@@ -6,14 +6,15 @@ namespace Z0.Data
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    
-    using F = EnumLiteralField;    
+
+    using F = EnumLiteralField;
     using api = Z0.Table;
 
+    [ApiClass(DataStructure)]
     public struct EnumLiteral
-    {                
+    {
         public string TypeName;
 
         public uint Index;
@@ -36,7 +37,7 @@ namespace Z0.Data
             BitString = bits;
             Description = description ?? EmptyString;
         }
-                    
+
         public string DelimitedText(char delimiter)
         {
             var formatter = api.formatter<F>(delimiter);
@@ -48,7 +49,7 @@ namespace Z0.Data
             formatter.Delimit(F.Description, Description);
             return formatter.ToString();
         }
- 
+
         public override string ToString()
             => DelimitedText(FieldDelimiter);
     }

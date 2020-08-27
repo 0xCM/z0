@@ -16,9 +16,12 @@ namespace Z0
         where D : unmanaged, Enum
         where S : unmanaged
     {
-        public const string ActorName = nameof(WfTableRunner<F,T,D,S,Y>);
+        public const string StepName = nameof(WfTableRunner<F,T,D,S,Y>);
 
         public IWfShell Wf {get;}
+
+        public WfStepId StepId
+            => AB.step(typeof(WfTableRunner<F,T,D,S,Y>));
 
         readonly TableMaps<D,S,T,Y> Processors;
 
@@ -36,7 +39,7 @@ namespace Z0
             Selectors = selectors;
             Source = sys.empty<T>();
             Target = sys.empty<Y>();
-            Wf.Created(ActorName);
+            Wf.Created(StepId);
         }
 
         [MethodImpl(Inline)]
@@ -47,16 +50,16 @@ namespace Z0
             Selectors = selectors;
             Source = src;
             Target = dst;
-            Wf.Created(ActorName);
+            Wf.Created(StepId);
         }
 
         [MethodImpl(Inline)]
         public void Process(T[] src, Y[] dst)
         {
-            Wf.Running(ActorName);
+            Wf.Running(StepId);
             var dispatcher = new WfTableDispatcher<F,T,D,S,Y>(Wf, src, Processors, Selectors, dst);
             dispatcher.Run();
-            Wf.Ran(ActorName);
+            Wf.Ran(StepId);
         }
 
         [MethodImpl(Inline)]
@@ -67,7 +70,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(ActorName);
+            Wf.Finished(StepId);
         }
     }
 }

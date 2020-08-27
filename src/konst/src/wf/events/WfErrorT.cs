@@ -10,22 +10,22 @@ namespace Z0
     using static Konst;
     using static RenderPatterns;
     using static z;
-                
+
     [Event]
     public readonly struct WfError<T> : IWfEvent<WfError<T>,T>, IWfError
-    {                
+    {
         public const string EventName = nameof(WfError<T>);
 
         public WfEventId EventId {get;}
-        
+
         public WfActor Actor {get;}
-        
+
         public readonly T Data {get;}
 
-        public T Body => Data;
-        
+        public T Content => Data;
+
         public MessageFlair Flair {get;}
-        
+
         public AppMsgSource Source {get;}
 
         [MethodImpl(Inline)]

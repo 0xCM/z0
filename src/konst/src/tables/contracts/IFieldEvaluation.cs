@@ -3,12 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
-    
-    using Z0.Data;
 
-    public interface IFieldEvaluation
+    public interface IFieldEval
     {
         TableFields Fields {get;}
 
@@ -25,17 +23,14 @@ namespace Z0
         }
     }
 
-    public interface IFieldEvaluation<F,T> : IFieldEvaluation
+    public interface IFieldEval<F,T> : IFieldEval
         where F : unmanaged, Enum
         where T : struct, ITable<F,T>
     {
 
         new TableFields<F> Fields {get;}
 
-        Type IFieldEvaluation.SourceType 
+        Type IFieldEval.SourceType
             => typeof(T);
-
-        TableFields IFieldEvaluation.Fields 
-            => Fields;
     }
 }

@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TableHeader<F> header<F>(char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
-                => new TableHeader<F>(literals<F>());
+                => new TableHeader<F>(Literals.fields<F>());
 
         [MethodImpl(Inline)]
         public static string headerText<E>(char delimiter = FieldDelimiter)
@@ -38,9 +38,9 @@ namespace Z0
                     dst.Append(delimiter);
                     dst.Append(Space);
                 }
-                
+
                 ref readonly var field = ref skip(columns,i);
-                var name = field.Name.Format();            
+                var name = field.Name.Format();
                 if(i != count - 1)
                     dst.Append(name.PadRight(field.Width));
                 else

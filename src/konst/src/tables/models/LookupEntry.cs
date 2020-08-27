@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines an entry in a <see cref='LookupTable{T,K}'/>
     /// </summary>
-    [ApiClass(DataType)]
+    [ApiClass(DataStructure)]
     public struct LookupEntry<K,V>
         where K : unmanaged
     {

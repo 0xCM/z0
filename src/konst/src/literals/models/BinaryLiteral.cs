@@ -13,18 +13,19 @@ namespace Z0
     /// Defines a base2 literal via text and a boxed value; for the literal to be valid,
     /// the text, when parsed, must yield a value equivalent to the boxed value
     /// </summary>
+    [ApiClass(DataStructure)]
     public readonly struct BinaryLiteral : ILiteral<BinaryLiteral>
-    {                                           
+    {
         /// <summary>
         /// The literal name
         /// </summary>
         public readonly string Name;
-        
+
         /// <summary>
         /// The literal value
         /// </summary>
         public readonly object Data;
-        
+
         /// <summary>
         /// Text that represents the boxed value
         /// </summary>
@@ -37,7 +38,7 @@ namespace Z0
             Data = value;
             Text = text;
         }
-        
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -55,7 +56,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Empty;
         }
-        
+
 
         [MethodImpl(Inline)]
         public string Format()
@@ -68,29 +69,29 @@ namespace Z0
         public bool Equals(BinaryLiteral src)
             => eq(this,src);
 
-        public static BinaryLiteral Empty   
+        public static BinaryLiteral Empty
             => new BinaryLiteral(string.Empty, 0, string.Empty);
 
-        string ILiteral.Name 
+        string ILiteral.Name
             => Name;
 
-        object ILiteral.Data 
+        object ILiteral.Data
             => Data;
 
-        string ILiteral.Text 
+        string ILiteral.Text
             => Text;
 
         [MethodImpl(Inline)]
         public static bool eq(in BinaryLiteral x, in BinaryLiteral y)
-            => string.Equals(x.Text, y.Text) 
-            && object.Equals(x.Data, y.Data) 
+            => string.Equals(x.Text, y.Text)
+            && object.Equals(x.Data, y.Data)
             && string.Equals(x.Name, y.Name);
 
         [MethodImpl(Inline)]
         public static bool eq<T>(in BinaryLiteral<T> x, in BinaryLiteral<T> y)
             where T : unmanaged
-                => string.Equals(x.Text, y.Text) 
-                && object.Equals(x.Data, y.Data) 
+                => string.Equals(x.Text, y.Text)
+                && object.Equals(x.Data, y.Data)
                 && string.Equals(x.Name, y.Name);
 
         [MethodImpl(Inline)]
@@ -106,10 +107,10 @@ namespace Z0
             where T : unmanaged
                 => NumericKinds.kind<T>();
 
-        public static string format(in BinaryLiteral src) 
+        public static string format(in BinaryLiteral src)
             => $"{src.Name}({src.Data}:{kind(src).Keyword()}) := " + text.enquote(src.Text);
 
-        public static string format<T>(in BinaryLiteral<T> src) 
+        public static string format<T>(in BinaryLiteral<T> src)
             where T : unmanaged
                 => $"{src.Name}({src.Data}:{kind(src).Keyword()}) := " + text.enquote(src.Text);
 
@@ -121,7 +122,7 @@ namespace Z0
         public static bool empty<T>(in BinaryLiteral<T> src)
             where T : unmanaged
                 => text.blank(src.Name) && text.blank(src.Text) && src.Data.Equals(default);
-        
+
         [MethodImpl(Inline)]
         public static bool nonempty(in BinaryLiteral src)
             => !text.blank(src.Name) && !sys.blank(src.Text) && src.Data != null;

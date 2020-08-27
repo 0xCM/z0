@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Reflection;
     using System.Security;
@@ -13,18 +13,51 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface ITableField
     {
-        FieldInfo Definition {get;}
+        Type TableType {get;}
 
-        RenderWidth Width {get;}
-        
-        string Name 
-            => Definition.Name;        
+        StringRef FieldName {get;}
+
+        Type DataType {get;}
+
+        ByteSize FieldSize {get;}
+
+        RenderWidth<ushort> RenderWidth {get;}
+
+        Address64 FieldOffset
+            => Interop.offset(TableType, FieldName);
+
+        Address16 FieldId
+            => (Address16)FieldOffset;
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ITableField<F> : ITableField
+    public interface ITableField<T> : ITableField
+        where T : struct, ITable
+    {
+        Type ITableField.TableType
+            => typeof(T);
+
+        Address64 ITableField.FieldOffset
+            => Interop.offset<T>(FieldName.Format());
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface ITableField<F,T> : ITableField<T>
+        where T : struct, ITable
         where F : unmanaged, Enum
     {
-        F Id {get;}
+        new F FieldId {get;}
+    }
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface ITableField<F,T,V> : ITableField<F,T>
+        where T : struct, ITable
+        where F : unmanaged, Enum
+    {
+        Type ITableField.DataType
+            => typeof(V);
+
+        ByteSize ITableField.FieldSize
+            => z.size<V>();
     }
 }

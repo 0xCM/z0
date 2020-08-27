@@ -6,17 +6,22 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
-    using static z;
 
-    partial struct Literals
+    public readonly struct DataCell<W,T>
+        where W : unmanaged, IDataWidth
     {
+        public readonly T Content;
+
         [MethodImpl(Inline)]
-        public static unsafe E read<E,T>(in T scalar, E e = default)
-            where E : unmanaged, Enum
-            where T : unmanaged
-                => Unsafe.Read<E>(gptr<T,E>(scalar));
+        public DataCell(T data)
+            => Content = data;
+
+        public uint CellWidth
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Widths.data<W>();
+        }
     }
 }

@@ -6,37 +6,37 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
 
-    public readonly struct TableField<F>
+    public readonly struct TableField<F,T,V> : ITableField<F,T,V>
         where F : unmanaged, Enum
+        where T : struct, ITable<T>
     {
-        public F Id {get;}
+        public StringRef FieldName {get;}
 
-        public FieldInfo Definition {get;}
+        public F FieldId {get;}
 
-        public RenderWidth Width {get;}
+        public RenderWidth<ushort> RenderWidth {get;}
 
         [MethodImpl(Inline)]
-        public TableField(F id, FieldInfo def, RenderWidth width)
+        public TableField(F id, string name, ushort rw = default)
         {
-            Definition = def;
-            Id = id;
-            Width = width;
+            FieldId = id;
+            RenderWidth = rw;
+            FieldName = name;
         }
 
-        public string Name
+        public Address64 FieldOffset
         {
             [MethodImpl(Inline)]
-            get => Definition.Name;
+            get => Interop.offset<T>(FieldName);
         }
 
         public Type DataType
         {
             [MethodImpl(Inline)]
-            get => Definition.FieldType;
+            get => typeof(V);
         }
     }
 }

@@ -216,5 +216,10 @@ namespace Z0
         {
             Raise(new WfStepRan(step, Ct));
         }
+
+        void Ran<T>(WfStepId step, T data)
+        {
+            Raise(new WfStepRan<T>(step, data, Ct));
+        }
     }
 }

@@ -13,11 +13,11 @@ namespace Z0
 
     partial class PartRecords
     {
-        public static DatasetSink<F,ImgBlobRecord> sink(ImgBlobRecord spec)
+        public static DataSink<F,ImgBlobRecord> sink(ImgBlobRecord spec)
         {
             var formatter = Tabular.Formatter<F,W>();
             formatter.EmitHeader();
-            return new DatasetSink<F,ImgBlobRecord>(formatter, deposit);
+            return new DataSink<F,ImgBlobRecord>(formatter, deposit);
         }
 
         public static void deposit(in ImgBlobRecord src, IDatasetFormatter<ImgBlobField> dst)
@@ -26,7 +26,7 @@ namespace Z0
             dst.Delimit(F.HeapSize, src.HeapSize);
             dst.Delimit(F.Offset, src.Offset);
             dst.Delimit(F.Value, src.Value);
-            dst.EmitEol();            
-        }       
+            dst.EmitEol();
+        }
     }
 }

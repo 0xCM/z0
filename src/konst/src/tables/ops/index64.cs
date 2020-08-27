@@ -8,20 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    public readonly struct Cell<W,T>
-        where W : unmanaged, IDataWidth
+    partial struct Table
     {
-        public readonly T Data;
-
-        [MethodImpl(Inline)]
-        public Cell(T data)
-            => Data = data;
-
-        public uint CellWidth
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static ulong index64<I>(I index)
+            where I : unmanaged
         {
-            [MethodImpl(Inline)]
-            get => (uint)Widths.data<W>();
+            var storage = 0ul;
+            ref var dst = ref @as<I>(storage);
+            dst = index;
+            return storage;
         }
     }
 }

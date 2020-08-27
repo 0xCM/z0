@@ -10,29 +10,45 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct TableField : ITableField        
-    {        
-        public FieldInfo Definition {get;}
+    public struct TableField : ITableField
+    {
+        public ushort Index;
 
-        public RenderWidth Width {get;}
+        public Type TableType;
 
-        [MethodImpl(Inline)]
-        public TableField(FieldInfo def, RenderWidth width)
-        {
-            Definition = def;
-            Width = width;
-        }                
+        public StringRef FieldName;
+
+        public Address64 FieldOffset;
+
+        public Address16 FieldId;
+
+        public Type DataType;
+
+        public ByteSize FieldSize;
+
+        public RenderWidth<ushort> RenderWidth;
 
         public string Name
         {
             [MethodImpl(Inline)]
-            get => Definition.Name;
+            get => FieldName;
         }
 
-        public Type DataType
-        {
-            [MethodImpl(Inline)]
-            get => Definition.FieldType;
-        }
+        public FieldInfo Definition;
+
+        Type ITableField.TableType
+            => TableType;
+
+        StringRef ITableField.FieldName
+            => FieldName;
+
+        Type ITableField.DataType
+            => DataType;
+
+        ByteSize ITableField.FieldSize
+            => FieldSize;
+
+        RenderWidth<ushort> ITableField.RenderWidth
+            => RenderWidth;
     }
 }

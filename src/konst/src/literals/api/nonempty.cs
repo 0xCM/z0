@@ -6,17 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
     using static z;
 
     partial struct Literals
     {
-        [MethodImpl(Inline)]
-        public static unsafe E read<E,T>(in T scalar, E e = default)
-            where E : unmanaged, Enum
+        [MethodImpl(Inline), Op]
+        public static bool nonempty(in BinaryLiteral src)
+            => BinaryLiteral.nonempty(src);
+
+        [MethodImpl(Inline), Op, Closures(Integers8x64k)]
+        public static bool nonempty<T>(in BinaryLiteral<T> src)
             where T : unmanaged
-                => Unsafe.Read<E>(gptr<T,E>(scalar));
+                => BinaryLiteral.nonempty(src);
     }
 }

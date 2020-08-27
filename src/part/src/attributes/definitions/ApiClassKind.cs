@@ -40,5 +40,9 @@ namespace Z0
         /// </summary>
         Tool,
 
+
+        DataSummary,
+
+        DataIndex,
     }
 }

@@ -55,6 +55,10 @@ namespace Z0
             => new A((ushort)src.Location);
 
         [MethodImpl(Inline)]
+        public static explicit operator Address16(Address64 src)
+            => new A((ushort)src.Location);
+
+        [MethodImpl(Inline)]
         public static implicit operator int(A src)
             => src.Location;
 

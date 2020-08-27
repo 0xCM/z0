@@ -165,7 +165,9 @@ namespace Z0
 
         public const ApiClassKind DataStructure = ApiClassKind.DataStructure;
 
-        public const ApiClassKind DataType = ApiClassKind.ApiDataType;
+        public const ApiClassKind DataSummary = ApiClassKind.DataSummary;
+
+        public const ApiClassKind DataIndex = ApiClassKind.DataSummary;
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T zed<T>(T t = default)

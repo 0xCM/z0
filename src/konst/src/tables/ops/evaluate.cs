@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
@@ -13,9 +13,8 @@ namespace Z0
 
     partial struct Table
     {
-
         [Op]
-        public static FieldEvaluation evaluate(Type src, TableFields fields, Action<Exception> handler = null)
+        public static FieldEval evaluate(Type src, TableFields fields, Action<Exception> handler = null)
         {
             var buffer = alloc<NamedValue<object>>(fields.Count);
             var dst = span(buffer);
@@ -24,7 +23,7 @@ namespace Z0
                 try
                 {
                     ref readonly var field = ref fields[i];
-                    ref readonly var data = ref skip(fields.Data,i);
+                    ref readonly var data = ref skip(fields.View,i);
                     var name = field.Name;
                     var value = sys.value(data, field.Definition);
                     seek(dst,i) = (name, value);
@@ -37,11 +36,11 @@ namespace Z0
                         term.print(e);
                 }
             }
-            return new FieldEvaluation(src, fields, buffer);
+            return new FieldEval(src, fields, buffer);
         }
 
         [Op]
-        public static FieldEvaluation<F,T> evaluate<F,T>(T src, TableFields<F> fields, Action<Exception> handler = null)
+        public static FieldEval<F,T> evaluate<F,T>(T src, TableFields<F> fields, Action<Exception> handler = null)
             where F : unmanaged, Enum
             where T : struct, ITable<F,T>
         {
@@ -62,7 +61,7 @@ namespace Z0
                         term.print(e);
                 }
             }
-            return new FieldEvaluation<F,T>(fields, buffer);
+            return new FieldEval<F,T>(fields, buffer);
         }
     }
 }

@@ -3,16 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
-    
-    using Z0.Data;
-    
-    public struct FieldEvaluation : IFieldEvaluation
+
+    public struct FieldEval : IFieldEval
     {
         public TableFields Fields {get;}
 
@@ -21,20 +19,20 @@ namespace Z0
         public NamedValues<object> Values {get;}
 
         [MethodImpl(Inline)]
-        public FieldEvaluation(Type src, TableFields fields, NamedValue<object>[] values)
+        public FieldEval(Type src, TableFields fields, NamedValue<object>[] values)
         {
             SourceType = src;
             Fields = fields;
             Values = values;
-        }    
+        }
 
         [MethodImpl(Inline)]
-        public FieldEvaluation(Type src, TableFields fields, NamedValues<object> values)
+        public FieldEval(Type src, TableFields fields, NamedValues<object> values)
         {
             SourceType = src;
             Fields = fields;
             Values = values;
-        }    
+        }
 
         [MethodImpl(Inline)]
         public ref NamedValue<object> Value(string field)

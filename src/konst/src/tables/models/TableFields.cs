@@ -11,9 +11,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct TableFields        
-    {        
-        public TableField[] Data {get;}
+    public readonly struct TableFields : ITableSpan<TableField>
+    {
+        readonly TableSpan<TableField> Data;
 
         [MethodImpl(Inline)]
         public static implicit operator TableFields(TableField[] src)
@@ -53,19 +53,43 @@ namespace Z0
                         return current;
                 }
                 return none<TableField>();
-            }            
+            }
+        }
+
+        public Option<TableField> this[in StringRef name]
+        {
+            [MethodImpl(Inline)]
+            get
+            {
+                for(var i=0u; i<Count; i++)
+                {
+                    ref readonly var current = ref this[i];
+                    if(current.FieldName == name)
+                        return current;
+                }
+                return none<TableField>();
+            }
         }
 
         public ReadOnlySpan<TableField> View
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.View;
         }
 
         public Span<TableField> Edit
         {
             [MethodImpl(Inline)]
-            get => Data;
+            get => Data.Edit;
         }
+
+        public TableField[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data.Storage;
+        }
+
+        public static TableFields Empty
+            => new TableFields(sys.empty<TableField>());
     }
 }

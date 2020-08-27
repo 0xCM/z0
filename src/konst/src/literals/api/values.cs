@@ -13,9 +13,19 @@ namespace Z0
 
     partial struct Literals
     {
+        /// <summary>
+        /// Selects the binary literals declared by a specified type that are of a specified primal type
+        /// </summary>
+        /// <param name="src">The source type</param>
+        /// <typeparam name="T">The primal literal type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Integers8x64k)]
+        public static T[] values<T>(Base2 @base, Type src)
+            where T : unmanaged
+                => src.LiteralFields().Where(f => f.FieldType == typeof(T) && f.Tagged<BinaryLiteralAttribute>()).Select(x => (T)x.GetRawConstantValue());
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] values<T>(Type src)
-            => map(search<T>(src),value<T>);        
+            => map(search<T>(src),value<T>);
 
         [MethodImpl(Inline), Op]
         public static void values(in LiteralCover src, Span<object> dst)

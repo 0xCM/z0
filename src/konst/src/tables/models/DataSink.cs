@@ -3,24 +3,24 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    public readonly struct DatasetSink<S,R>
+    public readonly struct DataSink<S,R>
         where S : unmanaged, Enum
         where R : struct
-    {                                                        
+    {
         readonly IDatasetFormatter<S> Target;
-                
+
         readonly DatasetRelay<S,R> Relay;
-        
+
         [MethodImpl(Inline)]
-        public DatasetSink(IDatasetFormatter<S> dst, DatasetRelay<S,R> relay)
+        public DataSink(IDatasetFormatter<S> dst, DatasetRelay<S,R> relay)
         {
-            Target = dst;            
+            Target = dst;
             Relay = relay;
         }
 
@@ -32,6 +32,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Render()
-            => Target.Format(); 
-    }    
+            => Target.Format();
+    }
 }

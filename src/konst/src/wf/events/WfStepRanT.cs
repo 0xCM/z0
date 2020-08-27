@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.IO;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
     using static Render;
     using static RenderPatterns;
@@ -19,33 +19,33 @@ namespace Z0
         public const string EventName = nameof(WfStepRan<T>);
 
         public WfEventId EventId {get;}
-                        
-        public WfActor Actor {get;}
 
-        public T Body {get;}
+        public WfStepId StepId {get;}
+
+        public T Content {get;}
 
         public MessageFlair Flair {get;}
-        
+
         [MethodImpl(Inline)]
-        public WfStepRan(string actor, T body, CorrelationToken ct, MessageFlair flair = Ran)
-        {            
+        public WfStepRan(string step, T body, CorrelationToken ct, MessageFlair flair = Ran)
+        {
             EventId = evid(EventName, ct);
-            Actor = actor;
-            Body = body;
-            Flair = flair;        
+            StepId = AB.step(typeof(void));
+            Content = body;
+            Flair = flair;
         }
 
         [MethodImpl(Inline)]
-        public WfStepRan(in WfActor actor, T body, CorrelationToken ct, MessageFlair flair = Ran)
-        {            
+        public WfStepRan(WfStepId step, T body, CorrelationToken ct, MessageFlair flair = Ran)
+        {
             EventId = evid(EventName, ct);
-            Actor = actor;
-            Body = body;
-            Flair = flair;        
+            StepId = step;
+            Content = body;
+            Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, EventId, Actor, Body);          
-    }   
+            => text.format(PSx3, EventId, StepId, Content);
+    }
 }

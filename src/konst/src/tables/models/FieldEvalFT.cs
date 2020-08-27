@@ -3,16 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Data;
-    
     using static Konst;
     using static z;
 
-    public struct FieldEvaluation<F,T> : IFieldEvaluation<F,T>
+    public struct FieldEval<F,T>
         where F : unmanaged, Enum
         where T : struct, ITable<F,T>
     {
@@ -21,15 +19,11 @@ namespace Z0
         public NamedValues<object> Values {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator FieldEvaluation(FieldEvaluation<F,T> src)
-            => new FieldEvaluation(typeof(T), src.Fields, src.Values);
-        
-        [MethodImpl(Inline)]
-        public FieldEvaluation(TableFields<F> fields, NamedValue<object>[] values)
-        {            
+        public FieldEval(TableFields<F> fields, NamedValue<object>[] values)
+        {
             Fields = fields;
             Values = values;
-        }    
+        }
 
         [MethodImpl(Inline)]
         public ref NamedValue<object> Value(string field)

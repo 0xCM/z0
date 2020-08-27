@@ -3,12 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Text;
-
-    using Z0.Data;
 
     using static Konst;
     using static z;
@@ -21,9 +19,9 @@ namespace Z0
                 => new TableFormatter<F>(text.build(), delimiter, fields);
 
         [MethodImpl(Inline)]
-        public static FieldFormatter<F> formatter<F>(char delimiter = FieldDelimiter) 
+        public static FieldFormatter<F> formatter<F>(char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
-                => new FieldFormatter<F>(text.build(), delimiter);        
+                => new FieldFormatter<F>(text.build(), delimiter);
 
         /// <summary>
         /// Creates a formatter from a rendering function render:C -> T

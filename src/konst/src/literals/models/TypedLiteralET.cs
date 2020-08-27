@@ -36,23 +36,23 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator TypedLiteral<E,V>(V value)
-            => TypedLiterals.from<E,V>(value);
+            => Literals.typed<E,V>(value);
 
         [MethodImpl(Inline)]
         public static implicit operator TypedLiteral<E>(TypedLiteral<E,V> src)
-            => TypedLiterals.from<E>(src.Class);
+            => Literals.typed<E>(src.Class);
 
         [MethodImpl(Inline)]
         public TypedLiteral(E @class)
         {
             LiteralClass = @class;
-            LiteralValue = TypedLiterals.numeric<E,V>(@class);
+            LiteralValue = Literals.numeric<E,V>(@class);
         }
 
         [MethodImpl(Inline)]
         public TypedLiteral(V value)
         {
-            LiteralClass = TypedLiterals.literal<E,V>(value);
+            LiteralClass = Literals.@enum<E,V>(value);
             LiteralValue = value;
         }
 

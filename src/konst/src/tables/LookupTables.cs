@@ -6,21 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
     using static z;
 
     [ApiHost]
-    public readonly struct TableSpans
+    public readonly partial struct LookupTables
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        internal static ulong normalize<I>(I index)
-            where I : unmanaged
-        {
-            var storage = 0ul;
-            ref var dst = ref @as<I>(storage);
-            dst = index;
-            return storage;
-        }
+        [MethodImpl(Inline)]
+        static LuFx64<K> luFx<K>(TableSpan<ulong> index, TableSpan<K> values)
+            where K : unmanaged
+                => new LuFx64<K>(index,values);
     }
 }

@@ -8,12 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     /// <summary>
     /// Defines a boxed enumeration literal as the triple (index,identifier,value)
     /// </summary>
+    [ApiClass(DataSummary)]
     public struct EnumLiteralDetail
-    {        
+    {
         /// <summary>
         /// The literal's surrogate identifier
         /// </summary>
@@ -33,7 +34,7 @@ namespace Z0
         /// The name of the declaring type
         /// </summary>
         public StringRef TypeName;
-        
+
         /// <summary>
         /// The primal kind specialized by the enum
         /// </summary>

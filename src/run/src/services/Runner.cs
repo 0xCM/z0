@@ -27,12 +27,15 @@ namespace Z0
 
         WfActor Actor;
 
+        WfStepId StepId;
+
         byte offset;
 
         [MethodImpl(Inline)]
         public Runner(WfCaptureState wf)
         {
             Ct = wf.Ct;
+            StepId = AB.step(typeof(Runner));
             Actor = Flow.actor(nameof(Runner));
             State = wf;
             Buffer = z.span<string>(256);
@@ -55,6 +58,12 @@ namespace Z0
 
         }
 
+        void RunChecks()
+        {
+            var log = text.build();
+            using var step = new CheckBitMasks(Wf,log);
+            step.Run();
+        }
 
         void RunFsm()
         {
@@ -70,7 +79,12 @@ namespace Z0
 
         void Status<T>(T message)
         {
-            Wf.Status(Actor, message, Ct);
+            Wf.Status(StepId, message, Ct);
+        }
+
+        void Status<T>(WfStepId step, T message)
+        {
+            Wf.Status(step, message, Ct);
         }
 
         static void format(ValueType src, StringBuilder dst)
@@ -226,13 +240,16 @@ namespace Z0
             using var s0 = new ListFormatPatterns(State.Wf, typeof(RenderPatterns));
             s0.Run();
 
-            ReadRes();
 
             RunFsm();
 
-            Capture();
+            using var s1 = new CheckResources(Wf);
+            s1.Run();
 
             Status(TableIndex.AsmTAddressingModRm32);
+
+            //Capture();
+
         }
     }
 }

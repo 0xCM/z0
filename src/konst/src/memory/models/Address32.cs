@@ -19,28 +19,32 @@ namespace Z0
 
         public static W W => default;
 
-        public bool IsEmpty 
+        public bool IsEmpty
         {
-             [MethodImpl(Inline)] 
-             get => Location == 0; 
+             [MethodImpl(Inline)]
+             get => Location == 0;
         }
 
-        public bool IsNonEmpty  
+        public bool IsNonEmpty
         {
-             [MethodImpl(Inline)] 
-             get => Location != 0; 
+             [MethodImpl(Inline)]
+             get => Location != 0;
         }
 
-        public A Zero 
+        public A Zero
         {
-             [MethodImpl(Inline)] 
-             get => Empty; 
+             [MethodImpl(Inline)]
+             get => Empty;
         }
 
         [MethodImpl(Inline)]
         public static implicit operator A(T src)
             => new A(src);
 
+
+        [MethodImpl(Inline)]
+        public static explicit operator Address32(IntPtr src)
+            => (uint)src.ToInt32();
 
         [MethodImpl(Inline)]
         public static implicit operator Address<W,T>(A src)
@@ -77,14 +81,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator!=(A x, A y)
             => x.Location != y.Location;
-    
+
         [MethodImpl(Inline)]
-        public bool Equals(A src)        
+        public bool Equals(A src)
             => Location == src.Location;
 
-        public override bool Equals(object src)        
+        public override bool Equals(object src)
             => src is A a && Equals(a);
- 
+
         [MethodImpl(Inline)]
         public int CompareTo(A src)
             => Location == src.Location ? 0 : Location < src.Location ? -1 : 1;
@@ -98,11 +102,11 @@ namespace Z0
 
         public override int GetHashCode()
             => Location.GetHashCode();
-                
-        public static A Empty 
+
+        public static A Empty
             => new A(0);
 
-        T IAddress<T>.Location 
+        T IAddress<T>.Location
             => Location;
 
         [MethodImpl(Inline)]

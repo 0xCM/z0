@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
     using static Render;
     using static RenderPatterns;
@@ -14,37 +14,37 @@ namespace Z0
 
     [Event]
     public readonly struct WfStatus<T> : IWfEvent<WfStatus<T>, T>
-    {        
+    {
         public const string EventName = nameof(WfStatus<T>);
 
         public WfEventId EventId {get;}
 
-        public WfActor Actor {get;}        
+        public WfStepId StepId {get;}
 
-        public T Body {get;}
-        
+        public T Content {get;}
+
         public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
         public WfStatus(string actor, T body, CorrelationToken ct, MessageFlair flair = Status)
         {
             EventId = evid(EventName, ct);
-            Actor = actor;
+            StepId = WfStepId.Empty;
             Flair =  flair;
-            Body = body;
+            Content = body;
         }
 
         [MethodImpl(Inline)]
-        public WfStatus(in WfActor actor, T body, CorrelationToken ct, MessageFlair flair = Status)
+        public WfStatus(WfStepId step, T body, CorrelationToken ct, MessageFlair flair = Status)
         {
             EventId = evid(EventName, ct);
-            Actor = actor;
+            StepId = step;
             Flair =  flair;
-            Body = body;
+            Content = body;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, EventId, Actor, Body);
+            => text.format(PSx3, EventId, StepId, Content);
     }
 }

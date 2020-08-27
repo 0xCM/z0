@@ -8,21 +8,21 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
-    public readonly struct Cells<W,T>
+
+    public readonly struct DataCells<W,T>
         where W : unmanaged, IDataWidth
     {
-        public readonly Cell<W,T>[] Data;
+        public readonly DataCell<W,T>[] Data;
 
         [MethodImpl(Inline)]
-        public Cells(Cell<W,T>[] data)
+        public DataCells(DataCell<W,T>[] data)
             => Data = data;
 
         [MethodImpl(Inline)]
-        public ref Cell<W,T> Cell(uint index)
+        public ref DataCell<W,T> Cell(uint index)
             => ref Data[index];
-        
-        public ref Cell<W,T> this[uint index]
+
+        public ref DataCell<W,T> this[uint index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
@@ -33,13 +33,13 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (uint)Data.Length;
         }
-        
+
         public uint CellWidth
         {
             [MethodImpl(Inline)]
             get => (uint)Widths.data<W>();
         }
-        
+
         public uint DataSize
         {
             [MethodImpl(Inline)]

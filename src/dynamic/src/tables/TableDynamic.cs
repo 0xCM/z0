@@ -13,7 +13,7 @@ namespace Z0
     using static z;
 
     [ApiHost]
-    public readonly struct TableSpecs
+    public readonly struct TableDynamic
     {
         [MethodImpl(Inline), Op]
         public static FieldSpec field(Name name, ClrTypeName type, ushort position, Address16? offset = null)

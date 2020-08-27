@@ -12,15 +12,15 @@ namespace Z0
     public readonly struct WfTermEvent : IWfEvent<WfTermEvent,Textual<string>>
     {
         public WfEventId EventId {get;}
-                        
+
         public WfActor Actor {get;}
 
         public WfStepId StepId {get;}
 
         public MessageFlair Flair {get;}
 
-        public Textual<string> Body {get;}
-        
+        public Textual<string> Content {get;}
+
         [MethodImpl(Inline)]
         public WfTermEvent(WfEventId e, WfActor actor, WfStepId step, string body, MessageFlair flair)
         {
@@ -28,11 +28,11 @@ namespace Z0
             Actor = actor;
             StepId = step;
             Flair = flair;
-            Body = new Textual<string>(body, body);
+            Content = new Textual<string>(body, body);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, Actor, StepId, Body);
+            => Render.format(EventId, Actor, StepId, Content);
     }
 }

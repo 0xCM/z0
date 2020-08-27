@@ -24,7 +24,7 @@ namespace Z0.Asm
         public static T[] binlits<T>(Type declarer, Action<AppMsg> msg)
             where T : unmanaged
         {
-            var literals = BinaryLiterals.attributed<T>(Konst.base2, declarer);
+            var literals = Literals.attributed<T>(Konst.base2, declarer);
             var count = literals.Length;
             var buffer = sys.alloc<T>(count);
             var dst = span(buffer);
@@ -40,7 +40,7 @@ namespace Z0.Asm
             return buffer;
         }
 
-        public void chedk_bit_masks()
+        public void check_bit_masks()
         {
             var src = typeof(BitMasks);
             var data = binlits<ulong>(src, msg => Trace(msg));

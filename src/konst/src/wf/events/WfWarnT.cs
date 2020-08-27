@@ -20,7 +20,7 @@ namespace Z0
 
         public string ActorName {get;}
 
-        public T Body {get;}
+        public T Content {get;}
 
         public MessageFlair Flair {get;}
 
@@ -28,11 +28,11 @@ namespace Z0
         public WfWarn(string actor, T body, CorrelationToken ct)
         {
             EventId = evid(EventName, ct);
-            Body = body;
+            Content = body;
             ActorName = actor;
             Flair = MessageFlair.Yellow;
         }
         public string Format()
-            => text.format(PSx3, EventId, ActorName, Body);
+            => text.format(PSx3, EventId, ActorName, Content);
     }
 }

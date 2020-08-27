@@ -31,9 +31,7 @@ namespace Z0
         {
             var t = typeof(T);
             if(t.Tagged<StepAttribute>())
-            {
                 return AB.step(t.Tag<StepAttribute>().Value.Host);
-            }
             else
                 return AB.step(typeof(void));
         }

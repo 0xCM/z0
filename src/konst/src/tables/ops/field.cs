@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
@@ -13,14 +13,10 @@ namespace Z0
 
     partial struct Table
     {
-        [MethodImpl(Inline), Op]
-        public static TableField field(FieldInfo definition, RenderWidth? width = null)
-            => new TableField(definition, width ?? new RenderWidth());
-
-        [MethodImpl(Inline), Op]
-        public static TableField<F> field<F,T>(F id, FieldInfo def, RenderWidth? width = null)
+        [MethodImpl(Inline)]
+        public static TableField<F> field<F,T>(F id, FieldInfo def, ushort? width = null)
             where F : unmanaged, Enum
             where T : struct, ITable<F,T>
-                => new TableField<F>(id,def, width ?? (new RenderWidth(@as<F,byte>(id))));
+                => new TableField<F>(id,def, width ?? (new RenderWidth<ushort>(@as<F,ushort>(id))));
     }
 }

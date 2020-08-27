@@ -8,15 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    public readonly struct TypedLiterals
+    partial struct Literals
     {
         /// <summary>
         /// Creates a typed literal from an enumeration literal
         /// </summary>
         /// <typeparam name="E">The enumeration type</typeparam>
         [MethodImpl(Inline)]
-        public static TypedLiteral<E> from<E>(E @class)
+        public static TypedLiteral<E> typed<E>(E @class)
             where E : unmanaged, Enum
                 => @class;
 
@@ -28,7 +29,7 @@ namespace Z0
         /// <typeparam name="E">An enumeration type that refines the parametric numeric type</typeparam>
         /// <typeparam name="V">The numeric type refined by the enum</typeparam>
         [MethodImpl(Inline)]
-        public static TypedLiteral<E,V> from<E,V>(V value, E e = default)
+        public static TypedLiteral<E,V> typed<E,V>(V value, E e = default)
             where E : unmanaged, Enum
             where V : unmanaged
                 => new TypedLiteral<E,V>(literal<E,V>(value));
@@ -41,19 +42,13 @@ namespace Z0
         /// <typeparam name="E">An enumeration type that refines the parametric numeric type</typeparam>
         /// <typeparam name="V">The numeric type refined by the enum</typeparam>
         [MethodImpl(Inline)]
-        public static TypedLiteral<E,V> from<E,V>(E @class, V v = default)
+        public static TypedLiteral<E,V> typed<E,V>(E @class, V v = default)
             where E : unmanaged, Enum
             where V : unmanaged
                 => new TypedLiteral<E,V>(@class);
 
         [MethodImpl(Inline)]
-        public static unsafe V numeric<E,V>(E e)
-            where E : unmanaged, Enum
-            where V : unmanaged
-                => Unsafe.Read<V>((V*)(&e));
-        
-        [MethodImpl(Inline)]
-        public static unsafe E literal<E,V>(V v)
+        static unsafe E literal<E,V>(V v)
             where E : unmanaged, Enum
             where V : unmanaged
                 => Unsafe.Read<E>((E*)&v);

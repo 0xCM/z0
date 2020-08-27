@@ -10,6 +10,7 @@ namespace Z0
 
     using static Konst;
 
+    [ApiClass(DataStructure)]
     public readonly struct EnumFieldValue<E,P>
         where E : unmanaged, Enum
     {

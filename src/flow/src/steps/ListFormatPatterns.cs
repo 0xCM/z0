@@ -27,7 +27,7 @@ namespace Z0
             Id = AB.step(typeof(ListFormatPatterns));
             Actor = caller;
             PatternSource = src;
-            Wf.Created(Actor);
+            Wf.Created(Id);
         }
 
         public void Run()
@@ -38,7 +38,7 @@ namespace Z0
             {
                 var patterns = Render.patterns(PatternSource);
                 foreach(var pattern in patterns.View)
-                    Wf.Status(Actor, pattern.Format(), Ct);
+                    Wf.Status(Id, pattern.Format(), Ct);
 
             }
             catch(Exception e)

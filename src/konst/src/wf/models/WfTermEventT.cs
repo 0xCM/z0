@@ -12,18 +12,18 @@ namespace Z0
     public readonly struct WfTermEvent<T> : IWfEvent<WfTermEvent<T>,Textual<T>>
     {
         public WfEventId EventId {get;}
-                        
+
         public WfActor Actor {get;}
 
         public WfStepId StepId {get;}
 
         public MessageFlair Flair {get;}
 
-        public Textual<T> Body {get;}
-        
+        public Textual<T> Content {get;}
+
         [MethodImpl(Inline)]
         public static implicit operator WfTermEvent(WfTermEvent<T> src)
-            => new WfTermEvent(src.EventId, src.Actor, src.StepId, src.Body.Text, src.Flair);
+            => new WfTermEvent(src.EventId, src.Actor, src.StepId, src.Content.Text, src.Flair);
 
         [MethodImpl(Inline)]
         public WfTermEvent(WfEventId e, WfActor actor, WfStepId step, Textual<T> body,  MessageFlair flair)
@@ -31,12 +31,12 @@ namespace Z0
             EventId = e;
             Actor = actor;
             StepId = step;
-            Body = body;
+            Content = body;
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, Actor, StepId, Body);
+            => Render.format(EventId, Actor, StepId, Content);
     }
 }

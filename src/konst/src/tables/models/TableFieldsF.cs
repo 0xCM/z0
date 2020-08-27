@@ -9,22 +9,18 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    using static Konst;   
+    using static Konst;
     using static z;
 
     public readonly struct TableFields<F>
         where F : unmanaged, Enum
     {
         public TableSpan<TableField<F>> Table {get;}
-        
+
         [MethodImpl(Inline)]
         public static implicit operator TableFields<F>(TableField<F>[] src)
             => new TableFields<F>(src);
 
-        [MethodImpl(Inline)]
-        public static implicit operator TableFields(TableFields<F> src)
-            => new TableFields(src.Table.Map(x => new TableField(x.Definition, x.Width)));
-        
         [MethodImpl(Inline)]
         public TableFields(TableField<F>[] src)
             => Table = src;
@@ -34,7 +30,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Table.Length;
         }
-        
+
         public int Length
         {
             [MethodImpl(Inline)]
@@ -45,7 +41,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Table.View;
-        }       
+        }
 
         public TableField<F> this[F id]
         {

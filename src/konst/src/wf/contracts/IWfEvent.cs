@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Security;
 
@@ -13,9 +13,12 @@ namespace Z0
         WfEventId EventId {get;}
 
         string EventName => EventId.Name;
-
     }
 
+    /// <summary>
+    /// Characterizes a reified event
+    /// </summary>
+    /// <typeparam name="H">The reifying type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IWfEvent<H> : IWfEvent, IAppEvent<H>
         where H : struct, IWfEvent<H>
@@ -23,10 +26,18 @@ namespace Z0
 
     }
 
+    /// <summary>
+    /// Characterizes a reified event with parametric content
+    /// </summary>
+    /// <typeparam name="H">The event type</typeparam>
+    /// <typeparam name="T">The content type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IWfEvent<H,T> : IWfEvent<H>
         where H : struct, IWfEvent<H,T>
     {
-        T Body {get;}
+        /// <summary>
+        /// The event payload
+        /// </summary>
+        T Content {get;}
     }
 }

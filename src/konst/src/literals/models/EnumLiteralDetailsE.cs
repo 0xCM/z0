@@ -15,17 +15,18 @@ namespace Z0
     /// <summary>
     /// Defines an E-parametric literal index
     /// </summary>
+    [ApiClass(DataIndex)]
     public readonly struct EnumLiteralDetails<E> : IEnumerable<EnumLiteralDetail<E>>, IConstIndex<EnumLiteralDetail<E>>
-        where E : unmanaged, Enum        
+        where E : unmanaged, Enum
     {
         readonly EnumLiteralDetail<E>[] Data;
 
         [MethodImpl(Inline)]
         public static implicit operator EnumLiteralDetails<E>(EnumLiteralDetail<E>[] src)
             => new EnumLiteralDetails<E>(src);
-        
+
         [MethodImpl(Inline)]
-        internal EnumLiteralDetails(EnumLiteralDetail<E>[] src) 
+        internal EnumLiteralDetails(EnumLiteralDetail<E>[] src)
             => Data = src;
 
         public EnumLiteralDetail<E>[] Content
@@ -39,7 +40,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.Length;
         }
-        
+
         public ref readonly EnumLiteralDetail<E> this[int i]
         {
             [MethodImpl(Inline)]
@@ -52,7 +53,7 @@ namespace Z0
             get => ref Data[i];
         }
 
-        public E[] LiteralValues 
+        public E[] LiteralValues
         {
             [MethodImpl(Inline)]
             get => Data.Map(x => x.LiteralValue);
@@ -68,7 +69,7 @@ namespace Z0
                 dst[i] = (F)(object)src[i];
             return dst;
         }
-                
+
         public IEnumerable<NamedValue<E>> NamedValues
             => from i in Data select NamedValue.define(i.Name, i.LiteralValue);
 

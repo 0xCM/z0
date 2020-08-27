@@ -13,10 +13,11 @@ namespace Z0
     /// <summary>
     /// Defines an E-V parametric enum value
     /// </summary>
+    [ApiClass(DataSummary)]
     public readonly struct EnumLiteralDetail<E,P> : IEnumLiteral<EnumLiteralDetail<E,P>,E,P>
         where E : unmanaged, Enum
         where P : unmanaged
-    {        
+    {
         public readonly EnumLiteralDetail<E> Spec;
 
         /// <summary>
@@ -28,13 +29,13 @@ namespace Z0
         public EnumLiteralDetail(EnumLiteralDetail<E> spec, P v)
         {
             Spec = spec;
-            PrimalValue = v;    
+            PrimalValue = v;
         }
-        
+
         /// <summary>
         /// The literal declaration order, unique within the declaring enum
         /// </summary>
-        public uint Position 
+        public uint Position
         {
             [MethodImpl(Inline)]
             get => Spec.Position;
@@ -52,7 +53,7 @@ namespace Z0
         /// <summary>
         /// The literal E-value
         /// </summary>
-        public E LiteralValue 
+        public E LiteralValue
         {
             [MethodImpl(Inline)]
             get => Spec.LiteralValue;
@@ -67,7 +68,7 @@ namespace Z0
         /// <summary>
         /// The numeric kind refined by the enum
         /// </summary>
-        public EnumScalarKind PrimalKind 
+        public EnumScalarKind PrimalKind
         {
             [MethodImpl(Inline)]
             get => Enums.@base<E>();
@@ -85,7 +86,7 @@ namespace Z0
             get => Spec.BackingField;
         }
 
-        public Type DataType 
+        public Type DataType
         {
             [MethodImpl(Inline)]
             get => typeof(P);
@@ -103,7 +104,7 @@ namespace Z0
             get => Spec.UserData;
         }
 
-        P IEnumLiteral<EnumLiteralDetail<E,P>,E,P>.PrimalValue 
+        P IEnumLiteral<EnumLiteralDetail<E,P>,E,P>.PrimalValue
             => PrimalValue;
 
         [MethodImpl(Inline)]
@@ -113,11 +114,11 @@ namespace Z0
 
         public override bool Equals(object src)
             => src is EnumLiteralDetail<E,P> x && Equals(x);
-        
+
         public override int GetHashCode()
             => (int)Position;
 
         public override string ToString()
-            => (this as IEnumLiteral).Format();            
+            => (this as IEnumLiteral).Format();
     }
 }

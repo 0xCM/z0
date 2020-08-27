@@ -8,27 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     partial struct Flow
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static WfStatus<T> status<T>(string actor, T body, CorrelationToken ct)
-            => new WfStatus<T>(actor, body, ct);
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static WfStatus<T> status<T>(in WfActor actor, T body, CorrelationToken ct)
-            => new WfStatus<T>(actor, body, ct);
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static WfStatus<T> status<T>(PartId actor, T body, CorrelationToken ct)
-            => new WfStatus<T>(actor.Format(), body, ct);
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void status<T>(IWfContext wf, string actor, T body, CorrelationToken ct)
-            => wf.Raise(status(actor, body, ct));
+            => wf.Raise(new WfStatus<T>(actor, body, ct));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void status<T>(IWfContext wf, in WfActor actor, T body, CorrelationToken ct)
-            => wf.Raise(Flow.status(actor, body, ct));
+        public static void status<T>(IWfContext wf, WfStepId step, T body, CorrelationToken ct)
+            => wf.Raise(new WfStatus<T>(step, body, ct));
     }
 }

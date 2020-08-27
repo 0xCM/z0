@@ -6,14 +6,15 @@ namespace Z0
 {
     using System;
     using System.Linq;
+    using System.Text;
 
     using static Konst;
     using static z;
 
     public class t_masks : t_bitcore<t_masks>
-    {                    
+    {
         public void lomask_case1()
-        {            
+        {
             Claim.Eq((Pow2.pow(3) - 1)^Pow2.pow(3), lo64(3));
             Claim.Eq((Pow2.pow(7) - 1)^Pow2.pow(7), lo64(7));
             Claim.Eq((Pow2.pow(13) - 1)^Pow2.pow(13), lo64(13));
@@ -22,7 +23,7 @@ namespace Z0
         }
 
         public void lomask_case2()
-        {            
+        {
             Claim.eq(4, Bits.pop(lo64(3)));
             Claim.eq(7, Bits.pop(lo64(6)));
             Claim.eq(13, Bits.pop(lo64(12)));
@@ -55,28 +56,6 @@ namespace Z0
         public void himask_64u()
             => check_himask(z64);
 
-        public void verify_mask_literals()
-        {
-            verify_mask_literals(z8);
-            verify_mask_literals(z16);
-            verify_mask_literals(z32);
-            verify_mask_literals(z64);
-        }
-
-        void verify_mask_literals<T>(T t = default)
-            where T : unmanaged
-        {
-            var literals = BinaryLiterals.attributed<T>(Konst.base2, typeof(BitMasks));
-            var masks = literals.ToArray();            
-            foreach(var m in masks)
-            {
-                var bits = BitSpans.parse(m.Text);
-                var bitval = bits.Convert<T>();
-                if(gmath.neq(bitval,m.Data))
-                    Claim.FailWith($"{m.Name}:{BitString.normalize(m.Text)} != {BitString.scalar(m.Data)}");                
-            }
-        }
-
         void check_himask<T>(T t = default)
             where T : unmanaged
         {
@@ -85,7 +64,7 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var count = Random.One(mincount,maxcount);
-                var mask = BitMask.hi(count,t);                
+                var mask = BitMask.hi(count,t);
                 var pop = gbits.pop(mask);
                 if(pop != count)
                 {
@@ -93,7 +72,7 @@ namespace Z0
                     Trace("popcount", pop.ToString());
                     Trace("mask", BitString.scalar(mask).Format());
                 }
-                
+
                 Claim.eq(count, gbits.pop(mask));
 
                 var lowered = gmath.srl(mask, (byte)(bitsize(t) -  count));

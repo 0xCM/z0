@@ -13,15 +13,15 @@ namespace Z0
     partial struct FS
     {
         [Table]
-        public struct EntryDetail
+        public struct EntryDetail : ITable<EntryDetail>
         {
             public FS.FilePath Path;
 
             public ByteSize Size;
 
-            public Timestamp CreateTS;        
+            public Timestamp CreateTS;
 
-            public Timestamp UpdateTS;        
+            public Timestamp UpdateTS;
 
             public FileAttributes Attributes;
         }

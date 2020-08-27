@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    
+
     [Table]
-    public struct MemoryFileInfo
+    public struct MemoryFileInfo : ITable<MemoryFileInfo>
     {
         public MemoryAddress BaseAddress;
 
-        public FS.EntryDetail Description;    
+        public FS.EntryDetail Description;
     }
 }

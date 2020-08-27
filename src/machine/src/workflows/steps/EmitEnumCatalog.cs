@@ -58,7 +58,7 @@ namespace Z0
                 {
                     var y = x[j];
                     (var part, var type) = y;
-                    var records = Table.literals(part,type);
+                    var records = Literals.etables(part,type);
                     for(var k = 0; k<records.Length; k++)
                         dst.Add(records[k]);
                 }

@@ -22,7 +22,7 @@ namespace Z0
 
         public string ActorName {get;}
 
-        public string Body {get;}
+        public string Content {get;}
 
         public MessageFlair Flair {get;}
 
@@ -33,9 +33,9 @@ namespace Z0
         {
             EventId = evid(EventName, ct);
             ActorName = actor;
-            Body = body;
+            Content = body;
             Flair =  flair;
-            Description = AppMsg.colorize(Body, Flair);
+            Description = AppMsg.colorize(Content, Flair);
         }
 
         [MethodImpl(Inline)]
