@@ -19,36 +19,24 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public WfActor Actor {get;}
-
-        public WfStepId Step {get;}
+        public WfStepId StepId {get;}
 
         public T Body {get;}
 
         public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStepRunning(WfActor actor, T body, CorrelationToken ct, MessageFlair flair = Running)
+        public WfStepRunning(WfStepId step, T body, CorrelationToken ct, MessageFlair flair = Running)
         {
             EventId = evid(EventName, ct);
-            Actor = actor;
-            Step = default;
+            StepId = step;
             Body = body;
             Flair = flair;
         }
 
-        [MethodImpl(Inline)]
-        public WfStepRunning(WfActor actor, WfStepId step, T body, CorrelationToken ct, MessageFlair flair = Running)
-        {
-            EventId = evid(EventName, ct);
-            Actor = actor;
-            Step = step;
-            Body = body;
-            Flair = flair;
-        }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, EventId, Actor, Body);
+            => text.format(PSx3, EventId, StepId, Body);
     }
 }

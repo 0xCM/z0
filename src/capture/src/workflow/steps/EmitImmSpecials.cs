@@ -42,7 +42,7 @@ namespace Z0
         internal EmitImmSpecials(IAsmContext context, WfConfig config, IMultiSink sink, IAsmFormatter formatter, IAsmDecoder decoder, IApiSet api, FolderPath root, CorrelationToken? ct = null)
         {
             Ct = correlate(ct);
-            Log = Flow.log(config);
+            Log = AB.log(config);
             Broker = WfBuilder.imm(Log, Ct);
             Context = context;
             Sink = sink;

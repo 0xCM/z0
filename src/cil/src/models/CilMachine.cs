@@ -14,8 +14,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly partial struct Cil
+    public ref struct CilMachine
     {
+
 
     }
 }

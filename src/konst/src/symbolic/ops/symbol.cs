@@ -29,11 +29,5 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => new Symbol<S,T,N>(value);
 
-        [MethodImpl(Inline)]
-        public static Symbol<S,T,N> symbol<S,T,N>(string name, S value, T t = default, N n = default)
-            where S : unmanaged
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-                => new Symbol<S,T,N>(name, value);
     }
 }

@@ -29,7 +29,6 @@ namespace Z0
             }
         }
 
-
         [MethodImpl(Inline), Op]
         public static OpCodeTable pack(ILOpCode id, string name, OpCodeType type, OperandType optype, byte opcount, ushort code, StackBehaviour sb1, StackBehaviour sb2)
             => new OpCodeTable(id, name, type, optype, opcount,code, sb1, sb2);

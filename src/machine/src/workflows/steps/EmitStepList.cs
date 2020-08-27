@@ -25,19 +25,19 @@ namespace Z0
             Ct = ct;
             Df = (src, Wf.AppDataRoot + FileName.Define(src.GetSimpleName(), "steps.json"));
 
-            Wf.Created(Step);
+            Wf.Created(StepId);
         }
 
         public void Run()
         {
-            Wf.Running(Step);
+            Wf.Running(StepId);
 
-            Wf.Ran(Step);
+            Wf.Ran(StepId);
         }
 
         public void Dispose()
         {
-            Wf.Finished(Step);
+            Wf.Finished(StepId);
 
         }
     }

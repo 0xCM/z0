@@ -53,24 +53,11 @@ namespace Z0
         void Status<T>(WfStepId worker, T message, CorrelationToken ct)
             => Flow.status(this, worker, message,ct);
 
-        void Status<T>(T data, [File] string actor = null)
-            => Flow.status(this, Path.GetFileNameWithoutExtension(actor), data,Ct);
-
-        void Status<T>(WfStepId step, T data)
-            => Raise(new WfStatus<T>(step, data, Ct));
-
         void RunningT<T>(string actor, T output, CorrelationToken? ct = null)
-            => Flow.running(this, actor, output, ct  ?? Ct);
-
-        void RunningT<T>(in WfActor actor, T output, CorrelationToken? ct = null)
-            => Flow.running(this, actor, output, ct ?? Ct);
+            => Flow.running(this, WfStepId.Empty, output, Ct);
 
         void RanT<T>(string actor, T output, CorrelationToken? ct = null)
             => Flow.ran(this, actor, output, ct ?? Ct);
-
-        void Finished<T>(IWfStep<T> step)
-            where T: struct,  IWfStep<T>
-                => Finished(step.Id);
 
         static string ToActorName(string src)
             => Path.GetFileNameWithoutExtension(src);

@@ -18,7 +18,6 @@ namespace Z0
 
         string Namespace;
 
-
         protected override string[] StaticUsings {get;}
             = new string[]{
                 "Root",
@@ -44,8 +43,8 @@ namespace Z0
             => text.concat("X", src.FormatHex(zpad:true, specifier:false, uppercase:true));
 
         string TargetTypeName
-            => text.concat("HexMachine",Identifier(MinHandler));        
-        
+            => text.concat("HexMachine",Identifier(MinHandler));
+
         void OpenTypeDeclaration(int i, TextWriter dst)
         {
             dst.WriteLine(level(i, bracket(nameof(ApiHost))));
@@ -53,7 +52,7 @@ namespace Z0
             dst.WriteLine(level(i, LBrace));
         }
 
-    
+
         void DeclareFields(int i, TextWriter dst)
         {
             dst.WriteLine(level(i,"bit Processed;"));
@@ -69,19 +68,19 @@ namespace Z0
             using var dst = new StringWriter(buffer);
             EmitFileHeader(dst);
             OpenFileNamespace(dst);
-            EmitUsingStatments(dst, TypeLevel);
+            EmitUsingStatements(dst, TypeLevel);
             OpenTypeDeclaration(TypeLevel,dst);
             DeclareFields(MemberLevel,dst);
-            
+
             while(current++ < MaxHandler)
                 EmitHandler(MemberLevel,current, dst);
-            
+
             CloseTypeDeclaration(dst, TypeLevel);
             CloseFileNamespace(dst);
 
             return buffer.ToString();
         }
-        
+
         void EmitHandler(int i, byte handler, TextWriter dst)
         {
             dst.WriteLine(level(i, "[MethodImpl(Inline), Op]"));

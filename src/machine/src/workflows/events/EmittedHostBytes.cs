@@ -31,6 +31,7 @@ namespace Z0
             ActorName = worker;
             AccessorCount = count;
         }
+
         public string Format()
             => text.format(PSx4, EventId, ActorName, Host.Format(), AccessorCount);
     }

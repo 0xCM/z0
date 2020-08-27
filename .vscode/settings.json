@@ -18,6 +18,7 @@
         "Jitted",
         "Konst",
         "LINENUM",
+        "Ldarg",
         "Ldind",
         "Ldlen",
         "Ldloca",

@@ -11,63 +11,20 @@ namespace Z0
 
     using static Konst;
 
-    public enum PartHandlerKind : byte
-    {
-        A = 0,
-
-        B = 1,
-
-        C = 2
-    }
-
-    public interface IAsmProcessor<T> : IWfDataProcessor<T>
-    {
-        void Process(T src);
-    }
-
-
-    public interface IAsmProcessor<E,T> : IAsmProcessor<T>
-        where E : unmanaged, Enum
-    {
-        IWfDataBroker<E,T> Broker {get;}
-
-        void Relay(E kind, T data)
-            => Broker.Relay(kind,data);
-    }
-
-    public interface IAsmProcessor : IAsmProcessor<Mnemonic,BasedAsmFx>
-    {
-        void OnAnd(BasedAsmFx located)
-        {
-
-        }
-
-        void OnOr(BasedAsmFx located)
-        {
-
-        }
-
-        void IWfDataProcessor.Connect()
-        {
-            Broker[Mnemonic.And] = AB.handler<BasedAsmFx>(OnAnd);
-            Broker[Mnemonic.Or] = AB.handler<BasedAsmFx>(OnOr);
-        }
-    }
-
-    public readonly struct PartAsmProcessor : IAsmProcessor<PartHandlerKind,PartAsmFx>
+    public readonly struct PartAsmProcessor : IAsmProcessor<AsmHandlerKind,PartAsmFx>
     {
         public IWfContext Wf {get;}
 
-        readonly BitBroker<PartHandlerKind,PartAsmFx> broker;
+        readonly BitBroker<AsmHandlerKind,PartAsmFx> broker;
 
-        public IWfDataBroker<PartHandlerKind,PartAsmFx> Broker
+        public IWfDataBroker<AsmHandlerKind,PartAsmFx> Broker
             => broker;
 
         [MethodImpl(Inline)]
         public PartAsmProcessor(IWfContext wf)
         {
             Wf = wf;
-            broker = DataBrokers.broker64<PartHandlerKind,PartAsmFx>();
+            broker = DataBrokers.broker64<AsmHandlerKind,PartAsmFx>();
             (this as IWfDataProcessor).Connect();
         }
 

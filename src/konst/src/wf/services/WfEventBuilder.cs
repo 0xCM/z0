@@ -107,5 +107,9 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static WfStatus<T> status<T>(WfStepId step, T content, CorrelationToken ct)
             => new WfStatus<T>(step, content, ct);
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static WfStepRunning<T> running<T>(WfStepId step, T content, CorrelationToken ct)
+            => new WfStepRunning<T>(step, content, ct);
     }
 }

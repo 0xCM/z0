@@ -5,19 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
+    using System.Reflection.Emit;
+    using System.Reflection.Metadata;
+    using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
+    using static Konst;
+    using static z;
 
-    public enum HostHandlerKind : byte
-    {
-        A = 0,
-
-        B = 1,
-
-        C = 2
-    }
-
-    public interface IHostAsmProcessor : IAsmProcessor<HostHandlerKind,HostAsmFx>
+    partial struct Cil
     {
 
     }

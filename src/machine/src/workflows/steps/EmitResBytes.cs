@@ -43,12 +43,12 @@ namespace Z0
 
         public void Run()
         {
-            Wf.RunningT(StepName, new {SourceDir, TargetDir}, Ct);
+            Wf.Running(StepId, new {SourceDir, TargetDir});
 
             var indices = CodeReader.identified(SourceDir, Sink);
             foreach(var index in indices)
             {
-                Wf.Status(StepName, $"Loaded {index.Code.Length} {index.Host} code blocks", Ct);
+                Wf.Status(StepId, $"Loaded {index.Code.Length} {index.Host} code blocks", Ct);
 
                 try
                 {
@@ -75,7 +75,7 @@ namespace Z0
             using var writer = path.Writer();
             EmitFileHeader(writer);
             OpenFileNamespace(writer, "Z0.ByteCode");
-            EmitUsingStatments(writer);
+            EmitUsingStatements(writer);
             DeclareStaticClass(writer, typename);
             for(var i=0; i<resources.Count; i++)
             {

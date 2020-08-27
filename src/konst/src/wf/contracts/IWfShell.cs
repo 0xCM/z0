@@ -70,23 +70,11 @@ namespace Z0
         void Created(in WfActor actor, CorrelationToken? ct = null)
             => Raise(WfEvB.created(ct ?? Ct, actor));
 
-        void Created(in WfActor actor)
-            => Raise(WfEvB.created(Ct, actor));
+        void Created(in WfStepId step)
+            => Raise(WfEvB.created(step, Ct));
 
-        void Created(in WfWorker worker)
-            => Raise(WfEvB.created(Ct, worker));
-
-        void Created<T>(IWfStep<T> step)
-            where T: struct,  IWfStep<T>
-                => Created(step.Id);
-
-        void Running<T>(IWfStep<T> step)
-            where T: struct,  IWfStep<T>
-                => Running(step.Id);
-
-        void Ran<T>(IWfStep<T> step)
-            where T: struct,  IWfStep<T>
-                => Ran(step.Id);
+        void Running<T>(WfStepId step, T content)
+            => Raise(WfEvB.running(step,content, Ct));
 
         void Created(in WfActor actor, WfStepId step, CorrelationToken ct)
             => Raise(new WfStepCreated(step, ct));
@@ -143,7 +131,7 @@ namespace Z0
 
         void Running(string actor, string message, CorrelationToken ct)
         {
-            Raise(new WfStepRunning<string>(actor, message, ct));
+            Raise(new WfStepRunning<string>(WfStepId.Empty, message, ct));
         }
 
         void Running(string actor, CorrelationToken ct)
@@ -181,15 +169,8 @@ namespace Z0
             Raise(new WfFinished(actor, Ct));
         }
 
-        void Finished(in WfActor actor)
-        {
-            Raise(new WfActorFinished(actor, Ct));
-        }
-
         void Finished(in WfActor actor, CorrelationToken ct)
-        {
-            Raise(new WfActorFinished(actor, ct));
-        }
+            => Raise(new WfActorFinished(actor, ct));
 
         void Initializing(string actor)
             => Raise(new WfInitializing(actor, Ct));
@@ -198,28 +179,26 @@ namespace Z0
             => Raise(new WfInitialized(actor, Ct));
 
         void Running<T>(T message, string actor)
-        {
-            Raise(new WfStepRunning<T>(actor, message, Ct));
-        }
+            => Raise(new WfStepRunning<T>(WfStepId.Empty, message, Ct));
 
         void Ran(in WfActor actor, WfStepId step, CorrelationToken ct)
-        {
-            Raise(new WfStepRan(actor, step, ct));
-        }
+            => Raise(new WfStepRan(actor, step, ct));
 
         void Ran(string actor)
-        {
-            Raise(new WfStepRan(actor, Ct));
-        }
+            => Raise(new WfStepRan(actor, Ct));
 
         void Ran(WfStepId step)
-        {
-            Raise(new WfStepRan(step, Ct));
-        }
+            => Raise(new WfStepRan(step, Ct));
 
         void Ran<T>(WfStepId step, T data)
-        {
-            Raise(new WfStepRan<T>(step, data, Ct));
-        }
+            => Raise(new WfStepRan<T>(step, data, Ct));
+
+        void Status<T>(WfStepId step, T data)
+            => Raise(new WfStatus<T>(step, data, Ct));
+
+        void Finished<T>(IWfStep<T> step)
+            where T: struct,  IWfStep<T>
+                => Finished(step.Id);
+
     }
 }

@@ -45,7 +45,7 @@ namespace Z0
                 var ct = correlate(ShellId);
                 var paths = context.AppPaths;
                 var config = Flow.configure(context, args, paths.ResourceRoot + FolderName.Define("capture"), ct);
-                using var log = Flow.log(config);
+                using var log = AB.log(config);
                 using var wf = Flow.context(context, config, log, ct);
                 wf.RunningT(ActorName, Flow.delimit(config.Parts), ct);
                 using var control = new Control(wf);

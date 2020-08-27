@@ -47,7 +47,7 @@ namespace Z0.Asm
             Asm = asm;
             Ct = ct;
             Config = config;
-            Log = Flow.log(Config);
+            Log = AB.log(Config);
             var srcpath = FilePath.Define(wf.GetType().Assembly.Location).FolderPath;
             var dstpath = wf.AppPaths.AppCaptureRoot;
             var src = new ArchiveConfig(srcpath);

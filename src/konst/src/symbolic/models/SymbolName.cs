@@ -62,6 +62,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => new SymbolName<S>(EmptyString);
         }
-
     }
 }

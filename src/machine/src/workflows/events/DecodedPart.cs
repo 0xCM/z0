@@ -11,6 +11,7 @@ namespace Z0
 
     using static Konst;
     using static RenderPatterns;
+    using static Render;
     using static z;
 
     [Event]
@@ -31,7 +32,7 @@ namespace Z0
         public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public DecodedPart(string actor, PartAsmFx src, CorrelationToken ct, MessageFlair flair = MessageFlair.Cyan)
+        public DecodedPart(string actor, PartAsmFx src, CorrelationToken ct, MessageFlair flair = Ran)
         {
             EventId = WfEventId.define(EventName, ct);
             Actor = actor;

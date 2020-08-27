@@ -9,10 +9,24 @@ namespace Z0
     using System.Reflection;
     using System.Runtime.InteropServices;
 
-    public readonly struct DataProcessor<S,T>
+    public readonly struct Processor<T>
     {
+        public static void Process(in T src, ref T dst)
+        {
+
+        }
 
     }
+
+    public readonly struct Processor<S,T>
+    {
+        public static void Process(in S src, ref T dst)
+        {
+
+        }
+
+    }
+
 
     public readonly struct DataDynamic
     {

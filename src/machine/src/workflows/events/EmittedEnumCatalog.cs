@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static RenderPatterns;
 
-    [Event(EventName)]
+    [Event]
     public readonly struct EmittedEnumCatalog : IWfEvent<EmittedEnumCatalog>
     {
         public const string EventName = nameof(EmittedEnumCatalog);

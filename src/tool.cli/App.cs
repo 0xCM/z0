@@ -34,7 +34,7 @@ namespace Z0
             try
             {
                 var config = Flow.configure(Context,args, Ct);
-                using var log = Flow.log(config);
+                using var log = AB.log(config);
                 using var wf = Flow.context(Context, config, log, Ct);
                 Flow.status(wf, ShellName, new {Message ="Running shell", Args = text.bracket(args.FormatList())},Ct);
 

@@ -10,13 +10,7 @@ namespace Z0
 
         LoadedParseReport LoadedParseReport => default;
 
-        IndexedEncoded IndexedCode => default;
-
         DecodedHost DecodedHost => default;
-
-        DecodedPart DecodedPart => default;
-
-        DecodedMachine DecodedIndex => default;
 
         void OnEvent(IWfError e)
             => Sink.Deposit(e);
@@ -40,10 +34,7 @@ namespace Z0
         {
             Error.Subscribe(Broker,OnEvent);
             LoadedParseReport.Subscribe(Broker,OnEvent);
-            //IndexedCode.Subscribe(Broker,OnEvent);
             DecodedHost.Subscribe(Broker,OnEvent);
-            //DecodedPart.Subscribe(Broker,OnEvent);
-            //DecodedIndex.Subscribe(Broker,OnEvent);
         }
     }
 }

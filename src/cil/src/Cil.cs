@@ -33,10 +33,13 @@ namespace Z0
             Data = src;
         }
 
-
         [MethodImpl(Inline), Op]
-        public static Symbol<ILOpCode,ushort,N16> symbol<K>(K k = default)
+        public static OpCodeSymbol symbol(ILOpCode id)
+            => new OpCodeSymbol(id);
+
+        [MethodImpl(Inline)]
+        public static OpCodeSymbol symbol<K>(K k = default)
             where K : unmanaged, ICilOpCode<K>
-                => Symbolic.symbol<ILOpCode,ushort,N16>((ILOpCode)(default(K).Id));
+                => new OpCodeSymbol((ILOpCode)(default(K).Id));
     }
 }

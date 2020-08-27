@@ -34,7 +34,7 @@ namespace Z0
         {
             var s = Flow.settings(Context, Ct);
             var config = Flow.configure(Context, args, Ct);
-            using var log = Flow.log(config);
+            using var log = AB.log(config);
             using var context = Flow.context(Context, config, log, Ct);
             using var wf = new XedEtl(context, new XedEtlConfig(Context, s));
             wf.Run();

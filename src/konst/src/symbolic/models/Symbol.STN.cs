@@ -19,11 +19,6 @@ namespace Z0
         where N : unmanaged, ITypeNat
     {
         /// <summary>
-        /// The symbol name, if not anonymous
-        /// </summary>
-        public SymbolName Name {get;}
-
-        /// <summary>
         /// The symbol value
         /// </summary>
         public S Value {get;}
@@ -47,14 +42,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public Symbol(S value)
         {
-            Value = value;
-            Name = SymbolName.Empty;
-        }
-
-        [MethodImpl(Inline)]
-        public Symbol(string name, S value)
-        {
-            Name = name;
             Value = value;
         }
 

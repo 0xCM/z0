@@ -11,6 +11,13 @@ namespace Z0
     using static EmitPartStringsStep;
     using static z;
 
+    public enum PartStringKind
+    {
+        System = 0,
+
+        User = 1,
+    }
+
     public ref struct EmitPartStrings
     {
         /// <summary>
@@ -24,18 +31,18 @@ namespace Z0
 
         readonly IPart Part;
 
-        readonly bool UserStrings;
+        readonly PartStringKind StringKind;
 
         readonly FilePath TargetPath;
 
         [MethodImpl(Inline)]
-        public EmitPartStrings(IWfContext wf, IPart part, bool user, FilePath dst, CorrelationToken ct)
+        public EmitPartStrings(IWfContext wf, IPart part, PartStringKind sk, FolderPath dir, CorrelationToken ct)
         {
             Wf = wf;
             Part = part;
             Ct = ct;
-            TargetPath = dst;
-            UserStrings = user;
+            TargetPath = dir + FileName.Define(part.Id.Format(), ExtName(sk));
+            StringKind = sk;
             EmissionCount = 0;
             Wf.Created(StepName, Ct);
         }
@@ -64,7 +71,7 @@ namespace Z0
         }
 
         ReadOnlySpan<ImgStringRecord> ReadData()
-            => UserStrings ? ReadUserStrings(Part) : ReadSystemStrings(Part);
+            => StringKind == PartStringKind.User ? ReadUserStrings(Part) : ReadSystemStrings(Part);
 
         ReadOnlySpan<ImgStringRecord> ReadUserStrings(IPart part)
         {

@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Collections.Generic;
     using System.Text;
@@ -19,44 +19,44 @@ namespace Z0
     public class CodeGenerator : ICodeGenerator
     {
         public static string property(BinaryResourceSpec src, int level = 2)
-            => text.concat("public static ReadOnlySpan<byte> ", 
-            src.Identifier, 
+            => text.concat("public static ReadOnlySpan<byte> ",
+            src.Identifier,
             Space,
-            " => ", 
+            " => ",
             Space,
             $"new byte[{src.Encoded.Length}]",
-            LBrace, 
-            src.Encoded.Format(HexFormatConfig.ArrayContent), 
+            LBrace,
+            src.Encoded.Format(HexFormatConfig.ArrayContent),
             RBrace,
             Chars.Semicolon
             );
 
 
-        public static string FileHeader 
+        public static string FileHeader
             => text.lines(HeaderLine1, HeaderLine2, HeaderLine3, HeaderLine4);
 
         const string HeaderLine1 = "//-----------------------------------------------------------------------------";
-        
+
         const string HeaderLine2 = "// Copyright   :  (c) Chris Moore, 2020";
-        
+
         const string HeaderLine3 = "// License     :  MIT";
 
         const string HeaderLine4 = "//-----------------------------------------------------------------------------";
 
         public const string Level0 = "";
-        
+
         public const string Level1 = "    ";
-        
+
         public const string Level2 = Level1 + Level1;
-        
+
         public const string Level3 = Level2 + Level1;
 
         public const string InlineTag = "[MethodImpl(Inline)]";
-        
+
         public const string ImplicitOp ="public static implicit operator ";
 
         public const int FileLevel = 0;
-        
+
         public const int TypeLevel = 1;
 
         public const int MemberLevel = 2;
@@ -68,8 +68,8 @@ namespace Z0
             => string.Join(Chars.Comma,src);
 
         public static string attrib(string name, params object[] arguments)
-            => arguments.Length == 0 
-            ? bracket(text.concat(name)) 
+            => arguments.Length == 0
+            ? bracket(text.concat(name))
             : bracket(text.concat(name, Chars.LParen, args(arguments), Chars.RParen));
 
         protected CodeGenerator()
@@ -102,7 +102,7 @@ namespace Z0
 
         public static string usingNs(int n, string ns)
             => level(n, text.concat("using", Space, ns, Chars.Semicolon));
-        
+
         public static  string usingType(int n, string type)
             => level(n, text.concat("using static", Space, type, Chars.Semicolon));
 
@@ -117,7 +117,7 @@ namespace Z0
 
         public static string assign(object dst, object src)
             => text.concat(dst, Space, Chars.Eq, Space, src);
-        
+
         public virtual string Generate() => string.Empty;
 
         public static string Comment(object src, int l)
@@ -138,9 +138,9 @@ namespace Z0
         public static string[] DefaultTypes {get;}
             = new string[]{ };
 
-        protected virtual string[] StaticUsings 
+        protected virtual string[] StaticUsings
             => DefaultTypes;
-            
+
         public static void EmitFileHeader(TextWriter dst)
         {
             dst.Write(FileHeader);
@@ -149,25 +149,25 @@ namespace Z0
         public static void OpenFileNamespace(TextWriter dst, string ns = "Z0")
         {
             dst.WriteLine(string.Concat("namespace ", ns));
-            dst.WriteLine(LBrace);            
+            dst.WriteLine(LBrace);
         }
 
         public static void CloseFileNamespace(TextWriter dst)
         {
-            dst.WriteLine(RBrace);            
+            dst.WriteLine(RBrace);
 
         }
 
         public static void OpenStructDeclaration(TextWriter dst, string name, params string[] modifiers)
         {
-            
+
             dst.WriteLine(level(TypeLevel, text.concat($"{spaced(modifiers)} struct {name}")));
             dst.WriteLine(level(TypeLevel, LBrace));
         }
 
         public static void OpenClassDeclaration(TextWriter dst, string name, params string[] modifiers)
         {
-            
+
             dst.WriteLine(level(TypeLevel, text.concat($"{spaced(modifiers)} class {name}")));
             dst.WriteLine(level(TypeLevel, LBrace));
         }
@@ -180,15 +180,15 @@ namespace Z0
             dst.WriteLine(level(l, RBrace));
         }
 
-        public static void EmitUsingStatments(TextWriter dst, int l = TypeLevel)
+        public static void EmitUsingStatements(TextWriter dst, int l = TypeLevel)
         {
             for(var j=0; j<DefaultNamspaces.Length; j++)
-                dst.WriteLine(usingNs(l, DefaultNamspaces[j]));                
+                dst.WriteLine(usingNs(l, DefaultNamspaces[j]));
 
             dst.WriteLine();
 
             for(var j=0; j<DefaultTypes.Length; j++)
-                dst.WriteLine(usingType(l, DefaultTypes[j]));                
+                dst.WriteLine(usingType(l, DefaultTypes[j]));
 
             dst.WriteLine();
         }

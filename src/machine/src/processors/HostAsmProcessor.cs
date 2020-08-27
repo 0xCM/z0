@@ -11,19 +11,19 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct HostAsmProcessor : IHostAsmProcessor
+    public readonly struct HostAsmProcessor : IAsmProcessor<AsmHandlerKind,HostAsmFx>
     {
         public IWfContext Wf {get;}
 
         public HostAsmFx Source {get;}
 
-        public IWfDataBroker<HostHandlerKind,HostAsmFx> Broker {get;}
+        public IWfDataBroker<AsmHandlerKind,HostAsmFx> Broker {get;}
 
         [MethodImpl(Inline)]
         public HostAsmProcessor(IWfContext context, HostAsmFx src)
         {
             Wf = context;
-            Broker = DataBrokers.broker64<HostHandlerKind,HostAsmFx>();
+            Broker = DataBrokers.broker64<AsmHandlerKind,HostAsmFx>();
             Source = src;
             (this as IWfDataProcessor).Connect();
         }

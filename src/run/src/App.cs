@@ -35,7 +35,7 @@ namespace Z0
                 parts = Context.PartIdentities;
 
             var config = Flow.configure(Context, args, Ct);
-            using var log = Flow.log(config);
+            using var log = AB.log(config);
             var wfc = Flow.context(Context, config, log, Ct);
             using var state = WfBuilder.state(wfc, WfBuilder.asm(Context), config);
 

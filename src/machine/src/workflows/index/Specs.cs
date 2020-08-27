@@ -12,18 +12,28 @@ namespace Z0
     public readonly struct ProcessPartFilesStep : IWfStep<ProcessPartFilesStep>
     {
         public const string StepName = nameof(ProcessPartFiles);
+
+        public static WfStepId StepId
+            => AB.step<ProcessPartFilesStep>();
     }
 
     [Step(typeof(EmitCallIndex))]
     public readonly struct EmitCallIndexStep : IWfStep<EmitCallIndexStep,PartAsmFx,FilePath>
     {
         public const string StepName = nameof(EmitCallIndex);
+
+        public static WfStepId StepId
+            => AB.step<EmitCallIndexStep>();
     }
 
     [Step(typeof(CaptureResBytes))]
     public readonly struct CaptureResBytesStep : IWfStep<CaptureResBytesStep>
     {
         public const string StepName = nameof(CaptureResBytes);
+
+        public static WfStepId StepId
+            => AB.step<CaptureResBytesStep>();
+
     }
 
     [Step(typeof(EmitBitMasks))]
@@ -121,19 +131,19 @@ namespace Z0
     {
         public const string StepName = nameof(EmitStringRecords);
 
-        public const string DataType = "metastring";
+        public const string DataType = "strings";
 
-        public const string UserKind = "user";
+        public const string UserKind = nameof(PartStringKind.User);
 
-        public const string SystemKind = "system";
+        public const string SystemKind = nameof(PartStringKind.System);
 
         public const string TargetFolder = DataType + Plural;
 
         public const string DataTypeExt = DataType + ExtSep + DataExt;
 
-        public const string UserKindExt = SystemKind + ExtSep + DataTypeExt;
+        public const string UserKindExt = UserKind + ExtSep + DataTypeExt;
 
-        public const string SystemKindExt = UserKind + ExtSep + DataTypeExt;
+        public const string SystemKindExt = SystemKind + ExtSep + DataTypeExt;
     }
 
     [Step(typeof(EmitPartStrings))]
@@ -142,6 +152,9 @@ namespace Z0
         public const string StepName = nameof(EmitPartStrings);
 
         public const string EmissionType = EmitStringRecordsStep.DataType;
+
+        public static string ExtName(PartStringKind kind)
+            => (kind == PartStringKind.System ? EmitStringRecordsStep.SystemKindExt : EmitStringRecordsStep.UserKindExt).ToLower();
     }
 
     [Step(typeof(IndexEncodedParts))]
@@ -176,9 +189,13 @@ namespace Z0
     }
 
     [Step(typeof(EmitResBytes))]
-    public readonly struct EmitResBytesStep
+    public readonly struct EmitResBytesStep : IWfStep<EmitResBytesStep>
     {
         public const string StepName = nameof(EmitResBytes);
+
+        public static WfStepId StepId
+            => AB.step<EmitResBytesStep>();
+
     }
 
     [Step(typeof(ParseAsmFiles))]
@@ -217,6 +234,7 @@ namespace Z0
     {
         public const string StepName = nameof(EmitStepList);
 
-        public static EmitStepListStep Step => default;
+        public static WfStepId StepId
+            => AB.step<EmitStepListStep>();
     }
 }
