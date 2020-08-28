@@ -17,26 +17,26 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public string ActorName {get;}
+        public WfStepId StepId {get;}
 
-        public string DatasetName {get;}
+        public string Dataset {get;}
 
-        public readonly uint RecordCount;
+        public readonly uint RowCount;
 
-        public readonly FilePath TargetPath;
+        public readonly FS.FilePath Target;
 
         [MethodImpl(Inline)]
-        public WfEmitted(string actor, string dataset, uint count, FilePath target, CorrelationToken ct)
+        public WfEmitted(WfStepId step, string dataset, uint count, FilePath target, CorrelationToken ct)
         {
             EventId = z.evid(EventName, ct);
-            ActorName = actor;
-            DatasetName = dataset;
-            RecordCount = count;
-            TargetPath = target;
+            StepId = step;
+            Dataset = dataset;
+            RowCount = count;
+            Target = FS.path(target.Name);
         }
 
         public string Format()
-            => text.format(PSx5, EventId, ActorName, DatasetName, RecordCount, TargetPath);
+            => text.format(PSx5, EventId, StepId, Dataset, RowCount, Target);
 
         public override string ToString()
             => Format();

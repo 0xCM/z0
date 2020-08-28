@@ -87,7 +87,7 @@ namespace Z0
 
         public void Run()
         {
-            Run(default(EmitMetadataSetsStep));
+            //Run(default(EmitMetadataSetsStep));
             Run(default(EmitBitMasksStep));
             Run(default(EmitProjectDocsStep));
             Run(default(EmitResBytesStep));

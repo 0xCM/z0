@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
@@ -11,22 +11,13 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Identifies a specialized literal cover
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Struct)]
-    public class LiteralCoverAttribute : Attribute
-    {
-
-    }
-    
-    /// <summary>
     /// Characterizes a type that defines views over captured literals
     /// </summary>
     /// <typeparam name="K">The covered literal type</typeparam>
     public interface ILiteralCover<C>
         where C : struct, ILiteralCover<C>
     {
-        FieldInfo[] Covered 
+        FieldInfo[] Covered
             => typeof(C).Fields();
     }
 
@@ -38,7 +29,7 @@ namespace Z0
     public interface ILiteralCover<C,K> : ILiteralCover<C>
         where C : struct, ILiteralCover<C,K>
     {
-         
+
     }
 
     /// <summary>
@@ -50,6 +41,6 @@ namespace Z0
     public interface ILiteralCover<C,K0,K1> : ILiteralCover<C>
         where C : struct, ILiteralCover<C,K0,K1>
     {
-        
-    }    
+
+    }
 }

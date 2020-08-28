@@ -43,6 +43,12 @@ namespace Z0
 
         CorrelationToken Ct {get;}
 
+        FolderPath AsmTables
+            => ResourceRoot + FolderName.Define("tables");
+
+        FolderPath AsmTableCore
+            => AsmTables + FolderName.Define("asm");
+
         WfEventId Raise<E>(in E e)
             where E : IWfEvent;
 
@@ -70,8 +76,17 @@ namespace Z0
         void Ran<S,T,R>(WfStepId step, WfDataFlow<S,T,R> df)
             => Raise(WfEvB.ran(step, df, Ct));
 
-        void Ran(WfStepId step, [File] string actor = null)
-            => Raise(WfEvB.ran(Path.GetFileNameWithoutExtension(actor), step, Ct));
+        void Ran(WfStepId step, CorrelationToken ct)
+            => Raise(new WfStepRan(step, ct));
+
+        void Ran(WfStepId step)
+            => Raise(new WfStepRan(step, Ct));
+
+        void Ran<T>(WfStepId step, T data)
+            => Raise(new WfStepRan<T>(step, data, Ct));
+
+        void Status<T>(WfStepId step, T data)
+            => Raise(new WfStatus<T>(step, data, Ct));
 
         void Created(in WfActor actor, CorrelationToken? ct = null)
             => Raise(WfEvB.created(ct ?? Ct, actor));
@@ -79,11 +94,14 @@ namespace Z0
         void Created(in WfStepId step)
             => Raise(WfEvB.created(step, Ct));
 
-        void Running<T>(WfStepId step, T content)
-            => Raise(WfEvB.running(step,content, Ct));
+        void Emitting(WfStepId step, string dataset, FilePath dst)
+            => Raise(new WfEmitting(step, dataset, dst, Ct));
 
-        void Created(in WfActor actor, WfStepId step, CorrelationToken ct)
-            => Raise(new WfStepCreated(step, ct));
+        void Emitted(WfStepId step, string dataset, uint count, FilePath dst)
+            => Raise(new WfEmitted(step, dataset, count, dst, Ct));
+
+        void Running<T>(WfStepId step, T content)
+            => Raise(WfEvB.running(step, content, Ct));
 
         void Running(string actor)
         {
@@ -102,6 +120,9 @@ namespace Z0
 
         void Finished(WfStepId step, CorrelationToken ct)
             => Raise(new WfFinished(step.Format(), ct));
+
+        void Finished(WfStepId step)
+            => Raise(new WfFinished(step.Format(), Ct));
 
         void Initializing(string worker, CorrelationToken ct)
         {
@@ -123,15 +144,11 @@ namespace Z0
             Raise(new WfStepCreated(step, ct));
         }
 
-        void Emitting(string worker, string table, FilePath dst, CorrelationToken ct)
-        {
-            Raise(new WfEmitting(worker, table, dst, ct));
-        }
+        void Emitting(string worker, string dataset, FilePath dst, CorrelationToken ct)
+            => Raise(new WfEmitting(WfStepId.Empty, dataset, dst, ct));
 
-        void Emitted(string actor, string table, uint count, FilePath dst, CorrelationToken ct)
-        {
-            Raise(new WfEmitted(actor, table, count,  dst, ct));
-        }
+        void Emitted(string actor, string dataset, uint count, FilePath dst, CorrelationToken ct)
+            => Raise(new WfEmitted(WfStepId.Empty, dataset, count,  dst, ct));
 
         void Running(string actor, string message, CorrelationToken ct)
         {
@@ -146,26 +163,6 @@ namespace Z0
         void Status(string worker, string msg, CorrelationToken ct)
         {
             Raise(new WfStatus(worker, msg, ct));
-        }
-
-        void Finished(WfStepId step)
-        {
-            Raise(new WfFinished(step.Format(), Ct));
-        }
-
-        void Emitting(string worker, string table, FilePath dst)
-        {
-            Raise(new WfEmitting(worker, table, dst, Ct));
-        }
-
-        void Emitted(string actor, string table, uint count, FilePath dst)
-        {
-            Raise(new WfEmitted(actor, table, count, dst, Ct));
-        }
-
-        void Ran(WfStepId step, CorrelationToken ct)
-        {
-            Raise(new WfStepRan(step, ct));
         }
 
         void Finished(string actor)
@@ -190,19 +187,5 @@ namespace Z0
 
         void Ran(string actor)
             => Raise(new WfStepRan(actor, Ct));
-
-        void Ran(WfStepId step)
-            => Raise(new WfStepRan(step, Ct));
-
-        void Ran<T>(WfStepId step, T data)
-            => Raise(new WfStepRan<T>(step, data, Ct));
-
-        void Status<T>(WfStepId step, T data)
-            => Raise(new WfStatus<T>(step, data, Ct));
-
-        void Finished<T>(IWfStep<T> step)
-            where T: struct,  IWfStep<T>
-                => Finished(step.Id);
-
     }
 }

@@ -11,8 +11,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using NK = EnumTypeCode;
-
     partial struct TableFormat
     {
         [MethodImpl(Inline)]

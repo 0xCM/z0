@@ -18,23 +18,23 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public string ActorName {get;}
+        public WfStepId StepId {get;}
 
-        public string DatasetName {get;}
+        public string Dataset {get;}
 
-        public string TargetPath {get;}
+        public FS.FilePath Target {get;}
 
         [MethodImpl(Inline)]
-        public WfEmitting(string actor, string dataset, FilePath target, CorrelationToken ct)
+        public WfEmitting(WfStepId step, string dataset, FilePath target, CorrelationToken ct)
         {
-            ActorName = actor;
+            StepId = step;
             EventId = z.evid(EventName, ct);
-            DatasetName = dataset;
-            TargetPath = target.Name;
+            Dataset = dataset;
+            Target = FS.path(target.Name);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx4, EventId, ActorName, DatasetName, TargetPath);
+            => text.format(PSx4, EventId, StepId, Dataset, Target);
     }
 }

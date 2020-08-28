@@ -8,49 +8,30 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     /// <summary>
     /// Describes a branching instruction operand
     /// </summary>
-    public readonly struct AsmBranchInfo
-    {        
-        public readonly Instruction Instruction {get;}
-        
-        public readonly MemoryAddress Base;
+    public struct AsmBranchInfo
+    {
+        public Instruction Fx;
 
-        public readonly MemoryAddress Source;
+        public MemoryAddress Base;
 
-        public readonly AsmBranchTarget Target;
+        public MemoryAddress Source;
 
-        public readonly MemoryAddress TargetOffset;
-        
-        public bool IsEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => Base == 0 && Source == 0; 
-        }
+        public AsmBranchTarget Target;
 
-        public bool IsNonEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => !IsEmpty; 
-        }
-
-        public bool IsNear 
-            => Target.IsNear;
-        
+        public MemoryAddress TargetOffset;
 
         [MethodImpl(Inline)]
         public AsmBranchInfo(in Instruction fx, MemoryAddress @base, MemoryAddress src, in AsmBranchTarget target, uint offset)
-        {            
-            Instruction = fx;
+        {
+            Fx = fx;
             Base = @base;
             Source = src;
             Target = target;
             TargetOffset = offset;
         }
-
-        public static AsmBranchInfo Empty 
-            => new AsmBranchInfo(new Instruction(), 0, 0, AsmBranchTarget.Empty, 0);
     }
 }

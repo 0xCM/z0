@@ -29,19 +29,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void ProcessJmp(HostAsmFx src)
-        {
-            var pJmp = AsmProcessors.jmp(Wf);
-            for(var j=0; j<src.Length; j++)
-            {
-                ref readonly var member = ref src[j];
-
-                for(var k=0; k<member.Length; k++)
-                    pJmp.Process(member[k]);
-            }
-        }
-
-        [MethodImpl(Inline)]
         public void Process()
         {
             var processor = AsmProcessors.create(Wf);

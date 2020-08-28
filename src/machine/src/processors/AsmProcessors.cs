@@ -48,14 +48,6 @@ namespace Z0
             => new PartAsmProcessor(wf);
 
         /// <summary>
-        /// Creates a jmp processor
-        /// </summary>
-        /// <param name="context">The process context</param>
-        [MethodImpl(Inline), Op]
-        public static ProcessAsmJmp jmp(IWfContext context)
-            => new ProcessAsmJmp(context);
-
-        /// <summary>
         /// Creates a command-parametric generic process stated
         /// </summary>
         /// <param name="initial">The initial state</param>

@@ -53,7 +53,7 @@ namespace Z0
         }
 
         public string Format()
-            => Calls.format(this);
+            => AsmCalls.format(this);
 
         public override string ToString()
             => Format();

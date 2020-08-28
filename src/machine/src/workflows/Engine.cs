@@ -116,9 +116,8 @@ namespace Z0
         {
             try
             {
-                Wf.Status(StepName, "Processing instructions", Ct);
-                var workflow = ProcessInstructions.create(Wf);
-                workflow.Process(fx);
+                var step = new ProcessInstructions(Wf,fx);
+                step.Run();
             }
             catch(Exception error)
             {

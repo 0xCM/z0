@@ -6,12 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.Linq;
 
-    using static Konst;   
+    using static Konst;
     using static z;
-
 
     partial class XTend
     {
@@ -19,7 +16,7 @@ namespace Z0
         public static TableSpan<T> TableSpan<T>(this T[] src)
             where T : struct
                 => src;
-        
+
         [MethodImpl(Inline)]
         public static TableSpan<Y> Map<T,Y>(this TableSpan<T> src, Func<T,Y> f)
             where T : struct

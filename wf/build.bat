@@ -22,4 +22,8 @@ set Cmd=%ZDev%\wf\stage.bat
 echo on
 call %Cmd%
 
+set Cmd=wf\publish.bat
+echo on
+call %Cmd%
+
 

@@ -8,6 +8,15 @@ namespace Z0
 
     using Z0.Asm;
 
+    [Step(typeof(ProcessInstructions))]
+    public readonly struct ProcessInstructionsStep : IWfStep<ProcessInstructionsStep>
+    {
+        public const string StepName = nameof(ProcessInstructions);
+
+        public static WfStepId StepId
+            => AB.step<ProcessInstructionsStep>();
+    }
+
     [Step(typeof(ProcessPartFiles))]
     public readonly struct ProcessPartFilesStep : IWfStep<ProcessPartFilesStep>
     {
@@ -33,7 +42,6 @@ namespace Z0
 
         public static WfStepId StepId
             => AB.step<CaptureResBytesStep>();
-
     }
 
     [Step(typeof(EmitBitMasks))]
@@ -163,12 +171,6 @@ namespace Z0
         public const string StepName = nameof(IndexEncodedParts);
     }
 
-    [Step(typeof(ProcessInstructions))]
-    public readonly struct ProcessInstructionsStep
-    {
-        public const string StepName = nameof(ProcessInstructions);
-    }
-
     public readonly struct Controller
     {
         public const string ActorName = nameof(Control);
@@ -224,7 +226,7 @@ namespace Z0
     }
 
     [Step(typeof(EmitMetadataSets))]
-    public readonly struct EmitMetadataSetsStep
+    public readonly struct EmitMetadataSetsStep : IWfStep<EmitMetadataSetsStep>
     {
         public const string WorkerName = nameof(EmitMetadataSets);
     }

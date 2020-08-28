@@ -8,14 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
-    
+
     using static Konst;
     using static Asm.OpKind;
-    
+
     partial struct asm
-    {       
+    {
         [Op]
-        public static AsmBranchTarget branchTarget(Instruction src, int index)
+        public static AsmBranchTarget branchTarget(Instruction src, byte index)
         {
             var k = asm.kind(src, index);
             switch(k)

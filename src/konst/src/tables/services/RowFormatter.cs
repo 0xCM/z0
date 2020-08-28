@@ -51,9 +51,6 @@ namespace Z0
             return content;
         }
 
-        public string FormatHeader()
-            => FormatHeader(Widths);
-
         public string FormatHeader(ReadOnlySpan<byte> widths)
         {
             var dst = text.build();
@@ -69,55 +66,63 @@ namespace Z0
             return dst.ToString();
         }
 
-        public void EmitHeader()
+        public void EmitHeader(ReadOnlySpan<byte> widths)
         {
-            Target.Append(FormatHeader());
+            Target.Append(FormatHeader(widths));
             EmitEol();
         }
 
-        public void Append(ushort width, object content)
-            => Target.Append(Render(content).PadRight(width));
+        public void Append(ushort width, object src)
+            => Target.Append(Render(src).PadRight(width));
 
-        public void Delimit(ushort width, object content)
+        void Delimit(ushort width, object src)
         {
             Target.Append(Delimiter);
             Target.Append(Space);
-            Target.Append(Render(content).PadRight(width));
+            Target.Append(Render(src).PadRight(width));
         }
 
-        public void Delimit(ushort width, byte content)
+        public void Delimit<E>(ushort width, EnumValue<E> src)
+            where E : unmanaged, Enum
         {
             Target.Append(Delimiter);
             Target.Append(Space);
-            Target.Append(Render(content).PadRight(width));
+            Target.Append(src.Format().PadRight(width));
         }
 
-        public void Delimit(ushort width, ushort content)
+        public void Delimit(ushort width, byte src)
         {
             Target.Append(Delimiter);
             Target.Append(Space);
-            Target.Append(Render(content).PadRight(width));
+            Target.Append(src.ToString().PadRight(width));
         }
 
-        public void Delimit(ushort width, uint content)
+        public void Delimit(ushort width, ushort src)
         {
             Target.Append(Delimiter);
             Target.Append(Space);
-            Target.Append(Render(content).PadRight(width));
+            Target.Append(src.ToString().PadRight(width));
         }
 
-        public void Delimit(ushort width, ulong content)
+        public void Delimit(ushort width, uint src)
         {
             Target.Append(Delimiter);
             Target.Append(Space);
-            Target.Append(Render(content).PadRight(width));
+            Target.Append(src.ToString().PadRight(width));
         }
 
-        public void Delimit(ushort width, string content)
+        public void Delimit(ushort width, ulong src)
         {
             Target.Append(Delimiter);
             Target.Append(Space);
-            Target.Append(Render(content).PadRight(width));
+            Target.Append(src.ToString().PadRight(width));
+        }
+
+        public void Delimit(ushort width, string src)
+        {
+            Target.Append(Delimiter);
+            Target.Append(Space);
+            Target.Append((src ?? EmptyString).PadRight(width));
         }
 
         public void Delimit<C>(ushort width, C content)

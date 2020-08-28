@@ -45,6 +45,4 @@ namespace Z0
         void Relay(E kind, T data)
             => Broker.Relay(kind,data);
     }
-
-
 }

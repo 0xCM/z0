@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     [ApiHost]
-    public readonly struct Calls
+    public readonly struct AsmCalls
     {
         [MethodImpl(Inline), Op]
         public static CallClient client(MemoryAddress @base)
@@ -47,7 +47,7 @@ namespace Z0
         [Op]
         public static string format(Invocation src)
         {
-            var site = Calls.offset(src);
+            var site = AsmCalls.offset(src);
             var target =  src.CalledTarget.Base;
             var offset = (site - target).Location;
             var delta = (src.ActualTarget.Base - site).Location;

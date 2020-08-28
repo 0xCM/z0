@@ -6,11 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
 
-    public readonly struct AsmState
+    /// <summary>
+    /// Identifies a specialized literal cover
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Struct)]
+    public class LiteralCoverAttribute : Attribute
     {
 
     }
+
 }

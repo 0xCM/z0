@@ -4,34 +4,53 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using Z0.Asm;
 
     using static Konst;
+    using static z;
 
-    public class ProcessInstructions
+    using static ProcessInstructionsStep;
+
+
+    public ref struct ProcessInstructions
     {
-        public static ProcessInstructions create(IWfContext wf)
-            => new ProcessInstructions(wf);
+        readonly IWfContext Wf;
 
-        public IWfContext Wf {get;}
+        readonly PartAsmFx Source;
 
-        readonly ProcessAsmJmp Processor;
-
-        public ProcessInstructions(IWfContext wf)
+        public ProcessInstructions(IWfContext wf, PartAsmFx src)
         {
             Wf = wf;
-            Processor = AsmProcessors.jmp(wf);
+            Source = src;
+            Wf.Created(StepId);
         }
 
-        public void Run(PartAsmFx src)
+        public void Dispose()
         {
-            Process(src);
+            Wf.Finished(StepId);
         }
 
-        public void Process(PartAsmFx src)
+        void ProcessJumps()
         {
-            AsmProcessors.parts(Wf).Process(src);
-            RenderSemantic.Render(src);
+            using var processor = new ProcessAsmJmp(Wf, Source);
+            processor.Process();
+        }
+
+        public void Run()
+        {
+            Wf.Running(StepId, Source.Part);
+            try
+            {
+                ProcessJumps();
+                AsmProcessors.parts(Wf).Process(Source);
+                RenderSemantic.Render(Source);
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e);
+            }
+            Wf.Ran(StepId, Source.Part);
         }
     }
 }

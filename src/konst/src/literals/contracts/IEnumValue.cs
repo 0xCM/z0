@@ -2,19 +2,16 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    public readonly struct AsmFxKind<K> : IAsmFxKind<K>
-        where K : unmanaged, Enum
-    {
-        public AsmFxKind(K literal)
-        {
-            Literal = literal;
-        }
+    using static Konst;
 
-        public K Literal {get;}
+    public interface IEnumValue<E> : ITextual
+        where E : unmanaged, Enum
+    {
+        E Literal {get;}
     }
 }
