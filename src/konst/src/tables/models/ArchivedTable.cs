@@ -6,19 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
-    public readonly struct ArchivedTable<F,T>
-        where T : struct, ITable<F,T>
-        where F : unmanaged, Enum
+    public readonly struct ArchivedTable<T>
+        where T : struct
     {
-        public readonly FilePath Location;        
+        public readonly FilePath Location;
 
         [MethodImpl(Inline)]
         public ArchivedTable(FilePath path)
         {
             Location = path;
-        }        
+        }
     }
 }

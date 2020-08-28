@@ -10,6 +10,8 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
+    using static z;
+
     using static TargetTypeStep;
 
     [Step(typeof(TargetType), StepName)]

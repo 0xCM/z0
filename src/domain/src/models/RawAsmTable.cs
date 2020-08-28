@@ -24,12 +24,12 @@ namespace Z0
 
     [Table]
     public readonly struct RawAsmTable : ITable<RawAsmField,RawAsmTable>
-    {        
-        public static RawAsmTable Empty 
+    {
+        public static RawAsmTable Empty
             => new RawAsmTable(0, 0, EmptyString, EmptyString);
-        
+
         public readonly uint Sequence;
-        
+
         public readonly MemoryAddress Address;
 
         public readonly string Mnemonic;
@@ -50,7 +50,7 @@ namespace Z0
     {
         public static string Format(this RawAsmTable src)
         {
-            var dst = Table.formatter<RawAsmField>();
+            var dst = TableFormat.formatter<RawAsmField>();
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.Address, src.Address);
             dst.Delimit(F.Mnemonic, src.Mnemonic);
@@ -59,6 +59,6 @@ namespace Z0
         }
 
         public static string FormatHeader(this RawAsmTable src)
-            => Table.formatter<RawAsmField>().FormatHeader();
+            => TableFormat.formatter<RawAsmField>().FormatHeader();
     }
 }

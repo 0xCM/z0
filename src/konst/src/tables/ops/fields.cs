@@ -62,9 +62,8 @@ namespace Z0
             return final;
         }
 
-
         public static TableFields fields<T>()
-            where T : struct, ITable
+            where T : struct
         {
             var type = typeof(T);
             var declared = @readonly(type.DeclaredInstanceFields());
@@ -99,20 +98,22 @@ namespace Z0
             where T : struct, ITable<F,T>
         {
             var t = typeof(T);
-            var f = fields(t);
-            var l = Literals.fields<F>();
-            var v = l.View;
-            var buffer = alloc<TableField<F>>(v.Length);
-            var dst = span(buffer);
-            for(var i=0u; i<dst.Length; i++)
+            var tFields = fields(t);
+            var literals = Literals.fields<F>();
+            var lFields = literals.Specs;
+
+            var specs = fields<T>();
+            var dst = list<TableField<F>>(lFields.Length);
+            for(var i=0u; i<lFields.Length; i++)
             {
-                ref readonly var litVal = ref l[i];
-                var litName = l.Name(i);
-                var ff = f[l.Name(i)];
-                if(ff.IsSome())
-                    seek(dst,i) = field<F,T>(litVal,ff.Value.Definition);
+                ref readonly var literal = ref literals[i];
+                var name = literals.Name(i);
+                var spec = specs[name];
+                if(spec.IsSome())
+                    dst.Add(field<F,T>(literal, spec.Value));
+
             }
-            return buffer;
+            return dst.ToArray();
         }
     }
 }

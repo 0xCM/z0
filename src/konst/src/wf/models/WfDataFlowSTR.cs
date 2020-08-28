@@ -11,30 +11,33 @@ namespace Z0
 
     using api = AB;
 
-    public readonly struct WfDataFlow<S,T> : IDataFlow<S,T>
+    public readonly struct WfDataFlow<S,T,R> : IDataFlow<S,T,R>
     {
         public readonly S Source;
 
         public readonly T Target;
 
-        [MethodImpl(Inline)]
-        public static implicit operator WfDataFlow<S,T> ((S src, T dst) x)
-            => new WfDataFlow<S,T>(x.src, x.dst);
+        public readonly R Result;
 
         [MethodImpl(Inline)]
-        public static implicit operator WfType<S,T> (WfDataFlow<S,T> x)
+        public static implicit operator WfDataFlow<S,T,R>((S src, T dst, R result) x)
+            => new WfDataFlow<S,T,R>(x.src, x.dst, x.result);
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfType<S,T>(WfDataFlow<S,T,R> x)
             => x.Type;
 
         [MethodImpl(Inline)]
-        public WfDataFlow(S src, T dst)
+        public WfDataFlow(S src, T dst, R result)
         {
             Source = src;
             Target = dst;
+            Result = result;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(RenderPatterns.Arrow, Source, Target);
+            => text.format("{0} -> {1} | {2}", Source, Target, Result);
 
         public WfType<S,T> Type
         {
@@ -47,5 +50,7 @@ namespace Z0
 
         T IDataFlow<S,T>.Target
             => Target;
+        R IDataFlow<S,T,R>.Result
+            => Result;
     }
 }

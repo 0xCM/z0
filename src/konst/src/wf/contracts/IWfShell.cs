@@ -64,6 +64,12 @@ namespace Z0
         void Running(WfStepId step, [File] string actor = null)
             => Raise(WfEvB.running(Path.GetFileNameWithoutExtension(actor), step, Ct));
 
+        void Running<S,T>(WfStepId step, WfDataFlow<S,T> df)
+            => Raise(WfEvB.running(step, df, Ct));
+
+        void Ran<S,T,R>(WfStepId step, WfDataFlow<S,T,R> df)
+            => Raise(WfEvB.ran(step, df, Ct));
+
         void Ran(WfStepId step, [File] string actor = null)
             => Raise(WfEvB.ran(Path.GetFileNameWithoutExtension(actor), step, Ct));
 
@@ -95,9 +101,7 @@ namespace Z0
         }
 
         void Finished(WfStepId step, CorrelationToken ct)
-        {
-            Raise(new WfFinished(step.Format(), ct));
-        }
+            => Raise(new WfFinished(step.Format(), ct));
 
         void Initializing(string worker, CorrelationToken ct)
         {

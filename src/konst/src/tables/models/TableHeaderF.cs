@@ -41,7 +41,7 @@ namespace Z0
 
         public string Format()
         {
-            var formatter = api.formatter<F>(Fields, Delimiter);
+            var formatter = TableFormat.formatter<F>(Fields, Delimiter);
             for(var i=0u; i<Fields.Count; i++)
             {
                 if(i != 0)
@@ -57,7 +57,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public HeaderCell<F> Cell(byte index)
-            => new HeaderCell<F>(index, Fields.Definition(index), Value(index));
+            => new HeaderCell<F>(index, Fields.Spec(index), Value(index));
 
         [MethodImpl(Inline)]
         ref readonly F Value(byte index)

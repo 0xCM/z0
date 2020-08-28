@@ -13,22 +13,15 @@ namespace Z0
     /// Defines a boxed enumeration literal as the triple (index,identifier,value)
     /// </summary>
     [ApiClass(DataSummary)]
-    public struct EnumLiteralDetail
+    public struct EnumLiteralDetail : ITable<EnumLiteralDetail>
     {
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[6]{24, 24, 16, 12, 24, 16};
+
         /// <summary>
         /// The literal's surrogate identifier
         /// </summary>
-        public ArtifactIdentity Id;
-
-        /// <summary>
-        /// The handle of the declaring type
-        /// </summary>
-        public MemoryAddress TypeHandle;
-
-        /// <summary>
-        /// The types's surrogate identifier
-        /// </summary>
-        public ArtifactIdentity TypeId;
+        public MemberIdentity Id;
 
         /// <summary>
         /// The name of the declaring type
@@ -48,11 +41,11 @@ namespace Z0
         /// <summary>
         /// The literal identifier, unique within the declaring enum
         /// </summary>
-        public StringRef Name;
+        public StringRef LiteralName;
 
         /// <summary>
         /// The literal value
         /// </summary>
-        public variant Value;
+        public variant ScalarValue;
     }
 }

@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
     using static Konst;
@@ -13,7 +13,7 @@ namespace Z0
     using static Typed;
 
     /// <summary>
-    /// Defines a tabular span of dimension MxN 
+    /// Defines a tabular span of dimension MxN
     /// </summary>
     /// <typeparam name="M">The row count type</typeparam>
     /// <typeparam name="N">The row count type</typeparam>
@@ -29,28 +29,32 @@ namespace Z0
         /// <summary>
         /// The number of rows in the structure
         /// </summary>
-        public static int RowCount => (int)value<M>();
+        public static int RowCount
+            => (int)value<M>();
 
         /// <summary>
         /// The number of columns in the structure
         /// </summary>
-        public static int ColCount => (int)value<N>();
+        public static int ColCount
+            => (int)value<N>();
 
         /// <summary>
         /// The number of cells in each row
         /// </summary>
-        public static int RowLenth => ColCount;
+        public static int RowLength
+            => ColCount;
 
         /// <summary>
         /// The number of cells in each column
         /// </summary>
-        public static int ColLength => RowCount;
+        public static int ColLength
+            => RowCount;
 
         /// <summary>
         /// The total number of allocated elements
         /// </summary>
-        public static int CellCount 
-            => RowLenth * ColLength;
+        public static int CellCount
+            => RowLength * ColLength;
 
         public static implicit operator TableSpan<M,N,T>(T[] src)
             => new TableSpan<M,N,T>(src);
@@ -72,7 +76,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TableSpan<M,N,T> CheckedTransfer(Span<T> src)
         {
-            
             reason(src.Length >= CellCount, $"length(src) = {src.Length} < {CellCount} = SpanLength");
             return new TableSpan<M,N,T>(src);
         }
@@ -83,23 +86,23 @@ namespace Z0
             data = MemoryMarshal.CreateSpan(ref src, CellCount);
         }
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         internal TableSpan(Span<T> src)
         {
-            reason(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
+            reason(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");
             data = src;
         }
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         internal TableSpan(T[] src)
         {
-            reason(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
+            reason(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");
             data = src;
         }
 
         [MethodImpl(Inline)]
         internal TableSpan(T value)
-        {         
+        {
             this.data = new Span<T>(new T[CellCount]);
             this.data.Fill(value);
         }
@@ -107,23 +110,23 @@ namespace Z0
         [MethodImpl(Inline)]
         internal TableSpan(ReadOnlySpan<T> src)
         {
-            reason(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");         
+            reason(src.Length == CellCount, $"length(src) = {src.Length} != {CellCount} = SpanLength");
             data = src.ToArray();
         }
 
         public ref T Head
         {
-            [MethodImpl(Inline)]        
+            [MethodImpl(Inline)]
             get => ref MemoryMarshal.GetReference(data);
         }
 
         public ref T this[int r, int c]
         {
-            [MethodImpl(Inline)]        
-            get => ref Unsafe.Add(ref Head, RowLenth*r + c);
+            [MethodImpl(Inline)]
+            get => ref Unsafe.Add(ref Head, RowLength*r + c);
         }
 
-        public ref T this[int index] 
+        public ref T this[int index]
         {
             [MethodImpl(Inline)]
             get => ref Unsafe.Add(ref Head, index);
@@ -138,12 +141,12 @@ namespace Z0
             get => data;
         }
 
-        public Dim<M,N> Dim 
-            => default;    
+        public Dim<M,N> Dim
+            => default;
 
         [MethodImpl(Inline)]
         public T[] ToArray()
-            => data.ToArray();   
+            => data.ToArray();
 
         [MethodImpl(Inline)]
         public void Fill(T value)
@@ -166,18 +169,18 @@ namespace Z0
             => data.TryCopyTo(dst);
 
         [MethodImpl(Inline)]
-        public TableSpan<M,N,T> Replicate()        
+        public TableSpan<M,N,T> Replicate()
             => new TableSpan<M,N,T>(data.ToArray());
 
         [MethodImpl(Inline)]
         bool IsRowHead(int index)
-            => index == 0 || index % RowLenth == 0;
+            => index == 0 || index % RowLength == 0;
 
         public TableSpan<I,J,T> SubSpan<I,J>((uint r, uint c) origin, Dim<I,J> dim = default)
             where I : unmanaged, ITypeNat
             where J : unmanaged, ITypeNat
-        {            
-            var  dst = TableSpan.alloc<I,J,T>();
+        {
+            var  dst = Table.tspan<I,J,T>();
             var curidx = 0;
             for(var i = origin.r; i < (origin.r + dim.I); i++)
             for(var j = origin.c; j < (origin.c + dim.J); j++)
@@ -191,15 +194,15 @@ namespace Z0
             reason(col >= 0 && col < ColCount, $"The column index {col} is out of range");
 
             for(var row = 0; row < ColLength; row++)
-                dst[row] = data[row*RowLenth + col];
+                dst[row] = data[row*RowLength + col];
             return ref dst;
         }
 
         [MethodImpl(Inline)]
         public NatSpan<N,T> Row(int row)
         {
-            reason(row >= 0 && row < RowCount, $"The row index {row} is out of range");            
-            return data.Slice(row * RowLenth, RowLenth);
+            reason(row >= 0 && row < RowCount, $"The row index {row} is out of range");
+            return data.Slice(row * RowLength, RowLength);
         }
 
         [MethodImpl(Inline)]
@@ -209,20 +212,20 @@ namespace Z0
 
         public TableSpan<N,M,T> Transpose()
         {
-            var dst = TableSpan.alloc<N,M,T>();                
+            var dst = Table.tspan<N,M,T>();
             for(var r = 0; r < RowCount; r++)
             for(var c = 0; c < ColCount; c++)
                 dst[c, r] = this[r, c];
-            return dst;            
+            return dst;
         }
 
         public string Format(int? padlen = null, char? padchar = null, char? rowsep = null, char? cellsep = null)
-            => Data.FormatTable((int)value<M>(), (int)value<N>(),  padlen, padchar, rowsep, cellsep); 
+            => Data.FormatTable((int)value<M>(), (int)value<N>(),  padlen, padchar, rowsep, cellsep);
 
-        public override bool Equals(object rhs) 
+        public override bool Equals(object rhs)
             => throw new NotSupportedException();
 
-        public override int GetHashCode() 
-            => throw new NotSupportedException();        
+        public override int GetHashCode()
+            => throw new NotSupportedException();
     }
 }

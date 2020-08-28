@@ -17,11 +17,15 @@ namespace Z0
         public static LiteralFields fields(Type src)
             => new LiteralFields(src.LiteralFields());
 
-
         [MethodImpl(Inline)]
         public static LiteralFields<F> fields<F>()
             where F : unmanaged, Enum
-                => new LiteralFields<F>(typeof(F).LiteralFields());
+        {
+            var specs = typeof(F).LiteralFields();
+            var values = specs.Map(f => (F)f.GetRawConstantValue());
+            return new LiteralFields<F>(specs, values);
+        }
+
         [Op]
         public static void etables(PartId part, Type type, EnumTypeCode ecode, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteralRecord> dst)
         {

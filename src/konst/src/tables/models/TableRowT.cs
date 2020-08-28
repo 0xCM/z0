@@ -9,14 +9,21 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct TableRow<T>
-    {    
-        public readonly T[] Cells;
-        
+    public struct TableRow<T>
+        where T : struct
+    {
+        public uint RowIndex;
+
+        public T Source;
+
+        public readonly object[] Cells;
+
         [MethodImpl(Inline)]
-        public TableRow(T[] cells)
+        public TableRow(uint index, T src, object[] cells)
         {
-            Cells = cells;            
+            RowIndex = index;
+            Source = src;
+            Cells = cells;
         }
 
         public int Length
@@ -31,7 +38,13 @@ namespace Z0
             get => (uint)Cells.Length;
         }
 
-        public ref T this[int index]
+        public ref object this[long index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Cells[index];
+        }
+
+        public ref object this[ulong index]
         {
             [MethodImpl(Inline)]
             get => ref Cells[index];

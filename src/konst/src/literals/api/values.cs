@@ -23,10 +23,6 @@ namespace Z0
             where T : unmanaged
                 => src.LiteralFields().Where(f => f.FieldType == typeof(T) && f.Tagged<BinaryLiteralAttribute>()).Select(x => (T)x.GetRawConstantValue());
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static T[] values<T>(Type src)
-            => map(search<T>(src),value<T>);
-
         [MethodImpl(Inline), Op]
         public static void values(in LiteralCover src, Span<object> dst)
             => src.WriteValues(dst);
@@ -49,5 +45,10 @@ namespace Z0
             for(var i=0u; i<count; i++)
                 seek(target,i) = skip(fields,i).GetValueDirect(tRef);
         }
+
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T[] values<T>(Type src)
+            => map(search<T>(src),value<T>);
     }
 }

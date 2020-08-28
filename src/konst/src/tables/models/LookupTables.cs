@@ -67,6 +67,7 @@ namespace Z0
             }
         }
 
+
         /// <summary>
         /// Defines a 16-bit lookup tablee
         /// </summary>

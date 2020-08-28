@@ -9,19 +9,19 @@ namespace Z0
 
     using static Konst;
     using static EmitContentCatalogStep;
-    
+
     using F = ContentLibField;
-    
+
     public ref struct EmitContentCatalog
     {
         public readonly FilePath TargetPath;
-        
+
         public uint EmissionCount;
 
         readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
-        
+
         [MethodImpl(Inline)]
         public EmitContentCatalog(IWfContext wf, CorrelationToken ct)
         {
@@ -39,7 +39,7 @@ namespace Z0
             var entries = z.span(provider.Provided.Array());
             EmissionCount = (uint)entries.Length;
 
-            var f = Table.formatter<ContentLibField>();
+            var f = TableFormat.formatter<ContentLibField>();
             for(var i=0u; i<EmissionCount; i++)
             {
                 ref readonly var entry = ref z.skip(entries, i);
@@ -47,14 +47,14 @@ namespace Z0
                 f.Delimit(F.Name, entry.Name);
                 f.EmitEol();
             }
-            
+
             using var dst = TargetPath.Writer();
             dst.Write(f.Format());
 
             Wf.Emitted(StepName, DatasetName, EmissionCount, TargetPath, Ct);
         }
 
-        public void Dispose()        
+        public void Dispose()
         {
             Wf.Finished(StepName, Ct);
         }

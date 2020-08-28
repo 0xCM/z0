@@ -5,7 +5,7 @@
 namespace Z0.Mkl
 {
     using System;
-    using System.Diagnostics;    
+    using System.Diagnostics;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -18,15 +18,15 @@ namespace Z0.Mkl
         /// Captures a stopwatch duration
         /// </summary>
         /// <param name="sw">A running/stopped stopwatch</param>
-        [MethodImpl(Inline)]   
-        public static Duration snap(Stopwatch sw)     
-            => Duration.Define(sw.ElapsedTicks);        
+        [MethodImpl(Inline)]
+        public static Duration snap(Stopwatch sw)
+            => Duration.Define(sw.ElapsedTicks);
 
         const string Intro = "beginning";
         const string Finale = "finished";
 
         static readonly string Divider = new string('-',80);
-        
+
         public static (string method, string msg) intro(bool silent = true, [CallerMemberName] string method = null)
         {
             var line1 = $"{method} => {Intro}";
@@ -58,13 +58,13 @@ namespace Z0.Mkl
         {
             var line1 = $"Output {title}: {value}";
             var line2 = $"{method} => {Finale} | Runtime = {format(time)}";
-            
+
             if(!silent)
             {
                 term.magenta(line1);
                 term.cyan(line2);
             }
-            
+
             return line1 + Eol + line2;
         }
 
@@ -89,10 +89,10 @@ namespace Z0.Mkl
         }
 
 
-        public static string conclude(Duration time, bool silent = true, [CallerMemberName] string method = null)    
+        public static string conclude(Duration time, bool silent = true, [CallerMemberName] string method = null)
         {
             var msg = $"Runtime: {format(time)}";
-            if(!silent)            
+            if(!silent)
             {
                 term.cyan(msg);
                 term.print();
@@ -112,7 +112,7 @@ namespace Z0.Mkl
             }
             return msg;
         }
-            
+
 
         [MethodImpl(Inline)]
         public static (Stopwatch timer, string report) input(string firstTitle, object firstValue, string secondTitle, object secondValue, bool silent = true)
@@ -123,9 +123,8 @@ namespace Z0.Mkl
             return (Time.stopwatch(), report.ToString());
         }
 
-    
          public static string format(Duration time)
-         {  
+         {
              return $"{time.Ms} ms";
          }
 
@@ -164,7 +163,7 @@ namespace Z0.Mkl
 
         public static void sasum()
         {
-            var silent = true;   
+            var silent = true;
             (var method, var msg) = intro(silent);
             var n = 10;
             var incx = 1;
@@ -173,29 +172,29 @@ namespace Z0.Mkl
 
             var sw = Time.stopwatch();
             var result = CBLAS.cblas_sasum(n, ref x[0], incx);
-            var ss = snap(sw);            
+            var ss = snap(sw);
 
-            msg += output(result, silent);            
+            msg += output(result, silent);
             msg += Eol;
-            msg += conclude(ss, silent);            
+            msg += conclude(ss, silent);
         }
 
         public static void dzasum()
         {
             var silent = true;
-            (var method, var msg) = intro(silent);            
+            (var method, var msg) = intro(silent);
 
             var n = 4;
             var incx = 1;
             var x =  ComplexF64.Load(new double[]{1.2, 2.5, 3.0, 1.7, 4.0, 0.53, -5.5, -0.29});
             msg += input(x.FormatAsVector(),silent);
-            
+
             var expect = x.Map(z => Math.Abs(z.re) + Math.Abs(z.im)).Reduce((a,b) => a + b);
             expected(expect);
 
 
             var time = start();
-            var result = CBLAS.cblas_dzasum(n, ref x[0], incx);            
+            var result = CBLAS.cblas_dzasum(n, ref x[0], incx);
             output("result", result, snap(time));
 
         }
@@ -213,10 +212,10 @@ namespace Z0.Mkl
 
             var sw = Time.stopwatch();
             CBLAS.cblas_saxpy(n, alpha, ref x[0], incx, ref y[0], incy);
-            var ss = snap(sw);            
+            var ss = snap(sw);
 
             output(y.FormatAsVector());
-            conclude(ss);                                    
+            conclude(ss);
         }
 
         static string gemm<M,N>(bool silent = true)
@@ -227,7 +226,7 @@ namespace Z0.Mkl
             var n = nati<N>();
             (var method, var introMsg) = varintro($"{m}x{n} * {n}x{m} = {m}x{m}", silent);
             var count = m*n;
-            
+
             var srcA = Arrays.alloc<double>(count);
             for(var i=1; i<= count; i++)
                 srcA[i-1] = i;
@@ -239,22 +238,22 @@ namespace Z0.Mkl
             var b = Matrix.blockload<N,M,double>(srcB);
 
             (var timer, var startMsg) = input(
-                nameof(a), a.Format(), 
+                nameof(a), a.Format(),
                 nameof(b), b.Format(),
                 silent
-                );            
+                );
 
-            var c = mkl.gemm(a,b);            
-            var time = snap(timer); 
+            var c = mkl.gemm(a,b);
+            var time = snap(timer);
             var finaleMsg = finale(nameof(c), c.Format(), timer, silent, method);
-                
+
             var report = text.build();
             report.AppendLine(introMsg);
             report.AppendLine(startMsg);
             report.AppendLine(finaleMsg);
             return report.ToString();
         }
-        
+
         public static void gemm()
         {
             var report = text.build();
@@ -263,6 +262,6 @@ namespace Z0.Mkl
             report.AppendLine(gemm<N10,N10>());
             report.AppendLine(gemm<N16,N16>());
             report.AppendLine(gemm<N17,N17>());
-        }       
+        }
     }
 }

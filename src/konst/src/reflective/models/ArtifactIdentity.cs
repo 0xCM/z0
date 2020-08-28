@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
@@ -15,24 +15,28 @@ namespace Z0
     /// </summary>
     public readonly struct ArtifactIdentity : ITextual, IEquatable<ArtifactIdentity>, INullity
     {
-        readonly Address32 Data;        
-    
+        readonly Address32 Data;
+
         [MethodImpl(Inline)]
         public static implicit operator ArtifactIdentity(int src)
             => new ArtifactIdentity(src);
-        
+
+        [MethodImpl(Inline)]
+        public static implicit operator ArtifactIdentity(uint src)
+            => new ArtifactIdentity(src);
+
         public int TokenValue
         {
             [MethodImpl(Inline)]
             get => (int)Data.Location;
         }
-         
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => Data == 0;
         }
-                
+
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
@@ -40,7 +44,7 @@ namespace Z0
         }
         public string Format()
             => Data.Format();
- 
+
         [MethodImpl(Inline)]
         public static ArtifactIdentity From(Type src)
             => new ArtifactIdentity(src);
@@ -92,19 +96,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ArtifactIdentity(ParameterInfo src)
             => From(src);
-        
+
         [MethodImpl(Inline)]
         internal ArtifactIdentity(Type src)
             : this(src.MetadataToken)
         {
-            
+
         }
 
         [MethodImpl(Inline)]
         internal ArtifactIdentity(Assembly src)
             : this(src.GetHashCode())
         {
-            
+
         }
 
         [MethodImpl(Inline)]
@@ -146,7 +150,13 @@ namespace Z0
         internal ArtifactIdentity(int token)
         {
             Data = (uint)token;
-        }        
+        }
+
+        [MethodImpl(Inline)]
+        internal ArtifactIdentity(uint token)
+        {
+            Data = token;
+        }
 
         public override string ToString()
             => Format();
@@ -155,13 +165,13 @@ namespace Z0
         public bool Equals(ArtifactIdentity src)
             => Data == src.Data;
 
-        public override int GetHashCode() 
+        public override int GetHashCode()
             => Data.GetHashCode();
 
         public override bool Equals(object src)
             => src is ArtifactIdentity t && Equals(t);
 
-        public static ArtifactIdentity Empty 
+        public static ArtifactIdentity Empty
             => default;
     }
 }

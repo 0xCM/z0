@@ -28,10 +28,10 @@ namespace Z0
         OpSig = 6 | 110 << 16,
 
         Data = 7 | 1 << 16
-    }    
+    }
 
     public readonly struct MemberParseRecord : ITabular<F,R>, ISequential
-    {                                
+    {
         public readonly int Seq;
 
         public readonly int SourceSeq;
@@ -50,14 +50,14 @@ namespace Z0
 
         public const int FieldCount = 8;
 
-        int ISequential.Sequence 
+        int ISequential.Sequence
             => Seq;
 
-        public static R Empty 
+        public static R Empty
             => new R(0, 0, 0, 0, 0, OpUri.Empty, EmptyString, LocatedCode.Empty);
 
 
-        
+
         public static ParseResult<MemberParseRecord> Parse(string src)
         {
             try
@@ -81,46 +81,46 @@ namespace Z0
                 if(uri.Failed)
                     sys.@throw(uri.Reason);
                 var sig = fields[index++];
-                var data = new LocatedCode(address, dataParser.ParseData(fields[index++], Array.Empty<byte>()));  
-                          
+                var data = new LocatedCode(address, dataParser.ParseData(fields[index++], Array.Empty<byte>()));
+
                 return ParseResult.Success(src, new R(
-                    Seq: seq, 
-                    SourceSequence: srcSeq, 
-                    Address: address, 
-                    Length: len, 
+                    Seq: seq,
+                    SourceSequence: srcSeq,
+                    Address: address,
+                    Length: len,
                     TermCode: default,
-                    Uri:uri.Value, 
-                    OpSig:sig, 
+                    Uri:uri.Value,
+                    OpSig:sig,
                     Data:data
                     ));
             }
             catch(Exception e)
-            {   
+            {
                 return ParseResult.Fail<MemberParseRecord>(src, e);
             }
         }
 
         public MemberParseRecord(
-            int Seq, 
-            int SourceSequence, 
-            MemoryAddress Address, 
-            int Length, 
-            ExtractTermCode TermCode, 
-            OpUri Uri, 
-            string OpSig, 
+            int Seq,
+            int SourceSequence,
+            MemoryAddress Address,
+            int Length,
+            ExtractTermCode TermCode,
+            OpUri Uri,
+            string OpSig,
             LocatedCode Data
             )
         {
             this.Seq = Seq;
-            this.SourceSeq = SourceSequence;                
+            this.SourceSeq = SourceSequence;
             this.Address = Address;
-            this.Length = Length; 
+            this.Length = Length;
             this.TermCode = TermCode;
             this.Uri = Uri;
             this.OpSig = OpSig;
             this.Data = Data;
         }
-        
+
 
         public dynamic this[F f]
         {
@@ -139,7 +139,7 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var dst = Table.formatter<F>(delimiter);            
+            var dst = TableFormat.formatter<F>(delimiter);
             dst.Delimit(F.Seq, Seq);
             dst.Delimit(F.SourceSeq, SourceSeq);
             dst.Delimit(F.Address, Address);
@@ -148,7 +148,7 @@ namespace Z0
             dst.Delimit(F.Uri, Uri);
             dst.Delimit(F.OpSig, OpSig);
             dst.Delimit(F.Data, Data.Format());
-            return dst.Format();            
-        }        
+            return dst.Format();
+        }
     }
 }

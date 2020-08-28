@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    
+
     using static Konst;
 
     using F = ParseFailureField;
@@ -37,7 +37,7 @@ namespace Z0
 
         public readonly ExtractTermCode TermCode;
 
-        public readonly OpUri Uri;        
+        public readonly OpUri Uri;
 
         public readonly LocatedCode Data;
 
@@ -50,9 +50,9 @@ namespace Z0
                 return Empty;
 
             var parser = Parsers.numeric<int>();
-            var seq = parser.Parse(fields[0]).ValueOrDefault();            
+            var seq = parser.Parse(fields[0]).ValueOrDefault();
             var address = z.address(Parsers.hex().Parse(fields[1]).ValueOrDefault());
-            var len = parser.Parse(fields[2]).ValueOrDefault();            
+            var len = parser.Parse(fields[2]).ValueOrDefault();
             var term = Enums.Parse<ExtractTermCode>(fields[3]).ValueOrDefault();
             var uri = OpUriParser.Service.Parse(fields[4]);
             if(uri.Failed)
@@ -67,25 +67,25 @@ namespace Z0
         {
             this.Sequence = Sequence;
             this.Address = Address;
-            this.Length = Length; 
+            this.Length = Length;
             this.Uri = Uri;
             this.TermCode = TermCode;
             this.Data = Data;
         }
-        
+
         public string DelimitedText(char delimiter)
         {
-            var dst = Table.formatter<F>(delimiter);
+            var dst = TableFormat.formatter<F>(delimiter);
             dst.Delimit(F.Sequence, Sequence);
             dst.Delimit(F.Address, Address);
             dst.Delimit(F.Length, Length);
             dst.Delimit(F.TermCode, TermCode);
             dst.Delimit(F.Uri, Uri);
             dst.Delimit(F.Data, Data);
-            return dst.Format();            
+            return dst.Format();
         }
 
-        public static R Empty 
+        public static R Empty
             => new R(0, MemoryAddress.Empty, 0, ExtractTermCode.None, OpUri.Empty, LocatedCode.Empty);
     }
 }

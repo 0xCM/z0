@@ -71,14 +71,6 @@ namespace Z0
         public static WfStepCreated created(in WfActor actor, WfStepId id, CorrelationToken ct, MessageFlair flair = Created)
             => new WfStepCreated(actor, id, ct, flair);
 
-        [MethodImpl(Inline), Op]
-        public static WfStepRunning running(WfActor actor, WfStepId step, CorrelationToken ct)
-            => new WfStepRunning(actor, step, ct);
-
-        [MethodImpl(Inline), Op]
-        public static WfStepRunning ran(in WfActor actor, in WfStepId step, CorrelationToken ct)
-            => new WfStepRunning(actor, step, ct);
-
         /// <summary>
         /// Defines a <see cref='WorkerCreated'/> event
         /// </summary>
@@ -108,8 +100,24 @@ namespace Z0
         public static WfStatus<T> status<T>(WfStepId step, T content, CorrelationToken ct)
             => new WfStatus<T>(step, content, ct);
 
+        [MethodImpl(Inline), Op]
+        public static WfStepRunning running(WfActor actor, WfStepId step, CorrelationToken ct)
+            => new WfStepRunning(actor, step, ct);
+
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static WfStepRunning<T> running<T>(WfStepId step, T content, CorrelationToken ct)
             => new WfStepRunning<T>(step, content, ct);
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static WfStepRunning<WfDataFlow<S,T>> running<S,T>(WfStepId step, WfDataFlow<S,T> flow, CorrelationToken ct)
+            => new WfStepRunning<WfDataFlow<S,T>>(step, flow, ct);
+
+        [MethodImpl(Inline), Op]
+        public static WfStepRunning ran(in WfActor actor, in WfStepId step, CorrelationToken ct)
+            => new WfStepRunning(actor, step, ct);
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static WfStepRan<T> ran<T>(WfStepId step, T content, CorrelationToken ct)
+            => new WfStepRan<T>(step, content, ct);
     }
 }

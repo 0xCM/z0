@@ -10,26 +10,20 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct FieldEval : IFieldEval
+    public struct TableFieldEval<F,T>
+        where F : unmanaged, Enum
+        where T : struct, ITable<F,T>
     {
-        public TableFields Fields {get;}
+        public T Source;
 
-        public Type SourceType {get;}
+        public TableFields<F> Fields;
 
-        public NamedValues<object> Values {get;}
-
-        [MethodImpl(Inline)]
-        public FieldEval(Type src, TableFields fields, NamedValue<object>[] values)
-        {
-            SourceType = src;
-            Fields = fields;
-            Values = values;
-        }
+        public NamedValues<object> Values;
 
         [MethodImpl(Inline)]
-        public FieldEval(Type src, TableFields fields, NamedValues<object> values)
+        public TableFieldEval(T source, TableFields<F> fields, NamedValue<object>[] values)
         {
-            SourceType = src;
+            Source = source;
             Fields = fields;
             Values = values;
         }
@@ -42,6 +36,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref Value(name);
+        }
+
+        public ref NamedValue<object> this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Values[index];
         }
     }
 }

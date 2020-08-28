@@ -13,44 +13,51 @@ namespace Z0
     partial struct Literals
     {
         /// <summary>
-        /// Creates a typed literal from an enumeration literal
+        /// Creates a <see cref='TypedLiteral{E}'/>
         /// </summary>
+        /// <param name="e">The enum literal value</param>
         /// <typeparam name="E">The enumeration type</typeparam>
         [MethodImpl(Inline)]
-        public static TypedLiteral<E> typed<E>(E @class)
+        public static TypedLiteral<E> typed<E>(E e)
             where E : unmanaged, Enum
-                => @class;
+                => new TypedLiteral<E>(e);
 
         /// <summary>
-        /// Creates a numeric-parametric typed literal from a numeric value
+        /// Creates a <see cref='TypedLiteral{E,T}'/>
         /// </summary>
         /// <param name="value">The numeric value</param>
-        /// <param name="e">An enum representative to aid type inference</param>
-        /// <typeparam name="E">An enumeration type that refines the parametric numeric type</typeparam>
-        /// <typeparam name="V">The numeric type refined by the enum</typeparam>
+        /// <param name="t">The primitive value</param>
+        /// <typeparam name="E">The enum type</typeparam>
+        /// <typeparam name="T">The refined primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static TypedLiteral<E,V> typed<E,V>(V value, E e = default)
+        public static TypedLiteral<E,T> typed<E,T>(T value)
             where E : unmanaged, Enum
-            where V : unmanaged
-                => new TypedLiteral<E,V>(literal<E,V>(value));
+            where T : unmanaged
+                => new TypedLiteral<E,T>(eval<E,T>(value), value);
 
         /// <summary>
-        /// Creates a numeric-parametric typed literal from an enumeration literal
+        /// Creates a <see cref='TypedLiteral{E,T}'/>
         /// </summary>
-        /// <param name="@class">The enum litera value</param>
-        /// <param name="v">An numeric representative to aid type inference</param>
-        /// <typeparam name="E">An enumeration type that refines the parametric numeric type</typeparam>
-        /// <typeparam name="V">The numeric type refined by the enum</typeparam>
+        /// <param name="e">The enum literal value</param>
+        /// <typeparam name="E">The enum type</typeparam>
+        /// <typeparam name="T">The refined primitive type</typeparam>
         [MethodImpl(Inline)]
-        public static TypedLiteral<E,V> typed<E,V>(E @class, V v = default)
+        public static TypedLiteral<E,T> typed<E,T>(E e)
             where E : unmanaged, Enum
-            where V : unmanaged
-                => new TypedLiteral<E,V>(@class);
+            where T : unmanaged
+                => new TypedLiteral<E,T>(e, numeric<E,T>(e));
 
+        /// <summary>
+        /// Creates a <see cref='TypedLiteral{E,T}'/>
+        /// </summary>
+        /// <param name="e">The enum literal value</param>
+        /// <param name="t">The corresponding primitive value</param>
+        /// <typeparam name="E">The enum type</typeparam>
+        /// <typeparam name="T">The refined primitive type</typeparam>
         [MethodImpl(Inline)]
-        static unsafe E literal<E,V>(V v)
+        public static TypedLiteral<E,T> typed<E,T>(E e, T t)
             where E : unmanaged, Enum
-            where V : unmanaged
-                => Unsafe.Read<E>((E*)&v);
+            where T : unmanaged
+                => new TypedLiteral<E,T>(e,t);
     }
 }

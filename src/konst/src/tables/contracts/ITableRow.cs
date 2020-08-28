@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Security;
 
@@ -12,7 +12,7 @@ namespace Z0
         string ITextual.Format()
             => "Unformatted";
 
-        BinaryCode[] Cells {get;}            
+        BinaryCode[] Cells {get;}
     }
 
     public interface ITableRow<F> : ITableRow
@@ -25,6 +25,6 @@ namespace Z0
         where F : unmanaged, Enum
         where T : struct, ITable<F,T>
     {
-        T Data {get;}
-    }    
+        T Source {get;}
+    }
 }

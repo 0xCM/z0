@@ -35,7 +35,13 @@ namespace Z0
             get => Data.Length;
         }
 
-        public ref TableField this[uint index]
+        public ref TableField this[ulong index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
+
+        public ref TableField this[long index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Data
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,7 +10,6 @@ namespace Z0.Data
     using static Konst;
 
     using F = EnumLiteralField;
-    using api = Z0.Table;
 
     [ApiClass(DataStructure)]
     public struct EnumLiteral
@@ -40,7 +39,7 @@ namespace Z0.Data
 
         public string DelimitedText(char delimiter)
         {
-            var formatter = api.formatter<F>(delimiter);
+            var formatter = TableFormat.formatter<F>(delimiter);
             formatter.Append(F.TypeName, TypeName);
             formatter.Delimit(F.Index, Index);
             formatter.Delimit(F.Name, Name);

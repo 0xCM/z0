@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
-    
+
     using F = EvalResultField;
     using R = EvalResult;
 
@@ -21,7 +21,7 @@ namespace Z0
         Status =  2 | (10 << WidthOffset),
 
         Duration = 3  | (14u << WidthOffset),
-        
+
         Timestamp =  4 | (26u << WidthOffset),
 
         Message = 5 | (20u << WidthOffset)
@@ -38,7 +38,7 @@ namespace Z0
     /// Describes the outcome of a test case
     /// </summary>
     public readonly struct EvalResult : ITabular<F,R>, ISequential
-    {        
+    {
         public readonly int Sequence;
 
         public readonly string CaseName;
@@ -78,20 +78,20 @@ namespace Z0
             this.Timestamp = DateTime.Now;
             this.Message = message ?? "Empty result!";
         }
-        
+
         public string DelimitedText(char delimiter)
-        {            
-            var dst = Table.formatter<F>(delimiter);
+        {
+            var dst = TableFormat.formatter<F>(delimiter);
             dst.Append(F.Sequence, Sequence);
             dst.Delimit(F.CaseName, CaseName);
             dst.Delimit(F.Status, Status);
-            dst.Delimit(F.Duration, Duration);            
+            dst.Delimit(F.Duration, Duration);
             dst.Delimit(F.Timestamp, Timestamp);
             dst.Delimit(F.Message, Message);
             return dst.ToString();
-        }        
+        }
 
-        int ISequential.Sequence 
+        int ISequential.Sequence
             => Sequence;
     }
 }

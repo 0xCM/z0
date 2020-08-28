@@ -246,6 +246,9 @@ namespace Z0
             using var s1 = new CheckResources(Wf);
             s1.Run();
 
+            using var s2 = new EmitLiterals(Wf, Parts.Konst.Assembly);
+            s2.Run();
+
             Status(TableIndex.AsmTAddressingModRm32);
 
             //Capture();

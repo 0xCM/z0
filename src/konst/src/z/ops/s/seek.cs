@@ -9,11 +9,11 @@ namespace Z0
 
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
-    
+
     partial struct z
-    {         
+    {
         /// <summary>
-        /// Advances an S-reference in units measured by T-cells and returns 
+        /// Advances an S-reference in units measured by T-cells and returns
         /// the resulting T-cell reference
         /// </summary>
         /// <param name="src">The data source</param>
@@ -27,10 +27,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T seek<T>(Span<byte> src, uint count)
             =>  ref seek<byte,T>(skip(src,count*size<T>()), 1);
-
-        // [MethodImpl(Inline)]
-        // public static ref T seek<T>(Span<T> src, int count)
-        //     =>  ref seek<byte,T>(skip(src,count*size<T>()), 1);
 
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
@@ -47,7 +43,17 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T seek<T>(Span<T> src, uint offset)
-            => ref add(first(src), offset);            
+            => ref add(first(src), offset);
+
+        /// <summary>
+        /// Returns a reference to a T-measured offset-identified cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The T-measured offset count</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T seek<T>(Span<T> src, ulong offset)
+            => ref add(first(src), offset);
 
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
@@ -57,7 +63,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, byte offset)
-            => ref add(first(src), offset);            
+            => ref add(first(src), offset);
 
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
@@ -67,7 +73,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, ushort offset)
-            => ref add(first(src), offset);            
+            => ref add(first(src), offset);
 
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
@@ -104,6 +110,16 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T seek<T>(in T src, uint offset)
+            => ref Add(ref edit(src), (int)offset);
+
+        /// <summary>
+        /// Returns a reference to a T-measured offset-identified cell
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The T-measured offset count</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T seek<T>(in T src, ulong offset)
             => ref Add(ref edit(src), (int)offset);
 
         /// <summary>

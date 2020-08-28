@@ -15,6 +15,11 @@ namespace Z0
     partial struct Table
     {
         [MethodImpl(Inline)]
+        public static FieldIndex<F> index<F>()
+            where F : unmanaged, Enum
+                => new FieldIndex<F>(0);
+
+        [MethodImpl(Inline)]
         public static ulong index<D,S>(in ClosedInterval<ulong> positions, in D id)
             where D : unmanaged, Enum
             where S : unmanaged

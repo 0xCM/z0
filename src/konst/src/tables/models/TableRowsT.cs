@@ -10,40 +10,46 @@ namespace Z0
     using static Konst;
 
     public readonly struct TableRows<T>
-        where T : ITable
-    {        
-        public readonly TableRow<T>[] Data;
+        where T : struct
+    {
+        readonly TableRow<T>[] Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator TableRows<T>(TableRow<T>[] data)
             => new TableRows<T>(data);
 
         [MethodImpl(Inline)]
-        public TableRows(TableRow<T>[] data)
-            => Data = data;
+        public TableRows(TableRow<T>[] src)
+            => Storage = src;
 
-        public ref TableRow<T> this[uint index]
+        public Span<TableRow<T>> Edit
         {
             [MethodImpl(Inline)]
-            get => ref Data[index];
+            get => Storage;
         }
 
-        public ref TableRow<T> this[int index]
+        public ref TableRow<T> this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref Data[index];
+            get => ref Storage[(int)index];
+        }
+
+        public ref TableRow<T> this[long index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Storage[(int)index];
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Storage.Length;
         }
 
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => (uint)Data.Length;
+            get => (uint)Storage.Length;
         }
     }
 }

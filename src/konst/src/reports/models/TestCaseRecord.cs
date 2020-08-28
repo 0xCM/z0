@@ -5,14 +5,13 @@
 namespace Z0
 {
     using System;
-    using Z0.Data;
-    
+
     using static Konst;
     using static z;
 
     using F = TestCaseField;
     using R = TestCaseRecord;
-        
+
     public enum TestCaseField : uint
     {
         Case = 0 | (60 << WidthOffset),
@@ -20,7 +19,7 @@ namespace Z0
         Status =  1 | (14 << WidthOffset),
 
         Duration = 2  | (14 << WidthOffset),
-        
+
         Executed =  3 | (26 << WidthOffset)
     }
 
@@ -35,7 +34,7 @@ namespace Z0
     /// Describes the outcome of a test case
     /// </summary>
     public readonly struct TestCaseRecord : ITabular<F,R>
-    {        
+    {
         public readonly string Case;
 
         public readonly TestCaseStatus Status;
@@ -46,7 +45,7 @@ namespace Z0
 
         public static TestCaseRecord Define(string name, bool succeeded, Duration duration)
             => new TestCaseRecord(name, succeeded, duration);
-        
+
         TestCaseRecord(string name, bool succeeded, Duration duration)
         {
             Case = name;
@@ -57,10 +56,10 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var dst = Table.formatter<F>(delimiter);
+            var dst = TableFormat.formatter<F>(delimiter);
             dst.Delimit(F.Case, Case);
             dst.Delimit(F.Status, Status);
-            dst.Delimit(F.Duration, Duration);            
+            dst.Delimit(F.Duration, Duration);
             dst.Delimit(F.Executed, Executed);
             return dst.ToString();
         }

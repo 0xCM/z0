@@ -10,20 +10,23 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct TableField<F>
+    public struct TableField<F>
         where F : unmanaged, Enum
     {
         public F Id {get;}
 
-        public FieldInfo Definition {get;}
+        public TableField Spec;
+
+        public FieldInfo Definition
+            => Spec.Definition;
 
         public RenderWidth Width {get;}
 
         [MethodImpl(Inline)]
-        public TableField(F id, FieldInfo def, RenderWidth width)
+        public TableField(F id, TableField spec, RenderWidth width)
         {
-            Definition = def;
             Id = id;
+            Spec = spec;
             Width = width;
         }
 

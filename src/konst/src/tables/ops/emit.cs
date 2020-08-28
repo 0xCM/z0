@@ -3,10 +3,9 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
     using System.Linq;
     using System.Collections.Generic;
 
@@ -16,7 +15,19 @@ namespace Z0
 
     partial struct Table
     {
-        public static void emit<F,T>(in TableEmission<F,T> src, FilePath dst, IRowFormatter<F> formatter, char delimiter = FieldDelimiter)
+        public static WfDataFlow<EnumLiteral[],FilePath> emit<E>(EnumLiteral[] src, FilePath dst)
+            where E : unmanaged, Enum
+        {
+            var literals = @readonly(src);
+            var count = literals.Length;
+            using var writer = dst.Writer();
+            writer.WriteLine(Tabular.HeaderText<E>());
+            for(var i=0; i<count; i++)
+                writer.WriteLine(skip(literals,i).DelimitedText(FieldDelimiter));
+            return (src,dst);
+        }
+
+        public static WfDataFlow<TableEmission<F,T>,FilePath> emit<F,T>(in TableEmission<F,T> src, FilePath dst, IRowFormatter<F> formatter, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
             where T : struct, ITable<F,T>
         {
@@ -24,45 +35,52 @@ namespace Z0
             var count = src.RowCount;
             var rows = src.View;
 
-            using var writer = dst.Writer();            
+            using var writer = dst.Writer();
             writer.WriteLine(header.HeaderText);
-            
-            for(var i=0u; i<count; i++)
-                writer.WriteLine(formatter.Format(skip(rows,i)));                 
-        }  
 
-        public static void emit<E>(Dictionary<string,E> src, FilePath dst)
+            for(var i=0u; i<count; i++)
+                writer.WriteLine(formatter.Format(skip(rows,i)));
+            return (src,dst);
+        }
+
+        public static WfDataFlow<Dictionary<string,E>,FilePath> emit<E>(Dictionary<string,E> src, FilePath dst)
             where E : unmanaged, Enum
         {
             var header = text.concat("Seq". PadRight((int)FW.Sequence), SpacePipe, typeof(E).Name);
-            
+
             using var writer = dst.Writer();
             writer.WriteLine(header);
-        
+
             var keys = src.Keys.ToArray();
             Array.Sort(keys);
             for(var i=0; i<keys.Length; i++)
                 writer.WriteLine(FormatSequential(i, src[keys[i]]));
+            return (src,dst);
         }
 
-        public static void emit<E>(FilePath dst)
+        /// <summary>
+        /// Stores the dataset supplied by <see cref='Enums.index{E}'/>
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="dst">The target</param>
+        /// <typeparam name="E">The enum type</typeparam>
+        public static WfDataFlow<EnumLiteralDetails<E>,FilePath> emit<E>(in EnumLiteralDetails<E> src, FilePath dst)
             where E : unmanaged, Enum
         {
             var name = typeof(E).Name;
             var header = text.concat("Sequence". PadRight((int)FW.Sequence), SpacePipe, typeof(E).Name);
-            var literals = Enums.index<E>();
-
             using var writer = dst.Writer();
             writer.WriteLine(header);
 
-            for(var i=0; i<literals.Length; i++)
+            for(var i=0; i<src.Length; i++)
             {
-                var literal = literals[i];
+                var literal = src[i];
                 writer.WriteLine(FormatSequential((int)literal.Position, literal.LiteralValue));
             }
+            return (src,dst);
         }
 
         static string FormatSequential<E>(int seq, E value)
-            => text.concat(seq.ToString().PadRight((int)FW.Sequence), SpacePipe, value.ToString());                  
+            => text.concat(seq.ToString().PadRight((int)FW.Sequence), SpacePipe, value.ToString());
     }
 }

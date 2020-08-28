@@ -13,47 +13,47 @@ namespace Z0
     /// A numeric-parametric typed literal
     /// </summary>
     /// <typeparam name="E">An enumeration type that refines the parametric numeric type</typeparam>
-    /// <typeparam name="V">The numeric type refined by the enum</typeparam>
-    public readonly struct TypedLiteral<E,V> : ITypedLiteral<E,V>
+    /// <typeparam name="T">The numeric type refined by the enum</typeparam>
+    public struct TypedLiteral<E,T> : ITypedLiteral<E,T>
         where E : unmanaged, Enum
-        where V : unmanaged
+        where T : unmanaged
     {
-        public readonly E LiteralClass;
+        public E EVal;
 
-        public readonly V LiteralValue;
+        public T TVal;
 
         [MethodImpl(Inline)]
-        public static implicit operator E(TypedLiteral<E,V> t)
+        public static implicit operator E(TypedLiteral<E,T> t)
             => t.Class;
 
         [MethodImpl(Inline)]
-        public static implicit operator V(TypedLiteral<E,V> t)
-            => t.Value;
+        public static implicit operator T(TypedLiteral<E,T> t)
+            => t.TVal;
 
         [MethodImpl(Inline)]
-        public static implicit operator TypedLiteral<E,V>(E @class)
-            => new TypedLiteral<E,V>(@class);
+        public static implicit operator TypedLiteral<E,T>(E @class)
+            => new TypedLiteral<E,T>(@class);
 
         [MethodImpl(Inline)]
-        public static implicit operator TypedLiteral<E,V>(V value)
-            => Literals.typed<E,V>(value);
+        public static implicit operator TypedLiteral<E,T>(T value)
+            => Literals.typed<E,T>(value);
 
         [MethodImpl(Inline)]
-        public static implicit operator TypedLiteral<E>(TypedLiteral<E,V> src)
+        public static implicit operator TypedLiteral<E>(TypedLiteral<E,T> src)
             => Literals.typed<E>(src.Class);
 
         [MethodImpl(Inline)]
         public TypedLiteral(E @class)
         {
-            LiteralClass = @class;
-            LiteralValue = Literals.numeric<E,V>(@class);
+            EVal = @class;
+            TVal = Literals.numeric<E,T>(@class);
         }
 
         [MethodImpl(Inline)]
-        public TypedLiteral(V value)
+        public TypedLiteral(E @class, T value)
         {
-            LiteralClass = Literals.@enum<E,V>(value);
-            LiteralValue = value;
+            EVal = @class;
+            TVal = value;
         }
 
         /// <summary>
@@ -62,16 +62,16 @@ namespace Z0
         public E Class
         {
             [MethodImpl(Inline)]
-            get => LiteralClass;
+            get => EVal;
         }
 
         /// <summary>
         /// The numeric value of the classifier
         /// </summary>
-        public V Value
+        public T Value
         {
             [MethodImpl(Inline)]
-            get => LiteralValue;
+            get => TVal;
         }
     }
 }

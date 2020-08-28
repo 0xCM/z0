@@ -6,110 +6,106 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
     using static z;
-    
+
     using NK = EnumTypeCode;
 
     [ApiHost]
-    public readonly struct MultiFormatter
+    public readonly struct ValueFormatter
     {
-        public static MultiFormatter Service => default;
+        public static ValueFormatter Service => default;
 
-        [MethodImpl(Inline)]
-        public string Format<T>(T src, N2 n, int? digits = null)
+        [MethodImpl(Inline), Op,Closures(Integers)]
+        public string FormatPrimal<T>(T src, N2 n, int? digits = null)
             where T : unmanaged
                 => Format_u(src,n, digits);
 
-        [MethodImpl(Inline)]
-        public string Format<T>(T src, N8 n, int? digits = null)
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public string FormatPrimal<T>(T src, N8 n, int? digits = null)
             where T : unmanaged
                 => Format_u(src,n, digits);
 
-        [MethodImpl(Inline)]
-        public string Format<T>(T src, N16 n, int? digits = null)
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public string FormatPrimal<T>(T src, N16 n, int? digits = null)
             where T : unmanaged
                 => Format_u(src,n, digits);
 
-        [MethodImpl(Inline)]
-        public string Format<T>(T src, N10 n, int? digits = null)
+        [MethodImpl(Inline), Op, Closures(Integers)]
+        public string FormatPrimal<T>(T src, N10 n, int? digits = null)
             where T : unmanaged
                 => Format_u(src,n, digits);
 
         public string FormatEnum<E>(E src, N2 n, int? digits = null)
-            where E : unmanaged, Enum        
+            where E : unmanaged, Enum
                 => Enums.typecode<E>() switch {
-                    NK.U8 => Format(Enums.e8u(src), n, digits),    
-                    NK.I8 => Format(Enums.e8i(src), n, digits),    
-                    NK.I16 => Format(Enums.e16i(src), n, digits),    
-                    NK.U16 => Format(Enums.e16u(src), n, digits),    
-                    NK.I32 => Format(Enums.e32i(src), n, digits),    
-                    NK.U32 => Format(Enums.e32u(src), n, digits),    
-                    NK.I64 => Format(Enums.e64i(src), n, digits),    
-                    NK.U64 => Format(Enums.e64u(src), n, digits),    
+                    NK.U8 => Format(Enums.e8u(src), n, digits),
+                    NK.I8 => Format(Enums.e8i(src), n, digits),
+                    NK.I16 => Format(Enums.e16i(src), n, digits),
+                    NK.U16 => Format(Enums.e16u(src), n, digits),
+                    NK.I32 => Format(Enums.e32i(src), n, digits),
+                    NK.U32 => Format(Enums.e32u(src), n, digits),
+                    NK.I64 => Format(Enums.e64i(src), n, digits),
+                    NK.U64 => Format(Enums.e64u(src), n, digits),
                     _ => src.ToString(),
                 };
 
         public string FormatEnum<E>(E src, N8 n)
-            where E : unmanaged, Enum        
+            where E : unmanaged, Enum
                 => Enums.typecode<E>() switch {
-                    NK.U8 => Format(Enums.e8u(src), n),    
-                    NK.I8 => Format(Enums.e8i(src), n),    
-                    NK.I16 => Format(Enums.e16i(src), n),    
-                    NK.U16 => Format(Enums.e16u(src), n),    
-                    NK.I32 => Format(Enums.e32i(src), n),    
-                    NK.U32 => Format(Enums.e32u(src), n),    
-                    NK.I64 => Format(Enums.e64i(src), n),    
-                    NK.U64 => Format(Enums.e64u(src), n),    
+                    NK.U8 => Format(Enums.e8u(src), n),
+                    NK.I8 => Format(Enums.e8i(src), n),
+                    NK.I16 => Format(Enums.e16i(src), n),
+                    NK.U16 => Format(Enums.e16u(src), n),
+                    NK.I32 => Format(Enums.e32i(src), n),
+                    NK.U32 => Format(Enums.e32u(src), n),
+                    NK.I64 => Format(Enums.e64i(src), n),
+                    NK.U64 => Format(Enums.e64u(src), n),
                     _ => src.ToString(),
                 };
 
         public string FormatEnum<E>(E src, N16 n, int? digits = null)
-            where E : unmanaged, Enum        
+            where E : unmanaged, Enum
                 => Enums.typecode<E>() switch {
-                    NK.U8 => Format(Enums.e8u(src), n, digits),    
-                    NK.I8 => Format(Enums.e8i(src), n, digits),    
-                    NK.I16 => Format(Enums.e16i(src), n, digits),    
-                    NK.U16 => Format(Enums.e16u(src), n, digits),    
-                    NK.I32 => Format(Enums.e32i(src), n, digits),    
-                    NK.U32 => Format(Enums.e32u(src), n, digits),    
-                    NK.I64 => Format(Enums.e64i(src), n, digits),    
-                    NK.U64 => Format(Enums.e64u(src), n, digits),    
+                    NK.U8 => Format(Enums.e8u(src), n, digits),
+                    NK.I8 => Format(Enums.e8i(src), n, digits),
+                    NK.I16 => Format(Enums.e16i(src), n, digits),
+                    NK.U16 => Format(Enums.e16u(src), n, digits),
+                    NK.I32 => Format(Enums.e32i(src), n, digits),
+                    NK.U32 => Format(Enums.e32u(src), n, digits),
+                    NK.I64 => Format(Enums.e64i(src), n, digits),
+                    NK.U64 => Format(Enums.e64u(src), n, digits),
                     _ => src.ToString(),
                 };
 
         public string FormatEnum<E>(E src, N10 n, int? digits = null)
-            where E : unmanaged, Enum        
+            where E : unmanaged, Enum
                 => Enums.typecode<E>() switch {
-                    NK.U8 => Format(Enums.e8u(src), n, digits),    
-                    NK.I8 => Format(Enums.e8i(src), n, digits),    
-                    NK.I16 => Format(Enums.e16i(src), n, digits),    
-                    NK.U16 => Format(Enums.e16u(src), n, digits),    
-                    NK.I32 => Format(Enums.e32i(src), n, digits),    
-                    NK.U32 => Format(Enums.e32u(src), n, digits),    
-                    NK.I64 => Format(Enums.e64i(src), n, digits),    
-                    NK.U64 => Format(Enums.e64u(src), n, digits),    
+                    NK.U8 => Format(Enums.e8u(src), n, digits),
+                    NK.I8 => Format(Enums.e8i(src), n, digits),
+                    NK.I16 => Format(Enums.e16i(src), n, digits),
+                    NK.U16 => Format(Enums.e16u(src), n, digits),
+                    NK.I32 => Format(Enums.e32i(src), n, digits),
+                    NK.U32 => Format(Enums.e32u(src), n, digits),
+                    NK.I64 => Format(Enums.e64i(src), n, digits),
+                    NK.U64 => Format(Enums.e64u(src), n, digits),
                     _ => src.ToString(),
                 };
 
         public string FormatEnum<E>(E src, NumericBaseKind @base, int? digits = null)
-            where E : unmanaged, Enum        
+            where E : unmanaged, Enum
                 => Enums.typecode<E>() switch {
-                    NK.U8 => Format(Enums.e8u(src), @base, digits),    
-                    NK.I8 => Format(Enums.e8i(src), @base, digits),    
-                    NK.I16 => Format(Enums.e16i(src), @base, digits),    
-                    NK.U16 => Format(Enums.e16u(src), @base, digits),    
-                    NK.I32 => Format(Enums.e32i(src), @base, digits),    
-                    NK.U32 => Format(Enums.e32u(src), @base, digits),    
-                    NK.I64 => Format(Enums.e64i(src), @base, digits),    
-                    NK.U64 => Format(Enums.e64u(src), @base, digits),    
+                    NK.U8 => Format(Enums.e8u(src), @base, digits),
+                    NK.I8 => Format(Enums.e8i(src), @base, digits),
+                    NK.I16 => Format(Enums.e16i(src), @base, digits),
+                    NK.U16 => Format(Enums.e16u(src), @base, digits),
+                    NK.I32 => Format(Enums.e32i(src), @base, digits),
+                    NK.U32 => Format(Enums.e32u(src), @base, digits),
+                    NK.I64 => Format(Enums.e64i(src), @base, digits),
+                    NK.U64 => Format(Enums.e64u(src), @base, digits),
                     _ => src.ToString(),
-                };        
-
-        static string bitformat<T>(T src, int? digits = null)
-            where T : unmanaged
-                => BitFormatter.format(src, digits != null ? BitFormatter.limited(digits.Value, digits.Value)  : BitFormatter.configure());
+                };
 
         [MethodImpl(Inline), Op]
         public string Format(sbyte src, N2 @base, int? digits = null)
@@ -256,7 +252,7 @@ namespace Z0
                NumericBaseKind.Base16 => Format(src, n16, digits),
                 _ => Format(src, n10, digits),
             };
- 
+
         [MethodImpl(Inline), Op]
         public string Format(short src, NumericBaseKind @base, int? digits = null)
            => @base switch{
@@ -311,6 +307,8 @@ namespace Z0
                 _ => Format(src, n10, digits),
             };
 
+
+
         [MethodImpl(Inline)]
         string Format_u<T>(T src, N10 n, int? digits = null)
             where T : unmanaged
@@ -340,7 +338,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return Format(int64(src),n, digits);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -372,7 +370,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return Format(int64(src),n, digits);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -404,7 +402,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return Format(int64(src),n, digits);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -438,5 +436,9 @@ namespace Z0
             else
                 throw no<T>();
         }
+
+        static string bitformat<T>(T src, int? digits = null)
+            where T : unmanaged
+                => BitFormatter.format(src, digits != null ? BitFormatter.limited(digits.Value, digits.Value)  : BitFormatter.configure());
     }
 }

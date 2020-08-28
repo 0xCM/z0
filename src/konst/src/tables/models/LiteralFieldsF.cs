@@ -13,62 +13,61 @@ namespace Z0
     public readonly struct LiteralFields<F>
         where F : unmanaged, Enum
     {
-        public readonly FieldInfo[] Definitions;
+        readonly FieldInfo[] FieldSpecs;
 
-        public readonly F[] Values;
-
-        [MethodImpl(Inline)]
-        public static implicit operator LiteralFields<F>(FieldInfo[] src)
-            => new LiteralFields<F>(src);
+        readonly F[] FieldValues;
 
         [MethodImpl(Inline)]
-        public LiteralFields(FieldInfo[] src)
+        public LiteralFields(FieldInfo[] specs, F[] values)
         {
-            Definitions = src;
-            Values = src.Map(f => (F)f.GetRawConstantValue());
+            FieldSpecs = specs;
+            FieldValues = values;
         }
 
         public CellCount Count
         {
             [MethodImpl(Inline)]
-            get => Definitions.Length;
+            get => FieldSpecs.Length;
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Definitions.Length;
+            get => FieldSpecs.Length;
         }
 
-        public ReadOnlySpan<FieldInfo> View
+        public ReadOnlySpan<FieldInfo> Specs
         {
             [MethodImpl(Inline)]
-            get => Definitions;
+            get => FieldSpecs;
         }
 
-        public Span<FieldInfo> Edit
+        public ReadOnlySpan<F> Values
         {
             [MethodImpl(Inline)]
-            get => Definitions;
+            get => FieldValues;
         }
 
         [MethodImpl(Inline)]
-        public string Name(uint index)
-            => Definitions[index].Name;
-        
-        public ref readonly F this[uint index]
+        public string Name(ulong index)
+            => FieldSpecs[index].Name;
+
+        [MethodImpl(Inline)]
+        public ref readonly F Value(ulong index)
+            => ref FieldValues[index];
+
+        public ref readonly F this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref Values[index];
-        }        
+            get => ref Value(index);
+        }
 
         [MethodImpl(Inline)]
-        public ref readonly FieldInfo Definition(uint index)
-            => ref Definitions[index];
+        public ref readonly FieldInfo Spec(ulong index)
+            => ref FieldSpecs[index];
 
-        
         [MethodImpl(Inline)]
-        public RenderWidth Width(F f)   
+        public RenderWidth Width(F f)
             => z.@as<F,byte>(f);
     }
 }

@@ -19,6 +19,5 @@ namespace Z0
             var fields = src.DeclaredFields();
             return search(src).Where(f => f.IsStringLiteral());
         }
-
     }
 }

@@ -42,6 +42,7 @@
         "RFLAGS",
         "Stind",
         "UNREX",
+        "Unfence",
         "Unignored",
         "Vinserti",
         "Vmovupd",

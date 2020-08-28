@@ -8,7 +8,7 @@ namespace Z0
     using System;
 
     using Z0.Data;
-    
+
     using static Konst;
     using static Root;
     using static XedSourceMarkers;
@@ -29,11 +29,11 @@ namespace Z0
                     if(src.IsProp(i + 1, OPERANDS))
                     {
                         patterns.Add(new XedPattern(
-                            src.Class, 
-                            src.Category, 
-                            src.Extension, 
-                            src.IsaSet, 
-                            src.ExtractProp(i), 
+                            src.Class,
+                            src.Category,
+                            src.Extension,
+                            src.IsaSet,
+                            src.ExtractProp(i),
                             src.ExtractProp(i + 1)
                             ));
                     }
@@ -49,13 +49,13 @@ namespace Z0
                 var row = src.Rows[i];
                 var rowText = row.Text;
                 if(text.nonempty(rowText) && rowText.StartsWith(name))
-                {                    
+                {
                     var value = rowText.RightOf(PROP_DELIMITER);
                     if(text.nonempty(value))
                         return value.Trim();
-                }                    
+                }
             }
-            return string.Empty;
+            return EmptyString;
         }
 
         public static string BaseCodeText(this XedPattern src)
@@ -69,9 +69,9 @@ namespace Z0
                 if(i != count - 1)
                     dst.Append(Chars.Space);
             }
-            
+
             return dst.ToString();
-        }   
+        }
 
         public static BinaryCode BaseCode(this XedPattern src)
         {
@@ -85,37 +85,37 @@ namespace Z0
                     seek8(dst, pos++) = parser.ParseByte(part);
             }
 
-            return slice(ByteReader.ReadAll(dst),0, pos);            
+            return slice(ByteReader.ReadAll(dst),0, pos);
         }
 
         const char LeftFence = Chars.LBracket;
 
         const char RightFence = Chars.RBracket;
-        
+
         public static string Mod(this XedPattern src)
-            => src.Parts.TryFind(x => x.StartsWith(MOD)).MapValueOrDefault(x => x.Unfence(LeftFence, RightFence), string.Empty);
+            => src.Parts.TryFind(x => x.StartsWith(MOD)).MapValueOrDefault(x => x.Unfence(LeftFence, RightFence), EmptyString);
 
         public static string Reg(this XedPattern src)
-            => src.Parts.TryFind(x => x.StartsWith(REG)).MapValueOrDefault(x => x.Unfence(LeftFence, RightFence), string.Empty);
+            => src.Parts.TryFind(x => x.StartsWith(REG)).MapValueOrDefault(x => x.Unfence(LeftFence, RightFence), EmptyString);
 
         public static XedPatternSummary Summary(this XedPattern src)
         {
-            var modidx = src.Parts.TryFind(x => x.StartsWith(MODIDX)).MapValueOrDefault(x => x.RightOf(ASSIGN).Trim(), string.Empty);
+            var modidx = src.Parts.TryFind(x => x.StartsWith(MODIDX)).MapValueOrDefault(x => x.RightOf(ASSIGN).Trim(), EmptyString);
             return new R(
-                Class: src.Class, 
-                Category: src.Category, 
-                Extension: src.Extension, 
-                IsaSet: src.IsaSet, 
+                Class: src.Class,
+                Category: src.Category,
+                Extension: src.Extension,
+                IsaSet: src.IsaSet,
                 BaseCode: src.BaseCode(),
                 Mod: src.Mod(),
                 Reg: src.Reg(),
-                Pattern: src.PatternText, 
+                Pattern: src.PatternText,
                 Operands: src.OperandText);
         }
 
         public static string FormatPattern(this XedPattern src, char delimiter)
         {
-            var dst = Table.formatter<F>(delimiter);
+            var dst = TableFormat.formatter<F>(delimiter);
             dst.Delimit(F.Class, src.Class);
             dst.Delimit(F.Category, src.Category);
             dst.Delimit(F.Extension, src.Extension);
@@ -130,7 +130,7 @@ namespace Z0
 
         public static string FormatRow(this XedPatternSummary src, char delimiter)
         {
-            var dst = Table.formatter<F>(delimiter);
+            var dst = TableFormat.formatter<F>(delimiter);
             dst.Delimit(F.Class, src.Class);
             dst.Delimit(F.Category, src.Category);
             dst.Delimit(F.Extension, src.Extension);
@@ -140,7 +140,7 @@ namespace Z0
             dst.Delimit(F.Reg, src.Reg);
             dst.Delimit(F.Pattern, src.Pattern);
             dst.Delimit(F.Operands, src.Operands);
-            return dst.Format();                             
-        }      
+            return dst.Format();
+        }
     }
 }

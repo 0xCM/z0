@@ -9,26 +9,16 @@ namespace Z0
     using System.Text;
     using System.Reflection;
 
-    using Z0.Data;
-
     using static Konst;
 
     public struct TableFormatter<F> : ITableFormatter<F>
         where F : unmanaged, Enum
-    {        
+    {
         readonly StringBuilder Target;
-        
+
         char Delimiter;
 
         readonly LiteralFields<F> Fields;
-
-        [MethodImpl(Inline)]
-        public TableFormatter(StringBuilder dst, char delimiter)
-        {
-            Target = dst;
-            Delimiter = delimiter;
-            Fields = typeof(F).LiteralFields();
-        }
 
         [MethodImpl(Inline)]
         public TableFormatter(StringBuilder dst, char delimiter, LiteralFields<F> fields)
@@ -47,12 +37,12 @@ namespace Z0
             =>  z.scalar<F,ushort>((F)field.GetRawConstantValue());
 
         public void EmitEol()
-            => Target.Append(Eol);        
-        
+            => Target.Append(Eol);
+
         public string FormatHeader()
         {
             var dst = text.build();
-            var fields = Fields.View;
+            var fields = Fields.Specs;
             for(var i=0u; i<fields.Length; i++)
             {
                 if(i != 0)
@@ -62,16 +52,10 @@ namespace Z0
                 }
 
                 ref readonly var field = ref z.skip(fields,i);
-                dst.Append(field.Name.PadRight(width(field)));                
+                dst.Append(field.Name.PadRight(width(field)));
             }
             dst.Append(Eol);
             return dst.ToString();
-        }
-
-        public string FormatRow<T>(T row)
-            where T : struct, ITable<F,T>
-        {
-            return EmptyString;
         }
 
         public void EmitHeader()
@@ -83,9 +67,9 @@ namespace Z0
             => Target.Append(Render(content).PadRight(width(f)));
 
         public void Delimit(F f, object content)
-        {            
+        {
             Target.Append(Delimiter);
-            Target.Append(Space);            
+            Target.Append(Space);
             Target.Append(Render(content).PadRight(width(f)));
         }
 
@@ -98,7 +82,7 @@ namespace Z0
         }
 
         public TableFormatter<F> Reset(char? delimiter = null)
-        {            
+        {
             Target.Clear();
             Delimiter = delimiter ?? FieldDelimiter;
             return this;
@@ -106,7 +90,7 @@ namespace Z0
 
         public string Format()
             => Target.ToString();
-        
+
 
         public override string ToString()
             => Format();

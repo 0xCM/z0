@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IFieldEval
+    public interface ITableFieldEval
     {
         TableFields Fields {get;}
 
@@ -23,14 +23,14 @@ namespace Z0
         }
     }
 
-    public interface IFieldEval<F,T> : IFieldEval
+    public interface ITableFieldEval<F,T> : ITableFieldEval
         where F : unmanaged, Enum
         where T : struct, ITable<F,T>
     {
 
         new TableFields<F> Fields {get;}
 
-        Type IFieldEval.SourceType
+        Type ITableFieldEval.SourceType
             => typeof(T);
     }
 }

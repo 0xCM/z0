@@ -14,9 +14,9 @@ namespace Z0
     partial struct Table
     {
         [MethodImpl(Inline)]
-        public static TableField<F> field<F,T>(F id, FieldInfo def, ushort? width = null)
+        public static TableField<F> field<F,T>(F id, TableField spec, ushort? width = null)
             where F : unmanaged, Enum
             where T : struct, ITable<F,T>
-                => new TableField<F>(id,def, width ?? (new RenderWidth<ushort>(@as<F,ushort>(id))));
+                => new TableField<F>(id,spec, width ?? (new RenderWidth<ushort>(@as<F,ushort>(id))));
     }
 }

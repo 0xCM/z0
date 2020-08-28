@@ -19,8 +19,8 @@ namespace Z0
                 => Enum.IsDefined(typeof(E), e);
 
         [MethodImpl(Inline)]
-        public static bool IsSome<E>(this E src)        
-            where E : unmanaged, Enum            
+        public static bool IsSome<E>(this E src)
+            where E : unmanaged, Enum
                 => !Z0.Enums.zero<E>().Equals(src);
 
         /// <summary>
@@ -42,8 +42,8 @@ namespace Z0
                 => src.Where(x => x.IsSome()).ToArray();
 
         [MethodImpl(Inline)]
-        public static bool IsNone<E>(this E src)        
-            where E : unmanaged, Enum            
+        public static bool IsNone<E>(this E src)
+            where E : unmanaged, Enum
                 => Z0.Enums.zero<E>().Equals(src);
 
         [MethodImpl(Inline)]
@@ -64,51 +64,51 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TypeCode TypeCode(this EnumTypeCode k)
             =>(System.TypeCode)k;
-    
+
         public static EnumLiteralDetails<E> ToIndex<E>(this IEnumerable<EnumLiteralDetail<E>> src)
             where E : unmanaged, Enum
                 => new EnumLiteralDetails<E>(src.ToArray());
 
-        public static EnumLiterals ToIndex(this IEnumerable<EnumLiteralDetail> src)
-            => new EnumLiterals(src.ToArray());
+        public static EnumLiteralDetails ToIndex(this IEnumerable<EnumLiteralDetail> src)
+            => new EnumLiteralDetails(src.ToArray());
 
         [MethodImpl(Inline)]
-        public static sbyte ToInt8<E>(this E src)                
+        public static sbyte ToInt8<E>(this E src)
             where E : unmanaged, Enum
                 => Z0.Enums.e8i(src);
 
         [MethodImpl(Inline)]
-        public static byte ToUInt8<E>(this E src)                
+        public static byte ToUInt8<E>(this E src)
             where E : unmanaged, Enum
                 => Z0.Enums.e8u(src);
 
         [MethodImpl(Inline)]
-        public static short ToInt16<E>(this E src)                
+        public static short ToInt16<E>(this E src)
             where E : unmanaged, Enum
                 => Z0.Enums.e16i(src);
 
         [MethodImpl(Inline)]
-        public static ushort ToUInt16<E>(this E src)                
+        public static ushort ToUInt16<E>(this E src)
             where E : unmanaged, Enum
                 => Z0.Enums.e16u(src);
 
         [MethodImpl(Inline)]
-        public static int ToInt32<E>(this E src)                
+        public static int ToInt32<E>(this E src)
             where E : unmanaged, Enum
                 => Z0.Enums.e32i(src);
 
         [MethodImpl(Inline)]
-        public static uint ToUInt32<E>(this E src)                
+        public static uint ToUInt32<E>(this E src)
             where E : unmanaged, Enum
                 => Z0.Enums.e32u(src);
 
         [MethodImpl(Inline)]
-        public static long ToInt64<E>(this E src)                
+        public static long ToInt64<E>(this E src)
             where E : unmanaged, Enum
                 => Z0.Enums.e64i(src);
 
         [MethodImpl(Inline)]
-        public static ulong ToUInt64<E>(this E src)                
+        public static ulong ToUInt64<E>(this E src)
             where E : unmanaged, Enum
                 => Z0.Enums.e64u(src);
     }

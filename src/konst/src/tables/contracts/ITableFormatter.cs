@@ -9,16 +9,16 @@ namespace Z0
     public interface ITableFormatter<F> : ITextual
         where F : unmanaged, Enum
     {
-        void EmitEol();        
+        void EmitEol();
 
         string FormatHeader();
-        
+
         void EmitHeader();
     }
 
-    public interface ITableFormatter<F,T> 
+    public interface ITableFormatter<F,T>
         where F : unmanaged, Enum
-        where T : struct, ITable<F,T>         
+        where T : struct
     {
         string FormatHeader();
 

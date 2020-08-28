@@ -25,6 +25,5 @@ namespace Z0
             where T : struct, ITable
             where S : unmanaged
                 => new TableMap<D,S,T,Y>(f,id);
-
     }
 }

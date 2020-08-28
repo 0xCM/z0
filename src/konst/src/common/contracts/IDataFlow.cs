@@ -12,7 +12,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a flow that represents a data movement from A -> B, or, in this case, S -> T
+    /// Characterizes a data flow
     /// </summary>
     /// <typeparam name="S">The source type</typeparam>
     /// <typeparam name="T">The target type</typeparam>
@@ -25,5 +25,18 @@ namespace Z0
 
         string ITextual.Format()
             => text.format(RenderPatterns.Arrow, Source, Target);
+    }
+
+    /// <summary>
+    /// Characterizes an executed data flow
+    /// </summary>
+    /// <typeparam name="S">The source type</typeparam>
+    /// <typeparam name="T">The target type</typeparam>
+    [Free]
+    public interface IDataFlow<S,T,R> : IDataFlow<S,T>
+    {
+        R Result {get;}
+        string ITextual.Format()
+            => text.format("{0} -> {1} | {2}", Source, Target, Result);
     }
 }

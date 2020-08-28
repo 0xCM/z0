@@ -15,6 +15,12 @@ namespace Z0
 
     partial struct Literals
     {
+        [MethodImpl(Inline)]
+        public static unsafe V numeric<E,V>(E e)
+            where E : unmanaged, Enum
+            where V : unmanaged
+                => Unsafe.Read<V>((V*)(&e));
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static NumericLiteral<T> numeric<T>(string Name, T data, string Text, NBK @base)
             where T : unmanaged
@@ -30,18 +36,6 @@ namespace Z0
             where T : unmanaged
                 => z.map(search<T>(src),numeric<T>);
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public FieldValues<T> numeric<T>(Type[] types)
-            where T : unmanaged
-        {
-            var literals = list<FieldValue<T>>();
-            for(var i=0u; i<types.Length; i++)
-            {
-                var values = fieldValues<T>(types[i]).ToSpan();
-                for(var j=0u; j<values.Length; j++)
-                    literals.Add(skip(values,j));
-            }
-            return sys.array(literals);
-        }
+
     }
 }

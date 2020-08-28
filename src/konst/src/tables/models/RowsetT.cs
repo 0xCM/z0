@@ -9,15 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct TableGrid<F,T,D> : ITableContent<F,T,D>
-        where F : unmanaged, Enum
-        where D : unmanaged, Enum
-        where T : struct, ITable<F,T,D>
+    public readonly struct Rowset<T>
+        where T : struct
     {
         readonly T[] Data;
 
         [MethodImpl(Inline)]
-        public TableGrid(T[] data)
+        public Rowset(T[] data)
             => Data = data;
 
         public ReadOnlySpan<T> View
@@ -49,6 +47,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
+
         public ref T this[long index]
         {
             [MethodImpl(Inline)]
