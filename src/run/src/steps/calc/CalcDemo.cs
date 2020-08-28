@@ -20,7 +20,7 @@ namespace Z0
     public readonly struct CalcDemo
     {
         static ReadOnlySpan<LocatedMethod> Slots
-            => FunctionJit.jit(typeof(CalcSlots));
+            => FunctionDynamic.jit(typeof(CalcSlots));
 
         void Display1()
         {
@@ -75,7 +75,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static MemSlotView from(Type src)
-            => FunctionJit.jit(src).Map(m => new SegRef(m.Address, m.Size));
+            => FunctionDynamic.jit(src).Map(m => new SegRef(m.Address, m.Size));
 
         [MethodImpl(Inline)]
         public static MemSlotView<E> from<E>(Type src)

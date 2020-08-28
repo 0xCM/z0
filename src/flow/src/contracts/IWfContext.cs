@@ -12,7 +12,6 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-    using WfEvB = WfEventBuilder;
 
     /// <summary>
     /// Characterizes a worklow context
@@ -34,9 +33,6 @@ namespace Z0
 
         void Warn<T>(string actor, T content, CorrelationToken? ct = null)
             => Flow.warn(this, actor, content, ct ?? Ct);
-
-        void Processing<T>(string actor, T kind, FilePath src, CorrelationToken ct)
-            => Flow.processing(this, actor, kind, src, ct);
 
         void ProcessingFile<T>(T kind, FilePath src, [File] string actor = null, [Line] int? line = null)
             => Flow.processing(this, Path.GetFileNameWithoutExtension(actor), kind, src, Ct);

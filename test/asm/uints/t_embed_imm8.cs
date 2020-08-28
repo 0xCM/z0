@@ -16,7 +16,7 @@ namespace Z0.Asm
     using K = Kinds;
 
     public class t_embed_imm8 : t_asm<t_embed_imm8>
-    {    
+    {
         protected override bool TraceDetailEnabled
             => false;
 
@@ -50,7 +50,7 @@ namespace Z0.Asm
         {
             using var dst = AsmCaseWriter();
 
-            check_blend_imm(dst);            
+            check_blend_imm(dst);
         }
 
         byte[] Immediates => new byte[]{1,2,3,4};
@@ -71,11 +71,11 @@ namespace Z0.Asm
         }
 
         void check_imm(MethodInfo src, W128 w, Type tVector, StreamWriter dst)
-        {            
+        {
             var kVector = VectorType.kind(tVector);
             var tCell = kVector.CellType();
             var vbroadcast = Search.vbroadcast(tCell,w);
-            var vones = vbroadcast.Invoke(null, new object[]{w,one(tCell).Boxed});            
+            var vones = vbroadcast.Invoke(null, new object[]{w,one(tCell).Boxed});
 
             foreach(var imm in Immediates)
             {
@@ -90,12 +90,11 @@ namespace Z0.Asm
         void check_vbsll_imm(W128 w, StreamWriter dst)
         {   const byte imm8 = 9;
 
-            var dynamics = FunctionDynamic.Service;
             var name = nameof(gvec.vbsll);
             var src = typeof(gvec).DeclaredMethods().WithName(name).OfKind(K.v128).Single();
             var id = Z0.Identity.identify(src);
             var f = Dynop.EmbedVUnaryOpImm(K.vk128<uint>(), id, src, imm8);
-            var method = dynamics.Method(dynamics.Handle(f.Target));
+            var method = FunctionDynamic.method(FunctionDynamic.handle(f.Target));
             Claim.eq(method.Name, name);
 
             var capture = AsmCheck.Capture(id, f).Require();
@@ -105,13 +104,12 @@ namespace Z0.Asm
         void check_vbsll_imm(W256 w, StreamWriter dst)
         {   const byte imm8 = 4;
 
-            var dynamics = FunctionDynamic.Service;
             var name = "vbsll";
             var vKind = K.vk256<uint>();
             var src = typeof(V0d).DeclaredMethods().WithName(name).OfKind(vKind).Single();
             var id = Z0.Identity.identify(src);
             var f = Dynop.EmbedVUnaryOpImm(vKind, id, src, imm8);
-            var method = dynamics.Method(dynamics.Handle(f.Target));
+            var method = FunctionDynamic.method(FunctionDynamic.handle(f.Target));
             Claim.eq(method.Name, name);
 
             var capture = AsmCheck.Capture(id, f).Require();
@@ -145,7 +143,7 @@ namespace Z0.Asm
                 var id = src.Identify().WithImm8(imm);
                 var capture = AsmCheck.Capture(id, method).Require();
                 AsmCheck.WriteAsm(capture,dst);
-            }            
+            }
         }
 
         void check_blend_imm(StreamWriter dst)
@@ -158,15 +156,15 @@ namespace Z0.Asm
 
             var injector = AsmCheck.Dynamic.BinaryInjector<ushort>(w);
             var x = Random.CpuVector<ushort>(w);
-            var y = Random.CpuVector<ushort>(w);            
+            var y = Random.CpuVector<ushort>(w);
             var f = injector.EmbedImmediate(src,imm);
             var v1 = f.DynamicOp.Invoke(x,y);
             var captured = AsmCheck.Capture(f.Id, f).Require();
-            var asm = AsmCheck.Decoder.Decode(captured).Require();    
-            AsmCheck.WriteAsm(asm,dst);            
-            
+            var asm = AsmCheck.Decoder.Decode(captured).Require();
+            AsmCheck.WriteAsm(asm,dst);
+
             var g = Dynamic.EmitFixedBinary<Fixed256>(AsmCheck[Main], asm.Code);
-            
+
             var v2 = g(x,y).ToVector<ushort>();
             Claim.veq(v1,v2);
         }
@@ -182,7 +180,7 @@ namespace Z0.Asm
                 Notify($"kVector := {kVector}");
                 Notify($"tCell := {tCell.Name}");
             }
-            
+
             Claim.Require(tCell.IsNonEmpty());
 
             if(tVector == typeof(Vector128<sbyte>))
@@ -240,7 +238,7 @@ namespace Z0.Asm
                 Notify($"kVector := {kVector}");
                 Notify($"tCell := {tCell.Name}");
             }
-            
+
             Claim.Require(tCell.IsNonEmpty());
 
             if(tVector == typeof(Vector256<sbyte>))

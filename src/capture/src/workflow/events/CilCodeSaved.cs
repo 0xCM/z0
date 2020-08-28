@@ -17,11 +17,9 @@ namespace Z0.Asm
 
         public WfEventId EventId {get;}
 
-        public WfActor Actor {get;}
+        public WfStepId StepId {get;}
 
         public readonly ApiHostUri Host;
-
-        public readonly IdentifiedCode[] Code;
 
         public readonly CellCount MemberCount;
 
@@ -30,19 +28,18 @@ namespace Z0.Asm
         public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public CilCodeSaved(string actor, ApiHostUri host, IdentifiedCode[] code, FilePath dst, CorrelationToken ct, MessageFlair flair = Ran)
+        public CilCodeSaved(WfStepId step, ApiHostUri host, uint count, FilePath dst, CorrelationToken ct, MessageFlair flair = Ran)
         {
             EventId = evid(EventName, ct);
-            Actor = Flow.actor(actor);
+            StepId = step;
             Host = host;
-            MemberCount = code.Length;
-            Code = code;
+            MemberCount = count;
             Target = dst;
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Host, MemberCount, Target);
+            => format(EventId, StepId, Host, MemberCount, Target);
     }
 }

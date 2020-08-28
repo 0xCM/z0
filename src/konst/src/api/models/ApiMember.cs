@@ -41,7 +41,7 @@ namespace Z0
             Method = z.insist(method);
             Address = address;
             HostUri = OpUri.Host;
-            Cil = FunctionCil.extract(method);
+            Cil = FunctionDynamic.cil(method);
         }
 
         [MethodImpl(Inline)]
@@ -53,7 +53,7 @@ namespace Z0
             Method = method.Method;
             Address = method.Address;
             HostUri = OpUri.Host;
-            Cil = FunctionCil.extract(Method);
+            Cil = FunctionDynamic.cil(Method);
         }
 
         [MethodImpl(Inline)]

@@ -17,19 +17,13 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        readonly FolderPath TargetRoot;
-
         readonly IPart[] Parts;
-
-        readonly PartSink Sink;
 
         public EmitMetadataSets(IWfContext context, CorrelationToken ct)
         {
             Wf = context;
             Ct = ct;
-            TargetRoot = Wf.ResourceRoot;
             Parts = ModuleArchives.executing().Parts.Array();
-            Sink = new PartSink(context.ContextRoot);
             Wf.Created(WorkerName, Ct);
         }
 

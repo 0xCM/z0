@@ -22,7 +22,7 @@ namespace Z0
         readonly CorrelationToken Ct;
 
         readonly IPart[] Parts;
-        
+
         [MethodImpl(Inline)]
         public EmitBlobs(IWfContext wf, IPart[] parts, CorrelationToken ct)
         {
@@ -31,24 +31,24 @@ namespace Z0
             Parts = parts;
             TargetDir = wf.ResourceRoot + FolderName.Define("blobs");
             EmissionCount = 0;
-            Wf.Created(StepName, ct);
+            Wf.Created(StepId, ct);
         }
 
         public ReadOnlySpan<ImgBlobRecord> Read(IPart part)
         {
             using var reader = PeMetaReader.open(part.PartPath());
-            return reader.ReadBlobs();        
+            return reader.ReadBlobs();
         }
-                
+
         void Emit(IPart part)
         {
             var id = part.Id;
             var dstPath =  TargetDir + FileName.Define(id.Format(), "blob.csv");
 
-            Wf.Emitting(StepName, EmissionType, dstPath, Ct);            
+            Wf.Emitting(StepId, EmissionType, dstPath);
 
             var data = Read(part);
-            var count = (uint)data.Length;     
+            var count = (uint)data.Length;
             var target = PartRecords.sink(ImageRecords.Blobs);
 
             for(var i=0u; i<count; i++)
@@ -57,25 +57,24 @@ namespace Z0
             using var writer = dstPath.Writer();
             writer.Write(target.Render());
 
-            Wf.Emitted(StepName, EmissionType, count, dstPath, Ct);                        
+            Wf.Emitted(StepId, EmissionType, count, dstPath);
 
             EmissionCount += count;
         }
-        
+
         public void Run()
         {
-            Wf.RunningT(StepName, new {EmissionType, TargetDir}, Ct);
-            
+            Wf.Running(StepId, new {EmissionType, TargetDir});
+
             foreach(var part in Parts)
                 Emit(part);
 
-            Wf.RanT(StepName, new {EmissionType, EmissionCount, TargetDir}, Ct);
-
+            Wf.Ran(StepId, new {EmissionType, EmissionCount, TargetDir});
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);            
+            Wf.Finished(StepId);
         }
     }
 }

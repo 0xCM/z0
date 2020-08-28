@@ -23,7 +23,7 @@ namespace Z0
             var count = src.Length;
             var located = sys.alloc<LocatedMethod>(count);
             for(var i=0; i<count; i++)
-                located[i] = FunctionJit.jit(src[i].Method);
+                located[i] = FunctionDynamic.jit(src[i].Method);
 
             var captured = sys.alloc<CapturedCode>(count);
 
@@ -53,7 +53,7 @@ namespace Z0
 
         public static CapturedCode capture(IdentifiedMethod src, Span<byte> buffer)
         {
-            var located = FunctionJit.jit(src.Method);
+            var located = FunctionDynamic.jit(src.Method);
             var summary = capture(buffer, src.Id, located.Address);
             return DefineMember(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
         }

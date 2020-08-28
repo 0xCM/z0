@@ -19,6 +19,8 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
+        readonly IPart[] Parts;
+
         readonly bool Recapture;
 
         public EmitDatasets(IWfContext context, CorrelationToken ct)
@@ -26,8 +28,10 @@ namespace Z0
             Ct = ct;
             Wf = context;
             Recapture = false;
-            Wf.Initialized(StepName, Ct);
+            Parts = ModuleArchives.executing().Parts;
+            Wf.Created(StepId);
         }
+
 
         void Run(EmitProjectDocsStep kind)
         {
@@ -45,20 +49,111 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(nameof(EmitDatasets), Ct);
+            Wf.Finished(StepId);
         }
 
         void Run(EmitResBytesStep kind)
         {
-            using var step = new EmitResBytes(Wf, Ct);
-            step.Run();
+            try
+            {
+                using var step = new EmitResBytes(Wf, Ct);
+                step.Run();
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e, Ct);
+            }
         }
 
-
-        void Run(EmitMetadataSetsStep kind)
+        void Run(EmitConstantDatasetsStep kind)
         {
-            using var step = new EmitMetadataSets(Wf, Ct);
-            step.Run();
+            try
+            {
+                using var step = new EmitConstantDatasets(Wf, Parts, Ct);
+                step.Run();
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e, Ct);
+            }
+        }
+
+        void Run(EmitPeHeadersStep kind)
+        {
+            try
+            {
+                using var step = new EmitPeHeaders(Wf, Parts, Ct);
+                step.Run();
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e, Ct);
+            }
+        }
+
+        void Run(EmitImageContentStep kind)
+        {
+            try
+            {
+                using var step = new EmitImageContent(Wf, Parts, Ct);
+                step.Run();
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e, Ct);
+            }
+        }
+
+        void Run(EmitStringRecordsStep kind)
+        {
+            try
+            {
+                using var step = new EmitStringRecords(Wf, Parts, Ct);
+                step.Run();
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e, Ct);
+            }
+        }
+
+        void Run(EmitBlobsStep kind)
+        {
+            try
+            {
+                using var step = new EmitBlobs(Wf, Parts, Ct);
+                step.Run();
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e, Ct);
+            }
+        }
+
+        void Run(EmitFieldMetadataStep kind)
+        {
+            try
+            {
+                using var step = new EmitFieldMetadata(Wf, Parts, Ct);
+                step.Run();
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e, Ct);
+            }
+        }
+
+        void Run(EmitCilDatasetsStep kind)
+        {
+            try
+            {
+                using var step = new EmitCilDatasets(Wf, Parts, Ct);
+                step.Run();
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e, Ct);
+            }
         }
 
         void Run(EmitEnumCatalogStep kind)
@@ -87,7 +182,13 @@ namespace Z0
 
         public void Run()
         {
-            //Run(default(EmitMetadataSetsStep));
+            Run(default(EmitConstantDatasetsStep));
+            Run(default(EmitPeHeadersStep));
+            Run(default(EmitImageContentStep));
+            Run(default(EmitStringRecordsStep));
+            Run(default(EmitBlobsStep));
+            Run(default(EmitFieldMetadataStep));
+            Run(default(EmitCilDatasetsStep));
             Run(default(EmitBitMasksStep));
             Run(default(EmitProjectDocsStep));
             Run(default(EmitResBytesStep));
@@ -97,7 +198,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static IAsmContext asm(IAppContext root)
+        static IAsmContext asm(IAppContext root)
             => new AsmContext(root);
 
         void Run(RecaptureStep kind)

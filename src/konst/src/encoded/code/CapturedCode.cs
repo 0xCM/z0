@@ -37,7 +37,7 @@ namespace Z0
             z.insist(extracted.Address, parsed.Address);
             OpUri = OpUri.hex(ApiHostUri.FromHost(method.DeclaringType), method.Name, id);
             TermCode = term;
-            Cil = FunctionCil.extract(method);
+            Cil = FunctionDynamic.cil(method);
         }
 
         public ReadOnlySpan<byte> InputData

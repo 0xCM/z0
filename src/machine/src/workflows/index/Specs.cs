@@ -177,11 +177,14 @@ namespace Z0
     }
 
     [Step(typeof(EmitBlobs))]
-    public readonly struct EmitBlobsStep
+    public readonly struct EmitBlobsStep : IWfStep<EmitBlobsStep>
     {
         public const string StepName = nameof(EmitBlobs);
 
         public const string EmissionType = "Metablobs";
+
+        public static WfStepId StepId
+            => AB.step<EmitBitMasksStep>();
     }
 
     [Step(typeof(EmitImageSummaries))]
@@ -206,9 +209,12 @@ namespace Z0
         public const string StepName = nameof(ParseAsmFiles);
     }
 
-    public readonly struct EmitDatasetsStep
+    [Step(typeof(EmitDatasets))]
+    public readonly struct EmitDatasetsStep : IWfStep<EmitDatasetsStep>
     {
         public const string StepName = nameof(EmitDatasets);
+
+        public static WfStepId StepId => AB.step<EmitDatasetsStep>();
     }
 
     [Step(typeof(EmitFieldMetadata))]

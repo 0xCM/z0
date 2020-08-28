@@ -30,8 +30,6 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        readonly MnemonicParser Parser;
-
         readonly ReadOnlySpan<MemoryAddress> Locations;
 
         AsmTableSeg<Mnemonic>[] Segments;

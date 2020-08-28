@@ -27,41 +27,38 @@ namespace Z0
     }
 
     [Step(typeof(CaptureHostMembers), StepName)]
-    public readonly struct CaptureHostMembersStep
+    public readonly struct CaptureHostMembersStep : IWfStep<CaptureHostMembersStep>
     {
         public const string StepName = nameof(CaptureHostMembers);
 
         public static WfStepId StepId => step(typeof(CaptureHostMembers));
 
-        public WfStepId Id => StepId;
-
     }
 
     [Step(typeof(CaptureHosts), StepName)]
-    public readonly struct CaptureHostsStep
+    public readonly struct CaptureHostsStep : IWfStep<CaptureHostsStep>
     {
         public const string StepName = nameof(CaptureHosts);
 
         public static WfStepId StepId => step(typeof(CaptureHosts));
 
-        public WfStepId Id => StepId;
     }
 
     [Step(typeof(DecodeParsed), StepName)]
-    public readonly struct DecodeParsedStep
+    public readonly struct DecodeParsedStep : IWfStep<DecodeParsedStep>
     {
         public const string StepName = nameof(DecodeParsed);
 
         public static WfStepId StepId => step(typeof(DecodeParsed));
 
-        public WfStepId Id => StepId;
-
     }
 
     [Step(typeof(EmitHostArtifacts), StepName)]
-    public readonly struct EmitHostArtifactsStep
+    public readonly struct EmitHostArtifactsStep : IWfStep<EmitHostArtifactsStep>
     {
         public const string StepName = nameof(EmitHostArtifacts);
+
+        public static WfStepId StepId => step<EmitHostArtifactsStep>();
     }
 
     [Step(typeof(EmitExtractReport), StepName)]
@@ -71,9 +68,11 @@ namespace Z0
     }
 
     [Step(typeof(EmitParsedReport), StepName)]
-    public readonly struct EmitParsedReportStep
+    public readonly struct EmitParsedReportStep : IWfStep<EmitParsedReportStep>
     {
         public const string StepName = nameof(EmitParsedReport);
+
+        public static WfStepId StepId => step<EmitParsedReportStep>();
     }
 
     [Step(typeof(ExtractHostMembers), StepName)]

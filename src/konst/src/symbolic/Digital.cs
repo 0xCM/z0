@@ -8,20 +8,21 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     /// <summary>
     /// Defines operations over character digits
     /// </summary>
     [ApiHost]
     public readonly struct Digital
-    {        
+    {
         /// <summary>
         /// Converts a character in the inclusive range [0,9] to the corresponding number in the same range
         /// </summary>
         /// <param name="c">The digit character</param>
         [MethodImpl(Inline), Op]
         public static ulong digit(char c)
-            => (ulong)c - (ulong)'0'; 
+            => (ulong)c - (ulong)'0';
 
         /// <summary>
         /// Converts a character in the inclusive range [0,9] to the corresponding number in the same range
@@ -212,7 +213,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N1 count, ref byte dst)
         {
-            z.add(dst, 0) = (byte)digit(src,0);
+            add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -224,8 +225,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N2 count, ref byte dst)
         {
-            z.add(dst, 1) = (byte)digit(src,1);
-            z.add(dst, 0) = (byte)digit(src,0);
+            add(dst, 1) = (byte)digit(src,1);
+            add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -237,9 +238,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N3 count, ref byte dst)
         {
-            z.add(dst, 2) = (byte)digit(src,2);
-            z.add(dst, 1) = (byte)digit(src,1);
-            z.add(dst, 0) = (byte)digit(src,0);
+            add(dst, 2) = (byte)digit(src,2);
+            add(dst, 1) = (byte)digit(src,1);
+            add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -251,10 +252,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N4 count, ref byte dst)
         {
-            z.add(dst, 3) = (byte)digit(src,3);
-            z.add(dst, 2) = (byte)digit(src,2);
-            z.add(dst, 1) = (byte)digit(src,1);
-            z.add(dst, 0) = (byte)digit(src,0);
+            add(dst, 3) = (byte)digit(src,3);
+            add(dst, 2) = (byte)digit(src,2);
+            add(dst, 1) = (byte)digit(src,1);
+            add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -266,11 +267,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N5 count, ref byte dst)
         {
-            z.add(dst, 4) = (byte)digit(src,4);
-            z.add(dst, 3) = (byte)digit(src,3);
-            z.add(dst, 2) = (byte)digit(src,2);
-            z.add(dst, 1) = (byte)digit(src,1);
-            z.add(dst, 0) = (byte)digit(src,0);
+            add(dst, 4) = (byte)digit(src,4);
+            add(dst, 3) = (byte)digit(src,3);
+            add(dst, 2) = (byte)digit(src,2);
+            add(dst, 1) = (byte)digit(src,1);
+            add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -282,12 +283,12 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N6 count, ref byte dst)
         {
-            z.add(dst, 5) = (byte)digit(src,5);
-            z.add(dst, 4) = (byte)digit(src,4);
-            z.add(dst, 3) = (byte)digit(src,3);
-            z.add(dst, 2) = (byte)digit(src,2);
-            z.add(dst, 1) = (byte)digit(src,1);
-            z.add(dst, 0) = (byte)digit(src,0);
+            add(dst, 5) = (byte)digit(src,5);
+            add(dst, 4) = (byte)digit(src,4);
+            add(dst, 3) = (byte)digit(src,3);
+            add(dst, 2) = (byte)digit(src,2);
+            add(dst, 1) = (byte)digit(src,1);
+            add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -299,13 +300,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void digits(ulong src, N7 count, ref byte dst)
         {
-            z.add(dst, 6) = (byte)digit(src,6);
-            z.add(dst, 5) = (byte)digit(src,5);
-            z.add(dst, 4) = (byte)digit(src,4);
-            z.add(dst, 3) = (byte)digit(src,3);
-            z.add(dst, 2) = (byte)digit(src,2);
-            z.add(dst, 1) = (byte)digit(src,1);
-            z.add(dst, 0) = (byte)digit(src,0);
+            add(dst, 6) = (byte)digit(src,6);
+            add(dst, 5) = (byte)digit(src,5);
+            add(dst, 4) = (byte)digit(src,4);
+            add(dst, 3) = (byte)digit(src,3);
+            add(dst, 2) = (byte)digit(src,2);
+            add(dst, 1) = (byte)digit(src,1);
+            add(dst, 0) = (byte)digit(src,0);
         }
 
         /// <summary>
@@ -316,10 +317,6 @@ namespace Z0
         /// <param name="dst">The digit receiver</param>
         [MethodImpl(Inline), Op]
         public static void unpack(Base10 @base, ulong src, N8 count, ref byte dst)
-            => asci.unpack(@base,src,count,ref dst);
-
-        [MethodImpl(Inline), Op]
-        static ref T add<T>(ref T src, int count)
-            => ref Unsafe.Add(ref src, count);
+            => asci.unpack(@base, src, count, ref dst);
     }
 }

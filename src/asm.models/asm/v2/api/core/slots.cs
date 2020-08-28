@@ -24,7 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static MemSlotView slots(Type src)
-            => FunctionJit.jit(src).Map(m => new SegRef(m.Address, m.Size));
+            => FunctionDynamic.jit(src).Map(m => new SegRef(m.Address, m.Size));
 
         public static MemSlotView<E> slots<E,T>(T src)
             where E : unmanaged, Enum

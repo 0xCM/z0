@@ -10,6 +10,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
+    using static z;
     using static EmitHostArtifactsStep;
 
     public ref struct EmitHostArtifacts
@@ -116,8 +117,17 @@ namespace Z0
 
         void SaveCil()
         {
-            var cil = IdentifiedCodeWriter.save(Source, Parsed, CilDataPath);
-            Wf.Raise(new CilCodeSaved(StepName, Source, cil, ParsedPath, Ct));
+            var src = span(Parsed);
+            var count = src.Length;
+            using var dst = CilDataPath.Writer();
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var parsed = ref skip(src,i);
+                var cil = FunctionDynamic.cil(parsed.Address, parsed.OpUri, parsed.Method);
+                dst.WriteLine(cil.Format());
+
+            }
+            Wf.Raise(new CilCodeSaved(StepId, Source, (uint)src.Length, ParsedPath, Ct));
         }
 
         void Decode()

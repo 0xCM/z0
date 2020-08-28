@@ -37,16 +37,8 @@ namespace Z0
             Code = src;
         }
 
-        [MethodImpl(Inline)]
-        public IdentifiedCode(OpUri uri, BinaryCode src)
-        {
-            Base = 0ul;
-            Uri = uri;
-            Code = src;
-        }
-
         /// <summary>
-        /// An identifier populated with parsed operation uri text, when possible; otherwise populated with unparseable uri text
+        /// An identifier populated with parsed operation uri text, when possible; otherwise populated with unparsed uri text
         /// </summary>
         public readonly string Identifier
         {
@@ -115,11 +107,12 @@ namespace Z0
         public bool Equals(IdentifiedCode src)
             => Encoded.Equals(src.Encoded);
 
-        public string Format()
-            => text.concat(OpUri.UriText, text.spaces(5), Encoded.Format());
-
         public string Format(int uripad)
-            => text.concat(OpUri.UriText.PadRight(uripad), Space, Base.Format(), Space, Encoded.Format());
+            => text.concat(Base.Format(), Space, OpUri.UriText.PadRight(uripad), Space, Encoded.Format());
+
+        public string Format()
+            => Format(60);
+
 
         public override string ToString()
             => Format();

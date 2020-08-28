@@ -12,22 +12,46 @@ namespace Z0
 
     public readonly struct CilCode
     {
+        /// <summary>
+        /// The code's base address
+        /// </summary>
+        public readonly MemoryAddress Base;
+
+        /// <summary>
+        /// The operation uri
+        /// </summary>
         public readonly string Name;
 
-        public readonly BinaryCode Data;
+        public readonly BinaryCode Encoded;
 
         public readonly MethodImplAttributes ImplSpec;
 
         [MethodImpl(Inline)]
-        public static CilCode define(string name, byte[] data, MethodImplAttributes attribs)
-            => new CilCode(name,data,attribs);
-
-        [MethodImpl(Inline)]
-        public CilCode(string name, byte[] data, MethodImplAttributes impl)
+        public CilCode(MemoryAddress @base, OpUri uri, BinaryCode data, MethodImplAttributes impl)
         {
-            Name = name;
-            Data = data;
+            Base = @base;
+            Name = uri.Format();
+            Encoded = data;
             ImplSpec = impl;
         }
+
+        [MethodImpl(Inline)]
+        public CilCode(string name, BinaryCode data, MethodImplAttributes impl)
+        {
+            Base = 0;
+            Name = name;
+            Encoded = data;
+            ImplSpec = impl;
+        }
+
+        public string Format(int uripad)
+            => text.concat(Base.Format(), Space, Name.PadRight(uripad), Space, Encoded.Format());
+
+        public string Format()
+            => Format(30);
+
+
+        public override string ToString()
+            => Format();
     }
 }
