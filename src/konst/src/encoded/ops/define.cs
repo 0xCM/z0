@@ -13,16 +13,16 @@ namespace Z0
     partial struct Encoded
     {
         [MethodImpl(Inline), Op]
-        public static MemberCode define(OpUri uri, MemoryAddress address, in BinaryCode data)
-            => new MemberCode(uri, new LocatedCode(address, data));
+        public static X86ApiCode define(OpUri uri, MemoryAddress address, in BinaryCode data)
+            => new X86ApiCode(uri, new X86Code(address, data));
 
         [MethodImpl(Inline), Op]
-        public static MemberCode define(OpUri uri, in LocatedCode data)
-            => new MemberCode(uri, data);
+        public static X86ApiCode define(OpUri uri, in X86Code data)
+            => new X86ApiCode(uri, data);
 
         [MethodImpl(Inline), Op]
-        public static LocatedCode define(MemoryAddress address, in BinaryCode code)
-            => new LocatedCode(address, code);
+        public static X86Code define(MemoryAddress address, in BinaryCode code)
+            => new X86Code(address, code);
 
         [MethodImpl(Inline), Op]
         public static IdentifiedCode define(MemoryAddress address, OpUri uri, in BinaryCode data)
@@ -33,11 +33,11 @@ namespace Z0
             => new BinaryCode(data);
 
         [MethodImpl(Inline), Op]
-        public static ApiCode define(in ApiMember member, in IdentifiedCode data)
-            => new ApiCode(member, data);
+        public static X86ApiMember define(in ApiMember member, in IdentifiedCode data)
+            => new X86ApiMember(member, data);
 
         [MethodImpl(Inline), Op]
-        public static CapturedCode define(OpIdentity id, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
-            => new CapturedCode(id, method, extracted, parsed, term);
+        public static X86ApiCapture define(OpIdentity id, MethodInfo method, X86Code extracted, X86Code parsed, ExtractTermCode term)
+            => new X86ApiCapture(id, method, extracted, parsed, term);
     }
 }

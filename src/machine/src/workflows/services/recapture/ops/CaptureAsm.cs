@@ -21,7 +21,7 @@ namespace Z0
         public CapturedAccessor[] Capture(ApiHostUri host, ReadOnlySpan<ResourceAccessor> src, FilePath dst)
         {
             var count = src.Length;
-            var codes = span(alloc<CapturedCode>(count));
+            var codes = span(alloc<X86ApiCapture>(count));
             var captured = alloc<CapturedAccessor>(count);
             var target = span(captured);
 
@@ -31,7 +31,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var accessor = ref skip(src,i);
-                var code = quick.Capture(accessor.Member).ValueOrDefault(CapturedCode.Empty);
+                var code = quick.Capture(accessor.Member).ValueOrDefault(X86ApiCapture.Empty);
                 seek(codes, i) = code;
 
                 if(code.IsNonEmpty)
@@ -46,7 +46,7 @@ namespace Z0
         }
 
 
-        Option<AsmRoutineCode> CreateFunction(CapturedCode capture)
+        Option<AsmRoutineCode> CreateFunction(X86ApiCapture capture)
         {
             var decoded = Context.RoutineDecoder.Decode(capture);
             if(decoded)

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct CilCode
+    public readonly struct CilCode : IEncoded
     {
         /// <summary>
         /// The code's base address
@@ -43,6 +43,9 @@ namespace Z0
             Encoded = data;
             ImplSpec = impl;
         }
+
+        BinaryCode IEncoded.Encoded
+            => Encoded;
 
         public string Format(int uripad)
             => text.concat(Base.Format(), Space, Name.PadRight(uripad), Space, Encoded.Format());

@@ -56,7 +56,7 @@ namespace Z0.Asm
             {
                 var summary = capture(exchange, src.Id, src.Address);
                 var size = summary.Encoded.Length;
-                var code = new CapturedCode(src.Id, src.Method, summary.Encoded.ParseInput, summary.Encoded.Encoded, summary.Outcome.TermCode);
+                var code = new X86ApiCapture(src.Id, src.Method, summary.Encoded.ParseInput, summary.Encoded.Encoded, summary.Outcome.TermCode);
                 return new CapturedMember(src, code);
             }
             catch(Exception e)
@@ -66,7 +66,7 @@ namespace Z0.Asm
             }
         }
 
-        public Option<CapturedCode> Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src)
+        public Option<X86ApiCapture> Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src)
         {
             try
             {
@@ -80,18 +80,18 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return none<CapturedCode>();
+                return none<X86ApiCapture>();
             }
         }
 
-        public Option<CapturedCode> Capture(in CaptureExchange exchange, OpIdentity id, in DynamicDelegate src)
+        public Option<X86ApiCapture> Capture(in CaptureExchange exchange, OpIdentity id, in DynamicDelegate src)
         {
             try
             {
                 var pSrc = jit(src).Handle;
                 var summary = capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;
-                var captured = new CapturedCode(id, src.SourceMethod, summary.Encoded.ParseInput, summary.Encoded.ParseResult, outcome.TermCode);
+                var captured = new X86ApiCapture(id, src.SourceMethod, summary.Encoded.ParseInput, summary.Encoded.ParseResult, outcome.TermCode);
                 Demands.insist((MemoryAddress)pSrc,captured.BaseAddress);
                 return exchange.CaptureComplete(outcome.State, captured);
             }
@@ -99,7 +99,7 @@ namespace Z0.Asm
             {
                 term.error($"Capture service failure");
                 term.error(e);
-                return none<CapturedCode>();
+                return none<X86ApiCapture>();
             }
         }
 
@@ -116,7 +116,7 @@ namespace Z0.Asm
             }
         }
 
-        public Option<CapturedCode> Capture(in CaptureExchange exchange, OpIdentity id, Delegate src)
+        public Option<X86ApiCapture> Capture(in CaptureExchange exchange, OpIdentity id, Delegate src)
         {
             try
             {
@@ -130,11 +130,11 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return none<CapturedCode>();
+                return none<X86ApiCapture>();
             }
         }
 
-        public Option<CapturedCode> Capture(in CaptureExchange exchange, MethodInfo src, params Type[] args)
+        public Option<X86ApiCapture> Capture(in CaptureExchange exchange, MethodInfo src, params Type[] args)
         {
             if(src.IsOpenGeneric())
             {
@@ -147,12 +147,12 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        static CapturedCode DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedEncoding bits, ExtractTermCode term)
-            => new CapturedCode(id, src, bits.ParseInput, bits.Encoded, term);
+        static X86ApiCapture DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedEncoding bits, ExtractTermCode term)
+            => new X86ApiCapture(id, src, bits.ParseInput, bits.Encoded, term);
 
         [MethodImpl(Inline)]
-        static CapturedCode DefineMember(OpIdentity id, Delegate src, Z0.ParsedEncoding bits, ExtractTermCode term)
-            => new CapturedCode(id, src.Method, bits.ParseInput, bits.Encoded, term);
+        static X86ApiCapture DefineMember(OpIdentity id, Delegate src, Z0.ParsedEncoding bits, ExtractTermCode term)
+            => new X86ApiCapture(id, src.Method, bits.ParseInput, bits.Encoded, term);
 
         [MethodImpl(Inline)]
         static ParsedBuffer capture(in CaptureExchange exchange, OpIdentity id, ref byte src)

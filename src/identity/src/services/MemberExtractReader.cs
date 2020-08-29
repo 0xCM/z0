@@ -27,7 +27,7 @@ namespace Z0
             return new ApiIndex(ops.HashTable, ops.Duplicates);
         }
 
-        public ExtractedCode[] Read(FilePath src)
+        public X86MemberExtract[] Read(FilePath src)
         {
             var report = ExtractReport.Load(src);
             if(report.IsNonEmpty)
@@ -45,16 +45,16 @@ namespace Z0
             return default;
         }
 
-        ExtractedCode[] CreateExtracts(IApiHost host, ExtractRecord[] records)
+        X86MemberExtract[] CreateExtracts(IApiHost host, ExtractRecord[] records)
         {
-            var data = new ExtractedCode[records.Length];
+            var data = new X86MemberExtract[records.Length];
             var index = IndexApi(MemberLocator.locate(host));
-            Span<ExtractedCode> extracts = data;
+            Span<X86MemberExtract> extracts = data;
             for(var i = 0; i<records.Length; i++)
             {
                 ref readonly var record = ref skip(extracts,i);
                 var member = index.Lookup(record.Id);
-                seek(extracts,i) = member ? new ExtractedCode(member.Value, record.Encoded) : ExtractedCode.Empty;
+                seek(extracts,i) = member ? new X86MemberExtract(member.Value, record.Encoded) : X86MemberExtract.Empty;
             }
             return data;
         }

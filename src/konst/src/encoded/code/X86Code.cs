@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source with a known (nonzero) location
     /// </summary>
-    public readonly struct LocatedCode : ILocatedCode<LocatedCode,BinaryCode>
+    public readonly struct X86Code : ILocatedCode<X86Code,BinaryCode>
     {
         /// <summary>
         /// The head of the memory location from which the data originated
@@ -64,34 +64,34 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator byte[](LocatedCode src)
+        public static implicit operator byte[](X86Code src)
             => src.Encoded;
 
         [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(LocatedCode src)
+        public static implicit operator BinaryCode(X86Code src)
             => src.Encoded;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(LocatedCode src)
+        public static implicit operator ReadOnlySpan<byte>(X86Code src)
             => src.Encoded;
 
         [MethodImpl(Inline)]
-        public static bool operator==(LocatedCode a, LocatedCode b)
+        public static bool operator==(X86Code a, X86Code b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator!=(LocatedCode a, LocatedCode b)
+        public static bool operator!=(X86Code a, X86Code b)
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        public LocatedCode(MemoryAddress src, byte[] data)
+        public X86Code(MemoryAddress src, byte[] data)
         {
             Address = z.insist(src, x => x.IsNonEmpty);
             Encoded = new BinaryCode(z.insist(data));
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(LocatedCode src)
+        public bool Equals(X86Code src)
             => Encoded.Equals(src.Encoded);
 
         public string Format()
@@ -105,7 +105,7 @@ namespace Z0
             => src is BinaryCode encoded && Equals(encoded);
 
         [MethodImpl(Inline)]
-        LocatedCode(ulong zero)
+        X86Code(ulong zero)
         {
             Address = zero;
             Encoded = Array.Empty<byte>();
@@ -117,7 +117,7 @@ namespace Z0
             get => (Address, Address + (MemoryAddress)Encoded.Length);
         }
 
-        public static LocatedCode Empty
-            => new LocatedCode(0);
+        public static X86Code Empty
+            => new X86Code(0);
     }
 }

@@ -56,20 +56,20 @@ namespace Z0
             return dstLen <= 0 ? src.Length : dstLen;
         }
 
-        LocatedCode Locate(MemoryAddress address, byte[] src, int cut = 0)
+        X86Code Locate(MemoryAddress address, byte[] src, int cut = 0)
         {
             if(cut == 0)
-                return new LocatedCode(address, src);
+                return new X86Code(address, src);
             else
             {
                 Span<byte> data = src;
                 var len = CalcLength(data, cut, 0xC3);
                 var keep = data.Slice(0, len);
-                return new LocatedCode(address, keep.ToArray());
+                return new X86Code(address, keep.ToArray());
             }
         }
 
-        public ExtractParseResult Parse(ExtractedCode src, int seq)
+        public ExtractParseResult Parse(X86MemberExtract src, int seq)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace Z0
                 if(term != ExtractTermCode.Fail)
                 {
                     var code = Locate(src.Encoded.Address, parser.Parsed, term == ExtractTermCode.CTC_Zx7 ? Zx7Cut : 0);
-                    return new ExtractParseResult(new ParsedExtraction(src, seq, term, code));
+                    return new ExtractParseResult(new X86MemberRefinement(src, seq, term, code));
                 }
                 else
                     return ExtractParseResult.FromFailure(new ExtractParseFailure(src, seq, term));
@@ -92,9 +92,9 @@ namespace Z0
             }
         }
 
-        public ExtractParseResults Parse(ExtractedCode[] src)
+        public ExtractParseResults Parse(X86MemberExtract[] src)
         {
-            var parsed = list<ParsedExtraction>(src.Length);
+            var parsed = list<X86MemberRefinement>(src.Length);
             var failed = list<ExtractParseFailure>();
             for(var i=0; i<src.Length; i++)
             {

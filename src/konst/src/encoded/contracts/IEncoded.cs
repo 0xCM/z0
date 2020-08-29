@@ -6,7 +6,12 @@ namespace Z0
 {
     using System;
 
-    public interface IEncoded<F> : IEquatable<F>, IMeasured, ITextual
+    public interface IEncoded
+    {
+        BinaryCode Encoded  => BinaryCode.Empty;
+    }
+
+    public interface IEncoded<F> : IEncoded, IEquatable<F>, IMeasured, ITextual
         where F : struct, IEncoded<F>
     {
 
@@ -16,8 +21,8 @@ namespace Z0
         where F : struct, IEncoded<F,C>
     {
         /// <summary>
-        /// The encoded data, likely in bytes
+        /// The encoded data
         /// </summary>
-        C Encoded {get;}
+        new C Encoded {get;}
     }
 }

@@ -44,7 +44,7 @@ namespace Z0
             StreamOut.Dispose();
         }
 
-        public static IdentifiedCode[] save(ApiHostUri host, ParsedExtraction[] src, FilePath dst)
+        public static IdentifiedCode[] save(ApiHostUri host, X86MemberRefinement[] src, FilePath dst)
         {
             using var writer = new IdentifiedCodeWriter(dst);
             var data = src.Map(x => new IdentifiedCode(x.Address, x.OpUri, x.Encoded.Encoded));

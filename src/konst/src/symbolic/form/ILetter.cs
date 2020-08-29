@@ -3,25 +3,44 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
-    
+
+    /// <summary>
+    /// Characterizes a letter
+    /// </summary>
     public interface ILetter : ITextual
     {
-        AsciLetter Symbol {get;}        
+        /// <summary>
+        /// The unicode character representation
+        /// </summary>
+        char Character {get;}
+    }
 
-        AsciLetterCode Code
-             => (AsciLetterCode)Symbol;
+    /// <summary>
+    /// Characterizes a letter
+    /// </summary>
+    /// <typeparam name="S"></typeparam>
+    /// <typeparam name="C"></typeparam>
+    public interface ILetter<S,C> : ILetter
+        where S : unmanaged
+        where C : unmanaged
+    {
+        S Symbol {get;}
 
-        char Character
-             => (char)Symbol;
+        C Code {get;}
+
+        char ILetter.Character
+             => z.c16(Code);
 
         string ITextual.Format()
             => Character.ToString();
     }
 
-    public interface ILetter<L> : ILetter, IEquatable<L>
-        where L : unmanaged, ILetter<L>
+    public interface ILetter<L,S,C> : ILetter<S,C>, IEquatable<L>
+        where L : unmanaged, ILetter<L,S,C>
+        where S : unmanaged
+        where C : unmanaged
     {
 
     }

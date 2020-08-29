@@ -22,31 +22,31 @@ namespace Z0
         /// <summary>
         /// The host-owned code
         /// </summary>
-        public readonly MemberCode[] Data;
-        
+        public readonly X86ApiCode[] Data;
+
         [MethodImpl(Inline)]
-        public EncodedMembers(ApiHostUri id, MemberCode[] code)
+        public EncodedMembers(ApiHostUri id, X86ApiCode[] code)
         {
             Host = id;
             Data = code.OrderBy(x => x.Address);
         }
 
         [MethodImpl(Inline)]
-        public ref readonly MemberCode Cell(uint index)
+        public ref readonly X86ApiCode Cell(uint index)
             => ref Data[index];
 
-        public ref readonly MemberCode this[int index]  
+        public ref readonly X86ApiCode this[int index]
         {
-             [MethodImpl(Inline)] 
+             [MethodImpl(Inline)]
              get => ref Cell((uint)index);
         }
 
         /// <summary>
         /// The number of collected functions
         /// </summary>
-        public int Length 
-        { 
-            [MethodImpl(Inline)] 
+        public int Length
+        {
+            [MethodImpl(Inline)]
             get => Data.Length;
         }
     }

@@ -8,7 +8,7 @@ namespace Z0
     /// Characterizes a service that consumes raw extract bytes and emits, hopefully,
     /// a sequence of bytes that defines member content exactly, with no more nor less
     /// bits than needed
-    /// </summary>    
+    /// </summary>
     public interface IExtractionParser
     {
         /// <summary>
@@ -16,13 +16,13 @@ namespace Z0
         /// </summary>
         /// <param name="src"></param>
         /// <param name="seq"></param>
-        ExtractParseResult Parse(ExtractedCode src, int seq);
+        ExtractParseResult Parse(X86MemberExtract src, int seq);
 
         /// <summary>
         /// Parses an extract sequence, returning a comprehensive result set that includes
         /// outcomes of successful parse operations and any unfortunate failures
         /// </summary>
         /// <param name="src">The source extracts</param>
-        ExtractParseResults Parse(ExtractedCode[] src);
+        ExtractParseResults Parse(X86MemberExtract[] src);
     }
 }

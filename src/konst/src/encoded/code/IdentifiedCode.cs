@@ -30,6 +30,10 @@ namespace Z0
         public readonly BinaryCode Code;
 
         [MethodImpl(Inline)]
+        public static implicit operator BinaryCode(IdentifiedCode src)
+            => src.Code;
+
+        [MethodImpl(Inline)]
         public IdentifiedCode(MemoryAddress @base, OpUri uri, BinaryCode src)
         {
             Base = @base;

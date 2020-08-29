@@ -41,7 +41,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Option<CapturedCode> Capture(MethodInfo src)
+        public Option<X86ApiCapture> Capture(MethodInfo src)
             => Service.Capture(z.insist(src).Identify(), src);
 
         [MethodImpl(Inline)]
@@ -49,7 +49,7 @@ namespace Z0
             => Service.Capture(src);
 
         [MethodImpl(Inline)]
-        public Option<CapturedCode> Capture(ApiHostUri hos, MethodInfo src)
+        public Option<X86ApiCapture> Capture(ApiHostUri hos, MethodInfo src)
             => Service.Capture(z.insist(src).Identify(),src);
 
         public void Dispose()

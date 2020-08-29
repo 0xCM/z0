@@ -3,21 +3,21 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-        
+
     /// <summary>
     /// Encapsulates a contiguous instruction sequence along with the captured bits
     /// </summary>
-    public readonly struct AsmFxBlock 
+    public readonly struct AsmFxBlock
     {
         /// <summary>
         /// Encoded assembly
         /// </summary>
-        public readonly MemberCode Encoded;
+        public readonly X86ApiCode Encoded;
 
         /// <summary>
         /// The decoded instructions
@@ -30,19 +30,19 @@ namespace Z0.Asm
         public readonly ExtractTermCode TermCode;
 
         [MethodImpl(Inline)]
-        public AsmFxBlock(MemberCode encoded, Instruction[] decoded, ExtractTermCode term)
+        public AsmFxBlock(X86ApiCode encoded, Instruction[] decoded, ExtractTermCode term)
         {
             Encoded = encoded;
             Decoded = decoded;
             TermCode = term;
         }
 
-        public MemoryAddress BaseAddress 
+        public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
             get => Encoded.Address;
         }
-        
+
         /// <summary>
         /// Queries/Manipulates an index-identified instruction
         /// </summary>
@@ -50,6 +50,6 @@ namespace Z0.Asm
             => ref Decoded[i];
 
         public int InstructionCount
-            => Decoded.Length;     
+            => Decoded.Length;
     }
 }

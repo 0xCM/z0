@@ -35,14 +35,14 @@ namespace Z0.Asm
         IPartCapturePaths CaptureArchive(FolderPath root)
             => Z0.Archives.capture(root, null, null);
 
-        void WriteAsm(CapturedCode capture, StreamWriter dst)
+        void WriteAsm(X86ApiCapture capture, StreamWriter dst)
         {
             var asm = Decoder.Decode(capture).Require();
             var formatted = Formatter.FormatFunction(asm);
             dst.Write(formatted);
         }
 
-        void WriteAsm(CapturedCode[] src, StreamWriter dst)
+        void WriteAsm(X86ApiCapture[] src, StreamWriter dst)
         {
             for(var i=0; i<src.Length; i++)
                 WriteAsm(src[i], dst);

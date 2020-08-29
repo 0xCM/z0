@@ -11,8 +11,8 @@ namespace Z0
     public readonly struct EncodedParts : IEncodedParts
     {
         readonly EncodedMemories Memories;
-        
-        readonly UriLocations UriLocations; 
+
+        readonly UriLocations UriLocations;
 
         readonly HostedCode HostCode;
 
@@ -25,16 +25,16 @@ namespace Z0
             UriLocations = memuri;
             HostCode = hostcode;
         }
-        
+
         /// <summary>
         /// The number of indexed functions
         /// </summary>
-        public int EntryCount 
+        public int EntryCount
         {
             [MethodImpl(Inline)]
             get => Memories.Count;
         }
-        
+
         /// <summary>
         /// The base addresses that identify entries in the index
         /// </summary>
@@ -47,7 +47,7 @@ namespace Z0
         /// <summary>
         /// All indexed code
         /// </summary>
-        public MemberCode[] MemberCode
+        public X86ApiCode[] MemberCode
         {
             [MethodImpl(Inline)]
             get => Memories.Encoded;
@@ -56,7 +56,7 @@ namespace Z0
         /// <summary>
         /// Operation idenfiers, each of which are associated with one or more code blocks
         /// </summary>
-        public OpUri[] Identities 
+        public OpUri[] Identities
         {
             [MethodImpl(Inline)]
             get => UriLocations.Identities;
@@ -72,7 +72,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public MemberCode Code(MemoryAddress location)
+        public X86ApiCode Code(MemoryAddress location)
             => Memories[location];
 
         [MethodImpl(Inline)]
@@ -83,7 +83,7 @@ namespace Z0
         public PartCode CodeSet(PartId id)
             => Encoded.index(id, Hosts.Map(CodeSet));
 
-        public MemberCode this[MemoryAddress location]
+        public X86ApiCode this[MemoryAddress location]
         {
             [MethodImpl(Inline)]
             get => Code(location);

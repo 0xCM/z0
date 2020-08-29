@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -13,7 +13,7 @@ namespace Z0.Asm
     /// Describes the assembly encoding of a member api
     /// </summary>
     public class AsmRoutine
-    {           
+    {
         /// <summary>
         /// The defining operation uri
         /// </summary>
@@ -28,16 +28,16 @@ namespace Z0.Asm
         /// The source member signature
         /// </summary>
         public string OpSig {get;}
-        
+
         /// <summary>
         /// The function encoding
         /// </summary>
-        public MemberCode Code {get;}
+        public X86ApiCode Code {get;}
 
         /// <summary>
         /// The encoded instructions
         /// </summary>
-        public AsmFxList Instructions {get;}            
+        public AsmFxList Instructions {get;}
 
         /// <summary>
         /// Specifies the reason for capture termination
@@ -45,13 +45,13 @@ namespace Z0.Asm
         public ExtractTermCode TermCode {get;}
 
         [MethodImpl(Inline)]
-        public AsmRoutine(OpUri uri, string sig, MemberCode code, ExtractTermCode term, AsmFxList instructions)
+        public AsmRoutine(OpUri uri, string sig, X86ApiCode code, ExtractTermCode term, AsmFxList instructions)
         {
             Uri = uri;
             OpId = uri.OpId;
             OpSig = sig;
             Instructions = instructions;
-            Code = code;            
+            Code = code;
             TermCode =term;
         }
 
@@ -70,17 +70,17 @@ namespace Z0.Asm
         public int InstructionCount
         {
             [MethodImpl(Inline)]
-            get => Instructions.Length;            
+            get => Instructions.Length;
         }
 
-        public bool IsEmpty 
+        public bool IsEmpty
             => InstructionCount == 0;
 
-        public bool IsNonEmpty 
+        public bool IsNonEmpty
             => InstructionCount != 0;
 
 
-        public static AsmRoutine Empty 
-            => new AsmRoutine(OpUri.Empty, string.Empty, MemberCode.Empty, 0, AsmFxList.Empty);
+        public static AsmRoutine Empty
+            => new AsmRoutine(OpUri.Empty, string.Empty, X86ApiCode.Empty, 0, AsmFxList.Empty);
     }
 }

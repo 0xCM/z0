@@ -20,11 +20,11 @@ namespace Z0
             var count = rows.Length;
             if(count == 0)
                 return sys.empty<MemberParseRecord>();
-            
+
             var buffer = alloc<MemberParseRecord>(count - 1);
             ref var dst =  ref first(span(buffer));
             ref readonly var src = ref first(span(rows));
-            
+
             for(var i = 1u; i<count; i++)
             {
                 var j=0u;
@@ -41,19 +41,19 @@ namespace Z0
                 var term = Enums.Parse(fields[j++], ExtractTermCode.None);
                 var uri = OpUriParser.Service.Parse(fields[j++]);
                 var sig = fields[j++];
-                var data = new LocatedCode(address, dataParser.ParseData(fields[j++], sys.empty<byte>()));
+                var data = new X86Code(address, dataParser.ParseData(fields[j++], sys.empty<byte>()));
                 seek(dst,i) = new R(
-                    Seq: seq, 
-                    SourceSequence: srcSeq, 
-                    Address: address, 
-                    Length: len, 
+                    Seq: seq,
+                    SourceSequence: srcSeq,
+                    Address: address,
+                    Length: len,
                     TermCode: default,
-                    Uri:uri.Value, 
-                    OpSig:sig, 
+                    Uri:uri.Value,
+                    OpSig:sig,
                     Data:data
                 );
-            }                        
+            }
             return buffer;
-        }     
+        }
     }
 }

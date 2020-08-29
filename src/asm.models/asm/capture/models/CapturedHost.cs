@@ -18,14 +18,14 @@ namespace Z0
     {
         public readonly ApiHostUri Host;
 
-        public readonly ExtractedCode[] Extracts;
+        public readonly X86MemberExtract[] Extracts;
 
-        public readonly ParsedExtraction[] Parsed;
-        
+        public readonly X86MemberRefinement[] Parsed;
+
         public readonly AsmRoutine[] Decoded;
-        
+
         [MethodImpl(Inline)]
-        public CapturedHost(ApiHostUri host, ExtractedCode[] extracts, ParsedExtraction[] parsed, AsmRoutine[] decoded)
+        public CapturedHost(ApiHostUri host, X86MemberExtract[] extracts, X86MemberRefinement[] parsed, AsmRoutine[] decoded)
         {
             Host = host;
             Extracts = extracts;

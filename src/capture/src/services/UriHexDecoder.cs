@@ -5,12 +5,12 @@
 namespace Z0.Asm
 {
     using System;
-    
+
     using static Konst;
     using static z;
-    
+
     public readonly struct UriHexDecoder
-    {        
+    {
         public static int decode(ReadOnlySpan<IdentifiedCode> src, Span<AsmInstructions> dst)
         {
             var decoder = Capture.Services.RoutineDecoder();
@@ -35,11 +35,11 @@ namespace Z0.Asm
             decode(src, dst);
             return dst;
         }
-        
+
         public static Option<AsmInstructions> decode(IdentifiedCode src)
             => Capture.DefaultDecoder.Decode(src);
 
-        public static Option<AsmFxList> decode(MemberCode src)
-            => Capture.DefaultDecoder.Decode(src.Encoded);      
+        public static Option<AsmFxList> decode(X86ApiCode src)
+            => Capture.DefaultDecoder.Decode(src.Encoded);
     }
 }

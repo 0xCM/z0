@@ -35,19 +35,19 @@ namespace Z0
             => _Buffer = buffer;
 
         [MethodImpl(Inline)]
-        public ExtractedCode Extract(ApiMember src)
+        public X86MemberExtract Extract(ApiMember src)
             => MemberExtraction.extract(src, Buffer);
 
         [MethodImpl(Inline)]
-        public ExtractedCode[] Extract(ApiMember[] members)
+        public X86MemberExtract[] Extract(ApiMember[] members)
             => MemberExtraction.extract(members, Buffer);
 
         [MethodImpl(Inline)]
-        public ExtractedCode[] Extract(IApiHost src, IWfBroker broker)
+        public X86MemberExtract[] Extract(IApiHost src, IWfBroker broker)
             => MemberExtraction.extract(ApiMemberJit.jit(src), Buffer);
 
         [MethodImpl(Inline)]
-        public ExtractedCode[] Extract(IApiHost[] src, IWfBroker broker)
+        public X86MemberExtract[] Extract(IApiHost[] src, IWfBroker broker)
             => MemberExtraction.extract(ApiMemberJit.jit(src, broker.Sink), Buffer);
     }
 }

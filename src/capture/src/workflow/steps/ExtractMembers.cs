@@ -17,7 +17,7 @@ namespace Z0
         readonly CorrelationToken Ct;
 
         readonly WfCaptureState Wf;
-                
+
         [MethodImpl(Inline)]
         public ExtractMembers(WfCaptureState state, CorrelationToken ct)
         {
@@ -31,19 +31,19 @@ namespace Z0
             Wf.Finished(StepName, Ct);
         }
 
-        ExtractedCode[] Extract(ICaptureContext context, IApiHost host)
-        {            
+        X86MemberExtract[] Extract(ICaptureContext context, IApiHost host)
+        {
             var members = ApiMemberJit.jit(host);
-            context.Raise(new MembersLocated(host.Uri, members));            
+            context.Raise(new MembersLocated(host.Uri, members));
             return Extractor.Extract(members);
         }
 
-        public ExtractedCode[] Extract(IApiHost host)
+        public X86MemberExtract[] Extract(IApiHost host)
         {
-            var extracted = sys.empty<ExtractedCode>();            
+            var extracted = sys.empty<X86MemberExtract>();
             try
             {
-                extracted = Extract(Wf.CWf.Context ,host); 
+                extracted = Extract(Wf.CWf.Context ,host);
                 Wf.Raise(new ExtractedMembers(host.Uri, extracted.Length));
             }
             catch(Exception e)
@@ -52,10 +52,10 @@ namespace Z0
             }
             return extracted;
         }
-        
-        public ExtractedCode[] Extract(IApiHost[] hosts)
+
+        public X86MemberExtract[] Extract(IApiHost[] hosts)
         {
-            var extracted = sys.empty<ExtractedCode>();            
+            var extracted = sys.empty<X86MemberExtract>();
             try
             {
                 var members = ApiMemberJit.jit(hosts, Wf.WfEventSink);
@@ -65,11 +65,11 @@ namespace Z0
             catch(Exception e)
             {
                 Wf.Error(StepName, e, Ct);
-                return sys.empty<ExtractedCode>();
-            }            
+                return sys.empty<X86MemberExtract>();
+            }
         }
 
         static MemberExtractor Extractor
-            => MemberExtraction.service(Extractors.DefaultBufferLength);    
+            => MemberExtraction.service(Extractors.DefaultBufferLength);
     }
 }

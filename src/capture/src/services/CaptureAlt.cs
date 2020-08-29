@@ -15,17 +15,17 @@ namespace Z0
     [ApiHost]
     public readonly unsafe struct CaptureAlt
     {
-        public static CapturedCode[] capture(IdentifiedMethod[] src)
+        public static X86ApiCapture[] capture(IdentifiedMethod[] src)
             => capture(src, sys.alloc<byte>(Pow2.T14));
 
-        public static CapturedCode[] capture(IdentifiedMethod[] src, Span<byte> buffer)
+        public static X86ApiCapture[] capture(IdentifiedMethod[] src, Span<byte> buffer)
         {
             var count = src.Length;
             var located = sys.alloc<LocatedMethod>(count);
             for(var i=0; i<count; i++)
                 located[i] = FunctionDynamic.jit(src[i].Method);
 
-            var captured = sys.alloc<CapturedCode>(count);
+            var captured = sys.alloc<X86ApiCapture>(count);
 
             for(var i=0; i<count; i++)
             {
@@ -41,29 +41,29 @@ namespace Z0
         {
             var summary = capture(buffer, src.Id, ApiMemberJit.jit(src));
             var size = summary.Data.Length;
-            var code = new CapturedCode(src.Id, src.Method, summary.Encoded.ParseInput, summary.Encoded.Encoded, summary.Outcome.TermCode);
+            var code = new X86ApiCapture(src.Id, src.Method, summary.Encoded.ParseInput, summary.Encoded.Encoded, summary.Outcome.TermCode);
             return new CapturedMember(src, code);
         }
 
-        public static CapturedCode capture(LocatedMethod located, Span<byte> buffer)
+        public static X86ApiCapture capture(LocatedMethod located, Span<byte> buffer)
         {
             var summary = capture(buffer, located.Id, located.Address);
             return DefineMember(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
         }
 
-        public static CapturedCode capture(IdentifiedMethod src, Span<byte> buffer)
+        public static X86ApiCapture capture(IdentifiedMethod src, Span<byte> buffer)
         {
             var located = FunctionDynamic.jit(src.Method);
             var summary = capture(buffer, src.Id, located.Address);
             return DefineMember(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
         }
 
-        public static CapturedCode capture(IdentifiedMethod src)
+        public static X86ApiCapture capture(IdentifiedMethod src)
             => capture(src, sys.alloc<byte>(Pow2.T14));
 
         [MethodImpl(Inline)]
-        static CapturedCode DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedEncoding bits, ExtractTermCode term)
-            => new CapturedCode(id, src, bits.ParseInput, bits.Encoded, term);
+        static X86ApiCapture DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedEncoding bits, ExtractTermCode term)
+            => new X86ApiCapture(id, src, bits.ParseInput, bits.Encoded, term);
 
         [MethodImpl(Inline)]
         static CapturedOperation capture(Span<byte> buffer, OpIdentity id, MemoryAddress src)

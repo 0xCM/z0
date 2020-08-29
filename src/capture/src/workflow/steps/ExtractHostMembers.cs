@@ -22,7 +22,7 @@ namespace Z0
 
         readonly IApiHost Source;
 
-        public ExtractedCode[] Extractions;
+        public X86MemberExtract[] Extractions;
 
         [MethodImpl(Inline)]
         internal ExtractHostMembers(WfCaptureState state, IApiHost host, IPartCapturePaths dst, CorrelationToken ct)
@@ -33,7 +33,7 @@ namespace Z0
             Host = host.Uri;
             Source = host;
 
-            Extractions = new ExtractedCode[0]{};
+            Extractions = new X86MemberExtract[0]{};
 
             Wf.Created(StepName, Ct);
         }

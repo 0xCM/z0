@@ -14,14 +14,14 @@ namespace Z0
     using R = MemberParseRecord;
 
     public class MemberParseReport : Report<MemberParseReport,F,R>
-    {             
+    {
         public ApiHostUri ApiHost {get;}
 
         [MethodImpl(Inline)]
         public static MemberParseReport Create(ApiHostUri host, params R[] records)
             => new MemberParseReport(host, records);
 
-        public static R Record(in ParsedExtraction extract, int seq)
+        public static R Record(in X86MemberRefinement extract, int seq)
             => new R
                 (
                     Seq : seq,
@@ -34,29 +34,29 @@ namespace Z0
                     Data : extract.Encoded
                 );
 
-        public static MemberParseReport Create(ApiHostUri host, ParsedExtraction[] extracts)
+        public static MemberParseReport Create(ApiHostUri host, X86MemberRefinement[] extracts)
         {
             var count = extracts.Length;
-            var buffer = alloc<R>(count);            
+            var buffer = alloc<R>(count);
             var dst = span(buffer);
             var src = span(extracts);
 
             for(var i=0; i<count; i++)
             {
                 ref readonly var extract = ref skip(src,i);
-                seek(dst,i) = Record(extract, i);                
+                seek(dst,i) = Record(extract, i);
             }
-            
+
             return new MemberParseReport(host, buffer);
         }
 
         public MemberParseReport(){}
-        
+
         [MethodImpl(Inline)]
         internal MemberParseReport(ApiHostUri host, params R[] records)
             : base(records)
         {
             ApiHost = host;
         }
-    }    
+    }
 }

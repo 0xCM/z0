@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a uri-identified encoded block with a known base address
     /// </summary>
-    public readonly struct MemberCode : IMemberCode<MemberCode,LocatedCode>
+    public readonly struct X86ApiCode : IMemberCode<X86ApiCode,X86Code>
     {
         /// <summary>
         /// The source member identity
@@ -22,17 +22,17 @@ namespace Z0
         /// <summary>
         /// The data, located
         /// </summary>
-        public LocatedCode Encoded {get;}
+        public X86Code Encoded {get;}
 
         [MethodImpl(Inline)]
-        public MemberCode(OpUri uri, MemoryAddress address, BinaryCode encoded)
+        public X86ApiCode(OpUri uri, MemoryAddress address, BinaryCode encoded)
         {
             OpUri = uri;
-            Encoded = new LocatedCode(address,encoded);
+            Encoded = new X86Code(address,encoded);
         }
 
         [MethodImpl(Inline)]
-        public MemberCode(OpUri uri, LocatedCode code)
+        public X86ApiCode(OpUri uri, X86Code code)
         {
             OpUri = uri;
             Encoded = code;
@@ -81,19 +81,19 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<byte>(MemberCode code)
+        public static implicit operator ReadOnlySpan<byte>(X86ApiCode code)
             => code.Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(MemberCode src)
+        public static implicit operator BinaryCode(X86ApiCode src)
             => src.Encoded.Encoded;
 
         [MethodImpl(Inline)]
-        public static implicit operator LocatedCode(MemberCode src)
+        public static implicit operator X86Code(X86ApiCode src)
             => src.Encoded;
 
         [MethodImpl(Inline)]
-        public static implicit operator IdentifiedCode(MemberCode src)
+        public static implicit operator IdentifiedCode(X86ApiCode src)
             => new IdentifiedCode(src.Address, src.OpUri, src.Encoded);
 
 
@@ -122,16 +122,16 @@ namespace Z0
         public string Format()
             => Format(80);
 
-        public bool Equals(MemberCode src)
+        public bool Equals(X86ApiCode src)
             => Encoded.Equals(src.Encoded);
 
         public override int GetHashCode()
             => OpUri.GetHashCode();
 
         public override bool Equals(object src)
-            => src is MemberCode x && Equals(x);
+            => src is X86ApiCode x && Equals(x);
 
-        public static MemberCode Empty
-            => new MemberCode(OpUri.Empty, LocatedCode.Empty);
+        public static X86ApiCode Empty
+            => new X86ApiCode(OpUri.Empty, X86Code.Empty);
     }
 }

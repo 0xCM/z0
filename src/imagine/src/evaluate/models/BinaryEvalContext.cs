@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly ref struct BinaryEvalContext<T>
         where T : unmanaged
-    {            
+    {
         public readonly EvalContext Context;
 
         public readonly BinaryEvaluations<T> Target;
@@ -24,13 +24,13 @@ namespace Z0
             Target = dst;
         }
 
-        public Pairs<T> Input 
+        public Pairs<T> Input
         {
             [MethodImpl(Inline)]
             get => Target.Source;
         }
 
-        public PairEvalOutcomes<T> Outcomes 
+        public PairEvalOutcomes<T> Outcomes
         {
             [MethodImpl(Inline)]
             get => Target.Target;
@@ -41,14 +41,14 @@ namespace Z0
 
         public BufferTokens Buffers
             => Context.Buffers;
-        
-        public ApiCode ApiCode
+
+        public X86ApiMember ApiCode
             => Context.ApiCode;
 
-        public ApiMember Member 
+        public ApiMember Member
             => Context.Member;
 
-        public IdentifiedCode ApiBits 
-            => Context.ApiBits;            
+        public IdentifiedCode ApiBits
+            => Context.ApiBits;
     }
 }

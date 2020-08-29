@@ -39,7 +39,7 @@ namespace Z0
 
         public readonly string OpSig;
 
-        public readonly LocatedCode Data;
+        public readonly X86Code Data;
 
         const int FieldCount = 6;
 
@@ -56,11 +56,11 @@ namespace Z0
             var uri = OpUriParser.Service.Parse(fields[3]).ValueOrDefault(OpUri.Empty);
             var sig = fields[4];
             var data = fields[5].SplitClean(HexFormatSpecs.DataDelimiter).Select(Parsers.hex(true).Succeed).ToArray();
-            var extract = new LocatedCode(address, data);
+            var extract = new X86Code(address, data);
             return new R(seq, address, len, uri, sig, extract);
         }
 
-        public ExtractRecord(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, LocatedCode Data)
+        public ExtractRecord(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, X86Code Data)
         {
             this.Sequence = Sequence;
             this.Address = Address;
@@ -83,7 +83,7 @@ namespace Z0
         }
 
         public static R Empty
-            => new R(0, MemoryAddress.Empty, 0, OpUri.Empty, EmptyString, LocatedCode.Empty);
+            => new R(0, MemoryAddress.Empty, 0, OpUri.Empty, EmptyString, X86Code.Empty);
 
     }
 }

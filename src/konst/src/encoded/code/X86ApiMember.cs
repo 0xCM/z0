@@ -12,74 +12,75 @@ namespace Z0
 
     /// <summary>
     /// Pairs an api member with the executable code derived from that member
-    /// </summary>    
-    public readonly struct ApiCode : IIdentifiedCode<ApiCode,IdentifiedCode>
+    /// </summary>
+    public readonly struct X86ApiMember : IIdentifiedCode<X86ApiMember,IdentifiedCode>
     {
         public ApiMember Member {get;}
 
         public IdentifiedCode Encoded {get;}
 
-        public OpUri OpUri 
+        public OpUri OpUri
         {
-            [MethodImpl(Inline)] 
-            get => Encoded.OpUri;        
+            [MethodImpl(Inline)]
+            get => Encoded.OpUri;
         }
-        
-        public byte[] Data 
-        { 
-            [MethodImpl(Inline)] 
+
+        public byte[] Data
+        {
+            [MethodImpl(Inline)]
             get => Encoded.Data;
         }
-        
-        public int Length 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.Length; 
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.Length;
         }
 
-        public ref readonly byte this[int index] 
-        { 
-            [MethodImpl(Inline)] 
-            get => ref Encoded[index]; 
+        public ref readonly byte this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Encoded[index];
         }
 
-        public bool IsEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.IsEmpty; 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.IsEmpty;
         }
 
-        public bool IsNonEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.IsNonEmpty; 
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.IsNonEmpty;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(ApiCode src)
+        public static implicit operator BinaryCode(X86ApiMember src)
             => src.Encoded.Encoded;
 
         [MethodImpl(Inline)]
-        public ApiCode(ApiMember member, IdentifiedCode code)
+        public X86ApiMember(ApiMember member, IdentifiedCode code)
         {
             Member = member;
             Encoded = code;
         }
 
         [MethodImpl(Inline)]
-        public ApiCode(ApiMember member, BinaryCode code)
+        public X86ApiMember(ApiMember member, BinaryCode code)
         {
             Member = member;
             Encoded = new IdentifiedCode(member.Address, member.OpUri, code);
         }
 
+
         public OpKindId KindId
              => Member.KindId;
-        
-        public OpIdentity Id  
+
+        public OpIdentity Id
             => Member.Id;
-        
-        public OpUri Uri  
+
+        public OpUri Uri
             => Member.OpUri;
 
         public ApiHostUri Host
@@ -88,14 +89,17 @@ namespace Z0
         public MethodInfo Method
              => Member.Method;
 
-        public bool Equals(ApiCode src)
+        BinaryCode IEncoded.Encoded
+            => Encoded;
+
+        public bool Equals(X86ApiMember src)
             => Encoded.Equals(src.Encoded);
 
         public override int GetHashCode()
             => Uri.GetHashCode();
 
         public override bool Equals(object src)
-            => src is ApiCode m && Equals(m);        
+            => src is X86ApiMember m && Equals(m);
 
         public string Format(int uripad)
             => text.concat(Member.OpUri.Format().PadRight(uripad), Encoded.Format());
@@ -104,9 +108,9 @@ namespace Z0
             => Format(80);
 
         public override string ToString()
-            => Format();             
+            => Format();
 
-        public static ApiCode Empty 
-            => new ApiCode(ApiMember.Empty, BinaryCode.Empty);
+        public static X86ApiMember Empty
+            => new X86ApiMember(ApiMember.Empty, BinaryCode.Empty);
     }
 }

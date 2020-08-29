@@ -46,7 +46,7 @@ namespace Z0
 
         public readonly string OpSig;
 
-        public readonly LocatedCode Data;
+        public readonly X86Code Data;
 
         public const int FieldCount = 8;
 
@@ -54,7 +54,7 @@ namespace Z0
             => Seq;
 
         public static R Empty
-            => new R(0, 0, 0, 0, 0, OpUri.Empty, EmptyString, LocatedCode.Empty);
+            => new R(0, 0, 0, 0, 0, OpUri.Empty, EmptyString, X86Code.Empty);
 
 
 
@@ -81,7 +81,7 @@ namespace Z0
                 if(uri.Failed)
                     sys.@throw(uri.Reason);
                 var sig = fields[index++];
-                var data = new LocatedCode(address, dataParser.ParseData(fields[index++], Array.Empty<byte>()));
+                var data = new X86Code(address, dataParser.ParseData(fields[index++], Array.Empty<byte>()));
 
                 return ParseResult.Success(src, new R(
                     Seq: seq,
@@ -108,7 +108,7 @@ namespace Z0
             ExtractTermCode TermCode,
             OpUri Uri,
             string OpSig,
-            LocatedCode Data
+            X86Code Data
             )
         {
             this.Seq = Seq;

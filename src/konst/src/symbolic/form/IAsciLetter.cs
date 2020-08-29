@@ -4,11 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     /// <summary>
-    /// Defines service contract to support reading text-formatted encoded x86 asm data
+    /// Characterizes a type-level asci letter
     /// </summary>
-    public interface IMemberExtractReader
+    /// <typeparam name="L">The reification type</typeparam>
+   public interface IAsciLetter<L> : ILetter<L,AsciLetter,AsciLetterCode>
+        where L : unmanaged, IAsciLetter<L>
     {
-        X86MemberExtract[] Read(FilePath src);
+
     }
 }

@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public readonly struct BasedAsmFx : IAsmFxInfo<Instruction>
     {
-        public MemberCode Encoded {get;}
+        public X86ApiCode Encoded {get;}
 
         public OffsetSequence OffsetSeq {get;}
 
@@ -62,10 +62,10 @@ namespace Z0.Asm
             => Instruction.ByteLength;
 
         [MethodImpl(Inline)]
-        public static BasedAsmFx One(MemoryAddress @base, OffsetSequence offseq, Instruction fx, MemberCode encoded)
+        public static BasedAsmFx One(MemoryAddress @base, OffsetSequence offseq, Instruction fx, X86ApiCode encoded)
             => new BasedAsmFx(@base, offseq, fx, encoded);
 
-        public static BasedAsmFx[] Many(MemberCode code, Instruction[] src)
+        public static BasedAsmFx[] Many(X86ApiCode code, Instruction[] src)
         {
             var @base = code.Address;
             var offseq = OffsetSequence.Zero;
@@ -77,7 +77,7 @@ namespace Z0.Asm
                 var fx = src[i];
                 var data = z.span(code.Encoded.Data);
                 var slice = data.Slice((int)offseq.Offset, fx.ByteLength).ToArray();
-                var recoded = new MemberCode(code.OpUri, fx.IP, slice);
+                var recoded = new X86ApiCode(code.OpUri, fx.IP, slice);
                 dst[i] = One(@base, offseq, fx, recoded);
                 offseq = offseq.AccrueOffset((uint)fx.ByteLength);
             }
@@ -85,7 +85,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public BasedAsmFx(MemoryAddress @base, OffsetSequence offseq, Instruction fx, MemberCode encoded)
+        public BasedAsmFx(MemoryAddress @base, OffsetSequence offseq, Instruction fx, X86ApiCode encoded)
         {
             BaseAddress = @base;
             OffsetSeq = offseq;

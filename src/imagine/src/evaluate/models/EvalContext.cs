@@ -17,7 +17,7 @@ namespace Z0
                     => new UnaryEvalContext<T>(context, content);
 
         [MethodImpl(Inline)]
-        public static UnaryEvalContext<T> unary<T>(BufferTokens buffers, ApiCode code, in UnaryEvaluations<T> content)
+        public static UnaryEvalContext<T> unary<T>(BufferTokens buffers, X86ApiMember code, in UnaryEvaluations<T> content)
             where T : unmanaged
                 => unary<T>(new EvalContext(buffers,code), content);
 
@@ -27,31 +27,31 @@ namespace Z0
                 => new BinaryEvalContext<T>(context, content);
 
         [MethodImpl(Inline)]
-        public static BinaryEvalContext<T> binary<T>(BufferTokens buffers, ApiCode code, in BinaryEvaluations<T> content)
+        public static BinaryEvalContext<T> binary<T>(BufferTokens buffers, X86ApiMember code, in BinaryEvaluations<T> content)
             where T : unmanaged
                 => binary<T>(new EvalContext(buffers,code), content);
 
-        public readonly BufferTokens Buffers;        
+        public readonly BufferTokens Buffers;
 
-        public readonly ApiCode ApiCode;
+        public readonly X86ApiMember ApiCode;
 
-        public IdentifiedCode ApiBits 
-        { 
-            [MethodImpl(Inline)] 
+        public IdentifiedCode ApiBits
+        {
+            [MethodImpl(Inline)]
             get => ApiCode.Encoded;
         }
 
-        public ApiMember Member 
-        { 
-            [MethodImpl(Inline)] 
+        public ApiMember Member
+        {
+            [MethodImpl(Inline)]
             get =>  ApiCode.Member;
         }
 
         [MethodImpl(Inline)]
-        public EvalContext(BufferTokens buffers, ApiCode code)
+        public EvalContext(BufferTokens buffers, X86ApiMember code)
         {
             Buffers = buffers;
             ApiCode = code;
-        }        
+        }
     }
 }

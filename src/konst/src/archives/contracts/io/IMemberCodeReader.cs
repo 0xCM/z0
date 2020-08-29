@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Collections.Generic;
 
@@ -16,6 +16,6 @@ namespace Z0
         /// Reads the content of a source file
         /// </summary>
         /// <param name="src">The source file path</param>
-        IEnumerable<MemberCode> Read(FilePath src);
+        IEnumerable<X86ApiCode> Read(FilePath src);
     }
 }

@@ -15,12 +15,12 @@ namespace Z0
         [Op]
         public static EncodedPartBuilder builder()
             => new EncodedPartBuilder(
-                CodeAddress : z.dict<MemoryAddress,MemberCode>(),
+                CodeAddress : z.dict<MemoryAddress,X86ApiCode>(),
                 UriAddress : z.dict<MemoryAddress,OpUri>(),
-                CodeUri: z.dict<OpUri,MemberCode>());
+                CodeUri: z.dict<OpUri,X86ApiCode>());
 
         [MethodImpl(Inline), Op]
-        public static IdentifiedCodeIndex index(ApiHostUri host, IdentifiedCode[] code)                    
+        public static IdentifiedCodeIndex index(ApiHostUri host, IdentifiedCode[] code)
             => new IdentifiedCodeIndex(host,code);
 
         [MethodImpl(Inline), Op]
@@ -28,7 +28,7 @@ namespace Z0
             => new PartCode(part,src);
 
         [MethodImpl(Inline), Op]
-        public static EncodedMembers index(ApiHostUri id, MemberCode[] code)
-            => new EncodedMembers(id,code);     
+        public static EncodedMembers index(ApiHostUri id, X86ApiCode[] code)
+            => new EncodedMembers(id,code);
     }
 }

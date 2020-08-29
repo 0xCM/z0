@@ -20,7 +20,7 @@ namespace Z0
 
         readonly ApiHostUri Host;
 
-        readonly ExtractedCode[] Source;
+        readonly X86MemberExtract[] Source;
 
         readonly FilePath Target;
 
@@ -30,7 +30,7 @@ namespace Z0
             => Artifact;
 
         [MethodImpl(Inline)]
-        public EmitExtractReport(WfCaptureState wf, ApiHostUri host, ExtractedCode[] data, FilePath dst, CorrelationToken ct)
+        public EmitExtractReport(WfCaptureState wf, ApiHostUri host, X86MemberExtract[] data, FilePath dst, CorrelationToken ct)
         {
             Ct = ct;
             Wf = wf;

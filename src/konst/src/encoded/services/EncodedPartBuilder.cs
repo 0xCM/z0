@@ -12,15 +12,15 @@ namespace Z0
 
     public readonly struct EncodedPartBuilder
     {
-        internal readonly Dictionary<MemoryAddress,MemberCode> CodeAddress;
+        internal readonly Dictionary<MemoryAddress,X86ApiCode> CodeAddress;
 
         internal readonly Dictionary<MemoryAddress,OpUri> UriAddress;
 
-        internal readonly Dictionary<OpUri,MemberCode> CodeUri;
+        internal readonly Dictionary<OpUri,X86ApiCode> CodeUri;
 
         [MethodImpl(Inline)]
-        internal EncodedPartBuilder(Dictionary<MemoryAddress,MemberCode> CodeAddress, Dictionary<MemoryAddress,OpUri> UriAddress, Dictionary<OpUri,MemberCode> CodeUri)
-        {            
+        internal EncodedPartBuilder(Dictionary<MemoryAddress,X86ApiCode> CodeAddress, Dictionary<MemoryAddress,OpUri> UriAddress, Dictionary<OpUri,X86ApiCode> CodeUri)
+        {
             this.CodeAddress = CodeAddress;
             this.UriAddress = UriAddress;
             this.CodeUri = CodeUri;
@@ -29,12 +29,12 @@ namespace Z0
         public EncodedParts Freeze()
             => Encoded.freeze(this);
 
-        public bool Include(MemberCode src)
+        public bool Include(X86ApiCode src)
         {
             return CodeAddress.TryAdd(src.Address, src);
         }
 
-        public int Include(MemberCode[] src, ISink<MemberCode> duplicate)
+        public int Include(X86ApiCode[] src, ISink<X86ApiCode> duplicate)
         {
             var count = 0;
             for(var i=0; i<src.Length; i++)

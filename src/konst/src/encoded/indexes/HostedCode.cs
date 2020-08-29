@@ -11,10 +11,10 @@ namespace Z0
 
     using static Konst;
 
-    using KVP = System.Collections.Generic.Dictionary<ApiHostUri,MemberCode[]>;
+    using KVP = System.Collections.Generic.Dictionary<ApiHostUri,X86ApiCode[]>;
 
     public readonly struct HostedCode
-    {        
+    {
         public readonly PartId[] Parts;
 
         readonly KVP Data;
@@ -30,7 +30,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Data.Count;
-        }        
+        }
 
         public ApiHostUri[] Hosts
         {
@@ -38,13 +38,13 @@ namespace Z0
             get => Data.Keys.ToArray();
         }
 
-        public MemberCode[] this[ApiHostUri src]
+        public X86ApiCode[] this[ApiHostUri src]
         {
             [MethodImpl(Inline)]
             get => Data[src];
         }
 
-        public IEnumerable<MemberCode> Code
+        public IEnumerable<X86ApiCode> Code
         {
             get
             {
@@ -55,10 +55,10 @@ namespace Z0
                         yield return c;
                     }
                 }
-            }            
+            }
         }
-        
-        public static HostedCode Empty 
-            => new HostedCode(sys.empty<PartId>(), new KVP());        
-    }    
+
+        public static HostedCode Empty
+            => new HostedCode(sys.empty<PartId>(), new KVP());
+    }
 }

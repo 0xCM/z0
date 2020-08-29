@@ -16,7 +16,7 @@ namespace Z0
     /// Correlates operation identifiers and coded members
     /// </summary>
     [ApiHost]
-    public readonly struct ApiCodeIndex 
+    public readonly struct ApiCodeIndex
     {
         [Op]
         public static ApiCodeIndex create(ApiIndex members, OpIndex<IdentifiedCode> code)
@@ -24,19 +24,19 @@ namespace Z0
             var apicode = from pair in members.Intersect(code).Enumerated
                           let l = pair.Item1
                           let r = pair.Item2
-                          select new ApiCode(r.left, r.right);              
+                          select new X86ApiMember(r.left, r.right);
             return new ApiCodeIndex(OpIndex.create(apicode.Select(c => (c.Id, c))));
         }
 
-        readonly IReadOnlyDictionary<OpIdentity,ApiCode> Hashtable;
+        readonly IReadOnlyDictionary<OpIdentity,X86ApiMember> Hashtable;
 
         [MethodImpl(Inline)]
-        public ApiCodeIndex(in OpIndex<ApiCode> code)
+        public ApiCodeIndex(in OpIndex<X86ApiMember> code)
         {
-            Hashtable = code.Enumerated.ToDictionary(); 
+            Hashtable = code.Enumerated.ToDictionary();
         }
 
-        public ApiCode this[OpIdentity id]
+        public X86ApiMember this[OpIdentity id]
         {
             [MethodImpl(Inline)]
             get => Hashtable[id];
@@ -44,55 +44,55 @@ namespace Z0
 
         public int EntryCount
             => Hashtable.Count;
-            
+
         public IEnumerable<OpIdentity> Keys
             => Hashtable.Keys;
-        
-        IEnumerable<ApiCode> Values
+
+        IEnumerable<X86ApiMember> Values
             => Hashtable.Values;
 
         public IEnumerable<MethodInfo> Methods
             => Values.Select(v => v.Member.Method);
 
-        public IEnumerable<ApiCode> Search(ArityClassKind arity)
+        public IEnumerable<X86ApiMember> Search(ArityClassKind arity)
             => from code in  Values
                 let method = code.Member.Method
                 where method.ArityValue() == (int)arity
-                select code;    
+                select code;
 
-        public IEnumerable<ApiCode> Search(OperatorClassKind @class)
+        public IEnumerable<X86ApiMember> Search(OperatorClassKind @class)
             => from code in  Values
                 let method = code.Member.Method
                 where method.ClassifyOperator() == @class
-                select code;    
+                select code;
 
-        public IEnumerable<ApiCode> Search(OpKindId id)
+        public IEnumerable<X86ApiMember> Search(OpKindId id)
             => from code in  Values
                 let method = code.Member.Method
                 where method.KindId() == id
-                select code;    
+                select code;
 
-        public IEnumerable<ApiCode> Operators
+        public IEnumerable<X86ApiMember> Operators
             => Values.Where(x => x.Member.Method.IsOperator());
 
-        public IEnumerable<ApiCode> UnaryOperators
+        public IEnumerable<X86ApiMember> UnaryOperators
             => Search(OperatorClassKind.UnaryOp);
 
-        public IEnumerable<ApiCode> BinaryOperators
+        public IEnumerable<X86ApiMember> BinaryOperators
             => Search(OperatorClassKind.BinaryOp);
 
-        public IEnumerable<ApiCode> TernaryOperators
+        public IEnumerable<X86ApiMember> TernaryOperators
             => Search(OperatorClassKind.TernaryOp);
 
-        public IEnumerable<ApiCode> NumericOperators(int? arity = null)
+        public IEnumerable<X86ApiMember> NumericOperators(int? arity = null)
             => Values.Where(x => x.Member.Method.IsNumericOperator(arity));
 
-        public IEnumerable<ApiCode> KindedOperators()
+        public IEnumerable<X86ApiMember> KindedOperators()
             => from code in Values
                 where code.Method.IsKindedOperator()
                 select code;
 
-        public IEnumerable<ApiCode> KindedOperators(int arity)
+        public IEnumerable<X86ApiMember> KindedOperators(int arity)
             => from code in Values
                 where code.Method.IsKindedOperator() && code.Method.ArityValue() == arity
                 select code;

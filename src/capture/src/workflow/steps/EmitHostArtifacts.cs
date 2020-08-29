@@ -19,7 +19,7 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        readonly ExtractedCode[] Extractions;
+        readonly X86MemberExtract[] Extractions;
 
         readonly ApiHostUri Source;
 
@@ -27,7 +27,7 @@ namespace Z0
 
         readonly IExtractionParser Parser;
 
-        public ParsedExtraction[] Parsed;
+        public X86MemberRefinement[] Parsed;
 
         readonly FilePath ExtractPath;
 
@@ -39,7 +39,7 @@ namespace Z0
 
         readonly FilePath AsmPath;
 
-        public EmitHostArtifacts(WfCaptureState wf, ApiHostUri src, ExtractedCode[] extracts, IPartCapturePaths dst, CorrelationToken ct)
+        public EmitHostArtifacts(WfCaptureState wf, ApiHostUri src, X86MemberExtract[] extracts, IPartCapturePaths dst, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
@@ -51,7 +51,7 @@ namespace Z0
             HexPath = Target.HostHexPath;
             AsmPath = Target.HostAsmPath;
             CilDataPath = Target.CilDataPath;
-            Parsed = new ParsedExtraction[0]{};
+            Parsed = new X86MemberRefinement[0]{};
             Parser = Extractors.Services.ExtractParser(Extractors.DefaultBufferLength);
             Wf.Created(StepName, Ct);
         }

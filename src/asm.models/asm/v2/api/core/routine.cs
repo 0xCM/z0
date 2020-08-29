@@ -15,9 +15,9 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmRoutine routine(ParsedExtraction encoding, AsmFxList src)
+        public static AsmRoutine routine(X86MemberRefinement encoding, AsmFxList src)
         {
-            var code = new MemberCode(encoding.OpUri, encoding.Encoded);
+            var code = new X86ApiCode(encoding.OpUri, encoding.Encoded);
             var sig = encoding.Method.Signature().Format();
             return new AsmRoutine(encoding.OpUri, sig, code, encoding.TermCode, src);
         }

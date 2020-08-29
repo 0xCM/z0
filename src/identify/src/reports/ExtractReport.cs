@@ -6,13 +6,13 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    
+
     using F = ExtractField;
     using R = ExtractRecord;
     using Report = ExtractReport;
 
     public class ExtractReport : Report<Report,F,R>
-    {        
+    {
         /// <summary>
         /// Loads a saved extract report
         /// </summary>
@@ -24,21 +24,21 @@ namespace Z0
                 return new ExtractReport(lines[0].Uri.Host, lines);
             else
                 return Empty;
-        }        
+        }
 
         public ApiHostUri ApiHost {get;}
 
-        public override string ReportName 
+        public override string ReportName
             => $"Extract report for {ApiHost.Format()}";
 
-        public static Report Create(ApiHostUri host, ExtractedCode[] src)
+        public static Report Create(ApiHostUri host, X86MemberExtract[] src)
         {
             var count = src.Length;
             var records = new ExtractRecord[count];
             for(var i=0; i< count; i++)
             {
                 var op = src[i];
-                records[i] = new ExtractRecord(                
+                records[i] = new ExtractRecord(
                     Sequence : i,
                     Address : op.Member.Address,
                     Length : op.Encoded.Length,
@@ -50,13 +50,13 @@ namespace Z0
 
             return new Report(host, records);
         }
-        
+
         public ExtractReport(){}
 
         internal ExtractReport(ApiHostUri host, R[] records)
             : base(records)
         {
             ApiHost = host;
-        }            
-    }     
+        }
+    }
 }

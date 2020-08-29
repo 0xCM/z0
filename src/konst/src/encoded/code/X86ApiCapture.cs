@@ -14,11 +14,11 @@ namespace Z0
     ///  Defines the dataset accumulated for an operation-targeted capture workflow
     /// </summary>
     [ApiDataType]
-    public struct CapturedCode : ICapturedCode<CapturedCode,LocatedCode>
+    public struct X86ApiCapture : ICapturedCode<X86ApiCapture,X86Code>
     {
-        readonly LocatedCode Extracted;
+        readonly X86Code Extracted;
 
-        public LocatedCode Parsed;
+        public X86Code Parsed;
 
         public OpUri OpUri;
 
@@ -29,7 +29,7 @@ namespace Z0
         public CilCode Cil;
 
         [MethodImpl(Inline)]
-        public CapturedCode(OpIdentity id, MethodInfo method, LocatedCode extracted, LocatedCode parsed, ExtractTermCode term)
+        public X86ApiCapture(OpIdentity id, MethodInfo method, X86Code extracted, X86Code parsed, ExtractTermCode term)
         {
             Extracted = extracted;
             Parsed = parsed;
@@ -94,10 +94,10 @@ namespace Z0
             get => Parsed.IsNonEmpty;
         }
 
-        public MemberCode HostedBits
+        public X86ApiCode HostedBits
         {
              [MethodImpl(Inline)]
-             get => new MemberCode(OpUri, Parsed);
+             get => new X86ApiCode(OpUri, Parsed);
         }
 
         public OpIdentity MemberId
@@ -125,11 +125,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Identical(in CapturedCode src)
+        public bool Identical(in X86ApiCapture src)
             => Parsed.Equals(src.Parsed);
 
         [MethodImpl(Inline)]
-        public int Compare(in CapturedCode src)
+        public int Compare(in X86ApiCapture src)
             => BaseAddress.CompareTo(src.BaseAddress);
 
         [MethodImpl(Inline)]
@@ -151,11 +151,11 @@ namespace Z0
         }
 
         [Ignore]
-        bool IEquatable<CapturedCode>.Equals(CapturedCode src)
+        bool IEquatable<X86ApiCapture>.Equals(X86ApiCapture src)
             => Identical(src);
 
         [Ignore]
-        int IComparable<CapturedCode>.CompareTo(CapturedCode src)
+        int IComparable<X86ApiCapture>.CompareTo(X86ApiCapture src)
             => Compare(src);
 
         [Ignore]
@@ -163,8 +163,12 @@ namespace Z0
             => Format();
 
         [Ignore]
-        public LocatedCode Encoded
+        public X86Code Encoded
             => Parsed;
+
+        [Ignore]
+        BinaryCode IEncoded.Encoded
+            => Encoded;
 
         [Ignore]
         int IMeasured.Length
@@ -177,9 +181,9 @@ namespace Z0
             => (int)Hash;
 
         public override bool Equals(object src)
-            => src is CapturedCode x && Identical(x);
+            => src is X86ApiCapture x && Identical(x);
 
-        public static CapturedCode Empty
+        public static X86ApiCapture Empty
             => default;
     }
 }

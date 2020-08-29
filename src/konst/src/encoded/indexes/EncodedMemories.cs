@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using KVP = KeyValuePairs<MemoryAddress,MemberCode>;
+    using KVP = KeyValuePairs<MemoryAddress,X86ApiCode>;
 
     public readonly struct EncodedMemories
     {
@@ -30,7 +30,7 @@ namespace Z0
             get => Data.Keys;
         }
 
-        public MemberCode[] Encoded
+        public X86ApiCode[] Encoded
         {
             [MethodImpl(Inline)]
             get => Data.Values;
@@ -42,13 +42,13 @@ namespace Z0
             get => Data.Count;
         }
 
-        public MemberCode this[MemoryAddress src]
+        public X86ApiCode this[MemoryAddress src]
         {
             [MethodImpl(Inline)]
             get => Data[src];
         }
 
-        public static EncodedMemories Empty 
+        public static EncodedMemories Empty
             => new EncodedMemories(sys.empty<PartId>(), KVP.Empty);
     }
 }

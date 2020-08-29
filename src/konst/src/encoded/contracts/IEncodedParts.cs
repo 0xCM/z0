@@ -12,13 +12,13 @@ namespace Z0
 
         PartId[] Parts {get;}
 
-        MemberCode Code(MemoryAddress src);
+        X86ApiCode Code(MemoryAddress src);
 
         EncodedMembers CodeSet(ApiHostUri host);
 
         PartCode CodeSet(PartId part);
 
-        MemberCode this[MemoryAddress address] {get;}
+        X86ApiCode this[MemoryAddress address] {get;}
 
         EncodedMembers this[ApiHostUri uri] {get;}
 

@@ -28,14 +28,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Write(MemberCode src, int idpad = 60)
+        public void Write(X86ApiCode src, int idpad = 60)
             => StreamOut.WriteLine(src.Format(idpad));
 
         [MethodImpl(Inline)]
-        public void WriterLine(MemberCode src)
+        public void WriterLine(X86ApiCode src)
             => Write(src,0);
 
-        public void WriteLines(MemberCode[] src)
+        public void WriteLines(X86ApiCode[] src)
         {
             var idpad = src.Max(x => x.OpUri.UriText.Length) + 1;
             for(var i=0; i< src.Length; i++)

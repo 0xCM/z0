@@ -15,11 +15,11 @@ namespace Z0
 
     public readonly struct Executor
     {
-        public static EvalResult<ExecutorContext> validate(ExecutorContext context, in BufferSeq buffers, BinaryOpClass k, N8 w, in ConstPair<ApiCode> pair)
+        public static EvalResult<ExecutorContext> validate(ExecutorContext context, in BufferSeq buffers, BinaryOpClass k, N8 w, in ConstPair<X86ApiMember> pair)
         {
             var f = buffers[Left].EmitFixedBinaryOp(w, pair.Left.Encoded);
             var g = buffers[Right].EmitFixedBinaryOp(w, pair.Right.Encoded);
-            return validate(context, f, pair.Left.Uri, g, pair.Right.Uri);  
+            return validate(context, f, pair.Left.Uri, g, pair.Right.Uri);
         }
 
         static void check(ExecutorContext context, BinaryOp8 f, BinaryOp8 g)
@@ -41,12 +41,12 @@ namespace Z0
         /// <param name="g">The second operator, considered as the operation under test</param>
         /// <param name="gId">The identity of the second operator</param>
         public static EvalResult<ExecutorContext> validate(ExecutorContext context, BinaryOp8 f, OpUri fUri, BinaryOp8 g, OpUri gUri)
-        {         
+        {
             return exec(context, () => check(context, f, g), fUri, gUri);
         }
 
         public static EvalResult<ExecutorContext> exec(ExecutorContext context, Action action, OpUri f, OpUri g)
-        {            
+        {
             var clock = Time.counter(true);
             try
             {

@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly ref struct UnaryEvalContext<T>
         where T : unmanaged
-    {            
+    {
         public readonly EvalContext Context;
 
         public readonly UnaryEvaluations<T> Target;
@@ -23,35 +23,35 @@ namespace Z0
             Context = context;
             Target = dst;
         }
-        
-        public Span<T> Input 
-        { 
-            [MethodImpl(Inline)] 
-            get => Target.Source; 
-        }
 
-        public PairEvalOutcomes<T> Outcomes 
+        public Span<T> Input
         {
-             [MethodImpl(Inline)] 
-             get => Target.Target; 
+            [MethodImpl(Inline)]
+            get => Target.Source;
         }
 
-        public int PointCount 
+        public PairEvalOutcomes<T> Outcomes
+        {
+             [MethodImpl(Inline)]
+             get => Target.Target;
+        }
+
+        public int PointCount
             => Target.Source.Length;
 
-        public int DstCount 
+        public int DstCount
             => Target.Target.PointCount;
-        
-        public ApiCode ApiCode
+
+        public X86ApiMember ApiCode
             => Context.ApiCode;
 
-        public BufferTokens Buffers 
+        public BufferTokens Buffers
             => Context.Buffers;
-        
-        public ApiMember Member 
+
+        public ApiMember Member
             => Context.Member;
 
-        public IdentifiedCode ApiBits 
+        public IdentifiedCode ApiBits
             => Context.ApiBits;
     }
 }

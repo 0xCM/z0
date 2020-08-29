@@ -34,7 +34,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source member</param>
         [MethodImpl(Inline), Op]
-        public static ExtractedCode[] extract(IApiHost src, Span<byte> buffer)
+        public static X86MemberExtract[] extract(IApiHost src, Span<byte> buffer)
             => extract(members(src), buffer);
 
         /// <summary>
@@ -42,23 +42,23 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source member</param>
         [MethodImpl(Inline), Op]
-        public static ExtractedCode[] extract(IApiHost src)
+        public static X86MemberExtract[] extract(IApiHost src)
             => extract(members(src), sys.alloc<byte>(Extractors.DefaultBufferLength));
 
         [MethodImpl(Inline), Op]
-        public static ExtractedCode extract(in ApiMember src, Span<byte> buffer)
+        public static X86MemberExtract extract(in ApiMember src, Span<byte> buffer)
         {
             var address = src.Address;
             var length = MemoryExtractor.read(address, buffer);
             var extracted = sys.array(buffer.Slice(0,length));
-            return new ExtractedCode(src, new LocatedCode(address, extracted));
+            return new X86MemberExtract(src, new X86Code(address, extracted));
         }
 
         [Op]
-        public static ExtractedCode[] extract(ApiMember[] src, Span<byte> buffer)
+        public static X86MemberExtract[] extract(ApiMember[] src, Span<byte> buffer)
         {
             var count = src.Length;
-            var dst = sys.alloc<ExtractedCode>(count);
+            var dst = sys.alloc<X86MemberExtract>(count);
             var target = span(dst);
             var source = span(src);
             for(var i=0; i<count; i++)
@@ -67,7 +67,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ExtractedCode[] extract(ApiMember[] src)
+        public static X86MemberExtract[] extract(ApiMember[] src)
             => extract(src, sys.alloc<byte>(Extractors.DefaultBufferLength));
     }
 }

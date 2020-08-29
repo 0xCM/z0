@@ -72,7 +72,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void Process(in MemberCode src)
+        void Process(in X86ApiCode src)
         {
             var decoded = Decoder.Decode(src.Encoded);
             if(decoded)
@@ -99,7 +99,7 @@ namespace Z0
             return AsmRecords.sets(sets);
         }
 
-        void Process(in LocatedCode code, in AsmFxList asm)
+        void Process(in X86Code code, in AsmFxList asm)
         {
             var data = code.Data;
             var bytes = data.ToReadOnlySpan();

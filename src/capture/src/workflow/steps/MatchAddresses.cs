@@ -10,25 +10,25 @@ namespace Z0
     using Z0.Asm;
 
     using static MatchAddressesStep;
-    
+
     public ref struct MatchAddresses
-    {        
+    {
         readonly WfCaptureState Wf;
-        
+
         readonly CorrelationToken Ct;
 
-        readonly ExtractedCode[] Extracted;
+        readonly X86MemberExtract[] Extracted;
 
         readonly AsmRoutine[] Decoded;
 
-        public MatchAddresses(WfCaptureState wf, ExtractedCode[] extracted, AsmRoutine[] decoded, CorrelationToken ct)
+        public MatchAddresses(WfCaptureState wf, X86MemberExtract[] extracted, AsmRoutine[] decoded, CorrelationToken ct)
         {
             Wf = wf;
             Extracted = extracted;
             Decoded = decoded;
             Ct = ct;
         }
-        
+
         public void Run()
         {
             Wf.Running(StepName, Ct);
@@ -41,21 +41,21 @@ namespace Z0
                 var b = Decoded.Select(f => f.BaseAddress).ToHashSet();
                 if(b.Count != Decoded.Length)
                     Wf.Error(StepName, $"count(Decoded) = {Decoded.Length} != {b.Count} = count(set(Decoded))", Ct);
-                
+
                 b.IntersectWith(a);
                 if(b.Count != Decoded.Length)
                     Wf.Error(StepName, $"count(Decoded) = {Decoded.Length} != {b.Count} = count(intersect(Decoded,Extracted))", Ct);
-                               
+
             }
             catch(Exception e)
             {
-                Wf.Error(StepName, e, Ct);    
+                Wf.Error(StepName, e, Ct);
             }
 
             Wf.Ran(StepName, Ct);
 
         }
-        
+
         public void Dispose()
         {
            Wf.Finished(StepName, Ct);

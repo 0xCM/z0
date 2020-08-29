@@ -14,10 +14,10 @@ namespace Z0
     {
         public readonly ApiMember Member;
 
-        public readonly CapturedCode Code;
+        public readonly X86ApiCapture Code;
 
         [MethodImpl(Inline)]
-        public CapturedMember(ApiMember member, CapturedCode code)
+        public CapturedMember(ApiMember member, X86ApiCapture code)
         {
             Member = member;
             Code = code;

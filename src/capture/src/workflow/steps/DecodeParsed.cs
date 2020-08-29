@@ -12,15 +12,15 @@ namespace Z0
     using static Konst;
 
     using static DecodeParsedStep;
-    
+
     public readonly ref struct DecodeParsed
-    {            
+    {
         public WfCaptureState Wf {get;}
 
         readonly CorrelationToken Ct;
 
         ICaptureContext Capture {get;}
-        
+
         [MethodImpl(Inline)]
         internal DecodeParsed(WfCaptureState wf, ICaptureContext capture, CorrelationToken ct)
         {
@@ -30,10 +30,10 @@ namespace Z0
             Wf.Created(StepName, Ct);
         }
 
-        public AsmRoutine[] Run(ApiHostUri host, ParsedExtraction[] src)
-        {   
+        public AsmRoutine[] Run(ApiHostUri host, X86MemberRefinement[] src)
+        {
             try
-            {             
+            {
                 Wf.Running(StepName, host, Ct);
                 var dst = z.alloc<AsmRoutine>(src.Length);
                 for(var i=0; i<src.Length; i++)
@@ -42,8 +42,8 @@ namespace Z0
                     var decoded = Capture.Decoder.Decode(member);
                     if(!decoded)
                         HandleUndecoded(member);
-                    
-                    dst[i] = decoded ? decoded.Value : AsmRoutine.Empty;                
+
+                    dst[i] = decoded ? decoded.Value : AsmRoutine.Empty;
                 }
 
                 Capture.Raise(new FunctionsDecoded(host, dst));
@@ -58,14 +58,14 @@ namespace Z0
 
         public void SaveDecoded(AsmRoutine[] src, FilePath dst)
         {
-            using var writer = Capture.WriterFactory(dst, Capture.Formatter);                
+            using var writer = Capture.WriterFactory(dst, Capture.Formatter);
             writer.WriteAsm(src);
         }
 
-        void HandleUndecoded(in ParsedExtraction member)
+        void HandleUndecoded(in X86MemberRefinement member)
         {
             Wf.Error(StepName, $"Could not decode {member}", Ct);
-        }        
+        }
 
         public void Dispose()
         {

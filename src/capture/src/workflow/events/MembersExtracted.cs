@@ -7,27 +7,27 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
 
     public readonly struct MembersExtracted : IWfEvent<MembersExtracted>
     {
         public WfEventId EventId  => WfEventId.define("Placeholder");
 
         public readonly ApiHostUri Host;
-        
-        public readonly ExtractedCode[] Members;
+
+        public readonly X86MemberExtract[] Members;
 
         [MethodImpl(Inline)]
-        public MembersExtracted(ApiHostUri host, ExtractedCode[] members)
+        public MembersExtracted(ApiHostUri host, X86MemberExtract[] members)
         {
             Host = host;
             Members = members;
         }
-        
+
         public string Format()
             => $"{Members.Length} {Host} members extracted";
 
-        public static MembersExtracted Empty 
-            => new MembersExtracted(ApiHostUri.Empty, Array.Empty<ExtractedCode>());
-    }    
+        public static MembersExtracted Empty
+            => new MembersExtracted(ApiHostUri.Empty, Array.Empty<X86MemberExtract>());
+    }
 }

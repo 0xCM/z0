@@ -18,7 +18,7 @@ namespace Z0.Asm
         /// <param name="src">The source bits</param>
 
         [MethodImpl(Inline), Op]
-        public static string header(LocatedCode src, OpIdentity id)
+        public static string header(X86Code src, OpIdentity id)
             => comment(new ByteSpanProperty(id.ToPropertyName(), src).Format());
 
         /// <summary>

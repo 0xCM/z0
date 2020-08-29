@@ -25,20 +25,20 @@ namespace Z0
             => ExtractParsers.member(bufferlen);
 
         [MethodImpl(Inline), Op]
-        public static Option<LocatedCode> parse(LocatedCode src, byte[] buffer)
+        public static Option<X86Code> parse(X86Code src, byte[] buffer)
         {
             if(ExtractParsers.parse(src, buffer, out var dst))
                 return Option.some(dst);
             else
-                return Option.none<LocatedCode>();
+                return Option.none<X86Code>();
         }
 
         [MethodImpl(Inline), Op]
-        public static LocatedCode extract(MemoryAddress src, byte[] buffer)
+        public static X86Code extract(MemoryAddress src, byte[] buffer)
         {
             Span<byte> target = buffer;
             var length = MemoryExtractor.read(src, target);
-            return new LocatedCode(src, sys.array(target.Slice(0,length)));
+            return new X86Code(src, sys.array(target.Slice(0,length)));
         }
     }
 }

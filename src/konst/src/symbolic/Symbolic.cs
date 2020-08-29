@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    
+    /// <summary>
+    /// Defines an api surface for <see cref='ISymbol'/> manipulation
+    /// </summary>
     [ApiHost]
     public readonly partial struct Symbolic
     {
-                    
+
     }
 }

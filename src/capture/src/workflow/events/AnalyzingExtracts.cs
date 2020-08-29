@@ -12,25 +12,25 @@ namespace Z0.Events
     using static z;
 
     public readonly struct AnalyzingExtracts : IWfEvent<AnalyzingExtracts>
-    {        
+    {
         public WfEventId EventId {get;}
 
         public string ActorName {get;}
 
-        public ExtractedCode[] Extracts {get;}
-        
-        public uint ExtractCount 
+        public X86MemberExtract[] Extracts {get;}
+
+        public uint ExtractCount
             => (uint)Extracts.Length;
 
         [MethodImpl(Inline)]
-        internal AnalyzingExtracts(string worker, ExtractedCode[] extracts, CorrelationToken ct)
+        internal AnalyzingExtracts(string worker, X86MemberExtract[] extracts, CorrelationToken ct)
         {
             EventId = evid(nameof(AnalyzingExtracts), ct);
             ActorName = worker;
             Extracts = extracts;
         }
 
-        public string Format() 
+        public string Format()
             => text.format(PSx3, EventId, ActorName, ExtractCount);
     }
 }
