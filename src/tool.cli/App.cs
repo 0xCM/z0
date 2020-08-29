@@ -42,7 +42,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Raise(Flow.error(ShellName, e, Ct));
+                Raise(WfEvents.error(ShellName, e, Ct));
             }
 
         }

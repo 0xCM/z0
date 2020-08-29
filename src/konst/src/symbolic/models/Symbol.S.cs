@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -11,11 +11,11 @@ namespace Z0
     using static z;
 
     /// <summary>
-    /// Defines an S-symbol value
+    /// Defines a symbol, a construct that is characterized in-full by the sequence of bits it covers
     /// </summary>
     public readonly struct Symbol<S> : ISymbol<S>
         where S : unmanaged
-    {                
+    {
         /// <summary>
         /// The symbol value
         /// </summary>
@@ -37,6 +37,6 @@ namespace Z0
         public Symbol(S value)
         {
             Value = value;
-        }        
+        }
     }
 }

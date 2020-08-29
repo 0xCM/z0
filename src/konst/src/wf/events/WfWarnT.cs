@@ -12,27 +12,27 @@ namespace Z0
     using static z;
 
     [Event]
-    public readonly struct WfWarn<T> : IWfEvent<WfWarn<T>, T>
+    public readonly struct WfWarn<T> : IWfEvent<WfWarn<T>,T>
     {
         public const string EventName = nameof(WfWarn<T>);
 
         public WfEventId EventId {get;}
 
-        public string ActorName {get;}
+        public WfStepId StepId {get;}
 
         public T Content {get;}
 
         public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfWarn(string actor, T body, CorrelationToken ct)
+        public WfWarn(WfStepId step, T body, CorrelationToken ct)
         {
             EventId = evid(EventName, ct);
             Content = body;
-            ActorName = actor;
+            StepId = step;
             Flair = MessageFlair.Yellow;
         }
         public string Format()
-            => text.format(PSx3, EventId, ActorName, Content);
+            => text.format(PSx3, EventId, StepId, Content);
     }
 }

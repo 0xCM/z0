@@ -12,7 +12,7 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-    using WfEvB = WfEventBuilder;
+    using WfEvB = WfEvents;
 
     public interface IWfShell : IDisposable
     {
@@ -62,7 +62,7 @@ namespace Z0
             => Raise(WfEvB.error(actor, e, ct ?? Ct));
 
         void Created(string actor)
-            => Raise(WfEventBuilder.newWorker(Ct, actor));
+            => Raise(WfEvents.newWorker(Ct, actor));
 
         void Created(WfStepId id)
             => Raise(WfEvB.created(id, Ct));

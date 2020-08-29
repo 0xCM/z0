@@ -54,14 +54,16 @@ namespace Z0
         public const string RanPattern = "Emitted {0} bitmasks to {1}";
     }
 
-    [Step(typeof(EmitCilDatasets))]
-    public readonly struct EmitCilDatasetsStep : IWfStep<EmitBitMasksStep>
+    [Step(typeof(EmitPartCil))]
+    public readonly struct EmitPartCilStep : IWfStep<EmitPartCilStep>
     {
-        public const string StepName = nameof(EmitCilDatasets);
-
         public const string DatasetName = "Cil";
 
         public const string EmissionType = "il";
+
+        public const string StepName = nameof(EmitPartCil);
+
+        public static WfStepId StepId => AB.step<EmitPartCilStep>();
 
         public const string DataFolder = EmissionType;
 
@@ -93,7 +95,7 @@ namespace Z0
     }
 
     [Step(typeof(EmitPeImage))]
-    public readonly struct EmitPeImageStep
+    public readonly struct EmitPeImageStep : IWfStep<EmitPeImageStep>
     {
         public const string StepName = nameof(EmitPeImage);
 
@@ -116,10 +118,10 @@ namespace Z0
         public const string DatasetName = "ContentCatalog";
     }
 
-    [Step(typeof(EmitConstantDatasets))]
-    public readonly struct EmitConstantDatasetsStep
+    [Step(typeof(EmitImageConstants))]
+    public readonly struct EmitImageConstantsStep
     {
-        public const string StepName = nameof(EmitConstantDatasets);
+        public const string StepName = nameof(EmitImageConstants);
     }
 
     [Step(typeof(EmitDatasetsStep))]
@@ -166,9 +168,12 @@ namespace Z0
     }
 
     [Step(typeof(IndexEncodedParts))]
-    public readonly struct IndexEncodedPartsStep
+    public readonly struct IndexEncodedPartsStep : IWfStep<IndexEncodedPartsStep>
     {
         public const string StepName = nameof(IndexEncodedParts);
+
+        public static WfStepId StepId
+            => AB.step<IndexEncodedPartsStep>();
     }
 
     public readonly struct Controller
@@ -176,10 +181,10 @@ namespace Z0
         public const string ActorName = nameof(Control);
     }
 
-    [Step(typeof(EmitBlobs))]
-    public readonly struct EmitBlobsStep : IWfStep<EmitBlobsStep>
+    [Step(typeof(EmitImageBlobs))]
+    public readonly struct EmitImageBlobsStep : IWfStep<EmitImageBlobsStep>
     {
-        public const string StepName = nameof(EmitBlobs);
+        public const string StepName = nameof(EmitImageBlobs);
 
         public const string EmissionType = "Metablobs";
 
@@ -188,9 +193,12 @@ namespace Z0
     }
 
     [Step(typeof(EmitImageSummaries))]
-    public readonly struct EmitImageSummariesStep
+    public readonly struct EmitImageSummariesStep : IWfStep<EmitImageSummariesStep>
     {
         public const string StepName = nameof(EmitImageSummaries);
+
+        public static WfStepId StepId
+            => AB.step<EmitImageSummariesStep>();
     }
 
     [Step(typeof(EmitResBytes))]
@@ -226,7 +234,7 @@ namespace Z0
     }
 
     [Step(typeof(EmitImageContent))]
-    public readonly struct EmitImageContentStep
+    public readonly struct EmitImageContentStep : IWfStep<EmitImageContentStep>
     {
         public const string StepName = nameof(EmitImageContent);
     }

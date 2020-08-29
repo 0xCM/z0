@@ -8,24 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     [ApiHost]
     public readonly partial struct ImageRecords
     {
-        public static ImgStringRecord Strings => default;
-        
-        public static ImgBlobRecord Blobs => default;
-        
+        public static ImageString Strings => default;
+
         public static ImgConstantRecord Constants => default;
 
         public static ImgFieldRecord Fields => default;
 
         public static ImgFieldRva FieldRva => default;
 
-        public static PeHeaderRecord PeHeader => default;
-
-        public static ImgMethodBody MethodBody => default;
-
-        public static ImgLiteralFieldRecord LiteralFields => default;
     }
 }

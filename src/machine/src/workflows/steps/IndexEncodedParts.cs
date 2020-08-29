@@ -34,7 +34,6 @@ namespace Z0
         public void Dispose()
         {
             Wf.Finished(StepName, Ct);
-
         }
 
         public void Run()
@@ -90,7 +89,7 @@ namespace Z0
             {
                 var code = new X86ApiCode(src.Uri, src.Data);
                 if(!dst.Include(code))
-                    Wf.Warn(StepName, $"Duplicate | {src.Uri.Format()}", Ct);
+                    Wf.Warn(StepId, $"Duplicate | {src.Uri.Format()}");
             }
         }
     }

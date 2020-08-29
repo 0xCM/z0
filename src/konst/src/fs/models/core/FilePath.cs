@@ -20,6 +20,30 @@ namespace Z0
             public FilePath(PathPart name)
                 => Name = name;
 
+            public bool Exists
+            {
+                [MethodImpl(Inline)]
+                get => File.Exists(Name);
+            }
+
+            public FileName FileName
+            {
+                [MethodImpl(Inline)]
+                get => file(Path.GetFileName(Name));
+            }
+
+            public FolderPath FolderPath
+            {
+                [MethodImpl(Inline)]
+                get => dir(Path.GetDirectoryName(Name));
+            }
+
+            public FolderName FolderName
+            {
+                [MethodImpl(Inline)]
+                get => folder(Directory.GetParent(FolderPath.Name).Name);
+            }
+
             public FileInfo Info
             {
                 [MethodImpl(Inline)]
@@ -27,21 +51,15 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
+            public FilePath Replace(char src, char dst)
+                => new FilePath(Name.Replace(src,dst));
+
+            [MethodImpl(Inline)]
             public string Format()
                 => Name.Format();
 
             public override string ToString()
                 => Format();
-
-            [MethodImpl(Inline)]
-            public FilePath Replace(char src, char dst)
-                => new FilePath(Name.Replace(src,dst));
-
-            public bool Exists
-            {
-                [MethodImpl(Inline)]
-                get => File.Exists(Name);
-            }
         }
     }
 }

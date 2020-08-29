@@ -10,13 +10,12 @@ namespace Z0
     using static Konst;
 
     partial struct Symbolic
-    {        
-
+    {
         [MethodImpl(Inline)]
         public static char @char<S,T,N>(Symbol<S,T,N> src)
             where S : unmanaged
             where T : unmanaged
-            where N : unmanaged, ITypeNat         
+            where N : unmanaged, ITypeNat
                 => z.@as<S,char>(src.Value);
 
         [MethodImpl(Inline)]

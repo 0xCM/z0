@@ -32,7 +32,7 @@ namespace Z0
             Id = AB.step(typeof(EmitImageSummaries));
             Images = images;
             TargetPath = Wf.IndexRoot + FileName.Define("machine.images", FileExtensions.Csv);
-            Wf.Created(Id, Ct);
+            Wf.Created(StepId);
         }
 
         public void Run()
@@ -42,7 +42,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(Id, Ct);
+            Wf.Finished(StepId);
         }
 
         static void Summarize(LocatedImages src, FilePath dst)

@@ -66,6 +66,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format("{0} | {1} | {2} | {3}", Part.Format(), Name, FileLine, File);
+            => text.format(RenderPatterns.PSx4, Part.Format(), Name, FileLine, File);
     }
 }

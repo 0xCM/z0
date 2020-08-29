@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static EmitCilDatasetsStep;
+    using static EmitPartCilStep;
 
     using static z;
 
-    public ref struct EmitCilDatasets
+    public ref struct EmitPartCil
     {
         public readonly FolderPath TargetDir;
 
@@ -27,7 +27,7 @@ namespace Z0
         readonly CorrelationToken Ct;
 
         [MethodImpl(Inline)]
-        public EmitCilDatasets(IWfContext wf, IPart[] parts, CorrelationToken ct)
+        public EmitPartCil(IWfContext wf, IPart[] parts, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
@@ -35,12 +35,12 @@ namespace Z0
             PartCount = (uint)parts.Length;
             TargetDir = Wf.ResourceRoot + FolderName.Define(DataFolder);
             EmissionCount = 0;
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId);
         }
 
         public void Run()
         {
-            Wf.RunningT(StepName, new {PartCount, TargetDir}, Ct);
+            Wf.Running(StepId, new {PartCount, TargetDir});
 
             foreach(var part in Parts)
             {
@@ -54,12 +54,12 @@ namespace Z0
                 }
             }
 
-            Wf.RanT(StepName, new {PartCount, TargetDir, EmissionCount}, Ct);
+            Wf.Running(StepId, new {PartCount, TargetDir, EmissionCount});
         }
 
         uint Emit(IPart part, FilePath dst)
         {
-            Wf.Emitting(StepName, EmissionType, dst, Ct);
+            Wf.Emitting(StepId, EmissionType, dst);
 
             var id = part.Id;
             var assembly = part.Owner;
@@ -72,14 +72,14 @@ namespace Z0
             for(var i=0u; i<count; i++)
                 writer.WriteLine(skip(methods,i).Format());
 
-            Wf.Emitted(StepName, EmissionType, count, dst, Ct);
+            Wf.Emitted(StepId, EmissionType, count, dst);
 
             return count;
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId);
         }
     }
 }

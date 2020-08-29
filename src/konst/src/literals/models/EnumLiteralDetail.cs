@@ -26,7 +26,7 @@ namespace Z0
         /// <summary>
         /// The name of the declaring type
         /// </summary>
-        public StringRef TypeName;
+        public string TypeName;
 
         /// <summary>
         /// The primal kind specialized by the enum
@@ -41,7 +41,7 @@ namespace Z0
         /// <summary>
         /// The literal identifier, unique within the declaring enum
         /// </summary>
-        public StringRef LiteralName;
+        public string LiteralName;
 
         /// <summary>
         /// The literal value

@@ -12,35 +12,33 @@ namespace Z0
     partial struct Symbolic
     {
         /// <summary>
-        /// Defines a symbol spec predicated on enumeration literals
+        /// Defines a sequence of symbols predicated on parametric arguments
         /// </summary>
         /// <typeparam name="E"></typeparam>
         /// <typeparam name="T"></typeparam>
         /// <typeparam name="N"></typeparam>
-        public static Symbols<E,T,N> enumerate<E,T,N>(int crop = 0)
+        public static Symbols<E,T,N> enumerate<E,T,N>()
             where E : unmanaged, Enum
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => new Symbols<E,T,N>(Enums.literals<E>(crop).Map(x => symbol<E,T,N>(x)));
+                => new Symbols<E,T,N>(Enums.literals<E>().Map(x => symbol<E,T,N>(x)));
 
         /// <summary>
         /// Defines a symbol spec predicated on enumeration literals
         /// </summary>
         /// <typeparam name="E"></typeparam>
         /// <typeparam name="T"></typeparam>
-        public static Symbols<E,T> enumerate<E,T>(int crop = 0)
+        public static Symbols<E,T> enumerate<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged
-                => new Symbols<E,T>(Enums.literals<E>(crop).Map(x => symbol<E,T>(x)));
+                => new Symbols<E,T>(Enums.literals<E>().Map(x => symbol<E,T>(x)));
 
         /// <summary>
         /// Defines a symbol spec predicated on enumeration literals
         /// </summary>
-        /// <typeparam name="E"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        [MethodImpl(Inline)]    
-        public static Symbols<E> enumerate<E>(int crop = 0)
+        /// <typeparam name="E">The enum type</typeparam>
+        public static Symbols<E> enumerate<E>()
             where E : unmanaged, Enum
-                => new Symbols<E>(Enums.literals<E>(crop).Map(x => symbol<E>(x)));
+                => new Symbols<E>(Enums.literals<E>().Map(x => symbol<E>(x)));
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
- 
+
     [ApiHost]
     public unsafe partial class memory
     {
@@ -20,14 +20,6 @@ namespace Z0
                 z.seek(dst, index++) = z.skip(src, j);
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe Span<T> edit<T>(MemoryAddress src, uint count)
-            => z.cover(src.Ref<T>(), count);
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe Span<byte> edit(MemoryAddress src, ByteSize size)
-            => z.cover(src.Ref<byte>(), size);
-                    
         /// <summary>
         /// Copies a specified number of source values to the target and returns the count of copied bytes
         /// </summary>
@@ -39,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void copy<S,T>(in S src, ref T dst, int srcCount, int dstOffset = 0)
             where S: unmanaged
-            where T :unmanaged  
+            where T :unmanaged
                 => sys.copy(z.view<S,byte>(src), ref edit<T,byte>(add(dst, dstOffset)), (uint)srcCount);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
@@ -48,7 +40,7 @@ namespace Z0
             for(var j=0u; j<count; j++)
                 z.seek(dst, index++) = z.skip(src, j);
         }
-        
+
         /// <summary>
         /// Copies a contiguous segments of values to a span
         /// </summary>
@@ -182,7 +174,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe ref byte store64(ulong src, ref byte dst)
         {
-             *(gptr<ulong>(dst)) = src;        
+             *(gptr<ulong>(dst)) = src;
              return ref dst;
         }
 
@@ -194,8 +186,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe ref ushort store64(ulong src, ref ushort dst)
         {
-            *(gptr<ulong>(dst)) = src; 
-            return ref dst;       
+            *(gptr<ulong>(dst)) = src;
+            return ref dst;
         }
 
         /// <summary>
@@ -206,7 +198,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe ref uint store64(ulong src, ref uint dst)
         {
-            *(gptr<ulong>(dst)) = src;        
+            *(gptr<ulong>(dst)) = src;
             return ref dst;
         }
     }

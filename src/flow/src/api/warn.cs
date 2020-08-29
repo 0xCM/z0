@@ -9,14 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Flow    
+    partial struct Flow
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static WfWarn<T> warn<T>(string worker, T body, CorrelationToken ct)
-            => new WfWarn<T>(worker, body, ct);       
-        
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void warn<T>(IWfContext wf, string worker, T body, CorrelationToken ct)
-            => wf.Raise(warn(worker,body,ct));
+        public static WfWarn<T> warn<T>(WfStepId step, T body, CorrelationToken ct)
+            => new WfWarn<T>(step, body, ct);
     }
 }

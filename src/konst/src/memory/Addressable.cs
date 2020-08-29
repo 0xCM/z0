@@ -5,8 +5,8 @@
 namespace Z0
 {
     [ApiHost]
-    public readonly partial struct Addressable
-    {        
+    public readonly partial struct Address
+    {
 
 
     }

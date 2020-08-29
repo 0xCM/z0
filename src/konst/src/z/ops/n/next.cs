@@ -11,6 +11,34 @@ namespace Z0
 
     partial struct z
     {
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ref Sequential<T> next<T>(in Sequential<T> src)
+            where T : unmanaged
+        {
+            ref var dst = ref @edit(src);
+            ref var value = ref dst.Value;
+
+            if(typeof(T) == typeof(byte))
+                uint8(ref value) = (byte)(uint8(value) + 1);
+            else if(typeof(T) == typeof(ushort))
+                uint16(ref value) = (ushort)(uint16(value) + 1);
+            else if(typeof(T) == typeof(uint))
+                uint32(ref value) = uint32(value) + 1u;
+            else if(typeof(T) == typeof(ulong))
+                uint64(ref value) = uint64(value) + 1ul;
+            else
+                throw no<T>();
+
+            return ref dst;
+        }
+
+        // public static void next<T>(in T src, ref T dst)
+        //     where T : unmanaged
+        // {
+        //     dst = add(dst, 1);
+        //     add(src, size<T>());
+        // }
+
         /// <summary>
         ///  Effects: movzx eax,byte ptr [rcx] => mov [rdx],al => eax,byte ptr [rdx+1] => mov [rdx],al => rax,[rcx+1]
         /// </summary>

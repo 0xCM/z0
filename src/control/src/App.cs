@@ -47,7 +47,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Raise(Flow.error(ActorName, e, Ct));
+                Raise(WfEvents.error(ActorName, e, Ct));
             }
         }
 

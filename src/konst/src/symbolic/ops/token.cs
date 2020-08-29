@@ -11,10 +11,10 @@ namespace Z0
     using static z;
 
     partial struct Symbolic
-    {        
+    {
         [MethodImpl(Inline)]
-        public static TokenModel token<T>(T index, string id, string value, string description)
+        public static TokenInfo token<T>(T index, string id, string value, string description)
             where T : unmanaged, Enum
-                => new TokenModel(EnumValue.e32i(index), id, value, description);
+                => new TokenInfo(EnumValue.e32u(index), id, value, description);
     }
 }

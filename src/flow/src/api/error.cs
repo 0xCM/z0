@@ -15,31 +15,14 @@ namespace Z0
 
     partial struct Flow
     {
-        [Op]
-        public static void error(IWfContext wf, Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-        {
-            const string CallerPattern = "An error was trapped by {0} on line {1} in {2}";
-            const string Pattern = "{0}" + Eol + "{1}";
-            var where = text.format(CallerPattern, caller, line, file);
-            var what = e.ToString();
-            var msg = text.format(Pattern, where, what);
-            wf.Raise(Flow.error(caller, msg, ct));
-        }
+        [Op, Closures(UnsignedInts)]
+        public static void error<T>(IWfContext wf, string worker, T body, CorrelationToken ct,
+            [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
+                => wf.Raise(new WfError<T>(worker, body, ct, AB.source(caller,file,line)));
 
         [Op, Closures(UnsignedInts)]
-        public static void error<T>(IWfContext wf, string worker, T body, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-            => wf.Raise(new WfError<T>(worker, body, ct, AppMsgSource.create(caller,file,line)));
-
-        [Op, Closures(UnsignedInts)]
-        public static void error<T>(IWfContext wf, in WfActor actor, T body, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-            => wf.Raise(new WfError<T>(actor, body, ct, AppMsgSource.create(caller,file,line)));
-
-        [Op, Closures(UnsignedInts)]
-        public static WfError<T> error<T>(string actor, T body, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-            => new WfError<T>(actor, body, ct, AppMsgSource.create(caller,file,line));
-
-        [Op, Closures(UnsignedInts)]
-        public static WfError<T> error<T>(in WfActor actor, T body, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-            => new WfError<T>(actor, body, ct, AppMsgSource.create(caller,file,line));
+        public static void error<T>(IWfContext wf, in WfActor actor, T body, CorrelationToken ct,
+            [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
+                => wf.Raise(new WfError<T>(actor, body, ct, AB.source(caller,file,line)));
     }
 }

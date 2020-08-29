@@ -7,25 +7,27 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
-    
-    public readonly struct AsmOpCodeDataset
-    {                
-        public readonly AsmOpCodeTable[] Records;
+    using static Konst;
 
-        public readonly AsmOpCodeId[] OpCodeIdentifiers;
+    public readonly struct AsmOpCodeDataset
+    {
+        public readonly TableSpan<AsmOpCodeTable> Entries;
+
+        public readonly TableSpan<AsmOpCodeId> Identity;
 
         public AsmOpCodeDataset(AsmOpCodeTable[] records, AsmOpCodeId[] identifiers)
         {
-            Records = records;
-            OpCodeIdentifiers = identifiers;
+            Entries = records;
+            Identity = identifiers;
         }
 
-        public int OpCodeCount 
-            => Records.Length;
+        public int OpCodeCount
+            => Entries.Length;
 
-        [MethodImpl(Inline), Op]
-        public ref readonly AsmOpCodeId opcode(int index)
-            => ref OpCodeIdentifiers[index];
+        public ref readonly AsmOpCodeId this[ushort index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Identity[index];
+        }
     }
 }

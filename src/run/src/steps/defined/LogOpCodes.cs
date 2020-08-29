@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Asm;
+
     using static Konst;
     using static z;
 
@@ -24,8 +26,7 @@ namespace Z0
 
         public void Run()
         {
-
-            var data = AsmOpCodes.dataset().Records.TableSpan();
+            var data = AsmOpCodes.dataset().Entries;
             var count = data.Count;
             var view = data.View;
             using var dst = Args.Target.Writer();
@@ -35,6 +36,5 @@ namespace Z0
                 var fmt = record.Format();
             }
         }
-
     }
 }

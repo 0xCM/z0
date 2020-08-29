@@ -1,4 +1,11 @@
 {
+
+    "files.exclude": {
+        "**/.git": true,
+        "**/.vs": true,
+        ".build": true
+    },
+
     "cSpell.words": [
         "Biconverter",
         "Brfalse",
@@ -69,6 +76,7 @@
         "complus",
         "coredistools",
         "cpuid",
+        "deduplicated",
         "delaysign",
         "denullify",
         "diasymreader",
@@ -77,6 +85,7 @@
         "errorendlocation",
         "errorreport",
         "etables",
+        "evalue",
         "filealign",
         "fmath",
         "fullpaths",
@@ -139,11 +148,13 @@
         "vbsll",
         "vbytes",
         "vcell",
+        "vcompact",
         "vcount",
         "vfirst",
         "vinc",
         "vinflate",
         "vload",
+        "vsave",
         "vshuf",
         "vstore",
         "vswap",

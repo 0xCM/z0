@@ -1,4 +1,4 @@
-<Project>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <Import Project="z0.props"/>
 
@@ -10,18 +10,14 @@
     <SrcDir>$(TopDir)src\</SrcDir>
     <TestDir>$(TopDir)test\</TestDir>
     <NativeDir>$(TopDir)native\</NativeDir>
-    <BuildRootDir>$(TopDir)bin\</BuildRootDir>
+    <BuildRootDir>$(TopDir).build\</BuildRootDir>
     <ResBytesLib>z0.res</ResBytesLib>
   </PropertyGroup>
 
   <Import Project=".props/options.props"/>
-
   <Import Project="$(Src)symbols.props"/>
-
   <Import Project="$(Native)symbols.props"/>
-
   <Import Project=".props/version.props"/>
-
   <Import Project=".props/locations.props"/>
 
 </Project>

@@ -21,5 +21,25 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string remove(string src, string match)
             => src.Replace(match, EmptyString);
+
+        [Op]
+        public static string remove(string src, params char[] matches)
+        {
+            var index = hashset(matches);
+            if (!src.ContainsAny(index))
+                return src;
+
+            var length = src.Length;
+            var dst = span<char>(length);
+            var data = span(src);
+            var j = 0u;
+            for (var i=0; i<length; i++)
+            {
+                ref readonly var c = ref skip(data,i);
+                if ( !index.Contains(c))
+                    seek(dst,j++) = c;
+            }
+            return new string(z.slice(dst,0,j));
+        }
     }
 }

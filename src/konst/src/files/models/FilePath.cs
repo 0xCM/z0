@@ -14,15 +14,15 @@ namespace Z0
     /// Represents a fully-qualified path to a file on the local machine
     /// </summary>
     public class FilePath : PathComponent<FilePath>
-    {        
+    {
         /// <summary>
         /// Lonely, so
         /// </summary>
-        public static FilePath[] None 
+        public static FilePath[] None
             => Array.Empty<FilePath>();
 
         [MethodImpl(Inline)]
-        public static FilePath Define(string name) 
+        public static FilePath Define(string name)
             => new FilePath(name);
 
         [MethodImpl(Inline)]
@@ -49,7 +49,7 @@ namespace Z0
 
         }
 
-       /// <summary>
+        /// <summary>
         /// Determines whether the modeled file exists on disk
         /// </summary>
         public bool Exists
@@ -69,13 +69,13 @@ namespace Z0
 
         public string FullPath
             => Name;
-        
+
         public bool Rooted
             => Path.IsPathRooted(Name);
-        
+
         public FilePath RenameFile(FileName src)
             => FolderPath + src;
-    
+
         /// <summary>
         /// Determines whether the filename is of the form {owner}.{.}.{*}
         /// </summary>
@@ -95,7 +95,7 @@ namespace Z0
         /// </summary>
         public PartId Owner
             => FileName.Owner;
-        
+
         /// <summary>
         /// Determines whether the path contains a specified substring
         /// </summary>

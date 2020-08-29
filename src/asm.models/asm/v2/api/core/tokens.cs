@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
-    
+
     using static Konst;
-    
+
     partial struct asm
-    {        
+    {
         [MethodImpl(Inline), Op]
         public static AsmFxTokens tokens(in AsmTokenIndex index)
             => new AsmFxTokens(index);
@@ -26,7 +26,7 @@ namespace Z0
             => tokens.Meanings[(int)id];
 
         [MethodImpl(Inline), Op]
-        public static ref readonly TokenModel token(in AsmFxTokens tokens, AsmTokenKind id)
+        public static ref readonly TokenInfo token(in AsmFxTokens tokens, AsmTokenKind id)
             => ref tokens.Models[(int)id];
 
         [MethodImpl(Inline), Op]

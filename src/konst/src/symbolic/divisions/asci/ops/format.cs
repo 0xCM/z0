@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -18,7 +18,7 @@ namespace Z0
         public static string format(in BinaryCode src)
         {
             var dst = span<char>(src.Length);
-            decode(src,dst);            
+            decode(src,dst);
             return sys.@string(dst);
         }
 
@@ -46,38 +46,6 @@ namespace Z0
         public static string format(in asci64 src)
             => F.format(src);
 
-        [MethodImpl(Inline), Op]
-        public static string format_old(in asci2 src)
-        {
-            var dst = CharBlocks.c16s(CharBlocks.alloc(n2));
-            store(src,dst);
-            return @string(dst);
-        }       
-
-        [MethodImpl(Inline), Op]
-        public static string format_old(in asci4 src)
-            => @string(asci.decode(src));
-
-        [MethodImpl(Inline), Op]
-        public static string format_old(in asci8 src)
-        {
-            var dst = CharBlocks.c16s(CharBlocks.alloc(n8));
-            store(src,dst);            
-            return @string(dst.Slice(0, src.Length));
-        }        
-
-        [MethodImpl(Inline), Op]
-        public static string format_old(in asci16 src)
-            => @string(decode(src));
-
-        [MethodImpl(Inline), Op]
-        public static string format_old(in asci32 src)
-            => @string(decode(src));
-
-        [MethodImpl(Inline), Op]
-        public static string format_old(in asci64 src)
-            => @string(decode(src));
-
         [Op]
         public static string format(ReadOnlySpan<BinaryDigit> src)
         {
@@ -89,7 +57,7 @@ namespace Z0
         [Op]
         public static string format(ReadOnlySpan<DecimalDigit> src)
         {
-            Span<char> dst = stackalloc char[src.Length]; 
+            Span<char> dst = stackalloc char[src.Length];
             render(src,dst);
             return @string(dst);
         }
@@ -108,6 +76,6 @@ namespace Z0
             Span<char> digits = stackalloc char[src.Length*3];
             render(@base, @case, src,digits);
             return @string(digits);
-        }                   
+        }
     }
 }

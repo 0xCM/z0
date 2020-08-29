@@ -6,26 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
-
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     /// <summary>
     /// Specifies application message origination details
     /// </summary>
     public readonly struct AppMsgSource : ITextual
-    {                        
-        [MethodImpl(Inline)]
-        public static AppMsgSource create(PartId part, string caller, string file, int? line)        
-            => new AppMsgSource(part, caller, file, line);
+    {
+        public const string KnownPartPattern = "{0}/{1}/{2}?line = {3} | {4}";
 
-        [MethodImpl(Inline)]
-        public static AppMsgSource create([Caller]string caller = null, [File] string file = null, [Line]int? line = null)        
-            => new AppMsgSource(PartId.None, caller, file, line);
+        public const string UnknownPartPattern = "{0}/{1}?line = {2} | {3}";
 
         /// <summary>
         /// Specifies the emitting executable part
@@ -36,11 +27,11 @@ namespace Z0
         /// The name of the member that originated the message
         /// </summary>
         public readonly string Caller;
-        
+
         /// <summary>
         /// The path to the source file in which the message originated
         /// </summary>
-        public readonly FilePath File;
+        public readonly FS.FilePath File;
 
         /// <summary>
         /// The source file line number on which the message originated
@@ -52,34 +43,23 @@ namespace Z0
         {
             Part = part;
             Caller = caller;
-            File = FilePath.Define(file ?? EmptyString);
+            File = FS.path(file ?? EmptyString);
             Line = (uint)(line ?? 0);
         }
 
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => (File is null) ? true : text.blank(Caller) || File.IsEmpty;
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => (File is null) ? false : (text.nonempty(Caller) || File.IsNonEmpty);
-        }
-
+        [MethodImpl(Inline)]
         public string Format()
         {
             if(Part != 0)
-                return $"{Part.Format()}/{File.FileName}/{Caller}?line = {Line} | {File}";
+                return text.format(KnownPartPattern, Part.Format(), File.FileName, Caller, Line, File);
             else
-                return $"{File.FileName}/{Caller}?line = {Line} | {File}";
+                return text.format(UnknownPartPattern, File.FileName, Caller, Line, File);
         }
-        
+
         public override string ToString()
             => Format();
 
-        public static AppMsgSource Empty         
+        public static AppMsgSource Empty
             => new AppMsgSource(0, EmptyString, EmptyString, 0);
     }
 }

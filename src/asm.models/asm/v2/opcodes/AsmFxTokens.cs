@@ -14,7 +14,7 @@ namespace Z0.Asm
 
     public readonly struct AsmFxTokens
     {
-        public readonly TableSpan<TokenModel> Models;
+        public readonly TableSpan<TokenInfo> Models;
 
         public readonly string[] Meanings;
 
@@ -23,10 +23,10 @@ namespace Z0.Asm
         public readonly string[] Definitions;
 
         public readonly byte[] ValueEncoding;
-    
+
         [MethodImpl(Inline), Op]
         static uint EncodeDefinitions(string[] src, byte[] dst)
-            => asci.encode(src, dst, EncodingDelimiter);           
+            => asci.encode(src, dst, EncodingDelimiter);
 
         [MethodImpl(Inline), Op]
         public string Definition(AsmTokenKind id)
@@ -37,7 +37,7 @@ namespace Z0.Asm
             => Meanings[(int)id];
 
         [MethodImpl(Inline), Op]
-        public ref readonly TokenModel Token(AsmTokenKind id)
+        public ref readonly TokenInfo Token(AsmTokenKind id)
             => ref Models[(int)id];
 
         [MethodImpl(Inline), Op]
@@ -58,7 +58,7 @@ namespace Z0.Asm
             Meanings = index.Meaning;
             Identity = index.Identifier;
             Definitions = index.Value;
-            ValueEncoding = new byte[Definitions.Map(x => x.Length).Sum() + Definitions.Length];        
+            ValueEncoding = new byte[Definitions.Map(x => x.Length).Sum() + Definitions.Length];
             EncodeDefinitions(Definitions,ValueEncoding);
         }
     }

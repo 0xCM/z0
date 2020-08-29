@@ -8,15 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     partial struct Flow
     {
         [Op, Closures(UnsignedInts)]
-        public static WfProcessedFile<T> processed<T>(string actor, T kind, FilePath src, uint size, CorrelationToken ct)
-            => new WfProcessedFile<T>(actor, kind, src, size, ct);
-
-        [Op, Closures(UnsignedInts)]
         public static void processed<T>(IWfContext wf, string actor, T kind, FilePath src, uint size, CorrelationToken ct)
-            => wf.Raise(processed(actor, kind, src, size, ct));
+            => wf.Raise(WfEvents.processed(actor, kind, src, size, ct));
     }
 }

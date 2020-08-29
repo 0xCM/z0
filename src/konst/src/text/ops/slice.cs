@@ -16,19 +16,19 @@ namespace Z0
         /// Extracts a substring
         /// </summary>
         /// <param name="src">The source text</param>
-        /// <param name="startidx">The index of the first character</param>
+        /// <param name="start">The index of the first character</param>
         [MethodImpl(Inline), Op]
-        public static string slice(string src, int startidx)
-            => src.Substring(startidx);        
+        public static string slice(string src, int start)
+            => src.Substring(start);
 
         /// <summary>
         /// Extracts a substring
         /// </summary>
         /// <param name="src">The source text</param>
-        /// <param name="startidx">The index of the first character</param>
+        /// <param name="start">The index of the first character</param>
         /// <param name="length">The substring length</param>
         [MethodImpl(Inline), Op]
-        public static string slice(string src, int startidx, int length)
-            => src.Substring(startidx, length);        
+        public static string slice(string src, int start, int length)
+            => src.Substring(start, length);
     }
 }

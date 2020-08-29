@@ -1,0 +1,1 @@
+mklink .settings\vscode.json J:\tools\vscode\data\user-data\User\settings.json

@@ -80,7 +80,7 @@ namespace Z0.Asm.Data
         {
             var data = AsmOpCodes.dataset();
             var count = data.OpCodeCount;
-            var records = data.Records.ToReadOnlySpan();
+            var records = data.Entries.View;
             using var writer = CaseWriter("OpCodes");
             writer.WriteLine(AsmOpCodeTable.FormatHeader());
             for(var i=0; i<records.Length; i++)

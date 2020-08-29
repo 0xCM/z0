@@ -93,7 +93,7 @@ namespace Z0
             for(var i=0; i<refs.Length; i++)
             {
                 var r = refs[i];
-                var data = Addressable.view(r.Address, r.DataSize);
+                var data = Address.view(r.Address, r.DataSize);
                 dst.WriteLine(data.FormatHexBytes(Chars.Space));
 
             }

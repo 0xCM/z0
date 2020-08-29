@@ -43,18 +43,36 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T add<T>(in T src, uint count)
-            => ref Add(ref edit(src), (int)count);            
+            => ref Add(ref edit(src), (int)count);
 
+        /// <summary>
+        /// Adds an offset to a reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="count">The T-cell count to add</param>
+        /// <typeparam name="T">The reference type</typeparam>
         [MethodImpl(Inline)]
         public static ref T add<T>(in T src, byte count)
-            => ref Add(ref edit(src), (int)count);                        
+            => ref Add(ref edit(src), (int)count);
 
+        /// <summary>
+        /// Adds an offset to a reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="count">The T-cell count to add</param>
+        /// <typeparam name="T">The reference type</typeparam>
         [MethodImpl(Inline)]
         public static ref T add<T>(in T src, ushort count)
-            => ref Add(ref edit(src), (int)count);                        
+            => ref Add(ref edit(src), (int)count);
 
+        /// <summary>
+        /// Adds an offset to a reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="count">The T-cell count to add</param>
+        /// <typeparam name="T">The reference type</typeparam>
         [MethodImpl(Inline)]
         public static ref T add<T>(in T src, ulong count)
-            => ref Add(ref edit(src), (int)count);                        
+            => ref Add(ref edit(src), (int)count);
     }
 }

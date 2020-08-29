@@ -71,10 +71,6 @@ namespace Z0
             return @event.EventId;
         }
 
-
-        public void Warn<T>(string actor, T content, CorrelationToken ct)
-            => Flow.warn(this, actor, content, ct);
-
         public void ProcessingFile<T>(T kind, FilePath src, [File] string actor = null, [Line] int? line = null)
             => Flow.processing(this, Path.GetFileNameWithoutExtension(actor), kind, src, Ct);
 

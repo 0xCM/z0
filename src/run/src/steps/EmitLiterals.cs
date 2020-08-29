@@ -73,11 +73,19 @@ namespace Z0
             var formatter = TableFormat.rows<EnumLiteralDetail>();
             var dst = Df.Target.Writer();
             dst.WriteLine(formatter.FormatHeader(EnumLiteralDetail.RenderWidths));
+
             for(var i=0u; i<count; i++)
             {
                 ref readonly var row = ref skip(src,i);
-                Format(row, formatter);
-                dst.WriteLine(formatter.Render());
+                try
+                {
+                    Format(row, formatter);
+                    dst.WriteLine(formatter.Render());
+                }
+                catch(Exception e)
+                {
+                    Wf.Warn(StepId, e.Message);
+                }
             }
             Emitted = src;
         }

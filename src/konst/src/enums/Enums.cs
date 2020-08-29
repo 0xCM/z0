@@ -19,7 +19,7 @@ namespace Z0
         public static Refinement<V,T> refine<V,T>(V src, T t = default)
             where V : unmanaged, Enum
             where T : unmanaged
-                => new Refinement<V,T>(src);            
+                => new Refinement<V,T>(src);
 
         [MethodImpl(Inline)]
         public static E zero<E>()
@@ -36,7 +36,7 @@ namespace Z0
             var exp = (byte)(@base & EnumScalarKind.WidthMask);
             return (TypeWidth)Pow2.pow(exp);
         }
-                   
+
         /// <summary>
         /// Determines an enumeration's underlying kind
         /// </summary>
@@ -47,7 +47,7 @@ namespace Z0
                 => Primitive.ecode<E>();
 
         /// <summary>
-        /// Reads a generic numeric value from a generic enum. 
+        /// Reads a generic numeric value from a generic enum.
         /// </summary>
         /// <param name="e">The enum value to reinterpret</param>
         /// <typeparam name="E">The enum source type</typeparam>
@@ -79,7 +79,7 @@ namespace Z0
         public static V scalar_slow<V>(Enum e)
             where V : unmanaged
                 => (V)Convert.ChangeType(e, e.GetTypeCode());
- 
+
         /// <summary>
         /// Gets the literals defined by an enumeration together with their integral values
         /// </summary>
@@ -127,7 +127,7 @@ namespace Z0
         {
             var literals = span(literals<E>());
             var count = literals.Length - crop;
-            return literals.Slice(0,count);            
+            return literals.Slice(0,count);
         }
 
         /// <summary>

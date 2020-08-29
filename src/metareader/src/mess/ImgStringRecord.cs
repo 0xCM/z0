@@ -10,16 +10,16 @@ namespace Z0
     using static Konst;
 
     using F = ImgStringField;
-    using W = StringValueWidths;
+    using W = ImageStringField;
 
     partial class PartRecords
     {
-        public static RecordFormatter<F,W> formatter(ImgStringRecord spec)
+        public static RecordFormatter<F,W> formatter(ImageString spec)
             => Tabular.Formatter<F,W>();
 
         [Op]
-        public static ref readonly RecordFormatter<F,W> format(in ImgStringRecord src, in RecordFormatter<F,W> dst, bool eol = true)
-        {            
+        public static ref readonly RecordFormatter<F,W> format(in ImageString src, in RecordFormatter<F,W> dst, bool eol = true)
+        {
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.Source, src.Source);
             dst.Delimit(F.HeapSize, src.HeapSize);

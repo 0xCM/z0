@@ -9,12 +9,12 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    
+
     public readonly struct PartIdParser : IPartIdParser
     {
         public static IPartIdParser Service => default(PartIdParser);
-     
-        public static PartId part(FilePath src)        
+
+        public static PartId part(FilePath src)
             => PartIdParser.single(src.FileName.Name.Replace("z0.", EmptyString).Replace(".dll", EmptyString).Replace(".exe", EmptyString));
 
         public ParseResult<PartId> Parse(string src)
@@ -35,7 +35,7 @@ namespace Z0
                 dst[i] = parse<PartId>(parts[i]).ValueOrDefault();
             return dst;
         }
-        
+
         public PartId[] ParseValid(params string[] args)
             => WhereSome(args.Map(arg => parse<PartId>(arg).ValueOrDefault()));
 
@@ -44,15 +44,15 @@ namespace Z0
             var result = WhereSome(args.Map(arg => parse<PartId>(arg).ValueOrDefault()));
             return result.Length == 0 ? fallback : result;
         }
-        
+
         [MethodImpl(Inline)]
         static E zero<E>()
             where E : unmanaged, Enum
                 => default(E);
 
         [MethodImpl(Inline)]
-        static bool IsSome<E>(E src)        
-            where E : unmanaged, Enum            
+        static bool IsSome<E>(E src)
+            where E : unmanaged, Enum
                 => !zero<E>().Equals(src);
 
         /// <summary>
@@ -73,8 +73,9 @@ namespace Z0
             where E : unmanaged, Enum
         {
             try
-            {                
-                return ParseResult.Success(name, Enum.Parse<E>(name,true));
+            {
+                var src = text.remove(name, Chars.Dot);
+                return ParseResult.Success(name, Enum.Parse<E>(src,true));
             }
             catch(Exception e)
             {

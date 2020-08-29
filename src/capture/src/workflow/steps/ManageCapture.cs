@@ -101,7 +101,7 @@ namespace Z0
         {
             var index = ApiMemberOps.index(src);
             foreach(var key in index.DuplicateKeys)
-                State.Raise(new WfWarn<string>(StepName, $"Duplicate key {key}", Ct));
+                Wf.Warn(StepId, $"Duplicate key {key}");
         }
     }
 }

@@ -31,14 +31,14 @@ namespace Z0
         void Error(in WfActor actor, Exception e, CorrelationToken? ct = null)
             => Flow.error(this, actor, e, ct ?? Ct);
 
-        void Warn<T>(string actor, T content, CorrelationToken? ct = null)
-            => Flow.warn(this, actor, content, ct ?? Ct);
+        void Warn<T>(WfStepId step, T content)
+            => Raise(WfEvents.warn(step, content, Ct));
 
         void ProcessingFile<T>(T kind, FilePath src, [File] string actor = null, [Line] int? line = null)
-            => Flow.processing(this, Path.GetFileNameWithoutExtension(actor), kind, src, Ct);
+            => Raise(WfEvents.processing(Path.GetFileNameWithoutExtension(actor), kind, src, Ct));
 
         void ProcessedFile<T>(T kind, FilePath src, uint size, [File] string actor = null, [Line] int? line = null)
-            => Flow.processed(this, ToActorName(actor), kind, src, size, Ct);
+            => Raise(WfEvents.processed(ToActorName(actor), kind, src, size, Ct));
 
         void Ran(string actor, CorrelationToken ct)
             => Flow.ran(this, actor, "Finished", ct);

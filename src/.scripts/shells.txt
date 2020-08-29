@@ -1,0 +1,26 @@
+       // {
+        //     "shell":"C:\\Windows\\System32\\cmd.exe",
+        //     "label": "vscmd",
+        //     "args":["/k", "J:\\tools\\msvs\\Common7\\Tools\\VsDevCmd.bat"]
+        // },
+        // {
+        //     "shell": "J:\\Tools\\Git\\bin\\bash.exe",
+        //     "label": "bash:git"
+        // },
+        // {
+        //     "shell": "J:\\tools\\cygwin\\bin\\bash.exe",
+        //     "label": "bash:cygwin",
+        //     "args": ["--login",
+        //         "-i",
+        //         "/j/tools/msys64/home/Administrator/.bash_profile"
+        //     ]
+        // },
+        // {
+        //     "label": "bash:ansi",
+        //     "shell": "j:\\tools\\ansicon\\x64\\ansicon.exe",
+        //     "args":[
+        //         "J:\\Tools\\Git\\bin\\bash.exe",
+        //         "--login",
+        //         "-i"]
+        // },
+

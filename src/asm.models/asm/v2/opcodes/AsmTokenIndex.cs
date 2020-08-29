@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     [ApiHost]
@@ -20,12 +20,12 @@ namespace Z0
             var index = new AsmTokenIndex();
 
 
-            return index;    
+            return index;
         }
 
         [MethodImpl(Inline), Op]
         public ref readonly string identifier(AsmTokenKind kind)
-            => ref Identifier[kind];            
+            => ref Identifier[kind];
 
         [MethodImpl(Inline), Op]
         public string meaning(AsmTokenKind kind)
@@ -33,10 +33,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public string value(AsmTokenKind kind)
-            => Value[(int)kind];            
+            => Value[(int)kind];
 
         [MethodImpl(Inline), Op]
-        public TokenModel model(AsmTokenKind kind)
+        public TokenInfo model(AsmTokenKind kind)
             => Model[(int)kind];
-    }        
+    }
 }

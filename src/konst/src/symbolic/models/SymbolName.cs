@@ -29,38 +29,16 @@ namespace Z0
         public string Format()
             => Ref.Format();
 
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Ref.IsNonEmpty;
+        }
+
         public static SymbolName Empty
         {
             [MethodImpl(Inline)]
             get => new SymbolName(EmptyString);
-        }
-    }
-
-    public readonly struct SymbolName<S>
-        where S : unmanaged
-    {
-        readonly StringRef Ref;
-
-        [MethodImpl(Inline)]
-        public static implicit operator SymbolName(SymbolName<S> src)
-            => new SymbolName(src.Ref);
-
-        [MethodImpl(Inline)]
-        public static implicit operator SymbolName<S>(string src)
-            => new SymbolName<S>(src);
-
-        [MethodImpl(Inline)]
-        public SymbolName(string src)
-            => Ref = src;
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Ref.Format();
-
-        public static SymbolName<S> Empty
-        {
-            [MethodImpl(Inline)]
-            get => new SymbolName<S>(EmptyString);
         }
     }
 }

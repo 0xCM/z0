@@ -2,38 +2,21 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using Z0.Asm;
     using Z0.Tokens;
 
     using static Konst;
     using static z;
 
     [ApiHost]
-    public readonly struct AsmOpCodes
+    public readonly partial struct AsmOpCodes
     {
-        [MethodImpl(Inline), Op]
-        public static MnemonicExpression mnemonicExpr(in AsmOpCodeTable src)
-            => new MnemonicExpression(src.Mnemonic);
-
-        [MethodImpl(Inline), Op]
-        public static CpuidExpression cpuidExpr(in AsmOpCodeTable src)
-            => new CpuidExpression(src.CpuId);
-
-        [MethodImpl(Inline), Op]
-        public static AsmOpCode opcode(in AsmOpCodeTable src)
-            => new AsmOpCode(src.OpCode);
-
-        [MethodImpl(Inline), Op]
-        public static AsmFxPattern fxExpr(in AsmOpCodeTable src)
-            => new AsmFxPattern(src.Instruction);
-
-        public static TableSpan<TokenModel> Tokens
+        public static TableSpan<TokenInfo> Tokens
             => AsmTokenIndex.create().Model;
 
         [MethodImpl(Inline), Op]
@@ -56,19 +39,14 @@ namespace Z0
             return new AsmOpCodeDataset(records,identifers);
         }
 
-        [MethodImpl(Inline), Op]
-        static AsmOpCodePartitoner partitioner(uint seq = 0)
-            => new AsmOpCodePartitoner((int)seq);
-
         [Op]
-        public AsmOpCodeGroup partition(uint seq = 0)
+        public AsmOpCodeGroup partition()
         {
             var dataset = AsmOpCodes.dataset();
             var count = dataset.OpCodeCount;
-            var records = dataset.Records;
             var handler = new AsmOpCodeGroup((uint)count);
-            var processor = partitioner(seq);
-            Partition(processor, handler, records);
+            var processor = new AsmOpCodePartitoner();
+            Partition(processor, handler, dataset.Entries.View);
             return handler;
         }
 
@@ -93,10 +71,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static void process(in AsmOpCodeTable src, in AsmOpCodeGroup handler, ref uint s0)
         {
-            process(opcode(src), handler, s0);
-            process(fxExpr(src), handler, s0);
-            process(mnemonicExpr(src), handler, s0);
-            process(cpuidExpr(src), handler, s0);
+            process(AsmExpression.opcode(src), handler, s0);
+            process(AsmExpression.fx(src), handler, s0);
+            process(AsmExpression.mnemonic(src), handler, s0);
+            process(AsmExpression.cpuid(src), handler, s0);
         }
 
         [MethodImpl(Inline), Op]
@@ -261,27 +239,17 @@ namespace Z0
             }
         }
 
-        public void opcode_reccords()
-        {
-            var data = AsmOpCodes.dataset();
-            var count = data.OpCodeCount;
-            var records = data.Records.ToReadOnlySpan();
-            using var writer = CaseWriter("OpCodes");
-            writer.WriteLine(AsmOpCodeTable.FormatHeader());
-            for(var i=0; i<records.Length; i++)
-                writer.WriteLine(skip(records,i).Format());
-        }
 
         void opcode_tokens()
         {
             var data = AsmOpCodes.dataset();
             var count = data.OpCodeCount;
-            var records = data.Records.ToReadOnlySpan();
-            var identifers = data.OpCodeIdentifiers.ToReadOnlySpan();
+            var records = data.Entries.View;
+            var identifers = data.Identity.View;
             insist(count, records.Length);
             insist(count, identifers.Length);
 
-            var processor = partitioner();
+            var processor = new AsmOpCodePartitoner();
             var handler = AsmOpCodeGroup.Create(count);
             processor.Partition(records, handler);
 

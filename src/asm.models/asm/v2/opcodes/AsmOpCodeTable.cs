@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -13,14 +13,14 @@ namespace Z0.Asm
     using R = AsmOpCodeTable;
 
     public struct AsmOpCodeTable : ITable<F,R>
-    {                   
+    {
         public static string FormatHeader(char delimiter = FieldDelimiter)
             => Table.headerText<F>(delimiter);
-            
+
         public int Sequence;
 
 		public asci32 Mnemonic;
-		
+
 		public asci32 OpCode;
 
         public asci64 Instruction;
@@ -35,30 +35,7 @@ namespace Z0.Asm
 
         public OpCodeId CodeId;
 
-        [MethodImpl(Inline)]
-        public AsmOpCodeTable(
-            int Sequence, 
-            asci32 Mnemonic, 
-            asci32 OpCode, 
-            asci64 Instruction, 
-            YeaOrNea M16, 
-            YeaOrNea M32, 
-            YeaOrNea M64, 
-            asci64 CpuId, 
-            OpCodeId Id)
-        {
-            this.Sequence = Sequence;
-            this.Mnemonic = Mnemonic;
-            this.OpCode = OpCode;
-            this.Instruction = Instruction;
-            this.M16 = M16;
-            this.M32 = M32;
-            this.M64 = M64;
-            this.CpuId = CpuId;
-            this.CodeId = Id;
-        }
-
-        public bool IsEmpty 
+        public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => Sequence == 0 && CodeId == OpCodeId.INVALID;
@@ -90,8 +67,8 @@ namespace Z0.Asm
 
         public override string ToString()
             => Format();
-        
-        public static AsmOpCodeTable Empty 
+
+        public static AsmOpCodeTable Empty
             => default;
-    }    
+    }
 }

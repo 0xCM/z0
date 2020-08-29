@@ -27,11 +27,11 @@ namespace Z0
             Wf.Created(WorkerName, Ct);
         }
 
-        void Run(EmitConstantDatasetsStep kind)
+        void Run(EmitImageConstantsStep kind)
         {
             try
             {
-                using var step = new EmitConstantDatasets(Wf, Parts, Ct);
+                using var step = new EmitImageConstants(Wf, Parts, Ct);
                 step.Run();
             }
             catch(Exception e)
@@ -53,11 +53,11 @@ namespace Z0
             }
         }
 
-        void Run(EmitCilDatasetsStep kind)
+        void Run(EmitPartCil kind)
         {
             try
             {
-                using var step = new EmitCilDatasets(Wf, Parts, Ct);
+                using var step = new EmitPartCil(Wf, Parts, Ct);
                 step.Run();
             }
             catch(Exception e)
@@ -92,11 +92,11 @@ namespace Z0
             }
         }
 
-        void Run(EmitBlobsStep kind)
+        void Run(EmitImageBlobsStep kind)
         {
             try
             {
-                using var step = new EmitBlobs(Wf, Parts, Ct);
+                using var step = new EmitImageBlobs(Wf, Parts, Ct);
                 step.Run();
             }
             catch(Exception e)
@@ -121,12 +121,12 @@ namespace Z0
         public void Run()
         {
             Wf.Running(WorkerName, Ct);
-            Run(default(EmitConstantDatasetsStep));
+            Run(default(EmitImageConstantsStep));
             Run(default(EmitPeHeadersStep));
-            Run(default(EmitCilDatasetsStep));
+            Run(default(EmitPartCil));
             Run(default(EmitImageContentStep));
             Run(default(EmitStringRecordsStep));
-            Run(default(EmitBlobsStep));
+            Run(default(EmitImageBlobsStep));
             Run(default(EmitFieldMetadataStep));
             Wf.Ran(WorkerName, Ct);
         }

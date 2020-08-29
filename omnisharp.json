@@ -1,9 +1,0 @@
-{
-    "msbuild": {
-       "enabled": true
-
-    },
-    "script": {
-      "enabled": true
-    }
-  }

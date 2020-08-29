@@ -9,10 +9,10 @@ namespace Z0
     using System.Linq;
 
     using Z0.Data;
-    
+
     using static Konst;
     using static z;
-    
+
     public readonly struct Tabular
     {
         [MethodImpl(Inline)]
@@ -32,7 +32,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static F[] literals<F>()
-            where F : unmanaged, Enum            
+            where F : unmanaged, Enum
                 => Z0.Table.index<F>().Literals;
 
         /// <summary>
@@ -46,15 +46,15 @@ namespace Z0
             var literals = @readonly(literals<F>());
             var count = literals.Length;
             var headBuffer = sys.alloc<string>(count);
-            var fieldBuffer = sys.alloc<TabularField<F>>(count);            
+            var fieldBuffer = sys.alloc<TabularField<F>>(count);
             var fields = span(fieldBuffer);
 
             for(var i=0u; i<count; i++)
             {
-                ref readonly var literal = ref skip(literals, i);                
-                seek(fields,i) = new TabularField<F>(literal, literal.ToString(), (int)i, (short)(uint32(literal) >> WidthOffset));                
+                ref readonly var literal = ref skip(literals, i);
+                seek(fields,i) = new TabularField<F>(literal, literal.ToString(), (int)i, (short)(uint32(literal) >> WidthOffset));
             }
-            
+
             return new TabularFormat<F>(fieldBuffer);
         }
 
@@ -77,11 +77,11 @@ namespace Z0
         public static int Width<F>(F field)
             where F : unmanaged, Enum
                 => Dataset.width(field);
-    
+
         [MethodImpl(Inline)]
         public static string[] Headers<F>()
             where F : unmanaged, Enum
-                => Dataset.labels<F>();    
+                => Dataset.labels<F>();
 
         [MethodImpl(Inline)]
         public static RecordFormatter<F,W> Formatter<F,W>(char delimiter = FieldDelimiter)
@@ -95,10 +95,10 @@ namespace Z0
         /// <param name="sep">The default field delimiter</param>
         /// <typeparam name="F">The type of the defining enum</typeparam>
         [MethodImpl(Inline)]
-        public static IDatasetFormatter<F> Formatter<F>(char sep)
+        public static IDatasetFormatter<F> Formatter<F>(char sep = FieldDelimiter)
             where F : unmanaged, Enum
                 => new DatasetFormatter<F>(text.build(), sep);
-                
+
         [MethodImpl(Inline)]
         public static DatasetHeader<F> Header<F>()
             where F : unmanaged, Enum

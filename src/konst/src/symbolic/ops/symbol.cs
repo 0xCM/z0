@@ -11,6 +11,7 @@ namespace Z0
 
     partial struct Symbolic
     {
+
         [MethodImpl(Inline)]
         public static Symbol<S> symbol<S>(S value)
             where S : unmanaged
@@ -28,6 +29,5 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => new Symbol<S,T,N>(value);
-
     }
 }
