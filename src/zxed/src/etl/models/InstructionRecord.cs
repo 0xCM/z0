@@ -8,7 +8,7 @@ namespace Z0
 
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     using F = XedInstructionField;
@@ -17,7 +17,7 @@ namespace Z0
     public enum XedInstructionField : uint
     {
         Sequence = 0 | 16 << WidthOffset,
-        
+
         Mnemonic = 1 | 16 << WidthOffset,
 
         Extension = 2 | 16 << WidthOffset,
@@ -28,14 +28,11 @@ namespace Z0
 
         Reg = 5 | 8 << WidthOffset,
     }
-    
+
     public readonly struct XedInstructionRecord : IRecord<F,R>
     {
-        public static XedInstructionRecord Empty 
-            => new XedInstructionRecord(0, asci.Null, asci.Null, asci.Null, asci.Null, asci.Null);
-
         public readonly int Sequence;
-        
+
         public readonly asci16 Mnemonic;
 
         public readonly asci16 Extension;
@@ -45,7 +42,7 @@ namespace Z0
         public readonly asci4 Mod;
 
         public readonly asci8 Reg;
-    
+
         [MethodImpl(Inline)]
         public XedInstructionRecord(int Sequence, asci16 Mnemonic, asci16 Extension, asci8 BaseCode, asci4 Mod, asci8 Reg)
         {
@@ -56,9 +53,9 @@ namespace Z0
             this.Mod = Mod;
             this.Reg = Reg;
         }
-        
+
         public string DelimitedText(char delimiter)
-        {            
+        {
             var formatter = Tabular.Formatter<F>(delimiter);
             formatter.Delimit(F.Sequence, Sequence);
             formatter.Delimit(F.Mnemonic, Mnemonic);
@@ -69,7 +66,7 @@ namespace Z0
             return string.Empty;
         }
 
-        int ISequential.Sequence 
+        int ISequential.Sequence
             => Sequence;
     }
 }

@@ -15,6 +15,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static IEvalControl control(IAppContext context, IPolyrand random, FolderPath root, uint bufferSize)
-            => new Asm.EvalControl(context, random, root, bufferSize);
+            => new EvalControl(context, random, root, bufferSize);
     }
 }

@@ -32,7 +32,7 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {
-            var s = Flow.settings(Context, Ct);
+            var s = AB.settings(Context, Ct);
             var config = Flow.configure(Context, args, Ct);
             using var log = AB.log(config);
             using var context = Flow.context(Context, config, log, Ct);

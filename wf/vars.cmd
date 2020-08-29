@@ -1,5 +1,5 @@
-set TargetFramework=netcoreapp3.1
-set RuntimeIdentifier=win-x64
+set Framework=netcoreapp3.1
+set RtId=win-x64
 set AppName=z0
 set AppResName=respack
 set Dev=%ZDev%
@@ -11,7 +11,7 @@ set AssetDir="j:\assets"
 set Archive="k:\z0\archives"
 set DevBuild="%ZBin%"
 set StageBuildRoot=%Stage%\builds
-set StageBuild="%StageBuildRoot%\%AppName%\%TargetFramework%\%RuntimeIdentifier%"
+set StageBuild="%StageBuildRoot%\%AppName%\%Framework%\%RtId%"
 set ToolDir="%AssetDir%\tools\exe"
 set LibDir="%AssetDir%\tools\lib"
 set IncDir="%AssetDir%\tools\specs\headers"

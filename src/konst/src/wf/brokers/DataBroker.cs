@@ -13,7 +13,7 @@ namespace Z0
     public readonly struct DataBroker<K,C,T> : IWfDataBroker<K,C,T>
         where K : unmanaged, Enum
     {
-        public IWfContext Wf {get;}
+        public IWfShell Wf {get;}
 
         readonly DataHandler<C,T>[] handlers;
 
@@ -26,7 +26,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public DataBroker(IWfContext wf, int capacity, IndexFunction<K> xf)
+        public DataBroker(IWfShell wf, int capacity, IndexFunction<K> xf)
         {
             Wf = wf;
             handlers = new DataHandler<C,T>[capacity];

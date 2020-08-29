@@ -134,6 +134,9 @@ namespace Z0
         FolderPath BuildStage
             => LogRoot + FolderName.Define("builds");
 
+        FolderPath CaptureStage
+            => LogRoot + CaptureFolder + FolderName.Define("artifacts");
+
         /// <summary>
         /// The directory into into which standard out stream emissions are deposited
         /// </summary>

@@ -2,19 +2,24 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    partial struct Flow    
+    public readonly struct AsmStatements
     {
+        public AsmRoutineHeader Header {get;}
+
+        public readonly AsmStatement[] Statements;
+
         [MethodImpl(Inline)]
-        public static TableSectors<D,S> selectors<D,S>(TableSelector<D,S>[] src, S min, S max)
-            where D : unmanaged, Enum        
-            where S : unmanaged
-                => new TableSectors<D,S>(src,min,max);
+        public AsmStatements(AsmRoutineHeader header, AsmStatement[] src)
+        {
+            Header = header;
+            Statements = src;
+        }
     }
 }

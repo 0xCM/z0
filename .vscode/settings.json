@@ -19,6 +19,7 @@
         "Dynop",
         "Dynops",
         "EFLAGS",
+        "ICLASS",
         "ILAs",
         "Immediates",
         "Injective",

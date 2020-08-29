@@ -134,5 +134,13 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static WfProcessedFile<T> processed<T>(string actor, T kind, FilePath src, uint size, CorrelationToken ct)
             => new WfProcessedFile<T>(actor, kind, src, size, ct);
+
+        [MethodImpl(Inline), Op]
+        public static WfEventOrigin origin(in WfEventId id, string actor, in WfCaller call)
+            => new WfEventOrigin(id,actor, call);
+
+        [MethodImpl(Inline), Op]
+        public static WfEventOrigin origin(in WfEventId id, PartId part, string actor, [CallerMemberName] string caller = null, [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
+            => new WfEventOrigin(id,actor, AB.caller(part, caller,file,line));
     }
 }

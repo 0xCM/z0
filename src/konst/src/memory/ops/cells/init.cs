@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static z;    
+    using static z;
 
     readonly partial struct CellBlocks
     {
@@ -17,7 +17,7 @@ namespace Z0
         public static CellBlock32 init(Vector256<ushort> lo, Vector256<ushort> hi)
         {
             var src = new Seg512(lo,hi);
-            var dst = alloc(w32);
+            var dst = alloc(w8, n32);
             copy(z.bytes(src), ref dst);
             return dst;
         }

@@ -71,10 +71,10 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         static void process(in AsmOpCodeTable src, in AsmOpCodeGroup handler, ref uint s0)
         {
-            process(AsmExpression.opcode(src), handler, s0);
-            process(AsmExpression.fx(src), handler, s0);
-            process(AsmExpression.mnemonic(src), handler, s0);
-            process(AsmExpression.cpuid(src), handler, s0);
+            process(AsmExpressions.opcode(src), handler, s0);
+            process(AsmExpressions.fx(src), handler, s0);
+            process(AsmExpressions.mnemonic(src), handler, s0);
+            process(AsmExpressions.cpuid(src), handler, s0);
         }
 
         [MethodImpl(Inline), Op]
@@ -124,7 +124,7 @@ namespace Z0.Asm
         }
 
         [Op]
-        public static unsafe Asm.AsmOpCodeTokens load(ReadOnlySpan<FieldRef> src, AsmOpCodeToken[] dst)
+        public static AsmOpCodeTokens load(ReadOnlySpan<FieldRef> src, AsmOpCodeToken[] dst)
         {
             var buffer = span(dst);
             ref var target = ref first(buffer);
@@ -134,7 +134,7 @@ namespace Z0.Asm
                 var sr = field.ToStringRef();
                 seek(buffer, i) = new AsmOpCodeToken(i, (AsmOpCodeTokenKind)(i + 1), sr);
             }
-            return new Asm.AsmOpCodeTokens(dst);
+            return new AsmOpCodeTokens(dst);
         }
 
         [Op]
@@ -238,7 +238,6 @@ namespace Z0.Asm
                 dst.WriteLine(line);
             }
         }
-
 
         void opcode_tokens()
         {

@@ -28,7 +28,7 @@ namespace Z0
         public void Configure(params WfStepArg[] args)
         {
             Args = args;
-            Step.Configure(Args) ;
+            Step.Configure(Args);
         }
 
         public WfStepId Id

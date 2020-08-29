@@ -11,22 +11,18 @@ namespace Z0.Asm
 
     public readonly struct CpuidExpression
     {
-        public readonly asci16 Value;
+        public readonly asci64 Value;
 
         [MethodImpl(Inline)]
         public static implicit operator CpuidExpression(string src)
             => new CpuidExpression(src);
 
         [MethodImpl(Inline)]
-        public CpuidExpression(asci16 src)
+        public CpuidExpression(in asci64 src)
             => Value = src;
 
         [MethodImpl(Inline)]
         public CpuidExpression(string src)
-            => asci.encode(src, out Value);
-
-        [MethodImpl(Inline)]
-        public CpuidExpression(char[] src)
             => asci.encode(src, out Value);
 
         public ReadOnlySpan<byte> Encoded

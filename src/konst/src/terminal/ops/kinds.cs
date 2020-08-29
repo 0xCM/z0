@@ -51,7 +51,7 @@ namespace Z0
         public static void error(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             var msg = string.Empty.Build();
-            msg.AppendLine($"Failure ocuurred at {caller} {file} {line}");
+            msg.AppendLine($"Failure occurred at {caller} {file} {line}");
             msg.AppendLine(content?.ToString() ?? string.Empty);
             T.WriteError(AppMsg.define($"{msg.ToString()}", MessageKind.Error));
         }
@@ -78,7 +78,7 @@ namespace Z0
         public static void error(ClaimException e, string title, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             var msg = string.Empty.Build();
-            msg.AppendLine($"{title}: Failure ocuurred at {caller} {file} {line}");
+            msg.AppendLine($"{title}: Failure occurred at {caller} {file} {line}");
             msg.AppendLine(e?.ToString() ?? string.Empty);
             T.WriteError(AppMsg.define($"{msg.ToString()}", MessageKind.Error));
         }
@@ -91,7 +91,7 @@ namespace Z0
         public static void errlabel(Exception e, string title, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             var msg = string.Empty.Build();
-            msg.AppendLine($"{title}: Failure ocuurred at {caller} {file} {line}");
+            msg.AppendLine($"{title}: Failure occurred at {caller} {file} {line}");
             msg.AppendLine(e?.ToString() ?? string.Empty);
             T.WriteError(AppMsg.define($"{msg.ToString()}", MessageKind.Error));
         }

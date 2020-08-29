@@ -5,14 +5,16 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
     using System.Reflection;
 
     using static Konst;
+    using static z;
 
-    partial struct Flow
+    partial struct AB
     {
         [Op]
-        public static WfSettings settings(IAppContext context, CorrelationToken ct)
+        public static WfSettings settings(IShellContext context, CorrelationToken ct)
         {
             FilePath configPath()
             {

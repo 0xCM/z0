@@ -18,6 +18,5 @@ namespace Z0
 
         public static FS.FolderPath Normalize(this FS.FolderPath src)
             => new FS.FolderPath(src.Name.Replace(Chars.BSlash, Chars.FSlash));
-
     }
 }

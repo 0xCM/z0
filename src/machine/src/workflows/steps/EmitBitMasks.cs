@@ -48,7 +48,6 @@ namespace Z0
 
         uint emit(Type src)
         {
-
             var literals = span(find(src));
             var count = literals.Length;
             var formatter = NumericLiteralFormatter.Service;

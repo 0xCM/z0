@@ -11,13 +11,13 @@ namespace Z0
     using static EmitFieldMetadataStep;
 
     public readonly ref struct EmitFieldMetadata
-    {    
+    {
         readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
 
         readonly IPart[] Parts;
-        
+
         readonly ImgFieldRecord Spec;
 
         readonly FolderPath TargetDir;
@@ -30,20 +30,20 @@ namespace Z0
             Parts = parts;
             Spec = ImageRecords.Fields;
             TargetDir = wf.ResourceRoot + FolderName.Define("fields");
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId);
         }
 
         public void Run()
-        {  
+        {
             var count = 0u;
             var partCount = Parts.Length;
-            Wf.RunningT(StepName, new {PartCount = partCount}, Ct);
-            
+            Wf.Running(StepId, new {PartCount = partCount});
+
             foreach(var part in Parts)
             {
                 try
-                {                
-                    count += Emit(part);            
+                {
+                    count += Emit(part);
                 }
                 catch(Exception e)
                 {
@@ -51,9 +51,9 @@ namespace Z0
                 }
             }
 
-            Wf.RanT(StepName, new {PartCount = partCount, RecordCount = count}, Ct);
+            Wf.Ran(StepId, new {PartCount = partCount, RecordCount = count});
         }
-        
+
         static IPeMetaReader Reader(string src)
             => PeMetaReader.open(FilePath.Define(src));
 
@@ -68,25 +68,25 @@ namespace Z0
 
             Wf.Emitting(StepName, DatasetName, path, Ct);
 
-            var assembly = part.Owner;                
+            var assembly = part.Owner;
             using var reader = Reader(assembly.Location);
             var src = reader.ReadFields();
-            var count = src.Length;              
+            var count = src.Length;
 
             var formatter = PartRecords.formatter(Spec);
             formatter.EmitHeader();
             foreach(var record in src)
                 PartRecords.format(record, formatter);
 
-            path.Ovewrite(formatter.Render());  
-            Wf.Emitted(StepName, DatasetName, (uint)src.Length, path, Ct);
+            path.Overwrite(formatter.Render());
+            Wf.Emitted(StepId, DatasetName, (uint)src.Length, path);
             return (uint)count;
         }
 
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId);
         }
     }
 }

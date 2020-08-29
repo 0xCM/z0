@@ -73,7 +73,7 @@ namespace Z0
                 => value.HasValue ? some(value.Value) : none<T>();
 
         /// <summary>
-        /// Evaluates a function within a try block and returns the value of the computation if 
+        /// Evaluates a function within a try block and returns the value of the computation if
         /// successful; otherwise, returns None and invokes an error handler if supplied
         /// </summary>
         /// <typeparam name="T">The result type</typeparam>
@@ -92,7 +92,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Evaluates a function within a try block and returns the value of the computation if 
+        /// Evaluates a function within a try block and returns the value of the computation if
         /// successful; otherwise, returns None together with the reported exception
         /// </summary>
         /// <param name="f">The function to evaluate</param>
@@ -130,7 +130,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Evaluates a function within a try block and returns the value of the computation if 
+        /// Evaluates a function within a try block and returns the value of the computation if
         /// successful; otherwise, returns None together with the reported exception
         /// </summary>
         /// <typeparam name="X">The input type</typeparam>
@@ -155,27 +155,27 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The target type</typeparam>
         /// <param name="item">The object to cast</param>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static Option<T> TryCast<T>(object item)
             => item is T ? some((T)item) : none<T>();
 
         static void Handle(Exception e, Action<Exception> handler)
         {
-            if(handler != null) 
-                handler.Invoke(e); 
-            else 
+            if(handler != null)
+                handler.Invoke(e);
+            else
                 Console.Error.WriteLine(e);
         }
 
         static void Handle<X>(Exception e, X x, Action<X,Exception> handler)
         {
-            if(handler != null) 
-                handler.Invoke(x,e); 
-            else 
+            if(handler != null)
+                handler.Invoke(x,e);
+            else
             {
                 var msg = $"Exeption raised during {x} evaluation: {e}";
                 Console.WriteLine(msg);
-            }            
+            }
         }
 
         /// <summary>
@@ -196,6 +196,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T[] array<T>(params T[] src)
             => src;
-
     }
 }

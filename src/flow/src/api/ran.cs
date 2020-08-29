@@ -14,9 +14,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static void ran<T>(IWfContext wf, string worker, T body, CorrelationToken ct)
             => wf.Raise(new WfStepRan<T>(worker, body, ct));
-
-        [MethodImpl(Inline), Op]
-        public static WfStepRunning ran(in WfActor actor, in WfStepId step, CorrelationToken ct)
-            => new WfStepRunning(actor, step, ct);
     }
 }

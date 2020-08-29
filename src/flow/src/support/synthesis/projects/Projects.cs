@@ -15,22 +15,22 @@ namespace Z0
     public readonly partial struct Projects
     {
         const string NetSdk = "Microsoft.NET.Sdk";
-        
+
         [Op]
         public static Project resbytes()
         {
-            var itemBuffer = sys.alloc<ProjectItem>(4);        
-            var items = span(itemBuffer);            
+            var itemBuffer = sys.alloc<ProjectItem>(4);
+            var items = span(itemBuffer);
             seek(items,0) = resource("asm/**/*.asm");
             seek(items,1) = resource("docs/**/*.csv");
             seek(items,2) = resource("index/**/*.csv");
             seek(items,3) = resource("metadata/**/*.csv");
 
-            var propBuffer = sys.alloc<ProjectProperty>(4);        
+            var propBuffer = sys.alloc<ProjectProperty>(4);
             var props = span(propBuffer);
             seek(props,0) = library();
             seek(props,1) = netcoreapp(n3);
-            
+
             return project("z0.res", netsdk(), default, itemBuffer);
         }
 
@@ -40,7 +40,7 @@ namespace Z0
 
         [Op]
         public static void save(in Project src, string type, FolderPath dst)
-            => (dst + filename(src,type)).Ovewrite(src.Render());
+            => (dst + filename(src,type)).Overwrite(src.Render());
 
         [MethodImpl(Inline), Op]
         public static Sdk sdk(string name)

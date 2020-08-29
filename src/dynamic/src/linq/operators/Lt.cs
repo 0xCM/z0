@@ -8,8 +8,8 @@ namespace Z0.Dynamics.Operators
     using System;
     using System.Linq;
     using System.Linq.Expressions;
-      
-    using static Root;
+
+    using static z;
     using static XPress;
 
     public readonly struct Lt<T>
@@ -19,7 +19,6 @@ namespace Z0.Dynamics.Operators
 
         static Func<T,T,bool> _OP
             => _OPSafe.Require();
-
 
         static Option<Func<T,T,bool>> TryConstruct()
             => Try(() =>

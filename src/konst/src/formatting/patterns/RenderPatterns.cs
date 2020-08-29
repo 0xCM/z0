@@ -5,8 +5,6 @@
 namespace Z0
 {
     using static AsciCharText;
-    using A = AsciChar;
-    using T = AsciCharText;
 
     [LiteralProvider]
     public readonly partial struct RenderPatterns

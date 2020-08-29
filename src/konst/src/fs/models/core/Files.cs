@@ -19,6 +19,10 @@ namespace Z0
             public readonly FilePath[] Data;
 
             [MethodImpl(Inline)]
+            public static implicit operator FilePath[](Files src)
+                => src.Data;
+
+            [MethodImpl(Inline)]
             public static implicit operator Files(FilePath[] src)
                 => new Files(src);
 

@@ -15,15 +15,6 @@
     <OutputDir>$(TargetBinDir)</OutputDir>
     <OutputPath>$(TargetBinDir)</OutputPath>
 
-    <!-- <IntermediateBuildDir>$(BuildRootDir)$(MSBuildProjectName)\</IntermediateBuildDir>
-    <TargetBuildRoot>$(BuildRootDir)$(MsBuildProjectName)\</TargetBuildRoot>
-
-    <LibBuildDir>$(BuildRootDir)lib\</LibBuildDir>
-    <BaseIntermediateOutputPath>$(IntermediateBuildDir)</BaseIntermediateOutputPath>
-    <IntermediateOutputPath>$(IntermediateBuildDir)</IntermediateOutputPath>
-    <DocumentationFile>$(LibBuildDir)$(TargetFramework)\$(MsBuildProjectName).xml</DocumentationFile>
-    <OutputDir>$(LibBuildDir)</OutputDir>
-    <OutputPath>$(LibBuildDir)</OutputPath> -->
   </PropertyGroup>
 
 </Project>

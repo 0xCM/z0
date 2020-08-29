@@ -11,6 +11,13 @@ namespace Z0
 
     using static ManageCaptureStep;
 
+    [Step(typeof(Evaluate))]
+    public readonly struct EvaluateStep : IWfStep<EvaluateStep>
+    {
+        public static WfStepId StepId
+            => AB.step<EvaluateStep>();
+    }
+
     public struct ManageCapture : IManageCapture
     {
         readonly WfCaptureState State;
@@ -33,12 +40,12 @@ namespace Z0
             Sink = Wf.WfSink;
             Broker = state.CaptureBroker;
             ImmEmitter = State.Services.ImmEmitter(Sink, State.Asm.Api, State.Formatter, State.RoutineDecoder, State.Config, Ct);
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId);
         }
 
         public void Dispose()
         {
-            State.Finished(nameof(ManageCapture), Ct);
+            Wf.Finished(StepId);
         }
 
         public void Run()
@@ -48,17 +55,18 @@ namespace Z0
             Wf.Raise(new CapturingParts(StepName, State.Parts, Ct));
 
             using var manage = new ManagePartCapture(State, Ct);
-            manage.Consolidate();
+            //manage.Consolidate();
+            manage.Run();
 
             ImmEmitter.ClearArchive(State.Parts);
             ImmEmitter.EmitRefined(State.Parts);
 
-            Wf.Running(nameof(Evaluate), Ct);
-            var eval = Evaluate.control(State.Root, State.Root.Random, Wf.AppPaths.AppCaptureRoot, Pow2.T14);
-            eval.Execute();
-            State.Ran(nameof(Evaluate), Ct);
+            Wf.Running(EvaluateStep.StepId);
+            var evaluate = Evaluate.control(State.Root, State.Root.Random, Wf.AppPaths.AppCaptureRoot, Pow2.T14);
+            evaluate.Execute();
+            Wf.Ran(EvaluateStep.StepId);
 
-            Wf.Ran(StepName, Ct);
+            Wf.Ran(StepId);
         }
 
         public void OnEvent(FunctionsDecoded e)

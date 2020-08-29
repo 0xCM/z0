@@ -33,12 +33,12 @@ namespace Z0
             Ct = state.Ct;
             Paths = Wf.AppPaths;
             Asm = WfBuilder.asm(state.Root);
-            State.Created(ActorName, Ct);
+            Wf.Created(StepId);
         }
 
         public void Run()
         {
-            State.Running(ActorName, Flow.delimit(Wf.Config.Parts), Ct);
+            Wf.Running(StepId, z.delimit(Wf.Config.Parts));
 
             try
             {
@@ -50,12 +50,12 @@ namespace Z0
                 State.Error(ActorName, e, Ct);
             }
 
-            State.Ran(ActorName, Ct);
+            Wf.Ran(StepId);
         }
 
         public void Dispose()
         {
-            Wf.Finished(ActorName, Ct);
+            Wf.Finished(StepId);
         }
     }
 }

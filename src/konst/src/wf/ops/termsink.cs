@@ -6,14 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
-    using static TableFunctions;
+    using static z;
 
-    partial struct Flow
+    partial struct AB
     {
-        [MethodImpl(Inline)]
-        public static WfDataHandler<S,T> handler<S,T>(IWfContext wf, Map<S,T> f, S[] src, T[] dst)
-            => new WfDataHandler<S,T>(wf, f,src,dst);
+        [MethodImpl(Inline), Op]
+        public static WfTermEventSink termsink(IWfEventLog log, CorrelationToken ct)
+            => WfTermEventSink.create(log, ct);
     }
 }

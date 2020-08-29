@@ -237,22 +237,28 @@ namespace Z0
 
         public void Run()
         {
-            using var s0 = new ListFormatPatterns(State.Wf, typeof(RenderPatterns));
-            s0.Run();
 
+            {
+                using var step = new ListFormatPatterns(State.Wf, typeof(RenderPatterns));
+                step.Run();
+            }
 
-            RunFsm();
+            {
+                using var step = new CheckResources(Wf);
+                step.Run();
+            }
 
-            using var s1 = new CheckResources(Wf);
-            s1.Run();
+            {
+                using var step = new EmitLiterals(Wf, Parts.Konst.Assembly);
+                step.Run();
+            }
 
-            using var s2 = new EmitLiterals(Wf, Parts.Konst.Assembly);
-            s2.Run();
-
-            Status(TableIndex.AsmTAddressingModRm32);
+            {
+                using var step = new EmitAsmSymbols(Wf);
+                step.Run();
+            }
 
             //Capture();
-
         }
     }
 }

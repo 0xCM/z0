@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    partial struct asm
+    partial struct FS
     {
-
-
+        [MethodImpl(Inline), Op]
+        public static FilePath[] exclude(FilePath[] src, string pattern)
+            => src.Where(x => !contains(x.Name, pattern));
     }
 }

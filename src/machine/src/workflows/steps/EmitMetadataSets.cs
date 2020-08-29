@@ -23,7 +23,7 @@ namespace Z0
         {
             Wf = context;
             Ct = ct;
-            Parts = ModuleArchives.executing().Parts.Array();
+            Parts = ModuleArchives.entry().Parts.Array();
             Wf.Created(WorkerName, Ct);
         }
 

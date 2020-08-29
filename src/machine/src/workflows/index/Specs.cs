@@ -131,9 +131,12 @@ namespace Z0
     }
 
     [Step(typeof(EmitFieldLiterals))]
-    public readonly struct EmitFieldLiteralsStep
+    public readonly struct EmitFieldLiteralsStep : IWfStep<EmitFieldLiteralsStep>
     {
         public const string StepName = nameof(EmitFieldLiterals);
+
+        public static WfStepId StepId
+            => AB.step<EmitFieldLiteralsStep>();
     }
 
     [Step(typeof(EmitStringRecords))]
@@ -157,11 +160,14 @@ namespace Z0
     }
 
     [Step(typeof(EmitPartStrings))]
-    public readonly struct EmitPartStringsStep
+    public readonly struct EmitPartStringsStep : IWfStep<EmitPartStringsStep>
     {
         public const string StepName = nameof(EmitPartStrings);
 
         public const string EmissionType = EmitStringRecordsStep.DataType;
+
+        public static WfStepId StepId
+            => AB.step<EmitPartStringsStep>();
 
         public static string ExtName(PartStringKind kind)
             => (kind == PartStringKind.System ? EmitStringRecordsStep.SystemKindExt : EmitStringRecordsStep.UserKindExt).ToLower();
@@ -226,11 +232,14 @@ namespace Z0
     }
 
     [Step(typeof(EmitFieldMetadata))]
-    public readonly struct EmitFieldMetadataStep
+    public readonly struct EmitFieldMetadataStep : IWfStep<EmitFieldMetadataStep>
     {
         public const string StepName = nameof(EmitFieldMetadata);
 
         public const string DatasetName = "FieldMetadata";
+
+        public static WfStepId StepId
+            => AB.step<EmitFieldMetadataStep>();
     }
 
     [Step(typeof(EmitImageContent))]

@@ -11,12 +11,15 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct WfCaptureControl
+    public readonly struct WfCaptureControl : IWfStep<WfCaptureControl>
     {
-        public const string ActorName = nameof(CaptureControl);        
-        
+        public const string ActorName = nameof(CaptureControl);
+
         [MethodImpl(Inline)]
         public static CaptureControl create(WfCaptureState state)
             => new CaptureControl(state);
+
+        public static WfStepId StepId => AB.step<WfCaptureControl>();
+
     }
 }

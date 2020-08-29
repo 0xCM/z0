@@ -29,9 +29,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public FieldValues(params EnumFieldValue<E,T>[] src)
-        {
-            Data = src;
-        }
+            => Data = src;
 
         public int Length
         {

@@ -16,7 +16,6 @@ namespace Z0
     {
         protected IMultiSink Sink {get;}
 
-
         protected Shell(IShellContext context, IMultiSink sink)
         {
             Sink = sink;
@@ -32,7 +31,7 @@ namespace Z0
         }
 
         protected Shell()
-            : this(new ShellContext(ApiQuery.KnownComponents))
+            : this(new ShellContext(ApiQuery.assemblies()))
         {
 
         }
@@ -73,7 +72,7 @@ namespace Z0
             => LazyParts.Value;
 
         static Lazy<PartIndex> LazyParts {get;}
-            = z.defer(Parted.executing);
+            = z.defer(() => ApiQuery.index(ApiQuery.parts()));
 
         protected static void Launch(params string[] args)
         {

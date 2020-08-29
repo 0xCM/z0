@@ -5,14 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using Z0.Asm;
 
-    partial struct Flow
+    readonly struct AppShell
     {
-        [MethodImpl(Inline), Op]
-        public static WfTermEventSink termsink(IWfEventLog log, CorrelationToken ct)
-            => WfTermEventSink.create(log, ct);       
+        public const PartId Id = PartId.Control;
+
+        public const string AppName = nameof(PartId.Control);
+
+        public const string ActorName = AppName + "/" + nameof(App);
     }
 }

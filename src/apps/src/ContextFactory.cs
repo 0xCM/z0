@@ -12,12 +12,6 @@ namespace Z0
     [ApiHost]
     public readonly struct ContextFactory
     {
-        public static ApiParts KnownParts
-        {
-            [MethodImpl(Inline), Op]
-            get => ApiQuery.KnownParts;
-        }
-
         public static IShellPaths Paths
         {
             [MethodImpl(Inline), Op]
@@ -26,11 +20,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static IAppContext create()
-            => create(Paths, compose(KnownParts), random());
+            => create(Paths, compose(ApiQuery.parts()), random());
 
         [MethodImpl(Inline), Op]
         public static IAppContext create(IShellPaths paths)
-            => create(paths, compose(KnownParts), random());
+            => create(paths, compose(ApiQuery.parts()), random());
 
         [MethodImpl(Inline), Op]
         public static IAppContext create(IShellPaths paths, IResolvedApi api)

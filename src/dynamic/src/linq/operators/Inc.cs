@@ -8,7 +8,7 @@ namespace Z0.Dynamics.Operators
     using System;
     using System.Linq.Expressions;
 
-    using static Root;
+    using static z;
     using static XPress;
 
     public readonly struct Inc<T>
@@ -36,7 +36,6 @@ namespace Z0.Dynamics.Operators
                         return lambda<T,T>(Expression.Increment).Compile();
                 }
             });
-
 
         public static T Apply(T x)
             => _OP(x);

@@ -47,7 +47,7 @@ namespace Z0
                 var config = Flow.configure(context, args, paths.ResourceRoot + FolderName.Define("capture"), ct);
                 using var log = AB.log(config);
                 using var wf = Flow.context(context, config, log, ct);
-                wf.RunningT(ActorName, Flow.delimit(config.Parts), ct);
+                wf.RunningT(ActorName, z.delimit(config.Parts), ct);
                 using var control = new Control(wf);
                 control.Run();
                 wf.Ran(ActorName, ct);

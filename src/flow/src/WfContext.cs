@@ -71,10 +71,10 @@ namespace Z0
             return @event.EventId;
         }
 
-        public void ProcessingFile<T>(T kind, FilePath src, [File] string actor = null, [Line] int? line = null)
+        public void Processing<T>(T kind, FilePath src, [File] string actor = null, [Line] int? line = null)
             => Flow.processing(this, Path.GetFileNameWithoutExtension(actor), kind, src, Ct);
 
-        public void ProcessedFile<T>(T kind, FilePath src, uint size, [File] string actor = null, [Line] int? line = null)
+        public void Processed<T>(T kind, FilePath src, uint size, [File] string actor = null, [Line] int? line = null)
             => Flow.processed(this,ToActorName(actor), kind, src, size, Ct);
 
         public void Ran(string actor, CorrelationToken ct)

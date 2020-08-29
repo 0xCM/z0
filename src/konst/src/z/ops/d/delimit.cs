@@ -9,12 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Flow    
+    partial struct z
     {
-        [MethodImpl(Inline)]
-        public static TableSelector<D,S> selector<D,S>(D id, S s = default)
-            where D : unmanaged, Enum        
-            where S : unmanaged
-                => new TableSelector<D,S>(id);
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static DelimitedList<T> delimit<T>(T[] src, char delimiter = Chars.Comma)
+            => new DelimitedList<T>(src, delimiter);
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
 
     public readonly struct ModuleArchives
     {
-        public static ModuleArchive executing()
+        public static ModuleArchive entry()
         {
             var entry = Assembly.GetEntryAssembly();
             var path = FilePath.Define(entry.Location);
@@ -24,6 +24,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ModuleArchive from(FolderPath src)
             => new ModuleArchive(src);
+
+        public static ModuleArchive entry(params string[] exclusions)
+        {
+            var entry = Assembly.GetEntryAssembly();
+            var path = FS.path(entry.Location);
+            insist(path.Exists, $"The file for {entry}, it must exist");
+            return from(path.FolderPath, exclusions);
+        }
+
+        [MethodImpl(Inline)]
+        public static ModuleArchive from(FS.FolderPath src, params string[] exclusions)
+            => new ModuleArchive(src, exclusions);
 
         [MethodImpl(Inline)]
         public static ModuleArchive from(params Assembly[] src)

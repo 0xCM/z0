@@ -31,10 +31,22 @@ namespace Z0
         public Symbols(Symbol<S,T>[] src)
             => Data = src;
 
-        public int Count
+        public ReadOnlySpan<Symbol<S,T>> View
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Data.View;
+        }
+
+        public Span<Symbol<S,T>> Edit
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
+        }
+
+        public uint Count
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
         }
 
         public ref readonly Symbol<S,T> this[ulong index]

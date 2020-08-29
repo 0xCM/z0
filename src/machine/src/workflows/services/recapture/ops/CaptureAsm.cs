@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
-    using Z0.Events;
 
     using static Konst;
     using static z;
@@ -45,7 +44,6 @@ namespace Z0
             return captured;
         }
 
-
         Option<AsmRoutineCode> CreateFunction(X86ApiCapture capture)
         {
             var decoded = Context.RoutineDecoder.Decode(capture);
@@ -54,6 +52,5 @@ namespace Z0
             else
                 return z.none<AsmRoutineCode>();
         }
-
     }
 }

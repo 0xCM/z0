@@ -152,7 +152,7 @@ namespace Z0
         {
             var upper = src.Select(s => s.Class).Distinct().OrderBy(x => x).ToArray();
             var dst = Pub.ArchiveRoot + FileName.Define("mnemonics.csv");
-            dst.Ovewrite(upper);
+            dst.Overwrite(upper);
         }
 
         void SaveFunctions(XedFunctionData[] src)

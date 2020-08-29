@@ -9,9 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Flow
+    partial struct FS
     {
-        public static IWfEventLog log(FS.FilePath status, FS.FilePath error, bool clear = true)
-            => new WfTermEventLog(FilePath.Define(status.Name), FilePath.Define(error.Name), clear);
+        [MethodImpl(Inline), Op]
+        public static bool contains(PathPart src, string match)
+            => src.Name.Contains(match);
     }
 }

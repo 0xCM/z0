@@ -16,18 +16,53 @@ namespace Z0
     [ApiHost]
     public readonly struct ApiQuery
     {
-        public static IPart[] KnownParts
-            => ModuleArchives.executing().Parts.Where(r => r.Id != 0);
+        public static IPart[] parts()
+            => ModuleArchives.entry().Parts.Where(r => r.Id != 0);
 
-        public static Assembly[] KnownComponents
-            => ModuleArchives.executing().Components;
+        public static PartIndex index(Type src)
+            => ApiQuery.index(ModuleArchives.from(src).Parts);
+
+        [MethodImpl(Inline), Op]
+        public static bool contains(in PartIndex src, PartId id)
+            => src.Data.ContainsKey(id);
+
+        [MethodImpl(Inline), Op]
+        public static Option<IPart> search(in PartIndex src, PartId id)
+            => src.Data.TryGetValue(id, out var part) ? some(part) : none<IPart>();
+
+        public static PartIndex index(IPart[] src)
+        {
+            var dst = new Dictionary<PartId,IPart>();
+            foreach(var part in src)
+                dst.TryAdd(part.Id, part);
+            return new PartIndex(dst);
+        }
+
+        public static IPart[] parts(params string[] exclusions)
+            => ModuleArchives.entry(exclusions).Parts.Where(r => r.Id != 0);
+
+        public static Assembly[] assemblies()
+            => ModuleArchives.entry().Components;
+
+        public static Assembly[] assemblies(params string[] exclusions)
+            => ModuleArchives.entry(exclusions).Components;
 
         /// <summary>
         /// Attempts to resolve a part resolution type
         /// </summary>
         [MethodImpl(Inline), Op]
         public static Option<IPart> part(Assembly src)
-            => Option.Try(() => src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Map(t => (IPart)Activator.CreateInstance(t)).FirstOrDefault());
+        {
+            try
+            {
+                return some(src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Map(t => (IPart)Activator.CreateInstance(t)).FirstOrDefault());
+            }
+            catch(Exception e)
+            {
+                term.error(AppErrors.define(nameof(ApiQuery), text.format("Assembly {0} | {1}", src.GetSimpleName(), e)));
+                return none<IPart>();
+            }
+        }
 
         [Op]
         public static IPart[] parts(Assembly[] src)
@@ -37,7 +72,17 @@ namespace Z0
         /// Loads an assembly from a potential part path
         /// </summary>
         public static Option<Assembly> assembly(FS.FilePath src)
-            => Option.Try(src, x => Assembly.LoadFrom(x.Name));
+        {
+            try
+            {
+                return Assembly.LoadFrom(src.Name);
+            }
+            catch(Exception e)
+            {
+                term.error(AppErrors.define(nameof(ApiQuery), text.format("Path {0} | {1}", src, e)));
+                return none<Assembly>();
+            }
+        }
 
         public static Assembly[] components(FS.FilePath[] src)
             => src.Map(assembly).Where(x => x.IsSome()).Select(x => x.Value).Where(isPart);

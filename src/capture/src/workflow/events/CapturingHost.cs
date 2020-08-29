@@ -10,10 +10,9 @@ namespace Z0.Asm
     using static Konst;
     using static Render;
     using static z;
-    
 
     public readonly struct CapturingHost : IWfEvent<CapturingHost>
-    {            
+    {
         public const string EventName = nameof(CapturingHost);
 
         public WfEventId EventId {get;}
@@ -28,7 +27,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public string Format() 
-            => format(EventId, Host);        
-    }    
+        public string Format()
+            => format(EventId, Host);
+    }
 }

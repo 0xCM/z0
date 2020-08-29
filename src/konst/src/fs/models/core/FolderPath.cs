@@ -18,8 +18,6 @@ namespace Z0
 
         public readonly struct FolderPath : IEntry<FolderPath>
         {
-            public static FolderPath Empty => new FolderPath(PathPart.Empty);
-
             public PathPart Name {get;}
 
             [MethodImpl(Inline)]
@@ -34,6 +32,11 @@ namespace Z0
             public static FilePath operator +(FolderPath a, FileName b)
                 => new FilePath(text.format(FileJoinPattern, a, b));
 
+            public FilePath[] Files(string pattern, SearchOption options)
+                => Directory.EnumerateFiles(Name, pattern, options).Array().Select(x => FS.path(pattern));
+
+            public FilePath[] Files(string pattern = null)
+                =>  Directory.EnumerateFiles(Name, pattern ?? "*.*").Array().Select(x => FS.path(x));
 
             /// <summary>
             /// Specifies whether the represented directory actually exists within the file system
@@ -53,6 +56,9 @@ namespace Z0
 
             public override string ToString()
                 => Format();
+
+            public static FolderPath Empty
+                => new FolderPath(PathPart.Empty);
         }
     }
 }

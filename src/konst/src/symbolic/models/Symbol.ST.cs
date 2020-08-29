@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -16,7 +16,7 @@ namespace Z0
     public readonly struct Symbol<S,T> : ISymbol<S,T>
         where S : unmanaged
         where T : unmanaged
-    {                
+    {
         /// <summary>
         /// The symbol value
         /// </summary>
@@ -36,9 +36,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Symbol(S value)
-        {
-            Value = value;
-        }  
+            => Value = value;
 
         public Symbol<S> Simplified
         {
@@ -47,12 +45,18 @@ namespace Z0
         }
 
         /// <summary>
-        /// The symbol value, from storage cell persective
+        /// The symbol value, from storage cell perspective
         /// </summary>
         public T Cell
         {
             [MethodImpl(Inline)]
-            get => Unsafe.As<S,T>(ref edit(Value));
-        }      
+            get => z.@as<S,T>(Value);
+        }
+
+        public Type ValueType
+            => typeof(S);
+
+        public Type CellType
+            => typeof(T);
     }
 }

@@ -26,12 +26,13 @@ namespace Z0
 
         readonly FS.FilePath Source;
 
+
         [MethodImpl(Inline)]
         public CheckResources(IWfContext wf)
         {
             Wf = wf;
             Wf.Created(StepId);
-            Source = FS.path("J:/dev/projects/z0-logs/builds/respack/lib/netcoreapp3.1/z0.respack.exe");
+            Source = FS.path("J:/dev/projects/z0-logs/builds/respack/lib/netcoreapp3.1/z0.respack.dll");
         }
 
         public void Run()

@@ -9,12 +9,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using Xed;
 
     public readonly struct XedFunctionData
-    {        
+    {
         public FileName SourceFile {get;}
-        
+
         public string Name {get;}
 
         public string ReturnType {get;}

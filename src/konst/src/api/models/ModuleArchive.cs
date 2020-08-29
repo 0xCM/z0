@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct ModuleArchive
     {
-        public FolderPath Root {get;}
+        public readonly FolderPath Root;
 
         public readonly Files Files;
 
@@ -35,6 +35,15 @@ namespace Z0
             insist(Files.Count != 0, $"The files in {root}, there must be some");
             Parts = Parted.resolve(Files);
             Components = Parted.parts(Files);
+        }
+
+        public ModuleArchive(FS.FolderPath root, params string[] exclusions)
+        {
+            Root = FolderPath.Define(root.Name);
+            FS.Files files = root.Files().Where(f => FS.managed(FS.path(f.Name)));
+            Files = files.Map(f => FilePath.Define(f.Name));
+            Parts = Parted.resolve(files);
+            Components = Parted.parts(files);
         }
     }
 }

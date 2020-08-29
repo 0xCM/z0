@@ -6,16 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
 
     using Z0.Asm;
-    using Z0.Tokens;
 
     using static Konst;
     using static z;
 
     [ApiHost]
-    public readonly struct AsmExpression
+    public readonly struct AsmExpressions
     {
         [MethodImpl(Inline), Op]
         public static MnemonicExpression mnemonic(in AsmOpCodeTable src)
@@ -33,5 +31,4 @@ namespace Z0
         public static AsmFxPattern fx(in AsmOpCodeTable src)
             => new AsmFxPattern(src.Instruction);
     }
-
 }

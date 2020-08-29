@@ -16,12 +16,5 @@ namespace Z0
             where A : struct
                 => new WfRunner<A>(wf, handler, args);
 
-        [MethodImpl(Inline)]
-        public static WfTableRunner<F,T,D,S,Y> runner<F,T,D,S,Y>(IWfContext wf, TableMaps<D,S,T,Y> processors, TableSectors<D,S> selectors)
-            where F : unmanaged, Enum
-            where T : struct, ITable<F,T,D>
-            where D : unmanaged, Enum
-            where S : unmanaged
-                => new WfTableRunner<F,T,D,S,Y>(wf, processors, selectors);
     }
 }

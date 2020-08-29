@@ -15,7 +15,9 @@ namespace Z0
 
     public readonly ref struct CaptureHostMembers
     {
-        public WfCaptureState Wf {get;}
+        public WfCaptureState State {get;}
+
+        readonly IWfContext Wf;
 
         readonly IPartCapturePaths Target;
 
@@ -24,31 +26,46 @@ namespace Z0
         [MethodImpl(Inline)]
         public CaptureHostMembers(WfCaptureState state, IPartCapturePaths dst, CorrelationToken ct)
         {
-            Wf = state;
+            Wf = state.Wf;
+            State = state;
             Target = dst;
             Ct = ct;
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId);
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId);
+        }
+
+        void ClearTargets(IApiHost host)
+        {
+            // var state = HostCaptureArchive.create(Wf.AppPaths.CaptureStage, host.Uri);
+            // state.HostHexPath.Delete();
+            // state.CilDataPath.Delete();
+            // state.HostAsmDir.Clear();
         }
 
         public void Execute(IApiHost host)
         {
+            Wf.Running(StepId);
+
             try
             {
-                using var extract = new ExtractHostMembers(Wf, host, Target, Ct);
+                ClearTargets(host);
+
+                using var extract = new ExtractHostMembers(State, host, Target, Ct);
                 extract.Run();
 
-                using var emit = new EmitHostArtifacts(Wf, host.Uri, extract.Extractions, Target, Ct);
+                using var emit = new EmitHostArtifacts(State, host.Uri, extract.Extractions, Target, Ct);
                 emit.Run();
             }
             catch(Exception e)
             {
-                Wf.Error(StepName,e, Ct);
+                State.Error(StepName,e, Ct);
             }
+
+            Wf.Ran(StepId);
         }
     }
 }

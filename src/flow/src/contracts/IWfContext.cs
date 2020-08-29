@@ -34,10 +34,10 @@ namespace Z0
         void Warn<T>(WfStepId step, T content)
             => Raise(WfEvents.warn(step, content, Ct));
 
-        void ProcessingFile<T>(T kind, FilePath src, [File] string actor = null, [Line] int? line = null)
+        void Processing<T>(T kind, FilePath src, [File] string actor = null, [Line] int? line = null)
             => Raise(WfEvents.processing(Path.GetFileNameWithoutExtension(actor), kind, src, Ct));
 
-        void ProcessedFile<T>(T kind, FilePath src, uint size, [File] string actor = null, [Line] int? line = null)
+        void Processed<T>(T kind, FilePath src, uint size, [File] string actor = null, [Line] int? line = null)
             => Raise(WfEvents.processed(ToActorName(actor), kind, src, size, Ct));
 
         void Ran(string actor, CorrelationToken ct)
@@ -50,7 +50,7 @@ namespace Z0
             => Flow.status(this, worker, message,ct);
 
         void RunningT<T>(string actor, T output, CorrelationToken? ct = null)
-            => Flow.running(this, WfStepId.Empty, output, Ct);
+            => Raise(WfEvents.running(WfStepId.Empty, output, Ct));
 
         void RanT<T>(string actor, T output, CorrelationToken? ct = null)
             => Flow.ran(this, actor, output, ct ?? Ct);

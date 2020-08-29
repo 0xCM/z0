@@ -28,7 +28,7 @@ namespace Z0
         public WfBroker(IWfEventLog log, CorrelationToken ct)
         {
             Ct = ct;
-            Sink = Flow.termsink(log, Ct);
+            Sink = AB.termsink(log, Ct);
             Subscriptions = new Dictionary<Type,ISink>();
             Receivers = new Dictionary<ulong, Receiver<IAppEvent>>();
             locker = new object();

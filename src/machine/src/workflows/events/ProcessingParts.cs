@@ -14,7 +14,7 @@ namespace Z0
     public readonly struct ProcessingParts : IWfEvent<ProcessingParts>
     {
         public const string EventName = nameof(ProcessingParts);
-        
+
         public WfEventId EventId {get;}
 
         public WfActor Actor {get;}
@@ -22,7 +22,7 @@ namespace Z0
         public WfProcessor Processor {get;}
 
         public PartId[] Parts {get;}
-        
+
         public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
@@ -34,9 +34,9 @@ namespace Z0
             Parts = parts;
             Flair = flair;
         }
-        
-        [MethodImpl(Inline)]        
+
+        [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Actor, Processor, Flow.delimit(Parts));               
-    }        
+            => format(EventId, Actor, Processor, z.delimit(Parts));
+    }
 }

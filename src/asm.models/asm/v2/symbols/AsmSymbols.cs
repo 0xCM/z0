@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
+
     using static Konst;
 
     [ApiDataType]
@@ -15,13 +16,16 @@ namespace Z0
     {
         readonly Symbolic<Mnemonic,ushort> _Mnemonics;
 
+        readonly Symbolic<RegisterKind,uint> _Registers;
+
         readonly AsmOpCodeDataset _OpCodes;
 
         [MethodImpl(Inline)]
-        internal AsmSymbols(Symbolic<Mnemonic,ushort> mnemonics, AsmOpCodeDataset opcodes)
+        internal AsmSymbols(Symbolic<Mnemonic,ushort> mnemonics, Symbolic<RegisterKind,uint> registers, AsmOpCodeDataset opcodes)
         {
             _Mnemonics = mnemonics;
             _OpCodes = opcodes;
+            _Registers = registers;
         }
 
         public Symbols<Mnemonic,ushort> Mnemonics
@@ -29,16 +33,17 @@ namespace Z0
             [MethodImpl(Inline)]
             get => _Mnemonics.Symbols;
         }
-    }
 
-    partial struct asm
-    {
-        [Op]
-        public static AsmSymbols symbols()
+        public ReadOnlySpan<AsmOpCodeTable> OpCodes
         {
-            var mnemonics = Symbolic.cover<Mnemonic,ushort>();
-            var opcodes = AsmOpCodes.dataset();
-            return new AsmSymbols(mnemonics, opcodes);
+            [MethodImpl(Inline)]
+            get => _OpCodes.Entries.View;
+        }
+
+        public Symbols<RegisterKind,uint> Registers
+        {
+            [MethodImpl(Inline)]
+            get => _Registers.Symbols;
         }
     }
 }

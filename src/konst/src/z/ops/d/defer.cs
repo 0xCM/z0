@@ -11,18 +11,19 @@ namespace Z0
 
     using static Konst;
 
-    partial struct z    
+    partial struct z
     {
+
         [MethodImpl(Inline)]
-        public static Lazy<T> defer<T>(Func<T> factory) 
+        public static Lazy<T> defer<T>(Func<T> factory)
             => new Lazy<T>(factory);
 
         [MethodImpl(Inline)]
-        public static Seq<T> defer<T>(IEnumerable<T> src) 
+        public static Seq<T> defer<T>(IEnumerable<T> src)
             => new Seq<T>(src);
 
         [MethodImpl(Inline)]
-        public static Seq<T> defer<T>(params T[] src) 
+        public static Seq<T> defer<T>(params T[] src)
             => new Seq<T>(src);
     }
 }

@@ -8,7 +8,8 @@ namespace Z0.Dynamics.Operators
     using System;
     using System.Linq.Expressions;
 
-    using static Root;
+    using static Konst;
+    using static z;
     using static XPress;
 
     public static class Gt<T>

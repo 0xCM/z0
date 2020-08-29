@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
     using static z;
 
     readonly partial struct CharBlocks
@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static CharBlock3 alloc(N3 n)
             => default;
-        
+
         [MethodImpl(Inline), Op]
         public static CharBlock4 alloc(N4 n)
             => default;
@@ -78,80 +78,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static CharBlock32 alloc(N32 n)
-            => default;       
+            => default;
 
         [MethodImpl(Inline), Op]
         public static CharBlock64 alloc(N64 n)
-            => default;       
-
-        [MethodImpl(Inline), Op]
-        public static ref char alloc(out CharBlock2 dst)
-        {
-            dst = default;
-            return ref c16(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref char alloc(out CharBlock3 dst)
-        {
-            dst = default;
-            return ref c16(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref char alloc(out CharBlock4 dst)
-        {
-            dst = default;
-            return ref c16(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref char alloc(out CharBlock5 dst)
-        {
-            dst = default;
-            return ref c16(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref char alloc(out CharBlock6 dst)
-        {
-            dst = default;
-            return ref c16(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref char alloc(out CharBlock7 dst)
-        {
-            dst = default;
-            return ref c16(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref char alloc(out CharBlock8 dst)
-        {
-            dst = default;
-            return ref c16(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref char alloc(out CharBlock16 dst)
-        {
-            dst = default;
-            return ref c16(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref char alloc(out CharBlock32 dst)
-        {
-            dst = default;
-            return ref c16(dst);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref char alloc(out CharBlock64 dst)
-        {
-            dst = default;
-            return ref c16(dst);
-        }
+            => default;
     }
 }

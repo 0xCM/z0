@@ -8,7 +8,7 @@ namespace Z0.Dynamics.Operators
     using System;
     using System.Linq.Expressions;
 
-    using static Root;
+    using static z;
     using static XPress;
 
     public static class Decrement<T>
@@ -18,7 +18,6 @@ namespace Z0.Dynamics.Operators
 
         static Func<T,T> _OP
             => _OPSafe.Require();
-
 
         static Option<Func<T,T>> TryConstruct()
             => Try(() =>

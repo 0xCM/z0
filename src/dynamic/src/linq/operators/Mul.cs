@@ -7,7 +7,7 @@ namespace Z0.Dynamics.Operators
     using System;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
-      
+
     using static Root;
     using static XPress;
     using static XFunc;
@@ -23,7 +23,7 @@ namespace Z0.Dynamics.Operators
             {
 
                 case TypeCode.String:
-                    return fx(method<T,T,T>(nameof(String.Concat)).Require().Func<T,T,T>()).Compile();
+                    return fx(Reflex.method<T,T,T>(nameof(String.Concat)).Require().Func<T,T,T>()).Compile();
                 case TypeCode.Byte:
                     return cast<Func<T,T,T>>(Ops8u.Mul.Compile());
                 case TypeCode.SByte:

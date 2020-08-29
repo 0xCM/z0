@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
-    using Z0.Events;
 
     using static z;
 

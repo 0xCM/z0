@@ -5,11 +5,11 @@
 
 namespace Z0.Dynamics.Operators
 {
-    using System;    
+    using System;
     using System.Linq;
     using System.Linq.Expressions;
 
-    using static Z0.Root;
+    using static z;
     using static Z0.XPress;
     using static Z0.XFunc;
 
@@ -28,7 +28,7 @@ namespace Z0.Dynamics.Operators
                 {
 
                     case TypeCode.String:
-                        return fx(method<T,T,T>(nameof(String.Concat)).Require().Func<T,T,T>()).Compile();
+                        return fx(Reflex.method<T,T,T>(nameof(String.Concat)).Require().Func<T,T,T>()).Compile();
                     case TypeCode.Byte:
                         return cast<Func<T,T,T>>(Ops8u.Add.Compile());
                     case TypeCode.SByte:

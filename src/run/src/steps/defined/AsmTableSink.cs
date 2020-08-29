@@ -23,7 +23,7 @@ namespace Z0
         public AsmTableSink(IWfContext context, params Receive<AsmRecord>[] receivers)
         {
             Wf = context;
-            Sinks = receivers.Map(f => api.sink(context, f));
+            Sinks = receivers.Map(f => AB.tablesink(context, f));
         }
 
         public void Deposit(in AsmRecord src)

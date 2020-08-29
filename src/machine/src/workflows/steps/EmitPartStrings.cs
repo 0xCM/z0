@@ -44,12 +44,12 @@ namespace Z0
             TargetPath = dir + FileName.Define(part.Id.Format(), ExtName(sk));
             StringKind = sk;
             EmissionCount = 0;
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId);
         }
 
         public void Run()
         {
-            Wf.Emitting(StepName, EmissionType, TargetPath, Ct);
+            Wf.Emitting(StepId, EmissionType, TargetPath);
 
             var data = ReadData();
             EmissionCount = (uint)data.Length;
@@ -62,12 +62,12 @@ namespace Z0
                 PartRecords.format(skip(data,i), target);
             writer.Write(target.Render());
 
-            Wf.Emitted(StepName, EmissionType, EmissionCount, TargetPath, Ct);
+            Wf.Emitted(StepId, EmissionType, EmissionCount, TargetPath);
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId);
         }
 
         ReadOnlySpan<ImageString> ReadData()

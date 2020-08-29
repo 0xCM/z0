@@ -54,14 +54,14 @@ namespace Z0
 
         public static void Append(this FilePath dst, params string[] src)
         {
-            using var writer = new StreamWriter(reifyParent(dst).Name, true);            
+            using var writer = new StreamWriter(reifyParent(dst).Name, true);
             foreach(var line in src)
                 writer.WriteLine(line);
         }
 
-        public static void Ovewrite(this FilePath dst, params string[] src)
+        public static void Overwrite(this FilePath dst, params string[] src)
         {
-            using var writer = new StreamWriter(reifyParent(dst).Name, false);            
+            using var writer = new StreamWriter(reifyParent(dst).Name, false);
             foreach(var line in src)
                 writer.WriteLine(line);
         }

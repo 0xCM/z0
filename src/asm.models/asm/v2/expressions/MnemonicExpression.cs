@@ -11,14 +11,14 @@ namespace Z0.Asm
 
     public readonly struct MnemonicExpression
     {
-        public readonly asci16 Value;
+        public readonly asci32 Value;
 
         [MethodImpl(Inline)]
         public static implicit operator MnemonicExpression(string src)
             => new MnemonicExpression(src);
 
         [MethodImpl(Inline)]
-        public MnemonicExpression(asci16 src)
+        public MnemonicExpression(in asci32 src)
             => Value = src;
 
         [MethodImpl(Inline)]
