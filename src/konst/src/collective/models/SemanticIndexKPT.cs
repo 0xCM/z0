@@ -35,9 +35,9 @@ namespace Z0
         readonly EnumLiteralDetails<K,P> literals;
 
         readonly EnumLiteralDetail<K,P>[] keyIndex;
-                
+
         readonly string[] keyNames;
-                        
+
         [MethodImpl(Inline)]
         public SemanticIndex(T[] data)
         {
@@ -50,7 +50,7 @@ namespace Z0
             keyNames = Enums.names<K>();
             keyKind = Enums.kind<K>();
         }
-        
+
         public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]
@@ -69,7 +69,7 @@ namespace Z0
             get => ref Data[EnumValue.scalar<K,ushort>(index)];
         }
 
-        public CellCount EntryCount
+        public Count32 EntryCount
         {
             [MethodImpl(Inline)]
             get => Data.Length;

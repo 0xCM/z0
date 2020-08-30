@@ -11,16 +11,16 @@ namespace Z0
 
     public readonly struct StringTableRow<T>
         where T : ITextual
-    {    
+    {
         public readonly StringTableCells<T> Cells;
-        
+
         [MethodImpl(Inline)]
         public StringTableRow(T[] cells)
-            => Cells = cells;            
+            => Cells = cells;
 
         [MethodImpl(Inline)]
         public StringTableRow(StringTableCell<T>[] cells)
-            => Cells = cells;            
+            => Cells = cells;
 
         public int Length
         {
@@ -28,7 +28,7 @@ namespace Z0
             get => Cells.Length;
         }
 
-        public CellCount Count
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => (uint)Cells.Length;

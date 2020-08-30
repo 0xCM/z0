@@ -14,9 +14,6 @@ namespace Z0.Asm
 
     public struct AsmOpCodeTable : ITable<F,R>
     {
-        public static string FormatHeader(char delimiter = FieldDelimiter)
-            => Table.headerText<F>(delimiter);
-
         public int Sequence;
 
 		public asci32 Mnemonic;
@@ -49,7 +46,7 @@ namespace Z0.Asm
 
         public string DelimitedText(char delimiter)
         {
-            var formatter = Tabular.Formatter<F>(delimiter);
+            var formatter = Formatters.dataset<F>(delimiter);
             formatter.Delimit(F.Sequence, Sequence);
             formatter.Delimit(F.Mnemonic, Mnemonic);
             formatter.Delimit(F.OpCode, OpCode);

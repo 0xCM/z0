@@ -30,7 +30,7 @@ namespace Z0
             get => Data;
         }
 
-        public CellCount Count
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => Data.Length;

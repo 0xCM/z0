@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Security;
 
@@ -16,7 +16,7 @@ namespace Z0
         /// <summary>
         /// The number of elements covered
         /// </summary>
-        CellCount Count {get;}
+        Count32 Count {get;}
 
         /// <summary>
         /// A bow to the ubiquitous and unreasonable devotion to *signed* 32-bit integers
@@ -43,23 +43,23 @@ namespace Z0
         where T : struct
     {
         T[] Storage {get;}
-        
-        int ITableSpan.Length 
+
+        int ITableSpan.Length
             => Storage?.Length ?? 0;
 
-        CellCount ITableSpan.Count 
+        Count32 ITableSpan.Count
             => Storage?.Length ?? 0;
-        
-        Span<T> Edit 
+
+        Span<T> Edit
             => Storage;
 
-        ReadOnlySpan<T> View 
+        ReadOnlySpan<T> View
             => Storage;
 
-        ref T this[long index] 
+        ref T this[long index]
             => ref Storage[index];
 
-        ref T this[ulong index] 
+        ref T this[ulong index]
             => ref Storage[index];
 
         bool ITableSpan.IsEmpty
@@ -94,7 +94,7 @@ namespace Z0
         where I : unmanaged
         where F : unmanaged, Enum
     {
-        
+
     }
 
     /// <summary>
@@ -111,6 +111,6 @@ namespace Z0
         where I : unmanaged
         where F : unmanaged, Enum
     {
-        
+
     }
 }

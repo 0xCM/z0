@@ -11,45 +11,45 @@ namespace Z0
 
     interface TReport<F,R> : IReport
         where F : unmanaged, Enum
-        where R : ITabular
+        where R : struct, ITabular
     {
         R[] Records {get;}
-        
+
         string IReport.ReportName
-            => typeof(R).DisplayName();        
+            => typeof(R).DisplayName();
 
-        TabularStore<F,R> Log 
-            => default;       
+        TableStore<F,R> Log
+            => default;
 
-        int IReport.RecordCount 
-        { 
-            [MethodImpl(Inline)] 
-            get => Records.Length; 
+        int IReport.RecordCount
+        {
+            [MethodImpl(Inline)]
+            get => Records.Length;
         }
 
-        bool IsEmpty 
+        bool IsEmpty
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => RecordCount == 0;
         }
 
-        bool IsNonEmpty 
+        bool IsNonEmpty
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => RecordCount != 0;
         }
 
-        string[] IReport.HeaderLabels 
-        { 
-            [MethodImpl(Inline)] 
+        string[] IReport.HeaderLabels
+        {
+            [MethodImpl(Inline)]
             get => Tabular.Headers<F>();
         }
 
         [MethodImpl(Inline)]
-        Option<FilePath> Save(FilePath dst) 
-            => Log.Save(Records, dst);               
+        Option<FilePath> Save(FilePath dst)
+            => Log.Save(Records, dst);
 
-        TabularFormat<F> Format 
+        TableFormatSpec<F> Format
         {
             [MethodImpl(Inline)]
             get => Tabular.Specify<F>();

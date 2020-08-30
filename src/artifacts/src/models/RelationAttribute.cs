@@ -11,21 +11,20 @@ namespace Z0
     using static z;
     using static ArtifactModel;
 
-
     public readonly struct RelationAttribute
     {
-        public readonly DirectedRelation Relation;
+        public readonly ArtifactRelation Relation;
 
         public readonly asci32 Name;
 
         public readonly variant Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator RelationAttribute((DirectedRelation r, asci32 name, variant value) src)
+        public static implicit operator RelationAttribute((ArtifactRelation r, asci32 name, variant value) src)
             => new RelationAttribute(src.r, src.name, src.value);
 
         [MethodImpl(Inline)]
-        public RelationAttribute(DirectedRelation r, asci32 name, variant value)
+        public RelationAttribute(ArtifactRelation r, asci32 name, variant value)
         {
             Relation = r;
             Name = name;

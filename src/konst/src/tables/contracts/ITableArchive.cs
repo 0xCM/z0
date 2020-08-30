@@ -3,11 +3,30 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Security;
     using System.Collections.Generic;
     using System.Linq;
+
+    public interface ITabularArchive
+    {
+        FolderPath ArchiveRoot {get;}
+
+        Option<FilePath> Deposit<F,R>(R[] src, FileName name)
+            where F : unmanaged, Enum
+            where R : struct, ITabular;
+
+        Option<FilePath> Deposit<F,R>(R[] src, FolderName folder, FileName name)
+            where F : unmanaged, Enum
+            where R : struct, ITabular;
+
+        void Clear()
+            => ArchiveRoot.Clear();
+
+        void Clear(FolderName folder)
+            => (ArchiveRoot + folder).Clear();
+    }
 
     [SuppressUnmanagedCodeSecurity]
     public interface ITableArchive
@@ -19,8 +38,8 @@ namespace Z0
 
         ParseResult<TextDoc> Dataset(FileName name)
             => (from p in DatasetPaths().Where(p => p.FileName == name)
-                select Dataset(p)).FirstOrDefault(); 
-              
+                select Dataset(p)).FirstOrDefault();
+
         ParseResult<TextDoc> Dataset(string name)
             => Dataset(ArchiveRoot + FileName.Define(name, FileExtensions.Csv));
 

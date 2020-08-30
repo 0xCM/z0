@@ -18,7 +18,7 @@ namespace Z0
 
         Span<T> Edit {get;}
 
-        CellCount Count {get;}
+        Count32 Count {get;}
 
         int Length {get;}
     }
@@ -39,5 +39,5 @@ namespace Z0
     {
 
 
-    }    
+    }
 }

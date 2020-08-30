@@ -16,19 +16,22 @@ namespace Z0
     {
         readonly CorrelationToken Ct;
 
-        readonly WfCaptureState Wf;
+        readonly WfCaptureState State;
+
+        readonly IWfShell Wf;
 
         [MethodImpl(Inline)]
         public ExtractMembers(WfCaptureState state, CorrelationToken ct)
         {
-            Wf = state;
+            State = state;
+            Wf = state.Wf;
             Ct = ct;
-            Wf.Created(StepName,  Ct);
+            Wf.Created(StepId);
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId);
         }
 
         X86MemberExtract[] Extract(ICaptureContext context, IApiHost host)
@@ -43,12 +46,12 @@ namespace Z0
             var extracted = sys.empty<X86MemberExtract>();
             try
             {
-                extracted = Extract(Wf.CWf.Context ,host);
-                Wf.Raise(new ExtractedMembers(host.Uri, extracted.Length));
+                extracted = Extract(State.CWf.Context ,host);
+                State.Raise(new ExtractedMembers(host.Uri, extracted.Length));
             }
             catch(Exception e)
             {
-                Wf.Error(StepName, e, Ct);
+                Wf.Error(StepId, e);
             }
             return extracted;
         }
@@ -58,13 +61,13 @@ namespace Z0
             var extracted = sys.empty<X86MemberExtract>();
             try
             {
-                var members = ApiMemberJit.jit(hosts, Wf.WfEventSink);
-                Wf.Raise(new PreparedConsolidated(nameof(ExtractMembers), hosts, members, Ct));
+                var members = ApiMemberJit.jit(hosts, State.WfEventSink);
+                State.Raise(new PreparedConsolidated(nameof(ExtractMembers), hosts, members, Ct));
                 return Extractor.Extract(members);
             }
             catch(Exception e)
             {
-                Wf.Error(StepName, e, Ct);
+                State.Error(StepName, e, Ct);
                 return sys.empty<X86MemberExtract>();
             }
         }

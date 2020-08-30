@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The array to cover</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static TableSpan<T> tspan<T>(T[] src)     
+        public static TableSpan<T> tspan<T>(T[] src)
             where T : struct
                 => src;
 
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The array to cover</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static TableSpan<T> tspan<T>(List<T> src)     
+        public static TableSpan<T> tspan<T>(List<T> src)
             where T : struct
                 => src.Array();
 
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="src">The array to cover</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static TableSpan<T> tspan<T>(IEnumerable<T> src)     
+        public static TableSpan<T> tspan<T>(IEnumerable<T> src)
             where T : struct
                 => src.Array();
 
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="count">The cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static TableSpan<T> tspan<T>(byte count)     
+        public static TableSpan<T> tspan<T>(byte count)
             where T : struct
                 => sys.alloc<T>(count);
 
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="count">The cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static TableSpan<T> tspan<T>(ushort count)     
+        public static TableSpan<T> tspan<T>(ushort count)
             where T : struct
                 => sys.alloc<T>(count);
 
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="count">The cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static TableSpan<T> tspan<T>(uint count)     
+        public static TableSpan<T> tspan<T>(uint count)
             where T : struct
                 => sys.alloc<T>(count);
 
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="count">The cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static TableSpan<T> tspan<T>(ulong count)     
+        public static TableSpan<T> tspan<T>(ulong count)
             where T : struct
                 => sys.alloc<T>(count);
 
@@ -88,7 +88,7 @@ namespace Z0
         /// <param name="count">The cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static TableSpan<T> tspan<T>(CellCount count)     
+        public static TableSpan<T> tspan<T>(Count32 count)
             where T : struct
                 => sys.alloc<T>(count);
     }

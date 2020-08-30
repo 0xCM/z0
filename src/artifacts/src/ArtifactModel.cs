@@ -17,5 +17,4 @@ namespace Z0
         public static ArtifactKey key(ArtifactKind kind, ArtifactIdentifier id)
             => new ArtifactKey(kind,id);
     }
-
 }

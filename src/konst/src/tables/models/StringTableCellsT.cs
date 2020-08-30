@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct StringTableCells<T>
         where T : ITextual
-    {    
+    {
         public readonly TableSpan<StringTableCell<T>> Data;
 
         [MethodImpl(Inline)]
@@ -28,7 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public StringTableCells(T[] src)
-            => Data= src.Select(x => new StringTableCell<T>(x));            
+            => Data= src.Select(x => new StringTableCell<T>(x));
 
         [MethodImpl(Inline)]
         public StringTableCells(StringTableCell<T>[] src)
@@ -40,7 +40,7 @@ namespace Z0
             get => Data.Length;
         }
 
-        public CellCount Count
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => Data.Length;

@@ -54,7 +54,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Operation idenfiers, each of which are associated with one or more code blocks
+        /// Operation identifiers, each of which are associated with one or more code blocks
         /// </summary>
         public OpUri[] Identities
         {

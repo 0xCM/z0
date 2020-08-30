@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     public readonly struct WfTableSinks<T>
         where T : struct, ITable<T>
     {
@@ -21,8 +21,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfTableSinks(params WfTableSink<T>[] src)
             => Data = src;
-        
-        public CellCount Count
+
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => Data.Length;

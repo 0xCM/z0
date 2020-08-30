@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static ArtifactModel;
 
     partial struct ArtifactRelations
     {
@@ -18,34 +17,34 @@ namespace Z0
             => new RelationAttribute<N,A,S,T>(name,value);
 
         [MethodImpl(Inline), Op]
-        public static RelationAttribute attribute(DirectedRelation r, in asci32 name, in variant value)
+        public static RelationAttribute attribute(ArtifactRelation r, in asci32 name, in variant value)
             => new RelationAttribute(r,name,value);
 
         [MethodImpl(Inline), Op]
-        public static RelationAttribute attribute<A>(DirectedRelation r, in asci32 name, A value)
+        public static RelationAttribute attribute<A>(ArtifactRelation r, in asci32 name, A value)
             where A : unmanaged
                 => new RelationAttribute(r,name,Variant.from(value));
 
         [MethodImpl(Inline), Op]
-        public static RelationAttribute<S,T> attribute<S,T>(in asci32 name, in variant value, DirectedRelation<S,T> r = default)
+        public static RelationAttribute<S,T> attribute<S,T>(in asci32 name, in variant value, Relation<S,T> r = default)
             => new RelationAttribute<S,T>(name,value);
 
         [MethodImpl(Inline), Op]
-        public static RelationAttribute<S,T> attribute<A,S,T>(in asci32 name, A value, DirectedRelation<S,T> r = default)
+        public static RelationAttribute<S,T> attribute<A,S,T>(in asci32 name, A value, Relation<S,T> r = default)
             where A : unmanaged
                 => new RelationAttribute<S,T>(name, Variant.from(value));
 
         [MethodImpl(Inline), Op]
-        public static RelationAttribute attribute(ArtifactIdentifier src, ArtifactIdentifier dst, in asci32 name, in variant value)
-            => new RelationAttribute(directed(src,dst), name, value);
+        public static RelationAttribute<ArtifactIdentifier> attribute(ArtifactIdentifier src, ArtifactIdentifier dst, in asci32 name, in variant value)
+            => new RelationAttribute<ArtifactIdentifier>((src,dst), name, value);
 
         [MethodImpl(Inline), Op]
-        public static RelationAttribute attribute(ArtifactIdentifier src, ArtifactIdentifier dst, string name, in variant value)
-            => new RelationAttribute(directed(src,dst), name, value);
+        public static RelationAttribute<ArtifactIdentifier> attribute(ArtifactIdentifier src, ArtifactIdentifier dst, string name, in variant value)
+            => new RelationAttribute<ArtifactIdentifier>((src,dst), name, value);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static RelationAttribute attribute<A>(ArtifactIdentifier src, ArtifactIdentifier dst, string name, A value)
+        public static RelationAttribute<ArtifactIdentifier> attribute<A>(ArtifactIdentifier src, ArtifactIdentifier dst, string name, A value)
             where A : unmanaged
-                => new RelationAttribute(directed(src,dst), name, Variant.from(value));
+                => new RelationAttribute<ArtifactIdentifier>((src,dst), name, Variant.from(value));
     }
 }

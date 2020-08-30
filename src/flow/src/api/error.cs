@@ -16,13 +16,8 @@ namespace Z0
     partial struct Flow
     {
         [Op, Closures(UnsignedInts)]
-        public static void error<T>(IWfContext wf, string worker, T body, CorrelationToken ct,
+        public static void error<T>(IWfContext wf, WfStepId step, T content, CorrelationToken ct,
             [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-                => wf.Raise(new WfError<T>(worker, body, ct, AB.source(caller,file,line)));
-
-        [Op, Closures(UnsignedInts)]
-        public static void error<T>(IWfContext wf, in WfActor actor, T body, CorrelationToken ct,
-            [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-                => wf.Raise(new WfError<T>(actor, body, ct, AB.source(caller,file,line)));
+                => wf.Raise(new WfError<T>(step, content, ct, AB.source(caller,file,line)));
     }
 }

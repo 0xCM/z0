@@ -19,15 +19,15 @@ namespace Z0
             [MethodImpl(Inline)]
             public static IdentifierIndex create()
                 => new IdentifierIndex(TokenCount);
-            
+
             public SemanticIndex<AsmTokenKind,string> semantic()
                 => SemanticIndex.create(Storage,AsmTokenKind.None);
 
             [MethodImpl(Inline)]
             public IdentifierIndex(uint count)
             {
-                Storage = new string[TokenCount]{ 
-                    None, bnd, DST, ᛁerᛁ,  imm8, imm16, imm32, imm64, k1, m, m8, 
+                Storage = new string[TokenCount]{
+                    None, bnd, DST, ᛁerᛁ,  imm8, imm16, imm32, imm64, k1, m, m8,
                     m16, m32, m64, m128, m16ᙾ16, m16ᙾ32, m16ᙾ64, m16Ʌ32, m16Ʌ16,
                     m32Ʌ32, m16Ʌ64, m32fp, m64fp, m80fp, m16int, m32int, m64int,
                     mm, mmノm32, mmノm64, mib, moffs8, moffs16, moffs32, moffs64,
@@ -37,9 +37,9 @@ namespace Z0
                     ymm, m256, ymmノm256, ᐸYMM0ᐳ, zmm, m512, zmmノm512,
                     mV, m32bcst, m64bcst, zmmノm512ノm32bcst, zmmノm512ノm64bcst,
                     ᐸZMM0ᐳ,
-                };                
+                };
 
-            }  
+            }
 
             public ReadOnlySpan<string> View
             {
@@ -47,7 +47,7 @@ namespace Z0
                 get => Storage;
             }
 
-            public CellCount Count 
+            public Count32 Count
             {
                 get => TokenCount;
             }

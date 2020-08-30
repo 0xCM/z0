@@ -3,13 +3,13 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
     using static Konst;
-    
+
     public readonly struct ArrayBuilder<T>
     {
         readonly List<T> Items;
@@ -25,12 +25,12 @@ namespace Z0
             Items.AddRange(src);
         }
 
-        public CellCount Count
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => Items.Count;
         }
-        
+
         [MethodImpl(Inline)]
         public void Include(params T[] src)
             => Items.AddRange(src);
@@ -63,6 +63,6 @@ namespace Z0
             ref var target = ref z.seek(dst, offset);
             for(var i=offset; i<Items.Count; i++)
                 z.seek(target,i) = Items[(int)i];
-        }        
+        }
     }
 }

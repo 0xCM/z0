@@ -19,9 +19,24 @@ namespace Z0
         public readonly FS.FilePath Path;
 
         [MethodImpl(Inline)]
+        public static implicit operator ListedFile((uint index, FS.FilePath path) src)
+            => new ListedFile(src.index, src.path);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ListedFile((int index, FS.FilePath path) src)
+            => new ListedFile(src.index, src.path);
+
+        [MethodImpl(Inline)]
         public ListedFile(uint index, FS.FilePath path)
         {
             Index = index;
+            Path = path;
+        }
+
+        [MethodImpl(Inline)]
+        public ListedFile(int index, FS.FilePath path)
+        {
+            Index = (uint)index;
             Path = path;
         }
     }

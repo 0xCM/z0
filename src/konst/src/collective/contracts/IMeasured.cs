@@ -11,7 +11,7 @@ namespace Z0
     {
         int Length {get;}
 
-        CellCount ICounted.Count 
+        Count32 ICounted.Count
             => Length;
     }
 

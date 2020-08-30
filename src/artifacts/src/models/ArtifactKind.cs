@@ -10,16 +10,6 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ArtifactKind<K> : IArtifactKind<K>
-        where K : unmanaged, IArtifactKind<K>
-    {
-        [MethodImpl(Inline)]
-        public static implicit operator ArtifactKind<K>(K src)
-            => default;
-
-        public TableIndex Index => default(K).Index;
-    }
-
     public readonly struct ArtifactKind : IArtifactKind<ArtifactKind>
     {
         public TableIndex Index {get;}

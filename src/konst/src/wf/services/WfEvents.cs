@@ -10,6 +10,7 @@ namespace Z0
 
     using static Konst;
     using static Render;
+    using static AB;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -19,14 +20,14 @@ namespace Z0
     public readonly struct WfEvents
     {
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static WfError<T> error<T>(string actor, T body, CorrelationToken ct,
+        public static WfError<T> error<T>(string actor, T content, CorrelationToken ct,
             [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-                => new WfError<T>(actor, body, ct, AB.source(caller,file,line));
+                => new WfError<T>(actor, content, ct, source(caller,file,line));
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static WfError<T> error<T>(in WfActor actor, T body, CorrelationToken ct,
+        public static WfError<T> error<T>(WfStepId step, T content, CorrelationToken ct,
             [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-                => new WfError<T>(actor, body, ct, AB.source(caller,file,line));
+                => new WfError<T>(step, content, ct, source(caller,file,line));
 
         [Op]
         public static WfError<string> error(Exception e, CorrelationToken ct,

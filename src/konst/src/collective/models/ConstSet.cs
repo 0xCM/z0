@@ -18,15 +18,15 @@ namespace Z0
     {
         readonly HashSet<T> Data;
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public ConstSet(IEnumerable<T> src)
             => Data = z.hashset(src);
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public ConstSet(HashSet<T> src)
             => Data = src;
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public ConstSet(T[] src)
             => Data = z.hashset(src);
 
@@ -68,7 +68,7 @@ namespace Z0
         public static bool operator !=(ConstSet<T> a, ConstSet<T> b)
             => !a.Equals(b);
 
-        public CellCount Count 
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => Data.Count;
@@ -78,27 +78,27 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data;
         }
-        
-        public bool IsEmpty 
+
+        public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => Count == 0;
         }
-        
-        [MethodImpl(Inline)]   
+
+        [MethodImpl(Inline)]
         public bool Contains(T candidate)
             => Data.Contains(candidate);
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public bool IsMember(object candidate)
             => candidate is T ? Contains((T)candidate) :false;
-        
+
         /// <summary>
         /// Determines whether the current set is a subset of a specified set.
         /// </summary>
         /// <param name="rhs">The candidate superset</param>
         /// <param name="proper">Specifies whether only proper subsets are considered "subsets"</param>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public bool IsSubset(ConstSet<T> rhs, bool proper = true)
             => proper ? Data.IsProperSubsetOf(rhs.Data) : Data.IsSubsetOf(rhs.Data);
 
@@ -107,7 +107,7 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The candidate subset</param>
         /// <param name="proper">Specifies whether only proper subsets are considered "subsets"</param>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public bool IsSuperset(ConstSet<T> rhs, bool proper)
             => proper ? Data.IsProperSupersetOf(rhs.Data) : Data.IsSubsetOf(rhs.Data);
 
@@ -115,9 +115,9 @@ namespace Z0
         /// Calculates the union between the current set and a specified set and returns a new set that embodies this result
         /// </summary>
         /// <param name="src">The set with which to union/param>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public void Union(HashSet<T> dst)
-        {            
+        {
             dst.UnionWith(Data);
         }
 
@@ -126,39 +126,39 @@ namespace Z0
         /// returns a new set that embodies this result
         /// </summary>
         /// <param name="src">The set with which to intersect</param>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public void Intersect(HashSet<T> dst)
         {
-            dst.IntersectWith(Data);            
+            dst.IntersectWith(Data);
         }
 
         /// <summary>
-        /// Calculates the set difference, or symmetric difference, between the current set and a specified set 
+        /// Calculates the set difference, or symmetric difference, between the current set and a specified set
         /// and returns a new set that embodies this result
         /// </summary>
         /// <param name="src">The set that should be differenced</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Symmetric_difference</remarks>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public void Difference(HashSet<T> dst, bool symmetric)
         {
             if(symmetric)
                 dst.SymmetricExceptWith(Data);
             else
-                dst.ExceptWith(Data);            
+                dst.ExceptWith(Data);
         }
-    
+
         /// <summary>
         /// Determine whether the current set and a specified set have a nonemtpy intersection
         /// </summary>
         /// <param name="rhs">The set to compare</param>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public bool Intersects(ConstSet<T> rhs)
             => Data.Overlaps(rhs.Data);
 
-        static IEqualityComparer<HashSet<T>> Comparer 
-            => HashSet<T>.CreateSetComparer(); 
+        static IEqualityComparer<HashSet<T>> Comparer
+            => HashSet<T>.CreateSetComparer();
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public bool Equals(ConstSet<T> src)
             => Comparer.Equals(Data, src.Data);
 
@@ -166,6 +166,6 @@ namespace Z0
             => obj is ConstSet<T> x && Equals(x);
 
         public override int GetHashCode()
-            => Data.GetHashCode(); 
+            => Data.GetHashCode();
     }
 }

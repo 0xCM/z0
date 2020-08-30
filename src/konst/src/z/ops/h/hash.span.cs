@@ -11,10 +11,9 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {            
+    {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static uint hash<T>(ReadOnlySpan<T> src)
-            where T : unmanaged
         {
             var length = src.Length;
             if(length == 0)
@@ -28,6 +27,6 @@ namespace Z0
                 rolling = hash(rolling, hash(x,y))*FnvPrime;
             }
             return rolling;
-        }        
+        }
     }
 }

@@ -47,7 +47,7 @@ namespace Z0
             get => Storage.Length;
         }
 
-        public CellCount Count
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => Storage.Length;

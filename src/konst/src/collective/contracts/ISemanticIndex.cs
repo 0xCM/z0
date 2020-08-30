@@ -9,14 +9,14 @@ namespace Z0
 
     public interface ISemanticIndex
     {
-        CellCount EntryCount {get;}
+        Count32 EntryCount {get;}
 
         Type KeyType {get;}
 
         EnumScalarKind KeyKind {get;}
-        
+
         ReadOnlySpan<string> KeyNames {get;}
-        
+
     }
 
     public interface ISemanticIndex<K> : ISemanticIndex
@@ -24,19 +24,19 @@ namespace Z0
     {
         Type ISemanticIndex.KeyType
             => typeof(K);
-        
+
         EnumScalarKind ISemanticIndex.KeyKind
             => Enums.kind<K>();
-        
+
         EnumLiteralNames<K> KeyNameIndex
             => Enums.NameIndex<K>();
 
-        ReadOnlySpan<string> ISemanticIndex.KeyNames 
+        ReadOnlySpan<string> ISemanticIndex.KeyNames
             => Enums.names<K>();
-        
-        ReadOnlySpan<K> KeyValues 
+
+        ReadOnlySpan<K> KeyValues
             => Enums.literals<K>();
-        
+
         ReadOnlySpan<EnumLiteralDetail<K>> KeyIndex
             => Enums.index<K>().Content;
     }
@@ -46,7 +46,7 @@ namespace Z0
         where K : unmanaged, Enum
         where P : unmanaged
     {
-        new ReadOnlySpan<EnumLiteralDetail<K,P>> KeyIndex 
+        new ReadOnlySpan<EnumLiteralDetail<K,P>> KeyIndex
             => Enums.values<K,P>().Content;
 
     }
@@ -62,7 +62,7 @@ namespace Z0
     {
 
     }
-    
+
     public interface ISemanticIndex<K,T> : ISemanticIndex<K>
         where K : unmanaged, Enum
     {
@@ -72,10 +72,10 @@ namespace Z0
 
         ref T this[K index]{get;}
 
-        CellCount ISemanticIndex.EntryCount
+        Count32 ISemanticIndex.EntryCount
             => View.Length;
     }
-    
+
     public interface ISemanticIndex<H,K,T> : ISemanticIndex<K,T>
         where H : struct, ISemanticIndex<H,K,T>
         where K : unmanaged, Enum

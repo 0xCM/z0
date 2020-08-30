@@ -18,22 +18,18 @@ namespace Z0
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static uint hash<T>(T src)
-            where T : unmanaged
-                => hash_u(src);
+            => hash_u(src);
 
         /// <summary>
-        /// Computes combined hash codes for unmanaged system primitives
+        /// Computes a combined hash code for a pair
         /// </summary>
-        /// <param name="src">The primal value</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static uint hash<T>(T x, T y)
-            where T : unmanaged
-                => hash_u(x,y);
+        public static uint hash<S,T>(S x, T y)
+            => hash(hash<S>(x), hash<T>(y));
 
         [MethodImpl(Inline)]
         static uint hash_u<T>(T src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return hash(uint8(src));
@@ -43,13 +39,12 @@ namespace Z0
                 return hash(uint32(src));
             else if(typeof(T) == typeof(ulong))
                 return hash(uint64(src));
-
-            return hash_i(src);
+            else
+                return hash_i(src);
         }
 
         [MethodImpl(Inline)]
         static uint hash_i<T>(T src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
                 return hash(int8(src));
@@ -59,13 +54,12 @@ namespace Z0
                 return hash(int32(src));
             else if(typeof(T) == typeof(long))
                 return hash(int64(src));
-
-            return hash_f(src);
+            else
+                return hash_f(src);
         }
 
         [MethodImpl(Inline)]
         static uint hash_f<T>(T src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(float))
                 return hash(float32(src));
@@ -79,19 +73,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static uint hash_x<T>(T src)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(char))
                 return hash(char16(src));
             else if(typeof(T) == typeof(bool))
                 return hash(bool8(src));
             else
-                throw no<T>();
+                return fallback(src);
         }
 
         [MethodImpl(Inline)]
         static uint hash_u<T>(T x, T y)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return hash(uint8(x), uint8(y));
@@ -101,13 +93,12 @@ namespace Z0
                 return hash(uint32(x), uint32(y));
             else if(typeof(T) == typeof(ulong))
                 return hash(uint64(x), uint64(y));
-
-            return hash_i(x,y);
+            else
+                return hash_i(x,y);
         }
 
         [MethodImpl(Inline)]
         static uint hash_i<T>(T x, T y)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
                 return hash(int8(x), int8(y));
@@ -117,13 +108,12 @@ namespace Z0
                 return hash(int32(x), int32(y));
             else if(typeof(T) == typeof(long))
                 return hash(int64(x), int64(y));
-
-            return hash_f(x,y);
+            else
+                return hash_f(x,y);
         }
 
         [MethodImpl(Inline)]
         static uint hash_f<T>(T x, T y)
-            where T : unmanaged
         {
             if(typeof(T) == typeof(float))
                 return hash(float32(x), float32(y));
@@ -132,7 +122,18 @@ namespace Z0
             else if(typeof(T) == typeof(decimal))
                 return hash(float128(x), float128(y));
             else
-                throw no<T>();
+                return fallback(x,y);
         }
+
+        [MethodImpl(Inline)]
+        static uint fallback<T>(T src)
+            => (uint)(src?.GetHashCode() ?? 0);
+
+        [MethodImpl(Inline)]
+        static uint fallback<S,T>(S x, T y)
+            => hash(
+                (uint)(x?.GetHashCode() ?? 0),
+                (uint)(y?.GetHashCode() ?? 0)
+                );
     }
 }

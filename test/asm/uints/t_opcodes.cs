@@ -2,16 +2,17 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm.Data
+namespace Z0.Asm
 {
     using System;
 
     using static Konst;
     using static Memories;
 
+    using Z0.Asm.Data;
+
     public class t_opcodes : t_asmd<t_opcodes>
     {
-
         void emit(ReadOnlySpan<AsmFxPattern> src)
         {
             var dstPath = CasePath($"InstructionExpression");
@@ -76,13 +77,16 @@ namespace Z0.Asm.Data
         //     }
         // }
 
+        public static string header(char delimiter = FieldDelimiter)
+            => Table.headerText<AsmOpCodeField>(delimiter);
+
         public void opcode_reccords()
         {
             var data = AsmOpCodes.dataset();
             var count = data.OpCodeCount;
             var records = data.Entries.View;
             using var writer = CaseWriter("OpCodes");
-            writer.WriteLine(AsmOpCodeTable.FormatHeader());
+            writer.WriteLine(header());
             for(var i=0; i<records.Length; i++)
                 writer.WriteLine(skip(records,i).Format());
         }

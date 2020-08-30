@@ -13,16 +13,16 @@ namespace Z0
     using api = FS;
 
     public readonly partial struct FileKinds : ITextual
-    {   
+    {
         readonly Type[] KindReps;
 
         [MethodImpl(Inline)]
         public FileKinds(Type[] reps)
         {
-            KindReps = reps;            
+            KindReps = reps;
         }
 
-        public CellCount Count 
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => KindReps.Length;
@@ -32,8 +32,8 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => KindReps;
-        }        
-                
+        }
+
         [MethodImpl(Inline)]
         public string Format()
             => api.format(this);

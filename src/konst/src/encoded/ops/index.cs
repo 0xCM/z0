@@ -15,9 +15,9 @@ namespace Z0
         [Op]
         public static EncodedPartBuilder builder()
             => new EncodedPartBuilder(
-                CodeAddress : z.dict<MemoryAddress,X86ApiCode>(),
-                UriAddress : z.dict<MemoryAddress,OpUri>(),
-                CodeUri: z.dict<OpUri,X86ApiCode>());
+                codes : z.dict<MemoryAddress,X86ApiCode>(),
+                addresses : z.dict<MemoryAddress,OpUri>(),
+                identities: z.dict<OpUri,X86ApiCode>());
 
         [MethodImpl(Inline), Op]
         public static IdentifiedCodeIndex index(ApiHostUri host, IdentifiedCode[] code)

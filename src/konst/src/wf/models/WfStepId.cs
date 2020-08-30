@@ -32,7 +32,7 @@ namespace Z0
         public Type Host {get;}
 
         [MethodImpl(Inline)]
-        internal WfStepId(Type host, string name, WfToken token)
+        public WfStepId(Type host, string name, WfToken token)
         {
             Host = host;
             Token = token;

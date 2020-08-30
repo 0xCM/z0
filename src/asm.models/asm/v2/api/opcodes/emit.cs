@@ -8,12 +8,9 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using Z0.Tokens;
-
     using static Konst;
     using static z;
     using F = Z0.Asm.AsmOpCodeField;
-
 
     partial struct AsmOpCodes
     {
@@ -27,26 +24,37 @@ namespace Z0.Asm
             var data = AsmOpCodes.dataset();
             var records = data.Entries.View;
             var count = data.OpCodeCount;
-            var formatter = Tabular.Formatter<F>();
+            var formatter = Formatters.dataset<F>();
             using var writer = dst.Writer();
             writer.WriteLine(formatter.HeaderText);
             for(var i=0; i<count; i++)
-                writer.WriteLine(format(skip(records,i), formatter));
+            {
+                ref readonly var record = ref skip(records,i);
+                writer.WriteLine(emit(record,formatter).Render());
+                //writer.WriteLine(format(record, formatter));
+            }
         }
 
         [Op]
-        static string format(in AsmOpCodeTable src, IDatasetFormatter<F> formatter)
+        public static ref readonly DatasetFormatter<F> emit(in AsmOpCodeTable src, in DatasetFormatter<F> dst)
         {
-            formatter.Delimit(F.Sequence, src.Sequence);
-            formatter.Delimit(F.Mnemonic, src.Mnemonic);
-            formatter.Delimit(F.OpCode, src.OpCode);
-            formatter.Delimit(F.Instruction, src.Instruction);
-            formatter.Delimit(F.M16, src.M16);
-            formatter.Delimit(F.M32, src.M32);
-            formatter.Delimit(F.M64, src.M64);
-            formatter.Delimit(F.CpuId, src.CpuId);
-            formatter.Delimit(F.CodeId, src.CodeId);
-            return formatter.Render();
+            dst.Delimit(F.Sequence, src.Sequence);
+            dst.Delimit(F.Mnemonic, src.Mnemonic);
+            dst.Delimit(F.OpCode, src.OpCode);
+            dst.Delimit(F.Instruction, src.Instruction);
+            dst.Delimit(F.M16, src.M16);
+            dst.Delimit(F.M32, src.M32);
+            dst.Delimit(F.M64, src.M64);
+            dst.Delimit(F.CpuId, src.CpuId);
+            dst.Delimit(F.CodeId, src.CodeId);
+            return ref dst;
         }
+
+        // [Op]
+        // public static string format(in AsmOpCodeTable src, DatasetFormatter<F> dst)
+        // {
+        //     emit(src,dst);
+        //     return dst.Render();
+        // }
     }
 }

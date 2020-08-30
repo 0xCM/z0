@@ -29,7 +29,7 @@ namespace Z0
             get => FieldSpecs.View;
         }
 
-        public CellCount FieldCount
+        public Count32 FieldCount
         {
             [MethodImpl(Inline)]
             get => FieldSpecs.Count;

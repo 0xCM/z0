@@ -16,22 +16,17 @@ namespace Z0
         /// </summary>
         string DelimitedText(char delimiter);
 
-        string[] HeaderNames {get;}     
+        string[] HeaderNames {get;}
 
         string ITextual.Format()
-            => DelimitedText(FieldDelimiter);   
+            => DelimitedText(FieldDelimiter);
     }
 
-    public interface ITabular<R> : ITabular
-        where R : ITabular
-    {
-    }
-
-    public interface ITabular<F,R> : ITabular<R>
+    public interface ITabular<F,R> : ITabular
         where F : unmanaged, Enum
-        where R : ITabular
+        where R : struct
     {
-        string[] ITabular.HeaderNames 
+        string[] ITabular.HeaderNames
             => Enums.names<F>();
     }
 }

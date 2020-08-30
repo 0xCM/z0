@@ -19,14 +19,14 @@ namespace Z0
 
         public WfStepId StepId {get;}
 
-        public string Dataset {get;}
+        public TableId Dataset {get;}
 
         public readonly uint RowCount;
 
         public readonly FS.FilePath Target;
 
         [MethodImpl(Inline)]
-        public WfEmitted(WfStepId step, string dataset, uint count, FilePath target, CorrelationToken ct)
+        public WfEmitted(WfStepId step, TableId dataset, uint count, FilePath target, CorrelationToken ct)
         {
             EventId = z.evid(EventName, ct);
             StepId = step;
@@ -35,6 +35,15 @@ namespace Z0
             Target = FS.path(target.Name);
         }
 
+        [MethodImpl(Inline)]
+        public WfEmitted(WfStepId step, TableId dataset, uint count, FS.FilePath target, CorrelationToken ct)
+        {
+            EventId = z.evid(EventName, ct);
+            StepId = step;
+            Dataset = dataset;
+            RowCount = count;
+            Target = target;
+        }
         public string Format()
             => text.format(PSx5, EventId, StepId, Dataset, RowCount, Target);
 

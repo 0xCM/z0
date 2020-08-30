@@ -25,14 +25,14 @@ namespace Z0
 
             DataType = 20,
 
-            Value = 30,            
+            Value = 30,
         }
 
         public static RecordFormatter<F,W> formatter(ImgConstantRecord spec)
-            => Tabular.Formatter<F,W>();
+            => Formatters.record<F,W>();
 
         public static ref readonly RecordFormatter<F,W> format(in ImgConstantRecord src, in RecordFormatter<F,W> dst, bool eol = true)
-        {            
+        {
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.ParentId, src.ParentId);
             dst.Delimit(F.Source, src.Source);
@@ -41,6 +41,6 @@ namespace Z0
             if(eol)
                 dst.EmitEol();
             return ref dst;
-        }        
+        }
     }
 }

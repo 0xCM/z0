@@ -73,7 +73,7 @@ namespace Z0
         }
 
         public override int GetHashCode()
-            => (int)z.hash(Start,End);
+            => (int)z.hash(Start, End);
 
         [MethodImpl(Inline)]
         public bool Equals(MemoryRange src)

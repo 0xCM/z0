@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         public readonly IApiHost[] Hosts;
 
-        public readonly CellCount HostCount;
+        public readonly Count32 HostCount;
 
         [MethodImpl(Inline)]
         public CapturingHosts(IApiHost[] hosts, CorrelationToken ct)

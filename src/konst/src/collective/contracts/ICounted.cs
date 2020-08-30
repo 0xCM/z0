@@ -17,12 +17,22 @@ namespace Z0
         /// <summary>
         /// The count value
         /// </summary>
-        new CellCount Count {get;}
+        new Count32 Count {get;}
 
-        CellCount IFinite.Count()
+        Count32 IFinite.Count()
             => Count;
 
         bool INullity.IsEmpty
             => Count == 0;
+    }
+
+    [Free]
+    public interface ICounted<T> : ICounted
+        where T : unmanaged
+    {
+        T Value {get;}
+
+        Count32 ICounted.Count
+            => z.uint32(Value);
     }
 }

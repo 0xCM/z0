@@ -17,7 +17,7 @@ namespace Z0
 
         public ArtifactIdentifier Id => Value.Identifier;
 
-        public ArtifactKind Kind => Value.Class;
+        public ArtifactKind Kind => Value.Kind;
 
         [MethodImpl(Inline)]
         public static implicit operator ArtifactKey(Paired<ArtifactKind,ArtifactIdentifier> src)
@@ -32,27 +32,5 @@ namespace Z0
         {
             Value = (kind,id);
         }
-    }
-
-    public readonly struct ArtifactKey<K>
-        where K : unmanaged, IArtifactKind<K>
-    {
-        public readonly ArtifactIdentifier Id;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ArtifactKey<K>(ArtifactIdentifier id)
-            => new ArtifactKey<K>(id);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ArtifactKey(ArtifactKey<K> src)
-            => new ArtifactKey(src.Kind.Index, src.Id);
-
-        [MethodImpl(Inline)]
-        public ArtifactKey(ArtifactIdentifier id)
-            => Id = id;
-
-        public TableIndex Index => Kind.Index;
-
-        public K Kind => default(K);
     }
 }

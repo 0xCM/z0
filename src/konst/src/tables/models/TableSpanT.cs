@@ -33,29 +33,29 @@ namespace Z0
             get => Data;
         }
 
-        public Span<T> Edit 
+        public Span<T> Edit
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public ReadOnlySpan<T> View 
+        public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]
             get => Data;
         }
-        
-        public CellCount Count
+
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => Data?.Length ?? 0;
         }
 
-        public int Length 
+        public int Length
         {
             [MethodImpl(Inline)]
             get => Data?.Length ?? 0;
-        } 
+        }
 
         public bool IsEmpty
         {
@@ -80,13 +80,13 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
-        
+
         [MethodImpl(Inline)]
         public void Iter(Action<T> f)
         {
             var count = Count;
             ref readonly var src = ref first(View);
-            for(var i=0; i<count; i++)   
+            for(var i=0; i<count; i++)
                 f(skip(src,i));
         }
     }

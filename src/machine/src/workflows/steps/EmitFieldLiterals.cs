@@ -14,8 +14,6 @@ namespace Z0
     using static Konst;
     using static EmitFieldLiteralsStep;
 
-    using PK = PrimalKindId;
-
     public readonly ref struct EmitFieldLiterals
     {
         readonly IWfContext Wf;

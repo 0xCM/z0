@@ -19,11 +19,11 @@ namespace Z0
         internal readonly Dictionary<OpUri,X86ApiCode> CodeUri;
 
         [MethodImpl(Inline)]
-        internal EncodedPartBuilder(Dictionary<MemoryAddress,X86ApiCode> CodeAddress, Dictionary<MemoryAddress,OpUri> UriAddress, Dictionary<OpUri,X86ApiCode> CodeUri)
+        internal EncodedPartBuilder(Dictionary<MemoryAddress,X86ApiCode> codes, Dictionary<MemoryAddress,OpUri> addresses, Dictionary<OpUri,X86ApiCode> identities)
         {
-            this.CodeAddress = CodeAddress;
-            this.UriAddress = UriAddress;
-            this.CodeUri = CodeUri;
+            CodeAddress = codes;
+            UriAddress = addresses;
+            CodeUri = identities;
         }
 
         public EncodedParts Freeze()

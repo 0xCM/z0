@@ -3,16 +3,16 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static HexFormatSpecs;
-    using static z;    
- 
+    using static z;
+
     partial class Hex
-    {        
+    {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         internal static string format<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
             where T : unmanaged
@@ -32,7 +32,7 @@ namespace Z0
                 return uint64(src).FormatHex(zpad, specifier, uppercase, prespec);
             else
                 return format_i(src,zpad,specifier,uppercase,prespec);
-        } 
+        }
 
         [MethodImpl(Inline)]
         static string format_i<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
@@ -48,7 +48,7 @@ namespace Z0
                 return int64(src).FormatHex(zpad, specifier, uppercase, prespec);
             else
                 return format_f(src,zpad,specifier,uppercase,prespec);
-        } 
+        }
 
         [MethodImpl(Inline)]
         static string format_f<T>(T src, bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true)
@@ -60,56 +60,56 @@ namespace Z0
                 return float64(src).FormatHex(zpad, specifier, uppercase, prespec);
             else
                 throw Unsupported.define<T>();
-        } 
- 
+        }
+
         [MethodImpl(Inline), Op]
         public static string format<W,T>(T value, W w = default)
             where W : unmanaged, IDataWidth
             where T : unmanaged
         {
             if(typeof(W) == typeof(W8))
-                return SmallHexFormat.format(Cast.to<T,byte>(value));
+                return SmallHex.format(Cast.to<T,byte>(value));
             else if(typeof(W) == typeof(W16))
-                return SmallHexFormat.format(Cast.to<T,ushort>(value));
+                return SmallHex.format(Cast.to<T,ushort>(value));
             else if(typeof(W) == typeof(W32))
-                return SmallHexFormat.format(Cast.to<T,uint>(value));
+                return SmallHex.format(Cast.to<T,uint>(value));
             else if(typeof(W) == typeof(W64))
-                return SmallHexFormat.format(Cast.to<T,ulong>(value));
+                return SmallHex.format(Cast.to<T,ulong>(value));
             else
                 return default;
-        }        
+        }
 
         [MethodImpl(Inline), Op]
         public static string format(in HexText<Hex1Kind> src, Hex1Kind kind)
-            => src.String(kind);        
+            => src.String(kind);
 
         [MethodImpl(Inline), Op]
         public static string format(in HexText<Hex2Kind> src,  Hex2Kind kind)
-            => src.String(kind);        
+            => src.String(kind);
 
         [MethodImpl(Inline), Op]
         public static string format(in HexText<Hex3Kind> src, Hex3Kind kind)
             => src.String(kind);
-        
+
         [MethodImpl(Inline), Op]
-        public static string format(in HexText<Hex4Kind> src, Hex4Kind kind)        
+        public static string format(in HexText<Hex4Kind> src, Hex4Kind kind)
             => src.String(kind);
 
         [MethodImpl(Inline), Op]
         public static string format(Hex1Kind kind)
-            => format(text(n1), kind);        
+            => format(text(n1), kind);
 
         [MethodImpl(Inline), Op]
         public static string format(Hex2Kind kind)
-            => format(text(n2), kind);        
+            => format(text(n2), kind);
 
         [MethodImpl(Inline), Op]
         public static string format(Hex3Kind kind)
-            => format(text(n3), kind);        
-        
+            => format(text(n3), kind);
+
         [MethodImpl(Inline), Op]
-        public static string format(Hex4Kind kind)        
-            => format(text(n4), kind);        
+        public static string format(Hex4Kind kind)
+            => format(text(n4), kind);
 
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<byte> src)
@@ -136,22 +136,22 @@ namespace Z0
                 dst.AppendLine();
 
             for(var i=0; i<size; i++)
-            {                
+            {
                 var value = src[i].ToString(spec);
                 var padded = zpad ? value.PadLeft(2, Chars.D0) : value;
 
                 dst.Append(string.Concat(pre, padded, post));
                 if(i != src.Length - 1)
                     dst.Append(sep);
-                
+
                 if(++counter == width)
                 {
                     dst.AppendLine();
                     counter = 0;
-                }                
+                }
             }
-            
+
             return dst.ToString();
-        }            
+        }
     }
 }

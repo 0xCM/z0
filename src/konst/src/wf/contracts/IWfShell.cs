@@ -55,6 +55,9 @@ namespace Z0
         void Error(Exception e, CorrelationToken? ct = null, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
             => Raise(WfEvB.error(e, ct ?? Ct, caller, file, line));
 
+        void Error(WfStepId step, Exception e, CorrelationToken? ct = null, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
+            => Raise(WfEvB.error(e, ct ?? Ct, caller, file, line));
+
         void Error<T>(string worker, T body, CorrelationToken? ct = null)
             => Raise(WfEvB.error(worker, body, ct ?? Ct));
 
@@ -94,11 +97,23 @@ namespace Z0
         void Created(in WfStepId step)
             => Raise(WfEvB.created(step, Ct));
 
-        void Emitting(WfStepId step, string dataset, FilePath dst)
-            => Raise(new WfEmitting(step, dataset, dst, Ct));
+        void Emitting(WfStepId step, string table, FilePath dst)
+            => Raise(new WfEmitting(step, Table.identify(table), dst, Ct));
 
-        void Emitted(WfStepId step, string dataset, uint count, FilePath dst)
-            => Raise(new WfEmitted(step, dataset, count, dst, Ct));
+        void Emitted(WfStepId step, string table, uint count, FilePath dst)
+            => Raise(new WfEmitted(step, Table.identify(table), count, dst, Ct));
+
+        void Emitting(WfStepId step, TableId table, FS.FilePath dst)
+            => Raise(new WfEmitting(step, table, dst, Ct));
+
+        void Emitted(WfStepId step, TableId table, uint count, FS.FilePath dst)
+            => Raise(new WfEmitted(step, table, count, dst, Ct));
+
+        void Emitting(string worker, string dataset, FilePath dst, CorrelationToken ct)
+            => Raise(new WfEmitting(WfStepId.Empty, Table.identify(dataset), dst, ct));
+
+        void Emitted(string actor, string dataset, uint count, FilePath dst, CorrelationToken ct)
+            => Raise(new WfEmitted(WfStepId.Empty, Table.identify(dataset), count,  dst, ct));
 
         void Running<T>(WfStepId step, T content)
             => Raise(WfEvB.running(step, content, Ct));
@@ -144,11 +159,6 @@ namespace Z0
             Raise(new WfStepCreated(step, ct));
         }
 
-        void Emitting(string worker, string dataset, FilePath dst, CorrelationToken ct)
-            => Raise(new WfEmitting(WfStepId.Empty, dataset, dst, ct));
-
-        void Emitted(string actor, string dataset, uint count, FilePath dst, CorrelationToken ct)
-            => Raise(new WfEmitted(WfStepId.Empty, dataset, count,  dst, ct));
 
         void Running(string actor, string message, CorrelationToken ct)
         {

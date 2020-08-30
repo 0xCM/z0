@@ -11,11 +11,19 @@ namespace Z0
 
     public readonly struct ListedFiles
     {
-        public readonly ListedFile[] Data;
+        public readonly TableSpan<ListedFile> Data;
 
         [MethodImpl(Inline)]
         public ListedFiles(ListedFile[] src)
             => Data = src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ListedFiles(ListedFile[] src)
+            => new ListedFiles(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ListedFiles(FS.FilePath[] src)
+            => new ListedFiles(src.Mapi((i,x) => new ListedFile(i,x)));
 
         public uint Count
         {
@@ -23,14 +31,28 @@ namespace Z0
             get => (uint)Data.Length;
         }
 
-        public ref readonly ListedFile this[uint index]
+        public ReadOnlySpan<ListedFile> View
+        {
+            [MethodImpl(Inline)]
+            get => Data.View;
+        }
+
+        public Span<ListedFile> Edit
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
+        }
+
+        public ref ListedFile this[ulong index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
 
-        [MethodImpl(Inline)]
-        public static implicit operator ListedFiles(ListedFile[] src)
-            => new ListedFiles(src);
+        public ref ListedFile this[long index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
     }
 }

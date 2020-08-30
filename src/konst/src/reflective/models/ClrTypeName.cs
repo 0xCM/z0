@@ -81,7 +81,7 @@ namespace Z0
             get => (uint)Address;
         }
 
-        public CellCount Count
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => Content.Length;

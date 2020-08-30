@@ -237,9 +237,10 @@ namespace Z0
 
         public void Run()
         {
-
             {
-                using var step = new ListFormatPatterns(State.Wf, typeof(RenderPatterns));
+                var src = typeof(RenderPatterns);
+                var dst = FS.dir(Wf.IndexRoot.Name) + FS.file("format-patterns", "csv");
+                using var step = new EmitFormatPatterns(State.Wf, (src, dst));
                 step.Run();
             }
 

@@ -23,7 +23,7 @@ namespace Z0
         public TableFields(TableField[] src)
             => Data = src;
 
-        public CellCount Count
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => Data.Length;

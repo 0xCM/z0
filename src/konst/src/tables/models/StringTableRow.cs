@@ -10,12 +10,12 @@ namespace Z0
     using static Konst;
 
     public readonly struct StringTableRow
-    {    
+    {
         public readonly StringTableCells Cells;
-        
+
         [MethodImpl(Inline)]
         public StringTableRow(string[] cells)
-            => Cells = cells;            
+            => Cells = cells;
 
         public int Length
         {
@@ -23,7 +23,7 @@ namespace Z0
             get => Cells.Length;
         }
 
-        public CellCount Count
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => (uint)Cells.Length;

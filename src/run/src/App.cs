@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using Z0.Asm;
-
     using static Konst;
     using static z;
 
@@ -48,7 +46,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Flow.error(wfc, ActorName, e, Ct);
+                wfc.Error(e, Ct);
             }
         }
 

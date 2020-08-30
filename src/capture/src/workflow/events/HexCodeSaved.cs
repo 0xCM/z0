@@ -14,17 +14,17 @@ namespace Z0.Asm
     public readonly struct HexCodeSaved : IWfEvent<HexCodeSaved>
     {
         public const string EventName = nameof(HexCodeSaved);
-        
+
         public WfEventId EventId {get;}
-    
+
         public WfActor Actor {get;}
 
         public readonly ApiHostUri Host;
-        
+
         public readonly IdentifiedCode[] Code;
 
-        public readonly CellCount MemberCount;
-        
+        public readonly Count32 MemberCount;
+
         public readonly FilePath Target;
 
         public MessageFlair Flair {get;}
@@ -40,9 +40,9 @@ namespace Z0.Asm
             Target = dst;
             Flair = flair;
         }
-        
+
         [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Host, MemberCount, Target);                   
-    }    
+            => format(EventId, Host, MemberCount, Target);
+    }
 }

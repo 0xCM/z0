@@ -8,24 +8,24 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     using static Konst;
-    
+
     public readonly struct NamedValues<T>
-    {        
+    {
         public NamedValue<T>[] Data {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator NamedValues<T>(NamedValue<T>[] src)
             => new NamedValues<T>(src);
-        
+
         [MethodImpl(Inline)]
         public NamedValues(NamedValue<T>[] src)
         {
             Data = src;
-        }                
+        }
 
-        public CellCount Count
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => Data.Length;
@@ -48,13 +48,13 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data;
         }
-        
+
         public ref NamedValue<T> this[string name]
         {
             [MethodImpl(Inline)]
             get => ref Data[Index(name)];
         }
-        
+
         public ref NamedValue<T> this[uint index]
         {
             [MethodImpl(Inline)]
@@ -72,6 +72,6 @@ namespace Z0
                     return i;
             }
             return 0;
-        }        
+        }
     }
 }

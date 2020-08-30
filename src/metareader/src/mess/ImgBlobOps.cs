@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+
     using F = ImgBlobField;
     using W = BlobFieldWidth;
 
@@ -15,7 +16,7 @@ namespace Z0
     {
         public static DataSink<F,ImgBlobRecord> sink(ImgBlobRecord spec)
         {
-            var formatter = Tabular.Formatter<F,W>();
+            var formatter = Formatters.record<F,W>();
             formatter.EmitHeader();
             return new DataSink<F,ImgBlobRecord>(formatter, deposit);
         }

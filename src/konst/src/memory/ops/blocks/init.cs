@@ -16,5 +16,13 @@ namespace Z0
         public static StorageBlock<T> init<T>(in T lo, in T hi)
             where T : unmanaged
                 => pair(lo, hi);
+
+        [MethodImpl(Inline)]
+        public static ref T init<T>(ReadOnlySpan<char> src, out T dst)
+            where T : unmanaged, ICharBlock<T>
+        {
+            dst = default;
+            return ref copy(src, ref dst);
+        }
     }
 }

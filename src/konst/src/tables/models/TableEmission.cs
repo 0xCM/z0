@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -16,7 +16,7 @@ namespace Z0
         public readonly T[] Data {get;}
 
         public FilePath Target {get;}
-        
+
         [MethodImpl(Inline)]
         public TableEmission(T[] src, FilePath dst)
         {
@@ -24,7 +24,7 @@ namespace Z0
             Target = dst;
         }
 
-        public CellCount RowCount
+        public Count32 RowCount
         {
             [MethodImpl(Inline)]
             get => Data.Length;

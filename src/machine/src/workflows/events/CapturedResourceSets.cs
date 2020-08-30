@@ -21,13 +21,13 @@ namespace Z0
         public WfEventId EventId {get;}
 
         public WfActor Actor {get;}
-        
-        public CellCount Count {get;}
-        
+
+        public Count32 Count {get;}
+
         public FilePath Source {get;}
-        
+
         public FolderPath Target {get;}
-        
+
         [MethodImpl(Inline)]
         public CapturedResourceSets(string actor, CapturedAccessor[] data, FilePath src, FolderPath dst,  CorrelationToken? ct = null)
         {
@@ -37,7 +37,7 @@ namespace Z0
             Source = src;
             Target = dst;
         }
-        
+
         [MethodImpl(Inline)]
         public string Format()
             => format(EventId, Actor, Count, Target);

@@ -28,8 +28,14 @@ namespace Z0
         FilePath ResPack
             => FilePath.Define(@"J:\dev\projects\z0-logs\respack\.bin\lib\netcoreapp3.0\z0.respack.dll");
 
+        void Error(WfStepId step, Exception e)
+            => Raise(WfEvents.error(step, e, Ct));
+
+        void Error<T>(WfStepId step,T content)
+            => Raise(WfEvents.error(step, content,  Ct));
+
         void Error(in WfActor actor, Exception e, CorrelationToken? ct = null)
-            => Flow.error(this, actor, e, ct ?? Ct);
+            => Raise(WfEvents.error(WfStepId.Empty, e, ct ?? Ct));
 
         void Warn<T>(WfStepId step, T content)
             => Raise(WfEvents.warn(step, content, Ct));
@@ -43,8 +49,8 @@ namespace Z0
         void Ran(string actor, CorrelationToken ct)
             => Flow.ran(this, actor, "Finished", ct);
 
-        void Ran<T>(string actor, T output, CorrelationToken? ct = null)
-            => Flow.ran(this, actor, output, ct ?? Ct);
+        void Ran<T>(string actor, T content, CorrelationToken? ct = null)
+            => Raise(WfEvents.ran(WfStepId.Empty, content, ct ?? Ct));
 
         void Status<T>(WfStepId worker, T message, CorrelationToken ct)
             => Flow.status(this, worker, message,ct);

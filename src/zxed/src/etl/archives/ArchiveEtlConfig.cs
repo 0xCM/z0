@@ -14,39 +14,33 @@ namespace Z0
     {
         public XedEtlConfig(IAppContext context, WfSettings settings)
         {
-            Settings = settings;            
+            Settings = settings;
             SourceRoot = context.AppPaths.DevRoot + FolderName.Define("data") + FolderName.Define("sources") + FolderName.Define("xed");
-            TargetRoot = context.AppPaths.BuildStage + FolderName.Define("xed");
+            TargetRoot = context.AppPaths.LogRoot + FolderName.Define("data") + FolderName.Define("xed");
         }
-        
+
         public readonly WfSettings Settings;
-        
+
         public readonly FolderPath SourceRoot;
 
         public readonly FolderPath TargetRoot;
 
-        public FolderName StageFolder 
-            => FolderName.Define("extracts");
+        public FolderPath ExtractRoot
+            => TargetRoot + FolderName.Define("extracts");
 
-        public FolderPath StageRoot 
-            => TargetRoot + StageFolder;
+        public FolderPath PubRoot
+            => TargetRoot + FolderName.Define("datasets");
 
-        public FolderName PublicationFolder 
-            => FolderName.Define("datasets");
-
-        public FolderPath PublicationRoot
-            => TargetRoot + PublicationFolder;
-
-        public FolderName ExtensionFolder 
+        public FolderName ExtensionFolder
             => FolderName.Define("extensions");
 
-        public FolderName CategoryFolder 
+        public FolderName CategoryFolder
             => FolderName.Define("categories");
 
-        public FileExtension DataFileExt 
+        public FileExtension DataFileExt
             => FileExtensions.Csv;
 
-        public xed_ext[] Extensions 
+        public xed_ext[] Extensions
         {
             [Op]
             get => ExtensionData;
@@ -59,13 +53,13 @@ namespace Z0
         }
 
        static xed_ext[] ExtensionData => new xed_ext[]{
-            xed_ext.XED_EXTENSION_BASE,             
-            xed_ext.XED_EXTENSION_AVX, 
-            xed_ext.XED_EXTENSION_AVX2,            
-            xed_ext.XED_EXTENSION_BMI1,            
-            xed_ext.XED_EXTENSION_BMI2,            
-            xed_ext.XED_EXTENSION_SSE,            
-            xed_ext.XED_EXTENSION_SSE2,            
+            xed_ext.XED_EXTENSION_BASE,
+            xed_ext.XED_EXTENSION_AVX,
+            xed_ext.XED_EXTENSION_AVX2,
+            xed_ext.XED_EXTENSION_BMI1,
+            xed_ext.XED_EXTENSION_BMI2,
+            xed_ext.XED_EXTENSION_SSE,
+            xed_ext.XED_EXTENSION_SSE2,
         };
 
        static xed_cat[] CategoryData => new xed_cat[]{

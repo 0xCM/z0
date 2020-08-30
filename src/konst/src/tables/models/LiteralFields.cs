@@ -10,10 +10,10 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct LiteralFields        
+    public readonly struct LiteralFields
     {
         public readonly FieldInfo[] Data;
-                
+
         [MethodImpl(Inline)]
         public static implicit operator LiteralFields(FieldInfo[] src)
             => new LiteralFields(src);
@@ -22,7 +22,7 @@ namespace Z0
         public LiteralFields(FieldInfo[] src)
             => Data = src;
 
-        public CellCount Count
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => Data.Length;

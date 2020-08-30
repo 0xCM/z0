@@ -10,9 +10,9 @@ namespace Z0.Asm
     using static Konst;
     using static Render;
     using static z;
-    
+
     public readonly struct ExtractReportCreated : IWfEvent<ExtractReportCreated>
-    {            
+    {
         public const string EventName = nameof(ExtractReportCreated);
 
         public WfEventId EventId {get;}
@@ -22,21 +22,21 @@ namespace Z0.Asm
         public CorrelationToken Ct {get;}
 
         public MessageFlair Flair {get;}
-        
-        public readonly CellCount RecordCount;
+
+        public readonly Count32 RecordCount;
 
         [MethodImpl(Inline)]
-        public ExtractReportCreated(string actor, CellCount count, CorrelationToken ct, MessageFlair flair = Ran)
+        public ExtractReportCreated(string actor, Count32 count, CorrelationToken ct, MessageFlair flair = Ran)
         {
             Actor = actor;
             EventId = evid(EventName, ct);
             Ct = ct;
             RecordCount = count;
-            Flair = flair;            
+            Flair = flair;
         }
-        
+
         [MethodImpl(Inline)]
         public string Format()
             => format(EventId, Actor, RecordCount);
-    }    
+    }
 }

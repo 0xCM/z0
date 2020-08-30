@@ -21,13 +21,14 @@ namespace Z0
 
     using F = XedPatternField;
     using R = XedPatternSummary;
+    using api = XedOps;
 
     [ApiHost]
     public readonly ref struct XedEtl
     {
         readonly XedEtlConfig Config;
 
-        readonly IWfContext Context;
+        readonly IWfContext Wf;
 
         readonly XedSourceArchive Src;
 
@@ -37,11 +38,11 @@ namespace Z0
 
         public XedEtl(IWfContext context, XedEtlConfig config)
         {
-            Context = context;
+            Wf = context;
             Config = config;
             Src = XedSourceArchive.Create(Config.SourceRoot);
-            Dst = XedStagingArchive.Create(Config.StageRoot);
-            Pub = TabularArchive.Service(Config.PublicationRoot);
+            Dst = XedStagingArchive.Create(Config.ExtractRoot);
+            Pub = TabularArchive.Service(Config.PubRoot);
         }
 
         public void Dispose()
@@ -49,8 +50,10 @@ namespace Z0
 
         }
 
+
         public XedPattern[] ExtractPatterns()
         {
+            var step = new WfStepId(typeof(XedEtl), nameof(ExtractPatterns), AB.token(WfPartKind.Step, typeof(XedEtl)));
             var patterns = list<XedPattern>();
             var parser = XedSourceParser.Service;
             var files = Src.InstructionFiles.ToSpan();
@@ -59,7 +62,7 @@ namespace Z0
                 for(var i=0; i< files.Length; i++)
                 {
                     ref readonly var file = ref skip(files,i);
-                    var id = Context.Raise(XedEvents.ParsingInstructions(file));
+                    var id = Wf.Raise(XedEvents.ParsingInstructions(file));
                     var parsed = span(parser.ParseInstructions(file));
                     for(var j = 0; j< parsed.Length; j++)
                     {
@@ -68,7 +71,7 @@ namespace Z0
                         Dst.Deposit(parsed, file.FileName);
                     }
 
-                    Context.Raise(XedEvents.ParsedInstructions(file, parsed.Length, id));
+                    Wf.Raise(new ParsedInstructions(step, FS.path(file.Name), parsed.Length, Wf.Ct));
                 }
             }
             catch(Exception e)
@@ -77,26 +80,6 @@ namespace Z0
             }
 
             return patterns.ToArray();
-        }
-
-        static XedInstructionRecord[] InstructionRecords(XedPattern[] src)
-        {
-            var input = Root.@readonly(src);
-            var count = input.Length;
-            var dst = Root.alloc<XedInstructionRecord>(count);
-            var target = Root.span(dst);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var x = ref skip(input,i);
-                seek(target,i) = new XedInstructionRecord(
-                    Sequence: (int)i,
-                    Mnemonic: x.Class,
-                    Extension: x.Extension,
-                    BaseCode: x.BaseCodeText(),
-                    Mod: default,
-                    Reg: default);
-            }
-            return dst;
         }
 
         public XedFunctionData[] ExtractFunctions()

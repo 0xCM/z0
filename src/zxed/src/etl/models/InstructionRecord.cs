@@ -29,19 +29,19 @@ namespace Z0
         Reg = 5 | 8 << WidthOffset,
     }
 
-    public readonly struct XedInstructionRecord : IRecord<F,R>
+    public struct XedInstructionRecord : IRecord<F,R>
     {
-        public readonly int Sequence;
+        public int Sequence;
 
-        public readonly asci16 Mnemonic;
+        public asci16 Mnemonic;
 
-        public readonly asci16 Extension;
+        public asci16 Extension;
 
-        public readonly asci8 BaseCode;
+        public asci8 BaseCode;
 
-        public readonly asci4 Mod;
+        public asci4 Mod;
 
-        public readonly asci8 Reg;
+        public asci8 Reg;
 
         [MethodImpl(Inline)]
         public XedInstructionRecord(int Sequence, asci16 Mnemonic, asci16 Extension, asci8 BaseCode, asci4 Mod, asci8 Reg)
@@ -56,7 +56,7 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var formatter = Tabular.Formatter<F>(delimiter);
+            var formatter = Formatters.dataset<F>(delimiter);
             formatter.Delimit(F.Sequence, Sequence);
             formatter.Delimit(F.Mnemonic, Mnemonic);
             formatter.Delimit(F.Extension, Extension);

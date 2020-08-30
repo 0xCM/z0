@@ -35,7 +35,7 @@ namespace Z0
         public Files(FS.FilePath[] src)
             => Data = src.Select(x => FilePath.Define(x.Name));
 
-        public CellCount Count
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => Data.Length;

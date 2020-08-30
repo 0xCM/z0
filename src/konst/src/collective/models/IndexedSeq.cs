@@ -16,7 +16,7 @@ namespace Z0
     /// Reifies a canonical indexed sequence container
     /// </summary>
     public readonly struct IndexedSeq<T> : IIndex<T>
-    {        
+    {
         readonly T[] Data;
 
         /// <summary>
@@ -41,26 +41,26 @@ namespace Z0
 
         public T[] Content
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => Data;
         }
 
         public ref T Head
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => ref Data[0];
         }
 
         public ref T Tail
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => ref Data[Length - 1];
         }
 
-        public int Count 
-        { 
-            [MethodImpl(Inline)] 
-            get => Data.Length; 
+        public int Count
+        {
+            [MethodImpl(Inline)]
+            get => Data.Length;
         }
 
         public IndexedSeq<T> Reverse()
@@ -68,37 +68,37 @@ namespace Z0
             Array.Reverse(Data);
             return this;
         }
-        
-        public bool IsEmpty 
+
+        public bool IsEmpty
         {
-             [MethodImpl(Inline)] 
-             get => Data.Length == 1 && object.Equals(default, Head); 
+             [MethodImpl(Inline)]
+             get => Data.Length == 1 && object.Equals(default, Head);
         }
 
-        public bool IsNonEmpty 
+        public bool IsNonEmpty
         {
-             [MethodImpl(Inline)] 
-             get => !IsEmpty; 
+             [MethodImpl(Inline)]
+             get => !IsEmpty;
         }
 
-        public int Length 
-        { 
-            [MethodImpl(Inline)] 
+        public int Length
+        {
+            [MethodImpl(Inline)]
             get => Data.Length;
         }
 
         [MethodImpl(Inline)]
-        CellCount IFinite.Count() 
+        Count32 IFinite.Count()
             => Data.Length;
 
-        public ref T this[int index] 
-        { 
-            [MethodImpl(Inline)] 
-            get => ref Data[index]; 
+        public ref T this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
         }
 
         [MethodImpl(Inline)]
-        public ref T Lookup(int index) 
+        public ref T Lookup(int index)
             => ref this[index];
 
         [MethodImpl(Inline)]
@@ -113,7 +113,7 @@ namespace Z0
         public IndexedSeq<T> Concat(IndexedSeq<T> rhs)
             => new IndexedSeq<T>(Data.Concat(rhs.Data));
 
-        public IndexedSeq<Y> Select<Y>(Func<T,Y> selector)       
+        public IndexedSeq<Y> Select<Y>(Func<T,Y> selector)
              => Indexed.seq(from x in Data select selector(x));
 
         public IndexedSeq<Z> SelectMany<Y,Z>(Func<T,IndexedSeq<Y>> lift, Func<T,Y,Z> project)

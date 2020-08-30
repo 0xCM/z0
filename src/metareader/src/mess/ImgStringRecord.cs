@@ -15,7 +15,7 @@ namespace Z0
     partial class PartRecords
     {
         public static RecordFormatter<F,W> formatter(ImageString spec)
-            => Tabular.Formatter<F,W>();
+            => Formatters.record<F,W>();
 
         [Op]
         public static ref readonly RecordFormatter<F,W> format(in ImageString src, in RecordFormatter<F,W> dst, bool eol = true)

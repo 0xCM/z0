@@ -20,6 +20,8 @@ namespace Z0
 
         public WfActor Actor {get;}
 
+        public WfStepId StepId {get;}
+
         public readonly T Data {get;}
 
         public T Content => Data;
@@ -32,6 +34,7 @@ namespace Z0
         public WfError(string actor, T body, CorrelationToken ct, AppMsgSource source)
         {
             EventId = evid(EventName, ct);
+            StepId = WfStepId.Empty;
             Actor = actor;
             Data = body;
             Flair =  MessageFlair.Red;
@@ -39,15 +42,17 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public WfError(in WfActor actor, T body, CorrelationToken ct, AppMsgSource source)
+        public WfError(WfStepId step, T body, CorrelationToken ct, AppMsgSource source)
         {
             EventId = evid(EventName, ct);
-            Actor = actor;
+            Actor = EmptyString;
+            StepId = step;
             Data = body;
             Flair =  MessageFlair.Red;
             Source = source;
         }
+
         public string Format()
-            => text.format(PSx4, EventId, Actor, Source, Data);
+            => text.format(PSx4, EventId, StepId, Source, Content);
     }
 }

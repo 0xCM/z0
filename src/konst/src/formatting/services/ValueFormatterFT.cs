@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using Z0.Data;
-
     using static Konst;
 
     public readonly struct ValueFormatter<F,T>
@@ -29,6 +27,6 @@ namespace Z0
             => Formatter.Format(src);
 
         public string HeaderText
-            => Dataset.header<F>().Render();
+            => Datasets.header<F>().Render();
     }
 }

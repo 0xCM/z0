@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -15,7 +15,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static T init<T>()
-            where T : struct, ITable<T>
-                => new T(); 
+            where T : struct
+                => new T();
     }
 }

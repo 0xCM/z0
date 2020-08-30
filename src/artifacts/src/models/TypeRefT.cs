@@ -11,7 +11,6 @@ namespace Z0
     using static z;
     using static ArtifactModel;
 
-
     partial struct ArtifactModel
     {
         /// <summary>

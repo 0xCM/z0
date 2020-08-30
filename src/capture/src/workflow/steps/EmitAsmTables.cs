@@ -129,7 +129,7 @@ namespace Z0
                 Process(src.Encoded, decoded.Value);
         }
 
-        CellCount RecordCount()
+        Count32 RecordCount()
         {
             var count = 0u;
             var keys = Keys;

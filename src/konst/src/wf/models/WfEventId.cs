@@ -22,6 +22,10 @@ namespace Z0
         public static WfEventId define(string name, CorrelationToken? ct = null, Timestamp? ts = null)
             => new WfEventId(name, ct ?? correlate(0ul), ts ?? now());
 
+        [MethodImpl(Inline)]
+        public static implicit operator WfEventId((string name, CorrelationToken ct) src)
+            => define(src.name, src.ct);
+
         const string Pattern = "| {0} | {1} | {2}";
 
         /// <summary>

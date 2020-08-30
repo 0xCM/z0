@@ -13,8 +13,8 @@ namespace Z0
 
     public interface IRecord<F,R> : IRecord, ITabular<F,R>, ITextual
         where F : unmanaged, Enum
-        where R : IRecord
+        where R : struct
     {
-                
+
     }
 }

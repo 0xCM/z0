@@ -108,7 +108,7 @@ namespace Z0
         /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
         [MethodImpl(Inline), Op]
         public static uint hash(float x, float y)
-            => hash(@int(x),@int(y));
+            => hash(@int(x), @int(y));
 
         /// <summary>
         /// Creates a combined/unsigned hash code

@@ -29,7 +29,7 @@ namespace Z0
         public ApiMembers(params ApiMember[] src)
             => Data = src;
 
-        public CellCount Count
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => Data.Count;

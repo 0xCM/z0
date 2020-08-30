@@ -9,8 +9,6 @@ namespace Z0
     using System.Reflection;
     using System.Collections.Generic;
 
-    using Z0.Data;
-
     using static Konst;
     using static EmitBitMasksStep;
     using static z;
@@ -50,7 +48,7 @@ namespace Z0
         {
             var literals = span(find(src));
             var count = literals.Length;
-            var formatter = NumericLiteralFormatter.Service;
+            var formatter = Formatters.numeric();
             using var writer = TargetPath.Writer();
             writer.WriteLine(formatter.HeaderText);
 

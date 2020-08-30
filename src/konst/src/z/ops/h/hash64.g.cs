@@ -12,16 +12,14 @@ namespace Z0
     partial struct z
     {
         /// <summary>
-        /// Creates a 64-bit hashcode over two primal values by combining 2 32-bit hash codes in the obvious way
+        /// Creates a 64-bit hashcode over a pair
         /// </summary>
-        /// <param name="x">The first primitive value</param>
-        /// <param name="y">The second primitive value</param>
-        /// <typeparam name="X"></typeparam>
-        /// <typeparam name="Y"></typeparam>
+        /// <param name="x">The first member</param>
+        /// <param name="y">The second member</param>
+        /// <typeparam name="X">The first member type</typeparam>
+        /// <typeparam name="Y">The second member type</typeparam>
         [MethodImpl(Inline)]
         public static ulong hash64<X,Y>(X x, Y y)
-            where X : unmanaged
-            where Y : unmanaged
-                => hash(x) | (hash(y) << 32);
+            => hash(x) | (hash(y) << 32);
     }
 }

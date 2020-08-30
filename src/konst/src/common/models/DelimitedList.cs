@@ -18,9 +18,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator DelimitedList<T>(T[] src)
             => new DelimitedList<T>(src);
-        
+
         [MethodImpl(Inline)]
-        public DelimitedList(T[] src, char delimiter = Chars.Comma)
+        public DelimitedList(T[] src, char delimiter = Chars.Pipe)
         {
             Data = src;
             Delimiter = delimiter;

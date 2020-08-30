@@ -84,10 +84,14 @@ namespace Z0
     }
 
     [Step(typeof(ExtractMembers), StepName)]
-    public readonly struct ExtractMembersStep
+    public readonly struct ExtractMembersStep : IWfStep<ExtractMembersStep>
     {
         public const string StepName = nameof(ExtractMembers);
+
+        public static WfStepId StepId => AB.step<ExtractMembersStep>();
     }
+
+
 
     [Step(typeof(EmitImmSpecials), StepName)]
     public readonly struct SpecializeImmediatesStep

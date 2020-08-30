@@ -14,15 +14,15 @@ namespace Z0.Events
     public readonly struct MethodsPrepared : IWfEvent<MethodsPrepared>
     {
         public const string EventName = nameof(MethodsPrepared);
-        
+
         public WfEventId EventId {get;}
 
         public WfActor Actor {get;}
-        
+
         public ApiHostUri Host {get;}
 
-        public CellCount Count {get;}
-        
+        public Count32 Count {get;}
+
         [MethodImpl(Inline)]
         public MethodsPrepared(WfActor actor, ApiHostUri host, int count, CorrelationToken ct)
         {

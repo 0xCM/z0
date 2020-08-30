@@ -20,17 +20,26 @@ namespace Z0
 
         public WfStepId StepId {get;}
 
-        public string Dataset {get;}
+        public TableId Dataset {get;}
 
         public FS.FilePath Target {get;}
 
         [MethodImpl(Inline)]
-        public WfEmitting(WfStepId step, string dataset, FilePath target, CorrelationToken ct)
+        public WfEmitting(WfStepId step, TableId dataset, FilePath target, CorrelationToken ct)
         {
             StepId = step;
             EventId = z.evid(EventName, ct);
             Dataset = dataset;
             Target = FS.path(target.Name);
+        }
+
+        [MethodImpl(Inline)]
+        public WfEmitting(WfStepId step, TableId dataset, FS.FilePath target, CorrelationToken ct)
+        {
+            StepId = step;
+            EventId = z.evid(EventName, ct);
+            Dataset = dataset;
+            Target = target;
         }
 
         [MethodImpl(Inline)]

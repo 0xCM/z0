@@ -24,7 +24,7 @@ namespace Z0
             FieldValues = values;
         }
 
-        public CellCount Count
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => FieldSpecs.Length;

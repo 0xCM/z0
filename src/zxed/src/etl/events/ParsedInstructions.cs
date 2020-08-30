@@ -9,10 +9,11 @@ namespace Z0.XedWf
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Render;
 
     public readonly struct ParsedInstructions : IWfEvent<ParsedInstructions>
     {
-        const string Pattern = "{0}: Parsed {1} instructions from {2}";
+        public const string EventName = nameof(ParsedInstructions);
 
         /// <summary>
         /// The event identifier
@@ -20,24 +21,36 @@ namespace Z0.XedWf
         public WfEventId EventId {get;}
 
         /// <summary>
+        /// The step that was executing when the event originated
+        /// </summary>
+        public WfStepId StepId {get;}
+
+        /// <summary>
         /// The input file path
         /// </summary>
-        public readonly FilePath Source;
-        
+        public FS.FilePath Source {get;}
+
         /// <summary>
         /// The number of instructions parsed from the source
         /// </summary>
-        public readonly uint Count;
-        
+        public Count32 Count {get;}
+
+        /// <summary>
+        /// The message flair
+        /// </summary>
+        public MessageFlair Flair {get;}
+
         [MethodImpl(Inline)]
-        public ParsedInstructions(WfEventId id, FilePath source, uint count)
+        public ParsedInstructions(WfStepId step, FS.FilePath source, Count32 count, CorrelationToken ct, MessageFlair flair = Ran)
         {
-            EventId = id;
+            EventId = (EventName, ct);
+            StepId = step;
             Source = source;
             Count = count;
+            Flair = flair;
         }
 
         public string Format()
-            => text.format(Pattern, EventId, Count, Source);
+            => Render.format(EventId, StepId, Count, Source);
     }
 }

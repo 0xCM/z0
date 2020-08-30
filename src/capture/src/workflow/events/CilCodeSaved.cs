@@ -21,7 +21,7 @@ namespace Z0.Asm
 
         public readonly ApiHostUri Host;
 
-        public readonly CellCount MemberCount;
+        public readonly Count32 MemberCount;
 
         public readonly FilePath Target;
 

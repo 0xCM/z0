@@ -11,6 +11,9 @@ namespace Z0
     using static z;
     using static ArtifactModel;
 
+    /// <summary>
+    /// Defines a reference to an artifact
+    /// </summary>
     public readonly struct ArtifactRef
     {
         public readonly ArtifactIdentifier Id;

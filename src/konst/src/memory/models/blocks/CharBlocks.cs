@@ -11,10 +11,17 @@ namespace Z0
     using static z;
     using api = StorageBlocks;
 
+    public interface ICharBlock<T>
+        where T : unmanaged, ICharBlock<T>
+    {
+
+
+    }
+
     /// <summary>
     /// Defines a character block b with capacity(b) = 1x16u
     /// </summary>
-    public struct CharBlock1
+    public struct CharBlock1 : ICharBlock<CharBlock1>
     {
         public char Data;
     }
@@ -22,7 +29,7 @@ namespace Z0
     /// <summary>
     /// Defines a character block b with capacity(b) = 2x16u
     /// </summary>
-    public struct CharBlock2
+    public struct CharBlock2 : ICharBlock<CharBlock2>
     {
         [MethodImpl(Inline)]
         public static implicit operator Pair<CharBlock1>(CharBlock2 src)
@@ -46,7 +53,7 @@ namespace Z0
     /// <summary>
     /// Defines a character block b with capacity(b) = 4x16u
     /// </summary>
-    public struct CharBlock4
+    public struct CharBlock4 : ICharBlock<CharBlock4>
     {
         public CharBlock2 Lo;
 
@@ -86,7 +93,7 @@ namespace Z0
         public CharBlock1 Hi;
     }
 
-    public struct CharBlock8
+    public struct CharBlock8 : ICharBlock<CharBlock8>
     {
         /// <summary>
         /// The upper segment
@@ -190,7 +197,7 @@ namespace Z0
     /// <summary>
     /// Defines a character block b with capacity(b) = 16x16u
     /// </summary>
-    public struct CharBlock16
+    public struct CharBlock16 : ICharBlock<CharBlock16>
     {
         /// <summary>
         /// The upper segment
@@ -203,8 +210,12 @@ namespace Z0
     /// <summary>
     /// Defines a character block b with capacity(b) = 32x16u
     /// </summary>
-    public struct CharBlock32
+    public struct CharBlock32  : ICharBlock<CharBlock32>
     {
+        [MethodImpl(Inline)]
+        public static implicit operator CharBlock32(string src)
+            => api.init(src, out CharBlock32 dst);
+
         /// <summary>
         /// The upper segment
         /// </summary>
@@ -219,7 +230,7 @@ namespace Z0
     /// <summary>
     /// Defines a character block b with capacity(b) = 64x16u
     /// </summary>
-    public struct CharBlock64
+    public struct CharBlock64 : ICharBlock<CharBlock64>
     {
         /// <summary>
         /// The upper segment
@@ -232,7 +243,7 @@ namespace Z0
     /// <summary>
     /// Defines a character block b with capacity(b) = 128x16u
     /// </summary>
-    public struct CharBlock128
+    public struct CharBlock128 : ICharBlock<CharBlock128>
     {
         /// <summary>
         /// The upper segment

@@ -8,11 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;    
+    using static Konst;
     using static z;
 
-    readonly partial struct CharBlocks
+    partial struct StorageBlocks
     {
+        [MethodImpl(Inline)]
+        public static ref T copy<T>(ReadOnlySpan<char> src, ref T dst)
+            where T : unmanaged, ICharBlock<T>
+        {
+            var length = (uint)min(src.Length, size<T>()/2);
+            z.copy(first(src), ref @as<T,char>(dst), length);
+            return ref dst;
+        }
+
         [MethodImpl(Inline), Op]
         public static ref CharBlock2 copy(ReadOnlySpan<char> src, ref CharBlock2 dst)
         {

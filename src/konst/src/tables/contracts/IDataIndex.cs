@@ -3,33 +3,33 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Security;
 
     [SuppressUnmanagedCodeSecurity]
     public interface IDataIndex
     {
-        CellCount Count {get;}
-        
+        Count32 Count {get;}
+
         int Length {get;}
     }
-    
+
     [SuppressUnmanagedCodeSecurity]
     public interface IDataIndex<T> : IDataIndex
     {
         T[] Data {get;}
 
-        Span<T> Edit 
+        Span<T> Edit
             => Data;
 
-        ReadOnlySpan<T> View  
+        ReadOnlySpan<T> View
             => Data;
 
-        CellCount IDataIndex.Count
+        Count32 IDataIndex.Count
             => Data.Length;
 
-        int IDataIndex.Length 
+        int IDataIndex.Length
             => Data.Length;
     }
 }

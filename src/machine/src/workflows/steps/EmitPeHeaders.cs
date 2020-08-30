@@ -7,24 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Data;
-    
     using static Konst;
     using static EmitPeHeadersStep;
 
     using F = PeHeaderField;
-    
+
     public readonly ref struct EmitPeHeaders
     {
         readonly IWfContext Wf;
-        
+
         readonly IPart[] Parts;
-        
+
         readonly FilePath TargetPath;
-        
+
         readonly CorrelationToken Ct;
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         public EmitPeHeaders(IWfContext wf, IPart[] src, CorrelationToken ct)
         {
             Wf = wf;
@@ -40,29 +38,29 @@ namespace Z0
             var total = 0u;
             Wf.RunningT(StepName,new {PartCount = pCount}, Ct);
 
-            var formatter = DatasetFormatter<F>.Default;            
+            var formatter = Formatters.dataset<F>();
             using var writer = TargetPath.Writer();
             writer.WriteLine(formatter.HeaderText);
 
             foreach(var part in Parts)
             {
                 var id = part.Id;
-                var assembly = part.Owner;                                
+                var assembly = part.Owner;
                 var records = PeMetaReader.headers(FilePath.Define(assembly.Location));
                 var count = (uint)records.Length;
-                
+
                 for(var i=0; i<count; i++)
                 {
                     format(z.skip(records,i), formatter);
                     writer.WriteLine(formatter.Render());
-                } 
+                }
                 total += count;
-            }  
+            }
 
             Wf.RanT(StepName, new {PartCount = pCount, TotalRecordCount = total}, Ct);
         }
 
-        static void format(in PeHeaderRecord src, IDatasetFormatter<F> dst)
+        static void format(in PeHeaderRecord src, DatasetFormatter<F> dst)
         {
             dst.Append(F.FileName, src.FileName);
             dst.Delimit(F.Section, src.Section);

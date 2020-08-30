@@ -6,44 +6,50 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection.Metadata.Ecma335;
 
     using static Konst;
     using static z;
 
     /// <summary>
-    /// Defines an unmanaged key predicated on a discriminator of type <typeparamref name='K'/> and
-    /// and identifier of type <typeparamref name='T'/>
+    /// Defines a <typeparamref name='K'/> discriminated key for an identifier <typeparamref name='T'/>
     /// </summary>
+    /// <remarks>
+    ///  The key is denoted symbolically by <see cref='Key{K,T}.Identifier'/>: <see cref='Key{K,T}.Kind'/>
+    /// </remarks>
     public readonly struct Key<K,T>
-        where K : unmanaged
-        where T : unmanaged
     {
+        public const string FormatPatternText = "{0}: {1}";
+
+        public static RenderPattern<N2> FormatPattern => FormatPatternText;
+
         /// <summary>
         /// The key discriminator
         /// </summary>
-        public readonly K Class;
+        public readonly K Kind;
 
         /// <summary>
-        /// The item identifier relative to the discriminated context defined by <see cref='Class'/>
+        /// The item identifier relative to the discriminated context defined by <see cref='Kind'/>
         /// </summary>
         public readonly T Identifier;
 
         [MethodImpl(Inline)]
-        public static implicit operator Key<K,T>((K d, T id) src)
-            => new Key<K,T>(src.d, src.id);
+        public static implicit operator Key<K,T>((K kind, T id) src)
+            => new Key<K,T>(src.kind, src.id);
 
         [MethodImpl(Inline)]
-        public Key(K d, T i)
+        public Key(K kind, T id)
         {
-            Class = d;
-            Identifier = i;
+            Kind = kind;
+            Identifier = id;
         }
 
         public ulong Hash64
         {
             [MethodImpl(Inline)]
-            get => z.hash(Class) | (z.hash(Identifier) << 32);
+            get => z.hash(Kind) | (z.hash(Identifier) << 32);
         }
+
+        public string Format()
+            => text.format(FormatPatternText, Identifier, Kind);
     }
 }

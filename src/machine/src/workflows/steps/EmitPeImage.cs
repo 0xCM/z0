@@ -10,13 +10,13 @@ namespace Z0
 
     using static Konst;
     using static EmitPeImageStep;
-    
+
     public ref struct EmitPeImage
     {
         readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
-        
+
         readonly IPart Part;
 
         readonly MemoryAddress BaseAddress;
@@ -30,7 +30,7 @@ namespace Z0
         readonly Span<byte> Buffer;
 
         readonly uint BufferSize;
-        
+
         uint LineCount;
 
         char LabelDelimiter;
@@ -51,30 +51,30 @@ namespace Z0
             LabelDelimiter = Chars.Pipe;
             BufferSize = 32;
             Buffer = sys.alloc<byte>(BufferSize);
-            SourcePath = FilePath.Define(Part.Owner.Location);            
+            SourcePath = FilePath.Define(Part.Owner.Location);
             Wf.Created(StepName, Ct);
         }
 
         public void Run()
-        {                        
+        {
             Wf.Emitting(StepName, DatasetName, TargetPath, Ct);
 
             using var stream = SourcePath.Reader();
             using var reader = stream.BinaryReader();
-            using var dst = TargetPath.Writer();            
+            using var dst = TargetPath.Writer();
             dst.WriteLine(text.concat($"Address".PadRight(12), SpacePipe, "Data"));
 
             var k = Read(reader);
             while(k != 0)
             {
                 dst.WriteLine(Formatter.FormatLine(Buffer, Offset, LabelDelimiter));
-                
+
                 Offset += k;
                 LineCount++;
 
                 Buffer.Clear();
                 k = Read(reader);
-            }        
+            }
 
             Wf.Emitted(StepName, DatasetName, LineCount, TargetPath, Ct);
 
@@ -95,6 +95,6 @@ namespace Z0
         {
             Buffer.Clear();
             return (uint)reader.Read(Buffer);
-        }    
+        }
     }
 }

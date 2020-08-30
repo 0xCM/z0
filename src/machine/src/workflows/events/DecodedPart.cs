@@ -27,7 +27,7 @@ namespace Z0
 
         public PartId PartId {get;}
 
-        public CellCount TotalCount {get;}
+        public Count32 TotalCount {get;}
 
         public MessageFlair Flair {get;}
 

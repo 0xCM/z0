@@ -3,14 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Security;
 
     [SuppressUnmanagedCodeSecurity]
     public interface ICellular
     {
-        CellCount CellCount {get;}
+        Count32 CellCount {get;}
     }
 
     [SuppressUnmanagedCodeSecurity]
@@ -18,9 +18,9 @@ namespace Z0
     {
         T[] Cells {get;}
 
-        CellCount ICellular.CellCount 
+        Count32 ICellular.CellCount
             => Cells.Length;
-        
+
         ref T this[uint index]
             => ref Cells[index];
     }
@@ -29,7 +29,7 @@ namespace Z0
     public interface ICellular<T,K> : ICellular<T>
         where K : unmanaged, Enum
     {
-        ref T this[K index] 
+        ref T this[K index]
             => ref this[Enums.e32u(index)];
     }
 }

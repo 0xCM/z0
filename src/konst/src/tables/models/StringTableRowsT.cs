@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct StringTableRows<T>
         where T : ITextual
-    {        
+    {
         public readonly TableSpan<StringTableRow<T>> Data;
 
         [MethodImpl(Inline)]
@@ -40,7 +40,7 @@ namespace Z0
             get => Data.Length;
         }
 
-        public CellCount Count
+        public Count32 Count
         {
             [MethodImpl(Inline)]
             get => Data.Length;

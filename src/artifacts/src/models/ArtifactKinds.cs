@@ -8,28 +8,46 @@ namespace Z0
 
     using I = System.Reflection.Metadata.Ecma335.TableIndex;
 
+    /// <summary>
+    /// Defines a set of types that projects each <see cref='I'/> literal into the type-system
+    /// </summary>
     public readonly struct ArtifactKinds
     {
+        /// <summary>
+        /// Encodes the <see cref='I.IModule' /> literal as a type
+        /// </summary>
         public readonly struct Module : IArtifactKind<Module>
         {
             public I Index => I.Module;
         }
 
+        /// <summary>
+        /// Encodes the <see cref='I.TypeRef' /> literal as a type
+        /// </summary>
         public readonly struct TypeRef : IArtifactKind<TypeRef>
         {
             public I Index => I.TypeRef;
         }
 
+        /// <summary>
+        /// Encodes the <see cref='I.TypeDef' /> literal as a type
+        /// </summary>
         public readonly struct TypeDef : IArtifactKind<TypeDef>
         {
             public I Index => I.TypeDef;
         }
 
+        /// <summary>
+        /// Encodes the <see cref='I.FieldPtr' /> literal as a type
+        /// </summary>
         public readonly struct FieldPtr : IArtifactKind<FieldPtr>
         {
             public I Index => I.FieldPtr;
         }
 
+        /// <summary>
+        /// Encodes the <see cref='I.Field' /> literal as a type
+        /// </summary>
         public readonly struct Field : IArtifactKind<Field>
         {
             public I Index => I.Field;
