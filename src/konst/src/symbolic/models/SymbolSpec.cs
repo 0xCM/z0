@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
@@ -18,19 +18,19 @@ namespace Z0
 
         public ushort Capacity {get;}
 
-        public ArtifactIdentity SegDomain {get;}
+        public ArtifactIdentifier SegDomain {get;}
 
-        public ArtifactIdentity SymDomain {get;}
+        public ArtifactIdentifier SymDomain {get;}
 
 
         [MethodImpl(Inline)]
-        public SymbolSpec(ushort symwidth, ushort segwidth, ArtifactIdentity segdomain, ArtifactIdentity symdomain)
+        public SymbolSpec(ushort symwidth, ushort segwidth, ArtifactIdentifier segdomain, ArtifactIdentifier symdomain)
         {
             SymWidth = symwidth;
             SegWidth = segwidth;
             Capacity = (ushort)(SegWidth/SymWidth);
             SegDomain = segdomain;
-            SymDomain = symdomain;            
-        }        
+            SymDomain = symdomain;
+        }
     }
 }

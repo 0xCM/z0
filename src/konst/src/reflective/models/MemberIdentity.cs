@@ -17,13 +17,13 @@ namespace Z0
     {
         readonly ulong Data;
 
-        public ArtifactIdentity OwnerId
+        public ArtifactIdentifier OwnerId
         {
             [MethodImpl(Inline)]
             get => (uint)(Data >> 32);
         }
 
-        public ArtifactIdentity MemberId
+        public ArtifactIdentifier MemberId
         {
             [MethodImpl(Inline)]
             get => (uint)(Data);

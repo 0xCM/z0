@@ -15,20 +15,20 @@ namespace Z0
         where E : unmanaged, Enum
         where T : unmanaged
     {
-        public ArtifactIdentity Id {get;}
+        public ArtifactIdentifier Id {get;}
 
         public string Description {get;}
 
         public EnumScalarKind DataType {get;}
-                
+
         public UserMetadata UserData {get;}
 
         public int EntryCount {get;}
 
-        public ArtifactIdentity[] Tokens {get;}
-        
+        public ArtifactIdentifier[] Tokens {get;}
+
         public uint[] Indices {get;}
-        
+
         public string[] Names {get;}
 
         public E[] Literals {get;}
@@ -47,17 +47,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public EnumDatasetEntry<E,T> Entry(int i)
-            => new EnumDatasetEntry<E,T>(Tokens[i], Id, 
+            => new EnumDatasetEntry<E,T>(Tokens[i], Id,
                     Indices[i], Names[i], Literals[i], Scalars[i], Descriptions[i], EntryData[i]);
 
-        public EnumDataset(ArtifactIdentity token, string description, UserMetadata data, EnumScalarKind type, EnumDatasetEntry<E,T>[] entries)
+        public EnumDataset(ArtifactIdentifier token, string description, UserMetadata data, EnumScalarKind type, EnumDatasetEntry<E,T>[] entries)
         {
             Id = token;
             DataType = type;
             Description = description;
             UserData = data;
             EntryCount = entries.Length;
-            Tokens = sys.alloc<ArtifactIdentity>(EntryCount);
+            Tokens = sys.alloc<ArtifactIdentifier>(EntryCount);
             Indices = sys.alloc<uint>(EntryCount);
             Names = sys.alloc<string>(EntryCount);
             Literals = sys.alloc<E>(EntryCount);
@@ -67,7 +67,7 @@ namespace Z0
 
             for(var i=0; i<entries.Length; i++)
             {
-                Tokens[i] = entries[i].Token;                                
+                Tokens[i] = entries[i].Token;
                 Indices[i] = entries[i].Position;
                 Names[i] = entries[i].Name;
                 Literals[i] = entries[i].Literal;
@@ -76,14 +76,14 @@ namespace Z0
                 EntryData[i] = entries[i].UserData;
             }
         }
-                
+
         [MethodImpl(Inline)]
-        public EnumDataset(ArtifactIdentity token, string description, UserMetadata data,  EnumScalarKind type, ArtifactIdentity[] tokens,  
+        public EnumDataset(ArtifactIdentifier token, string description, UserMetadata data,  EnumScalarKind type, ArtifactIdentifier[] tokens,
             uint[] indices, string[] names, E[] literals, T[] scalars, string[] descriptions, UserMetadata[] entrydata)
         {
             Id = token;
             DataType = type;
-            EntryCount = tokens.Length;            
+            EntryCount = tokens.Length;
             Description = description;
             UserData = data;
             Tokens = tokens;

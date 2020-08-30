@@ -11,11 +11,11 @@ namespace Z0.ClrData
     using static Konst;
     using static z;
 
-    using Storage = KeyedValues<ArtifactIdentity,System.Type>;
-    using T = KeyedValue<ArtifactIdentity,System.Type>;
+    using Storage = KeyedValues<ArtifactIdentifier,System.Type>;
+    using T = KeyedValue<ArtifactIdentifier,System.Type>;
     using V = System.Type;
-    using K = ArtifactIdentity;
-    
+    using K = ArtifactIdentifier;
+
     public readonly struct ClrTypes
     {
         readonly Storage Data;
@@ -23,10 +23,10 @@ namespace Z0.ClrData
         [MethodImpl(Inline)]
         static K kf(in V t)
             => t.MetadataToken;
-        
+
         [MethodImpl(Inline)]
         public static ClrTypes init(uint capacity)
-            => new ClrTypes(new Storage(kf,capacity));        
+            => new ClrTypes(new Storage(kf,capacity));
 
         [MethodImpl(Inline)]
         public static ClrTypes create(ReadOnlySpan<V> src)
@@ -55,8 +55,8 @@ namespace Z0.ClrData
         [MethodImpl(Inline)]
         public bool Search(Func<Type,bool> predicate, out Type found)
             => Data.Search(predicate, out found);
-                
-        public Span<T> Pairs 
+
+        public Span<T> Pairs
         {
             [MethodImpl(Inline)]
             get => Data.Edit;

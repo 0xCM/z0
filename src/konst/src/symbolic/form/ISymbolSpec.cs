@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     public interface ISymbolSpec
     {
         ushort SymWidth {get;}
@@ -12,9 +12,9 @@ namespace Z0
 
         ushort Capacity {get;}
 
-        ArtifactIdentity SegDomain {get;}
+        ArtifactIdentifier SegDomain {get;}
 
-        ArtifactIdentity SymDomain {get;}
+        ArtifactIdentifier SymDomain {get;}
     }
 
     public interface ISymbolSpec<S> : ISymbolSpec

@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
@@ -15,7 +15,7 @@ namespace Z0
         where S : unmanaged
     {
         public ushort SymWidth {get;}
-        
+
         /// <summary>
         /// The bit-width of a storage cell
         /// </summary>
@@ -26,14 +26,14 @@ namespace Z0
         /// </summary>
         public ushort Capacity {get;}
 
-        public ArtifactIdentity SegDomain {get;}
+        public ArtifactIdentifier SegDomain {get;}
 
-        public ArtifactIdentity SymDomain {get;}
+        public ArtifactIdentifier SymDomain {get;}
 
         public S[] Symbols {get;}
 
         [MethodImpl(Inline)]
-        public SymbolSpec(ushort symwidth, ushort segwidth, ArtifactIdentity segdomain,  ArtifactIdentity symdomain, params S[] symbols)
+        public SymbolSpec(ushort symwidth, ushort segwidth, ArtifactIdentifier segdomain,  ArtifactIdentifier symdomain, params S[] symbols)
         {
             SymWidth = symwidth;
             SegWidth = segwidth;
@@ -44,7 +44,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public SymbolSpec(ushort symwidth, ArtifactIdentity symdomain, params S[] symbols)
+        public SymbolSpec(ushort symwidth, ArtifactIdentifier symdomain, params S[] symbols)
         {
             SymWidth = symwidth;
             SegWidth = (ushort)bitsize<S>();

@@ -13,7 +13,7 @@ namespace Z0
     {
         public readonly PartId PartId;
 
-        public readonly ArtifactIdentity TypeId;
+        public readonly ArtifactIdentifier TypeId;
 
         public readonly MemoryAddress TypeAddress;
 
@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public EnumLiteralRecord(PartId part, Type type,  MemoryAddress address, ushort index, string name, MemoryAddress nameaddress, EnumScalarKind primal, ulong value)
         {
-            
+
             PartId =  part;
             TypeId = type;
             TypeName = type.Name;
@@ -49,8 +49,8 @@ namespace Z0
             PrimalKind = primal;
             ScalarValue = value;
         }
-        
+
         public int CompareTo(EnumLiteralRecord src)
-            => Identifier.CompareTo(src.Identifier);    
+            => Identifier.CompareTo(src.Identifier);
     }
 }

@@ -11,10 +11,10 @@ namespace Z0
 
     public readonly struct EnumDatasetEntry
     {
-        public ArtifactIdentity Id {get;}
+        public ArtifactIdentifier Id {get;}
 
-        public ArtifactIdentity Declarer {get;}
-        
+        public ArtifactIdentifier Declarer {get;}
+
         public uint Index {get;}
 
         public string Name {get;}
@@ -26,7 +26,7 @@ namespace Z0
         public UserMetadata UserData {get;}
 
         [MethodImpl(Inline)]
-        public EnumDatasetEntry(ArtifactIdentity token, ArtifactIdentity declarer, 
+        public EnumDatasetEntry(ArtifactIdentifier token, ArtifactIdentifier declarer,
             uint index, string identifier,  variant scalar, string description, UserMetadata user)
         {
             Id = token;
@@ -36,6 +36,6 @@ namespace Z0
             Scalar = scalar;
             Description = description;
             UserData = user;
-        }    
+        }
     }
 }

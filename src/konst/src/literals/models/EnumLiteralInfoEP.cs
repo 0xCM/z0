@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -13,10 +13,10 @@ namespace Z0
         where E : unmanaged, Enum
         where P : unmanaged
     {
-        public ArtifactIdentity Id {get;}
-        
+        public ArtifactIdentifier Id {get;}
+
         public uint Position {get;}
-        
+
         public string Name {get;}
 
         public E Literal {get;}
@@ -24,13 +24,13 @@ namespace Z0
         public P Scalar {get;}
 
         [MethodImpl(Inline)]
-        public EnumLiteralInfo(ArtifactIdentity id, uint index, string name, E literal, P scalar)
+        public EnumLiteralInfo(ArtifactIdentifier id, uint index, string name, E literal, P scalar)
         {
             Id = id;
             Position = index;
             Name = name;
             Literal = literal;
             Scalar = scalar;
-        }                
+        }
     }
 }

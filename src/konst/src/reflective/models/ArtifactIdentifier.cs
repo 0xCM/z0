@@ -13,17 +13,17 @@ namespace Z0
     /// <summary>
     /// Identifies a metadata element
     /// </summary>
-    public readonly struct ArtifactIdentity : ITextual, IEquatable<ArtifactIdentity>, INullity
+    public readonly struct ArtifactIdentifier : ITextual, IEquatable<ArtifactIdentifier>, INullity
     {
         readonly Address32 Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator ArtifactIdentity(int src)
-            => new ArtifactIdentity(src);
+        public static implicit operator ArtifactIdentifier(int src)
+            => new ArtifactIdentifier(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ArtifactIdentity(uint src)
-            => new ArtifactIdentity(src);
+        public static implicit operator ArtifactIdentifier(uint src)
+            => new ArtifactIdentifier(src);
 
         public int TokenValue
         {
@@ -46,114 +46,114 @@ namespace Z0
             => Data.Format();
 
         [MethodImpl(Inline)]
-        public static ArtifactIdentity From(Type src)
-            => new ArtifactIdentity(src);
+        public static ArtifactIdentifier From(Type src)
+            => new ArtifactIdentifier(src);
 
         [MethodImpl(Inline)]
-        public static ArtifactIdentity From<T>()
-            => new ArtifactIdentity(typeof(T));
+        public static ArtifactIdentifier From<T>()
+            => new ArtifactIdentifier(typeof(T));
 
         [MethodImpl(Inline)]
-        public static ArtifactIdentity From(FieldInfo src)
-            => new ArtifactIdentity(src);
+        public static ArtifactIdentifier From(FieldInfo src)
+            => new ArtifactIdentifier(src);
 
         [MethodImpl(Inline)]
-        public static ArtifactIdentity From(PropertyInfo src)
-            => new ArtifactIdentity(src);
+        public static ArtifactIdentifier From(PropertyInfo src)
+            => new ArtifactIdentifier(src);
 
         [MethodImpl(Inline)]
-        public static ArtifactIdentity From(MethodInfo src)
-            => new ArtifactIdentity(src);
+        public static ArtifactIdentifier From(MethodInfo src)
+            => new ArtifactIdentifier(src);
 
         [MethodImpl(Inline)]
-        public static ArtifactIdentity From(ParameterInfo src)
-            => new ArtifactIdentity(src);
+        public static ArtifactIdentifier From(ParameterInfo src)
+            => new ArtifactIdentifier(src);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(ArtifactIdentity x, ArtifactIdentity y)
+        public static bool operator ==(ArtifactIdentifier x, ArtifactIdentifier y)
             => x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(ArtifactIdentity x, ArtifactIdentity y)
+        public static bool operator !=(ArtifactIdentifier x, ArtifactIdentifier y)
             => !x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static implicit operator ArtifactIdentity(Type src)
+        public static implicit operator ArtifactIdentifier(Type src)
             => From(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ArtifactIdentity(FieldInfo src)
+        public static implicit operator ArtifactIdentifier(FieldInfo src)
             => From(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ArtifactIdentity(PropertyInfo src)
+        public static implicit operator ArtifactIdentifier(PropertyInfo src)
             => From(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ArtifactIdentity(MethodInfo src)
+        public static implicit operator ArtifactIdentifier(MethodInfo src)
             => From(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ArtifactIdentity(ParameterInfo src)
+        public static implicit operator ArtifactIdentifier(ParameterInfo src)
             => From(src);
 
         [MethodImpl(Inline)]
-        internal ArtifactIdentity(Type src)
+        internal ArtifactIdentifier(Type src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal ArtifactIdentity(Assembly src)
+        internal ArtifactIdentifier(Assembly src)
             : this(src.GetHashCode())
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal ArtifactIdentity(FieldInfo src)
+        internal ArtifactIdentifier(FieldInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal ArtifactIdentity(PropertyInfo src)
+        internal ArtifactIdentifier(PropertyInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal ArtifactIdentity(ParameterInfo src)
+        internal ArtifactIdentifier(ParameterInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal ArtifactIdentity(MethodInfo src)
+        internal ArtifactIdentifier(MethodInfo src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal ArtifactIdentity(Module src)
+        internal ArtifactIdentifier(Module src)
             : this(src.MetadataToken)
         {
 
         }
 
         [MethodImpl(Inline)]
-        internal ArtifactIdentity(int token)
+        internal ArtifactIdentifier(int token)
         {
             Data = (uint)token;
         }
 
         [MethodImpl(Inline)]
-        internal ArtifactIdentity(uint token)
+        internal ArtifactIdentifier(uint token)
         {
             Data = token;
         }
@@ -162,16 +162,16 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public bool Equals(ArtifactIdentity src)
+        public bool Equals(ArtifactIdentifier src)
             => Data == src.Data;
 
         public override int GetHashCode()
             => Data.GetHashCode();
 
         public override bool Equals(object src)
-            => src is ArtifactIdentity t && Equals(t);
+            => src is ArtifactIdentifier t && Equals(t);
 
-        public static ArtifactIdentity Empty
+        public static ArtifactIdentifier Empty
             => default;
     }
 }

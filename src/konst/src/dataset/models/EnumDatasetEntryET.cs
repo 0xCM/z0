@@ -13,10 +13,10 @@ namespace Z0
         where E : unmanaged, Enum
         where T : unmanaged
     {
-        public ArtifactIdentity Token {get;}
+        public ArtifactIdentifier Token {get;}
 
-        public ArtifactIdentity Declarer {get;}
-        
+        public ArtifactIdentifier Declarer {get;}
+
         public uint Position {get;}
 
         public string Name {get;}
@@ -33,7 +33,7 @@ namespace Z0
             => src.Untyped;
 
         [MethodImpl(Inline)]
-        public EnumDatasetEntry(ArtifactIdentity token, ArtifactIdentity declarer, 
+        public EnumDatasetEntry(ArtifactIdentifier token, ArtifactIdentifier declarer,
             uint index, string identifier,  E literal, T numeric, string description, UserMetadata user)
         {
             Token = token;
@@ -44,7 +44,7 @@ namespace Z0
             Scalar = numeric;
             Description = description;
             UserData = user;
-        }    
+        }
 
         public EnumDatasetEntry Untyped
         {

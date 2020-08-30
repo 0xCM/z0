@@ -25,7 +25,7 @@ namespace Z0.ClrData
             Definition = src;
         }
 
-        public ArtifactIdentity Id
+        public ArtifactIdentifier Id
 
         {
             [MethodImpl(Inline)]

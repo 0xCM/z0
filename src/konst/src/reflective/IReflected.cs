@@ -3,10 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     public interface IReflected
     {
-        ArtifactIdentity Id {get;}
+        ArtifactIdentifier Id {get;}
     }
 
     public interface IReflected<F> : IReflected

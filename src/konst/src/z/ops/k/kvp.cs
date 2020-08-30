@@ -10,7 +10,20 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {                
+    {
+        /// <summary>
+        /// Creates a unmanaged K-discriminated key over a T-identifier
+        /// </summary>
+        /// <param name="kind"></param>
+        /// <param name="id"></param>
+        /// <typeparam name="K"></typeparam>
+        /// <typeparam name="T"></typeparam>
+        [MethodImpl(Inline)]
+        public static Key<K,T> key<K,T>(K kind, T id)
+            where K : unmanaged
+            where T : unmanaged
+                =>  new Key<K,T>(kind,id);
+
         /// <summary>
         /// Creates a kvp
         /// </summary>
@@ -21,6 +34,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static KeyedValue<K,V> kvp<K,V>(K key, V value)
             => new KeyedValue<K,V>(key,value);
-            
+
     }
 }

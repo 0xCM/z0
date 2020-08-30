@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public struct MethodSig
     {
-        public ArtifactIdentity MethodId;
+        public ArtifactIdentifier MethodId;
 
         public string MethodName;
 

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     using static z;
 
     partial class Enums
@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The scalar type refined by the enum</typeparam>
         /// <typeparam name="A">The asci identifier type</typeparam>
         [MethodImpl(Inline)]
-        public static EnumLiteralInfo<E,T> describe<E,T>(ArtifactIdentity token, uint index, string identifier, E literal, T scalar)
+        public static EnumLiteralInfo<E,T> describe<E,T>(ArtifactIdentifier token, uint index, string identifier, E literal, T scalar)
             where E : unmanaged, Enum
             where T : unmanaged
                 => new EnumLiteralInfo<E,T>(token, index, identifier, literal, scalar);
@@ -44,7 +44,7 @@ namespace Z0
                 seek(dst,i) = describe(entry.Token, entry.Position, entry.Name, entry.Literal, entry.Scalar);
             }
             return buffer;
-        }        
+        }
 
     }
 }

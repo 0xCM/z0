@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {        
+    {
         /// <summary>
         /// Computes hash codes for unmanaged system primitives
         /// </summary>
@@ -73,7 +73,7 @@ namespace Z0
                 return hash(float64(src));
             else if(typeof(T) == typeof(decimal))
                 return hash(float128(src));
-            else 
+            else
                 return hash_x(src);
         }
 
@@ -86,9 +86,8 @@ namespace Z0
             else if(typeof(T) == typeof(bool))
                 return hash(bool8(src));
             else
-                throw no<T>();            
+                throw no<T>();
         }
-
 
         [MethodImpl(Inline)]
         static uint hash_u<T>(T x, T y)
@@ -133,7 +132,7 @@ namespace Z0
             else if(typeof(T) == typeof(decimal))
                 return hash(float128(x), float128(y));
             else
-                throw no<T>();            
+                throw no<T>();
         }
     }
 }

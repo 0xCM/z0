@@ -74,7 +74,7 @@ namespace Z0
             get => Enums.@base<E>();
         }
 
-        public ArtifactIdentity Token
+        public ArtifactIdentifier Token
         {
             [MethodImpl(Inline)]
             get => Spec.Id;

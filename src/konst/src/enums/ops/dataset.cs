@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    
+
     using static z;
 
     partial class Enums
@@ -13,10 +13,10 @@ namespace Z0
         public static EnumDataset<E,T> dataset<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged
-        {            
+        {
             var src = LiteralSequence<E,T>();
             var count = src.Length;
-            var token = ArtifactIdentity.From<E>();
+            var token = ArtifactIdentifier.From<E>();
             var datatype = kind<E>();
             var description = string.Empty;
             var enumData = UserMetadata.Empty;
@@ -26,11 +26,11 @@ namespace Z0
             var numeric = sys.alloc<T>(count);
             var descriptions = sys.alloc<string>(count);
             var userData = sys.alloc<UserMetadata>(count);
-            var tokens = sys.alloc<ArtifactIdentity>(count);
+            var tokens = sys.alloc<ArtifactIdentifier>(count);
 
-            var dst = new EnumDataset<E,T>(token, description,  UserMetadata.Empty, datatype, 
+            var dst = new EnumDataset<E,T>(token, description,  UserMetadata.Empty, datatype,
                 tokens, indices,  names, literals, numeric, descriptions, userData);
-            
+
             for(var i=0; i<count; i++)
             {
                 indices[i] = src[i].Position;
@@ -43,6 +43,6 @@ namespace Z0
             }
 
             return dst;
-        }    
+        }
     }
 }

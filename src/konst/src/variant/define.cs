@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static z;
 
@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static unsafe variant scalar(Enum src)
         {
-            var kind = src.GetType().GetEnumUnderlyingType().NumericKind();             
+            var kind = src.GetType().GetEnumUnderlyingType().NumericKind();
             var converted = (ulong)rebox(src,NumericKind.U64);
             return define(converted, kind);
         }
@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static variant define(object src, Type dst)
             => define(src, dst.NumericKind());
-        
+
         [MethodImpl(Inline), Op]
         public static variant define(object src, NumericKind dst)
         {
@@ -44,7 +44,7 @@ namespace Z0
 
                 case NK.U16:
                     return define((ushort)src);
-                
+
                 case NK.I32:
                     return define((int)src);
 
@@ -64,7 +64,7 @@ namespace Z0
                     return define((double)src);
             }
 
-            return default;   
+            return default;
         }
 
         [MethodImpl(Inline), Op]
@@ -106,9 +106,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static variant define(double src)
             => from(store(src, NK.F64));
-
-
     }
-
-
 }

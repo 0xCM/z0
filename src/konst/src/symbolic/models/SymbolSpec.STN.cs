@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -17,7 +17,7 @@ namespace Z0
         where S : unmanaged
         where T : unmanaged
         where W : unmanaged, IDataWidth
-    {       
+    {
         public S[] Symbols {get;}
 
         [MethodImpl(Inline)]
@@ -63,13 +63,13 @@ namespace Z0
             get => (ushort)((ushort)bitsize<T>()/(ushort)Widths.data<W>());
         }
 
-        public ArtifactIdentity SegDomain
+        public ArtifactIdentifier SegDomain
         {
             [MethodImpl(Inline)]
             get => typeof(T);
         }
 
-        public ArtifactIdentity SymDomain
+        public ArtifactIdentifier SymDomain
         {
             [MethodImpl(Inline)]
             get => typeof(S);
@@ -79,6 +79,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Symbols != null  && Symbols.Length != 0;
-        }        
+        }
     }
 }

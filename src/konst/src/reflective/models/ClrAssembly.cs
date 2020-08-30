@@ -16,10 +16,10 @@ namespace Z0
         {
             public Assembly Definition {get;}
 
-            public ArtifactIdentity Id
+            public ArtifactIdentifier Id
             {
                 [MethodImpl(Inline)]
-                get => new ArtifactIdentity(Definition);
+                get => new ArtifactIdentifier(Definition);
             }
 
             [MethodImpl(Inline)]
