@@ -25,14 +25,20 @@ namespace Z0
 
         public Assembly[] Assemblies {get;}
 
+        public IApiHost[] ApiDataTypes {get;}
+
+        public IApiHost[] ApiOpHosts {get;}
+
         public ApiSet(IResolvedApi api)
         {
             Composition = api;
             Parts = api.Resolved;
             Assemblies = Parts.Select(x => x.Owner);
-            Catalogs = Parts.Select(x => ApiQuery.catalog(x)).Where(c => c.IsIdentified);
+            Catalogs = Parts.Select(x => ApiQuery.catalog(x) as IPartCatalog).Where(c => c.IsIdentified);
             Hosts = Catalogs.SelectMany(c => c.ApiHosts);
             PartIdentities = api.Resolved.Map(p => p.Id);
+            ApiDataTypes = Catalogs.SelectMany(c => c.ApiDataTypes).Cast<IApiHost>().Array();
+            ApiOpHosts = Catalogs.SelectMany(c => c.Operations).Cast<IApiHost>().Array();
         }
 
         public Option<IPart> FindPart(PartId id)

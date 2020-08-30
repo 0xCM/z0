@@ -34,12 +34,6 @@ namespace Z0
         public const string Pipe = "|";
 
         /// <summary>
-        /// Defines the literal '->'
-        /// </summary>
-        [StringLiteral("->")]
-        public const string Arrow = "->";
-
-        /// <summary>
         /// Defines the literal '.'
         /// </summary>
         [StringLiteral(".")]
@@ -367,22 +361,10 @@ namespace Z0
 
         public const string SlotTuple7 = "({0}, {1}, {2}, {3}, {4}, {5}, {6})";
 
-        public const string SlotArrow2 = Slot0 + Space + Arrow + Space + Slot1;
-
-        public const string SlotArrow3 = "{0} -> {1} -> {3}";
-
-        public const string SlotArrow4 = "{0} -> {1} -> {3} -> {4}";
-
         /// <summary>
         /// Defines the literal '{0} -> {1}'
         /// </summary>
         [StringLiteral("{0} -> {1}")]
-        public const string AtoB = SlotArrow2;
-
-        /// <summary>
-        /// Defines the literal '{0} -> {1}'
-        /// </summary>
-        [StringLiteral("{0} -> {1}")]
-        public const string AtoBtoC = AtoB;
+        public const string ArrowAxB = "{0} -> {1}";
     }
 }

@@ -15,24 +15,24 @@ namespace Z0
         /// The content that was parsed...or not
         /// </summary>
         public object Source {get;}
-        
+
         /// <summary>
         /// The target value type
         /// </summary>
         public Type TargetType {get;}
-     
+
         /// <summary>
         /// The source type
         /// </summary>
         public Type SourceType {get;}
-        
+
         /// <summary>
         /// Specifies whether the parse attempt succeed, and thus the Value field is meaningful
         /// </summary>
         public bool Succeeded {get;}
 
         /// <summary>
-        /// The parsed value, if the parse operaion succeedeed; otherwise best not look there
+        /// The parsed value, if the parse operaion succeeded; otherwise best not look there
         /// </summary>
         public object Value {get;}
 
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         public Option<object> Reason {get;}
 
-        public bool Failed  
+        public bool Failed
         {
             [MethodImpl(Inline)]
             get => !Succeeded;
@@ -56,7 +56,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ParseResult<T> Success<T>(string source, T value)
             => ParseResult<T>.Success(source, value);
-
 
         [MethodImpl(Inline)]
         public static ParseResult<T> Fail<T>(string source, object reason = null)
@@ -73,7 +72,7 @@ namespace Z0
         /// <summary>
         /// Defines a successful parse result
         /// </summary>
-        /// <param name="source">The input vaue</param>
+        /// <param name="source">The input value</param>
         /// <param name="value">The parsed value</param>
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
@@ -84,7 +83,7 @@ namespace Z0
         /// <summary>
         /// Defines a parse result that signals failure
         /// </summary>
-        /// <param name="source">The input vaue</param>
+        /// <param name="source">The input value</param>
         /// <param name="reason">The failure reason, if available</param>
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>

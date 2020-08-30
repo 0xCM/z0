@@ -25,8 +25,8 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The primitive type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static uint hash<S,T>(S x, T y)
-            => hash(hash<S>(x), hash<T>(y));
+        public static uint hash<T>(T x, T y)
+            => hash_u(x,y);
 
         [MethodImpl(Inline)]
         static uint hash_u<T>(T src)

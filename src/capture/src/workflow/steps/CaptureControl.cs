@@ -22,8 +22,6 @@ namespace Z0
 
         readonly IWfContext Wf;
 
-        readonly IShellPaths Paths;
-
         public WfCaptureState State {get;}
 
         public CaptureControl(WfCaptureState state)
@@ -31,14 +29,13 @@ namespace Z0
             State = state;
             Wf = state.Wf;
             Ct = state.Ct;
-            Paths = Wf.AppPaths;
-            Asm = WfBuilder.asm(state.Root);
+            Asm = AsmWfBuilder.asm(state.Root);
             Wf.Created(StepId);
         }
 
         public void Run()
         {
-            Wf.Running(StepId, z.delimit(Wf.Config.Parts));
+            Wf.Running(StepId, delimit(Wf.Config.Parts));
 
             try
             {

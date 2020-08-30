@@ -96,7 +96,6 @@ namespace Z0
         public static implicit operator IdentifiedCode(X86ApiCode src)
             => new IdentifiedCode(src.Address, src.OpUri, src.Encoded);
 
-
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]

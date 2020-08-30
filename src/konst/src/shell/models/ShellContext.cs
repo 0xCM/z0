@@ -12,17 +12,17 @@ namespace Z0
 
     public readonly struct ShellContext : IShellContext
     {
+        public IApiSet Api {get;}
+
+        public IPart[] Parts {get;}
+
+        public Assembly[] Components {get;}
+
         public ShellContext(Assembly[] components)
         {
             Components = components;
             Parts = ApiQuery.parts(components);
             Api = ApiQuery.set(Parts);
         }
-
-        public IApiSet Api {get;}
-
-        public IPart[] Parts {get;}
-
-        public Assembly[] Components {get;}
     }
 }

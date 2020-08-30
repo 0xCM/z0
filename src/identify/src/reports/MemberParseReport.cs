@@ -18,10 +18,10 @@ namespace Z0
         public ApiHostUri ApiHost {get;}
 
         [MethodImpl(Inline)]
-        public static MemberParseReport Create(ApiHostUri host, params R[] records)
+        public static MemberParseReport create(ApiHostUri host, params R[] records)
             => new MemberParseReport(host, records);
 
-        public static R Record(in X86MemberRefinement extract, int seq)
+        static R Record(in X86MemberRefinement extract, int seq)
             => new R
                 (
                     Seq : seq,
@@ -34,7 +34,7 @@ namespace Z0
                     Data : extract.Encoded
                 );
 
-        public static MemberParseReport Create(ApiHostUri host, X86MemberRefinement[] extracts)
+        public static MemberParseReport create(ApiHostUri host, X86MemberRefinement[] extracts)
         {
             var count = extracts.Length;
             var buffer = alloc<R>(count);
@@ -42,10 +42,7 @@ namespace Z0
             var src = span(extracts);
 
             for(var i=0; i<count; i++)
-            {
-                ref readonly var extract = ref skip(src,i);
-                seek(dst,i) = Record(extract, i);
-            }
+                seek(dst,i) = Record(skip(src,i), i);
 
             return new MemberParseReport(host, buffer);
         }

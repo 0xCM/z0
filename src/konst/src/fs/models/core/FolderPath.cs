@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.IO;
+    using System.Linq;
 
     using static Konst;
 
@@ -41,9 +42,14 @@ namespace Z0
                 => Directory.EnumerateFiles(Name, pattern, option(recurse))
                             .Array()
                             .Select(x => FS.path(pattern));
+            public FilePath[] Files
+                => Directory.EnumerateFiles(Name, "*.*").Array().Select(x => FS.path(x));
 
-            public FilePath[] Files(string pattern = null)
+            public FilePath[] Match(string pattern = null)
                 => Directory.EnumerateFiles(Name, pattern ?? "*.*").Array().Select(x => FS.path(x));
+
+            public FilePath[] Exclude(string substring, string match = null)
+                => text.nonempty(substring) ? Match(match).Where(f => !f.Name.Contains(substring)) : Match(match);
 
             /// <summary>
             /// Specifies whether the represented directory actually exists within the file system

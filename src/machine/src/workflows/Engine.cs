@@ -11,20 +11,39 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static Machines;
+    using static Shell;
+    using static Engines;
     using static z;
 
-    public class Engine : IMachineEngine<Engine>
+    public class Engine  : IDisposable
     {
+        public static void run(IAppContext context, params string[] args)
+        {
+            try
+            {
+                var ct = correlate(ShellId);
+                var config = WfBuilder.configure(context,args);
+                using var log = AB.log(config);
+                using var wf = Flow.context(context, config, log, ct);
+
+                var state = new WfCaptureState(wf, AsmWfBuilder.asm(context), wf.Config, wf.Ct);
+
+                wf.Running(StepId, delimit(config.Parts));
+
+                using var machine = new Engine(state,ct);
+                machine.Run();
+
+                wf.Ran(StepId, ct);
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+            }
+        }
+
         readonly WfCaptureState State;
 
         readonly CorrelationToken Ct;
-
-        PartFiles Files {get;}
-
-        readonly FolderPath TargetDir;
-
-        public EncodedParts Index;
 
         readonly List<Instruction> Buffer;
 
@@ -32,8 +51,6 @@ namespace Z0
         {
             State = wf;
             Ct = ct;
-            TargetDir = Wf.AppDataRoot + FolderName.Define(StepName);
-            Files = PartFiles.create(Asm);
             Buffer = list<Instruction>(2000);
         }
 
@@ -52,18 +69,26 @@ namespace Z0
         public void Run()
         {
             Wf.Running(StepName, Ct);
+
             try
             {
-                using var step = new IndexEncodedParts(Wf, Files, Ct);
+                Run(default(ManageCaptureStep));
+                Run(default(EmitDatasetsStep));
+                Run(default(ProcessPartFilesStep));
+
+                var files = new PartFiles(Asm);
+                using var step = new IndexEncodedParts(Wf, files, Ct);
                 step.Run();
-                Index = step.EncodedIndex;
-                Process(Index);
-                Process(DecodeParts(Index));
+                var index = step.EncodedIndex;
+
+                Process(index);
+                Process(DecodeParts(index));
             }
             catch(Exception e)
             {
                 term.error(e);
             }
+
             Wf.Ran(StepName, Ct);
         }
 
@@ -72,29 +97,50 @@ namespace Z0
             Wf.Finished(StepName, Ct);
         }
 
-        Span<PartAsmFx> DecodeParts(EncodedParts src)
+        Span<PartAsmFx> DecodeParts(EncodedPartIndex src)
         {
+            Wf.Status(StepId, text.format("Decoding {0} entries from {1} parts", src.EntryCount, src.Parts.Length));
+
             var parts = src.Parts;
             var dst = z.alloc<PartAsmFx>(parts.Length);
             var hostFx = z.list<HostAsmFx>();
+            var kMembers = 0u;
+            var kHosts = 0u;
+            var kParts = 0u;
+            var kFx = 0u;
             for(var i=0; i<parts.Length; i++)
             {
                 hostFx.Clear();
+
                 var part = parts[i];
                 var hosts = src.Hosts.Where(h => h.Owner == part);
+
+                Wf.Status(StepId, text.format("Decoding {0}", part.Format()));
 
                 for(var j=0; j<hosts.Length; j++)
                 {
                     var host = hosts[j];
                     var members = src[host];
-                    hostFx.Add(Decode(members));
+                    var fx = Decode(members);
+                    hostFx.Add(fx);
+
+                    kHosts++;
+                    kMembers += (uint)fx.MemberCount;
+                    kFx += (uint)fx.TotalCount;
                 }
                 dst[i] = new PartAsmFx(part, hostFx.ToArray());
+
+                kParts++;
+
+                Wf.Status(StepId, text.format(RenderPatterns.PSx4, kParts, kHosts, kMembers, kFx));
+
             }
+
+            Wf.Status(StepId, text.format("Completed decoding process for {1} parts", src.EntryCount, src.Parts.Length));
             return dst;
         }
 
-        public void Process(ReadOnlySpan<PartAsmFx> src)
+        void Process(ReadOnlySpan<PartAsmFx> src)
         {
             try
             {
@@ -112,7 +158,7 @@ namespace Z0
             }
         }
 
-        public void Process(PartAsmFx fx)
+        void Process(PartAsmFx fx)
         {
             try
             {
@@ -130,7 +176,7 @@ namespace Z0
             Buffer.Add(src);
         }
 
-        HostAsmFx Decode(EncodedMembers hcs)
+        HostAsmFx Decode(EncodedMemberIndex hcs)
         {
             var instructions = Root.list<MemberAsmFx>();
             var ip = MemoryAddress.Empty;
@@ -152,7 +198,7 @@ namespace Z0
             return new HostAsmFx(hcs.Host, instructions.ToArray());
         }
 
-        void Process(EncodedParts encoded)
+        void Process(EncodedPartIndex encoded)
         {
             try
             {
@@ -200,10 +246,43 @@ namespace Z0
             }
         }
 
-        IMultiSink IWfBrokerClient.Sink
-            => Wf.Broker;
+        void Run(ManageCaptureStep kind, params string[] args)
+        {
+            using var control = WfCaptureControl.create(State);
+            control.Run();
+        }
 
-        IWfBroker IWfBrokerClient.Broker
-            => Wf.Broker;
+        void Run(EmitDatasetsStep kind)
+        {
+            Wf.Running(StepId, kind);
+            try
+            {
+                using var emission = new EmitDatasets(Wf, Ct);
+                emission.Run();
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e, Ct);
+            }
+
+            Wf.Ran(StepId, kind);
+        }
+
+        void Run(ProcessPartFilesStep kind)
+        {
+            Wf.Running(StepId, kind);
+
+            try
+            {
+                using var step = new ProcessPartFiles(Wf, Asm, Ct);
+                step.Run();
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e, Ct);
+            }
+
+            Wf.Ran(StepId, kind);
+        }
     }
 }

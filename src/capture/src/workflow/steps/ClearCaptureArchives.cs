@@ -21,11 +21,11 @@ namespace Z0.Asm
     {
         readonly IWfContext Wf;
 
-        readonly WfConfig Config;
+        readonly IWfConfig Config;
 
         readonly CorrelationToken Ct;
 
-        public ClearCaptureArchives(IWfContext wf, WfConfig config, CorrelationToken ct)
+        public ClearCaptureArchives(IWfContext wf, IWfConfig config, CorrelationToken ct)
         {
             Wf = wf;
             Config = config;

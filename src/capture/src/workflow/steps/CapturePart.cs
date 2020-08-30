@@ -36,7 +36,7 @@ namespace Z0
         {
             Wf = wf;
             Root = wf.ContextRoot;
-            Asm = WfBuilder.asm(Root);
+            Asm = AsmWfBuilder.asm(Root);
             Services = CaptureServices.create(Asm);
             var format = AsmFormatSpec.DefaultStreamFormat;
             Formatter = Services.Formatter(format);

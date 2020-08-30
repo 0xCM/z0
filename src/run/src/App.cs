@@ -21,7 +21,7 @@ namespace Z0
         public CorrelationToken Ct {get;}
 
         public App()
-            : base(ContextFactory.create())
+            : base(ContextFactory.app())
         {
             Ct = correlate(Part);
         }
@@ -35,7 +35,7 @@ namespace Z0
             var config = Flow.configure(Context, args, Ct);
             using var log = AB.log(config);
             var wfc = Flow.context(Context, config, log, Ct);
-            using var state = WfBuilder.state(wfc, WfBuilder.asm(Context), config);
+            using var state = AsmWfBuilder.state(wfc, AsmWfBuilder.asm(Context), config);
 
             try
             {

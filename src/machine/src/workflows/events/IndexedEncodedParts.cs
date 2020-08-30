@@ -12,29 +12,29 @@ namespace Z0
     using static RenderPatterns;
 
     [Event]
-    public readonly struct IndexedEncoded : IWfEvent<IndexedEncoded>
+    public readonly struct IndexedEncodedParts : IWfEvent<IndexedEncodedParts>
     {
-        public const string EventName = nameof(IndexedEncoded);
-                
+        public const string EventName = nameof(IndexedEncodedParts);
+
         public WfEventId EventId {get;}
 
         public string ActorName {get;}
 
-        public readonly EncodedParts Index;
-        
-        public MessageFlair Flair 
-            => MessageFlair.Cyan;                                 
+        public readonly EncodedPartIndex Index;
+
+        public MessageFlair Flair
+            => MessageFlair.Cyan;
 
         [MethodImpl(Inline)]
-        public IndexedEncoded(string worker, EncodedParts index, CorrelationToken ct)
+        public IndexedEncodedParts(string worker, EncodedPartIndex index, CorrelationToken ct)
         {
             EventId = z.evid(EventName, ct);
             Index = index;
             ActorName = worker;
         }
-        
-        [MethodImpl(Inline)]        
+
+        [MethodImpl(Inline)]
         public string Format()
-            => text.format(SSx3, EventId, ActorName, EncodedPartStats.from(Index).Format());               
-    }        
+            => text.format(SSx3, EventId, ActorName, EncodedPartStats.from(Index).Format());
+    }
 }

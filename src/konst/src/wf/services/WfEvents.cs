@@ -42,22 +42,13 @@ namespace Z0
         }
 
         /// <summary>
-        /// Defines an actor with a specified name, if given; otherwise the actor name is derived
-        /// from the path of the invoking member file
-        /// </summary>
-        /// <param name="name">The actor name</param>
-        [MethodImpl(Inline), Op]
-        public static WfWorker worker([CallerFilePath] string name = null)
-            => new WfWorker(Path.GetFileNameWithoutExtension(name));
-
-        /// <summary>
         /// Defines a <see cref='WorkerCreated'/> event
         /// </summary>
         /// <param name="ct">The correlation token</param>
         /// <param name="name">The actor name</param>
         [MethodImpl(Inline), Op]
         public static WorkerCreated newWorker(CorrelationToken ct, [File] string name = null)
-            => new WorkerCreated(worker(name), ct);
+            => new WorkerCreated(Path.GetFileNameWithoutExtension(name), ct);
 
         /// <summary>
         /// Defines a <see cref='WfStepCreated'/> event
@@ -141,7 +132,10 @@ namespace Z0
             => new WfEventOrigin(id,actor, call);
 
         [MethodImpl(Inline), Op]
-        public static WfEventOrigin origin(in WfEventId id, PartId part, string actor, [CallerMemberName] string caller = null, [CallerFilePath] string file = null, [CallerLineNumber] int? line = null)
-            => new WfEventOrigin(id,actor, AB.caller(part, caller,file,line));
+        public static WfEventOrigin origin(in WfEventId id, PartId part, string actor,
+            [CallerMemberName] string caller = null,
+            [CallerFilePath] string file = null,
+            [CallerLineNumber] int? line = null)
+                    => new WfEventOrigin(id,actor, AB.caller(part, caller,file,line));
     }
 }

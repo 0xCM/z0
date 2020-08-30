@@ -15,14 +15,14 @@ namespace Z0
 
         public IWfCaptureState State {get;}
 
-        readonly EncodedParts Encoded;
+        readonly EncodedPartIndex Encoded;
 
         [MethodImpl(Inline)]
         public static implicit operator WfActor(AsmTableSteps src)
             => Flow.actor(StepName);
 
         [MethodImpl(Inline)]
-        public AsmTableSteps(IWfCaptureState state, in EncodedParts encoded)
+        public AsmTableSteps(IWfCaptureState state, in EncodedPartIndex encoded)
         {
             State = state;
             Encoded = encoded;

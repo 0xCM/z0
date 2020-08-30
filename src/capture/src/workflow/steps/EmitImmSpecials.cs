@@ -43,7 +43,7 @@ namespace Z0
         {
             Ct = correlate(ct);
             Log = AB.log(config);
-            Broker = WfBuilder.imm(Log, Ct);
+            Broker = AsmWfBuilder.imm(Log, Ct);
             Context = context;
             Sink = sink;
             Formatter = formatter;

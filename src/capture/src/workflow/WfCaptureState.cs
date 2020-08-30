@@ -58,7 +58,7 @@ namespace Z0.Asm
             Formatter = Services.Formatter(FormatConfig);
             RoutineDecoder = Services.RoutineDecoder(FormatConfig);
             CWf = new WfCaptureContext(Asm, Wf, RoutineDecoder, Formatter, Services.AsmWriterFactory, Archives.capture(Config.TargetArchive), Ct);
-            CaptureBroker = WfBuilder.capture(Log, ct);
+            CaptureBroker = AsmWfBuilder.capture(Log, ct);
             Parts = Wf.Config.Parts.Length == 0 ? Asm.ContextRoot.PartIdentities : Wf.Config.Parts;
         }
 
@@ -94,11 +94,11 @@ namespace Z0.Asm
         public void Finished(string actor, CorrelationToken ct)
             => Wf.Finished(actor, Ct);
 
-        public void Initializing(string actor, CorrelationToken ct)
-            => Wf.Initializing(actor, Ct);
+        public void Initializing(WfStepId step, CorrelationToken ct)
+            => Wf.Initializing(step, Ct);
 
-        public void Initialized(string actor, CorrelationToken ct)
-            => Wf.Initialized(actor, Ct);
+        public void Initialized(WfStepId step,  CorrelationToken ct)
+            => Wf.Initialized(step, Ct);
 
         public void Error(string actor, Exception e, CorrelationToken ct)
             => Wf.Error(actor, e, Ct);

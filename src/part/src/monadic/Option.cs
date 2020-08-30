@@ -86,7 +86,7 @@ namespace Z0
             }
             catch (Exception e)
             {
-                Handle(e,handler);
+                Handle(e, handler);
                 return none<T>();
             }
         }

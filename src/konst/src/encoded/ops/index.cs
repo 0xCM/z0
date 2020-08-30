@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using static z;
 
     using static Konst;
 
@@ -14,21 +15,18 @@ namespace Z0
     {
         [Op]
         public static EncodedPartBuilder builder()
-            => new EncodedPartBuilder(
-                codes : z.dict<MemoryAddress,X86ApiCode>(),
-                addresses : z.dict<MemoryAddress,OpUri>(),
-                identities: z.dict<OpUri,X86ApiCode>());
+            => new EncodedPartBuilder();
 
         [MethodImpl(Inline), Op]
         public static IdentifiedCodeIndex index(ApiHostUri host, IdentifiedCode[] code)
             => new IdentifiedCodeIndex(host,code);
 
         [MethodImpl(Inline), Op]
-        public static PartCode index(PartId part, EncodedMembers[] src)
-            => new PartCode(part,src);
+        public static PartCodeIndex index(PartId part, EncodedMemberIndex[] src)
+            => new PartCodeIndex(part,src);
 
         [MethodImpl(Inline), Op]
-        public static EncodedMembers index(ApiHostUri id, X86ApiCode[] code)
-            => new EncodedMembers(id,code);
+        public static EncodedMemberIndex index(ApiHostUri id, X86ApiCode[] code)
+            => new EncodedMemberIndex(id,code);
     }
 }

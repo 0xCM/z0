@@ -6,6 +6,18 @@ namespace Z0
 {
     using static AB;
 
+    using Asm;
+
+    public readonly struct WfCaptureControl : IWfStep<WfCaptureControl>
+    {
+        public const string ActorName = nameof(CaptureControl);
+
+        public static CaptureControl create(WfCaptureState state)
+            => new CaptureControl(state);
+
+        public static WfStepId StepId => step<WfCaptureControl>();
+    }
+
     [Step(typeof(CapturePart), StepName)]
     public readonly struct CapturePartStep : IWfStep<CapturePartStep>
     {
@@ -74,13 +86,16 @@ namespace Z0
     {
         public const string StepName = nameof(EmitParsedReport);
 
-        public static WfStepId StepId => step<EmitParsedReportStep>();
+        public static WfStepId StepId
+            => step<EmitParsedReportStep>();
     }
 
     [Step(typeof(ExtractHostMembers), StepName)]
-    public readonly struct ExtractHostMembersStep
+    public readonly struct ExtractHostMembersStep : IWfStep<ExtractHostMembersStep>
     {
         public const string StepName = nameof(ExtractHostMembers);
+
+        public static WfStepId StepId => step<ExtractHostMembersStep>();
     }
 
     [Step(typeof(ExtractMembers), StepName)]
@@ -91,8 +106,6 @@ namespace Z0
         public static WfStepId StepId => AB.step<ExtractMembersStep>();
     }
 
-
-
     [Step(typeof(EmitImmSpecials), StepName)]
     public readonly struct SpecializeImmediatesStep
     {
@@ -100,14 +113,19 @@ namespace Z0
     }
 
     [Step(typeof(ManagePartCapture), StepName)]
-    public readonly struct ManagePartCaptureStep
+    public readonly struct ManagePartCaptureStep : IWfStep<ManagePartCaptureStep>
     {
         public const string StepName = nameof(ManagePartCapture);
+
+        public static WfStepId StepId => step<ManagePartCaptureStep>();
     }
 
     [Step(typeof(MatchAddresses), StepName)]
-    public readonly struct MatchAddressesStep
+    public readonly struct MatchAddressesStep : IWfStep<MatchAddressesStep>
     {
         public const string StepName = nameof(MatchAddresses);
+
+        public static WfStepId StepId
+            => step<MatchAddressesStep>();
     }
 }

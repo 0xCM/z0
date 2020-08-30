@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     [ApiHost]
-    public readonly partial struct WfBuilder
+    public readonly partial struct AsmWfBuilder
     {
 
     }

@@ -18,7 +18,7 @@ namespace Z0
         public CorrelationToken Ct {get;}
 
         public App()
-            : base(ContextFactory.create())
+            : base(WfBuilder.app())
         {
             Ct = correlate(Id);
         }
@@ -27,12 +27,11 @@ namespace Z0
         {
             try
             {
-                var context = Context;
-                var config = Flow.configure2(context, args, Ct);
+                var config = WfBuilder.configure(Context, args);
                 using var log = AB.log(config.StatusLog, config.ErrorLog);
                 using var sink = AB.termsink(log, Ct);
-                using var wf = new WfContext(context, Ct, config, sink);
-                using var control = new CaptureControl(new WfCaptureState(wf, new AsmContext(context), config, Ct));
+                using var wf = new WfContext(Context, Ct, config, sink);
+                using var control = new CaptureControl(new WfCaptureState(wf, new AsmContext(Context), config, Ct));
                 wf.Raise(new LogsConfigured(ActorName, config.Logs, Ct));
 
                 control.Run();

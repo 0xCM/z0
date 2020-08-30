@@ -129,15 +129,6 @@ namespace Z0
             => LogRoot + TestLogFolder;
 
         /// <summary>
-        /// The build staging directory
-        /// </summary>
-        FolderPath BuildStage
-            => LogRoot + FolderName.Define("builds");
-
-        FolderPath CaptureStage
-            => LogRoot + CaptureFolder + FolderName.Define("artifacts");
-
-        /// <summary>
         /// The directory into into which standard out stream emissions are deposited
         /// </summary>
         FolderPath AppStandardOut
@@ -213,7 +204,7 @@ namespace Z0
         /// The <see cref='PartId.Machine'/> capture archive directory
         /// </summary>
         FolderPath MachineCaptureRoot
-            =>  ResourceRoot + CaptureFolder;
+            => ResourceRoot + CaptureFolder;
 
         /// <summary>
         /// The root folder for test-specific data

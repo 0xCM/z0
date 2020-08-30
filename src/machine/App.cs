@@ -21,14 +21,14 @@ namespace Z0
         public CorrelationToken Ct;
 
         public App()
-            : base(ContextFactory.create())
+            : base(WfBuilder.app())
         {
-            Ct =  correlate(ShellId);
+            Ct = correlate(ShellId);
         }
 
         public override void RunShell(params string[] args)
         {
-            Control.run(Context, args);
+            Engine.run(Context, args);
         }
 
         public static void Main(params string[] args)

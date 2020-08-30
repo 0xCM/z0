@@ -15,7 +15,7 @@ namespace Z0
 
     public readonly ref struct EmitParsedReport
     {
-        readonly WfCaptureState Wf ;
+        readonly WfCaptureState State;
 
         readonly CorrelationToken Ct;
 
@@ -25,35 +25,38 @@ namespace Z0
 
         readonly FilePath Target;
 
+        readonly IWfShell Wf;
+
         [MethodImpl(Inline)]
-        internal EmitParsedReport(WfCaptureState wf, ApiHostUri host, X86MemberRefinement[] src, FilePath dst, CorrelationToken ct)
+        internal EmitParsedReport(WfCaptureState state, ApiHostUri host, X86MemberRefinement[] src, FilePath dst, CorrelationToken ct)
         {
-            Wf = wf;
+            State = state;
+            Wf = state.Wf;
             Ct = ct;
             Host = host;
             Source = src;
             Target = dst;
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId);
         }
 
         public void Run()
         {
             try
             {
-                Wf.Running(StepName, Host, Ct);
-                var report = MemberParseReport.Create(Host, Source);
+                Wf.Running(StepId, Host);
+                var report = MemberParseReport.create(Host, Source);
                 report.Save(Target);
-                Wf.Ran(StepName, text.format(PSx2, Host, report.RecordCount), Ct);
+                Wf.Ran(StepId, text.format(PSx2, Host, report.RecordCount));
             }
             catch(Exception e)
             {
-                Wf.Error(StepName, e, Ct);
+                Wf.Error(StepId, e);
             }
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId);
         }
     }
 }

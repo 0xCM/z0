@@ -27,13 +27,16 @@ namespace Z0
 
         public IWfBroker Broker {get;}
 
-        public FolderPath IndexRoot {get;}
-
-        public FolderPath ResourceRoot {get;}
-
         readonly WfActor Actor;
 
         readonly IWfEventLog Log;
+
+        public FolderPath IndexRoot
+            => FolderPath.Define(Config.IndexRoot.Name);
+
+        public FolderPath ResourceRoot
+             => FolderPath.Define(Config.ResRoot.Name);
+
 
         [MethodImpl(Inline)]
         public WfContext(IAppContext root, CorrelationToken ct, WfConfig config, WfTermEventSink sink, [Caller] string caller = null)
@@ -45,8 +48,6 @@ namespace Z0
             Broker = new WfBroker(Log, Ct);
             WfSink = sink;
             Actor = Flow.actor(caller);
-            ResourceRoot = ContextRoot.AppPaths.ResourceRoot;
-            IndexRoot =  ResourceRoot + FolderName.Define("index");
             ((WfBroker)Broker).WithContext(this);
             WfSink.Deposit(new WfContextLoaded(Actor, Ct));
         }

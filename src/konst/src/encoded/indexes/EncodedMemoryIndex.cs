@@ -11,14 +11,14 @@ namespace Z0
 
     using KVP = KeyValuePairs<MemoryAddress,X86ApiCode>;
 
-    public readonly struct EncodedMemories
+    public readonly struct EncodedMemoryIndex
     {
         public readonly PartId[] Parts;
 
         readonly KVP Data;
 
         [MethodImpl(Inline)]
-        internal EncodedMemories(PartId[] parts, KVP src)
+        internal EncodedMemoryIndex(PartId[] parts, KVP src)
         {
             Data = src;
             Parts = parts;
@@ -48,7 +48,7 @@ namespace Z0
             get => Data[src];
         }
 
-        public static EncodedMemories Empty
-            => new EncodedMemories(sys.empty<PartId>(), KVP.Empty);
+        public static EncodedMemoryIndex Empty
+            => new EncodedMemoryIndex(sys.empty<PartId>(), KVP.Empty);
     }
 }

@@ -11,14 +11,14 @@ namespace Z0
 
     using KVP = KeyValuePairs<MemoryAddress,OpUri>;
 
-    public readonly struct UriLocations
+    public readonly struct UriLocationIndex
     {
         public readonly PartId[] Parts;
 
         readonly KVP Data;
 
         [MethodImpl(Inline)]
-        internal UriLocations(PartId[] parts, KVP src)
+        internal UriLocationIndex(PartId[] parts, KVP src)
         {
             Parts = parts;
             Data = src;
@@ -40,9 +40,9 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Data.Count;
-        }        
+        }
 
-        public static UriLocations Empty 
-            => new UriLocations(sys.empty<PartId>(), KVP.Empty);        
+        public static UriLocationIndex Empty
+            => new UriLocationIndex(sys.empty<PartId>(), KVP.Empty);
     }
 }

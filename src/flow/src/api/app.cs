@@ -15,6 +15,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static IAppContext app()
-            => ContextFactory.create();
+            => ContextFactory.app();
     }
 }

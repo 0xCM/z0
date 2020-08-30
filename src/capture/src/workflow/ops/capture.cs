@@ -11,10 +11,10 @@ namespace Z0
 
     using static Konst;
 
-    partial struct WfBuilder
+    partial struct AsmWfBuilder
     {
         [MethodImpl(Inline), Op]
         public static IWfCaptureBroker capture(IWfEventLog log, CorrelationToken ct)
-            => new WfCaptureBroker(log, ct); 
+            => new WfCaptureBroker(log, ct);
     }
 }

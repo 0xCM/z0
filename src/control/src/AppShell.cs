@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using Z0.Asm;
-
     readonly struct AppShell
     {
         public const PartId Id = PartId.Control;

@@ -31,14 +31,8 @@ namespace Z0
         public bool IsPointer;
 
         public static TypeSig from(Type src)
-            => new TypeSig(
-                src.DisplayName(),
-                src.IsConstructedGenericType,
-                src.IsGenericType && !src.IsConstructedGenericType,
-                src.IsByRef,
-                false,
-                false,
-                src.IsPointer);
+            => new TypeSig(src.DisplayName(), src.IsConstructedGenericType,src.IsGenericType && !src.IsConstructedGenericType,
+                    src.IsByRef, false, false, src.IsPointer);
 
         public static TypeSig from(ParameterInfo src)
         {

@@ -12,6 +12,8 @@ namespace Z0
 
     public readonly struct CilCode : IEncoded
     {
+        public const string FormatPattern = "{0,-16} | {1, -80} | {2}";
+
         /// <summary>
         /// The code's base address
         /// </summary>
@@ -47,11 +49,8 @@ namespace Z0
         BinaryCode IEncoded.Encoded
             => Encoded;
 
-        public string Format(int uripad)
-            => text.concat(Base.Format(), Space, Name.PadRight(uripad), Space, Encoded.Format());
-
         public string Format()
-            => Format(30);
+            => text.format(FormatPattern, Base, Name, Encoded.Format());
 
 
         public override string ToString()

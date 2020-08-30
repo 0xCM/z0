@@ -30,33 +30,39 @@ namespace Z0
         Data = 7 | 1 << 16
     }
 
-    public readonly struct MemberParseRecord : ITabular<F,R>, ISequential
+    public struct MemberParseRecord : ITabular<F,R>
     {
-        public readonly int Seq;
-
-        public readonly int SourceSeq;
-
-        public readonly MemoryAddress Address;
-
-        public readonly int Length;
-
-        public readonly ExtractTermCode TermCode;
-
-        public readonly OpUri Uri;
-
-        public readonly string OpSig;
-
-        public readonly X86Code Data;
-
         public const int FieldCount = 8;
 
-        int ISequential.Sequence
-            => Seq;
+        public int Seq;
+
+        public int SourceSeq;
+
+        public MemoryAddress Address;
+
+        public int Length;
+
+        public ExtractTermCode TermCode;
+
+        public OpUri Uri;
+
+        public string OpSig;
+
+        public X86Code Data;
 
         public static R Empty
-            => new R(0, 0, 0, 0, 0, OpUri.Empty, EmptyString, X86Code.Empty);
+            => default;
 
-
+        public static ParseResult<MemberParseRecord[]> load(FilePath src)
+        {
+            var attempts = src.ReadLines().Skip(1).Select(MemberParseRecord.Parse);
+            var failed = attempts.Where(r => !r.Succeeded);
+            var success = attempts.Where(r => r.Succeeded).Select(r => r.Value);
+            if(failed.Length != 0 && success.Length == 0)
+                return ParseResult.Fail<MemberParseRecord[]>(src.Name, failed[0].Reason);
+            else
+                return ParseResult.Success(src.Name, success);
+        }
 
         public static ParseResult<MemberParseRecord> Parse(string src)
         {
@@ -66,33 +72,17 @@ namespace Z0
                 if(fields.Length !=  (uint)FieldCount)
                     return ParseResult.Fail<MemberParseRecord>(src,"No data");
 
+                var dst = Empty;
                 var index = 0;
-
-                var numericParser = NumericParser.infallible<int>();
-                var addressParser = MemoryAddressParser.Service;
-                var dataParser = Parsers.hex(true);
-
-                var seq = numericParser.Parse(fields[index++]);
-                var srcSeq = numericParser.Parse(fields[index++]);
-                var address = addressParser.Parse(fields[index++], MemoryAddress.Empty);
-                var len = numericParser.Parse(fields[index++]);
-                var term = Enums.Parse(fields[index++], ExtractTermCode.None);
-                var uri = OpUriParser.Service.Parse(fields[index++]);
-                if(uri.Failed)
-                    sys.@throw(uri.Reason);
-                var sig = fields[index++];
-                var data = new X86Code(address, dataParser.ParseData(fields[index++], Array.Empty<byte>()));
-
-                return ParseResult.Success(src, new R(
-                    Seq: seq,
-                    SourceSequence: srcSeq,
-                    Address: address,
-                    Length: len,
-                    TermCode: default,
-                    Uri:uri.Value,
-                    OpSig:sig,
-                    Data:data
-                    ));
+                dst.Seq = NumericParser.succeed<int>(fields[index++]);
+                dst.SourceSeq = NumericParser.succeed<int>(fields[index++]);
+                dst.Address = MemoryAddressParser.succeed(fields[index++]);
+                dst.Length = NumericParser.succeed<int>(fields[index++]);
+                dst.TermCode = Enums.Parse(fields[index++], ExtractTermCode.None);
+                dst.Uri = OpUriParser.Service.Parse(fields[index++]).Require();
+                dst.OpSig = fields[index++];
+                dst.Data = new X86Code(dst.Address, Parsers.hex(true).ParseData(fields[index++], sys.empty<byte>()));
+                return ParseResult.Success(src, dst);
             }
             catch(Exception e)
             {
@@ -100,16 +90,8 @@ namespace Z0
             }
         }
 
-        public MemberParseRecord(
-            int Seq,
-            int SourceSequence,
-            MemoryAddress Address,
-            int Length,
-            ExtractTermCode TermCode,
-            OpUri Uri,
-            string OpSig,
-            X86Code Data
-            )
+        public MemberParseRecord(int Seq, int SourceSequence, MemoryAddress Address, int Length,
+            ExtractTermCode TermCode, OpUri Uri, string OpSig, X86Code Data)
         {
             this.Seq = Seq;
             this.SourceSeq = SourceSequence;
@@ -119,22 +101,6 @@ namespace Z0
             this.Uri = Uri;
             this.OpSig = OpSig;
             this.Data = Data;
-        }
-
-
-        public dynamic this[F f]
-        {
-            get => f switch {
-                F.Seq => Seq,
-                F.SourceSeq => SourceSeq,
-                F.Address => Address,
-                F.Length => Length,
-                F.TermCode => TermCode,
-                F.Uri => Uri,
-                F.OpSig => OpSig,
-                F.Data => Data,
-                _ => 0,
-            };
         }
 
         public string DelimitedText(char delimiter)

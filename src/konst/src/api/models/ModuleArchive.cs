@@ -18,14 +18,17 @@ namespace Z0
 
         public readonly IPart[] Parts;
 
-        public readonly Assembly[] Components;
+        public readonly Assembly[] Owners;
+
+        public readonly ApiSet Api {get;}
 
         public ModuleArchive(Assembly[] src)
         {
             Root = FolderPath.Empty;
             Parts = ApiQuery.parts(src);
-            Components = Parts.Select(x => x.Owner);
-            Files = Components.Select(x => FilePath.Define(x.Location));
+            Owners = Parts.Select(x => x.Owner);
+            Files = Owners.Select(x => FilePath.Define(x.Location));
+            Api = ApiQuery.set(new ApiParts(Parts));
         }
 
         public ModuleArchive(FolderPath root)
@@ -33,17 +36,18 @@ namespace Z0
             Root = root;
             Files = root.Files().Where(f => FS.managed(FS.path(f.Name)));
             insist(Files.Count != 0, $"The files in {root}, there must be some");
-            Parts = Parted.resolve(Files);
-            Components = Parted.parts(Files);
+            Parts = ApiQuery.resolve(Files);
+            Owners = ApiQuery.parts(Files);
+            Api = ApiQuery.set(new ApiParts(Parts));
         }
 
-        public ModuleArchive(FS.FolderPath root, params string[] exclusions)
+        public ModuleArchive(FS.FolderPath root, string exclude)
         {
             Root = FolderPath.Define(root.Name);
-            FS.Files files = root.Files().Where(f => FS.managed(FS.path(f.Name)));
-            Files = files.Map(f => FilePath.Define(f.Name));
-            Parts = Parted.resolve(files);
-            Components = Parted.parts(files);
+            Files = root.Exclude(exclude).Where(f => FS.managed(f)).Map(f => FilePath.Define(f.Name));
+            Parts = ApiQuery.resolve(Files);
+            Owners = ApiQuery.parts(Files);
+            Api = ApiQuery.set(new ApiParts(Parts));
         }
     }
 }

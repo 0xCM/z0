@@ -24,7 +24,13 @@ namespace Z0
         T Target {get;}
 
         string ITextual.Format()
-            => text.format(RenderPatterns.Arrow, Source, Target);
+            => text.format(RenderPatterns.ArrowAxB, Source, Target);
+    }
+
+    [Free]
+    public interface IDataFlow<T> : IDataFlow<T,T>
+    {
+
     }
 
     /// <summary>

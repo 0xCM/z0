@@ -11,10 +11,10 @@ namespace Z0
 
     using static Konst;
 
-    partial struct WfBuilder
+    partial struct AsmWfBuilder
     {
         [MethodImpl(Inline), Op]
         public static IAsmContext asm(IAppContext root)
-            => new AsmContext(root); 
+            => new AsmContext(root);
     }
 }

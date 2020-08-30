@@ -6,19 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+
     using static Konst;
 
-    public readonly struct EncodedParts : IEncodedParts
+    public readonly struct EncodedPartIndex
     {
-        readonly EncodedMemories Memories;
+        readonly EncodedMemoryIndex Memories;
 
-        readonly UriLocations UriLocations;
+        readonly UriLocationIndex UriLocations;
 
-        readonly HostedCode HostCode;
+        readonly HostedCodeIndex HostCode;
 
-        public PartId[] Parts {get;}
+        public readonly PartId[] Parts;
 
-        public EncodedParts(PartId[] parts, EncodedMemories members, UriLocations memuri, HostedCode hostcode)
+        public EncodedPartIndex(PartId[] parts, EncodedMemoryIndex members, UriLocationIndex memuri, HostedCodeIndex hostcode)
         {
             Parts = parts;
             Memories = members;
@@ -76,11 +77,11 @@ namespace Z0
             => Memories[location];
 
         [MethodImpl(Inline)]
-        public EncodedMembers CodeSet(ApiHostUri id)
+        public EncodedMemberIndex CodeSet(ApiHostUri id)
             => Encoded.index(id, HostCode[id]);
 
         [MethodImpl(Inline)]
-        public PartCode CodeSet(PartId id)
+        public PartCodeIndex CodeSet(PartId id)
             => Encoded.index(id, Hosts.Map(CodeSet));
 
         public X86ApiCode this[MemoryAddress location]
@@ -89,13 +90,13 @@ namespace Z0
             get => Code(location);
         }
 
-        public EncodedMembers this[ApiHostUri id]
+        public EncodedMemberIndex this[ApiHostUri id]
         {
             [MethodImpl(Inline)]
             get => CodeSet(id);
         }
 
-        public PartCode this[PartId id]
+        public PartCodeIndex this[PartId id]
         {
             [MethodImpl(Inline)]
             get => CodeSet(id);

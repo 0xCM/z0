@@ -19,24 +19,21 @@ namespace Z0
         readonly IShellPaths AppPaths;
 
         [MethodImpl(Inline)]
-        internal PartFiles(IAsmContext context)
+        public PartFiles(IAsmContext context)
             => AppPaths = context.AppPaths.ForApp(Part.ExecutingPart);
-
-        [MethodImpl(Inline)]
-        public static PartFiles create(IAsmContext context)
-            => new PartFiles(context);
 
         public static MemberParseRecord[] parsed(IAsmContext context, PartId part)
         {
-            var pfs = PartFiles.create(context);
+            var pfs = new PartFiles(context);
             var files = pfs.ParseFileIndex(part);
-            var parser = ParseReportParser.Service;
             if(files.TryGetValue(part, out var partFiles))
             {
-                for(var j= 0; j<partFiles.Length; j++)
+                var count = partFiles.Length;
+                var view = @readonly(partFiles);
+                for(var j=0; j<count; j++)
                 {
-                    var path = partFiles[j].Path;
-                    var records = parser.ParseRecords(path);
+                    ref readonly var file = ref skip(view, j);
+                    var records = MemberParseRecord.load(file.Path);
                     if(records)
                         return records.Value;
                 }
@@ -44,15 +41,6 @@ namespace Z0
 
             return sys.empty<MemberParseRecord>();
         }
-
-        public static FilePath[] AsmPaths(FolderPath root, params PartId[] parts)
-            => CaptureArchive(root).AsmFilePaths(parts);
-
-        public static FilePath[] HexPaths(FolderPath root, params PartId[] parts)
-            => CaptureArchive(root).HexFilePaths(parts);
-
-        public static FilePath[] ParsePaths(FolderPath root, PartId[] parts)
-            => CaptureArchive(root).ParseFilePaths(parts);
 
         public FolderPath ArchiveRoot
             => AppPaths.AppCaptureRoot;
@@ -68,12 +56,6 @@ namespace Z0
 
         public Dictionary<PartId,PartFile[]> ParseFileIndex(params PartId[] parts)
             => SelectFiles(PartFileClass.Parsed, ParseFiles, parts);
-
-        public Dictionary<PartId,PartFile[]> HexFileIndex(params PartId[] parts)
-            => SelectFiles(PartFileClass.Hex, HexFiles, parts);
-
-        public Dictionary<PartId,PartFile[]> AsmFileIndex(params PartId[] parts)
-            => SelectFiles(PartFileClass.Asm, AsmFiles, parts);
 
         static Dictionary<PartId,PartFile[]> SelectFiles(PartFileClass kind, IEnumerable<FilePath> src, params PartId[] parts)
         {

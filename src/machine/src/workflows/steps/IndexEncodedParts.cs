@@ -20,49 +20,53 @@ namespace Z0
 
         readonly PartFiles SourceFiles;
 
-        public EncodedParts EncodedIndex;
+        public EncodedPartIndex EncodedIndex;
 
         public IndexEncodedParts(IWfContext wf, PartFiles src, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
             SourceFiles = src;
-            Wf.Created(StepName, Ct);
-            EncodedIndex = default(EncodedParts);
+            EncodedIndex = default;
+            Wf.Created(StepId);
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId, Ct);
         }
 
         public void Run()
         {
-            Wf.Running(StepName, Ct);
+            Wf.Running(StepId);
 
             try
             {
-                var parser = ParseReportParser.Service;
                 var files = span(SourceFiles.ParseFiles);
                 var count = files.Length;
-
                 var builder = Encoded.builder();
+
+                Wf.Status(StepId, text.format("Indexing {0} datasets",count));
+
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var path = ref skip(files,i);
-                    var parsed = parser.Parse(path);
-                    if(parsed)
+
+                    var result = MemberParseRecord.load(path);
+                    if(result)
                     {
-                        Index(parsed.Value,builder);
+                        Index(result.Value, builder);
+                        Wf.Status(StepId, text.format("Indexed {0}", path));
                     }
                     else
-                    {
-                        Wf.Error(StepName, $"Parse failed for {path}", Ct);
-                    }
+                        Wf.Error(StepId, $"Could not parse {path}");
                 }
 
+                var status = builder.Status();
+                Wf.Status(StepId, text.format("Freeze: {0}", status.Format()));
+
                 EncodedIndex = builder.Freeze();
-                Wf.Raise(new IndexedEncoded(StepName, EncodedIndex, Ct));
+                Wf.Raise(new IndexedEncodedParts(StepName, EncodedIndex, Ct));
 
             }
             catch(Exception e)
@@ -70,27 +74,24 @@ namespace Z0
                 Wf.Error(e, Ct);
             }
 
-            Wf.Ran(StepName, Ct);
+            Wf.Ran(StepId);
         }
 
-        void Index(MemberParseReport report, EncodedPartBuilder dst)
+        void Index(ReadOnlySpan<MemberParseRecord> src, EncodedPartBuilder dst)
         {
-            var count = report.RecordCount;
-            var view = @readonly(report.Records);
+            var count = src.Length;
             for(var i=0; i<count; i++)
-                Index(skip(view,i), dst);
+                Index(skip(src,i), dst);
         }
 
-        void Index(MemberParseRecord src, EncodedPartBuilder dst)
+        void Index(in MemberParseRecord src, EncodedPartBuilder dst)
         {
             if(src.Address.IsEmpty)
-                Wf.Raise(new Unaddressed(src.Uri, src.Data));
-            else
-            {
-                var code = new X86ApiCode(src.Uri, src.Data);
-                if(!dst.Include(code))
-                    Wf.Warn(StepId, $"Duplicate | {src.Uri.Format()}");
-            }
+                return;
+
+            var code = new X86ApiCode(src.Uri, src.Data);
+            if(!dst.Include(code))
+                Wf.Warn(StepId, $"Duplicate | {src.Uri.Format()}");
         }
     }
 }

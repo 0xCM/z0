@@ -12,52 +12,57 @@ public enum PartId : ulong
 
     Part = 1,
 
-    Sys = 2,
+    Sys = 4,
 
-    Domain = 3,
+    Konst = 8,
 
-    Konst = 5,
+    Math = 12,
 
-    Math = 7,
+    BitMasks = 14,
 
-    Expressive = 10,
+    Expressive = 16,
 
-    Imagine = 12,
+    Domain = 18,
 
-    Flow = 13,
+    Imagine = 20,
 
-    Seed = 17,
+    Seed = 22,
 
-    Lang = 20,
+    Memories = 24,
 
-    Memories = 23,
+    Json = 28,
 
-    Kinds = 28,
+    Artifacts = 32,
 
-    Monitor = 30,
+    GMath = 34,
 
-    Json = 31,
+    Polyrand = 36,
 
-    ToolCore = 32,
+    Kinds = 40,
 
-    ToolCli = 33,
-
-    Artifacts = 34,
 
     // ~ 50
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Monitor = 41,
+
+    ToolCore = 42,
+
+    ToolCli = 43,
+
+    Flow = 45,
+
+    Lang = 46,
 
     Run = 50,
 
     Data = 51,
 
-    Tables = 52,
-
     Canonical = 63,
 
     Bits = 70,
-    Win = 71,
 
+    Win = 71,
 
     // ~ 100
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -76,8 +81,6 @@ public enum PartId : ulong
 
     BitSvc = 106,
 
-    BitMasks = 107,
-
     BitFields = 108,
 
     BitSuite = 109,
@@ -85,8 +88,6 @@ public enum PartId : ulong
     BitCore = 110,
 
     BitMatrix = 111,
-
-    GMath = 113,
 
     MathSvc = 114,
 
@@ -98,8 +99,6 @@ public enum PartId : ulong
 
     Machines = 118,
 
-    Polyrand = 119,
-
     Identity = 120,
 
     LSquare = 121,
@@ -107,7 +106,6 @@ public enum PartId : ulong
     Blocked = 125,
 
     MetaReader = 126,
-
 
     Nats = 133,
 

@@ -11,16 +11,30 @@ namespace Z0
 
     using static Konst;
 
-    using KVP = System.Collections.Generic.Dictionary<ApiHostUri,X86ApiCode[]>;
+    using KVP = System.Collections.Generic.Dictionary<ApiHostUri, EncodedHost>;
 
-    public readonly struct HostedCode
+    public readonly struct EncodedHost
+    {
+        public readonly ApiHostUri Host;
+
+        public readonly TableSpan<X86ApiCode> Code;
+
+        [MethodImpl(Inline)]
+        public EncodedHost(ApiHostUri host, X86ApiCode[] code)
+        {
+            Host = host;
+            Code = code;
+        }
+    }
+
+    public readonly struct HostedCodeIndex
     {
         public readonly PartId[] Parts;
 
         readonly KVP Data;
 
         [MethodImpl(Inline)]
-        internal HostedCode(PartId[] parts, KVP src)
+        internal HostedCodeIndex(PartId[] parts, KVP src)
         {
             Parts = parts;
             Data = src;
@@ -38,10 +52,10 @@ namespace Z0
             get => Data.Keys.ToArray();
         }
 
-        public X86ApiCode[] this[ApiHostUri src]
+        public TableSpan<X86ApiCode> this[ApiHostUri src]
         {
             [MethodImpl(Inline)]
-            get => Data[src];
+            get => Data[src].Code;
         }
 
         public IEnumerable<X86ApiCode> Code
@@ -50,15 +64,12 @@ namespace Z0
             {
                 foreach(var k in Data.Keys)
                 {
-                    foreach(var c in Data[k])
+                    foreach(var c in Data[k].Code.Storage)
                     {
                         yield return c;
                     }
                 }
             }
         }
-
-        public static HostedCode Empty
-            => new HostedCode(sys.empty<PartId>(), new KVP());
     }
 }

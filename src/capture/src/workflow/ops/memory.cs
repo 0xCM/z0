@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct WfBuilder
+    partial struct AsmWfBuilder
     {
         /// <summary>
         /// Creates a memory capture service

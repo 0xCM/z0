@@ -23,7 +23,7 @@ namespace Z0
             var indices = src.RemoveAny(Chars.LParen, Chars.RParen).Trim().Split(Chars.Space);
             if(indices.Length != 2)
                 return ParseResult.Fail<Pair<T>>(src);
-            
+
             var parser = Parsers.numeric<T>();
             var result = Option.Try(() => Tuples.pair(parser.Parse(indices[0]).ValueOrDefault(), parser.Parse(indices[1]).ValueOrDefault()));
             if(result.IsSome())
@@ -31,6 +31,11 @@ namespace Z0
             else
                 return ParseResult.Fail<Pair<T>>(src);
         }
+
+        [MethodImpl(Inline)]
+        public static T succeed<T>(string src)
+            where T : unmanaged
+                => NumericParser.parse<T>(src).ValueOrDefault();
 
         /// <summary>
         /// Creates an infallible numeric parser
@@ -60,7 +65,7 @@ namespace Z0
                 return ParseResult.Fail<T>(src);
         }
 
-        static ScalarParser SP 
+        static ScalarParser SP
             => ScalarParser.Service;
 
         [MethodImpl(Inline)]
@@ -163,7 +168,7 @@ namespace Z0
                     return false;
 
             }
-            else 
+            else
                 return parse_f(src, out dst);
         }
 
@@ -172,7 +177,7 @@ namespace Z0
             where T : unmanaged
         {
             dst = default;
-            
+
             if(typeof(T) == typeof(float))
             {
                 if(SP.parse(src, out float x))
@@ -194,6 +199,6 @@ namespace Z0
                     return false;
             }
             return false;
-        }    
+        }
     }
 }

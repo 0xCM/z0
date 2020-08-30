@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Collects statistics of encoded data known to a <see cref='EncodedParts'/> 
+    /// Collects statistics of encoded data known to a <see cref='EncodedPartIndex'/>
     /// </summary>
     public struct EncodedPartStats
     {
@@ -20,7 +20,7 @@ namespace Z0
         public uint HostCount;
 
         public uint AddressCount;
-        
+
         public uint FunctionCount;
 
         public uint IdentityCount;
@@ -29,8 +29,8 @@ namespace Z0
 
         public string Format()
             => text.format("{0}", new {PartCount, HostCount, AddressCount, FunctionCount, IdentityCount, ByteCount});
-        
-        public static EncodedPartStats from(EncodedParts src)
+
+        public static EncodedPartStats from(EncodedPartIndex src)
         {
             var stats = default(EncodedPartStats);
             stats.PartCount = (uint)src.Parts.Length;

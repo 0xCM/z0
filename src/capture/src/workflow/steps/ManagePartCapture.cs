@@ -20,15 +20,11 @@ namespace Z0
 
         readonly IWfContext Wf;
 
-        public WfConfig Config;
+        public IWfConfig Config;
 
         readonly CorrelationToken Ct;
 
         readonly ICaptureContext Context;
-
-        readonly IPartCatalog[] Catalogs;
-
-        readonly IApiHost[] Hosts;
 
         [MethodImpl(Inline)]
         public ManagePartCapture(WfCaptureState state, CorrelationToken ct)
@@ -38,42 +34,40 @@ namespace Z0
             Config = State.Config;
             Ct = ct;
             Context = State.CWf.Context;
-            Catalogs = Context.ApiSet.MatchingCatalogs(state.Config.Parts).Array();
-            var a = Catalogs.SelectMany(c => c.ApiDataTypes).Cast<IApiHost>();
-            var b = Catalogs.SelectMany(c => c.Operations).Cast<IApiHost>();
-            Hosts = a.Concat(b).OrderBy(x => x.PartId).ThenBy(x => (long)x.HostType.TypeHandle.Value).Array();
+            Wf.Created(StepId);
         }
 
         public void Run()
         {
-            Clear(Config);
+            Wf.Running(StepId);
+            Clear();
             Capture(Archives.capture(Config.TargetArchive.Root));
+            Wf.Ran(StepId);
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName);
+            Wf.Finished(StepId);
         }
 
         void Capture(IPartCapturePaths dst)
         {
-            var count = Catalogs.Length;
+            var catalogs = @readonly(Config.Api.Catalogs);
+            var count = catalogs.Length;
             for(var i=0; i<count; i++)
-            {
-                CapturePart(Catalogs[i], dst);
-            }
+                CapturePart(skip(catalogs,i), dst);
         }
 
         public void Consolidate()
         {
-            Wf.Raise(new RunningConsolidated(StepName, (uint)Catalogs.Length, Ct));
+            Wf.Raise(new RunningConsolidated(StepName, (uint)Config.Api.Catalogs.Length, Ct));
 
-            Clear(Config);
+            Clear();
 
             try
             {
                 var dst = Archives.capture(Config.TargetArchive.Root);
-                using var step = new CaptureHosts(State, Hosts, dst, Ct);
+                using var step = new CaptureHosts(State, Config.Api.Hosts, dst, Ct);
                 step.Run();
 
             }
@@ -85,18 +79,19 @@ namespace Z0
 
         void CapturePart(IPartCatalog src, IPartCapturePaths dst)
         {
-            if(src.IsNonEmpty)
-            {
-                Context.Raise(new CapturingPart(src.PartId));
-                CaptureHosts(src,dst);
-                Context.Raise(new CapturedPart(src.PartId));
-            }
+            if(src.IsEmpty)
+                return;
+
+            Context.Raise(new CapturingPart(src.PartId));
+            CaptureHosts(src,dst);
+            Context.Raise(new CapturedPart(src.PartId));
         }
 
         void CaptureHosts(IPartCatalog src, IPartCapturePaths dst)
         {
             var hosts = span(src.Operations);
             var count = hosts.Length;
+
             using var step = new CaptureHostMembers(State, dst, Ct);
             for(var i=0; i<count; i++)
             {
@@ -107,11 +102,11 @@ namespace Z0
             }
         }
 
-        void Clear(WfConfig config)
+        void Clear()
         {
             try
             {
-                using var step = new ClearCaptureArchives(Wf, config, Ct);
+                using var step = new ClearCaptureArchives(Wf, Config, Ct);
                 step.Run();
             }
             catch(Exception e)

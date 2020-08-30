@@ -18,16 +18,7 @@ namespace Z0
         void OnEvent(LoadedParseReport e)
             => Sink.Deposit(e);
 
-        void OnEvent(IndexedEncoded e)
-            => Sink.Deposit(e);
-
         void OnEvent(DecodedHost e)
-            => Sink.Deposit(e);
-
-        void OnEvent(DecodedPart e)
-            => Sink.Deposit(e);
-
-        void OnEvent(DecodedMachine e)
             => Sink.Deposit(e);
 
         void Connect()

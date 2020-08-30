@@ -23,7 +23,7 @@ namespace Z0
 
         readonly IAsmContext Asm;
 
-        readonly EncodedParts Encoded;
+        readonly EncodedPartIndex Encoded;
 
         readonly int[] Sequence;
 
@@ -47,7 +47,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ProcessAsm(IWfCaptureState state, in EncodedParts encoded)
+        public ProcessAsm(IWfCaptureState state, in EncodedPartIndex encoded)
         {
             Wf = state.Wf;
             Asm = state.Asm;
@@ -60,7 +60,8 @@ namespace Z0
 
         public AsmRecordSets<Mnemonic> Process()
         {
-            var locations = z.span(Encoded.Locations);
+            Wf.Running(StepId);
+            var locations = span(Encoded.Locations);
             var count = locations.Length;
             for(var i=0u; i<count; i++)
             {
@@ -68,7 +69,10 @@ namespace Z0
                 Process(Encoded[address]);
             }
 
-            return Processed();
+            var result = Processed();
+            Wf.Ran(StepId, result.Count);
+
+            return result;
         }
 
         [MethodImpl(Inline)]

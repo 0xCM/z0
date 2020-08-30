@@ -52,19 +52,25 @@ namespace Z0
         {
             (this as IManageCapture).Connect();
 
-            Wf.Raise(new CapturingParts(StepName, State.Parts, Ct));
+            Wf.Running(StepId);
 
-            using var manage = new ManagePartCapture(State, Ct);
-            //manage.Consolidate();
-            manage.Run();
+            {
+                Wf.Raise(new CapturingParts(StepName, State.Parts, Ct));
+                using var manage = new ManagePartCapture(State, Ct);
+                manage.Run();
+            }
 
-            ImmEmitter.ClearArchive(State.Parts);
-            ImmEmitter.EmitRefined(State.Parts);
+            {
+                ImmEmitter.ClearArchive(State.Parts);
+                ImmEmitter.EmitRefined(State.Parts);
+            }
 
-            Wf.Running(EvaluateStep.StepId);
-            var evaluate = Evaluate.control(State.Root, State.Root.Random, Wf.AppPaths.AppCaptureRoot, Pow2.T14);
-            evaluate.Execute();
-            Wf.Ran(EvaluateStep.StepId);
+            {
+                Wf.Running(EvaluateStep.StepId);
+                var evaluate = Evaluate.control(State.Root, State.Root.Random, Wf.AppPaths.AppCaptureRoot, Pow2.T14);
+                evaluate.Execute();
+                Wf.Ran(EvaluateStep.StepId);
+            }
 
             Wf.Ran(StepId);
         }

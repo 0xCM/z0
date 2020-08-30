@@ -22,6 +22,12 @@ namespace Z0
 
         IResolvedApi Composition {get;}
 
+        IApiHost[] ApiDataTypes
+            => Catalogs.SelectMany(c => c.ApiDataTypes).Cast<IApiHost>().Array();
+
+        IApiHost[] ApiOpHosts
+            => Catalogs.SelectMany(c => c.Operations).Cast<IApiHost>().Array();
+
         Option<IPart> FindPart(PartId id)
             => z.option(Parts.FirstOrDefault(p => p.Id == id));
 

@@ -16,8 +16,33 @@ namespace Z0
     [ApiHost]
     public readonly struct ApiQuery
     {
+        /// <summary>
+        /// Attempts to parse a part identifier; if unsuccessful, returns none
+        /// </summary>
+        /// <param name="name">The literal name</param>
+        [MethodImpl(Inline), Op]
+        public static PartId id(string name)
+            => Enums.Parse(name, PartId.None);
+
+        [MethodImpl(Inline), Op]
+        public static string format(PartId src)
+            => Part.format(src);
+
+        public static PartId[] validParts(params string[] args)
+            => args.Map(arg => Enums.Parse<PartId>(arg).ValueOrDefault()).WhereSome();
+
+        [Op]
+        public static string Format(TargetPart part)
+            => text.concat(format(part.Source), PartConnector, format(part.Target));
+
+        const string PartConnector = " -> ";
+
+        [MethodImpl(Inline), Op]
+        public static TargetPart target(PartId src, PartId dst)
+            => new TargetPart(src,dst);
+
         public static IPart[] parts()
-            => ModuleArchives.entry().Parts.Where(r => r.Id != 0);
+            => ModuleArchives.entry().Parts;
 
         public static PartIndex index(Type src)
             => ApiQuery.index(ModuleArchives.from(src).Parts);
@@ -38,14 +63,14 @@ namespace Z0
             return new PartIndex(dst);
         }
 
-        public static IPart[] parts(params string[] exclusions)
-            => ModuleArchives.entry(exclusions).Parts.Where(r => r.Id != 0);
+        public static IPart[] parts(string exclude = EmptyString)
+            => ModuleArchives.exclude(exclude).Parts.Where(r => r.Id != 0);
 
         public static Assembly[] assemblies()
-            => ModuleArchives.entry().Components;
+            => ModuleArchives.entry().Owners;
 
-        public static Assembly[] assemblies(params string[] exclusions)
-            => ModuleArchives.entry(exclusions).Components;
+        public static Assembly[] assemblies(string exclude = EmptyString)
+            => ModuleArchives.exclude(exclude).Owners;
 
         /// <summary>
         /// Attempts to resolve a part resolution type
@@ -66,12 +91,15 @@ namespace Z0
 
         [Op]
         public static IPart[] parts(Assembly[] src)
-            => src.Where(isPart).Select(part).Where(x => x.IsSome()).Select(x => x.Value);
+            => src.Where(isPart).Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id);
 
         /// <summary>
         /// Loads an assembly from a potential part path
         /// </summary>
-        public static Option<Assembly> assembly(FS.FilePath src)
+        public static Option<Assembly> assembly(FS.FilePath src,
+            [CallerMemberName] string caller = null,
+            [CallerFilePath] string file = null,
+            [CallerLineNumber] int?  line = null)
         {
             try
             {
@@ -79,13 +107,55 @@ namespace Z0
             }
             catch(Exception e)
             {
-                term.error(AppErrors.define(nameof(ApiQuery), text.format("Path {0} | {1}", src, e)));
-                return none<Assembly>();
+                term.error($"An attempt to load the file {src} resulted in abject failure: {e}", caller, file, line);
+                return default;
             }
         }
 
+        /// <summary>
+        /// Loads an assembly from a potential part path
+        /// </summary>
+        internal static Option<Assembly> assembly(FilePath src,
+            [CallerMemberName] string caller = null,
+            [CallerFilePath] string file = null,
+            [CallerLineNumber] int?  line = null)
+        {
+            try
+            {
+                return Assembly.LoadFrom(src.Name);
+            }
+            catch(Exception e)
+            {
+                term.error($"An attempt to load the file {src} resulted in abject failure: {e}", caller, file, line);
+                return default;
+            }
+        }
+
+        /// <summary>
+        /// Creates an index over the known parts
+        /// </summary>
+        public static PartIndex index()
+            => ApiQuery.index(ModuleArchives.entry().Parts);
+
+        public static bool test(Assembly src)
+            => src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Count() > 0;
+
+        public static Assembly[] parts(FilePath[] src,
+            [CallerMemberName] string caller = null,
+            [CallerFilePath] string file = null,
+            [CallerLineNumber] int?  line = null)
+                => src.Map(f => ApiQuery.assembly(f, caller, file, line))
+                      .Where(x => x.IsSome()).Select(x => x.Value).Where(test);
+
+        public static Assembly[] parts(FS.FilePath[] src,
+            [CallerMemberName] string caller = null,
+            [CallerFilePath] string file = null,
+            [CallerLineNumber] int?  line = null)
+                => src.Map(f => ApiQuery.assembly(f, caller, file, line))
+                      .Where(x => x.IsSome()).Select(x => x.Value).Where(test);
+
         public static Assembly[] components(FS.FilePath[] src)
-            => src.Map(assembly).Where(x => x.IsSome()).Select(x => x.Value).Where(isPart);
+            => src.Map(f => assembly(f)).Where(x => x.IsSome()).Select(x => x.Value).Where(isPart);
 
         [MethodImpl(Inline), Op]
         public static bool isSvc(PartId a)
@@ -139,7 +209,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Assembly[] components(in ModuleArchive src)
-            => src.Components.Where(isPart);
+            => src.Owners.Where(isPart);
 
         [MethodImpl(Inline), Op]
         public static ApiPart assemble(params IPart[] parts)
@@ -148,7 +218,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ApiSet set(params IPart[] parts)
             => new ApiSet(assemble(parts));
-
 
         [MethodImpl(Inline), Op]
         public static ApiPart assemble(IEnumerable<IPart> parts)
@@ -191,8 +260,12 @@ namespace Z0
         }
 
         [Op]
-        public static IPartCatalog catalog(IPart part)
+        public static PartCatalog catalog(IPart part)
             => new PartCatalog(part, dataTypes(part.Owner), apiHosts(part.Owner), svcHostTypes(part.Owner));
+
+        [Op]
+        public static PartCatalog[] catalogs(params IPart[] parts)
+            => parts.Select(catalog);
 
         [Op]
         public static IPartCatalog catalog(Assembly src)
@@ -201,5 +274,58 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static IApiSet apiset(IResolvedApi resolved)
             => new ApiSet(resolved);
+
+        public static IPart[] resolve(FS.Files paths)
+            => resolve(paths.Data);
+
+        /// <summary>
+        /// Attempts to resolve a part from an assembly file path
+        /// </summary>
+        public static Option<IPart> resolve(FilePath src,
+            [CallerMemberName] string caller = null,
+            [CallerFilePath] string file = null,
+            [CallerLineNumber] int?  line = null)
+                => from component in ApiQuery.assembly(src, caller, file, line)
+                    from type in resolve(component)
+                    from prop in resolve(type)
+                    from part in resolve(prop)
+                    select part;
+
+        public static IPart[] resolve(FilePath[] paths,
+            [CallerMemberName] string caller = null,
+            [CallerFilePath] string file = null,
+            [CallerLineNumber] int?  line = null)
+                => paths.Select(p => resolve(p, caller, file, line)).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id);
+
+        /// <summary>
+        /// Attempts to resolve a part from an assembly file path
+        /// </summary>
+        public static Option<IPart> resolve(FS.FilePath src,
+            [CallerMemberName] string caller = null,
+            [CallerFilePath] string file = null,
+            [CallerLineNumber] int?  line = null)
+                => from component in ApiQuery.assembly(src)
+                from type in resolve(component)
+                from prop in resolve(type)
+                from part in resolve(prop)
+                select part;
+
+        /// <summary>
+        /// Attempts to resolve a part resolution type
+        /// </summary>
+        internal static Option<Type> resolve(Assembly src)
+            => src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).FirstOrDefault();
+
+        /// <summary>
+        /// Attempts to resolve a part resolution property
+        /// </summary>
+        internal static Option<PropertyInfo> resolve(Type src)
+            => src.StaticProperties().Where(p => p.Name == "Resolved").FirstOrDefault();
+
+        /// <summary>
+        /// Attempts to resolve a part from a resolution property
+        /// </summary>
+        internal static Option<IPart> resolve(PropertyInfo src)
+            => Try(src, x => (IPart)x.GetValue(null));
     }
 }

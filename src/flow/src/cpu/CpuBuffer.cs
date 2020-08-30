@@ -10,15 +10,59 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CpuBuffer<N,W,T>
-        where N : unmanaged, ITypeNat
-        where W : unmanaged, ITypeWidth
-        where T : unmanaged
+    [ApiHost]
+    public readonly struct CpuBuffer
     {
-        readonly T[] Data;
+        readonly byte[] Data;
+
+        [MethodImpl(Inline), Op]
+        public static CpuBuffers alloc(int size)
+            => new CpuBuffers(size);
 
         [MethodImpl(Inline)]
-        public CpuBuffer(T[] data)
+        public static CpuBuffer<N,W,T> alloc<N,W,T>()
+            where N : unmanaged, ITypeNat
+            where W : unmanaged, ITypeWidth
+            where T : unmanaged
+                => new CpuBuffer<N,W,T>(new T[value<N>()]);
+
+        /// <summary>
+        /// The number of bytes covered by the buffer
+        /// </summary>
+        public const int BufferSize = 64;
+
+        /// <summary>
+        /// The number of 16-bit elements covered by the buffer
+        /// </summary>
+        public const int Buffer16 = BufferSize/2;
+
+        /// <summary>
+        /// The number of 32-bit elements covered by the buffer
+        /// </summary>
+        public const int Buffer32 = BufferSize/4;
+
+        /// <summary>
+        /// The number of 64-bit elements covered by the buffer
+        /// </summary>
+        public const int Buffer64 = BufferSize/8;
+
+        /// <summary>
+        /// The number of 128-bit elements covered by the buffer
+        /// </summary>
+        public const int Buffer128 = BufferSize/16;
+
+        /// <summary>
+        /// The number of 256-bit elements covered by the buffer
+        /// </summary>
+        public const int Buffer256 = BufferSize/32;
+
+        /// <summary>
+        /// The number of 512-bit elements covered by the buffer
+        /// </summary>
+        public const int Buffer512 = BufferSize/64;
+
+        [MethodImpl(Inline)]
+        public CpuBuffer(byte[] data)
         {
             Data = data;
         }
@@ -26,10 +70,10 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => (int)value<N>();
+            get => Data.Length;
         }
 
-        public Span<T> Content
+        public Span<byte> Content
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -38,25 +82,25 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Clear(W16 w)
         {
-            first(Content.Cast<T,ushort>()) = Zero16u;
+            first(Content.Cast<byte,ushort>()) = Zero16u;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public void Clear(W32 w)
         {
-            first(Content.Cast<T,uint>()) = Zero32u;
+            first(Content.Cast<byte,uint>()) = Zero32u;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public void Clear(W64 w)
         {
-            first(Content.Cast<T,ulong>()) = Zero64u;
+            first(Content.Cast<byte,ulong>()) = Zero64u;
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public void Clear(W128 w)
         {
-            first(Content.Cast<T,Fixed128>()) = Fixed128.Empty;
+            first(Content.Cast<byte,Fixed128>()) = Fixed128.Empty;
         }
     }
 }

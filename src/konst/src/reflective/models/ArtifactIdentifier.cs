@@ -17,14 +17,6 @@ namespace Z0
     {
         readonly Address32 Data;
 
-        [MethodImpl(Inline)]
-        public static implicit operator ArtifactIdentifier(int src)
-            => new ArtifactIdentifier(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ArtifactIdentifier(uint src)
-            => new ArtifactIdentifier(src);
-
         public int TokenValue
         {
             [MethodImpl(Inline)]
@@ -67,6 +59,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ArtifactIdentifier From(ParameterInfo src)
+            => new ArtifactIdentifier(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ArtifactIdentifier(int src)
+            => new ArtifactIdentifier(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ArtifactIdentifier(uint src)
             => new ArtifactIdentifier(src);
 
         [MethodImpl(Inline)]

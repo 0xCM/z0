@@ -71,5 +71,11 @@ namespace Z0
         /// </summary>
         public bool IsNonEmpty
             => (Operations.Length + ApiDataTypes.Length) != 0;
+
+        /// <summary>
+        /// Specifies whether the catalog describes any api hosts
+        /// </summary>
+        public bool IsEmpty
+            => (Operations.Length + ApiDataTypes.Length) == 0;
     }
 }

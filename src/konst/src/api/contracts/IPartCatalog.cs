@@ -41,8 +41,7 @@ namespace Z0
         /// <summary>
         /// The api hosts known to the catalog, including both operation and data type hosts
         /// </summary>
-        IApiHost[] ApiHosts
-            => ApiDataTypes.Cast<IApiHost>().Concat(Operations.Cast<IApiHost>()).Array();
+        IApiHost[] ApiHosts {get;}
 
         /// <summary>
         /// Specifies whether the catalog contains content from an identified assembly
@@ -55,5 +54,11 @@ namespace Z0
         /// </summary>
         bool IsNonEmpty
             => (Operations.Length + ApiDataTypes.Length) != 0;
+
+        /// <summary>
+        /// Specifies whether the catalog describes any api hosts
+        /// </summary>
+        bool IsEmpty
+            => (Operations.Length + ApiDataTypes.Length) == 0;
     }
 }

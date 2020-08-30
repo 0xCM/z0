@@ -20,20 +20,20 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public string ActorName {get;}
+        public WfStepId StepId {get;}
 
         public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfInitialized(string worker, CorrelationToken ct, MessageFlair flair = Initialized)
+        public WfInitialized(WfStepId worker, CorrelationToken ct, MessageFlair flair = Initialized)
         {
             EventId = evid(EventName, ct);
-            ActorName = worker;
+            StepId = worker;
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx2, EventId, ActorName);
+            => text.format(PSx2, EventId, StepId);
     }
 }

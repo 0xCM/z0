@@ -39,7 +39,7 @@ namespace Z0
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => hash(Source,Target);
+            get => (uint)HashCode.Combine(Source, Target);
         }
 
         public ulong Hash64

@@ -11,10 +11,10 @@ namespace Z0
 
     using static Konst;
 
-    partial struct WfBuilder
+    partial struct AsmWfBuilder
     {
         [MethodImpl(Inline), Op]
-        public static WfCaptureState state(IWfContext wf, IAsmContext asm, WfConfig config)         
+        public static WfCaptureState state(IWfContext wf, IAsmContext asm, WfConfig config)
             => new WfCaptureState(wf, asm, config, wf.Ct);
     }
 }

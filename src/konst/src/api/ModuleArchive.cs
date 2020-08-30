@@ -25,16 +25,16 @@ namespace Z0
         public static ModuleArchive from(FolderPath src)
             => new ModuleArchive(src);
 
-        public static ModuleArchive entry(params string[] exclusions)
+        public static ModuleArchive exclude(string exclude = EmptyString)
         {
             var entry = Assembly.GetEntryAssembly();
             var path = FS.path(entry.Location);
             insist(path.Exists, $"The file for {entry}, it must exist");
-            return from(path.FolderPath, exclusions);
+            return from(path.FolderPath, exclude);
         }
 
         [MethodImpl(Inline)]
-        public static ModuleArchive from(FS.FolderPath src, params string[] exclusions)
+        public static ModuleArchive from(FS.FolderPath src, string exclusions = EmptyString)
             => new ModuleArchive(src, exclusions);
 
         [MethodImpl(Inline)]

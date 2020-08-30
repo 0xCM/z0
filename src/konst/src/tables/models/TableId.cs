@@ -41,5 +41,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => text.format(PSx2, Shape, StorageBlocks.format(Name));
+
+        public override string ToString()
+            => Format();
     }
 }

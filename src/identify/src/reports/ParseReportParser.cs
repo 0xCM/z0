@@ -10,24 +10,15 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using F = MemberParseField;
-    using R = MemberParseRecord;
-
-
-    public readonly struct ParseReportParser : IParseReportParser, IReportParser<MemberParseRecord>
+    public readonly struct ParseReportParser
     {
-        public static ParseReportParser Service => default;
-
-              
-        public ParseResult<MemberParseReport> Parse(FilePath src)
+        public static ParseResult<MemberParseReport> Parse(FilePath src)
         {
-            var result = ParseRecords(src);
+            var result = MemberParseRecord.load(src);
             if(result.Succeeded && (result.Value.Length != 0))
             {
-                var records = result.Value;        
-                var host = records[0].Uri.Host;
-                var report = MemberParseReport.Create(host, records);
-                return ParseResult.Success(src.Name, report);
+                var records = result.Value;
+                return ParseResult.Success(src.Name, MemberParseReport.create(records[0].Uri.Host, records));
             }
             else
             {
@@ -37,16 +28,5 @@ namespace Z0
                     return ParseResult.Fail<MemberParseReport>(src.Name);
             }
         }
-
-        public ParseResult<MemberParseRecord[]> ParseRecords(FilePath src)
-        {
-            var attempts = src.ReadLines().Skip(1).Select(MemberParseRecord.Parse);
-            var failed = attempts.Where(r => !r.Succeeded);
-            var success = attempts.Where(r => r.Succeeded).Select(r => r.Value);
-            if(failed.Length != 0 && success.Length == 0)
-                return ParseResult.Fail<MemberParseRecord[]>(src.Name, failed[0].Reason);            
-            else
-                return ParseResult.Success(src.Name, success);
-        }
-    }    
+    }
 }

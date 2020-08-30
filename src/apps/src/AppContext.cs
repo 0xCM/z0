@@ -10,7 +10,7 @@ namespace Z0
 
     public class AppContext : IAppContext
     {
-        readonly IApiSet Api;
+        public IApiSet Api {get;}
 
         public ISettings Settings {get;}
 
@@ -40,6 +40,16 @@ namespace Z0
             Settings = settings ?? SettingValues.Load(AppPaths.AppConfigPath);
             MessageQueue = queue;
             Api = ApiQuery.apiset(composition);
+        }
+
+        public AppContext(IShellPaths paths, IApiSet api, IPolyrand random, ISettings settings, IAppMsgQueue queue)
+        {
+            AppPaths = paths;
+            Next = msg => {};
+            Random = random;
+            Settings = settings ?? SettingValues.Load(AppPaths.AppConfigPath);
+            MessageQueue = queue;
+            Api = api;
         }
 
         public IResolvedApi Composition

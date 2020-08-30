@@ -80,12 +80,16 @@ namespace Z0
     public readonly struct ProcessAsmStep : IWfStep<ProcessAsmStep>
     {
         public const string StepName = nameof(ProcessAsm);
+
+        public static WfStepId StepId => AB.step<ProcessAsmStep>();
     }
 
     [Step(typeof(Engine))]
-    public readonly struct Machines : IWfStep<Machines>
+    public readonly struct Engines : IWfStep<Engines>
     {
         public const string StepName = nameof(Engine);
+
+        public static WfStepId StepId => AB.step<Engines>();
     }
 
     [Step(typeof(EmitPeHeaders))]
@@ -182,9 +186,11 @@ namespace Z0
             => AB.step<IndexEncodedPartsStep>();
     }
 
-    public readonly struct Controller
+    public readonly struct Controller : IWfStep<Controller>
     {
         public const string ActorName = nameof(Control);
+
+        public static WfStepId StepId => AB.step<Controller>();
     }
 
     [Step(typeof(EmitImageBlobs))]

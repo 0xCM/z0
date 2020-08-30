@@ -26,7 +26,7 @@ namespace Z0
 
         readonly IAsmContext Asm;
 
-        readonly EncodedParts Encoded;
+        readonly EncodedPartIndex Encoded;
 
         readonly CorrelationToken Ct;
 
@@ -58,7 +58,7 @@ namespace Z0
             get => Offset++;
         }
 
-        public EmitAsmTables(WfActor actor, IWfCaptureState state, EncodedParts encoded, CorrelationToken ct)
+        public EmitAsmTables(WfActor actor, IWfCaptureState state, EncodedPartIndex encoded, CorrelationToken ct)
         {
             State = state;
             Wf = state.Wf;

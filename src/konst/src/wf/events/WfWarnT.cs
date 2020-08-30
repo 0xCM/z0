@@ -25,10 +25,10 @@ namespace Z0
         public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfWarn(WfStepId step, T body, CorrelationToken ct)
+        public WfWarn(WfStepId step, T content, CorrelationToken ct)
         {
             EventId = evid(EventName, ct);
-            Content = body;
+            Content = content;
             StepId = step;
             Flair = MessageFlair.Yellow;
         }

@@ -44,6 +44,8 @@ namespace Z0
                 get => Name;
             }
 
+            public bool Contains(string substring)
+                => Name.Contains(substring);
             public string Format()
                 => View.ToString();
 

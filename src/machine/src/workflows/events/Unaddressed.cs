@@ -20,9 +20,9 @@ namespace Z0
         public readonly X86Code Code;
 
         [MethodImpl(Inline)]
-        public Unaddressed(OpUri uri, X86Code code)
+        public Unaddressed(OpUri uri, X86Code code, CorrelationToken ct)
         {
-            EventId = WfEventId.define(nameof(Unaddressed));
+            EventId = WfEventId.define(nameof(Unaddressed), ct);
             Uri = uri;
             Code = code;
         }

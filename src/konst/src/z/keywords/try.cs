@@ -61,6 +61,5 @@ namespace Z0
         [MethodImpl(Inline)]
         static void OnTryFail<X>(X x, Exception e)
             => term.error(e);
-
     }
 }
