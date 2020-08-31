@@ -53,7 +53,7 @@ namespace Z0
             var seq = parser.Parse(fields[0]).ValueOrDefault();
             var address = z.address(Parsers.hex().Parse(fields[1]).ValueOrDefault());
             var len = parser.Parse(fields[2]).ValueOrDefault();
-            var uri = OpUriParser.Service.Parse(fields[3]).ValueOrDefault(OpUri.Empty);
+            var uri = ApiUriParser.Service.Parse(fields[3]).ValueOrDefault(OpUri.Empty);
             var sig = fields[4];
             var data = fields[5].SplitClean(HexFormatSpecs.DataDelimiter).Select(Parsers.hex(true).Succeed).ToArray();
             var extract = new X86Code(address, data);

@@ -19,7 +19,7 @@ namespace Z0
             FilePath configPath()
             {
                 var assname = Assembly.GetEntryAssembly().GetSimpleName();
-                var filename = FileName.Define(assname, FileExtensions.Json);
+                var filename = FileName.define(assname, FileExtensions.Json);
                 var src = context.AppPaths.ConfigRoot + filename;
                 return src;
             }

@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -14,6 +14,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static FilePath path(FolderPath dst, IDataModel model)
-            => dst + FileName.Define(model.Name, FileExtensions.Csv);
+            => dst + FileName.define(model.Name, FileExtensions.Csv);
     }
 }

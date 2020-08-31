@@ -27,7 +27,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static FileName GetFileName(string path)
-            => FileName.Define(Path.GetFileName(path));
+            => FileName.define(Path.GetFileName(path));
 
         public static FilePath operator + (FilePath a, FileName b)
             => new FilePath(Path.Join(a.Name, b.Name));
@@ -56,7 +56,7 @@ namespace Z0
             => File.Exists(Name);
 
         public FileName FileName
-            => FileName.Define(Path.GetFileName(Name));
+            => FileName.define(Path.GetFileName(Name));
 
         public FolderPath FolderPath
             => FolderPath.Define(Path.GetDirectoryName(Name));
@@ -118,7 +118,7 @@ namespace Z0
             => Name.EndsWith(substring, NoCase);
 
         public FilePath ChangeExtension(FileExtension ext)
-            => FolderPath + FileName.Define(Path.ChangeExtension(Path.GetFileName(FullPath), ext.Name));
+            => FolderPath + FileName.define(Path.ChangeExtension(Path.GetFileName(FullPath), ext.Name));
 
         public FileInfo Info
         {

@@ -23,27 +23,27 @@ namespace Z0
             => HexDirPath(root) + name;
 
         FilePath HexFilePath(FolderPath root, ApiHostUri host)
-            => HexDirPath(root) + FileName.Define(host.Name, HexLine);
+            => HexDirPath(root) + FileName.define(host.Name, HexLine);
 
         FilePath HexFilePath<T>(FolderPath root)
-            => HexFilePath(root, FileName.Define(typeof(T).Name, HexLine));
+            => HexFilePath(root, FileName.define(typeof(T).Name, HexLine));
 
         FilePath AsmFilePath(FolderPath root, FileName name)
             => AsmDirPath(root) + name;
         FilePath AsmFilePath<T>(FolderPath root)
-            => AsmFilePath(root, FileName.Define(typeof(T).Name, Asm));
+            => AsmFilePath(root, FileName.define(typeof(T).Name, Asm));
 
         FilePath AsmFilePath(FolderPath root, ApiHostUri host)
-            => AsmDirPath(root) + FileName.Define(host.Name, Asm);
+            => AsmDirPath(root) + FileName.define(host.Name, Asm);
 
         FilePath ExtractFilePath(FolderPath root, ApiHostUri host)
-            => ExtractDirPath(root) + FileName.Define(host.Name, Extract);
+            => ExtractDirPath(root) + FileName.define(host.Name, Extract);
 
         FilePath UnparsedFilePath(FolderPath root, ApiHostUri host)
-            => UnparsedDirPath(root) + FileName.Define($"{host.Owner.Format()}.{host.Name}", Unparsed);
+            => UnparsedDirPath(root) + FileName.define($"{host.Owner.Format()}.{host.Name}", Unparsed);
 
         FilePath ParseFilePath(FolderPath root, ApiHostUri host)
-            => ParsedDirPath(root) + FileName.Define(host.Name, Parsed);
+            => ParsedDirPath(root) + FileName.define(host.Name, Parsed);
 
         FilePath[] AsmFilePaths(FolderPath root)
             => AsmDirPath(root).Files(Asm);

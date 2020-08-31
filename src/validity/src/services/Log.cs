@@ -46,13 +46,13 @@ namespace Z0
         static FileExtension LogExt => FileExtensions.StatusLog;
 
         public FilePath LogPath(LogArea area, string basename, FileExtension ext = null)
-            => Settings.LogDir(area) + FileName.Define(basename, ext ?? LogExt);
+            => Settings.LogDir(area) + FileName.define(basename, ext ?? LogExt);
 
         public FilePath LogPath(LogArea area, FolderName subdir, string basename, FileExtension ext = null)
-            => Settings.LogDir(area, subdir) + FileName.Define(basename, ext ?? LogExt);
+            => Settings.LogDir(area, subdir) + FileName.define(basename, ext ?? LogExt);
 
         public FilePath Timestamped(LogArea area, string basename, FileExtension ext = null)
-            => Settings.LogDir(area) + FileName.Define($"{basename}.{LogDate}", ext ?? LogExt);
+            => Settings.LogDir(area) + FileName.define($"{basename}.{LogDate}", ext ?? LogExt);
 
         public FilePath UniqueLogPath(LogArea area, string basename, FileExtension ext = null)
         {
@@ -71,10 +71,10 @@ namespace Z0
         }
 
         static FilePath LogPath(LogArea area, string basename, FileExtension ext, long timestamp)
-            => LogDir(area) + FileName.Define($"{basename}.{timestamp}", ext);
+            => LogDir(area) + FileName.define($"{basename}.{timestamp}", ext);
 
         static FilePath LogPath(LogArea area, FolderName subdir, string basename, FileExtension ext, long timestamp)
-            => LogDir(area, subdir) + FileName.Define($"{basename}.{timestamp}.{ext}", ext);
+            => LogDir(area, subdir) + FileName.define($"{basename}.{timestamp}.{ext}", ext);
 
         static EnvConfig Settings
             => new EnvConfig();

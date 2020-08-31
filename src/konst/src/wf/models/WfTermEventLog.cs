@@ -22,7 +22,7 @@ namespace Z0
         static FilePath path(FilePath status)
         {
             var ext = FileExtension.Define(text.format("{0}{1}", timestamp(), status.Ext.Name));
-            var name = FileName.Define(Path.GetFileNameWithoutExtension(status.Name), ext);
+            var name = FileName.define(Path.GetFileNameWithoutExtension(status.Name), ext);
             return status.FolderPath + name;
         }
 

@@ -43,7 +43,7 @@ namespace Z0
         void Emit(IPart part)
         {
             var id = part.Id;
-            var dstPath =  TargetDir + FileName.Define(id.Format(), "blob.csv");
+            var dstPath =  TargetDir + FileName.define(id.Format(), "blob.csv");
 
             Wf.Emitting(StepId, EmissionType, dstPath);
 

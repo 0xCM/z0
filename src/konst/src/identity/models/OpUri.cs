@@ -92,11 +92,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static OpUri hex(OpIdentity opid, MethodInfo src)
-            => new OpUri(OpUriScheme.Hex, ApiHostUri.FromHost(src.DeclaringType), src.Name, opid);
+            => new OpUri(OpUriScheme.Hex, ApiQuery.uri(src.DeclaringType), src.Name, opid);
 
         [MethodImpl(Inline)]
         public static OpUri located(OpIdentity opid, MethodInfo src)
-            => new OpUri(OpUriScheme.Located, ApiHostUri.FromHost(src.DeclaringType), src.Name, opid);
+            => new OpUri(OpUriScheme.Located, ApiQuery.uri(src.DeclaringType), src.Name, opid);
 
         [MethodImpl(Inline)]
         public static OpUri asm(ApiHostUri host, string group)
@@ -108,7 +108,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static OpUri asm(OpIdentity opid, MethodInfo src)
-            => new OpUri(OpUriScheme.Asm, ApiHostUri.FromHost(src.DeclaringType), src.Name, opid);
+            => new OpUri(OpUriScheme.Asm, ApiQuery.uri(src.DeclaringType), src.Name, opid);
 
         [MethodImpl(Inline)]
         OpUri(OpUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)

@@ -15,7 +15,7 @@ namespace Z0
             => Uri.Name;
 
         ApiHostUri Uri
-            => ApiHostUri.FromHost(HostType);
+            => ApiQuery.uri(HostType);
 
         PartId PartId
             => HostType.Assembly.Id();

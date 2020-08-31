@@ -23,7 +23,7 @@ namespace Z0
 
         readonly IAsmContext Asm;
 
-        readonly EncodedPartIndex Encoded;
+        readonly GlobalCodeIndex Encoded;
 
         readonly int[] Sequence;
 
@@ -47,7 +47,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ProcessAsm(IWfCaptureState state, in EncodedPartIndex encoded)
+        public ProcessAsm(IWfCaptureState state, in GlobalCodeIndex encoded)
         {
             Wf = state.Wf;
             Asm = state.Asm;

@@ -31,7 +31,7 @@ namespace Z0
             Ct = ct;
             Id = AB.step(typeof(EmitImageSummaries));
             Images = images;
-            TargetPath = Wf.IndexRoot + FileName.Define("machine.images", FileExtensions.Csv);
+            TargetPath = Wf.IndexRoot + FileName.define("machine.images", FileExtensions.Csv);
             Wf.Created(StepId);
         }
 

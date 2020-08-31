@@ -18,7 +18,7 @@ namespace Z0
         readonly KVP Data;
 
         [MethodImpl(Inline)]
-        internal UriLocationIndex(PartId[] parts, KVP src)
+        public UriLocationIndex(PartId[] parts, KVP src)
         {
             Parts = parts;
             Data = src;

@@ -70,7 +70,7 @@ namespace Z0
             broker = AsmBrokers.jmp();
             Source = src;
             Collected = list<JmpInfo>();
-            Target = wf.AsmTables + FolderName.Define("jumps") + FileName.Define(src.Part.Format(), FileExtensions.Csv) ;
+            Target = wf.AsmTables + FolderName.Define("jumps") + FileName.define(src.Part.Format(), FileExtensions.Csv) ;
             if(connect)
                 Connect();
         }

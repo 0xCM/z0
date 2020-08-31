@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static uint hash(string src)
-            => (uint)src?.GetHashCode();
+            => (uint)(src?.GetHashCode() ?? int.MaxValue) ;
 
         [MethodImpl(Inline), Op]
         public static uint hash(Type src)

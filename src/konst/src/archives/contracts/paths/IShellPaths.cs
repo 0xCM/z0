@@ -84,7 +84,7 @@ namespace Z0
         /// The name of an application configuration file
         /// </summary>
         FileName ConfigFileName
-            => FileName.Define("config.json");
+            => FileName.define("config.json");
 
         /// <summary>
         /// The name of a folder that contains one or more resource index files
@@ -144,25 +144,25 @@ namespace Z0
         /// The executing application's standard out log filename
         /// </summary>
         FileName AppStandardOutName
-            => FileName.Define($"{ShellName}.stdout", FileExtensions.StatusLog);
+            => FileName.define($"{ShellName}.stdout", FileExtensions.StatusLog);
 
         /// <summary>
         /// The executing application's standard out log filename
         /// </summary>
         FileName CaseLogName
-            => FileName.Define($"{ShellName}.cases", FileExtensions.Csv);
+            => FileName.define($"{ShellName}.cases", FileExtensions.Csv);
 
         /// <summary>
         /// The executing application's error log filename
         /// </summary>
         FileName AppErrorOutName
-            => FileName.Define($"{ShellName}.errors", FileExtensions.StatusLog);
+            => FileName.define($"{ShellName}.errors", FileExtensions.StatusLog);
 
         /// <summary>
         /// The executing application's data filename
         /// </summary>
         FileName AppDataFileName
-            => FileName.Define($"{ShellName}", FileExtensions.Csv);
+            => FileName.define($"{ShellName}", FileExtensions.Csv);
 
         /// <summary>
         /// The executing application's standard out log path

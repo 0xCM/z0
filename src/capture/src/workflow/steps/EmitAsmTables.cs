@@ -26,7 +26,7 @@ namespace Z0
 
         readonly IAsmContext Asm;
 
-        readonly EncodedPartIndex Encoded;
+        readonly GlobalCodeIndex Encoded;
 
         readonly CorrelationToken Ct;
 
@@ -58,7 +58,7 @@ namespace Z0
             get => Offset++;
         }
 
-        public EmitAsmTables(WfActor actor, IWfCaptureState state, EncodedPartIndex encoded, CorrelationToken ct)
+        public EmitAsmTables(WfActor actor, IWfCaptureState state, GlobalCodeIndex encoded, CorrelationToken ct)
         {
             State = state;
             Wf = state.Wf;
@@ -111,7 +111,7 @@ namespace Z0
             var buffer = span(src.Content.Array);
             var tables = buffer.Slice(offset,count);
             var dir = (Wf.ResourceRoot + FolderName.Define("tables")) + FolderName.Define("asm");
-            var dst = dir + FileName.Define(src.Key.ToString(), FileExtensions.Csv);
+            var dst = dir + FileName.define(src.Key.ToString(), FileExtensions.Csv);
             using var writer = dst.Writer();
             writer.WriteLine(AsmRecord.FormatHeader());
             for(var i=0; i<count; i++)

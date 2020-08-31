@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
@@ -26,13 +26,13 @@ namespace Z0
     {
         public static void Emit(FolderPath root)
         {
-            var dst = root + FileName.Define("asci", FileExtensions.Txt);
+            var dst = root + FileName.define("asci", FileExtensions.Txt);
             using var writer = dst.Writer();
             writer.Write(BuildAsciData(false));
             writer.Write(BuildAsciData(true));
             writer.Write(BuildAsciByteSpan());
-        }            
-        
+        }
+
         static string BuildAsciData(bool span)
         {
             var sb = text.build();
@@ -54,12 +54,12 @@ namespace Z0
             sb.Append(propDecl);
             if(span)
                 sb.AppendLine();
-            
+
             for(var i=0; i<count; i++)
             {
                 var c = (char)i;
                 sb.Append(charFence);
-                
+
                 if(c == 0)
                     sb.Append('0');
                 else if(c == 10 || c == 13)
@@ -70,8 +70,8 @@ namespace Z0
                     sb.Append($"0");
                 else
                     sb.Append(c);
-                sb.Append(charFence);                
-                
+                sb.Append(charFence);
+
                 if(span)
                 {
                     sb.Append(", ");
@@ -81,7 +81,7 @@ namespace Z0
             }
 
             sb.AppendLine(propClose);
-            
+
             return sb.ToString();
         }
 
@@ -102,7 +102,7 @@ namespace Z0
             sb.Append(propDecl);
             if(span)
                 sb.AppendLine();
-            
+
             var j =0;
             for(int i=0; i<count; i++)
             {
@@ -117,7 +117,7 @@ namespace Z0
             }
 
             sb.AppendLine(propClose);
-            
+
             return sb.ToString();
         }
     }

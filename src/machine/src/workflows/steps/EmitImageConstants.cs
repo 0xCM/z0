@@ -60,7 +60,7 @@ namespace Z0
         void Emit(IPart part)
         {
             var id = part.Id;
-            var dstPath = TargetDir + FileName.Define(id.Format(), DataExt);
+            var dstPath = TargetDir + FileName.define(id.Format(), DataExt);
             Wf.Running(StepName, dstPath.Name, Ct);
 
             var data = Read(part);

@@ -13,9 +13,9 @@ namespace Z0
     using static EmitImageContentStep;
 
     using static z;
-    
+
     public ref struct EmitImageContent
-    {    
+    {
         readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
@@ -23,8 +23,8 @@ namespace Z0
         readonly Span<IPart> Parts;
 
         readonly LocatedImages Images;
-        
-        readonly FolderPath TargetDir;    
+
+        readonly FolderPath TargetDir;
 
         public Span<LocatedPart> Index;
 
@@ -56,21 +56,21 @@ namespace Z0
         }
 
         public void Run()
-        {  
+        {
              Wf.Running(StepName, Ct);
 
              Index = z.span<LocatedPart>(Parts.Length);
              for(var i=0u; i< Parts.Length; i++)
              {
                 ref readonly var part = ref skip(Parts, i);
-                var @base = part.BaseAddress();                 
-                var dstpath = TargetDir + FileName.Define(part.Format(), FileExtension.Define("csv"));
+                var @base = part.BaseAddress();
+                var dstpath = TargetDir + FileName.define(part.Format(), FileExtension.Define("csv"));
                 using var step = new EmitPeImage(Wf, part, @base, dstpath, Ct);
                 step.Run();
-             
+
                 seek(Index,i) = new LocatedPart(part, @base, (uint)(step.OffsetAddress - @base));
              }
-            
+
             using var summarize = new EmitImageSummaries(Wf, Images, Ct);
             summarize.Run();
 

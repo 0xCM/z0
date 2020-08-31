@@ -9,24 +9,24 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    
-    public readonly struct CodeResourceIndex
+
+    public readonly struct ResDeclarationIndex
     {
         public readonly Assembly Owner;
 
         public readonly ResourceDeclarations[] Declarations;
-        
+
         [MethodImpl(Inline)]
-        public CodeResourceIndex(Assembly src, ResourceDeclarations[] declarations)
+        public ResDeclarationIndex(Assembly src, ResourceDeclarations[] declarations)
         {
-            Owner = src;            
+            Owner = src;
             Declarations = declarations;
-        }    
-                
-        public Type[] Hosts 
+        }
+
+        public Type[] Hosts
         {
             [MethodImpl(Inline)]
             get => Declarations.Select(x => x.DeclaringType);
         }
-    } 
+    }
 }

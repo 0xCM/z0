@@ -10,13 +10,13 @@ namespace Z0
             => id.ToFileName(ext);
 
         FileName LegalFileName(PartId part, OpIdentity id, FileExtension ext)
-            => FileName.Define(string.Concat(part.Format(), Chars.Dot, LegalFileName(id,ext)));
+            => FileName.define(string.Concat(part.Format(), Chars.Dot, LegalFileName(id,ext)));
 
         FileName LegalFileName(ApiHostUri host, OpIdentity id, FileExtension ext)
-            => FileName.Define(string.Concat(host.Owner.Format(), Chars.Dot, host.Name, Chars.Dot, LegalFileName(id,ext)));
+            => FileName.define(string.Concat(host.Owner.Format(), Chars.Dot, host.Name, Chars.Dot, LegalFileName(id,ext)));
 
         FileName LegalFileName(ApiHostUri host, FileExtension ext)
-            => FileName.Define(string.Concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
+            => FileName.define(string.Concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
 
         FileName AsmFileName(OpIdentity id)
             => LegalFileName(id, Asm);

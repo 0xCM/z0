@@ -28,7 +28,7 @@ namespace Z0
         {
             Wf = context;
             Ct = ct;
-            TargetPath = Wf.IndexRoot + FileName.Define("bitmasks", FileExtensions.Csv);;
+            TargetPath = Wf.IndexRoot + FileName.define("bitmasks", FileExtensions.Csv);;
             Wf.Created(StepName, Ct);
         }
 

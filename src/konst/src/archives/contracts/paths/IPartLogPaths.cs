@@ -7,12 +7,12 @@ namespace Z0
     public interface IPartLogPaths : IPartFolderPaths, IPartLogExtensions
     {
         FilePath StatusLogPath(FolderPath root, PartId id)
-            => PartExeRoot(root) + FileName.Define(id.Format(), StatusLog);
+            => PartExeRoot(root) + FileName.define(id.Format(), StatusLog);
 
         FilePath ErrorLogPath(FolderPath root, PartId id)
-            => PartExeRoot(root) + FileName.Define(id.Format(), ErrorLog);
+            => PartExeRoot(root) + FileName.define(id.Format(), ErrorLog);
 
         FilePath StatusLogPath(FolderPath root, ApiHostUri host)
-            => LogDirPath(root) + FileName.Define(host.Name, StatusLog);
+            => LogDirPath(root) + FileName.define(host.Name, StatusLog);
     }
 }

@@ -58,7 +58,7 @@ namespace Z0
             => PeMetaReader.open(FilePath.Define(src));
 
         FilePath TargetPath(PartId part)
-            => TargetDir +  FileName.Define(part.Format(), "fields.csv");
+            => TargetDir +  FileName.define(part.Format(), "fields.csv");
 
         uint Emit(IPart part)
         {

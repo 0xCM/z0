@@ -44,8 +44,8 @@ namespace Z0.Asm
 
         public void check_math()
         {
-            var dSrc = ApiHostUri.FromHost(typeof(math));
-            var gSrc = ApiHostUri.FromHost(typeof(gmath));
+            var dSrc = ApiQuery.uri(typeof(math));
+            var gSrc = ApiQuery.uri(typeof(gmath));
             var id = PartId.GMath;
             var paths = AppPaths.ForApp(PartId.Control);
             var capture = AsmCheck.CaptureArchive(paths.AppCaptureRoot);

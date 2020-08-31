@@ -7,19 +7,19 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     using System.IO;
-    
+
     using static Konst;
     using static BinaryLogicKind;
 
     using BLK = BinaryLogicKind;
 
     public class t_truthtable : UnitTest<t_truthtable>
-    {                        
+    {
         BitLogix bitlogix => BitLogix.Service;
 
         public void unary_truth()
         {
-            using var dst = UnitWriter(FileName.Define(caller()));
+            using var dst = UnitWriter(FileName.define(caller()));
             var src = bitlogix.UnaryOpKinds;
             TabularTruth.save(src, dst);
             //TabularTruth.save(dst,ArityValue.Unary);
@@ -27,7 +27,7 @@ namespace Z0.Logix
 
         public void binary_truth()
         {
-            using var dst = UnitWriter(FileName.Define(caller()));
+            using var dst = UnitWriter(FileName.define(caller()));
             var src = bitlogix.BinaryOpKinds;
             TabularTruth.save(src, dst);
             //TabularTruth.save(dst,ArityValue.Binary);
@@ -35,7 +35,7 @@ namespace Z0.Logix
 
         public void ternary_truth()
         {
-            using var dst = UnitWriter(FileName.Define(caller()));
+            using var dst = UnitWriter(FileName.define(caller()));
             var src = bitlogix.TernaryOpKinds;
             TabularTruth.save(src, dst);
             //TabularTruth.save(dst, ArityValue.Ternary);
@@ -135,7 +135,7 @@ namespace Z0.Logix
             => check_typed_truth(CNonImpl);
 
         void check_typed_truth(BinaryLogicKind op)
-        {               
+        {
             const byte on = 1;
             const byte off = 0;
 
@@ -147,7 +147,7 @@ namespace Z0.Logix
             var sig = TabularTruth.vector(n4, op);
             Claim.eq(sig,dst);
         }
-        
+
         void check_truth(BinaryLogicKind op)
         {
             var dst = BitVector.alloc(n4);
@@ -163,7 +163,7 @@ namespace Z0.Logix
         {
             Notify(TabularTruth.vector(n16, BLK.And).Format());
             Notify(TabularTruth.vector(n16, BLK.Or).Format());
-            Notify(TabularTruth.vector(n16,BLK.Nand).Format());        
+            Notify(TabularTruth.vector(n16,BLK.Nand).Format());
         }
     }
 }

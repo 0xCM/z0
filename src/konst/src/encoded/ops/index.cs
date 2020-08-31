@@ -13,9 +13,6 @@ namespace Z0
 
     partial struct Encoded
     {
-        [Op]
-        public static EncodedPartBuilder builder()
-            => new EncodedPartBuilder();
 
         [MethodImpl(Inline), Op]
         public static IdentifiedCodeIndex index(ApiHostUri host, IdentifiedCode[] code)

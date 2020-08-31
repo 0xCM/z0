@@ -216,7 +216,7 @@ namespace Z0
             var id = part.Id();
             using var step = new CapturePart(Wf);
             var captured = step.Capture(part);
-            var dst = Wf.AppPaths.AppCaptureRoot + FileName.Define(id.Format(), FileExtensions.Asm);
+            var dst = Wf.AppPaths.AppCaptureRoot + FileName.define(id.Format(), FileExtensions.Asm);
             using var writer = dst.Writer();
             var count = captured.Length;
             if(count != 0)

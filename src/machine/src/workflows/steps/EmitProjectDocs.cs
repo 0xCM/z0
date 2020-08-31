@@ -63,7 +63,7 @@ namespace Z0
             var dst = new Dictionary<PartId, Dictionary<string,ProjectDocRecord>>();
             foreach(var part in src.Keys)
             {
-                var path = docs + FileName.Define(part.Format(), FileExtensions.Csv);
+                var path = docs + FileName.define(part.Format(), FileExtensions.Csv);
                 var partDocs = new Dictionary<string, ProjectDocRecord>();
                 dst[part] = partDocs;
                 using var writer = path.Writer();

@@ -34,7 +34,7 @@ namespace Z0
 
         public void Generate(byte min, byte max, FolderPath dst)
         {
-            var path = dst + FileName.Define($"HexMachine{Identifier(min)}", FileExtensions.Cs);
+            var path = dst + FileName.define($"HexMachine{Identifier(min)}", FileExtensions.Cs);
             using var writer = path.Writer();
             Generate(min, max, writer);
         }

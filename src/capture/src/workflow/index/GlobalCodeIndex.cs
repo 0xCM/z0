@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct EncodedPartIndex
+    public readonly struct GlobalCodeIndex
     {
         readonly EncodedMemoryIndex Memories;
 
@@ -19,7 +19,7 @@ namespace Z0
 
         public readonly PartId[] Parts;
 
-        public EncodedPartIndex(PartId[] parts, EncodedMemoryIndex members, UriLocationIndex memuri, HostedCodeIndex hostcode)
+        public GlobalCodeIndex(PartId[] parts, EncodedMemoryIndex members, UriLocationIndex memuri, HostedCodeIndex hostcode)
         {
             Parts = parts;
             Memories = members;

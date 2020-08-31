@@ -17,6 +17,121 @@ namespace Z0
     public readonly struct ApiQuery
     {
         /// <summary>
+        /// Determines the api host that owns the file, if any
+        /// </summary>
+        /// <param name="src">The source file</param>
+        [MethodImpl(Inline)]
+        public static Option<ApiHostUri> host(FilePath src)
+            => host(src.FileName);
+
+        /// <summary>
+        /// Determines the api host that owns the file, if any
+        /// </summary>
+        /// <param name="src">The source file</param>
+        public static Option<ApiHostUri> host(FileName src)
+        {
+            var components = src.WithoutExtension.Name.Split(Chars.Dot);
+            if(components.Length == 2)
+            {
+                var owner = Z0.Enums.Parse(components[0], PartId.None);
+                if(owner.IsSome())
+                    return z.some(new ApiHostUri(owner, components[1]));
+            }
+            return z.none<ApiHostUri>();
+        }
+
+        /// <summary>
+        /// Collects all resource accessors defined by a specified assembly
+        /// </summary>
+        /// <param name="src">The source assembly</param>
+        [Op]
+        public static ResDeclarationIndex declarationIndex(Assembly src)
+            => new ResDeclarationIndex(src, declarations(src));
+
+        [Op]
+        public static ResDeclarationIndex declarationIndex(FilePath src)
+            => declarationIndex(Assembly.LoadFrom(src.Name));
+
+        /// <summary>
+        /// Queries the source assemblies for ByteSpan property getters
+        /// </summary>
+        /// <param name="src">The assemblies to query</param>
+        public static ResourceAccessors resources(Assembly[] src)
+            => resources(src.SelectMany(x => x.GetTypes()));
+
+        /// <summary>
+        /// Queries the source assembly for ByteSpan property getters
+        /// </summary>
+        /// <param name="src">The assembly to query</param>
+        public static ResourceAccessors resources(Assembly src)
+            => resources(src.GetTypes());
+
+        /// <summary>
+        /// Queries the source types for ByteSpan property getters
+        /// </summary>
+        /// <param name="src">The types to query</param>
+        public static ResourceAccessors resources(Type[] src)
+            => src.Where(t => !t.IsInterface).SelectMany(ApiQuery.resources).ToArray();
+
+        /// <summary>
+        /// Queries the source type for ByteSpan property getters
+        /// </summary>
+        /// <param name="src">The type to query</param>
+        public static ResourceAccessor[] resources(Type src)
+            => src.StaticProperties()
+                 .Ignore()
+                  .WithPropertyType(ResAccessorTypes)
+                  .Select(p => p.GetGetMethod(true))
+                  .Where(m  => m != null)
+                  .Concrete()
+                  .Select(x => new ResourceAccessor(ApiQuery.uri(src), x, FormatAccessor(x.ReturnType)));
+
+
+        /// <summary>
+        /// Collects all resource accessors defined by a specified assembly
+        /// </summary>
+        /// <param name="src">The source assembly</param>
+        [Op]
+        public static ResourceDeclarations[] declarations(params ResourceAccessor[] src)
+            => (from a in src
+                let t = a.Member.DeclaringType
+                group a by t).Map(x => new ResourceDeclarations(x.Key, x.ToArray()));
+
+
+        /// <summary>
+        /// Collects all resource accessors defined by a specified assembly
+        /// </summary>
+        /// <param name="src">The source assembly</param>
+        [Op]
+        public static ResourceDeclarations[] declarations(Assembly src)
+            => (from a in ApiQuery.resources(src).Accessors
+                let t = a.Member.DeclaringType
+                group a by t).Map(x => new ResourceDeclarations(x.Key, x.ToArray()));
+
+
+        static Type[] ResAccessorTypes => new Type[]{typeof(ReadOnlySpan<byte>), typeof(ReadOnlySpan<char>)};
+
+        static ResourceFormat FormatAccessor(Type match)
+        {
+            ref readonly var src = ref first(span(ResAccessorTypes));
+            var kind = ResourceFormat.None;
+            if(skip(src,0).Equals(match))
+                kind = ResourceFormat.ByteSpan;
+            else if(skip(src,1).Equals(match))
+                kind = ResourceFormat.CharSpan;
+            return kind;
+        }
+
+        [MethodImpl(Inline)]
+        public static ApiHostUri uri(Type host)
+        {
+            var tag = host.Tag<ApiHostAttribute>();
+            var name = ifblank(tag.MapValueOrDefault(x => x.HostName), host.Name);
+            var owner = host.Assembly.Id();
+            return new ApiHostUri(owner, name);
+        }
+
+        /// <summary>
         /// Attempts to parse a part identifier; if unsuccessful, returns none
         /// </summary>
         /// <param name="name">The literal name</param>
@@ -179,7 +294,7 @@ namespace Z0
         {
             var attrib = t.Tag<ApiHostAttribute>();
             var name =  text.ifblank(attrib.MapValueOrDefault(a => a.HostName, t.Name),t.Name).ToLower();
-            var uri = ApiHostUri.Define(part, name);
+            var uri = new ApiHostUri(part, name);
             return new ApiHost(t, name, part, uri);
         }
 
@@ -253,7 +368,7 @@ namespace Z0
                 ref readonly var type = ref skip(types,i);
                 var attrib = type.Tag<ApiDataTypeAttribute>();
                 var name =  text.ifblank(attrib.MapValueOrDefault(a => a.Name, type.Name),type.Name).ToLower();
-                var uri = ApiHostUri.Define(part, name);
+                var uri = new ApiHostUri(part, name);
                 seek(dst,i) = new ApiDataType(type, name, part, uri);
             }
             return buffer;

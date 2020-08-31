@@ -10,9 +10,9 @@ namespace Z0
             => root + TestFolderName;
 
         FilePath TestMessages(FolderPath root,  PartId id)
-            => TestRootPath(root) + FileName.Define(id.Format(), StatusLog);
+            => TestRootPath(root) + FileName.define(id.Format(), StatusLog);
 
         FilePath TestErrors(FolderPath root,  PartId id)
-            => TestRootPath(root) + FileName.Define(id.Format(), ErrorLog);
+            => TestRootPath(root) + FileName.define(id.Format(), ErrorLog);
     }
 }

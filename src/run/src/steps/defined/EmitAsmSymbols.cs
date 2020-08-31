@@ -44,7 +44,7 @@ namespace Z0
         void EmitMnemonics()
         {
             const string Pattern = "{0,-20} | {1,-20} | {2,-20} | {3}";
-            var dst = Wf.AppDataRoot + FolderName.Define("symbols") + FileName.Define("mnemonics", FileExtensions.Csv);
+            var dst = Wf.AppDataRoot + FolderName.Define("symbols") + FileName.define("mnemonics", FileExtensions.Csv);
 
             var symbols = asm.symbols();
             var src = symbols.Mnemonics.View;

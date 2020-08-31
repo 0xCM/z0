@@ -33,13 +33,13 @@ namespace Z0
         {
             var identifier = src.identifier;
             if(TechLables.Contains(src.tech))
-                return FileName.Define("_" + src.tech, kind);
+                return FileName.define("_" + src.tech, kind);
             else if(src.tech == "AVX-512/KNC")
-                return FileName.Define("_AVX-512-KNC", kind);
+                return FileName.define("_AVX-512-KNC", kind);
             else if(src.instructions.Count == 0)
-                return FileName.Define("_Other", kind);
+                return FileName.define("_Other", kind);
             else
-                return FileName.Define($"{identifier[0]}", kind);
+                return FileName.define($"{identifier[0]}", kind);
         }
 
         static string[] lines(string src, uint width)

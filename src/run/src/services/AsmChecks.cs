@@ -41,13 +41,13 @@ namespace Z0.Asm
 
         protected IArchiveWriter HexWriter([Caller] string caller = null)
         {
-            var dstPath = CodeArchive.HexPath(FileName.Define($"{caller}", FileExtensions.HexLine));
+            var dstPath = CodeArchive.HexPath(FileName.define($"{caller}", FileExtensions.HexLine));
             return Archives.writer<MemberCodeWriter>(dstPath);
         }
 
         protected AsmWriter AsmWriter([Caller] string caller = null)
         {
-            var dst = CodeArchive.AsmPath(FileName.Define($"{caller}", FileExtensions.Asm));
+            var dst = CodeArchive.AsmPath(FileName.define($"{caller}", FileExtensions.Asm));
             var format = AsmFormatSpec.WithFunctionTimestamp;
             return AsmCore.Services.AsmWriter(dst,format);
         }

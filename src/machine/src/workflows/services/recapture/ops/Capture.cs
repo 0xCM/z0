@@ -21,14 +21,14 @@ namespace Z0
         {
             var resfile = z.insist(ResBytesCompiled);
             var captured = Capture(resfile, ResBytesUncompiled);
-            var csvfile = ResIndexDir + FileName.Define("z0.res.bytes", FileExtensions.Csv);
+            var csvfile = ResIndexDir + FileName.define("z0.res.bytes", FileExtensions.Csv);
             SaveIndex(captured, csvfile);
         }
 
         public CapturedAccessor[] Capture(FilePath src, FolderPath dst)
         {
             var resdll = Assembly.LoadFrom(src.Name);
-            var indices = span(Resources.declarations(resdll));
+            var indices = span(ApiQuery.declarations(resdll));
             var count = indices.Length;
 
             term.magenta($"Capturing {count} host resource sets from {src} -> {dst}");

@@ -41,7 +41,7 @@ namespace Z0
             Wf = wf;
             Part = part;
             Ct = ct;
-            TargetPath = dir + FileName.Define(part.Id.Format(), ExtName(sk));
+            TargetPath = dir + FileName.define(part.Id.Format(), ExtName(sk));
             StringKind = sk;
             EmissionCount = 0;
             Wf.Created(StepId);

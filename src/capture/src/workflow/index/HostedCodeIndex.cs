@@ -6,49 +6,42 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Collections.Generic;
 
     using static Konst;
 
-    using KVP = KeyValuePairs<MemoryAddress,X86ApiCode>;
+    using KVP = System.Collections.Generic.Dictionary<ApiHostUri, EncodedHost>;
 
-    public readonly struct EncodedMemoryIndex
+    public readonly struct HostedCodeIndex
     {
         public readonly PartId[] Parts;
 
         readonly KVP Data;
 
         [MethodImpl(Inline)]
-        internal EncodedMemoryIndex(PartId[] parts, KVP src)
+        public HostedCodeIndex(PartId[] parts, KVP src)
         {
-            Data = src;
             Parts = parts;
+            Data = src;
         }
 
-        public MemoryAddress[] Locations
-        {
-            [MethodImpl(Inline)]
-            get => Data.Keys;
-        }
-
-        public X86ApiCode[] Encoded
-        {
-            [MethodImpl(Inline)]
-            get => Data.Values;
-        }
-
-        public int Count
+        public int HostCount
         {
             [MethodImpl(Inline)]
             get => Data.Count;
         }
 
-        public X86ApiCode this[MemoryAddress src]
+        public ApiHostUri[] Hosts
         {
             [MethodImpl(Inline)]
-            get => Data[src];
+            get => Data.Keys.ToArray();
         }
 
-        public static EncodedMemoryIndex Empty
-            => new EncodedMemoryIndex(sys.empty<PartId>(), KVP.Empty);
+        public TableSpan<X86ApiCode> this[ApiHostUri src]
+        {
+            [MethodImpl(Inline)]
+            get => Data[src].Code;
+        }
     }
 }

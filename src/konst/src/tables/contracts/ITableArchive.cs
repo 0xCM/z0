@@ -41,7 +41,7 @@ namespace Z0
                 select Dataset(p)).FirstOrDefault();
 
         ParseResult<TextDoc> Dataset(string name)
-            => Dataset(ArchiveRoot + FileName.Define(name, FileExtensions.Csv));
+            => Dataset(ArchiveRoot + FileName.define(name, FileExtensions.Csv));
 
         IEnumerable<FilePath> DatasetPaths(FolderName subject = default)
             => (ArchiveRoot + (subject ?? FolderName.Define("asm"))).Files(FileExtensions.Csv, true);

@@ -7,6 +7,6 @@ namespace Z0
     partial class XTend
     {
         public static FileName ToFileName(this OpIdentity src, FileExtension ext)
-            => FileName.Define(LegalIdentityBuilder.file(src), ext);        
+            => FileName.define(LegalIdentityBuilder.file(src), ext);
     }
 }

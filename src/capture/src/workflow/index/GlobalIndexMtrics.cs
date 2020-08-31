@@ -11,9 +11,9 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Collects statistics of encoded data known to a <see cref='EncodedPartIndex'/>
+    /// Collects statistics of encoded data known to a <see cref='GlobalCodeIndex'/>
     /// </summary>
-    public struct EncodedPartStats
+    public struct GlobalIndexMetrics
     {
         public uint PartCount;
 
@@ -30,9 +30,9 @@ namespace Z0
         public string Format()
             => text.format("{0}", new {PartCount, HostCount, AddressCount, FunctionCount, IdentityCount, ByteCount});
 
-        public static EncodedPartStats from(EncodedPartIndex src)
+        public static GlobalIndexMetrics from(GlobalCodeIndex src)
         {
-            var stats = default(EncodedPartStats);
+            var stats = default(GlobalIndexMetrics);
             stats.PartCount = (uint)src.Parts.Length;
             stats.HostCount = (uint)src.Hosts.Length;
             stats.AddressCount =(uint)src.Locations.Length;

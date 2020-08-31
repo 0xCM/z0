@@ -11,27 +11,16 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static BuildGlobalIndexStep;
 
-    public struct PartBuilderStatus : ITextual
+
+    [Step(typeof(BuildGlobalCodeIndex))]
+    public readonly struct BuildGlobalIndexStep : IWfStep<BuildGlobalIndexStep>
     {
-        public PartId[] Parts;
-
-        public ApiHostUri[] Hosts;
-
-        public MemoryAddress[] Addresses;
-
-        public uint MemberCount;
-
-        public EncodedMemoryIndex Encoded;
-
-        public string Format()
-            => text.format(RenderPatterns.PSx5, Parts.Length, Hosts.Length, MemberCount, Addresses.Length, Encoded.Count);
-
-        public override string ToString()
-            => Format();
+        public static WfStepId StepId => AB.step<BuildGlobalIndexStep>();
     }
 
-    public class EncodedPartBuilder
+    public class BuildGlobalCodeIndex
     {
         readonly Dictionary<MemoryAddress,X86ApiCode> CodeAddress;
 
@@ -39,16 +28,19 @@ namespace Z0
 
         readonly Dictionary<OpUri,X86ApiCode> Locations;
 
-        internal EncodedPartBuilder()
+        readonly IWfContext Wf;
+
+        public BuildGlobalCodeIndex(IWfContext wf)
         {
+            Wf = wf;
             CodeAddress = dict<MemoryAddress,X86ApiCode>();
             UriAddress = dict<MemoryAddress,OpUri>();
             Locations = dict<OpUri,X86ApiCode>();
         }
 
-        public PartBuilderStatus Status()
+        public GlobalIndexStatus Status()
         {
-            var dst = default(PartBuilderStatus);
+            var dst = default(GlobalIndexStatus);
             dst.Parts = Parts;
             dst.Hosts = Hosts;
             dst.Addresses = Addresses;
@@ -75,7 +67,7 @@ namespace Z0
         public KeyValuePairs<MemoryAddress,OpUri> Located
             => UriAddress.ToKVPairs();
 
-        public EncodedPartIndex Freeze()
+        public GlobalCodeIndex Freeze()
         {
             var memories = Encoded;
             var locations = Located;
@@ -85,7 +77,7 @@ namespace Z0
                 .GroupBy(g => g.Host)
                 .Select(x => (new EncodedHost(x.Key, x.Select(y => y.Code).ToArray()))).Array();
 
-            return new EncodedPartIndex(parts,
+            return new GlobalCodeIndex(parts,
                    new EncodedMemoryIndex(parts, memories),
                    new UriLocationIndex(parts, locations),
                    new HostedCodeIndex(parts, code.Select(x => (x.Host, x)).ToDictionary()));
@@ -93,5 +85,23 @@ namespace Z0
 
         public bool Include(in X86ApiCode src)
             => CodeAddress.TryAdd(src.Address, src);
+
+
+        public void Include(ReadOnlySpan<MemberParseRecord> src)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                include(skip(src,i));
+        }
+
+         void include(in MemberParseRecord src)
+        {
+            if(src.Address.IsEmpty)
+                return;
+
+            var code = new X86ApiCode(src.Uri, src.Data);
+            if(!Include(code))
+                Wf.Warn(StepId, $"Duplicate | {src.Uri.Format()}");
+        }
     }
 }

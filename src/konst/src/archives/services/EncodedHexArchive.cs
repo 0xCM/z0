@@ -40,14 +40,14 @@ namespace Z0
 
         public static IdentifiedCode[] read(FolderPath root, ApiHostUri host)
         {
-            var hfn = ApiHostUri.HostFileName(host.Owner, host.Name, FileExtensions.HexLine);
+            var hfn = FileName.define(host.Owner, host.Name, FileExtensions.HexLine);
             var path = files(root).Where(f => f.FileName == hfn).FirstOrDefault(FilePath.Empty);
             return read(path);
         }
 
         public static IdentifiedCodeIndex index(FilePath src, IMultiSink status)
         {
-            var uri = ApiHostUri.Parse(src.FileName);
+            var uri = ApiUriParser.host(src.FileName);
             if(uri.Failed || uri.Value.IsEmpty)
             {
                 status.Deposit(AppErrors.define(nameof(EncodedHexArchive), uri.Reason));
@@ -64,7 +64,7 @@ namespace Z0
 
         public IEnumerable<IdentifiedCode> Read(ApiHostUri host)
         {
-            var hfn = ApiHostUri.HostFileName(host.Owner, host.Name, FileExtensions.HexLine);
+            var hfn = FileName.define(host.Owner, host.Name, FileExtensions.HexLine);
             var path = Files(host.Owner).Where(f => f.FileName == hfn).FirstOrDefault(FilePath.Empty);
             return read(ArchiveRoot,host);
         }
@@ -135,6 +135,6 @@ namespace Z0
         /// </summary>
         /// <param name="id">The identifying moniker</param>
         public IEnumerable<IdentifiedCode> Read(OpIdentity id)
-            => Read(ArchiveRoot + FileName.Define(id, FileExtensions.HexLine));
+            => Read(ArchiveRoot + FileName.define(id, FileExtensions.HexLine));
     }
 }

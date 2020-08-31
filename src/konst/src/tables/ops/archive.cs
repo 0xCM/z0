@@ -27,7 +27,7 @@ namespace Z0
             where M : struct, IDataModel
             where K : unmanaged, Enum
         {
-            var path = dst.ArchiveRoot + FolderName.Define(m.Name) + FileName.Define(typeof(T).Name);
+            var path = dst.ArchiveRoot + FolderName.Define(m.Name) + FileName.define(typeof(T).Name);
             return (src, new ArchivedTable<T>(path));
         }
 
@@ -36,7 +36,7 @@ namespace Z0
             where M : struct, IDataModel
             where K : unmanaged, Enum
         {
-            var path = dst.ArchiveRoot + FolderName.Define(m.Name) + FileName.Define(typeof(T).Name);
+            var path = dst.ArchiveRoot + FolderName.Define(m.Name) + FileName.define(typeof(T).Name);
             var records = z.span(src);
             var count = records.Length;
 

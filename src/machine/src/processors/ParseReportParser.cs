@@ -39,7 +39,7 @@ namespace Z0
                 var address = addressParser.Parse(fields[j++], MemoryAddress.Empty);
                 var len = numericParser.Parse(fields[j++]);
                 var term = Enums.Parse(fields[j++], ExtractTermCode.None);
-                var uri = OpUriParser.Service.Parse(fields[j++]);
+                var uri = ApiUriParser.Service.Parse(fields[j++]);
                 var sig = fields[j++];
                 var data = new X86Code(address, dataParser.ParseData(fields[j++], sys.empty<byte>()));
                 seek(dst,i) = new R(

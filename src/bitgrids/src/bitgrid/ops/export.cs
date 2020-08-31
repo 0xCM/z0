@@ -171,7 +171,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => FileName.Define($"{label}_{sigtext(w,m,n,t)}","grid");
+                => FileName.define($"{label}_{sigtext(w,m,n,t)}","grid");
 
         /// <summary>
         /// Creates a grid writer predicated on type parameters

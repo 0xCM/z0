@@ -32,5 +32,21 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static FileName file(PathPart name, string ext)
             => new FileName(name, FS.ext(ext));
+
+        [MethodImpl(Inline)]
+        public static FileName file(PartId owner, string hostname, FileExtension ext)
+            => file(text.concat(owner.Format(), Chars.Dot, hostname), ext);
+
+        [MethodImpl(Inline)]
+        public static FileName file(string name)
+            => new FileName(name);
+
+        [MethodImpl(Inline)]
+        public static FileName file(string name, string x)
+            => new FileName(name, ext(x));
+
+        [MethodImpl(Inline)]
+        public static FileName file(string name, FileExtension x)
+            => new FileName(name, ext(x.Name));
     }
 }

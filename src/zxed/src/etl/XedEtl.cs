@@ -11,7 +11,6 @@ namespace Z0
     using System.Linq;
 
     using Z0.XedWf;
-    using Z0.Data;
 
     using static z;
     using static Konst;
@@ -103,7 +102,7 @@ namespace Z0
         {
             var sorted = (src as IEnumerable<XedPattern>).OrderBy(x => x.Class).ThenBy(x => x.Category).ThenBy(x => x.Extension).ThenBy(x => x.IsaSet).Array();
             var records = sorted.Map(p => p.Summary());
-            Pub.Deposit<F,R>(records, FileName.Define("summary", FileExtensions.Csv));
+            Pub.Deposit<F,R>(records, FileName.define("summary", FileExtensions.Csv));
             return records;
         }
 
@@ -118,7 +117,7 @@ namespace Z0
             foreach(var selected in Config.Extensions)
                 Pub.Deposit<F,R>(Filter(src, selected),
                     Config.ExtensionFolder,
-                    FileName.Define(Xed.XedConst.Name(selected), Config.DataFileExt)
+                    FileName.define(Xed.XedConst.Name(selected), Config.DataFileExt)
                     );
         }
 
@@ -127,20 +126,20 @@ namespace Z0
             foreach(var selected in Config.Categories)
                 Pub.Deposit<F,R>(Filter(src, selected),
                     Config.CategoryFolder,
-                    FileName.Define(Xed.XedConst.Name(selected), Config.DataFileExt)
+                    FileName.define(Xed.XedConst.Name(selected), Config.DataFileExt)
                     );
         }
 
         void SaveMnemonics(XedPatternSummary[] src)
         {
             var upper = src.Select(s => s.Class).Distinct().OrderBy(x => x).ToArray();
-            var dst = Pub.ArchiveRoot + FileName.Define("mnemonics.csv");
+            var dst = Pub.ArchiveRoot + FileName.define("mnemonics.csv");
             dst.Overwrite(upper);
         }
 
         void SaveFunctions(XedFunctionData[] src)
         {
-            var path = Pub.ArchiveRoot + FileName.Define("rules.txt");
+            var path = Pub.ArchiveRoot + FileName.define("rules.txt");
             using var writer = path.Writer();
             for(var i=0; i<src.Length; i++)
             {

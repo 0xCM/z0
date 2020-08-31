@@ -23,8 +23,8 @@ namespace Z0
         /// <param name="n">The length representative</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]   
-        public static NatSpan<N,T> natspan<N,T>(in Block256<T> src, N n = default)    
+        [MethodImpl(Inline)]
+        public static NatSpan<N,T> natspan<N,T>(in Block256<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => NatSpan.load(src.Data,n);
@@ -44,7 +44,7 @@ namespace Z0
                 dst.AsSpan().Fill(fill.Value);
             return dst;
         }
-    
+
         /// <summary>
         /// Allocates a square matrix of natual dimension
         /// </summary>
@@ -70,7 +70,7 @@ namespace Z0
         public static Matrix256<N,T> blockalloc<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Blocks.rectangle<T>(n256, value(n), value(n)); 
+                => Blocks.rectangle<T>(n256, value(n), value(n));
 
         /// <summary>
         /// Allocates a blocked matrix of natual dimensions
@@ -86,7 +86,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Blocks.rectangle<T>(n256, value(m), value(n)); 
+                => Blocks.rectangle<T>(n256, value(m), value(n));
 
         /// <summary>
         /// Allocates a matrix of natual dimensions
@@ -103,7 +103,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new Matrix<M, N, T>(array<T>((int)(value<M>() * value<N>()),fill));
-         
+
         /// <summary>
         /// Loads a matrix of natural dimensions from an array
         /// </summary>
@@ -212,15 +212,15 @@ namespace Z0
         public static FileName filename<M,N,T>(int? index = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged    
+            where T : unmanaged
         {
             var dim = $"{TypeNats.value<M>()}x{TypeNats.value<N>()}";
             var kind = typeof(T).NumericKind().Format();
             var @base = $"mat_{kind}[{dim}]";
             var suffix  = index.MapValueOrDefault(i => Chars.Dot + index.ToString().PadLeft(3,'0'), EmptyString);
-            return FileName.Define($"{@base}{suffix}",FileExtensions.Csv);                
+            return FileName.define($"{@base}{suffix}",FileExtensions.Csv);
         }
-        
+
         /// <summary>
         /// Writes a matrix to a delimited file
         /// </summary>
@@ -248,7 +248,7 @@ namespace Z0
                         dst.Write(Chars.Space);
 
                     dst.Write($"Col{i}".PadRight(width, Chars.Space));
-                    
+
                     if(i != cols - 1)
                         dst.Write(sep);
                 }
@@ -270,7 +270,7 @@ namespace Z0
         public static Matrix256<M,N,T> blockread<M,N,T>(FilePath src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged    
+            where T : unmanaged
         {
             var doc = TextDocParser.parse(src).Require();
             var m = (int)value<M>();
@@ -322,7 +322,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged    
+            where T : unmanaged
         {
             var m = (int)value<M>();
             var n = (int)value<N>();

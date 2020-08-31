@@ -216,11 +216,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         protected FilePath CasePath(FileExtension ext, [CallerMemberName] string caller = null)
-            => UnitPath(FileName.Define(caller,  ext));
+            => UnitPath(FileName.define(caller,  ext));
 
         [MethodImpl(Inline)]
         protected FilePath CasePath(string CaseName, FileExtension ext = null)
-            => UnitPath(FileName.Define(CaseName, ext ?? FileExtensions.Csv));
+            => UnitPath(FileName.define(CaseName, ext ?? FileExtensions.Csv));
 
         protected StreamWriter CaseWriter(FileExtension ext, [Caller] string caller = null)
             => CasePath(caller, ext).Writer();

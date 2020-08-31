@@ -37,7 +37,7 @@ namespace Z0
         {
             var fields = Refs.fields(src.Types);
             if(fields.Length != 0)
-                Emit(fields, Target + FileName.Define(src.Part.Format(), FileExtensions.Csv));
+                Emit(fields, Target + FileName.define(src.Part.Format(), FileExtensions.Csv));
         }
 
         public void Run()

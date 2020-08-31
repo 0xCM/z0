@@ -79,7 +79,7 @@ namespace Z0
                 dst.Address = MemoryAddressParser.succeed(fields[index++]);
                 dst.Length = NumericParser.succeed<int>(fields[index++]);
                 dst.TermCode = Enums.Parse(fields[index++], ExtractTermCode.None);
-                dst.Uri = OpUriParser.Service.Parse(fields[index++]).Require();
+                dst.Uri = ApiUriParser.Service.Parse(fields[index++]).Require();
                 dst.OpSig = fields[index++];
                 dst.Data = new X86Code(dst.Address, Parsers.hex(true).ParseData(fields[index++], sys.empty<byte>()));
                 return ParseResult.Success(src, dst);

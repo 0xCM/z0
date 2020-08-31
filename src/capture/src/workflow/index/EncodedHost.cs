@@ -6,19 +6,22 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Collections.Generic;
 
     using static Konst;
 
-    partial struct Flow
+    public readonly struct EncodedHost
     {
-        [Op]
-        public static ApiHostUri uri(Type src)
+        public readonly ApiHostUri Host;
+
+        public readonly TableSpan<X86ApiCode> Code;
+
+        [MethodImpl(Inline)]
+        public EncodedHost(ApiHostUri host, X86ApiCode[] code)
         {
-            var typename = src.Name;
-            var partName = typename.LeftOf('_');
-            var part = PartIdParser.single(partName);
-            var host = text.ifblank(typename.RightOf('_'), "anonymous");
-            return new ApiHostUri(part, host);
+            Host = host;
+            Code = code;
         }
     }
 }

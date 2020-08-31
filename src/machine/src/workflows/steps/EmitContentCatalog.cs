@@ -27,7 +27,7 @@ namespace Z0
         {
             Wf = wf;
             Ct = ct;
-            TargetPath =  Wf.IndexRoot + FileName.Define("catalog", FileExtensions.Csv);
+            TargetPath =  Wf.IndexRoot + FileName.define("catalog", FileExtensions.Csv);
             EmissionCount = 0;
             Wf.Created(StepName, Ct);
         }

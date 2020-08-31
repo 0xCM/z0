@@ -54,7 +54,7 @@ namespace Z0
         {
             Wf = wf;
             var part = ApiQuery.part(src).Require();
-            Df = (part, wf.AppDataRoot + FileName.Define(part.Id.Format(), "enums.csv"));
+            Df = (part, wf.AppDataRoot + FileName.define(part.Id.Format(), "enums.csv"));
             Emitted = sys.empty<EnumLiteralDetail>();
             Wf.Created(StepId);
         }

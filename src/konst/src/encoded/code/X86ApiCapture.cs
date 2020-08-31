@@ -35,7 +35,7 @@ namespace Z0
             Parsed = parsed;
             Method = method;
             z.insist(extracted.Address, parsed.Address);
-            OpUri = OpUri.hex(ApiHostUri.FromHost(method.DeclaringType), method.Name, id);
+            OpUri = OpUri.hex(ApiQuery.uri(method.DeclaringType), method.Name, id);
             TermCode = term;
             Cil = FunctionDynamic.cil(method);
         }

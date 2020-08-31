@@ -46,7 +46,7 @@ namespace Z0
             {
                 try
                 {
-                    EmissionCount += Emit(part, TargetDir + FileName.Define(part.Id.Format(), DatasetExt));
+                    EmissionCount += Emit(part, TargetDir + FileName.define(part.Id.Format(), DatasetExt));
                 }
                 catch(Exception e)
                 {

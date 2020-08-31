@@ -97,7 +97,7 @@ namespace Z0
             Wf.Finished(StepName, Ct);
         }
 
-        Span<PartAsmFx> DecodeParts(EncodedPartIndex src)
+        Span<PartAsmFx> DecodeParts(GlobalCodeIndex src)
         {
             Wf.Status(StepId, text.format("Decoding {0} entries from {1} parts", src.EntryCount, src.Parts.Length));
 
@@ -198,7 +198,7 @@ namespace Z0
             return new HostAsmFx(hcs.Host, instructions.ToArray());
         }
 
-        void Process(EncodedPartIndex encoded)
+        void Process(GlobalCodeIndex encoded)
         {
             try
             {
@@ -236,7 +236,7 @@ namespace Z0
             var count = src.Count;
             var records = span(src.Sequenced);
             var dir = Wf.AppPaths.ResourceRoot + FolderName.Define("tables") + FolderName.Define("asm");
-            var dst = dir + FileName.Define(src.Key.ToString(), FileExtensions.Csv);
+            var dst = dir + FileName.define(src.Key.ToString(), FileExtensions.Csv);
             using var writer = dst.Writer();
             writer.WriteLine(AsmRecord.FormatHeader());
             for(var i=0; i<count; i++)

@@ -166,10 +166,10 @@ namespace Z0.Asm
         }
 
         static FilePath CasePath(string name)
-            => ShellPaths.Default.AppDataRoot + FileName.Define(name);
+            => ShellPaths.Default.AppDataRoot + FileName.define(name);
 
         static FilePath CasePath(string name, FileExtension ext)
-            => ShellPaths.Default.AppDataRoot + FileName.Define(name, ext);
+            => ShellPaths.Default.AppDataRoot + FileName.define(name, ext);
 
         static StreamWriter CaseWriter(string name, FileExtension ext)
             =>  CasePath(name, ext).Writer();

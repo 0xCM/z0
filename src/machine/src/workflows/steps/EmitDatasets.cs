@@ -203,7 +203,7 @@ namespace Z0
 
         void Run(RecaptureStep kind)
         {
-            var resources = Resources.code(Assembly.LoadFrom(Wf.ResPack.Name));
+            var resources = ApiQuery.declarationIndex(Assembly.LoadFrom(Wf.ResPack.Name));
             using var step = new Recapture(asm(Wf.ContextRoot));
             step.CaptureResBytes();
         }

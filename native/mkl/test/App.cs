@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -27,14 +27,14 @@ namespace Z0
             var methods = typeof(LAPACK).DeclaredMethods().Select(x => x.Name).ToReadOnlyList();
             var sb = text.build();
             methods.Iter(m => sb.AppendLine(m));
-                        
-            WriteText(sb.ToString(), FileName.Define("lapacke.list"));
+
+            WriteText(sb.ToString(), FileName.define("lapacke.list"));
         }
     }
 
     public class App : TestApp<App>
-    {            
-        
+    {
+
         public static void Main(params string[] args)
             => Run(args);
     }

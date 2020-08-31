@@ -20,7 +20,7 @@ namespace Z0
 
         readonly PartFiles SourceFiles;
 
-        public EncodedPartIndex EncodedIndex;
+        public GlobalCodeIndex EncodedIndex;
 
         public IndexEncodedParts(IWfContext wf, PartFiles src, CorrelationToken ct)
         {
@@ -36,6 +36,11 @@ namespace Z0
             Wf.Finished(StepId, Ct);
         }
 
+
+        [Op]
+        public BuildGlobalCodeIndex epb()
+            => new BuildGlobalCodeIndex(Wf);
+
         public void Run()
         {
             Wf.Running(StepId);
@@ -44,7 +49,7 @@ namespace Z0
             {
                 var files = span(SourceFiles.ParseFiles);
                 var count = files.Length;
-                var builder = Encoded.builder();
+                var builder = epb();
 
                 Wf.Status(StepId, text.format("Indexing {0} datasets",count));
 
@@ -77,14 +82,14 @@ namespace Z0
             Wf.Ran(StepId);
         }
 
-        void Index(ReadOnlySpan<MemberParseRecord> src, EncodedPartBuilder dst)
+        void Index(ReadOnlySpan<MemberParseRecord> src, BuildGlobalCodeIndex dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
                 Index(skip(src,i), dst);
         }
 
-        void Index(in MemberParseRecord src, EncodedPartBuilder dst)
+        void Index(in MemberParseRecord src, BuildGlobalCodeIndex dst)
         {
             if(src.Address.IsEmpty)
                 return;

@@ -20,13 +20,13 @@ namespace Z0
 
         public string ActorName {get;}
 
-        public readonly EncodedPartIndex Index;
+        public readonly GlobalCodeIndex Index;
 
         public MessageFlair Flair
             => MessageFlair.Cyan;
 
         [MethodImpl(Inline)]
-        public IndexedEncodedParts(string worker, EncodedPartIndex index, CorrelationToken ct)
+        public IndexedEncodedParts(string worker, GlobalCodeIndex index, CorrelationToken ct)
         {
             EventId = z.evid(EventName, ct);
             Index = index;
@@ -35,6 +35,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(SSx3, EventId, ActorName, EncodedPartStats.from(Index).Format());
+            => text.format(SSx3, EventId, ActorName, GlobalIndexMetrics.from(Index).Format());
     }
 }

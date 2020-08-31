@@ -25,7 +25,7 @@ namespace Z0
         {
             Wf = context;
             Ct = ct;
-            TargetPath = Wf.IndexRoot + FileName.Define("enums",FileExtensions.Csv);
+            TargetPath = Wf.IndexRoot + FileName.define("enums",FileExtensions.Csv);
             Wf.Created(StepName, Ct);
         }
 

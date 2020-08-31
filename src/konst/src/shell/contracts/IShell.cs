@@ -23,13 +23,13 @@ namespace Z0
         /// The path to the application status log
         /// </summary>
         FilePath StatusLogPath
-            => EnvVars.Common.LogRoot + FolderName.Define("apps") + FileName.Define(AppId.Format(), FileExtensions.StatusLog);
+            => EnvVars.Common.LogRoot + FolderName.Define("apps") + FileName.define(AppId.Format(), FileExtensions.StatusLog);
 
         /// <summary>
         /// The path to the application status log
         /// </summary>
         FilePath ErrorLogPath
-            => EnvVars.Common.LogRoot + FolderName.Define("apps") + FileName.Define(AppId.Format(), FileExtensions.ErrorLog);
+            => EnvVars.Common.LogRoot + FolderName.Define("apps") + FileName.define(AppId.Format(), FileExtensions.ErrorLog);
 
         void Print(object content, MessageFlair? color = null)
         {

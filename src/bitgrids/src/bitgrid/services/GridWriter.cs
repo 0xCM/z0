@@ -13,10 +13,10 @@ namespace Z0
     {
         public static GridWriter Create()
             => default(GridWriter);
-            
+
         public void Save(int segwidth, int minsegs, int maxsegs, FolderPath dst)
         {
-            var filename = FileName.Define($"GridMap{segwidth}.csv");
+            var filename = FileName.define($"GridMap{segwidth}.csv");
             var dstpath = dst + filename;
             Save(segwidth,minsegs,maxsegs, dstpath);
         }
@@ -33,15 +33,15 @@ namespace Z0
                 select (row, col)).ToArray();
 
             for(var i = 0; i<points.Length; i++)
-            {                    
+            {
                 var gs = BitGrid.metrics((ushort)points[i].row, (ushort)points[i].col, (ushort)segwidth).Stats();
                     if(gs.Vec256Remainder == 0 || gs.Vec128Remainder == 0)
                         dst.WriteLine(Format(gs));
             }
-                            
+
             dst.Flush();
         }
- 
+
         public string Format(GridStats stats, int? colpad = null, char? delimiter = null)
         {
             var format = text.build();

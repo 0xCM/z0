@@ -23,7 +23,7 @@ namespace Z0
         {
             Wf = wf;
             Ct = ct;
-            Df = (src, Wf.AppDataRoot + FileName.Define(src.GetSimpleName(), "steps.json"));
+            Df = (src, Wf.AppDataRoot + FileName.define(src.GetSimpleName(), "steps.json"));
 
             Wf.Created(StepId);
         }

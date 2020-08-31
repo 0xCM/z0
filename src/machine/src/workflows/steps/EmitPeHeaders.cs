@@ -28,7 +28,7 @@ namespace Z0
             Wf = wf;
             Ct = ct;
             Parts = src;
-            TargetPath = wf.ResourceRoot + FileName.Define("z0", "pe.csv");
+            TargetPath = wf.ResourceRoot + FileName.define("z0", "pe.csv");
             Wf.Created(StepName, Ct);
         }
 
