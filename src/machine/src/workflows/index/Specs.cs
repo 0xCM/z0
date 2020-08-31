@@ -6,8 +6,6 @@ namespace Z0
 {
     using static RenderPatterns;
 
-    using Z0.Asm;
-
     [Step(typeof(ProcessInstructions))]
     public readonly struct ProcessInstructionsStep : IWfStep<ProcessInstructionsStep>
     {

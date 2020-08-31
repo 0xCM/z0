@@ -5,14 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
     using static Konst;
 
     partial class SBlock
     {
         [MethodImpl(Inline)]
-        public static bit all<F,T>(in Block128<T> lhs, F f)
+        public static bit all<F,T>(in SpanBlock128<T> lhs, F f)
             where T : unmanaged
             where F : IUnaryPred128<T>
         {
@@ -24,7 +24,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bit all<F,T>(in Block256<T> lhs, F f)
+        public static bit all<F,T>(in SpanBlock256<T> lhs, F f)
             where T : unmanaged
             where F : IUnaryPred256<T>
         {
@@ -36,7 +36,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bit all<F,T>(in Block128<T> lhs, in Block128<T> rhs, F f)
+        public static bit all<F,T>(in SpanBlock128<T> lhs, in SpanBlock128<T> rhs, F f)
             where T : unmanaged
             where F : IBinaryPred128<T>
         {
@@ -48,7 +48,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bit all<F,T>(in Block256<T> lhs, in Block256<T> rhs, F f)
+        public static bit all<F,T>(in SpanBlock256<T> lhs, in SpanBlock256<T> rhs, F f)
             where T : unmanaged
             where F : IBinaryPred256<T>
         {

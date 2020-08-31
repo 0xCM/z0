@@ -69,9 +69,9 @@ namespace Z0
             return (UnaryOp<T>)Emit(id, functype:tOperator, result:tResult, args: array(tOperand), dst.Address);
         }
 
-        static FixedDelegate Emit(OpIdentity id, Type functype, Type result, Type[] args, MemoryAddress dst)
+        static FixedCellDelegate Emit(OpIdentity id, Type functype, Type result, Type[] args, MemoryAddress dst)
         {
-            var method = new DynamicMethod(id, result, args, functype.Module);            
+            var method = new DynamicMethod(id, result, args, functype.Module);
             var g = method.GetILGenerator();
             switch(args.Length)
             {
@@ -80,25 +80,25 @@ namespace Z0
                 break;
                 case 2:
                     g.Emit(OpCodes.Ldarg_0);
-                    g.Emit(OpCodes.Ldarg_1);                
+                    g.Emit(OpCodes.Ldarg_1);
                 break;
                 case 3:
                     g.Emit(OpCodes.Ldarg_0);
-                    g.Emit(OpCodes.Ldarg_1);                
-                    g.Emit(OpCodes.Ldarg_2);                
+                    g.Emit(OpCodes.Ldarg_1);
+                    g.Emit(OpCodes.Ldarg_2);
                 break;
                 case 4:
                     g.Emit(OpCodes.Ldarg_0);
-                    g.Emit(OpCodes.Ldarg_1);                
-                    g.Emit(OpCodes.Ldarg_2);                
-                    g.Emit(OpCodes.Ldarg_3);                
-                break;                
+                    g.Emit(OpCodes.Ldarg_1);
+                    g.Emit(OpCodes.Ldarg_2);
+                    g.Emit(OpCodes.Ldarg_3);
+                break;
 
             }
             g.Emit(OpCodes.Ldc_I8, (long)dst);
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, result, args);
             g.Emit(OpCodes.Ret);
-            return FixedDelegate.Define(id, dst, method, method.CreateDelegate(functype));
+            return FixedCellDelegate.Define(id, dst, method, method.CreateDelegate(functype));
         }
 
         static T empty<T>(T src)

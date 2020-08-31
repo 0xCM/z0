@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
+    using System.IO;
 
     using Z0.Asm;
 
@@ -14,6 +16,12 @@ namespace Z0
 
     partial struct Recapture
     {
+        void Save(X86ApiCapture capture, StreamWriter dst)
+        {
+            var asm = Context.RoutineDecoder.Decode(capture).Require();
+            var formatted = Context.Formatter.FormatFunction(asm);
+            dst.Write(formatted);
+        }
         public CapturedAccessor[] Capture(ApiHostUri host, FilePath dst)
             => Capture(host, ApiQuery.resources(Context.ContextRoot.Api.Composition.Assemblies), dst);
 
@@ -51,6 +59,39 @@ namespace Z0
                 return new AsmRoutineCode(decoded.Value, capture);
             else
                 return z.none<AsmRoutineCode>();
+        }
+
+        /// <summary>
+        /// All of your resbytes belong to us
+        /// </summary>
+        public void CaptureResBytes()
+        {
+            var resfile = z.insist(ResBytesCompiled);
+            var captured = Capture(resfile, ResBytesUncompiled);
+            var csvfile = ResIndexDir + FileName.define("z0.res.bytes", FileExtensions.Csv);
+            SaveIndex(captured, csvfile);
+        }
+
+        public CapturedAccessor[] Capture(FilePath src, FolderPath dst)
+        {
+            var resdll = Assembly.LoadFrom(src.Name);
+            var indices = span(ApiQuery.declarations(resdll));
+            var count = indices.Length;
+
+            term.magenta($"Capturing {count} host resource sets from {src} -> {dst}");
+
+            var results = list<CapturedAccessor>();
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var index = ref skip(indices,i);
+                var host = Flow.uri(index.DeclaringType);
+                var path = dst + host.FileName(FileExtensions.Asm);
+                results.AddRange(Capture(host, index.Data, path));
+            }
+
+            var data = results.Array();
+            term.print(new CapturedResourceSets(nameof(Recapture), data, src, dst));
+            return data;
         }
     }
 }

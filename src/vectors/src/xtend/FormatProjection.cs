@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
-    
+
     partial class XTend
     {
        public static string FormatProjection<S,T>(this Vector128<S> x, Vector128<T> y)
@@ -28,7 +28,7 @@ namespace Z0
             return formatted;
         }
 
-        public static string FormatProjection<S,T>(this Block64<S> x, Vector128<T> y)
+        public static string FormatProjection<S,T>(this SpanBlock64<S> x, Vector128<T> y)
             where S : unmanaged
             where T : unmanaged
         {

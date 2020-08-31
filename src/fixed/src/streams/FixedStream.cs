@@ -11,14 +11,14 @@ namespace Z0
     public readonly struct FixedStream
     {
         public static IEnumerable<F> create<F>(IFixedSource<F> source)
-            where F : struct, IFixed
+            where F : struct, IFixedCell
         {
             while(true)
             {
                 yield return source.Next();
             }
         }
-        
+
         // public static IEnumerable<F> stream<F>(IValueSource source)
         //     where F: unmanaged, IFixed
         // {
@@ -32,7 +32,7 @@ namespace Z0
         //         case FixedWidth.W128: return stream<F>(source, w128);
         //         case FixedWidth.W256: return stream<F>(source, w256);
         //         case FixedWidth.W512: return stream<F>(source, w512);
-        //         default: return Root.seq<F>();                    
+        //         default: return Root.seq<F>();
         //     }
         // }
 
@@ -87,13 +87,13 @@ namespace Z0
         // }
 
         public static IEnumerable<F> Create<F,W,T>(IPolyrand random, F f = default, T t = default)
-            where F : unmanaged, IFixed
+            where F : unmanaged, IFixedCell
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => new FixedStreamProvider<F,W,T>(random, random.Domain<T>()).Stream;
 
         public static IEnumerable<F> Create<F,W,T>(IPolyrand random, Interval<T> celldomain)
-            where F : unmanaged, IFixed
+            where F : unmanaged, IFixedCell
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => new FixedStreamProvider<F,W,T>(random, celldomain).Stream;

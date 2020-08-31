@@ -17,12 +17,12 @@ namespace Z0
     /// </summary>
     /// <remarks>Conforming dimensions include 1x128, 128x1, 2x64, 64x2, 4x32, 32x4, 8x16, and 16x8</remarks>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
-    [IdentityProvider(typeof(BitGridIdentityProvider))]    
+    [IdentityProvider(typeof(BitGridIdentityProvider))]
     public readonly ref struct BitGrid128<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
-    {                
+    {
         /// <summary>
         /// The grid state
         /// </summary>
@@ -38,7 +38,7 @@ namespace Z0
             => src.Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator Block128<T>(in BitGrid128<M,N,T> src)
+        public static implicit operator SpanBlock128<T>(in BitGrid128<M,N,T> src)
             => src.Data.ToBlock();
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline)]
-        public static implicit operator BitGrid128<M,N,T>(in Block128<T> src)
+        public static implicit operator BitGrid128<M,N,T>(in SpanBlock128<T> src)
             => new BitGrid128<M,N,T>(src);
 
         /// <summary>
@@ -92,13 +92,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit operator !=(in BitGrid128<M,N,T> g1, in BitGrid128<M,N,T> g2)
             => !BitGrid.same(g1,g2);
-        
+
         [MethodImpl(Inline)]
         internal BitGrid128(Vector128<T> data)
             => this.Data = data;
-        
+
         [MethodImpl(Inline)]
-        internal BitGrid128(in Block128<T> src)
+        internal BitGrid128(in SpanBlock128<T> src)
             => this.Data = src.LoadVector();
 
         /// <summary>
@@ -131,12 +131,12 @@ namespace Z0
         /// <summary>
         /// The number of rows in the grid
         /// </summary>
-        public int RowCount => nati<M>();         
+        public int RowCount => nati<M>();
 
         /// <summary>
         /// The number of columns in the grid
         /// </summary>
-        public int ColCount => nati<N>();  
+        public int ColCount => nati<N>();
 
         /// <summary>
         /// Reads an index-identified cell

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
     using static Memories;
 
     public readonly ref struct FixedBits<T>
@@ -21,7 +21,7 @@ namespace Z0
 
         internal readonly int BlockCount;
 
-        internal readonly Block64<T> Data;   
+        internal readonly SpanBlock64<T> Data;
 
         public Span<byte> Bytes
         {
@@ -29,7 +29,7 @@ namespace Z0
             get => Data.Bytes;
         }
 
-        internal FixedBits(Block64<T> src, int bitcount)
+        internal FixedBits(SpanBlock64<T> src, int bitcount)
         {
             this.Data = src;
             this.BitCount = bitcount;
@@ -42,13 +42,13 @@ namespace Z0
         public T BitSlice(byte start, byte length)
             => gbits.slice(Data[start/CellWidth], (byte)(start % CellWidth), length);
 
-        public bit this[ByteSize offset, byte pos]        
+        public bit this[ByteSize offset, byte pos]
         {
             [MethodImpl(Inline)]
             get => bit.test(Bytes[offset], pos);
-            
+
             [MethodImpl(Inline)]
-            set => Bytes[offset] = bit.set(Bytes[offset], pos, value);                
+            set => Bytes[offset] = bit.set(Bytes[offset], pos, value);
         }
     }
 }

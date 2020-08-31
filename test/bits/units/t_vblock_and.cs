@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.IO;
-    
+
     using static Konst;
     using static Memories;
 
@@ -37,13 +37,13 @@ namespace Z0
         public void vblock_and_n64x64u()
             => vblock_and_check(n64, z64);
 
-        static Block256<T> and<T>(Block256<T> lhs, Block256<T> rhs)
+        static SpanBlock256<T> and<T>(SpanBlock256<T> lhs, SpanBlock256<T> rhs)
             where T : unmanaged
         {
             var dst = Blocks.alloc<T>(n256,lhs.BlockCount);
             gspan.and(lhs,rhs, dst.Data);
             return dst;
-        }            
+        }
 
         protected void vblock_and_check<N,T>(N n = default, T t = default)
             where T : unmanaged
@@ -52,9 +52,9 @@ namespace Z0
             var length = nati(n);
             var u = Random.VectorBlock(n,t);
             var v = Random.VectorBlock(n,t);
-            var result = BlockVectorOps.and(u, v);            
+            var result = BlockVectorOps.and(u, v);
             var expect = and(u.Data, v.Data);
-            
+
             ClaimNumeric.Eq(expect.Data, result.Data);
         }
     }

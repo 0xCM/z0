@@ -14,13 +14,13 @@ namespace Z0
     partial class XTend
     {
         [MethodImpl(Inline)]
-        public static bit Identical<T>(this Block128<T> xb, Block128<T> yb)        
-            where T : unmanaged        
+        public static bit Identical<T>(this SpanBlock128<T> xb, SpanBlock128<T> yb)
+            where T : unmanaged
                 => xb.Data.Identical(yb.Data);
 
         [MethodImpl(Inline)]
-        public static bit Identical<T>(this Block256<T> xb, Block256<T> yb)        
-            where T : unmanaged        
+        public static bit Identical<T>(this SpanBlock256<T> xb, SpanBlock256<T> yb)
+            where T : unmanaged
                 => xb.Data.Identical(yb.Data);
     }
 }

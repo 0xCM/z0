@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;    
+    using static Konst;
 
     partial class XTend
     {
@@ -20,15 +20,15 @@ namespace Z0
         /// <param name="j">The second index</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block128<T> Swap<T>(this Block128<T> src, params Swap[] swaps)           
+        public static SpanBlock128<T> Swap<T>(this SpanBlock128<T> src, params Swap[] swaps)
             where T : unmanaged
         {
              if(swaps == null || swaps.Length == 0)
                 return src;
-                
+
              src.Data.Swap(swaps);
              return src;
-        }        
+        }
 
         /// <summary>
         /// Applies a sequence of transpositions to a blocked container
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="j">The second index</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Block256<T> Swap<T>(this Block256<T> src, params Swap[] swaps)           
+        public static SpanBlock256<T> Swap<T>(this SpanBlock256<T> src, params Swap[] swaps)
             where T : unmanaged
         {
              if(swaps == null || swaps.Length == 0)

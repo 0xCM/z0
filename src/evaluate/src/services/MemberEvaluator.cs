@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="src">The source pairs over which to evaluate the operator</param>
         /// <typeparam name="T">The operand type</typeparam>
         public Triples<F> EvalFixed<F>(in X86ApiMember api, BinaryOpClass op, in Pairs<F> src)
-            where F : unmanaged, IFixed
+            where F : unmanaged, IFixedCell
         {
             var count = src.PointCount;
             var f = Dynamic.EmitBinaryOp<F>(Tokens[Left], api.Encoded);

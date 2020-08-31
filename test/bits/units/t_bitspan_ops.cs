@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    
+
     using static Konst;
     using static z;
 
@@ -36,11 +36,11 @@ namespace Z0
             var x0 = 0b_01011000_00001000_11111010_01100101u;
             var x1 = x0.ToBitSpan();
             var x2 = x1.Extract<uint>();
-            Claim.Eq(x0,x2);            
+            Claim.Eq(x0,x2);
 
             var x = 0b10100001100101010001u;
             var bsSrc = "0000010100001100101010001";
-            
+
             var bs1 = BitSpans.parse(bsSrc);
             Claim.eq((int)bs1.Length, bsSrc.Length);
 
@@ -53,7 +53,7 @@ namespace Z0
 
         public void bsand_8()
             => bsand_check(z8);
-        
+
         public void bsand_16()
             => bsand_check(z16);
 
@@ -65,7 +65,7 @@ namespace Z0
 
         public void bsor_8()
             => bsor_check(z8);
-        
+
         public void bsor_16()
             => bsor_check(z16);
 
@@ -87,19 +87,19 @@ namespace Z0
             => bsxor_check(z64);
 
         public void bsbitload_check()
-        {            
+        {
             var bytecount = RepCount;
-            Block256<uint> unpacked = Blocks.alloc<uint>(n256,bytecount);
-            Block64<byte> buffer = Blocks.alloc<byte>(n64);
+            SpanBlock256<uint> unpacked = Blocks.alloc<uint>(n256,bytecount);
+            SpanBlock64<byte> buffer = Blocks.alloc<byte>(n64);
             Span<byte> packed = stackalloc byte[bytecount];
-            
-            for(var i=0; i<RepCount; i++)            
+
+            for(var i=0; i<RepCount; i++)
             {
                 Random.SpanFill(packed);
                 BitPack.unpack(packed, unpacked);
                 var bitspan = BitSpans.load(unpacked.As<bit>());
                 bitspan_check(packed,bitspan);
-            }            
+            }
         }
 
         public void bsformat_8()
@@ -139,7 +139,7 @@ namespace Z0
             var z2 = y[4,2,t];
             Claim.eq(0b11,z2);
             var z3 = y[6,2,t];
-            Claim.eq(0b00,z3);    
+            Claim.eq(0b00,z3);
         }
 
         public void loadscalar()
@@ -168,7 +168,7 @@ namespace Z0
 
         void bsand_check<T>(T t = default)
             where T : unmanaged
-        {            
+        {
             var n = bitsize<T>();
 
             for(var rep = 0u; rep <= RepCount; rep++)
@@ -185,7 +185,7 @@ namespace Z0
 
         void bsor_check<T>(T t = default)
             where T : unmanaged
-        {            
+        {
             var n = bitsize(t);
 
             for(var rep = 0; rep <= RepCount; rep++)
@@ -202,7 +202,7 @@ namespace Z0
 
         void bsxor_check<T>(T t = default)
             where T : unmanaged
-        {            
+        {
             var n = bitsize(t);
 
             for(var rep = 0; rep <= RepCount; rep++)
@@ -238,7 +238,7 @@ namespace Z0
                     Claim.nea(bitspan[i]);
                     ClaimPrimalSeq.eq(bit.Zero, format[(int)j]);
                 }
-            }            
+            }
         }
 
         void bsload_scalars_check<T>(T t = default)
@@ -263,7 +263,7 @@ namespace Z0
                 Span<byte> bytes = stackalloc byte[(int)size(t)];
                 for(var i=0; i < RepCount; i++)
                 {
-                    var src = Random.One(t);                
+                    var src = Random.One(t);
                     var bitspan = BitSpans.from(src);
                     As.deposit(src,bytes);
                     bitspan_check(bytes, bitspan);
@@ -272,7 +272,7 @@ namespace Z0
 
             CheckAction(check, CaseName<T>("bscreate"));
         }
-            
+
         void bsextract_check<T>(T t = default)
             where T : unmanaged
         {
@@ -285,7 +285,7 @@ namespace Z0
                     var z = BitSpans.extract<T>(y);
                     Claim.Eq(x,z);
                 }
-            }  
+            }
 
             CheckAction(check, CaseName<T>("bsextract"));
         }

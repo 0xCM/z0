@@ -10,10 +10,9 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static AddressRecord;
     using static z;
 
-    public struct AddressRecord
+    partial struct Recapture
     {
         public const string Col0 = "Addresses";
 
@@ -21,11 +20,6 @@ namespace Z0
 
         public const ushort Col0Width = 16;
 
-        public const ushort Col1Width = 180;
-    }
-
-    partial struct Recapture
-    {
         public void SaveIndex(ReadOnlySpan<CapturedAccessor> src, FilePath dst)
         {
             const ulong Cut = 0x55005500550;

@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    using System.Runtime.CompilerServices;    
-    using System.Collections.Generic;        
+    using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Konst;
     using static z;
@@ -16,7 +16,7 @@ namespace Z0
     /// Defines the vector api surface
     /// </summary>
     public static class RowVectors
-    {        
+    {
         /// <summary>
         /// Loads a natural block from blocked storage
         /// </summary>
@@ -24,8 +24,8 @@ namespace Z0
         /// <param name="n">The length representative</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]   
-        public static NatSpan<N,T> natspan<N,T>(in Block256<T> src, N n = default)    
+        [MethodImpl(Inline)]
+        public static NatSpan<N,T> natspan<N,T>(in SpanBlock256<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => NatSpan.load(src.Data,n);
@@ -37,13 +37,13 @@ namespace Z0
         /// <param name="offset">The span index at which to begin the load</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        internal static Block256<T> safeload<N,T>(N256 n, in NatSpan<N,T> src)
+        internal static SpanBlock256<T> safeload<N,T>(N256 n, in NatSpan<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => Blocks.safeload(n,src.Data);        
+                => Blocks.safeload(n,src.Data);
 
-        public static RowVector<T> alloc<T>(int minlen)               
-            where T : unmanaged  
+        public static RowVector<T> alloc<T>(int minlen)
+            where T : unmanaged
             => new RowVector<T>(new T[minlen]);
 
         [MethodImpl(Inline)]
@@ -104,7 +104,7 @@ namespace Z0
         public static RowVector<N,T> increasing<N,T>(N length = default, T first = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-        {            
+        {
             var components = range<N,T>(first).ToArray();
             return load<N,T>(components);
         }
@@ -112,7 +112,7 @@ namespace Z0
         public static RowVector<N,T> decreasing<N,T>(N length = default, T first = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-        {            
+        {
             var components = range<N,T>(first).ToArray();
             return load<N,T>(components);
         }
@@ -128,7 +128,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => Block256<N,T>.Load(Blocks.square<T>(n256, value(n)));
-        
+
         /// <summary>
         /// Allocates a block vector optionally filled with a specified value
         /// </summary>
@@ -137,7 +137,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static RowVector256<T> blockalloc<T>(int length)               
+        public static RowVector256<T> blockalloc<T>(int length)
             where T : unmanaged
                 => Blocks.cellalloc<T>(n256,(ulong)length);
 
@@ -155,7 +155,7 @@ namespace Z0
                 => Block256<N,T>.Load(Blocks.safeload(n256,src));
 
         [MethodImpl(Inline)]
-        public static Block256<N,T> blockload<N,T>(Block256<T> src)
+        public static Block256<N,T> blockload<N,T>(SpanBlock256<T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => Block256<N,T>.Load(src);
@@ -164,6 +164,6 @@ namespace Z0
         public static Block256<N,T> blockload<N,T>(NatSpan<N,T> src)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => src; 
+                => src;
     }
 }

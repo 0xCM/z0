@@ -6,10 +6,10 @@ namespace Z0.Asm
 {
     using static z;
 
-    public interface IZmmOperand : IRegOperand<W512,Fixed512>
+    public interface IZmmOperand : IRegOperand<W512,FixedCell512>
     {
-        RegisterClass IRegOperand.Class 
-            => RegisterClass.ZMM;        
+        RegisterClass IRegOperand.Class
+            => RegisterClass.ZMM;
     }
 
     /// <summary>
@@ -21,7 +21,7 @@ namespace Z0.Asm
         where F : struct, IZmmOperand<F,N>
         where N : unmanaged, ITypeNat
     {
-        RegisterCode IRegOperand.Code 
+        RegisterCode IRegOperand.Code
             => (RegisterCode)value<N>();
-    }    
+    }
 }

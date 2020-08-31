@@ -18,23 +18,23 @@ namespace Z0
     /// <typeparam name="D">The operator type</typeparam>
     public readonly struct FixedOpKind<W,T,D> : IFixedOpKind<W,T,D>
         where W : unmanaged, IFixedWidth
-        where T : IFixed
+        where T : IFixedCell
         where D : Delegate
     {
         [MethodImpl(Inline)]
         public static implicit operator FixedOpKind(FixedOpKind<W,T,D> src)
             => src.Untyped;
-        
+
         public FixedWidth OperandWidth
-             => Widths.tfixed<W>();        
-        
-        public Type OperandType 
-            => typeof(T);        
+             => Widths.tfixed<W>();
 
-        public Type OperatorType 
-            => typeof(D);            
+        public Type OperandType
+            => typeof(T);
 
-        public FixedOpKind Untyped 
+        public Type OperatorType
+            => typeof(D);
+
+        public FixedOpKind Untyped
         {
             [MethodImpl(Inline)]
             get => new FixedOpKind(OperandWidth, OperandType, OperatorType);

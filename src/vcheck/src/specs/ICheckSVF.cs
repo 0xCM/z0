@@ -140,7 +140,7 @@ namespace Z0
             }
         }
 
-        void CheckExplicit<F,T>(F f, Block128<T> left, Block128<T> right, Block128<T> dst, string name = null)
+        void CheckExplicit<F,T>(F f, SpanBlock128<T> left, SpanBlock128<T> right, SpanBlock128<T> dst, string name = null)
             where T : unmanaged
             where F : IBinaryOp128<T>
         {
@@ -175,7 +175,7 @@ namespace Z0
             }
         }
 
-        void CheckExplicit<F,T>(F f, Block256<T> left, Block256<T> right, Block256<T> dst, string name = null)
+        void CheckExplicit<F,T>(F f, SpanBlock256<T> left, SpanBlock256<T> right, SpanBlock256<T> dst, string name = null)
             where T : unmanaged
             where F : IBinaryOp256<T>
         {

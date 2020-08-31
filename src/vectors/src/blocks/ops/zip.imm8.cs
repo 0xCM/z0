@@ -5,14 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
     using static Konst;
 
     partial class SBlock
     {
         [MethodImpl(Inline)]
-        public static ref readonly Block128<T> zip<F,T>(in Block128<T> src, byte imm8, in Block128<T> dst, F f)
+        public static ref readonly SpanBlock128<T> zip<F,T>(in SpanBlock128<T> src, byte imm8, in SpanBlock128<T> dst, F f)
             where T : unmanaged
             where F : IShiftOp128<T>
         {
@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ref readonly Block256<T> zip<F,T>(in Block256<T> src, byte imm8, in Block256<T> dst, F f)
+        public static ref readonly SpanBlock256<T> zip<F,T>(in SpanBlock256<T> src, byte imm8, in SpanBlock256<T> dst, F f)
             where T : unmanaged
             where F : IShiftOp256<T>
         {

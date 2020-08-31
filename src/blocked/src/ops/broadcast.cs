@@ -5,9 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    
-    using static Konst; 
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
     using static z;
     using static Blocks;
 
@@ -18,10 +18,10 @@ namespace Z0
         /// </summary>
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
-        /// <typeparam name="T">The cell type</typeparam>        
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8k)]
-        public static void broadcast<T>(T data, in Block8<T> dst)
-            where T : unmanaged        
+        public static void broadcast<T>(T data, in SpanBlock8<T> dst)
+            where T : unmanaged
         {
             if(aligned<T>(w128,dst.CellCount))
             {
@@ -29,7 +29,7 @@ namespace Z0
                 {
                     V0.vload(n128, dst.Block(i));
                 }
-            }            
+            }
         }
 
         /// <summary>
@@ -37,10 +37,10 @@ namespace Z0
         /// </summary>
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
-        /// <typeparam name="T">The cell type</typeparam>        
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
-        public static void broadcast<T>(T data, in Block16<T> dst)
-            where T : unmanaged        
+        public static void broadcast<T>(T data, in SpanBlock16<T> dst)
+            where T : unmanaged
                 => dst.Fill(data);
 
         /// <summary>
@@ -48,21 +48,10 @@ namespace Z0
         /// </summary>
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
-        /// <typeparam name="T">The cell type</typeparam>        
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline),Op, Closures(Numeric8x16x32k)]
-        public static void broadcast<T>(T data, in Block32<T> dst)
-            where T : unmanaged        
-                => dst.Fill(data);
-        
-        /// <summary>
-        /// Fills a target block with replicated cell data
-        /// </summary>
-        /// <param name="data">The data used to fill the block</param>
-        /// <param name="dst">The target block</param>
-        /// <typeparam name="T">The cell type</typeparam>        
-        [MethodImpl(Inline),Op, Closures(AllNumeric)]
-        public static void broadcast<T>(T data, in Block64<T> dst)
-            where T : unmanaged        
+        public static void broadcast<T>(T data, in SpanBlock32<T> dst)
+            where T : unmanaged
                 => dst.Fill(data);
 
         /// <summary>
@@ -70,10 +59,10 @@ namespace Z0
         /// </summary>
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
-        /// <typeparam name="T">The cell type</typeparam>        
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline),Op, Closures(AllNumeric)]
-        public static void broadcast<T>(T data, in Block128<T> dst)
-            where T : unmanaged        
+        public static void broadcast<T>(T data, in SpanBlock64<T> dst)
+            where T : unmanaged
                 => dst.Fill(data);
 
         /// <summary>
@@ -81,21 +70,32 @@ namespace Z0
         /// </summary>
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
-        /// <typeparam name="T">The cell type</typeparam>        
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline),Op, Closures(AllNumeric)]
-        public static void broadcast<T>(T data, in Block256<T> dst)
-            where T : unmanaged        
-                => dst.Fill(data); 
+        public static void broadcast<T>(T data, in SpanBlock128<T> dst)
+            where T : unmanaged
+                => dst.Fill(data);
 
         /// <summary>
         /// Fills a target block with replicated cell data
         /// </summary>
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
-        /// <typeparam name="T">The cell type</typeparam>        
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline),Op, Closures(AllNumeric)]
-        public static void broadcast<T>(T data, in Block512<T> dst)
-            where T : unmanaged        
-                => dst.Fill(data); 
+        public static void broadcast<T>(T data, in SpanBlock256<T> dst)
+            where T : unmanaged
+                => dst.Fill(data);
+
+        /// <summary>
+        /// Fills a target block with replicated cell data
+        /// </summary>
+        /// <param name="data">The data used to fill the block</param>
+        /// <param name="dst">The target block</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline),Op, Closures(AllNumeric)]
+        public static void broadcast<T>(T data, in SpanBlock512<T> dst)
+            where T : unmanaged
+                => dst.Fill(data);
     }
 }

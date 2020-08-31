@@ -8,7 +8,7 @@ namespace Z0
     using System.Security;
 
     /// <summary>
-    /// Characterizes a fixed operator descriptor which both characterizes and describes 
+    /// Characterizes a fixed operator descriptor which both characterizes and describes
     /// an operator defined over operands of fixed-width
     /// </summary>
     public interface IFixedOpKind : ITextual
@@ -16,7 +16,7 @@ namespace Z0
         /// <summary>
         /// The operand width
         /// </summary>
-        FixedWidth OperandWidth {get;}        
+        FixedWidth OperandWidth {get;}
 
         /// <summary>
         /// The fixed operand type
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         Type OperatorType {get;}
 
-        FixedOpKind Untyped 
+        FixedOpKind Untyped
             => new FixedOpKind(OperandWidth, OperandType, OperatorType);
 
         string ITextual.Format()
@@ -37,7 +37,7 @@ namespace Z0
             var width = OperandWidth.Format();
             var operand = OperandType.DisplayName();
             var format = text.concat(name, Chars.LBracket, width, Chars.RBracket, Chars.Colon, operand, Chars.MapsTo, operand);
-            return format;           
+            return format;
         }
     }
 
@@ -56,9 +56,9 @@ namespace Z0
         where W : unmanaged, IFixedWidth
         where D : Delegate
     {
-        
-        FixedWidth IFixedOpKind.OperandWidth 
-            => Widths.tfixed<W>();        
+
+        FixedWidth IFixedOpKind.OperandWidth
+            => Widths.tfixed<W>();
     }
 
     /// <summary>
@@ -70,14 +70,14 @@ namespace Z0
     /// <typeparam name="D">The operator type</typeparam>
     public interface IFixedOpKind<W,T,D> : IFixedOpKind<W,D>
         where W : unmanaged, IFixedWidth
-        where T : IFixed
+        where T : IFixedCell
         where D : Delegate
     {
 
-        Type IFixedOpKind.OperandType 
-            => typeof(T);    
+        Type IFixedOpKind.OperandType
+            => typeof(T);
 
-        Type IFixedOpKind.OperatorType 
-            => typeof(D);          
+        Type IFixedOpKind.OperatorType
+            => typeof(D);
     }
 }

@@ -42,7 +42,7 @@ namespace Z0
         public void bm_create_fromfixed_16x16x16()
         {
             var data = Random.Span<ushort>(16);
-            var src = Fixed.alloc<Fixed256>();
+            var src = Fixed.alloc<FixedCell256>();
             Fixed.deposit(in head(data), ref src);
             var A = BitMatrix.primal(n16, Fixed.byteview(src));
             var B = BitMatrix.primal(n16, data);
@@ -69,7 +69,7 @@ namespace Z0
             m1.Fill(bit.On);
             var fmt = m1.Format().RemoveBlanks();
 
-            Claim.eq(7*9, fmt.Length);    
+            Claim.eq(7*9, fmt.Length);
         }
 
         public void bm_init_n7x9x8()

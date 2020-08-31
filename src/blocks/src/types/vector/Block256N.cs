@@ -7,28 +7,28 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    
+
     using static Konst;
     using static z;
 
     public readonly ref struct Block256<N,T>
         where N : unmanaged, ITypeNat
-        where T : unmanaged    
+        where T : unmanaged
     {
-        public readonly Block256<T> Data;
+        public readonly SpanBlock256<T> Data;
 
         [MethodImpl(Inline)]
         public static Block256<N,T> Load(Span<T> src)
             => new Block256<N,T>(src);
 
         [MethodImpl(Inline)]
-        public static Block256<N,T> Load(Block256<T> src)
+        public static Block256<N,T> Load(SpanBlock256<T> src)
             => new Block256<N,T>(src);
 
         /// <summary>
         /// Specifies the length of the vector, i.e. its component count
         /// </summary>
-        public static int Length => (int)value<N>();     
+        public static int Length => (int)value<N>();
 
         /// <summary>
         /// Vec => Slice
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">THe component type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static implicit operator NatSpan<N,T>(Block256<N,T> src)
             => RowVectors.natspan<N,T>(src.Data);
 
@@ -46,34 +46,34 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="N">The natural length</typeparam>
         /// <typeparam name="T">THe component type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static implicit operator Block256<N,T>(NatSpan<N,T> src)
             => new Block256<N,T>(src);
 
-        [MethodImpl(Inline)]   
-        public static implicit operator Block256<T>(Block256<N,T> src)
+        [MethodImpl(Inline)]
+        public static implicit operator SpanBlock256<T>(Block256<N,T> src)
             => src.Data;
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static implicit operator RowVector256<T>(Block256<N,T> src)
             => src.Denaturalize();
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static implicit operator Block256<N,T>(T[] src)
             => new Block256<N,T>(src);
 
         [MethodImpl(Inline)]
-        public static bool operator == (Block256<N,T> lhs, in Block256<N,T> rhs) 
+        public static bool operator == (Block256<N,T> lhs, in Block256<N,T> rhs)
             => lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static bool operator != (Block256<N,T> lhs, in Block256<N,T> rhs) 
+        public static bool operator != (Block256<N,T> lhs, in Block256<N,T> rhs)
             => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
         public static T operator *(Block256<N,T> lhs, in Block256<N,T> rhs)
             => gmath.dot<T>(lhs.Unsized, rhs.Unsized);
-         
+
         [MethodImpl(Inline)]
         internal Block256(Span<T> src)
         {
@@ -81,7 +81,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal Block256(Block256<T> src)
+        internal Block256(SpanBlock256<T> src)
         {
             Root.insist(src.CellCount >= Length);
             Data = src;
@@ -92,8 +92,8 @@ namespace Z0
         {
             Data = RowVectors.safeload(n256,src);
         }
-                    
-        public ref T this[int index] 
+
+        public ref T this[int index]
             => ref Data[index];
 
         public Span<T> Unsized
@@ -101,7 +101,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.Data;
         }
- 
+
 
         [MethodImpl(Inline)]
         public Block256<N,U> As<U>()
@@ -126,7 +126,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Projects the source vector onto a target vector of the same length 
+        /// Projects the source vector onto a target vector of the same length
         /// via a supplied transformation
         /// </summary>
         /// <param name="f">The transformation function</param>
@@ -140,7 +140,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Projects the source vector onto a caller-supplied target vector of the same length 
+        /// Projects the source vector onto a caller-supplied target vector of the same length
         /// via a supplied transformation
         /// </summary>
         /// <param name="f">The transformation function</param>
@@ -160,7 +160,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Data.Format();    
+            => Data.Format();
 
         public Block256<N,T> Replicate()
             => new Block256<N,T>(Data.Replicate());
@@ -170,11 +170,11 @@ namespace Z0
 
         public override bool Equals(object other)
             => throw new NotSupportedException();
- 
+
         public override int GetHashCode()
             => throw new NotSupportedException();
- 
+
         public override string ToString()
-            => Format();    
+            => Format();
     }
 }

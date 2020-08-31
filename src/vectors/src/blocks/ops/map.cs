@@ -12,7 +12,7 @@ namespace Z0
     partial class SBlock
     {
         [MethodImpl(Inline)]
-        public static ref readonly Block128<T> map<F,T>(in Block128<T> src, in Block128<T> dst, F f)
+        public static ref readonly SpanBlock128<T> map<F,T>(in SpanBlock128<T> src, in SpanBlock128<T> dst, F f)
             where T : unmanaged
             where F : IUnaryOp128<T>
         {
@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ref readonly Block256<T> map<F,T>(in Block256<T> src, in Block256<T> dst, F f)
+        public static ref readonly SpanBlock256<T> map<F,T>(in SpanBlock256<T> src, in SpanBlock256<T> dst, F f)
             where T : unmanaged
             where F : IUnaryOp256<T>
         {
@@ -34,7 +34,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Span<bit> map<F,T>(in Block128<T> src, in Span<bit> dst, F f)
+        public static Span<bit> map<F,T>(in SpanBlock128<T> src, in Span<bit> dst, F f)
             where T : unmanaged
             where F : IUnaryPred128<T>
         {
@@ -46,7 +46,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Span<bit> map<F,T>(in Block256<T> src, Span<bit> dst, F f)
+        public static Span<bit> map<F,T>(in SpanBlock256<T> src, Span<bit> dst, F f)
             where T : unmanaged
             where F : IUnaryPred256<T>
         {

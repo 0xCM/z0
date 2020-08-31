@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static z;
 
     /// <summary>
@@ -19,17 +19,17 @@ namespace Z0
         /// <summary>
         /// The bitvector content
         /// </summary>
-        readonly Block256<T> data;
+        readonly SpanBlock256<T> data;
 
         /// <summary>
         /// The actual number of bits that are represented by the vector
         /// </summary>
         public readonly uint BitCount;
-        
+
         /// <summary>
         /// The maximum number of bits that can be placed a single segment segment
         /// </summary>
-        public static uint CellWidth 
+        public static uint CellWidth
             => bitsize<T>();
 
         [MethodImpl(Inline)]
@@ -78,7 +78,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitBlock(T src, uint bitcount)
-        {            
+        {
             data = Blocks.alloc<T>(n256);
             data.Head = src;
             BitCount = bitcount;
@@ -86,7 +86,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitBlock(Span<T> src, uint n)
-        {            
+        {
             data = Blocks.safeload(n256, src);
             BitCount = n;
         }
@@ -125,7 +125,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => BitBlocks.testbit(data,index);
-            
+
             [MethodImpl(Inline)]
             set => BitBlocks.setbit(data, index,value);
         }
@@ -157,7 +157,7 @@ namespace Z0
                 count += gbits.pop(data[i]);
             return count;
         }
-                                        
+
         [MethodImpl(Inline)]
         public bool Equals(in BitBlock<T> y)
             => data.Identical(y.data);
@@ -168,10 +168,10 @@ namespace Z0
 
         public override bool Equals(object obj)
             => throw new NotImplementedException();
-        
+
         public override int GetHashCode()
             => throw new NotImplementedException();
-    
+
         public override string ToString()
             => throw new NotImplementedException();
     }

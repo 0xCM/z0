@@ -16,12 +16,12 @@ namespace Z0
     /// A grid of natural dimensions M and N such that M*N <= W := 128
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
-    [IdentityProvider(typeof(BitGridIdentityProvider))]    
+    [IdentityProvider(typeof(BitGridIdentityProvider))]
     public readonly ref struct SubGrid128<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
-    {                
+    {
         /// <summary>
         /// The grid state
         /// </summary>
@@ -36,17 +36,17 @@ namespace Z0
         /// The maximum grid width
         /// </summary>
         public static W128 W => default;
-    
+
         [MethodImpl(Inline)]
         public static implicit operator Vector128<T>(in SubGrid128<M,N,T> src)
             => src.Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator Block128<T>(in SubGrid128<M,N,T> src)
+        public static implicit operator SpanBlock128<T>(in SubGrid128<M,N,T> src)
             => src.Data.ToBlock();
 
         [MethodImpl(Inline)]
-        public static implicit operator SubGrid128<M,N,T>(in Block128<T> src)
+        public static implicit operator SubGrid128<M,N,T>(in SpanBlock128<T> src)
             => new SubGrid128<M, N, T>(src);
 
 
@@ -57,15 +57,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator SubGrid128<M,N,T>(Vector128<byte> src)
             => new SubGrid128<M,N,T>(src.As<byte,T>());
-        
+
         [MethodImpl(Inline)]
         internal SubGrid128(Vector128<T> data)
             => this.Data = data;
-        
+
         [MethodImpl(Inline)]
-        internal SubGrid128(in Block128<T> src)
+        internal SubGrid128(in SpanBlock128<T> src)
             => this.Data = src.LoadVector();
-        
+
         /// <summary>
         /// The exposed grid state
         /// </summary>
@@ -90,12 +90,12 @@ namespace Z0
         /// <summary>
         /// The number of rows in the grid
         /// </summary>
-        public int RowCount => nati<M>();         
+        public int RowCount => nati<M>();
 
         /// <summary>
         /// The number of columns in the grid
         /// </summary>
-        public int ColCount => nati<N>();  
+        public int ColCount => nati<N>();
 
         /// <summary>
         /// The number of covered bits

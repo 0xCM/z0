@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    
+
     using static Konst;
 
     partial class XTend
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
         [MethodImpl(Inline)]
-        public static unsafe void StoreTo<T>(this Vector128<T> src, in Block128<T> dst)
+        public static unsafe void StoreTo<T>(this Vector128<T> src, in SpanBlock128<T> dst)
             where T : unmanaged
                 => Vectors.vstore(src, dst);
 
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="dst">The target memory</param>
         /// <param name="block">The 0-based block index at which storage should begin</param>
         [MethodImpl(Inline)]
-        public static unsafe void StoreTo<T>(this Vector128<T> src, in Block128<T> dst, int block)
+        public static unsafe void StoreTo<T>(this Vector128<T> src, in SpanBlock128<T> dst, int block)
             where T : unmanaged
                 => Vectors.vstore(src, dst, block);
 
@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
         [MethodImpl(Inline)]
-        public static unsafe void StoreTo<T>(this Vector256<T> src, in Block256<T> dst)
+        public static unsafe void StoreTo<T>(this Vector256<T> src, in SpanBlock256<T> dst)
             where T : unmanaged
                 => Vectors.vstore(src, dst);
 
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target memory</param>
         [MethodImpl(Inline)]
-        public static unsafe void StoreTo<T>(this Vector512<T> src, in Block512<T> dst)
+        public static unsafe void StoreTo<T>(this Vector512<T> src, in SpanBlock512<T> dst)
             where T : unmanaged
                 => Vectors.vstore(src, dst);
 
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="dst">The target memory</param>
         /// <param name="block">The 0-based block index at which storage should begin</param>
         [MethodImpl(Inline)]
-        public static unsafe void StoreTo<T>(this Vector256<T> src, in Block256<T> dst, int block)
+        public static unsafe void StoreTo<T>(this Vector256<T> src, in SpanBlock256<T> dst, int block)
             where T : unmanaged
                 => Vectors.vstore(src, dst, block);
 
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="dst">The target memory</param>
         /// <param name="block">The 0-based block index at which storage should begin</param>
         [MethodImpl(Inline)]
-        public static unsafe void StoreTo<T>(this Vector512<T> src, in Block512<T> dst, int block)
+        public static unsafe void StoreTo<T>(this Vector512<T> src, in SpanBlock512<T> dst, int block)
             where T : unmanaged
                 => Vectors.vstore(src, dst, block);
     }

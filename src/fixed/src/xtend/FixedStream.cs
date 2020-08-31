@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <typeparam name="F">The fixed type</typeparam>
         public static IEnumerable<F> FixedStream<F>(this IPolyrand random)
-            where F: unmanaged, IFixed
-                => create(create<F>(random));     
+            where F: unmanaged, IFixedCell
+                => create(create<F>(random));
     }
 }

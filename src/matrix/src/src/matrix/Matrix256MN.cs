@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static z;
 
@@ -20,68 +20,68 @@ namespace Z0
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
-    {        
-        readonly Block256<T> data;
+    {
+        readonly SpanBlock256<T> data;
 
         /// <summary>
         /// The number of matrix rows
         /// </summary>
-        public static int Rows 
+        public static int Rows
             => (int)value<M>();
 
         /// <summary>
         /// The number of matrix colums
         /// </summary>
-        public static int Cols 
+        public static int Cols
             => (int)value<N>();
 
         /// <summary>
         /// The total number of matrix cells
         /// </summary>
-        public static int Capacity 
+        public static int Capacity
             => (int)NatCalc.mul<M,N>();
 
-        public static implicit operator Matrix256<M,N,T>(in Block256<T> src)
+        public static implicit operator Matrix256<M,N,T>(in SpanBlock256<T> src)
             => new Matrix256<M,N,T>(src);
 
         public static implicit operator TableSpan<M,N,T>(in Matrix256<M,N,T> A)
             => A.Natural;
 
-        public static implicit operator Block256<T>(in Matrix256<M,N,T> A)
+        public static implicit operator SpanBlock256<T>(in Matrix256<M,N,T> A)
             => A.Unsized;
 
         [MethodImpl(Inline)]
-        public static bool operator == (in Matrix256<M,N,T> A, in Matrix256<M,N,T> B) 
+        public static bool operator == (in Matrix256<M,N,T> A, in Matrix256<M,N,T> B)
             => A.Equals(B);
 
         [MethodImpl(Inline)]
-        public static bool operator != (in Matrix256<M,N,T> A, in Matrix256<M,N,T> B) 
+        public static bool operator != (in Matrix256<M,N,T> A, in Matrix256<M,N,T> B)
             => !A.Equals(B);
 
         [MethodImpl(Inline)]
-        public Matrix256(in Block256<T> src)
+        public Matrix256(in SpanBlock256<T> src)
         {
             Demands.insist(Capacity  >= src.CellCount);
             data = src;
         }
 
         [MethodImpl(Inline)]
-        internal Matrix256(in Block256<T> src, bool skipChecks)
+        internal Matrix256(in SpanBlock256<T> src, bool skipChecks)
             => data = src;
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         public ref T Cell(int r, int c)
             => ref data[Cols*r + c];
 
         public ref T this[int r, int c]
         {
-            [MethodImpl(Inline)]        
+            [MethodImpl(Inline)]
             get => ref Cell(r,c);
         }
 
         public ref T this[uint r, uint c]
         {
-            [MethodImpl(Inline)]        
+            [MethodImpl(Inline)]
             get => ref Cell((int)r,(int)c);
         }
 
@@ -90,7 +90,7 @@ namespace Z0
         {
             if(row < 0 || row >= Rows)
                 throw AppErrors.IndexOutOfRange(row, 0, Rows - 1);
-            
+
             return RowVectors.blockload<N,T>(data.Slice(row * Cols, Cols));
         }
 
@@ -108,7 +108,7 @@ namespace Z0
         {
             if(col < 0 || col >= Cols)
                 throw AppErrors.IndexOutOfRange(col, 0, Cols - 1);
-            
+
             for(var row = 0; row < Rows; row++)
                 dst[row] = data[row*Cols + col];
             return ref dst;
@@ -139,7 +139,7 @@ namespace Z0
         {
             var dst = Matrix.blockalloc<N,M,T>();
             for(var row = 0; row < Rows; row++)
-                dst.SetCol(row, GetRow(row));            
+                dst.SetCol(row, GetRow(row));
             return dst;
         }
 
@@ -147,7 +147,7 @@ namespace Z0
         /// Provides access to the underlying data as a linear unblocked span
         /// </summary>
         public Span<T> Unblocked
-        {            
+        {
             [MethodImpl(Inline)]
             get => data;
         }
@@ -155,8 +155,8 @@ namespace Z0
         /// <summary>
         /// Provides access to the underlying data as a 256-bit blocked span
         /// </summary>
-        public Block256<T> Unsized
-        {            
+        public SpanBlock256<T> Unsized
+        {
             [MethodImpl(Inline)]
             get => data;
         }
@@ -260,7 +260,7 @@ namespace Z0
 
         public override bool Equals(object other)
             => throw new NotSupportedException();
- 
+
         public override int GetHashCode()
             => throw new NotSupportedException();
     }

@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IXmmOperand : IRegOperand<W128, Fixed128>    
-    {        
-        RegisterClass IRegOperand.Class 
+    public interface IXmmOperand : IRegOperand<W128, FixedCell128>
+    {
+        RegisterClass IRegOperand.Class
             => RegisterClass.XMM;
     }
 
@@ -15,10 +15,10 @@ namespace Z0.Asm
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
     /// <typeparam name="N">The index type</typeparam>
-    public interface IXmmOperand<F,R> : IXmmOperand, IRegOperand<W128,Fixed128>
+    public interface IXmmOperand<F,R> : IXmmOperand, IRegOperand<W128,FixedCell128>
         where F : struct, IXmmOperand<F,R>
         where R : unmanaged
     {
 
-    }    
+    }
 }

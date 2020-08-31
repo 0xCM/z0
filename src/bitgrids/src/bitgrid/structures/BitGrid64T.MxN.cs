@@ -15,12 +15,12 @@ namespace Z0
     /// A grid of natural dimensions M and N such that M*N = W := 64
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
-    [IdentityProvider(typeof(BitGridIdentityProvider))]    
+    [IdentityProvider(typeof(BitGridIdentityProvider))]
     public readonly ref struct BitGrid64<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
-    {                
+    {
         /// <summary>
         /// The grid state
         /// </summary>
@@ -32,7 +32,7 @@ namespace Z0
         public const int ByteCount = 8;
 
         [MethodImpl(Inline)]
-        public static implicit operator BitGrid64<M,N,T>(in Block64<T> src)
+        public static implicit operator BitGrid64<M,N,T>(in SpanBlock64<T> src)
             => new BitGrid64<M,N,T>(src);
 
         [MethodImpl(Inline)]
@@ -62,9 +62,9 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitGrid64(ulong src)
             => this.Data = src;
-        
+
         [MethodImpl(Inline)]
-        internal BitGrid64(Block64<T> src)
+        internal BitGrid64(SpanBlock64<T> src)
             => this.Data = src.As<ulong>().Head;
 
         public ulong Content
@@ -103,12 +103,12 @@ namespace Z0
         /// <summary>
         /// The number of rows in the grid
         /// </summary>
-        public int RowCount => nati<M>();         
+        public int RowCount => nati<M>();
 
         /// <summary>
         /// The number of columns in the grid
         /// </summary>
-        public int ColCount => nati<N>();  
+        public int ColCount => nati<N>();
 
         /// <summary>
         /// Reads/writes an index-identified cell
@@ -134,7 +134,7 @@ namespace Z0
         public BitGrid64<M,N,U> As<U>()
             where U : unmanaged
                 => new BitGrid64<M,N,U>(Data);
-        
+
         [MethodImpl(Inline)]
         public bool Equals(BitGrid64<M,N,T> rhs)
             => Data.Equals(rhs.Data);

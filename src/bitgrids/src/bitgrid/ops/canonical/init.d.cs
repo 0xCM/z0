@@ -17,11 +17,11 @@ namespace Z0
         /// </summary>
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
-        /// <typeparam name="T">The cell type</typeparam>        
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline),Op, Closures(AllNumeric)]
-        public static void broadcast<T>(T data, in Block256<T> dst)
-            where T : unmanaged        
-                => dst.Fill(data); 
+        public static void broadcast<T>(T data, in SpanBlock256<T> dst)
+            where T : unmanaged
+                => dst.Fill(data);
 
         /// <summary>
         /// Creates a dynamically-sized grid of natural dimensions filled with specified data
@@ -54,7 +54,7 @@ namespace Z0
         static BitGrid16<M,N,T> init16<M,N,T>(M m = default, N n = default, T d = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged  
+            where T : unmanaged
                 => new BitGrid16<M,N,T>(gvec.broadcast<T,ushort>(d));
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         static BitGrid32<M,N,T> init32<M,N,T>(M m = default, N n = default, T d = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => new BitGrid32<M,N,T>(gvec.broadcast<T,uint>(d));
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Z0
         static BitGrid64<M,N,T> init64<M,N,T>(M m = default, N n = default, T d = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => new BitGrid64<M,N,T>(gvec.broadcast<T,ulong>(d));
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Z0
         static BitGrid128<M,N,T> init128<M,N,T>(M m = default, N n = default, T d = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => new BitGrid128<M,N,T>(Vectors.vbroadcast(n128, d));
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace Z0
         static BitGrid256<M,N,T> init256<M,N,T>(M m = default, N n = default, T d = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => new BitGrid256<M,N,T>(Vectors.vbroadcast(n256, d));
     }
 }

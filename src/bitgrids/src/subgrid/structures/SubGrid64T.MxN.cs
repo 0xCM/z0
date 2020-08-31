@@ -15,12 +15,12 @@ namespace Z0
     /// A grid of natural dimensions M and N such that M*N <= W := 64
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
-    [IdentityProvider(typeof(BitGridIdentityProvider))]    
+    [IdentityProvider(typeof(BitGridIdentityProvider))]
     public readonly ref struct SubGrid64<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
-    {                
+    {
         /// <summary>
         /// The grid state
         /// </summary>
@@ -37,7 +37,7 @@ namespace Z0
         public static N64 W => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator SubGrid64<M,N,T>(in Block64<T> src)
+        public static implicit operator SubGrid64<M,N,T>(in SpanBlock64<T> src)
             => new SubGrid64<M,N,T>(src);
 
         [MethodImpl(Inline)]
@@ -67,9 +67,9 @@ namespace Z0
         [MethodImpl(Inline)]
         internal SubGrid64(ulong src)
             => this.Data = src;
-        
+
         [MethodImpl(Inline)]
-        internal SubGrid64(Block64<T> src)
+        internal SubGrid64(SpanBlock64<T> src)
             => this.Data = src.As<ulong>().Head;
 
         /// <summary>
@@ -96,12 +96,12 @@ namespace Z0
         /// <summary>
         /// The number of rows in the grid
         /// </summary>
-        public int RowCount => nati<M>();         
+        public int RowCount => nati<M>();
 
         /// <summary>
         /// The number of columns in the grid
         /// </summary>
-        public int ColCount => nati<N>();  
+        public int ColCount => nati<N>();
 
         /// <summary>
         /// The number of covered bits
@@ -132,7 +132,7 @@ namespace Z0
         public SubGrid64<M,N,U> As<U>()
             where U : unmanaged
                 => new SubGrid64<M, N, U>(Data);
-        
+
         [MethodImpl(Inline)]
         public bool Equals(SubGrid64<M,N,T> rhs)
             => Data.Equals(rhs.Data);

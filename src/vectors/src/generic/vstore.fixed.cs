@@ -9,17 +9,17 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    
+
     partial class Vectors
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static void vstore<T>(Vector128<T> src, ref Fixed128 dst)
+        public static void vstore<T>(Vector128<T> src, ref FixedCell128 dst)
             where T : unmanaged
-                => V0.vsave(src, ref Fixed.head<Fixed128,T>(ref dst));
+                => V0.vsave(src, ref Fixed.head<FixedCell128,T>(ref dst));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static void vstore<T>(Vector256<T> src, ref Fixed256 dst)
+        public static void vstore<T>(Vector256<T> src, ref FixedCell256 dst)
             where T : unmanaged
-                => V0.vsave(src, ref Fixed.head<Fixed256,T>(ref dst));
+                => V0.vsave(src, ref Fixed.head<FixedCell256,T>(ref dst));
     }
 }

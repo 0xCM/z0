@@ -14,12 +14,12 @@ namespace Z0
 
 
     class FixedStreamProvider<F,W,T> : IFixedStreamProvider<F,W,T>
-        where F : unmanaged, IFixed
+        where F : unmanaged, IFixedCell
         where W : unmanaged, ITypeWidth
         where T : unmanaged
     {
         readonly IPolyrand random;
-        
+
         readonly string Name;
 
         readonly FixedWidth Width;
@@ -27,7 +27,7 @@ namespace Z0
         readonly NumericKind Kind;
 
         readonly Func<F> ValueEmitter;
-        
+
         readonly Interval<T> CellDomain;
 
         public FixedStreamProvider(IPolyrand random, Interval<T>? domain = null)
@@ -35,7 +35,7 @@ namespace Z0
             this.random = random;
             this.Name = $"fixed_rng_{default(F).BitWidth}x{bitsize<T>()}";
             this.Width = (FixedWidth)default(F).BitWidth;
-            this.Kind = typeof(T).NumericKind();            
+            this.Kind = typeof(T).NumericKind();
             this.ValueEmitter = CreateEmitter();
             this.CellDomain = domain ?? random.Domain<T>();
         }
@@ -48,12 +48,12 @@ namespace Z0
                     yield return ValueEmitter();
             }
         }
-            
+
         [MethodImpl(Inline)]
-        static F Fixed<K>(in K x)        
+        static F Fixed<K>(in K x)
             where K : struct
                 => As.@as<K,F>(ref As.edit(x));
-    
+
         Func<F> CreateEmitter()
         {
             if(Width <= FixedWidth.W64)
@@ -80,7 +80,7 @@ namespace Z0
                         return f32f;
                     case NumericKind.F64:
                         return f64f;
-                }   
+                }
             }
             else
             {
@@ -100,67 +100,67 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        F f8i() 
+        F f8i()
             => Fixed(random.Next<sbyte>());
 
         [MethodImpl(Inline)]
-        F f8u() 
+        F f8u()
             => Fixed(random.Next<byte>());
 
         [MethodImpl(Inline)]
-        F f16u() 
+        F f16u()
             => Fixed(random.Next<ushort>());
 
         [MethodImpl(Inline)]
-        F f16i() 
+        F f16i()
             => Fixed(random.Next<short>());
 
         [MethodImpl(Inline)]
-        F f32i() 
+        F f32i()
             => Fixed(random.Next<int>());
 
         [MethodImpl(Inline)]
-        F f32u() 
+        F f32u()
             => Fixed(random.Next<uint>());
 
         [MethodImpl(Inline)]
-        F f64u() 
+        F f64u()
             => Fixed(random.Next<ulong>());
 
         [MethodImpl(Inline)]
-        F f64i() 
+        F f64i()
             => Fixed(random.Next<long>());
 
         [MethodImpl(Inline)]
-        F f32f() 
+        F f32f()
             => Fixed(random.Next<float>());
 
         [MethodImpl(Inline)]
-        F f64f() 
+        F f64f()
             => Fixed(random.Next<double>());
 
         [MethodImpl(Inline)]
-        F f128() 
+        F f128()
             => Fixed(random.Fixed(w128));
 
         [MethodImpl(Inline)]
-        F f256() 
+        F f256()
             => Fixed(random.Fixed(w256));
 
         [MethodImpl(Inline)]
-        F f512() 
-            => Fixed(random.Fixed(w512));    
+        F f512()
+            => Fixed(random.Fixed(w512));
 
         [MethodImpl(Inline)]
-        public Fixed128 f128V(W128 w)
+        public FixedCell128 f128V(W128 w)
             => random.NextPair<ulong>();
 
         [MethodImpl(Inline)]
-        public Fixed256 Fixed(W256 w)
+        public FixedCell256 Fixed(W256 w)
             =>  (random.Fixed(w128), random.Fixed(w128));
 
         [MethodImpl(Inline)]
-        public Fixed512 Fixed(W512 w)
+        public FixedCell512 Fixed(W512 w)
             => (random.Fixed(w256), random.Fixed(w256));
     }
 }

@@ -21,7 +21,7 @@ namespace Z0
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
-    {                
+    {
         /// <summary>
         /// The grid state
         /// </summary>
@@ -31,7 +31,7 @@ namespace Z0
         /// The number of bytes covered by the grid
         /// </summary>
         public const int ByteCount = 4;
-        
+
         [MethodImpl(Inline)]
         public static implicit operator BitGrid32<M,N,T>(uint src)
             => new BitGrid32<M, N, T>(src);
@@ -45,7 +45,7 @@ namespace Z0
             => new BitGrid32<T>(src.Data);
 
         [MethodImpl(Inline)]
-        public static implicit operator BitGrid32<M,N,T>(in Block32<T> src)
+        public static implicit operator BitGrid32<M,N,T>(in SpanBlock32<T> src)
             => new BitGrid32<M,N,T>(src);
 
         [MethodImpl(Inline)]
@@ -65,7 +65,7 @@ namespace Z0
             => this.Data = src;
 
         [MethodImpl(Inline)]
-        internal BitGrid32(Block32<T> src)
+        internal BitGrid32(SpanBlock32<T> src)
             => this.Data = src.As<uint>().Head;
 
         /// <summary>
@@ -107,12 +107,12 @@ namespace Z0
         /// <summary>
         /// The number of rows in the grid
         /// </summary>
-        public int RowCount => val8u<M>();         
+        public int RowCount => val8u<M>();
 
         /// <summary>
         /// The number of columns in the grid
         /// </summary>
-        public int ColCount => val8u<N>();  
+        public int ColCount => val8u<N>();
 
         /// <summary>
         /// Reads/writes an index-identified cell

@@ -12,12 +12,12 @@ namespace Z0
         /// <summary>
         /// Specifies a fixed binary predicate defined over 8-bit operands
         /// </summary>
-        public static FixedOpKind<W8,Fixed8,BinaryPredicate8> BinaryPredicate8 => default;
+        public static FixedOpKind<W8,FixedCell8,BinaryPredicate8> BinaryPredicate8 => default;
 
         /// <summary>
         /// Specifies a fixed binary predicate defined over 16-bit operands
         /// </summary>
-        public static FixedOpKind<W16,Fixed16,BinaryPredicate16> BinaryPredicate16 => default;
+        public static FixedOpKind<W16,FixedCell16,BinaryPredicate16> BinaryPredicate16 => default;
 
         /// <summary>
         /// Specifies a fixed binary predicate defined over 32-bit operands
@@ -27,21 +27,21 @@ namespace Z0
         /// <summary>
         /// Specifies a fixed binary predicate defined over 64-bit operands
         /// </summary>
-        public static FixedOpKind<W64,Fixed64,BinaryPredicate64> BinaryPredicate64 => default;
+        public static FixedOpKind<W64,FixedCell64,BinaryPredicate64> BinaryPredicate64 => default;
 
         /// <summary>
         /// Specifies a fixed binary predicate defined over 128-bit operands
         /// </summary>
-        public static FixedOpKind<W128,Fixed128,BinaryPredicate128> BinaryPredicate128 => default;
+        public static FixedOpKind<W128,FixedCell128,BinaryPredicate128> BinaryPredicate128 => default;
 
         /// <summary>
         /// Specifies a fixed binary predicate defined over 256-bit operands
         /// </summary>
-        public static FixedOpKind<W256,Fixed256,BinaryPredicate256> BinaryPredicate256 => default;
+        public static FixedOpKind<W256,FixedCell256,BinaryPredicate256> BinaryPredicate256 => default;
 
         /// <summary>
         /// Specifies a fixed binary predicate defined over 512-bit operands
         /// </summary>
-        public static FixedOpKind<W512,Fixed512,BinaryPredicate512> BinaryPredicate512 => default;
+        public static FixedOpKind<W512,FixedCell512,BinaryPredicate512> BinaryPredicate512 => default;
     }
 }

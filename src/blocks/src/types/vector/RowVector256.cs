@@ -5,25 +5,25 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-        
+    using System.Runtime.CompilerServices;
+
     using static Konst;
 
     public readonly ref struct RowVector256<T>
         where T : unmanaged
     {
-        public readonly Block256<T> Data;
+        public readonly SpanBlock256<T> Data;
 
         [MethodImpl(Inline)]
-        public RowVector256(in Block256<T> src)
+        public RowVector256(in SpanBlock256<T> src)
             => this.Data = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator RowVector256<T>(in Block256<T> src)
+        public static implicit operator RowVector256<T>(in SpanBlock256<T> src)
             =>  new RowVector256<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Block256<T>(in RowVector256<T> src)
+        public static implicit operator SpanBlock256<T>(in RowVector256<T> src)
             =>  src.Data;
 
         [MethodImpl(Inline)]
@@ -35,11 +35,11 @@ namespace Z0
             =>  src.Data;
 
         [MethodImpl(Inline)]
-        public static bool operator == (RowVector256<T> lhs, in RowVector256<T> rhs) 
+        public static bool operator == (RowVector256<T> lhs, in RowVector256<T> rhs)
             => lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static bool operator != (RowVector256<T> lhs, in RowVector256<T> rhs) 
+        public static bool operator != (RowVector256<T> lhs, in RowVector256<T> rhs)
             => !lhs.Equals(rhs);
 
 
@@ -50,13 +50,13 @@ namespace Z0
         public ref T this[int i]
         {
             [MethodImpl(Inline)]
-            get => ref Data[i];            
+            get => ref Data[i];
         }
 
         public int Count
         {
             [MethodImpl(Inline)]
-            get => Data.CellCount;            
+            get => Data.CellCount;
         }
 
         public int Length
@@ -76,10 +76,10 @@ namespace Z0
         public RowVector256<U> As<U>()
             where U : unmanaged
                 => Data.As<U>();
-                
+
         [MethodImpl(Inline)]
         public string Format()
-            => Data.Data.Format();    
+            => Data.Data.Format();
 
         [MethodImpl(Inline)]
         public ref RowVector256<T> CopyTo(ref RowVector256<T> dst)
@@ -112,6 +112,6 @@ namespace Z0
             => throw new NotSupportedException();
 
         public override int GetHashCode()
-            => throw new NotSupportedException(); 
+            => throw new NotSupportedException();
     }
 }

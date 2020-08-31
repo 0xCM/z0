@@ -10,7 +10,7 @@ namespace Z0
     using static Konst; using static Memories;
 
     partial class BitMatrix
-    {                                
+    {
         /// <summary>
         /// Loads a generic bitmatrix from a span
         /// </summary>
@@ -22,7 +22,7 @@ namespace Z0
                 => new BitMatrix<T>(src);
 
         [MethodImpl(Inline)]
-        public static BitMatrix<T> load<T>(Block256<T> src)
+        public static BitMatrix<T> load<T>(SpanBlock256<T> src)
             where T : unmanaged
                 => new BitMatrix<T>(src);
 
@@ -58,11 +58,11 @@ namespace Z0
         /// <param name="n">The matrix order</param>
         /// <typeparam name="N">The matrix order type</typeparam>
         /// <typeparam name="T">The matrix cell type</typeparam>
-        public static BitMatrix<M,N,T> load<M,N,T>(M m, N n, Span<T> src)        
+        public static BitMatrix<M,N,T> load<M,N,T>(M m, N n, Span<T> src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitMatrix<M,N,T>.Load(src); 
+                => BitMatrix<M,N,T>.Load(src);
 
         /// <summary>
         /// Loads an MxN natural bitmatrix from an array
@@ -71,10 +71,10 @@ namespace Z0
         /// <param name="n">The matrix order</param>
         /// <typeparam name="N">The matrix order type</typeparam>
         /// <typeparam name="T">The matrix cell type</typeparam>
-        public static BitMatrix<M,N,T> load<M,N,T>(Span<T> src)        
+        public static BitMatrix<M,N,T> load<M,N,T>(Span<T> src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
-                => BitMatrix<M,N,T>.Load(src); 
+            where T : unmanaged
+                => BitMatrix<M,N,T>.Load(src);
     }
 }

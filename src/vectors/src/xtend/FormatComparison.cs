@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     public static class FormatComparison
-    {        
-        public static string Format<T>(Block128<T> x, Block128<T> y, Vector128<T> expect, Vector128<T> actual, Vector128<T> result)
+    {
+        public static string Format<T>(SpanBlock128<T> x, SpanBlock128<T> y, Vector128<T> expect, Vector128<T> actual, Vector128<T> result)
             where T : unmanaged
         {
             var dst = text.build();
@@ -22,7 +22,7 @@ namespace Z0
             return dst.ToString();
         }
 
-        public static string Format<T>(Block256<T> x, Block256<T> y, Vector256<T> expect, Vector256<T> actual, Vector256<T> result)
+        public static string Format<T>(SpanBlock256<T> x, SpanBlock256<T> y, Vector256<T> expect, Vector256<T> actual, Vector256<T> result)
             where T : unmanaged
         {
             var dst = text.build();

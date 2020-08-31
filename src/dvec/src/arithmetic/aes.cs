@@ -5,9 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-            
+
     using AES = System.Runtime.Intrinsics.X86.Aes;
 
     /// <summary>
@@ -66,7 +66,7 @@ namespace Z0
 
         /// <summary>
         /// _m128i _mm_aeskeygenassist_si128 (__m128i a, const int imm8) AESKEYGENASSIST xmm, xmm/m128, imm8
-        /// Assist in expanding the AES cipher key by computing steps towards generating a round key for 
+        /// Assist in expanding the AES cipher key by computing steps towards generating a round key for
         /// encryption cipher using data from a and an 8-bit round constant specified in imm8
         /// </summary>
         /// <param name="src"></param>
@@ -76,14 +76,14 @@ namespace Z0
             => AES.KeygenAssist(src,imm8);
 
         [MethodImpl(Inline)]
-        public static void aesEncode(Block128<byte> src, Vector128<byte> key, Block128<byte> dst)            
+        public static void aesEncode(SpanBlock128<byte> src, Vector128<byte> key, SpanBlock128<byte> dst)
         {
             for(var block = 0; block < src.BlockCount; block++)
                  Vectors.vstore(aesEncode(src.LoadVector(block),key), ref dst.BlockRef(block));
         }
 
         [MethodImpl(Inline)]
-        public static void aesdec(Block128<byte> src, Vector128<byte> key, Block128<byte> dst)            
+        public static void aesdec(SpanBlock128<byte> src, Vector128<byte> key, SpanBlock128<byte> dst)
         {
             for(var block = 0; block < src.BlockCount; block++)
                  Vectors.vstore(aesDecode(src.LoadVector(block),key), ref dst.BlockRef(block));

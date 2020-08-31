@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly Fixed128 ToFixed<T>(this in Vector128<T> x)
+        public static ref readonly FixedCell128 ToFixed<T>(this in Vector128<T> x)
             where T : unmanaged
                 => ref Fixed.from(x);
 
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly Fixed256 ToFixed<T>(this in Vector256<T> x)
+        public static ref readonly FixedCell256 ToFixed<T>(this in Vector256<T> x)
             where T : unmanaged
                 => ref Fixed.from(x);
 
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly Fixed512 ToFixed<T>(this in Vector512<T> x)
+        public static ref readonly FixedCell512 ToFixed<T>(this in Vector512<T> x)
             where T : unmanaged
                 => ref Fixed.from(x);
 
@@ -68,7 +68,7 @@ namespace Z0
         public static BinaryOp256 ToFixed<T>(this Func<Vector256<T>,Vector256<T>,Vector256<T>> f)
             where T : unmanaged
                 => FixedOps.vfix(f);
- 
+
         /// <summary>
         /// Creates a fixed 256-bit binary operator from caller-supplied delegate
         /// </summary>

@@ -13,15 +13,15 @@ namespace Z0.Asm
     public readonly struct Zmm<N> : IZmmOperand<Zmm<N>,N>
         where N : unmanaged, ITypeNat
     {
-        public Fixed512 Content {get;}
+        public FixedCell512 Content {get;}
 
         [MethodImpl(Inline)]
-        public Zmm(Fixed512 value)
+        public Zmm(FixedCell512 value)
         {
             Content = value;
         }
 
-        public RegisterKind Kind 
+        public RegisterKind Kind
         {
             [MethodImpl(Inline)]
             get => RegisterBits.join((RegisterCode)value<N>(), RegisterClass.YMM, RegisterWidth.W512);

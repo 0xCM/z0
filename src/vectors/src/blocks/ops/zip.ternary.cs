@@ -5,31 +5,31 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
     using static Konst;
 
     partial class SBlock
     {
         [MethodImpl(Inline)]
-        public static ref readonly Block128<T> zip<F,T>(in Block128<T> a, in Block128<T> b, in Block128<T> c, in Block128<T> dst, F f)
+        public static ref readonly SpanBlock128<T> zip<F,T>(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> c, in SpanBlock128<T> dst, F f)
             where T : unmanaged
             where F : ITernaryOp128<T>
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                f.Invoke(a.LoadVector(block), b.LoadVector(block), c.LoadVector(block)).StoreTo(dst, block);            
+                f.Invoke(a.LoadVector(block), b.LoadVector(block), c.LoadVector(block)).StoreTo(dst, block);
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref readonly Block256<T> zip<F,T>(in Block256<T> a, in Block256<T> b, in Block256<T> c, in Block256<T> dst, F f)
+        public static ref readonly SpanBlock256<T> zip<F,T>(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> c, in SpanBlock256<T> dst, F f)
             where T : unmanaged
             where F : ITernaryOp256<T>
         {
             var blocks = dst.BlockCount;
             for(var block = 0; block < blocks; block++)
-                f.Invoke(a.LoadVector(block), b.LoadVector(block), c.LoadVector(block)).StoreTo(dst, block);            
+                f.Invoke(a.LoadVector(block), b.LoadVector(block), c.LoadVector(block)).StoreTo(dst, block);
             return ref dst;
         }
 

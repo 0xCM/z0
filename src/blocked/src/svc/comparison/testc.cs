@@ -20,7 +20,7 @@ namespace Z0
         {
 
             [MethodImpl(Inline)]
-            public Span<bit> Invoke(in Block128<T> a, in Block128<T> b, Span<bit> dst) 
+            public Span<bit> Invoke(in SpanBlock128<T> a, in SpanBlock128<T> b, Span<bit> dst)
                 => zip(a, b, dst, VSvc.vtestc<T>(w128));
         }
 
@@ -30,7 +30,7 @@ namespace Z0
         {
 
             [MethodImpl(Inline)]
-            public Span<bit> Invoke(in Block256<T> a, in Block256<T> b, Span<bit> dst) 
+            public Span<bit> Invoke(in SpanBlock256<T> a, in SpanBlock256<T> b, Span<bit> dst)
                 => zip(a, b, dst, VSvc.vtestc<T>(w256));
         }
     }

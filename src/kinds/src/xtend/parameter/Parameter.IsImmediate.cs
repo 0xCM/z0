@@ -21,8 +21,8 @@ namespace Z0
         {
             if(param.Tagged<ImmAttribute>())
             {
-                var isrefined = param.ParameterType.IsEnum;
-                if(isrefined)
+                var refined = param.ParameterType.IsEnum;
+                if(refined)
                 {
                     if(refinement == ImmRefinementKind.Refined || refinement == ImmRefinementKind.All)
                         return true;
@@ -32,7 +32,7 @@ namespace Z0
                     if(refinement == ImmRefinementKind.Unrefined)
                         return true;
                 }
-                
+
             }
             return false;
         }
@@ -42,7 +42,7 @@ namespace Z0
 
         public static Imm8R[] ToImm8Values(this IEnumerable<byte> src, ImmRefinementKind kind)
             => src.Map(x => new Imm8R(x, kind != 0));
-        
+
         /// <summary>
         /// Determines whether a parameters is an unrefined immediate
         /// </summary>

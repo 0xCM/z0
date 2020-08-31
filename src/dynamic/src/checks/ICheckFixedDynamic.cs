@@ -16,7 +16,7 @@ namespace Z0
     public interface ICheckFixedDynamic : ITestRandom, TCheckNull, TCheckDynamic, IBufferedChecker
     {
         void CheckFixedMatch<F>(K.UnaryOpClass k, IdentifiedCode a, IdentifiedCode b)
-            where F : unmanaged, IFixed
+            where F : unmanaged, IFixedCell
         {
             var f = Dynamic.EmitFixedUnary<F>(Tokens[Left], a);
             var g = Dynamic.EmitFixedUnary<F>(Tokens[Right], b);

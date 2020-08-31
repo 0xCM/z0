@@ -7,21 +7,21 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.Intrinsics;
-    
+
     using static HexConst;
     using static z;
 
     partial class t_vexamples
-    {        
-        public static ReadOnlySpan<byte> AddPattern 
+    {
+        public static ReadOnlySpan<byte> AddPattern
             => new byte[32]{0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,14,14,15,15,16};
 
         //Identity
-        public static ReadOnlySpan<byte> IdentityPattern  
+        public static ReadOnlySpan<byte> IdentityPattern
             => new byte[16]{0,1,2,3,4,5,6,7,8,9,A,B,C,D,E,F};
 
         //Reversal
-        public static ReadOnlySpan<byte> ReversalPattern  
+        public static ReadOnlySpan<byte> ReversalPattern
             => new byte[16]{F,E,D,C,B,A,9,8,7,6,5,4,3,2,1,0};
 
         /// <summary>
@@ -33,13 +33,13 @@ namespace Z0
         {
             var b0 = (byte)(x0 + x0);
             var b1 = (byte)(x0 + x0 + 1);
-            
+
             var b2 = (byte)(x1 + x1);
             var b3 = (byte)(x1 + x1 + 1);
-            
+
             var b4 = (byte)(x2 + x2);
             var b5 = (byte)(x2 + x2 + 1);
-            
+
             var b6 = (byte)(x3 + x3);
             var b7 = (byte)(x3 + x3 + 1);
 
@@ -51,8 +51,8 @@ namespace Z0
 
             var bC = (byte)(x6 + x6);
             var bD = (byte)(x6 + x6 + 1);
-            
-            var bE = (byte)(x7 + x7);            
+
+            var bE = (byte)(x7 + x7);
             var bF = (byte)(x7 + x7 + 1);
 
             var b10 = (byte)(x8 + x8);
@@ -64,7 +64,7 @@ namespace Z0
             var b14 = (byte)(xA + xA);
             var b15 = (byte)(xA + xA + 1);
 
-            var b16 = (byte)(xB + xB);            
+            var b16 = (byte)(xB + xB);
             var b17 = (byte)(xB + xB + 1);
 
             var b18 = (byte)(xC + xC);
@@ -79,8 +79,8 @@ namespace Z0
             var b1E = (byte)(xF + xF);
             var b1F = (byte)(xF + xF + 1);
 
-            return vparts(w256, 
-                b0,b1, b2,b3, b4,b5, b6,b7, b8,b9,   bA,bB, bC,bD, bE,bF, 
+            return vparts(w256,
+                b0,b1, b2,b3, b4,b5, b6,b7, b8,b9,   bA,bB, bC,bD, bE,bF,
                 b10,b11, b12,b13, b14,b15, b16,b17,  b18,b19, b1A,b1B, b1C,b1D, b1E,b1F
                 );
         }
@@ -90,9 +90,9 @@ namespace Z0
         /// </summary>
         public static Vector256<byte> vshuffle_spec_1(Vector256<ushort> src)
             => vshuffle_spec_parts(
-                vcell(src,0), vcell(src,1), vcell(src,2),vcell(src,3), 
+                vcell(src,0), vcell(src,1), vcell(src,2),vcell(src,3),
                 vcell(src,4), vcell(src,5), vcell(src,6), vcell(src,7),
-                vcell(src,8), vcell(src,9), vcell(src,10), vcell(src,11), 
+                vcell(src,8), vcell(src,9), vcell(src,10), vcell(src,11),
                 vcell(src,12), vcell(src,13), vcell(src,14), vcell(src,15)
                 );
 
@@ -105,7 +105,7 @@ namespace Z0
         public void vshuf16x16()
         {
             var w = n256;
-            var x = gvec.vinc(w,z16);            
+            var x = gvec.vinc(w,z16);
             var reverse = V0.vdec<ushort>(w);
             var identity = V0.vinc<ushort>(w);
             var pairswap = vparts(w256,1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
@@ -152,7 +152,7 @@ namespace Z0
             var x5 = Random.CpuVector<byte>(w);
             var x5Spec = vbroadcast(w,(byte)0b10000000);
             var x5Dst = z.vshuf16x8(x5, x5Spec);
-            Claim.veq(x5Dst, z.vbroadcast(w,(byte)0));                        
+            Claim.veq(x5Dst, z.vbroadcast(w,(byte)0));
         }
 
         public void vshuf16x8()
@@ -178,7 +178,7 @@ namespace Z0
 
         public static Vector256<byte> videntity_shuffle()
         {
-            Block256<byte> mask = Blocks.cellalloc<byte>(n256,1);
+            SpanBlock256<byte> mask = Blocks.cellalloc<byte>(n256,1);
 
             //For the first 128-bit lane
             var half = mask.CellCount/2;

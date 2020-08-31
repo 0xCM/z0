@@ -15,12 +15,12 @@ namespace Z0
     /// A grid of natural dimensions M and N such that M*N <= 16
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
-    [IdentityProvider(typeof(BitGridIdentityProvider))]    
+    [IdentityProvider(typeof(BitGridIdentityProvider))]
     public readonly ref struct SubGrid16<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
-    {                
+    {
         /// <summary>
         /// The grid state
         /// </summary>
@@ -37,7 +37,7 @@ namespace Z0
         public static N16 W => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator SubGrid16<M,N,T>(in Block16<T> src)
+        public static implicit operator SubGrid16<M,N,T>(in SpanBlock16<T> src)
             => new SubGrid16<M, N, T>(src);
 
         [MethodImpl(Inline)]
@@ -59,9 +59,9 @@ namespace Z0
         [MethodImpl(Inline)]
         internal SubGrid16(ushort src)
             => this.Data = src;
-        
+
         [MethodImpl(Inline)]
-        internal SubGrid16(Block16<T> src)
+        internal SubGrid16(SpanBlock16<T> src)
             => this.Data = src.As<ushort>().Head;
 
         /// <summary>
@@ -94,12 +94,12 @@ namespace Z0
         /// <summary>
         /// The number of rows in the grid
         /// </summary>
-        public int RowCount => nati<M>();         
+        public int RowCount => nati<M>();
 
         /// <summary>
         /// The number of columns in the grid
         /// </summary>
-        public int ColCount => nati<N>();  
+        public int ColCount => nati<N>();
 
         public Span<T> Cells
         {
@@ -134,7 +134,7 @@ namespace Z0
             where U : unmanaged
                 => new SubGrid16<M,N,U>(Data);
 
-        
+
         [MethodImpl(Inline)]
         public bool Equals(SubGrid16<M,N,T> rhs)
             => Data.Equals(rhs.Data);

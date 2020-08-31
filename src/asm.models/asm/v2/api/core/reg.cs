@@ -34,12 +34,12 @@ namespace Z0
                 => new R64<R>(data);
 
         [MethodImpl(Inline)]
-        public static Xmm<R> reg<R>(Fixed128 data, R r = default)
+        public static Xmm<R> reg<R>(FixedCell128 data, R r = default)
             where R : unmanaged, IXmmOperand
                 => new Xmm<R>(data);
 
         [MethodImpl(Inline)]
-        public static Ymm<R> reg<R>(Fixed256 data, R n = default)
+        public static Ymm<R> reg<R>(FixedCell256 data, R n = default)
             where R : unmanaged, IYmmOperand
                 => new Ymm<R>(data);
     }

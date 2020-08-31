@@ -10,14 +10,14 @@ namespace Z0
     using static Konst;
 
     partial class XTend
-    {   
+    {
         /// <summary>
         /// Retrieves, at most, one cell's worth of bits defined by an inclusive bit index range
         /// </summary>
         /// <param name="first">The linear index of the first bit</param>
         /// <param name="last">The linear index of the last bit</param>
         [MethodImpl(Inline)]
-        public static T BitSeg<T>(this Block256<T> src, int first, int last)
+        public static T BitSeg<T>(this SpanBlock256<T> src, int first, int last)
             where T : unmanaged
                 => BitBlocks.bitseg(src,first,last);
 
@@ -35,7 +35,7 @@ namespace Z0
         public static BitMatrix<N,T> AsSquare<N,T>(this BitMatrix<N,N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                    => BitMatrix.load<N,T>(src.Content);                    
+                    => BitMatrix.load<N,T>(src.Content);
 
         [MethodImpl(Inline)]
         public static RowBits<T> ToRowBits<T>(this BitMatrix<T> src)
@@ -54,7 +54,7 @@ namespace Z0
             Span<byte> bits = new byte[src.RowCount*src.ColCount];
             for(var i=0;i<src.RowCount; i++)
                 src[i].ToBitString().BitSeq.CopyTo(bits.Slice(i*src.ColCount));
-            return BitString.load(bits);                            
+            return BitString.load(bits);
         }
 
         [MethodImpl(Inline)]

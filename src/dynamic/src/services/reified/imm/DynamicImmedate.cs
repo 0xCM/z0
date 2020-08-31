@@ -11,29 +11,29 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Linq;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     static class DynamicImmediate
     {
         public static DynamicMethod DynamicSignature(string name, Type owner, Type @return, params Type[] args)
-            => new DynamicMethod(name: name, 
-                attributes: MethodAttributes.Public | MethodAttributes.Static,  
+            => new DynamicMethod(name: name,
+                attributes: MethodAttributes.Public | MethodAttributes.Static,
                 callingConvention: CallingConventions.Standard,
-                returnType: @return, 
-                parameterTypes: args, 
+                returnType: @return,
+                parameterTypes: args,
                 owner: owner,
-                skipVisibility: false);               
+                skipVisibility: false);
 
         public static DynamicDelegate EmbedV128UnaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
         {
             Demands.reason(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
-            var tCell = src.ReturnType.SuppliedTypeArgs().Single();            
+            var tCell = src.ReturnType.SuppliedTypeArgs().Single();
             var wrapped = src.Reify(tCell);
             var idTarget = id.WithImm8(imm8);
-            var tOperand = typeof(Vector128<>).MakeGenericType(tCell);  
+            var tOperand = typeof(Vector128<>).MakeGenericType(tCell);
             var tWrapper = typeof(UnaryOp<>).MakeGenericType(tOperand);
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);            
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);
             target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
             return Delegates.dynamic(idTarget, wrapped, target, tWrapper);
         }
@@ -44,9 +44,9 @@ namespace Z0
             var tCell = src.ReturnType.SuppliedTypeArgs().Single();
             var wrapped = src.Reify(tCell);
             var idTarget = id.WithImm8(imm8);
-            var tOperand = typeof(Vector256<>).MakeGenericType(tCell);  
+            var tOperand = typeof(Vector256<>).MakeGenericType(tCell);
             var tWrapper = typeof(UnaryOp<>).MakeGenericType(tOperand);
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);            
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);
             target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
             return Delegates.dynamic(idTarget, wrapped, target, tWrapper);
         }
@@ -54,12 +54,12 @@ namespace Z0
         public static DynamicDelegate EmbedV128BinaryOpImm(MethodInfo src, byte imm8, OpIdentity id)
         {
             Demands.reason(src.ReturnType.IsVector(), $"Method {src.Name} does not return a vector value");
-            var tCell = src.ReturnType.SuppliedTypeArgs().Single();            
+            var tCell = src.ReturnType.SuppliedTypeArgs().Single();
             var wrapped = src.Reify(tCell);
             var idTarget = id.WithImm8(imm8);
-            var tOperand = typeof(Vector128<>).MakeGenericType(tCell);  
+            var tOperand = typeof(Vector128<>).MakeGenericType(tCell);
             var tWrapper = typeof(BinaryOp<>).MakeGenericType(tOperand);
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);            
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);
             target.GetILGenerator().EmitImmBinaryCall(wrapped, imm8);
             return Delegates.dynamic(idTarget, wrapped, target, tWrapper);
         }
@@ -70,9 +70,9 @@ namespace Z0
             var tCell = src.ReturnType.SuppliedTypeArgs().Single();
             var wrapped = src.Reify(tCell);
             var idTarget = id.WithImm8(imm8);
-            var tOperand = typeof(Vector256<>).MakeGenericType(tCell);  
+            var tOperand = typeof(Vector256<>).MakeGenericType(tCell);
             var tWrapper = typeof(BinaryOp<>).MakeGenericType(tOperand);
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);            
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);
             target.GetILGenerator().EmitImmBinaryCall(wrapped, imm8);
             return Delegates.dynamic(idTarget, wrapped, target, tWrapper);
         }
@@ -81,7 +81,7 @@ namespace Z0
         {
             try
             {
-                var width = VectorType.width(src.ReturnType);            
+                var width = VectorType.width(src.ReturnType);
                 return width switch{
                     TypeWidth.W128 => EmbedV128UnaryOpImm(src, imm8, id),
                     TypeWidth.W256 => EmbedV256UnaryOpImm(src, imm8, id),
@@ -112,8 +112,8 @@ namespace Z0
         {
             var wrapped = src.Reify(typeof(T));
             var idTarget = id.WithImm8(imm8);
-            var tOperand = typeof(Vector128<T>); 
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);            
+            var tOperand = typeof(Vector128<T>);
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);
             target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
             return Delegates.dynamic<UnaryOp<Vector128<T>>>(idTarget, wrapped, target);
         }
@@ -123,8 +123,8 @@ namespace Z0
         {
             var wrapped = src.Reify(typeof(T));
             var idTarget = id.WithImm8(imm8);
-            var tOperand = typeof(Vector256<T>);                        
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);            
+            var tOperand = typeof(Vector256<T>);
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand);
             target.GetILGenerator().EmitImmUnaryCall(wrapped, imm8);
             return Delegates.dynamic<UnaryOp<Vector256<T>>>(idTarget, wrapped, target);
         }
@@ -135,7 +135,7 @@ namespace Z0
             var wrapped = src.Reify(typeof(T));
             var idTarget = id.WithImm8(imm8);
             var tOperand = typeof(Vector128<T>);
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);            
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, tOperand, tOperand, tOperand);
             target.GetILGenerator().EmitImmBinaryCall(wrapped,imm8);
             return Delegates.dynamic<BinaryOp<Vector128<T>>>(idTarget, wrapped, target);
         }
@@ -145,8 +145,8 @@ namespace Z0
         {
             var wrapped = src.Reify(typeof(T));
             var idTarget = id.WithImm8(imm8);
-            var tOperand = typeof(Block128<T>); 
-            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, @return: tOperand, args: array(tOperand, tOperand));            
+            var tOperand = typeof(SpanBlock128<T>);
+            var target = DynamicSignature(wrapped.Name, wrapped.DeclaringType, @return: tOperand, args: array(tOperand, tOperand));
             var gTarget = target.GetILGenerator();
             gTarget.Emit(OpCodes.Ldarg_0);
             gTarget.EmitImmLoad(imm8);

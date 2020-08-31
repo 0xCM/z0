@@ -22,11 +22,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void deposit<S,F>(in S src, ref F dst)
             where S : struct
-            where F : unmanaged, IFixed
+            where F : unmanaged, IFixedCell
         {
             ref var dstBytes = ref Unsafe.As<F,byte>(ref dst);
-            ref var srcBytes = ref Unsafe.As<S,byte>(ref Unsafe.AsRef(in src));            
+            ref var srcBytes = ref Unsafe.As<S,byte>(ref Unsafe.AsRef(in src));
             Unsafe.CopyBlockUnaligned(ref dstBytes, ref srcBytes, (uint)sizeof(F));
-        }    
+        }
     }
 }

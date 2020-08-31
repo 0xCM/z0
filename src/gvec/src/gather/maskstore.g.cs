@@ -5,10 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;    
-    
-    using static Konst; 
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+
+    using static Konst;
     using static As;
 
     partial class gvec
@@ -23,7 +23,7 @@ namespace Z0
         /// <param name="dst">The target memory</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static void vmaskstore8<T>(Vector128<T> src, Vector128<byte> mask, in Block128<byte> dst)
+        public static void vmaskstore8<T>(Vector128<T> src, Vector128<byte> mask, in SpanBlock128<byte> dst)
             where T : unmanaged
                 => dvec.vmaskstore(v8u(src),mask, dst);
 
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="dst">The target memory</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static void vmaskstore8<T>(Vector256<T> src, Vector256<byte> mask, in Block256<byte> dst)
+        public static void vmaskstore8<T>(Vector256<T> src, Vector256<byte> mask, in SpanBlock256<byte> dst)
             where T : unmanaged
                 => dvec.vmaskstore(v8u(src),mask, dst);
 
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="dst">The target memory</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static void vmaskstore32<T>(Vector128<T> src, Vector128<uint> mask, in Block128<uint> dst)
+        public static void vmaskstore32<T>(Vector128<T> src, Vector128<uint> mask, in SpanBlock128<uint> dst)
             where T : unmanaged
                 => dvec.vmaskstore(v32u(src),mask,dst);
 
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="dst">The target memory</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static void vmaskstore32<T>(Vector256<T> src, Vector256<uint> mask, in Block256<uint> dst)
+        public static void vmaskstore32<T>(Vector256<T> src, Vector256<uint> mask, in SpanBlock256<uint> dst)
             where T : unmanaged
                 => dvec.vmaskstore(v32u(src),mask, dst);
 
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="dst">The target memory</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static void vmaskstore64<T>(Vector128<T> src, Vector128<ulong> mask, in Block128<ulong> dst)
+        public static void vmaskstore64<T>(Vector128<T> src, Vector128<ulong> mask, in SpanBlock128<ulong> dst)
             where T : unmanaged
                 => dvec.vmaskstore(v64u(src),mask,dst);
 
@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="dst">The target memory</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
-        public static void vmaskstore64<T>(Vector256<T> src, Vector256<ulong> mask, in Block256<ulong> dst)
+        public static void vmaskstore64<T>(Vector256<T> src, Vector256<ulong> mask, in SpanBlock256<ulong> dst)
             where T : unmanaged
                 => dvec.vmaskstore(v64u(src),mask, dst);
     }

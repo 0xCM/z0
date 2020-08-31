@@ -14,30 +14,30 @@ namespace Z0
     using K = Kinds;
 
     partial class Fixed
-    {        
+    {
         [MethodImpl(Inline)]
         internal static unsafe Span<T> span<F,T>(ref F src)
-            where F : unmanaged, IFixed
+            where F : unmanaged, IFixedCell
             where T : unmanaged
                 => new Span<T>(Unsafe.AsPointer(ref src), Unsafe.SizeOf<F>());
 
         [MethodImpl(Inline)]
         internal static ref T head<F,T>(ref F src, T t)
-            where F : unmanaged, IFixed
+            where F : unmanaged, IFixedCell
             where T : unmanaged
                 => ref Unsafe.As<F,T>(ref src);
 
         [MethodImpl(Inline)]
         internal static ref readonly F from<T,F>(in T src)
-            where F : unmanaged, IFixed
+            where F : unmanaged, IFixedCell
             where T : struct
-                => ref Unsafe.As<T,F>(ref  Unsafe.AsRef(in src));                 
+                => ref Unsafe.As<T,F>(ref  Unsafe.AsRef(in src));
 
         [MethodImpl(Inline)]
         internal static unsafe ReadOnlySpan<T> view<F,T>(in F src)
-            where F : unmanaged, IFixed
+            where F : unmanaged, IFixedCell
             where T : unmanaged
-                => new ReadOnlySpan<T>(Unsafe.AsPointer(ref Unsafe.AsRef(in src)), Unsafe.SizeOf<F>()); 
+                => new ReadOnlySpan<T>(Unsafe.AsPointer(ref Unsafe.AsRef(in src)), Unsafe.SizeOf<F>());
 
         /// <summary>
         /// Writes a specified number of source elements to a fixed target
@@ -59,8 +59,8 @@ namespace Z0
             where T : struct
         {
             ref var dstBytes = ref Unsafe.As<T,byte>(ref dst);
-            ref var srcBytes = ref Unsafe.As<S,byte>(ref Unsafe.AsRef(in src));            
+            ref var srcBytes = ref Unsafe.As<S,byte>(ref Unsafe.AsRef(in src));
             Unsafe.CopyBlockUnaligned(ref dstBytes, ref srcBytes, (uint)bytecount);
-        }         
+        }
     }
 }

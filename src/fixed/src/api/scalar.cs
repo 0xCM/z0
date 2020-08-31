@@ -13,11 +13,11 @@ namespace Z0
     partial class Fixed
     {
         [MethodImpl(Inline), Op]
-        public static byte scalar(Fixed8 src)
+        public static byte scalar(FixedCell8 src)
             =>  (byte)src;
 
         [MethodImpl(Inline), Op]
-        public static ushort scalar(Fixed16 src)
+        public static ushort scalar(FixedCell16 src)
             => (ushort)src;
 
         [MethodImpl(Inline), Op]
@@ -25,7 +25,7 @@ namespace Z0
             => (uint)src;
 
         [MethodImpl(Inline), Op]
-        public static ulong scalar(Fixed64 src)
+        public static ulong scalar(FixedCell64 src)
             => (ulong)src;
     }
 }

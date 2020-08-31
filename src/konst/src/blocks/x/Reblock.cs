@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend    
+    partial class XTend
     {
         /// <summary>
         /// Converts 64-bit blocks to 32-bit blocks without allocation
@@ -18,9 +18,9 @@ namespace Z0
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block16<T> Reblock<T>(this in Block32<T> src, W16 n)
+        public static SpanBlock16<T> Reblock<T>(this in SpanBlock32<T> src, W16 n)
              where T : unmanaged
-                => new Block16<T>(src.Data);
+                => new SpanBlock16<T>(src.Data);
 
         /// <summary>
         /// Converts 64-bit blocks to 32-bit blocks without allocation
@@ -29,9 +29,9 @@ namespace Z0
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block32<T> Reblock<T>(this in Block64<T> src, W32 n)
+        public static SpanBlock32<T> Reblock<T>(this in SpanBlock64<T> src, W32 n)
              where T : unmanaged
-                => new Block32<T>(src.Data);
+                => new SpanBlock32<T>(src.Data);
 
         /// <summary>
         /// Converts 128-bit blocks to 16-bit blocks without allocation
@@ -40,9 +40,9 @@ namespace Z0
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block16<T> Reblock<T>(this in Block128<T> src, W16 n)
+        public static SpanBlock16<T> Reblock<T>(this in SpanBlock128<T> src, W16 n)
              where T : unmanaged
-                => new Block16<T>(src.Data);
+                => new SpanBlock16<T>(src.Data);
 
         /// <summary>
         /// Converts 128-bit blocks to 32-bit blocks without allocation
@@ -51,9 +51,9 @@ namespace Z0
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block32<T> Reblock<T>(this in Block128<T> src, W32 n)
+        public static SpanBlock32<T> Reblock<T>(this in SpanBlock128<T> src, W32 n)
              where T : unmanaged
-                => new Block32<T>(src.Data);
+                => new SpanBlock32<T>(src.Data);
 
         /// <summary>
         /// Converts 128-bit blocks to 64-bit blocks without allocation
@@ -62,9 +62,9 @@ namespace Z0
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block64<T> Reblock<T>(this in Block128<T> src, W64 n)
+        public static SpanBlock64<T> Reblock<T>(this in SpanBlock128<T> src, W64 n)
              where T : unmanaged
-                => new Block64<T>(src.Data);
+                => new SpanBlock64<T>(src.Data);
 
         /// <summary>
         /// Converts 256-bit blocks to 16-bit blocks without allocation
@@ -73,9 +73,9 @@ namespace Z0
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block16<T> Reblock<T>(this in Block256<T> src, W16 n)
+        public static SpanBlock16<T> Reblock<T>(this in SpanBlock256<T> src, W16 n)
              where T : unmanaged
-                => new Block16<T>(src.Data);
+                => new SpanBlock16<T>(src.Data);
 
         /// <summary>
         /// Converts 256-bit blocks to 32-bit blocks without allocation
@@ -84,9 +84,9 @@ namespace Z0
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block32<T> Reblock<T>(this in Block256<T> src, W32 n)
+        public static SpanBlock32<T> Reblock<T>(this in SpanBlock256<T> src, W32 n)
              where T : unmanaged
-                => new Block32<T>(src.Data);
+                => new SpanBlock32<T>(src.Data);
 
         /// <summary>
         /// Converts 256-bit blocks to 64-bit blocks without allocation
@@ -95,9 +95,9 @@ namespace Z0
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block64<T> Reblock<T>(this in Block256<T> src, W64 n)
+        public static SpanBlock64<T> Reblock<T>(this in SpanBlock256<T> src, W64 n)
              where T : unmanaged
-                => new Block64<T>(src.Data);
+                => new SpanBlock64<T>(src.Data);
 
         /// <summary>
         /// Converts 256-bit blocks to 64-bit blocks without allocation
@@ -106,8 +106,8 @@ namespace Z0
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static Block128<T> Reblock<T>(this in Block256<T> src, W128 n)
+        public static SpanBlock128<T> Reblock<T>(this in SpanBlock256<T> src, W128 n)
              where T : unmanaged
-                => new Block128<T>(src.Data);
+                => new SpanBlock128<T>(src.Data);
     }
 }

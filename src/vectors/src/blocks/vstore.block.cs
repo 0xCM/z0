@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
+
     partial class Vectors
     {
         /// <summary>
@@ -19,15 +19,15 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
         [Op, Closures(UnsignedInts)]
-        public static Block128<T> block<T>(Vector128<T> src)
-            where T : unmanaged            
+        public static SpanBlock128<T> block<T>(Vector128<T> src)
+            where T : unmanaged
         {
             var w = w128;
             var stack = Stacks.alloc(w);
             ref var dst = ref Stacks.head<T>(ref stack);
             V0.vsave(src, ref dst);
-            return Blocks.load(w, ref dst);            
-        }                       
+            return Blocks.load(w, ref dst);
+        }
 
         /// <summary>
         /// Allocates and deposits vector content to a data block
@@ -35,15 +35,15 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [Op, Closures(UnsignedInts)]
-        public static Block256<T> block<T>(Vector256<T> src)
-            where T : unmanaged            
+        public static SpanBlock256<T> block<T>(Vector256<T> src)
+            where T : unmanaged
         {
             var w = w256;
             var stack = Stacks.alloc(w);
             ref var dst = ref Stacks.head<T>(ref stack);
             V0.vsave(src, ref dst);
-            return Blocks.load(w, ref dst);            
-        }            
+            return Blocks.load(w, ref dst);
+        }
 
         /// <summary>
         /// Allocates and deposits vector content to a data block
@@ -51,15 +51,15 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primitive type</typeparam>
         [Op, Closures(UnsignedInts)]
-        public static Block512<T> block<T>(Vector512<T> src)
-            where T : unmanaged            
+        public static SpanBlock512<T> block<T>(Vector512<T> src)
+            where T : unmanaged
         {
             var w = w512;
             var stack = Stacks.alloc(w);
             ref var dst = ref Stacks.head<T>(ref stack);
             V0.vsave(src, ref dst);
-            return Blocks.load(w, ref dst);            
-        }                  
+            return Blocks.load(w, ref dst);
+        }
 
         /// <summary>
         /// Stores the source vector to the head of a blocked container
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void vstore<T>(Vector128<T> src, in Block128<T> dst)
+        public static void vstore<T>(Vector128<T> src, in SpanBlock128<T> dst)
             where T : unmanaged
                 => V0.vsave(src, ref dst.Head);
 
@@ -80,7 +80,7 @@ namespace Z0
         /// <param name="block">The 0-based block index at which storage should begin</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void vstore<T>(Vector128<T> src, in Block128<T> dst, int block)
+        public static void vstore<T>(Vector128<T> src, in SpanBlock128<T> dst, int block)
             where T : unmanaged
                 => V0.vsave(src, ref dst.BlockRef(block));
 
@@ -91,7 +91,7 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void vstore<T>(Vector256<T> src, in Block256<T> dst)
+        public static void vstore<T>(Vector256<T> src, in SpanBlock256<T> dst)
             where T : unmanaged
                 => V0.vsave(src, ref dst.Head);
 
@@ -102,7 +102,7 @@ namespace Z0
         /// <param name="dst">The target block</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void vstore<T>(Vector512<T> src, in Block512<T> dst)
+        public static void vstore<T>(Vector512<T> src, in SpanBlock512<T> dst)
             where T : unmanaged
                 => V0.vsave(src, ref dst.Head);
 
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="block">The 0-based block index at which storage should begin</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void vstore<T>(Vector256<T> src, in Block256<T> dst, int block)
+        public static void vstore<T>(Vector256<T> src, in SpanBlock256<T> dst, int block)
             where T : unmanaged
                 => V0.vsave(src, ref dst.BlockRef(block));
 
@@ -126,7 +126,7 @@ namespace Z0
         /// <param name="block">The 0-based block index at which storage should begin</param>
         /// <typeparam name="T">The vector component type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void vstore<T>(Vector512<T> src, in Block512<T> dst, int block)
+        public static void vstore<T>(Vector512<T> src, in SpanBlock512<T> dst, int block)
             where T : unmanaged
                 => V0.vsave(src, ref dst.BlockRef(block));
     }

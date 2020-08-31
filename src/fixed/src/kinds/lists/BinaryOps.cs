@@ -12,12 +12,12 @@ namespace Z0
         /// <summary>
         /// Specifies a fixed binary operator defined over 8-bit operands
         /// </summary>
-        public static FixedOpKind<W8,Fixed8,BinaryOp8> BinaryOp8 => default;
+        public static FixedOpKind<W8,FixedCell8,BinaryOp8> BinaryOp8 => default;
 
         /// <summary>
         /// Specifies a fixed binary operator defined over 16-bit operands
         /// </summary>
-        public static FixedOpKind<W16,Fixed16,BinaryOp16> BinaryOp16 => default;
+        public static FixedOpKind<W16,FixedCell16,BinaryOp16> BinaryOp16 => default;
 
         /// <summary>
         /// Specifies a fixed binary operator defined over 32-bit operands
@@ -27,21 +27,21 @@ namespace Z0
         /// <summary>
         /// Specifies a fixed binary operator defined over 64-bit operands
         /// </summary>
-        public static FixedOpKind<W64,Fixed64,BinaryOp64> BinaryOp64 => default;
+        public static FixedOpKind<W64,FixedCell64,BinaryOp64> BinaryOp64 => default;
 
         /// <summary>
         /// Specifies a fixed binary operator defined over 128-bit operands
         /// </summary>
-        public static FixedOpKind<W128,Fixed128,BinaryOp128> BinaryOp128 => default;
+        public static FixedOpKind<W128,FixedCell128,BinaryOp128> BinaryOp128 => default;
 
         /// <summary>
         /// Specifies a fixed binary operator defined over 256-bit operands
         /// </summary>
-        public static FixedOpKind<W256,Fixed256,BinaryOp256> BinaryOp256 => default;
+        public static FixedOpKind<W256,FixedCell256,BinaryOp256> BinaryOp256 => default;
 
         /// <summary>
         /// Specifies a fixed binary operator defined over 512-bit operands
         /// </summary>
-        public static FixedOpKind<W512,Fixed512,BinaryOp512> BinaryOp512 => default;
+        public static FixedOpKind<W512,FixedCell512,BinaryOp512> BinaryOp512 => default;
     }
 }

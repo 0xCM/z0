@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     using static Konst;
     using static Typed;
 
@@ -17,15 +17,15 @@ namespace Z0
     {
         public static BitString ToBitString(this string src)
             => BitString.parse(src);
-            
+
         public static string Format(this Utf8AsciPoint src)
         {
             var bits = src.Code.FormatBits();
             var num = src.Code.FormatHex();
             var str = src.IsControl ? "___"  : $"'{src.ToChar()}'";
             return $"{num} {bits} {str}";
-        }        
-                
+        }
+
         /// <summary>
         /// Transforms an primal enumerator into a bitstream
         /// </summary>
@@ -38,7 +38,7 @@ namespace Z0
             {
                 var bs = BitString.scalar(src.Current);
                 for(var i = 0; i< 64; i++)
-                    yield return bs[i];                                    
+                    yield return bs[i];
             }
         }
 
@@ -136,15 +136,15 @@ namespace Z0
         /// Converts a span of bits to a to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         public static BitString ToBitString(this Span<bit> src)
-            => BitString.load((ReadOnlySpan<bit>)src); 
+            => BitString.load((ReadOnlySpan<bit>)src);
 
         /// <summary>
         /// Converts a readonly span of bits to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         public static BitString ToBitString(this ReadOnlySpan<bit> src)
             => BitString.load(src);
 
@@ -152,17 +152,17 @@ namespace Z0
         /// Converts span content to a to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         public static BitString ToBitString<T>(this Span<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.scalars(src, maxbits); 
+                => BitString.scalars(src, maxbits);
 
         /// <summary>
         /// Converts blocked content to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this Block64<T> src, int? maxbits = null)
+        [MethodImpl(Inline)]
+        public static BitString ToBitString<T>(this SpanBlock64<T> src, int? maxbits = null)
             where T : unmanaged
                 => BitString.scalars(src.Data, maxbits ?? w64);
 
@@ -170,8 +170,8 @@ namespace Z0
         /// Converts blocked content to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this Block128<T> src, int? maxbits = null)
+        [MethodImpl(Inline)]
+        public static BitString ToBitString<T>(this SpanBlock128<T> src, int? maxbits = null)
             where T : unmanaged
                 => BitString.scalars(src.Data, maxbits ?? w128);
 
@@ -179,29 +179,29 @@ namespace Z0
         /// Converts datablock content to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]        
-        public static BitString ToBitString<T>(this Block256<T> src, int? maxbits = null)
+        [MethodImpl(Inline)]
+        public static BitString ToBitString<T>(this SpanBlock256<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitString.scalars(src.Data, maxbits ?? w256);    
- 
+                => BitString.scalars(src.Data, maxbits ?? w256);
+
         /// <summary>
         /// Converts an 128-bit intrinsic vector representation to a bistring
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static BitString ToBitString<T>(this Vector128<T> src, int? maxbits = null)
-            where T : unmanaged 
+            where T : unmanaged
                 => BitString.load(src, maxbits);
-        
+
         /// <summary>
         /// Converts an 256-bit vector representation to a bistring
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static BitString ToBitString<T>(this Vector256<T> src, int? maxbits = null)
-            where T : unmanaged        
+            where T : unmanaged
                 => BitString.load(src, maxbits);
 
         /// <summary>
@@ -209,9 +209,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static BitString ToBitString<T>(this Vector512<T> src, int? maxbits = null)
-            where T : unmanaged        
+            where T : unmanaged
                 => BitString.load(src, maxbits);
 
         /// <summary>
@@ -219,7 +219,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The enumeration type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static BitString ToBitString<T>(this T src, int? maxbits = null)
             where T : unmanaged, Enum
                 => BitString.@enum(src, maxbits);
@@ -228,7 +228,7 @@ namespace Z0
         /// Reverses the order of the source bits
         /// </summary>
         /// <param name="src">The source bits</param>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static BitString Reverse(this BitString src)
         {
             src.BitSeq.Reverse();
@@ -252,7 +252,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString Intersperse(this BitString src, BitString value)
             => BitString.intersperse(src,value);
-        
+
         [MethodImpl(Inline)]
         public static BitString Clear(this BitString src, int i0, int i1)
             => BitString.clear(src,i0,i1);
@@ -276,13 +276,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString Xor(this BitString xbs, BitString ybs)
             => BitString.xor(xbs,ybs);
-        
+
         [MethodImpl(Inline)]
         public static BitString Srl(this BitString bs, int shift)
             => BitString.srl(bs,shift);
 
         [MethodImpl(Inline)]
-        public static BitString Sll(this BitString bs, int shift) 
+        public static BitString Sll(this BitString bs, int shift)
             => BitString.sll(bs,shift);
 
         /// <summary>

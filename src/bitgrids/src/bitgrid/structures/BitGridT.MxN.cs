@@ -19,8 +19,8 @@ namespace Z0
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
-    {                
-        internal readonly Block256<T> Data;
+    {
+        internal readonly SpanBlock256<T> Data;
 
         [MethodImpl(Inline)]
         public static bit operator ==(in BitGrid<M,N,T> g1, in BitGrid<M,N,T> g2)
@@ -31,7 +31,7 @@ namespace Z0
             => !BitGrid.same(g1,g2);
 
         [MethodImpl(Inline)]
-        internal BitGrid(in Block256<T> data)
+        internal BitGrid(in SpanBlock256<T> data)
         {
             this.Data = data;
         }
@@ -39,7 +39,7 @@ namespace Z0
         /// <summary>
         /// The allocated storage
         /// </summary>
-        public Block256<T> Content
+        public SpanBlock256<T> Content
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -65,7 +65,7 @@ namespace Z0
         public int ColCount => nati<N>();
 
         /// <summary>
-        /// The number of allocated 256-bit blocks 
+        /// The number of allocated 256-bit blocks
         /// </summary>
         public int BlockCount
         {
@@ -88,7 +88,7 @@ namespace Z0
         public int BitCount
         {
             [MethodImpl(Inline)]
-            get => (int)BitCalcs.tablebits<M,N>(); 
+            get => (int)BitCalcs.tablebits<M,N>();
         }
 
         public bit this[int row, int col]
@@ -134,11 +134,11 @@ namespace Z0
         /// <param name="block">The block index</param>
         public Span<T> SpanBlock(int block)
             => Data.Block(block);
-            
+
         [MethodImpl(Inline)]
         public bool Equals(BitGrid<M,N,T> rhs)
             => Content.Identical(rhs.Data);
- 
+
         public override bool Equals(object obj)
             => throw new NotSupportedException();
 

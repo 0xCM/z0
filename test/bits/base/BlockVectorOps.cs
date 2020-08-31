@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     public readonly struct BlockVectorOps
@@ -21,20 +21,20 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Block256<N,T> and<N,T>(Block256<N,T> lhs, Block256<N,T> rhs)
             where N : unmanaged, ITypeNat
-            where T : unmanaged    
+            where T : unmanaged
         {
             var dst = RowVectors.blockalloc<N,T>();
             and<T>(lhs.Data, rhs.Data, dst);
             return dst;
         }
 
-        public static Block256<T> and<T>(in Block256<T> lhs, in Block256<T> rhs, Block256<T> dst)
+        public static SpanBlock256<T> and<T>(in SpanBlock256<T> lhs, in SpanBlock256<T> rhs, SpanBlock256<T> dst)
             where T : unmanaged
         {
             for(var i=0; i< lhs.BlockCount; i++)
-                Vectors.vstore(gvec.vand<T>(lhs.LoadVector(i), rhs.LoadVector(i)), ref dst.BlockRef(i));                             
-            return dst;        
-        } 
+                Vectors.vstore(gvec.vand<T>(lhs.LoadVector(i), rhs.LoadVector(i)), ref dst.BlockRef(i));
+            return dst;
+        }
 
         /// <summary>
         /// Computes lhs[i] := lhs[i] + rhs[i] for i = 0...N-1
@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Block256<N,T> add<N,T>(ref Block256<N,T> x, in Block256<N,T> y)
             where N : unmanaged, ITypeNat
-            where T : unmanaged    
+            where T : unmanaged
         {
             Blocked.add<T>(x,y,x);
             return ref x;
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Block256<N,T> sub<N,T>(Block256<N,T> x, Block256<N,T> y, ref Block256<N,T> z)
             where N : unmanaged, ITypeNat
-            where T : unmanaged    
+            where T : unmanaged
         {
             Blocked.sub(x.Data, y.Data, z.Data);
             return ref z;

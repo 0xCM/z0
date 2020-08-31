@@ -56,7 +56,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Clear(W128 w)
         {
-            first(Content.Cast<T,Fixed128>()) = Fixed128.Empty;
+            first(Content.Cast<T,FixedCell128>()) = FixedCell128.Empty;
         }
     }
 }

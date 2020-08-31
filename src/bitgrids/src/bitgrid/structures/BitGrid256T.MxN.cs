@@ -16,12 +16,12 @@ namespace Z0
     /// A grid of natural dimensions M and N such that M*N = W := 256
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
-    [IdentityProvider(typeof(BitGridIdentityProvider))]    
+    [IdentityProvider(typeof(BitGridIdentityProvider))]
     public readonly ref struct BitGrid256<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
-    {                
+    {
         /// <summary>
         /// The grid state
         /// </summary>
@@ -37,11 +37,11 @@ namespace Z0
             => src.Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator Block256<T>(in BitGrid256<M,N,T> src)
+        public static implicit operator SpanBlock256<T>(in BitGrid256<M,N,T> src)
             => src.Data.ToBlock();
 
         [MethodImpl(Inline)]
-        public static implicit operator BitGrid256<M,N,T>(in Block256<T> src)
+        public static implicit operator BitGrid256<M,N,T>(in SpanBlock256<T> src)
             => new BitGrid256<M,N,T>(src);
 
 
@@ -84,15 +84,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit operator !=(in BitGrid256<M,N,T> g1, in BitGrid256<M,N,T> g2)
             => !BitGrid.same(g1,g2);
-        
+
         [MethodImpl(Inline)]
         internal BitGrid256(Vector256<T> data)
             => this.Data = data;
-        
+
         [MethodImpl(Inline)]
-        internal BitGrid256(in Block256<T> src)
+        internal BitGrid256(in SpanBlock256<T> src)
             => this.Data = src.LoadVector();
-        
+
         /// <summary>
         /// The exposed grid state
         /// </summary>
@@ -120,12 +120,12 @@ namespace Z0
         /// <summary>
         /// The number of rows in the grid
         /// </summary>
-        public int RowCount => nati<M>();         
+        public int RowCount => nati<M>();
 
         /// <summary>
         /// The number of columns in the grid
         /// </summary>
-        public int ColCount => nati<N>();  
+        public int ColCount => nati<N>();
 
         /// <summary>
         /// Reads an index-identified cell

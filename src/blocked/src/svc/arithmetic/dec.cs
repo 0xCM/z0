@@ -20,7 +20,7 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public ref readonly Block128<T> Invoke(in Block128<T> src, in Block128<T> dst)
+            public ref readonly SpanBlock128<T> Invoke(in SpanBlock128<T> src, in SpanBlock128<T> dst)
                 => ref map(src, dst, VSvc.vdec<T>(w128));
         }
 
@@ -29,7 +29,7 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public ref readonly Block256<T> Invoke(in Block256<T> src, in Block256<T> dst)
+            public ref readonly SpanBlock256<T> Invoke(in SpanBlock256<T> src, in SpanBlock256<T> dst)
                 => ref map(src, dst, VSvc.vdec<T>(w256));
         }
     }

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial class BitGrid
-    {                
+    {
         /// <summary>
         /// Loads a fixed-width natural bitgrid the first block in the source
         /// </summary>
@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid16<M,N,T> first<M,N,T>(in Block16<T> src, M m = default, N n = default)
+        public static BitGrid16<M,N,T> first<M,N,T>(in SpanBlock16<T> src, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -37,7 +37,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid32<M,N,T> first<M,N,T>(in Block32<T> src, M m = default, N n = default)
+        public static BitGrid32<M,N,T> first<M,N,T>(in SpanBlock32<T> src, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -53,7 +53,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid64<M,N,T> first<M,N,T>(in Block64<T> src, M m = default, N n = default)
+        public static BitGrid64<M,N,T> first<M,N,T>(in SpanBlock64<T> src, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -69,7 +69,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid128<M,N,T> first<M,N,T>(in Block128<T> src, M m = default, N n = default)
+        public static BitGrid128<M,N,T> first<M,N,T>(in SpanBlock128<T> src, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -85,7 +85,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid256<M,N,T> first<M,N,T>(in Block256<T> src, M m = default, N n = default)
+        public static BitGrid256<M,N,T> first<M,N,T>(in SpanBlock256<T> src, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged

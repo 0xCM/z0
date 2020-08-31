@@ -17,8 +17,8 @@ namespace Z0
     [IdentityProvider(typeof(BitGridIdentityProvider))]
     public readonly ref struct BitGrid<T>
         where T : unmanaged
-    {                
-        internal readonly Block256<T> Data;
+    {
+        internal readonly SpanBlock256<T> Data;
 
         /// <summary>
         /// The number of grid rows
@@ -37,16 +37,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(in BitGrid<T> g1, in BitGrid<T> g2)
             => !g1.Equals(g2);
-        
+
         [MethodImpl(Inline)]
-        internal BitGrid(Block256<T> data, int rows, int cols)
+        internal BitGrid(SpanBlock256<T> data, int rows, int cols)
         {
             Data = data;
             RowCount = rows;
             ColCount = cols;
         }
 
-        public Block256<T> Content
+        public SpanBlock256<T> Content
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -57,7 +57,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data.Head;
         }
-        
+
         /// <summary>
         /// The number of cells over which the grid is defined
         /// </summary>

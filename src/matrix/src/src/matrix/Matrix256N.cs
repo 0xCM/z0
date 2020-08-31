@@ -17,24 +17,24 @@ namespace Z0
     /// <typeparam name="T">The primal type</typeparam>
     public readonly ref struct Matrix256<N,T>
         where N : unmanaged, ITypeNat
-        where T : unmanaged    
-    {        
-        readonly Block256<T> data;
+        where T : unmanaged
+    {
+        readonly SpanBlock256<T> data;
 
         /// <summary>
         /// The square matrix dimension
         /// </summary>
-        public static int Order 
+        public static int Order
             => (int)value<N>();
 
         /// <summary>
         /// The total number of allocated elements
         /// </summary>
-        public static int CellCount 
+        public static int CellCount
             => (int)NatCalc.square<N>();
 
         [MethodImpl(Inline)]
-        public static implicit operator Matrix256<N,T>(Block256<T> src)
+        public static implicit operator Matrix256<N,T>(SpanBlock256<T> src)
             => new Matrix256<N,T>(src);
 
         [MethodImpl(Inline)]
@@ -54,37 +54,37 @@ namespace Z0
             => src.Unsized;
 
         [MethodImpl(Inline)]
-        public static implicit operator Block256<T>(Matrix256<N,T> src)
+        public static implicit operator SpanBlock256<T>(Matrix256<N,T> src)
             => src.Unsized;
 
         [MethodImpl(Inline)]
-        public static bool operator == (Matrix256<N,T> lhs, in Matrix256<N,T> rhs) 
+        public static bool operator == (Matrix256<N,T> lhs, in Matrix256<N,T> rhs)
             => lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static bool operator != (Matrix256<N,T> lhs, in Matrix256<N,T> rhs) 
+        public static bool operator != (Matrix256<N,T> lhs, in Matrix256<N,T> rhs)
             => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public Matrix256(Block256<T> src)
+        public Matrix256(SpanBlock256<T> src)
         {
             Demands.insist(src.CellCount >= CellCount);
             data = src;
         }
-        
-        [MethodImpl(Inline)]        
+
+        [MethodImpl(Inline)]
         public ref T Cell(int r, int c)
             => ref data[Order*r + c];
 
         public ref T this[int r, int c]
         {
-            [MethodImpl(Inline)]        
+            [MethodImpl(Inline)]
             get => ref Cell(r,c);
         }
 
         public ref T this[uint r, uint c]
         {
-            [MethodImpl(Inline)]        
+            [MethodImpl(Inline)]
             get => ref Cell((int)r,(int)c);
         }
 
@@ -93,7 +93,7 @@ namespace Z0
         {
             if(row < 0 || row >= Order)
                 throw AppErrors.IndexOutOfRange(row, 0, Order - 1);
-            
+
             return RowVectors.blockload<N,T>(data.Slice(row * Order, Order));
         }
 
@@ -102,7 +102,7 @@ namespace Z0
         {
             if(row < 0 || row >= Order)
                 AppErrors.ThrowOutOfRange<T>(row, 0, Order - 1);
-             
+
              var src = data.Slice(row * Order, Order);
              src.CopyTo(dst.Unsized);
              return ref dst;
@@ -112,7 +112,7 @@ namespace Z0
         {
             if(col < 0 || col >= Order)
                 AppErrors.ThrowOutOfRange<T>(col, 0, Order - 1);
-            
+
             for(var row = 0; row < Order; row++)
                 dst[row] = data[row*Order + col];
             return ref dst;
@@ -129,7 +129,7 @@ namespace Z0
         /// Provides access to the underlying data as a linear unblocked span
         /// </summary>
         public Span<T> Unblocked
-        {            
+        {
             [MethodImpl(Inline)]
             get => data;
         }
@@ -137,8 +137,8 @@ namespace Z0
         /// <summary>
         /// Provides access to the underlying data as a 256-bit blocked span
         /// </summary>
-        public Block256<T> Unsized
-        {            
+        public SpanBlock256<T> Unsized
+        {
             [MethodImpl(Inline)]
             get => data;
         }
@@ -204,7 +204,7 @@ namespace Z0
 
         public override bool Equals(object other)
             => throw new NotSupportedException();
- 
+
         public override int GetHashCode()
             => throw new NotSupportedException();
     }

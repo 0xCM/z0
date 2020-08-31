@@ -24,7 +24,7 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static NatSpan<N,T> natspan<N,T>(in Block256<T> src, N n = default)
+        public static NatSpan<N,T> natspan<N,T>(in SpanBlock256<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => NatSpan.load(src.Data,n);
@@ -133,7 +133,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Matrix256<M,N,T> blockload<M,N,T>(Block256<T> src, M m = default, N n = default)
+        public static Matrix256<M,N,T> blockload<M,N,T>(SpanBlock256<T> src, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -147,7 +147,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Matrix256<N,T> blockload<N,T>(Block256<T> src,  N n = default)
+        public static Matrix256<N,T> blockload<N,T>(SpanBlock256<T> src,  N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new Matrix256<N, T>(src);

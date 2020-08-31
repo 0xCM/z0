@@ -21,7 +21,7 @@ namespace Z0
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
-    {                
+    {
         /// <summary>
         /// The grid state
         /// </summary>
@@ -31,7 +31,7 @@ namespace Z0
         /// The number of bytes covered by the grid
         /// </summary>
         public const int ByteCount = 2;
-        
+
         [MethodImpl(Inline)]
         public static implicit operator BitGrid16<M,N,T>(ushort src)
             => new BitGrid16<M,N,T>(src);
@@ -39,9 +39,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ushort(BitGrid16<M,N,T> src)
             => src.Data;
-        
+
         [MethodImpl(Inline)]
-        public static implicit operator BitGrid16<M,N,T>(in Block16<T> src)
+        public static implicit operator BitGrid16<M,N,T>(in SpanBlock16<T> src)
             => new BitGrid16<M,N,T>(src);
 
         [MethodImpl(Inline)]
@@ -57,7 +57,7 @@ namespace Z0
             => this.Data = src;
 
         [MethodImpl(Inline)]
-        internal BitGrid16(Block16<T> src)
+        internal BitGrid16(SpanBlock16<T> src)
             => this.Data = src.As<ushort>().Head;
 
         /// <summary>
@@ -105,12 +105,12 @@ namespace Z0
         /// <summary>
         /// The number of rows in the grid
         /// </summary>
-        public int RowCount => nati<M>();         
+        public int RowCount => nati<M>();
 
         /// <summary>
         /// The number of columns in the grid
         /// </summary>
-        public int ColCount => nati<N>();  
+        public int ColCount => nati<N>();
 
         /// <summary>
         /// Reads/writes an index-identified cell

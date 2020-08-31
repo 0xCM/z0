@@ -10,18 +10,18 @@ namespace Z0
     using System.Collections.Generic;
 
    public interface IFixedStreamProvider<F> : IStreamProvider<F>
-        where F : unmanaged, IFixed
+        where F : unmanaged, IFixedCell
     {
-        new IEnumerable<F> Stream {get;}   
+        new IEnumerable<F> Stream {get;}
 
         IEnumerable<F> IStreamProvider<F>.Stream
             => Stream;
     }
 
     public interface IFixedStreamProvider<F,W,T> : IFixedStreamProvider<F>
-        where F : unmanaged, IFixed
+        where F : unmanaged, IFixedCell
         where W : unmanaged, ITypeWidth
-        where T : unmanaged            
+        where T : unmanaged
     {
 
     }

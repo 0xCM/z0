@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
- 
+
     using static Konst;
 
     partial class FixedOps
@@ -19,8 +19,8 @@ namespace Z0
         /// <typeparam name="F">The target operand type</typeparam>
         /// <typeparam name="T">The source operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryOp<F> fix<F,T>(UnaryOp<T> f)            
-            where F : unmanaged, IFixed
+        public static UnaryOp<F> fix<F,T>(UnaryOp<T> f)
+            where F : unmanaged, IFixedCell
             where T : unmanaged
                 => a => Fixed.fix<T,F>(f(Fixed.unfix<F,T>(a)));
 
@@ -32,7 +32,7 @@ namespace Z0
         /// <typeparam name="T">The source operand type</typeparam>
         [MethodImpl(Inline)]
         public static BinaryOp<F> fix<F,T>(BinaryOp<T> f)
-            where F : unmanaged, IFixed
+            where F : unmanaged, IFixedCell
             where T : unmanaged
                 => (F a, F b) => Fixed.fix<T,F>(f(Fixed.unfix<F,T>(a), Fixed.unfix<F,T>(b)));
 
@@ -43,8 +43,8 @@ namespace Z0
         /// <typeparam name="F">The source operand type</typeparam>
         /// <typeparam name="T">The target operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryOp<T> unfix<F,T>(UnaryOp<F> f)            
-            where F : unmanaged, IFixed
+        public static UnaryOp<T> unfix<F,T>(UnaryOp<F> f)
+            where F : unmanaged, IFixedCell
             where T : unmanaged
                 => a => Fixed.unfix<F,T>(f(Fixed.fix<T,F>(a)));
 
@@ -55,8 +55,8 @@ namespace Z0
         /// <typeparam name="F">The source operand type</typeparam>
         /// <typeparam name="T">The target operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryOp<T> unfix<F,T>(BinaryOp<F> f)            
-            where F : unmanaged, IFixed
+        public static BinaryOp<T> unfix<F,T>(BinaryOp<F> f)
+            where F : unmanaged, IFixedCell
             where T : unmanaged
                 => (T a, T b) => Fixed.unfix<F,T>(f(Fixed.fix<T,F>(a), Fixed.fix<T,F>(b)));
     }

@@ -19,7 +19,7 @@ namespace Z0
         //     where T : unmanaged
         // {
         //     [MethodImpl(Inline)]
-        //     public ref readonly Block64<T> Invoke(in Block64<T> a, in Block64<T> b, in Block64<T> dst)            
+        //     public ref readonly Block64<T> Invoke(in Block64<T> a, in Block64<T> b, in Block64<T> dst)
         //         => ref zip(a, b, dst, MSvc.and<T>);
         // }
 
@@ -28,7 +28,7 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public ref readonly Block128<T> Invoke(in Block128<T> a, in Block128<T> b, in Block128<T> dst)            
+            public ref readonly SpanBlock128<T> Invoke(in SpanBlock128<T> a, in SpanBlock128<T> b, in SpanBlock128<T> dst)
                 => ref zip(a, b, dst, VSvc.vand<T>(w128));
         }
 
@@ -37,8 +37,8 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public ref readonly Block256<T> Invoke(in Block256<T> a, in Block256<T> b, in Block256<T> dst)            
+            public ref readonly SpanBlock256<T> Invoke(in SpanBlock256<T> a, in SpanBlock256<T> b, in SpanBlock256<T> dst)
                 => ref zip(a, b, dst, VSvc.vand<T>(w256));
-        } 
+        }
     }
 }

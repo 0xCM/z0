@@ -5,13 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst; 
+
+    using static Konst;
     using static Root;
     using static V0;
-    
+
     partial class gvec
     {
         /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
             ref var dst = ref vref(ref buffer);
             var length = min(count, bitsize<S>());
             for(var i=0; i<length; i++)
-                seek(ref dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;            
+                seek(ref dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
             return buffer;
         }
 
@@ -52,7 +52,7 @@ namespace Z0
             ref var dst = ref vref(ref buffer);
             var length = min(count, bitsize<S>());
             for(var i=0; i<length; i++)
-                seek(ref dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;            
+                seek(ref dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
             return buffer;
         }
 
@@ -65,7 +65,7 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly Block128<T> broadcast<S,T>(S src, T enabled, in Block128<T> dst)
+        public static ref readonly SpanBlock128<T> broadcast<S,T>(S src, T enabled, in SpanBlock128<T> dst)
             where S : unmanaged
             where T : unmanaged
         {
@@ -84,7 +84,7 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly Block256<T> broadcast<S,T>(S src, T enabled, in Block256<T> dst)
+        public static ref readonly SpanBlock256<T> broadcast<S,T>(S src, T enabled, in SpanBlock256<T> dst)
             where S : unmanaged
             where T : unmanaged
         {
@@ -105,6 +105,6 @@ namespace Z0
         public static T broadcast<S,T>(S src, T t = default)
             where S : unmanaged
             where T : unmanaged
-                => Vectors.vfirst<S,T>(Vectors.vbroadcast(N128.N, src));                
+                => Vectors.vfirst<S,T>(Vectors.vbroadcast(N128.N, src));
     }
 }

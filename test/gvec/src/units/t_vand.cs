@@ -13,11 +13,11 @@ namespace Z0
     public class t_vand : t_inx<t_vand>
     {
         public void vand_check()
-        {            
+        {
             vand_check(n128);
             vand_check(n256);
 
-            
+
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.CpuVector(n128,z32);
@@ -28,7 +28,7 @@ namespace Z0
 
         void vand_check(N128 w)
         {
-            vand_check(w, z8);                
+            vand_check(w, z8);
             vand_check(w, z8i);
             vand_check(w, z16);
             vand_check(w, z16i);
@@ -41,25 +41,25 @@ namespace Z0
 
         void vand_check(N256 w)
         {
-            vand_check(w, z8);                
+            vand_check(w, z8);
             vand_check(w, z8i);
             vand_check(w, z16);
             vand_check(w, z16i);
             vand_check(w, z32);
             vand_check(w, z32i);
             vand_check(w, z64);
-            vand_check(w, z64i);            
-        }            
+            vand_check(w, z64i);
+        }
 
         static bit vand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             var svc = MSvc.bitlogic<T>();
             var v1 = VSvc.vbitlogic<T>(w128).and(x,y);
-            
-            var buffer = Fixed.alloc<Fixed128>();
-            ref var dst = ref Fixed.head<Fixed128,T>(ref buffer);
-            var count = z.vcount<T>(w128);  
+
+            var buffer = Fixed.alloc<FixedCell128>();
+            ref var dst = ref Fixed.head<FixedCell128,T>(ref buffer);
+            var count = z.vcount<T>(w128);
 
             for(byte i=0; i< count; i++)
                 seek(dst, i) = svc.and(vcell(x,i), vcell(y,i));
@@ -70,7 +70,7 @@ namespace Z0
         void vand_check<T>(N128 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckBinaryOp(VSvc.vand(w,t), w, t);
-            
+
         void vand_check<T>(N256 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckBinaryOp(VSvc.vand(w,t), w, t);

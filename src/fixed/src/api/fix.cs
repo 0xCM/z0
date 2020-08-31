@@ -13,14 +13,14 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static F fix<T,F>(T src)
-            where F : unmanaged, IFixed
-            where T : unmanaged        
+            where F : unmanaged, IFixedCell
+            where T : unmanaged
                 => Unsafe.As<T,F>(ref src);
 
         [MethodImpl(Inline)]
         public static T unfix<F,T>(F src)
-            where F : unmanaged, IFixed
-            where T : unmanaged        
+            where F : unmanaged, IFixedCell
+            where T : unmanaged
                 => Unsafe.As<F,T>(ref src);
     }
 }

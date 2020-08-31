@@ -14,18 +14,18 @@ namespace Z0.Asm.Dsl
 
     public readonly struct Xmm : IXmmOperand
     {
-        public Fixed128 Content {get;}
-        
-        public RegisterKind Kind {get;}     
+        public FixedCell128 Content {get;}
 
-        public RegisterCode Code 
+        public RegisterKind Kind {get;}
+
+        public RegisterCode Code
         {
             [MethodImpl(Inline)]
             get => RegisterBits.code(Kind);
         }
 
         [MethodImpl(Inline)]
-        public Xmm(Fixed128 value, RegisterKind kind)
+        public Xmm(FixedCell128 value, RegisterKind kind)
         {
             Content = value;
             Kind = kind;

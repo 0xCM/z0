@@ -10,16 +10,16 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public struct M256 : IAsmMemoryOp<M256,W256,Fixed256>
+    public struct M256 : IAsmMemoryOp<M256,W256,FixedCell256>
     {
-        public Fixed256 Data;
+        public FixedCell256 Data;
 
         [MethodImpl(Inline)]
-        public M256(Fixed256 src)
+        public M256(FixedCell256 src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator M256(Fixed256 src)
+        public static implicit operator M256(FixedCell256 src)
             => new M256(src);
 
         [MethodImpl(Inline)]
@@ -27,10 +27,10 @@ namespace Z0.Asm
             => new M256(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator Fixed256(M256 src)
+        public static implicit operator FixedCell256(M256 src)
             => src.Data;
 
-        Fixed256 IAsmOperand<Fixed256>.Content
+        FixedCell256 IAsmOperand<FixedCell256>.Content
             => Data;
     }
 }

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
     using static z;
 
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="dst">The bit target</param>
         [MethodImpl(Inline), Unpack]
-        public static void unpack32x1(uint src, in Block256<byte> dst)
+        public static void unpack32x1(uint src, in SpanBlock256<byte> dst)
             => unpack32x1(src, dst.Data);
 
 
