@@ -52,6 +52,17 @@ namespace Z0
                 => text.nonempty(substring) ? Match(match).Where(f => !f.Name.Contains(substring)) : Match(match);
 
             /// <summary>
+            /// Creates the represented directory in the file system if it doesn't exist
+            /// </summary>
+            /// <param name="dst">The target path</param>
+            public FolderPath Create()
+            {
+                if(!Directory.Exists(Name))
+                    Directory.CreateDirectory(Name);
+                return this;
+            }
+
+            /// <summary>
             /// Specifies whether the represented directory actually exists within the file system
             /// </summary>
             public bool Exists

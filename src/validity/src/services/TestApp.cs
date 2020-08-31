@@ -25,19 +25,19 @@ namespace Z0
         protected virtual string AppName
             => GetType().Assembly.GetSimpleName();
 
-        
+
         protected TestApp()
         {
             OnDispose += HandleDispose;
             CaseLog = CaseLog.create(AppPaths.CaseLogPath);
-            Log = AppMsgLog.create(AppPaths.TestStandardPath, AppPaths.TestErrorPath);
+            Log = AppMsgLog.create(AppPaths.TestStatusPath, AppPaths.TestErrorPath);
         }
 
         void HandleDispose()
         {
             CaseLog.Dispose();
         }
-        
+
         ConcurrentQueue<TestCaseRecord> TestResultQueue {get;}
             = new ConcurrentQueue<TestCaseRecord>();
 

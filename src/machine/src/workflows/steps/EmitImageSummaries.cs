@@ -14,7 +14,7 @@ namespace Z0
 
     public ref struct EmitImageSummaries
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
@@ -25,7 +25,7 @@ namespace Z0
         readonly FilePath TargetPath;
 
         [MethodImpl(Inline)]
-        public EmitImageSummaries(IWfContext wf, LocatedImages images, CorrelationToken ct)
+        public EmitImageSummaries(IWfShell wf, LocatedImages images, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

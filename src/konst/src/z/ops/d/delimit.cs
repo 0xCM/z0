@@ -12,7 +12,7 @@ namespace Z0
     partial struct z
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static DelimitedList<T> delimit<T>(T[] src, char delimiter = Chars.Comma)
-            => new DelimitedList<T>(src, delimiter);
+        public static DelimitedList<object> delimit(params object[] src)
+            => new DelimitedList<object>(src, FieldDelimiter);
     }
 }

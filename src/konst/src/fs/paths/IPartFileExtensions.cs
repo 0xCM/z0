@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IPartFileExtensions : IPartLogExtensions
+    public interface IPartFileExtensions
     {
         /// <summary>
         /// Extract log extension
@@ -60,5 +60,15 @@ namespace Z0
         /// Extension for part configuration files
         /// </summary>
         FileExtension Config =>  FileExtensions.Json;
+
+        /// <summary>
+        /// Extension for application status logs
+        /// </summary>
+        FileExtension StatusLog => FileExtensions.StatusLog;
+
+        /// <summary>
+        /// Extension for error output capture logs
+        /// </summary>
+        FileExtension ErrorLog => FileExtensions.ErrorLog;
     }
 }

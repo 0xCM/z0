@@ -47,6 +47,6 @@ namespace Z0
         }
 
         public string DelimitedText(char sep)
-            => this.FormatRow(sep);
+            => XedOps.format(this,sep);
     }
 }

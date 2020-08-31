@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         public uint EmissionCount;
 
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
@@ -36,7 +36,7 @@ namespace Z0
         readonly FilePath TargetPath;
 
         [MethodImpl(Inline)]
-        public EmitPartStrings(IWfContext wf, IPart part, PartStringKind sk, FolderPath dir, CorrelationToken ct)
+        public EmitPartStrings(IWfShell wf, IPart part, PartStringKind sk, FolderPath dir, CorrelationToken ct)
         {
             Wf = wf;
             Part = part;

@@ -45,7 +45,7 @@ namespace Z0
              StdLock = new object();
              Console.OutputEncoding = new UnicodeEncoding();
              Console.CancelKeyPress += OnCancelKeyPressed;
-             ErrorLogPath = ShellBase.Default.AppPaths.AppErrorOutPath.ChangeExtension(FileExtension.Define("term.errors.log")).CreateParentIfMissing();
+             ErrorLogPath = Shells.Default.AppPaths.AppErrorLogPath.ChangeExtension(FileExtension.Define("term.errors.log")).CreateParentIfMissing();
         }
 
         /// <summary>

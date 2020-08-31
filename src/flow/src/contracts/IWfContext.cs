@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
@@ -18,12 +17,7 @@ namespace Z0
     /// </summary>
     public interface IWfContext : IWfShell
     {
-        IAppContext ContextRoot {get;}
-
         IWfBroker Broker {get;}
-
-        IShellContext IWfShell.Shell
-            => ContextRoot;
 
         FilePath ResPack
             => FilePath.Define(@"J:\dev\projects\z0-logs\respack\.bin\lib\netcoreapp3.0\z0.respack.dll");
@@ -53,7 +47,7 @@ namespace Z0
             => Raise(WfEvents.ran(WfStepId.Empty, content, ct ?? Ct));
 
         void Status<T>(WfStepId worker, T message, CorrelationToken ct)
-            => Flow.status(this, worker, message,ct);
+            => AB.status(this, worker, message,ct);
 
         void RunningT<T>(string actor, T output, CorrelationToken? ct = null)
             => Raise(WfEvents.running(WfStepId.Empty, output, Ct));

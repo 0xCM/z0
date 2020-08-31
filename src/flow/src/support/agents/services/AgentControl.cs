@@ -10,10 +10,10 @@ namespace Z0
 
     public class AgentControl : AgentControl<IAgentControl,IAgentContext>, IAgentControl
     {
-        public static IAgentControl FromContext(IShellBase context)
+        public static IAgentControl FromContext(IShellContext context)
             => new AgentControl(context);
 
-        public AgentControl(IShellBase Context)
+        public AgentControl(IShellContext Context)
             : base(Context)
         {
 

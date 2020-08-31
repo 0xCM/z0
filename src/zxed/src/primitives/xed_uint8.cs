@@ -55,7 +55,7 @@ namespace Z0.Xed
         [MethodImpl(Inline), Op]
         public static xed_uint8_t operator <<(xed_uint8_t src, int shift)
             => sll(src.data, (byte)shift);
-        
+
         [MethodImpl(Inline), Op]
         public static xed_uint8_t operator >>(xed_uint8_t src, int shift)
             => srl(src.data, (byte)shift);
@@ -71,7 +71,7 @@ namespace Z0.Xed
         [MethodImpl(Inline), Op]
         public static implicit operator byte(xed_uint8_t src)
             => src.data;
-                
+
         [MethodImpl(Inline), Op]
         public static implicit operator bool(xed_uint8_t src)
             => src.data != 0;

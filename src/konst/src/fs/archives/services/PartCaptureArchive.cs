@@ -13,16 +13,18 @@ namespace Z0
     {
         public FolderPath ArchiveRoot {get;}
 
-        public FolderName AreaName {get;}
-
-        public FolderName SubjectName {get;}
 
         [MethodImpl(Inline)]
         internal PartCaptureArchive(FolderPath root, FolderName area, FolderName subject)
         {
             ArchiveRoot = root.Create();
-            AreaName = area;
-            SubjectName = subject;
         }
+
+        [MethodImpl(Inline)]
+        internal PartCaptureArchive(FS.FolderPath root)
+        {
+            ArchiveRoot = FolderPath.Define(root.Create().Name);
+        }
+
     }
 }

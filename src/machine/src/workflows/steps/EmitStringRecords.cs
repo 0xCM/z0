@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
     using static EmitStringRecordsStep;
 
     public ref struct EmitStringRecords
@@ -27,14 +28,14 @@ namespace Z0
         /// </summary>
         public readonly FolderPath TargetDir;
 
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
         readonly IPart[] Parts;
 
         [MethodImpl(Inline)]
-        public EmitStringRecords(IWfContext wf, IPart[] parts, CorrelationToken ct)
+        public EmitStringRecords(IWfShell wf, IPart[] parts, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
@@ -42,7 +43,12 @@ namespace Z0
             TargetDir = wf.ResourceRoot + FolderName.Define(TargetFolder);
             EmissionCount = 0;
             PartCount = (uint)parts.Length;
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId);
+        }
+
+        public void Dispose()
+        {
+            Wf.Finished(StepId);
         }
 
         uint EmitUserStrings(IPart part)
@@ -61,7 +67,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.RunningT(StepName, new {PartCount, TargetDir}, Ct);
+            Wf.Running(StepId, delimit(PartCount, TargetDir));
 
             foreach(var part in Parts)
             {
@@ -69,12 +75,7 @@ namespace Z0
                 EmissionCount += EmitSystemStrings(part);
             }
 
-            Wf.RanT(StepName, new {PartCount, EmissionCount}, Ct);
-        }
-
-        public void Dispose()
-        {
-            Wf.Finished(StepName, Ct);
+            Wf.Ran(StepId, delimit(PartCount, EmissionCount));
         }
     }
 }

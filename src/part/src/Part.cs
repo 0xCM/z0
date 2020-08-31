@@ -20,7 +20,7 @@ namespace Z0
         public static PartId ExecutingPart
             => id(Assembly.GetEntryAssembly());
 
-        public static string RuntimeRoot
+        public static string ShellExeDir
             => Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 
         public static PartId[] identities(Assembly[] src)

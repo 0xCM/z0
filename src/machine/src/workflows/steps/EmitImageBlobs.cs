@@ -17,14 +17,14 @@ namespace Z0
 
         public readonly FolderPath TargetDir;
 
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
         readonly IPart[] Parts;
 
         [MethodImpl(Inline)]
-        public EmitImageBlobs(IWfContext wf, IPart[] parts, CorrelationToken ct)
+        public EmitImageBlobs(IWfShell wf, IPart[] parts, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

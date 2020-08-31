@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using System;
 
-    public interface IImmEmitter : IShellBase, IDisposable
+    public interface IImmEmitter : IShellContext, IDisposable
     {
         void EmitLiteral(byte[] imm8, params PartId[] parts);
 

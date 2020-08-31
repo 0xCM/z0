@@ -48,8 +48,8 @@ namespace Z0
         /// <param name="rest">The formattables to be rendered and concatenated</param>
         [MethodImpl(Inline), Op]
         public static string format(object first)
-            =>  first is ITextual t ? t.Format() : first?.ToString() ?? EmptyString;
-                    
+            =>  first is ITextual t ? t.Format() : first?.ToString() ?? "!!null!!";
+
         /// <summary>
         /// Formats a pattern using a parametric argument
         /// </summary>
@@ -58,7 +58,7 @@ namespace Z0
         /// <typeparam name="T">The argument type</typeparam>
         [MethodImpl(Inline)]
         public static string format<T>(string pattern, T arg0)
-            => string.Format(pattern, 
+            => string.Format(pattern,
                 arg0 is ITextual t ? t.Format() : $"{arg0}"
                 );
 
@@ -69,7 +69,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string format(in StringRef src)
             => src.Format();
-        
+
         /// <summary>
         /// Formats a source operand according to a specified pattern
         /// </summary>
@@ -140,8 +140,8 @@ namespace Z0
         /// <typeparam name="B">The second argument type</typeparam>
         [MethodImpl(Inline)]
         public static string format<A,B>(string pattern, A arg0, B arg1)
-            => string.Format(pattern, 
-                arg0 is ITextual t0 ? t0.Format() : $"{arg0}", 
+            => string.Format(pattern,
+                arg0 is ITextual t0 ? t0.Format() : $"{arg0}",
                 arg1 is ITextual t1 ? t1.Format() : $"{arg1}"
                 );
 
@@ -157,8 +157,8 @@ namespace Z0
         /// <typeparam name="C">The third argument type</typeparam>
         [MethodImpl(Inline)]
         public static string format<A,B,C>(string pattern, A arg0, B arg1, C arg2)
-            => string.Format(pattern, 
-                            arg0 is ITextual t0 ? t0.Format() : $"{arg0}", 
+            => string.Format(pattern,
+                            arg0 is ITextual t0 ? t0.Format() : $"{arg0}",
                             arg1 is ITextual t1 ? t1.Format() : $"{arg1}",
                             arg2 is ITextual t2 ? t2.Format() : $"{arg2}"
                             );
@@ -175,8 +175,8 @@ namespace Z0
         /// <typeparam name="C">The third argument type</typeparam>
         [MethodImpl(Inline)]
         public static string format<A,B,C,D>(string pattern, A arg0, B arg1, C arg2, D arg3)
-            => string.Format(pattern, 
-                            arg0 is ITextual t0 ? t0.Format() : $"{arg0}", 
+            => string.Format(pattern,
+                            arg0 is ITextual t0 ? t0.Format() : $"{arg0}",
                             arg1 is ITextual t1 ? t1.Format() : $"{arg1}",
                             arg2 is ITextual t2 ? t2.Format() : $"{arg2}",
                             arg3 is ITextual t3 ? t3.Format() : $"{arg3}"
@@ -194,8 +194,8 @@ namespace Z0
         /// <typeparam name="C">The third argument type</typeparam>
         [MethodImpl(Inline)]
         public static string format<A,B,C,D,E>(string pattern, A arg0, B arg1, C arg2, D arg3, E arg4)
-            => string.Format(pattern, 
-                            arg0 is ITextual t0 ? t0.Format() : $"{arg0}", 
+            => string.Format(pattern,
+                            arg0 is ITextual t0 ? t0.Format() : $"{arg0}",
                             arg1 is ITextual t1 ? t1.Format() : $"{arg1}",
                             arg2 is ITextual t2 ? t2.Format() : $"{arg2}",
                             arg3 is ITextual t3 ? t3.Format() : $"{arg3}",
@@ -206,7 +206,7 @@ namespace Z0
         /// Formats a <see cref='ITextual'/>
         /// </summary>
         /// <param name="src">The source element</param>
-        /// <typeparam name="T">The element type</typeparam>        
+        /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static string format<T>(T src)
             where T : struct, ITextual
@@ -219,6 +219,6 @@ namespace Z0
         /// <typeparam name="F">The element type</typeparam>
         public static IEnumerable<string> format<F>(IEnumerable<F> items)
             where F : ITextual
-                => items.Select(m => m.Format());                
+                => items.Select(m => m.Format());
     }
 }

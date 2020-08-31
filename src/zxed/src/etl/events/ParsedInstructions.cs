@@ -3,27 +3,21 @@
 // Copyright   : (c) Chris Moore, 2020
 // License     : Apache
 //-----------------------------------------------------------------------------
-namespace Z0.XedWf
+namespace Z0.Xed
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static Render;
+    using static AB;
 
-    public readonly struct ParsedInstructions : IWfEvent<ParsedInstructions>
+    public readonly struct ParsedXedInstructions : IWfEvent<ParsedXedInstructions>
     {
-        public const string EventName = nameof(ParsedInstructions);
-
         /// <summary>
         /// The event identifier
         /// </summary>
         public WfEventId EventId {get;}
-
-        /// <summary>
-        /// The step that was executing when the event originated
-        /// </summary>
-        public WfStepId StepId {get;}
 
         /// <summary>
         /// The input file path
@@ -41,16 +35,16 @@ namespace Z0.XedWf
         public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public ParsedInstructions(WfStepId step, FS.FilePath source, Count32 count, CorrelationToken ct, MessageFlair flair = Ran)
+        public ParsedXedInstructions(WfStepId step, FS.FilePath source, Count32 count, CorrelationToken ct, MessageFlair flair = Ran)
         {
-            EventId = (EventName, ct);
-            StepId = step;
+            EventId = id<ParsedXedInstructions>(step,ct);
             Source = source;
             Count = count;
             Flair = flair;
         }
 
+        [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, StepId, Count, Source);
+            => Render.format(EventId, Count, Source);
     }
 }

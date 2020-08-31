@@ -13,7 +13,7 @@ namespace Z0
 
     public ref struct EmitPeImage
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
@@ -38,7 +38,7 @@ namespace Z0
         readonly HexDataFormatter Formatter;
 
         [MethodImpl(Inline)]
-        public EmitPeImage(IWfContext wf, IPart part, MemoryAddress @base, FilePath dst, CorrelationToken ct)
+        public EmitPeImage(IWfShell wf, IPart part, MemoryAddress @base, FilePath dst, CorrelationToken ct)
         {
             Ct = ct;
             Wf = wf;

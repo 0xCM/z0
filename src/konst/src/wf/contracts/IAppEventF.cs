@@ -15,14 +15,14 @@ namespace Z0
     public interface IAppEvent<F> : IAppEvent, INullary<F>, ICorrelated<F>, IChronic<F>
         where F : struct, IAppEvent<F>
     {
-        F INullary<F>.Zero 
+        F INullary<F>.Zero
             => default;
     }
-    
+
     [SuppressUnmanagedCodeSecurity]
     public interface IAppEvent<F,T> : IAppEvent<F>
         where F : struct, IAppEvent<F,T>
     {
-        T Data {get;}
+        WfPayload<T> Content => default;
     }
 }

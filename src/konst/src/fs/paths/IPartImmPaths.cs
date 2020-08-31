@@ -11,7 +11,7 @@ namespace Z0
         /// <summary>
         /// The imm root directory path
         /// </summary>
-        FolderPath ImmRootDir
+        FolderPath ImmRoot
             => ImmRootDirPath(ArchiveRoot);
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="part">The owning part</param>
         /// <param name="ext">The extension to match</param>
         FolderPath[] ImmDirs(PartId part)
-            => ImmRootDir.SubDirs.Where(d => d.Name.EndsWith(part.Format()));
+            => ImmRoot.SubDirs.Where(d => d.Name.EndsWith(part.Format()));
 
         FolderPath[] ImmHostDirs(PartId part)
             => ImmDirs(part).SelectMany(path => path.SubDirs).ToArray();
@@ -75,10 +75,10 @@ namespace Z0
             => parts.Select(AsmImmFiles).Join();
 
         FolderPath ImmSubDir(FolderName name)
-            => (ImmRootDir + name);
+            => (ImmRoot + name);
 
         FolderPath ImmSubDir(RelativeLocation name)
-            => (ImmRootDir +  name);
+            => (ImmRoot +  name);
 
         FilePath HexImmPath(PartId owner, ApiHostUri host, OpIdentity id)
             => ImmSubDir(RelativeLocation.Define(owner.Format(), host.Name)) + HexOpFileName(id);

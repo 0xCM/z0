@@ -7,7 +7,7 @@ namespace Z0
     partial struct FS
     {
         [LiteralProvider]
-        public readonly struct ExtensionNames
+        public readonly struct CommonExtensionNames
         {
             /// <summary>
             /// Defines the 'json' literal

@@ -11,10 +11,10 @@ namespace Z0.Asm
     using static z;
 
     public class CaptureContext : ICaptureContext
-    { 
+    {
         public CorrelationToken Ct {get;}
-        
-        public IAppContext Root {get;}
+
+        public IAppContext ContextRoot {get;}
 
         public IAsmDecoder Decoder {get;}
 
@@ -24,11 +24,11 @@ namespace Z0.Asm
 
         public IWfCaptureBroker CaptureBroker {get;}
 
-        public CaptureContext(IAppContext root, IAsmDecoder decoder, IAsmFormatter formatter, AsmTextWriterFactory wf, 
+        public CaptureContext(IAppContext root, IAsmDecoder decoder, IAsmFormatter formatter, AsmTextWriterFactory wf,
             IWfCaptureBroker broker, CorrelationToken ct)
         {
             Ct = ct;
-            Root = root;
+            ContextRoot = root;
             Decoder = decoder;
             Formatter = formatter;
             WriterFactory = wf;

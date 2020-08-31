@@ -7,7 +7,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Root;
     using static XedSourceMarkers;
 
@@ -39,7 +39,7 @@ namespace Z0
                 if(IsLeftDelimiter(row))
                     parsing = true;
                 else if(parsing)
-                    rows.Add(row);                                
+                    rows.Add(row);
 
             }
             return new XedInstructionData(rows.ToArray());
@@ -47,7 +47,7 @@ namespace Z0
 
         XedInstructionData[] ParseSequence(TextFileRows data, int idx)
         {
-            var dst = list<XedInstructionData>();            
+            var dst = list<XedInstructionData>();
             for(var i=0; i<data.RowCount; i++)
             {
                 var parsed = ParseInstruction(data, ++i, ref i);
@@ -62,7 +62,7 @@ namespace Z0
             var data = LoadSource(src);
             for(var i=0; i<data.RowCount; i++)
             {
-                if(data[i].Text.ContainsAny(INSTRUCTION_SEQ))  
+                if(data[i].Text.ContainsAny(INSTRUCTION_SEQ))
                     return ParseSequence(data, i);
             }
             return Root.array<XedInstructionData>();
@@ -82,7 +82,7 @@ namespace Z0
             for(var i = rowidx; i<data.RowCount; i++)
             {
                 ref readonly var row = ref data[rowidx];
-                
+
                 var isHeader = Contains(row,FUNC_MARKER);
                 if(isHeader)
                 {
@@ -100,12 +100,12 @@ namespace Z0
 
                 Advance(ref rowidx);
 
-                if(IsComment(row))                
-                    continue;             
+                if(IsComment(row))
+                    continue;
 
                 if(IsEmpty(row))
                     continue;
-                
+
                 body.Add(row.Text);
 
             }

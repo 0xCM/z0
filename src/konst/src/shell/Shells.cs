@@ -9,10 +9,16 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Flow
+    /// <summary>
+    /// Reifies an app environment service with the default implementation
+    /// </summary>
+    [ApiHost]
+    public readonly struct Shells : IShellContext
     {
-        [Op, Closures(UnsignedInts)]
-        public static void processed<T>(IWfContext wf, string actor, T kind, FilePath src, uint size, CorrelationToken ct)
-            => wf.Raise(WfEvents.processed(actor, kind, src, size, ct));
+        public static IShellContext Default => default(Shells);
+
+        [Op]
+        public static PathSettings paths()
+            => PathSettings.create();
     }
 }

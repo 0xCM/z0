@@ -4,13 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IPartLogPaths : IPartFolderPaths, IPartLogExtensions
+    public interface IPartLogPaths : IPartFolderPaths, IPartFileExtensions
     {
         FilePath StatusLogPath(FolderPath root, PartId id)
-            => PartExeRoot(root) + FileName.define(id.Format(), StatusLog);
+            => ShellDataDir(root) + FileName.define(id.Format(), StatusLog);
 
         FilePath ErrorLogPath(FolderPath root, PartId id)
-            => PartExeRoot(root) + FileName.define(id.Format(), ErrorLog);
+            => ShellDataDir(root) + FileName.define(id.Format(), ErrorLog);
 
         FilePath StatusLogPath(FolderPath root, ApiHostUri host)
             => LogDirPath(root) + FileName.define(host.Name, StatusLog);

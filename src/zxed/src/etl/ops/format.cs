@@ -23,5 +23,21 @@ namespace Z0
                 seek(dst,i) = FS.format(skip(sources,i));
             return dst;
         }
+
+        [Op]
+        public static string format(in XedPattern src, char delimiter)
+        {
+            var dst = TableFormat.formatter<XedPatternField>(delimiter);
+            emit(src,dst);
+            return dst.Format();
+        }
+
+        [Op]
+        public static string format(in XedPatternSummary src, char delimiter)
+        {
+            var dst = TableFormat.formatter<XedPatternField>(delimiter);
+            emit(src, dst);
+            return dst.Format();
+        }
     }
 }

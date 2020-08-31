@@ -84,7 +84,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var index = ref skip(indices,i);
-                var host = Flow.uri(index.DeclaringType);
+                var host = AB.uri(index.DeclaringType);
                 var path = dst + host.FileName(FileExtensions.Asm);
                 results.AddRange(Capture(host, index.Data, path));
             }

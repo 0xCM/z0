@@ -201,11 +201,11 @@ namespace Z0
         static IAsmContext asm(IAppContext root)
             => new AsmContext(root);
 
-        void Run(RecaptureStep kind)
-        {
-            var resources = ApiQuery.declarationIndex(Assembly.LoadFrom(Wf.ResPack.Name));
-            using var step = new Recapture(asm(Wf.ContextRoot));
-            step.CaptureResBytes();
-        }
+        // void Run(RecaptureStep kind)
+        // {
+        //     var resources = ApiQuery.declarationIndex(Assembly.LoadFrom(Wf.ResPack.Name));
+        //     using var step = new Recapture(asm(Wf.ContextRoot));
+        //     step.CaptureResBytes();
+        // }
     }
 }

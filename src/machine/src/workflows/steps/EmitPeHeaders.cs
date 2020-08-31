@@ -8,13 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
     using static EmitPeHeadersStep;
 
     using F = PeHeaderField;
 
     public readonly ref struct EmitPeHeaders
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly IPart[] Parts;
 
@@ -23,20 +24,25 @@ namespace Z0
         readonly CorrelationToken Ct;
 
         [MethodImpl(Inline)]
-        public EmitPeHeaders(IWfContext wf, IPart[] src, CorrelationToken ct)
+        public EmitPeHeaders(IWfShell wf, IPart[] src, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
             Parts = src;
             TargetPath = wf.ResourceRoot + FileName.define("z0", "pe.csv");
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId, TargetPath);
+        }
+
+        public void Dispose()
+        {
+            Wf.Finished(StepId);
         }
 
         public void Run()
         {
             var pCount = Parts.Length;
             var total = 0u;
-            Wf.RunningT(StepName,new {PartCount = pCount}, Ct);
+            Wf.Running(StepId, pCount);
 
             var formatter = Formatters.dataset<F>();
             using var writer = TargetPath.Writer();
@@ -57,7 +63,7 @@ namespace Z0
                 total += count;
             }
 
-            Wf.RanT(StepName, new {PartCount = pCount, TotalRecordCount = total}, Ct);
+            Wf.Ran(StepId, delimit(pCount, total));
         }
 
         static void format(in PeHeaderRecord src, DatasetFormatter<F> dst)
@@ -70,11 +76,6 @@ namespace Z0
             dst.Delimit(F.CodeBase, src.CodeBase);
             dst.Delimit(F.Gpt, src.GlobalPointerTable);
             dst.Delimit(F.GptSize, src.GlobalPointerTableSize);
-        }
-
-        public void Dispose()
-        {
-            Wf.Finished(nameof(EmitPeHeaders), Ct);
         }
     }
 }

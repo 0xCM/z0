@@ -29,19 +29,19 @@ namespace Z0
         FilePath HostHexPath
             => CodeDir + HexFileName;
 
-        FileName AmsFileName
+        FileName AsmFile
             => LegalFileName(Host, Asm);
 
         FilePath HostAsmPath
-            => HostAsmDir + AmsFileName;
+            => HostAsmDir + AsmFile;
 
-        FileName CilFileName
+        FileName CilFile
             => LegalFileName(Host, Il);
 
-        FileName CilDataFileName
+        FileName CilDataFile
             => LegalFileName(Host, IlData);
 
         FilePath CilDataPath
-            => CilDataDir + CilDataFileName;
+            => CilDataDir + CilDataFile;
     }
 }

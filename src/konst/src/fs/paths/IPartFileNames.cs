@@ -9,12 +9,6 @@ namespace Z0
         FileName LegalFileName(OpIdentity id, FileExtension ext)
             => id.ToFileName(ext);
 
-        FileName LegalFileName(PartId part, OpIdentity id, FileExtension ext)
-            => FileName.define(string.Concat(part.Format(), Chars.Dot, LegalFileName(id,ext)));
-
-        FileName LegalFileName(ApiHostUri host, OpIdentity id, FileExtension ext)
-            => FileName.define(string.Concat(host.Owner.Format(), Chars.Dot, host.Name, Chars.Dot, LegalFileName(id,ext)));
-
         FileName LegalFileName(ApiHostUri host, FileExtension ext)
             => FileName.define(string.Concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
 
@@ -26,9 +20,6 @@ namespace Z0
 
         FileName HexOpFileName(OpIdentity id)
             => LegalFileName(id, HexLine);
-
-        FileName CilOpFileName(OpIdentity id)
-            => LegalFileName(id, Il);
 
         FileName ParseFileName(ApiHostUri host)
             => LegalFileName(host, Parsed);

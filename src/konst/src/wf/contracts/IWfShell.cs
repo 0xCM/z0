@@ -14,17 +14,20 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
     using WfEvB = WfEvents;
 
-    public interface IWfShell : IDisposable
+    public interface IWfShell : IShellContext<WfConfig>, IDisposable
     {
         IShellContext Shell {get;}
 
-        WfConfig Config {get;}
+        IMultiSink WfSink {get;}
+
+        FolderPath IndexRoot {get;}
+
+        FolderPath ResourceRoot {get;}
+
+        CorrelationToken Ct {get;}
 
         FolderPath AppDataRoot
             => Shell.AppPaths.AppDataRoot;
-
-        IShellPaths AppPaths
-            => Shell.AppPaths;
 
         FolderPath ArchiveRoot
             => FolderPath.Define(@"k:/z0/archives");
@@ -34,14 +37,6 @@ namespace Z0
 
         FolderPath ToolProcessDir(string tool)
             => ArchiveRoot + FolderName.Define("tools") + FolderName.Define(tool) + FolderName.Define("processed");
-
-        IMultiSink WfSink {get;}
-
-        FolderPath IndexRoot {get;}
-
-        FolderPath ResourceRoot {get;}
-
-        CorrelationToken Ct {get;}
 
         FolderPath AsmTables
             => ResourceRoot + FolderName.Define("tables");
@@ -70,8 +65,27 @@ namespace Z0
         void Created(WfStepId id)
             => Raise(WfEvB.created(id, Ct));
 
+        void Created<T>(WfStepId id, T content)
+            => Raise(WfEvB.created(id, content, Ct));
+
         void Running(WfStepId step, [File] string actor = null)
             => Raise(WfEvB.running(Path.GetFileNameWithoutExtension(actor), step, Ct));
+
+        void Running<T>(T step, [File] string caller = null)
+            where T : struct, IWfStep<T>
+                => Raise(WfEvB.running(step, Path.GetFileNameWithoutExtension(caller), Ct));
+
+        void Running<S,T>(S step, T content)
+            where S : struct, IWfStep<S>
+                => Raise(WfEvB.running(step,content, Ct));
+
+        void Ran<S,T>(S step, T content)
+            where S : struct, IWfStep<S>
+                => Raise(WfEvB.ran(step,content, Ct));
+
+        void Ran<T>(T step, [File] string caller = null)
+            where T : struct, IWfStep<T>
+                => Raise(WfEvB.ran(step, Path.GetFileNameWithoutExtension(caller), Ct));
 
         void Running<S,T>(WfStepId step, WfDataFlow<S,T> df)
             => Raise(WfEvB.running(step, df, Ct));

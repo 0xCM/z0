@@ -20,7 +20,7 @@ namespace Z0
         public static WfStepId StepId => AB.step<BuildGlobalIndexStep>();
     }
 
-    public class BuildGlobalCodeIndex
+    public class BuildGlobalCodeIndex : IDisposable
     {
         readonly Dictionary<MemoryAddress,X86ApiCode> CodeAddress;
 
@@ -47,6 +47,11 @@ namespace Z0
             dst.MemberCount = MemberCount;
             dst.Encoded = new EncodedMemoryIndex(dst.Parts, Encoded);
             return dst;
+        }
+
+        public void Dispose()
+        {
+            Wf.Finished(StepId);
         }
 
         public PartId[] Parts
@@ -83,25 +88,30 @@ namespace Z0
                    new HostedCodeIndex(parts, code.Select(x => (x.Host, x)).ToDictionary()));
         }
 
-        public bool Include(in X86ApiCode src)
-            => CodeAddress.TryAdd(src.Address, src);
-
-
-        public void Include(ReadOnlySpan<MemberParseRecord> src)
+        public Triple<bool> Include(in X86ApiCode src)
         {
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-                include(skip(src,i));
+            var a = CodeAddress.TryAdd(src.Address, src);
+            var b = UriAddress.TryAdd(src.Address, src.OpUri);
+            var c = Locations.TryAdd(src.OpUri, src);
+            return (a,b,c);
         }
 
-         void include(in MemberParseRecord src)
-        {
-            if(src.Address.IsEmpty)
-                return;
+        // public void Include(ReadOnlySpan<MemberParseRecord> src)
+        // {
+        //     var count = src.Length;
+        //     for(var i=0; i<count; i++)
+        //         Include(skip(src,i));
+        // }
 
-            var code = new X86ApiCode(src.Uri, src.Data);
-            if(!Include(code))
-                Wf.Warn(StepId, $"Duplicate | {src.Uri.Format()}");
-        }
+        // void Include(in MemberParseRecord src)
+        // {
+        //     if(src.Address.IsEmpty)
+        //         return;
+
+        //     var code = new X86ApiCode(src.Uri, src.Data);
+
+        //     // if(!Include(code))
+        //     //     Wf.Warn(StepId, $"Duplicate | {src.Uri.Format()}");
+        // }
     }
 }

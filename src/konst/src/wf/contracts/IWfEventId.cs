@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    partial struct Flow
+    public interface IWfEventId<T> : IComparable<T>, IEquatable<T>, INamed<T>, ICorrelated<T>, IChronic<T>, ITextual
+        where T : struct, IWfEventId<T>
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static WfWarn<T> warn<T>(WfStepId step, T body, CorrelationToken ct)
-            => new WfWarn<T>(step, body, ct);
+
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct WfEventId : IComparable<WfEventId>, IEquatable<WfEventId>, INamed<WfEventId>, ICorrelated<WfEventId>, IChronic<WfEventId>, ITextual
+    public readonly struct WfEventId : IWfEventId<WfEventId>
     {
         /// <summary>
         /// Creates a workflow event
@@ -19,19 +19,31 @@ namespace Z0
         /// <param name="ct">The correlation token, if any</param>
         /// <param name="ts">The timestamp which, if unspecified, will default to the event creation time (now)</param>
         [MethodImpl(Inline)]
-        public static WfEventId define(string name, CorrelationToken? ct = null, Timestamp? ts = null)
-            => new WfEventId(name, ct ?? correlate(0ul), ts ?? now());
+        public static WfEventId define(string name, CorrelationToken? ct = null)
+            => new WfEventId(name, ct ?? correlate(0ul));
+
+        [MethodImpl(Inline)]
+        public static WfEventId define(Type type, WfStepId step, CorrelationToken ct)
+            => new WfEventId(type,step,ct,now());
+
+        [MethodImpl(Inline)]
+        public static WfEventId define<T>(WfStepId step, CorrelationToken ct)
+            where T : struct, IWfEvent<T>
+                => new WfEventId(typeof(T), step, ct, now());
 
         [MethodImpl(Inline)]
         public static implicit operator WfEventId((string name, CorrelationToken ct) src)
-            => define(src.name, src.ct);
+            => new WfEventId(src.name, src.ct, now());
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfEventId((Type type, WfStepId step, CorrelationToken ct) src)
+            => new WfEventId(src.type, src.step, src.ct, now());
 
         const string Pattern = "| {0} | {1} | {2}";
 
-        /// <summary>
-        /// The event data type name
-        /// </summary>
-        public string Name {get;}
+        public Type EventType {get;}
+
+        public WfStepId StepId {get;}
 
         /// <summary>
         /// The time at which the event was raised
@@ -44,11 +56,39 @@ namespace Z0
         public CorrelationToken Ct {get;}
 
         [MethodImpl(Inline)]
-        public WfEventId(string name, CorrelationToken ct, Timestamp ts)
+        public WfEventId(string name, CorrelationToken ct, Timestamp? ts = null)
         {
-            Name = name;
+            EventType = typeof(void);
+            StepId = WfStepId.Empty;
             Ct = ct;
-            Ts = ts;
+            Ts = ts ?? timestamp();
+        }
+
+        [MethodImpl(Inline)]
+        public WfEventId(Type type, WfStepId step, CorrelationToken ct, Timestamp? ts = null)
+        {
+            EventType = type;
+            StepId = step;
+            Ct = ct;
+            Ts = ts ?? timestamp();
+        }
+
+        /// <summary>
+        /// The event data type name
+        /// </summary>
+        public string Name
+            => EventType.Name;
+
+
+        [MethodImpl(Inline)]
+        string RenderName()
+        {
+            if(StepId.IsNonEmpty && EventType != typeof(void))
+                return text.format("| {0} | {1}", EventType.Name, StepId);
+            else if(StepId.IsNonEmpty && EventType == typeof(void))
+                return StepId.Name;
+            else
+                return EventType.Name;
         }
 
         [MethodImpl(Inline)]
@@ -61,7 +101,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, Ts, Ct, Name).PadRight(56);
+            => text.format(Pattern, Ts, Ct, RenderName()).PadRight(56);
 
         public uint Hashed
         {

@@ -15,7 +15,7 @@ namespace Z0
     {
         static IAppContext CreateAppContext()
         {
-            var resolved = ApiQuery.assemble(z.stream(P.Imagine.Resolved));
+            var resolved = ApiQuery.apipart(z.stream(P.Imagine.Resolved));
             var random = Polyrand.Pcg64(PolySeed64.Seed05);
             var settings = SettingValues.Load(AppPaths.AppConfigPath);
             var exchange = AppMsgExchange.Create();
@@ -32,7 +32,6 @@ namespace Z0
         {
 
         }
-
 
         public override void RunShell(params string[] args)
         {

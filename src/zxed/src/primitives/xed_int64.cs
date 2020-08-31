@@ -9,7 +9,7 @@ namespace Z0.Xed
     using System.Runtime.CompilerServices;
 
     using static Konst;
-        
+
     [ApiHost]
     public struct xed_int64_t
     {

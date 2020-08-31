@@ -14,18 +14,37 @@ namespace Z0
     using static z;
     using static Konst;
 
-    public readonly struct PartFiles
+    public readonly struct PartFileProvider
     {
-        readonly IShellPaths AppPaths;
+        readonly IShellPaths Paths;
+
+        readonly IWfShell Wf;
+
+        public readonly FS.FolderPath Root;
+
+        readonly IPartCapturePaths CapturePaths;
+
+        public readonly FS.Files Parsed;
+
+        public readonly FS.Files Hex;
+
+        public readonly FS.Files Asm;
 
         [MethodImpl(Inline)]
-        public PartFiles(IAsmContext context)
-            => AppPaths = context.AppPaths.ForApp(Part.ExecutingPart);
-
-        public static MemberParseRecord[] parsed(IAsmContext context, PartId part)
+        public PartFileProvider(IWfShell wf, FS.FolderPath root)
         {
-            var pfs = new PartFiles(context);
-            var files = pfs.ParseFileIndex(part);
+            Wf = wf;
+            Root = root;
+            Paths = Wf.AppPaths;
+            CapturePaths = CaptureArchive(Root);
+            Parsed = CaptureArchive(Root).ParsePaths.Select(x => FS.path(x.Name));
+            Hex = CaptureArchive(Root).HexPaths.Select(x => FS.path(x.Name));
+            Asm = CaptureArchive(Root).AsmPaths.Select(x => FS.path(x.Name));
+        }
+
+        public MemberParseRecord[] ParseRecords(PartId part)
+        {
+            var files = ParseFileIndex(part);
             if(files.TryGetValue(part, out var partFiles))
             {
                 var count = partFiles.Length;
@@ -42,25 +61,21 @@ namespace Z0
             return sys.empty<MemberParseRecord>();
         }
 
-        public FolderPath ArchiveRoot
-            => AppPaths.AppCaptureRoot;
-
         public FilePath[] ParseFiles
-            => CaptureArchive(AppPaths.MachineCaptureRoot).ParseFiles;
+            => CaptureArchive(Root).ParsePaths;
 
         public FilePath[] AsmFiles
-            => CaptureArchive(AppPaths.MachineCaptureRoot).AsmFiles;
+            => CaptureArchive(Root).AsmPaths;
 
         public FilePath[] HexFiles
-            => CaptureArchive(AppPaths.MachineCaptureRoot).HexFiles;
+            => CaptureArchive(Root).HexPaths;
 
         public Dictionary<PartId,PartFile[]> ParseFileIndex(params PartId[] parts)
             => SelectFiles(PartFileClass.Parsed, ParseFiles, parts);
 
-        static Dictionary<PartId,PartFile[]> SelectFiles(PartFileClass kind, IEnumerable<FilePath> src, params PartId[] parts)
+        static Dictionary<PartId,PartFile[]> SelectFiles(PartFileClass kind, FilePath[] src, PartId[] parts)
         {
             var partSet = parts.ToHashSet();
-
             var files = (from f in src
                         let part = f.Owner
                         where part != PartId.None && partSet.Contains(part)
@@ -70,7 +85,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static IPartCapturePaths CaptureArchive(FolderPath root)
-            => Archives.capture(root, null, null);
+        static IPartCapturePaths CaptureArchive(FS.FolderPath src)
+            => Archives.capture(FolderPath.Define(src.Name));
     }
 }

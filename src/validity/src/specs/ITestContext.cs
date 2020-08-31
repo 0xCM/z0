@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     public interface ITestContext : IAppMsgContext, IServiceAllocation, IPolyrandProvider, ITestService, ITestQueue,
-        IShellBase, TClocked, TCheckAction, TCheckOptions, TTestCaseIdentity, TValidator
+        IShellContext, TClocked, TCheckAction, TCheckOptions, TTestCaseIdentity, TValidator
     {
         bool DiagnosticMode {get;}
     }

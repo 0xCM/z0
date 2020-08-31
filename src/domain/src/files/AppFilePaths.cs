@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public AppFilePaths(in PathSettings paths, PartId? app)
         {
-            AppFolder = FS.folder(app != null ?app.Value.Format() : ShellBase.Default.ShellName);
+            AppFolder = FS.folder(app != null ?app.Value.Format() : Shells.Default.ShellName);
             CaptureRoot = new FS.FolderPath(text.format("{0}/{1}/{2}/{3}", paths.Logs, "apps", AppFolder, "capture"));
         }
 

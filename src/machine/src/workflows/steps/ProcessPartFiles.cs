@@ -24,14 +24,11 @@ namespace Z0
 
         int ProcessedCount;
 
-        //readonly PartFiles Files;
-
         [MethodImpl(Inline)]
         internal ProcessPartFiles(IWfContext wf, IAsmContext asm, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
-            //Files = PartFiles.create(asm);
             Buffers = CpuBuffer.alloc(DefaultBufferSize);
             ProcessedCount = 0;
             Wf.Created(StepId);

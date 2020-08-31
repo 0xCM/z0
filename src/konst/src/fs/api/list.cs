@@ -13,7 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ListedFiles list(Files src)
-            => new ListedFiles(src.Data.Mapi((i,x) => new ListedFile((uint)i,x)));
+            => new ListedFiles(src.Data.Storage.Mapi((i,x) => new ListedFile((uint)i,x)));
 
         public static FilePath[] list(FolderPath src, FileExt ext, bool recurse = false)
         {

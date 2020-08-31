@@ -9,13 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct GlobalCodeIndex
+    public struct GlobalCodeIndex
     {
-        readonly EncodedMemoryIndex Memories;
+        EncodedMemoryIndex Memories;
 
-        readonly UriLocationIndex UriLocations;
+        UriLocationIndex UriLocations;
 
-        readonly HostedCodeIndex HostCode;
+        HostedCodeIndex HostCode;
 
         public readonly PartId[] Parts;
 

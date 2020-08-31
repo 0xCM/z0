@@ -11,9 +11,6 @@ namespace Z0
         FolderPath ExtractDir
             => ExtractDirPath(ArchiveRoot);
 
-        FolderPath UnparsedDir
-            => UnparsedDirPath(ArchiveRoot);
-
         FolderPath ParsedDir
             => ParsedDirPath(ArchiveRoot);
 
@@ -25,12 +22,6 @@ namespace Z0
 
         FolderPath AsmDir
             => AsmDirPath(ArchiveRoot);
-
-        FolderPath LogDir
-            => LogDirPath(ArchiveRoot);
-
-        FolderName AreaName
-            => FolderName.Empty;
 
         FilePath AsmPath(FileName name)
             => AsmFilePath(ArchiveRoot, name);
@@ -47,49 +38,16 @@ namespace Z0
         FilePath HexPath(ApiHostUri host)
             => HexFilePath(ArchiveRoot, host);
 
-        FilePath AsmPath(ApiHostUri host)
-            => AsmDir +  FileName.define(text.concat(host.Owner.Format(), ".", host.Name), FileExtensions.Asm);
-
-        FilePath ExtractPath(ApiHostUri host)
-            => ExtractFilePath(ArchiveRoot, host);
-
         FilePath UnparsedPath(ApiHostUri host)
             => UnparsedFilePath(ArchiveRoot, host);
 
-        FilePath ParseFilePath(ApiHostUri host)
-            => ParseFilePath(ArchiveRoot, host);
-
-        FilePath HostLogPath(ApiHostUri host)
-            => StatusLogPath(ArchiveRoot, host);
-
-        FilePath[] AsmFiles
+        FilePath[] AsmPaths
             => AsmFilePaths(ArchiveRoot);
 
-        FilePath[] HexFiles
+        FilePath[] HexPaths
             => HexFilePaths(ArchiveRoot);
 
-        FilePath[] ExtractFiles
-            => ExtractFilePaths(ArchiveRoot);
-
-        FilePath[] ParseFiles
+        FilePath[] ParsePaths
             => ParseFilePaths(ArchiveRoot);
-
-        FolderName SubjectName
-            => FolderName.Empty;
-
-        FilePath[] ExtractFilePaths(params PartId[] parts)
-            => PartFilePaths(ExtractDir, parts);
-
-        FilePath[] ParseFilePaths(params PartId[] parts)
-            => PartFilePaths(ParsedDir, parts);
-
-        FilePath[] PartParseFilePaths(PartId[] parts,  PartId part)
-            => PartFilePaths(ParsedDir, parts.Where(p => p == part));
-
-        FilePath[] AsmFilePaths(params PartId[] parts)
-            => PartFilePaths(AsmDir, parts);
-
-        FilePath[] HexFilePaths(params PartId[] parts)
-            => PartFilePaths(CodeDir, parts);
     }
 }

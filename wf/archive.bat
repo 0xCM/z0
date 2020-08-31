@@ -6,6 +6,10 @@ set BuildDst="K:\z0\builds"
 set BuildLog="%ZLogs%\etl\build-archive.log"
 robocopy %BuildSrc% %BuildDst% /log:%BuildLog% /tee /TS /BYTES /V /MIR
 
+set SrcDir="%ZLogs%\capture\artifacts"
+set DstDir="%ZLogs%\respack\content\capture"
+robocopy %SrcDir% %DstDir% /log:%LogPath% /tee /TS /BYTES /V /MIR
+
 set SrcDir="%ZLogs%\respack\content"
 set DstDir="K:\z0\archives\respack\content"
 set LogPath="%ZLogs%\etl\respack-archive.log"

@@ -22,8 +22,6 @@ namespace Z0
 
         CorrelationToken Ct;
 
-        IWfContext Wf;
-
         [MethodImpl(Inline)]
         public WfBroker(IWfEventLog log, CorrelationToken ct)
         {
@@ -32,13 +30,6 @@ namespace Z0
             Subscriptions = new Dictionary<Type,ISink>();
             Receivers = new Dictionary<ulong, Receiver<IAppEvent>>();
             locker = new object();
-        }
-
-        [MethodImpl(Inline)]
-        public IWfBroker WithContext(IWfContext wf)
-        {
-            Wf = wf;
-            return this;
         }
 
         public void Dispose()

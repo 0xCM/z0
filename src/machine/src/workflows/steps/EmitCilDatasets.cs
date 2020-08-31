@@ -14,6 +14,8 @@ namespace Z0
 
     public ref struct EmitPartCil
     {
+        readonly IWfShell Wf;
+
         public readonly FolderPath TargetDir;
 
         public uint EmissionCount;
@@ -22,12 +24,11 @@ namespace Z0
 
         readonly IPart[] Parts;
 
-        readonly IWfContext Wf;
 
         readonly CorrelationToken Ct;
 
         [MethodImpl(Inline)]
-        public EmitPartCil(IWfContext wf, IPart[] parts, CorrelationToken ct)
+        public EmitPartCil(IWfShell wf, IPart[] parts, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

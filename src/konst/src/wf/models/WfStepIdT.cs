@@ -14,58 +14,68 @@ namespace Z0
     /// <summary>
     /// Identifies a workflow step
     /// </summary>
-    public readonly struct WfStepId<T> :
-        IComparable<WfStepId<T>>,
-        IEquatable<WfStepId<T>>,
-        INamed<WfStepId<T>>,
-        ITextual
+    public readonly struct WfStepId<T> : IWfStepId<WfStepId<T>>
+        where T : struct, IWfStep<T>
     {
         [MethodImpl(Inline)]
         public static implicit operator WfStepId(WfStepId<T> src)
-            => AB.step(src.Host);
+            => new WfStepId(src.Control, src.Effect);
 
-        /// <summary>
-        /// The step token
-        /// </summary>
-        public WfToken Token {get;}
+        [MethodImpl(Inline)]
+        public static implicit operator WfStepId<T>(Type effect)
+            => new WfStepId<T>(effect);
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfToken(WfStepId<T> src)
+            => src.Token;
 
         /// <summary>
         /// The step name
         /// </summary>
-        public string Name {get;}
+        public string Name => Effect.Name;
 
         /// <summary>
-        /// The host type
+        /// The step controller
         /// </summary>
-        public Type Host {get;}
+        public Type Control => typeof(T);
+
+        /// <summary>
+        /// The step effector
+        /// </summary>
+        public Type Effect {get;}
 
         [MethodImpl(Inline)]
-        public WfStepId(Type host, string name, WfToken token)
+        public WfStepId(Type effect)
+            => Effect = effect;
+
+        /// <summary>
+        /// The step token
+        /// </summary>
+        public WfToken Token
         {
-            Host = host;
-            Name = name;
-            Token = token;
+            [MethodImpl(Inline)]
+            get => AB.token(WfPartKind.Step, Effect);
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Host == null || Host.IsEmpty();
+            get => Effect == null || Effect.IsEmpty();
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Host != null && !Host.IsEmpty();
+            get => Effect != null && !Effect.IsEmpty();
         }
 
         [MethodImpl(Inline)]
         public bool Equals(WfStepId<T> src)
-            => Host == src.Host;
+            => Effect == src.Effect;
 
         [MethodImpl(Inline)]
         public int CompareTo(WfStepId<T> src)
-            => Host.FullName.CompareTo(src.Host.FullName);
+            => (src.IsEmpty || IsEmpty)? 0 : Effect.FullName.CompareTo(src.Effect.FullName);
 
         [MethodImpl(Inline)]
         public string Format()
@@ -73,12 +83,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format(bool full)
-            => full ? Host.FullName : Host.Name;
-
+            => full ? Effect.FullName : Effect.Name;
         public uint Hashed
         {
             [MethodImpl(Inline)]
-            get => (uint)Host.GetHashCode();
+            get => (uint)Effect.GetHashCode();
         }
 
         public override int GetHashCode()
@@ -90,5 +99,11 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        public static WfStepId<T> Empty
+        {
+            [MethodImpl(Inline)]
+           get => new WfStepId<T>(typeof(void));
+        }
     }
 }

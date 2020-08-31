@@ -12,7 +12,7 @@ namespace Z0
 
     using F = XedPatternField;
     using R = XedPattern;
-        
+
     public readonly struct XedPattern : ITabular<F,R>
     {
         public string Class {get;}
@@ -28,9 +28,9 @@ namespace Z0
         public string OperandText {get;}
 
         public string[] Parts {get;}
-        
+
         public string[] Operands  {get;}
-                    
+
         [MethodImpl(Inline)]
         public XedPattern(string @class, string category, string extension, string isaset, string patternText, string operandText)
         {
@@ -45,6 +45,6 @@ namespace Z0
         }
 
         public string DelimitedText(char delimiter)
-            => this.FormatPattern(delimiter);
-    }   
+            => XedOps.format(this, delimiter);
+    }
 }

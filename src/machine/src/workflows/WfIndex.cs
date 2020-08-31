@@ -6,18 +6,15 @@ namespace Z0
 {
     using static RenderPatterns;
 
+    using static AB;
+
     [Step(typeof(ProcessInstructions))]
     public readonly struct ProcessInstructionsStep : IWfStep<ProcessInstructionsStep>
     {
         public const string StepName = nameof(ProcessInstructions);
 
         public static WfStepId StepId
-            => AB.step<ProcessInstructionsStep>();
-
-        public void Run(IWfShell wf, params WfStepArgs[] args)
-        {
-            //using var step = new ProcessInstructions()
-        }
+            => step<ProcessInstructionsStep>();
     }
 
     [Step(typeof(ProcessPartFiles))]
@@ -26,7 +23,7 @@ namespace Z0
         public const string StepName = nameof(ProcessPartFiles);
 
         public static WfStepId StepId
-            => AB.step<ProcessPartFilesStep>();
+            => step<ProcessPartFilesStep>();
     }
 
     [Step(typeof(EmitCallIndex))]
@@ -35,7 +32,7 @@ namespace Z0
         public const string StepName = nameof(EmitCallIndex);
 
         public static WfStepId StepId
-            => AB.step<EmitCallIndexStep>();
+            => step<EmitCallIndexStep>();
     }
 
     [Step(typeof(CaptureResBytes))]
@@ -44,7 +41,7 @@ namespace Z0
         public const string StepName = nameof(CaptureResBytes);
 
         public static WfStepId StepId
-            => AB.step<CaptureResBytesStep>();
+            => step<CaptureResBytesStep>();
     }
 
     [Step(typeof(EmitBitMasks))]
@@ -55,6 +52,9 @@ namespace Z0
         public const string RunningPattern = "Emitting bitmasks to {0}";
 
         public const string RanPattern = "Emitted {0} bitmasks to {1}";
+
+        public static WfStepId StepId
+            => step<EmitBitMasksStep>();
     }
 
     [Step(typeof(EmitPartCil))]
@@ -66,7 +66,8 @@ namespace Z0
 
         public const string StepName = nameof(EmitPartCil);
 
-        public static WfStepId StepId => AB.step<EmitPartCilStep>();
+        public static WfStepId StepId
+            => typeof(EmitPartCilStep);
 
         public const string DataFolder = EmissionType;
 
@@ -77,6 +78,9 @@ namespace Z0
     public readonly struct RecaptureStep : IWfStep<RecaptureStep>
     {
         public const string StepName = nameof(Recapture);
+
+        public static WfStepId StepId
+            => step<RecaptureStep>();
     }
 
     [Step(typeof(ProcessAsm))]
@@ -84,7 +88,8 @@ namespace Z0
     {
         public const string StepName = nameof(ProcessAsm);
 
-        public static WfStepId StepId => AB.step<ProcessAsmStep>();
+        public static WfStepId StepId
+            => step<ProcessAsmStep>();
     }
 
     [Step(typeof(Engine))]
@@ -92,13 +97,17 @@ namespace Z0
     {
         public const string StepName = nameof(Engine);
 
-        public static WfStepId StepId => AB.step<Engines>();
+        public static WfStepId StepId
+            => step<Engines>();
     }
 
     [Step(typeof(EmitPeHeaders))]
     public readonly struct EmitPeHeadersStep : IWfStep<EmitPeHeadersStep>
     {
         public const string StepName = nameof(EmitPeHeaders);
+
+        public static WfStepId StepId
+            => step<EmitPeHeadersStep>();
     }
 
     [Step(typeof(EmitPeImage))]
@@ -118,23 +127,33 @@ namespace Z0
     }
 
     [Step(typeof(EmitContentCatalog))]
-    public readonly struct EmitContentCatalogStep
+    public readonly struct EmitContentCatalogStep : IWfStep<EmitContentCatalogStep>
     {
         public const string StepName = nameof(EmitContentCatalog);
 
         public const string DatasetName = "ContentCatalog";
+
+        public static WfStepId StepId
+            => step<EmitContentCatalogStep>();
+
     }
 
     [Step(typeof(EmitImageConstants))]
-    public readonly struct EmitImageConstantsStep
+    public readonly struct EmitImageConstantsStep : IWfStep<EmitImageConstantsStep>
     {
         public const string StepName = nameof(EmitImageConstants);
+
+        public static WfStepId StepId
+            => step<EmitImageConstantsStep>();
     }
 
     [Step(typeof(EmitDatasetsStep))]
-    public readonly struct EmitEnumCatalogStep
+    public readonly struct EmitEnumCatalogStep : IWfStep<EmitEnumCatalogStep>
     {
         public const string StepName = nameof(EmitEnumCatalog);
+
+        public static WfStepId StepId
+            => step<EmitEnumCatalogStep>();
     }
 
     [Step(typeof(EmitFieldLiterals))]
@@ -143,11 +162,11 @@ namespace Z0
         public const string StepName = nameof(EmitFieldLiterals);
 
         public static WfStepId StepId
-            => AB.step<EmitFieldLiteralsStep>();
+            => step<EmitFieldLiteralsStep>();
     }
 
     [Step(typeof(EmitStringRecords))]
-    public readonly struct EmitStringRecordsStep
+    public readonly struct EmitStringRecordsStep : IWfStep<EmitStringRecordsStep>
     {
         public const string StepName = nameof(EmitStringRecords);
 
@@ -164,6 +183,9 @@ namespace Z0
         public const string UserKindExt = UserKind + ExtSep + DataTypeExt;
 
         public const string SystemKindExt = SystemKind + ExtSep + DataTypeExt;
+
+        public static WfStepId StepId
+            => step<EmitStringRecordsStep>();
     }
 
     [Step(typeof(EmitPartStrings))]
@@ -220,9 +242,12 @@ namespace Z0
     }
 
     [Step(typeof(ParseAsmFiles))]
-    public readonly struct ParseAsmFilesStep
+    public readonly struct ParseAsmFilesStep : IWfStep<ParseAsmFilesStep>
     {
         public const string StepName = nameof(ParseAsmFiles);
+
+        public static WfStepId StepId
+            => AB.step<ParseAsmFilesStep>();
     }
 
     [Step(typeof(EmitDatasets))]
@@ -248,12 +273,18 @@ namespace Z0
     public readonly struct EmitImageContentStep : IWfStep<EmitImageContentStep>
     {
         public const string StepName = nameof(EmitImageContent);
+
+        public static WfStepId StepId
+            => step<EmitImageContentStep>();
     }
 
     [Step(typeof(EmitMetadataSets))]
     public readonly struct EmitMetadataSetsStep : IWfStep<EmitMetadataSetsStep>
     {
-        public const string WorkerName = nameof(EmitMetadataSets);
+        public const string StepName = nameof(EmitMetadataSets);
+
+        public static WfStepId StepId
+            => step<EmitMetadataSetsStep>();
     }
 
     [Step(typeof(EmitStepList))]
@@ -262,6 +293,6 @@ namespace Z0
         public const string StepName = nameof(EmitStepList);
 
         public static WfStepId StepId
-            => AB.step<EmitStepListStep>();
+            => step<EmitStepListStep>();
     }
 }

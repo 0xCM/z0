@@ -14,7 +14,7 @@ namespace Z0
     partial struct Evaluate
     {
         [MethodImpl(Inline), Op]
-        public static IEvalControl control(IAppContext context, IPolyrand random, FolderPath root, uint bufferSize)
-            => new EvalControl(context, random, root, bufferSize);
+        public static IEvalControl control(IAppContext context, FolderPath root, uint bufferSize)
+            => new EvalControl(context, context.Random, root, bufferSize);
     }
 }

@@ -161,7 +161,7 @@ namespace Z0
 
         void ListCaptureFiles()
         {
-            var paths = ShellBase.paths();
+            var paths = Shells.paths();
             var files = AppFilePaths.create(paths, PartId.Control);
 
             Status(paths.Logs);
@@ -214,7 +214,8 @@ namespace Z0
         {
             var part = Parts.Canonical.Assembly;
             var id = part.Id();
-            using var step = new CapturePart(Wf);
+
+            using var step = new CapturePart(Wf, State.Asm);
             var captured = step.Capture(part);
             var dst = Wf.AppPaths.AppCaptureRoot + FileName.define(id.Format(), FileExtensions.Asm);
             using var writer = dst.Writer();

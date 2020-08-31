@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    public interface IApiSet : IShellBase
+    public interface IApiSet
     {
         IPart[] Parts {get;}
 

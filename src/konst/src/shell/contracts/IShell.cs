@@ -19,24 +19,6 @@ namespace Z0
 
         void RunShell(params string[] args);
 
-        /// <summary>
-        /// The path to the application status log
-        /// </summary>
-        FilePath StatusLogPath
-            => EnvVars.Common.LogRoot + FolderName.Define("apps") + FileName.define(AppId.Format(), FileExtensions.StatusLog);
-
-        /// <summary>
-        /// The path to the application status log
-        /// </summary>
-        FilePath ErrorLogPath
-            => EnvVars.Common.LogRoot + FolderName.Define("apps") + FileName.define(AppId.Format(), FileExtensions.ErrorLog);
-
-        void Print(object content, MessageFlair? color = null)
-        {
-            var term = Terminal.Get();
-            term.WriteLine($"{content}", color ?? MessageFlair.Green);
-        }
-
         void IExeModule<string>.Execute(params string[] args)
         {
             try
@@ -58,5 +40,14 @@ namespace Z0
     {
         PartId IShell.AppId
             => typeof(S).Assembly.Id();
+    }
+
+    public interface IShell<S,C> : IShell<S>
+        where S : IShell<S,C>, new()
+    {
+        new IShellContext<C> Context {get;}
+
+        IShellContext IShell.Context
+            => Context;
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Render;
-    using static RenderPatterns;
+    using static AB;
     using static z;
 
     [Event]
@@ -21,30 +21,30 @@ namespace Z0
 
         public WfStepId StepId {get;}
 
-        public T Content {get;}
+        public WfPayload<T> Content {get;}
 
         public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStatus(string actor, T body, CorrelationToken ct, MessageFlair flair = Status)
+        public WfStatus(string actor, T content, CorrelationToken ct, MessageFlair flair = Status)
         {
-            EventId = evid(EventName, ct);
+            EventId = id(EventName, ct);
             StepId = WfStepId.Empty;
             Flair =  flair;
-            Content = body;
+            Content = content;
         }
 
         [MethodImpl(Inline)]
-        public WfStatus(WfStepId step, T body, CorrelationToken ct, MessageFlair flair = Status)
+        public WfStatus(WfStepId step, T content, CorrelationToken ct, MessageFlair flair = Status)
         {
-            EventId = evid(EventName, ct);
+            EventId = id(step,ct);
             StepId = step;
             Flair =  flair;
-            Content = body;
+            Content = content;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, EventId, StepId, Content);
+            => format(EventId, Content);
     }
 }

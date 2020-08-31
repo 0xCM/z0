@@ -14,15 +14,18 @@ namespace Z0
     {
         public IApiSet Api {get;}
 
-        public IPart[] Parts {get;}
+        public Assembly Root
+            => Assembly.GetEntryAssembly();
 
-        public Assembly[] Components {get;}
+        public IPart[] Parts
+            => Api.Parts;
 
-        public ShellContext(Assembly[] components)
+        public Assembly[] Components
+            => Api.Components;
+
+        public ShellContext(IApiSet api)
         {
-            Components = components;
-            Parts = ApiQuery.parts(components);
-            Api = ApiQuery.set(Parts);
+            Api = api;
         }
     }
 }

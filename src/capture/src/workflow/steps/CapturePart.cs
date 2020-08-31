@@ -18,8 +18,6 @@ namespace Z0
 
     public readonly ref struct CapturePart
     {
-        readonly IAppContext Root;
-
         readonly IAsmContext Asm;
 
         readonly IAsmDecoder Decoder;
@@ -28,15 +26,14 @@ namespace Z0
 
         readonly ICaptureServices Services;
 
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly Span<byte> Buffer;
 
-        public CapturePart(IWfContext wf)
+        public CapturePart(IWfShell wf, IAsmContext asm)
         {
             Wf = wf;
-            Root = wf.ContextRoot;
-            Asm = AsmWfBuilder.asm(Root);
+            Asm = asm;
             Services = CaptureServices.create(Asm);
             var format = AsmFormatSpec.DefaultStreamFormat;
             Formatter = Services.Formatter(format);

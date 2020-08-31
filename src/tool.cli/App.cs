@@ -24,7 +24,7 @@ namespace Z0
         public CorrelationToken Ct {get;}
 
         public App()
-            : base(Flow.app())
+            : base(WfBuilder.app())
         {
             Ct = correlate(ShellId);
         }
@@ -34,11 +34,11 @@ namespace Z0
             try
             {
                 var config = WfBuilder.configure(Context,args);
-                using var log = AB.log(config);
+                using var log = AB.termlog(config);
                 using var wf = WfBuilder.context(Context, config, log, Ct);
-                Flow.status(wf, ShellName, new {Message ="Running shell", Args = text.bracket(args.FormatList())},Ct);
+                AB.status(wf, ShellName, new {Message ="Running shell", Args = text.bracket(args.FormatList())},Ct);
 
-                Flow.status(wf, ShellName, "Shell run complete", Ct);
+                AB.status(wf, ShellName, "Shell run complete", Ct);
             }
             catch(Exception e)
             {

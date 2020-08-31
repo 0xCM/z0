@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static FS.ExtensionNames;
+    using static FS.CommonExtensionNames;
 
     partial struct FS
     {

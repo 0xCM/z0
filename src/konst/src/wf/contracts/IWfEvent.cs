@@ -35,9 +35,6 @@ namespace Z0
     public interface IWfEvent<H,T> : IWfEvent<H>
         where H : struct, IWfEvent<H,T>
     {
-        /// <summary>
-        /// The event payload
-        /// </summary>
-        T Content {get;}
+        WfPayload<T> Content => default;
     }
 }

@@ -28,7 +28,7 @@ namespace Z0
             try
             {
                 var config = WfBuilder.configure(Context, args);
-                using var log = AB.log(config.StatusLog, config.ErrorLog);
+                using var log = AB.termlog(config.StatusLog, config.ErrorLog);
                 using var sink = AB.termsink(log, Ct);
                 using var wf = new WfContext(Context, Ct, config, sink);
                 using var control = new CaptureControl(new WfCaptureState(wf, new AsmContext(Context), config, Ct));

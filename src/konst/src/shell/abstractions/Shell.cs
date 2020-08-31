@@ -31,13 +31,14 @@ namespace Z0
         }
 
         protected Shell()
-            : this(new ShellContext(ApiQuery.assemblies()))
+            : this(new ShellContext(ApiQuery.apiset()))
         {
 
         }
 
+        public string[] Args {get; private set;}
 
-        public IShellContext Context {get;}
+        public IShellContext Context {get; private set;}
 
         /// <summary>
         /// The default application path collection
@@ -65,30 +66,36 @@ namespace Z0
             term.error(e);
         }
 
-        /// <summary>
-        /// The parts that are not unknown
-        /// </summary>
-        protected static PartIndex KnownParts
-            => LazyParts.Value;
+        protected static S Init(params string[] args)
+        {
+            var shell = new S();
+            shell.Args = args;
+            return shell;
+        }
 
-        static Lazy<PartIndex> LazyParts {get;}
-            = z.defer(() => ApiQuery.index(ApiQuery.parts()));
+        protected static S Init(IShellContext context, params string[] args)
+        {
+            var shell = new S();
+            shell.Args = args;
+            shell.Context = context;
+            return shell;
+        }
 
         protected static void Launch(params string[] args)
         {
             var created = false;
             try
             {
-                using var shell = new S() as IShell;
-                created = true;
-                shell.Execute(args);
+                using var shell = new S();
+                shell.Args = args;
+                (shell as IShell).Execute(args);
             }
             catch(Exception e)
             {
                 if(created)
-                    term.errlabel(e, $"Shell abended upon disposal!");
+                    term.errlabel(e, $"Shell became angry upon disposal!");
                 else
-                    term.errlabel(e, $"Shell abended upon creation!");
+                    term.errlabel(e, $"Shell became angry upon creation!");
             }
         }
     }

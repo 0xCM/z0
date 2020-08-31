@@ -7,13 +7,14 @@ namespace Z0
 {
     using System;
 
-    class XedSourceMarkers
-    {        
+    [LiteralProvider]
+    public readonly struct XedSourceMarkers
+    {
         public static string FuncHeader(string name)
             => $"{name}()::";
 
         public const string FUNC_MARKER = "()::";
-            
+
         /// <summary>
         /// Whe encountered, signals a list  of  insruction specifications to follow,
         /// where each specification covers multiple lines of text, bounded above by
@@ -23,7 +24,7 @@ namespace Z0
         public const string INSTRUCTION_SEQ = "INSTRUCTIONS()::";
 
         /// <summary>
-        /// When encountered, signals a sequence of lines that describe an instruciton
+        /// When encountered, signals a sequence of lines that describe an instruction
         /// </summary>
         public const string FuncBodyBegin = "{" ;
 

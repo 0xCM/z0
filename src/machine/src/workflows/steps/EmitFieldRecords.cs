@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly ref struct EmitFieldMetadata
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
@@ -23,7 +23,7 @@ namespace Z0
         readonly FolderPath TargetDir;
 
         [MethodImpl(Inline)]
-        public EmitFieldMetadata(IWfContext wf, IPart[] parts, CorrelationToken ct)
+        public EmitFieldMetadata(IWfShell wf, IPart[] parts, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

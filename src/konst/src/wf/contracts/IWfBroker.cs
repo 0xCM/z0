@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IWfBroker : IShellBase, IDisposable, IMultiSink
+    public interface IWfBroker : IShellContext, IDisposable, IMultiSink
     {
         Outcome Subscribe<E>(Action<E> receiver, E model = default)
             where E : IAppEvent;

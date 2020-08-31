@@ -13,8 +13,8 @@ namespace Z0
         where T : struct
     {
         public EventId Id {get;}
-        
-        public T Data {get;}
+
+        public WfPayload<T> Content {get;}
 
         public MessageFlair Flair {get;}
 
@@ -22,25 +22,25 @@ namespace Z0
         public AppEvent(EventId id, T data, MessageFlair flair = MessageFlair.Blue)
         {
             Id = id;
-            Data = data;
+            Content = data;
             Flair = flair;
         }
-        
+
         public string Format()
         {
             var dst = text.build();
             dst.Append(Id);
             dst.Append(Chars.Space);
             dst.Append(Chars.Pipe);
-            dst.AppendLine(z.bytes(Data).Format());
+            dst.AppendLine(z.bytes(Content.Data).Format());
             return dst.ToString();
-        }    
+        }
 
 
         public override string ToString()
             => Format();
 
-        public static AppEvent<T> Empty 
+        public static AppEvent<T> Empty
             => default;
     }
 }

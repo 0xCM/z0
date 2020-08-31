@@ -16,7 +16,7 @@ namespace Z0
     {
         public readonly struct Files : IEnumerable<FilePath>
         {
-            public readonly FilePath[] Data;
+            public readonly TableSpan<FilePath> Data;
 
             [MethodImpl(Inline)]
             public static implicit operator FilePath[](Files src)
@@ -30,13 +30,31 @@ namespace Z0
             public Files(FilePath[] src)
                 => Data = src;
 
-            public Count32 Count
+            public uint Count
             {
                 [MethodImpl(Inline)]
-                get => Data.Length;
+                get => (uint)Data.Length;
             }
 
-            public ref readonly FilePath this[uint index]
+            public ReadOnlySpan<FilePath> View
+            {
+                [MethodImpl(Inline)]
+                get => Data.View;
+            }
+
+            public Span<FilePath> Edit
+            {
+                [MethodImpl(Inline)]
+                get => Data.Edit;
+            }
+
+            public ref FilePath this[ulong index]
+            {
+                [MethodImpl(Inline)]
+                get => ref Data[index];
+            }
+
+            public ref FilePath this[long index]
             {
                 [MethodImpl(Inline)]
                 get => ref Data[index];
@@ -47,10 +65,10 @@ namespace Z0
                 => path(src.Name.Replace('\\', '/'));
 
             IEnumerator<FilePath> IEnumerable<FilePath>.GetEnumerator()
-                => ((IEnumerable<FilePath>)Data).GetEnumerator();
+                => ((IEnumerable<FilePath>)Data.Storage).GetEnumerator();
 
             IEnumerator IEnumerable.GetEnumerator()
-                => Data.GetEnumerator();
+                => Data.Storage.GetEnumerator();
         }
     }
 }

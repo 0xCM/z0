@@ -29,11 +29,13 @@ namespace Z0.Asm
         ICaptureCore ICaptureServiceProxy.CaptureService
             => Context.CaptureCore;
 
-        IPartCapturePaths CaptureArchive(PartId part)
-            => Z0.Archives.capture((EnvVars.Common.LogRoot + FolderName.Define("apps")) + FolderName.Define(part.Format()), FolderName.Define("capture"));
+        // IPartCapturePaths CaptureArchive(PartId part)
+        //     => Z0.Archives.capture(
+        //         (EnvVars.Common.LogRoot + FolderName.Define("apps")) + FolderName.Define(part.Format()),
+        //         FolderName.Define("capture"));
 
         IPartCapturePaths CaptureArchive(FolderPath root)
-            => Z0.Archives.capture(root, null, null);
+            => Z0.Archives.capture(root);
 
         void WriteAsm(X86ApiCapture capture, StreamWriter dst)
         {

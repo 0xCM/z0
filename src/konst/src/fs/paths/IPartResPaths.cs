@@ -4,8 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
+    using static FS.CommonFolderNames;
 
     public interface IPartResPaths : IShellPaths
     {
@@ -13,15 +12,15 @@ namespace Z0
         /// The path to the root application resource directory
         /// </summary>
         FolderPath ResRoot
-            => LogRoot + FolderName.Define("respack/content");
+            => LogRoot + FolderName.Define(RespackContent);
 
         FolderPath ResTables
-            => ResRoot + FolderName.Define("tables");
+            => ResRoot + FolderName.Define(Tables);
 
         FolderPath ResIndex
-            => ResRoot + FolderName.Define("index");
+            => ResRoot + FolderName.Define(Index);
 
         FolderPath AsmResTables
-            => ResTables + FolderName.Define("asm");
+            => ResTables + FolderName.Define(Asm);
     }
 }

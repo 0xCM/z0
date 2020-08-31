@@ -2,23 +2,24 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Xed
 {
     using System;
 
     using static Konst;
     using static z;
 
-    class App : AppShell<App,IAppContext>
+    class Shell : AppShell<Shell,IAppContext>
     {
-        public readonly PartId Part = PartId.ZXed;
-
         public CorrelationToken Ct {get;}
 
-        public App()
-            : base(Flow.app())
+        public WfConfig Config {get;}
+
+        public Shell()
+            : base(WfBuilder.app())
         {
-            Ct = correlate(Part);
+            Config = WfBuilder.configure(Context);
+            Ct = correlate(PartId.ZXed);
         }
 
         void Parse(FilePath src)
@@ -32,12 +33,11 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {
-            var s = AB.settings(Context, Ct);
             var config = WfBuilder.configure(Context, args);
-            using var log = AB.log(config);
-            using var context = WfBuilder.context(Context, config, log, Ct);
-            using var wf = new XedEtl(context, new XedEtlConfig(Context, s));
-            wf.Run();
+            using var log = AB.termlog(config);
+            using var wf = WfBuilder.context(Context, config, log, Ct);
+            using var step = new XedWf(wf, new XedEtlConfig(Context, config.Settings));
+            step.Run();
         }
 
         public static void Main(params string[] args)

@@ -23,10 +23,6 @@ namespace Z0
             => app(Paths, compose(ApiQuery.parts()), random());
 
         [MethodImpl(Inline), Op]
-        public static IAppContext app(ModuleArchive src)
-            => app(src,ShellPaths.Default);
-
-        [MethodImpl(Inline), Op]
         public static IAppContext app(ModuleArchive src, IShellPaths paths)
             => new AppContext(paths, src.Api, random(), settings(paths), exchange());
 
@@ -43,7 +39,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         static ApiPart compose(IPart[] parts)
-            => ApiQuery.assemble(parts);
+            => ApiQuery.apipart(parts);
 
         [MethodImpl(Inline), Op]
         static IPolyrand random()

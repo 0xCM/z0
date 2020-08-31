@@ -31,26 +31,28 @@ namespace Z0
 
         readonly IWfEventLog Log;
 
-        public FolderPath IndexRoot
-            => FolderPath.Define(Config.IndexRoot.Name);
-
-        public FolderPath ResourceRoot
-             => FolderPath.Define(Config.ResRoot.Name);
-
-
         [MethodImpl(Inline)]
         public WfContext(IAppContext root, CorrelationToken ct, WfConfig config, WfTermEventSink sink, [Caller] string caller = null)
         {
             Ct = ct;
             Config = config;
             ContextRoot = root;
-            Log = AB.log(config);
+            Log = AB.termlog(config);
             Broker = new WfBroker(Log, Ct);
             WfSink = sink;
             Actor = Flow.actor(caller);
-            ((WfBroker)Broker).WithContext(this);
             WfSink.Deposit(new WfContextLoaded(Actor, Ct));
         }
+
+        public IShellContext Shell
+            => this;
+
+        public FolderPath IndexRoot
+            => FolderPath.Define(Config.IndexRoot.Name);
+
+        public FolderPath ResourceRoot
+             => FolderPath.Define(Config.ResRoot.Name);
+
 
         public void Dispose()
         {
@@ -64,6 +66,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ContextRoot.AppPaths;
         }
+
 
         public WfEventId Raise<E>(in E @event)
             where E : IWfEvent

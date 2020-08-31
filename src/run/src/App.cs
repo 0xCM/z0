@@ -33,16 +33,16 @@ namespace Z0
                 parts = Context.Api.PartIdentities;
 
             var config = WfBuilder.configure(Context, args);
-            using var log = AB.log(config);
+            using var log = AB.termlog(config);
             var wfc = WfBuilder.context(Context, config, log, Ct);
             using var state = AsmWfBuilder.state(wfc, AsmWfBuilder.asm(Context), config);
 
             try
             {
-                Flow.status(wfc, ActorName, new {Message ="Running", Args = text.bracket(args.FormatList())},Ct);
+                AB.status(wfc, ActorName, new {Message ="Running", Args = text.bracket(args.FormatList())},Ct);
                 using var runner = new Runner(state);
                 runner.Run();
-                Flow.status(wfc, ActorName,  "Ran", Ct);
+                AB.status(wfc, ActorName,  "Ran", Ct);
             }
             catch(Exception e)
             {

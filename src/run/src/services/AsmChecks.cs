@@ -7,8 +7,6 @@ namespace Z0.Asm
     using static Konst;
     using static BufferSeqId;
 
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-
     public class AsmChecks : IAsmTester
     {
         public IAsmContext Context {get;}
@@ -31,25 +29,23 @@ namespace Z0.Asm
             BufferAlloc.Dispose();
         }
 
-        IAsmTester Me => this;
-
         public ref readonly BufferToken this[BufferSeqId index]
             => ref Tokens[index];
 
-        IPartCapturePaths CodeArchive
-            => Me.CaptureArchive(Part.ExecutingPart);
+        // IPartCapturePaths CodeArchive
+        //     => Me.CaptureArchive(Part.ExecutingPart);
 
-        protected IArchiveWriter HexWriter([Caller] string caller = null)
-        {
-            var dstPath = CodeArchive.HexPath(FileName.define($"{caller}", FileExtensions.HexLine));
-            return Archives.writer<MemberCodeWriter>(dstPath);
-        }
+        // protected IArchiveWriter HexWriter([Caller] string caller = null)
+        // {
+        //     var dstPath = CodeArchive.HexPath(FileName.define($"{caller}", FileExtensions.HexLine));
+        //     return Archives.writer<MemberCodeWriter>(dstPath);
+        // }
 
-        protected AsmWriter AsmWriter([Caller] string caller = null)
-        {
-            var dst = CodeArchive.AsmPath(FileName.define($"{caller}", FileExtensions.Asm));
-            var format = AsmFormatSpec.WithFunctionTimestamp;
-            return AsmCore.Services.AsmWriter(dst,format);
-        }
+        // protected AsmWriter AsmWriter([Caller] string caller = null)
+        // {
+        //     var dst = CodeArchive.AsmPath(FileName.define($"{caller}", FileExtensions.Asm));
+        //     var format = AsmFormatSpec.WithFunctionTimestamp;
+        //     return AsmCore.Services.AsmWriter(dst,format);
+        // }
     }
 }

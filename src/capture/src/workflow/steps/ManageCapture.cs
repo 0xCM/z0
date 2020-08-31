@@ -32,9 +32,12 @@ namespace Z0
 
         readonly IImmEmitter ImmEmitter;
 
+        readonly IAppContext App;
+
         public ManageCapture(WfCaptureState state, CorrelationToken ct)
         {
             State = state;
+            App = state.Asm.ContextRoot;
             Wf = state.Wf;
             Ct = ct;
             Sink = Wf.WfSink;
@@ -67,7 +70,7 @@ namespace Z0
 
             {
                 Wf.Running(EvaluateStep.StepId);
-                var evaluate = Evaluate.control(State.Root, State.Root.Random, Wf.AppPaths.AppCaptureRoot, Pow2.T14);
+                var evaluate = Evaluate.control(App, Wf.AppPaths.AppCaptureRoot, Pow2.T14);
                 evaluate.Execute();
                 Wf.Ran(EvaluateStep.StepId);
             }

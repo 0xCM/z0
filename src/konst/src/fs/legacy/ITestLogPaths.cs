@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ITestLogPaths : IPartFolderPaths, IPartLogExtensions
+    public interface ITestLogPaths : IPartFolderPaths, IPartFileExtensions
     {
         FolderPath TestRootPath(FolderPath root)
-            => root + TestFolderName;
+            => root + TestFolder;
 
         FilePath TestMessages(FolderPath root,  PartId id)
             => TestRootPath(root) + FileName.define(id.Format(), StatusLog);

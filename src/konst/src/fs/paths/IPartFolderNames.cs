@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using static FS.CommonFolderNames;
 
     /// <summary>
     /// Defines common part path components
@@ -14,56 +14,44 @@ namespace Z0
         /// <summary>
         /// An archive partition for files emitted during test execution
         /// </summary>
-        FolderName TestFolderName
-            => FolderName.Define("test", "Test emissions");
-
-        /// <summary>
-        /// An archive partition for files emitted during application execution
-        /// </summary>
-        FolderName AppFolderName
-            => FolderName.Define("apps", "Application emissions");
+        FolderName TestFolder
+            => FolderName.Define(Test);
 
         /// <summary>
         /// An archive partition for static data
         /// </summary>
-        FolderName DataFolderName
-            => FolderName.Define("data", "Reference data");
-
-        /// <summary>
-        /// An archive partition for static data
-        /// </summary>
-        FolderName LogFolderName
-            => FolderName.Define("logs", "Application logs");
+        FolderName LogsFolder
+            => FolderName.Define(Logs);
 
         /// <summary>
         /// Part folder name predicated on the entry assembly
         /// </summary>
-        FolderName PartExeFolderName
+        FolderName ShellFolder
             => FolderName.Define(Part.ExecutingPart);
 
         FolderName ExtractFolderName
             => FolderName.Define("extracted", "Raw binary extracts");
 
         FolderName ParsedFolderName
-            => FolderName.Define("parsed", "Parsed binary extracts");
+            => FolderName.Define(Parsed);
 
         FolderName UnparsedFolderName
             => FolderName.Define("unparsed", "Extraction parse failures");
 
         FolderName AsmFolderName
-            => FolderName.Define("asm", "Formatted x86 assembly");
+            => FolderName.Define(Asm);
 
         FolderName HexFolderName
             => FolderName.Define("code", "Hex formatted encoded x86 assembly");
 
-        FolderName CilDataFolder
-            => FolderName.Define("cil", "Common Intermediate Langage");
+        FolderName CilDataFolderName
+            => FolderName.Define(CilData);
 
         /// <summary>
         /// The imm root folder name
         /// </summary>
         FolderName ImmFolderName
-            => FolderName.Define("imm", "Immediate embedding emission root");
+            => FolderName.Define(Imm);
 
         /// <summary>
         /// Defines a part-specific folder name {part}
@@ -78,15 +66,5 @@ namespace Z0
         /// <param name="part">The source part</param>
         FolderName HostFolderName(ApiHostUri host)
             => FolderName.Define(host);
-
-        /// <summary>
-        /// Defines a type-specific folder name {t.Name}
-        /// </summary>
-        /// <param name="src">The source type</param>
-        FolderName TypeFolderName(Type src)
-            => FolderName.Define(src.Name);
-
-        RelativeLocation HostPartLocation(ApiHostUri host)
-            => RelativeLocation.Define(PartFolderName(host.Owner), HostFolderName(host));
     }
 }

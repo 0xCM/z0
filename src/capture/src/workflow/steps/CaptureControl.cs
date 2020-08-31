@@ -29,7 +29,7 @@ namespace Z0
             State = state;
             Wf = state.Wf;
             Ct = state.Ct;
-            Asm = AsmWfBuilder.asm(state.Root);
+            Asm = AsmWfBuilder.asm(state.App);
             Wf.Created(StepId);
         }
 

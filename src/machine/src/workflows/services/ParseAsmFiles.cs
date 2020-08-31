@@ -6,64 +6,65 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
     using static z;
     using static ParseAsmFilesStep;
-    
+
     public readonly ref struct ParseAsmFiles
     {
         readonly CorrelationToken Ct;
 
         readonly IWfContext Wf;
 
-        readonly PartFiles Files;
-        
-        public ParseAsmFiles(IWfContext wf, PartFiles files, CorrelationToken ct)
+        readonly PartFileProvider Files;
+
+        public ParseAsmFiles(IWfContext wf, PartFileProvider files, CorrelationToken ct)
         {
             Ct = ct;
             Wf = wf;
             Files = files;
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId, Ct);
         }
 
         public void Run()
         {
-            Wf.Running(StepName, Ct);
+            Wf.Running(StepId, Ct);
 
             try
             {
-                var files = z.span(Files.AsmFiles);
-                var count = files.Length;
+                var files = Files.Asm.View;
+                var count = Files.Asm.Count;
 
-                Wf.Status(StepName, $"Parsing {count} asm files", Ct);
+                Wf.Status(StepId, count);
+
                 for(var i=0u; i<count; i++)
                 {
-                    ref readonly var path = ref z.skip(files,i);
+                    ref readonly var path = ref skip(files,i);
                     var result = TextDocParser.parse(path, TextDocFormat.Unstructured);
                     if(result.Succeeded)
                     {
                         var doc = result.Value;
-                        Wf.Raise(new ParsedAsmFile(StepName, (uint)doc.RowCount, path, Ct));                         
+                        Wf.Raise(new ParsedAsmFile(StepId, doc.RowCount, path, Ct));
                     }
                     else
                     {
-                        Wf.Error(StepName, $"The document {path} failed to parse", Ct);                
+                        Wf.Error(StepId, path);
                     }
-                }            
+                }
 
             }
             catch(Exception e)
             {
-                Wf.Error(e, Ct);
+                Wf.Error(StepId, e);
             }
 
-            Wf.Ran(StepName, Ct);
+            Wf.Ran(StepId, Ct);
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId, Ct);
         }
     }
 }

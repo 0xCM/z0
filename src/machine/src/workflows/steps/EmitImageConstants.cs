@@ -14,7 +14,7 @@ namespace Z0
 
     public readonly ref struct EmitImageConstants
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
@@ -23,18 +23,18 @@ namespace Z0
         readonly IPart[] Parts;
 
         [MethodImpl(Inline)]
-        public EmitImageConstants(IWfContext wf, IPart[] parts, CorrelationToken ct)
+        public EmitImageConstants(IWfShell wf, IPart[] parts, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
             Parts = parts;
             TargetDir = wf.ResourceRoot + FolderName.Define("constants");
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId);
         }
 
         public void Run()
         {
-            Wf.Running(StepName, Ct);
+            Wf.Running(StepId);
 
             foreach(var part in Parts)
             {
@@ -44,11 +44,11 @@ namespace Z0
                 }
                 catch(Exception e)
                 {
-                    Wf.Error(e, Ct);
+                    Wf.Error(StepId, e);
                 }
             }
 
-            Wf.Ran(StepName, Ct);
+            Wf.Ran(StepId);
         }
 
         ReadOnlySpan<ImgConstantRecord> Read(IPart part)
@@ -61,7 +61,7 @@ namespace Z0
         {
             var id = part.Id;
             var dstPath = TargetDir + FileName.define(id.Format(), DataExt);
-            Wf.Running(StepName, dstPath.Name, Ct);
+            Wf.Running(StepId, dstPath.Name);
 
             var data = Read(part);
             var count = data.Length;
@@ -74,12 +74,12 @@ namespace Z0
             using var writer = dstPath.Writer();
             writer.Write(dst.Render());
 
-            Wf.RanT(StepName, new {PartId = id, Count = count}, Ct);
+            Wf.Ran(StepId, delimit(id, count));
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId);
         }
     }
 }

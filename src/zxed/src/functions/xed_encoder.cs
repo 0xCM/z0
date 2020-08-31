@@ -23,7 +23,7 @@ namespace Z0.Xed
             [MethodImpl(Inline), Op]
             get => ref Storage[0];
         }
-        
+
         ref xed_operand_storage_t Operands
         {
             [MethodImpl(Inline), Op]
@@ -51,7 +51,7 @@ namespace Z0.Xed
         /// mode64   NOREX=0  NEEDREX=1 REXW[w] REXB[b] REXX[x] REXR[r] -> 0b0100 wrxb
         /// </summary>
         [MethodImpl(Inline), Op]
-        byte? Test1()        
+        byte? Test1()
             => eval(Operands.mode == mode64 && !Operands.norex && Operands.needrex);
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Z0.Xed
         [MethodImpl(Inline), Op]
         byte? Test3()
             => eval(Operands.mode == mode64 && !Operands.norex && Operands.rexw);
-        
+
         /// <summary>
         /// mode64   NOREX=0            REXW[w] REXB[b]=1 REXX[x] REXR[r] -> 0b0100 wrxb
         /// </summary>
@@ -102,7 +102,7 @@ namespace Z0.Xed
                 var test = tests[i]();
                 if(test.HasValue)
                 {
-                    State.ev._iforms.x_REX_PREFIX_ENC = test.Value;                
+                    State.ev._iforms.x_REX_PREFIX_ENC = test.Value;
                     break;
                 }
             }

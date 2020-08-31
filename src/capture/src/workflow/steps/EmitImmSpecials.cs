@@ -42,7 +42,7 @@ namespace Z0
         internal EmitImmSpecials(IAsmContext context, WfConfig config, IMultiSink sink, IAsmFormatter formatter, IAsmDecoder decoder, IApiSet api, FolderPath root, CorrelationToken? ct = null)
         {
             Ct = correlate(ct);
-            Log = AB.log(config);
+            Log = AB.termlog(config);
             Broker = AsmWfBuilder.imm(Log, Ct);
             Context = context;
             Sink = sink;
@@ -90,7 +90,7 @@ namespace Z0
             if(parts.Length != 0)
                 CodeArchive.ImmHostDirs(parts).Delete();
             else
-                CodeArchive.ImmRootDir.Delete();
+                CodeArchive.ImmRoot.Delete();
         }
 
         public void EmitLiteral(byte[] imm8, params PartId[] parts)

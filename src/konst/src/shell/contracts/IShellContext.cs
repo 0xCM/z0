@@ -8,19 +8,44 @@ namespace Z0
     using System.Collections.Generic;
     using System.Reflection;
 
-    public interface IShellContext : IShellBase
+    /// <summary>
+    /// Characterizes a stateful shared execution environment with a parametric configuration
+    /// </summary>
+    /// <typeparam name="C">The configuration type</typeparam>
+    public interface IContext<C> : IContext
     {
-        IShellPaths Paths
-             => ShellPaths.Default;
+        C Config {get;}
+    }
 
-        IApiSet Api {get;}
+    public interface IShellContext : IContext, ITextual
+    {
+        IShellPaths AppPaths
+            => Z0.ShellPaths.Default;
 
-        IPart[] Parts => Api.Parts;
+        ISettings Settings
+            => SettingValues.Load(AppPaths.AppConfigPath);
+
+        IApiSet Api
+            => ApiQuery.apiset();
+
+        string ShellName
+            => Root.GetSimpleName();
+
+        string ITextual.Format()
+            => ShellName;
+
+        IPart[] Parts
+            => Api.Parts;
 
         Assembly[] Components
             => Api.Components;
 
-        Assembly RootComponent
+        Assembly Root
             => Assembly.GetEntryAssembly();
+    }
+
+    public interface IShellContext<C> : IContext<C>, IShellContext
+    {
+
     }
 }

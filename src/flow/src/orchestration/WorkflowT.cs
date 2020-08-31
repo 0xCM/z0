@@ -7,17 +7,17 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.IO;
-    
+
     using static Konst;
-    
+
     public readonly struct Workflow<T> : IDisposable, IDataSink
-    {     
+    {
         readonly IAppContext Context;
-        
+
         readonly EventReceiver Receiver;
 
         readonly FilePath ErrorLogPath;
-                
+
         readonly StreamWriter StatusLog;
 
         readonly Action Connector;
@@ -36,8 +36,8 @@ namespace Z0
         {
             Context = context;
             Receiver = receiver;
-            ErrorLogPath = context.AppPaths.AppErrorOutPath;
-            StatusLog = context.AppPaths.AppStandardOutPath.Writer();
+            ErrorLogPath = context.AppPaths.AppErrorLogPath;
+            StatusLog = context.AppPaths.AppStatusLogPath.Writer();
             Connector = connect;
             Executor = exec;
             Hub = EventHubs.hub();
@@ -53,7 +53,7 @@ namespace Z0
         public void Deposit<S>(in S e)
             where S : struct, IDataEvent
                 => Relay.Deposit(e);
-        
+
         public void Dispose()
         {
             StatusLog.Dispose();
@@ -61,5 +61,5 @@ namespace Z0
 
         public void Run()
             => Executor();
-    }        
+    }
 }

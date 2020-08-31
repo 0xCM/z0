@@ -24,14 +24,4 @@ namespace Z0
     {
         C Context {get;}
     }
-
-    /// <summary>
-    /// Characterizes a stateful shared execution environment over a parametric context
-    /// </summary>
-    /// <typeparam name="C">The context type</typeparam>
-    public interface IContext<C> : IContext, IContextual<C>
-        where C : IContext
-    {
-
-    }
 }

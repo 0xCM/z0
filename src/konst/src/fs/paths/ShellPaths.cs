@@ -18,14 +18,14 @@ namespace Z0
 
         public FolderPath LogRoot {get;}
 
-        public FolderPath RuntimeRoot {get;}
+        public FolderPath ShellExeDir {get;}
 
         [MethodImpl(Inline)]
         public ShellPaths(PartId id, FolderPath log)
         {
             AppId = id;
             LogRoot = log;
-            RuntimeRoot = FolderPath.Define(Part.RuntimeRoot);
+            ShellExeDir = FolderPath.Define(Part.ShellExeDir);
         }
 
         public static IShellPaths Default

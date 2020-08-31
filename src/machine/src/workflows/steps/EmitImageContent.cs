@@ -16,7 +16,7 @@ namespace Z0
 
     public ref struct EmitImageContent
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
@@ -43,7 +43,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public EmitImageContent(IWfContext wf, IPart[] parts, CorrelationToken ct)
+        public EmitImageContent(IWfShell wf, IPart[] parts, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
@@ -52,12 +52,17 @@ namespace Z0
             TargetDir = wf.ResourceRoot + FolderName.Define("images");
             var process = Process.GetCurrentProcess();
             Images = process.Modules.Cast<ProcessModule>().Map(from).OrderBy(x => x.BaseAddress);
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId);
+        }
+
+        public void Dispose()
+        {
+             Wf.Finished(StepId);
         }
 
         public void Run()
         {
-             Wf.Running(StepName, Ct);
+             Wf.Running(StepId);
 
              Index = z.span<LocatedPart>(Parts.Length);
              for(var i=0u; i< Parts.Length; i++)
@@ -74,12 +79,7 @@ namespace Z0
             using var summarize = new EmitImageSummaries(Wf, Images, Ct);
             summarize.Run();
 
-            Wf.Ran(StepName, Ct);
-        }
-
-        public void Dispose()
-        {
-             Wf.Finished(StepName, Ct);
+            Wf.Ran(StepId);
         }
     }
 }

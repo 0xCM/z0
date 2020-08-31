@@ -15,13 +15,13 @@ namespace Z0
 
     public ref struct EmitCallIndex
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
         public WfDataFlow<PartAsmFx,FilePath> Df;
 
-        public EmitCallIndex(IWfContext wf, PartAsmFx src, CorrelationToken ct)
+        public EmitCallIndex(IWfShell wf, PartAsmFx src, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
@@ -32,7 +32,7 @@ namespace Z0
         public void Run()
         {
 
-            Wf.RunningT(StepName, Df.Target, Ct);
+            Wf.Running(StepId, Df.Target);
 
             var index = LocatedAsmFxList.create(Df.Source.Located.ToArray());
             var sep = Chars.Pipe;
@@ -45,7 +45,7 @@ namespace Z0
             writer.WriteLine(names);
             z.iter(delimited, writer.WriteLine);
 
-            Wf.RanT(StepName, names.Length, Ct);
+            Wf.Ran(StepId, names.Length);
         }
 
         public void Dispose()

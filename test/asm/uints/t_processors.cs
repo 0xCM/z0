@@ -51,11 +51,5 @@ namespace Z0.Asm
             }
         }
 
-
-        public void blah_blah()
-        {
-            var records = PartFiles.parsed(Context, PartId.Sys);
-            Trace(records.Length);
-        }
     }
 }

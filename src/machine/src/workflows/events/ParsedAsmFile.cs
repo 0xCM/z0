@@ -8,35 +8,37 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
     using static RenderPatterns;
 
     [Event]
     public readonly struct ParsedAsmFile : IWfEvent<ParsedAsmFile>
     {
-        const string Pattern = PSx4;
-        
+        public const string EventName = nameof(ParsedAsmFile);
+
         public WfEventId EventId {get;}
 
-        public string ActorName {get;}
+        public WfStepId StepId {get;}
 
-        public FilePath SourcePath {get;}
+        public FS.FilePath SourcePath {get;}
 
-        public uint LineCount {get;}        
+        public Count32 LineCount {get;}
+
+        public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public ParsedAsmFile(string worker, uint lines, FilePath src, CorrelationToken ct)
+        public ParsedAsmFile(WfStepId step, Count32 lines, FS.FilePath src, CorrelationToken ct, MessageFlair flair =  MessageFlair.Cyan)
         {
-            EventId = WfEventId.define(nameof(ParsedAsmFile), ct);
-            ActorName = worker;
+            EventId = (EventName, ct);
+            StepId = step;
             LineCount = lines;
             SourcePath = src;
+            Flair = flair;
         }
 
-        public MessageFlair Flair 
-            => MessageFlair.Cyan;                                 
-        
-        [MethodImpl(Inline)]        
+
+        [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, EventId, ActorName, LineCount, SourcePath);               
-    }        
+            => Render.format(EventId, StepId, LineCount, SourcePath);
+    }
 }

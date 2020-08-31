@@ -13,16 +13,16 @@ namespace Z0
 
     using F = XedInstructionField;
     using S = XedInstructionRecord;
-    using T = DatasetFormatter<XedInstructionField>;
+    using Target = DatasetFormatter<XedInstructionField>;
 
     partial struct XedOps
     {
         [MethodImpl(Inline), Op]
-        public static string format(in S src, in T dst)
+        public static string format(in S src, in Target dst)
             => emit(src, dst).Render();
 
         [MethodImpl(Inline), Op]
-        public static ref readonly DatasetFormatter<F> emit(in S src, in T dst)
+        public static ref readonly Target emit(in S src, in Target dst)
         {
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.Mnemonic, src.Mnemonic);

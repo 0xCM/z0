@@ -11,9 +11,9 @@ namespace Z0.Asm
 
     public readonly struct WfCaptureState : IWfCaptureState
     {
-        public IWfContext Wf {get;}
+        public IAppContext App {get;}
 
-        public IAppContext Root {get;}
+        public IWfContext Wf {get;}
 
         public IAsmContext Asm {get;}
 
@@ -43,16 +43,16 @@ namespace Z0.Asm
         public WfCaptureState(IWfContext wf, IAsmContext asm, WfConfig config, CorrelationToken ct)
         {
             Wf = wf;
-            Root = wf.ContextRoot;
             Asm = asm;
+            App = asm.ContextRoot;
             Ct = ct;
             Config = config;
-            Log = AB.log(Config);
+            Log = AB.log(Config, ct);
             var srcpath = FilePath.Define(wf.GetType().Assembly.Location).FolderPath;
             var dstpath = wf.AppPaths.AppCaptureRoot;
             var src = new ArchiveConfig(srcpath);
             var dst = new ArchiveConfig(dstpath);
-            Settings = CaptureConfig.From(wf.ContextRoot.Settings);
+            Settings = CaptureConfig.From(wf.Settings);
             Services = CaptureServices.create(Asm);
             FormatConfig = AsmFormatSpec.WithSectionDelimiter;
             Formatter = Services.Formatter(FormatConfig);

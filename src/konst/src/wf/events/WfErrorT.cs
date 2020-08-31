@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static RenderPatterns;
+    using static Render;
+    using static AB;
     using static z;
 
     [Event]
@@ -24,7 +25,7 @@ namespace Z0
 
         public readonly T Data {get;}
 
-        public T Content => Data;
+        public WfPayload<T> Content => Data;
 
         public MessageFlair Flair {get;}
 
@@ -53,6 +54,6 @@ namespace Z0
         }
 
         public string Format()
-            => text.format(PSx4, EventId, StepId, Source, Content);
+            => format(EventId, Source, Content);
     }
 }

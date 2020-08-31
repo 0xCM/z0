@@ -6,15 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
     using System.Reflection;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static Konst;
+    using static z;
 
-    partial struct Flow
+    partial struct ApiQuery
     {
         [MethodImpl(Inline), Op]
-        public static IAppContext app()
-            => ContextFactory.app();
+        public static Assembly[] owners(in ModuleArchive src)
+            => src.Owners.Where(isPart);
+
+        [MethodImpl(Inline), Op]
+        public static Assembly[] owners()
+            => ModuleArchives.entry().Owners;
     }
 }

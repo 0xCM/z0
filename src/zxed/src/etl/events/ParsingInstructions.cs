@@ -3,17 +3,15 @@
 // Copyright   : (c) Chris Moore, 2020
 // License     : Apache
 //-----------------------------------------------------------------------------
-namespace Z0.XedWf
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    public readonly struct ParsingInstructions : IWfEvent<ParsingInstructions>
+    public readonly struct ParsingXedInstructions : IWfEvent<ParsingXedInstructions>
     {
-        const string Pattern = "{0}: Parsing {1}";
-
         /// <summary>
         /// The event identifier
         /// </summary>
@@ -23,15 +21,16 @@ namespace Z0.XedWf
         /// The input file path
         /// </summary>
         public readonly FilePath Source;
-        
+
         [MethodImpl(Inline)]
-        public ParsingInstructions(WfEventId id, FilePath source)
+        public ParsingXedInstructions(WfStepId step, FilePath source, CorrelationToken ct)
         {
-            EventId = id;
+            EventId = AB.id<ParsingXedInstructions>(step,ct);
             Source = source;
         }
 
+        [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, EventId, Source);
+            => Render.format(EventId, Source);
     }
 }

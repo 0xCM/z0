@@ -10,33 +10,49 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct WfStepId :
-        IComparable<WfStepId>,
-        IEquatable<WfStepId>,
-        INamed<WfStepId>,
-        ITextual
+    public readonly struct WfStepId : IWfStepId<WfStepId>
     {
         /// <summary>
-        /// The step token
+        /// The Step controller
         /// </summary>
-        public WfToken Token {get;}
+        public Type Control {get;}
+
+        /// <summary>
+        /// The Step implementation
+        /// </summary>
+        public Type Effect {get;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfStepId(Pair<Type> src)
+            => new WfStepId(src.Left, src.Right);
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfStepId(Type control)
+            => AB.step(control);
+
+        [MethodImpl(Inline)]
+        public WfStepId(Type control, Type effect)
+        {
+            Effect = effect;
+            Control = control;
+        }
 
         /// <summary>
         /// The step name
         /// </summary>
-        public string Name {get;}
+        public string Name
+        {
+            [MethodImpl(Inline)]
+            get => Effect.Name;
+        }
 
         /// <summary>
-        /// The host type
+        /// The step token
         /// </summary>
-        public Type Host {get;}
-
-        [MethodImpl(Inline)]
-        public WfStepId(Type host, string name, WfToken token)
+        public WfToken Token
         {
-            Host = host;
-            Token = token;
-            Name = host.Name;
+            [MethodImpl(Inline)]
+            get => AB.token(WfPartKind.Step, Effect);
         }
 
         public bool IsEmpty
@@ -72,7 +88,6 @@ namespace Z0
         public override int GetHashCode()
             => (int)Hashed;
 
-
         public override bool Equals(object src)
             => src is WfStepId i && Equals(i);
 
@@ -80,6 +95,6 @@ namespace Z0
             => Format();
 
         public static WfStepId Empty
-            => AB.step(typeof(void));
+            => new WfStepId(typeof(void), typeof(void));
     }
 }

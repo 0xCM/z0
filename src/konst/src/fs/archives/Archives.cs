@@ -14,12 +14,16 @@ namespace Z0
     public readonly struct Archives
     {
         [MethodImpl(Inline), Op]
-        public static IPartCaptureArchive capture(FolderPath root = null, FolderName area = null, FolderName subject = null)
-            => new PartCaptureArchive(root ?? EnvVars.Common.LogRoot, area ?? FolderName.Empty, subject ?? FolderName.Empty);
+        public static IPartCaptureArchive capture(FolderPath root)
+            => new PartCaptureArchive(root ?? EnvVars.Common.LogRoot, FolderName.Empty, FolderName.Empty);
+
+        [MethodImpl(Inline), Op]
+        public static IPartCaptureArchive capture(FS.FolderPath root)
+            => new PartCaptureArchive(root);
 
         [MethodImpl(Inline), Op]
         public static IPartCaptureArchive capture(PartId part)
-            => capture(EnvVars.Common.LogRoot, FolderName.Define("capture"), FolderName.Define(part.Format()));
+            => new PartCaptureArchive(EnvVars.Common.LogRoot, FolderName.Define("capture"), FolderName.Define(part.Format()));
 
         [MethodImpl(Inline), Op]
         public static IPartCaptureArchive capture(ArchiveConfig config)

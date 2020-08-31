@@ -3,12 +3,12 @@
 // Copyright   : (c) Chris Moore, 2020
 // License     : Apache
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Xed
 {
     using System;
 
-    using xed_ext = Z0.Xed.xed_extension_enum_t;
-    using xed_cat = Z0.Xed.xed_category_enum_t;
+    using xed_ext = xed_extension_enum_t;
+    using xed_cat = xed_category_enum_t;
 
     public readonly struct XedEtlConfig
     {

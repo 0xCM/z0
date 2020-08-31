@@ -20,11 +20,11 @@ namespace Z0
 
         protected virtual void RunTests(params string[] filters)
         {
-            try            
-            {  
+            try
+            {
                 Context.AppPaths.TestErrorPath.Delete();
-                Context.AppPaths.TestStandardPath.Delete();          
-                
+                Context.AppPaths.TestStatusPath.Delete();
+
                 RunTests(false,filters);
 
                 EmitLogs();

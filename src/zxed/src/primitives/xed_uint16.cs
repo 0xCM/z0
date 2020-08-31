@@ -8,8 +8,10 @@ namespace Z0.Xed
     using System;
     using System.Runtime.CompilerServices;
 
+    using Z0.Xed;
+
     using static Konst;
-        
+
     [ApiHost]
     public struct xed_uint16_t
     {

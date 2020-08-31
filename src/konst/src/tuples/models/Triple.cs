@@ -18,7 +18,7 @@ namespace Z0
         /// The first member
         /// </summary>
         public T First;
-        
+
         /// <summary>
         /// The second member
         /// </summary>
@@ -32,30 +32,34 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Triple<T>((T a, T b, T c) src)
             => new Triple<T>(src.a, src.b, src.c);
-        
+
         [MethodImpl(Inline)]
-        public static bool operator ==(Triple<T> x, Triple<T> y)        
+        public static bool operator ==(Triple<T> x, Triple<T> y)
             => x.Equals(y);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(Triple<T> x, Triple<T> y)        
+        public static bool operator !=(Triple<T> x, Triple<T> y)
             => x.Equals(y);
 
         [MethodImpl(Inline)]
         public Triple(T a, T b, T c)
         {
-            this.First = a;
-            this.Second = b;
-            this.Third = c;
-        }                
+            First = a;
+            Second = b;
+            Third = c;
+        }
 
         [MethodImpl(Inline)]
         public void Deconstruct(out T a, out T b, out T c)
         {
-            a = this.First;
-            b = this.Second;
-            c = this.Third;
+            a = First;
+            b = Second;
+            c = Third;
         }
+
+        [MethodImpl(Inline)]
+        public bool Any(Func<T,bool> f)
+            => f(First) || f(Second) || f(Third);
 
         public T this[int i]
         {
@@ -63,7 +67,7 @@ namespace Z0
             get => i == 0 ? First : i == 1 ? Second : Third;
 
             [MethodImpl(Inline)]
-            set 
+            set
             {
                 if(i == 0)
                     First = value;
@@ -74,19 +78,19 @@ namespace Z0
             }
         }
 
-        T ITriple<Triple<T>, T>.First 
+        T ITriple<Triple<T>, T>.First
         {
             [MethodImpl(Inline)]
             get => First;
         }
 
-        T ITriple<Triple<T>, T>.Second 
+        T ITriple<Triple<T>, T>.Second
         {
             [MethodImpl(Inline)]
             get => Second;
         }
 
-        T ITriple<Triple<T>, T>.Third 
+        T ITriple<Triple<T>, T>.Third
         {
             [MethodImpl(Inline)]
             get => Third;
@@ -112,7 +116,7 @@ namespace Z0
 
         public override int GetHashCode()
             => HashCode.Combine(First,Second,Third);
-        
+
         public override bool Equals(object obj)
             => obj is Triple<T> x && Equals(x);
 

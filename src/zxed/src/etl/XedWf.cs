@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using Z0.XedWf;
+    using Z0.Xed;
 
     using static z;
     using static Konst;
@@ -20,10 +20,9 @@ namespace Z0
 
     using F = XedPatternField;
     using R = XedPatternSummary;
-    using api = XedOps;
 
     [ApiHost]
-    public readonly ref struct XedEtl
+    public readonly ref struct XedWf
     {
         readonly XedEtlConfig Config;
 
@@ -35,10 +34,13 @@ namespace Z0
 
         readonly TabularArchive Pub;
 
-        public XedEtl(IWfContext context, XedEtlConfig config)
+        readonly CorrelationToken Ct;
+
+        public XedWf(IWfContext context, XedEtlConfig config)
         {
             Wf = context;
             Config = config;
+            Ct = Wf.Ct;
             Src = XedSourceArchive.Create(Config.SourceRoot);
             Dst = XedStagingArchive.Create(Config.ExtractRoot);
             Pub = TabularArchive.Service(Config.PubRoot);
@@ -49,10 +51,9 @@ namespace Z0
 
         }
 
-
         public XedPattern[] ExtractPatterns()
         {
-            var step = new WfStepId(typeof(XedEtl), nameof(ExtractPatterns), AB.token(WfPartKind.Step, typeof(XedEtl)));
+            var step = AB.step(typeof(void),typeof(XedWf));
             var patterns = list<XedPattern>();
             var parser = XedSourceParser.Service;
             var files = Src.InstructionFiles.ToSpan();
@@ -61,7 +62,7 @@ namespace Z0
                 for(var i=0; i< files.Length; i++)
                 {
                     ref readonly var file = ref skip(files,i);
-                    var id = Wf.Raise(XedEvents.ParsingInstructions(file));
+                    var id = Wf.Raise(new ParsingXedInstructions(ParseInstructionsStep.StepId, file,Ct));
                     var parsed = span(parser.ParseInstructions(file));
                     for(var j = 0; j< parsed.Length; j++)
                     {
@@ -70,7 +71,7 @@ namespace Z0
                         Dst.Deposit(parsed, file.FileName);
                     }
 
-                    Wf.Raise(new ParsedInstructions(step, FS.path(file.Name), parsed.Length, Wf.Ct));
+                    Wf.Raise(new ParsedXedInstructions(step, FS.path(file.Name), parsed.Length, Wf.Ct));
                 }
             }
             catch(Exception e)
@@ -98,10 +99,9 @@ namespace Z0
         }
 
         public XedPatternSummary[] PublishSummary(XedPattern[] src)
-
         {
             var sorted = (src as IEnumerable<XedPattern>).OrderBy(x => x.Class).ThenBy(x => x.Category).ThenBy(x => x.Extension).ThenBy(x => x.IsaSet).Array();
-            var records = sorted.Map(p => p.Summary());
+            var records = sorted.Map(p => XedOps.summary(p));
             Pub.Deposit<F,R>(records, FileName.define("summary", FileExtensions.Csv));
             return records;
         }

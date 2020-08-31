@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+
     using M = XedSourceMarkers;
 
     /// <summary>
@@ -18,37 +19,34 @@ namespace Z0
     {
         public readonly TextRow[] Rows {get;}
 
-        public static XedInstructionData Empty 
-            => new XedInstructionData(sys.empty<TextRow>());
-        
         [MethodImpl(Inline)]
-        internal XedInstructionData(params TextRow[] rows)
+        public XedInstructionData(params TextRow[] rows)
         {
             Rows = rows;
         }
 
-        public ref readonly TextRow this[int i] 
-        { 
-            [MethodImpl(Inline)] 
+        public ref readonly TextRow this[int i]
+        {
+            [MethodImpl(Inline)]
             get => ref Rows[i];
         }
 
-        public bool IsEmpty 
-        { 
-            [MethodImpl(Inline)] 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
             get => (Rows?.Length ?? 0) == 0;
         }
 
         public bool IsNonEmpty
-        { 
-            [MethodImpl(Inline)] 
+        {
+            [MethodImpl(Inline)]
             get => !IsEmpty;
-        }   
+        }
 
-        public int RowCount 
+        public int RowCount
             => Rows.Length;
 
-        public string Class 
+        public string Class
             => this.ExtractProp(M.ICLASS);
 
         public string Category
@@ -67,15 +65,15 @@ namespace Z0
             => this.ExtractProp(M.REAL_OPCODE);
 
         public XedPattern[] Patterns
-            => this.ExtractPatterns();
+            => XedOps.patterns(this);
 
         [MethodImpl(Inline)]
-        internal bool IsProp(int index, string Name)            
+        internal bool IsProp(int index, string Name)
             => this[index].Text.StartsWith(Name);
 
         [MethodImpl(Inline)]
         internal string ExtractProp(TextRow src)
-            => src.Text.RightOf(M.PROP_DELIMITER).Trim(); 
+            => src.Text.RightOf(M.PROP_DELIMITER).Trim();
 
         [MethodImpl(Inline)]
         internal string ExtractProp(int index)

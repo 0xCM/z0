@@ -28,7 +28,7 @@ namespace Z0
             Parts = ApiQuery.parts(src);
             Owners = Parts.Select(x => x.Owner);
             Files = Owners.Select(x => FilePath.Define(x.Location));
-            Api = ApiQuery.set(new ApiParts(Parts));
+            Api = ApiQuery.apiset(new ApiParts(Parts));
         }
 
         public ModuleArchive(FS.FolderPath root, string exclude = EmptyString)
@@ -37,7 +37,7 @@ namespace Z0
             Files = root.Exclude(text.ifblank(exclude, "System.Private.CoreLib")).Where(f => FS.managed(f)).Map(f => FilePath.Define(f.Name));
             Parts = ApiQuery.resolve(Files);
             Owners = ApiQuery.parts(Files);
-            Api = ApiQuery.set(new ApiParts(Parts));
+            Api = ApiQuery.apiset(new ApiParts(Parts));
         }
     }
 }

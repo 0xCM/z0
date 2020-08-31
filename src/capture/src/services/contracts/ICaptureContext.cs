@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface ICaptureContext : IShellBase
+    public interface ICaptureContext : IShellContext
     {
-        IAppContext Root {get;}
+        IAppContext ContextRoot {get;}
 
         IAsmDecoder Decoder {get;}
 
