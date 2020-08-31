@@ -25,6 +25,10 @@ namespace Z0
         public static ModuleArchive from(FolderPath src)
             => new ModuleArchive(FS.dir(src.Name));
 
+        [MethodImpl(Inline)]
+        public static ModuleArchive from(FS.FolderPath src, PartId[] parts)
+            => new ModuleArchive(FS.dir(src.Name), parts);
+
         public static ModuleArchive exclude(string exclude)
         {
             var entry = Assembly.GetEntryAssembly();

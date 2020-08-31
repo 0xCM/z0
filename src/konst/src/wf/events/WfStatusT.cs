@@ -15,8 +15,6 @@ namespace Z0
     [Event]
     public readonly struct WfStatus<T> : IWfEvent<WfStatus<T>, T>
     {
-        public const string EventName = nameof(WfStatus<T>);
-
         public WfEventId EventId {get;}
 
         public WfStepId StepId {get;}
@@ -26,18 +24,9 @@ namespace Z0
         public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStatus(string actor, T content, CorrelationToken ct, MessageFlair flair = Status)
-        {
-            EventId = id(EventName, ct);
-            StepId = WfStepId.Empty;
-            Flair =  flair;
-            Content = content;
-        }
-
-        [MethodImpl(Inline)]
         public WfStatus(WfStepId step, T content, CorrelationToken ct, MessageFlair flair = Status)
         {
-            EventId = id(step,ct);
+            EventId = id(step, ct);
             StepId = step;
             Flair =  flair;
             Content = content;

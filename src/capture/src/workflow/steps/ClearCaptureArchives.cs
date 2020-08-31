@@ -11,21 +11,16 @@ namespace Z0.Asm
     using static z;
     using static ClearCaptureArchivesStep;
 
-    [Step(typeof(ClearCaptureArchives))]
-    public readonly struct ClearCaptureArchivesStep
-    {
-        public const string StepName = nameof(ClearCaptureArchives);
-    }
 
     public readonly ref struct ClearCaptureArchives
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly IWfConfig Config;
 
         readonly CorrelationToken Ct;
 
-        public ClearCaptureArchives(IWfContext wf, IWfConfig config, CorrelationToken ct)
+        public ClearCaptureArchives(IWfShell wf, IWfConfig config, CorrelationToken ct)
         {
             Wf = wf;
             Config = config;

@@ -21,12 +21,18 @@ namespace Z0
             public static FileName operator +(FileName a, FileExt b)
                 => file(text.format("{0}.{1}",a,b));
 
-            public FileExt Ext 
+            public FileExt Ext
             {
                 [MethodImpl(Inline)]
                 get => new FileExt(Path.GetExtension(Name.Name));
             }
-            
+
+            public FileName WithoutExtension
+            {
+                [MethodImpl(Inline)]
+                get => FS.file(Path.GetFileNameWithoutExtension(Name));
+            }
+
             [MethodImpl(Inline)]
             public FileName(PathPart name)
                 => Name = name;
@@ -40,7 +46,7 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => Path.GetExtension(z.span(Name.Name)).Length != 0;
             }
-            
+
             public bool IsEmpty
             {
                 [MethodImpl(Inline)]
@@ -53,7 +59,7 @@ namespace Z0
                 get => Name.IsNonEmpty;
             }
 
-            public static FileName Empty 
+            public static FileName Empty
             {
                 [MethodImpl(Inline)]
                 get => new FileName(PathPart.Empty);
@@ -62,7 +68,7 @@ namespace Z0
             const string ExtPattern = "{0}.{1}";
 
             const string Pattern = "{0}";
-            
+
             [MethodImpl(Inline)]
             public string Format()
                 => Name.Format();
@@ -70,6 +76,6 @@ namespace Z0
             public override string ToString()
                 => Format();
 
-        }        
+        }
     }
 }

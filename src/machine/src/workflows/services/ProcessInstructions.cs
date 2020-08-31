@@ -15,11 +15,11 @@ namespace Z0
 
     public ref struct ProcessInstructions
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly PartAsmFx Source;
 
-        public ProcessInstructions(IWfContext wf, PartAsmFx src)
+        public ProcessInstructions(IWfShell wf, PartAsmFx src)
         {
             Wf = wf;
             Source = src;

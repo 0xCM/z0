@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.Linq;
 
     using static Konst;
     using static z;
@@ -39,5 +40,15 @@ namespace Z0
             Owners = ApiQuery.parts(Files);
             Api = ApiQuery.apiset(new ApiParts(Parts));
         }
+
+        public ModuleArchive(FS.FolderPath root, PartId[] parts)
+        {
+            Root = FolderPath.Define(root.Name);
+            Files = root.Exclude("System.Private.CoreLib").Where(f => FS.managed(f)).Map(f => FilePath.Define(f.Name));
+            Parts =  parts.Length != 0 ? ApiQuery.resolve(Files).Where(x => parts.Contains(x.Id)) : ApiQuery.resolve(Files);
+            Owners = Parts.Select(x => x.Owner);
+            Api = ApiQuery.apiset(new ApiParts(Parts));
+        }
+
     }
 }

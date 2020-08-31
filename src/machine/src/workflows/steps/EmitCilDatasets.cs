@@ -24,7 +24,6 @@ namespace Z0
 
         readonly IPart[] Parts;
 
-
         readonly CorrelationToken Ct;
 
         [MethodImpl(Inline)]
@@ -41,7 +40,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running(StepId, new {PartCount, TargetDir});
+            Wf.Running(StepId, delimit(PartCount, TargetDir));
 
             foreach(var part in Parts)
             {
@@ -55,26 +54,22 @@ namespace Z0
                 }
             }
 
-            Wf.Running(StepId, new {PartCount, TargetDir, EmissionCount});
+            Wf.Running(StepId, delimit(PartCount, TargetDir, EmissionCount));
         }
 
         uint Emit(IPart part, FilePath dst)
         {
             Wf.Emitting(StepId, EmissionType, dst);
 
-            var id = part.Id;
-            var assembly = part.Owner;
-            var methods = PeMetaReader.methods(FilePath.Define(assembly.Location));
+            var methods = PeTableReader.methods(FS.path(part.Owner.Location));
             var count = (uint)methods.Length;
-
             using var writer = dst.Writer();
-            writer.WriteLine(ImgMethodBody.Header);
+            writer.WriteLine(ImageMethodBody.Header);
 
             for(var i=0u; i<count; i++)
                 writer.WriteLine(skip(methods,i).Format());
 
             Wf.Emitted(StepId, EmissionType, count, dst);
-
             return count;
         }
 

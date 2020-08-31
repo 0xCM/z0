@@ -16,7 +16,7 @@ namespace Z0
     {
         const int DefaultBufferSize = CpuBuffer.BufferSize;
 
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
@@ -25,7 +25,7 @@ namespace Z0
         int ProcessedCount;
 
         [MethodImpl(Inline)]
-        internal ProcessPartFiles(IWfContext wf, IAsmContext asm, CorrelationToken ct)
+        internal ProcessPartFiles(IWfShell wf, IAsmContext asm, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

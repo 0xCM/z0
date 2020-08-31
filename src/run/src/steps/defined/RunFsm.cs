@@ -3,26 +3,26 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Threading.Tasks;
-    
+
     using static Konst;
     using static z;
     using static Fsm1Spec.StateKinds;
 
     public ref struct RunFsm
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         [MethodImpl(Inline)]
-        public RunFsm(IWfContext wf)
+        public RunFsm(IWfShell wf)
         {
             Wf = wf;
         }
-        
+
         public void Run()
         {
             var spec = new Fsm1Spec();
@@ -35,7 +35,7 @@ namespace Z0
                 var machine = Fsm.machine($"Fsm1-{i}",context, S0,S5, spec.TransFunc);
                 tasks[i] = Fsm.run(machine);
             }
-            Task.WaitAll(tasks);                            
+            Task.WaitAll(tasks);
         }
 
         public void Dispose()

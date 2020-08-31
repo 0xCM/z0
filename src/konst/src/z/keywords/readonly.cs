@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Konst;
 
@@ -28,5 +29,16 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> @readonly<T>(T[] src)
             => src;
+
+        /// <summary>
+        /// Constructs a span from a (presumeably finite) sequence selection
+        /// </summary>
+        /// <param name="src">The source sequence</param>
+        /// <param name="offset">The number of elements to skip from the head of the sequence</param>
+        /// <param name="length">The number of elements to take from the sequence</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<T> @readonly<T>(IEnumerable<T> src)
+            => src.ToSpan();
     }
 }

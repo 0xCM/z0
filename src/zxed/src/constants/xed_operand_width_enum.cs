@@ -8,9 +8,13 @@ namespace Z0.Xed
     public enum xed_operand_width_enum_t : byte
     {
         XED_OPERAND_WIDTH_INVALID,
+
         XED_OPERAND_WIDTH_ASZ,
+
         XED_OPERAND_WIDTH_SSZ,
+
         XED_OPERAND_WIDTH_PSEUDO,
+
         XED_OPERAND_WIDTH_PSEUDOX87,
         XED_OPERAND_WIDTH_A16,
         XED_OPERAND_WIDTH_A32,
@@ -125,6 +129,6 @@ namespace Z0.Xed
         XED_OPERAND_WIDTH_ZU32,
         XED_OPERAND_WIDTH_ZU64,
         XED_OPERAND_WIDTH_ZU128,
-        XED_OPERAND_WIDTH_LAST        
+        XED_OPERAND_WIDTH_LAST
     }
 }

@@ -16,11 +16,11 @@ namespace Z0
 
     public readonly struct AsmTableSink : IWfTableSink<AsmTableSink, AsmRecord>
     {
-        public IWfContext Wf {get;}
+        public IWfShell Wf {get;}
 
         readonly WfTableSink<AsmRecord>[] Sinks;
 
-        public AsmTableSink(IWfContext context, params Receive<AsmRecord>[] receivers)
+        public AsmTableSink(IWfShell context, params Receive<AsmRecord>[] receivers)
         {
             Wf = context;
             Sinks = receivers.Map(f => AB.tablesink(context, f));

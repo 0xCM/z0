@@ -21,7 +21,7 @@ namespace Z0
 
         readonly Span<string> Buffer;
 
-        IWfContext Wf => State.Wf;
+        IWfShell Wf => State.Wf;
 
         CorrelationToken Ct;
 
@@ -79,12 +79,12 @@ namespace Z0
 
         void Status<T>(T message)
         {
-            Wf.Status(StepId, message, Ct);
+            Wf.Status(StepId, message);
         }
 
         void Status<T>(WfStepId step, T message)
         {
-            Wf.Status(step, message, Ct);
+            Wf.Status(step, message);
         }
 
         static void format(ValueType src, StringBuilder dst)

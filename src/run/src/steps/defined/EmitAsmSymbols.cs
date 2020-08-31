@@ -24,10 +24,10 @@ namespace Z0
 
     public ref struct EmitAsmSymbols
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         [MethodImpl(Inline)]
-        public EmitAsmSymbols(IWfContext wf)
+        public EmitAsmSymbols(IWfShell wf)
         {
             Wf = wf;
             Wf.Created(StepId);

@@ -14,10 +14,6 @@ namespace Z0
     partial struct AB
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static void status<T>(IWfShell wf, string actor, T body, CorrelationToken ct)
-            => wf.Raise(new WfStatus<T>(actor, body, ct));
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void status<T>(IWfShell wf, WfStepId step, T body, CorrelationToken ct)
             => wf.Raise(new WfStatus<T>(step, body, ct));
     }

@@ -17,7 +17,7 @@ namespace Z0
     {
         public WfCaptureState State {get;}
 
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly IPartCapturePaths Target;
 

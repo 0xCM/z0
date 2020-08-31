@@ -13,7 +13,7 @@ namespace Z0.Xed
 
         XED_ERROR_GENERAL_ERROR, ///< XED could not decode the given instruction
 
-        XED_ERROR_INVALID_FOR_CHIP, ///< The instruciton is not valid for the specified chip
+        XED_ERROR_INVALID_FOR_CHIP, ///< The instruction is not valid for the specified chip
 
         XED_ERROR_BAD_REGISTER, ///< XED could not decode the given instruction because an invalid register encoding was used.
 

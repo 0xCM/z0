@@ -7,39 +7,41 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Data;
-
     using static Konst;
 
     public enum ImgRvaField : uint
-    {   
-        Rva = 0 | (16 << WidthOffset),     
-        
+    {
+        Rva = 0 | (16 << WidthOffset),
+
         Name = 1 | (64 << WidthOffset),
-        
-        Signature = 2 | (64 << WidthOffset),         
+
+        Signature = 2 | (64 << WidthOffset),
     }
 
-    public struct ImgFieldRva : IComparable<ImgFieldRva>, ITable<ImgRvaField,ImgFieldRva>
+    [Table]
+    public struct ImageFieldRvaRecord : IComparable<ImageFieldRvaRecord>
     {
         public Address32 Rva;
 
         public string TypeName;
-        
+
         public string FieldName;
-        
-        public BinaryCode Signature;
-        
+
+        public ImgBlobRecord Sig;
+
+        public BinaryCode SigData
+            => Sig.Data;
+
         [MethodImpl(Inline)]
-        public ImgFieldRva(string typeName, string name, ImgBlobRecord sig, Address32 offset)
+        public ImageFieldRvaRecord(Address32 rva, string typeName, string name, ImgBlobRecord sig)
         {
-            Rva = offset;
+            Rva = rva;
             TypeName = typeName;
             FieldName = name;
-            Signature = sig.Value;
-        }            
+            Sig = sig;;
+        }
 
-        public int CompareTo(ImgFieldRva src)    
+        public int CompareTo(ImageFieldRvaRecord src)
             => Rva.CompareTo(src.Rva);
     }
 }

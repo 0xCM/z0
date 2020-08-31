@@ -36,7 +36,7 @@ namespace Z0
 
         public ReadOnlySpan<ImgBlobRecord> Read(IPart part)
         {
-            using var reader = PeMetaReader.open(part.PartPath());
+            using var reader = PeTableReader.open(part.PartPath());
             return reader.ReadBlobs();
         }
 

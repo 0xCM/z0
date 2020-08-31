@@ -41,7 +41,7 @@ namespace Z0
     {
         readonly BitBroker<JmpKind,BasedAsmFx> broker;
 
-        public IWfContext Wf {get;}
+        public IWfShell Wf {get;}
 
         public readonly PartAsmFx Source;
 
@@ -64,7 +64,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ProcessAsmJmp(IWfContext wf, PartAsmFx src,  bool connect = true)
+        public ProcessAsmJmp(IWfShell wf, PartAsmFx src,  bool connect = true)
         {
             Wf = wf;
             broker = AsmBrokers.jmp();

@@ -15,7 +15,7 @@ namespace Z0
 
     public ref partial struct EmitDatasets
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
@@ -23,7 +23,7 @@ namespace Z0
 
         readonly bool Recapture;
 
-        public EmitDatasets(IWfContext context, CorrelationToken ct)
+        public EmitDatasets(IWfShell context, CorrelationToken ct)
         {
             Ct = ct;
             Wf = context;

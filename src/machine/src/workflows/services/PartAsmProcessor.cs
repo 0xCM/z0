@@ -13,7 +13,7 @@ namespace Z0
 
     public readonly struct PartAsmProcessor : IAsmProcessor<AsmHandlerKind,PartAsmFx>
     {
-        public IWfContext Wf {get;}
+        public IWfShell Wf {get;}
 
         readonly BitBroker<AsmHandlerKind,PartAsmFx> broker;
 
@@ -21,7 +21,7 @@ namespace Z0
             => broker;
 
         [MethodImpl(Inline)]
-        public PartAsmProcessor(IWfContext wf)
+        public PartAsmProcessor(IWfShell wf)
         {
             Wf = wf;
             broker = DataBrokers.broker64<AsmHandlerKind,PartAsmFx>();

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     using F = ImgBlobField;
-    using W = BlobFieldWidth;
+    using W = ImageBlobFieldWidth;
 
     partial class PartRecords
     {
@@ -23,10 +23,10 @@ namespace Z0
 
         public static void deposit(in ImgBlobRecord src, IDatasetFormatter<ImgBlobField> dst)
         {
-            dst.Delimit(F.Sequence, src.Sequence);
+            dst.Delimit(F.Sequence, src.Seq);
             dst.Delimit(F.HeapSize, src.HeapSize);
             dst.Delimit(F.Offset, src.Offset);
-            dst.Delimit(F.Value, src.Value);
+            dst.Delimit(F.Value, src.Data);
             dst.EmitEol();
         }
     }

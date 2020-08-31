@@ -8,11 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
 
-    using Z0.Data;
-
     using static Konst;
 
-    public enum ImgConstantField : ushort
+    public enum ImageConstantField : ushort
     {
         Sequence = 0,
 
@@ -26,26 +24,26 @@ namespace Z0
     }
 
     [Table]
-    public struct ImgConstantRecord : ITable<ImgConstantRecord>
-    {            
-        public int Sequence;
+    public struct ImageConstantRecord
+    {
+        public Count32 Sequence;
 
-        public int ParentId;
-        
+        public ArtifactIdentifier ParentId;
+
         public string Source;
 
         public ConstantTypeCode DataType;
 
-        public BinaryCode Value;    
+        public BinaryCode Content;
 
         [MethodImpl(Inline)]
-        public ImgConstantRecord(int Sequence, HandleInfo Parent, ConstantTypeCode type, BinaryCode value)
+        public ImageConstantRecord(Count32 seq, HandleInfo parent, ConstantTypeCode tc, BinaryCode value)
         {
-            this.Sequence = Sequence;
-            this.ParentId = Parent.Token;
-            this.Source = Parent.Source.ToString();
-            this.DataType = type;
-            this.Value = value;
-        }            
-    }    
+            Sequence = seq;
+            ParentId = parent.Token;
+            Source = parent.Source.ToString();
+            DataType = tc;
+            Content = value;
+        }
+    }
 }

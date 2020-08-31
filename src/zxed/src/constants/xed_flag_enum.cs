@@ -51,7 +51,6 @@ namespace Z0.Xed
 
         XED_FLAG_fc3, ///< x87 FC3 flag
 
-        XED_FLAG_LAST        
+        XED_FLAG_LAST
     }
-
 }

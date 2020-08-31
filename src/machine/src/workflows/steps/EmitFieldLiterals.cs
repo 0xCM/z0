@@ -16,7 +16,7 @@ namespace Z0
 
     public readonly ref struct EmitFieldLiterals
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
@@ -26,7 +26,7 @@ namespace Z0
         ModuleArchive Modules
             => ModuleArchives.entry();
 
-        public EmitFieldLiterals(IWfContext context, CorrelationToken ct)
+        public EmitFieldLiterals(IWfShell context, CorrelationToken ct)
         {
             Ct = ct;
             Wf = context;

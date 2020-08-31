@@ -11,20 +11,11 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Konst;    
-    using static PartRecords;
-        
-    partial class PeMetaReader
-    {        
-        internal static ImgBlobRecord record(in ReaderState state, BlobHandle handle, int seq)
-        {
-            var offset = state.Reader.GetHeapOffset(handle);            
-            var value = state.Reader.GetBlobBytes(handle) ?? Root.array<byte>();
-            var size = state.Reader.GetHeapSize(HeapIndex.Blob);
-            return new ImgBlobRecord(seq, size,offset,value);                    
-        }
+    using static Konst;
 
-        internal static ReadOnlySpan<ImgBlobRecord> blobs(in ReaderState state)
+    partial class PeTableReader
+    {
+        public static ReadOnlySpan<ImgBlobRecord> blobs(in ReaderState state)
         {
             var reader = state.Reader;
             int size = reader.GetHeapSize(HeapIndex.Blob);
@@ -37,12 +28,7 @@ namespace Z0
             do
             {
                 var value = reader.GetBlobBytes(handle);
-                values.Add(new ImgBlobRecord(
-                    Sequence: i++,
-                    HeapSize: size, 
-                    Offset: reader.GetHeapOffset(handle), 
-                    Value: reader.GetBlobBytes(handle)
-                    ));
+                values.Add(new ImgBlobRecord(i++, size, (Address32)reader.GetHeapOffset(handle), reader.GetBlobBytes(handle)));
 
                 handle = reader.GetNextHandle(handle);
             }

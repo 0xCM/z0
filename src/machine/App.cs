@@ -12,8 +12,6 @@ namespace Z0
     public readonly struct Shell
     {
         public const PartId ShellId = PartId.Machine;
-
-        public const string ShellName = "machine";
     }
 
     class App : AppShell<App,IAppContext>

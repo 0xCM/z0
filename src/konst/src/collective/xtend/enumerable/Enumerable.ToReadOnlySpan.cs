@@ -42,13 +42,13 @@ namespace Z0
         /// <param name="length">The number of elements to take from the sequence</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<T> ToReadOnlySpan<T>(this IEnumerable<T> src)            
-            => src.ToSpan();
+        public static ReadOnlySpan<T> ToReadOnlySpan<T>(this IEnumerable<T> src)
+            => z.@readonly(src);
 
         /// <summary>
-        /// Constructs a span from an aray
+        /// Constructs a span from an array
         /// </summary>
-        /// <param name="src">The source aray</param>
+        /// <param name="src">The source array</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> ToReadOnlySpan<T>(this T[] src)

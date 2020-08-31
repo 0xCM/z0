@@ -14,13 +14,14 @@ namespace Z0
         public readonly int Token;
 
         public readonly TableIndex Source;
-                
+
         public HandleInfo(int token, TableIndex src)
         {
             Token = token;
             Source = src;
         }
-        
-        public static HandleInfo Empty => new HandleInfo(0, 0);
+
+        public static HandleInfo Empty
+            => new HandleInfo(0, 0);
     }
 }

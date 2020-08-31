@@ -7,15 +7,18 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Shell;
+    using static Shelly;
 
     using static z;
 
-    readonly struct Shell
+    readonly struct Shelly : IWfStep<Shelly>
     {
         public const PartId ShellId = PartId.ToolCli;
 
         public const string ShellName = nameof(PartId.ToolCli) + "/" + nameof(App);
+
+        public static WfStepId StepId
+            => AB.id<Shelly>();
     }
 
     class App : AppShell<App,IAppContext>
@@ -36,9 +39,9 @@ namespace Z0
                 var config = WfBuilder.configure(Context,args);
                 using var log = AB.termlog(config);
                 using var wf = WfBuilder.context(Context, config, log, Ct);
-                AB.status(wf, ShellName, new {Message ="Running shell", Args = text.bracket(args.FormatList())},Ct);
+                wf.Status(StepId, new {Message ="Running shell", Args = text.bracket(args.FormatList())});
 
-                AB.status(wf, ShellName, "Shell run complete", Ct);
+                wf.Status(StepId, "Shell run complete");
             }
             catch(Exception e)
             {

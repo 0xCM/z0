@@ -39,7 +39,7 @@ namespace Z0
 
         readonly FilePath AsmPath;
 
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         public EmitHostArtifacts(WfCaptureState state, ApiHostUri src, X86MemberExtract[] extracts, IPartCapturePaths dst, CorrelationToken ct)
         {

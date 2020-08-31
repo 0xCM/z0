@@ -20,7 +20,7 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         public WfCaptureState State {get;}
 

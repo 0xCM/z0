@@ -31,8 +31,8 @@ namespace Z0
             Ct = ct;
             StatusLock = new object();
             ErrorLock = new object();
-            Status = status.Writer();
-            Errors = errors.Writer();
+            Status = status.Timestamped().Writer();
+            Errors = errors.Timestamped().Writer();
             Relay = relay;
         }
 
@@ -56,7 +56,7 @@ namespace Z0
 
         public void Deposit(IAppEvent src)
         {
-            Deposit(new WfStatus("anonymous", src.Format(), Ct, src.Flair));
+            Deposit(new WfStatus<string>(WfStepId.Empty, src.Format(), Ct, src.Flair));
         }
 
         public void Deposit(IAppMsg src)

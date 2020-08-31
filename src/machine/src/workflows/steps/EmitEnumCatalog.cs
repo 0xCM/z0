@@ -14,14 +14,14 @@ namespace Z0
 
     public readonly ref struct EmitEnumCatalog
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
         readonly FilePath TargetPath;
 
         [MethodImpl(Inline)]
-        public EmitEnumCatalog(IWfContext context, CorrelationToken ct)
+        public EmitEnumCatalog(IWfShell context, CorrelationToken ct)
         {
             Wf = context;
             Ct = ct;

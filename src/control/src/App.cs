@@ -12,7 +12,6 @@ namespace Z0
     using static Konst;
     using static AppShell;
 
-
     class App : AppShell<App,IAppContext>
     {
         public CorrelationToken Ct {get;}
@@ -23,17 +22,17 @@ namespace Z0
             Ct = correlate(Id);
         }
 
-        public override void RunShell(params string[] args)
+        public override void RunShell(IWfShell wf)
         {
             try
             {
-                var config = WfBuilder.configure(Context, args);
-                using var log = AB.termlog(config.StatusLog, config.ErrorLog);
-                using var sink = AB.termsink(log, Ct);
-                using var wf = new WfContext(Context, Ct, config, sink);
-                using var control = new CaptureControl(new WfCaptureState(wf, new AsmContext(Context), config, Ct));
-                wf.Raise(new LogsConfigured(ActorName, config.Logs, Ct));
+                // var config = WfBuilder.configure(Context, args);
+                // using var log = AB.termlog(config.StatusLog, config.ErrorLog);
+                // using var sink = AB.termsink(log, Ct);
+                // using var wf = new WfContext(Context, Ct, config, sink);
 
+                using var control = new CaptureControl(new WfCaptureState(wf, new AsmContext(Context), wf.Config, Ct));
+                wf.Raise(new LogsConfigured(ActorName, wf.Config.Logs, Ct));
                 control.Run();
             }
             catch(Exception e)
@@ -42,8 +41,9 @@ namespace Z0
             }
         }
 
-        public static void Main(params string[] args)
-            => Launch(args);
+        public static int Main(params string[] args)
+            => Launch(AB.shell(args));
+
     }
 
     public static partial class XTend { }

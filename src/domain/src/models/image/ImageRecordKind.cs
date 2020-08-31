@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum ImgRecordKind : byte
+    public enum ImageRecordKind : byte
     {
         None = 0,
 

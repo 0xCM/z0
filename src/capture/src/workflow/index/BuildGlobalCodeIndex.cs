@@ -28,9 +28,9 @@ namespace Z0
 
         readonly Dictionary<OpUri,X86ApiCode> Locations;
 
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
-        public BuildGlobalCodeIndex(IWfContext wf)
+        public BuildGlobalCodeIndex(IWfShell wf)
         {
             Wf = wf;
             CodeAddress = dict<MemoryAddress,X86ApiCode>();

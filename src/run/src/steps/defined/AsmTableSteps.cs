@@ -28,7 +28,7 @@ namespace Z0
             Encoded = encoded;
         }
 
-        public IWfContext Wf
+        public IWfShell Wf
             => State.Wf;
 
         public void Run()

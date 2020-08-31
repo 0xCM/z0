@@ -70,20 +70,20 @@ namespace Z0
             Wf.Finished(StepId);
         }
 
-        ReadOnlySpan<ImageString> ReadData()
+        ReadOnlySpan<ImageStringRecord> ReadData()
             => StringKind == PartStringKind.User ? ReadUserStrings(Part) : ReadSystemStrings(Part);
 
-        ReadOnlySpan<ImageString> ReadUserStrings(IPart part)
+        ReadOnlySpan<ImageStringRecord> ReadUserStrings(IPart part)
         {
             var srcPath = part.PartPath();
-            using var reader = PeMetaReader.open(srcPath);
+            using var reader = PeTableReader.open(srcPath);
             return reader.ReadUserStrings();
         }
 
-        ReadOnlySpan<ImageString> ReadSystemStrings(IPart part)
+        ReadOnlySpan<ImageStringRecord> ReadSystemStrings(IPart part)
         {
             var srcPath = part.PartPath();
-            using var reader = PeMetaReader.open(srcPath);
+            using var reader = PeTableReader.open(srcPath);
             return reader.ReadStrings();
         }
     }

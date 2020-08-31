@@ -31,7 +31,7 @@ namespace Z0
         }
 
         protected Shell()
-            : this(new ShellContext(ApiQuery.apiset()))
+            : this(new ShellContext(sys.empty<string>(), ApiQuery.apiset()))
         {
 
         }
@@ -55,7 +55,15 @@ namespace Z0
         public void Dispose()
             => OnDispose();
 
-        public abstract void RunShell(params string[] args);
+        public virtual void RunShell(params string[] args)
+        {
+
+        }
+
+        public virtual void RunShell(IWfShell context)
+        {
+
+        }
 
         protected virtual void OnDispose()
             => term.warn($"Dispose handler not implemented");
@@ -79,6 +87,24 @@ namespace Z0
             shell.Args = args;
             shell.Context = context;
             return shell;
+        }
+
+        protected static int Launch(IWfShell context)
+        {
+            try
+            {
+                var shell = new S();
+                shell.Args = context.Args;
+                shell.Context = context;
+                shell.RunShell(context);
+
+                return 0;
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                return -1;
+            }
         }
 
         protected static void Launch(params string[] args)

@@ -17,22 +17,12 @@ namespace Z0
     /// </summary>
     public interface IWfContext : IWfShell
     {
-        IWfBroker Broker {get;}
-
-        FilePath ResPack
-            => FilePath.Define(@"J:\dev\projects\z0-logs\respack\.bin\lib\netcoreapp3.0\z0.respack.dll");
-
         void Error(WfStepId step, Exception e)
             => Raise(WfEvents.error(step, e, Ct));
 
-        void Error<T>(WfStepId step,T content)
-            => Raise(WfEvents.error(step, content,  Ct));
 
         void Error(in WfActor actor, Exception e, CorrelationToken? ct = null)
             => Raise(WfEvents.error(WfStepId.Empty, e, ct ?? Ct));
-
-        void Warn<T>(WfStepId step, T content)
-            => Raise(WfEvents.warn(step, content, Ct));
 
         void Processing<T>(T kind, FilePath src, [File] string actor = null, [Line] int? line = null)
             => Raise(WfEvents.processing(Path.GetFileNameWithoutExtension(actor), kind, src, Ct));

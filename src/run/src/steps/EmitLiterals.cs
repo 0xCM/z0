@@ -43,14 +43,14 @@ namespace Z0
 
     public ref struct EmitLiterals
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         public readonly WfDataFlow<IPart,FilePath> Df;
 
         public ReadOnlySpan<EnumLiteralDetail> Emitted;
 
         [MethodImpl(Inline)]
-        public EmitLiterals(IWfContext wf, Assembly src)
+        public EmitLiterals(IWfShell wf, Assembly src)
         {
             Wf = wf;
             var part = ApiQuery.part(src).Require();

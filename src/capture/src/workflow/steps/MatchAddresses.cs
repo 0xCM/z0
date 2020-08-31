@@ -52,13 +52,13 @@ namespace Z0
                 Wf.Error(StepName, e, Ct);
             }
 
-            Wf.Ran(StepName, Ct);
+            Wf.Ran(StepId);
 
         }
 
         public void Dispose()
         {
-           Wf.Finished(StepName, Ct);
+           Wf.Finished(StepId);
         }
     }
 }

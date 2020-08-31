@@ -52,7 +52,7 @@ namespace Z0
             {
                 var id = part.Id;
                 var assembly = part.Owner;
-                var records = PeMetaReader.headers(FilePath.Define(assembly.Location));
+                var records = PeTableReader.headers(FilePath.Define(assembly.Location));
                 var count = (uint)records.Length;
 
                 for(var i=0; i<count; i++)
@@ -66,12 +66,12 @@ namespace Z0
             Wf.Ran(StepId, delimit(pCount, total));
         }
 
-        static void format(in PeHeaderRecord src, DatasetFormatter<F> dst)
+        static void format(in ImageSectionHeader src, DatasetFormatter<F> dst)
         {
-            dst.Append(F.FileName, src.FileName);
-            dst.Delimit(F.Section, src.Section);
-            dst.Delimit(F.Address, src.Address);
-            dst.Delimit(F.Size, src.Size);
+            dst.Append(F.FileName, src.File);
+            dst.Delimit(F.Section, src.SectionName);
+            dst.Delimit(F.Address, src.RawData);
+            dst.Delimit(F.Size, src.RawDataSize);
             dst.Delimit(F.EntryPoint, src.EntryPoint);
             dst.Delimit(F.CodeBase, src.CodeBase);
             dst.Delimit(F.Gpt, src.GlobalPointerTable);

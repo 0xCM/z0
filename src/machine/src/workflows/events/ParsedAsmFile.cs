@@ -29,13 +29,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public ParsedAsmFile(WfStepId step, Count32 lines, FS.FilePath src, CorrelationToken ct, MessageFlair flair =  MessageFlair.Cyan)
         {
-            EventId = (EventName, ct);
+            EventId = (typeof(ParsedAsmFile), step, ct);
             StepId = step;
             LineCount = lines;
             SourcePath = src;
             Flair = flair;
         }
-
 
         [MethodImpl(Inline)]
         public string Format()

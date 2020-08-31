@@ -1,0 +1,32 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Reflection.Metadata;
+    using System.Reflection.Metadata.Ecma335;
+
+    using static ReaderInternals;
+
+    using static Konst;
+    using static z;
+
+    partial class PeTableReader
+    {
+        public static HandleInfo? describe(in ReaderState state, Handle handle)
+        {
+            if(!handle.IsNil)
+            {
+                var table = index(handle);
+                var token = state.Reader.GetToken(handle);
+                if (table != null)
+                    return new HandleInfo(token, table.Value);
+            }
+
+            return null;
+        }
+    }
+}

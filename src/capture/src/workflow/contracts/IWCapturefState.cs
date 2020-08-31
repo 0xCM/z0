@@ -10,7 +10,7 @@ namespace Z0
 
     public interface IWfCaptureState : IWfCaptureContext
     {
-        IWfContext Wf {get;}
+        IWfShell Wf {get;}
 
         WfConfig Config {get;}
 

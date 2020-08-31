@@ -35,12 +35,12 @@ namespace Z0
 
             Extractions = new X86MemberExtract[0]{};
 
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId);
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId);
         }
 
         public void Run()
@@ -56,7 +56,7 @@ namespace Z0
                 Wf.Error(StepName, e, Ct);
             }
 
-            Wf.Ran(StepName, Ct);
+            Wf.Ran(StepId,Ct);
         }
     }
 }

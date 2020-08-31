@@ -7,20 +7,20 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using F = ImgFieldRecordField;
-    using W = FieldRecordFieldWidth;
+    using F = ImageFieldTableField;
+    using W = ImageFieldTabledWidth;
 
     partial class PartRecords
     {
-        public static RecordFormatter<F,W> formatter(ImgFieldRecord spec)
+        public static RecordFormatter<F,W> formatter(ImageFieldTable spec)
             => Formatters.record<F,W>();
 
-        public static ref readonly RecordFormatter<F,W> format(in ImgFieldRecord src, in RecordFormatter<F,W> dst, bool eol = true)
+        public static ref readonly RecordFormatter<F,W> format(in ImageFieldTable src, in RecordFormatter<F,W> dst, bool eol = true)
         {
-            dst.Delimit(F.Sequence, src.Sequence);
+            dst.Delimit(F.Sequence, src.Seq);
             dst.Delimit(F.Name, src.Name);
-            dst.Delimit(F.Signature, src.Signature);
-            dst.Delimit(F.Attributes, src.Attributes);
+            dst.Delimit(F.Signature, src.Sig);
+            dst.Delimit(F.Attributes, src.Attribs);
             if(eol)
                 dst.EmitEol();
             return ref dst;

@@ -10,8 +10,6 @@ namespace Z0.Dac
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using Z0.MS;
-
     public sealed unsafe class SOSHandleEnum : CallableCOMWrapper
     {
         static readonly Guid IID_ISOSHandleEnum = new Guid("3E269830-4A2B-4301-8EE2-D6805B29B2FA");

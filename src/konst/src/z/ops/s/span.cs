@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Reflection;
+    using System.Linq;
 
     using static Konst;
     using static System.Runtime.InteropServices.MemoryMarshal;
@@ -37,8 +38,8 @@ namespace Z0
         public static Span<T> span<S,T>(ref S src)
             where T : struct
             where S : struct
-                => Cast<S,T>(CreateSpan(ref src, 1));        
-                        
+                => Cast<S,T>(CreateSpan(ref src, 1));
+
         /// <summary>
         /// Allocates storage for a specified number of T-cells
         /// </summary>
@@ -68,5 +69,45 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> span(string src)
             => src;
+
+        /// <summary>
+        /// Constructs a span from a readonly span
+        /// </summary>
+        /// <param name="src">The source span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> span<T>(ReadOnlySpan<T> src)
+            => src.ToArray();
+
+        /// <summary>
+        /// Constructs a span of specified length from a sequence
+        /// </summary>
+        /// <param name="src">The source sequence</param>
+        /// <param name="length">The length of the result span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> span<T>(IEnumerable<T> src, Count32 length)
+            => src.Take(length).Array();
+
+        /// <summary>
+        /// Constructs a span of specified length from the sequence obtained by skipping a specified number of leading elements
+        /// </summary>
+        /// <param name="src">The source sequence</param>
+        /// <param name="offset">The number of elements to skip</param>
+        /// <param name="length">The length of the result span</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> span<T>(IEnumerable<T> src, int offset, int length)
+            => src.Skip(offset).Take(length).Array();
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> span<T>(HashSet<T> src)
+        {
+            var dst = span<T>(src.Count);
+            var i = 0u;
+            foreach(var item in src)
+                seek(dst, i++) = item;
+            return dst;
+        }
     }
 }

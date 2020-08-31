@@ -8,16 +8,27 @@ namespace Z0.Xed
     public enum xed_operand_enum_t : byte
     {
         XED_OPERAND_INVALID,
+
         XED_OPERAND_AGEN,
+
         XED_OPERAND_AMD3DNOW,
+
         XED_OPERAND_ASZ,
+
         XED_OPERAND_BASE0,
+
         XED_OPERAND_BASE1,
+
         XED_OPERAND_BCAST,
+
         XED_OPERAND_BCRC,
+
         XED_OPERAND_BRDISP_WIDTH,
+
         XED_OPERAND_CET,
+
         XED_OPERAND_CHIP,
+
         XED_OPERAND_CLDEMOTE,
         XED_OPERAND_DEFAULT_SEG,
         XED_OPERAND_DF32,
@@ -132,6 +143,6 @@ namespace Z0.Xed
         XED_OPERAND_VL,
         XED_OPERAND_WBNOINVD,
         XED_OPERAND_ZEROING,
-        XED_OPERAND_LAST        
+        XED_OPERAND_LAST
     }
 }

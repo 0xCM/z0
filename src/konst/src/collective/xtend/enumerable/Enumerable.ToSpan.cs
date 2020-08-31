@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    
+
     partial class XTend
     {
         /// <summary>
@@ -39,8 +39,8 @@ namespace Z0
         /// <param name="length">The number of elements to take from the sequence</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<T> ToSpan<T>(this IEnumerable<T> src)            
-            => src.ToArray();
+        public static Span<T> ToSpan<T>(this IEnumerable<T> src)
+            => z.span(src);
 
         /// <summary>
         /// Constructs a span from a readonly span
@@ -59,7 +59,7 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> ToSpan<T>(this IEnumerable<T> src, int length)
-            => src.Take(length).ToArray();            
+            => z.span(src, length);
 
         /// <summary>
         /// Constructs a span of specified length from the sequence obtained by skipping a specified number of leading elements
@@ -69,15 +69,6 @@ namespace Z0
         /// <param name="length">The length of the result span</param>
         /// <typeparam name="T">The element type</typeparam>
         public static Span<T> ToSpan<T>(this IEnumerable<T> src, int offset, int length)
-            => src.Skip(offset).Take(length).ToArray();            
-
-        public static Span<T> ToSpan<T>(this ISet<T> src)
-        {
-            var dst = new T[src.Count];
-            var i = 0;
-            foreach(var item in src)
-                dst[i++] = item;
-            return dst;
-        }            
+            => z.span(src,offset,length);
     }
 }

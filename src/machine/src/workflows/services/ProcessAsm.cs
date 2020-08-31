@@ -19,7 +19,7 @@ namespace Z0
     {
         readonly Dictionary<Mnemonic, ArrayBuilder<AsmRecord>> Index;
 
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly IAsmContext Asm;
 

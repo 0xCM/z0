@@ -14,11 +14,11 @@ namespace Z0
 
     public ref struct LogOpCodes
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly LogOpCodesArgs Args;
 
-        public LogOpCodes(IWfContext context, LogOpCodesArgs args)
+        public LogOpCodes(IWfShell context, LogOpCodesArgs args)
         {
             Wf = context;
             Args = args;

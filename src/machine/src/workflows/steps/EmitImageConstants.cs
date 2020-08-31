@@ -51,9 +51,9 @@ namespace Z0
             Wf.Ran(StepId);
         }
 
-        ReadOnlySpan<ImgConstantRecord> Read(IPart part)
+        ReadOnlySpan<ImageConstantRecord> Read(IPart part)
         {
-            using var reader = PeMetaReader.open(part.PartPath());
+            using var reader = PeTableReader.open(part.PartPath());
             return reader.ReadConstants();
         }
 

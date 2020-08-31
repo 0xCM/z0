@@ -13,7 +13,7 @@ namespace Z0.Asm
     {
         public IAppContext App {get;}
 
-        public IWfContext Wf {get;}
+        public IWfShell Wf {get;}
 
         public IAsmContext Asm {get;}
 
@@ -40,7 +40,7 @@ namespace Z0.Asm
         public PartId[] Parts {get;}
 
         [MethodImpl(Inline)]
-        public WfCaptureState(IWfContext wf, IAsmContext asm, WfConfig config, CorrelationToken ct)
+        public WfCaptureState(IWfShell wf, IAsmContext asm, WfConfig config, CorrelationToken ct)
         {
             Wf = wf;
             Asm = asm;
@@ -76,20 +76,26 @@ namespace Z0.Asm
         public IWfEventSink WfEventSink
             => Wf.Broker.Sink;
 
+        public void Created(WfStepId actor)
+            => Wf.Created(actor, Ct);
+
         public void Created(string actor, CorrelationToken ct)
             => Wf.Created(actor, Ct);
 
         public void Running(string actor, CorrelationToken ct)
             => Wf.Running(actor, ct);
 
-        public void Running<T>(string actor, T message, CorrelationToken ct)
-            => Wf.RunningT(actor, message, ct);
+        public void Running<T>(WfStepId step, T content)
+            => Wf.Running(step, content);
 
-        public void Ran<T>(string actor, T content, CorrelationToken ct)
-            => Wf.RanT(actor, content, ct);
+        public void Ran(WfStepId step)
+            => Wf.Ran(step, Ct);
 
-        public void Ran(string actor, CorrelationToken ct)
-            => Wf.Ran(actor, Ct);
+        public void Ran<T>(WfStepId step, T content)
+            => Wf.Ran(step, content);
+
+        public void Finished(WfStepId actor)
+            => Wf.Finished(actor, Ct);
 
         public void Finished(string actor, CorrelationToken ct)
             => Wf.Finished(actor, Ct);

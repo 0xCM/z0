@@ -29,7 +29,5 @@ namespace Z0.Xed
         XED_OPERAND_XTYPE_UINT,
         XED_OPERAND_XTYPE_VAR,
         XED_OPERAND_XTYPE_LAST
-        
     }
-
 }

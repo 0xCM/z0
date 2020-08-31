@@ -17,31 +17,31 @@ namespace Z0
 
     public ref struct EmitBitMasks
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
         readonly FilePath TargetPath;
 
         [MethodImpl(Inline)]
-        public EmitBitMasks(IWfContext context, CorrelationToken ct)
+        public EmitBitMasks(IWfShell context, CorrelationToken ct)
         {
             Wf = context;
             Ct = ct;
             TargetPath = Wf.IndexRoot + FileName.define("bitmasks", FileExtensions.Csv);;
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId);
         }
 
         public void Run()
         {
-            Wf.Running(StepName, text.format(RunningPattern, TargetPath), Ct);
+            Wf.Running(StepId, text.format(RunningPattern, TargetPath));
             var count = emit(typeof(BitMasks));
-            Wf.Ran(StepName, text.format(RanPattern, count, TargetPath), Ct);
+            Wf.Ran(StepId, text.format(RanPattern, count, TargetPath));
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId);
         }
 
         uint emit(Type src)

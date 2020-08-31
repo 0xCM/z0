@@ -16,27 +16,27 @@ namespace Z0
 
     public readonly ref struct EmitProjectDocs
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
-        public EmitProjectDocs(IWfContext wf, CorrelationToken ct)
+        public EmitProjectDocs(IWfShell wf, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId);
         }
 
         public void Run()
         {
-            Wf.Running(StepName, Ct);
+            Wf.Running(StepId);
             collect();
-            Wf.Ran(StepName, Ct);
+            Wf.Ran(StepId);
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId);
         }
 
         const string Sep = "| ";

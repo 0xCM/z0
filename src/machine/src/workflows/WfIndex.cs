@@ -121,9 +121,12 @@ namespace Z0
     }
 
     [Step(typeof(EmitProjectDocs))]
-    public readonly struct EmitProjectDocsStep
+    public readonly struct EmitProjectDocsStep : IWfStep<EmitProjectDocsStep>
     {
         public const string StepName = nameof(EmitProjectDocs);
+
+        public static WfStepId StepId
+            => typeof(EmitProjectDocsStep);
     }
 
     [Step(typeof(EmitContentCatalog))]

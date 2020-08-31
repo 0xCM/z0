@@ -25,8 +25,13 @@ namespace Z0
         ISettings Settings
             => SettingValues.Load(AppPaths.AppConfigPath);
 
+        FS.FolderPath CaptureRoot
+            => FS.dir((AppPaths.LogRoot + FolderName.Define("capture/artifacts")).Name);
         IApiSet Api
             => ApiQuery.apiset();
+
+        string[] Args
+             => sys.empty<string>();
 
         string ShellName
             => Root.GetSimpleName();

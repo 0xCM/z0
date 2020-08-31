@@ -13,14 +13,14 @@ namespace Z0
 
     public readonly struct HostAsmProcessor : IAsmProcessor<AsmHandlerKind,HostAsmFx>
     {
-        public IWfContext Wf {get;}
+        public IWfShell Wf {get;}
 
         public HostAsmFx Source {get;}
 
         public IWfDataBroker<AsmHandlerKind,HostAsmFx> Broker {get;}
 
         [MethodImpl(Inline)]
-        public HostAsmProcessor(IWfContext context, HostAsmFx src)
+        public HostAsmProcessor(IWfShell context, HostAsmFx src)
         {
             Wf = context;
             Broker = DataBrokers.broker64<AsmHandlerKind,HostAsmFx>();

@@ -29,6 +29,10 @@ namespace Z0
             => src.Value;
 
         [MethodImpl(Inline)]
+        public static explicit operator int(Count32 src)
+            => (int)src.Value;
+
+        [MethodImpl(Inline)]
         public Count32(uint value)
             => Value = value;
 

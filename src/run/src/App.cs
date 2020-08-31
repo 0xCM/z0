@@ -9,6 +9,13 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static RunnerShell;
+
+    [Step(typeof(App))]
+    public readonly struct RunnerShell : IWfStep<RunnerShell>
+    {
+        public static WfStepId StepId => typeof(RunnerShell);
+    }
 
     class App : AppShell<App,IAppContext>
     {
@@ -34,19 +41,19 @@ namespace Z0
 
             var config = WfBuilder.configure(Context, args);
             using var log = AB.termlog(config);
-            var wfc = WfBuilder.context(Context, config, log, Ct);
-            using var state = AsmWfBuilder.state(wfc, AsmWfBuilder.asm(Context), config);
+            var wf = WfBuilder.context(Context, config, log, Ct);
+            using var state = AsmWfBuilder.state(wf, AsmWfBuilder.asm(Context), config);
 
             try
             {
-                AB.status(wfc, ActorName, new {Message ="Running", Args = text.bracket(args.FormatList())},Ct);
+                wf.Running(StepId, text.bracket(args.FormatList()));
                 using var runner = new Runner(state);
                 runner.Run();
-                AB.status(wfc, ActorName,  "Ran", Ct);
+                wf.Ran(StepId);
             }
             catch(Exception e)
             {
-                wfc.Error(e, Ct);
+                wf.Error(e, Ct);
             }
         }
 

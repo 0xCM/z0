@@ -32,68 +32,40 @@ namespace Z0
                 => new WfEventId(typeof(T), step, ct, now());
 
         [MethodImpl(Inline)]
-        public static implicit operator WfEventId((string name, CorrelationToken ct) src)
-            => new WfEventId(src.name, src.ct, now());
-
-        [MethodImpl(Inline)]
         public static implicit operator WfEventId((Type type, WfStepId step, CorrelationToken ct) src)
             => new WfEventId(src.type, src.step, src.ct, now());
 
-        const string Pattern = "| {0} | {1} | {2}";
+        readonly string Identifier;
 
-        public Type EventType {get;}
-
-        public WfStepId StepId {get;}
-
-        /// <summary>
-        /// The time at which the event was raised
-        /// </summary>
         public Timestamp Ts {get;}
 
-        /// <summary>
-        /// Relates the event to other events in the workflow
-        /// </summary>
         public CorrelationToken Ct {get;}
 
         [MethodImpl(Inline)]
         public WfEventId(string name, CorrelationToken ct, Timestamp? ts = null)
         {
-            EventType = typeof(void);
-            StepId = WfStepId.Empty;
-            Ct = ct;
             Ts = ts ?? timestamp();
+            Ct = ct;
+            Identifier = text.format("{0} | {1} | {2}", Ts, Ct, name);
         }
 
         [MethodImpl(Inline)]
         public WfEventId(Type type, WfStepId step, CorrelationToken ct, Timestamp? ts = null)
         {
-            EventType = type;
-            StepId = step;
-            Ct = ct;
             Ts = ts ?? timestamp();
+            Ct = ct;
+            Identifier = text.format("{0} | {1} | {2} | {3}", Ts, Ct, type.Name, step);
         }
 
         /// <summary>
         /// The event data type name
         /// </summary>
         public string Name
-            => EventType.Name;
-
-
-        [MethodImpl(Inline)]
-        string RenderName()
-        {
-            if(StepId.IsNonEmpty && EventType != typeof(void))
-                return text.format("| {0} | {1}", EventType.Name, StepId);
-            else if(StepId.IsNonEmpty && EventType == typeof(void))
-                return StepId.Name;
-            else
-                return EventType.Name;
-        }
+            => Identifier;
 
         [MethodImpl(Inline)]
         public bool Equals(WfEventId src)
-            => Name == src.Name && Ct == src.Ct && Ts == src.Ts;
+            => Identifier == src.Identifier;
 
         [MethodImpl(Inline)]
         public int CompareTo(WfEventId src)
@@ -101,7 +73,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(Pattern, Ts, Ct, RenderName()).PadRight(56);
+            => Identifier.PadRight(56);
 
         public uint Hashed
         {

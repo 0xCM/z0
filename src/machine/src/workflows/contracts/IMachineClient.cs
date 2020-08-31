@@ -6,26 +6,26 @@ namespace Z0
 {
     public interface IMachineClient : IWfBrokerClient
     {
-        IWfError Error => default(WfError<object>);
+        // IWfError Error => default(WfError<object>);
 
-        LoadedParseReport LoadedParseReport => default;
+        // LoadedParseReport LoadedParseReport => default;
 
-        DecodedHost DecodedHost => default;
+        // DecodedHost DecodedHost => default;
 
-        void OnEvent(IWfError e)
-            => Sink.Deposit(e);
+        // void OnEvent(IWfError e)
+        //     => Sink.Deposit(e);
 
-        void OnEvent(LoadedParseReport e)
-            => Sink.Deposit(e);
+        // void OnEvent(LoadedParseReport e)
+        //     => Sink.Deposit(e);
 
-        void OnEvent(DecodedHost e)
-            => Sink.Deposit(e);
+        // void OnEvent(DecodedHost e)
+        //     => Sink.Deposit(e);
 
-        void Connect()
-        {
-            Error.Subscribe(Broker,OnEvent);
-            LoadedParseReport.Subscribe(Broker,OnEvent);
-            DecodedHost.Subscribe(Broker,OnEvent);
-        }
+        // void Connect()
+        // {
+        //     Error.Subscribe(Broker,OnEvent);
+        //     LoadedParseReport.Subscribe(Broker,OnEvent);
+        //     DecodedHost.Subscribe(Broker,OnEvent);
+        // }
     }
 }

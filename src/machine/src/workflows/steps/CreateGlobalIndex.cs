@@ -17,7 +17,7 @@ namespace Z0
 
     public ref struct CreateGlobalIndex
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
@@ -29,7 +29,7 @@ namespace Z0
 
         readonly IWfCaptureState State;
 
-        public CreateGlobalIndex(IWfContext wf, IWfCaptureState state, PartFileProvider src, CorrelationToken ct)
+        public CreateGlobalIndex(IWfShell wf, IWfCaptureState state, PartFileProvider src, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
@@ -51,7 +51,7 @@ namespace Z0
 
             try
             {
-                var files = span(SourceFiles.ParseFiles);
+                var files = SourceFiles.ParseFiles.View;
                 var count = files.Length;
                 var builder = new BuildGlobalCodeIndex(Wf);
 
@@ -78,11 +78,10 @@ namespace Z0
                 Wf.Raise(new IndexedEncodedParts(StepName, EncodedIndex, Ct));
 
 
-            var index = EncodedIndex;
-            Process(index);
-            var decoded = DecodeParts(index);
-            Process(decoded);
-
+                var index = EncodedIndex;
+                Process(index);
+                var decoded = DecodeParts(index);
+                Process(decoded);
 
             }
             catch(Exception e)

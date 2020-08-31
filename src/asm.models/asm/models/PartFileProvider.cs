@@ -61,13 +61,13 @@ namespace Z0
             return sys.empty<MemberParseRecord>();
         }
 
-        public FilePath[] ParseFiles
+        public Files ParseFiles
             => CaptureArchive(Root).ParsePaths;
 
-        public FilePath[] AsmFiles
+        public Files AsmFiles
             => CaptureArchive(Root).AsmPaths;
 
-        public FilePath[] HexFiles
+        public Files HexFiles
             => CaptureArchive(Root).HexPaths;
 
         public Dictionary<PartId,PartFile[]> ParseFileIndex(params PartId[] parts)

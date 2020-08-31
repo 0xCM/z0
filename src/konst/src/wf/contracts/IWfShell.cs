@@ -26,6 +26,8 @@ namespace Z0
 
         CorrelationToken Ct {get;}
 
+        IWfBroker Broker {get;}
+
         FolderPath AppDataRoot
             => Shell.AppPaths.AppDataRoot;
 
@@ -53,6 +55,9 @@ namespace Z0
         void Error(WfStepId step, Exception e, CorrelationToken? ct = null, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
             => Raise(WfEvB.error(e, ct ?? Ct, caller, file, line));
 
+        void Error<T>(WfStepId step, T body)
+            => Raise(WfEvB.error(step, body, Ct));
+
         void Error<T>(string worker, T body, CorrelationToken? ct = null)
             => Raise(WfEvB.error(worker, body, ct ?? Ct));
 
@@ -64,6 +69,9 @@ namespace Z0
 
         void Created(WfStepId id)
             => Raise(WfEvB.created(id, Ct));
+
+        void Warn<T>(WfStepId id, T content)
+            => Raise(WfEvB.warn(id, content, Ct));
 
         void Created<T>(WfStepId id, T content)
             => Raise(WfEvB.created(id, content, Ct));
@@ -167,10 +175,7 @@ namespace Z0
         }
 
         void Created(WfStepId step, CorrelationToken ct)
-        {
-            Raise(new WfStepCreated(step, ct));
-        }
-
+            => Raise(new WfStepCreated(step, ct));
 
         void Running(string actor, string message, CorrelationToken ct)
         {

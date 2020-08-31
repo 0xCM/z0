@@ -18,7 +18,7 @@ namespace Z0
     {
         readonly IWfCaptureState State;
 
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly WfActor Actor;
 

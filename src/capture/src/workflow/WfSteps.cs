@@ -8,6 +8,14 @@ namespace Z0
 
     using Asm;
 
+    [Step(typeof(ClearCaptureArchives))]
+    public readonly struct ClearCaptureArchivesStep : IWfStep<ClearCaptureArchivesStep>
+    {
+        public const string StepName = nameof(ClearCaptureArchives);
+
+        public static WfStepId StepId => step<ClearCaptureArchivesStep>();
+    }
+
     public readonly struct WfCaptureControl : IWfStep<WfCaptureControl>
     {
         public const string ActorName = nameof(CaptureControl);

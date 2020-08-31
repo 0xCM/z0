@@ -28,5 +28,16 @@ namespace Z0
             SettingValues.absorb(configPath(),dst);
             return new WfSettings(dst);
         }
+
+        [Op]
+        public static WfSettings settings(IShellPaths paths)
+        {
+            var assname = Assembly.GetEntryAssembly().GetSimpleName();
+            var filename = FileName.define(assname, FileExtensions.Json);
+            var src = paths.ConfigRoot + filename;
+            var dst = z.dict<string,string>();
+            SettingValues.absorb(src,dst);
+            return new WfSettings(dst);
+        }
     }
 }

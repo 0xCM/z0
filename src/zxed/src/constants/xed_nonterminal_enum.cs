@@ -8,59 +8,59 @@ namespace Z0.Xed
     public enum xed_nonterminal_enum_t : byte
     {
         XED_NONTERMINAL_INVALID,
-        
+
         XED_NONTERMINAL_AR10,
-        
+
         XED_NONTERMINAL_AR11,
-        
+
         XED_NONTERMINAL_AR12,
-        
+
         XED_NONTERMINAL_AR13,
-        
+
         XED_NONTERMINAL_AR14,
-        
+
         XED_NONTERMINAL_AR15,
-        
+
         XED_NONTERMINAL_AR8,
-        
+
         XED_NONTERMINAL_AR9,
-        
+
         XED_NONTERMINAL_ARAX,
-        
+
         XED_NONTERMINAL_ARBP,
-        
+
         XED_NONTERMINAL_ARBX,
-        
+
         XED_NONTERMINAL_ARCX,
-        
+
         XED_NONTERMINAL_ARDI,
-        
+
         XED_NONTERMINAL_ARDX,
-        
+
         XED_NONTERMINAL_ARSI,
-        
+
         XED_NONTERMINAL_ARSP,
-        
+
         XED_NONTERMINAL_ASZ_NONTERM,
-        
+
         XED_NONTERMINAL_AVX512_ROUND,
-        
+
         XED_NONTERMINAL_AVX_INSTRUCTIONS,
-        
+
         XED_NONTERMINAL_AVX_SPLITTER,
-        
+
         XED_NONTERMINAL_A_GPR_B,
-        
+
         XED_NONTERMINAL_A_GPR_R,
-        
+
         XED_NONTERMINAL_BND_B,
-        
+
         XED_NONTERMINAL_BND_B_CHECK,
-        
+
         XED_NONTERMINAL_BND_R,
-        
+
         XED_NONTERMINAL_BND_R_CHECK,
-        
+
         XED_NONTERMINAL_BRANCH_HINT,
         XED_NONTERMINAL_BRDISP32,
         XED_NONTERMINAL_BRDISP8,
@@ -279,24 +279,23 @@ namespace Z0.Xed
         XED_NONTERMINAL_YMM_SE32,
         XED_NONTERMINAL_YMM_SE64,
         XED_NONTERMINAL_ZMM_B3,
- 
-        XED_NONTERMINAL_ZMM_B3_32,
- 
-        XED_NONTERMINAL_ZMM_B3_64,
- 
-        XED_NONTERMINAL_ZMM_N3,
- 
-        XED_NONTERMINAL_ZMM_N3_32,
- 
-        XED_NONTERMINAL_ZMM_N3_64,
- 
-        XED_NONTERMINAL_ZMM_R3,
- 
-        XED_NONTERMINAL_ZMM_R3_32,
- 
-        XED_NONTERMINAL_ZMM_R3_64,
- 
-        XED_NONTERMINAL_LAST
 
+        XED_NONTERMINAL_ZMM_B3_32,
+
+        XED_NONTERMINAL_ZMM_B3_64,
+
+        XED_NONTERMINAL_ZMM_N3,
+
+        XED_NONTERMINAL_ZMM_N3_32,
+
+        XED_NONTERMINAL_ZMM_N3_64,
+
+        XED_NONTERMINAL_ZMM_R3,
+
+        XED_NONTERMINAL_ZMM_R3_32,
+
+        XED_NONTERMINAL_ZMM_R3_64,
+
+        XED_NONTERMINAL_LAST
     }
 }

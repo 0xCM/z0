@@ -11,6 +11,10 @@ namespace Z0
 
     partial struct FS
     {
+        [MethodImpl(Inline)]
+        public static FileName file(PartId part, FileExtension ext)
+            => file(text.concat(part.Format()), ext);
+
         /// <summary>
         /// Defines a host-specialized filename
         /// </summary>
@@ -36,6 +40,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static FileName file(PartId owner, string hostname, FileExtension ext)
             => file(text.concat(owner.Format(), Chars.Dot, hostname), ext);
+
 
         [MethodImpl(Inline)]
         public static FileName file(string name)

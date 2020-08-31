@@ -57,6 +57,16 @@ namespace Z0
         /// <summary>
         /// Defines an event identifier
         /// </summary>
+        /// <param name="name">The event name</param>
+        /// <param name="ct">A corelation token</param>
+        /// <param name="ts">The event timestamp</param>
+        [MethodImpl(Inline), Op]
+        public static WfEventId id(Type @event, WfStepId step, CorrelationToken ct)
+            => new WfEventId(@event, step,  ct);
+
+        /// <summary>
+        /// Defines an event identifier
+        /// </summary>
         /// <param name="step">The step id</param>
         /// <param name="ct">The correlation token</param>
         /// <typeparam name="E">The reifying event type</typeparam>

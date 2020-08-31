@@ -25,7 +25,7 @@ namespace Z0
     {
         readonly StringBuilder Log;
 
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         uint SuccessCount;
 
@@ -33,7 +33,7 @@ namespace Z0
 
         public Pair<uint> Counts;
 
-        public CheckBitMasks(IWfContext wf, StringBuilder log)
+        public CheckBitMasks(IWfShell wf, StringBuilder log)
         {
             Wf = wf;
             Log = log;

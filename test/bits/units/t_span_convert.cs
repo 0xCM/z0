@@ -9,7 +9,6 @@ namespace Z0
 
     public sealed class t_span_convert : UnitTest<t_span_convert,CheckNumeric,TCheckNumeric>
     {
-
         void VerifySpanBytesToValue<T>(Span<byte> src, T expect)
             where T : unmanaged
         {
@@ -36,9 +35,9 @@ namespace Z0
             {
                 var value = values[i];
                 var valBytes = z.bytes(value);
-                valBytes.CopyTo(bytes, offset);            
+                valBytes.CopyTo(bytes, offset);
             }
-            
+
             VerifySpanBytesToValues(bytes,values);
         }
 
@@ -62,12 +61,12 @@ namespace Z0
 
             var rev1 = src1.Reverse();
             var rev2 = src2.Reverse();
-            
-            var lastix = src1.Length -1;            
+
+            var lastix = src1.Length -1;
             for(var i=0; i<src1.Length; i++)
                 Claim.eq(rev1[lastix - i], src1[i]);
 
-            lastix = src2.Length -1;            
+            lastix = src2.Length -1;
             for(var i=0; i<src2.Length; i++)
                 Claim.eq(rev2[lastix - i], src2[i]);
         }
@@ -94,10 +93,10 @@ namespace Z0
             {
                 var value = values[i];
                 var valBytes = BitConverter.GetBytes(value).ToSpan();
-                valBytes.CopyTo(bytes, offset);            
+                valBytes.CopyTo(bytes, offset);
             }
-            
-            VerifySpanBytesToValues(bytes,values);        
+
+            VerifySpanBytesToValues(bytes,values);
         }
 
         public void VerifySpanBytesToInt64()
@@ -119,9 +118,8 @@ namespace Z0
             var bitBytes = Bits.pack(bits);
             var xBytes = ByteSpan.FromValue(x);
             Claim.eq(xBytes, bitBytes);
-            
+
         }
         #endif
-
     }
 }

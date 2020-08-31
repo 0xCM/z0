@@ -12,13 +12,13 @@ namespace Z0
     [ApiHost]
     public readonly partial struct ImageRecords
     {
-        public static ImageString Strings => default;
+        public static ImageStringRecord Strings => default;
 
-        public static ImgConstantRecord Constants => default;
+        public static ImageConstantRecord Constants => default;
 
-        public static ImgFieldRecord Fields => default;
+        public static ImageFieldTable Fields => default;
 
-        public static ImgFieldRva FieldRva => default;
+        public static ImageFieldRvaRecord FieldRva => default;
 
     }
 }

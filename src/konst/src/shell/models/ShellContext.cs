@@ -14,6 +14,8 @@ namespace Z0
     {
         public IApiSet Api {get;}
 
+        public string[] Args {get;}
+
         public Assembly Root
             => Assembly.GetEntryAssembly();
 
@@ -23,9 +25,10 @@ namespace Z0
         public Assembly[] Components
             => Api.Components;
 
-        public ShellContext(IApiSet api)
+        public ShellContext(string[] args, IApiSet api)
         {
             Api = api;
+            Args = args;
         }
     }
 }

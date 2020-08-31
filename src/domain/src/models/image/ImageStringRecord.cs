@@ -32,29 +32,29 @@ namespace Z0
     }
 
     [Table]
-    public struct ImageString : ITable<ImgStringField,ImageString>
+    public struct ImageStringRecord
     {
-        public int Sequence;
+        public Count32 Sequence;
 
         public ImgStringSource Source;
 
-        public int HeapSize;
+        public ByteSize HeapSize;
 
-        public int Length;
+        public Count32 Length;
 
-        public int Offset;
+        public Address32 Offset;
 
-        public string Value;
+        public string Content;
 
         [MethodImpl(Inline)]
-        public ImageString(int Sequence, ImgStringSource src, int HeapSize, int Offset, string Value)
+        public ImageStringRecord(Count32 seq, ImgStringSource src, ByteSize heap, Address32 offset, string data)
         {
-            this.Sequence = Sequence;
-            this.Source = src;
-            this.HeapSize = HeapSize;
-            this.Length = Value.Length;
-            this.Offset = Offset;
-            this.Value = Value;
+            Sequence = seq;
+            Source = src;
+            HeapSize = heap;
+            Length = data.Length;
+            Offset = offset;
+            Content = data;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="context">The process context</param>
         [MethodImpl(Inline), Op]
-        public static IAsmProcessor create(IWfContext wf)
+        public static IAsmProcessor create(IWfShell wf)
         {
             var processor = new ProcessLocatedAsm(wf) as IAsmProcessor;
             processor.Connect();
@@ -40,11 +40,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static HostAsmProcessor hosts(IWfContext wf, HostAsmFx src)
+        public static HostAsmProcessor hosts(IWfShell wf, HostAsmFx src)
             => new HostAsmProcessor(wf, src);
 
         [MethodImpl(Inline), Op]
-        public static PartAsmProcessor parts(IWfContext wf)
+        public static PartAsmProcessor parts(IWfShell wf)
             => new PartAsmProcessor(wf);
 
         /// <summary>

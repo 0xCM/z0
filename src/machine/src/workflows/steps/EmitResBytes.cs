@@ -24,14 +24,14 @@ namespace Z0
 
         public readonly FolderPath TargetDir;
 
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
         IWfEventSink Sink
             => Wf.Broker.Sink;
 
-        public EmitResBytes(IWfContext context, CorrelationToken ct)
+        public EmitResBytes(IWfShell context, CorrelationToken ct)
         {
             Wf = context;
             Ct = ct;
@@ -48,7 +48,7 @@ namespace Z0
             var indices = CodeReader.identified(SourceDir, Sink);
             foreach(var index in indices)
             {
-                Wf.Status(StepId, $"Loaded {index.Code.Length} {index.Host} code blocks", Ct);
+                Wf.Status(StepId, $"Loaded {index.Code.Length} {index.Host} code blocks");
 
                 try
                 {

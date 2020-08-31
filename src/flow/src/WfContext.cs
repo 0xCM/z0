@@ -67,7 +67,6 @@ namespace Z0
             get => ContextRoot.AppPaths;
         }
 
-
         public WfEventId Raise<E>(in E @event)
             where E : IWfEvent
         {

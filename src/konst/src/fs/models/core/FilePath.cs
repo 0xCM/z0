@@ -9,6 +9,7 @@ namespace Z0
     using System.IO;
 
     using static Konst;
+    using static z;
 
     partial struct FS
     {
@@ -32,6 +33,12 @@ namespace Z0
                 get => file(Path.GetFileName(Name));
             }
 
+            public FileExt FileExt
+            {
+                [MethodImpl(Inline)]
+                get => FS.ext(Path.GetExtension(Name));
+            }
+
             public FolderPath FolderPath
             {
                 [MethodImpl(Inline)]
@@ -48,6 +55,14 @@ namespace Z0
             {
                 [MethodImpl(Inline)]
                 get => new FileInfo(Name);
+            }
+
+            public FilePath Timestamped()
+            {
+                var name = FileName.WithoutExtension;
+                var ext = FileExt;
+                var stamped = FS.file(text.format("{0}.{1}.{1}", name, timestamp(), ext));
+                return FolderPath + stamped;
             }
 
             [MethodImpl(Inline)]

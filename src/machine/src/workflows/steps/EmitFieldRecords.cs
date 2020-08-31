@@ -18,7 +18,7 @@ namespace Z0
 
         readonly IPart[] Parts;
 
-        readonly ImgFieldRecord Spec;
+        readonly ImageFieldTable Spec;
 
         readonly FolderPath TargetDir;
 
@@ -54,8 +54,8 @@ namespace Z0
             Wf.Ran(StepId, new {PartCount = partCount, RecordCount = count});
         }
 
-        static IPeMetaReader Reader(string src)
-            => PeMetaReader.open(FilePath.Define(src));
+        static IPeTableReader Reader(string src)
+            => PeTableReader.open(FilePath.Define(src));
 
         FilePath TargetPath(PartId part)
             => TargetDir +  FileName.define(part.Format(), "fields.csv");

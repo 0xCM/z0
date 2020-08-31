@@ -13,12 +13,12 @@ namespace Z0
 
     public struct ProcessLocatedAsm : IAsmProcessor
     {
-        public IWfContext Wf {get;}
+        public IWfShell Wf {get;}
 
         public IWfDataBroker<Mnemonic,BasedAsmFx> Broker {get;}
 
         [MethodImpl(Inline)]
-        internal ProcessLocatedAsm(IWfContext context)
+        internal ProcessLocatedAsm(IWfShell context)
         {
             Wf = context;
             Broker = DataBrokers.broker<Mnemonic,BasedAsmFx>((int)Mnemonic.LAST);

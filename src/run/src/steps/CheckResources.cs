@@ -22,13 +22,13 @@ namespace Z0
 
     public ref struct CheckResources
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly FS.FilePath Source;
 
 
         [MethodImpl(Inline)]
-        public CheckResources(IWfContext wf)
+        public CheckResources(IWfShell wf)
         {
             Wf = wf;
             Wf.Created(StepId);

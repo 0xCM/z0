@@ -34,7 +34,7 @@ namespace Z0
         {
             try
             {
-                Wf.Running(StepName, host, Ct);
+                Wf.Running(StepId, host);
                 var dst = z.alloc<AsmRoutine>(src.Length);
                 for(var i=0; i<src.Length; i++)
                 {

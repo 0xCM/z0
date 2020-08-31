@@ -19,12 +19,12 @@ namespace Z0
 
         public CorrelationToken Ct {get;}
 
-        public IWfContext Wf {get;}
+        public IWfShell Wf {get;}
 
         readonly IWfEventLog Log;
 
         [MethodImpl(Inline)]
-        public WfCaptureContext(IAsmContext asm, IWfContext wf, IAsmDecoder decoder, IAsmFormatter formatter, AsmTextWriterFactory writerfactory, IPartCapturePaths archive, CorrelationToken ct)
+        public WfCaptureContext(IAsmContext asm, IWfShell wf, IAsmDecoder decoder, IAsmFormatter formatter, AsmTextWriterFactory writerfactory, IPartCapturePaths archive, CorrelationToken ct)
         {
             Ct = ct;
             Wf = wf;

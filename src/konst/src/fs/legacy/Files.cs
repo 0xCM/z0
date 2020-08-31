@@ -41,7 +41,19 @@ namespace Z0
             get => Data.Length;
         }
 
-        public ref readonly FilePath this[uint index]
+        public ReadOnlySpan<FilePath> View
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        public ref FilePath this[ulong index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
+
+        public ref FilePath this[long index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];

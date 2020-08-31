@@ -58,17 +58,11 @@ namespace Z0
             Wf.Finished(StepId, Ct);
         }
 
-        IWfContext Wf
+        IWfShell Wf
             => State.Wf;
 
         IAsmContext Asm
             => State.Asm;
-
-        public IWfBroker Broker
-            => State.Wf.Broker;
-
-        public IWfEventSink Sink
-            => Wf.Broker.Sink;
 
         public void Run()
         {
@@ -94,9 +88,8 @@ namespace Z0
         void Run(CreateGlobalIndexStep s)
         {
             Wf.Running(s);
-
-            var src = FS.dir((Wf.AppPaths.LogRoot + FolderName.Define("capture/artifacts")).Name);
-            using var step = new CreateGlobalIndex(Wf, State, new PartFileProvider(Wf, src), Ct);
+            //var src = FS.dir((Wf.AppPaths.LogRoot + FolderName.Define("capture/artifacts")).Name);
+            using var step = new CreateGlobalIndex(Wf, State, new PartFileProvider(Wf, Wf.CaptureRoot), Ct);
             step.Run();
             Wf.Ran(s);
         }
