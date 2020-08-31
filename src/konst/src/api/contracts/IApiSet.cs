@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     using static Konst;
 
@@ -21,6 +22,9 @@ namespace Z0
         IApiHost[] Hosts {get;}
 
         IResolvedApi Composition {get;}
+
+        Assembly[]  Components
+            => Parts.Select(p => p.Owner);
 
         IApiHost[] ApiDataTypes
             => Catalogs.SelectMany(c => c.ApiDataTypes).Cast<IApiHost>().Array();

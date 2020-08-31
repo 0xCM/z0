@@ -15,8 +15,12 @@ namespace Z0
 
         IApiSet Api {get;}
 
-        IPart[] Parts {get;}
+        IPart[] Parts => Api.Parts;
 
-        Assembly[] Components {get;}
+        Assembly[] Components
+            => Api.Components;
+
+        Assembly RootComponent
+            => Assembly.GetEntryAssembly();
     }
 }

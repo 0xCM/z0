@@ -22,9 +22,9 @@ namespace Z0
             try
             {
                 var ct = correlate(ShellId);
-                var config = WfBuilder.configure(context,args);
+                var config = WfBuilder.configure(context, args);
                 using var log = AB.log(config);
-                using var wf = Flow.context(context, config, log, ct);
+                using var wf = WfBuilder.context(context, config, log, ct);
 
                 var state = new WfCaptureState(wf, AsmWfBuilder.asm(context), wf.Config, wf.Ct);
 
@@ -77,7 +77,7 @@ namespace Z0
                 Run(default(ProcessPartFilesStep));
 
                 var files = new PartFiles(Asm);
-                using var step = new IndexEncodedParts(Wf, files, Ct);
+                using var step = new CreateGlobalIndex(Wf, files, Ct);
                 step.Run();
                 var index = step.EncodedIndex;
 
@@ -208,7 +208,7 @@ namespace Z0
                 Wf.Raise(new RunningProcessor(StepName, name, Ct));
 
                 var processor = new ProcessAsm(State, encoded);
-                var parts = Wf.ContextRoot.Composition.Resolved.Select(p => p.Id);
+                var parts = Wf.ContextRoot.Api.Composition.Resolved.Select(p => p.Id);
                 Wf.Raise(new ProcessingParts(StepName, name, parts, Ct));
                 var result = processor.Process();
 

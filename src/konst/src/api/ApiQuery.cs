@@ -159,9 +159,6 @@ namespace Z0
         public static IPart[] parts()
             => ModuleArchives.entry().Parts;
 
-        public static PartIndex index(Type src)
-            => ApiQuery.index(ModuleArchives.from(src).Parts);
-
         [MethodImpl(Inline), Op]
         public static bool contains(in PartIndex src, PartId id)
             => src.Data.ContainsKey(id);

@@ -15,6 +15,11 @@ namespace Z0
 
         public static WfStepId StepId
             => AB.step<ProcessInstructionsStep>();
+
+        public void Run(IWfShell wf, params WfStepArgs[] args)
+        {
+            //using var step = new ProcessInstructions()
+        }
     }
 
     [Step(typeof(ProcessPartFiles))]
@@ -27,7 +32,7 @@ namespace Z0
     }
 
     [Step(typeof(EmitCallIndex))]
-    public readonly struct EmitCallIndexStep : IWfStep<EmitCallIndexStep,PartAsmFx,FilePath>
+    public readonly struct EmitCallIndexStep : IWfStep<EmitCallIndexStep>
     {
         public const string StepName = nameof(EmitCallIndex);
 
@@ -177,20 +182,13 @@ namespace Z0
             => (kind == PartStringKind.System ? EmitStringRecordsStep.SystemKindExt : EmitStringRecordsStep.UserKindExt).ToLower();
     }
 
-    [Step(typeof(IndexEncodedParts))]
-    public readonly struct IndexEncodedPartsStep : IWfStep<IndexEncodedPartsStep>
+    [Step(typeof(CreateGlobalIndex))]
+    public readonly struct CreateGlobalIndexStep : IWfStep<CreateGlobalIndexStep>
     {
-        public const string StepName = nameof(IndexEncodedParts);
+        public const string StepName = nameof(CreateGlobalIndex);
 
         public static WfStepId StepId
-            => AB.step<IndexEncodedPartsStep>();
-    }
-
-    public readonly struct Controller : IWfStep<Controller>
-    {
-        public const string ActorName = nameof(Control);
-
-        public static WfStepId StepId => AB.step<Controller>();
+            => AB.step<CreateGlobalIndexStep>();
     }
 
     [Step(typeof(EmitImageBlobs))]

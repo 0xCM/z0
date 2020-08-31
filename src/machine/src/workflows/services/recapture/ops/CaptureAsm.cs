@@ -15,7 +15,7 @@ namespace Z0
     partial struct Recapture
     {
         public CapturedAccessor[] Capture(ApiHostUri host, FilePath dst)
-            => Capture(host, ApiQuery.resources(Context.ContextRoot.Composition.Assemblies), dst);
+            => Capture(host, ApiQuery.resources(Context.ContextRoot.Api.Composition.Assemblies), dst);
 
         public CapturedAccessor[] Capture(ApiHostUri host, ReadOnlySpan<ResourceAccessor> src, FilePath dst)
         {

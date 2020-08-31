@@ -14,11 +14,6 @@ namespace Z0
     partial struct AB
     {
         [MethodImpl(Inline)]
-        public static ConfiguredStep<T> configure<T>(T step, params WfStepArg[] args)
-            where T : struct, IWfStep<T>
-                => new ConfiguredStep<T>(step, args);
-
-        [MethodImpl(Inline)]
         public static DataBroker<K,C,T> broker<K,C,T>(IWfShell wf, int capacity, IndexFunction<K> xf)
             where K : unmanaged, Enum
                 => new DataBroker<K,C,T>(wf, capacity, xf);

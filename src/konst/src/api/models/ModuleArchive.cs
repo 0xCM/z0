@@ -31,20 +31,10 @@ namespace Z0
             Api = ApiQuery.set(new ApiParts(Parts));
         }
 
-        public ModuleArchive(FolderPath root)
-        {
-            Root = root;
-            Files = root.Files().Where(f => FS.managed(FS.path(f.Name)));
-            insist(Files.Count != 0, $"The files in {root}, there must be some");
-            Parts = ApiQuery.resolve(Files);
-            Owners = ApiQuery.parts(Files);
-            Api = ApiQuery.set(new ApiParts(Parts));
-        }
-
-        public ModuleArchive(FS.FolderPath root, string exclude)
+        public ModuleArchive(FS.FolderPath root, string exclude = EmptyString)
         {
             Root = FolderPath.Define(root.Name);
-            Files = root.Exclude(exclude).Where(f => FS.managed(f)).Map(f => FilePath.Define(f.Name));
+            Files = root.Exclude(text.ifblank(exclude, "System.Private.CoreLib")).Where(f => FS.managed(f)).Map(f => FilePath.Define(f.Name));
             Parts = ApiQuery.resolve(Files);
             Owners = ApiQuery.parts(Files);
             Api = ApiQuery.set(new ApiParts(Parts));

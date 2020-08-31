@@ -11,15 +11,9 @@ namespace Z0
     /// <summary>
     /// Characterizes a context that carries and provides access to a composition
     /// </summary>
-    public interface IAppContext : IAppMsgQueue, IPolyrandProvider, IApiSet, IAppMsgContext, IShellContext
+    public interface IAppContext : IAppMsgQueue, IPolyrandProvider, IAppMsgContext, IShellContext
     {
         IAppMsgQueue MessageQueue {get;}
-
-        IApiSet IShellContext.Api
-            => this;
-
-        Assembly[] IShellContext.Components
-            => Api.Parts.Select(x => x.Owner);
 
         Action<IAppMsg> MessageRelay
             => (e => term.print(e));

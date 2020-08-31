@@ -8,9 +8,6 @@ namespace Z0.Asm
     {
         IAppContext Root {get;}
 
-        IApiSet ApiSet
-             => Root;
-
         IAsmDecoder Decoder {get;}
 
         IAsmFormatter Formatter {get;}

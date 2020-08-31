@@ -33,9 +33,9 @@ namespace Z0
         {
             try
             {
-                var config = Flow.configure(Context,args, Ct);
+                var config = WfBuilder.configure(Context,args);
                 using var log = AB.log(config);
-                using var wf = Flow.context(Context, config, log, Ct);
+                using var wf = WfBuilder.context(Context, config, log, Ct);
                 Flow.status(wf, ShellName, new {Message ="Running shell", Args = text.bracket(args.FormatList())},Ct);
 
                 Flow.status(wf, ShellName, "Shell run complete", Ct);

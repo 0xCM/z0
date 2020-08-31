@@ -30,11 +30,11 @@ namespace Z0
         {
             var parts = PartIdParser.Service.ParseValid(args);
             if(parts.Length == 0)
-                parts = Context.PartIdentities;
+                parts = Context.Api.PartIdentities;
 
-            var config = Flow.configure(Context, args, Ct);
+            var config = WfBuilder.configure(Context, args);
             using var log = AB.log(config);
-            var wfc = Flow.context(Context, config, log, Ct);
+            var wfc = WfBuilder.context(Context, config, log, Ct);
             using var state = AsmWfBuilder.state(wfc, AsmWfBuilder.asm(Context), config);
 
             try

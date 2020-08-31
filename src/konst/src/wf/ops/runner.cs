@@ -14,6 +14,15 @@ namespace Z0
     partial struct AB
     {
         [MethodImpl(Inline)]
+        public static WfStepExec<H,T> executor<H,T>(IWfShell wf, WfStepArgs? args = null, WfStepId? id = null)
+            where H : struct, IWfStepExec<T>, IWfStep<H>
+        {
+            var e = new WfStepExec<H,T>(wf, id ?? step<H>());
+            e.Configure(args ?? WfStepArgs.Empty);
+            return e;
+        }
+
+        [MethodImpl(Inline)]
         public static WfTableRunner<F,T,D,S,Y> runner<F,T,D,S,Y>(IWfShell wf, TableMaps<D,S,T,Y> processors, TableSectors<D,S> selectors)
             where F : unmanaged, Enum
             where T : struct, ITable<F,T,D>

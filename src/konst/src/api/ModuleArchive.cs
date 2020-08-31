@@ -18,14 +18,14 @@ namespace Z0
             var entry = Assembly.GetEntryAssembly();
             var path = FilePath.Define(entry.Location);
             insist(path.Exists, $"The file for {entry}, it must exist");
-            return from(path.FolderPath);
+            return from(FS.dir(path.FolderPath.Name));
         }
 
         [MethodImpl(Inline)]
         public static ModuleArchive from(FolderPath src)
-            => new ModuleArchive(src);
+            => new ModuleArchive(FS.dir(src.Name));
 
-        public static ModuleArchive exclude(string exclude = EmptyString)
+        public static ModuleArchive exclude(string exclude)
         {
             var entry = Assembly.GetEntryAssembly();
             var path = FS.path(entry.Location);
@@ -40,8 +40,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ModuleArchive from(params Assembly[] src)
             => new ModuleArchive(src);
-
-        public static ModuleArchive from(Type src)
-            => from(FilePath.Define(src.Assembly.Location).FolderPath);
     }
 }

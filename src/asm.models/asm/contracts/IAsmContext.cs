@@ -29,7 +29,7 @@ namespace Z0.Asm
         /// The api collection known to the context
         /// </summary>
         IApiSet Api
-            => ContextRoot;
+            => ContextRoot.Api;
 
         /// <summary>
         /// The buffer length to use whenever a buffer length is unspecified

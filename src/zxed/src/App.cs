@@ -33,9 +33,9 @@ namespace Z0
         public override void RunShell(params string[] args)
         {
             var s = AB.settings(Context, Ct);
-            var config = Flow.configure(Context, args, Ct);
+            var config = WfBuilder.configure(Context, args);
             using var log = AB.log(config);
-            using var context = Flow.context(Context, config, log, Ct);
+            using var context = WfBuilder.context(Context, config, log, Ct);
             using var wf = new XedEtl(context, new XedEtlConfig(Context, s));
             wf.Run();
         }

@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
     using static System.Runtime.InteropServices.MemoryMarshal;
+
     partial struct z
     {
         /// <summary>
@@ -30,6 +31,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly byte first8<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => ref As<T,byte>(ref GetReference(src));    
+                => ref As<T,byte>(ref GetReference(src));
     }
 }

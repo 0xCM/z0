@@ -32,7 +32,7 @@ namespace Z0.Asm
             Context = context;
             Dispatcher = Evaluate.dispatcher(random, context, buffersize);
             CodeArchive = Archives.capture(root);
-            ApiSet = context;
+            ApiSet = context.Api;
         }
 
         void ExecuteHost(BufferTokens buffers, IApiHost host)

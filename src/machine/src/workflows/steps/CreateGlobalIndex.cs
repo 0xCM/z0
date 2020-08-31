@@ -10,9 +10,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using static IndexEncodedPartsStep;
+    using static CreateGlobalIndexStep;
 
-    public ref struct IndexEncodedParts
+    public ref struct CreateGlobalIndex
     {
         readonly IWfContext Wf;
 
@@ -22,7 +22,7 @@ namespace Z0
 
         public GlobalCodeIndex EncodedIndex;
 
-        public IndexEncodedParts(IWfContext wf, PartFiles src, CorrelationToken ct)
+        public CreateGlobalIndex(IWfContext wf, PartFiles src, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

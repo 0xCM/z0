@@ -13,15 +13,18 @@ namespace Z0
 
     public readonly struct WfBuilder
     {
-
         public static IAppContext app()
         {
             var entry = Assembly.GetEntryAssembly();
             var srcRoot = FS.path(entry.Location).FolderPath;
-            var srcArchive = ModuleArchives.from(srcRoot,"Private.CoreLib");
+            var srcArchive = ModuleArchives.from(srcRoot);
             var context = ContextFactory.app(srcArchive, ShellPaths.Default);
             return context;
         }
+
+        [Op]
+        public static IWfContext context(IAppContext root, WfConfig config, IWfEventLog log, CorrelationToken ct)
+            => new WfContext(root, ct, config, AB.termsink(log, ct));
 
         [Op]
         public static WfConfig configure(params string[] args)
@@ -42,11 +45,11 @@ namespace Z0
         [Op]
         public static WfConfig configure(IAppContext context, params string[] args)
         {
-            var entry = Assembly.GetEntryAssembly();
-            var id = entry.Id();
+            var root = Assembly.GetEntryAssembly();
+            var id = root.Id();
             var ct = correlate(id);
-            var parts = AB.parts(args, context.PartIdentities);
-            var src = ModuleArchives.from(FS.path(entry.Location).FolderPath,"Private.CoreLib");
+            var parts = AB.parts(args, context.Api.PartIdentities);
+            var src = ModuleArchives.from(FS.path(root.Location).FolderPath,"Private.CoreLib");
             var settings = AB.settings(context, ct);
             var captureOut = FS.dir(context.AppPaths.LogRoot.Name) + FS.folder("capture/artifacts");
             var captureLog = FS.dir(context.AppPaths.LogRoot.Name) + FS.folder("capture/logs");
@@ -57,41 +60,6 @@ namespace Z0
                 context.AppPaths.AppLogRoot,
                 settings);
             return config;
-        }
-    }
-
-    partial struct Flow
-    {
-
-        [Op]
-        public static WfConfig configure(IAppContext context, string[] args, CorrelationToken ct)
-        {
-            var parts = AB.parts(args, context.PartIdentities);
-            var settings = AB.settings(context, ct);
-            var src = ModuleArchives.from(FS.path(context.GetType().Assembly.Location).FolderPath, "Private.CoreLib");
-            //var src = new ArchiveConfig(FilePath.Define(context.GetType().Assembly.Location).FolderPath);
-            var dst = new ArchiveConfig(context.AppPaths.AppCaptureRoot);
-            return new WfConfig(context, args, src, dst, parts,
-                context.AppPaths.ResourceRoot,
-                context.AppPaths.AppDataRoot,
-                context.AppPaths.AppLogRoot,
-                settings);
-        }
-
-        [Op]
-        public static WfConfig configure(IAppContext context, string[] args, FolderPath target, CorrelationToken ct)
-        {
-            var parts = AB.parts(args, context.PartIdentities);
-            var logs = context.AppPaths.AppLogRoot;
-            var settings = AB.settings(context, ct);
-            var src = ModuleArchives.from(FS.path(context.GetType().Assembly.Location).FolderPath, "Private.CoreLib");
-            //var src = new ArchiveConfig(FilePath.Define(context.GetType().Assembly.Location).FolderPath);
-            var dst = new ArchiveConfig(target);
-            return new WfConfig(context, args, src, dst, parts,
-                context.AppPaths.ResourceRoot,
-                context.AppPaths.AppDataRoot,
-                context.AppPaths.AppLogRoot,
-                settings);
         }
     }
 }
