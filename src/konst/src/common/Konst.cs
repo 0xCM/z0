@@ -178,6 +178,30 @@ namespace Z0
         internal static ReadOnlySpan<T> transform<T>(ReadOnlySpan<byte> src)
             where T : unmanaged
                 => MemoryMarshal.Cast<byte,T>(MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(src), src.Length));
+
+        /// <summary>
+        /// Populates a <see cref="NotSupportedException"/> complaining that a
+        /// parametrically-identified type is not supported
+        /// </summary>
+        /// <typeparam name="T">The unsupported type</typeparam>
+        [MethodImpl(Inline), Closures(AllNumeric)]
+        public static NotSupportedException no<T>()
+            => Unsupported.define<T>();
+
+        [MethodImpl(Inline), Closures(AllNumeric)]
+        public static T bad<T>()
+            => Unsupported.raise<T>();
+
+        public static T no<S,T>()
+            => Unsupported.raise<T>($"The transformation {typeof(S).Name} -> {typeof(T).Name} is undefined");
+
+        [MethodImpl(Inline), Op]
+        public static void ThrowEmptySpanError()
+            => sys.@throw($"The span, it is empty");
+
+        [MethodImpl(Inline), Op]
+        public static void ThrowDuplicated<K,V>(KeyedValue<K,V> kvp)
+            => sys.@throw(new Exception($"The key {kvp.Key} for {kvp.Value} is not unique"));
     }
 
     public static partial class XTend

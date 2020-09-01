@@ -11,11 +11,10 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {               
-
+    {
         [MethodImpl(Inline)]
         public static unsafe decimal @decimal<T>(T src)
-            where T : unmanaged             
+            where T : unmanaged
                 => *((decimal*)(&src));
 
         [MethodImpl(Inline), Op]
