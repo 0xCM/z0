@@ -14,10 +14,11 @@ namespace Z0
 
     public ref struct ExtractHostMembers
     {
-        public WfCaptureState Wf {get;}
+        public WfCaptureState State {get;}
 
         readonly CorrelationToken Ct;
 
+        readonly IWfShell Wf;
         readonly ApiHostUri Host;
 
         readonly IApiHost Source;
@@ -27,14 +28,12 @@ namespace Z0
         [MethodImpl(Inline)]
         internal ExtractHostMembers(WfCaptureState state, IApiHost host, IPartCapturePaths dst, CorrelationToken ct)
         {
-            Wf = state;
+            State = state;
             Ct = ct;
-
             Host = host.Uri;
+            Wf = state.Wf;
             Source = host;
-
             Extractions = new X86MemberExtract[0]{};
-
             Wf.Created(StepId);
         }
 
@@ -45,15 +44,15 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running(StepName, Ct);
+            Wf.Running(StepId, Ct);
             try
             {
-                using var step = new ExtractMembers(Wf, Ct);
+                using var step = new ExtractMembers(State, Ct);
                 Extractions = step.Extract(Source);
             }
             catch(Exception e)
             {
-                Wf.Error(StepName, e, Ct);
+                Wf.Error(StepId, e);
             }
 
             Wf.Ran(StepId,Ct);

@@ -27,9 +27,9 @@ namespace Z0.Asm
         public readonly AsmRoutineCode Code;
 
         [MethodImpl(Inline)]
-        public CapturedAccessor(string actor, ApiHostUri host, in ResourceAccessor accessor, in AsmRoutineCode code, CorrelationToken? ct = null)
+        public CapturedAccessor(string actor, ApiHostUri host, in ResourceAccessor accessor, in AsmRoutineCode code, CorrelationToken ct)
         {
-            EventId = evid(EventName,ct ?? CorrelationToken.Empty);
+            EventId = evid(EventName, ct);
             Actor = actor;
             Host = host;
             Accessor = accessor;

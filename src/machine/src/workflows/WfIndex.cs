@@ -95,8 +95,6 @@ namespace Z0
     [Step(typeof(Engine))]
     public readonly struct Engines : IWfStep<Engines>
     {
-        public const string StepName = nameof(Engine);
-
         public static WfStepId StepId
             => step<Engines>();
     }
@@ -104,8 +102,6 @@ namespace Z0
     [Step(typeof(EmitPeHeaders))]
     public readonly struct EmitPeHeadersStep : IWfStep<EmitPeHeadersStep>
     {
-        public const string StepName = nameof(EmitPeHeaders);
-
         public static WfStepId StepId
             => step<EmitPeHeadersStep>();
     }

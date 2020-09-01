@@ -25,9 +25,7 @@ namespace Z0
                 using var wf = WfBuilder.context(context, config, log, ct);
 
                 var state = new WfCaptureState(wf, AsmWfBuilder.asm(context), wf.Config, wf.Ct);
-
                 wf.Running(StepId, delimit(config.Parts));
-
                 using var machine = new Engine(state,ct);
                 machine.Run();
 
@@ -43,14 +41,12 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        readonly IPart[] Parts;
-
         internal Engine(WfCaptureState wf, CorrelationToken ct)
         {
             State = wf;
             Ct = ct;
-            Parts = wf.Wf.Api.Parts;
-            Wf.Created(StepId, delimit(Parts));
+            var parts = wf.Wf.Api.Parts.Select(x => x.Id);
+            Wf.Created(StepId, delimit(parts));
         }
 
         public void Dispose()

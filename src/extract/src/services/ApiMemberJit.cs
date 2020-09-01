@@ -34,37 +34,42 @@ namespace Z0
 
         public static ApiMembers jit(IApiHost[] src, IAppEventSink sink)
         {
-            var datatypes = JitDirect(src.Where(h => h is ApiDataType).Cast<ApiDataType>(), sink);
+            var datatypes = jit(src.Where(h => h is ApiDataType).Cast<ApiDataType>());
             var direct = JitDirectMembers(src, sink);
             var generic = JitGenericMembers(src, sink);
             var all = datatypes.Concat(direct).Concat(generic).Array();
             return all.OrderBy(x => x.Address);
         }
 
-        static ApiMember[] JitDirectMembers(IApiHost[] src, IAppEventSink sink)
-            => DefineMembers(JitDirect(src, sink));
+        public static ApiMember[] jit(ApiDataType src)
+            => jit(src, ApiDataType.Ignore);
 
-        static ApiMember[] JitDirect(ApiDataType[] src, IAppEventSink sink)
+        public static ApiMember[] jit(ApiDataType src, HashSet<string> exclusions)
+        {
+            var methods = src.HostType.DeclaredMethods().Unignored().NonGeneric().Exclude(exclusions).Select(m => new HostedMethod(src.Uri, m));
+            var located = methods.Select(m => m.WithLocation(Root.address(Jit(m.Method))));
+            Array.Sort(located);
+            return members(located);
+        }
+
+        public static ApiMember[] jit(ApiDataType[] src)
         {
             var dst = z.list<ApiMember>();
             var count = src.Length;
-            var exclusions = new HashSet<string>(new string[4]{"ToString","GetHashCode", "Equals", "ToString"});
+            var exclusions = ApiDataType.Ignore;
 
             Array.Sort(src);
 
             for(var i=0; i<count; i++)
             {
                 var host = src[i];
-                var methods = host.HostType.DeclaredMethods().Unignored().NonGeneric().Exclude(exclusions).Select(m => new HostedMethod(host.Uri, m));
-                var located = methods.Select(m => m.WithLocation(Root.address(Jit(m.Method))));
-                Array.Sort(located);
-                dst.AddRange(DefineMembers(located));
+                dst.AddRange(jit(host, exclusions));
             }
             return dst.ToArray();
         }
 
         static ApiMember[] JitGenericMembers(IApiHost[] src, IAppEventSink sink)
-            => DefineMembers(JitGeneric(src, sink));
+            => members(JitGeneric(src, sink));
 
         static HostedMethod[] JitDirect(IApiHost[] src, IAppEventSink sink)
         {
@@ -73,6 +78,9 @@ namespace Z0
             Array.Sort(located);
             return located;
         }
+
+        static ApiMember[] JitDirectMembers(IApiHost[] src, IAppEventSink sink)
+            => members(JitDirect(src, sink));
 
         static HostedMethod[] JitGeneric(IApiHost[] src, IAppEventSink sink)
         {
@@ -83,7 +91,7 @@ namespace Z0
             return located;
         }
 
-        static ApiMember[] DefineMembers(HostedMethod[] located)
+        public static ApiMember[] members(HostedMethod[] located)
         {
             var dst = sys.alloc<ApiMember>(located.Length);
 
@@ -108,16 +116,6 @@ namespace Z0
                 let address = z.address(Jit(m.Method))
                 select new ApiMember(uri, m.Method, kid, address);
 
-        // static ApiMember[] JitGeneric(HostedMethod[] methods)
-        //     =>  (from m in methods
-        //         let kid = m.Method.KindId()
-        //         from t in ClosureQuery.numeric(m.Method)
-        //         let reified = m.Method.MakeGenericMethod(t)
-        //         let address = Root.address(Jit(reified))
-        //         let id = Diviner.Identify(reified)
-        //         let uri = OpUri.located(id, m.Method)
-        //         select new ApiMember(uri, reified, kid, address)).Array();
-
         static ApiMember[] JitGeneric(IApiHost src)
             =>  (from m in GenericMethods(src)
                 let kid = m.Method.KindId()
@@ -127,31 +125,6 @@ namespace Z0
                 let id = Diviner.Identify(reified)
                 let uri = OpUri.Define(OpUriScheme.Located, src.Uri, m.Method.Name, id)
                 select new ApiMember(uri, reified, kid, address)).Array();
-
-        // static ApiMember[] JitLocatedDirect<K>(IApiHost src, K kind)
-        //     where K : unmanaged, Enum
-        //         => from m in HostedDirect(src, kind)
-        //         let uri = OpUri.Define(OpUriScheme.Located, src.Uri, m.Method.Name, m.Id)
-        //         let address = z.address(Jit(m.Method))
-        //         select new ApiMember(uri, m.Method, m.KindId, address);
-
-        // static ApiMember[] HostedDirect<K>(IApiHost src, K kind)
-        //     where K : unmanaged, Enum
-        //         => from m in DirectMethods(src,kind)
-        //         let id = Diviner.Identify(m)
-        //         let uri = OpUri.Define(OpUriScheme.Type, src.Uri, m.Name, id)
-        //         let address = Root.address(Jit(m))
-        //         select new ApiMember(uri, m, m.KindId(), address);
-
-        // static ApiMember[] JitGeneric<K>(IApiHost src, K kind)
-        //     where K : unmanaged, Enum
-        //         => (from m in GenericMethods(src,kind)
-        //         from t in ClosureQuery.numeric(m)
-        //         let reified = m.MakeGenericMethod(t)
-        //         let id = Diviner.Identify(reified)
-        //         let uri = OpUri.Define(OpUriScheme.Located, src.Uri, m.Name, id)
-        //         let address = Root.address(Jit(reified))
-        //         select new ApiMember(uri, reified, m.KindId(), address)).Array();
 
         static HostedMethod[] DirectMethods(IApiHost host)
             => host.HostType.DeclaredMethods().NonGeneric().Where(IsDirectApiMember).Select(m => new HostedMethod(host.Uri, m));

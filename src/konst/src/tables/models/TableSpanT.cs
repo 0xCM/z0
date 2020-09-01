@@ -13,7 +13,8 @@ namespace Z0
     public readonly struct TableSpan<T> : ITableSpan<T>
         where T : struct
     {
-        public static TableSpan<T> Empty => new TableSpan<T>(new T[0]{});
+        public static TableSpan<T> Empty
+            => new TableSpan<T>(new T[0]{});
 
         readonly T[] Data;
 

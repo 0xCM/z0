@@ -72,6 +72,20 @@ namespace Z0
             }
         }
 
+        public X86MemberExtract[] Extract(ApiDataType[] types)
+        {
+            var extracted = sys.empty<X86MemberExtract>();
+            try
+            {
+                return Extractor.Extract(ApiMemberJit.jit(types));
+            }
+            catch(Exception e)
+            {
+                State.Error(StepName, e, Ct);
+                return sys.empty<X86MemberExtract>();
+            }
+        }
+
         static MemberExtractor Extractor
             => MemberExtraction.service(Extractors.DefaultBufferLength);
     }

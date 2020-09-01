@@ -156,9 +156,7 @@ namespace Z0
         }
 
         void Finished(string actor, CorrelationToken ct)
-        {
-            Raise(new WfFinished(actor, ct));
-        }
+            => Raise(new WfFinished(actor, ct));
 
         void Finished(WfStepId step, CorrelationToken ct)
             => Raise(new WfFinished(step.Format(), ct));
@@ -175,17 +173,13 @@ namespace Z0
             => Raise(new WfInitialized(step, ct));
 
         void Created(string actor, CorrelationToken ct)
-        {
-            Raise(WfEvB.newWorker(ct, actor));
-        }
+            => Raise(WfEvB.newWorker(ct, actor));
 
         void Created(WfStepId step, CorrelationToken ct)
             => Raise(new WfStepCreated(step, ct));
 
         void Running(string actor, string message, CorrelationToken ct)
-        {
-            Raise(new WfStepRunning<string>(WfStepId.Empty, message, ct));
-        }
+            => Raise(new WfStepRunning<string>(WfStepId.Empty, message, ct));
 
         void Running(string actor, CorrelationToken ct)
         {

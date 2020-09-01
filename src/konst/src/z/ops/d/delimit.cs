@@ -14,5 +14,10 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static DelimitedList<object> delimit(params object[] src)
             => new DelimitedList<object>(src, FieldDelimiter);
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static DelimitedList<T> delimit<T>(params T[] src)
+            where T : unmanaged
+                => new DelimitedList<T>(src, text.delimit, Chars.Pipe);
     }
 }

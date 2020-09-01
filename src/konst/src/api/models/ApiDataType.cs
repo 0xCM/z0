@@ -7,11 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
+    using System.Collections.Generic;
 
     using static Konst;
 
     public readonly struct ApiDataType : IApiHost, IComparable<ApiDataType>
     {
+        public static HashSet<string> Ignore
+            => z.hashset("ToString","GetHashCode", "Equals", "ToString");
+
         public PartId PartId {get;}
 
         public Type HostType {get;}

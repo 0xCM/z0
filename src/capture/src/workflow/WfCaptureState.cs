@@ -100,12 +100,6 @@ namespace Z0.Asm
         public void Finished(string actor, CorrelationToken ct)
             => Wf.Finished(actor, Ct);
 
-        public void Initializing(WfStepId step, CorrelationToken ct)
-            => Wf.Initializing(step, Ct);
-
-        public void Initialized(WfStepId step,  CorrelationToken ct)
-            => Wf.Initialized(step, Ct);
-
         public void Error(string actor, Exception e, CorrelationToken ct)
             => Wf.Error(actor, e, Ct);
 

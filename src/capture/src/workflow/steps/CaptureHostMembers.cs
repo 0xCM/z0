@@ -11,6 +11,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
+    using static z;
     using static CaptureHostMembersStep;
 
     public readonly ref struct CaptureHostMembers
@@ -38,22 +39,12 @@ namespace Z0
             Wf.Finished(StepId);
         }
 
-        void ClearTargets(IApiHost host)
-        {
-            // var state = HostCaptureArchive.create(Wf.AppPaths.CaptureStage, host.Uri);
-            // state.HostHexPath.Delete();
-            // state.CilDataPath.Delete();
-            // state.HostAsmDir.Clear();
-        }
-
         public void Execute(IApiHost host)
         {
             Wf.Running(StepId);
 
             try
             {
-                ClearTargets(host);
-
                 using var extract = new ExtractHostMembers(State, host, Target, Ct);
                 extract.Run();
 

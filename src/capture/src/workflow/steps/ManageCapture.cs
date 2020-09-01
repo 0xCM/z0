@@ -11,13 +11,6 @@ namespace Z0
 
     using static ManageCaptureStep;
 
-    [Step(typeof(Evaluate))]
-    public readonly struct EvaluateStep : IWfStep<EvaluateStep>
-    {
-        public static WfStepId StepId
-            => AB.step<EvaluateStep>();
-    }
-
     public struct ManageCapture : IManageCapture
     {
         readonly WfCaptureState State;

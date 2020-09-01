@@ -13,7 +13,6 @@ namespace Z0
 
     partial struct z
     {
-
         [MethodImpl(Inline)]
         public static Lazy<T> defer<T>(Func<T> factory)
             => new Lazy<T>(factory);

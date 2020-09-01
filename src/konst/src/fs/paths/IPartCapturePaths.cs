@@ -23,6 +23,9 @@ namespace Z0
         FolderPath AsmDir
             => AsmDirPath(ArchiveRoot);
 
+        FolderPath PartAsmDir(PartId part)
+            => AsmDir + PartFolderName(part);
+
         FilePath AsmPath(FileName name)
             => AsmFilePath(ArchiveRoot, name);
 

@@ -44,7 +44,7 @@ namespace Z0
                 if(code.IsNonEmpty)
                 {
                     ref readonly var data = ref skip(codes,i);
-                    seek(target, i) = new CapturedAccessor(nameof(Recapture), host, accessor, CreateFunction(data).ValueOrDefault(AsmRoutineCode.Empty));
+                    seek(target, i) = new CapturedAccessor(nameof(Recapture), host, accessor, CreateFunction(data).ValueOrDefault(AsmRoutineCode.Empty), default);
                     Save(data, writer);
                 }
             }

@@ -75,7 +75,7 @@ namespace Z0
                 Wf.Status(StepId, text.format("Freeze: {0}", status.Format()));
 
                 EncodedIndex = builder.Freeze();
-                Wf.Raise(new IndexedEncodedParts(StepName, EncodedIndex, Ct));
+                Wf.Raise(new CreatedPartIndex(StepName, EncodedIndex, Ct));
 
 
                 var index = EncodedIndex;

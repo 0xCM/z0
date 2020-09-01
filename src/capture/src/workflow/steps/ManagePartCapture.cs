@@ -89,9 +89,24 @@ namespace Z0
 
         void CaptureHosts(IPartCatalog src, IPartCapturePaths dst)
         {
-            var hosts = span(src.Operations);
-            var count = hosts.Length;
+            Capture(src.ApiDataTypes, dst);
+            Capture(src.Operations, dst);
+            // var count = hosts.Length;
 
+            // using var step = new CaptureHostMembers(State, dst, Ct);
+            // for(var i=0; i<count; i++)
+            // {
+            //     ref readonly var host = ref skip(hosts,i);
+            //     Context.Raise(new CapturingHost(host.Uri, Ct));
+            //     step.Execute(host);
+            //     Context.Raise(new Asm.CapturedHost(host.Uri, Ct));
+            // }
+        }
+
+        void Capture(ApiHost[] src, IPartCapturePaths dst)
+        {
+            var count = src.Length;
+            var hosts = @readonly(src);
             using var step = new CaptureHostMembers(State, dst, Ct);
             for(var i=0; i<count; i++)
             {
@@ -99,6 +114,18 @@ namespace Z0
                 Context.Raise(new CapturingHost(host.Uri, Ct));
                 step.Execute(host);
                 Context.Raise(new Asm.CapturedHost(host.Uri, Ct));
+            }
+        }
+
+        void Capture(ApiDataType[] src, IPartCapturePaths dst)
+        {
+            using var step = new ExtractMembers(State, Ct);
+            var extracted = @readonly(step.Extract(src).GroupBy(x => x.Host).Select(x => kvp(x.Key, x.Array())).Array());
+            for(var i=0; i<extracted.Length; i++)
+            {
+                ref readonly var x = ref skip(extracted,i);
+                using var emit = new EmitHostArtifacts(State, x.Key, x.Value, dst, Ct);
+                emit.Run();
             }
         }
 

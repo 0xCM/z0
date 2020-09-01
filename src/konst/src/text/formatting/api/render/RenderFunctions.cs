@@ -5,13 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IMachineEngine : IMachineClient, IDisposable
+    using static Konst;
+    using static z;
+
+    public readonly struct RenderFunctions
     {
-        void Run();
-    }
+        public delegate T RenderArray<S,T>(S[] src);
 
-    public interface IMachineEngine<H> : IMachineEngine
-        where H : IMachineEngine<H>
-    {}
+        public delegate T DelimitArray<S,T>(S[] src, char delimiter);
+    }
 }

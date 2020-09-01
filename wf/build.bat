@@ -12,3 +12,4 @@ echo off
 set Cmd=%ZDev%\wf\stage.bat
 echo on
 call %Cmd%
+

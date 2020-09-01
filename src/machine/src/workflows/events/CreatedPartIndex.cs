@@ -6,15 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Konst;
     using static RenderPatterns;
 
     [Event]
-    public readonly struct IndexedEncodedParts : IWfEvent<IndexedEncodedParts>
+    public readonly struct CreatedPartIndex : IWfEvent<CreatedPartIndex>
     {
-        public const string EventName = nameof(IndexedEncodedParts);
+        public const string EventName = nameof(CreatedPartIndex);
 
         public WfEventId EventId {get;}
 
@@ -26,7 +25,7 @@ namespace Z0
             => MessageFlair.Cyan;
 
         [MethodImpl(Inline)]
-        public IndexedEncodedParts(string worker, GlobalCodeIndex index, CorrelationToken ct)
+        public CreatedPartIndex(string worker, GlobalCodeIndex index, CorrelationToken ct)
         {
             EventId = z.evid(EventName, ct);
             Index = index;

@@ -78,6 +78,13 @@ namespace Z0
             get => Encoded.Address;
         }
 
+        public ApiHostUri Host
+        {
+            [MethodImpl(Inline)]
+            get => Member.HostUri;
+        }
+
+        [MethodImpl(Inline)]
         public string Format()
             => Encoded.Format();
 

@@ -8,6 +8,13 @@ namespace Z0
 
     using Asm;
 
+    [Step(typeof(Evaluate))]
+    public readonly struct EvaluateStep : IWfStep<EvaluateStep>
+    {
+        public static WfStepId StepId
+            => AB.step<EvaluateStep>();
+    }
+
     [Step(typeof(ClearCaptureArchives))]
     public readonly struct ClearCaptureArchivesStep : IWfStep<ClearCaptureArchivesStep>
     {
@@ -31,7 +38,8 @@ namespace Z0
     {
         public const string StepName = nameof(CapturePart);
 
-        public static WfStepId StepId => step(typeof(CapturePart));
+        public static WfStepId StepId
+            => step<CapturePartStep>();
 
         public WfStepId Id => StepId;
     }
@@ -42,7 +50,7 @@ namespace Z0
         public const string StepName = nameof(ManageCapture);
 
         public static WfStepId StepId
-            => step(typeof(ManageCapture));
+            => step<ManageCaptureStep>();
 
         public WfStepId Id => StepId;
     }
@@ -53,7 +61,14 @@ namespace Z0
         public const string StepName = nameof(CaptureHostMembers);
 
         public static WfStepId StepId
-            => step(typeof(CaptureHostMembers));
+            => step<CaptureHostMembersStep>();
+    }
+
+    [Step(typeof(CapturePartDataTypes))]
+    public readonly struct CapturePartDataTypesStep : IWfStep<CapturePartDataTypesStep>
+    {
+        public static WfStepId StepId
+            => step<CapturePartDataTypesStep>();
     }
 
     [Step(typeof(CaptureHosts), StepName)]

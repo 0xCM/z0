@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
+    using static RenderFunctions;
 
     public readonly struct DelimitedList<T> : ITextual
     {
@@ -15,19 +17,33 @@ namespace Z0
 
         public readonly char Delimiter;
 
+        readonly DelimitArray<T,string> Render;
+
         [MethodImpl(Inline)]
         public static implicit operator DelimitedList<T>(T[] src)
             => new DelimitedList<T>(src);
 
         [MethodImpl(Inline)]
-        public DelimitedList(T[] src, char delimiter = Chars.Pipe)
+        public DelimitedList(T[] src, char delimiter =  FieldDelimiter)
         {
             Data = src;
             Delimiter = delimiter;
+            Render = text.delimit;
+        }
+
+        [MethodImpl(Inline)]
+        public DelimitedList(T[] src, DelimitArray<T,string> fx, char delimiter = FieldDelimiter)
+        {
+            Data = src;
+            Delimiter = delimiter;
+            Render = fx;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.bracket(text.join($"{Delimiter} ", Data));
+            => Render(Data, Delimiter);
+
+        public override string ToString()
+            => Format();
     }
 }
