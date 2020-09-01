@@ -43,7 +43,6 @@ namespace Z0
 
         public static int Main(params string[] args)
             => Launch(AB.shell(args));
-
     }
 
     public static partial class XTend { }

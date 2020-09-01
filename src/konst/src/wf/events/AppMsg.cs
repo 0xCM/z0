@@ -23,10 +23,6 @@ namespace Z0
     {
         public AppMsgData<object> Data {get;}
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static AppMsgData<T> data<T>(T content, string template, MessageKind kind, MessageFlair color, AppMsgSource source)
-            => new AppMsgData<T>(content, template ?? "{0}", kind, color, source);
-
         [MethodImpl(Inline), Op]
         public static AppMsgSource source(string caller, string file, int? line)
             => new AppMsgSource(PartId.None, caller, file, line);
@@ -62,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline)]
         AppMsg(object content, MessageKind kind, MessageFlair color, string caller, string file, int? line, bool displayed = false)
         {
-            Data = data(content,"{0}", kind, color, source(caller, file, line));
+            Data = new AppMsgData<object>(content,"{0}", kind, color, source(caller, file, line));
         }
 
         /// <summary>
@@ -75,7 +71,7 @@ namespace Z0
         /// The message foreground color when rendered for display
         /// </summary>
         public MessageFlair Flair
-            => Data.Color;
+            => Data.Flair;
 
         public string Format()
             => Data.Format();

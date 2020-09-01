@@ -4,7 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static FS.CommonFolderNames;
+    using static FS.CFNL;
+    using L = FS.CFNL;
 
     /// <summary>
     /// Defines common part path components
@@ -39,7 +40,7 @@ namespace Z0
             => FolderName.Define("unparsed", "Extraction parse failures");
 
         FolderName AsmFolderName
-            => FolderName.Define(Asm);
+            => FolderName.Define(L.Asm);
 
         FolderName HexFolderName
             => FolderName.Define("code", "Hex formatted encoded x86 assembly");

@@ -5,10 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Structured)" />
     <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(V0)" />
   </ItemGroup>
 
 </Project>

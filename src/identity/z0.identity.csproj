@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Blocks)" />
+    <ProjectReference Include="$(Gmath)" />
     <ProjectReference Include="$(Identify)" />
   </ItemGroup>
 

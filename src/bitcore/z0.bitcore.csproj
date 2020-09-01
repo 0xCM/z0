@@ -5,9 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(BitMasks)" />
-    <ProjectReference Include="$(Blocks)" />
+    <ProjectReference Include="$(Kinds)" />
 
   </ItemGroup>
 

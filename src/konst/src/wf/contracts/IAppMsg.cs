@@ -23,4 +23,9 @@ namespace Z0
         bool IsError
             => Kind == MessageKind.Error;
     }
+
+    public interface IAppMsg<T> : IAppMsg
+    {
+        T Content {get;}
+    }
 }

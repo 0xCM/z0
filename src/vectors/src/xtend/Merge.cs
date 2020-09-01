@@ -40,7 +40,7 @@ namespace Z0
                 dst[j++] = f(rhsData[i]);
             }
 
-            return Vectors.vload(n256, in z.first(dst));
+            return z.vload(n256, in z.first(dst));
         }
     }
 }

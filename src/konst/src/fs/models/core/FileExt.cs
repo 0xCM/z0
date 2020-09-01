@@ -16,6 +16,10 @@ namespace Z0
             public PathPart Name {get;}
 
             [MethodImpl(Inline)]
+            public static FileExt operator + (FileExt a, FileExt b)
+                => ext(text.format("{0}.{1}",a.Name,b.Name));
+
+            [MethodImpl(Inline)]
             public FileExt(PathPart name)
                 => Name = name;
 

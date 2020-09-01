@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -13,7 +13,7 @@ namespace Z0
     using K = Hex1Kind;
 
     public readonly struct Hex1 : IHexNumber<H,K>
-    {                
+    {
         public readonly K Value;
 
         [MethodImpl(Inline)]
@@ -23,6 +23,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public Hex1(byte src)
             => Value = (K)src & KMax;
+
+        public const string On = "1";
+
+        public const string Off = "0";
 
         public const byte Width = 1;
 
@@ -40,8 +44,16 @@ namespace Z0
 
         public static H Min => KMin;
 
-        public static H Max => KMax;                
- 
+        public static H Max => KMax;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Hex1(bit src)
+            => new Hex1((byte)(src ? 1 : 0));
+
+        [MethodImpl(Inline)]
+        public static implicit operator Hex1(bool src)
+            => new Hex1(z.@byte(src));
+
         [MethodImpl(Inline)]
         public static implicit operator H(K src)
             => new H(src);
@@ -90,7 +102,7 @@ namespace Z0
         public static explicit operator ulong(H src)
             => (ulong)src.Value;
 
-        K IHexNumber<K>.Value 
+        K IHexNumber<K>.Value
             => Value;
 
         [MethodImpl(Inline)]
@@ -112,7 +124,7 @@ namespace Z0
         public string Text
         {
             [MethodImpl(Inline)]
-            get => $"{Value}";
+            get => Value == One ? On : Off;
         }
 
         [MethodImpl(Inline)]

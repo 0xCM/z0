@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     partial class Spans
     {
@@ -28,5 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> alloc<T>(ulong length)
             => sys.alloc<T>(length);
+
+
     }
 }

@@ -11,8 +11,6 @@ namespace Z0
     public interface IWfEvent : IAppEvent
     {
         WfEventId EventId {get;}
-
-        string EventName => EventId.Name;
     }
 
     /// <summary>

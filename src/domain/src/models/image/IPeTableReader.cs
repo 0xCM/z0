@@ -18,6 +18,6 @@ namespace Z0
 
         ReadOnlySpan<ImageFieldTable> ReadFields();
 
-        ReadOnlySpan<ImageFieldRvaRecord> ReadFieldRva();
+        ReadOnlySpan<FieldRvaRecord> ReadFieldRva();
     }
 }

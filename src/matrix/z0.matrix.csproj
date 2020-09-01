@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
-    <ProjectReference Include="$(Blocks)" />
+    <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(Gmath)" />
+    <ProjectReference Include="$(Structured)" />
   </ItemGroup>
 </Project>

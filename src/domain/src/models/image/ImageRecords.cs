@@ -18,7 +18,7 @@ namespace Z0
 
         public static ImageFieldTable Fields => default;
 
-        public static ImageFieldRvaRecord FieldRva => default;
+        public static FieldRvaRecord FieldRva => default;
 
     }
 }

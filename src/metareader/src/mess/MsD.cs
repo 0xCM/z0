@@ -11,8 +11,6 @@ namespace Z0
     using System.Diagnostics;
     using System.Runtime.CompilerServices;
 
-    using Z0.Image;
-
     internal static class MsDx
     {
         public static IntPtr AsIntPtr(this ulong address)
@@ -21,7 +19,7 @@ namespace Z0
                 return new IntPtr((long)address);
 
             return new IntPtr((int)address);
-        }        
+        }
 
 
         internal static ImmutableArray<T> AsImmutableArray<T>(this T[] array)
@@ -33,6 +31,6 @@ namespace Z0
         internal static ImmutableArray<T> MoveOrCopyToImmutable<T>(this ImmutableArray<T>.Builder builder)
         {
             return builder.Capacity == builder.Count ? builder.MoveToImmutable() : builder.ToImmutable();
-        }            
+        }
     }
 }

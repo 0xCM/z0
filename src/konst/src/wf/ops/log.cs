@@ -17,10 +17,6 @@ namespace Z0
             => new WfEventLog(config.StatusLog, config.ErrorLog, termlog(config,clear), ct);
 
         [MethodImpl(Inline), Op]
-        public static IWfEventLog termlog(FS.FilePath status, FS.FilePath error, bool clear = true)
-            => new WfTermEventLog(FilePath.Define(status.Name), FilePath.Define(error.Name), clear);
-
-        [MethodImpl(Inline), Op]
         public static IWfEventLog termlog(WfConfig config, bool clear = true)
             => new WfTermEventLog(FilePath.Define(config.StatusLog.Name), FilePath.Define(config.ErrorLog.Name), clear);
     }

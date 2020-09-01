@@ -18,6 +18,21 @@ namespace Z0
 
     public enum ImageStringField : ushort
     {
+        Sequence,
+
+        Source,
+
+        HeapSize,
+
+        Length,
+
+        Offset,
+
+        Value,
+    }
+
+    public enum ImageStringFieldWidth : ushort
+    {
         Sequence = 12,
 
         Source = 12,

@@ -168,7 +168,7 @@ namespace Z0
             return dst;
         }
 
-        public ReadOnlySpan<ImageFieldRvaRecord> ReadFieldRva()
+        public ReadOnlySpan<FieldRvaRecord> ReadFieldRva()
             => fieldrva(State);
     }
 }

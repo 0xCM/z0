@@ -19,12 +19,11 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static unsafe byte @byte(bool src)
-            => (*((byte*)(&src))); 
+            => (*((byte*)(&src)));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte @byte<T>(in T src)
-            where T : unmanaged             
-                => ref As<T,byte>(ref edit(src));        
-                //=> *((byte*)(&src));
+            where T : unmanaged
+                => ref As<T,byte>(ref edit(src));
     }
 }

@@ -7,9 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
     using api = AB;
 
     /// <summary>
@@ -18,16 +15,26 @@ namespace Z0
     public interface IWfStep
     {
         WfStepId Id {get;}
-    }
 
+        Type Control => Id.Control;
+
+        Type Effect => Id.Effect;
+
+        WfFunc<C> Fx<C>([CallerMemberName] string name = null)
+            where C : struct, IWfStep<C>
+                => new WfFunc<C>(name);
+    }
 
     /// <summary>
     /// Describes a workflow step
     /// </summary>
-    public interface IWfStep<T> : IWfStep
-        where T : struct, IWfStep<T>
+    public interface IWfStep<C> : IWfStep
+        where C : struct, IWfStep<C>
     {
         WfStepId IWfStep.Id
-            => api.step<T>();
+            => api.step<C>();
+
+        WfFunc<C> Fx([CallerMemberName] string name = null)
+            => new WfFunc<C>(name);
     }
 }

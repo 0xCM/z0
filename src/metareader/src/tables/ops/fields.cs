@@ -16,7 +16,7 @@ namespace Z0
 
     partial class PeTableReader
     {
-        public static ReadOnlySpan<ImageFieldRvaRecord> fieldrva(in ReaderState state)
+        public static ReadOnlySpan<FieldRvaRecord> fieldrva(in ReaderState state)
         {
             var reader = state.Reader;
             var offset = reader.GetTableMetadataOffset(System.Reflection.Metadata.Ecma335.TableIndex.FieldRva);
@@ -26,7 +26,7 @@ namespace Z0
             var rvaCount = FieldRvaCount(state);
             var handles = reader.FieldDefinitions.ToReadOnlySpan();
             var count = handles.Length;
-            var dst = sys.alloc<ImageFieldRvaRecord>(count);
+            var dst = sys.alloc<FieldRvaRecord>(count);
 
             for(var i=0u; i<count; i++)
             {
@@ -37,7 +37,7 @@ namespace Z0
                 var sig = signature(state, entry, i);
                 var name = reader.GetString(entry.Name);
                 var va = entry.GetRelativeVirtualAddress();
-                dst[i] = new ImageFieldRvaRecord((Address32)va, tName, name, sig);
+                dst[i] = new FieldRvaRecord((Address32)va, tName, name, sig);
             }
 
             return dst.OrderBy(x => x.Rva);

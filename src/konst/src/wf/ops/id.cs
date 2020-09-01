@@ -97,5 +97,16 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static WfEventId id(string name, CorrelationToken ct)
             => new WfEventId(name, ct);
+
+        [MethodImpl(Inline)]
+        public static WfEventId id<C>(WfFunc<C> fx, CorrelationToken ct)
+            where C : struct, IWfStep<C>
+                => new WfEventId(fx,ct);
+
+        [MethodImpl(Inline)]
+        public static WfEventId id<C,R>(WfFunc<C,R> fx, CorrelationToken ct)
+            where C : struct, IWfStep<C>
+            where R : ITextual
+                => new WfEventId(fx,ct);
     }
 }

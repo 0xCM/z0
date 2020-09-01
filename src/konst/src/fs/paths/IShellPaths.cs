@@ -5,8 +5,7 @@
 namespace Z0
 {
     using System;
-    using static FS.CommonFolderNames;
-    using static FS.CommonFileNames;
+    using static FS.CFNL;
 
     public interface IShellPaths : IShellContext
     {
@@ -80,7 +79,7 @@ namespace Z0
         /// The name of an application configuration file
         /// </summary>
         FileName ConfigFileName
-            => FileName.define(JsonConfig);
+            => FileName.define("config.json");
 
         /// <summary>
         /// The name of a folder that contains one or more resource index files

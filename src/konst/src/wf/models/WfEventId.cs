@@ -57,6 +57,14 @@ namespace Z0
             Identifier = text.format("{0} | {1} | {2} | {3}", Ts, Ct, type.Name, step);
         }
 
+        [MethodImpl(Inline)]
+        public WfEventId(WfFunc fx, CorrelationToken ct, Timestamp? ts = null)
+        {
+            Ts = ts ?? timestamp();
+            Ct = ct;
+            Identifier = text.format("{0} | {1} | {2} | {3}", Ts, Ct, fx.StepId.Effect.Name, fx.Name.Format());
+        }
+
         /// <summary>
         /// The event data type name
         /// </summary>

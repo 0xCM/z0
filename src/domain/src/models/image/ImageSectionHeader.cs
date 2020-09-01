@@ -5,12 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
     using System.Reflection.PortableExecutable;
-    using System.Reflection.Metadata.Ecma335;
-    using System.IO;
-    using System.Collections.Generic;
 
     using static Konst;
 

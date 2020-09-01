@@ -15,6 +15,7 @@
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Identity)" />
     <ProjectReference Include="$(Data)" />
+    <ProjectReference Include="$(Structured)" />
 
   </ItemGroup>
 

@@ -113,6 +113,11 @@ namespace Z0
         void Status<T>(WfStepId step, T data)
             => Raise(new WfStatus<T>(step, data, Ct));
 
+        void Status<C,R>(WfFunc<C,R> f, R result)
+            where C : struct, IWfStep<C>
+            where R : ITextual
+                => Raise(new WfStatus<C,R>(f, result, Ct));
+
         void Created(in WfActor actor, CorrelationToken? ct = null)
             => Raise(WfEvB.created(ct ?? Ct, actor));
 

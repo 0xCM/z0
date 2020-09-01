@@ -8,18 +8,16 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    
+
     using Z0.MS;
-    using Z0.Image;
 
     using static MS.HResult.FacilityCode;
-    using OC = Z0.MS.CilOpCodeKind;
 
     partial class XTend
     {
        public static bool IsPrimitive(this ClrElementType src)
             => ClrQueries.primitive(src);
-        
+
         public static bool IsValueType(this ClrElementType src)
             => ClrQueries.valuetype(src);
 
@@ -30,14 +28,14 @@ namespace Z0
             => ClrQueries.represented(src);
 
         public static string GetName(this ClrRootKind src)
-            => ClrQueries.name(src);  
+            => ClrQueries.name(src);
 
         /// <summary>
         /// Returns true of the specified op-code is a branch to a label.
         /// </summary>
         public static bool IsBranch(this ILOpCode opCode)
             => ClrQueries.branch(opCode);
-            
+
         /// <summary>
         /// Calculate the size of the specified branch instruction operand.
         /// </summary>
@@ -65,7 +63,7 @@ namespace Z0
         public static ILOpCode GetLongBranch(this ILOpCode opCode)
             => ClrQueries.longBranch(opCode);
 
-        public static string GetName(this ClrHandleKind kind) 
+        public static string GetName(this ClrHandleKind kind)
             => ClrQueries.name(kind);
 
         public static int Search<Kind, Key>(this IReadOnlyList<Kind> list, Key key, Func<Kind, Key, int> compareTo)
@@ -96,7 +94,7 @@ namespace Z0
             return -1;
         }
 
-        public static int Search<Kind, Key>(this Kind[] list, Key key, Func<Kind, Key, int> compareTo) 
+        public static int Search<Kind, Key>(this Kind[] list, Key key, Func<Kind, Key, int> compareTo)
             => Search((IReadOnlyList<Kind>)list, key, compareTo);
 
         /// <summary>

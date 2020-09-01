@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
@@ -15,7 +15,7 @@ namespace Z0
     partial struct z
     {
         /// <summary>
-        /// Inrements each component by 1
+        /// Increments each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Inc]
@@ -23,7 +23,7 @@ namespace Z0
             =>  vadd(src, vunits<sbyte>(n128));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Increments each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Inc]
@@ -31,7 +31,7 @@ namespace Z0
             =>  vadd(src, vunits<byte>(n128));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Increments each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Inc]
@@ -39,7 +39,7 @@ namespace Z0
             =>  vadd(src, vunits<short>(n128));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Increments each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Inc]
@@ -47,7 +47,7 @@ namespace Z0
             => vadd(src, vunits<ushort>(n128));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Increments each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Inc]
@@ -55,7 +55,7 @@ namespace Z0
             => vadd(src, vunits<int>(n128));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Increments each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Inc]
@@ -63,7 +63,7 @@ namespace Z0
             => vadd(src, vunits<uint>(n128));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Increments each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Inc]
@@ -71,7 +71,7 @@ namespace Z0
             => vadd(src, vunits<long>(n128));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Increments each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Inc]
@@ -79,7 +79,7 @@ namespace Z0
             => vadd(src, vunits<ulong>(n128));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Increments each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Inc]
@@ -87,7 +87,7 @@ namespace Z0
             => vadd(src, vunits<sbyte>(n256));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Increments each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Inc]
@@ -95,7 +95,7 @@ namespace Z0
             => vadd(src, vunits<byte>(n256));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Increments each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Inc]
@@ -103,7 +103,7 @@ namespace Z0
             => vadd(src, vunits<short>(n256));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Increments each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Inc]
@@ -111,7 +111,7 @@ namespace Z0
             => vadd(src, vunits<ushort>(n256));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Increments each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Inc]
@@ -119,7 +119,7 @@ namespace Z0
             => vadd(src, vunits<int>(n256));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Increments each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Inc]
@@ -127,7 +127,7 @@ namespace Z0
             => vadd(src, vunits<uint>(n256));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Increments each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Inc]
@@ -135,7 +135,7 @@ namespace Z0
             => vadd(src, vunits<long>(n256));
 
         /// <summary>
-        /// Inrements each component by 1
+        /// Increments each component by 1
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Inc]

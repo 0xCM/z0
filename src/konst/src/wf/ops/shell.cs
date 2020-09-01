@@ -10,7 +10,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static TableFunctions;
 
     partial struct AB
     {
@@ -28,8 +27,7 @@ namespace Z0
             var captureLog = FS.dir(paths.LogRoot.Name) + FS.folder("capture/logs");
             var dstArchive = new ArchiveConfig(FolderPath.Define(captureOut.Name));
             var shell = new ShellContext(args, api);
-            var config  = new WfConfig(shell, args, modules, dstArchive, parts, paths.ResourceRoot,
-                paths.AppDataRoot, paths.AppLogRoot, settings);
+            var config  = new WfConfig(shell, args, modules, dstArchive, parts, paths.ResourceRoot, paths.AppDataRoot, paths.AppLogRoot, settings);
             var context = new ShellContext<WfConfig>(api,config);
             return new WfShellContext(context, ct);
         }
