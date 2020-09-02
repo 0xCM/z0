@@ -15,7 +15,6 @@ namespace Z0
 
     public readonly ref struct EmitParsedReport
     {
-        readonly WfCaptureState State;
 
         readonly CorrelationToken Ct;
 
@@ -28,9 +27,8 @@ namespace Z0
         readonly IWfShell Wf;
 
         [MethodImpl(Inline)]
-        internal EmitParsedReport(WfCaptureState state, ApiHostUri host, X86MemberRefinement[] src, FilePath dst, CorrelationToken ct)
+        internal EmitParsedReport(IWfCaptureState state, ApiHostUri host, X86MemberRefinement[] src, FilePath dst, CorrelationToken ct)
         {
-            State = state;
             Wf = state.Wf;
             Ct = ct;
             Host = host;

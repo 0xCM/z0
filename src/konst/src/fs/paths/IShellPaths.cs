@@ -5,10 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using static FS.CFNL;
 
-    public interface IShellPaths : IShellContext
+    public interface IShellPaths
     {
+        string ShellName
+            => Assembly.GetEntryAssembly().GetSimpleName();
+
         FolderPath ShellExeDir
             => FolderPath.Define(Part.ShellExeDir);
 

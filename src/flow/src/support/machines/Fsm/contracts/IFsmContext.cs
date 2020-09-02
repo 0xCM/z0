@@ -11,5 +11,4 @@ namespace Z0
     {
         ulong? ReceiptLimit {get;}
     }
-
 }

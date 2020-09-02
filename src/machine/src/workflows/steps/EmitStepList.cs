@@ -13,13 +13,13 @@ namespace Z0
 
     public ref struct EmitStepList
     {
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
         public WfDataFlow<Assembly,FilePath> Df;
 
-        public EmitStepList(IWfContext wf, Assembly src, CorrelationToken ct)
+        public EmitStepList(IWfShell wf, Assembly src, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

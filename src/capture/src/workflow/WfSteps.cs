@@ -105,11 +105,11 @@ namespace Z0
             => step<EmitHostArtifactsStep>();
     }
 
-    [Step(typeof(EmitExtractReport), StepName)]
-    public readonly struct EmitExtractReportStep
-    {
-        public const string StepName = nameof(EmitExtractReport);
-    }
+    // [Step(typeof(EmitExtractReport), StepName)]
+    // public readonly struct EmitExtractReportStep : IWfStep<EmitExtractReportStep>
+    // {
+    //     public const string StepName = nameof(EmitExtractReport);
+    // }
 
     [Step(typeof(EmitParsedReport), StepName)]
     public readonly struct EmitParsedReportStep : IWfStep<EmitParsedReportStep>

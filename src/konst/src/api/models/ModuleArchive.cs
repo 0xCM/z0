@@ -49,6 +49,5 @@ namespace Z0
             Owners = Parts.Select(x => x.Owner);
             Api = ApiQuery.apiset(new ApiParts(Parts));
         }
-
     }
 }

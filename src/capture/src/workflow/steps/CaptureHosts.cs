@@ -15,8 +15,9 @@ namespace Z0
 
     public readonly ref struct CaptureHosts
     {
-        public WfCaptureState Wf {get;}
+        public IWfCaptureState State {get;}
 
+        public IWfShell Wf {get;}
         public IApiHost[] Hosts {get;}
 
         public CorrelationToken Ct {get;}
@@ -26,7 +27,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public CaptureHosts(WfCaptureState state, IApiHost[] hosts,  IPartCapturePaths dst, CorrelationToken ct)
         {
-            Wf = state;
+            State = state;
+            Wf = state.Wf;
             Hosts = hosts;
             Ct = ct;
             Target = dst;
@@ -37,7 +39,7 @@ namespace Z0
         {
             Wf.Raise(new CapturingHosts(Hosts, Ct));
 
-            using var step = new ExtractMembers(Wf, Ct);
+            using var step = new ExtractMembers(State, Ct);
             var extracts = step.Extract(Hosts);
             if(extracts.Length == 0)
                 return;
@@ -52,7 +54,7 @@ namespace Z0
 
         void Store(ApiHostUri host, X86MemberExtract[] extracts, IPartCapturePaths dst)
         {
-            using var step = new EmitHostArtifacts(Wf, host, extracts, dst, Ct);
+            using var step = new EmitHostArtifacts(State, host, extracts, dst, Ct);
             step.Run();
         }
 

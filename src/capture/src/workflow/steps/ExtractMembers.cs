@@ -16,12 +16,12 @@ namespace Z0
     {
         readonly CorrelationToken Ct;
 
-        readonly WfCaptureState State;
+        readonly IWfCaptureState State;
 
         readonly IWfShell Wf;
 
         [MethodImpl(Inline)]
-        public ExtractMembers(WfCaptureState state, CorrelationToken ct)
+        public ExtractMembers(IWfCaptureState state, CorrelationToken ct)
         {
             State = state;
             Wf = state.Wf;
@@ -37,7 +37,7 @@ namespace Z0
         X86MemberExtract[] Extract(ICaptureContext context, IApiHost host)
         {
             var members = ApiMemberJit.jit(host);
-            context.Raise(new MembersLocated(host.Uri, members));
+            Wf.Raise(new MembersLocated(host.Uri, members, Ct));
             return Extractor.Extract(members);
         }
 
@@ -47,7 +47,7 @@ namespace Z0
             try
             {
                 extracted = Extract(State.CWf.Context ,host);
-                State.Raise(new ExtractedMembers(host.Uri, extracted.Length));
+                Wf.Raise(new ExtractedMembers(host.Uri, extracted.Length, Ct));
             }
             catch(Exception e)
             {
@@ -61,13 +61,13 @@ namespace Z0
             var extracted = sys.empty<X86MemberExtract>();
             try
             {
-                var members = ApiMemberJit.jit(hosts, State.WfEventSink);
-                State.Raise(new PreparedConsolidated(nameof(ExtractMembers), hosts, members, Ct));
+                var members = ApiMemberJit.jit(hosts, Wf.Broker.Sink);
+                Wf.Raise(new PreparedConsolidated(nameof(ExtractMembers), hosts, members, Ct));
                 return Extractor.Extract(members);
             }
             catch(Exception e)
             {
-                State.Error(StepName, e, Ct);
+                Wf.Error(StepName, e, Ct);
                 return sys.empty<X86MemberExtract>();
             }
         }
@@ -81,7 +81,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                State.Error(StepName, e, Ct);
+                Wf.Error(StepName, e, Ct);
                 return sys.empty<X86MemberExtract>();
             }
         }

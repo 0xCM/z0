@@ -5,9 +5,11 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
 
     using static z;
     using static Shell;
+    using Z0.Asm;
 
     public readonly struct Shell
     {
@@ -30,7 +32,13 @@ namespace Z0
         }
 
         public static void Main(params string[] args)
-            => Launch(args);
+        {
+            var wf = WfBuilder.context(Assembly.GetEntryAssembly(), args, out var app);
+            var state = new WfCaptureState(wf, new AsmContext(app, wf), wf.Config, wf.Ct);
+            using var machine = new Engine(state, wf.Ct);
+            machine.Run();
+        }
+
     }
 
     public static partial class XTend {}

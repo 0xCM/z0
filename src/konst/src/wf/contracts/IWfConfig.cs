@@ -39,7 +39,7 @@ namespace Z0
         /// <summary>
         /// The input data archive configuration
         /// </summary>
-        ModuleArchive SourceArchive {get;}
+        ModuleArchive Modules {get;}
 
         /// <summary>
         /// The output data archive configuration
@@ -69,20 +69,20 @@ namespace Z0
         /// <summary>
         /// The application-specific status log path
         /// </summary>
-        FS.FilePath StatusLog
+        FS.FilePath StatusPath
             => Logs.StatusLog;
 
         /// <summary>
         /// The application-specific error log path
         /// </summary>
-        FS.FilePath ErrorLog
+        FS.FilePath ErrorPath
             => Logs.ErrorLog;
 
-        FS.FolderPath ResRoot
+        FS.FolderPath ResDir
             => FS.dir(Resources.Root.Name);
 
-        FS.FolderPath IndexRoot
-            => ResRoot + FS.folder("index");
+        FS.FolderPath IndexDir
+            => ResDir + FS.folder("index");
     }
 
     public interface IWfConfig<T> : IWfConfig

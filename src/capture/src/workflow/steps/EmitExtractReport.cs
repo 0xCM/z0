@@ -10,13 +10,25 @@ namespace Z0
     using static Konst;
 
     using Z0.Asm;
+
+    using static EmitExtractReportStep;
+
+    [Step(typeof(EmitExtractReport))]
+    public readonly struct EmitExtractReportStep : IWfStep<EmitExtractReportStep>
+    {
+        public static WfStepId StepId
+            => AB.step<EmitExtractReportStep>();
+    }
+
     public ref struct EmitExtractReport
     {
         public const string ActorName = nameof(EmitExtractReport);
 
         readonly CorrelationToken Ct;
 
-        readonly WfCaptureState Wf;
+        readonly IWfShell Wf;
+
+        readonly IWfCaptureState State;
 
         readonly ApiHostUri Host;
 
@@ -30,15 +42,21 @@ namespace Z0
             => Artifact;
 
         [MethodImpl(Inline)]
-        public EmitExtractReport(WfCaptureState wf, ApiHostUri host, X86MemberExtract[] data, FilePath dst, CorrelationToken ct)
+        public EmitExtractReport(IWfCaptureState state, ApiHostUri host, X86MemberExtract[] data, FilePath dst, CorrelationToken ct)
         {
             Ct = ct;
-            Wf = wf;
+            State = state;
+            Wf = State.Wf;
             Host = host;
             Source = data;
             Target = dst;
             Artifact = default;
-            Wf.Created(ActorName, Ct);
+            Wf.Created(StepId);
+        }
+
+        public void Dispose()
+        {
+            Wf.Finished(StepId);
         }
 
         public void Run()
@@ -51,17 +69,12 @@ namespace Z0
                 if(result)
                     Wf.Raise(new ExtractReportSaved(ActorName, Artifact, Ct));
                 else
-                    Wf.Error(ActorName, "Unable to save extract report", Ct);
+                    Wf.Error(StepId, "Unable to save extract report");
             }
             catch(Exception e)
             {
-                Wf.Error(ActorName, e, Ct);
+                Wf.Error(StepId, e);
             }
-        }
-
-        public void Dispose()
-        {
-            Wf.Finished(ActorName, Ct);
         }
     }
 }

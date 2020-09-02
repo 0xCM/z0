@@ -45,9 +45,5 @@ namespace Z0
     public interface IShell<S,C> : IShell<S>
         where S : IShell<S,C>, new()
     {
-        new IShellContext<C> Context {get;}
-
-        IShellContext IShell.Context
-            => Context;
     }
 }

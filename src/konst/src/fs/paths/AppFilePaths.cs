@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
 
@@ -33,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public AppFilePaths(in PathSettings paths, PartId? app)
         {
-            AppFolder = FS.folder(app != null ?app.Value.Format() : Shells.Default.ShellName);
+            AppFolder = FS.folder(app != null ?app.Value.Format() : Assembly.GetEntryAssembly().GetSimpleName());
             CaptureRoot = new FS.FolderPath(text.format("{0}/{1}/{2}/{3}", paths.Logs, "apps", AppFolder, "capture"));
         }
 

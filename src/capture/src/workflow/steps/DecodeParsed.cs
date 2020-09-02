@@ -15,19 +15,19 @@ namespace Z0
 
     public readonly ref struct DecodeParsed
     {
-        public WfCaptureState Wf {get;}
+        public IWfShell Wf {get;}
 
         readonly CorrelationToken Ct;
 
         ICaptureContext Capture {get;}
 
         [MethodImpl(Inline)]
-        internal DecodeParsed(WfCaptureState wf, ICaptureContext capture, CorrelationToken ct)
+        internal DecodeParsed(IWfShell wf, ICaptureContext capture, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
             Capture = capture;
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId);
         }
 
         public AsmRoutine[] Run(ApiHostUri host, X86MemberRefinement[] src)
@@ -41,17 +41,17 @@ namespace Z0
                     var member = src[i];
                     var decoded = Capture.Decoder.Decode(member);
                     if(!decoded)
-                        HandleUndecoded(member);
+                        HandleFailure(member);
 
                     dst[i] = decoded ? decoded.Value : AsmRoutine.Empty;
                 }
 
-                Capture.Raise(new FunctionsDecoded(host, dst));
+                Wf.Raise(new FunctionsDecoded(host, dst));
                 return dst;
             }
             catch(Exception e)
             {
-                Wf.Error(StepName, $"{host}: {e}", Ct);
+                Wf.Error(StepId, $"{host}: {e}");
                 return sys.empty<AsmRoutine>();
             }
         }
@@ -62,14 +62,14 @@ namespace Z0
             writer.WriteAsm(src);
         }
 
-        void HandleUndecoded(in X86MemberRefinement member)
+        void HandleFailure(in X86MemberRefinement member)
         {
-            Wf.Error(StepName, $"Could not decode {member}", Ct);
+            Wf.Error(StepId, $"Could not decode {member}");
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId);
         }
     }
 }

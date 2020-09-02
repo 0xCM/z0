@@ -25,9 +25,6 @@ namespace Z0
         public static ApiMembers members(IApiHost src)
             => ApiMemberJit.jit(src);
 
-        [MethodImpl(Inline), Op]
-        public static ApiMembers members(IApiHost[] src, IWfBroker broker)
-            => ApiMemberJit.jit(src, broker.Sink);
 
         /// <summary>
         /// Extracts encoded content for all operations defined by a host

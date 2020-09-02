@@ -12,6 +12,8 @@ namespace Z0
 
     public readonly struct ParsingXedInstructions : IWfEvent<ParsingXedInstructions>
     {
+        public static Type EventType => typeof(ParsingXedInstructions);
+
         /// <summary>
         /// The event identifier
         /// </summary>
@@ -25,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ParsingXedInstructions(WfStepId step, FilePath source, CorrelationToken ct)
         {
-            EventId = AB.id<ParsingXedInstructions>(step,ct);
+            EventId = (EventType, step, ct);
             Source = source;
         }
 

@@ -66,7 +66,7 @@ namespace Z0
             var id = part.Id;
             var path = TargetPath(id);
 
-            Wf.Emitting(StepName, DatasetName, path, Ct);
+            Wf.Emitting(StepId, DatasetName, path);
 
             var assembly = part.Owner;
             using var reader = Reader(assembly.Location);

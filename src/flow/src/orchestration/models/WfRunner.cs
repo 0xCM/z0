@@ -17,14 +17,14 @@ namespace Z0
     {
         public const string ActorName = nameof(WfRunner<A>);
 
-        public IWfContext Wf {get;}
+        public IWfShell Wf {get;}
 
         readonly Action<A> Handler;
 
         readonly A? InitialArgs;
 
         [MethodImpl(Inline)]
-        public WfRunner(IWfContext wf, Action<A> handler, A? args = null)
+        public WfRunner(IWfShell wf, Action<A> handler, A? args = null)
         {
             Wf = wf;
             Handler = handler;

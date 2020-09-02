@@ -12,7 +12,9 @@ namespace Z0
     {
         IWfShell Wf {get;}
 
-        WfConfig Config {get;}
+        IAppContext App {get;}
+
+        IWfConfig Config {get;}
 
         IAsmContext Asm {get;}
 

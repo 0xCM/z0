@@ -12,8 +12,9 @@ namespace Z0.Asm
 
     using static z;
 
+    [Event]
     public readonly struct CountedInstructions : IWfEvent<CountedInstructions>
-    {            
+    {
         public WfEventId EventId {get;}
 
         public string ActorName {get;}
@@ -30,8 +31,8 @@ namespace Z0.Asm
             Count = count;
             Host = host;
         }
-        public string Format() 
+        public string Format()
             => text.format(PSx4, EventId, ActorName, Host, Count);
-    }    
+    }
 
 }

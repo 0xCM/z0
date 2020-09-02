@@ -29,7 +29,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public CapturedAccessor(string actor, ApiHostUri host, in ResourceAccessor accessor, in AsmRoutineCode code, CorrelationToken ct)
         {
-            EventId = evid(EventName, ct);
+            EventId = (EventName, ct);
             Actor = actor;
             Host = host;
             Accessor = accessor;

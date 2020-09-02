@@ -14,13 +14,13 @@ namespace Z0
 
     public unsafe partial class MetadataReader : IDisposable
     {
-        public MetadataReader(IWfContext wf, FilePath src)
+        public MetadataReader(IWfShell wf, FilePath src)
         {
             Source = MemoryFile.open(src.Name);
             Wf = wf;
             Pe = new PEReader(Source.BaseAddress.Pointer<byte>(), (int)Source.Size);
             Reader = Pe.GetMetadataReader();
-            PeMemory = Pe.GetMetadata();        
+            PeMemory = Pe.GetMetadata();
         }
 
         public DebugMetadataHeader DebugMetadataHeader

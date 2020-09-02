@@ -14,7 +14,7 @@ namespace Z0
     partial struct AsmWfBuilder
     {
         [MethodImpl(Inline), Op]
-        public static IWfCaptureBroker capture(IWfEventLog log, CorrelationToken ct)
-            => new WfCaptureBroker(log, ct);
+        public static IWfCaptureBroker capture(IWfShell wf)
+            => new WfCaptureBroker(wf);
     }
 }

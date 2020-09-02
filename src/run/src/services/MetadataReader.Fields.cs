@@ -17,8 +17,8 @@ namespace Z0
 
     partial class MetadataReader
     {
-        public IWfContext Wf;
-        
+        public IWfShell Wf;
+
         readonly MemoryFile Source;
 
         readonly PEReader Pe;
@@ -26,13 +26,13 @@ namespace Z0
         readonly SysReader Reader;
 
         readonly PEMemoryBlock PeMemory;
-        
+
         TableSpan<AssemblyFileHandle> _AssemblyFileHandles;
 
         TableSpan<ManifestResourceHandle> _ManifestResourceHandles;
 
         TableSpan<FieldDefinitionHandle> _FieldDefinitionHandles;
 
-        TableSpan<AssemblyReferenceHandle> _AssemblyReferenceHandles;    
+        TableSpan<AssemblyReferenceHandle> _AssemblyReferenceHandles;
     }
 }

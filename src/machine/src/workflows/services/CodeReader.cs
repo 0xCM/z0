@@ -59,12 +59,12 @@ namespace Z0
             return read(path);
         }
 
-        static IdentifiedCodeIndex index(FilePath src, IAppEventSink status)
+        static IdentifiedCodeIndex index(FilePath src, IWfEventSink status)
         {
             var uri = ApiUriParser.host(src.FileName);
             if(uri.Failed || uri.Value.IsEmpty)
             {
-                status.Deposit(AppErrors.define(nameof(CodeReader), uri.Reason));
+                status.Deposit(WfEvents.error(nameof(CodeReader), $"{src} not found", default));
                 return IdentifiedCodeIndex.Empty;
             }
 

@@ -14,7 +14,7 @@ namespace Z0
     partial struct AB
     {
         [Op]
-        public static WfSettings settings(IShellContext context, CorrelationToken ct)
+        public static WfSettings settings(IShellContext context)
         {
             FilePath configPath()
             {

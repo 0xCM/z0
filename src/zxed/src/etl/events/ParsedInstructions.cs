@@ -14,6 +14,7 @@ namespace Z0.Xed
 
     public readonly struct ParsedXedInstructions : IWfEvent<ParsedXedInstructions>
     {
+        public const string EventName = nameof(ParsedXedInstructions);
         /// <summary>
         /// The event identifier
         /// </summary>
@@ -37,7 +38,7 @@ namespace Z0.Xed
         [MethodImpl(Inline)]
         public ParsedXedInstructions(WfStepId step, FS.FilePath source, Count32 count, CorrelationToken ct, MessageFlair flair = Ran)
         {
-            EventId = id<ParsedXedInstructions>(step,ct);
+            EventId = (EventName, step, ct);
             Source = source;
             Count = count;
             Flair = flair;

@@ -17,27 +17,9 @@ namespace Z0
         C Config {get;}
     }
 
-    public interface IShellContext : IContext, ITextual
+    public interface IApiContext : IShellContext
     {
-        IShellPaths AppPaths
-            => Z0.ShellPaths.Default;
-
-        ISettings Settings
-            => SettingValues.Load(AppPaths.AppConfigPath);
-
-        FS.FolderPath CaptureRoot
-            => FS.dir((AppPaths.LogRoot + FolderName.Define("capture/artifacts")).Name);
-        IApiSet Api
-            => ApiQuery.apiset();
-
-        string[] Args
-             => sys.empty<string>();
-
-        string ShellName
-            => Root.GetSimpleName();
-
-        string ITextual.Format()
-            => ShellName;
+        IApiSet Api {get;}
 
         IPart[] Parts
             => Api.Parts;
@@ -48,12 +30,32 @@ namespace Z0
         Assembly[] Components
             => Api.Components;
 
-        Assembly Root
-            => Assembly.GetEntryAssembly();
     }
 
-    public interface IShellContext<C> : IContext<C>, IShellContext
+    public interface IShellContext : IContext, ITextual
     {
+        CorrelationToken Ct
+            => z.correlate(Control.Id());
 
+        IShellPaths AppPaths
+            => Z0.ShellPaths.Default;
+
+        ISettings Settings
+            => SettingValues.Load(AppPaths.AppConfigPath);
+
+        FS.FolderPath CaptureRoot
+            => FS.dir((AppPaths.LogRoot + FolderName.Define("capture/artifacts")).Name);
+
+        string[] Args
+             => Environment.GetCommandLineArgs();
+
+        string ShellName
+            => Control.GetSimpleName();
+
+        string ITextual.Format()
+            => ShellName;
+
+        Assembly Control
+            => Assembly.GetEntryAssembly();
     }
 }

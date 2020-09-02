@@ -14,7 +14,7 @@ namespace Z0
 
     public readonly struct AsmJmpHandler
     {
-        public IWfContext Wf {get;}
+        public IWfShell Wf {get;}
 
         readonly BitBroker<JmpKind,BasedAsmFx> broker;
 

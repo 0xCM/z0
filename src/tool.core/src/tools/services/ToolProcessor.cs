@@ -24,22 +24,17 @@ namespace Z0
         {
             Wf = wf;
             Handler = handler;
-            Wf.Created(ActorName);
         }
 
         [MethodImpl(Inline)]
         public void Process(IToolFile<T,F> src)
         {
-            Wf.Running(ActorName);
-
             Handler(src);
-
-            Wf.Ran(ActorName);
         }
 
         public void Dispose()
         {
-            Wf.Finished(ActorName);
+
         }
     }
 }

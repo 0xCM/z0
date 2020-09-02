@@ -12,23 +12,35 @@ namespace Z0
 
     public readonly struct ShellContext : IShellContext
     {
+        public static IShellContext create(Assembly control, string[] args, ModuleArchive modules)
+            => new ShellContext(control, args, modules);
+
         public IApiSet Api {get;}
 
         public string[] Args {get;}
 
-        public Assembly Root
-            => Assembly.GetEntryAssembly();
+        public Assembly Control {get;}
 
-        public IPart[] Parts
-            => Api.Parts;
+        public ModuleArchive Modules {get;}
 
-        public Assembly[] Components
-            => Api.Components;
+        public CorrelationToken Ct {get;}
 
-        public ShellContext(string[] args, IApiSet api)
+        public ShellContext(Assembly control, string[] args, IApiSet api)
         {
+            Control = control;
             Api = api;
+            Modules = ModuleArchives.from(control);
             Args = args;
+            Ct = z.correlate(control.Id());
+        }
+
+        public ShellContext(Assembly control, string[] args, ModuleArchive modules)
+        {
+            Control = control;
+            Modules = modules;
+            Api = modules.Api;
+            Args = args;
+            Ct = z.correlate(control.Id());
         }
     }
 }

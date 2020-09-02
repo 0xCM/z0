@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime;
     using System.IO;
+    using System.Reflection;
 
     using static z;
 
@@ -31,7 +32,7 @@ namespace Z0
         }
 
         protected Shell()
-            : this(new ShellContext(sys.empty<string>(), ApiQuery.apiset()))
+            : this(new ShellContext(Assembly.GetEntryAssembly(), sys.empty<string>(), ApiQuery.apiset()))
         {
 
         }
@@ -60,11 +61,6 @@ namespace Z0
 
         }
 
-        public virtual void RunShell(IWfShell context)
-        {
-
-        }
-
         protected virtual void OnDispose()
             => term.warn($"Dispose handler not implemented");
 
@@ -81,31 +77,31 @@ namespace Z0
             return shell;
         }
 
-        protected static S Init(IShellContext context, params string[] args)
-        {
-            var shell = new S();
-            shell.Args = args;
-            shell.Context = context;
-            return shell;
-        }
+        // protected static S Init(IShellContext context, params string[] args)
+        // {
+        //     var shell = new S();
+        //     shell.Args = args;
+        //     shell.Context = context;
+        //     return shell;
+        // }
 
-        protected static int Launch(IWfShell context)
-        {
-            try
-            {
-                var shell = new S();
-                shell.Args = context.Args;
-                shell.Context = context;
-                shell.RunShell(context);
+        // protected static int Launch(IWfShell context)
+        // {
+        //     try
+        //     {
+        //         var shell = new S();
+        //         shell.Args = context.Args;
+        //         shell.Context = context;
+        //         shell.RunShell(context);
 
-                return 0;
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-                return -1;
-            }
-        }
+        //         return 0;
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         term.error(e);
+        //         return -1;
+        //     }
+        // }
 
         protected static void Launch(params string[] args)
         {
@@ -136,6 +132,11 @@ namespace Z0
         where C : IShellContext
     {
         public new C Context {get;}
+
+        public virtual void RunShell(C context)
+        {
+
+        }
 
         protected Shell(C context)
             : base(context)

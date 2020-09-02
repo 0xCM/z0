@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     public readonly struct EmittedEmbeddedImm : IWfEvent<EmittedEmbeddedImm>
     {
-        public WfEventId EventId 
+        public WfEventId EventId
             => WfEventId.define(nameof(EmittedEmbeddedImm));
 
         public readonly ApiHostUri Host;
@@ -38,7 +38,7 @@ namespace Z0.Asm
             => new EmittedEmbeddedImm(uri, generic, refinement != null ? ImmRefinementKind.Refined : ImmRefinementKind.Unrefined, refinement, dst);
 
         [MethodImpl(Inline)]
-        internal EmittedEmbeddedImm(ApiHostUri uri, bool generic, ImmRefinementKind source, Type refinement, FilePath dst)
+        public EmittedEmbeddedImm(ApiHostUri uri, bool generic, ImmRefinementKind source, Type refinement, FilePath dst)
         {
             Host = uri;
             Generic = generic;
@@ -46,23 +46,23 @@ namespace Z0.Asm
             Refinement = refinement;
             TargetFile = dst;
         }
-                    
+
         public string Format()
         {
-            var description = 
+            var description =
                 (ImmSource == ImmRefinementKind.Unrefined && Refinement != null)
                 ? $"Emitted {Host}{(Generic ? " generic" : string.Empty)} literal imm specializations to {TargetFile}"
                 : $"Emitted {Host}{(Generic ? " generic" : string.Empty)} imm {Refinement.DisplayName()} refinements to {TargetFile}";
-            return description;            
+            return description;
         }
 
-        public EmittedEmbeddedImm Zero 
+        public EmittedEmbeddedImm Zero
             => Empty;
 
-        public MessageFlair Flair 
+        public MessageFlair Flair
             => MessageFlair.DarkMagenta;
 
-        public static EmittedEmbeddedImm Empty 
+        public static EmittedEmbeddedImm Empty
             => default;
-    }            
+    }
 }

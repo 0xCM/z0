@@ -16,27 +16,27 @@ namespace Z0
         /// <summary>
         /// Creates an identifier for a workflow step
         /// </summary>
-        /// <param name="host">The reifying type</param>
+        /// <param name="control">The controller type</param>
         [MethodImpl(Inline)]
-        public static WfStepId step(Type host)
-            => id(host);
+        public static WfStepId step(Type control)
+            => new WfStepId(control, control);
 
         /// <summary>
         /// Creates an identifier for a workflow step
         /// </summary>
-        /// <param name="host">The reifying type</param>
-        [MethodImpl(Inline)]
+        /// <param name="control">The contoller type</param>
+        /// <param name="effect">The effector type</param>
+        [MethodImpl(Inline), Op]
         public static WfStepId step(Type control, Type effect)
-            => id(control,effect);
+            => new WfStepId(control, effect);
 
         /// <summary>
-        /// Defines a workflow step id
+        /// Defines a workflow step id predicated on a parametric controller type
         /// </summary>
-        /// <param name="caller">The invoking member</param>
         /// <typeparam name="T">The host type</typeparam>
         [MethodImpl(Inline)]
         public static WfStepId<T> step<T>()
             where T : struct, IWfStep<T>
-                => id<T>();
+                => default;
     }
 }

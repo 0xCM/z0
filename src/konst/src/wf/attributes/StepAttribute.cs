@@ -6,31 +6,21 @@ namespace Z0
 {
     using System;
 
+    /// <summary>
+    /// Identifies a workflow step controller
+    /// </summary>
     public class StepAttribute : Attribute
     {
-        public Type Host {get;}
-        
-        public string StepName {get;}            
-        
-        public StepAttribute(bool descriptor = false)
+        public Type Control {get;}
+
+        public StepAttribute(Type control)
         {
-        
+            Control = control;
         }
 
-        public StepAttribute(Type host, string name = null)
+        public StepAttribute(Type control, string name)
         {
-            Host = host;
-            StepName =  name ?? host.Name;
-        }
-        
-        public StepAttribute(object id)
-        {
-        
-        }
-
-        public StepAttribute(object id, bool descriptor)
-        {
-        
+            Control = control;
         }
     }
 }

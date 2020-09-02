@@ -11,6 +11,7 @@ namespace Z0.Events
     using static RenderPatterns;
     using static z;
 
+    [Event]
     public readonly struct AnalyzingExtracts : IWfEvent<AnalyzingExtracts>
     {
         public WfEventId EventId {get;}

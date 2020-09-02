@@ -21,7 +21,7 @@ namespace Z0
 
         public IWfCaptureBroker Broker {get;}
 
-        public IMultiSink Sink {get;}
+        public IWfEventSink Sink {get;}
 
         readonly IAppContext App;
 

@@ -15,7 +15,7 @@ namespace Z0
     {
         public FolderPath ArchiveRoot {get;}
 
-        TermEventSink Sink {get;}
+        IMultiSink Sink {get;}
 
         [MethodImpl(Inline)]
         public EncodedHexArchive(FolderPath root)

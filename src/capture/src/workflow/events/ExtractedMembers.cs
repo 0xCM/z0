@@ -7,34 +7,36 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Events;
-
     using static Konst;
     using static RenderPatterns;
 
+    [Event]
     public readonly struct ExtractedMembers : IWfEvent<ExtractedMembers>
-    {            
+    {
+        public const string EventName = nameof(ExtractedMembers);
+
         public WfEventId EventId {get;}
 
         public readonly ApiHostUri Host;
 
-        public readonly int MemberCount;
+        public readonly Count32 MemberCount;
 
         [MethodImpl(Inline)]
-        public ExtractedMembers(ApiHostUri host, int count, CorrelationToken? ct = null)
+        public ExtractedMembers(ApiHostUri host, Count32 count, CorrelationToken ct)
         {
-            EventId = WfEventId.define(nameof(ExtractedMembers), ct);
+            EventId = (EventName, ct);
             Host = host;
             MemberCount = count;
         }
 
+        [MethodImpl(Inline)]
         public string Format()
             => text.format(PSx3, EventId, MemberCount, Host.Format());
 
         public ExtractedMembers Zero
             => Empty;
-        
-        public static ExtractedMembers Empty 
+
+        public static ExtractedMembers Empty
             => default;
-    }    
+    }
 }

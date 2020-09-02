@@ -16,9 +16,8 @@ namespace Z0
     {
         WfStepId Id {get;}
 
-        Type Control => Id.Control;
-
-        Type Effect => Id.Effect;
+        string Name
+            => Id.Control.Name.Remove("Step");
 
         WfFunc<C> Fx<C>([CallerMemberName] string name = null)
             where C : struct, IWfStep<C>

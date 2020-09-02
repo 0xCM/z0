@@ -21,7 +21,7 @@ namespace Z0.Asm
 
         public CaptureConfig Settings {get;}
 
-        public WfConfig Config {get;}
+        public IWfConfig Config {get;}
 
         public AsmFormatSpec FormatConfig {get;}
 
@@ -35,19 +35,16 @@ namespace Z0.Asm
 
         public IWfCaptureBroker CaptureBroker {get;}
 
-        readonly IWfEventLog Log;
-
         public PartId[] Parts {get;}
 
         [MethodImpl(Inline)]
-        public WfCaptureState(IWfShell wf, IAsmContext asm, WfConfig config, CorrelationToken ct)
+        public WfCaptureState(IWfShell wf, IAsmContext asm, IWfConfig config, CorrelationToken ct)
         {
             Wf = wf;
             Asm = asm;
             App = asm.ContextRoot;
             Ct = ct;
             Config = config;
-            Log = AB.log(Config, ct);
             var srcpath = FilePath.Define(wf.GetType().Assembly.Location).FolderPath;
             var dstpath = wf.AppPaths.AppCaptureRoot;
             var src = new ArchiveConfig(srcpath);
@@ -58,53 +55,24 @@ namespace Z0.Asm
             Formatter = Services.Formatter(FormatConfig);
             RoutineDecoder = Services.RoutineDecoder(FormatConfig);
             CWf = new WfCaptureContext(Asm, Wf, RoutineDecoder, Formatter, Services.AsmWriterFactory, Archives.capture(Config.TargetArchive), Ct);
-            CaptureBroker = AsmWfBuilder.capture(Log, ct);
+            CaptureBroker = AsmWfBuilder.capture(wf);
             Parts = Wf.Config.Parts.Length == 0 ? Asm.ContextRoot.Api.PartIdentities : Wf.Config.Parts;
         }
 
         public void Dispose()
         {
-            Log.Dispose();
+
         }
 
-        public ICaptureContext CaptureContext
-            => CWf.Context;
-
-        public IAppEventSink AppEventSink
-            => CWf.Broker.Sink;
 
         public IWfEventSink WfEventSink
             => Wf.Broker.Sink;
 
-        public void Created(WfStepId actor)
-            => Wf.Created(actor, Ct);
+        public void Error(WfStepId step, Exception e)
+            => Wf.Error(step, e, Ct);
 
-        public void Created(string actor, CorrelationToken ct)
-            => Wf.Created(actor, Ct);
-
-        public void Running(string actor, CorrelationToken ct)
-            => Wf.Running(actor, ct);
-
-        public void Running<T>(WfStepId step, T content)
-            => Wf.Running(step, content);
-
-        public void Ran(WfStepId step)
-            => Wf.Ran(step, Ct);
-
-        public void Ran<T>(WfStepId step, T content)
-            => Wf.Ran(step, content);
-
-        public void Finished(WfStepId actor)
-            => Wf.Finished(actor, Ct);
-
-        public void Finished(string actor, CorrelationToken ct)
-            => Wf.Finished(actor, Ct);
-
-        public void Error(string actor, Exception e, CorrelationToken ct)
-            => Wf.Error(actor, e, Ct);
-
-        public void Error(string actor, string message, CorrelationToken ct)
-            => Wf.Error(actor, message, ct);
+        public void Error(WfStepId step, string message)
+            => Wf.Error(step, message);
 
         public WfEventId Raise<E>(in E @event)
             where E : IWfEvent

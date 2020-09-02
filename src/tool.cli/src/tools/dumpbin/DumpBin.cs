@@ -10,33 +10,33 @@ namespace Z0.Tools
     using static Konst;
 
     public partial struct DumpBin : ITool<DumpBin,DumpBinFlag>
-    {   
+    {
         [MethodImpl(Inline), Op]
-        public static DumpBin create(IWfContext wf, DumpBinFlag flags)
+        public static DumpBin create(IWfShell wf, DumpBinFlag flags)
             => new DumpBin(wf, wf.ToolOuputDir(Name), wf.ToolProcessDir(Name), flags);
 
-        public const string Name = "dumpbin";                
+        public const string Name = "dumpbin";
 
         public static ToolId Id => Name;
-        
-        public IWfContext Wf;
+
+        public IWfShell Wf;
 
         public ToolId ToolId {get;}
 
         public string ToolName {get;}
-        
+
         public FolderPath Source {get;}
-        
+
         public IToolArchive<DumpBin> Archive {get;}
 
         public IExtensionMap<DumpBinFlag> Map {get;}
 
         public ToolFlags<DumpBinFlag> AvailableFlags {get;}
-        
+
         public DumpBinFlag SelectedFlags {get;}
-        
+
         [MethodImpl(Inline)]
-        public DumpBin(IWfContext wf, FolderPath outdir, FolderPath processed, DumpBinFlag selected)
+        public DumpBin(IWfShell wf, FolderPath outdir, FolderPath processed, DumpBinFlag selected)
         {
             Wf = wf;
             SelectedFlags = selected;
@@ -47,7 +47,7 @@ namespace Z0.Tools
             Map = new ExtensionMap<DumpBinFlag,ExtMap>(0);
             Archive = new ToolArchive<DumpBin>(ToolId, outdir, processed);
             Wf.Created(Name);
-        } 
+        }
 
         public void Process()
         {
@@ -71,7 +71,7 @@ namespace Z0.Tools
                 //     var message = text.format(FormatLiterals.PSx2, processor.LineCount, processor.IxCount);
                 //     Wf.Status(ActorName, message, Ct);
                 // }
-            //}                           
+            //}
 
         }
         public void Dispose()

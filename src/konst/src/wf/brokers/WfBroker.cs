@@ -20,13 +20,13 @@ namespace Z0
 
         object locker;
 
-        CorrelationToken Ct;
+        public CorrelationToken Ct {get;}
 
         [MethodImpl(Inline)]
-        public WfBroker(IWfEventLog log, CorrelationToken ct)
+        public WfBroker(IWfEventSink sink, CorrelationToken ct)
         {
             Ct = ct;
-            Sink = AB.termsink(log, Ct);
+            Sink = sink;
             Subscriptions = new Dictionary<Type,ISink>();
             Receivers = new Dictionary<ulong, Receiver<IAppEvent>>();
             locker = new object();

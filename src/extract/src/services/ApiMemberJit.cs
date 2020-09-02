@@ -32,7 +32,7 @@ namespace Z0
             return all.OrderBy(x => x.Address);
         }
 
-        public static ApiMembers jit(IApiHost[] src, IAppEventSink sink)
+        public static ApiMembers jit(IApiHost[] src, IWfEventSink sink)
         {
             var datatypes = jit(src.Where(h => h is ApiDataType).Cast<ApiDataType>());
             var direct = JitDirectMembers(src, sink);
@@ -68,10 +68,10 @@ namespace Z0
             return dst.ToArray();
         }
 
-        static ApiMember[] JitGenericMembers(IApiHost[] src, IAppEventSink sink)
+        static ApiMember[] JitGenericMembers(IApiHost[] src, IWfEventSink sink)
             => members(JitGeneric(src, sink));
 
-        static HostedMethod[] JitDirect(IApiHost[] src, IAppEventSink sink)
+        static HostedMethod[] JitDirect(IApiHost[] src, IWfEventSink sink)
         {
             var methods = DirectMethods(src, sink);
             var located = methods.Select(m => m.WithLocation(Root.address(Jit(m.Method))));
@@ -79,10 +79,10 @@ namespace Z0
             return located;
         }
 
-        static ApiMember[] JitDirectMembers(IApiHost[] src, IAppEventSink sink)
+        static ApiMember[] JitDirectMembers(IApiHost[] src, IWfEventSink sink)
             => members(JitDirect(src, sink));
 
-        static HostedMethod[] JitGeneric(IApiHost[] src, IAppEventSink sink)
+        static HostedMethod[] JitGeneric(IApiHost[] src, IWfEventSink sink)
         {
             var methods = GenericMethods(src, sink);
             var closed = methods.SelectMany(m => (from t in ClosureQuery.numeric(m.Method) select new HostedMethod(m.Host, m.Method.MakeGenericMethod(t))));
@@ -132,7 +132,7 @@ namespace Z0
         static HostedMethod[] GenericMethods(IApiHost host)
             => host.HostType.DeclaredMethods().OpenGeneric(1).Where(IsGenericApiMember).Select(m => new HostedMethod(host.Uri, m));
 
-        static HostedMethod[] DirectMethods(IApiHost[] src, IAppEventSink broker)
+        static HostedMethod[] DirectMethods(IApiHost[] src, IWfEventSink broker)
         {
             var dst = z.list<HostedMethod>();
             foreach(var host in src)
@@ -147,7 +147,7 @@ namespace Z0
             return dst.ToArray();
         }
 
-        static HostedMethod[] GenericMethods(IApiHost[] src, IAppEventSink broker)
+        static HostedMethod[] GenericMethods(IApiHost[] src, IWfEventSink broker)
         {
             var dst = z.list<HostedMethod>();
             foreach(var host in src)

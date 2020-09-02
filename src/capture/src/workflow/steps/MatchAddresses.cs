@@ -13,7 +13,9 @@ namespace Z0
 
     public ref struct MatchAddresses
     {
-        readonly WfCaptureState Wf;
+        readonly IWfCaptureState State;
+
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
@@ -21,9 +23,10 @@ namespace Z0
 
         readonly AsmRoutine[] Decoded;
 
-        public MatchAddresses(WfCaptureState wf, X86MemberExtract[] extracted, AsmRoutine[] decoded, CorrelationToken ct)
+        public MatchAddresses(IWfCaptureState state, X86MemberExtract[] extracted, AsmRoutine[] decoded, CorrelationToken ct)
         {
-            Wf = wf;
+            State = state;
+            Wf =state.Wf;
             Extracted = extracted;
             Decoded = decoded;
             Ct = ct;
@@ -31,25 +34,25 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running(StepName, Ct);
+            Wf.Running(StepId, Ct);
             try
             {
                 var a = Extracted.Select(x => x.Address).ToHashSet();
                 if(a.Count != Extracted.Length)
-                    Wf.Error(StepName, $"count(Extracted) = {Extracted.Length} != {a.Count} = count(set(Extracted))", Ct);
+                    Wf.Error(StepId, $"count(Extracted) = {Extracted.Length} != {a.Count} = count(set(Extracted))");
 
                 var b = Decoded.Select(f => f.BaseAddress).ToHashSet();
                 if(b.Count != Decoded.Length)
-                    Wf.Error(StepName, $"count(Decoded) = {Decoded.Length} != {b.Count} = count(set(Decoded))", Ct);
+                    Wf.Error(StepId, $"count(Decoded) = {Decoded.Length} != {b.Count} = count(set(Decoded))");
 
                 b.IntersectWith(a);
                 if(b.Count != Decoded.Length)
-                    Wf.Error(StepName, $"count(Decoded) = {Decoded.Length} != {b.Count} = count(intersect(Decoded,Extracted))", Ct);
+                    Wf.Error(StepId, $"count(Decoded) = {Decoded.Length} != {b.Count} = count(intersect(Decoded,Extracted))");
 
             }
             catch(Exception e)
             {
-                Wf.Error(StepName, e, Ct);
+                Wf.Error(StepId, e);
             }
 
             Wf.Ran(StepId);

@@ -13,8 +13,6 @@ namespace Z0
 
     partial struct AsmWfBuilder
     {
-        [MethodImpl(Inline), Op]
-        public static WfImmBroker imm(IWfEventLog log, CorrelationToken ct)
-            => new WfImmBroker(log, ct);
+
     }
 }

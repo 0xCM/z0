@@ -159,22 +159,22 @@ namespace Z0
             Status(format(info));
         }
 
-        void ListCaptureFiles()
-        {
-            var paths = Shells.paths();
-            var files = AppFilePaths.create(paths, PartId.Control);
+        // void ListCaptureFiles()
+        // {
+        //     var paths = Shells.paths();
+        //     var files = AppFilePaths.create(paths, PartId.Control);
 
-            Status(paths.Logs);
-            Status(paths.Archives);
-            Status(paths.BuildPub);
-            Status(paths.BuildStage);
-            Status(files.CaptureRoot);
+        //     Status(paths.Logs);
+        //     Status(paths.Archives);
+        //     Status(paths.BuildPub);
+        //     Status(paths.BuildStage);
+        //     Status(files.CaptureRoot);
 
-            foreach(var file in FS.list((FS.FolderPath)files.AsmDir))
-            {
-                Status(file);
-            }
-        }
+        //     foreach(var file in FS.list((FS.FolderPath)files.AsmDir))
+        //     {
+        //         Status(file);
+        //     }
+        // }
 
         unsafe static void Emit(MemoryRange src, FilePath dst)
         {

@@ -14,19 +14,21 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
     using WfEvB = WfEvents;
 
-    public interface IWfShell : IShellContext<WfConfig>, IDisposable
+    public interface IWfShell : IApiContext, IDisposable
     {
         IShellContext Shell {get;}
 
-        IMultiSink WfSink {get;}
+        IWfEventSink WfSink {get;}
 
         FolderPath IndexRoot {get;}
 
         FolderPath ResourceRoot {get;}
 
-        CorrelationToken Ct {get;}
+        ModuleArchive Modules {get;}
 
         IWfBroker Broker {get;}
+
+        WfConfig Config {get;}
 
         FolderPath AppDataRoot
             => Shell.AppPaths.AppDataRoot;
@@ -47,7 +49,11 @@ namespace Z0
             => AsmTables + FolderName.Define("asm");
 
         WfEventId Raise<E>(in E e)
-            where E : IWfEvent;
+            where E : IWfEvent
+        {
+            WfSink.Deposit(e);
+            return e.EventId;
+        }
 
         void Error(Exception e, CorrelationToken? ct = null, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
             => Raise(WfEvB.error(e, ct ?? Ct, caller, file, line));
@@ -68,7 +74,17 @@ namespace Z0
             => Raise(WfEvents.newWorker(Ct, actor));
 
         void Created(WfStepId id)
-            => Raise(WfEvB.created(id, Ct));
+        {
+            try
+            {
+                var e = WfEvB.created(id, Ct);
+                Raise(e);
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+            }
+        }
 
         void Warn<T>(WfStepId id, T content)
             => Raise(WfEvB.warn(id, content, Ct));
@@ -77,11 +93,11 @@ namespace Z0
             => Raise(WfEvB.created(id, content, Ct));
 
         void Running(WfStepId step, [File] string actor = null)
-            => Raise(WfEvB.running(Path.GetFileNameWithoutExtension(actor), step, Ct));
+            => Raise(WfEvB.running(callerName(actor), step, Ct));
 
         void Running<T>(T step, [File] string caller = null)
             where T : struct, IWfStep<T>
-                => Raise(WfEvB.running(step, Path.GetFileNameWithoutExtension(caller), Ct));
+                => Raise(WfEvB.running(step, callerName(caller), Ct));
 
         void Running<S,T>(S step, T content)
             where S : struct, IWfStep<S>
@@ -93,7 +109,7 @@ namespace Z0
 
         void Ran<T>(T step, [File] string caller = null)
             where T : struct, IWfStep<T>
-                => Raise(WfEvB.ran(step, Path.GetFileNameWithoutExtension(caller), Ct));
+                => Raise(WfEvB.ran(step, callerName(caller), Ct));
 
         void Running<S,T>(WfStepId step, WfDataFlow<S,T> df)
             => Raise(WfEvB.running(step, df, Ct));
@@ -118,9 +134,6 @@ namespace Z0
             where R : ITextual
                 => Raise(new WfStatus<C,R>(f, result, Ct));
 
-        void Created(in WfActor actor, CorrelationToken? ct = null)
-            => Raise(WfEvB.created(ct ?? Ct, actor));
-
         void Created(in WfStepId step)
             => Raise(WfEvB.created(step, Ct));
 
@@ -136,24 +149,8 @@ namespace Z0
         void Emitted(WfStepId step, TableId table, uint count, FS.FilePath dst)
             => Raise(new WfEmitted(step, table, count, dst, Ct));
 
-        void Emitting(string worker, string dataset, FilePath dst, CorrelationToken ct)
-            => Raise(new WfEmitting(WfStepId.Empty, Table.identify(dataset), dst, ct));
-
-        void Emitted(string actor, string dataset, uint count, FilePath dst, CorrelationToken ct)
-            => Raise(new WfEmitted(WfStepId.Empty, Table.identify(dataset), count,  dst, ct));
-
         void Running<T>(WfStepId step, T content)
             => Raise(WfEvB.running(step, content, Ct));
-
-        void Running(string actor)
-        {
-            Raise(new WfStepRunning(actor, WfStepId.Empty, Ct));
-        }
-
-        void Running(in WfActor actor, WfStepId step, CorrelationToken ct)
-        {
-            Raise(new WfStepRunning(actor, step, ct));
-        }
 
         void Finished(string actor, CorrelationToken ct)
             => Raise(new WfFinished(actor, ct));
@@ -165,26 +162,16 @@ namespace Z0
             => Raise(new WfFinished(step.Format(), Ct));
 
         void Initializing(WfStepId step, CorrelationToken ct)
-        {
-            Raise(new WfInitializing(step, ct));
-        }
+            => Raise(new WfInitializing(step, Ct));
 
         void Initialized(WfStepId step, CorrelationToken ct)
-            => Raise(new WfInitialized(step, ct));
+            => Raise(new WfInitialized(step, Ct));
 
         void Created(string actor, CorrelationToken ct)
             => Raise(WfEvB.newWorker(ct, actor));
 
         void Created(WfStepId step, CorrelationToken ct)
-            => Raise(new WfStepCreated(step, ct));
-
-        void Running(string actor, string message, CorrelationToken ct)
-            => Raise(new WfStepRunning<string>(WfStepId.Empty, message, ct));
-
-        void Running(string actor, CorrelationToken ct)
-        {
-            Raise(new WfStepRunning(actor, WfStepId.Empty, ct));
-        }
+            => Raise(new WfStepCreated(step, Ct));
 
         void Status(string worker, string msg, CorrelationToken ct)
         {
@@ -192,17 +179,24 @@ namespace Z0
         }
 
         void Finished(string actor)
-        {
-            Raise(new WfFinished(actor, Ct));
-        }
+            => Raise(new WfFinished(actor, Ct));
 
-        void Finished(in WfActor actor, CorrelationToken ct)
-            => Raise(new WfActorFinished(actor, ct));
+        void Error(WfStepId step, Exception e)
+            => Raise(WfEvents.error(step, e, Ct));
 
-        void Ran(in WfActor actor, WfStepId step, CorrelationToken ct)
-            => Raise(new WfStepRan(actor, step, ct));
+        void Processing<T>(T kind, FilePath src, [File] string actor = null, [Line] int? line = null)
+            => Raise(WfEvents.processing(callerName(actor), kind, src, Ct));
 
-        void Ran(string actor)
-            => Raise(new WfStepRan(actor, Ct));
+        static string callerName(string src)
+            => Path.GetFileNameWithoutExtension(src);
+
+        void Processed<T>(T kind, FilePath src, uint size, [File] string actor = null, [Line] int? line = null)
+            => Raise(WfEvents.processed(callerName(actor), kind, src, size, Ct));
+
+        void RunningT<T>(string actor, T output, CorrelationToken? ct = null)
+            => Raise(WfEvents.running(WfStepId.Empty, output, Ct));
+
+        void RanT<T>(string actor, T output, CorrelationToken? ct = null)
+            => Raise(WfEvents.ran(WfStepId.Empty, output, Ct));
     }
 }

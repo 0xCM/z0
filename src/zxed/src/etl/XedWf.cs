@@ -26,7 +26,7 @@ namespace Z0
     {
         readonly XedEtlConfig Config;
 
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly XedSourceArchive Src;
 
@@ -36,7 +36,7 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        public XedWf(IWfContext context, XedEtlConfig config)
+        public XedWf(IWfShell context, XedEtlConfig config)
         {
             Wf = context;
             Config = config;

@@ -18,7 +18,7 @@ namespace Z0
     public interface INamed<F> : INamed
         where F : struct, INamed<F>
     {
-        string INamed.Name 
+        string INamed.Name
             => typeof(F).Name;
     }
 }

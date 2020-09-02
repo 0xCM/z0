@@ -7,83 +7,84 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.IO;
+    using System.Reflection;
 
     using static Konst;
     using static z;
 
-    using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
-    using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-
-    public struct WfContext : IWfContext
+    public struct WfContext : IWfShell
     {
-        public IAppContext ContextRoot {get;}
-
-        public CorrelationToken Ct {get;}
+        public IShellContext Shell {get;}
 
         public WfConfig Config {get;}
 
-        public IMultiSink WfSink {get;}
+        public ModuleArchive Modules {get;}
+
+        public IWfEventSink WfSink {get;}
 
         public IWfBroker Broker {get;}
 
-        readonly WfActor Actor;
+        public IShellPaths Paths
+            => Shell.AppPaths;
 
-        readonly IWfEventLog Log;
+        public ISettings Settings
+            => SettingValues.Load(Paths.AppConfigPath);
 
-        [MethodImpl(Inline)]
-        public WfContext(IAppContext root, CorrelationToken ct, WfConfig config, WfTermEventSink sink, [Caller] string caller = null)
-        {
-            Ct = ct;
-            Config = config;
-            ContextRoot = root;
-            Log = AB.termlog(config);
-            Broker = new WfBroker(Log, Ct);
-            WfSink = sink;
-            Actor = Flow.actor(caller);
-            WfSink.Deposit(new WfContextLoaded(Actor, Ct));
-        }
+        public FS.FolderPath CaptureRoot
+            => FS.dir((AppPaths.LogRoot + FolderName.Define("capture/artifacts")).Name);
 
-        public IShellContext Shell
-            => this;
+        public CorrelationToken Ct
+             => Shell.Ct;
+
+        public string[] Args
+            => Shell.Args;
+
+        public FolderPath AppDataRoot
+            => Shell.AppPaths.AppDataRoot;
 
         public FolderPath IndexRoot
-            => FolderPath.Define(Config.IndexRoot.Name);
+            => FolderPath.Define(Config.IndexDir.Name);
 
         public FolderPath ResourceRoot
-             => FolderPath.Define(Config.ResRoot.Name);
+             => FolderPath.Define(Config.ResDir.Name);
+
+        public IShellPaths AppPaths
+            => Shell.AppPaths;
+
+        public IApiSet Api
+             => Modules.Api;
+
+        public string ShellName
+            => Control.GetSimpleName();
+        string ITextual.Format()
+            => ShellName;
+
+        public IPart[] Parts
+            => Api.Parts;
+
+        public PartId[] PartIdList
+            => Api.Parts.Select(x => x.Id);
+
+        public Assembly[] Components
+            => Api.Components;
+
+        public Assembly Control
+            => Assembly.GetEntryAssembly();
+
+        [MethodImpl(Inline)]
+        public WfContext(WfConfig config, IWfEventSink sink)
+        {
+            Shell = z.insist(config.Shell);
+            WfSink = z.insist(sink);
+            Config = config;
+            Modules = config.Modules;
+            Broker = new WfBroker(sink, Shell.Ct);
+        }
 
 
         public void Dispose()
         {
-            WfSink.Deposit(new WfContextUnloaded(Actor, Ct));
             Broker.Dispose();
-            Log.Dispose();
         }
-
-        public IShellPaths AppPaths
-        {
-            [MethodImpl(Inline)]
-            get => ContextRoot.AppPaths;
-        }
-
-        public WfEventId Raise<E>(in E @event)
-            where E : IWfEvent
-        {
-            WfSink.Deposit(@event);
-            return @event.EventId;
-        }
-
-        public void Processing<T>(T kind, FilePath src, [File] string actor = null, [Line] int? line = null)
-            => Flow.processing(this, Path.GetFileNameWithoutExtension(actor), kind, src, Ct);
-
-        public void Processed<T>(T kind, FilePath src, uint size, [File] string actor = null, [Line] int? line = null)
-            => Flow.processed(this,ToActorName(actor), kind, src, size, Ct);
-
-        public void Ran(string actor, CorrelationToken ct)
-            => Flow.ran(this, actor, "Finished", ct);
-
-        static string ToActorName(string src)
-            => Path.GetFileNameWithoutExtension(src);
-    }
+   }
 }

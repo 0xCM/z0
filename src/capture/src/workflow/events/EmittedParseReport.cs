@@ -11,8 +11,9 @@ namespace Z0.Asm
     using static z;
     using static RenderPatterns;
 
+    [Event]
     public readonly struct EmittedParseReport : IWfEvent<EmittedParseReport>
-    {        
+    {
         public const string EventName = nameof(EmittedParseReport);
 
         public WfEventId EventId {get;}
@@ -21,18 +22,18 @@ namespace Z0.Asm
 
         public readonly MemberParseReport Report;
 
-        public readonly FilePath Target;        
-        
+        public readonly FilePath Target;
+
         [MethodImpl(Inline)]
         public EmittedParseReport(string actor, MemberParseReport report, FilePath dst, CorrelationToken ct)
         {
-            EventId = evid(EventName, ct);        
+            EventId = evid(EventName, ct);
             ActorName = actor;
             Report = report;
-            Target = dst;        
+            Target = dst;
         }
 
         public string Format()
             => text.format(PSx4, EventId, ActorName, Report.ApiHost, Report.RecordCount);
-    }        
+    }
 }

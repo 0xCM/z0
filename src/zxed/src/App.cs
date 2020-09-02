@@ -34,8 +34,8 @@ namespace Z0.Xed
         public override void RunShell(params string[] args)
         {
             var config = WfBuilder.configure(Context, args);
-            using var log = AB.termlog(config);
-            using var wf = WfBuilder.context(Context, config, log, Ct);
+            using var log = AB.log(config);
+            using var wf = WfBuilder.context(config, log);
             using var step = new XedWf(wf, new XedEtlConfig(Context, config.Settings));
             step.Run();
         }

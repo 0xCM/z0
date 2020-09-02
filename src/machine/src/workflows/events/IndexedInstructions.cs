@@ -13,7 +13,7 @@ namespace Z0
     [Event]
     public readonly struct IndexedInstructions : IWfEvent<IndexedInstructions>
     {
-        public const string EventName = nameof(IndexedInstructions);
+        public static string EventName => nameof(IndexedInstructions);
 
         public WfEventId EventId {get;}
 
@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public IndexedInstructions(LocatedAsmFxList src, CorrelationToken ct)
         {
-            EventId = AB.id(EventName, ct);
+            EventId = (EventName, ct);
             Index = src;
         }
 

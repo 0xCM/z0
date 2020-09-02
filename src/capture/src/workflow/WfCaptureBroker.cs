@@ -11,8 +11,8 @@ namespace Z0.Asm
 
     public sealed class WfCaptureBroker : WfBroker, IWfCaptureBroker
     {
-        public WfCaptureBroker(IWfEventLog log, CorrelationToken ct)
-            : base(log, ct)
+        public WfCaptureBroker(IWfShell wf)
+            : base(wf.WfSink, wf.Ct)
         {
 
         }

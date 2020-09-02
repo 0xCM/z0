@@ -52,12 +52,12 @@ namespace Z0
             BufferSize = 32;
             Buffer = sys.alloc<byte>(BufferSize);
             SourcePath = FilePath.Define(Part.Owner.Location);
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId);
         }
 
         public void Run()
         {
-            Wf.Emitting(StepName, DatasetName, TargetPath, Ct);
+            Wf.Emitting(StepId, DatasetName, TargetPath);
 
             using var stream = SourcePath.Reader();
             using var reader = stream.BinaryReader();
@@ -76,13 +76,13 @@ namespace Z0
                 k = Read(reader);
             }
 
-            Wf.Emitted(StepName, DatasetName, LineCount, TargetPath, Ct);
+            Wf.Emitted(StepId, DatasetName, LineCount, TargetPath);
 
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId);
         }
 
         public MemoryAddress OffsetAddress

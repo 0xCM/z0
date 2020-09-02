@@ -15,11 +15,11 @@ namespace Z0
     {
         readonly CorrelationToken Ct;
 
-        readonly IWfContext Wf;
+        readonly IWfShell Wf;
 
         readonly PartFileProvider Files;
 
-        public ParseAsmFiles(IWfContext wf, PartFileProvider files, CorrelationToken ct)
+        public ParseAsmFiles(IWfShell wf, PartFileProvider files, CorrelationToken ct)
         {
             Ct = ct;
             Wf = wf;

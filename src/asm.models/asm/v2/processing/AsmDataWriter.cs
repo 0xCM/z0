@@ -3,24 +3,24 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    
+
     using static Konst;
 
     public readonly struct AsmDataWriter : IWfActor
     {
-        public IWfContext Wf {get;}
+        public IWfShell Wf {get;}
 
         readonly FilePath Target;
 
         readonly bool Append;
 
-        public AsmDataWriter(IWfContext wf, FilePath dst, bool append)
+        public AsmDataWriter(IWfShell wf, FilePath dst, bool append)
         {
-            Wf = wf;            
+            Wf = wf;
             Target = dst;
             Append = append;
         }
@@ -30,7 +30,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source functions</param>
         /// <param name="append">Whether to append to an existing file or else overwrite</param>
-        public void Write(AsmRoutine[] src)    
+        public void Write(AsmRoutine[] src)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace Z0.Asm
                     ref readonly var f = ref src[i];
                     if(f.IsNonEmpty)
                     {
-                        
+
                     }
                 }
             }

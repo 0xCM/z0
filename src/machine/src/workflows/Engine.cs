@@ -15,14 +15,23 @@ namespace Z0
 
     public class Engine  : IDisposable
     {
+        // public static void run(IWfContext wf)
+        // {
+        //     var asm = new AsmContext(wf);
+        //     var state = new WfCaptureState(wf, asm, wf.Config, wf.Ct);
+        //     wf.Running(StepId, delimit(wf.Parts));
+        //     using var machine = new Engine(state, wf.Ct);
+        //     machine.Run();
+        // }
+
         public static void run(IAppContext context, params string[] args)
         {
             try
             {
                 var ct = correlate(ShellId);
                 var config = WfBuilder.configure(context, args);
-                using var log = AB.termlog(config);
-                using var wf = WfBuilder.context(context, config, log, ct);
+                using var log = AB.log(config);
+                using var wf = WfBuilder.context(config, log);
 
                 var state = new WfCaptureState(wf, AsmWfBuilder.asm(context), wf.Config, wf.Ct);
                 wf.Running(StepId, delimit(config.Parts));

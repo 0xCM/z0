@@ -23,28 +23,57 @@ namespace Z0
             return context;
         }
 
-        [Op]
-        public static IWfContext context(IAppContext root, WfConfig config, IWfEventLog log, CorrelationToken ct)
-            => new WfContext(root, ct, config, termsink(log, ct));
+        public static IAppContext app(IWfShell wf)
+            => ContextFactory.app(wf.Modules, ShellPaths.Default);
 
         [Op]
-        public static WfConfig configure(IAppContext context, params string[] args)
+        public static IWfShell context(WfConfig config, IWfEventSink sink)
+            => new WfContext(config, sink);
+
+        [Op]
+        public static WfConfig configure(IAppContext app, params string[] args)
         {
-            var root = Assembly.GetEntryAssembly();
-            var id = root.Id();
+            var control = Assembly.GetEntryAssembly();
+            var id = control.Id();
             var ct = correlate(id);
-            var parts = AB.parts(args, context.Api.PartIdentities);
-            var src = ModuleArchives.from(FS.path(root.Location).FolderPath);
-            var settings = AB.settings(context, ct);
-            var captureOut = FS.dir(context.AppPaths.LogRoot.Name) + FS.folder("capture/artifacts");
-            var captureLog = FS.dir(context.AppPaths.LogRoot.Name) + FS.folder("capture/logs");
+            var parts = AB.parts(args, app.Api.PartIdentities);
+            var src = ModuleArchives.from(FS.path(control.Location).FolderPath);
+            var settings = AB.settings(app);
+            var captureOut = FS.dir(app.AppPaths.LogRoot.Name) + FS.folder("capture/artifacts");
+            var captureLog = FS.dir(app.AppPaths.LogRoot.Name) + FS.folder("capture/logs");
             var dstArchive = new ArchiveConfig(FolderPath.Define(captureOut.Name));
-            var config  = new WfConfig(context, args, src, dstArchive, parts,
-                context.AppPaths.ResourceRoot,
-                context.AppPaths.AppDataRoot,
-                context.AppPaths.AppLogRoot,
+            var config  = new WfConfig(app, args, src, dstArchive, parts,
+                app.AppPaths.ResourceRoot,
+                app.AppPaths.AppDataRoot,
+                app.AppPaths.AppLogRoot,
                 settings);
             return config;
+        }
+
+        public static IWfShell context(Assembly control, string[] args, out IAppContext app)
+        {
+            var id =  control.Id();
+            var ct = correlate(id);
+            var modules = ModuleArchives.from(control);
+            var api = modules.Api;
+            var shell = ShellContext.create(control, args, modules);
+            var config = new WfConfig(shell, args, modules);
+
+            app = ContextFactory.app(modules, config.Paths);
+
+            return new WfContext(config, WfTermEventSink.create(log(config), ct));
+        }
+
+        public static IWfShell context(Assembly control)
+        {
+            var args = Environment.GetCommandLineArgs();
+            var id =  control.Id();
+            var ct = correlate(id);
+            var modules = ModuleArchives.from(control);
+            var api = modules.Api;
+            var shell = ShellContext.create(control, args, modules);
+            var config = new WfConfig(shell, args, modules);
+            return new WfContext(config, WfTermEventSink.create(log(config), ct));
         }
     }
 }

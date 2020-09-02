@@ -29,13 +29,14 @@ namespace Z0
             Ct = ct;
             TargetPath =  Wf.IndexRoot + FileName.define("catalog", FileExtensions.Csv);
             EmissionCount = 0;
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId);
         }
 
         public void Run()
         {
+            Wf.Emitting(StepId, DatasetName, TargetPath);
+
             var provider = TableProvider.create();
-            Wf.Emitting(StepName, DatasetName, TargetPath, Ct);
             var entries = z.span(provider.Provided.Array());
             EmissionCount = (uint)entries.Length;
 
@@ -51,12 +52,12 @@ namespace Z0
             using var dst = TargetPath.Writer();
             dst.Write(f.Format());
 
-            Wf.Emitted(StepName, DatasetName, EmissionCount, TargetPath, Ct);
+            Wf.Emitted(StepId, DatasetName, EmissionCount, TargetPath);
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId);
         }
     }
 }

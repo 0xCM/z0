@@ -9,8 +9,9 @@ namespace Z0
 
     using static Konst;
 
+    [Event]
     public readonly struct CapturedPart : IWfEvent<CapturedPart>
-    {            
+    {
         const string Pattern = "";
 
         public WfEventId EventId  => WfEventId.define("Placeholder");
@@ -23,7 +24,7 @@ namespace Z0
             Part = part;
         }
 
-        public string Format() 
+        public string Format()
             => $"{Part.Format()} capture completed";
-    }    
+    }
 }

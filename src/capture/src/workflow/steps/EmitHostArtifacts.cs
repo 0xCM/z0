@@ -15,7 +15,7 @@ namespace Z0
 
     public ref struct EmitHostArtifacts
     {
-        public WfCaptureState State {get;}
+        public IWfCaptureState State {get;}
 
         readonly CorrelationToken Ct;
 
@@ -41,7 +41,7 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        public EmitHostArtifacts(WfCaptureState state, ApiHostUri src, X86MemberExtract[] extracts, IPartCapturePaths dst, CorrelationToken ct)
+        public EmitHostArtifacts(IWfCaptureState state, ApiHostUri src, X86MemberExtract[] extracts, IPartCapturePaths dst, CorrelationToken ct)
         {
             State = state;
             Wf = state.Wf;
@@ -59,6 +59,11 @@ namespace Z0
             Wf.Created(StepId);
         }
 
+        public void Dispose()
+        {
+            Wf.Finished(StepId);
+        }
+
         public void Run()
         {
             Wf.Running(StepId);
@@ -74,25 +79,26 @@ namespace Z0
             }
             catch(Exception e)
             {
-                State.Error(StepName, e, Ct);
+                Wf.Error(StepId, e);
             }
 
             Wf.Ran(StepId);
-
-        }
-
-        public void Dispose()
-        {
-            State.Finished(StepName, Ct);
         }
 
         void SaveExtracts()
         {
-            if(Extracts.Length == 0)
-                return;
+            try
+            {
+                if(Extracts.Length == 0)
+                    return;
 
-            using var step = new EmitExtractReport(State, Source, Extracts, ExtractPath, Ct);
-            step.Run();
+                using var step = new EmitExtractReport(State, Source, Extracts, ExtractPath, Ct);
+                step.Run();
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e);
+            }
         }
 
         void Parse()
@@ -105,14 +111,14 @@ namespace Z0
             if(result.Failed.Length != 0)
             {
                 for(var i = 0; i<result.Failed.Length; i++)
-                    State.Raise(ExtractParseFailed.create(result.Failed[i]));
+                    Wf.Raise(ExtractParseFailed.create(result.Failed[i]));
 
                 var report = ParseFailureReport.Create(Source, result.Failed);
                 report.Save(Target.UnparsedPath(Source));
             }
 
             Parsed = result.Parsed;
-            State.Raise(new ExtractsParsed(StepName, Source, Parsed, Ct));
+            Wf.Raise(new ExtractsParsed(StepName, Source, Parsed, Ct));
         }
 
         void SaveParseReport()
@@ -129,7 +135,7 @@ namespace Z0
                 return;
 
             var hex = IdentifiedCodeWriter.save(Source, Parsed, HexPath);
-            State.Raise(new HexCodeSaved(StepName, Source, hex, ParsedPath, Ct));
+            Wf.Raise(new HexCodeSaved(StepName, Source, hex, ParsedPath, Ct));
         }
 
         void SaveCil()
@@ -147,7 +153,7 @@ namespace Z0
                 dst.WriteLine(cil.Format());
 
             }
-            State.Raise(new CilCodeSaved(StepId, Source, (uint)src.Length, ParsedPath, Ct));
+            Wf.Raise(new CilCodeSaved(StepId, Source, (uint)src.Length, ParsedPath, Ct));
         }
 
         void Decode()
@@ -155,7 +161,7 @@ namespace Z0
             if(Parsed.Length == 0)
                 return;
 
-            using var step = new DecodeParsed(State, State.CWf.Context, Ct);
+            using var step = new DecodeParsed(State.Wf, State.CWf.Context, Ct);
             var decoded = step.Run(Source, Parsed);
             if(decoded.Length != 0)
             {

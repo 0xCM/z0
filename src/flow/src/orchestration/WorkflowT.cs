@@ -9,6 +9,7 @@ namespace Z0
     using System.IO;
 
     using static Konst;
+    using static WfDelegates;
 
     public readonly struct Workflow<T> : IDisposable, IDataSink
     {

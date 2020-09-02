@@ -10,12 +10,11 @@ namespace Z0.Events
     using static Konst;
     using static RenderPatterns;
 
-    using E = AnalyzingExtractReport;
-
-    public readonly struct AnalyzingExtractReport : IWfEvent<E>
-    {                  
+    [Event]
+    public readonly struct AnalyzingExtractReport : IWfEvent<AnalyzingExtractReport>
+    {
         public const string EventName = nameof(AnalyzingExtractReport);
-        
+
         public WfEventId EventId {get;}
 
         public string ActorName {get;}
@@ -32,8 +31,8 @@ namespace Z0.Events
 
         public object Description
             => new {ReportPath};
-        
-        public string Format() 
+
+        public string Format()
             => text.format(PSx3, EventId, ActorName, Description);
     }
 }

@@ -11,14 +11,15 @@ namespace Z0
     using static RenderPatterns;
     using static Render;
 
+    [Event]
     public readonly struct CapturingParts : IWfEvent<CapturingParts>
-    {        
+    {
         public const string EventName = nameof(CapturingParts);
 
         public WfEventId EventId {get;}
 
         public string ActorName {get;}
-        
+
         public readonly PartId[] Parts;
 
         public MessageFlair Flair {get;}
@@ -29,10 +30,10 @@ namespace Z0
             EventId = WfEventId.define(EventName, ct);
             ActorName = actor;
             Flair = flair;
-            Parts = parts;            
+            Parts = parts;
         }
-        
+
         public string Format()
             => text.format(PSx3, EventId, ActorName, Parts.Format());
-    }        
+    }
 }

@@ -14,7 +14,7 @@ namespace Z0
     partial struct AsmWfBuilder
     {
         [MethodImpl(Inline), Op]
-        public static WfCaptureState state(IWfContext wf, IAsmContext asm, WfConfig config)
+        public static WfCaptureState state(IWfShell wf, IAsmContext asm, WfConfig config)
             => new WfCaptureState(wf, asm, config, wf.Ct);
     }
 }

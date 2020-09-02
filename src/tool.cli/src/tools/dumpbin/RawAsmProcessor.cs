@@ -20,7 +20,7 @@ namespace Z0.Tools
         {
             public const string ActorName = nameof(RawAsmProcessor);
 
-            public IWfContext Wf {get;}
+            public IWfShell Wf {get;}
 
             public uint LineCount;
 
@@ -33,7 +33,7 @@ namespace Z0.Tools
             public ToolArchive<DumpBin> Archive {get;}
 
             [MethodImpl(Inline)]
-            public RawAsmProcessor(IWfContext wf, FolderPath output, FolderPath processed, DumpBinFlag flags, DumpBinOptions options)
+            public RawAsmProcessor(IWfShell wf, FolderPath output, FolderPath processed, DumpBinFlag flags, DumpBinOptions options)
             {
                 Wf = wf;
                 LineCount = 0;

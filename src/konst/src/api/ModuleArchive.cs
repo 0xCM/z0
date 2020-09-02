@@ -22,27 +22,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ModuleArchive from(FolderPath src)
-            => new ModuleArchive(FS.dir(src.Name));
-
-        [MethodImpl(Inline)]
         public static ModuleArchive from(FS.FolderPath src, PartId[] parts)
             => new ModuleArchive(FS.dir(src.Name), parts);
 
-        public static ModuleArchive exclude(string exclude)
-        {
-            var entry = Assembly.GetEntryAssembly();
-            var path = FS.path(entry.Location);
-            insist(path.Exists, $"The file for {entry}, it must exist");
-            return from(path.FolderPath, exclude);
-        }
-
         [MethodImpl(Inline)]
-        public static ModuleArchive from(FS.FolderPath src, string exclusions = EmptyString)
-            => new ModuleArchive(src, exclusions);
-
-        [MethodImpl(Inline)]
-        public static ModuleArchive from(params Assembly[] src)
+        public static ModuleArchive from(FS.FolderPath src)
             => new ModuleArchive(src);
+
+        [MethodImpl(Inline)]
+        public static ModuleArchive from(Assembly control)
+            => new ModuleArchive(FS.path(control.Location).FolderPath);
     }
 }
