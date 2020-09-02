@@ -6,41 +6,41 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
     using static z;
-        
-    [ApiHost]
-    public unsafe readonly struct ResStoreModels 
-    {
-        public static ResStoreModels Service => default;    
 
-        internal static ResStoreModel Data 
+    [ApiHost]
+    public unsafe readonly struct ResStoreModels
+    {
+        public static ResStoreModels Service => default;
+
+        internal static ResStoreModel Data
             => ResStoreModel.Data;
-        
-        public SegRef[] Refs 
+
+        public SegRef[] Refs
         {
             [MethodImpl(Inline)]
             get => Data.provided();
         }
-        
+
         [MethodImpl(Inline), Op]
-        public MemoryStore store()
-            => MemoryStore.Create(Refs);
+        public Segments store()
+            => Segments.create(Refs);
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<byte> leads()
             => Data.leads();
 
         [Op]
-        public ReadOnlySpan<MemoryAddress> locations(in MemoryStore store)
+        public ReadOnlySpan<MemoryAddress> locations(in Segments store)
         {
-            var sources = store.Sources;
+            var sources = store.View;
             var results = sys.alloc<MemoryAddress>(sources.Length);
             locations(store,results);
             return results;
         }
-        
+
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<byte> span(byte n)
         {
@@ -63,7 +63,7 @@ namespace Z0
             else
                 return span(n256);
         }
-        
+
         [MethodImpl(Inline), Op]
         public SegRef memref(byte n)
         {
@@ -137,32 +137,32 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref readonly byte first<N>(N n)
             where N : unmanaged, ITypeNat
-                => ref z.first(span(n));        
+                => ref z.first(span(n));
 
         [MethodImpl(Inline)]
         public ref readonly byte cell<N>(N n, int i)
             where N : unmanaged, ITypeNat
-                => ref skip(span(n),(uint)i);    
+                => ref skip(span(n),(uint)i);
 
         [MethodImpl(Inline)]
         public unsafe SegRef memref<N>(N n = default)
             where N : unmanaged, ITypeNat
-        {                
-            var src = span<N>(n); 
+        {
+            var src = span<N>(n);
             var pSrc = gptr(z.first(src));
             return new SegRef(pSrc, src.Length);
         }
 
         [Op]
-        static void locations(in MemoryStore store, Span<MemoryAddress> results)
+        static void locations(in Segments store, Span<MemoryAddress> results)
         {
-            var sources = store.Sources;
+            var sources = store.View;
             for(var i=0u; i<sources.Length; i++)
             {
                 ref readonly var source = ref skip(sources,i);
                 var length = source.DataSize;
-                var data = MemStores.Service.load(source);                                
-                
+                var data = MemStores.Service.load(source);
+
                 if(data.Length == length)
                 {
                     for(var j = 0u; j<length; j++)

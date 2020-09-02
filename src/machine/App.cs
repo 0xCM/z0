@@ -33,7 +33,7 @@ namespace Z0
 
         public static void Main(params string[] args)
         {
-            var wf = WfBuilder.context(Assembly.GetEntryAssembly(), args, out var app);
+            var wf = WfBuilder.shell(Assembly.GetEntryAssembly(), args, out var app);
             var state = new WfCaptureState(wf, new AsmContext(app, wf), wf.Config, wf.Ct);
             using var machine = new Engine(state, wf.Ct);
             machine.Run();

@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -11,22 +11,21 @@ namespace Z0
     using static z;
 
     [ApiHost]
-    public readonly struct AsciResourceSet
-    {        
+    public readonly struct ResourceSets
+    {
         [MethodImpl(Inline)]
         public static ByteSize size<A>()
-            where A : unmanaged, IAsciSequence
+            where A : unmanaged
                 => (ByteSize)size<A>();
 
         [MethodImpl(Inline)]
         public static int offset<A>(int index)
-            where A : unmanaged, IAsciSequence
+            where A : unmanaged
                 => index*size<A>();
 
         [MethodImpl(Inline)]
         public static int count<A>(int datasize)
-            where A : unmanaged, IAsciSequence
+            where A : unmanaged
                 => datasize/size<A>();
-
     }
 }

@@ -14,6 +14,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static WfToken token(WfPartKind kind, Type src)
-            => new WfToken((((uint)z.address(src) & BitMasks.Lo24u) | ((uint)kind << 24) ) | z.hash(src.AssemblyQualifiedName));
+            => new WfToken((((uint)src.MetadataToken & BitMasks.Lo24u) | ((uint)kind << 24) ) | hash2(src.AssemblyQualifiedName));
     }
 }

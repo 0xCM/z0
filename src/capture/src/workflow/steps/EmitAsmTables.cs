@@ -16,20 +16,11 @@ namespace Z0
 
     using static EmitAsmTablesStep;
 
-    [Step(typeof(EmitAsmTables))]
-    public readonly struct EmitAsmTablesStep : IWfStep<EmitAsmTablesStep>
-    {
-        public static WfStepId StepId => AB.step<EmitAsmTablesStep>();
-    }
-
     public ref struct EmitAsmTables
     {
         readonly IWfCaptureState State;
 
         readonly IWfShell Wf;
-
-        readonly WfActor Actor;
-
 
         readonly IAsmContext Asm;
 
@@ -65,30 +56,29 @@ namespace Z0
             get => Offset++;
         }
 
-        public EmitAsmTables(WfActor actor, IWfCaptureState state, GlobalCodeIndex encoded, CorrelationToken ct)
+        public EmitAsmTables(IWfCaptureState state, GlobalCodeIndex encoded)
         {
             State = state;
             Wf = state.Wf;
-            Actor = actor;
+            Ct = Wf.Ct;
             Encoded = encoded;
             Locations = encoded.Locations;
             Sequence = 0;
             Offset = 0;
             Index = new Dictionary<Mnemonic, ArrayBuilder<AsmRecord>>();
             Asm = state.Asm;
-            Ct = ct;
             Segments = sys.empty<AsmTableSeg<Mnemonic>>();
             Wf.Created(StepId, Ct);
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepId, Ct);
+            Wf.Finished(StepId);
         }
 
         public void Run()
         {
-            Wf.Running(StepId, Ct);
+            Wf.Running(StepId);
 
             var count = Locations.Length;
             for(var i=0u; i<count; i++)
@@ -107,10 +97,8 @@ namespace Z0
                 offset += seg.Count;
             }
 
-
-            Wf.Ran(StepId, Ct);
+            Wf.Ran(StepId);
         }
-
 
         void Save(in AsmTableSeg<Mnemonic> src, int offset)
         {

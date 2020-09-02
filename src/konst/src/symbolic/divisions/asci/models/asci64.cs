@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
@@ -16,9 +16,9 @@ namespace Z0
     using A = asci64;
     using S = Vector512<byte>;
 
-    public readonly struct asci64 : IAsciSequence<A,N>
+    public readonly struct asci64 : IBytes<A,N>
     {
-        internal readonly S Storage;        
+        internal readonly S Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator A(string src)
@@ -77,7 +77,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => asci.bytes(this);
         }
-        
+
         public A Zero
         {
             [MethodImpl(Inline)]
@@ -118,27 +118,27 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(A src)
             => Storage.Equals(src.Storage);
- 
+
          public override int GetHashCode()
             => Storage.GetHashCode();
 
-        public override bool Equals(object src)        
+        public override bool Equals(object src)
             => src is A j && Equals(j);
 
         public const int Size = 64;
 
-        public static A Spaced 
+        public static A Spaced
         {
             [MethodImpl(Inline)]
             get => asci.init(n);
         }
-        
-        public static A Null 
+
+        public static A Null
         {
             [MethodImpl(Inline)]
             get => new A(default(S));
         }
-        
+
         [MethodImpl(Inline)]
         public asci64(S src)
             => Storage = src;

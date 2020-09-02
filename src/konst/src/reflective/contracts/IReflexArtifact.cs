@@ -2,12 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.ClrData
+namespace Z0
 {
-    using System.Reflection;
-
-    public interface IClrAssembly : IClrArtifact<Assembly>
+    public interface IReflexArtifact
     {
-        
+
+    }
+
+    public interface IReflexArtifact<T> : IReflexArtifact
+    {
+        T Definition {get;}
     }
 }

@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -12,10 +12,10 @@ namespace Z0
     /// <summary>
     /// Covers an A-parametric sequence of asci sequences
     /// </summary>
-    public readonly struct AsciSequence<A> : IAsciContainer<A>
-        where A : unmanaged, IAsciSequence
+    public readonly struct AsciSequence<A> : IByteContainer<A>
+        where A : unmanaged, IBytes
     {
-        public A Content {get;}        
+        public A Content {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator A(AsciSequence<A> src)
@@ -24,15 +24,15 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator AsciSequence<A>(A src)
             => new AsciSequence<A>(src);
-       
+
         [MethodImpl(Inline)]
         public AsciSequence(A src)
-            => Content = src;      
+            => Content = src;
 
         public string Format()
             => Content.Format();
 
         public override string ToString()
-            => Format();  
+            => Format();
     }
 }

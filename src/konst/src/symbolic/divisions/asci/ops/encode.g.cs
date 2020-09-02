@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static A encode<A>(string src)
-            where A : unmanaged, IAsciSequence
+            where A : unmanaged, IBytes
         {
 
             return default;

@@ -3,26 +3,26 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
 
     /// <summary>
     /// Characterizes a container that reifies an asci sequence
     /// </summary>
     /// <typeparam name="A">The asci sequence type</typeparam>
-    public interface IAsciContainer<A> : IAsciSequence, IContented<A>
-        where A : unmanaged, IAsciSequence
-    {        
-        int IAsciSequence.Length  
+    public interface IByteContainer<A> : IBytes, IContented<A>
+        where A : unmanaged, IBytes
+    {
+        int IBytes.Length
             => Content.Length;
 
-        int IAsciSequence.Capacity 
+        int IBytes.Capacity
             => Content.Capacity;
-        
-        ReadOnlySpan<byte> IAsciSequence.View
+
+        ReadOnlySpan<byte> IBytes.View
             => Content.View;
-        
-        bool INullity.IsEmpty   
+
+        bool INullity.IsEmpty
             => Content.IsEmpty;
-    }    
+    }
 }

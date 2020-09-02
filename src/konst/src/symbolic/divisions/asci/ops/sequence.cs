@@ -32,7 +32,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static AsciSequence<A> sequence<A>(A content)
-            where A : unmanaged, IAsciSequence
+            where A : unmanaged, IBytes
                 => new AsciSequence<A>(content);
     }
 }

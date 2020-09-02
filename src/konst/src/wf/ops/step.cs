@@ -13,11 +13,12 @@ namespace Z0
 
     partial struct AB
     {
+
         /// <summary>
         /// Creates an identifier for a workflow step
         /// </summary>
         /// <param name="control">The controller type</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static WfStepId step(Type control)
             => new WfStepId(control, control);
 

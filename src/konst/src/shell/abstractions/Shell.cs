@@ -32,7 +32,7 @@ namespace Z0
         }
 
         protected Shell()
-            : this(new ShellContext(Assembly.GetEntryAssembly(), sys.empty<string>(), ApiQuery.apiset()))
+            : this(ShellContext.create())
         {
 
         }

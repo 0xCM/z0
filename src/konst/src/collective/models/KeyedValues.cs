@@ -15,22 +15,25 @@ namespace Z0
     public readonly struct KeyedValues
     {
         public static KeyedValues<K,V> from<K,V>(Dictionary<K,V> src)
-            => new KeyedValues<K,V>(src.Select(x => KeyedValue.define(x.Key, x.Value)).Array());        
+            => new KeyedValues<K,V>(src.Select(x => KeyedValue.define(x.Key, x.Value)).Array());
 
         public static KeyedValues<K,V> from<K,V>(K key, V[] values)
             => new KeyedValues<K,V>(values.Select(value => KeyedValue.define(key, value)).Array());
     }
-    
+
     /// <summary>
     /// Defines a T-value index together with a comanion K-index ,
-    /// where each K-value i is either obtained directly from the caller or by 
-    /// invoking a caller-supplied index function f:T -> K that computes a uniqe K-value for each T-value
+    /// where each K-value i is either obtained directly from the caller or by
+    /// invoking a caller-supplied index function f:T -> K that computes a unique K-value for each T-value
     /// </summary>
     public readonly struct KeyedValues<K,V> : IIndex<KeyedValue<K,V>>
     {
-        public readonly KeyedValue<K,V>[] Pairs;        
-        
+        public readonly KeyedValue<K,V>[] Pairs;
+
         readonly KeyFunction<K,V> KeyFunction;
+
+        public static implicit operator KeyedValues<K,V>(KeyedValue<K,V>[] src)
+            => new KeyedValues<K,V>(src);
 
         [MethodImpl(Inline)]
         public KeyedValues(V[] src, KeyFunction<K,V> kf, KeyedValue<K,V>[] dst)
@@ -42,12 +45,27 @@ namespace Z0
             var values = span(src);
             var count = src.Length;
             for(var i= 0u; i<count; i++)
-            {   
+            {
                 ref readonly var value = ref skip(values,i);
                 var key = kf(value);
                 seek(edit,i) = kvp(key,value);
             }
         }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Pairs == null || Pairs.Length == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !IsEmpty;
+        }
+
+        public static KeyedValues<K,V> Empty
+            => default;
 
         [MethodImpl(Inline)]
         public KeyedValues(KeyedValue<K,V>[] dst)
@@ -119,7 +137,7 @@ namespace Z0
             {
                 ref readonly var candidate = ref skip(view,i);
                 if(key.Equals(candidate))
-                {  
+                {
                     found = candidate.Value;
                     break;
                 }
@@ -143,7 +161,7 @@ namespace Z0
             found = default;
             return false;
         }
-        
+
         public ref KeyedValue<K,V> this[uint index]
         {
             [MethodImpl(Inline)]
@@ -161,7 +179,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Search(key);
         }
-        
+
         [MethodImpl(Inline)]
         public ref K Key(uint index)
             => ref Pairs[index].Key;

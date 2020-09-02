@@ -16,7 +16,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a model of a CLR type
     /// </summary>
-    public interface IClrType : IClrArtifact<Type>
+    public interface IClrType : IReflexArtifact<Type>
     {
         ClrTypeKind Kind {get;}
 
@@ -61,7 +61,7 @@ namespace Z0
         ClrType IClrType<M>.Generalized
             => Untyped.Generalized;
 
-        Type IClrArtifact<Type>.Definition
+        Type IReflexArtifact<Type>.Definition
             => typeof(T);
     }
 

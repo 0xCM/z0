@@ -12,13 +12,144 @@ namespace Z0
 
     partial struct z
     {
+        /// <summary>
+        /// Computes the FNV-1a hash of the source sequence
+        /// See http://en.wikipedia.org/wiki/Fowler%E2%80%93Noll%E2%80%93Vo_hash_function
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
+        const uint K = 0xA5555529;
+
+        const uint FnvOffsetBias = 2166136261;
+
+        const uint FnvPrime = 16777619;
+
+        /// <summary>
+        /// Creates an unsigned hash code
+        /// </summary>
+        /// <param name="x">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static uint hash(sbyte x)
+            => (uint)x;
+
+        /// <summary>
+        /// Creates an unsigned hash code
+        /// </summary>
+        /// <param name="x">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static uint hash(byte x)
+            => (uint)x;
+
+        /// <summary>
+        /// Creates an unsigned hash code
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
+        [MethodImpl(Inline), Op]
+        public static uint hash(short x)
+            => (uint)x;
+
+        /// <summary>
+        /// Creates an unsigned hash code
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
+        [MethodImpl(Inline), Op]
+        public static uint hash(ushort x)
+            => (uint)x;
+
+        /// <summary>
+        /// Creates an unsigned hash code
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
+        [MethodImpl(Inline), Op]
+        public static uint hash(int x)
+            => (uint)x;
+
+        /// <summary>
+        /// Creates an unsigned hash code
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
+        [MethodImpl(Inline), Op]
+        public static uint hash(uint x)
+            => (uint)x;
+
+        /// <summary>
+        /// Creates an unsigned hash code
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
+        [MethodImpl(Inline), Op]
+        public static uint hash(ulong x)
+            => hash((uint)x,(uint)(x >> 32));
+
+        /// <summary>
+        /// Creates an unsigned hash code
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
+        [MethodImpl(Inline), Op]
+        public static uint hash(long x)
+            => hash((uint)x,(uint)(x >> 32));
+
+        /// <summary>
+        /// Creates an unsigned hash code
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
+        [MethodImpl(Inline), Op]
+        public static uint hash(char x)
+            => (uint)x;
+
+        /// <summary>
+        /// Creates an unsigned hash code
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
+        [MethodImpl(Inline), Op]
+        public static uint hash(float x)
+            => hash((long)x);
+
+        /// <summary>
+        /// Creates an unsigned hash code
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
+        [MethodImpl(Inline), Op]
+        public static uint hash(double x)
+            => hash(@ulong(x));
+
+        /// <summary>
+        /// Creates an unsigned hash code
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
+        [MethodImpl(Inline), Op]
+        public static uint hash(decimal x)
+            => hash(@ulong(x));
+
+        /// <summary>
+        /// Creates an unsigned hash code
+        /// </summary>
+        /// <param name="x">The source value</param>
+        /// <remarks>Adapted from the .Net core type System.Reflection.Internal.Hash</remarks>
+        [MethodImpl(Inline), Op]
+        public static uint hash(bool x)
+            => @byte(x);
+
         [MethodImpl(Inline), Op]
         public static uint hash(string src)
-            => (uint)(src?.GetHashCode() ?? int.MaxValue) ;
+            => (uint)(src?.GetHashCode() ?? int.MaxValue);
 
         [MethodImpl(Inline), Op]
         public static uint hash(Type src)
-            => (uint)src.GetHashCode();
+            => (uint)src.MetadataToken;
+
+        [MethodImpl(Inline), Op]
+        public static unsafe uint hash2(string src)
+            => (uint)(pchar2(src ?? EmptyString));
 
         /// <summary>
         /// Calculates a combined hash for 2 unsigned 32-bit integers

@@ -15,6 +15,12 @@ namespace Z0
         public static IShellContext create(Assembly control, string[] args, ModuleArchive modules)
             => new ShellContext(control, args, modules);
 
+        public static IShellContext create(Assembly control, string[] args)
+            => new ShellContext(control, args, ApiQuery.modules(control,args));
+
+        public static IShellContext create()
+            => new ShellContext(Assembly.GetEntryAssembly(), Environment.GetCommandLineArgs(), ApiQuery.modules());
+
         public IApiSet Api {get;}
 
         public string[] Args {get;}
@@ -25,21 +31,12 @@ namespace Z0
 
         public CorrelationToken Ct {get;}
 
-        public ShellContext(Assembly control, string[] args, IApiSet api)
-        {
-            Control = control;
-            Api = api;
-            Modules = ModuleArchives.from(control);
-            Args = args;
-            Ct = z.correlate(control.Id());
-        }
-
         public ShellContext(Assembly control, string[] args, ModuleArchive modules)
         {
             Control = control;
+            Args = args;
             Modules = modules;
             Api = modules.Api;
-            Args = args;
             Ct = z.correlate(control.Id());
         }
     }

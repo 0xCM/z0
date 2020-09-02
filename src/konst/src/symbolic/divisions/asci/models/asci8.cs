@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -17,8 +17,8 @@ namespace Z0
     /// <summary>
     /// Defines a 64-bit asci code sequence of length 8
     /// </summary>
-    public readonly struct asci8 : IAsciSequence<A,N>
-    {                
+    public readonly struct asci8 : IBytes<A,N>
+    {
         internal readonly S Storage;
 
         [MethodImpl(Inline)]
@@ -52,7 +52,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(A a, A b)
             => !a.Equals(b);
-        
+
         public bool IsBlank
         {
             [MethodImpl(Inline)]
@@ -82,13 +82,13 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Null;
         }
-        
+
         public AsciCharCode this[int index]
         {
             [MethodImpl(Inline)]
             get => (AsciCharCode)(Storage >> index*8);
         }
-        
+
         /// <summary>
         /// Specifies the number of characters that precede a null terminator, if any; otherwise, returns the maximum content length
         /// </summary>
@@ -134,22 +134,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => Text;
- 
+
         public override string ToString()
             => Text;
 
         public const int Size = 8;
 
         static N n => default;
-        
+
         static W w => default;
-        public static A Null 
+        public static A Null
         {
             [MethodImpl(Inline)]
             get => new A(default(S));
         }
 
-        public static A Spaced 
+        public static A Spaced
         {
             [MethodImpl(Inline)]
             get => asci.init(n);
@@ -158,11 +158,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public asci8(S src)
             => Storage = src;
-      
+
         [MethodImpl(Inline)]
         public asci8(string src)
             => Storage = asci.encode(n,src).Storage;
 
- 
+
     }
 }

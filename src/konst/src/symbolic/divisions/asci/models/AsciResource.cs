@@ -3,14 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     public readonly struct AsciResource<A> : IAsciResource<A>
-        where A : IAsciSequence
+        where A : IBytes
     {
         public asci32 Name {get;}
 

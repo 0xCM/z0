@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -17,7 +17,7 @@ namespace Z0
     /// <summary>
     /// Defines an asci code sequence of length 2
     /// </summary>
-    public readonly struct asci2 : IAsciSequence<A,N>
+    public readonly struct asci2 : IBytes<A,N>
     {
         internal readonly S Storage;
 
@@ -48,10 +48,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator !=(A a, A b)
             => !a.Equals(b);
-        
+
         [MethodImpl(Inline)]
         public static implicit operator ushort(A src)
-            => src.Storage;                    
+            => src.Storage;
 
         public bool IsBlank
         {
@@ -131,13 +131,13 @@ namespace Z0
 
         public const int Size = 2;
 
-        public static A Null 
+        public static A Null
         {
             [MethodImpl(Inline)]
             get => new A(default(S));
         }
 
-        public static A Spaced 
+        public static A Spaced
         {
             [MethodImpl(Inline)]
             get => asci.init(n);
@@ -157,6 +157,6 @@ namespace Z0
         public asci2(string src)
         {
             Storage = asci.encode(n,src).Storage;
-        }        
+        }
     }
 }

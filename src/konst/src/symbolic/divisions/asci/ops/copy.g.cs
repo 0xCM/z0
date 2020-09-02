@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -14,20 +14,20 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static unsafe void copy<A>(ReadOnlySpan<A> src, Span<byte> dst)
-            where A : unmanaged, IAsciSequence
+            where A : unmanaged, IBytes
         {
             for(var i=0u; i<src.Length; i++)
                 copy(z.skip(src,i), ref z.seek(dst,i*64));
-        }        
-        
+        }
+
         [MethodImpl(Inline)]
         public static void copy<A>(in A src, ref byte dst)
-            where A : unmanaged, IAsciSequence
+            where A : unmanaged, IBytes
                 => copy(n2, src, ref dst);
-        
+
         [MethodImpl(Inline)]
         static void copy<A>(N2 n, in A src, ref byte dst)
-            where A : unmanaged, IAsciSequence
+            where A : unmanaged, IBytes
         {
             if(typeof(A) == typeof(asci2))
                 copy(cast(n2, src), ref dst);
@@ -37,13 +37,13 @@ namespace Z0
                 copy(cast(n8, src), ref dst);
             else if(typeof(A) == typeof(asci16))
                 copy(cast(n16, src), ref dst);
-            else                
+            else
                 copy(n32, src, ref dst);
         }
 
         [MethodImpl(Inline)]
         static void copy<A>(N32 n, in A src, ref byte dst)
-            where A : unmanaged, IAsciSequence
+            where A : unmanaged, IBytes
         {
             if(typeof(A) == typeof(asci32))
                 copy(cast(n32, src), ref dst);

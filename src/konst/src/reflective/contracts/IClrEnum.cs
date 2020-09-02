@@ -36,7 +36,6 @@ namespace Z0
         where M : struct, IClrEnum<M>
         where T : unmanaged, Enum
     {
-
         ClrType IClrType<M>.Generalized
             => Untyped.Generalized;
     }

@@ -13,72 +13,72 @@ namespace Z0
 
     public readonly partial struct ReflectedKinds
     {
-        public ReflectedAssembly Assembly => default;
+        public AssemblyKind Assembly => default;
 
-        public ReflectedModule Module => default;
+        public ModuleKind Module => default;
 
-        public ReflectedMethod Method => default;
+        public MethodKind Method => default;
 
-        public ReflectedType Type => default;
+        public TypeKind Type => default;
 
-        public ReflectedEnum Enum => default;
+        public EnumKind Enum => default;
 
-        public ReflectedEnumLiteral EnumLiteral => default;
+        public EnumLiteralKind EnumLiteral => default;
 
-        public ReflectedField Field => default;
+        public FieldKind Field => default;
 
-        public ReflectedProperty Property => default;
+        public PropertyKind Property => default;
 
-        public readonly struct ReflectedAssembly
+        public readonly struct AssemblyKind
         {
             public ReflectedClass Class => ClrMetadata;
 
             public ReflectedKind Kind => K.Assembly;
         }
 
-        public readonly struct ReflectedModule
+        public readonly struct ModuleKind
         {
             public ReflectedClass Class => ClrMetadata;
 
             public ReflectedKind Kind => K.Module;
         }
 
-        public readonly struct ReflectedMethod
+        public readonly struct MethodKind
         {
             public ReflectedClass Class => ClrMetadata;
 
             public ReflectedKind Kind => K.Method;
         }
 
-        public readonly struct ReflectedType
+        public readonly struct TypeKind
         {
             public ReflectedClass Class => ClrMetadata;
 
             public ReflectedKind Kind => K.Type;
         }
 
-        public readonly struct ReflectedEnum
+        public readonly struct EnumKind
         {
             public ReflectedClass Class => ClrMetadata;
 
             public ReflectedKind Kind => K.Enum;
         }
 
-        public readonly struct ReflectedEnumLiteral
+        public readonly struct EnumLiteralKind
         {
             public ReflectedClass Class => ClrMetadata;
 
             public ReflectedKind Kind => K.EnumLiteral;
         }
 
-        public readonly struct ReflectedField
+        public readonly struct FieldKind
         {
             public ReflectedClass Class => ClrMetadata;
 
             public ReflectedKind Kind => K.Field;
         }
 
-        public readonly struct ReflectedProperty
+        public readonly struct PropertyKind
         {
             public ReflectedClass Class => ClrMetadata;
 

@@ -8,21 +8,36 @@ namespace Z0
 
     using Asm;
 
-    [Step(typeof(Evaluate))]
+    [Step]
+    public readonly struct EmitAsmTablesStep : IWfStep<EmitAsmTablesStep>
+    {
+        public static void control(IWfShell wf, IWfCaptureState state, GlobalCodeIndex encoded)
+        {
+            using var step = new EmitAsmTables(state,encoded);
+            step.Run();
+        }
+
+        public static WfStepId StepId
+            => step<EmitAsmTablesStep>();
+    }
+
+    [Step]
     public readonly struct EvaluateStep : IWfStep<EvaluateStep>
     {
         public static WfStepId StepId
-            => AB.step<EvaluateStep>();
+            => step<EvaluateStep>();
     }
 
-    [Step(typeof(ClearCaptureArchives))]
+    [Step]
     public readonly struct ClearCaptureArchivesStep : IWfStep<ClearCaptureArchivesStep>
     {
         public const string StepName = nameof(ClearCaptureArchives);
 
-        public static WfStepId StepId => step<ClearCaptureArchivesStep>();
+        public static WfStepId StepId
+            => step<ClearCaptureArchivesStep>();
     }
 
+    [Step]
     public readonly struct WfCaptureControl : IWfStep<WfCaptureControl>
     {
         public const string ActorName = nameof(CaptureControl);
@@ -33,7 +48,7 @@ namespace Z0
         public static WfStepId StepId => step<WfCaptureControl>();
     }
 
-    [Step(typeof(CapturePart), StepName)]
+    [Step]
     public readonly struct CapturePartStep : IWfStep<CapturePartStep>
     {
         public const string StepName = nameof(CapturePart);
@@ -44,7 +59,7 @@ namespace Z0
         public WfStepId Id => StepId;
     }
 
-    [Step(typeof(ManageCapture), StepName)]
+    [Step]
     public readonly struct ManageCaptureStep : IWfStep<ManageCaptureStep>
     {
         public const string StepName = nameof(ManageCapture);
@@ -62,7 +77,7 @@ namespace Z0
             => AB.step<EmitImmSpecialsStep>();
     }
 
-    [Step(typeof(CaptureHostMembers), StepName)]
+    [Step]
     public readonly struct CaptureHostMembersStep : IWfStep<CaptureHostMembersStep>
     {
         public const string StepName = nameof(CaptureHostMembers);
@@ -71,14 +86,14 @@ namespace Z0
             => step<CaptureHostMembersStep>();
     }
 
-    [Step(typeof(CapturePartDataTypes))]
+    [Step]
     public readonly struct CapturePartDataTypesStep : IWfStep<CapturePartDataTypesStep>
     {
         public static WfStepId StepId
             => step<CapturePartDataTypesStep>();
     }
 
-    [Step(typeof(CaptureHosts), StepName)]
+    [Step]
     public readonly struct CaptureHostsStep : IWfStep<CaptureHostsStep>
     {
         public const string StepName = nameof(CaptureHosts);
@@ -87,7 +102,7 @@ namespace Z0
 
     }
 
-    [Step(typeof(DecodeParsed), StepName)]
+    [Step]
     public readonly struct DecodeParsedStep : IWfStep<DecodeParsedStep>
     {
         public const string StepName = nameof(DecodeParsed);
@@ -96,7 +111,7 @@ namespace Z0
 
     }
 
-    [Step(typeof(EmitHostArtifacts), StepName)]
+    [Step]
     public readonly struct EmitHostArtifactsStep : IWfStep<EmitHostArtifactsStep>
     {
         public const string StepName = nameof(EmitHostArtifacts);
@@ -111,7 +126,7 @@ namespace Z0
     //     public const string StepName = nameof(EmitExtractReport);
     // }
 
-    [Step(typeof(EmitParsedReport), StepName)]
+    [Step]
     public readonly struct EmitParsedReportStep : IWfStep<EmitParsedReportStep>
     {
         public const string StepName = nameof(EmitParsedReport);
@@ -120,7 +135,7 @@ namespace Z0
             => step<EmitParsedReportStep>();
     }
 
-    [Step(typeof(ExtractHostMembers), StepName)]
+    [Step]
     public readonly struct ExtractHostMembersStep : IWfStep<ExtractHostMembersStep>
     {
         public const string StepName = nameof(ExtractHostMembers);
@@ -136,13 +151,13 @@ namespace Z0
         public static WfStepId StepId => AB.step<ExtractMembersStep>();
     }
 
-    [Step(typeof(EmitImmSpecials), StepName)]
+    [Step]
     public readonly struct SpecializeImmediatesStep
     {
         public const string StepName = nameof(EmitImmSpecials);
     }
 
-    [Step(typeof(ManagePartCapture), StepName)]
+    [Step]
     public readonly struct ManagePartCaptureStep : IWfStep<ManagePartCaptureStep>
     {
         public const string StepName = nameof(ManagePartCapture);
@@ -150,7 +165,7 @@ namespace Z0
         public static WfStepId StepId => step<ManagePartCaptureStep>();
     }
 
-    [Step(typeof(MatchAddresses), StepName)]
+    [Step]
     public readonly struct MatchAddressesStep : IWfStep<MatchAddressesStep>
     {
         public const string StepName = nameof(MatchAddresses);

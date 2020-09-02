@@ -18,26 +18,49 @@ namespace Z0
         {
             var entry = Assembly.GetEntryAssembly();
             var srcRoot = FS.path(entry.Location).FolderPath;
-            var srcArchive = ModuleArchives.from(srcRoot);
-            var context = ContextFactory.app(srcArchive, ShellPaths.Default);
-            return context;
+            var modules = ApiQuery.modules(srcRoot);
+            return ContextFactory.app(modules, ShellPaths.Default);
         }
 
-        public static IAppContext app(IWfShell wf)
-            => ContextFactory.app(wf.Modules, ShellPaths.Default);
+        public static IAppContext app(Assembly control)
+        {
+            var srcRoot = FS.path(control.Location).FolderPath;
+            var modules = ApiQuery.modules(srcRoot);
+            return ContextFactory.app(modules, ShellPaths.Default);
+        }
 
-        [Op]
-        public static IWfShell context(WfConfig config, IWfEventSink sink)
+        public static IAppContext app(Assembly control, string[] args)
+            => ContextFactory.app(ApiQuery.modules(control, args), ShellPaths.Default);
+
+        public static IWfShell shell(WfConfig config, IWfEventSink sink)
             => new WfContext(config, sink);
 
-        [Op]
-        public static WfConfig configure(IAppContext app, params string[] args)
+        public static IWfShell shell(Assembly control, string[] args, out IAppContext app)
+        {
+            var id =  control.Id();
+            var ct = correlate(id);
+            var modules = ApiQuery.modules(control, args);
+            var api = modules.Api;
+            var shell = ShellContext.create(control, args, modules);
+            var config = new WfConfig(shell, args, modules);
+            app = ContextFactory.app(modules, config.Paths);
+            return new WfContext(config, WfTermEventSink.create(log(config), ct));
+        }
+
+        public static IWfShell shell(Assembly control, string[] args)
+        {
+            var modules = ApiQuery.modules(control, args);
+            var config = new WfConfig(ShellContext.create(control, args, modules), args, modules);
+            return new WfContext(config, WfTermEventSink.create(log(config), correlate(control.Id())));
+        }
+
+        public static WfConfig configure(IAppContext app, string[] args)
         {
             var control = Assembly.GetEntryAssembly();
             var id = control.Id();
             var ct = correlate(id);
             var parts = AB.parts(args, app.Api.PartIdentities);
-            var src = ModuleArchives.from(FS.path(control.Location).FolderPath);
+            var src = ApiQuery.modules(FS.path(control.Location).FolderPath);
             var settings = AB.settings(app);
             var captureOut = FS.dir(app.AppPaths.LogRoot.Name) + FS.folder("capture/artifacts");
             var captureLog = FS.dir(app.AppPaths.LogRoot.Name) + FS.folder("capture/logs");
@@ -50,30 +73,7 @@ namespace Z0
             return config;
         }
 
-        public static IWfShell context(Assembly control, string[] args, out IAppContext app)
-        {
-            var id =  control.Id();
-            var ct = correlate(id);
-            var modules = ModuleArchives.from(control);
-            var api = modules.Api;
-            var shell = ShellContext.create(control, args, modules);
-            var config = new WfConfig(shell, args, modules);
-
-            app = ContextFactory.app(modules, config.Paths);
-
-            return new WfContext(config, WfTermEventSink.create(log(config), ct));
-        }
-
-        public static IWfShell context(Assembly control)
-        {
-            var args = Environment.GetCommandLineArgs();
-            var id =  control.Id();
-            var ct = correlate(id);
-            var modules = ModuleArchives.from(control);
-            var api = modules.Api;
-            var shell = ShellContext.create(control, args, modules);
-            var config = new WfConfig(shell, args, modules);
-            return new WfContext(config, WfTermEventSink.create(log(config), ct));
-        }
+        public static WfConfig configure(IAppContext app)
+            => configure(app, Environment.GetCommandLineArgs());
     }
 }

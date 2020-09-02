@@ -13,9 +13,16 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Reflex
     {
-        const BindingFlags BF = ReflectionFlags.BF_All;       
+        const BindingFlags BF = ReflectionFlags.BF_All;
 
-        public static Assembly EntryAssembly 
+        [MethodImpl(Inline), Op]
+        public static Reflected reflected(IWfShell wf)
+            => new Reflected(wf);
+
+        public static ReflectedKinds Kinds
+            => default;
+
+        public static Assembly EntryAssembly
         {
             [MethodImpl(Inline), Op]
             get => sys.EntryAssembly;

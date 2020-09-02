@@ -31,7 +31,7 @@ namespace Z0
                 var ct = correlate(ShellId);
                 var config = WfBuilder.configure(context, args);
                 using var log = AB.log(config);
-                using var wf = WfBuilder.context(config, log);
+                using var wf = WfBuilder.shell(config, log);
 
                 var state = new WfCaptureState(wf, AsmWfBuilder.asm(context), wf.Config, wf.Ct);
                 wf.Running(StepId, delimit(config.Parts));

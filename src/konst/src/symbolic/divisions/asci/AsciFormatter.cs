@@ -39,7 +39,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe string format<A,N>(in A src, N n = default)
-            where A : unmanaged, IAsciSequence<A,N>
+            where A : unmanaged, IBytes<A,N>
             where N : unmanaged, ITypeNat
         {
             buffer<A,N>(src, out var target, out var pSrc);
@@ -53,7 +53,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static char* buffer<A,N>(in A src, out string target, out byte* pSrc)
-            where A : unmanaged, IAsciSequence<A,N>
+            where A : unmanaged, IBytes<A,N>
             where N : unmanaged, ITypeNat
         {
             if(typeof(N) == typeof(N2))
@@ -92,7 +92,7 @@ namespace Z0
                 pSrc = (byte*)pvoid(src);
                 return pchar(target);
             }
-            else    
+            else
             {
                 target = Buffer0;
                 pSrc = (byte*)pvoid(src);

@@ -24,7 +24,7 @@ namespace Z0
             => Wf.ResourceRoot + FolderName.Define("fields");
 
         ModuleArchive Modules
-            => ModuleArchives.entry();
+            => ApiQuery.modules();
 
         public EmitFieldLiterals(IWfShell context, CorrelationToken ct)
         {

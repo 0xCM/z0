@@ -3,13 +3,13 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
-    using N = N4;    
+    using N = N4;
     using W = W32;
     using A = asci4;
     using S = System.UInt32;
@@ -17,8 +17,8 @@ namespace Z0
     /// <summary>
     /// Defines an asci code sequence of length 4
     /// </summary>
-    public readonly struct asci4 : IAsciSequence<A,N>
-    {        
+    public readonly struct asci4 : IBytes<A,N>
+    {
         internal readonly S Storage;
 
         [MethodImpl(Inline)]
@@ -100,13 +100,13 @@ namespace Z0
             [MethodImpl(Inline)]
             get => asci.length(this);
         }
-        
+
         public int Capacity
         {
             [MethodImpl(Inline)]
             get => Size;
         }
-        
+
         public ReadOnlySpan<byte> View
         {
             [MethodImpl(Inline)]
@@ -138,17 +138,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => Text;
- 
+
         public override string ToString()
             => Text;
 
-        public static A Null 
+        public static A Null
         {
             [MethodImpl(Inline)]
             get => new A(default(S));
         }
 
-        public static A Spaced 
+        public static A Spaced
         {
             [MethodImpl(Inline)]
             get => asci.init(n);
@@ -157,7 +157,7 @@ namespace Z0
         public const int Size = 4;
 
         static N n => default;
-        
+
 
         [MethodImpl(Inline)]
         public asci4(S src)

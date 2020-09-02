@@ -47,7 +47,6 @@ namespace Z0
         public Type Effect
             => Control;
 
-
         /// <summary>
         /// The step token
         /// </summary>
@@ -84,6 +83,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format(bool full)
             => full ? Effect.FullName : Effect.Name;
+
         public uint Hashed
         {
             [MethodImpl(Inline)]

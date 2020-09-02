@@ -21,6 +21,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Assembly[] owners()
-            => ModuleArchives.entry().Owners;
+            => modules().Owners;
     }
 }

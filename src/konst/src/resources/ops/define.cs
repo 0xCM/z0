@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -45,7 +45,7 @@ namespace Z0
         /// <typeparam name="A">The asci element type</typeparam>
         [MethodImpl(Inline)]
         static AsciResource<A> resource<A>(asci32 name, A content, asci64? description = null)
-            where A : IAsciSequence
+            where A : IBytes
                 => new AsciResource<A>(name, content, description);
     }
 }

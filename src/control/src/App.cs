@@ -9,37 +9,15 @@ namespace Z0
     using Z0.Asm;
     using System.Reflection;
 
-    using static z;
-    using static Konst;
-    using static AppShell;
-
-    class App : Shell<App,IWfShell>
+    class App
     {
-        public CorrelationToken Ct {get;}
-
-        public App()
-            : base(WfBuilder.context(Assembly.GetEntryAssembly()))
+        public static void Main(params string[] args)
         {
-            Ct = correlate(Id);
+            var wf = WfBuilder.shell(Assembly.GetEntryAssembly(), args, out var app);
+            var state = new WfCaptureState(wf, new AsmContext(app, wf), wf.Config, wf.Ct);
+            using var runner = new CaptureControl(state);
+            runner.Run();
         }
-
-        public override void RunShell(IWfShell wf)
-        {
-            // try
-            // {
-            //     using var control = new CaptureControl(new WfCaptureState(wf, new AsmContext(Context), wf.Config, Ct));
-            //     wf.Raise(new LogsConfigured(ActorName, wf.Config.Logs, Ct));
-            //     control.Run();
-            // }
-            // catch(Exception e)
-            // {
-            //     Raise(WfEvents.error(ActorName, e, Ct));
-            // }
-        }
-
-        public static int Main(params string[] args)
-            => 0;
-            //=> Launch(AB.shell(args));
     }
 
     public static partial class XTend { }

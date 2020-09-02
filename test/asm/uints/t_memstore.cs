@@ -43,7 +43,7 @@ namespace Z0
             }
         }
 
-        unsafe void Process(in SegRef src, in MemoryStore store)
+        unsafe void Process(in SegRef src, in Segments store)
         {
             var reader = PointedReader.create(src.Address.Pointer<byte>(), (int)src.DataSize);
             var dstA = Spans.alloc<byte>(src.DataSize);
@@ -103,7 +103,7 @@ namespace Z0
         {
             var svc = ResStoreModels.Service;
             var store = svc.store();
-            var sources = store.Sources;
+            var sources = store.View;
             for(var i=0u; i<sources.Length; i++)
                 Process(skip(sources,i), store);
         }

@@ -19,7 +19,7 @@ namespace Z0
     /// <summary>
     /// Defines an asci code sequence of length 16
     /// </summary>
-    public readonly struct asci16 : IAsciSequence<A,N>
+    public readonly struct asci16 : IBytes<A,N>
     {
         public readonly S Storage;
 

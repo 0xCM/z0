@@ -7,14 +7,15 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
+    using SR = System.Reflection;
 
     using static Konst;
 
-    partial struct ComponentModels
+    partial struct Reflected
     {
-        public readonly struct ClrAssembly
+        public readonly struct Assembly
         {
-            public Assembly Definition {get;}
+            public SR.Assembly Definition {get;}
 
             public ArtifactIdentifier Id
             {
@@ -23,11 +24,11 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            public ClrAssembly(Assembly src)
+            public Assembly(SR.Assembly src)
                 => Definition = src;
 
             [MethodImpl(Inline)]
-            public static implicit operator Assembly(ClrAssembly src)
+            public static implicit operator SR.Assembly(Assembly src)
                 => src.Definition;
         }
     }

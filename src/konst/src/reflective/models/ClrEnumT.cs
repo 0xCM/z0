@@ -2,49 +2,54 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.ClrData
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    /// <summary>
-    /// Represents a parametrically-identified clr enum
-    /// </summary>
-    public readonly struct ClrEnum<T> : IClrEnum<ClrEnum<T>,ClrEnum,T>
-        where T : unmanaged, Enum
+    using Z0.ClrData;
+
+    partial struct Reflected
     {
-        public Type Definition {get;}
-
-        [MethodImpl(Inline)]
-        public ClrEnum(Type src)
+        /// <summary>
+        /// Represents a parametrically-identified clr enum
+        /// </summary>
+        public readonly struct ClrEnum<T> : IClrEnum<ClrEnum<T>,ClrEnum,T>
+            where T : unmanaged, Enum
         {
-            Definition = src;
-        }
+            public Type Definition {get;}
 
-        public ArtifactIdentifier Id
-        {
             [MethodImpl(Inline)]
-            get => Definition.MetadataToken;
-        }
+            public ClrEnum(Type src)
+            {
+                Definition = src;
+            }
 
-        public ClrEnum Untyped
-        {
+            public ArtifactIdentifier Id
+            {
+                [MethodImpl(Inline)]
+                get => Definition.MetadataToken;
+            }
+
+            public ClrEnum Untyped
+            {
+                [MethodImpl(Inline)]
+                get => new ClrEnum(Definition);
+            }
+
             [MethodImpl(Inline)]
-            get => new ClrEnum(Definition);
+            public static implicit operator ClrEnum(ClrEnum<T> src)
+                => src.Untyped;
+
+            [MethodImpl(Inline)]
+            public static implicit operator Type(ClrEnum<T> src)
+                => src.Definition;
+
+            [MethodImpl(Inline)]
+            public static implicit operator ClrType<T>(ClrEnum<T> src)
+                => new ClrType<T>(src.Definition);
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrEnum(ClrEnum<T> src)
-            => src.Untyped;
-
-        [MethodImpl(Inline)]
-        public static implicit operator Type(ClrEnum<T> src)
-            => src.Definition;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrType<T>(ClrEnum<T> src)
-            => new ClrType<T>(src.Definition);
     }
 }

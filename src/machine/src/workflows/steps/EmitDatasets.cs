@@ -28,7 +28,7 @@ namespace Z0
             Ct = ct;
             Wf = context;
             Recapture = false;
-            Parts = ModuleArchives.entry().Parts;
+            Parts = context.Parts;
             Wf.Created(StepId);
         }
 

@@ -6,26 +6,26 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
 
     [ApiDataType]
     public readonly struct ResModelQuery
-    {        
+    {
         [MethodImpl(Inline)]
         internal ResModelQuery(ResStoreModels models)
         {
             Refs = models.Refs;
-            Storage = MemoryStore.Create(Refs);
+            Storage = Segments.create(Refs);
             Stores = MemStores.Service;
             Models = models;
-        }        
-                
+        }
+
         readonly ResStoreModels Models;
-        
-        readonly SegRef[] Refs;                
-        
-        readonly MemoryStore Storage;
+
+        readonly SegRef[] Refs;
+
+        readonly Segments Storage;
 
         readonly MemStores Stores;
 
@@ -232,7 +232,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ulong sib_d<N>(N n, int i, byte scale, ushort offset)
             where N : unmanaged, ITypeNat
-                => ((ulong)scale)*Models.cell(n, i) + (ulong)offset; 
+                => ((ulong)scale)*Models.cell(n, i) + (ulong)offset;
 
         [MethodImpl(Inline)]
         public ulong sib_d(N0 n, int i, byte scale, ushort offset)

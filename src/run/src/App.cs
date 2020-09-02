@@ -41,7 +41,7 @@ namespace Z0
 
             var config = WfBuilder.configure(Context, args);
             using var log = AB.log(config);
-            var wf = WfBuilder.context(config, log);
+            var wf = WfBuilder.shell(config, log);
             using var state = AsmWfBuilder.state(wf, AsmWfBuilder.asm(Context), config);
 
             try

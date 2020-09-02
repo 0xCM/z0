@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -14,12 +14,12 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ReadOnlySpan<AsciCharCode> codes<A>(in A src)
-            where A : unmanaged, IAsciSequence
+            where A : unmanaged, IBytes
                 => codes(n2, src);
-        
+
         [MethodImpl(Inline)]
         static ReadOnlySpan<AsciCharCode> codes<A>(N2 n, in A src)
-            where A : unmanaged, IAsciSequence
+            where A : unmanaged, IBytes
         {
             if(typeof(A) == typeof(asci2))
                 return z.recover<AsciCharCode>(cast(n2,src).View);
@@ -29,13 +29,13 @@ namespace Z0
                 return z.recover<AsciCharCode>(cast(n8,src).View);
             else if(typeof(A) == typeof(asci16))
                 return z.recover<AsciCharCode>(cast(n16,src).View);
-            else                
+            else
                 return codes(n32, src);
         }
 
         [MethodImpl(Inline)]
         static ReadOnlySpan<AsciCharCode> codes<A>(N32 n, in A src)
-            where A : unmanaged, IAsciSequence
+            where A : unmanaged, IBytes
         {
             if(typeof(A) == typeof(asci32))
                 return z.recover<AsciCharCode>(cast(n32,src).View);

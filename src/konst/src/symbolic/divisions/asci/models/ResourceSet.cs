@@ -3,16 +3,16 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
-    using static AsciResourceSet;
+    using static ResourceSets;
 
-    public readonly ref struct AsciResourceSet<A>
-        where A : unmanaged, IAsciSequence
+    public readonly ref struct ResourceSet<A>
+        where A : unmanaged
     {
         /// <summary>
         /// The resource set name
@@ -54,12 +54,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal AsciResourceSet(in asci32 name, ReadOnlySpan<byte> content, asci64? description = null)
+        internal ResourceSet(in asci32 name, ReadOnlySpan<byte> content, asci64? description = null)
         {
             Name = name;
             Content = content;
             Description = description ?? asci64.Null;
-        }              
+        }
 
         [MethodImpl(Inline)]
         internal static ref readonly byte LeadingCell(ReadOnlySpan<byte> content, int index)

@@ -3,12 +3,12 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     using N = N1;
     using C = AsciSymbol;
 
@@ -16,10 +16,10 @@ namespace Z0
     /// Lifts an asci code to a structural type
     /// </summary>
     [ApiHost]
-    public readonly struct AsciSymbol : IAsciSequence<C,N>
-    {        
+    public readonly struct AsciSymbol : IBytes<C,N>
+    {
         public const int Length = 1;
-        
+
         internal readonly AsciCharCode Code;
 
         [MethodImpl(Inline), Op]
@@ -43,7 +43,7 @@ namespace Z0
             [MethodImpl(Inline), Op]
             get => asci.@string(Code);
         }
-        
+
         public ReadOnlySpan<byte> Encoded
         {
             [MethodImpl(Inline), Op]
@@ -135,7 +135,7 @@ namespace Z0
         public override string ToString()
             => Text;
 
-        ReadOnlySpan<byte> IAsciSequence.View
+        ReadOnlySpan<byte> IBytes.View
             => z.bytes(this);
 
         bool INullity.IsEmpty
@@ -144,19 +144,19 @@ namespace Z0
         bool INullity.IsNonEmpty
             => IsNonEmpty;
 
-        int IAsciSequence.Length
+        int IBytes.Length
             => 1;
 
         bool IEquatable<C>.Equals(C src)
             => Code == src.Code;
-        
+
         C INullary<C>.Zero
-            => Empty;       
-        
+            => Empty;
+
         string ITextual.Format()
             => Text;
 
-        public static C Empty 
+        public static C Empty
             => new C(AsciCharCode.Null);
     }
 }

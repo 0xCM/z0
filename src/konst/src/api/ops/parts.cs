@@ -16,7 +16,7 @@ namespace Z0
     partial struct ApiQuery
     {
         public static IPart[] parts()
-            => ModuleArchives.entry().Parts;
+            => modules().Parts;
 
         [MethodImpl(Inline), Op]
         public static PartId[] parts(params string[] args)

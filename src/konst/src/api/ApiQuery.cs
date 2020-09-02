@@ -16,6 +16,25 @@ namespace Z0
     [ApiHost]
     public readonly partial struct ApiQuery
     {
+        public static ModuleArchive modules()
+            => modules(Assembly.GetEntryAssembly(), Environment.GetCommandLineArgs());
+
+        [MethodImpl(Inline)]
+        public static ModuleArchive modules(Assembly control)
+            => modules(control, Environment.GetCommandLineArgs());
+
+        public static ModuleArchive modules(Assembly control, string[] args)
+        {
+            var parts = PartIdParser.parse(args);
+            if(parts.Length != 0)
+               return new ModuleArchive(control, parts);
+            else
+                return new ModuleArchive(control);
+        }
+
+        [MethodImpl(Inline)]
+        public static ModuleArchive modules(FS.FolderPath src)
+            => new ModuleArchive(src);
 
         /// <summary>
         /// Collects all resource accessors defined by a specified assembly
@@ -34,7 +53,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source assembly</param>
         [Op]
-        public static ResourceDeclarations[] declarations(params ResourceAccessor[] src)
+        public static ResourceDeclarations[] declarations(ResourceAccessor[] src)
             => (from a in src
                 let t = a.Member.DeclaringType
                 group a by t).Map(x => new ResourceDeclarations(x.Key, x.ToArray()));
@@ -131,7 +150,7 @@ namespace Z0
         /// Creates an index over the known parts
         /// </summary>
         public static PartIndex index()
-            => ApiQuery.index(ModuleArchives.entry().Parts);
+            => ApiQuery.index(modules().Parts);
 
         public static bool test(Assembly src)
             => src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Count() > 0;

@@ -35,7 +35,7 @@ namespace Z0.Xed
         {
             var config = WfBuilder.configure(Context, args);
             using var log = AB.log(config);
-            using var wf = WfBuilder.context(config, log);
+            using var wf = WfBuilder.shell(config, log);
             using var step = new XedWf(wf, new XedEtlConfig(Context, config.Settings));
             step.Run();
         }
