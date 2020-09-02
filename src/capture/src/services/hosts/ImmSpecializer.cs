@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
@@ -11,8 +11,8 @@ namespace Z0.Asm
     using static Konst;
     using static Memories;
 
-    class ImmSpecializer : IImmSpecializer
-    {        
+    public class ImmSpecializer : IImmSpecializer
+    {
         readonly IAsmDecoder Decoder;
 
         readonly ICaptureCore Capture;
@@ -26,8 +26,8 @@ namespace Z0.Asm
             => term.error($"Embedding failure for {src.Name}");
 
         [MethodImpl(Inline)]
-        internal ImmSpecializer(IAsmDecoder decoder)
-        {            
+        public ImmSpecializer(IAsmDecoder decoder)
+        {
             Decoder = decoder;
             Capture = new CaptureCore();
             Dynamic = Dynops.Services.Dynexus;
@@ -38,7 +38,7 @@ namespace Z0.Asm
             var width = VectorType.width(src.ReturnType);
             var f = Dynamic.CreateUnaryOp(width,src, imm).OnNone(() => OnEmbeddingFailure(src));
             if(f)
-              return     
+              return
                     from c in Capture.Capture(exchange, f.Value.Id, f.Value)
                     from d in Decoder.Decode(c)
                     select d;
@@ -51,7 +51,7 @@ namespace Z0.Asm
             var width = VectorType.width(src.ReturnType);
             var f = Dynamic.CreateUnaryOp(width, src, imm).OnNone(() => OnEmbeddingFailure(src));
             if(f)
-              return     
+              return
                     from c in Capture.Capture(exchange, f.Value.Id, f.Value)
                     from d in Decoder.Decode(c)
                     select d;
@@ -60,7 +60,7 @@ namespace Z0.Asm
         }
 
         public AsmRoutine[] UnaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params Imm8R[] imm)
-        {   
+        {
             var count = imm.Length;
             var dst = new AsmRoutine[count];
             for(var i=0; i<count; i++)
@@ -73,7 +73,7 @@ namespace Z0.Asm
             var width = VectorType.width(src.ReturnType);
             var f = Dynamic.CreateBinaryOp(width,src, imm).OnNone(() => OnEmbeddingFailure(src));
             if(f)
-              return     
+              return
                     from c in Capture.Capture(exchange, f.Value.Id, f.Value)
                     from d in Decoder.Decode(c)
                     select d;
@@ -82,7 +82,7 @@ namespace Z0.Asm
         }
 
         public AsmRoutine[] BinaryOps(in CaptureExchange exchange, MethodInfo src, OpIdentity id, params Imm8R[] imm)
-        {   
+        {
             var count = imm.Length;
             var dst = new AsmRoutine[count];
             for(var i=0; i<count; i++)

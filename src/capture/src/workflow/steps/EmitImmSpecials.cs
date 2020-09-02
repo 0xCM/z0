@@ -13,23 +13,17 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
+    using static EmitImmSpecialsStep;
+
     using static z;
 
     public class EmitImmSpecials : IImmEmitter
     {
-        public CorrelationToken Ct {get;}
-
-        public IWfImmBroker Broker {get;}
+        IWfShell Wf;
 
         readonly IAsmContext Context;
 
-        public IMultiSink Sink {get;}
-
-        readonly IApiSet ApiSet;
-
         readonly IAsmFormatter Formatter;
-
-        readonly IAsmDecoder Decoder;
 
         readonly IApiCollector ApiCollector;
 
@@ -37,53 +31,23 @@ namespace Z0
 
         readonly IImmSpecializer Specializer;
 
-        readonly IWfEventLog Log;
-
-        internal EmitImmSpecials(IAsmContext context, WfConfig config, IMultiSink sink, IAsmFormatter formatter, IAsmDecoder decoder, IApiSet api, FolderPath root, CorrelationToken? ct = null)
+        public EmitImmSpecials(IWfShell wf, IAsmContext context, IAsmFormatter formatter, IAsmDecoder decoder, FolderPath root, CorrelationToken? ct = null)
         {
-            Ct = correlate(ct);
-            Log = AB.termlog(config);
-            Broker = AsmWfBuilder.imm(Log, Ct);
+            Wf = wf;
             Context = context;
-            Sink = sink;
             Formatter = formatter;
-            Decoder = decoder;
-            ApiSet = api;
             CodeArchive = Archives.capture(root);
             Specializer = Capture.Services.ImmSpecializer(decoder);
-            ApiCollector =  Identities.Services.Collector;
-            ConnectReceivers(Broker);
+            ApiCollector = Identities.Services.Collector;
+            Wf.Created(StepId);
         }
 
         public void Dispose()
         {
-            Broker.Dispose();
-            Log.Dispose();
+            Wf.Finished(StepId);
         }
 
         bool Append = true;
-
-        void ConnectReceivers(IWfImmBroker relay)
-        {
-            relay.EmittedEmbeddedImm.Subscribe(relay, OnEvent);
-            relay.HostFileEmissionFailed.Subscribe(relay, OnEvent);
-            relay.ImmInjectionFailed.Subscribe(relay,OnEvent);
-        }
-
-        void OnEvent(EmittedEmbeddedImm e)
-        {
-            Sink.Deposit(e);
-        }
-
-        void OnEvent(FileEmissionFailed e)
-        {
-            Sink.Deposit(e);
-        }
-
-        void OnEvent(ImmInjectionFailed e)
-        {
-            Sink.Deposit(e);
-        }
 
         public void ClearArchive(params PartId[] parts)
         {
@@ -97,7 +61,6 @@ namespace Z0
         {
             if(imm8.Length != 0)
             {
-                //var exchange =  CaptureServices.create(Context).CaptureExchange;
                 var exchange = Capture.exchange(Context);
                 EmitUnrefined(exchange, imm8.ToImm8Values(ImmRefinementKind.Unrefined), parts);
             }
@@ -105,9 +68,7 @@ namespace Z0
 
         public void EmitRefined(params PartId[] parts)
         {
-            var exchange = Capture.exchange(Context);
-            //var exchange = CaptureServices.create(Context).CaptureExchange;
-            EmitRefined(exchange, parts);
+            EmitRefined(Capture.exchange(Context), parts);
         }
 
         ParameterInfo RefiningParameter(MethodInfo src)
@@ -140,9 +101,9 @@ namespace Z0
                             if(functions.Length != 0)
                             {
                                 dst.SaveHexImm(gid, functions, Append)
-                                    .OnSome(path => Broker.Raise(Broker.EmittedEmbeddedImm.Refined(uri, generic, rft, path)));
+                                    .OnSome(path => Wf.Raise(default(EmittedEmbeddedImm).Refined(uri, generic, rft, path)));
                                 dst.SaveAsmImm(gid, functions, Append)
-                                    .OnSome(path => Broker.Raise(Broker.EmittedEmbeddedImm.Refined(uri, generic, rft, path)));
+                                    .OnSome(path => Wf.Raise(default(EmittedEmbeddedImm).Refined(uri, generic, rft, path)));
                             }
                         }
                     }
@@ -156,9 +117,9 @@ namespace Z0
                             if(functions.Length != 0)
                             {
                                 dst.SaveHexImm(gid, functions, Append)
-                                    .OnSome(path => Broker.Raise(Broker.EmittedEmbeddedImm.Refined(uri, generic, rft, path)));
+                                    .OnSome(path => Wf.Raise(default(EmittedEmbeddedImm).Refined(uri, generic, rft, path)));
                                 dst.SaveAsmImm(gid, functions, Append)
-                                    .OnSome(path => Broker.Raise(Broker.EmittedEmbeddedImm.Refined(uri, generic, rft, path)));
+                                    .OnSome(path => Wf.Raise(default(EmittedEmbeddedImm).Refined(uri, generic, rft, path)));
                             }
                         }
                     }
@@ -167,7 +128,7 @@ namespace Z0
         }
 
         IEnumerable<ApiHost> Hosts(params PartId[] parts)
-            => from h in ApiSet.DefinedHosts(parts)
+            => from h in Wf.Api.DefinedHosts(parts)
                 where h is ApiHost
                 select (ApiHost)h;
 
@@ -257,8 +218,8 @@ namespace Z0
                 var functions = Specializer.UnaryOps(exchange, f.Method, f.Id, imm8);
                 if(functions.Length != 0)
                 {
-                    dst.SaveHexImm(gid, functions, Append).OnSome(path => Broker.EmittedEmbeddedImm.Literal(host, generic, path));
-                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => Broker.EmittedEmbeddedImm.Literal(host, generic, path));
+                    dst.SaveHexImm(gid, functions, Append).OnSome(path => Wf.Raise(default(EmittedEmbeddedImm).Literal(host, generic, path)));
+                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => Wf.Raise(default(EmittedEmbeddedImm).Literal(host, generic, path)));
                 }
             }
         }
@@ -272,8 +233,8 @@ namespace Z0
                 var functions = Specializer.BinaryOps(exchange, f.Method, f.Id, imm8);
                 if(functions.Length != 0)
                 {
-                    dst.SaveHexImm(gid, functions, Append).OnSome(path => Broker.EmittedEmbeddedImm.Literal(host, generic, path));
-                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => Broker.EmittedEmbeddedImm.Literal(host, generic, path));
+                    dst.SaveHexImm(gid, functions, Append).OnSome(path => Wf.Raise(default(EmittedEmbeddedImm).Literal(host, generic, path)));
+                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => Wf.Raise(default(EmittedEmbeddedImm).Literal(host, generic, path)));
                 }
             }
         }
@@ -288,8 +249,8 @@ namespace Z0
                 var functions = Specializer.UnaryOps(exchange, closure.Method, closure.Id, imm8);
                 if(functions.Length != 0)
                 {
-                    dst.SaveHexImm(gid, functions, Append).OnSome(path => Broker.EmittedEmbeddedImm.Create(host, generic, path, refinement));
-                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => Broker.EmittedEmbeddedImm.Create(host, generic, path, refinement));
+                    dst.SaveHexImm(gid, functions, Append).OnSome(path => Wf.Raise(default(EmittedEmbeddedImm).Create(host, generic, path, refinement)));
+                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => Wf.Raise(default(EmittedEmbeddedImm).Create(host, generic, path, refinement)));
                 }
             }
         }
@@ -304,8 +265,8 @@ namespace Z0
                 var functions = Specializer.BinaryOps(exchange, closure.Method, closure.Id, imm8);
                 if(functions.Length != 0)
                 {
-                    dst.SaveHexImm(gid, functions, Append).OnSome(path => Broker.EmittedEmbeddedImm.Create(host, generic, path, refinement));
-                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => Broker.EmittedEmbeddedImm.Create(host, generic, path, refinement));
+                    dst.SaveHexImm(gid, functions, Append).OnSome(path => Wf.Raise(default(EmittedEmbeddedImm).Create(host, generic, path, refinement)));
+                    dst.SaveAsmImm(gid, functions, Append).OnSome(path => Wf.Raise(default(EmittedEmbeddedImm).Create(host, generic, path, refinement)));
                 }
             }
         }

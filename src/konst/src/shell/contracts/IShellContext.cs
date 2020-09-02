@@ -42,6 +42,9 @@ namespace Z0
         IPart[] Parts
             => Api.Parts;
 
+        PartId[] PartIdList
+            => Api.Parts.Select(x => x.Id);
+
         Assembly[] Components
             => Api.Components;
 

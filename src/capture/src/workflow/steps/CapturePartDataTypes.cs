@@ -51,8 +51,6 @@ namespace Z0
 
             try
             {
-                Target.PartAsmDir(Part).Clear();
-
                 using var extract = new ExtractMembers(State, Ct);
                 var extracted = z.@readonly(extract.Extract(DataTypes).GroupBy(x => x.Host).Select(x => kvp(x.Key, x.Array())).Array());
                 var count = extracted.Length;

@@ -34,13 +34,6 @@ namespace Z0.Asm
             => new AsmFormatter(config);
 
         /// <summary>
-        /// Allocates a caller-disposed asm text writer with the default formatter
-        /// </summary>
-        /// <param name="dst">The target path</param>
-        AsmWriter AsmWriter(FilePath dst)
-            => new AsmWriter(dst, DefaultFormatter);
-
-        /// <summary>
         /// Allocates a caller-disposed asm text writer with a specified formatter
         /// </summary>
         /// <param name="dst">The target path</param>

@@ -23,9 +23,9 @@ namespace Z0
 
         public IMultiSink Sink {get;}
 
-        readonly IImmEmitter ImmEmitter;
-
         readonly IAppContext App;
+
+        readonly PartId[] Parts;
 
         public ManageCapture(WfCaptureState state, CorrelationToken ct)
         {
@@ -34,8 +34,8 @@ namespace Z0
             Wf = state.Wf;
             Ct = ct;
             Sink = Wf.WfSink;
+            Parts = Wf.PartIdList;
             Broker = state.CaptureBroker;
-            ImmEmitter = State.Services.ImmEmitter(Sink, State.Asm.Api, State.Formatter, State.RoutineDecoder, State.Config, Ct);
             Wf.Created(StepId);
         }
 
@@ -57,8 +57,9 @@ namespace Z0
             }
 
             {
-                ImmEmitter.ClearArchive(State.Parts);
-                ImmEmitter.EmitRefined(State.Parts);
+                using var step = new EmitImmSpecials(Wf, State.Asm, State.Formatter, State.RoutineDecoder, Wf.Config.TargetArchive.Root, Ct);
+                step.ClearArchive(Parts);
+                step.EmitRefined(Parts);
             }
 
             {

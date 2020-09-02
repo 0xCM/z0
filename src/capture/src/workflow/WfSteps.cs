@@ -55,6 +55,13 @@ namespace Z0
         public WfStepId Id => StepId;
     }
 
+    [Step(typeof(EmitImmSpecials))]
+    public readonly struct EmitImmSpecialsStep : IWfStep<EmitImmSpecialsStep>
+    {
+        public static WfStepId StepId
+            => AB.step<EmitImmSpecialsStep>();
+    }
+
     [Step(typeof(CaptureHostMembers), StepName)]
     public readonly struct CaptureHostMembersStep : IWfStep<CaptureHostMembersStep>
     {

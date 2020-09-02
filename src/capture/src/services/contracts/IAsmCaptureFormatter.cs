@@ -3,9 +3,9 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
-    
+
     using Iced = Iced.Intel;
 
     interface IAsmCaptureFormatter : IService
@@ -14,5 +14,4 @@ namespace Z0.Asm
 
         ReadOnlySpan<string> FormatInstructions(Iced.InstructionList src, ulong @base);
     }
-
 }

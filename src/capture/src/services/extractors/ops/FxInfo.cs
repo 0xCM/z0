@@ -16,6 +16,5 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static InstructionInfo FxInfo(Iced.Instruction src)
             => Deicer.Thaw(src.GetInfo());
-
     }
 }

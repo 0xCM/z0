@@ -13,8 +13,5 @@ namespace Z0.Asm
 
         IAsmDecoder ICaptureServices.RoutineDecoder(in AsmFormatSpec? format)
             => new AsmRoutineDecoder(format ?? AsmFormatSpec.Default);
-
-        IImmEmitter ImmEmitter(IMultiSink sink, IApiSet api, IAsmFormatter formatter, IAsmDecoder decoder, WfConfig config, CorrelationToken? ct = null)
-            => new EmitImmSpecials(Context, config, sink, formatter, decoder, api, config.TargetArchive.Root, ct);
     }
 }
