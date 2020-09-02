@@ -70,8 +70,8 @@ namespace Z0
         void Error(string actor, Exception e, CorrelationToken? ct = null)
             => Raise(WfEvB.error(actor, e, ct ?? Ct));
 
-        void Created(string actor)
-            => Raise(WfEvents.newWorker(Ct, actor));
+        void Created(WfToolId tool)
+            => Raise(WfEvents.created(tool, Ct));
 
         void Created(WfStepId id)
         {
@@ -192,6 +192,9 @@ namespace Z0
 
         void Processed<T>(T kind, FilePath src, uint size, [File] string actor = null, [Line] int? line = null)
             => Raise(WfEvents.processed(callerName(actor), kind, src, size, Ct));
+
+        void Processed<T>(WfStepId step, T content, WfDataFlow<FS.FilePath> flow, uint size)
+            => Raise(WfEvents.processed(step, content, flow, size, Ct));
 
         void RunningT<T>(string actor, T output, CorrelationToken? ct = null)
             => Raise(WfEvents.running(WfStepId.Empty, output, Ct));

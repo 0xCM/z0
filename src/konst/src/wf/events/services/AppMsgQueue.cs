@@ -11,9 +11,6 @@ namespace Z0
 
     using static Konst;
 
-    /// <summary>
-    /// A container of messages which isnt't realy a queue but is more-or-less thread-safe
-    /// </summary>
     class AppMsgQueue : IAppMsgQueue, IAppMsgContext
     {
         object lockobj = new object();

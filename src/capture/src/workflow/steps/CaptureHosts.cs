@@ -18,6 +18,7 @@ namespace Z0
         public IWfCaptureState State {get;}
 
         public IWfShell Wf {get;}
+
         public IApiHost[] Hosts {get;}
 
         public CorrelationToken Ct {get;}
@@ -32,7 +33,7 @@ namespace Z0
             Hosts = hosts;
             Ct = ct;
             Target = dst;
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId);
         }
 
         public void Run()
@@ -60,7 +61,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId);
         }
     }
 }

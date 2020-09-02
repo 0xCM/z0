@@ -16,7 +16,7 @@ namespace Z0
         /// <summary>
         /// The tool identifier
         /// </summary>
-        public ToolId OwnerId {get;}
+        public WfToolId OwnerId {get;}
 
         /// <summary>
         /// The tool output directory
@@ -27,9 +27,9 @@ namespace Z0
         /// The process root folder
         /// </summary>
         public FolderPath Processed {get;}
-        
+
         [MethodImpl(Inline)]
-        public ToolArchive(ToolId tool, FolderPath src, FolderPath dst)
+        public ToolArchive(WfToolId tool, FolderPath src, FolderPath dst)
         {
             ToolOutput = src;
             OwnerId = tool;
@@ -38,7 +38,7 @@ namespace Z0
 
         public ToolFiles<T> Dir()
             => ToolOutput.AllFiles.Map(f => new ToolFile<T>(f));
-        
+
         public ToolFiles<T> Dir(string pattern)
             => ToolOutput.Files(pattern, SearchOption.AllDirectories).Map(f => new ToolFile<T>(f));
     }

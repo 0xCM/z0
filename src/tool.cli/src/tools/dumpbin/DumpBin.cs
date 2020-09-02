@@ -17,11 +17,11 @@ namespace Z0.Tools
 
         public const string Name = "dumpbin";
 
-        public static ToolId Id => Name;
+        public static WfToolId Id => Name;
 
         public IWfShell Wf;
 
-        public ToolId ToolId {get;}
+        public WfToolId ToolId {get;}
 
         public string ToolName {get;}
 
@@ -46,7 +46,7 @@ namespace Z0.Tools
             AvailableFlags = new ToolFlags<DumpBinFlag>(0);
             Map = new ExtensionMap<DumpBinFlag,ExtMap>(0);
             Archive = new ToolArchive<DumpBin>(ToolId, outdir, processed);
-            Wf.Created(Name);
+            Wf.Created(Id);
         }
 
         public void Process()
@@ -60,18 +60,7 @@ namespace Z0.Tools
             var archive = Archive;
             var root = archive.ToolOutput;
             var files = archive.Dir();
-            var listed = Tooling.listed(files);
-            return listed;
-            //var formatted = FS.format(listed);
-            //for(var i=0u; i <files.Count; i++)
-            //{
-                // if(files[i].Path.Name.Contains(".instructions."))
-                // {
-                //     Process(files[i]);
-                //     var message = text.format(FormatLiterals.PSx2, processor.LineCount, processor.IxCount);
-                //     Wf.Status(ActorName, message, Ct);
-                // }
-            //}
+            return Tooling.listed(files);
 
         }
         public void Dispose()

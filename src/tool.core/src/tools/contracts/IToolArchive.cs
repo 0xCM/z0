@@ -11,7 +11,7 @@ namespace Z0
         /// <summary>
         /// The identifier of the owning tool
         /// </summary>
-        ToolId OwnerId {get;}
+        WfToolId OwnerId {get;}
 
         /// <summary>
         /// The tool output directory
@@ -21,12 +21,12 @@ namespace Z0
         /// <summary>
         /// The process root folder
         /// </summary>
-        FolderPath Processed {get;}        
+        FolderPath Processed {get;}
     }
 
     public interface IToolArchive<T> : IToolArchive
         where T : struct, ITool<T>
-    {        
+    {
         /// <summary>
         /// The tool that owns the archive
         /// </summary>
@@ -35,9 +35,9 @@ namespace Z0
         /// <summary>
         /// The identifier of the owning tool
         /// </summary>
-        ToolId IToolArchive.OwnerId 
+        WfToolId IToolArchive.OwnerId
             => Owner.ToolId;
-        
+
         ToolFiles<T> Dir()
             => ToolArchives.output(this).Map(f => new ToolFile<T>(f));
     }
@@ -45,7 +45,7 @@ namespace Z0
     // public interface IToolArchive<T,F> : IToolArchive<T>
     //     where T : struct, ITool<T>
     //     where F : unmanaged, Enum
-    // {        
+    // {
     //     IExtensionMap<F> Map {get;}
 
     //     FileExtension Ext(F f)

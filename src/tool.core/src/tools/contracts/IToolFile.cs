@@ -10,7 +10,7 @@ namespace Z0
 
     public interface IToolFile
     {
-        ToolId ToolId {get;}
+        WfToolId ToolId {get;}
 
         FilePath EmissionPath {get;}
     }
@@ -20,7 +20,7 @@ namespace Z0
     {
         T Tool => default(T);
 
-        ToolId IToolFile.ToolId 
+        WfToolId IToolFile.ToolId
             => Tool.ToolId;
     }
 
@@ -28,6 +28,6 @@ namespace Z0
         where T : struct, ITool<T>
         where F : unmanaged, Enum
     {
-        
+
     }
 }

@@ -17,6 +17,8 @@ namespace Z0
         {
             public PathPart Name {get;}
 
+            public static FilePath Empty => new FilePath(PathPart.Empty);
+
             [MethodImpl(Inline)]
             public FilePath(PathPart name)
                 => Name = name;

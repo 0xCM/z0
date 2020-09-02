@@ -10,23 +10,23 @@ namespace Z0
     using static Konst;
 
     public interface ITool
-    {        
-        ToolId ToolId {get;}
+    {
+        WfToolId ToolId {get;}
 
         FolderPath Source {get;}
     }
-    
+
     public interface ITool<T> : ITool
         where T : struct, ITool<T>
     {
         T Tool => default;
 
-        ToolId ITool.ToolId 
-            => Tool.ToolId; 
+        WfToolId ITool.ToolId
+            => Tool.ToolId;
 
         IToolArchive<T> Archive {get;}
     }
-    
+
     public interface ITool<T,F> : ITool<T>, IToolFlags<F>
         where T : struct, ITool<T,F>
         where F : unmanaged, Enum

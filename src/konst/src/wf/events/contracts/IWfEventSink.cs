@@ -12,11 +12,4 @@ namespace Z0
     {
 
     }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface IWfEventSink<H> : IWfEventSink
-        where H : struct, IWfEventSink<H>
-    {
-
-    }
 }

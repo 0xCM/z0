@@ -11,8 +11,8 @@ namespace Z0
 
     public interface IToolConfig
     {
-        ToolId ToolId {get;}
-        
+        WfToolId ToolId {get;}
+
         FolderPath Source {get;}
 
         FolderPath Target {get;}

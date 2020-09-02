@@ -10,6 +10,8 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
+    using static CaptureMemoryStep;
+
     [Step(typeof(CaptureMemory))]
     public readonly struct CaptureMemoryStep : IWfStep<CaptureMemoryStep>
     {
@@ -45,12 +47,12 @@ namespace Z0.Asm
             ExtractBuffer = alloc<byte>(bufferlen);
             ParseBuffer = alloc<byte>(bufferlen);
             Decoder = AsmDecoderProxy.Service;
-            Wf.Created(StepName);
+            Wf.Created(StepId);
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName);
+            Wf.Finished(StepId);
         }
 
         [MethodImpl(Inline)]
@@ -62,7 +64,7 @@ namespace Z0.Asm
 
         public CapturedMemory Run(MemoryAddress src)
         {
-            Wf.RunningT(StepName, src);
+            Wf.Running(StepId, src);
 
             ClearBuffers();
 
@@ -96,7 +98,7 @@ namespace Z0.Asm
                 }
             }
 
-            Wf.RanT(StepName, captured);
+            Wf.Ran(StepId, captured);
 
             return captured;
         }

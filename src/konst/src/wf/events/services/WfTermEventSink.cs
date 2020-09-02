@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Reifies a workflow event receiver that emits received events to the terminal
     /// </summary>
-    public readonly struct WfTermEventSink : IWfEventSink<WfTermEventSink>, IMultiSink
+    public readonly struct WfTermEventSink : IWfEventSink, IMultiSink
     {
         public static IWfEventSink create(IWfEventLog log, CorrelationToken ct)
             => new WfTermEventSink(log,ct);

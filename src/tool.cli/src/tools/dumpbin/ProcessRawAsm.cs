@@ -10,15 +10,23 @@ namespace Z0.Tools
     using static Konst;
     using static z;
 
+    using static ProcessRawAsmStep;
+
+    public readonly struct ProcessRawAsmStep : IWfStep<ProcessRawAsmStep>
+    {
+        public static WfStepId StepId
+            => AB.step<ProcessRawAsmStep>();
+    }
+
     partial struct DumpBin
     {
         [MethodImpl(Inline)]
-        public RawAsmProcessor Processor(DumpBinFlag flags, DumpBinOptions options= default)
-            => new RawAsmProcessor(Wf, Wf.ToolOuputDir(DumpBin.Name), Wf.ToolProcessDir(DumpBin.Name), flags, options);
+        public ProcessRawAsm Processor(DumpBinFlag flags, DumpBinOptions options= default)
+            => new ProcessRawAsm(Wf, Wf.ToolOuputDir(DumpBin.Name), Wf.ToolProcessDir(DumpBin.Name), flags, options);
 
-        public struct RawAsmProcessor : IToolProcessor<DumpBin,DumpBinFlag>
+        public struct ProcessRawAsm : IToolProcessor<DumpBin,DumpBinFlag>
         {
-            public const string ActorName = nameof(RawAsmProcessor);
+            public const string ActorName = nameof(ProcessRawAsm);
 
             public IWfShell Wf {get;}
 
@@ -33,7 +41,7 @@ namespace Z0.Tools
             public ToolArchive<DumpBin> Archive {get;}
 
             [MethodImpl(Inline)]
-            public RawAsmProcessor(IWfShell wf, FolderPath output, FolderPath processed, DumpBinFlag flags, DumpBinOptions options)
+            public ProcessRawAsm(IWfShell wf, FolderPath output, FolderPath processed, DumpBinFlag flags, DumpBinOptions options)
             {
                 Wf = wf;
                 LineCount = 0;
@@ -41,7 +49,7 @@ namespace Z0.Tools
                 Archive = ToolArchives.create<DumpBin>(output, processed);
                 Flags = flags;
                 Options = options;
-                Wf.Created(ActorName);
+                Wf.Created(StepId);
             }
 
             const byte Seg0Min = 0;
@@ -94,8 +102,10 @@ namespace Z0.Tools
 
                     LineCount++;
                 }
+
                 writer.Flush();
                 writer.Dispose();
+
                 Wf.Processed(ExtMap.Asm, src.EmissionPath, LineCount);
             }
 
@@ -117,7 +127,7 @@ namespace Z0.Tools
 
             public void Dispose()
             {
-                Wf.Finished(ActorName);
+                Wf.Finished(StepId);
             }
         }
     }

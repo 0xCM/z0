@@ -11,21 +11,19 @@ namespace Z0
     using static Render;
     using static z;
 
-    public readonly struct WfStepCreated : IWfEvent<WfStepCreated>
+    public readonly struct WfToolCreated : IWfEvent<WfToolCreated>
     {
-        public const string EventName = nameof(WfStepCreated);
-
         public WfEventId EventId {get;}
 
-        public WfStepId StepId {get;}
+        public WfToolId ToolId {get;}
 
         public MessageFlair Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStepCreated(WfStepId step, CorrelationToken ct, MessageFlair flair = Created)
+        public WfToolCreated(WfToolId tool, CorrelationToken ct, MessageFlair flair = Created)
         {
-            EventId = (EventName, step, ct);
-            StepId = step;
+            EventId = (tool, ct);
+            ToolId = tool;
             Flair = flair;
         }
 

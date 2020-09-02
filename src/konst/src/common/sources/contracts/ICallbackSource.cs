@@ -3,12 +3,12 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Security;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ICallbackSouce<T> : ISource
+    public interface ICallbackSource<T> : ISource
     {
         event Action<T> Next;
     }

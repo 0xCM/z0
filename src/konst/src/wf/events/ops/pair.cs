@@ -6,24 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using static Konst;
-    using static z;
+    using static Render;
+    using static AB;
 
-    public readonly struct ToolSpec
+    partial struct WfEvents
     {
-        public readonly WfToolId Id;
-
-        public readonly ToolFlag[] Flags;
-
-        public readonly ToolOption[] Options;
-
         [MethodImpl(Inline)]
-        public ToolSpec(string name, ToolFlag[] flags, ToolOption[] options)
-        {
-            Id = name;
-            Flags = flags;
-            Options = options;
-        }
+        public static WfEventPair<S,T> pair<S,T>(in S a, in T b)
+            where S : struct, IWfEvent<S>
+            where T : struct, IWfEvent<T>
+                => new WfEventPair<S,T>(a,b);
     }
 }

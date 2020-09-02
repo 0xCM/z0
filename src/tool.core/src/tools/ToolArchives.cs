@@ -8,15 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
-    public readonly struct ToolArchives    
-    {     
+
+    public readonly struct ToolArchives
+    {
         [MethodImpl(Inline)]
-        public static ToolArchive<T,F> create<T,F>(ToolId id, FolderPath root)
+        public static ToolArchive<T,F> create<T,F>(WfToolId id, FolderPath root)
             where T : struct, ITool<T,F>
-            where F : unmanaged, Enum   
-                => new ToolArchive<T,F>(id, root);        
-        
+            where F : unmanaged, Enum
+                => new ToolArchive<T,F>(id, root);
+
         [MethodImpl(Inline)]
         public static ToolArchive<T> create<T>(FolderPath src, FolderPath dst)
             where T : struct, ITool<T>

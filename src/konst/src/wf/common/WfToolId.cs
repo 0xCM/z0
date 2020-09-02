@@ -9,25 +9,25 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ToolId : ITextual
+    public readonly struct WfToolId : ITextual
     {
         public readonly StringRef Name;
 
         public readonly ulong Key;
-        
-        [MethodImpl(Inline)]
-        public static implicit operator ToolId(string name)
-            => new ToolId(name);
 
         [MethodImpl(Inline)]
-        public ToolId(string name)
+        public static implicit operator WfToolId(string name)
+            => new WfToolId(name);
+
+        [MethodImpl(Inline)]
+        public WfToolId(string name)
         {
             Name = name;
             Key = Name.Address;
-        }    
+        }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Name.Format();    
+            => Name.Format();
     }
 }

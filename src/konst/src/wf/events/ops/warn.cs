@@ -6,13 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using static Konst;
+    using static Render;
+    using static AB;
 
-    partial struct Tooling
+    partial struct WfEvents
     {
-        [MethodImpl(Inline), Op]
-        public static ToolConfig config(WfToolId tool,FolderPath src, FolderPath dst)
-            => new ToolConfig(tool,src,dst);
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        public static WfWarn<T> warn<T>(WfStepId step, T body, CorrelationToken ct)
+            => new WfWarn<T>(step, body, ct);
     }
 }

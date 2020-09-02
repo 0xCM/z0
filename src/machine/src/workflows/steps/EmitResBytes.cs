@@ -38,12 +38,12 @@ namespace Z0
             SourceDir = context.AppPaths.AppCaptureRoot;
             TargetDir = context.AppPaths.ResourceRoot + FolderName.Define(ProjectName);
             Archive = Archives.hex(SourceDir);
-            Wf.Created(StepName,Ct);
+            Wf.Created(StepId);
         }
 
         public void Run()
         {
-            Wf.Running(StepId, new {SourceDir, TargetDir});
+            Wf.Running(StepId, flow(SourceDir, TargetDir));
 
             var indices = CodeReader.identified(SourceDir, Sink);
             foreach(var index in indices)
@@ -59,11 +59,13 @@ namespace Z0
                     Wf.Error(e, Ct);
                 }
             }
+
+            Wf.Ran(StepId, flow(SourceDir, TargetDir));
         }
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId, Ct);
         }
 
         void Emit(IdentifiedCodeIndex src, FolderPath dst)
@@ -85,8 +87,8 @@ namespace Z0
                     EmitMember(writer, property(res));
                     members.Add(res.Identifier);
                 }
-
             }
+
             CloseTypeDeclaration(writer);
             CloseFileNamespace(writer);
 
