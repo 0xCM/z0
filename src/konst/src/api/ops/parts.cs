@@ -26,6 +26,7 @@ namespace Z0
         public static IPart[] parts(Assembly[] src)
             => src.Where(isPart).Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id);
 
+        [Op]
         public static Assembly[] parts(FilePath[] src,
             [CallerMemberName] string caller = null,
             [CallerFilePath] string file = null,
@@ -33,6 +34,7 @@ namespace Z0
                 => src.Map(f => ApiQuery.assembly(f, caller, file, line))
                       .Where(x => x.IsSome()).Select(x => x.Value).Where(test);
 
+        [Op]
         public static Assembly[] parts(FS.FilePath[] src,
             [CallerMemberName] string caller = null,
             [CallerFilePath] string file = null,

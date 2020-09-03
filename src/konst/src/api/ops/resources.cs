@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    using System.Collections.Generic;
     using System.Linq;
 
     using static Konst;
@@ -19,6 +18,7 @@ namespace Z0
         /// Queries the source assemblies for ByteSpan property getters
         /// </summary>
         /// <param name="src">The assemblies to query</param>
+        [MethodImpl(Inline), Op]
         public static ResourceAccessors resources(Assembly[] src)
             => resources(src.SelectMany(x => x.GetTypes()));
 
@@ -26,6 +26,7 @@ namespace Z0
         /// Queries the source assembly for ByteSpan property getters
         /// </summary>
         /// <param name="src">The assembly to query</param>
+        [MethodImpl(Inline), Op]
         public static ResourceAccessors resources(Assembly src)
             => resources(src.GetTypes());
 
@@ -33,13 +34,15 @@ namespace Z0
         /// Queries the source types for ByteSpan property getters
         /// </summary>
         /// <param name="src">The types to query</param>
+        [MethodImpl(Inline), Op]
         public static ResourceAccessors resources(Type[] src)
-            => src.Where(t => !t.IsInterface).SelectMany(ApiQuery.resources).ToArray();
+            => src.Where(t => !t.IsInterface).SelectMany(ApiQuery.resources).Array();
 
         /// <summary>
         /// Queries the source type for ByteSpan property getters
         /// </summary>
         /// <param name="src">The type to query</param>
+        [Op]
         public static ResourceAccessor[] resources(Type src)
             => src.StaticProperties()
                  .Ignore()

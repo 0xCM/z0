@@ -35,7 +35,5 @@ namespace Z0
         public static T[] numeric<T>(Type src)
             where T : unmanaged
                 => z.map(search<T>(src),numeric<T>);
-
-
     }
 }

@@ -14,11 +14,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static bool empty(in BinaryLiteral src)
-            => BinaryLiteral.empty(src);
+            => text.blank(src.Name) && text.blank(src.Text) && src.Data is null;
 
         [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static bool empty<T>(in BinaryLiteral<T> src)
             where T : unmanaged
-                => BinaryLiteral.empty(src);
+                => text.empty(src.Name) && text.empty(src.Text) && src.Data.Equals(default);
     }
 }

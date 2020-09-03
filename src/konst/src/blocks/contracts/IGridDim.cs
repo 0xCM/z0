@@ -7,21 +7,21 @@ namespace Z0
     public interface IGridDim
     {
         /// <summary>
-        /// The numbet of rows in the grid
+        /// The number of rows in the grid
         /// </summary>
-        int RowCount {get;}
-        
+        Count32 RowCount {get;}
+
         /// <summary>
         /// The number of columns in the grid
         /// </summary>
-        int ColCount {get;}    
+        Count32 ColCount {get;}
     }
 
     /// <summary>
     /// Characterizes a grid with parametric cell type
     /// </summary>
     /// <typeparam name="T">The grid cell type</typeparam>
-    public interface   IGridDim<T> : IGridDim
+    public interface IGridDim<T> : IGridDim
         where T : unmanaged
     {
 
@@ -54,6 +54,6 @@ namespace Z0
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-        
+
     }
 }

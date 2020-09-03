@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static z;
 
     /// <summary>
     /// Encapsulates metrics that characterize a grid of natural rectangular dimensions
     /// </summary>
-    public readonly struct GridDim<M,N,T> : IGridDim<M,N,T>
+    public readonly struct GridDim<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
@@ -71,7 +71,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => GridCells.tablecells<M,N,T>();
         }
-        
+
         /// <summary>
         /// The number of bytes required to cover a grid
         /// </summary>
@@ -82,7 +82,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Returns a dimension expression of the form RxCxWw where 
+        /// Returns a dimension expression of the form RxCxWw where
         /// R := row count
         /// C := column count
         /// W := cell width

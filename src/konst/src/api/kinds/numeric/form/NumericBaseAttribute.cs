@@ -10,7 +10,7 @@ namespace Z0
     /// Indicates the target's numeric base preference
     /// </summary>
     public class NumericBaseAttribute : Attribute
-    {    
+    {
         public NumericBaseAttribute(int @base)
         {
             this.Base = (NumericBaseKind)@base;
@@ -26,7 +26,7 @@ namespace Z0
         {
             this.Base = @base;
         }
-        
+
         public NumericBaseKind Base {get;}
 
         public int? MaxDigits {get;}

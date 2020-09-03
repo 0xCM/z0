@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source literal</param>
         [MethodImpl(Inline), Op]
         public static NumericKind kind(BinaryLiteral src)
-            => BinaryLiteral.kind(src);
+            => src.Data?.GetType()?.NumericKind() ?? NumericKind.None;
 
         /// <summary>
         /// Discerns the numeric kind of a specified binary literal
@@ -27,6 +27,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static NumericKind kind<T>(BinaryLiteral<T> src)
             where T : unmanaged
-                => BinaryLiteral.kind(src);
+                => NumericKinds.kind<T>();
     }
 }

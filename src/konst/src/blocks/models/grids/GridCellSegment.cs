@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static z;
 
-    public readonly struct GridCellSegment<T> : IGridDim<T>, ITextual
+    public readonly struct GridCellSegment<T> : ITextual
         where T : unmanaged
     {
         /// <summary>
@@ -19,7 +19,7 @@ namespace Z0
         public readonly ushort RowCount;
 
         /// <summary>
-        /// The number of columsn in the grid
+        /// The number of columns in the grid
         /// </summary>
         public readonly ushort ColCount;
 
@@ -43,24 +43,12 @@ namespace Z0
         }
 
         /// <summary>
-        /// Returns a dimension expression of the form RxCxWw where 
+        /// Returns a dimension expression of the form RxCxWw where
         /// R := row count
         /// C := column count
         /// W := cell width
         /// </summary>
         public string Format()
             => $"{RowCount}x{ColCount}x{CellWidth}w";
-
-        int IGridDim.RowCount 
-        {
-            [MethodImpl(Inline)]
-            get => RowCount;
-        }
-
-        int IGridDim.ColCount 
-        {
-            [MethodImpl(Inline)]
-            get => ColCount;
-        }
     }
 }

@@ -10,6 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using api = Literals;
+
     [ApiClass(DataStructure)]
     public readonly struct BinaryLiteral<T> : ILiteral<BinaryLiteral<T>,T>
         where T : unmanaged
@@ -31,13 +33,13 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => BinaryLiteral.empty(this);
+            get => api.empty(this);
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => BinaryLiteral.nonempty(this);
+            get => api.nonempty(this);
         }
 
         public BinaryLiteral<T> Zero
@@ -48,7 +50,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => BinaryLiteral.format(this);
+            => api.format(this);
 
         public override string ToString()
             => Format();
@@ -56,7 +58,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(BinaryLiteral<T> src)
-            => BinaryLiteral.eq(this, src);
+            => api.eq(this, src);
 
         public static BinaryLiteral<T> Empty
             => new BinaryLiteral<T>(EmptyString, default, EmptyString);

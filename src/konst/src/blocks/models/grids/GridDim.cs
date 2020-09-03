@@ -8,35 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     /// <summary>
     /// Defines grid dimensions based on specification without parametrization
     /// </summary>
-    public readonly struct GridDim : IGridDim
-    {        
+    public readonly struct GridDim
+    {
         /// <summary>
         /// The number of grid rows
         /// </summary>
-        public readonly int RowCount;
+        public readonly uint RowCount;
 
         /// <summary>
         /// The number of grid columns
         /// </summary>
-        public readonly int ColCount;
-
-        public static GridDim Parse(string s)
-        {
-            var parts = s.Split('x');
-            var parser = Parsers.numeric<int>();
-            if(parts.Length == 2)
-            {
-                var result = from m in parser.Parse(parts[0])
-                             from n in parser.Parse(parts[1])
-                             select new GridDim(m,n);
-                return result.Succeeded ? result.Value : Empty;
-            }
-            return Empty;
-        }
+        public readonly uint ColCount;
 
         public static bool operator ==(GridDim d1, GridDim d2)
             => d1.Equals(d2);
@@ -46,14 +33,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator GridDim((int rows, int cols) src)
-            => new GridDim(src.rows,src.cols);
+            => new GridDim((uint)src.rows,(uint)src.cols);
 
         [MethodImpl(Inline)]
-        public static implicit operator (int rows, int cols)(GridDim src)
-            => (src.RowCount, src.ColCount);
+        public static implicit operator Pair<uint>(GridDim src)
+            => pair(src.RowCount, src.ColCount);
 
         [MethodImpl(Inline)]
-        public GridDim(int rows, int cols)
+        public GridDim(uint rows, uint cols)
         {
             RowCount = rows;
             ColCount = cols;
@@ -66,7 +53,7 @@ namespace Z0
             => $"{RowCount}x{ColCount}";
 
         [MethodImpl(Inline)]
-        public void Deconstruct(out int rows, out int cols)
+        public void Deconstruct(out uint rows, out uint cols)
         {
             rows = RowCount;
             cols = ColCount;
@@ -74,30 +61,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(GridDim src)
-            => src.RowCount == RowCount && src.ColCount == ColCount;
+            => src.RowCount == RowCount
+            && src.ColCount == ColCount;
 
         public override string ToString()
             => Format();
-        
+
         public override int GetHashCode()
-            => HashCode.Combine(RowCount,ColCount);
-        
+            => (int)hash(RowCount, ColCount);
+
         public override bool Equals(object obj)
             => obj is GridDim d && Equals(d);
 
-        public static GridDim Empty 
+        public static GridDim Empty
             => default;
-
-        int IGridDim.RowCount 
-        {
-            [MethodImpl(Inline)]
-            get => RowCount;
-        }
-
-        int IGridDim.ColCount 
-        {
-            [MethodImpl(Inline)]
-            get => ColCount;
-        }
     }
 }

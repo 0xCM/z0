@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Classfies operations according to their immediate needs
+    /// Classifies operations according to their immediate needs
     /// </summary>
     [Flags]
     public enum ImmFunctionClassKind : byte
@@ -16,7 +16,7 @@ namespace Z0
         /// The empty class
         /// </summary>
         None = 0,
-        
+
         /// <summary>
         /// Classifies operations that accept one or more immediate values
         /// </summary>
@@ -85,6 +85,6 @@ namespace Z0
         /// <summary>
         /// F:A -> A -> A -> byte -> byte -> A
         /// </summary>
-        TernaryImm8x2 = Imm8 | ImmCount2 | ImmSlot3 | ImmSlot4        
+        TernaryImm8x2 = Imm8 | ImmCount2 | ImmSlot3 | ImmSlot4
     }
 }

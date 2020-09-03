@@ -7,13 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static Root;
 
     /// <summary>
     /// Defines a parametrically-predicated blocked grid
     /// </summary>
-    public readonly struct GridDim<W,M,N,T> : IGridDim<W,M,N,T>
+    public readonly struct GridDim<W,M,N,T>
         where W : unmanaged, ITypeNat
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
@@ -101,7 +101,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Returns a dimension expression of the form {R}x{C}x{W}w where 
+        /// Returns a dimension expression of the form {R}x{C}x{W}w where
         /// R := row count
         /// C := column count
         /// W := cell width

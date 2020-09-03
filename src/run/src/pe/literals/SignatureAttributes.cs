@@ -40,6 +40,5 @@ namespace Z0
             /// </summary>
             ExplicitThis = 0x40,
         }
-
     }
 }

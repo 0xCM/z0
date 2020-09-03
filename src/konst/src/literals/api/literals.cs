@@ -13,6 +13,7 @@ namespace Z0
 
     partial struct Literals
     {
+        [MethodImpl(Inline), Op]
         public static FieldInfo[] literals(FieldInfo[] src)
             => src.Where(x => x.IsLiteral);
     }

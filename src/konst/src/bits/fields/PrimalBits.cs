@@ -95,6 +95,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static PrimalKindId id(PrimalKindBitField f)
             => (PrimalKindId)select(f, SegId.KindId);
-
     }
 }

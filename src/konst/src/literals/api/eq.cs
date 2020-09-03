@@ -15,10 +15,14 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers8x64k)]
         public static bool eq<T>(BinaryLiteral<T> x, BinaryLiteral<T> y)
             where T : unmanaged
-                => BinaryLiteral.eq(x,y);
+                => string.Equals(x.Text, y.Text)
+                && object.Equals(x.Data, y.Data)
+                && string.Equals(x.Name, y.Name);
 
         [MethodImpl(Inline), Op]
         public static bool eq(BinaryLiteral x, BinaryLiteral y)
-            => BinaryLiteral.eq(x,y);
+                => string.Equals(x.Text, y.Text)
+                && object.Equals(x.Data, y.Data)
+                && string.Equals(x.Name, y.Name);
     }
 }
