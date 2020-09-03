@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Konst;
     using static z;
@@ -21,11 +20,11 @@ namespace Z0
             => Option.Try(() => (bit)(byte)rebox(incoming, NumericKind.U8));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static bit to<T>(T src) 
+        public static bit to<T>(T src)
             => to_a(src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T from<T>(bit src) 
+        public static T from<T>(bit src)
             => from_a<T>(src);
 
         [MethodImpl(Inline)]
@@ -35,7 +34,7 @@ namespace Z0
                 return (bit)bool8(src);
             else if(typeof(T) == typeof(char))
                 return  (bit)char16(src);
-            else 
+            else
                 return to_u(src);
         }
 
@@ -80,7 +79,7 @@ namespace Z0
                 return generic<T>((float)((uint)src));
             else if(typeof(T) == typeof(double))
                 return generic<T>((double)((double)src));
-            else 
+            else
                 return from_u<T>(src);
         }
 

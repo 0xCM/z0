@@ -12,21 +12,23 @@ public enum PartId : ulong
 
     Part = 1,
 
-    Sys = 4,
+    Sys = 2,
 
-    Konst = 8,
+    Konst = 3,
 
-    Math = 12,
+    Math = 4,
 
-    BitMasks = 14,
+    BitMasks = 5,
 
-    Expressive = 16,
+    Win = 6,
+
+    Expressive = 7,
+
+    ToolCore = 8,
 
     Domain = 18,
 
     Imagine = 20,
-
-    Seed = 22,
 
     Memories = 24,
 
@@ -46,7 +48,6 @@ public enum PartId : ulong
 
     Monitor = 41,
 
-    ToolCore = 42,
 
     ToolCli = 43,
 
@@ -62,7 +63,6 @@ public enum PartId : ulong
 
     Bits = 70,
 
-    Win = 71,
 
     // ~ 100
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

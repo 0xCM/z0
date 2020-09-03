@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using static Memories;
-    
+    using static z;
+
     public class TestFixedBinaryOp : TTestFixedBinaryOp
     {
         public IPolyrand Random {get;}
@@ -28,7 +28,7 @@ namespace Z0
             Random = random;
         }
 
-        TTestAction ActionTest => cast<TTestFixedBinaryOp>(this);
+        TTestAction ActionTest => z.cast<TTestFixedBinaryOp>(this);
 
         TTestCaseIdentity Identity => ActionTest;
 
@@ -46,7 +46,7 @@ namespace Z0
         public TestCaseRecord Match(BinaryOp8 f, OpIdentity fId, BinaryOp8 g, OpIdentity gId)
         {
             var w = w8;
-        
+
             void check()
             {
                 for(var i=0; i < RepCount; i++)
@@ -184,6 +184,6 @@ namespace Z0
             }
 
             return ActionTest.TestAction(check, Identity.MatchCaseName(fId, gId));
-        } 
+        }
     }
 }

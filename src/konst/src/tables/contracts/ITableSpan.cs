@@ -56,6 +56,9 @@ namespace Z0
         ReadOnlySpan<T> View
             => Storage;
 
+        TableSpan<T> Table
+            => Storage;
+
         ref T this[long index]
             => ref Storage[index];
 
@@ -69,48 +72,10 @@ namespace Z0
             => Length != 0;
     }
 
-    /// <summary>
-    /// Characterizes an index-parametric <see cref='ITableSpan{T}' />
-    /// /// </summary>
-    /// <typeparam name="T">The table type</typeparam>
-    /// <typeparam name="I">The index type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ITableSpan<T,I> : ITableSpan<T>
-        where T : struct, ITable
-        where I : unmanaged
+    public interface ITableSpan<H,T> : ITableSpan<T>
+        where H : struct, ITableSpan<H,T>
+        where T : struct
     {
-        ref T this[I index] {get;}
-    }
-
-    /// <summary>
-    /// Characterizes a field-parametric <see cref='ITableSpan{T,I}'/>
-    /// </summary>
-    /// <typeparam name="F">The field specification</typeparam>
-    /// <typeparam name="T">The table type</typeparam>
-    /// <typeparam name="I">The index type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ITableSpan<F,T,I> : ITableSpan<T,I>
-        where T : struct, ITable
-        where I : unmanaged
-        where F : unmanaged, Enum
-    {
-
-    }
-
-    /// <summary>
-    /// Characterizes a reified <see cref='ITableSpan{F,T,I}'/>
-    /// </summary>
-    /// <typeparam name="H">The host type</typeparam>
-    /// <typeparam name="F">The field specification</typeparam>
-    /// <typeparam name="T">The table type</typeparam>
-    /// <typeparam name="I">The index type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ITableSpan<H,F,T,I> : ITableSpan<F,T,I>
-        where H : struct, ITableSpan<H,F,T,I>
-        where T : struct, ITable
-        where I : unmanaged
-        where F : unmanaged, Enum
-    {
-
+        H Refresh(T[] src);
     }
 }

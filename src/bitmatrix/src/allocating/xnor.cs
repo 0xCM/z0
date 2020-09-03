@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     partial class BitMatrixA
@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
         [MethodImpl(Inline), Xnor, Closures(UnsignedInts)]
         public static BitMatrix<T> xnor<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
@@ -37,7 +37,7 @@ namespace Z0
         {
             var a = (ushort)A;
             var b = (ushort)B;
-            return math.xnor(a,b);
+            return BitLogic.xnor(a,b);
         }
 
         /// <summary>

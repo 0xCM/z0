@@ -20,7 +20,7 @@ namespace Z0
         public static void SpanFill<T>(this IPolyrand random, Span<T> dst)
             where T : unmanaged
                 => random.Fill(random.Domain<T>(), dst.Length, ref z.first(dst));
-                        
+
         /// <summary>
         /// Fills a caller-allocated target with a specified number of values from the source
         /// </summary>
@@ -47,9 +47,12 @@ namespace Z0
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static void Fill<T>(this IPolyrand random, T min, T max, Span<T> dst)
+        public static Span<T> Fill<T>(this IPolyrand random, T min, T max, Span<T> dst)
             where T : unmanaged
-                => random.Fill((min,max), dst.Length, ref first(dst));
+        {
+            random.Fill((min,max), dst.Length, ref first(dst));
+            return dst;
+        }
 
         /// <summary>
         /// Fills a caller-allocated target with a specified number of values from the source
@@ -80,11 +83,11 @@ namespace Z0
             while(pos <= last)
             {
                 var data = random.Next<ulong>();
-                
+
                 var i = -1;
                 while(++pos <= last && ++i < w)
                     dst[pos] = bit.test(data,i);
             }
-        }        
+        }
     }
 }

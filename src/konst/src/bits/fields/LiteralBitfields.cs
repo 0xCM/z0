@@ -19,5 +19,6 @@ namespace Z0
             where W : unmanaged, Enum
             where M : unmanaged, Enum
                 => default;
+
     }
 }

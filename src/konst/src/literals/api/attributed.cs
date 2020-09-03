@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source type</param>
         /// <typeparam name="T">The primal literal type</typeparam>
-        public static BinaryLiteral<T>[] attributed<T>(Base2 @base, Type src)
+        public static BinaryLiterals<T> attributed<T>(Base2 @base, Type src)
             where T : unmanaged
                 => from f in src.LiteralFields()
                    where f.FieldType == typeof(T) && f.Tagged<BinaryLiteralAttribute>()

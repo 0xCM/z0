@@ -15,8 +15,8 @@ namespace Z0
     {
         public void primal_kind()
         {
-            var f = Primal.bitfield(PrimalKind.I16);
-            var width = Primal.width(f);
+            var f = PrimalBits.from(PrimalKind.I16);
+            var width = PrimalBits.width(f);
             Claim.Eq(width, TypeWidth.W16);
         }
 

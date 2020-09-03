@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public sealed class t_classify : t_identity<t_classify>
     {
@@ -24,28 +24,28 @@ namespace Z0
         public void classify_numeric()
         {
 
-            var fkExpect = set(NumericKind.F32, NumericKind.F64);
+            var fkExpect = hashset(NumericKind.F32, NumericKind.F64);
             var fkActual = NumericKind.Floats.DistinctKinds();
             Claim.seteq(fkExpect,fkActual);
 
-            var ftExpect = set(typeof(float), typeof(double));
+            var ftExpect = hashset(typeof(float), typeof(double));
             var ftActual = NumericKind.Floats.DistinctTypes();
             Claim.seteq(ftExpect,ftActual);
 
 
-            var ukExpect = set(NumericKind.U8, NumericKind.U16, NumericKind.U32, NumericKind.U64);
+            var ukExpect = hashset(NumericKind.U8, NumericKind.U16, NumericKind.U32, NumericKind.U64);
             var ukActual = NumericKind.UnsignedInts.DistinctKinds();
             Claim.seteq(ukExpect,ukActual);
 
-            var utExpect = set(typeof(byte), typeof(ushort), typeof(uint), typeof(ulong));
+            var utExpect = hashset(typeof(byte), typeof(ushort), typeof(uint), typeof(ulong));
             var utActual = NumericKind.UnsignedInts.DistinctTypes();
             Claim.seteq(utExpect,utActual);
 
-            var skExpect = set(NumericKind.I8, NumericKind.I16, NumericKind.I32, NumericKind.I64);
+            var skExpect = hashset(NumericKind.I8, NumericKind.I16, NumericKind.I32, NumericKind.I64);
             var skActual = NumericKind.SignedInts.DistinctKinds();
             Claim.seteq(skExpect,skActual);
 
-            var stExpect = set(typeof(sbyte), typeof(short), typeof(int), typeof(long));
+            var stExpect = hashset(typeof(sbyte), typeof(short), typeof(int), typeof(long));
             var stActual = NumericKind.SignedInts.DistinctTypes();
             Claim.seteq(stExpect,stActual);
 

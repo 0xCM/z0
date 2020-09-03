@@ -14,22 +14,22 @@ namespace Z0.MS
     public class ClrmdField : ClrInstanceField
     {
         readonly IFieldHelpers _helpers;
-        
+
         string? _name;
-        
+
         ClrType? _type;
-        
+
         FieldAttributes _attributes = FieldAttributes.ReservedMask;
 
         public override ClrElementType ElementType { get; }
 
-        public override bool IsObjectReference 
+        public override bool IsObjectReference
             => ElementType.IsObjectReference();
-        
-        public override bool IsValueType 
+
+        public override bool IsValueType
             => ElementType.IsValueType();
-        
-        public override bool IsPrimitive 
+
+        public override bool IsPrimitive
             => ElementType.IsPrimitive();
 
         public override string? Name
@@ -55,7 +55,7 @@ namespace Z0.MS
             }
         }
 
-        public override int Size 
+        public override int Size
             => GetSize(Type, ElementType);
 
         public override int Token { get; }
@@ -159,6 +159,8 @@ namespace Z0.MS
             return name;
         }
 
+        const int IMAGE_CEE_CS_CALLCONV_FIELD = 0x6;
+
         internal static ClrType? GetTypeForFieldSig(ITypeFactory factory, ClrSigParser sigParser, ClrHeap heap, ClrModule? module)
         {
             ClrType? result = null;
@@ -166,7 +168,7 @@ namespace Z0.MS
             int etype = 0;
 
             if (res = sigParser.GetCallingConvInfo(out int sigType))
-                DebugOnly.Assert(sigType == ClrSigParser.IMAGE_CEE_CS_CALLCONV_FIELD);
+                DebugOnly.Assert(sigType == IMAGE_CEE_CS_CALLCONV_FIELD);
 
             res = res && sigParser.SkipCustomModifiers();
             res = res && sigParser.GetElemType(out etype);
@@ -252,7 +254,7 @@ namespace Z0.MS
                 etype = 0;
 
                 if (res = sigParser.GetCallingConvInfo(out sigType))
-                    DebugOnly.Assert(sigType == ClrSigParser.IMAGE_CEE_CS_CALLCONV_FIELD);
+                    DebugOnly.Assert(sigType == IMAGE_CEE_CS_CALLCONV_FIELD);
 
                 res = res && sigParser.SkipCustomModifiers();
                 res = res && sigParser.GetElemType(out etype);

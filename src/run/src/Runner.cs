@@ -263,10 +263,17 @@ namespace Z0
                 step.Run();
             }
 
+            {
+                using var step = new CheckCredits(Wf);
+                step.Run();
+
+            }
+
         }
         public void Run()
         {
-            using var step = new CheckCredits(Wf);
+            var dst = text.build();
+            using var step = new CheckBitMasks(Wf, Random, dst);
             step.Run();
         }
     }

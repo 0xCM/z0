@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-                
-    using static Konst; 
+
+    using static Konst;
     using static Memories;
 
     partial class gmath
-    {        
+    {
         /// <summary>
         /// Computes the bitwise or between two primal values
         /// </summary>
@@ -61,13 +61,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<T>(math.or(convert<T,uint>(a), convert<T,uint>(b)));
+                return convert<T>(BitLogic.or(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
-                return convert<T>(math.or(convert<T,uint>(a), convert<T,uint>(b)));
+                return convert<T>(BitLogic.or(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(math.or(uint32(a), uint32(b)));
+                return generic<T>(BitLogic.or(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(math.or(uint64(a), uint64(b)));
+                return generic<T>(BitLogic.or(uint64(a), uint64(b)));
             else
                 return or_i(a,b);
         }
@@ -77,13 +77,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return convert<T>(math.or(convert<T,int>(a), convert<T,int>(b)));
+                return convert<T>(BitLogic.or(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(short))
-                return convert<T>(math.or(convert<T,int>(a), convert<T,int>(b)));
+                return convert<T>(BitLogic.or(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(math.or(int32(a), int32(b)));
+                 return generic<T>(BitLogic.or(int32(a), int32(b)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(math.or(int64(a), int64(b)));
+                 return generic<T>(BitLogic.or(int64(a), int64(b)));
             else
                 throw Unsupported.define<T>();
         }
@@ -93,13 +93,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.or(uint8(a), uint8(b), uint8(c)));
+                return generic<T>(BitLogic.or(uint8(a), uint8(b), uint8(c)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.or(uint16(a), uint16(b), uint16(c)));
+                return generic<T>(BitLogic.or(uint16(a), uint16(b), uint16(c)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(math.or(uint32(a), uint32(b), uint32(c)));
+                return generic<T>(BitLogic.or(uint32(a), uint32(b), uint32(c)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(math.or(uint64(a), uint64(b), uint64(c)));
+                return generic<T>(BitLogic.or(uint64(a), uint64(b), uint64(c)));
             else
                 return or_i(a,b,c);
         }
@@ -109,13 +109,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(math.or(int8(a), int8(b), int8(c)));
+                 return generic<T>(BitLogic.or(int8(a), int8(b), int8(c)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(math.or(int16(a), int16(b), int16(c)));
+                 return generic<T>(BitLogic.or(int16(a), int16(b), int16(c)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(math.or(int32(a), int32(b), int32(c)));
+                 return generic<T>(BitLogic.or(int32(a), int32(b), int32(c)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(math.or(int64(a), int64(b), int64(c)));
+                 return generic<T>(BitLogic.or(int64(a), int64(b), int64(c)));
             else
                 throw Unsupported.define<T>();
         }

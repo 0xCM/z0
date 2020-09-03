@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The characters to concatenate</param>
         [MethodImpl(Inline), Op]
-        public static string concat(IEnumerable<object> src)    
+        public static string concat(IEnumerable<object> src)
             => string.Concat(src);
 
         /// <summary>
@@ -51,11 +51,11 @@ namespace Z0
         /// </summary>
         /// <param name="src">The values to be joined</param>
         [MethodImpl(Inline), Op]
-        public static string concat(params object[] src)    
+        public static string concat(params object[] src)
             => string.Concat(src);
 
         /// <summary>
-        /// Concatentates a sequence of strings, padding each to a specified width and interspersed with a specified delimiter
+        /// Concatenates a sequence of strings, padding each to a specified width and interspersed with a specified delimiter
         /// </summary>
         /// <param name="src">The text to join</param>
         /// <param name="widths">The corresponding widths</param>

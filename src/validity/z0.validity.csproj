@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Imagine)" />
     <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Structured)" />
     <ProjectReference Include="$(GMath)" />

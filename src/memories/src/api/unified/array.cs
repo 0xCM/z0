@@ -21,14 +21,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T[] array<T>(params T[] src)
             => src;
-
-        /// <summary>
-        /// Constructs an array from a parameter array
-        /// </summary>
-        /// <param name="src">The source array</param>
-        /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
-        public static HashSet<T> set<T>(params T[] src)
-            => new HashSet<T>(src);
     }
 }

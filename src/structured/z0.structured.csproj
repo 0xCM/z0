@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Seed)" />
+    <ProjectReference Include="$(Imagine)" />
     <ProjectReference Include="$(Kinds)" />
   </ItemGroup>
 

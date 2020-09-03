@@ -13,7 +13,7 @@ namespace Z0
     using static Memories;
 
     readonly struct TypeIdentityDiviner : ITypeIdentityDiviner
-    {        
+    {
         /// <summary>
         /// Determines whether a type is a natural span
         /// </summary>
@@ -41,8 +41,8 @@ namespace Z0
             else if(SpanTypes.IsSystemSpan(arg))
                 return SystemSpanId(arg);
             else if(IsNatSpan(arg))
-                return NatSpanId(arg);  
-            else           
+                return NatSpanId(arg);
+            else
                 return none<TypeIdentity>();
         }
 
@@ -68,10 +68,10 @@ namespace Z0
             => TypeIdentities.provider(src, CreateProvider);
 
         static TypeIdentity DoDivination(Type arg)
-            => default(TypeIdentityDiviner).DivineIdentity(arg);        
+            => default(TypeIdentityDiviner).DivineIdentity(arg);
 
         static TypeIdentity PointerId(Type arg)
-            => TypeIdentity.Define(text.concat(DoDivination(arg.Unwrap()), IDI.ModSep, IDI.Pointer));    
+            => TypeIdentity.Define(text.concat(DoDivination(arg.Unwrap()), IDI.ModSep, IDI.Pointer));
 
         static Option<TypeIndicator> SegIndicator(Type t)
         {
@@ -79,7 +79,7 @@ namespace Z0
                 return TypeIndicator.Define(IDI.Block);
             else if(t.IsVector())
                 return TypeIndicator.Define(IDI.Vector);
-            else 
+            else
                 return none<TypeIndicator>();
         }
 
@@ -95,14 +95,14 @@ namespace Z0
                 let nk = arg.NumericKind()
                 where  nk != 0
                 let nki = nk.Indicator().Format()
-                let identifer = concat(i, segfmt, IDI.SegSep,argfmt, nki)                
+                let identifer = text.concat(i, segfmt, IDI.SegSep,argfmt, nki)
                 select SegmentedIdentity.identify(i,segwidth,nk).AsTypeIdentity();
 
         static Option<TypeIdentity> NatId(Type arg)
-            => from v in arg.NatValue() 
-                let id = concat(IDI.Nat, v.ToString())
+            => from v in arg.NatValue()
+                let id = text.concat(IDI.Nat, v.ToString())
                 select TypeIdentity.Define(id);
-        
+
         static Option<TypeIdentity> SystemSpanId(Type arg)
         {
             var kind = SpanTypes.kind(arg);
@@ -146,13 +146,13 @@ namespace Z0
                 return none<TypeIdentity>();
         }
 
-        
+
         static readonly ITypeIdentityProvider DefaultProvider
             = new FunctionalProvider(DoDivination);
 
         internal static ITypeIdentityProvider CreateProvider(Type t)
         {
-            var provider = none<ITypeIdentityProvider>();   
+            var provider = none<ITypeIdentityProvider>();
             if(t.Tagged<IdentityProviderAttribute>())
                 provider = AttributedProvider(t);
             else if(t.Reifies<ITypeIdentityProvider>())
@@ -161,13 +161,13 @@ namespace Z0
         }
 
         readonly struct FunctionalProvider : ITypeIdentityProvider
-        {     
+        {
             readonly Func<Type,TypeIdentity> f;
-            
+
             [MethodImpl(Inline)]
             public FunctionalProvider(Func<Type, TypeIdentity> f)
                 => this.f = f;
-            
+
             [MethodImpl(Inline)]
             public TypeIdentity Identify(Type src)
                 => f(src);

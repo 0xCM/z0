@@ -9,9 +9,10 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
+
     partial struct GridCells
     {
+
         /// <summary>
         /// Computes the number of bits covered by a rectangular region and predicated on natural dimensions
         /// </summary>
@@ -21,6 +22,6 @@ namespace Z0
         public static int tablebits<M,N>(M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => (int)NatCalc.mul(m,n);         
+                => (int)NatCalc.mul(m,n);
     }
 }

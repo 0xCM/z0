@@ -6,14 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
+
+    using static Konst;
     using static Memories;
 
     partial class gmath
     {
         /// <summary>
-        /// Defines the ternary bitwise select operator over primal unsigned integers, 
+        /// Defines the ternary bitwise select operator over primal unsigned integers,
         /// select(a,b,c) := or(a & b, and(~a, c)) = or(and(a,b), notimpl(a,c));
         /// </summary>
         /// <param name="a">The first operand</param>
@@ -23,12 +23,12 @@ namespace Z0
         [MethodImpl(Inline), Select, Closures(Integers)]
         public static T select<T>(T a, T b, T c)
             where T : unmanaged
-        {            
-            if(typeof(T) == typeof(byte))    
-                return generic<T>(math.select(uint8(a), uint8(b), uint8(c)));
+        {
+            if(typeof(T) == typeof(byte))
+                return generic<T>(BitLogic.select(uint8(a), uint8(b), uint8(c)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.select(uint16(a), uint16(b), uint16(c)));
-            else 
+                return generic<T>(BitLogic.select(uint16(a), uint16(b), uint16(c)));
+            else
                 return or(and(a,b), nonimpl(a,c));
         }
 

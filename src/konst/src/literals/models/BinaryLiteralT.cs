@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     [ApiClass(DataStructure)]
     public readonly struct BinaryLiteral<T> : ILiteral<BinaryLiteral<T>,T>

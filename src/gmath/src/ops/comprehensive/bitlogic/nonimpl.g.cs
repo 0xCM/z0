@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst; 
+
+    using static Konst;
     using static Memories;
 
     partial class gmath
@@ -27,13 +27,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<T>(math.nonimpl(convert<T,uint>(a), convert<T,uint>(b)));
+                return convert<T>(BitLogic.nonimpl(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
-                return convert<T>(math.nonimpl(convert<T,uint>(a), convert<T,uint>(b)));
+                return convert<T>(BitLogic.nonimpl(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(math.nonimpl(uint32(a), uint32(b)));
+                return generic<T>(BitLogic.nonimpl(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(math.nonimpl(uint64(a), uint64(b)));
+                return generic<T>(BitLogic.nonimpl(uint64(a), uint64(b)));
             else
                 return nonimpl_i(a,b);
         }
@@ -43,13 +43,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return convert<T>(math.nonimpl(convert<T,int>(a), convert<T,int>(b)));
+                return convert<T>(BitLogic.nonimpl(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(short))
-                return convert<T>(math.nonimpl(convert<T,int>(a), convert<T,int>(b)));
+                return convert<T>(BitLogic.nonimpl(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(math.nonimpl(int32(a), int32(b)));
+                return generic<T>(BitLogic.nonimpl(int32(a), int32(b)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(math.nonimpl(int64(a), int64(b)));
+                return generic<T>(BitLogic.nonimpl(int64(a), int64(b)));
             else
                 throw Unsupported.define<T>();
         }

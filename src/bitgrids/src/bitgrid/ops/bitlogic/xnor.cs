@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial class BitGrid
-    {        
+    {
         /// <summary>
         /// Computes the bitwise XNOR between generic bitgrids
         /// </summary>
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Xnor, Closures(UInt8x16k)]
         public static BitGrid16<T> xnor<T>(BitGrid16<T> gx, BitGrid16<T> gy)
             where T : unmanaged
-                => init16<T>(math.xnor(gx,gy));
+                => init16<T>(BitLogic.xnor(gx,gy));
 
         /// <summary>
         /// Computes the bitwise XNOR between generic bitgrids
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Xnor, Closures(UInt8x16x32k)]
         public static BitGrid32<T> xnor<T>(BitGrid32<T> gx, BitGrid32<T> gy)
             where T : unmanaged
-                => init32<T>(math.xnor(gx,gy));
+                => init32<T>(BitLogic.xnor(gx,gy));
 
         /// <summary>
         /// Computes the bitwise XNOR between generic bitgrids
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Xnor, Closures(UnsignedInts)]
         public static BitGrid64<T> xnor<T>(BitGrid64<T> gx, BitGrid64<T> gy)
             where T : unmanaged
-                => init64<T>(math.xnor(gx,gy));
+                => init64<T>(BitLogic.xnor(gx,gy));
 
         /// <summary>
         /// Computes the bitwise XNOR between generic bitgrids and stores the result to a caller-supplied target
@@ -72,7 +72,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => math.xnor(gx,gy);
+                => BitLogic.xnor(gx,gy);
 
         /// <summary>
         /// Computes the bitwise XNOR between natural bitgrids
@@ -85,7 +85,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => math.xnor(gx,gy);
+                => BitLogic.xnor(gx,gy);
 
         /// <summary>
         /// Computes the bitwise XNOR between natural bitgrids
@@ -98,7 +98,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vxnor<T>(gx,gy);    
+                => gvec.vxnor<T>(gx,gy);
 
         /// <summary>
         /// Computes the bitwise XNOR between 256-bit fixed-width natural bitgrids
@@ -111,7 +111,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vxnor<T>(gx,gy);    
+                => gvec.vxnor<T>(gx,gy);
 
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var gz = alloc<M,N,T>();    
+            var gz = alloc<M,N,T>();
             xnor(gx,gy,gz);
             return gz;
         }

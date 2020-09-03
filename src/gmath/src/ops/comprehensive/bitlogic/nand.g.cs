@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-                
-    using static Konst; 
+
+    using static Konst;
     using static Memories;
 
     partial class gmath
@@ -28,13 +28,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<T>(math.nand(convert<T,uint>(a), convert<T,uint>(b)));
+                return convert<T>(BitLogic.nand(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
-                return convert<T>(math.nand(convert<T,uint>(a), convert<T,uint>(b)));
+                return convert<T>(BitLogic.nand(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(math.nand(uint32(a), uint32(b)));
+                return generic<T>(BitLogic.nand(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(math.nand(uint64(a), uint64(b)));
+                return generic<T>(BitLogic.nand(uint64(a), uint64(b)));
             else
                 return nand_i(a,b);
         }
@@ -44,13 +44,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return convert<T>(math.nand(convert<T,int>(a), convert<T,int>(b)));
+                return convert<T>(BitLogic.nand(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(short))
-                return convert<T>(math.nand(convert<T,int>(a), convert<T,int>(b)));
+                return convert<T>(BitLogic.nand(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(math.nand(int32(a), int32(b)));
+                return generic<T>(BitLogic.nand(int32(a), int32(b)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(math.nand(int64(a), int64(b)));
+                return generic<T>(BitLogic.nand(int64(a), int64(b)));
             else
                 throw Unsupported.define<T>();
         }
