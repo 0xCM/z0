@@ -31,6 +31,8 @@ namespace Z0
 
         byte offset;
 
+        IPolyrand Random;
+
         [MethodImpl(Inline)]
         public Runner(WfCaptureState wf)
         {
@@ -40,6 +42,7 @@ namespace Z0
             State = wf;
             Buffer = z.span<string>(256);
             offset = 0;
+            Random = wf.App.Random;
         }
 
         public void Run<C,S,T>(in WfRunSpec<C,S,T> spec)
@@ -61,7 +64,7 @@ namespace Z0
         void RunChecks()
         {
             var log = text.build();
-            using var step = new CheckBitMasks(Wf,log);
+            using var step = new CheckBitMasks(Wf, Random, log);
             step.Run();
         }
 

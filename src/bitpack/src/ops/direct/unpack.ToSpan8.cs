@@ -5,8 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    
+    using System.Runtime.CompilerServices;
+
     using static Konst;
     using static As;
     using static Root;
@@ -22,9 +22,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack(byte src, Span<byte> dst)
         {
-            var mask = BitMask.lsb<ulong>(n8,n1);
+            var mask = BitMasks.lsb<ulong>(n8,n1);
             ref var lead = ref head(dst);
-            
+
             seek64(lead, 0) = Bits.scatter((ulong)(byte)src, mask);
         }
 
@@ -36,9 +36,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack(ushort src, Span<byte> dst)
         {
-            var mask = BitMask.lsb<ulong>(n8,n1);
+            var mask = BitMasks.lsb<ulong>(n8,n1);
             ref var lead = ref head(dst);
-            
+
             seek64(lead, 0) = Bits.scatter((ulong)(byte)src, mask);
             seek64(lead, 1) = Bits.scatter((ulong)((byte)(src >> 8)), mask);
         }
@@ -51,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack(uint src, Span<byte> dst)
         {
-            var mask = BitMask.lsb<ulong>(n8,n1);
+            var mask = BitMasks.lsb<ulong>(n8,n1);
             ref var lead = ref head(dst);
 
             seek64(lead, 0) = Bits.scatter((ulong)(byte)src, mask);
@@ -70,6 +70,6 @@ namespace Z0
         {
             unpack((uint)src, dst.Slice(0,32));
             unpack((uint)(src >> 32), dst.Slice(32,32));
-        }        
+        }
   }
 }

@@ -6,15 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
-   
+
     partial class Bits
-    {               
+    {
         /// <summary>
         /// Extracts the upper 4 bits from the source
         /// </summary>
-        /// <param name="src">The soruce value</param>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Hi]
         public static byte hi(byte src)
             => (byte)(src >> 4);
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Hi]
         public static uint hi(uint src)
-            => (ushort)(src >> 16); 
+            => (ushort)(src >> 16);
 
         /// <summary>
         /// Extracts the upper 16 bits from the source

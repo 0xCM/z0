@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using static Memories;
-        
+    using static z;
+
     public class t_bitmix : t_bitcore<t_bitmix>
     {
         public void bitmix_8()
@@ -49,14 +49,14 @@ namespace Z0
                 var bsaOdd = BitString.scalar(a).Odd();
                 var bsbEven = BitString.scalar(b).Even();
                 var bsbOdd = BitString.scalar(b).Odd();
-                
+
                 // bitstring reference interspersal for the even bits
-                var bsEven = bsaEven.Intersperse(bsbEven);                
+                var bsEven = bsaEven.Intersperse(bsbEven);
                 Claim.yea(bsEven == abEven);
 
                 // bitstring reference interspersal for the odd bits
                 var bsOdd = bsaOdd.Intersperse(bsbOdd);
-                Claim.yea(bsOdd == abOdd);                                
+                Claim.yea(bsOdd == abOdd);
             }
         }
 
@@ -65,19 +65,19 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 BitVector64 x = Random.BitVector(n64);
-                BitVector32 y = (uint)Bits.gather(x, BitMasks.Even64);
+                BitVector32 y = (uint)Bits.gather(x, MaskLiterals.Even64);
                 BitVector32 z = default;
 
                 for(int j=0, k = 0; j<64; j+=2, k++)
                     z[k] = x[j];
 
                 Claim.Eq(z.Scalar, y.Scalar);
-            }            
+            }
 
             for(var i=0; i<RepCount; i++)
             {
                 BitVector64 x = Random.BitVector(n64);
-                BitVector32 y = (uint)Bits.gather(x, BitMasks.Odd64);
+                BitVector32 y = (uint)Bits.gather(x, MaskLiterals.Odd64);
                 BitVector32 z = default;
 
                 for(int j=1, k = 0; j<64; j+=2, k++)
@@ -88,13 +88,13 @@ namespace Z0
         }
 
         string sb_mix_report()
-        {            
+        {
             var x = Random.Next<uint>();
             var y = Random.Next<uint>();
-            var xE = Bits.scatter(Bits.gather(x,BitMasks.Even32), BitMasks.Even32);
-            var xO = Bits.scatter(Bits.gather(x,BitMasks.Odd32), BitMasks.Even32);
-            var yE = Bits.scatter(Bits.gather(y,BitMasks.Even32), BitMasks.Odd32);
-            var yO = Bits.scatter(Bits.gather(y,BitMasks.Odd32), BitMasks.Odd32);
+            var xE = Bits.scatter(Bits.gather(x,MaskLiterals.Even32), MaskLiterals.Even32);
+            var xO = Bits.scatter(Bits.gather(x,MaskLiterals.Odd32), MaskLiterals.Even32);
+            var yE = Bits.scatter(Bits.gather(y,MaskLiterals.Even32), MaskLiterals.Odd32);
+            var yO = Bits.scatter(Bits.gather(y,MaskLiterals.Odd32), MaskLiterals.Odd32);
             var xEy = xE | yE;
             var xOy = xO | yO;
             var t = text.build();

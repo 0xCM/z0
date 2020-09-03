@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     partial class gbits
     {
@@ -21,6 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T eraser<T>(byte start, byte count)
             where T : unmanaged
-                => gmath.xor(NumericLiterals.maxval<T>(), gmath.sll(BitMask.lo<T>(count - 1), start));        
+                => gmath.xor(NumericLiterals.maxval<T>(), gmath.sll(BitMasks.lo<T>(count - 1), start));
     }
 }

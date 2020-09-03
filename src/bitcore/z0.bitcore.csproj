@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(GMath)" />
-    <ProjectReference Include="$(BitMasks)" />
     <ProjectReference Include="$(Kinds)" />
 
   </ItemGroup>

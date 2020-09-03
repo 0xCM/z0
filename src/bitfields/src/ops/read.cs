@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
     using static Memories;
 
     partial class BitFields
@@ -17,7 +17,7 @@ namespace Z0
         internal static T Mask<F,T>(BitField256<F,T> src, F index)
             where T : unmanaged
             where F : unmanaged, Enum
-                => BitMask.lo<T>(src.Spec[index]);
+                => BitMasks.lo<T>(src.Spec[index]);
 
         [MethodImpl(Inline)]
         public static T read<F,T>(in BitField256<F,T> src, F index)

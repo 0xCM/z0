@@ -5,9 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     public static class Cast
     {
@@ -17,15 +18,15 @@ namespace Z0
         /// <param name="src">The soruce value</param>
         /// <typeparam name="S">The source numeric kind</typeparam>
         /// <typeparam name="T">The target numeric kind</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static T to<S,T>(S src)
             => z.convert<S,T>(src);
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static T to<T>(sbyte src)
             => z.convert<T>(src);
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static T to<T>(byte src)
             => z.convert<T>(src);
 

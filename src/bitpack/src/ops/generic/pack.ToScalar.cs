@@ -5,8 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    
+    using System.Runtime.CompilerServices;
+
     using static dvec;
     using static Konst;
     using static Memories;
@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static byte pack<T>(in T src, N8 count, N8 mod)
             where T : unmanaged
-                => (byte)Bits.gather(convert<T,ulong>(src), BitMasks.Lsb64x8x1);
+                => (byte)Bits.gather(convert<T,ulong>(src), MaskLiterals.Lsb64x8x1);
 
         /// <summary>
         /// Packs 16 1-bit values taken from the least significant bit of each source byte
@@ -61,6 +61,6 @@ namespace Z0
             dst = (ulong)pack(src, n32, n8);
             dst |=(ulong)pack(skip(src, 32), n32, n8) << 32;
             return dst;
-        }        
+        }
     }
 }

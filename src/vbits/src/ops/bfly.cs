@@ -31,7 +31,7 @@ namespace Z0
                 return generic<T>(VBits.vbfly(n,v32u(x)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -52,7 +52,7 @@ namespace Z0
                 return generic<T>(VBits.vbfly(n,v32u(x)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -74,7 +74,7 @@ namespace Z0
                 return generic<T>(VBits.vbfly(n,v32u(x)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -94,7 +94,7 @@ namespace Z0
                 return generic<T>(VBits.vbfly(n,v32u(x)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -111,7 +111,7 @@ namespace Z0
                 return x;
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -132,7 +132,7 @@ namespace Z0
                 return generic<T>(VBits.vbfly(n,v32u(x)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -153,7 +153,7 @@ namespace Z0
                 return generic<T>(VBits.vbfly(n,v32u(x)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -175,7 +175,7 @@ namespace Z0
                 return generic<T>(VBits.vbfly(n,v32u(x)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -195,7 +195,7 @@ namespace Z0
                 return generic<T>(VBits.vbfly(n,v32u(x)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -212,10 +212,10 @@ namespace Z0
                 return x;
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
-            else            
+            else
                 throw Unsupported.define<T>();
-        }         
-         
+        }
+
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
         /// </summary>
@@ -303,8 +303,8 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        /// <remarks> 
-        /// [0 | 1 2 | 3 || 4 | 5 6 | 7] -> 
+        /// <remarks>
+        /// [0 | 1 2 | 3 || 4 | 5 6 | 7] ->
         /// [0 | 2 1 | 3 || 4 | 6 5 | 7]
         /// </remarks>
         [MethodImpl(Inline), Op]
@@ -316,7 +316,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        /// <remarks> 
+        /// <remarks>
         /// [0 | 1 2 | 3 || 4 | 5 6 | 7 || 8 | 9 A | B || C | D E | F] ->
         /// [0 | 2 1 | 3 || 4 | 6 5 | 7 || 8 | A 9 | B || C | E D | F]
         /// </remarks>
@@ -343,7 +343,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vbfly(N8 n, Vector128<ulong> x)
             => vbutterfly(x,v00FFFF0000FFFF00(n128),8);
- 
+
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior 16-bit segments
         /// </summary>
@@ -441,8 +441,8 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        /// <remarks> 
-        /// [0 | 1 2 | 3 || 4 | 5 6 | 7] -> 
+        /// <remarks>
+        /// [0 | 1 2 | 3 || 4 | 5 6 | 7] ->
         /// [0 | 2 1 | 3 || 4 | 6 5 | 7]
         /// </remarks>
         [MethodImpl(Inline), Op]
@@ -454,7 +454,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The interior segment width selector</param>
         /// <param name="x">The bit source</param>
-        /// <remarks> 
+        /// <remarks>
         /// [0 | 1 2 | 3 || 4 | 5 6 | 7 || 8 | 9 A | B || C | D E | F] ->
         /// [0 | 2 1 | 3 || 4 | 6 5 | 7 || 8 | A 9 | B || C | E D | F]
         /// </remarks>
@@ -481,7 +481,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vbfly(N8 n, Vector256<ulong> x)
             => vbutterfly(x,v00FFFF0000FFFF00(n256),8);
- 
+
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior 16-bit segments
         /// </summary>
@@ -526,114 +526,114 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static Vector128<byte> v666(N128 w, N8 n)
-            => V0d.vbroadcast(w,BitMasks.Central8x4x2);
+            => V0d.vbroadcast(w,MaskLiterals.Central8x4x2);
 
         [MethodImpl(Inline)]
         static Vector128<ushort> v666(N128 w, N16 n)
-            => V0d.vbroadcast(w,BitMasks.Central16x4x2);
+            => V0d.vbroadcast(w,MaskLiterals.Central16x4x2);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v666(N128 w, N32 n)
-            => V0d.vbroadcast(w,BitMasks.Central32x4x2);
+            => V0d.vbroadcast(w,MaskLiterals.Central32x4x2);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v666(N128 w, N64 n)
-            => V0d.vbroadcast(w,BitMasks.Central64x4x2);
+            => V0d.vbroadcast(w,MaskLiterals.Central64x4x2);
 
         [MethodImpl(Inline)]
         static Vector128<byte> v3C(N128 w, N8 f)
-            => V0d.vbroadcast(w,BitMasks.Central8x8x4);
+            => V0d.vbroadcast(w,MaskLiterals.Central8x8x4);
 
         [MethodImpl(Inline)]
         static Vector128<ushort> v3C(N128 w, N16 n)
-            => V0d.vbroadcast(w,BitMasks.Central16x8x4);
+            => V0d.vbroadcast(w,MaskLiterals.Central16x8x4);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v3C(N128 w, N32 n)
-            => V0d.vbroadcast(w,BitMasks.Central32x8x4);
+            => V0d.vbroadcast(w,MaskLiterals.Central32x8x4);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v3C(N128 w, N64 n)
-            => V0d.vbroadcast(w, BitMasks.Central64x8x4);
+            => V0d.vbroadcast(w, MaskLiterals.Central64x8x4);
 
         [MethodImpl(Inline)]
         static Vector128<ushort> v0FF0(N128 w, N16 n)
-            => V0d.vbroadcast(w,BitMasks.Central16x16x8);
+            => V0d.vbroadcast(w,MaskLiterals.Central16x16x8);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v0FF0(N128 w, N32 n)
-            => V0d.vbroadcast(w,BitMasks.Central32x16x8);
+            => V0d.vbroadcast(w,MaskLiterals.Central32x16x8);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v0FF0(N128 w, N64 n)
-            => V0d.vbroadcast(w,BitMasks.Central64x16x8);
+            => V0d.vbroadcast(w,MaskLiterals.Central64x16x8);
 
         [MethodImpl(Inline)]
         static Vector128<uint> v00FFFF00(N128 w)
-            => V0d.vbroadcast(w,BitMasks.Central32x32x16);
+            => V0d.vbroadcast(w,MaskLiterals.Central32x32x16);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v00FFFF0000FFFF00(N128 w)
-            => V0d.vbroadcast(w,BitMasks.Central64x32x16);
+            => V0d.vbroadcast(w,MaskLiterals.Central64x32x16);
 
         [MethodImpl(Inline)]
         static Vector128<ulong> v0000FFFFFFFF0000(N128 w)
-            => V0d.vbroadcast(w,BitMasks.Central64x64x32);
+            => V0d.vbroadcast(w,MaskLiterals.Central64x64x32);
 
         [MethodImpl(Inline)]
         static Vector256<byte> v666(N256 w, N8 n)
-            => V0d.vbroadcast(w,BitMasks.Central8x4x2);
+            => V0d.vbroadcast(w,MaskLiterals.Central8x4x2);
 
         [MethodImpl(Inline)]
         static Vector256<ushort> v666(N256 w, N16 n)
-            => V0d.vbroadcast(w,BitMasks.Central16x4x2);
+            => V0d.vbroadcast(w,MaskLiterals.Central16x4x2);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v666(N256 w, N32 n)
-            => Vectors.vbroadcast<uint>(w, BitMasks.Central32x4x2);
+            => Vectors.vbroadcast<uint>(w, MaskLiterals.Central32x4x2);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v666(N256 w, N64 n)
-            => V0d.vbroadcast(w,BitMasks.Central64x4x2);
+            => V0d.vbroadcast(w,MaskLiterals.Central64x4x2);
 
         [MethodImpl(Inline)]
         static Vector256<byte> v3C(N256 w, N8 n)
-            => V0d.vbroadcast(w,BitMasks.Central8x8x4);
+            => V0d.vbroadcast(w,MaskLiterals.Central8x8x4);
 
         [MethodImpl(Inline)]
         static Vector256<ushort> v3C(N256 w, N16 n)
-            => V0d.vbroadcast(w,BitMasks.Central16x8x4);
+            => V0d.vbroadcast(w,MaskLiterals.Central16x8x4);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v3C(N256 w, N32 n)
-            => Vectors.vbroadcast<uint>(w, BitMasks.Central32x8x4);
+            => Vectors.vbroadcast<uint>(w, MaskLiterals.Central32x8x4);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v3C(N256 w, N64 n)
-            => V0d.vbroadcast(w,BitMasks.Central64x8x4);
+            => V0d.vbroadcast(w,MaskLiterals.Central64x8x4);
 
         [MethodImpl(Inline)]
         static Vector256<ushort> v0FF0(N256 w, N16 n)
-            => V0d.vbroadcast(w,BitMasks.Central16x16x8);
+            => V0d.vbroadcast(w,MaskLiterals.Central16x16x8);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v0FF0(N256 w, N32 n)
-            => Vectors.vbroadcast<uint>(w, BitMasks.Central32x16x8);
+            => Vectors.vbroadcast<uint>(w, MaskLiterals.Central32x16x8);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v0FF0(N256 w, N64 n)
-            => V0d.vbroadcast(w,BitMasks.Central64x16x8);
+            => V0d.vbroadcast(w,MaskLiterals.Central64x16x8);
 
         [MethodImpl(Inline)]
         static Vector256<uint> v00FFFF00(N256 w)
-            => Vectors.vbroadcast<uint>(w, BitMasks.Central32x32x16);
+            => Vectors.vbroadcast<uint>(w, MaskLiterals.Central32x32x16);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v00FFFF0000FFFF00(N256 w)
-            => V0d.vbroadcast(w,BitMasks.Central64x32x16);
+            => V0d.vbroadcast(w,MaskLiterals.Central64x32x16);
 
         [MethodImpl(Inline)]
         static Vector256<ulong> v0000FFFFFFFF0000(N256 w)
-            => V0d.vbroadcast(w,BitMasks.Central64x64x32);
+            => V0d.vbroadcast(w,MaskLiterals.Central64x64x32);
     }
 }

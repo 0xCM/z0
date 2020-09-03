@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
-    
+
     partial class Bits
-    {                
+    {
         /// <summary>
         /// Rotates the source bits rightward by a specified offset
         /// </summary>

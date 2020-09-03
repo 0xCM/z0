@@ -17,14 +17,14 @@ namespace Z0
         /// <param name="src">The type code</param>
         [MethodImpl(Inline)]
         public static PrimalKind primal(TypeCode src)
-            => Primitive.kind(src);
+            => Primal.kind(src);
 
         [MethodImpl(Inline)]
         public static PrimalKind primal(Type src)
-            => Primitive.kind(src);
+            => Primal.kind(src);
 
         [MethodImpl(Inline)]
         public static PrimalKind primal<T>()
-            => Primitive.kind<T>();
+            => Primal.kind<T>();
     }
 }

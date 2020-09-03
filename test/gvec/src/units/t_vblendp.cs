@@ -19,22 +19,22 @@ namespace Z0
             => false;
 
         public void vblendp_perm32_g128x8u()
-            => vblendp_check(n128, n32, BitMasks.Msb16x16x1, z8);
+            => vblendp_check(n128, n32, MaskLiterals.Msb16x16x1, z8);
 
         public void vblendp_perm16_g128x16u()
-            => vblendp_check(n128, n16, BitMasks.Msb32x32x1, z16);
+            => vblendp_check(n128, n16, MaskLiterals.Msb32x32x1, z16);
 
         public void vblendp_perm8_g128x32u()
-            => vblendp_check(n128, n8, BitMasks.Msb64x64x1, z32);
+            => vblendp_check(n128, n8, MaskLiterals.Msb64x64x1, z32);
 
         public void vblendp_perm64_g256x8u()
-            => vblendp_check(n256, n64, BitMasks.Msb16x16x1, z8);
+            => vblendp_check(n256, n64, MaskLiterals.Msb16x16x1, z8);
 
         public void vblendp_perm32_g256x16u()
-            => vblendp_check(n256, n32, BitMasks.Msb32x32x1, z16);
+            => vblendp_check(n256, n32, MaskLiterals.Msb32x32x1, z16);
 
         public void vblendp_perm16_g256x32u()
-            => vblendp_check(n256, n16, BitMasks.Msb64x64x1, z32);
+            => vblendp_check(n256, n16, MaskLiterals.Msb64x64x1, z32);
 
         static string describe<F,D,T,S>(IMaskSpec<F,D,T> maskspec, S sample, Vector512<T> source, Vector512<T> target)
             where F : unmanaged, ITypeNat
@@ -45,13 +45,13 @@ namespace Z0
             var description = text.build();
             var indent = "/// ";
             var bits = BitString.scalar(sample).Format(specifier:true);
-            var header = $"{indent}512x{bitsize(default(T))}, {maskspec}, {bits}"; 
-            var sfk = SequenceFormatKind.List;  
-            var sep = Chars.Comma;         
+            var header = $"{indent}512x{bitsize(default(T))}, {maskspec}, {bits}";
+            var sfk = SequenceFormatKind.List;
+            var sep = Chars.Comma;
             var pad = 2;
             description.AppendLine(header);
             description.AppendLine($"{indent}source: {source.Format()}");
-            description.AppendLine($"{indent}target: {target.Format()}");            
+            description.AppendLine($"{indent}target: {target.Format()}");
             return description.ToString();
         }
 
@@ -64,17 +64,17 @@ namespace Z0
         {
             var w = n512;
             var t = z64;
-            var maskspec = MaskSpecs.msb(n2,n1,t);
+            var maskspec = BitMasks.MsbSpec(n2,n1,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), z.maxval<ulong>());
+            var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), z.maxval<ulong>());
             var target = gvec.vblendp(source, blendspec);
             var expect = Vectors.vparts(w,0,5,2,7,4,1,6,3);
             Claim.Require(gvec.vsame(expect,target));
 
-            var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
+            var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
-                Notify(descrition);            
+                Notify(descrition);
         }
 
         /// <summary>
@@ -86,18 +86,18 @@ namespace Z0
         {
             var w = n512;
             var t = z64;
-            var maskspec = MaskSpecs.msb(n4,n1,t);
+            var maskspec = BitMasks.MsbSpec(n4,n1,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
+            var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = Vectors.vparts(w,0,1,2,7,4,5,6,3);
             Claim.Require(gvec.vsame(expect,target));
 
-            var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
+            var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
                 Notify(descrition);
-            
+
         }
 
         /// <summary>
@@ -109,17 +109,17 @@ namespace Z0
         {
             var w = n512;
             var t = z64;
-            var maskspec = MaskSpecs.lsb(n2,n1,t);
+            var maskspec = BitMasks.LsbSpec(n2,n1,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
+            var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = Vectors.vparts(w,4,1,6,3,0,5,2,7);
             Claim.Require(gvec.vsame(expect,target));
 
-            var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
+            var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
-                Notify(descrition);            
+                Notify(descrition);
         }
 
         /// <summary>
@@ -131,17 +131,17 @@ namespace Z0
         {
             var w = n512;
             var t = z64;
-            var maskspec = MaskSpecs.jsb(n8,n2,t);
+            var maskspec = BitMasks.JsbSpec(n8,n2,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
+            var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = Vectors.vparts(w,4,5,2,3,0,1,6,7);
             Claim.Require(gvec.vsame(expect,target));
 
-            var descrition = describe(maskspec, BitMask.mask(maskspec.As(z8)), source,target);
+            var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z8)), source,target);
             if(EmitInfo)
-                Notify(descrition);            
+                Notify(descrition);
         }
 
         /// <summary>
@@ -153,18 +153,18 @@ namespace Z0
         {
             var w = n512;
             var t = z32;
-            var maskspec = MaskSpecs.jsb(n8,n2,t);
+            var maskspec = BitMasks.JsbSpec(n8,n2,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
+            var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = Vectors.vparts(w,8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7);
-            
+
             Claim.Require(gvec.vsame(expect,target));
 
-            var descrition = describe(maskspec, BitMask.mask(maskspec.As(z16)), source,target);
+            var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z16)), source,target);
             if(EmitInfo)
-                Notify(descrition);            
+                Notify(descrition);
         }
 
         /// <summary>
@@ -176,17 +176,17 @@ namespace Z0
         {
             var w = n512;
             var t = z16;
-            var maskspec = MaskSpecs.jsb(n8,n2,t);
+            var maskspec = BitMasks.JsbSpec(n8,n2,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
+            var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
             var expect = Vectors.vparts(w,16, 17,  2,  3,  4,  5, 22, 23, 24, 25, 10, 11, 12, 13, 30, 31,  0,  1, 18, 19, 20, 21,  6,  7,  8,  9, 26, 27, 28, 29, 14, 15);
             Claim.eq(expect,target);
 
-            var descrition = describe(maskspec, BitMask.mask(maskspec.As(z32)), source,target);
+            var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z32)), source,target);
             if(EmitInfo)
-                Notify(descrition);            
+                Notify(descrition);
         }
 
         /// <summary>
@@ -198,31 +198,31 @@ namespace Z0
         {
             var w = n512;
             var t = z8;
-            var maskspec = MaskSpecs.jsb(n8,n2,t);
+            var maskspec = BitMasks.JsbSpec(n8,n2,t);
 
             var source = gvec.vinc(w,t);
-            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
+            var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
 
-            var descrition = describe(maskspec, BitMask.mask(maskspec.As(z64)), source,target);
+            var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z64)), source,target);
             if(EmitInfo)
-                Notify(descrition);            
+                Notify(descrition);
         }
 
         public void vblendp_512x8_Jsb8x2()
         {
             var w = n512;
             var t = z8;
-            var maskspec = MaskSpecs.jsb(n8,n2,t);
-            var blendspec = gvec.vbroadcast(n256, BitMask.mask(maskspec), maxval(t));
+            var maskspec = BitMasks.JsbSpec(n8,n2,t);
+            var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
 
-            var maskbits = BitMask.mask(maskspec.As(z64));
+            var maskbits = BitMasks.mask(maskspec.As(z64));
 
             for(var samples=0; samples< RepCount; samples++)
             {
-                var source = Random.CpuVector(w,t);                
+                var source = Random.CpuVector(w,t);
                 var target = gvec.vblendp(source,blendspec);
-                
+
 
             }
 
@@ -234,23 +234,23 @@ namespace Z0
             var t = z8;
             var n = n64;
             var tf = 4;
-            var pick = BitMask.msb(n1,n1,t);
+            var pick = BitMasks.msb(n1,n1,t);
             var pattern = Blocks.alloc<byte>(w);
             for(var i=0; i< pattern.CellCount; i++)
                 pattern[i] = (i % tf == 0) ? pick : t;
-            
-            
+
+
             var spec = pattern.LoadVector();
             var x = gvec.vinc(w, t);
-            var y = gvec.vadd(x, gmath.add(x.LastCell(), As.one(t)));            
-            var z = gvec.vblendp(x,y,spec);       
+            var y = gvec.vadd(x, gmath.add(x.LastCell(), As.one(t)));
+            var z = gvec.vblendp(x,y,spec);
 
 
             var dst = Blocks.alloc(w,2,t);
             gvec.vlo(z).StoreTo(dst,0);
             gvec.vhi(z).StoreTo(dst,1);
 
-            var perm = Perm.Init(dst.Data);            
+            var perm = Perm.Init(dst.Data);
             for(var i=0; i< perm.Length; i++)
             {
                 var identity = i == perm[i];
@@ -266,7 +266,7 @@ namespace Z0
         static Vector128<T> swaps_pattern<T>(N128 w, int tf, T t = default)
             where T : unmanaged
         {
-            var pick = BitMask.msb(n1,n1,t);
+            var pick = BitMasks.msb(n1,n1,t);
             var pattern = Blocks.alloc<T>(w);
             for(var i=0; i< pattern.CellCount; i++)
                 pattern[i] = (i % tf == 0) ? pick : t;
@@ -275,27 +275,27 @@ namespace Z0
 
         static T enabled<T>(T t = default)
             where T : unmanaged
-                => BitMask.msb(n1,n1,t);
+                => BitMasks.msb(n1,n1,t);
 
         static Vector128<T> rrll_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => gvec.broadcast(BitMask.even(n2,n2,z64), enabled(t), Blocks.alloc<T>(w)).LoadVector();
+                => gvec.broadcast(BitMasks.even(n2,n2,z64), enabled(t), Blocks.alloc<T>(w)).LoadVector();
 
         static Vector128<T> llrr_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => gvec.broadcast(BitMask.odd<ulong>(n2,n2), enabled(t), Blocks.alloc<T>(w)).LoadVector();
+                => gvec.broadcast(BitMasks.odd<ulong>(n2,n2), enabled(t), Blocks.alloc<T>(w)).LoadVector();
 
         static Vector128<T> rl_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => gvec.broadcast(BitMask.lsb(n2,n1,z64), enabled(t), Blocks.alloc<T>(w)).LoadVector();
+                => gvec.broadcast(BitMasks.lsb(n2,n1,z64), enabled(t), Blocks.alloc<T>(w)).LoadVector();
 
         static Vector128<T> lr_pattern<T>(N128 w, T t = default)
             where T : unmanaged
-                => gvec.broadcast(BitMask.msb(n2,n1,z64), enabled(t), Blocks.alloc<T>(w)).LoadVector();
+                => gvec.broadcast(BitMasks.msb(n2,n1,z64), enabled(t), Blocks.alloc<T>(w)).LoadVector();
 
         static Vector256<T> rl_pattern<T>(N256 w, T t = default)
             where T : unmanaged
-                => gvec.broadcast(BitMask.lsb(n2,n1,t), enabled(t), Blocks.alloc<T>(w)).LoadVector();
+                => gvec.broadcast(BitMasks.lsb(n2,n1,t), enabled(t), Blocks.alloc<T>(w)).LoadVector();
 
 
         void vblendp_check<T>(Vector128<T> spec, [Caller] string title = null)
@@ -308,15 +308,15 @@ namespace Z0
             Claim.eq(value(pn), NatCalc.divT(w,t) * 2);
 
             var left = gvec.vinc(w, t);
-            var right = gvec.vadd(left, gmath.add(left.LastCell(), As.one(t)));            
-            var blend = gvec.vblendp(left,right,spec);       
+            var right = gvec.vadd(left, gmath.add(left.LastCell(), As.one(t)));
+            var blend = gvec.vblendp(left,right,spec);
 
 
             var dst = Blocks.alloc(w,2,t);
             gvec.vlo(blend).StoreTo(dst,0);
             gvec.vhi(blend).StoreTo(dst,1);
 
-            var perm = Perm.Init(dst.Data);            
+            var perm = Perm.Init(dst.Data);
             var tc = 0;
             for(var i=0; i< perm.Length; i++)
             {
@@ -327,7 +327,7 @@ namespace Z0
                     var j = perm[i];
                     var k = perm[j];
                     Claim.Eq(ti,k);
-                    tc++;                    
+                    tc++;
                 }
             }
 
@@ -339,8 +339,8 @@ namespace Z0
                 Notify($"* {title}: vector width = {w}, swap count = {tc}, cell type = {typeof(T).DisplayName()}, perm length = {pn}");
                 Notify($"left:  {left.Format()}");
                 Notify($"right: {right.Format()}");
-                Notify(perm.Format());  
-                Notify(string.Empty);  
+                Notify(perm.Format());
+                Notify(string.Empty);
             }
         }
 
@@ -411,16 +411,16 @@ namespace Z0
         protected void vblendp_check<P,S,T>(N128 w, P np, S pattern, T t = default)
             where T : unmanaged
             where S : unmanaged
-            where P : unmanaged, ITypeNat             
+            where P : unmanaged, ITypeNat
         {
             var spec = @as(Vectors.vbroadcast(w, pattern), t);
             var x = gvec.vinc(w, t);
-            var y = gvec.vadd(x, gmath.add(x.LastCell(), As.one(t)));            
-            var z = gvec.vblendp(x,y,spec);         
+            var y = gvec.vadd(x, gmath.add(x.LastCell(), As.one(t)));
+            var z = gvec.vblendp(x,y,spec);
 
             var dst = Blocks.alloc(w,2,t);
-            gvec.vlo(z).StoreTo(dst,0);            
-            gvec.vhi(z).StoreTo(dst,1);            
+            gvec.vlo(z).StoreTo(dst,0);
+            gvec.vhi(z).StoreTo(dst,1);
 
             var perm = Perm.Init(dst.Data);
             for(var i=0; i< perm.Length; i++)
@@ -439,12 +439,12 @@ namespace Z0
         protected void vblendp_check<P,S,T>(N256 w, P np, S pattern, T t = default)
             where T : unmanaged
             where S : unmanaged
-            where P : unmanaged, ITypeNat             
+            where P : unmanaged, ITypeNat
         {
             var spec = @as(Vectors.vbroadcast(w, pattern),t);
             var x = gvec.vinc(w, t);
-            var y = gvec.vadd(x, gmath.add(x.LastCell(), As.one(t)));            
-            var z = gvec.vblendp(x,y,spec);         
+            var y = gvec.vadd(x, gmath.add(x.LastCell(), As.one(t)));
+            var z = gvec.vblendp(x,y,spec);
 
             var dst = Blocks.alloc(w,2,t);
             z.Lo.StoreTo(dst,0);

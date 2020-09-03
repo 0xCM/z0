@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static Memories;
     using static Vectors;
-    
+
     partial class VMask
     {
         /// <summary>
@@ -69,8 +69,8 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         static Vector128<T> veven<T>(N128 w, N2 f = default, N1 d = default, T t = default)
             where T : unmanaged
-                => Vectors.vbroadcast(w,BitMask.even(f,d,t));
-                
+                => Vectors.vbroadcast(w,BitMasks.even(f,d,t));
+
         /// <summary>
         /// [01010101]
         /// </summary>
@@ -82,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         static Vector256<T> veven<T>(N256 w, N2 f = default, N1 d = default, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMask.even(f,d,t));
+                => vbroadcast(w,BitMasks.even(f,d,t));
 
         /// <summary>
         /// [00110011]
@@ -95,7 +95,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         static Vector128<T> veven<T>(N128 w, N2 f = default, N2 d = default, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMask.even(f,d,t));
+                => vbroadcast(w,BitMasks.even(f,d,t));
 
         /// <summary>
         /// [00110011]
@@ -108,6 +108,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         static Vector256<T> veven<T>(N256 w, N2 f = default, N2 d = default, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMask.even(f,d,t));
+                => vbroadcast(w,BitMasks.even(f,d,t));
     }
 }

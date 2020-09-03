@@ -12,12 +12,12 @@ namespace Z0
     using static z;
 
     partial class BitGrid
-    {        
+    {
         [MethodImpl(Inline)]
-        public static BitGrid64<N8,N8,T> transpose<T>(BitGrid64<N8,N8,T> g)        
+        public static BitGrid64<N8,N8,T> transpose<T>(BitGrid64<N8,N8,T> g)
             where T : unmanaged
         {
-            var dst = alloc64<N8,N8,byte>();                        
+            var dst = alloc64<N8,N8,byte>();
             var src = Vectors.vscalar(n128,g);
             for(var i=7; i>= 0; i--)
             {
@@ -44,26 +44,26 @@ namespace Z0
             var r = A.RowCount;
             var c = A.ColCount;
             var R = math.pow2m1(r);
-                    
+
             var c0 = Bits.gather(A.Content, C << 0);
             var c1 = Bits.gather(A.Content, C << 1);
             var c2 = Bits.gather(A.Content, C << 2);
             var c3 = Bits.gather(A.Content, C << 3);
-            
+
             var r0 = Bits.scatter(c0, R << 0*r);
             var r1 = Bits.scatter(c1, R << 1*r);
             var r2 = Bits.scatter(c2, R << 2*r);
             var r3 = Bits.scatter(c3, R << 3*r);
             return r0 | r1 | r2 | r3;
-            
+
         }
 
         [MethodImpl(Inline)]
         public static BitGrid64<N4,N16,ulong> transpose(BitGrid64<N16,N4,ulong> A)
-            => BitGrid.create(n64,n4,n16, 
-                (ulong)A.Col(0) << 0  | 
-                (ulong)A.Col(1) << 16 | 
-                (ulong)A.Col(2) << 32 | 
+            => BitGrid.create(n64,n4,n16,
+                (ulong)A.Col(0) << 0  |
+                (ulong)A.Col(1) << 16 |
+                (ulong)A.Col(2) << 32 |
                 (ulong)A.Col(3) << 48
                 );
 
@@ -76,8 +76,8 @@ namespace Z0
         static Vector256<T> vT16x16step<T>(in Vector256<T> src, in Vector256<T> g0, int i, int j)
             where T : unmanaged
         {
-            const uint E = BitMasks.Even32;
-            const uint O = BitMasks.Odd32;
+            const uint E = MaskLiterals.Even32;
+            const uint O = MaskLiterals.Odd32;
 
             var mask = gvec.vtakemask(src, (byte)i);
             var gT = gcell(g0, i, convert<T>(Bits.gather(mask, E)));
@@ -86,7 +86,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BitGrid256<N16,N16,ushort> transpose(in BitGrid256<N16,N16,ushort> g)                
+        public static BitGrid256<N16,N16,ushort> transpose(in BitGrid256<N16,N16,ushort> g)
         {
             var gT = default(Vector256<ushort>);
             var src = g.Content;

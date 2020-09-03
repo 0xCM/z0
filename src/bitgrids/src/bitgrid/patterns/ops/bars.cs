@@ -18,7 +18,7 @@ namespace Z0
             where T : unmanaged
         {
             var sep = nati(n);
-            var pattern = BitMask.lo(sep, z64) << sep;                        
+            var pattern = BitMasks.lo(sep, z64) << sep;
             return generic<T>(z.vbroadcast(w, gbits.replicate(pattern)));
         }
     }

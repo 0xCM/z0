@@ -30,7 +30,7 @@ namespace Z0
         public Address32 Offset
         {
             [MethodImpl(Inline)]
-            get => (uint)Value & BitMasks.Lo24u;
+            get => (uint)Value & MaskLiterals.Lo24u;
         }
 
         public uint Id

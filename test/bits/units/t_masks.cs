@@ -33,15 +33,15 @@ namespace Z0
 
         public void lomask_case3()
         {
-            var lomask = BitMask.lo<uint>(6);
-            var himask = BitMask.hi<uint>(8);
+            var lomask = BitMasks.lo<uint>(6);
+            var himask = BitMasks.hi<uint>(8);
             var src = uint.MaxValue;
             var dst = gmath.xor(gmath.xor(src,lomask), himask);
             Claim.eq(7, gbits.ntz(dst));
             Claim.eq(8, gbits.nlz(dst));
 
-            Claim.eq(7, Bits.pop(BitMask.lo<uint>(6)));
-            Claim.eq(12, Bits.pop(BitMask.lo<uint>(11)));
+            Claim.eq(7, Bits.pop(BitMasks.lo<uint>(6)));
+            Claim.eq(12, Bits.pop(BitMasks.lo<uint>(11)));
         }
 
         public void himask_8u()
@@ -64,7 +64,7 @@ namespace Z0
             for(var i=0; i< RepCount; i++)
             {
                 var count = Random.One(mincount,maxcount);
-                var mask = BitMask.hi(count,t);
+                var mask = BitMasks.hi(count,t);
                 var pop = gbits.pop(mask);
                 if(pop != count)
                 {

@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
@@ -16,7 +16,7 @@ namespace Z0
     using static Konst;
 
     partial class dvec
-    {         
+    {
         /// <summary>
         /// Shifts each each component rightward by a specified bitcount
         /// </summary>
@@ -41,7 +41,7 @@ namespace Z0
             var x = v16u(ShiftRightLogical(z.vinflate(src, n256, z16i),count));
             var y = z.vand(x,v16u(z.vbroadcast(n256, byte.MaxValue)));
             return v8i(z.vcompact(y,n128,z8));
-        } 
+        }
 
         /// <summary>
         /// __m128i _mm_srli_epi16 (__m128i a, int immediate) PSRLW xmm, imm8
@@ -115,7 +115,7 @@ namespace Z0
             var y = v16u(ShiftRightLogical(vinflate(z.vhi(src), n256, z16i),count));
             var m = v16u(z.vbroadcast(n256, byte.MaxValue));
             return v8i(z.vcompact(z.vand(x,m), z.vand(y,m),n256,z8));
-        } 
+        }
 
         /// <summary>
         /// Shifts each each component rightward by a specified bitcount
@@ -128,7 +128,7 @@ namespace Z0
             var y = v8u(ShiftRightLogical(v64u(src), count));
             var m = vlsb(n256, n8, (byte)(8 - count),z8);
             return dvec.vand(y,m);
-        } 
+        }
 
         /// <summary>
         /// __m256i _mm256_srli_epi16 (__m256i a, int imm8) VPSRLW ymm, ymm, imm8
@@ -188,7 +188,7 @@ namespace Z0
         /// <param name="count">The bitcount</param>
         [MethodImpl(Inline), Srl]
         public static Vector256<ulong> vsrl(Vector256<ulong> src, [Imm] byte count)
-            => ShiftRightLogical(src, count); 
+            => ShiftRightLogical(src, count);
 
         /// <summary>
         /// The f least significant bits of each 8 bit segment are enabled
@@ -200,7 +200,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector128<T> vlsb<T>(N128 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => generic<T>(z.vbroadcast<byte>(w, BitMask.lsb8f(d)));
+                => generic<T>(z.vbroadcast<byte>(w, BitMasks.lsb8f(d)));
 
         /// <summary>
         /// The f least significant bits of each 8 bit segment are enabled
@@ -212,6 +212,6 @@ namespace Z0
         [MethodImpl(Inline)]
         static Vector256<T> vlsb<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => generic<T>(z.vbroadcast<byte>(w, BitMask.lsb8f(d)));
+                => generic<T>(z.vbroadcast<byte>(w, BitMasks.lsb8f(d)));
     }
 }

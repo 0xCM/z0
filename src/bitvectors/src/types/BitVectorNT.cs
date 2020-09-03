@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;            
+    using static Konst;
     using static NumericCast;
 
     /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// <summary>
         /// The maximum arithmetic value of the vector, constrained by the natural width
         /// </summary>
-        public static T MaxValue 
+        public static T MaxValue
         {
             [MethodImpl(Inline)]
             get => convert<ulong,T>(NatCalc.pow2m1<N>());
@@ -141,16 +141,16 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> operator +(BitVector<N,T> x,BitVector<N,T> y) 
+        public static BitVector<N,T> operator +(BitVector<N,T> x,BitVector<N,T> y)
             => gmath.mod(gmath.add(x.Data,y.Data), MaxValue);
-        
+
         /// <summary>
         /// Computes the N-modular arithmetic difference between the operands
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> operator -(BitVector<N,T> x,BitVector<N,T> y) 
+        public static BitVector<N,T> operator -(BitVector<N,T> x,BitVector<N,T> y)
             => x + -y;
 
         /// <summary>
@@ -253,7 +253,7 @@ namespace Z0
         /// <param name="data">The scalar source value</param>
         [MethodImpl(Inline)]
         internal BitVector(T data)
-            => this.Data = gmath.and(BitMask.lo<N,T>(), data);
+            => this.Data = gmath.and(BitMasks.lo<N,T>(), data);
 
         [MethodImpl(Inline)]
         BitVector(T data, bit inject)
@@ -295,7 +295,7 @@ namespace Z0
             get => gmath.nonz(Data);
         }
 
-        public Span<byte> Bytes 
+        public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
             get => BitVector.bytes(Data);
@@ -308,7 +308,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => gbits.testbit(Data, (byte)index);
-            
+
             [MethodImpl(Inline)]
             set => Data = gbits.setbit(Data, index, value);
         }
@@ -323,13 +323,13 @@ namespace Z0
             [MethodImpl(Inline)]
             get => gbits.extract(Data, first, last);
         }
- 
+
         [MethodImpl(Inline)]
         public readonly bool Equals(BitVector<N,T> y)
             => gmath.eq(Data, y.Data);
 
         /// <summary>
-        /// Creates a new vector by converting the underlying cell to the target type 
+        /// Creates a new vector by converting the underlying cell to the target type
         /// </summary>
         /// <typeparam name="U">The target type</typeparam>
         [MethodImpl(Inline)]
@@ -339,7 +339,7 @@ namespace Z0
 
         public readonly override bool Equals(object obj)
             => obj is BitVector<N,T> x && Equals(x);
-        
+
         public readonly override int GetHashCode()
             => Data.GetHashCode();
 
@@ -350,6 +350,6 @@ namespace Z0
             => BitVector.format(this);
 
         public override string ToString()
-            => Format();    
+            => Format();
     }
 }

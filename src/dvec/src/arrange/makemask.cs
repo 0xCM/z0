@@ -13,7 +13,7 @@ namespace Z0
     using static V0d;
 
     partial class dvec
-    {    
+    {
         /// <summary>
         /// Distributes each bit of the source to the hi bit of each byte in a 128-bit target vector
         /// </summary>
@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vmakemask(ushort src, byte index)
         {
-            var m = BitMasks.Lsb64x8x1 << index;
+            var m = MaskLiterals.Lsb64x8x1 << index;
             return v8u(vparts(maskpart(src,0, m), maskpart(src,8, m)));
         }
 
@@ -49,15 +49,15 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vmakemask(uint src, byte index)
         {
-            var m = BitMasks.Lsb64x8x1 << index;
+            var m = MaskLiterals.Lsb64x8x1 << index;
             var lo = v8u(vparts(maskpart(src, 0, m), maskpart(src, 8, m)));
             var hi = v8u(vparts(maskpart(src, 16, m), maskpart(src, 24, m)));
-            return vconcat(lo,hi);            
+            return vconcat(lo,hi);
         }
 
         [MethodImpl(Inline), Op]
         static ulong maskpart(uint src, int offset)
-            => Bits.scatter((ulong)((byte)(src >> offset)), BitMasks.Msb64x8x1);
+            => Bits.scatter((ulong)((byte)(src >> offset)), MaskLiterals.Msb64x8x1);
 
         [MethodImpl(Inline), Op]
         static ulong maskpart(uint src, int offset, ulong mask)

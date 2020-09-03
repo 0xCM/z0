@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
-    
+
     partial class Bits
-    {                
+    {
         /// <summary>
         /// Calculates the number of bits set up to and including the specified position
         /// </summary>

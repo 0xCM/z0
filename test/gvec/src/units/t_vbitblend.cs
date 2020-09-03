@@ -7,18 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static Typed;
     using static V0;
     using static V0d;
- 
+
     public class t_vbitblend : t_inx<t_vbitblend>
-    {                
+    {
         public void bitblend_basecases()
         {
             var n = n256;
-            var mask = vbroadcast(n, BitMask.msb(n2,n1,z8));
+            var mask = vbroadcast(n, BitMasks.msb(n2,n1,z8));
             var zero = vzero<byte>(n);
             var ones = gvec.vones<byte>(n);
             var blend = VBits.bitblend(zero,ones,mask);
@@ -65,7 +65,7 @@ namespace Z0
                 for(var i = 0; i<count; i++)
                     Claim.Eq(vcell(blended,i),gmath.blend(vcell(x,i),vcell(y,i), vcell(mask,i)));
 
-                vcheckmask(x,y,mask,blended);                    
+                vcheckmask(x,y,mask,blended);
             }
         }
 
@@ -82,13 +82,13 @@ namespace Z0
             {
                 var a = bsm[i] ? rbs[i] : lbs[i];
                 Claim.Eq(a, bsr[i]);
-            }            
+            }
         }
 
         void vbitblend_check<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var count = w/z.bitsize<T>();            
+            var count = w/z.bitsize<T>();
             for(var sample=0; sample<RepCount; sample++)
             {
                 var x = Random.CpuVector(w,t);

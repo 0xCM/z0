@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-                
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gmath
     {
@@ -51,7 +51,7 @@ namespace Z0
                  return math.eq(int32(a), int32(b));
             else if(typeof(T) == typeof(long))
                  return math.eq(int64(a), int64(b));
-             else 
+             else
                 return gfp.eq(a,b);
        }
     }

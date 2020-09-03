@@ -10,20 +10,20 @@ namespace Z0
     using static Konst;
     using static As;
 
-    public class t_partitions : t_bitcore<t_partitions>    
-    {            
+    public class t_partitions : t_bitcore<t_partitions>
+    {
         public void bitpart_16x4()
         {
             var n = n4;
             var t = z8;
-            var src = BitMask.msb(n2,n1,z16);
+            var src = BitMasks.msb(n2,n1,z16);
             var dst = NatSpan.alloc(n,t);
             Bits.part4x4(src, ref dst.Head);
             var segment = uint8(0b1010).ToBitSpan();
             var expect = segment.Replicate(4);
             var actual = dst.Data.ToBitSpan();
             Claim.Require(expect.Equals(actual));
-                        
+
         }
 
         public void bitpart_24x3()
@@ -33,7 +33,7 @@ namespace Z0
 
             var src = uint.MaxValue;
             var dst = NatSpan.alloc(n,t);
-            
+
             Bits.part24x3(src, ref dst.Head);
             for(var i=0; i<n; i++)
                 Claim.Eq(dst[i],(byte)7);
@@ -46,7 +46,7 @@ namespace Z0
 
             var src = uint.MaxValue;
             var dst = NatSpan.alloc(n,t);
-            
+
             Bits.part27x3(src, ref dst.Head);
 
             var expect = BitSpans.parse("000001110000011100000111000001110000011100000111000001110000011100000111");
@@ -61,7 +61,7 @@ namespace Z0
                 Claim.Eq(expect[i+1],actual[i+1]);
                 Claim.Eq(expect[i+2],actual[i+2]);
             }
-                        
+
         }
 
         public void bitpart_30x3()
@@ -71,7 +71,7 @@ namespace Z0
 
             var src = uint.MaxValue;
             var dst = NatSpan.alloc(n,t);
-            
+
             Bits.part30x3(src, ref dst.Head);
             for(var i=0; i<n; i++)
                 Claim.Eq(dst[i],(byte)7);

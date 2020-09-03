@@ -46,7 +46,7 @@ namespace Z0
             var data = 0ul;
             for(var i=0; i<8; i++)
             {
-                data |= (Bits.gather(src, BitMasks.Lsb64x8x1) << i*8);
+                data |= (Bits.gather(src, MaskLiterals.Lsb64x8x1) << i*8);
                 src >>= 1;
             }
             return (BitMatrix8)data;
@@ -60,7 +60,7 @@ namespace Z0
             var data = 0ul;
             for(var i=0; i<8; i++)
             {
-                data |= (Bits.gather(src, BitMasks.Lsb64x8x1) << i*8);
+                data |= (Bits.gather(src, MaskLiterals.Lsb64x8x1) << i*8);
                 src >>= 1;
             }
 

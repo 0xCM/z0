@@ -18,7 +18,7 @@ namespace Z0
         public static void store(PartId part, Type src, Span<EnumLiteralRecord> dst)
         {
             var fields = span(src.LiteralFields());
-            var tc = Primitive.ecode(src);
+            var tc = Primal.ecode(src);
             store(part, src, tc, fields, dst);
         }
 

@@ -42,7 +42,7 @@ namespace Z0.Asm
 
         public void check_bit_masks()
         {
-            var src = typeof(BitMasks);
+            var src = typeof(MaskLiterals);
             var data = binlits<ulong>(src, msg => Trace(msg));
             Trace(data.Length);
 

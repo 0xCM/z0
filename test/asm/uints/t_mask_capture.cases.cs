@@ -16,21 +16,21 @@ namespace Z0.Asm
     {
         static T central<T>(N8 f, N2 d)
             where T : unmanaged
-                => BitMask.central<T>(f,d);
+                => BitMasks.central<T>(f,d);
 
         static T central<T>(N8 f, N4 d)
             where T : unmanaged
-                => BitMask.central<T>(f,d);
+                => BitMasks.central<T>(f,d);
 
         static T central<T>(N8 f, N6 d)
             where T : unmanaged
-                => BitMask.central<T>(f,d);        
+                => BitMasks.central<T>(f,d);
 
         [MethodImpl(Inline), NumericClosures(UnsignedInts), Naturals(4,6,8,10,12,14,16,18,32,64)]
         static T lsb<N,T>(N w, N2 f, N1 d, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitMask.lsb<N,T>(w, f, d);
+                => BitMasks.lsb<N,T>(w, f, d);
 
         public static IEnumerable<MethodInfo> NumericMethods
             => typeof(MaskCases).DeclaredStaticMethods().OpenGeneric(1);
@@ -54,7 +54,7 @@ namespace Z0.Asm
             => Root.array(typeof(N4), typeof(N6), typeof(N8), typeof(N10), typeof(N12));
 
         public static Type[] NumericArgs
-            => Root.array(typeof(byte), typeof(ushort), typeof(uint), typeof(ulong));    
+            => Root.array(typeof(byte), typeof(ushort), typeof(uint), typeof(ulong));
     }
 
 }

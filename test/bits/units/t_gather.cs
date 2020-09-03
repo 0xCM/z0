@@ -11,16 +11,16 @@ namespace Z0
     using static Memories;
 
     public class t_gather : t_bitcore<t_gather>
-    {            
+    {
         public void gather_masks()
         {
 
-            var m2 = BitMasks.Lsb32x8x1;
+            var m2 = MaskLiterals.Lsb32x8x1;
             var x2 = Bits.gather(UInt32.MaxValue, m2);
             var y2 = Bits.scatter(x2, m2).ToBitVector();
             var bv = m2.ToBitVector();
             Claim.Eq(y2.Scalar,bv.Scalar);
-            
+
             for(var i=0; i<y2.Width; i++)
                 Claim.Eq(y2[i], i % 8 == 0 ? bit.On : bit.Off);
         }
@@ -35,7 +35,7 @@ namespace Z0
             => gather_check<uint>();
 
         public void gather_64()
-            => gather_check<ulong>();        
+            => gather_check<ulong>();
 
         void gather_check<T>(T t = default)
             where T : unmanaged
@@ -68,9 +68,9 @@ namespace Z0
                 return generic<T>(gather(uint32(src), uint32(mask)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(gather(uint64(src), uint64(mask)));
-            else            
+            else
                 throw Unsupported.define<T>();
-        }           
+        }
 
         /// <summary>
         /// Collects mask-identified source bits that are deposited to

@@ -7,7 +7,16 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(Bits)" />
+    <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(BitFields)" />
+    <ProjectReference Include="$(BitGrids)" />
+    <ProjectReference Include="$(BitMatrix)" />
+    <ProjectReference Include="$(BitPack)" />
+    <ProjectReference Include="$(BitSpans)" />
+    <ProjectReference Include="$(BitStrings)" />
+    <ProjectReference Include="$(BitSvc)" />
+    <ProjectReference Include="$(BitVectors)" />
+    <ProjectReference Include="$(VBits)" />
   </ItemGroup>
 
 </Project>

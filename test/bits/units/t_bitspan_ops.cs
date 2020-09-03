@@ -128,7 +128,7 @@ namespace Z0
 
         public void bitslice_32()
         {
-            var x = BitMasks.Even32x2;
+            var x = MaskLiterals.Even32x2;
             var y = x.ToBitSpan();
             var t = z32;
 
@@ -221,7 +221,7 @@ namespace Z0
             where T : unmanaged
         {
             var length = bitsize<T>();
-            var src = BitMask.even(n2, n1, t);
+            var src = BitMasks.even(n2, n1, t);
             var bitspan = BitSpans.from<T>(src);
             var format = bitspan.Format();
 

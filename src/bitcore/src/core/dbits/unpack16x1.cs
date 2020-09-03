@@ -10,6 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using L = BitMasks.Literals;
+
     partial class Bits
     {
         /// <summary>
@@ -33,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline), Unpack]
         static void unpack16x1(ushort src, ref ulong dst)
         {
-            const ulong M = (ulong)BitMasks.Lsb64x8x1;
+            const ulong M = (ulong)L.Lsb64x8x1;
 
             seek(dst, 0) = scatter(src, M);
             seek(dst, 1) = scatter(uint16(src >> 8), M);

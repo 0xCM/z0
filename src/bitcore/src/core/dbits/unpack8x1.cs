@@ -6,9 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
     using static z;
+
+    using L = BitMasks.Literals;
 
     partial class Bits
     {
@@ -19,7 +21,7 @@ namespace Z0
         /// <param name="dst">The bit target</param>
         [MethodImpl(Inline), Unpack]
         public static void unpack8x1(byte src, ref ulong dst)
-            => dst = scatter(src, (ulong)BitMasks.Lsb64x8x1);
+            => dst = scatter(src, (ulong)L.Lsb64x8x1);
 
         /// <summary>
         /// Sends each source bit to a corresponding target cell

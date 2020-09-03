@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The data to test</param>
         [MethodImpl(Inline), Op]
         public static bool valid(byte src)
-            => (BitMasks.Msb8x8x1 & src) == 0;
+            => (MaskLiterals.Msb8x8x1 & src) == 0;
 
         /// <summary>
         /// Tests whether the data source contains only asci data
@@ -26,7 +26,7 @@ namespace Z0
         /// <param name="src">The data to test</param>
         [MethodImpl(Inline), Op]
         public static bool valid(ushort src)
-            => (BitMasks.Msb16x8x1 & src) == 0;
+            => (MaskLiterals.Msb16x8x1 & src) == 0;
 
         /// <summary>
         /// Tests whether the data source contains only asci data
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="src">The data to test</param>
         [MethodImpl(Inline), Op]
         public static bool valid(uint src)
-            => (BitMasks.Msb32x8x1 & src) == 0;
+            => (MaskLiterals.Msb32x8x1 & src) == 0;
 
         /// <summary>
         /// Tests whether the data source contains only asci data
@@ -42,6 +42,6 @@ namespace Z0
         /// <param name="src">The data to test</param>
         [MethodImpl(Inline), Op]
         public static bool valid(ulong src)
-            => (BitMasks.Msb64x8x1 & src) == 0;
+            => (MaskLiterals.Msb64x8x1 & src) == 0;
     }
 }

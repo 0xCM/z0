@@ -35,7 +35,7 @@ namespace Z0
         public void Run()
         {
             Wf.Running(StepId, text.format(RunningPattern, TargetPath));
-            var count = emit(typeof(BitMasks));
+            var count = emit(typeof(MaskLiterals));
             Wf.Ran(StepId, text.format(RanPattern, count, TargetPath));
         }
 

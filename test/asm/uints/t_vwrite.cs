@@ -15,9 +15,9 @@ namespace Z0
     {
         public void primal_kind()
         {
-            var f = Primitive.bitfield(PrimalKind.I16);
-            var width = Primitive.width(f);
-            Claim.Eq(width, TypeWidth.W16);            
+            var f = Primal.bitfield(PrimalKind.I16);
+            var width = Primal.width(f);
+            Claim.Eq(width, TypeWidth.W16);
         }
 
         static void asci_format_16()
@@ -40,10 +40,10 @@ namespace Z0
             var count = Math.Min(src.Length, Buffer.Length);
             for(var i=0; i<count; i++)
                 *pDst++ = *pSrc++;
-                            
+
             return Buffer;
         }
-        
+
         public unsafe void check_ref_data()
         {
             const string A = "abcdefghijklmnopqrstuvwxyz";
@@ -51,14 +51,14 @@ namespace Z0
             var src = A;
             var r = z.cover(src);
             Claim.eq(A.Length, r.Length);
-            
+
             for(var i=0; i<src.Length; i++)
-                Claim.eq(r[i], src[i]);                 
+                Claim.eq(r[i], src[i]);
         }
 
         public void check_vwrite_u8()
         {
-            var src = Random.Span<byte>(16);        
+            var src = Random.Span<byte>(16);
             var dst = vcover<uint>(w128, ref first(src));
             var a = Spans.alloc<uint>(4);
             vsave(dst, ref first(a));

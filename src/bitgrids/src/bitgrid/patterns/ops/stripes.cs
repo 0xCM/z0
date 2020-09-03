@@ -17,6 +17,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Vectors.vbroadcast(w, BitMask.lsb(n64, n2, n1, t));
+                => Vectors.vbroadcast(w, BitMasks.lsb(n64, n2, n1, t));
     }
 }

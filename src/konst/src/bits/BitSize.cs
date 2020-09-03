@@ -12,6 +12,7 @@ namespace Z0
     /// <summary>
     /// Specifies data size in bits
     /// </summary>
+    [ApiDataType]
     public readonly struct BitSize
     {
         /// <summary>
@@ -28,7 +29,7 @@ namespace Z0
         /// Computes the bit-size of a parametric type
         /// </summary>
         /// <typeparam name="T">The type to measure</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Closures(UnsignedInts)]
         public static int measure<T>()
             => Unsafe.SizeOf<T>()*8;
 
@@ -37,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The parametric type from which a bit-width will be determined</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Closures(UnsignedInts)]
         public static int div<T>(int a, T t = default)
             where T : unmanaged
                 => a / (Unsafe.SizeOf<T>()*8);
@@ -47,7 +48,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The parametric type from which a bit-width will be determined</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Closures(UnsignedInts)]
         public static int mod<T>(int a, T t = default)
             where T : unmanaged
                 => a % (Unsafe.SizeOf<T>()*8);
@@ -127,7 +128,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator BitSize(ByteSize src)
             => new BitSize(src.Count * 8);
-        
+
         [MethodImpl(Inline)]
         public static bool operator ==(BitSize lhs, BitSize rhs)
             => lhs.Count == rhs.Count;
@@ -165,9 +166,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Count/8;
         }
-    
-        public BitSize Zero 
-            => default;
 
         [MethodImpl(Inline)]
         public bool Equals(BitSize rhs)
@@ -185,7 +183,7 @@ namespace Z0
         /// <summary>
         /// The bit with no size
         /// </summary>
-        public static BitSize Empty 
+        public static BitSize Empty
             => default;
     }
 }
