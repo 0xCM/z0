@@ -23,9 +23,7 @@ namespace Z0
 
         public WfStepId StepId {get;}
 
-        public readonly T Data {get;}
-
-        public WfPayload<T> Content => Data;
+        public WfPayload<T> Data {get;}
 
         public MessageFlair Flair {get;}
 
@@ -45,7 +43,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfError(WfStepId step, T body, CorrelationToken ct, AppMsgSource source)
         {
-            EventId = evid(EventName, ct);
+            EventId = (EventName, step, ct);
             Actor = EmptyString;
             StepId = step;
             Data = body;
@@ -53,7 +51,8 @@ namespace Z0
             Source = source;
         }
 
+        [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Source, Content);
+            => format(EventId, Source, Data);
     }
 }

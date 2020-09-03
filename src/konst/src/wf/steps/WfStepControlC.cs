@@ -9,12 +9,12 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct WfStepControl<C> : IWfStepControl<C>
-        where C : struct, IWfStep<C>
+    public readonly struct WfStepControl<C>
+        where C : IWfStep<C>, new()
     {
         readonly Action Fx;
 
-        public WfStepId StepId => AB.step<C>();
+        public WfStepId Id => AB.step<C>();
 
         [MethodImpl(Inline)]
         public static implicit operator WfStepControl<C>(Action fx)
@@ -22,7 +22,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator WfStepControl(WfStepControl<C> src)
-            => new WfStepControl(src.StepId, src.Fx);
+            => new WfStepControl(src.Id, src.Fx);
 
         [MethodImpl(Inline)]
         public WfStepControl(Action fx)

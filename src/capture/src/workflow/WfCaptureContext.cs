@@ -31,12 +31,10 @@ namespace Z0
             Log = AB.log(wf.Config);
             Broker = AsmWfBuilder.capture(wf);
             Context = new CaptureContext(asm.ContextRoot, decoder, formatter, writerfactory, Broker, Ct);
-            Wf.Created(nameof(WfCaptureContext), Ct);
         }
 
         public void Dispose()
         {
-            Wf.Finished(nameof(WfCaptureContext), Ct);
             Broker.Dispose();
             Log.Dispose();
         }

@@ -56,7 +56,7 @@ namespace Z0
                 }
                 catch(Exception e)
                 {
-                    Wf.Error(e, Ct);
+                    Wf.Error(StepId, e);
                 }
             }
 
@@ -65,7 +65,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(StepId, Ct);
+            Wf.Finished(StepId);
         }
 
         void Emit(IdentifiedCodeIndex src, FolderPath dst)

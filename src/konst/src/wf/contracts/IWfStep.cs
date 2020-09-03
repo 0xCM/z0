@@ -17,7 +17,7 @@ namespace Z0
         WfStepId Id {get;}
 
         string Name
-            => Id.Control.Name.Remove("Step");
+            => Id.Name;
 
         WfFunc<C> Fx<C>([CallerMemberName] string name = null)
             where C : struct, IWfStep<C>
@@ -28,7 +28,7 @@ namespace Z0
     /// Describes a workflow step
     /// </summary>
     public interface IWfStep<C> : IWfStep
-        where C : struct, IWfStep<C>
+        where C : IWfStep<C>, new()
     {
         WfStepId IWfStep.Id
             => api.step<C>();

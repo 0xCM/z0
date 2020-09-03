@@ -31,31 +31,31 @@ namespace Z0
     }
 
     public interface IWfFunc<C> : IWfFunc
-        where C : struct, IWfStep<C>
+        where C : IWfStep<C>, new()
     {
         C Step => default;
     }
 
     public interface IWfFunc<C,R> : IWfFunc<C>
-        where C : struct, IWfStep<C>
+        where C : IWfStep<C>, new()
     {
 
     }
 
     public interface IWfFunc<C,A0,R> : IWfFunc<C,R>
-        where C : struct, IWfStep<C>
+        where C : IWfStep<C>, new()
     {
 
     }
 
     public interface IWfFunc<C,A0,A1,R> : IWfFunc<C,R>
-        where C : struct, IWfStep<C>
+        where C : IWfStep<C>, new()
     {
 
     }
 
     public interface IWfFunc<C,A0,A1,A2,R> : IWfFunc<C,R>
-        where C : struct, IWfStep<C>
+        where C : IWfStep<C>, new()
     {
 
     }

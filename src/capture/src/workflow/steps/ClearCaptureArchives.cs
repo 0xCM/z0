@@ -25,7 +25,7 @@ namespace Z0.Asm
             Wf = wf;
             Config = config;
             Ct = ct;
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId, Ct);
         }
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0.Asm
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId, Ct);
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct WfStepId : IWfStepId<WfStepId>
+    public readonly struct WfStepId : IWfStepId
     {
         /// <summary>
         /// The Step controller
@@ -34,12 +34,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator WfStepId(Type control)
-            => AB.step(control);
+            => new WfStepId(control);
 
         [MethodImpl(Inline)]
         public WfStepId(Type control, Type effect)
         {
             Effect = effect;
+            Control = control;
+        }
+
+        [MethodImpl(Inline)]
+        public WfStepId(Type control)
+        {
+            Effect = control;
             Control = control;
         }
 

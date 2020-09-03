@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct WfStepControl : IWfStepControl
+    public readonly struct WfStepControl
     {
         readonly Action Fx;
 

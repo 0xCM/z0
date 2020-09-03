@@ -16,11 +16,11 @@ namespace Z0
             => new WfProcessingFile<T>(actor, kind, src, ct);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static WfProcessedFile<T> processed<T>(string actor, T kind, FilePath src, uint size, CorrelationToken ct)
-            => new WfProcessedFile<T>(actor, kind, src, size, ct);
+        public static ProcessedFile<T> processed<T>(string actor, T kind, FilePath src, uint size, CorrelationToken ct)
+            => new ProcessedFile<T>(actor, kind, src, size, ct);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static WfProcessedFile<T> processed<T>(WfStepId step, T content, WfDataFlow<FS.FilePath> flow, uint size, CorrelationToken ct)
-            => new WfProcessedFile<T>(step, content, flow, size, ct);
+        public static ProcessedFile<T> processed<T>(WfStepId step, T content, WfDataFlow<FS.FilePath> flow, uint size, CorrelationToken ct)
+            => new ProcessedFile<T>(step, content, flow, size, ct);
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
     using static FS;
 
     public readonly struct WfFunc<C> : IWfFunc<C>
-        where C : struct, IWfStep<C>
+        where C : IWfStep<C>, new()
     {
         public StringRef Name {get;}
 

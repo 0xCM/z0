@@ -26,7 +26,7 @@ namespace Z0
             Wf = context;
             Ct = ct;
             TargetPath = Wf.IndexRoot + FileName.define("enums",FileExtensions.Csv);
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId, Ct);
         }
 
         public void format(in EnumLiteralRecord src, TableFormatter<EnumLiteralRecordField> dst)
@@ -80,7 +80,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(StepName, Ct);
+            Wf.Finished(StepId, Ct);
         }
     }
 }

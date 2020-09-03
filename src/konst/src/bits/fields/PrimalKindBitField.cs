@@ -13,7 +13,7 @@ namespace Z0
     using api = PrimalBits;
 
     [ApiDataType]
-    public readonly struct PrimalKindBitField : IRefinedBitField<PrimalKind,byte>
+    public readonly struct PrimalKindBitField //: IRefinedBitField<PrimalKind,byte>
     {
         readonly byte Data;
 

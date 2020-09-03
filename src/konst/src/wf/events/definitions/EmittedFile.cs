@@ -12,6 +12,8 @@ namespace Z0
     {
         public readonly struct EmittedFile : IWfEvent<EmittedFile, FS.FilePath>, IWfFileEmission<EmittedFile>
         {
+            public const string EventName = nameof(EmittedFile);
+
             public WfEventId EventId {get;}
 
             public WfStepId StepId {get;}
@@ -23,17 +25,8 @@ namespace Z0
             [MethodImpl(Inline)]
             public EmittedFile(WfStepId step, FS.FilePath path, CorrelationToken ct, MessageFlair flair = Ran)
             {
+                EventId = (EventName, step, ct);
                 StepId = step;
-                EventId = id<EmittedFile>(step,ct);
-                Path = path;
-                Flair = flair;
-            }
-
-            [MethodImpl(Inline)]
-            public EmittedFile(WfFunc fx, FS.FilePath path, CorrelationToken ct, MessageFlair flair = Ran)
-            {
-                StepId = fx.StepId;
-                EventId = id<EmittedFile>(fx, ct);
                 Path = path;
                 Flair = flair;
             }

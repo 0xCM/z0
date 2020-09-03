@@ -3,15 +3,15 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{    
+{
     public interface IWfCaptureEvents
     {
-        WfStatus Status => default;
+        IWfStatus Status => default(WfStatus<string>);
 
         IWfError Error => default(WfError<object>);
 
         CapturingHosts CapturingHosts => default;
-        
+
         ExtractReportCreated ExtractReportCreated => default;
 
         ExtractedMembers ExtractedMembers => default;
@@ -39,9 +39,9 @@ namespace Z0.Asm
         ExtractParseFailed ExtractParseFailed => default;
 
         ExtractsParsed ExtractsParsed => default;
-        
+
         EmittedParseReport ParseReportCreated => default;
 
-        ClearedPartFiles ClearedPartFiles => default;                           
+        ClearedPartFiles ClearedPartFiles => default;
     }
 }

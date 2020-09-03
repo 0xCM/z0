@@ -24,12 +24,12 @@ namespace Z0
 
             var exception = error.Data;
             var eType = exception.GetType();
-            var outer = string.Format(ErrorTrace, error.EventId, error.Actor, error.Source, eType.Name, exception.Message, exception.StackTrace);
+            var outer = string.Format(ErrorTrace, error.EventId, error.Actor, error.Source, eType.Name, exception.Data.Message, exception.Data.StackTrace);
             dst.AppendLine(outer);
 
             int level = 0;
 
-            var e = exception.InnerException;
+            var e = exception.Data.InnerException;
             while (e != null)
             {
                 dst.AppendLine(string.Format(InnerTrace, error.EventId, error.Actor, error.Source, level, eType.Name, e.Message, e.StackTrace));

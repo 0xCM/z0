@@ -9,7 +9,7 @@ namespace Z0.Asm
         void OnEvent(IWfError e)
             => Sink.Deposit(e);
 
-        void OnEvent(WfStatus e)
+        void OnEvent(IWfStatus e)
             => Sink.Deposit(e);
 
         void OnEvent(CapturingPart e)
@@ -71,7 +71,7 @@ namespace Z0.Asm
 
         void Connect()
         {
-            Broker.Status.Subscribe(Broker,OnEvent);
+            Broker.Status.Subscribe(Broker, OnEvent);
             Broker.Error.Subscribe(Broker,OnEvent);
             Broker.CapturingPart.Subscribe(Broker, OnEvent);
             Broker.CapturedPart.Subscribe(Broker, OnEvent);

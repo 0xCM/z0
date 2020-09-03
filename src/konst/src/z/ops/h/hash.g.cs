@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Konst;
 
@@ -21,6 +22,23 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong hash64<X,Y>(X x, Y y)
             => hash(x) | (hash(y) << 32);
+
+        /// <summary>
+        /// Creates a 32-bit hash code predicated on a type parameter
+        /// </summary>
+        /// <typeparam name="T">The source type</typeparam>
+        [MethodImpl(Inline)]
+        public static uint hash<T>()
+            => hash(typeof(T));
+
+        /// <summary>
+        /// Creates a 64-bit hash code predicated on two type parameters
+        /// </summary>
+        /// <typeparam name="S">The first type</typeparam>
+        /// <typeparam name="T">The second type</typeparam>
+        [MethodImpl(Inline)]
+        public static ulong hash<S,T>()
+            => (ulong)hash<S>() | (ulong)hash<T>() << 32;
 
         /// <summary>
         /// Computes hash codes for unmanaged system primitives

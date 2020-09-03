@@ -99,7 +99,7 @@ namespace Z0
                         if(parsed.Count != 0)
                         {
                             dst[id] = parsed;
-                            Wf.Status(StepName, $"Parsed {dst[id].Count} entries from {xmlfile}", Ct);
+                            Wf.Status(StepId, $"Parsed {dst[id].Count} entries from {xmlfile}");
                         }
                     }
                 }

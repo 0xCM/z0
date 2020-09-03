@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static RenderPatterns;
 
-    public readonly struct TableId
+    public readonly struct TableId : ITextual
     {
         public readonly ArtifactIdentifier Shape;
 

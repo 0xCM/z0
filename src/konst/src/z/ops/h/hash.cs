@@ -24,6 +24,19 @@ namespace Z0
 
         const uint FnvPrime = 16777619;
 
+        [MethodImpl(Inline), Op]
+        public static uint hash(Type src)
+            => (uint)src.MetadataToken;
+
+        /// <summary>
+        /// Creates a 64-bit hash code predicated on two types
+        /// </summary>
+        /// <typeparam name="S">The first type</typeparam>
+        /// <typeparam name="T">The second type</typeparam>
+        [MethodImpl(Inline)]
+        public static ulong hash(Type t1, Type t2)
+            => (ulong)hash(t1) | (ulong)hash(t2) << 32;
+
         /// <summary>
         /// Creates an unsigned hash code
         /// </summary>
@@ -143,9 +156,6 @@ namespace Z0
         public static uint hash(string src)
             => (uint)(src?.GetHashCode() ?? int.MaxValue);
 
-        [MethodImpl(Inline), Op]
-        public static uint hash(Type src)
-            => (uint)src.MetadataToken;
 
         [MethodImpl(Inline), Op]
         public static unsafe uint hash2(string src)

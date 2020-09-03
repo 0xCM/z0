@@ -14,38 +14,44 @@ namespace Z0
     /// <summary>
     /// Identifies a workflow step
     /// </summary>
-    public readonly struct WfStepId<T> : IWfStepId
-        where T :  IWfStep<T>, new()
+    public readonly struct WfStepId<S,T> : IWfStepId
+        where S : struct
+        where T : struct
     {
-        [MethodImpl(Inline)]
-        public static implicit operator WfStepId(WfStepId<T> src)
-            => new WfStepId(src.Control, src.Effect);
+        public const string RenderPattern = "{0} -> {1}";
 
         [MethodImpl(Inline)]
-        public static implicit operator WfStepId<T>(Type effect)
-            => default;
+        public static implicit operator WfType<S,T>(WfStepId<S,T> src)
+            => src.Type;
 
         [MethodImpl(Inline)]
-        public static implicit operator WfToken(WfStepId<T> src)
+        public static implicit operator WfToken(WfStepId<S,T> src)
             => src.Token;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Type(WfStepId<S,T> src)
+            => WfType<S,T>.Type;
 
         /// <summary>
         /// The step name
         /// </summary>
         public string Name
-            => Control.Name.Remove("Step");
+            => text.format(RenderPattern, typeof(S).Name, typeof(T).Name);
 
         /// <summary>
         /// The step controller
         /// </summary>
-        public Type Control
+        public Type Source
             => typeof(T);
 
         /// <summary>
         /// The step effector
         /// </summary>
-        public Type Effect
-            => Control;
+        public Type Target
+            => typeof(S);
+
+        public WfType<S,T> Type
+            => default;
 
         /// <summary>
         /// The step token
@@ -53,28 +59,16 @@ namespace Z0
         public WfToken Token
         {
             [MethodImpl(Inline)]
-            get => AB.token(WfPartKind.Step, Effect);
-        }
-
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Effect == null || Effect.IsEmpty();
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Effect != null && !Effect.IsEmpty();
+            get => new WfToken(hash<S,T>());
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(WfStepId<T> src)
-            => Effect == src.Effect;
+        public bool Equals(WfStepId<S,T> src)
+            => true;
 
         [MethodImpl(Inline)]
-        public int CompareTo(WfStepId<T> src)
-            => (src.IsEmpty || IsEmpty)? 0 : Effect.FullName.CompareTo(src.Effect.FullName);
+        public int CompareTo(WfStepId<S,T> src)
+            => 0;
 
         [MethodImpl(Inline)]
         public string Format()
@@ -82,12 +76,18 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format(bool full)
-            => full ? Effect.FullName : Effect.Name;
+            => text.format(RenderPattern, typeof(S).AssemblyQualifiedName, typeof(T).AssemblyQualifiedName);
 
         public uint Hashed
         {
             [MethodImpl(Inline)]
-            get => (uint)Effect.GetHashCode();
+            get => default(WfType<S,T>).Hashed;
+        }
+
+        public ulong Hash64
+        {
+            [MethodImpl(Inline)]
+            get => hash<S,T>();
         }
 
         public override int GetHashCode()
@@ -99,8 +99,5 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
-        public static WfStepId<T> Empty
-            => default;
     }
 }

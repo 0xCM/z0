@@ -65,7 +65,7 @@ namespace Z0
             }
             catch(Exception error)
             {
-                Wf.Error(error, Ct);
+                Wf.Error(StepId, error);
             }
 
             Wf.Ran(StepId);

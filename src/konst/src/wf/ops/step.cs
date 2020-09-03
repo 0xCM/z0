@@ -13,7 +13,6 @@ namespace Z0
 
     partial struct AB
     {
-
         /// <summary>
         /// Creates an identifier for a workflow step
         /// </summary>
@@ -37,7 +36,7 @@ namespace Z0
         /// <typeparam name="T">The host type</typeparam>
         [MethodImpl(Inline)]
         public static WfStepId<T> step<T>()
-            where T : struct, IWfStep<T>
+            where T : IWfStep<T>, new()
                 => default;
     }
 }

@@ -4,20 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using System.IO;
     using System.Runtime.CompilerServices;
-    using System;
 
     using static Konst;
-    using static RenderPatterns;
     using static z;
 
     partial struct WfEvents
     {
-        [Event]
-        public readonly struct Initializing : IWfEvent<Initializing>
+        public readonly struct Initialized : IWfEvent<Initialized>
         {
-            public const string EventName = nameof(Initializing);
+            public const string EventName = nameof(Initialized);
 
             public WfEventId EventId { get; }
 
@@ -26,16 +24,16 @@ namespace Z0
             public MessageFlair Flair { get; }
 
             [MethodImpl (Inline)]
-            public Initializing(WfStepId worker, CorrelationToken ct, MessageFlair flair = Render.Initializing)
+            public Initialized (WfStepId step, CorrelationToken ct, MessageFlair flair = Render.Initialized)
             {
-                EventId = evid (EventName, ct);
-                StepId = worker;
+                EventId = (EventName, step, ct);
+                StepId = step;
                 Flair = flair;
             }
 
             [MethodImpl (Inline)]
             public string Format()
-                => text.format(PSx2, EventId, StepId);
+                => EventId.Format();
         }
     }
 }

@@ -26,7 +26,7 @@ namespace Z0
             Wf = wf;
             Ct = ct;
             Df = (src, (Wf.ResourceRoot + FolderName.Define("calls")) + FileName.define($"{src.Part.Format()}.calls", FileExtensions.Csv));
-            Wf.Created(StepName, Ct);
+            Wf.Created(StepId);
         }
 
         public void Run()
@@ -50,7 +50,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(StepName,Ct);
+            Wf.Finished(StepId, Ct);
         }
 
         static string Delimit(string[] src, char delimiter)

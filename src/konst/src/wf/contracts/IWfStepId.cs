@@ -10,60 +10,45 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public interface IWfStepId<H> : IComparable<H>, IEquatable<H>, INamed<H>, ITextual
-        where H : struct, IWfStepId<H>
+    public interface IWfStepId : ITextual, INamed
     {
-        /// <summary>
-        /// The Step controller
-        /// </summary>
-        Type Control {get;}
-
-        /// <summary>
-        /// The Step implementation
-        /// </summary>
-        Type Effect {get;}
-
         /// <summary>
         /// The step token
         /// </summary>
-        WfToken Token
+        WfToken Token {get;}
+    }
+
+    public interface IWfStepId<H> : IWfStepId, IComparable<H>, IEquatable<H>, INamed<H>
+        where H : struct, IWfStepId<H>
+    {
+        /// <summary>
+        /// The step token
+        /// </summary>
+        WfToken IWfStepId.Token
         {
             [MethodImpl(Inline)]
-            get => AB.token(WfPartKind.Step, Effect);
+            get => new WfToken((ulong)typeof(H).MetadataToken);
         }
 
-        bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Effect == null || Effect.IsEmpty();
-        }
-
-        bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Effect != null && !Effect.IsEmpty();
-        }
+        string INamed.Name
+            => typeof(H).Name;
 
         string ITextual.Format()
-            => Effect.Name;
+            => Name;
 
 
         [MethodImpl(Inline)]
-        bool Equals(WfStepId src)
-            => Effect == src.Effect;
+        bool IEquatable<H>.Equals(H src)
+            => src.Token.Value == Token.Value;
 
         [MethodImpl(Inline)]
-        int CompareTo(WfStepId src)
-            => (src.IsEmpty || IsEmpty)? 0 : Effect.FullName.CompareTo(src.Effect.FullName);
+        int IComparable<H>.CompareTo(H src)
+            => Name.CompareTo(src.Name);
 
-
-        [MethodImpl(Inline)]
-        string Format(bool full)
-            => full ? Effect.FullName : Effect.Name;
         uint Hashed
         {
             [MethodImpl(Inline)]
-            get => (uint)Effect.GetHashCode();
+            get => (uint)hash(typeof(H));
         }
     }
 }

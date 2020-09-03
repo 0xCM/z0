@@ -35,7 +35,7 @@ namespace Z0
             => new WfStepCreated<T>(id, content, ct, flair);
 
         [MethodImpl(Inline), Op]
-        public static WfToolCreated created(WfToolId tool, CorrelationToken ct, MessageFlair flair = Created)
-            => new WfToolCreated(tool, ct, flair);
+        public static ToolCreated created(WfToolId tool, CorrelationToken ct, MessageFlair flair = Created)
+            => new ToolCreated(tool, ct, flair);
     }
 }

@@ -10,12 +10,19 @@ namespace Z0
     using static Konst;
 
     using api = AB;
+    using static z;
 
     public readonly struct WfType<S,T>
     {
         public readonly Type Source;
 
         public readonly Type Target;
+
+        public static Type Type
+            => typeof(WfType<S,T>);
+
+        public static implicit operator Type(WfType<S,T> src)
+            => typeof(WfType<S,T>);
 
         [MethodImpl(Inline)]
         public static implicit operator WfType(WfType<S,T> src)
@@ -35,5 +42,20 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => api.format(this);
+
+        public uint Hashed
+        {
+            [MethodImpl(Inline)]
+            get => (uint)typeof(WfType<S,T>).GetHashCode();
+        }
+
+        public ulong Hash64
+        {
+            [MethodImpl(Inline)]
+            get => hash(Source,Target);
+        }
+
+        public override int GetHashCode()
+            => (int)Hashed;
     }
 }

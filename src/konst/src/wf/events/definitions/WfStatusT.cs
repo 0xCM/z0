@@ -12,10 +12,21 @@ namespace Z0
     using static AB;
     using static z;
 
-    [Event]
-    public readonly struct WfStatus<T> : IWfEvent<WfStatus<T>, T>
+    public interface IWfStatus : IWfEvent
     {
-        public static Type EventType = typeof(WfStatus<T>);
+
+    }
+
+    public interface IWfStatus<T> : IWfStatus
+    {
+        WfPayload<T> Content {get;}
+    }
+
+    [Event]
+    public readonly struct WfStatus<T> : IWfStatus<T>
+    {
+        public static string EventName = nameof(WfStatus<T>);
+
         public WfEventId EventId {get;}
 
         public WfStepId StepId {get;}
@@ -27,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfStatus(WfStepId step, T content, CorrelationToken ct, MessageFlair flair = Status)
         {
-            EventId = (EventType, step, ct);
+            EventId = (EventName, step, ct);
             StepId = step;
             Flair =  flair;
             Content = content;

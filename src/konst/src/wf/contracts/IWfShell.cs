@@ -12,7 +12,8 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
-    using WfEvB = WfEvents;
+
+    using static WfEvents;
 
     public interface IWfShell : IApiContext, IDisposable
     {
@@ -55,70 +56,60 @@ namespace Z0
             return e.EventId;
         }
 
-        void Error(Exception e, CorrelationToken? ct = null, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-            => Raise(WfEvB.error(e, ct ?? Ct, caller, file, line));
+        void Error(Exception e, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
+            => Raise(WfEvents.error(e, Ct, caller, file, line));
+
+        void Error(Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
+            => Raise(WfEvents.error(e,  Ct, caller, file, line));
 
         void Error(WfStepId step, Exception e, CorrelationToken? ct = null, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-            => Raise(WfEvB.error(e, ct ?? Ct, caller, file, line));
+            => Raise(error(e, ct ?? Ct, caller, file, line));
 
         void Error<T>(WfStepId step, T body)
-            => Raise(WfEvB.error(step, body, Ct));
-
-        void Error<T>(string worker, T body, CorrelationToken? ct = null)
-            => Raise(WfEvB.error(worker, body, ct ?? Ct));
+            => Raise(error(step, body, Ct));
 
         void Error(string actor, Exception e, CorrelationToken? ct = null)
-            => Raise(WfEvB.error(actor, e, ct ?? Ct));
+            => Raise(error(actor, e, ct ?? Ct));
 
         void Created(WfToolId tool)
-            => Raise(WfEvents.created(tool, Ct));
+            => Raise(created(tool, Ct));
 
         void Created(WfStepId id)
-        {
-            try
-            {
-                var e = WfEvB.created(id, Ct);
-                Raise(e);
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-            }
-        }
+            => Raise(created(id, Ct));
 
         void Warn<T>(WfStepId id, T content)
-            => Raise(WfEvB.warn(id, content, Ct));
+            => Raise(warn(id, content, Ct));
 
         void Created<T>(WfStepId id, T content)
-            => Raise(WfEvB.created(id, content, Ct));
+            => Raise(WfEvents.created(id, content, Ct));
 
         void Running(WfStepId step, [File] string actor = null)
-            => Raise(WfEvB.running(callerName(actor), step, Ct));
+            => Raise(WfEvents.running(callerName(actor), step, Ct));
 
         void Running<T>(T step, [File] string caller = null)
             where T : struct, IWfStep<T>
-                => Raise(WfEvB.running(step, callerName(caller), Ct));
+                => Raise(WfEvents.running(step, callerName(caller), Ct));
 
         void Running<S,T>(S step, T content)
             where S : struct, IWfStep<S>
-                => Raise(WfEvB.running(step,content, Ct));
+                => Raise(WfEvents.running(step,content, Ct));
 
         void Ran<S,T>(S step, T content)
             where S : struct, IWfStep<S>
-                => Raise(WfEvB.ran(step,content, Ct));
+                => Raise(ran(step,content, Ct));
 
         void Ran<T>(T step, [File] string caller = null)
             where T : struct, IWfStep<T>
-                => Raise(WfEvB.ran(step, callerName(caller), Ct));
+                => Raise(ran(step, callerName(caller), Ct));
 
         void Running<S,T>(WfStepId step, WfDataFlow<S,T> df)
-            => Raise(WfEvB.running(step, df, Ct));
+            => Raise(running(step, df, Ct));
 
         void Ran<S,T,R>(WfStepId step, WfDataFlow<S,T,R> df)
-            => Raise(WfEvB.ran(step, df, Ct));
+            => Raise(ran(step, df, Ct));
 
         void Ran(WfStepId step, CorrelationToken ct)
-            => Raise(new WfStepRan(step, ct));
+            => Raise(new WfStepRan(step, Ct));
 
         void Ran(WfStepId step)
             => Raise(new WfStepRan(step, Ct));
@@ -135,51 +126,37 @@ namespace Z0
                 => Raise(new WfStatus<C,R>(f, result, Ct));
 
         void Created(in WfStepId step)
-            => Raise(WfEvB.created(step, Ct));
+            => Raise(WfEvents.created(step, Ct));
 
         void Emitting(WfStepId step, string table, FilePath dst)
-            => Raise(new WfEmitting(step, Table.identify(table), dst, Ct));
+            => Raise(new EmittingTable(step, Table.identify(table), dst, Ct));
 
         void Emitted(WfStepId step, string table, uint count, FilePath dst)
-            => Raise(new WfEmitted(step, Table.identify(table), count, dst, Ct));
+            => Raise(new EmittedTable(step, Table.identify(table), count, dst, Ct));
 
         void Emitting(WfStepId step, TableId table, FS.FilePath dst)
-            => Raise(new WfEmitting(step, table, dst, Ct));
+            => Raise(new EmittingTable(step, table, dst, Ct));
 
         void Emitted(WfStepId step, TableId table, uint count, FS.FilePath dst)
-            => Raise(new WfEmitted(step, table, count, dst, Ct));
+            => Raise(new EmittedTable(step, table, count, dst, Ct));
 
         void Running<T>(WfStepId step, T content)
-            => Raise(WfEvB.running(step, content, Ct));
-
-        void Finished(string actor, CorrelationToken ct)
-            => Raise(new WfFinished(actor, ct));
+            => Raise(WfEvents.running(step, content, Ct));
 
         void Finished(WfStepId step, CorrelationToken ct)
-            => Raise(new WfFinished(step.Format(), ct));
+            => Raise(new WfFinished(step, Ct));
 
         void Finished(WfStepId step)
-            => Raise(new WfFinished(step.Format(), Ct));
+            => Raise(new WfFinished(step, Ct));
 
         void Initializing(WfStepId step, CorrelationToken ct)
-            => Raise(new WfInitializing(step, Ct));
+            => Raise(new Initializing(step, Ct));
 
         void Initialized(WfStepId step, CorrelationToken ct)
-            => Raise(new WfInitialized(step, Ct));
-
-        void Created(string actor, CorrelationToken ct)
-            => Raise(WfEvB.newWorker(ct, actor));
+            => Raise(new Initialized(step, Ct));
 
         void Created(WfStepId step, CorrelationToken ct)
             => Raise(new WfStepCreated(step, Ct));
-
-        void Status(string worker, string msg, CorrelationToken ct)
-        {
-            Raise(new WfStatus(worker, msg, ct));
-        }
-
-        void Finished(string actor)
-            => Raise(new WfFinished(actor, Ct));
 
         void Error(WfStepId step, Exception e)
             => Raise(WfEvents.error(step, e, Ct));
@@ -196,10 +173,5 @@ namespace Z0
         void Processed<T>(WfStepId step, T content, WfDataFlow<FS.FilePath> flow, uint size)
             => Raise(WfEvents.processed(step, content, flow, size, Ct));
 
-        void RunningT<T>(string actor, T output, CorrelationToken? ct = null)
-            => Raise(WfEvents.running(WfStepId.Empty, output, Ct));
-
-        void RanT<T>(string actor, T output, CorrelationToken? ct = null)
-            => Raise(WfEvents.ran(WfStepId.Empty, output, Ct));
     }
 }

@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
     using static Render;
-    using static RenderPatterns;
     using static z;
 
     [Event]
@@ -21,18 +20,15 @@ namespace Z0
 
         public MessageFlair Flair {get;}
 
-        public string ActorName {get;}
-
         [MethodImpl(Inline)]
-        public WfFinished(string worker, CorrelationToken ct, MessageFlair flair = Finished)
+        public WfFinished(WfStepId step, CorrelationToken ct, MessageFlair flair = Finished)
         {
-            EventId = evid(EventName, ct);
-            ActorName = worker;
+            EventId = (EventName, step, ct);
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx2, EventId, ActorName);
+            => EventId.Format();
     }
 }

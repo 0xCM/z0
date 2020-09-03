@@ -54,7 +54,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(e, Ct);
+                Wf.Error(kind.GetType(), e);
             }
         }
 
@@ -67,7 +67,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(e, Ct);
+                Wf.Error(kind.GetType(), e);
             }
         }
 
@@ -80,7 +80,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(e, Ct);
+                Wf.Error(typeof(EmitPartCil), e);
             }
         }
 
@@ -93,7 +93,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(e, Ct);
+                Wf.Error(kind.GetType(), e);
             }
         }
 
@@ -106,12 +106,13 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(e, Ct);
+                Wf.Error(kind.GetType(), e);
             }
         }
 
         void Run(EmitImageBlobsStep kind)
         {
+
             try
             {
                 using var step = new EmitImageBlobs(Wf, Parts, Ct);
@@ -132,7 +133,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(e, Ct);
+                Wf.Error(kind.GetType(), e);
             }
         }
     }

@@ -61,11 +61,11 @@ namespace Z0.Tools
             var root = archive.ToolOutput;
             var files = archive.Dir();
             return Tooling.listed(files);
-
         }
+
         public void Dispose()
         {
-            Wf.Finished(Name);
+
         }
     }
 }

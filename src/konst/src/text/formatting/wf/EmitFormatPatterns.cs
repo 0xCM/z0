@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;
     using static EmitFormatPatternsStep;
 
-
     [Step(typeof(EmitFormatPatterns))]
     public readonly struct EmitFormatPatternsStep : IWfStep<EmitFormatPatternsStep>
     {
@@ -48,7 +47,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(e);
+                Wf.Error(Step,e);
             }
 
             Wf.Ran(Step);

@@ -12,13 +12,19 @@ namespace Z0
 
     partial struct AB
     {
-        [MethodImpl(Inline), Op]
-        public static WfStepControl control(WfStepId id, Action fx)
-            => new WfStepControl(id, fx);
+        [MethodImpl(Inline)]
+        public static WfHost<H> host<H>(H h = default)
+            where H : WfHost<H>, new()
+                => new H();
 
         [MethodImpl(Inline)]
-        public static WfStepControl<H> control<H>(Action fx)
-            where H : IWfStep<H>, new()
-                => new WfStepControl<H>(fx);
+        public static WfHost<H,C> host<H,C>(C config, H h = default)
+            where H : WfHost<H,C>, new()
+            where C : struct
+        {
+            var host = new H();
+            host.Configure(config);
+            return host;
+        }
     }
 }

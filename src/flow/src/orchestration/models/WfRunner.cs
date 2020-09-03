@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
 
+
     /// <summary>
     /// Executes an input-parametric action
     /// </summary>
@@ -28,14 +29,14 @@ namespace Z0
         {
             Wf = wf;
             Handler = handler;
-            Wf.Created(ActorName, Wf.Ct);
             InitialArgs = args;
+            Wf.Created(typeof(A), Wf.Ct);
         }
 
         [MethodImpl(Inline)]
         public void Run(A args)
         {
-            Wf.RunningT(ActorName, args, Wf.Ct);
+            Wf.Running(typeof(A), args);
 
             try
             {
@@ -46,7 +47,7 @@ namespace Z0
                 Wf.Error(e, Wf.Ct);
             }
 
-            Wf.RanT(ActorName,args, Wf.Ct);
+            Wf.Ran(typeof(A), args);
         }
 
         [MethodImpl(Inline)]
@@ -58,7 +59,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(ActorName);
+            Wf.Finished(typeof(A));
         }
     }
 }
