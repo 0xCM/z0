@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline)]
         public static bool IsUnsigned(this BlockedKind k)
-            => ((uint)k & (uint)NumericKind.Unsigned) != 0;
+            => ((uint)k & (uint)Z0.NumericKind.Unsigned) != 0;
     }
 }

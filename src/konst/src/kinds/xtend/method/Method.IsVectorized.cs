@@ -8,38 +8,38 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
     using System.Collections.Generic;
- 
+
     partial class XTend
     {
         /// <summary>
-        /// Determines whether a method has at least one 128-bit intrinsic vector parameter 
+        /// Determines whether a method has at least one 128-bit intrinsic vector parameter
         /// </summary>
         /// <param name="src">The method to examine</param>
         /// <param name="w">The width to match</param>
-        public static bool IsVectorized(this MethodInfo src, W128 w)        
+        public static bool IsVectorized(this MethodInfo src, W128 w)
             => RC.IsVectorized(src,w);
 
         /// <summary>
-        /// Determines whether a method has at least one 128-bit intrinsic vector parameter 
+        /// Determines whether a method has at least one 128-bit intrinsic vector parameter
         /// </summary>
         /// <param name="src">The method to examine</param>
         /// <param name="w">The width to match</param>
-        public static bool IsVectorized(this MethodInfo src, W256 w)        
+        public static bool IsVectorized(this MethodInfo src, W256 w)
             => RC.IsVectorized(src,w);
 
         /// <summary>
         /// Determines whether a method has intrinsic parameters or return type
         /// </summary>
         /// <param name="src">The method to test</param>
-        public static bool IsVectorized(this MethodInfo src)        
+        public static bool IsVectorized(this MethodInfo src)
             => RC.IsVectorized(src);
 
         /// <summary>
-        /// Determines whether a method has at least one 128-bit intrinsic vector parameter 
+        /// Determines whether a method has at least one 128-bit intrinsic vector parameter
         /// </summary>
         /// <param name="m">The method to examine</param>
         /// <param name="w">The width to match</param>
-        public static bool IsVectorized(this MethodInfo src, W512 w)        
+        public static bool IsVectorized(this MethodInfo src, W512 w)
             => RC.IsVectorized(src,w);
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         /// <param name="w">The width to match</param>
-        public static bool IsVectorized(this MethodInfo src, W128 w, Type tCell)        
+        public static bool IsVectorized(this MethodInfo src, W128 w, Type tCell)
             => RC.IsVectorized(src, w, tCell);
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to examine</param>
         /// <param name="w">The width to match</param>
-        public static bool IsVectorized(this MethodInfo src, W256 w, Type tCell)        
+        public static bool IsVectorized(this MethodInfo src, W256 w, Type tCell)
             => RC.IsVectorized(src, w, tCell);
 
         /// <summary>
@@ -63,31 +63,31 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to examine</param>
         /// <param name="w">The width to match</param>
-        public static bool IsVectorized(this MethodInfo src, W512 w, Type tCell)        
+        public static bool IsVectorized(this MethodInfo src, W512 w, Type tCell)
             => RC.IsVectorized(src, w, tCell);
 
         /// <summary>
-        /// Selcts vectorized methods from a source stream
+        /// Selects vectorized methods from a source stream
         /// </summary>
-        /// <param name="src">The source strean</param>
+        /// <param name="src">The data source</param>
         /// <param name="w">The vector width</param>
         /// <param name="g">The generic partition from which methods should be selected</param>
         public static bool IsVectorized(this MethodInfo src, W128 w, GenericState g = default)
             => RC.IsVectorized(src, w, g);
 
         /// <summary>
-        /// Selcts vectorized methods from a source stream
+        /// Selects vectorized methods from a source stream
         /// </summary>
-        /// <param name="src">The source strean</param>
+        /// <param name="src">The data source</param>
         /// <param name="w">The vector width</param>
         /// <param name="g">The generic partition from which methods should be selected</param>
         public static bool IsVectorized(this MethodInfo src, W256 w, GenericState g = default)
             => RC.IsVectorized(src, w, g);
 
         /// <summary>
-        /// Selcts vectorized methods from a source stream
+        /// Selects vectorized methods from a source stream
         /// </summary>
-        /// <param name="src">The source strean</param>
+        /// <param name="src">The data source</param>
         /// <param name="w">The vector width</param>
         /// <param name="g">The generic partition from which methods should be selected</param>
         public static bool IsVectorized(this MethodInfo src, W512 w, GenericState g = default)

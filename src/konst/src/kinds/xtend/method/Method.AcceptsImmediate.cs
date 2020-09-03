@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Linq;
-    using System.Collections.Generic;
 
     partial class XTend
     {
@@ -15,14 +14,14 @@ namespace Z0
         /// Determines whether a method defines a parameter that requires an 8-bit immediate immediate
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static bool AcceptsImmediate(this MethodInfo src, ImmRefinementKind refinement) 
+        public static bool AcceptsImmediate(this MethodInfo src, ImmRefinementKind refinement)
             => src.ImmParameters(refinement).Any();
 
         /// <summary>
         /// Determines whether a method defines a parameter that requires an 8-bit immediate immediate
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static bool AcceptsImmediate(this MethodInfo src) 
+        public static bool AcceptsImmediate(this MethodInfo src)
             => src.Parameters(p => p.Tagged<ImmAttribute>()).Any();
 
         /// <summary>

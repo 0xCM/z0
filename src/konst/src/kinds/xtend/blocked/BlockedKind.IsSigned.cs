@@ -18,6 +18,6 @@ namespace Z0
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline)]
         public static bool IsSigned(this BlockedKind k)
-            => ((uint)k & (uint)NumericKind.Signed) != 0;
+            => ((uint)k & (uint)Z0.NumericKind.Signed) != 0;
     }
 }
