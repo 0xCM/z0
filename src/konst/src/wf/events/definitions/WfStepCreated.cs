@@ -19,10 +19,10 @@ namespace Z0
 
         public WfStepId StepId {get;}
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStepCreated(WfStepId step, CorrelationToken ct, MessageFlair flair = Created)
+        public WfStepCreated(WfStepId step, CorrelationToken ct, FlairKind flair = Created)
         {
             EventId = (EventName, step, ct);
             StepId = step;

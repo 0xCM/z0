@@ -22,10 +22,10 @@ namespace Z0
 
         public WfWorker Worker {get;}
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public WorkerCreated(in WfWorker worker, CorrelationToken ct, MessageFlair flair = Created)
+        public WorkerCreated(in WfWorker worker, CorrelationToken ct, FlairKind flair = Created)
         {
             EventId = z.evid(EventName, ct);
             Worker = worker;

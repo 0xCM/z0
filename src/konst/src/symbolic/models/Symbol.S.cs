@@ -11,7 +11,7 @@ namespace Z0
     using static z;
 
     /// <summary>
-    /// Defines a symbol, a construct that is characterized in-full by the sequence of bits it covers
+    /// Defines a symbol, characterized by its value, that defines an atomic element in some vocabulary/grammar
     /// </summary>
     public readonly struct Symbol<S> : ISymbol<S>
         where S : unmanaged
@@ -35,8 +35,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Symbol(S value)
-        {
-            Value = value;
-        }
+            => Value = value;
     }
 }

@@ -17,7 +17,7 @@ namespace Z0.MS
     {
         public ClrType Type { get; }
 
-        public ClrElementType ElementType { get; }
+        public ClrTypeCode ElementType { get; }
 
         private readonly (string, object?)[] _values;
 
@@ -31,7 +31,7 @@ namespace Z0.MS
             MetadataImport? import = type.Module?.MetadataImport;
             if (import != null)
             {
-                _values = EnumerateValues(import, out ClrElementType elementType).ToArray();
+                _values = EnumerateValues(import, out ClrTypeCode elementType).ToArray();
                 ElementType = elementType;
             }
             else
@@ -52,10 +52,10 @@ namespace Z0.MS
         public IEnumerable<string> GetEnumNames() => _values.Select(v => v.Item1);
         public IEnumerable<(string, object?)> EnumerateValues() => _values;
 
-        private (string, object?)[] EnumerateValues(MetadataImport import, out ClrElementType elementType)
+        private (string, object?)[] EnumerateValues(MetadataImport import, out ClrTypeCode elementType)
         {
             List<(string, object?)> values = new List<(string, object?)>();
-            elementType = ClrElementType.Unknown;
+            elementType = ClrTypeCode.None;
 
             foreach (int token in import.EnumerateFields(Type.MetadataToken))
             {
@@ -68,7 +68,7 @@ namespace Z0.MS
                     {
                         ClrSigParser parser = new ClrSigParser(ppvSigBlob, pcbSigBlob);
                         if (parser.GetCallingConvInfo(out _) && parser.GetElemType(out int elemType))
-                            elementType = (ClrElementType)elemType;
+                            elementType = (ClrTypeCode)elemType;
                     }
 
                     // public, static, literal, has default
@@ -78,7 +78,7 @@ namespace Z0.MS
                         parser.GetCallingConvInfo(out _);
                         parser.GetElemType(out _);
 
-                        Type? underlying = ((ClrElementType)pdwCPlusTypeFlag).GetTypeForElementType();
+                        Type? underlying = ((ClrTypeCode)pdwCPlusTypeFlag).GetTypeForElementType();
                         if (underlying != null)
                         {
                             object o = Marshal.PtrToStructure(ppValue, underlying)!;

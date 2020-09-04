@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class gbits
     {
@@ -28,8 +28,8 @@ namespace Z0
                 return generic<T>(Bits.hi(uint32(src)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.hi(uint64(src)));
-            else            
-                throw Unsupported.define<T>();
-        }           
+            else
+                throw no<T>();
+        }
     }
 }

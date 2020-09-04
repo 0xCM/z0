@@ -26,14 +26,14 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void inform(object content)
-            => T.WriteLine($"{content}", MessageFlair.Green);
+            => T.WriteLine($"{content}", FlairKind.Status);
 
         /// <summary>
         /// Announces a menthod invocation
         /// </summary>
         /// <param name="caller">The invoked method</param>
         public static void announce([Caller] string caller = null)
-            => T.WriteMessage(AppMsg.colorize(caller, MessageFlair.Magenta));
+            => T.WriteMessage(AppMsg.colorize(caller, FlairKind.Running));
 
         /// <summary>
         /// Emits a warning-level message

@@ -13,7 +13,7 @@ namespace Z0
     partial struct AB
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static AppMsg<T> message<T>(T content, string pattern, MessageKind kind, MessageFlair flair, AppMsgSource origin)
+        public static AppMsg<T> message<T>(T content, string pattern, MessageKind kind, FlairKind flair, AppMsgSource origin)
             => new AppMsgData<T>(content, pattern ?? "{0}", kind, flair, origin);
     }
 }

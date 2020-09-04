@@ -11,7 +11,7 @@ namespace Z0
     using static z;
 
     public readonly struct HexDataFormatter
-    {            
+    {
         public readonly HexLineConfig LineConfig;
 
         public readonly HexFormatConfig LabelConfig;
@@ -25,23 +25,23 @@ namespace Z0
         {
             LineConfig = config;
             BaseAddress = @base ?? MemoryAddress.Empty;
-            LabelConfig = RenderOptions.hex(zpad:true, specifier: true, uppercase: false, prespec:false);
+            LabelConfig = FormatOptions.hex(zpad:true, specifier: true, uppercase: false, prespec:false);
             DataConfig = HexFormatConfig.HexData;
         }
 
         public string FormatLine(ReadOnlySpan<byte> data, ulong offset, char delimiter = Chars.Space)
         {
-            var line = string.Empty.Build();            
+            var line = string.Empty.Build();
             var count = data.Length;
             var _offset = BaseAddress + offset;
-            
+
             if(LineConfig.LineLabels)
             {
                 line.Append(_offset.Format());
 
                 if(delimiter != Space)
                     line.Append(Space);
-                line.Append(delimiter);                
+                line.Append(delimiter);
                 if(delimiter != Space)
                     line.Append(Space);
             }
@@ -54,21 +54,21 @@ namespace Z0
             }
 
 
-            return line.ToString();                  
-        }         
+            return line.ToString();
+        }
 
         public ReadOnlySpan<string> FormatLines(ReadOnlySpan<byte> data)
         {
             var lines = list<string>();
-            var line = string.Empty.Build();            
+            var line = string.Empty.Build();
             var count = data.Length;
 
             for(ushort i=0; i<count; i++)
-            {                
+            {
                 if(i % LineConfig.BytesPerLine == 0)
                 {
                     if(i != 0)
-                    {                                                
+                    {
                         lines.Add(line.ToString());
                         line.Clear();
                     }
@@ -86,9 +86,9 @@ namespace Z0
 
             var last = line.ToString();
             if(!string.IsNullOrWhiteSpace(last))
-                lines.Add(last);   
+                lines.Add(last);
 
-            return lines.ToArray();           
-        }         
+            return lines.ToArray();
+        }
     }
 }

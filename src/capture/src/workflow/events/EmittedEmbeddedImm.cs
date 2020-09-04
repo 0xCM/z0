@@ -59,8 +59,8 @@ namespace Z0.Asm
         public EmittedEmbeddedImm Zero
             => Empty;
 
-        public MessageFlair Flair
-            => MessageFlair.DarkMagenta;
+        public FlairKind Flair
+            => FlairKind.DarkMagenta;
 
         public static EmittedEmbeddedImm Empty
             => default;

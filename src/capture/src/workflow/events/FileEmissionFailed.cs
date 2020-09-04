@@ -32,13 +32,13 @@ namespace Z0.Asm
             TargetFile = dst;
         }
 
-        public MessageFlair Flair
-            => MessageFlair.Red;                    
-        
+        public FlairKind Flair
+            => FlairKind.Error;
+
         public string Format()
             => $"{Host} emission failure" + (Generic ? " (generic)" : string.Empty) + TargetFile.FullPath;
-        
-        public static FileEmissionFailed Empty 
+
+        public static FileEmissionFailed Empty
             =>default;
-    }            
+    }
 }

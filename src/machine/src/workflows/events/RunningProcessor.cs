@@ -18,22 +18,22 @@ namespace Z0
         public WfEventId EventId {get;}
 
         public WfActor Actor {get;}
-    
+
         public WfProcessor Processor {get;}
-        
-        public MessageFlair Flair {get;}        
-    
+
+        public FlairKind Flair {get;}
+
         [MethodImpl(Inline)]
-        public RunningProcessor(string actor, string processor, CorrelationToken ct, MessageFlair flair = Running)
+        public RunningProcessor(string actor, string processor, CorrelationToken ct, FlairKind flair = Running)
         {
             EventId = WfEventId.define(EventName, ct);
             Actor = actor;
-            Processor = processor;            
+            Processor = processor;
             Flair = flair;
         }
-        
-        [MethodImpl(Inline)]        
+
+        [MethodImpl(Inline)]
         public string Format()
-             => format(EventId, Actor, Processor);               
-    }        
+             => format(EventId, Actor, Processor);
+    }
 }

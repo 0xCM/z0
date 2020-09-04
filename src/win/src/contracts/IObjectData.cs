@@ -9,13 +9,13 @@ namespace Z0.MS
     public interface IObjectData
     {
         ulong DataPointer { get; }
-        
+
         ulong ElementTypeHandle { get; }
-        
-        ClrElementType ElementType { get; }
-        
+
+        ClrTypeCode ElementType { get; }
+
         ulong RCW { get; }
-        
+
         ulong CCW { get; }
     }
 }

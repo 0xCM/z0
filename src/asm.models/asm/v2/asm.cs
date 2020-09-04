@@ -23,7 +23,7 @@ namespace Z0
             ((StringBuilder)state[1]).Clear();
             return ((StringBuilder)state[1]);
         }
-        
+
         [MethodImpl(Inline)]
         static string render(StringBuilder src)
         {
@@ -31,13 +31,13 @@ namespace Z0
             src.Clear();
             return dst;
         }
-        
+
         ref object this[byte index]
         {
             [MethodImpl(Inline)]
             get => ref state[index];
         }
-        
+
         ref readonly HexFormatConfig HexConfig
         {
             [MethodImpl(Inline)]
@@ -47,7 +47,7 @@ namespace Z0
         public asm(int i)
         {
             state = new object[i];
-            state[0] = RenderOptions.hex(zpad:false, specifier:false);
+            state[0] = FormatOptions.hex(zpad:false, specifier:false);
             state[1] = new StringBuilder(1024);
         }
     }

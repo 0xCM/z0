@@ -6,14 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
     /// Defines a common set of hex formatting options
     /// </summary>
     public readonly struct HexFormatConfig
-    {   
+    {
         /// <summary>
         /// Indicates whether the numeric content should be left-padded with zeros
         /// </summary>
@@ -47,32 +47,32 @@ namespace Z0
         /// <summary>
         /// The hex format string as determined by configuration
         /// </summary>
-        public string FormatCode 
+        public string FormatCode
             => $"{CaseFormatChar}";
 
         /// <summary>
         /// Specifies the default configuration for hex data emission
         /// </summary>
-        public static HexFormatConfig HexData 
+        public static HexFormatConfig HexData
             => new HexFormatConfig(true, false, false, false, Space);
-        
+
         /// <summary>
         /// The default configuration for array initialization content
         /// </summary>
-        public static HexFormatConfig ArrayContent 
+        public static HexFormatConfig ArrayContent
             => new HexFormatConfig(true, true, false, true, Chars.Comma);
 
         [MethodImpl(Inline)]
-        public static implicit operator HexSequenceFormatConfig(in HexFormatConfig src)
-            => HexSequenceFormatConfig.define(src);
-        
+        public static implicit operator HexSeqFormat(in HexFormatConfig src)
+            => HexSeqFormat.define(src);
+
         [MethodImpl(Inline)]
         public HexFormatConfig(bool zpad, bool specifier, bool uppercase, bool prespec, char delimiter)
-        {            
+        {
             ZPad = zpad;
             Specifier = specifier;
             Uppercase = uppercase;
-            PreSpec = prespec;    
+            PreSpec = prespec;
             CaseFormatChar = HexFormatSpecs.CaseSpec(uppercase);
             Delimiter = delimiter;
         }

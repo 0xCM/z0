@@ -65,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Deposit(in WfTermEvent src)
         {
-            var emitted = Emit(src.Format(), src.Flair == MessageFlair.Red);
+            var emitted = Emit(src.Format(), src.Flair == FlairKind.Error);
             Relay.Deposit(src);
         }
 

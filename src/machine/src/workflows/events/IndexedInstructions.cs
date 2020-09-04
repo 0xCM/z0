@@ -26,8 +26,8 @@ namespace Z0
             Index = src;
         }
 
-        public MessageFlair Flair
-            => MessageFlair.Cyan;
+        public FlairKind Flair
+            => FlairKind.Ran;
 
         public string Format()
             => text.format(PSx2, EventId, Index.Indexed.Length);

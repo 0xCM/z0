@@ -6,15 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using api = Render;
 
-    public readonly struct HexFormatter<T> : ISpanFormatter<T,HexSequenceFormatConfig,HexFormatConfig>
+    public readonly struct HexFormatter<T> : ISpanFormatter<T,HexSeqFormat,HexFormatConfig>
         where T : unmanaged
     {
         readonly ISystemFormatter<T> BaseFormatter;
-        
+
         [MethodImpl(Inline)]
         public HexFormatter(ISystemFormatter<T> formatter)
             => BaseFormatter = formatter;
@@ -26,12 +26,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public string FormatItem(T src, in HexFormatConfig hex)
             => string.Concat(
-                hex.Specifier && hex.Specifier ? HexFormatSpecs.PreSpec : string.Empty, 
+                hex.Specifier && hex.Specifier ? HexFormatSpecs.PreSpec : string.Empty,
                 hex.ZPad ? BaseFormatter.Format(src, hex.FormatCode).PadLeft(Unsafe.SizeOf<T>()*2, '0') : BaseFormatter.Format(src, hex.FormatCode),
                 hex.Specifier && !hex.PreSpec ? HexFormatSpecs.PostSpec : string.Empty
                 );
 
-        public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src, in HexSequenceFormatConfig config)
+        public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src, in HexSeqFormat config)
         {
             Span<string> dst = new string[src.Length];
             for(var i=0; i<dst.Length; i++)
@@ -39,8 +39,8 @@ namespace Z0
             return dst;
         }
 
-        public string Format(ReadOnlySpan<T> src, in HexSequenceFormatConfig seq, in HexFormatConfig hex)
-        {            
+        public string Format(ReadOnlySpan<T> src, in HexSeqFormat seq, in HexFormatConfig hex)
+        {
             var result = string.Empty.Build();
 
             for(var i = 0; i<src.Length; i++)
@@ -50,11 +50,11 @@ namespace Z0
                 if(i != src.Length - 1)
                     result.Append(seq.Delimiter);
             }
-                        
+
             return result.ToString();
         }
 
-        public string Format(ReadOnlySpan<T> src, in HexSequenceFormatConfig seq)
+        public string Format(ReadOnlySpan<T> src, in HexSeqFormat seq)
         {
             var result = text.build();
             var config = seq.HexFormat;
@@ -66,7 +66,7 @@ namespace Z0
                 if(i != src.Length - 1)
                     result.Append(seq.Delimiter);
             }
-                        
+
             return result.ToString();
         }
 
@@ -75,11 +75,11 @@ namespace Z0
 
         public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src)
             => FormatItems(src, DefaultSeqConfig);
-        
-        static HexFormatConfig DefaultConfig 
-            => RenderOptions.hex();
 
-        static HexSequenceFormatConfig DefaultSeqConfig 
-            => HexSequenceFormatConfig.define(DefaultConfig);    
+        static HexFormatConfig DefaultConfig
+            => FormatOptions.hex();
+
+        static HexSeqFormat DefaultSeqConfig
+            => HexSeqFormat.define(DefaultConfig);
     }
 }

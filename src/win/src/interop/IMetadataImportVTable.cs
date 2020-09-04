@@ -36,7 +36,6 @@ namespace Z0.MS
 
         public readonly IntPtr GetTypeRefProps;
 
-
         public readonly IntPtr ResolveTypeRef;
 
         public readonly IntPtr EnumMembers;
@@ -153,5 +152,5 @@ namespace Z0.MS
         public readonly IntPtr GetVersionString;
 
         public readonly IntPtr EnumMethodSpecs;
-    }    
+    }
 }

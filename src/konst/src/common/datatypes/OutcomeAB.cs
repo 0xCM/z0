@@ -41,7 +41,6 @@ namespace Z0
                 Data = none<A>();
                 Error = some(error);
             }
-
         }
 
         [MethodImpl(Inline)]

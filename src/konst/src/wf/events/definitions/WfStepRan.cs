@@ -23,10 +23,10 @@ namespace Z0
 
         public WfStepId StepId {get;}
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStepRan(WfStepId step, CorrelationToken ct, MessageFlair flair = Ran)
+        public WfStepRan(WfStepId step, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
             Actor = step.Name;

@@ -10,41 +10,41 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ArtifactRelations
+    partial struct Needs
     {
         [MethodImpl(Inline)]
-        public static RelationAttribute<N,A,S,T> attribute<N,A,S,T>(N name, A value, S s = default, T t = default)
-            => new RelationAttribute<N,A,S,T>(name,value);
+        public static NeedAttribute<N,A,S,T> attribute<N,A,S,T>(N name, A value, S s = default, T t = default)
+            => new NeedAttribute<N,A,S,T>(name,value);
+
+        // [MethodImpl(Inline), Op]
+        // public static NeedAttribute attribute(ArtifactRelation r, in asci32 name, in variant value)
+        //     => new NeedAttribute(r,name,value);
+
+        // [MethodImpl(Inline), Op]
+        // public static NeedAttribute attribute<A>(ArtifactRelation r, in asci32 name, A value)
+        //     where A : unmanaged
+        //         => new NeedAttribute(r,name,Variant.from(value));
 
         [MethodImpl(Inline), Op]
-        public static RelationAttribute attribute(ArtifactRelation r, in asci32 name, in variant value)
-            => new RelationAttribute(r,name,value);
+        public static NeedAttribute<S,T> attribute<S,T>(in asci32 name, in variant value, Need<S,T> r = default)
+            => new NeedAttribute<S,T>(name,value);
 
         [MethodImpl(Inline), Op]
-        public static RelationAttribute attribute<A>(ArtifactRelation r, in asci32 name, A value)
+        public static NeedAttribute<S,T> attribute<A,S,T>(in asci32 name, A value, Need<S,T> r = default)
             where A : unmanaged
-                => new RelationAttribute(r,name,Variant.from(value));
+                => new NeedAttribute<S,T>(name, Variant.from(value));
 
         [MethodImpl(Inline), Op]
-        public static RelationAttribute<S,T> attribute<S,T>(in asci32 name, in variant value, Relation<S,T> r = default)
-            => new RelationAttribute<S,T>(name,value);
+        public static NeedAttribute<ArtifactIdentifier> attribute(ArtifactIdentifier src, ArtifactIdentifier dst, in asci32 name, in variant value)
+            => new NeedAttribute<ArtifactIdentifier>((src,dst), name, value);
 
         [MethodImpl(Inline), Op]
-        public static RelationAttribute<S,T> attribute<A,S,T>(in asci32 name, A value, Relation<S,T> r = default)
-            where A : unmanaged
-                => new RelationAttribute<S,T>(name, Variant.from(value));
-
-        [MethodImpl(Inline), Op]
-        public static RelationAttribute<ArtifactIdentifier> attribute(ArtifactIdentifier src, ArtifactIdentifier dst, in asci32 name, in variant value)
-            => new RelationAttribute<ArtifactIdentifier>((src,dst), name, value);
-
-        [MethodImpl(Inline), Op]
-        public static RelationAttribute<ArtifactIdentifier> attribute(ArtifactIdentifier src, ArtifactIdentifier dst, string name, in variant value)
-            => new RelationAttribute<ArtifactIdentifier>((src,dst), name, value);
+        public static NeedAttribute<ArtifactIdentifier> attribute(ArtifactIdentifier src, ArtifactIdentifier dst, string name, in variant value)
+            => new NeedAttribute<ArtifactIdentifier>((src,dst), name, value);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static RelationAttribute<ArtifactIdentifier> attribute<A>(ArtifactIdentifier src, ArtifactIdentifier dst, string name, A value)
+        public static NeedAttribute<ArtifactIdentifier> attribute<A>(ArtifactIdentifier src, ArtifactIdentifier dst, string name, A value)
             where A : unmanaged
-                => new RelationAttribute<ArtifactIdentifier>((src,dst), name, Variant.from(value));
+                => new NeedAttribute<ArtifactIdentifier>((src,dst), name, Variant.from(value));
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static RenderFunctions;
+    using static FormatFunctions;
 
     public readonly struct DelimitedList<T> : ITextual
     {

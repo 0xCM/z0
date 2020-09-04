@@ -25,10 +25,10 @@ namespace Z0
 
         public WfPayload<R> Content {get;}
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStatus(WfFunc<C,R> f, R content, CorrelationToken ct, MessageFlair flair = Status)
+        public WfStatus(WfFunc<C,R> f, R content, CorrelationToken ct, FlairKind flair = Status)
         {
             EventId = (f, ct);
             Func = f;

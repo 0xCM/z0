@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class gbits
     {
@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), HiPos, Closures(UnsignedInts)]
-        public static int hipos<T>(T src)
+        public static byte hipos<T>(T src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -28,8 +28,8 @@ namespace Z0
                 return Bits.hipos(uint32(src));
             else if(typeof(T) == typeof(ulong))
                 return Bits.hipos(uint64(src));
-            else            
-                throw Unsupported.define<T>();
-        }           
+            else
+                throw no<T>();
+        }
     }
 }

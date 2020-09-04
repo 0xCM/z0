@@ -27,10 +27,10 @@ namespace Z0.Asm
 
         public readonly FilePath Target;
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public HexCodeSaved(string actor, ApiHostUri host, IdentifiedCode[] code, FilePath dst, CorrelationToken ct, MessageFlair flair = Ran)
+        public HexCodeSaved(string actor, ApiHostUri host, IdentifiedCode[] code, FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = evid(EventName, ct);
             Actor = Flow.actor(actor);

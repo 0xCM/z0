@@ -19,7 +19,7 @@ namespace Z0
     /// </summary>
     public struct ClrObject : IAddressableTypedEntity, IEquatable<ClrObject>
     {
-        private IClrObjectHelpers Helpers 
+        private IClrObjectHelpers Helpers
             => GetTypeOrThrow().ClrObjectHelpers;
 
         /// <summary>
@@ -90,13 +90,14 @@ namespace Z0
         /// <summary>
         /// Gets the size of the object.
         /// </summary>
-        public ulong Size => GetTypeOrThrow().Heap.GetObjectSize(Address, GetTypeOrThrow());
+        public ulong Size
+            => GetTypeOrThrow().Heap.GetObjectSize(Address, GetTypeOrThrow());
 
         /// <summary>
         /// Gets a value indicating whether this object is an array.
         /// </summary>
         public bool IsArray => GetTypeOrThrow().IsArray;
-    
+
 
         /// <summary>
         /// Returns the RuntimeCallableWrapper for the given object.
@@ -220,7 +221,7 @@ namespace Z0
         }
 
         public bool IsRuntimeType => Type?.Name == "System.RuntimeType";
-        
+
         public ClrType AsRuntimeType()
         {
             ClrType type = GetTypeOrThrow();
@@ -233,7 +234,7 @@ namespace Z0
                 return null;
 
             ulong mt;
-            if (field.ElementType == ClrElementType.NativeInt)
+            if (field.ElementType == ClrTypeCode.IntI)
                 mt = (ulong)GetField<IntPtr>("m_handle");
             else
                 mt = (ulong)GetValueTypeField("m_handle").GetField<IntPtr>("m_ptr");
@@ -261,7 +262,7 @@ namespace Z0
         /// </exception>
         public string GetStringField(string fieldName, int maxLength = 4096)
         {
-            ulong address = GetFieldAddress(fieldName, ClrElementType.String, out ClrType stringType, "string");
+            ulong address = GetFieldAddress(fieldName, ClrTypeCode.String, out ClrType stringType, "string");
             IDataReader dataReader = Helpers.DataReader;
             if (!dataReader.ReadPointer(address, out ulong strPtr))
                 throw new MemoryReadException(address);
@@ -281,7 +282,7 @@ namespace Z0
             return ValueReader.GetStringContents(type, Helpers.DataReader, Address, maxLength);
         }
 
-        private ulong GetFieldAddress(string fieldName, ClrElementType element, out ClrType fieldType, string typeName)
+        private ulong GetFieldAddress(string fieldName, ClrTypeCode element, out ClrType fieldType, string typeName)
         {
             ClrType type = GetTypeOrThrow();
 

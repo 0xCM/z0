@@ -29,7 +29,7 @@ namespace Z0
         /// <summary>
         /// The message foreground color when rendered for display
         /// </summary>
-        public readonly MessageFlair Flair;
+        public readonly FlairKind Flair;
 
         /// <summary>
         /// Specifies the emitting executable part
@@ -37,7 +37,7 @@ namespace Z0
         public readonly AppMsgSource Origin;
 
         [MethodImpl(Inline)]
-        internal AppMsgData(T content, string pattern, MessageKind kind, MessageFlair color, AppMsgSource origin)
+        internal AppMsgData(T content, string pattern, MessageKind kind, FlairKind color, AppMsgSource origin)
         {
             Content = content;
             Pattern = pattern;

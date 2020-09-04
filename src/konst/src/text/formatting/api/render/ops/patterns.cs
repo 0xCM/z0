@@ -14,17 +14,15 @@ namespace Z0
     partial struct Render
     {
         [Op]
-        public static RenderPatternIndex patterns(Type src)
+        public static FormatPatternIndex patterns(Type src)
         {
             var values = src.LiteralFieldValues<string>(out var fields);
             var count = values.Length;
-            var buffer = alloc<RenderPattern>(count);
+            var buffer = alloc<FormatPattern>(count);
             var dst = span(buffer);
             for(var i=0u; i<count; i++)
-                seek(dst,i) = new RenderPattern(skip(fields,i), skip(values,i));
+                seek(dst,i) = new FormatPattern(skip(fields,i), skip(values,i));
             return buffer;
         }
-
-
     }
 }

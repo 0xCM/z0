@@ -22,10 +22,10 @@ namespace Z0.Asm
 
         public readonly ApiMember[] Members;
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public MembersLocated(ApiHostUri host, ApiMember[] functions, CorrelationToken ct, MessageFlair flair = Ran)
+        public MembersLocated(ApiHostUri host, ApiMember[] functions, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName,ct);
             Host = host;

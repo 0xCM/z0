@@ -12,12 +12,12 @@ namespace Z0.MS
     {
         IFieldHelpers Helpers { get; }
 
-        ClrElementType ElementType { get; }
-        
+        ClrTypeCode ElementType { get; }
+
         int Token { get; }
-        
+
         int Offset { get; }
-        
+
         ulong TypeMethodTable { get; }
     }
 }

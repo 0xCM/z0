@@ -12,7 +12,7 @@ namespace Z0
     partial class gbits
     {
         /// <summary>
-        /// Overwrites a target bit segment dst[index..(start + count)] with a corresponding 
+        /// Overwrites a target bit segment dst[index..(start + count)] with a corresponding
         /// segment src[index..(start + count)] in the source
         /// </summary>
         /// <param name="src">The bit source</param>
@@ -24,14 +24,14 @@ namespace Z0
         public static T copy<T>(T src, byte index, byte count, T dst)
             where T : unmanaged
         {
-            var dstidx = index;
+            var dstIdx = index;
             var sliced = slice(src, index, count);
-            var cleared = gbits.clear(dst, dstidx, count);
-            return gmath.or(cleared, gmath.sll(sliced, dstidx));            
+            var cleared = gbits.clear(dst, dstIdx, count);
+            return gmath.or(cleared, gmath.sll(sliced, dstIdx));
         }
 
         /// <summary>
-        /// Overwrites a target bit segment dst[index..(start + count)] with a corresponding 
+        /// Overwrites a target bit segment dst[index..(start + count)] with a corresponding
         /// segment src[index..(start + count)] in the source
         /// </summary>
         /// <param name="src">The bit source</param>
@@ -48,26 +48,26 @@ namespace Z0
         }
 
         /// <summary>
-        /// Overwrites a target bit segment dst[dstidx..(dstidx + count)] with a corresponding 
+        /// Overwrites a target bit segment dst[dstidx..(dstidx + count)] with a corresponding
         /// segment src[srcidx..(srcidx + count)] in the source
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="srcidx">The source start index</param>
-        /// <param name="dstidx">The target start index</param>
+        /// <param name="srcIdx">The source start index</param>
+        /// <param name="dstIdx">The target start index</param>
         /// <param name="count">The number of bits to copy</param>
         /// <param name="dst">The bit target</param>
         /// <typeparam name="T">The numeric type</typeparam>
         [MethodImpl(Inline), Copy, Closures(Integers)]
-        public static T copy<T>(T src, byte srcidx, byte dstidx, byte count, T dst)
+        public static T copy<T>(T src, byte srcIdx, byte dstIdx, byte count, T dst)
             where T : unmanaged
         {
-            var sliced = slice(src, srcidx, count);
-            var cleared = gbits.clear(dst, dstidx, count);
-            return gmath.or(cleared, gmath.sll(sliced, dstidx));            
+            var sliced = slice(src, srcIdx, count);
+            var cleared = gbits.clear(dst, dstIdx, count);
+            return gmath.or(cleared, gmath.sll(sliced, dstIdx));
         }
 
         /// <summary>
-        /// Overwrites a target bit segment dst[dstidx..(dstidx + count)] with a corresponding 
+        /// Overwrites a target bit segment dst[dstidx..(dstidx + count)] with a corresponding
         /// segment src[srcidx..(srcidx + count)] in the source
         /// </summary>
         /// <param name="src">The bit source</param>

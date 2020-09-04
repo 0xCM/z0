@@ -19,10 +19,10 @@ namespace Z0.Asm
 
         public WfLogConfig Config {get;}
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public LogsConfigured(string actor, WfLogConfig config, CorrelationToken ct, MessageFlair flair = Flairs.Ran)
+        public LogsConfigured(string actor, WfLogConfig config, CorrelationToken ct, FlairKind flair = FlairKinds.Ran)
         {
             EventId = WfEventId.define(EventName, ct);
             Actor = actor;

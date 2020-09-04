@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="tx">The title render function</param>
         /// <typeparam name="T">The type of element to render</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Entitled<T> entitled<T>(FormatFx.FormatTitle<T> tx, FormatFx.Format<T> fx)
+        public static Entitled<T> entitled<T>(FormatFunctions.FormatTitle<T> tx, FormatFunctions.Format<T> fx)
             => new Entitled<T>(title(tx), content(fx));
     }
 }

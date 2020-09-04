@@ -27,8 +27,8 @@ namespace Z0
             Code = code;
         }
 
-        public MessageFlair Flair
-            => MessageFlair.Red;
+        public FlairKind Flair
+            => FlairKind.Error;
 
         public string Format()
             => text.format(PSx2, EventId, Uri);

@@ -69,7 +69,7 @@ namespace Z0.Asm
            this.EmitLineAddresses = ShowLineAddresses;
            this.FieldDelimiter = FieldSep;
            this.SectionDelimiter  = SectionSep;
-           this.HeaderEncodingFormat = RenderOptions.hex();
+           this.HeaderEncodingFormat = FormatOptions.hex();
        }
 
         public bool EmitCaptureTermCode;

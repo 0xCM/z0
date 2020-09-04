@@ -16,10 +16,10 @@ namespace Z0
 
         public WfPayload<T> Content {get;}
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public AppEvent(EventId id, T data, MessageFlair flair = MessageFlair.Blue)
+        public AppEvent(EventId id, T data, FlairKind flair = FlairKind.Blue)
         {
             Id = id;
             Content = data;

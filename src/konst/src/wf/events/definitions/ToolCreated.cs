@@ -19,10 +19,10 @@ namespace Z0
 
             public WfToolId ToolId {get;}
 
-            public MessageFlair Flair {get;}
+            public FlairKind Flair {get;}
 
             [MethodImpl(Inline)]
-            public ToolCreated(WfToolId tool, CorrelationToken ct, MessageFlair flair = Created)
+            public ToolCreated(WfToolId tool, CorrelationToken ct, FlairKind flair = Created)
             {
                 EventId = (tool, ct);
                 ToolId = tool;

@@ -11,7 +11,7 @@ namespace Z0
     using static z;
     using static ArtifactModel;
 
-    partial struct ArtifactRelations
+    partial struct Needs
     {
         [MethodImpl(Inline)]
         public static TypeRef<T> reference<T>(T t = default)

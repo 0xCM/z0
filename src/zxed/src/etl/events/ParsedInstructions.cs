@@ -33,10 +33,10 @@ namespace Z0.Xed
         /// <summary>
         /// The message flair
         /// </summary>
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ParsedXedInstructions(WfStepId step, FS.FilePath source, Count32 count, CorrelationToken ct, MessageFlair flair = Ran)
+        public ParsedXedInstructions(WfStepId step, FS.FilePath source, Count32 count, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
             Source = source;

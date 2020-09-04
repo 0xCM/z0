@@ -13,7 +13,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         string Format(ReadOnlySpan<T> src);
-        
+
         /// <summary>
         /// Formats span cells
         /// </summary>
@@ -22,7 +22,7 @@ namespace Z0
     }
 
    public interface ISpanFormatter<T,C> : ISpanFormatter<T>, ISequenceFormatter<T,C>
-        where C : ISequenceFormatConfig
+        where C : ISeqFormat
     {
         /// <summary>
         /// Formats and concatenates span content using a sequence format configuration
@@ -40,7 +40,7 @@ namespace Z0
     }
 
    public interface ISpanFormatter<T,C,E> : ISpanFormatter<T,C>, ISequenceFormatter<T,C,E>
-        where C : ISequenceFormatConfig
+        where C : ISeqFormat
     {
         /// <summary>
         /// Formats a span using both sequence and element format configurations
@@ -48,6 +48,6 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="seq">The sequence format configuration</param>
         /// <param name="config">The element format configuration</param>
-        string Format(ReadOnlySpan<T> src, in C seq, in E element);         
+        string Format(ReadOnlySpan<T> src, in C seq, in E element);
     }
 }

@@ -24,6 +24,8 @@ namespace Z0
 
         public readonly Option<Exception> Error;
 
+        public readonly ulong MessageCode;
+
         [MethodImpl(Inline)]
         public static implicit operator Outcome<T>(T data)
             => new Outcome<T>(true, data);
@@ -32,16 +34,22 @@ namespace Z0
         public static implicit operator Outcome<T>(Exception error)
             => new Outcome<T>(error);
 
-        // [MethodImpl(Inline)]
-        // public static implicit operator Outcome<T>((bool ok, T data) src)
-        //     => new Outcome<T>(src.ok, src.data);
-
         [MethodImpl(Inline)]
-        public Outcome(bool ok, T data)
+        public Outcome(bool ok, T data, ulong code = default)
         {
             Ok = ok;
             Data = data;
             Error = default;
+            MessageCode = code;
+        }
+
+        [MethodImpl(Inline)]
+        public Outcome(ulong code)
+        {
+            Ok = false;
+            Data = default;
+            Error = default;
+            MessageCode = code;
         }
 
         [MethodImpl(Inline)]
@@ -50,7 +58,9 @@ namespace Z0
             Ok = false;
             Data = data;
             Error = e;
+            MessageCode = default;
         }
+
 
         [MethodImpl(Inline)]
         public string Format()

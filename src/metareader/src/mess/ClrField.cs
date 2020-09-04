@@ -5,7 +5,7 @@
 // License    :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.MS
-{    
+{
     /// <summary>
     /// A representation of a field in the target process.
     /// </summary>
@@ -36,25 +36,28 @@ namespace Z0.MS
         /// Gets the element type of this field.  Note that even when Type is <see langword="null"/>, this should still tell you
         /// the element type of the field.
         /// </summary>
-        public abstract ClrElementType ElementType { get; }
+        public abstract ClrTypeCode ElementType { get; }
 
         /// <summary>
         /// Gets a value indicating whether this field is a primitive (<see cref="int"/>, <see cref="float"/>, etc).
         /// </summary>
         /// <returns>True if this field is a primitive (<see cref="int"/>, <see cref="float"/>, etc), false otherwise.</returns>
-        public virtual bool IsPrimitive => ElementType.IsPrimitive();
+        public virtual bool IsPrimitive
+            => ElementType.IsPrimitive();
 
         /// <summary>
         /// Gets a value indicating whether this field is a value type.
         /// </summary>
         /// <returns>True if this field is a value type, false otherwise.</returns>
-        public virtual bool IsValueType => ElementType.IsValueType();
+        public virtual bool IsValueType
+            => ElementType.IsValueType();
 
         /// <summary>
         /// Gets a value indicating whether this field is an object reference.
         /// </summary>
         /// <returns>True if this field is an object reference, false otherwise.</returns>
-        public virtual bool IsObjectReference => ElementType.IsObjectReference();
+        public virtual bool IsObjectReference
+            => ElementType.IsObjectReference();
 
         /// <summary>
         /// Gets the size of this field.
@@ -98,5 +101,5 @@ namespace Z0.MS
 
             return Name;
         }
-    }        
+    }
 }

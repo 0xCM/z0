@@ -8,7 +8,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using Z0.MS;
 
     using static Konst;
@@ -28,33 +28,33 @@ namespace Z0
         {
             return Structures.digits(src, LowerCase);
         }
-        
+
         [MethodImpl(Inline), Op]
         public static string format(EventDefinitionHandle src)
             => Structures.format(src);
 
         [MethodImpl(Inline), Op]
-        public static bool primitive(ClrElementType src)
+        public static bool primitive(ClrTypeCode src)
         {
-            return src >= ClrElementType.Boolean && src <= ClrElementType.Double
-                || src == ClrElementType.NativeInt || src == ClrElementType.NativeUInt
-                || src == ClrElementType.Pointer || src == ClrElementType.FunctionPointer;
+            return src >= ClrTypeCode.Bool8 && src <= ClrTypeCode.Float64
+                || src == ClrTypeCode.IntI || src == ClrTypeCode.IntU
+                || src == ClrTypeCode.Ptr || src == ClrTypeCode.PtrFx;
         }
-        
-        [MethodImpl(Inline), Op]
-        public static bool valuetype(ClrElementType src)
-            => src == ClrElementType.Struct;
 
         [MethodImpl(Inline), Op]
-        public static bool objref(ClrElementType src)
-        {
-            return src == ClrElementType.String || src == ClrElementType.Class
-                || src == ClrElementType.Array || src == ClrElementType.SZArray
-                || src == ClrElementType.Object;
-        }
- 
+        public static bool valuetype(ClrTypeCode src)
+            => src == ClrTypeCode.Struct;
+
         [MethodImpl(Inline), Op]
-        public static string name(ClrRootKind kind) 
+        public static bool objref(ClrTypeCode src)
+        {
+            return src == ClrTypeCode.String || src == ClrTypeCode.Class
+                || src == ClrTypeCode.Array || src == ClrTypeCode.Cells
+                || src == ClrTypeCode.Object;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static string name(ClrRootKind kind)
             => kind switch
         {
             ClrRootKind.None => "none",
@@ -67,7 +67,7 @@ namespace Z0
             ClrRootKind.SizedRefHandle => "sized ref handle",
             _ => "unknown root"
         };
-         
+
         [Op]
         public static string name(ClrHandleKind kind) => kind switch
         {
@@ -84,56 +84,56 @@ namespace Z0
         };
 
         /// <summary>
-        /// Gets the <see cref='System.Type' /> represented by the <see cref='ClrElementType'/>
+        /// Gets the <see cref='System.Type' /> represented by the <see cref='ClrTypeCode'/>
         /// </summary>
         /// <param name="src">The model element type</param>
         [Op]
-        public static Type represented(ClrElementType src)
+        public static Type represented(ClrTypeCode src)
         {
             switch (src)
             {
-                case ClrElementType.Boolean:
+                case ClrTypeCode.Bool8:
                     return typeof(bool);
 
-                case ClrElementType.Char:
+                case ClrTypeCode.Char16:
                     return typeof(char);
 
-                case ClrElementType.Double:
+                case ClrTypeCode.Float64:
                     return typeof(double);
 
-                case ClrElementType.Float:
+                case ClrTypeCode.Float32:
                     return typeof(float);
 
-                case ClrElementType.Pointer:
-                case ClrElementType.NativeInt:
-                case ClrElementType.FunctionPointer:
+                case ClrTypeCode.Ptr:
+                case ClrTypeCode.IntI:
+                case ClrTypeCode.PtrFx:
                     return typeof(IntPtr);
 
-                case ClrElementType.NativeUInt:
+                case ClrTypeCode.IntU:
                     return typeof(UIntPtr);
 
-                case ClrElementType.Int16:
+                case ClrTypeCode.Int16i:
                     return typeof(short);
 
-                case ClrElementType.Int32:
+                case ClrTypeCode.Int32i:
                     return typeof(int);
 
-                case ClrElementType.Int64:
+                case ClrTypeCode.Int64i:
                     return typeof(long);
 
-                case ClrElementType.Int8:
+                case ClrTypeCode.Int8i:
                     return typeof(sbyte);
 
-                case ClrElementType.UInt16:
+                case ClrTypeCode.Int16u:
                     return typeof(ushort);
 
-                case ClrElementType.UInt32:
+                case ClrTypeCode.Int32u:
                     return typeof(uint);
 
-                case ClrElementType.UInt64:
+                case ClrTypeCode.Int64u:
                     return typeof(ulong);
 
-                case ClrElementType.UInt8:
+                case ClrTypeCode.Int8u:
                     return typeof(byte);
 
                 default:
@@ -254,7 +254,7 @@ namespace Z0
             }
 
             return 0;
-        }        
+        }
 
 
         /// <summary>

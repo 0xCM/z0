@@ -46,8 +46,8 @@ namespace Z0
         /// <param name="count">The cell allocation count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> span<T>(int count)
-            => sys.span<T>(count);
+        public static Span<T> span<T>(long count)
+            => sys.span<T>((uint)count);
 
         /// <summary>
         /// Allocates storage for a specified number of T-cells
@@ -57,6 +57,10 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> span<T>(uint count)
             => sys.span<T>(count);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> span<T>(ulong count)
+            => sys.span<T>((uint)count);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> span<T>(IEnumerable<T> src)

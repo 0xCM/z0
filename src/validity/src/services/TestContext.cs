@@ -248,7 +248,7 @@ namespace Z0
         protected void Trace(object msg, [Caller] string caller = null)
             => Queue.Trace(msg, GetType(), caller);
 
-        protected void Trace(string title, object msg, MessageFlair color, [Caller] string caller = null)
+        protected void Trace(string title, object msg, FlairKind color, [Caller] string caller = null)
             => Queue.Trace(title, msg, color, GetType(), caller);
 
         protected void Trace(string title, string msg, [Caller] string caller = null)

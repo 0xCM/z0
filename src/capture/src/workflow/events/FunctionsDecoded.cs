@@ -9,13 +9,13 @@ namespace Z0.Asm
 
     using static Konst;
     using static RenderPatterns;
-    
+
     public readonly struct FunctionsDecoded : IWfEvent<FunctionsDecoded>
     {
         public WfEventId EventId  => WfEventId.define("Placeholder");
 
         public readonly ApiHostUri Host;
-        
+
         public readonly AsmRoutine[] Functions;
 
         [MethodImpl(Inline)]
@@ -24,17 +24,17 @@ namespace Z0.Asm
             Host = host;
             Functions = functions;
         }
-        
+
         public string Format()
             => $"{Functions.Length} {Host} functions decoded";
-        
-        public FunctionsDecoded Zero 
+
+        public FunctionsDecoded Zero
             => Empty;
 
-        public MessageFlair Flair 
-            => MessageFlair.Magenta;            
+        public FlairKind Flair
+            => FlairKind.Running;
 
-        public static FunctionsDecoded Empty 
+        public static FunctionsDecoded Empty
             => default;
     }
 }

@@ -21,12 +21,12 @@ namespace Z0.Asm
 
         public CorrelationToken Ct {get;}
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         public readonly Count32 RecordCount;
 
         [MethodImpl(Inline)]
-        public ExtractReportCreated(string actor, Count32 count, CorrelationToken ct, MessageFlair flair = Ran)
+        public ExtractReportCreated(string actor, Count32 count, CorrelationToken ct, FlairKind flair = Ran)
         {
             Actor = actor;
             EventId = evid(EventName, ct);

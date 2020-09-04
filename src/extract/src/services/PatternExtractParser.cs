@@ -86,7 +86,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                var msg = AppMsg.colorize($"{src.Member.OpUri} extract parse FAIL: {e}", MessageFlair.Yellow);
+                var msg = AppMsg.colorize($"{src.Member.OpUri} extract parse FAIL: {e}", FlairKind.Warning);
                 term.print(msg);
                 return ExtractParseResult.FromFailure(new ExtractParseFailure(src, seq, ExtractTermCode.Fail));
             }

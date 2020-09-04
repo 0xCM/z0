@@ -18,12 +18,12 @@ namespace Z0
 
         public WfStepId StepId {get;}
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         public Textual<string> Content {get;}
 
         [MethodImpl(Inline)]
-        public WfTermEvent(WfEventId e, WfActor actor, WfStepId step, string body, MessageFlair flair)
+        public WfTermEvent(WfEventId e, WfActor actor, WfStepId step, string body, FlairKind flair)
         {
             EventId = e;
             Actor = actor;

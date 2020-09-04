@@ -63,7 +63,7 @@ namespace Z0
                 FormatTs(start)
                 );
 
-            return AppMsg.colorize(fields.Concat(FieldSep), MessageFlair.Blue);
+            return AppMsg.colorize(fields.Concat(FieldSep), FlairKind.Blue);
         }
 
         static AppMsg PostCase(string testName, TimeSpan elapsed, DateTime start, DateTime end)
@@ -77,7 +77,7 @@ namespace Z0
                 Format(end - start)
                 );
 
-            return AppMsg.colorize(fields.Concat(FieldSep), MessageFlair.Blue);
+            return AppMsg.colorize(fields.Concat(FieldSep), FlairKind.Blue);
         }
 
         static AppMsg PostUnit(string hosturi, TimeSpan elapsed, DateTime start, DateTime end)
@@ -91,7 +91,7 @@ namespace Z0
                 Format(end - start)
                 );
 
-            return AppMsg.colorize(fields.Concat(FieldSep), MessageFlair.Blue);
+            return AppMsg.colorize(fields.Concat(FieldSep), FlairKind.Blue);
         }
     }
 }

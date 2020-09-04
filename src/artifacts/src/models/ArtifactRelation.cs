@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static ArtifactModel;
 
     /// <summary>
     /// Defines a directed association from one artifact to another

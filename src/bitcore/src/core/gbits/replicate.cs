@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics.X86;
- 
+
     using static Konst;
-    using static Memories;    
-   
+    using static Memories;
+
     partial class gbits
-    {                       
+    {
         /// <summary>
         /// Replicates an index-defined bitpattern a specified number of times
         /// </summary>
@@ -35,8 +35,8 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T replicate<T>(T src)
             where T : unmanaged
-        {         
-            var index = (byte)hipos(src);
+        {
+            var index = hipos(src);
             var count = (bitsize<T>() / (index + 1) +  1);
             var replicated = Bits.replicate(convert<T,ulong>(src), 0, index, count);
             return convert<T>(replicated);

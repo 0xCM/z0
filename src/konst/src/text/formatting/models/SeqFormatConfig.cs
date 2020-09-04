@@ -9,10 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct SeqFormatConfig : ISequenceFormatConfig<SeqFormatConfig>
+    public readonly struct SeqFormatConfig : ISeqFormat<SeqFormatConfig>
     {
         public string Delimiter {get;}
-        
+
         [MethodImpl(Inline)]
         public SeqFormatConfig(string delimiter)
         {

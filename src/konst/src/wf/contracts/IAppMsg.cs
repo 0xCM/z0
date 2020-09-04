@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// The message foreground color when rendered for display
         /// </summary>
-        MessageFlair Flair {get;}
+        FlairKind Flair {get;}
 
         /// <summary>
         /// Specifies whether the message describes an error

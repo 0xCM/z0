@@ -8,41 +8,39 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
-    public class t_msbpos : t_bitcore<t_msbpos>
+    public class t_hipos : t_bitcore<t_hipos>
     {
-        public void msbpos_8()
-            => msbpos_check<byte>();
+        public void hipos_8()
+            => hipos_check<byte>();
 
-        public void msbpos_16()
-            => msbpos_check<ushort>();
+        public void hipos_16()
+            => hipos_check<ushort>();
 
-        public void msbpos_32()
-            => msbpos_check<uint>();
+        public void hipos_32()
+            => hipos_check<uint>();
 
-        public void msbpos_64()
-            => msbpos_check<ulong>();
- 
-        void msbpos_check<T>(T t = default)
+        public void hipos_64()
+            => hipos_check<ulong>();
+
+        void hipos_check<T>(T t = default)
             where T : unmanaged
         {
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.Next<T>();
-                var xpos = gbits.hipos(x);
-                ClaimNumeric.lt(xpos, (int)bitsize<T>());
-                
-                var xcount = gbits.nlz(x);
-                var bs = BitString.scalar(x);
-                var bscount = bs.Nlz();
-                ClaimNumeric.eq(xcount, bscount);
-                
-                var bspos = bs.Length - 1 - bscount;
-                Claim.eq(xpos,bspos);
+                var xPos = gbits.hipos(x);
+                ClaimNumeric.lt(xPos, (byte)bitsize<T>());
+
+                var xCount = gbits.nlz(x);
+                var y = BitString.scalar(x);
+                var yCount = y.Nlz();
+                ClaimNumeric.eq(xCount, yCount);
+
+                var yPos = y.Length - 1 - yCount;
+                Claim.eq(xPos,yPos);
             }
         }
- 
     }
-
 }

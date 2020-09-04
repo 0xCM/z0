@@ -15,16 +15,16 @@ namespace Z0
 
     partial class XTend
     {
-       public static bool IsPrimitive(this ClrElementType src)
+       public static bool IsPrimitive(this ClrTypeCode src)
             => ClrQueries.primitive(src);
 
-        public static bool IsValueType(this ClrElementType src)
+        public static bool IsValueType(this ClrTypeCode src)
             => ClrQueries.valuetype(src);
 
-        public static bool IsObjectReference(this ClrElementType src)
+        public static bool IsObjectReference(this ClrTypeCode src)
             => ClrQueries.objref(src);
 
-        public static Type GetTypeForElementType(this ClrElementType src)
+        public static Type GetTypeForElementType(this ClrTypeCode src)
             => ClrQueries.represented(src);
 
         public static string GetName(this ClrRootKind src)

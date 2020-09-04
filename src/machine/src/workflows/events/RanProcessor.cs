@@ -9,25 +9,25 @@ namespace Z0
 
     using static Konst;
     using static RenderPatterns;
-    using static Flairs;
+    using static FlairKinds;
 
     [Event]
     public readonly struct RanProcessor : IWfEvent<RanProcessor>
     {
         public const string EventName = nameof(RanProcessor);
-        
+
         public WfEventId EventId {get;}
 
         public WfActor Actor {get;}
 
         public WfProcessor Processor {get;}
-        
+
         public string Message {get;}
-        
-        public MessageFlair Flair {get;}
+
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public RanProcessor(string actor, string processor, string message, CorrelationToken ct,  MessageFlair flair = Ran)
+        public RanProcessor(string actor, string processor, string message, CorrelationToken ct,  FlairKind flair = Ran)
         {
             EventId = WfEventId.define(EventName, ct);
             Actor = actor;
@@ -35,9 +35,9 @@ namespace Z0
             Message =  message;
             Flair = flair;
         }
-        
-        [MethodImpl(Inline)]        
+
+        [MethodImpl(Inline)]
         public string Format()
             => text.format(PSx4, EventId, Actor, Processor, Message);
-    }        
+    }
 }

@@ -10,17 +10,17 @@ namespace Z0
     using System.Buffers;
     using System.Runtime.InteropServices;
     using System.Text;
-    
+
     partial struct ClrDataModel
     {
         internal static class ValueReader
         {
             private static bool _initializedStringFields;
-            
+
             private static ClrType _stringType;
-            
+
             private static ClrInstanceField _firstChar;
-            
+
             private static ClrInstanceField _stringLength;
 
             internal static T[] GetValuesFromAddress<T>(IDataReader reader, ulong addr, int count) where T : unmanaged
@@ -36,22 +36,22 @@ namespace Z0
                 return default;
             }
 
-            internal static object GetValueAtAddress(ClrHeap heap, IDataReader reader, ClrElementType cet, ulong addr)
+            internal static object GetValueAtAddress(ClrHeap heap, IDataReader reader, ClrTypeCode cet, ulong addr)
             {
                 switch (cet)
                 {
-                    case ClrElementType.String:
+                    case ClrTypeCode.String:
                         return GetStringContents(heap.StringType, reader, addr, 4096);
 
-                    case ClrElementType.Class:
-                    case ClrElementType.Array:
-                    case ClrElementType.SZArray:
-                    case ClrElementType.Object:
+                    case ClrTypeCode.Class:
+                    case ClrTypeCode.Array:
+                    case ClrTypeCode.Cells:
+                    case ClrTypeCode.Object:
                         {
                             return reader.ReadPointer(addr);
                         }
 
-                    case ClrElementType.Boolean:
+                    case ClrTypeCode.Bool8:
                         {
                             if (!reader.Read(addr, out byte val))
                                 return null;
@@ -59,7 +59,7 @@ namespace Z0
                             return val != 0;
                         }
 
-                    case ClrElementType.Int32:
+                    case ClrTypeCode.Int32i:
                         {
                             if (!reader.Read(addr, out int val))
                                 return null;
@@ -67,7 +67,7 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrElementType.UInt32:
+                    case ClrTypeCode.Int32u:
                         {
                             if (!reader.Read(addr, out uint val))
                                 return null;
@@ -75,7 +75,7 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrElementType.Int64:
+                    case ClrTypeCode.Int64i:
                         {
                             if (!reader.Read(addr, out long val))
                                 return long.MaxValue;
@@ -83,7 +83,7 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrElementType.UInt64:
+                    case ClrTypeCode.Int64u:
                         {
                             if (!reader.Read(addr, out ulong val))
                                 return long.MaxValue;
@@ -91,19 +91,19 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrElementType.NativeUInt: // native unsigned int
-                    case ClrElementType.Pointer:
-                    case ClrElementType.FunctionPointer:
+                    case ClrTypeCode.IntU: // native unsigned int
+                    case ClrTypeCode.Ptr:
+                    case ClrTypeCode.PtrFx:
                         {
                             return reader.ReadPointer(addr);
                         }
 
-                    case ClrElementType.NativeInt: // native int
+                    case ClrTypeCode.IntI: // native int
                         {
                             return reader.ReadPointer(addr);
                         }
 
-                    case ClrElementType.Int8:
+                    case ClrTypeCode.Int8i:
                         {
                             if (!reader.Read(addr, out sbyte val))
                                 return null;
@@ -111,7 +111,7 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrElementType.UInt8:
+                    case ClrTypeCode.Int8u:
                         {
                             if (!reader.Read(addr, out byte val))
                                 return null;
@@ -119,7 +119,7 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrElementType.Float:
+                    case ClrTypeCode.Float32:
                         {
                             if (!reader.Read(addr, out float val))
                                 return null;
@@ -127,7 +127,7 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrElementType.Double: // double
+                    case ClrTypeCode.Float64: // double
                         {
                             if (!reader.Read(addr, out double val))
                                 return null;
@@ -135,7 +135,7 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrElementType.Int16:
+                    case ClrTypeCode.Int16i:
                         {
                             if (!reader.Read(addr, out short val))
                                 return null;
@@ -143,7 +143,7 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrElementType.Char: // u2
+                    case ClrTypeCode.Char16: // u2
                         {
                             if (!reader.Read(addr, out ushort val))
                                 return null;
@@ -151,7 +151,7 @@ namespace Z0
                             return (char)val;
                         }
 
-                    case ClrElementType.UInt16:
+                    case ClrTypeCode.Int16u:
                         {
                             if (!reader.Read(addr, out ushort val))
                                 return null;
@@ -220,6 +220,6 @@ namespace Z0
                         ArrayPool<byte>.Shared.Return(array);
                 }
             }
-        }        
+        }
     }
 }

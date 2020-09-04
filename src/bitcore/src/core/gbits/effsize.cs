@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class gbits
     {
         /// <summary>
-        /// Computes the minimum number of butes required to represent the source value
+        /// Computes the minimum number of bytes required to represent the source value
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
@@ -29,9 +29,9 @@ namespace Z0
                 return Bits.effsize(uint32(src));
             else if(typeof(T) == typeof(ulong))
                 return Bits.effsize_baseline(uint64(src));
-            else            
+            else
                 return effsize_i(src);
-        }           
+        }
 
         static byte effsize_i<T>(T src)
             where T : unmanaged
@@ -44,8 +44,8 @@ namespace Z0
                 return Bits.effsize(int32(src));
             else if(typeof(T) == typeof(long))
                 return Bits.effsize(int64(src));
-            else            
-                throw Unsupported.define<T>();
-        }           
+            else
+                throw no<T>();
+        }
     }
 }

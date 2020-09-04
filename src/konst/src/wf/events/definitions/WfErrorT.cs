@@ -25,7 +25,7 @@ namespace Z0
 
         public WfPayload<T> Data {get;}
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         public AppMsgSource Source {get;}
 
@@ -36,7 +36,7 @@ namespace Z0
             StepId = WfStepId.Empty;
             Actor = actor;
             Data = body;
-            Flair =  MessageFlair.Red;
+            Flair =  FlairKind.Error;
             Source = source;
         }
 
@@ -47,7 +47,7 @@ namespace Z0
             Actor = EmptyString;
             StepId = step;
             Data = body;
-            Flair =  MessageFlair.Red;
+            Flair =  FlairKind.Error;
             Source = source;
         }
 

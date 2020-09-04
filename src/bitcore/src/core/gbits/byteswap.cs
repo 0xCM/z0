@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;    
-    
+    using static z;
+
     partial class gbits
-    {    
+    {
         [MethodImpl(Inline), Op, Closures(UInt16x32x64k)]
         public static T byteswap<T>(T src)
             where T : unmanaged

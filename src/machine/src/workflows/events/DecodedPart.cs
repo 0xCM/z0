@@ -29,10 +29,10 @@ namespace Z0
 
         public Count32 TotalCount {get;}
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public DecodedPart(string actor, PartAsmFx src, CorrelationToken ct, MessageFlair flair = Ran)
+        public DecodedPart(string actor, PartAsmFx src, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = WfEventId.define(EventName, ct);
             Actor = actor;

@@ -13,9 +13,9 @@ namespace Z0.Image
 
     public readonly struct PeReaderEvents
     {
-        const string NoMagicDescription ="Magic is not here";        
+        const string NoMagicDescription ="Magic is not here";
 
-        public static AppEvent NoMagic([Caller] string caller = null) 
-            => new AppEvent(EventId.define("NoMagic", caller), NoMagicDescription, MessageFlair.Red);
+        public static AppEvent NoMagic([Caller] string caller = null)
+            => new AppEvent(EventId.define("NoMagic", caller), NoMagicDescription, FlairKind.Error);
     }
 }

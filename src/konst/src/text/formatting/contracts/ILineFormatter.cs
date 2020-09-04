@@ -10,5 +10,4 @@ namespace Z0
     {
         string[] FormatLines(T src);
     }
-
 }

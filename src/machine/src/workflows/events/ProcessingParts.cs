@@ -23,10 +23,10 @@ namespace Z0
 
         public PartId[] Parts {get;}
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ProcessingParts(string actor, string processor, PartId[] parts, CorrelationToken ct, MessageFlair flair = Running)
+        public ProcessingParts(string actor, string processor, PartId[] parts, CorrelationToken ct, FlairKind flair = Running)
         {
             EventId = WfEventId.define(EventName, ct);
             Actor = actor;

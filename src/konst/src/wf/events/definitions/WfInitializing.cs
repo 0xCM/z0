@@ -23,10 +23,10 @@ namespace Z0
 
             public WfStepId StepId { get; }
 
-            public MessageFlair Flair { get; }
+            public FlairKind Flair { get; }
 
             [MethodImpl (Inline)]
-            public Initializing(WfStepId worker, CorrelationToken ct, MessageFlair flair = Render.Initializing)
+            public Initializing(WfStepId worker, CorrelationToken ct, FlairKind flair = Render.Initializing)
             {
                 EventId = evid (EventName, ct);
                 StepId = worker;

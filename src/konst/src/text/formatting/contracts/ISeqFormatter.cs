@@ -8,7 +8,7 @@ namespace Z0
     {
         string FormatItem(object src);
     }
-                       
+
     public interface ISequenceFormatter<T> : ISequenceFormatter
     {
         string FormatItem(T src)
@@ -19,14 +19,14 @@ namespace Z0
     }
 
     public interface ISequenceFormatter<T,C> : ISequenceFormatter<T>
-        where C : ISequenceFormatConfig
+        where C : ISeqFormat
     {
-        
-    }  
+
+    }
 
     public interface ISequenceFormatter<T,C,E> : ISequenceFormatter<T,C>
-        where C : ISequenceFormatConfig
+        where C : ISeqFormat
     {
         string FormatItem(T src, in E config);
-    }  
+    }
 }

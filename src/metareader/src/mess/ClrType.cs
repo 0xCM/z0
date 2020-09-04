@@ -11,7 +11,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using Z0.MS;
-        
+
     /// <summary>
     /// A representation of a type in the target process.
     /// </summary>
@@ -64,9 +64,9 @@ namespace Z0
         public abstract ClrModule Module { get; }
 
         /// <summary>
-        /// Gets the <see cref="ClrElementType"/> of this Type.  Can return <see cref="ClrElementType.Unknown"/> on error.
+        /// Gets the <see cref="ClrTypeCode"/> of this Type.  Can return <see cref="ClrTypeCode.None"/> on error.
         /// </summary>
-        public abstract ClrElementType ElementType { get; }
+        public abstract ClrTypeCode ElementType { get; }
 
         /// <summary>
         /// Gets a value indicating whether this type is a primitive (<see cref="int"/>, <see cref="float"/>, etc).
@@ -277,7 +277,7 @@ namespace Z0
             if (other.IsPointer)
                 return ComponentType == other.ComponentType;
 
-            if (IsPrimitive && other.IsPrimitive && ElementType != ClrElementType.Unknown)
+            if (IsPrimitive && other.IsPrimitive && ElementType != ClrTypeCode.None)
                 return ElementType == other.ElementType;
 
             // Ok we aren't a primitive type, or a pointer, and our MethodTables are 0.  Last resort is to
@@ -302,5 +302,5 @@ namespace Z0
         {
             return !(left == right);
         }
-    }        
+    }
 }

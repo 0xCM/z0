@@ -22,10 +22,10 @@ namespace Z0
 
         public readonly PartId[] Parts;
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public CapturingParts(string actor, PartId[] parts, CorrelationToken ct, MessageFlair flair = Running)
+        public CapturingParts(string actor, PartId[] parts, CorrelationToken ct, FlairKind flair = Running)
         {
             EventId = WfEventId.define(EventName, ct);
             ActorName = actor;

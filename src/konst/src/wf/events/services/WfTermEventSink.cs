@@ -55,9 +55,9 @@ namespace Z0
             EventLog.Deposit(e);
         }
 
-        public void Deposit(string message, MessageFlair? color = null)
+        public void Deposit(string message, FlairKind? color = null)
         {
-            term.print(message, color ?? MessageFlair.Green);
+            term.print(message, color ?? FlairKind.Status);
         }
 
         public void Dispose()

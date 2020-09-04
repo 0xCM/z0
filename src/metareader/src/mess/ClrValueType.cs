@@ -9,15 +9,15 @@ namespace Z0
     using System;
 
     using Z0.MS;
-    
+
     /// <summary>
     /// Represents an instance of a type which inherits from <see cref="ValueType"/>.
     /// </summary>
     public struct ClrValueType : IAddressableTypedEntity
     {
-        private IDataReader DataReader 
+        private IDataReader DataReader
             => GetTypeOrThrow().ClrObjectHelpers.DataReader;
-        
+
         private readonly bool _interior;
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Z0
         /// <exception cref="MemoryReadException">There was an error reading the value of this field out of the data target.</exception>
         public string GetStringField(string fieldName, int maxLength = 4096)
         {
-            ulong address = GetFieldAddress(fieldName, ClrElementType.String, "string");
+            ulong address = GetFieldAddress(fieldName, ClrTypeCode.String, "string");
             if (!DataReader.ReadPointer(address, out ulong str))
                 throw new MemoryReadException(address);
 
@@ -130,7 +130,7 @@ namespace Z0
             return obj.AsString(maxLength);
         }
 
-        private ulong GetFieldAddress(string fieldName, ClrElementType element, string typeName)
+        private ulong GetFieldAddress(string fieldName, ClrTypeCode element, string typeName)
         {
             ClrInstanceField? field = Type.GetFieldByName(fieldName);
             if (field is null)

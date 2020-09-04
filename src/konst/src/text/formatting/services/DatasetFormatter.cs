@@ -11,8 +11,6 @@ namespace Z0
 
     using static Konst;
 
-    using Z0.Data;
-
     public readonly struct DatasetFormatter<F> : IDatasetFormatter<F>
         where F : unmanaged, Enum
     {

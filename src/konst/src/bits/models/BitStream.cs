@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
     using static z;
@@ -21,7 +20,7 @@ namespace Z0
             var bytes = z.bytes(src);
             var buffer = sys.alloc<bit>(bytes.Length*8);
             var dst = span(buffer);
-            
+
             for(var i=0u; i<bytes.Length; i++)
             {
                 var b = skip(bytes,i);
@@ -53,7 +52,7 @@ namespace Z0
         public static IEnumerable<bit> from<T>(IEnumerable<T> src)
             where T : struct
                 => from<T>(src.GetEnumerator());
-        
+
         // [MethodImpl(Inline)]
         // public static IStreamSource<bit> source<T>(IEnumerable<T> src)
         //     where T : struct

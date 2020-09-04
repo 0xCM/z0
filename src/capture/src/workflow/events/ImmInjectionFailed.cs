@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static Konst;
     using static z;
     using static RenderPatterns;
-    
+
     using E = ImmInjectionFailed;
 
     public readonly struct ImmInjectionFailed : IWfEvent<E>
@@ -23,16 +23,16 @@ namespace Z0.Asm
         {
             Method = method;
         }
-        
+
         public MethodInfo Method {get;}
-        
+
         public string Format()
             => $"Imm injection failure for {Method.Name}";
-        
-        public MessageFlair Flair
-            => MessageFlair.Red;
 
-        public static ImmInjectionFailed Empty 
+        public FlairKind Flair
+            => FlairKind.Error;
+
+        public static ImmInjectionFailed Empty
             => default;
     }
 }

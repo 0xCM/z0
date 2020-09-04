@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op]
-        public static WfStepCreated created(WfStepId id, CorrelationToken ct, MessageFlair flair = Created)
+        public static WfStepCreated created(WfStepId id, CorrelationToken ct, FlairKind flair = Created)
             => new WfStepCreated(id, ct, flair);
 
         /// <summary>
@@ -31,11 +31,11 @@ namespace Z0
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static WfStepCreated<T> created<T>(WfStepId id, T content, CorrelationToken ct, MessageFlair flair = Created)
+        public static WfStepCreated<T> created<T>(WfStepId id, T content, CorrelationToken ct, FlairKind flair = Created)
             => new WfStepCreated<T>(id, content, ct, flair);
 
         [MethodImpl(Inline), Op]
-        public static ToolCreated created(WfToolId tool, CorrelationToken ct, MessageFlair flair = Created)
+        public static ToolCreated created(WfToolId tool, CorrelationToken ct, FlairKind flair = Created)
             => new ToolCreated(tool, ct, flair);
     }
 }

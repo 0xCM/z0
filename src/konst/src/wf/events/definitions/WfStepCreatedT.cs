@@ -22,10 +22,10 @@ namespace Z0
 
         public WfPayload<T> Content {get;}
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStepCreated(WfStepId step, T content, CorrelationToken ct, MessageFlair flair = Created)
+        public WfStepCreated(WfStepId step, T content, CorrelationToken ct, FlairKind flair = Created)
         {
             EventId = (EventName, step, ct);
             StepId = step;

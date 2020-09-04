@@ -18,19 +18,12 @@ namespace Z0
         public static LookupGrid<byte,byte,byte,T> grid<T>(W8 ixj)
             => new LookupGrid<byte,byte,byte,T>(new byte[256,256], new T[256*256]);
 
-        [Op, Closures(UInt8k)]
-        public static LookupGrid2<byte,byte,byte,T> grid2<T>(W8 ixj)
-            => new LookupGrid2<byte,byte,byte,T>(new byte[256], new byte[256], new T[256*256]);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T lookup<T>(in LookupGrid<byte,byte,byte,T> src, byte i, byte j)
             where T : unmanaged
                 => ref lookup<byte,byte,byte,T>(src,i,j);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ref T lookup<T>(in LookupGrid2<byte,byte,byte,T> src, byte i, byte j)
-            where T : unmanaged
-                => ref src.Cell(i,j);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T lookup<T>(in TableSpan<N256,N256,T> src, byte i, byte j)

@@ -28,10 +28,10 @@ namespace Z0
 
             public FilePath SourcePath {get;}
 
-            public MessageFlair Flair {get;}
+            public FlairKind Flair {get;}
 
             [MethodImpl(Inline)]
-            public WfProcessingFile(string worker, T kind, FilePath src, CorrelationToken ct, MessageFlair flair = Running)
+            public WfProcessingFile(string worker, T kind, FilePath src, CorrelationToken ct, FlairKind flair = Running)
             {
                 EventId = evid(EventName, ct);
                 ActorName = worker;

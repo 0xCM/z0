@@ -3,24 +3,24 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     [ApiHost]
     public readonly partial struct Render
     {
-        public const MessageFlair Error = MessageFlair.Red;
+        public const FlairKind Error = FlairKind.Error;
 
-        public const MessageFlair Created = MessageFlair.Gray;
+        public const FlairKind Created = FlairKind.Disposed;
 
-        public const MessageFlair Running = MessageFlair.Magenta;
+        public const FlairKind Running = FlairKind.Running;
 
-        public const MessageFlair Ran = MessageFlair.Cyan;
+        public const FlairKind Ran = FlairKind.Ran;
 
-        public const MessageFlair Finished = MessageFlair.Gray;
+        public const FlairKind Finished = FlairKind.Disposed;
 
-        public const MessageFlair Status = MessageFlair.Green;
+        public const FlairKind Status = FlairKind.Status;
 
-        public const MessageFlair Initializing = MessageFlair.Gray;
+        public const FlairKind Initializing = FlairKind.Disposed;
 
-        public const MessageFlair Initialized = MessageFlair.Gray;                
+        public const FlairKind Initialized = FlairKind.Disposed;
     }
 }

@@ -18,7 +18,7 @@ namespace Z0
 
         public WfStepId StepId {get;}
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         public Textual<T> Content {get;}
 
@@ -27,7 +27,7 @@ namespace Z0
             => new WfTermEvent(src.EventId, src.Actor, src.StepId, src.Content.Text, src.Flair);
 
         [MethodImpl(Inline)]
-        public WfTermEvent(WfEventId e, WfActor actor, WfStepId step, Textual<T> body,  MessageFlair flair)
+        public WfTermEvent(WfEventId e, WfActor actor, WfStepId step, Textual<T> body,  FlairKind flair)
         {
             EventId = e;
             Actor = actor;

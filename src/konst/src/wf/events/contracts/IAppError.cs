@@ -13,8 +13,8 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IAppError : IAppEvent
     {
-        MessageFlair IAppEvent.Flair
-            => MessageFlair.Red;
+        FlairKind IAppEvent.Flair
+            => FlairKind.Error;
 
         bool IAppEvent.IsError
             => true;

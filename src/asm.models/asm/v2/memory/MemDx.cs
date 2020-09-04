@@ -3,14 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
     public readonly struct MemDx
-    {        
+    {
         /// <summary>
         /// The size of the displacement in bytes
         /// </summary>
@@ -20,7 +20,7 @@ namespace Z0
         /// The displacement value
         /// </summary>
         public readonly ulong Value;
-        
+
         [MethodImpl(Inline)]
         public MemDx(ulong value, DataSize size)
         {
@@ -28,29 +28,29 @@ namespace Z0
             Size = size;
         }
 
-        public bool IsEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => Value == 0 && Size == 0; 
-        }
-
-        public bool IsNonEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => Value != 0 && Size != 0; 
-        }
-
-        public bool NonZero 
+        public bool IsEmpty
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
+            get => Value == 0 && Size == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Value != 0 && Size != 0;
+        }
+
+        public bool NonZero
+        {
+            [MethodImpl(Inline)]
             get => Value != 0;
         }
-        
-        public MemDx Zero 
+
+        public MemDx Zero
             => Empty;
 
-        HexFormatConfig HexSpec 
-            => RenderOptions.hex(zpad:false, specifier:false);
+        HexFormatConfig HexSpec
+            => FormatOptions.hex(zpad:false, specifier:false);
 
         public string Format()
             => (Size switch{
@@ -68,7 +68,7 @@ namespace Z0
         public static implicit operator MemDx((ulong value, int size) src)
             => asm.memDx(src.value, src.size);
 
-        public static MemDx Empty 
+        public static MemDx Empty
             => default;
     }
 }

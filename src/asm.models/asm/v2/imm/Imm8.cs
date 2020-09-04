@@ -32,7 +32,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => AsmOperandKind.Imm;
         }
-        
+
         [MethodImpl(Inline)]
         public static implicit operator byte(I src)
             => src.Data;
@@ -88,17 +88,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public int CompareTo(I src)
             => Data == src.Data ? 0 : Data < src.Data ? -1 : 1;
-       
+
         [MethodImpl(Inline)]
         public bool Equals(I src)
             => Data == src.Data;
 
-        public override bool Equals(object src)            
+        public override bool Equals(object src)
             => src is I x && Equals(x);
 
         [MethodImpl(Inline)]
         public Address8 ToAddress()
             => Data;
-
     }
 }

@@ -27,7 +27,7 @@ namespace Z0
             get => Data.Kind;
         }
 
-        public MessageFlair Flair
+        public FlairKind Flair
         {
             [MethodImpl(Inline)]
             get => Data.Flair;

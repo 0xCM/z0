@@ -43,7 +43,7 @@ namespace Z0
         private GetCustomAttributeByNameDelegate _getCustomAttributeByName;
 
         private EnumGenericParamsDelegate _enumGenericParams;
-        
+
         private GetGenericParamPropsDelegate _getGenericParamProps;
 
         public MetadataImport(ZDacLib library, IntPtr pUnknown)
@@ -51,7 +51,8 @@ namespace Z0
         {
         }
 
-        private ref readonly IMetaDataImportVTable VTable => ref Unsafe.AsRef<IMetaDataImportVTable>(_vtable);
+        private ref readonly IMetaDataImportVTable VTable
+            => ref Unsafe.AsRef<IMetaDataImportVTable>(_vtable);
 
         public IEnumerable<int> EnumerateInterfaceImpls(int token)
         {
@@ -299,17 +300,8 @@ namespace Z0
 
         [UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int GetMethodPropsDelegate(
-            IntPtr self,
-            int md,
-            out int pClass,
-            StringBuilder szMethod,
-            int cchMethod,
-            out int pchMethod,
-            out MethodAttributes pdwAttr,
-            out IntPtr ppvSigBlob,
-            out uint pcbSigBlob,
-            out uint pulCodeRVA,
-            out uint pdwImplFlags);
+            IntPtr self, int md, out int pClass, StringBuilder szMethod, int cchMethod, out int pchMethod, out MethodAttributes pdwAttr,
+                out IntPtr ppvSigBlob, out uint pcbSigBlob, out uint pulCodeRVA, out uint pdwImplFlags);
 
         [UnmanagedFunctionPointer(CallingConvention.StdCall)]
         private delegate int GetNestedClassPropsDelegate(IntPtr self, int tdNestedClass, out int tdEnclosingClass);
@@ -352,5 +344,5 @@ namespace Z0
             char* wzname,
             int cchName,
             out int pchName);
-    }   
+    }
 }

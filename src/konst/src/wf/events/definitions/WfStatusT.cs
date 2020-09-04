@@ -33,10 +33,10 @@ namespace Z0
 
         public WfPayload<T> Content {get;}
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStatus(WfStepId step, T content, CorrelationToken ct, MessageFlair flair = Status)
+        public WfStatus(WfStepId step, T content, CorrelationToken ct, FlairKind flair = Status)
         {
             EventId = (EventName, step, ct);
             StepId = step;

@@ -41,5 +41,4 @@ namespace Z0.MS
         /// </summary>
         private readonly int _reserved;
     }
-    
 }

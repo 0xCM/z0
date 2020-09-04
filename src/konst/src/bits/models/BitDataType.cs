@@ -12,32 +12,32 @@ namespace Z0
 
 
     /// <summary>
-    /// An anti-succinct representation of a bit 
+    /// An anti-succinct representation of a bit
     /// </summary>
     /// <remarks>
-    /// An essay would be required to fully explain why a 32-bit integer is used to 
+    /// An essay would be required to fully explain why a 32-bit integer is used to
     /// encose the content of a single bit. Briefly, it is because its the only way
     /// to acheive performance characteristics on par with the system-defined bool
-    /// data type. Bool, which is itself predicated on a byte, is a privileged 
+    /// data type. Bool, which is itself predicated on a byte, is a privileged
     /// data structure that garners special treatment by the runtime. A user-defined
     /// type predicated on a byte would not enjoy this status and would endure
     /// a constant barrage of shifts, movements, etc. from not being 32-bit aligned.
-    /// </remarks>    
+    /// </remarks>
     [
         IdentityProvider(typeof(bit)),
-        UserType(UserTypeId.BitId), 
+        UserType(UserTypeId.BitId),
         Width(TypeWidth.W1),
         ConversionProvider(typeof(BitDataTypeConverter)),
         ApiHost
     ]
-    public readonly struct bit : ITextual<bit>, ITypeIdentityProvider<bit> 
+    public readonly struct bit : ITextual<bit>, ITypeIdentityProvider<bit>
     {
         public const char Zero = '0';
 
         public const char One = '1';
 
-        readonly uint state;        
-        
+        readonly uint state;
+
         [MethodImpl(Inline), Op]
         unsafe bit(bool on)
             => this.state  = *((byte*)(&on));
@@ -49,29 +49,29 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public char ToChar()
             => (char)(state + 48);
-        
+
         [MethodImpl(Inline), Op]
         public static bit Parse(char c)
             => c == One;
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T generic<T>(bit src)
-            => Unsafe.As<bit,T>(ref src);                 
+            => Unsafe.As<bit,T>(ref src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static bit specific<T>(T src)
-            => Unsafe.As<T,bit>(ref src);        
+            => Unsafe.As<T,bit>(ref src);
 
         public static bit Parse(string src)
             => OnLabels.Contains(src.Trim().ToLower());
 
-        static string[] OnLabels 
+        static string[] OnLabels
             => new string[]{"on", "1", "enabled", "true", "yes"};
-            
+
         /// <summary>
         /// Constructs a disabled bit
         /// </summary>
-        public static bit Off 
+        public static bit Off
         {
              [MethodImpl(Inline)]
              get  => new bit(0u);
@@ -80,20 +80,20 @@ namespace Z0
         /// <summary>
         /// Constructs an enabled bit
         /// </summary>
-        public static bit On 
+        public static bit On
         {
              [MethodImpl(Inline)]
              get  => new bit(1u);
         }
 
-        public static bit[] B01 
+        public static bit[] B01
         {
             [MethodImpl(Inline)]
             get => new bit[]{Off,On};
         }
 
         [MethodImpl(Inline), Op]
-        public unsafe static bit From(bool src)        
+        public unsafe static bit From(bool src)
         {
             uint state = *((byte*)(&src));
             return new bit(state);
@@ -178,7 +178,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static sbyte set(sbyte src, byte pos, bit state)            
+        public static sbyte set(sbyte src, byte pos, bit state)
         {
             var c = ~(sbyte)state + 1;
             src ^= (sbyte)((c ^ src) & (1 << pos));
@@ -192,7 +192,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static byte set(byte src, byte pos, bit state)            
+        public static byte set(byte src, byte pos, bit state)
         {
             var c = ~(byte)state + 1;
             src ^= (byte)((c ^ src) & (1 << pos));
@@ -206,7 +206,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static short set(short src, byte pos, bit state)            
+        public static short set(short src, byte pos, bit state)
         {
             var c = ~(short)state + 1;
             src ^= (short)((c ^ src) & (1 << pos));
@@ -220,7 +220,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static ushort set(ushort src, byte pos, bit state)            
+        public static ushort set(ushort src, byte pos, bit state)
         {
             var c = ~(ushort)state + 1;
             src ^= (ushort)((c ^ src) & (1 << pos));
@@ -234,7 +234,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static int set(int src, byte pos, bit state)            
+        public static int set(int src, byte pos, bit state)
         {
             var c = ~(int)state + 1;
             src ^= (c ^ src) & (1 << pos);
@@ -248,7 +248,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static uint set(uint src, byte pos, bit state)            
+        public static uint set(uint src, byte pos, bit state)
         {
             var c = ~(uint)state + 1u;
             src ^= (c ^ src) & (1u << pos);
@@ -262,7 +262,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static long set(long src, byte pos, bit state)            
+        public static long set(long src, byte pos, bit state)
         {
             var c = ~(long)state + 1L;
             src ^= (c ^ src) & (1L << pos);
@@ -282,7 +282,7 @@ namespace Z0
             src ^= (c ^ src) & (1ul << pos);
             return src;
         }
-         
+
         /// <summary>
         /// The identity function
         /// </summary>
@@ -297,7 +297,7 @@ namespace Z0
         /// <param name="a">The left bit</param>
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline), Op]
-        public static bit and(bit a, bit b) 
+        public static bit and(bit a, bit b)
             => Wrap(a.state & b.state);
 
         /// <summary>
@@ -306,7 +306,7 @@ namespace Z0
         /// <param name="a">The left bit</param>
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline), Op]
-        public static bit or(bit a, bit b) 
+        public static bit or(bit a, bit b)
             => Wrap(a.state | b.state);
 
         /// <summary>
@@ -567,7 +567,7 @@ namespace Z0
         /// <param name="a">The left bit</param>
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline)]
-        public static bit operator + (bit a, bit b) 
+        public static bit operator + (bit a, bit b)
             => Wrap(a.state ^ b.state);
 
         /// <summary>
@@ -576,7 +576,7 @@ namespace Z0
         /// <param name="a">The left bit</param>
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline)]
-        public static bit operator & (bit a, bit b) 
+        public static bit operator & (bit a, bit b)
             => and(a,b);
 
         /// <summary>
@@ -585,16 +585,16 @@ namespace Z0
         /// <param name="a">The left bit</param>
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline)]
-        public static bit operator | (bit a, bit b) 
+        public static bit operator | (bit a, bit b)
             => or(a,b);
-            
+
         /// <summary>
         /// Computes the bitwise XOR between the operands
         /// </summary>
         /// <param name="a">The left bit</param>
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline)]
-        public static bit operator ^ (bit a, bit b) 
+        public static bit operator ^ (bit a, bit b)
             => xor(a,b);
 
         /// <summary>
@@ -602,7 +602,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source bit</param>
         [MethodImpl(Inline)]
-        public static bit operator ~ (bit a) 
+        public static bit operator ~(bit a)
             => not(a);
 
         /// <summary>
@@ -610,7 +610,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source bit</param>
         [MethodImpl(Inline)]
-        public static bit operator ! (bit a) 
+        public static bit operator !(bit a)
             => not(a);
 
         [MethodImpl(Inline)]
@@ -634,14 +634,14 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public bool Equals(bit b)
-            => state == b.state; 
+            => state == b.state;
 
         public override bool Equals(object b)
             => b is bit x && Equals(x);
 
         public override int GetHashCode()
-            => (int)state; 
-        
+            => (int)state;
+
         public string Format()
             => state.ToString();
 
@@ -689,7 +689,7 @@ namespace Z0
             => BitConversionOps.from<T>(src);
 
         [MethodImpl(Inline)]
-        public bit Convert<T>(T src) 
+        public bit Convert<T>(T src)
             => BitConversionOps.to<T>(src);
 
         [MethodImpl(Inline)]

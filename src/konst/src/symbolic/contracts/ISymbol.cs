@@ -50,7 +50,6 @@ namespace Z0
         /// The <typeparamref name='T' />-cell value
         /// </summary>
         T Cell => Unsafe.As<S,T>(ref edit(Value));
-
     }
 
     public interface ISymbol<S,N,T> : ISymbol<S,T>

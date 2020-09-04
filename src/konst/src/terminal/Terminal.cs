@@ -70,10 +70,10 @@ namespace Z0
         /// </summary>
         /// <param name="c">The char to emit</param>
         /// <param name="severity">The severity</param>
-        public void WriteChar(char c, MessageFlair? color = null)
-            => Write(c, (ConsoleColor)(color ?? MessageFlair.Yellow));
+        public void WriteChar(char c, FlairKind? color = null)
+            => Write(c, (ConsoleColor)(color ?? FlairKind.Warning));
 
-        public void WriteMessage(IAppMsg msg, MessageFlair? color = null)
+        public void WriteMessage(IAppMsg msg, FlairKind? color = null)
         {
             if(msg.Kind == MessageKind.Error)
                 WriteError(msg);
@@ -91,7 +91,7 @@ namespace Z0
             }
         }
 
-        public void WriteLine<F>(F src, MessageFlair color)
+        public void WriteLine<F>(F src, FlairKind color)
             where F : ITextual
         {
             lock(TermLock)
@@ -103,7 +103,7 @@ namespace Z0
             }
         }
 
-        public void WriteLines<F>(MessageFlair color, params F[] src)
+        public void WriteLines<F>(FlairKind color, params F[] src)
             where F : ITextual
         {
             lock(TermLock)
@@ -149,7 +149,7 @@ namespace Z0
             return Console.ReadKey().KeyChar;
         }
 
-        void WriteLine(object src, MessageFlair color)
+        void WriteLine(object src, FlairKind color)
         {
             lock(TermLock)
             {
@@ -219,15 +219,15 @@ namespace Z0
         }
 
         public void WriteLine(object sr)
-            => WriteLine(sr, MessageFlair.Green);
+            => WriteLine(sr, FlairKind.Status);
 
         public void Warn(string description)
             => WriteWarning((object)description);
 
         public void Info(string message)
-            => WriteLine((object)message, MessageFlair.Green);
+            => WriteLine((object)message, FlairKind.Status);
 
-        public void WriteLine(string message, MessageFlair color)
+        public void WriteLine(string message, FlairKind color)
             => WriteLine((object)message, color);
     }
 }

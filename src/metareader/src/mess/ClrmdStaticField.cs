@@ -12,24 +12,24 @@ namespace Z0.MS
     public class ClrmdStaticField : ClrStaticField
     {
         private ulong _address = ulong.MaxValue - 1;
-        
+
         private readonly IFieldHelpers _helpers;
-        
+
         private string? _name;
-        
+
         private ClrType? _type;
-        
+
         private FieldAttributes _attributes = FieldAttributes.ReservedMask;
 
-        public override ClrElementType ElementType { get; }
+        public override ClrTypeCode ElementType { get; }
 
-        public override bool IsObjectReference 
+        public override bool IsObjectReference
             => ElementType.IsObjectReference();
 
-        public override bool IsValueType 
+        public override bool IsValueType
             => ElementType.IsValueType();
 
-        public override bool IsPrimitive 
+        public override bool IsPrimitive
             => ElementType.IsPrimitive();
 
         public override string? Name
@@ -55,11 +55,11 @@ namespace Z0.MS
             }
         }
 
-        public override int Size 
+        public override int Size
             => ClrmdField.GetSize(Type, ElementType);
 
         public override int Token { get; }
-        
+
         public override int Offset { get; }
 
         public override ClrType Parent { get; }
@@ -194,5 +194,5 @@ namespace Z0.MS
 
             return obj.AsString();
         }
-    }    
+    }
 }

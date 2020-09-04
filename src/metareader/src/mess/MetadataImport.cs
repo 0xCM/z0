@@ -43,7 +43,7 @@ namespace Z0
         private GetCustomAttributeByNameDelegate _getCustomAttributeByName;
 
         private EnumGenericParamsDelegate _enumGenericParams;
-        
+
         private GetGenericParamPropsDelegate _getGenericParamProps;
 
         public MetadataImport(DacLibrary library, IntPtr pUnknown)
@@ -51,7 +51,8 @@ namespace Z0
         {
         }
 
-        private ref readonly IMetaDataImportVTable VTable => ref Unsafe.AsRef<IMetaDataImportVTable>(_vtable);
+        private ref readonly IMetaDataImportVTable VTable
+            => ref Unsafe.AsRef<IMetaDataImportVTable>(_vtable);
 
         public IEnumerable<int> EnumerateInterfaceImpls(int token)
         {
@@ -352,6 +353,6 @@ namespace Z0
             char* wzname,
             int cchName,
             out int pchName);
-    }   
+    }
 
 }

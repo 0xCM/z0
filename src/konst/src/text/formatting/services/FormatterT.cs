@@ -12,10 +12,10 @@ namespace Z0
 
     public readonly struct Formatter<T> : IFormatter<T>
     {
-        readonly FormatFx.Format<T> Fx;
+        readonly FormatFunctions.Format<T> Fx;
 
         [MethodImpl(Inline)]
-        public Formatter(FormatFx.Format<T> render)
+        public Formatter(FormatFunctions.Format<T> render)
             => Fx = render;
 
         [MethodImpl(Inline)]

@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <param name="value"></param>
         [MethodImpl(Inline)]
-        public ClrDataAddress(long value) 
+        public ClrDataAddress(long value)
             => Value = value;
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="cda">The address to convert.</param>
         [MethodImpl(Inline)]
-        public static implicit operator ulong(ClrDataAddress cda) 
+        public static implicit operator ulong(ClrDataAddress cda)
             => cda.AsUInt64();
 
         /// <summary>
@@ -47,8 +47,7 @@ namespace Z0
         /// </summary>
         /// <returns>The value of this address and un-sign extends the value if appropriate.</returns>
         [MethodImpl(Inline)]
-        ulong AsUInt64() 
+        ulong AsUInt64()
             => IntPtr.Size == 4  ? unchecked((uint)Value)  : unchecked((ulong)Value);
-    }        
-
+    }
 }

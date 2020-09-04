@@ -17,23 +17,23 @@ namespace Z0.MS
     {
         protected ITypeHelpers Helpers {get;}
 
-        protected IDataReader DataReader 
+        protected IDataReader DataReader
             => Helpers.DataReader;
 
         string? _name;
-        
+
         TypeAttributes _attributes;
-        
+
         ulong _loaderAllocatorHandle = ulong.MaxValue - 1;
 
         ImmutableArray<ClrMethod> _methods;
-        
+
         ImmutableArray<ClrInstanceField> _fields;
-        
+
         ImmutableArray<ClrStaticField> _statics;
 
-        ClrElementType _elementType;
-        
+        ClrTypeCode _elementType;
+
         GCDesc _gcDesc;
 
         public override string? Name
@@ -60,7 +60,7 @@ namespace Z0.MS
 
         public override GCDesc GCDesc => GetOrCreateGCDesc();
 
-        public override ClrElementType ElementType 
+        public override ClrTypeCode ElementType
             => GetElementType();
 
         public bool Shared { get; }
@@ -189,48 +189,48 @@ namespace Z0.MS
             return result;
         }
 
-        private ClrElementType GetElementType()
+        private ClrTypeCode GetElementType()
         {
-            if (_elementType != ClrElementType.Unknown)
+            if (_elementType != ClrTypeCode.None)
                 return _elementType;
 
             if (this == Heap.ObjectType)
-                return _elementType = ClrElementType.Object;
+                return _elementType = ClrTypeCode.Object;
 
             if (this == Heap.StringType)
-                return _elementType = ClrElementType.String;
+                return _elementType = ClrTypeCode.String;
 
             if (ComponentSize > 0)
-                return _elementType = StaticSize > (uint)(3 * IntPtr.Size) ? ClrElementType.Array : ClrElementType.SZArray;
+                return _elementType = StaticSize > (uint)(3 * IntPtr.Size) ? ClrTypeCode.Array : ClrTypeCode.Cells;
 
             ClrType? baseType = BaseType;
             if (baseType is null || baseType == Heap.ObjectType)
-                return _elementType = ClrElementType.Object;
+                return _elementType = ClrTypeCode.Object;
 
             if (baseType.Name != "System.ValueType")
             {
-                ClrElementType et = baseType.ElementType;
+                ClrTypeCode et = baseType.ElementType;
                 return _elementType = et;
             }
 
             return _elementType = Name switch
             {
-                "System.Int32" => ClrElementType.Int32,
-                "System.Int16" => ClrElementType.Int16,
-                "System.Int64" => ClrElementType.Int64,
-                "System.IntPtr" => ClrElementType.NativeInt,
-                "System.UInt16" => ClrElementType.UInt16,
-                "System.UInt32" => ClrElementType.UInt32,
-                "System.UInt64" => ClrElementType.UInt64,
-                "System.UIntPtr" => ClrElementType.NativeUInt,
-                "System.Boolean" => ClrElementType.Boolean,
-                "System.Single" => ClrElementType.Float,
-                "System.Double" => ClrElementType.Double,
-                "System.Byte" => ClrElementType.UInt8,
-                "System.Char" => ClrElementType.Char,
-                "System.SByte" => ClrElementType.Int8,
-                "System.Enum" => ClrElementType.Int32,
-                _ => ClrElementType.Struct,
+                "System.Int32" => ClrTypeCode.Int32i,
+                "System.Int16" => ClrTypeCode.Int16i,
+                "System.Int64" => ClrTypeCode.Int64i,
+                "System.IntPtr" => ClrTypeCode.IntI,
+                "System.UInt16" => ClrTypeCode.Int16u,
+                "System.UInt32" => ClrTypeCode.Int32u,
+                "System.UInt64" => ClrTypeCode.Int64u,
+                "System.UIntPtr" => ClrTypeCode.IntU,
+                "System.Boolean" => ClrTypeCode.Bool8,
+                "System.Single" => ClrTypeCode.Float32,
+                "System.Double" => ClrTypeCode.Float64,
+                "System.Byte" => ClrTypeCode.Int8u,
+                "System.Char" => ClrTypeCode.Char16,
+                "System.SByte" => ClrTypeCode.Int8i,
+                "System.Enum" => ClrTypeCode.Int32i,
+                _ => ClrTypeCode.Struct,
             };
         }
 
@@ -283,9 +283,9 @@ namespace Z0.MS
 
         public override bool IsFinalizable => Methods.Any(method => method.IsVirtual && method.Name == "Finalize");
 
-        public override bool IsArray 
+        public override bool IsArray
             => ComponentSize != 0 && !IsString && !IsFree;
-        public override bool IsCollectible 
+        public override bool IsCollectible
             => LoaderAllocatorHandle != 0;
 
         public override ulong LoaderAllocatorHandle
@@ -301,7 +301,7 @@ namespace Z0.MS
             }
         }
 
-        public override bool IsString 
+        public override bool IsString
             => this == Heap.StringType;
 
         public override ImmutableArray<ClrInstanceField> Fields
@@ -353,23 +353,23 @@ namespace Z0.MS
             }
         }
 
-        public override ClrStaticField? GetStaticFieldByName(string name) 
+        public override ClrStaticField? GetStaticFieldByName(string name)
             => StaticFields.FirstOrDefault(f => f.Name == name);
 
-        public override ClrInstanceField? GetFieldByName(string name) 
+        public override ClrInstanceField? GetFieldByName(string name)
             => Fields.FirstOrDefault(f => f.Name == name);
 
-        public override ulong GetArrayElementAddress(ulong objRef, int index) 
+        public override ulong GetArrayElementAddress(ulong objRef, int index)
             => throw new InvalidOperationException($"{Name} is not an array.");
-        
-        public override object? GetArrayElementValue(ulong objRef, int index) 
+
+        public override object? GetArrayElementValue(ulong objRef, int index)
             => throw new InvalidOperationException($"{Name} is not an array.");
-        
-        public override T[]? GetArrayElementValues<T>(ulong objRef, int count) 
+
+        public override T[]? GetArrayElementValues<T>(ulong objRef, int count)
             => throw new InvalidOperationException($"{Name} is not an array.");
 
         // convenience function for testing
-        public static string? FixGenerics(string? name) 
+        public static string? FixGenerics(string? name)
             => RuntimeBuilder.FixGenerics(name);
 
         private void InitFlags()

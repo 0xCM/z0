@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="fx">A function that produces text from an element value</param>
         /// <typeparam name="T">The type of element to render</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static TitleFormatter<T> title<T>(FormatFx.FormatTitle<T> fx)
+        public static TitleFormatter<T> title<T>(FormatFunctions.FormatTitle<T> fx)
             => new TitleFormatter<T>(fx);
     }
 }

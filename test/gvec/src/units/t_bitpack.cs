@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    
+
     using static Konst;
     using static z;
 
@@ -23,8 +23,8 @@ namespace Z0
                 Claim.eq(bitseq.CellCount,n4);
 
                 var packed = BitPack.pack(bitseq,mod);
-                Trace("bitstring", bs, MessageFlair.Magenta);
-                Trace("bitseq", bitseq.Format(), MessageFlair.Magenta);
+                Trace("bitstring", bs, FlairKind.Running);
+                Trace("bitseq", bitseq.Format(), FlairKind.Running);
 
                 Claim.eq(bs.TakeScalar<byte>(), packed);
             }
@@ -37,7 +37,7 @@ namespace Z0
                 var src = Random.Next<ushort>();
                 var dst = Blocks.alloc<byte>(n128);
 
-                BitPack.unpack(src, dst);            
+                BitPack.unpack(src, dst);
                 unpack_check(src,dst);
 
                 var rebound = BitPack.pack(dst,n8);
@@ -54,7 +54,7 @@ namespace Z0
                 BitPack.unpack(src, dst);
 
                 unpack_check(src,dst);
-                
+
                 var rebound = BitPack.pack(dst,n8);
                 Claim.eq(src,rebound);
             }
@@ -69,7 +69,7 @@ namespace Z0
                 BitPack.unpack(src, dst);
 
                 unpack_check(src,dst.Data);
-                
+
                 var rebound = BitPack.pack(dst,n8);
                 Claim.eq(src,rebound);
             }
@@ -107,7 +107,7 @@ namespace Z0
         {
             var count = n32;
             var block = n256;
-            
+
             for(var sample = 0; sample<RepCount; sample++)
             {
                 var bs = Random.BitString(count);
@@ -125,7 +125,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var bits = Random.BitStream32().Take(Random.Next<uint>(5,25)).ToSpan();
-                
+
                 var expect = 0u;
                 for(var j=0; j<bits.Length; j++)
                     expect |= (uint)bits[j] << j;
@@ -133,7 +133,7 @@ namespace Z0
                 buffer.Clear();
                 bits.CopyTo(buffer);
                 var result = BitPack.pack<uint>(buffer);
-                
+
                 Claim.eq(expect, result);
 
             }

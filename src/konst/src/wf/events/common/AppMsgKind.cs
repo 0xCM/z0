@@ -12,61 +12,61 @@ namespace Z0
         /// <summary>
         /// Boring
         /// </summary>
-        Unspecified = MessageFlair.Unspecified,
+        Unspecified = FlairKind.Unspecified,
 
         /// <summary>
         /// Identifies chatty content
         /// </summary>
-        Babble = MessageFlair.DarkGray,
+        Babble = FlairKind.Initializing,
 
         /// <summary>
         /// Identifies informational content
         /// </summary>
-        Info = MessageFlair.Green,
+        Info = FlairKind.Status,
 
         /// <summary>
         /// Identifies warning content
         /// </summary>
-        Warning = MessageFlair.Yellow,
+        Warning = FlairKind.Warning,
 
         /// <summary>
         /// Identifies error content
         /// </summary>
-        Error = MessageFlair.Red,
+        Error = FlairKind.Error,
 
         /// <summary>
         /// Identifies benchmark/timing result
         /// </summary>
-        Benchmark = MessageFlair.Magenta,
+        Benchmark = FlairKind.Running,
 
         /// <summary>
         /// Dark blue foreground
         /// </summary>
-        HiliteBD = MessageFlair.DarkBlue,
+        HiliteBD = FlairKind.Created,
 
         /// <summary>
         /// Light blue foreground
         /// </summary>
-        HiliteBL = MessageFlair.Blue,
+        HiliteBL = FlairKind.Blue,
 
         /// <summary>
         /// Dark cyan foreground
         /// </summary>
-        HiliteCD = MessageFlair.DarkCyan,
+        HiliteCD = FlairKind.DarkCyan,
 
         /// <summary>
         /// Cyan foreground
         /// </summary>
-        HiliteCL = MessageFlair.Cyan,
+        HiliteCL = FlairKind.Ran,
 
         /// <summary>
         /// Dark magenta foreground
         /// </summary>
-        HiliteMD = MessageFlair.DarkMagenta,
+        HiliteMD = FlairKind.DarkMagenta,
 
         /// <summary>
         /// Magenta foreground
         /// </summary>
-        HiliteML = MessageFlair.Magenta,
+        HiliteML = FlairKind.Running,
     }
 }

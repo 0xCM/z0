@@ -14,12 +14,12 @@ namespace Z0
     static class FsmMessages
     {
         public static AppMsg Transition<S>(string machine, S s1, S s2)
-            => AppMsg.colorize($"{machine} Transitioned {s1} -> {s2}", MessageFlair.Cyan);
+            => AppMsg.colorize($"{machine} Transitioned {s1} -> {s2}", FlairKind.Ran);
 
         public static AppMsg Completed(string machine, FsmStats stats, bool asPlanned)
             => AppMsg.colorize($"{machine} executed for {stats.Runtime.Ms} ms and completed"
             + (asPlanned ? $" as planned after receiving {stats.ReceiptCount} events and experiencing {stats.TransitionCount} transitions" : " abnormally"),
-                MessageFlair.Blue);
+                FlairKind.Blue);
 
         public static AppMsg Receipt<E>(string machine, E input, ulong receipts)
             => AppMsg.babble($"{machine} received event {input.ToString().PadLeft(6)} | Total Receipts: {receipts}");

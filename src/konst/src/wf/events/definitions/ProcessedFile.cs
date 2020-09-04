@@ -32,10 +32,10 @@ namespace Z0
 
             public uint ProcessedSize {get;}
 
-            public MessageFlair Flair {get;}
+            public FlairKind Flair {get;}
 
             [MethodImpl (Inline)]
-            public ProcessedFile(string worker, T kind, FilePath src, uint size, CorrelationToken ct, MessageFlair flair = Ran)
+            public ProcessedFile(string worker, T kind, FilePath src, uint size, CorrelationToken ct, FlairKind flair = Ran)
             {
                 EventId = evid (EventName, ct);
                 ActorName = worker;
@@ -47,7 +47,7 @@ namespace Z0
             }
 
             [MethodImpl (Inline)]
-            public ProcessedFile(WfStepId step, T content, WfDataFlow<FS.FilePath> flow, uint size, CorrelationToken ct, MessageFlair flair = Ran)
+            public ProcessedFile(WfStepId step, T content, WfDataFlow<FS.FilePath> flow, uint size, CorrelationToken ct, FlairKind flair = Ran)
             {
                 EventId = (EventName, step, ct);
                 ActorName = step.Name;

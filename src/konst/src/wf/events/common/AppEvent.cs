@@ -12,13 +12,13 @@ namespace Z0
     public readonly struct AppEvent : IAppEvent<AppEvent, string>
     {
         public EventId Id {get;}
-        
+
         public string Data {get;}
-        
-        public MessageFlair Flair {get;}        
+
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public AppEvent(EventId id, string data, MessageFlair flair)
+        public AppEvent(EventId id, string data, FlairKind flair)
         {
             Id = id;
             Data = data;

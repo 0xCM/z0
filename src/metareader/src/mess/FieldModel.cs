@@ -12,35 +12,35 @@ namespace Z0.Dac
 
     public readonly struct FieldModel
     {
-        public FieldModel(ClrElementType type, FieldData data)
+        public FieldModel(ClrTypeCode type, FieldData data)
         {
             ElementType = type;
             Data = data;
         }
-        
-        public readonly ClrElementType ElementType;        
-        
+
+        public readonly ClrTypeCode ElementType;
+
         public readonly FieldData Data;
 
-        public uint Token 
+        public uint Token
             =>  Data.FieldToken;
 
-        public uint Offset 
+        public uint Offset
             => Data.Offset;
 
-        public ulong TypeMethodTable 
+        public ulong TypeMethodTable
             => Data.TypeMethodTable;
 
-        public ulong NextField 
+        public ulong NextField
             => Data.NextField;
 
-        public bool IsContextLocal 
+        public bool IsContextLocal
             => Data.IsContextLocal != 0;
-        
-        public bool IsStatic 
+
+        public bool IsStatic
             => Data.IsStatic != 0;
-        
-        public bool IsThreadLocal 
+
+        public bool IsThreadLocal
             => Data.IsThreadLocal != 0;
     }
 }

@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     partial struct Konst
     {
         /// <summary>
@@ -105,7 +105,7 @@ namespace Z0
         /// Identifies term 19 of a bit sequence
         /// </summary>
         public const byte Bit19 = 19;
- 
+
         /// <summary>
         /// Identifies term 20 of a bit sequence
         /// </summary>
@@ -155,7 +155,7 @@ namespace Z0
         /// Identifies term 29 of a bit sequence
         /// </summary>
         public const byte Bit29 = 29;
- 
+
         /// <summary>
         /// Identifies term 30 of a bit sequence
         /// </summary>
@@ -204,7 +204,7 @@ namespace Z0
         /// <summary>
         /// Identifies term 39 of a bit sequence
         /// </summary>
-        public const byte Bit39 = 39; 
+        public const byte Bit39 = 39;
 
         /// <summary>
         /// Identifies term 40 of a bit sequence
@@ -254,6 +254,6 @@ namespace Z0
         /// <summary>
         /// Identifies term 49 of a bit sequence
         /// </summary>
-        public const byte Bit49 = 49;          
+        public const byte Bit49 = 49;
     }
 }

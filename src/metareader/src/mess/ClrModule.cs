@@ -10,9 +10,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Diagnostics;
 
-    using Z0.Image;    
-    using Z0.MS;
-    
+    using Z0.Image;
+
     /// <summary>
     /// Represents a managed module in the target process.
     /// </summary>
@@ -168,6 +167,6 @@ namespace Z0
         }
 
         public static bool operator !=(ClrModule left, ClrModule right) => !(left == right);
-    }      
+    }
 
 }

@@ -21,8 +21,8 @@ namespace Z0
 
         public readonly GlobalCodeIndex Index;
 
-        public MessageFlair Flair
-            => MessageFlair.Cyan;
+        public FlairKind Flair
+            => FlairKind.Ran;
 
         [MethodImpl(Inline)]
         public CreatedPartIndex(string worker, GlobalCodeIndex index, CorrelationToken ct)

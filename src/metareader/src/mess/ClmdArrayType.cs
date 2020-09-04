@@ -8,8 +8,6 @@ namespace Z0.MS
 {
     using System;
 
-    using Z0.Dac;
-    
     using static ClrDataModel;
 
     public sealed class ClrmdArrayType : ClrmdType
@@ -70,7 +68,7 @@ namespace Z0.MS
                 return null;
 
             ClrType? componentType = ComponentType;
-            ClrElementType cet;
+            ClrTypeCode cet;
             if (componentType != null)
             {
                 cet = componentType.ElementType;
@@ -85,10 +83,10 @@ namespace Z0.MS
                 cet = data.ElementType;
             }
 
-            if (cet == ClrElementType.Unknown)
+            if (cet == ClrTypeCode.None)
                 return null;
 
-            if (cet == ClrElementType.String)
+            if (cet == ClrTypeCode.String)
                 address = DataReader.ReadPointer(address);
 
             return ValueReader.GetValueAtAddress(Heap, DataReader, cet, address);
@@ -98,7 +96,7 @@ namespace Z0.MS
         {
             ulong address = GetArrayElementAddress(objRef, 0);
             ClrType? componentType = ComponentType;
-            ClrElementType cet;
+            ClrTypeCode cet;
             if (componentType != null)
             {
                 cet = componentType.ElementType;
@@ -113,7 +111,7 @@ namespace Z0.MS
                 cet = data.ElementType;
             }
 
-            if (cet == ClrElementType.Unknown)
+            if (cet == ClrTypeCode.None)
                 return null;
 
             if (address == 0)

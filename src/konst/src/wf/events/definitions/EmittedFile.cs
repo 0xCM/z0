@@ -20,10 +20,10 @@ namespace Z0
 
             public FS.FilePath Path {get;}
 
-            public MessageFlair Flair {get;}
+            public FlairKind Flair {get;}
 
             [MethodImpl(Inline)]
-            public EmittedFile(WfStepId step, FS.FilePath path, CorrelationToken ct, MessageFlair flair = Ran)
+            public EmittedFile(WfStepId step, FS.FilePath path, CorrelationToken ct, FlairKind flair = Ran)
             {
                 EventId = (EventName, step, ct);
                 StepId = step;

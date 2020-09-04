@@ -17,19 +17,19 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
-        public static string FormatBits<T>(this Vector128<T> src, int? maxbits = null,  bool tlz = false, bool specifier = false, int? blockWidth = null, 
+        public static string FormatBits<T>(this Vector128<T> src, int? maxbits = null,  bool tlz = false, bool specifier = false, int? blockWidth = null,
             char? blocksep = null, int? rowWidth = null)
-                where T : unmanaged        
-                    => src.ToBitString(maxbits).Format(RenderOptions.bits(tlz, specifier, blockWidth, blocksep, rowWidth,null));
-        
+                where T : unmanaged
+                    => src.ToBitString(maxbits).Format(FormatOptions.bits(tlz, specifier, blockWidth, blocksep, rowWidth,null));
+
         /// <summary>
         /// Formats vector bits
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
-        public static string FormatBits<T>(this Vector256<T> src, int? maxbits = null, bool tlz = false, bool specifier = false, int? blockWidth = null, 
+        public static string FormatBits<T>(this Vector256<T> src, int? maxbits = null, bool tlz = false, bool specifier = false, int? blockWidth = null,
             char? blocksep = null, int? rowWidth = null)
-                where T : unmanaged        
-                    =>  src.ToBitString(maxbits).Format(RenderOptions.bits(tlz, specifier, blockWidth, blocksep, rowWidth,null));
+                where T : unmanaged
+                    =>  src.ToBitString(maxbits).Format(FormatOptions.bits(tlz, specifier, blockWidth, blocksep, rowWidth,null));
     }
 }

@@ -76,7 +76,7 @@ namespace Z0
             }
             else
             {
-                msg = AppMsg.colorize("Nothing there", MessageFlair.Gray);
+                msg = AppMsg.colorize("Nothing there", FlairKind.Disposed);
                 return true;
             }
         }

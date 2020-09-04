@@ -25,10 +25,10 @@ namespace Z0.Asm
 
         public readonly FilePath Target;
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public CilCodeSaved(WfStepId step, ApiHostUri host, uint count, FilePath dst, CorrelationToken ct, MessageFlair flair = Ran)
+        public CilCodeSaved(WfStepId step, ApiHostUri host, uint count, FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = evid(EventName, ct);
             StepId = step;

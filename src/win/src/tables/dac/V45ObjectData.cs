@@ -15,44 +15,44 @@ namespace Z0.Dac
     public struct V45ObjectData : IObjectData
     {
         public ClrDataAddress MethodTable;
- 
+
         public uint ObjectType;
- 
+
         public ulong Size;
- 
+
         public ClrDataAddress ElementTypeHandle;
- 
+
         public uint ElementType;
- 
+
         public uint Rank;
- 
+
         public ulong NumComponents;
- 
+
         public ulong ComponentSize;
- 
+
         public ClrDataAddress ArrayDataPointer;
- 
+
         public ClrDataAddress ArrayBoundsPointer;
- 
+
         public ClrDataAddress ArrayLowerBoundsPointer;
- 
+
         public ClrDataAddress RCW;
- 
+
         public ClrDataAddress CCW;
 
-        ClrElementType IObjectData.ElementType 
-            => (ClrElementType)ElementType;
- 
-        ulong IObjectData.ElementTypeHandle 
+        ClrTypeCode IObjectData.ElementType
+            => (ClrTypeCode)ElementType;
+
+        ulong IObjectData.ElementTypeHandle
             => ElementTypeHandle;
- 
-        ulong IObjectData.RCW 
+
+        ulong IObjectData.RCW
             => RCW;
- 
-        ulong IObjectData.CCW 
+
+        ulong IObjectData.CCW
             => CCW;
- 
-        ulong IObjectData.DataPointer 
+
+        ulong IObjectData.DataPointer
             => ArrayDataPointer;
     }
 }

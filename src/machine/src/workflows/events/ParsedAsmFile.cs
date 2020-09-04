@@ -24,10 +24,10 @@ namespace Z0
 
         public Count32 LineCount {get;}
 
-        public MessageFlair Flair {get;}
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ParsedAsmFile(WfStepId step, Count32 lines, FS.FilePath src, CorrelationToken ct, MessageFlair flair =  MessageFlair.Cyan)
+        public ParsedAsmFile(WfStepId step, Count32 lines, FS.FilePath src, CorrelationToken ct, FlairKind flair =  FlairKind.Ran)
         {
             EventId = (typeof(ParsedAsmFile), step, ct);
             StepId = step;

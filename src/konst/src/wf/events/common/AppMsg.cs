@@ -29,34 +29,34 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static AppMsg called(object content, MessageKind kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new AppMsg(content, kind, (MessageFlair)kind, caller, file, line);
+            => new AppMsg(content, kind, (FlairKind)kind, caller, file, line);
 
         [MethodImpl(Inline), Op]
         public static AppMsg define(object content, MessageKind kind)
-            => new AppMsg(content, kind, (MessageFlair)(kind), EmptyString, EmptyString, null);
+            => new AppMsg(content, kind, (FlairKind)(kind), EmptyString, EmptyString, null);
 
         [MethodImpl(Inline), Op]
-        public static AppMsg colorize(object content, MessageFlair color)
+        public static AppMsg colorize(object content, FlairKind color)
             => new AppMsg(content, MessageKind.Info, color, string.Empty, EmptyString, null);
 
         [MethodImpl(Inline), Op]
         public static AppMsg info(object content)
-            => new AppMsg(content, MessageKind.Info, MessageFlair.Green, EmptyString, EmptyString, null);
+            => new AppMsg(content, MessageKind.Info, FlairKind.Status, EmptyString, EmptyString, null);
 
         [MethodImpl(Inline), Op]
         public static AppMsg babble(object content)
-            => new AppMsg(content, MessageKind.Babble, MessageFlair.Gray, EmptyString, EmptyString, null);
+            => new AppMsg(content, MessageKind.Babble, FlairKind.Disposed, EmptyString, EmptyString, null);
 
         [MethodImpl(Inline), Op]
         public static AppMsg warn(object content)
-            => new AppMsg(content, MessageKind.Warning, MessageFlair.Yellow, EmptyString, EmptyString, null);
+            => new AppMsg(content, MessageKind.Warning, FlairKind.Warning, EmptyString, EmptyString, null);
 
         [MethodImpl(Inline), Op]
         public static AppMsg error(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => define($"{content} {caller} {line} {file}", MessageKind.Error);
 
         [MethodImpl(Inline)]
-        AppMsg(object content, MessageKind kind, MessageFlair color, string caller, string file, int? line, bool displayed = false)
+        AppMsg(object content, MessageKind kind, FlairKind color, string caller, string file, int? line, bool displayed = false)
         {
             Data = new AppMsgData<object>(content,"{0}", kind, color, source(caller, file, line));
         }
@@ -70,7 +70,7 @@ namespace Z0
         /// <summary>
         /// The message foreground color when rendered for display
         /// </summary>
-        public MessageFlair Flair
+        public FlairKind Flair
             => Data.Flair;
 
         public string Format()

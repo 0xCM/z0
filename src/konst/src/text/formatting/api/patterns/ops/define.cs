@@ -14,19 +14,19 @@ namespace Z0
     partial struct RenderPatterns
     {
         [MethodImpl(Inline)]
-        public static RenderPattern<S0,S1> define<S0,S1>(string src)
+        public static FormatPattern<S0,S1> define<S0,S1>(string src)
             => src;
 
         [MethodImpl(Inline)]
-        public static RenderPattern<S0,S1,S2> define<S0,S1,S2>(string src)
+        public static FormatPattern<S0,S1,S2> define<S0,S1,S2>(string src)
             => src;
 
         [MethodImpl(Inline)]
-        public static RenderPattern<S0,S1,S2,S3> define<S0,S1,S2,S3>(string src)
+        public static FormatPattern<S0,S1,S2,S3> define<S0,S1,S2,S3>(string src)
             => src;
 
         [MethodImpl(Inline)]
-        public static RenderPattern<S0,S1,S2,S3,S4> define<S0,S1,S2,S3,S4>(string src)
+        public static FormatPattern<S0,S1,S2,S3,S4> define<S0,S1,S2,S3,S4>(string src)
             => src;
     }
 }

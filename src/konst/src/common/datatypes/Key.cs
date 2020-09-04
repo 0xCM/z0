@@ -21,7 +21,7 @@ namespace Z0
     {
         public const string FormatPatternText = "{0}: {1}";
 
-        public static RenderPattern<N2> FormatPattern => FormatPatternText;
+        public static FormatPattern<N2> FormatPattern => FormatPatternText;
 
         /// <summary>
         /// The key discriminator

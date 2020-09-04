@@ -17,7 +17,7 @@ namespace Z0.MS
     using System.Text;
     using System.Threading;
 
-    using Z0.Dac;    
+    using Z0.Dac;
 
     public sealed class ClrmdDependentHandle : ClrHandle
     {
@@ -25,10 +25,10 @@ namespace Z0.MS
 
         public override ClrObject Object { get; }
 
-        public override ClrHandleKind HandleKind 
+        public override ClrHandleKind HandleKind
             => ClrHandleKind.Dependent;
 
-        public override uint ReferenceCount 
+        public override uint ReferenceCount
             => uint.MaxValue;
 
         public override ClrObject Dependent { get; }
@@ -43,7 +43,7 @@ namespace Z0.MS
             Dependent = dependent;
         }
     }
-    
+
     public sealed class ClrmdHandle : ClrHandle
     {
         public override ulong Address { get; }
@@ -71,7 +71,7 @@ namespace Z0.MS
             Object = obj;
             HandleKind = kind;
         }
-    }    
+    }
 
     public sealed class ClrmdRefCountedHandle : ClrHandle
     {
@@ -96,29 +96,29 @@ namespace Z0.MS
         }
     }
 
-    internal sealed unsafe class RuntimeBuilder : IRuntimeHelpers, ITypeFactory, ITypeHelpers, 
+    internal sealed unsafe class RuntimeBuilder : IRuntimeHelpers, ITypeFactory, ITypeHelpers,
         IModuleHelpers, IMethodHelpers, IClrObjectHelpers, IFieldHelpers, IAppDomainHelpers, IThreadHelpers, IExceptionHelpers, IHeapHelpers
     {
         bool _disposed;
-        
+
         readonly ClrInfo _clrInfo;
-        
+
         readonly DacLibrary _library;
-        
+
         readonly ClrDataProcess _dac;
-        
+
         readonly SOSDac _sos;
-        
+
         readonly ProcessCacheOptions _options;
-        
+
         private readonly SOSDac6? _sos6;
-        
+
         private readonly int _threads;
-        
+
         private readonly ulong _finalizer;
-        
+
         private readonly ulong _firstThread;
-        
+
         private volatile ClrType?[]? _basicTypes;
 
         private readonly Dictionary<ulong, ClrAppDomain> _domains = new Dictionary<ulong, ClrAppDomain>();
@@ -813,14 +813,14 @@ namespace Z0.MS
 
         public ClrHeap GetOrCreateHeap() => _heap;
 
-        public ClrType GetOrCreateBasicType(ClrElementType basicType)
+        public ClrType GetOrCreateBasicType(ClrTypeCode basicType)
         {
             CheckDisposed();
 
             ClrType?[]? basicTypes = _basicTypes;
             if (basicTypes is null)
             {
-                basicTypes = new ClrType[(int)ClrElementType.SZArray];
+                basicTypes = new ClrType[(int)ClrTypeCode.Cells];
                 int count = 0;
                 ClrModule bcl = GetOrCreateRuntime().BaseClassLibrary;
                 if (bcl != null && bcl.MetadataImport != null)
@@ -828,28 +828,28 @@ namespace Z0.MS
                     foreach ((ulong mt, int _) in bcl.EnumerateTypeDefToMethodTableMap())
                     {
                         string? name = _sos.GetMethodTableName(mt);
-                        ClrElementType type = name switch
+                        ClrTypeCode type = name switch
                         {
-                            "System.Boolean" => ClrElementType.Boolean,
-                            "System.Char" => ClrElementType.Char,
-                            "System.SByte" => ClrElementType.Int8,
-                            "System.Byte" => ClrElementType.UInt8,
-                            "System.Int16" => ClrElementType.Int16,
-                            "System.UInt16" => ClrElementType.UInt16,
-                            "System.Int32" => ClrElementType.Int32,
-                            "System.UInt32" => ClrElementType.UInt32,
-                            "System.Int64" => ClrElementType.Int64,
-                            "System.UInt64" => ClrElementType.UInt64,
-                            "System.Single" => ClrElementType.Float,
-                            "System.Double" => ClrElementType.Double,
-                            "System.IntPtr" => ClrElementType.NativeInt,
-                            "System.UIntPtr" => ClrElementType.NativeUInt,
-                            "System.ValueType" => ClrElementType.Struct,
-                            "System.Array" => ClrElementType.SZArray,
-                            _ => ClrElementType.Unknown,
+                            "System.Boolean" => ClrTypeCode.Bool8,
+                            "System.Char" => ClrTypeCode.Char16,
+                            "System.SByte" => ClrTypeCode.Int8i,
+                            "System.Byte" => ClrTypeCode.Int8u,
+                            "System.Int16" => ClrTypeCode.Int16i,
+                            "System.UInt16" => ClrTypeCode.Int16u,
+                            "System.Int32" => ClrTypeCode.Int32i,
+                            "System.UInt32" => ClrTypeCode.Int32u,
+                            "System.Int64" => ClrTypeCode.Int64i,
+                            "System.UInt64" => ClrTypeCode.Int64u,
+                            "System.Single" => ClrTypeCode.Float32,
+                            "System.Double" => ClrTypeCode.Float64,
+                            "System.IntPtr" => ClrTypeCode.IntI,
+                            "System.UIntPtr" => ClrTypeCode.IntU,
+                            "System.ValueType" => ClrTypeCode.Struct,
+                            "System.Array" => ClrTypeCode.Cells,
+                            _ => ClrTypeCode.None,
                         };
 
-                        if (type != ClrElementType.Unknown)
+                        if (type != ClrTypeCode.None)
                         {
                             basicTypes[(int)type - 1] = GetOrCreateType(mt, 0);
                             count++;
@@ -973,7 +973,7 @@ namespace Z0.MS
                     result = GetOrCreateType(data.ElementTypeHandle, 0);
 
                 if (result is null && data.ElementType != 0)
-                    result = GetOrCreateBasicType((ClrElementType)data.ElementType);
+                    result = GetOrCreateBasicType((ClrTypeCode)data.ElementType);
 
                 type.SetComponentType(result);
             }

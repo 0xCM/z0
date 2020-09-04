@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -13,7 +13,7 @@ namespace Z0
     using K = Hex2Kind;
 
     public readonly struct Hex2 : IHexNumber<H,K>
-    {                
+    {
         public readonly K Value;
 
         [MethodImpl(Inline)]
@@ -42,7 +42,6 @@ namespace Z0
 
         public static H Max => KMax;
 
-
         [MethodImpl(Inline)]
         public static implicit operator H(K src)
             => new H(src);
@@ -50,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator K(H src)
             => src.Value;
-        
+
         [MethodImpl(Inline)]
         public static implicit operator Hex3(Hex2 src)
             => new Hex3((byte)src.Value);
@@ -90,7 +89,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator H(Hex1Kind src)
             => new H((byte)src);
-        K IHexNumber<K>.Value 
+        K IHexNumber<K>.Value
             => Value;
 
         [MethodImpl(Inline)]

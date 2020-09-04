@@ -9,36 +9,36 @@ namespace Z0.Dac
     using System;
 
     using Z0.MS;
-    
+
     public class FieldBuilder : IFieldData, IDisposable
     {
         IFieldHelpers? _helpers;
-        
+
         FieldData _fieldData;
 
         public IFieldHelpers Helpers => _helpers!;
 
-        public ClrElementType ElementType   
-            => (ClrElementType)_fieldData.ElementType;
+        public ClrTypeCode ElementType
+            => (ClrTypeCode)_fieldData.ElementType;
 
         public int Token => (int)_fieldData.FieldToken;
 
         public int Offset => (int)_fieldData.Offset;
 
-        public ulong TypeMethodTable 
+        public ulong TypeMethodTable
             => _fieldData.TypeMethodTable;
 
         public Dac.DacObjectPool<FieldBuilder>? Owner { get; set; }
 
         public ulong NextField => _fieldData.NextField;
 
-        public bool IsContextLocal 
+        public bool IsContextLocal
             => _fieldData.IsContextLocal != 0;
-        
-        public bool IsStatic 
+
+        public bool IsStatic
             => _fieldData.IsStatic != 0;
-        
-        public bool IsThreadLocal 
+
+        public bool IsThreadLocal
             => _fieldData.IsThreadLocal != 0;
 
         internal bool Init(SOSDac sos, ulong fieldDesc, IFieldHelpers helpers)
