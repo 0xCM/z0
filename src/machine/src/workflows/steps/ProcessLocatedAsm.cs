@@ -18,10 +18,10 @@ namespace Z0
         public IWfDataBroker<Mnemonic,BasedAsmFx> Broker {get;}
 
         [MethodImpl(Inline)]
-        internal ProcessLocatedAsm(IWfShell context)
+        public ProcessLocatedAsm(IWfShell context)
         {
             Wf = context;
-            Broker = DataBrokers.broker<Mnemonic,BasedAsmFx>((int)Mnemonic.LAST);
+            Broker = AB.broker<Mnemonic,BasedAsmFx>((int)Mnemonic.LAST);
         }
 
         [MethodImpl(Inline)]

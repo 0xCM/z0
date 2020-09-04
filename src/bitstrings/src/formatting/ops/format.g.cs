@@ -6,7 +6,7 @@ namespace Z0
 {
     partial class FormatBits
     {
-        public static string format<T>(T src, BitFormatConfig config)
+        public static string format<T>(T src, BitFormat config)
             where T : struct
                 => format(z.bytes(in src), config);
     }

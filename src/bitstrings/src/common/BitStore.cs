@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static In;
     using static Root;
-    
+
     public static class BitStore
     {
         /// <summary>
@@ -48,9 +48,9 @@ namespace Z0
         /// </summary>
         /// <param name="index">A value from 0 - 255 indicating the byte of interest</param>
         [MethodImpl(Inline)]
-        public static unsafe ReadOnlySpan<byte> select(byte value)            
+        public static unsafe ReadOnlySpan<byte> select(byte value)
             => new ReadOnlySpan<byte>(bitseqP(value), 8);
-         
+
         /// <summary>
         /// Selects unpacked bits from a block of 8*256 bytes, where each byte represents 1 bit
         /// </summary>
@@ -61,7 +61,7 @@ namespace Z0
             => BitSeqData.Slice(offset,length);
 
         /// <summary>
-        /// Constructs a span of bytes where each byte, ordered from lo to hi, 
+        /// Constructs a span of bytes where each byte, ordered from lo to hi,
         /// represents a single bit in the source value
         /// </summary>
         /// <param name="src">The source value</param>
@@ -72,7 +72,7 @@ namespace Z0
         {
             var dst = sys.alloc(bitsize<T>());
             bitseq(src,dst);
-            return dst;                
+            return dst;
         }
 
         [MethodImpl(Inline)]
@@ -84,37 +84,37 @@ namespace Z0
         public static void bitseq<T>(T src, Span<byte> dst, int offset = 0)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 bitseq_u(src,dst,offset);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 bitseq_i(src,dst,offset);
-            else 
+            else
                 bitseq_f(src,dst,offset);
-        }        
+        }
 
         [MethodImpl(Inline)]
         public static void bitchars<T>(T src, Span<char> dst, int offset = 0)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 bitchars_u(src,dst,offset);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 bitchars_i(src,dst,offset);
-            else 
+            else
                 bitchars_f(src,dst,offset);
-        }        
+        }
 
         const int seglen = 8;
 
@@ -159,7 +159,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static unsafe void bitchars(sbyte src, Span<char> dst, int offset)
             => bitchars((byte)src, dst, offset);
-        
+
         [MethodImpl(Inline)]
         static unsafe void bitchars(short src, Span<char> dst, int offset)
             => bitchars((ushort)src, dst, offset);
@@ -174,11 +174,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe void bitchars(float src, Span<char> dst, int offset)
-            => bitchars(Unsigned.u32(src), dst, offset);
+            => bitchars(Sized.u32(src), dst, offset);
 
         [MethodImpl(Inline)]
         static unsafe void bitchars(double src, Span<char> dst, int offset)
-            => bitchars(Unsigned.u64(src), dst, offset);
+            => bitchars(Sized.u64(src), dst, offset);
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(byte src, Span<byte> dst, int offset)
@@ -191,19 +191,19 @@ namespace Z0
         {
             ref var target = ref head(dst);
             memory.copy(bitseqP((byte)(src >> seglen*0)), dst, offset + seglen*0, seglen);
-            memory.copy(bitseqP((byte)(src >> seglen*1)), dst, offset + seglen*1, seglen);            
+            memory.copy(bitseqP((byte)(src >> seglen*1)), dst, offset + seglen*1, seglen);
         }
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(uint src, Span<byte> dst, int offset)
-        {            
+        {
             for(var i=0; i<4; i++)
                 memory.copy(bitseqP((byte)(src >> seglen*i)), dst, offset + seglen*i, seglen);
-        }                 
+        }
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(ulong src, Span<byte> dst, int offset)
-        {            
+        {
             for(var i=0; i<8; i++)
                 memory.copy(bitseqP((byte)(src >> seglen*i)), dst, offset + seglen*i, seglen);
         }
@@ -226,11 +226,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(float src, Span<byte> dst, int offset)
-            => bitseq(Unsigned.u32(src), dst, offset);
+            => bitseq(Sized.u32(src), dst, offset);
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(double src, Span<byte> dst, int offset)
-            => bitseq(Unsigned.u64(src), dst, offset);
+            => bitseq(Sized.u64(src), dst, offset);
 
         [MethodImpl(Inline)]
         static void bitseq_i<T>(T src, Span<byte> dst, int offset)
@@ -242,9 +242,9 @@ namespace Z0
                 bitseq(int16(src),dst,offset);
             else if(typeof(T) == typeof(int))
                 bitseq(int32(src),dst,offset);
-            else 
+            else
                 bitseq(int64(src),dst,offset);
-        }        
+        }
 
         [MethodImpl(Inline)]
         static void bitseq_u<T>(T src, Span<byte> dst, int offset)
@@ -256,9 +256,9 @@ namespace Z0
                 bitseq(uint16(src),dst,offset);
             else if(typeof(T) == typeof(uint))
                 bitseq(uint32(src),dst,offset);
-            else 
+            else
                 bitseq(uint64(src),dst,offset);
-        }        
+        }
 
         [MethodImpl(Inline)]
         static void bitseq_f<T>(T src, Span<byte> dst, int offset)
@@ -268,9 +268,9 @@ namespace Z0
                 bitseq(float32(src),dst,offset);
             else if(typeof(T) == typeof(double))
                 bitseq(float64(src),dst,offset);
-            else 
+            else
                 throw Unsupported.define<T>();
-        }        
+        }
 
         [MethodImpl(Inline)]
         static void bitchars_i<T>(T src, Span<char> dst, int offset)
@@ -282,9 +282,9 @@ namespace Z0
                 bitchars(int16(src),dst,offset);
             else if(typeof(T) == typeof(int))
                 bitchars(int32(src),dst,offset);
-            else 
+            else
                 bitchars(int64(src),dst,offset);
-        }        
+        }
 
         [MethodImpl(Inline)]
         static void bitchars_u<T>(T src, Span<char> dst, int offset)
@@ -296,9 +296,9 @@ namespace Z0
                 bitchars(uint16(src),dst,offset);
             else if(typeof(T) == typeof(uint))
                 bitchars(uint32(src),dst,offset);
-            else 
+            else
                 bitchars(uint64(src),dst,offset);
-        }        
+        }
 
         [MethodImpl(Inline)]
         static void bitchars_f<T>(T src, Span<char> dst, int offset)
@@ -308,10 +308,10 @@ namespace Z0
                 bitchars(float32(src),dst,offset);
             else if(typeof(T) == typeof(double))
                 bitchars(float64(src),dst,offset);
-            else 
+            else
                 throw Unsupported.define<T>();
-        }        
-         
+        }
+
         static ReadOnlySpan<byte> PopCounts => new byte[]
         {
             0x00, 0x01, 0x01, 0x02, 0x01, 0x02, 0x02, 0x03,
@@ -346,10 +346,10 @@ namespace Z0
             0x04, 0x05, 0x05, 0x06, 0x05, 0x06, 0x06, 0x07,
             0x04, 0x05, 0x05, 0x06, 0x05, 0x06, 0x06, 0x07,
             0x05, 0x06, 0x06, 0x07, 0x06, 0x07, 0x07, 0x08,
-            
+
         };
 
-        static ReadOnlySpan<byte> BitSeqData 
+        static ReadOnlySpan<byte> BitSeqData
             => new byte[]
             {
 
@@ -869,7 +869,7 @@ namespace Z0
             0x30, 0x00, 0x30, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00,
             0x31, 0x00, 0x30, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00,
             0x30, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00,
-            0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00,            
+            0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00, 0x31, 0x00,
         };
     }
 }

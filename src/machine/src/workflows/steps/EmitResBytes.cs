@@ -65,7 +65,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(StepId);
+            Wf.Disposed(StepId);
         }
 
         void Emit(IdentifiedCodeIndex src, FolderPath dst)

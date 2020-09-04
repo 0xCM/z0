@@ -25,7 +25,7 @@ namespace Z0
                 Bits.split(x,out var x0, out var x1);
                 var y = Bits.concat(x0, x1);
                 Claim.Eq(x,y);
-                Claim.Eq(x, Unsigned.u16(new byte[]{x0, x1}));
+                Claim.Eq(x, Sized.u16(new byte[]{x0, x1}));
             }
         }
 
@@ -37,7 +37,7 @@ namespace Z0
                 Bits.split(x, out var x0, out var x1, out var x2, out var x3);
                 var y = Bits.concat(x0, x1, x2, x3);
                 Claim.Eq(x,y);
-                Claim.Eq(x, Unsigned.u32(new byte[]{x0, x1, x2, x3}));
+                Claim.Eq(x, Sized.u32(new byte[]{x0, x1, x2, x3}));
             }
         }
 
@@ -89,10 +89,7 @@ namespace Z0
                     Claim.Require(gbits.bitmatch(dst, j++, x7, pos));
                 }
             }
-
         }
-
-
 
         public void sb_pack_split_16()
         {

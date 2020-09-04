@@ -6,8 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
-    using static Bit;
+
+    using static Sized;
+
     public class t_quartet : UnitTest<t_quartet>
     {
         public void add_4u_check()
@@ -126,7 +127,7 @@ namespace Z0
             var x = (uint4)7;
             for(var i=0; i< 3; i++)
                 x++;
-            
+
             Claim.eq((uint4)10,x);
 
             for(var i=0; i< 3; i++)
@@ -146,7 +147,7 @@ namespace Z0
             var x = (uint4)7;
             for(var i=0; i< 3; i++)
                 x--;
-            
+
             Claim.eq((uint4)4,x);
 
             for(var i=0; i< 3; i++)
@@ -168,7 +169,7 @@ namespace Z0
             var z0 = (uint4)0b0100;
             Claim.eq(y0,z0);
         }
-       
+
         public void uint4_add()
         {
             var x1 = (uint4)3;
@@ -179,19 +180,7 @@ namespace Z0
             Claim.eq(y0, x1 + x2);
             Claim.eq(z0, y0 + x1);
             Claim.eq(z1, z0 + y0);
-        
+
         }
-
-        // public void uint4_hilo()
-        // {
-        //     Claim.eq((uint4)0b11, ((uint4)0b1011).Lo);
-        //     Claim.eq((uint4)0b10, ((uint4)0b1011).Hi);
-
-        //     var x0 = (uint4)0b1011;
-        //     x0.Lo = (uint4)0b01;
-        //     x0.Hi = (uint4)0b01;
-        //     var y0 = (uint4)0b0101;
-        //     Claim.eq(y0,x0);            
-        // }
     }
 }

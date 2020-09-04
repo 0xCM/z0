@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public struct BitVector16 : IBitVector<BitVector16,ushort>
     {
-        internal ushort Data;            
+        internal ushort Data;
 
         public static BitVector16 Zero => 0;
 
@@ -34,7 +34,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ushort(BitVector16 src)
-            => src.Data;        
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector32(BitVector16 src)
@@ -76,7 +76,7 @@ namespace Z0
             => BitVector.xor(x,y);
 
         /// <summary>
-        /// Computes the bitwise complement of the operand. 
+        /// Computes the bitwise complement of the operand.
         /// </summary>
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
@@ -135,7 +135,7 @@ namespace Z0
             => BitVector.srl(x,(byte)shift);
 
         /// <summary>
-        /// Arithmetically increments the source vector 
+        /// Arithmetically increments the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
@@ -143,7 +143,7 @@ namespace Z0
             => BitVector.inc(src);
 
         /// <summary>
-        /// Arithmetically decrements the source vector 
+        /// Arithmetically decrements the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
@@ -290,7 +290,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (byte)(Data >> 8);
         }
-    
+
         /// <summary>
         /// Presents bitvector content as a bytespan
         /// </summary>
@@ -307,11 +307,11 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => bit.test(Data, pos);
-            
+
             [MethodImpl(Inline)]
             set => Data = bit.set(Data, (byte)pos, value);
         }
-        
+
         /// <summary>
         /// Selects a contiguous range of bits
         /// </summary>
@@ -329,11 +329,11 @@ namespace Z0
 
         public override bool Equals(object obj)
             => obj is BitVector16 x ? Equals(x) : false;
-        
+
         public override int GetHashCode()
             => Data.GetHashCode();
-        
-         public string Format(BitFormatConfig config)
+
+         public string Format(BitFormat config)
             => BitVector.format(this,config);
 
         public string Format()

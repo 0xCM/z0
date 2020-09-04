@@ -21,24 +21,24 @@ namespace Z0
             => new SeqFormatConfig(delimiter);
 
         [MethodImpl(Inline), Op]
-        public static BitFormatConfig bits(bool tlz = false)
+        public static BitFormat bits(bool tlz = false)
             => bits(tlz:tlz, specifier:false, blockWidth:null, blocksep:null, rowWidth:null, maxbits:null,zpad:null);
 
         [MethodImpl(Inline), Op]
-        public static BitFormatConfig bitmax(int maxbits, int? zpad = null)
+        public static BitFormat bitmax(uint maxbits, int? zpad = null)
             => bits(tlz:true, maxbits: maxbits, zpad:zpad);
 
         [MethodImpl(Inline), Op]
-        public static BitFormatConfig bitblock(int width, char? sep = null, int? maxbits = null, bool specifier = false)
+        public static BitFormat bitblock(int width, char? sep = null, uint? maxbits = null, bool specifier = false)
             => bits(tlz:false, blockWidth: width, blocksep: sep, maxbits:maxbits, specifier: specifier);
 
         [MethodImpl(Inline), Op]
-        public static BitFormatConfig bitrows(int blockWidth, int rowWidth, char? blockSep = null)
+        public static BitFormat bitrows(int blockWidth, int rowWidth, char? blockSep = null)
             => bits(tlz:false, blockWidth: blockWidth, rowWidth:rowWidth, blocksep: blockSep);
 
         [MethodImpl(Inline), Op]
-        public static BitFormatConfig bits(bool tlz, bool specifier = false, int? blockWidth = null,
-            char? blocksep = null, int? rowWidth = null, int? maxbits = null, int? zpad = null)
-                => new BitFormatConfig(tlz, specifier, blockWidth, blocksep, rowWidth, maxbits,zpad);
+        public static BitFormat bits(bool tlz, bool specifier = false, int? blockWidth = null,
+            char? blocksep = null, int? rowWidth = null, uint? maxbits = null, int? zpad = null)
+                => new BitFormat(tlz, specifier, blockWidth, blocksep, rowWidth, maxbits,zpad);
     }
 }

@@ -3,13 +3,13 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-     
+
     using static Konst;
 
     public class BinaryKindGenerator : CodeGenerator
@@ -26,10 +26,10 @@ namespace Z0
         public string Namespace {get;}
             = "Z0";
 
-        public string BaseType {get;} 
+        public string BaseType {get;}
             = "byte";
 
-        public string Access {get;} 
+        public string Access {get;}
             = "public";
 
         public string TypeKind {get;}
@@ -42,17 +42,17 @@ namespace Z0
             = 0xFF;
 
         [MethodImpl(Inline)]
-        static int nlz(uint src)
-            => (int)Lzcnt.LeadingZeroCount(src);
+        static byte nlz(uint src)
+            => (byte)Lzcnt.LeadingZeroCount(src);
 
         [MethodImpl(Inline)]
-        static int effwidth(uint src)
-            => 32 - nlz(src);
+        static byte effwidth(uint src)
+            => (byte)(32 - nlz(src));
 
-        int MaxBitCount 
+        byte MaxBitCount
             => effwidth(MaxValue);
 
-        public string TypeName 
+        public string TypeName
         {
             get
             {
@@ -77,7 +77,7 @@ namespace Z0
 
             return dst.ToString();
         }
-        
+
         IEnumerable<string> Literals()
         {
             for(var i=0; i<=MaxValue; i++)
@@ -93,7 +93,7 @@ namespace Z0
         string LiteralValue(byte value)
             => text.concat("0b", Formatter.Format(value, BitFormatter.limited(MaxBitCount, MaxBitCount)));
 
-        string Literal(string Name, string Value) 
+        string Literal(string Name, string Value)
             => text.assign(Name, Value);
     }
 }

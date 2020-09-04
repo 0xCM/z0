@@ -6,7 +6,7 @@ namespace Z0
 {
     public static partial class FormatBits
     {
-        static string format(BitString src, BitFormatConfig config)
+        static string format(BitString src, BitFormat config)
             => src.Format(config.TrimLeadingZeros, config.SpecifierPrefix, config.BlockWidth, config.BlockSep, config.RowWidth);
     }
 }

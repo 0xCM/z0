@@ -49,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitSpan(Span<bit> bits)
             => this.Data = bits;
-        
+
         public Span<bit> Bits
         {
             [MethodImpl(Inline)]
@@ -75,7 +75,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref seek(Head, index);
-        }        
+        }
 
         /// <summary>
         /// Queries/Manipulates an index-identified bit
@@ -84,7 +84,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref seek(Head, index);
-        }        
+        }
 
         /// <summary>
         /// Packs a segment selection of at most 8 bits
@@ -93,7 +93,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => BitSpans.bitslice<byte>(this, offset, count);
-        }        
+        }
 
         /// <summary>
         /// Packs a segment selection of at most 16 bits
@@ -102,7 +102,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => BitSpans.bitslice<ushort>(this, offset, count);
-        }        
+        }
 
         /// <summary>
         /// Packs a segment selection of at most 32 bits
@@ -111,7 +111,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => BitSpans.bitslice<uint>(this, offset, count);
-        }        
+        }
 
         /// <summary>
         /// Packs a segment selection of at most 64 bits
@@ -120,19 +120,19 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => BitSpans.bitslice<ulong>(this, offset, count);
-        }        
+        }
 
         internal Span<uint> Bit32
             => recover<bit,uint>(Data);
 
         [MethodImpl(Inline)]
-        public string Format(BitFormatConfig? fmt = null)
+        public string Format(BitFormat? fmt = null)
             => format(this, fmt);
 
         [MethodImpl(Inline)]
         public bool Equals(in BitSpan rhs)
             => same(this, rhs);
-    
+
         public override int GetHashCode()
             => throw new NotSupportedException();
 

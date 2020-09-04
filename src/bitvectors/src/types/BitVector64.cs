@@ -7,19 +7,19 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    using static Memories;    
+    using static Konst;
+    using static Memories;
 
     /// <summary>
     /// Defines a 64-bit bitvector
     /// </summary>
     public struct BitVector64 : IBitVector<BitVector64,ulong>
-    {    
+    {
         internal ulong Data;
 
         public static BitVector64 Zero => default;
 
-        public static BitVector64 One => 1;                
+        public static BitVector64 One => 1;
 
         public static BitVector64 Ones => uint.MaxValue;
 
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static implicit operator ulong(BitVector64 src)
-            => src.Data;        
+            => src.Data;
 
         /// <summary>
         /// Explicitly converts a a 64-bit bitvector to an 8-bit bitvector
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static explicit operator BitVector4(BitVector64 src)
-            => BitVector.create(n4,(byte)src.Data);        
+            => BitVector.create(n4,(byte)src.Data);
 
         /// <summary>
         /// Explicitly converts a a 64-bit bitvector to an 8-bit bitvector
@@ -75,13 +75,13 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
         public static explicit operator BitVector32(BitVector64 src)
-            => BitVector.create(n32, (uint)src.Data);        
+            => BitVector.create(n32, (uint)src.Data);
 
         /// <summary>
         /// Implicitly converts a scalar value to a 64-bit bitvector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]    
+        [MethodImpl(Inline)]
         public static implicit operator BitVector64(byte src)
             => BitVector.create(N,src);
 
@@ -89,7 +89,7 @@ namespace Z0
         /// Implicitly converts a scalar value to a 64-bit bitvector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]    
+        [MethodImpl(Inline)]
         public static implicit operator BitVector64(ushort src)
             => BitVector.create(N,src);
 
@@ -97,7 +97,7 @@ namespace Z0
         /// Implicitly converts a scalar value to a 64-bit bitvector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]    
+        [MethodImpl(Inline)]
         public static implicit operator BitVector64(uint src)
             => BitVector.create(N,src);
 
@@ -138,7 +138,7 @@ namespace Z0
             => BitVector.dot(x,y);
 
         /// <summary>
-        /// Computes the arithmetic sum of the source operands. 
+        /// Computes the arithmetic sum of the source operands.
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -163,7 +163,7 @@ namespace Z0
             => BitVector.negate(src);
 
         /// <summary>
-        /// Arithmetically subtracts the second operand from the first. 
+        /// Arithmetically subtracts the second operand from the first.
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -359,7 +359,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => BitVector.create(n32,(uint)(Data >> 32));
-        }        
+        }
 
         /// <summary>
         /// Reads/Manipulates a source bit at a specified position
@@ -368,7 +368,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => bit.test(Data, index);
-            
+
             [MethodImpl(Inline)]
             set => Data = bit.set(Data, (byte)index, value);
         }
@@ -389,20 +389,20 @@ namespace Z0
         /// </summary>
         /// <param name="index">The 0-based byte-relative position</param>
         [MethodImpl(Inline)]
-        public ref byte Byte(int index)        
+        public ref byte Byte(int index)
             => ref Bytes[index];
-                                    
+
         [MethodImpl(Inline)]
         public readonly bool Equals(BitVector64 y)
             => Data == y.Data;
 
         public override bool Equals(object obj)
-            => obj is BitVector64 x && Equals(x); 
-        
+            => obj is BitVector64 x && Equals(x);
+
         public override int GetHashCode()
             => Data.GetHashCode();
- 
-        public string Format(BitFormatConfig config)
+
+        public string Format(BitFormat config)
             => BitVector.format(this,config);
 
          public string Format()

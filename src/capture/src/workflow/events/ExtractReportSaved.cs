@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static RenderPatterns;
     using static z;
 
-
+    [Event]
     public readonly struct ExtractReportSaved : IWfEvent<ExtractReportSaved>
     {
         public const string EventName = nameof(ExtractReportSaved);

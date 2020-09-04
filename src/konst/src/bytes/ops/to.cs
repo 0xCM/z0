@@ -11,14 +11,14 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Bytes 
+    partial struct Bytes
     {
         /// <summary>
         /// Reads a byte array from an unmanaged source value and stored the result in a caller-allocated target
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The target array</param>
-        /// <typeparam name="T">The soruce type</typeparam>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void to<T>(in T src, Span<byte> dst)
             where T : struct

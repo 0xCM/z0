@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    using static Memories;    
+    using static Konst;
+    using static Memories;
 
     /// <summary>
     /// Defines a 32-bit bitvector
@@ -56,13 +56,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator uint(BitVector32 src)
-            => src.Data;        
+            => src.Data;
 
         /// <summary>
         /// Implicitly converts a scalar value to a 32-bit bitvector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]    
+        [MethodImpl(Inline)]
         public static implicit operator BitVector32(byte src)
             => BitVector.create(N,src);
 
@@ -70,7 +70,7 @@ namespace Z0
         /// Implicitly converts a scalar value to a 32-bit bitvector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]    
+        [MethodImpl(Inline)]
         public static implicit operator BitVector32(ushort src)
             => BitVector.create(N,src);
 
@@ -119,7 +119,7 @@ namespace Z0
             => BitVector.or(x,y);
 
         /// <summary>
-        /// Computes the bitwise complement of the operand. 
+        /// Computes the bitwise complement of the operand.
         /// </summary>
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
@@ -127,7 +127,7 @@ namespace Z0
             => BitVector.not(src);
 
         /// <summary>
-        /// Computes the arithmetic sum of the source operands. 
+        /// Computes the arithmetic sum of the source operands.
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -136,7 +136,7 @@ namespace Z0
             => BitVector.add(x,y);
 
         /// <summary>
-        /// Arithmetically increments the source vector 
+        /// Arithmetically increments the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
@@ -144,7 +144,7 @@ namespace Z0
             => BitVector.inc(src);
 
         /// <summary>
-        /// Arithmetically decrements the source vector 
+        /// Arithmetically decrements the source vector
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline)]
@@ -299,7 +299,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (ushort)Bits.hi(Data);
         }
-        
+
         /// <summary>
         /// Presents bitvector content as a bytespan
         /// </summary>
@@ -334,7 +334,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => bit.test(Data, pos);
-            
+
             [MethodImpl(Inline)]
             set => Data = bit.set(Data, (byte)pos, value);
        }
@@ -359,11 +359,11 @@ namespace Z0
 
         public override bool Equals(object obj)
             => obj is BitVector32 x ? Equals(x) : false;
-        
+
         public override int GetHashCode()
             => Data.GetHashCode();
- 
-         public string Format(BitFormatConfig config)
+
+         public string Format(BitFormat config)
             => BitVector.format(this,config);
 
         public string Format()

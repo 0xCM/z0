@@ -22,30 +22,32 @@ namespace Z0
 
             public TableId Dataset {get;}
 
-            public readonly uint RowCount;
+            public Count32 RowCount {get;}
 
-            public readonly FS.FilePath Target;
+            public FS.FilePath Target {get;}
 
-            [MethodImpl (Inline)]
+            [MethodImpl(Inline)]
             public EmittedTable (WfStepId step, TableId dataset, uint count, FilePath target, CorrelationToken ct)
             {
-                EventId = z.evid (EventName, ct);
+                EventId = (EventName, step, ct);
                 StepId = step;
                 Dataset = dataset;
                 RowCount = count;
                 Target = FS.path (target.Name);
             }
 
-            [MethodImpl (Inline)]
-            public EmittedTable (WfStepId step, TableId dataset, uint count, FS.FilePath target, CorrelationToken ct)
+            [MethodImpl(Inline)]
+            public EmittedTable(WfStepId step, TableId dataset, uint count, FS.FilePath target, CorrelationToken ct)
             {
-                EventId = z.evid (EventName, ct);
+                EventId = (EventName, step, ct);
                 StepId = step;
                 Dataset = dataset;
                 RowCount = count;
                 Target = target;
             }
-            public string Format ()
+
+            [MethodImpl(Inline)]
+            public string Format()
                 => text.format(PSx5, EventId, StepId, Dataset, RowCount, Target);
 
             public override string ToString()

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Konst;    
+    using static Konst;
 
     public readonly struct BitFieldFormatter
     {
@@ -29,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string format<F>(F entry)
             where F : unmanaged, IBitFieldIndexEntry<F>
-                => $"{entry.FieldWidth.GetType().Name}[{entry.FieldIndex}] = {entry.FieldName}";        
+                => $"{entry.FieldWidth.GetType().Name}[{entry.FieldIndex}] = {entry.FieldName}";
 
         public static string[] format(in BitFieldModel src)
             => BitFieldFormatters.Service.FormatLines(src);
@@ -50,7 +50,7 @@ namespace Z0
         {
             var formatter = BitFormatter.create<T>();
             var data = Enums.scalar<V,T>(value);
-            var limit = gbits.effwidth(data);
+            var limit = (uint)gbits.effwidth(data);
             var config = BitFormatter.limited(limit);
             var name = typeof(V).Name;
             var bits = formatter.Format(data,config);
@@ -76,7 +76,7 @@ namespace Z0
                     formatted.Append(sep);
             }
 
-            formatted.Append(Chars.RBracket);            
+            formatted.Append(Chars.RBracket);
             return formatted.ToString();
         }
 

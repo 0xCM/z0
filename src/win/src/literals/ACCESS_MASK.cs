@@ -63,19 +63,19 @@ namespace Z0.MS
         /// <summary>
         /// Gets the generic rights of this value.
         /// </summary>
-        public GenericRight GenericRights 
+        public GenericRight GenericRights
             => (GenericRight)(this.Value & GenericRightsMask);
 
         /// <summary>
         /// Gets the special rights of this value.
         /// </summary>
-        public SpecialRight SpecialRights 
+        public SpecialRight SpecialRights
             => (SpecialRight)(this.Value & SpecialRightsMask);
 
         /// <summary>
         /// Gets the standard rights of this value.
         /// </summary>
-        public StandardRight StandardRights 
+        public StandardRight StandardRights
             => (StandardRight)(this.Value & StandardRightsMask);
 
         /// <summary>
@@ -86,22 +86,26 @@ namespace Z0.MS
         /// <summary>
         /// Gets the specific rights of this value for desktops.
         /// </summary>
-        public DesktopSpecificRight DesktopSpecificRights => (DesktopSpecificRight)this.SpecificRights;
+        public DesktopSpecificRight DesktopSpecificRights
+            => (DesktopSpecificRight)this.SpecificRights;
 
         /// <summary>
         /// Gets the generic rights of this value for interactive window stations.
         /// </summary>
-        public InteractiveWindowStationGenericRight InteractiveWindowStationGenericRights => (InteractiveWindowStationGenericRight)this.GenericRights;
+        public InteractiveWindowStationGenericRight InteractiveWindowStationGenericRights
+            => (InteractiveWindowStationGenericRight)this.GenericRights;
 
         /// <summary>
         /// Gets the generic rights of this value for noninteractive window stations.
         /// </summary>
-        public NonInteractiveWindowStationGenericRight NonInteractiveWindowStationGenericRights => (NonInteractiveWindowStationGenericRight)this.GenericRights;
+        public NonInteractiveWindowStationGenericRight NonInteractiveWindowStationGenericRights
+            => (NonInteractiveWindowStationGenericRight)this.GenericRights;
 
         /// <summary>
         /// Gets the specific rights of this value for window stations.
         /// </summary>
-        public WindowStationSpecificRight WindowStationSpecificRights => (WindowStationSpecificRight)this.SpecificRights;
+        public WindowStationSpecificRight WindowStationSpecificRights
+            => (WindowStationSpecificRight)this.SpecificRights;
 
         /// <summary>
         /// Converts an <see cref="int"/> into an <see cref="ACCESS_MASK"/>.
@@ -125,13 +129,15 @@ namespace Z0.MS
         /// Converts an <see cref="ACCESS_MASK"/> into an <see cref="uint"/>.
         /// </summary>
         /// <param name="value">The value of the ACCESS_MASK.</param>
-        public static implicit operator uint(ACCESS_MASK value) => value.Value;
+        public static implicit operator uint(ACCESS_MASK value)
+            => value.Value;
 
         /// <summary>
         /// Converts a <see cref="StandardRight"/> to an <see cref="ACCESS_MASK"/>.
         /// </summary>
         /// <param name="value">The value for the <see cref="ACCESS_MASK"/>.</param>
-        public static implicit operator ACCESS_MASK(StandardRight value) => new ACCESS_MASK((uint)value);
+        public static implicit operator ACCESS_MASK(StandardRight value)
+            => new ACCESS_MASK((uint)value);
 
         /// <summary>
         /// Converts a <see cref="GenericRight"/> to an <see cref="ACCESS_MASK"/>.

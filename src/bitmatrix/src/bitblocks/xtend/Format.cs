@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="rowlen">The number of bits in each row</param>
         /// <param name="maxbits">The maximum number of bits to format</param>
         /// <param name="showrow">Indicates whether the content of each row shold be preceded by the row index</param>
-        public static string FormatMatrixBits(this Span<byte> src, int rowlen, int? maxbits = null, bool showrow = false) 
+        public static string FormatMatrixBits(this Span<byte> src, int rowlen, int? maxbits = null, bool showrow = false)
         {
             var dst = BitString.bitchars(src);
             var sb = text.build();
@@ -35,7 +35,7 @@ namespace Z0
                 sb.AppendLine(rowformat);
             }
             return sb.ToString();
-        }       
+        }
 
         /// <summary>
         /// Formats the content of a generic span of primal cells as a bitmatrix
@@ -51,7 +51,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static string Format<N,T>(this BitBlock<N,T> src, BitFormatConfig? config = null)
+        public static string Format<N,T>(this BitBlock<N,T> src, BitFormat? config = null)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => src.ToBitString().Format(config);

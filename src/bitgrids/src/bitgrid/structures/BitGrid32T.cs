@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     /// <summary>
@@ -18,13 +18,13 @@ namespace Z0
     [IdentityProvider(typeof(BitGridIdentityProvider))]
     public readonly ref struct BitGrid32<T>
         where T : unmanaged
-    {                
-        internal readonly uint Data;       
+    {
+        internal readonly uint Data;
 
         /// <summary>
         /// The number of covered bits
         /// </summary>
-        public int BitCount => 32;
+        public byte BitCount => 32;
 
         /// <summary>
         /// The number of grid cells := {1 | 2 | 4}

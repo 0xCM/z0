@@ -11,6 +11,7 @@ namespace Z0.Asm
     using static Render;
     using static z;
 
+    [Event]
     public readonly struct CapturingHosts : IWfEvent<CapturingHosts>
     {
         public const string EventName = nameof(CapturingHosts);

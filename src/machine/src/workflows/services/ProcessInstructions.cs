@@ -12,7 +12,6 @@ namespace Z0
 
     using static ProcessInstructionsStep;
 
-
     public ref struct ProcessInstructions
     {
         readonly IWfShell Wf;
@@ -28,7 +27,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(StepId);
+            Wf.Disposed(StepId);
         }
 
         void ProcessJumps()

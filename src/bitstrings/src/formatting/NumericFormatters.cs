@@ -3,11 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;         
+
+    using static Konst;
 
     public static class NumericFormatters
     {
@@ -24,7 +24,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static NumericFormatter<T> get_u<T>()
-            where T : unmanaged                
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return get<U8Formatter,byte>().As<T>();
@@ -34,13 +34,13 @@ namespace Z0
                 return get<U32Formatter, uint>().As<T>();
             else if(typeof(T) == typeof(ulong))
                 return get<U64Formatter, ulong>().As<T>();
-            else    
+            else
                 return get_i<T>();
         }
 
         [MethodImpl(Inline)]
         static NumericFormatter<T> get_i<T>()
-            where T : unmanaged                
+            where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
                 return get<I8Formatter,sbyte>().As<T>();
@@ -50,26 +50,26 @@ namespace Z0
                 return get<I32Formatter, int>().As<T>();
             else if(typeof(T) == typeof(long))
                 return get<I64Formatter,long>().As<T>();
-            else    
+            else
                 return get_f<T>();
         }
 
         [MethodImpl(Inline)]
         static NumericFormatter<T> get_f<T>()
-            where T : unmanaged                
+            where T : unmanaged
         {
             if(typeof(T) == typeof(float))
                 return get<F32Formatter, float>().As<T>();
             else if(typeof(T) == typeof(double))
                 return get<F64Formatter, double>().As<T>();
-            else    
+            else
                 throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
         static F get_u<F,T>()
             where F : struct, INumericFormatter<F,T>
-            where T : unmanaged                
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
                 return generic<U8Formatter,F>(default(U8Formatter));
@@ -79,7 +79,7 @@ namespace Z0
                 return generic<U32Formatter,F>(default(U32Formatter));
             else if(typeof(T) == typeof(ulong))
                 return generic<U64Formatter,F>(default(U64Formatter));
-            else    
+            else
                 return get_i<F,T>();
         }
 
@@ -112,14 +112,14 @@ namespace Z0
             else
                 throw Unsupported.define<F>();
         }
-                     
+
         readonly struct U8Formatter : INumericFormatter<U8Formatter, byte>
         {
             [MethodImpl(Inline)]
             public string Format(byte src, NumericBaseKind @base)
                 => @base switch{
                     NumericBaseKind.Base2 => src.FormatBits(),
-                    NumericBaseKind.Base16 => src.FormatHex(),                
+                    NumericBaseKind.Base16 => src.FormatHex(),
                     _ => src.ToString()
                 };
 
@@ -134,11 +134,11 @@ namespace Z0
             public string Format(sbyte src, NumericBaseKind @base)
                 => @base switch{
                     NumericBaseKind.Base2 => src.FormatBits(),
-                    NumericBaseKind.Base16 => src.FormatHex(),                
+                    NumericBaseKind.Base16 => src.FormatHex(),
                     _ => src.ToString()
                 };
-            
-            
+
+
             [MethodImpl(Inline)]
             public NumericFormatter<I8Formatter, sbyte> Concretize()
                 => generalize<I8Formatter,sbyte>(this);
@@ -151,7 +151,7 @@ namespace Z0
             public string Format(ushort src, NumericBaseKind @base)
                 => @base switch{
                     NumericBaseKind.Base2 => src.FormatBits(),
-                    NumericBaseKind.Base16 => src.FormatHex(),                
+                    NumericBaseKind.Base16 => src.FormatHex(),
                     _ => src.ToString()
                 };
 
@@ -166,7 +166,7 @@ namespace Z0
             public string Format(short src, NumericBaseKind @base)
                 => @base switch{
                     NumericBaseKind.Base2 => src.FormatBits(),
-                    NumericBaseKind.Base16 => src.FormatHex(),                
+                    NumericBaseKind.Base16 => src.FormatHex(),
                     _ => src.ToString()
                 };
 
@@ -181,7 +181,7 @@ namespace Z0
             public string Format(int src, NumericBaseKind @base)
                 => @base switch{
                     NumericBaseKind.Base2 => src.FormatBits(),
-                    NumericBaseKind.Base16 => src.FormatHex(),                
+                    NumericBaseKind.Base16 => src.FormatHex(),
                     _ => src.ToString()
                 };
 
@@ -196,7 +196,7 @@ namespace Z0
             public string Format(uint src, NumericBaseKind @base)
                 => @base switch{
                     NumericBaseKind.Base2 => src.FormatBits(),
-                    NumericBaseKind.Base16 => src.FormatHex(),                
+                    NumericBaseKind.Base16 => src.FormatHex(),
                     _ => src.ToString()
                 };
 
@@ -211,7 +211,7 @@ namespace Z0
             public string Format(ulong src, NumericBaseKind @base)
                 => @base switch{
                     NumericBaseKind.Base2 => src.FormatBits(),
-                    NumericBaseKind.Base16 => src.FormatHex(),                
+                    NumericBaseKind.Base16 => src.FormatHex(),
                     _ => src.ToString()
                 };
 
@@ -226,7 +226,7 @@ namespace Z0
             public string Format(long src, NumericBaseKind @base)
                 => @base switch{
                     NumericBaseKind.Base2 => src.FormatBits(),
-                    NumericBaseKind.Base16 => src.FormatHex(),                
+                    NumericBaseKind.Base16 => src.FormatHex(),
                     _ => src.ToString()
                 };
 
@@ -240,7 +240,7 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format(float src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBaseKind.Base2 => Unsigned.u64(src).FormatBits(),
+                    NumericBaseKind.Base2 => Sized.u64(src).FormatBits(),
                     NumericBaseKind.Base16 => src.FormatHex(false),
                     _ => src.ToString()
                 };
@@ -255,7 +255,7 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format(double src, NumericBaseKind @base)
                 => @base switch{
-                    NumericBaseKind.Base2 => Unsigned.u64(src).FormatBits(),
+                    NumericBaseKind.Base2 => Sized.u64(src).FormatBits(),
                     NumericBaseKind.Base16 => src.FormatHex(false),
                     _ => src.ToString()
                 };
@@ -274,6 +274,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static G generic<S,G>(in S specific)
-            => Unsafe.As<S, G>(ref Unsafe.AsRef(in specific));                                   
-    }    
+            => Unsafe.As<S, G>(ref Unsafe.AsRef(in specific));
+    }
 }

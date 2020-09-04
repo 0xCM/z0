@@ -343,7 +343,7 @@ namespace Z0
         public readonly override int GetHashCode()
             => Data.GetHashCode();
 
-        public string Format(BitFormatConfig config)
+        public string Format(BitFormat config)
             => BitVector.format(this,config);
 
         public string Format()

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    using static Memories;    
+    using static Konst;
+    using static Memories;
 
     /// <summary>
     /// Defines a generic bitvector over a primal cell
@@ -128,7 +128,7 @@ namespace Z0
             => BitVector.dec(src);
 
         /// <summary>
-        /// Computes the arithmetic sum of the source operands. 
+        /// Computes the arithmetic sum of the source operands.
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -137,7 +137,7 @@ namespace Z0
             => BitVector.add(x,y);
 
         /// <summary>
-        /// Arithmetically subtracts the second operand from the first. 
+        /// Arithmetically subtracts the second operand from the first.
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -233,7 +233,7 @@ namespace Z0
         /// <summary>
         /// The number of bits represented by the vector
         /// </summary>
-        public readonly int Width 
+        public readonly int Width
         {
             [MethodImpl(Inline)]
             get => bitsize<T>();
@@ -273,7 +273,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => gbits.testbit(Data, (byte)index);
-            
+
             [MethodImpl(Inline)]
             set => Data = gbits.setbit(Data, index, value);
         }
@@ -295,11 +295,11 @@ namespace Z0
 
         public readonly override bool Equals(object obj)
             => obj is BitVector<T> x && Equals(x);
-        
+
         public readonly override int GetHashCode()
             => Data.GetHashCode();
-    
-         public string Format(BitFormatConfig config)
+
+         public string Format(BitFormat config)
             => BitVector.format(this,config);
 
         public string Format()

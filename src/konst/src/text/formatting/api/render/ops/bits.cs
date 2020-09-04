@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-        
+
     partial struct Render
     {
         [MethodImpl(Inline), Op]
@@ -29,10 +29,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void bits(byte src, int maxbits, Span<char> dst, ref int k)
+        public static void bits(byte src, uint maxbits, Span<char> dst, ref int k)
         {
             for(var j=0; j<8; j++, k++)
-            {                
+            {
                 if(k>=maxbits)
                     break;
                 seek(dst, (uint)k) = @char(@bool(testbit(src, j)));
@@ -40,7 +40,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void bits(in byte src, int length, int maxbits, Span<char> dst)
+        public static void bits(in byte src, int length, uint maxbits, Span<char> dst)
         {
             var k=0;
             for(var i=0u; i<length; i++)
@@ -52,7 +52,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void bits(ReadOnlySpan<byte> src, int maxbits, Span<char> dst)
+        public static void bits(ReadOnlySpan<byte> src, Count32 maxbits, Span<char> dst)
             => bits(first(src), src.Length, maxbits, dst);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
@@ -61,32 +61,32 @@ namespace Z0
                 => bits(src, BitFormatter.configure());
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static string bits<T>(T src, in BitFormatConfig config)
+        public static string bits<T>(T src, in BitFormat config)
             where T : struct
                 => bits(bytes(src), config);
 
         [Op]
-        public static string bits(ReadOnlySpan<byte> src, in BitFormatConfig config)
-        {            
+        public static string bits(ReadOnlySpan<byte> src, in BitFormat config)
+        {
             var count = src.Length*8;
             var dst = span<char>(count);
             dst.Fill(Chars.D0);
 
             bits(src, config.MaxBitCount, dst);
-                        
+
             dst.Reverse();
-            
-            var bs = new string(dst);                
-            
+
+            var bs = new string(dst);
+
             if(config.TrimLeadingZeros)
                 bs = bs.TrimStart(Chars.D0);
-            
+
             if(config.ZPad != 0)
                 bs = bs.PadLeft(config.ZPad, Chars.D0);
-            
+
             if(config.BlockWidth != 0)
                 bs = string.Join(config.BlockSep, bs.Partition(config.BlockWidth));
-            
+
             return config.SpecifierPrefix ? "0b" + bs : bs;
         }
     }

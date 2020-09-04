@@ -6,15 +6,15 @@ namespace Z0
 {
     using System;
 
-    using Api = FormatBits;    
+    using Api = FormatBits;
 
     partial class XTend
     {
-        public static string FormatBits<T>(this ReadOnlySpan<T> src, BitFormatConfig? config = null)
+        public static string FormatBits<T>(this ReadOnlySpan<T> src, BitFormat? config = null)
             where T : unmanaged
                 => Api.format(src, config ?? BitFormatter.configure());
-        
-        public static string FormatBits<T>(this Span<T> src, BitFormatConfig? config = null)
+
+        public static string FormatBits<T>(this Span<T> src, BitFormat? config = null)
             where T : unmanaged
                 => Api.format(src.ReadOnly(), config ?? BitFormatter.configure());
     }

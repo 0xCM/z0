@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
 
     public readonly struct BitFieldModel
-    {                
+    {
         readonly asci16 FieldName;
-        
+
         public readonly byte FieldCount;
 
         public readonly byte TotalWidth;
@@ -24,7 +24,7 @@ namespace Z0
         readonly ArraySpan<byte> Positions;
 
         [MethodImpl(Inline)]
-        internal BitFieldModel(asci16 name, byte count, byte width, ArraySpan<asci16> names,  ArraySpan<byte> widths, ArraySpan<byte> positions)
+        public BitFieldModel(asci16 name, byte count, byte width, ArraySpan<asci16> names,  ArraySpan<byte> widths, ArraySpan<byte> positions)
         {
             FieldName = name;
             FieldCount = count;

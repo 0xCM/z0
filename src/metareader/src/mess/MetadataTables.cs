@@ -143,26 +143,32 @@ namespace Z0
         public struct FieldRvaRow
         {
             public int Offset;
+
             public int Field;
         }
 
         public struct FieldDefRow
         {
             public ushort Flags;
+
             public StringHandle Name;
+
             public BlobHandle Signature;
         }
 
         public struct FileTableRow
         {
             public uint Flags;
+
             public StringHandle FileName;
+
             public BlobHandle HashValue;
         }
 
         public struct GenericParamConstraintRow
         {
             public int Owner;
+
             public int Constraint;
         }
 
@@ -253,9 +259,21 @@ namespace Z0
             public StringHandle Name;
         }
 
-        public struct NestedClassRow { public int NestedClass; public int EnclosingClass; }
+        public struct NestedClassRow
+        {
+            public int NestedClass;
 
-        public struct ParamRow { public ushort Flags; public ushort Sequence; public StringHandle Name; }
+            public int EnclosingClass;
+        }
+
+        public struct ParamRow
+        {
+            public ushort Flags;
+
+            public ushort Sequence;
+
+            public StringHandle Name;
+        }
 
         public struct PropertyMapRow
         {
@@ -311,8 +329,11 @@ namespace Z0
         public struct DocumentRow
         {
             public BlobHandle Name;
+
             public GuidHandle HashAlgorithm;
+
             public BlobHandle Hash;
+
             public GuidHandle Language;
         }
 
@@ -340,7 +361,9 @@ namespace Z0
         public struct LocalVariableRow
         {
             public ushort Attributes;
+
             public ushort Index;
+
             public StringHandle Name;
         }
 

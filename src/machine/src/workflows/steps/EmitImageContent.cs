@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Diagnostics;
+    using System.IO;
 
     using static Konst;
     using static EmitImageContentStep;
@@ -57,18 +58,25 @@ namespace Z0
 
         public void Dispose()
         {
-             Wf.Finished(StepId);
+             Wf.Disposed(StepId);
+        }
+
+        static MemoryAddress BaseAddress(IPart src)
+        {
+            var match =  Path.GetFileNameWithoutExtension(src.Owner.Location);
+            var module = SystemProcess.modules().Where(m => Path.GetFileNameWithoutExtension(m.FileName) == match).First();
+            return module.BaseAddress;
         }
 
         public void Run()
         {
              Wf.Running(StepId);
 
-             Index = z.span<LocatedPart>(Parts.Length);
+             Index = span<LocatedPart>(Parts.Length);
              for(var i=0u; i< Parts.Length; i++)
              {
                 ref readonly var part = ref skip(Parts, i);
-                var @base = part.BaseAddress();
+                var @base = BaseAddress(part);
                 var dstpath = TargetDir + FileName.define(part.Format(), FileExtension.Define("csv"));
                 using var step = new EmitPeImage(Wf, part, @base, dstpath, Ct);
                 step.Run();

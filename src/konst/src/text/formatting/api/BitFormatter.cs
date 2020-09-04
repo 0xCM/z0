@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+
     using api = Render;
 
     [ApiHost]
@@ -22,40 +23,39 @@ namespace Z0
                 => default;
 
         [MethodImpl(Inline)]
-        public static BitFormatConfig configure(bool tlz = false)
+        public static BitFormat configure(bool tlz = false)
             => FormatOptions.bits(tlz);
 
         [MethodImpl(Inline)]
-        public static BitFormatConfig limited(int maxbits, int? zpad = null)
+        public static BitFormat limited(uint maxbits, int? zpad = null)
             => FormatOptions.bitmax(maxbits, zpad);
 
         [MethodImpl(Inline)]
-        public static BitFormatConfig blocked(int width, char? sep = null, int? maxbits = null, bool specifier = false)
+        public static BitFormat blocked(int width, char? sep = null, uint? maxbits = null, bool specifier = false)
             => FormatOptions.bitblock(width, sep, maxbits, specifier);
 
-
         [MethodImpl(Inline), Op]
-        public void Format(byte src, int maxbits, Span<char> dst, ref int k)
+        public void Format(byte src, uint maxbits, Span<char> dst, ref int k)
             => api.bits(src, maxbits, dst, ref k);
 
         [MethodImpl(Inline), Op]
-        public void Format(in byte src, int length, int maxbits, Span<char> dst)
+        public void Format(in byte src, int length, uint maxbits, Span<char> dst)
             => api.bits(src,length,maxbits,dst);
 
         [MethodImpl(Inline), Op]
-        public static void format(in byte src, int length, int maxbits, Span<char> dst)
+        public static void format(in byte src, int length, uint maxbits, Span<char> dst)
             => api.bits(src, length, maxbits, dst);
 
         [MethodImpl(Inline)]
-        public void Format(ReadOnlySpan<byte> src, int maxbits, Span<char> dst)
+        public void Format(ReadOnlySpan<byte> src, uint maxbits, Span<char> dst)
             => Format(first(src), src.Length, maxbits, dst);
 
         [MethodImpl(Inline)]
-        public static void format(byte src, int maxbits, Span<char> dst, ref int k)
+        public static void format(byte src, uint maxbits, Span<char> dst, ref int k)
             => api.bits(src, maxbits, dst, ref k);
 
         [MethodImpl(Inline)]
-        public static string format<T>(T src, in BitFormatConfig config)
+        public static string format<T>(T src, in BitFormat config)
             where T : struct
                 => format(z.bytes(src), config);
 
@@ -65,7 +65,7 @@ namespace Z0
                 => format(src, BitFormatter.configure());
 
         [MethodImpl(Inline)]
-        public static string format(ReadOnlySpan<byte> src, in BitFormatConfig config)
+        public static string format(ReadOnlySpan<byte> src, in BitFormat config)
             => api.bits(src,config);
     }
 }

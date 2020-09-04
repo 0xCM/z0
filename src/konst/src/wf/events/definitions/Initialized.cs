@@ -17,14 +17,14 @@ namespace Z0
         {
             public const string EventName = nameof(Initialized);
 
-            public WfEventId EventId { get; }
+            public WfEventId EventId {get;}
 
-            public WfStepId StepId { get; }
+            public WfStepId StepId {get;}
 
-            public FlairKind Flair { get; }
+            public FlairKind Flair {get;}
 
-            [MethodImpl (Inline)]
-            public Initialized (WfStepId step, CorrelationToken ct, FlairKind flair = Render.Initialized)
+            [MethodImpl(Inline)]
+            public Initialized(WfStepId step, CorrelationToken ct, FlairKind flair = Render.Initialized)
             {
                 EventId = (EventName, step, ct);
                 StepId = step;

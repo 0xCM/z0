@@ -144,10 +144,10 @@ namespace Z0
             => Raise(WfEvents.running(step, content, Ct));
 
         void Finished(WfStepId step, CorrelationToken ct)
-            => Raise(new WfFinished(step, Ct));
+            => Raise(new WfDisposed(step, Ct));
 
-        void Finished(WfStepId step)
-            => Raise(new WfFinished(step, Ct));
+        void Disposed(WfStepId step)
+            => Raise(new WfDisposed(step, Ct));
 
         void Initializing(WfStepId step, CorrelationToken ct)
             => Raise(new Initializing(step, Ct));
@@ -161,17 +161,10 @@ namespace Z0
         void Error(WfStepId step, Exception e)
             => Raise(WfEvents.error(step, e, Ct));
 
-        void Processing<T>(T kind, FilePath src, [File] string actor = null, [Line] int? line = null)
-            => Raise(WfEvents.processing(callerName(actor), kind, src, Ct));
-
         static string callerName(string src)
             => Path.GetFileNameWithoutExtension(src);
 
-        void Processed<T>(T kind, FilePath src, uint size, [File] string actor = null, [Line] int? line = null)
-            => Raise(WfEvents.processed(callerName(actor), kind, src, size, Ct));
-
-        void Processed<T>(WfStepId step, T content, WfDataFlow<FS.FilePath> flow, uint size)
-            => Raise(WfEvents.processed(step, content, flow, size, Ct));
-
+        void Processed(WfStepId step, WfDataFlow<FS.FilePath> flow, uint size)
+            => Raise(WfEvents.processed(step, flow, size, Ct));
     }
 }

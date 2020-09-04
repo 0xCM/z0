@@ -14,7 +14,7 @@ namespace Z0
     {
         readonly Action Fx;
 
-        public WfStepId Id => AB.step<C>();
+        public WfStepId Id => typeof(C);
 
         [MethodImpl(Inline)]
         public static implicit operator WfStepControl<C>(Action fx)
@@ -26,9 +26,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public WfStepControl(Action fx)
-        {
-            Fx = fx;
-        }
+            => Fx = fx;
 
         [MethodImpl(Inline)]
         public void Run()

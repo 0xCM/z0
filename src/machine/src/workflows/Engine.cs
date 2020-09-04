@@ -13,27 +13,18 @@ namespace Z0
     using static Engines;
     using static z;
 
-    public class Engine  : IDisposable
+    public class Engine : IDisposable
     {
-        // public static void run(IWfContext wf)
-        // {
-        //     var asm = new AsmContext(wf);
-        //     var state = new WfCaptureState(wf, asm, wf.Config, wf.Ct);
-        //     wf.Running(StepId, delimit(wf.Parts));
-        //     using var machine = new Engine(state, wf.Ct);
-        //     machine.Run();
-        // }
-
-        public static void run(IAppContext context, params string[] args)
+        public static void run(IAppContext app, params string[] args)
         {
             try
             {
                 var ct = correlate(ShellId);
-                var config = WfBuilder.configure(context, args);
+                var config = WfBuilder.configure(app, args);
                 using var log = AB.log(config);
                 using var wf = WfBuilder.shell(config, log);
 
-                var state = new WfCaptureState(wf, AsmWfBuilder.asm(context), wf.Config, wf.Ct);
+                var state = new WfCaptureState(wf, AsmWfBuilder.asm(app), wf.Config, wf.Ct);
                 wf.Running(StepId, delimit(config.Parts));
                 using var machine = new Engine(state,ct);
                 machine.Run();
@@ -50,12 +41,14 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        internal Engine(WfCaptureState wf, CorrelationToken ct)
+        readonly IWfShell Wf;
+
+        internal Engine(WfCaptureState state, CorrelationToken ct)
         {
-            State = wf;
+            State = state;
+            Wf = State.Wf;
             Ct = ct;
-            var parts = wf.Wf.Api.Parts.Select(x => x.Id);
-            Wf.Created(StepId, delimit(parts));
+            Wf.Created(StepId, delimit(Wf.Api.PartIdentities));
         }
 
         public void Dispose()
@@ -63,8 +56,6 @@ namespace Z0
             Wf.Finished(StepId, Ct);
         }
 
-        IWfShell Wf
-            => State.Wf;
 
         IAsmContext Asm
             => State.Asm;

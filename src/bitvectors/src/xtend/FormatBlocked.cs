@@ -27,20 +27,20 @@ namespace Z0
         public static string FormatBlocked(this BitVector64 src, int width)
             => FormatBits.blocked(src.Scalar, width);
 
-        public static string FormatBlocked<T>(this BitVector<T> src, BitFormatConfig config)
+        public static string FormatBlocked<T>(this BitVector<T> src, BitFormat config)
             where T : unmanaged
                 => FormatBits.blocked(src.Scalar, config);
 
-        public static string FormatBlocked(this BitVector8 src, BitFormatConfig config)
+        public static string FormatBlocked(this BitVector8 src, BitFormat config)
             => FormatBits.blocked(src.Scalar, config);
 
-        public static string FormatBlocked(this BitVector16 src, BitFormatConfig config)
+        public static string FormatBlocked(this BitVector16 src, BitFormat config)
             => FormatBits.blocked(src.Scalar, config);
 
-        public static string FormatBlocked(this BitVector32 src, BitFormatConfig config)
+        public static string FormatBlocked(this BitVector32 src, BitFormat config)
             => FormatBits.blocked(src.Scalar, config);
 
-        public static string FormatBlocked(this BitVector64 src, BitFormatConfig config)
+        public static string FormatBlocked(this BitVector64 src, BitFormat config)
             => FormatBits.blocked(src.Scalar, config);
     }
 }

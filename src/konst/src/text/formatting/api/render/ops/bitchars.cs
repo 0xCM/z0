@@ -10,15 +10,15 @@ namespace Z0
 
     using static Konst;
     using static z;
-        
+
     partial struct Render
     {
         [Op]
         public static ReadOnlySpan<char> bitchars(byte[] src)
-        {   
+        {
             var dst = span<char>(src.Length*8);
             var input = span(src);
-            var config = BitFormatConfig.Default;
+            var config = BitFormat.Default;
             bits(src, dst.Length, dst);
             return dst;
         }

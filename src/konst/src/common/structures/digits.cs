@@ -23,8 +23,8 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var d = ref skip(bytes,i);
-                seek(dst, j--) = Hex.code(LowerCase, Unsigned.cut(d, w4));
-                seek(dst, j--) = Hex.code(LowerCase, Unsigned.srl(d, n4, w4));
+                seek(dst, j--) = Hex.code(LowerCase, Sized.cut(d, w4));
+                seek(dst, j--) = Hex.code(LowerCase, Sized.srl(d, n4, w4));
             }
         }
 

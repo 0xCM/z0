@@ -16,8 +16,8 @@ namespace Z0
         /// </summary>
         /// <param name="i">The source integer</param>
         /// <param name="p">The parity bit</param>
-        [MethodImpl(Inline), Op]        
+        [MethodImpl(Inline), Op]
         public static byte parity(uint i, BitState p)
-            => uint8(i*2 + (uint)p);
+            => (byte)(i*2 + (uint)p);
     }
 }

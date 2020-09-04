@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
 
     public struct BitVector8 : IBitVector<BitVector8,byte>
     {
@@ -17,7 +17,7 @@ namespace Z0
 
         public static BitVector8 One => 1;
 
-        public static BitVector8 Ones => byte.MaxValue;                
+        public static BitVector8 Ones => byte.MaxValue;
 
         [MethodImpl(Inline)]
         public static implicit operator BitVector<byte>(BitVector8 src)
@@ -82,7 +82,7 @@ namespace Z0
         public static BitVector8 operator |(BitVector8 x, BitVector8 y)
             => BitVector.or(x,y);
 
-        /// Computes the XOR of the source operands. 
+        /// Computes the XOR of the source operands.
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -107,7 +107,7 @@ namespace Z0
             => BitVector.srl(x,(byte)shift);
 
         /// <summary>
-        /// Computes the one's complement of the operand. 
+        /// Computes the one's complement of the operand.
         /// </summary>
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
@@ -123,7 +123,7 @@ namespace Z0
             => BitVector.negate(x);
 
         /// <summary>
-        /// Computes the arithmetic sum of the source operands. 
+        /// Computes the arithmetic sum of the source operands.
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -132,7 +132,7 @@ namespace Z0
             => BitVector.add(x,y);
 
         /// <summary>
-        /// Computes the product of the operands. 
+        /// Computes the product of the operands.
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -154,7 +154,7 @@ namespace Z0
         /// </summary>
         /// <param name="b">The base vector</param>
         /// <param name="n">The power</param>
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         public static BitVector8 operator ^(BitVector8 b, int n)
             => BitVector.pow(b,n);
 
@@ -263,7 +263,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitVector8(byte src)
-            => this.Data = src;        
+            => this.Data = src;
 
         /// <summary>
         /// Extracts the scalar represented by the vector
@@ -281,7 +281,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => 8;
-        }        
+        }
 
         /// <summary>
         /// Presents bitvector content as a bytespan
@@ -325,8 +325,8 @@ namespace Z0
         public readonly BitVector4 Hi
         {
             [MethodImpl(Inline)]
-            get => Bits.hi(Data);        
-        }        
+            get => Bits.hi(Data);
+        }
 
         /// <summary>
         /// The vector's 4 least significant bits
@@ -334,8 +334,8 @@ namespace Z0
         public readonly BitVector4 Lo
         {
             [MethodImpl(Inline)]
-            get => Bits.lo(Data);        
-        }        
+            get => Bits.lo(Data);
+        }
 
         /// <summary>
         /// Gets/sets the state of an index-identified bit
@@ -344,7 +344,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => bit.test(Data, index);
-            
+
             [MethodImpl(Inline)]
             set => Data = bit.set(Data, (byte)index, value);
         }
@@ -359,18 +359,18 @@ namespace Z0
             [MethodImpl(Inline)]
             get => BitVector.bitseg(this,first,last);
         }
-            
+
         [MethodImpl(Inline)]
         public readonly bool Equals(BitVector8 y)
             => Data == y.Data;
 
         public override bool Equals(object obj)
             => obj is BitVector8 x ? Equals(x) : false;
-        
+
         public override int GetHashCode()
             => Data.GetHashCode();
 
-        public string Format(BitFormatConfig config)
+        public string Format(BitFormat config)
             => BitVector.format(this,config);
 
         public string Format()

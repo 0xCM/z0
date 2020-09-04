@@ -17,26 +17,21 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public WfActor Actor {get;}
-
-        public WfProcessor Processor {get;}
 
         public PartId[] Parts {get;}
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ProcessingParts(string actor, string processor, PartId[] parts, CorrelationToken ct, FlairKind flair = Running)
+        public ProcessingParts(WfStepId step, PartId[] parts, CorrelationToken ct, FlairKind flair = Running)
         {
-            EventId = WfEventId.define(EventName, ct);
-            Actor = actor;
-            Processor = processor;
+            EventId = (EventName, step, ct);
             Parts = parts;
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Actor, Processor, z.delimit(Parts));
+            => format(EventId, z.delimit(Parts));
     }
 }

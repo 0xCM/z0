@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     /// <summary>
@@ -18,7 +18,7 @@ namespace Z0
     [IdentityProvider(typeof(BitGridIdentityProvider))]
     public readonly ref struct BitGrid16<T>
         where T : unmanaged
-    {                
+    {
         /// <summary>
         /// Grid storage
         /// </summary>
@@ -27,7 +27,7 @@ namespace Z0
         /// <summary>
         /// The number of covered bits := 16
         /// </summary>
-        public int BitCount => 16; 
+        public byte BitCount => 16;
 
         /// <summary>
         /// Returns a copy of the grid's backing storage
@@ -38,7 +38,7 @@ namespace Z0
         /// The number of grid cells := {1 | 2}
         /// </summary>
         public int CellCount { [MethodImpl(Inline)] get => 2/size<T>(); }
-        
+
         /// <summary>
         /// Covers grid content with a span that defines cells of width := {1 | 2}
         /// </summary>
@@ -72,7 +72,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitGrid16(ushort data)
-            => Data = data; 
+            => Data = data;
 
         /// <summary>
         /// Reads/writes an index-identified cell
@@ -94,6 +94,6 @@ namespace Z0
             => throw new NotSupportedException();
 
         public override int GetHashCode()
-            => throw new NotSupportedException(); 
+            => throw new NotSupportedException();
     }
 }

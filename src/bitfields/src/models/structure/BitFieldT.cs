@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
     using static Memories;
 
-    using API = BitFields;
-    
+    using api = BitFields;
+
     /// <summary>
     /// Defines the (stateful) bitfield api surface
     /// </summary>
@@ -30,7 +30,7 @@ namespace Z0
         internal BitField(in BitFieldSpec spec)
         {
             Spec = spec;
-            Segs = spec.Segments;            
+            Segs = spec.Segments;
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="src">The value from which the segment will be extracted</param>
         [MethodImpl(Inline)]
         public T Extract(in BitFieldSegment seg, T src)
-            => API.extract(seg, src);
+            => api.extract(seg, src);
 
         /// <summary>
         /// Extracts all segments from the source value and deposits the result in a caller-suppled span
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         [MethodImpl(Inline)]
         public void Deposit(T src, Span<T> dst)
-            => API.deposit(Spec, src, dst);
+            => api.deposit(Spec, src, dst);
 
         /// <summary>
         /// Extracts a source segment to the least bits of the target then shifts the target by a specified offset
@@ -67,20 +67,20 @@ namespace Z0
         /// <param name="offset">The offset amount</param>
         [MethodImpl(Inline)]
         public T Extract(in BitFieldSegment segment, T src, bool offset)
-            => API.extract(segment, src, offset);
+            => api.extract(segment, src, offset);
 
         [MethodImpl(Inline)]
         public ref T Deposit(in BitFieldSegment segment, T src, ref T dst)
         {
-            API.deposit(segment, src, ref dst);
+            api.deposit(segment, src, ref dst);
             return ref dst;
-        }            
+        }
 
         [MethodImpl(Inline)]
         public ref T Deposit(ReadOnlySpan<T> src, ref T dst)
-        {   
-            API.deposit(Spec, src, ref dst);
+        {
+            api.deposit(Spec, src, ref dst);
             return ref dst;
-        }        
+        }
     }
 }

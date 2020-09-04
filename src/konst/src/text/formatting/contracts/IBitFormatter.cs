@@ -8,11 +8,11 @@ namespace Z0
 
     public interface IBitFormatter : IFormatter
     {
-        void Format(ReadOnlySpan<byte> src, int maxbits, Span<char> dst);
+
     }
 
-    public interface IBitFormatter<T> : IBitFormatter, IDataFormatter<BitFormatConfig,T>
+    public interface IBitFormatter<T> : IBitFormatter, IDataFormatter<BitFormat,T>
         where T : struct
     {
-    }        
+    }
 }

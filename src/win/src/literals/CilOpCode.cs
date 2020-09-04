@@ -9,7 +9,6 @@ namespace Z0.MS
     using System;
     using System.Reflection;
     using System.Threading;
-    using System.Reflection.Emit;
 
     using static CilKonst;
 
@@ -21,21 +20,21 @@ namespace Z0.MS
         internal const int OperandTypeMask = 0x1F;              // 000000000000000000000000000XXXXX
 
         internal const int FlowControlShift = 5;                // 00000000000000000000000XXXX00000
-        
+
         internal const int FlowControlMask = 0x0F;
 
         internal const int OpCodeTypeShift = 9;                 // 00000000000000000000XXX000000000
-        
+
         internal const int OpCodeTypeMask = 0x07;
 
         internal const int StackBehaviourPopShift = 12;         // 000000000000000XXXXX000000000000
-        
+
         internal const int StackBehaviourPushShift = 17;        // 0000000000XXXXX00000000000000000
-        
+
         internal const int StackBehaviourMask = 0x1F;
 
         internal const int SizeShift = 22;                      // 00000000XX0000000000000000000000
-        
+
         internal const int SizeMask = 0x03;
 
         internal const int EndsUncondJmpBlkFlag = 0x01000000;   // 0000000X000000000000000000000000
@@ -45,7 +44,7 @@ namespace Z0.MS
         internal const int StackChangeShift = 28;               // XXXX0000000000000000000000000000
 
         readonly CilOpCodeKind m_value;
-        
+
         readonly int m_flags;
 
         internal CilOpCode(CilOpCodeKind value, int flags)
@@ -60,25 +59,25 @@ namespace Z0.MS
         internal int StackChange() =>
             m_flags >> StackChangeShift;
 
-        public OperandType OperandType 
+        public OperandType OperandType
             => (OperandType)(m_flags & OperandTypeMask);
 
-        public FlowControl FlowControl 
+        public FlowControl FlowControl
             => (FlowControl)((m_flags >> FlowControlShift) & FlowControlMask);
 
-        public OpCodeType OpCodeType 
+        public OpCodeType OpCodeType
             => (OpCodeType)((m_flags >> OpCodeTypeShift) & OpCodeTypeMask);
 
-        public StackBehaviour StackBehaviourPop 
+        public StackBehaviour StackBehaviourPop
             => (StackBehaviour)((m_flags >> StackBehaviourPopShift) & StackBehaviourMask);
 
-        public StackBehaviour StackBehaviourPush 
+        public StackBehaviour StackBehaviourPush
             => (StackBehaviour)((m_flags >> StackBehaviourPushShift) & StackBehaviourMask);
 
-        public int Size 
+        public int Size
             => (m_flags >> SizeShift) & SizeMask;
 
-        public short Value 
+        public short Value
             => (short)m_value;
 
         private static volatile string[]? g_nameCache;
@@ -137,10 +136,10 @@ namespace Z0.MS
 
         public static bool operator !=(CilOpCode a, CilOpCode b) => !(a == b);
 
-        public override int GetHashCode() 
+        public override int GetHashCode()
             => Value;
 
-        public override string? ToString() 
+        public override string? ToString()
             => Name;
     }
 }

@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
-    using API = BitFields;
+    using api = BitFields;
 
     public ref struct BitField64<I,W>
         where I : unmanaged, Enum
@@ -34,10 +34,10 @@ namespace Z0
         public ulong this[I index]
         {
             [MethodImpl(Inline)]
-            get => API.extract(segment(index), Data);
+            get => api.extract(segment(index), Data);
 
             [MethodImpl(Inline)]
-            set => API.deposit(segment(index), value, ref Data);
+            set => api.deposit(segment(index), value, ref Data);
         }
     }
 }

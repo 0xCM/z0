@@ -34,7 +34,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid32<M,N,T>(uint src)
-            => new BitGrid32<M, N, T>(src);
+            => new BitGrid32<M,N,T>(src);
 
         [MethodImpl(Inline)]
         public static implicit operator uint(BitGrid32<M,N,T> src)
@@ -98,7 +98,7 @@ namespace Z0
         /// <summary>
         /// The number of covered bits
         /// </summary>
-        public int BitCount
+        public Count32 BitCount
         {
             [MethodImpl(Inline)]
             get => (int)NatCalc.mul<M,N>();

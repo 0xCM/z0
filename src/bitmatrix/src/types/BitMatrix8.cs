@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
-    using static Konst; 
+
+    using static Konst;
     using static Memories;
 
     /// <summary>
@@ -15,9 +15,9 @@ namespace Z0
     /// </summary>
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public readonly ref struct BitMatrix8
-    {        
+    {
         internal readonly Span<byte> Data;
-                                        
+
         /// <summary>
         /// The matrix order
         /// </summary>
@@ -44,7 +44,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator ulong(BitMatrix8 src)
-            => Unsigned.u64(src.Data);
+            => Sized.u64(src.Data);
 
         [MethodImpl(Inline)]
         public static explicit operator BitMatrix8(ulong src)
@@ -97,7 +97,7 @@ namespace Z0
         public ReadOnlySpan<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => Data;            
+            get => Data;
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Z0
         /// </summary>
         public unsafe ref byte Head
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => ref head(Data);
         }
 
@@ -131,7 +131,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             set => seek(ref Head, row) = bit.set(seek(ref Head, row), (byte)col, value);
-        }            
+        }
 
         /// <summary>
         /// Gets/Sets the data for a row
@@ -147,8 +147,8 @@ namespace Z0
         public BitVector8 Col(int index)
             => BitVector.create(n8, Bits.gather((ulong)this, (C0 << index)));
 
-        const ulong C0 = 
-            (1ul << 64 - 1*8) | (1ul << 64 - 2*8) | (1ul << 64 - 3*8) | (1ul << 64 - 4*8) | 
+        const ulong C0 =
+            (1ul << 64 - 1*8) | (1ul << 64 - 2*8) | (1ul << 64 - 3*8) | (1ul << 64 - 4*8) |
             (1ul << 64 - 5*8) | (1ul << 64 - 6*8) | (1ul << 64 - 7*8) | 1;
 
         public override string ToString()
@@ -162,8 +162,8 @@ namespace Z0
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();
-        
-        public override int GetHashCode() 
+
+        public override int GetHashCode()
             => throw new NotSupportedException();
     }
 }

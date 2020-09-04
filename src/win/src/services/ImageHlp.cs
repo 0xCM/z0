@@ -24,14 +24,8 @@ namespace Z0.Image
         /// If the function succeeds, the return value is TRUE.
         /// If the function fails, the return value is FALSE. To retrieve extended error information, call <see cref="Marshal.GetLastWin32Error"/>.
         /// </returns>
-        [DllImport(nameof(ImageHlp), SetLastError = true, CharSet = CharSet.Ansi)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool MapAndLoad(
-            string ImageName,
-            string DllPath,
-            out LOADED_IMAGE LoadedImage,
-            bool DotDll,
-            bool ReadOnly);
+        [DllImport(nameof(ImageHlp), SetLastError = true, CharSet = CharSet.Ansi)] [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool MapAndLoad(string ImageName, string DllPath, out LOADED_IMAGE LoadedImage, bool DotDll, bool ReadOnly);
 
         /// <summary>
         /// Deallocate all resources that are allocated by a previous call to the <see cref="MapAndLoad"/> function.
@@ -43,8 +37,7 @@ namespace Z0.Image
         /// If the function succeeds, the return value is TRUE.
         /// If the function fails, the return value is FALSE. To retrieve extended error information, call <see cref="Marshal.GetLastWin32Error"/>.
         /// </returns>
-        [DllImport(nameof(ImageHlp), SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
+        [DllImport(nameof(ImageHlp), SetLastError = true)][return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool UnMapAndLoad(ref LOADED_IMAGE LoadedImage);
-    }     
+    }
 }

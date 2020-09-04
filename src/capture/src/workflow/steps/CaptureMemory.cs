@@ -52,7 +52,7 @@ namespace Z0.Asm
 
         public void Dispose()
         {
-            Wf.Finished(StepId);
+            Wf.Disposed(StepId);
         }
 
         [MethodImpl(Inline)]

@@ -9,10 +9,9 @@ namespace Z0
 
     using static Konst;
     using static Render;
-    using static AB;
     using static z;
 
-    public readonly struct WfStepCreated<T> : IWfEvent<WfStepCreated<T>,T>
+    public readonly struct WfStepCreated<T> : IWfEvent<WfStepCreated<T>>
     {
         public const string EventName = nameof(WfStepCreated);
 
@@ -35,6 +34,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Content);
+            => Render.format(EventId, Content);
     }
 }

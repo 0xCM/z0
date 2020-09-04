@@ -13,6 +13,7 @@ namespace Z0
 
     using static Konst;
 
+    [ApiHost]
     public static class ClrQueries
     {
         [MethodImpl(Inline), Op]

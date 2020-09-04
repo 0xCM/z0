@@ -31,7 +31,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(StepId);
+            Wf.Disposed(StepId);
         }
 
         X86MemberExtract[] Extract(ICaptureContext context, IApiHost host)

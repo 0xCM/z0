@@ -17,7 +17,7 @@ namespace Z0
 
         readonly DataHandler<C,T>[] handlers;
 
-        readonly IndexFunction<K> xf;
+        readonly WfDelegates.Indexer<K> IndexFx;
 
         Span<DataHandler<C,T>> Handlers
         {
@@ -26,18 +26,18 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public DataBroker(IWfShell wf, int capacity, IndexFunction<K> xf)
+        public DataBroker(IWfShell wf, int capacity, WfDelegates.Indexer<K> xf)
         {
             Wf = wf;
             handlers = new DataHandler<C,T>[capacity];
             handlers.Fill(DataHandler<C,T>.Empty);
-            this.xf = xf;
+            this.IndexFx = xf;
         }
 
         [MethodImpl(Inline)]
         public ref DataHandler<C,T> Set(K kind, in DataHandler<C,T> handler)
         {
-            var index = (uint)xf(kind);
+            var index = (uint)IndexFx(kind);
             ref var dst = ref seek(Handlers, index);
             dst = handler;
             return ref dst;
@@ -45,12 +45,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly DataHandler<C,T> Get(K kind)
-            => ref skip(Handlers, (uint)xf(kind));
+            => ref skip(Handlers, (uint)IndexFx(kind));
 
         public ref DataHandler<C,T> this[K kind]
         {
             [MethodImpl(Inline)]
-            get => ref seek(Handlers, (uint)xf(kind));
+            get => ref seek(Handlers, (uint)IndexFx(kind));
         }
 
         [MethodImpl(Inline)]

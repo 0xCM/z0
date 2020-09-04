@@ -81,7 +81,7 @@ namespace Z0
         /// <summary>
         /// The number of covered bits
         /// </summary>
-        public int BitCount
+        public Count32 BitCount
         {
             [MethodImpl(Inline)]
             get => (int)NatCalc.mul<M,N>();

@@ -437,6 +437,6 @@ namespace Z0
 
         static string bitformat<T>(T src, int? digits = null)
             where T : unmanaged
-                => BitFormatter.format(src, digits != null ? BitFormatter.limited(digits.Value, digits.Value)  : BitFormatter.configure());
+                => BitFormatter.format(src, digits != null ? BitFormatter.limited((uint)digits.Value, digits.Value)  : BitFormatter.configure());
     }
 }

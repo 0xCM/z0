@@ -5,12 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.IO;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static Render;
-    using static RenderPatterns;
     using static z;
 
     [Event]
@@ -25,7 +23,6 @@ namespace Z0
         public WfPayload<T> Content {get;}
 
         public FlairKind Flair {get;}
-
 
         [MethodImpl(Inline)]
         public WfStepRan(WfStepId step, T data, CorrelationToken ct, FlairKind flair = Ran)

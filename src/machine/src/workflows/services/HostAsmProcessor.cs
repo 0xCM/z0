@@ -23,7 +23,7 @@ namespace Z0
         public HostAsmProcessor(IWfShell context, HostAsmFx src)
         {
             Wf = context;
-            Broker = DataBrokers.broker64<AsmHandlerKind,HostAsmFx>();
+            Broker = BitBrokers.broker64<AsmHandlerKind,HostAsmFx>();
             Source = src;
             (this as IWfDataProcessor).Connect();
         }

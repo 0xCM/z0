@@ -12,15 +12,9 @@ namespace Z0
 
     public struct Workflow : IDataSink
     {
-        public readonly ulong Id;
-
-        readonly IAppContext Context;
+        readonly IWfShell Wf;
 
         readonly EventReceiver Receiver;
-
-        readonly FilePath ErrorLogPath;
-
-        readonly StreamWriter StatusLog;
 
         readonly Action Connector;
 
@@ -32,18 +26,14 @@ namespace Z0
 
         readonly HubClient client;
 
-        long Correlation;
+        readonly CorrelationToken Ct;
 
         [MethodImpl(Inline)]
-        public Workflow(ulong id, IAppContext context, EventReceiver receiver, Action connect, Action exec)
-            : this()
+        public Workflow(IWfShell wf, EventReceiver receiver, Action connect, Action exec)
         {
-            Correlation = 0;
-            Id = id;
-            Context = context;
+            Wf = wf;
+            Ct = wf.Ct;
             Receiver = receiver;
-            ErrorLogPath = context.AppPaths.AppErrorLogPath;
-            StatusLog = context.AppPaths.AppStatusLogPath.Writer();
             Connector = connect;
             Executor = exec;
             Hub = EventHubs.hub();
@@ -62,7 +52,7 @@ namespace Z0
 
         public void Dispose()
         {
-            StatusLog.Dispose();
+
         }
 
         public void Run()

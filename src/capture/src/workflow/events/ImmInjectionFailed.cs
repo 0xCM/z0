@@ -10,29 +10,27 @@ namespace Z0.Asm
 
     using static Konst;
     using static z;
-    using static RenderPatterns;
 
-    using E = ImmInjectionFailed;
-
-    public readonly struct ImmInjectionFailed : IWfEvent<E>
+    [Event]
+    public readonly struct ImmInjectionFailed : IWfEvent<ImmInjectionFailed>
     {
-        public WfEventId EventId  => WfEventId.define("Placeholder");
+        public const string EventName = nameof(ImmInjectionFailed);
+        public WfEventId EventId {get;}
 
-        [MethodImpl(Inline)]
-        public ImmInjectionFailed(MethodInfo method)
-        {
-            Method = method;
-        }
-
-        public MethodInfo Method {get;}
-
-        public string Format()
-            => $"Imm injection failure for {Method.Name}";
+        public WfPayload<MethodInfo> Method {get;}
 
         public FlairKind Flair
             => FlairKind.Error;
 
-        public static ImmInjectionFailed Empty
-            => default;
+        [MethodImpl(Inline)]
+        public ImmInjectionFailed(WfStepId step, MethodInfo method, CorrelationToken ct)
+        {
+            EventId = (EventName, step, ct);
+            Method = method;
+        }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Render.format(EventId,Method);
     }
 }

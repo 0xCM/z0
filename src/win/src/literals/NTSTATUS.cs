@@ -8,8 +8,7 @@ namespace Z0.MS
 {
     using System;
     using System.Diagnostics;
-    using System.Runtime.InteropServices;
-    
+
     using static NTSTATUS;
 
     /// <summary>

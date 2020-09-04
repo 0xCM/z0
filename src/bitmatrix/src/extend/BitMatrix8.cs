@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     public static class BitMatrix8x
-    {   
+    {
         /// <summary>
         /// Converts the matrix to a bitvector
         /// </summary>
@@ -54,13 +54,13 @@ namespace Z0
             => BitMatrix.load(n8,A.Bytes);
 
         [MethodImpl(Inline)]
-        public static string Format(this BitMatrix8 src)            
+        public static string Format(this BitMatrix8 src)
             => src.Data.FormatMatrixBits(src.Order);
 
         /// <summary>
         /// Determines whether this matrix is equivalent to the canonical 0 matrix
         /// </summary>
-        [MethodImpl(Inline)] 
+        [MethodImpl(Inline)]
         public static bit IsZero(this BitMatrix8 A)
             => BitMatrix.empty(A);
 
@@ -76,7 +76,7 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static ulong Pack(this BitMatrix8 A)
-            => Unsigned.u64(A.Data);
+            => Sized.u64(A.Data);
 
         /// <summary>
         /// Transposes a copy of the source matrix
@@ -84,7 +84,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix8 Transpose(this BitMatrix8 A)
             => BitMatrix.transpose_v2(A);
- 
+
         [MethodImpl(Inline)]
         public static BitMatrix8 AndNot(this BitMatrix8 A, in BitMatrix8 B)
             => BitMatrix.cnonimpl(A, B);
@@ -113,7 +113,7 @@ namespace Z0
         /// Creates a new matrix by cloning the existing matrix or allocating a matrix with the same structure
         /// </summary>
         /// <param name="structureOnly">Specifies whether the replication reproduces only structure and is thus equivalent to an allocation</param>
-        [MethodImpl(Inline)] 
+        [MethodImpl(Inline)]
         public static BitMatrix8 Replicate(this BitMatrix8 A)
             => BitMatrix.primal(n8, A.Bytes.Replicate());
     }

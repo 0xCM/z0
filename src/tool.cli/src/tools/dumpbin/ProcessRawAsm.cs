@@ -54,7 +54,6 @@ namespace Z0.Tools
 
             const byte Seg0Min = 0;
 
-
             const byte Seg0Size = (byte)RawAsmField.Address;
 
             const byte Seg1Size = (byte)RawAsmField.Mnemonic;
@@ -85,7 +84,7 @@ namespace Z0.Tools
                 LineCount = 0;
                 IxCount = 0;
 
-                Wf.Processing(ExtMap.Asm, src.EmissionPath, ActorName);
+                //Wf.Processing(ExtMap.Asm, src.EmissionPath, ActorName);
 
                 using var reader = src.EmissionPath.Reader();
                 using var writer = dst.Writer();
@@ -106,7 +105,7 @@ namespace Z0.Tools
                 writer.Flush();
                 writer.Dispose();
 
-                Wf.Processed(ExtMap.Asm, src.EmissionPath, LineCount);
+                //Wf.Processed(StepId, ExtMap.Asm, src.EmissionPath, LineCount);
             }
 
             const string SearchPattern = "*.instructions.asm";
@@ -127,7 +126,7 @@ namespace Z0.Tools
 
             public void Dispose()
             {
-                Wf.Finished(StepId);
+                Wf.Disposed(StepId);
             }
         }
     }

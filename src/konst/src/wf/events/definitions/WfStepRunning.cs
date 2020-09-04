@@ -27,7 +27,6 @@ namespace Z0
             Flair = flair;
         }
 
-
         [MethodImpl(Inline)]
         public string Format()
             => EventId.Format();

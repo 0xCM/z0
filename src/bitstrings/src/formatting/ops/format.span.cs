@@ -8,23 +8,23 @@ namespace Z0
 
     partial class FormatBits
     {
-        public static string format<T>(ReadOnlySpan<T> src, BitFormatConfig config)
+        public static string format<T>(ReadOnlySpan<T> src, BitFormat config)
             where T : unmanaged
                 => BitString.scalars(src)
-                        .Truncate(config.MaxBitCount)
-                        .Format(config.TrimLeadingZeros, config.SpecifierPrefix, config.BlockWidth, config.BlockSep, config.RowWidth); 
+                        .Truncate((int)config.MaxBitCount)
+                        .Format(config.TrimLeadingZeros, config.SpecifierPrefix, config.BlockWidth, config.BlockSep, config.RowWidth);
 
-        public static string format<T>(Span<T> src, BitFormatConfig config)            
+        public static string format<T>(Span<T> src, BitFormat config)
                 where T : unmanaged
                     => format(src.ReadOnly(), config);
 
-        public static string format(ReadOnlySpan<bit> src, BitFormatConfig? fmt = null)
+        public static string format(ReadOnlySpan<bit> src, BitFormat? fmt = null)
             => src.ToBitString().Format(fmt);
-            
-        public static string format(Span<bit> src,  BitFormatConfig? fmt = null)
+
+        public static string format(Span<bit> src,  BitFormat? fmt = null)
             => format(src.ReadOnly(), fmt);
 
-        public static string format<N,T>(NatSpan<N,T> src, BitFormatConfig config)
+        public static string format<N,T>(NatSpan<N,T> src, BitFormat config)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => format(src.Data.ReadOnly(), config);

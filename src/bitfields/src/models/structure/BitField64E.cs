@@ -15,22 +15,16 @@ namespace Z0
         ulong State;
 
         [MethodImpl(Inline)]
-        public static BitField64<E> Define(E state)
-            => new BitField64<E>(state);
-
-        [MethodImpl(Inline)]
-        BitField64(E state)
-        {
-            State = Enums.e64u(state);            
-        }
+        public BitField64(E state)
+            => State = Enums.e64u(state);
 
         /// <summary>
         /// Determines whether an index-identified bit is enabled
         /// </summary>
         /// <param name="index">An integer in the range [0,63]</param>
         [MethodImpl(Inline)]
-        public bit Test(byte index)
-            => math.nonz(math.and(math.pow2(index), State));
+        public uint1 Test(byte index)
+            => math.nonz(BitLogic.and(Pow2.pow(index), State));
 
         /// <summary>
         /// Enables or disables an index-identified bit
@@ -38,13 +32,26 @@ namespace Z0
         /// <param name="index">An integer in the range [0,63]</param>
         /// <param name="state">If 1, turns the bit on; otherwise, the bit is turned off</param>
         [MethodImpl(Inline)]
-        public void Set(byte index, bit state)
+        public void Set(byte index, uint1 state)
         {
-            if(state)
+            if(state != 0)
                 Enable(index);
             else
                 Disable(index);
         }
+
+        /// <summary>
+        /// Enables a specified source bit
+        /// </summary>
+        /// <param name="src">The source value to manipulate</param>
+        /// <param name="pos">The position of the bit to enable</param>
+        [MethodImpl(Inline)]
+        static ulong enable(ulong src, byte pos)
+            =>  src |= (1ul << pos);
+
+        [MethodImpl(Inline)]
+        static ulong disable(ulong src, byte pos)
+            => src & ~((1ul << pos));
 
         /// <summary>
         /// Enables an index-identified bit
@@ -52,7 +59,7 @@ namespace Z0
         /// <param name="index">An integer in the range [0,63]</param>
         [MethodImpl(Inline)]
         public void Enable(byte index)
-            => State = Bits.enable(State,index);
+            => State = enable(State,index);
 
         /// <summary>
         /// Enables an index-identified bit
@@ -60,25 +67,16 @@ namespace Z0
         /// <param name="index">An integer in the range [0,63]</param>
         [MethodImpl(Inline)]
         public void Disable(byte index)
-            => State = Bits.disable(State, index);
+            => State = disable(State, index);
 
         [MethodImpl(Inline)]
         public byte Index(E src)
-            => (byte)math.log2(Enums.e64u(src));
+            => (byte)Pow2.log(Enums.e64u(src));
 
-        public bit this[byte i]
-        {
-            [MethodImpl(Inline)]
-            get => Test(i);
-
-            [MethodImpl(Inline)]
-            set => Set(i,value);
-        }
-
-        public string Format()        
+        public string Format()
              => Formatters.bits<ulong>().Format(State);
-        
+
         public override string ToString()
             => Format();
-    }    
+    }
 }

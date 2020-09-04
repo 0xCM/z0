@@ -15,6 +15,11 @@ namespace Z0
 
     using static CreateGlobalIndexStep;
 
+    public class ProcessGlobalIndexStep : IWfStep<ProcessGlobalIndexStep>
+    {
+        public static WfStepId StepId => typeof(ProcessGlobalIndexStep);
+    }
+
     public ref struct CreateGlobalIndex
     {
         readonly IWfShell Wf;
@@ -153,7 +158,6 @@ namespace Z0
             return dst;
         }
 
-
         HostAsmFx Decode(EncodedMemberIndex hcs)
         {
             var instructions = Root.list<MemberAsmFx>();
@@ -181,17 +185,14 @@ namespace Z0
         {
             try
             {
-                Wf.Running(StepId);
-
-                var name = "ProcessEncodedIndex";
-                Wf.Raise(new RunningProcessor(StepName, name, Ct));
+                var id = ProcessGlobalIndexStep.StepId;
+                Wf.Running(id);
 
                 var processor = new ProcessAsm(State, encoded);
                 var parts = Wf.Api.Composition.Resolved.Select(p => p.Id);
-                Wf.Raise(new ProcessingParts(StepName, name, parts, Ct));
+                Wf.Raise(new ProcessingParts(id, parts, Ct));
                 var result = processor.Process();
-
-                Wf.Raise(new RanProcessor(StepName, name, $"Process result contains {result.Count} recordsets", Ct));
+                Wf.Ran(id, result.Count);
 
                 var sets = result.View;
                 var count = result.Count;

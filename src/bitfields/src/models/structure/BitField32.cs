@@ -13,24 +13,24 @@ namespace Z0
     /// <summary>
     /// Defines a minimalistic 32-bit bitfield
     /// </summary>
-    public readonly struct BitField32
-    {        
-        const int BitCount = 32;
+    public readonly ref struct BitField32
+    {
+        public const byte BitCount = 32;
 
-        readonly byte[] Data;
+        readonly Span<uint1> Data;
 
         [MethodImpl(Inline)]
         public static BitField32 Init(byte[] data)
             => new BitField32(data);
 
         [MethodImpl(Inline)]
-        public static BitField32 Alloc()
-            => new BitField32(sys.alloc<byte>(BitCount));
+        public static BitField32 create()
+            => new BitField32(sys.alloc<uint1>(BitCount));
 
         [MethodImpl(Inline)]
-        public static BitField32<E> alloc<E>()
+        public static BitField32<E> create<E>()
             where E : unmanaged, Enum
-                => new BitField32<E>(Alloc());
+                => new BitField32<E>(create());
 
         [MethodImpl(Inline)]
         public static BitField32<E> init<E>(byte[] data)
@@ -38,14 +38,18 @@ namespace Z0
                 => new BitField32<E>(Init(data));
 
         [MethodImpl(Inline)]
-        public BitField32(byte[] data)
+        public BitField32(Span<uint1> data)
             => Data = data;
 
         [MethodImpl(Inline)]
-        ref byte Bit(int index)
-            => ref Data[index];
+        public BitField32(Span<byte> data)
+            => Data = z.recover<byte,uint1>(data);
 
-        public bit this[int index]
+        [MethodImpl(Inline)]
+        ref uint1 Bit(uint5 index)
+            => ref z.seek(Data, index);
+
+        public uint1 this[uint5 index]
         {
             [MethodImpl(Inline)]
             get => Bit(index) == 1;
@@ -58,17 +62,17 @@ namespace Z0
         public string Format()
         {
             Span<char> dst = stackalloc char[BitCount];
-            for(var i=0; i<BitCount; i++)
-                Root.seek(dst,i) = this[i].ToChar();
+            for(var i=0u; i<BitCount; i++)
+                z.seek(dst,i) = z.skip(Data,i).ToChar();
             return new string(dst);
         }
     }
-    
+
     /// <summary>
     /// Defines an extremely lo-tech 32-bit bitfield, as in the non-parametric version,
     /// but field content is indexed by an enumeration
     /// </summary>
-    public readonly struct BitField32<E>
+    public readonly ref struct BitField32<E>
         where E : unmanaged, Enum
     {
         readonly BitField32 Data;
@@ -78,10 +82,10 @@ namespace Z0
             => Data = data;
 
         [MethodImpl(Inline)]
-        public int FieldIndex(E id)
-            => (int)BitOperations.Log2(Root.e32u(id));
+        public uint5 FieldIndex(E id)
+            => (uint5)BitOperations.Log2(Root.e32u(id));
 
-        public bit this[E id]
+        public uint1 this[E id]
         {
             [MethodImpl(Inline)]
             get => Data[FieldIndex(id)];

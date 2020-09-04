@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
 
     [ApiHost("api")]
     public partial class BitFields : IApiHost<BitFields>
@@ -15,6 +15,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitField64<E> bf64<E>(E state)
             where E : unmanaged, Enum
-                => BitField64<E>.Define(state);        
+                => new BitField64<E>(state);
     }
 }

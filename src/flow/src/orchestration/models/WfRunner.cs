@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
 
-
     /// <summary>
     /// Executes an input-parametric action
     /// </summary>
@@ -59,7 +58,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(typeof(A));
+            Wf.Disposed(typeof(A));
         }
     }
 }

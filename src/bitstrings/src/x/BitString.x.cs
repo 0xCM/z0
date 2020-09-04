@@ -57,64 +57,64 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this sbyte src, int? maxbits = null)
-            => BitString.scalar(src, maxbits);
+        public static BitString ToBitString(this sbyte src, uint? maxbits = null)
+            => BitString.scalar(src, (int)maxbits);
 
         /// <summary>
         /// Converts the source value to a bitstring
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this byte src, int? maxbits = null)
-            => BitString.scalar(src, maxbits);
+        public static BitString ToBitString(this byte src, uint? maxbits = null)
+            => BitString.scalar(src, (int)maxbits);
 
         /// <summary>
         /// Converts the source value to a bitstring
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this short src, int? maxbits = null)
-            => BitString.scalar(src, maxbits);
+        public static BitString ToBitString(this short src, uint? maxbits = null)
+            => BitString.scalar(src, (int)maxbits);
 
         /// <summary>
         /// Converts the source value to a bitstring
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this ushort src, int? maxbits = null)
-            => BitString.scalar(src, maxbits);
+        public static BitString ToBitString(this ushort src, uint? maxbits = null)
+            => BitString.scalar(src, (int)maxbits);
 
         /// <summary>
         /// Converts the source value to a bitstring
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this int src, int? maxbits = null)
-            => BitString.scalar(src, maxbits);
+        public static BitString ToBitString(this int src, uint? maxbits = null)
+            => BitString.scalar(src, (int)maxbits);
 
         /// <summary>
         /// Converts the source value to a bitstring
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this uint src, int? maxbits = null)
-            => BitString.scalar(src, maxbits);
+        public static BitString ToBitString(this uint src, uint? maxbits = null)
+            => BitString.scalar(src, (int)maxbits);
 
         /// <summary>
         /// Converts the source value to a bitstring
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this long src, int? maxbits = null)
-            => BitString.scalar(src, maxbits);
+        public static BitString ToBitString(this long src, uint? maxbits = null)
+            => BitString.scalar(src, (int)maxbits);
 
         /// <summary>
         /// Converts the source value to a bitstring
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this ulong src, int? maxbits = null)
-            => BitString.scalar(src, maxbits);
+        public static BitString ToBitString(this ulong src, uint? maxbits = null)
+            => BitString.scalar(src, (int)maxbits);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -129,8 +129,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this double src, int? maxbits = null)
-            => BitString.scalar(src, maxbits);
+        public static BitString ToBitString(this double src, uint? maxbits = null)
+            => BitString.scalar(src, (int)maxbits);
 
         /// <summary>
         /// Converts a span of bits to a to a bitstring

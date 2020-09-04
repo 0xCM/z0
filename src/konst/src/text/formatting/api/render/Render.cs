@@ -9,18 +9,18 @@ namespace Z0
     {
         public const FlairKind Error = FlairKind.Error;
 
-        public const FlairKind Created = FlairKind.Disposed;
+        public const FlairKind Created = FlairKind.Created;
 
         public const FlairKind Running = FlairKind.Running;
 
         public const FlairKind Ran = FlairKind.Ran;
 
-        public const FlairKind Finished = FlairKind.Disposed;
+        public const FlairKind Disposed = FlairKind.Disposed;
 
         public const FlairKind Status = FlairKind.Status;
 
-        public const FlairKind Initializing = FlairKind.Disposed;
+        public const FlairKind Initializing = FlairKind.Initialized;
 
-        public const FlairKind Initialized = FlairKind.Disposed;
+        public const FlairKind Initialized = FlairKind.Initializing;
     }
 }

@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.CompilerServices;
 
     using static Konst;

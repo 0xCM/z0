@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
-    
-    public interface IBitVector : ITextual<IBitVector,BitFormatConfig>
+
+    public interface IBitVector : ITextual<IBitVector,BitFormat>
     {
         /// <summary>
         /// Presents bitvector content as a bytespan
@@ -22,8 +22,8 @@ namespace Z0
         /// </summary>
         /// <param name="index">The byte-relative segment index</param>
         [MethodImpl(Inline)]
-        ref byte Byte(int index)        
-            => ref seek(Bytes, index);            
+        ref byte Byte(int index)
+            => ref seek(Bytes, index);
     }
 
     public interface IBitVector<V> : IBitVector, IEquatable<V>
@@ -31,7 +31,7 @@ namespace Z0
     {
 
     }
-    
+
     public interface IBitVector<V,T> : IScalarBits<T>, IBitVector<V>
         where V : unmanaged, IBitVector
         where T : unmanaged

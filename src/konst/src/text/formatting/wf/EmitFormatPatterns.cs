@@ -55,7 +55,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(Step);
+            Wf.Disposed(Step);
         }
     }
 }

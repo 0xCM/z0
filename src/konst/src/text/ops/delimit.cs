@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static string delimit<T>(T[] src, char delimiter)
-            => text.delimit(src,$"{delimiter} ");
+            => text.delimit(src,$" {delimiter} ");
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static string delimit<T>(T[] src, string delimiter)
