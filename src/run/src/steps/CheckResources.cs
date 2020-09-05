@@ -17,7 +17,7 @@ namespace Z0
     {
         public const string StepName = nameof(CheckResources);
 
-        public static WfStepId StepId => AB.step<CheckResourcesStep>();
+        public static WfStepId StepId => Flow.step<CheckResourcesStep>();
     }
 
     public ref struct CheckResources

@@ -33,14 +33,5 @@ namespace Z0
             where F : unmanaged, Enum
                 => new FieldFormatter<F>(text.build(), delimiter);
 
-        /// <summary>
-        /// Creates a create from a rendering function render:C -> T
-        /// </summary>
-        /// <param name="render">A function that produces text from an element value</param>
-        /// <typeparam name="T">The type of element to format</typeparam>
-        [MethodImpl(Inline)]
-        public static CellFormatter<C,T> formatter<C,T>(CellFormatter.RenderFunction<C,T> render)
-            where C : struct
-                => new CellFormatter<C,T>(render);
     }
 }

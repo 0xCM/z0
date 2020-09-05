@@ -9,11 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    partial class Memories
+    partial struct z
     {
-        [MethodImpl(Inline)]
-        public static T zero<T>(T t)
-            where T : unmanaged
-                => default(T);
+
     }
 }

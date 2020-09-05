@@ -40,7 +40,7 @@ namespace Z0
                 parts = Context.Api.PartIdentities;
 
             var config = WfBuilder.configure(Context, args);
-            using var log = AB.log(config);
+            using var log = Flow.log(config);
             var wf = WfBuilder.shell(config, log);
             using var state = AsmWfBuilder.state(wf, AsmWfBuilder.asm(Context), config);
 

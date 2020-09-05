@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    using static AB;
+    using static Flow;
     using static z;
 
     public readonly struct WfBuilder
@@ -59,9 +59,9 @@ namespace Z0
             var control = Assembly.GetEntryAssembly();
             var id = control.Id();
             var ct = correlate(id);
-            var parts = AB.parts(args, app.Api.PartIdentities);
+            var parts = Flow.parts(args, app.Api.PartIdentities);
             var src = ApiQuery.modules(FS.path(control.Location).FolderPath);
-            var settings = AB.settings(app);
+            var settings = Flow.settings(app);
             var captureOut = FS.dir(app.AppPaths.LogRoot.Name) + FS.folder("capture/artifacts");
             var captureLog = FS.dir(app.AppPaths.LogRoot.Name) + FS.folder("capture/logs");
             var dstArchive = new ArchiveConfig(FolderPath.Define(captureOut.Name));

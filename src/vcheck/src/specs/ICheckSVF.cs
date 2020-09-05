@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     using K = Kinds;
 
@@ -78,7 +78,7 @@ namespace Z0
             where F : ITernaryOp256D<T>
                 => Typed<T>().CheckSVF(f, K.TernaryOp, w);
 
-        void CheckCells<F,T>(F f, Func<int,Pair<Vector128<T>>> src)
+        void CheckCells<F,T>(F f, Func<uint,Pair<Vector128<T>>> src)
             where T : unmanaged
             where F : IBinaryOp128D<T>
         {
@@ -90,11 +90,11 @@ namespace Z0
             count.Start();
             try
             {
-                for(var i=0; i < RepCount; i++)
+                for(var i=0u; i<RepCount; i++)
                 {
                     (var x, var y) = src(i);
                     var z = f.Invoke(x,y);
-                    for(var j=0; j< cells; j++)
+                    for(byte j=0; j<cells; j++)
                         Eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }
@@ -109,7 +109,7 @@ namespace Z0
             }
         }
 
-        void CheckCells<F,T>(F f, Func<int,Pair<Vector256<T>>> src)
+        void CheckCells<F,T>(F f, Func<uint,Pair<Vector256<T>>> src)
             where T : unmanaged
             where F : IBinaryOp256D<T>
         {
@@ -121,11 +121,11 @@ namespace Z0
             count.Start();
             try
             {
-                for(var i=0; i < RepCount; i++)
+                for(var i=0u; i < RepCount; i++)
                 {
                     (var x, var y) = src(i);
                     var z = f.Invoke(x,y);
-                    for(var j=0; j< cells; j++)
+                    for(byte j=0; j< cells; j++)
                         Eq(f.Invoke(vcell(x,j),vcell(y,j)), vcell(z,j));
                 }
             }

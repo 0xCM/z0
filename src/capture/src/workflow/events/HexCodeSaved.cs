@@ -17,8 +17,6 @@ namespace Z0.Asm
 
         public WfEventId EventId {get;}
 
-        public WfActor Actor {get;}
-
         public readonly ApiHostUri Host;
 
         public readonly IdentifiedCode[] Code;
@@ -30,10 +28,9 @@ namespace Z0.Asm
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public HexCodeSaved(string actor, ApiHostUri host, IdentifiedCode[] code, FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
+        public HexCodeSaved(WfStepId step, ApiHostUri host, IdentifiedCode[] code, FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
         {
-            EventId = evid(EventName, ct);
-            Actor = Flow.actor(actor);
+            EventId = (EventName, step, ct);
             Host = host;
             MemberCount = code.Length;
             Code = code;

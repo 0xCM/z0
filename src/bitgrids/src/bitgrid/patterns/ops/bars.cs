@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
+    using static Konst;
+
+    using static z;
 
     partial class GridPatterns
     {
@@ -17,7 +19,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var sep = nati(n);
+            var sep = (int)value(n);
             var pattern = BitMasks.lo(sep, z64) << sep;
             return generic<T>(z.vbroadcast(w, gbits.replicate(pattern)));
         }

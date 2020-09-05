@@ -52,10 +52,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Connect()
         {
-            broker[JmpKind.JA] = AB.handler<BasedAsmFx>(OnJA);
-            broker[JmpKind.JAE] = AB.handler<BasedAsmFx>(OnJAE);
-            broker[JmpKind.JB] = AB.handler<BasedAsmFx>(OnJB);
-            broker[JmpKind.JBE] = AB.handler<BasedAsmFx>(OnJBE);
+            broker[JmpKind.JA] = Flow.handler<BasedAsmFx>(OnJA);
+            broker[JmpKind.JAE] = Flow.handler<BasedAsmFx>(OnJAE);
+            broker[JmpKind.JB] = Flow.handler<BasedAsmFx>(OnJB);
+            broker[JmpKind.JBE] = Flow.handler<BasedAsmFx>(OnJBE);
         }
 
         public void Dispose()

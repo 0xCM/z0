@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class VBits
     {

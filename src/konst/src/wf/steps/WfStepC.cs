@@ -17,7 +17,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public WfStep(Type effect)
-            => Id = AB.step(typeof(C), effect);
+            => Id = Flow.step(typeof(C), effect);
 
         public Type Control
         {

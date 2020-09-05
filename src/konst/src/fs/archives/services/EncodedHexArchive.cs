@@ -21,7 +21,7 @@ namespace Z0
         public EncodedHexArchive(FolderPath root)
         {
             ArchiveRoot = root;
-            Sink = AB.sink();
+            Sink = Flow.sink();
         }
 
         void IAppEventSink.Deposit(IAppEvent e)

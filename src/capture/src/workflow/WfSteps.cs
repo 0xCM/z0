@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static AB;
+    using static Flow;
 
     using Asm;
 
@@ -74,7 +74,7 @@ namespace Z0
     public readonly struct EmitImmSpecialsStep : IWfStep<EmitImmSpecialsStep>
     {
         public static WfStepId StepId
-            => AB.step<EmitImmSpecialsStep>();
+            => Flow.step<EmitImmSpecialsStep>();
     }
 
     [Step]
@@ -148,7 +148,7 @@ namespace Z0
     {
         public const string StepName = nameof(ExtractMembers);
 
-        public static WfStepId StepId => AB.step<ExtractMembersStep>();
+        public static WfStepId StepId => Flow.step<ExtractMembersStep>();
     }
 
     [Step]

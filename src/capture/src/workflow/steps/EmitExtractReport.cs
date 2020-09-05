@@ -17,7 +17,7 @@ namespace Z0
     public readonly struct EmitExtractReportStep : IWfStep<EmitExtractReportStep>
     {
         public static WfStepId StepId
-            => AB.step<EmitExtractReportStep>();
+            => Flow.step<EmitExtractReportStep>();
     }
 
     public ref struct EmitExtractReport

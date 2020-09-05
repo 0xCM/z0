@@ -23,10 +23,10 @@ namespace Z0.Asm
 
         public bool Direct;
 
-        public SignExtensionKind SignExtension;
+        public Sx SignExtension;
 
         [MethodImpl(Inline)]
-        public ImmInfo(NumericWidth size, ulong value, bool direct, SignExtensionKind sek)
+        public ImmInfo(NumericWidth size, ulong value, bool direct, Sx sek)
         {
             Width = size;
             Value = value;
@@ -42,17 +42,17 @@ namespace Z0.Asm
             Value = value;
             Signed = false;
             Direct = direct;
-            SignExtension = SignExtensionKind.None;
+            SignExtension = Sx.None;
         }
 
         [MethodImpl(Inline)]
-        public ImmInfo(NumericWidth size, long value, bool direct, SignExtensionKind? sek = null)
+        public ImmInfo(NumericWidth size, long value, bool direct, Sx? sek = null)
         {
             Width = size;
             Value = (ulong)value;
             Signed = true;
             Direct = direct;
-            SignExtension = sek ?? SignExtensionKind.None;
+            SignExtension = sek ?? Sx.None;
         }
 
         public bool IsEmpty

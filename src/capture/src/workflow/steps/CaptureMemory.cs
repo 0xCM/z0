@@ -16,7 +16,7 @@ namespace Z0.Asm
     public readonly struct CaptureMemoryStep : IWfStep<CaptureMemoryStep>
     {
         public static WfStepId StepId
-            => AB.step<CaptureMemoryStep>();
+            => Flow.step<CaptureMemoryStep>();
     }
 
     public ref struct CaptureMemory

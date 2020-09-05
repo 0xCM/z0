@@ -135,7 +135,7 @@ namespace Z0
                 return;
 
             var hex = IdentifiedCodeWriter.save(Source, Parsed, HexPath);
-            Wf.Raise(new HexCodeSaved(StepName, Source, hex, ParsedPath, Ct));
+            Wf.Raise(new HexCodeSaved(StepId, Source, hex, ParsedPath, Ct));
         }
 
         void SaveCil()

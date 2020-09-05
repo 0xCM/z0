@@ -14,7 +14,7 @@ namespace Z0
     public readonly struct EmitFormatPatternsStep : IWfStep<EmitFormatPatternsStep>
     {
         public static WfStepId StepId
-            => AB.step<EmitFormatPatternsStep>();
+            => Flow.step<EmitFormatPatternsStep>();
     }
 
     public ref struct EmitFormatPatterns

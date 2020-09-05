@@ -12,10 +12,10 @@ namespace Z0
     public readonly struct ArchivedTable<T>
         where T : struct
     {
-        public readonly FilePath Location;
+        public readonly FS.FilePath Location;
 
         [MethodImpl(Inline)]
-        public ArchivedTable(FilePath path)
+        public ArchivedTable(FS.FilePath path)
         {
             Location = path;
         }

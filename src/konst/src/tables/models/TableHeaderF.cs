@@ -11,8 +11,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = Z0.Table;
-
     public readonly struct TableHeader<F>
         where F : unmanaged, Enum
     {

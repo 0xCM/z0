@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct AB
+    partial struct Flow
     {
         [MethodImpl(Inline)]
         public static WfHost<H> host<H>(H h = default)

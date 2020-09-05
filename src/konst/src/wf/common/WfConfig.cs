@@ -115,10 +115,10 @@ namespace Z0
             Api = Modules.Api;
             Control = Part.ExecutingPart;
             TargetArchive = new ArchiveConfig(FS.dir(Paths.LogRoot.Name) + FS.folder("capture/artifacts"));
-            Parts = AB.parts(args, Api.PartIdentities);
+            Parts = Flow.parts(args, Api.PartIdentities);
             Resources = new ArchiveConfig(Paths.ResourceRoot);
             AppData = new ArchiveConfig(Paths.AppDataRoot);
-            Settings = AB.settings(Shell);
+            Settings = Flow.settings(Shell);
             Logs = new WfLogConfig(Control, Paths.AppLogRoot);
         }
     }

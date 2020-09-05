@@ -9,24 +9,28 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    public readonly struct SegSpec : ITextual
-    {        
-        public readonly SegIndicator Indicator;
+    // public readonly struct SegSpec<W,I,J> : ITextual
+    //     where W : unmanaged, ITypeWidth
+    //     where I : unmanaged, ITypeNat
+    //     where J : unmanaged, ITypeNat
+    // {
+    //     public uint Width => width<W>();
 
-        public readonly DataWidth Width;
+    //     public readonly DataWidth Width;
 
-        public readonly PrimalNumericKind CellType;
-        
-        [MethodImpl(Inline)]
-        public SegSpec(SegIndicator i, DataWidth w, PrimalNumericKind nk)
-        {
-            Indicator = i;
-            Width = w;
-            CellType = nk;
-        }
+    //     public readonly PrimalNumericKind CellType;
 
-        public string Format()
-            => text.format("{0}x{1}x{2}", Width, CellType, Indicator);
-    }
+    //     [MethodImpl(Inline)]
+    //     public SegSpec(SegIndicator i, DataWidth w, PrimalNumericKind nk)
+    //     {
+    //         Indicator = i;
+    //         Width = w;
+    //         CellType = nk;
+    //     }
+
+    //     public string Format()
+    //         => text.format("{0}x{1}x{2}", Width, CellType, Indicator);
+    // }
 }

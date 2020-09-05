@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct AB
+    partial struct Flow
     {
         [MethodImpl(Inline)]
         public static WfStepExec<H,T> executor<H,T>(IWfShell wf, WfStepArgs? args = null, WfStepId? id = null)

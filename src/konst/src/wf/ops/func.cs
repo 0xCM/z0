@@ -11,7 +11,7 @@ namespace Z0
     using static z;
     using D = WfDelegates;
 
-    partial struct AB
+    partial struct Flow
     {
 
         [MethodImpl(Inline)]

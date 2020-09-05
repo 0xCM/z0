@@ -21,9 +21,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public eax(uint value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.EAX;
 
@@ -44,9 +42,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public ecx(uint value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.ECX;
 
@@ -68,9 +64,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public edx(uint value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.EDX;
 
@@ -91,9 +85,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public ebx(uint value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.EBX;
 
@@ -114,9 +106,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public esi(uint value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.ESI;
 
@@ -137,9 +127,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public edi(uint value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.EDI;
 
@@ -160,9 +148,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public esp(uint value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.ESP;
 
@@ -202,9 +188,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public r8d(uint value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.R8D;
 
@@ -240,9 +224,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public r10d(uint value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.R10D;
 
@@ -259,9 +241,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public r11d(uint value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.R11D;
 
@@ -278,9 +258,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public r12d(uint value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.R12D;
 
@@ -317,9 +295,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public r14d(uint value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.R14D;
 
@@ -336,9 +312,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public r15d(uint value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.R15D;
 

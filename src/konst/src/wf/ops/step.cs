@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct AB
+    partial struct Flow
     {
         /// <summary>
         /// Creates an identifier for a workflow step

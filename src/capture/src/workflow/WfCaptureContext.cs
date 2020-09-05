@@ -28,7 +28,7 @@ namespace Z0
         {
             Ct = ct;
             Wf = wf;
-            Log = AB.log(wf.Config);
+            Log = Flow.log(wf.Config);
             Broker = AsmWfBuilder.capture(wf);
             Context = new CaptureContext(asm.ContextRoot, decoder, formatter, writerfactory, Broker, Ct);
         }

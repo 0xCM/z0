@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gvec
     {
@@ -27,11 +27,11 @@ namespace Z0
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vbyteswap(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vbyteswap(v32u(x)));            
+                return generic<T>(dvec.vbyteswap(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vbyteswap(v64u(x)));            
+                return generic<T>(dvec.vbyteswap(v64u(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -47,11 +47,11 @@ namespace Z0
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vbyteswap(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vbyteswap(v32u(x)));            
+                return generic<T>(dvec.vbyteswap(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vbyteswap(v64u(x)));            
+                return generic<T>(dvec.vbyteswap(v64u(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

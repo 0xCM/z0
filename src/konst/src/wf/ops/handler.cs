@@ -12,7 +12,7 @@ namespace Z0
 
     using static TableFunctions;
 
-    partial struct AB
+    partial struct Flow
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static WfDataHandler<T> handler<T>(DataReceiver<T> receiver)

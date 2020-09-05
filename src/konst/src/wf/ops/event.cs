@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct AB
+    partial struct Flow
     {
         /// <summary>
         /// Defines an event identifier

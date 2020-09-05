@@ -18,10 +18,10 @@ namespace Z0
             vsrl_check(n128);
             vsrl_check(n256);
         }
-        
+
         void vsrl_check(N128 w)
         {
-            vsrl_check(w, z8);                
+            vsrl_check(w, z8);
             vsrl_check(w, z8i);
             vsrl_check(w, z16);
             vsrl_check(w, z32);
@@ -32,7 +32,7 @@ namespace Z0
 
         void vsrl_check(N256 w)
         {
-            vsrl_check(w, z8);                
+            vsrl_check(w, z8);
             vsrl_check(w, z8i);
             vsrl_check(w, z16);
             vsrl_check(w, z32);
@@ -48,6 +48,5 @@ namespace Z0
         void vsrl_check<T>(N256 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckShiftOp(VSvc.vsrl(w,t),w,t);
-
     }
 }

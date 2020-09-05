@@ -38,7 +38,7 @@ namespace Z0
     {
         public const string StepName = nameof(EmitLiterals);
 
-        public static WfStepId StepId => AB.step<EmitLiteralsStep>();
+        public static WfStepId StepId => Flow.step<EmitLiteralsStep>();
     }
 
     public ref struct EmitLiterals

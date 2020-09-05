@@ -8,7 +8,7 @@ namespace Z0
 
     using static RenderPatterns;
 
-    using static AB;
+    using static Flow;
 
     [Step]
     public readonly struct ProcessInstructionsStep : IWfStep<ProcessInstructionsStep>
@@ -168,7 +168,7 @@ namespace Z0
         public const string EmissionType = EmitStringRecordsStep.DataType;
 
         public static WfStepId StepId
-            => AB.step<EmitPartStringsStep>();
+            => Flow.step<EmitPartStringsStep>();
 
         public static string ExtName(PartStringKind kind)
             => (kind == PartStringKind.System ? EmitStringRecordsStep.SystemKindExt : EmitStringRecordsStep.UserKindExt).ToLower();
@@ -180,7 +180,7 @@ namespace Z0
         public const string StepName = nameof(CreateGlobalIndex);
 
         public static WfStepId StepId
-            => AB.step<CreateGlobalIndexStep>();
+            => Flow.step<CreateGlobalIndexStep>();
     }
 
     [Step]
@@ -189,14 +189,14 @@ namespace Z0
         public const string EmissionType = "Metablobs";
 
         public static WfStepId StepId
-            => AB.step<EmitBitMasksStep>();
+            => Flow.step<EmitBitMasksStep>();
     }
 
     [Step]
     public readonly struct EmitImageSummariesStep : IWfStep<EmitImageSummariesStep>
     {
         public static WfStepId StepId
-            => AB.step<EmitImageSummariesStep>();
+            => Flow.step<EmitImageSummariesStep>();
     }
 
     [Step(typeof(EmitResBytes))]
@@ -205,7 +205,7 @@ namespace Z0
         public const string StepName = nameof(EmitResBytes);
 
         public static WfStepId StepId
-            => AB.step<EmitResBytesStep>();
+            => Flow.step<EmitResBytesStep>();
 
     }
 
@@ -213,13 +213,13 @@ namespace Z0
     public readonly struct ParseAsmFilesStep : IWfStep<ParseAsmFilesStep>
     {
         public static WfStepId StepId
-            => AB.step<ParseAsmFilesStep>();
+            => Flow.step<ParseAsmFilesStep>();
     }
 
     [Step(typeof(EmitDatasets))]
     public readonly struct EmitDatasetsStep : IWfStep<EmitDatasetsStep>
     {
-        public static WfStepId StepId => AB.step<EmitDatasetsStep>();
+        public static WfStepId StepId => Flow.step<EmitDatasetsStep>();
     }
 
     [Step(typeof(EmitFieldMetadata))]
@@ -228,7 +228,7 @@ namespace Z0
         public const string DatasetName = "FieldMetadata";
 
         public static WfStepId StepId
-            => AB.step<EmitFieldMetadataStep>();
+            => Flow.step<EmitFieldMetadataStep>();
     }
 
     [Step(typeof(EmitImageContent))]

@@ -12,7 +12,7 @@ namespace Z0
     using static z;
 
     [ApiHost]
-    public readonly partial struct AB
+    public readonly partial struct Flow
     {
         [MethodImpl(Inline)]
         public static WfType<S,T> type<S,T>(S s = default, T t = default)

@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst; 
+
+    using static Konst;
     using static As;
-    
+
     partial class gvec
     {
         /// <summary>
@@ -58,7 +58,7 @@ namespace Z0
                 return generic<T>(dvec.vcnonimpl(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
                 return Memories.generic<T>(dvec.vcnonimpl(v64u(x), v64u(y)));
-            else 
+            else
                 return vcnonimpl_i(x,y);
         }
 
@@ -74,7 +74,7 @@ namespace Z0
                 return generic<T>(dvec.vcnonimpl(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
                 return generic<T>(dvec.vcnonimpl(v64i(x), v64i(y)));
-            else 
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -83,14 +83,14 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return Memories.generic<T>(dvec.vcnonimpl(v8u(x), v8u(y)));
+                return generic<T>(dvec.vcnonimpl(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vcnonimpl(v16u(x),v16u(y)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(dvec.vcnonimpl(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(dvec.vcnonimpl(v64u(x), v64u(y)));
-            else 
+            else
                 return vcnonimpl_i(x,y);
         }
 
@@ -106,8 +106,8 @@ namespace Z0
                 return generic<T>(dvec.vcnonimpl(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
                 return generic<T>(dvec.vcnonimpl(v64i(x), v64i(y)));
-            else 
-                throw Unsupported.define<T>();
+            else
+                throw no<T>();
         }
     }
 }

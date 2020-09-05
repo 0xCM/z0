@@ -6,20 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
-    using System.Linq;
 
     using static Konst;
     using static z;
 
     using static EmitAsmSymbolsStep;
 
-    [Step(typeof(EmitAsmSymbols), StepName)]
-    public readonly struct EmitAsmSymbolsStep : IWfStep<EmitAsmSymbolsStep>
+    [Step]
+    public struct EmitAsmSymbolsStep : IWfStep<EmitAsmSymbolsStep>
     {
-        public const string StepName = nameof(EmitAsmSymbols);
-
-        public static WfStepId StepId => AB.step<EmitAsmSymbolsStep>();
+        public static WfStepId StepId
+            => type<EmitAsmSymbolsStep>();
     }
 
     public ref struct EmitAsmSymbols

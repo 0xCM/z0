@@ -26,6 +26,6 @@ namespace Z0
             [CallerMemberName] string caller = null,
             [CallerFilePath] string file = null,
             [CallerLineNumber] int? line = null)
-                    => new WfEventOrigin(id,actor, AB.caller(part, caller,file,line));
+                    => new WfEventOrigin(id,actor, Flow.caller(part, caller,file,line));
     }
 }

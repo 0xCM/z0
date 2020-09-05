@@ -17,7 +17,7 @@ namespace Z0
     [Step(typeof(BuildGlobalCodeIndex))]
     public readonly struct BuildGlobalIndexStep : IWfStep<BuildGlobalIndexStep>
     {
-        public static WfStepId StepId => AB.step<BuildGlobalIndexStep>();
+        public static WfStepId StepId => Flow.step<BuildGlobalIndexStep>();
     }
 
     public class BuildGlobalCodeIndex : IDisposable

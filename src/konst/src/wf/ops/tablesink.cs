@@ -11,7 +11,7 @@ namespace Z0
     using static z;
     using static TableFunctions;
 
-    partial struct AB
+    partial struct Flow
     {
         /// <summary>
         /// Creates a T-parametric sink predicated on a <see cref='Receive{T}'/> process function

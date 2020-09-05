@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using static z;    
+    using static z;
 
     public class t_vsllv : t_inx<t_vsllv>
     {
@@ -42,33 +42,33 @@ namespace Z0
         }
 
         void vsllv_check<T>(W128 w, T t = default)
-            where T : unmanaged        
+            where T : unmanaged
         {
-            var domain = Interval.closed(zero(t), convert<int,T>( (int)bitsize(t) - 1));
-            
-            Pair<Vector128<T>> @case(int i)
+            var domain = Interval.closed(zero(t), convert<uint,T>( (uint)bitsize(t) - 1));
+
+            Pair<Vector128<T>> @case(uint i)
             {
                 var x = Random.CpuVector(w,t);
                 var offsets = Random.CpuVector(w, domain);
                 return (x,offsets);
             }
 
-            CheckSVF.CheckCells(VSvc.vsllv(w,t),@case);            
+            CheckSVF.CheckCells(VSvc.vsllv(w,t),@case);
         }
 
         void vsllv_check<T>(W256 w, T t = default)
-            where T : unmanaged        
+            where T : unmanaged
         {
-            var domain = Interval.closed(As.zero(t),convert<int,T>((int)bitsize(t) - 1));
-            
-            Pair<Vector256<T>> @case(int i)
+            var domain = Interval.closed(As.zero(t),convert<uint,T>((uint)bitsize(t) - 1));
+
+            Pair<Vector256<T>> @case(uint i)
             {
                 var x = Random.CpuVector(w,t);
                 var offsets = Random.CpuVector(w, domain);
                 return (x,offsets);
             }
 
-            CheckSVF.CheckCells(VSvc.vsllv(w,t),@case);            
+            CheckSVF.CheckCells(VSvc.vsllv(w,t),@case);
         }
     }
 }

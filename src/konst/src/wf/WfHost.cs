@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     public abstract class WfHost<H> : IWfHost<H>
         where H : WfHost<H>, new()
@@ -26,7 +27,7 @@ namespace Z0
             Name = Type.Name;
         }
 
-        public abstract void Run();
+        public virtual void Run() {}
 
         public virtual string Format()
             => Id.Format();

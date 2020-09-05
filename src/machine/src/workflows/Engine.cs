@@ -21,7 +21,7 @@ namespace Z0
             {
                 var ct = correlate(ShellId);
                 var config = WfBuilder.configure(app, args);
-                using var log = AB.log(config);
+                using var log = Flow.log(config);
                 using var wf = WfBuilder.shell(config, log);
 
                 var state = new WfCaptureState(wf, AsmWfBuilder.asm(app), wf.Config, wf.Ct);

@@ -53,7 +53,7 @@ namespace Z0
 
         public XedPattern[] ExtractPatterns()
         {
-            var step = AB.step(typeof(void),typeof(XedWf));
+            var step = Flow.step(typeof(void),typeof(XedWf));
             var patterns = list<XedPattern>();
             var parser = XedSourceParser.Service;
             var files = Src.InstructionFiles.ToSpan();

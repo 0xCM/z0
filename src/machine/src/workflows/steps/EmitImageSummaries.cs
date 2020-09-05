@@ -29,7 +29,7 @@ namespace Z0
         {
             Wf = wf;
             Ct = ct;
-            Id = AB.step(typeof(EmitImageSummaries));
+            Id = Flow.step(typeof(EmitImageSummaries));
             Images = images;
             TargetPath = Wf.IndexRoot + FileName.define("machine.images", FileExtensions.Csv);
             Wf.Created(StepId);

@@ -5,11 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst; 
-    using static As;
+
+    using static Konst;
+    using static z;
 
     partial class gvec
     {
@@ -39,7 +39,7 @@ namespace Z0
             else if(typeof(T) == typeof(uint))
                 return generic<T>(dvec.vlt(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return Memories.generic<T>(dvec.vlt(v64u(x), v64u(y)));
+                return generic<T>(dvec.vlt(v64u(x), v64u(y)));
             else
                 return vlt_i(x,y);
         }
@@ -57,7 +57,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(dvec.vlt(v64i(x), v64i(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -65,7 +65,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return Memories.generic<T>(dvec.vlt(v8u(x), v8u(y)));
+                return generic<T>(dvec.vlt(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(dvec.vlt(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
@@ -74,7 +74,7 @@ namespace Z0
                 return generic<T>(dvec.vlt(v64u(x), v64u(y)));
             else
                 return vlt_i(x,y);
-        }    
+        }
 
         [MethodImpl(Inline)]
         static Vector256<T> vlt_i<T>(Vector256<T> x, Vector256<T> y)
@@ -89,7 +89,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(dvec.vlt(v64i(x), v64i(y)));
             else
-                throw Unsupported.define<T>();
-        }    
+                throw no<T>();
+        }
     }
 }

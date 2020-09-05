@@ -21,7 +21,7 @@ namespace Z0
         public ProcessLocatedAsm(IWfShell context)
         {
             Wf = context;
-            Broker = AB.broker<Mnemonic,BasedAsmFx>((int)Mnemonic.LAST);
+            Broker = Flow.broker<Mnemonic,BasedAsmFx>((int)Mnemonic.LAST);
         }
 
         [MethodImpl(Inline)]

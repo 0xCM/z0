@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Security;
 
@@ -19,10 +19,4 @@ namespace Z0
 
     }
 
-    public interface ITableRows<F,T> : ITableRows<F>
-        where F : unmanaged, Enum
-        where T : struct, ITable<F,T>
-    {
-        T[] Data {get;}
-    }    
 }

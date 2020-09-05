@@ -26,8 +26,8 @@ namespace Z0
 
         void IWfDataProcessor.Connect()
         {
-            Broker[Mnemonic.And] = AB.handler<BasedAsmFx>(OnAnd);
-            Broker[Mnemonic.Or] = AB.handler<BasedAsmFx>(OnOr);
+            Broker[Mnemonic.And] = Flow.handler<BasedAsmFx>(OnAnd);
+            Broker[Mnemonic.Or] = Flow.handler<BasedAsmFx>(OnOr);
         }
     }
 

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct AB
+    partial struct Flow
     {
         [MethodImpl(Inline), Op]
         public static WfStepControl control(WfStepId id, Action fx)

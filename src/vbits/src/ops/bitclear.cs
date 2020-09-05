@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
-    using static Memories;
-    
+    using static z;
+
     partial class VBits
     {
         /// <summary>
@@ -45,6 +45,6 @@ namespace Z0
             var cellmask = gbits.eraser<T>(start,count);
             var vmask = Vectors.vbroadcast(n, cellmask);
             return gvec.vand(vmask,src);
-        }                  
+        }
     }
 }

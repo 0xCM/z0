@@ -6,14 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using Z0.Asm;
 
     using static Konst;
     using static TableFunctions;
-
-    using api = Flow;
 
     public readonly struct AsmTableSink : IWfTableSink<AsmTableSink, AsmRecord>
     {
@@ -24,7 +21,7 @@ namespace Z0
         public AsmTableSink(IWfShell context, params Receive<AsmRecord>[] receivers)
         {
             Wf = context;
-            Sinks = receivers.Map(f => AB.tablesink(context, f));
+            Sinks = receivers.Map(f => Flow.tablesink(context, f));
         }
 
         public void Deposit(in AsmRecord src)

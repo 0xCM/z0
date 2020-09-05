@@ -17,9 +17,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public xmm0(FixedCell128 value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.XMM0;
     }
@@ -31,9 +29,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public xmm1(FixedCell128 value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.XMM1;
     }
@@ -44,9 +40,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public xmm2(FixedCell128 value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.XMM2;
     }
@@ -57,9 +51,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public xmm3(FixedCell128 value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.XMM3;
     }
@@ -97,9 +89,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public xmm6(FixedCell128 value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.XMM6;
     }
@@ -136,9 +126,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public xmm9(FixedCell128 value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.XMM9;
     }
@@ -175,9 +163,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public xmm12(FixedCell128 value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.XMM12;
     }
@@ -188,9 +174,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public xmm13(FixedCell128 value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.XMM13;
     }
@@ -201,9 +185,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public xmm14(FixedCell128 value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.XMM14;
     }
@@ -214,9 +196,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public xmm15(FixedCell128 value)
-        {
-            Content = value;
-        }
+            => Content = value;
         public K Kind => K.XMM15;
     }
 
@@ -358,9 +338,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public xmm26(FixedCell128 value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.XMM26;
     }
@@ -371,9 +349,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public xmm27(FixedCell128 value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.XMM27;
     }
@@ -384,9 +360,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public xmm28(FixedCell128 value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.XMM28;
     }
@@ -397,9 +371,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public xmm29(FixedCell128 value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.XMM29;
     }
@@ -410,9 +382,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public xmm30(FixedCell128 value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.XMM30;
     }
@@ -423,9 +393,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public xmm31(FixedCell128 value)
-        {
-            Content = value;
-        }
+             => Content = value;
 
         public K Kind => K.XMM31;
     }

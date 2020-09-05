@@ -5,11 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Generic intrinsics over floating-point domains
@@ -25,9 +25,9 @@ namespace Z0
                 return generic<T>(dinxfp.vadd(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vadd(v64f(x), v64f(y)));
-            else 
+            else
                 throw Unsupported.define<T>();
-        }        
+        }
 
        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
        public static Vector256<T> vadd<T>(Vector256<T> x, Vector256<T> y)
@@ -37,9 +37,9 @@ namespace Z0
                 return generic<T>(dinxfp.vadd(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vadd(v64f(x), v64f(y)));
-            else 
+            else
                 throw Unsupported.define<T>();
-        }     
+        }
 
        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
        public static Vector128<T> vsub<T>(Vector128<T> x, Vector128<T> y)
@@ -49,9 +49,9 @@ namespace Z0
                 return generic<T>(dinxfp.vsub(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vsub(v64f(x), v64f(y)));
-            else 
+            else
                 throw Unsupported.define<T>();
-        }        
+        }
 
        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
        public static Vector256<T> vsub<T>(Vector256<T> x, Vector256<T> y)
@@ -61,9 +61,9 @@ namespace Z0
                 return generic<T>(dinxfp.vsub(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vsub(v64f(x), v64f(y)));
-            else 
+            else
                 throw Unsupported.define<T>();
-        }        
+        }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector128<T> vhadd<T>(Vector128<T> x, Vector128<T> y)
@@ -73,7 +73,7 @@ namespace Z0
                 return generic<T>(dinxfp.vhadd(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vhadd(v64f(x), v64f(y)));
-            else 
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -85,7 +85,7 @@ namespace Z0
                 return generic<T>(dinxfp.vhadd(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vhadd(v64f(x), v64f(y)));
-            else 
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -97,7 +97,7 @@ namespace Z0
                 return generic<T>(dinxfp.vdiv(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vdiv(v64f(x), v64f(y)));
-            else 
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -109,7 +109,7 @@ namespace Z0
                 return generic<T>(dinxfp.vdiv(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vdiv(v64f(x), v64f(y)));
-            else 
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -122,9 +122,9 @@ namespace Z0
                 return generic<T>(dinxfp.vand(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vand(v64f(x), v64f(y)));
-            else 
+            else
                 throw Unsupported.define<T>();
-                    
+
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -135,9 +135,9 @@ namespace Z0
                 return generic<T>(dinxfp.vand(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vand(v64f(x), v64f(y)));
-            else 
+            else
                 throw Unsupported.define<T>();
-                    
+
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -148,8 +148,8 @@ namespace Z0
                 return generic<T>(dinxfp.vor(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vor(v64f(x), v64f(y)));
-            else 
-                throw Unsupported.define<T>();                    
+            else
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -160,8 +160,8 @@ namespace Z0
                 return generic<T>(dinxfp.vor(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vor(v64f(x), v64f(y)));
-            else 
-                throw Unsupported.define<T>();                    
+            else
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -172,8 +172,8 @@ namespace Z0
                 return generic<T>(dinxfp.vxor(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vxor(v64f(x), v64f(y)));
-            else 
-                throw Unsupported.define<T>();                    
+            else
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -184,8 +184,8 @@ namespace Z0
                 return generic<T>(dinxfp.vxor(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vxor(v64f(x), v64f(y)));
-            else 
-                throw Unsupported.define<T>();                    
+            else
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -196,8 +196,8 @@ namespace Z0
                 return generic<T>(dinxfp.vxornot(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vxornot(v64f(x), v64f(y)));
-            else 
-                throw Unsupported.define<T>();                    
+            else
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -208,8 +208,8 @@ namespace Z0
                 return generic<T>(dinxfp.vxornot(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vxornot(v64f(x), v64f(y)));
-            else 
-                throw Unsupported.define<T>();                    
+            else
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
@@ -220,10 +220,10 @@ namespace Z0
                 return generic<T>(dinxfp.vmin(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vmin(v64f(x), v64f(y)));
-            else 
+            else
                 throw Unsupported.define<T>();
         }
-         
+
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector256<T> vmin<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
@@ -232,7 +232,7 @@ namespace Z0
                 return generic<T>(dinxfp.vmin(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vmin(v64f(x), v64f(y)));
-            else 
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -244,9 +244,9 @@ namespace Z0
                 return generic<T>(dinxfp.vmax(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vmax(v64f(x), v64f(y)));
-            else 
+            else
                 throw Unsupported.define<T>();
-        }        
+        }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector256<T> vmax<T>(Vector256<T> x, Vector256<T> y)
@@ -256,9 +256,9 @@ namespace Z0
                 return generic<T>(dinxfp.vmax(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vmax(v64f(x), v64f(y)));
-            else 
+            else
                 throw Unsupported.define<T>();
-        }        
+        }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector128<T> vnegate<T>(Vector128<T> src)
@@ -268,7 +268,7 @@ namespace Z0
                 return generic<T>(dinxfp.vnegate(v32f(src)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vnegate(v64f(src)));
-            else 
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -280,7 +280,7 @@ namespace Z0
                 return generic<T>(dinxfp.vnegate(v32f(src)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vnegate(v64f(src)));
-            else 
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -296,7 +296,7 @@ namespace Z0
                 return generic<T>(dinxfp.vbroadcast(n256,-0.0f));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vbroadcast(n256,-0.0));
-            else 
+            else
                 return default;
         }
     }

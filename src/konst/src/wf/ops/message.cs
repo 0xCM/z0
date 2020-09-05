@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct AB
+    partial struct Flow
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static AppMsg<T> message<T>(T content, string pattern, MessageKind kind, FlairKind flair, AppMsgSource origin)

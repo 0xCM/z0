@@ -5,13 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    
+
     using static Konst;
-    using static Memories;
-    
+    using static z;
+
     /// <summary>
     /// Generic scalar intrinsics over floating-point domains
     /// </summary>
@@ -70,10 +70,10 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxsfp.mul(v32f(x), v32f(y)));          
+                return generic<T>(dinxsfp.mul(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxsfp.mul(v64f(x), v64f(y)));
-            else                
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -85,7 +85,7 @@ namespace Z0
                 return generic<T>(dinxsfp.div(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxsfp.div(v64f(x), v64f(y)));
-            else                
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -97,7 +97,7 @@ namespace Z0
                 return generic<T>(dinxsfp.min(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxsfp.min(v64f(x), v64f(y)));
-            else                
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -106,10 +106,10 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxsfp.max(v32f(x), v32f(y)));            
+                return generic<T>(dinxsfp.max(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxsfp.max(v64f(x), v64f(y)));
-            else                
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -118,10 +118,10 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxsfp.ceil(v32f(x)));            
+                return generic<T>(dinxsfp.ceil(v32f(x)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxsfp.ceil(v64f(x)));
-            else                
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -130,10 +130,10 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxsfp.floor(v32f(x)));            
+                return generic<T>(dinxsfp.floor(v32f(x)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxsfp.floor(v64f(x)));
-            else                
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -142,10 +142,10 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxsfp.sqrt(v32f(x)));            
+                return generic<T>(dinxsfp.sqrt(v32f(x)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxsfp.sqrt(v64f(x)));
-            else                
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -154,10 +154,10 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxsfp.fmadd(v32f(x), v32f(y), v32f(z))); 
+                return generic<T>(dinxsfp.fmadd(v32f(x), v32f(y), v32f(z)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxsfp.fmadd(v64f(x), v64f(y), v64f(z)));
-            else                
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -166,10 +166,10 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxsfp.fmsub(v32f(x), v32f(y), v32f(z))); 
+                return generic<T>(dinxsfp.fmsub(v32f(x), v32f(y), v32f(z)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxsfp.fmsub(v64f(x), v64f(y), v64f(z)));
-            else                
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -178,10 +178,10 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxsfp.fnmadd(v32f(x), v32f(y), v32f(z))); 
+                return generic<T>(dinxsfp.fnmadd(v32f(x), v32f(y), v32f(z)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxsfp.fnmadd(v64f(x), v64f(y), v64f(z)));
-            else                
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -205,7 +205,7 @@ namespace Z0
                 return dinxsfp.neq(v32f(x), v32f(y));
             else if(typeof(T) == typeof(double))
                 return dinxsfp.neq(v64f(x), v64f(y));
-            else 
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -214,22 +214,22 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dinxsfp.lteq(v32f(x), v32f(y));            
+                return dinxsfp.lteq(v32f(x), v32f(y));
             else if(typeof(T) == typeof(double))
                 return dinxsfp.lteq(v32f(x), v32f(y));
-            else                
+            else
                 throw Unsupported.define<T>();
         }
- 
+
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static bool ngt<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dinxsfp.ngt(v32f(x), v32f(y));            
+                return dinxsfp.ngt(v32f(x), v32f(y));
             else if(typeof(T) == typeof(double))
                 return dinxsfp.ngt(v32f(x), v32f(y));
-            else                
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -238,10 +238,10 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dinxsfp.nlt(v32f(x), v32f(y));            
+                return dinxsfp.nlt(v32f(x), v32f(y));
             else if(typeof(T) == typeof(double))
                 return dinxsfp.nlt(v32f(x), v32f(y));
-            else                
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -278,7 +278,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return dinxsfp.lt(v64f(x), v64f(y));
             throw Unsupported.define<T>();
-        }   
+        }
 
         [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
         public static Vector128<T> cmp<T>(Vector128<T> x, Vector128<T> y, FpCmpMode mode)
@@ -289,6 +289,6 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxsfp.cmp(v64f(x), v64f(y),mode));
             throw Unsupported.define<T>();
-        }   
+        }
     }
 }

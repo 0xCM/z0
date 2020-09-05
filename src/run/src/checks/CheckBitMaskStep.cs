@@ -14,6 +14,6 @@ namespace Z0
     public readonly struct CheckBitMasksStep : IWfStep<CheckBitMasksStep>
     {
         public static WfStepId StepId
-            => AB.step<CheckBitMasksStep>();
+            => Flow.step<CheckBitMasksStep>();
     }
 }

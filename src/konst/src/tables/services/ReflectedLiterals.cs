@@ -13,8 +13,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using Z0.Data;
-
     using NBI = NumericBaseIndicator;
 
     public readonly struct ReflectedLiterals
@@ -27,10 +25,10 @@ namespace Z0
                 var attrib = (LiteralAttribute)target.GetCustomAttribute(typeof(LiteralAttribute));
                 var data = attrib.Description;
                 if(!string.IsNullOrWhiteSpace(data))
-                    return LiteralInfo.Define(target.Name, 
-                    target.GetRawConstantValue(), data, 
-                    Type.GetTypeCode(target.FieldType), 
-                    target.FieldType.IsEnum, 
+                    return LiteralInfo.Define(target.Name,
+                    target.GetRawConstantValue(), data,
+                    Type.GetTypeCode(target.FieldType),
+                    target.FieldType.IsEnum,
                     false);
             }
             return LiteralInfo.Empty;
@@ -52,7 +50,7 @@ namespace Z0
                 else
                     dst.Add(NumericLiteral.Base2(field.Name, vRaw, Render.bits(vRaw, tc)));
             }
-            return dst.ToArray();            
+            return dst.ToArray();
         }
 
         public static NumericLiteral[] numeric(LiteralInfo src, object value)
@@ -83,16 +81,16 @@ namespace Z0
                                     src.Name,
                                     value,
                                     component.Substring(0, length - 1),
-                                    NumericBases.kind(indicator)                                    
+                                    NumericBases.kind(indicator)
                                     );
-                            }                            
+                            }
                         }
                         else
                             dst[i] = NumericLiteral.Empty;
                     }
                 }
-            }   
+            }
             return Array.Empty<NumericLiteral>();
-        }        
+        }
     }
 }

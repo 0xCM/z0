@@ -9,12 +9,12 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct TableArchive : ITableArchive
+    public readonly struct TableArchive
     {
-        public FolderPath ArchiveRoot {get;}
+        public FS.FolderPath ArchiveRoot {get;}
 
         [MethodImpl(Inline)]
-        public TableArchive(FolderPath root)
+        public TableArchive(FS.FolderPath root)
         {
             ArchiveRoot = root;
         }

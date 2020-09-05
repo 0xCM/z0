@@ -13,11 +13,11 @@ namespace Z0
     partial struct Table
     {
         [MethodImpl(Inline), Op]
-        public static TableArchive archive(FolderPath root)
+        public static TableArchive archive(FS.FolderPath root)
             => new TableArchive(root);
 
         [MethodImpl(Inline)]
-        public static ArchivedTable<T> archived<T>(FilePath src)
+        public static ArchivedTable<T> archived<T>(FS.FilePath src)
             where T : struct
                 => new ArchivedTable<T>(src);
 
@@ -27,7 +27,7 @@ namespace Z0
             where M : struct, IDataModel
             where K : unmanaged, Enum
         {
-            var path = dst.ArchiveRoot + FolderName.Define(m.Name) + FileName.define(typeof(T).Name);
+            var path = dst.ArchiveRoot + FS.folder(m.Name) + FS.file(typeof(T).Name);
             return (src, new ArchivedTable<T>(path));
         }
 
@@ -36,7 +36,7 @@ namespace Z0
             where M : struct, IDataModel
             where K : unmanaged, Enum
         {
-            var path = dst.ArchiveRoot + FolderName.Define(m.Name) + FileName.define(typeof(T).Name);
+            var path = dst.ArchiveRoot + FS.folder(m.Name) + FS.file(typeof(T).Name);
             var records = z.span(src);
             var count = records.Length;
 
@@ -52,7 +52,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static WfDataFlow<Rowset<T>, ArchivedTable<T>> archive<T>(Rowset<T> src, FilePath dst)
+        public static WfDataFlow<Rowset<T>, ArchivedTable<T>> archive<T>(Rowset<T> src, FS.FilePath dst)
             where T : struct
                 => (src, new ArchivedTable<T>(dst));
     }

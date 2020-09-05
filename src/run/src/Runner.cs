@@ -25,8 +25,6 @@ namespace Z0
 
         CorrelationToken Ct;
 
-        WfActor Actor;
-
         WfStepId StepId;
 
         byte offset;
@@ -37,8 +35,7 @@ namespace Z0
         public Runner(WfCaptureState wf)
         {
             Ct = wf.Ct;
-            StepId = AB.step(typeof(Runner));
-            Actor = Flow.actor(nameof(Runner));
+            StepId = Flow.step(typeof(Runner));
             State = wf;
             Buffer = z.span<string>(256);
             offset = 0;

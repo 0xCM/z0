@@ -21,9 +21,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public rax(ulong value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.RAX;
 
@@ -44,9 +42,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public rcx(ulong value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.RAX;
 
@@ -113,9 +109,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public rsi(ulong value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.RSI;
 
@@ -151,9 +145,7 @@ namespace Z0.Asm.Dsl
 
         [MethodImpl(Inline)]
         public rsp(ulong value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public K Kind => K.RSP;
 

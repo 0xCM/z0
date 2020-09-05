@@ -5,14 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-        
-    using static Konst; 
+
+    using static Konst;
     using static z;
 
     partial struct z
     {
+
         /// <summary>
         /// 8x16w -> 16x8w
         /// </summary>
@@ -51,7 +52,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vcover(Vector256<uint> src, out Vector256<ushort> dst)
              => dst = v16u(vor(vsll(src,16),src));
-        
+
         /// <summary>
         /// 2x64w -> 4x32w
         /// [0, 1] -> [0, 0, 1, 1]

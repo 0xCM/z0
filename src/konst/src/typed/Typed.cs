@@ -8,13 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     public static partial class Typed
-    {        
+    {
         /// <summary>
         /// Returns the numeric value represented by a natural type
         /// </summary>
-        /// <param name="n">The natural type representativev</param>
+        /// <param name="n">The natural type representative</param>
         /// <typeparam name="K">A natural type</typeparam>
         [MethodImpl(Inline)]
         public static ulong value<N>(N n = default)
@@ -27,7 +27,7 @@ namespace Z0
         public const sbyte z8i = 0;
 
         /// <summary>
-        /// The zero-value for an 8-bit usigned integer
+        /// The zero-value for an 8-bit unsigned integer
         /// </summary>
         public const byte z8 = 0;
 
@@ -47,7 +47,7 @@ namespace Z0
         public const int z32i = 0;
 
         /// <summary>
-        /// The zero-value for a 32-bit usigned integer
+        /// The zero-value for a 32-bit unsigned integer
         /// </summary>
         public const uint z32 = 0;
 
