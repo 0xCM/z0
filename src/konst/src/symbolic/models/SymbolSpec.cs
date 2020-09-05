@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
 
@@ -22,15 +21,14 @@ namespace Z0
 
         public ArtifactIdentifier SymDomain {get;}
 
-
         [MethodImpl(Inline)]
-        public SymbolSpec(ushort symwidth, ushort segwidth, ArtifactIdentifier segdomain, ArtifactIdentifier symdomain)
+        public SymbolSpec(ushort symwidth, ushort segwidth, ArtifactIdentifier seg, ArtifactIdentifier sym)
         {
             SymWidth = symwidth;
             SegWidth = segwidth;
             Capacity = (ushort)(SegWidth/SymWidth);
-            SegDomain = segdomain;
-            SymDomain = symdomain;
+            SegDomain = seg;
+            SymDomain = sym;
         }
     }
 }

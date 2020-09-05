@@ -16,6 +16,8 @@ public enum PartId : ulong
 
     Konst = 3,
 
+    KonstShell = Konst | Shell,
+
     Math = 4,
 
     BitMasks = 5,
@@ -242,7 +244,6 @@ public enum PartId : ulong
 
     AsmTest = Asm | Test,
 
-
     AsmDTest = AsmModels | Test,
 
     SymbolicTest = Symbolic | Test,
@@ -253,11 +254,9 @@ public enum PartId : ulong
     // ~ Classifiers
     // ~ -------------------------------------------------------------------------------
 
-    Svc = ushort.MaxValue + 1,
+    Shell = ushort.MaxValue  + 1,
 
-    Test = Svc << 1,
+    Svc = Shell << 1,
 
-    App = Test << 1,
-
-    Lib = App << 1,
+    Test = Shell << 2,
 }

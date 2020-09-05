@@ -28,10 +28,10 @@ namespace Z0
         /// </summary>
         /// <typeparam name="E"></typeparam>
         /// <typeparam name="T"></typeparam>
-        public static Symbols<E,T> enumerate<E,T>()
+        public static SymbolSet<E,T> enumerate<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged
-                => new Symbols<E,T>(Enums.literals<E>().Map(x => symbol<E,T>(x)));
+                => new SymbolSet<E,T>(Enums.literals<E>().Map(x => symbol<E,T>(x)));
 
         /// <summary>
         /// Defines a symbol spec predicated on enumeration literals

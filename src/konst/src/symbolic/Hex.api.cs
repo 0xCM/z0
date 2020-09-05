@@ -18,7 +18,7 @@ namespace Z0
         /// The asci code of the '0' digit
         /// </summary>
         public const byte MinScalarCode = 48;
-        
+
         /// <summary>
         /// The asci code of the '9' digit
         /// </summary>
@@ -57,11 +57,6 @@ namespace Z0
             => new byte[]{48,49,50,51,52,53,54,55,56,57,97,98,99,100,101,102};
 
         public static SegRef[] HexRefs
-            => sys.array(
-                memref(H.UpperSymData),
-                memref(H.LowerSymData), 
-                memref(H.UpperCodes), 
-                memref(H.LowerCodes)
-                );            
+            => sys.array(memref(H.UpperSymData), memref(H.LowerSymData), memref(H.UpperCodes), memref(H.LowerCodes));
     }
 }

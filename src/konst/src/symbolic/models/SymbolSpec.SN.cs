@@ -11,7 +11,7 @@ namespace Z0
     using static z;
 
     /// <summary>
-    /// Specifes symbol characteristics
+    /// Specifies symbol characteristics
     /// </summary>
     public readonly struct SymbolSpec<S,W> : ISymbolSpec<S>
         where S : unmanaged
