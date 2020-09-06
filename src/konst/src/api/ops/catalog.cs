@@ -7,20 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
     using static z;
 
     partial struct ApiQuery
     {
-        [MethodImpl(Inline), Op]
-        public static ApiSet apiset(params IPart[] parts)
-            => new ApiSet(new ApiPart(parts));
+        [Op]
+        public static PartCatalog catalog(IPart part)
+            => new PartCatalog(part, dataTypes(part.Owner), apiHosts(part.Owner), svcHostTypes(part.Owner));
 
-        [MethodImpl(Inline), Op]
-        public static IApiSet apiset(IResolvedApi resolved)
-            => new ApiSet(resolved);
-   }
+        [Op]
+        public static IPartCatalog catalog(Assembly src)
+            => new PartCatalog(src, dataTypes(src), apiHosts(src), svcHostTypes(src));
+    }
 }

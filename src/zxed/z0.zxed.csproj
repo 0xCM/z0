@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Flow)" />
+    <ProjectReference Include="$(Konst)" />
   </ItemGroup>
 </Project>

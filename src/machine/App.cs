@@ -16,20 +16,8 @@ namespace Z0
         public const PartId ShellId = PartId.Machine;
     }
 
-    class App : AppShell<App,IAppContext>
+    class App
     {
-        public CorrelationToken Ct;
-
-        public App()
-            : base(WfBuilder.app())
-        {
-            Ct = correlate(ShellId);
-        }
-
-        public override void RunShell(params string[] args)
-        {
-            Engine.run(Context, args);
-        }
 
         public static void Main(params string[] args)
         {
@@ -38,7 +26,6 @@ namespace Z0
             using var machine = new Engine(state, wf.Ct);
             machine.Run();
         }
-
     }
 
     public static partial class XTend {}

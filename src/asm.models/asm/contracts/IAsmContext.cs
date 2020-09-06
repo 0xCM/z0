@@ -16,10 +16,10 @@ namespace Z0.Asm
 
         ICaptureServices CaptureServices {get;}
 
-        IShellPaths AppPaths
-            => ContextRoot.AppPaths;
+        IShellPaths Paths
+            => ContextRoot.Paths;
 
-        IApiSet Api
+        ApiParts Api
             => ContextRoot.Api;
 
         /// <summary>

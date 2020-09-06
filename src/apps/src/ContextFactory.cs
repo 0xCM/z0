@@ -27,7 +27,7 @@ namespace Z0
             => new AppContext(paths, src.Api, random(), settings(paths), exchange());
 
         [MethodImpl(Inline), Op]
-        static IAppContext app(IShellPaths paths, IResolvedApi api, IPolyrand random)
+        static IAppContext app(IShellPaths paths, ApiParts api, IPolyrand random)
             => new AppContext(paths, api, random, settings(paths), exchange());
 
         [MethodImpl(Inline), Op]
@@ -38,8 +38,8 @@ namespace Z0
             => AppMsgExchange.Create();
 
         [MethodImpl(Inline), Op]
-        static ApiPart compose(IPart[] parts)
-            => ApiQuery.apipart(parts);
+        static ApiParts compose(IPart[] parts)
+            => ApiQuery.api(parts);
 
         [MethodImpl(Inline), Op]
         static IPolyrand random()

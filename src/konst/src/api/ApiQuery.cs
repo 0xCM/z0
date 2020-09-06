@@ -129,29 +129,6 @@ namespace Z0
             return new PartIndex(dst);
         }
 
-        /// <summary>
-        /// Attempts to resolve a part resolution type
-        /// </summary>
-        [MethodImpl(Inline), Op]
-        public static Option<IPart> part(Assembly src)
-        {
-            try
-            {
-                return some(src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Map(t => (IPart)Activator.CreateInstance(t)).FirstOrDefault());
-            }
-            catch(Exception e)
-            {
-                term.error(AppErrors.define(nameof(ApiQuery), text.format("Assembly {0} | {1}", src.GetSimpleName(), e)));
-                return none<IPart>();
-            }
-        }
-
-        /// <summary>
-        /// Creates an index over the known parts
-        /// </summary>
-        public static PartIndex index()
-            => ApiQuery.index(modules().Parts);
-
         public static bool test(Assembly src)
             => src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Count() > 0;
 
@@ -186,18 +163,6 @@ namespace Z0
             var _id = id(src);
             return apiHostTypes(src).Select(h => host(_id, h));
         }
-
-        [MethodImpl(Inline), Op]
-        public static PartId[] identities(Assembly[] src)
-            => Part.identities(src);
-
-        [MethodImpl(Inline), Op]
-        public static ApiPart apipart(params IPart[] parts)
-            => new ApiPart(parts);
-
-        [MethodImpl(Inline), Op]
-        public static ApiPart apipart(IEnumerable<IPart> parts)
-            => new ApiPart(parts.ToArray());
 
         /// <summary>
         /// Retrieves the part identifier, if any, of a specified assembly
@@ -236,15 +201,7 @@ namespace Z0
         }
 
         [Op]
-        public static PartCatalog catalog(IPart part)
-            => new PartCatalog(part, dataTypes(part.Owner), apiHosts(part.Owner), svcHostTypes(part.Owner));
-
-        [Op]
         public static PartCatalog[] catalogs(params IPart[] parts)
             => parts.Select(catalog);
-
-        [Op]
-        public static IPartCatalog catalog(Assembly src)
-            => new PartCatalog(src, dataTypes(src), apiHosts(src), svcHostTypes(src));
     }
 }

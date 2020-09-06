@@ -15,14 +15,14 @@ namespace Z0
     {
         public WfToolId Id {get;}
 
-        public FolderPath ToolOutput {get;}
+        public FS.FolderPath ToolOutput {get;}
 
         public IExtensionMap<F> Map {get;}
 
         readonly F[] Flags;
 
         [MethodImpl(Inline)]
-        public ToolArchive(WfToolId id, FolderPath root)
+        public ToolArchive(WfToolId id, FS.FolderPath root)
         {
             Id = id;
             ToolOutput = root;
@@ -30,7 +30,7 @@ namespace Z0
             Flags = Enums.literals<F>();
         }
 
-        public ToolArchive(WfToolId id, FolderPath root, IExtensionMap<F> map)
+        public ToolArchive(WfToolId id, FS.FolderPath root, IExtensionMap<F> map)
         {
             Id = id;
             ToolOutput = root;

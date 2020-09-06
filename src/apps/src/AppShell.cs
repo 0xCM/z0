@@ -8,7 +8,7 @@ namespace Z0
 
     public abstract class AppShell<A,C> : Shell<A,C>, IAppShell<A>
         where A : AppShell<A,C>, new()
-        where C : IAppContext
+        where C : IShellContext
     {
         public virtual IPart[] Resolved {get;}
 

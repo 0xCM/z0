@@ -12,28 +12,25 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct Files : IEnumerable<FilePath>
+    public readonly struct Files : IEnumerable<FS.FilePath>
     {
-        public static Files from(FilePath[] src)
+        public static Files from(FS.FilePath[] src)
             => new Files(src.Map(normalize));
 
-        public readonly FilePath[] Data;
+        readonly FS.FilePath[] Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator Files(FilePath[] src)
+        public static implicit operator Files(FS.FilePath[] src)
             => new Files(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator FilePath[](Files src)
+        public static implicit operator FS.FilePath[](Files src)
             => src.Data;
 
-        [MethodImpl(Inline)]
-        public Files(FilePath[] src)
-            => Data = src;
 
         [MethodImpl(Inline)]
         public Files(FS.FilePath[] src)
-            => Data = src.Select(x => FilePath.Define(x.Name));
+            => Data = src.Select(x => FS.path(x.Name));
 
         public Count32 Count
         {
@@ -41,30 +38,30 @@ namespace Z0
             get => Data.Length;
         }
 
-        public ReadOnlySpan<FilePath> View
+        public ReadOnlySpan<FS.FilePath> View
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public ref FilePath this[ulong index]
+        public ref FS.FilePath this[ulong index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
 
-        public ref FilePath this[long index]
+        public ref FS.FilePath this[long index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
         }
 
         [MethodImpl(Inline)]
-        public static FilePath normalize(FilePath src)
-            => FilePath.Define(src.Name.Replace('\\', '/'));
+        public static FS.FilePath normalize(FS.FilePath src)
+            => FS.path(src.Name.Replace('\\', '/'));
 
-        IEnumerator<FilePath> IEnumerable<FilePath>.GetEnumerator()
-            => ((IEnumerable<FilePath>)Data).GetEnumerator();
+        IEnumerator<FS.FilePath> IEnumerable<FS.FilePath>.GetEnumerator()
+            => ((IEnumerable<FS.FilePath>)Data).GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator()
             => Data.GetEnumerator();

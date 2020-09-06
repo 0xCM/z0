@@ -22,10 +22,10 @@ namespace Z0
                 var ct = correlate(ShellId);
                 var config = WfBuilder.configure(app, args);
                 using var log = Flow.log(config);
-                using var wf = WfBuilder.shell(config, log);
+                using var wf = Flow.shell(config, log);
 
                 var state = new WfCaptureState(wf, AsmWfBuilder.asm(app), wf.Config, wf.Ct);
-                wf.Running(StepId, delimit(config.Parts));
+                wf.Running(StepId, delimit(config.PartIdentities));
                 using var machine = new Engine(state,ct);
                 machine.Run();
 

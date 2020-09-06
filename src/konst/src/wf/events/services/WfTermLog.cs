@@ -10,18 +10,18 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Reifies a workflow event receiver that emits received events to the terminal
+    /// Reifies a workflow event receiver that both logs received events and renders received events to the terminal
     /// </summary>
-    public readonly struct WfTermEventSink : IWfEventSink, IMultiSink
+    public readonly struct WfTermLog : IWfEventSink, IMultiSink
     {
         public static IWfEventSink create(IWfEventLog log, CorrelationToken ct)
-            => new WfTermEventSink(log,ct);
+            => new WfTermLog(log,ct);
 
         public CorrelationToken Ct {get;}
 
         readonly IWfEventLog EventLog;
 
-        public WfTermEventSink(IWfEventLog log, CorrelationToken ct)
+        public WfTermLog(IWfEventLog log, CorrelationToken ct)
         {
             Ct = ct;
             EventLog = log;

@@ -71,6 +71,17 @@ namespace Z0
         public Dictionary<PartId,PartFile[]> ParseFileIndex(params PartId[] parts)
             => SelectFiles(PartFileClass.Parsed, ParseFiles, parts);
 
+        static Dictionary<PartId,PartFile[]> SelectFiles(PartFileClass kind, Files src, PartId[] parts)
+        {
+            var partSet = parts.ToHashSet();
+            var files = (from f in src
+                        let part = f.Owner
+                        where part != PartId.None && partSet.Contains(part)
+                        let pf = new PartFile(part, kind, f)
+                        group pf by pf.Part).ToDictionary(x => x.Key, y => y.ToArray());
+            return files;
+        }
+
         static Dictionary<PartId,PartFile[]> SelectFiles(PartFileClass kind, FilePath[] src, PartId[] parts)
         {
             var partSet = parts.ToHashSet();

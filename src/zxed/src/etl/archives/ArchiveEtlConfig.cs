@@ -12,11 +12,11 @@ namespace Z0.Xed
 
     public readonly struct XedEtlConfig
     {
-        public XedEtlConfig(IAppContext context, WfSettings settings)
+        public XedEtlConfig(IWfShell shell, WfSettings settings)
         {
             Settings = settings;
-            SourceRoot = context.AppPaths.DevRoot + FolderName.Define("data") + FolderName.Define("sources") + FolderName.Define("xed");
-            TargetRoot = context.AppPaths.LogRoot + FolderName.Define("data") + FolderName.Define("xed");
+            SourceRoot = shell.AppPaths.DevRoot + FolderName.Define("data") + FolderName.Define("sources") + FolderName.Define("xed");
+            TargetRoot = shell.AppPaths.LogRoot + FolderName.Define("data") + FolderName.Define("xed");
         }
 
         public readonly WfSettings Settings;

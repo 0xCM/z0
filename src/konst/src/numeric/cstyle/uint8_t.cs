@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
     using static Konst;
 
@@ -28,23 +28,23 @@ namespace Z0
         public static implicit operator BK(analog src)
             => (BK)src.data;
 
-        [MethodImpl(Inline)]    
+        [MethodImpl(Inline)]
         public uint8_t(byte x)
             => data =x;
 
-        [MethodImpl(Inline)]    
+        [MethodImpl(Inline)]
         public uint8_t(BK x)
             => data =(byte)x;
 
-        [MethodImpl(Inline)]    
+        [MethodImpl(Inline)]
         public static analog @bool(bool x)
             => x ? one : zero;
 
-        [MethodImpl(Inline)]    
+        [MethodImpl(Inline)]
         public static bool operator true(analog x)
             => x.data != 0;
 
-        [MethodImpl(Inline)]    
+        [MethodImpl(Inline)]
         public static bool operator false(analog x)
             => x.data == 0;
 
@@ -67,10 +67,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ushort(analog src)
             => src.data;
-
-        // [MethodImpl(Inline)]
-        // public static explicit operator uint4_t(analog src)
-        //     => uint4_t.From(src.data);
 
         [MethodImpl(Inline)]
         public static implicit operator uint16_t(analog src)
@@ -109,27 +105,27 @@ namespace Z0
             => src.data;
 
         [MethodImpl(Inline)]
-        public static analog operator == (analog lhs, analog rhs) 
+        public static analog operator == (analog lhs, analog rhs)
             => @bool(lhs.data == rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator != (analog lhs, analog rhs) 
+        public static analog operator != (analog lhs, analog rhs)
             => @bool(lhs.data != rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator + (analog lhs, analog rhs) 
+        public static analog operator + (analog lhs, analog rhs)
             => wrap(lhs.data + rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator - (analog lhs, analog rhs) 
+        public static analog operator - (analog lhs, analog rhs)
             => wrap(lhs.data - rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator * (analog lhs, analog rhs) 
+        public static analog operator * (analog lhs, analog rhs)
             => wrap(lhs.data * rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator / (analog lhs, analog rhs) 
+        public static analog operator / (analog lhs, analog rhs)
             => wrap(lhs.data / rhs.data);
 
         [MethodImpl(Inline)]
@@ -137,56 +133,56 @@ namespace Z0
             => wrap(lhs.data % rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator < (analog lhs, analog rhs) 
+        public static analog operator < (analog lhs, analog rhs)
             => @bool(lhs.data < rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator <= (analog lhs, analog rhs) 
+        public static analog operator <= (analog lhs, analog rhs)
             => @bool(lhs.data <= rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator > (analog lhs, analog rhs) 
+        public static analog operator > (analog lhs, analog rhs)
             => @bool(lhs.data > rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator >= (analog lhs, analog rhs) 
+        public static analog operator >= (analog lhs, analog rhs)
             => @bool(lhs.data >= rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator & (analog lhs, analog rhs) 
+        public static analog operator & (analog lhs, analog rhs)
             => (analog)(lhs.data & rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator | (analog lhs, analog rhs) 
+        public static analog operator | (analog lhs, analog rhs)
             => wrap(lhs.data | rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator ^ (analog lhs, analog rhs) 
+        public static analog operator ^ (analog lhs, analog rhs)
             => wrap(lhs.data ^ rhs.data);
 
         [MethodImpl(Inline)]
-        public static analog operator >> (analog lhs, int rhs) 
+        public static analog operator >> (analog lhs, int rhs)
             => wrap(lhs.data >> rhs);
-    
+
         [MethodImpl(Inline)]
-        public static analog operator << (analog lhs, int rhs) 
+        public static analog operator << (analog lhs, int rhs)
             => wrap(lhs.data << rhs);
 
         [MethodImpl(Inline)]
-        public static analog operator ~ (analog src) 
+        public static analog operator ~ (analog src)
             => wrap(~ src.data);
 
         [MethodImpl(Inline)]
-        public static analog operator - (analog src) 
+        public static analog operator - (analog src)
             => wrap(~src.data + 1);
 
         [MethodImpl(Inline)]
-        public static analog operator -- (analog src) 
-            =>  --src.data;
+        public static analog operator -- (analog src)
+            => --src.data;
 
         [MethodImpl(Inline)]
-        public static analog operator ++ (analog src) 
-            =>  ++src.data;
+        public static analog operator ++ (analog src)
+            => ++src.data;
 
         [MethodImpl(Inline)]
         static analog wrap(int x)
@@ -201,7 +197,7 @@ namespace Z0
 
         public override bool Equals(object rhs)
             => data.Equals(rhs);
-        
+
         public override string ToString()
             => data.ToString();
     }

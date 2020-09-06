@@ -6,14 +6,16 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Reflection;
 
     /// <summary>
     /// Characterizes a context that carries and provides access to a composition
     /// </summary>
-    public interface IAppContext : IAppMsgQueue, IPolyrandProvider, IAppMsgContext, IApiContext
+    public interface IAppContext : IAppMsgQueue, IPolyrandProvider, IAppMsgContext, IApiProvider, IShellContext
     {
         IAppMsgQueue MessageQueue {get;}
+
+        IShellPaths Paths
+            => ShellPaths.Default;
 
         Action<IAppMsg> MessageRelay
             => (e => term.print(e));

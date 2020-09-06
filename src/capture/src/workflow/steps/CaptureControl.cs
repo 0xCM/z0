@@ -35,7 +35,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running(StepId, delimit(Wf.Config.Parts));
+            Wf.Running(StepId, delimit(Wf.Config.PartIdentities));
 
             try
             {

@@ -5,18 +5,14 @@
 namespace Z0
 {
     using System;
+    using static z;
 
     readonly struct App
     {
         public static int Main(params string[] args)
         {
-            var wf = WfBuilder.shell(Assembly.GetEntryAssembly(), args, out var app);
-            return Run(wf);
-        }
-
-        public int Run(IWfShell wf)
-        {
-
+            using var wf = Flow.shell(args);
+            iter(wf.Modules.Files, m => wf.Raise(WfEvents.data(m, wf.Ct)));
             return 0;
         }
     }

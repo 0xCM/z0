@@ -13,36 +13,34 @@ namespace Z0
 
     public readonly struct ApiSet : IApiSet
     {
-        public IResolvedApi Composition {get;}
+        public ResolvedApi Composition {get;}
 
         public IApiHost[] Hosts {get;}
 
         public IPartCatalog[] Catalogs {get;}
 
-        public IPart[] Parts {get;}
+        public ApiParts Parts {get;}
 
         public PartId[] PartIdentities {get;}
 
-        public Assembly[] Assemblies {get;}
+        public Assembly[] Components {get;}
 
-        public IApiHost[] ApiDataTypes {get;}
+        public IApiHost[] DataTypes {get;}
 
-        public IApiHost[] ApiOpHosts {get;}
+        public IApiHost[] OpHosts {get;}
 
-        public ApiSet(IResolvedApi api)
+        public ApiSet(ResolvedApi api)
         {
             Composition = api;
             Parts = api.Resolved;
-            Assemblies = Parts.Select(x => x.Owner);
-            Catalogs = Parts.Select(x => ApiQuery.catalog(x) as IPartCatalog).Where(c => c.IsIdentified);
+            Components = Parts.Components;
+            Catalogs = Parts.Catalogs;
             Hosts = Catalogs.SelectMany(c => c.ApiHosts);
             PartIdentities = api.Resolved.Map(p => p.Id);
-            ApiDataTypes = Catalogs.SelectMany(c => c.ApiDataTypes).Cast<IApiHost>().Array();
-            ApiOpHosts = Catalogs.SelectMany(c => c.Operations).Cast<IApiHost>().Array();
+            DataTypes = Catalogs.SelectMany(c => c.ApiDataTypes).Cast<IApiHost>().Array();
+            OpHosts = Catalogs.SelectMany(c => c.Operations).Cast<IApiHost>().Array();
         }
 
-        public Option<IPart> FindPart(PartId id)
-            => z.option(Parts.FirstOrDefault(p => p.Id == id));
 
         public Option<IApiHost> FindHost(ApiHostUri uri)
             => z.option(Hosts.Where(h => h.Uri == uri).FirstOrDefault());

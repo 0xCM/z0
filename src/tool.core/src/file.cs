@@ -12,9 +12,9 @@ namespace Z0
     partial struct Tooling
     {
         [MethodImpl(Inline)]
-        public static ToolFile<T,F> file<T,F>(F kind, FilePath path)
+        public static ToolFile<T,F> file<T,F>(F kind, FS.FilePath path)
             where T : struct, ITool<T>
-            where F : unmanaged, Enum   
+            where F : unmanaged, Enum
                 => new ToolFile<T,F>(kind, path);
     }
 }

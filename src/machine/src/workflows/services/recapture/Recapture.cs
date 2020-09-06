@@ -10,16 +10,16 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    
+
     public readonly ref partial struct Recapture
     {
         readonly IAsmContext Context;
-        
+
         public FolderPath ResIndexDir
-            => Context.AppPaths.ResIndexDir;
-        
+            => Context.Paths.ResIndexDir;
+
         public FolderPath ResBytesDir
-            => Context.AppPaths.AppDataRoot + FolderName.Define("resbytes");
+            => Context.Paths.AppDataRoot + FolderName.Define("resbytes");
 
         /// <summary>
         /// The x86 resource assembly output path - which was created by disassembling most of z0
@@ -36,12 +36,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public Recapture(IAsmContext context)
         {
-            Context = context;            
-            Context.AppPaths.AppDataRoot.Clear();
+            Context = context;
+            Context.Paths.AppDataRoot.Clear();
             ResIndexDir.Clear();
             ResBytesDir.Clear();
             ResBytesUncompiled.Clear();
-        }                            
+        }
 
         public void Dispose()
         {

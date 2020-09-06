@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime;
     using System.IO;
-    using System.Reflection;
 
     using static z;
 
@@ -32,7 +31,7 @@ namespace Z0
         }
 
         protected Shell()
-            : this(ShellContext.create())
+            : this(Flow.context())
         {
 
         }
@@ -77,31 +76,6 @@ namespace Z0
             return shell;
         }
 
-        // protected static S Init(IShellContext context, params string[] args)
-        // {
-        //     var shell = new S();
-        //     shell.Args = args;
-        //     shell.Context = context;
-        //     return shell;
-        // }
-
-        // protected static int Launch(IWfShell context)
-        // {
-        //     try
-        //     {
-        //         var shell = new S();
-        //         shell.Args = context.Args;
-        //         shell.Context = context;
-        //         shell.RunShell(context);
-
-        //         return 0;
-        //     }
-        //     catch(Exception e)
-        //     {
-        //         term.error(e);
-        //         return -1;
-        //     }
-        // }
 
         protected static void Launch(params string[] args)
         {
@@ -119,35 +93,6 @@ namespace Z0
                 else
                     term.errlabel(e, $"Shell became angry upon creation!");
             }
-        }
-    }
-
-    /// <summary>
-    /// Base class for shells with pararametric context
-    /// </summary>
-    /// <typeparam name="S">The shell reification type</typeparam>
-    /// <typeparam name="C">The shell context type</typeparam>
-    public abstract class Shell<S,C> : Shell<S>
-        where S : Shell<S,C>, new()
-        where C : IShellContext
-    {
-        public new C Context {get;}
-
-        public virtual void RunShell(C context)
-        {
-
-        }
-
-        protected Shell(C context)
-            : base(context)
-        {
-            Context = context;
-        }
-
-        protected Shell(C context, IMultiSink sink)
-            : base(context, sink)
-        {
-            Context = context;
         }
     }
 }

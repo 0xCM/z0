@@ -59,6 +59,37 @@ namespace Z0
                 get => new FileInfo(Name);
             }
 
+            /// <summary>
+            /// Determines whether the filename is of the form {owner}.{host}.{*}
+            /// </summary>
+            /// <param name="owner">The owner to test</param>
+            [MethodImpl(Inline)]
+            public bool HostedBy(ApiHostUri host)
+                => FileName.HostedBy(host);
+
+            /// <summary>
+            /// Determines whether the filename is of the form {owner}.{.}.{*}
+            /// </summary>
+            /// <param name="owner">The owner to test</param>
+            [MethodImpl(Inline)]
+            public bool OwnedBy(PartId owner)
+                => owner == FileName.Owner;
+
+            /// <summary>
+            /// Specifies the file's owning part, if any
+            /// </summary>
+            public PartId Owner
+            {
+                [MethodImpl(Inline)]
+                get => FileName.Owner;
+            }
+
+            public FilePath ChangeExtension(FileExt ext)
+                => FolderPath + FS.file(Path.ChangeExtension(Path.GetFileName(Name), ext.Name));
+
+            public string ReadText()
+                => File.ReadAllText(Name);
+
             public FilePath Timestamped()
             {
                 var name = FileName.WithoutExtension;

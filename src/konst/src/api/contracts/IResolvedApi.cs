@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         IPart[] Resolved {get;}
 
-        Assembly[] Assemblies
+        Assembly[] Components
             => Resolved.Select(x => x.Owner);
     }
 }

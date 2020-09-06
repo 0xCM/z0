@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
     using System.IO;
 
     using static Konst;
@@ -59,11 +58,24 @@ namespace Z0
                 get => Name.IsNonEmpty;
             }
 
+            /// <summary>
+            /// Specifies the file's owning part, if any
+            /// </summary>
+            public PartId Owner
+                => PartIdParser.single(WithoutExtension.Name.Remove("z0."));
+
             public static FileName Empty
             {
                 [MethodImpl(Inline)]
                 get => new FileName(PathPart.Empty);
             }
+
+            /// <summary>
+            /// Determines whether the name of a file is of the form {owner}.{host}.{*}
+            /// </summary>
+            /// <param name="host">The owner to test</param>
+            public bool HostedBy(ApiHostUri host)
+                => Name.Name.StartsWith(string.Concat(host.Owner.Format(), Chars.Dot, host.Name.ToLower(), Chars.Dot));
 
             const string ExtPattern = "{0}.{1}";
 

@@ -10,19 +10,27 @@ namespace Z0
     using static Konst;
 
     public readonly struct PartFile
-    {        
+    {
         public readonly PartId Part;
 
         public readonly PartFileClass Kind;
 
-        public readonly FilePath Path;
+        public readonly FS.FilePath Path;
 
         [MethodImpl(Inline)]
         public PartFile(PartId part, PartFileClass kind, FilePath path)
         {
             Part = part;
             Kind = kind;
+            Path = FS.path(path.Name);
+        }
+
+        public PartFile(PartId part, PartFileClass kind, FS.FilePath path)
+        {
+            Part = part;
+            Kind = kind;
             Path = path;
         }
+
     }
 }

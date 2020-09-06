@@ -30,7 +30,7 @@ namespace Z0
 
         Blue = ConsoleColor.Blue,
 
-        DarkCyan = ConsoleColor.DarkCyan,
+        DataRow = ConsoleColor.DarkCyan,
 
         DarkMagenta = ConsoleColor.DarkMagenta,
 

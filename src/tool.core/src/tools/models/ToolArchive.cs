@@ -21,15 +21,15 @@ namespace Z0
         /// <summary>
         /// The tool output directory
         /// </summary>
-        public FolderPath ToolOutput {get;}
+        public FS.FolderPath ToolOutput {get;}
 
         /// <summary>
         /// The process root folder
         /// </summary>
-        public FolderPath Processed {get;}
+        public FS.FolderPath Processed {get;}
 
         [MethodImpl(Inline)]
-        public ToolArchive(WfToolId tool, FolderPath src, FolderPath dst)
+        public ToolArchive(WfToolId tool, FS.FolderPath src, FS.FolderPath dst)
         {
             ToolOutput = src;
             OwnerId = tool;

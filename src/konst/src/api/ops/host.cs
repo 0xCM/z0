@@ -6,14 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
     using static z;
 
-    public readonly partial struct ApiQuery
+    partial struct ApiQuery
     {
         /// <summary>
         /// Describes an api host

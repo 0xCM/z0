@@ -16,12 +16,12 @@ namespace Z0
         /// <summary>
         /// The tool output directory
         /// </summary>
-        FolderPath ToolOutput {get;}
+        FS.FolderPath ToolOutput {get;}
 
         /// <summary>
         /// The process root folder
         /// </summary>
-        FolderPath Processed {get;}
+        FS.FolderPath Processed {get;}
     }
 
     public interface IToolArchive<T> : IToolArchive
@@ -41,23 +41,4 @@ namespace Z0
         ToolFiles<T> Dir()
             => ToolArchives.output(this).Map(f => new ToolFile<T>(f));
     }
-
-    // public interface IToolArchive<T,F> : IToolArchive<T>
-    //     where T : struct, ITool<T>
-    //     where F : unmanaged, Enum
-    // {
-    //     IExtensionMap<F> Map {get;}
-
-    //     FileExtension Ext(F f)
-    //         => ToolArchive.ext(this, f);
-
-    //     void MapExtension(F f, FileExtension ext)
-    //         => ToolArchive.map(this, f, ext);
-
-    //     ToolFiles<T,F> Dir(F f)
-    //         => ToolArchive.dir(this, f);
-
-    //     ToolFiles<T,F> Dir()
-    //         => ToolArchive.dir(this);
-    //}
 }

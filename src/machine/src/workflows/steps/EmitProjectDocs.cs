@@ -83,7 +83,7 @@ namespace Z0
             return src;
         }
 
-        Dictionary<PartId, Dictionary<string,string>> collect(FilePath[] paths)
+        Dictionary<PartId, Dictionary<string,string>> collect(FS.FilePath[] paths)
         {
             var dst = new Dictionary<PartId, Dictionary<string,string>>();
             foreach(var path in paths)
@@ -91,7 +91,7 @@ namespace Z0
                 var id = path.Owner;
                 if(id.IsSome())
                 {
-                    var xmlfile = path.ChangeExtension(FileExtensions.Xml);
+                    var xmlfile = path.ChangeExtension(FS.ext("xml"));
                     if(xmlfile.Exists)
                     {
                         var data = xmlfile.ReadText();

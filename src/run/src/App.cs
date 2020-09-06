@@ -12,7 +12,7 @@ namespace Z0
     using static RunnerShell;
 
     [Step(typeof(App))]
-    public readonly struct RunnerShell : IWfStep<RunnerShell>
+    readonly struct RunnerShell : IWfStep<RunnerShell>
     {
         public static WfStepId StepId => typeof(RunnerShell);
     }
@@ -41,7 +41,7 @@ namespace Z0
 
             var config = WfBuilder.configure(Context, args);
             using var log = Flow.log(config);
-            var wf = WfBuilder.shell(config, log);
+            var wf = Flow.shell(config, log);
             using var state = AsmWfBuilder.state(wf, AsmWfBuilder.asm(Context), config);
 
             try

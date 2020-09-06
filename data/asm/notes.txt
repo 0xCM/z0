@@ -1,1 +1,0 @@
-# intrinsics xml data from: https://software.intel.com/sites/landingpage/IntrinsicsGuide/files/data-latest.xml

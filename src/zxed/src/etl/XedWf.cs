@@ -84,7 +84,7 @@ namespace Z0
 
         public XedFunctionData[] ExtractFunctions()
         {
-            var functions = Root.list<XedFunctionData>();
+            var functions = list<XedFunctionData>();
             var parser = XedSourceParser.Service;
             foreach(var file in Src.FunctionFiles)
             {

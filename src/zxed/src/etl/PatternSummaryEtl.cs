@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static XedSourceMarkers;
-    using static As;
+    using static z;
 
     static class PatternSummaryEtl
     {

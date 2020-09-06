@@ -22,7 +22,10 @@ namespace Z0.Tools
     {
         [MethodImpl(Inline)]
         public ProcessRawAsm Processor(DumpBinFlag flags, DumpBinOptions options= default)
-            => new ProcessRawAsm(Wf, Wf.ToolOuputDir(DumpBin.Name), Wf.ToolProcessDir(DumpBin.Name), flags, options);
+            => new ProcessRawAsm(Wf,
+                FS.dir(Wf.ToolOuputDir(DumpBin.Name).Name),
+                FS.dir(Wf.ToolProcessDir(DumpBin.Name).Name),
+                flags, options);
 
         public struct ProcessRawAsm : IToolProcessor<DumpBin,DumpBinFlag>
         {
@@ -41,7 +44,7 @@ namespace Z0.Tools
             public ToolArchive<DumpBin> Archive {get;}
 
             [MethodImpl(Inline)]
-            public ProcessRawAsm(IWfShell wf, FolderPath output, FolderPath processed, DumpBinFlag flags, DumpBinOptions options)
+            public ProcessRawAsm(IWfShell wf, FS.FolderPath output, FS.FolderPath processed, DumpBinFlag flags, DumpBinOptions options)
             {
                 Wf = wf;
                 LineCount = 0;

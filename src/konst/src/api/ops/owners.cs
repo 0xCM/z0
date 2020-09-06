@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
     using static z;
@@ -17,10 +15,10 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static Assembly[] owners(in ModuleArchive src)
-            => src.Owners.Where(isPart);
+            => src.Components.Where(isPart);
 
         [MethodImpl(Inline), Op]
         public static Assembly[] owners()
-            => modules().Owners;
+            => modules().Components;
     }
 }

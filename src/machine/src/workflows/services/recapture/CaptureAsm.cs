@@ -22,8 +22,9 @@ namespace Z0
             var formatted = Context.Formatter.FormatFunction(asm);
             dst.Write(formatted);
         }
+
         public CapturedAccessor[] Capture(ApiHostUri host, FilePath dst)
-            => Capture(host, ApiQuery.resources(Context.ContextRoot.Api.Composition.Assemblies), dst);
+            => Capture(host, ApiQuery.resources(Context.ContextRoot.Api.Composition.Components), dst);
 
         public CapturedAccessor[] Capture(ApiHostUri host, ReadOnlySpan<ResourceAccessor> src, FilePath dst)
         {
@@ -89,7 +90,7 @@ namespace Z0
                 results.AddRange(Capture(host, index.Data, path));
             }
 
-            var data = results.Array();
+            var data = results.ToArray();
             term.print(new CapturedResourceSets(nameof(Recapture), data, src, dst));
             return data;
         }

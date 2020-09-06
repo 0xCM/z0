@@ -44,13 +44,13 @@ namespace Z0
         FilePath UnparsedPath(ApiHostUri host)
             => UnparsedFilePath(ArchiveRoot, host);
 
-        FilePath[] AsmPaths
-            => AsmFilePaths(ArchiveRoot);
+        FS.FilePath[] AsmPaths
+            => AsmFilePaths(ArchiveRoot).Select(x => FS.path(x.Name));
 
-        FilePath[] HexPaths
-            => HexFilePaths(ArchiveRoot);
+        FS.FilePath[] HexPaths
+            => HexFilePaths(ArchiveRoot).Select(x => FS.path(x.Name));
 
-        FilePath[] ParsePaths
-            => ParseFilePaths(ArchiveRoot);
+        FS.FilePath[] ParsePaths
+            => ParseFilePaths(ArchiveRoot).Select(x => FS.path(x.Name));
     }
 }

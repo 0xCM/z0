@@ -8,6 +8,7 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Numeric)" />
     <ProjectReference Include="$(Identity)" />
+    <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Cil)" />
     <ProjectReference Include="$(AsmModels)" />
     <ProjectReference Include="$(Dynamic)" />

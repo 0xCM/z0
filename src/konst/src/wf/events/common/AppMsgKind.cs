@@ -52,7 +52,7 @@ namespace Z0
         /// <summary>
         /// Dark cyan foreground
         /// </summary>
-        HiliteCD = FlairKind.DarkCyan,
+        HiliteCD = FlairKind.DataRow,
 
         /// <summary>
         /// Cyan foreground

@@ -22,36 +22,16 @@ namespace Z0
             return ContextFactory.app(modules, ShellPaths.Default);
         }
 
-        public static IAppContext app(Assembly control)
-        {
-            var srcRoot = FS.path(control.Location).FolderPath;
-            var modules = ApiQuery.modules(srcRoot);
-            return ContextFactory.app(modules, ShellPaths.Default);
-        }
-
-        public static IAppContext app(Assembly control, string[] args)
-            => ContextFactory.app(ApiQuery.modules(control, args), ShellPaths.Default);
-
-        public static IWfShell shell(WfConfig config, IWfEventSink sink)
-            => new WfContext(config, sink);
-
         public static IWfShell shell(Assembly control, string[] args, out IAppContext app)
         {
             var id =  control.Id();
             var ct = correlate(id);
             var modules = ApiQuery.modules(control, args);
             var api = modules.Api;
-            var shell = ShellContext.create(control, args, modules);
+            var shell = Flow.context(control, modules, args);
             var config = new WfConfig(shell, args, modules);
             app = ContextFactory.app(modules, config.Paths);
-            return new WfContext(config, WfTermEventSink.create(log(config), ct));
-        }
-
-        public static IWfShell shell(Assembly control, string[] args)
-        {
-            var modules = ApiQuery.modules(control, args);
-            var config = new WfConfig(ShellContext.create(control, args, modules), args, modules);
-            return new WfContext(config, WfTermEventSink.create(log(config), correlate(control.Id())));
+            return new WfShell(config, WfTermLog.create(log(config), ct));
         }
 
         public static WfConfig configure(IAppContext app, string[] args)
@@ -62,13 +42,13 @@ namespace Z0
             var parts = Flow.parts(args, app.Api.PartIdentities);
             var src = ApiQuery.modules(FS.path(control.Location).FolderPath);
             var settings = Flow.settings(app);
-            var captureOut = FS.dir(app.AppPaths.LogRoot.Name) + FS.folder("capture/artifacts");
-            var captureLog = FS.dir(app.AppPaths.LogRoot.Name) + FS.folder("capture/logs");
+            var captureOut = FS.dir(app.Paths.LogRoot.Name) + FS.folder("capture/artifacts");
+            var captureLog = FS.dir(app.Paths.LogRoot.Name) + FS.folder("capture/logs");
             var dstArchive = new ArchiveConfig(FolderPath.Define(captureOut.Name));
             var config  = new WfConfig(app, args, src, dstArchive, parts,
-                app.AppPaths.ResourceRoot,
-                app.AppPaths.AppDataRoot,
-                app.AppPaths.AppLogRoot,
+                app.Paths.ResourceRoot,
+                app.Paths.AppDataRoot,
+                app.Paths.AppLogRoot,
                 settings);
             return config;
         }

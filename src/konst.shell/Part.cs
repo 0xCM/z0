@@ -6,8 +6,6 @@
 
 namespace Z0.Parts
 {
-    using System;
-
     public sealed class Run : Part<Run>
     {
 

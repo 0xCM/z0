@@ -17,9 +17,9 @@ namespace Z0
 
         public WfToolId ToolId {get;}
 
-        public FolderPath SourceDir {get;}
+        public FS.FolderPath SourceDir {get;}
 
-        public FolderPath Source {get;}
+        public FS.FolderPath Source {get;}
 
         public IExtensionMap<F> Map {get;}
 
@@ -28,7 +28,7 @@ namespace Z0
         public ToolFlags<F> AvailableFlags {get;}
 
         [MethodImpl(Inline)]
-        public Tool(IWfShell wf, WfToolId id, FolderPath src, FolderPath dst)
+        public Tool(IWfShell wf, WfToolId id, FS.FolderPath src, FS.FolderPath dst)
         {
             Wf = wf;
             ToolId = id;

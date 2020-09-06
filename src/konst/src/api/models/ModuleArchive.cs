@@ -17,37 +17,37 @@ namespace Z0
 
         public readonly Files Files;
 
-        public readonly IPart[] Parts;
+        public readonly ApiParts Parts;
 
-        public readonly Assembly[] Owners;
+        public readonly Assembly[] Components;
 
-        public readonly ApiSet Api {get;}
+        public readonly ApiParts Api {get;}
 
         public ModuleArchive(FS.FolderPath root)
         {
             Root = root;
-            Files = root.Exclude("System.Private.CoreLib").Where(f => FS.managed(f)).Map(f => FilePath.Define(f.Name));
+            Files = root.Exclude("System.Private.CoreLib").Where(f => FS.managed(f)).Map(f => FS.path(f.Name));
             Parts = ApiQuery.resolve(Files);
-            Owners = ApiQuery.parts(Files);
-            Api = ApiQuery.apiset(new ApiParts(Parts));
+            Components = ApiQuery.parts(Files);
+            Api = Parts;
         }
 
         public ModuleArchive(Assembly root, PartId[] parts)
         {
             Root = FS.path(root.Location).FolderPath;
-            Files = Root.Exclude("System.Private.CoreLib").Where(f => FS.managed(f)).Map(f => FilePath.Define(f.Name));
+            Files = Root.Exclude("System.Private.CoreLib").Where(f => FS.managed(f)).Map(f => FS.path(f.Name));
             Parts =  parts.Length != 0 ? ApiQuery.resolve(Files).Where(x => parts.Contains(x.Id)) : ApiQuery.resolve(Files);
-            Owners = Parts.Select(x => x.Owner);
-            Api = ApiQuery.apiset(new ApiParts(Parts));
+            Components = Parts.Components;
+            Api = Parts;
         }
 
         public ModuleArchive(Assembly root)
         {
             Root = FS.path(root.Location).FolderPath;
-            Files = Root.Exclude("System.Private.CoreLib").Where(f => FS.managed(f)).Map(f => FilePath.Define(f.Name));
+            Files = Root.Exclude("System.Private.CoreLib").Where(f => FS.managed(f)).Map(f => FS.path(f.Name));
             Parts =  ApiQuery.resolve(Files);
-            Owners = Parts.Select(x => x.Owner);
-            Api = ApiQuery.apiset(new ApiParts(Parts));
+            Components = Parts.Components;
+            Api = Parts;
         }
     }
 }

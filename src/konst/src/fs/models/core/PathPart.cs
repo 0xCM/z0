@@ -44,8 +44,15 @@ namespace Z0
                 get => Name;
             }
 
+            [MethodImpl(Inline)]
+            public PathPart Remove(string substring)
+                => Name.Remove(substring);
+
+            [MethodImpl(Inline)]
             public bool Contains(string substring)
                 => Name.Contains(substring);
+
+            [MethodImpl(Inline)]
             public string Format()
                 => View.ToString();
 

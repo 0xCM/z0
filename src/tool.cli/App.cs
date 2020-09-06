@@ -38,7 +38,7 @@ namespace Z0
             {
                 var config = WfBuilder.configure(Context,args);
                 using var log = Flow.log(config);
-                using var wf = WfBuilder.shell(config, log);
+                using var wf = Flow.shell(config, log);
                 wf.Status(StepId, new {Message ="Running shell", Args = text.bracket(args.FormatList())});
 
                 wf.Status(StepId, "Shell run complete");

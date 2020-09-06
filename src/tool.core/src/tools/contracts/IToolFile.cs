@@ -12,7 +12,7 @@ namespace Z0
     {
         WfToolId ToolId {get;}
 
-        FilePath EmissionPath {get;}
+        FS.FilePath EmissionPath {get;}
     }
 
     public interface IToolFile<T> : IToolFile

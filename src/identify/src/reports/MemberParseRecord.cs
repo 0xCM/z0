@@ -64,6 +64,9 @@ namespace Z0
                 return ParseResult.Success(src.Name, success);
         }
 
+        public static ParseResult<MemberParseRecord[]> load(FS.FilePath src)
+            => load(FilePath.Define(src.Name));
+
         public static ParseResult<MemberParseRecord> Parse(string src)
         {
             try

@@ -16,21 +16,6 @@ namespace Z0
 
     partial struct WfEvents
     {
-        /// <summary>
-        /// Creates a <see cref='WfStatus{T}'/> message
-        /// </summary>
-        /// <param name="step">The executing step</param>
-        /// <param name="content">The status content</param>
-        /// <param name="ct">The correlation token</param>
-        /// <typeparam name="T">The content type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static WfStatus<T> status<T>(WfStepId step, T content, CorrelationToken ct)
-            => new WfStatus<T>(step, content, ct);
-
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static WfWarn<T> warn<T>(WfStepId step, T body, CorrelationToken ct)
-            => new WfWarn<T>(step, body, ct);
-
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static WfError<T> error<T>(string actor, T content, CorrelationToken ct,
             [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)

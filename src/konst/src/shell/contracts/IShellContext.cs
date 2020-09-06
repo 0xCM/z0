@@ -5,34 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Reflection;
 
-    /// <summary>
-    /// Characterizes a stateful shared execution environment with a parametric configuration
-    /// </summary>
-    /// <typeparam name="C">The configuration type</typeparam>
-    public interface IContext<C> : IContext
-    {
-        C Config {get;}
-    }
-
-    public interface IApiContext : IShellContext
-    {
-        IApiSet Api {get;}
-
-        IPart[] Parts
-            => Api.Parts;
-
-        PartId[] PartIdList
-            => Api.Parts.Select(x => x.Id);
-
-        Assembly[] Components
-            => Api.Components;
-
-    }
-
-    public interface IShellContext : IContext, ITextual
+    public interface IShellContext : ITextual
     {
         CorrelationToken Ct
             => z.correlate(Control.Id());

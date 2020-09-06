@@ -1,9 +1,0 @@
-# AsmTEFlagsAltCStates - Table B-1 Intel Vol1
--------------------------------------
-| Identifier | OF | CF | ZF | SF | PF |
-| NAE        |    | 1  |    |    |    |
-| AE         |    | 0  |    |    |    |
-| Z          |    |    | 1  |    |    |
-| NZ         |    |    | 0  |    |    |
-| PE         |    |    |    |    | 1  |
-| PO         |    |    |    |    | 0  |

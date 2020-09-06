@@ -13,7 +13,7 @@ namespace Z0
 
     public interface IApiSet
     {
-        IPart[] Parts {get;}
+        ApiParts Parts {get;}
 
         IPartCatalog[] Catalogs {get;}
 
@@ -21,19 +21,16 @@ namespace Z0
 
         IApiHost[] Hosts {get;}
 
-        IResolvedApi Composition {get;}
+        ResolvedApi Composition {get;}
 
-        Assembly[]  Components
-            => Parts.Select(p => p.Owner);
+        Assembly[] Components
+            => Parts.Components;
 
-        IApiHost[] ApiDataTypes
+        IApiHost[] DataTypes
             => Catalogs.SelectMany(c => c.ApiDataTypes).Cast<IApiHost>().Array();
 
-        IApiHost[] ApiOpHosts
+        IApiHost[] OpHosts
             => Catalogs.SelectMany(c => c.Operations).Cast<IApiHost>().Array();
-
-        Option<IPart> FindPart(PartId id)
-            => z.option(Parts.FirstOrDefault(p => p.Id == id));
 
         Option<IApiHost> FindHost(ApiHostUri uri)
             => z.option(Hosts.Where(h => h.Uri == uri).FirstOrDefault());

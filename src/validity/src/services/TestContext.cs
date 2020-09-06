@@ -29,10 +29,10 @@ namespace Z0
          protected IResolvedApi Api
             => _Api.Value;
 
-        static IResolvedApi ComposeApi()
-            => ApiQuery.apipart(ApiQuery.index());
+        static ResolvedApi ComposeApi()
+            => ApiQuery.api(ApiQuery.index());
 
-        static Lazy<IResolvedApi> _Api {get;}
+        static Lazy<ResolvedApi> _Api {get;}
             = Root.defer(ComposeApi);
     }
 

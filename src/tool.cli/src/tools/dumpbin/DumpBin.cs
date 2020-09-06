@@ -11,10 +11,6 @@ namespace Z0.Tools
 
     public partial struct DumpBin : ITool<DumpBin,DumpBinFlag>
     {
-        [MethodImpl(Inline), Op]
-        public static DumpBin create(IWfShell wf, DumpBinFlag flags)
-            => new DumpBin(wf, wf.ToolOuputDir(Name), wf.ToolProcessDir(Name), flags);
-
         public const string Name = "dumpbin";
 
         public static WfToolId Id => Name;
@@ -25,7 +21,7 @@ namespace Z0.Tools
 
         public string ToolName {get;}
 
-        public FolderPath Source {get;}
+        public FS.FolderPath Source {get;}
 
         public IToolArchive<DumpBin> Archive {get;}
 
@@ -36,7 +32,7 @@ namespace Z0.Tools
         public DumpBinFlag SelectedFlags {get;}
 
         [MethodImpl(Inline)]
-        public DumpBin(IWfShell wf, FolderPath outdir, FolderPath processed, DumpBinFlag selected)
+        public DumpBin(IWfShell wf, FS.FolderPath outdir, FS.FolderPath processed, DumpBinFlag selected)
         {
             Wf = wf;
             SelectedFlags = selected;

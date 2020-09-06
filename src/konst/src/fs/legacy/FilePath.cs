@@ -124,5 +124,6 @@ namespace Z0
         {
             get => new FileInfo(Name);
         }
+
     }
 }

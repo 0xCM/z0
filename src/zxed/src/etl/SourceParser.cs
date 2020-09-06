@@ -8,7 +8,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static z;
     using static XedSourceMarkers;
 
     readonly struct XedSourceParser
@@ -65,40 +65,40 @@ namespace Z0
                 if(data[i].Text.ContainsAny(INSTRUCTION_SEQ))
                     return ParseSequence(data, i);
             }
-            return Root.array<XedInstructionData>();
+            return z.array<XedInstructionData>();
         }
 
-        static void Advance(ref int rowidx)
-            => ++rowidx;
+        static void Advance(ref int index)
+            => ++index;
 
-        static void Retreat(ref int rowidx)
-            => --rowidx;
+        static void Retreat(ref int index)
+            => --index;
 
-        XedFunctionData ParseFunction(TextFileRows data, ref int rowidx)
+        XedFunctionData ParseFunction(TextFileRows data, ref int index)
         {
-            var title = data[rowidx].Text.LeftOf(FUNC_MARKER);
+            var title = data[index].Text.LeftOf(FUNC_MARKER);
             var body = list<string>();
-            var first = rowidx;
-            for(var i = rowidx; i<data.RowCount; i++)
+            var first = index;
+            for(var i = index; i<data.RowCount; i++)
             {
-                ref readonly var row = ref data[rowidx];
+                ref readonly var row = ref data[index];
 
                 var isHeader = Contains(row,FUNC_MARKER);
                 if(isHeader)
                 {
                     if(i != first)
                     {
-                        Retreat(ref rowidx);
+                        Retreat(ref index);
                         break;
                     }
                     else
                     {
-                        Advance(ref rowidx);
+                        Advance(ref index);
                         continue;
                     }
                 }
 
-                Advance(ref rowidx);
+                Advance(ref index);
 
                 if(IsComment(row))
                     continue;

@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-        
+
     using static Konst;
     using static z;
 
     public readonly struct WfSettings
     {
         readonly KeyedValues<string,string> Index;
-        
+
         [MethodImpl(Inline)]
         public WfSettings(KeyedValue<string,string>[] src)
             => Index = new KeyedValues<string,string>(src);

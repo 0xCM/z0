@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// The controlling part
         /// </summary>
-        public PartId Control {get;}
+        public PartId ControlId {get;}
 
         /// <summary>
         /// The controlling arguments, in raw form as supplied by the entry point or caller
@@ -35,7 +35,7 @@ namespace Z0
         /// <summary>
         /// The parts considered by the workflow
         /// </summary>
-        public PartId[] Parts {get;}
+        public PartId[] PartIdentities {get;}
 
         /// <summary>
         /// The input data archive configuration
@@ -85,7 +85,7 @@ namespace Z0
         public FS.FolderPath IndexDir
             => ResDir + FS.folder("index");
 
-        public ApiSet Api {get;}
+        public ApiParts Api {get;}
 
         [MethodImpl(Inline)]
         public WfConfig(IShellContext shell, string[] args, ModuleArchive modules, ArchiveConfig target,
@@ -96,13 +96,13 @@ namespace Z0
             Args = args;
             Modules = modules;
             Api = Modules.Api;
-            Control = Part.ExecutingPart;
+            ControlId = Part.ExecutingPart;
             TargetArchive = target;
-            Parts = parts;
+            PartIdentities = parts;
             Resources = new ArchiveConfig(resroot);
             AppData = new ArchiveConfig(appdata);
             Settings = settings;
-            Logs = new WfLogConfig(Control, logroot);
+            Logs = new WfLogConfig(ControlId, logroot);
         }
 
         [MethodImpl(Inline)]
@@ -113,13 +113,13 @@ namespace Z0
             Args = args;
             Modules = modules;
             Api = Modules.Api;
-            Control = Part.ExecutingPart;
+            ControlId = Part.ExecutingPart;
             TargetArchive = new ArchiveConfig(FS.dir(Paths.LogRoot.Name) + FS.folder("capture/artifacts"));
-            Parts = Flow.parts(args, Api.PartIdentities);
+            PartIdentities = Flow.parts(args, Api.PartIdentities);
             Resources = new ArchiveConfig(Paths.ResourceRoot);
             AppData = new ArchiveConfig(Paths.AppDataRoot);
             Settings = Flow.settings(Shell);
-            Logs = new WfLogConfig(Control, Paths.AppLogRoot);
+            Logs = new WfLogConfig(ControlId, Paths.AppLogRoot);
         }
     }
 }

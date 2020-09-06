@@ -8,7 +8,7 @@ namespace Z0
 
     public readonly struct Apps
     {
-        public static IAppContext context(IResolvedApi composition, IPolyrand random, ISettings settings, IAppMsgQueue queue)
+        public static IAppContext context(ApiParts composition, IPolyrand random, ISettings settings, IAppMsgQueue queue)
             => new AppContext(composition, random, settings, queue);
     }
 }

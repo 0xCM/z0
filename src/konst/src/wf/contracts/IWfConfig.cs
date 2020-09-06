@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// The configured api set
         /// </summary>
-        ApiSet Api {get;}
+        ApiParts Api {get;}
 
         /// <summary>
         /// The context root
@@ -24,7 +24,7 @@ namespace Z0
         /// <summary>
         /// The controlling part
         /// </summary>
-        PartId Control {get;}
+        PartId ControlId {get;}
 
         /// <summary>
         /// The controlling arguments, in raw form as supplied by the entry point or caller
@@ -34,7 +34,7 @@ namespace Z0
         /// <summary>
         /// The parts considered by the workflow
         /// </summary>
-        PartId[] Parts {get;}
+        PartId[] PartIdentities {get;}
 
         /// <summary>
         /// The input data archive configuration

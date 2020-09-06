@@ -15,12 +15,6 @@ namespace Z0
         public static IShellContext create(Assembly control, string[] args, ModuleArchive modules)
             => new ShellContext(control, args, modules);
 
-        public static IShellContext create(Assembly control, string[] args)
-            => new ShellContext(control, args, ApiQuery.modules(control,args));
-
-        public static IShellContext create()
-            => new ShellContext(Assembly.GetEntryAssembly(), Environment.GetCommandLineArgs(), ApiQuery.modules());
-
         public IApiSet Api {get;}
 
         public string[] Args {get;}

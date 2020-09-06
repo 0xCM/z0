@@ -10,7 +10,7 @@ namespace Z0
 
     public class AppContext : IAppContext
     {
-        public IApiSet Api {get;}
+        public ApiParts Api {get;}
 
         public ISettings Settings {get;}
 
@@ -18,38 +18,28 @@ namespace Z0
 
         public IAppMsgQueue MessageQueue {get;}
 
-        public IShellPaths AppPaths {get;}
+        public IShellPaths Paths {get;}
 
         public event Action<IAppMsg> Next;
 
-        public AppContext(IResolvedApi composition, IPolyrand random, ISettings settings, IAppMsgQueue queue)
+        public AppContext(ApiParts parts, IPolyrand random, ISettings settings, IAppMsgQueue queue)
         {
-            AppPaths = Z0.ShellPaths.Default;
+            Paths = Z0.ShellPaths.Default;
             Next = msg => {};
             Random = random;
-            Settings = settings ?? SettingValues.Load(AppPaths.AppConfigPath);
+            Settings = settings ?? SettingValues.Load(Paths.AppConfigPath);
             MessageQueue = queue;
-            Api = ApiQuery.apiset(composition);
+            Api = parts;
         }
 
-        public AppContext(IShellPaths paths, IResolvedApi composition, IPolyrand random, ISettings settings, IAppMsgQueue queue)
+        public AppContext(IShellPaths paths, ApiParts parts, IPolyrand random, ISettings settings, IAppMsgQueue queue)
         {
-            AppPaths = paths;
+            Paths = paths;
             Next = msg => {};
             Random = random;
-            Settings = settings ?? SettingValues.Load(AppPaths.AppConfigPath);
+            Settings = settings ?? SettingValues.Load(Paths.AppConfigPath);
             MessageQueue = queue;
-            Api = ApiQuery.apiset(composition);
-        }
-
-        public AppContext(IShellPaths paths, IApiSet api, IPolyrand random, ISettings settings, IAppMsgQueue queue)
-        {
-            AppPaths = paths;
-            Next = msg => {};
-            Random = random;
-            Settings = settings ?? SettingValues.Load(AppPaths.AppConfigPath);
-            MessageQueue = queue;
-            Api = api;
+            Api = parts;
         }
 
         public IResolvedApi Composition

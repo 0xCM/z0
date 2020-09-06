@@ -57,8 +57,8 @@ namespace Z0.Asm
 
         public void Run()
         {
-            var parts = Config.Parts;
-            Clear(OnDelete,Config.Parts);
+            var parts = Config.PartIdentities;
+            Clear(OnDelete,Config.PartIdentities);
         }
 
         public void Dispose()
