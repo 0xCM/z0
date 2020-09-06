@@ -15,7 +15,7 @@ namespace Z0
 
         StringRef Name {get;}
 
-        void Run();
+        void Run(IWfShell shell);
 
         string ITextual.Format()
             => Id.Format();
@@ -34,30 +34,10 @@ namespace Z0
             => typeof(H).Name;
     }
 
-    public interface IWfHost<H,C> : IWfHost
-        where H : IWfHost<H,C>, new()
-        where C : struct
-    {
-        void Configure(in C config);
-
-        ref readonly C Config {get;}
-    }
-
-    public interface IWfHost<H,C,S,T> : IWfHost<H,C>
-        where H : IWfHost<H,C,S,T>, new()
-        where C : struct
+    public interface IWfHost<H,S> : IWfHost<H>
+        where H : IWfHost<H,S>, new()
         where S : struct
-        where T : struct
     {
-        Type IWfHost.Type
-            => Type;
-
-        new WfType<S,T> Type
-            => default;
-
-        T Run(in S src);
-
-        void IWfHost.Run()
-            => Run(new S());
+        void Run(IWfShell shell, in S state);
     }
 }

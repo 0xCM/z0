@@ -20,7 +20,7 @@ namespace Z0
             {
                 var assname = Assembly.GetEntryAssembly().GetSimpleName();
                 var filename = FileName.define(assname, FileExtensions.Json);
-                var src = context.AppPaths.ConfigRoot + filename;
+                var src = context.Paths.ConfigRoot + filename;
                 return src;
             }
 

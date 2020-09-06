@@ -5,8 +5,7 @@
 namespace Z0
 {
     using System;
-    using static V0;
- 
+
     public class t_cnonimpl : t_bitcore<t_cnonimpl>
     {
         public void cnonimpl_8u()
@@ -24,16 +23,15 @@ namespace Z0
         protected void cnonimpl_check<T>(T t = default)
             where T : unmanaged
         {
-            var vZero = vzero<T>(n128);
+            var vZero = z.vzero<T>(n128);
             for(var i=0; i<RepCount; i++)
             {
-                var x = Random.Next<T>();                    
-                var y = Random.Next<T>();                    
+                var x = Random.Next<T>();
+                var y = Random.Next<T>();
                 var z1 = gmath.cnonimpl(x, y);
                 var z2 = gmath.and(x,gmath.not(y));
                 Claim.Eq(z1,z2);
             }
         }
-
     }
 }

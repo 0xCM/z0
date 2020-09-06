@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
     using static Konst;
     using static z;
@@ -19,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [Op, NumericClosures(AllNumeric)]
+        [Op, Closures(UnsignedInts)]
         public static Span<T> vspan<T>(Vector128<T> src)
             where T : unmanaged
         {
@@ -33,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [Op, NumericClosures(AllNumeric)]
+        [Op, Closures(UnsignedInts)]
         public static Span<T> vspan<T>(Vector256<T> src)
             where T : unmanaged
         {
@@ -47,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [Op, NumericClosures(AllNumeric)]
+        [Op, Closures(UnsignedInts)]
         public static Span<T> vspan<T>(Vector512<T> src)
             where T : unmanaged
         {

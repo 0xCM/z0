@@ -14,7 +14,7 @@ namespace Z0
 
         Initialized = ConsoleColor.DarkGray,
 
-        Created = ConsoleColor.DarkBlue,
+        Created = ConsoleColor.Blue,
 
         Running = ConsoleColor.Magenta,
 
@@ -24,7 +24,7 @@ namespace Z0
 
         Error = ConsoleColor.Red,
 
-        Disposed = ConsoleColor.DarkBlue,
+        Disposed = ConsoleColor.Blue,
 
         Status = ConsoleColor.Green,
 

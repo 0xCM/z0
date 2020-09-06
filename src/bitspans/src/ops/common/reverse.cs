@@ -14,7 +14,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan reverse(in BitSpan src)
         {
-            src.Bits.Reverse();
+            src.Edit.Reverse();
             return ref src;
         }
     }

@@ -38,7 +38,7 @@ namespace Z0.Asm
                 lines.Add(comment(src.Code.OpUri.OpId));
 
             if(config.EmitBaseAddress)
-                lines.Add(comment(text.concat("Base", text.spaced(Chars.Eq), src.Code.Address)));
+                lines.Add(comment(text.concat("Base", text.spaced(Chars.Eq), src.Code.Base)));
 
             if(config.EmitCaptureTermCode)
             {

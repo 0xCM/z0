@@ -3,11 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{ 
+{
     [ApiHost]
-    public static partial class VData
-    {        
-
+    public static partial class VKonst
+    {
 
     }
 }

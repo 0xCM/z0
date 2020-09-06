@@ -31,14 +31,14 @@ namespace Z0
 
         public void vclear_check<T>(N256 n, T t = default)
             where T : unmanaged
-        {            
+        {
             for(var i=0; i< RepCount; i++)
             {
                 byte start = Random.Next<byte>(0, (byte)bitsize<T>());
                 byte length = (byte)(bitsize<T>() - start);
                 var cellcount = n/bitsize(t);
                 var x = Random.CpuVector<T>(n);
-                var x1 = VBits.bitclear(x, start, length);                                    
+                var x1 = VBits.bitclear(x, start, length);
                 var x2 = gvec.vsrl(x1,start);
                 Claim.nea(gvec.vnonz(x2));
             }
@@ -46,14 +46,14 @@ namespace Z0
 
         protected void vclear_check<T>(N128 n, T t = default)
             where T : unmanaged
-        {            
+        {
             for(var i=0; i< RepCount; i++)
             {
                 byte start = Random.Next<byte>(0, (byte)bitsize<T>());
                 byte length = (byte)(bitsize<T>() - start);
                 var cellcount = n/bitsize(t);
                 var x = Random.CpuVector<T>(n);
-                var x1 = VBits.bitclear(x, start, length);                                    
+                var x1 = VBits.bitclear(x, start, length);
                 var x2 = gvec.vsrl(x1,start);
                 Claim.nea(gvec.vnonz(x2));
             }
@@ -61,7 +61,7 @@ namespace Z0
 
         public void clearalt_256x8()
         {
-            var tr = VData.vclearalt<byte>(n256);
+            var tr = VKonst.vclearalt<byte>(n256);
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.CpuVector<byte>(n256);

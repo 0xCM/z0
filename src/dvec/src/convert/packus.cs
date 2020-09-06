@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse41;
 
-    using static Konst; 
-    using static z;    
+    using static Konst;
+    using static z;
 
     partial class dvec
     {
@@ -28,7 +28,7 @@ namespace Z0
             => z.vpackus(x,y);
 
         /// <summary>
-        ///__m128i _mm_packus_epi32 (__m128i a, __m128i b)PACKUSDW xmm, xmm/m128 
+        ///__m128i _mm_packus_epi32 (__m128i a, __m128i b)PACKUSDW xmm, xmm/m128
         /// (4x32w,4x32w) -> 8x16w
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -70,11 +70,11 @@ namespace Z0
             var mask = z.vbroadcast(n128, (ushort)(byte.MaxValue));
             var v1 = z.v16i(z.vand(x,mask));
             var v2 = z.v16i(z.vand(y,mask));
-            return PackUnsignedSaturate(v1,v2);         
+            return PackUnsignedSaturate(v1,v2);
         }
 
         /// <summary>
-        ///__m128i _mm_packus_epi32 (__m128i a, __m128i b) PACKUSDW xmm, xmm/m128 
+        ///__m128i _mm_packus_epi32 (__m128i a, __m128i b) PACKUSDW xmm, xmm/m128
         /// (4x32w,4x32w) -> 8x16w
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -101,7 +101,7 @@ namespace Z0
             var mask = z.vbroadcast(n256, (ushort)(byte.MaxValue));
             var v1 = z.v16i(z.vand(x,mask));
             var v2 = z.v16i(z.vand(y,mask));
-            return PackUnsignedSaturate(v1,v2);         
+            return PackUnsignedSaturate(v1,v2);
         }
 
         /// <summary>
@@ -129,8 +129,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         static Vector256<ushort> vpackus_alt(Vector256<uint> x, Vector256<uint> y)
         {
-            var v1 = z.vshuf16x8(x, VData.packusLo(n256,n32,n16));
-            var v2 = z.vshuf16x8(y, VData.packusHi(n256,n32,n16));
+            var v1 = z.vshuf16x8(x, VKonst.packusLo(n256,n32,n16));
+            var v2 = z.vshuf16x8(y, VKonst.packusHi(n256,n32,n16));
             return z.v16u(vor(v1,v2));
         }
    }

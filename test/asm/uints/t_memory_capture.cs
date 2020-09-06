@@ -7,7 +7,7 @@ namespace Z0.Asm
     using System;
 
     public class t_memory_capture : t_asm<t_memory_capture>
-    {    
+    {
         public override bool Enabled => false;
 
         public void call32_intr_pattern()
@@ -19,13 +19,12 @@ namespace Z0.Asm
                 Claim.Fail();
         }
 
-
         public void check_decoder()
         {
-            DecodeHostBits(Context.Api.Hosts.Map(h => h.Uri));                       
+            DecodeHostBits(Context.Api.Hosts.Map(h => h.Uri));
         }
 
-        public static ReadOnlySpan<byte> AsChar_Span8u_Input 
+        public static ReadOnlySpan<byte> AsChar_Span8u_Input
             => new byte[]{
                 0x48,0x83,0xec,0x28,0x90,0x48,0x8b,0x02,
                 0x8b,0x52,0x08,0xd1,0xea,0x48,0x89,0x01,

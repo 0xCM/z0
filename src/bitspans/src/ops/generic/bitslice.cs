@@ -20,10 +20,10 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T bitslice<T>(in BitSpan src, int offset)
             where T : unmanaged
-        {            
+        {
             var dst = span<bit>(bitsize<T>());
             var len = math.min(dst.Length, src.Length - offset);
-            Copier.copy(src.Bits, offset, len, dst);
+            Copier.copy(src.Edit, offset, len, dst);
             return BitPack.pack<T>(dst);
         }
 
@@ -35,10 +35,10 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T bitslice<T>(in BitSpan src)
             where T : unmanaged
-        {            
+        {
             var dst = span<bit>(bitsize<T>());
             var len = math.min(dst.Length, src.Length);
-            Copier.copy(src.Bits, 0, len, dst);
+            Copier.copy(src.Edit, 0, len, dst);
             return BitPack.pack<T>(dst);
         }
 
@@ -52,10 +52,10 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T bitslice<T>(in BitSpan src, int offset, int count)
             where T : unmanaged
-        {            
+        {
             var dst = span<bit>(bitsize<T>());
             var len = math.min(count, src.Length - offset);
-            Copier.copy(src.Bits, offset, len, dst);
+            Copier.copy(src.Edit, offset, len, dst);
             return BitPack.pack<T>(dst);
         }
    }

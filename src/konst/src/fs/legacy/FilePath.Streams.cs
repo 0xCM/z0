@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.IO;
 
     using static Konst;
@@ -29,7 +29,7 @@ namespace Z0
         public static StreamWriter Writer(this FilePath dst)
             => new StreamWriter(dst.CreateParentIfMissing().Name, false);
 
-        public static PartFileWriter<T> Writer<T>(this FilePath dst)
+        public static PartFileWriter<T> Writer<T>(this FS.FilePath dst)
             where T : ITextual
                 => new PartFileWriter<T>(dst);
 
@@ -40,6 +40,6 @@ namespace Z0
             => new BinaryReader(src);
 
         public static BinaryReader BinaryReader(this StreamReader src)
-            => new BinaryReader(src.BaseStream);            
+            => new BinaryReader(src.BaseStream);
     }
 }

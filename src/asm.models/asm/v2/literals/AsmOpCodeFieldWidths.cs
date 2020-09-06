@@ -3,15 +3,13 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
-    using C = DataFieldWidths;
-
+{
     /// <summary>
     /// Defines the widths of common asm record fields
     /// </summary>
     public enum AsmOpCodeFieldWidths
     {
-        Sequence = C.Sequence,
+        Sequence = 10,
 
         Mnemonic = asci32.Size,
 
@@ -20,10 +18,10 @@ namespace Z0.Asm
         OpCode = asci32.Size,
 
         OpCodeId = asci32.Size,
-        
+
         Address64 = 16,
 
-        YeaOrNea = C.Bool,
+        YeaOrNea = 8,
 
         CpuId = asci64.Size,
     }

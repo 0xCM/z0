@@ -13,8 +13,8 @@ namespace Z0
     /// <summary>
     /// Represents the generic type definition for a 128-bit vector
     /// </summary>
-    public readonly struct Vec128Type : IVectorType<Vec128Type,W128>
-    {     
+    public readonly struct Vec128Type : IVectorKind<Vec128Type,W128>
+    {
         [MethodImpl(Inline)]
         public static implicit operator VectorWidthKind(Vec128Type src)
             => src.Class;
@@ -25,22 +25,22 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Vec128Type(W128 src)
-            => default;        
-
-        public W128 W 
             => default;
 
-        public VectorWidth Class 
+        public W128 W
+            => default;
+
+        public VectorWidth Class
             => VectorWidth.W128;
 
-        public uint Value 
+        public uint Value
             => (uint)W.DataWidth;
 
-        public int BitWidth 
+        public int BitWidth
             => W;
 
-        public Type TypeDefinition 
+        public Type TypeDefinition
             => typeof(Vector128<>).GenericDefinition2();
 
-    }        
+    }
 }

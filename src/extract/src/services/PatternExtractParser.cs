@@ -69,7 +69,7 @@ namespace Z0
             }
         }
 
-        public ExtractParseResult Parse(X86MemberExtract src, int seq)
+        public ExtractParseResult Parse(X86ApiExtract src, int seq)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace Z0
                 var term = status.HasFailed() ? ExtractTermCode.Fail : parser.Result.ToTermCode();
                 if(term != ExtractTermCode.Fail)
                 {
-                    var code = Locate(src.Encoded.Address, parser.Parsed, term == ExtractTermCode.CTC_Zx7 ? Zx7Cut : 0);
+                    var code = Locate(src.Encoded.Base, parser.Parsed, term == ExtractTermCode.CTC_Zx7 ? Zx7Cut : 0);
                     return new ExtractParseResult(new X86MemberRefinement(src, seq, term, code));
                 }
                 else
@@ -92,7 +92,7 @@ namespace Z0
             }
         }
 
-        public ExtractParseResults Parse(X86MemberExtract[] src)
+        public ExtractParseResults Parse(X86ApiExtract[] src)
         {
             var parsed = list<X86MemberRefinement>(src.Length);
             var failed = list<ExtractParseFailure>();

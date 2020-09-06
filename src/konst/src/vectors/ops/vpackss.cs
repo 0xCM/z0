@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Sse2;
@@ -43,7 +43,7 @@ namespace Z0
             => PackSignedSaturate(x,y);
 
         /// <summary>
-        /// __m128i _mm_packs_epi32 (__m128i a, __m128i b)PACKSSDW xmm, xmm/m128
+        /// __m128i _mm_packs_epi32 (__m128i a, __m128i b) PACKSSDW xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -52,7 +52,7 @@ namespace Z0
             => PackSignedSaturate(v32i(x), v32i(y));
 
         /// <summary>
-        /// __m256i _mm256_packs_epi16 (__m256i a, __m256i b)VPACKSSWB ymm, ymm, ymm/m256
+        /// __m256i _mm256_packs_epi16 (__m256i a, __m256i b) VPACKSSWB ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -61,7 +61,7 @@ namespace Z0
             => PackSignedSaturate(x,y);
 
         /// <summary>
-        /// __m256i _mm256_packs_epi16 (__m256i a, __m256i b)VPACKSSWB ymm, ymm, ymm/m256
+        /// __m256i _mm256_packs_epi16 (__m256i a, __m256i b) VPACKSSWB ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -70,7 +70,7 @@ namespace Z0
             => PackSignedSaturate(v16i(x),v16i(y));
 
         /// <summary>
-        /// __m256i _mm256_packs_epi32 (__m256i a, __m256i b)VPACKSSDW ymm, ymm, ymm/m256
+        /// __m256i _mm256_packs_epi32 (__m256i a, __m256i b) VPACKSSDW ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>

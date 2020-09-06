@@ -157,7 +157,7 @@ namespace Z0
             => CheckEquatable.Checker;
 
         protected IShellPaths AppPaths
-            => Context.AppPaths;
+            => Context.Paths;
 
         protected PartId TestedPart
         {
@@ -168,7 +168,7 @@ namespace Z0
         FolderPath TestRoot
         {
              [MethodImpl(Inline)]
-             get => Context.AppPaths.TestDataRoot + FolderName.Define(TestedPart.Format());
+             get => Context.Paths.TestDataRoot + FolderName.Define(TestedPart.Format());
         }
 
         protected FolderPath UnitDataDir

@@ -34,10 +34,10 @@ namespace Z0.Asm
         protected BufferSeqId Main
             => BufferSeqId.Main;
 
-        protected IMemberCodeWriter HexWriter([Caller] string caller = null)
+        protected IApiHexWriter HexWriter([Caller] string caller = null)
         {
             var dstPath = TargetArchive.HexPath(FileName.define(caller, FileExtensions.HexLine));
-            return Archives.writer<MemberCodeWriter>(dstPath);
+            return Archives.writer<ApiHexWriter>(dstPath);
         }
 
         protected IAsmTextWriter AsmWriter([Caller] string caller = null)
@@ -46,12 +46,13 @@ namespace Z0.Asm
             return AsmCore.Services.AsmWriter(dst, AsmFormatSpec.DefaultStreamFormat);
         }
 
-        protected X86ApiCode[] ReadHostBits(ApiHostUri host)
+        protected ApiHex[] ReadHostBits(ApiHostUri host)
         {
             var paths = AppPaths.ForApp(PartId.Control);
             var root = paths.AppCaptureRoot;
             var capture = Archives.capture(root);
-            return UriCodeReader.Service.Read(capture.HexPath(host)).ToArray();
+            var archive = new ApiHexArchive(root);
+            return archive.Read(capture.HexPath(host)).ToArray();
         }
 
         protected AsmFxList[] DecodeHostBits(ApiHostUri[] hosts)
@@ -61,7 +62,7 @@ namespace Z0.Asm
             var totalCount = 0ul;
             var hostCount = 0ul;
 
-            var dst = Root.list<AsmFxList>();
+            var dst = z.list<AsmFxList>();
 
             void Decoded(Instruction i)
             {
@@ -74,7 +75,7 @@ namespace Z0.Asm
                 hostCount = 0;
                 var bits = ReadHostBits(host).ToArray();
                 foreach(var f in bits)
-                    decoder.Decode(f.Encoded, Decoded).OnSome(i => dst.Add(i));
+                    decoder.Decode(f, Decoded).OnSome(i => dst.Add(i));
             }
 
             return dst.ToArray();

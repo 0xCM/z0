@@ -27,24 +27,24 @@ namespace Z0
             Host = host;
         }
 
-        IDynexus Dynamic 
+        IDynexus Dynamic
             => Dynops.Services.Dynexus;
 
         uint PointCount<T>()
             => (uint)Root.size<T>()/Buffer.BufferSize;
 
-        IPolyrand Random 
+        IPolyrand Random
             => Context.Random;
 
-        public TestCaseRecord Match<T>(BinaryOp<Vector128<T>> f, IdentifiedCode bits)
+        public TestCaseRecord Match<T>(BinaryOp<Vector128<T>> f, ApiHex bits)
             where T : unmanaged
         {
             var g = Dynamic.EmitFixedBinary(Buffer, w128, bits);
             return Match<T>(f, g, bits.OpUri.OpId);
         }
 
-        public TestCaseRecord Match<T>(BinaryOp<Vector256<T>> f, IdentifiedCode bits)
-            where T : unmanaged                    
+        public TestCaseRecord Match<T>(BinaryOp<Vector256<T>> f, ApiHex bits)
+            where T : unmanaged
         {
             var g = Dynamic.EmitFixedBinary(Buffer, w256, bits);
             return Match<T>(f, g, bits.OpUri.OpId);
@@ -86,6 +86,6 @@ namespace Z0
             }
 
             return TestCaseRecord.Define(TestCaseIdentity.name<T>(Host,id), success, clock);
-        }          
+        }
     }
 }

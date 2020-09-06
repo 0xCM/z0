@@ -5,13 +5,13 @@
 namespace Z0
 {
     /// <summary>
-    /// Characteries an object that advertises its memory locatiohn
+    /// Characteries an object that advertises its memory location
     /// </summary>
     public interface IAddressable
     {
-        MemoryAddress Address {get;}
+        MemoryAddress Base {get;}
     }
-    
+
     /// <summary>
     /// Characterizes an object that advertises a parametric memory location
     /// </summary>
@@ -19,11 +19,11 @@ namespace Z0
     public interface IAddressable<T> : IAddressable
         where T : unmanaged, IAddress
     {
-        new T Address {get;}
+        new T Base {get;}
 
-        MemoryAddress IAddressable.Address 
-            => z.convert<T,ulong>(Address);
-    }     
+        MemoryAddress IAddressable.Base
+            => z.convert<T,ulong>(Base);
+    }
 
     /// <summary>
     /// Characterizes a reified addressable object

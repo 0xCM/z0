@@ -27,6 +27,10 @@ namespace Z0
 
         readonly PartId[] Parts;
 
+        readonly ManageCaptureStep Step;
+
+        WfStepId StepId => Step.Id;
+
         public ManageCapture(WfCaptureState state, CorrelationToken ct)
         {
             State = state;
@@ -36,6 +40,7 @@ namespace Z0
             Sink = Wf.WfSink;
             Parts = Wf.PartIdentities;
             Broker = state.CaptureBroker;
+            Step = new ManageCaptureStep();
             Wf.Created(StepId);
         }
 
@@ -51,7 +56,7 @@ namespace Z0
             Wf.Running(StepId);
 
             {
-                Wf.Raise(new CapturingParts(StepName, State.Parts, Ct));
+                Wf.Raise(new CapturingParts(Step.Name, State.Parts, Ct));
                 using var manage = new ManagePartCapture(State, Ct);
                 manage.Run();
             }
@@ -64,7 +69,7 @@ namespace Z0
 
             {
                 Wf.Running(EvaluateStep.StepId);
-                var evaluate = Evaluate.control(App, Wf.AppPaths.AppCaptureRoot, Pow2.T14);
+                var evaluate = Evaluate.control(App, Wf.Paths.AppCaptureRoot, Pow2.T14);
                 evaluate.Execute();
                 Wf.Ran(EvaluateStep.StepId);
             }
@@ -80,7 +85,7 @@ namespace Z0
                 CollectAsmStats(e.Host, e.Functions);
         }
 
-        public void OnEvent(HexCodeSaved e)
+        public void OnEvent(ApiHexSaved e)
         {
             Sink.Deposit(e);
 
@@ -105,7 +110,7 @@ namespace Z0
             for(var i = 0u; i<functions.Length; i++)
                 count += (uint)z.skip(functions,i).InstructionCount;
 
-           Wf.Raise(new CountedInstructions(StepName, host, count, Ct));
+           Wf.Raise(new CountedInstructions(Step.Name, host, count, Ct));
         }
 
         void CheckDuplicates(ApiHostUri host, ReadOnlySpan<ApiMember> src)

@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     using System;
-    
+
     using static Konst;
     using static BufferSeqId;
 
@@ -15,11 +15,11 @@ namespace Z0.Asm
             where D : Delegate
                 => from capture in CaptureService.Capture(CaptureExchange.Context, src.Id, src)
                 from asm in Decoder.Decode(capture)
-                select asm;        
+                select asm;
 
-        TestCaseRecord TestMatch<T>(BinaryOp<T> f, IdentifiedCode src)
+        TestCaseRecord TestMatch<T>(BinaryOp<T> f, ApiHex src)
             where T : unmanaged
-        {                                  
+        {
             var g = Dynamic.EmitBinaryOp<T>(this[Main],src);
             void check()
             {

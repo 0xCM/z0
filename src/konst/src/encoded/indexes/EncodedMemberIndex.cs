@@ -28,7 +28,7 @@ namespace Z0
         public EncodedMemberIndex(ApiHostUri id, X86ApiCode[] code)
         {
             Host = id;
-            Data = code.OrderBy(x => x.Address);
+            Data = code.OrderBy(x => x.Base);
         }
 
         [MethodImpl(Inline)]

@@ -34,7 +34,7 @@ namespace Z0
             Extracted = extracted;
             Parsed = parsed;
             Method = method;
-            z.insist(extracted.Address, parsed.Address);
+            z.insist(extracted.Base, parsed.Base);
             OpUri = OpUri.hex(ApiQuery.uri(method.DeclaringType), method.Name, id);
             TermCode = term;
             Cil = FunctionDynamic.cil(method);
@@ -109,7 +109,7 @@ namespace Z0
         public MemoryAddress BaseAddress
         {
             [MethodImpl(Inline)]
-            get => Extracted.Address;
+            get => Extracted.Base;
         }
 
         public uint Hash

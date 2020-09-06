@@ -8,17 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using Asm;
+    using Z0.Asm;
 
     using static Konst;
     using static z;
-
     using static CreateGlobalIndexStep;
-
-    public class ProcessGlobalIndexStep : IWfStep<ProcessGlobalIndexStep>
-    {
-        public static WfStepId StepId => typeof(ProcessGlobalIndexStep);
-    }
 
     public ref struct CreateGlobalIndex
     {
@@ -34,10 +28,10 @@ namespace Z0
 
         readonly IWfCaptureState State;
 
-        public CreateGlobalIndex(IWfShell wf, IWfCaptureState state, PartFileProvider src, CorrelationToken ct)
+        public CreateGlobalIndex(IWfShell wf, IWfCaptureState state, PartFileProvider src)
         {
             Wf = wf;
-            Ct = ct;
+            Ct = Wf.Ct;
             State = state;
             SourceFiles = src;
             EncodedIndex = default;
@@ -185,7 +179,7 @@ namespace Z0
         {
             try
             {
-                var id = ProcessGlobalIndexStep.StepId;
+                var id = new ProcessGlobalIndexStep().Id;
                 Wf.Running(id);
 
                 var processor = new ProcessAsm(State, encoded);
@@ -215,7 +209,7 @@ namespace Z0
         {
             var count = src.Count;
             var records = span(src.Sequenced);
-            var dir = Wf.AppPaths.ResourceRoot + FolderName.Define("tables") + FolderName.Define("asm");
+            var dir = Wf.Paths.ResourceRoot + FolderName.Define("tables") + FolderName.Define("asm");
             var dst = dir + FileName.define(src.Key.ToString(), FileExtensions.Csv);
             using var writer = dst.Writer();
             writer.WriteLine(AsmRecord.FormatHeader());
@@ -256,6 +250,5 @@ namespace Z0
                 Wf.Error(error,Ct);
             }
         }
-
     }
 }

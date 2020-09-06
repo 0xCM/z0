@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly BitSpan BitSpan(this IPolyrand random, in BitSpan dst)
         {
-            random.BitStream32().Take(dst.Length).ToArray().CopyTo(dst.Bits);
+            random.BitStream32().Take(dst.Length).ToArray().CopyTo(dst.Edit);
             return ref dst;
         }
     }

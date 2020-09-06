@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     partial class BitSpans
@@ -31,9 +31,9 @@ namespace Z0
         {
             if(src.Length <= maxbits)
                 return ref src;
-            
-            src.Bits.Slice(maxbits).Clear();
-            
+
+            src.Edit.Slice(maxbits).Clear();
+
             return ref src;
         }
 
@@ -48,6 +48,6 @@ namespace Z0
         {
             src.Data.Slice(i0, i0 - i1 + 1).Clear();
             return ref src;
-        }         
+        }
     }
 }

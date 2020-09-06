@@ -90,8 +90,8 @@ namespace Z0
 
         public Triple<bool> Include(in X86ApiCode src)
         {
-            var a = CodeAddress.TryAdd(src.Address, src);
-            var b = UriAddress.TryAdd(src.Address, src.OpUri);
+            var a = CodeAddress.TryAdd(src.Base, src);
+            var b = UriAddress.TryAdd(src.Base, src.OpUri);
             var c = Locations.TryAdd(src.OpUri, src);
             return (a,b,c);
         }

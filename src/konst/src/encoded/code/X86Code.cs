@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The head of the memory location from which the data originated
         /// </summary>
-        public MemoryAddress Address {get;}
+        public MemoryAddress Base {get;}
 
         /// <summary>
         /// The encoded content
@@ -86,7 +86,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public X86Code(MemoryAddress src, byte[] data)
         {
-            Address = z.insist(src, x => x.IsNonEmpty);
+            Base = z.insist(src, x => x.IsNonEmpty);
             Encoded = new BinaryCode(z.insist(data));
         }
 
@@ -107,14 +107,14 @@ namespace Z0
         [MethodImpl(Inline)]
         X86Code(ulong zero)
         {
-            Address = zero;
+            Base = zero;
             Encoded = Array.Empty<byte>();
         }
 
         public MemoryRange MemorySegment
         {
             [MethodImpl(Inline)]
-            get => (Address, Address + (MemoryAddress)Encoded.Length);
+            get => (Base, Base + (MemoryAddress)Encoded.Length);
         }
 
         public static X86Code Empty

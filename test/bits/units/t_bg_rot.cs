@@ -8,11 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
-    using static Vectors;
-    
+    using static z;
+
     public class t_bg_rot : t_bitgrids<t_bg_rot>
-    {        
+    {
 
         public void bg_rot_basecases()
         {
@@ -38,10 +37,10 @@ namespace Z0
                 var pattern = 0b00000000_00000111_00000000_00000000u;
                 var shifts = vparts(w,1,1,4,4,0,0,1,1);
                 var g0 = BitGrid.broadcast(pattern, BitGrid.alloc(w,m,n,t));
-                
+
                 //PostMessage("g0");
                 //PostMessage(g0.Format());
-                
+
                 var g1 = BitGrid.sllv(g0, shifts);
                 //PostMessage("sllv");
                 //PostMessage(g1.Format());
@@ -53,8 +52,5 @@ namespace Z0
 
             case2();
         }
-
     }
-
 }
-        

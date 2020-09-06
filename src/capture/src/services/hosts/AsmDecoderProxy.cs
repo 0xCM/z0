@@ -37,7 +37,7 @@ namespace Z0.Asm
         public Option<AsmRoutine> Decode(X86MemberRefinement src)
             => Decoder.Decode(src);
 
-        public Option<AsmInstructions> Decode(IdentifiedCode src)
+        public Option<AsmInstructions> Decode(ApiHex src)
             => Decoder.Decode(src);
 
         public Option<AsmRoutine> Decode(X86MemberRefinement src, Action<Instruction> f)
@@ -52,5 +52,11 @@ namespace Z0.Asm
         /// <param name="src">The code source</param>
         public Option<AsmFxList> Decode(X86Code src)
             => Decoder.Decode(src);
+
+        public Option<AsmFxList> Decode(ApiHex src, Action<Instruction> f)
+            => Decoder.Decode(src,f);
+
+        public Option<AsmFxList> Decode(X86ApiCode src, Action<Instruction> f)
+            => Decoder.Decode(src,f);
     }
 }

@@ -5,13 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static VectorKonst;
 
-    partial class VData
+    partial class VKonst
     {
         /// <summary>
         /// Creates a shuffle mask that clears every-other vector component
@@ -22,10 +22,10 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return V0.vload<T>(n,ClearAlt256x8u);
+                return z.vload<T>(n,ClearAlt256x8u);
             else if(typeof(T) == typeof(ushort))
-                return V0.vload<T>(n,ClearAlt256x16u);
-            else 
+                return z.vload<T>(n,ClearAlt256x16u);
+            else
                 return default;
         }
     }

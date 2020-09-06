@@ -24,8 +24,8 @@ namespace Z0
             => HostCaptureArchive.create(Paths.ResourceRoot + FolderName.Define("capture"), host);
 
         [MethodImpl(Inline), Op]
-        public ISemanticArchive Semantic(ApiHostUri host)
-            => SemanticArchive.create();
+        public ISemanticPaths Semantic(ApiHostUri host)
+            => SemanticPaths.create();
 
         static void Clear(PartId part, FilePath file, Action<FilePath> handler)
             => file.Delete().OnSome(handler);
@@ -40,28 +40,5 @@ namespace Z0
         static void Clear(PartId part, FolderPath src, FileExtension ext, Action<FilePath> handler)
             => Clear(part, src.Files(ext), handler);
 
-        // public void ClearExtracts(PartId part, Action<FilePath> handler)
-        //     => Clear(part, Archive.ExtractDir, X.Extract, handler);
-
-        // public void ClearParsed(PartId part, Action<FilePath> handler)
-        //     => Clear(part, Archive.ParsedDir, X.Parsed, handler);
-
-        // public void ClearAsm(PartId part, Action<FilePath> handler)
-        //     => Clear(part, Archive.AsmDir, X.Asm, handler);
-
-        // public void ClearHexCode(PartId part, Action<FilePath> handler)
-        //     => Clear(part, Archive.CodeDir, X.HexLine, handler);
-
-        // public void ClearUnparsed(PartId part, Action<FilePath> handler)
-        //     => Clear(part, Archive.UnparsedDir, X.Unparsed, handler);
-
-        public void Clear(PartId part, Action<FilePath> handler)
-        {
-            // ClearExtracts(part,handler);
-            // ClearParsed(part,handler);
-            // ClearAsm(part,handler);
-            // ClearHexCode(part,handler);
-            // ClearUnparsed(part,handler);
-        }
     }
 }

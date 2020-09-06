@@ -4,23 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;    
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
     using K = OperatorClassKind;
 
-    public readonly struct ShiftOpClass : IOperatorClass<ShiftOpClass,K> 
+    public readonly struct ShiftOpClass : IOperatorClass<ShiftOpClass,K>
     {
         public static implicit operator OperatorClass(ShiftOpClass src)
             => src.Generalized;
 
-        public K Kind 
-            => K.ShiftOp; 
+        public K Kind
+            => K.ShiftOp;
 
-        public OperatorClass Generalized 
+        public OperatorClass Generalized
             => new OperatorClass(Kind);
-    }    
-
+    }
 }

@@ -6,14 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
-    
+
     using static Konst;
 
     /// <summary>
     /// Represents the generic type definition for a 512-bit vector
     /// </summary>
-    public readonly struct Vec512Type : IVectorType<Vec512Type,W512>
+    public readonly struct Vec512Type : IVectorKind<Vec512Type,W512>
     {
         [MethodImpl(Inline)]
         public static implicit operator VectorWidthKind(Vec512Type src)
@@ -25,21 +24,21 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Vec512Type(W512 src)
-            => default;                                 
-
-        public W512 W 
             => default;
 
-        public VectorWidth Class 
+        public W512 W
+            => default;
+
+        public VectorWidth Class
             => VectorWidth.W512;
 
-        public uint Value 
+        public uint Value
             => (uint)W.DataWidth;
 
-        public int BitWidth 
+        public int BitWidth
             => W;
 
-        public Type TypeDefinition 
+        public Type TypeDefinition
             => typeof(Vector512<>).GenericDefinition2();
-    }        
+    }
 }

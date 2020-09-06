@@ -46,7 +46,7 @@ namespace Z0.Asm
             Ct = ct;
             Config = config;
             var srcpath = FilePath.Define(wf.GetType().Assembly.Location).FolderPath;
-            var dstpath = wf.AppPaths.AppCaptureRoot;
+            var dstpath = wf.Paths.AppCaptureRoot;
             var src = new ArchiveConfig(srcpath);
             var dst = new ArchiveConfig(dstpath);
             Settings = CaptureConfig.From(wf.Settings);
@@ -64,18 +64,7 @@ namespace Z0.Asm
 
         }
 
-
-        public IWfEventSink WfEventSink
-            => Wf.Broker.Sink;
-
         public void Error(WfStepId step, Exception e)
             => Wf.Error(step, e, Ct);
-
-        public void Error(WfStepId step, string message)
-            => Wf.Error(step, message);
-
-        public WfEventId Raise<E>(in E @event)
-            where E : IWfEvent
-                => Wf.Raise(@event);
     }
 }

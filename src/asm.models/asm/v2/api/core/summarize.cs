@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     using Z0.Asm;
 
     partial struct asm
-    { 
+    {
         [MethodImpl(Inline), Op]
         public static AsmFxSummary summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string formatted, ushort offset)
             => new AsmFxSummary(@base, (ushort)offset,  formatted,  src.InstructionCode, operands(@base, src),  encoded.Slice(offset, src.ByteLength).ToArray());
@@ -30,11 +30,11 @@ namespace Z0
         {
             var dst = new AsmFxSummary[src.Length];
             var offset = (ushort)0;
-            var @base = src.Encoded.Address;
+            var @base = src.Encoded.Base;
 
             for(var i=0; i<dst.Length; i++)
             {
-                var instruction = src[i];                            
+                var instruction = src[i];
                 dst[i] =   asm.Summarize(@base, instruction, src.Encoded, instruction.FormattedInstruction, offset);
                 offset += (ushort)instruction.ByteLength;
             }
@@ -55,13 +55,13 @@ namespace Z0
             for(var i=0; i<dst.Length; i++)
             {
                 var instruction = src.Instructions[i];
-                
+
                 if(src.Code.Length < offset + instruction.ByteLength)
                 {
                     term.error($"Instruction size mismatch {instruction.IP} {offset} {src.Code.Length} {instruction.ByteLength}");
                     continue;
                 }
-            
+
                 dst[i] = asm.summarize(@base, instruction, src.Code.Encoded, instruction.FormattedInstruction, offset);
                 offset += (ushort)instruction.ByteLength;
             }

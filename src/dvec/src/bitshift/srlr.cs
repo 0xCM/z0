@@ -5,17 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;    
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse2;
-    
-    using static Vectors;    
+
+    using static Vectors;
     using static Typed;
-    
+
     partial class dvec
-    {           
+    {
         /// <summary>
         /// Shifts each source vector component rightwards by an amount specified in the first component of the offset vector
         /// </summary>
@@ -26,7 +26,7 @@ namespace Z0
         {
             var y = v16u(count);
             var dst = vsrlr(vinflate(src,w256,z16),y);
-            return vcompact(dst, w128, z8);
+            return z.vcompact(dst, w128, z8);
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
         {
             var y = v16i(count);
             var dst = vsrlr(vinflate(src,w256,z16i),y);
-            return vcompact(dst, w128, z8i);
+            return z.vcompact(dst, w128, z8i);
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Z0
             var y = v16i(count);
             var lo = vsrlr(vinflate(V0d.vlo(src),w256,z16i),y);
             var hi = vsrlr(vinflate(V0d.vhi(src),w256,z16i),y);
-            return vcompact(lo,hi, w256, z8i);
+            return z.vcompact(lo,hi, w256, z8i);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Z0
             var y = v16u(count);
             var lo = vsrlr(vinflate(V0d.vlo(src),w256,z16),y);
             var hi = vsrlr(vinflate(V0d.vhi(src),w256,z16),y);
-            return vcompact(lo,hi, w256, z8);
+            return z.vcompact(lo,hi, w256, z8);
         }
 
         /// <summary>

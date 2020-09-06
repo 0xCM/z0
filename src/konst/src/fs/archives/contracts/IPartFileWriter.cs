@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// The path to which the writer writes
         /// </summary>
-        FilePath TargetPath {get;}
+        FS.FilePath TargetPath {get;}
 
         void Write(string src);
 

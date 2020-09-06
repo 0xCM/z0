@@ -36,9 +36,9 @@ namespace Z0.Asm
             =>  from i in Decode(src.Encoded) select asm.routine(src,i);
 
         public Option<AsmFxList> Decode(X86Code src)
-            => Decode(src.Encoded, src.Address).TryMap(x => asm.list(x, src));
+            => Decode(src.Encoded, src.Base).TryMap(x => asm.list(x, src));
 
-        public Option<AsmInstructions> Decode(IdentifiedCode src)
+        public Option<AsmInstructions> Decode(ApiHex src)
             => Decode(src.Encoded, src.Base);
 
         public Option<AsmRoutine> Decode(X86MemberRefinement src, Action<Asm.Instruction> f)
@@ -52,7 +52,7 @@ namespace Z0.Asm
                 var reader = new Iced.ByteArrayCodeReader(src.Encoded);
                 var formatter = Capture.formatter(AsmFormat);
                 var decoder = Iced.Decoder.Create(IntPtr.Size * 8, reader);
-                var @base = src.Address;
+                var @base = src.Base;
                 decoder.IP = @base;
                 var stop = false;
                 var dst = new List<Asm.Instruction>(decoded.Count);
@@ -108,6 +108,18 @@ namespace Z0.Asm
                 term.error(e);
                 return Option.none<AsmInstructions>();
             }
+        }
+
+        public Option<AsmFxList> Decode(ApiHex src, Action<Instruction> f)
+        {
+            var x86 = new X86Code(src.Base,src.Data);
+            return Decode(x86,f);
+        }
+
+        public Option<AsmFxList> Decode(X86ApiCode src, Action<Instruction> f)
+        {
+            var x86 = new X86Code(src.Base, src.Data);
+            return Decode(x86,f);
         }
     }
 }

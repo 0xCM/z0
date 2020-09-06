@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static z;
 
@@ -52,9 +52,9 @@ namespace Z0
 
         void check_invariant<T>(N128 w, T t = default)
             where T : unmanaged
-        {            
+        {
             var v1 = V0.vinc<T>(w);
-            var v2 = VData.vdecrements<T>(w);
+            var v2 = VKonst.vdecrements<T>(w);
             var v3 = gvec.vreverse(v1);
             Claim.veq(v2,v3);
         }
@@ -63,7 +63,7 @@ namespace Z0
             where T : unmanaged
         {
             var v1 = V0.vinc<T>(w);
-            var v2 = VData.vdecrements<T>(w);            
+            var v2 = VKonst.vdecrements<T>(w);
             var v3 = gvec.vreverse(v1);
             Claim.veq(v2,v3);
         }
@@ -77,9 +77,9 @@ namespace Z0
 
             void check()
             {
-                var input = r.Invoke();                
+                var input = r.Invoke();
                 var output = f.Invoke(input);
-                var expect = V0.vzero(w,t);
+                var expect = z.vzero(w,t);
                 for(byte j = 0; j < n; j++)
                     expect = vcell(V0.vcell(input,(n - 1) - j),j,expect);
 
@@ -98,7 +98,7 @@ namespace Z0
 
             void check()
             {
-                var input = r.Invoke();                
+                var input = r.Invoke();
                 var output = f.Invoke(input);
                 var expect = V0.vzero(w,t);
                 for(byte j = 0; j < n; j++)
@@ -108,6 +108,6 @@ namespace Z0
             }
 
             CheckAction(check, CaseName(f));
-        } 
+        }
    }
 }

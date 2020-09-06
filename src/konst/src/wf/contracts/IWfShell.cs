@@ -15,6 +15,11 @@ namespace Z0
 
     using static WfEvents;
 
+    public interface IWfShell<S> : IWfShell
+    {
+
+    }
+
     public interface IWfShell : IApiProvider, IShellContext, IDisposable
     {
         IShellContext Shell {get;}
@@ -32,7 +37,7 @@ namespace Z0
         WfConfig Config {get;}
 
         FolderPath AppDataRoot
-            => Shell.AppPaths.AppDataRoot;
+            => Shell.Paths.AppDataRoot;
 
         FolderPath ArchiveRoot
             => FolderPath.Define(@"k:/z0/archives");

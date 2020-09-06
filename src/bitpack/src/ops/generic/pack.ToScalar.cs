@@ -9,7 +9,7 @@ namespace Z0
 
     using static dvec;
     using static Konst;
-    using static Memories;
+    using static z;
     using static V0;
 
     partial class BitPack

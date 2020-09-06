@@ -14,7 +14,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static CapturePartStep;
 
     public readonly ref struct CapturePart
     {
@@ -30,22 +29,25 @@ namespace Z0
 
         readonly Span<byte> Buffer;
 
-        public CapturePart(IWfShell wf, IAsmContext asm)
+        readonly CapturePartStep Host;
+
+        public CapturePart(IWfShell wf, IAsmContext asm, CapturePartStep host)
         {
             Wf = wf;
             Asm = asm;
+            Host = host;
             Services = CaptureServices.create(Asm);
             var format = AsmFormatSpec.DefaultStreamFormat;
             Formatter = Services.Formatter(format);
             Decoder = Services.RoutineDecoder(format);
             Buffer = sys.alloc<byte>(Pow2.T16);
-            Wf.Created(StepId);
+            Wf.Created(Host.Id);
         }
 
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host.Id);
         }
 
         static IMultiDiviner Diviner
@@ -67,7 +69,7 @@ namespace Z0
 
         public ReadOnlySpan<AsmMemberRoutine> Capture(Assembly src)
         {
-            Wf.Running(StepId);
+            Wf.Running(Host.Id);
 
             var buffer = span<byte>(Pow2.T14);
             var catalog = ApiQuery.catalog(src);
@@ -90,7 +92,7 @@ namespace Z0
 
             Array.Sort(target);
 
-            Wf.Ran(StepId);
+            Wf.Ran(Host.Id);
 
             return dst;
         }
@@ -126,6 +128,5 @@ namespace Z0
             var formatted = Formatter.FormatFunction(asm);
             dst.Write(formatted);
         }
-
     }
 }

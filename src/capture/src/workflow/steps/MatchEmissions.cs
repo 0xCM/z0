@@ -32,15 +32,15 @@ namespace Z0
         TCheckEquatable Claim
             => CheckEquatable.Checker;
 
-        public void Run(ApiHostUri host, ReadOnlySpan<IdentifiedCode> srcA, FilePath srcB)
+        public void Run(ApiHostUri host, ReadOnlySpan<ApiHex> srcA, FilePath srcB)
         {
             var wfStateless = Capture.Services;
             //var reader = wfStateless.HexReader;
-            var reader = Archives.reader<EncodedHexReader>();
+            var reader = Archives.reader<ApiHexReader>();
             var fileSrc = @readonly(reader.Read(srcB));
 
             Claim.Eq(fileSrc.Length, srcA.Length);
-            Claim.Eq(Spans.count<IdentifiedCode>(fileSrc, s => s.OpUri.IsEmpty),0);
+            Claim.Eq(Spans.count<ApiHex>(fileSrc, s => s.OpUri.IsEmpty),0);
             for(var i=0; i<srcA.Length; i++)
             {
                 Claim.Eq(skip(fileSrc,i).OpUri, skip(srcA,i).OpUri);

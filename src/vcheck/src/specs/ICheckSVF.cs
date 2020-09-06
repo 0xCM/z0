@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public CheckSVF(ITestContext context)
         {
-            this.Context = context;
+            Context = context;
         }
 
         [MethodImpl(Inline)]

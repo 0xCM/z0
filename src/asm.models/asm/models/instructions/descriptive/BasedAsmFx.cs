@@ -67,7 +67,7 @@ namespace Z0.Asm
 
         public static BasedAsmFx[] Many(X86ApiCode code, Instruction[] src)
         {
-            var @base = code.Address;
+            var @base = code.Base;
             var offseq = OffsetSequence.Zero;
             var count = src.Length;
             var dst = new BasedAsmFx[count];

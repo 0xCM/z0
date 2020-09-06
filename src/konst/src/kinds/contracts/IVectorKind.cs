@@ -1,0 +1,60 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+
+    public interface IVectorKind : IVectorWidth
+    {
+        /// <summary>
+        /// The vector's generic type definition
+        /// </summary>
+        Type TypeDefinition {get;}
+
+        /// <summary>
+        /// The vector numeric cell kind
+        /// </summary>
+        NumericKind CellKind {get;}
+
+        /// <summary>
+        /// The vector numeric cell width
+        /// </summary>
+        NumericWidth CellWidth {get;}
+
+        /// <summary>
+        /// The reified vector type as determined by kind facets
+        /// </summary>
+        Type Close();
+    }
+
+    /// <summary>
+    /// Characterizes an F-bound polymorphic reification that identifies an intrinsic vector generic type definition
+    /// </summary>
+    /// <typeparam name="F">The reification type</typeparam>
+    public interface IVectorKind<F,W> :  TVectorWidth<F>, ITypedLiteral<F,VectorWidth,uint>
+        where F : struct, IVectorKind<F,W>
+        where W : unmanaged, ITypeWidth
+    {
+
+    }
+
+    public interface IVectorKind<F,W,T> : IVectorKind<F,W>, IVectorKind
+        where F : struct, IVectorKind<F,W,T>
+        where W : unmanaged, ITypeWidth
+        where T : unmanaged
+    {
+        NumericKind IVectorKind.CellKind
+            => NumericKinds.kind<T>();
+
+        NumericWidth IVectorKind.CellWidth
+            => (NumericWidth)Widths.bits<T>();
+
+        /// <summary>
+        /// The reified vector type as determined by kind facets
+        /// </summary>
+        Type IVectorKind.Close()
+            => TypeDefinition.MakeGenericType(CellKind.SystemType());
+    }
+}

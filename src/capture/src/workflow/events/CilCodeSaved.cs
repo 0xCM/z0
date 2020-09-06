@@ -23,14 +23,14 @@ namespace Z0.Asm
 
         public readonly Count32 MemberCount;
 
-        public readonly FilePath Target;
+        public readonly FS.FilePath Target;
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public CilCodeSaved(WfStepId step, ApiHostUri host, uint count, FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
+        public CilCodeSaved(WfStepId step, ApiHostUri host, uint count, FS.FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
         {
-            EventId = evid(EventName, ct);
+            EventId = (EventName, step, ct);
             StepId = step;
             Host = host;
             MemberCount = count;
@@ -40,6 +40,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, StepId, Host, MemberCount, Target);
+            => format(EventId, Host, MemberCount, Target);
     }
 }

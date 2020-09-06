@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Sse2;
@@ -25,10 +25,10 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<byte> vpackus(Vector128<short> x, Vector128<short> y)
-            => PackUnsignedSaturate(x,y);        
+            => PackUnsignedSaturate(x,y);
 
         /// <summary>
-        ///__m128i _mm_packus_epi32 (__m128i a, __m128i b)PACKUSDW xmm, xmm/m128 
+        ///__m128i _mm_packus_epi32 (__m128i a, __m128i b)PACKUSDW xmm, xmm/m128
         /// (4x32w,4x32w) -> 8x16w
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -71,11 +71,11 @@ namespace Z0
             var mask = z.vbroadcast(n128, (ushort)(byte.MaxValue));
             var v1 = z.v16i(z.vand(x,mask));
             var v2 = z.v16i(z.vand(y,mask));
-            return PackUnsignedSaturate(v1,v2);         
+            return PackUnsignedSaturate(v1,v2);
         }
 
         /// <summary>
-        ///__m128i _mm_packus_epi32 (__m128i a, __m128i b) PACKUSDW xmm, xmm/m128 
+        ///__m128i _mm_packus_epi32 (__m128i a, __m128i b) PACKUSDW xmm, xmm/m128
         /// (4x32w,4x32w) -> 8x16w
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -84,9 +84,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vpackus(Vector128<uint> x, Vector128<uint> y)
         {
-            var mask = z.vbroadcast(n128, (uint)(ushort.MaxValue));
-            var z0 = z.v32i(z.vand(x,mask));
-            var z1 = z.v32i(z.vand(y,mask));
+            var mask = vbroadcast(n128, (uint)(ushort.MaxValue));
+            var z0 = v32i(vand(x,mask));
+            var z1 = v32i(vand(y,mask));
             return PackUnsignedSaturate(z0, z1);
         }
 
@@ -99,10 +99,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vpackus(Vector256<ushort> x, Vector256<ushort> y)
         {
-            var mask = z.vbroadcast(n256, (ushort)(byte.MaxValue));
-            var v1 = z.v16i(z.vand(x,mask));
-            var v2 = z.v16i(z.vand(y,mask));
-            return PackUnsignedSaturate(v1,v2);         
+            var mask = vbroadcast(n256, (ushort)(byte.MaxValue));
+            var v1 = v16i(vand(x,mask));
+            var v2 = v16i(vand(y,mask));
+            return PackUnsignedSaturate(v1,v2);
         }
 
         /// <summary>
@@ -115,9 +115,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vpackus(Vector256<uint> x, Vector256<uint> y)
         {
-            var mask = z.vbroadcast<uint>(n256, (uint)(ushort.MaxValue));
-            var z0 = z.v32i(z.vand(x,mask));
-            var z1 = z.v32i(z.vand(y,mask));
+            var mask = vbroadcast<uint>(n256, (uint)(ushort.MaxValue));
+            var z0 = v32i(vand(x,mask));
+            var z1 = v32i(vand(y,mask));
             return PackUnsignedSaturate(z0, z1);
         }
     }

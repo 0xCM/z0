@@ -36,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static BitString load(ReadOnlySpan<byte> src)                
+        public static BitString load(ReadOnlySpan<byte> src)
             => new BitString(src);
 
         /// <summary>
@@ -45,10 +45,10 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="maxbits">The maximum number of bits to extract from the source</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static BitString load<T>(Vector128<T> src, int? maxbits = null)
-            where T : unmanaged        
-                => scalars(cover(vref(ref src), vcount<T>(W128.W)), maxbits);
+            where T : unmanaged
+                => scalars(cover(z.vref(ref src), vcount<T>(W128.W)), maxbits);
 
         /// <summary>
         /// Populates a bitstring from a 256-bit cpu vector
@@ -56,10 +56,10 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="maxbits">The maximum number of bits to extract</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static BitString load<T>(Vector256<T> src, int? maxbits = null)
-            where T : unmanaged        
-                => scalars(cover(vref(ref src), vcount<T>(W256.W)), maxbits);
+            where T : unmanaged
+                => scalars(cover(z.vref(ref src), vcount<T>(W256.W)), maxbits);
 
         /// <summary>
         /// Populates a bitstring from a 256-bit cpu vector
@@ -67,17 +67,17 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="maxbits">The maximum number of bits to extract</param>
         /// <typeparam name="T">The vector component type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static BitString load<T>(Vector512<T> src, int? maxbits = null)
-            where T : unmanaged        
-                => scalars(cover(vref(ref src), vcount<T>(W512.W)), maxbits);
+            where T : unmanaged
+                => scalars(cover(z.vref(ref src), vcount<T>(W512.W)), maxbits);
 
         /// <summary>
         /// Constructs a bitstring from a span of bits
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static BitString load(ReadOnlySpan<bit> src)                
+        public static BitString load(ReadOnlySpan<bit> src)
             => new BitString(src);
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString scalar<T>(T src, int? maxbits = null)
             where T : unmanaged
-                => new BitString(BitStore.bitseq(src, maxbits ?? bitsize<T>()));                
+                => new BitString(BitStore.bitseq(src, maxbits ?? bitsize<T>()));
 
         /// <summary>
         /// Constructs a bitstring from primal value, using caller-supplied storage instead of allocation
@@ -113,7 +113,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString @enum<T>(T src, int? maxbits = null)
             where T : unmanaged, Enum
-                => BitString.scalar((ulong)Convert.ChangeType(src, typeof(ulong)), maxbits ?? bitsize<T>());        
+                => BitString.scalar((ulong)Convert.ChangeType(src, typeof(ulong)), maxbits ?? bitsize<T>());
 
         /// <summary>
         /// Constructs a bitstring from span of scalar values
@@ -171,22 +171,22 @@ namespace Z0
         /// <typeparam name="T">The scalar type</typeparam>
         [MethodImpl(Inline)]
         public static T scalar<T>(BitString src, int offset = 0)
-            where T : unmanaged 
+            where T : unmanaged
                 => src.Scalar<T>(offset);
 
         /// <summary>
         /// Constructs a bitstring from text
         /// </summary>
         /// <param name="src">The bit source</param>
-        public static BitString parse(string src)                
-        {            
+        public static BitString parse(string src)
+        {
             src = src.RemoveBlanks();
             var len = src.Length;
             var lastix = len - 1;
             Span<byte> dst = sys.alloc(len);
             for(var i=0; i<= lastix; i++)
                 dst[lastix - i] = src[i] == bit.Zero ? (byte)0 : (byte)1;
-            return new BitString(dst);                        
+            return new BitString(dst);
         }
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         public static BitString not(BitString src)
-        {            
+        {
             var len = src.Length;
             var dst = alloc(len);
             for(var i=0; i< len; i++)
@@ -214,7 +214,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         public static BitString and(BitString a, BitString b)
-        {            
+        {
             var len = length(a, b);
             var dst = alloc(len);
             for(var i=0; i< len; i++)
@@ -228,7 +228,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         public static BitString or(BitString a, BitString b)
-        {            
+        {
             var len = length(a, b);
             var dst = alloc(len);
             for(var i=0; i< len; i++)
@@ -242,7 +242,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         public static BitString xor(BitString a, BitString b)
-        {            
+        {
             var len = length(a,b);
             var dst = alloc(len);
             for(var i=0; i< len; i++)
@@ -256,7 +256,7 @@ namespace Z0
         /// <param name="src">The source bitstring</param>
         /// <param name="shift">The shift offset</param>
         public static BitString srl(BitString src, int shift)
-        {            
+        {
             var dst = alloc(src.Length);
             for(var i=src.Length - shift; i>=0; i--)
                 dst[i] = src[i];
@@ -269,7 +269,7 @@ namespace Z0
         /// <param name="src">The source bitstring</param>
         /// <param name="shift">The shift offset</param>
         public static BitString sll(BitString src, int shift)
-        {            
+        {
             var dst = alloc(src.Length);
             for(var i=shift; i<dst.Length; i++)
                 dst[i] = src[i];
@@ -282,7 +282,7 @@ namespace Z0
         public static BitString even(BitString src)
         {
             var count = src.Length>>1;
-            var dst = BitString.alloc(count);            
+            var dst = BitString.alloc(count);
             for(int i=0,j=0; i<src.Length; i+=2,j++)
                 dst[j] = src[i];
             return dst;
@@ -294,14 +294,14 @@ namespace Z0
         public static BitString odd(BitString src)
         {
             var count = src.Length>>1;
-            var dst = BitString.alloc(count);            
+            var dst = BitString.alloc(count);
             for(int i=1,j=0; i<src.Length; i+=2,j++)
                 dst[j] = src[i];
             return dst;
         }
 
         /// <summary>
-        /// Considers the source bitstring as a row-major encoding of an mxn matrix and computes 
+        /// Considers the source bitstring as a row-major encoding of an mxn matrix and computes
         /// the transposition maxtrix of dimension nxm similary encoded as a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
@@ -324,7 +324,7 @@ namespace Z0
 
         public static BitString transpose(BitString src, ulong m, ulong n)
             => transpose(src,(int)m, (int)n);
-        
+
         /// <summary>
         /// Overwrites selected target bits with lower bits from the source
         /// </summary>
@@ -346,7 +346,7 @@ namespace Z0
         /// <param name="value">The interspersal value</param>
         public static BitString intersperse(BitString src, BitString value)
         {
-            var len = Math.Min(src.Length, value.Length);            
+            var len = Math.Min(src.Length, value.Length);
             var dst = BitString.alloc(len*2);
             for(int i=0, j=0; i< dst.Length; i+=2, j++)
             {

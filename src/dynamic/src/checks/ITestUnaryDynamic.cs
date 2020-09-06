@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    
+
     using static BufferSeqId;
     using static Memories;
 
@@ -13,7 +13,7 @@ namespace Z0
 
     public interface ITestUnaryDynamic : TTester, TTestOperatorMatch, TCheckDynamic
     {
-        TestCaseRecord Match(K k, TypeWidth w, IdentifiedCode a, IdentifiedCode b, BufferTokens dst)
+        TestCaseRecord Match(K k, TypeWidth w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             switch(w)
             {
@@ -37,47 +37,47 @@ namespace Z0
             }
             throw Unsupported.define(w.GetType());
         }
-        
-        TestCaseRecord Match(K k, W8 w, IdentifiedCode a, IdentifiedCode b, BufferTokens dst)
+
+        TestCaseRecord Match(K k, W8 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
             var g = Dynamic.EmitFixedUnary(dst[Right], w, b);
-            return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+            return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        TestCaseRecord Match(K k, W16 w, IdentifiedCode a, IdentifiedCode b, BufferTokens dst)
+        TestCaseRecord Match(K k, W16 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
             var g = Dynamic.EmitFixedUnary(dst[Right], w, b);
-            return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+            return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        TestCaseRecord Match(K k, W32 w, IdentifiedCode a, IdentifiedCode b, BufferTokens dst)
+        TestCaseRecord Match(K k, W32 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
             var g = Dynamic.EmitFixedUnary(dst[Right], w, b);
-            return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+            return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        TestCaseRecord Match(K k, W64 w, IdentifiedCode a, IdentifiedCode b, BufferTokens dst)
+        TestCaseRecord Match(K k, W64 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
             var g = Dynamic.EmitFixedUnary(dst[Right], w, b);
-            return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+            return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        TestCaseRecord Match(K k,  W128 w, IdentifiedCode a, IdentifiedCode b, BufferTokens dst)
+        TestCaseRecord Match(K k,  W128 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
             var g = Dynamic.EmitFixedUnary(dst[Right], w, b);
-            return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+            return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        TestCaseRecord Match(K k, W256 w, IdentifiedCode a, IdentifiedCode b, BufferTokens dst)
+        TestCaseRecord Match(K k, W256 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
             var g = Dynamic.EmitFixedUnary(dst[Right], w, b);
-            return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                                      
+            return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     partial struct Encoded
     {
         [MethodImpl(Inline), Op]
-        public static X86MemberExtract extracted(OpIdentity id, OpUri uri, ApiMember member, X86Code encoded)
-            => new X86MemberExtract(id,uri,member,encoded);
+        public static X86ApiExtract extracted(OpIdentity id, OpUri uri, ApiMember member, X86Code encoded)
+            => new X86ApiExtract(id,uri,member,encoded);
     }
 }

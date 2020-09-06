@@ -5,8 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    
+    using System.Runtime.CompilerServices;
+
     using static Memories;
     using static V0;
 
@@ -21,7 +21,7 @@ namespace Z0
         public static byte pack(Span<bit> src, N8 count)
         {
             var v0 = vload(n256, head(convert(src, 0, bitsize<byte>())));
-            return (byte)packlsb(dvec.vcompact(v0,n128,z8), n8);
+            return (byte)packlsb(z.vcompact(v0,n128,z8), n8);
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ushort pack(Span<bit> src, N16 count)
         {
-            ref readonly var unpacked = ref head(convert(src, 0, bitsize<ushort>())); 
+            ref readonly var unpacked = ref head(convert(src, 0, bitsize<ushort>()));
             return pack(unpacked, count, w16);
         }
 
@@ -45,7 +45,7 @@ namespace Z0
         public static uint pack(Span<bit> src, N32 count)
         {
             ref readonly var unpacked = ref head(convert(src, 0, bitsize<uint>()));
-            return pack(unpacked,count, w32);            
+            return pack(unpacked,count, w32);
         }
 
         /// <summary>

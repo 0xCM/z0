@@ -13,18 +13,14 @@ namespace Z0
     partial struct Flow
     {
         [MethodImpl(Inline)]
-        public static WfHost<H> host<H>(H h = default)
+        public static WfHost<H> host<H>()
             where H : WfHost<H>, new()
                 => new H();
 
         [MethodImpl(Inline)]
-        public static WfHost<H,C> host<H,C>(C config, H h = default)
-            where H : WfHost<H,C>, new()
-            where C : struct
-        {
-            var host = new H();
-            host.Configure(config);
-            return host;
-        }
+        public static WfHost<H,S> host<H,S>()
+            where H : WfHost<H,S>, new()
+            where S : struct
+                => new H();
     }
 }

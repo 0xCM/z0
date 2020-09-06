@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    
+    using System.Runtime.CompilerServices;
+
     using static Konst;
-    using static Memories;
-    using static Vectors;
-    
+    using static z;
+
     partial class BitPack
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
@@ -47,7 +46,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return convert<T>(pack(src, n64));
             else
-                throw no<T>();            
+                throw no<T>();
         }
     }
 }

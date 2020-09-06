@@ -24,13 +24,13 @@ namespace Z0
             StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath, false);
         }
 
-        public void Write(in IdentifiedCode src, int idpad)
+        public void Write(in ApiHex src, int idpad)
             => StreamOut.WriteLine(src.Format(idpad));
 
-        public void WriterLine(in IdentifiedCode src)
+        public void WriterLine(in ApiHex src)
             => StreamOut.WriteLine(src.Format(0));
 
-        public void WriteLines(IdentifiedCode[] src)
+        public void WriteLines(ApiHex[] src)
         {
             var uripad = src.Max(x => x.OpUri.UriText.Length) + 1;
             for(var i=0; i< src.Length; i++)
@@ -44,15 +44,15 @@ namespace Z0
             StreamOut.Dispose();
         }
 
-        public static IdentifiedCode[] save(ApiHostUri host, X86MemberRefinement[] src, FilePath dst)
+        public static ApiHex[] save(ApiHostUri host, X86MemberRefinement[] src, FilePath dst)
         {
             using var writer = new IdentifiedCodeWriter(dst);
-            var data = src.Map(x => new IdentifiedCode(x.Address, x.OpUri, x.Encoded.Encoded));
+            var data = src.Map(x => new ApiHex(x.Address, x.OpUri, x.Encoded.Encoded));
             writer.WriteLines(data);
             return data;
         }
 
-        public void Write(in IdentifiedCode code)
+        public void Write(in ApiHex code)
             => Write(code,60);
     }
 }

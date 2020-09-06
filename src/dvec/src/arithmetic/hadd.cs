@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
-    
+
     using static System.Runtime.Intrinsics.X86.Sse3;
     using static System.Runtime.Intrinsics.X86.Ssse3;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
-    
+
     using static Typed;
 
     partial class dvec
@@ -27,8 +27,8 @@ namespace Z0
         public static Vector128<sbyte> vhadd(Vector128<sbyte> x, Vector128<sbyte> y)
         {
             var a = vinflate(x, n256, z16i);
-            var b = vinflate(y, n256, z16i);            
-            return vcompact(vhadd(a,b), n128, z8i);
+            var b = vinflate(y, n256, z16i);
+            return z.vcompact(vhadd(a,b), n128, z8i);
         }
 
         /// <summary>
@@ -39,9 +39,9 @@ namespace Z0
         [MethodImpl(Inline), AddH]
         public static Vector128<byte> vhadd(Vector128<byte> x, Vector128<byte> y)
         {
-            var z0 = vinflate(x, n256, z16i);
-            var z1 = vinflate(y, n256, z16i);
-            return vcompact(vhadd(z0,z1), n128, z8);
+            var z0 = z.vinflate(x, n256, z16i);
+            var z1 = z.vinflate(y, n256, z16i);
+            return z.vcompact(vhadd(z0,z1), n128, z8);
         }
 
         /// <summary>
@@ -70,9 +70,9 @@ namespace Z0
         [MethodImpl(Inline), AddH]
         public static Vector256<sbyte> vhadd(Vector256<sbyte> x, Vector256<sbyte> y)
         {
-            (var x0, var x1) = vinflate(x,n512, z16i);
-            (var y0, var y1) = vinflate(x,n512, z16i);
-            return vcompact(vhadd(x0,y0),vhadd(x1,y1),n256,z8i);
+            (var x0, var x1) = z.vinflate(x,n512, z16i);
+            (var y0, var y1) = z.vinflate(x,n512, z16i);
+            return z.vcompact(vhadd(x0,y0),vhadd(x1,y1),n256,z8i);
         }
 
         /// <summary>

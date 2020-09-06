@@ -93,13 +93,13 @@ namespace Z0
             => src.Encoded;
 
         [MethodImpl(Inline)]
-        public static implicit operator IdentifiedCode(X86ApiCode src)
-            => new IdentifiedCode(src.Address, src.OpUri, src.Encoded);
+        public static implicit operator ApiHex(X86ApiCode src)
+            => new ApiHex(src.Base, src.OpUri, src.Encoded);
 
-        public MemoryAddress Address
+        public MemoryAddress Base
         {
             [MethodImpl(Inline)]
-            get => Encoded.Address;
+            get => Encoded.Base;
         }
 
         public PartId Part

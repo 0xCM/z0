@@ -15,7 +15,7 @@ namespace Z0
     {
 
         [MethodImpl(Inline), Op]
-        public static IdentifiedCodeIndex index(ApiHostUri host, IdentifiedCode[] code)
+        public static IdentifiedCodeIndex index(ApiHostUri host, ApiHex[] code)
             => new IdentifiedCodeIndex(host,code);
 
         [MethodImpl(Inline), Op]

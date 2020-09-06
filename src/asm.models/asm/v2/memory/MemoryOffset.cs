@@ -35,13 +35,13 @@ namespace Z0
             get => IsEmpty ? MemoryAddress.Empty : (Base + Offset);
         }
 
-        MemoryAddress IAddressable<MemoryAddress>.Address
+        MemoryAddress IAddressable<MemoryAddress>.Base
         {
             [MethodImpl(Inline)]
             get => Absolute;
         }
 
-        MemoryAddress IAddressable.Address
+        MemoryAddress IAddressable.Base
             => IsEmpty ? MemoryAddress.Empty : (Base + Offset);
 
         public MemoryOffset Zero

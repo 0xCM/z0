@@ -15,10 +15,10 @@ namespace Z0
     {
         readonly StreamWriter Writer;
 
-        public FilePath TargetPath {get;}
+        public FS.FilePath TargetPath {get;}
 
         [MethodImpl(Inline)]
-        public PartFileWriter(FilePath dst)
+        public PartFileWriter(FS.FilePath dst)
         {
             TargetPath = dst;
             Writer = dst.Writer();
@@ -65,5 +65,4 @@ namespace Z0
             Writer?.Dispose();
         }
     }
-
 }

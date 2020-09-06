@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
-    public readonly struct Vec512Kind<T> : TVectorKind<Vec512Kind<T>,W512,T>
+    public readonly struct Vec512Kind<T> : IVectorKind<Vec512Kind<T>,W512,T>
         where T : unmanaged
-    {    
+    {
         [MethodImpl(Inline)]
         public static implicit operator VectorWidth(Vec512Kind<T> src)
             => src.Width;
@@ -21,17 +21,17 @@ namespace Z0
             => default;
 
         public W512 W => default;
-        
-        public VectorWidth Width 
-            => VectorWidth.W512;       
 
-        public NumericKind CellKind 
+        public VectorWidth Width
+            => VectorWidth.W512;
+
+        public NumericKind CellKind
             => NumericKinds.kind<T>();
 
-        public NumericWidth CellWidth 
+        public NumericWidth CellWidth
             => (NumericWidth)Widths.bits<T>();
 
-        public Type TypeDefinition 
+        public Type TypeDefinition
             => typeof(void);
-    }   
+    }
 }

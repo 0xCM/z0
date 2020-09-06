@@ -142,23 +142,23 @@ namespace Z0
             var w = W128.W;
             var x = vparts(w,0,1,2,3,4,5,6,7);
 
-            var a0 = z.vpermlo4x16(x, Perm4L.DCBA);
+            var a0 = vpermlo4x16(x, Perm4L.DCBA);
             var a1 = vparts(w,3,2,1,0,4,5,6,7);
             Claim.veq(a0,a1);
 
-            var b0 = z.vpermhi4x16(x, Perm4L.DCBA);
+            var b0 = vpermhi4x16(x, Perm4L.DCBA);
             var b1 = vparts(w,0,1,2,3,7,6,5,4);
             Claim.veq(b0,b1);
 
-            var c0 = z.vperm4x16(x,Perm4L.DCBA,Perm4L.DCBA);
+            var c0 = vperm4x16(x,Perm4L.DCBA,Perm4L.DCBA);
             var c1 = vparts(w,3,2,1,0,7,6,5,4);
             Claim.veq(c0,c1);
 
-            var d0 = z.vpermlo4x16(x, Perm4L.BADC);
+            var d0 = vpermlo4x16(x, Perm4L.BADC);
             var d1 = vparts(w,1,0,3,2,4,5,6,7);
             Claim.veq(d0,d1);
 
-            var e0 = z.vpermhi4x16(x, Perm4L.BADC);
+            var e0 = vpermhi4x16(x, Perm4L.BADC);
             var e1 = vparts(w,0,1,2,3,5,4,7,6);
             Claim.veq(e0,e1);
 
@@ -173,19 +173,19 @@ namespace Z0
             var n = n256;
             var x = vparts(n,0,1,2,3);
 
-            Claim.veq(vparts(n,0,1,2,3), z.vperm4x64(x, Perm4L.ABCD));
-            Claim.veq(vparts(n,0,1,3,2), z.vperm4x64(x, Perm4L.ABDC));
-            Claim.veq(vparts(n,0,2,1,3), z.vperm4x64(x, Perm4L.ACBD));
-            Claim.veq(vparts(n,0,2,3,1), z.vperm4x64(x, Perm4L.ACDB));
-            Claim.veq(vparts(n,0,3,1,2), z.vperm4x64(x, Perm4L.ADBC));
-            Claim.veq(vparts(n,0,3,2,1), z.vperm4x64(x, Perm4L.ADCB));
+            Claim.veq(vparts(n,0,1,2,3), vperm4x64(x, Perm4L.ABCD));
+            Claim.veq(vparts(n,0,1,3,2), vperm4x64(x, Perm4L.ABDC));
+            Claim.veq(vparts(n,0,2,1,3), vperm4x64(x, Perm4L.ACBD));
+            Claim.veq(vparts(n,0,2,3,1), vperm4x64(x, Perm4L.ACDB));
+            Claim.veq(vparts(n,0,3,1,2), vperm4x64(x, Perm4L.ADBC));
+            Claim.veq(vparts(n,0,3,2,1), vperm4x64(x, Perm4L.ADCB));
 
-            Claim.veq(vparts(n,1,0,2,3), z.vperm4x64(x, Perm4L.BACD));
-            Claim.veq(vparts(n,1,0,3,2), z.vperm4x64(x, Perm4L.BADC));
-            Claim.veq(vparts(n,1,2,0,3), z.vperm4x64(x, Perm4L.BCAD));
-            Claim.veq(vparts(n,1,2,3,0), z.vperm4x64(x, Perm4L.BCDA));
-            Claim.veq(vparts(n,1,3,0,2), z.vperm4x64(x, Perm4L.BDAC));
-            Claim.veq(vparts(n,1,3,2,0), z.vperm4x64(x, Perm4L.BDCA));
+            Claim.veq(vparts(n,1,0,2,3), vperm4x64(x, Perm4L.BACD));
+            Claim.veq(vparts(n,1,0,3,2), vperm4x64(x, Perm4L.BADC));
+            Claim.veq(vparts(n,1,2,0,3), vperm4x64(x, Perm4L.BCAD));
+            Claim.veq(vparts(n,1,2,3,0), vperm4x64(x, Perm4L.BCDA));
+            Claim.veq(vparts(n,1,3,0,2), vperm4x64(x, Perm4L.BDAC));
+            Claim.veq(vparts(n,1,3,2,0), vperm4x64(x, Perm4L.BDCA));
         }
 
         public void perm4_symbols()
@@ -311,7 +311,7 @@ namespace Z0
         public void vperm_256u8_outline()
         {
             var a = V0.vinc<byte>(n256);
-            var b = VData.vdecrements<byte>(n256);
+            var b = VKonst.vdecrements<byte>(n256);
             var c = z.vreverse(z.vshuf32x8(a,b));
             Claim.veq(a,c);
         }

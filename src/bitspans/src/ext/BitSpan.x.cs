@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static NatSpan<N,bit> ToNatSpan<N>(this in BitSpan src, N n = default)
             where N : unmanaged, ITypeNat
-                => NatSpan.load(src.Bits,n);
+                => NatSpan.load(src.Edit,n);
 
         /// <summary>
         /// Obliterates all bitspan content
@@ -29,8 +29,8 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static ref readonly BitSpan Clear(this in BitSpan src)
-        {            
-            clear(src);        
+        {
+            clear(src);
             return ref src;
         }
 
@@ -43,7 +43,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly BitSpan Clear(this in BitSpan src, int i0, int i1)
         {
-            clear(src, i0, i1);        
+            clear(src, i0, i1);
             return ref src;
         }
 
@@ -55,7 +55,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitSpan Replicate(this in BitSpan src, int copies = 1)
             => replicate(src,copies);
-        
+
         /// <summary>
         /// Computes the number of enabled bits covered by source
         /// </summary>
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int PopCount(this in BitSpan src)
             => pop(src);
-            
+
         /// <summary>
         /// Extracts and packs bitsize[T] source bits; will fail if data are insufficent
         /// </summary>
@@ -74,7 +74,7 @@ namespace Z0
         public static T Extract<T>(this in BitSpan src, T t = default)
             where T : unmanaged
                 => BitSpans.extract<T>(src);
-        
+
         /// <summary>
         /// Extracts a T-valued scalar (or portion thereof) from the source
         /// </summary>
@@ -84,7 +84,7 @@ namespace Z0
         public static T Convert<T>(this in BitSpan src)
             where T : unmanaged
                 => BitSpans.bitslice<T>(src);
-    
+
         /// <summary>
         /// Extracts a T-valued scalar (or portion thereof) from the source segment [offset,..,offset - (bitsize[T] - 1)]
         /// </summary>
@@ -98,7 +98,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static T BitSlice<T>(this in BitSpan src, int offset, int count)
-            where T : unmanaged 
+            where T : unmanaged
                 => BitSpans.bitslice<T>(src, offset, count);
 
         /// <summary>

@@ -32,7 +32,7 @@ namespace Z0
             var matched = parser.Result;
             var succeeded = matched.IsSome() && status.Success();
             return succeeded
-                ? ParseResult.Success(buffer, new X86Code(src.Address, parser.Parsed))
+                ? ParseResult.Success(buffer, new X86Code(src.Base, parser.Parsed))
                 : ParseResult.Fail<BinaryCode,X86Code>(buffer);
         }
 

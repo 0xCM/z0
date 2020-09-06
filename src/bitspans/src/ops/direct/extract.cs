@@ -22,15 +22,15 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ushort extract(in BitSpan src, N16 count, int offset)
         {
-            ref readonly var unpacked = ref first(extract(src, offset, count)); 
+            ref readonly var unpacked = ref first(extract(src, offset, count));
             return BitPack.pack(unpacked, count, w16);
         }
 
         [MethodImpl(Inline), Op]
         public static uint extract(in BitSpan src, N32 count, int offset)
         {
-            ref readonly var unpacked = ref first(extract(src, offset, count));            
-            return BitPack.pack(unpacked, count, w32);            
+            ref readonly var unpacked = ref first(extract(src, offset, count));
+            return BitPack.pack(unpacked, count, w32);
         }
 
         [MethodImpl(Inline), Op]
@@ -42,6 +42,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Span<uint> extract(in BitSpan src, int offset, int count)
-           => src.Bits.Slice(offset, count).Cast<bit,uint>();        
+           => src.Edit.Slice(offset, count).Cast<bit,uint>();
     }
 }

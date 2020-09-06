@@ -14,8 +14,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using static EmitAsmTablesStep;
-
     public ref struct EmitAsmTables
     {
         readonly IWfCaptureState State;
@@ -56,10 +54,13 @@ namespace Z0
             get => Offset++;
         }
 
-        public EmitAsmTables(IWfCaptureState state, GlobalCodeIndex encoded)
+        readonly EmitAsmTablesHost Host;
+
+        public EmitAsmTables(IWfCaptureState state, GlobalCodeIndex encoded, EmitAsmTablesHost host)
         {
             State = state;
             Wf = state.Wf;
+            Host = host;
             Ct = Wf.Ct;
             Encoded = encoded;
             Locations = encoded.Locations;
@@ -68,17 +69,17 @@ namespace Z0
             Index = new Dictionary<Mnemonic, ArrayBuilder<AsmRecord>>();
             Asm = state.Asm;
             Segments = sys.empty<AsmTableSeg<Mnemonic>>();
-            Wf.Created(StepId, Ct);
+            Wf.Created(Host.Id, Ct);
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host.Id);
         }
 
         public void Run()
         {
-            Wf.Running(StepId);
+            Wf.Running(Host.Id);
 
             var count = Locations.Length;
             for(var i=0u; i<count; i++)
@@ -97,7 +98,7 @@ namespace Z0
                 offset += seg.Count;
             }
 
-            Wf.Ran(StepId);
+            Wf.Ran(Host.Id);
         }
 
         void Save(in AsmTableSeg<Mnemonic> src, int offset)

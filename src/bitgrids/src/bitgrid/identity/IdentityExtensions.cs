@@ -3,12 +3,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;    
+    using System;
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    
-    using static Konst; 
+
+    using static Konst;
     using static Memories;
     using static GridKind;
 
@@ -40,15 +40,15 @@ namespace Z0
 
         public static string Indicator(this GridKind k)
             => k.IsPrimalGeneric() ? GridIndicators.PrimalGeneric
-             : k.IsSubGrid() ? GridIndicators.FixedSubgrid 
+             : k.IsSubGrid() ? GridIndicators.FixedSubgrid
              : k.IsFixedNatural() ? GridIndicators.FixedNatural
              : (k & Z0.GridKind.Generic) != 0 ? GridIndicators.Generic
-             : (k & Z0.GridKind.GenericUnfixed) != 0 ? GridIndicators.Generic 
-             : (k & Z0.GridKind.Natural) != 0 ? GridIndicators.Natural 
-             : (k & Z0.GridKind.NaturalUnfixed) != 0 ? GridIndicators.Natural 
+             : (k & Z0.GridKind.GenericUnfixed) != 0 ? GridIndicators.Generic
+             : (k & Z0.GridKind.Natural) != 0 ? GridIndicators.Natural
+             : (k & Z0.GridKind.NaturalUnfixed) != 0 ? GridIndicators.Natural
              :  k.ToString();
-                    
-        public static NatNumericIdentity GridClosures(this Type src )
+
+        public static NatIdentity GridClosures(this Type src )
         {
             var args = src.GridKind().MapValueOrDefault(k => src.SuppliedTypeArgs().ToArray(), array<Type>());
             if(args.Length == 1)
@@ -56,15 +56,15 @@ namespace Z0
             else if(args.Length == 3)
                 return (args[0].TypeNatural().NatValue, args[1].TypeNatural().NatValue, args[2].NumericKind());
             else
-                return (0, 0, NumericKind.None);            
+                return (0, 0, NumericKind.None);
         }
 
         [MethodImpl(Inline)]
-        public static bool IsSome(this NatNumericIdentity src)
+        public static bool IsSome(this NatIdentity src)
             => !src.IsEmpty;
 
         [MethodImpl(Inline)]
-        public static int NonEmptyCount(this NatNumericIdentity src)
+        public static int NonEmptyCount(this NatIdentity src)
             => (src.M != 0 ? 1 : 0) + (src.N != 0 ? 1 : 0)  + (src.T.IsSome() ? 1 : 0);
 
         public static Option<GridKind> GridKind(this Type src)

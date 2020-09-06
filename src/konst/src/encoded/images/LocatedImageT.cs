@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// The image source path
         /// </summary>
-        public readonly FilePath ImagePath;        
+        public readonly FilePath ImagePath;
 
         /// <summary>
         /// The address at which image data begins
@@ -33,8 +33,8 @@ namespace Z0
             StartAddress = start;
             EndAddress = end;
         }
-        
-        MemoryAddress IAddressable<MemoryAddress>.Address 
+
+        MemoryAddress IAddressable<MemoryAddress>.Base
             => StartAddress;
 
         public MemoryRange Segment

@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_vrotx : t_inx<t_vrotx>
     {
@@ -16,7 +16,7 @@ namespace Z0
         {
             for(var i=0; i<RepCount; i++)
             {
-                var x = VData.vunits<byte>(n128);            
+                var x = vunits<byte>(n128);
                 Claim.veq(gvec.vrotrx(x,8), dvec.vrotrx(x,n8));
                 Claim.veq(gvec.vrotrx(x,16), dvec.vrotrx(x,n16));
                 Claim.veq(gvec.vrotrx(x,24), dvec.vrotrx(x,n24));
@@ -28,7 +28,7 @@ namespace Z0
         {
             for(var i=0; i<RepCount; i++)
             {
-                var x = VData.vunits<byte>(n128);            
+                var x = vunits<byte>(n128);
                 Claim.veq(gvec.vrotlx(x,8), dvec.vrotlx(x,n8));
                 Claim.veq(gvec.vrotlx(x,16), dvec.vrotlx(x,n16));
                 Claim.veq(gvec.vrotlx(x,24), dvec.vrotlx(x,n24));

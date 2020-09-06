@@ -14,7 +14,8 @@ namespace Z0
     using AC = ArityClassKind;
     using OC = OperatorClassKind;
     using PC = PredicateClassKind;
- 
+
+    [ApiHost]
     public readonly struct IdentityReflector : TIdentityReflector
     {
         public static TIdentityReflector Service => default(IdentityReflector);
@@ -23,6 +24,7 @@ namespace Z0
         /// Determines whether a method accepts an intrinsic vector in some parameter slot
         /// </summary>
         /// <param name="src">The method to test</param>
+        [Op]
         public static bool AcceptsVector(MethodInfo src)
             => src.Parameters(p => p.IsVector()).Any();
 
@@ -31,6 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to test</param>
         /// <param name="index">THe parameter index to match</param>
+        [Op]
         public static bool AcceptsVector(MethodInfo src, int index)
             => src.Parameters(p => p.Position == index && p.IsVector()).Any();
 
@@ -40,6 +43,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         /// <param name="index">THe parameter index to match</param>
         /// <param name="w">The width to match</param>
+        [Op]
         public static bool AcceptsVector(MethodInfo src, int index, W512 w)
             => src.Parameters(p => p.Position == index && p.IsVector(w)).Any();
 
@@ -50,6 +54,7 @@ namespace Z0
         /// <param name="index">THe parameter index to match</param>
         /// <param name="w">The width to match</param>
         /// <param name="tCell">The cell type to match</param>
+        [Op]
         public static bool AcceptsVector(MethodInfo src, int index, W128 w, Type tCell)
             => src.Parameters(p => p.Position == index && p.IsVector(w,tCell)).Any();
 
@@ -59,6 +64,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         /// <param name="index">THe parameter index to match</param>
         /// <param name="w">The width to match</param>
+        [Op]
         public static bool AcceptsVector(MethodInfo src, int index, W128 w)
             => src.Parameters(p => p.Position == index && p.IsVector(w)).Any();
 
@@ -68,6 +74,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         /// <param name="index">THe parameter index to match</param>
         /// <param name="w">The width to match</param>
+        [Op]
         public static bool AcceptsVector(MethodInfo src, int index, W256 w)
             => src.Parameters(p => p.Position == index && p.IsVector(w)).Any();
 
@@ -78,6 +85,7 @@ namespace Z0
         /// <param name="index">THe parameter index to match</param>
         /// <param name="w">The width to match</param>
         /// <param name="tCell">The cell type to match</param>
+        [Op]
         public static bool AcceptsVector(MethodInfo src, int index, W256 w, Type tCell)
             => src.Parameters(p => p.Position == index && p.IsVector(w,tCell)).Any();
 
@@ -88,13 +96,15 @@ namespace Z0
         /// <param name="index">The parameter index to match</param>
         /// <param name="w">The width to match</param>
         /// <param name="tCell">The cell type to match</param>
+        [Op]
         public static bool AcceptsVector(MethodInfo src, int index, W512 w, Type tCell)
-            => src.Parameters(p => p.Position == index && p.IsVector(w,tCell)).Any();            
- 
+            => src.Parameters(p => p.Position == index && p.IsVector(w,tCell)).Any();
+
         /// <summary>
         /// Determines whether a method returns a 128-bit intrinsic vector
         /// </summary>
         /// <param name="src">The method to test</param>
+        [Op]
         public static bool ReturnsVector(MethodInfo src, W128 w)
             => src.ReturnType.IsVector(w);
 
@@ -102,6 +112,7 @@ namespace Z0
         /// Determines whether a method returns a 256-bit intrinsic vector
         /// </summary>
         /// <param name="src">The method to test</param>
+        [Op]
         public static bool ReturnsVector(MethodInfo src, W256 w)
             => src.ReturnType.IsVector(w);
 
@@ -109,6 +120,7 @@ namespace Z0
         /// Determines whether a method returns a 256-bit intrinsic vector
         /// </summary>
         /// <param name="src">The method to test</param>
+        [Op]
         public static bool ReturnsVector(MethodInfo src, W512 w)
             => src.ReturnType.IsVector(w);
 
@@ -118,6 +130,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         /// <param name="w">The width to match</param>
         /// <param name="tCell">The cell type to match</param>
+        [Op]
         public static bool ReturnsVector(MethodInfo src, W128 w, Type tCell)
             => src.ReturnType.IsVector(w, tCell);
 
@@ -127,6 +140,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         /// <param name="w">The width to match</param>
         /// <param name="tCell">The cell type to match</param>
+        [Op]
         public static bool ReturnsVector(MethodInfo src, W256 w, Type tCell)
             => src.ReturnType.IsVector(w, tCell);
 
@@ -136,6 +150,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         /// <param name="w">The width to match</param>
         /// <param name="tCell">The cell type to match</param>
+        [Op]
         public static bool ReturnsVector(MethodInfo src, W512 w, Type tCell)
             => src.ReturnType.IsVector(w, tCell);
 
@@ -143,6 +158,7 @@ namespace Z0
         /// Determines whether a method is an emitter, i.e. a method that returns a value but accepts no input
         /// </summary>
         /// <param name="m">The method to classify</param>
+        [Op]
         public static bool IsSource(MethodInfo m)
             => m.IsFunction() && m.HasArityValue(0);
 
@@ -150,13 +166,15 @@ namespace Z0
         /// Determines whether a method has void return and has arity = 1
         /// </summary>
         /// <param name="m">The method to classify</param>
+        [Op]
         public static bool IsSink(MethodInfo m)
-            => m.HasVoidReturn() && m.ArityValue() == 1;            
+            => m.HasVoidReturn() && m.ArityValue() == 1;
 
         /// <summary>
         /// Queries the stream for methods with a nonempty arity classification
         /// </summary>
         /// <param name="src">The source stream</param>
+        [Op]
         public static MethodInfo[] WithArityClass(MethodInfo[] src)
             => from m in src where ArityClass(m) != 0 select m;
 
@@ -164,6 +182,7 @@ namespace Z0
         /// Queries the stream for methods with a specified arity classification
         /// </summary>
         /// <param name="src">The source stream</param>
+        [Op]
         public static MethodInfo[] WithArityClass(MethodInfo[] src, ArityClassKind @class)
             => from m in src where ArityClass(m) == @class select m;
 
@@ -171,8 +190,9 @@ namespace Z0
         /// Determines whether a method is a function with numeric operands (if any) and return type
         /// </summary>
         /// <param name="m">The method to examine</param>
+        [Op]
         public static bool IsNumericFunction(MethodInfo m)
-            => m.IsFunction() 
+            => m.IsFunction()
             && NumericKinds.test(m.ReturnType)
             && Enumerable.All<Type>(m.ParameterTypes(), t => t.NumericKind() != NumericKind.None);
 
@@ -180,6 +200,7 @@ namespace Z0
         /// Queries the stream for methods that are functions
         /// </summary>
         /// <param name="src">The source stream</param>
+        [Op]
         public static MethodInfo[] Functions(MethodInfo[] src)
             => src.Where(m => m.IsFunction());
 
@@ -187,13 +208,15 @@ namespace Z0
         /// Queries the stream for methods that are actions
         /// </summary>
         /// <param name="src">The source stream</param>
+        [Op]
         public static MethodInfo[] Actions(MethodInfo[] src)
-            => src.Where(m => m.IsAction());              
+            => src.Where(m => m.IsAction());
 
         /// <summary>
         /// Queries the stream for methods with a specified predicate classification
         /// </summary>
         /// <param name="src">The source stream</param>
+        [Op]
         public static MethodInfo[] WithPredicateClass(MethodInfo[] src, PredicateClassKind @class)
             => from m in src where ClassifyPredicate(m) == @class select m;
 
@@ -201,13 +224,15 @@ namespace Z0
         /// Queries the stream for methods with a nonempty predicate classification
         /// </summary>
         /// <param name="src">The source stream</param>
+        [Op]
         public static MethodInfo[] WithPredicateClass(MethodInfo[] src)
-            => from m in src where ClassifyPredicate(m) != 0 select m;         
+            => from m in src where ClassifyPredicate(m) != 0 select m;
 
         /// <summary>
         /// Queries the stream for methods with a nonempty operator classification
         /// </summary>
         /// <param name="src">The source stream</param>
+        [Op]
         public static MethodInfo[] WithOperatorClass(MethodInfo[] src)
             => from m in src where m.ClassifyOperator() != 0 select m;
 
@@ -215,6 +240,7 @@ namespace Z0
         /// Queries the stream for methods with a specified operator classification
         /// </summary>
         /// <param name="src">The source stream</param>
+        [Op]
         public static MethodInfo[] WithOperatorClass(MethodInfo[] src, OperatorClassKind @class)
             => from m in src where m.ClassifyOperator() == @class select m;
 
@@ -222,14 +248,16 @@ namespace Z0
         /// Determines whether a method defines a predicate that returns a bit or bool value
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static bool IsPredicate(MethodInfo m)        
-            => m.ParameterTypes().Distinct().Count() == 1 
+        [Op]
+        public static bool IsPredicate(MethodInfo m)
+            => m.ParameterTypes().Distinct().Count() == 1
             && (m.ReturnType.Name =="bit" || m.ReturnType == typeof(bool));
 
         /// <summary>
         /// Classifies a methods that is an operator and has arity between 1 and 3; otherwise, returns None
         /// </summary>
         /// <param name="m">The method to examine</param>
+        [Op]
         public static PredicateClassKind ClassifyPredicate(MethodInfo m)
         {
             if(IsPredicate(m))
@@ -249,6 +277,7 @@ namespace Z0
         /// Assigns an arity classification, if any, to a method
         /// </summary>
         /// <param name="m">The method to examine</param>
+        [Op]
         public static ArityClassKind ArityClass(MethodInfo m)
             => m.ArityValue() switch{
                 0 => AC.Nullary,
@@ -258,13 +287,34 @@ namespace Z0
                 _ => AC.None
             };
 
+        [Op]
         public static int ArityValue(OperatorClassKind src)
             => src switch{
                OC.UnaryOp => 1,
                OC.BinaryOp => 2,
-               OC.TernaryOp => 3,     
+               OC.TernaryOp => 3,
                 _  => 0,
             };
+
+
+        /// <summary>
+        /// Classifies a methods that is an operator and has arity between 1 and 3; otherwise, returns None
+        /// </summary>
+        /// <param name="src">The method to examine</param>
+        public static OC ClassifyOperator(MethodInfo src)
+        {
+            if(src.IsOperator())
+            {
+                return src.ArityValue() switch {
+                    1 => OC.UnaryOp,
+                    2 => OC.BinaryOp,
+                    3 => OC.TernaryOp,
+                    _ => OC.None
+
+                };
+            }
+            return 0;
+        }
 
     }
 }

@@ -35,7 +35,7 @@ namespace Z0
         public string Identifier
             => Location.ToString("x") + HexFormatSpecs.PostSpec;
 
-        MemoryAddress IAddressable.Address
+        MemoryAddress IAddressable.Base
         {
             [MethodImpl(Inline)]
             get => this;

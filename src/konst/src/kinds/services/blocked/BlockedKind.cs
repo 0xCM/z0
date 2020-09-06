@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     using BK = BlockedKind;
-         
+
    public readonly struct BlockedKind<T> : IBlockedKind<BlockedKind<T>>
         where T : unmanaged
     {
@@ -24,18 +24,18 @@ namespace Z0
         public static implicit operator BlockedKind(BlockedKind<T> src)
             => src.Class;
 
-        public NumericKind CellKind 
-        { 
-            [MethodImpl(Inline)] 
+        public NumericKind CellKind
+        {
+            [MethodImpl(Inline)]
             get => NumericKinds.kind<T>();
         }
 
         [MethodImpl(Inline)]
         public BlockedKind(BlockedKind kind)
-            => Class = kind; 
-    }        
+            => Class = kind;
+    }
 
-    public readonly struct BlockedKind<W,T> : TBlockedKind<BlockedKind<W,T>, W,T>
+    public readonly struct BlockedKind<W,T> : IBlockedKind<BlockedKind<W,T>, W,T>
         where T : unmanaged
         where W : unmanaged, ITypeWidth
     {
@@ -47,19 +47,19 @@ namespace Z0
         public static implicit operator BlockedKind<T>(BlockedKind<W,T> src)
             => new BlockedKind<T>(src.Class);
 
-        public BK Class 
+        public BK Class
         {
             [MethodImpl(Inline)]
             get => BlockedKinds.kind<W,T>();
         }
 
-        public W Width 
+        public W Width
             => default(W);
 
-        public NumericKind CellKind 
-        { 
-            [MethodImpl(Inline)] 
+        public NumericKind CellKind
+        {
+            [MethodImpl(Inline)]
             get => NumericKinds.kind<T>();
         }
-    } 
+    }
 }

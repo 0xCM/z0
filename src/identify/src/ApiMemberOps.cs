@@ -24,7 +24,7 @@ namespace Z0
 
         public static ApiCodeIndex index(IMemberLocator locator, IApiSet api, ApiHostUri uri, FilePath src)
         {
-            var code = EncodedHexReader.Service.Read(src).ToArray();
+            var code = ApiHexReader.Service.Read(src).ToArray();
             var host = api.FindHost(uri).Require();
             var members = locator.Locate(host);
             var codeIndex =  UriHexQuery.Service.CreateIndex(code);
@@ -38,7 +38,7 @@ namespace Z0
             var idx = index(members);
             var archive =  Archives.capture(root);
             var paths =  HostCaptureArchive.create(root, host);
-            var code = EncodedHexReader.Service.Read(paths.HostHexPath);
+            var code = ApiHexReader.Service.Read(paths.HostHexPath);
             var opIndex =  UriHexQuery.Service.CreateIndex(code);
             return ApiCodeIndex.create(idx, opIndex);
         }

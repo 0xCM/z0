@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;        
+    using static Konst;
     using static BufferSeqId;
     using static Memories;
 
@@ -17,17 +17,17 @@ namespace Z0
     {
         readonly TTestFixedBinaryOp Matcher;
 
-        public IPolyrand Random 
+        public IPolyrand Random
             => Matcher.Random;
 
         [MethodImpl(Inline)]
-        public static ITestBinaryDynamic Service(TTestFixedBinaryOp matcher) 
+        public static ITestBinaryDynamic Service(TTestFixedBinaryOp matcher)
             => new TestBinaryDynamic(matcher);
 
         [MethodImpl(Inline)]
-        internal static TestBinaryDynamic Check(TTestFixedBinaryOp matcher) 
+        internal static TestBinaryDynamic Check(TTestFixedBinaryOp matcher)
             => new TestBinaryDynamic(matcher);
-        
+
         internal TestBinaryDynamic(TTestFixedBinaryOp matcher)
         {
             Matcher = matcher;
@@ -35,7 +35,7 @@ namespace Z0
 
         IDynexus Dynamic => CheckDynamic.Checker.Dynamic;
 
-        public TestCaseRecord Match(K k, TypeWidth w, IdentifiedCode a, IdentifiedCode b, BufferTokens dst)
+        public TestCaseRecord Match(K k, TypeWidth w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             switch(w)
             {
@@ -57,50 +57,50 @@ namespace Z0
                 case TypeWidth.W256:
                     return Match(k, w256, a, b, dst);
             }
-            
+
             throw Unsupported.define(w.GetType());
         }
 
-        public TestCaseRecord Match(K k, W8 w, IdentifiedCode a, IdentifiedCode b, BufferTokens dst)
+        public TestCaseRecord Match(K k, W8 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
-            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        public TestCaseRecord Match(K k, W16 w, IdentifiedCode a, IdentifiedCode b, BufferTokens dst)
+        public TestCaseRecord Match(K k, W16 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
-            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        public TestCaseRecord Match(K k, W32 w, IdentifiedCode a, IdentifiedCode b, BufferTokens dst)
+        public TestCaseRecord Match(K k, W32 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
-            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        public TestCaseRecord Match(K k, W64 w, IdentifiedCode a, IdentifiedCode b, BufferTokens dst)
+        public TestCaseRecord Match(K k, W64 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
-            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        public TestCaseRecord Match(K k,  W128 w, IdentifiedCode a, IdentifiedCode b, BufferTokens dst)
+        public TestCaseRecord Match(K k,  W128 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
-            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                          
+            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        public TestCaseRecord Match(K k, W256 w, IdentifiedCode a, IdentifiedCode b, BufferTokens dst)
+        public TestCaseRecord Match(K k, W256 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
-            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());                                                      
-        }                
+            return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
+        }
     }
 }

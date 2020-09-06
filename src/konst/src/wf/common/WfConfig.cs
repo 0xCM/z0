@@ -92,7 +92,7 @@ namespace Z0
             PartId[] parts, FolderPath resroot, FolderPath appdata, FS.FolderPath logroot, WfSettings settings)
         {
             Shell = insist(shell);
-            Paths = shell.AppPaths;
+            Paths = shell.Paths;
             Args = args;
             Modules = modules;
             Api = Modules.Api;
@@ -109,7 +109,7 @@ namespace Z0
         public WfConfig(IShellContext shell, string[] args, ModuleArchive modules)
         {
             Shell = insist(shell);
-            Paths = shell.AppPaths;
+            Paths = shell.Paths;
             Args = args;
             Modules = modules;
             Api = Modules.Api;

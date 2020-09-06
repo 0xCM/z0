@@ -27,8 +27,8 @@ namespace Z0
             where T : unmanaged
         {
             var count = vcount(w, enabled);
-            var buffer = vzero<T>(w);
-            ref var dst = ref vref(ref buffer);
+            var buffer = z.vzero<T>(w);
+            ref var dst = ref z.vref(ref buffer);
             var length = min(count, bitsize<S>());
             for(var i=0; i<length; i++)
                 seek(ref dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
@@ -48,8 +48,8 @@ namespace Z0
             where T : unmanaged
         {
             var count = vcount(w, enabled);
-            var buffer = vzero<T>(w);
-            ref var dst = ref vref(ref buffer);
+            var buffer = z.vzero<T>(w);
+            ref var dst = ref z.vref(ref buffer);
             var length = min(count, bitsize<S>());
             for(var i=0; i<length; i++)
                 seek(ref dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
@@ -69,7 +69,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var length = math.min(dst.CellCount, bitsize<S>());
+            var length = z.min(dst.CellCount, bitsize<S>());
             for(var i=0; i< length; i++)
                 dst[i] = gbits.testbit(src,(byte)i) ? enabled : default;
             return ref dst;
@@ -88,7 +88,7 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            var length = math.min(dst.CellCount, bitsize<S>());
+            var length = z.min(dst.CellCount, bitsize<S>());
             for(var i=0; i< length; i++)
                 dst[i] = gbits.testbit(src,(byte)i) ? enabled : default;
             return ref dst;
@@ -105,6 +105,6 @@ namespace Z0
         public static T broadcast<S,T>(S src, T t = default)
             where S : unmanaged
             where T : unmanaged
-                => Vectors.vfirst<S,T>(Vectors.vbroadcast(N128.N, src));
+                => z.vfirst<S,T>(z.vbroadcast(N128.N, src));
     }
 }

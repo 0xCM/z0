@@ -10,9 +10,8 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static ProcessPartFilesStep;
 
-    public class ProcessPartFiles : IDisposable
+    public ref struct ProcessPartFiles
     {
         const int DefaultBufferSize = CpuBuffer.BufferSize;
 
@@ -24,6 +23,10 @@ namespace Z0
 
         int ProcessedCount;
 
+        readonly ProcessPartFilesStep Step;
+
+        WfStepId StepId => Step.Id;
+
         [MethodImpl(Inline)]
         internal ProcessPartFiles(IWfShell wf, IAsmContext asm, CorrelationToken ct)
         {
@@ -31,6 +34,7 @@ namespace Z0
             Ct = ct;
             Buffers = CpuBuffer.alloc(DefaultBufferSize);
             ProcessedCount = 0;
+            Step = new ProcessPartFilesStep();
             Wf.Created(StepId);
         }
 
@@ -70,12 +74,6 @@ namespace Z0
 
             Wf.Ran(StepId);
         }
-
-        // [Op, MethodImpl(Inline)]
-        // public void Run(ulong data)
-        // {
-        //     Dispatch(AsmEncoder.encode(data));
-        // }
 
         [Op, MethodImpl(Inline)]
         void Dispatch(in EncodedFx src)

@@ -34,16 +34,16 @@ namespace Z0
             Wf.Disposed(StepId);
         }
 
-        X86MemberExtract[] Extract(ICaptureContext context, IApiHost host)
+        X86ApiExtract[] Extract(ICaptureContext context, IApiHost host)
         {
             var members = ApiMemberJit.jit(host);
             Wf.Raise(new MembersLocated(host.Uri, members, Ct));
             return Extractor.Extract(members);
         }
 
-        public X86MemberExtract[] Extract(IApiHost host)
+        public X86ApiExtract[] Extract(IApiHost host)
         {
-            var extracted = sys.empty<X86MemberExtract>();
+            var extracted = sys.empty<X86ApiExtract>();
             try
             {
                 extracted = Extract(State.CWf.Context ,host);
@@ -56,9 +56,9 @@ namespace Z0
             return extracted;
         }
 
-        public X86MemberExtract[] Extract(IApiHost[] hosts)
+        public X86ApiExtract[] Extract(IApiHost[] hosts)
         {
-            var extracted = sys.empty<X86MemberExtract>();
+            var extracted = sys.empty<X86ApiExtract>();
             try
             {
                 var members = ApiMemberJit.jit(hosts, Wf.Broker.Sink);
@@ -68,13 +68,13 @@ namespace Z0
             catch(Exception e)
             {
                 Wf.Error(StepName, e, Ct);
-                return sys.empty<X86MemberExtract>();
+                return sys.empty<X86ApiExtract>();
             }
         }
 
-        public X86MemberExtract[] Extract(ApiDataType[] types)
+        public X86ApiExtract[] Extract(ApiDataType[] types)
         {
-            var extracted = sys.empty<X86MemberExtract>();
+            var extracted = sys.empty<X86ApiExtract>();
             try
             {
                 return Extractor.Extract(ApiMemberJit.jit(types));
@@ -82,7 +82,7 @@ namespace Z0
             catch(Exception e)
             {
                 Wf.Error(StepName, e, Ct);
-                return sys.empty<X86MemberExtract>();
+                return sys.empty<X86ApiExtract>();
             }
         }
 

@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    
+
     partial struct z
-    {   
+    {
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vcompact(Vector256<ushort> src, W8 w)            
+        public static Vector128<byte> vcompact(Vector256<ushort> src, W8 w)
             => vpackus(vlo(src), vhi(src));
 
         // ~ 16i -> X
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<sbyte> vcompact(Vector256<short> x, Vector256<short> y, N256 w, sbyte t)            
+        public static Vector256<sbyte> vcompact(Vector256<short> x, Vector256<short> y, N256 w, sbyte t)
             => vperm4x64(vpackss(x,y), Perm4L.ACBD);
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="y">The second source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> vcompact(Vector256<ushort> x, Vector256<ushort> y, N256 w, byte t)            
+        public static Vector256<byte> vcompact(Vector256<ushort> x, Vector256<ushort> y, N256 w, byte t)
             => vperm4x64(vpackus(x,y), Perm4L.ACBD);
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<short> vcompact(Vector256<int> x, Vector256<int> y, N256 w, short t)            
+        public static Vector256<short> vcompact(Vector256<int> x, Vector256<int> y, N256 w, short t)
             => vperm4x64(vpackss(x,y), Perm4L.ACBD);
 
         /// <summary>
@@ -101,13 +101,13 @@ namespace Z0
         /// </summary>
         /// <param name="x">The first source vector</param>
         /// <param name="y">The second source vector</param>
-        /// <remarks>The vpackus intrinsic emits a vector in the following form: 
+        /// <remarks>The vpackus intrinsic emits a vector in the following form:
         /// [0, 1, 2, 3, 8, 9, 10, 11, 4, 5, 6, 7, 12, 13, 14, 15]
-        /// To make use of the result, it must be permuted to a more reasonable order, 
+        /// To make use of the result, it must be permuted to a more reasonable order,
         /// [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static Vector256<ushort> vcompact(Vector256<uint> x, Vector256<uint> y, N256 w, ushort t)            
+        public static Vector256<ushort> vcompact(Vector256<uint> x, Vector256<uint> y, N256 w, ushort t)
             => vperm4x64(vpackus(x,y), Perm4L.ACBD);
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace Z0
         /// <param name="x1">The second source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vcompact(Vector256<uint> x0, Vector256<uint> x1, N128 w, byte t)  
+        public static Vector128<byte> vcompact(Vector256<uint> x0, Vector256<uint> x1, N128 w, byte t)
             => vcompact(vcompact(x0, x1, n256, Konst.z16), w, t);
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace Z0
         /// <param name="x3">The fourth source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vcompact(Vector128<uint> x0, Vector128<uint> x1, Vector128<uint> x2, Vector128<uint> x3, N128 w, byte t)            
+        public static Vector128<byte> vcompact(Vector128<uint> x0, Vector128<uint> x1, Vector128<uint> x2, Vector128<uint> x3, N128 w, byte t)
             => vcompact(vcompact(x0, x1, n128, Konst.z8), vcompact(x2, x3, n128, Konst.z8),w,t);
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace Z0
         /// <param name="x3">The fourth source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> vcompact(Vector256<uint> x0, Vector256<uint> x1, Vector256<uint> x2, Vector256<uint> x3, N256 w, byte t) 
+        public static Vector256<byte> vcompact(Vector256<uint> x0, Vector256<uint> x1, Vector256<uint> x2, Vector256<uint> x3, N256 w, byte t)
             => vcompact(vcompact(x0,x1,n256,Konst.z16), vcompact(x2,x3,n256,Konst.z16),w,t);
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Z0
         /// <param name="src">The source vector tuple</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vcompact(in Vector512<uint> src, N128 w, byte t)            
+        public static Vector128<byte> vcompact(in Vector512<uint> src, N128 w, byte t)
             => vcompact(src.Lo, src.Hi, w, t);
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<int> vcompact(Vector256<long> src, N128 w, int t)            
+        public static Vector128<int> vcompact(Vector256<long> src, N128 w, int t)
             => vparts(w128i, (int)vcell(src, 0), (int)vcell(src, 1), (int)vcell(src, 2), (int)vcell(src, 3));
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<sbyte> vcompact(Vector256<short> src, N128 w, sbyte t)            
+        public static Vector128<sbyte> vcompact(Vector256<short> src, N128 w, sbyte t)
             => vpackss(vlo(src), vhi(src));
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vcompact(Vector256<short> src, N128 w, byte t)            
+        public static Vector128<byte> vcompact(Vector256<short> src, N128 w, byte t)
             => v8u(vpackss(vlo(src), vhi(src)));
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vcompact(Vector128<ushort> x, N128 w, byte t)            
+        public static Vector128<byte> vcompact(Vector128<ushort> x, N128 w, byte t)
             => vcompact(x, default, w, t);
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vcompact(Vector256<ushort> src, N128 w, byte t)            
+        public static Vector128<byte> vcompact(Vector256<ushort> src, N128 w, byte t)
             => vpackus(vlo(src), vhi(src));
 
         /// <summary>
@@ -233,7 +233,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static ulong vcompact(Vector128<ushort> src, N64 w, ulong t)            
+        public static ulong vcompact(Vector128<ushort> src, N64 w, ulong t)
             => vcell64(vcompact(src, default, n128, Konst.z8),0);
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<ushort> vcompact(Vector256<uint> src, N128 w, ushort t)            
+        public static Vector128<ushort> vcompact(Vector256<uint> src, N128 w, ushort t)
             => vcompact(vlo(src), vhi(src),w,t);
 
         /// <summary>
@@ -253,7 +253,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
-        public static ulong vcompact(Vector256<uint> src, N64 w, ulong t)            
+        public static ulong vcompact(Vector256<uint> src, N64 w, ulong t)
             => vcompact(vcompact(src, n128,Konst.z16),w,t);
 
         /// <summary>
@@ -263,7 +263,7 @@ namespace Z0
         /// <param name="w">The target width</param>
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<byte> vcompact(Vector256<uint> src, N128 w, byte t)            
+        public static Vector128<byte> vcompact(Vector256<uint> src, N128 w, byte t)
             => vcompact(vcompact(src, n128,Konst.z16),w,t);
 
         /// <summary>
@@ -273,7 +273,7 @@ namespace Z0
         /// <param name="w">The target vector width</param>
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
-        public static Vector128<short> vcompact(Vector256<int> src, N128 w, short t)            
+        public static Vector128<short> vcompact(Vector256<int> src, N128 w, short t)
             => vcompact(vlo(src), vhi(src),w,t);
    }
 }

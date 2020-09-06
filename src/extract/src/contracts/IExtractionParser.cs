@@ -16,13 +16,13 @@ namespace Z0
         /// </summary>
         /// <param name="src"></param>
         /// <param name="seq"></param>
-        ExtractParseResult Parse(X86MemberExtract src, int seq);
+        ExtractParseResult Parse(X86ApiExtract src, int seq);
 
         /// <summary>
         /// Parses an extract sequence, returning a comprehensive result set that includes
         /// outcomes of successful parse operations and any unfortunate failures
         /// </summary>
         /// <param name="src">The source extracts</param>
-        ExtractParseResults Parse(X86MemberExtract[] src);
+        ExtractParseResults Parse(X86ApiExtract[] src);
     }
 }

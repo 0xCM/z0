@@ -30,31 +30,31 @@ namespace Z0
             => new PartCaptureArchive(config.Root, FolderName.Empty, FolderName.Empty);
 
         [MethodImpl(Inline), Op]
-        public static ISemanticArchive semantic()
-            => new SemanticArchive();
+        public static ISemanticPaths semantic()
+            => new SemanticPaths();
 
         [MethodImpl(Inline)]
-        public static IMemberCodeWriter writer<H>(FilePath dst, H rep = default)
+        public static IApiHexWriter writer<H>(FilePath dst, H rep = default)
             where H : struct, IArchiveWriter<H>
         {
-            if(typeof(H) == typeof(MemberCodeWriter))
-                return new MemberCodeWriter(dst);
+            if(typeof(H) == typeof(ApiHexWriter))
+                return new ApiHexWriter(dst);
             else
                 throw no<H>();
         }
 
         [MethodImpl(Inline)]
-        public static IEncodedHexReader reader<H>(H rep = default)
+        public static IApiHexReader reader<H>(H rep = default)
             where H : struct, IArchiveReader<H>
         {
-            if(typeof(H) == typeof(EncodedHexReader))
-                return new EncodedHexReader();
+            if(typeof(H) == typeof(ApiHexReader))
+                return new ApiHexReader();
             else
                 throw no<H>();
         }
 
         [MethodImpl(Inline), Op]
-        public static IEncodedHexArchive hex(FolderPath root)
-            => new EncodedHexArchive(root);
+        public static IApiHexArchive hex(FolderPath root)
+            => new ApiHexArchive(root);
     }
 }

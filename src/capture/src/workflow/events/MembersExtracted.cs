@@ -15,10 +15,10 @@ namespace Z0.Asm
 
         public readonly ApiHostUri Host;
 
-        public readonly X86MemberExtract[] Members;
+        public readonly X86ApiExtract[] Members;
 
         [MethodImpl(Inline)]
-        public MembersExtracted(ApiHostUri host, X86MemberExtract[] members)
+        public MembersExtracted(ApiHostUri host, X86ApiExtract[] members)
         {
             Host = host;
             Members = members;
@@ -28,6 +28,6 @@ namespace Z0.Asm
             => $"{Members.Length} {Host} members extracted";
 
         public static MembersExtracted Empty
-            => new MembersExtracted(ApiHostUri.Empty, Array.Empty<X86MemberExtract>());
+            => new MembersExtracted(ApiHostUri.Empty, Array.Empty<X86ApiExtract>());
     }
 }

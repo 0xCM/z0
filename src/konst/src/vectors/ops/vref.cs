@@ -12,9 +12,9 @@ namespace Z0
     using static z;
 
     partial struct z
-    {                        
+    {
         /// <summary>
-        /// Returns a refererence to the leading component of the source
+        /// Returns a reference to the leading component of the source
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector component type</typeparam>
@@ -24,7 +24,7 @@ namespace Z0
                 => ref @as<Vector128<T>,T>(src);
 
         /// <summary>
-        /// Returns a refererence to the leading component of the source
+        /// Returns a reference to the leading component of the source
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector component type</typeparam>
@@ -34,7 +34,7 @@ namespace Z0
                 => ref @as<Vector256<T>,T>(src);
 
         /// <summary>
-        /// Returns a refererence to the leading component of the source
+        /// Returns a reference to the leading component of the source
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector component type</typeparam>

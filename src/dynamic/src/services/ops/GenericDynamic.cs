@@ -16,7 +16,7 @@ namespace Z0
 
     public readonly struct GenericDynamic
     {
-        public static UnaryOp<T> unary<T>(BufferToken dst, IdentifiedCode src)
+        public static UnaryOp<T> unary<T>(BufferToken dst, ApiHex src)
             where T : unmanaged
         {
             try
@@ -33,7 +33,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static BinaryOp<T> binary<T>(BufferToken dst, IdentifiedCode src)
+        public static BinaryOp<T> binary<T>(BufferToken dst, ApiHex src)
             where T : unmanaged
         {
             try

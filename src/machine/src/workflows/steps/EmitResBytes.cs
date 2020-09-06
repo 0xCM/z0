@@ -18,7 +18,7 @@ namespace Z0
     {
         const string ProjectName = "bytes";
 
-        readonly IEncodedHexArchive Archive;
+        readonly IApiHexArchive Archive;
 
         public readonly FolderPath SourceDir;
 
@@ -35,8 +35,8 @@ namespace Z0
         {
             Wf = context;
             Ct = ct;
-            SourceDir = context.AppPaths.AppCaptureRoot;
-            TargetDir = context.AppPaths.ResourceRoot + FolderName.Define(ProjectName);
+            SourceDir = context.Paths.AppCaptureRoot;
+            TargetDir = context.Paths.ResourceRoot + FolderName.Define(ProjectName);
             Archive = Archives.hex(SourceDir);
             Wf.Created(StepId);
         }

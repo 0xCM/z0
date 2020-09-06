@@ -9,7 +9,6 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static Shell;
     using static Engines;
     using static z;
 
@@ -43,11 +42,11 @@ namespace Z0
 
             try
             {
-                Run(default(ManageCaptureStep));
-                Run(default(EmitDatasetsStep));
-                Run(default(ProcessPartFilesStep));
-                Run(default(EmitMetadataSetsStep));
-                Run(default(CreateGlobalIndexStep));
+                Run(new ManageCaptureStep());
+                Run(new EmitDatasetsStep());
+                Run(new ProcessPartFilesStep());
+                Run(new EmitMetadataSetsStep());
+                Run(new CreateGlobalIndexStep());
 
             }
             catch(Exception e)
@@ -61,8 +60,7 @@ namespace Z0
         void Run(CreateGlobalIndexStep s)
         {
             Wf.Running(s);
-            //var src = FS.dir((Wf.AppPaths.LogRoot + FolderName.Define("capture/artifacts")).Name);
-            using var step = new CreateGlobalIndex(Wf, State, new PartFileProvider(Wf, Wf.CaptureRoot), Ct);
+            using var step = new CreateGlobalIndex(Wf, State, new PartFileProvider(Wf, Wf.CaptureRoot));
             step.Run();
             Wf.Ran(s);
         }
@@ -75,15 +73,15 @@ namespace Z0
             Wf.Ran(s);
         }
 
-        void Run(ManageCaptureStep kind, params string[] args)
+        void Run(ManageCaptureStep step, params string[] args)
         {
             using var control = WfCaptureControl.create(State);
             control.Run();
         }
 
-        void Run(EmitDatasetsStep kind)
+        void Run(EmitDatasetsStep step)
         {
-            Wf.Running(StepId, kind);
+            Wf.Running(StepId, step);
 
             try
             {
@@ -95,7 +93,7 @@ namespace Z0
                 Wf.Error(e, Ct);
             }
 
-            Wf.Ran(StepId, kind);
+            Wf.Ran(StepId, step);
         }
 
         void Run(ProcessPartFilesStep kind)

@@ -13,15 +13,15 @@ namespace Z0
 
     public interface TTestDynamicVectors : TCheckVectors, TTestAction, ITestDynamic, IBufferedChecker
     {
-        TestCaseRecord Match<T>(BinaryOp<Vector128<T>> f, IdentifiedCode bits)
+        TestCaseRecord Match<T>(BinaryOp<Vector128<T>> f, ApiHex bits)
             where T : unmanaged
         {
             var g = Dynamic.EmitFixedBinary(this[Main], w128, bits);
             return Match<T>(f, g, bits.OpUri.OpId);
         }
 
-        TestCaseRecord Match<T>(BinaryOp<Vector256<T>> f, IdentifiedCode bits)
-            where T : unmanaged                    
+        TestCaseRecord Match<T>(BinaryOp<Vector256<T>> f, ApiHex bits)
+            where T : unmanaged
         {
             var g = Dynamic.EmitFixedBinary(this[Main], w256, bits);
             return Match<T>(f, g, bits.OpUri.OpId);
@@ -46,10 +46,10 @@ namespace Z0
                     var x = Random.CpuVector(w,t);
                     var y = Random.CpuVector(w,t);
                     veq(f(x,y), g.Apply(x,y));
-                }            
+                }
             }
 
-            return TestAction(check, name);      
+            return TestAction(check, name);
         }
 
         TestCaseRecord Match<T>(BinaryOp<Vector256<T>> f, BinaryOp256 g, OpIdentity name)
@@ -65,9 +65,9 @@ namespace Z0
                     var y = Random.CpuVector(w,t);
                     eq(f(x,y), g.Apply(x,y));
                 }
-            }      
+            }
 
-            return TestAction(check, name);      
+            return TestAction(check, name);
         }
 
         TestCaseRecord Match<T>(BinaryOp<Vector128<T>> f, OpIdentity fId, BinaryOp128 g, OpIdentity gId)
@@ -84,7 +84,7 @@ namespace Z0
                     var y = Random.CpuVector(w,t);
                     eq(f(x,y), g.Apply(x,y));
                 }
-            }            
+            }
 
             return TestAction(check, MatchCaseName(fId, gId));
         }
@@ -95,7 +95,7 @@ namespace Z0
             var w = w256;
             var t = default(T);
 
-            void check()            
+            void check()
             {
 
                 for(var i=0; i<RepCount; i++)
@@ -104,9 +104,9 @@ namespace Z0
                     var y = Random.CpuVector(w,t);
                     eq(f(x,y), g.Apply(x,y));
                 }
-            }            
+            }
 
             return TestAction(check, MatchCaseName(fId, gId));
-        }         
+        }
     }
 }

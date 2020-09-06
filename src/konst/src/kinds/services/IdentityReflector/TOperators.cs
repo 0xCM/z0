@@ -33,27 +33,9 @@ namespace Z0
             => src switch{
                OC.UnaryOp => 1,
                OC.BinaryOp => 2,
-               OC.TernaryOp => 3,     
+               OC.TernaryOp => 3,
                 _  => 0,
             };
-        
-        /// <summary>
-        /// Classifies a methods that is an operator and has arity between 1 and 3; otherwise, returns None
-        /// </summary>
-        /// <param name="src">The method to examine</param>
-        OC ClassifyOperator(MethodInfo src)
-        {
-            if(src.IsOperator())
-            {
-                return src.ArityValue() switch {
-                    1 => OC.UnaryOp,
-                    2 => OC.BinaryOp,
-                    3 => OC.TernaryOp,
-                    _ => OC.None
 
-                };
-            }
-            return 0;
-        } 
     }
 }

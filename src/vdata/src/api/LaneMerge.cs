@@ -5,17 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
-    using static Memories;
+    using static z;
     using static VectorKonst;
 
-    partial class VData
+    partial class VKonst
     {
         /// <summary>
-        /// Creates a vector that decribes a lo/hi lane merge permutation
+        /// Creates a vector that describes a lo/hi lane merge permutation
         /// For example, if X = [A E B F | C G D H] then the lane merge pattern P will
         /// describe a permutation that has the following effect: permute(X,P) = [A B C D | E F G H]
         /// </summary>
@@ -25,10 +25,10 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return V0.vload<T>(n256,LaneMerge256x8u);
+                return vload<T>(n256,LaneMerge256x8u);
             else if(typeof(T) == typeof(ushort))
-                return V0.vload<T>(n256,LaneMerge256x16u);
-            else 
+                return vload<T>(n256,LaneMerge256x16u);
+            else
                 return default;
         }
 

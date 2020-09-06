@@ -49,10 +49,10 @@ namespace Z0
         public static FilePath[] files(FolderPath root)
             => root.Files(FileExtensions.HexLine, true).Array();
 
-        public static IdentifiedCode[] read(FilePath src)
-            => EncodedHexReader.Service.Read(src).Where(x => x.IsNonEmpty).Array();
+        public static ApiHex[] read(FilePath src)
+            => ApiHexReader.Service.Read(src).Where(x => x.IsNonEmpty).Array();
 
-        public static IdentifiedCode[] read(FolderPath root, ApiHostUri host)
+        public static ApiHex[] read(FolderPath root, ApiHostUri host)
         {
             var hfn = FileName.define(host.Owner, host.Name, FileExtensions.HexLine);
             var path = files(root).Where(f => f.FileName == hfn).FirstOrDefault(FilePath.Empty);
@@ -68,7 +68,7 @@ namespace Z0
                 return IdentifiedCodeIndex.Empty;
             }
 
-            var dst = z.list<IdentifiedCode>();
+            var dst = z.list<ApiHex>();
             foreach(var item in read(src))
                 if(item.IsNonEmpty)
                     dst.Add(item);

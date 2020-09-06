@@ -8,13 +8,6 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    //using static Konst;
-
-    public static partial class XTend
-    {
-
-    }
-
     partial class XTend
     {
         /// <summary>

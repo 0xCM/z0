@@ -10,13 +10,13 @@ namespace Z0
     using static Konst;
 
     public readonly struct IdentifiedCodeIndex
-    {                
+    {
         public readonly ApiHostUri Host;
 
-        public readonly IdentifiedCode[] Code;
+        public readonly ApiHex[] Code;
 
         [MethodImpl(Inline)]
-        public IdentifiedCodeIndex(ApiHostUri host, IdentifiedCode[] code)
+        public IdentifiedCodeIndex(ApiHostUri host, ApiHex[] code)
         {
             z.insist(host.IsNonEmpty, $"Empty host uri");
             Host = host;
@@ -36,13 +36,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public IdentifiedCodeIndex(IdentifiedCode[] code)
-        {            
+        public IdentifiedCodeIndex(ApiHex[] code)
+        {
             Host = ApiHostUri.Empty;
             Code = code;
         }
 
-        public static IdentifiedCodeIndex Empty 
-            => new IdentifiedCodeIndex(sys.empty<IdentifiedCode>());
+        public static IdentifiedCodeIndex Empty
+            => new IdentifiedCodeIndex(sys.empty<ApiHex>());
     }
 }

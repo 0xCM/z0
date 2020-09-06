@@ -10,42 +10,28 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public interface TKindServices
-    {
-        TIdentityProducer IdentityProducer 
-            => Z0.IdentityProducer.Service;
-        
-        TIdentityReflector IdentityReflector 
-            => Z0.IdentityReflector.Service;
-
-        TIdentityParser IdentityParser 
-            => OpIdentityParser.Service;
-    }   
-    
     [ApiHost]
-    public readonly struct IdentityProducer : TIdentityProducer, IApiHost<IdentityProducer>
+    public readonly struct IdentityProducer
     {
-        public static TIdentityProducer Service => default(IdentityProducer);
-        
         [MethodImpl(Inline), Op]
-        public NatNumericIdentity NaturalNumeric(ulong n, NumericKind t)   
-            => new NatNumericIdentity(null,n,t);
+        public NatIdentity NaturalNumeric(ulong n, NumericKind t)
+            => new NatIdentity(null,n,t);
 
         [MethodImpl(Inline), Op]
-        public NatNumericIdentity NaturalNumeric(ulong m, ulong n, NumericKind t)   
-            => new NatNumericIdentity(m,n,t);
+        public NatIdentity NaturalNumeric(ulong m, ulong n, NumericKind t)
+            => new NatIdentity(m,n,t);
 
         [MethodImpl(Inline)]
-        public NatNumericIdentity NaturalNumeric<N,T>(N n = default, T t = default)
+        public NatIdentity NaturalNumeric<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new NatNumericIdentity(null,value<N>(), NumericKinds.kind<T>());
+                => new NatIdentity(null,value<N>(), NumericKinds.kind<T>());
 
         [MethodImpl(Inline)]
-        public NatNumericIdentity NaturalNumeric<M,N,T>(M m = default,N n = default, T t = default)
+        public NatIdentity NaturalNumeric<M,N,T>(M m = default,N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new NatNumericIdentity(value<M>(),value<N>(), NumericKinds.kind<T>());
+                => new NatIdentity(value<M>(),value<N>(), NumericKinds.kind<T>());
     }
 }

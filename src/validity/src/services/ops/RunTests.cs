@@ -22,8 +22,8 @@ namespace Z0
         {
             try
             {
-                Context.AppPaths.TestErrorPath.Delete();
-                Context.AppPaths.TestStatusPath.Delete();
+                Context.Paths.TestErrorPath.Delete();
+                Context.Paths.TestStatusPath.Delete();
 
                 RunTests(false,filters);
 

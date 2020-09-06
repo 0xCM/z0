@@ -19,7 +19,7 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        readonly X86MemberExtract[] Extracts;
+        readonly X86ApiExtract[] Extracts;
 
         readonly ApiHostUri Source;
 
@@ -41,7 +41,7 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        public EmitHostArtifacts(IWfCaptureState state, ApiHostUri src, X86MemberExtract[] extracts, IPartCapturePaths dst, CorrelationToken ct)
+        public EmitHostArtifacts(IWfCaptureState state, ApiHostUri src, X86ApiExtract[] extracts, IPartCapturePaths dst, CorrelationToken ct)
         {
             State = state;
             Wf = state.Wf;
@@ -135,7 +135,7 @@ namespace Z0
                 return;
 
             var hex = IdentifiedCodeWriter.save(Source, Parsed, HexPath);
-            Wf.Raise(new HexCodeSaved(StepId, Source, hex, ParsedPath, Ct));
+            Wf.Raise(new ApiHexSaved(StepId, Source, hex, ParsedPath, Ct));
         }
 
         void SaveCil()
@@ -153,7 +153,7 @@ namespace Z0
                 dst.WriteLine(cil.Format());
 
             }
-            Wf.Raise(new CilCodeSaved(StepId, Source, (uint)src.Length, ParsedPath, Ct));
+            Wf.Raise(new CilCodeSaved(StepId, Source, (uint)src.Length, FS.path(ParsedPath.Name), Ct));
         }
 
         void Decode()

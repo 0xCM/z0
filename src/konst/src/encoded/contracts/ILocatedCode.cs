@@ -8,6 +8,6 @@ namespace Z0
         where F : struct, IEncoded<F,C>
     {
         MemoryRange MemorySegment
-            => (Address, Address + (MemoryAddress)Length);                
+            => (Base, Base + (MemoryAddress)Length);
     }
 }

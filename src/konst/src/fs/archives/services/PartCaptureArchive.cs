@@ -13,7 +13,6 @@ namespace Z0
     {
         public FolderPath ArchiveRoot {get;}
 
-
         [MethodImpl(Inline)]
         internal PartCaptureArchive(FolderPath root, FolderName area, FolderName subject)
         {
@@ -25,6 +24,5 @@ namespace Z0
         {
             ArchiveRoot = FolderPath.Define(root.Create().Name);
         }
-
     }
 }

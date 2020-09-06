@@ -47,10 +47,10 @@ namespace Z0
             => !same(x,y);
 
         [MethodImpl(Inline)]
-        public BitSpan(Span<bit> bits)
-            => this.Data = bits;
+        public BitSpan(Span<bit> src)
+            => Data = src;
 
-        public Span<bit> Bits
+        public Span<bit> Edit
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -121,9 +121,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => BitSpans.bitslice<ulong>(this, offset, count);
         }
-
-        internal Span<uint> Bit32
-            => recover<bit,uint>(Data);
 
         [MethodImpl(Inline)]
         public string Format(BitFormat? fmt = null)

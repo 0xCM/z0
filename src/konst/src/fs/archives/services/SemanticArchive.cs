@@ -9,9 +9,9 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct SemanticArchive : ISemanticArchive<SemanticArchive>
+    public readonly struct SemanticPaths : ISemanticPaths<SemanticPaths>
     {
-        public static ISemanticArchive create()
-            => default(SemanticArchive);
+        public static ISemanticPaths create()
+            => default(SemanticPaths);
     }
 }

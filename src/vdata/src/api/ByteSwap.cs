@@ -5,16 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static VectorKonst;
- 
-    partial class VData
+
+    partial class VKonst
     {
         /// <summary>
-        /// Retrieves the shuffle pattern that, when applied, swaps the byte-level representation 
+        /// Retrieves the shuffle pattern that, when applied, swaps the byte-level representation
         /// of each  unsigned 16,32, or 64-bit integer component value
         /// </summary>
         /// <param name="w">The vector width selector</param>
@@ -25,17 +25,17 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             if(typeof(N) == typeof(N16))
-                return V0.vload<byte>(w, ByteSwap128x16u);
+                return z.vload<byte>(w, ByteSwap128x16u);
             else if(typeof(N) == typeof(N32))
-                return V0.vload<byte>(w, ByteSwap128x32u);
+                return z.vload<byte>(w, ByteSwap128x32u);
             else if(typeof(N) == typeof(N64))
-                return V0.vload<byte>(w, ByteSwap128x64u);
+                return z.vload<byte>(w, ByteSwap128x64u);
             else
-                throw Unsupported.define<N>();            
+                throw no<N>();
         }
 
         /// <summary>
-        /// Retrieves the shuffle pattern that, when applied, swaps the byte-level representation 
+        /// Retrieves the shuffle pattern that, when applied, swaps the byte-level representation
         /// of each  unsigned 16,32, or 64-bit integer component value
         /// </summary>
         /// <param name="w">The vector width selector</param>
@@ -46,13 +46,13 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             if(typeof(N) == typeof(N16))
-                return V0.vload<byte>(w, ByteSwap256x16u);
+                return z.vload<byte>(w, ByteSwap256x16u);
             else if(typeof(N) == typeof(N32))
-                return V0.vload<byte>(w, ByteSwap256x32u);
+                return z.vload<byte>(w, ByteSwap256x32u);
             else if(typeof(N) == typeof(N64))
-                return V0.vload<byte>(w, ByteSwap256x64u);
+                return z.vload<byte>(w, ByteSwap256x64u);
             else
-                throw Unsupported.define<N>();            
-        }         
+                throw no<N>();
+        }
     }
 }

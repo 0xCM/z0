@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static z;
 
@@ -20,76 +20,76 @@ namespace Z0
             var c = gvec.vinc<uint>(n,8);
             var d = gvec.vinc<uint>(n,12);
             Vector512<uint> v512 = (a,b,c,d);
-            var abActual = dvec.vcompact(a,b,n128,z16);
-            var abExpect = V0.vinc<ushort>(n);
+            var abActual = z.vcompact(a,b,n128,z16);
+            var abExpect = z.vinc<ushort>(n);
             Claim.veq(abExpect, abActual);
 
-            var abcdActual = dvec.vcompact(a,b,c,d, n128, z8);
-            var abcdExpect = V0.vinc<byte>(n);
-            Claim.veq(abcdExpect, abcdActual);        
+            var abcdActual = vcompact(a,b,c,d, n128, z8);
+            var abcdExpect = vinc<byte>(n);
+            Claim.veq(abcdExpect, abcdActual);
         }
-        
+
         public void vcompact_128x16x2_128x8()
         {
             var w = n128;
             var cellmax = Max8u;
-            
-            var vsmax = V0d.vbroadcast(w, (ushort)cellmax);
-            var vtmax = V0d.vbroadcast(w,cellmax);
-            var expect = V0d.vsub(vtmax, gvec.vinc(w,z8));
 
-            var x = V0d.vsub(vsmax, gvec.vinc(w, z16));
-            var y = V0d.vsub(vsmax, gvec.vinc(w, (ushort)8));
-            var actual = dvec.vcompact(x,y,n128,z8);
-            
-            Claim.veq(expect,actual);            
+            var vsmax = vbroadcast(w, (ushort)cellmax);
+            var vtmax = vbroadcast(w,cellmax);
+            var expect = vsub(vtmax, gvec.vinc(w,z8));
+
+            var x = vsub(vsmax, gvec.vinc(w, z16));
+            var y = vsub(vsmax, gvec.vinc(w, (ushort)8));
+            var actual = vcompact(x,y,n128,z8);
+
+            Claim.veq(expect,actual);
         }
 
         public void vcompact_256x16x2_256x8()
         {
             var w = n256;
             var cellmax = Max8u;
-            
+
             var vsmax = vbroadcast(w, (ushort)cellmax);
             var vtmax = vbroadcast(w,cellmax);
-            var expect = V0d.vsub(vtmax, gvec.vinc(w,z8));
+            var expect = vsub(vtmax, gvec.vinc(w,z8));
 
-            var x = V0d.vsub(vsmax, gvec.vinc(w, z16));
-            var y = V0d.vsub(vsmax, gvec.vinc(w, (ushort)16));
-            var actual = dvec.vcompact(x,y,n256,z8);
-            
-            Claim.veq(expect,actual);            
+            var x = vsub(vsmax, gvec.vinc(w, z16));
+            var y = vsub(vsmax, gvec.vinc(w, (ushort)16));
+            var actual = vcompact(x,y,n256,z8);
+
+            Claim.veq(expect,actual);
         }
 
         public void vcompact_2x128x32u_128x16u()
-        {   
+        {
             var w = n128;
             var cellmax = Max16u;
-            
-            var vsmax = V0d.vbroadcast(w, (uint)cellmax);
-            var vtmax = V0d.vbroadcast(w,cellmax);
-            var expect = V0d.vsub(vtmax, gvec.vinc(w,z16));
 
-            var x = V0d.vsub(vsmax, gvec.vinc(w, 0u));
-            var y = V0d.vsub(vsmax, gvec.vinc(w, 4u));
-            var actual = dvec.vcompact(x,y,n128,z16);
-            
-            Claim.veq(expect,actual);            
+            var vsmax = vbroadcast(w, (uint)cellmax);
+            var vtmax = vbroadcast(w,cellmax);
+            var expect = vsub(vtmax, gvec.vinc(w,z16));
+
+            var x = vsub(vsmax, gvec.vinc(w, 0u));
+            var y = vsub(vsmax, gvec.vinc(w, 4u));
+            var actual = vcompact(x,y,n128,z16);
+
+            Claim.veq(expect,actual);
         }
 
         public void vcompact_2x256x32u_256x16u()
-        {   
+        {
             var w = n256;
             var cellmax = Max16u;
 
-            var vsmax = Vectors.vbroadcast<uint>(w, (uint)cellmax);
+            var vsmax = vbroadcast<uint>(w, (uint)cellmax);
             var vtmax = vbroadcast(w,cellmax);
-            
-            var x = V0d.vsub(vsmax, gvec.vinc(w, 0u));
-            var y = V0d.vsub(vsmax, gvec.vinc(w, 8u));
-            var v = dvec.vcompact(x,y,n256,z16);
-            var expect = V0d.vsub(vtmax, gvec.vinc(w,z16));
-            Claim.veq(expect,v);            
+
+            var x = vsub(vsmax, gvec.vinc(w, 0u));
+            var y = vsub(vsmax, gvec.vinc(w, 8u));
+            var v = vcompact(x,y,n256,z16);
+            var expect = vsub(vtmax, gvec.vinc(w,z16));
+            Claim.veq(expect,v);
         }
 
         public void vcompact_2x128x64u_128x32u()
@@ -97,7 +97,7 @@ namespace Z0
             var n = n128;
             var x0 = vparts(n, 25, 50);
             var x1 = vparts(n, 75, 10);
-            var dst = dvec.vcompact(x0,x1,n128,z32);
+            var dst = vcompact(x0,x1,n128,z32);
             var expect = vparts(n,25,50,75,10);
             Claim.veq(expect,dst);
         }

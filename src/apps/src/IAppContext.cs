@@ -14,9 +14,6 @@ namespace Z0
     {
         IAppMsgQueue MessageQueue {get;}
 
-        IShellPaths Paths
-            => ShellPaths.Default;
-
         Action<IAppMsg> MessageRelay
             => (e => term.print(e));
 

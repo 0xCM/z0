@@ -16,10 +16,4 @@ namespace Z0
     {
 
     }
-
-    public interface IArchiveReader<H,T> : IArchiveReader<H>
-        where H : struct, IArchiveReader<H,T>
-    {
-
-    }
 }

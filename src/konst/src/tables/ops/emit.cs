@@ -11,7 +11,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using FW = DataFieldWidths;
 
     partial struct Table
     {
@@ -46,7 +45,7 @@ namespace Z0
         public static WfDataFlow<Dictionary<string,E>,FilePath> emit<E>(Dictionary<string,E> src, FilePath dst)
             where E : unmanaged, Enum
         {
-            var header = text.concat("Seq". PadRight((int)FW.Sequence), SpacePipe, typeof(E).Name);
+            var header = text.concat("Seq". PadRight(10), SpacePipe, typeof(E).Name);
 
             using var writer = dst.Writer();
             writer.WriteLine(header);
@@ -68,7 +67,7 @@ namespace Z0
             where E : unmanaged, Enum
         {
             var name = typeof(E).Name;
-            var header = text.concat("Sequence". PadRight((int)FW.Sequence), SpacePipe, typeof(E).Name);
+            var header = text.concat("Sequence". PadRight(10), SpacePipe, typeof(E).Name);
             using var writer = dst.Writer();
             writer.WriteLine(header);
 
@@ -81,6 +80,6 @@ namespace Z0
         }
 
         static string FormatSequential<E>(int seq, E value)
-            => text.concat(seq.ToString().PadRight((int)FW.Sequence), SpacePipe, value.ToString());
+            => text.concat(seq.ToString().PadRight(10), SpacePipe, value.ToString());
     }
 }

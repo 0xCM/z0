@@ -7,8 +7,16 @@ namespace Z0
     using System;
 
     using static RenderPatterns;
-
     using static Flow;
+
+    [Step]
+    public class ProcessGlobalIndexStep : WfHost<ProcessGlobalIndexStep>
+    {
+        public override void Run(IWfShell shell)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     [Step]
     public readonly struct ProcessInstructionsStep : IWfStep<ProcessInstructionsStep>
@@ -18,10 +26,12 @@ namespace Z0
     }
 
     [Step]
-    public readonly struct ProcessPartFilesStep : IWfStep<ProcessPartFilesStep>
+    public class ProcessPartFilesStep : WfHost<ProcessPartFilesStep>
     {
-        public static WfStepId StepId
-            => step<ProcessPartFilesStep>();
+        public override void Run(IWfShell shell)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     [Step]
@@ -31,11 +41,10 @@ namespace Z0
             => step<EmitCallIndexStep>();
     }
 
-    [Step(typeof(CaptureResBytes))]
+    [Step]
     public readonly struct CaptureResBytesStep : IWfStep<CaptureResBytesStep>
     {
-        public static WfStepId StepId
-            => step<CaptureResBytesStep>();
+
     }
 
     [Step]
@@ -65,10 +74,12 @@ namespace Z0
     }
 
     [Step]
-    public readonly struct RecaptureStep : IWfStep<RecaptureStep>
+    public class RecaptureStep : WfHost<RecaptureStep>
     {
-        public static WfStepId StepId
-            => step<RecaptureStep>();
+        public override void Run(IWfShell shell)
+        {
+            throw new NotImplementedException();
+        }
     }
 
     [Step]
@@ -76,8 +87,6 @@ namespace Z0
     {
         public static WfStepId StepId
             => step<ProcessAsmStep>();
-
-        public static Type StepType => typeof(ProcessAsmStep);
     }
 
     [Step]
@@ -199,7 +208,7 @@ namespace Z0
             => Flow.step<EmitImageSummariesStep>();
     }
 
-    [Step(typeof(EmitResBytes))]
+    [Step]
     public readonly struct EmitResBytesStep : IWfStep<EmitResBytesStep>
     {
         public const string StepName = nameof(EmitResBytes);
@@ -209,20 +218,20 @@ namespace Z0
 
     }
 
-    [Step(typeof(ParseAsmFiles))]
+    [Step]
     public readonly struct ParseAsmFilesStep : IWfStep<ParseAsmFilesStep>
     {
         public static WfStepId StepId
             => Flow.step<ParseAsmFilesStep>();
     }
 
-    [Step(typeof(EmitDatasets))]
+    [Step]
     public readonly struct EmitDatasetsStep : IWfStep<EmitDatasetsStep>
     {
         public static WfStepId StepId => Flow.step<EmitDatasetsStep>();
     }
 
-    [Step(typeof(EmitFieldMetadata))]
+    [Step]
     public readonly struct EmitFieldMetadataStep : IWfStep<EmitFieldMetadataStep>
     {
         public const string DatasetName = "FieldMetadata";
@@ -231,21 +240,21 @@ namespace Z0
             => Flow.step<EmitFieldMetadataStep>();
     }
 
-    [Step(typeof(EmitImageContent))]
+    [Step]
     public readonly struct EmitImageContentStep : IWfStep<EmitImageContentStep>
     {
         public static WfStepId StepId
             => step<EmitImageContentStep>();
     }
 
-    [Step(typeof(EmitMetadataSets))]
+    [Step]
     public readonly struct EmitMetadataSetsStep : IWfStep<EmitMetadataSetsStep>
     {
         public static WfStepId StepId
             => step<EmitMetadataSetsStep>();
     }
 
-    [Step(typeof(EmitStepList))]
+    [Step]
     public readonly struct EmitStepListStep : IWfStep<EmitStepListStep>
     {
         public static WfStepId StepId

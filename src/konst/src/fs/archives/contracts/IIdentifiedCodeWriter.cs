@@ -6,10 +6,10 @@ namespace Z0
 {
     public interface IIdentifiedCodeWriter : IArchiveWriter
     {
-        void Write(in IdentifiedCode src, int uripad);
+        void Write(in ApiHex src, int uripad);
     }
 
-    public interface IIdentifiedCodeWriter<H> : IIdentifiedCodeWriter, IEncodedWriter<H,IdentifiedCode>
+    public interface IIdentifiedCodeWriter<H> : IIdentifiedCodeWriter, IEncodedWriter<H,ApiHex>
         where H : struct, IIdentifiedCodeWriter<H>
     {
 

@@ -5,16 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Avx2;
 
-    using static Konst;    
+    using static Konst;
     using static z;
 
     partial class dvec
-    {         
+    {
         /// <summary>
         /// Computes z[i] := x[i] >> s[i] for i = 0..15
         /// </summary>
@@ -25,7 +25,7 @@ namespace Z0
         {
             var x = z.vinflate(src, n256, z16i);
             var y = z.vinflate(counts, n256, z16i);
-            return vcompact(vsrlv(x,y),n128,z8i);
+            return z.vcompact(vsrlv(x,y),n128,z8i);
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         {
             var x = z.vinflate(src, n256, z16);
             var y = z.vinflate(counts, n256, z16);
-            return vcompact(vsrlv(x,y),n128,z8);
+            return z.vcompact(vsrlv(x,y),n128,z8);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         {
             var x = z.vinflate(src, n256, z32i);
             var y = v32u(z.vinflate(counts,n256,z32i));
-            return vcompact(ShiftRightLogicalVariable(x,y),n128,z16i);
+            return z.vcompact(ShiftRightLogicalVariable(x,y),n128,z16i);
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
         {
             var x = z.vinflate(src, n256, z32);
             var y = z.vinflate(counts, n256, z32);
-            return vcompact(ShiftRightLogicalVariable(x,y), n128, z16);
+            return z.vcompact(ShiftRightLogicalVariable(x,y), n128, z16);
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="counts">The offset vector</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vsrlv(Vector128<ulong> x, Vector128<ulong> counts)
-            => ShiftRightLogicalVariable(x, counts);       
+            => ShiftRightLogicalVariable(x, counts);
 
         /// <summary>
         /// Computes z[i] := x[i] >> s[i] for i = 0..31
@@ -115,9 +115,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vsrlv(Vector256<sbyte> src, Vector256<sbyte> counts)
         {
-            (var x0, var x1) = z.vinflate(src, n512, z16i); 
+            (var x0, var x1) = z.vinflate(src, n512, z16i);
             (var s0, var s1) = z.vinflate(counts, n512, z16i);
-            return vcompact(vsrlv(x0,s0), vsrlv(x1,s1),n256,z8i);            
+            return z.vcompact(vsrlv(x0,s0), vsrlv(x1,s1),n256,z8i);
         }
 
         /// <summary>
@@ -128,9 +128,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vsrlv(Vector256<byte> src, Vector256<byte> counts)
         {
-            (var x0, var x1) = z.vinflate(src, n512, z16); 
+            (var x0, var x1) = z.vinflate(src, n512, z16);
             (var s0, var s1) = z.vinflate(counts, n512, z16);
-            return vcompact(vsrlv(x0,s0), vsrlv(x1,s1),n256,z8);            
+            return vcompact(vsrlv(x0,s0), vsrlv(x1,s1),n256,z8);
         }
 
         /// <summary>
@@ -141,9 +141,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<short> vsrlv(Vector256<short> src, Vector256<short> counts)
         {
-            (var x0, var x1) = z.vinflate(src, n512, z32i); 
+            (var x0, var x1) = z.vinflate(src, n512, z32i);
             (var s0, var s1) = z.vinflate(counts, n512, z32i);
-            return vcompact(vsrlv(x0,s0),vsrlv(x1,s1),n256,z16i);            
+            return vcompact(vsrlv(x0,s0),vsrlv(x1,s1),n256,z16i);
         }
 
         /// <summary>
@@ -154,9 +154,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vsrlv(Vector256<ushort> src, Vector256<ushort> counts)
         {
-            (var x0, var x1) = z.vinflate(src, n512, z32); 
+            (var x0, var x1) = z.vinflate(src, n512, z32);
             (var s0, var s1) = z.vinflate(counts, n512, z32);
-            return vcompact(vsrlv(x0,s0), vsrlv(x1,s1),n256,z16);            
+            return vcompact(vsrlv(x0,s0), vsrlv(x1,s1),n256,z16);
         }
 
         /// <summary>
@@ -197,6 +197,6 @@ namespace Z0
         /// <param name="counts">The offset vector</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vsrlv(Vector256<ulong> x, Vector256<ulong> counts)
-            => ShiftRightLogicalVariable(x, counts);     
+            => ShiftRightLogicalVariable(x, counts);
     }
 }

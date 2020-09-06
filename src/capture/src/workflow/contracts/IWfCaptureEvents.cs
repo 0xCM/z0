@@ -34,7 +34,7 @@ namespace Z0.Asm
 
         CapturedHost CapturedHost => default;
 
-        HexCodeSaved HexSaved => default;
+        ApiHexSaved HexSaved => default;
 
         ExtractParseFailed ExtractParseFailed => default;
 

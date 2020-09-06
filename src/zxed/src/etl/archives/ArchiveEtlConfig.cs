@@ -15,8 +15,8 @@ namespace Z0.Xed
         public XedEtlConfig(IWfShell shell, WfSettings settings)
         {
             Settings = settings;
-            SourceRoot = shell.AppPaths.DevRoot + FolderName.Define("data") + FolderName.Define("sources") + FolderName.Define("xed");
-            TargetRoot = shell.AppPaths.LogRoot + FolderName.Define("data") + FolderName.Define("xed");
+            SourceRoot = shell.Paths.DevRoot + FolderName.Define("data") + FolderName.Define("sources") + FolderName.Define("xed");
+            TargetRoot = shell.Paths.LogRoot + FolderName.Define("data") + FolderName.Define("xed");
         }
 
         public readonly WfSettings Settings;

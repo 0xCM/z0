@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Imagine)" />
     <ProjectReference Include="$(Symbolic)" />
-    <ProjectReference Include="$(Kinds)" />
     <ProjectReference Include="$(Numeric)" />
   </ItemGroup>
 </Project>

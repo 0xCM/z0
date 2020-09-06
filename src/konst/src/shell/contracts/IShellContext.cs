@@ -12,14 +12,14 @@ namespace Z0
         CorrelationToken Ct
             => z.correlate(Control.Id());
 
-        IShellPaths AppPaths
+        IShellPaths Paths
             => Z0.ShellPaths.Default;
 
         ISettings Settings
-            => SettingValues.Load(AppPaths.AppConfigPath);
+            => SettingValues.Load(Paths.AppConfigPath);
 
         FS.FolderPath CaptureRoot
-            => FS.dir((AppPaths.LogRoot + FolderName.Define("capture/artifacts")).Name);
+            => FS.dir((Paths.LogRoot + FolderName.Define("capture/artifacts")).Name);
 
         string[] Args
              => Environment.GetCommandLineArgs();

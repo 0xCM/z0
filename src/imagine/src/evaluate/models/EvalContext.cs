@@ -35,7 +35,7 @@ namespace Z0
 
         public readonly X86ApiMember ApiCode;
 
-        public IdentifiedCode ApiBits
+        public ApiHex ApiBits
         {
             [MethodImpl(Inline)]
             get => ApiCode.Encoded;

@@ -24,13 +24,13 @@ namespace Z0
         public X86Code ParseInput
         {
             [MethodImpl(Inline)]
-            get => new X86Code(Address, Input);
+            get => new X86Code(Base, Input);
         }
 
-        public MemoryAddress Address
+        public MemoryAddress Base
         {
             [MethodImpl(Inline)]
-            get => Encoded.Address;
+            get => Encoded.Base;
         }
 
         public byte[] Data
@@ -66,8 +66,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public ParsedEncoding(MemoryAddress src, X86Code raw, X86Code parsed)
         {
-            z.insist(src, raw.Address);
-            z.insist(src, parsed.Address);
+            z.insist(src, raw.Base);
+            z.insist(src, parsed.Base);
             Input = raw;
             ParseResult = parsed;
         }
@@ -75,7 +75,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ParsedEncoding(X86Code src, X86Code parsed)
         {
-            z.insist(src.Address, parsed.Address);
+            z.insist(src.Base, parsed.Base);
             Input = src;
             ParseResult = parsed;
         }

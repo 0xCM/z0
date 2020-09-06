@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// The extracted code
         /// </summary>
-        public readonly X86MemberExtract Extracted;
+        public readonly X86ApiExtract Extracted;
 
         /// <summary>
         /// The parsed code
@@ -63,9 +63,9 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public X86MemberRefinement(X86MemberExtract extracted, int seq, ExtractTermCode term, X86Code parsed)
+        public X86MemberRefinement(X86ApiExtract extracted, int seq, ExtractTermCode term, X86Code parsed)
         {
-            z.insist(extracted.Address, parsed.Address);
+            z.insist(extracted.Address, parsed.Base);
             Extracted = extracted;
             Sequence = seq;
             TermCode = term;
@@ -75,7 +75,7 @@ namespace Z0
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => Encoded.Address;
+            get => Encoded.Base;
         }
 
         /// <summary>

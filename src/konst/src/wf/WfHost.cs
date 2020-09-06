@@ -13,6 +13,8 @@ namespace Z0
     public abstract class WfHost<H> : IWfHost<H>
         where H : WfHost<H>, new()
     {
+        public static H Host => new H();
+
         public WfStepId Id {get;}
 
         public Type Type {get;}
@@ -27,52 +29,16 @@ namespace Z0
             Name = Type.Name;
         }
 
-        public virtual void Run() {}
+        public virtual void Run(IWfShell shell) {}
 
         public virtual string Format()
             => Id.Format();
     }
 
-    public abstract class WfHost<H,C> : WfHost<H>, IWfHost<H,C>
-        where H : WfHost<H,C>, new()
-        where C : struct
-    {
-        C _Config;
-
-        [MethodImpl(Inline)]
-        protected WfHost()
-            : base()
-        {
-            _Config = default;
-        }
-
-        [MethodImpl(Inline)]
-        protected WfHost(in C config)
-            : base()
-        {
-            _Config = config;
-        }
-
-        public ref readonly C Config
-        {
-            [MethodImpl(Inline)]
-            get => ref _Config;
-        }
-
-        [MethodImpl(Inline)]
-        public void Configure(in C config)
-        {
-            _Config = config;
-        }
-    }
-
-    public abstract class WfHost<H,C,S,T> : WfHost<H,C>
-        where H : WfHost<H,C,S,T>, new()
-        where C : struct
+    public abstract class WfHost<H,S> : WfHost<H>, IWfHost<H,S>
+        where H : WfHost<H,S>, new()
         where S : struct
-        where T : struct
     {
-
         [MethodImpl(Inline)]
         protected WfHost()
             : base()
@@ -80,16 +46,9 @@ namespace Z0
 
         }
 
-        [MethodImpl(Inline)]
-        protected WfHost(in C config)
-            : base(config)
-        {
+        public override void Run(IWfShell shell)
+            => Run((IWfShell<S>)shell, new S());
 
-        }
-
-        public override void Run()
-            => Run(new S());
-
-        public abstract T Run(in S src);
+        public virtual void Run(IWfShell shell, in S state) {}
     }
 }

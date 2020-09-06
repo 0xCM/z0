@@ -19,7 +19,7 @@ namespace Z0
         [Op]
         public static ToolLogger logger(IWfShell wf, string name)
         {
-            var dst = wf.AppPaths.AppDataRoot + FileName.define(name, FileExtensions.StatusLog);
+            var dst = wf.Paths.AppDataRoot + FileName.define(name, FileExtensions.StatusLog);
             return new ToolLogger(wf,dst);
         }
     }

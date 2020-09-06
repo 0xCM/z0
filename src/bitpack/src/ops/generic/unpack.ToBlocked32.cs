@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class BitPack
     {
@@ -23,7 +23,7 @@ namespace Z0
         {
             var blockcount = dst.BlockCount;
             var bytes = src.Bytes();
-            ref readonly var bitsrc = ref head(bytes);
+            ref readonly var bitsrc = ref first(bytes);
 
             for(var block=0; block < blockcount; block++)
                 unpack(skip(bitsrc, block), dst.Block(block));
@@ -67,6 +67,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly SpanBlock256<uint> unpack<T>(Span<T> src, in SpanBlock256<uint> dst, int block)
             where T : unmanaged
-                => ref unpack(src.ReadOnly(),dst,block);
+                => ref unpack(src.ReadOnly(), dst, block);
     }
 }

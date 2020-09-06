@@ -13,21 +13,21 @@ namespace Z0
     public readonly struct BitPop
     {
         public static Vector256<ulong> K1
-            => V0d.vbroadcast(n256, MaskLiterals.Even64);
+            => z.vbroadcast(n256, MaskLiterals.Even64);
 
         public static Vector256<ulong> K2
-            => V0d.vbroadcast(n256, MaskLiterals.Even64x2);
+            => z.vbroadcast(n256, MaskLiterals.Even64x2);
 
         public static Vector256<ulong> K4
-            => V0d.vbroadcast(n256, MaskLiterals.Lsb64x8x4);
+            => z.vbroadcast(n256, MaskLiterals.Lsb64x8x4);
 
         public static Vector128<ulong> v128K1
-            => V0d.vbroadcast(n128, MaskLiterals.Even64);
+            => z.vbroadcast(n128, MaskLiterals.Even64);
 
         public static Vector128<ulong> v128K2
-            => V0d.vbroadcast(n128, MaskLiterals.Even64x2);
+            => z.vbroadcast(n128, MaskLiterals.Even64x2);
 
         public static Vector128<ulong> v128K4
-            => V0d.vbroadcast(n128, MaskLiterals.Lsb64x8x4);
+            => z.vbroadcast(n128, MaskLiterals.Lsb64x8x4);
     }
 }

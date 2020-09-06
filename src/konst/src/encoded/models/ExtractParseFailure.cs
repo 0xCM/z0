@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The data over which the parse failure occurred
         /// </summary>
-        public readonly X86MemberExtract Data;
+        public readonly X86ApiExtract Data;
 
         /// <summary>
         /// The extracted member sequence
@@ -30,7 +30,7 @@ namespace Z0
         public readonly ExtractTermCode TermCode;
 
         [MethodImpl(Inline)]
-        public ExtractParseFailure(X86MemberExtract data, int seq, ExtractTermCode term)
+        public ExtractParseFailure(X86ApiExtract data, int seq, ExtractTermCode term)
         {
             Data = data;
             Sequence = seq;
@@ -41,6 +41,6 @@ namespace Z0
             => Data.Member.OpUri;
 
         public static ExtractParseFailure Empty
-            => new ExtractParseFailure(X86MemberExtract.Empty, 0, ExtractTermCode.None);
+            => new ExtractParseFailure(X86ApiExtract.Empty, 0, ExtractTermCode.None);
     }
 }
