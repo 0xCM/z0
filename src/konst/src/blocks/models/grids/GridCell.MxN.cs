@@ -16,8 +16,7 @@ namespace Z0
         where T : struct
         where M : unmanaged
         where N : unmanaged
-    {        
-
+    {
         [MethodImpl(Inline)]
         public static implicit operator T(in GridCell<T,M,N> src)
             => src.Data;
@@ -28,7 +27,6 @@ namespace Z0
 
         public readonly N Col;
 
-
         [MethodImpl(Inline)]
         public GridCell(T data, M row, N col)
         {
@@ -36,5 +34,5 @@ namespace Z0
             Col = col;
             Data = data;
         }
-    }    
+    }
 }

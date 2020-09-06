@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
-    using static Memories;
+    using static Konst;
+    using static z;
 
     partial class BitFields
-    {            
+    {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T deposit<T>(in BitFieldSegment seg, in T src, ref T dst)
             where T : unmanaged
@@ -21,7 +21,8 @@ namespace Z0
         public static void deposit<T>(in BitFieldSpec spec, T src, Span<T> dst)
             where T : unmanaged
         {
-            for(var i=0; i<spec.FieldCount; i++)
+            var count = spec.FieldCount;
+            for(var i=0u; i<count; i++)
                 seek(dst,i) = extract(skip(spec.Segments,i), src);
         }
 
@@ -29,8 +30,9 @@ namespace Z0
         public static ref T deposit<T>(in BitFieldSpec spec, ReadOnlySpan<T> src, ref T dst)
             where T : unmanaged
         {
-            for(var i=0; i<spec.FieldCount; i++)
-                deposit(skip(spec.Segments,i), skip(src,i),ref dst);                
+            var count = spec.FieldCount;
+            for(var i=0u; i<count; i++)
+                deposit(skip(spec.Segments,i), skip(src,i),ref dst);
             return ref dst;
         }
 
@@ -40,14 +42,14 @@ namespace Z0
                 => field.Deposit(src, dst);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public ref T deposit<T>(in BitField<T> field, in BitFieldSegment seg, in T src, ref T dst) 
+        public ref T deposit<T>(in BitField<T> field, in BitFieldSegment seg, in T src, ref T dst)
             where T : unmanaged
                 => ref field.Deposit(seg, src, ref dst);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public ref T deposit<T>(in BitField<T> field, ReadOnlySpan<T> src, ref T dst)
             where T : unmanaged
-                => ref field.Deposit(src, ref dst);        
+                => ref field.Deposit(src, ref dst);
 
         [MethodImpl(Inline)]
         public static void deposit<E,W,T>(in BitFieldSpec<E,W> spec, T src, Span<T> dst)
@@ -55,7 +57,8 @@ namespace Z0
             where W : unmanaged, Enum
             where T : unmanaged
         {
-            for(var i=0; i<spec.Segments.Length; i++)
+            var len = spec.Segments.Length;
+            for(var i=0u; i<len; i++)
                 seek(dst,i) = extract(skip(spec.Segments,i), src);
         }
 
@@ -65,7 +68,8 @@ namespace Z0
             where W : unmanaged, Enum
             where T : unmanaged
         {
-            for(var i=0; i<field.Spec.Segments.Length; i++)
+            var len = field.Spec.Segments.Length;
+            for(var i=0u; i<len; i++)
                 seek(dst,i) = extract(skip(field.Spec.Segments,i), src);
         }
 
@@ -74,7 +78,7 @@ namespace Z0
             where S : IScalarBitField<T>
             where T : unmanaged
         {
-            for(var i=0; i<spec.FieldCount; i++)
+            for(var i=0u; i<spec.FieldCount; i++)
                 seek(dst,i) = extract<S,T>(skip(spec.Segments,i), src);
         }
 

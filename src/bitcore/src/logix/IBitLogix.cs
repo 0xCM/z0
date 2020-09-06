@@ -11,17 +11,17 @@ namespace Z0
     using BLK = BinaryLogicKind;
     using TLK = TernaryBitLogic;
 
-    public interface IBitLogix : IService
+    public interface IBitLogix
     {
-        UnaryOp<bit> Lookup(ULK kind);   
+        UnaryOp<bit> Lookup(ULK kind);
 
         BinaryOp<bit> Lookup(BLK kind);
 
         TernaryOp<bit> Lookup(TLK kind);
 
-        bit Evaluate(ULK kind, bit a); 
-        
-        bit Evaluate(BLK kind, bit a, bit b);    
+        bit Evaluate(ULK kind, bit a);
+
+        bit Evaluate(BLK kind, bit a, bit b);
 
         bit Evaluate<F>(bit a, bit b, F kind = default)
             where F : unmanaged, IBitLogicKind;
@@ -31,7 +31,7 @@ namespace Z0
         ReadOnlySpan<ULK> UnaryOpKinds {get;}
 
         ReadOnlySpan<BLK> BinaryOpKinds {get;}
-        
+
         ReadOnlySpan<TLK> TernaryOpKinds {get;}
     }
 }

@@ -11,24 +11,24 @@ namespace Z0
 
     public interface ICheckSF : ITestService, TCheckVectors
     {
-        bool ExcludeZero => false;        
+        bool ExcludeZero => false;
     }
 
     public readonly struct CheckSF : ICheckSF
     {
         [MethodImpl(Inline)]
-        public static ICheckSF Create(ITestContext context, bool xzero = false)
-            => new CheckSF(context, xzero);
+        public static ICheckSF Create(ITestContext context, bool xz = false)
+            => new CheckSF(context, xz);
 
         public ITestContext Context {get;}
 
         public bool ExcludeZero {get;}
 
         [MethodImpl(Inline)]
-        public CheckSF(ITestContext context, bool xzero = false)
+        public CheckSF(ITestContext context, bool xz = false)
         {
             Context= context;
-            ExcludeZero = xzero;
+            ExcludeZero = xz;
         }
     }
 }

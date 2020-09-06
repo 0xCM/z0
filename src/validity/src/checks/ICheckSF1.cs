@@ -17,12 +17,12 @@ namespace Z0
         public ITestContext Context {get;}
 
         public bool ExcludeZero {get;}
-        
+
         [MethodImpl(Inline)]
-        public CheckUnaryOpSF(ITestContext context, bool xzero = false)
+        public CheckUnaryOpSF(ITestContext context, bool xz = false)
         {
             Context = context;
-            ExcludeZero = xzero;           
+            ExcludeZero = xz;
         }
     }
 
@@ -35,7 +35,7 @@ namespace Z0
             where G : IFunc<T,R>
         {
             var casename = OpUriBuilder.TestCase(Context.HostType, $"{g.Id}_span");
-            var succeeded = true;       
+            var succeeded = true;
             var clock = counter();
 
             T next_x()
@@ -71,11 +71,11 @@ namespace Z0
             var clock = counter();
 
             var lhs = (ExcludeZero ? Random.NonZeroSpan<T>(count) : Random.Span<T>(count)).ReadOnly();
-            ref readonly var leftIn = ref first(lhs);                        
-            
+            ref readonly var leftIn = ref first(lhs);
+
             var dst = span<R>(count);
             ref var target = ref first(dst);
-            
+
             clock.Start();
             try
             {
@@ -93,5 +93,5 @@ namespace Z0
                 Context.ReportCaseResult(casename, succeeded, clock);
             }
         }
-    }    
+    }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a generic bitvector over a primal cell
@@ -28,7 +28,7 @@ namespace Z0
             => src.Data;
 
         /// <summary>
-        /// Computes the bitwias AND between the operands
+        /// Computes the bitwise AND between the operands
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -37,7 +37,7 @@ namespace Z0
             => BitVector.and(x,y);
 
         /// <summary>
-        /// Computes the bitwias AND between the operands
+        /// Computes the bitwise AND between the operands
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -236,7 +236,7 @@ namespace Z0
         public readonly int Width
         {
             [MethodImpl(Inline)]
-            get => bitsize<T>();
+            get => (int)bitsize<T>();
         }
 
         /// <summary>

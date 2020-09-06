@@ -3,10 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
 
     using TC = System.TypeCode;
@@ -18,32 +18,28 @@ namespace Z0
         public static ref readonly TypeCodes init()
             => ref Parts.Konst.Resolved.Codes;
 
-        // [MethodImpl(Inline), Op]
-        // public static TypeCodes init()
-        //     => new TypeCodes(0);
-
         [MethodImpl(Inline), Op]
         public static TypeCodeIndex index(in TypeCodes src)
             => new TypeCodeIndex(src.Types);
 
         [MethodImpl(Inline), Op]
-        public static unsafe TypeCode lookup(in TypeCodes src, byte index)        
+        public static unsafe TypeCode lookup(in TypeCodes src, byte index)
         {
             var address = z.address(src);
             return (TypeCode)(*(address + index).Pointer<byte>());
         }
 
         [MethodImpl(Inline), Op]
-        public static ref readonly Type type(in TypeCodes src, TypeCode tc)        
+        public static ref readonly Type type(in TypeCodes src, TypeCode tc)
             => ref src[tc];
 
         [MethodImpl(Inline), Op]
         public static ref readonly Type type(in TypeCodeIndex src, TypeCode tc)
-            => ref src[tc];        
+            => ref src[tc];
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public Type type<T>()
-            => type_u<T>();        
+            => type_u<T>();
 
         public ref readonly Type this[TypeCode tc]
         {
@@ -55,7 +51,7 @@ namespace Z0
         /// 0
         /// </summary>
         readonly PrimalKindId @null;
-        
+
         /// <summary>
         /// 1
         /// </summary>
@@ -154,7 +150,7 @@ namespace Z0
             @null = TypeCode.Empty.ToKind();
             obj = TypeCode.Object.ToKind();
             dbnull = TypeCode.DBNull.ToKind();
-            u1 = TypeCode.Boolean.ToKind();                   
+            u1 = TypeCode.Boolean.ToKind();
             i8 = TypeCode.SByte.ToKind();
             u8 = TypeCode.Byte.ToKind();
             i16 = TypeCode.Int16.ToKind();
@@ -164,15 +160,15 @@ namespace Z0
             i64 = TypeCode.Int64.ToKind();
             u64 = TypeCode.UInt64.ToKind();
             f32 = TypeCode.Single.ToKind();
-            f64 = TypeCode.Double.ToKind();    
-            f128 = TypeCode.Decimal.ToKind();       
-            c16 = TypeCode.Char.ToKind(); 
+            f64 = TypeCode.Double.ToKind();
+            f128 = TypeCode.Decimal.ToKind();
+            c16 = TypeCode.Char.ToKind();
             dt = TypeCode.DateTime.ToKind();
-            _ = (PrimalKindId)17;      
+            _ = (PrimalKindId)17;
             s = TypeCode.String.ToKind();
             Types = CodedTypes;
         }
-        
+
         internal static Type[] CodedTypes
         {
             get
@@ -197,9 +193,9 @@ namespace Z0
                 typeof(DateTime),   //16
                 typeof(void),       //17
                 typeof(string),     //18
-                }; 
-            }       
-        }                            
+                };
+            }
+        }
 
 
         [MethodImpl(Inline)]
@@ -262,6 +258,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         Type indexed(TC code)
-            => Types[(uint)code];    
+            => Types[(uint)code];
     }
 }

@@ -11,27 +11,9 @@ namespace Z0
     /// Characterizes an in-memory table store
     /// </summary>
     [SuppressUnmanagedCodeSecurity]
-    public interface ITableSpan
+    public interface ITableSpan : ISpanBuffer
     {
-        /// <summary>
-        /// The number of elements covered
-        /// </summary>
-        Count32 Count {get;}
 
-        /// <summary>
-        /// A bow to the ubiquitous and unreasonable devotion to *signed* 32-bit integers
-        /// </summary>
-        int Length {get;}
-
-        /// <summary>
-        /// Specifies whether the data is missing
-        /// </summary>
-        bool IsEmpty {get;}
-
-        /// <summary>
-        /// Specifies whether at least one cell is populated
-        /// </summary>
-        bool IsNonEmpty {get;}
     }
 
     /// <summary>
@@ -39,43 +21,16 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The table type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface ITableSpan<T> : ITableSpan
+    public interface ITableSpan<T> : ITableSpan, ISpanBuffer<T>
         where T : struct
     {
-        T[] Storage {get;}
-
-        int ITableSpan.Length
-            => Storage?.Length ?? 0;
-
-        Count32 ITableSpan.Count
-            => Storage?.Length ?? 0;
-
-        Span<T> Edit
-            => Storage;
-
-        ReadOnlySpan<T> View
-            => Storage;
-
-        TableSpan<T> Table
-            => Storage;
-
-        ref T this[long index]
-            => ref Storage[index];
-
-        ref T this[ulong index]
-            => ref Storage[index];
-
-        bool ITableSpan.IsEmpty
-            => Length == 0;
-
-        bool ITableSpan.IsNonEmpty
-            => Length != 0;
     }
 
-    public interface ITableSpan<H,T> : ITableSpan<T>
+    [SuppressUnmanagedCodeSecurity]
+    public interface ITableSpan<H,T> : ITableSpan<T>, ISpanBuffer<H,T>
         where H : struct, ITableSpan<H,T>
         where T : struct
     {
-        H Refresh(T[] src);
+
     }
 }

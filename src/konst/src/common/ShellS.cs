@@ -25,7 +25,7 @@ namespace Z0
         }
 
         protected Shell(IShellContext context)
-            : this(context, Flow.sink())
+            : this(context, new TermEventSink())
         {
 
         }

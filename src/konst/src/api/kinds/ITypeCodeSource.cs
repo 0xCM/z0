@@ -10,17 +10,8 @@ namespace Z0
     public interface ITypeCodeSource
     {
         PartId Owner {get;}
-        
+
         ulong[] AssignedCodes {get;}
     }
-    
-    public interface ITypeCodeSource<S> : ITypeCodeSource
-        where S : struct, ITypeCodeSource<S>
-    {
-        PartId ITypeCodeSource.Owner
-            => typeof(S).Assembly.Id();     
 
-        ulong[] ITypeCodeSource.AssignedCodes 
-            => typeof(S).GetFields().Where(f => f.IsLiteral).Select(f => (ulong)f.GetRawConstantValue()).ToArray();
-    }
 }

@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
-    using static Konst;    
+
+    using static Konst;
 
    public readonly struct BitFieldSpec<E,W> : ITextual<BitFieldSpec<E,W>>
         where E : unmanaged, Enum
@@ -18,25 +18,25 @@ namespace Z0
         /// </summary>
         readonly BitFieldSpec Untyped;
 
-        public int TotalWidth {get;}
+        public uint TotalWidth {get;}
 
-        public ReadOnlySpan<BitFieldSegment> Segments 
+        public ReadOnlySpan<BitFieldSegment> Segments
         {
             [MethodImpl(Inline)]
             get => Untyped.Segments;
         }
 
         [MethodImpl(Inline)]
-        internal BitFieldSpec(in BitFieldSpec untyped, int bitcount)
+        internal BitFieldSpec(in BitFieldSpec untyped, uint bitcount)
         {
-            this.TotalWidth = bitcount;
-            this.Untyped = untyped;
-        }        
+            TotalWidth = bitcount;
+            Untyped = untyped;
+        }
 
         public string Format()
             => BitFields.format(Segments);
 
         public override string ToString()
-            => Format();                
+            => Format();
     }
 }

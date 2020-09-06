@@ -3,20 +3,20 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using K = BitFunctionKind;
     using I = IBitFunctionKind;
 
     /// <summary>
-    /// Characteries a bitfunction classifier
+    /// Characterizes a bitfunction classifier
     /// </summary>
     public interface IBitFunctionKind : IOpKind, IOpKind<K>
     {
         BitFunctionKind Kind {get;}
 
-        OpKindId IOpKind.KindId 
+        OpKindId IOpKind.KindId
             => (OpKindId)Kind;
-    }    
+    }
 
     /// <summary>
     /// Characterizes a reified bitfunction classifier
@@ -25,10 +25,10 @@ namespace Z0
     public interface IBitFunctionKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        OpKindId IOpKind.KindId 
-            => default(F).KindId;                
+        OpKindId IOpKind.KindId
+            => default(F).KindId;
     }
-    
+
     /// <summary>
     /// Characterizes a kind-parametric and numeric-parametric bitfunction operation classifier
     /// </summary>
@@ -37,7 +37,7 @@ namespace Z0
     public interface IBitFunctionKind<F,T> : IBitFunctionKind<F>
         where F : unmanaged, I
     {
-        K I.Kind 
+        K I.Kind
             => default(F).Kind;
     }
 }

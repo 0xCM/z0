@@ -8,7 +8,7 @@ namespace Z0
     using I = IArithmeticKind;
 
     /// <summary>
-    /// Characteries an arithmetic function classifier
+    /// Characterizes an arithmetic function classifier
     /// </summary>
     public interface IArithmeticKind : IOpKind, IOpKind<K>
     {
@@ -17,9 +17,9 @@ namespace Z0
         /// </summary>
         K Kind {get;}
 
-        OpKindId IOpKind.KindId 
+        OpKindId IOpKind.KindId
             => (OpKindId)Kind;
-    }    
+    }
 
     /// <summary>
     /// Characterizes a reified arithmetic function classifier
@@ -28,10 +28,10 @@ namespace Z0
     public interface IArithmeticKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        OpKindId IOpKind.KindId 
-            => default(F).KindId;                
+        OpKindId IOpKind.KindId
+            => default(F).KindId;
     }
-    
+
     /// <summary>
     /// Characterizes a kind-parametric and numeric-parametric arithmetic operation classifier
     /// </summary>
@@ -40,13 +40,13 @@ namespace Z0
     public interface IArithmeticKind<F,T> : IArithmeticKind<F>
         where F : unmanaged, I
     {
-        K I.Kind 
+        K I.Kind
             => default(F).Kind;
 
         /// <summary>
         /// The parametrically-identified numeric kind
         /// </summary>
-        NumericKind NumericKind 
+        NumericKind NumericKind
             => NumericKinds.kind<T>();
     }
 }

@@ -19,10 +19,10 @@ namespace Z0
         public bool ExcludeZero {get;}
 
         [MethodImpl(Inline)]
-        public CheckTernaryOpSF(ITestContext context, bool xzero = false)
+        public CheckTernaryOpSF(ITestContext context, bool xz = false)
         {
             Context = context;
-            ExcludeZero = xzero;                                   
+            ExcludeZero = xz;
         }
     }
 
@@ -37,9 +37,9 @@ namespace Z0
         public CheckTernaryPredSF(ITestContext context, bool xzero = false)
         {
             Context = context;
-            ExcludeZero = xzero;            
+            ExcludeZero = xzero;
         }
-    }    
+    }
 
     public interface ICheckSF<T0,T1,T2,R> : ICheckSF
         where T0 : unmanaged
@@ -52,7 +52,7 @@ namespace Z0
             where G : IFunc<T0,T1,T2,R>
         {
             var casename = Identify.TestCaseText(Context.HostType, g);
-            var succeeded = true;       
+            var succeeded = true;
             var clock = counter();
 
             T0 next_x()
@@ -89,7 +89,7 @@ namespace Z0
 
         void CheckSpanMatch<F,G>(F f, G g)
             where F : IFunc<T0,T1,T2,R>
-            where G : IFunc<T0,T1,T2,R>        
+            where G : IFunc<T0,T1,T2,R>
         {
             var casename = OpUriBuilder.TestCase(Context.HostType, $"{g.Id}_span");
             var succeeded = true;
@@ -97,8 +97,8 @@ namespace Z0
             var clock = counter();
 
             var inA = (ExcludeZero ? Random.NonZeroSpan<T0>(count) : Random.Span<T0>(count)).ReadOnly();
-            ref readonly var inATarget = ref first(inA);            
-            
+            ref readonly var inATarget = ref first(inA);
+
             var inB = (ExcludeZero ? Random.NonZeroSpan<T1>(count) : Random.Span<T1>(count)).ReadOnly();
             ref readonly var inBTarget = ref first(inB);
 
@@ -107,11 +107,11 @@ namespace Z0
 
             var dst = Spans.alloc<R>(count);
             ref var target = ref first(dst);
-            
+
             clock.Start();
 
             try
-            {                
+            {
                 apply(g, inA, inB, inC, dst);
                 for(var i=0u; i<count; i++)
                     Eq(f.Invoke(skip(inATarget, i), skip(inBTarget, i), skip(inCTarget, i)), skip(target, i));
@@ -125,6 +125,6 @@ namespace Z0
             {
                 Context.ReportCaseResult(casename, succeeded, clock);
             }
-        }   
-    }    
+        }
+    }
 }

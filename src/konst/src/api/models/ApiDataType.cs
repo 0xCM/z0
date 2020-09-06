@@ -10,11 +10,12 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
+    using static z;
 
     public readonly struct ApiDataType : IApiHost, IComparable<ApiDataType>
     {
         public static HashSet<string> Ignore
-            => z.hashset("ToString","GetHashCode", "Equals", "ToString");
+            => hashset("ToString","GetHashCode", "Equals", "ToString");
 
         public PartId PartId {get;}
 
@@ -45,7 +46,7 @@ namespace Z0
             Uri = uri;
         }
 
-        public MethodInfo[] HostedMethods
+        public MethodInfo[] Methods
             => HostType.DeclaredMethods();
 
         [MethodImpl(Inline)]

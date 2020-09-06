@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
 
     public readonly ref struct FixedBits<E,T,W>
         where E : unmanaged, Enum
@@ -30,7 +30,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data;
         }
-        
+
         public ref T this[int cell]
         {
             [MethodImpl(Inline)]
@@ -41,11 +41,11 @@ namespace Z0
         public T BitSlice(byte start, byte length)
             => Data.BitSlice(start,length);
 
-        public bit this[ByteSize offset, byte pos]        
+        public bit this[ByteSize offset, byte pos]
         {
             [MethodImpl(Inline)]
             get => Data[offset,pos];
-            
+
             [MethodImpl(Inline)]
             set => Data[offset,pos] = value;
         }

@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ApiHostQuery Create(IApiHost host)
             => new ApiHostQuery(host);
-        
+
         [MethodImpl(Inline)]
         public ApiHostQuery(IApiHost host)
             => Source = host;
@@ -32,15 +32,15 @@ namespace Z0
         /// <summary>
         /// All hosted methods
         /// </summary>
-        public MethodInfo[] Hosted 
-            => Source.HostedMethods;
+        public MethodInfo[] Hosted
+            => Source.Methods;
 
         /// <summary>
         /// All hosted generic methods
         /// </summary>
         public MethodInfo[] Generic
             => Hosted.OpenGeneric();
-               
+
         /// <summary>
         /// All hosted non-generic methods
         /// </summary>
@@ -195,6 +195,6 @@ namespace Z0
         /// <typeparam name="T">The cell type to match</typeparam>
         public MethodInfo[] Vectorized<T>(W512 w, string name)
             where T : unmanaged
-                => Vectorized<T>(w).WithName(name);            
+                => Vectorized<T>(w).WithName(name);
     }
 }

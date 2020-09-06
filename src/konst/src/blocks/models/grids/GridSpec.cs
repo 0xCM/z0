@@ -3,14 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
 
     /// <summary>
-    /// Characterizes the memory layout of a 2-dimenional grid
+    /// Characterizes the memory layout of a 2-d grid
     /// </summary>
     public readonly struct GridSpec
     {
@@ -18,7 +18,7 @@ namespace Z0
         /// The number of grid rows
         /// </summary>
         public readonly ushort RowCount;
-        
+
         /// <summary>
         /// The number of grid columns
         /// </summary>
@@ -65,10 +65,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bool Equals(GridSpec rhs)
-            => RowCount == rhs.RowCount && ColCount == rhs.ColCount 
-            && CellWidth == rhs.CellWidth && StoreWidth == rhs.StoreWidth 
+            => RowCount == rhs.RowCount && ColCount == rhs.ColCount
+            && CellWidth == rhs.CellWidth && StoreWidth == rhs.StoreWidth
             && StoreSize == rhs.StoreSize;
-        
+
         public override int GetHashCode()
             => HashCode.Combine(RowCount, ColCount, CellWidth, StoreWidth, CellCount);
 
@@ -76,7 +76,7 @@ namespace Z0
             => rhs is GridSpec x && Equals(x);
 
         public string Format()
-            => $"{RowCount}x{ColCount}x{CellWidth}"; 
+            => $"{RowCount}x{ColCount}x{CellWidth}";
 
         public override string ToString()
             => Format();

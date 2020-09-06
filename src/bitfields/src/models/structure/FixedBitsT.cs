@@ -8,14 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public readonly ref struct FixedBits<T>
         where T : unmanaged
     {
-        public readonly int BitCount;
+        public readonly uint BitCount;
 
-        internal readonly int CellWidth;
+        readonly byte CellWidth;
 
         internal readonly int CellCount;
 
@@ -29,11 +29,11 @@ namespace Z0
             get => Data.Bytes;
         }
 
-        internal FixedBits(SpanBlock64<T> src, int bitcount)
+        internal FixedBits(SpanBlock64<T> src, uint bitcount)
         {
             this.Data = src;
             this.BitCount = bitcount;
-            this.CellWidth = bitsize<T>();
+            this.CellWidth = (byte)bitsize<T>();
             this.BlockCount = src.BlockCount;
             this.CellCount = src.CellCount;
         }

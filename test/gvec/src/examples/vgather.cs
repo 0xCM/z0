@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.Intrinsics;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static z;
 
@@ -16,7 +16,7 @@ namespace Z0
         public void vgather_128()
         {
             const int count = Pow2.T09;
-            
+
             Span<uint> data32 = new uint[count];
             for(var i=0; i<data32.Length; i++)
                 data32[i] = (uint)i;
@@ -43,26 +43,26 @@ namespace Z0
 
             var i2x8 = Vectors.vparts(n128, 8, 16);
             var v2x8 = vgather(n128, in src64, i2x8);
-            Claim.veq(i2x8, v2x8);            
+            Claim.veq(i2x8, v2x8);
 
             var i2x64 = Vectors.vparts(n128, 64, 128);
             var v2x64 = vgather(n128, in src64, i2x64);
-            Claim.veq(i2x64, v2x64);            
+            Claim.veq(i2x64, v2x64);
 
             var i2x250 = Vectors.vparts(n128, 250, 500);
             var v2x250 = vgather(n128, in src64, i2x250);
-            Claim.veq(i2x250, v2x250);            
+            Claim.veq(i2x250, v2x250);
 
             var i2x2 = Vectors.vparts(n256, 2, 4, 8, 16);
             var v2x2 = vgather(n128, in src32, i2x2);
-            Claim.veq(dvec.vcompact(i2x2, n128, z32i), v2x2);            
+            Claim.veq(dvec.vcompact(i2x2, n128, z32i), v2x2);
 
             var i3x3 = Vectors.vparts(n256, 3, 6, 12, 24);
-            var v3x3 = vgather(n128, in src32, i3x3); 
+            var v3x3 = vgather(n128, in src32, i3x3);
             Claim.veq(dvec.vcompact(i3x3, n128, z32i), v3x3);
 
             var i3_3 = Vectors.vparts(n256, 3, 6, 9, 12);
-            var v3_3 = vgather(n128, in src32, i3_3); 
+            var v3_3 = vgather(n128, in src32, i3_3);
             Claim.veq(dvec.vcompact(i3_3, n128, z32i), v3_3);
 
             var i4x2 = Vectors.vparts(n256, 4, 8, 16, 32);
@@ -95,7 +95,7 @@ namespace Z0
 
             var i4x128 = Vectors.vpartsi(n256, 0, 128 - 1, 128*2 - 1, 128*4 - 1);
             var v4x128 = vgather(n128, in src32, v512idx);
-            Claim.veq(dvec.vcompact(i4x128, n128, z32i), v32i(v4x128));            
+            Claim.veq(dvec.vcompact(i4x128, n128, z32i), v32i(v4x128));
         }
 
         public void vgather_256()
@@ -103,7 +103,7 @@ namespace Z0
             Span<uint> data = new uint[Pow2.T09];
             for(var i=0; i<data.Length; i++)
                 data[i] = (uint)i;
-            ref var src = ref first(data);                
+            ref var src = ref first(data);
 
             //[0,3,7,15,31,63,127,255]
             var v256idx = Vectors.vparts(n256,Pow2.T00 - 1, Pow2.T02 - 1, Pow2.T03 - 1, Pow2.T04 - 1, Pow2.T05 - 1, Pow2.T06 - 1, Pow2.T07 - 1, Pow2.T08 - 1);
@@ -117,17 +117,17 @@ namespace Z0
         }
 
         public void vgather_blocks()
-        {                
+        {
             const int BlockLength = 4;
             const int CellCount = 512;
             const int BlockCount = CellCount / BlockLength;
 
             var w = n128;
             var t = z32;
-            var A = Blocks.alloc(w,BlockCount, t);                
+            var A = Blocks.alloc(w,BlockCount, t);
             var B = Blocks.alloc(w,BlockCount, t);
 
-            var pattern0 = VMask.vlsb(w,n2,n1,t);
+            var pattern0 = BitMasks.vlsb(w,n2,n1,t);
             var pattern1 = VMask.vmsb(w,n2,n1,t);
 
             for(var block = 0; block < BlockCount; block++)
@@ -146,11 +146,11 @@ namespace Z0
                 var i1 = i0 + 1;
                 var i2 = i1 + 1;
                 var i3 = i2 + 1;
-                
+
                 var indices = Vectors.vparts(w,i0,i1,i2,i3);
                 var result = vgather(w, in A.Head, indices);
                 var expect = gmath.even(block) ? pattern0 : pattern1;
-                Claim.veq(result,expect);                
+                Claim.veq(result,expect);
             }
         }
 
@@ -182,7 +182,7 @@ namespace Z0
             0x7f,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
             0xff,0x00,0x00,0x00,0x00,0x00,0x00,0x00
         };
- 
+
         //[0, 7, 15, 31, 63, 127, 255, 511]
         static ReadOnlySpan<byte> VGather256x32x512IndexData => new byte[]{
             0x00,0x00,0x00,0x00,
@@ -194,7 +194,7 @@ namespace Z0
             0xff,0x00,0x00,0x00,
             0xff,0x01,0x00,0x00
         };
-        
+
         //[0, 4, 8, 12, 16, 20, 24, 28]
         static ReadOnlySpan<byte> VGather256x32x4IndexData => new byte[]{
             0,0x00,0x00,0x00,

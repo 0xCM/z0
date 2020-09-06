@@ -10,7 +10,7 @@ namespace Z0
     using NK = NumericKind;
 
     /// <summary>
-    /// Clasifies concrete intrinsic vectors of total width w over components of width t and sign indicator s where:
+    /// Classifies concrete intrinsic vectors of total width w over components of width t and sign indicator s where:
     /// w = kind[0..15]
     /// t = kind[16..23]
     /// s = {u | i | f} as determined by kind[30..31]
@@ -54,7 +54,7 @@ namespace Z0
         /// A 128-bit vector covering 2 64-bit unsigned segments
         /// </summary>
         v128x64u = W128 | U64,
-        
+
         /// <summary>
         /// A 128-bit vector covering 2 64-bit signed segments
         /// </summary>
@@ -172,32 +172,32 @@ namespace Z0
 
         /// <summary>
         /// Redeclaration of <see cref="NK.Signed"/>
-        /// </summary>        
+        /// </summary>
         Signed = NK.Signed,
 
         /// <summary>
         /// Redeclaration of <see cref="NK.Unsigned"/>
-        /// </summary>        
+        /// </summary>
         Unsigned = NK.Unsigned,
 
         /// <summary>
         /// Redeclaration of <see cref="NK.Float"/>
-        /// </summary>        
+        /// </summary>
         Float = NK.Float,
 
         /// <summary>
         /// Redeclaration of <see cref="W.W128"/>
-        /// </summary>        
+        /// </summary>
         W128 = W.W128,
 
         /// <summary>
         /// Redeclaration of <see cref="W.W256"/>
-        /// </summary>        
+        /// </summary>
         W256 = W.W256,
 
         /// <summary>
         /// Redeclaration of <see cref="W.W512"/>
-        /// </summary>        
+        /// </summary>
         W512 = W.W512,
 
         /// <summary>

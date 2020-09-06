@@ -89,7 +89,7 @@ namespace Z0
         public TableSpan<T> Table
         {
             [MethodImpl(Inline)]
-            get => Host.Table;
+            get => Host.Storage;
         }
 
         [MethodImpl(Inline)]

@@ -18,13 +18,13 @@ namespace Z0
                 where !immg.IsEmpty
                 select g;
 
-        public static GenericApiMethod[] generic(ApiHost host, ImmRefinementKind refinment) 
+        public static GenericApiMethod[] generic(ApiHost host, ImmRefinementKind refinment)
             => generic(host).Where(op => op.Method.AcceptsImmediate(refinment));
 
         static MethodInfo[] TaggedOps(IApiHost src)
-            => src.HostedMethods.Tagged<OpAttribute>();
- 
-        static DirectApiGroup[] direct(ApiHost src)        
+            => src.Methods.Tagged<OpAttribute>();
+
+        static DirectApiGroup[] direct(ApiHost src)
             => (from d in DirectOpSpecs(src).GroupBy(op => op.Method.Name)
                 select new DirectApiGroup(OpIdentityParser.parse(d.Key), src, d)).Array();
 
@@ -32,7 +32,7 @@ namespace Z0
             => from m in TaggedOps(src).NonGeneric() select new DirectApiMethod(src, Diviner.Identify(m), m);
 
         static MethodInfo GenericDefintion(MethodInfo src)
-            => src.IsGenericMethodDefinition ? src : src.GetGenericMethodDefinition(); 
+            => src.IsGenericMethodDefinition ? src : src.GetGenericMethodDefinition();
 
         static GenericApiMethod[] generic(ApiHost src)
              => from m in TaggedOps(src).OpenGeneric()
@@ -41,10 +41,10 @@ namespace Z0
                 select new GenericApiMethod(src, Diviner.GenericIdentity(m), GenericDefintion(m), closures);
 
         static DirectApiGroup ImmGroup(IApiHost host, DirectApiGroup g, ImmRefinementKind refinment)
-            => new DirectApiGroup(g.GroupId, host, 
-                g.Members.Where(m => m.Method.AcceptsImmediate(refinment) && m.Method.ReturnsVector()));        
+            => new DirectApiGroup(g.GroupId, host,
+                g.Members.Where(m => m.Method.AcceptsImmediate(refinment) && m.Method.ReturnsVector()));
 
-       static IMultiDiviner Diviner 
+       static IMultiDiviner Diviner
             => MultiDiviner.Service;
     }
 }

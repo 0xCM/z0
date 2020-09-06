@@ -13,8 +13,8 @@ namespace Z0
 
     partial struct Flow
     {
-        public static IWfShell shell(WfConfig config, IWfEventSink sink)
-            => new WfShell(config, sink);
+        public static IWfShell shell(WfConfig config)
+            => new WfShell(config);
 
         /// <summary>
         /// Reifies a <see cref='IWfShell'/> predicated on a controlling assembly and zero or more arguments
@@ -25,9 +25,8 @@ namespace Z0
         {
             var id = control.Id();
             var modules = ApiQuery.modules(control, args);
-            var context = Flow.context(control, modules, args);
-            var config = new WfConfig(context, args, modules);
-            return new WfShell(config, termlog(log(config), correlate(id)));
+            var config = new WfConfig(context(control, modules, args), args, modules);
+            return new WfShell(config);
         }
 
         public static IWfShell shell(params string[] args)
@@ -43,7 +42,7 @@ namespace Z0
             var id = control.Id();
             var context = Flow.context(control, modules, args);
             var config = new WfConfig(context, args, modules);
-            return new WfShell(config, termlog(log(config), correlate(id)));
+            return new WfShell(config);
         }
     }
 }

@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;    
-    using static Memories;
+    using static Konst;
+    using static z;
 
     partial class BitFields
     {
@@ -57,9 +57,9 @@ namespace Z0
             where T : unmanaged
                 => new BitField<S,E,T>(spec);
 
-        internal static FixedBits<T> fixedalloc<T>(int bitcount)
+        internal static FixedBits<T> fixedalloc<T>(uint bitcount)
             where T : unmanaged
-                => new FixedBits<T>(Blocks.alloc<T>(n64, Blocks.bitcover<T>(bitcount)), bitcount);             
+                => new FixedBits<T>(Blocks.alloc<T>(n64, Blocks.bitcover<T>(bitcount)), bitcount);
 
         /// <summary>
         /// Defines and creates a fixed-width bitfield
@@ -70,14 +70,14 @@ namespace Z0
         /// <typeparam name="W"></typeparam>
         /// <typeparam name="W">A width-defining enumeration</typeparam>
         [MethodImpl(Inline)]
-        public static FixedBits<E,T,W> create<E,T,W>(int bitcount)
-            where E : unmanaged, Enum            
+        public static FixedBits<E,T,W> create<E,T,W>(uint bitcount)
+            where E : unmanaged, Enum
             where T : unmanaged
             where W : unmanaged, Enum
         {
             var data = fixedalloc<T>(bitcount);
             var spec = new BitFieldSpec<E,W>(specify<E,T,W>(), bitcount);
-            return new FixedBits<E,T,W>(data, spec);                
+            return new FixedBits<E,T,W>(data, spec);
         }
 
         /// <summary>

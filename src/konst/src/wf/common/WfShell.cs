@@ -13,11 +13,15 @@ namespace Z0
 
     public struct WfShell : IWfShell
     {
+        public PartId Id {get;}
+
         public IShellContext Shell {get;}
 
         public WfConfig Config {get;}
 
         public ModuleArchive Modules {get;}
+
+        readonly IWfEventLog Log;
 
         public IWfEventSink WfSink {get;}
 
@@ -54,10 +58,13 @@ namespace Z0
         public Assembly Control {get;}
 
         [MethodImpl(Inline)]
-        public WfShell(WfConfig config, IWfEventSink sink)
+        public WfShell(WfConfig config)
         {
             Config = config;
-            WfSink = insist(sink);
+            Id = config.ControlId;
+            Ct = correlate(Id);
+            Log = Flow.log(config);
+            WfSink = Flow.termlog(Log, Ct);
             Shell = insist(Config.Shell);
             Modules = Config.Modules;
             Api = Modules.Api;
@@ -65,7 +72,6 @@ namespace Z0
             Components = Parts.Select(x => x.Owner);
             Paths = Shell.AppPaths;
             Args = Shell.Args;
-            Ct = Shell.Ct;
             Control = Assembly.GetEntryAssembly();
             ShellName = Control.GetSimpleName();
             AppPaths = Paths;
@@ -75,12 +81,13 @@ namespace Z0
             Settings = SettingValues.Load(Paths.AppConfigPath);
             ResourceRoot = FolderPath.Define(Config.ResDir.Name);
             IndexRoot = FolderPath.Define(Config.IndexDir.Name);
-            Broker = new WfBroker(sink, Ct);
+            Broker = new WfBroker(WfSink, Ct);
         }
 
         public void Dispose()
         {
             Broker.Dispose();
+            Log.Dispose();
         }
 
         string ITextual.Format()

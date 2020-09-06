@@ -13,8 +13,7 @@ namespace Z0
         public static void Main(params string[] args)
         {
             var config = Flow.configure(args);
-            using var log = Flow.log(config);
-            using var wf = Flow.shell(config, log);
+            using var wf = Flow.shell(config);
             using var step = new XedWf(wf, new XedEtlConfig(wf, config.Settings));
             step.Run();
         }

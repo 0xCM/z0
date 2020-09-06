@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
 
     partial class BitFields
-    {            
+    {
         /// <summary>
         /// Defines a bitfield segment
         /// </summary>
@@ -22,7 +22,7 @@ namespace Z0
             => new BitFieldSegment(id, width, boundary);
 
         /// <summary>
-        /// Describes an index-identifed model segment
+        /// Describes an index-identified model segment
         /// </summary>
         /// <param name="src">The source model</param>
         /// <param name="index">The field index</param>
@@ -49,8 +49,8 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public ref readonly BitFieldSegment segment<T>(in BitField<T> field, int index)
-            where T : unmanaged            
-                => ref field.Segment(index);        
+            where T : unmanaged
+                => ref field.Segment(index);
 
         [MethodImpl(Inline)]
         public static BitFieldSegment segment<I,W>(BitField64<I,W> src, I index)

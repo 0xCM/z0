@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
-    using static Memories;
+    using static Konst;
+    using static z;
 
-    using API = BitFields;
+    using api = BitFields;
 
     /// <summary>
     /// Defines the (stateful) bitfield api surface parametrized by an indexing enum
@@ -32,10 +32,10 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitField(in BitFieldSpec spec)
         {
-            this.Spec = spec;
-            this.Segments = spec.Segments;            
+            Spec = spec;
+            Segments = spec.Segments;
         }
-        
+
         /// <summary>
         /// Fetches an index-identified segment
         /// </summary>
@@ -45,22 +45,22 @@ namespace Z0
             => ref skip(Segments, Enums.scalar<E,byte>(index));
 
         /// <summary>
-        /// Extracts a contiguous range of bits from the source value per the spegment specification
+        /// Extracts a contiguous range of bits from the source value per the segment specification
         /// </summary>
         /// <param name="segment">The segment spec</param>
         /// <param name="src">The value from which the segment will be extracted</param>
         [MethodImpl(Inline)]
         public T Read(in BitFieldSegment segment, in S src)
-            => API.extract<S,T>(segment, src);
+            => api.extract<S,T>(segment, src);
 
         /// <summary>
-        /// Extracts a contiguous range of bits from the source value per the spegment specification
+        /// Extracts a contiguous range of bits from the source value per the segment specification
         /// </summary>
         /// <param name="index">The segment index</param>
         /// <param name="src">The value from which the segment will be extracted</param>
         [MethodImpl(Inline)]
         public T Read(E index, in S src)
-            => API.extract<S,T>(Segment(index), src);
+            => api.extract<S,T>(Segment(index), src);
 
         /// <summary>
         /// Extracts all segments from the source value and deposits the result in a caller-suppled span
@@ -69,7 +69,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         [MethodImpl(Inline)]
         public void Read(in S src, Span<T> dst)
-            => API.deposit(Spec, src, dst);
+            => api.deposit(Spec, src, dst);
 
         /// <summary>
         /// Extracts a source segment to the least bits of the target then shifts the target by a specified offset
@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="offset">The offset amount</param>
         [MethodImpl(Inline)]
         public T Read(in BitFieldSegment segment, in S src, bool offset)
-            => API.extract<S,T>(segment, src, offset);
+            => api.extract<S,T>(segment, src, offset);
 
         /// <summary>
         /// Extracts a source segment to the least bits of the target then shifts the target by a specified offset
@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="offset">The offset amount</param>
         [MethodImpl(Inline)]
         public T Read(E index, in S src, bool offset)
-            => API.extract<S,T>(Segment(index), src, offset);
+            => api.extract<S,T>(Segment(index), src, offset);
 
         /// <summary>
         /// Overwrites an identified target segment with the bits from the corresponding source segment
@@ -100,9 +100,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref T Write(in BitFieldSegment segment, in S src, ref T dst)
         {
-            API.deposit(segment, src, ref dst);
+            api.deposit(segment, src, ref dst);
             return ref dst;
-        }            
+        }
 
         /// <summary>
         /// Overwrites an identified target segment with the bits from the corresponding source segment
@@ -113,9 +113,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref S Write(in BitFieldSegment segment, in S src, ref S dst)
         {
-            API.deposit<S,T>(segment, src, ref dst);
+            api.deposit<S,T>(segment, src, ref dst);
             return ref dst;
-        }            
+        }
 
         /// <summary>
         /// Overwrites an identified target segment with the bits from the corresponding source segment
@@ -126,9 +126,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref S Write(E index, in S src, ref S dst)
         {
-            API.deposit<S,T>(Segment(index), src, ref dst);
+            api.deposit<S,T>(Segment(index), src, ref dst);
             return ref dst;
-        }            
+        }
 
         /// <summary>
         /// Overwrites an index-identified target segment with the bits from the corresponding source segment
@@ -139,23 +139,23 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref T Write(E index, in S src, ref T dst)
         {
-            API.deposit<S,T>(Segment(index), src, ref dst);
+            api.deposit<S,T>(Segment(index), src, ref dst);
             return ref dst;
-        }            
+        }
 
         [MethodImpl(Inline)]
         public ref S Write(ReadOnlySpan<T> src, ref S dst)
-        {   
+        {
             var data = dst.Scalar;
-            dst.Update(API.deposit<S,T>(Spec, src, ref data));
+            dst.Update(api.deposit<S,T>(Spec, src, ref data));
             return ref dst;
-        }                 
+        }
 
         [MethodImpl(Inline)]
         public ref T Write(ReadOnlySpan<T> src, ref T dst)
-        {   
-            API.deposit<S,T>(Spec, src, ref dst);
+        {
+            api.deposit<S,T>(Spec, src, ref dst);
             return ref dst;
-        }                 
+        }
     }
 }

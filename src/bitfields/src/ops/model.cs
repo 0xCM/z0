@@ -7,29 +7,29 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
-    using static Memories;
+    using static Konst;
+    using static z;
 
     partial class BitFields
     {
         [Op]
         public static BitFieldModel model(string name, string[] names, byte[] widths)
-        {            
+        {
             Demands.insist(names.Length, widths.Length);
-            var fieldCount = (byte)names.Length;
-            var fieldWidths = widths;
-            var fieldNames = asci.alloc(n16,fieldCount);            
+            var count = (byte)names.Length;
+            var fieldWidths = span(widths);
+            var fieldNames = asci.alloc(n16, count);
+            var posbuffer = sys.alloc<byte>(count);
+            var positions = span(posbuffer);
 
-            ArraySpan<byte> fieldPositions = new byte[fieldCount];
-
-            byte width = 0;            
-            for(var i=0; i< fieldCount; i++)
+            byte width = 0;
+            for(var i=0u; i<count; i++)
             {
                 asci.encode(names[i], out fieldNames[i]);
-                fieldPositions[i] = width;
-                width += fieldWidths[i];                
+                seek(positions,i) = width;
+                width += skip(fieldWidths,i);
             }
-            return new BitFieldModel(asci.encode(n16,name), fieldCount, width, fieldNames, fieldWidths, fieldPositions);
+            return new BitFieldModel(name, count, width, fieldNames, widths, posbuffer);
         }
     }
 }

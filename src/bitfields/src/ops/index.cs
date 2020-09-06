@@ -6,11 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Reflection;
 
-    using static Konst;    
+    using static Konst;
 
     partial class BitFields
     {
@@ -19,8 +17,8 @@ namespace Z0
             where U : unmanaged
             where W : unmanaged, Enum
         {
-            var indices = typeof(I).LiteralFields().ToArray();
-            var widths = typeof(W).LiteralFields().ToArray();
+            var indices = typeof(I).LiteralFields().Array();
+            var widths = typeof(W).LiteralFields().Array();
             var count = indices.Length;
             var indexed = new BitFieldIndexEntry<I,W>[count];
             for(var i=0; i < count; i++)
@@ -34,9 +32,6 @@ namespace Z0
             where I : unmanaged, Enum
             where W : unmanaged, Enum
                 => new BitFieldIndexEntry<I,W>(
-                    index: Enums.literal<I,U>(NumericCast.convert<int,U>(i)), 
-                    name: indices[i].Name,  
-                    width: (W)widths[i].GetRawConstantValue()
-                    );
+                    Enums.literal<I,U>(NumericCast.convert<int,U>(i)), indices[i].Name, (W)widths[i].GetRawConstantValue());
     }
 }

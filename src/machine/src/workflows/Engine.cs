@@ -15,28 +15,6 @@ namespace Z0
 
     public class Engine : IDisposable
     {
-        public static void run(IAppContext app, params string[] args)
-        {
-            try
-            {
-                var ct = correlate(ShellId);
-                var config = WfBuilder.configure(app, args);
-                using var log = Flow.log(config);
-                using var wf = Flow.shell(config, log);
-
-                var state = new WfCaptureState(wf, AsmWfBuilder.asm(app), wf.Config, wf.Ct);
-                wf.Running(StepId, delimit(config.PartIdentities));
-                using var machine = new Engine(state,ct);
-                machine.Run();
-
-                wf.Ran(StepId, ct);
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-            }
-        }
-
         readonly WfCaptureState State;
 
         readonly CorrelationToken Ct;
@@ -55,7 +33,6 @@ namespace Z0
         {
             Wf.Finished(StepId, Ct);
         }
-
 
         IAsmContext Asm
             => State.Asm;

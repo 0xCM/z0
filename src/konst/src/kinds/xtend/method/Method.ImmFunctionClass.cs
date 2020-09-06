@@ -40,10 +40,8 @@ namespace Z0
                     immc |= second.ImmSlot();
                 break;
             }
-            
+
             return immc;
-        } 
-
-
+        }
     }
 }

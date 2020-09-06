@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public interface IBitVector : ITextual<IBitVector,BitFormat>
     {
@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The byte-relative segment index</param>
         [MethodImpl(Inline)]
-        ref byte Byte(int index)
+        ref byte Byte(uint index)
             => ref seek(Bytes, index);
     }
 

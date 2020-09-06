@@ -17,7 +17,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static FilePath path(string name)
-            => new FilePath(name);
+            => new FilePath(normalize(name));
 
         [MethodImpl(Inline), Op]
         public static FilePath path(FolderPath folder, FileName file)

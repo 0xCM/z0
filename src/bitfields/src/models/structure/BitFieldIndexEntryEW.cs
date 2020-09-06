@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
 
     /// <summary>
     /// Associates the declaration order of an enum literal with the corresponding literal value
@@ -15,7 +15,7 @@ namespace Z0
     public readonly struct BitFieldIndexEntry<E,W> : IBitFieldIndexEntry<BitFieldIndexEntry<E,W>,E,W>
         where E : unmanaged, Enum
         where W : unmanaged, Enum
-    {        
+    {
         public E FieldIndex {get;}
 
         public string FieldName {get;}
@@ -33,9 +33,9 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitFieldIndexEntry(E index, string name, W width)
         {
-            this.FieldIndex = index;
-            this.FieldName = name;
-            this.FieldWidth = width;
+            FieldIndex = index;
+            FieldName = name;
+            FieldWidth = width;
         }
 
         public string Format()
@@ -43,13 +43,13 @@ namespace Z0
             var t = typeof(E).Name;
             var i = Enums.scalar<E,byte>(FieldIndex);
             var w = Enums.scalar<W,byte>(FieldWidth);
-            return $"{t}[{i}:{w}] = {FieldName}";           
+            return $"{t}[{i}:{w}] = {FieldName}";
         }
-        
+
         [MethodImpl(Inline)]
         public bool Equals(BitFieldIndexEntry<E,W> other)
-            => FieldIndex.Equals(other.FieldIndex) 
-            && FieldWidth.Equals(other.FieldWidth)  
+            => FieldIndex.Equals(other.FieldIndex)
+            && FieldWidth.Equals(other.FieldWidth)
             && FieldName.Equals(other.FieldName);
 
         [MethodImpl(Inline)]
@@ -58,11 +58,11 @@ namespace Z0
 
         public override string ToString()
             => Format();
-         
+
         public override int GetHashCode()
             => HashCode.Combine(FieldIndex,FieldWidth);
 
         public override bool Equals(object obj)
             => obj is BitFieldIndexEntry<E,W> x && Equals(x);
-    }    
+    }
 }

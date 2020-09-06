@@ -9,6 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
+    using static z;
 
     /// <summary>
     /// Describes a reified api member which may be of hosted or located state

@@ -24,6 +24,9 @@ namespace Z0
         /// </summary>
         public readonly string Name;
 
+        /// <summary>
+        /// The encoded cil
+        /// </summary>
         public readonly BinaryCode Encoded;
 
         public readonly MethodImplAttributes ImplSpec;

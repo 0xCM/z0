@@ -107,6 +107,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         static Vector256<T> veven<T>(N256 w, N2 f = default, N2 d = default, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMasks.even(f,d,t));
+                => vbroadcast(w, BitMasks.even(f,d,t));
     }
 }

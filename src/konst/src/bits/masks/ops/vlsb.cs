@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class VMask
+    partial class BitMasks
     {
         /// <summary>
         /// [000...001]
@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vlsb<T>(N128 w, N1 f, N1 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMasks.lsb<T>(f,d,t));
+                => vbroadcast(w,lsb<T>(f,d,t));
 
         /// <summary>
         /// [01]
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vlsb<T>(N128 w, N2 f, N1 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMasks.lsb<T>(f,d,t));
+                => vbroadcast(w,lsb<T>(f,d,t));
 
         /// <summary>
         /// [0001]
@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vlsb<T>(N128 w, N4 f, N1 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMasks.lsb(f,d,t));
+                => vbroadcast(w,lsb(f,d,t));
 
         /// <summary>
         /// [00000001]
@@ -67,7 +67,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vlsb<T>(N128 w, N8 f, N1 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMasks.lsb(f,d,t));
+                => vbroadcast(w,lsb(f,d,t));
 
         /// <summary>
         /// [00000000 00000001]
@@ -81,7 +81,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vlsb<T>(N128 w, N16 f, N1 d, T t = default)
             where T : unmanaged
-                => generic<T>(vbroadcast<ulong>(w, BitMasks.lsb64(f, d)));
+                => generic<T>(vbroadcast<ulong>(w, lsb64(f, d)));
 
         /// <summary>
         /// [00000011]
@@ -95,7 +95,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vlsb<T>(N128 w, N8 f, N2 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMasks.lsb(f,d,t));
+                => vbroadcast(w,lsb(f,d,t));
 
         /// <summary>
         /// [00000111]
@@ -108,7 +108,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vlsb<T>(N128 w, N8 f, N3 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMasks.lsb(f,d,t));
+                => vbroadcast(w,lsb(f,d,t));
 
         /// <summary>
         /// [00001111]
@@ -122,7 +122,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vlsb<T>(N128 w, N8 f, N4 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMasks.lsb(f,d,t));
+                => vbroadcast(w,lsb(f,d,t));
 
         /// <summary>
         /// [00011111]
@@ -136,7 +136,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vlsb<T>(N128 w, N8 f, N5 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w, BitMasks.lsb(f,d,t));
+                => vbroadcast(w, lsb(f,d,t));
 
         /// <summary>
         /// [00111111]
@@ -150,7 +150,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vlsb<T>(N128 w, N8 f, N6 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w, BitMasks.lsb(f,d,t));
+                => vbroadcast(w, lsb(f,d,t));
 
         /// <summary>
         /// [01111111]
@@ -163,7 +163,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vlsb<T>(N128 w, N8 f, N7 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMasks.lsb(f,d,t));
+                => vbroadcast(w,lsb(f,d,t));
 
         /// <summary>
         /// [00....01]
@@ -174,7 +174,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vlsb<T>(N256 w, N1 f, N1 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMasks.lsb(f,d,t));
+                => vbroadcast(w,lsb(f,d,t));
 
         /// <summary>
         /// [01]
@@ -186,7 +186,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vlsb<T>(N256 w, N2 f, N1 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMasks.lsb(f,d,t));
+                => vbroadcast(w,lsb(f,d,t));
 
         /// <summary>
         /// [00010001]
@@ -197,7 +197,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vlsb<T>(N256 w, N4 f, N1 d,T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMasks.lsb<T>(f,d,t));
+                => vbroadcast(w,lsb<T>(f,d,t));
 
         /// <summary>
         /// [00000001]
@@ -208,7 +208,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vlsb<T>(N256 w, N8 f, N1 d,T t = default)
             where T : unmanaged
-                => vbroadcast(w, BitMasks.lsb<T>(f,d,t));
+                => vbroadcast(w, lsb<T>(f,d,t));
 
         /// <summary>
         /// [00000000 00000001]
@@ -219,7 +219,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vlsb<T>(N256 w, N16 f, N1 d,T t = default)
             where T : unmanaged
-                => generic<T>(vbroadcast<ulong>(w, BitMasks.lsb64(f, d)));
+                => generic<T>(vbroadcast<ulong>(w, lsb64(f, d)));
 
         /// <summary>
         /// [00000011]
@@ -232,7 +232,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vlsb<T>(N256 w, N8 f, N2 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMasks.lsb<T>(f,d));
+                => vbroadcast(w, lsb<T>(f,d));
 
         /// <summary>
         /// [00000111]
@@ -244,7 +244,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vlsb<T>(N256 w, N8 f, N3 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w, BitMasks.lsb<T>(f,d));
+                => vbroadcast(w, lsb<T>(f,d));
 
         /// <summary>
         /// [00001111]
@@ -256,7 +256,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vlsb<T>(N256 w, N8 f, N4 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMasks.lsb<T>(f,d));
+                => vbroadcast(w,lsb<T>(f,d));
 
         /// <summary>
         /// [00011111]
@@ -268,7 +268,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vlsb<T>(N256 w, N8 f, N5 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w,BitMasks.lsb<T>(f,d));
+                => vbroadcast(w,lsb<T>(f,d));
 
         /// <summary>
         /// [00111111]
@@ -280,7 +280,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vlsb<T>(N256 w, N8 f, N6 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w, BitMasks.lsb<T>(f,d));
+                => vbroadcast(w, lsb<T>(f,d));
 
         /// <summary>
         /// [01111111]
@@ -292,7 +292,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vlsb<T>(N256 w, N8 f, N7 d, T t = default)
             where T : unmanaged
-                => vbroadcast(w, BitMasks.lsb<T>(f,d));
+                => vbroadcast(w, lsb<T>(f,d));
 
         /// <summary>
         /// The f least significant bits of each 8 bit segment are enabled
@@ -304,7 +304,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vlsb<T>(N128 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => generic<T>(vbroadcast<byte>(w, BitMasks.lsb8f(d)));
+                => generic<T>(vbroadcast<byte>(w, lsb8f(d)));
 
         /// <summary>
         /// The f least significant bits of each 8 bit segment are enabled
@@ -316,6 +316,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vlsb<T>(N256 w, N8 f, byte d, T t = default)
             where T : unmanaged
-                => generic<T>(vbroadcast<byte>(w, BitMasks.lsb8f(d)));
+                => generic<T>(vbroadcast<byte>(w, lsb8f(d)));
     }
 }

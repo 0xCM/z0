@@ -32,7 +32,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -75,7 +75,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -176,7 +176,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(VBits.vbfly(n,v64u(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>

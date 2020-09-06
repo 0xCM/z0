@@ -18,10 +18,10 @@ namespace Z0
         public bool ExcludeZero {get;}
 
         [MethodImpl(Inline)]
-        public CheckBinaryOpSF(ITestContext context, bool xzero = false)
+        public CheckBinaryOpSF(ITestContext context, bool xz = false)
         {
             Context = context;
-            ExcludeZero = xzero;                       
+            ExcludeZero = xz;
         }
     }
 
@@ -33,12 +33,12 @@ namespace Z0
         public bool ExcludeZero {get;}
 
         [MethodImpl(Inline)]
-        public CheckBinaryPredSF(ITestContext context, bool xzero = false)
+        public CheckBinaryPredSF(ITestContext context, bool xz = false)
         {
             Context = context;
-            ExcludeZero = xzero;            
+            ExcludeZero = xz;
         }
-    }    
+    }
 
     public interface ICheckSF<T0,T1,R> : ICheckSF
         where T0 : unmanaged
@@ -47,10 +47,10 @@ namespace Z0
     {
         void CheckMatch<F,G>(F f, G g)
             where F : IFunc<T0,T1,R>
-            where G : IFunc<T0,T1,R>        
+            where G : IFunc<T0,T1,R>
         {
             var casename = Identify.TestCaseText(Context.HostType, g);
-            var succeeded = true;       
+            var succeeded = true;
             var clock = counter();
 
             T0 next_x()
@@ -90,18 +90,18 @@ namespace Z0
             var clock = counter();
 
             var lhs = (ExcludeZero ? Random.NonZeroSpan<T0>(count) : Random.Span<T0>(count)).ReadOnly();
-            ref readonly var leftIn = ref z.first(lhs);            
-            
+            ref readonly var leftIn = ref z.first(lhs);
+
             var rhs = (ExcludeZero ? Random.NonZeroSpan<T1>(count) : Random.Span<T1>(count)).ReadOnly();
             ref readonly var rightIn = ref z.first(rhs);
-            
+
             var dst = z.span<R>(count);
             ref var target = ref z.first(dst);
-            
+
             clock.Start();
-            
+
             try
-            {                
+            {
                 apply(g, lhs, rhs, dst);
                 for(var i=0u; i<count; i++)
                     Eq(f.Invoke(z.skip(leftIn, i), z.skip(rightIn, i)), z.skip(target, i));

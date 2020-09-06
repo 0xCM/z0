@@ -8,22 +8,21 @@ namespace Z0
     /// Characterizes an identifier
     /// </summary>
     public interface IIdentified
-    {        
+    {
         string Identifier {get;}
 
-        bool IsEmpty 
+        bool IsEmpty
             => string.IsNullOrWhiteSpace(Identifier);
 
         bool IsNonEmpty
             => !IsEmpty;
-
     }
 
     public interface IIdentified<T> : IIdentified
     {
         T Id {get;}
 
-        string IIdentified.Identifier 
+        string IIdentified.Identifier
             => $"{Id}";
     }
 }

@@ -5,25 +5,25 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-        
-    using static Konst;        
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
 
     partial struct Blocks
     {
         /// <summary>
         /// Computes the number of blocks required to cover a specified number of bits
         /// </summary>
-        /// <param name="srcbits">The source bit count</param>
+        /// <param name="bitcount">The source bit count</param>
         /// <param name="blockwidth">The block width in bits</param>
         [MethodImpl(Inline), Op]
-        public static int bitcover(int srcbits, int blockwidth)
+        public static uint bitcover(uint bitcount, uint blockwidth)
         {
             if(blockwidth == 0)
                 return 0;
-                
-            var a = srcbits / blockwidth;
-            return a + (srcbits % a == 0 ? 0 : 1);
+
+            var a = bitcount / blockwidth;
+            return a + (bitcount % a == 0 ? 0u : 1u);
         }
 
         /// <summary>
@@ -31,8 +31,8 @@ namespace Z0
         /// </summary>
         /// <param name="dstblockbits">The target block size in bits</param>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static int bitcover<T>(int srcbits)
+        public static uint bitcover<T>(uint bitcount)
             where T : unmanaged
-                => bitcover(srcbits, Unsafe.SizeOf<T>()*8);
+                => bitcover(bitcount, (uint)Unsafe.SizeOf<T>()*8);
     }
 }

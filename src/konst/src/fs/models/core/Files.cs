@@ -60,10 +60,6 @@ namespace Z0
                 get => ref Data[index];
             }
 
-            [MethodImpl(Inline)]
-            public static FilePath normalize(FilePath src)
-                => path(src.Name.Replace('\\', '/'));
-
             IEnumerator<FilePath> IEnumerable<FilePath>.GetEnumerator()
                 => ((IEnumerable<FilePath>)Data.Storage).GetEnumerator();
 

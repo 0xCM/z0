@@ -31,7 +31,7 @@ namespace Z0
             var shell = Flow.context(control, modules, args);
             var config = new WfConfig(shell, args, modules);
             app = ContextFactory.app(modules, config.Paths);
-            return new WfShell(config, WfTermLog.create(log(config), ct));
+            return new WfShell(config);
         }
 
         public static WfConfig configure(IAppContext app, string[] args)
@@ -52,8 +52,5 @@ namespace Z0
                 settings);
             return config;
         }
-
-        public static WfConfig configure(IAppContext app)
-            => configure(app, Environment.GetCommandLineArgs());
     }
 }

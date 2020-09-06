@@ -14,9 +14,6 @@ namespace Z0
 
     public readonly struct Files : IEnumerable<FS.FilePath>
     {
-        public static Files from(FS.FilePath[] src)
-            => new Files(src.Map(normalize));
-
         readonly FS.FilePath[] Data;
 
         [MethodImpl(Inline)]
@@ -26,7 +23,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator FS.FilePath[](Files src)
             => src.Data;
-
 
         [MethodImpl(Inline)]
         public Files(FS.FilePath[] src)

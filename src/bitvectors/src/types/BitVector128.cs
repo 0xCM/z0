@@ -25,11 +25,11 @@ namespace Z0
         internal readonly Vector128<T> Data;
 
         public static N128 MaxWidth => default;
-        
+
         public static Vector128<T> Ones
         {
             [MethodImpl(Inline)]
-            get => gvec.vones<T>(MaxWidth);
+            get => z.vones<T>(MaxWidth);
         }
 
         public static T Zero => default;
@@ -51,7 +51,7 @@ namespace Z0
             => src.Data;
 
         /// <summary>
-        /// Computes the bitwias AND between the operands
+        /// Computes the bitwise AND between the operands
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -60,7 +60,7 @@ namespace Z0
             => BitVector.and(x,y);
 
         /// <summary>
-        /// Computes the bitwias AND between the operands
+        /// Computes the bitwise AND between the operands
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -93,7 +93,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitVector128<N,T> operator ~(in BitVector128<N,T> src)
             => BitVector.not(src);
-    
+
         /// <summary>
         /// Computes the two's complement negation of the operand
         /// </summary>
@@ -153,7 +153,7 @@ namespace Z0
             => !BitVector.eq(x,y);
 
         /// <summary>
-        /// Intializes a bitvector with the lo N bits of a scalar source
+        /// Initializes a bitvector with the lo N bits of a scalar source
         /// </summary>
         /// <param name="data">The scalar source value</param>
         [MethodImpl(Inline)]
@@ -213,14 +213,14 @@ namespace Z0
             [MethodImpl(Inline)]
             get => gmath.nonz(Data);
         }
- 
+
         [MethodImpl(Inline)]
         public readonly bool Equals(in BitVector128<N,T> y)
             => BitVector.eq(this,y);
 
         public readonly override bool Equals(object obj)
             => obj is BitVector128<N,T> x && Equals(x);
-        
+
         public readonly override int GetHashCode()
             => Data.GetHashCode();
 

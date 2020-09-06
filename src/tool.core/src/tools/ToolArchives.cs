@@ -23,13 +23,13 @@ namespace Z0
                 => new ToolArchive<T>(default(T).ToolId, src, dst);
 
         [MethodImpl(Inline)]
-        public static Files output<T>(IToolArchive<T> archive)
+        public static FS.Files output<T>(IToolArchive<T> archive)
             where T : struct, ITool<T>
-                => Files.from(archive.ToolOutput.AllFiles);
+                => archive.ToolOutput.AllFiles;
 
         [MethodImpl(Inline)]
-        public static Files processed<T>(IToolArchive<T> archive)
+        public static FS.Files processed<T>(IToolArchive<T> archive)
             where T : struct, ITool<T>
-                => Files.from(archive.Processed.AllFiles);
+                => archive.Processed.AllFiles;
     }
 }
