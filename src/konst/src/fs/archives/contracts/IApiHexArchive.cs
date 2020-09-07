@@ -63,13 +63,13 @@ namespace Z0
         /// Reads the code owned by a specified collection of parts
         /// </summary>
         /// <param name="owners">The owning parts</param>
-        IEnumerable<IdentifiedCodeIndex> ReadIndices(params PartId[] owners);
+        IEnumerable<ApiHexIndex> ReadIndices(params PartId[] owners);
 
         /// <summary>
         /// Reads the code defined by a specified file
         /// </summary>
         /// <param name="src">The source path</param>
-        IdentifiedCodeIndex ReadIndex(FilePath src);
+        ApiHexIndex ReadIndex(FilePath src);
     }
 
     public interface IApiHexArchive<H> : IApiHexArchive

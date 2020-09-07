@@ -11,14 +11,14 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {        
+    {
         /// <summary>
         /// 8x32u -> 8x64u
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Op]
         public static Vector512<ulong> vinflate(Vector256<uint> src, W64 w)
-            => z.vconvert(src, w512, z64);
+            => vconvert(src, w512, z64);
 
         /// <summary>
         /// 8x32i -> 8x64i
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline), Op]
         public static Vector512<long> vinflate(Vector256<int> src, W64 w)
-            => z.vconvert(src, w512, z64i);
+            => vconvert(src, w512, z64i);
 
         /// <summary>
         /// 32x8u -> 32x32u
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="x1">A target cell type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector1024<uint> vinflate(Vector256<byte> src, W32 w)
-            => z.vconvert(src, w1024, z32);
+            => vconvert(src, w1024, z32);
 
         /// <summary>
         /// 32x8i -> (8x32i, 8x32i, 8x32i, 8x32i)
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="x1">A target cell type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector1024<int> vinflate(Vector256<sbyte> src, W32 w)
-            => z.vconvert(src, w1024, z32i);
+            => vconvert(src, w1024, z32i);
 
         /// <summary>
         /// 32x8i -> 32x16i
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="x1">The second target vector</param>
         [MethodImpl(Inline), Op]
         public static Vector512<short> vinflate(Vector256<sbyte> src, W16 w)
-            => z.vconvert(src, w512, z16i);
+            => vconvert(src, w512, z16i);
 
         /// <summary>
         /// 16x16i -> 16x32i
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector512<int> vinflate(Vector256<short> src, W32 w)
-            => z.vconvert(src, w512, z32i);
+            => vconvert(src, w512, z32i);
 
         /// <summary>
         /// 16x16u -> 16x32u
@@ -78,8 +78,8 @@ namespace Z0
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector512<uint> vinflate(Vector256<ushort> src, W32 w)
-            => z.vconvert(src, w512, z32);
- 
+            => vconvert(src, w512, z32);
+
         /// <summary>
         /// 32x8u -> 32x16u
         /// </summary>
@@ -203,6 +203,6 @@ namespace Z0
         /// <param name="t">A target type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector512<uint> vinflate(Vector256<ushort> src, N512 w, uint t)
-            => vconvert(src, w, t);                      
+            => vconvert(src, w, t);
     }
 }

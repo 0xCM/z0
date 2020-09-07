@@ -13,7 +13,7 @@ namespace Z0
 
     using BP = BytePatternParser<EncodingPatternKind>;
 
-    public readonly struct PatternExtractParser : IExtractionParser
+    public readonly struct PatternExtractParser : IExtractParser
     {
         /// <summary>
         /// The default length of the segment removed from the tail of the parsed byte array when the term code is Zx7
@@ -24,14 +24,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal PatternExtractParser(byte[] buffer)
-        {
-            Buffer = buffer;
-        }
+            => Buffer = buffer;
 
         BP Parser
         {
             [MethodImpl(Inline)]
-            get => Extractors.Services.PatternParser(Buffer.Clear());
+            get => ExtractParsers.pattern(Buffer.Clear());
         }
 
         [MethodImpl(Inline)]
@@ -97,9 +95,7 @@ namespace Z0
             var parsed = list<X86MemberRefinement>(src.Length);
             var failed = list<ExtractParseFailure>();
             for(var i=0; i<src.Length; i++)
-            {
                 Parse(src[i], i).OnResult(f => failed.Add(f), p => parsed.Add(p));
-            }
             return (failed.ToArray(), parsed.ToArray());
         }
     }

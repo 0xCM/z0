@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Pairs an api member with the executable code derived from that member
     /// </summary>
-    public readonly struct X86ApiMember : IIdentifiedCode<X86ApiMember,ApiHex>
+    public readonly struct X86ApiMember : IX86ApiMember<X86ApiMember,ApiHex>
     {
         public ApiMember Member {get;}
 
@@ -72,7 +72,6 @@ namespace Z0
             Member = member;
             Encoded = new ApiHex(member.Address, member.OpUri, code);
         }
-
 
         public OpKindId KindId
              => Member.KindId;

@@ -10,18 +10,16 @@ namespace Z0
     using static Konst;
 
     [ApiHost]
-    public readonly struct Extractors : IExtractors
+    public readonly struct Extractors
     {
-        public static IExtractors Services => default(Extractors);
-
         public const int DefaultBufferLength = Pow2.T14 + Pow2.T08;
 
         [MethodImpl(Inline), Op]
-        public static IExtractionParser parser(byte[] buffer)
+        public static IExtractParser parser(byte[] buffer)
             => ExtractParsers.member(buffer);
 
         [MethodImpl(Inline), Op]
-        public static IExtractionParser parser(ByteSize bufferlen)
+        public static IExtractParser parser(ByteSize bufferlen)
             => ExtractParsers.member(bufferlen);
 
         [MethodImpl(Inline), Op]
@@ -32,6 +30,10 @@ namespace Z0
             else
                 return Option.none<X86Code>();
         }
+
+        [MethodImpl(Inline), Op]
+        public static bool parse(X86Code src, byte[] buffer, out X86Code dst)
+            => ExtractParsers.parse(src, buffer, out dst);
 
         [MethodImpl(Inline), Op]
         public static X86Code extract(MemoryAddress src, byte[] buffer)

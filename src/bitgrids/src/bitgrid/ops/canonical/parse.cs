@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial class BitGrid
-    {        
+    {
         /// <summary>
         /// Hydrates a fixed-width 32-bit dimensionless grid from a bitstring
         /// </summary>
@@ -117,7 +117,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => V0.vload(w, bs.Pack(0,w));
+                => z.vload(w, bs.Pack(0,w));
 
         /// <summary>
         /// Hydrates a 256-bit natural bitgrid from a bitstring
@@ -135,6 +135,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => V0.vload(w, bs.Pack(0,w));
+                => z.vload(w, bs.Pack(0,w));
     }
 }

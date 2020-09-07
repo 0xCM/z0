@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -15,8 +15,8 @@ namespace Z0
     /// </summary>
     public readonly struct HostResources
     {
-        public static HostResources from(IdentifiedCodeIndex src)
-        {                        
+        public static HostResources from(ApiHexIndex src)
+        {
             var count = src.Code.Length;
             var buffer = alloc<BinaryResourceSpec>(count);
             var dst = span(buffer);
@@ -30,7 +30,7 @@ namespace Z0
             return new HostResources(src.Host, buffer);
         }
 
-        public readonly ApiHostUri Host;                
+        public readonly ApiHostUri Host;
 
         public readonly BinaryResourceSpec[] Data;
 

@@ -12,20 +12,11 @@ namespace Z0.Asm
 
     using static CaptureMemoryStep;
 
-    [Step(typeof(CaptureMemory))]
-    public readonly struct CaptureMemoryStep : IWfStep<CaptureMemoryStep>
-    {
-        public static WfStepId StepId
-            => Flow.step<CaptureMemoryStep>();
-    }
-
     public ref struct CaptureMemory
     {
-        public const string StepName = nameof(CaptureMemory);
+        readonly IWfShell Wf;
 
         readonly IAsmContext Root;
-
-        readonly IWfShell Wf;
 
         readonly IAsmDecoder Decoder;
 
@@ -38,7 +29,7 @@ namespace Z0.Asm
         readonly byte[] ParseBuffer;
 
         [MethodImpl(Inline)]
-        public CaptureMemory(IAsmContext root, IWfShell wf, int bufferlen)
+        public CaptureMemory(IWfShell wf, IAsmContext root, int bufferlen)
         {
             Root = root;
             Wf = wf;

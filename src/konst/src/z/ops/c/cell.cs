@@ -17,9 +17,9 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Int8x64k)]
-        public static T cell<T>(ReadOnlySpan<byte> src)
+        public static ref readonly T cell<T>(ReadOnlySpan<byte> src)
             where T : unmanaged
-                => read<T>(src);
+                => ref read2<T>(src);
 
         /// <summary>
         /// Reads a generic value beginning at a specified offset
@@ -38,9 +38,9 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Int8x64k)]
-        public static T cell<T>(Span<byte> src)
+        public static ref T cell<T>(Span<byte> src)
             where T : unmanaged
-                => read<T>(src);
+                => ref read2<T>(src);
 
         /// <summary>
         /// Reads an unmanaged generic value from a bytespan beginning at a specified offset
@@ -49,8 +49,8 @@ namespace Z0
         /// <param name="offset">The source array offset</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Int8x64k)]
-        public static T cell<T>(Span<byte> src, uint offset)
+        public static ref T cell<T>(Span<byte> src, uint offset)
             where T : unmanaged
-                => read<T>(slice(src, offset));
+                => ref read2<T>(slice(src, offset));
     }
 }

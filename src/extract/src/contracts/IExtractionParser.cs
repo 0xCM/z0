@@ -9,7 +9,7 @@ namespace Z0
     /// a sequence of bytes that defines member content exactly, with no more nor less
     /// bits than needed
     /// </summary>
-    public interface IExtractionParser
+    public interface IExtractParser
     {
         /// <summary>
         /// Parses a single extract

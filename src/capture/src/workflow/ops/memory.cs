@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="buffer">The buffer size to allocate</param>
         [MethodImpl(Inline), Op]
-        public static CaptureMemory memory(IAsmContext root, IWfShell wf, ByteSize buffer)
-            => new CaptureMemory(root, wf, buffer);
+        public static CaptureMemory memory(IWfShell wf, IAsmContext asm, ByteSize buffer)
+            => new CaptureMemory(wf, asm, buffer);
     }
 }

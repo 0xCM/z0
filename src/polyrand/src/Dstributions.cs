@@ -5,9 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Text;
-    using System.Runtime.CompilerServices;    
-        
+    using System.Runtime.CompilerServices;
+
     using static Konst;
 
     [ApiHost]
@@ -50,7 +49,7 @@ namespace Z0
                 => (UniformSpec<T>)spec;
 
         /// <summary>
-        /// Defines a unform distribution bound between lower and upper bounds
+        /// Defines a uniform distribution bound between lower and upper bounds
         /// </summary>
         /// <param name="min">The lower bound</param>
         /// <param name="max">The upper bound</param>
@@ -58,7 +57,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static UniformSpec<T> uniform<T>(T min, T max)
             where T : unmanaged
-                => UniformSpec<T>.Define(min,max);        
+                => UniformSpec<T>.Define(min,max);
 
         /// <summary>
         /// Defines a uniform distribution bound to an interval domain
@@ -68,7 +67,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static UniformSpec<T> uniform<T>(in Interval<T> domain)
             where T : unmanaged
-                => UniformSpec<T>.Define(domain);       
+                => UniformSpec<T>.Define(domain);
 
         /// <summary>
         /// Interprets a supplied spec as a Gaussian spec; an error
@@ -79,7 +78,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static GaussianSpec<T> gaussian<T>(IDistributionSpec<T> src)
             where T : unmanaged
-                => (GaussianSpec<T>)src;        
+                => (GaussianSpec<T>)src;
 
         /// <summary>
         /// Defines a Gaussian distribution with specified mean and standard deviation
@@ -102,7 +101,7 @@ namespace Z0
         public static UniformBitsSpec<T> uniformbits<T>(IDistributionSpec<T> src)
             where T : unmanaged
                 => (UniformBitsSpec<T>)src;
-        
+
         /// <summary>
         /// Defines a unform bits distribution
         /// </summary>

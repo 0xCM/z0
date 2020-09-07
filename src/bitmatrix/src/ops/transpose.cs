@@ -121,7 +121,7 @@ namespace Z0
 
         public static BitMatrix<N16,N8,uint> transpose(in BitMatrix<N8,N16,uint> A)
         {
-            var vec = V0.vload(n128,A.Bytes);
+            var vec = z.vload(n128,A.Bytes);
             z.vstore(z.vshuf16x8(vec, Tr8x16Mask), ref z.first(A.Bytes));
             return BitMatrix.load<N16,N8,uint>(A.Content);
         }

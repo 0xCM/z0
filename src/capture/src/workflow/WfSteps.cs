@@ -4,11 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using static z;
     using static Flow;
 
     using Asm;
+
+    [Step]
+    public readonly struct CaptureMemoryStep : IWfStep<CaptureMemoryStep>
+    {
+        public static WfStepId StepId
+            => Flow.step<CaptureMemoryStep>();
+    }
 
     [Step]
     public class EmitAsmTablesHost : WfHost<EmitAsmTablesHost>

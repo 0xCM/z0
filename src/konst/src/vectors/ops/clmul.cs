@@ -7,17 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static System.Runtime.Intrinsics.X86.Pclmulqdq;
-    using static System.Runtime.Intrinsics.X86.Sse41;
-    using static System.Runtime.Intrinsics.X86.Avx;
- 
-    using static Konst;    
+
+    using static Konst;
     using static z;
 
     partial struct z
     {
-
         /// <summary>
         /// Computes the caryless 16-bit product of two 8-bit operands
         /// </summary>
@@ -78,7 +75,7 @@ namespace Z0
         [MethodImpl(Inline), ClMul]
         public static ulong clmulr(N8 r, ulong a, ulong b, ulong poly)
         {
-            var product = clmul64(a,b);            
+            var product = clmul64(a,b);
             product ^= clmul64(product >> 8, poly);
             product ^= clmul64(product >> 8, poly);
             return product;
@@ -184,5 +181,5 @@ namespace Z0
         /// For a product P = XY, multiply the hi(X) and hi(Y)
         /// </summary>
         X11 = 0x11,
-    }    
+    }
 }

@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a uri-identified encoded block with a known base address
     /// </summary>
-    public readonly struct X86ApiCode : IMemberCode<X86ApiCode,X86Code>
+    public readonly struct X86ApiCode : IX86ApiMember<X86ApiCode,X86Code>
     {
         /// <summary>
         /// The source member identity

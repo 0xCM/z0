@@ -17,7 +17,7 @@ namespace Z0
 
     public interface IWfShell<S> : IWfShell
     {
-
+        S State {get;}
     }
 
     public interface IWfShell : IApiProvider, IShellContext, IDisposable

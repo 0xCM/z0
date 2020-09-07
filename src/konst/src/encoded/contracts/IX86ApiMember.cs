@@ -4,15 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IIdentifiedCode<F,C> : IEncoded<F,C>, IIdentified<OpIdentity>
+    public interface IX86ApiMember<F,C> : IEncoded<F,C>
         where F : struct, IEncoded<F,C>
     {
         /// <summary>
         /// The identifying uri
         /// </summary>
         OpUri OpUri {get;}
-
-        OpIdentity IIdentified<OpIdentity>.Id 
-            => OpUri.OpId;
     }
 }

@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Avx;
-    
-    using static Konst; 
+
+    using static Konst;
 
     partial struct z
     {
@@ -178,7 +178,7 @@ namespace Z0
             => And(x, y);
 
 
-        [MethodImpl(Inline), And]
+        [MethodImpl(Inline), And, Closures(UnsignedInts)]
         public static Vector256<byte> vand8u<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vand(z.v8u(x), z.v8u(y));

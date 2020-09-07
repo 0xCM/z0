@@ -25,7 +25,6 @@ namespace Z0
         public static ApiMembers members(IApiHost src)
             => ApiMemberJit.jit(src);
 
-
         /// <summary>
         /// Extracts encoded content for all operations defined by a host
         /// </summary>

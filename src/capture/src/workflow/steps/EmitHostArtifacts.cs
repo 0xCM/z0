@@ -25,7 +25,7 @@ namespace Z0
 
         readonly IHostCapturePaths Target;
 
-        readonly IExtractionParser Parser;
+        readonly IExtractParser Parser;
 
         public X86MemberRefinement[] Parsed;
 
@@ -55,7 +55,7 @@ namespace Z0
             AsmPath = Target.HostAsmPath;
             CilDataPath = Target.CilDataPath;
             Parsed = new X86MemberRefinement[0]{};
-            Parser = Extractors.Services.ExtractParser(Extractors.DefaultBufferLength);
+            Parser = ExtractParsers.member(Extractors.DefaultBufferLength);
             Wf.Created(StepId);
         }
 

@@ -7,14 +7,13 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
     using static z;
 
     public readonly struct CodeReader
     {
-        public static IEnumerable<IdentifiedCodeIndex> identified(FolderPath src, IWfEventSink sink, params PartId[] owners)
+        public static IEnumerable<ApiHexIndex> index(FolderPath src, IWfEventSink sink, params PartId[] owners)
         {
             if(owners.Length != 0)
             {
@@ -59,13 +58,13 @@ namespace Z0
             return read(path);
         }
 
-        static IdentifiedCodeIndex index(FilePath src, IWfEventSink status)
+        static ApiHexIndex index(FilePath src, IWfEventSink status)
         {
             var uri = ApiUriParser.host(src.FileName);
             if(uri.Failed || uri.Value.IsEmpty)
             {
                 status.Deposit(WfEvents.error(nameof(CodeReader), $"{src} not found", default));
-                return IdentifiedCodeIndex.Empty;
+                return ApiHexIndex.Empty;
             }
 
             var dst = z.list<ApiHex>();

@@ -5,17 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;    
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Avx2;
-        
-    using static Konst; 
+
+    using static Konst;
 
     partial struct z
-    {        
+    {
         /// <summary>
-        /// __m256i _mm256_permutevar8x32_epi32 (__m256i a, __m256i idx)VPERMD ymm, ymm/m256, ymm
+        /// __m256i _mm256_permutevar8x32_epi32 (__m256i a, __m256i idx) VPERMD ymm, ymm/m256, ymm
         /// Applies a cross-lane permutation over 8 32-bit source vector segments
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -25,7 +25,7 @@ namespace Z0
             => v8u(PermuteVar8x32(v32u(src), spec));
 
         /// <summary>
-        /// __m256i _mm256_permutevar8x32_epi32 (__m256i a, __m256i idx)VPERMD ymm, ymm/m256, ymm
+        /// __m256i _mm256_permutevar8x32_epi32 (__m256i a, __m256i idx) VPERMD ymm, ymm/m256, ymm
         /// Applies a cross-lane permutation over 8 32-bit source vector segments
         /// </summary>
         /// <param name="src">The source vector</param>

@@ -45,7 +45,7 @@ namespace Z0
         {
             Wf.Running(StepId, flow(SourceDir, TargetDir));
 
-            var indices = CodeReader.identified(SourceDir, Sink);
+            var indices = CodeReader.index(SourceDir, Sink);
             foreach(var index in indices)
             {
                 Wf.Status(StepId, $"Loaded {index.Code.Length} {index.Host} code blocks");
@@ -68,7 +68,7 @@ namespace Z0
             Wf.Disposed(StepId);
         }
 
-        void Emit(IdentifiedCodeIndex src, FolderPath dst)
+        void Emit(ApiHexIndex src, FolderPath dst)
         {
             var path = (dst + FolderName.Define("src")) + src.Host.FileName(FileExtensions.Cs);
             var resources = HostResources.from(src);

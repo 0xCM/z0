@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-        
+
     using A = OpKindAttribute;
     using K = BitShiftKind;
 
@@ -22,7 +22,7 @@ namespace Z0
     public sealed class SraAttribute : A { public SraAttribute() : base(K.Sra) {} }
 
     public sealed class RotlAttribute : A { public RotlAttribute() : base(K.Rotl) {} }
-        
+
     public sealed class RotrAttribute : A { public RotrAttribute() : base(K.Rotr) {} }
 
     public sealed class XorSlAttribute : A { public XorSlAttribute() : base(K.XorSl) {} }
@@ -31,18 +31,15 @@ namespace Z0
 
     public sealed class XorsAttribute : A { public XorsAttribute() : base(K.Xors) {} }
 
-    public sealed class BsllAttribute : A { public BsllAttribute() : base(K.Bsll) {} }    
+    public sealed class BsllAttribute : A { public BsllAttribute() : base(K.Bsll) {} }
 
-    public sealed class BsrlAttribute : A { public BsrlAttribute() : base(K.Bsrl) {} }        
+    public sealed class BsrlAttribute : A { public BsrlAttribute() : base(K.Bsrl) {} }
 
     public sealed class RotlxAttribute : A { public RotlxAttribute() : base(K.Rotlx) {} }
-        
+
     public sealed class RotrxAttribute : A { public RotrxAttribute() : base(K.Rotrx) {} }
 
     public sealed class SllxAttribute : A { public SllxAttribute() : base(K.Sllx) {} }
-        
+
     public sealed class SrlxAttribute : A { public SrlxAttribute() : base(K.Srlx) {} }
-
-
-
 }

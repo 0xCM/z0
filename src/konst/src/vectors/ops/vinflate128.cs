@@ -7,14 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
- 
-    using static System.Runtime.Intrinsics.X86.Avx2;
 
+    using static System.Runtime.Intrinsics.X86.Avx2;
     using static Konst;
 
     partial struct z
-    {        
+    {
         /// <summary>
         /// 16x8u -> 16x16u
         /// </summary>
@@ -44,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vinflate(Vector128<uint> src, W64 w)
             => vconvert(src, w256, z64);
-        
+
         /// <summary>
         /// 4x32w -> 4x64w
         /// </summary>
@@ -53,7 +51,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<long> vinflate(Vector128<int> src, W64 w)
             => vconvert(src, w256, z64i);
- 
+
         /// <summary>
         /// 16x8u -> 16x32u
         /// </summary>
@@ -62,7 +60,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector512<uint> vinflate(Vector128<byte> src, W32 w)
-            => vconvert(src, w512, z32);        
+            => vconvert(src, w512, z32);
 
         /// <summary>
         /// 8x16u -> 8x32u
@@ -101,7 +99,7 @@ namespace Z0
         /// <param name="hi">The target for the upper source elements</param>
         [MethodImpl(Inline), Op]
         public static Vector256<short> vinflate(Vector128<sbyte> src, W16 w, short t)
-            => vconcat(vmaplo(src, n128, t), vmaphi(src, n128, t));  
+            => vconcat(vmaplo(src, n128, t), vmaphi(src, n128, t));
 
         /// <summary>
         /// 16x8u -> 16x16u
@@ -150,9 +148,9 @@ namespace Z0
         /// <param name="x0">The first target vector</param>
         /// <param name="x1">The second target vector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<ulong> vinflate(Vector128<uint> src, N256 w, ulong t)        
+        public static Vector256<ulong> vinflate(Vector128<uint> src, N256 w, ulong t)
             => vconvert(src, w, t);
-        
+
         /// <summary>
         /// 4x32w -> 4x64w
         /// </summary>
@@ -170,7 +168,7 @@ namespace Z0
         /// <param name="t">A target component type representative</param>
         [MethodImpl(Inline), Op]
         public static Vector512<uint> vinflate(Vector128<byte> src, N512 w, uint t)
-            => vconvert(src, w, t);        
+            => vconvert(src, w, t);
 
         /// <summary>
         /// 8x16u -> 8x32u

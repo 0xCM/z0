@@ -47,13 +47,13 @@ namespace Z0
             return read(path);
         }
 
-        public static IdentifiedCodeIndex index(FilePath src, IMultiSink status)
+        public static ApiHexIndex index(FilePath src, IMultiSink status)
         {
             var uri = ApiUriParser.host(src.FileName);
             if(uri.Failed || uri.Value.IsEmpty)
             {
                 status.Deposit(AppErrors.define(nameof(ApiHexArchive), uri.Reason));
-                return IdentifiedCodeIndex.Empty;
+                return ApiHexIndex.Empty;
             }
 
             var dst = z.list<ApiHex>();
@@ -77,7 +77,7 @@ namespace Z0
         public IEnumerable<FilePath> Files(PartId owner)
             => ArchiveRoot.Files(owner, FileExtensions.HexLine, true);
 
-        public IEnumerable<IdentifiedCodeIndex> ReadIndices(params PartId[] owners)
+        public IEnumerable<ApiHexIndex> ReadIndices(params PartId[] owners)
         {
             if(owners.Length != 0)
             {
@@ -100,7 +100,7 @@ namespace Z0
             }
         }
 
-        public IdentifiedCodeIndex ReadIndex(FilePath file)
+        public ApiHexIndex ReadIndex(FilePath file)
             => index(file, Sink);
 
         public IEnumerable<ApiHex> Read()

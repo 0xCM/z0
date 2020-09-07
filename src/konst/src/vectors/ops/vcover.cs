@@ -13,7 +13,6 @@ namespace Z0
 
     partial struct z
     {
-
         /// <summary>
         /// 8x16w -> 16x8w
         /// </summary>

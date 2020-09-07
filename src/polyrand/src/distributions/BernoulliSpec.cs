@@ -9,22 +9,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     /// <summary>
-    /// Characterizes a bernouli distribution
-    /// </summary>    
+    /// Characterizes a bernoulli distribution
+    /// </summary>
     /// <typeparam name="T">The sample value type</typeparam>
     /// <remarks>See https://en.wikipedia.org/wiki/Bernoulli_distribution</remarks>
     public readonly struct BernoulliSpec<T> : IDistributionSpec<T>
         where T : unmanaged
-    {               
+    {
         /// <summary>
         /// Specifies a value within the unit interval [0,1] that represents the probability of success
         /// </summary>
         public readonly double Success;
 
-        public DistributionKind DistKind 
-            => DistributionKind.Bernoulli;        
+        public DistributionKind DistKind
+            => DistributionKind.Bernoulli;
 
         /// <summary>
         /// Defines a Bernoulli distribution predicated on the probability of trial success
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BernoulliSpec<T> Define(double p)
             => new BernoulliSpec<T>(p);
-        
+
         [MethodImpl(Inline)]
         public static implicit operator BernoulliSpec<T>(double p)
             => Define(p);
@@ -41,9 +41,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator double(BernoulliSpec<T> p)
             => p.Success;
-        
+
         [MethodImpl(Inline)]
         public BernoulliSpec(double p)
-            => Success = p; 
+            => Success = p;
     }
 }

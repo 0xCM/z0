@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class BitGrid
     {
@@ -21,7 +21,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid32<M,N,T> broadcast<M,N,T>(T cell, in BitGrid32<M,N,T> dst)    
+        public static BitGrid32<M,N,T> broadcast<M,N,T>(T cell, in BitGrid32<M,N,T> dst)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -36,7 +36,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid64<M,N,T> broadcast<M,N,T>(T cell, in BitGrid64<M,N,T> dst)    
+        public static BitGrid64<M,N,T> broadcast<M,N,T>(T cell, in BitGrid64<M,N,T> dst)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -51,12 +51,12 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid128<M,N,T> broadcast<M,N,T>(T cell, in BitGrid128<M,N,T> dst)    
+        public static BitGrid128<M,N,T> broadcast<M,N,T>(T cell, in BitGrid128<M,N,T> dst)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => Vectors.vbroadcast(n128,cell);
-    
+
         /// <summary>
         /// Transmits the content of a single cell to all cells in a grid
         /// </summary>
@@ -66,7 +66,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static BitGrid256<M,N,T> broadcast<M,N,T>(T cell, in BitGrid256<M,N,T> dst)    
+        public static BitGrid256<M,N,T> broadcast<M,N,T>(T cell, in BitGrid256<M,N,T> dst)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -81,7 +81,7 @@ namespace Z0
         /// <typeparam name="N">The col count type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly BitGrid<M,N,T> broadcast<M,N,T>(T cell, in BitGrid<M,N,T> dst)    
+        public static ref readonly BitGrid<M,N,T> broadcast<M,N,T>(T cell, in BitGrid<M,N,T> dst)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
