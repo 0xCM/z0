@@ -18,7 +18,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<byte> encode(in AsmSyntaxEncoding src)
-            => MemoryMarshal.CreateReadOnlySpan(ref z.edit(src),1).Bytes();                     
+            => MemoryMarshal.CreateReadOnlySpan(ref z.edit(src),1).Bytes();
 
         [Op, MethodImpl(Inline)]
         public static void parse(in AppResourceDoc specs, Span<AsmOpCodeTable> dst)
@@ -26,7 +26,7 @@ namespace Z0
             var fields = Enums.literals<F>();
             var src = span(specs.Rows);
             for(var i=0u; i<src.Length; i++)
-               parse(skip(src,i), fields, ref seek(dst,i));            
+               parse(skip(src,i), fields, ref seek(dst,i));
         }
 
         [Op, MethodImpl(Inline)]
@@ -39,48 +39,48 @@ namespace Z0
 
         [Op]
         static ref readonly AsmOpCodeTable parse(in TextRow src, ReadOnlySpan<F> fields, ref AsmOpCodeTable dst)
-        {                        
+        {
             ReadOnlySpan<string> cells = src.CellContent;
             var count = length(cells,fields);
 
-            var parser = AsmModels.FieldParser;
+            var parser = new AsmFieldParser();
             for(var i=0; i<count; i++)
-            {   
+            {
                 ref readonly var cell = ref skip(cells,i);
                 ref readonly var field = ref skip(fields,i);
                 switch(field)
                 {
                     case F.Sequence:
                         parser.Parse(cell, out dst.Sequence);
-                        break;                    
+                        break;
                     case F.Mnemonic:
                         parser.Parse(cell, out dst.Mnemonic);
-                        break;     
+                        break;
                     case F.OpCode:
                         parser.Parse(cell, out dst.OpCode);
-                        break;        
+                        break;
                     case F.Instruction:
                         parser.Parse(cell, out dst.Instruction);
-                        break;        
+                        break;
                     case F.M16:
                         parser.Parse(cell, out dst.M16);
-                        break;        
+                        break;
                     case F.M32:
                         parser.Parse(cell, out dst.M32);
-                        break;        
+                        break;
                     case F.M64:
                         parser.Parse(cell, out dst.M64);
-                        break;        
+                        break;
                     case F.CpuId:
                         parser.Parse(cell, out dst.CpuId);
-                        break;                    
+                        break;
                     case F.CodeId:
                         parser.Parse(cell, out dst.CodeId);
-                        break;                                                       
+                        break;
                 }
             }
 
             return ref dst;
-        }         
+        }
     }
 }

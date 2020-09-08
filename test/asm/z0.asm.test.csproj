@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(AsmModels)" />
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(GVec)" />

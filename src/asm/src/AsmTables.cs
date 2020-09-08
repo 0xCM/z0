@@ -22,7 +22,7 @@ namespace Z0
         }
 
         static ResExtractor Extractor
-            => ResExtractor.Service(typeof(Z0.Parts.AsmModels).Assembly);
+            => ResExtractor.Service(typeof(Z0.Parts.Asm).Assembly);
 
         /// <summary>
         /// Searches for an embedded document with a matching identifier and, if found,
@@ -30,6 +30,6 @@ namespace Z0
         /// </summary>
         /// <param name="match">The resource identifier to match</param>
         public static AppResourceDoc structured(string match)
-            => Extractor.MatchDocument(match); 
-    }    
+            => Extractor.MatchDocument(match);
+    }
 }

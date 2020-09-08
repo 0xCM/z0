@@ -10,7 +10,7 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(Flow)" />
-    <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(AsmModels)" />
     <ProjectReference Include="$(Encoded)" />
 
     <ProjectReference Include="$(Apps)" />

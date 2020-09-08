@@ -5,18 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Part)" />
-    <ProjectReference Include="$(Sys)" />
     <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(math)" />
     <ProjectReference Include="$(BitCore)" />
-    <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Flow)" />
+    <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Identity)" />
     <ProjectReference Include="$(Data)" />
     <ProjectReference Include="$(Structured)" />
-
   </ItemGroup>
 
 </Project>

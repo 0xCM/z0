@@ -10,7 +10,7 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Flow)" />
-    <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(AsmModels)" />
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(BitFields)" />
 
