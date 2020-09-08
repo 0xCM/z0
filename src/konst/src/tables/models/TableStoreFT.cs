@@ -8,14 +8,19 @@ namespace Z0
 
     using static Konst;
 
+    using api = Table;
+
     public readonly struct TableStore<F,R>: ITableStore<F,R>
         where F : unmanaged, Enum
         where R : struct, ITabular
     {
         public Option<FilePath> Save(R[] src, FilePath dst)
-            => Save(src, Tabular.Specify<F>(), dst, Overwrite);
+            => Save(src, api.renderspec<F>(), dst, Overwrite);
 
-        public Option<FilePath> Save(R[] data, TableFormatSpec<F> format, FilePath dst, FileWriteMode mode = Overwrite)
+        public Option<FilePath> Save(R[] src, FS.FilePath dst)
+            => Save(src, api.renderspec<F>(), FilePath.Define(dst.Name), Overwrite);
+
+        public Option<FilePath> Save(R[] data, TableRenderSpec<F> format, FilePath dst, FileWriteMode mode = Overwrite)
         {
             if(data == null || data.Length == 0)
                 return Option.none<FilePath>();

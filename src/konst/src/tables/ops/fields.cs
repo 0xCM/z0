@@ -19,7 +19,7 @@ namespace Z0
             if(!type.IsStruct() || type.IsPrimitive)
                 return TableFields.Empty;
 
-            var declared = type.DeclaredInstanceFields();
+            var declared = type.SequentialFields();
             var src = span(declared);
             var count = declared.Length;
             var buffer = alloc<TableField>(declared.Length);
@@ -37,7 +37,7 @@ namespace Z0
             ushort j = 0;
             if(src.IsStruct() && !src.IsPrimitive)
             {
-                var defs = @readonly(src.DeclaredInstanceFields());
+                var defs = @readonly(src.SequentialFields());
                 var count = defs.Length;
                 for(var i=0u; i<count; i++)
                 {
@@ -66,7 +66,7 @@ namespace Z0
             where T : struct
         {
             var type = typeof(T);
-            var declared = @readonly(type.DeclaredInstanceFields());
+            var declared = @readonly(type.SequentialFields());
             var count = declared.Length;
             var buffer = alloc<TableField>(count);
             var fields = span(buffer);
@@ -86,7 +86,7 @@ namespace Z0
             dst.FieldName = src.Name;
             dst.FieldOffset = Interop.offset(src.DeclaringType, src.Name);
             dst.FieldId = (Address16)dst.FieldOffset;
-            dst.RenderWidth = default;
+            dst.RenderWidth = 16;
             dst.FieldSize = default;
             dst.Definition = src;
             return ref dst;

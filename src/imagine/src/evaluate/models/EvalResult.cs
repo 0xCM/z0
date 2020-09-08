@@ -81,7 +81,7 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var dst = TableFormat.formatter<F>(delimiter);
+            var dst = Table.formatter<F>(delimiter);
             dst.Append(F.Sequence, Sequence);
             dst.Delimit(F.CaseName, CaseName);
             dst.Delimit(F.Status, Status);

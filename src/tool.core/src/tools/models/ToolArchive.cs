@@ -40,6 +40,6 @@ namespace Z0
             => ToolOutput.AllFiles.Map(f => new ToolFile<T>(f));
 
         public ToolFiles<T> Dir(string pattern)
-            => ToolOutput.Files(pattern, SearchOption.AllDirectories).Map(f => new ToolFile<T>(f));
+            => ToolOutput.Files(pattern, true).Map(f => new ToolFile<T>(f));
     }
 }

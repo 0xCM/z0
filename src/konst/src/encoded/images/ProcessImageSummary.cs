@@ -5,7 +5,8 @@
 namespace Z0
 {
     using System;
-    
+    using System.Runtime.InteropServices;
+
     public struct ProcessImageSummary
     {
         public StringRef ImageId;

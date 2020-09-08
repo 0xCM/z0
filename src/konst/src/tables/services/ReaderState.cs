@@ -7,14 +7,18 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public readonly struct ReaderState<S> : IReaderState<S>
+    using static Konst;
+
+    public readonly struct ReaderState<S>
         where S : struct, ISourceFacets
     {
         public S Facets {get;}
 
         public BinaryCode Source {get;}
-        
+
+        [MethodImpl(Inline)]
         public ReaderState(BinaryCode source, S facets)
         {
             Source = source;

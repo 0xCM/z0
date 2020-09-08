@@ -19,12 +19,12 @@ namespace Z0
 
     public struct PeImageReader : IDisposable
     {
-        readonly SourceStream Stream;
+        readonly ImageStream Stream;
 
         bool Succeeded;
 
-
-        public PeImageReader(SourceStream src)
+        [MethodImpl(Inline)]
+        public PeImageReader(ImageStream src)
         {
             Stream = src;
             Succeeded = false;
@@ -35,28 +35,26 @@ namespace Z0
         public static bool magical(ushort src)
             => src == Magical;
 
-        PeImageOffsets Offsets;
+        ImageOffsets Offsets;
 
-        public ref ImageContent Read(SourceStream src, ref ImageContent dst)
+        public Outcome Read(ImageStream src, out ImageContent dst)
         {
+            dst = default;
             var magic = src.Read<ushort>(0);
             if(magical(magic))
             {
-                var index = src.Read<int>(SigOffset);
+                var index = src.Read<uint>(SigOffset);
                 if(index != 0)
                 {
-                    Offsets = PeImageOffsets.FromHeaderIndex(index);
-                    var peSignature = src.Read<int>((int)index);
+                    Offsets = ImageOffsets.FromHeaderIndex(index);
+                    var peSignature = src.Read<int>(index);
                     if(peSignature == SigExpect)
                         Read(ref dst);
+                    return true;
                 }
             }
-            else
-            {
-                //No magic
-            }
 
-            return ref dst;
+            return false;
         }
 
         public void Read(ref ImageContent dst)
@@ -66,6 +64,9 @@ namespace Z0
 
             dst.Directories = ReadDataDirectories(Stream, Offsets.DataDirectoryOffset);
         }
+
+        public bool Read(out ImageHeader dst)
+            => Stream.TryRead(Offsets.HeaderOffset, out dst);
 
         public void Dispose()
         {
@@ -86,7 +87,7 @@ namespace Z0
             }
         }
 
-        void Read(N32 arch, ref OptionalHeaderS dst)
+        public void Read(N32 arch, ref OptionalHeaderS dst)
         {
             dst.SizeOfStackReserve = Stream.Read<uint>();
             dst.SizeOfStackCommit = Stream.Read<uint>();
@@ -96,7 +97,7 @@ namespace Z0
             dst.NumberOfRvaAndSizes = Stream.Read<uint>();
         }
 
-        void Read(N64 arch, ref OptionalHeaderS dst)
+        public void Read(N64 arch, ref OptionalHeaderS dst)
         {
             dst.SizeOfStackReserve = Stream.Read<ulong>();
             dst.SizeOfStackCommit = Stream.Read<ulong>();
@@ -106,7 +107,7 @@ namespace Z0
             dst.NumberOfRvaAndSizes = Stream.Read<uint>();
         }
 
-        static DirectoryEntry[] ReadDataDirectories(SourceStream src, uint offset)
+        public static DirectoryEntry[] ReadDataDirectories(ImageStream src, uint offset)
         {
             DirectoryEntry[] directories = new DirectoryEntry[ImageDataDirectoryCount];
             src.SeekTo(offset);

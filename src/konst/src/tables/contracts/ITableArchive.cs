@@ -9,7 +9,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    public interface ITabularArchive
+    [SuppressUnmanagedCodeSecurity]
+    public interface ITableArchive
     {
         FolderPath ArchiveRoot {get;}
 
@@ -26,12 +27,6 @@ namespace Z0
 
         void Clear(FolderName folder)
             => (ArchiveRoot + folder).Clear();
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface ITableArchive
-    {
-        FolderPath ArchiveRoot {get;}
 
         ParseResult<TextDoc> Dataset(FilePath src)
             => TextDocParser.parse(src);

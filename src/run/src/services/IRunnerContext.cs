@@ -6,12 +6,12 @@ namespace Z0
 {
     using Z0.Asm;
 
-    public interface IRunnerContext : IContext
+    public interface IRunnerContext
     {
         IAsmContext AsmContext {get;}
-        
-        IAppMsgSink AppMsgSink {get;}        
-        
-        PartId[] Parts {get;}        
-    }    
+
+        IAppMsgSink AppMsgSink {get;}
+
+        PartId[] Parts {get;}
+    }
 }

@@ -46,8 +46,23 @@ namespace Z0
             Origin = origin;
         }
 
+        public AppMsgData Untyped
+        {
+            [MethodImpl(Inline)]
+            get => new AppMsgData(Content, Pattern, Kind, Flair, Origin);
+        }
+
         [MethodImpl(Inline)]
         public string Format()
             => text.format(Pattern, Content);
+
+        [MethodImpl(Inline)]
+        public AppMsgData<S> Cast<S>()
+            => new AppMsgData<S>(z.@as<T,S>(Content), Pattern, Kind, Flair, Origin);
+
+
+        [MethodImpl(Inline)]
+        public static implicit operator AppMsgData(AppMsgData<T> src)
+            => src.Untyped;
     }
 }

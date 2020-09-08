@@ -19,11 +19,12 @@ namespace Z0
         readonly CorrelationToken Ct;
 
         readonly IWfShell Wf;
+
         readonly ApiHostUri Host;
 
         readonly IApiHost Source;
 
-        public X86ApiExtract[] Extractions;
+        public X86ApiExtract[] Extracts;
 
         [MethodImpl(Inline)]
         internal ExtractHostMembers(WfCaptureState state, IApiHost host, IPartCapturePaths dst, CorrelationToken ct)
@@ -33,7 +34,7 @@ namespace Z0
             Host = host.Uri;
             Wf = state.Wf;
             Source = host;
-            Extractions = new X86ApiExtract[0]{};
+            Extracts = new X86ApiExtract[0]{};
             Wf.Created(StepId);
         }
 
@@ -48,7 +49,7 @@ namespace Z0
             try
             {
                 using var step = new ExtractMembers(State, Ct);
-                Extractions = step.Extract(Source);
+                Extracts = step.Extract(Source);
             }
             catch(Exception e)
             {

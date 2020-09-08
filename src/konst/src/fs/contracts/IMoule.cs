@@ -8,27 +8,26 @@ namespace Z0
 
     using static FS;
 
-    partial struct FS
+    public interface IFileModule : ITextual
     {
-        public interface IModule
-        {
-            FilePath Path {get;}
+        FS.FilePath Path {get;}
 
-            ModuleKind Kind {get;}
-        }
+        ModuleKind Kind {get;}
 
-        public interface IModule<T> : IModule
-            where T : struct, IModule<T>
-        {
+        string ITextual.Format()
+            => Path.Name;
+    }
 
-        }
+    public interface IFileModule<T> : IFileModule
+        where T : struct, IFileModule<T>
+    {
 
-        public interface IModule<F,T> : IModule<T>
-            where F : struct, IModule<F,T>
-            where T : struct, IModule<T>
-        {
+    }
 
-        }
+    public interface IFileModule<F,T> : IFileModule<T>
+        where F : struct, IFileModule<F,T>
+        where T : struct, IFileModule<T>
+    {
 
     }
 }

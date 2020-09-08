@@ -1,22 +1,55 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
-// License     :  MIT
+// Copyright   : (c) Chris Moore, 2020
+// License     : MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static Konst;
 
-    public readonly struct TableArchive
+    using api = Table;
+
+    public readonly struct TableArchive : ITableArchive
     {
-        public FS.FolderPath ArchiveRoot {get;}
+        public FolderPath ArchiveRoot {get;}
+
+        [MethodImpl(Inline)]
+        public static TableArchive create(FolderPath root)
+            => new TableArchive(root);
+
+        [MethodImpl(Inline)]
+        public static TableArchive create(FS.FolderPath root)
+            => new TableArchive(root);
+
+        [MethodImpl(Inline)]
+        public TableArchive(FolderPath root)
+            => ArchiveRoot = root;
 
         [MethodImpl(Inline)]
         public TableArchive(FS.FolderPath root)
-        {
-            ArchiveRoot = root;
-        }
+            => ArchiveRoot = FolderPath.Define(root.Name);
+
+        public void Clear()
+            => ArchiveRoot.Clear();
+
+        public void Clear(FolderName folder)
+            => (ArchiveRoot + folder).Clear();
+
+        public IEnumerable<FilePath> Files()
+            => ArchiveRoot.Files(FileExtensions.Csv, true);
+
+        public Option<FilePath> Deposit<F,R>(R[] src, FileName name)
+            where F : unmanaged, Enum
+            where R : struct, ITabular
+                => api.store<F,R>().Save(src, api.renderspec<F>(), ArchiveRoot + name);
+
+        public Option<FilePath> Deposit<F,R>(R[] src, FolderName folder, FileName name)
+            where F : unmanaged, Enum
+            where R : struct, ITabular
+                => api.store<F,R>().Save(src, api.renderspec<F>(), (ArchiveRoot + folder) + name);
     }
 }

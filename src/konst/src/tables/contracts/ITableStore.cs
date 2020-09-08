@@ -11,16 +11,16 @@ namespace Z0
     public interface ITableStore<R>
         where R : struct
     {
-        Option<FilePath> Save(R[] src, TableFormatSpec format, FilePath dst, FileWriteMode mode = Overwrite);
+        Option<FilePath> Save(R[] src, TableRenderSpec format, FilePath dst, FileWriteMode mode = Overwrite);
     }
 
     public interface ITableStore<F,R> : ITableStore<R>
         where F : unmanaged, Enum
         where R : struct
     {
-        Option<FilePath> Save(R[] src, TableFormatSpec<F> format, FilePath dst, FileWriteMode mode = Overwrite);
+        Option<FilePath> Save(R[] src, TableRenderSpec<F> format, FilePath dst, FileWriteMode mode = Overwrite);
 
-        Option<FilePath> ITableStore<R>.Save(R[] src, TableFormatSpec format, FilePath dst, FileWriteMode mode)
+        Option<FilePath> ITableStore<R>.Save(R[] src, TableRenderSpec format, FilePath dst, FileWriteMode mode)
             => Save(src, format, dst, mode);
 
         /// <summary>

@@ -12,7 +12,7 @@ namespace Z0.MS
     public unsafe static class NativeMethods
     {
         private const string Kernel32LibraryName = "kernel32.dll";
-        
+
         private const string VersionLibraryName = "version.dll";
 
         public const int PROCESS_QUERY_INFORMATION = 0x0400;
@@ -29,9 +29,6 @@ namespace Z0.MS
         [DllImport(Kernel32LibraryName)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool FreeLibrary(IntPtr hModule);
-
-        [DllImport(Kernel32LibraryName, CharSet = CharSet.Unicode, SetLastError = true, EntryPoint = "LoadLibraryW")]
-        public static extern IntPtr LoadLibrary(string lpLibFileName);
 
         [DllImport(Kernel32LibraryName)]
         [return: MarshalAs(UnmanagedType.Bool)]

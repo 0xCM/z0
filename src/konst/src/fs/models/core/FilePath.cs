@@ -17,7 +17,12 @@ namespace Z0
         {
             public PathPart Name {get;}
 
-            public static FilePath Empty => new FilePath(PathPart.Empty);
+            public static FilePath Empty
+                => new FilePath(PathPart.Empty);
+
+            [MethodImpl(Inline)]
+            public static FileName operator +(FilePath a, FileExt b)
+                => file(text.format("{0}.{1}",a,b));
 
             [MethodImpl(Inline)]
             public FilePath(PathPart name)
@@ -84,6 +89,10 @@ namespace Z0
                 get => FileName.Owner;
             }
 
+            [MethodImpl(Inline)]
+            public bool Is(FileExt ext)
+                => ext.Matches(this);
+
             public FilePath ChangeExtension(FileExt ext)
                 => FolderPath + FS.file(Path.ChangeExtension(Path.GetFileName(Name), ext.Name));
 
@@ -94,7 +103,7 @@ namespace Z0
             {
                 var name = FileName.WithoutExtension;
                 var ext = FileExt;
-                var stamped = FS.file(text.format("{0}.{1}.{1}", name, timestamp(), ext));
+                var stamped = FS.file(text.format("{0}.{1}.{2}", name, timestamp(), ext));
                 return FolderPath + stamped;
             }
 

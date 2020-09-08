@@ -50,6 +50,10 @@ namespace Z0
         public static string format(object first)
             =>  first is ITextual t ? t.Format() : first?.ToString() ?? "!!null!!";
 
+        [Op]
+        public static string format(object src, Type t, char delimiter, RenderWidth width)
+            => text.rpad(text.format("{0} {1}", delimiter, text.format(src)), width);
+
         /// <summary>
         /// Formats a pattern using a parametric argument
         /// </summary>
@@ -58,9 +62,7 @@ namespace Z0
         /// <typeparam name="T">The argument type</typeparam>
         [MethodImpl(Inline)]
         public static string format<T>(string pattern, T arg0)
-            => string.Format(pattern,
-                arg0 is ITextual t ? t.Format() : $"{arg0}"
-                );
+            => string.Format(pattern, arg0 is ITextual t ? t.Format() : $"{arg0}");
 
         /// <summary>
         /// Formats a <see cref='StringRef'/>

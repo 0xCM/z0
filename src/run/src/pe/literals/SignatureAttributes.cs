@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Specified additional flags that can be applied to method signatures.
         /// Underlying values correspond to the representation in the leading signature
-        /// byte represented by <see cref="SignatureHeader"/>.
+        /// byte represented by <see cref="SigHeader"/>.
         /// </summary>
         [Flags]
         public enum SignatureAttributes : byte

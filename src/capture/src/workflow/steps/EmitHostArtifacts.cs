@@ -161,7 +161,7 @@ namespace Z0
             if(Parsed.Length == 0)
                 return;
 
-            using var step = new DecodeParsed(State.Wf, State.CWf.Context, Ct);
+            using var step = new DecodeApiAsm(State.Wf, State.CWf.Context, Ct);
             var decoded = step.Run(Source, Parsed);
             if(decoded.Length != 0)
             {

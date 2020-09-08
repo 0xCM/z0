@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Konst;
 
@@ -15,7 +16,7 @@ namespace Z0
     /// Defines a base2 literal via text and a boxed value; for the literal to be valid,
     /// the text, when parsed, must yield a value equivalent to the boxed value
     /// </summary>
-    [ApiClass(DataStructure)]
+    [StructLayout(LayoutKind.Sequential)]
     public readonly struct BinaryLiteral : ILiteral<BinaryLiteral>
     {
         /// <summary>

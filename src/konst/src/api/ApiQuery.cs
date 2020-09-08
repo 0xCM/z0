@@ -16,25 +16,25 @@ namespace Z0
     [ApiHost]
     public readonly partial struct ApiQuery
     {
-        public static ModuleArchive modules()
+        public static ApiModules modules()
             => modules(Assembly.GetEntryAssembly(), Environment.GetCommandLineArgs());
 
         [MethodImpl(Inline)]
-        public static ModuleArchive modules(Assembly control)
+        public static ApiModules modules(Assembly control)
             => modules(control, Environment.GetCommandLineArgs());
 
-        public static ModuleArchive modules(Assembly control, string[] args)
+        public static ApiModules modules(Assembly control, string[] args)
         {
             var parts = PartIdParser.parse(args);
             if(parts.Length != 0)
-               return new ModuleArchive(control, parts);
+               return new ApiModules(control, parts);
             else
-                return new ModuleArchive(control);
+                return new ApiModules(control);
         }
 
         [MethodImpl(Inline)]
-        public static ModuleArchive modules(FS.FolderPath src)
-            => new ModuleArchive(src);
+        public static ApiModules modules(FS.FolderPath src)
+            => new ApiModules(src);
 
         /// <summary>
         /// Collects all resource accessors defined by a specified assembly

@@ -23,7 +23,7 @@ namespace Z0
             => app(Paths, compose(ApiQuery.parts()), random());
 
         [MethodImpl(Inline), Op]
-        public static IAppContext app(ModuleArchive src, IShellPaths paths)
+        public static IAppContext app(ApiModules src, IShellPaths paths)
             => new AppContext(paths, src.Api, random(), settings(paths), exchange());
 
         [MethodImpl(Inline), Op]

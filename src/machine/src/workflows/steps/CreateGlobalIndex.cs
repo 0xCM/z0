@@ -20,7 +20,7 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        readonly PartFileProvider SourceFiles;
+        readonly PartFiles SourceFiles;
 
         public GlobalCodeIndex EncodedIndex;
 
@@ -28,7 +28,7 @@ namespace Z0
 
         readonly IWfCaptureState State;
 
-        public CreateGlobalIndex(IWfShell wf, IWfCaptureState state, PartFileProvider src)
+        public CreateGlobalIndex(IWfShell wf, IWfCaptureState state, PartFiles src)
         {
             Wf = wf;
             Ct = Wf.Ct;

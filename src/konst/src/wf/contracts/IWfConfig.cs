@@ -39,7 +39,7 @@ namespace Z0
         /// <summary>
         /// The input data archive configuration
         /// </summary>
-        ModuleArchive Modules {get;}
+        ApiModules Modules {get;}
 
         /// <summary>
         /// The output data archive configuration

@@ -20,11 +20,15 @@ namespace Z0
             public static FileName operator +(FileName a, FileExt b)
                 => file(text.format("{0}.{1}",a,b));
 
-            public FileExt Ext
+            public FileExt FileExt
             {
                 [MethodImpl(Inline)]
                 get => new FileExt(Path.GetExtension(Name.Name));
             }
+
+            [MethodImpl(Inline)]
+            public bool Is(FileExt ext)
+                => ext.Matches(this);
 
             public FileName WithoutExtension
             {

@@ -13,7 +13,7 @@ namespace Z0
 
     [ApiHost]
     public readonly struct MetadataIndex
-    {            
+    {
         [MethodImpl(Inline), Op]
         public static FieldInfo[] fields(ResourceIndex src)
             => typeof(ResourceIndex).DeclaredInstanceFields();
@@ -23,7 +23,7 @@ namespace Z0
             => typeof(ResourceIndex).DeclaredInstanceFields().Select(x => x.Name);
 
         [MethodImpl(Inline), Op]
-        public static string format(ResourceIndex src)        
+        public static string format(ResourceIndex src)
             => text.format(src.FormatPattern, src.Name, src.Address);
 
         [MethodImpl(Inline), Op]
@@ -32,25 +32,25 @@ namespace Z0
             var f = fields(src);
             return text.format(ResourceIndex.PatternText, f[0].Name, f[1].Name);
         }
-            
-        public readonly struct ResourceIndex : ITable<ResourceIndex>
+
+        public readonly struct ResourceIndex
         {
             public const string PatternText = "{0,-60} | {1,-16}";
-            
-            public string FormatPattern 
+
+            public string FormatPattern
                 => PatternText;
 
             public readonly string Name;
 
             public readonly MemoryAddress Address;
-            
+
             [MethodImpl(Inline)]
             public ResourceIndex(string name, MemoryAddress address)
             {
                 Name = name;
                 Address  = address;
-            }        
-        }   
+            }
+        }
 
         public static void save(ReadOnlySpan<ResourceIndex> src, FilePath dst)
         {

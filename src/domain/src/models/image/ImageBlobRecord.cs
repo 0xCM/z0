@@ -6,10 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Konst;
 
-    [Table]
+    [StructLayout(LayoutKind.Sequential)]
     public struct ImgBlobRecord
     {
         public Count32 Seq;

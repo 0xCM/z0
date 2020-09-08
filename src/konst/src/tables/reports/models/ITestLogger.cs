@@ -10,23 +10,22 @@ namespace Z0
     public enum LogWriteMode
     {
         Create,
-        
+
         Overwrite,
-        
+
         Append
     }
 
     /// <summary>
     /// Defines minimal contract for a log message sink
     /// </summary>
-    public interface ITestLogger : IService
-    {        
+    public interface ITestLogger
+    {
         FilePath Write<R>(IEnumerable<R> data, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header, FileExtension ext)
-            where R : ITabular;                
+            where R : ITabular;
 
         FilePath Write<R>(IEnumerable<R> data, FolderName subdir, string basename, FileWriteMode mode, char delimiter, bool header, FileExtension ext)
             where R : ITabular
-                => Write(data,subdir, basename, mode == FileWriteMode.Append ? LogWriteMode.Create : LogWriteMode.Append, delimiter, header, ext);                
-
+                => Write(data,subdir, basename, mode == FileWriteMode.Append ? LogWriteMode.Create : LogWriteMode.Append, delimiter, header, ext);
     }
 }

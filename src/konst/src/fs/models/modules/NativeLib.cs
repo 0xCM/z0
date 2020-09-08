@@ -14,19 +14,20 @@ namespace Z0
         /// <summary>
         /// Identifies and represents a native static library
         /// </summary>
-        public readonly struct NativeLib : IModule<NativeLib>
+        public readonly struct NativeLib : IFileModule<NativeLib>
         {
             public FilePath Path {get;}
 
-
             [MethodImpl(Inline)]
             public NativeLib(FilePath path)
-            {
-                Path = path;
-            }
+                => Path = path;
 
             public ModuleKind Kind
                 => ModuleKind.NativeLib;
+
+            [MethodImpl(Inline)]
+            public static implicit operator FileModule(NativeLib src)
+                => new FileModule(src.Path, src.Kind);
         }
     }
 }

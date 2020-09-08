@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -13,7 +13,7 @@ namespace Z0
     public readonly struct Imaging
     {
         [MethodImpl(Inline), Op]
-        static void fill(in LocatedImage src,ref ProcessImageSummary dst)
+        static void fill(in LocatedImage src, ref ProcessImageSummary dst)
         {
             dst.PartId = src.PartId;
             dst.EntryAddress = src.EndAddress;
@@ -21,7 +21,7 @@ namespace Z0
             dst.EndAddress = src.EndAddress;
             dst.Size = src.Size;
         }
-        
+
         [Op]
         public static ReadOnlySpan<ProcessImageSummary> summarize(LocatedImages src)
         {
@@ -47,7 +47,7 @@ namespace Z0
             }
 
             return summaries;
-        }        
+        }
 
         [Op]
         public static ReadOnlySpan<SystemImageSymbol> SystemImages
@@ -62,7 +62,7 @@ namespace Z0
                     {
                         ref readonly var row = ref doc[i];
                         if(row.CellCount >= 2)
-                            dst[i] = new SystemImageSymbol(row[0], row[1]);                        
+                            dst[i] = new SystemImageSymbol(row[0], row[1]);
                     }
                     return dst;
                 }
@@ -79,7 +79,7 @@ namespace Z0
         /// </summary>
         /// <param name="match">The resource identifier to match</param>
         public static AppResourceDoc structured(string match)
-            => Extractor.MatchDocument(match);        
-        
+            => Extractor.MatchDocument(match);
+
     }
 }

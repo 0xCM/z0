@@ -5,12 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Text;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
 
     [ApiHost]
     public readonly partial struct Datasets
@@ -34,11 +31,6 @@ namespace Z0
         public static int index<F>(F field)
             where F : unmanaged, Enum
                 => (int)(Tabular.PosMask & Enums.e32u(field));
-
-        [MethodImpl(Inline)]
-        public static string[] headers<F>()
-            where F : unmanaged, Enum
-                => Table.index<F>().Names;
 
         [MethodImpl(Inline)]
         public static DatasetHeader<F> header<F>()

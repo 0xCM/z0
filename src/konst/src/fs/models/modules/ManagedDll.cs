@@ -16,7 +16,7 @@ namespace Z0
         /// <summary>
         /// Identifies and represents and managaged module that lacks an entry point
         /// </summary>
-        public readonly struct ManagedDll : IModule<ManagedDll>
+        public readonly struct ManagedDll : IFileModule<ManagedDll>
         {
             /// <summary>
             /// The file's path
@@ -37,6 +37,10 @@ namespace Z0
 
            public ModuleKind Kind
                 => ModuleKind.ManagedDll;
+
+            [MethodImpl(Inline)]
+            public static implicit operator FileModule(ManagedDll src)
+                => new FileModule(src.Path, src.Kind);
         }
     }
 }

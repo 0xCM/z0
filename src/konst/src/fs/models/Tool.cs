@@ -10,7 +10,7 @@ namespace Z0
 
     partial struct FS
     {
-        public readonly struct Tool : IModule<Tool>
+        public readonly struct Tool : IFileModule<Tool>
         {
             public FilePath Path {get;}
 

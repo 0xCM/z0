@@ -50,7 +50,7 @@ namespace Z0
     {
         public static string Format(this RawAsmTable src)
         {
-            var dst = TableFormat.formatter<RawAsmField>();
+            var dst = Table.formatter<RawAsmField>();
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.Address, src.Address);
             dst.Delimit(F.Mnemonic, src.Mnemonic);
@@ -59,6 +59,6 @@ namespace Z0
         }
 
         public static string FormatHeader(this RawAsmTable src)
-            => TableFormat.formatter<RawAsmField>().FormatHeader();
+            => Table.formatter<RawAsmField>().FormatHeader();
     }
 }

@@ -49,10 +49,10 @@ namespace Z0
         Option<FilePath> Save(FilePath dst)
             => Log.Save(Records, dst);
 
-        TableFormatSpec<F> Format
+        TableRenderSpec<F> RenderSpec
         {
             [MethodImpl(Inline)]
-            get => Tabular.Specify<F>();
+            get => Table.renderspec<F>();
         }
     }
 }

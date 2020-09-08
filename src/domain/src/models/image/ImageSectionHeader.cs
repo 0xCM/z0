@@ -5,22 +5,23 @@
 namespace Z0
 {
     using System;
-    using System.Reflection.Metadata;
+    using System.Runtime.InteropServices;
     using System.Reflection.PortableExecutable;
 
     using static Konst;
 
+    [StructLayout(LayoutKind.Sequential)]
     public struct ImageSectionHeader
     {
         public FS.FileName File;
+
+        public string SectionName;
 
         public Address32 CodeBase;
 
         public Address32 GlobalPointerTable;
 
         public ByteSize GlobalPointerTableSize;
-
-        public string SectionName;
 
         public SectionCharacteristics SectionAspects;
 
@@ -29,6 +30,5 @@ namespace Z0
         public ByteSize RawDataSize;
 
         public Address32 EntryPoint;
-
     }
 }

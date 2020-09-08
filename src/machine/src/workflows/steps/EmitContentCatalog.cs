@@ -40,7 +40,7 @@ namespace Z0
             var entries = z.span(provider.Provided.Array());
             EmissionCount = (uint)entries.Length;
 
-            var f = TableFormat.formatter<ContentLibField>();
+            var f = Table.formatter<ContentLibField>();
             for(var i=0u; i<EmissionCount; i++)
             {
                 ref readonly var entry = ref z.skip(entries, i);

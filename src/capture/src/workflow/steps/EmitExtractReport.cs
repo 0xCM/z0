@@ -13,13 +13,6 @@ namespace Z0
 
     using static EmitExtractReportStep;
 
-    [Step(typeof(EmitExtractReport))]
-    public readonly struct EmitExtractReportStep : IWfStep<EmitExtractReportStep>
-    {
-        public static WfStepId StepId
-            => Flow.step<EmitExtractReportStep>();
-    }
-
     public ref struct EmitExtractReport
     {
         public const string ActorName = nameof(EmitExtractReport);

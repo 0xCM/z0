@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     public readonly struct RenderWidth : ITextual
     {
         public readonly byte Value;
@@ -24,7 +24,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public RenderWidth(byte value)
             => Value = value;
-
 
         [MethodImpl(Inline)]
         public string Format()

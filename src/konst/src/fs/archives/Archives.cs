@@ -14,6 +14,10 @@ namespace Z0
     public readonly struct Archives
     {
         [MethodImpl(Inline), Op]
+        public static ModuleArchive module(FS.FolderPath root)
+            => new ModuleArchive(root);
+
+        [MethodImpl(Inline), Op]
         public static IPartCaptureArchive capture(FolderPath root)
             => new PartCaptureArchive(root ?? EnvVars.Common.LogRoot, FolderName.Empty, FolderName.Empty);
 

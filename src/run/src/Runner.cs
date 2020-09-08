@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using System.Text;
 
@@ -250,7 +251,8 @@ namespace Z0
             }
 
             {
-                using var step = new EmitLiterals(Wf, Parts.Konst.Assembly);
+                var host = new EmitLiteralsHost();
+                using var step = new EmitLiterals(Wf, Parts.Konst.Assembly, host);
                 step.Run();
             }
 
@@ -262,15 +264,34 @@ namespace Z0
             {
                 using var step = new CheckCredits(Wf);
                 step.Run();
+            }
 
+            {
+                var dst = text.build();
+                using var step = new CheckBitMasks(Wf, Random, dst);
+                step.Run();
             }
 
         }
+
+
         public void Run()
         {
-            var dst = text.build();
-            using var step = new CheckBitMasks(Wf, Random, dst);
-            step.Run();
+            Wf.Running(StepId);
+            var dir = FS.dir("J:/tools/netsdk/packs/Microsoft.NETCore.App.Ref/5.0.0-preview.8.20407.11/ref/net5.0");
+            var ct = Wf.Ct;
+            var dlls = dir.Files(true).Where(f => f.FileExt.Name.Contains("dll"));
+            var host = new EmitImageHeadersHost();
+            var output = FS.path("J:/dev/projects/z0-logs/db/images.csv");
+            host.Run(Wf, (dlls,output));
+            // foreach(var dll in dlls)
+            // {
+            //     var dst = output + (dll.FileName + FS.ext("csv"));
+            //     host.Run(Wf, (dll,dst));
+            // }
+            //Wf.Raise(files);
+
+            Wf.Ran(StepId);
         }
     }
 }

@@ -179,7 +179,7 @@ namespace Z0
             if(Collected.Count != 0)
             {
                 var widths = JmpInfo.RenderWidths;
-                var formatter = TableFormat.rows<JmpInfo>();
+                var formatter = Table.rowformatter<JmpInfo>();
                 using var writer = Target.Writer();
                 writer.WriteLine(formatter.FormatHeader(widths));
                 var jumps = @readonly(Collected.ToArray());
@@ -195,11 +195,11 @@ namespace Z0
                     formatter.Delimit(skip(widths,j++), jmp.Target);
                     formatter.Delimit(skip(widths,j++), jmp.Kind.Value());
                     formatter.Delimit(skip(widths,j++), jmp.Asm);
-                    writer.WriteLine(formatter.Render());
+                    writer.WriteLine(formatter.Format(true));
                 }
             }
-
         }
+
         void Fill(in BasedAsmFx src, JmpKind jk, ref JmpInfo dst)
         {
             var target = asm.branch(src.BaseAddress, src.Instruction, 0);

@@ -6,12 +6,30 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
     using static z;
 
     partial struct Literals
     {
+        public static LiteralInfo attributed(FieldInfo target)
+        {
+            var tagged = target.Tagged<LiteralAttribute>();
+            if(tagged)
+            {
+                var attrib = (LiteralAttribute)target.GetCustomAttribute(typeof(LiteralAttribute));
+                var data = attrib.Description;
+                if(!string.IsNullOrWhiteSpace(data))
+                    return LiteralInfo.define(target.Name,
+                    target.GetRawConstantValue(), data,
+                    Type.GetTypeCode(target.FieldType),
+                    target.FieldType.IsEnum,
+                    false);
+            }
+            return LiteralInfo.Empty;
+        }
+
         /// <summary>
         /// Selects the binary literals declared by a type that are of a specified parametric primal type
         /// </summary>

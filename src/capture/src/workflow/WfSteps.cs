@@ -10,6 +10,13 @@ namespace Z0
     using Asm;
 
     [Step]
+    public readonly struct EmitExtractReportStep : IWfStep<EmitExtractReportStep>
+    {
+        public static WfStepId StepId
+            => Flow.step<EmitExtractReportStep>();
+    }
+
+    [Step]
     public readonly struct CaptureMemoryStep : IWfStep<CaptureMemoryStep>
     {
         public static WfStepId StepId
@@ -80,10 +87,7 @@ namespace Z0
     [Step]
     public class CapturePartDataTypesStep : WfHost<CapturePartDataTypesStep>
     {
-        public override void Run(IWfShell shell)
-        {
 
-        }
     }
 
     [Step]
@@ -93,9 +97,9 @@ namespace Z0
     }
 
     [Step]
-    public readonly struct DecodeParsedStep : IWfStep<DecodeParsedStep>
+    public readonly struct DecodeApiAsmStep : IWfStep<DecodeApiAsmStep>
     {
-        public static WfStepId StepId => step(typeof(DecodeParsed));
+        public static WfStepId StepId => step(typeof(DecodeApiAsm));
 
     }
 
@@ -121,7 +125,7 @@ namespace Z0
         public static WfStepId StepId => step<ExtractHostMembersStep>();
     }
 
-    [Step(typeof(ExtractMembers), StepName)]
+    [Step]
     public readonly struct ExtractMembersStep : IWfStep<ExtractMembersStep>
     {
         public const string StepName = nameof(ExtractMembers);

@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
+    using System.Runtime.InteropServices;
 
-    [Table]
+    [StructLayout(LayoutKind.Sequential)]
     public readonly struct HandleInfo
     {
         public readonly int Token;

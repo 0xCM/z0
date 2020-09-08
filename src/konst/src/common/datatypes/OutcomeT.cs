@@ -27,6 +27,14 @@ namespace Z0
         public readonly ulong MessageCode;
 
         [MethodImpl(Inline)]
+        public static bool operator true(Outcome<T> src)
+            => src.Ok == true;
+
+        [MethodImpl(Inline)]
+        public static bool operator false(Outcome<T> src)
+            => src.Ok == false;
+
+        [MethodImpl(Inline)]
         public static implicit operator Outcome<T>(T data)
             => new Outcome<T>(true, data);
 

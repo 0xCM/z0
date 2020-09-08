@@ -37,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="control">The controlling assembly</param>
         /// <param name="args">The shell args</param>
-        public static IWfShell shell(Assembly control, ModuleArchive modules, params string[] args)
+        public static IWfShell shell(Assembly control, ApiModules modules, params string[] args)
         {
             var id = control.Id();
             var context = Flow.context(control, modules, args);

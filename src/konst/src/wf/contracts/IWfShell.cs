@@ -30,7 +30,7 @@ namespace Z0
 
         FolderPath ResourceRoot {get;}
 
-        ModuleArchive Modules {get;}
+        ApiModules Modules {get;}
 
         IWfBroker Broker {get;}
 
@@ -59,6 +59,13 @@ namespace Z0
         {
             WfSink.Deposit(e);
             return e.EventId;
+        }
+
+        void Raise<T>(DataRow<T>[] src)
+            where T : ITextual
+        {
+            foreach(var row in src)
+                Raise(row);
         }
 
         void Error(Exception e, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)

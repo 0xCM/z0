@@ -31,21 +31,5 @@ namespace Z0.Asm
 
         public ref readonly BufferToken this[BufferSeqId index]
             => ref Tokens[index];
-
-        // IPartCapturePaths CodeArchive
-        //     => Me.CaptureArchive(Part.ExecutingPart);
-
-        // protected IArchiveWriter HexWriter([Caller] string caller = null)
-        // {
-        //     var dstPath = CodeArchive.HexPath(FileName.define($"{caller}", FileExtensions.HexLine));
-        //     return Archives.writer<MemberCodeWriter>(dstPath);
-        // }
-
-        // protected AsmWriter AsmWriter([Caller] string caller = null)
-        // {
-        //     var dst = CodeArchive.AsmPath(FileName.define($"{caller}", FileExtensions.Asm));
-        //     var format = AsmFormatSpec.WithFunctionTimestamp;
-        //     return AsmCore.Services.AsmWriter(dst,format);
-        // }
     }
 }

@@ -53,7 +53,7 @@ class Program
         {
             z.insist(config.Source.Exists, $"The file {config.Source}, it must exist");
 
-            var dst = FS.create(config.OutDir) + FS.file(config.Name, FS.CEX.Exe);
+            var dst = FS.create(config.OutDir) + FS.file(config.Name, FS.Extensions.Exe);
             var gen = new ToolProxyGen(dst);
 
             return CodeGen.compilation(config.Name)

@@ -78,10 +78,10 @@ namespace Z0
             return files;
         }
 
-        static Dictionary<PartId,PartFile[]> ParseFileIndex(PartFileProvider src, params PartId[] parts)
+        static Dictionary<PartId,PartFile[]> ParseFileIndex(PartFiles src, params PartId[] parts)
             => SelectFiles(PartFileClass.Parsed, src.ParseFiles, parts);
 
-        public static MemberParseRecord[] ParseRecords(PartFileProvider src, PartId part)
+        public static MemberParseRecord[] ParseRecords(PartFiles src, PartId part)
         {
             var files = ParseFileIndex(src, part);
             if(files.TryGetValue(part, out var partFiles))
@@ -144,7 +144,7 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var dst = TableFormat.formatter<F>(delimiter);
+            var dst = Table.formatter<F>(delimiter);
             dst.Delimit(F.Seq, Seq);
             dst.Delimit(F.SourceSeq, SourceSeq);
             dst.Delimit(F.Address, Address);

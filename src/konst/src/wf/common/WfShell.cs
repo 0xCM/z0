@@ -19,7 +19,7 @@ namespace Z0
 
         public WfConfig Config {get;}
 
-        public ModuleArchive Modules {get;}
+        public ApiModules Modules {get;}
 
         public IWfEventSink WfSink {get;}
 

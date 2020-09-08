@@ -14,7 +14,7 @@ namespace Z0.Dac
     public sealed class ZDacLib : IDisposable, IRefCountedFreeLibrary
     {
         private bool _disposed;
-        
+
         private ZDac? _sos;
 
         internal DacDataTargetWrapper DacDataTarget { get; }
@@ -25,7 +25,7 @@ namespace Z0.Dac
 
         public int Release()
             => OwningLibrary.Release();
-        
+
         public int AddRef()
             => OwningLibrary.AddRef();
 
@@ -44,7 +44,7 @@ namespace Z0.Dac
         public ZDac SOSDacInterface
             => GetSOSInterfaceNoAddRef();
 
-        // public SOSDac6? SOSDacInterface6 
+        // public SOSDac6? SOSDacInterface6
         //     => InternalDacPrivateInterface.GetSOSDacInterface6();
 
         public T GetInterface<T>(in Guid riid)
@@ -90,7 +90,7 @@ namespace Z0.Dac
             if (dataTarget.ClrDescriptions.Length == 0)
                 throw new Exception("Process is not a CLR process!");
 
-            IntPtr dacLibrary = NativeMethods.LoadLibrary(dacDll);
+            IntPtr dacLibrary = Windows.Kernel32.LoadLibrary(dacDll);
             if (dacLibrary == IntPtr.Zero)
                 throw new Exception("Failed to load dac: " + dacLibrary);
 

@@ -10,36 +10,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static EmitLiteralsStep;
-
-    public readonly struct EnumFormatters
-    {
-        [MethodImpl(Inline)]
-        public static EnumFormatter<E> create<E>()
-            where E : unmanaged, Enum
-                => default;
-
-        [MethodImpl(Inline)]
-        public static string format<E>(E src)
-            where E : unmanaged, Enum
-                => create<E>().Format(src);
-    }
-
-    public readonly struct EnumFormatter<E> : IFormatter<E>
-        where E : unmanaged, Enum
-    {
-        [MethodImpl(Inline)]
-        public string Format(E src)
-            => src.ToString();
-    }
-
-    [Step(typeof(EmitLiterals), StepName)]
-    public readonly struct EmitLiteralsStep : IWfStep<EmitLiteralsStep>
-    {
-        public const string StepName = nameof(EmitLiterals);
-
-        public static WfStepId StepId => Flow.step<EmitLiteralsStep>();
-    }
 
     public ref struct EmitLiterals
     {
@@ -47,30 +17,33 @@ namespace Z0
 
         public readonly WfDataFlow<IPart,FilePath> Df;
 
+        readonly EmitLiteralsHost Host;
+
         public ReadOnlySpan<EnumLiteralDetail> Emitted;
 
         [MethodImpl(Inline)]
-        public EmitLiterals(IWfShell wf, Assembly src)
+        public EmitLiterals(IWfShell wf, Assembly src, EmitLiteralsHost host)
         {
             Wf = wf;
+            Host = host;
             var part = ApiQuery.part(src).Require();
             Df = (part, wf.AppDataRoot + FileName.define(part.Id.Format(), "enums.csv"));
             Emitted = sys.empty<EnumLiteralDetail>();
-            Wf.Created(StepId);
+            Wf.Created(Host.Id);
         }
 
         public void Run()
         {
-            Wf.Running(StepId, Df);
+            Wf.Running(Host.Id, Df);
             TryRun();
-            Wf.Ran(StepId);
+            Wf.Ran(Host.Id);
         }
 
         void Execute()
         {
             var src = Literals.details(Df.Source.Owner).View;
             var count = src.Length;
-            var formatter = TableFormat.rows<EnumLiteralDetail>();
+            var formatter = Table.rowformatter<EnumLiteralDetail>();
             var dst = Df.Target.Writer();
             dst.WriteLine(formatter.FormatHeader(EnumLiteralDetail.RenderWidths));
 
@@ -80,11 +53,11 @@ namespace Z0
                 try
                 {
                     Format(row, formatter);
-                    dst.WriteLine(formatter.Render());
+                    dst.WriteLine(formatter.Format(true));
                 }
                 catch(Exception e)
                 {
-                    Wf.Warn(StepId, e.Message);
+                    Wf.Warn(Host.Id, e.Message);
                 }
             }
             Emitted = src;
@@ -116,7 +89,7 @@ namespace Z0
 
         public void Dispose()
         {
-           Wf.Disposed(StepId);
+           Wf.Disposed(Host.Id);
         }
     }
 }

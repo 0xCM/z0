@@ -5,25 +5,24 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Microsoft.Win32.SafeHandles;
     using System;
     using System.IO;
     using System.Runtime.InteropServices;
-    using System.Diagnostics;
+    using Microsoft.Win32.SafeHandles;
 
     using Z0.MS;
 
     partial struct Windows
     {
         partial struct Kernel32
-        {            
+        {
             /// <summary>
             /// WARNING: This method does not implicitly handle long paths. Use CreateFile.
             /// </summary>
             [DllImport(Dll, EntryPoint = "CreateFileW", SetLastError = true, CharSet = CharSet.Unicode, BestFitMapping = false, ExactSpelling = true)]
             public static extern unsafe IntPtr CreateFilePrivate_IntPtr(string lpFileName, int dwDesiredAccess, FileShare dwShareMode,
-                SECURITY_ATTRIBUTES* lpSecurityAttributes, FileMode dwCreationDisposition, int dwFlagsAndAttributes, IntPtr hTemplateFile);            
-            
+                SECURITY_ATTRIBUTES* lpSecurityAttributes, FileMode dwCreationDisposition, int dwFlagsAndAttributes, IntPtr hTemplateFile);
+
             public static unsafe IntPtr CreateFile_IntPtr(string lpFileName, int dwDesiredAccess, FileShare dwShareMode,
                 FileMode dwCreationDisposition, int dwFlagsAndAttributes)
             {
@@ -35,23 +34,11 @@ namespace Z0
             /// WARNING: This method does not implicitly handle long paths. Use CreateFile.
             /// </summary>
             [DllImport(Dll, EntryPoint = "CreateFileW", SetLastError = true, CharSet = CharSet.Unicode, BestFitMapping = false, ExactSpelling = true)]
-            private static extern unsafe SafeFileHandle CreateFilePrivate(
-                string lpFileName,
-                int dwDesiredAccess,
-                FileShare dwShareMode,
-                SECURITY_ATTRIBUTES* lpSecurityAttributes,
-                FileMode dwCreationDisposition,
-                int dwFlagsAndAttributes,
-                IntPtr hTemplateFile);
+            private static extern unsafe SafeFileHandle CreateFilePrivate(string lpFileName, int dwDesiredAccess,FileShare dwShareMode,
+                SECURITY_ATTRIBUTES* lpSecurityAttributes, FileMode dwCreationDisposition, int dwFlagsAndAttributes, IntPtr hTemplateFile);
 
-            public static unsafe SafeFileHandle CreateFile(
-                string lpFileName,
-                int dwDesiredAccess,
-                FileShare dwShareMode,
-                SECURITY_ATTRIBUTES* lpSecurityAttributes,
-                FileMode dwCreationDisposition,
-                int dwFlagsAndAttributes,
-                IntPtr hTemplateFile)
+            public static unsafe SafeFileHandle CreateFile(string lpFileName, int dwDesiredAccess, FileShare dwShareMode, SECURITY_ATTRIBUTES* lpSecurityAttributes,
+                FileMode dwCreationDisposition, int dwFlagsAndAttributes, IntPtr hTemplateFile)
             {
                 lpFileName = PathUtilities.EnsureExtendedPrefixIfNeeded(lpFileName);
                 return CreateFilePrivate(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);

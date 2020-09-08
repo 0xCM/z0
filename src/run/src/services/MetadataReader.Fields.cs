@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
     using System.Reflection.PortableExecutable;
-    using System.Collections.Generic;
 
     using SysReader = System.Reflection.Metadata.MetadataReader;
 

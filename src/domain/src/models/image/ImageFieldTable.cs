@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -31,7 +32,7 @@ namespace Z0
         Attributes = 10,
     }
 
-    [Table]
+    [StructLayout(LayoutKind.Sequential)]
     public struct ImageFieldTable
     {
         public Count32 Seq;

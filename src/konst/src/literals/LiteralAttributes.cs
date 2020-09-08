@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    
     using static Konst;
 
     public static class LiteralAttributes
@@ -16,11 +15,11 @@ namespace Z0
         public static NumericLiteral BinaryLiteral(FieldInfo target, object value)
         {
             if(!HasBinaryLiteral(target))
-                return NumericLiteral.Empty;                        
-            
-            return NumericLiteral.Base2(target.Name, value, 
+                return NumericLiteral.Empty;
+
+            return NumericLiteral.Base2(target.Name, value,
                 target.Tag<BinaryLiteralAttribute>().Value.Text);
-        }        
+        }
 
         public static bool HasBinaryLiteral(FieldInfo target)
             => Attribute.IsDefined(target, typeof(BinaryLiteralAttribute));
@@ -33,12 +32,12 @@ namespace Z0
                      .MapValueOrDefault(tag => TargetValue(target, tag.Data), LiteralInfo.Empty);
 
         static LiteralInfo TargetValue(FieldInfo target, string Text)
-            => LiteralInfo.Define(
-                Name: target.Name, 
-                Data: target.GetRawConstantValue(), 
+            => LiteralInfo.define(
+                Name: target.Name,
+                Data: target.GetRawConstantValue(),
                 Text: Text,
-                TypeCode: Type.GetTypeCode(target.FieldType), 
-                IsEnum: target.FieldType.IsEnum, 
+                TypeCode: Type.GetTypeCode(target.FieldType),
+                IsEnum: target.FieldType.IsEnum,
                 MultiLiteral: true
                 );
     }

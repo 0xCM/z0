@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using System.IO;
-
     using static Konst;
 
     partial struct FS
@@ -17,7 +15,7 @@ namespace Z0
         /// <summary>
         /// Identifies and represents and managaged module with an entry point
         /// </summary>
-        public readonly struct ManagedExe : IModule<ManagedExe>
+        public readonly struct ManagedExe : IFileModule<ManagedExe>
         {
             /// <summary>
             /// The path to the represented file
@@ -29,7 +27,6 @@ namespace Z0
             /// </summary>
             public AssemblyName Name {get;}
 
-
             [MethodImpl(Inline)]
             public ManagedExe(FilePath path, AssemblyName name)
             {
@@ -39,6 +36,10 @@ namespace Z0
 
             public ModuleKind Kind
                 => ModuleKind.ManagedExe;
+
+            [MethodImpl(Inline)]
+            public static implicit operator FileModule(ManagedExe src)
+                => new FileModule(src.Path, src.Kind);
         }
     }
 }

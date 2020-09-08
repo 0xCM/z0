@@ -6,12 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
     using static z;
 
-    partial struct LookupTables
+    partial struct Table
     {
         public readonly struct LuFx64<K>
             where K : unmanaged

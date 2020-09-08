@@ -14,7 +14,7 @@ namespace Z0
     partial struct ApiQuery
     {
         [MethodImpl(Inline), Op]
-        public static Assembly[] owners(in ModuleArchive src)
+        public static Assembly[] owners(in ApiModules src)
             => src.Components.Where(isPart);
 
         [MethodImpl(Inline), Op]

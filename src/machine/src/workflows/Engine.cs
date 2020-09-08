@@ -60,7 +60,7 @@ namespace Z0
         void Run(CreateGlobalIndexStep s)
         {
             Wf.Running(s);
-            using var step = new CreateGlobalIndex(Wf, State, new PartFileProvider(Wf, Wf.CaptureRoot));
+            using var step = new CreateGlobalIndex(Wf, State, new PartFiles(Wf, Wf.CaptureRoot));
             step.Run();
             Wf.Ran(s);
         }

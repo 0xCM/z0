@@ -3,25 +3,25 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 //-----------------------------------------------------------------------------
-namespace Z0.MS
+namespace Z0
 {
     [LiteralProvider]
     readonly struct WinLibs
     {
         public const string Advapi32 = "advapi32.dll";
-        
+
         public const string BCrypt = "BCrypt.dll";
-        
+
         public const string CoreComm_L1_1_1 = "api-ms-win-core-comm-l1-1-1.dll";
-        
+
         public const string CoreComm_L1_1_2 = "api-ms-win-core-comm-l1-1-2.dll";
-        
+
         public const string Crypt32 = "crypt32.dll";
-        
+
         public const string CryptUI = "cryptui.dll";
-        
+
         public const string Error_L1 = "api-ms-win-core-winrt-error-l1-1-0.dll";
-        
+
         public const string Gdi32 = "gdi32.dll";
 
         public const string HttpApi = "httpapi.dll";
@@ -78,5 +78,4 @@ namespace Z0.MS
 
         public const string HostPolicy = "hostpolicy.dll";
     }
-
 }

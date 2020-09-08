@@ -7,17 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
-    using System.Reflection.Metadata.Ecma335;
-    using System.Reflection;
-    using System.Reflection.PortableExecutable;
-
 
     using static Konst;
     using static z;
 
     partial class MetadataReader
     {
-        
         public void Read(TableSpan<AssemblyFileHandle> src, Receiver<AssemblyFile> dst)
             => src.Iter(handle => dst(Reader.GetAssemblyFile(handle)));
 
@@ -50,8 +45,8 @@ namespace Z0
 
         public string Read(StringHandle src)
             => Reader.GetString(src);
-        
+
         public MethodBodyBlock Read(MethodDefinition src)
-            => Pe.GetMethodBody(src.RelativeVirtualAddress);        
+            => Pe.GetMethodBody(src.RelativeVirtualAddress);
     }
 }

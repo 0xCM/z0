@@ -18,34 +18,6 @@ namespace Z0
         /// </summary>
         public const ushort PosMask = 0xFFFF;
 
-        [MethodImpl(Inline)]
-        public static F[] literals<F>()
-            where F : unmanaged, Enum
-                => Z0.Table.index<F>().Literals;
-
-        /// <summary>
-        /// Derives format configuration data from a type
-        /// </summary>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
-        public static TableFormatSpec<F> Specify<F>(char delimiter = FieldDelimiter)
-            where F : unmanaged, Enum
-        {
-            var literals = @readonly(literals<F>());
-            var count = literals.Length;
-            var headBuffer = sys.alloc<string>(count);
-            var fieldBuffer = sys.alloc<TabularField<F>>(count);
-            var fields = span(fieldBuffer);
-
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var literal = ref skip(literals, i);
-                seek(fields,i) = new TabularField<F>(literal, literal.ToString(), (int)i, (short)(uint32(literal) >> WidthOffset));
-            }
-
-            return new TableFormatSpec<F>(fieldBuffer);
-        }
-
         /// <summary>
         /// Computes the field index from a field specifier
         /// </summary>
@@ -69,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string[] Headers<F>()
             where F : unmanaged, Enum
-                => Datasets.headers<F>();
+                => Table.headers<F>();
 
         [MethodImpl(Inline)]
         public static DatasetHeader<F> Header<F>()

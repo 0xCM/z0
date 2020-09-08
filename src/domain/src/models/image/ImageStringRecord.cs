@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Konst;
 
@@ -46,7 +47,7 @@ namespace Z0
         Value = 12,
     }
 
-    [Table]
+    [StructLayout(LayoutKind.Sequential)]
     public struct ImageStringRecord
     {
         public Count32 Sequence;

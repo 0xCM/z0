@@ -10,9 +10,9 @@ namespace Z0
 
     partial struct FS
     {
-        public interface IExecutable : IModule
+        public interface IExecutable : IFileModule
         {
-            ModuleKind IModule.Kind => ModuleKind.Exe;
+            ModuleKind IFileModule.Kind => ModuleKind.Exe;
         }
 
         public interface IExecutable<T> : IExecutable

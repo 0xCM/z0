@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+
     using api = Table;
 
     public readonly struct TableSectors<D,S> : ITableSelectors<TableSectors<D,S>,D,S>

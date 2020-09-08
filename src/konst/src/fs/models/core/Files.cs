@@ -48,6 +48,9 @@ namespace Z0
                 get => Data.Edit;
             }
 
+            public Files Where(Func<FilePath,bool> f)
+                => Data.Storage.Where(f);
+
             public ref FilePath this[ulong index]
             {
                 [MethodImpl(Inline)]

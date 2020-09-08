@@ -19,6 +19,14 @@ namespace Z0
             public string Name {get;}
 
             [MethodImpl(Inline)]
+            public static bool operator ==(PathPart a, PathPart b)
+                => a.Equals(b);
+
+            [MethodImpl(Inline)]
+            public static bool operator !=(PathPart a, PathPart b)
+                => !a.Equals(b);
+
+            [MethodImpl(Inline)]
             public static implicit operator PathPart(char[] data)
                 => new PathPart(data);
 
@@ -80,6 +88,16 @@ namespace Z0
             [MethodImpl(Inline)]
             public PathPart Replace(char src, char dst)
                 => Name.Replace(src,dst);
+
+            public override int GetHashCode()
+                => Name.GetHashCode();
+
+            [MethodImpl(Inline)]
+            public bool Equals(PathPart src)
+                => string.Equals(Name, src.Name, NoCase);
+
+            public override bool Equals(object src)
+                => src is PathPart x && Equals(x);
         }
     }
 }

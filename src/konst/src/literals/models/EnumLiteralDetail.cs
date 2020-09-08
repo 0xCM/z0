@@ -5,14 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Konst;
 
     /// <summary>
     /// Defines a boxed enumeration literal as the triple (index,identifier,value)
     /// </summary>
-    [ApiClass(DataSummary)]
+    [StructLayout(LayoutKind.Sequential)]
     public struct EnumLiteralDetail : ITable<EnumLiteralDetail>
     {
         public static ReadOnlySpan<byte> RenderWidths

@@ -27,7 +27,7 @@ namespace Z0
         [Op]
         public static string format(in XedPattern src, char delimiter)
         {
-            var dst = TableFormat.formatter<XedPatternField>(delimiter);
+            var dst = Table.formatter<XedPatternField>(delimiter);
             emit(src,dst);
             return dst.Format();
         }
@@ -35,7 +35,7 @@ namespace Z0
         [Op]
         public static string format(in XedPatternSummary src, char delimiter)
         {
-            var dst = TableFormat.formatter<XedPatternField>(delimiter);
+            var dst = Table.formatter<XedPatternField>(delimiter);
             emit(src, dst);
             return dst.Format();
         }

@@ -17,9 +17,9 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        readonly PartFileProvider Files;
+        readonly PartFiles Files;
 
-        public ParseAsmFiles(IWfShell wf, PartFileProvider files, CorrelationToken ct)
+        public ParseAsmFiles(IWfShell wf, PartFiles files, CorrelationToken ct)
         {
             Ct = ct;
             Wf = wf;

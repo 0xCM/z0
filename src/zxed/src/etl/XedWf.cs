@@ -32,7 +32,7 @@ namespace Z0
 
         readonly XedStagingArchive Dst;
 
-        readonly TabularArchive Pub;
+        readonly TableArchive Pub;
 
         readonly CorrelationToken Ct;
 
@@ -43,7 +43,7 @@ namespace Z0
             Ct = Wf.Ct;
             Src = XedSourceArchive.Create(Config.SourceRoot);
             Dst = XedStagingArchive.Create(Config.ExtractRoot);
-            Pub = TabularArchive.Service(Config.PubRoot);
+            Pub = TableArchive.create(Config.PubRoot);
         }
 
         public void Dispose()

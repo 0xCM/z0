@@ -10,7 +10,7 @@ namespace Z0
     {
         /// <summary>
         /// Specifies the signature kind. Underlying values correspond to the representation
-        /// in the leading signature byte represented by <see cref="SignatureHeader"/>.
+        /// in the leading signature byte represented by <see cref="SigHeader"/>.
         /// </summary>
         public enum SignatureKind : byte
         {

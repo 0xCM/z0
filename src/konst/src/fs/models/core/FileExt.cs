@@ -17,11 +17,43 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static FileExt operator + (FileExt a, FileExt b)
-                => ext(text.format("{0}.{1}",a.Name,b.Name));
+                => ext(text.format("{0}.{1}", a.Name, b.Name));
+
+            [MethodImpl(Inline)]
+            public static bool operator ==(FileExt a, FileExt b)
+                => a.Equals(b);
+
+            [MethodImpl(Inline)]
+            public static bool operator !=(FileExt a, FileExt b)
+                => !a.Equals(b);
 
             [MethodImpl(Inline)]
             public FileExt(PathPart name)
                 => Name = name;
+
+            [MethodImpl(Inline)]
+            public bool Matches(FilePath src)
+            {
+                var left = Name.View;
+                var right = src.FileExt.Name.View;
+                return left.ContentEqual(right);
+            }
+
+            [MethodImpl(Inline)]
+            public bool Matches(FileName src)
+            {
+                var left = Name.View;
+                var right = src.FileExt.Name.View;
+                return left.ContentEqual(right);
+            }
+
+            [MethodImpl(Inline)]
+            public bool Matches(FileExt src)
+            {
+                var left = Name.View;
+                var right = src.Name.View;
+                return left.ContentEqual(right);
+            }
 
             public bool IsEmpty
             {
@@ -53,6 +85,16 @@ namespace Z0
 
             public override string ToString()
                 => Format();
+
+           public override int GetHashCode()
+                => Name.GetHashCode();
+
+            [MethodImpl(Inline)]
+            public bool Equals(FileExt src)
+                => Name.Equals(src.Name);
+
+            public override bool Equals(object src)
+                => src is FileExt x && Equals(x);
         }
     }
 }

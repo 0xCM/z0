@@ -71,7 +71,7 @@ namespace Z0
             if(header)
                 dst.AppendLine(Tabular.HeaderText<F>(delimiter));
 
-            var formatter = TableFormat.formatter<F>(delimiter);
+            var formatter = Table.formatter<F>(delimiter);
 
             Root.iter(records, r => dst.AppendLine(r.DelimitedText(delimiter)));
         }

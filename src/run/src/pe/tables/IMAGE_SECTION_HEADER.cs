@@ -13,7 +13,6 @@ namespace Z0
 
     partial struct ImageTables
     {
-
         [StructLayout(LayoutKind.Sequential)]
         [Table("https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_section_header")]
         public unsafe struct IMAGE_SECTION_HEADER

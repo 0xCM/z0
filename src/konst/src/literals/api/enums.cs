@@ -31,7 +31,7 @@ namespace Z0
             {
                 var literal = literals[i];
 
-                var description = ReflectedLiterals.attributed(typeof(E).Field(literal.ToString()).Require()).Text;
+                var description = attributed(typeof(E).Field(literal.ToString()).Require()).Text;
                 if(string.IsNullOrWhiteSpace(description) && flags)
                     description = literal.LiteralValue.ToString();
 

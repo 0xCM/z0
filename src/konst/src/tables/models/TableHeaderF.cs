@@ -39,7 +39,7 @@ namespace Z0
 
         public string Format()
         {
-            var formatter = TableFormat.formatter<F>(Fields, Delimiter);
+            var formatter = Table.formatter<F>(Fields, Delimiter);
             for(var i=0u; i<Fields.Count; i++)
             {
                 if(i != 0)

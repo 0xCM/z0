@@ -14,24 +14,24 @@ namespace Z0
     {
         public R[] Records {get;}
 
-        public TableFormatSpec Format {get;}
+        public TableRenderSpec RenderSpec {get;}
 
-        public Report(R[] records, TableFormatSpec format)
+        public Report(R[] records, TableRenderSpec format)
         {
             Records = records;
-            Format = format;
+            RenderSpec = format;
         }
 
         public string[] HeaderLabels
         {
             [MethodImpl(Inline)]
-            get => Format.Headers;
+            get => RenderSpec.Headers;
         }
 
         public int FieldCount
         {
              [MethodImpl(Inline)]
-             get => Format.FieldCount;
+             get => RenderSpec.FieldCount;
         }
         public ref readonly R this[int index]
         {
@@ -66,18 +66,18 @@ namespace Z0
         public static Report<F,R> Empty
             => new Report<F,R>();
 
-        public new TableFormatSpec<F> Format {get;}
+        public new TableRenderSpec<F> RenderSpec {get;}
 
         public Report(R[] records)
-            : base(records, Tabular.Specify<F>())
+            : base(records, Table.renderspec<F>())
         {
-            Format = Tabular.Specify<F>();
+            RenderSpec = Table.renderspec<F>();
         }
 
         public Report()
-            : base(Array.Empty<R>(), Tabular.Specify<F>())
+            : base(Array.Empty<R>(), Table.renderspec<F>())
         {
-            Format = Tabular.Specify<F>();
+            RenderSpec = Table.renderspec<F>();
         }
 
         [MethodImpl(Inline)]

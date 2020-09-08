@@ -5,8 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
-    using System.IO;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -21,7 +19,7 @@ namespace Z0
     [ApiHost]
     public class AppMsg : IAppMsg
     {
-        public AppMsgData<object> Data {get;}
+        public AppMsgData Data {get;}
 
         [MethodImpl(Inline), Op]
         public static AppMsgSource source(string caller, string file, int? line)
@@ -34,6 +32,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static AppMsg define(object content, MessageKind kind)
             => new AppMsg(content, kind, (FlairKind)(kind), EmptyString, EmptyString, null);
+
+        [MethodImpl(Inline), Op]
+        public static AppMsg define(AppMsgData src)
+            => new AppMsg(src);
 
         [MethodImpl(Inline), Op]
         public static AppMsg colorize(object content, FlairKind color)
@@ -55,10 +57,20 @@ namespace Z0
         public static AppMsg error(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => define($"{content} {caller} {line} {file}", MessageKind.Error);
 
+        [MethodImpl(Inline), Op]
+        public static AppMsg error(Exception e)
+            => define(e.ToString(), MessageKind.Error);
+
         [MethodImpl(Inline)]
         AppMsg(object content, MessageKind kind, FlairKind color, string caller, string file, int? line, bool displayed = false)
         {
-            Data = new AppMsgData<object>(content,"{0}", kind, color, source(caller, file, line));
+            Data = new AppMsgData(content,"{0}", kind, color, source(caller, file, line));
+        }
+
+        [MethodImpl(Inline)]
+        AppMsg(AppMsgData data)
+        {
+            Data = data;
         }
 
         /// <summary>

@@ -9,49 +9,45 @@ namespace Z0
     using System.Text;
 
     using static Konst;
+    using static z;
 
-    public struct RowFormatter<T>
-        where T : struct
+    using api = Table;
+
+    public struct RowFormatter
     {
-        readonly StringBuilder Target;
+        readonly Type TableType;
 
         readonly TableFields Fields;
 
-        readonly byte[] Widths;
+        readonly TableSpan<ushort> Widths;
 
-        char Delimiter;
+        readonly StringBuilder Target;
+
+        readonly char Delimiter;
 
         [MethodImpl(Inline)]
-        public RowFormatter(TableFields fields, StringBuilder dst, char delimiter)
+        public RowFormatter(Type table, TableFields fields, StringBuilder dst = null, char delimiter = FieldDelimiter)
         {
+            TableType = table;
             Fields = fields;
             Target = dst;
             Delimiter = delimiter;
-            Widths = sys.alloc<byte>(Fields.Length);
-            for(var i=0; i<Widths.Length; i++)
-                Widths[i] = 10;
+            Widths = fields.Storage.Select(f => f.RenderWidth.Value);
         }
 
         public void EmitEol()
             => Target.Append(Eol);
 
-        public RowFormatter<T> Reset()
+        public RowFormatter Reset()
         {
             Target.Clear();
             return this;
         }
 
-        public string Render(bool reset = true)
-        {
-            var content = Target.ToString();
+        public void EmitRow(object src)
+            => api.render(Fields,src,Target);
 
-            if(reset)
-                Target.Clear();
-
-            return content;
-        }
-
-        public string FormatHeader(ReadOnlySpan<byte> widths)
+        public string FormatHeader()
         {
             var dst = text.build();
             var view = Fields.View;
@@ -61,18 +57,18 @@ namespace Z0
                 dst.Append(Delimiter);
                 dst.Append(Space);
                 ref readonly var field = ref z.skip(view,i);
-                dst.Append(field.FieldName.Format().PadRight(z.skip(widths,i)));
+                dst.Append(field.FieldName.Format().PadRight(Widths[i]));
             }
             return dst.ToString();
         }
 
-        public void EmitHeader(ReadOnlySpan<byte> widths)
+        public void EmitHeader()
         {
-            Target.Append(FormatHeader(widths));
+            Target.Append(FormatHeader());
             EmitEol();
         }
 
-        public void Append(ushort width, object src)
+        void Append(ushort width, object src)
             => Target.Append(Render(src).PadRight(width));
 
         void Delimit(ushort width, object src)
@@ -82,7 +78,7 @@ namespace Z0
             Target.Append(Render(src).PadRight(width));
         }
 
-        public void Delimit<E>(ushort width, EnumValue<E> src)
+        void Delimit<E>(ushort width, EnumValue<E> src)
             where E : unmanaged, Enum
         {
             Target.Append(Delimiter);
@@ -90,42 +86,42 @@ namespace Z0
             Target.Append(src.Format().PadRight(width));
         }
 
-        public void Delimit(ushort width, byte src)
+        void Delimit(ushort width, byte src)
         {
             Target.Append(Delimiter);
             Target.Append(Space);
             Target.Append(src.ToString().PadRight(width));
         }
 
-        public void Delimit(ushort width, ushort src)
+        void Delimit(ushort width, ushort src)
         {
             Target.Append(Delimiter);
             Target.Append(Space);
             Target.Append(src.ToString().PadRight(width));
         }
 
-        public void Delimit(ushort width, uint src)
+        void Delimit(ushort width, uint src)
         {
             Target.Append(Delimiter);
             Target.Append(Space);
             Target.Append(src.ToString().PadRight(width));
         }
 
-        public void Delimit(ushort width, ulong src)
+        void Delimit(ushort width, ulong src)
         {
             Target.Append(Delimiter);
             Target.Append(Space);
             Target.Append(src.ToString().PadRight(width));
         }
 
-        public void Delimit(ushort width, string src)
+        void Delimit(ushort width, string src)
         {
             Target.Append(Delimiter);
             Target.Append(Space);
             Target.Append((src ?? EmptyString).PadRight(width));
         }
 
-        public void Delimit<C>(ushort width, C content)
+        void Delimit<C>(ushort width, C content)
             where C : ITextual
         {
             Target.Append(Delimiter);

@@ -72,7 +72,7 @@ namespace Z0
 
         public string DelimitedText(char delimiter)
         {
-            var dst = TableFormat.formatter<F>(delimiter);
+            var dst = Table.formatter<F>(delimiter);
             dst.Delimit(F.Sequence, Sequence);
             dst.Delimit(F.Address, Address);
             dst.Delimit(F.Length, Length);

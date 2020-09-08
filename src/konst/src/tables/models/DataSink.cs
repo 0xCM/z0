@@ -6,8 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Security;
 
     using static Konst;
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate void DatasetRelay<S,R>(in R src, IDatasetFormatter<S> dst)
+        where S : unmanaged, Enum
+        where R : struct;
 
     public readonly struct DataSink<S,R>
         where S : unmanaged, Enum

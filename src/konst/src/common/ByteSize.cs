@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -18,7 +18,7 @@ namespace Z0
         /// Specifies a byte count
         /// </summary>
         public readonly uint Count;
-        
+
         [MethodImpl(Inline)]
         public static ByteSize Define(int count)
             => new ByteSize(count);
@@ -101,7 +101,7 @@ namespace Z0
             => Count.ToString(pattern);
 
         public string Format()
-            => Format("#,#");
+            => Count == 0 ? "0" : Format("#,#");
 
         public override string ToString()
             => Format();
@@ -111,7 +111,7 @@ namespace Z0
 
         public bool Equals(ByteSize rhs)
             => Count == rhs.Count;
-    
+
         public override bool Equals(object obj)
             => obj is ByteSize ? Equals((ByteSize)obj) : false;
 
@@ -133,7 +133,7 @@ namespace Z0
             get => Count != 0;
         }
 
-        public static ByteSize Empty 
+        public static ByteSize Empty
             => default;
     }
 }

@@ -16,14 +16,14 @@ namespace Z0
 
         public string[] Args {get;}
 
-        public ModuleArchive Modules {get;}
+        public ApiModules Modules {get;}
 
         public CorrelationToken Ct {get;}
 
         public IShellPaths Paths {get;}
 
         [MethodImpl(Inline)]
-        public ShellContext(Assembly control, string[] args, ModuleArchive modules)
+        public ShellContext(Assembly control, string[] args, ApiModules modules)
         {
             Control = control;
             Args = args;

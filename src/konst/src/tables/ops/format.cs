@@ -13,13 +13,6 @@ namespace Z0
 
     partial struct Table
     {
-        [MethodImpl(Inline), Op]
-        public static string format(object src, Type t, char delimiter, RenderWidth width)
-        {
-            var content = src is ITextual x ? x.Format() : src.ToString();
-            return text.rpad(text.format("{0} {1}", delimiter, content), width);
-        }
-
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static string cell<T>(in CellFormatter<T,string> formatter, in T src)
             => formatter.Format(src);
@@ -39,7 +32,7 @@ namespace Z0
                 var type = field.DataType;
                 var def = field.Definition;
                 var val = value(def,tr);
-                var fmt = format(val, type, FieldDelimiter, width);
+                var fmt = text.format(val, type, FieldDelimiter, width);
                 dst.Append(fmt);
             }
         }

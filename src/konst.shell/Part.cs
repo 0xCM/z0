@@ -6,7 +6,7 @@
 
 namespace Z0.Parts
 {
-    public sealed class Run : Part<Run>
+    public sealed class KonstShell : Part<KonstShell>
     {
 
     }

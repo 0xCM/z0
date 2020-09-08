@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// Identifies and represents a native module that lacks  an entry point
         /// </summary>
-        public readonly struct NativeDll : IModule<NativeDll>
+        public readonly struct NativeDll : IFileModule<NativeDll>
         {
             public FilePath Path {get;}
 
@@ -23,9 +23,11 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public NativeDll(FilePath path)
-            {
-                Path = path;
-            }
+                => Path = path;
+
+            [MethodImpl(Inline)]
+            public static implicit operator FileModule(NativeDll src)
+                => new FileModule(src.Path, src.Kind);
         }
     }
 }

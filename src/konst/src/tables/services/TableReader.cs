@@ -5,25 +5,25 @@
 namespace Z0
 {
     using System;
-    
-    public readonly struct TableReader<S,T> : ITableReader<TableReader<S,T>, ReaderState<S>, T>
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+    using static z;
+
+    public readonly struct TableReader<S,T>
         where T : struct
         where S : struct, ISourceFacets
     {
-        public TableReader(in ReaderState<S> state)
-        {
-            State = state;
-        }
-        
         public readonly ReaderState<S> State;
 
-        public TableReader<S,T> Init(ReaderState<S> state)
-            => new TableReader<S,T>(state);
-        
+        [MethodImpl(Inline)]
+        public TableReader(ReaderState<S> state)
+            => State = state;
+
         public ReadOnlySpan<T> Read()
         {
             var data = State.Source;
-            return z.cover<byte,T>(data[0], 0);
-        }           
-    }    
+            return cover<byte,T>(data[0], 0);
+        }
+    }
 }

@@ -14,7 +14,7 @@ namespace Z0
     partial struct Flow
     {
         /// <summary>
-        /// Reifies a <see cref='IShellContet'/> predicated on the entry <see cref='Assembly'/>, a <see cref='ModuleArchive'/> derived
+        /// Reifies a <see cref='IShellContet'/> predicated on the entry <see cref='Assembly'/>, a <see cref='ApiModules'/> derived
         /// from the entry assembly location and zero or more arguments taken from the environment context
         /// </summary>
         [Op]
@@ -27,14 +27,14 @@ namespace Z0
         }
 
         /// <summary>
-        /// Reifies a <see cref='IShellContet'/> predicated on a controlling <see cref='Assembly'/>, a source <see cref='ModuleArchive'/> and
+        /// Reifies a <see cref='IShellContet'/> predicated on a controlling <see cref='Assembly'/>, a source <see cref='ApiModules'/> and
         /// zero or more arguments
         /// </summary>
         /// <param name="control">The controlling assembly</param>
         /// <param name="modules">The source module archive</param>
         /// <param name="args">The shell args</param>
         [MethodImpl(Inline), Op]
-        public static IShellContext context(Assembly control, ModuleArchive modules, params string[] args)
+        public static IShellContext context(Assembly control, ApiModules modules, params string[] args)
             => new ShellContext(control, args, modules);
     }
 }

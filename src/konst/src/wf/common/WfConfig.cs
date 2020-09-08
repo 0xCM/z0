@@ -40,7 +40,7 @@ namespace Z0
         /// <summary>
         /// The input data archive configuration
         /// </summary>
-        public ModuleArchive Modules {get;}
+        public ApiModules Modules {get;}
 
         /// <summary>
         /// The output data archive configuration
@@ -88,7 +88,7 @@ namespace Z0
         public ApiParts Api {get;}
 
         [MethodImpl(Inline)]
-        public WfConfig(IShellContext shell, string[] args, ModuleArchive modules, ArchiveConfig target,
+        public WfConfig(IShellContext shell, string[] args, ApiModules modules, ArchiveConfig target,
             PartId[] parts, FolderPath resroot, FolderPath appdata, FS.FolderPath logroot, WfSettings settings)
         {
             Shell = insist(shell);
@@ -106,7 +106,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public WfConfig(IShellContext shell, string[] args, ModuleArchive modules)
+        public WfConfig(IShellContext shell, string[] args, ApiModules modules)
         {
             Shell = insist(shell);
             Paths = shell.Paths;
