@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
-    
+
     using static Konst;
 
-    partial struct V0d
+    partial struct z
     {
         /// <summary>
         ///  __m128i _mm_bslli_si128 (__m128i a, int imm8) PSLLDQ xmm, imm8
@@ -94,7 +94,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vbsll(Vector128<ulong> x, [Imm] byte count)
             => ShiftLeftLogical128BitLane(x, count);
-        
+
         /// <summary>
         /// __m256i _mm256_bslli_epi128 (__m256i a, const int imm8) VPSLLDQ ymm, ymm, imm8
         /// Shifts the source vector leftwards with byte-level resolution
@@ -173,6 +173,6 @@ namespace Z0
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vbsll(Vector256<ulong> x, [Imm] byte count)
-            => ShiftLeftLogical128BitLane(x, count);          
+            => ShiftLeftLogical128BitLane(x, count);
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public unsafe readonly struct StringBuffers
+    unsafe readonly struct ResBuffer
     {
         const string Storage = "A null argument was provided                                                                                                                                                                ";
 

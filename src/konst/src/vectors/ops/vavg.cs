@@ -5,16 +5,16 @@
 namespace Z0
 {
      using System;
-     using System.Runtime.CompilerServices;    
+     using System.Runtime.CompilerServices;
      using System.Runtime.Intrinsics;
      using System.Runtime.Intrinsics.X86;
 
      using static System.Runtime.Intrinsics.X86.Sse2;
-     using static System.Runtime.Intrinsics.X86.Avx2;        
+     using static System.Runtime.Intrinsics.X86.Avx2;
 
      using static Konst;
-     
-     partial struct V0d
+
+     partial struct z
      {
           /// <summary>
           /// __m128i _mm_avg_epu8 (__m128i a, __m128i b) PAVGB xmm, xmm/m128
@@ -30,7 +30,7 @@ namespace Z0
           /// </summary>
           /// <param name="lhs">The left vector</param>
           /// <param name="rhs">The right vector</param>
-          [MethodImpl(Inline), Avgz]          
+          [MethodImpl(Inline), Avgz]
           public static Vector128<ushort> vavg(Vector128<ushort> lhs,Vector128<ushort> rhs)
                => Average(lhs,rhs);
 
@@ -39,7 +39,7 @@ namespace Z0
           /// </summary>
           /// <param name="lhs">The left vector</param>
           /// <param name="rhs">The right vector</param>
-          [MethodImpl(Inline), Avgz]          
+          [MethodImpl(Inline), Avgz]
           public static Vector256<byte> vavg(Vector256<byte> lhs,Vector256<byte> rhs)
                => Average(lhs,rhs);
 
@@ -48,7 +48,7 @@ namespace Z0
           /// </summary>
           /// <param name="lhs">The left vector</param>
           /// <param name="rhs">The right vector</param>
-          [MethodImpl(Inline), Avgz]          
+          [MethodImpl(Inline), Avgz]
           public static Vector256<ushort> vavg(Vector256<ushort> lhs,Vector256<ushort> rhs)
                => Average(lhs,rhs);
      }

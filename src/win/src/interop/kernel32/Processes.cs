@@ -107,6 +107,12 @@ namespace Z0
             [DllImport(WinLibs.Kernel32, SetLastError = true), SuppressUnmanagedCodeSecurity]
             [return: MarshalAs(UnmanagedType.Bool)]
             public static unsafe extern bool FlushInstructionCache(SafeObjectHandle hProcess, void* lpcBaseAddress, UIntPtr dwSize);
+
+
+            [DllImport(WinLibs.Kernel32), SuppressUnmanagedCodeSecurity]
+            [return: MarshalAs(UnmanagedType.Bool)]
+            public static extern bool IsWow64Process(IntPtr hProcess, out bool isWow64);
+
         }
     }
 }

@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static As;
-    
+
     partial class gvec
     {
         /// <summary>
@@ -24,15 +24,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(V0d.vbsrl(v8u(x), count));
+                return generic<T>(z.vbsrl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(V0d.vbsrl(v16u(x), count));
-            else if(typeof(T) == typeof(uint)) 
-                return generic<T>(V0d.vbsrl(v32u(x), count));
+                return generic<T>(z.vbsrl(v16u(x), count));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(z.vbsrl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(V0d.vbsrl(v64u(x), count));
+                return generic<T>(z.vbsrl(v64u(x), count));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -41,20 +41,20 @@ namespace Z0
         /// <param name="x">The source vector</param>
         /// <param name="count">The number of bytes to shift</param>
         /// <typeparam name="T">THe primal component type</typeparam>
-        [MethodImpl(Inline), Op, Closures(NumericKind.UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vbsrl<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(V0d.vbsrl(v8u(x), count));
+                return generic<T>(z.vbsrl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(V0d.vbsrl(v16u(x), count));
-            else if(typeof(T) == typeof(uint)) 
-                return generic<T>(V0d.vbsrl(v32u(x), count));
+                return generic<T>(z.vbsrl(v16u(x), count));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(z.vbsrl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(V0d.vbsrl(v64u(x), count));
+                return generic<T>(z.vbsrl(v64u(x), count));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

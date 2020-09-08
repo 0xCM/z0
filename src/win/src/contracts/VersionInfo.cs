@@ -16,22 +16,22 @@ namespace Z0
         /// <summary>
         /// In a version 'A.B.C.D', this field represents 'A'.
         /// </summary>
-        public readonly int Major { get; }
+        public readonly int Major;
 
         /// <summary>
         /// In a version 'A.B.C.D', this field represents 'B'.
         /// </summary>
-        public readonly int Minor { get; }
+        public readonly int Minor;
 
         /// <summary>
         /// In a version 'A.B.C.D', this field represents 'C'.
         /// </summary>
-        public readonly int Revision { get; }
+        public readonly int Revision;
 
         /// <summary>
         /// In a version 'A.B.C.D', this field represents 'D'.
         /// </summary>
-        public readonly int Patch { get; }
+        public readonly int Patch;
 
         public VersionInfo(int major, int minor, int revision, int patch)
         {
@@ -43,12 +43,11 @@ namespace Z0
 
         /// <inheritdoc/>
         public bool Equals(VersionInfo other)
-        {
-            return Major == other.Major && Minor == other.Minor && Revision == other.Revision && Patch == other.Patch;
-        }
+            => Major == other.Major && Minor == other.Minor && Revision == other.Revision && Patch == other.Patch;
 
         /// <inheritdoc/>
-        public override bool Equals(object obj) => obj is VersionInfo other && Equals(other);
+        public override bool Equals(object obj)
+            => obj is VersionInfo other && Equals(other);
 
         /// <inheritdoc/>
         public override int GetHashCode()
@@ -78,31 +77,25 @@ namespace Z0
             return Patch.CompareTo(other.Patch);
         }
 
-        /// <summary>
-        /// To string.
-        /// </summary>
-        /// <returns>The A.B.C.D version prepended with 'v'.</returns>
         public override string ToString()
-        {
-            return $"{Major}.{Minor}.{Revision}.{Patch}";
-        }
+            => $"{Major}.{Minor}.{Revision}.{Patch}";
 
-        public static bool operator ==(VersionInfo left, VersionInfo right) 
+        public static bool operator ==(VersionInfo left, VersionInfo right)
             => left.Equals(right);
 
-        public static bool operator !=(VersionInfo left, VersionInfo right) 
+        public static bool operator !=(VersionInfo left, VersionInfo right)
             => !(left == right);
 
-        public static bool operator <(VersionInfo left, VersionInfo right) 
+        public static bool operator <(VersionInfo left, VersionInfo right)
             => left.CompareTo(right) < 0;
 
-        public static bool operator <=(VersionInfo left, VersionInfo right) 
+        public static bool operator <=(VersionInfo left, VersionInfo right)
             => left.CompareTo(right) <= 0;
 
-        public static bool operator >(VersionInfo left, VersionInfo right) 
+        public static bool operator >(VersionInfo left, VersionInfo right)
             => right < left;
 
-        public static bool operator >=(VersionInfo left, VersionInfo right) 
+        public static bool operator >=(VersionInfo left, VersionInfo right)
             => right <= left;
     }
 }

@@ -26,8 +26,8 @@ namespace Z0
         [MethodImpl(Inline), AddH]
         public static Vector128<sbyte> vhadd(Vector128<sbyte> x, Vector128<sbyte> y)
         {
-            var a = vinflate(x, n256, z16i);
-            var b = vinflate(y, n256, z16i);
+            var a = z.vinflate(x, n256, z16i);
+            var b = z.vinflate(y, n256, z16i);
             return z.vcompact(vhadd(a,b), n128, z8i);
         }
 

@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class XTend
+    partial struct z
     {
         /// <summary>
         /// Combines two 128-bit source vectors into a 128-bit target vector via a mapping function
@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="f">The mapping function</param>
         /// <typeparam name="S">The source primal type</typeparam>
         /// <typeparam name="T">The target primal type</typeparam>
-        public static Vector128<T> Map<S,T>(this Vector128<S> lhs, Vector128<S> rhs, Func<S,S,T> f)
+        public static Vector128<T> vmap<S,T>(Vector128<S> lhs, Vector128<S> rhs, Func<S,S,T> f)
             where T : unmanaged
             where S : unmanaged
         {
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="f">The mapping function</param>
         /// <typeparam name="S">The source primal type</typeparam>
         /// <typeparam name="T">The target primal type</typeparam>
-        public static Vector128<T> Map<S,T>(this Vector128<S> src, Func<S,T> f)
+        public static Vector128<T> vmap<S,T>(Vector128<S> src, Func<S,T> f)
             where T : unmanaged
             where S : unmanaged
         {
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="f">The mapping function</param>
         /// <typeparam name="S">The source primal type</typeparam>
         /// <typeparam name="T">The target primal type</typeparam>
-        public static Vector256<T> Map<S,T>(this Vector256<S> src, Func<S,T> f)
+        public static Vector256<T> vmap<S,T>(Vector256<S> src, Func<S,T> f)
             where T : unmanaged
             where S : unmanaged
         {
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="f">The mapping function</param>
         /// <typeparam name="S">The source primal type</typeparam>
         /// <typeparam name="T">The target primal type</typeparam>
-        public static Vector256<T> Map<S,T>(this Vector256<S> x, Vector256<S> y, Func<S,S,T> f)
+        public static Vector256<T> vmap<S,T>(Vector256<S> x, Vector256<S> y, Func<S,S,T> f)
             where T : unmanaged
             where S : unmanaged
         {

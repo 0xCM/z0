@@ -43,8 +43,7 @@ namespace Z0.MS
         [DllImport(VersionLibraryName, CharSet = CharSet.Unicode, EntryPoint = "VerQueryValueW")]
         public static extern bool VerQueryValue(byte* pBlock, string pSubBlock, out IntPtr val, out int len);
 
-        [DllImport(Kernel32LibraryName)]
-        public static extern IntPtr GetProcAddress(IntPtr hModule, string procedureName);
+
     }
 
 }

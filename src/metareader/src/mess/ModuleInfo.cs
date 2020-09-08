@@ -20,9 +20,9 @@ namespace Z0.MS
     public class ModuleInfo
     {
         private readonly IDataReader _dataReader;
-        
+
         private bool? _isManaged;
-        
+
         private VersionInfo? _version;
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Z0.MS
             }
         }
 
-        public override string ToString() 
+        public override string ToString()
             => FileName;
 
         /// <summary>
@@ -137,14 +137,7 @@ namespace Z0.MS
         /// Creates a ModuleInfo object with an IDataReader instance.  This is used when
         /// lazily evaluating VersionInfo.
         /// </summary>
-        public ModuleInfo(
-            IDataReader reader,
-            ulong imgBase,
-            int filesize,
-            int timestamp,
-            string fileName,
-            ImmutableArray<byte> buildId = default,
-            VersionInfo? version = null)
+        public ModuleInfo(IDataReader reader, ulong imgBase, int filesize, int timestamp, string fileName, ImmutableArray<byte> buildId = default, VersionInfo? version = null)
         {
             _dataReader = reader ?? throw new ArgumentNullException(nameof(reader));
             ImageBase = imgBase;

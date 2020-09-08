@@ -5,9 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
@@ -25,7 +25,7 @@ namespace Z0
         /// [10000000 00000000]
         /// </summary>
         const ushort SignMask16 = Pow2.T15;
-        
+
         /// <summary>
         /// [10000000 00000000 00000000 00000000]
         /// </summary>
@@ -112,7 +112,7 @@ namespace Z0
         public static Vector128<long> vlt(Vector128<long> x, Vector128<long> y)
         {
             var a = vconcat(x,y);
-            var b = vswaphl(a);            
+            var b = vswaphl(a);
             return vlo(vlt(a,b));
         }
 
@@ -128,7 +128,7 @@ namespace Z0
             var b = vswaphl(a);
             return vlo(vlt(a,b));
         }
-        
+
         /// <summary>
         ///  __m256i _mm256_cmpgt_epi8 (__m256i a, __m256i b) VPCMPGTB ymm, ymm, ymm/m256
         /// </summary>
@@ -151,7 +151,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// __m256i _mm256_cmpgt_epi16 (__m256i a, __m256i b)VPCMPGTW ymm, ymm, ymm/m256 
+        /// __m256i _mm256_cmpgt_epi16 (__m256i a, __m256i b)VPCMPGTW ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -160,7 +160,7 @@ namespace Z0
             => CompareGreaterThan(y,x);
 
         /// <summary>
-        /// __m256i _mm256_cmpgt_epi16 (__m256i a, __m256i b) VPCMPGTW ymm, ymm, ymm/m256 
+        /// __m256i _mm256_cmpgt_epi16 (__m256i a, __m256i b) VPCMPGTW ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -210,11 +210,7 @@ namespace Z0
         public static Vector256<ulong> vlt(Vector256<ulong> x, Vector256<ulong> y)
         {
             var mask = vbroadcast(n256,SignMask64);
-            return v64u(
-                vlt(
-                v64i(vxor(x,mask)),
-                v64i(vxor(y,mask)))
-                );
-        }    
+            return v64u(vlt(v64i(vxor(x,mask)),v64i(vxor(y,mask))));
+        }
     }
 }

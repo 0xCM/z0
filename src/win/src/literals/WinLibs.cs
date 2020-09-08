@@ -46,6 +46,8 @@ namespace Z0
 
         public const string PerfCounter = "perfcounter.dll";
 
+        public const string PsApi = "psapi.dll";
+
         public const string RoBuffer = "api-ms-win-core-winrt-robuffer-l1-1-0.dll";
 
         public const string Secur32 = "secur32.dll";

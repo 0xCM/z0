@@ -96,13 +96,13 @@ namespace Z0.Dac
 
             OwningLibrary = new RefCountedFreeLibrary(dacLibrary);
 
-            IntPtr initAddr = NativeMethods.GetProcAddress(dacLibrary, "DAC_PAL_InitializeDLL");
+            IntPtr initAddr = Windows.Kernel32.GetProcAddress(dacLibrary, "DAC_PAL_InitializeDLL");
             if (initAddr == IntPtr.Zero)
-                initAddr = NativeMethods.GetProcAddress(dacLibrary, "PAL_InitializeDLL");
+                initAddr = Windows.Kernel32.GetProcAddress(dacLibrary, "PAL_InitializeDLL");
 
             if (initAddr != IntPtr.Zero)
             {
-                IntPtr dllMain = NativeMethods.GetProcAddress(dacLibrary, "DllMain");
+                IntPtr dllMain = Windows.Kernel32.GetProcAddress(dacLibrary, "DllMain");
                 if (dllMain == IntPtr.Zero)
                     throw new Exception("Failed to obtain Dac DllMain");
 
@@ -110,7 +110,7 @@ namespace Z0.Dac
                 main(dacLibrary, 1, IntPtr.Zero);
             }
 
-            IntPtr addr = NativeMethods.GetProcAddress(dacLibrary, "CLRDataCreateInstance");
+            IntPtr addr = Windows.Kernel32.GetProcAddress(dacLibrary, "CLRDataCreateInstance");
             if (addr == IntPtr.Zero)
                 throw new Exception("Failed to obtain Dac CLRDataCreateInstance");
 

@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
@@ -13,11 +13,11 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Ssse3;
 
     using static Konst;
-    
-    partial struct V0d
+
+    partial struct z
     {
-       /// <summary>
-        /// __m128i _mm_mulhrs_epi16 (__m128i a, __m128i b)PMULHRSW xmm, xmm/m128
+        /// <summary>
+        /// __m128i _mm_mulhrs_epi16 (__m128i a, __m128i b) PMULHRSW xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -26,7 +26,7 @@ namespace Z0
             => MultiplyHighRoundScale(x,y);
 
         /// <summary>
-        ///  __m256i _mm256_mulhrs_epi16 (__m256i a, __m256i b)VPMULHRSW ymm, ymm, ymm/m256
+        ///  __m256i _mm256_mulhrs_epi16 (__m256i a, __m256i b) VPMULHRSW ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>

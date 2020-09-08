@@ -23,5 +23,35 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
                 => vcell<S,T>(src,0);
+
+        /// <summary>
+        /// Returns a reference to the leading cell
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T vfirst<T>(in Vector128<T> src)
+            where T : unmanaged
+                => ref @as<Vector128<T>,T>(src);
+
+        /// <summary>
+        /// Returns a reference to the leading cell
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T vfirst<T>(in Vector256<T> src)
+            where T : unmanaged
+                => ref @as<Vector256<T>,T>(src);
+
+        /// <summary>
+        /// Returns a reference to the leading cell
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T vfirst<T>(in Vector512<T> src)
+            where T : unmanaged
+                => ref @as<Vector512<T>,T>(src);
     }
 }

@@ -10,14 +10,14 @@ namespace Z0.MS
     using System.Buffers;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    
+
     using Z0.Image;
 
     public unsafe readonly struct WindowsFunctions
     {
-        public bool IsEqualFileVersion(string file, DllVersion version)
+        public bool IsEqualFileVersion(FS.FilePath file, DllVersion version)
         {
-            if (!GetFileVersion(file, out int major, out int minor, out int revision, out int patch))
+            if (!GetFileVersion(file.Name, out int major, out int minor, out int revision, out int patch))
                 return false;
 
             return major == version.Major && minor == version.Minor && revision == version.Revision && patch == version.Patch;
@@ -25,10 +25,10 @@ namespace Z0.MS
 
         public static bool IsProcessRunning(int processId)
         {
-            IntPtr handle = WindowsNativeMethods.OpenProcess(WindowsNativeMethods.PROCESS_QUERY_INFORMATION, false, processId);
+            IntPtr handle = Windows.Kernel32.OpenProcess(WindowsNativeMethods.PROCESS_QUERY_INFORMATION, false, processId);
             if (handle != IntPtr.Zero)
             {
-                WindowsNativeMethods.CloseHandle(handle);
+                Windows.Kernel32.CloseHandle(handle);
                 return true;
             }
 
@@ -39,7 +39,7 @@ namespace Z0.MS
                 int size;
                 for (;;)
                 {
-                    WindowsNativeMethods.EnumProcesses(processIds, processIds.Length * sizeof(int), out size);
+                    Windows.PsApi.EnumProcesses(processIds, processIds.Length * sizeof(int), out size);
                     if (size == processIds.Length * sizeof(int))
                     {
                         ArrayPool<int>.Shared.Return(processIds);
@@ -61,7 +61,7 @@ namespace Z0.MS
 
         public bool FreeLibrary(IntPtr module)
         {
-            return WindowsNativeMethods.FreeLibrary(module);
+            return Windows.Kernel32.FreeLibrary(module);
         }
 
         public bool GetFileVersion(string dll, out int major, out int minor, out int revision, out int patch)
@@ -99,24 +99,22 @@ namespace Z0.MS
 
         public IntPtr GetProcAddress(IntPtr module, string method)
         {
-            return WindowsNativeMethods.GetProcAddress(module, method);
+            return Windows.Kernel32.GetProcAddress(module, method);
         }
 
         public IntPtr LoadLibrary(string lpFileName)
         {
-            return WindowsNativeMethods.LoadLibrary(lpFileName);
+            return Windows.Kernel32.LoadLibrary(lpFileName);
         }
 
         public bool TryGetWow64(IntPtr proc, out bool result)
         {
             if (Environment.OSVersion.Version.Major > 5 ||
                 Environment.OSVersion.Version.Major == 5 && Environment.OSVersion.Version.Minor >= 1)
-            {
-                return WindowsNativeMethods.IsWow64Process(proc, out result);
-            }
+                return Windows.Kernel32.IsWow64Process(proc, out result);
 
             result = false;
             return false;
-        }        
+        }
     }
 }

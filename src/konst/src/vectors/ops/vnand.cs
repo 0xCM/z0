@@ -6,18 +6,18 @@ namespace Z0
 {
     using System;
 
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Avx;
-    
-    using static Konst; 
-    
-    partial struct V0d
-    {         
+
+    using static Konst;
+
+    partial struct z
+    {
         /// <summary>
         /// Computes ~(x & y) for vectors x and y
         /// </summary>
@@ -98,7 +98,7 @@ namespace Z0
         [MethodImpl(Inline), Nand]
         public static Vector128<float> vnand(Vector128<float> x, Vector128<float> y)
             => vnot(And(x, y));
-        
+
         /// <summary>
         /// Computes ~(x & y) for vectors x and y
         /// </summary>
@@ -188,7 +188,7 @@ namespace Z0
         [MethodImpl(Inline), Nand]
         public static Vector256<float> vnand(Vector256<float> x, Vector256<float> y)
             => vnot(And(x, y));
-        
+
         /// <summary>
         /// Computes ~(x & y) for vectors x and y
         /// </summary>

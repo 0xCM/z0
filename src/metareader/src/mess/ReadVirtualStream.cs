@@ -11,13 +11,13 @@ namespace Z0.MS
 
     public class ReadVirtualStream : Stream
     {
-        private long _pos;
+        long _pos;
 
-        private readonly long _disp;
+        readonly long _disp;
 
-        private long _len;
+        long _len;
 
-        private readonly IDataReader _dataReader;
+        readonly IDataReader _dataReader;
 
         public ReadVirtualStream(IDataReader dataReader, long displacement, long len)
         {
@@ -27,16 +27,16 @@ namespace Z0.MS
         }
 
         public override bool CanRead => true;
-        
+
         public override bool CanSeek => true;
-        
+
         public override bool CanWrite => false;
 
         public override void Flush()
         {
         }
 
-        public override long Length 
+        public override long Length
             => throw new NotImplementedException();
 
         public override long Position
@@ -62,7 +62,7 @@ namespace Z0.MS
 
             return 0;
         }
-        
+
         public override long Seek(long offset, SeekOrigin origin)
         {
             switch (origin)
@@ -96,5 +96,5 @@ namespace Z0.MS
         {
             throw new InvalidOperationException();
         }
-    }        
+    }
 }

@@ -14,7 +14,7 @@ namespace Z0
     public readonly unsafe struct WindowsNativeMethods
     {
         private const string Kernel32LibraryName = "kernel32.dll";
-        
+
         private const string VersionLibraryName = "version.dll";
 
         public const int PROCESS_QUERY_INFORMATION = 0x0400;
@@ -35,9 +35,6 @@ namespace Z0
         [DllImport(Kernel32LibraryName, CharSet = CharSet.Unicode, SetLastError = true, EntryPoint = "LoadLibraryW")]
         public static extern IntPtr LoadLibrary(string lpLibFileName);
 
-        [DllImport(Kernel32LibraryName)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool IsWow64Process(IntPtr hProcess, out bool isWow64);
 
         [DllImport(VersionLibraryName, CharSet = CharSet.Unicode, EntryPoint = "GetFileVersionInfoW")]
         public static extern bool GetFileVersionInfo(string sFileName, int handle, int size, byte* infoBuffer);

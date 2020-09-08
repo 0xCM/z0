@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="address">The address to read from.</param>
         /// <param name="value">The value that was read.</param>
         /// <returns>True if the memory was present, false otherwise.</returns>
-        bool Read<T>(ulong address, out T value) 
+        bool Read<T>(ulong address, out T value)
             where T : unmanaged;
 
         /// <summary>
@@ -43,7 +43,8 @@ namespace Z0
         /// not managed pointeres.</typeparam>
         /// <param name="address">The address to read from.</param>
         /// <returns>The value at addr, or default(T) if not present in the data target.</returns>
-        T Read<T>(ulong address) where T : unmanaged;
+        T Read<T>(ulong address)
+            where T : unmanaged;
 
         /// <summary>
         /// Reads a pointer at the given address.

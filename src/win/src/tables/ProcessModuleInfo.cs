@@ -11,7 +11,6 @@ namespace Z0
     /// <summary>
     /// Describes a module
     /// </summary>
-    [Table]
     public readonly struct ProcessModuleInfo
     {
         /// <summary>
@@ -35,7 +34,7 @@ namespace Z0
         public readonly string FileName;
 
         public readonly VersionInfo Version;
-        
+
         public ProcessModuleInfo(ulong @base, int size, int timestamp, string filename, VersionInfo version)
         {
             ImageBase = @base;
@@ -53,7 +52,5 @@ namespace Z0
             FileName = filename;
             Version = version;
         }
-
-
     }
 }

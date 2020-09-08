@@ -5,10 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst; 
+
+    using static Konst;
     using static V0;
 
     partial class gvec
@@ -28,13 +28,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return dvec.vtestznc(v8u(src), v8u(mask));
+                return z.vtestznc(v8u(src), v8u(mask));
             else if(typeof(T) == typeof(ushort))
-                return dvec.vtestznc(v16u(src), v16u(mask));
+                return z.vtestznc(v16u(src), v16u(mask));
             else if(typeof(T) == typeof(uint))
-                return dvec.vtestznc(v32u(src), v32u(mask));
+                return z.vtestznc(v32u(src), v32u(mask));
             else if(typeof(T) == typeof(ulong))
-                return dvec.vtestznc(v64u(src), v64u(mask));
+                return z.vtestznc(v64u(src), v64u(mask));
             else
                 return vtestznc_i(src,mask);
         }
@@ -44,14 +44,14 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dvec.vtestznc(v8i(src), v8i(mask));
+                return z.vtestznc(v8i(src), v8i(mask));
             else if(typeof(T) == typeof(short))
-                return dvec.vtestznc(v16i(src), v16i(mask));
+                return z.vtestznc(v16i(src), v16i(mask));
             else if(typeof(T) == typeof(int))
-                return dvec.vtestznc(v32i(src), v32i(mask));
+                return z.vtestznc(v32i(src), v32i(mask));
             else if(typeof(T) == typeof(long))
-                return dvec.vtestznc(v64i(src), v64i(mask));
-            else 
+                return z.vtestznc(v64i(src), v64i(mask));
+            else
                 return vtestznc_f(src,mask);
         }
 
@@ -60,11 +60,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dvec.vtestznc(v32f(src), v32f(mask));
+                return z.vtestznc(v32f(src), v32f(mask));
             else if(typeof(T) == typeof(double))
-                return dvec.vtestznc(v64f(src), v64f(mask));
-            else 
-                throw Unsupported.define<T>();
+                return z.vtestznc(v64f(src), v64f(mask));
+            else
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -72,13 +72,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return dvec.vtestznc(v8u(src), v8u(mask));
+                return z.vtestznc(v8u(src), v8u(mask));
             else if(typeof(T) == typeof(ushort))
-                return dvec.vtestznc(v16u(src), v16u(mask));
+                return z.vtestznc(v16u(src), v16u(mask));
             else if(typeof(T) == typeof(uint))
-                return dvec.vtestznc(v32u(src), v32u(mask));
+                return z.vtestznc(v32u(src), v32u(mask));
             else if(typeof(T) == typeof(ulong))
-                return dvec.vtestznc(v64u(src), v64u(mask));
+                return z.vtestznc(v64u(src), v64u(mask));
             else
                 return vtestznc_i(src,mask);
         }
@@ -88,14 +88,14 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return dvec.vtestznc(v8i(src), v8i(mask));
+                return z.vtestznc(v8i(src), v8i(mask));
             else if(typeof(T) == typeof(short))
-                return dvec.vtestznc(v16i(src), v16i(mask));
+                return z.vtestznc(v16i(src), v16i(mask));
             else if(typeof(T) == typeof(int))
-                return dvec.vtestznc(v32i(src), v32i(mask));
+                return z.vtestznc(v32i(src), v32i(mask));
             else if(typeof(T) == typeof(long))
-                return dvec.vtestznc(v64i(src), v64i(mask));
-            else 
+                return z.vtestznc(v64i(src), v64i(mask));
+            else
                 return vtestznc_f(src,mask);
         }
 
@@ -104,11 +104,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return dvec.vtestznc(v32f(src), v32f(mask));
+                return z.vtestznc(v32f(src), v32f(mask));
             else if(typeof(T) == typeof(double))
-                return dvec.vtestznc(v64f(src), v64f(mask));
-            else 
-                throw Unsupported.define<T>();
+                return z.vtestznc(v64f(src), v64f(mask));
+            else
+                throw no<T>();
         }
     }
 }

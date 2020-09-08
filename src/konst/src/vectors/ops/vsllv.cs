@@ -13,7 +13,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class dvec
+    partial struct z
     {
         /// <summary>
         /// Computes z[i] := x[i] << s[i] for i = 0..15

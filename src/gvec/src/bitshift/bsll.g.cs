@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
     using static As;
-        
+
     partial class gvec
     {
         /// <summary>
@@ -40,13 +40,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(V0d.vbsll(v8u(x), count));
+                return generic<T>(z.vbsll(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(V0d.vbsll(v16u(x), count));
-            else if(typeof(T) == typeof(uint)) 
-                return generic<T>(V0d.vbsll(v32u(x), count));
+                return generic<T>(z.vbsll(v16u(x), count));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(z.vbsll(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(V0d.vbsll(v64u(x), count));
+                return generic<T>(z.vbsll(v64u(x), count));
             else
                 return vbsll_i(x,count);
         }
@@ -56,29 +56,29 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(V0d.vbsll(v8i(x), count));
+                return generic<T>(z.vbsll(v8i(x), count));
             else if(typeof(T) == typeof(short))
-                return generic<T>(V0d.vbsll(v16i(x), count));
-            else if(typeof(T) == typeof(int)) 
-                return generic<T>(V0d.vbsll(v32i(x), count));
+                return generic<T>(z.vbsll(v16i(x), count));
+            else if(typeof(T) == typeof(int))
+                return generic<T>(z.vbsll(v32i(x), count));
             else if(typeof(T) == typeof(long))
-                return generic<T>(V0d.vbsll(v64i(x), count));
+                return generic<T>(z.vbsll(v64i(x), count));
             else
                 throw Unsupported.define<T>();
         }
-        
+
         [MethodImpl(Inline)]
         static Vector256<T> vbsll_u<T>(Vector256<T> x, [Imm] byte count)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(V0d.vbsll(v8u(x), count));
+                return generic<T>(z.vbsll(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(V0d.vbsll(v16u(x), count));
-            else if(typeof(T) == typeof(uint)) 
-                return generic<T>(V0d.vbsll(v32u(x), count));
+                return generic<T>(z.vbsll(v16u(x), count));
+            else if(typeof(T) == typeof(uint))
+                return generic<T>(z.vbsll(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(V0d.vbsll(v64u(x), count));
+                return generic<T>(z.vbsll(v64u(x), count));
             else
                 return vbsll_i(x,count);
         }
@@ -88,13 +88,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(V0d.vbsll(v8i(x), count));
+                return generic<T>(z.vbsll(v8i(x), count));
             else if(typeof(T) == typeof(short))
-                return generic<T>(V0d.vbsll(v16i(x), count));
-            else if(typeof(T) == typeof(int)) 
-                return generic<T>(V0d.vbsll(v32i(x), count));
+                return generic<T>(z.vbsll(v16i(x), count));
+            else if(typeof(T) == typeof(int))
+                return generic<T>(z.vbsll(v32i(x), count));
             else if(typeof(T) == typeof(long))
-                return generic<T>(V0d.vbsll(v64i(x), count));
+                return generic<T>(z.vbsll(v64i(x), count));
             else
                 throw Unsupported.define<T>();
        }

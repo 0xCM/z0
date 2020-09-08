@@ -9,7 +9,7 @@ namespace Z0.Image
     using System;
     using System.Diagnostics;
     using System.Runtime.InteropServices;
-    
+
     using Z0.MS;
 
     /// <summary>
@@ -110,7 +110,3 @@ namespace Z0.Image
         }
     }
 }
-
-// #pragma warning disable SA1623 // Property summary documentation must match accessors
-// #pragma warning disable SA1300 // Element must begin with upper-case letter
-// #pragma warning disable SA1202 // Elements must be ordered by access

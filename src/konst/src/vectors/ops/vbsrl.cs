@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
-    
-    using static Konst; 
 
-    partial struct V0d
+    using static Konst;
+
+    partial struct z
     {
         /// <summary>
         /// __m128i _mm_bsrli_si128 (__m128i a, int imm8) PSRLDQ xmm, imm8
@@ -173,6 +173,6 @@ namespace Z0
         /// <param name="count">The number of bytes to shift</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vbsrl(Vector256<ulong> x, [Imm] byte count)
-            => ShiftRightLogical128BitLane(x, (byte)count); 
+            => ShiftRightLogical128BitLane(x, (byte)count);
     }
 }

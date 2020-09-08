@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> vload<T>(in SpanBlock128<T> src)
             where T : unmanaged
-                => z.vload(w128,src.Data);
+                => vload(w128,src.Data);
 
         /// <summary>
         /// Loads a 256-bit vector from the leading source block
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> vload<T>(in SpanBlock256<T> src)
             where T : unmanaged
-                => z.vload(w256, src.Data);
+                => vload(w256, src.Data);
 
         /// <summary>
         /// Loads a 512-bit vector from the leading source block
@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector512<T> vload<T>(in SpanBlock512<T> src)
             where T : unmanaged
-                => z.vload(w512, src.Data);
+                => vload(w512, src.Data);
 
         /// <summary>
         /// Loads a block-identified 128-bit vector
@@ -52,7 +52,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector128<T> vload<T>(in SpanBlock128<T> src, int block)
             where T : unmanaged
-                => z.vload(src.BlockRef(block), out Vector128<T> x);
+                => vload(src.BlockRef(block), out Vector128<T> x);
 
         /// <summary>
         /// Loads a block-identified 256-bit vector
@@ -63,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<T> vload<T>(in SpanBlock256<T> src, int block)
             where T : unmanaged
-                => z.vload(src.BlockRef(block), out Vector256<T> x);
+                => vload(src.BlockRef(block), out Vector256<T> x);
 
         /// <summary>
         /// Loads a block-identified 512-bit vector
@@ -74,6 +74,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector512<T> vload<T>(in SpanBlock512<T> src, int block)
             where T : unmanaged
-                => z.vload(src.BlockRef(block), out Vector512<T> x);
+                => vload(src.BlockRef(block), out Vector512<T> x);
     }
 }
