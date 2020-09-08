@@ -87,6 +87,22 @@ namespace Z0
             => new U(src);
 
         [MethodImpl(Inline), Op]
+        public static U uint24(uint6 a, uint6 b, uint6 c, uint6 d)
+        {
+            var dst = new U();
+            update(a | (b << 6) | (c << 12) | (d << 18), ref dst);
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static ref uint24 update(uint src, ref uint24 dst)
+        {
+            dst.Lo = (ushort)src;
+            dst.Hi = (byte)(src >> 16);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
         public static BitState test(U x, byte pos)
             => z.test(x.data, pos);
 

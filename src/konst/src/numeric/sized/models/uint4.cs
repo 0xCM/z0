@@ -19,7 +19,7 @@ namespace Z0
     /// <summary>
     /// Represents the value of a type-level quartet and thus is an integer in the range [0,15]
     /// </summary>
-    public readonly struct uint4 : IUnsigned<S,W,K,T>
+    public readonly struct uint4 : ISizedInt<S,W,K,T>
     {
         internal readonly byte data;
 

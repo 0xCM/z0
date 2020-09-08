@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct TableField<F,T,V> : ITableField<F,T,V>
+    public readonly struct TableField<F,T,V>
         where F : unmanaged, Enum
         where T : struct, ITable<T>
     {

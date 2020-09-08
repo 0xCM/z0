@@ -47,17 +47,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static S cast<S>(byte src)
-            where S : unmanaged, IUnsigned<S>
+            where S : unmanaged, ISizedInt<S>
                 => z.cast<byte,S>(src);
 
         [MethodImpl(Inline)]
         static S cast<S>(Limits24u src)
-            where S : unmanaged, IUnsigned<S>
+            where S : unmanaged, ISizedInt<S>
                 => z.cast<Limits24u,S>(src);
 
         [MethodImpl(Inline)]
         static S maxval<S>()
-            where S : unmanaged, IUnsigned<S>
+            where S : unmanaged, ISizedInt<S>
         {
             if(typeof(S) == typeof(uint1))
                 return cast<S>(Q.uint1.MaxVal);
@@ -73,7 +73,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static S maxval<S>(W5 w5)
-            where S : unmanaged, IUnsigned<S>
+            where S : unmanaged, ISizedInt<S>
         {
             if(typeof(S) == typeof(uint5))
                 return cast<S>(Q.uint5.MaxVal);
@@ -89,7 +89,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static S maxval<S>(W16 w)
-            where S : unmanaged, IUnsigned<S>
+            where S : unmanaged, ISizedInt<S>
         {
             if(typeof(S) == typeof(uint24))
                 return cast<S>(Q.uint24.MaxVal);

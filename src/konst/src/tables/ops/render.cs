@@ -22,7 +22,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var field = ref skip(view,i);
-                dst.Append(text.format(value(field.Definition, tref), field.DataType, FieldDelimiter, field.RenderWidth.Value));
+                dst.Append(text.format(value(field.Definition, tref), field.DataType, FieldDelimiter, field.RenderWidth));
             }
 
             if(eol)
@@ -39,7 +39,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var field = ref skip(view,i);
-                dst.Append(text.format(value(field.Definition, tref), field.DataType, FieldDelimiter, field.RenderWidth.Value));
+                dst.Append(text.format(value(field.Definition, tref), field.DataType, FieldDelimiter, field.RenderWidth));
             }
 
             if(eol)

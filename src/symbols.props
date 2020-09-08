@@ -16,6 +16,8 @@
     <Tables>$(Src)tables/z0.tables.csproj</Tables>
     <Konst>$(Src)konst/z0.konst.csproj</Konst>
 
+    <Check>$(Src)check/z0.check.csproj</Check>
+
     <Data>$(Src)data/z0.data.csproj</Data>
     <Expressive>$(Src)expressive/z0.expressive.csproj</Expressive>
     <Imagine>$(Src)imagine/z0.imagine.csproj</Imagine>
@@ -23,7 +25,8 @@
 
     <Asm>$(Src)asm/z0.asm.csproj</Asm>
     <AsmModels>$(Src)asm.models/z0.asm.models.csproj</AsmModels>
-    <AsmCode>$(Src)asm.code/z0.asm.code.csproj</AsmCode>
+    <Encoded>$(Src)encoded/z0.encoded.csproj</Encoded>
+
     <Run>$(Src)run/z0.run.csproj</Run>
     <Json>$(Src)json/z0.json.csproj</Json>
 

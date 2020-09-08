@@ -17,40 +17,40 @@ namespace Z0
 
     public interface TCheckClose : TCheckLengths
     {
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         bool almost(float lhs, float rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             var dist = fmath.dist(lhs,rhs);
-            if(dist.IsNaN() || dist.Infinite() || dist < Res32)    
+            if(dist.IsNaN() || dist.Infinite() || dist < Res32)
                 return true;
-                
+
             var err = fmath.relerr(lhs,rhs);
-            var tolerance = .1f;            
+            var tolerance = .1f;
             return err < tolerance ? true : throw Failed(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
         }
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         bool almost(double lhs, double rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             var dist = fmath.dist(lhs,rhs);
-            if(dist.IsNaN() || dist.Infinite() || dist < Res64)    
+            if(dist.IsNaN() || dist.Infinite() || dist < Res64)
                 return true;
 
-            var err = fmath.relerr(lhs,rhs);            
-            var tolerance = .1f;            
+            var err = fmath.relerr(lhs,rhs);
+            var tolerance = .1f;
             return err < tolerance ? true : throw Failed(ClaimKind.Close, NotClose(lhs, rhs, err, tolerance, caller, file, line));
         }
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         void close<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                almost(As.float32(lhs), As.float32(rhs), caller, file,line);
+                almost(z.float32(lhs), z.float32(rhs), caller, file,line);
             else if(typeof(T) == typeof(double))
-                almost(As.float64(lhs), As.float64(rhs), caller, file,line);
+                almost(z.float64(lhs), z.float64(rhs), caller, file,line);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -62,9 +62,9 @@ namespace Z0
         /// <param name="caller">The invoking function</param>
         /// <param name="file">The file in which the invoking function is defined </param>
         /// <param name="line">The file line number of invocation</param>
-        /// <typeparam name="T">The element type</typeparam>        
+        /// <typeparam name="T">The element type</typeparam>
         void close<T>(Span<T> lhs, Span<T> rhs, T tolerance, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : unmanaged 
+            where T : unmanaged
         {
             for(var i = 0; i< length(lhs,rhs); i++)
                 if(!gmath.within(lhs[i],rhs[i],tolerance))

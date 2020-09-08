@@ -11,10 +11,11 @@
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(Flow)" />
     <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(Encoded)" />
+
     <ProjectReference Include="$(Apps)" />
 
     <ProjectReference Include="$(MetaReader)" />
-    <ProjectReference Include="$(BitFields)" />
 
   </ItemGroup>
 

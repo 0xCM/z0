@@ -15,7 +15,7 @@ namespace Z0
     {
         Type TableType {get;}
 
-        StringRef FieldName {get;}
+        string FieldName {get;}
 
         Type DataType {get;}
 
@@ -38,7 +38,7 @@ namespace Z0
             => typeof(T);
 
         Address64 ITableField.FieldOffset
-            => Interop.offset<T>(FieldName.Format());
+            => Interop.offset<T>(FieldName);
     }
 
     [SuppressUnmanagedCodeSecurity]

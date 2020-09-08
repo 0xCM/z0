@@ -6,16 +6,18 @@ namespace Z0
 {
     public interface IConverter
     {
-        
+
     }
-    
+
     /// <summary>
-    /// Characterizes a one-way converter
+    /// Characterizes a two-way converter
     /// </summary>
-    /// <typeparam name="S">The source type</typeparam>
-    /// <typeparam name="T">The target type</typeparam>
-    public interface IConverter<in S, out T> : IConverter
+    /// <typeparam name="A">The source type</typeparam>
+    /// <typeparam name="B">The target type</typeparam>
+    public interface IConverter<A,B> : IConverter
     {
-        T Convert(S src);
-    }   
+        bool Convert(in A src, out B dst);
+
+        bool Convert(in B src, out A dst);
+    }
 }

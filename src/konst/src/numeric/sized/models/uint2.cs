@@ -20,7 +20,7 @@ namespace Z0
     /// <summary>
     /// Represents the value of a type-level duet and thus has domain {00,01,10,11}
     /// </summary>
-    public readonly struct uint2 : IUnsigned<S,W,K,T>
+    public readonly struct uint2 : ISizedInt<S,W,K,T>
     {
         internal readonly byte data;
 

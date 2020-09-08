@@ -6,8 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Konst;
+    using static z;
 
     using U = uint24;
     using W = W24;
@@ -26,10 +28,28 @@ namespace Z0
     /// <summary>
     /// Represents the value of an unsigned integer of bit-width 24
     /// </summary>
-    [ApiDataType]
-    public struct uint24 : IUnsigned<U,W,K,T>
+    [ApiDataType, StructLayout(LayoutKind.Sequential, Size = Size)]
+    public struct uint24 : ISizedInt<U,W,K,T>
     {
-        internal uint data;
+        internal ushort Lo;
+
+        internal byte Hi;
+
+        internal uint data
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Lo | ((uint)Hi << 16);
+
+            [MethodImpl(Inline)]
+            set => api.update(value, ref this);
+        }
+
+        // [MethodImpl(Inline)]
+        // static void update(uint src, ref uint24 dst)
+        // {
+        //     dst.Lo = (ushort)src;
+        //     dst.Hi = (byte)(src >> 16);
+        // }
 
         public const L MinVal = L.Min;
 
@@ -38,6 +58,8 @@ namespace Z0
         public const uint Mask = (T)MaxVal;
 
         public const byte Width = 24;
+
+        public const byte Size = 3;
 
         public const uint Count = (T)MaxVal + 1u;
 
@@ -278,47 +300,47 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal uint24(T src)
-            => data = src & (T)MaxVal;
+            : this() => data = src & (T)MaxVal;
 
         [MethodImpl(Inline)]
         public uint24(bool src)
-            => data = z.@uint(src);
+            : this() => Lo = @byte(src);
 
         [MethodImpl(Inline)]
         public uint24(byte src)
-            => data = src;
+            : this() => Lo = src;
 
         [MethodImpl(Inline)]
         public uint24(K src)
-            => data = (T)src;
+            : this() => api.update((T)src, ref this);
 
         [MethodImpl(Inline)]
         internal uint24(sbyte src)
-            => data = (T)src;
+            : this() => Lo = (byte)src;
 
         [MethodImpl(Inline)]
         internal uint24(short src)
-            => data = (T)src;
+            : this() => Lo = (ushort)src;
 
         [MethodImpl(Inline)]
         internal uint24(ushort src)
-            => data = src;
+            : this() => Lo = src;
 
         [MethodImpl(Inline)]
         internal uint24(int src)
-            => data = (T)src & (T)MaxVal;
+            : this() => data = (T)src & (T)MaxVal;
 
         [MethodImpl(Inline)]
         internal uint24(long src)
-            => data = (T)src & (T)MaxVal;
+            : this() => data = (T)src & (T)MaxVal;
 
         [MethodImpl(Inline)]
         internal uint24(ulong src)
-            => data = (T)src & (T)MaxVal;
+            : this() => data = (T)src & (T)MaxVal;
 
         [MethodImpl(Inline)]
         internal uint24(T src, bool @unchecked)
-            => data = src;
+            : this() => data = src;
 
         [MethodImpl(Inline)]
         static U wrap(T x)
@@ -335,7 +357,6 @@ namespace Z0
             return y < 0 ? Max : new U((T)y, true);
         }
 
-
         [MethodImpl(Inline)]
         public bool Equals(U rhs)
             => data == rhs.data;
@@ -348,25 +369,25 @@ namespace Z0
         bool IEquatable<U>.Equals(U rhs)
             => data == rhs.data;
 
-        bool IUnsigned.IsNonZero
+        bool ISizedInt.IsNonZero
         {
             [Ignore]
             get => IsNonZero;
         }
 
-        K IUnsigned<U,W,K,uint>.Kind
+        K ISizedInt<U,W,K,uint>.Kind
         {
             [Ignore]
             get => Kind;
         }
 
-        uint IUnsigned<U,uint>.Value
+        uint ISizedInt<U,uint>.Value
         {
             [Ignore]
             get => Value;
         }
 
-        bool IUnsigned.IsZero
+        bool ISizedInt.IsZero
         {
             [Ignore]
             get => IsZero;

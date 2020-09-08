@@ -19,7 +19,7 @@ namespace Z0
     /// <summary>
     /// Represents the value of a type-level octet and thus is an integer in the range [0,255]
     /// </summary>
-    public readonly struct octet : IUnsigned<S,W,K,T>
+    public readonly struct octet : ISizedInt<S,W,K,T>
     {
         internal readonly byte data;
 

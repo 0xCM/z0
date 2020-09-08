@@ -28,8 +28,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitField256(BitFieldSpec256<E> spec)
         {
-            this.Spec = spec;
-            this.State = default;
+            Spec = spec;
+            State = default;
         }
 
         public T this[E index]

@@ -12,34 +12,34 @@ namespace Z0
     using static PrimalBitFieldSpec;
 
     [ApiHost]
-    public readonly partial struct PrimalBits
+    public readonly partial struct PrimalKindBits
     {
         /// <summary>
         /// Creates a primal bitfield over a primitive kind
         /// </summary>
         /// <param name="src">The primal kind</param>
         [MethodImpl(Inline), Op]
-        public static PrimalKindBitField from(PrimalKind src)
-            => new PrimalKindBitField(src);
+        public static PrimalKindInfo from(PrimalKind src)
+            => new PrimalKindInfo(src);
 
         /// <summary>
         /// Creates a primal bitfield over untyped content
         /// </summary>
         /// <param name="src">The primal kind</param>
         [MethodImpl(Inline), Op]
-        public static PrimalKindBitField from(byte src)
-            => new PrimalKindBitField(src);
+        public static PrimalKindInfo from(byte src)
+            => new PrimalKindInfo(src);
 
         /// <summary>
         /// Creates a primal bitfield over a literal kind
         /// </summary>
         /// <param name="src">The literal kind</param>
         [MethodImpl(Inline), Op]
-        public static PrimalKindBitField from(LiteralKind src)
-            => new PrimalKindBitField(src);
+        public static PrimalKindInfo from(LiteralKind src)
+            => new PrimalKindInfo(src);
 
         [MethodImpl(Inline), Op]
-        public static TypeCode code(PrimalKindBitField f)
+        public static TypeCode code(PrimalKindInfo f)
             => (TypeCode)select(f, SegId.KindId);
 
         [MethodImpl(Inline), Op]
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="src">The source bitfield</param>
         /// <param name="i">The segment identifier</param>
         [MethodImpl(Inline), Op]
-        public static PrimalKind filter(PrimalKindBitField src, SegId i)
+        public static PrimalKind filter(PrimalKindInfo src, SegId i)
             => filter(src.Content, filter(i));
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="src">The source bitfield</param>
         /// <param name="i">The segment identifier</param>
         [MethodImpl(Inline), Op]
-        public static byte select(PrimalKindBitField src, SegId i)
+        public static byte select(PrimalKindInfo src, SegId i)
             => (byte)view(filter(src,i), index(i));
 
         [MethodImpl(Inline), Op]
@@ -81,7 +81,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">The literal's bitfield</param>
         [MethodImpl(Inline), Op]
-        public static TypeWidth width(PrimalKindBitField f)
+        public static TypeWidth width(PrimalKindInfo f)
             => (TypeWidth)Pow2.pow(select(f, SegId.Width));
 
         /// <summary>
@@ -89,11 +89,11 @@ namespace Z0
         /// </summary>
         /// <param name="f">The literal's bitfield</param>
         [MethodImpl(Inline), Op]
-        public static SignKind sign(PrimalKindBitField f)
+        public static SignKind sign(PrimalKindInfo f)
             => (SignKind)select(f, SegId.Sign);
 
         [MethodImpl(Inline), Op]
-        public static PrimalKindId id(PrimalKindBitField f)
+        public static PrimalKindId id(PrimalKindInfo f)
             => (PrimalKindId)select(f, SegId.KindId);
     }
 }

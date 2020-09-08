@@ -10,27 +10,27 @@ namespace Z0
     using static z;
     using static Konst;
 
-    using api = PrimalBits;
+    using api = PrimalKindBits;
 
     [ApiDataType]
-    public readonly struct PrimalKindBitField
+    public readonly struct PrimalKindInfo
     {
         readonly byte Data;
 
         [MethodImpl(Inline)]
-        public PrimalKindBitField(PrimalKind src)
+        public PrimalKindInfo(PrimalKind src)
             => Data = (byte)src;
 
         [MethodImpl(Inline)]
-        public PrimalKindBitField(LiteralKind src)
+        public PrimalKindInfo(LiteralKind src)
             => Data = (byte)src;
 
         [MethodImpl(Inline)]
-        public PrimalKindBitField(byte src)
+        public PrimalKindInfo(byte src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public bool Equals(PrimalKindBitField src)
+        public bool Equals(PrimalKindInfo src)
             => Data == src.Data;
 
         public PrimalKind Kind

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
-    using static Memories;
+    using static Konst;
+    using static z;
 
     using API = BitFields;
 
@@ -32,7 +32,7 @@ namespace Z0
         internal BitField(in BitFieldSpec spec)
         {
             this.Spec = spec;
-            this.Segs = spec.Segments;            
+            this.Segs = spec.Segments;
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Z0
         {
             API.deposit(segment, src, ref dst);
             return ref dst;
-        }            
+        }
 
         /// <summary>
         /// Overwrites an identified target segment with the bits from the corresponding source segment
@@ -114,13 +114,13 @@ namespace Z0
         {
             API.deposit(Segment(index), src, ref dst);
             return ref dst;
-        }            
+        }
 
         [MethodImpl(Inline)]
         public ref T Deposit(ReadOnlySpan<T> src, ref T dst)
-        {   
+        {
             API.deposit(Spec, src, ref dst);
             return ref dst;
-        }                 
+        }
     }
 }

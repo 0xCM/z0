@@ -278,9 +278,10 @@ namespace Z0
         public void Run()
         {
             Wf.Running(StepId);
-            var dir = FS.dir("J:/tools/netsdk/packs/Microsoft.NETCore.App.Ref/5.0.0-preview.8.20407.11/ref/net5.0");
+            //var dir = FS.dir("J:/tools/netsdk/packs/Microsoft.NETCore.App.Ref/5.0.0-preview.8.20407.11/ref/net5.0");
+            var dir = FS.dir("J:/dev/labs/blend/App01/bin/x64/Release/net5.0/win-x64");
             var ct = Wf.Ct;
-            var dlls = dir.Files(true).Where(f => f.FileExt.Name.Contains("dll"));
+            var dlls = dir.Files(false).Where(f => f.FileExt.Name.Contains("dll"));
             var host = new EmitImageHeadersHost();
             var output = FS.path("J:/dev/projects/z0-logs/db/images.csv");
             host.Run(Wf, (dlls,output));

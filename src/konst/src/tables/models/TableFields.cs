@@ -61,7 +61,7 @@ namespace Z0
             }
         }
 
-        public Option<TableField> this[in StringRef name]
+        public Option<TableField> this[in string name]
         {
             [MethodImpl(Inline)]
             get
@@ -69,7 +69,7 @@ namespace Z0
                 for(var i=0u; i<Count; i++)
                 {
                     ref readonly var current = ref this[i];
-                    if(current.FieldName == name)
+                    if(current.Name == name)
                         return current;
                 }
                 return none<TableField>();

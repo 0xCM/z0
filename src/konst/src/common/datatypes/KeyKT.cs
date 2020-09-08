@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-
     /// <summary>
     /// Defines a <typeparamref name='K'/> discriminated key for an identifier <typeparamref name='T'/>
     /// </summary>

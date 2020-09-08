@@ -6,11 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
 
-    public readonly struct TableField<F,T> : ITableField<F,T>
+    public readonly struct TableField<F,T>
         where F : unmanaged, Enum
         where T : struct, ITable
     {

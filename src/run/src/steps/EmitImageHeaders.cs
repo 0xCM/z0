@@ -10,6 +10,24 @@ namespace Z0
     using static Konst;
     using static z;
 
+    public struct ImageHeaderEmitted : ITextual
+    {
+        public const string FormatPattern = "{0,10} | {1,-80}";
+
+        public FS.FilePath Source;
+
+        public Name Section;
+
+        public static ImageHeaderEmitted define(in ImageSectionHeader src)
+        {
+            var dst = new ImageHeaderEmitted();
+            return dst;
+        }
+
+        public string Format()
+            => text.format(FormatPattern, Source, Section);
+    }
+
     public ref struct EmitImageHeaders
     {
         public readonly IWfShell Wf;
@@ -46,11 +64,16 @@ namespace Z0
                 if(result)
                 {
                     var count = result.Data;
-                    Wf.Status(Host.Id, count);
 
                     for(var i=0u; i<count; i++)
+                    {
+                        ref readonly var row = ref skip(dst,i);
                         writer.WriteLine(formatter.FormatRow(skip(dst,i)));
+                    }
+
                     total += count;
+
+                    Wf.Status(Host.Id, file);
                 }
 
             }

@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Imagine)" />
+    <ProjectReference Include="$(Check)" />
     <ProjectReference Include="$(Vectors)" />
     <ProjectReference Include="$(VData)" />
     <ProjectReference Include="$(BitCore)" />

@@ -5,9 +5,9 @@
 namespace Z0
 {
     using System;
-    
+
     /// <summary>
-    /// Characterizes a weakly-byped two-way converter
+    /// Characterizes a weakly-typed two-way converter
     /// </summary>
     public interface IBiconverter : IConverter
     {
@@ -15,29 +15,30 @@ namespace Z0
         /// The supported type
         /// </summary>
         Type TargetType {get;}
-        
+
         /// <summary>
         /// Converts an incoming value to a value of target type, if possible
         /// </summary>
-        /// <param name="incoming">The value to conver</param>
-        Option<object> ConvertToTarget(object incoming);
-        
+        /// <param name="src">The value to convert</param>
+        Option<object> ConvertToTarget(object src);
+
         /// <summary>
         /// Converts an incoming value of the target type to a value of specified type, if possible
         /// </summary>
-        /// <param name="incoming">The value to convert</param>
-        Option<object> ConvertFromTarget(object incoming, Type dst);
+        /// <param name="src">The value to convert</param>
+        Option<object> ConvertFromTarget(object src, Type dst);
     }
 
    /// <summary>
-   /// Characterizes a strongly-byped two-way converter
+   /// Characterizes a strongly-typed two-way converter
    /// </summary>
     public interface IBiconverter<S> : IBiconverter
     {
-        Type IBiconverter.TargetType => typeof(S);
+        Type IBiconverter.TargetType
+            => typeof(S);
 
-        T Convert<T>(S incoming);
-        
-        S Convert<T>(T incoming);
+        T Convert<T>(S src);
+
+        S Convert<T>(T src);
     }
 }

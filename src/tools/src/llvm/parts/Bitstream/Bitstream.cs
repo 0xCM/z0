@@ -2,17 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Tools.LLVM
 {
     using System;
+    using static z;
 
-    public readonly struct LiteralBitField<T,I,P,W,M>
-        where T : unmanaged
-        where I : unmanaged, Enum
-        where P : unmanaged, Enum
-        where W : unmanaged, Enum
-        where M : unmanaged, Enum
+    public partial struct Bitstream
     {
-        
+
     }
 }

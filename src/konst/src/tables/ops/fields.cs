@@ -83,11 +83,10 @@ namespace Z0
             dst.Index = index;
             dst.TableType = src.DeclaringType;
             dst.DataType = src.FieldType;
-            dst.FieldName = src.Name;
-            dst.FieldOffset = Interop.offset(src.DeclaringType, src.Name);
-            dst.FieldId = (Address16)dst.FieldOffset;
+            dst.Offset = Interop.offset(src.DeclaringType, src.Name);
+            dst.Id = (Address16)dst.Offset;
             dst.RenderWidth = 16;
-            dst.FieldSize = default;
+            dst.Size = default;
             dst.Definition = src;
             return ref dst;
         }

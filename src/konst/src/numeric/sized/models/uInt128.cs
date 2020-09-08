@@ -6,50 +6,50 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Konst;
+    using static z;
+
+    using S = uint128;
+    using W = W128;
+    using N = N128;
+    using T = System.Runtime.Intrinsics.Vector128<ulong>;
+    using C = System.UInt64;
 
     public struct uint128
     {
-        Vector128<ulong> Storage;
+        internal T data;
+
+        public static W W => default;
+
+        public static N N => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator uint128((ulong lo, ulong hi) src)
-            => new uint128(src.lo, src.hi);
+        public static implicit operator S((C lo, C hi) src)
+            => new S(src.lo, src.hi);
 
         [MethodImpl(Inline)]
-        public static implicit operator uint128(Vector128<ulong> src)
-            => new uint128(src);
+        public static implicit operator S(T src)
+            => new S(src);
 
         [MethodImpl(Inline)]
-        public uint128(ulong lo, ulong hi)
-        {            
-            Storage = Vector128.Create(lo,hi);
-        }
+        public uint128(C lo, C hi)
+            => data = vparts(lo,hi);
 
         [MethodImpl(Inline)]
-        public uint128(Vector128<ulong> src)
-        {            
-            Storage = src;
-        }
+        public uint128(T src)
+            => data = src;
 
-        public ulong Lo
+        public C Lo
         {
             [MethodImpl(Inline)]
-            get => Storage.GetElement(0);
+            get => vcell(data,0);
         }
-    
-        public ulong Hi
-        {
-            [MethodImpl(Inline)]
-            get => Storage.GetElement(1);
-        }   
 
-        public Vector128<ulong> Data
+        public C Hi
         {
             [MethodImpl(Inline)]
-            get => Storage;
-        } 
+            get => vcell(data,1);
+        }
     }
 }

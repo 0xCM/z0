@@ -18,7 +18,7 @@ namespace Z0
     /// <summary>
     /// Represents the value of a type-level single and thus has domain {0,1}
     /// </summary>
-    public readonly struct uint1 : IUnsigned<S,W,K,T>
+    public readonly struct uint1 : ISizedInt<S,W,K,T>
     {
         internal readonly byte data;
 

@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-
     [ApiDataType]
     public readonly struct PrimalBitFieldSpec
     {
@@ -29,12 +28,12 @@ namespace Z0
             Width = 0,
 
             /// <summary>
-            /// Identifies the bitfield segment that specifies a primtive kind identifier
+            /// Identifies the bitfield segment that specifies a primitive kind identifier
             /// </summary>
             KindId = 1,
 
             /// <summary>
-            /// Identifies the bitfield segment that specifies a primtive sign classifier
+            /// Identifies the bitfield segment that specifies a primitive sign classifier
             /// </summary>
             Sign = 2,
         }

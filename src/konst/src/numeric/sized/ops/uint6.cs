@@ -54,7 +54,7 @@ namespace Z0
             => new S(src);
 
         /// <summary>
-        /// Creates a 6-bit unsigned integer from the least 6 bits of the source
+        /// Creates a 6-bit unsigned integer from the least 6 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
@@ -62,7 +62,7 @@ namespace Z0
             => new S(src);
 
         /// <summary>
-        /// Creates a 6-bit unsigned integer from the least 6 bits of the source
+        /// Creates a 6-bit unsigned integer from the least 6 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
@@ -70,7 +70,7 @@ namespace Z0
             => new S(src);
 
         /// <summary>
-        /// Creates a 6-bit unsigned integer from the least 6 bits of the source
+        /// Creates a 6-bit unsigned integer from the least 6 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
@@ -78,7 +78,15 @@ namespace Z0
             => new S(src);
 
         /// <summary>
-        /// Creates a 6-bit unsigned integer from the least 6 bits of the source
+        /// Creates a 6-bit unsigned integer from the least 6 source bits
+        /// </summary>
+        /// <param name="src">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static S uint6(uint24 src)
+            => new S((uint)src);
+
+        /// <summary>
+        /// Creates a 6-bit unsigned integer from the least 6 source bits
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]

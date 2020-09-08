@@ -3,44 +3,44 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
 
-    public interface IUnsigned : ITextual, IHashed
+    public interface ISizedInt : ITextual, IHashed
     {
         bool IsZero {get;}
 
-        bool IsNonZero 
+        bool IsNonZero
             => !IsZero;
     }
 
-    public interface IUnsigned<S> : IUnsigned, IEquatable<S>    
-        where S : unmanaged, IUnsigned<S>
+    public interface ISizedInt<S> : ISizedInt, IEquatable<S>
+        where S : unmanaged, ISizedInt<S>
     {
-        
-    }    
 
-    public interface IUnsigned<S,T> : IUnsigned<S>, INullary<S,T>
-        where S : unmanaged, IUnsigned<S,T>
-        where T : unmanaged         
-    {
-        T Value {get;}
-    }    
-
-    public interface IUnsigned<S,W,T> : IUnsigned<S,T> 
-        where S : unmanaged, IUnsigned<S,W,T>
-        where W : unmanaged, IDataWidth
-        where T : unmanaged         
-    {
-        
     }
 
-    public interface IUnsigned<F,W,K,T> : IUnsigned<F,W,T>
-        where F : unmanaged, IUnsigned<F,W,K,T>
+    public interface ISizedInt<S,T> : ISizedInt<S>, INullary<S,T>
+        where S : unmanaged, ISizedInt<S,T>
+        where T : unmanaged
+    {
+        T Value {get;}
+    }
+
+    public interface ISizedInt<S,W,T> : ISizedInt<S,T>
+        where S : unmanaged, ISizedInt<S,W,T>
+        where W : unmanaged, IDataWidth
+        where T : unmanaged
+    {
+
+    }
+
+    public interface ISizedInt<F,W,K,T> : ISizedInt<F,W,T>
+        where F : unmanaged, ISizedInt<F,W,K,T>
         where W : unmanaged, IDataWidth
         where K : unmanaged, Enum
-        where T : unmanaged         
+        where T : unmanaged
     {
         K Kind {get;}
-    }    
+    }
 }

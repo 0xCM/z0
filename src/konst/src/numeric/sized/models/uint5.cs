@@ -19,7 +19,7 @@ namespace Z0
     /// <summary>
     /// Represents the value of a type-level quintet and thus is an integer in the range [0,31]
     /// </summary>
-    public readonly struct uint5 : IUnsigned<S,W,K,T>
+    public readonly struct uint5 : ISizedInt<S,W,K,T>
     {
         internal readonly byte data;
 

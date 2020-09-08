@@ -11,12 +11,34 @@ namespace Z0
 
     using TC = System.TypeCode;
 
+    public struct Cache<T>
+        where T : struct
+    {
+        static T _Data = new T();
+
+        [MethodImpl(Inline)]
+        public Cache(in T src)
+            => _Data = src;
+
+        public ref readonly T Data
+        {
+            [MethodImpl(Inline)]
+            get => ref _Data;
+        }
+
+    }
+
+    readonly struct TypeCodeCache
+    {
+        static internal readonly TypeCodes Data = new TypeCodes(0);
+    }
+
     [ApiHost]
     public readonly struct TypeCodes
     {
         [MethodImpl(Inline), Op]
-        public static ref readonly TypeCodes init()
-            => ref Parts.Konst.Resolved.Codes;
+        public static ref readonly TypeCodes cached()
+            => ref TypeCodeCache.Data;
 
         [MethodImpl(Inline), Op]
         public static TypeCodeIndex index(in TypeCodes src)

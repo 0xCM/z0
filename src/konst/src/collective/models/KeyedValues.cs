@@ -19,6 +19,13 @@ namespace Z0
 
         public static KeyedValues<K,V> from<K,V>(K key, V[] values)
             => new KeyedValues<K,V>(values.Select(value => KeyedValue.define(key, value)).Array());
+
+        public static KeyedValues<K,V> from<K,V>(Paired<K,V>[] src)
+            => new KeyedValues<K,V>(src.Select(x => new KeyedValue<K,V>(x.Left, x.Right)));
+
+        [MethodImpl(Inline)]
+        public static KeyedValues<K,V> from<K,V>(KeyedValue<K,V>[] src)
+            => new KeyedValues<K,V>(src);
     }
 
     /// <summary>
@@ -72,6 +79,13 @@ namespace Z0
         {
             Pairs = dst;
             KeyFunction = (in V key) => default(K);
+        }
+
+        [MethodImpl(Inline)]
+        public KeyedValues(KeyedValue<K,V>[] dst, KeyFunction<K,V> kf)
+        {
+            Pairs = dst;
+            KeyFunction = kf;
         }
 
         [MethodImpl(Inline)]

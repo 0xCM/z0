@@ -12,41 +12,39 @@ namespace Z0
 
     public struct TableField : ITableField
     {
-        public ushort Index;
-
         public Type TableType;
 
-        public StringRef FieldName;
+        public ushort Index;
 
-        public Address64 FieldOffset;
+        public Address16 Id;
 
-        public Address16 FieldId;
+        public Address64 Offset;
 
         public Type DataType;
 
-        public ByteSize FieldSize;
+        public ByteSize Size;
 
-        public RenderWidth<ushort> RenderWidth;
+        public ushort RenderWidth;
+
+        public FieldInfo Definition;
 
         public string Name
         {
             [MethodImpl(Inline)]
-            get => FieldName;
+            get => Definition.Name;
         }
-
-        public FieldInfo Definition;
 
         Type ITableField.TableType
             => TableType;
 
-        StringRef ITableField.FieldName
-            => FieldName;
+        string ITableField.FieldName
+            => Name;
 
         Type ITableField.DataType
             => DataType;
 
         ByteSize ITableField.FieldSize
-            => FieldSize;
+            => Size;
 
         RenderWidth<ushort> ITableField.RenderWidth
             => RenderWidth;

@@ -30,6 +30,8 @@ public enum PartId : ulong
 
     Domain = 18,
 
+    Check = 19,
+
     Imagine = 20,
 
     Memories = 24,
@@ -43,6 +45,7 @@ public enum PartId : ulong
     Polyrand = 36,
 
     Tools = 40,
+
 
     // ~ 50
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -159,8 +162,6 @@ public enum PartId : ulong
 
     Numeric = 161,
 
-    Core = 162,
-
     Validity = 163,
 
     VCheck = 164,
@@ -174,6 +175,8 @@ public enum PartId : ulong
     AsmModels = 181,
 
     AsmRun = 182,
+
+    Encoded = 185,
 
     // ~ 200
     // ~ -------------------------------------------------------------------------------

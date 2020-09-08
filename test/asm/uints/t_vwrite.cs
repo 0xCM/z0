@@ -13,12 +13,12 @@ namespace Z0
 
     public class t_vwrite : t_vcheck<t_vwrite>
     {
-        public void primal_kind()
-        {
-            var f = PrimalBits.from(PrimalKind.I16);
-            var width = PrimalBits.width(f);
-            Claim.Eq(width, TypeWidth.W16);
-        }
+        // public void primal_kind()
+        // {
+        //     var f = PrimalBits.from(PrimalKind.I16);
+        //     var width = PrimalBits.width(f);
+        //     Claim.Eq(width, TypeWidth.W16);
+        // }
 
         static void asci_format_16()
         {
