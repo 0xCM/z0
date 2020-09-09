@@ -13,10 +13,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm0 : IXmmOperand<xmm0,N0>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm0(FixedCell128 value)
+        public xmm0(Cell128 value)
             => Content = value;
 
         public K Kind => K.XMM0;
@@ -24,11 +24,11 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm1 : IXmmOperand<xmm1,N1>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
 
         [MethodImpl(Inline)]
-        public xmm1(FixedCell128 value)
+        public xmm1(Cell128 value)
             => Content = value;
 
         public K Kind => K.XMM1;
@@ -36,10 +36,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm2 : IXmmOperand<xmm2,N2>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm2(FixedCell128 value)
+        public xmm2(Cell128 value)
             => Content = value;
 
         public K Kind => K.XMM2;
@@ -47,10 +47,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm3 : IXmmOperand<xmm3,N3>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm3(FixedCell128 value)
+        public xmm3(Cell128 value)
             => Content = value;
 
         public K Kind => K.XMM3;
@@ -58,11 +58,11 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm4 : IXmmOperand<xmm4,N4>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
 
         [MethodImpl(Inline)]
-        public xmm4(FixedCell128 value)
+        public xmm4(Cell128 value)
         {
             Content = value;
         }
@@ -72,10 +72,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm5 : IXmmOperand<xmm5,N5>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm5(FixedCell128 value)
+        public xmm5(Cell128 value)
         {
             Content = value;
         }
@@ -85,10 +85,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm6 : IXmmOperand<xmm6,N6>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm6(FixedCell128 value)
+        public xmm6(Cell128 value)
             => Content = value;
 
         public K Kind => K.XMM6;
@@ -96,10 +96,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm7 : IXmmOperand<xmm7,N7>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm7(FixedCell128 value)
+        public xmm7(Cell128 value)
         {
             Content = value;
         }
@@ -109,10 +109,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm8 : IXmmOperand<xmm8,N8>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm8(FixedCell128 value)
+        public xmm8(Cell128 value)
         {
             Content = value;
         }
@@ -122,10 +122,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm9 : IXmmOperand<xmm9,N9>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm9(FixedCell128 value)
+        public xmm9(Cell128 value)
             => Content = value;
 
         public K Kind => K.XMM9;
@@ -133,10 +133,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm10 : IXmmOperand<xmm10,N10>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm10(FixedCell128 value)
+        public xmm10(Cell128 value)
         {
             Content = value;
         }
@@ -146,10 +146,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm11 : IXmmOperand<xmm11,N11>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm11(FixedCell128 value)
+        public xmm11(Cell128 value)
         {
             Content = value;
         }
@@ -159,10 +159,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm12 : IXmmOperand<xmm12,N12>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm12(FixedCell128 value)
+        public xmm12(Cell128 value)
             => Content = value;
 
         public K Kind => K.XMM12;
@@ -170,10 +170,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm13 : IXmmOperand<xmm13,N13>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm13(FixedCell128 value)
+        public xmm13(Cell128 value)
             => Content = value;
 
         public K Kind => K.XMM13;
@@ -181,10 +181,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm14 : IXmmOperand<xmm14,N14>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm14(FixedCell128 value)
+        public xmm14(Cell128 value)
             => Content = value;
 
         public K Kind => K.XMM14;
@@ -192,20 +192,20 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm15 : IXmmOperand<xmm15,N15>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm15(FixedCell128 value)
+        public xmm15(Cell128 value)
             => Content = value;
         public K Kind => K.XMM15;
     }
 
     public readonly struct xmm16 : IXmmOperand<xmm16,N16>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm16(FixedCell128 value)
+        public xmm16(Cell128 value)
         {
             Content = value;
         }
@@ -216,10 +216,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm17 : IXmmOperand<xmm17,N17>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm17(FixedCell128 value)
+        public xmm17(Cell128 value)
         {
             Content = value;
         }
@@ -229,10 +229,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm18 : IXmmOperand<xmm18,N18>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm18(FixedCell128 value)
+        public xmm18(Cell128 value)
         {
             Content = value;
         }
@@ -242,10 +242,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm19 : IXmmOperand<xmm19,N19>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm19(FixedCell128 value)
+        public xmm19(Cell128 value)
         {
             Content = value;
         }
@@ -255,10 +255,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm20 : IXmmOperand<xmm20,N20>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm20(FixedCell128 value)
+        public xmm20(Cell128 value)
         {
             Content = value;
         }
@@ -268,10 +268,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm21 : IXmmOperand<xmm21,N21>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm21(FixedCell128 value)
+        public xmm21(Cell128 value)
         {
             Content = value;
         }
@@ -281,10 +281,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm22 : IXmmOperand<xmm22,N22>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm22(FixedCell128 value)
+        public xmm22(Cell128 value)
         {
             Content = value;
         }
@@ -294,10 +294,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm23 : IXmmOperand<xmm23,N23>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm23(FixedCell128 value)
+        public xmm23(Cell128 value)
         {
             Content = value;
         }
@@ -307,11 +307,11 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm24 : IXmmOperand<xmm24,N24>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
 
         [MethodImpl(Inline)]
-        public xmm24(FixedCell128 value)
+        public xmm24(Cell128 value)
         {
             Content = value;
         }
@@ -321,10 +321,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm25 : IXmmOperand<xmm25,N25>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm25(FixedCell128 value)
+        public xmm25(Cell128 value)
         {
             Content = value;
         }
@@ -334,10 +334,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm26 : IXmmOperand<xmm26,N26>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm26(FixedCell128 value)
+        public xmm26(Cell128 value)
             => Content = value;
 
         public K Kind => K.XMM26;
@@ -345,10 +345,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm27 : IXmmOperand<xmm27,N27>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm27(FixedCell128 value)
+        public xmm27(Cell128 value)
             => Content = value;
 
         public K Kind => K.XMM27;
@@ -356,10 +356,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm28 : IXmmOperand<xmm28,N28>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm28(FixedCell128 value)
+        public xmm28(Cell128 value)
             => Content = value;
 
         public K Kind => K.XMM28;
@@ -367,10 +367,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm29 : IXmmOperand<xmm29,N29>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm29(FixedCell128 value)
+        public xmm29(Cell128 value)
             => Content = value;
 
         public K Kind => K.XMM29;
@@ -378,10 +378,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm30 : IXmmOperand<xmm30,N30>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm30(FixedCell128 value)
+        public xmm30(Cell128 value)
             => Content = value;
 
         public K Kind => K.XMM30;
@@ -389,10 +389,10 @@ namespace Z0.Asm.Dsl
 
     public readonly struct xmm31 : IXmmOperand<xmm31,N31>
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public xmm31(FixedCell128 value)
+        public xmm31(Cell128 value)
              => Content = value;
 
         public K Kind => K.XMM31;

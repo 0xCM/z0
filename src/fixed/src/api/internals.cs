@@ -17,25 +17,25 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         internal static unsafe Span<T> span<F,T>(ref F src)
-            where F : unmanaged, IFixedCell
+            where F : unmanaged, IDataCell
             where T : unmanaged
                 => new Span<T>(Unsafe.AsPointer(ref src), Unsafe.SizeOf<F>());
 
         [MethodImpl(Inline)]
         internal static ref T head<F,T>(ref F src, T t)
-            where F : unmanaged, IFixedCell
+            where F : unmanaged, IDataCell
             where T : unmanaged
                 => ref Unsafe.As<F,T>(ref src);
 
         [MethodImpl(Inline)]
         internal static ref readonly F from<T,F>(in T src)
-            where F : unmanaged, IFixedCell
+            where F : unmanaged, IDataCell
             where T : struct
                 => ref Unsafe.As<T,F>(ref  Unsafe.AsRef(in src));
 
         [MethodImpl(Inline)]
         internal static unsafe ReadOnlySpan<T> view<F,T>(in F src)
-            where F : unmanaged, IFixedCell
+            where F : unmanaged, IDataCell
             where T : unmanaged
                 => new ReadOnlySpan<T>(Unsafe.AsPointer(ref Unsafe.AsRef(in src)), Unsafe.SizeOf<F>());
 

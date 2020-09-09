@@ -18,9 +18,9 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8k)]
-        public static ReadOnlySpan<T> view<T>(in FixedCell8 src)
+        public static ReadOnlySpan<T> view<T>(in Cell8 src)
             where T : unmanaged
-                => view<FixedCell8,T>(src);
+                => view<Cell8,T>(src);
 
         /// <summary>
         /// Presents a 32-bit value as a T-parametric readonly span
@@ -29,9 +29,9 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
-        public static ReadOnlySpan<T> view<T>(in FixedCell16 src)
+        public static ReadOnlySpan<T> view<T>(in Cell16 src)
             where T : unmanaged
-                => view<FixedCell16,T>(src);
+                => view<Cell16,T>(src);
 
         /// <summary>
         /// Presents a 32-bit value as a T-parametric readonly span
@@ -40,9 +40,9 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8x16x32k)]
-        public static ReadOnlySpan<T> view<T>(in Fixed32 src)
+        public static ReadOnlySpan<T> view<T>(in Cell32 src)
             where T : unmanaged
-                => view<Fixed32,T>(src);
+                => view<Cell32,T>(src);
 
         /// <summary>
         /// Presents a 64-bit value as a T-parametric readonly span
@@ -51,9 +51,9 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ReadOnlySpan<T> view<T>(in FixedCell64 src)
+        public static ReadOnlySpan<T> view<T>(in Cell64 src)
             where T : unmanaged
-                => view<FixedCell64,T>(src);
+                => view<Cell64,T>(src);
 
         /// <summary>
         /// Presents a 128-bit value as a T-parametric readonly span
@@ -62,9 +62,9 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ReadOnlySpan<T> view<T>(in FixedCell128 src)
+        public static ReadOnlySpan<T> view<T>(in Cell128 src)
             where T : unmanaged
-                => view<FixedCell128,T>(src);
+                => view<Cell128,T>(src);
 
         /// <summary>
         /// Presents a 256-bit value as a T-parametric readonly span
@@ -73,9 +73,9 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ReadOnlySpan<T> view<T>(in FixedCell256 src)
+        public static ReadOnlySpan<T> view<T>(in Cell256 src)
             where T : unmanaged
-                => view<FixedCell256,T>(src);
+                => view<Cell256,T>(src);
 
         /// <summary>
         /// Presents a 512-bit value as a T-parametric readonly span
@@ -84,8 +84,8 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ReadOnlySpan<T> view<T>(in FixedCell512 src)
+        public static ReadOnlySpan<T> view<T>(in Cell512 src)
             where T : unmanaged
-                => view<FixedCell512,T>(src);
+                => view<Cell512,T>(src);
     }
 }

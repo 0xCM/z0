@@ -14,7 +14,7 @@ namespace Z0
 
 
     class FixedStreamProvider<F,W,T> : IFixedStreamProvider<F,W,T>
-        where F : unmanaged, IFixedCell
+        where F : unmanaged, IDataCell
         where W : unmanaged, ITypeWidth
         where T : unmanaged
     {
@@ -152,15 +152,15 @@ namespace Z0
             => Fixed(random.Fixed(w512));
 
         [MethodImpl(Inline)]
-        public FixedCell128 f128V(W128 w)
+        public Cell128 f128V(W128 w)
             => random.NextPair<ulong>();
 
         [MethodImpl(Inline)]
-        public FixedCell256 Fixed(W256 w)
+        public Cell256 Fixed(W256 w)
             =>  (random.Fixed(w128), random.Fixed(w128));
 
         [MethodImpl(Inline)]
-        public FixedCell512 Fixed(W512 w)
+        public Cell512 Fixed(W512 w)
             => (random.Fixed(w256), random.Fixed(w256));
     }
 }

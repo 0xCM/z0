@@ -14,7 +14,7 @@ namespace Z0.Asm.Dsl
 
     public readonly struct Xmm : IXmmOperand
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         public RegisterKind Kind {get;}
 
@@ -25,7 +25,7 @@ namespace Z0.Asm.Dsl
         }
 
         [MethodImpl(Inline)]
-        public Xmm(FixedCell128 value, RegisterKind kind)
+        public Xmm(Cell128 value, RegisterKind kind)
         {
             Content = value;
             Kind = kind;

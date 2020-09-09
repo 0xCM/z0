@@ -11,7 +11,7 @@ namespace Z0
     public readonly struct FixedStream
     {
         public static IEnumerable<F> create<F>(IFixedSource<F> source)
-            where F : struct, IFixedCell
+            where F : struct, IDataCell
         {
             while(true)
             {
@@ -87,13 +87,13 @@ namespace Z0
         // }
 
         public static IEnumerable<F> Create<F,W,T>(IPolyrand random, F f = default, T t = default)
-            where F : unmanaged, IFixedCell
+            where F : unmanaged, IDataCell
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => new FixedStreamProvider<F,W,T>(random, random.Domain<T>()).Stream;
 
         public static IEnumerable<F> Create<F,W,T>(IPolyrand random, Interval<T> celldomain)
-            where F : unmanaged, IFixedCell
+            where F : unmanaged, IDataCell
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => new FixedStreamProvider<F,W,T>(random, celldomain).Stream;

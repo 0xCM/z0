@@ -57,8 +57,8 @@ namespace Z0
             var svc = MSvc.bitlogic<T>();
             var v1 = VSvc.vbitlogic<T>(w128).and(x,y);
 
-            var buffer = Fixed.alloc<FixedCell128>();
-            ref var dst = ref Fixed.head<FixedCell128,T>(ref buffer);
+            var buffer = Fixed.alloc<Cell128>();
+            ref var dst = ref Fixed.head<Cell128,T>(ref buffer);
             var count = z.vcount<T>(w128);
 
             for(byte i=0; i< count; i++)

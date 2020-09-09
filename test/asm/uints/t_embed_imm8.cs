@@ -162,7 +162,7 @@ namespace Z0.Asm
             var asm = AsmCheck.Decoder.Decode(captured).Require();
             AsmCheck.WriteAsm(asm,dst);
 
-            var g = Dynamic.EmitFixedBinary<FixedCell256>(AsmCheck[Main], asm.Code);
+            var g = Dynamic.EmitFixedBinary<Cell256>(AsmCheck[Main], asm.Code);
 
             var v2 = g(x,y).ToVector<ushort>();
             Claim.veq(v1,v2);

@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The reference cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref T cell<F,T>(ref F src, int index)
-            where F : unmanaged, IFixedCell
+            where F : unmanaged, IDataCell
             where T : unmanaged
                 => ref Unsafe.Add(ref Unsafe.As<F,T>(ref src), index);
 
@@ -31,9 +31,9 @@ namespace Z0
         /// <param name="index">The 0-based type-relative cell index</param>
         /// <typeparam name="T">The reference cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8k)]
-        public static ref T cell<T>(ref FixedCell8 src, int index)
+        public static ref T cell<T>(ref Cell8 src, int index)
             where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.As<FixedCell8,T>(ref src), index);
+                => ref Unsafe.Add(ref Unsafe.As<Cell8,T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates a generic cell within a 16-bit storage block
@@ -42,9 +42,9 @@ namespace Z0
         /// <param name="index">The 0-based type-relative cell index</param>
         /// <typeparam name="T">The reference cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
-        public static ref T cell<T>(ref FixedCell16 src, int index)
+        public static ref T cell<T>(ref Cell16 src, int index)
             where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.As<FixedCell16,T>(ref src), index);
+                => ref Unsafe.Add(ref Unsafe.As<Cell16,T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates a generic cell within a 32-bit storage block
@@ -53,9 +53,9 @@ namespace Z0
         /// <param name="index">The 0-based type-relative cell index</param>
         /// <typeparam name="T">The reference cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8x16x32k)]
-        public static ref T cell<T>(ref Fixed32 src, int index)
+        public static ref T cell<T>(ref Cell32 src, int index)
             where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.As<Fixed32,T>(ref src), index);
+                => ref Unsafe.Add(ref Unsafe.As<Cell32,T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates a generic cell within a 64-bit storage block
@@ -64,9 +64,9 @@ namespace Z0
         /// <param name="index">The 0-based type-relative cell index</param>
         /// <typeparam name="T">The reference cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T cell<T>(ref FixedCell64 src, int index)
+        public static ref T cell<T>(ref Cell64 src, int index)
             where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.As<FixedCell64,T>(ref src), index);
+                => ref Unsafe.Add(ref Unsafe.As<Cell64,T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates a generic cell within a 128-bit storage block
@@ -75,9 +75,9 @@ namespace Z0
         /// <param name="index">The 0-based type-relative cell index</param>
         /// <typeparam name="T">The reference cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T cell<T>(ref FixedCell128 src, int index)
+        public static ref T cell<T>(ref Cell128 src, int index)
             where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.As<FixedCell128,T>(ref src), index);
+                => ref Unsafe.Add(ref Unsafe.As<Cell128,T>(ref src), index);
 
         /// <summary>
         /// Queries/manipulates a generic cell within a 256-bit storage block
@@ -86,8 +86,8 @@ namespace Z0
         /// <param name="index">The 0-based type-relative cell index</param>
         /// <typeparam name="T">The reference cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T cell<T>(ref FixedCell256 src, int index)
+        public static ref T cell<T>(ref Cell256 src, int index)
             where T : unmanaged
-                => ref Unsafe.Add(ref Unsafe.As<FixedCell256,T>(ref src), index);
+                => ref Unsafe.Add(ref Unsafe.As<Cell256,T>(ref src), index);
     }
 }

@@ -13,31 +13,31 @@ namespace Z0
     partial class XRng
     {
         [MethodImpl(Inline)]
-        public static FixedCell8 Fixed(this IValueSource source, W8 w)
+        public static Cell8 Fixed(this IValueSource source, W8 w)
             => FixedValues.next(source, w);
 
         [MethodImpl(Inline)]
-        public static FixedCell16 Fixed(this IValueSource source, W16 w)
+        public static Cell16 Fixed(this IValueSource source, W16 w)
             => FixedValues.next(source, w);
 
         [MethodImpl(Inline)]
-        public static Fixed32 Fixed(this IValueSource source, W32 w)
+        public static Cell32 Fixed(this IValueSource source, W32 w)
             => FixedValues.next(source, w);
 
         [MethodImpl(Inline)]
-        public static FixedCell64 Fixed(this IValueSource source, W64 w)
+        public static Cell64 Fixed(this IValueSource source, W64 w)
             => FixedValues.next(source, w);
 
         [MethodImpl(Inline)]
-        public static FixedCell128 Fixed(this IValueSource source, W128 w)
+        public static Cell128 Fixed(this IValueSource source, W128 w)
             => FixedValues.next(source, w);
 
         [MethodImpl(Inline)]
-        public static FixedCell256 Fixed(this IValueSource source, W256 w)
+        public static Cell256 Fixed(this IValueSource source, W256 w)
             => FixedValues.next(source, w);
 
         [MethodImpl(Inline)]
-        public static FixedCell512 Fixed(this IValueSource source, W512 w)
+        public static Cell512 Fixed(this IValueSource source, W512 w)
             => FixedValues.next(source, w);
     }
 }

@@ -18,7 +18,7 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe Span<byte> bytes<F>(ref F src)
-            where F : unmanaged, IFixedCell
+            where F : unmanaged, IDataCell
                 => new Span<byte>(Unsafe.AsPointer(ref src), Unsafe.SizeOf<F>());
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe ReadOnlySpan<byte> byteview<F>(in F src)
-            where F : unmanaged, IFixedCell
+            where F : unmanaged, IDataCell
                 => new ReadOnlySpan<byte>(Unsafe.AsPointer(ref Unsafe.AsRef(in src)), Unsafe.SizeOf<F>());
     }
 }

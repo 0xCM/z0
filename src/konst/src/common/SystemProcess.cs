@@ -8,16 +8,21 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Diagnostics;
     using System.Linq;
-    using System.IO;
 
+    using static Konst;
+
+    [ApiHost]
     public readonly struct SystemProcess
     {
-        public static Process Current
+        [MethodImpl(Inline), Op]
+        public static Process current()
             => Process.GetCurrentProcess();
 
+        [MethodImpl(Inline), Op]
         public static ProcessModule[] modules()
-            => modules(Current);
+            => modules(current());
 
+        [MethodImpl(Inline), Op]
         public static ProcessModule[] modules(Process src)
             => src.Modules.Cast<ProcessModule>().Array();
     }

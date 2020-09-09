@@ -28,7 +28,7 @@ namespace Z0
     }
 
     public interface IBufferToken<F> : IFixedBufferToken
-        where F : unmanaged, IFixedCell
+        where F : unmanaged, IDataCell
     {
 
     }

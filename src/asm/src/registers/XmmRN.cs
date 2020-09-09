@@ -14,10 +14,10 @@ namespace Z0.Asm
         where R : unmanaged, IXmmOperand
         where N : unmanaged, ITypeNat
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public Xmm(FixedCell128 value)
+        public Xmm(Cell128 value)
         {
             Content = value;
         }

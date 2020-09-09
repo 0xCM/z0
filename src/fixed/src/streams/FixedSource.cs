@@ -16,7 +16,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static FixedSource<F> create<F>(IValueSource provider)
-            where F : struct, IFixedCell
+            where F : struct, IDataCell
                 => new FixedSource<F>(provider);
 
         [MethodImpl(Inline), Op]
@@ -28,32 +28,32 @@ namespace Z0
             => Provider = provider;
 
         [MethodImpl(Inline), Op]
-        public FixedCell8 next(W8 w)
-            => create<FixedCell8>(Provider).Next();
+        public Cell8 next(W8 w)
+            => create<Cell8>(Provider).Next();
 
         [MethodImpl(Inline), Op]
-        public FixedCell16 next(W16 w)
-            => create<FixedCell16>(Provider).Next();
+        public Cell16 next(W16 w)
+            => create<Cell16>(Provider).Next();
 
         [MethodImpl(Inline), Op]
-        public Fixed32 next(W32 w)
-            => create<Fixed32>(Provider).Next();
+        public Cell32 next(W32 w)
+            => create<Cell32>(Provider).Next();
 
         [MethodImpl(Inline), Op]
-        public FixedCell64 next(W64 w)
-            => create<FixedCell64>(Provider).Next();
+        public Cell64 next(W64 w)
+            => create<Cell64>(Provider).Next();
 
         [MethodImpl(Inline), Op]
-        public FixedCell128 next(W128 w)
-            => create<FixedCell128>(Provider).Next();
+        public Cell128 next(W128 w)
+            => create<Cell128>(Provider).Next();
 
         [MethodImpl(Inline), Op]
-        public FixedCell256 next(W256 w)
-            => create<FixedCell256>(Provider).Next();
+        public Cell256 next(W256 w)
+            => create<Cell256>(Provider).Next();
 
         [MethodImpl(Inline), Op]
-        public FixedCell512 next(W512 w)
-            => create<FixedCell512>(Provider).Next();
+        public Cell512 next(W512 w)
+            => create<Cell512>(Provider).Next();
 
     }
 }

@@ -100,7 +100,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public void Clear(W128 w)
         {
-            first(Content.Cast<byte,FixedCell128>()) = FixedCell128.Empty;
+            first(Content.Cast<byte,Cell128>()) = Cell128.Empty;
         }
     }
 }

@@ -11,23 +11,23 @@ namespace Z0
     public delegate bit Emitter1();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate FixedCell8 Emitter8();
+    public delegate Cell8 Emitter8();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate FixedCell16 Emitter16();
+    public delegate Cell16 Emitter16();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed32 Emitter32();
+    public delegate Cell32 Emitter32();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate FixedCell64 Emitter64();
+    public delegate Cell64 Emitter64();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate FixedCell128 Emitter128();
+    public delegate Cell128 Emitter128();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate FixedCell256 Emitter256();
+    public delegate Cell256 Emitter256();
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate FixedCell512 Emitter512();
+    public delegate Cell512 Emitter512();
 }

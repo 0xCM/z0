@@ -72,7 +72,7 @@ namespace Z0.Asm
                 var v1 = f.DynamicOp.Invoke(x,y);
                 var captured = CaptureService.Capture(CaptureExchange.Context, f.Id, f.DynamicOp).Require();
                 var asm = Decoder.Decode(captured).Require();
-                var g = Dynamic.EmitFixedBinary<FixedCell128>(this[Main], asm.Code);
+                var g = Dynamic.EmitFixedBinary<Cell128>(this[Main], asm.Code);
                 var v2 = g(x.ToFixed(),y.ToFixed()).ToVector<T>();
                 veq(v1,v2);
             }
@@ -95,7 +95,7 @@ namespace Z0.Asm
                 var capture = CaptureService.Capture(CaptureExchange.Context, dynop.Id, dynop).Require();
                 var asm = Decoder.Decode(capture).Require();
 
-                var f = Dynamic.EmitFixedUnary<FixedCell256>(this[Main], capture.HostedBits);
+                var f = Dynamic.EmitFixedUnary<Cell256>(this[Main], capture.HostedBits);
                 var v2 = f(x.ToFixed()).ToVector<T>();
                 veq(v1,v2);
             }

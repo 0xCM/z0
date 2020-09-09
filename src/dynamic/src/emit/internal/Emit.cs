@@ -53,27 +53,27 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal static BinaryOp8 EmitFixedBinaryOp(this IBufferToken buffer, N8 w,OpIdentity id)
-            => (BinaryOp8)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp8), typeof(FixedCell8));
+            => (BinaryOp8)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp8), typeof(Cell8));
 
         [MethodImpl(Inline)]
         internal static BinaryOp16 EmitFixedBinaryOp(this IBufferToken buffer, N16 w, OpIdentity id)
-            => (BinaryOp16)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp16), typeof(FixedCell16));
+            => (BinaryOp16)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp16), typeof(Cell16));
 
         [MethodImpl(Inline)]
         internal static BinaryOp32 EmitFixedBinaryOp(this IBufferToken buffer, N32 w, OpIdentity id)
-            => (BinaryOp32)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp32), typeof(Fixed32));
+            => (BinaryOp32)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp32), typeof(Cell32));
 
         [MethodImpl(Inline)]
         internal static BinaryOp64 EmitFixedBinaryOp(this IBufferToken buffer, N64 w, OpIdentity id)
-            => (BinaryOp64)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp64), typeof(FixedCell64));
+            => (BinaryOp64)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp64), typeof(Cell64));
 
         [MethodImpl(Inline)]
         internal static BinaryOp128 EmitFixedBinaryOp(this IBufferToken buffer, N128 w, OpIdentity id)
-            => (BinaryOp128)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp128), typeof(FixedCell128));
+            => (BinaryOp128)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp128), typeof(Cell128));
 
         [MethodImpl(Inline)]
         internal static BinaryOp256 EmitFixedBinaryOp(this IBufferToken buffer, N256 w, OpIdentity id)
-            => (BinaryOp256)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp256), typeof(FixedCell256));
+            => (BinaryOp256)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp256), typeof(Cell256));
 
         internal static FixedCellDelegate EmitFixed(this IntPtr src, OpIdentity id, Type functype, Type result, params Type[] args)
         {

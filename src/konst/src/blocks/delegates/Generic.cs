@@ -8,7 +8,7 @@ namespace Z0
 
     [SuppressUnmanagedCodeSecurity]
     public delegate R FixedEmitter<R>()
-        where R : IFixedCell;
+        where R : IDataCell;
 
     [SuppressUnmanagedCodeSecurity]
     public delegate R FixedFunc<X0,R>(X0 x0);

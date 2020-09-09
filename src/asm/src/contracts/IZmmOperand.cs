@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     using static z;
 
-    public interface IZmmOperand : IRegOperand<W512,FixedCell512>
+    public interface IZmmOperand : IRegOperand<W512,Cell512>
     {
         RegisterClass IRegOperand.Class
             => RegisterClass.ZMM;

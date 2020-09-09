@@ -14,23 +14,23 @@ namespace Z0
     public readonly struct FixedCellIndex
     {
         public static FixedCellIndex<F> Alloc<F>(int length)
-            where F : unmanaged, IFixedCell
+            where F : unmanaged, IDataCell
                 => new FixedCellIndex<F>(new F[length]);
 
         [MethodImpl(Inline)]
         public static FixedCellIndex<F> From<F>(Span<F> src)
-            where F : unmanaged, IFixedCell
+            where F : unmanaged, IDataCell
                 => new FixedCellIndex<F>(src);
 
         [MethodImpl(Inline)]
         public static FixedIndex<F,T> From<F,T>(Span<F> src)
-            where F : unmanaged, IFixedCell
+            where F : unmanaged, IDataCell
             where T : unmanaged
                 => new FixedIndex<F,T>(src);
     }
 
     public readonly ref struct FixedCellIndex<F>
-        where F : struct, IFixedCell
+        where F : struct, IDataCell
     {
         public static uint ItemWidth
             => bitsize<F>();
@@ -78,7 +78,7 @@ namespace Z0
     }
 
     public readonly ref struct FixedIndex<F,T>
-        where F : struct, IFixedCell
+        where F : struct, IDataCell
         where T : struct
      {
         public static uint ItemWidth => bitsize<F>();

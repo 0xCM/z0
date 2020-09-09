@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe void deposit<S,F>(in S src, ref F dst)
             where S : struct
-            where F : unmanaged, IFixedCell
+            where F : unmanaged, IDataCell
         {
             ref var dstBytes = ref Unsafe.As<F,byte>(ref dst);
             ref var srcBytes = ref Unsafe.As<S,byte>(ref Unsafe.AsRef(in src));

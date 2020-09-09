@@ -11,24 +11,24 @@ namespace Z0
     public delegate bit BinaryPredicate1(bit a, bit b);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate bit BinaryPredicate8(FixedCell8 a, FixedCell8 b);
+    public delegate bit BinaryPredicate8(Cell8 a, Cell8 b);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate bit BinaryPredicate16(FixedCell16 a, FixedCell16 b);
+    public delegate bit BinaryPredicate16(Cell16 a, Cell16 b);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate bit BinaryPredicate32(Fixed32 a, Fixed32 b);
+    public delegate bit BinaryPredicate32(Cell32 a, Cell32 b);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate bit BinaryPredicate64(FixedCell64 a, FixedCell64 b);
+    public delegate bit BinaryPredicate64(Cell64 a, Cell64 b);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate bit BinaryPredicate128(FixedCell128 a, FixedCell128 b);
+    public delegate bit BinaryPredicate128(Cell128 a, Cell128 b);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate bit BinaryPredicate256(FixedCell256 a, FixedCell256 b);
+    public delegate bit BinaryPredicate256(Cell256 a, Cell256 b);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate bit BinaryPredicate512(FixedCell512 a, FixedCell512 b);
+    public delegate bit BinaryPredicate512(Cell512 a, Cell512 b);
 
 }

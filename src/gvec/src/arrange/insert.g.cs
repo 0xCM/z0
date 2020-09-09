@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
-    using static As;
-            
+    using static z;
+
     partial class gvec
     {
         /// <summary>
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively identifing low or hi</param>
         [MethodImpl(Inline), Closures(AllNumeric)]
-        public static Vector256<T> vinsert<T>(Vector128<T> src, Vector256<T> dst, [Imm] byte index)        
+        public static Vector256<T> vinsert<T>(Vector128<T> src, Vector256<T> dst, [Imm] byte index)
             where T : unmanaged
                 => vinsert_u(src,dst,(byte)index);
 
@@ -31,52 +31,52 @@ namespace Z0
         /// <param name="dst">The target vector</param>
         /// <param name="index">Identifies the lane in the target to overwrite, either 0 or 1 respectively identifing low or hi</param>
         [MethodImpl(Inline), Closures(AllNumeric)]
-        public static Vector256<T> vinsert<T>(Vector128<T> src, Vector256<T> dst, [Imm] BinaryDigit index)        
+        public static Vector256<T> vinsert<T>(Vector128<T> src, Vector256<T> dst, [Imm] BinaryDigit index)
             where T : unmanaged
                 => vinsert_u(src,dst,(byte)index);
 
         [MethodImpl(Inline)]
-        static Vector256<T> vinsert_u<T>(Vector128<T> src, Vector256<T> dst, byte index)        
+        static Vector256<T> vinsert_u<T>(Vector128<T> src, Vector256<T> dst, byte index)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(V0d.vinsert(v8u(src), v8u(dst), index));
+                return generic<T>(z.vinsert(v8u(src), v8u(dst), index));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(V0d.vinsert(v16u(src), v16u(dst), index));
+                return generic<T>(z.vinsert(v16u(src), v16u(dst), index));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(V0d.vinsert(v64i(src), v64i(dst), index));
+                return generic<T>(z.vinsert(v64i(src), v64i(dst), index));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(V0d.vinsert(v64u(src), v64u(dst), index));
+                return generic<T>(z.vinsert(v64u(src), v64u(dst), index));
             else
                 return vinsert_i(src,dst,index);
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vinsert_i<T>(Vector128<T> src, Vector256<T> dst, byte index)        
+        static Vector256<T> vinsert_i<T>(Vector128<T> src, Vector256<T> dst, byte index)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(V0d.vinsert(v8i(src), v8i(dst), index));
+                return generic<T>(z.vinsert(v8i(src), v8i(dst), index));
             else if(typeof(T) == typeof(short))
-                return generic<T>(V0d.vinsert(v16i(src), v16i(dst), index));
+                return generic<T>(z.vinsert(v16i(src), v16i(dst), index));
             else if(typeof(T) == typeof(int))
-                return generic<T>(V0d.vinsert(v32i(src), v32i(dst), index));
+                return generic<T>(z.vinsert(v32i(src), v32i(dst), index));
             else if(typeof(T) == typeof(long))
-                return generic<T>(V0d.vinsert(v64i(src), v64i(dst), index));
-            else 
+                return generic<T>(z.vinsert(v64i(src), v64i(dst), index));
+            else
                 return vinsert_f(src,dst,index);
         }
 
         [MethodImpl(Inline)]
-        static Vector256<T> vinsert_f<T>(Vector128<T> src, Vector256<T> dst, byte index)        
+        static Vector256<T> vinsert_f<T>(Vector128<T> src, Vector256<T> dst, byte index)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(V0d.vinsert(v32f(src), v32f(dst), index));
+                return generic<T>(z.vinsert(v32f(src), v32f(dst), index));
             else if(typeof(T) == typeof(double))
-                return generic<T>(V0d.vinsert(v64f(src), v64f(dst), index));
+                return generic<T>(z.vinsert(v64f(src), v64f(dst), index));
             else
-                throw Unsupported.define<T>();
-        } 
+                throw no<T>();
+        }
     }
 }

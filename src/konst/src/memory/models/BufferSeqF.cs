@@ -12,7 +12,7 @@ namespace Z0
     using static z;
 
     public readonly ref struct BufferSeq<F>
-        where F : unmanaged, IFixedCell
+        where F : unmanaged, IDataCell
     {
         readonly Span<F> View;
 

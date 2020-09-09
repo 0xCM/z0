@@ -13,10 +13,10 @@ namespace Z0.Asm
     public readonly struct Zmm<N> : IZmmOperand<Zmm<N>,N>
         where N : unmanaged, ITypeNat
     {
-        public FixedCell512 Content {get;}
+        public Cell512 Content {get;}
 
         [MethodImpl(Inline)]
-        public Zmm(FixedCell512 value)
+        public Zmm(Cell512 value)
         {
             Content = value;
         }

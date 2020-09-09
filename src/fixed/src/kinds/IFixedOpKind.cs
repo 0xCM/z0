@@ -70,7 +70,7 @@ namespace Z0
     /// <typeparam name="D">The operator type</typeparam>
     public interface IFixedOpKind<W,T,D> : IFixedOpKind<W,D>
         where W : unmanaged, IFixedWidth
-        where T : IFixedCell
+        where T : IDataCell
         where D : Delegate
     {
 

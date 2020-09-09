@@ -14,7 +14,7 @@ namespace Z0
     /// Describes a fixed-width allocated buffer
     /// </summary>
     public readonly struct BufferToken<F> : IBufferToken<F>
-        where F : unmanaged, IFixedCell
+        where F : unmanaged, IDataCell
     {
         public readonly MemoryAddress Address;
 

@@ -18,7 +18,7 @@ namespace Z0
     /// <typeparam name="D">The operator type</typeparam>
     public readonly struct FixedOpKind<W,T,D> : IFixedOpKind<W,T,D>
         where W : unmanaged, IFixedWidth
-        where T : IFixedCell
+        where T : IDataCell
         where D : Delegate
     {
         [MethodImpl(Inline)]

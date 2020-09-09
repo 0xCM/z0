@@ -11,24 +11,24 @@ namespace Z0
     public delegate bit UnaryOp1(bit a);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate FixedCell8 UnaryOp8(FixedCell8 a);
+    public delegate Cell8 UnaryOp8(Cell8 a);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate FixedCell16 UnaryOp16(FixedCell16 a);
+    public delegate Cell16 UnaryOp16(Cell16 a);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate Fixed32 UnaryOp32(Fixed32 a);
+    public delegate Cell32 UnaryOp32(Cell32 a);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate FixedCell64 UnaryOp64(FixedCell64 a);
+    public delegate Cell64 UnaryOp64(Cell64 a);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate FixedCell128 UnaryOp128(FixedCell128 a);
+    public delegate Cell128 UnaryOp128(Cell128 a);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate FixedCell256 UnaryOp256(FixedCell256 a);
+    public delegate Cell256 UnaryOp256(Cell256 a);
 
     [SuppressUnmanagedCodeSecurity]
-    public delegate FixedCell512 UnaryOp512(FixedCell512 a);
+    public delegate Cell512 UnaryOp512(Cell512 a);
 
 }

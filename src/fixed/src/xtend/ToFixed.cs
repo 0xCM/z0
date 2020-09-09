@@ -45,35 +45,35 @@ namespace Z0
             => FixedOps.fix(f);
 
         [MethodImpl(Inline)]
-        public static FixedCell8 ToFixed(this byte x)
+        public static Cell8 ToFixed(this byte x)
             => x;
 
         [MethodImpl(Inline)]
-        public static FixedCell8 ToFixed(this sbyte x)
+        public static Cell8 ToFixed(this sbyte x)
             => x;
 
         [MethodImpl(Inline)]
-        public static FixedCell16 ToFixed(this short x)
+        public static Cell16 ToFixed(this short x)
             => x;
 
         [MethodImpl(Inline)]
-        public static FixedCell16 ToFixed(this ushort x)
+        public static Cell16 ToFixed(this ushort x)
             => x;
 
         [MethodImpl(Inline)]
-        public static Fixed32 ToFixed(this int x)
+        public static Cell32 ToFixed(this int x)
             => x;
 
         [MethodImpl(Inline)]
-        public static Fixed32 ToFixed(this uint x)
+        public static Cell32 ToFixed(this uint x)
             => x;
 
         [MethodImpl(Inline)]
-        public static FixedCell64 ToFixed(this long x)
+        public static Cell64 ToFixed(this long x)
             => x;
 
         [MethodImpl(Inline)]
-        public static FixedCell64 ToFixed(this ulong x)
+        public static Cell64 ToFixed(this ulong x)
             => x;
     }
 }

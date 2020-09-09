@@ -11,12 +11,12 @@ namespace Z0.Asm
 
     public readonly struct Zmm : IZmmOperand
     {
-        public FixedCell512 Content {get;}
+        public Cell512 Content {get;}
 
         public RegisterKind Kind {get;}
 
         [MethodImpl(Inline)]
-        public Zmm(FixedCell512 value, RegisterKind kind)
+        public Zmm(Cell512 value, RegisterKind kind)
         {
             Content = value;
             Kind = kind;

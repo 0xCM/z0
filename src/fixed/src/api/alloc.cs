@@ -17,7 +17,7 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         [MethodImpl(Inline)]
         public static F alloc<F>()
-            where F : unmanaged, IFixedCell
+            where F : unmanaged, IDataCell
                 => default(F);
 
         /// <summary>
@@ -25,55 +25,55 @@ namespace Z0
         /// </summary>
         /// <param name="w">The bit-width selector</typeparam>
         [MethodImpl(Inline), Op]
-        public static FixedCell8 alloc(W8 w)
-            => default(FixedCell8);
+        public static Cell8 alloc(W8 w)
+            => default(Cell8);
 
         /// <summary>
         /// Creates a 16-bit value
         /// </summary>
         /// <param name="w">The bit-width selector</typeparam>
         [MethodImpl(Inline), Op]
-        public static FixedCell16 alloc(W16 w)
-            => default(FixedCell16);
+        public static Cell16 alloc(W16 w)
+            => default(Cell16);
 
         /// <summary>
         /// Creates a 32-bit value
         /// </summary>
         /// <param name="w">The bit-width selector</typeparam>
         [MethodImpl(Inline), Op]
-        public static Fixed32 alloc(W32 w)
-            => default(Fixed32);
+        public static Cell32 alloc(W32 w)
+            => default(Cell32);
 
         /// <summary>
         /// Creates a 64-bit value
         /// </summary>
         /// <param name="w">The bit-width selector</typeparam>
         [MethodImpl(Inline), Op]
-        public static FixedCell64 alloc(W64 w)
-            => default(FixedCell64);
+        public static Cell64 alloc(W64 w)
+            => default(Cell64);
 
         /// <summary>
         /// Creates a 128-bit value
         /// </summary>
         /// <param name="w">The bit-width selector</typeparam>
         [MethodImpl(Inline), Op]
-        public static FixedCell128 alloc(W128 w)
-            => default(FixedCell128);
+        public static Cell128 alloc(W128 w)
+            => default(Cell128);
 
         /// <summary>
         /// Creates a 256-bit value
         /// </summary>
         /// <param name="w">The bit-width selector</typeparam>
         [MethodImpl(Inline), Op]
-        public static FixedCell256 alloc(W256 w)
-            => default(FixedCell256);
+        public static Cell256 alloc(W256 w)
+            => default(Cell256);
 
         /// <summary>
         /// Creates a 512-bit value
         /// </summary>
         /// <param name="w">The bit-width selector</typeparam>
         [MethodImpl(Inline), Op]
-        public static FixedCell512 alloc(W512 w)
-            => default(FixedCell512);
+        public static Cell512 alloc(W512 w)
+            => default(Cell512);
     }
 }

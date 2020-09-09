@@ -239,51 +239,51 @@ namespace Z0
 
         [MethodImpl(Inline)]
         UnaryOp8 Emit(OpIdentity id, U f, W8 w, BufferToken dst)
-            => (UnaryOp8)Emit(id, f, typeof(UnaryOp8), typeof(FixedCell8), dst);
+            => (UnaryOp8)Emit(id, f, typeof(UnaryOp8), typeof(Cell8), dst);
 
         [MethodImpl(Inline)]
         UnaryOp16 Emit(OpIdentity id, U f, W16 w, BufferToken dst)
-            => (UnaryOp16)Emit(id, f, typeof(UnaryOp16), typeof(FixedCell16), dst);
+            => (UnaryOp16)Emit(id, f, typeof(UnaryOp16), typeof(Cell16), dst);
 
         [MethodImpl(Inline)]
         UnaryOp32 Emit(OpIdentity id, U f, W32 w, BufferToken dst)
-            => (UnaryOp32)Emit(id, f, typeof(UnaryOp32), typeof(Fixed32), dst);
+            => (UnaryOp32)Emit(id, f, typeof(UnaryOp32), typeof(Cell32), dst);
 
         [MethodImpl(Inline)]
         UnaryOp64 Emit(OpIdentity id, U f, W64 w, BufferToken dst)
-            => (UnaryOp64)Emit(id, f, typeof(UnaryOp64), typeof(FixedCell64), dst);
+            => (UnaryOp64)Emit(id, f, typeof(UnaryOp64), typeof(Cell64), dst);
 
         [MethodImpl(Inline)]
         UnaryOp128 Emit(BufferToken dst, OpIdentity id, U f, N128 w)
-            => (UnaryOp128)Emit(id, f, typeof(UnaryOp128), typeof(FixedCell128), dst);
+            => (UnaryOp128)Emit(id, f, typeof(UnaryOp128), typeof(Cell128), dst);
 
         [MethodImpl(Inline)]
         UnaryOp256 Emit(BufferToken dst, OpIdentity id, U f, N256 w)
-            => (UnaryOp256)Emit(id, f, typeof(UnaryOp256), typeof(FixedCell256), dst);
+            => (UnaryOp256)Emit(id, f, typeof(UnaryOp256), typeof(Cell256), dst);
 
         [MethodImpl(Inline)]
         BinaryOp8 Emit(BufferToken dst, OpIdentity id, B f, W8 w)
-            => (BinaryOp8)Emit(id, f, typeof(BinaryOp8), typeof(FixedCell8), dst);
+            => (BinaryOp8)Emit(id, f, typeof(BinaryOp8), typeof(Cell8), dst);
 
         [MethodImpl(Inline)]
         BinaryOp16 Emit(BufferToken dst, OpIdentity id, B f, W16 w)
-            => (BinaryOp16)Emit(id, f, typeof(BinaryOp16), typeof(FixedCell16), dst);
+            => (BinaryOp16)Emit(id, f, typeof(BinaryOp16), typeof(Cell16), dst);
 
         [MethodImpl(Inline)]
         BinaryOp32 Emit(BufferToken dst, OpIdentity id, B f, W32 w)
-            => (BinaryOp32)Emit(id, f, typeof(BinaryOp32), typeof(Fixed32), dst);
+            => (BinaryOp32)Emit(id, f, typeof(BinaryOp32), typeof(Cell32), dst);
 
         [MethodImpl(Inline)]
         BinaryOp64 Emit(BufferToken dst, OpIdentity id, B f, W64 w)
-            => (BinaryOp64)Emit(id, f, typeof(BinaryOp64), typeof(FixedCell64), dst);
+            => (BinaryOp64)Emit(id, f, typeof(BinaryOp64), typeof(Cell64), dst);
 
         [MethodImpl(Inline)]
         BinaryOp128 Emit(OpIdentity id, B f, N128 w, BufferToken dst)
-            => (BinaryOp128)Emit(id, f, typeof(BinaryOp128), typeof(FixedCell128), dst);
+            => (BinaryOp128)Emit(id, f, typeof(BinaryOp128), typeof(Cell128), dst);
 
         [MethodImpl(Inline)]
         BinaryOp256 Emit(OpIdentity id, B f, N256 w, BufferToken dst)
-            => (BinaryOp256)Emit(id, f, typeof(BinaryOp256), typeof(FixedCell256), dst);
+            => (BinaryOp256)Emit(id, f, typeof(BinaryOp256), typeof(Cell256), dst);
 
         [MethodImpl(Inline)]
         FixedCellDelegate Emit(OpIdentity id, U f, Type operatorType, Type operandType, BufferToken dst)

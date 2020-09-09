@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly FixedCell128 ToFixed<T>(this in Vector128<T> x)
+        public static ref readonly Cell128 ToFixed<T>(this in Vector128<T> x)
             where T : unmanaged
                 => ref Fixed.from(x);
 
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly FixedCell256 ToFixed<T>(this in Vector256<T> x)
+        public static ref readonly Cell256 ToFixed<T>(this in Vector256<T> x)
             where T : unmanaged
                 => ref Fixed.from(x);
 
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly FixedCell512 ToFixed<T>(this in Vector512<T> x)
+        public static ref readonly Cell512 ToFixed<T>(this in Vector512<T> x)
             where T : unmanaged
                 => ref Fixed.from(x);
 

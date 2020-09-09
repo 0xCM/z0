@@ -12,10 +12,10 @@ namespace Z0.Asm
     public readonly struct Xmm<R> : IXmmOperand<Xmm<R>,R>
         where R : unmanaged, IRegOperand
     {
-        public FixedCell128 Content {get;}
+        public Cell128 Content {get;}
 
         [MethodImpl(Inline)]
-        public Xmm(FixedCell128 value)
+        public Xmm(Cell128 value)
             => Content = value;
 
         public RegisterKind Kind

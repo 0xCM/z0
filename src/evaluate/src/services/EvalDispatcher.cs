@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="count">The number of points to load into the index</param>
         /// <typeparam name="T">The coordinate domain</typeparam>
         public Pairs<F> FixedPairs<F>(int count, F t = default)
-            where F : unmanaged, IFixedCell
+            where F : unmanaged, IDataCell
         {
             var s1 = Random.FixedStream<F>().Take(count);
             var s2 = Random.FixedStream<F>().Take(count);
@@ -119,10 +119,10 @@ namespace Z0
                 {
                     case NumericKind.U8:
                     case NumericKind.I8:
-                        return Dispatch(buffers, FixedPairs<FixedCell8>(count), api);
+                        return Dispatch(buffers, FixedPairs<Cell8>(count), api);
                     case NumericKind.I16:
                     case NumericKind.U16:
-                        return Dispatch(buffers, FixedPairs<FixedCell16>(count), api);
+                        return Dispatch(buffers, FixedPairs<Cell16>(count), api);
                     case NumericKind.I32:
                     case NumericKind.U32:
                         return 0;
@@ -314,7 +314,7 @@ namespace Z0
         /// <param name="src">The executable source that conforms to a fixed binary operator</param>
         /// <typeparam name="F">The operand type</typeparam>
         FixedBinaryOp<F> LoadFixedinaryOp<F>(BufferTokens buffers, BufferSeqId index, X86ApiMember src)
-            where F : unmanaged, IFixedCell
+            where F : unmanaged, IDataCell
                 => buffers[index].EmitFixedBinaryOp<F>(src.Encoded);
 
         /// <summary>
@@ -327,7 +327,7 @@ namespace Z0
         /// <param name="y">The second operand</param>
         /// <typeparam name="F">The operand type</typeparam>
         F ExecBinaryOp<F>(BufferTokens buffers, BufferSeqId index, X86ApiMember src, F x, F y)
-            where F : unmanaged, IFixedCell
+            where F : unmanaged, IDataCell
                 => LoadFixedinaryOp<F>(buffers, index, src)(x,y);
 
         void Analyze(in Pairs<byte> src, in Triples<byte> dst, in X86ApiMember api)
@@ -350,7 +350,7 @@ namespace Z0
             return 1;
         }
 
-        void Analyze(in Pairs<FixedCell8> src, in Triples<FixedCell8> dst, in X86ApiMember api)
+        void Analyze(in Pairs<Cell8> src, in Triples<Cell8> dst, in X86ApiMember api)
         {
             for(var i=0; i< 10; i++)
             {
@@ -362,7 +362,7 @@ namespace Z0
             }
         }
 
-        bit Dispatch(BufferTokens buffers, in Pairs<FixedCell8> src, in X86ApiMember api)
+        bit Dispatch(BufferTokens buffers, in Pairs<Cell8> src, in X86ApiMember api)
         {
 
             var dst = Evaluator(buffers).EvalFixed(api, K.BinaryOp, src);
@@ -370,7 +370,7 @@ namespace Z0
             return 1;
         }
 
-        bit Dispatch(BufferTokens buffers, in Pairs<FixedCell16> src, in X86ApiMember api)
+        bit Dispatch(BufferTokens buffers, in Pairs<Cell16> src, in X86ApiMember api)
         {
 
             var dst = Evaluator(buffers).EvalFixed(api, K.BinaryOp, src);

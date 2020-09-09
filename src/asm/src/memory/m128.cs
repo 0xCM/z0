@@ -10,16 +10,16 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public struct M128 : IAsmMemoryOp<M128,W128,FixedCell128>
+    public struct M128 : IAsmMemoryOp<M128,W128,Cell128>
     {
-        public FixedCell128 Data;
+        public Cell128 Data;
 
         [MethodImpl(Inline)]
-        public M128(FixedCell128 src)
+        public M128(Cell128 src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator M128(FixedCell128 src)
+        public static implicit operator M128(Cell128 src)
             => new M128(src);
 
         [MethodImpl(Inline)]
@@ -27,10 +27,10 @@ namespace Z0.Asm
             => new M128(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator FixedCell128(M128 src)
+        public static implicit operator Cell128(M128 src)
             => src.Data;
 
-        FixedCell128 IAsmOperand<FixedCell128>.Content
+        Cell128 IAsmOperand<Cell128>.Content
             => Data;
     }
 }

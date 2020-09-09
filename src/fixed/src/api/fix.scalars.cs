@@ -12,35 +12,35 @@ namespace Z0
     partial class Fixed
     {
         [MethodImpl(Inline), Op]
-        public static FixedCell8 fix(byte src)
+        public static Cell8 fix(byte src)
             => src;
 
         [MethodImpl(Inline), Op]
-        public static FixedCell8 fix(sbyte src)
+        public static Cell8 fix(sbyte src)
             => src;
 
         [MethodImpl(Inline), Op]
-        public static FixedCell16 fix(short src)
+        public static Cell16 fix(short src)
             => src;
 
         [MethodImpl(Inline), Op]
-        public static FixedCell16 fix(ushort src)
+        public static Cell16 fix(ushort src)
             => src;
 
         [MethodImpl(Inline), Op]
-        public static Fixed32 fix(int src)
+        public static Cell32 fix(int src)
             => src;
 
         [MethodImpl(Inline), Op]
-        public static Fixed32 fix(uint src)
+        public static Cell32 fix(uint src)
             => src;
 
         [MethodImpl(Inline), Op]
-        public static FixedCell64 fix(long src)
+        public static Cell64 fix(long src)
             => src;
 
         [MethodImpl(Inline), Op]
-        public static FixedCell64 fix(ulong src)
+        public static Cell64 fix(ulong src)
             => src;
     }
 }

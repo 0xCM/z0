@@ -12,16 +12,16 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a 256-bit operand
     /// </summary>
-    public readonly struct Op256: IAsmOperand<Op256,W256,FixedCell256>
+    public readonly struct Op256: IAsmOperand<Op256,W256,Cell256>
     {
-        public FixedCell256 Content {get;}
+        public Cell256 Content {get;}
 
         public SignKind Sign {get;}
 
         public AsmOperandKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public Op256(FixedCell256 value, SignKind sign, AsmOperandKind kind)
+        public Op256(Cell256 value, SignKind sign, AsmOperandKind kind)
         {
             Content = value;
             OpKind = kind;

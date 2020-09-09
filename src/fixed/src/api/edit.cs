@@ -18,9 +18,9 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8k)]
-        public static Span<T> span<T>(ref FixedCell8 src)
+        public static Span<T> span<T>(ref Cell8 src)
             where T : unmanaged
-                => span<FixedCell8,T>(ref src);
+                => span<Cell8,T>(ref src);
 
         /// <summary>
         /// Presents a 16-bit value as a T-parametric span
@@ -29,9 +29,9 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
-        public static Span<T> span<T>(ref FixedCell16 src)
+        public static Span<T> span<T>(ref Cell16 src)
             where T : unmanaged
-                => span<FixedCell16,T>(ref src);
+                => span<Cell16,T>(ref src);
 
         /// <summary>
         /// Presents a 32-bit value as a T-parametric span
@@ -40,9 +40,9 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8x16x32k)]
-        public static Span<T> span<T>(ref Fixed32 src)
+        public static Span<T> span<T>(ref Cell32 src)
             where T : unmanaged
-                => span<Fixed32,T>(ref src);
+                => span<Cell32,T>(ref src);
 
         /// <summary>
         /// Presents a 64-bit value as a T-parametric span
@@ -51,9 +51,9 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Span<T> span<T>(ref FixedCell64 src)
+        public static Span<T> span<T>(ref Cell64 src)
             where T : unmanaged
-                => span<FixedCell64,T>(ref src);
+                => span<Cell64,T>(ref src);
 
         /// <summary>
         /// Presents a 128-bit value as a T-parametric span
@@ -62,9 +62,9 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Span<T> span<T>(ref FixedCell128 src)
+        public static Span<T> span<T>(ref Cell128 src)
             where T : unmanaged
-                => span<FixedCell128,T>(ref src);
+                => span<Cell128,T>(ref src);
 
         /// <summary>
         /// Presents a 256-bit value as a T-parametric span
@@ -73,9 +73,9 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Span<T> span<T>(ref FixedCell256 src)
+        public static Span<T> span<T>(ref Cell256 src)
             where T : unmanaged
-                => span<FixedCell256,T>(ref src);
+                => span<Cell256,T>(ref src);
 
         /// <summary>
         /// Presents a 256-bit value as a T-parametric span
@@ -84,8 +84,8 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Span<T> span<T>(ref FixedCell512 src)
+        public static Span<T> span<T>(ref Cell512 src)
             where T : unmanaged
-                => span<FixedCell512,T>(ref src);
+                => span<Cell512,T>(ref src);
     }
 }

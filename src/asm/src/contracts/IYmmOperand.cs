@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IYmmOperand : IRegOperand<W256,FixedCell256>
+    public interface IYmmOperand : IRegOperand<W256,Cell256>
     {
         RegisterClass IRegOperand.Class
             => RegisterClass.YMM;
@@ -15,7 +15,7 @@ namespace Z0.Asm
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
     /// <typeparam name="N">The index type</typeparam>
-    public interface IYmmRegOperand<F,R> : IYmmOperand, IRegOperand<W256,FixedCell256>
+    public interface IYmmRegOperand<F,R> : IYmmOperand, IRegOperand<W256,Cell256>
         where F : struct, IYmmRegOperand<F,R>
         where R : unmanaged
     {

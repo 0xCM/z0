@@ -107,6 +107,8 @@
         "PEXTRD",
         "PHADDD",
         "PHADDW",
+        "PINSRB",
+        "PINSRW",
         "PMOVSXBW",
         "PMOVSXWD",
         "PMOVZXBD",

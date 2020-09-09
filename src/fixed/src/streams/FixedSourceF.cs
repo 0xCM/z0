@@ -12,7 +12,7 @@ namespace Z0
     using static FixedValues;
 
     public struct FixedSource<F> : IFixedSource<F>
-        where F : struct, IFixedCell
+        where F : struct, IDataCell
     {
         readonly IValueSource Values;
 
@@ -27,13 +27,13 @@ namespace Z0
         [MethodImpl(Inline)]
         F select(W8 w)
         {
-            if(typeof(F) == typeof(FixedCell8))
+            if(typeof(F) == typeof(Cell8))
                 return pull(w8);
-            else if(typeof(F) == typeof(FixedCell16))
+            else if(typeof(F) == typeof(Cell16))
                 return pull(w16);
-            else if(typeof(F) == typeof(Fixed32))
+            else if(typeof(F) == typeof(Cell32))
                 return pull(w32);
-            else if(typeof(F) == typeof(FixedCell64))
+            else if(typeof(F) == typeof(Cell64))
                 return pull(w64);
             else
                 return select(w128);
@@ -42,11 +42,11 @@ namespace Z0
         [MethodImpl(Inline)]
         F select(W128 w)
         {
-            if(typeof(F) == typeof(FixedCell128))
+            if(typeof(F) == typeof(Cell128))
                 return pull(w128);
-            else if(typeof(F) == typeof(FixedCell256))
+            else if(typeof(F) == typeof(Cell256))
                 return pull(w256);
-            else if(typeof(F) == typeof(FixedCell512))
+            else if(typeof(F) == typeof(Cell512))
                 return pull(w512);
             else
                 throw Unsupported.define<F>();

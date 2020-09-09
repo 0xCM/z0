@@ -21,13 +21,13 @@ namespace Z0
         public static Vector512<T> Apply<T>(this BinaryOp512 f, Vector512<T> x, Vector512<T> y)
             where T : unmanaged
         {
-            var zf = f(Unsafe.As<Vector512<T>,FixedCell512>(ref x), Unsafe.As<Vector512<T>,FixedCell512>(ref y));
-            return Unsafe.As<FixedCell512,Vector512<T>>(ref zf);
+            var zf = f(Unsafe.As<Vector512<T>,Cell512>(ref x), Unsafe.As<Vector512<T>,Cell512>(ref y));
+            return Unsafe.As<Cell512,Vector512<T>>(ref zf);
         }
 
         [MethodImpl(Inline)]
-        public static FixedCell512 ToFixed<T>(this Vector512<T> x)
+        public static Cell512 ToFixed<T>(this Vector512<T> x)
             where T : unmanaged
-                => Unsafe.As<Vector512<T>,FixedCell512>(ref x);
+                => Unsafe.As<Vector512<T>,Cell512>(ref x);
     }
 }

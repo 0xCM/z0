@@ -12,10 +12,10 @@ namespace Z0.Asm
     public readonly struct Ymm<R> : IYmmRegOperand<Ymm<R>,R>
         where R : unmanaged, IRegOperand
     {
-        public FixedCell256 Content {get;}
+        public Cell256 Content {get;}
 
         [MethodImpl(Inline)]
-        public Ymm(FixedCell256 value)
+        public Ymm(Cell256 value)
         {
             Content = value;
         }

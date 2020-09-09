@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Linq;
-    
+
     using static Konst;
     using static z;
 
     public class t_fixed_rng : t_inx<t_fixed_rng>
-    {        
+    {
         T next<T>()
             where T : unmanaged
                 => Random.Next<T>();
@@ -20,7 +20,7 @@ namespace Z0
         {
             const ulong tolerance = 5;
             var total = 0ul;
-            var emit = FixedOps.fix(next<byte>); 
+            var emit = FixedOps.fix(next<byte>);
             for(var i=0; i<RepCount; i++ )
                 total += Fixed.scalar(emit());
 
@@ -34,15 +34,15 @@ namespace Z0
                 Trace($"actual := {actual}");
             }
 
-            Claim.Require(succeeded);            
+            Claim.Require(succeeded);
         }
-        
+
         public void fixed_convert()
         {
             BinaryOp<uint> f = gmath.add<uint>;
-            BinaryOp32 g = FixedOps.fix(gmath.add<uint>);            
-            var lhs = Random.FixedStream<Fixed32>().Take(RepCount).ToArray();
-            var rhs = Random.FixedStream<Fixed32>().Take(RepCount).ToArray();
+            BinaryOp32 g = FixedOps.fix(gmath.add<uint>);
+            var lhs = Random.FixedStream<Cell32>().Take(RepCount).ToArray();
+            var rhs = Random.FixedStream<Cell32>().Take(RepCount).ToArray();
 
             void check()
             {
@@ -55,8 +55,8 @@ namespace Z0
                     var y = g(a,b);
                     Claim.Eq(x,y);
                 }
-            }      
-            
+            }
+
             CheckAction(check,nameof(fixed_convert));
         }
     }

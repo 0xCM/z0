@@ -32,13 +32,13 @@ namespace Z0.Asm
             foreach(var code in query.WithParameterCount(src, 1))
             {
                 if(query.AcceptsParameter(code, NumericKind.U8))
-                    AsmCheck.CheckFixedMatch<FixedCell8>(K.UnaryOp, code, code);
+                    AsmCheck.CheckFixedMatch<Cell8>(K.UnaryOp, code, code);
                 else if(query.AcceptsParameter(code, NumericKind.U16))
-                    AsmCheck.CheckFixedMatch<FixedCell16>(K.UnaryOp, code, code);
+                    AsmCheck.CheckFixedMatch<Cell16>(K.UnaryOp, code, code);
                 else if(query.AcceptsParameter(code, NumericKind.U32))
-                    AsmCheck.CheckFixedMatch<Fixed32>(K.UnaryOp, code, code);
+                    AsmCheck.CheckFixedMatch<Cell32>(K.UnaryOp, code, code);
                 else if(query.AcceptsParameter(code, NumericKind.U64))
-                    AsmCheck.CheckFixedMatch<FixedCell64>(K.UnaryOp, code, code);
+                    AsmCheck.CheckFixedMatch<Cell64>(K.UnaryOp, code, code);
             }
         }
 
