@@ -10,7 +10,7 @@ namespace Z0.Tools.LLVM
     using static Konst;
     using static z;
 
-    partial struct Bitstream
+    partial struct Bitcode
     {
         [ApiDataType]
         public readonly struct Char24

@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Reflection;
 
     [ApiHost("api")]
     public readonly partial struct Konst
@@ -19,6 +18,21 @@ namespace Z0
         public const MethodImplOptions Suboptimal = MethodImplOptions.NoOptimization;
 
         public const string Kernel32 = "kernel32.dll";
+
+        /// <summary>
+        /// The default item list delimiter
+        /// </summary>
+        public const char ItemDelimiter = Chars.Comma;
+
+        /// <summary>
+        /// The default label delimiter
+        /// </summary>
+        public const char LabelDelimiter = Chars.Colon;
+
+        /// <summary>
+        /// The default hex value delimiter
+        /// </summary>
+        public const char HexDelimiter = Chars.Space;
 
         /// <summary>
         /// A type considered to be empty
@@ -115,7 +129,7 @@ namespace Z0
         public const byte AsciNone = (byte)AsciCharCode.Null;
 
         /// <summary>
-        /// Canonical return value for search operation that returns a nonnegative vaule upon succes
+        /// Canonical return value for search operation that returns a nonnegative value upon success
         /// </summary>
         public const int NotFound = -1;
 

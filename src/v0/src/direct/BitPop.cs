@@ -8,26 +8,28 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Typed;
+    using static Konst;
+    using static z;
+    using static BitMasks.Literals;
 
     public readonly struct BitPop
     {
         public static Vector256<ulong> K1
-            => z.vbroadcast(n256, MaskLiterals.Even64);
+            => vbroadcast(n256, Even64);
 
         public static Vector256<ulong> K2
-            => z.vbroadcast(n256, MaskLiterals.Even64x2);
+            => vbroadcast(n256, Even64x2);
 
         public static Vector256<ulong> K4
-            => z.vbroadcast(n256, MaskLiterals.Lsb64x8x4);
+            => vbroadcast(n256, Lsb64x8x4);
 
         public static Vector128<ulong> v128K1
-            => z.vbroadcast(n128, MaskLiterals.Even64);
+            => vbroadcast(n128, Even64);
 
         public static Vector128<ulong> v128K2
-            => z.vbroadcast(n128, MaskLiterals.Even64x2);
+            => vbroadcast(n128, Even64x2);
 
         public static Vector128<ulong> v128K4
-            => z.vbroadcast(n128, MaskLiterals.Lsb64x8x4);
+            => vbroadcast(n128, Lsb64x8x4);
     }
 }

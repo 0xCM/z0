@@ -623,40 +623,9 @@ namespace Z0
         public const ushort Msb16x8x5 = (ushort) Msb8x8x5 | (ushort) Msb8x8x5 << 8;
 
         /// <summary>
-        /// [11111000 11111000 11111000 11111000]
-        /// </summary>
-        public const uint Msb32x8x5 = (uint) Msb16x8x5 | (uint) Msb16x8x5 << 16;
-
-        /// <summary>
-        /// [11111000 11111000 11111000 11111000 11111000 11111000 11111000 11111000]
-        /// </summary>
-        public const ulong Msb64x8x5 = (ulong) Msb32x8x5 | (ulong) Msb32x8x5 << 32;
-
-        // ~ Msb8x6: The greatest 6 bits of each 8-bit segment are enabled
-        // ~ ------------------------------------------------------------------
-
-        /// <summary>
         /// [11111100]
         /// </summary>
         public const byte Msb8x8x6 = 0b11111100;
-
-        /// <summary>
-        /// [11111100 11111100]
-        /// </summary>
-        public const ushort Msb16x8x6 = (ushort) Msb8x8x6 | (ushort) Msb8x8x6 << 8;
-
-        /// <summary>
-        /// [11111100 11111100 11111100 11111100]
-        /// </summary>
-        public const uint Msb32x8x6 = (uint) Msb16x8x6 | (uint) Msb16x8x6 << 16;
-
-        /// <summary>
-        /// [11111100 11111100 11111100 11111100 11111100 11111100 11111100 11111100]
-        /// </summary>
-        public const ulong Msb64x8x6 = (ulong) Msb32x8x6 | (ulong) Msb32x8x6 << 32;
-
-        // ~ Msb8x7: The greatest 7 bits of each 8-bit segment are enabled
-        // ~ ------------------------------------------------------------------
 
         /// <summary>
         /// [11111110]
@@ -673,24 +642,5 @@ namespace Z0
         /// </summary>
         public const uint Msb32x8x7 = (uint) Msb16x8x7 | (uint) Msb16x8x7 << 16;
 
-        /// <summary>
-        /// [11111110 11111110 11111110 11111110 11111110 11111110 11111110 11111110]
-        /// </summary>
-        public const ulong Msb64x8x7 = (ulong) Msb32x8x7 | (ulong) Msb32x8x7 << 32;
-
-        /// <summary>
-        /// [0b1100]
-        /// </summary>
-        public const byte Msb4x1x2 = 0b1100;
-
-        /// <summary>
-        /// [11001100]
-        /// </summary>
-        public const byte Msb8x2x2 = Msb4x1x2 | Msb4x1x2 << 4;
-
-        /// <summary>
-        /// [0b1100_1100_1100]
-        /// </summary>
-        public const ushort Msb12x3x2 = (ushort) Msb8x2x2 | (ushort) Msb4x1x2 << 8;
     }
 }

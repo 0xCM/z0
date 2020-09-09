@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Memories;
+    using static Konst;
     using static BitPop;
-    using static V0d;
+    using static z;
 
     partial class dvec
     {
@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint vpop(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
         {
-            const ulong kf = MaskLiterals.Lsb64x8x1;
+            const ulong kf = BitMasks.Literals.Lsb64x8x1;
 
             var k1 = v128K1;
             var k2 = v128K2;
@@ -46,7 +46,7 @@ namespace Z0
             odd = vadd(vadd(maj, maj), odd);
 
             var dst = Stacks.alloc(n128);
-            Vectors.vstore(odd, ref dst.X0);
+            vsave(odd, ref dst.X0);
             var total = 0ul;
 
             total += (dst.X0 * kf) >> 56;
@@ -88,13 +88,13 @@ namespace Z0
 
             var dst = Stacks.alloc(n256);
             ref var X = ref Stacks.head(ref dst, z64);
-            Vectors.vstore(odd, ref X);
+            vsave(odd, ref X);
 
             var total = 0ul;
-            total += (seek(ref X, 0) * kf) >> 56;
-            total += (seek(ref X, 1) * kf) >> 56;
-            total += (seek(ref X, 2) * kf) >> 56;
-            total += (seek(ref X, 3) * kf) >> 56;
+            total += (seek(X, 0) * kf) >> 56;
+            total += (seek(X, 1) * kf) >> 56;
+            total += (seek(X, 2) * kf) >> 56;
+            total += (seek(X, 3) * kf) >> 56;
 
             return (uint)total;
         }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static MaskLiterals;
+    using static BitMasks.Literals;
 
     partial class BitMasks
     {
@@ -405,25 +405,25 @@ namespace Z0
             where W : unmanaged, ITypeNat
         {
             if(typeof(W) == typeof(N4))
-                return MaskLiterals.Msb4x2x1;
+                return Msb4x2x1;
             else if(typeof(W) == typeof(N6))
-                return MaskLiterals.Msb6x2x1;
+                return Msb6x2x1;
             else if(typeof(W) == typeof(N8))
-                return MaskLiterals.Msb8x2x1;
+                return Msb8x2x1;
             else if(typeof(W) == typeof(N10))
-                return MaskLiterals.Msb10x2x1;
+                return Msb10x2x1;
             else if(typeof(W) == typeof(N12))
-                return MaskLiterals.Msb12x2x1;
+                return Msb12x2x1;
             else if(typeof(W) == typeof(N14))
-                return MaskLiterals.Msb14x2x1;
+                return Msb14x2x1;
             else if(typeof(W) == typeof(N16))
-                return MaskLiterals.Msb16x2x1;
+                return Msb16x2x1;
             else if(typeof(W) == typeof(N18))
-                return MaskLiterals.Msb18x2x1;
+                return Msb18x2x1;
             else if(typeof(W) == typeof(N32))
-                return MaskLiterals.Msb32x2x1;
+                return Msb32x2x1;
             else if(typeof(W) == typeof(N64))
-                return MaskLiterals.Msb64x2x1;
+                return Msb64x2x1;
             else
                 throw no<W>();
         }

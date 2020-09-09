@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
+    using static BitMasks.Literals;
 
     using static z;
 
@@ -19,22 +20,22 @@ namespace Z0
             => false;
 
         public void vblendp_perm32_g128x8u()
-            => vblendp_check(n128, n32, MaskLiterals.Msb16x16x1, z8);
+            => vblendp_check(n128, n32, Msb16x16x1, z8);
 
         public void vblendp_perm16_g128x16u()
-            => vblendp_check(n128, n16, MaskLiterals.Msb32x32x1, z16);
+            => vblendp_check(n128, n16, Msb32x32x1, z16);
 
         public void vblendp_perm8_g128x32u()
-            => vblendp_check(n128, n8, MaskLiterals.Msb64x64x1, z32);
+            => vblendp_check(n128, n8, Msb64x64x1, z32);
 
         public void vblendp_perm64_g256x8u()
-            => vblendp_check(n256, n64, MaskLiterals.Msb16x16x1, z8);
+            => vblendp_check(n256, n64, Msb16x16x1, z8);
 
         public void vblendp_perm32_g256x16u()
-            => vblendp_check(n256, n32, MaskLiterals.Msb32x32x1, z16);
+            => vblendp_check(n256, n32, Msb32x32x1, z16);
 
         public void vblendp_perm16_g256x32u()
-            => vblendp_check(n256, n16, MaskLiterals.Msb64x64x1, z32);
+            => vblendp_check(n256, n16, Msb64x64x1, z32);
 
         static string describe<F,D,T,S>(IMaskSpec<F,D,T> maskspec, S sample, Vector512<T> source, Vector512<T> target)
             where F : unmanaged, ITypeNat

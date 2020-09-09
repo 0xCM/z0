@@ -9,19 +9,19 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static As;    
-    
+    using static As;
+
     partial class Vectors
     {
 
         [MethodImpl(Inline)]
         public static void vstore<T>(Vector128<T> src, ref T dst)
             where T : unmanaged
-                => V0.vsave(src, ref dst);
+                => z.vsave(src, ref dst);
 
         [MethodImpl(Inline)]
         public static void vstore<T>(Vector256<T> src, ref T dst)
             where T : unmanaged
-                => V0.vsave(src, ref dst);
+                => z.vsave(src, ref dst);
     }
 }

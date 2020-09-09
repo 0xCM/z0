@@ -9,6 +9,7 @@ namespace Z0
 
     using static z;
     using static Konst;
+    using static BitMasks.Literals;
 
     partial struct asci
     {
@@ -18,7 +19,7 @@ namespace Z0
         /// <param name="src">The data to test</param>
         [MethodImpl(Inline), Op]
         public static bool valid(byte src)
-            => (MaskLiterals.Msb8x8x1 & src) == 0;
+            => (Msb8x8x1 & src) == 0;
 
         /// <summary>
         /// Tests whether the data source contains only asci data
@@ -26,7 +27,7 @@ namespace Z0
         /// <param name="src">The data to test</param>
         [MethodImpl(Inline), Op]
         public static bool valid(ushort src)
-            => (MaskLiterals.Msb16x8x1 & src) == 0;
+            => (Msb16x8x1 & src) == 0;
 
         /// <summary>
         /// Tests whether the data source contains only asci data
@@ -34,7 +35,7 @@ namespace Z0
         /// <param name="src">The data to test</param>
         [MethodImpl(Inline), Op]
         public static bool valid(uint src)
-            => (MaskLiterals.Msb32x8x1 & src) == 0;
+            => (Msb32x8x1 & src) == 0;
 
         /// <summary>
         /// Tests whether the data source contains only asci data
@@ -42,6 +43,6 @@ namespace Z0
         /// <param name="src">The data to test</param>
         [MethodImpl(Inline), Op]
         public static bool valid(ulong src)
-            => (MaskLiterals.Msb64x8x1 & src) == 0;
+            => (Msb64x8x1 & src) == 0;
     }
 }

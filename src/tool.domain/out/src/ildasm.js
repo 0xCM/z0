@@ -1,0 +1,102 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.OutputOption = exports.LibOption = exports.ModuleOption = exports.OutputKind = exports.VisKind = exports.MetaKind = exports.Meanings = exports.Examples = exports.ToolId = void 0;
+exports.default = ildasm;
+exports.ToolId = "ildasm";
+var Examples;
+(function (Examples) {
+    Examples["Example1"] = "ildasm /tokens /bytes source.exe /out=target.il";
+})(Examples = exports.Examples || (exports.Examples = {}));
+var Meanings;
+(function (Meanings) {
+    Meanings["BYTES"] = "Show actual bytes (in hex) as instruction comments.";
+    Meanings["CAVERBAL"] = "Output CA blobs in verbal form (default - in binary form).";
+    Meanings["CLASSLIST"] = "Include list of classes defined in the module.";
+    Meanings["CSV"] = "Show the record counts and heap sizes.";
+    Meanings["FORWARD"] = "Use forward class declaration.";
+    Meanings["HEADERS"] = "Include file headers information in the output.";
+    Meanings["HEX"] = "Show more things in hex as well as words.";
+    Meanings["HEAPS"] = "Show the raw heaps.";
+    Meanings["HTML"] = "Output in HTML format (valid with /OUT option only).";
+    Meanings["ITEM"] = "Disassemble the specified item only";
+    Meanings["LINENUM"] = "Include references to original source lines.";
+    Meanings["MDHEADER"] = "Show MetaData header information and sizes.";
+    Meanings["NOCA"] = "Suppress output of custom attributes.";
+    Meanings["NOIL"] = "Suppress IL assembler code output.";
+    Meanings["OUT"] = "Direct output to file rather than to console.";
+    Meanings["PROJECT"] = "Display .NET projection view if input is a .winmd file.";
+    Meanings["PUBONLY"] = "Only disassemble the public items (same as /VIS=PUB).";
+    Meanings["QUOTEALLNAMES"] = "Include all names into single quotes.";
+    Meanings["RAW"] = "Show the raw MetaData tables.";
+    Meanings["RAWEH"] = "Show exception handling clauses in raw form.";
+    Meanings["RTF"] = "Output in rich text format (valid with /OUT option only).";
+    Meanings["SCHEMA"] = "Show the MetaData header and schema information.";
+    Meanings["SOURCE"] = "Show original source lines as comments.";
+    Meanings["STATS"] = "Include statistics on the image.";
+    Meanings["TOKENS"] = "Show metadata tokens of classes and members.";
+    Meanings["TYPELIST"] = "Output full list of types (to preserve type ordering in round-trip).";
+    Meanings["UNREX"] = "Show unresolved externals.";
+    Meanings["VALIDATE"] = "Validate the consistency of the metadata.";
+    Meanings["VISIBILITY"] = "Only disassemble the items with specified visibility.";
+    Meanings["UTF8"] = "Use UTF-8 encoding for output (default - ANSI).";
+    Meanings["UNICODE"] = "Use UNICODE encoding for output.";
+    Meanings["ALL"] = "Combination of /HEADER,/BYTES,/STATS,/CLASSLIST,/TOKENS";
+})(Meanings = exports.Meanings || (exports.Meanings = {}));
+var MetaKind;
+(function (MetaKind) {
+    MetaKind[MetaKind["MDHEADER"] = 0] = "MDHEADER";
+    MetaKind[MetaKind["HEX"] = 1] = "HEX";
+    MetaKind[MetaKind["CSV"] = 2] = "CSV";
+    MetaKind[MetaKind["UNREX"] = 3] = "UNREX";
+    MetaKind[MetaKind["SCHEMA"] = 4] = "SCHEMA";
+    MetaKind[MetaKind["RAW"] = 5] = "RAW";
+    MetaKind[MetaKind["HEAPS"] = 6] = "HEAPS";
+    MetaKind[MetaKind["VALIDATE"] = 7] = "VALIDATE";
+})(MetaKind = exports.MetaKind || (exports.MetaKind = {}));
+var VisKind;
+(function (VisKind) {
+    VisKind[VisKind["PUB"] = 0] = "PUB";
+    VisKind[VisKind["PRI"] = 1] = "PRI";
+    VisKind[VisKind["FAM"] = 2] = "FAM";
+    VisKind[VisKind["ASM"] = 3] = "ASM";
+    VisKind[VisKind["FAA"] = 4] = "FAA";
+    VisKind[VisKind["FOA"] = 5] = "FOA";
+    VisKind[VisKind["PSC"] = 6] = "PSC";
+})(VisKind = exports.VisKind || (exports.VisKind = {}));
+var OutputKind;
+(function (OutputKind) {
+    OutputKind[OutputKind["HTML"] = 0] = "HTML";
+    OutputKind[OutputKind["RTF"] = 1] = "RTF";
+})(OutputKind = exports.OutputKind || (exports.OutputKind = {}));
+var ModuleOption;
+(function (ModuleOption) {
+    ModuleOption[ModuleOption["UTF8"] = 0] = "UTF8";
+    ModuleOption[ModuleOption["UNICODE"] = 1] = "UNICODE";
+    ModuleOption[ModuleOption["NOIL"] = 2] = "NOIL";
+    ModuleOption[ModuleOption["FORWARD"] = 3] = "FORWARD";
+    ModuleOption[ModuleOption["TYPELIST"] = 4] = "TYPELIST";
+    ModuleOption[ModuleOption["PROJECT"] = 5] = "PROJECT";
+    ModuleOption[ModuleOption["HEADERS"] = 6] = "HEADERS";
+    ModuleOption[ModuleOption["ITEM"] = 7] = "ITEM";
+    ModuleOption[ModuleOption["STATS"] = 8] = "STATS";
+    ModuleOption[ModuleOption["CLASSLIST"] = 9] = "CLASSLIST";
+    ModuleOption[ModuleOption["ALL"] = 10] = "ALL";
+})(ModuleOption = exports.ModuleOption || (exports.ModuleOption = {}));
+var LibOption;
+(function (LibOption) {
+    LibOption[LibOption["OBJECTFILE"] = 0] = "OBJECTFILE";
+})(LibOption = exports.LibOption || (exports.LibOption = {}));
+var OutputOption;
+(function (OutputOption) {
+    OutputOption[OutputOption["BYTES"] = 0] = "BYTES";
+    OutputOption[OutputOption["RAWEH"] = 1] = "RAWEH";
+    OutputOption[OutputOption["TOKENS"] = 2] = "TOKENS";
+    OutputOption[OutputOption["SOURCE"] = 3] = "SOURCE";
+    OutputOption[OutputOption["LINENUM"] = 4] = "LINENUM";
+    OutputOption[OutputOption["VISIBILITY"] = 5] = "VISIBILITY";
+    OutputOption[OutputOption["PUBONLY"] = 6] = "PUBONLY";
+    OutputOption[OutputOption["QUOTEALLNAMES"] = 7] = "QUOTEALLNAMES";
+    OutputOption[OutputOption["NOCA"] = 8] = "NOCA";
+    OutputOption[OutputOption["CAVERBAL"] = 9] = "CAVERBAL";
+})(OutputOption = exports.OutputOption || (exports.OutputOption = {}));
+//# sourceMappingURL=ildasm.js.map

@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class BitGrid
     {
@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Store, Closures(UnsignedInts)]
         public static void store<T>(Vector256<T> src, in BitGrid<T> dst, int block)
             where T : unmanaged
-                => Vectors.vstore(src, ref dst.Data.BlockRef(block));
+                => vsave(src, ref dst.Data.BlockRef(block));
 
         /// <summary>
         /// Stores a 128-bit bitgrid to a caller-supplied target
@@ -37,7 +37,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                =>  Vectors.vstore(src.Data, dst);
+                =>  vsave(src.Data, dst);
 
         /// <summary>
         /// Allocates and stores a 128-bit bitgrid to a blocked span
@@ -54,7 +54,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var dst = Blocks.alloc<T>(n128);
-            Vectors.vstore(src.Data, dst);
+            vsave(src.Data, dst);
             return dst;
         }
 
@@ -71,7 +71,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                =>  Vectors.vstore(src.Data, dst);
+                => vsave(src.Data, dst);
 
         /// <summary>
         /// Allocates and stores a 256-bit bitgrid to a blocked span
@@ -88,7 +88,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var dst = Blocks.alloc<T>(n256);
-            Vectors.vstore(src.Data, dst);
+            vsave(src.Data, dst);
             return dst;
         }
 
@@ -105,6 +105,6 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Vectors.vstore(src, ref dst.Data.BlockRef(block));
+                => vsave(src, ref dst.Data.BlockRef(block));
     }
 }

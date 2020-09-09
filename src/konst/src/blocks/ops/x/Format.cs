@@ -7,7 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class XTend
+    using static Konst;
+
+    partial class BXTend
     {
         /// <summary>
         /// Formats blocked content
@@ -16,7 +18,8 @@ namespace Z0
         /// <param name="delimiter">The cell delimiter</param>
         /// <param name="pad">The dell padding</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string Format<T>(this SpanBlock8<T> src, char delimiter = Chars.Comma, int pad = 0)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string Format<T>(this SpanBlock8<T> src, char delimiter = ItemDelimiter, int pad = 0)
             where T : unmanaged
                 => src.Data.Format(delimiter, 0, pad, true);
 
@@ -27,7 +30,8 @@ namespace Z0
         /// <param name="delimiter">The cell delimiter</param>
         /// <param name="pad">The dell padding</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string Format<T>(this SpanBlock16<T> src, char delimiter = Chars.Comma, int pad = 0)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string Format<T>(this SpanBlock16<T> src, char delimiter = ItemDelimiter, int pad = 0)
             where T : unmanaged
                 => src.Data.Format(delimiter, 0, pad, true);
 
@@ -38,7 +42,8 @@ namespace Z0
         /// <param name="delimiter">The cell delimiter</param>
         /// <param name="pad">The dell padding</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string Format<T>(this SpanBlock32<T> src, char delimiter = Chars.Comma, int pad = 0)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string Format<T>(this SpanBlock32<T> src, char delimiter = ItemDelimiter, int pad = 0)
             where T : unmanaged
                 => src.Data.Format(delimiter, 0, pad, true);
 
@@ -49,7 +54,8 @@ namespace Z0
         /// <param name="delimiter">The cell delimiter</param>
         /// <param name="pad">The dell padding</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string Format<T>(this SpanBlock64<T> src, char delimiter = Chars.Comma, int pad = 0)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string Format<T>(this SpanBlock64<T> src, char delimiter = ItemDelimiter, int pad = 0)
             where T : unmanaged
                 => src.Data.Format(delimiter, 0, pad, true);
 
@@ -60,7 +66,8 @@ namespace Z0
         /// <param name="delimiter">The cell delimiter</param>
         /// <param name="pad">The dell padding</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string Format<T>(this SpanBlock128<T> src, char delimiter = Chars.Comma, int pad = 0)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string Format<T>(this SpanBlock128<T> src, char delimiter = ItemDelimiter, int pad = 0)
             where T : unmanaged
                 => src.Data.Format(delimiter, 0, pad, true);
 
@@ -71,7 +78,8 @@ namespace Z0
         /// <param name="delimiter">The cell delimiter</param>
         /// <param name="pad">The dell padding</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string Format<T>(this SpanBlock256<T> src, char delimiter = Chars.Comma, int pad = 0)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string Format<T>(this SpanBlock256<T> src, char delimiter = ItemDelimiter, int pad = 0)
             where T : unmanaged
                 => src.Data.Format(delimiter, 0, pad, true);
 
@@ -82,7 +90,8 @@ namespace Z0
         /// <param name="delimiter">The cell delimiter</param>
         /// <param name="pad">The dell padding</param>
         /// <typeparam name="T">The cell type</typeparam>
-        public static string Format<T>(this SpanBlock512<T> src, char delimiter = Chars.Comma, int pad = 0)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string Format<T>(this SpanBlock512<T> src, char delimiter = ItemDelimiter, int pad = 0)
             where T : unmanaged
                 => src.Data.Format(delimiter, 0, pad, true);
     }

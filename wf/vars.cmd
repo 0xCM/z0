@@ -9,6 +9,7 @@ set LogRoot=%ZLogs%
 set Stage=%ZLogs%
 set AssetDir="j:\assets"
 set Archive="k:\z0\archives"
+set ArchiveDir="k:\z0\archives"
 set DevBuild="%ZBin%"
 set StageBuildRoot=%Stage%\builds
 set StageBuild="%StageBuildRoot%\%AppName%\%Framework%\%RtId%"

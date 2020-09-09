@@ -7,10 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
 
-    partial class XTend
+
+    partial class VXTend
     {
         /// <summary>
         /// Extracts an index-identified component from the source vector
@@ -20,7 +21,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static T Cell<T>(this Vector128<T> src, int index)
-            where T : unmanaged 
+            where T : unmanaged
                 => src.GetElement(index);
 
         /// <summary>
@@ -55,7 +56,7 @@ namespace Z0
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline)]
         public static T Cell<T>(this Vector256<T> src, int index)
-            where T : unmanaged 
+            where T : unmanaged
                 => src.GetElement(index);
    }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class BXTend
     {
         /// <summary>
         /// Returns a reference to the leading cell of an index-identified block

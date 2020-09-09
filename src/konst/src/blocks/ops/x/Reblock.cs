@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class BXTend
     {
         /// <summary>
         /// Converts 64-bit blocks to 32-bit blocks without allocation
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source blocks</param>
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock16<T> Reblock<T>(this in SpanBlock32<T> src, W16 n)
              where T : unmanaged
                 => new SpanBlock16<T>(src.Data);
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The source blocks</param>
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock32<T> Reblock<T>(this in SpanBlock64<T> src, W32 n)
              where T : unmanaged
                 => new SpanBlock32<T>(src.Data);
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="src">The source blocks</param>
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock16<T> Reblock<T>(this in SpanBlock128<T> src, W16 n)
              where T : unmanaged
                 => new SpanBlock16<T>(src.Data);
@@ -50,7 +50,7 @@ namespace Z0
         /// <param name="src">The source blocks</param>
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock32<T> Reblock<T>(this in SpanBlock128<T> src, W32 n)
              where T : unmanaged
                 => new SpanBlock32<T>(src.Data);
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="src">The source blocks</param>
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock64<T> Reblock<T>(this in SpanBlock128<T> src, W64 n)
              where T : unmanaged
                 => new SpanBlock64<T>(src.Data);
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="src">The source blocks</param>
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock16<T> Reblock<T>(this in SpanBlock256<T> src, W16 n)
              where T : unmanaged
                 => new SpanBlock16<T>(src.Data);
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="src">The source blocks</param>
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock32<T> Reblock<T>(this in SpanBlock256<T> src, W32 n)
              where T : unmanaged
                 => new SpanBlock32<T>(src.Data);
@@ -94,7 +94,7 @@ namespace Z0
         /// <param name="src">The source blocks</param>
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock64<T> Reblock<T>(this in SpanBlock256<T> src, W64 n)
              where T : unmanaged
                 => new SpanBlock64<T>(src.Data);
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="src">The source blocks</param>
         /// <param name="n">The target block width</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SpanBlock128<T> Reblock<T>(this in SpanBlock256<T> src, W128 n)
              where T : unmanaged
                 => new SpanBlock128<T>(src.Data);

@@ -12,6 +12,17 @@ namespace Z0
 
     partial struct z
     {
+        // /// <summary>
+        // /// Adds an offset to a reference, measured relative to the reference type
+        // /// </summary>
+        // /// <param name="src">The source reference</param>
+        // /// <param name="bytes">The number of elements to advance</param>
+        // /// <typeparam name="T">The element type</typeparam>
+        // [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        // public static ref T seek<T>(ref T src, int count)
+        //     => ref Unsafe.Add(ref src, count);
+
+
         /// <summary>
         /// Advances an S-reference in units measured by T-cells and returns
         /// the resulting T-cell reference

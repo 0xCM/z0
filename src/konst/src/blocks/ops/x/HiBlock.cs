@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Widths;
 
-    partial class XTend
+    partial class BXTend
     {
         /// <summary>
         /// Extracts the upper half of an index-identified block
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source block container</param>
         /// <param name="block">The 64-bit block-relative index</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> HiBlock<T>(this in SpanBlock128<T> src, int block)
             where T : unmanaged
                 => src.Slice(block * src.BlockLength + Blocks.blocklength<T>(w64), Blocks.blocklength<T>(w64));

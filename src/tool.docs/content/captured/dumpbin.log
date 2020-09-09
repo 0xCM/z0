@@ -1,0 +1,34 @@
+Microsoft (R) COFF/PE Dumper Version 14.26.28806.0
+Copyright (C) Microsoft Corporation.  All rights reserved.
+
+usage: DUMPBIN [options] [files]
+
+   options:
+
+      /ALL
+      /ARCHIVEMEMBERS
+      /CLRHEADER
+      /DEPENDENTS
+      /DIRECTIVES
+      /DISASM[:{BYTES|NOBYTES}]
+      /ERRORREPORT:{NONE|PROMPT|QUEUE|SEND}
+      /EXPORTS
+      /FPO
+      /HEADERS
+      /IMPORTS[:filename]
+      /LINENUMBERS
+      /LINKERMEMBER[:{1|2}]
+      /LOADCONFIG
+      /NOLOGO
+      /NOPDB
+      /OUT:filename
+      /PDATA
+      /PDBPATH[:VERBOSE]
+      /RANGE:vaMin[,vaMax]
+      /RAWDATA[:{NONE|1|2|4|8}[,#]]
+      /RELOCATIONS
+      /SECTION:name
+      /SUMMARY
+      /SYMBOLS
+      /TLS
+      /UNWINDINFO
