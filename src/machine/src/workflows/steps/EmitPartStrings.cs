@@ -11,6 +11,10 @@ namespace Z0
     using static EmitPartStringsStep;
     using static z;
 
+    using F = ImageStringField;
+    using W = ImageStringFieldWidth;
+
+
     public enum PartStringKind
     {
         System = 0,
@@ -47,27 +51,40 @@ namespace Z0
             Wf.Created(StepId);
         }
 
+        public void Dispose()
+        {
+            Wf.Disposed(StepId);
+        }
+
+        [Op]
+        static ref readonly RecordFormatter<F,W> format(in ImageStringRecord src, in RecordFormatter<F,W> dst)
+        {
+            dst.Delimit(F.Sequence, src.Sequence);
+            dst.Delimit(F.Source, src.Source);
+            dst.Delimit(F.HeapSize, src.HeapSize);
+            dst.Delimit(F.Length, src.Length);
+            dst.Delimit(F.Offset, src.Offset);
+            dst.Delimit(F.Value, src.Content);
+            dst.EmitEol();
+            return ref dst;
+        }
+
         public void Run()
         {
-            Wf.Emitting(StepId, EmissionType, TargetPath);
+            Wf.Emitting<ImageStringRecord>(StepId, FS.path(TargetPath.Name));
 
             var data = ReadData();
             EmissionCount = (uint)data.Length;
 
-            var target = PartRecords.formatter(ImageRecords.Strings);
+            var target = Table.formatter<F,W>();
             using var writer = TargetPath.Writer();
             target.EmitHeader();
 
             for(var i=0u; i<EmissionCount; i++)
-                PartRecords.format(skip(data,i), target);
+                format(skip(data,i), target);
             writer.Write(target.Render());
 
-            Wf.Emitted(StepId, EmissionType, EmissionCount, TargetPath);
-        }
-
-        public void Dispose()
-        {
-            Wf.Disposed(StepId);
+            Wf.Emitted<ImageStringRecord>(StepId, EmissionCount,FS.path(TargetPath.Name));
         }
 
         ReadOnlySpan<ImageStringRecord> ReadData()

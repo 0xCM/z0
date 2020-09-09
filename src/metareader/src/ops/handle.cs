@@ -6,17 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
+    using System.Reflection.Metadata;
+    using System.Reflection.Metadata.Ecma335;
 
     using static Konst;
-    using static z;
 
-    partial struct Formatters
+    partial class PeTableReader
     {
-        [MethodImpl(Inline)]
-        public static RecordFormatter<F,W> record<F,W>(char delimiter = FieldDelimiter)
-            where F : unmanaged, Enum
-            where W : unmanaged, Enum
-                => new RecordFormatter<F,W>(text.build(), delimiter);
+       [MethodImpl(Inline), Op]
+       public static Handle handle(ArtifactIdentifier token)
+            => MetadataTokens.Handle((int)token);
     }
 }

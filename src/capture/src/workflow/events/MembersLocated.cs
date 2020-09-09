@@ -20,7 +20,9 @@ namespace Z0.Asm
 
         public readonly ApiHostUri Host;
 
-        public readonly ApiMember[] Members;
+        public ApiMember[] Members {get;}
+
+        public Count32 MemberCount => Members.Length;
 
         public FlairKind Flair {get;}
 
@@ -35,6 +37,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(RenderPatterns.PSx3, EventId, Host, z.delimit(Members));
+            => format(EventId, Host, MemberCount);
     }
 }

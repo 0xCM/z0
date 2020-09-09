@@ -7,8 +7,9 @@
 namespace Z0.Dac
 {
     using System;
+    using System.Runtime.InteropServices;
 
-    [Table]
+    [StructLayout(LayoutKind.Sequential)]
     public struct AllocationContext
     {
         public ulong Pointer;

@@ -17,7 +17,7 @@ namespace Z0
 
     public interface IWfShell<S> : IWfShell
     {
-        S State {get;}
+
     }
 
     public interface IWfShell : IApiProvider, IShellContext, IDisposable
@@ -50,9 +50,6 @@ namespace Z0
 
         FolderPath AsmTables
             => ResourceRoot + FolderName.Define("tables");
-
-        FolderPath AsmTableCore
-            => AsmTables + FolderName.Define("asm");
 
         WfEventId Raise<E>(in E e)
             where E : IWfEvent
@@ -140,26 +137,28 @@ namespace Z0
         void Created(in WfStepId step)
             => Raise(WfEvents.created(step, Ct));
 
-        void Emitting(WfStepId step, string table, FilePath dst)
-            => Raise(new EmittingTable(step, Table.identify(table), dst, Ct));
+        void Emitting(WfStepId step, Type table, FS.FilePath dst)
+            => Raise(new EmittingTable(step, table, dst, Ct));
 
-        void Emitted(WfStepId step, string table, uint count, FilePath dst)
-            => Raise(new EmittedTable(step, Table.identify(table), count, dst, Ct));
+        void Emitting<T>(WfStepId step, FS.FilePath dst)
+            where T : struct
+                => Raise(new EmittingTable(step, typeof(T), dst, Ct));
+
+        void Emitted<T>(WfStepId step, Count32 count, FS.FilePath dst)
+            where T : struct
+                => Raise(new EmittedTable(step, typeof(T), count, dst, Ct));
 
         void Emitting(WfStepId step, TableId table, FS.FilePath dst)
             => Raise(new EmittingTable(step, table, dst, Ct));
 
         void Emitted(WfStepId step, TableId table, uint count, FS.FilePath dst)
-            => Raise(new EmittedTable(step, table, count, dst, Ct));
+            => Raise(WfEvents.emitted(step, table, count, dst, Ct));
 
         void Running<T>(WfStepId step, T content)
             => Raise(WfEvents.running(step, content, Ct));
 
-        void Finished(WfStepId step, CorrelationToken ct)
-            => Raise(new WfDisposed(step, Ct));
-
         void Disposed(WfStepId step)
-            => Raise(new WfDisposed(step, Ct));
+            => Raise(WfEvents.disposed(step, Ct));
 
         void Initializing(WfStepId step, CorrelationToken ct)
             => Raise(new Initializing(step, Ct));
@@ -176,7 +175,10 @@ namespace Z0
         static string callerName(string src)
             => Path.GetFileNameWithoutExtension(src);
 
-        void Processed(WfStepId step, WfDataFlow<FS.FilePath> flow, uint size)
-            => Raise(WfEvents.processed(step, flow, size, Ct));
+        void Processed<T>(WfStepId step, WfDataFlow<T> flow)
+            => Raise(WfEvents.processed(step, flow, Ct));
+
+        void Processed<S,T>(WfStepId step, WfDataFlow<S,T> flow)
+            => Raise(WfEvents.processed(step, flow, Ct));
     }
 }

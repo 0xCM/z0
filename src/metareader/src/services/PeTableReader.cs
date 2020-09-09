@@ -139,7 +139,7 @@ namespace Z0
 
             return values.ToArray();
         }
-        public ReadOnlySpan<ImgBlobRecord> ReadBlobs()
+        public ReadOnlySpan<ImageBlob> ReadBlobs()
             => blobs(State);
 
         public ReadOnlySpan<ImageConstantRecord> ReadConstants()
@@ -161,7 +161,7 @@ namespace Z0
                 seek(dst,i) = new ImageFieldTable(
                     seq: i,
                     name: name(State, entry, i),
-                    sig: signature(State, entry, i),
+                    sig: sig(State, entry, i),
                     attribs: format(entry.Attributes)
                 );
             }
@@ -169,6 +169,6 @@ namespace Z0
         }
 
         public ReadOnlySpan<FieldRvaRecord> ReadFieldRva()
-            => fieldrva(State);
+            => rva(State);
     }
 }

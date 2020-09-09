@@ -6,19 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
     using System.Reflection.Metadata;
+    using System.Reflection.Metadata.Ecma335;
 
     using static Konst;
     using static z;
 
     partial class PeTableReader
     {
-        [MethodImpl(Inline), Op]
-        public static BinaryCode data(MetadataReader src, BlobHandle handle)
-            => src.GetBlobBytes(handle);
+        public static ImageBlob sig(in ReaderState state, FieldDefinition src, Count32 seq)
+            => blob(state, src.Signature, seq);
 
-        [MethodImpl(Inline), Op]
-        public static string data(MetadataReader src, StringHandle handle)
-            => src.GetString(handle);
+        public static ImageBlob sig(in ReaderState state, MethodDefinition src, Count32 seq)
+            => blob(state, src.Signature, seq);
+
     }
 }

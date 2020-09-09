@@ -17,26 +17,23 @@ namespace Z0.Asm
 
         public WfEventId EventId {get;}
 
-        public WfActor Actor {get;}
+        public ApiHostUri Host {get;}
 
-        public CorrelationToken Ct {get;}
+        public Count32 Count {get;}
 
         public FlairKind Flair {get;}
 
-        public readonly Count32 RecordCount;
-
         [MethodImpl(Inline)]
-        public ExtractReportCreated(string actor, Count32 count, CorrelationToken ct, FlairKind flair = Ran)
+        public ExtractReportCreated(WfStepId step, ApiHostUri host, Count32 count, CorrelationToken ct, FlairKind flair = Ran)
         {
-            Actor = actor;
-            EventId = evid(EventName, ct);
-            Ct = ct;
-            RecordCount = count;
+            EventId = (EventName, step, ct);
+            Host = host;
+            Count = count;
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Actor, RecordCount);
+            => format(EventId, Host, Count);
     }
 }

@@ -11,10 +11,49 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Security;
 
-    using MS;
-
     partial struct Windows
     {
+        /// <summary>
+        /// Blittable version of Windows BOOL type. It is convenient in situations where
+        /// manual marshalling is required, or to avoid overhead of regular bool marshalling.
+        /// </summary>
+        /// <remarks>
+        /// Some Windows APIs return arbitrary integer values although the return type is defined
+        /// as BOOL. It is best to never compare BOOL to TRUE. Always use bResult != BOOL.FALSE
+        /// or bResult == BOOL.FALSE .
+        /// </remarks>
+        public enum BOOL : int
+        {
+            FALSE = 0,
+
+            TRUE = 1,
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct SECURITY_ATTRIBUTES
+        {
+            public uint nLength;
+
+            public IntPtr lpSecurityDescriptor;
+
+            public BOOL bInheritHandle;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public unsafe struct CREATEFILE2_EXTENDED_PARAMETERS
+        {
+            public uint dwSize;
+
+            public uint dwFileAttributes;
+
+            public uint dwFileFlags;
+
+            public uint dwSecurityQosFlags;
+
+            public SECURITY_ATTRIBUTES* lpSecurityAttributes;
+
+            public IntPtr hTemplateFile;
+        }
 
         /// <summary>
         /// Specifies a date and time, using individual members for the month, day, year, weekday, hour, minute, second, and millisecond.

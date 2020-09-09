@@ -12,6 +12,9 @@ namespace Z0
     using static RenderPatterns;
     using static z;
 
+    using F = ImageConstantField;
+    using W = ImageConstantFieldWidth;
+
     public readonly ref struct EmitImageConstants
     {
         readonly IWfShell Wf;
@@ -65,16 +68,28 @@ namespace Z0
 
             var data = Read(part);
             var count = data.Length;
-            var dst = PartRecords.formatter(ImageRecords.Constants);
+            var dst = Table.formatter<F,W>();
 
             dst.EmitHeader();
             for(var i=0u; i<count; i++)
-                PartRecords.format(skip(data,i), dst);
+                format(skip(data,i), dst);
 
             using var writer = dstPath.Writer();
             writer.Write(dst.Render());
 
             Wf.Ran(StepId, delimit(id, count));
+        }
+
+        static ref readonly RecordFormatter<F,W> format(in ImageConstantRecord src, in RecordFormatter<F,W> dst, bool eol = true)
+        {
+            dst.Delimit(F.Sequence, src.Sequence);
+            dst.Delimit(F.ParentId, src.ParentId);
+            dst.Delimit(F.Source, src.Source);
+            dst.Delimit(F.DataType, src.DataType);
+            dst.Delimit(F.Value, src.Content);
+            if(eol)
+                dst.EmitEol();
+            return ref dst;
         }
 
         public void Dispose()

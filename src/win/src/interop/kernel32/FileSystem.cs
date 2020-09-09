@@ -6,8 +6,11 @@
 namespace Z0
 {
     using System;
+    using System.IO;
     using System.Runtime.InteropServices;
     using System.Security;
+
+    using Z0.MS;
 
     partial struct Windows
     {
@@ -15,6 +18,26 @@ namespace Z0
 
         partial struct Kernel32
         {
+            /// <summary>
+            /// WARNING: This method does not implicitly handle long paths. Use CreateFile.
+            /// </summary>
+            [DllImport(WinLibs.Kernel32, EntryPoint = "CreateFileW", SetLastError = true, CharSet = CharSet.Unicode, BestFitMapping = false, ExactSpelling = true), SuppressUnmanagedCodeSecurity]
+            public static extern unsafe IntPtr CreateFile(string lpFileName, int dwDesiredAccess, FileShare dwShareMode,
+                SECURITY_ATTRIBUTES* lpSecurityAttributes, FileMode dwCreationDisposition, int dwFlagsAndAttributes, IntPtr hTemplateFile);
+
+            public static unsafe IntPtr CreateFile(FS.FilePath path, int dwDesiredAccess, FileShare dwShareMode, FileMode dwCreationDisposition, int dwFlagsAndAttributes)
+            {
+                var lpFileName = PathUtilities.EnsureExtendedPrefixIfNeeded(path.Name);
+                return CreateFile(lpFileName, dwDesiredAccess, dwShareMode, null, dwCreationDisposition, dwFlagsAndAttributes, IntPtr.Zero);
+            }
+
+            public static unsafe IntPtr CreateFile(FS.FilePath path, int dwDesiredAccess, FileShare dwShareMode, SECURITY_ATTRIBUTES* lpSecurityAttributes,
+                FileMode dwCreationDisposition, int dwFlagsAndAttributes, IntPtr hTemplateFile)
+            {
+                var lpFileName = PathUtilities.EnsureExtendedPrefixIfNeeded(path.Name);
+                return CreateFile(lpFileName, dwDesiredAccess, dwShareMode, lpSecurityAttributes, dwCreationDisposition, dwFlagsAndAttributes, hTemplateFile);
+            }
+
             [DllImport(WinLibs.Kernel32, SetLastError = true), SuppressUnmanagedCodeSecurity]
             public static extern unsafe int WriteFile(IntPtr handle, byte* bytes, int numBytesToWrite, out int numBytesWritten, IntPtr mustBeZero);
 
@@ -39,8 +62,6 @@ namespace Z0
 
             [DllImport(WinLibs.Kernel32, SetLastError = true), SuppressUnmanagedCodeSecurity]
             public static extern bool SetFilePointerEx(IntPtr hFile, long liDistanceToMove, out long lpNewFilePointer, uint dwMoveMethod);
-
-
        }
     }
 }

@@ -34,7 +34,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Emitting(StepId, DatasetName, TargetPath);
+            Wf.Emitting<ContentLibEntry>(StepId, FS.path(TargetPath.Name));
 
             var provider = TableProvider.create();
             var entries = z.span(provider.Provided.Array());
@@ -52,7 +52,7 @@ namespace Z0
             using var dst = TargetPath.Writer();
             dst.Write(f.Format());
 
-            Wf.Emitted(StepId, DatasetName, EmissionCount, TargetPath);
+            Wf.Emitted<ContentLibEntry>(StepId, EmissionCount, FS.path(TargetPath.Name));
         }
 
         public void Dispose()

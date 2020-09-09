@@ -24,7 +24,20 @@ namespace Z0
         Value = 4,
     }
 
-    [Table]
+    public enum ImageConstantFieldWidth : ushort
+    {
+        Sequence = 12,
+
+        ParentId = 20,
+
+        Source = 20,
+
+        DataType = 20,
+
+        Value = 30,
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
     public struct ImageConstantRecord
     {
         public Count32 Sequence;

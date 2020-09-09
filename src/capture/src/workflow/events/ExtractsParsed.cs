@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static RenderPatterns;
+    using static Render;
     using static z;
 
     using E = ExtractsParsed;
@@ -19,24 +19,22 @@ namespace Z0.Asm
 
         public WfEventId EventId {get;}
 
-        public string ActorName {get;}
+        public ApiHostUri Host {get;}
 
-        public readonly ApiHostUri Host;
+        public Count32 MemberCount {get;}
 
-        public readonly X86MemberRefinement[] Members;
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ExtractsParsed(string actor, ApiHostUri host, X86MemberRefinement[] members, CorrelationToken ct)
+        public ExtractsParsed(WfStepId step, ApiHostUri host, Count32 count, CorrelationToken ct, FlairKind flair = Ran)
         {
-            EventId = evid(EventName, ct);
-            ActorName = actor;
+            EventId = (EventName, step, ct);
             Host = host;
-            Members = members;
+            MemberCount = count;
+            Flair = flair;
         }
-        public string Format()
-            => text.format(PSx3, EventId, ActorName, Members.Length);
 
-        public static ExtractsParsed Empty
-            => default;
+        public string Format()
+            => format(EventId, Host, MemberCount);
     }
 }

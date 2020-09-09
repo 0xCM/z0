@@ -9,22 +9,16 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
 
-    using static ReaderInternals;
-
     using static Konst;
     using static z;
 
     partial class PeTableReader
     {
-        [MethodImpl(Inline), Op]
-        public static ConstantHandle ConstantHandle(Count32 row)
-            => MetadataTokens.ConstantHandle((int)row);
-
         public static ReadOnlySpan<ImageConstantRecord> constants(in ReaderState state)
         {
             var reader = state.Reader;
             var count = ConstantCount(state);
-            var dst = Spans.alloc<ImageConstantRecord>(count);
+            var dst = span<ImageConstantRecord>(count);
             for(var i=1u; i<=count; i++)
             {
                 var k = ConstantHandle(i);

@@ -12,11 +12,10 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static ReaderInternals;
 
     partial class PeTableReader
     {
-        public static ReadOnlySpan<FieldRvaRecord> fieldrva(in ReaderState state)
+        public static ReadOnlySpan<FieldRvaRecord> rva(in ReaderState state)
         {
             var reader = state.Reader;
             var offset = reader.GetTableMetadataOffset(System.Reflection.Metadata.Ecma335.TableIndex.FieldRva);
@@ -34,7 +33,7 @@ namespace Z0
                 var entry = reader.GetFieldDefinition(handle);
                 var td = reader.GetTypeDefinition(entry.GetDeclaringType());
                 var tName = reader.GetString(td.Name);
-                var sig = signature(state, entry, i);
+                var sig = PeTableReader.sig(state, entry, i);
                 var name = reader.GetString(entry.Name);
                 var va = entry.GetRelativeVirtualAddress();
                 dst[i] = new FieldRvaRecord((Address32)va, tName, name, sig);
@@ -43,22 +42,11 @@ namespace Z0
             return dst.OrderBy(x => x.Rva);
         }
 
-        public static ImageLiteralFieldTable record(in ReaderState state, StringHandle handle, Count32 seq)
-        {
-            var value = state.Reader.GetString(handle);
-            var offset = state.Reader.GetHeapOffset(handle);
-            var size = state.Reader.GetHeapSize(HeapIndex.String);
-            return new ImageLiteralFieldTable(seq, size, (Address32)offset, value);
-        }
-
         public static ImageLiteralFieldTable name(in ReaderState state, FieldDefinition entry, Count32 seq)
-            => record(state, entry.Name, seq);
+            => literal(state, entry.Name, seq);
 
         internal static string format(FieldAttributes src)
             => src.ToString();
-
-        internal static ImgBlobRecord signature(in ReaderState state, FieldDefinition entry, Count32 seq)
-            => blob(state, entry.Signature, seq);
 
         public static ReadOnlySpan<ImageFieldTable> fields(in ReaderState state)
         {
@@ -73,7 +61,7 @@ namespace Z0
                 var entry = reader.GetFieldDefinition(handle);
                 int offset = entry.GetOffset();
 
-                seek(dst,i) = new ImageFieldTable(i, name(state, entry, i), signature(state, entry, i), format(entry.Attributes));
+                seek(dst,i) = new ImageFieldTable(i, name(state, entry, i), sig(state, entry, i), format(entry.Attributes));
             }
             return dst;
         }

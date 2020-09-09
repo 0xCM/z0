@@ -11,6 +11,9 @@ namespace Z0
     using static EmitImageBlobsStep;
     using static z;
 
+    using F = ImageBlobField;
+    using W = ImageBlobFieldWidth;
+
     public ref struct EmitImageBlobs
     {
         public uint EmissionCount;
@@ -34,10 +37,26 @@ namespace Z0
             Wf.Created(StepId, ct);
         }
 
-        public ReadOnlySpan<ImgBlobRecord> Read(IPart part)
+        public ReadOnlySpan<ImageBlob> Read(IPart part)
         {
             using var reader = PeTableReader.open(part.PartPath());
             return reader.ReadBlobs();
+        }
+
+        static DataSink<F,ImageBlob> sink()
+        {
+            var formatter = Table.formatter<F,W>();
+            formatter.EmitHeader();
+            return new DataSink<F,ImageBlob>(formatter, deposit);
+        }
+
+        static void deposit(in ImageBlob src, IDatasetFormatter<F> dst)
+        {
+            dst.Delimit(F.Sequence, src.Seq);
+            dst.Delimit(F.HeapSize, src.HeapSize);
+            dst.Delimit(F.Offset, src.Offset);
+            dst.Delimit(F.Value, src.Data);
+            dst.EmitEol();
         }
 
         void Emit(IPart part)
@@ -45,11 +64,11 @@ namespace Z0
             var id = part.Id;
             var dstPath =  TargetDir + FileName.define(id.Format(), "blob.csv");
 
-            Wf.Emitting(StepId, EmissionType, dstPath);
+            Wf.Emitting<ImageBlob>(StepId, FS.path(dstPath.Name));
 
             var data = Read(part);
             var count = (uint)data.Length;
-            var target = PartRecords.sink(default(ImgBlobRecord));
+            var target = sink();
 
             for(var i=0u; i<count; i++)
                 target.Deposit(skip(data,i));
@@ -57,9 +76,9 @@ namespace Z0
             using var writer = dstPath.Writer();
             writer.Write(target.Render());
 
-            Wf.Emitted(StepId, EmissionType, count, dstPath);
-
             EmissionCount += count;
+
+            Wf.Emitted<ImageBlob>(StepId, count, FS.path(dstPath.Name));
         }
 
         public void Run()

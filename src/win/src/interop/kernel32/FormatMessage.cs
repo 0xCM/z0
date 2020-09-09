@@ -17,12 +17,12 @@ namespace Z0
             public static extern unsafe int FormatMessage(int dwFlags, IntPtr lpSource, uint dwMessageId, int dwLanguageId, void* lpBuffer, int nSize, IntPtr arguments);
 
             [DllImport(WinLibs.Kernel32, CharSet = CharSet.Unicode, SetLastError = true, BestFitMapping = true)]
-            public static extern unsafe int FormatMessage(int dwFlags, SafeLibraryHandle lpSource, uint dwMessageId, int dwLanguageId, [Out] char[] lpBuffer, int nSize, IntPtr[] arguments);
-            
+            public static extern unsafe int FormatMessage(int dwFlags, IntPtr lpSource, uint dwMessageId, int dwLanguageId, [Out] char[] lpBuffer, int nSize, IntPtr[] arguments);
+
             /// <summary>
             ///     Returns a string message for the specified Win32 error code.
             /// </summary>
-            public static string GetMessage(int errorCode) 
+            public static string GetMessage(int errorCode)
                 => GetMessage(errorCode, IntPtr.Zero);
 
             public static unsafe string GetMessage(int errorCode, IntPtr moduleHandle)

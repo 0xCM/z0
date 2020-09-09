@@ -9,12 +9,11 @@ namespace Z0
     using System.IO;
     using System.Runtime.InteropServices;
 
-    using Z0.MS;
 
     partial struct Windows
     {
         partial struct Kernel32
-        {            
+        {
             [DllImport(WinLibs.Kernel32, ExactSpelling = true)]
             public static extern unsafe void* VirtualAlloc(void* lpAddress, UIntPtr dwSize, int flAllocationType, int flProtect);
 

@@ -28,14 +28,14 @@ namespace Z0
         public TableId(Type shape)
         {
             Shape = shape;
-            Name = StorageBlocks.init(shape.Name, out Name);
+            Name = StorageBlocks.init(shape.Name, CharBlock32.Empty, out Name);
         }
 
         [MethodImpl(Inline)]
         public TableId(ArtifactIdentifier shape, string name)
         {
             Shape = shape;
-            Name = StorageBlocks.init(name, out Name);
+            Name = StorageBlocks.init(name, CharBlock32.Empty, out Name);
         }
 
         [MethodImpl(Inline)]

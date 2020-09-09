@@ -10,6 +10,9 @@ namespace Z0
     using static Konst;
     using static EmitFieldMetadataStep;
 
+    using F = ImageFieldTableField;
+    using W = ImageFieldTabledWidth;
+
     public readonly ref struct EmitFieldMetadata
     {
         readonly IWfShell Wf;
@@ -66,21 +69,33 @@ namespace Z0
             var id = part.Id;
             var path = TargetPath(id);
 
-            Wf.Emitting(StepId, DatasetName, path);
+            Wf.Emitting<ImageFieldTable>(StepId, FS.path(path.Name));
 
             var assembly = part.Owner;
             using var reader = Reader(assembly.Location);
             var src = reader.ReadFields();
-            var count = src.Length;
+            var count = (uint)src.Length;
 
-            var formatter = PartRecords.formatter(Spec);
+            var formatter = Table.formatter<F,W>();
             formatter.EmitHeader();
             foreach(var record in src)
-                PartRecords.format(record, formatter);
+                format(record, formatter);
 
             path.Overwrite(formatter.Render());
-            Wf.Emitted(StepId, DatasetName, (uint)src.Length, path);
-            return (uint)count;
+
+            Wf.Emitted<ImageFieldTable>(StepId, count, FS.path(path.Name));
+            return count;
+        }
+
+        static ref readonly RecordFormatter<F,W> format(in ImageFieldTable src, in RecordFormatter<F,W> dst, bool eol = true)
+        {
+            dst.Delimit(F.Sequence, src.Seq);
+            dst.Delimit(F.Name, src.Name);
+            dst.Delimit(F.Signature, src.Sig);
+            dst.Delimit(F.Attributes, src.Attribs);
+            if(eol)
+                dst.EmitEol();
+            return ref dst;
         }
 
 

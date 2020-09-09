@@ -37,6 +37,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public static RecordFormatter<F,W> formatter<F,W>(char delimiter = FieldDelimiter)
+            where F : unmanaged, Enum
+            where W : unmanaged, Enum
+                => new RecordFormatter<F,W>(text.build(), delimiter);
+
+        [MethodImpl(Inline)]
         public static RowFormatter formatter(Type table, char delimiter = FieldDelimiter)
             => new RowFormatter(table, fields(table), text.build(), delimiter);
 

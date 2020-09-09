@@ -10,19 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public enum ImageLiteralField : ushort
-    {
-        Sequence = 0,
-
-        HeapSize = 1,
-
-        Length = 2,
-
-        Offset = 3,
-
-        Value = 4,
-    }
-
+    [StructLayout(LayoutKind.Sequential)]
     public struct ImageLiteralFieldTable
     {
         public Count32 Sequence;

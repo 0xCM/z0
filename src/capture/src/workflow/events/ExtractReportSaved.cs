@@ -18,28 +18,21 @@ namespace Z0.Asm
 
         public WfEventId EventId {get;}
 
-        public string ActorName {get;}
+        public Count32 Count {get;}
 
-        public CorrelationToken Ct {get;}
-
+        public FS.FilePath Target {get;}
         public FlairKind Flair {get;}
 
-        public readonly ExtractReport Report;
-
-        public readonly uint RecordCount;
-
         [MethodImpl(Inline)]
-        public ExtractReportSaved(string actor, ExtractReport report, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
+        public ExtractReportSaved(WfStepId step, Count32 count, FS.FilePath target, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
         {
-            Report = report;
-            ActorName = actor;
-            Ct = ct;
-            RecordCount = (uint)report.RecordCount;
+            EventId = (EventName, step, ct);
+            Count = count;
+            Target = target;
             Flair = flair;
-            EventId = evid(EventName, ct);
         }
 
         public string Format()
-            => text.format(PSx3, EventId, ActorName, RecordCount);
+            => Render.format(EventId, Count, Target);
     }
 }

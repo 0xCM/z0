@@ -18,36 +18,6 @@ namespace Z0
 
     partial class PeTableReader
     {
-        public static ReadOnlySpan<MethodDetail> methods(in ReaderState state)
-        {
-            var details = list<MethodDetail>();
-            var reader = state.Reader;
-            var typedefs = reader.TypeDefinitions.ToReadOnlySpan();
-            var kTypes = typedefs.Length;
-            for(var i=0u; i<kTypes; i++)
-            {
-                ref readonly var hType = ref skip(typedefs,i);
-                var tDef = reader.GetTypeDefinition(hType);
-                var implementations = tDef.GetMethodImplementations().ToReadOnlySpan().Map(h => reader.GetMethodImplementation(h));
-                var definitions = tDef.GetMethods().ToReadOnlySpan().Map(h => reader.GetMethodDefinition(h));
-                var hMethods = tDef.GetMethods().ToReadOnlySpan();
-                var mCount = hMethods.Length;
-                for(var j=0; j<mCount; j++)
-                {
-                    var def = reader.GetMethodDefinition(skip(hMethods,j));
-                    var dst = default(MethodDetail);
-                    dst.Rva = (Address32)def.RelativeVirtualAddress;
-                    dst.Sig = data(reader,def.Signature);
-                    dst.Attribs = def.Attributes;
-                    dst.ImplAttribs = def.ImplAttributes;
-                    dst.Name = data(reader, def.Name);
-                    details.Add(dst);
-                }
-            }
-
-            return details.ToArray();
-        }
-
         public static ReadOnlySpan<ImageMethodBody> methods(FS.FilePath src)
         {
             var dst = list<ImageMethodBody>();
@@ -73,10 +43,14 @@ namespace Z0
                     if(rva != 0)
                     {
                         var body = pe.GetMethodBody(rva);
-                        var sig = data(reader, def.Signature);
-                        var name = reader.GetString(def.Name);
-                        var il = body.GetILBytes();
-                        dst.Add(new ImageMethodBody{Sig = sig, Name = name, Rva = (uint)rva, Cil = il});
+                        dst.Add(new ImageMethodBody
+                        {
+                            Sig = reader.GetBlobBytes(def.Signature),
+                            Name = reader.GetString(def.Name),
+                            Rva = (Address32)rva,
+                            Cil = body.GetILBytes(),
+                            Size = body.Size
+                        });
                     }
                  }
             }

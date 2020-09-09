@@ -12,7 +12,7 @@ namespace Z0
 
         ReadOnlySpan<ImageStringRecord> ReadUserStrings();
 
-        ReadOnlySpan<ImgBlobRecord> ReadBlobs();
+        ReadOnlySpan<ImageBlob> ReadBlobs();
 
         ReadOnlySpan<ImageConstantRecord> ReadConstants();
 

@@ -62,7 +62,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format()
-                => View.ToString();
+                => Name;
 
             public bool IsEmpty
             {

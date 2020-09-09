@@ -118,7 +118,7 @@ namespace Z0
             }
 
             Parsed = result.Parsed;
-            Wf.Raise(new ExtractsParsed(StepName, Source, Parsed, Ct));
+            Wf.Raise(new ExtractsParsed(StepId, Source, Parsed.Length, Ct));
         }
 
         void SaveParseReport()

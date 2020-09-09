@@ -20,6 +20,9 @@ namespace Z0
         /// </summary>
         public IShellContext Shell {get;}
 
+        /// <summary>
+        /// The configured paths
+        /// </summary>
         public IShellPaths Paths {get;}
 
         /// <summary>

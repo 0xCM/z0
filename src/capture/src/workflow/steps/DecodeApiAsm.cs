@@ -45,7 +45,7 @@ namespace Z0
                     dst[i] = decoded ? decoded.Value : AsmRoutine.Empty;
                 }
 
-                Wf.Raise(new FunctionsDecoded(host, dst));
+                Wf.Raise(new FunctionsDecoded(StepId, host, dst, Ct));
                 return dst;
             }
             catch(Exception e)

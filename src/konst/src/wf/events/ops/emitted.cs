@@ -8,16 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Render;
 
     partial struct WfEvents
     {
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static ProcessedFile processed(WfStepId step, WfDataFlow<FS.FilePath> flow, uint size, CorrelationToken ct)
-            => new ProcessedFile(step, flow, size, ct);
 
         [MethodImpl(Inline), Op]
         public static EmittedFile emitted(WfStepId step, FS.FilePath path, CorrelationToken ct)
             => new EmittedFile(step, path, ct);
+
+        [MethodImpl(Inline), Op]
+        public static EmittedTable emitted(WfStepId step, TableId table, uint count, FS.FilePath dst, CorrelationToken ct)
+            => new EmittedTable(step, table, count, dst, ct);
     }
 }

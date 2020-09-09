@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct ImgBlobRecord
+    public struct ImageBlob
     {
         public Count32 Seq;
 
@@ -22,7 +22,7 @@ namespace Z0
         public BinaryCode Data;
 
         [MethodImpl(Inline)]
-        public ImgBlobRecord(Count32 seq, ByteSize heap, Address32 offset, byte[] data)
+        public ImageBlob(Count32 seq, ByteSize heap, Address32 offset, byte[] data)
         {
             Seq = seq;
             HeapSize = heap;
@@ -31,7 +31,7 @@ namespace Z0
         }
     }
 
-    public enum ImgBlobField : ushort
+    public enum ImageBlobField : ushort
     {
         Sequence = 0,
 

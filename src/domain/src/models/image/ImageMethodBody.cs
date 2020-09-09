@@ -21,6 +21,8 @@ namespace Z0
 
         public BinaryCode Cil;
 
+        public ByteSize Size;
+
         public string Format()
         {
             var dst = EmptyString.Build();

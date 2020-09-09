@@ -38,6 +38,12 @@ namespace Z0
             Wf.Created(StepId);
         }
 
+
+        public void Dispose()
+        {
+            Wf.Disposed(StepId);
+        }
+
         public void Run()
         {
             Wf.Running(StepId, delimit(PartCount, TargetDir));
@@ -59,7 +65,7 @@ namespace Z0
 
         uint Emit(IPart part, FilePath dst)
         {
-            Wf.Emitting(StepId, EmissionType, dst);
+            Wf.Emitting<ImageMethodBody>(StepId, FS.path(dst.Name));
 
             var methods = PeTableReader.methods(FS.path(part.Owner.Location));
             var count = (uint)methods.Length;
@@ -69,13 +75,9 @@ namespace Z0
             for(var i=0u; i<count; i++)
                 writer.WriteLine(skip(methods,i).Format());
 
-            Wf.Emitted(StepId, EmissionType, count, dst);
+            Wf.Emitted<ImageMethodBody>(StepId, count, FS.path(dst.Name));
             return count;
         }
 
-        public void Dispose()
-        {
-            Wf.Disposed(StepId);
-        }
     }
 }

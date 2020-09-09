@@ -4,12 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.IO;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    partial class PeTableReader
+    partial struct FS
     {
+        [MethodImpl(Inline), Op]
+        public static bool has(FilePath src, FileExt ext)
+            => src.FileExt == ext;
     }
 }

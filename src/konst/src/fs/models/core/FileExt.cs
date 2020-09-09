@@ -81,7 +81,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format()
-                => Name.ToString();
+                => Name.Format();
 
             public override string ToString()
                 => Format();

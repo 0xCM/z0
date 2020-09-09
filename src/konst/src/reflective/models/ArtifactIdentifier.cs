@@ -17,12 +17,6 @@ namespace Z0
     {
         readonly Address32 Data;
 
-        public int TokenValue
-        {
-            [MethodImpl(Inline)]
-            get => (int)Data.Location;
-        }
-
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -34,6 +28,8 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data != 0;
         }
+
+        [MethodImpl(Inline)]
         public string Format()
             => Data.Format();
 
@@ -96,6 +92,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ArtifactIdentifier(ParameterInfo src)
             => From(src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator int(ArtifactIdentifier src)
+            => (int)src.Data.Location;
 
         [MethodImpl(Inline)]
         internal ArtifactIdentifier(Type src)

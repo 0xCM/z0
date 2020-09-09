@@ -60,9 +60,7 @@ namespace Z0.MS
         }
 
         public bool FreeLibrary(IntPtr module)
-        {
-            return Windows.Kernel32.FreeLibrary(module);
-        }
+            => Windows.Kernel32.FreeLibrary(module);
 
         public bool GetFileVersion(string dll, out int major, out int minor, out int revision, out int patch)
         {
@@ -98,14 +96,10 @@ namespace Z0.MS
         }
 
         public IntPtr GetProcAddress(IntPtr module, string method)
-        {
-            return Windows.Kernel32.GetProcAddress(module, method);
-        }
+            => Windows.Kernel32.GetProcAddress(module, method);
 
         public IntPtr LoadLibrary(string lpFileName)
-        {
-            return Windows.Kernel32.LoadLibrary(lpFileName);
-        }
+            => Windows.Kernel32.LoadLibrary(lpFileName);
 
         public bool TryGetWow64(IntPtr proc, out bool result)
         {

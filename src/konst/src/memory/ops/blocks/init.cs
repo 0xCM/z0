@@ -24,5 +24,13 @@ namespace Z0
             dst = default;
             return ref copy(src, ref dst);
         }
+
+        [MethodImpl(Inline)]
+        public static ref T init<T>(ReadOnlySpan<char> src, in T t0, out T dst)
+            where T : unmanaged, ICharBlock<T>
+        {
+            dst = t0;
+            return ref copy(src, ref dst);
+        }
     }
 }

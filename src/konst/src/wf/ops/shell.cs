@@ -25,8 +25,7 @@ namespace Z0
         {
             var id = control.Id();
             var modules = ApiQuery.modules(control, args);
-            var config = new WfConfig(context(control, modules, args), args, modules);
-            return new WfShell(config);
+            return new WfShell(new WfConfig(context(control, modules, args), args, modules));
         }
 
         public static IWfShell shell(params string[] args)

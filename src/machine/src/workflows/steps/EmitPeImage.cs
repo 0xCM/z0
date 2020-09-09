@@ -55,9 +55,14 @@ namespace Z0
             Wf.Created(StepId);
         }
 
+        public void Dispose()
+        {
+            Wf.Disposed(StepId);
+        }
+
         public void Run()
         {
-            Wf.Emitting(StepId, DatasetName, TargetPath);
+            Wf.Emitting<BinaryCode>(StepId, FS.path(TargetPath.Name));
 
             using var stream = SourcePath.Reader();
             using var reader = stream.BinaryReader();
@@ -76,14 +81,9 @@ namespace Z0
                 k = Read(reader);
             }
 
-            Wf.Emitted(StepId, DatasetName, LineCount, TargetPath);
-
+            Wf.Emitted<BinaryCode>(StepId, LineCount, FS.path(TargetPath.Name));
         }
 
-        public void Dispose()
-        {
-            Wf.Disposed(StepId);
-        }
 
         public MemoryAddress OffsetAddress
         {

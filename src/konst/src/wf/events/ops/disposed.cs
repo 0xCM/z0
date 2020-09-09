@@ -6,19 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
-    public struct MethodDetail
+    using static Konst;
+
+    partial struct WfEvents
     {
-        public BinaryCode Sig;
-
-        public string Name;
-
-        public Address32 Rva;
-
-        public MethodAttributes Attribs;
-
-        public MethodImplAttributes ImplAttribs;
+        [MethodImpl(Inline), Op]
+        public static WfDisposed disposed(WfStepId step, CorrelationToken ct)
+            => new WfDisposed(step,ct);
     }
-
 }

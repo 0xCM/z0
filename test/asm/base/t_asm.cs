@@ -21,7 +21,7 @@ namespace Z0.Asm
 
         public t_asm()
         {
-            Context = new AsmContext(WfBuilder.app());
+            Context = new AsmContext(Apps.context());
             AsmCheck = AsmTest.tester(Context);
             UnitDataDir.Clear();
         }

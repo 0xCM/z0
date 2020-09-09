@@ -64,7 +64,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Finished(StepId, Ct);
+            Wf.Disposed(StepId);
         }
     }
 }

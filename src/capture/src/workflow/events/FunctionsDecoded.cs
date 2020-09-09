@@ -8,33 +8,32 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static RenderPatterns;
 
     public readonly struct FunctionsDecoded : IWfEvent<FunctionsDecoded>
     {
-        public WfEventId EventId  => WfEventId.define("Placeholder");
+        public const string EventName = nameof(FunctionsDecoded);
+
+        public WfEventId EventId {get;}
 
         public readonly ApiHostUri Host;
 
         public readonly AsmRoutine[] Functions;
 
+        public readonly Count32 FunctionCount
+            => Functions.Length;
+        public FlairKind Flair {get;}
+
         [MethodImpl(Inline)]
-        public FunctionsDecoded(ApiHostUri host, AsmRoutine[] functions)
+        public FunctionsDecoded(WfStepId step, ApiHostUri host, AsmRoutine[] functions, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
         {
+            EventId = (EventName, step, ct);
             Host = host;
             Functions = functions;
+            Flair = flair;
         }
 
+        [MethodImpl(Inline)]
         public string Format()
-            => $"{Functions.Length} {Host} functions decoded";
-
-        public FunctionsDecoded Zero
-            => Empty;
-
-        public FlairKind Flair
-            => FlairKind.Running;
-
-        public static FunctionsDecoded Empty
-            => default;
+            => Render.format(EventId, Host, FunctionCount);
     }
 }

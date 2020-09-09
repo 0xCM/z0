@@ -8,11 +8,12 @@ namespace Z0.MS
 {
     using System;
     using System.Runtime.InteropServices;
- 
+
     [StructLayout(LayoutKind.Sequential)]
     public struct M128A : IEquatable<M128A>
     {
         public ulong Low;
+
         public ulong High;
 
         public void Clear()
@@ -29,7 +30,7 @@ namespace Z0.MS
 
         public bool Equals(M128A other) => Low == other.Low && High == other.High;
 
-        public override int GetHashCode() 
+        public override int GetHashCode()
             => base.GetHashCode();
-    }        
+    }
 }

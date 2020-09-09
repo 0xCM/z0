@@ -57,10 +57,10 @@ namespace Z0
             try
             {
                 Artifact = ExtractReport.Create(Host, Source);
-                Wf.Raise(new ExtractReportCreated(ActorName, Artifact.RecordCount, Ct));
+                Wf.Raise(new ExtractReportCreated(StepId, Host, Artifact.RecordCount, Ct));
                 var result = Report.Save(Target);
                 if(result)
-                    Wf.Raise(new ExtractReportSaved(ActorName, Artifact, Ct));
+                    Wf.Raise(new ExtractReportSaved(StepId, Artifact.RecordCount, FS.path(Target.Name), Ct));
                 else
                     Wf.Error(StepId, "Unable to save extract report");
             }

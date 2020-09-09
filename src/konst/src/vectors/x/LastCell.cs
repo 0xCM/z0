@@ -12,7 +12,7 @@ namespace Z0
 
     partial class VXTend
     {
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T LastCell<T>(this Vector128<T> src)
             where T : unmanaged
         {
@@ -26,7 +26,7 @@ namespace Z0
                 return src.Cell(1);
         }
 
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T LastCell<T>(this Vector256<T> src)
             where T : unmanaged
         {

@@ -212,6 +212,8 @@ namespace Z0
     /// </summary>
     public struct CharBlock32  : ICharBlock<CharBlock32>
     {
+        public static CharBlock32 Empty => "                                ";
+
         [MethodImpl(Inline)]
         public static implicit operator CharBlock32(string src)
             => api.init(src, out CharBlock32 dst);

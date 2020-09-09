@@ -9,8 +9,6 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
 
-    using static ReaderInternals;
-
     using static Konst;
     using static z;
 

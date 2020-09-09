@@ -60,7 +60,7 @@ namespace Z0
             => path.Length == GetRootLength(path);
 
         [Op, MethodImpl(Inline)]
-        public static ReadOnlySpan<char> TrimEndingDirectorySeparator(ReadOnlySpan<char> path) 
+        public static ReadOnlySpan<char> TrimEndingDirectorySeparator(ReadOnlySpan<char> path)
             => EndsInDirectorySeparator(path) && !IsRoot(path) ? path.Slice(0, path.Length - 1) : path;
 
         /// <summary>
@@ -212,5 +212,6 @@ namespace Z0
 
             return ExtendedDevicePathPrefix + path;
         }
+
     }
 }

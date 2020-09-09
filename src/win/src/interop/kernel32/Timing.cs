@@ -9,8 +9,6 @@ namespace Z0
     using System.Security;
     using System.Runtime.InteropServices;
 
-    using Z0.MS;
-
     partial struct Windows
     {
         partial struct Kernel32

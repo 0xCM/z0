@@ -44,7 +44,7 @@ namespace Z0
         public string Attribs;
 
         [MethodImpl(Inline)]
-        public ImageFieldTable(Count32 seq, ImageLiteralFieldTable name, ImgBlobRecord sig, string attribs)
+        public ImageFieldTable(Count32 seq, ImageLiteralFieldTable name, ImageBlob sig, string attribs)
         {
             Seq = seq;
             Name = name;
