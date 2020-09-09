@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Avx;
@@ -107,7 +107,7 @@ namespace Z0
         [MethodImpl(Inline), Broadcast]
         public static unsafe Vector256<byte> vbroadcast(W256 w, byte src)
             => BroadcastScalarToVector256(&src);
-                        
+
         /// <summary>
         ///  __m256i _mm256_broadcastw_epi16 (__m128i a) VPBROADCASTW ymm, m16
         /// Creates a target vector where each component is initialized with the same value
@@ -166,7 +166,7 @@ namespace Z0
         /// <param name="src">The value to broadcast</param>
         [MethodImpl(Inline), Broadcast]
         public static unsafe Vector256<ulong> vbroadcast(W256 w, ulong src)
-            => BroadcastScalarToVector256(&src);            
+            => BroadcastScalarToVector256(&src);
 
         /// <summary>
         /// __m256 _mm256_broadcast_ss (float const * mem_addr) VBROADCASTSS ymm, m32
@@ -202,7 +202,7 @@ namespace Z0
         /// <param name="src">The value to broadcast</param>
         [MethodImpl(Inline), Broadcast]
         public static unsafe Vector128<double> vbroadcast(W128 w, double src)
-            => Vector128.Create(src);             
+            => Vector128.Create(src);
 
         /// <summary>
         /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
@@ -213,7 +213,7 @@ namespace Z0
         /// <param name="hi">The value to replicate in the upper lane</param>
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vbroadcast(W256 w, byte lo, byte hi)
-            => V0d.vconcat(vbroadcast(w128, lo), vbroadcast(w128, hi));            
+            => z.vconcat(vbroadcast(w128, lo), vbroadcast(w128, hi));
 
         /// <summary>
         /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
@@ -224,7 +224,7 @@ namespace Z0
         /// <param name="hi">The value to replicate in the upper lane</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vbroadcast(W256 w, ushort lo, ushort hi)
-            => V0d.vconcat(vbroadcast(w128, lo), vbroadcast(w128, hi));            
+            => z.vconcat(vbroadcast(w128, lo), vbroadcast(w128, hi));
 
         /// <summary>
         /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
@@ -235,7 +235,7 @@ namespace Z0
         /// <param name="hi">The value to replicate in the upper lane</param>
         [MethodImpl(Inline), Op]
         public static Vector256<uint> vbroadcast(W256 w, uint lo, uint hi)
-            => V0d.vconcat(vbroadcast(w128, lo), vbroadcast(w128, hi));            
+            => z.vconcat(vbroadcast(w128, lo), vbroadcast(w128, hi));
 
         /// <summary>
         /// Creates a 256-bit vector where the lower 128-bit lane is filled with replicas of the lo value
@@ -246,6 +246,6 @@ namespace Z0
         /// <param name="hi">The value to replicate in the upper lane</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vbroadcast(W256 w, ulong lo, ulong hi)
-            => V0d.vconcat(vbroadcast(w128, lo), vbroadcast(w128, hi));
+            => z.vconcat(vbroadcast(w128, lo), vbroadcast(w128, hi));
     }
 }

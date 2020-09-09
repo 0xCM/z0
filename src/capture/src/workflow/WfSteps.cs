@@ -10,6 +10,12 @@ namespace Z0
     using Asm;
 
     [Step]
+    public readonly struct EmitCaptureIndexStep : IWfStep<EmitCaptureIndexStep>
+    {
+        public static WfStepId StepId => Flow.step<EmitCaptureIndexStep>();
+    }
+
+    [Step]
     public readonly struct EmitExtractReportStep : IWfStep<EmitExtractReportStep>
     {
         public static WfStepId StepId

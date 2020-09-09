@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.IO;
 
-     using static Konst;
+    using static Konst;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -15,10 +15,6 @@ namespace Z0
 
     using static WfEvents;
 
-    public interface IWfShell<S> : IWfShell
-    {
-
-    }
 
     public interface IWfShell : IApiProvider, IShellContext, IDisposable
     {

@@ -11,6 +11,7 @@ namespace Z0
     using System.Security;
 
     using Z0.MS;
+    using Z0.Image;
 
     partial struct Windows
     {

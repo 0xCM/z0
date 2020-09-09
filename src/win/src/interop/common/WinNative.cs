@@ -35,7 +35,6 @@ namespace Z0
         [DllImport(Kernel32LibraryName, CharSet = CharSet.Unicode, SetLastError = true, EntryPoint = "LoadLibraryW")]
         public static extern IntPtr LoadLibrary(string lpLibFileName);
 
-
         [DllImport(VersionLibraryName, CharSet = CharSet.Unicode, EntryPoint = "GetFileVersionInfoW")]
         public static extern bool GetFileVersionInfo(string sFileName, int handle, int size, byte* infoBuffer);
 

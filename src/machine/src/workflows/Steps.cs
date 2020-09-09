@@ -6,10 +6,12 @@ namespace Z0
 {
     using System;
 
+    using Z0.Asm;
+
     using static RenderPatterns;
     using static Flow;
 
-    [Step]
+    [WfHost]
     public class ProcessGlobalIndexStep : WfHost<ProcessGlobalIndexStep>
     {
         public override void Run(IWfShell shell)
@@ -25,12 +27,13 @@ namespace Z0
             => step<ProcessInstructionsStep>();
     }
 
-    [Step]
-    public class ProcessPartFilesStep : WfHost<ProcessPartFilesStep>
+    [WfHost]
+    public class ProcessPartFilesStep : WfHost<ProcessPartFilesStep,IAsmContext>
     {
-        public override void Run(IWfShell shell)
+        public override void Run(IWfShell wf, IAsmContext state)
         {
-            throw new NotImplementedException();
+            using var step = new ProcessPartFiles(wf, state, wf.Ct);
+            step.Run();
         }
     }
 

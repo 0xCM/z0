@@ -190,6 +190,5 @@ namespace Z0.Asm
             else
                 return string.Empty;
         }
-
     }
 }

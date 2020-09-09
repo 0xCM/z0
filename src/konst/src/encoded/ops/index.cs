@@ -13,14 +13,13 @@ namespace Z0
 
     partial struct Encoded
     {
-
         [MethodImpl(Inline), Op]
         public static ApiHexIndex index(ApiHostUri host, ApiHex[] code)
             => new ApiHexIndex(host,code);
 
         [MethodImpl(Inline), Op]
-        public static PartCodeIndex index(PartId part, EncodedMemberIndex[] src)
-            => new PartCodeIndex(part,src);
+        public static X86PartMembers index(PartId part, EncodedMemberIndex[] src)
+            => new X86PartMembers(part,src);
 
         [MethodImpl(Inline), Op]
         public static EncodedMemberIndex index(ApiHostUri id, X86ApiCode[] code)

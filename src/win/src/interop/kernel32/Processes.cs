@@ -9,8 +9,9 @@ namespace Z0
     using System.Runtime.InteropServices;
     using System.Security;
 
-    partial struct Windows
+    public partial struct Windows
     {
+
         partial struct Kernel32
         {
             /// <summary>
@@ -61,8 +62,8 @@ namespace Z0
             [DllImport(WinLibs.Kernel32), SuppressUnmanagedCodeSecurity]
             public static extern int GetProcessId(IntPtr Process);
 
-            [DllImport(WinLibs.Kernel32, SetLastError = true)]
-            public static extern IntPtr OpenProcess(int dwDesiredAccess, bool bInheritHandle, int dwProcessId);
+            [DllImport(WinLibs.Kernel32, SetLastError = true), SuppressUnmanagedCodeSecurity]
+            public static extern IntPtr OpenProcess(ProcessAccess dwDesiredAccess, bool bInheritHandle, int dwProcessId);
 
             /// <summary>Retrieves a pseudo handle for the current process.</summary>
             /// <returns>The return value is a pseudo handle to the current process.</returns>

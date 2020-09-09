@@ -34,5 +34,4 @@ namespace Z0
         public virtual string Format()
             => Id.Format();
     }
-
 }

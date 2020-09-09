@@ -19,7 +19,7 @@ namespace Z0
             var mask = z.vbroadcast(n, BitMasks.msb(n2,n1,z8));
             var zero = z.vzero<byte>(n);
             var ones = gvec.vones<byte>(n);
-            var blend = VBits.bitblend(zero,ones,mask);
+            var blend = VBits.vblendbits<byte>(zero, ones, mask);
             Claim.veq(blend,mask);
 
         }
@@ -58,7 +58,7 @@ namespace Z0
                 var x = Random.CpuVector(w,t);
                 var y = Random.CpuVector(w,t);
                 var mask = Random.CpuVector(w,t);
-                var blended = VBits.bitblend(x,y,mask);
+                var blended = VBits.vblendbits(x,y,mask);
 
                 for(var i = 0; i<count; i++)
                     Claim.Eq(vcell(blended,i),gmath.blend(vcell(x,i),vcell(y,i), vcell(mask,i)));
@@ -92,7 +92,7 @@ namespace Z0
                 var x = Random.CpuVector(w,t);
                 var y = Random.CpuVector(w,t);
                 var m = Random.CpuVector(w,t);
-                var r = VBits.bitblend(x,y,m);
+                var r = VBits.vblendbits(x,y,m);
 
                 for(var i = 0; i<count; i++)
                     Claim.Eq(vcell(r,i),gmath.blend(vcell(x,i),vcell(y,i), vcell(m,i)));

@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse41;
-        
+
     using static Konst;
-    
+
     partial struct z
     {
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<int> vblend(Vector256<int> x, Vector256<int> y, [Imm] Blend8x32 spec)        
+        public static Vector256<int> vblend(Vector256<int> x, Vector256<int> y, [Imm] Blend8x32 spec)
             => Blend(x, y, (byte)spec);
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<uint> vblend(Vector256<uint> x, Vector256<uint> y, [Imm] Blend8x32 spec)        
+        public static Vector256<uint> vblend(Vector256<uint> x, Vector256<uint> y, [Imm] Blend8x32 spec)
             => Blend(x, y, (byte)spec);
     }
 }

@@ -15,7 +15,7 @@ namespace Z0.Dac
 
     using Z0.Image;
     using Z0.MS;
-    
+
     using static MS.COMHelper;
     using static DacTargetDelegates;
 
@@ -24,17 +24,17 @@ namespace Z0.Dac
         public const ulong MagicCallbackConstant = 0x43;
 
         static readonly Guid IID_IDacDataTarget = new Guid("3E11CCEE-D08B-43e5-AF01-32717A64DA03");
-        
+
         static readonly Guid IID_IMetadataLocator = new Guid("aa8fa804-bc05-4642-b2c5-c353ed22fc63");
 
         readonly IProcessDataReader _dataReader;
-        
+
         readonly ProcessModuleInfo[] _modules;
 
         Action? _callback;
-        
+
         volatile int _callbackContext;
-        
+
         uint? _nextThreadId;
 
         ulong? _nextTLSValue;
@@ -42,10 +42,10 @@ namespace Z0.Dac
         public readonly IntPtr IDacDataTarget;
 
         readonly ProcessDataTarget _dataTarget;
-        
+
         readonly IBinaryLocator Locator;
 
-        public IUnknownVTable IUnknown 
+        public IUnknownVTable IUnknown
             => throw new NotImplementedException();
 
         public int AddRef()
@@ -103,23 +103,23 @@ namespace Z0.Dac
             builder.Complete();
         }
 
-        public void EnterMagicCallbackContext() 
+        public void EnterMagicCallbackContext()
             => Interlocked.Increment(ref _callbackContext);
 
-        public void ExitMagicCallbackContext() 
+        public void ExitMagicCallbackContext()
             => Interlocked.Decrement(ref _callbackContext);
 
-        public void SetMagicCallback(Action flushCallback) 
+        public void SetMagicCallback(Action flushCallback)
             => _callback = flushCallback;
 
         public int GetMachineType(IntPtr self, out IMAGE_FILE_MACHINE machineType)
         {
             machineType = _dataReader.Architecture switch
             {
-                MS.Architecture.Amd64 => IMAGE_FILE_MACHINE.AMD64,
-                MS.Architecture.X86 => IMAGE_FILE_MACHINE.I386,
-                MS.Architecture.Arm => IMAGE_FILE_MACHINE.THUMB2,
-                MS.Architecture.Arm64 => IMAGE_FILE_MACHINE.ARM64,
+                Architecture.Amd64 => IMAGE_FILE_MACHINE.AMD64,
+                Architecture.X86 => IMAGE_FILE_MACHINE.I386,
+                Architecture.Arm => IMAGE_FILE_MACHINE.THUMB2,
+                Architecture.Arm64 => IMAGE_FILE_MACHINE.ARM64,
                 _ => IMAGE_FILE_MACHINE.UNKNOWN,
             };
             return S_OK;
@@ -213,7 +213,7 @@ namespace Z0.Dac
                     return E_FAIL;
                 }
 
-                
+
                 var peimage = Images.adapter(filePath);
                 lock (peimage)
                 {

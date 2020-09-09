@@ -28,7 +28,7 @@ namespace Z0
         WfStepId StepId => Step.Id;
 
         [MethodImpl(Inline)]
-        internal ProcessPartFiles(IWfShell wf, IAsmContext asm, CorrelationToken ct)
+        public ProcessPartFiles(IWfShell wf, IAsmContext asm, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

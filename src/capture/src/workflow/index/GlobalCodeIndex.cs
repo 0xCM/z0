@@ -81,7 +81,7 @@ namespace Z0
             => Encoded.index(id, HostCode[id]);
 
         [MethodImpl(Inline)]
-        public PartCodeIndex CodeSet(PartId id)
+        public X86PartMembers CodeSet(PartId id)
             => Encoded.index(id, Hosts.Map(CodeSet));
 
         public X86ApiCode this[MemoryAddress location]
@@ -96,7 +96,7 @@ namespace Z0
             get => CodeSet(id);
         }
 
-        public PartCodeIndex this[PartId id]
+        public X86PartMembers this[PartId id]
         {
             [MethodImpl(Inline)]
             get => CodeSet(id);

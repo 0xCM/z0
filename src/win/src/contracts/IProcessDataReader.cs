@@ -4,10 +4,12 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.MS
+namespace Z0
 {
     using System;
     using System.Collections.Generic;
+
+    using Z0.MS;
 
     /// <summary>
     /// An interface for reading data out of the target process.

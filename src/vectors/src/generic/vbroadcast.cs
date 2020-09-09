@@ -51,13 +51,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(V0d.vbroadcast(w, uint8(src)));
+                return generic<T>(z.vbroadcast(w, uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(V0d.vbroadcast(w, uint16(src)));
+                return generic<T>(z.vbroadcast(w, uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(V0d.vbroadcast(w, uint32(src)));
+                return generic<T>(z.vbroadcast(w, uint32(src)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(V0d.vbroadcast(w, uint64(src)));
+                return generic<T>(z.vbroadcast(w, uint64(src)));
             else
                 return vbroadcast_i(w,src);
         }
@@ -67,13 +67,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(V0d.vbroadcast(w, int8(src)));
+                return generic<T>(z.vbroadcast(w, int8(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(V0d.vbroadcast(w, int16(src)));
+                return generic<T>(z.vbroadcast(w, int16(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(V0d.vbroadcast(w, int32(src)));
+                return generic<T>(z.vbroadcast(w, int32(src)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(V0d.vbroadcast(w, int64(src)));
+                return generic<T>(z.vbroadcast(w, int64(src)));
             else
                 return vbroadcast_f(w,src);
         }
@@ -83,10 +83,10 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return  generic<T>(V0d.vbroadcast(w, float32(src)));
+                return  generic<T>(z.vbroadcast(w, float32(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(V0d.vbroadcast(w, float64(src)));
-            else 
+                return generic<T>(z.vbroadcast(w, float64(src)));
+            else
                 throw no<T>();
         }
 
@@ -95,13 +95,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(V0d.vbroadcast(w, uint8(src)));
+                return generic<T>(z.vbroadcast(w, uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(V0d.vbroadcast(w, uint16(src)));
+                return generic<T>(z.vbroadcast(w, uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(V0d.vbroadcast(w, uint32(src)));
+                return generic<T>(z.vbroadcast(w, uint32(src)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(V0d.vbroadcast(w, uint64(src)));
+                return generic<T>(z.vbroadcast(w, uint64(src)));
             else
                 return vbroadcast_i(w,src);
         }
@@ -111,13 +111,13 @@ namespace Z0
             where T : unmanaged
         {
              if(typeof(T) == typeof(sbyte))
-                return generic<T>(V0d.vbroadcast(w, int8(src)));
+                return generic<T>(z.vbroadcast(w, int8(src)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(V0d.vbroadcast(w, int16(src)));
+                return generic<T>(z.vbroadcast(w, int16(src)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(V0d.vbroadcast(w, int32(src)));
+                return generic<T>(z.vbroadcast(w, int32(src)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(V0d.vbroadcast(w, int64(src)));
+                return generic<T>(z.vbroadcast(w, int64(src)));
             else
                 return vbroadcast_f(w,src);
        }
@@ -127,10 +127,10 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(V0d.vbroadcast(w, float32(src)));
+                return generic<T>(z.vbroadcast(w, float32(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(V0d.vbroadcast(w, float64(src)));
-            else 
+                return generic<T>(z.vbroadcast(w, float64(src)));
+            else
                 throw no<T>();
         }
     }

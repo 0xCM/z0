@@ -5,25 +5,25 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Collections.Generic;
     using System.Reflection;
     using System.Linq;
-    
+
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse2;
-    
+
     using static Konst;
-    
+
     public static class VMethods
     {
         public static VMethodSearch Search => default(VMethodSearch);
-                
+
         public static MethodInfo vbroadcast<W>(this VMethodSearch search, Type tCell, W w = default)
-            where W : unmanaged, ITypeWidth        
+            where W : unmanaged, ITypeWidth
             => typeof(V0d).DeclaredMethods()
-                    .WithName(nameof(V0d.vbroadcast))
+                    .WithName(nameof(z.vbroadcast))
                     .WithParameterTypes(w.GetType(), tCell)
                     .WithParameterCount(2)
                     .Single();
@@ -35,11 +35,11 @@ namespace Z0
     }
 
     static class VImmTestCases
-    {           
-        public static MethodInfo[] V128UnaryShifts 
+    {
+        public static MethodInfo[] V128UnaryShifts
             => typeof(VImmTestCases).DeclaredStaticMethods().WithNameLike("vsll_128");
 
-        public static MethodInfo[] V256UnaryShifts 
+        public static MethodInfo[] V256UnaryShifts
             => typeof(VImmTestCases).DeclaredStaticMethods().WithNameLike("vsll_256");
 
         [MethodImpl(Inline)]
@@ -88,6 +88,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Vector256<ulong> vsll_256x64u(Vector256<ulong> src, [Imm] byte count)
-            => ShiftLeftLogical(src, (byte)count); 
+            => ShiftLeftLogical(src, (byte)count);
     }
 }

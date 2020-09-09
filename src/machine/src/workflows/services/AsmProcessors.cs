@@ -47,37 +47,6 @@ namespace Z0
         public static PartAsmProcessor parts(IWfShell wf)
             => new PartAsmProcessor(wf);
 
-        /// <summary>
-        /// Creates a command-parametric generic process stated
-        /// </summary>
-        /// <param name="initial">The initial state</param>
-        /// <param name="cmd">A command representative, used for type inference</param>
-        /// <typeparam name="C">The command type</typeparam>
-        /// <typeparam name="S">The state type</typeparam>
-        [MethodImpl(Inline)]
-        public static AsmWorkerState<C,S> state<C,S>(S initial, C cmd = default)
-            where C : unmanaged, IAsmOperands<C>
-                => new AsmWorkerState<C,S>(initial);
-
-        /// <summary>
-        /// Creates a processor parametric in both command and state
-        /// </summary>
-        /// <param name="cmd">A command representative, used for type inference</param>
-        /// <param name="state">A state representative, used for type inference</param>
-        /// <typeparam name="C">The command type</typeparam>
-        /// <typeparam name="S">The state type</typeparam>
-        [MethodImpl(Inline)]
-        public static AsmWorker<C,S> worker<C,S>(C cmd = default, S state = default)
-            where C : unmanaged, IAsmOperands<C>
-            where S : IAsmWorkerState<C,S>
-                => default;
-
-        [MethodImpl(Inline)]
-        public static AsmWorker<P,C,S> worker<P,C,S>(P p = default, C cmd = default, S state = default)
-            where P : unmanaged, IAsmWorker
-            where C : unmanaged, IAsmOperands<C>
-            where S : IAsmWorkerState<C,S>
-                => default;
         static void OnStep(Vector128<byte> src)
         {
 

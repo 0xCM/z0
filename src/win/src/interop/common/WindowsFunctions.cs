@@ -13,9 +13,12 @@ namespace Z0.MS
 
     using Z0.Image;
 
+    using static Windows.Kernel32;
+
+
     public unsafe readonly struct WindowsFunctions
     {
-        public bool IsEqualFileVersion(FS.FilePath file, DllVersion version)
+        public bool Matches(FS.FilePath file, DllVersion version)
         {
             if (!GetFileVersion(file.Name, out int major, out int minor, out int revision, out int patch))
                 return false;
@@ -25,7 +28,7 @@ namespace Z0.MS
 
         public static bool IsProcessRunning(int processId)
         {
-            IntPtr handle = Windows.Kernel32.OpenProcess(WindowsNativeMethods.PROCESS_QUERY_INFORMATION, false, processId);
+            IntPtr handle = Windows.Kernel32.OpenProcess(ProcessAccess.PROCESS_QUERY_INFORMATION, false, processId);
             if (handle != IntPtr.Zero)
             {
                 Windows.Kernel32.CloseHandle(handle);
@@ -39,7 +42,7 @@ namespace Z0.MS
                 int size;
                 for (;;)
                 {
-                    Windows.PsApi.EnumProcesses(processIds, processIds.Length * sizeof(int), out size);
+                    Windows.ProcessApi.EnumProcesses(processIds, processIds.Length * sizeof(int), out size);
                     if (size == processIds.Length * sizeof(int))
                     {
                         ArrayPool<int>.Shared.Return(processIds);

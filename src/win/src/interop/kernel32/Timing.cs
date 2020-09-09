@@ -77,7 +77,6 @@ namespace Z0
             /// </param>
             [DllImport(WinLibs.Kernel32), SuppressUnmanagedCodeSecurity]
             public static extern unsafe void GetSystemTime(SYSTEMTIME* lpSystemTime);
-
         }
     }
 }

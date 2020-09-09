@@ -32,7 +32,7 @@ namespace Z0.Asm
             ArchiveRoot = root;
             AsmFormatter = formatter;
             HostArchive = HostCaptureArchive.create(root, host);
-            CilFormatter =  AsmCore.Services.CilFormatter();
+            CilFormatter =  AsmServices.Services.CilFormatter();
         }
 
         public Option<FilePath> SaveAsm(AsmRoutine[] src, bool append)

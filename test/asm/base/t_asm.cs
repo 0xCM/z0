@@ -43,7 +43,7 @@ namespace Z0.Asm
         protected IAsmTextWriter AsmWriter([Caller] string caller = null)
         {
             var dst = TargetArchive.AsmPath(FileName.define($"{caller}", FileExtensions.Asm));
-            return AsmCore.Services.AsmWriter(dst, AsmFormatSpec.DefaultStreamFormat);
+            return AsmServices.Services.AsmWriter(dst, AsmFormatSpec.DefaultStreamFormat);
         }
 
         protected ApiHex[] ReadHostBits(ApiHostUri host)

@@ -31,11 +31,11 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, byte offset, byte count) 
-                => VBits.bitclear(x,offset,count);
+            public Vector128<T> Invoke(Vector128<T> x, byte offset, byte count)
+                => VBits.vbitclear(x,offset,count);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, byte b, byte c) 
+            public T Invoke(T a, byte b, byte c)
                 => gbits.clear(a, b, c);
         }
 
@@ -44,11 +44,11 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, byte offset, byte count) 
-                => VBits.bitclear(x,offset, count);
+            public Vector256<T> Invoke(Vector256<T> x, byte offset, byte count)
+                => VBits.vbitclear(x,offset, count);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, byte b, byte c) 
+            public T Invoke(T a, byte b, byte c)
                 => gbits.clear(a, b, c);
         }
     }

@@ -133,7 +133,7 @@ namespace Z0
                 select (ApiHost)h;
 
         HostAsmArchiver Archive(IApiHost host)
-            => AsmCore.Services.HostArchiver(host.Uri, Formatter, CodeArchive.ArchiveRoot);
+            => AsmServices.Services.HostArchiver(host.Uri, Formatter, CodeArchive.ArchiveRoot);
 
         void EmitUnrefined(in CaptureExchange exchange, Imm8R[] imm8, params PartId[] parts)
         {

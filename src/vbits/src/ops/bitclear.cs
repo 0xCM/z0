@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="count">The number of bits to disable</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Vector128<T> bitclear<T>(Vector128<T> src, byte start, byte count)
+        public static Vector128<T> vbitclear<T>(Vector128<T> src, byte start, byte count)
             where T : unmanaged
         {
             var n = n128;
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="count">The number of bits to disable</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline),Op, Closures(Integers)]
-        public static Vector256<T> bitclear<T>(Vector256<T> src, byte start, byte count)
+        public static Vector256<T> vbitclear<T>(Vector256<T> src, byte start, byte count)
             where T : unmanaged
         {
             var n = n256;

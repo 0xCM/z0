@@ -17,11 +17,13 @@ namespace Z0
     using Z0.Dac;
     using Z0.MS;
 
-    public unsafe class ProcessDataReader : IProcessDataReader
+    using static Windows.Kernel32;
+
+    public unsafe struct ProcessDataReader : IProcessDataReader
     {
         static WindowsFunctions WinFx => default;
 
-        bool _disposed = false;
+        bool _disposed;
 
         readonly int _originalPid;
 
@@ -38,7 +40,9 @@ namespace Z0
         const int PROCESS_QUERY_INFORMATION = 0x0400;
 
         public ProcessDataReader(int processId, bool createSnapshot)
+            : this()
         {
+
             if (createSnapshot)
             {
                 _originalPid = processId;
@@ -60,7 +64,7 @@ namespace Z0
                 _pid = processId;
             }
 
-            _process = Windows.Kernel32.OpenProcess(PROCESS_VM_READ | PROCESS_QUERY_INFORMATION, false, _pid);
+            _process = Windows.Kernel32.OpenProcess(ProcessAccess.PROCESS_VM_READ | ProcessAccess.PROCESS_QUERY_INFORMATION, false, _pid);
 
             if (_process == IntPtr.Zero)
             {
@@ -110,11 +114,6 @@ namespace Z0
         {
             Dispose(true);
             GC.SuppressFinalize(this);
-        }
-
-        ~ProcessDataReader()
-        {
-            Dispose(false);
         }
 
         public uint ProcessId => (uint)_pid;

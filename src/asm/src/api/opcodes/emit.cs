@@ -31,7 +31,6 @@ namespace Z0.Asm
             {
                 ref readonly var record = ref skip(records,i);
                 writer.WriteLine(emit(record,formatter).Render());
-                //writer.WriteLine(format(record, formatter));
             }
         }
 

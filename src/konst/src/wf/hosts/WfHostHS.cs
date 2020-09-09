@@ -12,7 +12,6 @@ namespace Z0
 
     public abstract class WfHost<H,S> : WfHost<H>, IWfHost<H,S>
         where H : WfHost<H,S>, new()
-        where S : struct
     {
         [MethodImpl(Inline)]
         protected WfHost()
@@ -22,8 +21,8 @@ namespace Z0
         }
 
         public override void Run(IWfShell shell)
-            => Run((IWfShell<S>)shell, new S());
+            => throw new InvalidOperationException();
 
-        public virtual void Run(IWfShell shell, in S state) {}
+        public abstract void Run(IWfShell wf, S state);
     }
 }

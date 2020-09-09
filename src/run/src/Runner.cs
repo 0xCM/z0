@@ -271,7 +271,6 @@ namespace Z0
                 using var step = new CheckBitMasks(Wf, Random, dst);
                 step.Run();
             }
-
         }
 
 

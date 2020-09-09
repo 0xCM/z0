@@ -32,7 +32,8 @@ namespace Z0
         public void Process()
         {
             var processor = AsmProcessors.create(Wf);
-            for(var j=0; j<Source.Length; j++)
+            var count = Source.Length;
+            for(var j=0; j<count; j++)
             {
                 ref readonly var member = ref Source[j];
                 for(var k=0; k<member.Length; k++)

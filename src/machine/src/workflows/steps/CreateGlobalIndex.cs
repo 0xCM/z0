@@ -52,7 +52,7 @@ namespace Z0
             {
                 var files = SourceFiles.ParseFiles.View;
                 var count = files.Length;
-                var builder = new BuildGlobalCodeIndex(Wf);
+                var builder = new EmitCaptureIndex(Wf);
 
                 Wf.Status(StepId, text.format("Indexing {0} datasets",count));
 
@@ -91,14 +91,14 @@ namespace Z0
             Wf.Ran(StepId);
         }
 
-        void Index(ReadOnlySpan<MemberParseRecord> src, BuildGlobalCodeIndex dst)
+        void Index(ReadOnlySpan<MemberParseRecord> src, EmitCaptureIndex dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
                 Index(skip(src,i), dst);
         }
 
-        void Index(in MemberParseRecord src, BuildGlobalCodeIndex dst)
+        void Index(in MemberParseRecord src, EmitCaptureIndex dst)
         {
             if(src.Address.IsEmpty)
                 return;

@@ -9,15 +9,15 @@ namespace Z0.MS
     using System;
     using System.Runtime.InteropServices;
     using System.Reflection;
-    
+
     using Z0.Image;
 
-    using K = Z0.Image.HandleKind;
+    using K = Z0.Image.MetadataHandleKind;
 
     [StructLayout(LayoutKind.Sequential, Size = 4)]
     public readonly struct EventDefinitionHandle
     {
-        public HandleKind Kind => K.EventDefinition;
+        public MetadataHandleKind Kind => K.EventDefinition;
     }
 
 }

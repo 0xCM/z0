@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
+
     [ApiHost]
     public readonly partial struct StringRefs
     {
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="length">The size, in bytes, of the segment</param>
         [MethodImpl(Inline)]
         public StringRef @string(MemoryAddress address, uint length)
-            => new StringRef(address, length); 
+            => new StringRef(address, length);
 
         /// <summary>
         /// Creates a <see cref='StringRef'/> from a specified <see cref='SegRef'/>
@@ -58,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static StringRefs<N> refs<N>(N n, params StringRef[] src)
             where N : unmanaged, ITypeNat
-                => new StringRefs<N>(src);    
+                => new StringRefs<N>(src);
 
         [MethodImpl(Inline), Op]
         public static void refs(ReadOnlySpan<string> src, Span<StringRef> dst)
@@ -73,10 +73,10 @@ namespace Z0
             var dst = sys.alloc<StringRef>(src.Length);
             refs(src,dst);
             return dst;
-        }            
+        }
 
         /// <summary>
-        /// Computes the number of characters rerpresented by a <see cref='StringRef'/>
+        /// Computes the number of characters represented by a <see cref='StringRef'/>
         /// </summary>
         /// <param name="src">The source reference</param>
         [MethodImpl(Inline), Op]
@@ -89,7 +89,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         static ulong hi(StringRef src)
-            => z.vcell(src.Location, 1);        
+            => z.vcell(src.Location, 1);
 
         [MethodImpl(Inline), Op]
         public static unsafe string format(StringRef src)
@@ -100,16 +100,16 @@ namespace Z0
             var dst = text.build();
             var src = span(refs);
             var count = src.Length;
-            
+
             for(var i=0u; i<count; i++)
             {
                 var s = z.skip(src,i).Text;
                 dst.Append(s);
                 if(i != count - 1)
-                    dst.Append(delimiter);                    
+                    dst.Append(delimiter);
             }
-            
+
             return dst.ToString();
-        }        
+        }
     }
 }

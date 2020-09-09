@@ -39,6 +39,15 @@ namespace Z0
             => new Outcome<T>(true, data);
 
         [MethodImpl(Inline)]
+        public static implicit operator Outcome<T>((bool ok, T data) src)
+            => new Outcome<T>(src.ok, src.data);
+
+
+        [MethodImpl(Inline)]
+        public static implicit operator Outcome<T>((bool ok, T data, ulong code) src)
+            => new Outcome<T>(src.ok, src.data, src.code);
+
+        [MethodImpl(Inline)]
         public static implicit operator Outcome<T>(Exception error)
             => new Outcome<T>(error);
 

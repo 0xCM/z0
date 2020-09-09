@@ -4,19 +4,17 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.MS
+namespace Z0.Image
 {
     using System;
     using System.Runtime.InteropServices;
-    using System.Reflection;
-    
-    using Z0.Image;
 
-    using K = Z0.Image.HandleKind;
 
-    [Table, StructLayout(LayoutKind.Sequential, Size = 4)]
+    using K = Z0.Image.MetadataHandleKind;
+
+    [StructLayout(LayoutKind.Sequential, Size = 4)]
     public readonly struct MethodDefinitionHandle
     {
-        public HandleKind Kind => K.MethodDefinition;
-    }    
+        public MetadataHandleKind Kind => K.MethodDefinition;
+    }
 }

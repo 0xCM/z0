@@ -36,8 +36,7 @@ namespace Z0
 
     public interface IWfHost<H,S> : IWfHost<H>
         where H : IWfHost<H,S>, new()
-        where S : struct
     {
-        void Run(IWfShell shell, in S state);
+        void Run(IWfShell wf, S state);
     }
 }

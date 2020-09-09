@@ -41,7 +41,7 @@ namespace Z0
 
         const string Sep = "| ";
 
-        static string format(ProjectDocRecord src)
+        static string format(SummaryComment src)
         {
             return text.concat(src.Kind.ToString().PadRight(12), Sep, src.Identifer.PadRight(70), Sep, src.Summary);
         }
@@ -60,11 +60,11 @@ namespace Z0
             var docs = Wf.ResourceRoot + FolderName.Define("docs");
             docs.Clear();
             var src = collect(Wf.Modules.Files);
-            var dst = new Dictionary<PartId, Dictionary<string,ProjectDocRecord>>();
+            var dst = new Dictionary<PartId, Dictionary<string,SummaryComment>>();
             foreach(var part in src.Keys)
             {
                 var path = docs + FileName.define(part.Format(), FileExtensions.Csv);
-                var partDocs = new Dictionary<string, ProjectDocRecord>();
+                var partDocs = new Dictionary<string, SummaryComment>();
                 dst[part] = partDocs;
                 using var writer = path.Writer();
 
@@ -123,7 +123,7 @@ namespace Z0
             return index;
         }
 
-        static ParseResult<ProjectDocRecord> parse(string key, string value)
+        static ParseResult<SummaryComment> parse(string key, string value)
         {
             var components = key.SplitClean(Chars.Colon);
             if(components.Length == 2 && components[0].Length == 1)
@@ -131,10 +131,10 @@ namespace Z0
                 var k = kind(components[0][0]);
                 var name = components[1];
                 var summary = text.content(value, "<summary>", "</summary>").RemoveAny((char)AsciControl.CR, (char)AsciControl.NL).Trim();
-                return ParseResult.Success(key, new ProjectDocRecord(k, name, summary));
+                return ParseResult.Success(key, new SummaryComment(k, name, summary));
             }
             else
-                return ParseResult.Fail<ProjectDocRecord>(key);
+                return ParseResult.Fail<SummaryComment>(key);
         }
     }
 }

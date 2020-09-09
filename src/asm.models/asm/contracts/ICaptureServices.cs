@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface ICaptureServices : IAsmCore
+    public interface ICaptureServices : IAsmServices
     {
         ICaptureCore CaptureCore {get;}
 
