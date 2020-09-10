@@ -16,7 +16,7 @@ namespace Z0.Asm
         public static AsmFxCode FxCode(Iced.Instruction src)
         {
             var opcode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
-            return new AsmFxCode(opcode.ToOpCodeString(), opcode.ToInstructionString());
+            return new AsmFxCode(opcode.ToInstructionString(), opcode.ToOpCodeString());
         }
     }
 }

@@ -8,14 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
-    
+
     using static Konst;
     using static Asm.OpKind;
-        
+
     partial struct asm
-    {        
+    {
         [MethodImpl(Inline), Op]
-        public bool isMem(in Instruction src, int index)
+        public bool isMem(in Instruction src, byte index)
         {
             switch(kind(src,index))
             {
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The operand classifier</param>
         [MethodImpl(Inline), Op]
-        public static  bool isMem(OpKind src)            
+        public static  bool isMem(OpKind src)
             => isMemDirect(src) || isMem64(src) || isSegEs(src) || isSegBase(src);
     }
 }

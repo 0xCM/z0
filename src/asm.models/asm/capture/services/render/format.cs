@@ -85,8 +85,8 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static string format(AsmFxCode src, byte[] encoded, string sep)
             =>  text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}",
-                src.Expression, sep,
-                src.OpCode, sep,
+                src.Pattern, sep,
+                src.Code, sep,
                 encoded.Length, sep,
                 encoded.FormatHexBytes(Space,true,false)
                 );
@@ -98,7 +98,6 @@ namespace Z0.Asm
             var absolute = @base + (MemoryAddress)src.Offset;
             description.Append(text.concat(label(src.Offset), src.Formatted.PadRight(config.InstructionPad, Space)));
             description.Append(comment(format(src.Spec, src.Encoded, config.FieldDelimiter)));
-            //description.Append(text.concat(config.FieldDelimiter, src.Encoded.Length, config.FieldDelimiter, src.Encoded.FormatHexBytes(Space, true, false)));
             return description.ToString();
         }
 

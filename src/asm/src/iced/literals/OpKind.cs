@@ -2,12 +2,12 @@
 // Taken from Iced:https://github.com/0xd4d/iced
 // License: See the accompanying license file
 //-----------------------------------------------------------------------------
-namespace Z0.Asm 
+namespace Z0.Asm
 {
 	/// <summary>
 	/// Instruction operand kind
 	/// </summary>
-	public enum OpKind 
+	public enum OpKind : byte
 	{
 		/// <summary>
 		/// A register (<see cref="Intel.Register"/>).
@@ -140,7 +140,7 @@ namespace Z0.Asm
 
 		/// <summary>
 		/// Memory operand.
-		/// 
+		///
 		/// This operand kind uses <see cref="Instruction.MemoryDisplSize"/>, <see cref="Instruction.MemorySize"/>,
 		/// <see cref="Instruction.MemoryIndexScale"/>, <see cref="Instruction.MemoryDisplacement"/>,
 		/// <see cref="Instruction.MemoryBase"/>, <see cref="Instruction.MemoryIndex"/>, <see cref="Instruction.MemorySegment"/>,

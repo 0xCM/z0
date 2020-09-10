@@ -16,6 +16,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static IceRegister memIdx(Instruction src, int index)
-            => kind(src, index) == Memory ? src.MemoryIndex : 0;
+            => kind(src, (byte)index) == Memory ? src.MemoryIndex : 0;
     }
 }

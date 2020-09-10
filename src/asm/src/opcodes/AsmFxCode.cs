@@ -14,20 +14,20 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmFxCode : ITextual
     {
-        public readonly string Expression;
+        public readonly string Pattern;
 
-        public readonly string OpCode;
-
+        public readonly string Code;
 
         [MethodImpl(Inline)]
-        public AsmFxCode(string opcode, string expr)
+        public AsmFxCode(string pattern, string opcode)
         {
-            Expression = expr;
-            OpCode = opcode.Replace("o32 ", EmptyString);
+            Pattern = pattern;
+            Code = opcode.Replace("o32 ", EmptyString);
         }
 
+        [MethodImpl(Inline)]
         public string Format()
-            => String.Concat(Expression, SpacePipe, OpCode);
+            => String.Concat(Pattern, SpacePipe, Code);
 
         public override string ToString()
             => Format();

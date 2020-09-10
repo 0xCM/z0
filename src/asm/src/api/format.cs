@@ -18,7 +18,6 @@ namespace Z0
         public static string format(in AsmRecord src, char delimiter = FieldDelimiter)
             => format(src, Formatters.dataset<F>(delimiter)).Render();
 
-        [Op]
         public static string format(in AsmCall src)
         {
             var site = asm.offset(src);
@@ -30,7 +29,6 @@ namespace Z0
             return $"{client_field} | {target} | {offset} | {actual} | {delta}";
         }
 
-        [Op]
         public static ref readonly DatasetFormatter<AsmRecordField> format(in AsmRecord src, in DatasetFormatter<AsmRecordField> dst)
         {
             dst.Delimit(F.Sequence, src.Sequence);

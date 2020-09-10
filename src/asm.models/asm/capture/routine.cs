@@ -34,8 +34,7 @@ namespace Z0
                 var instruction = src[i];
                 if(check)
                     CheckInstructionSize(instruction, offset, src);
-
-                info[i] = asm.summarize(@base, instruction,src.Encoded.Encoded, instruction.FormattedInstruction, offset);
+                info[i] = asm.summarize(@base, instruction, src.Encoded.Encoded, instruction.FormattedInstruction, offset);
                 offset += (ushort)instruction.ByteLength;
             }
 

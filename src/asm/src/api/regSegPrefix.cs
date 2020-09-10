@@ -17,7 +17,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static IceRegister regSegPrefix(Instruction src, int index)
         {
-            switch(kind(src,index))
+            switch(kind(src,(byte)index))
             {
                 case Memory:
                 case Memory64:

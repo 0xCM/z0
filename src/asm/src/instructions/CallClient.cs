@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// The clients's operation identifier
         /// </summary>
-        public string Id;
+        public StringRef Id;
 
         /// <summary>
         /// The clients's base address
@@ -35,8 +35,9 @@ namespace Z0
             Base = @base;
         }
 
+        [MethodImpl(Inline)]
         public string Format()
-            => text.concat(Base.Format(), Chars.Colon, Chars.Space, z.ifblank(Id, "client"));
+            => text.concat(Base.Format(), Chars.Colon, Chars.Space, Id.Format());
 
         public override string ToString()
             => Format();

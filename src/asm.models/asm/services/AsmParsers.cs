@@ -25,17 +25,17 @@ namespace Z0.Asm
             => Enums.Parse(src, Mnemonic.INVALID);
 
         [MethodImpl(Inline), Op]
-        public static ParseResult<AsmStatementEncoding> statement(string line, ref uint seq)
+        public static ParseResult<AsmStatementEncoding> statement(string src, ref uint seq)
         {
-            var fail = ParseResult<AsmStatementEncoding>.Fail(line);
+            var fail = ParseResult<AsmStatementEncoding>.Fail(src);
 
-            if(IsBlankLine(line))
+            if(IsBlankLine(src))
                 return fail;
 
-            if(IsCommentLine(line))
+            if(IsCommentLine(src))
                 return fail;
 
-            var parts = line.SplitClean(BodySep);
+            var parts = src.SplitClean(BodySep);
             if(parts.Length != 2)
                 return fail;
 
@@ -50,13 +50,13 @@ namespace Z0.Asm
             if(descriptors.Length !=3)
                 return fail;
 
-            var instruction = descriptors[0];
-            var opcode = descriptors[1];
+            var pattern = descriptors[0];
+            var code = descriptors[1];
             var encoded = ParseEncoded(descriptors[2]);
             if(encoded.Failed)
                 return fail;
 
-            return ParseResult.Success(line, new AsmStatementEncoding(seq++, statement.Value, new AsmFxCode(opcode, instruction), encoded.Value));
+            return ParseResult.Success(src, new AsmStatementEncoding(seq++, statement.Value, new AsmFxCode(pattern, code), encoded.Value));
         }
 
         [MethodImpl(Inline), Nlz]

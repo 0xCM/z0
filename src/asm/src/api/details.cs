@@ -19,7 +19,7 @@ namespace Z0
         [Op]
         public static MemInfo memInfo(Instruction src, int index)
         {
-            var k = kind(src, index);
+            var k = kind(src, (byte)index);
 
             if(isMem(k))
             {

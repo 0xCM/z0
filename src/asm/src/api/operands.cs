@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Z0.Asm;
-    
+
     using static Konst;
     using static z;
-        
+
     partial struct asm
-    {   
+    {
         /// <summary>
         /// Extracts operand instruction data
         /// </summary>
@@ -21,10 +21,10 @@ namespace Z0
         /// <param name="@base">The base address</param>
         [MethodImpl(Inline), Op]
         public static AsmOperandInfo[] operands(MemoryAddress @base, in Instruction fx)
-        {            
+        {
             var count = fx.OpCount;
-            var buffer = tspan<AsmOperandInfo>(count);
-            var dst = buffer.Edit;
+            var buffer = alloc<AsmOperandInfo>(count);
+            var dst = span(buffer);
             for(byte j=0; j<count; j++)
                 seek(dst, j) = operand(@base, fx, j);
             return buffer;

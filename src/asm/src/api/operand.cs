@@ -11,14 +11,14 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
+
     partial struct asm
     {
         [MethodImpl(Inline), Op]
         public static AsmOperandInfo operand(MemoryAddress @base, in Instruction fx, byte index)
         {
             var dst = new AsmOperandInfo();
-            dst.Index =index;
+            dst.Index = index;
             dst.Kind = kind(fx, index);
             dst.Branch = isBranch(dst.Kind) ? branch(@base, fx, branchTarget(fx,index)) : default;
             return dst;

@@ -145,7 +145,7 @@ namespace Z0
 
             var opcount = src.Instruction.OpCount;
             var summaries = Root.list<string>();
-            for(var i =0; i<opcount; i++)
+            for(byte i =0; i<opcount; i++)
             {
                 var kind = asm.kind(fx, i);
                 var col01 = i.ToString().PadLeft(SeqDigitPad,'0').PadRight(Col0Pad);

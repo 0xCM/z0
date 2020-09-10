@@ -13,11 +13,7 @@ namespace Z0
 
     partial struct asm
     {
-        [MethodImpl(Inline), Op]
-        public static AsmFxSummary summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string formatted, ushort offset)
-            => new AsmFxSummary(@base, (ushort)offset,  formatted,  src.InstructionCode, operands(@base, src),  encoded.Slice(offset, src.ByteLength).ToArray());
 
-        [MethodImpl(Inline), Op]
         public static AsmFxSummary Summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string formatted, ushort offset)
             => summarize(@base, src, encoded, formatted, offset);
 
@@ -25,7 +21,6 @@ namespace Z0
         /// Describes the instructions that comprise an instruction list
         /// </summary>
         /// <param name="src">The source instruction list</param>
-        [Op]
         public static ReadOnlySpan<AsmFxSummary> summarize(AsmFxList src)
         {
             var dst = new AsmFxSummary[src.Length];
@@ -41,11 +36,13 @@ namespace Z0
             return dst;
         }
 
+        public static AsmFxSummary summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string formatted, ushort offset)
+            => new AsmFxSummary(@base, (ushort)offset,  formatted,  src.InstructionCode, operands(@base, src),  encoded.Slice(offset, src.ByteLength).ToArray());
+
         /// <summary>
         /// Describes the instructions that comprise a function
         /// </summary>
         /// <param name="src">The source function</param>
-        [Op]
         public static ReadOnlySpan<AsmFxSummary> summarize(in AsmRoutine src)
         {
             var dst = new AsmFxSummary[src.InstructionCount];

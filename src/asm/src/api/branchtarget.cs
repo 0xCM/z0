@@ -15,7 +15,7 @@ namespace Z0
     partial struct asm
     {
         [Op]
-        public static AsmBranchTarget branchTarget(Instruction src, byte index)
+        public static AsmBranchTarget branchTarget(in Instruction src, byte index)
         {
             var k = asm.kind(src, index);
             switch(k)
