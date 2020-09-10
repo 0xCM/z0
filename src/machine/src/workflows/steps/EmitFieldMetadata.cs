@@ -77,7 +77,7 @@ namespace Z0
             var count = (uint)src.Length;
 
             var formatter = Table.formatter<F,W>();
-            formatter.EmitHeader();
+            formatter.EmitHeader(true);
             foreach(var record in src)
                 format(record, formatter);
 

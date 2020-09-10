@@ -14,12 +14,12 @@ namespace Z0
    /// <typeparam name="A">The action type</typeparam>
     public class Fsm<E,S,A> : Fsm<E,S>
     {
-        internal Fsm(string Id, IFsmContext context, S GroundState, S EndState,
-                MachineTransition<E,S> Transition, EntryFunction<S,A> Entry, ExitFunction<S,A> Exit)
-            : base(Id, context, GroundState, EndState, Transition)
+        internal Fsm(string Id, IWfShell wf, IPolyrand random, S ground, S end,
+                MachineTransition<E,S> Transition, EntryFunction<S,A> entry, ExitFunction<S,A> exit, ulong? limit = null)
+            : base(Id, wf, random, ground, end, Transition, limit)
         {
-            this.EntryFunc = Entry;
-            this.ExitFunc = Exit;
+            EntryFunc = entry;
+            ExitFunc = exit;
         }
 
         /// <summary>

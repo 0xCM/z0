@@ -20,7 +20,7 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        public IWfConfig Config;
+        public IWfInit Config;
 
         readonly CorrelationToken Ct;
 

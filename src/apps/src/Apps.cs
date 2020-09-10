@@ -30,7 +30,7 @@ namespace Z0
             return context(modules, ShellPaths.Default);
         }
 
-        public static WfConfig configure(IAppContext app, string[] args)
+        public static WfInit init(IAppContext app, string[] args)
         {
             var control = Assembly.GetEntryAssembly();
             var id = control.Id();
@@ -41,16 +41,13 @@ namespace Z0
             var captureOut = FS.dir(app.Paths.LogRoot.Name) + FS.folder("capture/artifacts");
             var captureLog = FS.dir(app.Paths.LogRoot.Name) + FS.folder("capture/logs");
             var dstArchive = new ArchiveConfig(FolderPath.Define(captureOut.Name));
-            var config  = new WfConfig(app, args, src, dstArchive, parts,
+            var config  = new WfInit(app, args, src, dstArchive, parts,
                 app.Paths.ResourceRoot,
                 app.Paths.AppDataRoot,
                 app.Paths.AppLogRoot,
                 settings);
             return config;
         }
-
-        // public static IAppContext context()
-        //     => context(ShellPaths.Default, compose(ApiQuery.parts()), random());
 
         public static IAppContext context(ApiModules src, IShellPaths paths)
             => new AppContext(paths, src.Api, random(), settings(paths), exchange());

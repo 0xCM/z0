@@ -17,7 +17,7 @@ namespace Z0
 
         public IShellContext Shell {get;}
 
-        public WfConfig Config {get;}
+        public WfInit Init {get;}
 
         public ApiModules Modules {get;}
 
@@ -54,14 +54,14 @@ namespace Z0
         public Assembly Control {get;}
 
         [MethodImpl(Inline)]
-        public WfShell(WfConfig config)
+        public WfShell(WfInit config)
         {
-            Config = config;
+            Init = config;
             Id = config.ControlId;
             Ct = correlate(Id);
             WfSink = Flow.log(config);
-            Shell = insist(Config.Shell);
-            Modules = Config.Modules;
+            Shell = insist(Init.Shell);
+            Modules = Init.Modules;
             Api = Modules.Api;
             Parts = Api.Parts;
             Components = Parts.Select(x => x.Owner);
@@ -74,8 +74,8 @@ namespace Z0
             AppDataRoot = Paths.AppDataRoot;
             PartIdentities = Parts.Select(x => x.Id);
             Settings = SettingValues.Load(Paths.AppConfigPath);
-            ResourceRoot = FolderPath.Define(Config.ResDir.Name);
-            IndexRoot = FolderPath.Define(Config.IndexDir.Name);
+            ResourceRoot = FolderPath.Define(Init.ResDir.Name);
+            IndexRoot = FolderPath.Define(Init.IndexDir.Name);
             Broker = new WfBroker(WfSink, Ct);
         }
 

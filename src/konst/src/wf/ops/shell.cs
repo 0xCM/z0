@@ -13,23 +13,8 @@ namespace Z0
 
     partial struct Flow
     {
-        public static IWfShell shell(WfConfig config)
-            => new WfShell(config);
-
-        /// <summary>
-        /// Reifies a <see cref='IWfShell'/> predicated on a controlling assembly and zero or more arguments
-        /// </summary>
-        /// <param name="control">The controlling assembly</param>
-        /// <param name="args">The shell args</param>
-        public static IWfShell shell(Assembly control, params string[] args)
-        {
-            var id = control.Id();
-            var modules = ApiQuery.modules(control, args);
-            return new WfShell(new WfConfig(context(control, modules, args), args, modules));
-        }
-
-        public static IWfShell shell(params string[] args)
-            => shell(Assembly.GetEntryAssembly(), args);
+        public static IWfShell shell(WfInit init)
+            => new WfShell(init);
 
         /// <summary>
         /// Reifies a <see cref='IWfShell'/> predicated on a controlling assembly and zero or more arguments
@@ -37,11 +22,17 @@ namespace Z0
         /// <param name="control">The controlling assembly</param>
         /// <param name="args">The shell args</param>
         public static IWfShell shell(Assembly control, ApiModules modules, params string[] args)
-        {
-            var id = control.Id();
-            var context = Flow.context(control, modules, args);
-            var config = new WfConfig(context, args, modules);
-            return new WfShell(config);
-        }
+            => shell(new WfInit(Flow.context(control, modules, args), args, modules));
+
+        /// <summary>
+        /// Reifies a <see cref='IWfShell'/> predicated on a controlling assembly and zero or more arguments
+        /// </summary>
+        /// <param name="control">The controlling assembly</param>
+        /// <param name="args">The shell args</param>
+        public static IWfShell shell(Assembly control, params string[] args)
+            => shell(control, ApiQuery.modules(control, args), args);
+
+        public static IWfShell shell(params string[] args)
+            => shell(Assembly.GetEntryAssembly(), args);
     }
 }

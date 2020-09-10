@@ -12,6 +12,12 @@ namespace Z0
     [ApiHost]
     public readonly struct AsmCalls
     {
+        const long X = 0x00002b83;
+
+        const long Y = 11140;
+
+        const long Z = X - Y;
+
         [MethodImpl(Inline), Op]
         public static CallClient client(MemoryAddress @base)
             => new CallClient(@base);

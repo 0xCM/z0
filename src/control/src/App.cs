@@ -14,14 +14,9 @@ namespace Z0
         public static void Main(params string[] args)
         {
             var wf = Apps.shell(Assembly.GetEntryAssembly(), args, out var app);
-            var state = new WfCaptureState(wf, new AsmContext(app, wf), wf.Config, wf.Ct);
+            var state = new WfCaptureState(wf, new AsmContext(app, wf));
             using var control = new CaptureControl(state);
             control.Run();
-
-            // using var wf = Flow.shell(Assembly.GetEntryAssembly(), args);
-            // using var state = new WfCaptureState(wf, new AsmContext(Apps.context(wf.Modules, wf.Paths), wf), wf.Config, wf.Ct);
-            // using var runner = new CaptureControl(state);
-            // runner.Run();
         }
     }
 

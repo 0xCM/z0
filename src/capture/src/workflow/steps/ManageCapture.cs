@@ -62,7 +62,7 @@ namespace Z0
             }
 
             {
-                using var step = new EmitImmSpecials(Wf, State.Asm, State.Formatter, State.RoutineDecoder, Wf.Config.TargetArchive.Root, Ct);
+                using var step = new EmitImmSpecials(Wf, State.Asm, State.Formatter, State.RoutineDecoder, Wf.Init.TargetArchive.Root, Ct);
                 step.ClearArchive(Parts);
                 step.EmitRefined(Parts);
             }

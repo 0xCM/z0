@@ -12,7 +12,10 @@ namespace Z0
     using System.Threading;
     using System.Threading.Tasks;
 
-    public readonly partial struct Fsm
+    using static Konst;
+
+    [ApiHost]
+    public readonly struct Fsm
     {
         static int MachineCounter = 0;
 
@@ -40,10 +43,37 @@ namespace Z0
         public static Fsm<T,T> create<T>(PrimalFsmSpec<T> spec, ulong seed, ulong index)
             where T : unmanaged
         {
-            var id = $"{spec.Classifier}-{Interlocked.Increment(ref MachineCounter)}";
-            var context = Fsm.context(Polyrand.Pcg64(seed, index), spec.ReceiptLimit);
-            return Fsm.machine(id, context, spec.StartState, spec.EndState, transition(context, spec));
+            var random = Polyrand.Pcg64(seed, index);
+            var context = Fsm.context(random, spec.ReceiptLimit);
+            return Fsm.machine(identify(spec), context, spec.StartState, spec.EndState, transition(context, spec));
         }
+
+        /// <summary>
+        /// Creates a primal FSM according to a supplied spec with a specified random seed and stream index
+        /// </summary>
+        /// <param name="spec">The FSM definition</param>
+        /// <param name="seed">The rng seed</param>
+        /// <param name="index">The rng stream index</param>
+        /// <typeparam name="T">The primal fsm type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static Fsm<T,T> create<T>(IWfShell wf, PrimalFsmSpec<T> spec, ulong seed, ulong index)
+            where T : unmanaged
+                => create(wf, Polyrand.Pcg64(seed, index),spec);
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        static string identify<T>(PrimalFsmSpec<T> spec)
+            where T : unmanaged
+                => $"{spec.Classifier}-{Interlocked.Increment(ref MachineCounter)}";
+
+        /// <summary>
+        /// Creates a primal FSM according to a supplied spec with a specified random seed and stream index
+        /// </summary>
+        /// <param name="spec">The FSM definition</param>
+        /// <typeparam name="T">The primal fsm type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static Fsm<T,T> create<T>(IWfShell wf, IPolyrand random, PrimalFsmSpec<T> spec)
+            where T : unmanaged
+                => Fsm.machine(identify(spec), wf, random, spec.StartState, spec.EndState, transition(random, spec), spec.ReceiptLimit);
 
         /// <summary>
         /// Executes one or more primal state machines
@@ -110,6 +140,21 @@ namespace Z0
         {
             var sources = gmath.range<T>(spec.StateCount).ToArray();
             var random = context.Random;
+            var rules = new List<TransitionRule<T,T>>();
+            foreach(var source in sources)
+            {
+                var evss = random.Next<T>(spec.MinEventSamples, spec.MaxEventSamples);
+                var targets = from t in random.Distinct(spec.StateCount, evss) where gmath.neq(t,source) select t;
+                var events = random.Distinct(spec.EventCount, evss);
+                rules.AddRange(events.Zip(targets).Select(x => Fsm.transition(x.First, source, x.Second)));
+            }
+            return rules.ToFunction();
+        }
+
+        static MachineTransition<T,T> transition<T>(IPolyrand random, PrimalFsmSpec<T> spec)
+            where T : unmanaged
+        {
+            var sources = gmath.range<T>(spec.StateCount).ToArray();
             var rules = new List<TransitionRule<T,T>>();
             foreach(var source in sources)
             {
@@ -215,6 +260,18 @@ namespace Z0
             => new Fsm<E,S>(id, context, s0, sZ, f);
 
         /// <summary>
+        /// Defines the most basic FSM, predicated only on ground-state, end-state and transition function
+        /// </summary>
+        /// <param name="id">Identifies the machine within the context of the executing process</param>
+        /// <param name="s0">The ground-state</param>
+        /// <param name="sZ">The end-state</param>
+        /// <param name="f">The transition function</param>
+        /// <typeparam name="E">The event type</typeparam>
+        /// <typeparam name="S">The state type</typeparam>
+        public static Fsm<E,S> machine<E,S>(string id, IWfShell wf, IPolyrand random, S s0, S sZ, MachineTransition<E,S> f, ulong? limit = null)
+            => new Fsm<E,S>(id, wf, random, s0, sZ, f, limit);
+
+        /// <summary>
         /// Defines an output rule key
         /// </summary>
         /// <param name="source">The antecedent state</param>
@@ -265,8 +322,8 @@ namespace Z0
         /// <typeparam name="E">The event type</typeparam>
         /// <typeparam name="S">The state type</typeparam>
         /// <typeparam name="A">The entry action type</typeparam>
-        public static Fsm<E,S,A> machine<E,S,A>(string id, IFsmContext context, S s0, S sZ, MachineTransition<E,S> t, EntryFunction<S,A> entry, ExitFunction<S,A> exit)
-            =>  new Fsm<E,S,A>(id, context, s0, sZ, t, entry,exit);
+        public static Fsm<E,S,A> machine<E,S,A>(string id, IWfShell wf, IPolyrand random, S s0, S sZ, MachineTransition<E,S> t, EntryFunction<S,A> entry, ExitFunction<S,A> exit, ulong? limit = null)
+            =>  new Fsm<E,S,A>(id, wf, random, s0, sZ, t, entry,exit, limit);
 
         /// <summary>
         /// Creates a default machine observer
@@ -291,7 +348,7 @@ namespace Z0
         /// <param name="context">The machine context</param>
         /// <param name="machine">The specified machine</param>
         /// <typeparam name="E">The event type</typeparam>
-        /// <typeparam name="S">The state tyep</typeparam>
+        /// <typeparam name="S">The state type</typeparam>
         public static Task<Option<FsmStats>> run<E,S>(Fsm<E,S> machine)
             => Task.Factory.StartNew(() => RunMachine(machine));
 
@@ -299,7 +356,7 @@ namespace Z0
         {
             try
             {
-                var random = machine.Context.Random;
+                var random = machine.Random;
                 var o = Fsm.observer(machine, ObserverTrace.Completions | ObserverTrace.Errors);
                 var events = machine.Triggers.ToArray();
                 var domain = Interval.closed(0, events.Length);
@@ -315,5 +372,15 @@ namespace Z0
                 return default;
             }
         }
+
+        /// <summary>
+        /// Forms a transition function from a sequence of transition rules
+        /// </summary>
+        /// <param name="rules">The individual rules that will comprise the function</param>
+        /// <typeparam name="E">The input event type</typeparam>
+        /// <typeparam name="S">The state type</typeparam>
+        [MethodImpl(Inline)]
+        public static MachineTransition<E,S> transition<E,S>(params TransitionRule<E,S>[] rules)
+            => new MachineTransition<E,S>(rules);
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     partial struct Flow
     {
         [MethodImpl(Inline), Op]
-        public static IWfEventLog log(WfConfig config, bool clear = true)
+        public static IWfEventLog log(WfInit config, bool clear = true)
             => new WfTermEventLog(FilePath.Define(config.StatusPath.Name), FilePath.Define(config.ErrorPath.Name), clear);
 
     }

@@ -12,9 +12,9 @@ namespace Z0
     {
         public static void Main(params string[] args)
         {
-            var config = Flow.configure(args);
-            using var wf = Flow.shell(config);
-            using var step = new XedWf(wf, new XedEtlConfig(wf, config.Settings));
+            var init = Flow.init(args);
+            using var wf = Flow.shell(init);
+            using var step = new XedWf(wf, new XedEtlConfig(wf, init.Settings));
             step.Run();
         }
     }

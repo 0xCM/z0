@@ -29,13 +29,13 @@ namespace Z0
             State = state;
             Wf = state.Wf;
             Ct = state.Ct;
-            Asm = AsmWfBuilder.asm(state.App);
+            Asm = AsmWorkflows.asm(state.App);
             Wf.Created(StepId);
         }
 
         public void Run()
         {
-            Wf.Running(StepId, delimit(Wf.Config.PartIdentities));
+            Wf.Running(StepId, delimit(Wf.Init.PartIdentities));
 
             try
             {

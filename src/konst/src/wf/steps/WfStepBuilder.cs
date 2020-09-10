@@ -16,11 +16,11 @@ namespace Z0
             => new WfRunSpec<C,S,T>(config,source, target);
 
         [MethodImpl(Inline)]
-        public static WfRunSpec<WfConfig,S,T> specify<S,T>(WfConfig config, S source, T target)
-            => new WfRunSpec<WfConfig,S,T>(config,source, target);
+        public static WfRunSpec<WfInit,S,T> specify<S,T>(WfInit config, S source, T target)
+            => new WfRunSpec<WfInit,S,T>(config,source, target);
 
         [MethodImpl(Inline)]
-        public static WfRunSpec<WfConfig,WfStepId,T> specify<T>(WfConfig config, WfStepId step, T target)
-            => new WfRunSpec<WfConfig,WfStepId,T>(config,step, target);
+        public static WfRunSpec<WfInit,WfStepId,T> specify<T>(WfInit config, WfStepId step, T target)
+            => new WfRunSpec<WfInit,WfStepId,T>(config,step, target);
     }
 }

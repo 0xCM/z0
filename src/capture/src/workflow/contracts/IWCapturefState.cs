@@ -14,7 +14,7 @@ namespace Z0
 
         IAppContext App {get;}
 
-        IWfConfig Config {get;}
+        IWfInit Config {get;}
 
         IAsmContext Asm {get;}
 

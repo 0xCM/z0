@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public class Machine
+    public class AsmMachine
     {
 
         public void Execute(BinaryCode src)

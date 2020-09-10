@@ -11,7 +11,7 @@ namespace Z0
     using static z;
     using static RunnerShell;
 
-    [Step(typeof(App))]
+    [Step]
     readonly struct RunnerShell : IWfStep<RunnerShell>
     {
         public static WfStepId StepId => typeof(RunnerShell);
@@ -39,9 +39,9 @@ namespace Z0
             if(parts.Length == 0)
                 parts = Context.Api.PartIdentities;
 
-            var config = Apps.configure(Context, args);
-            using var wf = Flow.shell(config);
-            using var state = AsmWfBuilder.state(wf, AsmWfBuilder.asm(Context), config);
+            var init = Apps.init(Context, args);
+            using var wf = Flow.shell(init);
+            using var state = AsmWorkflows.state(wf, AsmWorkflows.asm(Context));
 
             try
             {

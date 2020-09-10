@@ -24,7 +24,7 @@ namespace Z0.Asm
             var data = AsmOpCodes.dataset();
             var records = data.Entries.View;
             var count = data.OpCodeCount;
-            var formatter = Formatters.dataset<F>();
+            var formatter = formatter<F>();
             using var writer = dst.Writer();
             writer.WriteLine(formatter.HeaderText);
             for(var i=0; i<count; i++)
@@ -34,6 +34,10 @@ namespace Z0.Asm
             }
         }
 
+        [MethodImpl(Inline)]
+        public static DatasetFormatter<T> formatter<T>()
+            where T : unmanaged, Enum
+                => Formatters.dataset<T>();
         [Op]
         public static ref readonly DatasetFormatter<F> emit(in AsmOpCodeTable src, in DatasetFormatter<F> dst)
         {

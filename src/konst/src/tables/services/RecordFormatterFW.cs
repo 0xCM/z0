@@ -34,7 +34,7 @@ namespace Z0
             Widths = Enums.literals<W>();
         }
 
-        public void EmitHeader(bool eol = true)
+        public void EmitHeader(bool eol)
         {
             var header = Tabular.Header<F>();
             for(var i=0; i<header.Fields.Length; i++)
@@ -43,6 +43,9 @@ namespace Z0
             if(eol)
                 EmitEol();
         }
+
+        public void EmitHeader()
+            => EmitHeader(true);
 
         public string HeaderText
             => Tabular.HeaderText<F>();

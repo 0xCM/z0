@@ -11,6 +11,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
+    using static z;
 
     [ApiHost]
     public readonly struct Time
@@ -34,6 +35,18 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool external(in DateRange src, Date test)
             => test < src.Min || test > src.Max;
+
+        /// <summary>
+        /// Returns the <see cref="Date"/> part of the supplied <see cref="DateTime"/>
+        /// </summary>
+        /// <param name="d">The subject</param>
+        [MethodImpl(Inline), Op]
+        public static Date date(DateTime d)
+            => new Date(d.Year, d.Month, d.Day);
+
+        [MethodImpl(Inline), Op]
+        public static uint key(Date d)
+            => (uint)d.Year * 1000 + (uint)d.Month * 10 + (uint)d.Day;
 
         /// <summary>
         /// Right now
@@ -106,7 +119,7 @@ namespace Z0
         /// <param name="t">The instant to render</param>
         /// <param name="accuracy">The accuracy with which to render the instant</param>
         [Op]
-        public static string lexical(DateTime t, DateTimeAccuracy accuracy = DateTimeAccuracy.Millisecond)
+        public static string lexical(DateTime t, TimeResolution accuracy = TimeResolution.Ms)
         {
             var format = String.Empty;
             var date = t.ToString("yyyy-MM-dd");
@@ -116,19 +129,19 @@ namespace Z0
             var ms = t.Millisecond.ToString().PadLeft(3, '0');
             switch (accuracy)
             {
-                case DateTimeAccuracy.Date:
+                case TimeResolution.Date:
                     format = date;
                     break;
-                case DateTimeAccuracy.Hour:
+                case TimeResolution.Hour:
                     format = String.Format("{0} {1}:00:00.000", date, hour);
                     break;
-                case DateTimeAccuracy.Minute:
+                case TimeResolution.Minute:
                     format = String.Format("{0} {1}:{2}:00.000", date, hour, minute);
                     break;
-                case DateTimeAccuracy.Second:
+                case TimeResolution.Second:
                     format = String.Format("{0} {1}:{2}:{3}.000", date, hour, minute, second);
                     break;
-                case DateTimeAccuracy.Millisecond:
+                case TimeResolution.Ms:
                     format = String.Format("{0} {1}:{2}:{3}.{4}", date, hour, minute, second, ms);
                     break;
                 default:
@@ -155,5 +168,22 @@ namespace Z0
                let max = dates.Last()
                select min.To(max);
 
+        [Op]
+        public static Span<ushort> parts(DateTime x, TimeResolution resolution = TimeResolution.Ms)
+        {
+            switch (resolution)
+            {
+                case TimeResolution.Date:
+                    return array((ushort)x.Year, (ushort)x.Month, (ushort)x.Day);
+                case TimeResolution.Hour:
+                    return array((ushort)x.Year, (ushort)x.Month, (ushort)x.Day, (ushort)x.Hour);
+                case TimeResolution.Minute:
+                    return array((ushort)x.Year, (ushort)x.Month, (ushort)x.Day, (ushort)x.Hour, (ushort)x.Minute);
+                case TimeResolution.Second:
+                    return array((ushort)x.Year, (ushort)x.Month, (ushort)x.Day, (ushort)x.Hour, (ushort)x.Minute, (ushort)x.Second);
+                default:
+                    return array((ushort)x.Year, (ushort)x.Month, (ushort)x.Day, (ushort)x.Hour, (ushort)x.Minute, (ushort)x.Second, (ushort)x.Millisecond);
+            }
+        }
     }
 }

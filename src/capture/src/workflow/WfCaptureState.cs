@@ -21,7 +21,7 @@ namespace Z0.Asm
 
         public CaptureConfig Settings {get;}
 
-        public IWfConfig Config {get;}
+        public IWfInit Config {get;}
 
         public AsmFormatSpec FormatConfig {get;}
 
@@ -38,13 +38,13 @@ namespace Z0.Asm
         public PartId[] Parts {get;}
 
         [MethodImpl(Inline)]
-        public WfCaptureState(IWfShell wf, IAsmContext asm, IWfConfig config, CorrelationToken ct)
+        public WfCaptureState(IWfShell wf, IAsmContext asm)
         {
             Wf = wf;
             Asm = asm;
             App = asm.ContextRoot;
-            Ct = ct;
-            Config = config;
+            Ct = wf.Ct;
+            Config = wf.Init;
             var srcpath = FilePath.Define(wf.GetType().Assembly.Location).FolderPath;
             var dstpath = wf.Paths.AppCaptureRoot;
             var src = new ArchiveConfig(srcpath);
@@ -55,8 +55,8 @@ namespace Z0.Asm
             Formatter = Services.Formatter(FormatConfig);
             RoutineDecoder = Services.RoutineDecoder(FormatConfig);
             CWf = new WfCaptureContext(Asm, Wf, RoutineDecoder, Formatter, Services.AsmWriterFactory, Archives.capture(Config.TargetArchive), Ct);
-            CaptureBroker = AsmWfBuilder.capture(wf);
-            Parts = Wf.Config.PartIdentities.Length == 0 ? Asm.ContextRoot.Api.Identifiers : Wf.Config.PartIdentities;
+            CaptureBroker = AsmWorkflows.capture(wf);
+            Parts = Wf.Init.PartIdentities.Length == 0 ? Asm.ContextRoot.Api.Identifiers : Wf.Init.PartIdentities;
         }
 
         public void Dispose()

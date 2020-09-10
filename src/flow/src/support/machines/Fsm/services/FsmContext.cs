@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    
+
     class FsmContext : IFsmContext
     {
-        public IPolyrand Random {get;}  
+        public IPolyrand Random {get;}
 
         public FsmContext(IPolyrand random, ulong? receiptLimit = null)
         {
-            this.Random = random;
-            this.ReceiptLimit = receiptLimit ?? (ulong)Pow2.T14;
+            Random = random;
+            ReceiptLimit = receiptLimit ?? (ulong)Pow2.T14;
         }
 
         /// <summary>

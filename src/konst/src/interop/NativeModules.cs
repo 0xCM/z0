@@ -7,15 +7,16 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
 
+    [ApiHost]
     public readonly partial struct NativeModules
     {
-        public static Outcome<DacModule> dac(FS.FilePath src)
-            => DacModule.create(src);
+        [MethodImpl(Inline), Op]
+        public static Outcome<DacLib.Module> dac(FS.FilePath src)
+            => DacLib.Module.create(src);
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static CheckResourcesStep;
 
-    [Step(typeof(CheckResources))]
+    [Step]
     public readonly struct CheckResourcesStep : IWfStep<CheckResourcesStep>
     {
         public const string StepName = nameof(CheckResources);

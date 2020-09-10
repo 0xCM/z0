@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -16,7 +16,7 @@ namespace Z0
     using X = HexDigit;
 
     using BS = BinarySym;
-    using OS = OctalSym;
+    using OC = OctalSym;
     using DS = DecimalSym;
 
     using DF = DecimalSymFacet;
@@ -35,15 +35,15 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static B digit(BS c)
-            => (B)((BF)c - BF.First); 
+            => (B)((BF)c - BF.First);
 
-        [MethodImpl(Inline), Op]   
-        public static O digit(OS c)
-            => (O)(c - OctalSym.First); 
+        [MethodImpl(Inline), Op]
+        public static O digit(OC c)
+            => (O)(c - OctalSym.First);
 
-        [MethodImpl(Inline), Op]   
+        [MethodImpl(Inline), Op]
         public static D digit(DS c)
-            => (D)((DF)c - DF.First); 
+            => (D)((DF)c - DF.First);
 
         [MethodImpl(Inline), Op]
         public static BinaryDigit digit(Base2 @base, char c)
@@ -60,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static X digit(Base16 @base, LowerCased @case, char src)
             => asci.digit(src)
-            ? (X)((XF)src - XF.NumberOffset) 
+            ? (X)((XF)src - XF.NumberOffset)
             : (X)((XF)src - XF.LetterOffsetLo);
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static X digit(Base16 @base, UpperCased @case, char src)
             => asci.digit(src)
-            ? (X)((XF)src - XF.NumberOffset) 
+            ? (X)((XF)src - XF.NumberOffset)
             : (X)((XF)src - XF.LetterOffsetUp);
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static HexDigit digit(HexSymLo src)
             => number(src)
-            ? (X)((XF)src - XF.NumberOffset) 
+            ? (X)((XF)src - XF.NumberOffset)
             : (X)((XF)src - XF.LetterOffsetLo);
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static HexDigit digit(HexSymUp src)
             => number(src)
-            ? (X)((XF)src - XF.NumberOffset) 
+            ? (X)((XF)src - XF.NumberOffset)
             : (X)((XF)src - XF.LetterOffsetUp);
 
         [MethodImpl(Inline), Op]
@@ -112,7 +112,7 @@ namespace Z0
         /// </summary>
         /// <param name="base">The base selector</param>
         /// <param name="src">The digit source</param>
-        /// <param name="index">An integer in the inclusive range [0, 3] that identifies the digit to extract</param>        
+        /// <param name="index">An integer in the inclusive range [0, 3] that identifies the digit to extract</param>
         [MethodImpl(Inline), Op]
         public static D digit(Base10 @base, uint src, byte index)
             => (D)(F & (src >> index*4));

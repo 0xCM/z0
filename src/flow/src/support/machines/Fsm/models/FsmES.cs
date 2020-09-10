@@ -20,18 +20,41 @@ namespace Z0
     /// <typeparam name="S">The state type</typeparam>
     public class Fsm<E,S>
     {
-        public Fsm(string Id, IFsmContext context, S GroundState, S EndState, IFsmFunc<E,S> transition)
+        public Fsm(string id, IWfShell wf, IPolyrand random,  S ground, S end, IFsmFunc<E,S> transition, ulong? limit = null)
         {
-            this.Id = Id;
-            this.Context = context;
-            this.CurrentState = GroundState;
-            this.EndState = EndState;
-            this.Error = none<Exception>();
-            this.Transition = transition;
-            this.ReceiptCount = 0;
-            this.TransitionCount = 0;
-            this.Runtime = Time.stopwatch(false);
+            Id = id;
+            Wf = wf;
+            CurrentState = ground;
+            Random = random;
+            EndState = end;
+            Error = none<Exception>();
+            Transition = transition;
+            ReceiptCount = 0;
+            TransitionCount = 0;
+            Limit = limit ?? ulong.MaxValue;
+            Runtime = Time.stopwatch(false);
         }
+
+        public Fsm(string id, IFsmContext context, S ground, S end, IFsmFunc<E,S> transition)
+        {
+            Id = id;
+            CurrentState = ground;
+            EndState = end;
+            Random = context.Random;
+            Error = none<Exception>();
+            Transition = transition;
+            ReceiptCount = 0;
+            TransitionCount = 0;
+            Limit = context.ReceiptLimit ?? ulong.MaxValue;
+            Runtime = Time.stopwatch(false);
+        }
+
+        readonly IWfShell Wf;
+
+        /// <summary>
+        /// Specifies the maximum number of events that will be accepted prior to forceful termination
+        /// </summary>
+        readonly ulong Limit;
 
         /// <summary>
         /// Records the time spent actively running
@@ -64,14 +87,11 @@ namespace Z0
         S CurrentState;
 
         /// <summary>
-        /// An arror that occurred, if any, prior to normal completion
+        /// An error that occurred, if any, prior to normal completion
         /// </summary>
         Option<Exception> Error;
 
-        /// <summary>
-        /// The machine context
-        /// </summary>
-        public IFsmContext Context {get;}
+        public IPolyrand Random {get;}
 
         /// <summary>
         /// Identifies the machine within the process
@@ -126,13 +146,6 @@ namespace Z0
         public bool Started
             => StartTime.HasValue;
 
-        /// <summary>
-        /// Specifies the maximum number of events that will be accept prior
-        /// to forceful termination
-        /// </summary>
-        ulong ReceiptLimit
-            => Context.ReceiptLimit ?? UInt64.MaxValue;
-
         public FsmStats QueryStats()
             => new FsmStats
             {
@@ -166,9 +179,9 @@ namespace Z0
                 return false;
             }
 
-            if(ReceiptCount > ReceiptLimit)
+            if(ReceiptCount > Limit)
             {
-                RaiseError(ReceiptLimitExceeded.Define(Id, ReceiptLimit));
+                RaiseError(ReceiptLimitExceeded.Define(Id, Limit));
                 return false;
             }
 

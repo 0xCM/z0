@@ -30,7 +30,7 @@ namespace Z0
 
         IWfBroker Broker {get;}
 
-        WfConfig Config {get;}
+        WfInit Init {get;}
 
         FolderPath AppDataRoot
             => Shell.Paths.AppDataRoot;
