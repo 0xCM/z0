@@ -21,6 +21,11 @@ namespace Z0
             where F : unmanaged, Enum
                 => new TableHeader<F>(Literals.fields<F>());
 
+        public static string header53<T>(char delimiter = FieldDelimiter)
+            where T : unmanaged, Enum
+                => Tabular.HeaderText<T>(delimiter);
+
+
         [MethodImpl(Inline)]
         public static string headerText<E>(char delimiter = FieldDelimiter)
             where E : unmanaged, Enum

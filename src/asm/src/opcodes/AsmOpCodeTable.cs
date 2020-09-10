@@ -45,21 +45,6 @@ namespace Z0.Asm
             get => !IsEmpty;
         }
 
-        // public string DelimitedText(char delimiter)
-        // {
-        //     var formatter = Formatters.dataset<F>(delimiter);
-        //     formatter.Delimit(F.Sequence, Sequence);
-        //     formatter.Delimit(F.Mnemonic, Mnemonic);
-        //     formatter.Delimit(F.OpCode, OpCode);
-        //     formatter.Delimit(F.Instruction, Instruction);
-        //     formatter.Delimit(F.M16, M16);
-        //     formatter.Delimit(F.M32, M32);
-        //     formatter.Delimit(F.M64, M64);
-        //     formatter.Delimit(F.CpuId, CpuId);
-        //     formatter.Delimit(F.CodeId, CodeId);
-        //     return formatter.ToString();
-        // }
-
         public string Format()
             => api.format(this);
 

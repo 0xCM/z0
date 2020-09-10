@@ -7,19 +7,17 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Tokens;
-
     using static Root;
- 
+
     using F = EnumDatasetEntryField;
-    
+
     public class t_enum_datasets : t_asm<t_enum_datasets>
-    {        
+    {
         public t_enum_datasets()
         {
-            UnitDataDir.Clear();   
+            UnitDataDir.Clear();
         }
-        
+
         public string header<F>(char delimiter = Chars.Pipe)
             where F : unmanaged, Enum
         {
@@ -42,29 +40,29 @@ namespace Z0.Asm
 
             return dst.ToString();
         }
-        
+
         public void emit<E,T>(ReadOnlySpan<EnumLiteralInfo<E,T>> src, FilePath dst)
             where E : unmanaged, Enum
             where T : unmanaged
         {
             using var writer = dst.Writer();
             writer.WriteLine(header<F>());
-            
+
             var dataset = Enums.dataset<E,T>();
             for(var i=0; i<src.Length; i++)
             {
                 writer.WriteLine(format(src[i]));
             }
         }
-        
-        FilePath EnumDatasetPath<E>() 
+
+        FilePath EnumDatasetPath<E>()
             where E : unmanaged, Enum
                 => CasePath($"{typeof(E).Name}.Metadata");
 
-        FilePath EnumIdentifiers<E>() 
+        FilePath EnumIdentifiers<E>()
             where E : unmanaged, Enum
                 => CasePath($"{typeof(E).Name}.Identifiers");
-        
+
 
         void emit<E,T>()
             where E : unmanaged, Enum
@@ -72,9 +70,9 @@ namespace Z0.Asm
         {
             EnumDatasets.Service.emit<E,T>(EnumDatasetPath<E>());
         }
-        
+
         public void ds_1()
-        {            
+        {
             emit<AsciCharCode,byte>();
             emit<BitSeq8,byte>();
             emit<Hex8Kind,byte>();
@@ -82,11 +80,11 @@ namespace Z0.Asm
             emit<RegisterCode,byte>();
             emit<RegisterClass,byte>();
             emit<RegisterWidth,ushort>();
-            emit<OperatingMode,byte>();
+            emit<AsmOperatingMode,byte>();
             emit<AsmTokenKind,byte>();
             emit<AsmOpCodeTokenKind,byte>();
         }
-        
+
         public void enum_dataset_convert()
         {
             var path = CasePath(FileExtensions.Csv);

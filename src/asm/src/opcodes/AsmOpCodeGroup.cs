@@ -7,8 +7,6 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Tokens;
-
     using static Konst;
     using static z;
 
@@ -20,13 +18,13 @@ namespace Z0.Asm
 
         readonly Span<AsmFxPattern> instructions;
 
-        readonly Span<AsmOpCode> codes;
+        readonly Span<AsmOpCodeExpression> codes;
 
         readonly Span<MnemonicExpression> mnemonics;
 
         readonly Span<CpuidExpression> cpuid;
 
-        readonly Span<OperatingMode> modes;
+        readonly Span<AsmOperatingMode> modes;
 
         readonly Span<uint> MnemonicSeq;
 
@@ -35,10 +33,10 @@ namespace Z0.Asm
         {
             MnemonicSeq = new uint[1];
             instructions = new AsmFxPattern[count];
-            codes = new AsmOpCode[count];
+            codes = new AsmOpCodeExpression[count];
             mnemonics = new MnemonicExpression[count];
             cpuid = new CpuidExpression[count];
-            modes = new OperatingMode[count];
+            modes = new AsmOperatingMode[count];
         }
 
         [MethodImpl(Inline), Op]
@@ -48,7 +46,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(uint seq, in AsmOpCode src)
+        public void Include(uint seq, in AsmOpCodeExpression src)
         {
             OpCode(seq) = src;
         }
@@ -60,7 +58,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(uint seq, in OperatingMode src)
+        public void Include(uint seq, in AsmOperatingMode src)
         {
 
             Mode(seq) = src;
@@ -73,7 +71,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(in AsmOpCodePartitoner ocp, in AsmOpCode src)
+        public void Include(in AsmOpCodePartitoner ocp, in AsmOpCodeExpression src)
         {
             OpCode((uint)ocp.Sequence) = src;
         }
@@ -119,7 +117,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public void Include(AsmOpCodePartitoner ocp, in OperatingMode src)
+        public void Include(AsmOpCodePartitoner ocp, in AsmOperatingMode src)
         {
 
             Mode((uint)ocp.Sequence) = src;
@@ -137,7 +135,7 @@ namespace Z0.Asm
             get => instructions;
         }
 
-        public ReadOnlySpan<AsmOpCode> OpCodes
+        public ReadOnlySpan<AsmOpCodeExpression> OpCodes
         {
             [MethodImpl(Inline)]
             get => codes;
@@ -155,7 +153,7 @@ namespace Z0.Asm
             get => mnemonics;
         }
 
-        public ReadOnlySpan<OperatingMode> Modes
+        public ReadOnlySpan<AsmOperatingMode> Modes
         {
             [MethodImpl(Inline)]
             get => modes;
@@ -166,11 +164,11 @@ namespace Z0.Asm
             => ref seek(mnemonics, seq);
 
         [MethodImpl(Inline), Op]
-        ref AsmOpCode OpCode(uint seq)
+        ref AsmOpCodeExpression OpCode(uint seq)
             => ref seek(codes, seq);
 
         [MethodImpl(Inline), Op]
-        ref OperatingMode Mode(uint seq)
+        ref AsmOperatingMode Mode(uint seq)
             => ref seek(modes, seq);
 
         [MethodImpl(Inline), Op]

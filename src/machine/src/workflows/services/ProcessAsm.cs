@@ -29,7 +29,7 @@ namespace Z0
 
         readonly uint[] Offset;
 
-        readonly MnemonicParser Parser;
+        readonly AsmMnemonicParser Parser;
 
         IAsmDecoder Decoder
             => Asm.RoutineDecoder;
@@ -52,7 +52,7 @@ namespace Z0
             Wf = state.Wf;
             Asm = state.Asm;
             Encoded = encoded;
-            Parser = MnemonicParser.Create();
+            Parser = AsmMnemonicParser.Create();
             Index = new Dictionary<Mnemonic, ArrayBuilder<AsmRecord>>();
             Sequence = sys.alloc<int>(1);
             Offset = sys.alloc<uint>(1);
@@ -143,7 +143,8 @@ namespace Z0
                     LocalOffset: localOffset,
                     GlobalOffset: NextOffset,
                     Mnemonic: mnemonic.ToString().ToUpper(),
-                    OpCode: asm.InstructionCode.OpCode.Replace("o32 ", string.Empty),
+                    //OpCode: asm.InstructionCode.OpCode.Replace("o32 ", EmptyString),
+                    OpCode: asm.InstructionCode.OpCode,
                     Encoded: new BinaryCode(encoded.TrimEnd().ToArray()),
                     InstructionFormat: asm.FormattedInstruction,
                     InstructionCode: asm.InstructionCode.Expression,

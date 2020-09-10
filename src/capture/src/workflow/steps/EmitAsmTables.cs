@@ -109,7 +109,7 @@ namespace Z0
             var dir = (Wf.ResourceRoot + FolderName.Define("tables")) + FolderName.Define("asm");
             var dst = dir + FileName.define(src.Key.ToString(), FileExtensions.Csv);
             using var writer = dst.Writer();
-            writer.WriteLine(AsmRecord.FormatHeader());
+            writer.WriteLine(Table.header53<AsmRecordField>());
             for(var i=0; i<count; i++)
             {
                 ref readonly var record = ref skip(tables,i);

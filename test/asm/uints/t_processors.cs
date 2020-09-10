@@ -12,6 +12,7 @@ namespace Z0.Asm
     using static Konst;
     using static Root;
 
+
     public class t_processors : t_asm<t_processors>
     {
         public void process_cpuid()
@@ -43,7 +44,7 @@ namespace Z0.Asm
             var count = src.Count;
             var records = src.Sequenced.ToReadOnlySpan();
             using var writer = CaseWriter($"{src.Key}");
-            writer.WriteLine(AsmRecord.FormatHeader());
+            writer.WriteLine(Table.header53<AsmRecordField>());
             for(var i=0; i<count; i++)
             {
                 ref readonly var record = ref skip(records,i);

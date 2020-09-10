@@ -211,12 +211,14 @@ namespace Z0
             var records = span(src.Sequenced);
             var dir = Wf.Paths.ResourceRoot + FolderName.Define("tables") + FolderName.Define("asm");
             var dst = dir + FileName.define(src.Key.ToString(), FileExtensions.Csv);
+            var formatter = Formatters.dataset<AsmRecordField>();
             using var writer = dst.Writer();
-            writer.WriteLine(AsmRecord.FormatHeader());
+            writer.WriteLine(Table.header53<AsmRecordField>());
             for(var i=0; i<count; i++)
             {
-                ref readonly var record = ref skip(records,i);
-                writer.WriteLine(record.Format());
+                //ref readonly var record = ref skip(records,i);
+                writer.WriteLine(asm.format(skip(records,i), formatter).Render());
+                //writer.WriteLine(record.Format());
             }
         }
 

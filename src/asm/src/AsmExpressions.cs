@@ -23,10 +23,18 @@ namespace Z0
         public static CpuidExpression cpuid(in AsmOpCodeTable src)
             => new CpuidExpression(src.CpuId);
 
+        /// <summary>
+        /// Selects the opcode expression from the source table
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static AsmOpCode opcode(in AsmOpCodeTable src)
-            => new AsmOpCode(src.OpCode);
+        public static AsmOpCodeExpression opcode(in AsmOpCodeTable src)
+            => new AsmOpCodeExpression(src.OpCode);
 
+        /// <summary>
+        /// Selects the instruction pattern from the source table
+        /// </summary>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static AsmFxPattern fx(in AsmOpCodeTable src)
             => new AsmFxPattern(src.Instruction);

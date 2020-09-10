@@ -12,7 +12,6 @@ namespace Z0.Asm
     /// <summary>
     /// Describes an immediate value in the context of an asm instruction operand
     /// </summary>
-    [Table]
     public struct ImmInfo
     {
         public NumericWidth Width;

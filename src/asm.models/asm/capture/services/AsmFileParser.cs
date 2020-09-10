@@ -14,9 +14,9 @@ namespace Z0.Asm
     public readonly struct AsmFileParser
     {
         [Op]
-        public static void ParseAsmFile(FilePath src, Action<int,EncodedFxInfo[]> AsmParsed, Action<AsmRoutineHeader> HeaderParsed = null)
+        public static void ParseAsmFile(FilePath src, Action<int,AsmStatementEncoding[]> AsmParsed, Action<AsmRoutineHeader> HeaderParsed = null)
         {
-            var commands = list<EncodedFxInfo>(100);
+            var commands = list<AsmStatementEncoding>(100);
             var comments = list<string>(8);
 
             var i = 0;
@@ -59,7 +59,7 @@ namespace Z0.Asm
                         continue;
                 }
 
-                var parsed = AsmParsers.ParseLine(line, ref seq);
+                var parsed = AsmParsers.statement(line, ref seq);
                 if(parsed.Failed)
                     continue;
 

@@ -11,15 +11,15 @@ namespace Z0.Asm
     using static z;
 
     using Z0.Asm.Dsl;
-    
+
     public unsafe readonly ref struct XmmIndex
     {
-        readonly Span<Xmm> Buffer;        
+        readonly Span<Xmm> Buffer;
 
         readonly int RegisterCount;
 
-        readonly Span<MemoryAddress> LocationBuffer;        
- 
+        readonly Span<MemoryAddress> LocationBuffer;
+
         [MethodImpl(Inline)]
         public static XmmIndex Create()
             => new XmmIndex(16);
@@ -27,27 +27,27 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static XmmIndex Create(Xmm[] buffer, MemoryAddress[] locations)
             => new XmmIndex(buffer, locations);
-       
+
         [MethodImpl(Inline)]
         XmmIndex(int k)
             : this()
-        {            
+        {
             RegisterCount = k;
             Buffer = new Xmm[k];
             LocationBuffer = new MemoryAddress[k];
             for(var i=0u; i<k; i++)
             {
-                seek(Buffer,i) = new Xmm(default, RegisterBits.join((RegisterCode)i, RegisterClass.XMM, RegisterWidth.W128));
+                seek(Buffer,i) = new Xmm(default, AsmRegisterBits.join((RegisterCode)i, RegisterClass.XMM, RegisterWidth.W128));
             }
         }
 
         [MethodImpl(Inline)]
         XmmIndex(Xmm[] buffer, MemoryAddress[] locations)
             : this()
-        {            
+        {
             RegisterCount = buffer.Length;
             Buffer = buffer;
-            LocationBuffer = locations;            
+            LocationBuffer = locations;
         }
 
         public ReadOnlySpan<Xmm> Data
@@ -72,8 +72,8 @@ namespace Z0.Asm
         void Selected(Xmm r)
         {
 
-        }        
-        
+        }
+
         [MethodImpl(Inline)]
         void Selected(xmm0 r)
         {
@@ -83,94 +83,94 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         void Selected(xmm1 r)
         {
-            
+
         }
 
         [MethodImpl(Inline)]
         void Selected(xmm2 r)
         {
-            
+
         }
 
         [MethodImpl(Inline)]
         void Selected(xmm3 r)
         {
-            
+
         }
 
         [MethodImpl(Inline)]
         void Selected(xmm4 r)
         {
-            
+
         }
 
         [MethodImpl(Inline)]
         void Selected(xmm5 r)
         {
-            
+
         }
 
         [MethodImpl(Inline)]
         void Selected(xmm6 r)
         {
-            
+
         }
 
         [MethodImpl(Inline)]
         void Selected(xmm7 r)
         {
-            
+
         }
 
         [MethodImpl(Inline)]
         void Selected(xmm8 r)
         {
-            
+
         }
 
         [MethodImpl(Inline)]
         void Selected(xmm9 r)
         {
-            
+
         }
 
         [MethodImpl(Inline)]
         void Selected(xmm10 r)
         {
-            
+
         }
 
         [MethodImpl(Inline)]
         void Selected(xmm11 r)
         {
-            
+
         }
 
         [MethodImpl(Inline)]
         void Selected(xmm12 r)
         {
-            
+
         }
 
         [MethodImpl(Inline)]
         void Selected(xmm13 r)
         {
-            
+
         }
 
         [MethodImpl(Inline)]
         void Selected(xmm14 r)
         {
-            
+
         }
 
         [MethodImpl(Inline)]
         void Selected(xmm15 r)
         {
-            
+
         }
 
-        public xmm0 xmm0         
+        public xmm0 xmm0
         {
             [MethodImpl(Inline)]
             get => this[0];
@@ -238,7 +238,7 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             set => this[7] = value;
         }
-        
+
         public xmm8 xmm8
         {
             [MethodImpl(Inline)]
@@ -315,7 +315,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         unsafe ReadOnlySpan<MemoryAddress> UpdateLocations()
         {
-            for(byte i=0; i<RegisterCount; i++)   
+            for(byte i=0; i<RegisterCount; i++)
                 seek(LocationBuffer,i) = pointer(ref this[i]);
             return LocationBuffer;
         }

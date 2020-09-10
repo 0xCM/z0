@@ -3,11 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;         
+    using static Konst;
 
     [ApiHost]
     public readonly partial struct AsmEncoder
@@ -17,7 +17,7 @@ namespace Z0.Asm
             => RexPrefixBits.define(src);
 
         [Op]
-        public static string format(RegisterBits src)
+        public static string format(AsmRegisterBits src)
         {
             const string Sep = " | ";
             var seg0 = BitFields.format<RegisterCode,byte>(src.Code);

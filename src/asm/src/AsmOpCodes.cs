@@ -8,8 +8,6 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
     using System.IO;
 
-    using Z0.Tokens;
-
     using F = AsmOpCodeField;
     using R = AsmOpCodeTable;
 
@@ -36,7 +34,6 @@ namespace Z0.Asm
             dst.Delimit(F.CodeId, src.CodeId);
             return ref dst;
         }
-
 
         public static TableSpan<TokenInfo> Tokens
             => AsmTokenIndex.create().Model;
@@ -100,7 +97,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        static void process(OperatingMode src, in AsmOpCodeGroup handler, ref uint seq)
+        static void process(AsmOperatingMode src, in AsmOpCodeGroup handler, ref uint seq)
         {
             handler.Include(seq, src);
         }
@@ -112,7 +109,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        static void process(in AsmOpCode src, in AsmOpCodeGroup handler, uint seq)
+        static void process(in AsmOpCodeExpression src, in AsmOpCodeGroup handler, uint seq)
         {
             handler.Include(seq, src);
         }
@@ -168,11 +165,11 @@ namespace Z0.Asm
             => new AsmOpCodePart(src);
 
         [MethodImpl(Inline), Op]
-        public static AsmOpCode from(asci32 src)
-            => new AsmOpCode(src);
+        public static AsmOpCodeExpression from(asci32 src)
+            => new AsmOpCodeExpression(src);
 
         [MethodImpl(Inline), Op]
-        public static AsmOpCode from(char[] src)
+        public static AsmOpCodeExpression from(char[] src)
         {
             var dst = asci32.Null;
             asci.encode(src, out dst);
@@ -180,7 +177,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static AsmOpCode from(string src)
+        public static AsmOpCodeExpression from(string src)
         {
             var dst = asci32.Null;
             asci.encode(src, out dst);
@@ -223,7 +220,7 @@ namespace Z0.Asm
             }
         }
 
-        public void emit(ReadOnlySpan<AsmOpCode> src)
+        public void emit(ReadOnlySpan<AsmOpCodeExpression> src)
         {
             var dstPath = CasePath($"OpCodes");
             using var writer = dstPath.Writer();

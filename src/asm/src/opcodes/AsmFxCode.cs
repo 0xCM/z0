@@ -23,7 +23,7 @@ namespace Z0.Asm
         public AsmFxCode(string opcode, string expr)
         {
             Expression = expr;
-            OpCode = opcode;
+            OpCode = opcode.Replace("o32 ", EmptyString);
         }
 
         public string Format()

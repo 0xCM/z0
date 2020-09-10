@@ -8,21 +8,21 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     /// <summary>
-    /// Defines a componetized opcode and carries opcode expression from whence they came
+    /// Defines an asm opcode and carries the source exrpression along for the ride
     /// </summary>
     public readonly struct AsmOpCodeParts
-    {                
-        public readonly AsmOpCode Expression;
+    {
+        public readonly AsmOpCodeExpression Expression;
 
         public readonly TableSpan<AsmOpCodePart> Parts;
 
         [MethodImpl(Inline)]
-        public AsmOpCodeParts(AsmOpCode expression, params AsmOpCodePart[] parts)
+        public AsmOpCodeParts(AsmOpCodeExpression expression, params AsmOpCodePart[] parts)
         {
             Expression = expression;
             Parts = parts;
-        }                    
+        }
     }
 }

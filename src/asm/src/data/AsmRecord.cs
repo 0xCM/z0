@@ -6,17 +6,17 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Konst;
 
     using F = AsmRecordField;
     using R = AsmRecord;
+    using api = asm;
 
+    [StructLayout(LayoutKind.Sequential)]
     public struct AsmRecord : IRecord<F,R>, ITable<AsmRecordField,AsmRecord>
     {
-        public static string FormatHeader(char delimiter = FieldDelimiter)
-            => Tabular.HeaderText<F>(delimiter);
-
         public int Sequence;
 
         public MemoryAddress Address;
@@ -79,21 +79,23 @@ namespace Z0.Asm
         }
 
         public string DelimitedText(char delimiter)
-        {
-            var formatter = Formatters.dataset<F>(delimiter);
-            formatter.Delimit(F.Sequence, Sequence);
-            formatter.Delimit(F.Address, Address);
-            formatter.Delimit(F.GlobalOffset, GlobalOffset);
-            formatter.Delimit(F.LocalOffset, LocalOffset);
-            formatter.Delimit(F.Mnemonic, Mnemonic);
-            formatter.Delimit(F.OpCode, OpCode);
-            formatter.Delimit(F.Encoded, Encoded);
-            formatter.Delimit(F.InstructionFormat, InstructionFormat);
-            formatter.Delimit(F.InstructionCode, InstructionCode);
-            formatter.Delimit(F.CpuId, CpuId);
-            formatter.Delimit(F.CodeId, CodeId);
-            return formatter.ToString();
-        }
+            => api.format(this,delimiter);
+
+        // {
+        //     var formatter = Formatters.dataset<F>(delimiter);
+        //     formatter.Delimit(F.Sequence, Sequence);
+        //     formatter.Delimit(F.Address, Address);
+        //     formatter.Delimit(F.GlobalOffset, GlobalOffset);
+        //     formatter.Delimit(F.LocalOffset, LocalOffset);
+        //     formatter.Delimit(F.Mnemonic, Mnemonic);
+        //     formatter.Delimit(F.OpCode, OpCode);
+        //     formatter.Delimit(F.Encoded, Encoded);
+        //     formatter.Delimit(F.InstructionFormat, InstructionFormat);
+        //     formatter.Delimit(F.InstructionCode, InstructionCode);
+        //     formatter.Delimit(F.CpuId, CpuId);
+        //     formatter.Delimit(F.CodeId, CodeId);
+        //     return formatter.ToString();
+        // }
 
         public string Format()
             => DelimitedText(FieldDelimiter);

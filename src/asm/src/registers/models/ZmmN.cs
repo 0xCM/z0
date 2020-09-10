@@ -6,27 +6,25 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
+    using static z;
 
-    public readonly struct AsmTableSeg<T>
+    public readonly struct Zmm<N> : IZmmOperand<Zmm<N>,N>
+        where N : unmanaged, ITypeNat
     {
-        public readonly T Key;
-
-        public readonly ArraySegment<AsmRecord> Content;
+        public Cell512 Content {get;}
 
         [MethodImpl(Inline)]
-        public AsmTableSeg(T key, ArraySegment<AsmRecord> data)
+        public Zmm(Cell512 value)
         {
-            Key = key;
-            Content = data;
+            Content = value;
         }
 
-        public int Count
+        public RegisterKind Kind
         {
             [MethodImpl(Inline)]
-            get => Content.Count;
+            get => AsmRegisterBits.join((RegisterCode)value<N>(), RegisterClass.YMM, RegisterWidth.W512);
         }
     }
 }

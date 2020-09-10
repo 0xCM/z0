@@ -7,13 +7,9 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
 
     using static Konst;
 
-    /// <summary>
-    /// Represents the <see cref='Mnemonic.Movzx'/> instruction
-    /// </summary>
     partial struct AsmBuilder
     {
         [MethodImpl(Inline), Op]
