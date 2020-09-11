@@ -97,7 +97,7 @@ namespace Z0
             where T : ITextual
                 => Raise(WfEvents.data(kind, content, Ct));
 
-        void Running(WfStepId step, [File] string actor = null)
+        void Running(WfStepId step, string actor = "fixme")
             => Raise(WfEvents.running(callerName(actor), step, Ct));
 
         void Running<T>(T step, [File] string caller = null)
@@ -132,7 +132,10 @@ namespace Z0
             => Raise(new WfStepRan<T>(step, data, Ct));
 
         void Status<T>(WfStepId step, T data)
-            => Raise(new WfStatus<T>(step, data, Ct));
+            => Raise(WfEvents.status(step, data, Ct));
+
+        void Trace<T>(WfStepId step, T data)
+            => Raise(WfEvents.trace(step, data, Ct));
 
         void Status<C,R>(WfFunc<C,R> f, R result)
             where C : struct, IWfStep<C>

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    [ApiHost("api")]
+    [ApiHost("api"), LiteralProvider]
     public readonly partial struct Konst
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
@@ -80,6 +80,16 @@ namespace Z0
         /// The default delimiter to use when formatting structured text
         /// </summary>
         public const char FieldDelimiter = Chars.Pipe;
+
+        /// <summary>
+        /// The default left subfield delimiter
+        /// </summary>
+        public const char NestedLeftFence = Chars.LBrace;
+
+        /// <summary>
+        /// The default right subfield delimiter
+        /// </summary>
+        public const char NestedRightFence = Chars.RBrace;
 
         /// <summary>
         /// What else could this be?

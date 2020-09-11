@@ -8,7 +8,7 @@ namespace Z0
     /// Characterizes operational inversion
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
-    public interface IInvertiveOps<T>
+    public interface IInversionOps<T>
     {
 
     }
@@ -17,7 +17,7 @@ namespace Z0
     /// Characterizes operational multiplicative inversion
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
-    public interface InvertiveMOps<T> : IInvertiveOps<T>
+    public interface InversionMOps<T> : IInversionOps<T>
     {
         /// <summary>
         /// Multiplicative inversion
@@ -30,7 +30,7 @@ namespace Z0
     /// Characterizes operational additive inversion
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
-    public interface InvertiveA<T> : IInvertiveOps<T>
+    public interface InvertiveA<T> : IInversionOps<T>
     {
         /// <summary>
         /// Additive inversion
@@ -42,10 +42,10 @@ namespace Z0
     /// <summary>
     /// Characterizes structural inversion
     /// </summary>
-    /// <typeparam name="T">The type over which the structrue is defined</typeparam>
+    /// <typeparam name="T">The type over which the structure is defined</typeparam>
     public interface IInvertive<S>
     {
-        
+
     }
 
     /// <summary>
@@ -75,4 +75,3 @@ namespace Z0
     }
 
 }
- 

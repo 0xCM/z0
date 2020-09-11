@@ -17,23 +17,20 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public string ActorName {get;}
-
         public readonly GlobalCodeIndex Index;
 
-        public FlairKind Flair
-            => FlairKind.Ran;
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public CreatedPartIndex(string worker, GlobalCodeIndex index, CorrelationToken ct)
+        public CreatedPartIndex(WfStepId step, GlobalCodeIndex index, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
         {
-            EventId = z.evid(EventName, ct);
+            EventId = (EventName, step, ct);
             Index = index;
-            ActorName = worker;
+            Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(SSx3, EventId, ActorName, GlobalIndexMetrics.from(Index).Format());
+            => text.format(SSx2, EventId, GlobalIndexMetrics.from(Index).Format());
     }
 }

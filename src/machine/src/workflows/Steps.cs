@@ -188,12 +188,9 @@ namespace Z0
     }
 
     [Step]
-    public readonly struct CreateGlobalIndexStep : IWfStep<CreateGlobalIndexStep>
+    public sealed class CreateGlobalIndexHost : WfHost<CreateGlobalIndexHost>
     {
-        public const string StepName = nameof(CreateGlobalIndex);
 
-        public static WfStepId StepId
-            => Flow.step<CreateGlobalIndexStep>();
     }
 
     [Step]
@@ -230,9 +227,9 @@ namespace Z0
     }
 
     [Step]
-    public readonly struct EmitDatasetsStep : IWfStep<EmitDatasetsStep>
+    public sealed class EmitDatasetsStep : WfHost<EmitDatasetsStep>
     {
-        public static WfStepId StepId => Flow.step<EmitDatasetsStep>();
+
     }
 
     [Step]
@@ -253,11 +250,10 @@ namespace Z0
             => step<EmitImageContentStep>();
     }
 
-    [Step]
-    public readonly struct EmitMetadataSetsStep : IWfStep<EmitMetadataSetsStep>
+    [WfHost]
+    public sealed class EmitMetadataSetsHost : WfHost<EmitMetadataSetsHost>
     {
-        public static WfStepId StepId
-            => step<EmitMetadataSetsStep>();
+
     }
 
     [Step]

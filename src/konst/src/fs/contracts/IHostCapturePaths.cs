@@ -23,11 +23,11 @@ namespace Z0
         FilePath ParsedPath
             => ParsedDir + ParsedFileName;
 
-        FileName HexFileName
+        FileName X86FileName
             => LegalFileName(Host, HexLine);
 
-        FilePath HostHexPath
-            => CodeDir + HexFileName;
+        FilePath HostX86Path
+            => X86Dir + X86FileName;
 
         FileName AsmFile
             => LegalFileName(Host, Asm);
@@ -36,12 +36,9 @@ namespace Z0
             => HostAsmDir + AsmFile;
 
         FileName CilFile
-            => LegalFileName(Host, Il);
-
-        FileName CilDataFile
             => LegalFileName(Host, IlData);
 
-        FilePath CilDataPath
-            => CilDataDir + CilDataFile;
+        FilePath CilPath
+            => CilDir + CilFile;
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     {
         WfToolId ToolId {get;}
 
-        FS.FolderPath Source {get;}
+        FS.FolderPath Source  => FS.FolderPath.Empty;
     }
 
     public interface ITool<T> : ITool

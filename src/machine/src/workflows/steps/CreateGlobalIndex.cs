@@ -12,7 +12,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static CreateGlobalIndexStep;
+    using static CreateGlobalIndexHost;
 
     public ref struct CreateGlobalIndex
     {
@@ -28,25 +28,28 @@ namespace Z0
 
         readonly IWfCaptureState State;
 
-        public CreateGlobalIndex(IWfShell wf, IWfCaptureState state, PartFiles src)
+        readonly CreateGlobalIndexHost Host;
+
+        public CreateGlobalIndex(IWfShell wf, CreateGlobalIndexHost host, IWfCaptureState state, PartFiles src)
         {
             Wf = wf;
+            Host = host;
             Ct = Wf.Ct;
             State = state;
             SourceFiles = src;
             EncodedIndex = default;
             Buffer = list<Instruction>(2000);
-            Wf.Created(StepId, src.Root);
+            Wf.Created(Host.Id);
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host.Id);
         }
 
         public void Run()
         {
-            Wf.Running(StepId);
+            Wf.Running(Host.Id);
 
             try
             {
@@ -54,7 +57,7 @@ namespace Z0
                 var count = files.Length;
                 var builder = new EmitCaptureIndex(Wf);
 
-                Wf.Status(StepId, text.format("Indexing {0} datasets",count));
+                Wf.Status(Host.Id, text.format("Indexing {0} datasets",count));
 
                 for(var i=0; i<count; i++)
                 {
@@ -64,17 +67,17 @@ namespace Z0
                     if(result)
                     {
                         Index(result.Value, builder);
-                        Wf.Status(StepId, text.format("Indexed {0}", path));
+                        Wf.Status(Host.Id, text.format("Indexed {0}", path));
                     }
                     else
-                        Wf.Error(StepId, $"Could not parse {path}");
+                        Wf.Error(Host.Id, $"Could not parse {path}");
                 }
 
                 var status = builder.Status();
-                Wf.Status(StepId, text.format("Freeze: {0}", status.Format()));
+                Wf.Status(Host.Id, text.format("Freeze: {0}", status.Format()));
 
                 EncodedIndex = builder.Freeze();
-                Wf.Raise(new CreatedPartIndex(StepName, EncodedIndex, Ct));
+                Wf.Raise(new CreatedPartIndex(Host.Id, EncodedIndex, Ct));
 
 
                 var index = EncodedIndex;
@@ -88,7 +91,7 @@ namespace Z0
                 Wf.Error(e, Ct);
             }
 
-            Wf.Ran(StepId);
+            Wf.Ran(Host.Id);
         }
 
         void Index(ReadOnlySpan<MemberParseRecord> src, EmitCaptureIndex dst)
@@ -106,12 +109,12 @@ namespace Z0
             var code = new X86ApiCode(src.Uri, src.Data);
             var inclusion = dst.Include(code);
             if(inclusion.Any(x => x == false))
-                Wf.Warn(StepId, $"Duplicate | {src.Uri.Format()}");
+                Wf.Warn(Host.Id, $"Duplicate | {src.Uri.Format()}");
         }
 
         Span<PartAsmFx> DecodeParts(GlobalCodeIndex src)
         {
-            Wf.Status(StepId, text.format("Decoding {0} entries from {1} parts", src.EntryCount, src.Parts.Length));
+            Wf.Status(Host.Id, text.format("Decoding {0} entries from {1} parts", src.EntryCount, src.Parts.Length));
 
             var parts = src.Parts;
             var dst = z.alloc<PartAsmFx>(parts.Length);
@@ -127,7 +130,7 @@ namespace Z0
                 var part = parts[i];
                 var hosts = src.Hosts.Where(h => h.Owner == part);
 
-                Wf.Status(StepId, text.format("Decoding {0}", part.Format()));
+                Wf.Status(Host.Id, text.format("Decoding {0}", part.Format()));
 
                 for(var j=0; j<hosts.Length; j++)
                 {
@@ -144,11 +147,11 @@ namespace Z0
 
                 kParts++;
 
-                Wf.Status(StepId, text.format(RenderPatterns.PSx4, kParts, kHosts, kMembers, kFx));
+                Wf.Status(Host.Id, text.format(RenderPatterns.PSx4, kParts, kHosts, kMembers, kFx));
 
             }
 
-            Wf.Status(StepId, text.format("Completed decoding process for {1} parts", src.EntryCount, src.Parts.Length));
+            Wf.Status(Host.Id, text.format("Completed decoding process for {1} parts", src.EntryCount, src.Parts.Length));
             return dst;
         }
 
@@ -196,12 +199,12 @@ namespace Z0
                     Process(set);
                 }
 
-                Wf.Ran(StepId);
+                Wf.Ran(Host.Id);
 
             }
             catch(Exception e)
             {
-                Wf.Error(StepName, e, Ct);
+                Wf.Error(e);
             }
         }
 

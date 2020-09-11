@@ -7,10 +7,10 @@ namespace Z0
     public interface IPartFilePaths : IPartFileExtensions, IPartFolderNames, IPartFileNames, IPartFolderPaths, IPartLogPaths, IPartResPaths
     {
         FilePath HexFilePath(FolderPath root, FileName name)
-            => HexDirPath(root) + name;
+            => X86DirPath(root) + name;
 
         FilePath HexFilePath(FolderPath root, ApiHostUri host)
-            => HexDirPath(root) + FileName.define(host.Name, HexLine);
+            => X86DirPath(root) + FileName.define(host.Name, HexLine);
 
         FilePath HexFilePath<T>(FolderPath root)
             => HexFilePath(root, FileName.define(typeof(T).Name, HexLine));
@@ -31,7 +31,7 @@ namespace Z0
             => AsmDirPath(root).Files(Asm);
 
         FilePath[] HexFilePaths(FolderPath root)
-            => HexDirPath(root).Files(HexLine);
+            => X86DirPath(root).Files(HexLine);
 
         FilePath[] ExtractFilePaths(FolderPath root)
             => ExtractDirPath(root).Files(Extract);

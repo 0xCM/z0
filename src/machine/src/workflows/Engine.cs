@@ -45,8 +45,8 @@ namespace Z0
                 Run(new ManageCaptureStep());
                 Run(new EmitDatasetsStep());
                 Run(new ProcessPartFilesStep());
-                Run(new EmitMetadataSetsStep());
-                Run(new CreateGlobalIndexStep());
+                Run(new EmitMetadataSetsHost());
+                Run(new CreateGlobalIndexHost());
 
             }
             catch(Exception e)
@@ -57,20 +57,20 @@ namespace Z0
             Wf.Ran(StepId);
         }
 
-        void Run(CreateGlobalIndexStep s)
+        void Run(CreateGlobalIndexHost host)
         {
-            Wf.Running(s);
-            using var step = new CreateGlobalIndex(Wf, State, new PartFiles(Wf, Wf.CaptureRoot));
+            Wf.Running(host.Id);
+            using var step = new CreateGlobalIndex(Wf, host, State, new PartFiles(Wf, Wf.CaptureRoot));
             step.Run();
-            Wf.Ran(s);
+            Wf.Ran(host.Id);
         }
 
-        public void Run(EmitMetadataSetsStep s)
+        public void Run(EmitMetadataSetsHost s)
         {
-            Wf.Running(s);
+            Wf.Running(s.Id);
             using var step = new EmitMetadataSets(Wf);
             step.Run();
-            Wf.Ran(s);
+            Wf.Ran(s.Id);
         }
 
         void Run(ManageCaptureStep step, params string[] args)
@@ -79,26 +79,26 @@ namespace Z0
             control.Run();
         }
 
-        void Run(EmitDatasetsStep step)
+        void Run(EmitDatasetsStep host)
         {
-            Wf.Running(StepId, step);
+            Wf.Running(host.Id);
 
             try
             {
-                using var emission = new EmitDatasets(Wf, Ct);
+                using var emission = new EmitDatasets(Wf, host);
                 emission.Run();
             }
             catch(Exception e)
             {
-                Wf.Error(e, Ct);
+                Wf.Error(e);
             }
 
-            Wf.Ran(StepId, step);
+            Wf.Ran(host.Id);
         }
 
-        void Run(ProcessPartFilesStep kind)
+        void Run(ProcessPartFilesStep host)
         {
-            Wf.Running(StepId, kind);
+            Wf.Running(host.Id);
 
             try
             {
@@ -107,10 +107,10 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(e, Ct);
+                Wf.Error(e);
             }
 
-            Wf.Ran(StepId, kind);
+            Wf.Ran(host.Id);
         }
     }
 }

@@ -64,6 +64,18 @@ namespace Z0
                 get => new FileInfo(Name);
             }
 
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Name.IsEmpty;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Name.IsNonEmpty;
+            }
+
             /// <summary>
             /// Determines whether the filename is of the form {owner}.{host}.{*}
             /// </summary>

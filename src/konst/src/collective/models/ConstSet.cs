@@ -68,11 +68,12 @@ namespace Z0
         public static bool operator !=(ConstSet<T> a, ConstSet<T> b)
             => !a.Equals(b);
 
-        public Count32 Count
+        public uint Count
         {
             [MethodImpl(Inline)]
-            get => Data.Count;
+            get => (uint)Data.Count;
         }
+
         public HashSet<T> Storage
         {
             [MethodImpl(Inline)]

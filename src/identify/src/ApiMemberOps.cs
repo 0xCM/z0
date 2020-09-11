@@ -38,7 +38,7 @@ namespace Z0
             var idx = index(members);
             var archive =  Archives.capture(root);
             var paths =  HostCaptureArchive.create(root, host);
-            var code = ApiHexReader.Service.Read(paths.HostHexPath);
+            var code = ApiHexReader.Service.Read(paths.HostX86Path);
             var opIndex =  UriHexQuery.Service.CreateIndex(code);
             return ApiCodeIndex.create(idx, opIndex);
         }

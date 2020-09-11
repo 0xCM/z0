@@ -90,23 +90,23 @@ namespace Z0
         public FS.FolderPath IndexDir
             => ResDir + FS.folder("index");
 
-        [MethodImpl(Inline)]
-        public WfInit(IShellContext shell, string[] args, ApiModules modules, ArchiveConfig target,
-            PartId[] parts, FolderPath resroot, FolderPath appdata, FS.FolderPath logroot, WfSettings settings)
-        {
-            Shell = insist(shell);
-            Paths = shell.Paths;
-            Args = args;
-            Modules = modules;
-            Api = Modules.Api;
-            ControlId = Part.ExecutingPart;
-            TargetArchive = target;
-            PartIdentities = parts;
-            Resources = new ArchiveConfig(resroot);
-            AppData = new ArchiveConfig(appdata);
-            Settings = settings;
-            Logs = new WfLogConfig(ControlId, logroot);
-        }
+        // [MethodImpl(Inline)]
+        // public WfInit(IShellContext shell, string[] args, ApiModules modules, ArchiveConfig target,
+        //     PartId[] parts, FolderPath resroot, FolderPath appdata, FS.FolderPath logroot, WfSettings settings)
+        // {
+        //     Shell = insist(shell);
+        //     Paths = shell.Paths;
+        //     Args = args;
+        //     Modules = modules;
+        //     Api = Modules.Api;
+        //     ControlId = Part.ExecutingPart;
+        //     TargetArchive = target;
+        //     PartIdentities = parts;
+        //     Resources = new ArchiveConfig(resroot);
+        //     AppData = new ArchiveConfig(appdata);
+        //     Settings = settings;
+        //     Logs = new WfLogConfig(ControlId, logroot);
+        // }
 
         [MethodImpl(Inline)]
         public WfInit(IShellContext shell, string[] args, ApiModules modules)

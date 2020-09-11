@@ -3,17 +3,17 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     /// <summary>
     /// Characterizes group operations over a type
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
-    public interface IGroupOps<T> : IInvertiveOps<T>, IMonoidOps<T>
+    public interface IGroupOps<T> : IInversionOps<T>, ISemigroupOps<T>
     {
-        
+
     }
 
-    public interface IGroupMOps<T> : IGroupOps<T>, IMonoidMOps<T>, InvertiveMOps<T>
+    public interface IGroupMOps<T> : IGroupOps<T>, IMonoidMOps<T>, InversionMOps<T>
     {
 
     }
@@ -21,7 +21,7 @@ namespace Z0
     /// <summary>
     /// Characterizes additive/abelian group operations
     /// </summary>
-    public interface IGroupAOps<T> : IGroupOps<T>, IMonoidAOps<T>, INegatableOps<T> 
+    public interface IGroupAOps<T> : IGroupOps<T>, IMonoidAOps<T>, INegatableOps<T>
     {
 
     }
@@ -33,8 +33,8 @@ namespace Z0
 
     public interface IGroupM<T> : IGroupLike<T>, IMonoidM<T>
     {
-        
-    }    
+
+    }
 
     public interface IGroupA<S> : IGroupLike<S>, IMonoidA<S>
     {
@@ -44,7 +44,7 @@ namespace Z0
         S Invert();
 
     }
-    
+
     /// <summary>
     /// Characterizes a group structure
     /// </summary>
@@ -53,7 +53,7 @@ namespace Z0
     public interface IGroupLike<S,T> : IGroupLike<S>
         where S : IGroupLike<S,T>, new()
     {
-        
+
     }
 
     /// <summary>
@@ -64,6 +64,6 @@ namespace Z0
     public interface IGroupA<S,T> : IGroupA<S>, IGroupLike<S,T>, IMonoidA<S,T>
         where S : IGroupA<S,T>, new()
     {
-        
+
     }
 }

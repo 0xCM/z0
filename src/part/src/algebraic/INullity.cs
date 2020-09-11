@@ -4,9 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Characterizes a type for which nullity can be adjudicated
     /// </summary>
+    [Free]
     public interface INullity
     {
         bool IsEmpty {get;}

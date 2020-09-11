@@ -17,9 +17,9 @@ namespace Z0
         /// <summary>
         /// The count value
         /// </summary>
-        new Count32 Count {get;}
+        new uint Count {get;}
 
-        Count32 IFinite.Count()
+        uint IFinite.Count()
             => Count;
 
         bool INullity.IsEmpty
@@ -32,7 +32,7 @@ namespace Z0
     {
         T Value {get;}
 
-        Count32 ICounted.Count
-            => z.uint32(Value);
+        uint ICounted.Count
+            => Part.uint32(Value);
     }
 }

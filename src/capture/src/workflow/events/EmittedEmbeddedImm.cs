@@ -8,59 +8,59 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static RenderPatterns;
+    using static Render;
 
     public readonly struct EmittedEmbeddedImm : IWfEvent<EmittedEmbeddedImm>
     {
-        public WfEventId EventId
-            => WfEventId.define(nameof(EmittedEmbeddedImm));
+        public const string EventName = nameof(EmittedEmbeddedImm);
+        public WfEventId EventId {get;}
 
-        public readonly ApiHostUri Host;
+        readonly ApiHostUri Host;
 
-        public readonly bool Generic;
+        readonly bool Generic;
 
-        public readonly ImmRefinementKind ImmSource;
+        readonly ImmRefinementKind ImmSource;
 
-        public readonly Type Refinement;
+        readonly Type Refinement;
 
-        public readonly FilePath TargetFile;
+        readonly FS.FilePath TargetFile;
 
-        [MethodImpl(Inline)]
-        public EmittedEmbeddedImm Refined(ApiHostUri uri, bool generic, Type refinement, FilePath dst)
-            => new EmittedEmbeddedImm(uri, generic, ImmRefinementKind.Refined, refinement, dst);
+        public FlairKind Flair {get;}
 
-        [MethodImpl(Inline)]
-        public EmittedEmbeddedImm Literal(ApiHostUri uri, bool generic, FilePath dst)
-            => new EmittedEmbeddedImm(uri, generic, ImmRefinementKind.Unrefined, typeof(void), dst);
 
         [MethodImpl(Inline)]
-        public EmittedEmbeddedImm Create(ApiHostUri uri, bool generic, FilePath dst, Type refinement = null)
-            => new EmittedEmbeddedImm(uri, generic, refinement != null ? ImmRefinementKind.Refined : ImmRefinementKind.Unrefined, refinement, dst);
+        public EmittedEmbeddedImm refined(WfStepId step, ApiHostUri uri, bool generic, Type refinement, FilePath dst, CorrelationToken ct)
+            => new EmittedEmbeddedImm(step, uri, generic, ImmRefinementKind.Refined, refinement, dst, ct);
 
         [MethodImpl(Inline)]
-        public EmittedEmbeddedImm(ApiHostUri uri, bool generic, ImmRefinementKind source, Type refinement, FilePath dst)
+        public EmittedEmbeddedImm literal(WfStepId step, ApiHostUri uri, bool generic, FilePath dst, CorrelationToken ct)
+            => new EmittedEmbeddedImm(step, uri, generic, ImmRefinementKind.Unrefined, typeof(void), dst, ct);
+
+        [MethodImpl(Inline)]
+        public EmittedEmbeddedImm define(WfStepId step, ApiHostUri uri, bool generic, FilePath dst, Type refinement, CorrelationToken ct)
+            => new EmittedEmbeddedImm(step, uri, generic,
+                refinement != null ? ImmRefinementKind.Refined : ImmRefinementKind.Unrefined,
+                refinement,
+                dst, ct);
+            //=> new EmittedEmbeddedImm(uri, generic, refinement != null ? ImmRefinementKind.Refined : ImmRefinementKind.Unrefined, refinement, dst);
+
+        [MethodImpl(Inline)]
+        public EmittedEmbeddedImm(WfStepId step, ApiHostUri uri, bool generic, ImmRefinementKind source, Type refinement, FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
         {
+            EventId = (EventName, step, ct);
             Host = uri;
             Generic = generic;
             ImmSource = source;
-            Refinement = refinement;
-            TargetFile = dst;
+            Refinement = refinement ?? typeof(void);
+            TargetFile = FS.path(dst.Name);
+            Flair = flair;
         }
 
         public string Format()
-        {
-            var description =
-                (ImmSource == ImmRefinementKind.Unrefined && Refinement != null)
-                ? $"Emitted {Host}{(Generic ? " generic" : string.Empty)} literal imm specializations to {TargetFile}"
-                : $"Emitted {Host}{(Generic ? " generic" : string.Empty)} imm {Refinement.DisplayName()} refinements to {TargetFile}";
-            return description;
-        }
+            => text.format(RenderPatterns.PSx6, EventId, Host, Generic, ImmSource, Refinement, TargetFile);
 
         public EmittedEmbeddedImm Zero
-            => Empty;
-
-        public FlairKind Flair
-            => FlairKind.DarkMagenta;
+            => default;
 
         public static EmittedEmbeddedImm Empty
             => default;

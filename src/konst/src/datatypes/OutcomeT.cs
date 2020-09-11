@@ -51,6 +51,10 @@ namespace Z0
             => new Outcome<T>(error);
 
         [MethodImpl(Inline)]
+        public static implicit operator T(Outcome<T> src)
+            => src.Ok ? src.Data : default;
+
+        [MethodImpl(Inline)]
         public Outcome(bool ok, T data, ulong code = default)
         {
             Ok = ok;
@@ -77,6 +81,23 @@ namespace Z0
             MessageCode = default;
         }
 
+        public Outcome<T> OnSuccess(Action<Outcome<T>> f)
+        {
+            if(Ok)
+                f(this);
+            return this;
+        }
+
+        public Outcome<T> OnFailure(Action<Outcome<T>> f)
+        {
+            if(!Ok)
+                f(this);
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public Either<Y,Z> Map<Y,Z>(Func<Outcome<T>,Y> success, Func<Outcome<T>,Z> failure)
+            => Ok ? Either.right<Y,Z>(success(this)) : Either.right<Y,Z>(failure(this));
 
         [MethodImpl(Inline)]
         public string Format()

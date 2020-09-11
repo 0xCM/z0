@@ -22,6 +22,18 @@ namespace Z0
         {
             public PathPart Name {get;}
 
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Name.IsEmpty;
+            }
+
+            public bool IsNonEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Name.IsNonEmpty;
+            }
+
             [MethodImpl(Inline)]
             public FolderPath(PathPart name)
                 => Name = name;

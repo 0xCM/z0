@@ -14,11 +14,11 @@ namespace Z0
         FolderPath ParsedDir
             => ParsedDirPath(ArchiveRoot);
 
-        FolderPath CodeDir
-            => HexDirPath(ArchiveRoot);
+        FolderPath X86Dir
+            => X86DirPath(ArchiveRoot);
 
-        FolderPath CilDataDir
-            => CilDataDirPath(ArchiveRoot);
+        FolderPath CilDir
+            => CilDirPath(ArchiveRoot);
 
         FolderPath AsmDir
             => AsmDirPath(ArchiveRoot);

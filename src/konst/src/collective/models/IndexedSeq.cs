@@ -88,8 +88,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        Count32 IFinite.Count()
-            => Data.Length;
+        uint IFinite.Count()
+            => (uint)Data.Length;
 
         public ref T this[int index]
         {

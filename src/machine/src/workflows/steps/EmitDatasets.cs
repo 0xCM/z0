@@ -23,13 +23,16 @@ namespace Z0
 
         readonly bool Recapture;
 
-        public EmitDatasets(IWfShell context, CorrelationToken ct)
+        readonly EmitDatasetsStep Host;
+
+        public EmitDatasets(IWfShell wf, EmitDatasetsStep host)
         {
-            Ct = ct;
-            Wf = context;
+            Wf = wf;
+            Host = host;
+            Ct = Wf.Ct;
             Recapture = false;
-            Parts = context.Api.Parts;
-            Wf.Created(StepId);
+            Parts = Wf.Api.Parts;
+            Wf.Created(host.Id);
         }
 
 
@@ -42,14 +45,14 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(e, Ct);
+                Wf.Error(Host.Id, e);
             }
         }
 
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host.Id);
         }
 
         void Run(EmitResBytesStep kind)
@@ -61,7 +64,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(StepId,e);
+                Wf.Error(Host.Id,e);
             }
         }
 
@@ -87,7 +90,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(e, Ct);
+                Wf.Error(Host.Id,e);
             }
         }
 
@@ -100,7 +103,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(e, Ct);
+                Wf.Error(Host.Id,e);
             }
         }
 
@@ -126,7 +129,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(e, Ct);
+                Wf.Error(Host.Id,e);
             }
         }
 
@@ -142,7 +145,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(e, Ct);
+                Wf.Error(Host.Id,e);
             }
         }
 

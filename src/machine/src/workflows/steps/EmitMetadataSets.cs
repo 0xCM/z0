@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static EmitMetadataSetsStep;
+    using static EmitMetadataSetsHost;
 
     public readonly ref struct EmitMetadataSets
     {
@@ -19,22 +19,25 @@ namespace Z0
 
         readonly IPart[] Parts;
 
+        readonly EmitMetadataSetsHost Host;
+
         public EmitMetadataSets(IWfShell wf)
         {
             Wf = wf;
             Ct = wf.Ct;
             Parts = Wf.Api.Parts;
-            Wf.Created(StepId, Ct);
+            Host = new EmitMetadataSetsHost();
+            Wf.Created(Host.Id, Ct);
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host.Id);
         }
 
         public void Run()
         {
-            Wf.Running(StepId);
+            Wf.Running(Host.Id);
             Run(new EmitImageConstantsStep());
             Run(new EmitPeHeadersStep());
             Run(new EmitPartCil());
@@ -42,7 +45,7 @@ namespace Z0
             Run(new EmitStringRecordsStep());
             Run(new EmitImageBlobsStep());
             Run(new EmitFieldMetadataHost());
-            Wf.Ran(StepId);
+            Wf.Ran(Host.Id);
         }
 
         void Run(EmitImageConstantsStep kind)

@@ -28,6 +28,26 @@ namespace Z0
             => new Either<L,R>(left);
 
         /// <summary>
+        /// Constructs a left-valued either
+        /// </summary>
+        /// <typeparam name="L">The left value type</typeparam>
+        /// <typeparam name="R">The right value type</typeparam>
+        /// <param name="left">The right value</param>
+        [MethodImpl(Inline)]
+        public static Either<L,R> left<L,R>(L src)
+            => new Either<L,R>(src);
+
+        /// <summary>
+        /// Constructs a right-valued either
+        /// </summary>
+        /// <typeparam name="L">The left value type</typeparam>
+        /// <typeparam name="R">The right value type</typeparam>
+        /// <param name="left">The right value</param>
+        [MethodImpl(Inline)]
+        public static Either<L,R> right<L,R>(R src)
+            => new Either<L,R>(src);
+
+        /// <summary>
         /// Constructs a right-valued either
         /// </summary>
         /// <typeparam name="L">The left value type</typeparam>
@@ -38,7 +58,7 @@ namespace Z0
             => new Either<L,R>(right);
 
         /// <summary>
-        /// If either is Left, returns the left value; oterwise, raises an error
+        /// If either is Left, returns the left value; otherwise, raises an error
         /// </summary>
         /// <typeparam name="L">The left type</typeparam>
         /// <typeparam name="R">The right type</typeparam>
@@ -48,7 +68,7 @@ namespace Z0
             => e.IsLeft ? e.Left : fail<L>(NotLeft(e));
 
         /// <summary>
-        /// If either is Left, returns the left value; oterwise, raises an error
+        /// If either is Left, returns the left value; otherwise, raises an error
         /// </summary>
         /// <typeparam name="L">The left type</typeparam>
         /// <typeparam name="R">The right type</typeparam>
@@ -72,7 +92,7 @@ namespace Z0
             => e.IsLeft ? make<X,Y>(lf(e.Left)) : make<X,Y>(rf(e.Right));
 
         /// <summary>
-        /// Applies a left function if the either is left-valued; otherwise, passes the right 
+        /// Applies a left function if the either is left-valued; otherwise, passes the right
         /// value through untransformed
         /// </summary>
         /// <typeparam name="L">The left value type</typeparam>
@@ -95,7 +115,7 @@ namespace Z0
         /// <param name="e">The either</param>
         [MethodImpl(Inline)]
         public static Either<L,Y> map<L,R,Y>(Func<R,Y> rf, Either<L,R> e)
-            => e.IsLeft ? make<L,Y>(e.Left) : make<L,Y>(rf(e.Right));        
+            => e.IsLeft ? make<L,Y>(e.Left) : make<L,Y>(rf(e.Right));
 
         /// <summary>
         /// Determines whether the either is left-valued
@@ -117,13 +137,13 @@ namespace Z0
         public static bool isRight<L,R>(Either<L,R> e)
             => e.IsRight;
 
-        static T fail<T>(string reason) 
+        static T fail<T>(string reason)
             => throw new Exception(reason);
 
         static string NotLeft<L,R>(Either<L,R> e)
-            => $"The either valeu {e} is not a left value";
+            => $"The either value {e} is not a left value";
 
         static string NotRight<L,R>(Either<L,R> e)
-            => $"The either valeu {e} is not a right value";
+            => $"The either value {e} is not a right value";
     }
 }

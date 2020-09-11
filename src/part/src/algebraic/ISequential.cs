@@ -4,12 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
- 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Characterizes an individual that can be identified, relative to other
-    /// sequentials (within the same set), by a term s(i) of a monotonic sequence 
+    /// sequentials (within the same set), by a term s(i) of a monotonic sequence
     /// s = {0,..,n - 1} where s(i) = i
     /// </summary>
+    [Free]
     public interface ISequential
     {
         /// <summary>

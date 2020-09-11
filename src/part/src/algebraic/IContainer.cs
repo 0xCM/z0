@@ -9,8 +9,6 @@ namespace Z0
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
-
     /// <summary>
     /// Characterizes a parametric container
     /// </summary>
@@ -22,14 +20,14 @@ namespace Z0
     }
 
     [Free]
-    public interface IContainer<F,T> : IContainer<F>, IReified<F>
+    public interface IContainer<F,T> : IContainer<F>
         where F : IContainer<F,T>, new()
     {
 
     }
 
     /// <summary>
-    /// Characterizes a refified container over sequentially enumerable content
+    /// Characterizes a reified container over sequentially enumerable content
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
     /// <typeparam name="T">The element type</typeparam>
@@ -124,23 +122,6 @@ namespace Z0
         F Concat(F rhs);
     }
 
-    [Free]
-    public interface IMaterialied<T> : IFinite, IContented<T>, IContentIndex<T>
-    {
-
-    }
-
-    [Free]
-    public interface IMaterialized<F,T> : IMaterialied<T>, IReified<F>
-        where T : IFiniteDeferral<T>
-        where F : IMaterialized<F,T>, new()
-    {
-        /// <summary>
-        /// Replaces materialized content forced from a source
-        /// </summary>
-        /// <param name="src"></param>
-        F Redefine(T src);
-    }
 
     /// <summary>
     /// Characterizes a reversible structure

@@ -13,8 +13,10 @@ namespace Z0
     {
         public static void Main(params string[] args)
         {
-            var wf = Apps.shell(Assembly.GetEntryAssembly(), args, out var app);
-            var state = new WfCaptureState(wf, new AsmContext(app, wf));
+            var wf = Flow.shell(args);
+            var app = Apps.context(wf);
+            var asm = new AsmContext(app, wf);
+            var state = new WfCaptureState(wf, asm);
             using var control = new CaptureControl(state);
             control.Run();
         }

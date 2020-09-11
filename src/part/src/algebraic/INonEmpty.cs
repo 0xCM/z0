@@ -4,14 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Characterizes a reification of the counterpoint to a nullary thing
     /// </summary>
     /// <typeparam name="F">The thing which cannot be empty</typeparam>
-    public interface INonEmpty<F> : INullity, IReified<F>
+    [Free]
+    public interface INonEmpty<F> : INullity
         where F : INonEmpty<F>, new()
     {
-        bool INullity.IsEmpty 
+        bool INullity.IsEmpty
             => false;
     }
 
@@ -19,6 +22,7 @@ namespace Z0
     /// Characterizes a T-parametric nonempty thing that provides evidence of non-absence
     /// </summary>
     /// <typeparam name="F">The thing which cannot be empty</typeparam>
+    [Free]
     public interface INonEmpty<F,T> : INonEmpty<F>
         where F : INonEmpty<F,T>, new()
     {
@@ -26,5 +30,5 @@ namespace Z0
         /// Proof
         /// </summary>
         T Individual {get;}
-    }    
+    }
 }

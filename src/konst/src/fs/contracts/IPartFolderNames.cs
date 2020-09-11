@@ -42,10 +42,10 @@ namespace Z0
         FolderName AsmFolderName
             => FolderName.Define(L.Asm);
 
-        FolderName HexFolderName
+        FolderName X86FolderName
             => FolderName.Define("code", "Hex formatted encoded x86 assembly");
 
-        FolderName CilDataFolderName
+        FolderName CilFolderName
             => FolderName.Define(CilData);
 
         /// <summary>

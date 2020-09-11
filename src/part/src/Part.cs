@@ -45,6 +45,10 @@ namespace Z0
         public static PartId withSvc(PartId a)
             => a | PartId.Svc;
 
+        [MethodImpl(Inline)]
+        public static uint uint32<T>(T src)
+            => Unsafe.As<T,uint>(ref src);
+
         /// <summary>
         /// Applies a function to an input sequence to yield a transformed output sequence
         /// </summary>

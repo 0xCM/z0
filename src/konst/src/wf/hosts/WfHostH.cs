@@ -42,9 +42,7 @@ namespace Z0
         }
 
         protected virtual void Execute(IWfShell shell)
-        {
-
-        }
+            => throw new NotImplementedException();
 
         public virtual string Format()
             => Id.Format();

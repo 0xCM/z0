@@ -81,10 +81,10 @@ namespace Z0
         public static bool operator !=(ValueSet<T> a, ValueSet<T> b)
             => !a.Equals(b);
 
-        public Count32 Count
+        public uint Count
         {
             [MethodImpl(Inline)]
-            get => Data.Count;
+            get => (uint)Data.Count;
         }
 
         public bool IsEmpty

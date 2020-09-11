@@ -34,7 +34,7 @@ namespace Z0
 
         DarkMagenta = ConsoleColor.DarkMagenta,
 
-        Reserved0 = ConsoleColor.DarkGreen,
+        Trace = ConsoleColor.DarkMagenta,
 
         Reserved1 = ConsoleColor.DarkYellow,
 

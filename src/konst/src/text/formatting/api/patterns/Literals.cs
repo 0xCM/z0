@@ -309,28 +309,43 @@ namespace Z0
         public const string SS3 = Space + Slot3;
 
         /// <summary>
-        /// Defines the literal " {4}"
+        /// Defines the literal ' {4}'
         /// </summary>
         public const string SS4 = Space + Slot4;
 
         /// <summary>
-        /// Defines the literal " {5}"
+        /// Defines the literal ' {5}'
         /// </summary>
         public const string SS5 = Space + Slot5;
 
         /// <summary>
-        /// Defines the literal "{0} {1}"
+        /// Defines the literal '{0} {1}'
         /// </summary>
-        public const string SSx2 = Slot0 + SS1;
+        [StringLiteral]
+        public const string SSx2 = "{0} {1}";
 
         /// <summary>
-        /// Defines the literal "{0} {1} {2}"
+        /// Defines the literal '{0} {1} {2}'
         /// </summary>
-        public const string SSx3 = Slot0 + SS1 + SS2;
+        [StringLiteral]
+        public const string SSx3 = "{0} {1} {2}";
+
+        /// <summary>
+        /// Defines the literal '{0} {1} {2} {3}'
+        /// </summary>
+        [StringLiteral]
+        public const string SSx4 = "{0} {1} {2} {3}";
+
+        /// <summary>
+        /// Defines the literal '{0} {1} {2} {3} {4}'
+        /// </summary>
+        [StringLiteral]
+        public const string SSx5 = "{0} {1} {2} {3} {4}";
 
         /// <summary>
         /// Defines the literal "{1} {2}"
         /// </summary>
+        [StringLiteral("{1} {2}")]
         public const string SS1x2 = Slot1 + SS2;
 
         /// <summary>

@@ -104,7 +104,7 @@ namespace Z0
         /// Nonrecursively enumerates all files in the folder
         /// </summary>
         public FilePath[] AllFiles
-            => Directory.EnumerateFiles(Name).Map(FilePath.Define);
+            => Exists ? Directory.EnumerateFiles(Name).Map(FilePath.Define) : sys.empty<FilePath>();
 
         /// <summary>
         /// The folder path sans trailing separator

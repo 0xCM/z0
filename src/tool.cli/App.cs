@@ -36,10 +36,8 @@ namespace Z0
         {
             try
             {
-                var config = Apps.init(Context,args);
-                using var wf = Flow.shell(config);
+                using var wf = Flow.shell(args);
                 wf.Status(StepId, new {Message ="Running shell", Args = text.bracket(args.FormatList())});
-
                 wf.Status(StepId, "Shell run complete");
             }
             catch(Exception e)

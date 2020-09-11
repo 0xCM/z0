@@ -4,14 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;    
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
     using K = OperatorClassKind;
 
-    public readonly struct OperatorClass : IOperatorClass<OperatorClass,K> 
+    public readonly struct OperatorClass : IOperatorClass<OperatorClass,K>
     {
         public K Kind {get;}
 
@@ -19,12 +19,12 @@ namespace Z0
         public OperatorClass(K k)
             => Kind = k;
 
-        public OperatorClass Generalized 
+        public OperatorClass Generalized
             => new OperatorClass(Kind);
-    } 
+    }
 
-    public readonly struct OperatorClass<T> : IOpClass<K,T> 
-    { 
+    public readonly struct OperatorClass<T> : IOperational<K,T>
+    {
         public K Kind {get;}
 
         [MethodImpl(Inline)]

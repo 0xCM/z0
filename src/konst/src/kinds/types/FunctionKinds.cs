@@ -8,26 +8,26 @@ namespace Z0
 
     partial class Kinds
     {
-        public readonly struct EmitterFunc : IOpClass<K> { public K Kind => K.Emitter; }
+        public readonly struct EmitterFunc : IOperational<K> { public K Kind => K.Emitter; }
 
-        public readonly struct UnaryFunc : IOpClass<K> { public K Kind => K.UnaryFunc; }
+        public readonly struct UnaryFunc : IOperational<K> { public K Kind => K.UnaryFunc; }
 
-        public readonly struct BinaryFunc : IOpClass<K> { public K Kind => K.BinaryFunc; }
+        public readonly struct BinaryFunc : IOperational<K> { public K Kind => K.BinaryFunc; }
 
-        public readonly struct TernaryFunc : IOpClass<K> { public K Kind => K.TernaryFunc; }
+        public readonly struct TernaryFunc : IOperational<K> { public K Kind => K.TernaryFunc; }
 
-        public readonly struct EmitterFunc<T> : IOpClass<EmitterFunc,K,T> {}
+        public readonly struct EmitterFunc<T> : IOperational<EmitterFunc,K,T> {}
 
-        public readonly struct UnaryFunc<T> : IOpClass<UnaryFunc,K,T> {}
+        public readonly struct UnaryFunc<T> : IOperational<UnaryFunc,K,T> {}
 
-        public readonly struct BinaryFunc<T> : IOpClass<BinaryFunc,K,T> {}
+        public readonly struct BinaryFunc<T> : IOperational<BinaryFunc,K,T> {}
 
-        public readonly struct TernaryFunc<T> : IOpClass<TernaryFunc,K,T> {}
+        public readonly struct TernaryFunc<T> : IOperational<TernaryFunc,K,T> {}
 
-        public readonly struct UnaryFunc<A,R> : IOpClass<UnaryFunc,K,R> {}
+        public readonly struct UnaryFunc<A,R> : IOperational<UnaryFunc,K,R> {}
 
-        public readonly struct BinaryFunc<A,B,R> : IOpClass<BinaryFunc,K,R> {}
+        public readonly struct BinaryFunc<A,B,R> : IOperational<BinaryFunc,K,R> {}
 
-        public readonly struct TernaryFunc<A,B,C,R> : IOpClass<TernaryFunc,K,R> {}
+        public readonly struct TernaryFunc<A,B,C,R> : IOperational<TernaryFunc,K,R> {}
     }
 }

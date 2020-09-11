@@ -4,11 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Characterizes a reified set over elements of parametric type
     /// </summary>
     /// <typeparam name="F">The reifying type</typeparam>
     /// <typeparam name="T">The element type</typeparam>
+    [Free]
     public interface ISet<F,T> : IStreamSource<T>, ICounted, INullity
         where F : struct, ISet<F,T>
     {
@@ -24,7 +27,7 @@ namespace Z0
         /// <param name="rhs">The candidate superset</param>
         /// <param name="proper">Specifies whether only proper subsets are considered "subsets"</param>
         bool IsSubset(F rhs, bool proper);
-        
+
         /// <summary>
         /// Determines whether the current set is a superset of a specified set.
         /// </summary>
@@ -38,20 +41,20 @@ namespace Z0
         /// </summary>
         /// <param name="rhs">The set with which to union/param>
         F Union(F rhs);
-        
+
         /// <summary>
         /// Calculates the intersection between the current set and a specified set and
         /// returns a new set that embodies this result
         /// </summary>
         /// <param name="rhs">The set with which to intersect</param>
         F Intersect(F rhs);
-        
+
         /// <summary>
-        /// Calculates the set difference, or symmetric difference, between the current 
+        /// Calculates the set difference, or symmetric difference, between the current
         /// set and a specified set and returns a new set that embodies this result
         /// </summary>
         /// <param name="rhs">The set that should be differenced</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Symmetric_difference</remarks>
         F Difference(F rhs, bool symmetric);
-    }   
+    }
 }

@@ -35,12 +35,11 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {
-            var parts = PartIdParser.Service.ParseValid(args);
-            if(parts.Length == 0)
-                parts = Context.Api.PartIdentities;
+            // var parts = PartIdParser.Service.ParseValid(args);
+            // if(parts.Length == 0)
+            //     parts = Context.Api.PartIdentities;
 
-            var init = Apps.init(Context, args);
-            using var wf = Flow.shell(init);
+            using var wf = Flow.shell(args);
             using var state = AsmWorkflows.state(wf, AsmWorkflows.asm(Context));
 
             try

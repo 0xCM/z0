@@ -51,9 +51,9 @@ namespace Z0
             Extracts = extracts;
             ExtractPath = Target.HostExtractPath;
             ParsedPath = Target.ParsedPath;
-            HexPath = Target.HostHexPath;
+            HexPath = Target.HostX86Path;
             AsmPath = Target.HostAsmPath;
-            CilDataPath = Target.CilDataPath;
+            CilDataPath = Target.CilPath;
             Parsed = new X86MemberRefinement[0]{};
             Parser = ExtractParsers.member(Extractors.DefaultBufferLength);
             Wf.Created(StepId);

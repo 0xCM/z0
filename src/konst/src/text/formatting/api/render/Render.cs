@@ -19,6 +19,8 @@ namespace Z0
 
         public const FlairKind Status = FlairKind.Status;
 
+        public const FlairKind Trace = FlairKind.Trace;
+
         public const FlairKind Initializing = FlairKind.Initialized;
 
         public const FlairKind Initialized = FlairKind.Initializing;

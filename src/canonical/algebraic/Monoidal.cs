@@ -6,13 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
     using System.Linq;
-    using System.Collections.Generic;
 
     using static Canonical;
+    using static z;
 
-    public static class Monoidial
+
+    public static class MonoidialX
     {
         /// <summary>
         /// Reduces a stream to a single value via an additive monoid
@@ -20,45 +20,31 @@ namespace Z0
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The stream element type</typeparam>
         [MethodImpl(Inline)]
-        public static T foldA<T>(IEnumerable<T> src)
-            where T : unmanaged, IMonoidA<T>
-        {        
-            var cumulant = default(T).Zero;
-            var items = src.ToArray();
-            var count = items.Length;
-            for(var i=0; i<count; i++)
-                cumulant = cumulant.Add(items[i]);            
-            return cumulant;
+        public static T foldA<T>(ReadOnlySpan<T> src)
+            where T : struct, IMonoidA<T>
+        {
+            var accumulate = default(T).Zero;
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+                accumulate = accumulate.Add(skip(src,i));
+            return accumulate;
         }
-                    
+
         /// <summary>
         /// Reduces a stream to a single value via a multiplicative monoid
         /// </summary>
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The stream element type</typeparam>
         [MethodImpl(Inline)]
-        public static T foldM<T>(IEnumerable<T> src)
+        public static T foldM<T>(T[] src)
             where T : unmanaged, IMonoidM<T>
-        {        
-            var cumulant = default(T).One;
+        {
+            var accumulate = default(T).One;
             foreach(var item in src)
-                cumulant = cumulant.Mul(item);            
-            return cumulant;
+                accumulate = accumulate.Mul(item);
+            return accumulate;
         }
-                    
-        /// <summary>
-        /// Reduces a stream to a single value via a specified monoid
-        /// </summary>
-        /// <param name="src">The source stream</param>
-        /// <typeparam name="T">The stream element type</typeparam>
-        [MethodImpl(Inline)]
-        public static T fold<T>(IEnumerable<T> src, IMonoidalOps<T> monoid)
-            where T : unmanaged
-        {            
-            var cumulant = monoid.Identity;
-            foreach(var item in src)
-                cumulant = monoid.Compose(cumulant, item);            
-            return cumulant;
-        }
+
+
     }
 }

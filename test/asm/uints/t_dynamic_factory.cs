@@ -130,7 +130,7 @@ namespace Z0.Asm
         {
             var dId = OpIdentityBuilder.build(name, w, kind, false);
             var gId = OpIdentityBuilder.build(name, w, kind, true);
-            var archive = new ApiHexArchive(TargetArchive.CodeDir);
+            var archive = new ApiHexArchive(TargetArchive.X86Dir);
             var dBits = archive.Read(ApiQuery.host<dvec>().Uri).Where(x => x.Id == dId).Single();
             var gBits = archive.Read(ApiQuery.host<gvec>().Uri).Where(x => x.Id == gId).Single();
             return AsmCheck.Match(K.BinaryOp, w, dBits, gBits, dst);

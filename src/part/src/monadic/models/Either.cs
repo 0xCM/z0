@@ -66,11 +66,11 @@ namespace Z0
         [MethodImpl(Inline)]
         internal Either(R right)
         {
-            this.Right = right;
-            this.Selected = EitherCase.Right;
-            this.Left = default;
+            Right = right;
+            Selected = EitherCase.Right;
+            Left = default;
         }
-        
+
         internal enum EitherCase { Left, Right }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Z0
                 action(Left);
             return this;
         }
-    
+
         /// <summary>
         /// Invokes an action if the alternative is right values
         /// </summary>
@@ -170,11 +170,11 @@ namespace Z0
                         right => $"Right({right})");
 
         public override int GetHashCode()
-            => IsLeft ? Left.GetHashCode() 
+            => IsLeft ? Left.GetHashCode()
                 : Right.GetHashCode();
 
         public override bool Equals(object obj)
-            => obj is Either<L,R> 
+            => obj is Either<L,R>
             ? Equals((Either<L,R>)obj) : false;
     }
 }

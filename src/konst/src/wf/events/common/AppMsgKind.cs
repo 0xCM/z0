@@ -40,33 +40,10 @@ namespace Z0
         Benchmark = FlairKind.Running,
 
         /// <summary>
-        /// Dark blue foreground
-        /// </summary>
-        HiliteBD = FlairKind.Created,
-
-        /// <summary>
-        /// Light blue foreground
-        /// </summary>
-        HiliteBL = FlairKind.Blue,
-
-        /// <summary>
-        /// Dark cyan foreground
-        /// </summary>
-        HiliteCD = FlairKind.DataRow,
-
-        /// <summary>
         /// Cyan foreground
         /// </summary>
         HiliteCL = FlairKind.Ran,
 
-        /// <summary>
-        /// Dark magenta foreground
-        /// </summary>
-        HiliteMD = FlairKind.DarkMagenta,
 
-        /// <summary>
-        /// Magenta foreground
-        /// </summary>
-        HiliteML = FlairKind.Running,
     }
 }

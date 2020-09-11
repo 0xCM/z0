@@ -27,6 +27,10 @@ namespace Z0
                 => new Files(src);
 
             [MethodImpl(Inline)]
+            public static implicit operator Files(Z0.FilePath[] src)
+                => new Files(src.Select(x => FS.path(x.Name)));
+
+            [MethodImpl(Inline)]
             public Files(FilePath[] src)
                 => Data = src;
 
@@ -48,6 +52,9 @@ namespace Z0
                 get => Data.Edit;
             }
 
+            public ReadOnlySpan<FilePath> ViewNonEmpty
+                => Data.Storage.Where(x => x.IsNonEmpty);
+
             public Files Where(Func<FilePath,bool> f)
                 => Data.Storage.Where(f);
 
@@ -63,11 +70,28 @@ namespace Z0
                 get => ref Data[index];
             }
 
+            public Outcome<uint> Delete()
+            {
+                try
+                {
+                    foreach(var file in Data.View)
+                        FS.delete(file);
+
+                    Edit.Clear();
+
+                    return Count;
+                }
+                catch(Exception e)
+                {
+                    return e;
+                }
+            }
+
             IEnumerator<FilePath> IEnumerable<FilePath>.GetEnumerator()
-                => ((IEnumerable<FilePath>)Data.Storage).GetEnumerator();
+                => ViewNonEmpty.ToEnumerable().GetEnumerator();
 
             IEnumerator IEnumerable.GetEnumerator()
-                => Data.Storage.GetEnumerator();
+                => ViewNonEmpty.ToEnumerable().GetEnumerator();
         }
     }
 }

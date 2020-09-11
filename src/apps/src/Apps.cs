@@ -22,6 +22,9 @@ namespace Z0
             return shell;
         }
 
+        public static IAppContext context(IWfShell wf)
+            => context(wf.Modules, wf.Paths);
+
         public static IAppContext context()
         {
             var entry = Assembly.GetEntryAssembly();
@@ -30,30 +33,33 @@ namespace Z0
             return context(modules, ShellPaths.Default);
         }
 
-        public static WfInit init(IAppContext app, string[] args)
+        public static WfInit init(Assembly control, string[] args)
         {
-            var control = Assembly.GetEntryAssembly();
-            var id = control.Id();
-            var ct = z.correlate(id);
-            var parts = Flow.parts(args, app.Api.PartIdentities);
-            var src = ApiQuery.modules(FS.path(control.Location).FolderPath);
-            var settings = Flow.settings(app);
-            var captureOut = FS.dir(app.Paths.LogRoot.Name) + FS.folder("capture/artifacts");
-            var captureLog = FS.dir(app.Paths.LogRoot.Name) + FS.folder("capture/logs");
-            var dstArchive = new ArchiveConfig(FolderPath.Define(captureOut.Name));
-            var config  = new WfInit(app, args, src, dstArchive, parts,
-                app.Paths.ResourceRoot,
-                app.Paths.AppDataRoot,
-                app.Paths.AppLogRoot,
-                settings);
-            return config;
+            var modules = ApiQuery.modules(control, args);
+            return new WfInit(Flow.context(control, modules, args), args, modules);
         }
+
+        // public static WfInit init(IAppContext app, string[] args)
+        // {
+        //     var control = Assembly.GetEntryAssembly();
+        //     var id = control.Id();
+        //     var ct = z.correlate(id);
+        //     var parts = Flow.parts(args, app.Api.PartIdentities);
+        //     var src = ApiQuery.modules(FS.path(control.Location).FolderPath);
+        //     var settings = Flow.settings(app);
+        //     var captureOut = FS.dir(app.Paths.LogRoot.Name) + FS.folder("capture/artifacts");
+        //     var captureLog = FS.dir(app.Paths.LogRoot.Name) + FS.folder("capture/logs");
+        //     var dstArchive = new ArchiveConfig(FolderPath.Define(captureOut.Name));
+        //     var config  = new WfInit(app, args, src, dstArchive, parts,
+        //         app.Paths.ResourceRoot,
+        //         app.Paths.AppDataRoot,
+        //         app.Paths.AppLogRoot,
+        //         settings);
+        //     return config;
+        // }
 
         public static IAppContext context(ApiModules src, IShellPaths paths)
             => new AppContext(paths, src.Api, random(), settings(paths), exchange());
-
-        static IAppContext context(IShellPaths paths, ApiSet api, IPolyrand random)
-            => new AppContext(paths, api, random, settings(paths), exchange());
 
         static ISettings settings(IShellPaths paths)
             => SettingValues.Load(paths.AppConfigPath);

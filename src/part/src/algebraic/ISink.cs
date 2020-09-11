@@ -3,8 +3,9 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Sink interface root
@@ -26,7 +27,7 @@ namespace Z0
         /// Receives supplied input
         /// </summary>
         /// <param name="src">The input</param>
-        void Deposit(A src);        
+        void Deposit(A src);
     }
 
     [SuppressUnmanagedCodeSecurity]

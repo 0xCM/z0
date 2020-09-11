@@ -18,11 +18,11 @@ namespace Z0
         FolderPath ParsedDirPath(FolderPath root)
             => (root + ParsedFolderName).Create();
 
-        FolderPath HexDirPath(FolderPath root)
-            => (root + HexFolderName).Create();
+        FolderPath X86DirPath(FolderPath root)
+            => (root + X86FolderName).Create();
 
-        FolderPath CilDataDirPath(FolderPath root)
-            => (root + CilDataFolderName).Create();
+        FolderPath CilDirPath(FolderPath root)
+            => (root + CilFolderName).Create();
 
         FolderPath AsmDirPath(FolderPath root)
             => (root + AsmFolderName).Create();

@@ -8,25 +8,25 @@ namespace Z0
 
     using static Konst;
 
-    public interface IOperatorClass : IOpClass
+    public interface IOperatorClass : IOperational
     {
 
     }
 
-    public interface IOperatorClass<E> : IOperatorClass, IOpClass<E>
+    public interface IOperatorClass<E> : IOperatorClass, IOperational<E>
         where E : unmanaged, Enum
     {
 
     }
 
-    public interface IOperatorClass<F,E> : IOperatorClass<E>, IOpClassF<F,E>
+    public interface IOperatorClass<F,E> : IOperatorClass<E>, IOperationalF<F,E>
         where F : struct, IOperatorClass<F,E>
         where E : unmanaged, Enum
     {
         OperatorClass Generalized {get;}
     }
 
-    public interface IOperatorClass<F,E,T> : IOperatorClass<F,E>, IOpClassT<T>
+    public interface IOperatorClass<F,E,T> : IOperatorClass<F,E>, IOperationalT<T>
         where F : struct, IOperatorClass<F,E>
         where E : unmanaged, Enum
     {

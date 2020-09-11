@@ -67,7 +67,7 @@ namespace Z0.Asm
             using var log = LogPath.Writer();
             var paths = AppPaths.ForApp(PartId.Control);
             var capture = CaptureArchive(paths.AppCaptureRoot);
-            var archive = UriBitsArchive(capture.CodeDir);
+            var archive = UriBitsArchive(capture.X86Dir);
 
             for(var i=0; i<parts.Length; i++)
             {

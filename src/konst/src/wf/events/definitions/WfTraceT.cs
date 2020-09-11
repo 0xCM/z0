@@ -13,9 +13,9 @@ namespace Z0
     using static z;
 
     [Event]
-    public readonly struct WfStatus<T> : IWfStatus<T>
+    public readonly struct WfTrace<T> : IWfTrace<T>
     {
-        public static string EventName = nameof(WfStatus<T>);
+        public static string EventName = nameof(WfTrace<T>);
 
         public WfEventId EventId {get;}
 
@@ -26,7 +26,7 @@ namespace Z0
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStatus(WfStepId step, T content, CorrelationToken ct, FlairKind flair = Status)
+        public WfTrace(WfStepId step, T content, CorrelationToken ct, FlairKind flair = Trace)
         {
             EventId = (EventName, step, ct);
             StepId = step;

@@ -11,7 +11,7 @@ namespace Z0
     /// <summary>
     /// Characterizes an operation class that classifies width-parametric operations
     /// </summary>
-    public interface ISizedKind : IOpClass
+    public interface ISizedKind : IOperational
     {
         TypeWidth Width {get;}
     }
@@ -23,15 +23,15 @@ namespace Z0
     public interface ISizedKind<W> : ISizedKind
         where W : unmanaged, ITypeWidth
     {
-        
+
     }
-        
+
     /// <summary>
     /// Characterizes a width-parametric operation class that is also class-parametric
     /// </summary>
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="E">The class type</typeparam>
-    public interface ISizedKind<W,E> : ISizedKind<W>, IOpClass<E>
+    public interface ISizedKind<W,E> : ISizedKind<W>, IOperational<E>
         where W : unmanaged, ITypeWidth
         where E : unmanaged, Enum
     {
@@ -44,10 +44,10 @@ namespace Z0
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="E">The class type</typeparam>
     /// <typeparam name="T">The operand type</typeparam>
-    public interface ISizedKind<W,E,T> : ISizedKind<W>, IOpClass<E,T>
+    public interface ISizedKind<W,E,T> : ISizedKind<W>, IOperational<E,T>
         where W : unmanaged, ITypeWidth
         where E : unmanaged, Enum
     {
 
-    }    
+    }
 }
