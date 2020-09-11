@@ -11,9 +11,9 @@ namespace Z0
 
     public readonly struct NumericIdentity : IIdentifiedType<NumericIdentity>
     {
-        public string Identifier {get;}            
+        public string Identifier {get;}
 
-        public NumericKind NumericKind {get;}           
+        public NumericKind NumericKind {get;}
 
         [MethodImpl(Inline)]
         public static NumericIdentity Define(NumericKind kind)
@@ -44,10 +44,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public TypeIdentity AsTypeIdentity()
-            => TypeIdentity.Define(Identifier);
+            => TypeIdentity.define(Identifier);
 
         IIdentifiedType<NumericIdentity> Identified => this;
- 
+
         public override int GetHashCode()
             => Identified.HashCode;
 

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class t_bitsvc<X> : UnitTest<X,CheckVectors,TCheckVectors>
+    public abstract class t_bitsvc<X> : UnitTest<X,CheckVectors,ICheckVectors>
         where X : t_bitsvc<X>, new()
     {
         protected override int RepCount => Pow2.T08;

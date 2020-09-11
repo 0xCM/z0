@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class Fixed
+    partial class Cells
     {
         /// <summary>
         /// Writes source data to a fixed target which, hopefully, is of sufficient size

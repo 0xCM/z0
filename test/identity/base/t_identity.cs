@@ -3,10 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    public abstract class t_identity<U> : UnitTest<U,CheckVectors,TCheckVectors>
+{
+    public abstract class t_identity<U> : UnitTest<U,CheckVectors,ICheckVectors>
         where U : t_identity<U>
     {
-        
+
     }
 }

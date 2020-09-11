@@ -9,19 +9,18 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    //using static Memories;
+    using static Konst;
     using static XPress;
 
     readonly struct EmitterOpFactory<T> : IEmitterOpFactory<T>
     {
         public static IEmitterOpFactory<T> Service => default(EmitterOpFactory<T>);
 
-        public Func<T> Manufacture(MethodInfo method, object instance)
+        public Func<T> Manufacture(MethodInfo method, object host)
         {
-            var callExpr = call(instance, method);
-            var convExpr = convert<T>(callExpr);
-            var f = emitter<T>(convExpr); 
+            var xCall = call(host, method);
+            var xConvert = convert<T>(xCall);
+            var f = emitter<T>(xConvert);
             return f.Compile();
         }
     }

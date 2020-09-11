@@ -26,30 +26,30 @@ namespace Z0
         /// </summary>
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static TypeIdentity numeric<T>(T t = default)
             where T : unmanaged
-                => TypeIdentity.Define(typeof(T).NumericKind().Format());
+                => define(typeof(T).NumericKind().Format());
 
         public static TypeIdentity numeric(string prefix, Type arg)
         {
             var kind = arg.NumericKind();
             var indicator = kind.Indicator().ToChar();
             var width = kind.Width();
-            return TypeIdentity.Define($"{prefix}{width}{indicator}");
+            return TypeIdentity.define($"{prefix}{width}{indicator}");
         }
 
         [MethodImpl(Inline)]
-        public static TypeIdentity Define(string id)
+        public static TypeIdentity define(string id)
             => new TypeIdentity(id);
 
         [MethodImpl(Inline)]
         public static TypeIdentity operator +(TypeIdentity lhs, string rhs)
-            => Define($"{lhs}{rhs}");
+            => define($"{lhs}{rhs}");
 
         [MethodImpl(Inline)]
         public static TypeIdentity operator +(string lhs, TypeIdentity rhs)
-            => Define($"{lhs}{rhs}");
+            => define($"{lhs}{rhs}");
 
         [MethodImpl(Inline)]
         public static implicit operator string(TypeIdentity src)
@@ -66,7 +66,7 @@ namespace Z0
         [MethodImpl(Inline)]
         TypeIdentity(string id)
             => Identifier = id;
-        
+
         IIdentifiedType<TypeIdentity> Identified => this;
 
         public bool IsEmpty
@@ -74,7 +74,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => string.IsNullOrWhiteSpace(Identifier);
         }
-        
+
         public override int GetHashCode()
             => Identified.HashCode;
 
@@ -82,13 +82,13 @@ namespace Z0
             => Identified.Same(obj);
 
         public override string ToString()
-            => Identified.Format();        
+            => Identified.Format();
 
         [MethodImpl(Inline)]
         public Option<TypeIdentity> ToOption()
             => IsEmpty ? Option.none<TypeIdentity>() : Option.some(this);
 
-        public static TypeIdentity Empty 
-            => Define(string.Empty);
+        public static TypeIdentity Empty
+            => define(string.Empty);
     }
 }

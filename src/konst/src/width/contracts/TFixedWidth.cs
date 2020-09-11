@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface TFixedWidth<F> : IFixedWidth, TTypeWidth<F>, ITypedLiteral<F,FixedWidth,uint>
+    public interface TFixedWidth<F> : ICellWidth, TTypeWidth<F>, ITypedLiteral<F,CellWidth,uint>
         where F : struct, TFixedWidth<F>
-    {     
-        FixedWidth IFixedWidth.FixedWidth 
-            => Widths.tfixed<F>();               
+    {
+        CellWidth ICellWidth.CellWidth
+            => Widths.cell<F>();
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Fixed
+    partial class Cells
     {
         /// <summary>
         /// Returns a generic reference to the leading storage cell of an 8-bit storage block

@@ -42,7 +42,6 @@ namespace Z0
         public static implicit operator Outcome<T>((bool ok, T data) src)
             => new Outcome<T>(src.ok, src.data);
 
-
         [MethodImpl(Inline)]
         public static implicit operator Outcome<T>((bool ok, T data, ulong code) src)
             => new Outcome<T>(src.ok, src.data, src.code);

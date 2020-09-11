@@ -12,6 +12,21 @@ namespace Z0
 
     partial struct ApiQuery
     {
+        [Op]
+        public static ApiHostInfo host<H>()
+            => host(typeof(H));
+
+
+        [Op]
+        public static ApiHostInfo host(Type t)
+        {
+            var ass = t.Assembly;
+            var part = id(ass);
+            var u = uri(t);
+            var methods = t.DeclaredMethods();
+            return new ApiHostInfo(t, u, part, methods);
+        }
+
         /// <summary>
         /// Describes an api host
         /// </summary>
@@ -31,14 +46,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source file</param>
         [MethodImpl(Inline)]
-        public static Option<ApiHostUri> host(FilePath src)
+        public static Option<ApiHostUri> host(FS.FilePath src)
             => host(src.FileName);
 
         /// <summary>
         /// Determines the api host that owns the file, if any
         /// </summary>
         /// <param name="src">The source file</param>
-        public static Option<ApiHostUri> host(FileName src)
+        public static Option<ApiHostUri> host(FS.FileName src)
         {
             var components = src.WithoutExtension.Name.Split(Chars.Dot);
             if(components.Length == 2)

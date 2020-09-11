@@ -10,19 +10,9 @@ namespace Z0
 
     using static Konst;
 
-
     /// <summary>
     /// An anti-succinct representation of a bit
     /// </summary>
-    /// <remarks>
-    /// An essay would be required to fully explain why a 32-bit integer is used to
-    /// encose the content of a single bit. Briefly, it is because its the only way
-    /// to acheive performance characteristics on par with the system-defined bool
-    /// data type. Bool, which is itself predicated on a byte, is a privileged
-    /// data structure that garners special treatment by the runtime. A user-defined
-    /// type predicated on a byte would not enjoy this status and would endure
-    /// a constant barrage of shifts, movements, etc. from not being 32-bit aligned.
-    /// </remarks>
     [
         IdentityProvider(typeof(bit)),
         UserType(UserTypeId.BitId),
@@ -674,7 +664,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public TypeIdentity Identity()
-            => TypeIdentity.Define("1u");
+            => TypeIdentity.define("1u");
     }
 
     /// <summary>

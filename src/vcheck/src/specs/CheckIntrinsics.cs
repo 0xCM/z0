@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public readonly struct CheckIntrinsics : TCheckInstrinsics
+    public readonly struct CheckIntrinsics : TCheckIntrinsics
     {
 
     }

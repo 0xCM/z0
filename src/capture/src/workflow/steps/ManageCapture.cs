@@ -38,7 +38,7 @@ namespace Z0
             Wf = state.Wf;
             Ct = ct;
             Sink = Wf.WfSink;
-            Parts = Wf.PartIdentities;
+            Parts = Wf.Api.PartIdentities;
             Broker = state.CaptureBroker;
             Step = new ManageCaptureStep();
             Wf.Created(StepId);

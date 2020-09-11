@@ -39,6 +39,10 @@ namespace Z0
                 => data.Name;
 
             [MethodImpl(Inline)]
+            public static PathPart from(string src)
+                => new PathPart(src);
+
+            [MethodImpl(Inline)]
             public PathPart(string name)
                 => Name = name;
 
@@ -63,6 +67,10 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format()
                 => Name;
+
+            [MethodImpl(Inline)]
+            public PathPart[] Split(char delimiter)
+                => Name.SplitClean(delimiter).Select(from);
 
             public bool IsEmpty
             {

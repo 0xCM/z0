@@ -10,9 +10,9 @@ namespace Z0
     using static Konst;
 
     partial class Widths
-    {        
+    {
         /// <summary>
-        /// Counts the number of numeric T-cells that can be convered by contiguous memory of width W
+        /// Counts the number of numeric T-cells that can be covered by contiguous memory of width W
         /// </summary>
         /// <param name="w">The memory bit-width</param>
         /// <typeparam name="T">The cell type</typeparam>
@@ -57,7 +57,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+        /// Counts the number of numeric T-cells that can be covered by contiguous memory of specified width
         /// </summary>
         /// <param name="w">The memory bit-width</param>
         /// <typeparam name="T">The cell type</typeparam>
@@ -66,7 +66,7 @@ namespace Z0
             => 1/(int)bytes<T>();
 
         /// <summary>
-        /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+        /// Counts the number of numeric T-cells that can be covered by contiguous memory of specified width
         /// </summary>
         /// <param name="w">The memory bit-width</param>
         /// <typeparam name="T">The cell type</typeparam>
@@ -75,7 +75,7 @@ namespace Z0
             => 2/(int)bytes<T>();
 
         /// <summary>
-        /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+        /// Counts the number of numeric T-cells that can be covered by contiguous memory of specified width
         /// </summary>
         /// <param name="w">The memory bit-width</param>
         /// <typeparam name="T">The cell type</typeparam>
@@ -84,7 +84,7 @@ namespace Z0
             => 4/(int)bytes<T>();
 
         /// <summary>
-        /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+        /// Counts the number of numeric T-cells that can be covered by contiguous memory of specified width
         /// </summary>
         /// <param name="w">The memory bit-width</param>
         /// <typeparam name="T">The cell type</typeparam>
@@ -93,7 +93,7 @@ namespace Z0
             => 8/(int)bytes<T>();
 
         /// <summary>
-        /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+        /// Counts the number of numeric T-cells that can be covered by contiguous memory of specified width
         /// </summary>
         /// <param name="w">The memory bit-width</param>
         /// <typeparam name="T">The cell type</typeparam>
@@ -103,7 +103,7 @@ namespace Z0
                 => 16/(int)bytes<T>();
 
         /// <summary>
-        /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+        /// Counts the number of numeric T-cells that can be covered by contiguous memory of specified width
         /// </summary>
         /// <param name="w">The memory bit-width</param>
         /// <typeparam name="T">The cell type</typeparam>
@@ -113,7 +113,7 @@ namespace Z0
                 => 32/(int)bytes<T>();
 
         /// <summary>
-        /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+        /// Counts the number of numeric T-cells that can be covered by contiguous memory of specified width
         /// </summary>
         /// <param name="w">The memory bit-width</param>
         /// <typeparam name="T">The cell type</typeparam>
@@ -123,7 +123,7 @@ namespace Z0
                 => 64/(int)bytes<T>();
 
         /// <summary>
-        /// Counts the number of numeric T-cells that can be convered by contiguous memory of specified width
+        /// Counts the number of numeric T-cells that can be covered by contiguous memory of specified width
         /// </summary>
         /// <param name="w">The memory bit-width</param>
         /// <typeparam name="T">The cell type</typeparam>

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using FW = FixedWidth;
+    using FW = CellWidth;
     using FC = SegOpClass;
 
     /// <summary>
@@ -17,567 +17,567 @@ namespace Z0
     {
        /// <summary>
        /// Classifies nothing
-       /// </summary>        
+       /// </summary>
         None = 0,
 
        /// <summary>
        /// Classifies functions with fixed operand and return types
-       /// </summary>        
+       /// </summary>
         FixedSigClass = FC.LastClass << 1,
 
        /// <summary>
        /// Classifies a signature position
-       /// </summary>        
+       /// </summary>
         FixedSlot = FixedSigClass << 1,
 
        /// <summary>
        /// Classifies a fixed operand type
-       /// </summary>        
+       /// </summary>
         Operand = FixedSigClass << 1,
 
        /// <summary>
        /// Classifies a fixed return type
-       /// </summary>        
+       /// </summary>
         Return = Operand << 1,
-                
+
        /// <summary>
        /// The first slot
-       /// </summary>        
+       /// </summary>
         Slot0 = Return << 1,
 
        /// <summary>
        /// The second slot
-       /// </summary>        
+       /// </summary>
         Slot1 = Slot0 << 1,
 
        /// <summary>
        /// The third slot
-       /// </summary>        
+       /// </summary>
         Slot2 = Slot1 << 1,
 
        /// <summary>
        /// The fourth slot
-       /// </summary>        
+       /// </summary>
         Slot3 = Slot2 << 1,
 
        /// <summary>
        /// The pentultimate slot
-       /// </summary>        
+       /// </summary>
         Slot4 = Slot3 << 1,
 
        /// <summary>
        /// The last slot
-       /// </summary>        
+       /// </summary>
         Slot5 = Slot4 << 1,
-    
+
        /// <summary>
        /// The signature specification lower bound
-       /// </summary>        
+       /// </summary>
         SigSpec = Slot5 << 1,
-                
+
        /// <summary>
        /// The function signature specification lower bound
-       /// </summary>        
+       /// </summary>
         Function = SigSpec << 1,
 
        /// <summary>
        /// The operator signature specification lower bound
-       /// </summary>        
+       /// </summary>
         Operator = SigSpec << 2,
 
         /// <summary>
         /// A unary function f:w1 -> w1
-        /// </summary>        
-        UnaryFunc1x1 = Function | Fixed1x0 | Return1, 
+        /// </summary>
+        UnaryFunc1x1 = Function | Fixed1x0 | Return1,
 
         /// <summary>
         /// A unary function f:w1 -> w8
-        /// </summary>        
-        UnaryFunc1x8 = Function | Fixed1x0 | Return8, 
+        /// </summary>
+        UnaryFunc1x8 = Function | Fixed1x0 | Return8,
 
         /// <summary>
         /// A unary function f:w1 -> w16
-        /// </summary>        
-        UnaryFunc1x16 = Function | Fixed1x0 | Return16, 
+        /// </summary>
+        UnaryFunc1x16 = Function | Fixed1x0 | Return16,
 
         /// <summary>
         /// A unary function f:w1 -> w32
-        /// </summary>        
-        UnaryFunc1x32 = Function | Fixed1x0 | Return32, 
+        /// </summary>
+        UnaryFunc1x32 = Function | Fixed1x0 | Return32,
 
         /// <summary>
         /// A unary function f:w1 -> w64
-        /// </summary>        
-        UnaryFunc1x64 = Function | Fixed1x0 | Return64, 
+        /// </summary>
+        UnaryFunc1x64 = Function | Fixed1x0 | Return64,
 
         /// <summary>
         /// A 1-bit unary operator
-        /// </summary>        
+        /// </summary>
         UnaryOp1 = Operator | Fixed1x0 | Return1,
 
         /// <summary>
         /// An 8-bit unary operator
-        /// </summary>        
+        /// </summary>
         UnaryOp8 = Operator | Fixed8x0 | Return8,
 
         /// <summary>
         /// An 16-bit unary operator
-        /// </summary>        
+        /// </summary>
         UnaryOp16 = Operator | Fixed16x0 | Return16,
 
         /// <summary>
         /// An 32-bit unary operator
-        /// </summary>        
+        /// </summary>
         UnaryOp32 =  Operator | Fixed32x0 | Return32,
 
         /// <summary>
         /// An 64-bit unary operator
-        /// </summary>        
+        /// </summary>
         UnaryOp64 = Operator | Fixed64x0 | Return64,
 
         /// <summary>
         /// An 128-bit unary operator
-        /// </summary>        
+        /// </summary>
         UnaryOp128 = Operator | Fixed128x0 | Return128,
 
         /// <summary>
         /// An 256-bit unary operator
-        /// </summary>        
+        /// </summary>
         UnaryOp256 = Operator | Fixed256x0 | Return256,
 
         /// <summary>
         /// An 512-bit unary operator
-        /// </summary>        
+        /// </summary>
         UnaryOp512 = Operator | Fixed512x0 | Return512,
 
         /// <summary>
         /// A 1-bit binary operator
-        /// </summary>        
+        /// </summary>
         BinaryOp1 = Operator | Fixed1x0 | Fixed8x1 | Return1,
 
         /// <summary>
         /// An 8-bit binary operator
-        /// </summary>        
+        /// </summary>
         BinaryOp8 = Operator | Fixed8x0 | Fixed8x1 | Return8,
 
         /// <summary>
         /// An 16-bit binary operator
-        /// </summary>        
+        /// </summary>
         BinaryOp16 = Operator | Fixed16x0 | Fixed16x1 | Return16,
 
         /// <summary>
         /// An 32-bit binary operator
-        /// </summary>        
+        /// </summary>
         BinaryOp32 =  Operator | Fixed32x0 | Fixed32x1 |Return32,
 
         /// <summary>
         /// An 64-bit binary operator
-        /// </summary>        
+        /// </summary>
         BinaryOp64 = Operator | Fixed64x0 | Fixed64x1 | Return64,
 
         /// <summary>
         /// An 128-bit binary operator
-        /// </summary>        
+        /// </summary>
         BinaryOp128 = Operator | Fixed128x0 | Fixed128x1 | Return128,
 
         /// <summary>
         /// An 256-bit binary operator
-        /// </summary>        
+        /// </summary>
         BinaryOp256 = Operator | Fixed256x0 | Fixed256x1 | Return256,
 
         /// <summary>
         /// An 512-bit binary operator
-        /// </summary>        
+        /// </summary>
         BinaryOp512 = Operator | Fixed512x0 | Fixed512x1 | Return512,
 
         /// <summary>
         /// A 1-bit ternary operator
-        /// </summary>        
+        /// </summary>
         TernaryOp1 = Operator | Fixed1x0 | Fixed8x1 | Fixed8x2 | Return1,
 
         /// <summary>
         /// An 8-bit ternary operator
-        /// </summary>        
+        /// </summary>
         TernaryOp8 = Operator | Fixed8x0 | Fixed8x1 | Fixed8x2 | Return8,
 
         /// <summary>
         /// An 16-bit ternary operator
-        /// </summary>        
+        /// </summary>
         TernaryOp16 = Operator | Fixed16x0 | Fixed16x1 | Fixed16x2 | Return16,
 
         /// <summary>
         /// An 32-bit ternary operator
-        /// </summary>        
+        /// </summary>
         TernaryOp32 =  Operator | Fixed32x0 | Fixed32x1 | Fixed32x2 | Return32,
 
         /// <summary>
         /// An 64-bit ternary operator
-        /// </summary>        
+        /// </summary>
         TernaryOp64 = Operator | Fixed64x0 | Fixed64x1 | Fixed64x2 | Return64,
 
         /// <summary>
         /// An 128-bit ternary operator
-        /// </summary>        
+        /// </summary>
         TernaryOp128 = Operator | Fixed128x0 | Fixed128x1 | Fixed128x2 | Return128,
 
         /// <summary>
         /// An 256-bit ternary operator
-        /// </summary>        
+        /// </summary>
         TernaryOp256 = Operator | Fixed256x0 | Fixed256x1 | Fixed256x2 | Return256,
 
         /// <summary>
         /// An 512-bit ternary operator
-        /// </summary>        
+        /// </summary>
         TernaryOp512 = Operator | Fixed512x0 | Fixed512x1 | Fixed512x2 | Return512,
 
         /// <summary>
         /// Redeclaration of <see cref="FW.W1"/>
-        /// </summary>        
+        /// </summary>
         Fixed1 = FW.W1,
 
         /// <summary>
         /// Redeclaration of <see cref="FW.W8"/>
-        /// </summary>        
+        /// </summary>
         Fixed8 = FW.W8,
 
         /// <summary>
         /// Redeclaration of <see cref="FW.W16"/>
-        /// </summary>        
+        /// </summary>
         Fixed16 = FW.W16,
 
         /// <summary>
         /// Redeclaration of <see cref="FW.W32"/>
-        /// </summary>        
+        /// </summary>
         Fixed32 = FW.W32,
 
         /// <summary>
         /// Redeclaration of <see cref="FW.W64"/>
-        /// </summary>        
+        /// </summary>
         Fixed64 = FW.W64,
 
         /// <summary>
         /// Redeclaration of <see cref="FW.W128"/>
-        /// </summary>        
+        /// </summary>
         Fixed128 = FW.W128,
 
         /// <summary>
         /// Redeclaration of <see cref="FW.W256"/>
-        /// </summary>        
+        /// </summary>
         Fixed256 = FW.W256,
 
         /// <summary>
         /// Redeclaration of <see cref="FW.W512"/>
-        /// </summary>        
+        /// </summary>
         Fixed512 = FW.W512,
 
         /// <summary>
         /// 1-bit value in slot
-        /// </summary>        
+        /// </summary>
         FixedSlot1 = FixedSlot | Fixed1,
 
         /// <summary>
         /// 8-bit value in slot
-        /// </summary>        
+        /// </summary>
         FixedSlot8 = FixedSlot | Fixed8,
 
         /// <summary>
         /// 16-bit value in slot
-        /// </summary>        
+        /// </summary>
         FixedSlot16 = FixedSlot | Fixed16,
 
         /// <summary>
         /// 32-bit value in slot
-        /// </summary>        
+        /// </summary>
         FixedSlot32 = FixedSlot | Fixed32,
 
         /// <summary>
         /// 54-bit value in slot
-        /// </summary>        
+        /// </summary>
         FixedSlot64 = FixedSlot | Fixed64,
 
         /// <summary>
         /// 128-bit value in slot
-        /// </summary>        
+        /// </summary>
         FixedSlot128 = FixedSlot | Fixed128,
 
         /// <summary>
         /// 256-bit value in slot
-        /// </summary>        
+        /// </summary>
         FixedSlot256 = FixedSlot | Fixed256,
 
         /// <summary>
         /// 512-bit value in slot
-        /// </summary>        
+        /// </summary>
         FixedSlot512 = FixedSlot | Fixed512,
 
         /// <summary>
         /// The first operand slot
-        /// </summary>        
+        /// </summary>
         Operand0 = Slot0 | Operand,
 
         /// <summary>
         /// The second operand slot
-        /// </summary>        
+        /// </summary>
         Operand1 = Slot1 | Operand,
 
         /// <summary>
         /// The third operand slot
-        /// </summary>        
+        /// </summary>
         Operand2 = Slot2 | Operand,
 
         /// <summary>
         /// The fourth operand slot
-        /// </summary>        
+        /// </summary>
         Operand3 = Slot3 | Operand,
 
         /// <summary>
         /// The fifth operand slot
-        /// </summary>        
+        /// </summary>
         Operand4 = Slot4 | Operand,
 
         /// <summary>
         /// The retun slot
-        /// </summary>        
+        /// </summary>
         ReturnSlot = Slot5 | Return,
 
         /// <summary>
         /// 1-bit operand in slot 0
-        /// </summary>        
+        /// </summary>
         Fixed1x0 = Operand0 | FixedSlot1,
 
         /// <summary>
         /// 1-bit operand in slot 1
-        /// </summary>        
+        /// </summary>
         Fixed1x1 = Operand1 | FixedSlot1,
 
         /// <summary>
         /// 1-bit operand in slot 2
-        /// </summary>        
+        /// </summary>
         Fixed1x2 = Operand2 | FixedSlot1,
 
         /// <summary>
         /// 1-bit operand in slot 3
-        /// </summary>        
+        /// </summary>
         Fixed1x3 = Operand2 | FixedSlot1,
 
         /// <summary>
         /// 1-bit operand in slot 4
-        /// </summary>        
+        /// </summary>
         Fixed1x4 = Operand4 | FixedSlot1,
 
         /// <summary>
         /// 8-bit operand in slot 0
-        /// </summary>        
+        /// </summary>
         Fixed8x0 = Operand0 | FixedSlot8,
 
         /// <summary>
         /// 8-bit operand in slot 1
-        /// </summary>        
+        /// </summary>
         Fixed8x1 = Operand1 | FixedSlot8,
 
         /// <summary>
         /// 8-bit operand in slot 2
-        /// </summary>        
+        /// </summary>
         Fixed8x2 = Operand2 | FixedSlot8,
 
         /// <summary>
         /// 8-bit operand in slot 3
-        /// </summary>        
+        /// </summary>
         Fixed8x3 = Operand2 | FixedSlot8,
 
         /// <summary>
         /// 8-bit operand in slot 4
-        /// </summary>        
+        /// </summary>
         Fixed8x4 = Operand4 | FixedSlot8,
 
         /// <summary>
         /// 16-bit operand in slot 0
-        /// </summary>        
+        /// </summary>
         Fixed16x0 = Operand0 | FixedSlot16,
 
         /// <summary>
         /// 16-bit operand in slot 1
-        /// </summary>        
+        /// </summary>
         Fixed16x1 = Operand1 | FixedSlot16,
 
         /// <summary>
         /// 16-bit operand in slot 2
-        /// </summary>        
+        /// </summary>
         Fixed16x2 = Operand2 | FixedSlot16,
 
         /// <summary>
         /// 16-bit operand in slot 3
-        /// </summary>        
+        /// </summary>
         Fixed16x3 = Operand2 | FixedSlot16,
 
         /// <summary>
         /// 16-bit operand in slot 4
-        /// </summary>        
+        /// </summary>
         Fixed16x4 = Operand4 | FixedSlot16,
 
         /// <summary>
         /// 32-bit operand in slot 0
-        /// </summary>        
+        /// </summary>
         Fixed32x0 = Operand0 | FixedSlot32,
 
         /// <summary>
         /// 32-bit operand in slot 1
-        /// </summary>        
+        /// </summary>
         Fixed32x1 = Operand1 | FixedSlot32,
 
         /// <summary>
         /// 32-bit operand in slot 2
-        /// </summary>        
+        /// </summary>
         Fixed32x2 = Operand2 | FixedSlot32,
 
         /// <summary>
         /// 32-bit operand in slot 3
-        /// </summary>        
+        /// </summary>
         Fixed32x3 = Operand2 | FixedSlot32,
 
         /// <summary>
         /// 32-bit operand in slot 4
-        /// </summary>        
+        /// </summary>
         Fixed32x4 = Operand4 | FixedSlot32,
 
         /// <summary>
         /// 64-bit operand in slot 0
-        /// </summary>        
+        /// </summary>
         Fixed64x0 = Operand0 | FixedSlot64,
 
         /// <summary>
         /// 64-bit operand in slot 1
-        /// </summary>        
+        /// </summary>
         Fixed64x1 = Operand1 | FixedSlot64,
 
         /// <summary>
         /// 64-bit operand in slot 2
-        /// </summary>        
+        /// </summary>
         Fixed64x2 = Operand2 | FixedSlot64,
 
         /// <summary>
         /// 64-bit operand in slot 3
-        /// </summary>        
+        /// </summary>
         Fixed64x3 = Operand2 | FixedSlot64,
 
         /// <summary>
         /// 64-bit operand in slot 4
-        /// </summary>        
+        /// </summary>
         Fixed64x4 = Operand4 | FixedSlot64,
 
         /// <summary>
         /// 64-bit operand in slot 0
-        /// </summary>        
+        /// </summary>
         Fixed128x0 = Operand0 | FixedSlot128,
 
         /// <summary>
         /// 128-bit operand in slot 1
-        /// </summary>        
+        /// </summary>
         Fixed128x1 = Operand1 | FixedSlot128,
 
         /// <summary>
         /// 128-bit operand in slot 2
-        /// </summary>        
+        /// </summary>
         Fixed128x2 = Operand2 | FixedSlot128,
 
         /// <summary>
         /// 128-bit operand in slot 3
-        /// </summary>        
+        /// </summary>
         Fixed128x3 = Operand2 | FixedSlot128,
 
         /// <summary>
         /// 128-bit operand in slot 4
-        /// </summary>        
+        /// </summary>
         Fixed128x4 = Operand4 | FixedSlot128,
 
         /// <summary>
         /// 64-bit operand in slot 0
-        /// </summary>        
+        /// </summary>
         Fixed256x0 = Operand0 | FixedSlot256,
 
         /// <summary>
         /// 256-bit operand in slot 1
-        /// </summary>        
+        /// </summary>
         Fixed256x1 = Operand1 | FixedSlot256,
 
         /// <summary>
         /// 256-bit operand in slot 2
-        /// </summary>        
+        /// </summary>
         Fixed256x2 = Operand2 | FixedSlot256,
 
         /// <summary>
         /// 256-bit operand in slot 3
-        /// </summary>        
+        /// </summary>
         Fixed256x3 = Operand2 | FixedSlot256,
 
         /// <summary>
         /// 256-bit operand in slot 4
-        /// </summary>        
+        /// </summary>
         Fixed256x4 = Operand4 | FixedSlot256,
 
         /// <summary>
         /// 64-bit operand in slot 0
-        /// </summary>        
+        /// </summary>
         Fixed512x0 = Operand0 | FixedSlot512,
 
         /// <summary>
         /// 512-bit operand in slot 1
-        /// </summary>        
+        /// </summary>
         Fixed512x1 = Operand1 | FixedSlot512,
 
         /// <summary>
         /// 512-bit operand in slot 2
-        /// </summary>        
+        /// </summary>
         Fixed512x2 = Operand2 | FixedSlot512,
 
         /// <summary>
         /// 512-bit operand in slot 3
-        /// </summary>        
+        /// </summary>
         Fixed512x3 = Operand2 | FixedSlot512,
 
         /// <summary>
         /// 512-bit operand in slot 4
-        /// </summary>        
+        /// </summary>
         Fixed512x4 = Operand4 | FixedSlot512,
 
         /// <summary>
         /// 1-bit return in last slot
-        /// </summary>        
+        /// </summary>
         Return1 = ReturnSlot | FixedSlot1,
 
         /// <summary>
         /// 8-bit return in last slot
-        /// </summary>        
+        /// </summary>
         Return8 = ReturnSlot | FixedSlot8,
 
         /// <summary>
         /// 16-bit return in last slot
-        /// </summary>        
+        /// </summary>
         Return16 = ReturnSlot | FixedSlot16,
 
         /// <summary>
         /// 32-bit return in last slot
-        /// </summary>        
+        /// </summary>
         Return32 = ReturnSlot | FixedSlot32,
 
         /// <summary>
         /// 64-bit return in last slot
-        /// </summary>        
+        /// </summary>
         Return64 = ReturnSlot | FixedSlot64,
 
         /// <summary>
         /// 128-bit return in last slot
-        /// </summary>        
+        /// </summary>
         Return128 = ReturnSlot | FixedSlot128,
 
         /// <summary>
         /// 256-bit return in last slot
-        /// </summary>        
+        /// </summary>
         Return256 = ReturnSlot | FixedSlot256,
 
         /// <summary>
         /// 512-bit return in last slot
-        /// </summary>        
+        /// </summary>
         Return512 = ReturnSlot | FixedSlot512,
     }
 }

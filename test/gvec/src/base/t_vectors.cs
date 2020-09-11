@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static Root;
 
-    public abstract class t_vectors<U> : UnitTest<U,CheckVectors,TCheckVectors>
+    public abstract class t_vectors<U> : UnitTest<U,CheckVectors,ICheckVectors>
         where U : t_vectors<U>,new()
     {
 

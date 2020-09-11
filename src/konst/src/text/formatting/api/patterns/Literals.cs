@@ -158,13 +158,13 @@ namespace Z0
         public const string Slot3 = OpenSlot + D3 + CloseSlot;
 
         /// <summary>
-        /// Defines the literal "{4}"
+        /// Defines the literal '{4}'
         /// </summary>
         [StringLiteral("{4}")]
         public const string Slot4 = OpenSlot + D4 + CloseSlot;
 
         /// <summary>
-        /// Defines the literal "{5}"
+        /// Defines the literal {5}'
         /// </summary>
         [StringLiteral("{5}")]
         public const string Slot5 = OpenSlot + D5 + CloseSlot;
@@ -242,14 +242,15 @@ namespace Z0
         public const string PSx3 = PSx2 + SpacePipe + Space + Slot2;
 
         /// <summary>
-        /// Defines the literal '| {0} | {1} | {2} | {3}'
+        /// Defines the literal '{0} | {1} | {2} | {3}'
         /// </summary>
         [StringLiteral("{0} | {1} | {2} | {3}")]
         public const string PSx4 = PSx3 + SpacePipe + Space + Slot3;
 
         /// <summary>
-        /// Defines the literal '| {0} | {1} | {2} | {3} | {4}'
+        /// Defines the literal '{0} | {1} | {2} | {3} | {4}'
         /// </summary>
+        [StringLiteral("{0} | {1} | {2} | {3} | {4}")]
         public const string PSx5 = PSx4 + SpacePipe + Space + Slot4;
 
         /// <summary>
@@ -333,19 +334,28 @@ namespace Z0
         public const string SS1x2 = Slot1 + SS2;
 
         /// <summary>
-        /// Defines the literal '{1} {2} {3}'
-        /// </summary>
-        public const string SS1x3 = Slot0 + SS1 + SS2 + SS3;
-
-        /// <summary>
         /// Defines the literal '{0}.{1}'
         /// </summary>
+        [StringLiteral("{0}.{1}")]
         public const string SlotDot2 = Slot0 + Dot + Slot1;
 
         /// <summary>
         /// Defines the literal '{0}.{1}.{2}'
         /// </summary>
+        [StringLiteral("{0}.{1}.{2}")]
         public const string SlotDot3 = SlotDot2 + Dot + Slot2;
+
+        /// <summary>
+        /// Defines the literal '{0}.{1}.{2}.{3}'
+        /// </summary>
+        [StringLiteral("{0}.{1}.{2}.{3}")]
+        public const string SlotDot4 = SlotDot3 + Dot + Slot3;
+
+        /// <summary>
+        /// Defines the literal '{0}.{1}.{2}.{3}.{4}'
+        /// </summary>
+        [StringLiteral("{0}.{1}.{2}.{3}.{4}")]
+        public const string SlotDot5 = SlotDot4 + Dot + Slot4;
 
         public const string SlotTuple1 = OpenTuple + Slot0 + CloseTuple;
 

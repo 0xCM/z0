@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class FixedOps
+    partial class CellOps
     {
         /// <summary>
         /// Creates a fixed 128-bit unary operator from caller-supplied delegate

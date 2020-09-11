@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct Apps
     {
-        public static IAppContext context(ApiParts composition, IPolyrand random, ISettings settings, IAppMsgQueue queue)
+        public static IAppContext context(ApiSet composition, IPolyrand random, ISettings settings, IAppMsgQueue queue)
             => new AppContext(composition, random, settings, queue);
 
         public static IWfShell shell(Assembly control, string[] args, out IAppContext app)
@@ -52,7 +52,7 @@ namespace Z0
         public static IAppContext context(ApiModules src, IShellPaths paths)
             => new AppContext(paths, src.Api, random(), settings(paths), exchange());
 
-        static IAppContext context(IShellPaths paths, ApiParts api, IPolyrand random)
+        static IAppContext context(IShellPaths paths, ApiSet api, IPolyrand random)
             => new AppContext(paths, api, random, settings(paths), exchange());
 
         static ISettings settings(IShellPaths paths)
@@ -60,9 +60,6 @@ namespace Z0
 
         static AppMsgExchange exchange()
             => AppMsgExchange.Create();
-
-        static ApiParts compose(IPart[] parts)
-            => ApiQuery.api(parts);
 
         static IPolyrand random()
             => Polyrand.Pcg64(PolySeed64.Seed05);

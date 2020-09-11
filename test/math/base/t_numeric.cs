@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class t_numeric<X> : UnitTest<X,CheckVectors, TCheckVectors>
+    public abstract class t_numeric<X> : UnitTest<X,CheckVectors, ICheckVectors>
         where X : t_numeric<X>, new()
     {
         protected new TCheckNumeric Claim => CheckNumeric.Checker;

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Fixed
+    partial class Cells
     {
         /// <summary>
         /// Creates a fixed-type value of parametric type

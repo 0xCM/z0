@@ -34,27 +34,31 @@ namespace Z0
             => Data.Format();
 
         [MethodImpl(Inline)]
-        public static ArtifactIdentifier From(Type src)
+        public static ArtifactIdentifier from(Type src)
             => new ArtifactIdentifier(src);
 
         [MethodImpl(Inline)]
-        public static ArtifactIdentifier From<T>()
+        public static ArtifactIdentifier from<T>()
             => new ArtifactIdentifier(typeof(T));
 
         [MethodImpl(Inline)]
-        public static ArtifactIdentifier From(FieldInfo src)
+        public static ArtifactIdentifier from(FieldInfo src)
             => new ArtifactIdentifier(src);
 
         [MethodImpl(Inline)]
-        public static ArtifactIdentifier From(PropertyInfo src)
+        public static ArtifactIdentifier from(PropertyInfo src)
             => new ArtifactIdentifier(src);
 
         [MethodImpl(Inline)]
-        public static ArtifactIdentifier From(MethodInfo src)
+        public static ArtifactIdentifier from(MethodInfo src)
             => new ArtifactIdentifier(src);
 
         [MethodImpl(Inline)]
-        public static ArtifactIdentifier From(ParameterInfo src)
+        public static ArtifactIdentifier from(ParameterInfo src)
+            => new ArtifactIdentifier(src);
+
+        [MethodImpl(Inline)]
+        public static ArtifactIdentifier from(Assembly src)
             => new ArtifactIdentifier(src);
 
         [MethodImpl(Inline)]
@@ -75,23 +79,23 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ArtifactIdentifier(Type src)
-            => From(src);
+            => from(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ArtifactIdentifier(FieldInfo src)
-            => From(src);
+            => from(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ArtifactIdentifier(PropertyInfo src)
-            => From(src);
+            => from(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ArtifactIdentifier(MethodInfo src)
-            => From(src);
+            => from(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ArtifactIdentifier(ParameterInfo src)
-            => From(src);
+            => from(src);
 
         [MethodImpl(Inline)]
         public static explicit operator int(ArtifactIdentifier src)

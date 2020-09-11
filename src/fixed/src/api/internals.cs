@@ -13,7 +13,7 @@ namespace Z0
 
     using K = Kinds;
 
-    partial class Fixed
+    partial class Cells
     {
         [MethodImpl(Inline)]
         internal static unsafe Span<T> span<F,T>(ref F src)

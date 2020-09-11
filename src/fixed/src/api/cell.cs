@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Fixed
+    partial class Cells
     {
         /// <summary>
         /// Queries/manipulates a cell within a fixed storage block

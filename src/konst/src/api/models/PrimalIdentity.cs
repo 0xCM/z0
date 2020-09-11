@@ -13,7 +13,7 @@ namespace Z0
     {
         public static PrimalIdentity Empty => new PrimalIdentity(EmptyString);
 
-        public string Identifier {get;}            
+        public string Identifier {get;}
 
         public string Keyword {get;}
 
@@ -58,10 +58,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public TypeIdentity AsTypeIdentity()
-            => TypeIdentity.Define(Identifier);
+            => TypeIdentity.define(Identifier);
 
         IIdentifiedType<PrimalIdentity> Identified => this;
- 
+
         public override int GetHashCode()
             => Identified.HashCode;
 

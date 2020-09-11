@@ -10,7 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct Cells
+    [ApiHost]
+    public readonly partial struct Cells_K
     {
         /// <summary>
         /// Counts the number of numeric T-cells that can be covered by contiguous memory of width W

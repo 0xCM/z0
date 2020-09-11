@@ -45,7 +45,7 @@ namespace Z0
 
         public void Run()
         {
-            var src = from part in  Wf.Parts
+            var src = from part in  Wf.Api.Parts.Storage
                        let enums = part.Owner.Enums()
                         orderby part.Id
                         select KeyedValues.@from(part.Id, enums);

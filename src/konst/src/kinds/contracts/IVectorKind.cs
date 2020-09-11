@@ -19,11 +19,6 @@ namespace Z0
         NumericKind CellKind {get;}
 
         /// <summary>
-        /// The vector numeric cell width
-        /// </summary>
-        NumericWidth CellWidth {get;}
-
-        /// <summary>
         /// The reified vector type as determined by kind facets
         /// </summary>
         Type Close();
@@ -47,9 +42,6 @@ namespace Z0
     {
         NumericKind IVectorKind.CellKind
             => NumericKinds.kind<T>();
-
-        NumericWidth IVectorKind.CellWidth
-            => (NumericWidth)Widths.bits<T>();
 
         /// <summary>
         /// The reified vector type as determined by kind facets

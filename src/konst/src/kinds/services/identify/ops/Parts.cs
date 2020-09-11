@@ -46,32 +46,32 @@ namespace Z0
                     break;
                 }
             }
-            
+
             var parts = text.split(text.slice(src,start), IDI.SegSep);
             if(parts.Length == 2)
             {
                 var part0 = parts[0];
                 var part1 = parts[1];
 
-                var sText = part0[0] 
-                    == IDI.Generic 
-                    ? text.slice(part0, 1, part0.Length - 1) 
+                var sText = part0[0]
+                    == IDI.Generic
+                    ? text.slice(part0, 1, part0.Length - 1)
                     : part0;
 
                 if(uint.TryParse(sText, out var n))
                 {
-                    if(Enum.IsDefined(typeof(FixedWidth),n))
+                    if(Enum.IsDefined(typeof(CellWidth),n))
                     {
-                        var bText = text.slice(part1,0, part1.Length - 1);                        
+                        var bText = text.slice(part1,0, part1.Length - 1);
                         if(uint.TryParse(bText, out var by))
-                        {                                
-                            if(Enum.IsDefined(typeof(FixedWidth), by))
+                        {
+                            if(Enum.IsDefined(typeof(CellWidth), by))
                             {
-                                dst = SegmentedIdentity.identify(indicator, (FixedWidth)n, ((NumericWidth)by).ToNumericKind((NumericIndicator)part1.Last()));
+                                dst = SegmentedIdentity.identify(indicator, (CellWidth)n, ((NumericWidth)by).ToNumericKind((NumericIndicator)part1.Last()));
                                 return true;
                             }
                         }
-                    }                       
+                    }
                 }
             }
             return false;
@@ -91,7 +91,7 @@ namespace Z0
                var parts = Identify.ComponentText(src).ToArray();
                byte i = 0;
                for(;i<parts.Length; i++)
-               {                   
+               {
                    var part = parts[i];
                    var partkind = IdentityPartKind.None;
 
@@ -106,7 +106,7 @@ namespace Z0
                             if(i == 1 && part[0] == IDI.Generic && Char.IsDigit(part.TakeAfter(IDI.Generic).First()))
                                 partkind = IdentityPartKind.Numeric;
                             else if(Char.IsDigit(part.First()))
-                                partkind = IdentityPartKind.Numeric;                                
+                                partkind = IdentityPartKind.Numeric;
                         }
                     }
                     yield return (i, partkind, part);
@@ -116,7 +116,7 @@ namespace Z0
                for(var j=0; j< suffixes.Length; j++, i++)
                     yield return (i, IdentityPartKind.Suffix, suffixes[j]);
         }
-    
+
         internal static IEnumerable<string> SuffixText(OpIdentity src)
         {
             if(src.Identifier.Contains(IDI.SuffixSep))
@@ -133,12 +133,12 @@ namespace Z0
 
         internal static IEnumerable<string> ComponentText(OpIdentity src)
         {
-            var parts = (src.Identifier.Contains(IDI.SuffixSep) 
-            ? src.Identifier.TakeBefore(IDI.SuffixSep) 
+            var parts = (src.Identifier.Contains(IDI.SuffixSep)
+            ? src.Identifier.TakeBefore(IDI.SuffixSep)
             : src.Identifier).Split(IDI.PartSep, StringSplitOptions.RemoveEmptyEntries);
             {
                 foreach(var part in parts)
-                    yield return part;                     
+                    yield return part;
             }
         }
     }

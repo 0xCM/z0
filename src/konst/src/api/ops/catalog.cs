@@ -15,10 +15,14 @@ namespace Z0
     {
         [Op]
         public static PartCatalog catalog(IPart part)
-            => new PartCatalog(part, dataTypes(part.Owner), apiHosts(part.Owner), svcHostTypes(part.Owner));
+            => new PartCatalog(part, datatypes(part.Owner), apiHosts(part.Owner), svcHostTypes(part.Owner));
 
         [Op]
         public static IPartCatalog catalog(Assembly src)
-            => new PartCatalog(src, dataTypes(src), apiHosts(src), svcHostTypes(src));
+            => new PartCatalog(src, datatypes(src), apiHosts(src), svcHostTypes(src));
+
+        [Op]
+        public static PartCatalog[] catalogs(params IPart[] parts)
+            => parts.Select(catalog);
     }
 }

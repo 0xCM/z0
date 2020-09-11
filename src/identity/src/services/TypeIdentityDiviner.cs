@@ -22,7 +22,7 @@ namespace Z0
             => t.GenericDefinition2() == typeof(NatSpan<,>) && t.IsClosedGeneric();
 
         public TypeIdentity DivineIdentity(Type arg)
-            => TryDivine(arg).ValueOrElse(() => TypeIdentity.Define(arg.DisplayName()));
+            => TryDivine(arg).ValueOrElse(() => TypeIdentity.define(arg.DisplayName()));
 
         public Option<TypeIdentity> TryDivine(Type arg)
         {
@@ -71,7 +71,7 @@ namespace Z0
             => default(TypeIdentityDiviner).DivineIdentity(arg);
 
         static TypeIdentity PointerId(Type arg)
-            => TypeIdentity.Define(text.concat(DoDivination(arg.Unwrap()), IDI.ModSep, IDI.Pointer));
+            => TypeIdentity.define(text.concat(DoDivination(arg.Unwrap()), IDI.ModSep, IDI.Pointer));
 
         static Option<TypeIndicator> SegIndicator(Type t)
         {
@@ -101,7 +101,7 @@ namespace Z0
         static Option<TypeIdentity> NatId(Type arg)
             => from v in arg.NatValue()
                 let id = text.concat(IDI.Nat, v.ToString())
-                select TypeIdentity.Define(id);
+                select TypeIdentity.define(id);
 
         static Option<TypeIdentity> SystemSpanId(Type arg)
         {
@@ -109,7 +109,7 @@ namespace Z0
             if(kind != 0 && kind != SpanKind.Custom)
             {
                 var cellid = DoDivination(arg.GetGenericArguments().Single());
-                return TypeIdentity.Define(text.concat(kind.Format(), cellid));
+                return TypeIdentity.define(text.concat(kind.Format(), cellid));
             }
             else
                 return none<TypeIdentity>();
@@ -121,7 +121,7 @@ namespace Z0
             {
                 var cellType = arg.GetElementType();
                 var cellId = DoDivination(cellType);
-                return TypeIdentity.Define(text.concat(IDI.Array, cellId));
+                return TypeIdentity.define(text.concat(IDI.Array, cellId));
             }
             else
                 return none<TypeIdentity>();
@@ -140,7 +140,7 @@ namespace Z0
                 text += typeargs[0].NatValue();
                 text += IDI.SegSep;
                 text += typeargs[1].NumericKind().Format();
-                return TypeIdentity.Define(text);
+                return TypeIdentity.define(text);
             }
             else
                 return none<TypeIdentity>();

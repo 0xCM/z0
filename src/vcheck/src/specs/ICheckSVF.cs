@@ -13,26 +13,7 @@ namespace Z0
 
     using K = Kinds;
 
-    public readonly struct CheckSVF : ICheckSVF
-    {
-        public ITestContext Context {get;}
-
-        [MethodImpl(Inline)]
-        public static CheckSVF Create(ITestContext context)
-            => new CheckSVF(context);
-
-        [MethodImpl(Inline)]
-        public CheckSVF(ITestContext context)
-        {
-            Context = context;
-        }
-
-        [MethodImpl(Inline)]
-        void ISink<TestCaseRecord>.Deposit(TestCaseRecord src)
-            => Context.Deposit(src);
-    }
-
-    public interface ICheckSVF : ITestService, TCheckVectors, ITestRandom, TCheckAction
+    public interface ICheckSVF : ITestService, ICheckVectors, ITestRandom, TCheckAction
     {
         ICheckSVF<T> Typed<T>()
             where T : unmanaged

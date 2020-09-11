@@ -13,31 +13,23 @@ namespace Z0
 
     partial struct ApiQuery
     {
-        public static IPart[] parts()
-            => modules().Parts;
-
-        [MethodImpl(Inline), Op]
-        public static PartId[] parts(params string[] args)
-            => args.Map(arg => Enums.Parse<PartId>(arg).ValueOrDefault()).WhereSome();
+        public static ApiSet parts(FS.Files paths)
+            => parts(paths.Data);
 
         [Op]
-        public static IPart[] parts(Assembly[] src)
+        public static ApiSet parts()
+            => modules().Parts;
+
+        [Op]
+        public static ApiSet parts(Assembly[] src)
             => src.Where(isPart).Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id);
 
         [Op]
-        public static Assembly[] parts(FilePath[] src,
+        public static IPart[] parts(FS.FilePath[] paths,
             [CallerMemberName] string caller = null,
             [CallerFilePath] string file = null,
             [CallerLineNumber] int?  line = null)
-                => src.Map(f => ApiQuery.assembly(f, caller, file, line))
-                      .Where(x => x.IsSome()).Select(x => x.Value).Where(test);
+                => paths.Select(p => part(p, caller, file, line)).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id);
 
-        [Op]
-        public static Assembly[] parts(FS.FilePath[] src,
-            [CallerMemberName] string caller = null,
-            [CallerFilePath] string file = null,
-            [CallerLineNumber] int?  line = null)
-                => src.Map(f => ApiQuery.assembly(f, caller, file, line))
-                      .Where(x => x.IsSome()).Select(x => x.Value).Where(test);
     }
 }

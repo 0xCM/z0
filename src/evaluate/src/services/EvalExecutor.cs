@@ -27,29 +27,29 @@ namespace Z0
             Context = Evaluate.context(random, 128);
         }
 
-        public EvalResult MatchBinaryOps(in BufferSeq buffers, FixedWidth w, in ConstPair<X86ApiMember> paired)
+        public EvalResult MatchBinaryOps(in BufferSeq buffers, CellWidth w, in ConstPair<X86ApiMember> paired)
         {
             var clock = Time.counter();
             try
             {
                 switch(w)
                 {
-                    case FixedWidth.W8:
+                    case CellWidth.W8:
                         return MatchBinaryOps(buffers, n8, paired);
 
-                    case FixedWidth.W16:
+                    case CellWidth.W16:
                         return MatchBinaryOps(buffers, n16, paired);
 
-                    case FixedWidth.W32:
+                    case CellWidth.W32:
                         return MatchBinaryOps(buffers, n32, paired);
 
-                    case FixedWidth.W64:
+                    case CellWidth.W64:
                         return MatchBinaryOps(buffers, n64, paired);
 
-                    case FixedWidth.W128:
+                    case CellWidth.W128:
                         return MatchBinaryOps(buffers, n128, paired);
 
-                    case FixedWidth.W256:
+                    case CellWidth.W256:
                         return MatchBinaryOps(buffers, n256, paired);
 
                     default:

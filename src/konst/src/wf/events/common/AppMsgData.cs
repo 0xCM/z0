@@ -11,6 +11,9 @@ namespace Z0
 
     public readonly struct AppMsgData : ITextual
     {
+        public static AppMsgData Empty
+            => new AppMsgData(EmptyString, "{0}", 0, 0, AppMsgSource.Empty);
+
         /// <summary>
         /// The message payload
         /// </summary>

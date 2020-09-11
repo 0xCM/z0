@@ -16,7 +16,7 @@ namespace Z0
         /// <summary>
         /// The operand width
         /// </summary>
-        FixedWidth OperandWidth {get;}
+        CellWidth OperandWidth {get;}
 
         /// <summary>
         /// The fixed operand type
@@ -28,8 +28,8 @@ namespace Z0
         /// </summary>
         Type OperatorType {get;}
 
-        FixedOpKind Untyped
-            => new FixedOpKind(OperandWidth, OperandType, OperatorType);
+        CellOpKind Untyped
+            => new CellOpKind(OperandWidth, OperandType, OperatorType);
 
         string ITextual.Format()
         {
@@ -41,8 +41,8 @@ namespace Z0
         }
     }
 
-    public interface IFixedOpKind<F> : IFixedOpKind, ITextual<F>
-        where F : struct, IFixedOpKind<F>
+    public interface ICellOpKind<F> : IFixedOpKind, ITextual<F>
+        where F : struct, ICellOpKind<F>
     {
 
     }
@@ -52,13 +52,13 @@ namespace Z0
     /// an operator defined over operands of fixed-width
     /// </summary>
     /// <typeparam name="W">The operand width</typeparam>
-    public interface IFixedOpKind<W,D> : IFixedOpKind
-        where W : unmanaged, IFixedWidth
+    public interface ICellOpKind<W,D> : IFixedOpKind
+        where W : unmanaged, ICellWidth
         where D : Delegate
     {
 
-        FixedWidth IFixedOpKind.OperandWidth
-            => Widths.tfixed<W>();
+        CellWidth IFixedOpKind.OperandWidth
+            => Widths.cell<W>();
     }
 
     /// <summary>
@@ -68,8 +68,8 @@ namespace Z0
     /// <typeparam name="W">The operand width</typeparam>
     /// <typeparam name="T">The operand type</typeparam>
     /// <typeparam name="D">The operator type</typeparam>
-    public interface IFixedOpKind<W,T,D> : IFixedOpKind<W,D>
-        where W : unmanaged, IFixedWidth
+    public interface ICellOpKind<W,T,D> : ICellOpKind<W,D>
+        where W : unmanaged, ICellWidth
         where T : IDataCell
         where D : Delegate
     {

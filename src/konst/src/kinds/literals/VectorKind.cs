@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using W = FixedWidth;
+    using W = CellWidth;
     using NK = NumericKind;
 
     /// <summary>

@@ -11,7 +11,7 @@ namespace Z0.Asm
         IService<IAsmContext>,
         IBufferedChecker,
         ITestDynamic,
-        TCheckVectors,
+        ICheckVectors,
         ICaptureChecker
     {
         IAsmDecoder Decoder
@@ -29,10 +29,6 @@ namespace Z0.Asm
         ICaptureCore ICaptureServiceProxy.CaptureService
             => Context.CaptureCore;
 
-        // IPartCapturePaths CaptureArchive(PartId part)
-        //     => Z0.Archives.capture(
-        //         (EnvVars.Common.LogRoot + FolderName.Define("apps")) + FolderName.Define(part.Format()),
-        //         FolderName.Define("capture"));
 
         IPartCapturePaths CaptureArchive(FolderPath root)
             => Z0.Archives.capture(root);

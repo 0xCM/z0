@@ -11,7 +11,7 @@ namespace Z0
     using static Memories;
     using static BufferSeqId;
 
-    public interface TTestDynamicVectors : TCheckVectors, TTestAction, ITestDynamic, IBufferedChecker
+    public interface TTestDynamicVectors : ICheckVectors, TTestAction, ITestDynamic, IBufferedChecker
     {
         TestCaseRecord Match<T>(BinaryOp<Vector128<T>> f, ApiHex bits)
             where T : unmanaged

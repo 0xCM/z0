@@ -23,4 +23,12 @@ namespace Z0
         MethodInfo[] Methods
             => HostType.DeclaredMethods();
     }
+
+    public interface IApiHost<F> : IApiHost
+        where F : IApiHost<F>, new()
+    {
+        Type IApiHost.HostType
+            => typeof(F);
+    }
+
 }

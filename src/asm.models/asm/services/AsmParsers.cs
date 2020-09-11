@@ -73,7 +73,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         static ReadOnlySpan<byte> bytes(in EncodedFx src)
-            => Fixed.view<byte>(Fixed.from(src.Data)).Slice((int)size(src));
+            => Cells.view<byte>(Cells.from(src.Data)).Slice((int)size(src));
 
         [MethodImpl(Inline)]
         static EncodedFx encode(ReadOnlySpan<byte> src)

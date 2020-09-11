@@ -19,10 +19,10 @@ namespace Z0
 
         readonly IPart[] Parts;
 
-        public EmitMetadataSets(IWfShell context)
+        public EmitMetadataSets(IWfShell wf)
         {
-            Wf = context;
-            Ct = context.Ct;
+            Wf = wf;
+            Ct = wf.Ct;
             Parts = Wf.Api.Parts;
             Wf.Created(StepId, Ct);
         }
@@ -35,13 +35,13 @@ namespace Z0
         public void Run()
         {
             Wf.Running(StepId);
-            Run(default(EmitImageConstantsStep));
-            Run(default(EmitPeHeadersStep));
-            Run(default(EmitPartCil));
-            Run(default(EmitImageContentStep));
-            Run(default(EmitStringRecordsStep));
-            Run(default(EmitImageBlobsStep));
-            Run(default(EmitFieldMetadataStep));
+            Run(new EmitImageConstantsStep());
+            Run(new EmitPeHeadersStep());
+            Run(new EmitPartCil());
+            Run(new EmitImageContentStep());
+            Run(new EmitStringRecordsStep());
+            Run(new EmitImageBlobsStep());
+            Run(new EmitFieldMetadataHost());
             Wf.Ran(StepId);
         }
 
@@ -124,17 +124,8 @@ namespace Z0
             }
         }
 
-        void Run(EmitFieldMetadataStep kind)
-        {
-            try
-            {
-                using var step = new EmitFieldMetadata(Wf, Parts, Ct);
-                step.Run();
-            }
-            catch(Exception e)
-            {
-                Wf.Error(kind.GetType(), e);
-            }
-        }
+        void Run(EmitFieldMetadataHost host)
+            => host.Run(Wf);
+
     }
 }

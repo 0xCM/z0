@@ -29,7 +29,22 @@ namespace Z0
             Name = Type.Name;
         }
 
-        public virtual void Run(IWfShell shell) {}
+        public virtual void Run(IWfShell shell)
+        {
+            try
+            {
+                Execute(shell);
+            }
+            catch(Exception e)
+            {
+                shell.Error(Id,e);
+            }
+        }
+
+        protected virtual void Execute(IWfShell shell)
+        {
+
+        }
 
         public virtual string Format()
             => Id.Format();

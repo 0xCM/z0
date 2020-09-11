@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    public interface TCheckInstrinsics : TCheckVectors, TCheckBlocks
+    public interface TCheckIntrinsics : ICheckVectors, TCheckBlocks
     {
-        
+
     }
 }

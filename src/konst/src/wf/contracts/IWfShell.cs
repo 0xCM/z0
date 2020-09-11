@@ -15,9 +15,10 @@ namespace Z0
 
     using static WfEvents;
 
-
-    public interface IWfShell : IApiProvider, IShellContext, IDisposable
+    public interface IWfShell : IShellContext, IDisposable
     {
+        ApiSet Api {get;}
+
         IShellContext Shell {get;}
 
         IWfEventSink WfSink {get;}

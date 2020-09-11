@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline)]
-        public static bool IsSome(this FixedWidth src)
+        public static bool IsSome(this CellWidth src)
             => src != 0;
 
         [MethodImpl(Inline)]
@@ -48,8 +48,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string Format<T>(this ArithmeticKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
-             
-        public static string Format(this BitShiftKind kind)        
+
+        public static string Format(this BitShiftKind kind)
             => kind switch {
                 BitShiftKind.Sll => "<<",
                 BitShiftKind.Srl => ">>",
@@ -59,8 +59,8 @@ namespace Z0
             };
 
         public static string Format<S,T>(this BitShiftKind kind, S arg1, T arg2)
-            => $"{arg1} {kind.Format()} {arg2}"; 
- 
+            => $"{arg1} {kind.Format()} {arg2}";
+
 
         [MethodImpl(Inline)]
         public static string Format(this BitLogicKind kind)

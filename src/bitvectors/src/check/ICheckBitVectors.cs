@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
     using static AppErrorMsg;
 
@@ -14,13 +14,9 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    public readonly struct CheckBitVectors : ICheckBitVectors
-    {
-        public static ICheckBitVectors Checker => default(CheckBitVectors);
-    }
 
     public interface ICheckBitVectors : TCheckPrimal, TCheckInvariant
-    {        
+    {
         TCheckPrimal Primal => this;
 
         [MethodImpl(Inline)]
@@ -41,23 +37,23 @@ namespace Z0
 
         [MethodImpl(Inline)]
         void eq(BitVector64 x, BitVector64 y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => Primal.eq(x.Scalar, y.Scalar, caller, file, line);       
+            => Primal.eq(x.Scalar, y.Scalar, caller, file, line);
 
         [MethodImpl(Inline)]
-        void eq<T>(BitVector<T> x, BitVector<T> y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null) 
+        void eq<T>(BitVector<T> x, BitVector<T> y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged
                 => yea(gmath.eq(x.Scalar, y.Scalar), $"{x} != {y}", caller, file, line);
 
         [MethodImpl(Inline)]
-        void eq<N,T>(BitVector128<N,T> x, BitVector128<N,T> y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null) 
+        void eq<N,T>(BitVector128<N,T> x, BitVector128<N,T> y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => yea(x.Equals(y), $"{x} != {y}", caller, file, line);
 
         [MethodImpl(Inline)]
-        void eq<N,T>(BitVector<N,T> x, BitVector<N,T> y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null) 
+        void eq<N,T>(BitVector<N,T> x, BitVector<N,T> y, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => yea(x.Equals(y), $"{x} != {y}", caller, file, line);
-    }  
+    }
 }

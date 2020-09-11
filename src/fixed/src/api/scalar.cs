@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Fixed
+    partial class Cells
     {
         [MethodImpl(Inline), Op]
         public static byte scalar(Cell8 src)

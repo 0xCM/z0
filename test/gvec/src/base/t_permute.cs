@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public abstract class t_permute<U> : UnitTest<U,CheckVectors,TCheckVectors>
+    public abstract class t_permute<U> : UnitTest<U,CheckVectors,ICheckVectors>
         where U : t_permute<U>,new()
     {
 

@@ -6,20 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
     /// Specifies host-independent api member identity
     /// </summary>
-    public readonly struct OpIdentity : IIdentifedOp<OpIdentity>
-    {            
+    public readonly struct OpIdentity : IIdentifiedOp<OpIdentity>
+    {
         /// <summary>
         /// Creates a moniker directly from source text
         /// </summary>
         /// <param name="src">The source text</param>
         [MethodImpl(Inline)]
-        public static OpIdentity set(string src)
+        public static OpIdentity define(string src)
             => new OpIdentity(src);
 
         [MethodImpl(Inline)]
@@ -40,12 +40,12 @@ namespace Z0
         /// The identifier suffix, if any
         /// </summary>
         public string Suffix {get;}
-        
+
         /// <summary>
-        /// Specifies whether the operation was reified from a generic definition 
+        /// Specifies whether the operation was reified from a generic definition
         /// </summary>
         public bool IsGeneric {get;}
-        
+
         /// <summary>
         /// Specifies whether the operation is specialized for an immediate value
         /// </summary>
@@ -54,13 +54,13 @@ namespace Z0
         /// <summary>
         /// The moniker parts, as determined by part delimiters
         /// </summary>
-        public string[] TextComponents {get;}                        
- 
+        public string[] TextComponents {get;}
+
         /// <summary>
         /// The empty identifier
         /// </summary>
-        public static OpIdentity Empty 
-            => set(EmptyString);
+        public static OpIdentity Empty
+            => define(EmptyString);
 
         [MethodImpl(Inline)]
         public static implicit operator string(OpIdentity src)
@@ -80,13 +80,13 @@ namespace Z0
         public OpIdentity(string text, string name, string suffix, bool generic, bool imm, string[] components)
         {
             Identifier = Safe(text);
-            Name = name; 
+            Name = name;
             Suffix = suffix;
             IsGeneric = generic;
             HasImm = imm;
             TextComponents = components;
         }
-        
+
         [MethodImpl(Inline)]
         OpIdentity(string text)
         {
@@ -98,12 +98,12 @@ namespace Z0
             TextComponents = sys.empty<string>();
         }
 
-        IIdentifedOp<OpIdentity> Identified 
+        IIdentifiedOp<OpIdentity> Identified
             => this;
-         
+
         public bool IsEmpty
         {
-            [MethodImpl(Inline)]   
+            [MethodImpl(Inline)]
             get => string.IsNullOrWhiteSpace(Identifier);
         }
 

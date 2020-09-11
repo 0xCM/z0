@@ -12,12 +12,12 @@ namespace Z0
 
     partial class VSvc
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static LoadSpan128<T> vloadspan<T>(N128 w, T t = default)
             where T : unmanaged
                 => default(LoadSpan128<T>);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static LoadSpan256<T> vloadspan<T>(N256 w, T t = default)
             where T : unmanaged
                 => default(LoadSpan256<T>);

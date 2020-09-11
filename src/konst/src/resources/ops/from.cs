@@ -6,14 +6,22 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Reflection;
 
     using static Konst;
+    using static z;
 
     partial struct Resources
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe ReadOnlySpan<T> from<T>(in ResMember member, int i0, int i1)
-            where T : unmanaged
-                => z.segment(member.Address.Pointer<T>(), i0, i1); 
+        /// <summary>
+        /// Collects all resource accessors defined by a specified assembly
+        /// </summary>
+        /// <param name="src">The source assembly</param>
+        [Op]
+        public static ComponentResources from(Assembly owner, ResourceAccessor[] src)
+            => new ComponentResources(owner, (from access in src
+                let t = access.Member.DeclaringType
+                group access by t).Map(x => new ResourceDeclarations(x.Key, x.ToArray())));
     }
 }

@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     using DW = DataWidth;
     using TW = TypeWidth;
-    using FW = FixedWidth;
+    using FW = CellWidth;
     using NW = NumericWidth;
     using TS = TypeSignKind;
 
@@ -20,9 +20,9 @@ namespace Z0
     /// <summary>
     /// Defines a type-level representation of <see cref='DW.W8'/> with a <see cref='TS.Signed'/> classifier
     /// </summary>
-    public readonly struct W8i : TNumericWidth<W> 
-    { 
-        public const DW Width = DW.W8; 
+    public readonly struct W8i : TNumericWidth<W>
+    {
+        public const DW Width = DW.W8;
 
         public const TS Sign = TS.Signed;
 
@@ -36,63 +36,63 @@ namespace Z0
         /// </summary>
         public const string Identifier = "w8i";
 
-        public string Id 
+        public string Id
             => Identifier;
 
-        public DW DataWidth 
+        public DW DataWidth
             => Width;
 
         public TS TypeSign
             => Sign;
 
-        public FW FixedWidth 
+        public FW CellWidth
             => (FW)Width;
 
-        public TW TypeWidth 
+        public TW TypeWidth
             => (TW)Width;
 
-        public NW NumericWidth 
+        public NW NumericWidth
             => (NW)Width;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(W src) 
+        public static implicit operator int(W src)
             => (int)Width;
 
         [MethodImpl(Inline)]
-        public static implicit operator DW(W src) 
+        public static implicit operator DW(W src)
             => Width;
 
         [MethodImpl(Inline)]
-        public static implicit operator DataWidth<W>(W src) 
+        public static implicit operator DataWidth<W>(W src)
             => default;
 
         [MethodImpl(Inline)]
-        public static implicit operator TW(W src) 
+        public static implicit operator TW(W src)
             => (TW)Width;
 
         [MethodImpl(Inline)]
-        public static implicit operator FW(W src) 
+        public static implicit operator FW(W src)
             => (FW)Width;
 
         [MethodImpl(Inline)]
-        public static implicit operator NW(W src) 
+        public static implicit operator NW(W src)
             => (NW)Width;
 
-        [MethodImpl(Inline)]        
-        public bool Equals(W w) 
+        [MethodImpl(Inline)]
+        public bool Equals(W w)
             => true;
 
         [MethodImpl(Inline)]
         public string Format()
             => Width.FormatValue();
 
-        public override string ToString() 
+        public override string ToString()
             => Format();
-        
-        public override int GetHashCode() 
+
+        public override int GetHashCode()
             => (int)Width;
-        
-        public override bool Equals(object obj) 
+
+        public override bool Equals(object obj)
             => obj is W;
     }
 }

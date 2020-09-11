@@ -27,8 +27,8 @@ namespace Z0
             => (k & FixedSubgrid) != 0;
 
         [MethodImpl(Inline)]
-        public static FixedWidth Width(this GridKind k)
-            => (FixedWidth)((ushort)k);
+        public static CellWidth Width(this GridKind k)
+            => (CellWidth)((ushort)k);
 
         [MethodImpl(Inline)]
         public static GridCategory Category(this GridKind k)
@@ -108,7 +108,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Option<FixedWidth> GridWidth(this Type src)
+        public static Option<CellWidth> GridWidth(this Type src)
             => src.GridKind().TryMap(k => k.Width());
     }
 }

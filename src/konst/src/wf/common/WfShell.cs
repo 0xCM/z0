@@ -43,7 +43,7 @@ namespace Z0
 
         public FolderPath ResourceRoot {get;}
 
-        public ApiParts Api {get;}
+        public ApiSet Api {get;}
 
         public string ShellName {get;}
 

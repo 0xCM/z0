@@ -76,7 +76,7 @@ namespace Z0
         public CapturedAccessor[] Capture(FilePath src, FolderPath dst)
         {
             var resdll = Assembly.LoadFrom(src.Name);
-            var indices = span(ApiQuery.declarations(resdll));
+            var indices = span(Resources.declarations(resdll));
             var count = indices.Length;
 
             term.magenta($"Capturing {count} host resource sets from {src} -> {dst}");

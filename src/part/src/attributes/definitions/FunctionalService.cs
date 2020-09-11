@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Identifies a type that defines an interface-contracted api surface
     /// </summary>
-    public class FunctionalServiceAttribute : Attribute
+    public class FunctionalServiceAttribute : ApiHostAttribute
     {
         public FunctionalServiceAttribute()
         {

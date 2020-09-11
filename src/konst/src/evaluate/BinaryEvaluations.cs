@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Captures the operands and outcome of binary operator evaluation 
+    /// Captures the operands and outcome of binary operator evaluation
     /// </summary>
     /// <typeparam name="T">The evaluation result type</typeparam>
     public readonly ref struct BinaryEvaluations<T>
@@ -19,22 +19,22 @@ namespace Z0
         public readonly Pairs<T> Source;
 
         public readonly PairEvalOutcomes<T> Target;
-                
+
         [MethodImpl(Inline)]
         internal BinaryEvaluations(in Pairs<T> src, PairEvalOutcomes<T> dst)
         {
             Demands.insist(src.PointCount, dst.PointCount);
             Source = src;
             Target = dst;
-        }        
+        }
 
-        public int PointCount 
+        public int PointCount
             => Source.PointCount;
 
-        public string LeftLabel 
+        public string LeftLabel
             => Target.LeftLabel;
 
-        public string RightLabel 
+        public string RightLabel
             => Target.RightLabel;
     }
 }

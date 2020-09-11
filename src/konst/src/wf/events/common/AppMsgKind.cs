@@ -12,7 +12,7 @@ namespace Z0
         /// <summary>
         /// Boring
         /// </summary>
-        Unspecified = FlairKind.Unspecified,
+        None = FlairKind.Unspecified,
 
         /// <summary>
         /// Identifies chatty content

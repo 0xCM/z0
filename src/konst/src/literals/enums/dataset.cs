@@ -16,7 +16,7 @@ namespace Z0
         {
             var src = LiteralSequence<E,T>();
             var count = src.Length;
-            var token = ArtifactIdentifier.From<E>();
+            var token = ArtifactIdentifier.from<E>();
             var datatype = kind<E>();
             var description = string.Empty;
             var enumData = UserMetadata.Empty;

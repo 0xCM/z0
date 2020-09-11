@@ -12,19 +12,19 @@ namespace Z0
     using MZ = Asm.MemorySize;
     using NK = NumericKind;
     using SI = SegmentedIdentity;
-    using FIX = FixedWidth;
+    using FIX = CellWidth;
 
-    using static Konst;    
+    using static Konst;
 
     using Z0.Asm;
 
     partial struct asm
-    {        
+    {
         /// <summary>
         /// Assigns identity to a <see cref='MemorySize'/> specification
         /// </summary>
         /// <param name="src">A memory size specification</param>
-        public static SegmentedIdentity identify(MemorySize src)        
+        public static SegmentedIdentity identify(MemorySize src)
             => src switch {
                     MZ.UInt8 => NK.U8,
                     MZ.UInt16 => NK.U16,

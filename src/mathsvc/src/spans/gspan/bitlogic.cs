@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
     using static Structured;
 
     partial class gspan

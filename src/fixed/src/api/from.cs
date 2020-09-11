@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Fixed
+    partial class Cells
     {
         /// <summary>
         /// Presents a 128-bit vector as a 128-bit fixed block

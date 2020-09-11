@@ -13,26 +13,26 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IFunc
     {
-        string Name 
+        string Name
             => GetType().Tag<OpKindAttribute>().MapValueOrDefault(a => GetType().Name, GetType().Name);
-        
+
         /// <summary>
         /// The operation identity
         /// </summary>
-        OpIdentity Id 
-            => OpIdentity.set(Name);        
+        OpIdentity Id
+            => OpIdentity.define(Name);
     }
 
     /// <summary>
     /// Characterizes a structural emitter; that is, the contract charactrizes a type that implements an emitter
     /// </summary>
-    /// <typeparam name="A">The emission type</typeparam>    
+    /// <typeparam name="A">The emission type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public interface IFunc<A> : IFunc
     {
         A Invoke();
 
-        Func<A> Operation 
+        Func<A> Operation
             => Invoke;
     }
 
@@ -46,7 +46,7 @@ namespace Z0
     {
         B Invoke(A a);
 
-        Func<A,B> Operation 
+        Func<A,B> Operation
             => Invoke;
     }
 
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="c">The third operand</param>
         C Invoke(A a, B b);
 
-        Func<A,B,C> Operation 
+        Func<A,B,C> Operation
             => Invoke;
     }
 
@@ -89,7 +89,7 @@ namespace Z0
         /// <param name="c">The third operand</param>
         D Invoke(A a, B b, C c);
 
-        Func<A,B,C,D> Operation 
+        Func<A,B,C,D> Operation
             => Invoke;
     }
 }

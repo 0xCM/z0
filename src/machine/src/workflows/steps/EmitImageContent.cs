@@ -64,8 +64,8 @@ namespace Z0
         static MemoryAddress BaseAddress(IPart src)
         {
             var match =  Path.GetFileNameWithoutExtension(src.Owner.Location);
-            var module = SystemProcess.modules().Where(m => Path.GetFileNameWithoutExtension(m.FileName) == match).First();
-            return module.BaseAddress;
+            var module = SystemProcess.modules().Where(m => Path.GetFileNameWithoutExtension(m.Path.Name) == match).First();
+            return module.Base;
         }
 
         public void Run()

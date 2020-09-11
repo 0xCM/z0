@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class Fixed
+    partial class Cells
     {
         /// <summary>
         /// Initializes a 128-bit value with a 128-bit source vector

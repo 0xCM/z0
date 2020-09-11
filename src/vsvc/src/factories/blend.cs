@@ -12,32 +12,32 @@ namespace Z0
 
     partial class VSvc
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Blend4x32x128<T> vblend4x32<T>(N128 w, T t = default)
             where T : unmanaged
                 => default(Blend4x32x128<T>);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Blend8x32x256<T> vblend8x32<T>(N256 w, T t = default)
             where T : unmanaged
                 => default(Blend8x32x256<T>);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Blend2x64x128<T> vblend2x64<T>(N128 w, T t = default)
             where T : unmanaged
                 => default(Blend2x64x128<T>);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Blend4x64x256<T> vblend4x64<T>(N256 w, T t = default)
             where T : unmanaged
                 => default(Blend4x64x256<T>);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Blend8x16x128<T> vblend8x16<T>(N128 w, T t = default)
             where T : unmanaged
                 => default(Blend8x16x128<T>);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Blend8x16x256<T> vblend8x16<T>(N256 w, T t = default)
             where T : unmanaged
                 => default(Blend8x16x256<T>);

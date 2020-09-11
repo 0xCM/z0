@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -17,6 +17,6 @@ namespace Z0.Asm
         /// <param name="src">The command source</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> bytes(in EncodedFx src)
-            => Fixed.view<byte>(Fixed.from(src.Data)).Slice(size(src));       
+            => Cells.view<byte>(Cells.from(src.Data)).Slice(size(src));
     }
 }

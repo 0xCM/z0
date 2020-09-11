@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
-    public readonly struct GenericOpIdentity : IIdentifedOp<GenericOpIdentity>
-    {            
+    public readonly struct GenericOpIdentity : IIdentifiedOp<GenericOpIdentity>
+    {
         /// <summary>
         /// The operation identifier
         /// </summary>
@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         GenericOpIdentity(string src)
             => Identifier = src ?? EmptyString;
- 
+
 
         public override int GetHashCode()
             => Identified.HashCode;
@@ -38,13 +38,13 @@ namespace Z0
         public override string ToString()
             => Identified.Format();
 
-        // public Func<string, GenericOpIdentity> Factory 
+        // public Func<string, GenericOpIdentity> Factory
         //     => Define;
 
-        IIdentifedOp<GenericOpIdentity> Identified 
+        IIdentifiedOp<GenericOpIdentity> Identified
             => this;
-        
-        public static GenericOpIdentity Empty 
+
+        public static GenericOpIdentity Empty
             => new GenericOpIdentity(string.Empty);
     }
 }

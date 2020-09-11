@@ -22,7 +22,7 @@ namespace Z0
 
         readonly string Name;
 
-        readonly FixedWidth Width;
+        readonly CellWidth Width;
 
         readonly NumericKind Kind;
 
@@ -34,7 +34,7 @@ namespace Z0
         {
             this.random = random;
             this.Name = $"fixed_rng_{default(F).BitWidth}x{bitsize<T>()}";
-            this.Width = (FixedWidth)default(F).BitWidth;
+            this.Width = (CellWidth)default(F).BitWidth;
             this.Kind = typeof(T).NumericKind();
             this.ValueEmitter = CreateEmitter();
             this.CellDomain = domain ?? random.Domain<T>();
@@ -56,7 +56,7 @@ namespace Z0
 
         Func<F> CreateEmitter()
         {
-            if(Width <= FixedWidth.W64)
+            if(Width <= CellWidth.W64)
             {
                 switch(Kind)
                 {
@@ -86,11 +86,11 @@ namespace Z0
             {
                 switch(Width)
                 {
-                    case FixedWidth.W128:
+                    case CellWidth.W128:
                         return f128;
-                    case FixedWidth.W256:
+                    case CellWidth.W256:
                         return f256;
-                    case FixedWidth.W512:
+                    case CellWidth.W512:
                         return f512;
                 }
             }

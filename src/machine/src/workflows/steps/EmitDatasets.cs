@@ -19,7 +19,7 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        readonly IPart[] Parts;
+        readonly ApiSet Parts;
 
         readonly bool Recapture;
 
@@ -28,7 +28,7 @@ namespace Z0
             Ct = ct;
             Wf = context;
             Recapture = false;
-            Parts = context.Parts;
+            Parts = context.Api.Parts;
             Wf.Created(StepId);
         }
 
@@ -130,18 +130,8 @@ namespace Z0
             }
         }
 
-        void Run(EmitFieldMetadataStep kind)
-        {
-            try
-            {
-                using var step = new EmitFieldMetadata(Wf, Parts, Ct);
-                step.Run();
-            }
-            catch(Exception e)
-            {
-                Wf.Error(e, Ct);
-            }
-        }
+        void Run(EmitFieldMetadataHost host)
+            => host.Run(Wf);
 
         void Run(EmitPartCil kind)
         {
@@ -182,24 +172,20 @@ namespace Z0
 
         public void Run()
         {
-            Run(default(EmitImageConstantsStep));
-            Run(default(EmitPeHeadersStep));
-            Run(default(EmitImageContentStep));
-            Run(default(EmitStringRecordsStep));
-            Run(default(EmitImageBlobsStep));
-            Run(default(EmitFieldMetadataStep));
-            Run(default(EmitPartCil));
-            Run(default(EmitBitMasksStep));
-            Run(default(EmitProjectDocsStep));
-            Run(default(EmitResBytesStep));
-            Run(default(EmitEnumCatalogStep));
-            Run(default(EmitFieldLiteralsStep));
-            Run(default(EmitContentCatalogStep));
+            Run(new EmitImageConstantsStep());
+            Run(new EmitPeHeadersStep());
+            Run(new EmitImageContentStep());
+            Run(new EmitStringRecordsStep());
+            Run(new EmitImageBlobsStep());
+            Run(new EmitFieldMetadataHost());
+            Run(new EmitPartCil());
+            Run(new EmitBitMasksStep());
+            Run(new EmitProjectDocsStep());
+            Run(new EmitResBytesStep());
+            Run(new EmitEnumCatalogStep());
+            Run(new EmitFieldLiteralsStep());
+            Run(new EmitContentCatalogStep());
         }
-
-        [MethodImpl(Inline), Op]
-        static IAsmContext asm(IAppContext root)
-            => new AsmContext(root);
 
         // void Run(RecaptureStep kind)
         // {

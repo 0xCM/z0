@@ -5,14 +5,14 @@
 namespace Z0
 {
     using System;
-    
+
     using DW = DataWidth;
 
     /// <summary>
     /// Defines a <see cref="DataWidth"/> constrained to widths supported by available fixed-width types
     /// </summary>
     [Flags]
-    public enum FixedWidth : ushort
+    public enum CellWidth : ushort
     {
         /// <summary>
         /// Vaccuous
@@ -77,16 +77,16 @@ namespace Z0
         /// <summary>
         /// Classifies widths that correspond numeric primitives
         /// </summary>
-        NumericWidths =  W1 | W8 | W16 | W32 | W64,
+        Numeric =  W8 | W16 | W32 | W64,
 
         /// <summary>
         /// Classifies widths that correspond to vector primitives
         /// </summary>
-        VectorWidths = W128 | W256 | W512,
+        Vector = W128 | W256 | W512,
 
         /// <summary>
         /// Classifies widths that correspond to numeric and vector primitives
         /// </summary>
-        TypeWidths = NumericWidths | VectorWidths
+        TypeWidths = Numeric | Vector
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class Fixed
+    partial class Cells
     {
         [MethodImpl(Inline)]
         public static F fix<T,F>(T src)

@@ -10,7 +10,7 @@ namespace Z0
     public class ClosuresAttribute : Attribute
     {
         public TypeClosureKind Kind {get;}
-        
+
         public ulong Spec {get;}
 
         public ulong[] Values {get;}
@@ -39,8 +39,8 @@ namespace Z0
             Kind = TypeClosureKind.Numeric;
         }
 
-        
-        public ClosuresAttribute(FixedWidth spec)
+
+        public ClosuresAttribute(CellWidth spec)
             : this()
         {
             Spec = (ulong)spec;

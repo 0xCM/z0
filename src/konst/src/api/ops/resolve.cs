@@ -15,51 +15,6 @@ namespace Z0
 
     partial struct ApiQuery
     {
-        public static IPart[] resolve(FS.Files paths)
-            => resolve(paths.Data);
-
-        /// <summary>
-        /// Attempts to resolve a part from an assembly file path
-        /// </summary>
-        [Op]
-        public static Option<IPart> resolve(FilePath src,
-            [CallerMemberName] string caller = null,
-            [CallerFilePath] string file = null,
-            [CallerLineNumber] int?  line = null)
-                => from component in ApiQuery.assembly(src, caller, file, line)
-                    from type in resolve(component)
-                    from prop in resolve(type)
-                    from part in resolve(prop)
-                    select part;
-
-        [Op]
-        public static IPart[] resolve(FS.FilePath[] paths,
-            [CallerMemberName] string caller = null,
-            [CallerFilePath] string file = null,
-            [CallerLineNumber] int?  line = null)
-                => paths.Select(p => resolve(p, caller, file, line)).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id);
-
-        [Op]
-        public static IPart[] resolve(FilePath[] paths,
-            [CallerMemberName] string caller = null,
-            [CallerFilePath] string file = null,
-            [CallerLineNumber] int?  line = null)
-                => paths.Select(p => resolve(p, caller, file, line)).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id);
-
-        /// <summary>
-        /// Attempts to resolve a part from an assembly file path
-        /// </summary>
-        [Op]
-        public static Option<IPart> resolve(FS.FilePath src,
-            [CallerMemberName] string caller = null,
-            [CallerFilePath] string file = null,
-            [CallerLineNumber] int?  line = null)
-                => from component in ApiQuery.assembly(src)
-                from type in resolve(component)
-                from prop in resolve(type)
-                from part in resolve(prop)
-                select part;
-
         /// <summary>
         /// Attempts to resolve a part resolution type
         /// </summary>

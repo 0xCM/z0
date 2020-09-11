@@ -11,6 +11,7 @@ namespace Z0
     using static RenderPatterns;
     using static Flow;
 
+
     [WfHost]
     public class ProcessGlobalIndexStep : WfHost<ProcessGlobalIndexStep>
     {
@@ -235,12 +236,14 @@ namespace Z0
     }
 
     [Step]
-    public readonly struct EmitFieldMetadataStep : IWfStep<EmitFieldMetadataStep>
+    public sealed class EmitFieldMetadataHost : WfHost<EmitFieldMetadataHost>
     {
-        public const string DatasetName = "FieldMetadata";
+        protected override void Execute(IWfShell wf)
+        {
+            using var step = new EmitFieldMetadata(wf, this);
+            step.Run();
+        }
 
-        public static WfStepId StepId
-            => Flow.step<EmitFieldMetadataStep>();
     }
 
     [Step]

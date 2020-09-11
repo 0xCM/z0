@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static EmitFieldMetadataStep;
 
     using F = ImageFieldTableField;
     using W = ImageFieldTabledWidth;
@@ -17,7 +16,7 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
-        readonly CorrelationToken Ct;
+        readonly IWfHost Host;
 
         readonly IPart[] Parts;
 
@@ -26,21 +25,21 @@ namespace Z0
         readonly FolderPath TargetDir;
 
         [MethodImpl(Inline)]
-        public EmitFieldMetadata(IWfShell wf, IPart[] parts, CorrelationToken ct)
+        public EmitFieldMetadata(IWfShell wf, EmitFieldMetadataHost host)
         {
             Wf = wf;
-            Ct = ct;
-            Parts = parts;
+            Host = host;
+            Parts = wf.Api.Parts;
             Spec = ImageRecords.Fields;
             TargetDir = wf.ResourceRoot + FolderName.Define("fields");
-            Wf.Created(StepId);
+            Wf.Created(Host.Id);
         }
 
         public void Run()
         {
             var count = 0u;
             var partCount = Parts.Length;
-            Wf.Running(StepId, new {PartCount = partCount});
+            Wf.Running(Host.Id, new {PartCount = partCount});
 
             foreach(var part in Parts)
             {
@@ -50,11 +49,11 @@ namespace Z0
                 }
                 catch(Exception e)
                 {
-                    Wf.Error(e,Ct);
+                    Wf.Error(Host.Id,e);
                 }
             }
 
-            Wf.Ran(StepId, new {PartCount = partCount, RecordCount = count});
+            Wf.Ran(Host.Id, new {PartCount = partCount, RecordCount = count});
         }
 
         static IPeTableReader Reader(string src)
@@ -69,7 +68,7 @@ namespace Z0
             var id = part.Id;
             var path = TargetPath(id);
 
-            Wf.Emitting<ImageFieldTable>(StepId, FS.path(path.Name));
+            Wf.Emitting<ImageFieldTable>(Host.Id, FS.path(path.Name));
 
             var assembly = part.Owner;
             using var reader = Reader(assembly.Location);
@@ -83,7 +82,7 @@ namespace Z0
 
             path.Overwrite(formatter.Render());
 
-            Wf.Emitted<ImageFieldTable>(StepId, count, FS.path(path.Name));
+            Wf.Emitted<ImageFieldTable>(Host.Id, count, FS.path(path.Name));
             return count;
         }
 
@@ -101,7 +100,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host.Id);
         }
     }
 }

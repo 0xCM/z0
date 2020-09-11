@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -19,9 +19,9 @@ namespace Z0
         public @enum(E literal)
         {
             Literal = literal;
-        }                
+        }
 
-        public DataWidth Width 
+        public DataWidth Width
         {
             [MethodImpl(Inline)]
             get => bitsize<E>();
@@ -35,12 +35,12 @@ namespace Z0
         public bool Equals(@enum<E> src)
             => Literal.Equals(src.Literal);
 
-        E IEnum<E>.Literal 
-            => Literal;    
+        E IEnum<E>.Literal
+            => Literal;
         public string Format()
             => $"{Literal}";
 
         public override string ToString()
-            => Format();            
+            => Format();
     }
 }

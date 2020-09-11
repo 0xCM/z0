@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static NumericKinds;
 
-    partial class FixedOps
+    partial class CellOps
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Cell8 F8<T>(T src)

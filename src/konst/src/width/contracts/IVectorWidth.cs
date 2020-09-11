@@ -4,21 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IVectorWidth : IFixedWidth, ITypedLiteral<VectorWidth,uint>
+    public interface IVectorWidth : ICellWidth, ITypedLiteral<VectorWidth,uint>
     {
         /// <summary>
-        /// Defines a class specifier synonym to facilitate disambiguaton
+        /// Defines a class specifier for use as a discriminator
         /// </summary>
-        VectorWidth VectorWidth 
+        VectorWidth VectorWidth
             => (VectorWidth)BitWidth;
 
-        VectorWidth ITypedLiteral<VectorWidth>.Class 
+        VectorWidth ITypedLiteral<VectorWidth>.Class
             => VectorWidth;
 
-        uint ITypedLiteral<VectorWidth,uint>.Value 
+        uint ITypedLiteral<VectorWidth,uint>.Value
             => BitWidth;
 
-        string ITypedLiteral<VectorWidth>.Name 
+        string ITypedLiteral<VectorWidth>.Name
             => VectorWidth.FormatName();
     }
 }

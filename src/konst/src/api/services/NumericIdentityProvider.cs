@@ -3,20 +3,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System; 
+    using System;
     using System.Collections.Generic;
 
     using static Konst;
-    
-    public readonly struct NumericIdentityProvider : ITypeIdentityProvider
-    {                
-        public TypeIdentity Identify(Type src)
-            => TypeIdentity.Define(src.NumericKind().Format());
 
-        public IEnumerable<Type> Identifiable 
+    public readonly struct NumericIdentityProvider : ITypeIdentityProvider
+    {
+        public TypeIdentity Identify(Type src)
+            => TypeIdentity.define(src.NumericKind().Format());
+
+        public IEnumerable<Type> Identifiable
             => z.stream(
-                typeof(byte), typeof(ushort), typeof(uint), typeof(ulong), 
-                typeof(sbyte), typeof(short), typeof(int), typeof(long),                 
+                typeof(byte), typeof(ushort), typeof(uint), typeof(ulong),
+                typeof(sbyte), typeof(short), typeof(int), typeof(long),
                 typeof(float), typeof(double)
                 );
     }

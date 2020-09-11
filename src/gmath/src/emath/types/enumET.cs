@@ -3,12 +3,12 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     /// <summary>
     /// Defines a model of an enum literal that is parametric in both the declaring enum
@@ -31,7 +31,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator @enum<E,T>(E src)
             => new @enum<E,T>(src);
-
 
         [MethodImpl(Inline)]
         public static implicit operator @enum<E,T>(T src)
@@ -76,7 +75,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static @enum<E,T> operator /(@enum<E,T> a, @enum<E,T> b)
             => emath.div(a,b);
-        
+
         [MethodImpl(Inline)]
         public static @enum<E,T> operator %(@enum<E,T> a, @enum<E,T> b)
             => emath.mod(a,b);
@@ -113,27 +112,27 @@ namespace Z0
         public @enum(E literal)
         {
             Literal = literal;
-        }                
+        }
 
         [MethodImpl(Inline)]
         public @enum(T scalar)
         {
             Literal = EnumValue.literal<E,T>(scalar);
-        }                
+        }
 
-        public T Scalar 
+        public T Scalar
         {
             [MethodImpl(Inline)]
             get => scalar<E,T>(Literal);
         }
 
-        public DataWidth Width 
+        public DataWidth Width
         {
             [MethodImpl(Inline)]
             get => (DataWidth)bitsize<T>();
         }
 
-        E IEnum<E>.Literal 
+        E IEnum<E>.Literal
             => Literal;
 
         [MethodImpl(Inline)]

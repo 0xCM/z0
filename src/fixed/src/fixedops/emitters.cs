@@ -9,42 +9,42 @@ namespace Z0
 
     using static Konst;
 
-    partial class FixedOps
+    partial class CellOps
     {
         [MethodImpl(Inline), Op]
-        public static Emitter1 fix(Emitter<bit> f) 
+        public static Emitter1 fix(Emitter<bit> f)
             => () => f();
 
         [MethodImpl(Inline), Op]
-        public static Emitter8 fix(Emitter<sbyte> f) 
+        public static Emitter8 fix(Emitter<sbyte> f)
             => () => f();
 
         [MethodImpl(Inline), Op]
-        public static Emitter8 fix(Emitter<byte> f) 
+        public static Emitter8 fix(Emitter<byte> f)
             => () => f();
 
         [MethodImpl(Inline), Op]
-        public static Emitter16 fix(Emitter<short> f) 
+        public static Emitter16 fix(Emitter<short> f)
             => () => f();
 
         [MethodImpl(Inline), Op]
-        public static Emitter16 fix(Emitter<ushort> f) 
+        public static Emitter16 fix(Emitter<ushort> f)
             => () => f();
 
         [MethodImpl(Inline), Op]
-        public static Emitter32 fix(Emitter<int> f) 
+        public static Emitter32 fix(Emitter<int> f)
             => () => f();
 
         [MethodImpl(Inline), Op]
-        public static Emitter32 fix(Emitter<uint> f) 
+        public static Emitter32 fix(Emitter<uint> f)
             => () => f();
 
         [MethodImpl(Inline), Op]
-        public static Emitter64 fix(Emitter<long> f) 
+        public static Emitter64 fix(Emitter<long> f)
             => () => f();
 
         [MethodImpl(Inline), Op]
-        public static Emitter64 fix(Emitter<ulong> f) 
+        public static Emitter64 fix(Emitter<ulong> f)
             => () => f();
     }
 }

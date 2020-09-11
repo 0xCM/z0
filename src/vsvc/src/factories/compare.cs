@@ -12,84 +12,84 @@ namespace Z0
 
     partial class VSvc
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Eq128<T> veq<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(Eq128<T>);
+                => default;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Eq256<T> veq<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(Eq256<T>);
+                => default;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Lt128<T> vlt<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(Lt128<T>);
+                => default;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Lt256<T> vlt<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(Lt256<T>);
+                => default;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Gt128<T> vgt<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(Gt128<T>);
+                => default;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Gt256<T> vgt<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(Gt256<T>);
- 
-        [MethodImpl(Inline)]
+                => default;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Max128<T> vmax<T>(W128 w, T t = default)
             where T : unmanaged
                 => default(Max128<T>);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Max256<T> vmax<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(Max256<T>);
+                => default;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Min128<T> vmin<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(Min128<T>);
+                => default;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Min256<T> vmin<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(Min256<T>);
+                => default;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static NonZ128<T> vnonz<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(NonZ128<T>);
+                => default;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static NonZ256<T> vnonz<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(NonZ256<T>);
+                => default;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static TestC128<T> vtestc<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(TestC128<T>);
+                => default;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static TestC256<T> vtestc<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(TestC256<T>);
+                => default;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static TestZ128<T> vtestz<T>(W128 w, T t = default)
             where T : unmanaged
-                => default(TestZ128<T>);
+                => default;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static TestZ256<T> vtestz<T>(W256 w, T t = default)
             where T : unmanaged
-                => default(TestZ256<T>);
+                => default;
     }
 }

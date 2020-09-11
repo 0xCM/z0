@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface INumericWidth : IFixedWidth, ITypedLiteral<NumericWidth,uint>
+    public interface INumericWidth : ICellWidth, ITypedLiteral<NumericWidth,uint>
     {
         /// <summary>
         /// Defines a class specifier synonym to facilitate disambiguation

@@ -19,7 +19,7 @@ namespace Z0
 
         Timing = 2 | (12 << WidthOffset),
     }
-    
+
     /// <summary>
     /// Defines a benchmark measure for an operator
     /// </summary>
@@ -42,8 +42,8 @@ namespace Z0
 
         public static BenchmarkRecord Empty => new BenchmarkRecord(0, Duration.Zero,string.Empty);
 
-        [MethodImpl(Inline)]   
-        public static BenchmarkRecord Capture(OpIdentity op, long opcount, in SystemCounter clock) 
+        [MethodImpl(Inline)]
+        public static BenchmarkRecord Capture(OpIdentity op, long opcount, in SystemCounter clock)
             => new BenchmarkRecord(op, opcount, clock.Elapsed);
 
         [MethodImpl(Inline)]
@@ -52,11 +52,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator BenchmarkRecord((string opName, long opCount, SystemCounter clock) src)
-            => Capture(OpIdentity.set(src.opName), src.opCount, src.clock);        
+            => Capture(OpIdentity.define(src.opName), src.opCount, src.clock);
 
         [MethodImpl(Inline)]
         public static BenchmarkRecord Define(long count, Duration timing, string label)
-            => new BenchmarkRecord(OpIdentity.set(label), count, timing);
+            => new BenchmarkRecord(OpIdentity.define(label), count, timing);
 
         [MethodImpl(Inline)]
         BenchmarkRecord(OpIdentity id, long opcount, Duration elapsed)
@@ -64,15 +64,15 @@ namespace Z0
             this.OpId = id;
             this.OpCount = opcount;
             this.Timing = elapsed;
-        }            
+        }
 
         [MethodImpl(Inline)]
         BenchmarkRecord(long count, Duration timing, string Label)
         {
-            this.OpId = OpIdentity.set(Label ?? "?");
+            this.OpId = OpIdentity.define(Label ?? "?");
             this.OpCount = count;
             this.Timing = timing;
-        }            
+        }
 
         const int OpNamePad = 30;
 
@@ -80,16 +80,16 @@ namespace Z0
 
         public string Format(int? labelPad = null)
             => $"{OpId}".PadRight(labelPad ?? OpNamePad) + $" | Ops = {OpCount} " + $"| Time = {Timing}";
-        
+
         string ITabular.DelimitedText(char delimiter)
             => text.concat(
-                $"{text.format(OpId).PadRight(OpNamePad)}{delimiter}{Chars.Space}",  
+                $"{text.format(OpId).PadRight(OpNamePad)}{delimiter}{Chars.Space}",
                  OpCount.ToString("#,#").PadRight(OpCountPad),  $"{delimiter}{Chars.Space}",
                 $"{Timing.Ms}");
 
         public IReadOnlyList<string> GetHeaders()
-            => new string[]{nameof(OpId).PadRight(OpNamePad), 
-                Chars.Space + nameof(OpCount).PadRight(OpCountPad), 
+            => new string[]{nameof(OpId).PadRight(OpNamePad),
+                Chars.Space + nameof(OpCount).PadRight(OpCountPad),
                 Chars.Space + nameof(Timing),
                 };
 
@@ -101,5 +101,5 @@ namespace Z0
 
         public int CompareTo(object obj)
             => obj is BenchmarkRecord r ? CompareTo(r) : -1;
-    }    
+    }
 }

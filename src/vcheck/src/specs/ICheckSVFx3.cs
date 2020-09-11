@@ -5,13 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Security;
+    using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static Memories;
-
-    using K = Kinds;
-
+    [SuppressUnmanagedCodeSecurity]
     public interface ICheckBinarySVFD<W,F,T>
         where T : unmanaged
         where W : ITypeWidth

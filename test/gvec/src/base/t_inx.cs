@@ -8,14 +8,14 @@ namespace Z0
     /// Base type for intrinsic tests
     /// </summary>
     /// <typeparam name="X">The concrete subtype</typeparam>
-    public abstract class t_inx<X> : UnitTest<X, CheckIntrinsics, TCheckInstrinsics>
+    public abstract class t_inx<X> : UnitTest<X, CheckIntrinsics, TCheckIntrinsics>
         where X : t_inx<X>
     {
         protected t_inx()
         {
             CheckSVF =  Context.CheckSVF();
         }
-        
-        protected readonly ICheckSVF CheckSVF;        
-    }   
+
+        protected readonly ICheckSVF CheckSVF;
+    }
 }

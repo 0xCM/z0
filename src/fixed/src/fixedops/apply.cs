@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class FixedOps    
+    partial class CellOps
     {
         /// <summary>
         /// Evaluates a 128-bit unary operator over a vector
@@ -68,7 +68,7 @@ namespace Z0
         public static Vector256<T> apply<T>(BinaryOp256 f, Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => f(x.ToFixed(), y.ToFixed()).ToVector<T>();
- 
+
         /// <summary>
         /// Evaluates a 512-bit binary operator over a pair of vectors
         /// </summary>
@@ -79,6 +79,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector512<T> apply<T>(BinaryOp512 f, Vector512<T> x, Vector512<T> y)
             where T : unmanaged
-                => f(x.ToFixed(), y.ToFixed()).ToVector<T>(); 
+                => f(x.ToFixed(), y.ToFixed()).ToVector<T>();
     }
 }

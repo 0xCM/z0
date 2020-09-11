@@ -22,7 +22,7 @@ namespace Z0
             where M : struct, IApiMember
                 => Identify.index(src.MapArray(h => (h.Id, h)));
 
-        public static ApiCodeIndex index(IMemberLocator locator, IApiSet api, ApiHostUri uri, FilePath src)
+        public static ApiCodeIndex index(IMemberLocator locator, ApiSet api, ApiHostUri uri, FilePath src)
         {
             var code = ApiHexReader.Service.Read(src).ToArray();
             var host = api.FindHost(uri).Require();
@@ -32,7 +32,7 @@ namespace Z0
             return ApiCodeIndex.create(memberIndex, codeIndex);
         }
 
-        public static ApiCodeIndex index(IMemberLocator locator, IApiSet api, ApiHostUri host, FolderPath root)
+        public static ApiCodeIndex index(IMemberLocator locator, ApiSet api, ApiHostUri host, FolderPath root)
         {
             var members = locator.Locate(api.FindHost(host).Require());
             var idx = index(members);

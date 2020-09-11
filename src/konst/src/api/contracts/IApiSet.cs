@@ -11,20 +11,13 @@ namespace Z0
 
     using static Konst;
 
-    public interface IApiSet
+    public interface IApiSet : IApiProvider
     {
-        ApiParts Parts {get;}
-
         IPartCatalog[] Catalogs {get;}
-
-        PartId[] PartIdentities {get;}
 
         IApiHost[] Hosts {get;}
 
         ResolvedApi Composition {get;}
-
-        Assembly[] Components
-            => Parts.Components;
 
         IApiHost[] DataTypes
             => Catalogs.SelectMany(c => c.ApiDataTypes).Cast<IApiHost>().Array();

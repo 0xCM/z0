@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source kind</param>
         [MethodImpl(Inline)]
-        public static string Format(this FixedWidth src)
+        public static string Format(this CellWidth src)
             => $"{(int)src}";
     }
 }

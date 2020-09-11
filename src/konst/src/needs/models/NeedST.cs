@@ -30,6 +30,10 @@ namespace Z0
             => new Need<T>(r.src,r.dst);
 
         [MethodImpl(Inline)]
+        public static implicit operator Need<T>(Pair<T> src)
+            => new Need<T>(src.Left, src.Right);
+
+        [MethodImpl(Inline)]
         public Need(T src, T dst)
         {
             Source = src;

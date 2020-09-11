@@ -20,9 +20,9 @@ namespace Z0
         {
             const ulong tolerance = 5;
             var total = 0ul;
-            var emit = FixedOps.fix(next<byte>);
+            var emit = CellOps.fix(next<byte>);
             for(var i=0; i<RepCount; i++ )
-                total += Fixed.scalar(emit());
+                total += Cells.scalar(emit());
 
             var expect = (ulong)(maxval<byte>()/2);
             var actual = total/(ulong)RepCount;
@@ -40,7 +40,7 @@ namespace Z0
         public void fixed_convert()
         {
             BinaryOp<uint> f = gmath.add<uint>;
-            BinaryOp32 g = FixedOps.fix(gmath.add<uint>);
+            BinaryOp32 g = CellOps.fix(gmath.add<uint>);
             var lhs = Random.FixedStream<Cell32>().Take(RepCount).ToArray();
             var rhs = Random.FixedStream<Cell32>().Take(RepCount).ToArray();
 
@@ -51,7 +51,7 @@ namespace Z0
                 {
                     var a = lhs[i];
                     var b = rhs[i];
-                    var x = Fixed.fix(f(a.Content, b.Content));
+                    var x = Cells.fix(f(a.Content, b.Content));
                     var y = g(a,b);
                     Claim.Eq(x,y);
                 }

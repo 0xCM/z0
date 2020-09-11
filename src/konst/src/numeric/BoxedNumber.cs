@@ -317,7 +317,7 @@ namespace Z0
         string IFormattable.ToString(string format, IFormatProvider formatProvider)
             => Formattable.ToString(format, formatProvider);
         public TypeIdentity Identity()
-            => TypeIdentity.Define("nbox");
+            => TypeIdentity.define("nbox");
 
         public static BoxedNumber Empty
             => new BoxedNumber(DBNull.Value, NumericKind.None);

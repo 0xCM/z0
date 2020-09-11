@@ -17,15 +17,15 @@ namespace Z0
         where T : unmanaged
     {
         readonly Pair<string> Labels;
-        
-        readonly Pairs<T> Target;     
-           
+
+        readonly Pairs<T> Target;
+
         [MethodImpl(Inline)]
         public PairEvalOutcomes(Pair<string> labels, in Pairs<T> dst)
         {
             Labels = labels;
             Target = dst;
-        }        
+        }
 
         [MethodImpl(Inline)]
         public ref Pair<T> Pair(int index)
@@ -41,15 +41,15 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Target.PointCount;
-        }        
+        }
 
-        public string LeftLabel 
+        public string LeftLabel
         {
             [MethodImpl(Inline)]
             get => Labels.Left;
         }
 
-        public string RightLabel 
+        public string RightLabel
         {
             [MethodImpl(Inline)]
             get => Labels.Right;

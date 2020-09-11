@@ -19,16 +19,16 @@ namespace Z0
 
         public readonly Assembly[] Components;
 
-        public readonly ApiParts Parts;
+        public readonly ApiSet Parts;
 
-        public readonly ApiParts Api {get;}
+        public readonly ApiSet Api {get;}
 
         public ApiModules(FS.FolderPath root)
         {
             Root = root;
             Files = root.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            Components = ApiQuery.parts(Files);
-            Parts = ApiQuery.resolve(Files);
+            Components = ApiQuery.components(Files);
+            Parts = ApiQuery.parts(Files);
             Api = Parts;
         }
 
@@ -36,7 +36,7 @@ namespace Z0
         {
             Root = FS.path(root.Location).FolderPath;
             Files = Root.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            Parts =  parts.Length != 0 ? ApiQuery.resolve(Files).Where(x => parts.Contains(x.Id)) : ApiQuery.resolve(Files);
+            Parts =  parts.Length != 0 ? ApiQuery.parts(Files).Storage.Where(x => parts.Contains(x.Id)) : ApiQuery.parts(Files);
             Components = Parts.Components;
             Api = Parts;
         }
@@ -45,7 +45,7 @@ namespace Z0
         {
             Root = FS.path(root.Location).FolderPath;
             Files = Root.Exclude("System.Private.CoreLib").Where(f => FS.managed(f));
-            Parts =  ApiQuery.resolve(Files);
+            Parts =  ApiQuery.parts(Files);
             Components = Parts.Components;
             Api = Parts;
         }

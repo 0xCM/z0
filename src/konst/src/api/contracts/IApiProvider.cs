@@ -9,7 +9,7 @@ namespace Z0
 
     public interface IApiProvider
     {
-        ApiParts Api {get;}
+        ApiSet Api {get;}
 
         IPart[] Parts
             => Api.Storage;

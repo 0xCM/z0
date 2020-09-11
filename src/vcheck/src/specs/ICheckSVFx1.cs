@@ -16,13 +16,9 @@ namespace Z0
     {
         public ITestContext Context {get;}
 
-        public static CheckSVF<T> Create(ITestContext context)
-            => new CheckSVF<T>(context);
-
         public CheckSVF(ITestContext context)
-        {
-            Context = context;
-        }
+            => Context = context;
+
     }
 
     public interface ICheckSVF<T> : ICheckSF, ICheckBinarySVFD<W128,IBinaryOp128D<T>,T>

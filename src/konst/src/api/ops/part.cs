@@ -30,5 +30,19 @@ namespace Z0
                 return none<IPart>();
             }
         }
+
+        /// <summary>
+        /// Attempts to resolve a part from an assembly file path
+        /// </summary>
+        [Op]
+        public static Option<IPart> part(FS.FilePath src,
+            [CallerMemberName] string caller = null,
+            [CallerFilePath] string file = null,
+            [CallerLineNumber] int?  line = null)
+                => from c in component(src)
+                from t in resolve(c)
+                from p in resolve(t)
+                from part in resolve(p)
+                select part;
     }
 }

@@ -19,6 +19,7 @@ namespace Z0
     [ApiHost]
     public class AppMsg : IAppMsg
     {
+        public static AppMsg Empty => new AppMsg(AppMsgData.Empty);
         public AppMsgData Data {get;}
 
         [MethodImpl(Inline), Op]

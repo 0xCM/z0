@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
 
-    public abstract class t_asm<U> : UnitTest<U,CheckVectors,TCheckVectors>
+    public abstract class t_asm<U> : UnitTest<U,CheckVectors,ICheckVectors>
         where U : t_asm<U>
     {
         protected IPartCapturePaths TargetArchive

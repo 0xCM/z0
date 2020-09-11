@@ -9,8 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend 
-    {        
+    partial class XTend
+    {
         public static string Format(this DataSize src)
             => ((byte)src).ToString();
 
@@ -27,7 +27,7 @@ namespace Z0
             => ((uint)w).ToString();
 
         [MethodImpl(Inline)]
-        public static string FormatValue(this FixedWidth w)
+        public static string FormatValue(this CellWidth w)
             => ((uint)w).ToString();
 
         [MethodImpl(Inline)]
