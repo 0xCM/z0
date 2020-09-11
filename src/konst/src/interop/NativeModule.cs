@@ -11,18 +11,27 @@ namespace Z0
     using static Konst;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface INativeModule : IDisposable
+    public interface INativeModule : IDisposable, IAddressable
     {
-
+        StringRef Name {get;}
     }
 
     public readonly struct NativeModule : INativeModule
     {
+        public StringRef Name {get;}
+
         readonly IntPtr Handle;
 
         [MethodImpl(Inline)]
-        public NativeModule(IntPtr handle)
-            => Handle = handle;
+        public static implicit operator IntPtr(NativeModule src)
+            => src.Handle;
+
+        [MethodImpl(Inline)]
+        public NativeModule(string name,IntPtr handle)
+        {
+            Name = name;
+            Handle = handle;
+        }
 
         public MemoryAddress Base
         {
@@ -35,5 +44,9 @@ namespace Z0
             if (Handle != IntPtr.Zero)
                 OS.FreeLibrary(Handle);
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => text.format(RenderPatterns.PSx2, Base, Name);
     }
 }

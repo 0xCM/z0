@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     partial struct AsmBuilder
     {
-        public static AsmOps<Xmm,Xmm> vmovdqu(Xmm xmm1, Xmm xmm2)
+        public static AsmArgs<Xmm,Xmm> vmovdqu(Xmm xmm1, Xmm xmm2)
             => (xmm1,xmm2);
     }
 }

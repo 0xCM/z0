@@ -6,14 +6,14 @@ namespace Z0
 {
     using System;
     using System.IO;
-    
+
     using static Typed;
 
     [ApiHost]
     public readonly struct TabularTruth : IApiHost<TabularTruth>
     {
         static bit on => bit.On;
-        
+
         static bit off => bit.Off;
 
         static BitLogix bitlogix => BitLogix.Service;
@@ -29,7 +29,7 @@ namespace Z0
             x[0] = bitlogix.Evaluate(kind, off);
             x[1] = bitlogix.Evaluate(kind, on);
             return x;
-        }        
+        }
 
         /// <summary>
         /// Computes a the signature, also referred to as the truth vector, for an identified binary operator
@@ -46,20 +46,6 @@ namespace Z0
             return x;
         }
 
-        /// <summary>
-        /// Computes a the signature, also referred to as the truth vector, for an identified binary operator
-        /// </summary>
-        /// <param name="kind">The operator kind</param>
-        [Op]
-        public static BitVector4 vector(N4 n, BinaryBitLogic kind)
-        {
-            var x = BitVector.alloc(n);
-            x[0] = bitlogix.Evaluate(kind, off, off);
-            x[1] = bitlogix.Evaluate(kind, on, off);
-            x[2] = bitlogix.Evaluate(kind, off, on);
-            x[3] = bitlogix.Evaluate(kind, on, on);
-            return x;
-        }
 
         /// <summary>
         /// Computes a the signature, also referred to as the truth vector, for an identified ternary operator
@@ -88,7 +74,7 @@ namespace Z0
         public static BitVector16 vector(N16 n, BinaryLogicKind kind)
         {
             var dst = BitVector.alloc(n16);
-            var s = ((byte)vector(n4, kind)).ToBitString().Truncate(4);            
+            var s = ((byte)vector(n4, kind)).ToBitString().Truncate(4);
             var f = bitlogix.Lookup(kind);
             dst[0] = off;
             dst[1] = off;
@@ -105,7 +91,7 @@ namespace Z0
             dst[12] = s[0];
             dst[13] = s[1];
             dst[14] = s[2];
-            dst[15] = s[3];            
+            dst[15] = s[3];
             return dst;
         }
 
@@ -116,24 +102,12 @@ namespace Z0
             var table = BitMatrix.alloc<N2,N2,byte>();
             table[0] = BitBlocks.single<N2,byte>((byte)Bits.pack(f(off), off));
             table[1] = BitBlocks.single<N2,byte>((byte)Bits.pack(f(on), on));
-            return table;            
+            return table;
         }
 
 
         [Op]
         public static BitMatrix<N4,N3,byte> table(BinaryLogicKind kind)
-        {
-            var tt = BitMatrix.alloc<N4,N3,byte>();
-            var f = bitlogix.Lookup(kind);
-            tt[0] = BitBlocks.single<N3,byte>((byte)Bits.pack(f(off, off), off, off));
-            tt[1] = BitBlocks.single<N3,byte>((byte)Bits.pack(f(on, off), off, on));
-            tt[2] = BitBlocks.single<N3,byte>((byte)Bits.pack(f(off, on), on, off));
-            tt[3] = BitBlocks.single<N3,byte>((byte)Bits.pack(f(on, on),  on, on));
-            return tt;
-        }
-
-        [Op]
-        public static BitMatrix<N4,N3,byte> table(BinaryBitLogic kind)
         {
             var tt = BitMatrix.alloc<N4,N3,byte>();
             var f = bitlogix.Lookup(kind);
@@ -174,13 +148,6 @@ namespace Z0
                 save(src[i], writer);
         }
 
-        public static void save(ReadOnlySpan<BinaryBitLogic> src, StreamWriter dst)
-        {
-            var writer = BitMatrixWriter.Share(dst);
-            for(var i=0; i<src.Length; i++)
-                save(src[i], writer);
-        }
-
         public static void save(ReadOnlySpan<TernaryBitLogic> src, StreamWriter dst)
         {
             var writer = BitMatrixWriter.Share(dst);
@@ -202,13 +169,6 @@ namespace Z0
             return table;
         }
 
-        public static BitMatrix<N4,N3,byte> save(BinaryBitLogic spec, IBitMatrixWriter dst)
-        {
-            var table = TabularTruth.table(spec);
-            dst.Write(table,spec);
-            return table;
-        }
-        
         public static BitMatrix<N8,N4,byte> save(TernaryBitLogic spec, IBitMatrixWriter dst)
         {
             var table = TabularTruth.table(spec);
@@ -241,7 +201,7 @@ namespace Z0
                 table[1] = BitBlocks.single<N3,byte>((byte)Bits.pack(result[1], off, on));
                 table[2] = BitBlocks.single<N3,byte>((byte)Bits.pack(result[2], on, off));
                 table[3] = BitBlocks.single<N3,byte>((byte)Bits.pack(result[3], on, on));
-                Demands.insist(table.GetCol(2) == bbResult);                
+                Demands.insist(table.GetCol(2) == bbResult);
                 dst.Write(table);
             }
         }
@@ -262,7 +222,7 @@ namespace Z0
                 table[5] = BitBlocks.single<N4,byte>((byte)Bits.pack(result[5], on, off, on));
                 table[6] = BitBlocks.single<N4,byte>((byte)Bits.pack(result[6], on, on, off));
                 table[7] = BitBlocks.single<N4,byte>((byte)Bits.pack(result[7], on, on, on));
-                Demands.insist(table.GetCol(3) == bbResult);                
+                Demands.insist(table.GetCol(3) == bbResult);
                 dst.Write(table);
             }
         }

@@ -101,7 +101,7 @@ namespace Z0
                 var method = member.Method;
                 var kind = method.KindId();
                 var id = Diviner.Identify(method);
-                var uri = OpUri.Define(OpUriScheme.Located, member.Host, method.Name, id);
+                var uri = OpUri.Define(ApiUriScheme.Located, member.Host, method.Name, id);
                 dst[i] = new ApiMember(uri,method, kind, member.Location);
             }
 
@@ -112,7 +112,7 @@ namespace Z0
             =>  from m in ApiMemberQuery.DirectMethods(src)
                 let kid = m.Method.KindId()
                 let id = Diviner.Identify(m.Method)
-                let uri = OpUri.Define(OpUriScheme.Located, src.Uri, m.Method.Name, id)
+                let uri = OpUri.Define(ApiUriScheme.Located, src.Uri, m.Method.Name, id)
                 let address = z.address(Jit(m.Method))
                 select new ApiMember(uri, m.Method, kid, address);
 
@@ -123,7 +123,7 @@ namespace Z0
                 let reified = m.Method.MakeGenericMethod(t)
                 let address = Root.address(Jit(reified))
                 let id = Diviner.Identify(reified)
-                let uri = OpUri.Define(OpUriScheme.Located, src.Uri, m.Method.Name, id)
+                let uri = OpUri.Define(ApiUriScheme.Located, src.Uri, m.Method.Name, id)
                 select new ApiMember(uri, reified, kid, address)).Array();
 
 

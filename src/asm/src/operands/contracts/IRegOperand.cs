@@ -7,24 +7,24 @@ namespace Z0.Asm
     /// <summary>
     /// Characterizes a register operand
     /// </summary>
-    public interface IRegOperand : IAsmOperand
+    public interface IRegOperand : IAsmArg
     {
         /// <summary>
         /// The register's kind classifier
         /// </summary>
         RegisterKind Kind {get;}
 
-        RegisterCode Code 
+        RegisterCode Code
             => (RegisterCode)((byte)Kind);
 
         RegisterClass Class
             => default;
 
-        AsmOperandKind IAsmOperand.OpKind 
-            => AsmOperandKind.R;        
+        AsmOperandKind IAsmArg.OpKind
+            => AsmOperandKind.R;
     }
 
-    public interface IRegOperand<T> : IRegOperand, IAsmOperand<T>
+    public interface IRegOperand<T> : IRegOperand, IAsmArg<T>
         where T : unmanaged
     {
 
@@ -35,11 +35,11 @@ namespace Z0.Asm
     /// </summary>
     /// <typeparam name="F">The reifying type</typeparam>
     /// <typeparam name="W">The register width</typeparam>
-    public interface IRegOperand<W,T> : IRegOperand<T>, IAsmOperand<W,T>
+    public interface IRegArg<W,T> : IRegOperand<T>, IAsmArg<W,T>
         where W : unmanaged, IDataWidth
         where T : unmanaged
     {
-        
+
     }
 
     /// <summary>
@@ -47,11 +47,11 @@ namespace Z0.Asm
     /// </summary>
     /// <typeparam name="F">The reifying type</typeparam>
     /// <typeparam name="W">The register width</typeparam>
-    public interface IRegOperand<F,W,T> : IRegOperand<W,T>
+    public interface IRegOperand<F,W,T> : IRegArg<W,T>
         where F : struct, IRegOperand<F,W,T>
         where W : unmanaged, IDataWidth
         where T : unmanaged
     {
-        
+
     }
 }

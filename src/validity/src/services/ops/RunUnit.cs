@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     partial class TestApp<A>
-    {        
+    {
         void RunUnit(Type host, IUnitTest unit)
         {
             if(DiagnosticMode)
@@ -21,27 +21,27 @@ namespace Z0
             try
             {
                 var execTime = Duration.Zero;
-                var clock = counter(true);                    
+                var clock = counter(true);
                 var tsStart = Time.now();
 
-                if(unit is IExplicitTest et)  
+                if(unit is IExplicitTest et)
                     ExecExplicit(et, host.Name,results);
                 else
-                {                    
-                    z.iter(FindTests(host), t =>  execTime += RunCase(unit, t, results));                    
+                {
+                    z.iter(FindTests(host), t =>  execTime += RunCase(unit, t, results));
                     PostBenchResult(unit.TakeBenchmarks().Array());
                 }
 
                 clock.Stop();
-                
-                var hosturi = OpUriBuilder.HostUri(host);
-                term.print(PostUnit(hosturi, clock.Time, tsStart, Time.now())); 
+
+                var hosturi = ApiUriBuilder.HostUri(host);
+                term.print(PostUnit(hosturi, clock.Time, tsStart, Time.now()));
 
             }
             catch(Exception e)
             {
                 term.error($"Harness execution failed: {e}");
-            }  
+            }
             finally
             {
                 PostTestResults(results);
@@ -49,15 +49,15 @@ namespace Z0
         }
 
         public void RunUnit(Type host, string[] filters)
-        {                    
+        {
             if(!HasTests(host, filters))
-                return;            
+                return;
 
-            using var unit = host.Instantiate<IUnitTest>();  
+            using var unit = host.Instantiate<IUnitTest>();
             if(unit.Enabled)
             {
                 unit.SetMode(DiagnosticMode);
-                RunUnit(host, unit);            
+                RunUnit(host, unit);
             }
         }
     }

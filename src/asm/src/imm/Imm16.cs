@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a 16-bit immediate value
     /// </summary>
-    public readonly struct Imm16 : IAsmOperand<I,W16,ushort>
+    public readonly struct Imm16 : IAsmArg<I,W16,ushort>
     {
         public readonly ushort Data;
 
@@ -84,7 +84,7 @@ namespace Z0
 
         public override int GetHashCode()
             => (int)Hash;
-     
+
         [MethodImpl(Inline)]
         public int CompareTo(I src)
             => Data == src.Data ? 0 : Data < src.Data ? -1 : 1;
@@ -93,7 +93,7 @@ namespace Z0
         public bool Equals(I src)
             => Data == src.Data;
 
-        public override bool Equals(object src)            
+        public override bool Equals(object src)
             => src is I x && Equals(x);
 
         [MethodImpl(Inline)]

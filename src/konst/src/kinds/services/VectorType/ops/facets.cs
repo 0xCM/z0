@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static int size(VectorKind kind)
             => width(kind)/8;
- 
+
         /// <summary>
         /// Determines the component width of a k-kinded vector
         /// </summary>
@@ -36,7 +36,7 @@ namespace Z0
             => (byte)((uint)k >> 16);
 
         /// <summary>
-        /// Determines whether a classfied vector is defined over primal unsigned integer components
+        /// Determines whether a classified vector is defined over primal unsigned integer components
         /// </summary>
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline), Op]

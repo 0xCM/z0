@@ -5,10 +5,10 @@
 namespace Z0
 {
     using System;
-    
+
     partial class XTend
     {
-       public static string Format(this OpUriScheme src)
+       public static string Format(this ApiUriScheme src)
             => src.ToString().ToLower();
     }
 }

@@ -18,13 +18,13 @@ namespace Z0.Asm
         public R32(uint value)
             => Data = value;
 
-        public RegisterKind Kind 
+        public RegisterKind Kind
         {
             [MethodImpl(Inline)]
             get => default(R).Kind;
         }
 
-        uint IAsmOperand<uint>.Content 
+        uint IAsmArg<uint>.Content
             => Data;
     }
 }

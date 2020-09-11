@@ -10,7 +10,7 @@ namespace Z0.Asm
     /// Describes a block of memory the context of an asm instruction operand
     /// </summary>
     public struct AsmMemoryOp<T>
-        where T : unmanaged, IAsmMemoryOp<T>
+        where T : unmanaged, IAsmMemoryArg<T>
     {
         public T Data;
     }
@@ -20,7 +20,7 @@ namespace Z0.Asm
     /// </summary>
     public struct AsmMemoryOp<W,T>
         where W : unmanaged, ITypeWidth
-        where T : unmanaged, IAsmMemoryOp<W,T>
+        where T : unmanaged, IAsmMemoryArg<W,T>
     {
         public T Data;
 
@@ -30,9 +30,9 @@ namespace Z0.Asm
     /// Describes a block of memory the context of an asm instruction operand
     /// </summary>
     public struct AsmMemoryOp<M,W,T>
-        where M : unmanaged, IAsmMemoryOp<M,W,T>
+        where M : unmanaged, IAsmMemoryArg<M,W,T>
         where W : unmanaged, ITypeWidth
-        where T : unmanaged, IAsmMemoryOp<W,T>
+        where T : unmanaged, IAsmMemoryArg<W,T>
     {
         public T Data;
 

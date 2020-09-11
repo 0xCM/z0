@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public struct M256 : IAsmMemoryOp<M256,W256,Cell256>
+    public struct M256 : IAsmMemoryArg<M256,W256,Cell256>
     {
         public Cell256 Data;
 
@@ -30,7 +30,7 @@ namespace Z0.Asm
         public static implicit operator Cell256(M256 src)
             => src.Data;
 
-        Cell256 IAsmOperand<Cell256>.Content
+        Cell256 IAsmArg<Cell256>.Content
             => Data;
     }
 }

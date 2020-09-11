@@ -19,7 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Any<T> From<S>(in S src)
-            => new Any<T>(Unsafe.As<S,T>(ref Unsafe.AsRef(src)));
+            => new Any<T>(Unsafe.As<S,T>(ref z.edit(src)));
 
         [MethodImpl(Inline)]
         public static bool operator ==(Any<T> x, Any<T> y)

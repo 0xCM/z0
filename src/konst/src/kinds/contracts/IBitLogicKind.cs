@@ -48,4 +48,20 @@ namespace Z0
         NumericKind NumericKind
             => NumericKinds.kind<T>();
     }
+
+    /// <summary>
+    /// Characterizes a kind, numeric, and width-parametric bitlogic operation classifier
+    /// </summary>
+    /// <typeparam name="F">The kind classifier type</typeparam>
+    /// <typeparam name="W">The width type</typeparam>
+    /// <typeparam name="T">The numeric type</typeparam>
+    public interface IBitLogicKind<F,W,T> : IBitLogicKind<F,T>
+        where W : unmanaged, ITypeWidth
+        where F : unmanaged, IBitLogicKind
+    {
+        /// <summary>
+        /// The parametrically-identified operand width
+        /// </summary>
+        TypeWidth OperandWidth => Widths.type<W>();
+    }
 }

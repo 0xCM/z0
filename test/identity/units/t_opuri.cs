@@ -18,7 +18,7 @@ namespace Z0
             Claim.Require(attempt.Succeeded);
             var uri = attempt.Value;
 
-            Claim.Eq(OpUriScheme.Hex, uri.Scheme);
+            Claim.Eq(ApiUriScheme.Hex, uri.Scheme);
             ClaimEquatable.Eq(new ApiHostUri(PartId.Fixed, "Vector512"), uri.Host);
             Claim.eq("vgeneric", uri.GroupName);
             Claim.eq(opid, uri.OpId);

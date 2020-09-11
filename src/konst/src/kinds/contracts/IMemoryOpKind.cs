@@ -20,7 +20,6 @@ namespace Z0
             => (ApiOpId)Kind;
     }
 
-
     /// <summary>
     /// Characterizes a reified system operation classifier
     /// </summary>

@@ -84,7 +84,7 @@ namespace Z0
             where F : IFunc<T0,T1,R>
             where G : IFunc<T0,T1,R>
         {
-            var casename = OpUriBuilder.TestCase(Context.HostType, $"{g.Id}_span");
+            var casename = ApiUriBuilder.TestCase(Context.HostType, $"{g.Id}_span");
             var succeeded = true;
             var count = RepCount;
             var clock = counter();

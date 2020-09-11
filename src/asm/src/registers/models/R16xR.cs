@@ -18,13 +18,13 @@ namespace Z0.Asm
         public R16(ushort value)
             => Data = value;
 
-        public RegisterKind Kind 
+        public RegisterKind Kind
         {
             [MethodImpl(Inline)]
             get => default(R).Kind;
         }
 
-        ushort IAsmOperand<ushort>.Content 
+        ushort IAsmArg<ushort>.Content
             => Data;
     }
 }

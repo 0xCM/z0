@@ -18,7 +18,7 @@ namespace Z0
             => dst.NotifyConsole(AppMsg.info($"{opname}({a}, {b}) = {result}"));
 
         public static void AnalyzingEvaluation(this IAppMsgSink dst, in X86ApiMember api)
-            => dst.NotifyConsole(AppMsg.define($"Analyzing evaluation of {api.Uri.WithScheme(OpUriScheme.Located)}", MessageKind.Babble));
+            => dst.NotifyConsole(AppMsg.define($"Analyzing evaluation of {api.Uri.WithScheme(ApiUriScheme.Located)}", MessageKind.Babble));
 
         public static void RuntimeEvalFailure(this IAppMsgSink dst, in X86ApiMember api, Exception e, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {

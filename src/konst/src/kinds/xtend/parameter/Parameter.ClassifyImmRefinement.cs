@@ -11,7 +11,6 @@ namespace Z0
 
     partial class XTend
     {
-
         public static ImmRefinementKind ClassifyImmRefinement(this ParameterInfo src)
         {
             if(!src.Tagged<ImmAttribute>())

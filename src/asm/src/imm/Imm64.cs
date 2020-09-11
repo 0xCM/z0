@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a 64-bit immediate value
     /// </summary>
-    public readonly struct Imm64 : IAsmOperand<I,W64,ulong>
+    public readonly struct Imm64 : IAsmArg<I,W64,ulong>
     {
         public readonly ulong Data;
 
@@ -93,7 +93,7 @@ namespace Z0
         public bool Equals(I src)
             => Data == src.Data;
 
-        public override bool Equals(object src)            
+        public override bool Equals(object src)
             => src is I x && Equals(x);
 
 

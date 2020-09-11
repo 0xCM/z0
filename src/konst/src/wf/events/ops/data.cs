@@ -12,13 +12,13 @@ namespace Z0
     partial struct WfEvents
     {
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static DataRow<T> data<T>(T data, CorrelationToken ct)
+        public static DataRow<T> data<T>(T content, CorrelationToken ct)
             where T : ITextual
-                => new DataRow<T>(data, ct);
+                => new DataRow<T>(content, ct);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static DataRow<T,K> data<T,K>(T data, K kind, CorrelationToken ct)
+        public static DataRow<T,K> data<T,K>(K kind, T content, CorrelationToken ct)
             where T : ITextual
-                => new DataRow<T,K>(data, kind, ct);
+                => new DataRow<T,K>(content, kind, ct);
     }
 }

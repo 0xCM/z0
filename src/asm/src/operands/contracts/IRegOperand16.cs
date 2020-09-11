@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IRegOperand16 : IRegOperand<W16,ushort>
+    public interface IRegOperand16 : IRegArg<W16,ushort>
     {
         RegisterClass IRegOperand.Class
             => RegisterClass.GP;

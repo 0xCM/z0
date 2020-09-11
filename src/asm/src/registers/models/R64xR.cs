@@ -18,13 +18,13 @@ namespace Z0.Asm
         public R64(ulong value)
             => Data = value;
 
-        public RegisterKind Kind 
+        public RegisterKind Kind
         {
             [MethodImpl(Inline)]
             get => default(R).Kind;
         }
 
-        ulong IAsmOperand<ulong>.Content 
+        ulong IAsmArg<ulong>.Content
             => Data;
     }
 }

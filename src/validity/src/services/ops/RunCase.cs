@@ -17,51 +17,51 @@ namespace Z0
         Duration RunCase(IUnitTest unit, MethodInfo method, IList<TestCaseRecord> cases)
         {
             var exectime = Duration.Zero;
-            var casename = OpUriBuilder.TestCase(method);
+            var casename = ApiUriBuilder.TestCase(method);
             var clock = counter(false);
             var messages = new List<IAppMsg>();
             var outcomes = z.list<TestCaseRecord>();
-            
+
             try
             {
                 if(DiagnosticMode)
-                    term.print($"Executing case {unit.HostType.Name}/{method.Name}");            
+                    term.print($"Executing case {unit.HostType.Name}/{method.Name}");
 
                 var tsStart = now();
                 messages.Add(PreCase(casename, tsStart));
 
                 clock.Start();
-                method.Invoke(unit,null);                    
+                method.Invoke(unit,null);
                 clock.Stop();
 
                 messages.AddRange(unit.Dequeue());
                 messages.Add(PostCase(casename, clock.Time, tsStart, now()));
-                
+
                 outcomes.AddRange(unit.TakeOutcomes().Array());
 
                 if(outcomes.Count == 0)
                     outcomes.Add(TestCaseRecord.Define(casename, true, clock.Time));
 
                 if(DiagnosticMode)
-                    term.print($"Executed case {unit.HostType.Name}/{method.Name}");            
+                    term.print($"Executed case {unit.HostType.Name}/{method.Name}");
 
             }
             catch(Exception e)
-            {                
+            {
                 clock.Stop();
-                messages.AddRange(unit.Dequeue());                
+                messages.AddRange(unit.Dequeue());
                 messages.AddRange(FormatErrors(e, method));
-                outcomes.Add(TestCaseRecord.Define(casename, false, clock.Time));                              
+                outcomes.Add(TestCaseRecord.Define(casename, false, clock.Time));
             }
             finally
-            {                     
-                Log.Deposit(messages);   
+            {
+                Log.Deposit(messages);
                 cases.WithItems(outcomes);
                 CaseLog.Deposit(outcomes.Array());
                 //Root.iter(messages.Where(m => !m.Displayed), term.print);
             }
 
             return exectime;
-        }            
+        }
     }
 }

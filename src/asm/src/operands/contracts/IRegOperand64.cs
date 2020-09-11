@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IRegOperand64 : IRegOperand<W64,ulong>
+    public interface IRegOperand64 : IRegArg<W64,ulong>
     {
         RegisterClass IRegOperand.Class
             => RegisterClass.GP;

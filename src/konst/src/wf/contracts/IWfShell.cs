@@ -89,6 +89,14 @@ namespace Z0
         void Created<T>(WfStepId id, T content)
             => Raise(WfEvents.created(id, content, Ct));
 
+        void DataRow<T>(T content)
+            where T : ITextual
+                => Raise(WfEvents.data(typeof(T).Name, content, Ct));
+
+        void DataRow<K,T>(K kind, T content)
+            where T : ITextual
+                => Raise(WfEvents.data(kind, content, Ct));
+
         void Running(WfStepId step, [File] string actor = null)
             => Raise(WfEvents.running(callerName(actor), step, Ct));
 

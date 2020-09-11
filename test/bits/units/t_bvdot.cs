@@ -28,7 +28,7 @@ namespace Z0
         }
 
         void bvdot_natcheck(byte t)
-        {   
+        {
             bvdot_natcheck<N2,byte>();
             bvdot_natcheck<N3,byte>();
             bvdot_natcheck<N4,byte>();
@@ -39,7 +39,7 @@ namespace Z0
        }
 
         void bvdot_natcheck(ushort t)
-        {   
+        {
             bvdot_natcheck<N2,ushort>();
             bvdot_natcheck<N3,ushort>();
             bvdot_natcheck<N4,ushort>();
@@ -57,7 +57,7 @@ namespace Z0
             bvdot_natcheck<N16,ushort>();
         }
 
-        void bvdot_natcheck(uint t)        
+        void bvdot_natcheck(uint t)
         {
             bvdot_natcheck<N2,uint>();
             bvdot_natcheck<N3,uint>();
@@ -93,7 +93,7 @@ namespace Z0
 
         }
 
-        void bvdot_natcheck(ulong t)        
+        void bvdot_natcheck(ulong t)
         {
             bvdot_natcheck<N2,ulong>();
             bvdot_natcheck<N3,ulong>();
@@ -131,9 +131,9 @@ namespace Z0
             bvdot_natcheck<N56,ulong>();
             bvdot_natcheck<N57,ulong>();
             bvdot_natcheck<N58,ulong>();
-            bvdot_natcheck<N59,ulong>();            
+            bvdot_natcheck<N59,ulong>();
             bvdot_natcheck<N60,ulong>();
-            bvdot_natcheck<N61,ulong>();            
+            bvdot_natcheck<N61,ulong>();
             bvdot_natcheck<N62,ulong>();
             bvdot_natcheck<N64,ulong>();
             bvdot_natcheck<N63,ulong>();
@@ -148,7 +148,7 @@ namespace Z0
                 var y = Random.BitVector(n4);
                 var a = x % y;
                 var b = modprod(x,y);
-                Claim.Require(a == b);            
+                Claim.Require(a == b);
             }
         }
 
@@ -160,13 +160,13 @@ namespace Z0
                 var y = Random.BitVector(n8);
                 var a = x % y;
                 var b = modprod(x,y);
-                Claim.Require(a == b);            
+                Claim.Require(a == b);
 
                 var zx = x.ToNatBits();
                 var zy = y.ToNatBits();
                 var c = zx % zy;
                 Claim.Require(a == c);
-            }            
+            }
         }
 
         public void bvdot_16()
@@ -177,7 +177,7 @@ namespace Z0
                 var y = Random.BitVector(n16);
                 var a = x % y;
                 var b = modprod(x,y);
-                Claim.Require(a == b);   
+                Claim.Require(a == b);
 
                 var zx = x.ToNatBits();
                 var zy = y.ToNatBits();
@@ -194,7 +194,7 @@ namespace Z0
                 var y = Random.BitVector(n32);
                 var a = x % y;
                 var b = modprod(x,y);
-                Claim.Require(a == b);   
+                Claim.Require(a == b);
 
                 var zx = x.ToNatural();
                 var zy = y.ToNatural();
@@ -216,10 +216,10 @@ namespace Z0
                 var zx = x.ToNatBits();
                 var zy = y.ToNatBits();
                 bit c = zx % zy;
-                Claim.Require(a == c);            
+                Claim.Require(a == c);
             }
 
-            for(var i=0; i< RepCount; i++)          
+            for(var i=0; i< RepCount; i++)
             {
                 var x32 = Random.BitVector(n32);
                 var y32 = Random.BitVector(n32);
@@ -249,7 +249,7 @@ namespace Z0
             }
         }
 
- 
+
         /// <summary>
         /// Verifies the natural bitvector dot product operation
         /// </summary>
@@ -260,7 +260,7 @@ namespace Z0
         protected void bvdot_natcheck<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-        {            
+        {
             var opname = $"bvdot_n{n}x{Identify.numeric<T>()}";
 
             void check()
@@ -275,7 +275,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check, OpUriBuilder.TestCase(GetType(),opname));
+            CheckAction(check, ApiUriBuilder.TestCase(GetType(),opname));
         }
     }
 }

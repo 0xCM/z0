@@ -15,7 +15,7 @@ namespace Z0.Asm.Dsl
     {
         public readonly byte Data;
 
-        byte IAsmOperand<byte>.Content
+        byte IAsmArg<byte>.Content
             => Data;
 
         [MethodImpl(Inline)]
@@ -40,7 +40,7 @@ namespace Z0.Asm.Dsl
     {
         public readonly byte Data;
 
-        byte IAsmOperand<byte>.Content
+        byte IAsmArg<byte>.Content
             => Data;
 
         public R8 Generalized
@@ -66,7 +66,7 @@ namespace Z0.Asm.Dsl
     {
         public readonly byte Data;
 
-        byte IAsmOperand<byte>.Content
+        byte IAsmArg<byte>.Content
             => Data;
 
         public R8 Generalized
@@ -92,7 +92,7 @@ namespace Z0.Asm.Dsl
     {
         public readonly byte Data;
 
-        byte IAsmOperand<byte>.Content
+        byte IAsmArg<byte>.Content
             => Data;
 
         public R8 Generalized
@@ -119,7 +119,7 @@ namespace Z0.Asm.Dsl
     {
         public readonly byte Data;
 
-        byte IAsmOperand<byte>.Content
+        byte IAsmArg<byte>.Content
             => Data;
 
         public R8 Generalized
@@ -145,7 +145,7 @@ namespace Z0.Asm.Dsl
     {
         public readonly byte Data;
 
-        byte IAsmOperand<byte>.Content
+        byte IAsmArg<byte>.Content
             => Data;
 
         public R8 Generalized
@@ -172,7 +172,7 @@ namespace Z0.Asm.Dsl
     {
         public readonly byte Data;
 
-        byte IAsmOperand<byte>.Content
+        byte IAsmArg<byte>.Content
             => Data;
 
         public R8 Generalized
@@ -198,7 +198,7 @@ namespace Z0.Asm.Dsl
     {
         public readonly byte Data;
 
-        byte IAsmOperand<byte>.Content
+        byte IAsmArg<byte>.Content
             => Data;
 
         public R8 Generalized
@@ -224,7 +224,7 @@ namespace Z0.Asm.Dsl
     {
         public readonly byte Data;
 
-        byte IAsmOperand<byte>.Content
+        byte IAsmArg<byte>.Content
             => Data;
 
         public R8 Generalized
@@ -251,7 +251,7 @@ namespace Z0.Asm.Dsl
     {
         public readonly byte Data;
 
-        byte IAsmOperand<byte>.Content
+        byte IAsmArg<byte>.Content
             => Data;
 
         public R8 Generalized
@@ -273,7 +273,7 @@ namespace Z0.Asm.Dsl
     {
         public readonly byte Data;
 
-        byte IAsmOperand<byte>.Content
+        byte IAsmArg<byte>.Content
             => Data;
 
         public R8 Generalized
@@ -297,7 +297,7 @@ namespace Z0.Asm.Dsl
     {
         public readonly byte Data;
 
-        byte IAsmOperand<byte>.Content
+        byte IAsmArg<byte>.Content
             => Data;
 
         public R8 Generalized
@@ -320,7 +320,7 @@ namespace Z0.Asm.Dsl
     {
         public readonly byte Data;
 
-        byte IAsmOperand<byte>.Content
+        byte IAsmArg<byte>.Content
             => Data;
 
         public R8 Generalized
@@ -342,7 +342,7 @@ namespace Z0.Asm.Dsl
     {
         public readonly byte Data;
 
-        byte IAsmOperand<byte>.Content
+        byte IAsmArg<byte>.Content
             => Data;
 
         public R8 Generalized
@@ -365,7 +365,7 @@ namespace Z0.Asm.Dsl
     {
         public readonly byte Data;
 
-        byte IAsmOperand<byte>.Content
+        byte IAsmArg<byte>.Content
             => Data;
 
         public R8 Generalized
@@ -388,7 +388,7 @@ namespace Z0.Asm.Dsl
     {
         public readonly byte Data;
 
-        byte IAsmOperand<byte>.Content
+        byte IAsmArg<byte>.Content
             => Data;
 
         public R8 Generalized

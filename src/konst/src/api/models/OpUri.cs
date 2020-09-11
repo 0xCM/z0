@@ -22,7 +22,7 @@ namespace Z0
         /// <summary>
         /// The uri scheme, constrained to the defining enumeration
         /// </summary>
-        public readonly OpUriScheme Scheme;
+        public readonly ApiUriScheme Scheme;
 
         /// <summary>
         /// The host fragment, of the form {assembly_short_name}/{hostname}
@@ -66,10 +66,10 @@ namespace Z0
         }
 
         public OpUri Loc
-            => WithScheme(OpUriScheme.Located);
+            => WithScheme(ApiUriScheme.Located);
 
         public OpUri Hex
-            => WithScheme(OpUriScheme.Hex);
+            => WithScheme(ApiUriScheme.Hex);
 
         OpUri INullary<OpUri>.Zero
             => Empty;
@@ -83,35 +83,35 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static OpUri Define(OpUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
+        public static OpUri Define(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
             => new OpUri(scheme, host, group, opid);
 
         [MethodImpl(Inline)]
         public static OpUri hex(ApiHostUri host, string group, OpIdentity opid)
-            => new OpUri(OpUriScheme.Hex, host, group, opid);
+            => new OpUri(ApiUriScheme.Hex, host, group, opid);
 
         [MethodImpl(Inline)]
         public static OpUri hex(OpIdentity opid, MethodInfo src)
-            => new OpUri(OpUriScheme.Hex, ApiQuery.uri(src.DeclaringType), src.Name, opid);
+            => new OpUri(ApiUriScheme.Hex, ApiQuery.uri(src.DeclaringType), src.Name, opid);
 
         [MethodImpl(Inline)]
         public static OpUri located(OpIdentity opid, MethodInfo src)
-            => new OpUri(OpUriScheme.Located, ApiQuery.uri(src.DeclaringType), src.Name, opid);
+            => new OpUri(ApiUriScheme.Located, ApiQuery.uri(src.DeclaringType), src.Name, opid);
 
         [MethodImpl(Inline)]
         public static OpUri asm(ApiHostUri host, string group)
-            => new OpUri(OpUriScheme.Asm, host, group, OpIdentity.Empty);
+            => new OpUri(ApiUriScheme.Asm, host, group, OpIdentity.Empty);
 
         [MethodImpl(Inline)]
         public static OpUri asm(ApiHostUri host, string group, OpIdentity opid)
-            => new OpUri(OpUriScheme.Asm, host, group, opid);
+            => new OpUri(ApiUriScheme.Asm, host, group, opid);
 
         [MethodImpl(Inline)]
         public static OpUri asm(OpIdentity opid, MethodInfo src)
-            => new OpUri(OpUriScheme.Asm, ApiQuery.uri(src.DeclaringType), src.Name, opid);
+            => new OpUri(ApiUriScheme.Asm, ApiQuery.uri(src.DeclaringType), src.Name, opid);
 
         [MethodImpl(Inline)]
-        OpUri(OpUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
+        OpUri(ApiUriScheme scheme, ApiHostUri host, string group, OpIdentity opid)
         {
             Scheme = scheme;
             Host = host;
@@ -127,7 +127,7 @@ namespace Z0
         public string Format()
             => UriText;
 
-        public OpUri WithScheme(OpUriScheme scheme)
+        public OpUri WithScheme(ApiUriScheme scheme)
             => Define(scheme, Host, GroupName, OpId);
 
         [MethodImpl(Inline)]
@@ -151,12 +151,12 @@ namespace Z0
         /// Emptiness of nothing
         /// </summary>
         public static OpUri Empty
-            => new OpUri(OpUriScheme.None, ApiHostUri.Empty, string.Empty, OpIdentity.Empty);
+            => new OpUri(ApiUriScheme.None, ApiHostUri.Empty, string.Empty, OpIdentity.Empty);
 
-        static string QueryText(OpUriScheme scheme, PartId catalog, string host, string group)
+        static string QueryText(ApiUriScheme scheme, PartId catalog, string host, string group)
             => $"{scheme.ToString().ToLower()}{EOS}{catalog.Format()}{PathSep}{host}{QueryMarker}{group}";
 
-        static string FullUriText(OpUriScheme scheme, PartId catalog, string host, string group, OpIdentity opid)
+        static string FullUriText(ApiUriScheme scheme, PartId catalog, string host, string group, OpIdentity opid)
             => $"{scheme.ToString().ToLower()}{EOS}{catalog.Format()}{PathSep}{host}{QueryMarker}{group}{Fragment}{opid.Identifier}";
     }
 }

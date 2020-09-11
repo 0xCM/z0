@@ -29,6 +29,9 @@ namespace Z0
         {
             [UnmanagedFunctionPointer(StdCall), SuppressUnmanagedCodeSecurity]
             public delegate int DllMain(IntPtr instance, int reason, IntPtr reserved);
+
+            [UnmanagedFunctionPointer(StdCall), SuppressUnmanagedCodeSecurity]
+            public delegate IntPtr GetProcAddress(IntPtr module, string name);
         }
     }
 }

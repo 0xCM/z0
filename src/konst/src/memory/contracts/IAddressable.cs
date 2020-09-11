@@ -5,11 +5,14 @@
 namespace Z0
 {
     /// <summary>
-    /// Characteries an object that advertises its memory location
+    /// Characterizes an object that advertises its memory location
     /// </summary>
-    public interface IAddressable
+    public interface IAddressable : ITextual
     {
         MemoryAddress Base {get;}
+
+        string ITextual.Format()
+            => Base.Format();
     }
 
     /// <summary>

@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines a refined 16-bit immediate value
     /// </summary>
-    public readonly struct Imm16<E> : IAsmOperand<Imm16<E>,W16, E>
+    public readonly struct Imm16<E> : IAsmArg<Imm16<E>,W16, E>
         where E : unmanaged, Enum
     {
         public readonly E Data;

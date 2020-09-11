@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
-    
+
     using static Konst;
     using static TestCaseIdentity;
     using static UriDelimiters;
-            
+
     public interface TTestCaseIdentity : TValidator
     {
         /// <summary>
@@ -23,7 +23,7 @@ namespace Z0
             => TestCaseIdentity.name(HostType,id);
 
         string CaseName([Caller] string label = null)
-            => OpUriBuilder.TestCase(HostType, label);
+            => ApiUriBuilder.TestCase(HostType, label);
 
         /// <summary>
         /// Produces a test case identifier predicated on a parametrically-specialized label
@@ -32,7 +32,7 @@ namespace Z0
         OpIdentity CaseOpId<T>([Caller] string label = null)
             where T : unmanaged
                 => TestCaseIdentity.id<T>(label);
-        
+
         /// <summary>
         /// Produces a test case name predicated on a parametrically-specialized label
         /// </summary>
@@ -46,7 +46,7 @@ namespace Z0
             where K : unmanaged
                 => Identify.sfunc<K>($"{label}_baseline");
 
-        string CaseName(IFunc f) 
+        string CaseName(IFunc f)
             => TestCaseIdentity.name(HostType,f);
 
         string CaseName<W,T>(IFunc f)

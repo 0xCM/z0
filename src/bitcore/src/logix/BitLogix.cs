@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static Konst;    
+    using static Konst;
 
     using BLK = BinaryLogicKind;
     using TLK = TernaryBitLogic;
@@ -21,42 +21,42 @@ namespace Z0
     /// </summary>
     [ApiHost]
     public readonly partial struct BitLogix : IBitLogix
-    {        
+    {
         public static BitLogix Service => default(BitLogix);
-        
+
         [MethodImpl(Inline)]
         public bit Evaluate<F>(bit a, bit b, F kind = default)
             where F : unmanaged, IBitLogicKind
                 => BitLogixOps.eval(a, b, kind);
 
         [MethodImpl(Inline), Op]
-        public bit Nand_kind(bit a, bit b)        
+        public bit Nand_kind(bit a, bit b)
             => BitLogixOps.eval(a, b, K.nand());
 
         [MethodImpl(Inline), Op]
-        public bit Xor_kind(bit a, bit b)        
+        public bit Xor_kind(bit a, bit b)
             => BitLogixOps.eval(a, b, K.xor());
 
         /// <summary>
-        /// Advertises the supported unary opeators
+        /// Advertises the supported unary operators
         /// </summary>
         public ReadOnlySpan<ULK> UnaryOpKinds
             => Enums.literals<ULK>();
 
         /// <summary>
-        /// Advertises the supported binary opeators
+        /// Advertises the supported binary operators
         /// </summary>
         public ReadOnlySpan<BLK> BinaryOpKinds
             => Enums.literals<BLK>();
-         
+
         /// <summary>
-        /// Advertises the supported ternary opeators
+        /// Advertises the supported ternary operators
         /// </summary>
         public ReadOnlySpan<TLK> TernaryOpKinds
             => gmath.range((byte)1,(byte)TLK.X5F).Cast<TLK>().ToArray();
 
         /// <summary>
-        /// Returns a kind-indentified unary operator
+        /// Returns a kind-identified unary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
         [MethodImpl(Inline)]
@@ -64,15 +64,7 @@ namespace Z0
             => BitLogixOps.lookup(kind);
 
         /// <summary>
-        /// Returns a kind-indentified unary operator
-        /// </summary>
-        /// <param name="kind">The operator kind</param>
-        [MethodImpl(Inline)]
-        public BinaryOp<bit> Lookup(BinaryBitLogic kind)
-            => BitLogixOps.lookup((BLK)kind);
-
-        /// <summary>
-        /// Returns a kind-indentified binary operator
+        /// Returns a kind-identified binary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
         [MethodImpl(Inline)]
@@ -80,7 +72,7 @@ namespace Z0
             => BitLogixOps.lookup(kind);
 
         /// <summary>
-        /// Returns a kind-indentified ternary operator
+        /// Returns a kind-identified ternary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
         [MethodImpl(Inline)]
@@ -90,8 +82,8 @@ namespace Z0
         /// <summary>
         /// Evaluates a unary operator over a supplied operand
         /// </summary>
-        /// <param name="kind">The operaor kind</param>
-        /// <param name="a">The operand</param>        
+        /// <param name="kind">The operator kind</param>
+        /// <param name="a">The operand</param>
         [MethodImpl(Inline)]
         public bit Evaluate(ULK kind, bit a)
             => BitLogixOps.eval(kind,a);
@@ -99,26 +91,17 @@ namespace Z0
         /// <summary>
         /// Evaluates a bianry operator over supplied operands
         /// </summary>
-        /// <param name="kind">The operaor kind</param>
-        /// <param name="a">The operand</param>        
+        /// <param name="kind">The operator kind</param>
+        /// <param name="a">The operand</param>
         [MethodImpl(Inline)]
         public bit Evaluate(BLK kind, bit a, bit b)
             => BitLogixOps.eval(kind, a, b);
 
         /// <summary>
-        /// Evaluates a bianry operator over supplied operands
-        /// </summary>
-        /// <param name="kind">The operaor kind</param>
-        /// <param name="a">The operand</param>        
-        [MethodImpl(Inline)]
-        public bit Evaluate(BinaryBitLogic bbl, bit a, bit b)
-            => BitLogixOps.eval((BLK)bbl, a, b);
-
-        /// <summary>
         /// Evaluates a ternary operator over supplied operands
         /// </summary>
-        /// <param name="kind">The operaor kind</param>
-        /// <param name="a">The operand</param>        
+        /// <param name="kind">The operator kind</param>
+        /// <param name="a">The operand</param>
         [MethodImpl(Inline)]
         public bit Evaluate(TLK kind, bit a, bit b, bit c)
             => BitLogixOps.eval(kind, a, b, c);

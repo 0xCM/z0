@@ -37,7 +37,7 @@ namespace Z0
         public static IEnumerable<ApiMember> HostedDirect(IApiHost src)
                 => from m in DirectMethods(src)
                 let id = Diviner.Identify(m)
-                let uri = OpUri.Define(OpUriScheme.Type, src.Uri, m.Name, id)
+                let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
                 let located = FunctionDynamic.jit(m)
                 select new ApiMember(uri, located,  m.KindId());
 
@@ -47,7 +47,7 @@ namespace Z0
                 from closure in numeric(m)
                 let reified = m.MakeGenericMethod(closure)
                 let id = Diviner.Identify(reified)
-                let uri = OpUri.Define(OpUriScheme.Type, src.Uri, m.Name, id)
+                let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
                 let located = FunctionDynamic.jit(m)
                 select new ApiMember(uri, located, m.KindId());
 
