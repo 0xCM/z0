@@ -7,9 +7,9 @@ namespace Z0.Logix
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using BSK = BitShiftKind;
+    using BSK = BitShiftOpId;
 
     partial class TypedLogicSpec
     {
@@ -102,7 +102,7 @@ namespace Z0.Logix
         public static ShiftOpExpr<T> rotr<T>(T src, byte count)
             where T : unmanaged
                 => shift(BSK.Rotr,literal(src), count);
-        
+
         /// <summary>
         /// Defines a bitwise rotl expression
         /// </summary>

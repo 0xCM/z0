@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = MemoryOpKind;
+    using K = MemoryOpId;
     using I = IMemoryOpKind;
 
     partial class Kinds
@@ -22,6 +22,6 @@ namespace Z0
 
         public readonly struct Store<T> : IMemoryOpKind<Store,T> {}
 
-        public readonly struct Load<T> : IMemoryOpKind<Load,T> {}     
+        public readonly struct Load<T> : IMemoryOpKind<Load,T> {}
     }
 }

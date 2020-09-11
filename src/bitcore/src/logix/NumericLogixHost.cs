@@ -9,18 +9,18 @@ namespace Z0
     using System.Security;
     using System.Linq;
 
-    using static Konst;    
+    using static Konst;
     using static Memories;
-    using static LogicSig;    
+    using static LogicSig;
     using static NumericLogix;
 
     using BLK = BinaryLogicKind;
     using TLK = TernaryBitLogic;
     using ULK = UnaryBitLogic;
-    using UAR = UnaryArithmeticKind;
-    using BAR = BinaryArithmeticKind;
-    using BCK = BinaryComparisonKind;
-    using BSK = BitShiftKind;
+    using UAR = UnaryArithmeticOpId;
+    using BAR = BinaryArithmeticOpId;
+    using BCK = BinaryComparisonOpId;
+    using BSK = BitShiftOpId;
 
     /// <summary>
     /// Defines the canonical shape of a 2-argument function over a parametric domain and boolean codomain
@@ -44,7 +44,7 @@ namespace Z0
 
     [ApiHost]
     public readonly struct NumericLogixHost : IApiHost<NumericLogixHost>
-    {        
+    {
         /// <summary>
         /// Advertises the supported unary bitlogic operators
         /// </summary>
@@ -84,7 +84,7 @@ namespace Z0
 
         [Closures(Integers)]
         public static bit eval<T>(BCK kind, T a, T b)
-            where T : unmanaged            
+            where T : unmanaged
         {
             switch(kind)
             {
@@ -100,7 +100,7 @@ namespace Z0
 
         [Closures(Integers)]
         public static BinaryPred<T> lookup<T>(BCK kind)
-            where T : unmanaged            
+            where T : unmanaged
         {
             switch(kind)
             {
@@ -133,9 +133,9 @@ namespace Z0
                 case BLK.RProject: return right(a,b);
                 case BLK.LNot: return lnot(a,b);
                 case BLK.RNot: return rnot(a,b);
-                case BLK.Impl: return impl(a,b);                    
+                case BLK.Impl: return impl(a,b);
                 case BLK.NonImpl: return nonimpl(a,b);
-                case BLK.CImpl: return cimpl(a,b);                    
+                case BLK.CImpl: return cimpl(a,b);
                 case BLK.CNonImpl: return cnonimpl(a,b);
                 default: throw new NotSupportedException(sig<T>(kind));
             }
@@ -279,10 +279,10 @@ namespace Z0
                 default: throw new NotSupportedException(sig<T>(kind));
             }
         }
-            
+
         [NumericClosures(Integers)]
         public static Shifter<T> lookup<T>(BSK kind)
-            where T : unmanaged            
+            where T : unmanaged
         {
             switch(kind)
             {
@@ -297,7 +297,7 @@ namespace Z0
 
         [NumericClosures(Integers)]
         public static UnaryOp<T> lookup<T>(ULK kind)
-            where T : unmanaged            
+            where T : unmanaged
         {
             switch(kind)
             {
@@ -571,12 +571,12 @@ namespace Z0
         // public static T cimpl<T>(T a, T b)
         //     where T : unmanaged
         //         => gmath.cimpl(a,b);
-        
+
         // [MethodImpl(Inline)]
         // public static T cnonimpl<T>(T a, T b)
         //     where T : unmanaged
         //         => gmath.cnonimpl(a,b);
-                
+
         // [MethodImpl(Inline)]
         // public static T xornot<T>(T a, T b)
         //     where T : unmanaged
@@ -601,21 +601,21 @@ namespace Z0
         // public static T mod<T>(T a, T b)
         //     where T : unmanaged
         //         => gmath.mod(a,b);
-        
+
         // [MethodImpl(Inline)]
         // public static T negate<T>(T a)
         //     where T : unmanaged
-        //         => gmath.negate(a); 
+        //         => gmath.negate(a);
 
         // [MethodImpl(Inline)]
         // public static T inc<T>(T a)
         //     where T : unmanaged
-        //         => gmath.inc(a); 
+        //         => gmath.inc(a);
 
         // [MethodImpl(Inline)]
         // public static T dec<T>(T a)
         //     where T : unmanaged
-        //         => gmath.dec(a); 
+        //         => gmath.dec(a);
 
         // [MethodImpl(Inline)]
         // public static T equals<T>(T a, T b)
@@ -649,7 +649,7 @@ namespace Z0
 
         // [MethodImpl(Inline)]
         // public static bit same<T>(T a, T b)
-        //     where T : unmanaged                    
+        //     where T : unmanaged
         //         => gmath.eq(a,b);
 
         // [MethodImpl(Inline), Op, Closures(UnsignedInts)]
@@ -694,7 +694,7 @@ namespace Z0
         // public static T f02<T>(T a, T b, T c)
         //     where T : unmanaged
         //         => and(c, nor(b,a));
- 
+
         //  // b nor a
         // [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         // public static T f03<T>(T a, T b, T c)
@@ -747,7 +747,7 @@ namespace Z0
         // [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         // public static T f0b<T>(T a, T b, T c)
         //     where T : unmanaged
-        //         => and(not(a), or(xor1(b),  c));   
+        //         => and(not(a), or(xor1(b),  c));
 
         // // b and (not a)
         // [MethodImpl(Inline), Op, Closures(UnsignedInts)]
@@ -778,14 +778,14 @@ namespace Z0
         // public static T f10<T>(T a, T b, T c)
         //     where T : unmanaged
         //         => and(a, nor(b, c));
-        
+
         // // c nor b
         // [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         // public static T f11<T>(T a, T b, T c)
         //     where T : unmanaged
         //         => nor(c,b);
-        
-        // // not b and (a xor c) 
+
+        // // not b and (a xor c)
         // [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         // public static T f12<T>(T a, T b, T c)
         //     where T : unmanaged
@@ -1257,5 +1257,5 @@ namespace Z0
         // public static T f97<T>(T a, T b, T c)
         //     where T : unmanaged
         //         => select(c, xnor(b,c), nand(b,c));
-    }    
+    }
 }

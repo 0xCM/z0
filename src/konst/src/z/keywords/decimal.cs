@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct z
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe decimal @decimal<T>(T src)
             where T : unmanaged
                 => *((decimal*)(&src));

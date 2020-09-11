@@ -6,19 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
+
+    using static Konst;
 
     partial class MSvcHosts
     {
         [Closures(Integers), NonImpl]
         public readonly struct NonImpl<T> : IBinaryOp<T>, IBinarySpanOp<T>
-            where T : unmanaged        
-        {    
-            public const BitLogicKind OpKind = BitLogicKind.NonImpl;
+            where T : unmanaged
+        {
+            public const BitLogicOpId OpKind = BitLogicOpId.NonImpl;
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b) 
+            public T Invoke(T a, T b)
                 => gmath.nonimpl(a,b);
 
             [MethodImpl(Inline)]

@@ -286,12 +286,12 @@ namespace Z0
             => (BinaryOp256)Emit(id, f, typeof(BinaryOp256), typeof(Cell256), dst);
 
         [MethodImpl(Inline)]
-        FixedCellDelegate Emit(OpIdentity id, U f, Type operatorType, Type operandType, BufferToken dst)
+        CellDelegate Emit(OpIdentity id, U f, Type operatorType, Type operandType, BufferToken dst)
             => Emit(id, functype:operatorType, result:operandType,
                     args:array(operandType, operandType), dst.Handle);
 
         [MethodImpl(Inline)]
-        FixedCellDelegate Emit(OpIdentity id, B f, Type operatorType, Type operandType, BufferToken dst)
+        CellDelegate Emit(OpIdentity id, B f, Type operatorType, Type operandType, BufferToken dst)
             => Emit(id, functype:operatorType, result:operandType,
                     args:array(operandType, operandType), dst.Handle);
 
@@ -311,18 +311,18 @@ namespace Z0
                 => (TernaryOp<T>)EmitFixedTernaryOp(id,typeof(TernaryOp<T>), typeof(T), dst);
 
         [MethodImpl(Inline)]
-        FixedCellDelegate EmitFixedUnaryOp(OpIdentity id, Type operatorType, Type operandType, BufferToken dst)
+        CellDelegate EmitFixedUnaryOp(OpIdentity id, Type operatorType, Type operandType, BufferToken dst)
             => Emit(id, functype: operatorType, result: operandType, args: array(operandType), dst.Handle);
 
         [MethodImpl(Inline)]
-        FixedCellDelegate EmitFixedBinaryOp(OpIdentity id, Type operatorType, Type operandType, BufferToken dst)
+        CellDelegate EmitFixedBinaryOp(OpIdentity id, Type operatorType, Type operandType, BufferToken dst)
             => Emit(id, functype:operatorType, result:operandType, args: array(operandType, operandType), dst.Handle);
 
         [MethodImpl(Inline)]
-        FixedCellDelegate EmitFixedTernaryOp(OpIdentity id, Type operatorType, Type operandType, BufferToken dst)
+        CellDelegate EmitFixedTernaryOp(OpIdentity id, Type operatorType, Type operandType, BufferToken dst)
             => Emit(id, functype:operatorType, result:operandType, args: array(operandType, operandType, operandType), dst.Handle);
 
-        FixedCellDelegate Emit(OpIdentity id, Type functype, Type result, Type[] args, IntPtr dst)
+        CellDelegate Emit(OpIdentity id, Type functype, Type result, Type[] args, IntPtr dst)
         {
             var method = new DynamicMethod(id, result, args, functype.Module);
             var g = method.GetILGenerator();
@@ -351,7 +351,7 @@ namespace Z0
             g.Emit(OpCodes.Ldc_I8, (long)dst);
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, result, args);
             g.Emit(OpCodes.Ret);
-            return FixedCellDelegate.Define(id, dst, method, method.CreateDelegate(functype));
+            return CellDelegate.define(id, dst, method, method.CreateDelegate(functype));
         }
     }
 }

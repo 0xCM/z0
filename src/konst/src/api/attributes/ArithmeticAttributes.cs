@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ArithmeticKind;    
+    using K = ArithmeticOpId;
     using A = OpKindAttribute;
 
     public sealed class AddAttribute : A { public AddAttribute() : base(K.Add) {} }
@@ -32,7 +32,7 @@ namespace Z0
     public sealed class MulHiAttribute : A { public MulHiAttribute() : base(K.MulHi) {} }
 
     public sealed class DivAttribute : A { public DivAttribute() : base(K.Div) {} }
-        
+
     public sealed class ModAttribute : A { public ModAttribute() : base(K.Mod) {} }
 
     public sealed class ClampAttribute : A { public ClampAttribute() : base(K.Clamp) {} }
@@ -73,11 +73,11 @@ namespace Z0
 
     public sealed class FloorAttribute : A { public FloorAttribute() : base(K.Floor) {} }
 
-    public sealed class RoundAttribute : A { public RoundAttribute() : base(K.Round) {} }    
+    public sealed class RoundAttribute : A { public RoundAttribute() : base(K.Round) {} }
 
-    public sealed class PowAttribute : A { public PowAttribute() : base(K.Pow) {} }    
+    public sealed class PowAttribute : A { public PowAttribute() : base(K.Pow) {} }
 
-    public sealed class Log2Attribute : A { public Log2Attribute() : base(K.Log2) {} }    
+    public sealed class Log2Attribute : A { public Log2Attribute() : base(K.Log2) {} }
 
-   
+
 }

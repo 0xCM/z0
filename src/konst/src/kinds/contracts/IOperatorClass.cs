@@ -10,12 +10,29 @@ namespace Z0
 
     public interface IOperatorClass : IOpClass
     {
-        
+
     }
 
     public interface IOperatorClass<E> : IOperatorClass, IOpClass<E>
         where E : unmanaged, Enum
     {
-        
+
+    }
+
+    public interface IOperatorClass<F,E> : IOperatorClass<E>, IOpClassF<F,E>
+        where F : struct, IOperatorClass<F,E>
+        where E : unmanaged, Enum
+    {
+        OperatorClass Generalized {get;}
+    }
+
+    public interface IOperatorClass<F,E,T> : IOperatorClass<F,E>, IOpClassT<T>
+        where F : struct, IOperatorClass<F,E>
+        where E : unmanaged, Enum
+    {
+        new OperatorClass<T> Generalized {get;}
+
+        OperatorClass IOperatorClass<F,E>.Generalized
+            => Generalized;
     }
 }

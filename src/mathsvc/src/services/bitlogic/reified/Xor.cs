@@ -6,19 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
+
+    using static Konst;
 
     partial class MSvcHosts
     {
         [Closures(Integers), Xor]
         public readonly struct Xor<T> : IBinaryOp<T>, IBinarySpanOp<T>
-            where T : unmanaged        
-        {    
-            public const BitLogicKind OpKind = BitLogicKind.Xnor;
+            where T : unmanaged
+        {
+            public const BitLogicOpId OpKind = BitLogicOpId.Xnor;
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b) 
+            public T Invoke(T a, T b)
                 => gmath.xor(a,b);
 
             [MethodImpl(Inline)]

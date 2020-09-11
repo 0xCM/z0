@@ -6,9 +6,9 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    
+
     partial class BitLogicSpec
     {
        /// <summary>
@@ -19,7 +19,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ComparisonExpr compare(BinaryComparisonKind kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] variables)
+        public static ComparisonExpr compare(BinaryComparisonOpId kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] variables)
             => ComparisonExpr.Define(kind, lhs,rhs,variables);
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ComparisonExpr<T> compare<T>(BinaryComparisonKind kind, ILogicExpr<T> lhs, ILogicExpr<T> rhs, params IVarExpr<T>[] variables)
+        public static ComparisonExpr<T> compare<T>(BinaryComparisonOpId kind, ILogicExpr<T> lhs, ILogicExpr<T> rhs, params IVarExpr<T>[] variables)
             where T : unmanaged
                 => ComparisonExpr.Define(kind, lhs,rhs, variables);
 
@@ -42,7 +42,7 @@ namespace Z0.Logix
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
         public static ComparisonExpr equals(ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] variables)
-            => ComparisonExpr.Define(BinaryComparisonKind.Eq, lhs,rhs,variables);
+            => ComparisonExpr.Define(BinaryComparisonOpId.Eq, lhs,rhs,variables);
 
         /// <summary>
         /// Defines an equality comparison expression
@@ -53,6 +53,6 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ComparisonExpr<T> equals<T>(ILogicExpr<T> lhs, ILogicExpr<T> rhs, params IVarExpr<T>[] variables)
             where T : unmanaged
-                => ComparisonExpr.Define(BinaryComparisonKind.Eq, lhs,rhs, variables);
+                => ComparisonExpr.Define(BinaryComparisonOpId.Eq, lhs,rhs, variables);
     }
 }

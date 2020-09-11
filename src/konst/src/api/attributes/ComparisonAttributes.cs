@@ -3,9 +3,9 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using A = OpKindAttribute;
-    using K = ComparisonKind;
+    using K = ComparisonOpId;
 
     public sealed class EqAttribute : A { public EqAttribute() : base(K.Eq) {} }
 

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
     using static Memories;
 
     using ULK = UnaryBitLogic;
@@ -34,7 +34,7 @@ namespace Z0
             => text.concat(format(kind), Chars.Colon, nameof(bit));
 
         [MethodImpl(Inline)]
-        public static string sig(BitLogicKind kind)
+        public static string sig(BitLogicOpId kind)
             => text.concat(format(kind), Chars.Colon, nameof(bit));
 
         [MethodImpl(Inline)]
@@ -52,35 +52,35 @@ namespace Z0
                 => text.concat(format(kind), Chars.Colon, keyword<T>());
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(BitShiftKind kind)
+        public static string sig<T>(BitShiftOpId kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(BinaryComparisonKind kind)
+        public static string sig<T>(BinaryComparisonOpId kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(UnaryArithmeticKind kind)
+        public static string sig<T>(UnaryArithmeticOpId kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(BinaryArithmeticKind kind)
+        public static string sig<T>(BinaryArithmeticOpId kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        public static string format(ULK kind)                
+        public static string format(ULK kind)
             => kind.ToString().ToLower();
 
-        public static string format(TLK kind)                
+        public static string format(TLK kind)
             => kind.ToString().ToLower();
 
-        public static string format(BLK kind)                
+        public static string format(BLK kind)
             => kind.ToString().ToLower();
 
-        public static string format(BitLogicKind kind)                
-            => kind.Format();             
+        public static string format(BitLogicOpId kind)
+            => kind.Format();
     }
 }

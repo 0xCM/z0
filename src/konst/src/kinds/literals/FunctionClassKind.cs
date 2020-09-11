@@ -39,21 +39,21 @@ namespace Z0
         /// <summary>
         /// Classifies functions that accept three arguments
         /// </summary>
-        TernaryFunc = OC.TernaryFunc,        
-                        
+        TernaryFunc = OC.TernaryFunc,
+
         /// <summary>
         /// Classifies operators that accept one argument
-        /// </summary>        
+        /// </summary>
         UnaryOp = OC.UnaryOp,
 
         /// <summary>
         /// Classifies operators that accept two arguments
-        /// </summary>        
+        /// </summary>
         BinaryOp = OC.BinaryOp,
 
         /// <summary>
-        /// Classifies operators that accept tjree arguments
-        /// </summary>        
+        /// Classifies operators that accept three arguments
+        /// </summary>
         TernaryOp = OC.TernaryOp,
-    } 
+    }
 }

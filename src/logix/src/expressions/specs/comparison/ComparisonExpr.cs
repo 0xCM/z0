@@ -6,24 +6,24 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
     /// Defines an untyped comparison expression
     /// </summary>
     public readonly struct ComparisonExpr : IComparisonExpr
-    {        
+    {
         /// <summary>
         /// The operator kind
         /// </summary>
-        public BinaryComparisonKind ComparisonKind {get;}
+        public BinaryComparisonOpId ComparisonKind {get;}
 
         /// <summary>
         /// The left operand
         /// </summary>
         public ILogicExpr Lhs {get;}
-        
+
         /// <summary>
         /// The right operand
         /// </summary>
@@ -35,15 +35,15 @@ namespace Z0.Logix
         public ILogicVarExpr[] Vars {get;}
 
         [MethodImpl(Inline)]
-        public static ComparisonExpr<T> Define<T>(BinaryComparisonKind kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
+        public static ComparisonExpr<T> Define<T>(BinaryComparisonOpId kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
             where T : unmanaged
                 => new ComparisonExpr<T>(kind,lhs,rhs,vars);
-        
+
         [MethodImpl(Inline)]
-        public static ComparisonExpr Define(BinaryComparisonKind kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
+        public static ComparisonExpr Define(BinaryComparisonOpId kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
             => new ComparisonExpr(kind,lhs,rhs,vars);
-            
-        ComparisonExpr(BinaryComparisonKind kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
+
+        ComparisonExpr(BinaryComparisonOpId kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
         {
             this.ComparisonKind = kind;
             this.Lhs = lhs;

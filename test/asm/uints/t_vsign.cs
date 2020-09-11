@@ -9,13 +9,14 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
+    using static z;
 
 
     public class t_vsign : t_dynamic<t_vsign>
     {
         public void check_vsign_8i()
         {
-            var fp = Pointers.fptr<BinaryOp<uint>>(math.add);
+            var fp = fptr<BinaryOp<uint>>(math.add);
             term.print(fp.P);
         }
     }

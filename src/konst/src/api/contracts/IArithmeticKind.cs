@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ArithmeticKind;
+    using K = ArithmeticOpId;
     using I = IArithmeticKind;
 
     /// <summary>
@@ -17,8 +17,8 @@ namespace Z0
         /// </summary>
         K Kind {get;}
 
-        OpKindId IOpKind.KindId
-            => (OpKindId)Kind;
+        ApiOpId IOpKind.KindId
+            => (ApiOpId)Kind;
     }
 
     /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
     public interface IArithmeticKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        OpKindId IOpKind.KindId
+        ApiOpId IOpKind.KindId
             => default(F).KindId;
     }
 

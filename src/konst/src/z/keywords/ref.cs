@@ -14,6 +14,46 @@ namespace Z0
     partial struct z
     {
         /// <summary>
+        /// Presents a T-reference as a byte reference and effects mov rax,rdx for all T
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The source type</typeparam>
+        /// <remarks>For all T, effects: mov rax,rdx</remarks>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref byte @ref<T>(W8 w, ref T src)
+            => ref @as<T,byte>(src);
+
+        /// <summary>
+        /// Presents a T-reference as a byte reference
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The source type</typeparam>
+        /// <remarks>For all T, effects: mov rax,rdx</remarks>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref ushort @ref<T>(W16 w, ref T src)
+            => ref @as<T,ushort>(src);
+
+        /// <summary>
+        /// Presents a T-reference as a byte reference
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The source type</typeparam>
+        /// <remarks>For all T, effects: mov rax,rdx</remarks>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref uint @ref<T>(W32 w, ref T src)
+            => ref @as<T,uint>(src);
+
+        /// <summary>
+        /// Presents a T-reference as a uint64 reference
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <typeparam name="T">The source type</typeparam>
+        /// <remarks>For all T, effects: mov rax,rdx</remarks>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref ulong @ref<T>(W64 w, ref T src)
+            => ref @as<T,ulong>(src);
+
+        /// <summary>
         /// Creates a reference to a string
         /// </summary>
         /// <param name="src">The source string</param>
@@ -44,9 +84,9 @@ namespace Z0
         /// <typeparam name="T">The reference type</typeparam>
         /// <remarks>For all T, effects: mov rax,rcx</remarks>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static unsafe ref T @ref<T>(T* ptr)            
+        public static unsafe ref T @ref<T>(T* ptr)
             where T : unmanaged
-                => ref AsRef<T>(ptr);            
+                => ref AsRef<T>(ptr);
 
         /// <summary>
         /// Presents a void pointer as a reference
@@ -73,8 +113,8 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The reference type</typeparam>
         [MethodImpl(Inline)]
-        public static unsafe ref T @ref<S,T>(S* pSrc)            
+        public static unsafe ref T @ref<S,T>(S* pSrc)
             where S : unmanaged
-                => ref @as<S,T>(@ref<S>(pSrc));    
+                => ref @as<S,T>(@ref<S>(pSrc));
     }
 }

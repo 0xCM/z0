@@ -6,19 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
+
+    using static Konst;
 
     partial class MSvcHosts
     {
         [Closures(Integers), Select]
         public readonly struct Select<T> : ITernaryOp<T>, ITernarySpanOp<T>
-            where T : unmanaged        
-        {    
-            public const BitLogicKind OpKind = BitLogicKind.Select;
+            where T : unmanaged
+        {
+            public const BitLogicOpId OpKind = BitLogicOpId.Select;
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b, T c) 
+            public T Invoke(T a, T b, T c)
                 => gmath.select(a, b, c);
 
             [MethodImpl(Inline)]

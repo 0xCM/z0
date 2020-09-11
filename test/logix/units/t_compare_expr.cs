@@ -10,7 +10,7 @@ namespace Z0.Logix
     using static LogicEngine;
 
     using CS = TypedComparisonSpec;
-    
+
     public class t_compare_expr : TypedLogixTest<t_compare_expr>
     {
         public void scalar_lt_check()
@@ -72,8 +72,8 @@ namespace Z0.Logix
                 var a = va.Set(Random);
                 var b = vb.Set(Random);
                 var result = eval(x).Value;
-                var expect = PredicateApi.eval(BinaryComparisonKind.Lt,a,b);                
-                Claim.Eq(expect,result);            
+                var expect = PredicateApi.eval(BinaryComparisonOpId.Lt,a,b);
+                Claim.Eq(expect,result);
             }
         }
 
@@ -88,7 +88,7 @@ namespace Z0.Logix
                 var a = va.Set(Random);
                 var b = vb.Set(Random);
                 var result = eval(x).Value;
-                var expect = PredicateApi.eval(BinaryComparisonKind.LtEq,a,b);                
+                var expect = PredicateApi.eval(BinaryComparisonOpId.LtEq,a,b);
                 Claim.Eq(expect,result);
             }
         }
@@ -103,11 +103,11 @@ namespace Z0.Logix
             {
                 var a = va.Set(Random);
                 var b = vb.Set(Random);
-                var expect = PredicateApi.eval(BinaryComparisonKind.Gt,a,b);   
+                var expect = PredicateApi.eval(BinaryComparisonOpId.Gt,a,b);
                 var actual = eval(x).Value;
-                if(gmath.neq(actual,expect))             
+                if(gmath.neq(actual,expect))
                     Notify($"{a} > {b}?");
-                Claim.Eq(expect,actual);            
+                Claim.Eq(expect,actual);
             }
         }
 
@@ -121,10 +121,10 @@ namespace Z0.Logix
             {
                 var a = va.Set(Random);
                 var b = vb.Set(Random);
-                var expect = PredicateApi.eval(BinaryComparisonKind.GtEq,a,b);
+                var expect = PredicateApi.eval(BinaryComparisonOpId.GtEq,a,b);
                 var actual = eval(x).Value;
                 Claim.Eq(expect,actual);
             }
-        }         
+        }
   }
 }

@@ -7,19 +7,18 @@ namespace Z0
     using System;
 
     using NK = NumericKind;
-    
 
     partial struct z
     {
         /// <summary>
-        /// Uncoditionaly converts a boxed numeric value of one kind to a boxed numeric value of specified kind, if possible.
+        /// Converts a boxed numeric value of one kind to a boxed numeric value of specified kind, if possible.
         /// If not possible, returns the original value
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="dst">The target kind</param>
         [Op]
         public static object rebox(object src, NumericKind dst)
-        {            
+        {
             var _nk = src.GetType().NumericKind();
             switch(_nk)
             {
@@ -34,7 +33,7 @@ namespace Z0
 
                 case NK.U16:
                     return box((ushort)src, dst);
-                
+
                 case NK.I32:
                     return box((int)src, dst);
 

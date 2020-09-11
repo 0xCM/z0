@@ -24,7 +24,7 @@ namespace Z0
             => Identity.identify(src);
 
         public OpIdentity DivineIdentity(Delegate src)
-            => DelegateIdentityDiviner.Service.DivineIdentity(src);
+            => Identity.identify(src);
 
         [MethodImpl(Inline)]
         public GenericOpIdentity GenericIdentity(MethodInfo src)

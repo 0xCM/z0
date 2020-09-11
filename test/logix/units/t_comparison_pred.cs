@@ -6,13 +6,13 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static LogicEngine;
     using static PredicateSpec;
-    using static BinaryComparisonKind;
+    using static BinaryComparisonOpId;
     using static NumericLogixHost;
     using static BitLogix;
-    
+
     public class t_comparison_pred : TypedLogixTest<t_comparison_pred>
     {
         public void trichotomy_check()
@@ -105,21 +105,21 @@ namespace Z0.Logix
             var va = var_a<T>();
             var vb = var_b<T>();
             var vc = var_c<T>();
-            var x = compare(BinaryComparisonKind.Lt,va,vb);
-            var y = compare(BinaryComparisonKind.Lt,vb,vc);
-            var z = compare(BinaryComparisonKind.Lt,vc,va);
+            var x = compare(BinaryComparisonOpId.Lt,va,vb);
+            var y = compare(BinaryComparisonOpId.Lt,vb,vc);
+            var z = compare(BinaryComparisonOpId.Lt,vc,va);
             for(var i=0; i<RepCount; i++)
             {
                 var a = va.Set(Random);
                 var b = vb.Set(Random);
                 var c = vc.Set(Random);
-                
+
                 var ab = gmath.lt(a,b);
                 var abx = eval(x);
                 Claim.Require(ab == abx);
-                
+
                 var bc = gmath.lt(b,c);
-                var bcy = eval(y);                
+                var bcy = eval(y);
                 Claim.Require(bc == bcy);
 
                 var ca = gmath.lt(c,a);
@@ -128,8 +128,8 @@ namespace Z0.Logix
             }
 
         }
-        
-        void predicate_check<T>(BinaryComparisonKind kind)
+
+        void predicate_check<T>(BinaryComparisonOpId kind)
             where T : unmanaged
         {
             var va = var_a<T>();
@@ -141,7 +141,7 @@ namespace Z0.Logix
                 var b = vb.Set(Random);
                 var result = eval(x);
                 var expect = NumericLogixHost.eval(kind,a,b);
-                Claim.Eq(expect,result);            
+                Claim.Eq(expect,result);
             }
         }
     }

@@ -40,15 +40,15 @@ namespace Z0
                 => (TernaryOp<T>)dst.EmitFixedTernaryOp(id,typeof(TernaryOp<T>), typeof(T));
 
         [MethodImpl(Inline)]
-        internal static FixedCellDelegate EmitFixedUnaryOp(this IBufferToken dst, OpIdentity id, Type operatorType, Type operandType)
+        internal static CellDelegate EmitFixedUnaryOp(this IBufferToken dst, OpIdentity id, Type operatorType, Type operandType)
             => dst.Handle.EmitFixed(id, functype: operatorType, result: operandType, args: operandType);
 
         [MethodImpl(Inline)]
-        internal static FixedCellDelegate EmitFixedBinaryOp(this IBufferToken dst, OpIdentity id, Type operatorType, Type operandType)
+        internal static CellDelegate EmitFixedBinaryOp(this IBufferToken dst, OpIdentity id, Type operatorType, Type operandType)
             => dst.Handle.EmitFixed(id,functype:operatorType, result:operandType, args: array(operandType, operandType));
 
         [MethodImpl(Inline)]
-        internal static FixedCellDelegate EmitFixedTernaryOp(this IBufferToken dst, OpIdentity id, Type operatorType, Type operandType)
+        internal static CellDelegate EmitFixedTernaryOp(this IBufferToken dst, OpIdentity id, Type operatorType, Type operandType)
             => dst.Handle.EmitFixed(id, functype:operatorType, result:operandType, args: array(operandType, operandType, operandType));
 
         [MethodImpl(Inline)]
@@ -75,7 +75,7 @@ namespace Z0
         internal static BinaryOp256 EmitFixedBinaryOp(this IBufferToken buffer, N256 w, OpIdentity id)
             => (BinaryOp256)buffer.EmitFixedBinaryOp(id, typeof(BinaryOp256), typeof(Cell256));
 
-        internal static FixedCellDelegate EmitFixed(this IntPtr src, OpIdentity id, Type functype, Type result, params Type[] args)
+        internal static CellDelegate EmitFixed(this IntPtr src, OpIdentity id, Type functype, Type result, params Type[] args)
         {
             var method = new DynamicMethod(id, result, args, functype.Module);
             var g = method.GetILGenerator();
@@ -104,7 +104,7 @@ namespace Z0
             g.Emit(OpCodes.Ldc_I8, (long)src);
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, result, args);
             g.Emit(OpCodes.Ret);
-            return FixedCellDelegate.Define(id, src, method, method.CreateDelegate(functype));
+            return CellDelegate.define(id, src, method, method.CreateDelegate(functype));
         }
 
         /// <summary>

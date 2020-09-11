@@ -73,7 +73,7 @@ namespace Z0
             Encoded = new ApiHex(member.Address, member.OpUri, code);
         }
 
-        public OpKindId KindId
+        public ApiOpId KindId
              => Member.KindId;
 
         public OpIdentity Id

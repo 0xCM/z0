@@ -13,8 +13,6 @@ namespace Z0
     /// </summary>
     readonly struct DelegateIdentityDiviner : IDelegateIdentityDiviner
     {
-        public static IDelegateIdentityDiviner Service => default(DelegateIdentityDiviner);
-
         public OpIdentity DivineIdentity(Delegate src)
             => Identity.identify(src);
     }

@@ -3,8 +3,8 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    using K = BitLogicKind;
+{
+    using K = BitLogicOpId;
     using I = IBitLogicKind;
 
     partial class Kinds

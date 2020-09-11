@@ -6,7 +6,7 @@ namespace Z0
 {
     using static Konst;
 
-    using K = BooleanPredicateKind;
+    using K = BooleanPredicateOpId;
     using I = IBooleanPredicateKind;
 
     /// <summary>
@@ -16,9 +16,9 @@ namespace Z0
     {
         K Kind {get;}
 
-        OpKindId IOpKind.KindId 
-            => (OpKindId)Kind;
-    }    
+        ApiOpId IOpKind.KindId
+            => (ApiOpId)Kind;
+    }
 
     /// <summary>
     /// Characterizes a reified bitfunction classifier
@@ -27,8 +27,8 @@ namespace Z0
     public interface IBooleanPredicateKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        OpKindId IOpKind.KindId 
-            => default(F).KindId;                
+        ApiOpId IOpKind.KindId
+            => default(F).KindId;
     }
 
     /// <summary>
@@ -44,7 +44,7 @@ namespace Z0
         /// <summary>
         /// The parametrically-identified numeric kind
         /// </summary>
-        NumericKind NumericKind 
+        NumericKind NumericKind
             => NumericKinds.kind<T>();
     }
 }

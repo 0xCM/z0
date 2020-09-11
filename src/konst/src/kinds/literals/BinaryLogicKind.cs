@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using Id = OpKindId;
+    using Id = ApiOpId;
 
     /// <summary>
     /// Classifies binary boolean and bitwise logical operations

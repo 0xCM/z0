@@ -9,14 +9,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     public readonly struct ApiCollector : IApiCollector
-    {        
-        public static ApiCollector Service 
+    {
+        public static ApiCollector Service
             => default;
 
-        public IEnumerable<DirectApiGroup> ImmDirect(ApiHost host, ImmRefinementKind refinment)
-            => ApiImmediates.direct(host,refinment);
+        public IEnumerable<DirectApiGroup> ImmDirect(ApiHost host, ImmRefinementKind kind)
+            => ApiImmediates.direct(host,kind);
 
-        public IEnumerable<GenericApiMethod> ImmGeneric(ApiHost host, ImmRefinementKind refinment) 
-            => ApiImmediates.generic(host,refinment);
+        public IEnumerable<GenericApiMethod> ImmGeneric(ApiHost host, ImmRefinementKind kind)
+            => ApiImmediates.generic(host,kind);
     }
 }

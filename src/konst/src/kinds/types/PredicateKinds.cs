@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = BooleanPredicateKind;
+    using K = BooleanPredicateOpId;
     using I = IBooleanPredicateKind;
 
     partial class Kinds
@@ -39,6 +39,6 @@ namespace Z0
 
         public readonly struct LtPred<T> : IBooleanPredicateKind<LtPred,T> {}
 
-        public readonly struct LtEqPred<T> : IBooleanPredicateKind<LtEqPred,T> {}        
+        public readonly struct LtEqPred<T> : IBooleanPredicateKind<LtEqPred,T> {}
     }
 }

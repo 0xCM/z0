@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = BitFunctionKind;
+    using K = BitFunctionOpId;
     using I = IBitFunctionKind;
 
     partial class Kinds
@@ -38,6 +38,6 @@ namespace Z0
         public readonly struct TestBits : I {  K I.Kind => K.TestBits; }
 
         public readonly struct Stitch : I {  K I.Kind => K.Stitch; }
-    
+
     }
 }

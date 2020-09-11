@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using A = OpKindAttribute;
-    using K = BitShiftKind;
+    using K = BitShiftOpId;
 
     public sealed class SllAttribute : A { public SllAttribute() : base(K.Sll) {} }
 

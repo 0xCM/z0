@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -18,7 +18,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public BinaryComparisonKind ComparisonKind {get;}
+        public BinaryComparisonOpId ComparisonKind {get;}
 
         /// <summary>
         /// The left operand
@@ -36,13 +36,13 @@ namespace Z0.Logix
         public IVarExpr<T>[] Vars {get;}
 
         [MethodImpl(Inline)]
-        public ComparisonPredExpr(BinaryComparisonKind op, IExpr<T> left, IExpr<T> right, params IVarExpr<T>[] vars)
+        public ComparisonPredExpr(BinaryComparisonOpId op, IExpr<T> left, IExpr<T> right, params IVarExpr<T>[] vars)
         {
             this.ComparisonKind = op;
             this.LeftArg = left;
             this.RightArg = right;
             this.Vars = vars;
-        }    
+        }
 
         public void SetVars(params IExpr<T>[] values)
         {
@@ -61,10 +61,10 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public void SetVar(int index, T value)
             => Vars[index].Set(value);
-         
+
         public string Format()
             => ComparisonKind.Format(LeftArg,RightArg);
-        
+
         public override string ToString()
             => Format();
     }

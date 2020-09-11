@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = SystemOpKind;
+    using K = SystemOpId;
     using I = ISystemOpKind;
-    
+
     /// <summary>
     /// Characterizes a system operation classifier
     /// </summary>
@@ -14,9 +14,9 @@ namespace Z0
     {
         K Kind {get;}
 
-        OpKindId IOpKind.KindId 
-            => (OpKindId)Kind;        
-    }    
+        ApiOpId IOpKind.KindId
+            => (ApiOpId)Kind;
+    }
 
     /// <summary>
     /// Characterizes a reified system operation classifier
@@ -25,10 +25,10 @@ namespace Z0
     public interface ISystemOpKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        OpKindId IOpKind.KindId 
-            => default(F).KindId;        
+        ApiOpId IOpKind.KindId
+            => default(F).KindId;
     }
-    
+
     /// <summary>
     /// Characterizes a kind-parametric and numeric-parametric system operation classifier
     /// </summary>
@@ -37,13 +37,13 @@ namespace Z0
     public interface ISystemOpKind<F,T> : ISystemOpKind<F>
         where F : unmanaged, I
     {
-        K I.Kind 
+        K I.Kind
             => default(F).Kind;
 
         /// <summary>
         /// The parametrically-identified numeric kind
         /// </summary>
-        NumericKind NumericKind 
+        NumericKind NumericKind
             => NumericKinds.kind<T>();
     }
 }

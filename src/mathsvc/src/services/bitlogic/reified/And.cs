@@ -6,19 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
+
+    using static Konst;
 
     partial class MSvcHosts
     {
         [Closures(Integers), And]
         public readonly struct And<T> : IBinaryOp<T>, IBinarySpanOp<T>
-            where T : unmanaged        
-        {    
-            public const BitLogicKind OpKind = BitLogicKind.And;
+            where T : unmanaged
+        {
+            public const BitLogicOpId OpKind = BitLogicOpId.And;
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b) 
+            public T Invoke(T a, T b)
                 => gmath.and(a,b);
 
             [MethodImpl(Inline)]

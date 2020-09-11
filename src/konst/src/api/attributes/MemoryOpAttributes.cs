@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = MemoryOpKind;
+    using K = MemoryOpId;
     using A = OpKindAttribute;
 
     public class LoadAttribute : A { public LoadAttribute() : base(K.Load) {} }

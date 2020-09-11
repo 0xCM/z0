@@ -25,33 +25,40 @@ namespace Z0
             return all.OrderBy(x => x.Method.MetadataToken);
         }
 
+        public static Type[] numeric(MethodInfo m)
+            => from c in ClosureKinds.numeric(m)
+               let t = c.SystemType()
+               where t != typeof(void)
+               select t;
+
         public ApiMembers Locate(IApiHost src)
                 => locate(src);
 
-        static IEnumerable<ApiMember> HostedDirect(IApiHost src)
+        public static IEnumerable<ApiMember> HostedDirect(IApiHost src)
                 => from m in DirectMethods(src)
                 let id = Diviner.Identify(m)
                 let uri = OpUri.Define(OpUriScheme.Type, src.Uri, m.Name, id)
                 let located = FunctionDynamic.jit(m)
                 select new ApiMember(uri, located,  m.KindId());
 
-        static IEnumerable<ApiMember> HostedGeneric(IApiHost src)
+
+        public static IEnumerable<ApiMember> HostedGeneric(IApiHost src)
                 => from m in GenericMethods(src)
-                from closure in ClosureQuery.numeric(m)
+                from closure in numeric(m)
                 let reified = m.MakeGenericMethod(closure)
                 let id = Diviner.Identify(reified)
                 let uri = OpUri.Define(OpUriScheme.Type, src.Uri, m.Name, id)
                 let located = FunctionDynamic.jit(m)
                 select new ApiMember(uri, located, m.KindId());
 
-        static IEnumerable<MethodInfo> GenericMethods(IApiHost src)
+        public static IEnumerable<MethodInfo> GenericMethods(IApiHost src)
                 => from m in src.HostType.DeclaredMethods().OpenGeneric(1)
                     where m.Tagged<OpAttribute>()
                     && m.Tagged<ClosuresAttribute>()
                     && !m.AcceptsImmediate()
                     select m;
 
-        static IEnumerable<MethodInfo> DirectMethods(IApiHost src)
+        public  static IEnumerable<MethodInfo> DirectMethods(IApiHost src)
                 => from m in src.HostType.DeclaredMethods().NonGeneric()
                 where m.Tagged<OpAttribute>() && !m.AcceptsImmediate()
                 select m;

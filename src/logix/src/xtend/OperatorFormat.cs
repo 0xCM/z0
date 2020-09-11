@@ -20,11 +20,11 @@ namespace Z0
             => ExprFormat.format(kind,arg);
 
         [MethodImpl(Inline)]
-        public static string Format(this UnaryArithmeticKind kind)
+        public static string Format(this UnaryArithmeticOpId kind)
             => ExprFormat.format(kind);
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryArithmeticKind kind, T arg)
+        public static string Format<T>(this UnaryArithmeticOpId kind, T arg)
             => ExprFormat.format(kind, arg);
 
         [MethodImpl(Inline)]
@@ -36,15 +36,15 @@ namespace Z0
             => ExprFormat.format(kind, arg1, arg2);
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryArithmeticKind kind, T arg1, T arg2)
+        public static string Format<T>(this BinaryArithmeticOpId kind, T arg1, T arg2)
             => ExprFormat.format(kind, arg1, arg2);
 
         [MethodImpl(Inline)]
-        public static string Format(this BinaryComparisonKind kind)
+        public static string Format(this BinaryComparisonOpId kind)
             => ExprFormat.format(kind);
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryComparisonKind kind, T arg1, T arg2)
+        public static string Format<T>(this BinaryComparisonOpId kind, T arg1, T arg2)
             => ExprFormat.format(kind, arg1, arg2);
     }
 

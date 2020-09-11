@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_sra : t_bitcore<t_sra>
     {
@@ -17,67 +17,72 @@ namespace Z0
 
         public void bs_sra_8u_check()
             => bs_sra_check<byte>();
-            
-        public void bs_sra_16i_check()        
-            => bs_sra_check<short>();            
-        
-        public void bs_sra_16u_check()        
+
+        public void bs_sra_16i_check()
+            => bs_sra_check<short>();
+
+        public void bs_sra_16u_check()
             => bs_sra_check<ushort>();
-        
-        public void bs_sra_32i_check()        
-            => bs_sra_check<int>();            
-        
-        public void bs_sra_32u_check()        
-            => bs_sra_check<uint>();            
-        
-        public void bs_sra_64i_check()        
-            => bs_sra_check<long>();           
-    
-        public void bs_sra_64u_check()        
+
+        public void bs_sra_32i_check()
+            => bs_sra_check<int>();
+
+        public void bs_sra_32u_check()
+            => bs_sra_check<uint>();
+
+        public void bs_sra_64i_check()
+            => bs_sra_check<long>();
+
+        public void bs_sra_64u_check()
             => bs_sra_check<ulong>();
 
         public void sb_sal_8i()
         {
-            var src = Random.Array<sbyte>(RepCount);            
-            var offset = Random.Array(RepCount, Interval.closed((byte)0, (byte)bitsize<sbyte>()));            
-            Root.iteri(RepCount, i => Claim.eq((sbyte)(src[i] << offset[i]), gmath.sal(src[i], offset[i])));    
+            var src = Random.Array<sbyte>(RepCount);
+            var offset = Random.Array(RepCount, Interval.closed((byte)0, (byte)bitsize<sbyte>()));
+            iteri(RepCount, i => Claim.eq((sbyte)(src[i] << offset[i]), gmath.sal(src[i], offset[i])));
+        }
+
+        public void sb_sal_8u()
+        {
+            var src = Random.Array<byte>(RepCount);
+            var offset = Random.Array(RepCount, Interval.closed((byte)0, (byte)bitsize<byte>()));
+            iteri(RepCount, i => Claim.eq((src[i] << offset[i]), gmath.sal(src[i], offset[i])));
         }
 
         public void sb_sra_8i()
         {
-            var src = Random.Array<sbyte>(RepCount);            
-            var offset = Random.Array(RepCount, Interval.closed((byte)0, (byte)bitsize<sbyte>()));                
-            Root.iteri(RepCount, i => Claim.eq((sbyte)(src[i] >> offset[i]), gmath.sra(src[i], offset[i])));    
+            var src = Random.Array<sbyte>(RepCount);
+            var offset = Random.Array(RepCount, Interval.closed((byte)0, (byte)bitsize<sbyte>()));
+            iteri(RepCount, i => Claim.eq((sbyte)(src[i] >> offset[i]), gmath.sra(src[i], offset[i])));
         }
 
         public void sb_sal_32i()
         {
-            var src = Random.Array<int>(RepCount);            
-            var offset = Random.Array(RepCount, Interval.closed((byte)0, (byte)bitsize<int>()));            
-            Root.iteri(RepCount, i => Claim.eq(src[i] << offset[i], gmath.sal(src[i], offset[i])));    
+            var src = Random.Array<int>(RepCount);
+            var offset = Random.Array(RepCount, Interval.closed((byte)0, (byte)bitsize<int>()));
+            iteri(RepCount, i => Claim.eq(src[i] << offset[i], gmath.sal(src[i], offset[i])));
         }
 
         public void sb_sra_32i()
         {
-            var src = Random.Array<int>(RepCount);            
-            var offset = Random.Array(RepCount, Interval.closed((byte)0, (byte)bitsize<int>()));            
-            Root.iteri(RepCount, i => Claim.eq(src[i] >> offset[i], gmath.sra(src[i], offset[i])));
+            var src = Random.Array<int>(RepCount);
+            var offset = Random.Array(RepCount, Interval.closed((byte)0, (byte)bitsize<int>()));
+            iteri(RepCount, i => Claim.eq(src[i] >> offset[i], gmath.sra(src[i], offset[i])));
         }
 
         public void sb_sal_64i()
         {
-            var src = Random.Array<long>(RepCount);            
-            var offset = Random.Array(RepCount, Interval.closed((byte)0, (byte)bitsize<ulong>()));            
-
-            Root.iteri(RepCount, i => Claim.eq(src[i] << offset[i], gmath.sal(src[i], offset[i])));    
+            var src = Random.Array<long>(RepCount);
+            var offset = Random.Array(RepCount, Interval.closed((byte)0, (byte)bitsize<ulong>()));
+            iteri(RepCount, i => Claim.eq(src[i] << offset[i], gmath.sal(src[i], offset[i])));
         }
 
         public void sb_sra_64i()
         {
-            var src = Random.Array<long>(RepCount);            
-            var offset = Random.Array(RepCount, Interval.closed((byte)0, (byte)bitsize<long>()));            
-
-            Root.iteri(RepCount, i => Claim.eq(src[i] >> offset[i], gmath.sra(src[i], offset[i])));
+            var src = Random.Array<long>(RepCount);
+            var offset = Random.Array(RepCount, Interval.closed((byte)0, (byte)bitsize<long>()));
+            iteri(RepCount, i => Claim.eq(src[i] >> offset[i], gmath.sra(src[i], offset[i])));
         }
 
         protected void bs_sra_check<T>()

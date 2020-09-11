@@ -6,10 +6,10 @@ namespace Z0.Logix
 {
     public interface IShiftOpExpr : IOperatorExpr
     {
-        
+
     }
 
-    public interface IShiftOpExpr<T> : IShiftOpExpr, IOperatorExpr<T, BitShiftKind>
+    public interface IShiftOpExpr<T> : IShiftOpExpr, IOperatorExpr<T, BitShiftOpId>
         where T : unmanaged
     {
         /// <summary>

@@ -13,6 +13,16 @@ namespace Z0
 
     partial struct z
     {
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static void map<T>(ReadOnlySpan<T> src, Func<T,T> f, Span<T> dst)
+        {
+            var count = min(src.Length, dst.Length);
+            ref readonly var s = ref first(src);
+            ref var t = ref first(dst);
+            for(var i=0u; i<count; i++)
+                seek(t,i) = f(skip(s,i));
+        }
+
         /// <summary>
         /// Applies a function to an input sequence to yield a transformed output sequence
         /// </summary>
@@ -28,7 +38,7 @@ namespace Z0
             var buffer = alloc<T>(count);
             var target = span(buffer);
             for(var i=0u; i<count; i++)
-                seek(target,i) = f(skip(source,i));            
+                seek(target,i) = f(skip(source,i));
             return buffer;
         }
 
@@ -64,7 +74,7 @@ namespace Z0
         /// <param name="src">The source</param>
         /// <param name="f">The transformation</param>
         /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>        
+        /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static void map<S,T>(ReadOnlySpan<S> src, Func<S,T> f, Span<T> dst)
         {
@@ -86,12 +96,12 @@ namespace Z0
         public static void map<S,T,R>(ReadOnlySpan<S> x, ReadOnlySpan<T> y, Func<S,T,R> f, Span<R> dst)
         {
             var count = length(x,y);
-            for(var i=0u; i<count; i++)            
-                seek(dst,i) = f(skip(x,i),skip(y,i));            
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = f(skip(x,i),skip(y,i));
         }
 
         /// <summary>
-        /// Iterates a pair of readonly spans in tandem, invoking a function for each cell pair, 
+        /// Iterates a pair of readonly spans in tandem, invoking a function for each cell pair,
         /// and deposits the result to an allocated target that is returned
         /// </summary>
         /// <param name="x">The first operand</param>
@@ -105,6 +115,6 @@ namespace Z0
             var dst = sys.alloc<R>(length(x,y));
             map(x,y,f,dst);
             return dst;
-        }  
+        }
     }
 }

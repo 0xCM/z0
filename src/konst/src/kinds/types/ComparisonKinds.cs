@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ComparisonKind;
+    using K = ComparisonOpId;
     using I = IComparisonKind;
 
     partial class Kinds
@@ -31,6 +31,6 @@ namespace Z0
 
         public readonly struct Eq<T> : IComparisonKind<Eq,T> {}
 
-        public readonly struct Neq<T> : IComparisonKind<Neq,T> {}        
+        public readonly struct Neq<T> : IComparisonKind<Neq,T> {}
     }
 }

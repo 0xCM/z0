@@ -5,9 +5,8 @@
 namespace Z0
 {
     using System;
-    
+
     using static Konst;
-    using static Memories;
 
     public sealed class t_convert : UnitTest<t_convert>
     {

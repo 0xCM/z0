@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = BitFunctionKind;
+    using K = BitFunctionOpId;
     using I = IBitFunctionKind;
 
     /// <summary>
@@ -12,10 +12,10 @@ namespace Z0
     /// </summary>
     public interface IBitFunctionKind : IOpKind, IOpKind<K>
     {
-        BitFunctionKind Kind {get;}
+        BitFunctionOpId Kind {get;}
 
-        OpKindId IOpKind.KindId
-            => (OpKindId)Kind;
+        ApiOpId IOpKind.KindId
+            => (ApiOpId)Kind;
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ namespace Z0
     public interface IBitFunctionKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        OpKindId IOpKind.KindId
+        ApiOpId IOpKind.KindId
             => default(F).KindId;
     }
 

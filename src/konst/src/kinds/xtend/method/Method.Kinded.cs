@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Reflection;
-    
+
     partial class XTend
     {
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The souce methods</param>
         /// <param name="kind">The kind to match</param>
-        public static IEnumerable<MethodInfo> Kinded(IEnumerable<MethodInfo> src, OpKindId kind)
+        public static IEnumerable<MethodInfo> Kinded(IEnumerable<MethodInfo> src, ApiOpId kind)
             => from m in src where m.KindId() == kind select m;
 
         /// <summary>

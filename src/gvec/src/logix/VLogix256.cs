@@ -8,16 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;    
+    using static Konst;
     using static Memories;
     using static LogicSig;
 
     using ULK = UnaryBitLogic;
     using BLK = BinaryLogicKind;
     using TLK = TernaryBitLogic;
-    using BSK = BitShiftKind;
-    using BCK = BinaryComparisonKind;
-    using BAR = BinaryArithmeticKind;
+    using BSK = BitShiftOpId;
+    using BCK = BinaryComparisonOpId;
+    using BAR = BinaryArithmeticOpId;
 
     partial class VLogix
     {
@@ -50,7 +50,7 @@ namespace Z0
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, Closures(Integers)]
         public static Vector256<T> eval<T>(BCK kind, Vector256<T> a, Vector256<T> b)
-            where T : unmanaged            
+            where T : unmanaged
         {
             switch(kind)
             {
@@ -58,7 +58,7 @@ namespace Z0
                 case BCK.Lt: return gvec.vlt(a,b);
                 case BCK.Gt: return gvec.vgt(a,b);
                 default: throw Unsupported.define<T>(sig<T>(kind));
-            }         
+            }
         }
 
         [Op, Closures(AllNumeric)]
@@ -227,7 +227,7 @@ namespace Z0
         public static Vector256<T> f02<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
                 => gvec.vand(c, gvec.vnor(b,a));
- 
+
          // b nor a
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f03<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
@@ -255,7 +255,7 @@ namespace Z0
         public static Vector256<T> f07<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
                 => gvec.vnor(a, gvec.vand(b,c));
-        
+
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f08<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
@@ -275,7 +275,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f0b<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
-                => gvec.vand(gvec.vnot(a), gvec.vor(gvec.vnot(b),  c));   
+                => gvec.vand(gvec.vnot(a), gvec.vor(gvec.vnot(b),  c));
 
         // b and (not a)
         [MethodImpl(Inline), Op, Closures(Integers)]
@@ -306,14 +306,14 @@ namespace Z0
         public static Vector256<T> f10<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
                 => gvec.vand(a, gvec.vnor(b, c));
-        
+
         // c nor b
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f11<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged
                 => gvec.vnor(c,b);
-        
-        // not b and (a xor c) 
+
+        // not b and (a xor c)
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> f12<T>(Vector256<T> a, Vector256<T> b, Vector256<T> c)
             where T : unmanaged

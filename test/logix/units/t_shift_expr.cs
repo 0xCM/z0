@@ -9,182 +9,182 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
 
     using static TypedLogicSpec;
-    
+
     public class t_shift_expr : TypedLogixTest<t_shift_expr>
-    {        
+    {
        // ~ sll
 
         public void sll_8u()
-            => check_op<byte>(BitShiftKind.Sll);
+            => check_op<byte>(BitShiftOpId.Sll);
 
         public void sll_128x8u()
-            => check_op_128<byte>(BitShiftKind.Sll);
+            => check_op_128<byte>(BitShiftOpId.Sll);
 
         public void sll_256x8u()
-            => check_op_256<byte>(BitShiftKind.Sll);
+            => check_op_256<byte>(BitShiftOpId.Sll);
 
         public void sll_32u()
-            => check_op<uint>(BitShiftKind.Sll);
+            => check_op<uint>(BitShiftOpId.Sll);
 
         public void sll_128x32u()
-            => check_op_128<uint>(BitShiftKind.Sll);
+            => check_op_128<uint>(BitShiftOpId.Sll);
 
         public void sll_256x32u()
-            => check_op_256<uint>(BitShiftKind.Sll);
+            => check_op_256<uint>(BitShiftOpId.Sll);
 
         public void sll_64u()
-            => check_op<ulong>(BitShiftKind.Sll);
+            => check_op<ulong>(BitShiftOpId.Sll);
 
         public void sll_128x64u()
-            => check_op_128<ulong>(BitShiftKind.Sll);
+            => check_op_128<ulong>(BitShiftOpId.Sll);
 
         public void sll_256x64u()
-            => check_op_256<ulong>(BitShiftKind.Sll);
+            => check_op_256<ulong>(BitShiftOpId.Sll);
 
         // ~ srl
 
         public void srl_8u()
-            => check_op<byte>(BitShiftKind.Srl);
+            => check_op<byte>(BitShiftOpId.Srl);
 
         public void srl_128x8u()
-            => check_op_128<byte>(BitShiftKind.Srl);
+            => check_op_128<byte>(BitShiftOpId.Srl);
 
         public void srl_256x8u()
-            => check_op_256<byte>(BitShiftKind.Srl);
+            => check_op_256<byte>(BitShiftOpId.Srl);
 
         public void check_srl_32u()
-            => check_op<uint>(BitShiftKind.Srl);
+            => check_op<uint>(BitShiftOpId.Srl);
 
         public void srl_128x32u()
-            => check_op_128<uint>(BitShiftKind.Srl);
+            => check_op_128<uint>(BitShiftOpId.Srl);
 
         public void srl_256x32u()
-            => check_op_256<uint>(BitShiftKind.Srl);
+            => check_op_256<uint>(BitShiftOpId.Srl);
 
         public void check_srl_64u()
-            => check_op<ulong>(BitShiftKind.Srl);
+            => check_op<ulong>(BitShiftOpId.Srl);
 
         public void srl_128x64u()
-            => check_op_128<ulong>(BitShiftKind.Srl);
+            => check_op_128<ulong>(BitShiftOpId.Srl);
 
         public void srl_256x64u()
-            => check_op_256<ulong>(BitShiftKind.Srl);
+            => check_op_256<ulong>(BitShiftOpId.Srl);
 
         // ~ rotl
 
         public void rotl_8u()
-            => check_op<byte>(BitShiftKind.Rotl);
+            => check_op<byte>(BitShiftOpId.Rotl);
 
         public void rotl_128x8u()
-            => check_op_128<byte>(BitShiftKind.Rotl);
+            => check_op_128<byte>(BitShiftOpId.Rotl);
 
         public void rotl_256x8u()
-            => check_op_256<byte>(BitShiftKind.Rotl);
+            => check_op_256<byte>(BitShiftOpId.Rotl);
 
         public void rotl_32u()
-            => check_op<uint>(BitShiftKind.Rotl);
+            => check_op<uint>(BitShiftOpId.Rotl);
 
         public void rotl_128x32u()
-            => check_op_128<uint>(BitShiftKind.Rotl);
+            => check_op_128<uint>(BitShiftOpId.Rotl);
 
         public void rotl_256x32u()
-            => check_op_256<uint>(BitShiftKind.Rotl);
+            => check_op_256<uint>(BitShiftOpId.Rotl);
 
         public void rotl_64u()
-            => check_op<ulong>(BitShiftKind.Rotl);
+            => check_op<ulong>(BitShiftOpId.Rotl);
 
         public void check_rotl_128x64u()
-            => check_op_128<ulong>(BitShiftKind.Rotl);
+            => check_op_128<ulong>(BitShiftOpId.Rotl);
 
         public void rotl_256x64u()
-            => check_op_256<ulong>(BitShiftKind.Rotl);
+            => check_op_256<ulong>(BitShiftOpId.Rotl);
 
         // ~ rotr
 
         public void rotr_8u()
-            => check_op<byte>(BitShiftKind.Rotr);
+            => check_op<byte>(BitShiftOpId.Rotr);
 
         public void rotr_128x8u()
-            => check_op_128<byte>(BitShiftKind.Rotr);
+            => check_op_128<byte>(BitShiftOpId.Rotr);
 
         public void rotr_256x8u()
-            => check_op_256<byte>(BitShiftKind.Rotr);
+            => check_op_256<byte>(BitShiftOpId.Rotr);
 
         public void rotr_16u()
-            => check_op<ushort>(BitShiftKind.Rotr);
+            => check_op<ushort>(BitShiftOpId.Rotr);
 
         public void rotr_128x16u()
-            => check_op_128<ushort>(BitShiftKind.Rotr);
+            => check_op_128<ushort>(BitShiftOpId.Rotr);
 
         public void rotr_256x16u()
-            => check_op_256<ushort>(BitShiftKind.Rotr);
+            => check_op_256<ushort>(BitShiftOpId.Rotr);
 
         public void rotr_32u()
-            => check_op<uint>(BitShiftKind.Rotr);
+            => check_op<uint>(BitShiftOpId.Rotr);
 
         public void rotr_128x32u()
-            => check_op_128<uint>(BitShiftKind.Rotr);
+            => check_op_128<uint>(BitShiftOpId.Rotr);
 
         public void rotr_256x32u()
-            => check_op_256<uint>(BitShiftKind.Rotr);
+            => check_op_256<uint>(BitShiftOpId.Rotr);
 
         public void rotr_64u()
-            => check_op<ulong>(BitShiftKind.Rotr);
+            => check_op<ulong>(BitShiftOpId.Rotr);
 
         public void rotr_128x64u()
-            => check_op_128<ulong>(BitShiftKind.Rotr);
+            => check_op_128<ulong>(BitShiftOpId.Rotr);
 
         public void check_rotr_256x64u()
-            => check_op_256<ulong>(BitShiftKind.Rotr);
+            => check_op_256<ulong>(BitShiftOpId.Rotr);
 
-        void check_op<T>(BitShiftKind op)
+        void check_op<T>(BitShiftOpId op)
             where T : unmanaged
         {
             var v1 = variable<T>(1);
             byte offset = 6;
             var expr = shift(op,v1,offset);
-            
+
             for(var i=0; i< RepCount; i++)
             {
                 var a = Random.Next<T>();
-                v1.Set(a);   
+                v1.Set(a);
                 T actual = LogicEngine.eval(expr);
                 T expect = NumericLogixHost.eval(op,a,offset);
-                Claim.Eq(actual,expect);                            
+                Claim.Eq(actual,expect);
             }
         }
 
-        void check_op_256<T>(BitShiftKind op)
+        void check_op_256<T>(BitShiftOpId op)
             where T : unmanaged
         {
             var v1 = variable(1, default(Vector256<T>));
             byte offset = 6;
             var expr = shift(op,v1,offset);
-            
+
             for(var i=0; i< RepCount; i++)
             {
                 var a = Random.CpuVector<T>(n256);
-                v1.Set(a);   
+                v1.Set(a);
                 Vector256<T> actual = LogicEngine.eval(expr);
                 Vector256<T> expect = VLogixOps.eval(op,a,offset);
-                Claim.veq(actual,expect);                            
+                Claim.veq(actual,expect);
             }
         }
 
-        protected void check_op_128<T>(BitShiftKind op)
+        protected void check_op_128<T>(BitShiftOpId op)
             where T : unmanaged
         {
             var v1 = variable(1, default(Vector128<T>));
             byte offset = 6;
             var expr = shift(op,v1,offset);
-            
+
             for(var i=0; i< RepCount; i++)
             {
                 var a = Random.CpuVector<T>(n128);
-                v1.Set(a);   
+                v1.Set(a);
                 Vector128<T> actual = LogicEngine.eval(expr);
                 Vector128<T> expect = VLogixOps.eval(op,a,offset);
-                Claim.veq(actual,expect);                            
+                Claim.veq(actual,expect);
             }
         }
     }

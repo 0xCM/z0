@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -18,7 +18,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public BitShiftKind OpKind {get;}
+        public BitShiftOpId OpKind {get;}
 
         /// <summary>
         /// The operand
@@ -31,7 +31,7 @@ namespace Z0.Logix
         public IExpr<byte> Offset {get;}
 
         [MethodImpl(Inline)]
-        public ShiftOpExpr(BitShiftKind op, IExpr<T> subject, IExpr<byte> offset)
+        public ShiftOpExpr(BitShiftOpId op, IExpr<T> subject, IExpr<byte> offset)
         {
             this.OpKind = op;
             this.Subject = subject;
@@ -40,8 +40,8 @@ namespace Z0.Logix
 
         public string Format()
             => OpKind.Format(Subject,Offset);
-        
+
         public override string ToString()
             => Format();
-    } 
+    }
 }

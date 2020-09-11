@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct z    
+    partial struct z
     {
         /// <summary>
         /// Iterates over the supplied items, invoking a receiver for each
@@ -31,7 +31,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void iter<T>(ReadOnlySpan<T> src, Action<T> action)
         {
-            for(var i=0u; i<src.Length; i++)
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
                 action(skip(src,i));
         }
 
@@ -47,8 +48,8 @@ namespace Z0
         public static void iter<S,T>(ReadOnlySpan<S> x, ReadOnlySpan<T> y, Action<S,T> f)
         {
             var count = min(x.Length, y.Length);
-            for(var i=0u; i<count; i++)            
-                f(skip(x,i),skip(y,i));            
+            for(var i=0u; i<count; i++)
+                f(skip(x,i),skip(y,i));
         }
 
         /// <summary>
@@ -63,8 +64,8 @@ namespace Z0
         public static void iter<S,T>(Span<S> x, Span<T> y, Action<S,T> f)
         {
             var count = min(x.Length, y.Length);
-            for(var i=0u; i<count; i++)            
-                f(skip(x,i),skip(y,i));            
+            for(var i=0u; i<count; i++)
+                f(skip(x,i),skip(y,i));
         }
     }
 }

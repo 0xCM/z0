@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The operation kind id</param>
         [MethodImpl(Inline)]
-        public static string name(OpKindId k)
+        public static string name(ApiOpId k)
             => k.Format();
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The operation kind id</param>
         [MethodImpl(Inline)]
-        public static string vname(OpKindId k)
+        public static string vname(ApiOpId k)
             => k.Format(true);
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="k">The operation kind id</param>
         /// <param name="nk">The operation numeric kind</typeparam>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
-        public static OpIdentity numeric(OpKindId k,  NumericKind nk, bool generic = false)
+        public static OpIdentity numeric(ApiOpId k,  NumericKind nk, bool generic = false)
             => NumericOp(name(k), nk, generic);
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="k">The operation kind id</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
         /// <typeparam name="T">The operation numeric kind</typeparam>
-        public static OpIdentity numeric<T>(OpKindId k, T t = default, bool generic = false)
+        public static OpIdentity numeric<T>(ApiOpId k, T t = default, bool generic = false)
             where T : unmanaged
                 =>  NumericOp<T>(name(k),  generic);
 
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <param name="nk">The vector cell kind</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
-        public static OpIdentity vectorized(OpKindId k, TypeWidth w, NumericKind nk, bool generic)
+        public static OpIdentity vectorized(ApiOpId k, TypeWidth w, NumericKind nk, bool generic)
             =>  OpIdentityBuilder.build(vname(k), w, nk, generic);
 
         /// <summary>
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <typeparam name="W">The vector operand width</typeparam>
         /// <typeparam name="T">The vector cell type</typeparam>
-        public static OpIdentity vdirect<T>(OpKindId k, TypeWidth w, T t = default)
+        public static OpIdentity vdirect<T>(ApiOpId k, TypeWidth w, T t = default)
             where T : unmanaged
                 =>  OpIdentityBuilder.build(vname(k), w, nkind(t), false);
 
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <typeparam name="W">The vector operand width</typeparam>
         /// <typeparam name="T">The vector cell type</typeparam>
-        public static OpIdentity vdirect<W,T>(OpKindId k, W w = default, T t = default)
+        public static OpIdentity vdirect<W,T>(ApiOpId k, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeWidth
                 =>  OpIdentityBuilder.build(vname(k), w.TypeWidth, nkind(t), false);
@@ -86,17 +86,17 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <typeparam name="W">The vector operand width</typeparam>
         /// <typeparam name="T">The vector cell type</typeparam>
-        public static OpIdentity vgeneric<W,T>(OpKindId k, W w = default, T t = default)
+        public static OpIdentity vgeneric<W,T>(ApiOpId k, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeWidth
-                => OpIdentityBuilder.build(vname(k), w.TypeWidth, nkind(t), true);    
+                => OpIdentityBuilder.build(vname(k), w.TypeWidth, nkind(t), true);
 
         /// <summary>
         /// Produces an identifier for a kinded numeric structural function
         /// </summary>
         /// <param name="k">The operation kind id</param>
         /// <typeparam name="T">The numeric type</typeparam>
-        public static OpIdentity sfunc<T>(OpKindId k, T t = default)
+        public static OpIdentity sfunc<T>(ApiOpId k, T t = default)
             => NumericOp(name(k), nkind(t));
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The operation kind id</param>
         /// <param name="nk">The operation numeric kind</param>
-        public static OpIdentity sfunc(OpKindId k, NumericKind nk)
+        public static OpIdentity sfunc(ApiOpId k, NumericKind nk)
             => NumericOp(name(k), nk);
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="w">A segment width representative</param>
         /// <param name="t">A cell type representative</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
-        public static OpIdentity sfunc(OpKindId k, TypeWidth w, NumericKind nk, bool generic = true)
+        public static OpIdentity sfunc(ApiOpId k, TypeWidth w, NumericKind nk, bool generic = true)
             => OpIdentityBuilder.build(name(k), w, nk, generic);
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Z0
         /// <param name="w">A segment width representative</param>
         /// <param name="t">A cell type representative</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
-        public static OpIdentity sfunc<T>(OpKindId k, TypeWidth w, T t = default, bool generic = true)
+        public static OpIdentity sfunc<T>(ApiOpId k, TypeWidth w, T t = default, bool generic = true)
             where T : unmanaged
                 => OpIdentityBuilder.build(name(k), w, nkind(t), generic);
 
@@ -137,7 +137,7 @@ namespace Z0
         /// <param name="generic">Whether the produced identity has a generic marker</param>
         /// <typeparam name="W">The width type</typeparam>
         /// <typeparam name="T">The numeric type</typeparam>
-        public static OpIdentity sfunc<W,T>(OpKindId k, W w = default, T t = default, bool generic = true)
+        public static OpIdentity sfunc<W,T>(ApiOpId k, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => OpIdentityBuilder.build(name(k), w.TypeWidth, nkind(t), generic);
@@ -149,7 +149,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         /// <param name="nk">The cell numeric kind</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
-        public static OpIdentity vsfunc(OpKindId k, TypeWidth w, NumericKind nk, bool generic = true)
+        public static OpIdentity vsfunc(ApiOpId k, TypeWidth w, NumericKind nk, bool generic = true)
             => OpIdentityBuilder.build(vname(k), w, nk, generic);
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace Z0
         /// <param name="nk">The cell numeric kind</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        public static OpIdentity vsfunc<T>(OpKindId k, TypeWidth w, T t = default, bool generic = true)
+        public static OpIdentity vsfunc<T>(ApiOpId k, TypeWidth w, T t = default, bool generic = true)
             where T : unmanaged
                 => OpIdentityBuilder.build(vname(k), w, nkind(t), generic);
 
@@ -173,7 +173,7 @@ namespace Z0
         /// <param name="generic">Whether the produced identity has a generic marker</param>
         /// <typeparam name="W">The vector width type</typeparam>
         /// <typeparam name="T">The vector cell type</typeparam>
-        public static OpIdentity vsfunc<W,T>(OpKindId k, W w = default, T t = default, bool generic = true)
+        public static OpIdentity vsfunc<W,T>(ApiOpId k, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => OpIdentityBuilder.build(vname(k), w.TypeWidth, nkind(t), generic);

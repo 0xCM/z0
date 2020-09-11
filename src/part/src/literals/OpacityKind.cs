@@ -9,8 +9,8 @@ namespace Z0
         None = 0,
 
         Closure = NumericKind.All,
-        
-        Root = OpKindId.Opaque,
+
+        Root = ApiOpId.Opaque,
 
         First = Root + 1,
 
@@ -56,7 +56,7 @@ namespace Z0
 
         ParameterArray,
 
-        InitRefBlock,       
+        InitRefBlock,
 
         FillSpan,
 
@@ -96,7 +96,7 @@ namespace Z0
 
        GetEnumNames,
 
-      GetEnumValues,       
+      GetEnumValues,
 
       FormatCharSpan,
 

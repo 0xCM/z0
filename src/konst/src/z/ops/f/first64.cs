@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
     using static System.Runtime.InteropServices.MemoryMarshal;
+    using static System.Runtime.InteropServices.Marshal;
 
     partial struct z
     {
@@ -40,6 +41,6 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op]
         public static ref readonly long first64i(ReadOnlySpan<byte> src)
-            => ref first(src.AsInt64());                
+            => ref first(src.AsInt64());
     }
 }

@@ -8,14 +8,14 @@ namespace Z0
     using System.Linq;
     using System.Runtime.Intrinsics;
 
-    using static Konst;    
+    using static Konst;
 
     using ULK = UnaryBitLogic;
     using BLK = BinaryLogicKind;
     using TLK = TernaryBitLogic;
-    using BAR = BinaryArithmeticKind;
-    using BCK = BinaryComparisonKind;
-    using BSK = BitShiftKind;
+    using BAR = BinaryArithmeticOpId;
+    using BCK = BinaryComparisonOpId;
+    using BSK = BitShiftOpId;
 
     public class VLogixOps
     {
@@ -74,7 +74,7 @@ namespace Z0
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, Closures(AllNumeric)]
         public static Vector128<T> eval<T>(BCK kind, Vector128<T> a, Vector128<T> b)
-            where T : unmanaged            
+            where T : unmanaged
                 => VLogix.eval(kind,a,b);
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Z0
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, Closures(Integers)]
         public static Vector256<T> eval<T>(BCK kind, Vector256<T> a, Vector256<T> b)
-            where T : unmanaged            
+            where T : unmanaged
                 => VLogix.eval(kind,a,b);
 
         /// <summary>
@@ -180,7 +180,7 @@ namespace Z0
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, Closures(Integers)]
         public static UnaryOp<Vector128<T>> lookup<T>(N128 w, ULK kind)
-            where T : unmanaged            
+            where T : unmanaged
                 => VLogix.lookup<T>(w,kind);
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace Z0
         /// <typeparam name="T">The primal vector component type</typeparam>
         [Op, Closures(Integers)]
         public static UnaryOp<Vector256<T>> lookup<T>(N256 w, ULK kind)
-            where T : unmanaged            
+            where T : unmanaged
                 => VLogix.lookup<T>(w,kind);
 
         [Op, Closures(Integers)]

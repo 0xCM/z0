@@ -24,8 +24,8 @@ namespace Z0
         /// <summary>
         /// The method's kind identifier if it exists
         /// </summary>
-        OpKindId KindId
-            => OpKindId.None;
+        ApiOpId KindId
+            => ApiOpId.None;
 
         /// The globally-unique operation uri
         /// </summary>

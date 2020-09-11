@@ -7,15 +7,15 @@ namespace Z0.Logix
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;    
+
+    using static Konst;
     using static Memories;
 
 
     using static TypedLogicSpec;
 
     using TLS = TypedLogicSpec;
-    using BCK = BinaryComparisonKind;
+    using BCK = BinaryComparisonOpId;
 
     /// <summary>
     /// Constructs type operator comparison expressions

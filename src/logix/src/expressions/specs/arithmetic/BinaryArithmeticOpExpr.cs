@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     /// <summary>
     /// Defines a typed binary arithmetic operator expression
     /// </summary>
@@ -16,7 +16,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public BinaryArithmeticKind OpKind {get;}
+        public BinaryArithmeticOpId OpKind {get;}
 
         /// <summary>
         /// The left operand
@@ -28,19 +28,19 @@ namespace Z0.Logix
         /// </summary>
         public IExpr<T> RightArg {get;}
 
-        public BinaryArithmeticOpExpr(BinaryArithmeticKind op, IExpr<T> lhs, IExpr<T> rhs)
+        public BinaryArithmeticOpExpr(BinaryArithmeticOpId op, IExpr<T> lhs, IExpr<T> rhs)
         {
             this.OpKind = op;
             this.LeftArg= lhs;
             this.RightArg = rhs;
         }
-        
+
         /// <summary>
         /// Renders the expression in canonical form
         /// </summary>
         public string Format()
             => OpKind.Format(LeftArg, RightArg);
-        
+
         public override string ToString()
             => Format();
     }

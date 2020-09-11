@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
 
@@ -19,7 +19,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref short int16<T>(ref T src)
             => ref As<T,short>(ref src);
-
-
     }
 }

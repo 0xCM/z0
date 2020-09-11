@@ -8,7 +8,7 @@ namespace Z0
 
     public readonly struct ApiAttributes
     {
-        public static OpKindId OpKindId(object id)
-            => (OpKindId)(ulong)Convert.ChangeType(id, typeof(ulong));
+        public static ApiOpId OpKindId(object id)
+            => (ApiOpId)(ulong)Convert.ChangeType(id, typeof(ulong));
     }
 }

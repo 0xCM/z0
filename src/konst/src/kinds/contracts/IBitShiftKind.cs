@@ -3,29 +3,29 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{   
+{
     /// <summary>
     /// Characterizes a bitshift operation classifier
     /// </summary>
-    public interface IBitShiftKind : IOpKind, IOpKind<BitShiftKind>
+    public interface IBitShiftKind : IOpKind, IOpKind<BitShiftOpId>
     {
-        BitShiftKind Kind {get;}
+        BitShiftOpId Kind {get;}
 
-        OpKindId IOpKind.KindId 
-            => (OpKindId)Kind;
-    }    
+        ApiOpId IOpKind.KindId
+            => (ApiOpId)Kind;
+    }
 
     /// <summary>
     /// Characterizes a reified bitlogic operation classifier
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    public interface IBitShiftKind<F> : IBitShiftKind, IOpKind<F,BitShiftKind>
+    public interface IBitShiftKind<F> : IBitShiftKind, IOpKind<F,BitShiftOpId>
         where F : unmanaged, IBitShiftKind
     {
-        OpKindId IOpKind.KindId 
-            => default(F).KindId;                
+        ApiOpId IOpKind.KindId
+            => default(F).KindId;
     }
-    
+
     /// <summary>
     /// Characterizes a kind-parametric and numeric-parametric bitshift operation classifier
     /// </summary>
@@ -34,12 +34,12 @@ namespace Z0
     public interface IBitShiftKind<K,T> : IBitShiftKind<K>
         where K : unmanaged, IBitShiftKind
     {
-        BitShiftKind IBitShiftKind.Kind => default(K).Kind;
+        BitShiftOpId IBitShiftKind.Kind => default(K).Kind;
 
         /// <summary>
         /// The parametrically-identified numeric kind
         /// </summary>
-        NumericKind NumericKind 
+        NumericKind NumericKind
             => NumericKinds.kind<T>();
     }
 }

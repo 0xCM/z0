@@ -20,16 +20,16 @@ namespace Z0
             => $"{kind.Format()}({arg})";
 
         [MethodImpl(Inline)]
-        public static string format(UnaryArithmeticKind kind)
+        public static string format(UnaryArithmeticOpId kind)
             => kind switch {
-                UnaryArithmeticKind.Inc => "++",
-                UnaryArithmeticKind.Dec => "--",
-                UnaryArithmeticKind.Negate => "-",
+                UnaryArithmeticOpId.Inc => "++",
+                UnaryArithmeticOpId.Dec => "--",
+                UnaryArithmeticOpId.Negate => "-",
                 _ => kind.ToString()
             };
 
         [MethodImpl(Inline)]
-        public static string format<T>(UnaryArithmeticKind kind, T arg)
+        public static string format<T>(UnaryArithmeticOpId kind, T arg)
             => $"{kind.Format()}({arg})";
 
         [MethodImpl(Inline)]
@@ -41,15 +41,15 @@ namespace Z0
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]
-        public static string format<T>(BinaryArithmeticKind kind, T arg1, T arg2)
+        public static string format<T>(BinaryArithmeticOpId kind, T arg1, T arg2)
             => $"{kind.ToString().ToLower()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]
-        public static string format(BinaryComparisonKind kind)
+        public static string format(BinaryComparisonOpId kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string format<T>(BinaryComparisonKind kind, T arg1, T arg2)
+        public static string format<T>(BinaryComparisonOpId kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
     }
 }

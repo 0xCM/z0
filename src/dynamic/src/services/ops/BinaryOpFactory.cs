@@ -66,7 +66,7 @@ namespace Z0
             g.Emit(OpCodes.Ldc_I8, address);
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, tOperand, args);
             g.Emit(OpCodes.Ret);
-            return (BinaryOp<T>)FixedCellDelegate.Define(id, address, method, method.CreateDelegate(tFunc));
+            return (BinaryOp<T>)CellDelegate.define(id, address, method, method.CreateDelegate(tFunc));
         }
 
         static unsafe BinaryOp<T> emit<T>(OpIdentity id, MemoryAddress f)
@@ -81,7 +81,7 @@ namespace Z0
             g.Emit(OpCodes.Ldc_I8, f);
             g.EmitCalli(OpCodes.Calli, CallingConvention.StdCall, tOperand, args);
             g.Emit(OpCodes.Ret);
-            return (BinaryOp<T>)FixedCellDelegate.Define(id, f, method, method.CreateDelegate(tFunc));
+            return (BinaryOp<T>)CellDelegate.define(id, f, method, method.CreateDelegate(tFunc));
         }
     }
 }

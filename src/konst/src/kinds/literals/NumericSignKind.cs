@@ -8,19 +8,19 @@ namespace Z0
     /// Defines an equivalence class over values of numeric kind
     /// </summary>
     public enum NumericSignKind : sbyte
-    {        
+    {
         /// <summary>
-        /// Spcecifies that a value is less than zero
+        /// Indicates a value is less than zero
         /// </summary>
         Negative = -1,
 
         /// <summary>
-        /// Spcecifies that a value has no sign, applicable only to zero, or that the sign is unspecified/unknown
+        /// Indicates that a value has no sign, applicable only to zero, or that the sign is unspecified/unknown
         /// </summary>
         None = 0,
 
         /// <summary>
-        /// Spcecifies that a value is greater than zero
+        /// Indicates that a value is greater than zero
         /// </summary>
         Positive = 1,
     }

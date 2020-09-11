@@ -5,27 +5,27 @@
 namespace Z0
 {
     using I = ICanonicalKind;
-    using K = CanonicalKind;
+    using K = CanonicalOpId;
 
     public interface ICanonicalKind : IOpKind, IOpKind<K>
     {
         K Kind {get;}
 
-        OpKindId IOpKind.KindId 
-            => (OpKindId)Kind;
-    }    
+        ApiOpId IOpKind.KindId
+            => (ApiOpId)Kind;
+    }
 
     public interface ICanonicalKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        OpKindId IOpKind.KindId 
-            => default(F).KindId;                
+        ApiOpId IOpKind.KindId
+            => default(F).KindId;
     }
-    
+
     public interface ICanonicalKind<F,T> : ICanonicalKind<F>
         where F : unmanaged, I
     {
-        K I.Kind 
+        K I.Kind
             => default(F).Kind;
     }
 }

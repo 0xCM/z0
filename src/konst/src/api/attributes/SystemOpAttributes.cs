@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = SystemOpKind;
+    using K = SystemOpId;
     using A = OpKindAttribute;
 
 

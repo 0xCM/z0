@@ -7,17 +7,17 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
-    
+
     using static LogicSig;
 
-    using UAR = UnaryArithmeticKind;
+    using UAR = UnaryArithmeticOpId;
 
     [ApiHost("expr.arith.eval")]
     public class ArithExprEval : IApiHost<ArithExprEval>
     {
-        
+
         [Op, NumericClosures(UnsignedInts)]
         public static LiteralExpr<T> eval<T>(IArithmeticExpr<T> expr)
             where T : unmanaged
@@ -41,7 +41,7 @@ namespace Z0.Logix
             switch(expr)
             {
                 case IArithmeticExpr<T> x: return eval(x);
-                default: return LogicEngine.eval(expr);                
+                default: return LogicEngine.eval(expr);
             }
         }
 
@@ -54,7 +54,7 @@ namespace Z0.Logix
                 case ILiteralExpr<T> x:
                     return x.Value;
                 default:
-                    return eval(expr.Value);                
+                    return eval(expr.Value);
             }
         }
 
@@ -62,7 +62,7 @@ namespace Z0.Logix
         static LiteralExpr<T> eval<T>(IArithmeticOpExpr<T> expr)
             where T : unmanaged
         {
-            switch(expr)               
+            switch(expr)
             {
                 case IUnaryArithmeticOpExpr<T> x:
                     return eval(x);
@@ -83,8 +83,8 @@ namespace Z0.Logix
                 default:
                     switch(expr.OpKind)
                     {
-                        case BinaryArithmeticKind.Add: return add(expr);
-                        case BinaryArithmeticKind.Sub: return sub(expr);
+                        case BinaryArithmeticOpId.Add: return add(expr);
+                        case BinaryArithmeticOpId.Sub: return sub(expr);
                         default: throw new NotSupportedException(sig<T>(expr.OpKind));
                     }
             }
@@ -94,7 +94,7 @@ namespace Z0.Logix
         static LiteralExpr<T> eval<T>(IUnaryArithmeticOpExpr<T> expr)
             where T : unmanaged
         {
-            switch(expr.OpKind)               
+            switch(expr.OpKind)
             {
                 case UAR.Inc: return inc(expr);
                 case UAR.Dec: return dec(expr);
@@ -122,7 +122,7 @@ namespace Z0.Logix
         static LiteralExpr<T> negate<T>(IUnaryArithmeticOpExpr<T> a)
             where T : unmanaged
                 => NumericLogix.negate(eval(a).Value);
-    
+
         [Op, NumericClosures(UnsignedInts)]
         static LiteralExpr<T> add<T>(IBinaryArithmeticOpExpr<T> expr)
             where T : unmanaged

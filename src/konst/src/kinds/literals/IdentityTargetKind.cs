@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Enumerates the identifiable things
     /// </summary>
-    public enum IdentityTargetKind
+    public enum IdentityTargetKind : byte
     {
         None = 0,
 

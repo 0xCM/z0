@@ -7,8 +7,8 @@ namespace Z0.Logix
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;    
+
+    using static Konst;
 
     public static partial class TypedLogicSpec
     {
@@ -53,7 +53,7 @@ namespace Z0.Logix
         /// <param name="right">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ComparisonExpr<T> binary<T>(BinaryComparisonKind op, IExpr<T> left, IExpr<T> right)
+        public static ComparisonExpr<T> binary<T>(BinaryComparisonOpId op, IExpr<T> left, IExpr<T> right)
             where T : unmanaged
                 => new ComparisonExpr<T>(op,left,right);
 
@@ -78,6 +78,6 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static RangeExpr<T> rangexpr<T>(T min, T max, T? step = null)
             where T : unmanaged
-                => new RangeExpr<T>(min,max,step ?? As.one<T>());        
-    }       
+                => new RangeExpr<T>(min,max,step ?? As.one<T>());
+    }
 }

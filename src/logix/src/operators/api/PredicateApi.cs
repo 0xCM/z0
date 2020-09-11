@@ -7,18 +7,18 @@ namespace Z0.Logix
     using System;
     using System.Security;
 
-    using static Konst;    
+    using static Konst;
     using static Memories;
     using static LogicSig;
 
-    using BCK = BinaryComparisonKind;
+    using BCK = BinaryComparisonOpId;
 
     [ApiHost]
     public readonly struct PredicateApi
     {
         [Op, NumericClosures(Integers)]
-        public static T eval<T>(BinaryComparisonKind kind, T a, T b)
-            where T : unmanaged            
+        public static T eval<T>(BinaryComparisonOpId kind, T a, T b)
+            where T : unmanaged
         {
             switch(kind)
             {

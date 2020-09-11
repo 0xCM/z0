@@ -19,16 +19,6 @@ namespace Z0
         public static unsafe MemoryAddress address(string src)
             => address(pchar(src));
 
-        /// <summary>
-        /// Presents a reference as an address
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public unsafe static MemoryAddress address<T>(in T src)
-            where T : unmanaged
-                => (ulong)gptr(src);
-
         [MethodImpl(Inline), Op]
         public static MemoryAddress address(IntPtr src)
             => new MemoryAddress((ulong)src.ToInt64());

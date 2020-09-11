@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using A = OpKindAttribute;    
-    using K = BitLogicKind;
+    using A = OpKindAttribute;
+    using K = BitLogicOpId;
 
     public sealed class AndAttribute : A { public AndAttribute() : base(K.And) {} }
 
@@ -39,11 +39,11 @@ namespace Z0
 
     public sealed class FalseAttribute : A { public FalseAttribute() : base(K.False) {} }
 
-    public sealed class SelectAttribute : A { public SelectAttribute() : base(K.Select) {} } 
+    public sealed class SelectAttribute : A { public SelectAttribute() : base(K.Select) {} }
 
     public sealed class NotAttribute : A { public NotAttribute() : base(K.Not) {} }
 
-    public sealed class XorNotAttribute : A { public XorNotAttribute() : base(K.XorNot) {} }    
+    public sealed class XorNotAttribute : A { public XorNotAttribute() : base(K.XorNot) {} }
 
-   
+
 }

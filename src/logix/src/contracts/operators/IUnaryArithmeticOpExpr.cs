@@ -12,7 +12,7 @@ namespace Z0.Logix
     }
 
 
-    public interface IUnaryArithmeticOpExpr<T> :  IUnaryArithmeticOpExpr, IArithmeticOpExpr<T, UnaryArithmeticKind>
+    public interface IUnaryArithmeticOpExpr<T> :  IUnaryArithmeticOpExpr, IArithmeticOpExpr<T, UnaryArithmeticOpId>
         where T : unmanaged
     {
 

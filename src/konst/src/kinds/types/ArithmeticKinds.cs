@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ArithmeticKind;
+    using K = ArithmeticOpId;
     using I = IArithmeticKind;
 
     partial class Kinds
@@ -37,7 +37,7 @@ namespace Z0
 
         //~ Parametric
         //~ -------------------------------------------------------------------
-        
+
         public readonly struct Add<T> : IArithmeticKind<Add,T> {}
 
         public readonly struct Sub<T> : IArithmeticKind<Sub,T> {}
@@ -62,6 +62,6 @@ namespace Z0
 
         public readonly struct Square<T> : IArithmeticKind<Square,T> {}
 
-        public readonly struct Sqrt<T> : IArithmeticKind<Sqrt,T> {}        
+        public readonly struct Sqrt<T> : IArithmeticKind<Sqrt,T> {}
     }
 }

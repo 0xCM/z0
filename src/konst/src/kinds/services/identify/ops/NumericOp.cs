@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static TypeIdentity numeric<T>(T t = default)
             where T : unmanaged
                 => TypeIdentity.numeric(t);
@@ -40,7 +40,7 @@ namespace Z0
             => TypeIdentity.numeric(prefix,arg);
 
         /// <summary>
-        /// Attempts to parse a numeric kind from a string in the form {width}{indicator} 
+        /// Attempts to parse a numeric kind from a string in the form {width}{indicator}
         /// </summary>
         /// <param name="src">The source text</param>
         public static NumericKind numeric(string src)
@@ -48,43 +48,43 @@ namespace Z0
             var input = src.Trim();
             if(string.IsNullOrWhiteSpace(input))
                 return 0;
-            
+
             var indicator = (NumericIndicator)input.Last();
             if(!indicator.IsLiteral() || indicator == NumericIndicator.None)
                 return 0;
-            
+
             var width = 0u;
             if(!uint.TryParse(input.Substring(0, input.Length - 1), out width))
                 return 0;
-            
+
             var nw = (NumericWidth)width;
             if(!nw.IsLiteral())
                 return 0;
-            
+
             var kind = nw.ToNumericKind(indicator);
             if(!kind.IsLiteral())
                 return 0;
-                        
-            return kind;                            
+
+            return kind;
         }
 
         /// <summary>
-        /// Attempts to parse a sequence of numeric kinds from a sequence of strings in the form {width}{indicator} 
+        /// Attempts to parse a sequence of numeric kinds from a sequence of strings in the form {width}{indicator}
         /// </summary>
         /// <param name="src">The source text</param>
         public static IEnumerable<NumericKind> numeric(IEnumerable<string> kinds)
             => from part in kinds
                let x = part.StartsWith(IDI.GenericLocator)
-                    ? numeric(part.Substring(1, part.Length - 1)) 
+                    ? numeric(part.Substring(1, part.Length - 1))
                     : numeric(part)
-                select x;       
-                 
+                select x;
+
         /// <summary>
         /// Produces an identifier of the form {opname}_{bitsize(kind)}{u | i | f}
         /// </summary>
         /// <param name="opname">The base operator name</param>
         /// <param name="k">The primal kind over which the identifier is deined</param>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static OpIdentity NumericOp(string opname, NumericKind k, bool generic = false)
             => OpIdentityBuilder.build(opname, TypeWidth.None, k, generic);
 
@@ -94,10 +94,10 @@ namespace Z0
         /// <param name="opname">The base operator name</param>
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static OpIdentity NumericOp<T>(string opname, NK<T> k, bool generic)
             where T : unmanaged
-                => OpIdentityBuilder.build(opname, TypeWidth.None, k, generic);       
+                => OpIdentityBuilder.build(opname, TypeWidth.None, k, generic);
 
         /// <summary>
         /// Produces an identifier of the form {opname}_g{kind}{u | i | f}
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="opname">The base operator name</param>
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static OpIdentity NumericOp<T>(string opname, bool generic = true)
             where T : unmanaged
                 => OpIdentityBuilder.build(opname, TypeWidth.None, nkind<T>(), generic);
@@ -116,7 +116,7 @@ namespace Z0
         /// <param name="id">The operation kind id</param>
         /// <param name="generic">Whether the operation should include a generic marker</param>
         /// <param name="kinds">The numeric argument kinds</param>
-        public static OpIdentity NumericOp(OpKindId id, bool generic, params NumericKind[] kinds)
+        public static OpIdentity NumericOp(ApiOpId id, bool generic, params NumericKind[] kinds)
         {
             var result = text.build();
             result.Append(id.Format());
@@ -133,7 +133,7 @@ namespace Z0
                 {
                     result.Append(IDI.ArgSep);
                 }
-                
+
                 result.Append(kinds[i].Format());
             }
             result.Append(IDI.ArgsClose);
@@ -146,7 +146,7 @@ namespace Z0
         /// </summary>
         /// <param name="id">The operation kind id</param>
         /// <param name="kinds">The numeric argument kinds</param>
-        public static OpIdentity NumericOp(OpKindId id, params NumericKind[] kinds)
+        public static OpIdentity NumericOp(ApiOpId id, params NumericKind[] kinds)
             => Identify.NumericOp(id,false,kinds);
     }
 }

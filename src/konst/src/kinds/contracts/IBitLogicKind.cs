@@ -6,7 +6,7 @@ namespace Z0
 {
     using static Konst;
 
-    using K = BitLogicKind;
+    using K = BitLogicOpId;
     using I = IBitLogicKind;
 
     /// <summary>
@@ -16,9 +16,9 @@ namespace Z0
     {
         K Kind {get;}
 
-        OpKindId IOpKind.KindId 
-            => (OpKindId)Kind;        
-    }    
+        ApiOpId IOpKind.KindId
+            => (ApiOpId)Kind;
+    }
 
     /// <summary>
     /// Characterizes a reified bitlogic operation classifier
@@ -27,10 +27,10 @@ namespace Z0
     public interface IBitLogicKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        OpKindId IOpKind.KindId 
-            => default(F).KindId;        
+        ApiOpId IOpKind.KindId
+            => default(F).KindId;
     }
-    
+
     /// <summary>
     /// Characterizes a kind-parametric and numeric-parametric bitlogic operation classifier
     /// </summary>
@@ -39,13 +39,13 @@ namespace Z0
     public interface IBitLogicKind<F,T> : IBitLogicKind<F>
         where F : unmanaged, I
     {
-        BitLogicKind I.Kind 
+        BitLogicOpId I.Kind
             => default(F).Kind;
 
         /// <summary>
         /// The parametrically-identified numeric kind
         /// </summary>
-        NumericKind NumericKind 
+        NumericKind NumericKind
             => NumericKinds.kind<T>();
     }
 }

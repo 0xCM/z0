@@ -12,7 +12,7 @@ namespace Z0
 
     public interface IAsmFunctionCases : IBinaryResourceIndex
     {
-        X86Code Case(OpKindId k, params NumericKind[] kinds)
+        X86Code Case(ApiOpId k, params NumericKind[] kinds)
         {
             var id = Identify.NumericOp(k, kinds).ToPropertyName();
             var resource = TryFind(id);

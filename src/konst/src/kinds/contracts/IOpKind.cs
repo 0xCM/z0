@@ -11,16 +11,16 @@ namespace Z0
 
     public interface IOpKind : IKind, ITextual
     {
-        OpKindId KindId {get;}
+        ApiOpId KindId {get;}
 
-        string ITextual.Format() 
+        string ITextual.Format()
             => KindId.ToString().ToLower();
     }
 
     public interface IOpKind<E> : IOpKind, ILiteralKind<E>
         where E : unmanaged, Enum
     {
-        E ITypedLiteral<E>.Class 
+        E ITypedLiteral<E>.Class
             => default;
     }
 
@@ -28,7 +28,7 @@ namespace Z0
         where E : unmanaged, Enum
         where K : unmanaged, IOpKind<E>
     {
-        K Kind => default;     
+        K Kind => default;
     }
 
 
@@ -36,7 +36,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static string Format<K>(this K kind)
-            where K : IOpKind   
-                => kind.Format();        
+            where K : IOpKind
+                => kind.Format();
     }
 }

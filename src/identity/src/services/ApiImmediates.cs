@@ -12,14 +12,14 @@ namespace Z0
 
     public readonly struct ApiImmediates
     {
-        public static DirectApiGroup[] direct(ApiHost host, ImmRefinementKind refinment)
+        public static DirectApiGroup[] direct(ApiHost host, ImmRefinementKind kind)
             => from g in direct(host)
-                let immg = ImmGroup(host, g, refinment)
-                where !immg.IsEmpty
+                let imm = ImmGroup(host, g, kind)
+                where !imm.IsEmpty
                 select g;
 
-        public static GenericApiMethod[] generic(ApiHost host, ImmRefinementKind refinment)
-            => generic(host).Where(op => op.Method.AcceptsImmediate(refinment));
+        public static GenericApiMethod[] generic(ApiHost host, ImmRefinementKind kind)
+            => generic(host).Where(op => op.Method.AcceptsImmediate(kind));
 
         static MethodInfo[] TaggedOps(IApiHost src)
             => src.Methods.Tagged<OpAttribute>();
@@ -40,9 +40,9 @@ namespace Z0
                 where closures.Length != 0
                 select new GenericApiMethod(src, Diviner.GenericIdentity(m), GenericDefintion(m), closures);
 
-        static DirectApiGroup ImmGroup(IApiHost host, DirectApiGroup g, ImmRefinementKind refinment)
+        static DirectApiGroup ImmGroup(IApiHost host, DirectApiGroup g, ImmRefinementKind kind)
             => new DirectApiGroup(g.GroupId, host,
-                g.Members.Where(m => m.Method.AcceptsImmediate(refinment) && m.Method.ReturnsVector()));
+                g.Members.Where(m => m.Method.AcceptsImmediate(kind) && m.Method.ReturnsVector()));
 
        static IMultiDiviner Diviner
             => MultiDiviner.Service;

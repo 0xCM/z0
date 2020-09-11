@@ -3,10 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using static Konst;
 
-    using K = MemoryOpKind;
+    using K = MemoryOpId;
     using I = IMemoryOpKind;
 
     /// <summary>
@@ -16,9 +16,9 @@ namespace Z0
     {
         K Kind {get;}
 
-        OpKindId IOpKind.KindId 
-            => (OpKindId)Kind;        
-    }    
+        ApiOpId IOpKind.KindId
+            => (ApiOpId)Kind;
+    }
 
 
     /// <summary>
@@ -28,8 +28,8 @@ namespace Z0
     public interface IMemoryOpKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        OpKindId IOpKind.KindId 
-            => default(F).KindId;        
+        ApiOpId IOpKind.KindId
+            => default(F).KindId;
     }
 
     /// <summary>
@@ -40,13 +40,13 @@ namespace Z0
     public interface IMemoryOpKind<F,T> : IMemoryOpKind<F>
         where F : unmanaged, I
     {
-        K I.Kind 
+        K I.Kind
             => default(F).Kind;
 
         /// <summary>
         /// The parametrically-identified numeric kind
         /// </summary>
-        NumericKind NumericKind 
+        NumericKind NumericKind
             => NumericKinds.kind<T>();
     }
 }
