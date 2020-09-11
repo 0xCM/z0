@@ -31,7 +31,7 @@ namespace Z0
         /// <summary>
         /// The data type hosts
         /// </summary>
-        ApiDataType[] ApiDataTypes {get;}
+        ApiDataTypes ApiDataTypes {get;}
 
         /// <summary>
         /// The operation hosts
@@ -53,12 +53,12 @@ namespace Z0
         /// Specifies whether the catalog describes any api hosts
         /// </summary>
         bool IsNonEmpty
-            => (Operations.Length + ApiDataTypes.Length) != 0;
+            => (Operations.Length + ApiDataTypes.Count) != 0;
 
         /// <summary>
         /// Specifies whether the catalog describes any api hosts
         /// </summary>
         bool IsEmpty
-            => (Operations.Length + ApiDataTypes.Length) == 0;
+            => (Operations.Length + ApiDataTypes.Count) == 0;
     }
 }

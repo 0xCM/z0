@@ -17,9 +17,9 @@ namespace Z0
         public static PartCatalog catalog(IPart part)
             => new PartCatalog(part, datatypes(part.Owner), apiHosts(part.Owner), svcHostTypes(part.Owner));
 
-        [Op]
-        public static IPartCatalog catalog(Assembly src)
-            => new PartCatalog(src, datatypes(src), apiHosts(src), svcHostTypes(src));
+        // [Op]
+        // public static IPartCatalog catalog(Assembly src)
+        //     => new PartCatalog(src, datatypes(src), apiHosts(src), svcHostTypes(src));
 
         [Op]
         public static PartCatalog[] catalogs(params IPart[] parts)

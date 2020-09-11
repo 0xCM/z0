@@ -15,9 +15,5 @@ namespace Z0
         Custom = 3
     }
 
-    partial class XTend
-    {
-        public static string Format(this SpanKind kind)
-            => kind != 0 ? (kind == SpanKind.Mutable ? IDI.Span : IDI.USpan) : string.Empty;
-    }    
+
 }

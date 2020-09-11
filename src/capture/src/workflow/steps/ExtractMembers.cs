@@ -72,7 +72,7 @@ namespace Z0
             }
         }
 
-        public X86ApiExtract[] Extract(ApiDataType[] types)
+        public X86ApiExtract[] Extract(ApiDataTypes types)
         {
             var extracted = sys.empty<X86ApiExtract>();
             try

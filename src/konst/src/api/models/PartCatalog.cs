@@ -23,7 +23,7 @@ namespace Z0
         /// <summary>
         /// The data types defined by the assembly
         /// </summary>
-        public ApiDataType[] ApiDataTypes {get;}
+        public ApiDataTypes ApiDataTypes {get;}
 
         /// <summary>
         /// The data types defined by the assembly
@@ -44,21 +44,21 @@ namespace Z0
         {
             PartId = part.Id;
             Owner = part.Owner;
-            ApiDataTypes = dtHosts;
+            ApiDataTypes = new ApiDataTypes(PartId,dtHosts);
             Operations = opHosts;
             ServiceHosts = svcHostTypes;
-            ApiHosts = ApiDataTypes.Cast<IApiHost>().Concat(Operations.Cast<IApiHost>()).Array();
+            ApiHosts = dtHosts.Cast<IApiHost>().Cast<IApiHost>().Concat(Operations.Cast<IApiHost>()).Array();
         }
 
-        public PartCatalog(Assembly src, ApiDataType[] dtHosts, ApiHost[] opHosts, Type[] svcHostTypes)
-        {
-            PartId = src.Id();
-            Owner = src;
-            ApiDataTypes = dtHosts;
-            Operations = opHosts;
-            ServiceHosts = svcHostTypes;
-            ApiHosts = ApiDataTypes.Cast<IApiHost>().Concat(Operations.Cast<IApiHost>()).Array();
-        }
+        // public PartCatalog(Assembly src, ApiDataType[] dtHosts, ApiHost[] opHosts, Type[] svcHostTypes)
+        // {
+        //     PartId = src.Id();
+        //     Owner = src;
+        //     ApiDataTypes = dtHosts;
+        //     Operations = opHosts;
+        //     ServiceHosts = svcHostTypes;
+        //     ApiHosts = ApiDataTypes.Cast<IApiHost>().Concat(Operations.Cast<IApiHost>()).Array();
+        // }
 
         /// <summary>
         /// Specifies whether the catalog contains content from an identified assembly
@@ -70,12 +70,12 @@ namespace Z0
         /// Specifies whether the catalog describes any api hosts
         /// </summary>
         public bool IsNonEmpty
-            => (Operations.Length + ApiDataTypes.Length) != 0;
+            => (Operations.Length + ApiDataTypes.Count) != 0;
 
         /// <summary>
         /// Specifies whether the catalog describes any api hosts
         /// </summary>
         public bool IsEmpty
-            => (Operations.Length + ApiDataTypes.Length) == 0;
+            => (Operations.Length + ApiDataTypes.Count) == 0;
     }
 }

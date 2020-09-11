@@ -51,15 +51,15 @@ namespace Z0
 
             try
             {
-                using var extract = new ExtractMembers(State, Ct);
-                var extracted = z.@readonly(extract.Extract(DataTypes).GroupBy(x => x.Host).Select(x => kvp(x.Key, x.Array())).Array());
-                var count = extracted.Length;
-                for(var i=0u; i<count; i++)
-                {
-                    ref readonly var x = ref skip(extracted,i);
-                    using var emit = new EmitHostArtifacts(State, x.Key, x.Value, Target, Ct);
-                    emit.Run();
-                }
+                // using var extract = new ExtractMembers(State, Ct);
+                // var extracted = z.@readonly(extract.Extract(DataTypes).GroupBy(x => x.Host).Select(x => kvp(x.Key, x.Array())).Array());
+                // var count = extracted.Length;
+                // for(var i=0u; i<count; i++)
+                // {
+                //     ref readonly var x = ref skip(extracted,i);
+                //     using var emit = new EmitCaptureArtifacts(State, x.Key, x.Value, Target, Ct);
+                //     emit.Run();
+                // }
 
             }
             catch(Exception e)

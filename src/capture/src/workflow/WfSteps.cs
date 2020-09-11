@@ -112,7 +112,7 @@ namespace Z0
     [Step]
     public readonly struct EmitHostArtifactsStep : IWfStep<EmitHostArtifactsStep>
     {
-        public const string StepName = nameof(EmitHostArtifacts);
+        public const string StepName = nameof(EmitCaptureArtifacts);
 
         public static WfStepId StepId
             => step<EmitHostArtifactsStep>();
@@ -151,7 +151,7 @@ namespace Z0
     [Step]
     public readonly struct ManagePartCaptureStep : IWfStep<ManagePartCaptureStep>
     {
-        public const string StepName = nameof(ManagePartCapture);
+        public const string StepName = nameof(CaptureParts);
 
         public static WfStepId StepId => step<ManagePartCaptureStep>();
     }

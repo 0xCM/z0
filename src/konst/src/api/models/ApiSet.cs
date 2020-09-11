@@ -65,11 +65,11 @@ namespace Z0
             get => Catalogs.SelectMany(c => c.ApiHosts);
         }
 
-        public IApiHost[] DataTypes
-        {
-            [MethodImpl(Inline)]
-            get => Catalogs.SelectMany(c => c.ApiDataTypes).Cast<IApiHost>().Array();
-        }
+        // public IApiHost[] DataTypes
+        // {
+        //     [MethodImpl(Inline)]
+        //     get => Catalogs.SelectMany(c => c.ApiDataTypes).Cast<IApiHost>().Array();
+        // }
 
         public IApiHost[] OpHosts
         {

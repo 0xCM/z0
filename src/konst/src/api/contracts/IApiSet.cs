@@ -19,8 +19,8 @@ namespace Z0
 
         ResolvedApi Composition {get;}
 
-        IApiHost[] DataTypes
-            => Catalogs.SelectMany(c => c.ApiDataTypes).Cast<IApiHost>().Array();
+        // IApiHost[] DataTypes
+        //     => Catalogs.SelectMany(c => c.ApiDataTypes).Cast<IApiHost>().Array();
 
         IApiHost[] OpHosts
             => Catalogs.SelectMany(c => c.Operations).Cast<IApiHost>().Array();

@@ -34,7 +34,8 @@ namespace Z0
 
         public static ApiMembers jit(IApiHost[] src, IWfEventSink sink)
         {
-            var datatypes = jit(src.Where(h => h is ApiDataType).Cast<ApiDataType>());
+            var xyz = src.Where(h => h.IsDataType).Cast<ApiDataType>().GroupBy(x => x.PartId).Select(x => new ApiDataTypes(x.Key, x.ToArray())).Array();
+            var datatypes = jit(xyz);
             var direct = JitDirectMembers(src, sink);
             var generic = JitGenericMembers(src, sink);
             var all = datatypes.Concat(direct).Concat(generic).Array();
@@ -52,20 +53,34 @@ namespace Z0
             return members(located);
         }
 
-        public static ApiMember[] jit(ApiDataType[] src)
+
+        public static ApiMember[] jit(ApiDataTypes[] src)
         {
             var dst = z.list<ApiMember>();
-            var count = src.Length;
+            foreach(var types in src)
+                dst.AddRange(jit(types));
+            var collected = dst.ToArray();
+            Array.Sort(collected);
+            return collected;
+        }
+
+        public static ApiMember[] jit(ApiDataTypes src)
+        {
+            var dst = z.list<ApiMember>();
+            var count = src.Count;
             var exclusions = ApiDataType.Ignore;
 
-            Array.Sort(src);
+            //Array.Sort(src);
+            ref var lead = ref src.LeadingCell;
 
-            for(var i=0; i<count; i++)
+            for(var i=0u; i<count; i++)
             {
-                var host = src[i];
+                var host = skip(lead,i);
                 dst.AddRange(jit(host, exclusions));
             }
-            return dst.ToArray();
+            var collected = dst.ToArray();
+            Array.Sort(collected);
+            return collected;
         }
 
         public static ApiMember[] JitGenericMembers(IApiHost[] src, IWfEventSink sink)

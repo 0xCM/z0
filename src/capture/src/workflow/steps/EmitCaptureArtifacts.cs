@@ -13,7 +13,7 @@ namespace Z0
     using static z;
     using static EmitHostArtifactsStep;
 
-    public ref struct EmitHostArtifacts
+    public ref struct EmitCaptureArtifacts
     {
         public IWfCaptureState State {get;}
 
@@ -41,7 +41,7 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        public EmitHostArtifacts(IWfCaptureState state, ApiHostUri src, X86ApiExtract[] extracts, IPartCapturePaths dst, CorrelationToken ct)
+        public EmitCaptureArtifacts(IWfCaptureState state, ApiHostUri src, X86ApiExtract[] extracts, IPartCapturePaths dst, CorrelationToken ct)
         {
             State = state;
             Wf = state.Wf;

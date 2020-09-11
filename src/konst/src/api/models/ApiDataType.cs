@@ -25,6 +25,8 @@ namespace Z0
 
         public ApiHostUri Uri {get;}
 
+        public bool IsDataType => true;
+
         [MethodImpl(Inline)]
         public static implicit operator ApiHostUri(ApiDataType src)
             => src.Uri;

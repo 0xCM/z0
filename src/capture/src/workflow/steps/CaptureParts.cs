@@ -14,7 +14,7 @@ namespace Z0
     using static ManagePartCaptureStep;
     using static z;
 
-    public struct ManagePartCapture : IDisposable
+    public struct CaptureParts : IDisposable
     {
         readonly WfCaptureState State;
 
@@ -27,7 +27,7 @@ namespace Z0
         readonly ICaptureContext Context;
 
         [MethodImpl(Inline)]
-        public ManagePartCapture(WfCaptureState state, CorrelationToken ct)
+        public CaptureParts(WfCaptureState state, CorrelationToken ct)
         {
             State = state;
             Wf = state.Wf;
@@ -91,16 +91,6 @@ namespace Z0
         {
             Capture(src.ApiDataTypes, dst);
             Capture(src.Operations, dst);
-            // var count = hosts.Length;
-
-            // using var step = new CaptureHostMembers(State, dst, Ct);
-            // for(var i=0; i<count; i++)
-            // {
-            //     ref readonly var host = ref skip(hosts,i);
-            //     Context.Raise(new CapturingHost(host.Uri, Ct));
-            //     step.Execute(host);
-            //     Context.Raise(new Asm.CapturedHost(host.Uri, Ct));
-            // }
         }
 
         void Capture(ApiHost[] src, IPartCapturePaths dst)
@@ -117,14 +107,14 @@ namespace Z0
             }
         }
 
-        void Capture(ApiDataType[] src, IPartCapturePaths dst)
+        void Capture(ApiDataTypes src, IPartCapturePaths dst)
         {
             using var step = new ExtractMembers(State, Ct);
             var extracted = @readonly(step.Extract(src).GroupBy(x => x.Host).Select(x => kvp(x.Key, x.Array())).Array());
             for(var i=0; i<extracted.Length; i++)
             {
                 ref readonly var x = ref skip(extracted,i);
-                using var emit = new EmitHostArtifacts(State, x.Key, x.Value, dst, Ct);
+                using var emit = new EmitCaptureArtifacts(State, x.Key, x.Value, dst, Ct);
                 emit.Run();
             }
         }
