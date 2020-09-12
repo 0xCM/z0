@@ -18,7 +18,7 @@ namespace Z0
 
         public MemoryAddress[] Addresses;
 
-        public uint MemberCount;
+        public Count32 MemberCount;
 
         public EncodedMemoryIndex Encoded;
 

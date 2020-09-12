@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     partial class XTend
     {
         /// <summary>
@@ -25,8 +25,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The interface type</typeparam>
         /// <param name="src">The type to examine</param>
-        public static bool Reifies<T>(this Type src)    
-            where T : class    
-                => src.Reifies(typeof(T));
+        public static bool Reifies<T>(this Type src)
+            => src.Reifies(typeof(T));
     }
 }

@@ -17,7 +17,7 @@ namespace Z0
 
         public readonly T Target;
 
-        public readonly R Result;
+        public readonly Outcome<R> Outcome;
 
         [MethodImpl(Inline)]
         public static implicit operator WfDataFlow<S,T,R>((S src, T dst, R result) x)
@@ -32,12 +32,12 @@ namespace Z0
         {
             Source = src;
             Target = dst;
-            Result = result;
+            Outcome = result;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format("{0} -> {1} | {2}", Source, Target, Result);
+            => text.format("{0} -> {1} | {2}", Source, Target, Outcome);
 
         public WfType<S,T> Type
         {
@@ -51,6 +51,6 @@ namespace Z0
         T IDataFlow<S,T>.Target
             => Target;
         R IDataFlow<S,T,R>.Result
-            => Result;
+            => Outcome;
     }
 }

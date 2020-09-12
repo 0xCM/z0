@@ -124,7 +124,7 @@ namespace Z0.Asm
 
         public string RenderAspects<T>(object src)
             where T : class
-                => AsmAspects.From<T>(src).Format();
+                => Aspects.From<T>(src).Format();
 
         static string RenderSegKind(string symbol)
             => text.blank(symbol) ? EmptyString : text.concat("seg:", Chars.LBracket, symbol, Chars.RBracket);

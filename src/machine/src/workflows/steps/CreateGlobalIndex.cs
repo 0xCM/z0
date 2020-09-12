@@ -111,12 +111,12 @@ namespace Z0
                 Wf.Warn(Host.Id, $"Duplicate | {src.Uri.Format()}");
         }
 
-        Span<PartAsmFx> DecodeParts(GlobalCodeIndex src)
+        Span<PartAsmInstructions> DecodeParts(GlobalCodeIndex src)
         {
             Wf.Status(Host.Id, text.format("Decoding {0} entries from {1} parts", src.EntryCount, src.Parts.Length));
 
             var parts = src.Parts;
-            var dst = z.alloc<PartAsmFx>(parts.Length);
+            var dst = z.alloc<PartAsmInstructions>(parts.Length);
             var hostFx = z.list<HostAsmFx>();
             var kMembers = 0u;
             var kHosts = 0u;
@@ -139,10 +139,10 @@ namespace Z0
                     hostFx.Add(fx);
 
                     kHosts++;
-                    kMembers += (uint)fx.MemberCount;
-                    kFx += (uint)fx.TotalCount;
+                    kMembers += fx.RoutineCount;
+                    kFx += fx.InstructionCount;
                 }
-                dst[i] = new PartAsmFx(part, hostFx.ToArray());
+                dst[i] = new PartAsmInstructions(part, hostFx.ToArray());
 
                 kParts++;
 
@@ -156,7 +156,7 @@ namespace Z0
 
         HostAsmFx Decode(X86HostIndex hcs)
         {
-            var instructions = Root.list<MemberAsmFx>();
+            var instructions = Root.list<ApiAsmRoutine>();
             var ip = MemoryAddress.Empty;
             var decoder = State.RoutineDecoder;
             var target = Buffer;
@@ -170,7 +170,7 @@ namespace Z0
                 if(i == 0)
                     ip = Buffer[0].IP;
 
-                var member = MemberAsmFx.Create(ip, uriCode, Buffer.ToArray());
+                var member = ApiAsmRoutine.create(ip, uriCode, Buffer.ToArray());
                 instructions.Add(member);
             }
 
@@ -224,7 +224,7 @@ namespace Z0
             }
         }
 
-        void Process(ReadOnlySpan<PartAsmFx> src)
+        void Process(ReadOnlySpan<PartAsmInstructions> src)
         {
             try
             {
@@ -242,7 +242,7 @@ namespace Z0
             }
         }
 
-        void Process(PartAsmFx fx)
+        void Process(PartAsmInstructions fx)
         {
             try
             {

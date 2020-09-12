@@ -11,15 +11,15 @@ namespace Z0.Asm
 
     public readonly struct AsmCallInfo : IAsmCallInfo
     {
-        readonly BasedAsmFx Fx;
+        readonly ApiInstruction Fx;
 
         public MemoryAddress Target {get;}
 
         public static string[] AspectNames
-            => AsmAspects.Names<IAsmCallInfo>();
+            => Aspects.Names<IAsmCallInfo>();
 
         public string[] AspectValues
-            => AsmAspects.Values<IAsmCallInfo>(this);
+            => Aspects.Values<IAsmCallInfo>(this);
 
         public MemoryAddress Source
             => Fx.IP;
@@ -34,7 +34,7 @@ namespace Z0.Asm
             => Fx.Encoded;
 
         [MethodImpl(Inline)]
-        public AsmCallInfo(BasedAsmFx src)
+        public AsmCallInfo(ApiInstruction src)
         {
             Fx = src;
             Target = MemoryAddress.Empty;

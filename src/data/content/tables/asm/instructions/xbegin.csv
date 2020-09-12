@@ -1,0 +1,5 @@
+# XBEGIN — Transactional Begin
+-------------------------------------------------------------------------------------------------------------------------------------
+| Opcode/Instruction | Op/En | 64/32bit Mode Support | CPUID Feature Flag | Description                                                                                                                                                                           |
+| C7 F8 XBEGIN rel16 | A     | V/V                   | RTM                | Specifies the start of an RTM region. Provides a 16-bit relative offset to compute the address of the fallback instruction address at which execution resumes following an RTM abort. |
+| C7 F8 XBEGIN rel32 | A     | V/V                   | RTM                | Specifies the start of an RTM region. Provides a 32-bit relative offset to compute the address of the fallback instruction address at which execution resumes following an RTM abort. |

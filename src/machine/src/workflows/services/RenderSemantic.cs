@@ -15,12 +15,8 @@ namespace Z0
     using static z;
     using static AsmRenderPatterns;
 
-    public readonly struct RenderSemantic
+    public readonly ref struct RenderSemantic
     {
-        [MethodImpl(Inline)]
-        public static RenderSemantic Create()
-            => new RenderSemantic(new List<string>());
-
         readonly HexFormatConfig DataFormat;
 
         readonly List<string> Buffer;
@@ -34,17 +30,24 @@ namespace Z0
             DataFormat = HexFormatConfig.HexData;
         }
 
-        public static void Render(PartAsmFx src)
+        public void Dispose()
+        {
+
+        }
+
+        public static void Render(PartAsmInstructions src)
         {
             var part = src.Part;
             var archive = Archives.semantic();
             var dir = archive.SemanticDir(part).Clear();
-            var view = @readonly(src.Data);
+            var view = src.ViewHosts;
             var buffer = list<string>();
+            var count = view.Length;
             var semantic = new RenderSemantic(buffer);
-            for(var i = 0; i < src.Data.Length; i++)
+            for(var i=0u; i<count; i++)
             {
                 buffer.Clear();
+
                 ref readonly var host = ref skip(view,i);
                 var path = archive.SemanticPath(host.Uri);
                 using var writer = path.Writer();
@@ -54,8 +57,8 @@ namespace Z0
 
         public void Render(HostAsmFx src, StreamWriter dst)
         {
-            var functions = span(src.Data);
-            var count = src.MemberCount;
+            var functions = span(src.Routines);
+            var count = src.RoutineCount;
 
             for(var i=0; i<count; i++)
             {
@@ -66,7 +69,7 @@ namespace Z0
             }
         }
 
-        void Render(MemberAsmFx src, StreamWriter dst)
+        void Render(ApiAsmRoutine src, StreamWriter dst)
         {
             Buffer.Clear();
 
@@ -77,7 +80,7 @@ namespace Z0
             var sequence = OffsetSequence.Zero;
             var address = src.OffsetAddress;
 
-            for(var i=0; i<src.TotalCount; i++)
+            for(var i=0; i<src.InstructionCount; i++)
             {
                 var fx = src[i];
                 Render(fx, address, sequence);
@@ -115,7 +118,7 @@ namespace Z0
         string Format(BinaryCode src)
             => text.concat("encoded", text.bracket(src.Length), Assign, src.Data.FormatHexBytes(DataFormat));
 
-        string Footer(BasedAsmFx src)
+        string Footer(ApiInstruction src)
         {
             if(asm.isCall(src.Instruction))
             {
@@ -133,7 +136,7 @@ namespace Z0
             return string.Empty;
         }
 
-        void Render(BasedAsmFx src, MemoryOffset address,  OffsetSequence sequence)
+        void Render(ApiInstruction src, MemoryOffset address,  OffsetSequence sequence)
         {
             var id = src.OpId;
             var @base = src.BaseAddress;
@@ -179,7 +182,7 @@ namespace Z0
                 text.concat(text.spaced(address.Offset.FormatAsmHex(6))).PadRight(OffsetAddrPad),
                 sequence.Format(InstructionCountPad));
 
-        string InstructionHeader(BasedAsmFx src, MemoryOffset address, OffsetSequence sequence)
+        string InstructionHeader(ApiInstruction src, MemoryOffset address, OffsetSequence sequence)
         {
             var left = LineLocation(src.Instruction, address, sequence);
             var right = text.concat(src.FormattedInstruction, LeftImply, src.InstructionCode, HeaderSep, Format(src.Encoded));

@@ -16,37 +16,37 @@ namespace Z0
     {
         public IWfShell Wf {get;}
 
-        readonly BitBroker<JmpKind,BasedAsmFx> broker;
+        readonly BitBroker<JmpKind,ApiInstruction> broker;
 
         [MethodImpl(Inline)]
         public void Connect()
         {
-            broker[JmpKind.JA] = Flow.handler<BasedAsmFx>(OnJA);
-            broker[JmpKind.JAE] = Flow.handler<BasedAsmFx>(OnJAE);
-            broker[JmpKind.JB] = Flow.handler<BasedAsmFx>(OnJB);
-            broker[JmpKind.JBE] = Flow.handler<BasedAsmFx>(OnJBE);
+            broker[JmpKind.JA] = Flow.handler<ApiInstruction>(OnJA);
+            broker[JmpKind.JAE] = Flow.handler<ApiInstruction>(OnJAE);
+            broker[JmpKind.JB] = Flow.handler<ApiInstruction>(OnJB);
+            broker[JmpKind.JBE] = Flow.handler<ApiInstruction>(OnJBE);
         }
 
         [MethodImpl(Inline)]
-        public void OnJA(BasedAsmFx fx)
+        public void OnJA(ApiInstruction fx)
         {
             term.announce();
         }
 
         [MethodImpl(Inline)]
-        public void OnJAE(BasedAsmFx fx)
+        public void OnJAE(ApiInstruction fx)
         {
             term.announce();
         }
 
         [MethodImpl(Inline)]
-        public void OnJB(BasedAsmFx fx)
+        public void OnJB(ApiInstruction fx)
         {
             term.announce();
         }
 
         [MethodImpl(Inline)]
-        public void OnJBE(BasedAsmFx fx)
+        public void OnJBE(ApiInstruction fx)
         {
             term.announce();
         }

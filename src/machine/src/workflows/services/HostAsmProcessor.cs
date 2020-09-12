@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct HostAsmProcessor : IAsmProcessor<AsmHandlerKind,HostAsmFx>
+    public readonly struct HostAsmProcessor : IAsmDataProcessor<AsmHandlerKind,HostAsmFx>
     {
         public IWfShell Wf {get;}
 
@@ -32,7 +32,7 @@ namespace Z0
         public void Process()
         {
             var processor = AsmProcessors.create(Wf);
-            var count = Source.Length;
+            var count = Source.RoutineCount;
             for(var j=0; j<count; j++)
             {
                 ref readonly var member = ref Source[j];
@@ -45,7 +45,7 @@ namespace Z0
         public void Process(HostAsmFx src)
         {
             var processor = AsmProcessors.create(Wf);
-            for(var j=0; j<Source.Length; j++)
+            for(var j=0; j<Source.RoutineCount; j++)
             {
                 ref readonly var member = ref src[j];
                 for(var k=0; k<member.Length; k++)

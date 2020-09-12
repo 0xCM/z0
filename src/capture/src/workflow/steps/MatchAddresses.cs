@@ -9,6 +9,8 @@ namespace Z0
 
     using Z0.Asm;
 
+    using static Konst;
+    using static z;
     using static MatchAddressesStep;
 
     public ref struct MatchAddresses
@@ -30,11 +32,19 @@ namespace Z0
             Extracted = extracted;
             Decoded = decoded;
             Ct = ct;
+            Wf.Created(StepId);
+        }
+
+
+        public void Dispose()
+        {
+           Wf.Disposed(StepId);
         }
 
         public void Run()
         {
-            Wf.Running(StepId, Ct);
+            Wf.Running(StepId, delimit(Extracted.Length, Decoded.Length));
+
             try
             {
                 var a = Extracted.Select(x => x.Address).ToHashSet();
@@ -55,13 +65,7 @@ namespace Z0
                 Wf.Error(StepId, e);
             }
 
-            Wf.Ran(StepId);
-
-        }
-
-        public void Dispose()
-        {
-           Wf.Disposed(StepId);
+            Wf.Ran(StepId, delimit(Extracted.Length, Decoded.Length));
         }
     }
 }

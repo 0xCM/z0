@@ -154,7 +154,7 @@ namespace Z0
                 return;
 
             var hex = X86ApiWriter.save(HostUri, ParsedMembers, HexPath);
-            Wf.Raise(new ApiHexSaved(StepId, HostUri, hex, ParsedPath, Ct));
+            Wf.Raise(new X86UriHexSaved(StepId, HostUri, hex, ParsedPath, Ct));
         }
 
         void SaveCil()

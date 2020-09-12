@@ -28,21 +28,15 @@ namespace Z0.Asm
         /// <summary>
         /// The decoded instructions
         /// </summary>
-        public MemberAsmFx[] Data {get;}
+        public ApiAsmRoutine[] Routines {get;}
 
         [MethodImpl(Inline)]
-        public HostAsmFx(ApiHostUri host, MemberAsmFx[] src)
+        public HostAsmFx(ApiHostUri host, ApiAsmRoutine[] src)
         {
             Uri = host;
-            Data = src.OrderBy(x => x.BaseAddress).ToArray();
-            BaseAddress = Data.Length != 0 ? Data[0].BaseAddress : MemoryAddress.Empty;
+            Routines = src.OrderBy(x => x.BaseAddress).ToArray();
+            BaseAddress = Routines.Length != 0 ? Routines[0].BaseAddress : MemoryAddress.Empty;
         }
-
-        /// <summary>
-        /// The number of host-defined operations
-        /// </summary>
-        public int MemberCount
-            => Data.Length;
 
         /// <summary>
         /// The member instruction content length
@@ -50,22 +44,28 @@ namespace Z0.Asm
         public int Length
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => Routines.Length;
         }
 
         /// <summary>
         /// Indexes into the member instruction content
         /// </summary>
-        public ref MemberAsmFx this[int index]
+        public ref ApiAsmRoutine this[int index]
         {
             [MethodImpl(Inline)]
-             get => ref Data[index];
+             get => ref Routines[index];
         }
 
         /// <summary>
         /// The total instruction count
         /// </summary>
-        public int TotalCount
-            => Data.Sum(i => i.TotalCount);
+        public uint InstructionCount
+            => (uint)Routines.Sum(i => (long)i.InstructionCount);
+
+        public uint RoutineCount
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Routines.Length;
+        }
     }
 }

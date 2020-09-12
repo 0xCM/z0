@@ -11,16 +11,16 @@ namespace Z0
     using static RenderPatterns;
 
     [Event]
-    public readonly struct IndexedInstructions : IWfEvent<IndexedInstructions>
+    public readonly struct IndexedApiInstructions : IWfEvent<IndexedApiInstructions>
     {
-        public static string EventName => nameof(IndexedInstructions);
+        public static string EventName => nameof(IndexedApiInstructions);
 
         public WfEventId EventId {get;}
 
-        public readonly LocatedAsmFxList Index;
+        public readonly ApiInstructions Index;
 
         [MethodImpl(Inline)]
-        public IndexedInstructions(LocatedAsmFxList src, CorrelationToken ct)
+        public IndexedApiInstructions(ApiInstructions src, CorrelationToken ct)
         {
             EventId = (EventName, ct);
             Index = src;
@@ -30,6 +30,6 @@ namespace Z0
             => FlairKind.Ran;
 
         public string Format()
-            => text.format(PSx2, EventId, Index.Indexed.Length);
+            => text.format(PSx2, EventId, Index.Storage.Length);
     }
 }

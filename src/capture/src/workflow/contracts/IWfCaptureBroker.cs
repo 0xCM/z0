@@ -3,9 +3,9 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{    
-    public interface IWfCaptureBroker : IWfImmBroker, IWfCaptureEvents
-    {        
+{
+    public interface IWfCaptureBroker : IWfBroker, IWfCaptureEvents
+    {
 
     }
 }

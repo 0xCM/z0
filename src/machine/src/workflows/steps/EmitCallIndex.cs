@@ -19,9 +19,9 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        public WfDataFlow<PartAsmFx,FilePath> Df;
+        public WfDataFlow<PartAsmInstructions,FilePath> Df;
 
-        public EmitCallIndex(IWfShell wf, PartAsmFx src, CorrelationToken ct)
+        public EmitCallIndex(IWfShell wf, PartAsmInstructions src, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;
@@ -31,21 +31,19 @@ namespace Z0
 
         public void Run()
         {
-
             Wf.Running(StepId, Df.Target);
 
-            var index = LocatedAsmFxList.create(Df.Source.Located.ToArray());
+            ApiInstructions instructions = Df.Source.Instructions;
             var sep = Chars.Pipe;
             using var writer = Df.Target.Writer();
 
-            var data = index.CallData.ToArray();
-            var delimited = data.Select(x => Delimit(x.Rows, sep));
-
+            var calls = instructions.CallData;
+            var delimited = calls.Select(x => Delimit(x.Rows, sep));
             var names = Delimit(AsmCallInfo.AspectNames, sep);
             writer.WriteLine(names);
             z.iter(delimited, writer.WriteLine);
 
-            Wf.Ran(StepId, names.Length);
+            Wf.Ran(StepId, calls.Length);
         }
 
         public void Dispose()

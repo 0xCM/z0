@@ -21,9 +21,9 @@ namespace Z0
             => new WfStepRunning<T>(step, content, ct);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static WfStepRunning<T> running<S,T>(S step, T content, CorrelationToken ct)
-            where S : struct, IWfStep<S>
-                => new WfStepRunning<T>(step.Id, content, ct);
+        public static WfStepRunning<T> running<H,T>(H host, T content, CorrelationToken ct)
+            where H : IWfHost<H>, new()
+                => new WfStepRunning<T>(host.Id, content, ct);
 
         [MethodImpl(Inline)]
         public static WfStepRunning<WfDataFlow<S,T>> running<S,T>(WfStepId step, WfDataFlow<S,T> flow, CorrelationToken ct)

@@ -9,7 +9,10 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct BasedAsmFx : IAsmFxInfo<Instruction>
+    /// <summary>
+    /// Describes an instruction within the context of the defining api member
+    /// </summary>
+    public readonly struct ApiInstruction : IAsmFxInfo<Instruction>
     {
         public X86ApiCode Encoded {get;}
 
@@ -62,15 +65,15 @@ namespace Z0.Asm
             => Instruction.ByteLength;
 
         [MethodImpl(Inline)]
-        public static BasedAsmFx One(MemoryAddress @base, OffsetSequence offseq, Instruction fx, X86ApiCode encoded)
-            => new BasedAsmFx(@base, offseq, fx, encoded);
+        public static ApiInstruction define(MemoryAddress @base, OffsetSequence offseq, Instruction fx, X86ApiCode encoded)
+            => new ApiInstruction(@base, offseq, fx, encoded);
 
-        public static BasedAsmFx[] Many(X86ApiCode code, Instruction[] src)
+        public static ApiInstruction[] map(X86ApiCode code, Instruction[] src)
         {
             var @base = code.Base;
             var offseq = OffsetSequence.Zero;
             var count = src.Length;
-            var dst = new BasedAsmFx[count];
+            var dst = new ApiInstruction[count];
 
             for(ushort i=0; i<count; i++)
             {
@@ -78,14 +81,14 @@ namespace Z0.Asm
                 var data = z.span(code.Encoded.Data);
                 var slice = data.Slice((int)offseq.Offset, fx.ByteLength).ToArray();
                 var recoded = new X86ApiCode(code.OpUri, fx.IP, slice);
-                dst[i] = One(@base, offseq, fx, recoded);
+                dst[i] = define(@base, offseq, fx, recoded);
                 offseq = offseq.AccrueOffset((uint)fx.ByteLength);
             }
             return dst;
         }
 
         [MethodImpl(Inline)]
-        public BasedAsmFx(MemoryAddress @base, OffsetSequence offseq, Instruction fx, X86ApiCode encoded)
+        public ApiInstruction(MemoryAddress @base, OffsetSequence offseq, Instruction fx, X86ApiCode encoded)
         {
             BaseAddress = @base;
             OffsetSeq = offseq;

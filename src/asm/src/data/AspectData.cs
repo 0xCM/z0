@@ -3,14 +3,13 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
     public readonly struct AspectData<T>
-        where T : class
     {
         public T Source {get;}
 

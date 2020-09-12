@@ -23,11 +23,11 @@ namespace Z0
             => BitBrokers.broker64<AsmHandlerKind,HostAsmFx>(buffer, kind);
 
         [MethodImpl(Inline), Op]
-        public static BitBroker<JmpKind,BasedAsmFx> jmp()
-            => BitBrokers.broker64<JmpKind,BasedAsmFx>();
+        public static BitBroker<JmpKind,ApiInstruction> jmp()
+            => BitBrokers.broker64<JmpKind,ApiInstruction>();
 
         [MethodImpl(Inline), Op]
-        public static BitBroker<JmpKind,BasedAsmFx> jmp(WfDataHandler<BasedAsmFx>[] buffer, JmpKind kind = default)
-            => BitBrokers.broker64<JmpKind,BasedAsmFx>(buffer, kind);
+        public static BitBroker<JmpKind,ApiInstruction> jmp(WfDataHandler<ApiInstruction>[] buffer, JmpKind kind = default)
+            => BitBrokers.broker64<JmpKind,ApiInstruction>(buffer, kind);
     }
 }

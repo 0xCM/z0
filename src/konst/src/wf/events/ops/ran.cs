@@ -17,8 +17,8 @@ namespace Z0
             => new WfStepRan<T>(step, content, ct);
 
         [MethodImpl(Inline)]
-        public static WfStepRan<T> ran<S,T>(S step, T content, CorrelationToken ct)
-            where S : struct, IWfStep<S>
-                => new WfStepRan<T>(step.Id, content, ct);
+        public static WfStepRan<T> ran<H,T>(H host, T content, CorrelationToken ct)
+            where H : IWfHost<H>, new()
+                => new WfStepRan<T>(host.Id, content, ct);
     }
 }

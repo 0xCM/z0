@@ -62,7 +62,7 @@ namespace Z0.Asm
                     ref var iced = ref decoded.AllocUninitializedElement();
                     decoder.Decode(out iced);
                     var format = formatter.FormatInstruction(iced, @base);
-                    var z = IceExtractors.Fx(iced,format);
+                    var z = IceExtractors.extract(iced,format);
                     dst.Add(z);
                     f(z);
                 }
@@ -100,7 +100,7 @@ namespace Z0.Asm
                 var instructions = new Asm.Instruction[decoded.Count];
                 var formatted = formatter.FormatInstructions(decoded, @base);
                 for(var i=0; i<instructions.Length; i++)
-                    instructions[i] = IceExtractors.Fx(decoded[i], formatted[i]);
+                    instructions[i] = IceExtractors.extract(decoded[i], formatted[i]);
                 return AsmInstructions.Create(instructions, code);
             }
             catch(Exception e)

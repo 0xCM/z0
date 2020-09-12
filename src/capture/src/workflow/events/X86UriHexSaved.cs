@@ -11,9 +11,9 @@ namespace Z0.Asm
     using static Render;
     using static z;
 
-    public readonly struct ApiHexSaved : IWfEvent<ApiHexSaved>
+    public readonly struct X86UriHexSaved : IWfEvent<X86UriHexSaved>
     {
-        public const string EventName = nameof(ApiHexSaved);
+        public const string EventName = nameof(X86UriHexSaved);
 
         public WfEventId EventId {get;}
 
@@ -28,7 +28,7 @@ namespace Z0.Asm
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ApiHexSaved(WfStepId step, ApiHostUri host, X86UriHex[] code, FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
+        public X86UriHexSaved(WfStepId step, ApiHostUri host, X86UriHex[] code, FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
             Host = host;
@@ -39,7 +39,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public ApiHexSaved(WfStepId step, ApiHostUri host, X86UriHex[] code, FS.FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
+        public X86UriHexSaved(WfStepId step, ApiHostUri host, X86UriHex[] code, FS.FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
             Host = host;

@@ -83,7 +83,7 @@ namespace Z0
                 CollectAsmStats(e.Host, e.Functions);
         }
 
-        public void OnEvent(ApiHexSaved e)
+        public void OnEvent(X86UriHexSaved e)
         {
             Sink.Deposit(e);
 

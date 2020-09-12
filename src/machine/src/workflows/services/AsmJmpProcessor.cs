@@ -16,34 +16,34 @@ namespace Z0
 
     public interface IJmpProcessor
     {
-        void OnJA(BasedAsmFx src)
+        void OnJA(ApiInstruction src)
         {
             term.announce();
         }
 
-        void OnJAE(BasedAsmFx src)
+        void OnJAE(ApiInstruction src)
         {
             term.announce();
         }
 
-        void OnJB(BasedAsmFx src)
+        void OnJB(ApiInstruction src)
         {
             term.announce();
         }
 
-        void OnJBE(BasedAsmFx src)
+        void OnJBE(ApiInstruction src)
         {
             term.announce();
         }
     }
 
-    public struct ProcessAsmJmp : IJmpProcessor, IDisposable
+    public struct AsmJmpProcessor : IJmpProcessor, IDisposable
     {
-        readonly BitBroker<JmpKind,BasedAsmFx> broker;
+        readonly BitBroker<JmpKind,ApiInstruction> broker;
 
         public IWfShell Wf {get;}
 
-        public readonly PartAsmFx Source;
+        public readonly PartAsmInstructions Source;
 
         public readonly FilePath Target;
 
@@ -52,10 +52,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Connect()
         {
-            broker[JmpKind.JA] = Flow.handler<BasedAsmFx>(OnJA);
-            broker[JmpKind.JAE] = Flow.handler<BasedAsmFx>(OnJAE);
-            broker[JmpKind.JB] = Flow.handler<BasedAsmFx>(OnJB);
-            broker[JmpKind.JBE] = Flow.handler<BasedAsmFx>(OnJBE);
+            broker[JmpKind.JA] = Flow.handler<ApiInstruction>(OnJA);
+            broker[JmpKind.JAE] = Flow.handler<ApiInstruction>(OnJAE);
+            broker[JmpKind.JB] = Flow.handler<ApiInstruction>(OnJB);
+            broker[JmpKind.JBE] = Flow.handler<ApiInstruction>(OnJBE);
         }
 
         public void Dispose()
@@ -64,7 +64,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ProcessAsmJmp(IWfShell wf, PartAsmFx src,  bool connect = true)
+        public AsmJmpProcessor(IWfShell wf, PartAsmInstructions src,  bool connect = true)
         {
             Wf = wf;
             broker = AsmBrokers.jmp();
@@ -75,7 +75,7 @@ namespace Z0
                 Connect();
         }
 
-        void Dispatch(in BasedAsmFx fx)
+        void Dispatch(in ApiInstruction fx)
         {
             var mnemonic = fx.Mnemonic;
             var kind = JmpKind.None;
@@ -143,21 +143,21 @@ namespace Z0
 
         public void Process()
         {
-            var hosts = Source.View;
+            var hosts = Source.ViewHosts;
             var kHost = Source.Length;
             for(var i=0u; i<kHost; i++)
             {
                 ref readonly var host = ref skip(hosts,i);
-                var kMember = host.Length;
-                var members = @readonly(host.Data);
+                var kMember = host.RoutineCount;
+                var members = @readonly(host.Routines);
                 for(var j=0u; j<kMember; j++)
                 {
                     ref readonly var member = ref skip(members,j);
-                    var instructions = @readonly(member.Content);
+                    var instructions = member.Instructions.View;
                     var iCount = instructions.Length;
                     for(var k=0u; k<iCount; k++)
                     {
-                        ref readonly var fx = ref skip(instructions,k);
+                        ref readonly var fx = ref skip(instructions, k);
                         var fc = fx.Instruction.FlowControl;
                         switch(fc)
                         {
@@ -200,7 +200,7 @@ namespace Z0
             }
         }
 
-        void Fill(in BasedAsmFx src, JmpKind jk, ref JmpInfo dst)
+        void Fill(in ApiInstruction src, JmpKind jk, ref JmpInfo dst)
         {
             var target = asm.branch(src.BaseAddress, src.Instruction, 0);
             dst.Kind = jk;
@@ -213,25 +213,25 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void OnJA(BasedAsmFx fx)
+        public void OnJA(ApiInstruction fx)
         {
 
         }
 
         [MethodImpl(Inline)]
-        public void OnJAE(BasedAsmFx fx)
+        public void OnJAE(ApiInstruction fx)
         {
 
         }
 
         [MethodImpl(Inline)]
-        public void OnJB(BasedAsmFx fx)
+        public void OnJB(ApiInstruction fx)
         {
 
         }
 
         [MethodImpl(Inline)]
-        public void OnJBE(BasedAsmFx fx)
+        public void OnJBE(ApiInstruction fx)
         {
 
         }

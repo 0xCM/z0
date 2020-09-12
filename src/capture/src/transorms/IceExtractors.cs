@@ -7,19 +7,90 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
 
-    using Iced.Intel;
-
     using static Konst;
+    using Iced.Intel;
 
     using Iced = Iced.Intel;
 
-    partial class IceExtractors
+    [ApiHost]
+    struct IceExtractors
     {
+        [MethodImpl(Inline), Op]
+        public static UsedMemory[] UsedMemory(Iced.InstructionInfo src)
+            => src.GetUsedMemory().Map(x => Deicer.Thaw(x));
+
+        [MethodImpl(Inline), Op]
+        public static UsedRegister[] UsedRegisters(Iced.InstructionInfo src)
+            => src.GetUsedRegisters().Map(x => Deicer.Thaw(x));
+
+        [MethodImpl(Inline), Op]
+        public static InstructionInfo FxInfo(Iced.Instruction src)
+            => Deicer.Thaw(src.GetInfo());
+
+        [MethodImpl(Inline)]
+        public static Func<UsedMemory[]> UsedMemoryDefer(Iced.InstructionInfo src)
+            => () => UsedMemory(src);
+
+        [MethodImpl(Inline)]
+        public static Func<UsedRegister[]> UsedRegistersDefer(Iced.InstructionInfo src)
+            => () => src.GetUsedRegisters().Map(x => Deicer.Thaw(x));
+
+        [MethodImpl(Inline)]
+        public static Func<InstructionInfo> InxsInfoDefer(Iced.Instruction src)
+            => () => FxInfo(src);
+
+        [MethodImpl(Inline)]
+        public static Func<OpAccess[]> OpAccessDefer(Iced.InstructionInfo src)
+            => () => OpAccess(src);
+
+        [MethodImpl(Inline)]
+        public static Func<AsmFlowInfo> FlowInfoDefer(Iced.Code src)
+            => () => FxFlow(src);
+
+        [Op]
+        public static AsmFxCode FxCode(Iced.Instruction src)
+        {
+            var opcode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
+            return new AsmFxCode(opcode.ToInstructionString(), opcode.ToOpCodeString());
+        }
+
+        [MethodImpl(Inline), Op]
+        public static OpAccess[] OpAccess(Iced.InstructionInfo src)
+            => Memories.array(
+                    Deicer.Thaw(src.Op0Access),
+                    Deicer.Thaw(src.Op0Access),
+                    Deicer.Thaw(src.Op2Access),
+                    Deicer.Thaw(src.Op3Access),
+                    Deicer.Thaw(src.Op4Access)).Where(x => x != 0);
+       [Op]
+       public static AsmFlowInfo FxFlow(Iced.Code src)
+            => new AsmFlowInfo
+            {
+                Code = Deicer.Thaw(src),
+                ConditionCode = Deicer.Thaw(src.GetConditionCode()),
+                IsStackInstruction = src.IsStackInstruction(),
+                FlowControl = Deicer.Thaw(src.FlowControl()),
+                IsJccShortOrNear = src.IsJccShortOrNear(),
+                IsJccNear = src.IsJccNear(),
+                IsJccShort = src.IsJccShort(),
+                IsJmpShort = src.IsJmpShort(),
+                IsJmpNear = src.IsJmpNear(),
+                IsJmpShortOrNear = src.IsJmpShortOrNear(),
+                IsJmpFar = src.IsJmpFar(),
+                IsCallNear = src.IsCallNear(),
+                IsCallFar = src.IsCallFar(),
+                IsJmpNearIndirect = src.IsJmpNearIndirect(),
+                IsJmpFarIndirect = src.IsJmpFarIndirect(),
+                IsCallNearIndirect = src.IsCallNearIndirect(),
+                IsCallFarIndirect = src.IsCallFarIndirect()
+            };
+
        /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
-        public static Instruction Fx(Iced.Instruction src, string formatted)
+        [Op]
+        public static Instruction extract(Iced.Instruction src, string formatted)
         {
             var info = src.GetInfo();
             return new Instruction
@@ -100,7 +171,7 @@ namespace Z0.Asm
                 NextIP = src.NextIP,
                 NextIP16 = src.NextIP16,
                 NextIP32 = src.NextIP32,
-                OpCode = FxCodeInfo(src.OpCode),
+                OpCode = extract(src.OpCode),
                 OpCount = src.OpCount,
                 OpMask = Deicer.Thaw(src.OpMask),
                 Op0Kind = Deicer.Thaw(src.Op0Kind),
@@ -126,5 +197,56 @@ namespace Z0.Asm
                 ZeroingMasking = src.ZeroingMasking,
            };
         }
+
+        /// <summary>
+        /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
+        /// </summary>
+        /// <param name="src">The iced source value</param>
+        [Op]
+        public static OpCodeInfo extract(Iced.OpCodeInfo src)
+            => new OpCodeInfo
+            {
+                AddressSize = src.AddressSize,
+                CanBroadcast = src.CanBroadcast,
+                CanSuppressAllExceptions = src.CanSuppressAllExceptions,
+                CanUseBndPrefix = src.CanUseBndPrefix,
+                CanUseHintTakenPrefix = src.CanUseHintTakenPrefix,
+                CanUseNotrackPrefix = src.CanUseNotrackPrefix,
+                CanUseOpMaskRegister = src.CanUseOpMaskRegister,
+                CanUseZeroingMasking = src.CanUseZeroingMasking,
+                CanUseLockPrefix = src.CanUseLockPrefix,
+                CanUseXacquirePrefix = src.CanUseXacquirePrefix,
+                CanUseXreleasePrefix = src.CanUseXreleasePrefix,
+                CanUseRepPrefix = src.CanUseRepPrefix,
+                CanUseRepnePrefix = src.CanUseRepnePrefix,
+                CanUseRoundingControl = src.CanUseRoundingControl,
+                Code = Deicer.Thaw(src.Code),
+                Encoding = Deicer.Thaw(src.Encoding),
+                Fwait = src.Fwait,
+                IsInstruction = src.IsInstruction,
+                IsGroup = src.IsGroup,
+                IsLIG = src.IsLIG,
+                IsWIG = src.IsWIG,
+                IsWIG32 = src.IsWIG32,
+                GroupIndex = src.GroupIndex,
+                L = src.L,
+                MandatoryPrefix = Deicer.Thaw(src.MandatoryPrefix),
+                Mode16 = src.Mode16,
+                Mode32 = src.Mode32,
+                Mode64 = src.Mode64,
+                OpCode = src.OpCode,
+                OperandSize = src.OperandSize,
+                OpCount = src.OpCount,
+                Op0Kind = Deicer.Thaw(src.Op0Kind),
+                Op1Kind = Deicer.Thaw(src.Op1Kind),
+                Op2Kind = Deicer.Thaw(src.Op2Kind),
+                Op3Kind = Deicer.Thaw(src.Op3Kind),
+                Op4Kind = Deicer.Thaw(src.Op4Kind),
+                RequireNonZeroOpMaskRegister = src.RequireNonZeroOpMaskRegister,
+                Table = Deicer.Thaw(src.Table),
+                TupleType = Deicer.Thaw(src.TupleType),
+                W = src.W,
+            };
+        static IceConverters Deicer => IceConverters.Service;
     }
 }

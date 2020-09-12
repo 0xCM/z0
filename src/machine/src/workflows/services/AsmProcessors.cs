@@ -32,9 +32,9 @@ namespace Z0
         /// </summary>
         /// <param name="context">The process context</param>
         [MethodImpl(Inline), Op]
-        public static IAsmProcessor create(IWfShell wf)
+        public static IApiAsmProcessor create(IWfShell wf)
         {
-            var processor = new ProcessLocatedAsm(wf) as IAsmProcessor;
+            var processor = new ApiAsmProcessor(wf) as IApiAsmProcessor;
             processor.Connect();
             return processor;
         }

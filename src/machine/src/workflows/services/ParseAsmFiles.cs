@@ -59,7 +59,7 @@ namespace Z0
                 Wf.Error(StepId, e);
             }
 
-            Wf.Ran(StepId, Ct);
+            Wf.Ran(StepId);
         }
 
         public void Dispose()

@@ -16,9 +16,9 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
-        readonly PartAsmFx Source;
+        readonly PartAsmInstructions Source;
 
-        public ProcessInstructions(IWfShell wf, PartAsmFx src)
+        public ProcessInstructions(IWfShell wf, PartAsmInstructions src)
         {
             Wf = wf;
             Source = src;
@@ -32,7 +32,7 @@ namespace Z0
 
         void ProcessJumps()
         {
-            using var processor = new ProcessAsmJmp(Wf, Source);
+            using var processor = new AsmJmpProcessor(Wf, Source);
             processor.Process();
         }
 

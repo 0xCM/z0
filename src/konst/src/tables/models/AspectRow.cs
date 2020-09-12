@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
-{        
+namespace Z0
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    public readonly struct AsmAspect
+    public readonly struct AspectRow
     {
         /// <summary>
         /// The aspect name
@@ -32,44 +32,31 @@ namespace Z0.Asm
         public readonly string Description;
 
         [MethodImpl(Inline)]
-        public static AsmAspect Create(string name, object src, object value, string description)
-            => (name,value,src,description);
+        public static implicit operator AspectRow((string name, object src, object value, string description) src)
+            => new AspectRow(src.name, src.src, src.value, src.description);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmAspect((string name, object src, object value, string description) src)
-            => new AsmAspect(src.name, src.src, src.value, src.description);
-
-        [MethodImpl(Inline)]
-        public AsmAspect(string name, object src, object value, string description)
+        public AspectRow(string name, object src, object value, string description)
         {
             Name = name;
             Source = Null.Banish(src);
             Value = Null.Banish(value);
             Description = Null.Banish(description);
         }
-                
-        public string Format(string delimiter)
-            => Name + delimiter + Description;
 
-        public AsmAspect Zero 
-            => Empty;
+        public bool IsEmpty
+            => Value == null || Value is Null;
 
-        public bool IsEmpty 
-            => text.blank(Name) && text.blank(Description) && Null.Is(Source) && Null.Is(Value);
-
-        public bool IsNonEmpty 
+        public bool IsNonEmpty
             => !IsEmpty;
 
         public string Format()
-            => text.concat(Source, text.bracket(Name)," = ", Description); 
+            => text.concat(Source, text.bracket(Name)," = ", Description);
 
         public override string ToString()
             => Format();
 
-        public static AsmAspect Empty 
+        public static AspectRow Empty
             => (string.Empty, Null.Value, Null.Value, string.Empty);
-        
-        const string DefaultSep 
-            = CharText.Space + CharText.Pipe + CharText.Space;        
     }
 }

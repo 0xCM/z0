@@ -16,7 +16,7 @@ namespace Z0
     {
         public X86UriHex[] Emitted;
 
-        public ApiHexSaved Event;
+        public X86UriHexSaved Event;
 
         readonly IWfShell Wf;
 
@@ -48,7 +48,7 @@ namespace Z0
         public void Run()
         {
             Emitted = X86ApiWriter.save(Uri, Source, Target);
-            Event = new ApiHexSaved(Host.Id, Uri, Emitted, Target, Wf.Ct);
+            Event = new X86UriHexSaved(Host.Id, Uri, Emitted, Target, Wf.Ct);
             Wf.Raise(Event);
         }
     }

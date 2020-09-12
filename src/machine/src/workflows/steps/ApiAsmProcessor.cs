@@ -11,21 +11,21 @@ namespace Z0
 
     using static Konst;
 
-    public struct ProcessLocatedAsm : IAsmProcessor
+    public struct ApiAsmProcessor : IApiAsmProcessor
     {
         public IWfShell Wf {get;}
 
-        public IWfDataBroker<Mnemonic,BasedAsmFx> Broker {get;}
+        public IWfDataBroker<Mnemonic,ApiInstruction> Broker {get;}
 
         [MethodImpl(Inline)]
-        public ProcessLocatedAsm(IWfShell context)
+        public ApiAsmProcessor(IWfShell context)
         {
             Wf = context;
-            Broker = Flow.broker<Mnemonic,BasedAsmFx>((int)Mnemonic.LAST);
+            Broker = Flow.broker<Mnemonic,ApiInstruction>((int)Mnemonic.LAST);
         }
 
         [MethodImpl(Inline)]
-        public void Process(BasedAsmFx src)
+        public void Process(ApiInstruction src)
         {
             Broker.Relay(src.Mnemonic, src);
         }
