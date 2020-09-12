@@ -110,7 +110,7 @@ namespace Z0.Asm
         AsmFxList ToList(AsmInstructions src)
             => asm.list(src, new X86Code(BaseAddress, src.Encoded));
 
-        void RunPipe(ReadOnlySpan<ApiHex> src, StreamWriter log)
+        void RunPipe(ReadOnlySpan<X86UriHex> src, StreamWriter log)
         {
             var t1 = asm.trigger(Mnemonic.Vinserti128, Handlers.OnVinserti128);
             var t2 = asm.trigger(Mnemonic.Vmovupd, Handlers.OnVmovupd);
@@ -149,6 +149,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         IApiHexArchive UriBitsArchive(FolderPath root)
-            =>  Archives.hex(root);
+            =>  Archives.x86(root);
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
 
     public interface ITestNumericDynamic : ITestRandom, TTestOperatorMatch, TCheckNumeric, TCheckDynamic
     {
-        TestCaseRecord MatchNumeric<T>(in BufferSeq buffers, UnaryOp<T> f, ApiHex src)
+        TestCaseRecord MatchNumeric<T>(in BufferSeq buffers, UnaryOp<T> f, X86UriHex src)
             where T : unmanaged
         {
             var g = Dynamic.EmitUnaryOp<T>(buffers[Main],src);
@@ -27,7 +27,7 @@ namespace Z0
             return TestAction(check, src.Id);
         }
 
-        TestCaseRecord MatchNumeric<T>(in BufferSeq buffers, BinaryOp<T> f, ApiHex src)
+        TestCaseRecord MatchNumeric<T>(in BufferSeq buffers, BinaryOp<T> f, X86UriHex src)
             where T : unmanaged
         {
             var g = Dynamic.EmitBinaryOp<T>(buffers[Main],src);
@@ -43,7 +43,7 @@ namespace Z0
             return TestAction(check, src.Id);
         }
 
-        TestCaseRecord MatchNumeric<T>(in BufferSeq buffers, TernaryOp<T> f, ApiHex src)
+        TestCaseRecord MatchNumeric<T>(in BufferSeq buffers, TernaryOp<T> f, X86UriHex src)
             where T : unmanaged
         {
             var g = Dynamic.EmitTernaryOp<T>(buffers[Main],src);

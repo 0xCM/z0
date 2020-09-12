@@ -51,7 +51,7 @@ namespace Z0
         public ApiMember Member
             => Context.Member;
 
-        public ApiHex ApiBits
+        public X86UriHex ApiBits
             => Context.ApiBits;
     }
 }

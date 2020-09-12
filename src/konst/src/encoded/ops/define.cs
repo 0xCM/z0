@@ -25,15 +25,15 @@ namespace Z0
             => new X86Code(address, code);
 
         [MethodImpl(Inline), Op]
-        public static ApiHex define(MemoryAddress address, OpUri uri, in BinaryCode data)
-            => new ApiHex(address, uri, data);
+        public static X86UriHex define(MemoryAddress address, OpUri uri, in BinaryCode data)
+            => new X86UriHex(address, uri, data);
 
         [MethodImpl(Inline), Op]
         public static BinaryCode define(byte[] data)
             => new BinaryCode(data);
 
         [MethodImpl(Inline), Op]
-        public static X86ApiMember define(in ApiMember member, in ApiHex data)
+        public static X86ApiMember define(in ApiMember member, in X86UriHex data)
             => new X86ApiMember(member, data);
 
         [MethodImpl(Inline), Op]

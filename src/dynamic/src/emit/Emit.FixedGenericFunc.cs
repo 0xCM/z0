@@ -11,7 +11,7 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The target buffer</param>
         /// <param name="src">The executable source</param>
-        public static FixedFunc<X0,R> EmitFixedFunc<X0,R>(this BufferToken dst, ApiHex src)
+        public static FixedFunc<X0,R> EmitFixedFunc<X0,R>(this BufferToken dst, X86UriHex src)
             => (FixedFunc<X0,R>)dst.Handle.EmitFixed(src.Id, typeof(FixedFunc<X0,R>), typeof(R), typeof(X0));
 
         /// <summary>
@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The target buffer</param>
         /// <param name="src">The executable source</param>
-        public static FixedFunc<X0,X1,R> EmitFixedFunc<X0,X1,R>(this BufferToken dst, ApiHex src)
+        public static FixedFunc<X0,X1,R> EmitFixedFunc<X0,X1,R>(this BufferToken dst, X86UriHex src)
             => (FixedFunc<X0,X1,R>)dst.Handle.EmitFixed(src.Id, typeof(FixedFunc<X0,X1,R>), typeof(R), typeof(X0), typeof(X1));
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The target buffer</param>
         /// <param name="src">The executable source</param>
-        public static FixedFunc<X0,X1,X2,R> EmitFixedFunc<X0,X1,X2,R>(this BufferToken dst, ApiHex src)
+        public static FixedFunc<X0,X1,X2,R> EmitFixedFunc<X0,X1,X2,R>(this BufferToken dst, X86UriHex src)
             => (FixedFunc<X0,X1,X2,R>)dst.Handle.EmitFixed(src.Id, typeof(FixedFunc<X0,X1,X2,R>), typeof(R), typeof(X0), typeof(X1), typeof(X2));
     }
 }

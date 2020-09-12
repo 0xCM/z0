@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Collects code derived from members declared by a specific operation host
     /// </summary>
-    public readonly struct EncodedMemberIndex
+    public readonly struct X86HostIndex
     {
         /// <summary>
         /// The defining host
@@ -25,7 +25,7 @@ namespace Z0
         public readonly X86ApiCode[] Data;
 
         [MethodImpl(Inline)]
-        public EncodedMemberIndex(ApiHostUri id, X86ApiCode[] code)
+        public X86HostIndex(ApiHostUri id, X86ApiCode[] code)
         {
             Host = id;
             Data = code.OrderBy(x => x.Base);

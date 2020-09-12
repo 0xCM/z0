@@ -13,7 +13,7 @@ namespace Z0
 
     public readonly struct CodeReader
     {
-        public static IEnumerable<ApiHexIndex> index(FolderPath src, IWfEventSink sink, params PartId[] owners)
+        public static IEnumerable<X86UriIndex> index(FolderPath src, IWfEventSink sink, params PartId[] owners)
         {
             if(owners.Length != 0)
             {
@@ -48,26 +48,26 @@ namespace Z0
         public static FilePath[] files(FolderPath root)
             => root.Files(FileExtensions.HexLine, true).Array();
 
-        public static ApiHex[] read(FilePath src)
+        public static X86UriHex[] read(FilePath src)
             => ApiHexReader.Service.Read(src).Where(x => x.IsNonEmpty).Array();
 
-        public static ApiHex[] read(FolderPath root, ApiHostUri host)
+        public static X86UriHex[] read(FolderPath root, ApiHostUri host)
         {
             var hfn = FileName.define(host.Owner, host.Name, FileExtensions.HexLine);
             var path = files(root).Where(f => f.FileName == hfn).FirstOrDefault(FilePath.Empty);
             return read(path);
         }
 
-        static ApiHexIndex index(FilePath src, IWfEventSink status)
+        static X86UriIndex index(FilePath src, IWfEventSink status)
         {
             var uri = ApiUriParser.host(src.FileName);
             if(uri.Failed || uri.Value.IsEmpty)
             {
                 status.Deposit(WfEvents.error(nameof(CodeReader), $"{src} not found", default));
-                return ApiHexIndex.Empty;
+                return X86UriIndex.Empty;
             }
 
-            var dst = z.list<ApiHex>();
+            var dst = z.list<X86UriHex>();
             foreach(var item in read(src))
                 if(item.IsNonEmpty)
                     dst.Add(item);

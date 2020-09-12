@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     /// <summary>
     ///  Defines the dataset accumulated for an operation-targeted capture workflow
@@ -34,7 +35,7 @@ namespace Z0
             Extracted = extracted;
             Parsed = parsed;
             Method = method;
-            z.insist(extracted.Base, parsed.Base);
+            insist(extracted.Base, parsed.Base);
             OpUri = OpUri.hex(ApiQuery.uri(method.DeclaringType), method.Name, id);
             TermCode = term;
             Cil = FunctionDynamic.cil(method);

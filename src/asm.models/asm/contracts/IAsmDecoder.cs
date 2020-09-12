@@ -18,6 +18,12 @@ namespace Z0.Asm
         Option<AsmRoutine> Decode(X86ApiCapture src);
 
         /// <summary>
+        /// Decodes a function from member capture data
+        /// </summary>
+        /// <param name="src">The source data</param>
+        Option<AsmRoutine> Decode(X86ApiMember src);
+
+        /// <summary>
         /// Decodes an asm routine from a parsed extract
         /// </summary>
         /// <param name="src">The source data</param>
@@ -29,13 +35,13 @@ namespace Z0.Asm
         /// <param name="src">The code source</param>
         Option<AsmFxList> Decode(X86Code src);
 
-        Option<AsmInstructions> Decode(ApiHex src);
+        Option<AsmInstructions> Decode(X86UriHex src);
 
         Option<AsmRoutine> Decode(X86MemberRefinement src, Action<Instruction> f);
 
         Option<AsmFxList> Decode(X86ApiCode src, Action<Instruction> f);
 
-        Option<AsmFxList> Decode(ApiHex src, Action<Instruction> f);
+        Option<AsmFxList> Decode(X86UriHex src, Action<Instruction> f);
 
         Option<AsmFxList> Decode(X86Code src, Action<Instruction> f);
     }

@@ -7,12 +7,11 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Applied to a structural artifact or member field, method or property to
-    /// indicate that the target provides some sort of literal data
+    /// Advertises that a type defines literal resources with with content that
+    /// could potentially be modified by a build step
     /// </summary>
-    public class LiteralProviderAttribute : Attribute
+    public class LiteralResourceAttribute : Attribute
     {
 
     }
-
 }

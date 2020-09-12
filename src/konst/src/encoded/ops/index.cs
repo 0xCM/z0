@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
     using static z;
 
     using static Konst;
@@ -14,15 +13,15 @@ namespace Z0
     partial struct Encoded
     {
         [MethodImpl(Inline), Op]
-        public static ApiHexIndex index(ApiHostUri host, ApiHex[] code)
-            => new ApiHexIndex(host,code);
+        public static X86UriIndex index(ApiHostUri host, X86UriHex[] code)
+            => new X86UriIndex(host,code);
 
         [MethodImpl(Inline), Op]
-        public static X86PartMembers index(PartId part, EncodedMemberIndex[] src)
-            => new X86PartMembers(part,src);
+        public static X86PartIndex index(PartId part, X86HostIndex[] src)
+            => new X86PartIndex(part,src);
 
         [MethodImpl(Inline), Op]
-        public static EncodedMemberIndex index(ApiHostUri id, X86ApiCode[] code)
-            => new EncodedMemberIndex(id,code);
+        public static X86HostIndex index(ApiHostUri id, X86ApiCode[] code)
+            => new X86HostIndex(id,code);
     }
 }

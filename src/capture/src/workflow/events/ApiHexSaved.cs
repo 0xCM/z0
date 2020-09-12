@@ -19,21 +19,32 @@ namespace Z0.Asm
 
         public readonly ApiHostUri Host;
 
-        public readonly ApiHex[] Code;
+        public readonly X86UriHex[] ApiHex;
 
         public readonly Count32 MemberCount;
 
-        public readonly FilePath Target;
+        public readonly FS.FilePath Target;
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ApiHexSaved(WfStepId step, ApiHostUri host, ApiHex[] code, FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
+        public ApiHexSaved(WfStepId step, ApiHostUri host, X86UriHex[] code, FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
             Host = host;
             MemberCount = code.Length;
-            Code = code;
+            ApiHex = code;
+            Target = FS.path(dst.Name);
+            Flair = flair;
+        }
+
+        [MethodImpl(Inline)]
+        public ApiHexSaved(WfStepId step, ApiHostUri host, X86UriHex[] code, FS.FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
+        {
+            EventId = (EventName, step, ct);
+            Host = host;
+            MemberCount = code.Length;
+            ApiHex = code;
             Target = dst;
             Flair = flair;
         }

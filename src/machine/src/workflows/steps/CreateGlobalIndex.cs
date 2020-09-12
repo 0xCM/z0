@@ -12,7 +12,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static CreateGlobalIndexHost;
 
     public ref struct CreateGlobalIndex
     {
@@ -155,7 +154,7 @@ namespace Z0
             return dst;
         }
 
-        HostAsmFx Decode(EncodedMemberIndex hcs)
+        HostAsmFx Decode(X86HostIndex hcs)
         {
             var instructions = Root.list<MemberAsmFx>();
             var ip = MemoryAddress.Empty;

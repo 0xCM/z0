@@ -60,6 +60,12 @@ namespace Z0
             get => Data?.Length ?? 0;
         }
 
+        public ref T First
+        {
+            [MethodImpl(Inline)]
+            get => ref first(Edit);
+        }
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]

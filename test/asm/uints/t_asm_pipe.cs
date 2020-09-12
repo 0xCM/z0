@@ -26,7 +26,7 @@ namespace Z0.Asm
         }
 
 
-        void check_unary_ops(ApiHex[] src)
+        void check_unary_ops(X86UriHex[] src)
         {
             var query = AsmCheck.UriBitQuery;
             foreach(var code in query.WithParameterCount(src, 1))
@@ -49,7 +49,7 @@ namespace Z0.Asm
             var id = PartId.GMath;
             var paths = AppPaths.ForApp(PartId.Control);
             var capture = AsmCheck.CaptureArchive(paths.AppCaptureRoot);
-            var archive = Archives.hex(capture.X86Dir);
+            var archive = Archives.x86(capture.X86Dir);
             var direct = archive.Read(dSrc).ToArray();
             var generic = archive.Read(gSrc).ToArray();
             check_unary_ops(direct);

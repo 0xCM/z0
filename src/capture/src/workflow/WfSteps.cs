@@ -9,6 +9,21 @@ namespace Z0
 
     using Asm;
 
+    [WfHost]
+    public sealed class EmitX86HexHost : WfHost<EmitX86HexHost>
+    {
+        protected override void Execute(IWfShell shell)
+        {
+
+        }
+    }
+
+    [WfHost]
+    public sealed class MatchEmissionsHost : WfHost<MatchEmissionsHost>
+    {
+
+    }
+
     [Step]
     public readonly struct EmitCaptureIndexStep : IWfStep<EmitCaptureIndexStep>
     {

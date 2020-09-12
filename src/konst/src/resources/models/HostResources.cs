@@ -15,7 +15,7 @@ namespace Z0
     /// </summary>
     public readonly struct HostResources
     {
-        public static HostResources from(ApiHexIndex src)
+        public static HostResources from(X86UriIndex src)
         {
             var count = src.Code.Length;
             var buffer = alloc<BinaryResourceSpec>(count);

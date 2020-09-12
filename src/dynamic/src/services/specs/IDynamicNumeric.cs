@@ -6,13 +6,13 @@ namespace Z0
 {
     public interface IDynamicNumeric
     {
-        UnaryOp<T> EmitUnaryOp<T>(BufferToken dst, ApiHex src)
+        UnaryOp<T> EmitUnaryOp<T>(BufferToken dst, X86UriHex src)
             where T : unmanaged;
 
-        BinaryOp<T> EmitBinaryOp<T>(BufferToken dst, ApiHex src)
+        BinaryOp<T> EmitBinaryOp<T>(BufferToken dst, X86UriHex src)
             where T : unmanaged;
 
-        TernaryOp<T> EmitTernaryOp<T>(BufferToken dst, ApiHex src)
+        TernaryOp<T> EmitTernaryOp<T>(BufferToken dst, X86UriHex src)
             where T : unmanaged;
     }
 }

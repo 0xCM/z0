@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// The hex bits found at the end of a uri
     /// </summary>
-    public readonly struct ApiHex : IX86ApiMember<ApiHex,BinaryCode>
+    public readonly struct X86UriHex : IX86ApiMember<X86UriHex,BinaryCode>
     {
         /// <summary>
         /// The code's base address
@@ -30,11 +30,15 @@ namespace Z0
         public readonly BinaryCode Code;
 
         [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(ApiHex src)
+        public static implicit operator BinaryCode(X86UriHex src)
             => src.Code;
 
         [MethodImpl(Inline)]
-        public ApiHex(MemoryAddress @base, OpUri uri, BinaryCode src)
+        public static implicit operator X86Code(X86UriHex src)
+            => new X86Code(src.Base, src.Code);
+
+        [MethodImpl(Inline)]
+        public X86UriHex(MemoryAddress @base, OpUri uri, BinaryCode src)
         {
             Base = @base;
             Uri = uri;
@@ -108,7 +112,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(ApiHex src)
+        public bool Equals(X86UriHex src)
             => Encoded.Equals(src.Encoded);
 
         public string Format(int uripad)
@@ -124,7 +128,7 @@ namespace Z0
         /// <summary>
         /// No code, no identity, no life
         /// </summary>
-        public static ApiHex Empty
-            => new ApiHex(MemoryAddress.Empty, OpUri.Empty, BinaryCode.Empty);
+        public static X86UriHex Empty
+            => new X86UriHex(MemoryAddress.Empty, OpUri.Empty, BinaryCode.Empty);
     }
 }

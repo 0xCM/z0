@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
 
     using static CodeGenerator;
     using static Konst;
@@ -37,7 +36,7 @@ namespace Z0
             Ct = ct;
             SourceDir = context.Paths.AppCaptureRoot;
             TargetDir = context.Paths.ResourceRoot + FolderName.Define(ProjectName);
-            Archive = Archives.hex(SourceDir);
+            Archive = Archives.x86(SourceDir);
             Wf.Created(StepId);
         }
 
@@ -68,7 +67,7 @@ namespace Z0
             Wf.Disposed(StepId);
         }
 
-        void Emit(ApiHexIndex src, FolderPath dst)
+        void Emit(X86UriIndex src, FolderPath dst)
         {
             var path = (dst + FolderName.Define("src")) + src.Host.FileName(FileExtensions.Cs);
             var resources = HostResources.from(src);

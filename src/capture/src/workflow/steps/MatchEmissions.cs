@@ -6,48 +6,57 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using Z0.Asm;
 
     using static Konst;
     using static z;
 
-    public readonly struct MatchEmissions
+    public ref struct MatchEmissions
     {
-        public IWfCaptureContext Workflow {get;}
+        readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
 
-        public ICaptureContext Context
-            => Workflow.Context;
+        readonly MatchEmissionsHost Host;
+
+        readonly TCheckEquatable Claim;
+
+        public MatchedCapturedEmissions Event;
 
         [MethodImpl(Inline)]
-        public MatchEmissions(IWfCaptureContext workflow, CorrelationToken ct)
+        public MatchEmissions(IWfShell wf)
         {
-            Workflow = workflow;
-            Ct = ct;
+            Wf = wf;
+            Ct = Wf.Ct;
+            Host = new MatchEmissionsHost();
+            Claim = CheckEquatable.Checker;
+            Wf.Created(Host.Id);
+            Event = default;
         }
 
-        TCheckEquatable Claim
-            => CheckEquatable.Checker;
 
-        public void Run(ApiHostUri host, ReadOnlySpan<ApiHex> srcA, FilePath srcB)
+        public void Dispose()
+        {
+            Wf.Disposed(Host.Id);
+        }
+
+        public void Run(ApiHostUri host, ReadOnlySpan<X86UriHex> x86data, FS.FilePath x86file)
         {
             var wfStateless = Capture.Services;
-            //var reader = wfStateless.HexReader;
             var reader = Archives.reader<ApiHexReader>();
-            var fileSrc = @readonly(reader.Read(srcB));
+            var fileSrc = @readonly(reader.Read(FilePath.Define(x86file.Name)));
 
-            Claim.Eq(fileSrc.Length, srcA.Length);
-            Claim.Eq(Spans.count<ApiHex>(fileSrc, s => s.OpUri.IsEmpty),0);
-            for(var i=0; i<srcA.Length; i++)
+            Claim.Eq(fileSrc.Length, x86data.Length);
+            Claim.Eq(Spans.count<X86UriHex>(fileSrc, s => s.OpUri.IsEmpty),0);
+            for(var i=0; i<x86data.Length; i++)
             {
-                Claim.Eq(skip(fileSrc,i).OpUri, skip(srcA,i).OpUri);
-                Claim.Eq(skip(fileSrc,i).Encoded.Length, skip(srcA, i).Encoded.Length);
+                Claim.Eq(skip(fileSrc,i).OpUri, skip(x86data,i).OpUri);
+                Claim.Eq(skip(fileSrc,i).Encoded.Length, skip(x86data, i).Encoded.Length);
             }
 
-            Context.Raise(new MatchedCapturedEmissions(host, srcA.Length, srcB));
+            Event = new MatchedCapturedEmissions(Host.Id, host, (uint)x86data.Length, x86file, Ct);
+            Wf.Raise(Event);
         }
     }
 }

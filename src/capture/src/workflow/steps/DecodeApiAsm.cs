@@ -16,28 +16,27 @@ namespace Z0
     {
         public IWfShell Wf {get;}
 
-        readonly CorrelationToken Ct;
-
         ICaptureContext Capture {get;}
 
         [MethodImpl(Inline)]
         internal DecodeApiAsm(IWfShell wf, ICaptureContext capture, CorrelationToken ct)
         {
             Wf = wf;
-            Ct = ct;
             Capture = capture;
             Wf.Created(StepId);
         }
 
-        public AsmRoutine[] Run(ApiHostUri host, X86MemberRefinement[] src)
+        public AsmRoutine[] Run(ApiHostUri host, X86ApiMembers src)
         {
             try
             {
+                var count = src.Count;
                 Wf.Running(StepId, host);
-                var dst = z.alloc<AsmRoutine>(src.Length);
-                for(var i=0; i<src.Length; i++)
+                var view = src.View;
+                var dst = z.alloc<AsmRoutine>(count);
+                for(var i=0; i<count; i++)
                 {
-                    var member = src[i];
+                    ref readonly var member = ref z.skip(view,i);
                     var decoded = Capture.Decoder.Decode(member);
                     if(!decoded)
                         HandleFailure(member);
@@ -45,7 +44,7 @@ namespace Z0
                     dst[i] = decoded ? decoded.Value : AsmRoutine.Empty;
                 }
 
-                Wf.Raise(new FunctionsDecoded(StepId, host, dst, Ct));
+                Wf.Raise(new FunctionsDecoded(StepId, host, dst, Wf.Ct));
                 return dst;
             }
             catch(Exception e)
@@ -61,7 +60,7 @@ namespace Z0
             writer.WriteAsm(src);
         }
 
-        void HandleFailure(in X86MemberRefinement member)
+        void HandleFailure(in X86ApiMember member)
         {
             Wf.Error(StepId, $"Could not decode {member}");
         }

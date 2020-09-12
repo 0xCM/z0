@@ -11,6 +11,15 @@ namespace Z0
 
     public interface IShellPaths
     {
+        IPartCaptureArchive PartCaptureArchive
+            => Archives.capture(FS.dir(LogRoot.Name) + FS.folder(FS.FolderNames.Capture));
+
+        IPartCaptureArchive CaptureArchive()
+            => Archives.capture(FS.dir(LogRoot.Name) + FS.folder(Capture) + FS.folder(Artifacts));
+
+        IHostCaptureArchive CaptureArchive(ApiHostUri host)
+            => HostCaptureArchive.create(CaptureArchive().ArchiveRoot, host);
+
         string ShellName
             => Assembly.GetEntryAssembly().GetSimpleName();
 

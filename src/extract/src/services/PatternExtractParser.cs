@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     using BP = BytePatternParser<EncodingPatternKind>;
 
@@ -67,7 +67,7 @@ namespace Z0
             }
         }
 
-        public ExtractParseResult Parse(X86ApiExtract src, int seq)
+        public ExtractParseResult Parse(in X86ApiExtract src, uint seq)
         {
             try
             {
@@ -77,24 +77,66 @@ namespace Z0
                 if(term != ExtractTermCode.Fail)
                 {
                     var code = Locate(src.Encoded.Base, parser.Parsed, term == ExtractTermCode.CTC_Zx7 ? Zx7Cut : 0);
-                    return new ExtractParseResult(new X86MemberRefinement(src, seq, term, code));
+
+                    var data = new X86ApiMember(src.Member, new X86UriHex(code.Base, src.OpUri, code), (uint)seq, term);
+                    return new ExtractParseResult(new X86MemberRefinement(src, (int)seq, term, code));
                 }
                 else
-                    return ExtractParseResult.FromFailure(new ExtractParseFailure(src, seq, term));
+                    return ExtractParseResult.FromFailure(new ExtractParseFailure(src, (int)seq, term));
             }
             catch(Exception e)
             {
                 var msg = AppMsg.colorize($"{src.Member.OpUri} extract parse FAIL: {e}", FlairKind.Warning);
                 term.print(msg);
-                return ExtractParseResult.FromFailure(new ExtractParseFailure(src, seq, ExtractTermCode.Fail));
+                return ExtractParseResult.FromFailure(new ExtractParseFailure(src, (int)seq, ExtractTermCode.Fail));
             }
+        }
+
+        public Outcome<X86ApiMember> ParseMember(in X86ApiExtract src, uint seq)
+        {
+            try
+            {
+                var parser = Parser;
+                var status = parser.Parse(src.Encoded);
+                var term = status.HasFailed() ? ExtractTermCode.Fail : parser.Result.ToTermCode();
+                if(term != ExtractTermCode.Fail)
+                {
+                    var code = Locate(src.Encoded.Base, parser.Parsed, term == ExtractTermCode.CTC_Zx7 ? Zx7Cut : 0);
+                    return new X86ApiMember(src.Member, new X86UriHex(code.Base, src.OpUri, code), seq, term);
+                }
+                else
+                    return z.fail<X86ApiMember>(term.ToString());
+            }
+            catch(Exception e)
+            {
+                return e;
+            }
+        }
+
+        public X86ApiMembers ParseMembers(ReadOnlySpan<X86ApiExtract> src)
+        {
+            var count = src.Length;
+            if(count == 0)
+                return default;
+
+            var buffer = alloc<X86ApiMember>(src.Length);
+            ref var dst = ref first(span(buffer));
+            for(var i=0u; i<count; i++)
+            {
+                var outcome = ParseMember(skip(src,i),i);
+                if(outcome)
+                    seek(dst,i) = outcome.Data;
+                else
+                    seek(dst,i) = X86ApiMember.Empty;
+            }
+            return buffer;
         }
 
         public ExtractParseResults Parse(X86ApiExtract[] src)
         {
             var parsed = list<X86MemberRefinement>(src.Length);
             var failed = list<ExtractParseFailure>();
-            for(var i=0; i<src.Length; i++)
+            for(var i=0u; i<src.Length; i++)
                 Parse(src[i], i).OnResult(f => failed.Add(f), p => parsed.Add(p));
             return (failed.ToArray(), parsed.ToArray());
         }

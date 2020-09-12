@@ -9,34 +9,42 @@ namespace Z0.Asm
 
     using static Konst;
 
-    using E = MatchedCapturedEmissions;
-
-    public readonly struct MatchedCapturedEmissions : IWfEvent<E>
+    public readonly struct MatchedCapturedEmissions : IWfEvent<MatchedCapturedEmissions>
     {
-        public WfEventId EventId  => WfEventId.define("Placeholder");
+        public const string EventName = nameof(MatchedCapturedEmissions);
 
-        public readonly ApiHostUri Host;
-        
-        public readonly int Count;
+        public WfEventId EventId {get;}
 
-        public readonly FilePath TargetPath;
+        readonly ApiHostUri Host;
+
+        readonly Count32 Count;
+
+        readonly FS.FilePath TargetPath;
+
+        public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public static E Define(ApiHostUri host, int count, FilePath path)
-            => new E(host,count,path);
-        
-        [MethodImpl(Inline)]
-        public MatchedCapturedEmissions(ApiHostUri host, int count, FilePath path)
+        public MatchedCapturedEmissions(WfStepId step, ApiHostUri host, uint count, FilePath path, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
         {
+            EventId = (EventName, step, ct);
             Host = host;
             Count = count;
-            TargetPath = path;              
+            TargetPath = FS.path(path.Name);
+            Flair = flair;
         }
-        
+
+        [MethodImpl(Inline)]
+        public MatchedCapturedEmissions(WfStepId step, ApiHostUri host, uint count, FS.FilePath path, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
+        {
+            EventId = (EventName, step, ct);
+            Host = host;
+            Count = count;
+            TargetPath = path;
+            Flair = flair;
+        }
+
+        [MethodImpl(Inline)]
         public string Format()
-            => $"{Count} {Host} members in memory were matched with emissions written to {TargetPath}";
-        
-        public static E Empty 
-            => default;
-    }    
+            => Render.format(EventId, Host, Count, TargetPath);
+    }
 }

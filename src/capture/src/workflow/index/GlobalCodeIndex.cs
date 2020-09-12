@@ -77,11 +77,11 @@ namespace Z0
             => Memories[location];
 
         [MethodImpl(Inline)]
-        public EncodedMemberIndex CodeSet(ApiHostUri id)
+        public X86HostIndex CodeSet(ApiHostUri id)
             => Encoded.index(id, HostCode[id]);
 
         [MethodImpl(Inline)]
-        public X86PartMembers CodeSet(PartId id)
+        public X86PartIndex CodeSet(PartId id)
             => Encoded.index(id, Hosts.Map(CodeSet));
 
         public X86ApiCode this[MemoryAddress location]
@@ -90,13 +90,13 @@ namespace Z0
             get => Code(location);
         }
 
-        public EncodedMemberIndex this[ApiHostUri id]
+        public X86HostIndex this[ApiHostUri id]
         {
             [MethodImpl(Inline)]
             get => CodeSet(id);
         }
 
-        public X86PartMembers this[PartId id]
+        public X86PartIndex this[PartId id]
         {
             [MethodImpl(Inline)]
             get => CodeSet(id);

@@ -20,6 +20,7 @@ namespace Z0
 
         public FolderPath ShellExeDir {get;}
 
+
         [MethodImpl(Inline)]
         public ShellPaths(PartId id, FolderPath log)
         {

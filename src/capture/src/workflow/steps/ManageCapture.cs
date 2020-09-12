@@ -9,8 +9,6 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static ManageCaptureStep;
-
     public struct ManageCapture : IManageCapture
     {
         readonly WfCaptureState State;
@@ -91,8 +89,9 @@ namespace Z0
 
             if(State.Settings.MatchEmissions)
             {
-                var step = new MatchEmissions(State.CWf, Ct);
-                step.Run(e.Host, e.Code, e.Target);
+                using var step = new MatchEmissions(Wf);
+                step.Run(e.Host, e.ApiHex, e.Target);
+                Broker.Raise(step.Event);
             }
         }
 

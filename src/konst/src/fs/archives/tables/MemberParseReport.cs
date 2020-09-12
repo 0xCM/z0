@@ -17,15 +17,32 @@ namespace Z0
     {
         public ApiHostUri ApiHost {get;}
 
-        [MethodImpl(Inline)]
-        public static MemberParseReport create(ApiHostUri host, params R[] records)
-            => new MemberParseReport(host, records);
+        public static ParseResult<MemberParseReport> parse(FilePath src)
+        {
+            var result = MemberParseRecord.load(src);
+            if(result.Succeeded && (result.Value.Length != 0))
+            {
+                var records = result.Value;
+                return ParseResult.Success(src.Name, MemberParseReport.create(records[0].Uri.Host, records));
+            }
+            else
+            {
+                if(result.Succeeded)
+                    return ParseResult.Success(src.Name, MemberParseReport.Empty);
+                else
+                    return ParseResult.Fail<MemberParseReport>(src.Name);
+            }
+        }
 
-        static R Record(in X86MemberRefinement extract, uint seq)
-            => new R
+        [MethodImpl(Inline)]
+        public static MemberParseReport create(ApiHostUri host, params MemberParseRecord[] src)
+            => new MemberParseReport(host, src);
+
+        static MemberParseRecord record(in X86ApiMember extract, uint seq)
+            => new MemberParseRecord
                 (
                     Seq : (int)seq,
-                    SourceSequence: extract.Sequence,
+                    SourceSequence: (int)extract.Sequence,
                     Address : extract.Address,
                     Length : extract.Encoded.Length,
                     TermCode: extract.TermCode,
@@ -34,15 +51,15 @@ namespace Z0
                     Data : extract.Encoded
                 );
 
-        public static MemberParseReport create(ApiHostUri host, X86MemberRefinement[] extracts)
+        public static MemberParseReport create(ApiHostUri host, X86ApiMembers members)
         {
-            var count = extracts.Length;
+            var count = members.Count;
             var buffer = alloc<R>(count);
             var dst = span(buffer);
-            var src = span(extracts);
+            var src = members.View;
 
             for(var i=0u; i<count; i++)
-                seek(dst,i) = Record(skip(src,i), i);
+                seek(dst,i) = record(skip(src,i), i);
 
             return new MemberParseReport(host, buffer);
         }
@@ -50,8 +67,8 @@ namespace Z0
         public MemberParseReport(){}
 
         [MethodImpl(Inline)]
-        internal MemberParseReport(ApiHostUri host, params R[] records)
-            : base(records)
+        internal MemberParseReport(ApiHostUri host, params MemberParseRecord[] src)
+            : base(src)
         {
             ApiHost = host;
         }

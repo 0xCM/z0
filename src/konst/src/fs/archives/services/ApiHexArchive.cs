@@ -37,26 +37,26 @@ namespace Z0
         public static FilePath[] files(FolderPath root)
             => root.Files(FileExtensions.HexLine, true).Array();
 
-        public static ApiHex[] read(FilePath src)
+        public static X86UriHex[] read(FilePath src)
             => ApiHexReader.Service.Read(src).Where(x => x.IsNonEmpty);
 
-        public static ApiHex[] read(FolderPath root, ApiHostUri host)
+        public static X86UriHex[] read(FolderPath root, ApiHostUri host)
         {
             var hfn = FileName.define(host.Owner, host.Name, FileExtensions.HexLine);
             var path = files(root).Where(f => f.FileName == hfn).FirstOrDefault(FilePath.Empty);
             return read(path);
         }
 
-        public static ApiHexIndex index(FilePath src, IMultiSink status)
+        public static X86UriIndex index(FilePath src, IMultiSink status)
         {
             var uri = ApiUriParser.host(src.FileName);
             if(uri.Failed || uri.Value.IsEmpty)
             {
                 status.Deposit(AppErrors.define(nameof(ApiHexArchive), uri.Reason));
-                return ApiHexIndex.Empty;
+                return X86UriIndex.Empty;
             }
 
-            var dst = z.list<ApiHex>();
+            var dst = z.list<X86UriHex>();
             foreach(var item in read(src))
                 if(item.IsNonEmpty)
                     dst.Add(item);
@@ -64,7 +64,7 @@ namespace Z0
             return Encoded.index(uri.Value, dst.Array());
         }
 
-        public IEnumerable<ApiHex> Read(ApiHostUri host)
+        public IEnumerable<X86UriHex> Read(ApiHostUri host)
         {
             var hfn = FileName.define(host.Owner, host.Name, FileExtensions.HexLine);
             var path = Files(host.Owner).Where(f => f.FileName == hfn).FirstOrDefault(FilePath.Empty);
@@ -77,7 +77,7 @@ namespace Z0
         public IEnumerable<FilePath> Files(PartId owner)
             => ArchiveRoot.Files(owner, FileExtensions.HexLine, true);
 
-        public IEnumerable<ApiHexIndex> ReadIndices(params PartId[] owners)
+        public IEnumerable<X86UriIndex> ReadIndices(params PartId[] owners)
         {
             if(owners.Length != 0)
             {
@@ -100,13 +100,13 @@ namespace Z0
             }
         }
 
-        public ApiHexIndex ReadIndex(FilePath file)
+        public X86UriIndex ReadIndex(FilePath file)
             => index(file, Sink);
 
-        public IEnumerable<ApiHex> Read()
+        public IEnumerable<X86UriHex> Read()
             => Read(_ => true);
 
-        public IEnumerable<ApiHex> Read(PartId owner)
+        public IEnumerable<X86UriHex> Read(PartId owner)
         {
             foreach(var file in Files(owner))
             foreach(var item in Read(file))
@@ -114,7 +114,7 @@ namespace Z0
                     yield return item;
         }
 
-        public IEnumerable<ApiHex> Read(Func<FileName,bool> predicate)
+        public IEnumerable<X86UriHex> Read(Func<FileName,bool> predicate)
         {
             foreach(var file in Files().Where(f => predicate(f.FileName)))
             foreach(var item in Read(file))
@@ -129,14 +129,14 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source file path</param>
         /// <param name="bytesep">The hex byte delimiter</param>
-        public IEnumerable<ApiHex> Read(FilePath src)
+        public IEnumerable<X86UriHex> Read(FilePath src)
             => ApiHexReader.Service.Read(src);
 
         /// <summary>
         /// Reads a moniker-identified, default-formatted hex-line file
         /// </summary>
         /// <param name="id">The identifying moniker</param>
-        public IEnumerable<ApiHex> Read(OpIdentity id)
+        public IEnumerable<X86UriHex> Read(OpIdentity id)
             => Read(ArchiveRoot + FileName.define(id, FileExtensions.HexLine));
     }
 }

@@ -11,23 +11,20 @@ namespace Z0
     using static RenderPatterns;
     using static EmitParsedReportStep;
 
-    using Z0.Asm;
-
     public readonly ref struct EmitParsedReport
     {
-
         readonly CorrelationToken Ct;
 
         readonly ApiHostUri Host;
 
-        readonly X86MemberRefinement[] Source;
+        readonly X86ApiMembers Source;
 
         readonly FilePath Target;
 
         readonly IWfShell Wf;
 
         [MethodImpl(Inline)]
-        internal EmitParsedReport(IWfCaptureState state, ApiHostUri host, X86MemberRefinement[] src, FilePath dst, CorrelationToken ct)
+        internal EmitParsedReport(IWfCaptureState state, ApiHostUri host, X86ApiMembers src, FilePath dst, CorrelationToken ct)
         {
             Wf = state.Wf;
             Ct = ct;

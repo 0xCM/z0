@@ -19,7 +19,7 @@ namespace Z0
     public readonly struct ApiCodeIndex
     {
         [Op]
-        public static ApiCodeIndex create(ApiIndex members, OpIndex<ApiHex> code)
+        public static ApiCodeIndex create(ApiIndex members, OpIndex<X86UriHex> code)
         {
             var apicode = from pair in members.Intersect(code).Enumerated
                           let l = pair.Item1

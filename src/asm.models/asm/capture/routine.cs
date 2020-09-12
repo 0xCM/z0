@@ -22,6 +22,14 @@ namespace Z0
             return new AsmRoutine(encoding.OpUri, sig, code, encoding.TermCode, src);
         }
 
+        [MethodImpl(Inline), Op]
+        public static AsmRoutine routine(X86ApiMember member, AsmInstructions asm)
+        {
+            var code = new X86ApiCode(member.OpUri, member.Encoded);
+            var sig = member.Method.Signature().Format();
+            return new AsmRoutine(member.OpUri, sig, code, member.TermCode, new AsmFxList(asm, member.Encoded));
+        }
+
         [Op]
         public static AsmRoutine routine(OpUri uri, string sig, AsmFxBlock src, bool check = false)
         {

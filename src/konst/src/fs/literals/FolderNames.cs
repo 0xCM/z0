@@ -11,7 +11,7 @@ namespace Z0
         /// <summary>
         /// Common Folder Name Literals
         /// </summary>
-        [LiteralProvider]
+        [LiteralResource]
         public readonly struct FolderNames
         {
             public const string Test = "test";
@@ -47,6 +47,10 @@ namespace Z0
             public const string Results = "results";
 
             public const string Config = ".config";
+
+            public const string Archive = "archive";
+
+            public const string Artifacts = "artifacts";
 
             public const string RespackContent = Respack + "/" + Content;
         }

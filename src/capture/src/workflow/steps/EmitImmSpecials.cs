@@ -19,9 +19,9 @@ namespace Z0
 
     public class EmitImmSpecials : IImmEmitter
     {
-        IWfShell Wf;
+        readonly IWfShell Wf;
 
-        readonly IAsmContext Context;
+        readonly IAsmContext Asm;
 
         readonly IAsmFormatter Formatter;
 
@@ -31,10 +31,10 @@ namespace Z0
 
         readonly IImmSpecializer Specializer;
 
-        public EmitImmSpecials(IWfShell wf, IAsmContext context, IAsmFormatter formatter, IAsmDecoder decoder, FolderPath root, CorrelationToken? ct = null)
+        public EmitImmSpecials(IWfShell wf, IAsmContext asm, IAsmFormatter formatter, IAsmDecoder decoder, FolderPath root, CorrelationToken? ct = null)
         {
             Wf = wf;
-            Context = context;
+            Asm = asm;
             Formatter = formatter;
             CodeArchive = Archives.capture(root);
             Specializer = Capture.Services.ImmSpecializer(decoder);
@@ -61,14 +61,14 @@ namespace Z0
         {
             if(imm8.Length != 0)
             {
-                var exchange = Capture.exchange(Context);
+                var exchange = Capture.exchange(Asm);
                 EmitUnrefined(exchange, imm8.ToImm8Values(ImmRefinementKind.Unrefined), parts);
             }
         }
 
         public void EmitRefined(params PartId[] parts)
         {
-            EmitRefined(Capture.exchange(Context), parts);
+            EmitRefined(Capture.exchange(Asm), parts);
         }
 
         ParameterInfo RefiningParameter(MethodInfo src)

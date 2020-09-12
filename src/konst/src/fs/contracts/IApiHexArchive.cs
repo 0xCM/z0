@@ -30,46 +30,46 @@ namespace Z0
         /// <summary>
         /// Reads all files in the archive
         /// </summary>
-        IEnumerable<ApiHex> Read();
+        IEnumerable<X86UriHex> Read();
 
         /// <summary>
         /// Reads the archived files owned by a specified part
         /// </summary>
-        IEnumerable<ApiHex> Read(PartId part);
+        IEnumerable<X86UriHex> Read(PartId part);
 
         /// <summary>
         /// Reads the archived files owned by a specified host
         /// </summary>
-        IEnumerable<ApiHex> Read(ApiHostUri host);
+        IEnumerable<X86UriHex> Read(ApiHostUri host);
 
         /// <summary>
         /// Reads all files in the archive that satisfy a supplied predicate
         /// </summary>
-        IEnumerable<ApiHex> Read(Func<FileName,bool> predicate);
+        IEnumerable<X86UriHex> Read(Func<FileName,bool> predicate);
 
         /// <summary>
         /// Reads the bits of an identified operation
         /// </summary>
         /// <param name="id">The source path</param>
-        IEnumerable<ApiHex> Read(OpIdentity id);
+        IEnumerable<X86UriHex> Read(OpIdentity id);
 
         /// <summary>
         /// Reads ths bits that live at a specified path
         /// </summary>
         /// <param name="src">The source path</param>
-        IEnumerable<ApiHex> Read(FilePath src);
+        IEnumerable<X86UriHex> Read(FilePath src);
 
         /// <summary>
         /// Reads the code owned by a specified collection of parts
         /// </summary>
         /// <param name="owners">The owning parts</param>
-        IEnumerable<ApiHexIndex> ReadIndices(params PartId[] owners);
+        IEnumerable<X86UriIndex> ReadIndices(params PartId[] owners);
 
         /// <summary>
         /// Reads the code defined by a specified file
         /// </summary>
         /// <param name="src">The source path</param>
-        ApiHexIndex ReadIndex(FilePath src);
+        X86UriIndex ReadIndex(FilePath src);
     }
 
     public interface IApiHexArchive<H> : IApiHexArchive

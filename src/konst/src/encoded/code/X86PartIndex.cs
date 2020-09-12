@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Pairs a part with owned code
     /// </summary>
-    public readonly struct X86PartMembers
+    public readonly struct X86PartIndex
     {
         /// <summary>
         /// The owning part
@@ -22,10 +22,10 @@ namespace Z0
         /// <summary>
         /// The code in the set
         /// </summary>
-        public readonly EncodedMemberIndex[] Data;
+        public readonly X86HostIndex[] Data;
 
         [MethodImpl(Inline)]
-        public X86PartMembers(PartId part, EncodedMemberIndex[] src)
+        public X86PartIndex(PartId part, X86HostIndex[] src)
         {
             Part = part;
             Data = src;

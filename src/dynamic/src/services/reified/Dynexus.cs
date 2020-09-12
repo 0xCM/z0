@@ -163,78 +163,78 @@ namespace Z0
                 => ImmInjector.from(Diviner, I.V256BinaryOpImmInjector.Create<T>(Diviner));
 
         [MethodImpl(Inline)]
-        FixedUnaryOp<F> IFixedDynamic.EmitFixedUnary<F>(BufferToken dst, ApiHex src)
+        FixedUnaryOp<F> IFixedDynamic.EmitFixedUnary<F>(BufferToken dst, X86UriHex src)
             => (FixedUnaryOp<F>)Emit(src.Id, typeof(FixedUnaryOp<F>), typeof(F),
                     sys.array(typeof(F)), dst.Load(src.Encoded).Handle);
 
         [MethodImpl(Inline)]
-        FixedBinaryOp<F> IFixedDynamic.EmitFixedBinary<F>(BufferToken dst, ApiHex src)
+        FixedBinaryOp<F> IFixedDynamic.EmitFixedBinary<F>(BufferToken dst, X86UriHex src)
             => (FixedBinaryOp<F>)Emit(src.Id, typeof(FixedBinaryOp<F>), typeof(F),
                     sys.array(typeof(F),typeof(F)),dst.Load(src.Encoded).Handle);
 
         [MethodImpl(Inline)]
-        FixedTernaryOp<F> IFixedDynamic.EmitFixedTernary<F>(BufferToken dst, ApiHex src)
+        FixedTernaryOp<F> IFixedDynamic.EmitFixedTernary<F>(BufferToken dst, X86UriHex src)
             => (FixedTernaryOp<F>)Emit(src.Id, typeof(FixedTernaryOp<F>), typeof(F),
                     sys.array(typeof(F), typeof(F), typeof(F)), dst.Load(src.Encoded).Handle);
 
         [MethodImpl(Inline)]
-        UnaryOp8 IFixedDynamic.EmitFixedUnary(BufferToken dst, W8 w, ApiHex src)
+        UnaryOp8 IFixedDynamic.EmitFixedUnary(BufferToken dst, W8 w, X86UriHex src)
             => Emit(src.Id, Unary, w, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]
-        UnaryOp16 IFixedDynamic.EmitFixedUnary(BufferToken dst, W16 w, ApiHex src)
+        UnaryOp16 IFixedDynamic.EmitFixedUnary(BufferToken dst, W16 w, X86UriHex src)
             => Emit(src.Id, Unary, w, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]
-        UnaryOp32 IFixedDynamic.EmitFixedUnary(BufferToken dst, W32 w, ApiHex src)
+        UnaryOp32 IFixedDynamic.EmitFixedUnary(BufferToken dst, W32 w, X86UriHex src)
             => Emit(src.Id, Unary, w, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]
-        UnaryOp64 IFixedDynamic.EmitFixedUnary(BufferToken dst, W64 w, ApiHex src)
+        UnaryOp64 IFixedDynamic.EmitFixedUnary(BufferToken dst, W64 w, X86UriHex src)
             => Emit(src.Id, Unary, w, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]
-        UnaryOp128 IFixedDynamic.EmitFixedUnary(BufferToken dst, W128 w, ApiHex src)
+        UnaryOp128 IFixedDynamic.EmitFixedUnary(BufferToken dst, W128 w, X86UriHex src)
             => Emit(dst.Load(src.Encoded), src.Id, Unary, w);
 
         [MethodImpl(Inline)]
-        UnaryOp256 IFixedDynamic.EmitFixedUnary(BufferToken dst, W256 w, ApiHex src)
+        UnaryOp256 IFixedDynamic.EmitFixedUnary(BufferToken dst, W256 w, X86UriHex src)
             => Emit(dst.Load(src.Encoded), src.Id, Unary, w);
 
         [MethodImpl(Inline)]
-        BinaryOp8 IFixedDynamic.EmitFixedBinary(BufferToken dst, W8 w, ApiHex src)
+        BinaryOp8 IFixedDynamic.EmitFixedBinary(BufferToken dst, W8 w, X86UriHex src)
             => Emit(dst.Load(src.Encoded), src.Id, Binary, w);
 
         [MethodImpl(Inline)]
-        BinaryOp16 IFixedDynamic.EmitFixedBinary(BufferToken dst, W16 w, ApiHex src)
+        BinaryOp16 IFixedDynamic.EmitFixedBinary(BufferToken dst, W16 w, X86UriHex src)
             => Emit(dst.Load(src.Encoded), src.Id, Binary, w);
 
         [MethodImpl(Inline)]
-        BinaryOp32 IFixedDynamic.EmitFixedBinary(BufferToken dst, W32 w, ApiHex src)
+        BinaryOp32 IFixedDynamic.EmitFixedBinary(BufferToken dst, W32 w, X86UriHex src)
             => Emit(dst.Load(src.Encoded), src.Id, Binary, w);
 
         [MethodImpl(Inline)]
-        BinaryOp64 IFixedDynamic.EmitFixedBinary(BufferToken dst, W64 w, ApiHex src)
+        BinaryOp64 IFixedDynamic.EmitFixedBinary(BufferToken dst, W64 w, X86UriHex src)
             => Emit(dst.Load(src.Encoded), src.Id, Binary, w);
 
         [MethodImpl(Inline)]
-        BinaryOp128 IFixedDynamic.EmitFixedBinary(BufferToken dst, W128 w, ApiHex src)
+        BinaryOp128 IFixedDynamic.EmitFixedBinary(BufferToken dst, W128 w, X86UriHex src)
             => Emit(src.Id, Binary, w, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]
-        BinaryOp256 IFixedDynamic.EmitFixedBinary(BufferToken dst, W256 w, ApiHex src)
+        BinaryOp256 IFixedDynamic.EmitFixedBinary(BufferToken dst, W256 w, X86UriHex src)
             => Emit(src.Id, Binary, w, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]
-        UnaryOp<T> IDynamicNumeric.EmitUnaryOp<T>(BufferToken dst, ApiHex src)
+        UnaryOp<T> IDynamicNumeric.EmitUnaryOp<T>(BufferToken dst, X86UriHex src)
             => EmitUnaryOp<T>(src.Id, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]
-        BinaryOp<T> IDynamicNumeric.EmitBinaryOp<T>(BufferToken dst, ApiHex src)
+        BinaryOp<T> IDynamicNumeric.EmitBinaryOp<T>(BufferToken dst, X86UriHex src)
             => EmitBinaryOp<T>(src.Id, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]
-        TernaryOp<T> IDynamicNumeric.EmitTernaryOp<T>(BufferToken dst, ApiHex src)
+        TernaryOp<T> IDynamicNumeric.EmitTernaryOp<T>(BufferToken dst, X86UriHex src)
             => EmitTernaryOp<T>(src.Id, dst.Load(src.Encoded));
 
         [MethodImpl(Inline)]

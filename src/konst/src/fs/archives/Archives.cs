@@ -31,7 +31,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static IPartCaptureArchive capture(ArchiveConfig config)
-            => new PartCaptureArchive(config.Root, FolderName.Empty, FolderName.Empty);
+            => capture(FS.dir(config.Root.Name));
 
         [MethodImpl(Inline), Op]
         public static ISemanticPaths semantic()
@@ -58,7 +58,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static IApiHexArchive hex(FolderPath root)
+        public static IApiHexArchive x86(FolderPath root)
             => new ApiHexArchive(root);
     }
 }

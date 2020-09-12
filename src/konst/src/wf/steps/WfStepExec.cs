@@ -46,7 +46,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                return failure<T>(e);
+                return fail<T>(e);
             }
         }
 
@@ -58,7 +58,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                return failure<T>(e);
+                return fail<T>(e);
             }
         }
 
