@@ -12,29 +12,29 @@ namespace Z0
 
     public struct FieldFormatter<F>
         where F : unmanaged, Enum
-    {        
+    {
         readonly StringBuilder Target;
-        
+
         char Delimiter;
 
         [MethodImpl(Inline)]
-        public FieldFormatter(StringBuilder dst, char delimiter)
+        public FieldFormatter(StringBuilder dst, char delimiter = FieldDelimiter)
         {
             Target = dst;
             Delimiter = delimiter;
         }
 
         public void EmitEol()
-            => Target.Append(Eol);        
-        
+            => Target.Append(Eol);
+
         public void Append(F f, object content)
-            => Target.Append(Render(content).PadRight(Tabular.Width(f)));
+            => Target.Append(Render(content).PadRight(Table.width(f)));
 
         public void Delimit(F f, object content)
-        {            
+        {
             Target.Append(Delimiter);
-            Target.Append(Space);            
-            Target.Append(Render(content).PadRight(Tabular.Width(f)));
+            Target.Append(Space);
+            Target.Append(Render(content).PadRight(Table.width(f)));
         }
 
         public void Delimit<T>(F f, T content)
@@ -42,11 +42,11 @@ namespace Z0
         {
             Target.Append(Delimiter);
             Target.Append(Space);
-            Target.Append(Render(content).PadRight(Tabular.Width(f)));
+            Target.Append(Render(content).PadRight(Table.width(f)));
         }
 
         public FieldFormatter<F> Reset(char? delimiter = null)
-        {            
+        {
             Target.Clear();
             Delimiter = delimiter ?? FieldDelimiter;
             return this;
@@ -54,7 +54,7 @@ namespace Z0
 
         public string Format()
             => Target.ToString();
-        
+
 
         public override string ToString()
             => Format();

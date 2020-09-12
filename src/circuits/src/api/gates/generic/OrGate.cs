@@ -8,13 +8,12 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
-    using static Memories;
 
     public readonly struct OrGate<T> : IBinaryGate<T>,  IBinaryGate<Vector128<T>>, IBinaryGate<Vector256<T>>
         where T : unmanaged
-    {    
+    {
         [MethodImpl(Inline)]
         public bit Invoke(bit x, bit y)
             => x | y;

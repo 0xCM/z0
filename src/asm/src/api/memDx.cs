@@ -15,11 +15,11 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static MemDx memDx(ulong value, int size)
-            => new MemDx(value, Enums.undefined((DataSize)size, DataSize.None));
+        public static MemDx memDx(ulong value, MemDxSize size)
+            => new MemDx(value, (MemDxSize)size);
 
         [MethodImpl(Inline), Op]
-        public static uint memDx(Instruction src, int index)
+        public static uint memDx(Instruction src, byte index)
             => kind(src, (byte)index) == Memory ? src.MemoryDisplacement : 0;
     }
 }

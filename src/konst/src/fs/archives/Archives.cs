@@ -38,27 +38,27 @@ namespace Z0
             => new SemanticPaths();
 
         [MethodImpl(Inline)]
-        public static IApiHexWriter writer<H>(FilePath dst, H rep = default)
+        public static IX86UriHexWriter writer<H>(FilePath dst, H rep = default)
             where H : struct, IArchiveWriter<H>
         {
-            if(typeof(H) == typeof(ApiHexWriter))
-                return new ApiHexWriter(dst);
+            if(typeof(H) == typeof(X86UriHexWriter))
+                return new X86UriHexWriter(dst);
             else
                 throw no<H>();
         }
 
         [MethodImpl(Inline)]
-        public static IApiHexReader reader<H>(H rep = default)
+        public static IX86UriHexReader reader<H>(H rep = default)
             where H : struct, IArchiveReader<H>
         {
-            if(typeof(H) == typeof(ApiHexReader))
-                return new ApiHexReader();
+            if(typeof(H) == typeof(X86UriHexReader))
+                return new X86UriHexReader();
             else
                 throw no<H>();
         }
 
         [MethodImpl(Inline), Op]
-        public static IApiHexArchive x86(FolderPath root)
-            => new ApiHexArchive(root);
+        public static IX86UriHexArchive x86(FolderPath root)
+            => new X86UriHexArchive(root);
     }
 }

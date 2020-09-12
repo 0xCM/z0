@@ -28,18 +28,6 @@ namespace Z0.Asm
             => Deicer.Thaw(src.GetInfo());
 
         [MethodImpl(Inline)]
-        public static Func<UsedMemory[]> UsedMemoryDefer(Iced.InstructionInfo src)
-            => () => UsedMemory(src);
-
-        [MethodImpl(Inline)]
-        public static Func<UsedRegister[]> UsedRegistersDefer(Iced.InstructionInfo src)
-            => () => src.GetUsedRegisters().Map(x => Deicer.Thaw(x));
-
-        [MethodImpl(Inline)]
-        public static Func<InstructionInfo> InxsInfoDefer(Iced.Instruction src)
-            => () => FxInfo(src);
-
-        [MethodImpl(Inline)]
         public static Func<OpAccess[]> OpAccessDefer(Iced.InstructionInfo src)
             => () => OpAccess(src);
 
@@ -85,7 +73,7 @@ namespace Z0.Asm
                 IsCallFarIndirect = src.IsCallFarIndirect()
             };
 
-       /// <summary>
+        /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
         /// <param name="src">The iced source value</param>
@@ -95,8 +83,8 @@ namespace Z0.Asm
             var info = src.GetInfo();
             return new Instruction
             {
-                UsedMemory = UsedMemoryDefer(info),
-                UsedRegisters = UsedRegistersDefer(info),
+                UsedMemory = UsedMemory(info),
+                UsedRegisters = UsedRegisters(info),
                 Access = OpAccessDefer(info),
                 FlowInfo = FlowInfoDefer(src.Code),
                 InstructionCode = FxCode(src),

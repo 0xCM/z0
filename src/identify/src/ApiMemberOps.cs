@@ -24,10 +24,10 @@ namespace Z0
 
         public static ApiCodeIndex index(IMemberLocator locator, ApiSet api, ApiHostUri uri, FilePath src)
         {
-            var code = ApiHexReader.Service.Read(src).ToArray();
+            var code = X86UriHexReader.Service.Read(src).ToArray();
             var host = api.FindHost(uri).Require();
             var members = locator.Locate(host);
-            var codeIndex =  UriHexQuery.Service.CreateIndex(code);
+            var codeIndex =  X86UriHexQuery.Service.CreateIndex(code);
             var memberIndex = index(members);
             return ApiCodeIndex.create(memberIndex, codeIndex);
         }
@@ -38,15 +38,15 @@ namespace Z0
             var idx = index(members);
             var archive =  Archives.capture(root);
             var paths =  HostCaptureArchive.create(root, host);
-            var code = ApiHexReader.Service.Read(paths.HostX86Path);
-            var opIndex =  UriHexQuery.Service.CreateIndex(code);
+            var code = X86UriHexReader.Service.Read(paths.HostX86Path);
+            var opIndex =  X86UriHexQuery.Service.CreateIndex(code);
             return ApiCodeIndex.create(idx, opIndex);
         }
 
-        public static ApiIndex index(ApiMembers src)
+        public static ApiMemberIndex index(ApiMembers src)
         {
             var index = Identify.index(src.Storage.Select(h => (h.Id, h)),true);
-            return new ApiIndex(index.HashTable, index.Duplicates);
+            return new ApiMemberIndex(index.HashTable, index.Duplicates);
         }
     }
 }

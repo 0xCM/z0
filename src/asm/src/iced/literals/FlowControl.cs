@@ -7,7 +7,7 @@ namespace Z0.Asm
 	/// <summary>
 	/// Flow control
 	/// </summary>
-	public enum FlowControl 
+	public enum FlowControl : byte
 	{
 		/// <summary>
 		/// The next instruction that will be executed is the next instruction in the instruction stream
@@ -57,6 +57,6 @@ namespace Z0.Asm
 		/// <summary>
 		/// It's an invalid instruction, eg. ud0, ud1, ud2
 		/// </summary>
-		Exception,		
+		Exception,
 	}
 }

@@ -12,6 +12,8 @@
     <ProjectReference Include="$(Identity)" />
     <ProjectReference Include="$(Data)" />
     <ProjectReference Include="$(Structured)" />
+    <ProjectReference Include="$(Extract)" />
+
   </ItemGroup>
 
 </Project>

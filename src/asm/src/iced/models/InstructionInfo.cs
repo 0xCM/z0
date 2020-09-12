@@ -7,8 +7,8 @@ namespace Z0.Asm
 	/// <summary>
 	/// Contains information about an instruction, eg. read/written registers, read/written RFLAGS bits, CPUID feature bit, etc
 	/// </summary>
-	public class InstructionInfo 
-    {    
+	public struct InstructionInfo
+    {
 		/// true if the instruction isn't available in real mode or virtual 8086 mode
 		/// </summary>
 		public bool IsProtectedMode  {get;set;}
@@ -75,11 +75,11 @@ namespace Z0.Asm
 		/// </summary>
 		public  FlowControl FlowControl {get;set;}
 
-        public UsedMemory[] UsedMemory {get;set;}        
+        public UsedMemory[] UsedMemory {get;set;}
 
-        public UsedRegister[] UsedRegisters {get;set;}        
+        public UsedRegister[] UsedRegisters {get;set;}
 
-        public OpAccess[] Access {get;set;}        
+        public OpAccess[] Access {get;set;}
 	}
 }
 

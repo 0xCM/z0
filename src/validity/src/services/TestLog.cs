@@ -69,7 +69,7 @@ namespace Z0
                 return;
 
             if(header)
-                dst.AppendLine(Tabular.HeaderText<F>(delimiter));
+                dst.AppendLine(Table.header53<F>(delimiter));
 
             var formatter = Table.formatter<F>(delimiter);
 

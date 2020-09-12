@@ -36,18 +36,18 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public X86ApiExtract Extract(ApiMember src)
-            => MemberExtraction.extract(src, Buffer);
+            => X86Extraction.extract(src, Buffer);
 
         [MethodImpl(Inline)]
         public X86ApiExtract[] Extract(ApiMember[] members)
-            => MemberExtraction.extract(members, Buffer);
+            => X86Extraction.extract(members, Buffer);
 
         [MethodImpl(Inline)]
         public X86ApiExtract[] Extract(IApiHost src, IWfBroker broker)
-            => MemberExtraction.extract(ApiMemberJit.jit(src), Buffer);
+            => X86Extraction.extract(ApiMemberJit.jit(src), Buffer);
 
         [MethodImpl(Inline)]
         public X86ApiExtract[] Extract(IApiHost[] src, IWfBroker broker)
-            => MemberExtraction.extract(ApiMemberJit.jit(src, broker.Sink), Buffer);
+            => X86Extraction.extract(ApiMemberJit.jit(src, broker.Sink), Buffer);
     }
 }

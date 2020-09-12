@@ -11,35 +11,31 @@ namespace Z0
     using static Root;
 
     [ApiHost]
-    public readonly struct MemberExtraction
+    public readonly struct X86Extraction
     {
+        public const int DefaultBufferLength = Pow2.T14 + Pow2.T08;
+
         [MethodImpl(Inline), Op]
         public static MemberExtractor service(int bufferlen)
             => new MemberExtractor(bufferlen);
 
         [MethodImpl(Inline), Op]
-        public static MemberExtractor service(byte[] buffer)
-            => new MemberExtractor(buffer);
+        public static Option<X86Code> parse(X86Code src, byte[] buffer)
+        {
+            if(ExtractParsers.parse(src, buffer, out var dst))
+                return Option.some(dst);
+            else
+                return Option.none<X86Code>();
+        }
 
         [MethodImpl(Inline), Op]
-        public static ApiMembers members(IApiHost src)
-            => ApiMemberJit.jit(src);
+        public static X86Code extract(MemoryAddress src, byte[] buffer)
+        {
+            Span<byte> target = buffer;
+            var length = MemoryExtractor.read(src, target);
+            return new X86Code(src, sys.array(target.Slice(0,length)));
+        }
 
-        /// <summary>
-        /// Extracts encoded content for all operations defined by a host
-        /// </summary>
-        /// <param name="src">The source member</param>
-        [MethodImpl(Inline), Op]
-        public static X86ApiExtract[] extract(IApiHost src, Span<byte> buffer)
-            => extract(members(src), buffer);
-
-        /// <summary>
-        /// Extracts encoded content for all operations defined by a host
-        /// </summary>
-        /// <param name="src">The source member</param>
-        [MethodImpl(Inline), Op]
-        public static X86ApiExtract[] extract(IApiHost src)
-            => extract(members(src), sys.alloc<byte>(Extractors.DefaultBufferLength));
 
         [MethodImpl(Inline), Op]
         public static X86ApiExtract extract(in ApiMember src, Span<byte> buffer)
@@ -61,9 +57,5 @@ namespace Z0
                 seek(target,i) = extract(skip(source,i), sys.clear(buffer));
             return dst;
         }
-
-        [MethodImpl(Inline), Op]
-        public static X86ApiExtract[] extract(ApiMember[] src)
-            => extract(src, sys.alloc<byte>(Extractors.DefaultBufferLength));
     }
 }

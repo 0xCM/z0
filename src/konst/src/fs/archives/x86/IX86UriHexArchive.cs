@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Specifies archive service operations for hosted bits
     /// </summary>
-    public interface IApiHexArchive
+    public interface IX86UriHexArchive
     {
         /// <summary>
         /// The directory to which path calculations are relative
@@ -63,17 +63,17 @@ namespace Z0
         /// Reads the code owned by a specified collection of parts
         /// </summary>
         /// <param name="owners">The owning parts</param>
-        IEnumerable<X86UriIndex> ReadIndices(params PartId[] owners);
+        IEnumerable<X86UriIndex> Indices(params PartId[] owners);
 
         /// <summary>
         /// Reads the code defined by a specified file
         /// </summary>
         /// <param name="src">The source path</param>
-        X86UriIndex ReadIndex(FilePath src);
+        X86UriIndex Index(FilePath src);
     }
 
-    public interface IApiHexArchive<H> : IApiHexArchive
-        where H : struct, IApiHexArchive<H>
+    public interface IX86UriHexArchive<H> : IX86UriHexArchive
+        where H : struct, IX86UriHexArchive<H>
     {
 
     }

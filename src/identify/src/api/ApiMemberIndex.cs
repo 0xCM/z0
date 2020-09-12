@@ -11,19 +11,19 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ApiIndex : IOpIndex<ApiMember>
+    public readonly struct ApiMemberIndex : IOpIndex<ApiMember>
     {
         readonly Dictionary<OpIdentity, ApiMember> Data;
 
         readonly OpIdentity[] Duplicates;
 
         [MethodImpl(Inline)]
-        public ApiIndex(Dictionary<OpIdentity, ApiMember> index, OpIdentity[] duplicates)
+        public ApiMemberIndex(Dictionary<OpIdentity, ApiMember> index, OpIdentity[] duplicates)
         {
             Data = index;
             Duplicates = duplicates;
         }
-    
+
         [MethodImpl(Inline)]
         public Option<ApiMember> Lookup(OpIdentity id)
             => Data.TryFind(id);
@@ -31,7 +31,7 @@ namespace Z0
         public ApiMember this[OpIdentity id]
         {
             [MethodImpl(Inline)]
-            get 
+            get
             {
                 if(Data.TryGetValue(id, out var value))
                     return value;
@@ -40,15 +40,15 @@ namespace Z0
             }
         }
 
-        public int EntryCount 
+        public int EntryCount
             => Data.Count;
 
-        public IEnumerable<(OpIdentity, ApiMember)> Enumerated 
+        public IEnumerable<(OpIdentity, ApiMember)> Enumerated
             => Data.Select(kvp => (kvp.Key, kvp.Value));
 
-        public IEnumerable<OpIdentity> Keys 
+        public IEnumerable<OpIdentity> Keys
             => Data.Keys;
-        
+
         public IReadOnlyList<OpIdentity> DuplicateKeys
             => Duplicates;
 

@@ -95,11 +95,12 @@ namespace Z0
             get => Parsed.IsNonEmpty;
         }
 
-        public X86ApiCode HostedBits
+        public X86UriHex UriHex
         {
              [MethodImpl(Inline)]
-             get => new X86ApiCode(OpUri, Parsed);
+             get => new X86UriHex(BaseAddress, OpUri, Parsed);
         }
+
 
         public OpIdentity MemberId
         {

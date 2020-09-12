@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct ApiHexReader : IApiHexReader<ApiHexReader,X86UriHex>
+    public readonly struct X86UriHexReader : IX86UriHexReader<X86UriHexReader,X86UriHex>
     {
-        public static IApiHexReader Service => default(ApiHexReader);
+        public static IX86UriHexReader Service => default(X86UriHexReader);
 
         public X86UriHex[] Read(FilePath src)
             => read(src);

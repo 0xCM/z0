@@ -11,7 +11,6 @@ namespace Z0
         void Process(T src);
     }
 
-
     public interface IAsmDataProcessor<E,T> : IAsmDataProcessor<T>
         where E : unmanaged, Enum
     {

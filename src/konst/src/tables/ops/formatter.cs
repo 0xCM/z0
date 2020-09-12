@@ -17,7 +17,6 @@ namespace Z0
         /// Derives format configuration data from a type
         /// </summary>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline)]
         public static TableRenderSpec<F> renderspec<F>(char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
         {

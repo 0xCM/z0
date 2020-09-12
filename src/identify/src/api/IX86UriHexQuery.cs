@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    using static UriHexQuery;
+    using static X86UriHexQuery;
 
-    public interface IUriHexQuery
+    public interface IX86UriHexQuery
     {
         /// <summary>
         /// Creates an operation index from a uri bitstream

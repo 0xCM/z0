@@ -17,7 +17,7 @@ namespace Z0
     {
         const string ProjectName = "bytes";
 
-        readonly IApiHexArchive Archive;
+        readonly IX86UriHexArchive Archive;
 
         public readonly FolderPath SourceDir;
 
@@ -43,8 +43,9 @@ namespace Z0
         public void Run()
         {
             Wf.Running(StepId, flow(SourceDir, TargetDir));
+            var archive = new X86UriHexArchive(Wf, FS.dir(SourceDir.Name));
 
-            var indices = CodeReader.index(SourceDir, Sink);
+            var indices = archive.Indices();
             foreach(var index in indices)
             {
                 Wf.Status(StepId, $"Loaded {index.Code.Length} {index.Host} code blocks");

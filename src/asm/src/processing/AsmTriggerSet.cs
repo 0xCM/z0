@@ -13,7 +13,7 @@ namespace Z0.Asm
     using FT = IAsmRoutineTrigger;
     using IT = IAsmFxTrigger;
 
-    public readonly struct AsmTriggerSet : IAsmFxTriggerSet, INullary<AsmTriggerSet>
+    public readonly struct AsmTriggerSet : INullary<AsmTriggerSet>
     {
         readonly IT[] ITriggers;
 
@@ -29,7 +29,7 @@ namespace Z0.Asm
         public bool IsEmpty
             => ITriggers.Length == 0 && FTriggers.Length == 0;
 
-        AsmTriggerSet INullary<AsmTriggerSet>.Zero
+        public AsmTriggerSet Zero
             => Empty;
 
         [MethodImpl(Inline)]

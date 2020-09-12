@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using System.Linq.Expressions;
-    
+
     using static Konst;
 
     public class XFunc
@@ -24,7 +24,7 @@ namespace Z0
             => f;
 
         /// <summary>
-        /// Creates a function expression over a fuction delegate of arity 1
+        /// Creates a function expression over a function delegate of arity 1
         /// </summary>
         /// <param name="f">The source delegate</param>
         /// <typeparam name="X">The function argument type</typeparam>
@@ -34,7 +34,7 @@ namespace Z0
             => f;
 
         /// <summary>
-        /// Creates a function expression over a fuction delegate of arity 2
+        /// Creates a function expression over a function delegate of arity 2
         /// </summary>
         /// <param name="f">The source delegate</param>
         /// <typeparam name="X1">The type of the first argument</typeparam>
@@ -45,7 +45,7 @@ namespace Z0
             => f;
 
         /// <summary>
-        /// Creates a function expression over a fuction delegate of arity 3
+        /// Creates a function expression over a function delegate of arity 3
         /// </summary>
         /// <param name="f">The source delegate</param>
         /// <typeparam name="X1">The type of the first argument</typeparam>
@@ -72,7 +72,7 @@ namespace Z0
         /// <typeparam name="X">The operand type</typeparam>
         [MethodImpl(Inline)]
         public static XFunc<X,X,X,X> f<X>(Func<X,X,X,X> f)
-            => f;    
+            => f;
 
         /// <summary>
         /// Creates a linq expression over an emitter

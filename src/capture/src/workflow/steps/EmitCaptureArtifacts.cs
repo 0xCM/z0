@@ -57,7 +57,7 @@ namespace Z0
             AsmPath = Target.HostAsmPath;
             CilDataPath = Target.CilPath;
             //Parsed = new X86MemberRefinement[0]{};
-            Parser = ExtractParsers.member(Extractors.DefaultBufferLength);
+            Parser = ExtractParsers.member(X86Extraction.DefaultBufferLength);
             ParsedMembers = default;
             Wf.Created(StepId);
         }
@@ -75,11 +75,13 @@ namespace Z0
             {
                 SaveExtracts();
                 Parse();
-                SaveParseReport();
-                //SaveHex();
-                Run(new EmitX86HexHost());
-                SaveCil();
-                Decode();
+                if(ParsedMembers.Count != 0)
+                {
+                    SaveParseReport();
+                    Run(new EmitX86HexHost());
+                    SaveCil();
+                    Decode();
+                }
             }
             catch(Exception e)
             {
@@ -112,20 +114,6 @@ namespace Z0
 
             ParsedMembers = Parser.ParseMembers(Extracts);
             Wf.Raise(new ExtractsParsed(StepId, HostUri, ParsedMembers.Count, Ct));
-
-
-            // var result = Parser.Parse(Extracts);
-
-            // if(result.Failed.Length != 0)
-            // {
-            //     for(var i = 0; i<result.Failed.Length; i++)
-            //         Wf.Raise(ExtractParseFailed.create(result.Failed[i]));
-
-            //     var report = ParseFailureReport.Create(HostUri, result.Failed);
-            //     report.Save(Target.UnparsedPath(HostUri));
-            // }
-
-            // Parsed = result.Parsed;
         }
 
         void SaveParseReport()
@@ -146,15 +134,6 @@ namespace Z0
             using var step = new EmitX86Hex(Wf, host, HostUri, ParsedMembers);
             step.Run();
 
-        }
-
-        void SaveHex()
-        {
-            if(ParsedMembers.Count== 0)
-                return;
-
-            var hex = X86ApiWriter.save(HostUri, ParsedMembers, HexPath);
-            Wf.Raise(new X86UriHexSaved(StepId, HostUri, hex, ParsedPath, Ct));
         }
 
         void SaveCil()

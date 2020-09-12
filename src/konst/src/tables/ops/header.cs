@@ -23,8 +23,12 @@ namespace Z0
 
         public static string header53<T>(char delimiter = FieldDelimiter)
             where T : unmanaged, Enum
-                => Tabular.HeaderText<T>(delimiter);
+                => Table.datasetHeader<T>().Render(delimiter);
 
+        [MethodImpl(Inline)]
+        public static DatasetHeader<F> datasetHeader<F>()
+            where F : unmanaged, Enum
+                => new DatasetHeader<F>();
 
         [MethodImpl(Inline)]
         public static string headerText<E>(char delimiter = FieldDelimiter)

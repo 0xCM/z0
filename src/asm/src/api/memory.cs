@@ -20,8 +20,8 @@ namespace Z0
         {
             dst = default;
             return dst;
-
         }
+
         [Op]
         public static AsmMemory memory2(Instruction src, byte index)
         {

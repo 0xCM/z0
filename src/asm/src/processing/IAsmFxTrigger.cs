@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Collections.Generic;
 
@@ -13,7 +13,7 @@ namespace Z0.Asm
 
         void FireOnMatch(in S src);
     }
-    
+
     public interface IAsmFxTrigger : IAsmTrigger<Instruction>
     {
 
@@ -26,8 +26,6 @@ namespace Z0.Asm
 
     public interface IAsmFxFlow
     {
-        IEnumerable<AsmFxList> Flow(IAsmFxPipe fxPipe);
-
-        AsmFxList[] Push(IAsmFxPipe fxPipe); 
+        AsmFxList[] Push(IAsmFxPipe fxPipe);
     }
 }

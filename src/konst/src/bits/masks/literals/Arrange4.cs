@@ -9,7 +9,7 @@ namespace Z0
     using static Perm4Sym;
 
     /// <summary>
-    /// Defines lierals that define arangments of symbols that may or may not be permutations
+    /// Defines literals that define symbol arrangements that may or may not be permutations
     /// </summary>
     public enum Arrange4L : byte
     {
@@ -18,7 +18,7 @@ namespace Z0
         DCBA = D | (C << 2) | (B << 4) | (A << 6),
 
         AAAA = A | (A << 2) | (A << 4) | (A << 6),
-        
+
         BBBB = B | (B << 2) | (B << 4) | (B << 6),
 
         CCCC = C | (C << 2) | (C << 4) | (C << 6),

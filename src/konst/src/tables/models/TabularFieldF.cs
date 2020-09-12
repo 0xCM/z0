@@ -14,12 +14,12 @@ namespace Z0
     /// on an enumeration value
     /// </summary>
     public readonly struct TabularField<F> : ITextual
-        where F : unmanaged, Enum        
+        where F : unmanaged, Enum
     {
         /// <summary>
         /// The field specifier
         /// </summary>
-        public readonly F Specifier;
+        public readonly F Id;
 
         /// <summary>
         /// The field name
@@ -35,29 +35,19 @@ namespace Z0
         /// The field width
         /// </summary>
         public readonly int Width;
-              
-        [MethodImpl(Inline)]
-        internal TabularField(F spec)
-        {            
-            var numeric = Enums.e32u(spec);
-            this.Specifier = spec;
-            this.Name = spec.ToString();
-            this.Index = Tabular.Index(spec);
-            this.Width = text.width(spec);
-        }   
 
         [MethodImpl(Inline)]
-        public TabularField(F spec, string name, int index, int width)
-        {            
-            Specifier = spec;
+        public TabularField(F id, string name, int index, int width)
+        {
+            Id = id;
             Name = name;
             Index = index;
             Width = width;
-        }   
+        }
         public string Format()
             => String.Concat($"{Index}".PadLeft(2,'0'), Space, $"{Width}".PadLeft(2,'0'), Space, Name);
 
         public override string ToString()
-            => Format();     
+            => Format();
     }
 }

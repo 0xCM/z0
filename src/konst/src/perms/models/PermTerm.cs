@@ -10,19 +10,19 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Describes an indivual term of a permutation p, i.e. the point 
+    /// Describes an individual term of a permutation p, i.e. the point
     /// of evaluation i and its image p(i)
     /// </summary>
     public readonly struct PermTerm : ITextual
     {
         /// <summary>
-        /// The point at which the permuation is evaluated
+        /// The point at which the permutation is evaluated
         /// </summary>
         public readonly int Source;
 
         /// <summary>
-        /// The result of evaluating the permuation over the source
-        /// </summary>                
+        /// The result of evaluating the permutation over the source
+        /// </summary>
         public readonly int Target;
 
         [MethodImpl(Inline)]
@@ -47,7 +47,7 @@ namespace Z0
             Source = src;
             Target = dst;
         }
-        
+
         public bool IsDegenerate
         {
             [MethodImpl(Inline)]
@@ -67,7 +67,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(PermTerm y)
             => Source == y.Source && Target == y.Target;
-        
+
         [MethodImpl(Inline)]
         public override bool Equals(object obj)
             => obj is PermTerm t && Equals(t);
@@ -75,7 +75,7 @@ namespace Z0
         public override int GetHashCode()
             => HashCode.Combine(Source,Target);
 
-        public override string ToString() 
+        public override string ToString()
             => Format();
     }
 }

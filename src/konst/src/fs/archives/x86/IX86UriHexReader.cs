@@ -4,20 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IApiHexReader : IArchiveReader
+    public interface IX86UriHexReader : IArchiveReader
     {
         X86UriHex[] Read(FilePath src);
     }
 
-    public interface IApiHexReader<H> : IApiHexReader, IArchiveReader<H>
-        where H : struct, IApiHexReader<H>
+    public interface IX86UriHexReader<H> : IX86UriHexReader, IArchiveReader<H>
+        where H : struct, IX86UriHexReader<H>
     {
 
     }
 
-    public interface IApiHexReader<H,T> : IApiHexReader<H>, IArchiveReader<H>
+    public interface IX86UriHexReader<H,T> : IX86UriHexReader<H>, IArchiveReader<H>
         where T : struct, IEncoded<T>
-        where H : struct, IApiHexReader<H,T>
+        where H : struct, IX86UriHexReader<H,T>
     {
 
     }

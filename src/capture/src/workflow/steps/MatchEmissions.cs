@@ -44,7 +44,7 @@ namespace Z0
         public void Run(ApiHostUri host, ReadOnlySpan<X86UriHex> x86data, FS.FilePath x86file)
         {
             var wfStateless = Capture.Services;
-            var reader = Archives.reader<ApiHexReader>();
+            var reader = Archives.reader<X86UriHexReader>();
             var fileSrc = @readonly(reader.Read(FilePath.Define(x86file.Name)));
 
             Claim.Eq(fileSrc.Length, x86data.Length);

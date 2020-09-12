@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-
     /// <summary>
     /// A memory location used by an instruction
     /// </summary>

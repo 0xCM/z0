@@ -29,7 +29,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<T> alloc<T>(ulong length)
             => sys.alloc<T>(length);
-
-
     }
 }

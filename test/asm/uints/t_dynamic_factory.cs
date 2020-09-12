@@ -118,11 +118,11 @@ namespace Z0.Asm
             using var asmTarget = AsmWriter();
 
             var fCaptured = AsmCheck.Capture(f.Identify(), f).Require();
-            hexTarget.Write(fCaptured.HostedBits);
+            hexTarget.Write(fCaptured.UriHex);
             asmTarget.WriteAsm(AsmCheck.Decoder.Decode(fCaptured).Require());
 
             var gCaptured = AsmCheck.Capture(g.Identify(), g).Require();
-            hexTarget.Write(gCaptured.HostedBits);
+            hexTarget.Write(gCaptured.UriHex);
             asmTarget.WriteAsm(AsmCheck.Decoder.Decode(gCaptured).Require());
         }
 
@@ -130,7 +130,7 @@ namespace Z0.Asm
         {
             var dId = OpIdentityBuilder.build(name, w, kind, false);
             var gId = OpIdentityBuilder.build(name, w, kind, true);
-            var archive = new ApiHexArchive(TargetArchive.X86Dir);
+            var archive = new X86UriHexArchive(TargetArchive.X86Dir);
             var dBits = archive.Read(ApiQuery.host<dvec>().Uri).Where(x => x.Id == dId).Single();
             var gBits = archive.Read(ApiQuery.host<gvec>().Uri).Where(x => x.Id == gId).Single();
             return AsmCheck.Match(K.BinaryOp, w, dBits, gBits, dst);

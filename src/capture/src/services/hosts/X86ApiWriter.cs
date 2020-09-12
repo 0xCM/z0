@@ -19,7 +19,6 @@ namespace Z0
 
         readonly FS.FilePath Target;
 
-
         [MethodImpl(Inline)]
         public X86ApiWriter(FS.FilePath dst)
         {
@@ -48,13 +47,6 @@ namespace Z0
             StreamOut.Dispose();
         }
 
-        // public static X86UriHex[] save(ApiHostUri host, X86ApiMembers src, FilePath dst)
-        // {
-        //     using var writer = new IdentifiedCodeWriter(dst);
-        //     var data = src.Map(x => new X86UriHex(x.Address, x.OpUri, x.Encoded.Encoded));
-        //     writer.WriteLines(data);
-        //     return data;
-        // }
 
         public static X86UriHex[] save(ApiHostUri host, X86ApiMembers src, FS.FilePath dst)
         {

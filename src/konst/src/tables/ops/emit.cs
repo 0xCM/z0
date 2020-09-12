@@ -20,7 +20,7 @@ namespace Z0
             var literals = @readonly(src);
             var count = literals.Length;
             using var writer = dst.Writer();
-            writer.WriteLine(Tabular.HeaderText<E>());
+            writer.WriteLine(Table.header53<E>());
             for(var i=0; i<count; i++)
                 writer.WriteLine(skip(literals,i).DelimitedText(FieldDelimiter));
             return (src,dst);

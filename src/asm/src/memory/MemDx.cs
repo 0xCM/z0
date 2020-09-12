@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// The size of the displacement in bytes
         /// </summary>
-        public readonly DataSize Size;
+        public readonly MemDxSize Size;
 
         /// <summary>
         /// The displacement value
@@ -22,7 +22,7 @@ namespace Z0
         public readonly ulong Value;
 
         [MethodImpl(Inline)]
-        public MemDx(ulong value, DataSize size)
+        public MemDx(ulong value, MemDxSize size)
         {
             Value = value;
             Size = size;
@@ -46,27 +46,19 @@ namespace Z0
             get => Value != 0;
         }
 
-        public MemDx Zero
-            => Empty;
-
         HexFormatConfig HexSpec
             => FormatOptions.hex(zpad:false, specifier:false);
 
         public string Format()
             => (Size switch{
-                DataSize.y1 => ((byte)Value).FormatHex(HexSpec),
-                DataSize.y2 => ((ushort)Value).FormatHex(HexSpec),
-                DataSize.y4 => ((uint)Value).FormatHex(HexSpec),
+                MemDxSize.y1 => ((byte)Value).FormatHex(HexSpec),
+                MemDxSize.y2 => ((ushort)Value).FormatHex(HexSpec),
+                MemDxSize.y4 => ((uint)Value).FormatHex(HexSpec),
                 _ => (Value).FormatHex(HexSpec),
             }) + "dx";
 
         public override string ToString()
             => Format();
-
-
-        [MethodImpl(Inline)]
-        public static implicit operator MemDx((ulong value, int size) src)
-            => asm.memDx(src.value, src.size);
 
         public static MemDx Empty
             => default;

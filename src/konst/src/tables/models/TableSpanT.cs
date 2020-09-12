@@ -63,7 +63,7 @@ namespace Z0
         public ref T First
         {
             [MethodImpl(Inline)]
-            get => ref first(Edit);
+            get => ref Data[0];
         }
 
         public bool IsEmpty

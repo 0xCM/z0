@@ -36,7 +36,7 @@ namespace Z0
 
         public void EmitHeader(bool eol)
         {
-            var header = Tabular.Header<F>();
+            var header = Table.datasetHeader<F>();
             for(var i=0; i<header.Fields.Length; i++)
                 Delimit(header.Fields[i], header.Labels[i]);
 
@@ -48,7 +48,7 @@ namespace Z0
             => EmitHeader(true);
 
         public string HeaderText
-            => Tabular.HeaderText<F>();
+            => Table.header53<F>();
 
         public void EmitEol()
         {

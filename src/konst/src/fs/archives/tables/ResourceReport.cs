@@ -31,7 +31,7 @@ namespace Z0
     /// Describes an assembly code emission
     /// </summary>
     public struct ResourceRecord : ITabular<F,R>
-    {    
+    {
         public ushort Offset;
 
         public MemoryAddress Address;
@@ -58,28 +58,17 @@ namespace Z0
         {
             var dst = text.build();
             dst.Delimit(F.Offset, Offset.FormatSmallHex());
-            dst.Delimit(F.Address, Address, delimiter); 
-            dst.Delimit(F.Size, Size.FormatAsmHex(4), delimiter); 
-            dst.Delimit(F.Uri, Uri, delimiter);                        
-            dst.Delimit(F.Data, Data.FormatHexBytes(), delimiter);                        
+            dst.Delimit(F.Address, Address, delimiter);
+            dst.Delimit(F.Size, Size.FormatAsmHex(4), delimiter);
+            dst.Delimit(F.Uri, Uri, delimiter);
+            dst.Delimit(F.Data, Data.FormatHexBytes(), delimiter);
             return dst.ToString();
         }
     }
 
-    partial class XTend
-    {
-        internal static void AppendDelimitedHere<C,F>(this StringBuilder sb, C content, F field, char delimiter)
-            where C : ITextual
-            where F : unmanaged, Enum
-        {
-            var pad = Tabular.Width(field);
-            sb.Append($"{delimiter} ");            
-            sb.Append($"{content?.Format()}".PadRight(pad));
-        }
-    }
 
     public class ResourceReport : Report<ResourceReport,F,R>
-    {        
+    {
         public static ResourceReport Create(BinaryResources resources)
             => new ResourceReport(resources);
 
@@ -112,5 +101,5 @@ namespace Z0
             }
             return records.ToArray();
         }
-    }    
+    }
 }

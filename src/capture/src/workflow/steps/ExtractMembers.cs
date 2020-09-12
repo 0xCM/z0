@@ -87,6 +87,6 @@ namespace Z0
         }
 
         static MemberExtractor Extractor
-            => MemberExtraction.service(Extractors.DefaultBufferLength);
+            => X86Extraction.service(X86Extraction.DefaultBufferLength);
     }
 }

@@ -30,9 +30,9 @@ namespace Z0.Asm
         public readonly ExtractTermCode TermCode;
 
         [MethodImpl(Inline)]
-        public AsmFxBlock(X86ApiCode encoded, Instruction[] decoded, ExtractTermCode term)
+        public AsmFxBlock(X86UriHex encoded, Instruction[] decoded, ExtractTermCode term)
         {
-            Encoded = encoded;
+            Encoded = new X86ApiCode(encoded.Uri, encoded.Base, encoded.Code);
             Decoded = decoded;
             TermCode = term;
         }

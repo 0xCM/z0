@@ -12,6 +12,7 @@ namespace Z0
     using static Konst;
     using static Seq;
 
+
     /// <summary>
     /// Defines a LINQ-monadic cover for a deferred finite or infinite parametric sequence
     /// </summary>
@@ -39,7 +40,6 @@ namespace Z0
         /// <param name="src">The source array</param>
         public static implicit operator Seq<T>(T[] src)
             => new Seq<T>(src);
-
 
         [MethodImpl(Inline)]
         public Seq<T> WithContent(IEnumerable<T> src)

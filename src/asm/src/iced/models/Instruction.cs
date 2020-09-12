@@ -22,12 +22,12 @@ namespace Z0.Asm
         /// <summary>
         /// Retrieves the used memory array as specified by the InstructionInfo type
         /// </summary>
-        public Func<UsedMemory[]> UsedMemory {get;set;}
+        public UsedMemory[] UsedMemory {get;set;}
 
         /// <summary>
         /// Captures the used register array as specified by the InstructionInfo type
         /// </summary>
-        public Func<UsedRegister[]> UsedRegisters {get; set;}
+        public UsedRegister[] UsedRegisters {get; set;}
 
         /// <summary>
         /// Captures the op access array as specified by the InstructionInfo type
@@ -76,7 +76,7 @@ namespace Z0.Asm
         public int MemoryDisplSize {get; set;}
 
         public MemDx MemDx
-            => Z0.asm.memDx(MemoryDisplacement, MemoryDisplSize);
+            => Z0.asm.memDx(MemoryDisplacement, (MemDxSize)MemoryDisplSize);
 
         //
         // Summary:

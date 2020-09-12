@@ -53,7 +53,6 @@ namespace Z0
             return members(located);
         }
 
-
         public static ApiMember[] jit(ApiDataTypes[] src)
         {
             var dst = z.list<ApiMember>();
@@ -100,7 +99,7 @@ namespace Z0
         public static HostedMethod[] JitGeneric(IApiHost[] src, IWfEventSink sink)
         {
             var methods = GenericMethods(src, sink);
-            var closed = methods.SelectMany(m => (from t in MemberLocator.numeric(m.Method) select new HostedMethod(m.Host, m.Method.MakeGenericMethod(t))));
+            var closed = methods.SelectMany(m => (from t in Reflex.NumericClosureTypes(m.Method) select new HostedMethod(m.Host, m.Method.MakeGenericMethod(t))));
             var located = closed.Select(m => m.WithLocation(Root.address(Jit(m.Method))));
             Array.Sort(located);
             return located;
@@ -134,7 +133,7 @@ namespace Z0
         public static ApiMember[] JitGeneric(IApiHost src)
             =>  (from m in ApiMemberQuery.GenericMethods(src)
                 let kid = m.Method.KindId()
-                from t in MemberLocator.numeric(m.Method)
+                from t in Reflex.NumericClosureTypes(m.Method)
                 let reified = m.Method.MakeGenericMethod(t)
                 let address = Root.address(Jit(reified))
                 let id = Diviner.Identify(reified)

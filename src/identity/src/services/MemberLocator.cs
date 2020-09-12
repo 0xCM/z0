@@ -25,17 +25,11 @@ namespace Z0
             return all.OrderBy(x => x.Method.MetadataToken);
         }
 
-        public static Type[] numeric(MethodInfo m)
-            => from c in ClosureKinds.numeric(m)
-               let t = c.SystemType()
-               where t != typeof(void)
-               select t;
-
         public ApiMembers Locate(IApiHost src)
                 => locate(src);
 
         public static IEnumerable<ApiMember> HostedDirect(IApiHost src)
-                => from m in DirectMethods(src)
+                => from m in Reflex.DirectApiMethods(src)
                 let id = Diviner.Identify(m)
                 let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
                 let located = FunctionDynamic.jit(m)
@@ -43,25 +37,13 @@ namespace Z0
 
 
         public static IEnumerable<ApiMember> HostedGeneric(IApiHost src)
-                => from m in GenericMethods(src)
-                from closure in numeric(m)
+                => from m in Reflex.GenericApiMethods(src)
+                from closure in Reflex.NumericClosureTypes(m)
                 let reified = m.MakeGenericMethod(closure)
                 let id = Diviner.Identify(reified)
                 let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
                 let located = FunctionDynamic.jit(m)
                 select new ApiMember(uri, located, m.KindId());
-
-        public static IEnumerable<MethodInfo> GenericMethods(IApiHost src)
-                => from m in src.HostType.DeclaredMethods().OpenGeneric(1)
-                    where m.Tagged<OpAttribute>()
-                    && m.Tagged<ClosuresAttribute>()
-                    && !m.AcceptsImmediate()
-                    select m;
-
-        public  static IEnumerable<MethodInfo> DirectMethods(IApiHost src)
-                => from m in src.HostType.DeclaredMethods().NonGeneric()
-                where m.Tagged<OpAttribute>() && !m.AcceptsImmediate()
-                select m;
 
         static IMultiDiviner Diviner
                 => MultiDiviner.Service;

@@ -13,6 +13,11 @@ namespace Z0
     public readonly partial struct Datasets
     {
         /// <summary>
+        /// Defines a mask that, when applied, reveals the field position
+        /// </summary>
+        public const ushort PosMask = 0xFFFF;
+
+        /// <summary>
         /// Computes the field width from a field specifier
         /// </summary>
         /// <param name="field">The field specifier</param>
@@ -30,17 +35,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int index<F>(F field)
             where F : unmanaged, Enum
-                => (int)(Tabular.PosMask & Enums.e32u(field));
+                => (int)(PosMask & Enums.e32u(field));
 
         [MethodImpl(Inline)]
         public static DatasetHeader<F> header<F>()
             where F : unmanaged, Enum
                 => new DatasetHeader<F>();
-
-        [MethodImpl(Inline)]
-        public static string format<F>(DatasetHeader<F> src, char delimiter = FieldDelimiter)
-            where F : unmanaged, Enum
-                => src.Render(delimiter);
 
         [Op]
         internal static string render(object content)

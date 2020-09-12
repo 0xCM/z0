@@ -42,6 +42,7 @@ namespace Z0
             State.Append(Eol);
         }
     }
+
     public interface IDatasetFormatter<F> : IDatasetFormatter
         where F : unmanaged, Enum
     {
@@ -51,11 +52,11 @@ namespace Z0
         string[] IDatasetFormatter.Labels
             => Table.headers<F>();
 
-        int Index(F field)
-            => index(field);
+        // int Index(F field)
+        //     => index(field);
 
-        int Width(F field)
-            => width(field);
+        // int Width(F field)
+        //     => width(field);
 
         void Append(F f, object content)
         {

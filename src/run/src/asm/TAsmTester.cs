@@ -20,8 +20,8 @@ namespace Z0.Asm
         IAsmFormatter Formatter
             => Context.Formatter;
 
-        IUriHexQuery UriBitQuery
-            => Z0.UriHexQuery.Service;
+        IX86UriHexQuery UriBitQuery
+            => Z0.X86UriHexQuery.Service;
 
         IPolyrand IPolyrandProvider.Random
             => Context.Random;

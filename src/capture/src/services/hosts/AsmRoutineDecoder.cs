@@ -29,7 +29,7 @@ namespace Z0.Asm
 
         public Option<AsmRoutine> Decode(X86ApiCapture src)
             => from i in Decode(src.Parsed)
-                let block = asm.block(src.HostedBits, i, src.TermCode)
+                let block = asm.block(src.UriHex, i, src.TermCode)
                 select AsmApi.routine(src.OpUri, src.Method.Signature().Format(), block);
 
         public Option<AsmRoutine> Decode(X86MemberRefinement src)

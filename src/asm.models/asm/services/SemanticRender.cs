@@ -38,9 +38,9 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static string render(in HexFormatConfig config, in MemDx src)
             => (src.Size switch{
-                DataSize.y1 => ((byte)src.Value).FormatHex(config),
-                DataSize.y2 => ((ushort)src.Value).FormatHex(config),
-                DataSize.y4 => ((uint)src.Value).FormatHex(config),
+                MemDxSize.y1 => ((byte)src.Value).FormatHex(config),
+                MemDxSize.y2 => ((ushort)src.Value).FormatHex(config),
+                MemDxSize.y4 => ((uint)src.Value).FormatHex(config),
                 _ => (src.Value).FormatHex(config),
             }) + "dx";
 
@@ -49,9 +49,9 @@ namespace Z0.Asm
 
         public static string format(in MemDx src)
             => (src.Size switch{
-                DataSize.y1 => ((byte)src.Value).FormatHex(HexSpec),
-                DataSize.y2 => ((ushort)src.Value).FormatHex(HexSpec),
-                DataSize.y4 => ((uint)src.Value).FormatHex(HexSpec),
+                MemDxSize.y1 => ((byte)src.Value).FormatHex(HexSpec),
+                MemDxSize.y2 => ((ushort)src.Value).FormatHex(HexSpec),
+                MemDxSize.y4 => ((uint)src.Value).FormatHex(HexSpec),
                 _ => (src.Value).FormatHex(HexSpec),
             }) + "dx";
 

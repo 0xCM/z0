@@ -10,11 +10,11 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-            
+
     partial struct asm
-    {        
+    {
         [MethodImpl(Inline), Op]
         public static MemDirect memDirect(in Instruction src)
-            => new MemDirect(src.MemoryBase, src.MemoryIndexScale, asm.memDx(src.MemoryDisplacement, src.MemoryDisplSize));
+            => new MemDirect(src.MemoryBase, src.MemoryIndexScale, asm.memDx(src.MemoryDisplacement, (MemDxSize)src.MemoryDisplSize));
     }
 }

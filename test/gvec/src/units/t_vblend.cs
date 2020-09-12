@@ -97,10 +97,10 @@ namespace Z0
             var x = vparts(n, 0,2,4,6,8,A,C,E);
             var y = vparts(n, 1,3,5,7,9,B,D,F);
 
-            Claim.veq(x, dvec.vblend(x,y, Blend8x16.LLLLLLLL));
-            Claim.veq(y, dvec.vblend(x,y, Blend8x16.RRRRRRRR));
-            Claim.veq(vparts(n, 0,2,4,6,9,B,D,F), dvec.vblend(x,y, Blend8x16.LLLLRRRR));
-            Claim.veq(vparts(n, 1,3,5,7,8,A,C,E), dvec.vblend(x,y, Blend8x16.RRRRLLLL));
+            Claim.veq(x, z.vblend(x,y, Blend8x16.LLLLLLLL));
+            Claim.veq(y, z.vblend(x,y, Blend8x16.RRRRRRRR));
+            Claim.veq(vparts(n, 0,2,4,6,9,B,D,F), z.vblend(x,y, Blend8x16.LLLLRRRR));
+            Claim.veq(vparts(n, 1,3,5,7,8,A,C,E), z.vblend(x,y, Blend8x16.RRRRLLLL));
 
         }
 
@@ -123,10 +123,10 @@ namespace Z0
             var w = w64;
             var left =  vparts(0,1);
             var right = vparts(4,5);
-            Claim.veq(vparts(0, 5),dvec.vblend(left, right, Blend2x64.LR));
-            Claim.veq(vparts(4, 1),dvec.vblend(left, right, Blend2x64.RL));
-            Claim.veq(vparts(0, 1),dvec.vblend(left, right, Blend2x64.LL));
-            Claim.veq(vparts(4, 5),dvec.vblend(left, right, Blend2x64.RR));
+            Claim.veq(vparts(0, 5), z.vblend(left, right, Blend2x64.LR));
+            Claim.veq(vparts(4, 1), z.vblend(left, right, Blend2x64.RL));
+            Claim.veq(vparts(0, 1), z.vblend(left, right, Blend2x64.LL));
+            Claim.veq(vparts(4, 5), z.vblend(left, right, Blend2x64.RR));
         }
 
         public void vblend_4x32_basecases()
@@ -152,9 +152,9 @@ namespace Z0
             Claim.veq(vparts(0,1,A,B,4,5,E,F), z.vblend(left,right, Blend8x32.LLRRLLRR));
             Claim.veq(vparts(8,9,2,3,C,D,6,7), z.vblend(left,right, Blend8x32.RRLLRRLL));
 
-            var lrpattern = V0.v32u(vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
-            for(var i=0; i < 8; i++)
-                Claim.eq(V0.vcell(lrpattern,i), gmath.even(i) ? 0u : uint.MaxValue);
+            var lrpattern = z.v32u(vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
+            for(byte i=0; i < 8; i++)
+                Claim.eq(z.vcell(lrpattern,i), gmath.even(i) ? 0u : uint.MaxValue);
 
             var zero = Vectors.vzero<uint>(n);
             var ones = gvec.vones<uint>(n);

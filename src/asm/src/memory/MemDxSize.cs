@@ -2,12 +2,23 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
-{        
-    public interface IAsmFxTriggerSet
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+
+    public enum MemDxSize : byte
     {
-        void FireOnMatch(in AsmFxList instructions);
-        
-        void FireOnMatch(in AsmRoutine function);
+        None,
+
+        y1,
+
+        y2,
+
+        y4,
+
+        y8
     }
 }

@@ -36,7 +36,7 @@ namespace Z0
 
         static GenericApiMethod[] generic(ApiHost src)
              => from m in TaggedOps(src).OpenGeneric()
-                let closures = ClosureKinds.numeric(m)
+                let closures = Reflex.NumericClosureKinds(m)
                 where closures.Length != 0
                 select new GenericApiMethod(src, Diviner.GenericIdentity(m), GenericDefintion(m), closures);
 

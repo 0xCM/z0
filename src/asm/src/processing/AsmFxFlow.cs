@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
@@ -13,12 +13,12 @@ namespace Z0.Asm
     using static z;
 
     public readonly struct AsmFxFlow : IAsmFxFlow
-    {        
+    {
         readonly AsmFxList[] FxList;
 
         readonly AsmTriggerSet Triggers;
 
-        readonly AsmFxHandler[] FxHandlers;                
+        readonly AsmFxHandler[] FxHandlers;
 
         [MethodImpl(Inline)]
         public AsmFxFlow(AsmFxList[] fxList, in AsmTriggerSet triggers, params AsmFxHandler[] handlers)
@@ -28,31 +28,17 @@ namespace Z0.Asm
             FxHandlers = handlers;
         }
 
-        int SourceCount
+        public AsmFxList[] Push(IAsmFxPipe pipe)
         {
-            [MethodImpl(Inline)]
-            get => FxList.Length;
-        }
-        
-        public IEnumerable<AsmFxList> Flow(IAsmFxPipe pipe)
-        {
-            for(var i=0; i<SourceCount; i++)
-            {
-                Triggers.FireOnMatch(FxList[i]);
-                yield return pipe.Flow(FxList[i]);
-            }
-        }    
-
-        public AsmFxList[] Push(IAsmFxPipe pipe)   
-        {
-            var buffer = alloc<AsmFxList>(SourceCount);
+            var count = FxList.Length;
+            var buffer = alloc<AsmFxList>(count);
             var dst = buffer.ToSpan();
-            var src = FxList.ToReadOnlySpan();
-            
-            for(var i=0u; i<SourceCount; i++)
+            var src = @readonly(FxList);
+
+            for(var i=0u; i<count; i++)
             {
                 ref readonly var item = ref skip(src,i);
-                
+
                 Triggers.FireOnMatch(item);
                 seek(dst,i) = pipe.Flow(item);
 

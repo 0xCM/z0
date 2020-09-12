@@ -15,23 +15,23 @@ namespace Z0.Asm
         public void define_resources()
         {
         }
-        
+
         public void mask_capture()
         {
             using var hexout = HexWriter();
             using var asmout = AsmWriter();
 
-            var methods = 
+            var methods =
                 from def in MaskCases.NumericMethodDefs
                 from closure in def.MakeGenericMethods(MaskCases.NumericArgs)
                 select closure;
 
             foreach(var src in methods)
             {
-                var captured = AsmCheck.Capture(src.Identify(), src).Require();                                
-                hexout.Write(captured.HostedBits);
+                var captured = AsmCheck.Capture(src.Identify(), src).Require();
+                hexout.Write(captured.UriHex);
                 asmout.WriteAsm(AsmCheck.Decoder.Decode(captured).Require());
-            }    
-        }                
+            }
+        }
     }
 }

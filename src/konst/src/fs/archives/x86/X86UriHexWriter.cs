@@ -6,12 +6,11 @@ namespace Z0
 {
     using System;
     using System.IO;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    public readonly struct ApiHexWriter : IApiHexWriter<ApiHexWriter>
+    public readonly struct X86UriHexWriter : IX86UriHexWriter<X86UriHexWriter>
     {
         /// <summary>
         /// The writer's target path
@@ -21,32 +20,23 @@ namespace Z0
         readonly StreamWriter StreamOut;
 
         [MethodImpl(Inline)]
-        public ApiHexWriter(FilePath path)
+        public X86UriHexWriter(FilePath path)
         {
             TargetPath = path;
             StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
         }
 
-        [MethodImpl(Inline)]
         public void Write(X86ApiCode src, int idpad = 60)
             => StreamOut.WriteLine(src.Format(idpad));
 
-        [MethodImpl(Inline)]
-        public void WriterLine(X86ApiCode src)
-            => Write(src,0);
-
-        public void WriteLines(X86ApiCode[] src)
-        {
-            var idpad = src.Max(x => x.OpUri.UriText.Length) + 1;
-            for(var i=0; i< src.Length; i++)
-                Write(src[i], idpad);
-            StreamOut.Flush();
-        }
+        public void Write(X86UriHex src, int idpad = 60)
+            => StreamOut.WriteLine(src.Format(idpad));
 
         public void Dispose()
         {
             StreamOut.Flush();
             StreamOut.Dispose();
         }
+
     }
 }

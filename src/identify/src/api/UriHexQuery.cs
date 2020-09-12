@@ -12,9 +12,9 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct UriHexQuery : IUriHexQuery
+    public readonly struct X86UriHexQuery : IX86UriHexQuery
     {
-        public static IUriHexQuery Service => default(UriHexQuery);
+        public static IX86UriHexQuery Service => default(X86UriHexQuery);
 
         /// <summary>
         /// Determines whether an operation accepts an argument of specified numeric kind

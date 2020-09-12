@@ -55,8 +55,8 @@ namespace Z0
                 RflagsModified = src.RflagsModified,
                 RflagsSet = src.RflagsSet,
                 RflagsUndefined = src.RflagsUndefined,
-                UsedMemory =  src.UsedMemory(),
-                UsedRegisters = src.UsedRegisters(),
+                UsedMemory =  src.UsedMemory,
+                UsedRegisters = src.UsedRegisters,
                 CpuidFeatures = src.CpuidFeatures,
                 Access = src.Access(),
             };

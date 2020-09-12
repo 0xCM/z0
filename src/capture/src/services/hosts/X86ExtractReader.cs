@@ -18,11 +18,11 @@ namespace Z0
         public X86ExtractReader(ApiSet api)
             => ApiSet = api;
 
-        static ApiIndex IndexApi(ApiMembers src)
+        static ApiMemberIndex IndexApi(ApiMembers src)
         {
             var pairs = src.Storage.Select(h => (h.Id, h));
             var ops = Identify.index(pairs,true);
-            return new ApiIndex(ops.HashTable, ops.Duplicates);
+            return new ApiMemberIndex(ops.HashTable, ops.Duplicates);
         }
 
         public X86ApiExtract[] Read(FilePath src)

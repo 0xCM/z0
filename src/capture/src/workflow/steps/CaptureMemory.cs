@@ -59,8 +59,8 @@ namespace Z0.Asm
 
             ClearBuffers();
 
-            var raw = Extractors.extract(src, ExtractBuffer);
-            var tryParse = Extractors.parse(raw, ParseBuffer);
+            var raw = X86Extraction.extract(src, ExtractBuffer);
+            var tryParse = X86Extraction.parse(raw, ParseBuffer);
             var captured = default(CapturedMemory);
             if(tryParse.IsSome())
             {

@@ -30,16 +30,6 @@ namespace Z0.Asm
         CpuidFeature[] CpuidFeatures {get; set;}
 
         /// <summary>
-        /// Retrieves the used memory array as specified by the InstructionInfo type
-        /// </summary>
-        Func<UsedMemory[]> UsedMemory {get;}
-
-        /// <summary>
-        /// Captures the used register array as specified by the InstructionInfo type
-        /// </summary>
-        Func<UsedRegister[]> UsedRegisters {get;}
-
-        /// <summary>
         /// Captures the op access array as specified by the InstructionInfo type
         /// </summary>
         Func<OpAccess[]> Access {get;}

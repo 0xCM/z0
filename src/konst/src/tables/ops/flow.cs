@@ -13,18 +13,6 @@ namespace Z0
     partial struct Table
     {
         /// <summary>
-        /// Defines a
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="dst"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static WfDataFlow<T[],BinaryCode> flow<T>(T[] src, BinaryCode dst)
-            where T : struct
-                => (src,dst);
-
-        /// <summary>
         /// Creates a <see cref='StringTableCells'/> sequence from a <see cref='string'/> sequence
         /// </summary>
         /// <param name="src">The source sequence</param>

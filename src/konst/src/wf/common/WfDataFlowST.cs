@@ -18,11 +18,15 @@ namespace Z0
         public readonly T Target;
 
         [MethodImpl(Inline)]
-        public static implicit operator WfDataFlow<S,T> ((S src, T dst) x)
+        public static implicit operator WfDataFlow<S,T>((S src, T dst) x)
             => new WfDataFlow<S,T>(x.src, x.dst);
 
         [MethodImpl(Inline)]
-        public static implicit operator WfType<S,T> (WfDataFlow<S,T> x)
+        public static implicit operator WfDataFlow<S,T>(Paired<S,T> x)
+            => new WfDataFlow<S,T>(x.Left, x.Right);
+
+        [MethodImpl(Inline)]
+        public static implicit operator WfType<S,T>(WfDataFlow<S,T> x)
             => x.Type;
 
         [MethodImpl(Inline)]

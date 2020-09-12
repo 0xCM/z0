@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.IO;
-        
+
     using static Konst;
     using static z;
 
@@ -18,25 +18,22 @@ namespace Z0
 
         int Counter;
 
-        StreamWriter Writer;        
-                
+        StreamWriter Writer;
+
         readonly FilePath Target;
 
-        static string[] HeaderLabels 
-            => Tabular.Headers<F>();
+        static string HeaderText
+            => Table.header53<F>();
 
-        static string HeaderText 
-            => Tabular.HeaderText<F>();
-        
         public CaseLog(FilePath dst)
         {
             Target = dst;
             Locker = new object();
             Writer = Target.Writer();
             Writer.WriteLine(HeaderText);
-            Counter = 0;        
+            Counter = 0;
         }
-        
+
         public void Deposit(params R[] src)
         {
             try
