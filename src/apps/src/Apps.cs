@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct Apps
     {
-        public static IAppContext context(ApiSet composition, IPolyrand random, ISettings settings, IAppMsgQueue queue)
+        public static IAppContext context(ApiParts composition, IPolyrand random, ISettings settings, IAppMsgQueue queue)
             => new AppContext(composition, random, settings, queue);
 
         public static IWfShell shell(Assembly control, string[] args, out IAppContext app)

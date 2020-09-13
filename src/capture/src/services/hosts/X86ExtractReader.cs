@@ -12,10 +12,10 @@ namespace Z0
 
     public readonly struct X86ExtractReader
     {
-        readonly ApiSet ApiSet;
+        readonly ApiParts ApiSet;
 
         [MethodImpl(Inline)]
-        public X86ExtractReader(ApiSet api)
+        public X86ExtractReader(ApiParts api)
             => ApiSet = api;
 
         static ApiMemberIndex IndexApi(ApiMembers src)

@@ -17,8 +17,8 @@ namespace Z0
         /// </summary>
         K Kind {get;}
 
-        ApiOpId IOpKind.KindId
-            => (ApiOpId)Kind;
+        ApiKeyKind IOpKind.KindId
+            => (ApiKeyKind)Kind;
     }
 
     /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
     public interface IArithmeticKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        ApiOpId IOpKind.KindId
+        ApiKeyKind IOpKind.KindId
             => default(F).KindId;
     }
 

@@ -44,7 +44,7 @@ namespace Z0
         {
             var fields = span(src.LiteralFields());
             var dst = span<EnumLiteralRecord>(fields.Length);
-            var ecode = Primal.ecode(src);
+            var ecode = PrimalKinds.ecode(src);
             etables(part, src, ecode, fields, dst);
             return dst;
         }

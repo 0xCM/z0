@@ -11,7 +11,7 @@ namespace Z0
 
     public interface IOpKind : IKind, ITextual
     {
-        ApiOpId KindId {get;}
+        ApiKeyKind KindId {get;}
 
         string ITextual.Format()
             => KindId.ToString().ToLower();

@@ -26,14 +26,6 @@ namespace Z0
             DiagnosticMode = diagnostic;
         }
 
-         protected IResolvedApi Api
-            => _Api.Value;
-
-        static ResolvedApi ComposeApi()
-            => ApiQuery.combine(ApiQuery.index().Array());
-
-        static Lazy<ResolvedApi> _Api {get;}
-            = Root.defer(ComposeApi);
     }
 
     public abstract class TestContext<U> : TestContext, ITestContext<U>

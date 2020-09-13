@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
     using static z;
@@ -15,7 +14,7 @@ namespace Z0
     public readonly struct Artifacts
     {
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<TypeArtifact> types(Assembly src)
-            => @recover<Type,TypeArtifact>(@readonly(src.Types()));
+        public static ClrArtifacts clr()
+            => default;
     }
 }

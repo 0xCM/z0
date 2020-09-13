@@ -185,7 +185,7 @@ namespace Z0
                 Wf.Running(id);
 
                 var processor = new ProcessAsm(State, encoded);
-                var parts = Wf.Api.Composition.Resolved.Select(p => p.Id);
+                var parts = Wf.Api.PartIdentities;
                 Wf.Raise(new ProcessingParts(id, parts, Ct));
                 var result = processor.Process();
                 Wf.Ran(id, result.Count);

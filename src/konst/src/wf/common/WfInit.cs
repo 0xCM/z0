@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         public WfLogConfig Logs {get;}
 
-        public ApiSet Api {get;}
+        public ApiParts Api {get;}
 
         /// <summary>
         /// The application-specific status log path

@@ -21,7 +21,7 @@ namespace Z0
             var data = Literals.value(src);
             var type = src.FieldType;
 
-            var datatype = Primal.kind(type);
+            var datatype = PrimalKinds.kind(type);
             if(data is string s)
             {
                 var content = z.span(s);

@@ -24,6 +24,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint1 eq<T>(T x, T y)
             where T : unmanaged
-                => Primal.eq(x,y);
+                => PrimalKinds.eq(x,y);
     }
 }

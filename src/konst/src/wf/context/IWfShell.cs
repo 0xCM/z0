@@ -17,7 +17,7 @@ namespace Z0
 
     public interface IWfShell : IShellContext, IDisposable
     {
-        ApiSet Api {get;}
+        ApiParts Api {get;}
 
         IShellContext Shell {get;}
 

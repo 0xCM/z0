@@ -305,6 +305,7 @@
         "lomask",
         "loopcc",
         "mclfilename",
+        "memmove",
         "modrm",
         "moduleassemblyname",
         "modulename",

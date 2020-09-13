@@ -14,7 +14,7 @@ namespace Z0
         /// Returns the source method's kind identifier if it exists
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static ApiOpId KindId(this MethodInfo m)
-            => m.Tag<OpKindAttribute>().MapValueOrDefault(a => a.KindId, ApiOpId.None);
+        public static ApiKeyKind KindId(this MethodInfo m)
+            => m.Tag<OpKindAttribute>().MapValueOrDefault(a => a.KindId, ApiKeyKind.None);
     }
 }

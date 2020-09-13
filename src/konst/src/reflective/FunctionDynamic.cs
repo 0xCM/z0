@@ -111,13 +111,6 @@ namespace Z0
             return  new LocatedMethod(OpIdentity.Empty, src, location, size);
         }
 
-        [MethodImpl(Inline), Op]
-        public static LocatedMethod jit(IdentifiedMethod src)
-        {
-            RuntimeHelpers.PrepareMethod(src.Method.MethodHandle);
-            var location = (MemoryAddress)src.Method.MethodHandle.GetFunctionPointer();
-            return new LocatedMethod(src.Id, src.Method, location);
-        }
 
         /// <summary>
         /// Jits the method declared by a specified type

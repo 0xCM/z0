@@ -95,6 +95,5 @@ namespace Z0
             *(gptr<ulong>(dst)) = src;
             return ref dst;
         }
-
     }
 }

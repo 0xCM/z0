@@ -15,6 +15,6 @@ namespace Z0
             KindId = ApiAttributes.OpKindId(id);
         }
 
-        public ApiOpId KindId {get;}
+        public ApiKeyKind KindId {get;}
     }
 }

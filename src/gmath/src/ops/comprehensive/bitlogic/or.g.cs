@@ -93,13 +93,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(BitLogic.or(uint8(a), uint8(b), uint8(c)));
+                return generic<T>(MultiOr.or(uint8(a), uint8(b), uint8(c)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(BitLogic.or(uint16(a), uint16(b), uint16(c)));
+                return generic<T>(MultiOr.or(uint16(a), uint16(b), uint16(c)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(BitLogic.or(uint32(a), uint32(b), uint32(c)));
+                return generic<T>(MultiOr.or(uint32(a), uint32(b), uint32(c)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(BitLogic.or(uint64(a), uint64(b), uint64(c)));
+                return generic<T>(MultiOr.or(uint64(a), uint64(b), uint64(c)));
             else
                 return or_i(a,b,c);
         }
@@ -109,15 +109,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return generic<T>(BitLogic.or(int8(a), int8(b), int8(c)));
+                 return generic<T>(MultiOr.or(int8(a), int8(b), int8(c)));
             else if(typeof(T) == typeof(short))
-                 return generic<T>(BitLogic.or(int16(a), int16(b), int16(c)));
+                 return generic<T>(MultiOr.or(int16(a), int16(b), int16(c)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(BitLogic.or(int32(a), int32(b), int32(c)));
+                 return generic<T>(MultiOr.or(int32(a), int32(b), int32(c)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(BitLogic.or(int64(a), int64(b), int64(c)));
+                 return generic<T>(MultiOr.or(int64(a), int64(b), int64(c)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

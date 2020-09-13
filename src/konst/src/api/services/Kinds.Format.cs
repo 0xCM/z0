@@ -27,13 +27,13 @@ namespace Z0
         public static string Format<T>(this ComparisonOpId kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
-        public static string Format(this ApiOpId id)
+        public static string Format(this ApiKeyKind id)
             => id.ToString().ToLower();
 
-        public static string Format(this ApiOpId id, bool vectorized)
+        public static string Format(this ApiKeyKind id, bool vectorized)
             => vectorized ? $"v{id.Format()}" : id.Format();
 
-        public static string Format(this ApiOpId? id)
+        public static string Format(this ApiKeyKind? id)
             => id.HasValue ? id.Value.Format() : "unkinded";
 
         [MethodImpl(Inline)]

@@ -13,7 +13,7 @@ namespace Z0
     partial struct ApiQuery
     {
         [MethodImpl(Inline), Op]
-        public static ApiSet combine(params IPart[] parts)
-            => new ApiSet(parts);
+        public static ApiParts combine(params IPart[] parts)
+            => new ApiParts(parts);
     }
 }

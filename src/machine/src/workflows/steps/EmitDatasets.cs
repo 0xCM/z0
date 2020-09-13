@@ -19,7 +19,7 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        readonly ApiSet Parts;
+        readonly ApiParts Parts;
 
         readonly bool Recapture;
 

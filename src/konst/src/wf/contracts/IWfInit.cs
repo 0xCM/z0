@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// The configured api set
         /// </summary>
-        ApiSet Api {get;}
+        ApiParts Api {get;}
 
         /// <summary>
         /// The context root

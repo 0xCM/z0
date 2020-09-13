@@ -99,7 +99,7 @@ namespace Z0
         /// <summary>
         /// The member kind, if known
         /// </summary>
-        public ApiOpId KindId
+        public ApiKeyKind KindId
             => Extracted.Member.KindId;
 
         public bool Equals(X86MemberRefinement src)

@@ -43,7 +43,7 @@ namespace Z0
 
         public FolderPath ResourceRoot {get;}
 
-        public ApiSet Api {get;}
+        public ApiParts Api {get;}
 
         public string ShellName {get;}
 
@@ -63,8 +63,8 @@ namespace Z0
             Shell = insist(Init.Shell);
             Modules = Init.Modules;
             Api = Modules.Api;
-            Parts = Api.Parts;
-            Components = Parts.Select(x => x.Owner);
+            Parts = Api;
+            Components = Api.Components;
             Paths = Shell.Paths;
             Args = Shell.Args;
             Control = Assembly.GetEntryAssembly();

@@ -108,7 +108,7 @@ namespace Z0
             var count = 128;
             var n = n2;
 
-            if(kid == ApiOpId.Div || kid == ApiOpId.Mod)
+            if(kid == ApiKeyKind.Div || kid == ApiKeyKind.Mod)
                 return 0;
 
             var apiclass = api.Method.ClassifyOperator();
@@ -138,8 +138,8 @@ namespace Z0
             }
         }
 
-        HashSet<ApiOpId> EvalSkip {get;}
-            = new HashSet<ApiOpId>(seq(ApiOpId.Inc));
+        HashSet<ApiKeyKind> EvalSkip {get;}
+            = new HashSet<ApiKeyKind>(seq(ApiKeyKind.Inc));
 
         void Analyze<T>(in X86ApiMember api, in UnaryEvaluations<T> eval)
             where T : unmanaged
@@ -205,7 +205,7 @@ namespace Z0
         {
             var kid = api.Member.KindId;
             int count = 128;
-            if(kid == 0 || kid == ApiOpId.Div || kid == ApiOpId.Mod)
+            if(kid == 0 || kid == ApiKeyKind.Div || kid == ApiKeyKind.Mod)
                 return;
 
             var nk = api.Method.ReturnType.NumericKind();
@@ -257,7 +257,7 @@ namespace Z0
         {
             var kid = api.Member.KindId;
             int count = 128;
-            if(kid == 0 || kid == ApiOpId.Div || kid == ApiOpId.Mod)
+            if(kid == 0 || kid == ApiKeyKind.Div || kid == ApiKeyKind.Mod)
                 return;
 
             var nk = api.Method.ReturnType.NumericKind();

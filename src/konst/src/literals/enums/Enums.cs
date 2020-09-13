@@ -44,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static EnumTypeCode typecode<E>()
             where E : unmanaged, Enum
-                => Primal.ecode<E>();
+                => PrimalKinds.ecode<E>();
 
         /// <summary>
         /// Reads a generic numeric value from a generic enum.

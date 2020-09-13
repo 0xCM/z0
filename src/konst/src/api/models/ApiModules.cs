@@ -19,9 +19,9 @@ namespace Z0
 
         public readonly Assembly[] Components;
 
-        public readonly ApiSet Parts;
+        public readonly ApiParts Parts;
 
-        public readonly ApiSet Api {get;}
+        public readonly ApiParts Api {get;}
 
         public ApiModules(FS.FolderPath root)
         {

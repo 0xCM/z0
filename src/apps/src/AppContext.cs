@@ -10,7 +10,7 @@ namespace Z0
 
     public class AppContext : IAppContext
     {
-        public ApiSet Api {get;}
+        public ApiParts Api {get;}
 
         public ISettings Settings {get;}
 
@@ -22,7 +22,7 @@ namespace Z0
 
         public event Action<IAppMsg> Next;
 
-        public AppContext(ApiSet parts, IPolyrand random, ISettings settings, IAppMsgQueue queue)
+        public AppContext(ApiParts parts, IPolyrand random, ISettings settings, IAppMsgQueue queue)
         {
             Paths = Z0.ShellPaths.Default;
             Next = msg => {};
@@ -32,7 +32,7 @@ namespace Z0
             Api = parts;
         }
 
-        public AppContext(IShellPaths paths, ApiSet parts, IPolyrand random, ISettings settings, IAppMsgQueue queue)
+        public AppContext(IShellPaths paths, ApiParts parts, IPolyrand random, ISettings settings, IAppMsgQueue queue)
         {
             Paths = paths;
             Next = msg => {};
@@ -41,18 +41,6 @@ namespace Z0
             MessageQueue = queue;
             Api = parts;
         }
-
-        public IResolvedApi Composition
-            => Api.Composition;
-
-        public IApiHost[] Hosts
-            => Api.Hosts;
-
-        public IPartCatalog[] Catalogs
-            => Api.Catalogs;
-
-        public IPart[] Parts
-            => Api.Parts;
 
         public PartId[] PartIdentities
             => Api.PartIdentities;

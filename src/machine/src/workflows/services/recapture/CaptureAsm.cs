@@ -24,7 +24,7 @@ namespace Z0
         }
 
         public CapturedAccessor[] Capture(ApiHostUri host, FilePath dst)
-            => Capture(host, ApiQuery.resources(Context.ContextRoot.Api.Composition.Components), dst);
+            => Capture(host, ApiQuery.resources(Context.ContextRoot.Api.Components), dst);
 
         public CapturedAccessor[] Capture(ApiHostUri host, ReadOnlySpan<ResourceAccessor> src, FilePath dst)
         {

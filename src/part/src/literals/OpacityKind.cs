@@ -10,7 +10,7 @@ namespace Z0
 
         Closure = NumericKind.All,
 
-        Root = ApiOpId.Opaque,
+        Root = ApiKeyKind.Opaque,
 
         First = Root + 1,
 

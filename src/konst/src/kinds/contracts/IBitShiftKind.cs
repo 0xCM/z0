@@ -11,8 +11,8 @@ namespace Z0
     {
         BitShiftOpId Kind {get;}
 
-        ApiOpId IOpKind.KindId
-            => (ApiOpId)Kind;
+        ApiKeyKind IOpKind.KindId
+            => (ApiKeyKind)Kind;
     }
 
     /// <summary>
@@ -22,7 +22,7 @@ namespace Z0
     public interface IBitShiftKind<F> : IBitShiftKind, IOpKind<F,BitShiftOpId>
         where F : unmanaged, IBitShiftKind
     {
-        ApiOpId IOpKind.KindId
+        ApiKeyKind IOpKind.KindId
             => default(F).KindId;
     }
 

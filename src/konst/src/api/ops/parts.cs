@@ -13,15 +13,15 @@ namespace Z0
 
     partial struct ApiQuery
     {
-        public static ApiSet parts(FS.Files paths)
+        public static ApiParts parts(FS.Files paths)
             => parts(paths.Data);
 
         [Op]
-        public static ApiSet parts()
+        public static ApiParts parts()
             => modules().Parts;
 
         [Op]
-        public static ApiSet parts(Assembly[] src)
+        public static ApiParts parts(Assembly[] src)
             => src.Where(isPart).Select(part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id);
 
         [Op]

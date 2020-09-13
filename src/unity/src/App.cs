@@ -12,21 +12,37 @@ namespace Z0
 
     struct App
     {
-        static FS.FolderPath BuildRoot => FS.dir(ShellPaths.Default.DevRoot.Name) + FS.folder(".build");
+        static FS.FolderPath BuildRoot = FS.dir(AppConfig.BuildRoot);
+
+        static IModuleArchive CreateBuildModuleArchive()
+            => ModuleArchive.create(BuildRoot);
+
+        static void Print<T>(IWfShell wf, ReadOnlySpan<T> src)
+            where T : ITextual
+        {
+            var count = src.Length;
+            if(count != 0)
+            {
+                ref readonly var lead = ref first(src);
+                for(var i=0u; i<count; i++)
+                {
+                    ref readonly var current = ref skip(lead, i);
+                    wf.DataRow(current);
+                }
+            }
+        }
+
+        static void PrintBuildModules(IWfShell wf)
+        {
+            var modules = CreateBuildModuleArchive();
+            Print(wf,modules.Files().ToReadOnlySpan());
+
+        }
 
         public static void Main(params string[] args)
         {
             var wf = Flow.shell(args);
 
-            var build = BuildArchive.create(BuildRoot);
-            var bin = build.NetCoreWin64("3.1");
-            var modules = ModuleArchive.create(bin);
-            foreach(var src in modules.Files())
-            {
-                wf.DataRow(src);
-            }
-
-            // var modules = ModuleArchive.module(w)
         }
     }
 

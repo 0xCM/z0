@@ -1,0 +1,1 @@
+[memmove](J:\lang\net\runtime\src\libraries\System.Private.CoreLib\src\System\Buffer.cs)

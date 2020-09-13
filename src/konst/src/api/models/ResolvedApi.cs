@@ -18,13 +18,13 @@ namespace Z0
         public Assembly[] Components {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator ResolvedApi(ApiSet src)
+        public static implicit operator ResolvedApi(ApiParts src)
             => new ResolvedApi(src);
 
         [MethodImpl(Inline)]
-        public ResolvedApi(ApiSet parts)
+        public ResolvedApi(ApiParts parts)
         {
-            Resolved = parts.Parts;
+            Resolved = parts;
             Components = parts.Components;
         }
     }
