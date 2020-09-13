@@ -41,7 +41,7 @@ namespace Z0
             Wf.Disposed(Host.Id);
         }
 
-        public void Run(ApiHostUri host, ReadOnlySpan<X86UriHex> x86data, FS.FilePath x86file)
+        public void Run(ApiHostUri host, ReadOnlySpan<X86ApiCodeTable> x86data, FS.FilePath x86file)
         {
             var wfStateless = Capture.Services;
             var reader = Archives.reader<X86UriHexReader>();
@@ -51,7 +51,7 @@ namespace Z0
             Claim.Eq(Spans.count<X86UriHex>(fileSrc, s => s.OpUri.IsEmpty),0);
             for(var i=0; i<x86data.Length; i++)
             {
-                Claim.Eq(skip(fileSrc,i).OpUri, skip(x86data,i).OpUri);
+                Claim.Eq(skip(fileSrc,i).OpUri.Format(), skip(x86data,i).Uri);
                 Claim.Eq(skip(fileSrc,i).Encoded.Length, skip(x86data, i).Encoded.Length);
             }
 

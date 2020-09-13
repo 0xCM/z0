@@ -15,6 +15,7 @@ namespace Z0
     using static Hex4Kind;
     using static z;
 
+    [ApiHost]
     public ref struct Dispatchers
     {
         [Op]

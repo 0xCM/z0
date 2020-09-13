@@ -11,7 +11,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using F = XedInstructionField;
     using R = XedInstructionRecord;
 
     partial struct XedOps

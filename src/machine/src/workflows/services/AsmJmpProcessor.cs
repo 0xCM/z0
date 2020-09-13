@@ -195,7 +195,7 @@ namespace Z0
                     formatter.Delimit(skip(widths,j++), jmp.Target);
                     formatter.Delimit(skip(widths,j++), jmp.Kind.Value());
                     formatter.Delimit(skip(widths,j++), jmp.Asm);
-                    writer.WriteLine(formatter.Format(true));
+                    writer.WriteLine(formatter.Render(true));
                 }
             }
         }

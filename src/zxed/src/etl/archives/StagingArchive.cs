@@ -12,7 +12,7 @@ namespace Z0.Xed
 
     public readonly struct XedStagingArchive : IPartFilePaths
     {
-        public static XedStagingArchive Create(FolderPath root)
+        public static XedStagingArchive Create(FS.FolderPath root)
             => new XedStagingArchive(root);
 
         public FolderPath ArchiveRoot {get;}
@@ -29,9 +29,9 @@ namespace Z0.Xed
         public FolderPath FunctionDir
             => ArchiveRoot + FunctionFolder;
 
-        public XedStagingArchive(FolderPath root)
+        public XedStagingArchive(FS.FolderPath root)
         {
-            ArchiveRoot = root;
+            ArchiveRoot = FolderPath.Define(root.Name);
         }
 
         public IEnumerable<FilePath> Files
@@ -78,7 +78,7 @@ namespace Z0.Xed
             }
         }
 
-        const string HSep = "--------------------------------------------------------------------------------------------------------";
+        const string HSep = RenderPatterns.PageBreak120;
     }
 
 }

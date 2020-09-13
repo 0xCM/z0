@@ -70,9 +70,24 @@ namespace Z0
             var count = declared.Length;
             var buffer = alloc<TableField>(count);
             var fields = span(buffer);
-
             for(ushort i=0; i<count; i++)
                 map(skip(declared,i), i, ref seek(fields,i));
+
+            return new TableFields(buffer);
+        }
+
+        public static TableFields fields<T>(ReadOnlySpan<byte> widths)
+            where T : struct
+        {
+            var type = typeof(T);
+            var declared = @readonly(type.SequentialFields());
+            var count = declared.Length;
+            var buffer = alloc<TableField>(count);
+            var fields = span(buffer);
+            for(ushort i=0; i<count; i++)
+            {
+                map(skip(declared,i), i, skip(widths,i), ref seek(fields,i));
+            }
 
             return new TableFields(buffer);
         }
@@ -86,6 +101,20 @@ namespace Z0
             dst.Offset = Interop.offset(src.DeclaringType, src.Name);
             dst.Id = (Address16)dst.Offset;
             dst.RenderWidth = 16;
+            dst.Size = default;
+            dst.Definition = src;
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ref TableField map(FieldInfo src, ushort index, byte width, ref TableField dst)
+        {
+            dst.Index = index;
+            dst.TableType = src.DeclaringType;
+            dst.DataType = src.FieldType;
+            dst.Offset = Interop.offset(src.DeclaringType, src.Name);
+            dst.Id = (Address16)dst.Offset;
+            dst.RenderWidth = width;
             dst.Size = default;
             dst.Definition = src;
             return ref dst;

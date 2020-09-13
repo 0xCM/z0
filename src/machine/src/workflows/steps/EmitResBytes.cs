@@ -17,7 +17,7 @@ namespace Z0
     {
         const string ProjectName = "bytes";
 
-        readonly IX86UriHexArchive Archive;
+        readonly X86UriHexArchive Archive;
 
         public readonly FolderPath SourceDir;
 
@@ -26,9 +26,6 @@ namespace Z0
         readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
-
-        IWfEventSink Sink
-            => Wf.Broker.Sink;
 
         public EmitResBytes(IWfShell context, CorrelationToken ct)
         {
@@ -43,8 +40,7 @@ namespace Z0
         public void Run()
         {
             Wf.Running(StepId, flow(SourceDir, TargetDir));
-            var archive = new X86UriHexArchive(Wf, FS.dir(SourceDir.Name));
-
+            var archive = X86UriHexArchive.create(FS.dir(SourceDir.Name));
             var indices = archive.Indices();
             foreach(var index in indices)
             {

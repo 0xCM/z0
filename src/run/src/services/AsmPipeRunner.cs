@@ -148,7 +148,7 @@ namespace Z0.Asm
             => CaptureArchive(part).HexPath<T>();
 
         [MethodImpl(Inline)]
-        IX86UriHexArchive UriBitsArchive(FolderPath root)
-            =>  Archives.x86(root);
+        X86UriHexArchive UriBitsArchive(FolderPath root)
+            => Archives.x86(root);
     }
 }

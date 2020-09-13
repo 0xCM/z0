@@ -38,10 +38,8 @@ namespace Z0
             Control = control;
             Root = root;
             var app = Control.Format();
-            StatusLog = root + FS.file(app, FS.Extensions.StatusLog);
-            ErrorLog = root + FS.file(app, FS.Extensions.ErrorLog);
-            //StatusLog = FS.path(text.format("{0}/{1}.status.log", root, Control.Format()));
-            //ErrorLog = FS.path(text.format("{0}/{1}.errors.log", root, Control.Format()));
+            StatusLog = root + FS.file(app, GlobalExtensions.StatusLog);
+            ErrorLog = root + FS.file(app, GlobalExtensions.ErrorLog);
         }
 
         [MethodImpl(Inline)]

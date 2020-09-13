@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static PathPart normalize(PathPart src)
-            => src.Name.Replace('\\', '/');
+            => src.Text.Replace('\\', '/');
 
         [MethodImpl(Inline), Op]
         public static FilePath normalize(FilePath src)

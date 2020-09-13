@@ -48,7 +48,7 @@ namespace Z0
         }
 
 
-        public static X86UriHex[] save(ApiHostUri host, X86ApiMembers src, FS.FilePath dst)
+        public static X86UriHex[] save(X86ApiMembers src, FS.FilePath dst)
         {
             using var writer = new X86ApiWriter(dst);
             var data = src.Storage.Map(x => new X86UriHex(x.Address, x.OpUri, x.Encoded.Encoded));

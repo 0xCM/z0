@@ -391,5 +391,17 @@ namespace Z0
         /// </summary>
         [StringLiteral("{0} -> {1}")]
         public const string ArrowAxB = "{0} -> {1}";
+
+        const string PageBreak10 = "----------";
+
+        public const string PageBreak20 = PageBreak10 + PageBreak10;
+
+        public const string PageBreak40 = PageBreak20 + PageBreak20;
+
+        public const string PageBreak80 = PageBreak40 + PageBreak40;
+
+        public const string PageBreak120 = PageBreak80 + PageBreak40;
+
+        public const string PageBreak160 = PageBreak80 + PageBreak80;
     }
 }

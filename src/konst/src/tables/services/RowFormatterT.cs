@@ -45,13 +45,11 @@ namespace Z0
             return this;
         }
 
-        public string Format(bool reset)
+        public string Render(bool reset = true)
         {
             var content = Target.ToString();
-
             if(reset)
                 Target.Clear();
-
             return content;
         }
 
@@ -140,6 +138,14 @@ namespace Z0
             Target.Append(Delimiter);
             Target.Append(Space);
             Target.Append(src.ToString().PadRight(width));
+        }
+
+        public void Delimit<X>(X src)
+            where X : ITextual
+        {
+            Target.Append(Delimiter);
+            Target.Append(Space);
+            Target.Append(src.Format());
         }
 
         public void Delimit(ushort width, uint src)

@@ -9,8 +9,8 @@ namespace Z0
 
     partial class XTend
     {
-        public static StreamWriter Writer(this FS.FilePath dst, FileWriteMode mode)
-            => FS.writer(dst, mode);
+        public static StreamWriter Writer(this FS.FilePath dst, bool append)
+            => FS.writer(dst, append ? FileWriteMode.Append : FileWriteMode.Overwrite);
 
         /// <summary>
         /// Creates an overwriting and caller-disposed stream writer that targets a specified path

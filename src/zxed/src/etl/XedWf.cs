@@ -20,6 +20,7 @@ namespace Z0
 
     using F = XedPatternField;
     using R = XedPatternSummary;
+    using static RenderPatterns;
 
     [ApiHost]
     public readonly ref struct XedWf
@@ -44,11 +45,12 @@ namespace Z0
             Src = XedSourceArchive.Create(Config.SourceRoot);
             Dst = XedStagingArchive.Create(Config.ExtractRoot);
             Pub = TableArchive.create(Config.PubRoot);
+            Wf.Created(typeof(XedWf));
         }
 
         public void Dispose()
         {
-
+            Wf.Disposed(typeof(XedWf));
         }
 
         public XedPattern[] ExtractPatterns()
@@ -116,9 +118,7 @@ namespace Z0
         {
             foreach(var selected in Config.Extensions)
                 Pub.Deposit<F,R>(Filter(src, selected),
-                    Config.ExtensionFolder,
-                    FileName.define(Xed.XedConst.Name(selected), Config.DataFileExt)
-                    );
+                    Config.ExtensionFolder, FS.file(Xed.XedConst.Name(selected), Config.DataFileExt));
         }
 
         void SaveCategories(XedPatternSummary[] src)
@@ -148,7 +148,7 @@ namespace Z0
                     if(body.Length != 0)
                     {
                         writer.WriteLine(f.Declaration);
-                        writer.WriteLine(HSep120);
+                        writer.WriteLine(PageBreak);
 
                         for(var j = 0; j < body.Length; j++)
                             writer.WriteLine(body[j]);
@@ -175,6 +175,6 @@ namespace Z0
             SaveFunctions(functions);
         }
 
-        const string HSep120 = "--------------------------------------------------------------------------------------------------------";
+        const string PageBreak = PageBreak120;
     }
 }

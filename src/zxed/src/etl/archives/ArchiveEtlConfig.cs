@@ -15,24 +15,24 @@ namespace Z0.Xed
         public XedEtlConfig(IWfShell shell, WfSettings settings)
         {
             Settings = settings;
-            SourceRoot = shell.Paths.DevRoot + FolderName.Define("data") + FolderName.Define("sources") + FolderName.Define("xed");
-            TargetRoot = shell.Paths.LogRoot + FolderName.Define("data") + FolderName.Define("xed");
+            SourceRoot = FS.dir(shell.Paths.DevRoot.Name) + FS.folder("data") + FS.folder("sources") + FS.folder("xed");
+            TargetRoot = FS.dir(shell.Paths.LogRoot.Name) + FS.folder("data") + FS.folder("xed");
         }
 
         public readonly WfSettings Settings;
 
-        public readonly FolderPath SourceRoot;
+        public readonly FS.FolderPath SourceRoot;
 
-        public readonly FolderPath TargetRoot;
+        public readonly FS.FolderPath TargetRoot;
 
-        public FolderPath ExtractRoot
-            => TargetRoot + FolderName.Define("extracts");
+        public FS.FolderPath ExtractRoot
+            => TargetRoot + FS.folder("extracts");
 
-        public FolderPath PubRoot
-            => TargetRoot + FolderName.Define("datasets");
+        public FS.FolderPath PubRoot
+            => TargetRoot + FS.folder("datasets");
 
-        public FolderName ExtensionFolder
-            => FolderName.Define("extensions");
+        public FS.FolderName ExtensionFolder
+            => FS.folder("extensions");
 
         public FolderName CategoryFolder
             => FolderName.Define("categories");

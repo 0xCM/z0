@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static FS.FolderNames;
-    using L = FS.FolderNames;
+    using static GlobalFolderNames;
+    using L = GlobalFolderNames;
 
     /// <summary>
     /// Defines common part path components
@@ -22,7 +22,7 @@ namespace Z0
         /// An archive partition for static data
         /// </summary>
         FolderName LogsFolder
-            => FolderName.Define(Logs);
+            => FolderName.Define(LogFolder);
 
         /// <summary>
         /// Part folder name predicated on the entry assembly
@@ -40,7 +40,7 @@ namespace Z0
             => FolderName.Define("unparsed", "Extraction parse failures");
 
         FolderName AsmFolderName
-            => FolderName.Define(L.Asm);
+            => FolderName.Define(L.AsmFolder);
 
         FolderName X86FolderName
             => FolderName.Define("code", "Hex formatted encoded x86 assembly");
@@ -52,7 +52,7 @@ namespace Z0
         /// The imm root folder name
         /// </summary>
         FolderName ImmFolderName
-            => FolderName.Define(Imm);
+            => FolderName.Define(ImmFolder);
 
         /// <summary>
         /// Defines a part-specific folder name {part}

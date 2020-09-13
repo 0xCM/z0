@@ -7,15 +7,16 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static FS.FolderNames;
+    using static GlobalFolderNames;
+    using FN = GlobalFolderNames;
 
     public interface IShellPaths
     {
         IPartCaptureArchive PartCaptureArchive
-            => Archives.capture(FS.dir(LogRoot.Name) + FS.folder(FS.FolderNames.Capture));
+            => Archives.capture(FS.dir(LogRoot.Name) + FS.folder(FN.Capture));
 
         IPartCaptureArchive CaptureArchive()
-            => Archives.capture(FS.dir(LogRoot.Name) + FS.folder(Capture) + FS.folder(Artifacts));
+            => Archives.capture(FS.dir(LogRoot.Name) + FS.folder(Capture) + FS.folder(ArtifactFolder));
 
         IHostCaptureArchive CaptureArchive(ApiHostUri host)
             => HostCaptureArchive.create(CaptureArchive().ArchiveRoot, host);
@@ -75,7 +76,7 @@ namespace Z0
         /// The name of the runtime log folder
         /// </summary>
         FolderName AppLogFolder
-            => FolderName.Define(Apps);
+            => FolderName.Define(AppsFolder);
 
         /// <summary>
         /// The name of the folder into which capture results are deposited

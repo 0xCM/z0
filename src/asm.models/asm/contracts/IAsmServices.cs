@@ -62,7 +62,7 @@ namespace Z0.Asm
         /// <param name="host">The host uri</param>
         /// <param name="formatter">The formatter to use</param>
         /// <param name="dst">The archive target</param>
-        HostAsmArchiver HostArchiver(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
-            => new HostAsmArchiver(host, formatter, z.insist(dst));
+        AsmImmWriter HostArchiver(ApiHostUri host, IAsmFormatter formatter, FolderPath dst)
+            => new AsmImmWriter(host, formatter, z.insist(dst));
     }
 }

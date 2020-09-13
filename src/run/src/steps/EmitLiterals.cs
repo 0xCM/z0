@@ -53,7 +53,7 @@ namespace Z0
                 try
                 {
                     Format(row, formatter);
-                    dst.WriteLine(formatter.Format(true));
+                    dst.WriteLine(formatter.Render(true));
                 }
                 catch(Exception e)
                 {

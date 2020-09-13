@@ -18,7 +18,7 @@ namespace Z0
         /// The first member
         /// </summary>
         public readonly T First;
-        
+
         /// <summary>
         /// The second member
         /// </summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// The third member
         /// </summary>
         public readonly T Third;
-        
+
         /// <summary>
         /// The fourth member
         /// </summary>
@@ -43,18 +43,18 @@ namespace Z0
             => new ConstQuad<T>(src.a.Left,src.a.Right, src.b.Left,src.b.Right);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(in ConstQuad<T> a, in ConstQuad<T> b)        
+        public static bool operator ==(in ConstQuad<T> a, in ConstQuad<T> b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(in ConstQuad<T> a, in ConstQuad<T> b)        
+        public static bool operator !=(in ConstQuad<T> a, in ConstQuad<T> b)
             => a.Equals(b);
 
         [MethodImpl(Inline)]
         public ConstQuad(T a, T b, T c, T d)
         {
             First = a; Second = b; Third = c; Fourth = d;
-        }                
+        }
 
         public T this[int i]
         {
@@ -89,12 +89,16 @@ namespace Z0
 
         public override int GetHashCode()
             => HashCode.Combine(First,Second,Third);
-        
+
         public override bool Equals(object obj)
             => obj is ConstQuad<T> x && Equals(x);
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public Y Map<Y>(Func<ConstQuad<T>,Y> f)
+            => f(this);
     }
 
 }

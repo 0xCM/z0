@@ -36,6 +36,6 @@ namespace Z0
         /// <param name="recurse">Specifies whether subdirectories should be searched</param>
         [MethodImpl(Inline), Op]
         public static Seq<FilePath> managed(FolderPath src, bool recurse = false)
-            => files(src, recurse, Extensions.Dll, Extensions.Exe).Where(managed);
+            => files(src, recurse, GlobalExtensions.Dll, GlobalExtensions.Exe).Where(managed);
     }
 }

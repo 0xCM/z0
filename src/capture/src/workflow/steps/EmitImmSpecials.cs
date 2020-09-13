@@ -80,7 +80,7 @@ namespace Z0
         Imm8R[] RefinedValues(MethodInfo src)
             => RefiningParameter(src).RefinedImmValues();
 
-        void EmitDirectRefinements(in CaptureExchange exchange, ApiHost host, IHostAsmArchiver dst)
+        void EmitDirectRefinements(in CaptureExchange exchange, ApiHost host, IAsmImmWriter dst)
         {
             var archive = Archive(host);
             var groups = ApiCollector.ImmDirect(host, ImmRefinementKind.Refined);
@@ -132,7 +132,7 @@ namespace Z0
                 where h is ApiHost
                 select (ApiHost)h;
 
-        HostAsmArchiver Archive(IApiHost host)
+        AsmImmWriter Archive(IApiHost host)
             => AsmServices.Services.HostArchiver(host.Uri, Formatter, CodeArchive.ArchiveRoot);
 
         void EmitUnrefined(in CaptureExchange exchange, Imm8R[] imm8, params PartId[] parts)
@@ -161,7 +161,7 @@ namespace Z0
             }
         }
 
-        void EmitUnrefinedDirect(in CaptureExchange exchange, IEnumerable<DirectApiGroup> groups, Imm8R[] imm8, IHostAsmArchiver dst)
+        void EmitUnrefinedDirect(in CaptureExchange exchange, IEnumerable<DirectApiGroup> groups, Imm8R[] imm8, IAsmImmWriter dst)
         {
             var unary = from g in groups
                         let members = g.Members.Where(m => m.Method.IsVectorizedUnaryImm(ImmRefinementKind.Unrefined))
@@ -189,7 +189,7 @@ namespace Z0
             }
         }
 
-        void EmitGenericRefinements(in CaptureExchange exchange, ApiHost host, IHostAsmArchiver dst)
+        void EmitGenericRefinements(in CaptureExchange exchange, ApiHost host, IAsmImmWriter dst)
         {
             var specs = ApiCollector.ImmGeneric(host, ImmRefinementKind.Refined);
             foreach(var f in specs)
@@ -201,7 +201,7 @@ namespace Z0
             }
         }
 
-        void EmitUnrefinedGeneric(in CaptureExchange exchange, GenericApiMethod f,  Imm8R[] imm8, IHostAsmArchiver dst)
+        void EmitUnrefinedGeneric(in CaptureExchange exchange, GenericApiMethod f,  Imm8R[] imm8, IAsmImmWriter dst)
         {
             if(f.Method.IsVectorizedUnaryImm(ImmRefinementKind.Unrefined))
                 EmitUnary(exchange, f, imm8, dst);
@@ -209,7 +209,7 @@ namespace Z0
                 EmitBinary(exchange, f, imm8, dst);
         }
 
-        void EmitUnrefinedUnary(in CaptureExchange exchange, OpIdentity gid, IEnumerable<DirectApiMethod> unary, Imm8R[] imm8, IHostAsmArchiver dst)
+        void EmitUnrefinedUnary(in CaptureExchange exchange, OpIdentity gid, IEnumerable<DirectApiMethod> unary, Imm8R[] imm8, IAsmImmWriter dst)
         {
             var generic = false;
             foreach(var f in unary)
@@ -224,7 +224,7 @@ namespace Z0
             }
         }
 
-        void EmitUnrefinedBinary(in CaptureExchange exchange, OpIdentity gid, IEnumerable<DirectApiMethod> binary, Imm8R[] imm8, IHostAsmArchiver dst)
+        void EmitUnrefinedBinary(in CaptureExchange exchange, OpIdentity gid, IEnumerable<DirectApiMethod> binary, Imm8R[] imm8, IAsmImmWriter dst)
         {
             var generic = false;
             foreach(var f in binary)
@@ -239,7 +239,7 @@ namespace Z0
             }
         }
 
-        void EmitUnary(in CaptureExchange exchange, GenericApiMethod f, Imm8R[] imm8, IHostAsmArchiver dst, Type refinement = null)
+        void EmitUnary(in CaptureExchange exchange, GenericApiMethod f, Imm8R[] imm8, IAsmImmWriter dst, Type refinement = null)
         {
             var gid = f.Id;
             var host = f.HostUri;
@@ -255,7 +255,7 @@ namespace Z0
             }
         }
 
-        void EmitBinary(in CaptureExchange exchange, GenericApiMethod f, Imm8R[] imm8, IHostAsmArchiver dst, Type refinement = null)
+        void EmitBinary(in CaptureExchange exchange, GenericApiMethod f, Imm8R[] imm8, IAsmImmWriter dst, Type refinement = null)
         {
             var gid = f.Id;
             var host = f.HostUri;

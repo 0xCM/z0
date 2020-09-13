@@ -12,12 +12,12 @@ namespace Z0
 
     public readonly struct XedSourceArchive : IPartFilePaths
     {
-        public static XedSourceArchive Create(FolderPath root)
+        public static XedSourceArchive Create(FS.FolderPath root)
             => new XedSourceArchive(root);
 
-        public XedSourceArchive(FolderPath root)
+        public XedSourceArchive(FS.FolderPath root)
         {
-            this.ArchiveRoot = root;
+            ArchiveRoot = FolderPath.Define(root.Name);
         }
 
         public FolderPath ArchiveRoot {get;}

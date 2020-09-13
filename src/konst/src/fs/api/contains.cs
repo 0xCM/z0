@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static bool contains(PathPart src, string match)
-            => src.Name.Contains(match);
+            => src.Text.Contains(match);
     }
 }

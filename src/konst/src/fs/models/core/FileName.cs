@@ -23,7 +23,7 @@ namespace Z0
             public FileExt FileExt
             {
                 [MethodImpl(Inline)]
-                get => new FileExt(Path.GetExtension(Name.Name));
+                get => new FileExt(Path.GetExtension(Name.Text));
             }
 
             [MethodImpl(Inline)]
@@ -47,7 +47,7 @@ namespace Z0
             public bool HasExtension
             {
                 [MethodImpl(Inline)]
-                get => Path.GetExtension(z.span(Name.Name)).Length != 0;
+                get => Path.GetExtension(z.span(Name.Text)).Length != 0;
             }
 
             public bool IsEmpty
@@ -79,7 +79,7 @@ namespace Z0
             /// </summary>
             /// <param name="host">The owner to test</param>
             public bool HostedBy(ApiHostUri host)
-                => Name.Name.StartsWith(string.Concat(host.Owner.Format(), Chars.Dot, host.Name.ToLower(), Chars.Dot));
+                => Name.Text.StartsWith(string.Concat(host.Owner.Format(), Chars.Dot, host.Name.ToLower(), Chars.Dot));
 
             const string ExtPattern = "{0}.{1}";
 

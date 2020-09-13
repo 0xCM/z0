@@ -20,6 +20,9 @@ namespace Z0
         public Option<FilePath> Save(R[] src, FS.FilePath dst)
             => Save(src, api.renderspec<F>(), FilePath.Define(dst.Name), Overwrite);
 
+        public Option<FilePath> Save(R[] data, TableRenderSpec<F> format, FS.FilePath dst, FileWriteMode mode = Overwrite)
+            => Save(data,format,FilePath.Define(dst.Name), mode);
+
         public Option<FilePath> Save(R[] data, TableRenderSpec<F> format, FilePath dst, FileWriteMode mode = Overwrite)
         {
             if(data == null || data.Length == 0)

@@ -37,7 +37,7 @@ namespace Z0.Asm
         protected IX86UriHexWriter HexWriter([Caller] string caller = null)
         {
             var dstPath = TargetArchive.HexPath(FileName.define(caller, FileExtensions.HexLine));
-            return Archives.writer<X86UriHexWriter>(dstPath);
+            return Archives.hexwriter<X86UriHexWriter>(dstPath);
         }
 
         protected IAsmTextWriter AsmWriter([Caller] string caller = null)
@@ -51,7 +51,7 @@ namespace Z0.Asm
             var paths = AppPaths.ForApp(PartId.Control);
             var root = paths.AppCaptureRoot;
             var capture = Archives.capture(root);
-            var archive = new X86UriHexArchive(root);
+            var archive = X86UriHexArchive.create(root);
             return archive.Read(capture.HexPath(host)).ToArray();
         }
 

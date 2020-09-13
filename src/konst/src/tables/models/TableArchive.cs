@@ -18,10 +18,6 @@ namespace Z0
         public FolderPath ArchiveRoot {get;}
 
         [MethodImpl(Inline)]
-        public static TableArchive create(FolderPath root)
-            => new TableArchive(root);
-
-        [MethodImpl(Inline)]
         public static TableArchive create(FS.FolderPath root)
             => new TableArchive(root);
 
@@ -39,8 +35,22 @@ namespace Z0
         public void Clear(FolderName folder)
             => (ArchiveRoot + folder).Clear();
 
+        public void Clear(FS.FolderName folder)
+            => (FS.dir(ArchiveRoot.Name) + folder).Clear();
+
+
         public IEnumerable<FilePath> Files()
             => ArchiveRoot.Files(FileExtensions.Csv, true);
+
+        public Option<FilePath> Deposit<F,R>(R[] src, FS.FileName name)
+            where F : unmanaged, Enum
+            where R : struct, ITabular
+                => api.store<F,R>().Save(src, api.renderspec<F>(), ArchiveRoot + FileName.define(name.Name));
+
+        public Option<FilePath> Deposit<F,R>(R[] src, FS.FolderName folder, FS.FileName name)
+            where F : unmanaged, Enum
+            where R : struct, ITabular
+                => api.store<F,R>().Save(src, api.renderspec<F>(), (FS.dir(ArchiveRoot.Name) + folder) + name);
 
         public Option<FilePath> Deposit<F,R>(R[] src, FileName name)
             where F : unmanaged, Enum

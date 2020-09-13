@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         public readonly struct PathPart : ITextual
         {
-            public string Name {get;}
+            public string Text {get;}
 
             [MethodImpl(Inline)]
             public static bool operator ==(PathPart a, PathPart b)
@@ -36,7 +36,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public static implicit operator string(PathPart data)
-                => data.Name;
+                => data.Text;
 
             [MethodImpl(Inline)]
             public static PathPart from(string src)
@@ -44,44 +44,44 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public PathPart(string name)
-                => Name = name;
+                => Text = name;
 
             [MethodImpl(Inline)]
             public PathPart(params char[] name)
-                => Name = new string(name);
+                => Text = new string(name);
 
             public ReadOnlySpan<char> View
             {
                 [MethodImpl(Inline)]
-                get => Name;
+                get => Text;
             }
 
             [MethodImpl(Inline)]
             public PathPart Remove(string substring)
-                => Name.Remove(substring);
+                => Text.Remove(substring);
 
             [MethodImpl(Inline)]
             public bool Contains(string substring)
-                => Name.Contains(substring);
+                => Text.Contains(substring);
 
             [MethodImpl(Inline)]
             public string Format()
-                => Name;
+                => Text;
 
             [MethodImpl(Inline)]
             public PathPart[] Split(char delimiter)
-                => Name.SplitClean(delimiter).Select(from);
+                => Text.SplitClean(delimiter).Select(from);
 
             public bool IsEmpty
             {
                 [MethodImpl(Inline)]
-                get => text.empty(Name);
+                get => text.empty(Text);
             }
 
             public bool IsNonEmpty
             {
                 [MethodImpl(Inline)]
-                get => text.nonempty(Name) && Name.Length > 0;
+                get => text.nonempty(Text) && Text.Length > 0;
             }
 
             public static PathPart Empty
@@ -95,14 +95,14 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public PathPart Replace(char src, char dst)
-                => Name.Replace(src,dst);
+                => Text.Replace(src,dst);
 
             public override int GetHashCode()
-                => Name.GetHashCode();
+                => Text.GetHashCode();
 
             [MethodImpl(Inline)]
             public bool Equals(PathPart src)
-                => string.Equals(Name, src.Name, NoCase);
+                => string.Equals(Text, src.Text, NoCase);
 
             public override bool Equals(object src)
                 => src is PathPart x && Equals(x);

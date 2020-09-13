@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static FS.FolderNames;
-    using FN = FS.FolderNames;
+    using static GlobalFolderNames;
+    using FN = GlobalFolderNames;
 
     public interface IPartResPaths : IShellPaths
     {
@@ -16,12 +16,12 @@ namespace Z0
             => LogRoot + FolderName.Define(RespackContent);
 
         FolderPath ResTables
-            => ResRoot + FolderName.Define(Tables);
+            => ResRoot + FolderName.Define(TableFolder);
 
         FolderPath ResIndex
-            => ResRoot + FolderName.Define(Index);
+            => ResRoot + FolderName.Define(IndexFolder);
 
         FolderPath AsmResTables
-            => ResTables + FolderName.Define(FN.Asm);
+            => ResTables + FolderName.Define(FN.AsmFolder);
     }
 }

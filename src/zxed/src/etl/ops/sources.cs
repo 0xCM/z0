@@ -38,9 +38,8 @@ namespace Z0
             return patterns.ToArray();
         }
 
-
         [MethodImpl(Inline), Op]
         public static ListedFiles sources(in XedEtlConfig config)
-            => FS.dir(config.SourceRoot.Name).List("*.*", true);
+            => Archives.list(FS.dir(config.SourceRoot.Name),"*.*", true);
     }
 }

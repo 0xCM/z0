@@ -26,6 +26,18 @@ namespace Z0
 
         public readonly ulong MessageCode;
 
+        public static Outcome<T> Empty
+        {
+            [MethodImpl(Inline)]
+            get => new Outcome<T>(0ul);
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => MessageCode == 0;
+        }
+
         [MethodImpl(Inline)]
         public static bool operator true(Outcome<T> src)
             => src.Ok == true;
@@ -64,7 +76,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Outcome(ulong code)
+        Outcome(ulong code)
         {
             Ok = false;
             Data = default;

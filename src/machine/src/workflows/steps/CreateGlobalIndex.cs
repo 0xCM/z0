@@ -52,7 +52,7 @@ namespace Z0
 
             try
             {
-                var files = SourceFiles.ParseFiles.View;
+                var files = SourceFiles.Parsed.View;
                 var count = files.Length;
                 var builder = new EmitCaptureIndex(Wf);
 

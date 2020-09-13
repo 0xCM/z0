@@ -25,7 +25,7 @@ namespace Z0
             Name = name;
             Source = src;
             OutDir = dst;
-            TargetPath = OutDir + FS.file(Name, FS.Extensions.Exe);
+            TargetPath = OutDir + FS.file(Name, GlobalExtensions.Exe);
         }
     }
 }

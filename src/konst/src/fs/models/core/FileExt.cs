@@ -15,6 +15,12 @@ namespace Z0
         {
             public PathPart Name {get;}
 
+            public string Text
+            {
+                [MethodImpl(Inline)]
+                get => Name.Text;
+            }
+
             [MethodImpl(Inline)]
             public static FileExt operator + (FileExt a, FileExt b)
                 => ext(text.format("{0}.{1}", a.Name, b.Name));
@@ -34,6 +40,7 @@ namespace Z0
             [MethodImpl(Inline)]
             public bool Matches(FilePath src)
             {
+
                 var left = Name.View;
                 var right = src.FileExt.Name.View;
                 return left.ContentEqual(right);

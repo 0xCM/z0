@@ -17,6 +17,12 @@ namespace Z0
         {
             public PathPart Name {get;}
 
+            public string Text
+            {
+                [MethodImpl(Inline)]
+                get => Name.Text;
+            }
+
             public static FilePath Empty
                 => new FilePath(PathPart.Empty);
 
@@ -43,7 +49,7 @@ namespace Z0
             public FileExt FileExt
             {
                 [MethodImpl(Inline)]
-                get => FS.ext(Path.GetExtension(Name));
+                get => FS.ext(Path.GetExtension(Name).TrimStart('.'));
             }
 
             public FolderPath FolderPath
@@ -103,7 +109,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public bool Is(FileExt ext)
-                => ext.Matches(this);
+                => string.Compare(FileExt.Text, ext.Text, NoCase) == 0;
 
             public FilePath ChangeExtension(FileExt ext)
                 => FolderPath + FS.file(Path.ChangeExtension(Path.GetFileName(Name), ext.Name));
