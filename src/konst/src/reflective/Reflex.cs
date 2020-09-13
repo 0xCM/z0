@@ -69,9 +69,6 @@ namespace Z0
         public static Reflected reflected(IWfShell wf)
             => new Reflected(wf);
 
-        public static ReflectedKinds Kinds
-            => default;
-
         public static Assembly EntryAssembly
         {
             [MethodImpl(Inline), Op]

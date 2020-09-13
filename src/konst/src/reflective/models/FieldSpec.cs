@@ -22,7 +22,7 @@ namespace Z0
         /// <summary>
         /// The assembly-qualified name of the field data type
         /// </summary>
-        public readonly ClrTypeName TypeName;
+        public readonly Name TypeName;
 
         /// <summary>
         /// The position of the field within the declaring type
@@ -35,7 +35,7 @@ namespace Z0
         public readonly Address16? Offset;
 
         [MethodImpl(Inline)]
-        public FieldSpec(Name name, ClrTypeName type, ushort pos, Address16? offset = null)
+        public FieldSpec(Name name, string type, ushort pos, Address16? offset = null)
         {
             TypeName = type;
             FieldName = name;

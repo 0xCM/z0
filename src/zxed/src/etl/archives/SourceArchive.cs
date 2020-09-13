@@ -15,18 +15,15 @@ namespace Z0
         public static XedSourceArchive Create(FS.FolderPath root)
             => new XedSourceArchive(root);
 
+        public FolderPath ArchiveRoot {get;}
+
+        public FilePath[] Files {get;}
+
         public XedSourceArchive(FS.FolderPath root)
         {
             ArchiveRoot = FolderPath.Define(root.Name);
+            Files = ArchiveRoot.Files(FileExtensions.Txt,true).Array();
         }
-
-        public FolderPath ArchiveRoot {get;}
-
-        public IEnumerable<FilePath> Files
-            => ArchiveRoot.Files(FileExtensions.Txt,true);
-
-        public int FileCount
-            => Files.Count();
 
         bool ContainsMarker(FilePath file, string marker)
         {
@@ -56,18 +53,15 @@ namespace Z0
                     return true;
             }
             return false;
-
-            //=> ContainsMarker(file, SourceMarkers.FUNC_MARKER);
-
         }
 
-        public IEnumerable<FilePath> InstructionFiles
+        public FilePath[] InstructionFiles
             => Files.Where(DefinesInstructions);
 
-        public IEnumerable<FilePath> FunctionFiles
+        public FilePath[] FunctionFiles
             => Files.Where(DefinesFunctions);
 
-        public IEnumerable<FilePath> EnumFiles
+        public FilePath[] EnumFiles
             => Files.Where(f => f.FileName.EndsWith("enum"));
     }
 

@@ -11,21 +11,21 @@ set DstDir="%ArchiveDir%\capture"
 set LogPath="%ZLogs%\etl\archive-capture.log"
 robocopy %SrcDir% %DstDir% /log:%LogPath% /tee /TS /BYTES /V /MIR
 
-REM set SrcDir="%ZLogs%\respack\content"
-REM set DstDir="%ArchiveDir%\emitted"
-REM set LogPath="%ZLogs%\etl\emitted-archive.log"
-REM robocopy %SrcDir% %DstDir% /log:%LogPath% /tee /TS /BYTES /V /MIR
+set SrcDir="%ZLogs%\respack\content"
+set DstDir="%ArchiveDir%\emitted"
+set LogPath="%ZLogs%\etl\emitted-archive.log"
+robocopy %SrcDir% %DstDir% /log:%LogPath% /tee /TS /BYTES /V /MIR
 
-REM set TestLogSrc="%ZLogs%\test"
-REM set TestLogDst="%Archive%\test"
-REM set TestLogLog="%ZLogs%\etl\test-archive.log"
-REM robocopy %TestLogSrc% %TestLogDst% /log:%TestLogLog% /tee /TS /BYTES /V /MIR
+set TestLogSrc="%ZLogs%\test"
+set TestLogDst="%Archive%\test"
+set TestLogLog="%ZLogs%\etl\test-archive.log"
+robocopy %TestLogSrc% %TestLogDst% /log:%TestLogLog% /tee /TS /BYTES /V /MIR
 
-REM set EtlLogSrc="%ZLogs%\etl"
-REM set EtlLogDst="%Archive%\.logs"
-REM set EltLogLog="%ZLogs%\etl\etl-archive.log"
-REM robocopy %EtlLogSrc% %EtlLogDst% /log:%EltLogLog% /tee /TS /BYTES /V /MIR
+set EtlLogSrc="%ZLogs%\etl"
+set EtlLogDst="%Archive%\.logs"
+set EltLogLog="%ZLogs%\etl\etl-archive.log"
+robocopy %EtlLogSrc% %EtlLogDst% /log:%EltLogLog% /tee /TS /BYTES /V /MIR
 
-REM set VerSrc="%ZDev%\version"
-REM set VerDst="%Archive%\"
-REM copy %VerSrc% /A %VerDst% /Y
+set VerSrc="%ZDev%\version"
+set VerDst="%Archive%\"
+copy %VerSrc% /A %VerDst% /Y

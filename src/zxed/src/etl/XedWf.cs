@@ -37,9 +37,9 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        public XedWf(IWfShell context, XedEtlConfig config)
+        public XedWf(IWfShell wf, XedEtlConfig config)
         {
-            Wf = context;
+            Wf = wf;
             Config = config;
             Ct = Wf.Ct;
             Src = XedSourceArchive.Create(Config.SourceRoot);
@@ -58,7 +58,7 @@ namespace Z0
             var step = Flow.step(typeof(void),typeof(XedWf));
             var patterns = list<XedPattern>();
             var parser = XedSourceParser.Service;
-            var files = Src.InstructionFiles.ToSpan();
+            var files = @readonly(Src.InstructionFiles);
             try
             {
                 for(var i=0; i< files.Length; i++)

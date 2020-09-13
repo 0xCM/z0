@@ -8,8 +8,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.InteropServices;
+    using System.Runtime.CompilerServices;
     using System.Diagnostics;
 
+    using static Konst;
     using static z;
 
     [ApiDataType]
@@ -26,7 +28,6 @@ namespace Z0
         public const int IMAGE_CEE_CS_CALLCONV_FIELD = 0x6;
 
         public const int IMAGE_CEE_CS_CALLCONV_LOCAL_SIG = 0x7;
-
 
         public const byte ELEMENT_TYPE_CMOD_REQD = 0x1F;
 
@@ -95,6 +96,7 @@ namespace Z0
         public const int mdtName = 0x71000000;
 
         public const int mdtBaseType = 0x72000000; // Leave this on the high end value. This does not correspond to metadata table
+
         byte* _sig;
 
         int _len;
@@ -331,6 +333,7 @@ namespace Z0
             return true;
         }
 
+        [MethodImpl(Inline)]
         bool GetByte(out byte data)
         {
             if (_len <= 0)
@@ -344,6 +347,7 @@ namespace Z0
             return true;
         }
 
+        [MethodImpl(Inline)]
         bool PeekByte(out byte data)
         {
             if (_len <= 0)
