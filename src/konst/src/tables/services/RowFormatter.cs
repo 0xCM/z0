@@ -56,7 +56,7 @@ namespace Z0
             {
                 dst.Append(Delimiter);
                 dst.Append(Space);
-                ref readonly var field = ref z.skip(view,i);
+                ref readonly var field = ref skip(view,i);
                 dst.Append(field.Name.PadRight(Widths[i]));
             }
             return dst.ToString();

@@ -6,23 +6,23 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static Memories;
     using static TypedLogicSpec;
 
     public class t_bitwise_expr : UnitTest<t_bitwise_expr, ICheckVectorBits>
     {
-        protected override ICheckVectorBits Claim => CheckVectorBits.Checker;        
+        protected override ICheckVectorBits Claim => CheckVectorBits.Checker;
 
         BitLogix bitlogix => BitLogix.Service;
 
-        public void check_not_scalar_expr()  
-        {      
-            check_scalar_expr<byte>(UnaryBitLogic.Not);
-            check_scalar_expr<ushort>(UnaryBitLogic.Not);
-            check_scalar_expr<uint>(UnaryBitLogic.Not);
-            check_scalar_expr<ulong>(UnaryBitLogic.Not);
+        public void check_not_scalar_expr()
+        {
+            check_scalar_expr<byte>(UnaryBitLogicKind.Not);
+            check_scalar_expr<ushort>(UnaryBitLogicKind.Not);
+            check_scalar_expr<uint>(UnaryBitLogicKind.Not);
+            check_scalar_expr<ulong>(UnaryBitLogicKind.Not);
         }
 
         public void check_and_scalar_expr()
@@ -86,9 +86,9 @@ namespace Z0.Logix
         }
 
         public void check_not_128_expr()
-        {            
+        {
             var n = n128;
-            var op = UnaryBitLogic.Not;
+            var op = UnaryBitLogicKind.Not;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -96,7 +96,7 @@ namespace Z0.Logix
         }
 
         public void check_and_128_expr()
-        {            
+        {
             var n = n128;
             var op = BinaryLogicKind.And;
             check_cpu_expr<byte>(n, op);
@@ -106,7 +106,7 @@ namespace Z0.Logix
         }
 
         public void check_or_128_expr()
-        {            
+        {
             var n = n128;
             var op = BinaryLogicKind.Or;
             check_cpu_expr<byte>(n, op);
@@ -116,7 +116,7 @@ namespace Z0.Logix
         }
 
         public void check_xor_128_expr()
-        {            
+        {
             var n = n128;
             var op = BinaryLogicKind.Xor;
             check_cpu_expr<byte>(n, op);
@@ -126,7 +126,7 @@ namespace Z0.Logix
         }
 
         public void check_nand_128_expr()
-        {            
+        {
             var n = n128;
             var op = BinaryLogicKind.Nand;
             check_cpu_expr<byte>(n, op);
@@ -136,7 +136,7 @@ namespace Z0.Logix
         }
 
         public void check_nor_128_expr()
-        {            
+        {
             var n = n128;
             var op = BinaryLogicKind.Nor;
             check_cpu_expr<byte>(n, op);
@@ -146,7 +146,7 @@ namespace Z0.Logix
         }
 
         public void check_xnor_128_expr()
-        {            
+        {
             var n = n128;
             var op = BinaryLogicKind.Xnor;
             check_cpu_expr<byte>(n, op);
@@ -156,9 +156,9 @@ namespace Z0.Logix
         }
 
         public void check_not_256_expr()
-        {            
+        {
             var n = n128;
-            var op = UnaryBitLogic.Not;
+            var op = UnaryBitLogicKind.Not;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -166,7 +166,7 @@ namespace Z0.Logix
         }
 
         public void check_and_256_expr()
-        {            
+        {
             var n = n256;
             var op = BinaryLogicKind.And;
             check_cpu_expr<byte>(n, op);
@@ -176,7 +176,7 @@ namespace Z0.Logix
         }
 
         public void check_or_256_expr()
-        {            
+        {
             var n = n256;
             var op = BinaryLogicKind.Or;
             check_cpu_expr<byte>(n, op);
@@ -186,7 +186,7 @@ namespace Z0.Logix
         }
 
         public void check_xor_256_expr()
-        {            
+        {
             var n = n256;
             var op = BinaryLogicKind.Xor;
             check_cpu_expr<byte>(n, op);
@@ -196,7 +196,7 @@ namespace Z0.Logix
         }
 
         public void check_nand_256_expr()
-        {            
+        {
             var n = n256;
             var op = BinaryLogicKind.Nand;
             check_cpu_expr<byte>(n, op);
@@ -206,7 +206,7 @@ namespace Z0.Logix
         }
 
         public void check_nor_256_expr()
-        {            
+        {
             var n = n256;
             var op = BinaryLogicKind.Nor;
             check_cpu_expr<byte>(n, op);
@@ -216,7 +216,7 @@ namespace Z0.Logix
         }
 
         public void check_xnor_256_expr()
-        {            
+        {
             var n = n256;
             var op = BinaryLogicKind.Xnor;
             check_cpu_expr<byte>(n, op);
@@ -224,14 +224,14 @@ namespace Z0.Logix
             check_cpu_expr<uint>(n, op);
             check_cpu_expr<ulong>(n, op);
         }
-        
+
         public void check_ternary_ops()
         {
             Root.iter(Spans.set(VLogixOps.TernaryBitLogicKinds, NumericLogixHost.TernaryLogicKinds),
                 check_ternary_ops);
         }
 
-        void check_ternary_ops(TernaryBitLogic op)
+        void check_ternary_ops(TernaryBitLogicKind op)
         {
             //check_ternary_ops<byte>(op);
             //check_ternary_ops<ushort>(op);
@@ -239,7 +239,7 @@ namespace Z0.Logix
             // check_ternary_ops<ulong>(op);
         }
 
-        void check_op_identity<T>(TernaryBitLogic id)
+        void check_op_identity<T>(TernaryBitLogicKind id)
             where T: unmanaged
         {
             var a = convert<T>(0b1111_0000);
@@ -252,7 +252,7 @@ namespace Z0.Logix
             Claim.eq(expect.FormatHex(), actual.FormatHex());
         }
 
-        void check_ternary_ops<T>(TernaryBitLogic id)
+        void check_ternary_ops<T>(TernaryBitLogicKind id)
             where T : unmanaged
         {
             var BL = bitlogix.Lookup(id);
@@ -294,19 +294,19 @@ namespace Z0.Logix
             }
         }
 
-        void check_scalar_expr<T>(UnaryBitLogic kind)
+        void check_scalar_expr<T>(UnaryBitLogicKind kind)
             where T : unmanaged
         {
             var v1 = variable<T>(1);
             var expr = unary(kind,v1);
-            
+
             for(var i=0; i< RepCount; i++)
             {
                 var a = Random.Next<T>();
                 v1.Set(a);
                 BitVector<T> actual = LogicEngine.eval(expr).Value;
                 BitVector<T> expect = NumericLogixHost.eval(kind,a);
-                Claim.eq(actual,expect);                                            
+                Claim.eq(actual,expect);
             }
         }
 
@@ -316,7 +316,7 @@ namespace Z0.Logix
             var v1 = variable<T>(1);
             var v2 = variable<T>(2);
             var expr = binary(op,v1,v2);
-            
+
             for(var i=0; i< RepCount; i++)
             {
                 var a = Random.Next<T>();
@@ -327,40 +327,40 @@ namespace Z0.Logix
                 T result1 = LogicEngine.eval(expr);
                 //T result2 = BitVectorOpApi.eval(op, BitVector.alloc(a),BitVector.alloc(b)).Scalar;
                 var result2 = BitVectorLogix.Service.EvalDirect(op, BitVector.alloc(a),BitVector.alloc(b)).Scalar;
-                Claim.Eq(expect, result1);                            
-                Claim.Eq(expect, result2);                            
+                Claim.Eq(expect, result1);
+                Claim.Eq(expect, result2);
             }
         }
 
-        void check_cpu_expr<T>(N128 n, UnaryBitLogic op)
+        void check_cpu_expr<T>(N128 n, UnaryBitLogicKind op)
             where T : unmanaged
         {
             var v1 = variable(1, default(Vector128<T>));
             var expr = unary(op,v1);
-            
+
             for(var i=0; i< RepCount; i++)
             {
                 var a = Random.CpuVector<T>(n128);
-                v1.Set(a);   
+                v1.Set(a);
                 Vector128<T> actual = LogicEngine.eval(expr);
                 Vector128<T> expect = VLogixOps.eval(op,a);
-                Claim.veq(actual,expect);                            
+                Claim.veq(actual,expect);
             }
         }
 
-        void check_cpu_expr<T>(N256 n, UnaryBitLogic op)
+        void check_cpu_expr<T>(N256 n, UnaryBitLogicKind op)
             where T : unmanaged
         {
             var v1 = variable(1, default(Vector256<T>));
             var expr = unary(op,v1);
-            
+
             for(var i=0; i< RepCount; i++)
             {
                 var a = Random.CpuVector<T>(n256);
-                v1.Set(a);   
+                v1.Set(a);
                 Vector256<T> actual = LogicEngine.eval(expr);
                 Vector256<T> expect = VLogixOps.eval(op,a);
-                Claim.veq(actual,expect);                            
+                Claim.veq(actual,expect);
             }
         }
 
@@ -370,36 +370,36 @@ namespace Z0.Logix
             var v1 = variable(1, default(Vector128<T>));
             var v2 = variable(2, default(Vector128<T>));
             var expr = binary(op,v1,v2);
-            
+
             for(var i=0; i< RepCount; i++)
             {
                 var a = Random.CpuVector<T>(n128);
                 var b = Random.CpuVector<T>(n128);
-                v1.Set(a);   
+                v1.Set(a);
                 v2.Set(b);
                 Vector128<T> actual = LogicEngine.eval(expr);
                 Vector128<T> expect = VLogixOps.eval(op,a,b);
-                Claim.veq(actual,expect);                            
+                Claim.veq(actual,expect);
             }
         }
 
         void check_cpu_expr<T>(N256 n, BinaryLogicKind op)
             where T : unmanaged
         {
-            
+
             var v1 = variable(1, default(Vector256<T>));
             var v2 = variable(2, default(Vector256<T>));
             var expr = binary(op,v1,v2);
-            
+
             for(var i=0; i< RepCount; i++)
             {
                 var a = Random.CpuVector<T>(n256);
                 var b = Random.CpuVector<T>(n256);
-                v1.Set(a);   
+                v1.Set(a);
                 v2.Set(b);
                 Vector256<T> actual = LogicEngine.eval(expr);
                 Vector256<T> expect = VLogixOps.eval(op,a,b);
-                Claim.veq(actual,expect);                            
+                Claim.veq(actual,expect);
             }
         }
     }

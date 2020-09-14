@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ArithmeticOpId;
+    using K = ArithmeticApiKeyKind;
     using I = IArithmeticKind;
 
     partial class Kinds

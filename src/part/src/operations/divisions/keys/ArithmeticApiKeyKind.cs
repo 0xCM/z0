@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Identifies arithmetic operation kinds
     /// </summary>
-    public enum ArithmeticOpId : ulong
+    public enum ArithmeticApiKeyKind : ushort
     {
         /// <summary>
         /// The empty identity

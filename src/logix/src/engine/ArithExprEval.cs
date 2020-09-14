@@ -12,7 +12,7 @@ namespace Z0.Logix
 
     using static LogicSig;
 
-    using UAR = UnaryArithmeticOpId;
+    using UAR = UnaryArithmeticApiKeyKind;
 
     [ApiHost("expr.arith.eval")]
     public class ArithExprEval : IApiHost<ArithExprEval>
@@ -83,8 +83,8 @@ namespace Z0.Logix
                 default:
                     switch(expr.OpKind)
                     {
-                        case BinaryArithmeticOpId.Add: return add(expr);
-                        case BinaryArithmeticOpId.Sub: return sub(expr);
+                        case BinaryArithmeticApiKeyKind.Add: return add(expr);
+                        case BinaryArithmeticApiKeyKind.Sub: return sub(expr);
                         default: throw new NotSupportedException(sig<T>(expr.OpKind));
                     }
             }

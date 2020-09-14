@@ -15,7 +15,7 @@ namespace Z0
         public readonly struct CNonImpl<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged
         {
-            public const BitLogicOpId OpKind = BitLogicOpId.CNonImpl;
+            public const BitLogicApiKeyKind OpKind = BitLogicApiKeyKind.CNonImpl;
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)

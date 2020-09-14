@@ -8,7 +8,7 @@ namespace Z0.Logix
     /// Characterizes a typed ternary bitwise operator
     /// </summary>
     /// <typeparam name="T">The type over which the operator is defined</typeparam>
-    public interface ITernaryBitwiseOpExpr<T> : ITernaryOpExpr<IExpr<T>>, IOperatorExpr<T,TernaryBitLogic> 
+    public interface ITernaryBitwiseOpExpr<T> : ITernaryOpExpr<IExpr<T>>, IOperatorExpr<T,TernaryBitLogicKind>
         where T : unmanaged
     {
 

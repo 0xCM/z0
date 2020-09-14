@@ -179,9 +179,9 @@ namespace Z0
             if(Collected.Count != 0)
             {
                 var widths = JmpInfo.RenderWidths;
-                var formatter = Table.rowformatter<JmpInfo>();
+                var formatter = Table.rowformatter<JmpInfo>(widths);
                 using var writer = Target.Writer();
-                writer.WriteLine(formatter.FormatHeader(widths));
+                writer.WriteLine(formatter.FormatHeader());
                 var jumps = @readonly(Collected.ToArray());
                 var count = jumps.Length;
                 for(var i=0u; i<count; i++)

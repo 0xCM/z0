@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Identifies comparison (predicate) kinds
     /// </summary>
-    public enum ComparisonOpId : ulong
+    public enum ComparisonKeyKind : ushort
     {
         /// <summary>
         /// The empty identity

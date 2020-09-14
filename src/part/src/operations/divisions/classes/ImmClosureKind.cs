@@ -4,24 +4,23 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    /// <summary>
-    /// Defines polarity classifiers
-    /// </summary>
-    public enum SignKind : sbyte
+    public enum ImmClosureKind : byte
     {
-        /// <summary>
-        /// Specifies negative polarity
-        /// </summary>
-        Negative = -1,
+        None = 0,
 
         /// <summary>
-        /// Specifies neutral polarity
+        /// Indicates closure is specified for an explicitly-specified set of immediates
         /// </summary>
-        Neutral = 0,
+        Individuals = 1,
 
         /// <summary>
-        /// Specifies positive polarity
+        /// Indicates closure is specified for a range of immediates
         /// </summary>
-        Positive = 1
+        Range = 2,
+
+        /// <summary>
+        /// Indicates closure is specified for an inclusive range of powers of 2
+        /// </summary>
+        Powers2 = 3,
     }
 }

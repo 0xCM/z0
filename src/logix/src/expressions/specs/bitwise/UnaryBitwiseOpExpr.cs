@@ -7,8 +7,8 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
-    
+    using static Konst;
+
     /// <summary>
     /// Defines a unary bitwise operator expression
     /// </summary>
@@ -18,7 +18,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public UnaryBitLogic OpKind {get;}
+        public UnaryBitLogicKind OpKind {get;}
 
         /// <summary>
         /// The operand
@@ -26,12 +26,12 @@ namespace Z0.Logix
         public IExpr<T> Arg {get;}
 
         [MethodImpl(Inline)]
-        public UnaryBitwiseOpExpr(UnaryBitLogic op, IExpr<T> operand)
+        public UnaryBitwiseOpExpr(UnaryBitLogicKind op, IExpr<T> operand)
         {
             OpKind = op;
             Arg = operand;
         }
-        
+
         public string Format()
             => OpKind.Format(Arg);
 

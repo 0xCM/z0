@@ -11,25 +11,26 @@ namespace Z0
 
     using static z;
     using static Konst;
-    using static EmitFieldLiteralsStep;
+    using static EmitFieldLiteralsHost;
 
     public readonly ref struct EmitFieldLiterals
     {
         readonly IWfShell Wf;
 
-        readonly CorrelationToken Ct;
+
+        readonly EmitFieldLiteralsHost Host;
 
         FolderPath Target
-            => Wf.ResourceRoot + FolderName.Define("fields");
+            => Wf.ResourceRoot + FolderName.Define("fieldlits");
 
         ApiModules Modules
             => ApiQuery.modules();
 
-        public EmitFieldLiterals(IWfShell context, CorrelationToken ct)
+        public EmitFieldLiterals(IWfShell wf, EmitFieldLiteralsHost host)
         {
-            Ct = ct;
-            Wf = context;
-            Wf.Created(StepId);
+            Host = host;
+            Wf = wf;
+            Wf.Created(Host);
         }
 
         void Emit(PartTypes src)
@@ -58,7 +59,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
 
         const string Sep = "| ";
@@ -120,7 +121,7 @@ namespace Z0
 
         void Emit(FieldRef[] src, FilePath dst)
         {
-            Wf.Running(StepId, dst.Name);
+            Wf.Running(Host, dst.Name);
             var input = span(src);
             var count = input.Length;
 
@@ -133,7 +134,7 @@ namespace Z0
                 writer.WriteLine(formatLine(field));
             }
 
-            Wf.Ran(StepId, dst.Name);
+            Wf.Ran(Host, dst.Name);
         }
     }
 }

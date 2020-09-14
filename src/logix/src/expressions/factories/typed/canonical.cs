@@ -7,8 +7,8 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst;    
+
+    using static Konst;
     using BLK = BinaryLogicKind;
 
     partial class TypedLogicSpec
@@ -128,7 +128,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static UnaryBitwiseOpExpr<T> not<T>(IExpr<T> operand)
             where T : unmanaged
-                => unary(UnaryBitLogic.Not, operand);
+                => unary(UnaryBitLogicKind.Not, operand);
 
         /// <summary>
         /// Defines a a bitwise complement expression with a literal operand
@@ -138,7 +138,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static UnaryBitwiseOpExpr<T> not<T>(T operand)
             where T : unmanaged
-                => unary(UnaryBitLogic.Not, literal(operand));
+                => unary(UnaryBitLogicKind.Not, literal(operand));
 
         /// <summary>
         /// Defines a bitwise NAND expression

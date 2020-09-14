@@ -6,7 +6,7 @@ namespace Z0
 {
     using static Konst;
 
-    using K = BitLogicOpId;
+    using K = BitLogicApiKeyKind;
     using I = IBitLogicKind;
 
     /// <summary>
@@ -39,7 +39,7 @@ namespace Z0
     public interface IBitLogicKind<F,T> : IBitLogicKind<F>
         where F : unmanaged, I
     {
-        BitLogicOpId I.Kind
+        BitLogicApiKeyKind I.Kind
             => default(F).Kind;
 
         /// <summary>

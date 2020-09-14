@@ -11,8 +11,8 @@ namespace Z0
     using static Konst;
 
     using BLK = BinaryLogicKind;
-    using TLK = TernaryBitLogic;
-    using ULK = UnaryBitLogic;
+    using TLK = TernaryBitLogicKind;
+    using ULK = UnaryBitLogicKind;
 
     using K = Kinds;
 

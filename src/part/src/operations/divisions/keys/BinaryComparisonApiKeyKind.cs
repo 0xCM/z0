@@ -11,7 +11,7 @@ namespace Z0
     /// <summary>
     /// Identifies binary comparison predicates
     /// </summary>
-    public enum BinaryComparisonOpId : ulong
+    public enum BinaryComparisonApiKeyKind : ushort
     {
         /// <summary>
         /// The empty identity

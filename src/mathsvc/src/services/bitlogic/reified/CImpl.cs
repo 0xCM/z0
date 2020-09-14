@@ -15,7 +15,7 @@ namespace Z0
         public readonly struct CImpl<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged
         {
-            public const BitLogicOpId OpKind = BitLogicOpId.CImpl;
+            public const BitLogicApiKeyKind OpKind = BitLogicApiKeyKind.CImpl;
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)

@@ -11,7 +11,7 @@ namespace Z0
     /// <summary>
     /// Classifies unary arithmetic operators
     /// </summary>
-    public enum UnaryArithmeticOpId : ulong
+    public enum UnaryArithmeticApiKeyKind : ushort
     {
         None = 0,
 

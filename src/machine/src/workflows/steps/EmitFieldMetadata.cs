@@ -9,18 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    using F = ImageFieldTableField;
-    using W = ImageFieldTabledWidth;
-
     public readonly ref struct EmitFieldMetadata
     {
         readonly IWfShell Wf;
 
-        readonly IWfHost Host;
+        readonly EmitFieldMetadataHost Host;
 
         readonly IPart[] Parts;
-
-        readonly ImageFieldTable Spec;
 
         readonly FolderPath TargetDir;
 
@@ -30,16 +25,14 @@ namespace Z0
             Wf = wf;
             Host = host;
             Parts = wf.Api.Parts;
-            Spec = ImageRecords.Fields;
             TargetDir = wf.ResourceRoot + FolderName.Define("fields");
-            Wf.Created(Host.Id);
+            Wf.Created(Host);
         }
 
         public void Run()
         {
             var count = 0u;
-            var partCount = Parts.Length;
-            Wf.Running(Host.Id, new {PartCount = partCount});
+            Wf.Running(Host, Parts.Length);
 
             foreach(var part in Parts)
             {
@@ -53,50 +46,32 @@ namespace Z0
                 }
             }
 
-            Wf.Ran(Host.Id, new {PartCount = partCount, RecordCount = count});
+            Wf.Ran(Host, count);
         }
 
-        static IPeTableReader Reader(string src)
-            => PeTableReader.open(FilePath.Define(src));
-
-        FilePath TargetPath(PartId part)
-            => TargetDir +  FileName.define(part.Format(), "fields.csv");
+        static ReadOnlySpan<byte> Widths => new byte[7]{16,60,12,12,16,40,30};
 
         uint Emit(IPart part)
         {
-            var rk = ImageRecords.FieldRva;
-            var id = part.Id;
-            var path = TargetPath(id);
-
-            Wf.Emitting<ImageFieldTable>(Host.Id, FS.path(path.Name));
+            var t = new ImageFieldTable();
+            var file = FS.file(string.Format("{0}.{1}", part.Id.Format(), ImageFieldTable.TableName), GlobalExtensions.Csv);
+            var path = FS.dir(TargetDir.Name) +  file;
+            Wf.Emitting(Host, t, FS.path(path.Name));
 
             var assembly = part.Owner;
-            using var reader = Reader(assembly.Location);
+            using var reader = PeTableReader.open(FilePath.Define(assembly.Location));
             var src = reader.ReadFields();
             var count = (uint)src.Length;
 
-            var formatter = Table.formatter<F,W>();
-            formatter.EmitHeader(true);
-            foreach(var record in src)
-                format(record, formatter);
+            var formatter = Table.rowformatter(Widths,t);
+            using var writer = path.Writer();
+            writer.WriteLine(formatter.FormatHeader());
+            foreach(var item in src)
+                writer.WriteLine(formatter.FormatRow(item));
 
-            path.Overwrite(formatter.Render());
-
-            Wf.Emitted<ImageFieldTable>(Host.Id, count, FS.path(path.Name));
+            Wf.Emitted(Host, t, count, FS.path(path.Name));
             return count;
         }
-
-        static ref readonly RecordFormatter<F,W> format(in ImageFieldTable src, in RecordFormatter<F,W> dst, bool eol = true)
-        {
-            dst.Delimit(F.Sequence, src.Seq);
-            dst.Delimit(F.Name, src.Name);
-            dst.Delimit(F.Signature, src.Sig);
-            dst.Delimit(F.Attributes, src.Attribs);
-            if(eol)
-                dst.EmitEol();
-            return ref dst;
-        }
-
 
         public void Dispose()
         {

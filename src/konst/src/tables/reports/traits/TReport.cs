@@ -42,7 +42,7 @@ namespace Z0
         string[] IReport.HeaderLabels
         {
             [MethodImpl(Inline)]
-            get => Table.headers<F>();
+            get => Table.index<F>().Names;
         }
 
         [MethodImpl(Inline)]

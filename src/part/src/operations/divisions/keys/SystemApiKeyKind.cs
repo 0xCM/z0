@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum MemoryOpId : ulong
+    public enum SystemApiKeyKind : ushort
     {
         None = 0,
 
@@ -24,10 +24,13 @@ namespace Z0
         Load = ApiKeyKind.Load,
 
         /// <summary>
-        /// Identifies an operation that accepts a memory buffer, such as a memory segmented covered by an S-span,
-        /// and returns the buffer unaltered but with an alternate presentation, such as a T-span
+        /// Identifies operations that initialize a resource where allocation may be required...or not
         /// </summary>
-        Recover = ApiKeyKind.Recover,
+        Init = ApiKeyKind.Init,
 
+        /// <summary>
+        /// Identifies operations assign kind classifiers
+        /// </summary>
+        Kind = ApiKeyKind.Kind
     }
 }

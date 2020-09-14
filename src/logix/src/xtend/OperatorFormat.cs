@@ -12,19 +12,19 @@ namespace Z0
     public static partial class XTend
     {
         [MethodImpl(Inline)]
-        public static string Format(this UnaryBitLogic kind)
+        public static string Format(this UnaryBitLogicKind kind)
             => ExprFormat.format(kind);
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryBitLogic kind, T arg)
+        public static string Format<T>(this UnaryBitLogicKind kind, T arg)
             => ExprFormat.format(kind,arg);
 
         [MethodImpl(Inline)]
-        public static string Format(this UnaryArithmeticOpId kind)
+        public static string Format(this UnaryArithmeticApiKeyKind kind)
             => ExprFormat.format(kind);
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this UnaryArithmeticOpId kind, T arg)
+        public static string Format<T>(this UnaryArithmeticApiKeyKind kind, T arg)
             => ExprFormat.format(kind, arg);
 
         [MethodImpl(Inline)]
@@ -36,15 +36,15 @@ namespace Z0
             => ExprFormat.format(kind, arg1, arg2);
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryArithmeticOpId kind, T arg1, T arg2)
+        public static string Format<T>(this BinaryArithmeticApiKeyKind kind, T arg1, T arg2)
             => ExprFormat.format(kind, arg1, arg2);
 
         [MethodImpl(Inline)]
-        public static string Format(this BinaryComparisonOpId kind)
+        public static string Format(this BinaryComparisonApiKeyKind kind)
             => ExprFormat.format(kind);
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this BinaryComparisonOpId kind, T arg1, T arg2)
+        public static string Format<T>(this BinaryComparisonApiKeyKind kind, T arg1, T arg2)
             => ExprFormat.format(kind, arg1, arg2);
     }
 

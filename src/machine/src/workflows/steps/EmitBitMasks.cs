@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.Collections.Generic;
+    using System.Runtime.InteropServices;
 
     using static Konst;
     using static EmitBitMasksStep;
@@ -48,7 +49,7 @@ namespace Z0
         {
             var literals = span(find(src));
             var count = literals.Length;
-            var formatter = Formatters.numeric();
+            var formatter = new BitMaskFormatter();
             using var writer = TargetPath.Writer();
             writer.WriteLine(formatter.HeaderText);
 
@@ -61,10 +62,10 @@ namespace Z0
             return (uint)count;
         }
 
-        static NumericLiteral[] find(Type src)
+        static BitMaskTable[] find(Type src)
         {
             var fields = span(src.LiteralFields());
-            var dst = new List<NumericLiteral>();
+            var dst = new List<BitMaskTable>();
             for(var i=0u; i<fields.Length; i++)
             {
                 ref readonly var field = ref skip(fields,i);
@@ -73,14 +74,14 @@ namespace Z0
                 if(LiteralAttributes.HasMultiLiteral(field))
                     dst.AddRange(numeric(LiteralAttributes.MultiLiteral(field), vRaw));
                 else if(LiteralAttributes.HasBinaryLiteral(field))
-                    dst.Add(LiteralAttributes.BinaryLiteral(field,vRaw));
+                    dst.Add(BitMasks.table(LiteralAttributes.BinaryLiteral(field,vRaw)));
                 else
-                    dst.Add(NumericLiteral.Base2(field.Name, vRaw, Render.bits(vRaw, tc)));
+                    dst.Add(BitMasks.table(NumericLiteral.Base2(field.Name, vRaw, Render.bits(vRaw, tc))));
             }
             return dst.ToArray();
         }
 
-        static NumericLiteral[] numeric(LiteralInfo src, object value)
+        static BitMaskTable[] numeric(LiteralInfo src, object value)
         {
             if(src.MultiLiteral)
             {
@@ -89,7 +90,7 @@ namespace Z0
                 {
                     var components = content.SplitClean(Chars.Pipe);
                     var count = components.Length;
-                    var dst = sys.alloc<NumericLiteral>(count);
+                    var dst = sys.alloc<BitMaskTable>(count);
                     for(var i=0; i<components.Length; i++)
                     {
                         var component = components[i];
@@ -99,25 +100,25 @@ namespace Z0
                             var indicator = NumericBases.indicator(component[0]);
 
                             if(indicator != 0)
-                                dst[i] = NumericLiteral.Define(src.Name, value, component.Substring(1), NumericBases.kind(indicator));
+                                dst[i] = BitMasks.table(NumericLiteral.Define(src.Name, value, component.Substring(1), NumericBases.kind(indicator)));
                             else
                             {
                                 indicator = NumericBases.indicator(component[length - 1]);
                                 indicator = indicator != 0 ? indicator : NBI.Base2;
-                                dst[i] = NumericLiteral.Define(
+                                dst[i] = BitMasks.table(NumericLiteral.Define(
                                     src.Name,
                                     value,
                                     component.Substring(0, length - 1),
                                     NumericBases.kind(indicator)
-                                    );
+                                    ));
                             }
                         }
                         else
-                            dst[i] = NumericLiteral.Empty;
+                            dst[i] = BitMasks.table(NumericLiteral.Empty);
                     }
                 }
             }
-            return sys.empty<NumericLiteral>();
+            return sys.empty<BitMaskTable>();
         }
     }
 }

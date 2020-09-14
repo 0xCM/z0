@@ -8,7 +8,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static Memories;
 
@@ -16,7 +16,7 @@ namespace Z0.Logix
     public static partial class LogicEngine
     {
         /// <summary>
-        /// Evalutates an untyped expression
+        /// Evaluates an untyped expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [Op]
@@ -24,7 +24,7 @@ namespace Z0.Logix
             => LogicExprEval.eval(expr);
 
         /// <summary>
-        /// Evalutates a typed logic expression
+        /// Evaluates a typed logic expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [Op, Closures(UnsignedInts)]
@@ -33,12 +33,12 @@ namespace Z0.Logix
                 => LogicExprEval.eval(expr);
 
         /// <summary>
-        /// Evalutates a typed scalar expression
+        /// Evaluates a typed scalar expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [Op, Closures(UnsignedInts)]
         public static LiteralExpr<T> eval<T>(IExpr<T> expr)
-            where T : unmanaged                
+            where T : unmanaged
                 => ScalarExprEval.eval(expr);
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Z0.Logix
                 => CmpExprEval.eval(expr);
 
         /// <summary>
-        /// Evaluates a comparison predicate, returning an enabled bit if the comparison succeeds and 
+        /// Evaluates a comparison predicate, returning an enabled bit if the comparison succeeds and
         /// a disabled bit otherwise
         /// </summary>
         /// <param name="expr">The predicate to evaluate</param>
@@ -84,7 +84,7 @@ namespace Z0.Logix
                 => CmpExprEval.eval(expr);
 
         /// <summary>
-        /// Evalutates a typed scalar expression
+        /// Evaluates a typed scalar expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [Op, Closures(UnsignedInts)]
@@ -93,7 +93,7 @@ namespace Z0.Logix
                 => ArithExprEval.eval(expr);
 
         /// <summary>
-        /// Evalutates a typed 128-bit intrinsic expression
+        /// Evaluates a typed 128-bit intrinsic expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [Op, Closures(UnsignedInts)]
@@ -102,16 +102,16 @@ namespace Z0.Logix
                 => VectorExprEval.eval(expr);
 
         /// <summary>
-        /// Evalutates a typed 256-bit intrinsic expression
+        /// Evaluates a typed 256-bit intrinsic expression
         /// </summary>
         /// <param name="expr">The expression to evaluate</param>
         [Op, Closures(UnsignedInts)]
         public static LiteralExpr<Vector256<T>> eval<T>(IExpr<Vector256<T>> expr)
             where T : unmanaged
                 => VectorExprEval.eval(expr);
-  
+
         /// <summary>
-        /// Returns an enabled bit if the equality expression is satisfied with 
+        /// Returns an enabled bit if the equality expression is satisfied with
         /// specified variable values and a disabled bit otherwise
         /// </summary>
         /// <param name="expr">The expression to test</param>
@@ -125,7 +125,7 @@ namespace Z0.Logix
         }
 
         /// <summary>
-        /// Returns an enabled bit if the equality expression is satisfied with 
+        /// Returns an enabled bit if the equality expression is satisfied with
         /// specified variable values and a disabled bit otherwise
         /// </summary>
         /// <param name="expr">The expression to test</param>
@@ -140,7 +140,7 @@ namespace Z0.Logix
         }
 
         /// <summary>
-        /// Returns an enabled bit if the equality expression is satisfied with 
+        /// Returns an enabled bit if the equality expression is satisfied with
         /// specified variable values and a disabled bit otherwise
         /// </summary>
         /// <param name="expr">The expression to test</param>
@@ -156,7 +156,7 @@ namespace Z0.Logix
         }
 
         /// <summary>
-        /// Returns an enabled bit if the equality expression is satisfied with 
+        /// Returns an enabled bit if the equality expression is satisfied with
         /// specified variable values and a disabled bit otherwise
         /// </summary>
         /// <param name="expr">The expression to test</param>
@@ -174,11 +174,11 @@ namespace Z0.Logix
         /// <summary>
         /// Determines by exhaustion whether the left and right operands are equal
         /// </summary>
-        /// <param name="a">The left operandd</param>
+        /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [Op]
         public static bit equal(VariedLogicExpr a, VariedLogicExpr b)
-        {                
+        {
             var count = a.Vars.Length;
             foreach(var vars in BitLogicSpec.bitcombo(count))
             {
@@ -187,7 +187,7 @@ namespace Z0.Logix
                 var y = LogicEngine.eval(b);
                 if(x != y)
                     return bit.Off;
-            }                
+            }
             return bit.On;
         }
 

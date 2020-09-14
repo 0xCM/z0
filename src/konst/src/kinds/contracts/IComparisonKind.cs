@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ComparisonOpId;
+    using K = ComparisonKeyKind;
     using I = IComparisonKind;
 
     /// <summary>

@@ -24,15 +24,15 @@ namespace Z0
 
         readonly IPart[] Parts;
 
-        readonly CorrelationToken Ct;
+        readonly EmitPartCilStep Host;
 
         [MethodImpl(Inline)]
-        public EmitPartCil(IWfShell wf, IPart[] parts, CorrelationToken ct)
+        public EmitPartCil(IWfShell wf, EmitPartCilStep host)
         {
             Wf = wf;
-            Ct = ct;
-            Parts = parts;
-            PartCount = (uint)parts.Length;
+            Host = host;
+            Parts = wf.Api.Parts;
+            PartCount = (uint)Parts.Length;
             TargetDir = Wf.ResourceRoot + FolderName.Define(DataFolder);
             EmissionCount = 0;
             Wf.Created(StepId);
@@ -56,7 +56,7 @@ namespace Z0
                 }
                 catch(Exception e)
                 {
-                    Wf.Error(e, Ct);
+                    Wf.Error(e);
                 }
             }
 

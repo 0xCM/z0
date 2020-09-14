@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Classifies binary boolean and bitwise logical operations
     /// </summary>
-    public enum BitLogicOpId : ulong
+    public enum BitLogicApiKeyKind : ushort
     {
         /// <summary>
         /// The empty identity which, unfortunately conflicts with the inescapable defintion of 'False'

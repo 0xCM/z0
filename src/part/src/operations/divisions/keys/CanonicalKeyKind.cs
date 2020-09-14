@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Classifies binary boolean and bitwise logical operations
     /// </summary>
-    public enum CanonicalOpId : ulong
+    public enum CanonicalApiKeyKind : ushort
     {
         None = 0,
 

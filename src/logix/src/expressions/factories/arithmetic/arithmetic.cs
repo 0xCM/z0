@@ -8,8 +8,8 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static UnaryArithmeticOpId;
-    using static BinaryArithmeticOpId;
+    using static UnaryArithmeticApiKeyKind;
+    using static BinaryArithmeticApiKeyKind;
     using TLS = TypedLogicSpec;
 
     public readonly struct ArithmeticSpec
@@ -21,7 +21,7 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryAritheticOpExpr<T> unary<T>(UnaryArithmeticOpId op, IExpr<T> a)
+        public static UnaryAritheticOpExpr<T> unary<T>(UnaryArithmeticApiKeyKind op, IExpr<T> a)
             where T : unmanaged
                 => new UnaryAritheticOpExpr<T>(op,a);
 
@@ -32,7 +32,7 @@ namespace Z0.Logix
         /// <param name="operand">The literal value</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryAritheticOpExpr<T> unary<T>(UnaryArithmeticOpId op, T a)
+        public static UnaryAritheticOpExpr<T> unary<T>(UnaryArithmeticApiKeyKind op, T a)
             where T : unmanaged
                 => new UnaryAritheticOpExpr<T>(op, TLS.literal(a));
 
@@ -43,7 +43,7 @@ namespace Z0.Logix
         /// <param name="b">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryArithmeticOpExpr<T> binary<T>(BinaryArithmeticOpId op, IExpr<T> a, IExpr<T> b)
+        public static BinaryArithmeticOpExpr<T> binary<T>(BinaryArithmeticApiKeyKind op, IExpr<T> a, IExpr<T> b)
             where T : unmanaged
                 => new BinaryArithmeticOpExpr<T>(op, a, b);
 
@@ -54,7 +54,7 @@ namespace Z0.Logix
         /// <param name="b">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static BinaryArithmeticOpExpr<T> binary<T>(BinaryArithmeticOpId op, T a, T b)
+        public static BinaryArithmeticOpExpr<T> binary<T>(BinaryArithmeticApiKeyKind op, T a, T b)
             where T : unmanaged
                 => new BinaryArithmeticOpExpr<T>(op, TLS.literal(a), TLS.literal(b));
 

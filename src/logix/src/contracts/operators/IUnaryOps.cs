@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Logix
 {
-    public interface IUnaryBitwiseOpExpr<T> : IUnaryOpExpr<IExpr<T>>, IOperatorExpr<T, UnaryBitLogic>
+    public interface IUnaryBitwiseOpExpr<T> : IUnaryOpExpr<IExpr<T>>, IOperatorExpr<T, UnaryBitLogicKind>
         where T : unmanaged
     {
-        
+
     }
 
 

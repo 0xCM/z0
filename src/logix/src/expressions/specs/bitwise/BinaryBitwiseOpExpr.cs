@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -33,9 +33,9 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public BinaryBitwiseOpExpr(BinaryLogicKind op, IExpr<T> left, IExpr<T> right)
         {
-            this.OpKind = op;
-            this.LeftArg = left;
-            this.RightArg = right;
+            OpKind = op;
+            LeftArg = left;
+            RightArg = right;
         }
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Z0.Logix
         /// </summary>
         public string Format()
             => OpKind.Format(LeftArg,RightArg);
-        
+
         public override string ToString()
             => Format();
     }

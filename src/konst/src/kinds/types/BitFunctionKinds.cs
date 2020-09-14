@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = BitFunctionOpId;
+    using K = BitFunctionKeyApiKind;
     using I = IBitFunctionKind;
 
     partial class Kinds

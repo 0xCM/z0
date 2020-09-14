@@ -10,12 +10,12 @@ namespace Z0
 
     using static Konst;
 
-    using ULK = UnaryBitLogic;
+    using ULK = UnaryBitLogicKind;
     using BLK = BinaryLogicKind;
-    using TLK = TernaryBitLogic;
-    using BAR = BinaryArithmeticOpId;
-    using BCK = BinaryComparisonOpId;
-    using BSK = BitShiftOpId;
+    using TLK = TernaryBitLogicKind;
+    using BAR = BinaryArithmeticApiKeyKind;
+    using BCK = BinaryComparisonApiKeyKind;
+    using BSK = BitShiftApiKeyKind;
 
     public class VLogixOps
     {

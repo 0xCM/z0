@@ -181,7 +181,7 @@ namespace Z0
         {
             try
             {
-                var id = new ProcessGlobalIndexStep().Id;
+                var id = new CreateGlobalIndexStep().Id;
                 Wf.Running(id);
 
                 var processor = new ProcessAsm(State, encoded);

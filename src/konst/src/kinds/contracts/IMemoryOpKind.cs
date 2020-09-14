@@ -6,7 +6,7 @@ namespace Z0
 {
     using static Konst;
 
-    using K = MemoryOpId;
+    using K = MemoryApiKeyKind;
     using I = IMemoryOpKind;
 
     /// <summary>

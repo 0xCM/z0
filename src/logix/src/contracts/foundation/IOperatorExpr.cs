@@ -6,21 +6,19 @@ namespace Z0.Logix
 {
     using System;
 
-
-
     /// <summary>
     /// Characterizes an expression defined via an operator
     /// </summary>
     public interface IOperatorExpr : IExpr
     {
-        
+
     }
 
     /// <summary>
     /// Characterizes a parametric operator that varies over operand type
     /// </summary>
     /// <typeparam name="T">The type over which the expression is defined</typeparam>
-    public interface IOperatorExpr<T> : IOperatorExpr, IExpr<T> 
+    public interface IOperatorExpr<T> : IOperatorExpr, IExpr<T>
         where T : unmanaged
     {
 

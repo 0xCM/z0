@@ -8,12 +8,12 @@ namespace Z0.Logix
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;    
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     /// <summary>
-    /// Defines a stewise-contiguous sequence of scalar values, available on-demand, 
+    /// Defines a stewise-contiguous sequence of scalar values, available on-demand,
     /// that satisfy upper/lower bound constraints
     /// </summary>
     /// <typeparam name="T">The scalar type</typeparam>
@@ -38,15 +38,15 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public RangeExpr(T min, T max, T step)
         {
-            this.Min = min;
-            this.Max = max;
-            this.Step = step;
+            Min = min;
+            Max = max;
+            Step = step;
         }
-        
+
         public IEnumerable<T> Terms
             => gmath.range(Min,Max,Step);
 
-        public int? Length 
+        public int? Length
             => convert<T,int>(gmath.sub(Max,Min));
 
         public string Format()

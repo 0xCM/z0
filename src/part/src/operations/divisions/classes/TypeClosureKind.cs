@@ -4,19 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Id = ApiKeyKind;
-
-    /// <summary>
-    /// Identifies transcental operation kinds
-    /// </summary>
-    public enum TranscendentalOpId : ulong
+    public enum TypeClosureKind : byte
     {
         None = 0,
 
-        Log10 = Id.Log10,
+        Numeric = 1,
 
-        Ln = Id.Ln,
+        Natural = 2,
 
-        Log = Id.Log
+        Imm8 = 3,
+
+        Width = 4,
+
+        Fixed = 5,
+
+        NaturalPairs = 6,
+
+        Opaque = 7,
     }
 }

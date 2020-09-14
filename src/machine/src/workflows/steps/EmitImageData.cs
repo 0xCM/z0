@@ -11,11 +11,11 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-    using static EmitImageContentStep;
+    using static EmitImageDataStep;
 
     using static z;
 
-    public ref struct EmitImageContent
+    public ref struct EmitImageData
     {
         readonly IWfShell Wf;
 
@@ -44,7 +44,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public EmitImageContent(IWfShell wf, IPart[] parts, CorrelationToken ct)
+        public EmitImageData(IWfShell wf, IPart[] parts, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

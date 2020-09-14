@@ -3,11 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Logix
-{    
+{
 
     public interface ILogicLiteralExpr : ILogicExpr, ILiteralExpr
     {
-        bit Value {get;}
+        bool Value {get;}
     }
 
     public interface ILogicLiteralExpr<T> : ILogicLiteralExpr, ILogicExpr<T>

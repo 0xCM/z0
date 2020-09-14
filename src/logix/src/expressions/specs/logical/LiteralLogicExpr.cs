@@ -6,10 +6,10 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
-    /// <summary>    
+    /// <summary>
     /// Defines an untyped literal logic expression
     /// </summary>
     public readonly struct LiteralLogicExpr : ILogicLiteralExpr
@@ -17,14 +17,14 @@ namespace Z0.Logix
         /// <summary>
         /// The literal value
         /// </summary>
-        public bit Value {get;}
+        public bool Value {get;}
 
         /// <summary>
-        /// Implicitly converts a literal expression to the underlying value 
+        /// Implicitly converts a literal expression to the underlying value
         /// </summary>
-        /// <param name="src">The source epxression</param>
+        /// <param name="src">The source expression</param>
         [MethodImpl(Inline)]
-        public static implicit operator bit(LiteralLogicExpr src)
+        public static implicit operator bool(LiteralLogicExpr src)
             => src.Value;
 
         /// <summary>
@@ -32,21 +32,20 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
-        public static implicit operator LiteralLogicExpr(bit src)
+        public static implicit operator LiteralLogicExpr(bool src)
             => new LiteralLogicExpr(src);
 
         [MethodImpl(Inline)]
-        public LiteralLogicExpr(bit value)
-            => this.Value= value;
+        public LiteralLogicExpr(bool src)
+            => Value= src;
 
         public string Format()
             => Format(false);
-         
-        public string Format(bool digit)
-            => digit ? Value.ToString() 
-                : Value ? "T" : "F";
 
-        public override string ToString() 
+        public string Format(bool digit)
+            => digit ? Value.ToString() : Value ? "T" : "F";
+
+        public override string ToString()
             => Format();
     }
 }

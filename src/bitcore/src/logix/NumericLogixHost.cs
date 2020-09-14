@@ -15,12 +15,12 @@ namespace Z0
     using static NumericLogix;
 
     using BLK = BinaryLogicKind;
-    using TLK = TernaryBitLogic;
-    using ULK = UnaryBitLogic;
-    using UAR = UnaryArithmeticOpId;
-    using BAR = BinaryArithmeticOpId;
-    using BCK = BinaryComparisonOpId;
-    using BSK = BitShiftOpId;
+    using TLK = TernaryBitLogicKind;
+    using ULK = UnaryBitLogicKind;
+    using UAR = UnaryArithmeticApiKeyKind;
+    using BAR = BinaryArithmeticApiKeyKind;
+    using BCK = BinaryComparisonApiKeyKind;
+    using BSK = BitShiftApiKeyKind;
 
     /// <summary>
     /// Defines the canonical shape of a 2-argument function over a parametric domain and boolean codomain

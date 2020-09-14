@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Identifies binary arithmetic operators classes
     /// </summary>
-    public enum BinaryArithmeticOpId : ulong
+    public enum BinaryArithmeticApiKeyKind : ushort
     {
         /// <summary>
         /// The empty identity

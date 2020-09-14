@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using ULK = UnaryBitLogic;
+    using ULK = UnaryBitLogicKind;
     using BLK = BinaryLogicKind;
-    using TLK = TernaryBitLogic;
+    using TLK = TernaryBitLogicKind;
 
     public interface IBitLogix
     {

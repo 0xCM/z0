@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     public sealed class VariableExpr<T> : IVarExpr<T>
@@ -15,7 +15,7 @@ namespace Z0.Logix
         /// <summary>
         /// The name of the variable
         /// </summary>
-        public string Name {get;}            
+        public string Name {get;}
 
         /// <summary>
         /// The value of the variable
@@ -25,10 +25,10 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public VariableExpr(string name, IExpr<T> value)
         {
-            this.Value = value;
-            this.Name = name;
+            Value = value;
+            Name = name;
         }
-        
+
         /// <summary>
         /// Updates the variable's value
         /// </summary>
@@ -54,7 +54,7 @@ namespace Z0.Logix
 
         public string Format(bool expand)
             => $"{Name}:{typeof(T).DisplayName()}" + (expand ? $" := {Value}" : string.Empty);
-        
+
         public override string ToString()
             => Format();
     }

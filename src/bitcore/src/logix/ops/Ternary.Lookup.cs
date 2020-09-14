@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
     using static LogicSig;
     using static BitLogix;
 
-    using TLK = TernaryBitLogic;
+    using TLK = TernaryBitLogicKind;
 
     partial class BitLogixOps
     {
@@ -118,7 +118,7 @@ namespace Z0
                 case TLK.X5C: return f5c;
                 case TLK.X5D: return f5d;
                 case TLK.X5E: return f5e;
-                case TLK.X5F: return f5f; 
+                case TLK.X5F: return f5f;
                 case TLK.XFF: return @true;
 
                 default: throw Unsupported.value(sig(kind));

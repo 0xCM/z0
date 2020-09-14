@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The operator kind</param>
         [Op]
-        public static BitVector4 vector(N4 n, UnaryBitLogic kind)
+        public static BitVector4 vector(N4 n, UnaryBitLogicKind kind)
         {
             var x = BitVector.alloc(n);
             x[0] = bitlogix.Evaluate(kind, off);
@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The operator kind</param>
         [Op]
-        public static BitVector8 vector(N8 n, TernaryBitLogic kind)
+        public static BitVector8 vector(N8 n, TernaryBitLogicKind kind)
         {
             var x = BitVector.alloc(n);
             x[0] = bitlogix.Evaluate(kind, off, off, off);
@@ -96,7 +96,7 @@ namespace Z0
         }
 
         [Op]
-        public static BitMatrix<N2,N2,byte> table(UnaryBitLogic kind)
+        public static BitMatrix<N2,N2,byte> table(UnaryBitLogicKind kind)
         {
             var f = bitlogix.Lookup(kind);
             var table = BitMatrix.alloc<N2,N2,byte>();
@@ -119,7 +119,7 @@ namespace Z0
         }
 
         [Op]
-        public static BitMatrix<N8,N4,byte> table(TernaryBitLogic kind)
+        public static BitMatrix<N8,N4,byte> table(TernaryBitLogicKind kind)
         {
             var tt = BitMatrix.alloc<N8,N4,byte>();
             var f = bitlogix.Lookup(kind);
@@ -134,7 +134,7 @@ namespace Z0
             return tt;
         }
 
-        public static void save(ReadOnlySpan<UnaryBitLogic> src, StreamWriter dst)
+        public static void save(ReadOnlySpan<UnaryBitLogicKind> src, StreamWriter dst)
         {
             var writer = BitMatrixWriter.Share(dst);
             for(var i=0; i<src.Length; i++)
@@ -148,14 +148,14 @@ namespace Z0
                 save(src[i], writer);
         }
 
-        public static void save(ReadOnlySpan<TernaryBitLogic> src, StreamWriter dst)
+        public static void save(ReadOnlySpan<TernaryBitLogicKind> src, StreamWriter dst)
         {
             var writer = BitMatrixWriter.Share(dst);
             for(var i=0; i<src.Length; i++)
                 save(src[i], writer);
         }
 
-        public static BitMatrix<N2,N2,byte> save(UnaryBitLogic spec, IBitMatrixWriter dst)
+        public static BitMatrix<N2,N2,byte> save(UnaryBitLogicKind spec, IBitMatrixWriter dst)
         {
             var table = TabularTruth.table(spec);
             dst.Write(table,spec);
@@ -169,7 +169,7 @@ namespace Z0
             return table;
         }
 
-        public static BitMatrix<N8,N4,byte> save(TernaryBitLogic spec, IBitMatrixWriter dst)
+        public static BitMatrix<N8,N4,byte> save(TernaryBitLogicKind spec, IBitMatrixWriter dst)
         {
             var table = TabularTruth.table(spec);
             dst.Write(table,spec);

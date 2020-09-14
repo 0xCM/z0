@@ -6,10 +6,10 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
-    /// <summary>    
+    /// <summary>
     /// Lifts a literal value to an expression
     /// </summary>
     public readonly struct LiteralExpr<T> : ILiteralExpr<T>
@@ -21,9 +21,9 @@ namespace Z0.Logix
         public T Value {get;}
 
         /// <summary>
-        /// Implicitly converts a literal expression to the underlying value 
+        /// Implicitly converts a literal expression to the underlying value
         /// </summary>
-        /// <param name="src">The source epxression</param>
+        /// <param name="src">The source expression</param>
         [MethodImpl(Inline)]
         public static implicit operator T(LiteralExpr<T> src)
             => src.Value;
@@ -46,9 +46,9 @@ namespace Z0.Logix
 
         [MethodImpl(Inline)]
         public LiteralExpr(T value)
-        {                
-            this.Value= value;
-        }            
+        {
+            Value = value;
+        }
 
         [MethodImpl(Inline)]
         public bool Equals(T other)
@@ -56,7 +56,7 @@ namespace Z0.Logix
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(ushort) || typeof(T) == typeof(uint) || typeof(T) == typeof(ulong))
                 return gmath.eq(Value,other);
             else
-                throw Unsupported.define<T>();            
+                throw no<T>();
         }
 
         public override int GetHashCode()
@@ -64,11 +64,11 @@ namespace Z0.Logix
 
         public override bool Equals(object obj)
             => obj is LiteralExpr<T> x && Equals(x);
-        
+
         public string Format()
             => Value.ToString();
 
-        public override string ToString() 
+        public override string ToString()
             => Format();
     }
 }

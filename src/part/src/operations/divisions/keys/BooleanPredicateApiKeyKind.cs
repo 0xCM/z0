@@ -6,16 +6,24 @@ namespace Z0
 {
     using Id = ApiKeyKind;
 
-    public enum AggregateOpId : ulong
+    public enum BooleanPredicateApiKeyKind : ushort
     {
         None = 0,
 
-        Sum = Id.Sum,
+        Even = Id.Even,
 
-        Avg = Id.Avg,
+        Odd = Id.Odd,
 
-        AggMax = Id.AggMax,
+        EqPred = Id.EqPred,
 
-        AggMin = Id.AggMin
+        NeqPred = Id.NeqPred,
+
+        LtPred = Id.LtPred,
+
+        LtEqPred = Id.LtEqPred,
+
+        GtPred = Id.GtPred,
+
+        GtEqPred = Id.GtEqPred,
     }
 }

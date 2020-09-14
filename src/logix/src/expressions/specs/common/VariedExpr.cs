@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -29,8 +29,8 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         internal VariedExpr(IExpr<T> baseExpr, params VariableExpr<T>[] variables)
         {
-            this.BaseExpr = baseExpr;
-            this.Vars = variables;
+            BaseExpr = baseExpr;
+            Vars = variables;
         }
 
         [MethodImpl(Inline)]
@@ -40,7 +40,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public void SetVars(params IExpr<T>[] values)
             => OpHelpers.Set(this,values);
-        
+
         public string Format()
             => string.Empty;
 
@@ -57,7 +57,7 @@ namespace Z0.Logix
     public sealed class VariedExpr<N,T>  : IVariedExpr<T>
         where T : unmanaged
         where N : unmanaged, ITypeNat
-    {        
+    {
         public IExpr<T> BaseExpr {get;}
 
         public IVarExpr<T>[] Vars {get;}

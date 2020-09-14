@@ -10,9 +10,9 @@ namespace Z0
     using static Konst;
     using static Memories;
 
-    using ULK = UnaryBitLogic;
+    using ULK = UnaryBitLogicKind;
     using BLK = BinaryLogicKind;
-    using TLK = TernaryBitLogic;
+    using TLK = TernaryBitLogicKind;
 
     public class LogicSig
     {
@@ -34,7 +34,7 @@ namespace Z0
             => text.concat(format(kind), Chars.Colon, nameof(bit));
 
         [MethodImpl(Inline)]
-        public static string sig(BitLogicOpId kind)
+        public static string sig(BitLogicApiKeyKind kind)
             => text.concat(format(kind), Chars.Colon, nameof(bit));
 
         [MethodImpl(Inline)]
@@ -52,22 +52,22 @@ namespace Z0
                 => text.concat(format(kind), Chars.Colon, keyword<T>());
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(BitShiftOpId kind)
+        public static string sig<T>(BitShiftApiKeyKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(BinaryComparisonOpId kind)
+        public static string sig<T>(BinaryComparisonApiKeyKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(UnaryArithmeticOpId kind)
+        public static string sig<T>(UnaryArithmeticApiKeyKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
         [MethodImpl(Inline), Op, NumericClosures(Integers)]
-        public static string sig<T>(BinaryArithmeticOpId kind)
+        public static string sig<T>(BinaryArithmeticApiKeyKind kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
@@ -80,7 +80,7 @@ namespace Z0
         public static string format(BLK kind)
             => kind.ToString().ToLower();
 
-        public static string format(BitLogicOpId kind)
+        public static string format(BitLogicApiKeyKind kind)
             => kind.Format();
     }
 }

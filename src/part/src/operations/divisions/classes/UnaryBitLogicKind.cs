@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Classifies unary logic operators
     /// </summary>
-    public enum UnaryBitLogic : byte
+    public enum UnaryBitLogicKind : byte
     {
         None = 0,
 

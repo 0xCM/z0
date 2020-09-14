@@ -15,7 +15,7 @@ namespace Z0
         public readonly struct Xnor<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged
         {
-            public const BitLogicOpId OpKind = BitLogicOpId.Xnor;
+            public const BitLogicApiKeyKind OpKind = BitLogicApiKeyKind.Xnor;
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)

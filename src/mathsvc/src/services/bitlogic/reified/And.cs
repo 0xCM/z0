@@ -15,7 +15,7 @@ namespace Z0
         public readonly struct And<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged
         {
-            public const BitLogicOpId OpKind = BitLogicOpId.And;
+            public const BitLogicApiKeyKind OpKind = BitLogicApiKeyKind.And;
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)

@@ -63,9 +63,9 @@ namespace Z0
                 case BLK.RProject: return BitVector.right(x,y);
                 case BLK.LNot: return BitVector.lnot(x,y);
                 case BLK.RNot: return BitVector.rnot(x,y);
-                case BLK.Impl: return BitVector.impl(x,y);                    
+                case BLK.Impl: return BitVector.impl(x,y);
                 case BLK.NonImpl: return BitVector.nonimpl(x,y);
-                case BLK.CImpl: return BitVector.cimpl(x,y);                    
+                case BLK.CImpl: return BitVector.cimpl(x,y);
                 case BLK.CNonImpl: return BitVector.cnonimpl(x,y);
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
@@ -89,9 +89,9 @@ namespace Z0
                 case BLK.RProject: return y;
                 case BLK.LNot: return lnot(x,y);
                 case BLK.RNot: return rnot(x,y);
-                case BLK.Impl: return impl(x,y);                    
+                case BLK.Impl: return impl(x,y);
                 case BLK.NonImpl: return nonimpl(x,y);
-                case BLK.CImpl: return cimpl(x,y);                    
+                case BLK.CImpl: return cimpl(x,y);
                 case BLK.CNonImpl: return cnonimpl(x,y);
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
@@ -100,7 +100,7 @@ namespace Z0
         BitLogix bitlogix => BitLogix.Service;
 
         /// <summary>
-        /// Computes the bitwise AND of the source vetors via component-wise logical operations to define a reference implementation 
+        /// Computes the bitwise AND of the source vetors via component-wise logical operations to define a reference implementation
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -116,7 +116,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the bitwise AND of the source vetors via component-wise logical operations to define a reference implementation 
+        /// Computes the bitwise AND of the source vetors via component-wise logical operations to define a reference implementation
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -207,7 +207,7 @@ namespace Z0
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = BitLogix.Service.Evaluate(UnaryBitLogic.Not, x[i]);
+                z[i] = BitLogix.Service.Evaluate(UnaryBitLogicKind.Not, x[i]);
             return z;
         }
 
@@ -223,7 +223,7 @@ namespace Z0
             var len = x.Width;
             var z = BitVector.alloc<T>();
             for(var i=0; i< len; i++)
-                z[i] = BitLogix.Service.Evaluate(UnaryBitLogic.Not, y[i]);
+                z[i] = BitLogix.Service.Evaluate(UnaryBitLogicKind.Not, y[i]);
             return z;
         }
 

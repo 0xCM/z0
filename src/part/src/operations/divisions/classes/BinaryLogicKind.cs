@@ -11,7 +11,7 @@ namespace Z0
     /// <summary>
     /// Classifies binary boolean and bitwise logical operations
     /// </summary>
-    public enum BinaryLogicKind : ulong
+    public enum BinaryLogicKind : ushort
     {
         /// <summary>
         /// The empty identity which, unfortunately conflicts with the inescapable defintion of 'False'

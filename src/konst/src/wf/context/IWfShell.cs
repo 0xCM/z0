@@ -116,8 +116,18 @@ namespace Z0
         void Created(in WfStepId step)
             => Raise(WfEvents.created(step, Ct));
 
+
        void Disposed(WfStepId step)
             => Raise(WfEvents.disposed(step, Ct));
+
+
+        void Created<H>(H host)
+            where H : WfHost<H>, new()
+                => Raise(WfEvents.created(host.Id, Ct));
+
+       void Disposed<H>(H host)
+            where H : WfHost<H>, new()
+                => Raise(WfEvents.disposed(host.Id, Ct));
 
 
         // ~ Initialization
@@ -165,7 +175,6 @@ namespace Z0
         // ~ Processing
         // ~ ---------------------------------------------------------------------------
 
-
         void Emitting(WfStepId step, Type table, FS.FilePath dst)
             => Raise(new EmittingTable(step, table, dst, Ct));
 
@@ -173,9 +182,19 @@ namespace Z0
             where T : struct
                 => Raise(new EmittingTable(step, typeof(T), dst, Ct));
 
+        void Emitting<H,T>(H host, T t, FS.FilePath dst)
+            where H : IWfHost<H>, new()
+            where T : struct
+                => Raise(new EmittingTable(host.Id, typeof(H), dst, Ct));
+
         void Emitted<T>(WfStepId step, Count32 count, FS.FilePath dst)
             where T : struct
                 => Raise(new EmittedTable(step, typeof(T), count, dst, Ct));
+
+        void Emitted<H,T>(H host, T t, Count32 count, FS.FilePath dst)
+            where H : IWfHost<H>, new()
+            where T : struct
+                => Raise(new EmittedTable(host.Id, typeof(T), count, dst, Ct));
 
         void Emitting(WfStepId step, TableId table, FS.FilePath dst)
             => Raise(new EmittingTable(step, table, dst, Ct));

@@ -6,10 +6,10 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
-    /// <summary>    
+    /// <summary>
     /// Defines a typed literal logic expression
     /// </summary>
     public readonly struct LiteralLogicExpr<T> : ILogicLiteralExpr<T>
@@ -18,16 +18,16 @@ namespace Z0.Logix
         /// <summary>
         /// The literal value
         /// </summary>
-        public bit Value {get;}
+        public bool Value {get;}
 
         [MethodImpl(Inline)]
-        public LiteralLogicExpr(bit value)
-            => this.Value= value;
-         
+        public LiteralLogicExpr(bool src)
+            => Value = src;
+
         public string Format()
             => $"{Value}";
 
-        public override string ToString() 
+        public override string ToString()
             => Format();
     }
 }

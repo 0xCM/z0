@@ -41,7 +41,7 @@ namespace Z0
             Run(new EmitImageConstantsStep());
             Run(new EmitPeHeadersStep());
             Run(new EmitPartCil());
-            Run(new EmitImageContentStep());
+            Run(new EmitImageDataStep());
             Run(new EmitStringRecordsStep());
             Run(new EmitImageBlobsStep());
             Run(new EmitFieldMetadataHost());
@@ -78,8 +78,8 @@ namespace Z0
         {
             try
             {
-                using var step = new EmitPartCil(Wf, Parts, Ct);
-                step.Run();
+                // using var step = new EmitPartCil(Wf, Parts, Ct);
+                // step.Run();
             }
             catch(Exception e)
             {
@@ -87,11 +87,11 @@ namespace Z0
             }
         }
 
-        void Run(EmitImageContentStep kind)
+        void Run(EmitImageDataStep kind)
         {
             try
             {
-                using var step = new EmitImageContent(Wf, Parts, Ct);
+                using var step = new EmitImageData(Wf, Parts, Ct);
                 step.Run();
             }
             catch(Exception e)

@@ -28,22 +28,12 @@ namespace Z0
             => new RowFormatter(table, fields(table), dst, delimiter);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static RowFormatter<T> formatter<T>(TableFields fields, StringBuilder dst, char delimiter = FieldDelimiter)
-            where T : struct
-                => new RowFormatter<T>(fields, dst, FieldDelimiter);
-
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static RowFormatter<T> formatter<T>(TableFields fields, char delimiter = FieldDelimiter)
-            where T : struct
-                => new RowFormatter<T>(fields, text.build(), FieldDelimiter);
-
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static RowFormatter<T> rowformatter<T>(char delimiter = FieldDelimiter)
             where T : struct
                 => new RowFormatter<T>(fields<T>(), text.build(), FieldDelimiter);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static RowFormatter<T> rowformatter<T>(ReadOnlySpan<byte> widths, char delimiter = FieldDelimiter)
+        public static RowFormatter<T> rowformatter<T>(ReadOnlySpan<byte> widths, T t = default, char delimiter = FieldDelimiter)
             where T : struct
                 => new RowFormatter<T>(fields<T>(widths), text.build(), FieldDelimiter);
 

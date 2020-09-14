@@ -29,7 +29,7 @@ namespace Z0.Logix
         /// <param name="operand">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryBitwiseOpExpr<T> unary<T>(UnaryBitLogic op, IExpr<T> operand)
+        public static UnaryBitwiseOpExpr<T> unary<T>(UnaryBitLogicKind op, IExpr<T> operand)
             where T : unmanaged
                 => new UnaryBitwiseOpExpr<T>(op,operand);
 
@@ -53,7 +53,7 @@ namespace Z0.Logix
         /// <param name="right">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ComparisonExpr<T> binary<T>(BinaryComparisonOpId op, IExpr<T> left, IExpr<T> right)
+        public static ComparisonExpr<T> binary<T>(BinaryComparisonApiKeyKind op, IExpr<T> left, IExpr<T> right)
             where T : unmanaged
                 => new ComparisonExpr<T>(op,left,right);
 
@@ -65,7 +65,7 @@ namespace Z0.Logix
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static TernaryBitwiseOpExpr<T> ternary<T>(TernaryBitLogic op, IExpr<T> a, IExpr<T> b, IExpr<T> c)
+        public static TernaryBitwiseOpExpr<T> ternary<T>(TernaryBitLogicKind op, IExpr<T> a, IExpr<T> b, IExpr<T> c)
             where T : unmanaged
                 => new TernaryBitwiseOpExpr<T>(op,a,b,c);
 

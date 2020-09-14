@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = BitFunctionOpId;
+    using K = BitFunctionKeyApiKind;
     using A = OpKindAttribute;
 
     public sealed class TestCAttribute : A { public TestCAttribute() : base(K.TestC) {} }

@@ -18,7 +18,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public BinaryComparisonOpId ComparisonKind {get;}
+        public BinaryComparisonApiKeyKind ComparisonKind {get;}
 
         /// <summary>
         /// The left operand
@@ -36,7 +36,7 @@ namespace Z0.Logix
         public IVarExpr<T>[] Vars {get;}
 
         [MethodImpl(Inline)]
-        public ComparisonPredExpr(BinaryComparisonOpId op, IExpr<T> left, IExpr<T> right, params IVarExpr<T>[] vars)
+        public ComparisonPredExpr(BinaryComparisonApiKeyKind op, IExpr<T> left, IExpr<T> right, params IVarExpr<T>[] vars)
         {
             this.ComparisonKind = op;
             this.LeftArg = left;

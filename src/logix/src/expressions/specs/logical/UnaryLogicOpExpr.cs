@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -17,7 +17,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public UnaryBitLogic OpKind {get;}
+        public UnaryBitLogicKind OpKind {get;}
 
         /// <summary>
         /// The operand
@@ -25,14 +25,14 @@ namespace Z0.Logix
         public ILogicExpr Arg {get;}
 
         [MethodImpl(Inline)]
-        public UnaryLogicOpExpr(UnaryBitLogic op, ILogicExpr arg)
+        public UnaryLogicOpExpr(UnaryBitLogicKind op, ILogicExpr arg)
         {
             this.OpKind = op;
             this.Arg = arg;
         }
 
         public string Format()
-            => OpKind.Format(Arg);        
+            => OpKind.Format(Arg);
     }
 
 }

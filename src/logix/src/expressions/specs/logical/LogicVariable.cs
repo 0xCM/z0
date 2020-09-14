@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -15,41 +15,33 @@ namespace Z0.Logix
     public sealed class LogicVariable : ILogicVarExpr
     {
         /// <summary>
-        /// The variable name
+        /// The variable's symbolic identifier
         /// </summary>
-        public string Name {get;}
-
+        public uint Symbol {get;}
         /// <summary>
-        /// The varible value
+        /// The variable value
         /// </summary>
         public ILogicExpr Value {get; private set;}
 
-        [MethodImpl(Inline)]
-        public LogicVariable(string name, ILogicExpr init)
-        {
-            this.Name = name;
-            this.Value = init;
-        }
+        /// <summary>
+        /// The variable name
+        /// </summary>
+        public string Name => Symbol.ToString();
 
         [MethodImpl(Inline)]
-        public LogicVariable(string name, bit init)
+        public LogicVariable(uint name, bit init)
         {
-            this.Name = name;
-            this.Value = new LiteralLogicExpr(init);
+            Symbol = name;
+            Value = new LiteralLogicExpr(init);
         }
-
 
         [MethodImpl(Inline)]
         public void Set(ILogicExpr value)
-        {
-            this.Value = value;
-        }
+            => Value = value;
 
         [MethodImpl(Inline)]
         public void Set(bit value)
-        {
-            this.Value = new LiteralLogicExpr(value);
-        }
+            => Value = new LiteralLogicExpr(value);
 
         [MethodImpl(Inline)]
         public void Set(IExpr value)
@@ -60,7 +52,7 @@ namespace Z0.Logix
 
         public string Format(bool expand)
             => $"{Name}" + (expand ? $" := {Value}" : string.Empty);
-        
+
         public override string ToString()
             => Format();
     }

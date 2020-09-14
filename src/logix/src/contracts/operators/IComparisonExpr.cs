@@ -49,7 +49,7 @@ namespace Z0.Logix
         /// <summary>
         /// The sort of comparison to be applied
         /// </summary>
-        BinaryComparisonOpId ComparisonKind {get;}
+        BinaryComparisonApiKeyKind ComparisonKind {get;}
     }
 
     /// <summary>

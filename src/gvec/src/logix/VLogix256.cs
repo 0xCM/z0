@@ -12,12 +12,12 @@ namespace Z0
     using static Memories;
     using static LogicSig;
 
-    using ULK = UnaryBitLogic;
+    using ULK = UnaryBitLogicKind;
     using BLK = BinaryLogicKind;
-    using TLK = TernaryBitLogic;
-    using BSK = BitShiftOpId;
-    using BCK = BinaryComparisonOpId;
-    using BAR = BinaryArithmeticOpId;
+    using TLK = TernaryBitLogicKind;
+    using BSK = BitShiftApiKeyKind;
+    using BCK = BinaryComparisonApiKeyKind;
+    using BAR = BinaryArithmeticApiKeyKind;
 
     partial class VLogix
     {

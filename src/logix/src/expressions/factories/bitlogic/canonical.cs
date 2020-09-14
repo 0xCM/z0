@@ -6,10 +6,10 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static BinaryLogicKind;
-    using static UnaryBitLogic;
+    using static UnaryBitLogicKind;
 
     public static partial class BitLogicSpec
     {
@@ -391,7 +391,7 @@ namespace Z0.Logix
                 => binary<T>(LNot, a, b);
 
         /// <summary>
-        /// Defines a right negation operator over expression operands 
+        /// Defines a right negation operator over expression operands
         /// </summary>
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
@@ -587,7 +587,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static TernaryLogicOpExpr select(ILogicExpr a, ILogicExpr b, ILogicExpr c)
-            => ternary(TernaryBitLogic.XCA, a, b, c);
+            => ternary(TernaryBitLogicKind.XCA, a, b, c);
 
         /// <summary>
         /// Defines a ternary select operator over bit literal operands
@@ -596,7 +596,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
         public static TernaryLogicOpExpr select(bit a, bit b, bit c)
-            => ternary(TernaryBitLogic.XCA, a, b, c);
+            => ternary(TernaryBitLogicKind.XCA, a, b, c);
 
         /// <summary>
         /// Defines a ternary select operator over typed expression operands
@@ -606,6 +606,6 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static TernaryLogicOpExpr<T> select<T>(ILogicExpr<T> a, ILogicExpr<T> b, ILogicExpr<T> c)
             where T : unmanaged
-                => ternary(TernaryBitLogic.XCA, a, b, c);
+                => ternary(TernaryBitLogicKind.XCA, a, b, c);
     }
 }

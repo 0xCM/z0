@@ -17,7 +17,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public BinaryComparisonOpId ComparisonKind {get;}
+        public BinaryComparisonApiKeyKind ComparisonKind {get;}
 
         /// <summary>
         /// The left operand
@@ -35,20 +35,20 @@ namespace Z0.Logix
         public ILogicVarExpr[] Vars {get;}
 
         [MethodImpl(Inline)]
-        public static ComparisonExpr<T> Define<T>(BinaryComparisonOpId kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
+        public static ComparisonExpr<T> define<T>(BinaryComparisonApiKeyKind kind, IExpr<T> lhs, IExpr<T> rhs, params IVarExpr<T>[] vars)
             where T : unmanaged
                 => new ComparisonExpr<T>(kind,lhs,rhs,vars);
 
         [MethodImpl(Inline)]
-        public static ComparisonExpr Define(BinaryComparisonOpId kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
+        public static ComparisonExpr define(BinaryComparisonApiKeyKind kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
             => new ComparisonExpr(kind,lhs,rhs,vars);
 
-        ComparisonExpr(BinaryComparisonOpId kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
+        internal ComparisonExpr(BinaryComparisonApiKeyKind kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] vars)
         {
-            this.ComparisonKind = kind;
-            this.Lhs = lhs;
-            this.Rhs = rhs;
-            this.Vars = vars;
+            ComparisonKind = kind;
+            Lhs = lhs;
+            Rhs = rhs;
+            Vars = vars;
         }
 
         public void SetVars(params ILogicExpr[] values)

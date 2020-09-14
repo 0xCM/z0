@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = MemoryOpId;
+    using K = MemoryApiKeyKind;
     using I = IMemoryOpKind;
 
     partial class Kinds

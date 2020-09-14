@@ -15,18 +15,21 @@ namespace Z0
     {
         public static H Host => new H();
 
-        public WfStepId Id {get;}
+        public virtual WfStepId Id {get;}
 
         public Type Type {get;}
 
-        public StringRef Name {get;}
+        public StringRef Name
+            => Identifier;
+
+        public virtual string Identifier
+            => typeof(H).Name;
 
         [MethodImpl(Inline)]
         protected WfHost()
         {
             Type = typeof(H);
             Id = Type;
-            Name = Type.Name;
         }
 
         public virtual void Run(IWfShell shell)

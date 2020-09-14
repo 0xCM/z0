@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Classifies bitwise shift operators
     /// </summary>
-    public enum BitShiftOpId : ulong
+    public enum BitShiftApiKeyKind : ushort
     {
         /// <summary>
         /// The empty identity

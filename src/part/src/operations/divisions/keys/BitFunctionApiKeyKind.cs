@@ -9,7 +9,7 @@ namespace Z0
     /// <summary>
     /// Identifies bitwise operations in an arity-neutral way
     /// </summary>
-    public enum BitFunctionOpId : ulong
+    public enum BitFunctionKeyApiKind : ushort
     {
         None = 0,
 

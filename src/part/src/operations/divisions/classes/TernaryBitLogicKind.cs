@@ -4,11 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     /// <summary>
     /// Classifies ternary logic and bitwise operators
     /// </summary>
-    public enum TernaryBitLogic : byte
+    public enum TernaryBitLogicKind : byte
     {
         /// <summary>
         /// The empty identity
@@ -1300,15 +1299,15 @@ namespace Z0
 
     partial class XTend
     {
-        public static TernaryBitLogic Next(this TernaryBitLogic src)
-            => src != TernaryBitLogic.XFF
-                ? (TernaryBitLogic)((uint)(src) + 1u)
-                : TernaryBitLogic.X00;
+        public static TernaryBitLogicKind Next(this TernaryBitLogicKind src)
+            => src != TernaryBitLogicKind.XFF
+                ? (TernaryBitLogicKind)((uint)(src) + 1u)
+                : TernaryBitLogicKind.X00;
 
-        public static string Format(this TernaryBitLogic kind)
+        public static string Format(this TernaryBitLogicKind kind)
             => kind.ToString();
 
-        public static string Format<T>(this TernaryBitLogic kind, T arg1, T arg2, T arg3)
+        public static string Format<T>(this TernaryBitLogicKind kind, T arg1, T arg2, T arg3)
             => $"{kind.Format()}({arg1}, {arg2}, {arg3})";
     }
 }

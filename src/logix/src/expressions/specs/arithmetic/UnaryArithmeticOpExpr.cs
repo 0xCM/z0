@@ -16,14 +16,14 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public UnaryArithmeticOpId OpKind {get;}
+        public UnaryArithmeticApiKeyKind OpKind {get;}
 
         /// <summary>
         /// The operand
         /// </summary>
         public IExpr<T> Arg {get;}
 
-        public UnaryAritheticOpExpr(UnaryArithmeticOpId op, IExpr<T> operand)
+        public UnaryAritheticOpExpr(UnaryArithmeticApiKeyKind op, IExpr<T> operand)
         {
             this.OpKind = op;
             this.Arg = operand;

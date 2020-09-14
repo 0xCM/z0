@@ -1,11 +1,6 @@
 echo off
 call wf\vars.cmd
 
-REM set BuildSrc="%StageBuild%"
-REM set BuildDst="K:\z0\builds"
-REM set BuildLog="%ZLogs%\etl\build-archive.log"
-REM robocopy %BuildSrc% %BuildDst% /log:%BuildLog% /tee /TS /BYTES /V /MIR
-
 set SrcDir="%ZLogs%\capture"
 set DstDir="%ArchiveDir%\capture"
 set LogPath="%ZLogs%\etl\archive-capture.log"

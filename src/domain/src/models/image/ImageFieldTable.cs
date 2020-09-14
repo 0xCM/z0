@@ -10,44 +10,34 @@ namespace Z0
 
     using static Konst;
 
-    public enum ImageFieldTableField : ushort
-    {
-        Sequence,
-
-        Name,
-
-        Signature,
-
-        Attributes,
-    }
-
-    public enum ImageFieldTabledWidth : ushort
-    {
-        Sequence = 12,
-
-        Name = 60,
-
-        Signature = 30,
-
-        Attributes = 10,
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential), Table(TableName)]
     public struct ImageFieldTable
     {
-        public Count32 Seq;
+        public const string TableName = "image.fields";
 
-        public ImageLiteralFieldTable Name;
+        public Count32 Sequence;
 
         public BinaryCode Sig;
+
+        public ByteSize HeapSize;
+
+        public Count32 Length;
+
+        public Address32 Offset;
+
+        public string Value;
 
         public string Attribs;
 
         [MethodImpl(Inline)]
-        public ImageFieldTable(Count32 seq, ImageLiteralFieldTable name, ImageBlob sig, string attribs)
+        public ImageFieldTable(Count32 seq, ImageLiteralFieldTable field, ImageBlob sig, string attribs)
         {
-            Seq = seq;
-            Name = name;
+            Sequence = seq;
+            Sig = sig.Data;
+            HeapSize = field.HeapSize;
+            Length = field.Length;
+            Offset = field.Offset;
+            Value = field.Value;
             Sig = sig.Data;
             Attribs = attribs;
         }

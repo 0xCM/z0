@@ -20,8 +20,6 @@ namespace Z0
 
         readonly TableFields Fields;
 
-        readonly TableSpan<ushort> Widths;
-
         readonly StringBuilder Target;
 
         readonly char Delimiter;
@@ -33,7 +31,6 @@ namespace Z0
             Fields = fields;
             Target = dst ?? text.build();
             Delimiter = delimiter;
-            Widths = fields.Storage.Select(f => f.RenderWidth);
         }
 
         public void EmitEol()
@@ -56,13 +53,22 @@ namespace Z0
         public string FormatHeader()
         {
             var dst = text.build();
-            EmitHeader(dst);
+            var view = Fields.View;
+            var count = view.Length;
+            for(var i=0u; i<count; i++)
+            {
+                dst.Append(Delimiter);
+                dst.Append(Space);
+                ref readonly var field = ref skip(view,i);
+                var width = field.RenderWidth;
+                dst.Append(field.Name.PadRight(width));
+            }
             return dst.ToString();
         }
 
         public void EmitHeader()
         {
-            EmitHeader(Target);
+            Target.Append(FormatHeader());
             EmitEol();
         }
 
@@ -76,36 +82,6 @@ namespace Z0
             if(clear)
                 Reset();
             return row;
-        }
-
-        void EmitHeader(StringBuilder dst)
-        {
-            var view = Fields.View;
-            var count = view.Length;
-            var widths = Widths.View;
-            for(var i=0u; i<count; i++)
-            {
-                dst.Append(Delimiter);
-                dst.Append(Space);
-                ref readonly var field = ref skip(view,i);
-                ref readonly var width = ref skip(widths,i);
-                dst.Append(field.Name.PadRight(width));
-            }
-        }
-
-        public string FormatHeader(ReadOnlySpan<byte> widths)
-        {
-            var dst = text.build();
-            var view = Fields.View;
-            var count = view.Length;
-            for(var i=0u; i<count; i++)
-            {
-                dst.Append(Delimiter);
-                dst.Append(Space);
-                ref readonly var field = ref skip(view,i);
-                dst.Append(field.Name.PadRight(skip(widths,i)));
-            }
-            return dst.ToString();
         }
 
         public void Append(ushort width, object src)

@@ -15,7 +15,7 @@ namespace Z0
         public readonly struct Nor<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged
         {
-            public const BitLogicOpId OpKind = BitLogicOpId.Nor;
+            public const BitLogicApiKeyKind OpKind = BitLogicApiKeyKind.Nor;
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)

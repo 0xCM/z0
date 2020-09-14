@@ -7,11 +7,11 @@ namespace Z0.Logix
     using System;
 
     /// <summary>
-    /// Characterizes a logicical expression over a bit
+    /// Characterizes a logical expression over a bit
     /// </summary>
     public interface ILogicExpr : IExpr
     {
-    
+
     }
 
     /// <summary>
@@ -23,6 +23,4 @@ namespace Z0.Logix
     {
 
     }
-
-
 }

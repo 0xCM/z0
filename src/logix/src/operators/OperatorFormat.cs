@@ -12,24 +12,24 @@ namespace Z0
     public readonly struct ExprFormat
     {
         [MethodImpl(Inline)]
-        public static string format(UnaryBitLogic kind)
+        public static string format(UnaryBitLogicKind kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string format<T>(UnaryBitLogic kind, T arg)
+        public static string format<T>(UnaryBitLogicKind kind, T arg)
             => $"{kind.Format()}({arg})";
 
         [MethodImpl(Inline)]
-        public static string format(UnaryArithmeticOpId kind)
+        public static string format(UnaryArithmeticApiKeyKind kind)
             => kind switch {
-                UnaryArithmeticOpId.Inc => "++",
-                UnaryArithmeticOpId.Dec => "--",
-                UnaryArithmeticOpId.Negate => "-",
+                UnaryArithmeticApiKeyKind.Inc => "++",
+                UnaryArithmeticApiKeyKind.Dec => "--",
+                UnaryArithmeticApiKeyKind.Negate => "-",
                 _ => kind.ToString()
             };
 
         [MethodImpl(Inline)]
-        public static string format<T>(UnaryArithmeticOpId kind, T arg)
+        public static string format<T>(UnaryArithmeticApiKeyKind kind, T arg)
             => $"{kind.Format()}({arg})";
 
         [MethodImpl(Inline)]
@@ -41,15 +41,15 @@ namespace Z0
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]
-        public static string format<T>(BinaryArithmeticOpId kind, T arg1, T arg2)
+        public static string format<T>(BinaryArithmeticApiKeyKind kind, T arg1, T arg2)
             => $"{kind.ToString().ToLower()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]
-        public static string format(BinaryComparisonOpId kind)
+        public static string format(BinaryComparisonApiKeyKind kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string format<T>(BinaryComparisonOpId kind, T arg1, T arg2)
+        public static string format<T>(BinaryComparisonApiKeyKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
     }
 }

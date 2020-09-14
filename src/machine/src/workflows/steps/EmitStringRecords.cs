@@ -23,11 +23,6 @@ namespace Z0
         /// </summary>
         public uint EmissionCount;
 
-        /// <summary>
-        /// The emission output rut
-        /// </summary>
-        public readonly FolderPath TargetDir;
-
         readonly IWfShell Wf;
 
         readonly CorrelationToken Ct;
@@ -40,7 +35,6 @@ namespace Z0
             Wf = wf;
             Ct = ct;
             Parts = parts;
-            TargetDir = wf.ResourceRoot + FolderName.Define(TargetFolder);
             EmissionCount = 0;
             PartCount = (uint)parts.Length;
             Wf.Created(StepId);
@@ -53,21 +47,23 @@ namespace Z0
 
         uint EmitUserStrings(IPart part)
         {
-            using var emitter = new EmitPartStrings(Wf, part, PartStringKind.User, TargetDir, Ct);
+            var dst = Wf.ResourceRoot + FolderName.Define(UserTargetFolder);
+            using var emitter = new EmitPartStrings(Wf, part, PartStringKind.User, dst, Ct);
             emitter.Run();
             return emitter.EmissionCount;
         }
 
         uint EmitSystemStrings(IPart part)
         {
-            using var emitter = new EmitPartStrings(Wf, part, PartStringKind.System, TargetDir, Ct);
+            var dst = Wf.ResourceRoot + FolderName.Define(SystemTargetFolder);
+            using var emitter = new EmitPartStrings(Wf, part, PartStringKind.System, dst, Ct);
             emitter.Run();
             return emitter.EmissionCount;
         }
 
         public void Run()
         {
-            Wf.Running(StepId, delimit(PartCount, TargetDir));
+            Wf.Running(StepId);
 
             foreach(var part in Parts)
             {

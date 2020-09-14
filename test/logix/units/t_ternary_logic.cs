@@ -5,7 +5,7 @@
 namespace Z0.Logix
 {
     using System;
-    
+
     using static Konst;
     using static Memories;
 
@@ -15,11 +15,11 @@ namespace Z0.Logix
 
         BitLogix bitlogix => BitLogix.Service;
 
-        ReadOnlySpan<TernaryBitLogic> TernaryKinds
+        ReadOnlySpan<TernaryBitLogicKind> TernaryKinds
             => NumericLogixHost.TernaryLogicKinds;
-        
+
         public void op_identities()
-        {                         
+        {
             foreach(var kind in TernaryKinds)
             {
                 check_op_identity<byte>(kind);
@@ -116,7 +116,7 @@ namespace Z0.Logix
 
         }
 
-        void check_op_identity<T>(TernaryBitLogic id)
+        void check_op_identity<T>(TernaryBitLogicKind id)
             where T: unmanaged
         {
             var a = convert<T>(0b1111_0000);
@@ -129,7 +129,7 @@ namespace Z0.Logix
             Claim.eq(expect.FormatHex(), actual.FormatHex());
         }
 
-        void check_op_equivalence<T>(TernaryBitLogic kind)
+        void check_op_equivalence<T>(TernaryBitLogicKind kind)
             where T: unmanaged
         {
             var width = bitsize<T>();
@@ -142,8 +142,8 @@ namespace Z0.Logix
 
                 for(var j=0; j<width; j++)
                     u[j] = bitlogix.Evaluate(kind, a[j], b[j], c[j]);
-                
-                
+
+
                 BitVector<T> v = NumericLogixHost.eval(kind, a.Scalar, b.Scalar, c.Scalar);
 
                 if(u != v)

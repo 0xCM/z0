@@ -43,9 +43,9 @@ namespace Z0
         {
             var src = Literals.details(Df.Source.Owner).View;
             var count = src.Length;
-            var formatter = Table.rowformatter<EnumLiteralDetail>();
+            var formatter = Table.rowformatter<EnumLiteralDetail>(EnumLiteralDetail.RenderWidths);
             var dst = Df.Target.Writer();
-            dst.WriteLine(formatter.FormatHeader(EnumLiteralDetail.RenderWidths));
+            dst.WriteLine(formatter.FormatHeader());
 
             for(var i=0u; i<count; i++)
             {

@@ -94,11 +94,11 @@ namespace Z0
             }
         }
 
-        void Run(EmitImageContentStep kind)
+        void Run(EmitImageDataStep kind)
         {
             try
             {
-                using var step = new EmitImageContent(Wf, Parts, Ct);
+                using var step = new EmitImageData(Wf, Parts, Ct);
                 step.Run();
             }
             catch(Exception e)
@@ -136,11 +136,11 @@ namespace Z0
         void Run(EmitFieldMetadataHost host)
             => host.Run(Wf);
 
-        void Run(EmitPartCil kind)
+        void Run(EmitPartCilStep host)
         {
             try
             {
-                using var step = new EmitPartCil(Wf, Parts, Ct);
+                using var step = new EmitPartCil(Wf, host);
                 step.Run();
             }
             catch(Exception e)
@@ -155,11 +155,8 @@ namespace Z0
             step.Run();
         }
 
-        void Run(EmitFieldLiteralsStep kind)
-        {
-            using var step = new EmitFieldLiterals(Wf, Ct);
-            step.Run();
-        }
+        void Run(EmitFieldLiteralsHost host)
+            => host.Run(Wf);
 
         void Run(EmitContentCatalogStep kind)
         {
@@ -177,16 +174,16 @@ namespace Z0
         {
             Run(new EmitImageConstantsStep());
             Run(new EmitPeHeadersStep());
-            Run(new EmitImageContentStep());
+            Run(new EmitImageDataStep());
             Run(new EmitStringRecordsStep());
             Run(new EmitImageBlobsStep());
             Run(new EmitFieldMetadataHost());
-            Run(new EmitPartCil());
+            Run(new EmitPartCilStep());
             Run(new EmitBitMasksStep());
             Run(new EmitProjectDocsStep());
             Run(new EmitResBytesStep());
             Run(new EmitEnumCatalogStep());
-            Run(new EmitFieldLiteralsStep());
+            Run(new EmitFieldLiteralsHost());
             Run(new EmitContentCatalogStep());
         }
 

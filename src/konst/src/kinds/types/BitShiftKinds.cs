@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = BitShiftOpId;
+    using K = BitShiftApiKeyKind;
     using I = IBitShiftKind;
 
     partial class Kinds

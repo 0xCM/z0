@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -18,7 +18,7 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public TernaryBitLogic OpKind {get;}
+        public TernaryBitLogicKind OpKind {get;}
 
         /// <summary>
         /// The first operand
@@ -36,7 +36,7 @@ namespace Z0.Logix
         public IExpr<T> ThirdArg {get;}
 
         [MethodImpl(Inline)]
-        public TernaryBitwiseOpExpr(TernaryBitLogic op, IExpr<T> first, IExpr<T> second, IExpr<T> third)
+        public TernaryBitwiseOpExpr(TernaryBitLogicKind op, IExpr<T> first, IExpr<T> second, IExpr<T> third)
         {
             this.OpKind = op;
             this.FirstArg = first;
@@ -46,7 +46,7 @@ namespace Z0.Logix
 
         public string Format()
             => OpKind.Format(FirstArg,SecondArg,ThirdArg);
-        
+
         public override string ToString()
             => Format();
     }

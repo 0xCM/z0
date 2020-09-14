@@ -15,7 +15,7 @@ namespace Z0
         public readonly struct Select<T> : ITernaryOp<T>, ITernarySpanOp<T>
             where T : unmanaged
         {
-            public const BitLogicOpId OpKind = BitLogicOpId.Select;
+            public const BitLogicApiKeyKind OpKind = BitLogicApiKeyKind.Select;
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b, T c)
