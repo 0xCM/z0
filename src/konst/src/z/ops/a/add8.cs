@@ -22,5 +22,15 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T add8<T>(in T src, uint count)
             => ref AddByteOffset(ref edit(src), (IntPtr)count);
+
+        /// <summary>
+        /// Adds a an offset of 1 byte to a reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The reference type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T add8<T>(in T src)
+            => ref AddByteOffset(ref edit(src), (IntPtr)1);
+
     }
 }

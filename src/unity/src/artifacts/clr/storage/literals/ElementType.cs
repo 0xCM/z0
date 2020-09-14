@@ -10,6 +10,7 @@ namespace Z0
 
     partial struct ClrStorage
     {
+
         public enum ElementType : byte
         {
             End = 0x00,

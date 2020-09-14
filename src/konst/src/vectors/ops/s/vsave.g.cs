@@ -23,17 +23,17 @@ namespace Z0
         public static void vsave<T>(Vector128<T> src, ref T dst, int offset)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 vsave128_u(src, ref dst, offset);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 vsave128_i(src, ref dst, offset);
-            else 
+            else
                 vsave128_f(src, ref dst, offset);
         }
 
@@ -48,17 +48,17 @@ namespace Z0
         public static void vsave<T>(Vector256<T> src, ref T dst, int offset)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 vsave256_u(src, ref dst, offset);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 vsave256_i(src, ref dst, offset);
-            else 
+            else
                 vsave256_f(src, ref dst, offset);
         }
 
@@ -77,7 +77,7 @@ namespace Z0
             where T : unmanaged
         {
             vsave(src.Lo, ref dst, offset);
-            vsave(src.Hi, ref dst, offset + vcount<T>(Typed.w256));
+            vsave(src.Hi, ref dst, offset + vcount<T>(w256));
         }
 
         [MethodImpl(Inline)]
@@ -120,8 +120,8 @@ namespace Z0
                 vsave(v32f(src), ref float32(ref dst));
             else if(typeof(T) == typeof(double))
                 vsave(v64f(src), ref float64(ref dst));
-            else 
-                throw no<T>();                
+            else
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -164,8 +164,8 @@ namespace Z0
                 vsave(v32f(src), ref float32(ref dst));
             else if(typeof(T) == typeof(double))
                 vsave(v64f(src), ref float64(ref dst));
-            else 
-                throw no<T>();                
+            else
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -204,8 +204,8 @@ namespace Z0
                 vsave(v32f(src), ref float32(ref dst), offset);
             else if(typeof(T) == typeof(double))
                 vsave(v64f(src), ref float64(ref dst), offset);
-            else 
-                throw no<T>();                
+            else
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -244,8 +244,8 @@ namespace Z0
                 vsave(v32f(src), ref float32(ref dst), offset);
             else if(typeof(T) == typeof(double))
                 vsave(v64f(src), ref float64(ref dst), offset);
-            else 
-                throw no<T>();                
+            else
+                throw no<T>();
         }
     }
 }

@@ -5,10 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;    
-    
-    using static Konst; 
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+
+    using static Konst;
 
     partial class dvec
     {
@@ -19,9 +19,7 @@ namespace Z0
         /// <param name="count">The number of bits to rotate</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ulong> vrotlx(Vector128<ulong> src, [Imm] byte count)
-        {
-            return vor(vsllx(src, count), vsrlx(src, (byte)(128 - count)));
-        }
+            => vor(vsllx(src, count), vsrlx(src, (byte)(128 - count)));
 
         /// <summary>
         /// Rotates each 128 lane leftward a bit-level resolution

@@ -32,6 +32,8 @@ namespace Z0
 
         public static W32i w32i => default;
 
+        public static W40 w40 => default;
+
         public static W64 w64 => default;
 
         public static W64i w64i => default;

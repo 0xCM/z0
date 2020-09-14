@@ -80,15 +80,15 @@ namespace Z0
         public static Vector512<uint> vinflate(Vector256<ushort> src, W32 w)
             => vconvert(src, w512, z32);
 
-        /// <summary>
-        /// 32x8u -> 32x16u
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="lo">The first target vector</param>
-        /// <param name="hi">The second target vector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector512<ushort> vinflate(Vector256<byte> src, W16 w)
-            => vconvert(src, w512, Zero16u);
+        // /// <summary>
+        // /// 32x8u -> 32x16u
+        // /// </summary>
+        // /// <param name="src">The source vector</param>
+        // /// <param name="lo">The first target vector</param>
+        // /// <param name="hi">The second target vector</param>
+        // [MethodImpl(Inline), Op]
+        // public static Vector512<ushort> vinflate(Vector256<byte> src, W16 w)
+        //     => vconvert(src, w512, Zero16u);
 
         // /// <summary>
         // /// 32x8w -> 32x16i

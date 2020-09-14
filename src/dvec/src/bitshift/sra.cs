@@ -5,17 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse2;
 
-    using static Konst; 
-    using static Memories;    
+    using static Konst;
 
     partial class dvec
-    {         
+    {
         /// <summary>
         /// __m128i _mm_srai_epi16 (__m128i a, int immediate) PSRAW xmm, imm8
         /// Applies a rightward arithmetic shift to the source vector

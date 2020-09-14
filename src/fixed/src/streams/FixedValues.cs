@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Widths;
-    using static Root;
+    using static z;
 
     [ApiHost]
     public readonly struct FixedValues

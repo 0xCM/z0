@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Widths;
     using static Konst;
+    using static z;
 
     partial struct BufferBlocks
     {
@@ -28,6 +28,5 @@ namespace Z0
                 dst[i] = z.convert<S,T>(src[i]);
             return dst;
         }
-
     }
 }

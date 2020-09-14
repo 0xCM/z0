@@ -5,20 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse41;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Sse;
-    using static System.Runtime.Intrinsics.X86.Ssse3;
 
-    using static Typed;    
-    using static V0;
-    using static V0d;
+    using static Konst;
+    using static z;
 
     partial class dvec
     {
@@ -86,7 +83,7 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector256<long> vmul(Vector128<int> x, Vector128<int> y)
         {
-            var lo = Multiply(x, y);                        
+            var lo = Multiply(x, y);
             var hi = Multiply(z.vswaphl(x), z.vswaphl(y));
             return z.vconcat(lo,hi);
         }
@@ -99,7 +96,7 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector256<ulong> vmul(Vector128<uint> x, Vector128<uint> y)
         {
-            var lo = Multiply(x, y);                        
+            var lo = Multiply(x, y);
             var hi = Multiply(z.vswaphl(x), z.vswaphl(y));
             return z.vconcat(lo,hi);
         }
@@ -130,7 +127,7 @@ namespace Z0
         public static Vector512<ushort> vmul(Vector256<byte> x, Vector256<byte> y)
         {
             (var x1, var x2) = z.vinflate(x,w512, z16);
-            (var y1, var y2) = z.vinflate(y,w512, z16);            
+            (var y1, var y2) = z.vinflate(y,w512, z16);
             return (vmullo(x1,y1), vmullo(x2,y2));
         }
 
@@ -168,7 +165,7 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector512<long> vmul(Vector256<int> x,Vector256<int> y)
         {
-            var lo = Multiply(x, y);                        
+            var lo = Multiply(x, y);
             var hi = Multiply(z.vswaphl(x), z.vswaphl(y));
             return (lo,hi);
         }
@@ -181,7 +178,7 @@ namespace Z0
         [MethodImpl(Inline), Mul]
         public static Vector512<ulong> vmul(Vector256<uint> x,Vector256<uint> y)
         {
-            var lo = Multiply(x, y);                        
+            var lo = Multiply(x, y);
             var hi = Multiply(z.vswaphl(x), z.vswaphl(y));
             return (lo,hi);
         }
@@ -193,14 +190,14 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Mul]
-        static Vector256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)    
+        static Vector256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)
         {
-            var loMask = vbroadcast(w256, 0x00000000fffffffful);                
+            var loMask = vbroadcast(w256, 0x00000000fffffffful);
             var xh = v32u(vsrl(x, 32));
             var yl = v32u(vand(y, loMask));
             return vadd(
-                Multiply(v32u(vand(x, loMask)), yl), 
-                vadd(vsll(Multiply(xh, yl), 32), 
+                Multiply(v32u(vand(x, loMask)), yl),
+                vadd(vsll(Multiply(xh, yl), 32),
                     vsll(Multiply(xh, v32u(vsrl(y, 32))), 32)));
         }
     }

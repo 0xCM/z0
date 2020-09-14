@@ -5,16 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst; 
-    using static As;
-    using static Typed;
+
+    using static Konst;
+    using static z;
 
     partial class gvec
     {
-
         [MethodImpl(Inline), True, Closures(Integers)]
         public static Vector128<T> vtrue<T>(W128 w)
             where T:unmanaged
@@ -33,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), True, Closures(Integers)]
         public static Vector128<T> vtrue<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T:unmanaged
-                => gvec.vones<T>(w128);  
+                => gvec.vones<T>(w128);
 
         [MethodImpl(Inline), True, Closures(Integers)]
         public static Vector256<T> vtrue<T>(W256 w)

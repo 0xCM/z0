@@ -23,24 +23,15 @@ namespace Z0
         /// The resource address
         /// </summary>
         public MemoryAddress Location {get;}
-    
+
         /// <summary>
         /// The resource value extracted from the accompanying location
         /// </summary>
         public string Content {get;}
 
-        ulong ITextResource.Location 
+        ulong ITextResource.Location
             => Location;
 
-        [MethodImpl(Inline)]
-        public static TextResource Define(ulong id, MemoryAddress location, string value)
-            => new TextResource(id,location,value);
-
-        [MethodImpl(Inline)]
-        public static TextResource<E> Define<E>(E id, MemoryAddress location, string value)
-            where E : unmanaged, Enum
-                => new TextResource<E>(id,location,value);
-       
         [MethodImpl(Inline)]
         public TextResource(ulong id, MemoryAddress location, string value)
         {

@@ -20,6 +20,26 @@ namespace Z0
         /// <param name="w">The target width selector</param>
         /// <param name="t">A target cell type representative</param>
         [MethodImpl(Inline), Op]
+        public static Vector256<short> vinflate(Vector128<byte> src, W16 w, N1 i)
+            => z.vinflate(src, w256, Zero16i);
+
+        /// <summary>
+        /// 32x8u -> 32x16u
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="lo">The first target vector</param>
+        /// <param name="hi">The second target vector</param>
+        [MethodImpl(Inline), Op]
+        public static Vector512<ushort> vinflate(Vector256<byte> src, W16 w)
+            => z.vinflate(src, w512, Zero16u);
+
+        /// <summary>
+        /// 16x8u -> 16x16u
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        /// <param name="w">The target width selector</param>
+        /// <param name="t">A target cell type representative</param>
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vinflate(Vector128<byte> src, W16 w)
             => vconvert(src, w256, z16);
 
@@ -76,16 +96,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vinflate(W128 w, in byte src)
             => ConvertToVector256Int16(vload(w, src)).AsUInt16();
-
-        /// <summary>
-        /// 16x8u -> 16x16u
-        /// </summary>
-        /// <param name="src">The source vector</param>
-        /// <param name="w">The target width selector</param>
-        /// <param name="t">A target cell type representative</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<short> vinflate(Vector128<byte> src, W16 w, N1 i)
-            => vconvert(src, w256, Zero16i);
 
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vinflate(Vector128<byte> src)

@@ -14,6 +14,42 @@ namespace Z0
     partial struct z
     {
         /// <summary>
+        /// Adds a an offset of 1 byte to a reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The reference type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T add<T>(in T src, W8 w)
+            => ref AddByteOffset(ref edit(src), (IntPtr)1);
+
+        /// <summary>
+        /// Adds a an offset of 2 bytes to a reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The reference type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T add<T>(in T src, W16 w)
+            => ref AddByteOffset(ref edit(src), (IntPtr)2);
+
+        /// <summary>
+        /// Adds a an offset of 3 bytes to a reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The reference type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T add<T>(in T src, W24 w)
+            => ref AddByteOffset(ref edit(src), (IntPtr)3);
+
+        /// <summary>
+        /// Adds a an offset of 4 bytes to a reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <typeparam name="T">The reference type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref T add<T>(in T src, W32 w)
+            => ref AddByteOffset(ref edit(src), (IntPtr)3);
+
+        /// <summary>
         /// Adds an offset to a reference
         /// </summary>
         /// <param name="src">The source reference</param>

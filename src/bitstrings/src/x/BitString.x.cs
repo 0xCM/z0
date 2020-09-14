@@ -11,7 +11,7 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static Typed;
+    using static z;
 
     public static class BitStringX
     {

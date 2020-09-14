@@ -12,6 +12,11 @@ namespace Z0
 
     partial struct Resources
     {
+        [MethodImpl(Inline)]
+        public static TextResource<E> define<E>(E id, MemoryAddress location, string value)
+            where E : unmanaged, Enum
+                => new TextResource<E>(id,location,value);
+
         [MethodImpl(Inline), Op]
         public static AsciResource<asci2> define(in asci32 name, asci2 content, asci64? description = null)
             => resource(name, content, description);

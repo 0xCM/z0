@@ -18,8 +18,8 @@ namespace Z0
             => new BinaryResource(owner, id, src.Length, z.address(src));
 
         [MethodImpl(Inline), Op]
-        public static BinaryResource binary(PartId owner, string id, int Length, ulong address)
-            => new BinaryResource(owner, id, Length, address);
+        public static BinaryResource binary(PartId owner, string id, ByteSize size, MemoryAddress address)
+            => new BinaryResource(owner, id, size, address);
 
         [MethodImpl(Inline), Op]
         public static BinaryResources binary(IResourceProvider src)
@@ -29,7 +29,7 @@ namespace Z0
         /// Returns the properties declared by a type that define binary resource content
         /// </summary>
         /// <typeparam name="T">The defining type</typeparam>
-        public static PropertyInfo[] BinaryProviders<T>() 
+        public static PropertyInfo[] BinaryProviders<T>()
             => typeof(T)
                 .StaticProperties()
                 .Where(p => p.PropertyType == typeof(ReadOnlySpan<byte>))

@@ -51,7 +51,7 @@ namespace Z0
                 ref readonly var address = ref skip(locations,(uint)i);
                 var data = Address.view<byte>(address, ResLength);
                 var content = Render(Symbols(data));
-                seek(dst, (uint)i) = TextResource.Define((ulong)address, address, content);
+                seek(dst, (uint)i) = new TextResource((ulong)address, address, content);
             }
             return count;
         }

@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-       
-    using static Konst; 
+
+    using static Konst;
     using static VectorKonst;
-    
+
     partial struct z
     {
         /// <summary>
@@ -65,11 +65,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
-                return vload<T>(w,Inc512x8u);
+                return vload<T>(w, Inc512x8u);
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
-                return vload<T>(w,Inc512x16u);
+                return vload<T>(w, Inc512x16u);
             else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int) || typeof(T) == typeof(float))
-                return vload<T>(w,Inc512x32u);
+                return vload<T>(w, Inc512x32u);
             else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(long))
                 return vload<T>(w,Inc512x64u);
             else

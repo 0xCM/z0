@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Typed;
-    using static V0;
+    using static z;
 
     partial class BitMatrix
     {
@@ -18,7 +17,7 @@ namespace Z0
         /// Loads the lower half of a 128-bit cpu vector from matrix data
         /// </summary>
         /// <param name="A">The source matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector128<byte> vload(in BitMatrix8 A)
             => z.vscalar(w128, (ulong)A).AsByte();
 
@@ -26,7 +25,7 @@ namespace Z0
         /// Loads a 256-bit cpu vector from matrix data
         /// </summary>
         /// <param name="A">The source matrix</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vload(in BitMatrix16 A)
             => z.vload(w256, A.Content);
 
@@ -35,17 +34,17 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         /// <param name="offset">The offset into the source, relative to the primal type, at which to begin reading data</param>
-        [MethodImpl(Inline)]
-        public static Vector256<uint> vload(in BitMatrix32 A, int offset)
-            => z.vload(w256, A.Content.Slice(offset));
+        [MethodImpl(Inline), Op]
+        public static Vector256<uint> vload(in BitMatrix32 A, uint offset)
+            => z.vload(w256, A.Content.Slice((int)offset));
 
         /// <summary>
         /// Loads a 256-bit cpu vector from matrix data beginning at a specified offset
         /// </summary>
         /// <param name="A">The source matrix</param>
         /// <param name="offset">The offset into the source, relative to the primal type, at which to begin reading data</param>
-        [MethodImpl(Inline)]
-        public static Vector256<ulong> vload(in BitMatrix64 A, int offset)
-            => z.vload(w256, A.Content.Slice(offset));
+        [MethodImpl(Inline), Op]
+        public static Vector256<ulong> vload(in BitMatrix64 A, uint offset)
+            => z.vload(w256, A.Content.Slice((int)offset));
     }
 }

@@ -6,10 +6,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using static Konst;
 
     partial struct ClrStorage
     {
+        [Flags]
         public enum TypeDefFlags : uint
         {
             PrivateAccess = 0x00000000,

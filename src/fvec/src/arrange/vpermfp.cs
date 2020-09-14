@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;    
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
-    
+
     using static Konst;
-    using static Typed;
+    using static z;
 
     partial class dinxfp
     {
@@ -25,10 +25,10 @@ namespace Z0
         /// <param name="spec">The control byte</param>
         [MethodImpl(Inline), Op]
         public static Vector256<double> vperm4x64(Vector256<double> x, [Imm] byte spec)
-            => Permute4x64(x,spec); 
+            => Permute4x64(x,spec);
 
         /// <summary>
-        /// __m256d _mm256_permute4x64_pd (__m256d a, const int imm8)VPERMPD ymm, ymm/m256, imm8
+        /// __m256d _mm256_permute4x64_pd (__m256d a, const int imm8) VPERMPD ymm, ymm/m256, imm8
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <param name="spec">The permutation spec</param>
@@ -94,12 +94,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<double> vperm2x128(Vector256<double> x, Vector256<double> y, Perm2x4 spec)
             => vperm2x128(x, y, (byte)spec);
- 
+
         [MethodImpl(Inline), Op]
         public static Vector256<float> vreverse(Vector256<float> src)
-            => vperm8x32(src,MRev256f32);    
+            => vperm8x32(src,MRev256f32);
 
-        static Vector256<int> MRev256f32 
-            => V0.vparts(w256i, 7, 6, 5, 4, 3, 2, 1, 0);    
+        static Vector256<int> MRev256f32
+            => V0.vparts(w256i, 7, 6, 5, 4, 3, 2, 1, 0);
     }
 }

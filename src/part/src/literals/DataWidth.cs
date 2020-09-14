@@ -90,13 +90,29 @@ namespace Z0
         /// </summary>
         W16 = 16,
 
+        /// <summary>
+        /// Indicates a bit-width of 17
+        /// </summary>
         W17 = 17,
 
+        /// <summary>
+        /// Indicates a bit-width of 18
+        /// </summary>
         W18 = 18,
 
+        /// <summary>
+        /// Indicates a bit-width of 19
+        /// </summary>
         W19 = 19,
+
+        /// <summary>
+        /// Indicates a bit-width of 20
+        /// </summary>
         W20 = 20,
 
+        /// <summary>
+        /// Indicates a bit-width of 21
+        /// </summary>
         W21 = 21,
 
         W22 = 22,
@@ -104,11 +120,25 @@ namespace Z0
         W23 = 23,
         W24 = 24,
 
-
         /// <summary>
         /// Indicates a bit-width of 32
         /// </summary>
         W32 = 32,
+
+        /// <summary>
+        /// Indicates a bit-width of 40
+        /// </summary>
+        W40 = 40,
+
+        /// <summary>
+        /// Indicates a bit-width of 48
+        /// </summary>
+        W48 = 48,
+
+        /// <summary>
+        /// Indicates a bit-width of 56
+        /// </summary>
+        W56 = 56,
 
         /// <summary>
         /// Indicates a bit-width of 64

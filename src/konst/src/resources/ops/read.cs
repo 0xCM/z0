@@ -35,7 +35,7 @@ namespace Z0
                 ref readonly var address = ref skip(locations,(uint)i);
                 var value = Spans.cast<char>(Address.view<byte>(address, ResLength)).ToString();
                 var id = EnumValue.literal<E,int>(i + 1);
-                seek(dst,(uint)i) = TextResource.Define(id, address, value);
+                seek(dst,(uint)i) = define(id, address, value);
             }
             return dst;
         }
