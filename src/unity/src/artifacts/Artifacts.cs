@@ -10,11 +10,11 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
+    [ApiHost("artifacts.api")]
     public readonly struct Artifacts
     {
         [MethodImpl(Inline), Op]
-        public static ClrArtifacts clr()
+        public static ClrArtifactServices clr()
             => default;
     }
 }

@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static z;
-    
+
     public class tv_mul : t_inx<tv_mul>
     {
         public void vmul_128x8i()
@@ -18,7 +18,7 @@ namespace Z0
             var wt = n256;
             var s = z8i;
             var t = z16i;
-        
+
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector(ws,s);
@@ -39,7 +39,7 @@ namespace Z0
             var wt = n256;
             var s = z8;
             var t = z16;
-        
+
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector(ws,s);
@@ -60,7 +60,7 @@ namespace Z0
             var wt = n256;
             var s = z16i;
             var t = z32i;
-        
+
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector(ws,s);
@@ -81,7 +81,7 @@ namespace Z0
             var wt = n256;
             var s = z16;
             var t = z32;
-        
+
             for(var rep=0; rep< RepCount; rep++)
             {
                 var x = Random.CpuVector(ws,s);
@@ -103,7 +103,7 @@ namespace Z0
             var s = z32;
             var t = z64;
             var count = vcount(ws,s);
-        
+
             var a0 = gvec.vinc(ws,1u);
             var a1 = gvec.vinc(ws,a0.LastCell() + 1);
             var b0 = dvec.vmul(a0,a1);
@@ -134,7 +134,7 @@ namespace Z0
             var wt = n512;
             var s = z8;
             var t = z16;
-        
+
             for(var i=0; i< RepCount; i++)
             {
                 var x = Random.CpuVector(ws,s);
@@ -154,9 +154,9 @@ namespace Z0
             var w = n256;
             var t = z32;
             var s = z16;
-            
-            var zb = Blocks.alloc<uint>(n512);
-            var eb = Blocks.alloc<uint>(n512);            
+
+            var zb = BufferBlocks.alloc<uint>(n512);
+            var eb = BufferBlocks.alloc<uint>(n512);
             var count = vcount(w,s);
 
             for(var i=0; i< RepCount; i ++)
@@ -171,7 +171,7 @@ namespace Z0
 
                 for(var j=0; j< count; j++)
                     eb[j] = uint32(xs[j] * ys[j]);
-                
+
                 Claim.eq(eb,zb);
             }
         }

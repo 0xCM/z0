@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     public class t_vbfly : t_inx<t_vbfly>
     {
         //[0 1 2 3] -> [0 2 1 3]
@@ -24,7 +24,7 @@ namespace Z0
                 Claim.eq(x2,y1);
                 Claim.eq(x3,y3);
             }
-        }        
+        }
 
         // [0 1 2 3] -> [0 2 1 3]
         public void butterfly_32x8()
@@ -40,12 +40,12 @@ namespace Z0
                 Claim.eq(x2,y1);
                 Claim.eq(x3,y3);
             }
-        }        
+        }
 
         /*
         swaps the interior 4-bit segments of each 16-bit segment.
-        [0 | 1 2 | 3 || 4 | 5 6 | 7] -> 
-        [0 | 2 1 | 3 || 4 | 6 5 | 7]            
+        [0 | 1 2 | 3 || 4 | 5 6 | 7] ->
+        [0 | 2 1 | 3 || 4 | 6 5 | 7]
         */
 
         public void butterfly_32x4()
@@ -63,7 +63,7 @@ namespace Z0
                 Claim.eq(BitString.scalar<byte>(c[16..19]), BitString.scalar<byte>(b[16..19]));
                 Claim.eq(BitString.scalar<byte>(c[20..23]), BitString.scalar<byte>(b[24..27]));
                 Claim.eq(BitString.scalar<byte>(c[24..27]), BitString.scalar<byte>(b[20..23]));
-                Claim.eq(BitString.scalar<byte>(c[28..31]), BitString.scalar<byte>(b[28..31]));                            
+                Claim.eq(BitString.scalar<byte>(c[28..31]), BitString.scalar<byte>(b[28..31]));
             }
 
         }
@@ -77,7 +77,7 @@ namespace Z0
                 var x = Random.CpuVector<uint>(n);
                 var y = VBits.bfly(w, x);
                 var xs = x.ToSpan();
-                var zs = Blocks.alloc<uint>(n);
+                var zs = BufferBlocks.alloc<uint>(n);
                 for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.bfly(w,xs[j]);
                 var z = zs.LoadVector();
@@ -94,7 +94,7 @@ namespace Z0
                 var x = Random.CpuVector<uint>(n);
                 var y = VBits.bfly(w, x);
                 var xs = x.ToSpan();
-                var zs = Blocks.alloc<uint>(n);
+                var zs = BufferBlocks.alloc<uint>(n);
                 for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.bfly(w,xs[j]);
                 var z = zs.LoadVector();
@@ -112,7 +112,7 @@ namespace Z0
                 var x = Random.CpuVector<ulong>(n);
                 var y = VBits.bfly(w, x);
                 var xs = x.ToSpan();
-                var zs = Blocks.alloc<ulong>(n);
+                var zs = BufferBlocks.alloc<ulong>(n);
                 for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.bfly(w,xs[j]);
                 var z = zs.LoadVector();
@@ -131,7 +131,7 @@ namespace Z0
                 var x = Random.CpuVector<T>(w);
                 var y = VBits.bfly(b, x);
                 var xs = x.ToSpan();
-                var zs = Blocks.alloc<T>(w);
+                var zs = BufferBlocks.alloc<T>(w);
                 for(var j=0; j<zs.CellCount; j++)
                     zs[j] = gbits.bfly(b,xs[j]);
                 var z = zs.LoadVector();

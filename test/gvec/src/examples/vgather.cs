@@ -124,8 +124,8 @@ namespace Z0
 
             var w = n128;
             var t = z32;
-            var A = Blocks.alloc(w,BlockCount, t);
-            var B = Blocks.alloc(w,BlockCount, t);
+            var A = BufferBlocks.alloc(w,BlockCount, t);
+            var B = BufferBlocks.alloc(w,BlockCount, t);
 
             var pattern0 = BitMasks.vlsb(w,n2,n1,t);
             var pattern1 = VMask.vmsb(w,n2,n1,t);

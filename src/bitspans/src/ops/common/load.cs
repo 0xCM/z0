@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitSpan8 init(Span<byte> src)
             => new BitSpan8(src);
-            
+
         /// <summary>
         /// Wraps a bitspan over a span of extant bits
         /// </summary>
@@ -31,15 +31,15 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitSpan load(bit[] src)
             => new BitSpan(src);
-        
+
         /// <summary>
         /// Loads a bitspan from a reference
         /// </summary>
         /// <param name="bits">The bit source</param>
         /// <param name="count">The number of bits to load</param>
         [MethodImpl(Inline), Op]
-        public static BitSpan load(ref bit bits, int count)        
-            => new BitSpan(cover(bits,count));                                   
+        public static BitSpan load(ref bit bits, int count)
+            => new BitSpan(cover(bits,count));
 
         /// <summary>
         /// Creates a bitspan from an arbitrary number of packed bytes
@@ -47,16 +47,16 @@ namespace Z0
         /// <param name="packed">The packed data source</param>
         [Op]
         internal static BitSpan load(ReadOnlySpan<byte> packed)
-        {               
+        {
             var srcbits = 8*packed.Length;
             var dstbits = 32*srcbits;
-            var blocks = dstbits/256 + (dstbits % 256 == 0 ? 0 : 1);        
-            var dst = Blocks.alloc<uint>(n256,blocks);
+            var blocks = dstbits/256 + (dstbits % 256 == 0 ? 0 : 1);
+            var dst = BufferBlocks.alloc<uint>(n256,blocks);
 
             for(var block=0; block<blocks; block++)
                 BitPack.unpack(packed, dst, block);
 
-            return load(dst.As<bit>());            
+            return load(dst.As<bit>());
         }
 
         /// <summary>
@@ -64,6 +64,6 @@ namespace Z0
         /// </summary>
         /// <param name="packed">The packed data source</param>
         internal static BitSpan load(Span<byte> packed)
-            => load(packed.ReadOnly());        
+            => load(packed.ReadOnly());
     }
 }

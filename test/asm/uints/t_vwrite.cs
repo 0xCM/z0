@@ -49,7 +49,7 @@ namespace Z0
             const string A = "abcdefghijklmnopqrstuvwxyz";
 
             var src = A;
-            var r = z.cover(src);
+            var r = z.view(src);
             Claim.eq(A.Length, r.Length);
 
             for(var i=0; i<src.Length; i++)

@@ -21,7 +21,7 @@ namespace Z0
         public static SpanBlock128<T> ToBlock<T>(this Vector128<T> src)
             where T : unmanaged
         {
-            var dst = Blocks.alloc<T>(w128);
+            var dst = BufferBlocks.alloc<T>(w128);
             V0.vsave(src, ref dst.Head);
             return dst;
         }
@@ -34,7 +34,7 @@ namespace Z0
         public static SpanBlock256<T> ToBlock<T>(this Vector256<T> src)
             where T : unmanaged
         {
-            var dst = Blocks.alloc<T>(w256);
+            var dst = BufferBlocks.alloc<T>(w256);
             V0.vsave(src, ref dst.Head);
             return dst;
         }
@@ -47,7 +47,7 @@ namespace Z0
         public static SpanBlock512<T> ToBlock<T>(this Vector512<T> src)
             where T : unmanaged
         {
-            var dst = Blocks.alloc<T>(w512);
+            var dst = BufferBlocks.alloc<T>(w512);
             V0.vsave(src, ref dst.Head);
             return dst;
         }

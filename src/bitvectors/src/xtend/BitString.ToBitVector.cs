@@ -28,9 +28,9 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitVector128<N,T> ToBitVector<N,T>(this BitString src, N128 n, T t = default)
-            where T : unmanaged   
+            where T : unmanaged
             where N : unmanaged, ITypeNat
-                => Blocks.safeload(n,src.Pack().Cast<byte, T>()).LoadVector();
+                => BufferBlocks.safeload(n,src.Pack().Cast<byte, T>()).LoadVector();
 
         /// <summary>
         /// Constructs a 4-bit bitvector from bitstring
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
         public static BitVector32 ToBitVector(this BitString src, N32 n)
-            => BitVector.create(n, src); 
+            => BitVector.create(n, src);
 
         /// <summary>
         /// Creates a 64-bit bitvector from bitstring

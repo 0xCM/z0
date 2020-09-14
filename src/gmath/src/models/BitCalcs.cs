@@ -38,7 +38,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the number of cells required to cover a rectangular region predicated on the 
+        /// Computes the number of cells required to cover a rectangular region predicated on the
         /// parametric cell type and supplied row/col dimensions
         /// </summary>
         /// <param name="rows">The number of rows in the grid</param>
@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ulong tableblocks<T>(N256 w, uint rows, uint cols)
             where T : unmanaged
-                => Blocks.cellcover<T>(w, tablecells<T>(rows,cols));
+                => BufferBlocks.cellcover<T>(w, tablecells<T>(rows,cols));
 
         /// <summary>
         /// Computes the number of bits covered by a rectangular region and predicated on natural dimensions
@@ -70,7 +70,7 @@ namespace Z0
         public static ulong tablebits<M,N>(M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => NatCalc.mul(m,n);         
+                => NatCalc.mul(m,n);
 
         /// <summary>
         /// Computes the number of segments required cover a grid as characterized by parametric type information
@@ -103,6 +103,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Blocks.cellcover<T>(w, tablecells<T>((uint)value(m), (uint)value(n)));        
+                => BufferBlocks.cellcover<T>(w, tablecells<T>((uint)value(m), (uint)value(n)));
     }
 }

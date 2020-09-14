@@ -11,14 +11,14 @@ namespace Z0
     public class t_vor : t_inx<t_vor>
     {
         public void vor_check()
-        {            
+        {
             vor_check(n128);
             vor_check(n256);
         }
 
         void vor_check(N128 w)
         {
-            vor_check(w, z8);                
+            vor_check(w, z8);
             vor_check(w, z8i);
             vor_check(w, z16);
             vor_check(w, z16i);
@@ -31,7 +31,7 @@ namespace Z0
 
         void vor_check(N256 w)
         {
-            vor_check(w, z8);                
+            vor_check(w, z8);
             vor_check(w, z8i);
             vor_check(w, z16);
             vor_check(w, z16i);
@@ -39,12 +39,12 @@ namespace Z0
             vor_check(w, z32i);
             vor_check(w, z64);
             vor_check(w, z64i);
-        }            
+        }
 
         void vor_check<T>(N128 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckBinaryOp(VSvc.vor(w,t),w,t);
-            
+
         void vor_check<T>(N256 w, T t = default)
             where T : unmanaged
                 => CheckSVF.CheckBinaryOp(VSvc.vor(w,t),w,t);
@@ -53,7 +53,7 @@ namespace Z0
             => vor_check<sbyte>(n128);
 
         public void vor_128x8u()
-            => vor_check<byte>(n128);            
+            => vor_check<byte>(n128);
 
         public void vor_128x16i()
             => vor_check<short>(n128);
@@ -65,19 +65,19 @@ namespace Z0
             => vor_check<int>(n128);
 
         public void vor_128x32u()
-            => vor_check<uint>(n128);            
+            => vor_check<uint>(n128);
 
         public void vor_128x64i()
-            => vor_check<long>(n128);            
+            => vor_check<long>(n128);
 
         public void vor_128x64u()
-            => vor_check<ulong>(n128);            
+            => vor_check<ulong>(n128);
 
         public void vor_256x8i()
             => vor_check<sbyte>(n256);
 
         public void vor_256x8u()
-            => vor_check<byte>(n256);            
+            => vor_check<byte>(n256);
 
         public void vor_256x16i()
             => vor_check<short>(n256);
@@ -89,13 +89,13 @@ namespace Z0
             => vor_check<int>(n256);
 
         public void vor_256x32u()
-            => vor_check<uint>(n256);            
+            => vor_check<uint>(n256);
 
         public void vor_256x64i()
-            => vor_check<long>(n256);            
+            => vor_check<long>(n256);
 
         public void vor_256x64u()
-            => vor_check<ulong>(n256);            
+            => vor_check<ulong>(n256);
 
         public void vor_blocks_128x8i()
             => vor_blocks_check<sbyte>(n128);
@@ -155,9 +155,9 @@ namespace Z0
 
             var xb = Random.Blocks<T>(w, blocks);
             var yb = Random.Blocks<T>(w, blocks);
-            var zb = Z0.Blocks.alloc<T>(w, blocks);
+            var zb = Z0.BufferBlocks.alloc<T>(w, blocks);
             Blocked.or(xb,yb,zb);
-            
+
             for(var i=0; i<cells; i++)
                 Claim.Eq(gmath.or(xb[i],yb[i]), zb[i]);
         }
@@ -172,11 +172,11 @@ namespace Z0
 
             var xb = Random.Blocks<T>(w, blocks);
             var yb = Random.Blocks<T>(w, blocks);
-            var zb = Z0.Blocks.alloc<T>(w, blocks);
+            var zb = Z0.BufferBlocks.alloc<T>(w, blocks);
             Blocked.or(xb,yb,zb);
-            
+
             for(var i=0; i<cells; i++)
                 Claim.Eq(gmath.or(xb[i],yb[i]), zb[i]);
-        }    
+        }
     }
 }

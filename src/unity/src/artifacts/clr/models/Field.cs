@@ -14,7 +14,7 @@ namespace Z0
 
     partial struct ClrArtifacts
     {
-        public readonly struct Field : IClrArtifact<Field,R.FieldInfo>
+        public readonly struct Field : IClrArtifact<Field>
         {
             readonly R.FieldInfo Subject;
 
@@ -42,6 +42,12 @@ namespace Z0
                 get => Subject.MetadataToken;
             }
 
+            public ClrArtifactKind Kind
+            {
+                [MethodImpl(Inline)]
+                get => ClrArtifactKind.Field;
+            }
+
             public R.FieldAttributes Attributes
             {
                 [MethodImpl(Inline)]
@@ -54,14 +60,19 @@ namespace Z0
                 get => Subject.FieldType;
             }
 
+
+            public Type DeclaringType
+            {
+                [MethodImpl(Inline)]
+                get => Subject.DeclaringType;
+            }
+
             public MemoryAddress Address
             {
                 [MethodImpl(Inline)]
                 get => Subject.FieldHandle.Value;
             }
 
-            R.FieldInfo IClrArtifact<R.FieldInfo>.Subject
-                => Subject;
         }
     }
 }

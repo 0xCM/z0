@@ -6,18 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
-    using static z;    
+    using static z;
 
     public class t_vswaps : t_inx<t_vswaps>
-    {        
+    {
         public void vswap_128x8u()
         {
             var src = gvec.vinc(n128, z8);
             var dst = z.vswap(src,2,3);
             Claim.eq(src.Cell(2), dst.Cell(3));
-            Claim.eq(src.Cell(3), dst.Cell(2));            
+            Claim.eq(src.Cell(3), dst.Cell(2));
         }
 
         public void vswap_128x16u()
@@ -25,15 +25,15 @@ namespace Z0
             var src = gvec.vinc(n128, z16);
             var dst = z.vswap(src,2,3);
             Claim.eq(src.Cell(2), dst.Cell(3));
-            Claim.eq(src.Cell(3), dst.Cell(2));            
+            Claim.eq(src.Cell(3), dst.Cell(2));
         }
 
         public void transpose_4x4_check()
         {
-            var order = n4;        
+            var order = n4;
             var n = n128;
             var cells = order*order;
-            var src = Blocks.alloc<uint>(n,order);
+            var src = BufferBlocks.alloc<uint>(n,order);
             int step = order;
 
             for(var i=0; i< cells; i++)
@@ -44,8 +44,8 @@ namespace Z0
             var c = src.LoadVector(2);
             var d = src.LoadVector(3);
             dvec.vtranspose(ref a, ref b, ref c, ref d);
-            
-            
+
+
             var dst = new uint[cells];
             z.vsave(a, ref head(dst), step*0);
             z.vsave(b, ref head(dst), step*1);
@@ -64,7 +64,7 @@ namespace Z0
             Span<uint> spec = stackalloc uint[Vector256<uint>.Count];
             for(byte k=0; k<spec.Length; k++)
             {
-                if(k == i)        
+                if(k == i)
                     spec[k] = j;
                 else if(k == j)
                     spec[k] = i;

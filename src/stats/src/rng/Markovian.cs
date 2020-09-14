@@ -21,7 +21,7 @@ namespace Z0
         public static void MarkovSpan<T>(this IPolyrand random, Span<T> dst)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(float))                
+            if(typeof(T) == typeof(float))
                 random.MarkovSpan(Spans.s32f(dst));
             else if(typeof(T) == typeof(double))
                 random.MarkovSpan(Spans.s64f(dst));
@@ -38,7 +38,7 @@ namespace Z0
         public static RowVector256<T> MarkovBlock<T>(this IPolyrand random, int length)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(float))                
+            if(typeof(T) == typeof(float))
                 return random.MarkovBlock(length, 1f, length << 4).As<T>();
             else if(typeof(T) == typeof(double))
                 return random.MarkovBlock(length, 1.0, length << 4).As<T>();
@@ -85,7 +85,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var n = value<N>();
-            var data = Blocks.rectangle<T>(n256, n, n);
+            var data = BufferBlocks.rectangle<T>(n256, n, n);
             for(var row=0u; row < n; row++)
                 random.MarkovSpan<T>(data.Slice((int)(row*n), (int)n));
             return Z0.Matrix.blockload<N,T>(data);
@@ -98,9 +98,9 @@ namespace Z0
             var data = dst.Unsized;
             var n = value<N>();
             for(var row=0u; row < n; row++)
-                random.MarkovSpan<T>(data.Slice((int)(row*n), (int)n));                            
+                random.MarkovSpan<T>(data.Slice((int)(row*n), (int)n));
             return ref dst;
-        }        
+        }
 
         /// Evaluates whether a square matrix is right-stochasitc, i.e. the sum of the entries
         /// in each row is equal to 1
@@ -114,7 +114,7 @@ namespace Z0
             where T : unmanaged
         {
             var tol = .001;
-            var radius = Interval.closed(1 - tol,1 + tol);   
+            var radius = Interval.closed(1 - tol,1 + tol);
             for(var r = 0; r < (int)n.NatValue; r ++)
             {
                 var row = src.Row(r);
@@ -127,7 +127,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static void MarkovSpan(this IPolyrand random, Span<float> dst)
-        {            
+        {
             var length = dst.Length;
             random.Fill(Interval.closed(1.0f,length << 4), length, ref dst[0]);
             fspan.div(dst, dst.Avg()*length);
@@ -135,7 +135,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static void MarkovSpan(this IPolyrand random, Span<double> dst)
-        {            
+        {
             var length = dst.Length;
             random.Fill(Interval.closed(1.0, length << 4), length, ref dst[0]);
             fspan.div(dst, dst.Avg()*length);
@@ -143,20 +143,20 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static RowVector256<float> MarkovBlock(this IPolyrand random, int length, float min, float max)
-        {            
-            var dst = Z0.Blocks.alloc<float>(n256, (uint)Z0.Blocks.blockcount<float>(n256, length));
+        {
+            var dst = Z0.BufferBlocks.alloc<float>(n256, (uint)Z0.BufferBlocks.blockcount<float>(n256, length));
             random.Fill(Interval.closed(min,max), length, ref dst[0]);
             fspan.div(dst.Data, dst.Data.Avg() * length);
-            return dst; 
+            return dst;
         }
 
         [MethodImpl(Inline)]
         static RowVector256<double> MarkovBlock(this IPolyrand random, int length, double min, double max)
-        {                        
-            var dst = Z0.Blocks.alloc<double>(n256, (uint)Z0.Blocks.blockcount<double>(n256, length));
+        {
+            var dst = Z0.BufferBlocks.alloc<double>(n256, (uint)Z0.BufferBlocks.blockcount<double>(n256, length));
             random.Fill(Interval.closed(min,max), length, ref dst[0]);
             fspan.div(dst.Data, dst.Data.Avg() * length);
-            return dst; 
-        }       
+            return dst;
+        }
     }
 }

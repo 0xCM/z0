@@ -18,7 +18,7 @@ namespace Z0
             var upper = Random.Stream(Interval.closed<byte>(32,64)).Take(RepCount).ToArray();
             for(var i=0; i< RepCount; i++)
             {
-                var v1 = Blocks.literals(n256,src[i]);
+                var v1 = BufferBlocks.literals(n256,src[i]);
                 var v2 = BitVector.create(n64,src[i]);
                 Claim.eq(v1.ToBitVector(n64), v2);
 
@@ -33,7 +33,7 @@ namespace Z0
                     Notify($"v1[{lower[i]}, {upper[i]}] = {r1.ToBitString()}");
                     Notify($"v2[{lower[i]}, {upper[i]}] = {r2.ToBitString()}");
                 }
-                Claim.eq(r1,r2);                
+                Claim.eq(r1,r2);
             }
         }
 
@@ -44,13 +44,13 @@ namespace Z0
             var upper = Random.Stream(Interval.closed<byte>(16,32)).Take(RepCount).ToArray();
             for(var i=0; i< RepCount; i++)
             {
-                var v1 = Blocks.literals(n256,src[i]);
+                var v1 = BufferBlocks.literals(n256,src[i]);
                 var v2 = BitVector.create(n32,src[i]);
                 Claim.eq(v1.ToBitVector(n32),v2);
 
                 var r1 = v1.BitSeg(lower[i], upper[i]);
                 var r2 = v2[lower[i], upper[i]];
-                Claim.eq(r1,r2);                
+                Claim.eq(r1,r2);
             }
         }
 
@@ -61,13 +61,13 @@ namespace Z0
             var upper = Random.Stream(Interval.closed<byte>(8,16)).Take(RepCount).ToArray();
             for(var i=0; i< RepCount; i++)
             {
-                var v1 = Blocks.literals(n256,src[i]);
+                var v1 = BufferBlocks.literals(n256,src[i]);
                 var v2 = BitVector.create(n16,src[i]);
                 Claim.eq(v1.ToBitVector(n16),v2);
 
                 var r1 = v1.BitSeg(lower[i], upper[i]);
                 var r2 = v2[lower[i], upper[i]];
-                Claim.eq(r1,r2);                
+                Claim.eq(r1,r2);
 
                 // var v1 = BitBlocks.literals(src[i]);
                 // var v2 = BitVector.create(n16,src[i]);
@@ -75,7 +75,7 @@ namespace Z0
 
                 // var r1 = v1.TakeScalarBits(lower[i], upper[i]);
                 // var r2 = v2[lower[i], upper[i]];
-                // Claim.eq(r1,r2);                
+                // Claim.eq(r1,r2);
             }
         }
 
@@ -86,8 +86,8 @@ namespace Z0
             byte x2 = 0b10100011;
             byte x3 = 0b10011101;
             byte x4 = 0b01011000;
-            var bcx = Blocks.literals(n256,x0,x1,x2,x3,x4);
-            
+            var bcx = BufferBlocks.literals(n256,x0,x1,x2,x3,x4);
+
             byte y0 = 0b0110;
             byte y1 = 0b1101;
             var y01 = gmath.or(y0, gmath.sal(y1, 4));
@@ -103,10 +103,10 @@ namespace Z0
             byte y8 = 0b1000;
             byte y9 = 0b0101;
             var y89 = gmath.or(y8, gmath.sal(y9, 4));
-            var bcy = Blocks.literals(n256,y01,y23,y45,y67,y89);            
+            var bcy = BufferBlocks.literals(n256,y01,y23,y45,y67,y89);
 
-            ulong z = 0b0101100010011101101000111001010111010110;           
-            var bvz = Blocks.literals(n256,z);
+            ulong z = 0b0101100010011101101000111001010111010110;
+            var bvz = BufferBlocks.literals(n256,z);
 
             var bsy = bcy.ToBitString().Format(true);
             var bsx = bcx.ToBitString().Format(true);
@@ -135,20 +135,20 @@ namespace Z0
             Claim.Eq(y6, bvz.BitSeg(24,27));
             Claim.Eq(y7, bvz.BitSeg(28,31));
             Claim.Eq(y8, bvz.BitSeg(32,35));
-            Claim.Eq(y9, bvz.BitSeg(36,39));    
+            Claim.Eq(y9, bvz.BitSeg(36,39));
         }
 
         public void bb_extract_arb()
         {
 
-            ulong src = 0b01011_00010_01110_11010_00111_00101_01110_10110;           
+            ulong src = 0b01011_00010_01110_11010_00111_00101_01110_10110;
             var bvz = BitBlocks.single(src,40);
             var xSrc =  z.bytes(src);
             Span<ushort> ySrc = xSrc.AsUInt16();
             Claim.eq(ySrc.Length*4, xSrc.Length);
 
             var bvx = BitBlocks.load(xSrc.Slice(0,5).ToArray());
-            var bvy = BitBlocks.load(ySrc.Slice(0,2).ToArray());            
+            var bvy = BitBlocks.load(ySrc.Slice(0,2).ToArray());
             var bsx = bvx.ToBitString().Format(true);
             var bsz = bvz.ToBitString().Format(true);
             ClaimPrimalSeq.eq(bsx, bsz);

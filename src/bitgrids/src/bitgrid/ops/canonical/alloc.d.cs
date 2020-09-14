@@ -25,10 +25,10 @@ namespace Z0
         {
             var blocksize = n256;
             var blocks = BitCalcs.tableblocks<T>(blocksize, (uint)value(m), (uint)value(n));
-            var data = Z0.Blocks.alloc<T>(blocksize, blocks);             
+            var data = Z0.BufferBlocks.alloc<T>(blocksize, blocks);
             return new BitGrid<M, N, T>(data);
         }
-        
+
         /// <summary>
         /// Creates a zero-filled 16-bit grid of natural dimensions
         /// </summary>
@@ -42,7 +42,7 @@ namespace Z0
         static BitGrid16<M,N,T> alloc16<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => default;
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Z0
         static BitGrid32<M,N,T> alloc32<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => default;
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Z0
         static BitGrid64<M,N,T> alloc64<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => default;
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Z0
         static BitGrid128<M,N,T> alloc128<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => default;
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Z0
         static BitGrid256<M,N,T> alloc256<M,N,T>(M m = default, N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged            
+            where T : unmanaged
                 => default;
 
     }

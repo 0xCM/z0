@@ -38,5 +38,30 @@ namespace Z0
     /// <typeparam name="T">The emission type</typeparam>
     [SuppressUnmanagedCodeSecurity]
     public delegate IEnumerable<T> ValueStreamEmitter<T>()
-        where T : struct;    
+        where T : struct;
+
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate bit Emitter1();
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Cell8 Emitter8();
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Cell16 Emitter16();
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Cell32 Emitter32();
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Cell64 Emitter64();
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Cell128 Emitter128();
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Cell256 Emitter256();
+
+    [SuppressUnmanagedCodeSecurity]
+    public delegate Cell512 Emitter512();
 }

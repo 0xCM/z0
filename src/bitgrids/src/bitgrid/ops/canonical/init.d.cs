@@ -36,7 +36,7 @@ namespace Z0
             where T : unmanaged
         {
             var blocksize = n256;
-            var blocks = Blocks.alloc<T>(blocksize, BitCalcs.tableblocks(blocksize, m,n,d));
+            var blocks = BufferBlocks.alloc<T>(blocksize, BitCalcs.tableblocks(blocksize, m,n,d));
             broadcast(d, blocks);
             return new BitGrid<M,N,T>(blocks);
         }

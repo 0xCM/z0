@@ -10,15 +10,12 @@ namespace Z0
     using static Konst;
 
     using R = System.Reflection;
-    using api = ClrArtifactApi;
 
     partial struct ClrArtifacts
     {
         public struct FieldTable : IClrTable<FieldTable>
         {
-            public ArtifactIdentifier Id;
-
-            public ClrName Name;
+            public ClrArtifactRef Key;
 
             public ArtifactIdentifier DeclaringType;
 

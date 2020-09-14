@@ -204,7 +204,7 @@ namespace Z0
                 Claim.veq(y,Vectors.vparts(n, ys[0], ys[1], ys[2], ys[3]));
 
                 var m = z.vblendspec(n256,false,n64);
-                var es = Blocks.alloc<ulong>(n);
+                var es = BufferBlocks.alloc<ulong>(n);
                 for(var i=0; i<es.CellCount; i++)
                     es[i] = gmath.odd(i) ? ys[i] : xs[i];
                 var expect = es.LoadVector();

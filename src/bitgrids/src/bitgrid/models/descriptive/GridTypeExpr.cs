@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static z;
-    
+
     [ApiHost]
     public readonly struct GridTypeExpr
     {
@@ -17,7 +17,7 @@ namespace Z0
         public static GridTypeExpr<N64,N8,N8,T> define<T>(T t = default)
             where T : unmanaged
                 => define(n64, n8,n8, t);
-        
+
         /// <summary>
         /// Defines a parametrically-specified grid type expression
         /// </summary>
@@ -50,7 +50,7 @@ namespace Z0
         /// <summary>
         /// Specifies the bit width block as determined by W
         /// </summary>
-        public uint BlockWidth 
+        public uint BlockWidth
         {
             [MethodImpl(Inline)]
             get => (uint)default(W).NatValue;
@@ -59,7 +59,7 @@ namespace Z0
         /// <summary>
         /// Specifies the M-identified number of rows in the grid
         /// </summary>
-        public uint RowCount         
+        public uint RowCount
         {
             [MethodImpl(Inline)]
             get=> (uint)default(M).NatValue;
@@ -68,7 +68,7 @@ namespace Z0
         /// <summary>
         /// Specifies the number of N-columns in the grid
         /// </summary>
-        public uint ColCount 
+        public uint ColCount
         {
             [MethodImpl(Inline)]
             get => (uint)default(N).NatValue;
@@ -77,18 +77,18 @@ namespace Z0
         /// <summary>
         /// Specifies the bit width of a T-cell
         /// </summary>
-        public uint CellWidth 
+        public uint CellWidth
         {
             [MethodImpl(Inline)]
             get => bitsize<T>();
         }
 
-        public uint BitCount        
+        public uint BitCount
         {
             [MethodImpl(Inline)]
             get => (uint)NatCalc.mul<M,N>();
         }
-    
+
         public uint CellCount
         {
             [MethodImpl(Inline)]
@@ -107,7 +107,7 @@ namespace Z0
         public uint BlockCount
         {
             [MethodImpl(Inline)]
-            get => (uint)Blocks.cellcover<W,M,N,T>();
+            get => (uint)BufferBlocks.cellcover<W,M,N,T>();
         }
 
         /// <summary>

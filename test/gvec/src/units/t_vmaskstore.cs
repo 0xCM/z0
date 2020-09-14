@@ -12,14 +12,14 @@ namespace Z0
     using static HexConst;
 
     public class t_vmaskstore : t_inx<t_vmaskstore>
-    {   
+    {
         public void vmstore_128x8()
         {
             const byte Y = Pow2.T07;
             const byte N = 0;
 
             var n = n128;
-            var dst = Blocks.alloc<byte>(n);
+            var dst = BufferBlocks.alloc<byte>(n);
             var m0 = vparts(n128,Y,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N);
             var m1 = dvec.vsllx(m0,32);
             var m2 = dvec.vsllx(m1,32);
@@ -38,13 +38,13 @@ namespace Z0
                 dvec.vmaskstore(v3, m3, dst);
 
                 var v4 = z.vload(dst);
-                var v5 = vparts(n128, 
+                var v5 = vparts(n128,
                     vcell(v0,0), vcell(v0,1), vcell(v0,2), vcell(v0,3),
                     vcell(v1,4), vcell(v1,5), vcell(v1,6), vcell(v1,7),
                     vcell(v2,8), vcell(v2,9), vcell(v2,A), vcell(v2,B),
                     vcell(v3,C), vcell(v3,D), vcell(v3,E), vcell(v3,F)
                     );
-                
+
                 Claim.veq(v4,v5);
             }
         }
@@ -53,7 +53,7 @@ namespace Z0
         {
             var count = 32;
             var x = Random.CpuVector(n256,z8);
-            var storage = Blocks.alloc<byte>(n256);
+            var storage = BufferBlocks.alloc<byte>(n256);
             var stored = Vectors.vzero(n256,z8);
             var mask = Vectors.vzero(n256,z8);
 
@@ -72,7 +72,7 @@ namespace Z0
 
 
             for(byte i=0; i< count; i++)
-                if(gmath.odd(i)) 
+                if(gmath.odd(i))
                     Claim.eq(vcell(x,i), storage[i]);
                 else
                     Claim.eq(z8, storage[i]);
@@ -85,7 +85,7 @@ namespace Z0
 
 
             for(byte i=0; i< count; i++)
-                if(gmath.even(i)) 
+                if(gmath.even(i))
                     Claim.eq(vcell(x,i), storage[i]);
                 else
                     Claim.eq(z8, storage[i]);
@@ -93,7 +93,7 @@ namespace Z0
 
             void report()
             {
-                Trace("input", x.Format());            
+                Trace("input", x.Format());
                 Trace("mask", mask.FormatBits());
                 Trace("stored", stored.Format());
             }

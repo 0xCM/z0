@@ -54,7 +54,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UInt8x16k)]
         public static BitGrid16<N1,N16,T> init<T>(N16 w, N1 m = default, N16 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init16(m,n,d);
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UInt8x16k)]
         public static BitGrid16<N16,N1,T> init<T>(N16 w, N16 m = default, N1 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init16(m,n,d);
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UInt8x16k)]
         public static BitGrid16<N2,N8,T> init<T>(N16 w, N2 m = default, N8 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init16(m,n,d);
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UInt8x16k)]
         public static BitGrid16<N8,N2,T> init<T>(N16 w, N8 m = default, N2 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init16(m,n,d);
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UInt8x16k)]
         public static BitGrid16<N4,N4,T> init<T>(N16 w, N4 m = default, N4 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init16(m,n,d);
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UInt8x16x32k)]
         public static BitGrid32<N1,N32,T> init<T>(N32 w, N1 m = default, N32 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init32(m,n,d);
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UInt8x16x32k)]
         public static BitGrid32<N32,N1,T> init<T>(N32 w, N32 m = default, N1 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init32(m,n,d);
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UInt8x16x32k)]
         public static BitGrid32<N16,N2,T> init<T>(N32 w, N16 m = default, N2 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init32(m,n,d);
 
         /// Creates a populated 2x16 grid
@@ -157,7 +157,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UInt8x16x32k)]
         public static BitGrid32<N2,N16,T> init<T>(N32 w, N2 m = default, N16 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init32(m,n,d);
 
         /// <summary>
@@ -170,7 +170,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UInt8x16x32k)]
         public static BitGrid32<N8,N4,T> init<T>(N32 w, N8 m = default, N4 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init32(m,n,d);
 
         /// <summary>
@@ -183,7 +183,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UInt8x16x32k)]
         public static BitGrid32<N4,N8,T> init<T>(N32 w, N4 m = default, N8 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init32(m,n,d);
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid64<N1,N64,T> init<T>(N64 w, N1 m = default, N64 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init64(m,n,d);
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid64<N64,N1,T> init<T>(N64 w, N64 m = default, N1 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init64(m,n,d);
 
         /// <summary>
@@ -222,7 +222,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid64<N2,N32,T> init<T>(N64 w, N2 m = default, N32 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init64(m,n,d);
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid64<N32,N2,T> init<T>(N64 w, N32 m = default, N2 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init64(m,n,d);
 
         /// <summary>
@@ -248,7 +248,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid64<N4,N16,T> init<T>(N64 w, N4 m = default, N16 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init64(m,n,d);
 
         /// <summary>
@@ -261,7 +261,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid64<N16,N4,T> init<T>(N64 w, N16 m = default, N4 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init64(m,n,d);
 
         /// <summary>
@@ -274,7 +274,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid64<N8,N8,T> init<T>(N64 w, N8 m = default, N8 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init64(m,n,d);
 
         /// <summary>
@@ -287,7 +287,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid128<N1,N128,T> init<T>(N128 w, N1 m = default, N128 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init128(m,n,d);
 
         /// <summary>
@@ -300,7 +300,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid128<N128,N1,T> init<T>(N128 w, N128 m = default, N1 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init128(m,n,d);
 
         /// <summary>
@@ -313,7 +313,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid128<N2,N64,T> init<T>(N128 w, N2 m = default, N64 n = default,T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init128(m,n,d);
 
         /// <summary>
@@ -326,7 +326,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid128<N64,N2,T> init<T>(N128 w, N64 m = default, N2 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init128(m,n,d);
 
         /// <summary>
@@ -339,7 +339,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid128<N4,N32,T> init<T>(N128 w, N4 m = default, N32 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init128(m,n,d);
 
         /// <summary>
@@ -352,7 +352,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid128<N32,N4,T> init<T>(N128 w, N32 m = default, N4 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init128(m,n,d);
 
         /// <summary>
@@ -365,7 +365,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid128<N8,N16,T> init<T>(N128 w, N8 m = default, N16 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init128(m,n,d);
 
         /// <summary>
@@ -378,7 +378,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid128<N16,N8,T> init<T>(N128 w, N16 m = default, N8 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init128(m,n,d);
 
         /// <summary>
@@ -391,7 +391,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid256<N1,N256,T> init<T>(N256 w, N1 m = default, N256 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init256(m,n,d);
 
         /// <summary>
@@ -404,7 +404,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid256<N256,N1,T> init<T>(N256 w, N256 m = default, N1 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init256(m,n,d);
 
         /// <summary>
@@ -416,7 +416,7 @@ namespace Z0
         /// <param name="d">The fill data</param>
         /// <typeparam name="T">The cell type</typeparam>
         public static BitGrid256<N2,N128,T> init<T>(N256 w, N2 m = default, N128 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init256(m,n,d);
 
         /// <summary>
@@ -429,7 +429,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid256<N128,N2,T> init<T>(N256 w, N128 m = default, N2 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init256(m,n,d);
 
         /// <summary>
@@ -442,7 +442,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid256<N4,N64,T> init<T>(N256 w, N4 m = default, N64 n = default,T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init256(m,n,d);
 
         /// <summary>
@@ -455,7 +455,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid256<N64,N4,T> init<T>(N256 w, N64 m = default, N4 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init256(m,n,d);
 
         /// <summary>
@@ -468,7 +468,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid256<N8,N32,T> init<T>(N256 w, N8 m = default, N32 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init256(m,n,d);
 
         /// <summary>
@@ -481,7 +481,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid256<N32,N8,T> init<T>(N256 w, N32 m = default, N8 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init256(m,n,d);
 
         /// <summary>
@@ -494,7 +494,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid256<N16,N16,T> init<T>(N256 w, N16 m = default, N16 n = default, T d = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => init256(m,n,d);
 
         /// <summary>
@@ -507,11 +507,11 @@ namespace Z0
         [MethodImpl(Inline), Init, Closures(UnsignedInts)]
         public static BitGrid<T> init<T>(uint m, uint n, T d = default)
             where T : unmanaged
-        {            
+        {
             var w = W256.W;
-            var blocks = Z0.Blocks.alloc<T>(w, BitCalcs.tableblocks<T>(w, m, n));
+            var blocks = Z0.BufferBlocks.alloc<T>(w, BitCalcs.tableblocks<T>(w, m, n));
             broadcast(d, blocks);
-            return new BitGrid<T>(blocks,(int)m,(int)n);            
+            return new BitGrid<T>(blocks,(int)m,(int)n);
         }
 
         /// <summary>
@@ -542,6 +542,6 @@ namespace Z0
         [MethodImpl(Inline)]
         internal static BitGrid64<T> init64<T>(ulong data)
             where T : unmanaged
-                => new BitGrid64<T>(data); 
+                => new BitGrid64<T>(data);
     }
 }

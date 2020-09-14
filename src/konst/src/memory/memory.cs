@@ -24,15 +24,15 @@ namespace Z0
         /// Copies a specified number of source values to the target and returns the count of copied bytes
         /// </summary>
         /// <param name="src">The source reference</param>
-        /// <param name="srcCount">The number of source values to copy</param>
+        /// <param name="count">The number of source cells to copy</param>
         /// <param name="dst">The target reference</param>
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static void copy<S,T>(in S src, ref T dst, int srcCount, int dstOffset = 0)
+        public static void copy<S,T>(in S src, ref T dst, int count, int dstOffset = 0)
             where S: unmanaged
             where T :unmanaged
-                => sys.copy(z.view<S,byte>(src), ref edit<T,byte>(add(dst, dstOffset)), (uint)srcCount);
+                => sys.copy(z.view<S,byte>(src), ref edit<T,byte>(add(dst, dstOffset)), (uint)count);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static void copy<T>(in T src, uint count, ref T dst, ref uint index)

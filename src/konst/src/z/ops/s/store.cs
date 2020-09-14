@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {            
+    {
         /// <summary>
         /// Writes a source to a target
         /// </summary>
@@ -21,14 +21,14 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T store<S,T>(in S src, out T dst) 
+        public static ref T store<S,T>(in S src, out T dst)
         {
             dst = z.@as<S,T>(src);
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Int8k)]
-        public static ref byte store<T>(in T src, out byte dst) 
+        public static ref byte store<T>(in T src, out byte dst)
             where T : unmanaged
         {
             dst = 0;
@@ -38,7 +38,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Int8x16k)]
-        public static ref ushort store<T>(in T src, out ushort dst) 
+        public static ref ushort store<T>(in T src, out ushort dst)
             where T : unmanaged
         {
             dst = 0;
@@ -50,7 +50,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Int8x16x32k)]
-        public static ref uint store<T>(in T src, out uint dst) 
+        public static ref uint store<T>(in T src, out uint dst)
             where T : unmanaged
         {
             dst = 0u;
@@ -58,13 +58,13 @@ namespace Z0
                 store(w8, src, ref dst);
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short) || typeof(T) == typeof(char))
                 store(w16, src, ref dst);
-            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))            
+            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
                 store(w32, src, ref dst);
             return ref dst;
         }
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static ref ulong store<T>(in T src, out ulong dst) 
+        public static ref ulong store<T>(in T src, out ulong dst)
             where T : unmanaged
         {
             dst = 0ul;
@@ -72,15 +72,15 @@ namespace Z0
                 store(w8, src, ref dst);
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short) || typeof(T) == typeof(char))
                 store(w16, src, ref dst);
-            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))            
+            else if(typeof(T) == typeof(uint) || typeof(T) == typeof(int))
                 store(w32, src, ref dst);
-            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(ulong))            
+            else if(typeof(T) == typeof(ulong) || typeof(T) == typeof(ulong))
                 store(w64, src, ref dst);
             return ref dst;
         }
-        
+
         [MethodImpl(Inline), Op, Closures(Int8k)]
-        public static ref byte store<T>(W8 w, in T src, ref byte dst) 
+        public static ref byte store<T>(W8 w, in T src, ref byte dst)
             where T : unmanaged
         {
             ref var cell = ref z.@as<T,byte>(src);
@@ -89,7 +89,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Int8k)]
-        public static ref byte store<T>(W8 w, in T src, ref ushort dst) 
+        public static ref byte store<T>(W8 w, in T src, ref ushort dst)
             where T : unmanaged
         {
             ref var cell = ref z.@as<T,byte>(src);
@@ -98,7 +98,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Int16k)]
-        public static ref ushort store<T>(W16 w, in T src, ref ushort dst) 
+        public static ref ushort store<T>(W16 w, in T src, ref ushort dst)
             where T : unmanaged
         {
             ref var cell = ref z.@as<T,ushort>(src);
@@ -107,7 +107,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Int8k)]
-        public static ref byte store<T>(W8 w, in T src, ref uint dst) 
+        public static ref byte store<T>(W8 w, in T src, ref uint dst)
             where T : unmanaged
         {
             ref var cell = ref z.@as<T,byte>(src);
@@ -116,7 +116,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Int16k)]
-        public static ref ushort store<T>(W16 w, in T src, ref uint dst) 
+        public static ref ushort store<T>(W16 w, in T src, ref uint dst)
             where T : unmanaged
         {
             ref var cell = ref z.@as<T,ushort>(src);
@@ -125,7 +125,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Int32k)]
-        public static ref uint store<T>(W32 w, in T src, ref uint dst) 
+        public static ref uint store<T>(W32 w, in T src, ref uint dst)
             where T : unmanaged
         {
             ref var cell = ref z.@as<T,uint>(src);
@@ -134,7 +134,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Int8k)]
-        public static ref byte store<T>(W8 w, in T src, ref ulong dst) 
+        public static ref byte store<T>(W8 w, in T src, ref ulong dst)
             where T : unmanaged
         {
             ref var cell = ref z.@as<T,byte>(src);
@@ -143,7 +143,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Int16k)]
-        public static ref ushort store<T>(W16 w, in T src, ref ulong dst) 
+        public static ref ushort store<T>(W16 w, in T src, ref ulong dst)
             where T : unmanaged
         {
             ref var cell = ref z.@as<T,ushort>(src);
@@ -152,7 +152,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Int32k)]
-        public static ref uint store<T>(W32 w, in T src, ref ulong dst) 
+        public static ref uint store<T>(W32 w, in T src, ref ulong dst)
             where T : unmanaged
         {
             ref var cell = ref z.@as<T,uint>(src);
@@ -161,7 +161,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(Int64k)]
-        public static ref ulong store<T>(W64 w, in T src, ref ulong dst) 
+        public static ref ulong store<T>(W64 w, in T src, ref ulong dst)
             where T : unmanaged
         {
             ref var cell = ref z.@as<T,ulong>(src);
@@ -183,12 +183,12 @@ namespace Z0
             while(sys.next(e) && i < dst.Length)
                 z.seek(dst,i) = sys.current(e);
             return dst;
-        }    
+        }
 
         [Op]
         public static void store(in StringRef src, ref char dst, uint offset = 0)
         {
-            var c = z.cover(src);
+            var c = z.view(src);
             var k = c.Length;
             for(uint i=0, o = offset; i<k; i++, o++)
                 seek(dst,o) = skip(c,i);

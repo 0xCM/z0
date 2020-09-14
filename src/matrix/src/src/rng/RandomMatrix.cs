@@ -30,8 +30,8 @@ namespace Z0
         public static Matrix<M,N,T> Matrix<M,N,T>(this IPolyrand random, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged    
-                => Z0.Matrix.load<M,N,T>(random.Array<T>(Z0.Matrix<M,N,T>.Cells));                    
+            where T : unmanaged
+                => Z0.Matrix.load<M,N,T>(random.Array<T>(Z0.Matrix<M,N,T>.Cells));
 
         /// <summary>
         /// Allocates and fills a matrix of natural dimensions with random values
@@ -47,9 +47,9 @@ namespace Z0
         public static Matrix<M,N,T> Matrix<M,N,T>(this IPolyrand random, Interval<T> domain, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged    
-                => Z0.Matrix.load<M,N,T>(random.Array<T>(Z0.Matrix<M,N,T>.Cells, domain));                    
-               
+            where T : unmanaged
+                => Z0.Matrix.load<M,N,T>(random.Array<T>(Z0.Matrix<M,N,T>.Cells, domain));
+
         /// <summary>
         /// Samples a square matrix of natural order
         /// </summary>
@@ -62,8 +62,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Matrix<N,T> Matrix<N,T>(this IPolyrand random, N n, T min, T max)
             where N : unmanaged, ITypeNat
-            where T : unmanaged   
-                => Z0.Matrix.load(n, random.Array<T>(Z0.Matrix<N,T>.Cells, (min,max)));                    
+            where T : unmanaged
+                => Z0.Matrix.load(n, random.Array<T>(Z0.Matrix<N,T>.Cells, (min,max)));
 
 
         /// <summary>
@@ -78,8 +78,8 @@ namespace Z0
          public static Matrix256<M,N,T> MatrixBlock<M,N,T>(this IPolyrand random)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged    
-                => Z0.Matrix.blockload<M, N, T>(random.Blocks<T>(n256, Z0.Blocks.blockcount<M, N, T>(n256)));                    
+            where T : unmanaged
+                => Z0.Matrix.blockload<M, N, T>(random.Blocks<T>(n256, Z0.BufferBlocks.blockcount<M, N, T>(n256)));
 
         /// <summary>
         /// Samples a blocked matrix of natural dimensions where the entries are constrained to a specified domain
@@ -94,9 +94,9 @@ namespace Z0
         public static Matrix256<M,N,T> MatrixBlock<M,N,T>(this IPolyrand random, Interval<T> domain, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged    
-                => Z0.Matrix.blockload<M, N, T>(random.Blocks(n256, domain, Z0.Blocks.blockcount<M, N, T>(n256)));                    
-                
+            where T : unmanaged
+                => Z0.Matrix.blockload<M, N, T>(random.Blocks(n256, domain, Z0.BufferBlocks.blockcount<M, N, T>(n256)));
+
         /// <summary>
         /// Samples a square matrix of natural order
         /// </summary>
@@ -105,8 +105,8 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
          public static Matrix256<N,T> MatrixBlock<N,T>(this IPolyrand random, Interval<T>? domain = null)
             where N : unmanaged, ITypeNat
-            where T : unmanaged    
-                => Z0.Matrix.blockload<N, T>(random.Blocks(n256, domain.ValueOrElse(() => random.Domain<T>()), Z0.Blocks.blockcount<N, N, T>(n256)));                    
+            where T : unmanaged
+                => Z0.Matrix.blockload<N, T>(random.Blocks(n256, domain.ValueOrElse(() => random.Domain<T>()), Z0.BufferBlocks.blockcount<N, N, T>(n256)));
 
          /// <summary>
          /// Samples values over an S-domain, transforms the sample into a T-domain and from this transformed
@@ -124,13 +124,13 @@ namespace Z0
           public static Matrix256<M,N,T> MatrixBlock<M,N,S,T>(this IPolyrand random, M m = default, N n = default,  T rep = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-            where T : unmanaged    
+            where T : unmanaged
             where S : unmanaged
                 => random.MatrixBlock<M,N,S>().Convert<T>();
- 
+
           static Matrix256<N,T> MatrixBlock<N,S,T>(this IPolyrand random, Interval<S>? domain = null, N n = default,  T rep = default)
             where N : unmanaged, ITypeNat
-            where T : unmanaged    
+            where T : unmanaged
             where S : unmanaged
                 => random.MatrixBlock<N,S>(domain).Convert<T>();
 

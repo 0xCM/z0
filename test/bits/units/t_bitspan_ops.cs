@@ -89,8 +89,8 @@ namespace Z0
         public void bsbitload_check()
         {
             var bytecount = RepCount;
-            SpanBlock256<uint> unpacked = Blocks.alloc<uint>(n256,bytecount);
-            SpanBlock64<byte> buffer = Blocks.alloc<byte>(n64);
+            SpanBlock256<uint> unpacked = BufferBlocks.alloc<uint>(n256,bytecount);
+            SpanBlock64<byte> buffer = BufferBlocks.alloc<byte>(n64);
             Span<byte> packed = stackalloc byte[bytecount];
 
             for(var i=0; i<RepCount; i++)

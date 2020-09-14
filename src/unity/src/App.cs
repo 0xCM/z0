@@ -5,10 +5,14 @@
 namespace Z0
 {
     using System;
-
-    using Z0.Asm;
+    using System.Runtime.CompilerServices;
     using System.Reflection;
+
+    using static Konst;
     using static z;
+
+    using api = ClrArtifacts;
+    using A = ClrArtifacts;
 
     struct App
     {
@@ -17,6 +21,7 @@ namespace Z0
         static IModuleArchive CreateBuildModuleArchive()
             => ModuleArchive.create(BuildRoot);
 
+        [MethodImpl(Inline)]
         static void Print<T>(IWfShell wf, ReadOnlySpan<T> src)
             where T : ITextual
         {
@@ -32,16 +37,51 @@ namespace Z0
             }
         }
 
+        [MethodImpl(Inline)]
+        static void Print<T>(IWfShell wf, in T src)
+            where T : ITextual
+                => wf.DataRow(src);
+
         static void PrintBuildModules(IWfShell wf)
         {
             var modules = CreateBuildModuleArchive();
             Print(wf,modules.Files().ToReadOnlySpan());
+        }
 
+        static void Traverse(IWfShell wf, A.Artifacts<ClrArtifacts.Field> src)
+        {
+            var count = src.Length;
+            if(count == 0)
+                return;
+
+            var printer = new ArtifactPrinter(wf);
+            ref readonly var lead = ref src.First;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var current = ref skip(lead,i);
+                printer.Print(current);
+            }
+        }
+
+        public static void Traverse(IWfShell wf, Assembly src)
+        {
+            var printer = new ArtifactPrinter(wf);
+            var models = api.types(src);
+            var count = models.Length;
+            ref readonly var lead = ref models.First;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var current = ref skip(lead,i);
+                printer.Print(current);
+
+                Traverse(wf,api.fields(current));
+            }
         }
 
         public static void Main(params string[] args)
         {
             var wf = Flow.shell(args);
+            Traverse(wf,Assembly.GetEntryAssembly());
 
         }
     }

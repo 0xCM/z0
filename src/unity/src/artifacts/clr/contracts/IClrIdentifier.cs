@@ -9,15 +9,19 @@ namespace Z0
 
     using static Konst;
 
-    public interface IClrIdentifier
+    public interface IClrArtifactRef : ITextual
     {
-        ClrTypeCode ArtifactType {get;}
+        ClrArtifactKind Kind {get;}
 
-        ArtifactIdentifier ArtifactId {get;}
+        ArtifactIdentifier Id {get;}
 
+        ClrName Name {get;}
+
+        string ITextual.Format()
+            => text.format(RenderPatterns.PSx3, Kind, Id, Name);
     }
 
-    public interface IClrIdentifier<A> : IClrIdentifier
+    public interface IClrArtifactRef<A> : IClrArtifactRef
         where A : struct, IClrArtifact<A>
     {
     }

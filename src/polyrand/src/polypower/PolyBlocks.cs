@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using B = Blocks;
+    using B = BufferBlocks;
 
     public static partial class PolyBlocks
     {

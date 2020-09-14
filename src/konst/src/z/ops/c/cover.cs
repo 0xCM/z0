@@ -32,16 +32,8 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Span<T> cover<T>(MemoryAddress address, uint count)
             where T : struct
-                => CreateSpan<T>(ref address.Ref<T>(), (int)count); 
-        
-        /// <summary>
-        /// Reveals the character data identified by a string reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        [MethodImpl(Inline), Op]
-        public static unsafe ReadOnlySpan<char> cover(in StringRef src)
-            => cover<char>(src.Address.Pointer<char>(), (uint)src.Length);
-                    
+                => CreateSpan<T>(ref address.Ref<T>(), (int)count);
+
         /// <summary>
         /// Covers content beginning at a specified address with a bytespan
         /// </summary>
@@ -70,7 +62,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> cover<T>(in T src, int count)
-            => CreateSpan(ref edit(src), count);    
+            => CreateSpan(ref edit(src), count);
 
         /// <summary>
         /// Covers a reference-identified T-counted buffer with a span

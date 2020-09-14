@@ -10,11 +10,10 @@ namespace Z0
     using static Konst;
 
     using R = System.Reflection;
-    using api = ClrArtifactApi;
 
     partial struct ClrArtifacts
     {
-        public readonly struct Assembly : IClrArtifact<Assembly, R.Assembly>
+        public readonly struct Assembly : IClrArtifact<Assembly>
         {
             readonly R.Assembly Subject;
 
@@ -42,8 +41,11 @@ namespace Z0
                 get => Subject.GetHashCode();
             }
 
-            R.Assembly IClrArtifact<R.Assembly>.Subject
-                => Subject;
+            public ClrArtifactKind Kind
+            {
+                [MethodImpl(Inline)]
+                get => ClrArtifactKind.Assembly;
+            }
         }
     }
 }

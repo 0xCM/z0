@@ -15,7 +15,7 @@ namespace Z0
     /// A string?
     /// </summary>
     public readonly struct StringRef : ITextual, IConstSpan<StringRef,char>
-    {            
+    {
         internal readonly Vector128<ulong> Location;
 
         [MethodImpl(Inline)]
@@ -40,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator StringRef(string src)
-            => z.@ref(src);
+            => @ref(src);
 
         /// <summary>
         /// The length of the represented string
@@ -51,16 +51,22 @@ namespace Z0
             get => (int)SegRefs.length<char>(Location);
         }
 
+        public uint Count
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Length;
+        }
+
         public uint User
         {
             [MethodImpl(Inline)]
             get => SegRefs.user(Location);
         }
-        
+
         public unsafe string Text
         {
             [MethodImpl(Inline)]
-            get => z.@string(this);            
+            get => z.@string(this);
         }
 
         public MemoryAddress Address
@@ -72,16 +78,25 @@ namespace Z0
         public ref readonly char this[int index]
         {
             [MethodImpl(Inline)]
-            get => ref skip(Data,(uint)index);
+            get => ref skip(View,(uint)index);
         }
 
         /// <summary>
-        /// The string content presented as a span
+        /// The string content presented as a readonly span
         /// </summary>
-        public ReadOnlySpan<char> Data
+        public ReadOnlySpan<char> View
         {
             [MethodImpl(Inline)]
-            get => z.cover(this);
+            get => view(this);
+        }
+
+        /// <summary>
+        /// The string content presented as a mutable span
+        /// </summary>
+        public Span<char> Edit
+        {
+            [MethodImpl(Inline)]
+            get => edit(this);
         }
 
         /// <summary>
@@ -90,7 +105,7 @@ namespace Z0
         ReadOnlySpan<char> IConstSpan<StringRef,char>.Data
         {
             [MethodImpl(Inline)]
-            get => z.cover(this);
+            get => view(this);
         }
 
         public bool IsEmpty
@@ -111,7 +126,7 @@ namespace Z0
             get => Empty;
         }
 
-        public static StringRef Empty 
+        public static StringRef Empty
         {
             [MethodImpl(Inline)]
             get => empty();

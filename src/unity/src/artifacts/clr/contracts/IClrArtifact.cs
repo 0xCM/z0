@@ -4,21 +4,21 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
 
-    using static Konst;
-
-    public interface IClrArtifact<T>
+    public interface IClrArtifact<A> : ITextual
+        where A : struct, IClrArtifact<A>
     {
-        T Subject {get;}
+        ClrArtifactKind Kind {get;}
+
+        ArtifactIdentifier Id {get;}
+
+        string Name {get;}
+
+        ClrArtifactRef Ref
+            => new ClrArtifactRef(Id, Kind ,Name);
+        string ITextual.Format()
+            => (Ref as IClrArtifactRef).Format();
     }
 
-    public interface IClrArtifact<H,T> : IClrArtifact<T>
-        where H : struct, IClrArtifact<H,T>
-    {
-
-    }
 
 }

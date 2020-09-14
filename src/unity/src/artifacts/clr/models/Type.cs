@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct ClrArtifacts
     {
-        public readonly struct Type : IClrArtifact<Type,S.Type>
+        public readonly struct Type : IClrArtifact<Type>
         {
             readonly S.Type Subject;
 
@@ -40,9 +40,10 @@ namespace Z0
                 get => Subject.MetadataToken;
             }
 
-            S.Type IClrArtifact<S.Type>.Subject
+            public ClrArtifactKind Kind
             {
-                get => Subject;
+                [MethodImpl(Inline)]
+                get => ClrArtifactKind.Type;
             }
         }
     }

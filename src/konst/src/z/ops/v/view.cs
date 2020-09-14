@@ -15,6 +15,14 @@ namespace Z0
     partial struct z
     {
         /// <summary>
+        /// Reveals the character data identified by a string reference
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ReadOnlySpan<char> view(in StringRef src)
+            => cover<char>(src.Address.Pointer<char>(), (uint)src.Length);
+
+        /// <summary>
         /// Covers a memory reference with a readonly span
         /// </summary>
         /// <param name="src">The source reference</param>
@@ -31,9 +39,9 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T view<S,T>(in S src)
-            => ref Unsafe.As<S,T>(ref edit(src));        
-            
-        /// <summary>   
+            => ref Unsafe.As<S,T>(ref edit(src));
+
+        /// <summary>
         /// Creates a T-span from a supplied reference
         /// </summary>
         /// <param name="src">A reference to the leading cell</param>

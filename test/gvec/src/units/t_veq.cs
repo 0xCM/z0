@@ -11,9 +11,9 @@ namespace Z0
     using static z;
 
     public class t_veq : t_inx<t_veq>
-    {     
+    {
         public void veq_check()
-        {            
+        {
             veq_basecase(w128);
             veq_basecase(w256);
             veq_check(w128);
@@ -22,7 +22,7 @@ namespace Z0
 
         void veq_check(W128 w)
         {
-            veq_check(w, z8);                
+            veq_check(w, z8);
             veq_check(w, z8i);
             veq_check(w, z16);
             veq_check(w, z16i);
@@ -35,7 +35,7 @@ namespace Z0
 
         void veq_check(W256 w)
         {
-            veq_check(w, z8);                
+            veq_check(w, z8);
             veq_check(w, z8i);
             veq_check(w, z16);
             veq_check(w, z16i);
@@ -43,11 +43,11 @@ namespace Z0
             veq_check(w, z32i);
             veq_check(w, z64);
             veq_check(w, z64i);
-        }            
+        }
 
         void veq_basecase(W128 w)
         {
-            veq_basecase(w, z8);                
+            veq_basecase(w, z8);
             veq_basecase(w, z8i);
             veq_basecase(w, z16);
             veq_basecase(w, z16i);
@@ -59,7 +59,7 @@ namespace Z0
 
         void veq_basecase(W256 w)
         {
-            veq_basecase(w, z8);                
+            veq_basecase(w, z8);
             veq_basecase(w, z8i);
             veq_basecase(w, z16);
             veq_basecase(w, z16i);
@@ -75,7 +75,7 @@ namespace Z0
             var name = CaseName(Identify.sfunc(nameof(veq_basecase), w.VectorKind<T>()));
             var f = VSvc.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/z.vcount(w,t));
-            var result = Blocks.alloc<T>(w, x.BlockCount);
+            var result = BufferBlocks.alloc<T>(w, x.BlockCount);
             result.Fill(As.ones(t));
             CheckSVF.CheckExplicit(f,x,x,result, name);
         }
@@ -83,11 +83,11 @@ namespace Z0
         void veq_basecase<T>(W256 w, T t = default)
             where T : unmanaged
         {
-            
+
             var name = CaseName(Identify.sfunc(nameof(veq_basecase), w.VectorKind<T>()));
             var f = VSvc.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/z.vcount(w,t));
-            var result = Blocks.alloc<T>(w, x.BlockCount);
+            var result = BufferBlocks.alloc<T>(w, x.BlockCount);
             result.Fill(As.ones(t));
             CheckSVF.CheckExplicit(f,x,x,result,name);
         }
@@ -98,6 +98,6 @@ namespace Z0
 
         void veq_check<T>(N256 w, T t = default)
             where T : unmanaged
-                => CheckSVF.CheckBinaryOp(VSvc.veq(w,t),w,t);            
+                => CheckSVF.CheckBinaryOp(VSvc.veq(w,t),w,t);
     }
 }

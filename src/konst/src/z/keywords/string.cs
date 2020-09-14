@@ -12,7 +12,7 @@ namespace Z0
     partial struct z
     {
         [MethodImpl(Inline), Op]
-        public static string @string(in StringRef src)                
-            => sys.@string(cover(src));
+        public static string @string(in StringRef src)
+            => sys.@string(view(src));
     }
 }

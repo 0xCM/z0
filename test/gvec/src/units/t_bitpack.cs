@@ -35,7 +35,7 @@ namespace Z0
             for(var sample = 0; sample < RepCount; sample ++)
             {
                 var src = Random.Next<ushort>();
-                var dst = Blocks.alloc<byte>(n128);
+                var dst = BufferBlocks.alloc<byte>(n128);
 
                 BitPack.unpack(src, dst);
                 unpack_check(src,dst);
@@ -50,7 +50,7 @@ namespace Z0
             for(var sample=0; sample< RepCount; sample++)
             {
                 var src = Random.Next<uint>();
-                var dst = Blocks.alloc<byte>(n256);
+                var dst = BufferBlocks.alloc<byte>(n256);
                 BitPack.unpack(src, dst);
 
                 unpack_check(src,dst);
@@ -65,7 +65,7 @@ namespace Z0
             for(var sample=0; sample< RepCount; sample++)
             {
                 var src = Random.Next<ulong>();
-                var dst = Blocks.alloc<byte>(n512);
+                var dst = BufferBlocks.alloc<byte>(n512);
                 BitPack.unpack(src, dst);
 
                 unpack_check(src,dst.Data);
@@ -78,12 +78,12 @@ namespace Z0
 
         public void pack_32x4_2()
         {
-            var block1 = Blocks.alloc<ushort>(w16,1);
+            var block1 = BufferBlocks.alloc<ushort>(w16,1);
             block1[0] = ushort.MaxValue;
             var val1 = block1.BlockRef(0);
             Trace(val1.ToBitString());
 
-            var block2 = Blocks.alloc<uint>(w32,1);
+            var block2 = BufferBlocks.alloc<uint>(w32,1);
             block2[0] = uint.MaxValue;
             var val2 = block2.BlockRef(0);
             Trace(val2.ToBitString());
@@ -143,7 +143,7 @@ namespace Z0
         {
             void case1()
             {
-                var src = Blocks.alloc<byte>(n256);
+                var src = BufferBlocks.alloc<byte>(n256);
                 gvec.vones<byte>(n256).StoreTo(src);
                 var dst = BitPack.pack(src,n8);
                 Claim.eq(dst,uint.MaxValue);
@@ -152,7 +152,7 @@ namespace Z0
 
             void case2()
             {
-                var src = Blocks.alloc<byte>(n128);
+                var src = BufferBlocks.alloc<byte>(n128);
                 gvec.vones<byte>(n128).StoreTo(src);
                 var dst = BitPack.pack(src,n8);
                 Claim.eq(dst,ushort.MaxValue);

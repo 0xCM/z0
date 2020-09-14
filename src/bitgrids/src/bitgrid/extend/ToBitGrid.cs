@@ -12,7 +12,7 @@ namespace Z0
     using static Memories;
 
     partial class GridLoad
-    {   
+    {
         [MethodImpl(Inline)]
         public static BitGrid64<N16,N4,ulong> ToBitGrid(this NatPerm<N16> src)
             => BitGrid.define(src);
@@ -27,11 +27,11 @@ namespace Z0
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
         public static BitGrid<uint> ToBitGrid(this BitMatrix32 src)
-            => BitGrid.load(Blocks.load(n256,src.Content),32,32);
+            => BitGrid.load(BufferBlocks.load(n256,src.Content),32,32);
 
         [MethodImpl(Inline)]
         public static BitGrid<N64,N64,ulong> ToBitGrid(this BitMatrix64 src, N64 n)
-            => BitGrid.load(Blocks.load(n256,src.Content),n,n);
+            => BitGrid.load(BufferBlocks.load(n256,src.Content),n,n);
 
         /// <summary>
         /// Represents the source matrix as a generic bitgrid of dimension 64x64 over cells of width 64
@@ -39,10 +39,10 @@ namespace Z0
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
         public static BitGrid<ulong> ToBitGrid(this BitMatrix64 src)
-            => BitGrid.load(Blocks.load(n256,src.Content),64,64);
+            => BitGrid.load(BufferBlocks.load(n256,src.Content),64,64);
 
         /// <summary>
-        /// Represents the source value as a 32-bit natural bitgrid of dimension 1x32 
+        /// Represents the source value as a 32-bit natural bitgrid of dimension 1x32
         /// </summary>
         /// <param name="x">The source value</param>
         /// <param name="m">The target row count</param>
@@ -52,7 +52,7 @@ namespace Z0
             => x;
 
         /// <summary>
-        /// Represents the source value as a 32-bit natural bitgrid of dimension 32x1 
+        /// Represents the source value as a 32-bit natural bitgrid of dimension 32x1
         /// </summary>
         /// <param name="x">The source value</param>
         /// <param name="m">The target row count</param>
@@ -62,7 +62,7 @@ namespace Z0
             => x;
 
         /// <summary>
-        /// Represents the source value as a 32-bit natural bitgrid of dimension 2x16 
+        /// Represents the source value as a 32-bit natural bitgrid of dimension 2x16
         /// </summary>
         /// <param name="x">The source value</param>
         /// <param name="m">The target row count</param>
@@ -72,7 +72,7 @@ namespace Z0
             => x;
 
         /// <summary>
-        /// Represents the source value as a 32-bit natural bitgrid of dimension 16x2 
+        /// Represents the source value as a 32-bit natural bitgrid of dimension 16x2
         /// </summary>
         /// <param name="x">The source value</param>
         /// <param name="m">The target row count</param>
@@ -82,7 +82,7 @@ namespace Z0
             => x;
 
         /// <summary>
-        /// Represents the source value as a 32-bit natural bitgrid of dimension 4x8 
+        /// Represents the source value as a 32-bit natural bitgrid of dimension 4x8
         /// </summary>
         /// <param name="x">The source value</param>
         /// <param name="m">The target row count</param>
@@ -92,7 +92,7 @@ namespace Z0
             => x;
 
         /// <summary>
-        /// Represents the source value as a 32-bit natural bitgrid of dimension 8x4 
+        /// Represents the source value as a 32-bit natural bitgrid of dimension 8x4
         /// </summary>
         /// <param name="x">The source value</param>
         /// <param name="m">The target row count</param>
@@ -102,7 +102,7 @@ namespace Z0
             => x;
 
         /// <summary>
-        /// Represents the source value as a 64-bit natural bitgrid of dimension 64x1 
+        /// Represents the source value as a 64-bit natural bitgrid of dimension 64x1
         /// </summary>
         /// <param name="x">The source value</param>
         /// <param name="m">The target row count</param>
@@ -179,7 +179,7 @@ namespace Z0
         /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N1,N128,T> ToBitGrid<T>(this Vector128<T> x, N1 m, N128 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => x;
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace Z0
         /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N128,N1,T> ToBitGrid<T>(this Vector128<T> x, N128 m, N1 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => x;
 
         /// <summary>
@@ -201,7 +201,7 @@ namespace Z0
         /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N2,N64,T> ToBitGrid<T>(this Vector128<T> x, N2 m, N64 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => x;
 
         /// <summary>
@@ -212,7 +212,7 @@ namespace Z0
         /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N64,N2,T> ToBitGrid<T>(this Vector128<T> x, N64 m, N2 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => x;
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace Z0
         /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N4,N32,T> ToBitGrid<T>(this Vector128<T> x, N4 m, N32 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => x;
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace Z0
         /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N32,N4,T> ToBitGrid<T>(this Vector128<T> x, N32 m, N4 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => x;
 
         /// <summary>
@@ -245,7 +245,7 @@ namespace Z0
         /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N8,N16,T> ToBitGrid<T>(this Vector128<T> x, N8 m, N16 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => x;
 
         /// <summary>
@@ -256,7 +256,7 @@ namespace Z0
         /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N16,N8,T> ToBitGrid<T>(this Vector128<T> x, N16 m, N8 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => x;
 
         /// <summary>
@@ -267,7 +267,7 @@ namespace Z0
         /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N1,N256,T> ToBitGrid<T>(this Vector256<T> x, N1 m, N256 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => x;
 
         /// <summary>
@@ -278,7 +278,7 @@ namespace Z0
         /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N256,N1,T> ToBitGrid<T>(this Vector256<T> x, N256 m, N1 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => x;
 
         /// <summary>
@@ -289,7 +289,7 @@ namespace Z0
         /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N128,N2,T> ToBitGrid<T>(this Vector256<T> x, N2 m, N128 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => x;
 
         /// <summary>
@@ -300,7 +300,7 @@ namespace Z0
         /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N128,N2,T> ToBitGrid<T>(this Vector256<T> x, N128 m, N2 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => x;
 
         /// <summary>
@@ -311,7 +311,7 @@ namespace Z0
         /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N4,N64,T> ToBitGrid<T>(this Vector256<T> x, N4 m, N64 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => x;
 
         /// <summary>
@@ -322,7 +322,7 @@ namespace Z0
         /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N64,N4,T> ToBitGrid<T>(this Vector256<T> x, N64 m, N4 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => x;
 
         /// <summary>
@@ -333,7 +333,7 @@ namespace Z0
         /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N8,N32,T> ToBitGrid<T>(this Vector256<T> x, N8 m, N32 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => x;
 
         /// <summary>
@@ -344,7 +344,7 @@ namespace Z0
         /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N32,N8,T> ToBitGrid<T>(this Vector256<T> x, N32 m, N8 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => x;
 
         /// <summary>
@@ -355,7 +355,7 @@ namespace Z0
         /// <param name="n">The garget col count</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N16,N16,T> ToBitGrid<T>(this Vector256<T> x, N16 m, N16 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => x;
 
         /// <summary>
@@ -470,6 +470,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BitGrid.parse(bs,w,m,n,t); 
+                => BitGrid.parse(bs,w,m,n,t);
     }
 }

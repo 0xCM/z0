@@ -15,21 +15,21 @@ namespace Z0
         [Alloc, Closures(UnsignedInts)]
         public static BitGrid<T> alloc<T>(uint m, uint n, T t = default)
             where T : unmanaged
-        {            
+        {
             var blocksize = W256.W;
             var blocks = BitCalcs.tableblocks<T>(blocksize,(uint)m,(uint)n);
-            var data = Z0.Blocks.alloc<T>(blocksize, blocks); 
-            return new BitGrid<T>(data,(int)m,(int)n);            
+            var data = Z0.BufferBlocks.alloc<T>(blocksize, blocks);
+            return new BitGrid<T>(data,(int)m,(int)n);
         }
 
         [Alloc, Closures(UnsignedInts)]
         public static BitGrid<T> alloc<T>(int m, int n, T t = default)
             where T : unmanaged
-        {            
+        {
             var blocksize = W256.W;
             var blocks = BitCalcs.tableblocks<T>(blocksize,(uint)m,(uint)n);
-            var data = Z0.Blocks.alloc<T>(blocksize, blocks); 
-            return new BitGrid<T>(data,(int)m,(int)n);            
+            var data = Z0.BufferBlocks.alloc<T>(blocksize, blocks);
+            return new BitGrid<T>(data,(int)m,(int)n);
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         public static BitGrid64<T> alloc<T>(N64 w)
             where T : unmanaged
                => new BitGrid64<T>(Konst.z64);
- 
+
         /// <summary>
         /// Allocates a zero-filled 1x16 grid
         /// </summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
         public static BitGrid16<N1,N16,T> alloc<T>(N16 w, N1 m, N16 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc16<N1,N16,T>();
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
         public static BitGrid16<N16,N1,T> alloc<T>(N16 w, N16 m, N1 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc16<N16,N1,T>();
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
         public static BitGrid16<N2,N8,T> alloc<T>(N16 w, N2 m, N8 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc16<N2,N8,T>();
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
         public static BitGrid16<N8,N2,T> alloc<T>(N16 w, N8 m, N2 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc16<N8,N2,T>();
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16k)]
         public static BitGrid16<N4,N4,T> alloc<T>(N16 w, N4 m, N4 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc16<N4,N4,T>();
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
         public static BitGrid32<N1,N32,T> alloc<T>(N32 w, N1 m, N32 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc32<N1,N32,T>();
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
         public static BitGrid32<N32,N1,T> alloc<T>(N32 w, N32 m = default, N1 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc32<N32,N1,T>();
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
         public static BitGrid32<N16,N2,T> alloc<T>(N32 w, N16 m = default, N2 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc32<N16,N2,T>();
 
         /// Allocates a zero-filled 2x16 grid
@@ -175,7 +175,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
         public static BitGrid32<N2,N16,T> alloc<T>(N32 w, N2 m = default, N16 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc32<N2,N16,T>();
 
         /// <summary>
@@ -188,7 +188,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
         public static BitGrid32<N8,N4,T> alloc<T>(N32 w, N8 m = default, N4 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc32<N8,N4,T>();
 
         /// <summary>
@@ -201,7 +201,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UInt8x16x32k)]
         public static BitGrid32<N4,N8,T> alloc<T>(N32 w, N4 m = default, N8 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc32<N4,N8,T>();
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid64<N1,N64,T> alloc<T>(N64 w, N1 m = default, N64 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc64<N1,N64,T>();
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid64<N64,N1,T> alloc<T>(N64 w, N64 m = default, N1 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc64<N64,N1,T>();
 
         /// <summary>
@@ -240,7 +240,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid64<N2,N32,T> alloc<T>(N64 w, N2 m = default, N32 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc64<N2,N32,T>();
 
         /// <summary>
@@ -253,7 +253,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid64<N32,N2,T> alloc<T>(N64 w, N32 m = default, N2 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc64<N32,N2,T>();
 
         /// <summary>
@@ -266,7 +266,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid64<N4,N16,T> alloc<T>(N64 w, N4 m = default, N16 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc64<N4,N16,T>();
 
         /// <summary>
@@ -279,7 +279,7 @@ namespace Z0
         /// <typeparam name="T">The  cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid64<N16,N4,T> alloc<T>(N64 w, N16 m = default, N4 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc64<N16,N4,T>();
 
         /// <summary>
@@ -292,7 +292,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid64<N8,N8,T> alloc<T>(N64 w, N8 m = default, N8 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc64<N8,N8,T>();
 
         /// <summary>
@@ -305,7 +305,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid128<N1,N128,T> alloc<T>(N128 w, N1 m, N128 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc128(m,n,t);
 
         /// <summary>
@@ -318,7 +318,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid128<N128,N1,T> alloc<T>(N128 w, N128 m = default, N1 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc128(m,n,t);
 
         /// <summary>
@@ -331,7 +331,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid128<N2,N64,T> alloc<T>(N128 block, N2 m = default, N64 n = default,T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc128(m,n,t);
 
         /// <summary>
@@ -344,7 +344,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid128<N64,N2,T> alloc<T>(N128 block, N64 m = default, N2 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc128(m,n,t);
 
         /// <summary>
@@ -357,7 +357,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid128<N4,N32,T> alloc<T>(N128 w, N4 m = default, N32 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc128(m,n,t);
 
         /// <summary>
@@ -370,7 +370,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid128<N32,N4,T> alloc<T>(N128 w, N32 m = default, N4 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc128(m,n,t);
 
         /// <summary>
@@ -383,7 +383,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid128<N8,N16,T> alloc<T>(N128 w, N8 m = default, N16 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc128(m,n,t);
 
         /// <summary>
@@ -396,7 +396,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid128<N16,N8,T> alloc<T>(N128 w, N16 m = default, N8 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc128(m,n,t);
 
         /// <summary>
@@ -409,7 +409,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid256<N1,N256,T> alloc<T>(N256 w, N1 m = default, N256 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc256(m,n,t);
 
         /// <summary>
@@ -422,7 +422,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid256<N256,N1,T> alloc<T>(N256 w, N256 m = default, N1 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc256(m,n,t);
 
         /// <summary>
@@ -434,7 +434,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         /// <typeparam name="T">The cell type</typeparam>
         public static BitGrid256<N2,N128,T> alloc<T>(N256 w, N2 m = default, N128 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc256(m,n,t);
 
         /// <summary>
@@ -447,7 +447,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid256<N128,N2,T> alloc<T>(N256 w, N128 m = default, N2 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc256(m,n,t);
 
         /// <summary>
@@ -460,7 +460,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid256<N4,N64,T> alloc<T>(N256 w, N4 m = default, N64 n = default,T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc256(m,n,t);
 
         /// <summary>
@@ -473,7 +473,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid256<N64,N4,T> alloc<T>(N256 w, N64 m = default, N4 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc256(m,n,t);
 
         /// <summary>
@@ -486,7 +486,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid256<N8,N32,T> alloc<T>(N256 w, N8 m = default, N32 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc256(m,n,t);
 
         /// <summary>
@@ -499,7 +499,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid256<N32,N8,T> alloc<T>(N256 w, N32 m = default, N8 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc256(m,n,t);
 
         /// <summary>
@@ -512,7 +512,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Alloc, Closures(UnsignedInts)]
         public static BitGrid256<N16,N16,T> alloc<T>(N256 w, N16 m = default, N16 n = default, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => alloc256(m,n,t);
     }
 }

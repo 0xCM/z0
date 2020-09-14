@@ -77,7 +77,7 @@ namespace Z0
         [MethodImpl(Inline)]
         internal Block256(Span<T> src)
         {
-            Data = Blocks.safeload(n256, src);
+            Data = BufferBlocks.safeload(n256, src);
         }
 
         [MethodImpl(Inline)]
@@ -156,7 +156,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Block256<N,U> Convert<U>()
             where U : unmanaged
-               => new Block256<N,U>(Blocks.convert<T,U>(Data));
+               => new Block256<N,U>(BufferBlocks.convert<T,U>(Data));
 
         [MethodImpl(Inline)]
         public string Format()

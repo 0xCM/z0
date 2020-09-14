@@ -13,12 +13,20 @@ namespace Z0
     partial struct z
     {
         /// <summary>
+        /// Reveals the character data identified by a string reference as a mutable span
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Span<char> edit(in StringRef src)
+            => cover<char>(src.Address.Pointer<char>(), (uint)src.Length);
+
+        /// <summary>
         /// Transforms a readonly T-cell into an editable T-cell
         /// </summary>
         /// <param name="src">The source cell</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T edit<T>(in T src)   
+        public static ref T edit<T>(in T src)
             => ref AsRef(src);
 
         /// <summary>
@@ -47,7 +55,7 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T edit<S,T>(in S src)   
+        public static ref T edit<S,T>(in S src)
             => ref As<S,T>(ref AsRef(src));
 
         /// <summary>
@@ -58,7 +66,7 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T edit<S,T>(in S src, ref T dst)   
-            => ref As<S,T>(ref AsRef(src));            
+        public static ref T edit<S,T>(in S src, ref T dst)
+            => ref As<S,T>(ref AsRef(src));
     }
 }
