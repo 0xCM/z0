@@ -7,34 +7,19 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
     using R = System.Reflection;
-    using S = System;
+
+    using static Konst;
 
     partial struct ClrArtifacts
     {
-        public readonly struct Field : IClrArtifact<Field>
+        public readonly struct Method : IClrArtifact<Method>
         {
-            readonly R.FieldInfo Subject;
+            readonly R.MethodInfo Subject;
 
             [MethodImpl(Inline)]
-            public Field(R.FieldInfo src)
+            public Method(R.MethodInfo src)
                 => Subject = src;
-
-            [MethodImpl(Inline)]
-            public static implicit operator Field(R.FieldInfo src)
-                => new Field(src);
-
-            [MethodImpl(Inline)]
-            public static implicit operator R.FieldInfo(Field src)
-                => src.Subject;
-
-            public string Name
-            {
-                [MethodImpl(Inline)]
-                get => Subject.Name;
-            }
 
             public ArtifactIdentifier Id
             {
@@ -45,20 +30,22 @@ namespace Z0
             public ClrArtifactKind Kind
             {
                 [MethodImpl(Inline)]
-                get => ClrArtifactKind.Field;
+                get => ClrArtifactKind.Method;
             }
 
-            public R.FieldAttributes Attributes
+            public string Name
             {
                 [MethodImpl(Inline)]
-                get => Subject.Attributes;
+                get => Subject.Name;
             }
 
-            public Type FieldType
-            {
-                [MethodImpl(Inline)]
-                get => Subject.FieldType;
-            }
+            [MethodImpl(Inline)]
+            public static implicit operator Method(R.MethodInfo src)
+                => new Method(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator R.MethodInfo(Method src)
+                => src.Subject;
 
             public Type DeclaringType
             {
@@ -69,7 +56,13 @@ namespace Z0
             public MemoryAddress Address
             {
                 [MethodImpl(Inline)]
-                get => Subject.FieldHandle.Value;
+                get => Subject.MethodHandle.Value;
+            }
+
+            public R.CallingConventions CallingConvention
+            {
+                [MethodImpl(Inline)]
+                get => Subject.CallingConvention;
             }
 
             public bool IsStatic
@@ -77,6 +70,13 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => Subject.IsStatic;
             }
+
+            public bool IsVirtual
+            {
+                [MethodImpl(Inline)]
+                get => Subject.IsVirtual;
+            }
+
         }
     }
 }

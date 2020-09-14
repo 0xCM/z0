@@ -19,6 +19,4 @@ namespace Z0
         string ITextual.Format()
             => (Ref as IClrArtifactRef).Format();
     }
-
-
 }

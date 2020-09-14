@@ -22,6 +22,10 @@ namespace Z0
             public ArtifactIdentifier DataType;
 
             public R.FieldAttributes Attributes;
+
+            public MemoryAddress Address;
+
+            public bool IsStatic;
         }
     }
 }

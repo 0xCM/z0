@@ -10,8 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using R = System.Reflection;
-
     partial struct ClrArtifacts
     {
         public readonly ref struct Artifacts<A>
@@ -30,6 +28,10 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator Artifacts<A>(ReadOnlySpan<A> src)
                 => new Artifacts<A>(src);
+
+            [MethodImpl(Inline)]
+            public static implicit operator ReadOnlySpan<A>(Artifacts<A> src)
+                => src.Data;
 
             [MethodImpl(Inline)]
             public Artifacts(A[] src)
@@ -85,6 +87,5 @@ namespace Z0
                 get => Data.Length != 0;
             }
         }
-
     }
 }

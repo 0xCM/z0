@@ -24,7 +24,7 @@ namespace Z0
 
         Method = I.Method,
 
+        Param = I.Param,
 
     }
-
 }

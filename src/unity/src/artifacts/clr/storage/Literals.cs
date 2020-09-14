@@ -639,144 +639,146 @@ namespace Z0
             GenericParamConstraint = 0x0000000000000001UL << 0x2C,
 
             SortedTablesMask = TableMask.ClassLayout |
-            TableMask.Constant |
-            TableMask.CustomAttribute |
-            TableMask.DeclSecurity |
-            TableMask.FieldLayout |
-            TableMask.FieldMarshal |
-            TableMask.FieldRva |
-            TableMask.GenericParam |
-            TableMask.GenericParamConstraint |
-            TableMask.ImplMap |
-            TableMask.InterfaceImpl |
-            TableMask.MethodImpl |
-            TableMask.MethodSemantics |
-            TableMask.NestedClass,
+                TableMask.Constant |
+                TableMask.CustomAttribute |
+                TableMask.DeclSecurity |
+                TableMask.FieldLayout |
+                TableMask.FieldMarshal |
+                TableMask.FieldRva |
+                TableMask.GenericParam |
+                TableMask.GenericParamConstraint |
+                TableMask.ImplMap |
+                TableMask.InterfaceImpl |
+                TableMask.MethodImpl |
+                TableMask.MethodSemantics |
+                TableMask.NestedClass,
+
             CompressedStreamNotAllowedMask = TableMask.FieldPtr |
-            TableMask.MethodPtr |
-            TableMask.ParamPtr |
-            TableMask.EventPtr |
-            TableMask.PropertyPtr |
-            TableMask.EnCLog |
-            TableMask.EnCMap,
+                TableMask.MethodPtr |
+                TableMask.ParamPtr |
+                TableMask.EventPtr |
+                TableMask.PropertyPtr |
+                TableMask.EnCLog |
+                TableMask.EnCMap,
+
             V1_0_TablesMask = TableMask.Module |
-            TableMask.TypeRef |
-            TableMask.TypeDef |
-            TableMask.FieldPtr |
-            TableMask.Field |
-            TableMask.MethodPtr |
-            TableMask.Method |
-            TableMask.ParamPtr |
-            TableMask.Param |
-            TableMask.InterfaceImpl |
-            TableMask.MemberRef |
-            TableMask.Constant |
-            TableMask.CustomAttribute |
-            TableMask.FieldMarshal |
-            TableMask.DeclSecurity |
-            TableMask.ClassLayout |
-            TableMask.FieldLayout |
-            TableMask.StandAloneSig |
-            TableMask.EventMap |
-            TableMask.EventPtr |
-            TableMask.Event |
-            TableMask.PropertyMap |
-            TableMask.PropertyPtr |
-            TableMask.Property |
-            TableMask.MethodSemantics |
-            TableMask.MethodImpl |
-            TableMask.ModuleRef |
-            TableMask.TypeSpec |
-            TableMask.ImplMap |
-            TableMask.FieldRva |
-            TableMask.EnCLog |
-            TableMask.EnCMap |
-            TableMask.Assembly |
-            TableMask.AssemblyRef |
-            TableMask.File |
-            TableMask.ExportedType |
-            TableMask.ManifestResource |
-            TableMask.NestedClass,
+                TableMask.TypeRef |
+                TableMask.TypeDef |
+                TableMask.FieldPtr |
+                TableMask.Field |
+                TableMask.MethodPtr |
+                TableMask.Method |
+                TableMask.ParamPtr |
+                TableMask.Param |
+                TableMask.InterfaceImpl |
+                TableMask.MemberRef |
+                TableMask.Constant |
+                TableMask.CustomAttribute |
+                TableMask.FieldMarshal |
+                TableMask.DeclSecurity |
+                TableMask.ClassLayout |
+                TableMask.FieldLayout |
+                TableMask.StandAloneSig |
+                TableMask.EventMap |
+                TableMask.EventPtr |
+                TableMask.Event |
+                TableMask.PropertyMap |
+                TableMask.PropertyPtr |
+                TableMask.Property |
+                TableMask.MethodSemantics |
+                TableMask.MethodImpl |
+                TableMask.ModuleRef |
+                TableMask.TypeSpec |
+                TableMask.ImplMap |
+                TableMask.FieldRva |
+                TableMask.EnCLog |
+                TableMask.EnCMap |
+                TableMask.Assembly |
+                TableMask.AssemblyRef |
+                TableMask.File |
+                TableMask.ExportedType |
+                TableMask.ManifestResource |
+                TableMask.NestedClass,
             V1_1_TablesMask = TableMask.Module |
-            TableMask.TypeRef |
-            TableMask.TypeDef |
-            TableMask.FieldPtr |
-            TableMask.Field |
-            TableMask.MethodPtr |
-            TableMask.Method |
-            TableMask.ParamPtr |
-            TableMask.Param |
-            TableMask.InterfaceImpl |
-            TableMask.MemberRef |
-            TableMask.Constant |
-            TableMask.CustomAttribute |
-            TableMask.FieldMarshal |
-            TableMask.DeclSecurity |
-            TableMask.ClassLayout |
-            TableMask.FieldLayout |
-            TableMask.StandAloneSig |
-            TableMask.EventMap |
-            TableMask.EventPtr |
-            TableMask.Event |
-            TableMask.PropertyMap |
-            TableMask.PropertyPtr |
-            TableMask.Property |
-            TableMask.MethodSemantics |
-            TableMask.MethodImpl |
-            TableMask.ModuleRef |
-            TableMask.TypeSpec |
-            TableMask.ImplMap |
-            TableMask.FieldRva |
-            TableMask.EnCLog |
-            TableMask.EnCMap |
-            TableMask.Assembly |
-            TableMask.AssemblyRef |
-            TableMask.File |
-            TableMask.ExportedType |
-            TableMask.ManifestResource |
-            TableMask.NestedClass,
+                TableMask.TypeRef |
+                TableMask.TypeDef |
+                TableMask.FieldPtr |
+                TableMask.Field |
+                TableMask.MethodPtr |
+                TableMask.Method |
+                TableMask.ParamPtr |
+                TableMask.Param |
+                TableMask.InterfaceImpl |
+                TableMask.MemberRef |
+                TableMask.Constant |
+                TableMask.CustomAttribute |
+                TableMask.FieldMarshal |
+                TableMask.DeclSecurity |
+                TableMask.ClassLayout |
+                TableMask.FieldLayout |
+                TableMask.StandAloneSig |
+                TableMask.EventMap |
+                TableMask.EventPtr |
+                TableMask.Event |
+                TableMask.PropertyMap |
+                TableMask.PropertyPtr |
+                TableMask.Property |
+                TableMask.MethodSemantics |
+                TableMask.MethodImpl |
+                TableMask.ModuleRef |
+                TableMask.TypeSpec |
+                TableMask.ImplMap |
+                TableMask.FieldRva |
+                TableMask.EnCLog |
+                TableMask.EnCMap |
+                TableMask.Assembly |
+                TableMask.AssemblyRef |
+                TableMask.File |
+                TableMask.ExportedType |
+                TableMask.ManifestResource |
+                TableMask.NestedClass,
 
             V2_0_TablesMask = TableMask.Module |
-            TableMask.TypeRef |
-            TableMask.TypeDef |
-            TableMask.FieldPtr |
-            TableMask.Field |
-            TableMask.MethodPtr |
-            TableMask.Method |
-            TableMask.ParamPtr |
-            TableMask.Param |
-            TableMask.InterfaceImpl |
-            TableMask.MemberRef |
-            TableMask.Constant |
-            TableMask.CustomAttribute |
-            TableMask.FieldMarshal |
-            TableMask.DeclSecurity |
-            TableMask.ClassLayout |
-            TableMask.FieldLayout |
-            TableMask.StandAloneSig |
-            TableMask.EventMap |
-            TableMask.EventPtr |
-            TableMask.Event |
-            TableMask.PropertyMap |
-            TableMask.PropertyPtr |
-            TableMask.Property |
-            TableMask.MethodSemantics |
-            TableMask.MethodImpl |
-            TableMask.ModuleRef |
-            TableMask.TypeSpec |
-            TableMask.ImplMap |
-            TableMask.FieldRva |
-            TableMask.EnCLog |
-            TableMask.EnCMap |
-            TableMask.Assembly |
-            TableMask.AssemblyRef |
-            TableMask.File |
-            TableMask.ExportedType |
-            TableMask.ManifestResource |
-            TableMask.NestedClass |
-            TableMask.GenericParam |
-            TableMask.MethodSpec |
-            TableMask.GenericParamConstraint,
+                TableMask.TypeRef |
+                TableMask.TypeDef |
+                TableMask.FieldPtr |
+                TableMask.Field |
+                TableMask.MethodPtr |
+                TableMask.Method |
+                TableMask.ParamPtr |
+                TableMask.Param |
+                TableMask.InterfaceImpl |
+                TableMask.MemberRef |
+                TableMask.Constant |
+                TableMask.CustomAttribute |
+                TableMask.FieldMarshal |
+                TableMask.DeclSecurity |
+                TableMask.ClassLayout |
+                TableMask.FieldLayout |
+                TableMask.StandAloneSig |
+                TableMask.EventMap |
+                TableMask.EventPtr |
+                TableMask.Event |
+                TableMask.PropertyMap |
+                TableMask.PropertyPtr |
+                TableMask.Property |
+                TableMask.MethodSemantics |
+                TableMask.MethodImpl |
+                TableMask.ModuleRef |
+                TableMask.TypeSpec |
+                TableMask.ImplMap |
+                TableMask.FieldRva |
+                TableMask.EnCLog |
+                TableMask.EnCMap |
+                TableMask.Assembly |
+                TableMask.AssemblyRef |
+                TableMask.File |
+                TableMask.ExportedType |
+                TableMask.ManifestResource |
+                TableMask.NestedClass |
+                TableMask.GenericParam |
+                TableMask.MethodSpec |
+                TableMask.GenericParamConstraint,
         }
 
         public enum HeapSizeFlag : byte
@@ -788,64 +790,6 @@ namespace Z0
             DeletedMarks = 0x80, //  Indicates metadata might contain items marked deleted
         }
 
-        public enum TokenTypeIds : uint
-        {
-            Module = 0x00000000,
-
-            TypeRef = 0x01000000,
-
-            TypeDef = 0x02000000,
-
-            FieldDef = 0x04000000,
-
-            MethodDef = 0x06000000,
-
-            ParamDef = 0x08000000,
-
-            InterfaceImpl = 0x09000000,
-
-            MemberRef = 0x0a000000,
-
-            CustomAttribute = 0x0c000000,
-
-            Permission = 0x0e000000,
-
-            Signature = 0x11000000,
-
-            Event = 0x14000000,
-
-            Property = 0x17000000,
-
-            ModuleRef = 0x1a000000,
-
-            TypeSpec = 0x1b000000,
-
-            Assembly = 0x20000000,
-
-            AssemblyRef = 0x23000000,
-
-            File = 0x26000000,
-
-            ExportedType = 0x27000000,
-
-            ManifestResource = 0x28000000,
-
-            GenericParam = 0x2a000000,
-
-            MethodSpec = 0x2b000000,
-
-            GenericParamConstraint = 0x2c000000,
-
-            String = 0x70000000,
-
-            Name = 0x71000000,
-
-            BaseType = 0x72000000, // Leave this on the high end value. This does not correspond to metadata table???
-
-            RIDMask = 0x00FFFFFF,
-
-            TokenTypeMask = 0xFF000000,
-        }
 
         public enum AssemblyHashAlgorithmFlags : uint
         {
@@ -854,76 +798,43 @@ namespace Z0
             SHA1 = 0x00008004
         }
 
-        public enum TypeDefFlags : uint
-        {
-            PrivateAccess = 0x00000000,
-            PublicAccess = 0x00000001,
-            NestedPublicAccess = 0x00000002,
-            NestedPrivateAccess = 0x00000003,
-            NestedFamilyAccess = 0x00000004,
-            NestedAssemblyAccess = 0x00000005,
-            NestedFamilyAndAssemblyAccess = 0x00000006,
-            NestedFamilyOrAssemblyAccess = 0x00000007,
-            AccessMask = 0x0000007,
-            NestedMask = 0x00000006,
-
-            AutoLayout = 0x00000000,
-            SeqentialLayout = 0x00000008,
-            ExplicitLayout = 0x00000010,
-            LayoutMask = 0x00000018,
-
-            ClassSemantics = 0x00000000,
-            InterfaceSemantics = 0x00000020,
-            AbstractSemantics = 0x00000080,
-            SealedSemantics = 0x00000100,
-            SpecialNameSemantics = 0x00000400,
-            RTSpecialNameReserved = 0x00000800,
-
-            ImportImplementation = 0x00001000,
-
-            SerializableImplementation = 0x00002000,
-
-            IsForeign = 0x00004000,
-
-            AnsiString = 0x00000000,
-
-            UnicodeString = 0x00010000,
-
-            AutoCharString = 0x00020000,
-
-            StringMask = 0x00030000,
-
-            HasSecurityReserved = 0x00040000,
-
-            BeforeFieldInitImplementation = 0x00100000,
-
-            ForwarderImplementation = 0x00200000,
-
-            DoesNotInheritTypeParameters = 0x10000000
-        }
 
         public enum FieldFlags : ushort
         {
             CompilerControlledAccess = 0x0000,
+
             PrivateAccess = 0x0001,
+
             FamilyAndAssemblyAccess = 0x0002,
+
             AssemblyAccess = 0x0003,
+
             FamilyAccess = 0x0004,
+
             FamilyOrAssemblyAccess = 0x0005,
+
             PublicAccess = 0x0006,
+
             AccessMask = 0x0007,
 
             StaticContract = 0x0010,
+
             InitOnlyContract = 0x0020,
+
             LiteralContract = 0x0040,
+
             NotSerializedContract = 0x0080,
 
             SpecialNameImpl = 0x0200,
+
             PInvokeImpl = 0x2000,
 
             RTSpecialNameReserved = 0x0400,
+
             HasFieldMarshalReserved = 0x1000,
+
             HasDefaultReserved = 0x8000,
+
             HasFieldRVAReserved = 0x0100,
 
             //  Load flags
@@ -933,45 +844,65 @@ namespace Z0
         public enum MethodFlags : ushort
         {
             CompilerControlledAccess = 0x0000,
+
             PrivateAccess = 0x0001,
+
             FamilyAndAssemblyAccess = 0x0002,
+
             AssemblyAccess = 0x0003,
+
             FamilyAccess = 0x0004,
+
             FamilyOrAssemblyAccess = 0x0005,
+
             PublicAccess = 0x0006,
+
             AccessMask = 0x0007,
 
             StaticContract = 0x0010,
+
             FinalContract = 0x0020,
+
             VirtualContract = 0x0040,
+
             HideBySignatureContract = 0x0080,
 
             ReuseSlotVTable = 0x0000,
+
             NewSlotVTable = 0x0100,
 
             CheckAccessOnOverrideImpl = 0x0200,
+
             AbstractImpl = 0x0400,
+
             SpecialNameImpl = 0x0800,
 
             PInvokeInterop = 0x2000,
+
             UnmanagedExportInterop = 0x0008,
 
             RTSpecialNameReserved = 0x1000,
+
             HasSecurityReserved = 0x4000,
+
             RequiresSecurityObjectReserved = 0x8000,
         }
 
         public enum ParamFlags : ushort
         {
             InSemantics = 0x0001,
+
             OutSemantics = 0x0002,
+
             OptionalSemantics = 0x0010,
 
             HasDefaultReserved = 0x1000,
+
             HasFieldMarshalReserved = 0x2000,
 
             //  Comes from signature...
             ByReference = 0x0100,
+
             ParamArray = 0x0200,
         }
 
@@ -980,13 +911,17 @@ namespace Z0
             SpecialNameImpl = 0x0200,
 
             RTSpecialNameReserved = 0x0400,
+
             HasDefaultReserved = 0x1000,
 
             //  Comes from signature...
             HasThis = 0x0001,
+
             ReturnValueIsByReference = 0x0002,
             //  Load flags
+
             GetterLoaded = 0x0004,
+
             SetterLoaded = 0x0008,
         }
 
@@ -998,7 +933,9 @@ namespace Z0
 
             //  Load flags
             AdderLoaded = 0x0001,
+
             RemoverLoaded = 0x0002,
+
             FireLoaded = 0x0004,
         }
 
@@ -1015,22 +952,39 @@ namespace Z0
         public enum DeclSecurityActionFlags : ushort
         {
             ActionNil = 0x0000,
+
             Request = 0x0001,
+
             Demand = 0x0002,
+
             Assert = 0x0003,
+
             Deny = 0x0004,
+
             PermitOnly = 0x0005,
+
             LinktimeCheck = 0x0006,
+
             InheritanceCheck = 0x0007,
+
             RequestMinimum = 0x0008,
+
             RequestOptional = 0x0009,
+
             RequestRefuse = 0x000A,
+
             PrejitGrant = 0x000B,
+
             PrejitDenied = 0x000C,
+
             NonCasDemand = 0x000D,
+
             NonCasLinkDemand = 0x000E,
+
             NonCasInheritance = 0x000F,
+
             MaximumValue = 0x000F,
+
             ActionMask = 0x001F,
         }
 
@@ -1117,59 +1071,6 @@ namespace Z0
             DefaultConstructorConstraint = 0x0010,
         }
 
-        public enum ElementType : byte
-        {
-            End = 0x00,
-            Void = 0x01,
-            Boolean = 0x02,
-            Char = 0x03,
-            Int8 = 0x04,
-            UInt8 = 0x05,
-            Int16 = 0x06,
-            UInt16 = 0x07,
-            Int32 = 0x08,
-            UInt32 = 0x09,
-            Int64 = 0x0a,
-            UInt64 = 0x0b,
-            Single = 0x0c,
-            Double = 0x0d,
-            String = 0x0e,
-
-            Pointer = 0x0f,
-            ByReference = 0x10,
-
-            ValueType = 0x11,
-            Class = 0x12,
-            GenericTypeParameter = 0x13,
-            Array = 0x14,
-            GenericTypeInstance = 0x15,
-            TypedReference = 0x16,
-
-            IntPtr = 0x18,
-            UIntPtr = 0x19,
-            FunctionPointer = 0x1b,
-            Object = 0x1c,
-            SzArray = 0x1d,
-
-            GenericMethodParameter = 0x1e,
-
-            RequiredModifier = 0x1f,
-            OptionalModifier = 0x20,
-
-            Internal = 0x21,
-
-            Max = 0x22,
-
-            Modifier = 0x40,
-
-            Sentinel = 0x41,
-
-            Pinned = 0x45,
-
-            SingleHFA = 0x54, //  What is this?
-
-            DoubleHFA = 0x55, //  What is this?
-        }
 
         public enum SerializationType : byte
         {

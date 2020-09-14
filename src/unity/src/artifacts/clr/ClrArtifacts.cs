@@ -31,6 +31,18 @@ namespace Z0
         public static Module module(R.Module src)
             => src;
 
+        [MethodImpl(Inline), Op]
+        public static Method method(R.MethodInfo src)
+            => src;
+
+        [MethodImpl(Inline), Op]
+        public static Field field(R.FieldInfo src)
+            => src;
+
+        [MethodImpl(Inline), Op]
+        public static ValueParam field(R.ParameterInfo src)
+            => src;
+
         [MethodImpl(Inline)]
         public static ClrArtifactRef<A> reference<A>(A src)
             where A : struct, IClrArtifact<A>
@@ -45,11 +57,13 @@ namespace Z0
             dst.DeclaringType = a.DeclaringType.Id;
             dst.DataType = a.FieldType.Id;
             dst.Attributes = a.Attributes;
+            dst.Address = a.Address;
+            dst.IsStatic = a.IsStatic;
             return dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static Artifacts<Module> modules(R.Assembly src)
+        public static ReadOnlySpan<Module> modules(R.Assembly src)
             => src.Modules.Map(module);
 
         [MethodImpl(Inline), Op]
@@ -57,27 +71,15 @@ namespace Z0
             => module(src.ManifestModule);
 
         [MethodImpl(Inline), Op]
-        public static Field field(R.FieldInfo src)
-            => src;
+        public static ReadOnlySpan<Field> fields(S.Type src)
+            => @recover<R.FieldInfo, Field>(@readonly(src.GetFields(F.BF_All)));
 
         [MethodImpl(Inline), Op]
-        public static Artifacts<Field> fields(S.Type src)
-            => @recover<R.FieldInfo, Field>(@readonly(src.GetFields(F.BF_All)));
+        public static ReadOnlySpan<Method> methods(S.Type src)
+            => @recover<R.MethodInfo, Method>(@readonly(src.GetMethods(F.BF_All)));
 
         [MethodImpl(Inline), Op]
         public static string format(in ClrArtifactRef src)
             => text.format(RenderPatterns.PSx3, src.Kind, src.Id, src.Name);
-
-        public static unsafe void read(in StringRef src, Span<char> dst)
-        {
-            var pSrc = src.View;
-
-
-        }
-
-        [MethodImpl(Inline)]
-        static unsafe ReadOnlySpan<char> cover(in StringRef src)
-            => cover<char>(src.Address.Pointer<char>(), (uint)src.Length);
-
     }
 }

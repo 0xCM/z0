@@ -9,12 +9,14 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
+    using static Konst;
+
     partial struct ClrStorage
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct DirectoryEntry
         {
-            public int RelativeVirtualAddress;
+            public Address32 RelativeVirtualAddress;
 
             public uint Size;
         }
@@ -22,7 +24,7 @@ namespace Z0
         [StructLayout(LayoutKind.Sequential)]
         public struct COR20Header
         {
-            public int CountBytes;
+            public ByteSize CountBytes;
 
             public ushort MajorRuntimeVersion;
 
@@ -32,7 +34,7 @@ namespace Z0
 
             public COR20Flags COR20Flags;
 
-            public uint EntryPointTokenOrRVA;
+            public Address32 EntryPointTokenOrRVA;
 
             public DirectoryEntry ResourcesDirectory;
 
@@ -86,17 +88,17 @@ namespace Z0
         {
             public string Name;
 
-            public int VirtualSize;
+            public ByteSize VirtualSize;
 
-            public int VirtualAddress;
+            public Address32 VirtualAddress;
 
-            public int SizeOfRawData;
+            public ByteSize SizeOfRawData;
 
-            public int OffsetToRawData;
+            public Address32 OffsetToRawData;
 
-            public int RVAToRelocations;
+            public Address32 RVAToRelocations;
 
-            public int PointerToLineNumbers;
+            public Address32 PointerToLineNumbers;
 
             public ushort NumberOfRelocations;
 
@@ -108,7 +110,7 @@ namespace Z0
         [StructLayout(LayoutKind.Sequential)]
         public struct OptionalHeaderNTAdditionalFields
         {
-            public ulong ImageBase;
+            public MemoryAddress ImageBase;
 
             public int SectionAlignment;
 
@@ -151,7 +153,6 @@ namespace Z0
             public int NumberOfRvaAndSizes;
         }
 
-
         [StructLayout(LayoutKind.Sequential)]
         public struct OptionalHeaderDirectoryEntries
         {
@@ -180,7 +181,6 @@ namespace Z0
             public DirectoryEntry BoundImportTableDirectory;
 
             public DirectoryEntry ImportAddressTableDirectory;
-
 
             public DirectoryEntry DelayImportTableDirectory;
 
@@ -365,9 +365,13 @@ namespace Z0
         public struct ModuleRow
         {
             public readonly ushort Generation;
+
             public readonly uint Name;
+
             public readonly uint MVId;
+
             public readonly uint EnCId;
+
             public readonly uint EnCBaseId;
 
         }
@@ -418,7 +422,9 @@ namespace Z0
         public struct FieldRow
         {
             public FieldFlags Flags;
+
             public uint Name;
+
             public uint Signature;
 
         }
@@ -434,7 +440,7 @@ namespace Z0
         [StructLayout(LayoutKind.Sequential)]
         public struct MethodRow
         {
-            public int RVA;
+            public Address32 RVA;
 
             public MethodImplFlags ImplFlags;
 
@@ -480,7 +486,9 @@ namespace Z0
         public struct MemberRefRow
         {
             public uint Class;
+
             public uint Name;
+
             public uint Signature;
 
         }
@@ -489,7 +497,9 @@ namespace Z0
         public struct ConstantRow
         {
             public byte Type;
+
             public uint Parent;
+
             public uint Value;
 
         }
@@ -499,7 +509,9 @@ namespace Z0
         public struct CustomAttributeRow
         {
             public uint Parent;
+
             public uint Type;
+
             public uint Value;
 
         }
@@ -509,6 +521,7 @@ namespace Z0
         public struct FieldMarshalRow
         {
             public uint Parent;
+
 
             public uint NativeType;
 
@@ -577,7 +590,9 @@ namespace Z0
         public struct EventRow
         {
             public EventFlags Flags;
+
             public uint Name;
+
             public uint EventType;
         }
 
@@ -643,7 +658,6 @@ namespace Z0
         public struct TypeSpecRow
         {
             public uint Signature;
-
         }
 
         //  0x1C
@@ -657,14 +671,13 @@ namespace Z0
             public uint ImportName;
 
             public uint ImportScope;
-
         }
 
         //  0x1D
         [StructLayout(LayoutKind.Sequential)]
         public struct FieldRVARow
         {
-            public int RVA;
+            public Address32 RVA;
 
             public uint Field;
 
@@ -693,13 +706,23 @@ namespace Z0
         public struct AssemblyRow
         {
             public uint HashAlgId;
+
             public ushort MajorVersion;
+
             public ushort MinorVersion;
+
             public ushort BuildNumber;
+
             public ushort RevisionNumber;
+
             public AssemblyFlags Flags;
+
             public uint PublicKey;
+
+
             public uint Name;
+
+
             public uint Culture;
         }
 
