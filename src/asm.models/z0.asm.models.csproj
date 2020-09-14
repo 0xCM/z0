@@ -8,6 +8,8 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(AsmServices)" />
+
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Identity)" />
     <ProjectReference Include="$(Data)" />

@@ -50,13 +50,6 @@ namespace Z0.Asm
             => new AsmWriter(dst, DefaultFormatter);
 
         /// <summary>
-        /// Creates a cil function formatter with an optionally-specified configuration
-        /// </summary>
-        /// <param name="config">The format configuration</param>
-        CilFunctionFormatter CilFormatter(CilFormatConfig? config = null)
-            => new CilFunctionFormatter(config);
-
-        /// <summary>
         /// Creates a host-specific archiver service
         /// </summary>
         /// <param name="host">The host uri</param>

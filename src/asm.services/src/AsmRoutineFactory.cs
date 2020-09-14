@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static Asm.AsmFxCheck;
 
-    public readonly struct AsmApi
+    public readonly struct AsmRoutineFactory
     {
         [MethodImpl(Inline), Op]
         public static AsmRoutine routine(X86MemberRefinement encoding, AsmFxList src)

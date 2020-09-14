@@ -6,6 +6,11 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(Asm)" />
+    <ProjectReference Include="$(Extract)" />
+    <ProjectReference Include="$(Structured)" />
+    <ProjectReference Include="$(Dynamic)" />
   </ItemGroup>
 
 </Project>
