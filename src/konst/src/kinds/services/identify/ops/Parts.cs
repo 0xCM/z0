@@ -67,7 +67,7 @@ namespace Z0
                         {
                             if(Enum.IsDefined(typeof(CellWidth), by))
                             {
-                                dst = SegmentedIdentity.identify(indicator, (CellWidth)n, ((NumericWidth)by).ToNumericKind((NumericIndicator)part1.Last()));
+                                dst = SegmentedIdentity.define(indicator, (CellWidth)n, ((NumericWidth)by).ToNumericKind((NumericIndicator)part1.Last()));
                                 return true;
                             }
                         }

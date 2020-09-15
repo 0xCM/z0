@@ -27,8 +27,8 @@ namespace Z0
             var w = n8;
             for(var i=0; i <context.PointCount; i++)
             {
-                var x = context.DataSource.Fixed(w);
-                var y = context.DataSource.Fixed(w);
+                var x = context.DataSource.Cell(w);
+                var y = context.DataSource.Cell(w);
                 Demands.insist(f(x,y),g(x,y));
             }
         }

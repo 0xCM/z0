@@ -17,9 +17,9 @@ namespace Z0.Asm
 
         public MemorySize MemorySize;
 
-        public MemScale MemoryIndexScale;
+        public MemoryScale MemoryIndexScale;
 
-        public MemDx MemDx;
+        public MemDx Displacement;
 
         public RegisterKind MemorySegment;
 
@@ -31,6 +31,7 @@ namespace Z0.Asm
 
         public bool IsIPRelativeMemoryOperand;
 
-        public MemoryAddress IPRelativeMemoryAddress;    }
+        public MemoryAddress IPRelativeMemoryAddress;
+    }
 
 }

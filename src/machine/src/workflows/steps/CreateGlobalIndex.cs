@@ -62,7 +62,7 @@ namespace Z0
                 {
                     ref readonly var path = ref skip(files,i);
 
-                    var result = MemberParseRecord.load(path);
+                    var result = MemberParseReport.load(path);
                     if(result)
                     {
                         Index(result.Value, builder);
@@ -93,14 +93,14 @@ namespace Z0
             Wf.Ran(Host.Id);
         }
 
-        void Index(ReadOnlySpan<MemberParseRecord> src, EmitCaptureIndex dst)
+        void Index(ReadOnlySpan<MemberParseRow> src, EmitCaptureIndex dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
                 Index(skip(src,i), dst);
         }
 
-        void Index(in MemberParseRecord src, EmitCaptureIndex dst)
+        void Index(in MemberParseRow src, EmitCaptureIndex dst)
         {
             if(src.Address.IsEmpty)
                 return;
@@ -111,13 +111,13 @@ namespace Z0
                 Wf.Warn(Host.Id, $"Duplicate | {src.Uri.Format()}");
         }
 
-        Span<PartAsmInstructions> DecodeParts(GlobalCodeIndex src)
+        Span<ApiPartRoutines> DecodeParts(GlobalCodeIndex src)
         {
             Wf.Status(Host.Id, text.format("Decoding {0} entries from {1} parts", src.EntryCount, src.Parts.Length));
 
             var parts = src.Parts;
-            var dst = z.alloc<PartAsmInstructions>(parts.Length);
-            var hostFx = z.list<HostAsmFx>();
+            var dst = z.alloc<ApiPartRoutines>(parts.Length);
+            var hostFx = z.list<ApiHostRoutines>();
             var kMembers = 0u;
             var kHosts = 0u;
             var kParts = 0u;
@@ -142,7 +142,7 @@ namespace Z0
                     kMembers += fx.RoutineCount;
                     kFx += fx.InstructionCount;
                 }
-                dst[i] = new PartAsmInstructions(part, hostFx.ToArray());
+                dst[i] = new ApiPartRoutines(part, hostFx.ToArray());
 
                 kParts++;
 
@@ -154,9 +154,9 @@ namespace Z0
             return dst;
         }
 
-        HostAsmFx Decode(X86HostIndex hcs)
+        ApiHostRoutines Decode(X86HostIndex hcs)
         {
-            var instructions = Root.list<ApiAsmRoutine>();
+            var instructions = Root.list<ApiRoutine>();
             var ip = MemoryAddress.Empty;
             var decoder = State.RoutineDecoder;
             var target = Buffer;
@@ -170,11 +170,10 @@ namespace Z0
                 if(i == 0)
                     ip = Buffer[0].IP;
 
-                var member = ApiAsmRoutine.create(ip, uriCode, Buffer.ToArray());
-                instructions.Add(member);
+                instructions.Add(asm.routine(ip, uriCode, Buffer.ToArray()));
             }
 
-            return new HostAsmFx(hcs.Host, instructions.ToArray());
+            return new ApiHostRoutines(hcs.Host, instructions.ToArray());
         }
 
         void Process(GlobalCodeIndex encoded)
@@ -224,7 +223,7 @@ namespace Z0
             }
         }
 
-        void Process(ReadOnlySpan<PartAsmInstructions> src)
+        void Process(ReadOnlySpan<ApiPartRoutines> src)
         {
             try
             {
@@ -242,7 +241,7 @@ namespace Z0
             }
         }
 
-        void Process(PartAsmInstructions fx)
+        void Process(ApiPartRoutines fx)
         {
             try
             {

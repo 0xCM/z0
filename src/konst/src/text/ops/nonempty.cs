@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -20,13 +19,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool nonempty(string src)
             => !string.IsNullOrEmpty(src);
-
-        /// <summary>
-        /// Test whether the source is a nonempty string
-        /// </summary>
-        /// <param name="src">The object to evaluate</param>
-        [MethodImpl(Inline), Op]
-        public static bool nonempty(object src) 
-            => src is string s ? sys.nonempty(s) : false;
     }
 }

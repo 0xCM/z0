@@ -96,7 +96,7 @@ namespace Z0
                 where  nk != 0
                 let nki = nk.Indicator().Format()
                 let identifer = text.concat(i, segfmt, IDI.SegSep,argfmt, nki)
-                select SegmentedIdentity.identify(i,segwidth,nk).AsTypeIdentity();
+                select SegmentedIdentity.define(i,segwidth,nk).AsTypeIdentity();
 
         static Option<TypeIdentity> NatId(Type arg)
             => from v in arg.NatValue()

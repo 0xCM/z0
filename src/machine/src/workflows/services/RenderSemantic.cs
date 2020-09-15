@@ -35,7 +35,7 @@ namespace Z0
 
         }
 
-        public static void Render(PartAsmInstructions src)
+        public static void Render(ApiPartRoutines src)
         {
             var part = src.Part;
             var archive = Archives.semantic();
@@ -55,7 +55,7 @@ namespace Z0
             }
         }
 
-        public void Render(HostAsmFx src, StreamWriter dst)
+        public void Render(ApiHostRoutines src, StreamWriter dst)
         {
             var functions = span(src.Routines);
             var count = src.RoutineCount;
@@ -69,7 +69,7 @@ namespace Z0
             }
         }
 
-        void Render(ApiAsmRoutine src, StreamWriter dst)
+        void Render(ApiRoutine src, StreamWriter dst)
         {
             Buffer.Clear();
 
@@ -95,8 +95,8 @@ namespace Z0
                 dst.WriteLine(rendered[j]);
         }
 
-        string FormatMemory(MemoryAddress @base, Instruction src, int i)
-            => render.Render(asm.memInfo(src, i));
+        string FormatMemory(MemoryAddress @base, Instruction src, byte i)
+            => render.Render(asm.meminfo(src, i));
 
         string Format(MemoryAddress @base, Instruction src, byte i)
         {

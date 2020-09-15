@@ -24,14 +24,14 @@ namespace Z0
 
         public string WorkerName {get;}
 
-        public HostAsmFx Instructions {get;}
+        public ApiHostRoutines Instructions {get;}
 
         public FlairKind Flair {get;}
 
         public string Description {get;}
 
         [MethodImpl(Inline)]
-        public DecodedHost(string worker, HostAsmFx src, CorrelationToken ct, FlairKind flair = Ran)
+        public DecodedHost(string worker, ApiHostRoutines src, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = WfEventId.define(EventName, ct);
             WorkerName = worker;

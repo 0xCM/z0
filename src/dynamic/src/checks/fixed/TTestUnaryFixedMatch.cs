@@ -7,7 +7,7 @@ namespace Z0
     using static Memories;
 
     using Eq = CheckEquatable;
-    
+
     public interface TTestUnaryFixedMatch : TTestAction, ITestRandom
     {
         /// <summary>
@@ -24,8 +24,8 @@ namespace Z0
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
+                    var x = Random.Cell(w);
+                    var y = Random.Cell(w);
                     Eq.Checker.Eq(f(x),g(x));
                 }
             }
@@ -47,8 +47,8 @@ namespace Z0
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
+                    var x = Random.Cell(w);
+                    var y = Random.Cell(w);
                     var a = f(x);
                     var b = g(x);
                     Eq.Checker.Eq(f(x),g(x));
@@ -72,8 +72,8 @@ namespace Z0
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
+                    var x = Random.Cell(w);
+                    var y = Random.Cell(w);
                     var a = f(x);
                     var b = g(x);
                     Eq.Checker.Eq(f(x),g(x));
@@ -97,8 +97,8 @@ namespace Z0
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
+                    var x = Random.Cell(w);
+                    var y = Random.Cell(w);
                     var a = f(x);
                     var b = g(x);
                     Eq.Checker.Eq(f(x),g(x));
@@ -122,8 +122,8 @@ namespace Z0
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
+                    var x = Random.Cell(w);
+                    var y = Random.Cell(w);
                     var a = f(x);
                     var b = g(x);
                     Eq.Checker.Eq(f(x),g(x));
@@ -147,8 +147,8 @@ namespace Z0
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
+                    var x = Random.Cell(w);
+                    var y = Random.Cell(w);
                     var a = f(x);
                     var b = g(x);
                     Eq.Checker.Eq(f(x),g(x));

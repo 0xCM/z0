@@ -10,6 +10,16 @@ namespace Z0
     using static Konst;
 
     /// <summary>
+    /// Defines the fields in a <see  cref='ListedFile'/> table
+    /// </summary>
+    public enum ListedFileField : ushort
+    {
+        Index = 10,
+
+        Path = 120
+    }
+
+    /// <summary>
     /// Defines an entry in list of files
     /// </summary>
     public readonly struct ListedFile : ITable<ListedFileField,ListedFile>

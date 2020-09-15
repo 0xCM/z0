@@ -9,7 +9,7 @@
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitFields)" />
     <ProjectReference Include="$(BitVectors)" />
-    <ProjectReference Include="$(AsmModels)" />
+    <ProjectReference Include="$(AsmServices)" />
   </ItemGroup>
 
 </Project>

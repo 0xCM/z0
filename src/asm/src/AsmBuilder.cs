@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Konst;
 
-
     [ApiHost]
     public readonly partial struct AsmBuilder
     {

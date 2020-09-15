@@ -10,7 +10,7 @@
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(VCheck)" />
     <ProjectReference Include="$(Canonical)" />
-    <ProjectReference Include="$(AsmModels)" />
+    <ProjectReference Include="$(AsmServices)" />
   </ItemGroup>
 
 </Project>

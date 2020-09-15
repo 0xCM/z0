@@ -10,22 +10,20 @@ namespace Z0
     using static Konst;
     using static ExtractMembersStep;
 
-    using Z0.Asm;
-
     public readonly ref struct ExtractMembers
     {
         readonly CorrelationToken Ct;
 
-        readonly IWfCaptureState State;
-
         readonly IWfShell Wf;
 
+        readonly MemberExtractor Extractor;
+
         [MethodImpl(Inline)]
-        public ExtractMembers(IWfCaptureState state, CorrelationToken ct)
+        public ExtractMembers(IWfShell wf)
         {
-            State = state;
-            Wf = state.Wf;
-            Ct = ct;
+            Wf = wf;
+            Ct = Wf.Ct;
+            Extractor = X86Extraction.service(X86Extraction.DefaultBufferLength);
             Wf.Created(StepId);
         }
 
@@ -34,36 +32,24 @@ namespace Z0
             Wf.Disposed(StepId);
         }
 
-        X86ApiExtract[] Extract(ICaptureContext context, IApiHost host)
-        {
-            var members = ApiMemberJit.jit(host);
-            Wf.Raise(new MembersLocated(host.Uri, members, Ct));
-            return Extractor.Extract(members);
-        }
-
         public X86ApiExtract[] Extract(IApiHost host)
         {
-            var extracted = sys.empty<X86ApiExtract>();
             try
             {
-                extracted = Extract(State.CWf.Context ,host);
-                Wf.Raise(new ExtractedMembers(host.Uri, extracted.Length, Ct));
+                return Extractor.Extract(ApiMemberJit.jit(host));
             }
             catch(Exception e)
             {
                 Wf.Error(StepId, e);
+                return sys.empty<X86ApiExtract>();
             }
-            return extracted;
         }
 
         public X86ApiExtract[] Extract(IApiHost[] hosts)
         {
-            var extracted = sys.empty<X86ApiExtract>();
             try
             {
-                var members = ApiMemberJit.jit(hosts, Wf.Broker.Sink);
-                Wf.Raise(new PreparedConsolidated(nameof(ExtractMembers), hosts, members, Ct));
-                return Extractor.Extract(members);
+                return Extractor.Extract(ApiMemberJit.jit(hosts, Wf.Broker.Sink));
             }
             catch(Exception e)
             {
@@ -85,8 +71,5 @@ namespace Z0
                 return sys.empty<X86ApiExtract>();
             }
         }
-
-        static MemberExtractor Extractor
-            => X86Extraction.service(X86Extraction.DefaultBufferLength);
     }
 }

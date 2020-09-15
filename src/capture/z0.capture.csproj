@@ -10,7 +10,7 @@
     <ProjectReference Include="$(Identity)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Cil)" />
-    <ProjectReference Include="$(AsmModels)" />
+    <ProjectReference Include="$(AsmServices)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Evaluate)" />
     <ProjectReference Include="$(Extract)" />

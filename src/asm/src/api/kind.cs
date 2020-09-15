@@ -16,33 +16,22 @@ namespace Z0
  		/// <summary>
 		/// Gets an operand's kind if it exists
 		/// </summary>
-		/// <param name="operand">Operand number, 0-4</param>
+		/// <param name="index">Operand number, 0-4</param>
         [MethodImpl(Inline), Op]
-		public static OpKind kind(in Instruction src, byte operand)
+		public static OpKind kind(in Instruction src, byte index)
         {
-            if(operand == 0)
+            if(index == 0)
                 return src.Op0Kind;
-            else if(operand == 1)
+            else if(index == 1)
                 return src.Op1Kind;
-            else if(operand == 2)
+            else if(index == 2)
                 return src.Op2Kind;
-            else if(operand == 3)
+            else if(index == 3)
                 return src.Op3Kind;
-            else if(operand == 4)
+            else if(index == 4)
                 return src.Op4Kind;
             else
                 return 0;
-
-			// switch (operand) {
-			// case 0: return src.Op0Kind;
-			// case 1: return src.Op1Kind;
-			// case 2: return src.Op2Kind;
-			// case 3: return src.Op3Kind;
-			// case 4: return src.Op4Kind;
-			// default:
-			// 	return 0;
-			// }
 		}
-
     }
 }

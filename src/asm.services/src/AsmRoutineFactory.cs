@@ -15,11 +15,11 @@ namespace Z0
     public readonly struct AsmRoutineFactory
     {
         [MethodImpl(Inline), Op]
-        public static AsmRoutine routine(X86MemberRefinement encoding, AsmFxList src)
+        public static AsmRoutine routine(X86ApiCapture captured, AsmFxList src)
         {
-            var code = new X86ApiCode(encoding.OpUri, encoding.Encoded);
-            var sig = encoding.Method.Signature().Format();
-            return new AsmRoutine(encoding.OpUri, sig, code, encoding.TermCode, src);
+            var code = new X86ApiCode(captured.OpUri, captured.Encoded);
+            var sig = captured.Method.Signature().Format();
+            return new AsmRoutine(captured.OpUri, sig, code, captured.TermCode, src);
         }
 
         [MethodImpl(Inline), Op]
@@ -31,7 +31,7 @@ namespace Z0
         }
 
         [Op]
-        public static AsmRoutine routine(OpUri uri, string sig, AsmFxBlock src, bool check = false)
+        public static AsmRoutine routine(OpUri uri, string sig, AsmBlock src, bool check = false)
         {
             var info = new AsmFxSummary[src.InstructionCount];
             var offset = (ushort)0;

@@ -23,7 +23,7 @@ namespace Z0
             => TestCaseIdentity.name(HostType,id);
 
         string CaseName([Caller] string label = null)
-            => ApiUriBuilder.TestCase(HostType, label);
+            => ApiUri.TestCase(HostType, label);
 
         /// <summary>
         /// Produces a test case identifier predicated on a parametrically-specialized label
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="label">The root name</param>
         string CaseName<C>(Type host, string label)
             where C : unmanaged
-                => text.concat(Identify.OwningPartText(host), PathSep, host.Name, PathSep, label, '_', Identify.numeric<C>());
+                => text.concat(Identify.OwningPartText(host), UriPathSep, host.Name, UriPathSep, label, '_', Identify.numeric<C>());
 
         string CaseName<W,C>(Type host, string label, bool generic)
             where W : unmanaged, ITypeWidth

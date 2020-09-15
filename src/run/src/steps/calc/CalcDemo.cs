@@ -74,13 +74,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static MemSlotView from(Type src)
+        public static MemorySlots from(Type src)
             => FunctionDynamic.jit(src).Map(m => new SegRef(m.Address, m.Size));
 
         [MethodImpl(Inline)]
-        public static MemSlotView<E> from<E>(Type src)
+        public static MemorySlots<E> from<E>(Type src)
             where E : unmanaged, Enum
-                => new MemSlotView<E>(from(src));
+                => new MemorySlots<E>(from(src));
 
         [Op]
         public static void run(Span<string> dst, ref byte offset)

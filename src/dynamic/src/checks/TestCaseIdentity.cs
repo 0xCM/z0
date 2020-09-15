@@ -27,10 +27,10 @@ namespace Z0
             => host.Assembly.Id().Format();
 
         public static string name(Type host, [Caller] string label = null)
-            => ApiUriBuilder.TestCase(host, label);
+            => ApiUri.TestCase(host, label);
 
         public static string name(Type host, IFunc f)
-            =>$"{owner(host)}{PathSep}{host.Name}{PathSep}{name(f)}";
+            =>$"{owner(host)}{UriPathSep}{host.Name}{UriPathSep}{name(f)}";
 
         /// <summary>
         /// Produces a test case identifier predicated on a parametrically-specialized label
@@ -45,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="id">Identifies the operation under test</param>
         public static string name(Type host, OpIdentity id)
-            => ApiUriBuilder.TestCase(host, id);
+            => ApiUri.TestCase(host, id);
 
         /// <summary>
         /// Produces a test case name predicated on a parametrically-specialized label
@@ -54,7 +54,7 @@ namespace Z0
         /// <typeparam name="T">The label specialization type</typeparam>
         public static string name<T>(Type host, [Caller] string label = null)
             where T : unmanaged
-                => ApiUriBuilder.TestCase(host, id<T>(label));
+                => ApiUri.TestCase(host, id<T>(label));
 
         /// <summary>
         /// Produces a case name for an identified operation match test
@@ -62,11 +62,11 @@ namespace Z0
         /// <param name="f">The left operation</param>
         /// <param name="g">The right operation</param>
         public static string match(Type host, OpIdentity f, OpIdentity g)
-            => ApiUriBuilder.TestCase(host, $"{f.Identifier}_vs_{g.Identifier}");
+            => ApiUri.TestCase(host, $"{f.Identifier}_vs_{g.Identifier}");
 
         public static string name<W,C>(Type host, string label, bool generic)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => $"{Identify.OwningPartText(host)}/{host.Name}{PathSep}{OpIdentityBuilder.build(label, default(W).TypeWidth, NumericKinds.kind<C>(), generic)}";
+                => $"{Identify.OwningPartText(host)}/{host.Name}{UriPathSep}{OpIdentityBuilder.build(label, default(W).TypeWidth, NumericKinds.kind<C>(), generic)}";
     }
 }

@@ -27,7 +27,7 @@ namespace Z0.Asm
 		/// <summary>
 		/// Index register scale (1, 2, 4, or 8)
 		/// </summary>
-		public readonly MemScale Scale;
+		public readonly MemoryScale Scale;
 
 		/// <summary>
 		/// Memory displacement

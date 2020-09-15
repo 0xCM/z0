@@ -14,7 +14,7 @@ namespace Z0.Asm
         public static AsmRoutineCode Empty
             => default;
 
-        public AsmRoutine Function {get;}
+        public AsmRoutine Routine {get;}
 
         public X86ApiCapture Code {get;}
 
@@ -25,20 +25,20 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public AsmRoutineCode(AsmRoutine f, X86ApiCapture code)
         {
-            Function = f;
+            Routine = f;
             Code = code;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => (Function == null || Function.IsEmpty) && Code.IsEmpty;
+            get => (Routine == null || Routine.IsEmpty) && Code.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => (Function != null && Function.IsNonEmpty) && Code.IsNonEmpty;
+            get => (Routine != null && Routine.IsNonEmpty) && Code.IsNonEmpty;
         }
     }
 }

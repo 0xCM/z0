@@ -19,9 +19,9 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        public WfDataFlow<PartAsmInstructions,FilePath> Df;
+        public WfDataFlow<ApiPartRoutines,FilePath> Df;
 
-        public EmitCallIndex(IWfShell wf, PartAsmInstructions src, CorrelationToken ct)
+        public EmitCallIndex(IWfShell wf, ApiPartRoutines src, CorrelationToken ct)
         {
             Wf = wf;
             Ct = ct;

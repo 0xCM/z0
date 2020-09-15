@@ -51,8 +51,8 @@ namespace Z0
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
+                    var x = Random.Cell(w);
+                    var y = Random.Cell(w);
                     Claim.Eq(f(x,y),g(x,y));
                 }
             }
@@ -75,8 +75,8 @@ namespace Z0
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
+                    var x = Random.Cell(w);
+                    var y = Random.Cell(w);
                     var a = f(x,y);
                     var b = g(x,y);
                     Claim.Eq(f(x,y),g(x,y));
@@ -100,8 +100,8 @@ namespace Z0
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
+                    var x = Random.Cell(w);
+                    var y = Random.Cell(w);
                     var a = f(x,y);
                     var b = g(x,y);
                     Claim.Eq(f(x,y),g(x,y));
@@ -125,8 +125,8 @@ namespace Z0
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
+                    var x = Random.Cell(w);
+                    var y = Random.Cell(w);
                     var a = f(x,y);
                     var b = g(x,y);
                     Claim.Eq(f(x,y),g(x,y));
@@ -150,8 +150,8 @@ namespace Z0
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
+                    var x = Random.Cell(w);
+                    var y = Random.Cell(w);
                     var a = f(x,y);
                     var b = g(x,y);
                     Claim.Eq(f(x,y),g(x,y));
@@ -175,8 +175,8 @@ namespace Z0
             {
                 for(var i=0; i < RepCount; i++)
                 {
-                    var x = Random.Fixed(w);
-                    var y = Random.Fixed(w);
+                    var x = Random.Cell(w);
+                    var y = Random.Cell(w);
                     var a = f(x,y);
                     var b = g(x,y);
                     Claim.Eq(f(x,y),g(x,y));

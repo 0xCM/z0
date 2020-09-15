@@ -16,27 +16,6 @@ namespace Z0.Asm
     {
         public static CaptureCore Service => default;
 
-        [MethodImpl(Inline)]
-        static IntPtr jit(MethodInfo src)
-        {
-            RuntimeHelpers.PrepareMethod(src.MethodHandle);
-            return src.MethodHandle.GetFunctionPointer();
-        }
-
-        [MethodImpl(Inline)]
-        static IntPtr jit(Delegate src)
-        {
-            RuntimeHelpers.PrepareDelegate(src);
-            return src.Method.MethodHandle.GetFunctionPointer();
-        }
-
-        [MethodImpl(Inline)]
-        static DynamicPointer jit(DynamicDelegate src)
-        {
-            RuntimeHelpers.PrepareDelegate(src.DynamicOp);
-            return DynamicPointer.From(src);
-        }
-
         public Option<ParsedBuffer> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
         {
             try
@@ -56,7 +35,7 @@ namespace Z0.Asm
             {
                 var summary = capture(exchange, src.Id, src.Address);
                 var size = summary.Encoded.Length;
-                var code = new X86ApiCapture(src.Id, src.Method, summary.Encoded.ParseInput, summary.Encoded.Encoded, summary.Outcome.TermCode);
+                var code = new X86ApiCapture(src.Id, src.Method, summary.Encoded.Input, summary.Encoded.Output, summary.Outcome.TermCode);
                 return new CapturedMember(src, code);
             }
             catch(Exception e)
@@ -91,7 +70,7 @@ namespace Z0.Asm
                 var pSrc = jit(src).Handle;
                 var summary = capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;
-                var captured = new X86ApiCapture(id, src.SourceMethod, summary.Encoded.ParseInput, summary.Encoded.ParseResult, outcome.TermCode);
+                var captured = new X86ApiCapture(id, src.SourceMethod, summary.Encoded.Input, summary.Encoded.Output, outcome.TermCode);
                 Demands.insist((MemoryAddress)pSrc,captured.BaseAddress);
                 return exchange.CaptureComplete(outcome.State, captured);
             }
@@ -148,11 +127,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         static X86ApiCapture DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedEncoding bits, ExtractTermCode term)
-            => new X86ApiCapture(id, src, bits.ParseInput, bits.Encoded, term);
+            => new X86ApiCapture(id, src, bits.Input, bits.Output, term);
 
         [MethodImpl(Inline)]
         static X86ApiCapture DefineMember(OpIdentity id, Delegate src, Z0.ParsedEncoding bits, ExtractTermCode term)
-            => new X86ApiCapture(id, src.Method, bits.ParseInput, bits.Encoded, term);
+            => new X86ApiCapture(id, src.Method, bits.Input, bits.Output, term);
 
         [MethodImpl(Inline)]
         static ParsedBuffer capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
@@ -198,7 +177,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         static CaptureOutcome Complete(in ExtractState state, ExtractTermCode tc, long start, long end, int delta)
-            => CaptureOutcome.define(state, ((ulong)start, (ulong)(end + delta)), tc);
+            => new CaptureOutcome(state, ((ulong)start, (ulong)(end + delta)), tc);
 
         [MethodImpl(Inline)]
         static ParsedBuffer SummarizeParse(in CaptureExchange exchange, in ExtractState state, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
@@ -323,5 +302,26 @@ namespace Z0.Asm
             && c.x == c.y
             && d.x == d.y
             && e.x == e.y;
+
+        [MethodImpl(Inline)]
+        static IntPtr jit(MethodInfo src)
+        {
+            RuntimeHelpers.PrepareMethod(src.MethodHandle);
+            return src.MethodHandle.GetFunctionPointer();
+        }
+
+        [MethodImpl(Inline)]
+        static IntPtr jit(Delegate src)
+        {
+            RuntimeHelpers.PrepareDelegate(src);
+            return src.Method.MethodHandle.GetFunctionPointer();
+        }
+
+        [MethodImpl(Inline)]
+        static DynamicPointer jit(DynamicDelegate src)
+        {
+            RuntimeHelpers.PrepareDelegate(src.DynamicOp);
+            return DynamicPointer.From(src);
+        }
     }
 }

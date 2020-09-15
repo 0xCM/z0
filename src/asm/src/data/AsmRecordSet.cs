@@ -3,18 +3,18 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
     public readonly struct AsmRecordSet<T>
-    {        
+    {
         public readonly T Key;
 
         readonly AsmRecord[] Records;
-    
+
         [MethodImpl(Inline)]
         public static implicit operator AsmRecord[](AsmRecordSet<T> src)
             => src.Records;
@@ -25,7 +25,6 @@ namespace Z0.Asm
             Key = key;
             Records = data;
         }
-
 
         public AsmRecord[] Sequenced
         {

@@ -13,15 +13,12 @@ namespace Z0
 
     partial struct asm
     {
-        /// <summary>
-        /// Defines a branch target
-        /// </summary>
-        /// <param name="kind"></param>
-        /// <param name="size"></param>
-        /// <param name="address"></param>
-        /// <param name="selector"></param>
         [MethodImpl(Inline), Op]
-        public static AsmBranchTarget target(BranchTargetKind kind, BranchTargetSize size, MemoryAddress address, ushort selector = 0)
+        public static AsmBranchTarget target(BranchTargetKind kind, BranchTargetWidth size, MemoryAddress address)
+            => new AsmBranchTarget(kind, size, address);
+
+        [MethodImpl(Inline), Op]
+        public static AsmBranchTarget target(BranchTargetKind kind, BranchTargetWidth size, MemoryAddress address, Address16 selector)
             => new AsmBranchTarget(kind, size, address, selector);
 
         [MethodImpl(Inline), Op]

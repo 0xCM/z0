@@ -11,12 +11,10 @@ namespace Z0
 
     using static z;
     using static Konst;
-    using static EmitFieldLiteralsHost;
 
     public readonly ref struct EmitFieldLiterals
     {
         readonly IWfShell Wf;
-
 
         readonly EmitFieldLiteralsHost Host;
 
@@ -33,7 +31,7 @@ namespace Z0
             Wf.Created(Host);
         }
 
-        void Emit(PartTypes src)
+        void Emit(ApiPartTypes src)
         {
             var fields = Refs.fields(src.Types);
             if(fields.Length != 0)
@@ -43,7 +41,7 @@ namespace Z0
         public void Run()
         {
             Target.Clear();
-            var parts = span(Modules.Parts.Storage.Map(part => PartTypes.from(part)));
+            var parts = span(Modules.Parts.Storage.Map(part => ApiQuery.types(part)));
             foreach(var part in parts)
             {
                 try

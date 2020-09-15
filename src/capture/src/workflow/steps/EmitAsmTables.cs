@@ -156,7 +156,7 @@ namespace Z0
                 offset += (int)current.Count.Value;
                 var s1 = offset;
 
-                seek(dst,i) = AsmRecords.segment(key, new ArraySegment<AsmRecord>(buffer, s0, s1-s0));
+                seek(dst,i) = asm.segment(key, new ArraySegment<AsmRecord>(buffer, s0, s1-s0));
             }
         }
 

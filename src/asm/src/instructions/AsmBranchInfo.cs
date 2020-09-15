@@ -14,8 +14,6 @@ namespace Z0.Asm
     /// </summary>
     public struct AsmBranchInfo
     {
-        public Instruction Fx;
-
         public MemoryAddress Base;
 
         public MemoryAddress Source;
@@ -25,9 +23,8 @@ namespace Z0.Asm
         public MemoryAddress TargetOffset;
 
         [MethodImpl(Inline)]
-        public AsmBranchInfo(in Instruction fx, MemoryAddress @base, MemoryAddress src, in AsmBranchTarget target, uint offset)
+        public AsmBranchInfo(MemoryAddress @base, MemoryAddress src, in AsmBranchTarget target, uint offset)
         {
-            Fx = fx;
             Base = @base;
             Source = src;
             Target = target;

@@ -15,12 +15,12 @@ namespace Z0
     public readonly struct AsmBrokers
     {
         [MethodImpl(Inline), Op]
-        public static BitBroker<AsmHandlerKind,HostAsmFx> broker(AsmHandlerKind kind = default)
-            => BitBrokers.broker64<AsmHandlerKind,HostAsmFx>(kind);
+        public static BitBroker<AsmHandlerKind,ApiHostRoutines> broker(AsmHandlerKind kind = default)
+            => BitBrokers.broker64<AsmHandlerKind,ApiHostRoutines>(kind);
 
         [MethodImpl(Inline), Op]
-        public static BitBroker<AsmHandlerKind,HostAsmFx> broker(WfDataHandler<HostAsmFx>[] buffer, AsmHandlerKind kind = default)
-            => BitBrokers.broker64<AsmHandlerKind,HostAsmFx>(buffer, kind);
+        public static BitBroker<AsmHandlerKind,ApiHostRoutines> broker(WfDataHandler<ApiHostRoutines>[] buffer, AsmHandlerKind kind = default)
+            => BitBrokers.broker64<AsmHandlerKind,ApiHostRoutines>(buffer, kind);
 
         [MethodImpl(Inline), Op]
         public static BitBroker<JmpKind,ApiInstruction> jmp()

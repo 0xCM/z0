@@ -83,7 +83,7 @@ namespace Z0
                 Process(src.Encoded, decoded.Value);
         }
 
-        void Process(in MemberParseRecord src)
+        void Process(in MemberParseRow src)
         {
             var instructions = Decoder.Decode(src.Data);
             if(instructions)
@@ -98,9 +98,9 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 var key = keys[i];
-                sets[i] = AsmRecords.set(key, Index[key].Create());
+                sets[i] = asm.set(key, Index[key].Create());
             }
-            return AsmRecords.sets(sets);
+            return asm.sets(sets);
         }
 
         void Process(in X86Code code, in AsmFxList asm)

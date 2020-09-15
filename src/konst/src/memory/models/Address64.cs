@@ -17,6 +17,10 @@ namespace Z0
     {
         public readonly T Location;
 
+        [MethodImpl(Inline)]
+        public static implicit operator MemoryAddress(Address64 src)
+            => src.Location;
+
         public static W W => default;
 
         public bool IsEmpty

@@ -16,7 +16,6 @@ namespace Z0
     {
         FS.FolderPath Root {get;}
 
-
         IEnumerable<FS.FolderPath> Directories(bool recurse = true)
         {
             foreach(var path in Root.SubDirs(recurse))

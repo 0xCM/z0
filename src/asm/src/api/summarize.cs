@@ -13,7 +13,6 @@ namespace Z0
 
     partial struct asm
     {
-
         public static AsmFxSummary Summarize(MemoryAddress @base, Instruction src, ReadOnlySpan<byte> encoded, string formatted, ushort offset)
             => summarize(@base, src, encoded, formatted, offset);
 

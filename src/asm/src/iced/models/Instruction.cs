@@ -12,7 +12,7 @@ namespace Z0.Asm
         /// <summary>
         /// Encapsulates the result of ToInstructionCodeString() and ToInstructionString()
         /// </summary>
-        public AsmFxCode InstructionCode {get;set;}
+        public AsmSpecifier InstructionCode {get;set;}
 
         /// <summary>
         /// Captures the formatted view of the instruction
@@ -60,7 +60,7 @@ namespace Z0.Asm
         // Summary:
         //     Gets the index register scale value, valid values are *1, *2, *4, *8. Use this
         //     property if the operand has kind Iced.Intel.OpKind.Memory
-        public MemScale MemoryIndexScale {get; set;}
+        public MemoryScale MemoryIndexScale {get; set;}
         //
         // Summary:
         //     Gets the memory operand's displacement. This should be sign extended to 64 bits
@@ -76,7 +76,7 @@ namespace Z0.Asm
         public int MemoryDisplSize {get; set;}
 
         public MemDx MemDx
-            => Z0.asm.memDx(MemoryDisplacement, (MemDxSize)MemoryDisplSize);
+            => Z0.asm.dx(MemoryDisplacement, (MemDxSize)MemoryDisplSize);
 
         //
         // Summary:

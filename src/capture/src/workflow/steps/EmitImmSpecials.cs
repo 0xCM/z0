@@ -31,7 +31,7 @@ namespace Z0
 
         readonly IImmSpecializer Specializer;
 
-        public EmitImmSpecials(IWfShell wf, IAsmContext asm, IAsmFormatter formatter, IAsmDecoder decoder, FolderPath root, CorrelationToken? ct = null)
+        public EmitImmSpecials(IWfShell wf, IAsmContext asm, IAsmFormatter formatter, IAsmDecoder decoder, FolderPath root)
         {
             Wf = wf;
             Asm = asm;

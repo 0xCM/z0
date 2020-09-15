@@ -17,7 +17,6 @@ namespace Z0
 
     partial struct asm
     {
-
         [MethodImpl(Inline), Op]
         public static AsmTriggerSet triggers(FT[] rTriggers, IT[] fxTriggers)
             => new AsmTriggerSet(rTriggers, fxTriggers);

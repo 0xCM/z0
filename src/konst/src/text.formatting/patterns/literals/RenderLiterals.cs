@@ -23,13 +23,13 @@ namespace Z0
         /// <summary>
         /// Defines the default field delimiter
         /// </summary>
-        [StringLiteral(" | ")]
+        [StringLiteral(FieldSep)]
         public const string FieldSep = " | ";
 
         /// <summary>
         /// Defines the literal '->'
         /// </summary>
-        [StringLiteral("|")]
+        [StringLiteral(Pipe)]
         public const string Pipe = "|";
 
         /// <summary>
@@ -47,16 +47,19 @@ namespace Z0
         /// <summary>
         /// Defines the literal '('
         /// </summary>
+        [StringLiteral(OpenTuple)]
         public const string OpenTuple = "(";
 
         /// <summary>
         /// Defines the literal ')'
         /// </summary>
+        [StringLiteral(CloseTuple)]
         public const string CloseTuple = ")";
 
         /// <summary>
         /// Defines the default extension for structured data
         /// </summary>
+        [StringLiteral(DataExt)]
         public const string DataExt = "csv";
 
         /// <summary>

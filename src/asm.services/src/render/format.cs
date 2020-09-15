@@ -20,6 +20,7 @@ namespace Z0.Asm
         public static string format(RelAddress<W32,W32,uint,uint> src)
             => src.Format();
 
+        [MethodImpl(Inline), Op]
         public static string format(in MemoryOffset moffs)
             => text.concat(((ushort)moffs.Offset).FormatAsmHex(), Chars.Space, moffs.Absolute);
 
@@ -65,7 +66,7 @@ namespace Z0.Asm
             return text.concat(offsetFmt, Sep, moffs.Absolute, Sep, moffsBase, Sep, moffsPrior);
         }
 
-        public static string[] format<E>(MemSlotView<E> src)
+        public static string[] format<E>(MemorySlots<E> src)
             where E : unmanaged, Enum
         {
             var dst = sys.alloc<string>(src.Length);
@@ -73,7 +74,7 @@ namespace Z0.Asm
             return dst;
         }
 
-        public static void format<E>(MemSlotView<E> src, Span<string> dst)
+        public static void format<E>(MemorySlots<E> src, Span<string> dst)
             where E : unmanaged, Enum
         {
             var count = src.Length;
@@ -83,13 +84,9 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static string format(AsmFxCode src, byte[] encoded, string sep)
+        public static string format(AsmSpecifier src, byte[] encoded, string sep)
             =>  text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}",
-                src.Pattern, sep,
-                src.Code, sep,
-                encoded.Length, sep,
-                encoded.FormatHexBytes(Space,true,false)
-                );
+                    src.Pattern, sep, src.Code, sep, encoded.Length, sep, encoded.FormatHexBytes(Space,true,false));
 
         [Op]
         public static string format(in MemoryAddress @base, in AsmFxSummary src, in AsmFormatSpec config)

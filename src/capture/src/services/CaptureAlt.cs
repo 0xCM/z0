@@ -12,6 +12,53 @@ namespace Z0
     using static z;
     using static ExtractTermCode;
 
+    readonly struct CapturedOperation
+    {
+        public OpIdentity Id {get;}
+
+        public readonly CaptureOutcome Outcome;
+
+        public readonly ParsedEncoding Encoded;
+
+        public byte[] Data
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.Output;
+        }
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.Length;
+        }
+
+        public ref readonly byte this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Encoded[index];
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.IsNonEmpty;
+        }
+
+        [MethodImpl(Inline)]
+        public CapturedOperation(OpIdentity id,  CaptureOutcome outcome, ParsedEncoding code)
+        {
+            Id = id;
+            Outcome = outcome;
+            Encoded = code;
+        }
+    }
+
     [ApiHost]
     public readonly unsafe struct CaptureAlt
     {
@@ -41,7 +88,7 @@ namespace Z0
         {
             var summary = capture(buffer, src.Id, ApiMemberJit.jit(src));
             var size = summary.Data.Length;
-            var code = new X86ApiCapture(src.Id, src.Method, summary.Encoded.ParseInput, summary.Encoded.Encoded, summary.Outcome.TermCode);
+            var code = new X86ApiCapture(src.Id, src.Method, summary.Encoded.Input, summary.Encoded.Output, summary.Outcome.TermCode);
             return new CapturedMember(src, code);
         }
 
@@ -63,7 +110,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static X86ApiCapture DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedEncoding bits, ExtractTermCode term)
-            => new X86ApiCapture(id, src, bits.ParseInput, bits.Encoded, term);
+            => new X86ApiCapture(id, src, bits.Input, bits.Output, term);
 
         [MethodImpl(Inline)]
         static CapturedOperation capture(Span<byte> buffer, OpIdentity id, MemoryAddress src)
@@ -104,7 +151,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static CaptureOutcome Complete(in ExtractState state, ExtractTermCode tc, MemoryAddress start, MemoryAddress end, int delta)
-            => CaptureOutcome.define(state, (start, (ulong)(end + delta)), tc);
+            => new CaptureOutcome(state, (start, (ulong)(end + delta)), tc);
 
         static CapturedOperation SummarizeParse(Span<byte> buffer, in ExtractState state, OpIdentity id, ExtractTermCode tc, MemoryAddress start, MemoryAddress end, int delta)
         {

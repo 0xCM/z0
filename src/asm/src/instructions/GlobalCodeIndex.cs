@@ -13,24 +13,24 @@ namespace Z0
     {
         EncodedMemoryIndex Memories;
 
-        UriLocationIndex UriLocations;
+        OpUriAddresses UriLocations;
 
-        HostedCodeIndex HostCode;
+        X86PartCodeIndex CodeIndex;
 
         public readonly PartId[] Parts;
 
-        public GlobalCodeIndex(PartId[] parts, EncodedMemoryIndex members, UriLocationIndex memuri, HostedCodeIndex hostcode)
+        public GlobalCodeIndex(PartId[] parts, EncodedMemoryIndex members, OpUriAddresses memuri, X86PartCodeIndex code)
         {
             Parts = parts;
             Memories = members;
             UriLocations = memuri;
-            HostCode = hostcode;
+            CodeIndex = code;
         }
 
         /// <summary>
         /// The number of indexed functions
         /// </summary>
-        public int EntryCount
+        public uint EntryCount
         {
             [MethodImpl(Inline)]
             get => Memories.Count;
@@ -69,7 +69,7 @@ namespace Z0
         public ApiHostUri[] Hosts
         {
             [MethodImpl(Inline)]
-            get => HostCode.Hosts;
+            get => CodeIndex.Hosts;
         }
 
         [MethodImpl(Inline)]
@@ -78,10 +78,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public X86HostIndex CodeSet(ApiHostUri id)
-            => Encoded.index(id, HostCode[id]);
+            => Encoded.index(id, CodeIndex[id]);
 
         [MethodImpl(Inline)]
-        public X86PartIndex CodeSet(PartId id)
+        public X86PartHosts CodeSet(PartId id)
             => Encoded.index(id, Hosts.Map(CodeSet));
 
         public X86ApiCode this[MemoryAddress location]
@@ -96,7 +96,7 @@ namespace Z0
             get => CodeSet(id);
         }
 
-        public X86PartIndex this[PartId id]
+        public X86PartHosts this[PartId id]
         {
             [MethodImpl(Inline)]
             get => CodeSet(id);

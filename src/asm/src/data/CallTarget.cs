@@ -8,13 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     public struct CallTarget
     {
         /// <summary>
         /// The target's identifier
         /// </summary>
-        public string Id;
+        public StringRef Id;
 
         /// <summary>
         /// The target's base address
@@ -36,7 +37,7 @@ namespace Z0
         }
 
         public string Format()
-            => text.concat(Base.Format(), Chars.Colon, Chars.Space, z.ifblank(Id, "target"));
+            => text.concat(Base.Format(), Chars.Colon, Chars.Space, ifempty(Id, "target"));
 
         public override string ToString()
             => Format();

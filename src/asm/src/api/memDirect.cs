@@ -15,6 +15,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static MemDirect memDirect(in Instruction src)
-            => new MemDirect(src.MemoryBase, src.MemoryIndexScale, asm.memDx(src.MemoryDisplacement, (MemDxSize)src.MemoryDisplSize));
+            => new MemDirect(src.MemoryBase, src.MemoryIndexScale, dx(src.MemoryDisplacement, (MemDxSize)src.MemoryDisplSize));
     }
 }

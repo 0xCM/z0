@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct asm
     {
-        public static void update<E,T>(ReadOnlySpan<BinaryCode> src, MemSlotView<E> slots, T dst)
+        public static void update<E,T>(ReadOnlySpan<BinaryCode> src, MemorySlots<E> slots, T dst)
             where E : unmanaged, Enum
         {
             //var slots = asm.slots<E,T>(dst);

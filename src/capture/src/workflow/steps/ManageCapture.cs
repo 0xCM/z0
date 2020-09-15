@@ -55,12 +55,12 @@ namespace Z0
 
             {
                 Wf.Raise(new CapturingParts(Step.Name, State.Parts, Ct));
-                using var manage = new CaptureParts(State, Ct);
+                using var manage = new CaptureParts(State);
                 manage.Run();
             }
 
             {
-                using var step = new EmitImmSpecials(Wf, State.Asm, State.Formatter, State.RoutineDecoder, Wf.Init.TargetArchive.Root, Ct);
+                using var step = new EmitImmSpecials(Wf, State.Asm, State.Formatter, State.RoutineDecoder, Wf.Init.TargetArchive.Root);
                 step.ClearArchive(Parts);
                 step.EmitRefined(Parts);
             }

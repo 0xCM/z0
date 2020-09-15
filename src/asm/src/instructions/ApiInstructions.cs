@@ -97,6 +97,5 @@ namespace Z0
         [MethodImpl(Inline)]
         internal ApiInstructions(ApiInstruction[] src)
             => Data = src;
-
     }
 }

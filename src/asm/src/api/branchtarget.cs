@@ -21,15 +21,15 @@ namespace Z0
             switch(k)
             {
                 case NearBranch16:
-                    return asm.target(BranchTargetKind.Near, BranchTargetSize.Branch16, src.NearBranch16);
+                    return asm.target(BranchTargetKind.Near, BranchTargetWidth.Branch16, src.NearBranch16);
                 case NearBranch32:
-                    return asm.target(BranchTargetKind.Near, BranchTargetSize.Branch32, src.NearBranch32);
+                    return asm.target(BranchTargetKind.Near, BranchTargetWidth.Branch32, src.NearBranch32);
                 case NearBranch64:
-                    return asm.target(BranchTargetKind.Near, BranchTargetSize.Branch64, src.NearBranch64);
+                    return asm.target(BranchTargetKind.Near, BranchTargetWidth.Branch64, src.NearBranch64);
                 case FarBranch16:
-                    return asm.target(BranchTargetKind.Far, BranchTargetSize.Branch16, src.FarBranch16, src.FarBranchSelector);
+                    return asm.target(BranchTargetKind.Far, BranchTargetWidth.Branch16, src.FarBranch16, (Address16)src.FarBranchSelector);
                 case FarBranch32:
-                    return asm.target(BranchTargetKind.Far, BranchTargetSize.Branch32, src.FarBranch32, src.FarBranchSelector);
+                    return asm.target(BranchTargetKind.Far, BranchTargetWidth.Branch32, src.FarBranch32, (Address16)src.FarBranchSelector);
             }
             return AsmBranchTarget.Empty;
         }

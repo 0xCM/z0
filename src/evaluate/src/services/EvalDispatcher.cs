@@ -96,8 +96,8 @@ namespace Z0
         public Pairs<F> FixedPairs<F>(int count, F t = default)
             where F : unmanaged, IDataCell
         {
-            var s1 = Random.FixedStream<F>().Take(count);
-            var s2 = Random.FixedStream<F>().Take(count);
+            var s1 = Random.CellStream<F>().Take(count);
+            var s2 = Random.CellStream<F>().Take(count);
             return s1.Zip(s2).Select(a =>  Tuples.pair(a.First, a.Second)).ToArray();
         }
 

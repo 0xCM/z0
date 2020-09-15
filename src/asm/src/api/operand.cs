@@ -14,6 +14,12 @@ namespace Z0
 
     partial struct asm
     {
+        /// <summary>
+        /// Defines an instruction operand
+        /// </summary>
+        /// <param name="base">The base address</param>
+        /// <param name="fx"></param>
+        /// <param name="index"></param>
         [MethodImpl(Inline), Op]
         public static AsmOperandInfo operand(MemoryAddress @base, in Instruction fx, byte index)
         {
@@ -23,5 +29,6 @@ namespace Z0
             dst.Branch = isBranch(dst.Kind) ? branch(@base, fx, branchTarget(fx,index)) : default;
             return dst;
         }
+
     }
 }

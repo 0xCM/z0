@@ -31,9 +31,9 @@ namespace Z0
             Locations = dict<OpUri,X86ApiCode>();
         }
 
-        public CaptureIndexStatus Status()
+        public GlobalIndexStatus Status()
         {
-            var dst = default(CaptureIndexStatus);
+            var dst = default(GlobalIndexStatus);
             dst.Parts = Parts;
             dst.Hosts = Hosts;
             dst.Addresses = Addresses;
@@ -73,12 +73,12 @@ namespace Z0
             var code = CodeAddress.Values.Select(x => (x.OpUri.Host, Code: x))
                 .Array()
                 .GroupBy(g => g.Host)
-                .Select(x => (new EncodedHost(x.Key, x.Select(y => y.Code).ToArray()))).Array();
+                .Select(x => (new X86HostCode(x.Key, x.Select(y => y.Code).ToArray()))).Array();
 
             return new GlobalCodeIndex(parts,
                    new EncodedMemoryIndex(parts, memories),
-                   new UriLocationIndex(parts, locations),
-                   new HostedCodeIndex(parts, code.Select(x => (x.Host, x)).ToDictionary()));
+                   new OpUriAddresses(parts, locations),
+                   new X86PartCodeIndex(parts, code.Select(x => (x.Host, x)).ToDictionary()));
         }
 
         public Triple<bool> Include(in X86ApiCode src)

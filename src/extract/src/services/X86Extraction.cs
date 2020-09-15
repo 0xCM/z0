@@ -36,7 +36,6 @@ namespace Z0
             return new X86Code(src, sys.array(target.Slice(0,length)));
         }
 
-
         [MethodImpl(Inline), Op]
         public static X86ApiExtract extract(in ApiMember src, Span<byte> buffer)
         {

@@ -36,10 +36,10 @@ namespace Z0.Asm
             => () => FxFlow(src);
 
         [Op]
-        public static AsmFxCode FxCode(Iced.Instruction src)
+        public static AsmSpecifier FxCode(Iced.Instruction src)
         {
             var opcode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
-            return new AsmFxCode(opcode.ToInstructionString(), opcode.ToOpCodeString());
+            return new AsmSpecifier(opcode.ToInstructionString(), opcode.ToOpCodeString());
         }
 
         [MethodImpl(Inline), Op]

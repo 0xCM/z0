@@ -11,19 +11,19 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct HostAsmProcessor : IAsmDataProcessor<AsmHandlerKind,HostAsmFx>
+    public readonly struct HostAsmProcessor : IAsmDataProcessor<AsmHandlerKind,ApiHostRoutines>
     {
         public IWfShell Wf {get;}
 
-        public HostAsmFx Source {get;}
+        public ApiHostRoutines Source {get;}
 
-        public IWfDataBroker<AsmHandlerKind,HostAsmFx> Broker {get;}
+        public IWfDataBroker<AsmHandlerKind,ApiHostRoutines> Broker {get;}
 
         [MethodImpl(Inline)]
-        public HostAsmProcessor(IWfShell context, HostAsmFx src)
+        public HostAsmProcessor(IWfShell context, ApiHostRoutines src)
         {
             Wf = context;
-            Broker = BitBrokers.broker64<AsmHandlerKind,HostAsmFx>();
+            Broker = BitBrokers.broker64<AsmHandlerKind,ApiHostRoutines>();
             Source = src;
             (this as IWfDataProcessor).Connect();
         }
@@ -42,7 +42,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void Process(HostAsmFx src)
+        public void Process(ApiHostRoutines src)
         {
             var processor = AsmProcessors.create(Wf);
             for(var j=0; j<Source.RoutineCount; j++)

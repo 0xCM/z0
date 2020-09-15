@@ -91,7 +91,7 @@ namespace Z0
             where F : IFunc<T0,T1,T2,R>
             where G : IFunc<T0,T1,T2,R>
         {
-            var casename = ApiUriBuilder.TestCase(Context.HostType, $"{g.Id}_span");
+            var casename = ApiUri.TestCase(Context.HostType, $"{g.Id}_span");
             var succeeded = true;
             var count = RepCount;
             var clock = counter();

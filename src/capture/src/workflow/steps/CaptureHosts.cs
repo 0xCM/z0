@@ -40,7 +40,7 @@ namespace Z0
         {
             Wf.Raise(new CapturingHosts(Hosts, Ct));
 
-            using var step = new ExtractMembers(State, Ct);
+            using var step = new ExtractMembers(Wf);
             var extracts = step.Extract(Hosts);
             if(extracts.Length == 0)
                 return;
@@ -55,7 +55,7 @@ namespace Z0
 
         void Store(ApiHostUri host, X86ApiExtract[] extracts, IPartCapturePaths dst)
         {
-            using var step = new EmitCaptureArtifacts(State, host, extracts, dst, Ct);
+            using var step = new EmitCaptureArtifacts(State, host, extracts, dst);
             step.Run();
         }
 

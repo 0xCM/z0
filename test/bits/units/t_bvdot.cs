@@ -275,7 +275,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check, ApiUriBuilder.TestCase(GetType(),opname));
+            CheckAction(check, ApiUri.TestCase(GetType(),opname));
         }
     }
 }

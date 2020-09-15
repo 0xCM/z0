@@ -14,20 +14,20 @@ namespace Z0
 
     partial struct asm
     {
-        [Op]
-        public static SegmentPrefix segPrefix(Instruction fx, byte index)
+        [MethodImpl(Inline), Op]
+        public static IceRegister segprefix(Instruction src, int index)
         {
-            var k = kind(fx, index);
-            switch(k)
+            switch(kind(src,(byte)index))
             {
                 case Memory:
                 case Memory64:
                 case MemorySegSI:
                 case MemorySegESI:
                 case MemorySegRSI:
-                    return new SegmentPrefix(fx.MemorySegment);
+                    return src.MemorySegment;
+                default:
+                    return 0;
             }
-            return default;
         }
-   }
+    }
 }

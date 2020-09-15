@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     /// <summary>
     /// Describes the outcome of a native capture operation
     /// </summary>
@@ -30,16 +30,12 @@ namespace Z0
         public readonly ExtractTermCode TermCode;
 
         [MethodImpl(Inline)]
-        public static CaptureOutcome define(in ExtractState state, MemoryRange source, ExtractTermCode cc)
-            => new CaptureOutcome(state, source, cc);
-
-        [MethodImpl(Inline)]
         public CaptureOutcome(in ExtractState state, MemoryRange range, ExtractTermCode cc)
-        {   
+        {
             State = state;
             Range = range;
             TermCode = cc;
-        }         
+        }
 
         public ulong Start
         {
@@ -62,10 +58,10 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => End - Start == 0 && TermCode == ExtractTermCode.None;        
+            get => End - Start == 0 && TermCode == ExtractTermCode.None;
         }
 
-        public static CaptureOutcome Empty 
+        public static CaptureOutcome Empty
             => new CaptureOutcome(ExtractState.Empty, MemoryRange.Empty, 0);
     }
 }

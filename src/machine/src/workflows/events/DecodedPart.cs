@@ -23,7 +23,7 @@ namespace Z0
 
         public WfActor Actor {get;}
 
-        public PartAsmInstructions Instructions {get;}
+        public ApiPartRoutines Instructions {get;}
 
         public PartId PartId {get;}
 
@@ -32,7 +32,7 @@ namespace Z0
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public DecodedPart(string actor, PartAsmInstructions src, CorrelationToken ct, FlairKind flair = Ran)
+        public DecodedPart(string actor, ApiPartRoutines src, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = WfEventId.define(EventName, ct);
             Actor = actor;

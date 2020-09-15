@@ -36,10 +36,10 @@ namespace Z0
             get => Data.Values;
         }
 
-        public int Count
+        public uint Count
         {
             [MethodImpl(Inline)]
-            get => Data.Count;
+            get => (uint)Data.Count;
         }
 
         public X86ApiCode this[MemoryAddress src]

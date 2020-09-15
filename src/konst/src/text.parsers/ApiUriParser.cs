@@ -20,7 +20,7 @@ namespace Z0
 
         public static ParseResult<ApiHostUri> host(FileName src)
         {
-            var input = src.WithoutExtension.Name.Replace(Chars.Dot, UriDelimiters.PathSep);
+            var input = src.WithoutExtension.Name.Replace(Chars.Dot, UriDelimiters.UriPathSep);
             return host(input);
         }
 
@@ -30,7 +30,7 @@ namespace Z0
             if(text.blank(src))
                 return failure;
 
-            var parts = src.SplitClean(UriDelimiters.PathSep);
+            var parts = src.SplitClean(UriDelimiters.UriPathSep);
             var count = parts.Length;
             if(count != 2)
                 return failure.WithReason(text.concat("Component count ", count," != ", 2));
@@ -48,20 +48,20 @@ namespace Z0
 
         public static ParseResult<OpUri> operation(string src)
         {
-            var parts = src.SplitClean(EOS);
+            var parts = src.SplitClean(UriEndOfScheme);
             var msg = string.Empty;
             if(parts.Length != 2)
-                return unparsed<OpUri>(src, $"Splitting on {EOS} produced {parts.Length} pieces");
+                return unparsed<OpUri>(src, $"Splitting on {UriEndOfScheme} produced {parts.Length} pieces");
 
             var scheme = ApiUriParser.scheme(parts[0]);
             var rest = parts[1];
-            var pathText = rest.TakeBefore(QueryMarker);
+            var pathText = rest.TakeBefore(UriQuery);
             var path = host(pathText);
             if(path.Failed)
                 return ParseResult.Fail<OpUri>(src, path.Reason);
 
-            var id = OpIdentityParser.parse(rest.TakeAfter(Fragment));
-            var group = rest.Between(QueryMarker,Fragment);
+            var id = OpIdentityParser.parse(rest.TakeAfter(UriFragment));
+            var group = rest.Between(UriQuery,UriFragment);
             var uri = OpUri.Define(scheme, path.Value, group, id);
             return parsed(src, uri);
         }

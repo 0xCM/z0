@@ -20,6 +20,10 @@ namespace Z0
 
         public static W W => default;
 
+        [MethodImpl(Inline)]
+        public static implicit operator MemoryAddress(Address16 src)
+            => src.Location;
+
         public bool IsEmpty
         {
              [MethodImpl(Inline)]

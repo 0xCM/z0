@@ -40,7 +40,7 @@ namespace Z0.Asm
         public string FormattedInstruction
             => Instruction.FormattedInstruction;
 
-        public AsmFxCode InstructionCode
+        public AsmSpecifier InstructionCode
             => Instruction.InstructionCode;
 
         public MemoryAddress IP

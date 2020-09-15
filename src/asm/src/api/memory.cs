@@ -11,11 +11,8 @@ namespace Z0
 
     using static Konst;
 
-
-
     partial struct asm
     {
-
         public static RegisterKind convert(IceRegister src, out RegisterKind dst)
         {
             dst = default;
@@ -27,19 +24,18 @@ namespace Z0
         {
             var dst = new AsmMemory();
             dst.MemoryBase = convert(memBase(src,index), out RegisterKind _);
-            dst.MemoryIndex = convert(memIdx(src,index), out RegisterKind _);
+            dst.MemoryIndex = convert(memidx(src,index), out RegisterKind _);
             dst.MemorySize = memSize(src,index);
             dst.MemoryIndexScale = memScale(src,index);
-            dst.MemDx = memDx(memDx(src,index), memDxSize(src,index));
+            dst.Displacement = dx(dxvalue(src,index), dxsize(src,index));
             dst.MemorySegment = convert(memSeg(src,index), out RegisterKind _);
-            dst.SegmentPrefix = convert(regSegPrefix(src,index), out RegisterKind _);
+            dst.SegmentPrefix = convert(segprefix(src,index), out RegisterKind _);
             dst.IsStackInstruction = src.IsStackInstruction;
             dst.StackPointerIncrement = src.StackPointerIncrement;
             dst.IsIPRelativeMemoryOperand = src.IsIPRelativeMemoryOperand;
             dst.IPRelativeMemoryAddress = src.IPRelativeMemoryAddress;
             return dst;
         }
-
 
         /// <summary>
         /// Extracts memory information, if applicable, from an instruction operand
@@ -51,12 +47,12 @@ namespace Z0
         {
             var dst = default(AsmFxMemory);
             dst.MemoryBase = memBase(src,index);
-            dst.MemoryIndex = memIdx(src,index);
+            dst.MemoryIndex = memidx(src,index);
             dst.MemorySize = memSize(src,index);
             dst.MemoryIndexScale = memScale(src,index);
-            dst.MemDx = memDx(memDx(src,index), memDxSize(src,index));
+            dst.MemDx = dx(dxvalue(src,index), dxsize(src,index));
             dst.MemorySegment = memSeg(src,index);
-            dst.SegmentPrefix = regSegPrefix(src,index);
+            dst.SegmentPrefix = segprefix(src,index);
             dst.IsStackInstruction = src.IsStackInstruction;
             dst.StackPointerIncrement = src.StackPointerIncrement;
             dst.IsIPRelativeMemoryOperand = src.IsIPRelativeMemoryOperand;

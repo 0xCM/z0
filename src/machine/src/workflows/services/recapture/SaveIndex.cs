@@ -42,7 +42,7 @@ namespace Z0
                 var accessor = captured.Accessor;
                 var uri = OpUri.hex(host, accessor.Member.Name, captured.Code.Code.MemberId);
 
-                var moves = AsmAnalyzer.moves(code.Function);
+                var moves = AsmAnalyzer.moves(code.Routine);
                 var movecount = moves.Length;
                 for(var j=0u; j<movecount; j++)
                 {

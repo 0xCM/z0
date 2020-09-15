@@ -34,7 +34,7 @@ namespace Z0
             where F : IFunc<T,R>
             where G : IFunc<T,R>
         {
-            var casename = ApiUriBuilder.TestCase(Context.HostType, $"{g.Id}_span");
+            var casename = ApiUri.TestCase(Context.HostType, $"{g.Id}_span");
             var succeeded = true;
             var clock = counter();
 

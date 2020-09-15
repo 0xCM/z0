@@ -40,7 +40,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static HostAsmProcessor hosts(IWfShell wf, HostAsmFx src)
+        public static HostAsmProcessor hosts(IWfShell wf, ApiHostRoutines src)
             => new HostAsmProcessor(wf, src);
 
         [MethodImpl(Inline), Op]

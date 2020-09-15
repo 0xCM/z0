@@ -34,7 +34,7 @@ namespace Z0
 
                 clock.Stop();
 
-                var hosturi = ApiUriBuilder.HostUri(host);
+                var hosturi = ApiUri.HostUri(host);
                 term.print(PostUnit(hosturi, clock.Time, tsStart, Time.now()));
 
             }

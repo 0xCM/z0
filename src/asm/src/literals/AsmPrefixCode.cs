@@ -118,23 +118,4 @@ namespace Z0
         Token=x0d
     }
 
-    /*
-#define IMAGE_REL_AMD64_ABSOLUTE        0x0000  // Reference is absolute, no relocation is necessary
-#define IMAGE_REL_AMD64_ADDR64          0x0001  // 64-bit address (VA).
-#define IMAGE_REL_AMD64_ADDR32          0x0002  // 32-bit address (VA).
-#define IMAGE_REL_AMD64_ADDR32NB        0x0003  // 32-bit address w/o image base (RVA).
-#define IMAGE_REL_AMD64_REL32           0x0004  // 32-bit relative address from byte following reloc
-#define IMAGE_REL_AMD64_REL32_1         0x0005  // 32-bit relative address from byte distance 1 from reloc
-#define IMAGE_REL_AMD64_REL32_2         0x0006  // 32-bit relative address from byte distance 2 from reloc
-#define IMAGE_REL_AMD64_REL32_3         0x0007  // 32-bit relative address from byte distance 3 from reloc
-#define IMAGE_REL_AMD64_REL32_4         0x0008  // 32-bit relative address from byte distance 4 from reloc
-#define IMAGE_REL_AMD64_REL32_5         0x0009  // 32-bit relative address from byte distance 5 from reloc
-#define IMAGE_REL_AMD64_SECTION         0x000A  // Section index
-#define IMAGE_REL_AMD64_SECREL          0x000B  // 32 bit offset from base of section containing target
-#define IMAGE_REL_AMD64_SECREL7         0x000C  // 7 bit unsigned offset from base of section containing target
-#define IMAGE_REL_AMD64_TOKEN           0x000D  // 32 bit metadata token
-
-
-    */
-
 }

@@ -18,11 +18,11 @@ namespace Z0
         /// </summary>
         /// <param name="src">The summary over which to compute count statistics</param>
         [MethodImpl(Inline), Op]
-        public static FarCallCounts counts(in FarCallSummary src)
+        public static FarCallCounts counts(in AsmCallSummary src)
             => new FarCallCounts(
-                src.FarCallTargets.Length, 
-                src.HostBases.Length, 
-                src.HostedReceivers.Length, 
+                src.FarCallTargets.Length,
+                src.HostBases.Length,
+                src.HostedReceivers.Length,
                 src.UnhostedReceivers.Length
                     );
     }

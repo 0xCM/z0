@@ -32,16 +32,13 @@ namespace Z0.Asm
                 let block = asm.block(src.UriHex, i, src.TermCode)
                 select AsmRoutineFactory.routine(src.OpUri, src.Method.Signature().Format(), block);
 
-        public Option<AsmRoutine> Decode(X86MemberRefinement src)
-            =>  from i in Decode(src.Encoded) select AsmRoutineFactory.routine(src,i);
-
         public Option<AsmFxList> Decode(X86Code src)
             => Decode(src.Encoded, src.Base).TryMap(x => asm.list(x, src));
 
         public Option<AsmInstructions> Decode(X86UriHex src)
             => Decode(src.Encoded, src.Base);
 
-        public Option<AsmRoutine> Decode(X86MemberRefinement src, Action<Asm.Instruction> f)
+        public Option<AsmRoutine> Decode(X86ApiCapture src, Action<Asm.Instruction> f)
             => Decode(src.Encoded,f).TryMap(x => AsmRoutineFactory.routine(src,x));
 
         public Option<AsmFxList> Decode(X86Code src, Action<Asm.Instruction> f)

@@ -3,72 +3,72 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Collections;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     using static Konst;
     using static z;
 
     /// <summary>
     /// Defines an *unbased* sequence of instructions
-    /// </summary>         
-    public readonly struct AsmInstructions : 
-        IEnumerable<Instruction>, 
-        IEncoded<AsmInstructions,BinaryCode>, 
+    /// </summary>
+    public readonly struct AsmInstructions :
+        IEnumerable<Instruction>,
+        IEncoded<AsmInstructions,BinaryCode>,
         IEquatable<AsmInstructions>
     {
-        readonly Instruction[] Fx;
-        
+        readonly Instruction[] Data;
+
         public BinaryCode Encoded {get;}
 
-        public static AsmInstructions Empty 
+        public static AsmInstructions Empty
             => Create(array<Instruction>(), BinaryCode.Empty);
-        
+
         [MethodImpl(Inline)]
         public static AsmInstructions Create(Instruction[] src, BinaryCode data)
             => new AsmInstructions(src, data);
 
-        public ref readonly Instruction this[int index]  
-        { 
-            [MethodImpl(Inline)] 
-            get => ref Fx[index]; 
+        public ref readonly Instruction this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
         }
-        
-        public int Length 
-        { 
-            [MethodImpl(Inline)] 
-            get => Fx.Length; 
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => Data.Length;
         }
 
         public int Count
         {
-            [MethodImpl(Inline)] 
-            get => Fx.Length;
+            [MethodImpl(Inline)]
+            get => Data.Length;
         }
 
-        public bool IsEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.IsEmpty; 
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.IsEmpty;
         }
 
-        public bool IsNonEmpty 
-        { 
-            [MethodImpl(Inline)] 
-            get => Encoded.IsNonEmpty; 
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.IsNonEmpty;
         }
 
         public static implicit operator Instruction[](AsmInstructions src)
-            => src.Fx;
+            => src.Data;
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         internal AsmInstructions(Instruction[] src, BinaryCode data)
         {
-            Fx = src;
+            Data = src;
             Encoded = data;
         }
 
@@ -77,12 +77,12 @@ namespace Z0.Asm
             => Encoded.Equals(src.Encoded);
         public string Format()
             => Encoded.Format();
-        
+
         public override string ToString()
-            => Format();       
+            => Format();
         IEnumerator<Instruction> IEnumerable<Instruction>.GetEnumerator()
-            => Fx.AsEnumerable().GetEnumerator();        
+            => Data.AsEnumerable().GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator()
-            => Fx.AsEnumerable().GetEnumerator();        
+            => Data.AsEnumerable().GetEnumerator();
     }
 }

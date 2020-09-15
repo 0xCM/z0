@@ -45,15 +45,15 @@ namespace Z0
 
             try
             {
-                using var extract = new ExtractHostMembers(State, host, Target, Ct);
+                using var extract = new ExtractHostMembers(Wf, host, Target);
                 extract.Run();
 
-                using var emit = new EmitCaptureArtifacts(State, host.Uri, extract.Extracts, Target, Ct);
+                using var emit = new EmitCaptureArtifacts(State, host.Uri, extract.Extracts, Target);
                 emit.Run();
             }
             catch(Exception e)
             {
-                State.Error(StepId,e);
+                Wf.Error(StepId,e);
             }
 
             Wf.Ran(StepId);

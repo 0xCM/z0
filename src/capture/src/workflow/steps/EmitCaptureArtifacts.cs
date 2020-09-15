@@ -41,11 +41,11 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        public EmitCaptureArtifacts(IWfCaptureState state, ApiHostUri src, X86ApiExtract[] extracts, IPartCapturePaths dst, CorrelationToken ct)
+        public EmitCaptureArtifacts(IWfCaptureState state, ApiHostUri src, X86ApiExtract[] extracts, IPartCapturePaths dst)
         {
             State = state;
             Wf = state.Wf;
-            Ct = ct;
+            Ct = Wf.Ct;
             HostUri = src;
             Target = HostCaptureArchive.create(dst.ArchiveRoot, HostUri);
             Extracts = extracts;
@@ -54,8 +54,7 @@ namespace Z0
             HexPath = FS.path(Target.HostX86Path.Name);
             AsmPath = Target.HostAsmPath;
             CilDataPath = Target.CilPath;
-            //Parsed = new X86MemberRefinement[0]{};
-            Parser = ExtractParsers.member(X86Extraction.DefaultBufferLength);
+            Parser = ExtractParsers.member();
             ParsedMembers = default;
             Wf.Created(StepId);
         }

@@ -38,7 +38,7 @@ namespace Z0
         /// Initializes a capture state
         /// </summary>
         /// <param name="id">The exraction subject identifier</param>
-        /// <param name="index">A zero-based and capture-relative index that identifes a state in the context of a capture workflow</param>
+        /// <param name="index">A zero-based and capture-relative index that identifies a state in the context of a capture workflow</param>
         /// <param name="location">The memory location from which data was extracted</param>
         /// <param name="captured">The extracted data</param>
         [MethodImpl(Inline)]
@@ -59,13 +59,13 @@ namespace Z0
         public string Format()
             => text.concat(Index.FormatAsmHex(4), Space, Address.Format(), Space, Captured.FormatHex());
 
-        public override string ToString() 
+        public override string ToString()
             => Format();
 
         /// <summary>
         /// The empty state
         /// </summary>
-        public static ExtractState Empty 
+        public static ExtractState Empty
             => default;
     }
 }

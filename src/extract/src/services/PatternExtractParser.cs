@@ -67,30 +67,30 @@ namespace Z0
             }
         }
 
-        public ExtractParseResult Parse(in X86ApiExtract src, uint seq)
-        {
-            try
-            {
-                var parser = Parser;
-                var status = parser.Parse(src.Encoded);
-                var term = status.HasFailed() ? ExtractTermCode.Fail : parser.Result.ToTermCode();
-                if(term != ExtractTermCode.Fail)
-                {
-                    var code = Locate(src.Encoded.Base, parser.Parsed, term == ExtractTermCode.CTC_Zx7 ? Zx7Cut : 0);
+        // public ExtractParseResult Parse(in X86ApiExtract src, uint seq)
+        // {
+        //     try
+        //     {
+        //         var parser = Parser;
+        //         var status = parser.Parse(src.Encoded);
+        //         var term = status.HasFailed() ? ExtractTermCode.Fail : parser.Result.ToTermCode();
+        //         if(term != ExtractTermCode.Fail)
+        //         {
+        //             var code = Locate(src.Encoded.Base, parser.Parsed, term == ExtractTermCode.CTC_Zx7 ? Zx7Cut : 0);
 
-                    var data = new X86ApiMember(src.Member, new X86UriHex(code.Base, src.OpUri, code), (uint)seq, term);
-                    return new ExtractParseResult(new X86MemberRefinement(src, (int)seq, term, code));
-                }
-                else
-                    return ExtractParseResult.FromFailure(new ExtractParseFailure(src, (int)seq, term));
-            }
-            catch(Exception e)
-            {
-                var msg = AppMsg.colorize($"{src.Member.OpUri} extract parse FAIL: {e}", FlairKind.Warning);
-                term.print(msg);
-                return ExtractParseResult.FromFailure(new ExtractParseFailure(src, (int)seq, ExtractTermCode.Fail));
-            }
-        }
+        //             var data = new X86ApiMember(src.Member, new X86UriHex(code.Base, src.OpUri, code), (uint)seq, term);
+        //             return new ExtractParseResult(new X86MemberRefinement(src, (int)seq, term, code));
+        //         }
+        //         else
+        //             return ExtractParseResult.FromFailure(new ExtractParseFailure(src, (int)seq, term));
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         var msg = AppMsg.colorize($"{src.Member.OpUri} extract parse FAIL: {e}", FlairKind.Warning);
+        //         term.print(msg);
+        //         return ExtractParseResult.FromFailure(new ExtractParseFailure(src, (int)seq, ExtractTermCode.Fail));
+        //     }
+        // }
 
         public Outcome<X86ApiMember> ParseMember(in X86ApiExtract src, uint seq)
         {
@@ -130,15 +130,6 @@ namespace Z0
                     seek(dst,i) = X86ApiMember.Empty;
             }
             return buffer;
-        }
-
-        public ExtractParseResults Parse(X86ApiExtract[] src)
-        {
-            var parsed = list<X86MemberRefinement>(src.Length);
-            var failed = list<ExtractParseFailure>();
-            for(var i=0u; i<src.Length; i++)
-                Parse(src[i], i).OnResult(f => failed.Add(f), p => parsed.Add(p));
-            return (failed.ToArray(), parsed.ToArray());
         }
     }
 }

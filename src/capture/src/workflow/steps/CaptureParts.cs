@@ -27,12 +27,12 @@ namespace Z0
         readonly ICaptureContext Context;
 
         [MethodImpl(Inline)]
-        public CaptureParts(WfCaptureState state, CorrelationToken ct)
+        public CaptureParts(WfCaptureState state)
         {
             State = state;
             Wf = state.Wf;
+            Ct = Wf.Ct;
             Config = State.Config;
-            Ct = ct;
             Context = State.CWf.Context;
             Wf.Created(StepId);
         }
@@ -109,12 +109,12 @@ namespace Z0
 
         void Capture(ApiDataTypes src, IPartCapturePaths dst)
         {
-            using var step = new ExtractMembers(State, Ct);
+            using var step = new ExtractMembers(Wf);
             var extracted = @readonly(step.Extract(src).GroupBy(x => x.Host).Select(x => kvp(x.Key, x.Array())).Array());
             for(var i=0; i<extracted.Length; i++)
             {
                 ref readonly var x = ref skip(extracted,i);
-                using var emit = new EmitCaptureArtifacts(State, x.Key, x.Value, dst, Ct);
+                using var emit = new EmitCaptureArtifacts(State, x.Key, x.Value, dst);
                 emit.Run();
             }
         }

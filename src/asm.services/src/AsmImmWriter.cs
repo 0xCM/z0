@@ -67,8 +67,6 @@ namespace Z0.Asm
             return dst;
         }
 
-        static ReadOnlySpan<byte> X86TableWidths => new byte[3]{16,80,80};
-
         public Option<FilePath> SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append)
         {
             var path = HostArchive.HexImmPath(Host.Owner, Host, id);

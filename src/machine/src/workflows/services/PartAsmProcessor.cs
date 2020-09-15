@@ -11,25 +11,25 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct PartAsmProcessor : IAsmDataProcessor<AsmHandlerKind,PartAsmInstructions>
+    public readonly struct PartAsmProcessor : IAsmDataProcessor<AsmHandlerKind,ApiPartRoutines>
     {
         public IWfShell Wf {get;}
 
-        readonly BitBroker<AsmHandlerKind,PartAsmInstructions> broker;
+        readonly BitBroker<AsmHandlerKind,ApiPartRoutines> broker;
 
-        public IWfDataBroker<AsmHandlerKind,PartAsmInstructions> Broker
+        public IWfDataBroker<AsmHandlerKind,ApiPartRoutines> Broker
             => broker;
 
         [MethodImpl(Inline)]
         public PartAsmProcessor(IWfShell wf)
         {
             Wf = wf;
-            broker = BitBrokers.broker64<AsmHandlerKind,PartAsmInstructions>();
+            broker = BitBrokers.broker64<AsmHandlerKind,ApiPartRoutines>();
             (this as IWfDataProcessor).Connect();
         }
 
         [MethodImpl(Inline)]
-        public void Process(PartAsmInstructions src)
+        public void Process(ApiPartRoutines src)
         {
             for(var i=0; i<src.Length; i++)
                 AsmProcessors.hosts(Wf, src[i]).Process();

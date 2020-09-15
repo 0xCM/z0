@@ -16,9 +16,9 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
-        readonly PartAsmInstructions Source;
+        readonly ApiPartRoutines Source;
 
-        public ProcessInstructions(IWfShell wf, PartAsmInstructions src)
+        public ProcessInstructions(IWfShell wf, ApiPartRoutines src)
         {
             Wf = wf;
             Source = src;

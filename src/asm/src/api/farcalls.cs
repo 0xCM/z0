@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="hosted">Base addresses of api host functions that are targets of a far call</param>
         /// <param name="unhosted">Far call targets that are not defined by an api host</param>
         [MethodImpl(Inline), Op]
-        public static FarCallSummary farcalls(MemoryAddress[] targets, MemoryAddress[] bases, MemoryAddress[] hosted, MemoryAddress[] unhosted)
-            => new FarCallSummary(targets, bases, hosted, unhosted);
+        public static AsmCallSummary farcalls(MemoryAddress[] targets, MemoryAddress[] bases, MemoryAddress[] hosted, MemoryAddress[] unhosted)
+            => new AsmCallSummary(targets, bases, hosted, unhosted);
     }
 }

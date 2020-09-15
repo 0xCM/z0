@@ -27,7 +27,7 @@ namespace Z0
 
         public X86ApiExtract[] Read(FilePath src)
         {
-            var report = ExtractReport.Load(src);
+            var report = MemberExtractReport.Load(src);
             if(report.IsNonEmpty)
             {
                 var uri = report[0].Uri.Host;
@@ -43,7 +43,7 @@ namespace Z0
             return default;
         }
 
-        X86ApiExtract[] CreateExtracts(IApiHost host, ExtractRecord[] records)
+        X86ApiExtract[] CreateExtracts(IApiHost host, MemberExtractRow[] records)
         {
             var data = new X86ApiExtract[records.Length];
             var index = IndexApi(MemberLocator.locate(host));

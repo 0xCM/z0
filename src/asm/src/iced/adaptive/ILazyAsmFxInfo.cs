@@ -16,7 +16,7 @@ namespace Z0.Asm
         /// <summary>
         /// Encapsulates the result of ToInstructionCodeString() and ToInstructionString()
         /// </summary>
-        AsmFxCode InstructionCode {get;}
+        AsmSpecifier InstructionCode {get;}
 
         //
         // Summary:

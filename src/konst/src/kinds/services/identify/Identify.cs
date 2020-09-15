@@ -18,7 +18,7 @@ namespace Z0
     using ID = NumericTypeId;
 
     public partial class Identify
-    {        
+    {
         /// <summary>
         /// Computes the primal types identified by a specified kind
         /// </summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The source type</param>
         [MethodImpl(Inline)]
         public static PrimalIdentity primal(Type src)
-            => src.IsSystemDefined() ? 
+            => src.IsSystemDefined() ?
                (NumericKinds.test(src)
                ? PrimalIdentity.Define(src.NumericKind(), src.SystemKeyword())
                : PrimalIdentity.Define(src.SystemKeyword())
@@ -53,7 +53,7 @@ namespace Z0
         /// Defines an 8-bit immediate suffix predicated on an immediate value
         /// </summary>
         /// <param name="imm8">The source immediate</param>
-        public static string Imm8Suffix(byte imm8)            
+        public static string Imm8Suffix(byte imm8)
             => $"{IDI.SuffixSep}{IDI.Imm}{imm8}";
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
                 return attrib.Value.GroupName;
         }
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static PartId OwningPart(Type host)
             => host.Assembly.Id();
 
@@ -77,7 +77,7 @@ namespace Z0
         /// Produces the formatted identifier of the declaring assembly
         /// </summary>
         /// <param name="host">The source type</param>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static string OwningPartText(Type host)
             => OwningPart(host).Format();
 
@@ -86,25 +86,25 @@ namespace Z0
         /// </summary>
         /// <param name="f">The function</param>
         public static string TestCaseText(Type host, IFunc f)
-            => $"{Identify.OwningPartText(host)}{PathSep}{host.Name}{PathSep}{f.Id}";
+            => $"{Identify.OwningPartText(host)}{UriPathSep}{host.Name}{UriPathSep}{f.Id}";
 
         /// <summary>
         /// Produces an identifier of the form {owner}/{host} where owner is the formatted identifier of the declaring assembly and host is the name of the type
         /// </summary>
         /// <param name="host">The source type</param>
         public static string HostUriText(Type host)
-            => $"{Identify.OwningPartText(host)}{PathSep}{host.Name}";
+            => $"{Identify.OwningPartText(host)}{UriPathSep}{host.Name}";
 
-        static ConcurrentDictionary<NumericKind, HashSet<NumericKind>> NumericKindSets {get;}       
+        static ConcurrentDictionary<NumericKind, HashSet<NumericKind>> NumericKindSets {get;}
             = new ConcurrentDictionary<NumericKind, HashSet<NumericKind>>();
 
-        static ConcurrentDictionary<NumericKind, HashSet<Type>> NumericTypeSets {get;}       
-            = new ConcurrentDictionary<NumericKind, HashSet<Type>>();                 
+        static ConcurrentDictionary<NumericKind, HashSet<Type>> NumericTypeSets {get;}
+            = new ConcurrentDictionary<NumericKind, HashSet<Type>>();
 
         static HashSet<Type> CreateTypeSet(NumericKind k)
-            => GetNumericKindSet(k).Select(NumericKinds.type).ToHashSet();         
+            => GetNumericKindSet(k).Select(NumericKinds.type).ToHashSet();
 
-        static HashSet<NumericKind> CreateKindSet(NumericKind k)       
+        static HashSet<NumericKind> CreateKindSet(NumericKind k)
         {
             var dst = new HashSet<NumericKind>();
             if(NumericKinds.contains(k, ID.U8))
@@ -136,7 +136,7 @@ namespace Z0
 
             if(NumericKinds.contains(k, ID.F64))
                 dst.Add(NK.F64);
-            
+
             return dst;
         }
 
@@ -146,6 +146,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static HashSet<Type> GetNumericTypeSet(NumericKind kind)
-            => NumericTypeSets.GetOrAdd(kind, CreateTypeSet); 
+            => NumericTypeSets.GetOrAdd(kind, CreateTypeSet);
     }
 }

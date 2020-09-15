@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    using System.Linq;
-    using System.Collections.Generic;
- 
+
     partial class XTend
     {
         /// <summary>
@@ -18,7 +16,6 @@ namespace Z0
         /// <param name="w">The vector width</param>
         public static MethodInfo[] VectorizedDirect(this MethodInfo[] src, W128 w)
             => src.NonGeneric().Where(m => m.IsVectorized(w));
-
 
         /// <summary>
         /// Selects nongeneric source methods that have at least one 256-bit vector parameter

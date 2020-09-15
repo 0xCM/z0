@@ -29,9 +29,9 @@ namespace Z0
 
         readonly FilePath Target;
 
-        ExtractReport Artifact;
+        MemberExtractReport Artifact;
 
-        public ExtractReport Report
+        public MemberExtractReport Report
             => Artifact;
 
         [MethodImpl(Inline)]
@@ -56,7 +56,7 @@ namespace Z0
         {
             try
             {
-                Artifact = ExtractReport.Create(Host, Source);
+                Artifact = MemberExtractReport.Create(Host, Source);
                 Wf.Raise(new ExtractReportCreated(StepId, Host, Artifact.RecordCount, Ct));
                 var result = Report.Save(Target);
                 if(result)

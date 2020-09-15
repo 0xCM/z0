@@ -21,8 +21,8 @@ namespace Z0
             => new PatternExtractParser(buffer);
 
         [MethodImpl(Inline), Op]
-        public static PatternExtractParser member(ByteSize bufferlen)
-            => new PatternExtractParser(sys.alloc<byte>(bufferlen));
+        public static PatternExtractParser member(uint size = X86Extraction.DefaultBufferLength)
+            => new PatternExtractParser(sys.alloc<byte>(size));
 
         [MethodImpl(Inline), Op]
         public static ParseResult<BinaryCode,X86Code> parse(in X86Code src, in BinaryCode buffer)

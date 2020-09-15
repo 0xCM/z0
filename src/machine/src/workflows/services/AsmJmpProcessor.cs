@@ -43,7 +43,7 @@ namespace Z0
 
         public IWfShell Wf {get;}
 
-        public readonly PartAsmInstructions Source;
+        public readonly ApiPartRoutines Source;
 
         public readonly FilePath Target;
 
@@ -64,7 +64,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public AsmJmpProcessor(IWfShell wf, PartAsmInstructions src,  bool connect = true)
+        public AsmJmpProcessor(IWfShell wf, ApiPartRoutines src,  bool connect = true)
         {
             Wf = wf;
             broker = AsmBrokers.jmp();

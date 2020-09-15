@@ -216,16 +216,22 @@ namespace Z0
         [FormatPattern("{0} -> {1}")]
         public const string ArrowAxB = "{0} -> {1}";
 
-        const string PageBreak10 = "----------";
+        [StringLiteral(PageBreak20)]
+        public const string PageBreak10 = "----------";
 
+        [StringLiteral(PageBreak20)]
         public const string PageBreak20 = PageBreak10 + PageBreak10;
 
+        [StringLiteral(PageBreak40)]
         public const string PageBreak40 = PageBreak20 + PageBreak20;
 
+        [StringLiteral(PageBreak80)]
         public const string PageBreak80 = PageBreak40 + PageBreak40;
 
+        [StringLiteral(PageBreak120)]
         public const string PageBreak120 = PageBreak80 + PageBreak40;
 
+        [StringLiteral(PageBreak160)]
         public const string PageBreak160 = PageBreak80 + PageBreak80;
     }
 }
