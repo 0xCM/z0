@@ -25,7 +25,7 @@ namespace Z0
             Items.AddRange(src);
         }
 
-        public Count32 Count
+        public Count Count
         {
             [MethodImpl(Inline)]
             get => Items.Count;

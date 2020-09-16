@@ -12,32 +12,32 @@ namespace Z0
     /// <summary>
     /// Defines a data structure that measures a nonnegative count (I mean, really, is there any other kind?) of 32-bit capacity
     /// </summary>
-    public struct Count32 : ITextual
+    public struct Count : ITextual
     {
         public uint Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator Count32(uint count)
-            => new Count32(count);
+        public static implicit operator Count(uint count)
+            => new Count(count);
 
         [MethodImpl(Inline)]
-        public static implicit operator Count32(int count)
-            => new Count32((uint)count);
+        public static implicit operator Count(int count)
+            => new Count((uint)count);
 
         [MethodImpl(Inline)]
-        public static implicit operator uint(Count32 src)
+        public static implicit operator uint(Count src)
             => src.Value;
 
         [MethodImpl(Inline)]
-        public static explicit operator int(Count32 src)
+        public static explicit operator int(Count src)
             => (int)src.Value;
 
         [MethodImpl(Inline)]
-        public Count32(uint value)
+        public Count(uint value)
             => Value = value;
 
         [MethodImpl(Inline)]
-        public Count32(int value)
+        public Count(int value)
             => Value = (uint)value;
 
         [MethodImpl(Inline)]

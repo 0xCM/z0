@@ -37,7 +37,7 @@ namespace Z0
     /// <summary>
     /// Describes the outcome of a test case
     /// </summary>
-    public readonly struct EvalResult : ITabular<F,R>, ISequential
+    public readonly struct EvalResult : ITabular<F,R>
     {
         public readonly int Sequence;
 
@@ -72,8 +72,5 @@ namespace Z0
             dst.Delimit(F.Message, Message);
             return dst.ToString();
         }
-
-        int ISequential.Sequence
-            => Sequence;
     }
 }

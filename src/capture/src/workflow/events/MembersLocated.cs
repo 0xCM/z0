@@ -22,7 +22,7 @@ namespace Z0.Asm
 
         public ApiMember[] Members {get;}
 
-        public Count32 MemberCount => Members.Length;
+        public Count MemberCount => Members.Length;
 
         public FlairKind Flair {get;}
 

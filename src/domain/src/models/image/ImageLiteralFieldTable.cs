@@ -13,18 +13,18 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ImageLiteralFieldTable
     {
-        public Count32 Sequence;
+        public Count Sequence;
 
         public ByteSize HeapSize;
 
-        public Count32 Length;
+        public Count Length;
 
         public Address32 Offset;
 
         public string Value;
 
         [MethodImpl(Inline)]
-        public ImageLiteralFieldTable(Count32 seq, ByteSize heap, Address32 offset, string value)
+        public ImageLiteralFieldTable(Count seq, ByteSize heap, Address32 offset, string value)
         {
             Sequence = seq;
             HeapSize = heap;

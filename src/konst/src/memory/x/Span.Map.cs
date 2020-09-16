@@ -19,15 +19,50 @@ namespace Z0
         /// <param name="f">The transformation</param>
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]
         public static Span<T> Map<S,T>(this ReadOnlySpan<S> src, Func<S,T> f)
         {
-            Span<T> dst = new T[src.Length];
-
+            var count = (uint)src.Length;
+            var dst = span<T>(count);
             ref readonly var current = ref first(src);
             ref var target = ref first(dst);
-            for(var i= 0u; i<src.Length; i++)
-                seek(dst,i) = f(skip(src,i));
+            for(var i= 0u; i<count; i++)
+                seek(target,i) = f(skip(src,i));
             return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static Span<T> Map<S,I,T>(this ReadOnlySpan<S> src, Func<I,S,T> f, I rep = default)
+            where I : unmanaged
+        {
+            var count = (uint)src.Length;
+            var dst = span<T>(count);
+            ref readonly var source = ref first(src);
+            ref var target = ref first(dst);
+            for(var i= 0ul; i<count; i++)
+                seek(target,i) = f(@as<ulong,I>(i), skip(source,i));
+            return dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static void Map<S,I,T>(this ReadOnlySpan<S> src, Func<I,S,T> f, Span<T> dst, I rep = default)
+            where I : unmanaged
+        {
+            var count = (uint)src.Length;
+            ref readonly var source = ref first(src);
+            ref var target = ref first(dst);
+            for(var i= 0ul; i<count; i++)
+                seek(target,i) = f(@as<ulong,I>(i), skip(source,i));
+        }
+
+        [MethodImpl(Inline)]
+        public static void Map<S,I,T>(this ReadOnlySpan<S> src, Func<I,S,T> f, ref T target, I rep = default)
+            where I : unmanaged
+        {
+            var count = (uint)src.Length;
+            ref readonly var source = ref first(src);
+            for(var i= 0ul; i<count; i++)
+                seek(target,i) = f(@as<ulong,I>(i), skip(source,i));
         }
 
         /// <summary>
@@ -39,6 +74,6 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static Span<T> Map<S,T>(this Span<S> src, Func<S,T> f)
-            => src.ReadOnly().Map(f); 
+            => src.ReadOnly().Map(f);
     }
 }

@@ -28,7 +28,7 @@ namespace Z0.Xed
         /// <summary>
         /// The number of instructions parsed from the source
         /// </summary>
-        public Count32 Count {get;}
+        public Count Count {get;}
 
         /// <summary>
         /// The message flair
@@ -36,7 +36,7 @@ namespace Z0.Xed
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ParsedXedInstructions(WfStepId step, FS.FilePath source, Count32 count, CorrelationToken ct, FlairKind flair = Ran)
+        public ParsedXedInstructions(WfStepId step, FS.FilePath source, Count count, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
             Source = source;

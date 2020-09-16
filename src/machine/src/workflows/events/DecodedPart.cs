@@ -27,7 +27,7 @@ namespace Z0
 
         public PartId PartId {get;}
 
-        public Count32 TotalCount {get;}
+        public Count TotalCount {get;}
 
         public FlairKind Flair {get;}
 

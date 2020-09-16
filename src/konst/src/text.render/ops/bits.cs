@@ -26,7 +26,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static void bits(ReadOnlySpan<byte> src, Count32 maxbits, Span<char> dst)
+        public static void bits(ReadOnlySpan<byte> src, Count maxbits, Span<char> dst)
             => bits(first(src), src.Length, maxbits, dst);
 
         [Op]

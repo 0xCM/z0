@@ -9,7 +9,7 @@ namespace Z0
 
     public interface ISemanticIndex
     {
-        Count32 EntryCount {get;}
+        Count EntryCount {get;}
 
         Type KeyType {get;}
 
@@ -72,7 +72,7 @@ namespace Z0
 
         ref T this[K index]{get;}
 
-        Count32 ISemanticIndex.EntryCount
+        Count ISemanticIndex.EntryCount
             => View.Length;
     }
 

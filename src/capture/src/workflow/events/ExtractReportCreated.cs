@@ -19,12 +19,12 @@ namespace Z0.Asm
 
         public ApiHostUri Host {get;}
 
-        public Count32 Count {get;}
+        public Count Count {get;}
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ExtractReportCreated(WfStepId step, ApiHostUri host, Count32 count, CorrelationToken ct, FlairKind flair = Ran)
+        public ExtractReportCreated(WfStepId step, ApiHostUri host, Count count, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
             Host = host;

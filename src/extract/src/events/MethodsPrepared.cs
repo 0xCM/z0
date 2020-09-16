@@ -21,7 +21,7 @@ namespace Z0.Events
 
         public ApiHostUri Host {get;}
 
-        public Count32 Count {get;}
+        public Count Count {get;}
 
         [MethodImpl(Inline)]
         public MethodsPrepared(WfActor actor, ApiHostUri host, int count, CorrelationToken ct)

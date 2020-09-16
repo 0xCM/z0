@@ -21,7 +21,7 @@ namespace Z0
         public RenderPatternSources(RenderPatternSource[] src)
             => Data = src;
 
-        public Count32 Count
+        public Count Count
         {
             [MethodImpl(Inline)]
             get => Data.Length;

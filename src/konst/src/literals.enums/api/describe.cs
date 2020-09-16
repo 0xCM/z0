@@ -41,7 +41,7 @@ namespace Z0
             for(var i=0u; i<dst.Length; i++)
             {
                 var entry = dataset[(int)i];
-                seek(dst,i) = describe(entry.Token, entry.Position, entry.Name, entry.Literal, entry.Scalar);
+                seek(dst,i) = describe(entry.Id, entry.Index, entry.Name, entry.EnumValue, entry.ScalarValue);
             }
             return buffer;
         }

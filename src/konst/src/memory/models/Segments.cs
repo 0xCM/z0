@@ -40,7 +40,7 @@ namespace Z0
             get => Refs;
         }
 
-        public Count32 Count
+        public Count Count
         {
             [MethodImpl(Inline)]
             get => Refs.Length;

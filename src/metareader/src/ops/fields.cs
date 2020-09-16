@@ -42,7 +42,7 @@ namespace Z0
             return dst.OrderBy(x => x.Rva);
         }
 
-        public static ImageLiteralFieldTable name(in ReaderState state, FieldDefinition entry, Count32 seq)
+        public static ImageLiteralFieldTable name(in ReaderState state, FieldDefinition entry, Count seq)
             => literal(state, entry.Name, seq);
 
         internal static string format(FieldAttributes src)

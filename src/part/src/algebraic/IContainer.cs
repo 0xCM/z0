@@ -26,26 +26,6 @@ namespace Z0
 
     }
 
-    /// <summary>
-    /// Characterizes a reified container over sequentially enumerable content
-    /// </summary>
-    /// <typeparam name="F">The reification type</typeparam>
-    /// <typeparam name="T">The element type</typeparam>
-    [Free]
-    public interface ISequential<F,T> : IContainer<F,T>
-        where F : ISequential<F,T>, new()
-        where T : IEnumerable<T>
-    {
-
-    }
-
-    [Free]
-    public interface ISequential<F,C,T> : IContainer<F,T>, IEnumerable<T>
-        where F : ISequential<F,C,T>, new()
-        where C : IEnumerable<T>
-    {
-
-    }
 
     /// <summary>
     /// Characterizes an immutable container

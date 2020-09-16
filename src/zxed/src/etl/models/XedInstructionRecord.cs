@@ -29,7 +29,7 @@ namespace Z0
         Reg = 5 | 8 << WidthOffset,
     }
 
-    public struct XedInstructionRecord : IRecord<F,R>
+    public struct XedInstructionRecord : ITabular<F,R>
     {
         public int Sequence;
 
@@ -65,8 +65,5 @@ namespace Z0
             formatter.Delimit(F.Reg, Reg);
             return string.Empty;
         }
-
-        int ISequential.Sequence
-            => Sequence;
     }
 }

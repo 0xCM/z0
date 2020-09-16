@@ -23,7 +23,7 @@ namespace Z0
             get => ref Storage[index];
         }
 
-        public Count32 Count
+        public Count Count
         {
             [MethodImpl(Inline)]
             get => Storage.Length;

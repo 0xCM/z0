@@ -18,7 +18,7 @@ namespace Z0
 
         Span<T> Edit {get;}
 
-        Count32 Count {get;}
+        Count Count {get;}
 
         int Length {get;}
     }

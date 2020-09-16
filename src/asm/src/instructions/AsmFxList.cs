@@ -49,7 +49,7 @@ namespace Z0.Asm
             get => Source;
         }
 
-        public Count32 Count
+        public Count Count
         {
             [MethodImpl(Inline)]
             get => Source.Length;

@@ -13,7 +13,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ImageBlob
     {
-        public Count32 Seq;
+        public Count Seq;
 
         public ByteSize HeapSize;
 
@@ -22,7 +22,7 @@ namespace Z0
         public BinaryCode Data;
 
         [MethodImpl(Inline)]
-        public ImageBlob(Count32 seq, ByteSize heap, Address32 offset, byte[] data)
+        public ImageBlob(Count seq, ByteSize heap, Address32 offset, byte[] data)
         {
             Seq = seq;
             HeapSize = heap;

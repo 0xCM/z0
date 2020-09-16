@@ -4,17 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-
-    public interface IRecord : ITabular, ISequential
+    public enum LiteralEmissionKind : byte
     {
+        None = 0,
 
-    }
+        EnumDataset = 1,
 
-    public interface IRecord<F,R> : IRecord, ITabular<F,R>, ITextual
-        where F : unmanaged, Enum
-        where R : struct
-    {
-
+        EnumInfoset = 2
     }
 }

@@ -15,10 +15,10 @@ namespace Z0
 
     partial class PeTableReader
     {
-        public static ImageBlob sig(in ReaderState state, FieldDefinition src, Count32 seq)
+        public static ImageBlob sig(in ReaderState state, FieldDefinition src, Count seq)
             => blob(state, src.Signature, seq);
 
-        public static ImageBlob sig(in ReaderState state, MethodDefinition src, Count32 seq)
+        public static ImageBlob sig(in ReaderState state, MethodDefinition src, Count seq)
             => blob(state, src.Signature, seq);
 
     }

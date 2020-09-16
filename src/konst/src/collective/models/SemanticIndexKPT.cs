@@ -69,7 +69,7 @@ namespace Z0
             get => ref Data[EnumValue.scalar<K,ushort>(index)];
         }
 
-        public Count32 EntryCount
+        public Count EntryCount
         {
             [MethodImpl(Inline)]
             get => Data.Length;

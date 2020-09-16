@@ -52,7 +52,7 @@ namespace Z0
             PartIdentities = Storage.Select(x => x.Id);
         }
 
-        public Count32 Count
+        public Count Count
         {
             [MethodImpl(Inline)]
             get => Storage.Length;

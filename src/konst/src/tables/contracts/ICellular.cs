@@ -10,7 +10,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface ICellular
     {
-        Count32 CellCount {get;}
+        Count CellCount {get;}
     }
 
     [SuppressUnmanagedCodeSecurity]
@@ -18,7 +18,7 @@ namespace Z0
     {
         T[] Cells {get;}
 
-        Count32 ICellular.CellCount
+        Count ICellular.CellCount
             => Cells.Length;
 
         ref T this[uint index]

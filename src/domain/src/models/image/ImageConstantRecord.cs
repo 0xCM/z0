@@ -40,7 +40,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ImageConstantRecord
     {
-        public Count32 Sequence;
+        public Count Sequence;
 
         public ArtifactIdentifier ParentId;
 
@@ -51,7 +51,7 @@ namespace Z0
         public BinaryCode Content;
 
         [MethodImpl(Inline)]
-        public ImageConstantRecord(Count32 seq, HandleInfo parent, ConstantTypeCode tc, BinaryCode value)
+        public ImageConstantRecord(Count seq, HandleInfo parent, ConstantTypeCode tc, BinaryCode value)
         {
             Sequence = seq;
             ParentId = parent.Token;

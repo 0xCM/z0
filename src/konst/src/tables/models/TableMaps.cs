@@ -27,7 +27,7 @@ namespace Z0
             Data = src;
         }
 
-        public Count32 Count
+        public Count Count
         {
             [MethodImpl(Inline)]
             get => Data.Length;

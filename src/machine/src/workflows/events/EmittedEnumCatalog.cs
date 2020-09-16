@@ -19,7 +19,7 @@ namespace Z0
 
         public readonly FilePath TargetPath;
 
-        public readonly Count32 Count;
+        public readonly Count Count;
 
         [MethodImpl(Inline)]
         public EmittedEnumCatalog(FilePath target, uint count, CorrelationToken ct)

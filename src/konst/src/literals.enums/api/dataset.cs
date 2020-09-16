@@ -10,6 +10,11 @@ namespace Z0
 
     partial class Enums
     {
+        /// <summary>
+        /// Creates an enumeration dataset predicated on supplied type parameters
+        /// </summary>
+        /// <typeparam name="E">The enum type</typeparam>
+        /// <typeparam name="T">The refined primitive type</typeparam>
         public static EnumDataset<E,T> dataset<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged

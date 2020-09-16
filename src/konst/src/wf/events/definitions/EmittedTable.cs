@@ -22,7 +22,7 @@ namespace Z0
 
             public TableId Dataset {get;}
 
-            public Count32 RowCount {get;}
+            public Count RowCount {get;}
 
             public FS.FilePath Target {get;}
 

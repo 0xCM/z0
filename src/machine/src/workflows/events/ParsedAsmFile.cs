@@ -22,12 +22,12 @@ namespace Z0
 
         public FS.FilePath SourcePath {get;}
 
-        public Count32 LineCount {get;}
+        public Count LineCount {get;}
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ParsedAsmFile(WfStepId step, Count32 lines, FS.FilePath src, CorrelationToken ct, FlairKind flair =  FlairKind.Ran)
+        public ParsedAsmFile(WfStepId step, Count lines, FS.FilePath src, CorrelationToken ct, FlairKind flair =  FlairKind.Ran)
         {
             EventId = (typeof(ParsedAsmFile), step, ct);
             StepId = step;

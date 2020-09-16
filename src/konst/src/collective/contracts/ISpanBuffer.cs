@@ -12,7 +12,7 @@ namespace Z0
         /// <summary>
         /// The number of elements covered
         /// </summary>
-        Count32 Count {get;}
+        Count Count {get;}
 
         /// <summary>
         /// A bow to the ubiquitous and unreasonable devotion to *signed* 32-bit integers
@@ -39,7 +39,7 @@ namespace Z0
         int ISpanBuffer.Length
             => Storage?.Length ?? 0;
 
-        Count32 ISpanBuffer.Count
+        Count ISpanBuffer.Count
             => Storage?.Length ?? 0;
 
         Span<T> Edit

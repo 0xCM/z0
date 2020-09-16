@@ -15,13 +15,13 @@ namespace Z0
     {
         public const string TableName = "image.fields";
 
-        public Count32 Sequence;
+        public Count Sequence;
 
         public BinaryCode Sig;
 
         public ByteSize HeapSize;
 
-        public Count32 Length;
+        public Count Length;
 
         public Address32 Offset;
 
@@ -30,7 +30,7 @@ namespace Z0
         public string Attribs;
 
         [MethodImpl(Inline)]
-        public ImageFieldTable(Count32 seq, ImageLiteralFieldTable field, ImageBlob sig, string attribs)
+        public ImageFieldTable(Count seq, ImageLiteralFieldTable field, ImageBlob sig, string attribs)
         {
             Sequence = seq;
             Sig = sig.Data;

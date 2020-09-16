@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="length">The length of the result span</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Span<T> span<T>(IEnumerable<T> src, Count32 length)
+        public static Span<T> span<T>(IEnumerable<T> src, Count length)
             => src.Take(length).Array();
 
         /// <summary>

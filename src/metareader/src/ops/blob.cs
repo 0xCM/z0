@@ -14,7 +14,7 @@ namespace Z0
     partial class PeTableReader
     {
         [Op]
-        public static ImageBlob blob(in ReaderState state, BlobHandle handle, Count32 seq)
+        public static ImageBlob blob(in ReaderState state, BlobHandle handle, Count seq)
         {
             var offset = (Address32)state.Reader.GetHeapOffset(handle);
             var value = state.Reader.GetBlobBytes(handle) ?? sys.empty<byte>();

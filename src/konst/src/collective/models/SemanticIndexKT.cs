@@ -56,7 +56,7 @@ namespace Z0
             get => ref Storage[EnumValue.scalar<K,ushort>(index)];
         }
 
-        public Count32 EntryCount
+        public Count EntryCount
         {
             [MethodImpl(Inline)]
             get => Storage.Length;

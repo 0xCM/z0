@@ -22,7 +22,7 @@ namespace Z0
 
             public WfDataFlow<FS.FilePath> DataFlow {get;}
 
-            public Count32 ProcessedSize {get;}
+            public Count ProcessedSize {get;}
 
             public FlairKind Flair {get;}
 

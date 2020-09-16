@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         public readonly AsmRoutine[] Functions;
 
-        public readonly Count32 FunctionCount
+        public readonly Count FunctionCount
             => Functions.Length;
         public FlairKind Flair {get;}
 

@@ -15,7 +15,7 @@ namespace Z0.Asm
     using api = asm;
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct AsmRecord : IRecord<F,R>, ITable<AsmRecordField,AsmRecord>
+    public struct AsmRecord : ITabular<F,R>, ITable<AsmRecordField,AsmRecord>
     {
         public int Sequence;
 
@@ -86,8 +86,5 @@ namespace Z0.Asm
 
         public override string ToString()
             => Format();
-
-        int ISequential.Sequence
-            => 0;
     }
 }

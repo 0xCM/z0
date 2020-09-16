@@ -88,7 +88,7 @@ namespace Z0
         /// <param name="count">The cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static TableSpan<T> tspan<T>(Count32 count)
+        public static TableSpan<T> tspan<T>(Count count)
             where T : struct
                 => sys.alloc<T>(count);
     }

@@ -50,20 +50,20 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ImageStringRecord
     {
-        public Count32 Sequence;
+        public Count Sequence;
 
         public ImgStringSource Source;
 
         public ByteSize HeapSize;
 
-        public Count32 Length;
+        public Count Length;
 
         public Address32 Offset;
 
         public string Content;
 
         [MethodImpl(Inline)]
-        public ImageStringRecord(Count32 seq, ImgStringSource src, ByteSize heap, Address32 offset, string data)
+        public ImageStringRecord(Count seq, ImgStringSource src, ByteSize heap, Address32 offset, string data)
         {
             Sequence = seq;
             Source = src;

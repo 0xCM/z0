@@ -47,7 +47,7 @@ namespace Z0
                 get => Storage;
             }
 
-            public Count32 Count
+            public Count Count
             {
                 get => TokenCount;
             }

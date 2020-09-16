@@ -11,6 +11,8 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using F = EnumDatasetField;
+
     partial struct Literals
     {
         [MethodImpl(Inline), Op]

@@ -28,7 +28,7 @@ namespace Z0
         public Files(FS.FilePath[] src)
             => Data = src.Select(x => FS.path(x.Name));
 
-        public Count32 Count
+        public Count Count
         {
             [MethodImpl(Inline)]
             get => Data.Length;

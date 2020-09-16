@@ -19,10 +19,10 @@ namespace Z0.Asm
 
         public readonly ApiHostUri Host;
 
-        public readonly Count32 MemberCount;
+        public readonly Count MemberCount;
 
         [MethodImpl(Inline)]
-        public ExtractedMembers(ApiHostUri host, Count32 count, CorrelationToken ct)
+        public ExtractedMembers(ApiHostUri host, Count count, CorrelationToken ct)
         {
             EventId = (EventName, ct);
             Host = host;

@@ -10,7 +10,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IDataIndex
     {
-        Count32 Count {get;}
+        Count Count {get;}
 
         int Length {get;}
     }
@@ -26,7 +26,7 @@ namespace Z0
         ReadOnlySpan<T> View
             => Data;
 
-        Count32 IDataIndex.Count
+        Count IDataIndex.Count
             => Data.Length;
 
         int IDataIndex.Length

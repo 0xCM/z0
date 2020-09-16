@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Root;
 
-    using F = EnumDatasetEntryField;
+    using F = EnumDatasetField;
 
     public class t_enum_datasets : t_asm<t_enum_datasets>
     {
@@ -41,34 +41,21 @@ namespace Z0.Asm
             return dst.ToString();
         }
 
-        public void emit<E,T>(ReadOnlySpan<EnumLiteralInfo<E,T>> src, FilePath dst)
+        FS.FilePath EnumDatasetPath<E>()
             where E : unmanaged, Enum
-            where T : unmanaged
-        {
-            using var writer = dst.Writer();
-            writer.WriteLine(header<F>());
+                => FS.path(CasePath($"{typeof(E).Name}.Metadata").Name);
 
-            var dataset = Enums.dataset<E,T>();
-            for(var i=0; i<src.Length; i++)
-            {
-                writer.WriteLine(format(src[i]));
-            }
-        }
-
-        FilePath EnumDatasetPath<E>()
+        FS.FilePath EnumIdentifiers<E>()
             where E : unmanaged, Enum
-                => CasePath($"{typeof(E).Name}.Metadata");
-
-        FilePath EnumIdentifiers<E>()
-            where E : unmanaged, Enum
-                => CasePath($"{typeof(E).Name}.Identifiers");
+                => FS.path(CasePath($"{typeof(E).Name}.Identifiers").Name);
 
 
         void emit<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            EnumDatasets.Service.emit<E,T>(EnumDatasetPath<E>());
+            //EnumDatasets.Service.emit<E,T>(EnumDatasetPath<E>());
+            EnumLiteralEmitter.emit<E,T>(LiteralEmissionKind.EnumDataset, EnumDatasetPath<E>());
         }
 
         public void ds_1()
@@ -87,9 +74,28 @@ namespace Z0.Asm
 
         public void enum_dataset_convert()
         {
-            var path = CasePath(FileExtensions.Csv);
+            var path = FS.path(CasePath(FileExtensions.Csv).Name);
             var enums = @readonly(Enums.describe<AsmTokenKind,byte>());
             emit(enums,path);
+        }
+
+        public void enum_dataset_convert(FS.FilePath dst)
+        {
+            var enums = @readonly(Enums.describe<AsmTokenKind,byte>());
+            emit(enums,dst);
+        }
+
+
+        public void emit<E,T>(ReadOnlySpan<EnumLiteralInfo<E,T>> src, FS.FilePath dst)
+            where E : unmanaged, Enum
+            where T : unmanaged
+        {
+            using var writer = dst.Writer();
+            writer.WriteLine(header<F>());
+
+            var dataset = Enums.dataset<E,T>();
+            for(var i=0; i<src.Length; i++)
+                writer.WriteLine(format(src[i]));
         }
     }
 }

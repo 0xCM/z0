@@ -125,7 +125,7 @@ namespace Z0
                 Process(src.Encoded, decoded.Value);
         }
 
-        Count32 RecordCount()
+        Count RecordCount()
         {
             var count = 0u;
             var keys = Keys;

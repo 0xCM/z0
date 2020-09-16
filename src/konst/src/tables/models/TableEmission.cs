@@ -24,7 +24,7 @@ namespace Z0
             Target = dst;
         }
 
-        public Count32 RowCount
+        public Count RowCount
         {
             [MethodImpl(Inline)]
             get => Data.Length;

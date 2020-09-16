@@ -6,12 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Security;
 
     using static Konst;
     using static z;
 
-    public readonly struct EnumDataset<E,T>
+    /// <summary>
+    /// Covers a collection of tables that, together, describe a parametrically-predicated enum
+    /// </summary>
+    /// <typeparam name="E">The enum type</typeparam>
+    /// <typeparam name="T">The refined primitive type</typeparam>
+    public struct EnumDataset<E,T>
         where E : unmanaged, Enum
         where T : unmanaged
     {
@@ -47,35 +51,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public EnumDatasetEntry<E,T> Entry(int i)
-            => new EnumDatasetEntry<E,T>(Tokens[i], Id,
-                    Indices[i], Names[i], Literals[i], Scalars[i], Descriptions[i], EntryData[i]);
-
-        public EnumDataset(ArtifactIdentifier token, string description, UserMetadata data, EnumScalarKind type, EnumDatasetEntry<E,T>[] entries)
-        {
-            Id = token;
-            DataType = type;
-            Description = description;
-            UserData = data;
-            EntryCount = entries.Length;
-            Tokens = sys.alloc<ArtifactIdentifier>(EntryCount);
-            Indices = sys.alloc<uint>(EntryCount);
-            Names = sys.alloc<string>(EntryCount);
-            Literals = sys.alloc<E>(EntryCount);
-            Scalars = sys.alloc<T>(EntryCount);
-            Descriptions = sys.alloc<string>(EntryCount);
-            EntryData = sys.alloc<UserMetadata>(EntryCount);
-
-            for(var i=0; i<entries.Length; i++)
-            {
-                Tokens[i] = entries[i].Token;
-                Indices[i] = entries[i].Position;
-                Names[i] = entries[i].Name;
-                Literals[i] = entries[i].Literal;
-                Scalars[i] = entries[i].Scalar;
-                Descriptions[i] = entries[i].Description;
-                EntryData[i] = entries[i].UserData;
-            }
-        }
+            => new EnumDatasetEntry<E,T>(Tokens[i], Id, Indices[i], Names[i], Literals[i], Scalars[i], Descriptions[i]);
 
         [MethodImpl(Inline)]
         public EnumDataset(ArtifactIdentifier token, string description, UserMetadata data,  EnumScalarKind type, ArtifactIdentifier[] tokens,

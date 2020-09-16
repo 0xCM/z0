@@ -192,11 +192,11 @@ namespace Z0
             where T : struct
                 => Raise(new EmittingTable(host.Id, typeof(H), dst, Ct));
 
-        void Emitted<T>(WfStepId step, Count32 count, FS.FilePath dst)
+        void Emitted<T>(WfStepId step, Count count, FS.FilePath dst)
             where T : struct
                 => Raise(new EmittedTable(step, typeof(T), count, dst, Ct));
 
-        void Emitted<H,T>(H host, T t, Count32 count, FS.FilePath dst)
+        void Emitted<H,T>(H host, T t, Count count, FS.FilePath dst)
             where H : IWfHost<H>, new()
             where T : struct
                 => Raise(new EmittedTable(host.Id, typeof(T), count, dst, Ct));

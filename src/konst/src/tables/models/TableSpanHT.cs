@@ -50,7 +50,7 @@ namespace Z0
             get => Host.View;
         }
 
-        public Count32 Count
+        public Count Count
         {
             [MethodImpl(Inline)]
             get => Host.Count;

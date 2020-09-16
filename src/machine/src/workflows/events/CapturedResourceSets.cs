@@ -22,7 +22,7 @@ namespace Z0
 
         public WfActor Actor {get;}
 
-        public Count32 Count {get;}
+        public Count Count {get;}
 
         public FilePath Source {get;}
 

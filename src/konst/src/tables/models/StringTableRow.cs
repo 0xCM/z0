@@ -23,7 +23,7 @@ namespace Z0
             get => Cells.Length;
         }
 
-        public Count32 Count
+        public Count Count
         {
             [MethodImpl(Inline)]
             get => (uint)Cells.Length;

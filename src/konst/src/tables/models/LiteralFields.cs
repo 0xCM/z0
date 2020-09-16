@@ -22,7 +22,7 @@ namespace Z0
         public LiteralFields(FieldInfo[] src)
             => Data = src;
 
-        public Count32 Count
+        public Count Count
         {
             [MethodImpl(Inline)]
             get => Data.Length;

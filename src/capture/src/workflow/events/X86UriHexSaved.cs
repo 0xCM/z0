@@ -21,7 +21,7 @@ namespace Z0.Asm
 
         public readonly X86ApiCodeRow[] ApiHex;
 
-        public readonly Count32 MemberCount;
+        public readonly Count MemberCount;
 
         public readonly FS.FilePath Target;
 

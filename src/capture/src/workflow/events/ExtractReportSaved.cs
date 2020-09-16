@@ -18,13 +18,13 @@ namespace Z0.Asm
 
         public WfEventId EventId {get;}
 
-        public Count32 Count {get;}
+        public Count Count {get;}
 
         public FS.FilePath Target {get;}
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ExtractReportSaved(WfStepId step, Count32 count, FS.FilePath target, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
+        public ExtractReportSaved(WfStepId step, Count count, FS.FilePath target, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
         {
             EventId = (EventName, step, ct);
             Count = count;

@@ -17,7 +17,7 @@ namespace Z0.Asm
 
         readonly ApiHostUri Host;
 
-        readonly Count32 Count;
+        readonly Count Count;
 
         readonly FS.FilePath TargetPath;
 

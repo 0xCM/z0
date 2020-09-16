@@ -15,7 +15,7 @@ namespace Z0
 
     partial class PeTableReader
     {
-        public static ImageLiteralFieldTable literal(in ReaderState state, StringHandle handle, Count32 seq)
+        public static ImageLiteralFieldTable literal(in ReaderState state, StringHandle handle, Count seq)
         {
             var value = state.Reader.GetString(handle);
             var offset = state.Reader.GetHeapOffset(handle);
