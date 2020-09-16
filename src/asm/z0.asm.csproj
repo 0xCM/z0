@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(AsmModels)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(BitFields)" />
   </ItemGroup>

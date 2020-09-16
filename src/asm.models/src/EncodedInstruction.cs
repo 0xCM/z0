@@ -2,31 +2,23 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Konst;
     using static z;
 
-    /// <summary>
-    /// Defines a reference to an artifact
-    /// </summary>
-    public readonly struct ArtifactRef
+    public readonly struct EncodedInstruction
     {
-        public readonly ArtifactIdentifier Id;
+        readonly Vector128<byte> Storage;
 
         [MethodImpl(Inline)]
-        public ArtifactRef(Type t)
+        internal EncodedInstruction(Vector128<byte> src)
         {
-            Id = t.MetadataToken;
-        }
-
-        [MethodImpl(Inline)]
-        public ArtifactRef(ArtifactIdentifier src)
-        {
-            Id = src;
+            Storage = src;
         }
     }
 }

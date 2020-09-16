@@ -17,12 +17,12 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public readonly GlobalCodeIndex Index;
+        public readonly X86CodeIndex Index;
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public CreatedPartIndex(WfStepId step, GlobalCodeIndex index, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
+        public CreatedPartIndex(WfStepId step, X86CodeIndex index, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
         {
             EventId = (EventName, step, ct);
             Index = index;
@@ -31,6 +31,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(SSx2, EventId, GlobalIndexMetrics.from(Index).Format());
+            => text.format(SSx2, EventId, X86IndexMetrics.from(Index).Format());
     }
 }

@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         public readonly ApiHostUri Host;
 
-        public readonly X86ApiCodeTable[] ApiHex;
+        public readonly X86ApiCodeRow[] ApiHex;
 
         public readonly Count32 MemberCount;
 
@@ -29,7 +29,7 @@ namespace Z0.Asm
 
 
         [MethodImpl(Inline)]
-        public X86UriHexSaved(WfStepId step, ApiHostUri host, X86ApiCodeTable[] code, FS.FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
+        public X86UriHexSaved(WfStepId step, ApiHostUri host, X86ApiCodeRow[] code, FS.FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
             Host = host;

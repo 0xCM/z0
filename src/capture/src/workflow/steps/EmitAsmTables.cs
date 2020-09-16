@@ -22,7 +22,7 @@ namespace Z0
 
         readonly IAsmContext Asm;
 
-        readonly GlobalCodeIndex Encoded;
+        readonly X86CodeIndex Encoded;
 
         readonly CorrelationToken Ct;
 
@@ -56,7 +56,7 @@ namespace Z0
 
         readonly EmitAsmTablesHost Host;
 
-        public EmitAsmTables(IWfCaptureState state, GlobalCodeIndex encoded, EmitAsmTablesHost host)
+        public EmitAsmTables(IWfCaptureState state, X86CodeIndex encoded, EmitAsmTablesHost host)
         {
             State = state;
             Wf = state.Wf;

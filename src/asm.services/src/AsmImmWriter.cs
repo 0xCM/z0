@@ -70,7 +70,7 @@ namespace Z0.Asm
         public Option<FilePath> SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append)
         {
             var path = HostArchive.HexImmPath(Host.Owner, Host, id);
-            Encoded.save(src.Map(x => x.Code), FS.path(path.Name),append);
+            EncodedX86.save(src.Map(x => x.Code), FS.path(path.Name),append);
             return path;
         }
     }

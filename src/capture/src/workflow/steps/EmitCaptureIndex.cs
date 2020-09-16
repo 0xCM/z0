@@ -31,14 +31,14 @@ namespace Z0
             Locations = dict<OpUri,X86ApiCode>();
         }
 
-        public GlobalIndexStatus Status()
+        public X86IndexStatus Status()
         {
-            var dst = default(GlobalIndexStatus);
+            var dst = default(X86IndexStatus);
             dst.Parts = Parts;
             dst.Hosts = Hosts;
             dst.Addresses = Addresses;
             dst.MemberCount = MemberCount;
-            dst.Encoded = new EncodedMemoryIndex(dst.Parts, Encoded);
+            dst.Encoded = new X86MemoryIndex(dst.Parts, Encoded);
             return dst;
         }
 
@@ -65,7 +65,7 @@ namespace Z0
         public KeyValuePairs<MemoryAddress,OpUri> Located
             => UriAddress.ToKVPairs();
 
-        public GlobalCodeIndex Freeze()
+        public X86CodeIndex Freeze()
         {
             var memories = Encoded;
             var locations = Located;
@@ -75,9 +75,9 @@ namespace Z0
                 .GroupBy(g => g.Host)
                 .Select(x => (new X86HostCode(x.Key, x.Select(y => y.Code).ToArray()))).Array();
 
-            return new GlobalCodeIndex(parts,
-                   new EncodedMemoryIndex(parts, memories),
-                   new OpUriAddresses(parts, locations),
+            return new X86CodeIndex(parts,
+                   new X86MemoryIndex(parts, memories),
+                   new X86UriAddresses(parts, locations),
                    new X86PartCodeIndex(parts, code.Select(x => (x.Host, x)).ToDictionary()));
         }
 

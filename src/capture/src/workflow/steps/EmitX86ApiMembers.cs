@@ -14,7 +14,7 @@ namespace Z0
 
     public ref struct EmitX86ApiMembers
     {
-        public X86ApiCodeTable[] Emitted;
+        public X86ApiCodeRow[] Emitted;
 
         public X86UriHexSaved Event;
 
@@ -47,7 +47,7 @@ namespace Z0
 
         public void Run()
         {
-            Emitted = Encoded.save(Source.Storage.Map(x => new X86ApiCode(x.Uri, x.Address, x.Encoded)), Target);
+            Emitted = EncodedX86.save(Source.Storage.Map(x => new X86ApiCode(x.Uri, x.Address, x.Encoded)), Target);
             Event = new X86UriHexSaved(Host.Id, Uri, Emitted, Target, Wf.Ct);
             Wf.Raise(Event);
         }

@@ -21,7 +21,7 @@ namespace Z0
 
         readonly PartFiles SourceFiles;
 
-        public GlobalCodeIndex EncodedIndex;
+        public X86CodeIndex EncodedIndex;
 
         readonly List<Instruction> Buffer;
 
@@ -111,7 +111,7 @@ namespace Z0
                 Wf.Warn(Host.Id, $"Duplicate | {src.Uri.Format()}");
         }
 
-        Span<ApiPartRoutines> DecodeParts(GlobalCodeIndex src)
+        Span<ApiPartRoutines> DecodeParts(X86CodeIndex src)
         {
             Wf.Status(Host.Id, text.format("Decoding {0} entries from {1} parts", src.EntryCount, src.Parts.Length));
 
@@ -176,7 +176,7 @@ namespace Z0
             return new ApiHostRoutines(hcs.Host, instructions.ToArray());
         }
 
-        void Process(GlobalCodeIndex encoded)
+        void Process(X86CodeIndex encoded)
         {
             try
             {
