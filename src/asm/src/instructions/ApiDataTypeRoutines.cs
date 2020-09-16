@@ -36,6 +36,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Members.View;
         }
+
         public ref ApiDataTypeRoutine LeadingMember
         {
             [MethodImpl(Inline)]

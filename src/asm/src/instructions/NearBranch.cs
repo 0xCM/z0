@@ -8,25 +8,26 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using Z0.Asm;
-
     using static Konst;
 
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct ApiDataTypeRoutine
+    public readonly struct NearBranch
     {
-        public readonly ApiDataType DataType;
+        /// <summary>
+        /// The target address
+        /// </summary>
+        public readonly MemoryAddress Target;
 
-        public readonly IdentifiedMethod Member;
-
-        public readonly AsmMemberRoutine Routine;
+        /// <summary>
+        /// The target size
+        /// </summary>
+        public readonly BranchTargetWidth Width;
 
         [MethodImpl(Inline)]
-        public ApiDataTypeRoutine(in ApiDataType type, in IdentifiedMethod member, in AsmMemberRoutine routine)
+        public NearBranch(MemoryAddress target, BranchTargetWidth width)
         {
-            DataType = type;
-            Member = member;
-            Routine = routine;
+            Target = target;
+            Width = width;
         }
     }
 }

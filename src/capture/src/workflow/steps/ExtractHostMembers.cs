@@ -7,10 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
-
     using static Konst;
-    using static ExtractHostMembersStep;
+    using static ExtractHostMembersHost;
 
     public ref struct ExtractHostMembers
     {
@@ -18,19 +16,16 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        readonly ApiHostUri Host;
-
         readonly IApiHost Source;
 
         public X86ApiExtract[] Extracts;
 
         [MethodImpl(Inline)]
-        internal ExtractHostMembers(IWfShell wf, IApiHost host, IPartCapturePaths dst)
+        public ExtractHostMembers(IWfShell wf, IApiHost src, IPartCapturePaths dst)
         {
             Ct = wf.Ct;
-            Host = host.Uri;
             Wf = wf;
-            Source = host;
+            Source = src;
             Extracts = new X86ApiExtract[0]{};
             Wf.Created(StepId);
         }
@@ -45,7 +40,7 @@ namespace Z0
             Wf.Running(StepId, Ct);
             try
             {
-                using var step = new ExtractMembers(Wf);
+                using var step = new ExtractMembers(Wf, new ExtractMembersHost());
                 Extracts = step.Extract(Source);
             }
             catch(Exception e)

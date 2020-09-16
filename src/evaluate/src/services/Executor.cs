@@ -51,12 +51,12 @@ namespace Z0
             try
             {
                 action();
-                var outcome =  EvalResult.Define(context.Sequence, (f,g), clock, true );
+                var outcome =  Evaluated.result(context.Sequence, (f,g), clock, true );
                 return (outcome,context);
             }
             catch(Exception e)
             {
-                var outcome = EvalResult.Define(context.Sequence, (f,g), clock, e);
+                var outcome = Evaluated.result(context.Sequence, (f,g), clock, e);
                 return (outcome,context);
             }
         }

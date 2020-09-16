@@ -15,7 +15,7 @@ namespace Z0
     partial struct asm
     {
         [Op]
-        public static MemorySize memSize(Instruction src, byte index)
+        public static MemorySize memsize(Instruction src, byte index)
         {
             switch(asm.kind(src,(byte)index))
             {

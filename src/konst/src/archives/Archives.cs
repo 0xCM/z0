@@ -9,8 +9,6 @@ namespace Z0
     using System.Reflection;
     using System.Text;
     using System.IO;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
     using static z;
@@ -42,7 +40,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static IX86UriHexReader reader<H>(H rep = default)
-            where H : struct, IArchiveReader<H>
+            where H : struct, IArchiveReader
         {
             if(typeof(H) == typeof(X86UriHexReader))
                 return new X86UriHexReader();

@@ -17,7 +17,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmRoutine routine(X86ApiCapture captured, AsmFxList src)
         {
-            var code = new X86ApiCode(captured.OpUri, captured.Encoded);
+            var code = new X86ApiCode(captured.OpUri, captured.Parsed);
             var sig = captured.Method.Signature().Format();
             return new AsmRoutine(captured.OpUri, sig, code, captured.TermCode, src);
         }

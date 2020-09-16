@@ -15,7 +15,7 @@ namespace Z0
     ///  Defines the dataset accumulated for an operation-targeted capture workflow
     /// </summary>
     [ApiDataType]
-    public struct X86ApiCapture : ICapturedCode<X86ApiCapture,X86Code>
+    public struct X86ApiCapture
     {
         readonly X86Code Extracted;
 
@@ -138,43 +138,43 @@ namespace Z0
         public string Format()
             => Parsed.Format();
 
-        [Ignore]
-        bool INullity.IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Parsed.IsEmpty;
-        }
+        // [Ignore]
+        // bool INullity.IsEmpty
+        // {
+        //     [MethodImpl(Inline)]
+        //     get => Parsed.IsEmpty;
+        // }
 
-        [Ignore]
-        bool INullity.IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Parsed.IsNonEmpty;
-        }
+        // [Ignore]
+        // bool INullity.IsNonEmpty
+        // {
+        //     [MethodImpl(Inline)]
+        //     get => Parsed.IsNonEmpty;
+        // }
 
-        [Ignore]
-        bool IEquatable<X86ApiCapture>.Equals(X86ApiCapture src)
-            => Identical(src);
+        // [Ignore]
+        // bool IEquatable<X86ApiCapture>.Equals(X86ApiCapture src)
+        //     => Identical(src);
 
-        [Ignore]
-        int IComparable<X86ApiCapture>.CompareTo(X86ApiCapture src)
-            => Compare(src);
+        // [Ignore]
+        // int IComparable<X86ApiCapture>.CompareTo(X86ApiCapture src)
+        //     => Compare(src);
 
-        [Ignore]
-        string ITextual.Format()
-            => Format();
+        // [Ignore]
+        // string ITextual.Format()
+        //     => Format();
 
-        [Ignore]
-        public X86Code Encoded
-            => Parsed;
+        // [Ignore]
+        // public X86Code Encoded
+        //     => Parsed;
 
-        [Ignore]
-        BinaryCode IEncoded.Encoded
-            => Encoded;
+        // [Ignore]
+        // BinaryCode IEncoded.Encoded
+        //     => Encoded;
 
-        [Ignore]
-        int IMeasured.Length
-            => Parsed.Length;
+        // [Ignore]
+        // int IMeasured.Length
+        //     => Parsed.Length;
 
         public override string ToString()
             => Format();

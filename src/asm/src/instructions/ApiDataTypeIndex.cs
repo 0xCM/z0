@@ -46,5 +46,4 @@ namespace Z0
             get => _Lookup.Edit;
         }
     }
-
 }

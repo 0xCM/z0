@@ -13,14 +13,6 @@ namespace Z0
 
     partial struct Render
     {
-        [Op]
-        public static ReadOnlySpan<char> bitchars(byte[] src)
-        {
-            var dst = span<char>(src.Length*8);
-            var input = span(src);
-            var config = BitFormat.Default;
-            bits(src, dst.Length, dst);
-            return dst;
-        }
+
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// The hex bits found at the end of a uri
     /// </summary>
-    public readonly struct X86UriHex : IX86ApiMember<X86UriHex,BinaryCode>
+    public readonly struct X86UriHex
     {
         /// <summary>
         /// The code's base address

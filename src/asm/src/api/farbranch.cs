@@ -14,11 +14,11 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmBranchTarget farbranch(W16 w, ushort src, Address16 selector)
-            => asm.target(BranchTargetKind.Far, BranchTargetWidth.Branch16, src, selector);
+        public static FarBranch farbranch(W16 w, Address16 dst, Address16 selector)
+            => new FarBranch(dst, BranchTargetWidth.Branch16, selector);
 
         [MethodImpl(Inline), Op]
-        public static AsmBranchTarget farbranch(W32 w, uint src, Address16 selector)
-            => asm.target(BranchTargetKind.Far, BranchTargetWidth.Branch32, src, selector);
+        public static FarBranch farbranch(W32 w, Address32 dst, Address16 selector)
+            => new FarBranch(dst, BranchTargetWidth.Branch32, selector);
     }
 }

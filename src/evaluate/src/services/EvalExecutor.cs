@@ -53,7 +53,7 @@ namespace Z0
                         return MatchBinaryOps(buffers, n256, paired);
 
                     default:
-                        return EvalResult.Define(seq, (paired.Left.Uri, paired.Right.Uri), clock, AppMsg.error($"Handler not found"));
+                        return Evaluated.result(seq, (paired.Left.Uri, paired.Right.Uri), clock, AppMsg.error($"Handler not found"));
                 }
             }
             catch(Exception error)
@@ -235,11 +235,11 @@ namespace Z0
             try
             {
                 action();
-                return EvalResult.Define(seq, f, clock, true);
+                return Evaluated.result(seq, f, clock, true);
             }
             catch(Exception e)
             {
-                return EvalResult.Define(seq, f, clock, e);
+                return Evaluated.result(seq, f, clock, e);
             }
         }
 
@@ -250,11 +250,11 @@ namespace Z0
             try
             {
                 action();
-                return EvalResult.Define(seq, (f,g), clock, true );
+                return Evaluated.result(seq, (f,g), clock, true );
             }
             catch(Exception e)
             {
-                return EvalResult.Define(seq, (f,g), clock, e);
+                return Evaluated.result(seq, (f,g), clock, e);
             }
         }
 

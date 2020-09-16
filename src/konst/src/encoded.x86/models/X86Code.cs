@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Encoded x86 bytes extracted from a memory source with a known (nonzero) location
     /// </summary>
-    public readonly struct X86Code : ILocatedCode<X86Code,BinaryCode>
+    public readonly struct X86Code
     {
         /// <summary>
         /// The head of the memory location from which the data originated

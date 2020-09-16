@@ -26,6 +26,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => PatternRef;
         }
+
         public string Format()
             => PatternText;
     }

@@ -43,8 +43,8 @@ namespace Z0
 
         public EmitCaptureArtifacts(IWfCaptureState state, ApiHostUri src, X86ApiExtract[] extracts, IPartCapturePaths dst)
         {
-            State = state;
             Wf = state.Wf;
+            State = state;
             Ct = Wf.Ct;
             HostUri = src;
             Target = HostCaptureArchive.create(dst.ArchiveRoot, HostUri);
@@ -95,7 +95,7 @@ namespace Z0
                 if(Extracts.Length == 0)
                     return;
 
-                using var step = new EmitExtractReport(Wf,host, HostUri, Extracts, FS.path(ExtractPath.Name));
+                using var step = new EmitExtractReport(Wf, host, HostUri, Extracts, FS.path(ExtractPath.Name));
                 step.Run();
             }
             catch(Exception e)
@@ -148,6 +148,7 @@ namespace Z0
                 dst.WriteLine(cil.Format());
 
             }
+
             Wf.Raise(new CilCodeSaved(StepId, HostUri, (uint)src.Length, FS.path(ParsedPath.Name), Ct));
         }
 

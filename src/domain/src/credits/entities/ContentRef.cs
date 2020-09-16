@@ -3,14 +3,12 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Data;
-    
     using static Konst;
-    using static z;    
+    using static z;
     using static CreditTypes;
 
     using E = ContentRef;
@@ -19,7 +17,7 @@ namespace Z0
 
     /// <summary>
     /// Defines a reference to specialized content within a document, such as figures and tables
-    /// that often, as a flagrant display of idiocy, have numbering schemes that are content-type 
+    /// that often, as a flagrant display of idiocy, have numbering schemes that are content-type
     /// independent and even doucment-location independent
     /// </summary>
     public readonly struct ContentRef : IDataEntity<E>
@@ -27,7 +25,7 @@ namespace Z0
         readonly S State;
 
         public static E Empty => new E(0);
-        
+
         public E Zero
         {
             [MethodImpl(Inline)]
@@ -90,8 +88,8 @@ namespace Z0
         public ContentNumber Level1
         {
             [MethodImpl(Inline)]
-            get => API.number(this, n1);        
-        }        
+            get => API.number(this, n1);
+        }
 
         /// <summary>
         /// The level-2 content number (if any)
@@ -109,7 +107,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => API.type(this);
-        }    
- 
+        }
+
     }
 }

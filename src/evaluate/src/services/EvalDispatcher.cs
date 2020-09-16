@@ -59,7 +59,7 @@ namespace Z0
         {
             var target = init<T>();
             var src = Random.Array<T>(target.PointCount);
-            var context = EvalContext.unary(buffers, code, Evaluated.unary(src, target));
+            var context = Evaluations.context(buffers, code, Evaluated.unary(src, target));
             return Evaluate.compute(context, error);
         }
 
@@ -68,7 +68,7 @@ namespace Z0
         {
             var target = init<T>();
             var src = Random.Pairs<T>(target.PointCount);
-            var context = EvalContext.binary(buffers, code, Evaluated.binary(src, target));
+            var context = Evaluations.context(buffers, code, Evaluated.binary(src, target));
             return Evaluate.compute(context, error);
         }
 

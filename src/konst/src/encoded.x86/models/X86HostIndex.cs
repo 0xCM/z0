@@ -22,7 +22,7 @@ namespace Z0
         /// <summary>
         /// The host-owned code
         /// </summary>
-        public readonly X86ApiCode[] Data;
+        readonly TableSpan<X86ApiCode> Data;
 
         [MethodImpl(Inline)]
         public X86HostIndex(ApiHostUri id, X86ApiCode[] code)
@@ -32,13 +32,19 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ref readonly X86ApiCode Cell(uint index)
+        public ref readonly X86ApiCode Cell(ulong index)
             => ref Data[index];
 
-        public ref readonly X86ApiCode this[int index]
+        public ref readonly X86ApiCode this[long index]
         {
              [MethodImpl(Inline)]
-             get => ref Cell((uint)index);
+             get => ref Data[index];
+        }
+
+        public ref readonly X86ApiCode this[ulong index]
+        {
+             [MethodImpl(Inline)]
+             get => ref Data[index];
         }
 
         /// <summary>
@@ -48,6 +54,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Data.Length;
+        }
+
+        public uint Count
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
         }
     }
 }

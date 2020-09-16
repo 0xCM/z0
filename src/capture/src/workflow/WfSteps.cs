@@ -10,7 +10,43 @@ namespace Z0
 
     using Asm;
 
-    [Step]
+    [WfHost]
+    public sealed class CapturePartDataTypesStep : WfHost<CapturePartDataTypesStep>
+    {
+        protected override void Execute(IWfShell wf)
+            => throw missing();
+    }
+
+    [WfHost]
+    public sealed class CaptureHostsHost : WfHost<CaptureHostsHost>
+    {
+        public static WfStepId StepId => step(typeof(CaptureHosts));
+
+        protected override void Execute(IWfShell wf)
+            => throw missing();
+    }
+
+    [WfHost]
+    public sealed class ExtractMembersHost : WfHost<ExtractMembersHost>
+    {
+        public const string StepName = nameof(ExtractMembers);
+
+        public static WfStepId StepId => type<ExtractMembersHost>();
+
+        protected override void Execute(IWfShell wf)
+            => throw missing();
+    }
+
+    [WfHost]
+    public sealed class ExtractHostMembersHost : WfHost<ExtractHostMembersHost>
+    {
+        public static WfStepId StepId => step<ExtractHostMembersHost>();
+
+        protected override void Execute(IWfShell shell)
+            => throw missing();
+    }
+
+    [WfHost]
     public sealed class EmitExtractReportHost : WfHost<EmitExtractReportHost>
     {
         protected override void Execute(IWfShell shell)
@@ -20,56 +56,56 @@ namespace Z0
     [WfHost]
     public sealed class EmitCilMembersHost : WfHost<EmitCilMembersHost>
     {
-        protected override void Execute(IWfShell shell)
+        protected override void Execute(IWfShell wf)
             => throw missing();
     }
 
     [WfHost]
     public sealed class DecodeApiMembersHost : WfHost<DecodeApiMembersHost>
     {
-        protected override void Execute(IWfShell shell)
+        protected override void Execute(IWfShell wf)
             => throw missing();
     }
 
     [WfHost]
     public sealed class SpecializeImmediatesHost : WfHost<SpecializeImmediatesHost>
     {
-        protected override void Execute(IWfShell shell)
+        protected override void Execute(IWfShell wf)
             => throw missing();
     }
 
     [WfHost]
     public sealed class CapturePartHost : WfHost<CapturePartHost>
     {
-        protected override void Execute(IWfShell shell)
+        protected override void Execute(IWfShell wf)
             => throw missing();
     }
 
     [WfHost]
     public sealed class ManageCaptureHost : WfHost<ManageCaptureHost>
     {
-        protected override void Execute(IWfShell shell)
+        protected override void Execute(IWfShell wf)
             => throw missing();
     }
 
     [WfHost]
     public sealed class EmitAsmTablesHost : WfHost<EmitAsmTablesHost>
     {
-        protected override void Execute(IWfShell shell)
+        protected override void Execute(IWfShell wf)
             => throw missing();
     }
 
     [WfHost]
     public sealed class EmitX86HexHost : WfHost<EmitX86HexHost>
     {
-        protected override void Execute(IWfShell shell)
+        protected override void Execute(IWfShell wf)
             => throw missing();
     }
 
     [WfHost]
     public sealed class MatchEmissionsHost : WfHost<MatchEmissionsHost>
     {
-        protected override void Execute(IWfShell shell)
+        protected override void Execute(IWfShell wf)
             => throw missing();
     }
 
@@ -123,17 +159,6 @@ namespace Z0
             => step<CaptureHostMembersStep>();
     }
 
-    [Step]
-    public class CapturePartDataTypesStep : WfHost<CapturePartDataTypesStep>
-    {
-
-    }
-
-    [Step]
-    public readonly struct CaptureHostsStep : IWfStep<CaptureHostsStep>
-    {
-        public static WfStepId StepId => step(typeof(CaptureHosts));
-    }
 
 
     [Step]
@@ -152,19 +177,7 @@ namespace Z0
             => step<EmitParsedReportStep>();
     }
 
-    [Step]
-    public readonly struct ExtractHostMembersStep : IWfStep<ExtractHostMembersStep>
-    {
-        public static WfStepId StepId => step<ExtractHostMembersStep>();
-    }
 
-    [Step]
-    public readonly struct ExtractMembersStep : IWfStep<ExtractMembersStep>
-    {
-        public const string StepName = nameof(ExtractMembers);
-
-        public static WfStepId StepId => type<ExtractMembersStep>();
-    }
 
     [Step]
     public readonly struct ManagePartCaptureStep : IWfStep<ManagePartCaptureStep>

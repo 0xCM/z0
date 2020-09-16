@@ -23,6 +23,18 @@ namespace Z0
             => new ImmValue(src);
 
         [MethodImpl(Inline)]
+        public static implicit operator ImmValue(ushort src)
+            => new ImmValue(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ImmValue(uint src)
+            => new ImmValue(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ImmValue(ulong src)
+            => new ImmValue(src);
+
+        [MethodImpl(Inline)]
         public ImmValue(byte src)
             => Data = src;
 

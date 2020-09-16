@@ -25,7 +25,7 @@ namespace Z0
             var dst = new AsmMemory();
             dst.MemoryBase = convert(memBase(src,index), out RegisterKind _);
             dst.MemoryIndex = convert(memidx(src,index), out RegisterKind _);
-            dst.MemorySize = memSize(src,index);
+            dst.MemorySize = memsize(src,index);
             dst.MemoryIndexScale = memScale(src,index);
             dst.Displacement = dx(dxvalue(src,index), dxsize(src,index));
             dst.MemorySegment = convert(memSeg(src,index), out RegisterKind _);
@@ -48,7 +48,7 @@ namespace Z0
             var dst = default(AsmFxMemory);
             dst.MemoryBase = memBase(src,index);
             dst.MemoryIndex = memidx(src,index);
-            dst.MemorySize = memSize(src,index);
+            dst.MemorySize = memsize(src,index);
             dst.MemoryIndexScale = memScale(src,index);
             dst.MemDx = dx(dxvalue(src,index), dxsize(src,index));
             dst.MemorySegment = memSeg(src,index);

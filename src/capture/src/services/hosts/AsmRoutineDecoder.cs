@@ -39,7 +39,7 @@ namespace Z0.Asm
             => Decode(src.Encoded, src.Base);
 
         public Option<AsmRoutine> Decode(X86ApiCapture src, Action<Asm.Instruction> f)
-            => Decode(src.Encoded,f).TryMap(x => AsmServices.routine(src,x));
+            => Decode(src.Parsed,f).TryMap(x => AsmServices.routine(src,x));
 
         public Option<AsmFxList> Decode(X86Code src, Action<Asm.Instruction> f)
         {

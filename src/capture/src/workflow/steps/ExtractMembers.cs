@@ -8,28 +8,31 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static ExtractMembersStep;
+    using static ExtractMembersHost;
 
     public readonly ref struct ExtractMembers
     {
-        readonly CorrelationToken Ct;
-
         readonly IWfShell Wf;
+
+        readonly ExtractMembersHost Host;
+
+        readonly CorrelationToken Ct;
 
         readonly MemberExtractor Extractor;
 
         [MethodImpl(Inline)]
-        public ExtractMembers(IWfShell wf)
+        public ExtractMembers(IWfShell wf, ExtractMembersHost host)
         {
             Wf = wf;
+            Host = host;
             Ct = Wf.Ct;
             Extractor = X86Extraction.service(X86Extraction.DefaultBufferLength);
-            Wf.Created(StepId);
+            Wf.Created(Host);
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
 
         public X86ApiExtract[] Extract(IApiHost host)
@@ -40,7 +43,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(StepId, e);
+                Wf.Error(Host, e);
                 return sys.empty<X86ApiExtract>();
             }
         }
@@ -53,7 +56,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(StepName, e, Ct);
+                Wf.Error(Host, e);
                 return sys.empty<X86ApiExtract>();
             }
         }
@@ -67,7 +70,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(StepName, e, Ct);
+                Wf.Error(Host, e);
                 return sys.empty<X86ApiExtract>();
             }
         }

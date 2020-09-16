@@ -18,12 +18,12 @@ namespace Z0.Asm
 
         public MemoryAddress Source;
 
-        public AsmBranchTarget Target;
+        public Branch Target;
 
         public MemoryAddress TargetOffset;
 
         [MethodImpl(Inline)]
-        public AsmBranchInfo(MemoryAddress @base, MemoryAddress src, in AsmBranchTarget target, uint offset)
+        public AsmBranchInfo(MemoryAddress @base, MemoryAddress src, in Branch target, uint offset)
         {
             Base = @base;
             Source = src;

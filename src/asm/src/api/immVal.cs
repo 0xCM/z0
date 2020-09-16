@@ -12,6 +12,8 @@ namespace Z0
     using static Konst;
     using static Asm.OpKind;
 
+    using W = NumericWidth;
+
     partial struct asm
     {
 		/// <summary>
@@ -20,7 +22,7 @@ namespace Z0
 		/// <param name="src">The source instruction</param>
 		/// <param name="index">The operand index</param>
         [Op]
-        public static ulong? immVal(Instruction src, byte index)
+        public static ImmValue? immval(Instruction src, byte index)
         {
 			return kind(src, index) switch
             {

@@ -3,11 +3,9 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
-
-    using Z0.Data;
 
     using static Konst;
     using static CreditTypes;
@@ -24,7 +22,7 @@ namespace Z0
         readonly S State;
 
         public static E Empty => new E(0);
-                        
+
         public E Zero
         {
             [MethodImpl(Inline)]
@@ -54,7 +52,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public bool Equals(E src)
             => State == src.State;
-        
+
         [MethodImpl(Inline)]
         public string Format()
             => API.format(this);

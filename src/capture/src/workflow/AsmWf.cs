@@ -15,7 +15,7 @@ namespace Z0
     {
         public IWfShell Wf {get;}
 
-        public IAsmContext Context {get;}
+        public IAsmContext Asm {get;}
 
         public IWfCaptureBroker Broker {get;}
 
@@ -25,7 +25,7 @@ namespace Z0
         public AsmWf(IWfShell wf, IAsmContext context)
         {
             Wf = wf;
-            Context = context;
+            Asm = context;
             Broker = new WfCaptureBroker(wf);
             State = new WfCaptureState(wf, context);
         }

@@ -6,14 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using Z0.Asm;
-    
+
     using static Konst;
     using static Asm.OpKind;
 
     using W = NumericWidth;
-   
+
     partial struct asm
     {
         /// <summary>
@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The operand classifier</param>
         [Op]
-        public static NumericWidth immWidth(OpKind src)
+        public static NumericWidth immwidth(OpKind src)
         {
             if(src == Immediate8 || src == Immediate8_2nd)
                 return W.W8;

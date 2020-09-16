@@ -15,13 +15,13 @@ namespace Z0
     /// </summary>
     public readonly struct X86ApiExtract
     {
-        public X86Code Encoded {get;}
+        public readonly X86Code Encoded;
 
-        public OpIdentity Id {get;}
+        public readonly OpIdentity Id;
 
-        public OpUri OpUri {get;}
+        public readonly OpUri OpUri;
 
-        public ApiMember Member {get;}
+        public readonly ApiMember Member;
 
         public byte[] Data
         {

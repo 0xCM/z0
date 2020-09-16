@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Pairs an api member with the executable code derived from that member
     /// </summary>
-    public readonly struct X86ApiMember : IX86ApiMember<X86ApiMember,X86UriHex>
+    public readonly struct X86ApiMember
     {
         public ApiMember Member {get;}
 
@@ -102,8 +102,6 @@ namespace Z0
         public MethodInfo Method
              => Member.Method;
 
-        BinaryCode IEncoded.Encoded
-            => Encoded;
 
         public bool Equals(X86ApiMember src)
             => Encoded.Equals(src.Encoded);

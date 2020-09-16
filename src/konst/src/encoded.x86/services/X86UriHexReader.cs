@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct X86UriHexReader : IX86UriHexReader<X86UriHexReader,X86UriHex>
+    public readonly struct X86UriHexReader : IX86UriHexReader
     {
         public static IX86UriHexReader Service => default(X86UriHexReader);
 

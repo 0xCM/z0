@@ -67,7 +67,7 @@ namespace Z0
             try
             {
                 var dst = Archives.capture(Config.TargetArchive.Root);
-                using var step = new CaptureHosts(State, Config.Api.Hosts, dst, Ct);
+                using var step = new CaptureHosts(State, Config.Api.Hosts, dst);
                 step.Run();
 
             }
@@ -109,7 +109,7 @@ namespace Z0
 
         void Capture(ApiDataTypes src, IPartCapturePaths dst)
         {
-            using var step = new ExtractMembers(Wf);
+            using var step = new ExtractMembers(Wf, new ExtractMembersHost());
             var extracted = @readonly(step.Extract(src).GroupBy(x => x.Host).Select(x => kvp(x.Key, x.Array())).Array());
             for(var i=0; i<extracted.Length; i++)
             {

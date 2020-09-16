@@ -14,6 +14,40 @@ namespace Z0
     partial struct Render
     {
         [MethodImpl(Inline), Op]
+        public static void bits(in byte src, int length, uint maxbits, Span<char> dst)
+        {
+            var k=0;
+            for(var i=0u; i<length; i++)
+            {
+                bits(skip(src,i), maxbits, dst, ref k);
+                if(k >= maxbits)
+                    break;
+            }
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void bits(ReadOnlySpan<byte> src, Count32 maxbits, Span<char> dst)
+            => bits(first(src), src.Length, maxbits, dst);
+
+        [Op]
+        public static ReadOnlySpan<char> bitchars(byte[] src)
+        {
+            var dst = span<char>(src.Length*8);
+            var input = span(src);
+            var config = BitFormat.Default;
+            bits(src, dst);
+            return dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void bits(byte[] src, Span<char> dst)
+        {
+            var input = span(src);
+            var config = BitFormat.Default;
+            bits(src, dst.Length, dst);
+        }
+
+        [MethodImpl(Inline), Op]
         public static string bits(object src, TypeCode type)
         {
             if(type == TypeCode.Byte || type == TypeCode.SByte)
@@ -38,22 +72,6 @@ namespace Z0
                 seek(dst, (uint)k) = @char(@bool(testbit(src, j)));
             }
         }
-
-        [MethodImpl(Inline), Op]
-        public static void bits(in byte src, int length, uint maxbits, Span<char> dst)
-        {
-            var k=0;
-            for(var i=0u; i<length; i++)
-            {
-                bits(z.skip(src,i), maxbits, dst, ref k);
-                if(k >= maxbits)
-                    break;
-            }
-        }
-
-        [MethodImpl(Inline), Op]
-        public static void bits(ReadOnlySpan<byte> src, Count32 maxbits, Span<char> dst)
-            => bits(first(src), src.Length, maxbits, dst);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static string bits<T>(T src)

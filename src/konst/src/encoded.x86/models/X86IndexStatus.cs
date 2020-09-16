@@ -6,10 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Konst;
     using static z;
 
+    [StructLayout(LayoutKind.Sequential)]
     public struct X86IndexStatus : ITextual
     {
         public PartId[] Parts;
@@ -22,11 +24,11 @@ namespace Z0
 
         public X86MemoryIndex Encoded;
 
+        [MethodImpl(Inline)]
         public string Format()
             => text.format(RenderPatterns.PSx5, Parts.Length, Hosts.Length, MemberCount, Addresses.Length, Encoded.Count);
 
         public override string ToString()
             => Format();
     }
-
 }

@@ -14,12 +14,12 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmBranchTarget target(BranchTargetKind kind, BranchTargetWidth size, MemoryAddress address)
-            => new AsmBranchTarget(kind, size, address);
+        public static Branch target(BranchTargetKind kind, MemoryAddress dst, BranchTargetWidth size)
+            => new Branch(kind,dst,size);
 
         [MethodImpl(Inline), Op]
-        public static AsmBranchTarget target(BranchTargetKind kind, BranchTargetWidth size, MemoryAddress address, Address16 selector)
-            => new AsmBranchTarget(kind, size, address, selector);
+        public static Branch target(BranchTargetKind kind, MemoryAddress dst, BranchTargetWidth size, Address16 selector)
+            => new Branch(kind, dst, size, selector);
 
         [MethodImpl(Inline), Op]
         public static CallTarget target(MemoryAddress @base)

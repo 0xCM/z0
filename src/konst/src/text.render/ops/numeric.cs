@@ -13,14 +13,13 @@ namespace Z0
     partial struct Render
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ReadOnlySpan<string> numeric<T>(ReadOnlySpan<T> src)
+        public static ReadOnlySpan<string> numeric<T>(ReadOnlySpan<T> src, Base16 @base, Span<string> dst)
             where T : unmanaged
         {
             var formatter = Formatters.numeric<T>();
             var count = src.Length;
-            var dst = z.span<string>(count);
             for(var i=0u; i<count; i++)
-                z.seek(dst, i) = formatter.Format(z.skip(src,i), NumericBaseKind.Base16);
+                seek(dst, i) = formatter.Format(skip(src,i), NumericBaseKind.Base16);
             return dst;
         }
 

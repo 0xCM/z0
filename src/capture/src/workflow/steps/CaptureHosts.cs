@@ -11,7 +11,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static CaptureHostsStep;
+    using static CaptureHostsHost;
 
     public readonly ref struct CaptureHosts
     {
@@ -19,29 +19,26 @@ namespace Z0
 
         public IWfShell Wf {get;}
 
-        public IApiHost[] Hosts {get;}
-
-        public CorrelationToken Ct {get;}
+        public IApiHost[] Sources {get;}
 
         public IPartCapturePaths Target {get;}
 
         [MethodImpl(Inline)]
-        public CaptureHosts(WfCaptureState state, IApiHost[] hosts,  IPartCapturePaths dst, CorrelationToken ct)
+        public CaptureHosts(WfCaptureState state, IApiHost[] src, IPartCapturePaths dst)
         {
             State = state;
             Wf = state.Wf;
-            Hosts = hosts;
-            Ct = ct;
+            Sources = src;
             Target = dst;
             Wf.Created(StepId);
         }
 
         public void Run()
         {
-            Wf.Raise(new CapturingHosts(Hosts, Ct));
+            Wf.Raise(new CapturingHosts(Sources, Wf.Ct));
 
-            using var step = new ExtractMembers(Wf);
-            var extracts = step.Extract(Hosts);
+            using var step = new ExtractMembers(Wf, new ExtractMembersHost());
+            var extracts = step.Extract(Sources);
             if(extracts.Length == 0)
                 return;
 

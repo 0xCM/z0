@@ -15,12 +15,12 @@ namespace Z0.Asm
     {
         public static SemanticRender Service => default(SemanticRender);
 
-        public static string label(in AsmBranchTarget src)
+        public static string label(in Branch src)
             => format(src.Kind, src.Size);
 
-        public static string format(in AsmBranchTarget src)
+        public static string format(in Branch src)
         {
-            var address = src.TargetAddress.FormatMinimal();
+            var address = src.Target.FormatMinimal();
             return label(src) + (src.IsNear ? text.bracket(address) : text.bracket(text.concat(address, Chars.Colon, src.Selector.Format())));
         }
 

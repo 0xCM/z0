@@ -110,7 +110,7 @@ namespace Z0
             else if (asm.isBranch(kind))
                 desc = render.Render(asm.branch(@base, src, i));
             else if(asm.isImm(kind))
-                desc = render.Render(asm.immInfo(src, i));
+                desc = render.Render(asm.imminfo(src, i));
 
             return desc;
         }

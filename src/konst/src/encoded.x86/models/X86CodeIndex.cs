@@ -6,9 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Konst;
 
+    [StructLayout(LayoutKind.Sequential)]
     public struct X86CodeIndex
     {
         X86MemoryIndex Memories;
@@ -19,6 +21,7 @@ namespace Z0
 
         public readonly PartId[] Parts;
 
+        [MethodImpl(Inline)]
         public X86CodeIndex(PartId[] parts, X86MemoryIndex members, X86UriAddresses memuri, X86PartCodeIndex code)
         {
             Parts = parts;
