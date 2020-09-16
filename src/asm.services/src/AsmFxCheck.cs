@@ -16,7 +16,7 @@ namespace Z0.Asm
 
     public readonly struct AsmFxCheck
     {
-        public static void CheckInstructionSize(in Instruction instruction, int offset, in AsmBlock src)
+        public static void CheckInstructionSize(in Instruction instruction, uint offset, in AsmBlock src)
         {
             if(src.Encoded.Length < offset + instruction.ByteLength)
                 throw SizeMismatch(instruction, offset, src);
@@ -24,25 +24,25 @@ namespace Z0.Asm
 
         public static void CheckBlockLength(in AsmBlock src)
         {
-            var blocklen = src.Decoded.Select(i => i.ByteLength).Sum();
+            var blocklen = (uint)src.Decoded.Select(i => i.ByteLength).Sum();
             if(blocklen != src.Encoded.Length)
                 throw BadBlockLength(src,blocklen);
         }
 
-        static AppException BadBlockLength(in AsmBlock src, int computedLength)
+        static AppException BadBlockLength(in AsmBlock src, uint computedLength)
             => AppException.Define(InstructionBlockSizeMismatch(src.BaseAddress, src.Encoded.Length, computedLength));
 
-        static AppException SizeMismatch(in Instruction instruction, int offset, in AsmBlock src)
-            => AppException.Define(InstructionSizeMismatch(instruction.IP, offset, src.Encoded.Length, instruction.ByteLength));
+        static AppException SizeMismatch(in Instruction instruction, uint offset, in AsmBlock src)
+            => AppException.Define(InstructionSizeMismatch(instruction.IP, offset, (uint)src.Encoded.Length, (uint)instruction.ByteLength));
 
-        static AppMsg InstructionSizeMismatch(MemoryAddress ip, int offset, int actual, int reported,
+        static AppMsg InstructionSizeMismatch(MemoryAddress ip, uint offset, uint actual, uint reported,
             [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
                 => AppMsg.error(text.concat(
                     $"The encoded instruction length does not match the reported instruction length:",
                     $"address = {ip}, datalen = {reported}, offset = {offset}, bytelen = {reported}"),
                         caller, file, line);
 
-        static AppMsg InstructionBlockSizeMismatch(MemoryAddress @base, int actual, int reported,
+        static AppMsg InstructionBlockSizeMismatch(MemoryAddress @base, int actual, uint reported,
             [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
                 => AppMsg.error(text.concat(
                     $"The encoded instruction block length does not match the reported total instruction length:",

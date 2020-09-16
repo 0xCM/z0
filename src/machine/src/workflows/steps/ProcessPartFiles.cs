@@ -23,7 +23,7 @@ namespace Z0
 
         int ProcessedCount;
 
-        readonly ProcessPartFilesStep Step;
+        readonly ProcessPartFilesHost Step;
 
         WfStepId StepId => Step.Id;
 
@@ -34,7 +34,7 @@ namespace Z0
             Ct = ct;
             Buffers = CpuBuffer.alloc(DefaultBufferSize);
             ProcessedCount = 0;
-            Step = new ProcessPartFilesStep();
+            Step = new ProcessPartFilesHost();
             Wf.Created(StepId);
         }
 

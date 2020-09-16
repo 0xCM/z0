@@ -12,7 +12,7 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-    using static EmitProjectDocsStep;
+    using static EmitProjectDocsHost;
 
     public readonly ref struct EmitProjectDocs
     {

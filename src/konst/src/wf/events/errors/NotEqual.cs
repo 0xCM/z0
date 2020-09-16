@@ -13,9 +13,9 @@ namespace Z0
     partial class AppErrors
     {
         public static void ThrowNotEqual<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => throw new Exception(NotEqual(lhs,rhs,caller,file,line));
+            => throw new Exception(neq(lhs,rhs,caller,file,line));
 
         public static T ThrowNotEqualNoCaller<T>(T lhs, T rhs)
-            => throw new Exception(NotEqual(lhs,rhs));
+            => throw new Exception(neq(lhs,rhs));
     }
 }

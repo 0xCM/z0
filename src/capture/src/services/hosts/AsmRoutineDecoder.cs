@@ -30,7 +30,7 @@ namespace Z0.Asm
         public Option<AsmRoutine> Decode(X86ApiCapture src)
             => from i in Decode(src.Parsed)
                 let block = asm.block(src.UriHex, i, src.TermCode)
-                select AsmRoutineFactory.routine(src.OpUri, src.Method.Signature().Format(), block);
+                select AsmServices.routine(src.OpUri, src.Method.Signature().Format(), block);
 
         public Option<AsmFxList> Decode(X86Code src)
             => Decode(src.Encoded, src.Base).TryMap(x => asm.list(x, src));
@@ -39,7 +39,7 @@ namespace Z0.Asm
             => Decode(src.Encoded, src.Base);
 
         public Option<AsmRoutine> Decode(X86ApiCapture src, Action<Asm.Instruction> f)
-            => Decode(src.Encoded,f).TryMap(x => AsmRoutineFactory.routine(src,x));
+            => Decode(src.Encoded,f).TryMap(x => AsmServices.routine(src,x));
 
         public Option<AsmFxList> Decode(X86Code src, Action<Asm.Instruction> f)
         {
@@ -120,7 +120,6 @@ namespace Z0.Asm
         }
 
         public Option<AsmRoutine> Decode(X86ApiMember src)
-            => from i in Decode(src.Encoded) select AsmRoutineFactory.routine(src,i);
-
+            => from i in Decode(src.Encoded) select AsmServices.routine(src,i);
     }
 }

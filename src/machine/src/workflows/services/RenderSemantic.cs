@@ -17,7 +17,7 @@ namespace Z0
 
     public readonly ref struct RenderSemantic
     {
-        readonly HexFormatConfig DataFormat;
+        readonly HexFormatOptions DataFormat;
 
         readonly List<string> Buffer;
 
@@ -27,7 +27,7 @@ namespace Z0
         public RenderSemantic(List<string> descriptions)
         {
             Buffer = descriptions;
-            DataFormat = HexFormatConfig.HexData;
+            DataFormat = HexFormatOptions.HexData;
         }
 
         public void Dispose()

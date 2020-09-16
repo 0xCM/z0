@@ -43,12 +43,12 @@ namespace Z0
             try
             {
                 Run(new EmitFieldMetadataHost());
-                Run(new ProcessPartFilesStep());
+                Run(new ProcessPartFilesHost());
                 Run(new EmitPeHeadersStep());
                 Run(new EmitImageConstantsStep());
                 Run(new EmitImageDataStep());
                 Run(new EmitStringRecordsStep());
-                Run(new EmitProjectDocsStep());
+                Run(new EmitProjectDocsHost());
                 Run(new EmitResBytesStep());
                 Run(new EmitImageBlobsStep());
                 Run(new EmitPartCilStep());
@@ -75,7 +75,7 @@ namespace Z0
             Wf.Ran(host.Id);
         }
 
-        void Run(ManageCaptureStep step, params string[] args)
+        void Run(ManageCaptureHost step, params string[] args)
         {
             using var control = WfCaptureControl.create(State);
             control.Run();
@@ -101,7 +101,7 @@ namespace Z0
 
         void Run(EmitContentCatalogStep kind)
         {
-            using var step = new EmitContentCatalog(Wf, Ct);
+            using var step = new EmitContentCatalog(Wf);
             step.Run();
         }
 
@@ -141,7 +141,7 @@ namespace Z0
             step.Run();
         }
 
-        void Run(EmitProjectDocsStep host)
+        void Run(EmitProjectDocsHost host)
         {
             using var step = new EmitProjectDocs(Wf, Ct);
             step.Run();
@@ -153,7 +153,7 @@ namespace Z0
             step.Run();
         }
 
-        void Run(ProcessPartFilesStep host)
+        void Run(ProcessPartFilesHost host)
         {
             using var step = new ProcessPartFiles(Wf, Asm, Ct);
             step.Run();

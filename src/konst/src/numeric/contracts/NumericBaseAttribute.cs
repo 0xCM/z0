@@ -11,24 +11,24 @@ namespace Z0
     /// </summary>
     public class NumericBaseAttribute : Attribute
     {
+        public NumericBaseKind Base {get;}
+
+        public int? MaxDigits {get;}
+
         public NumericBaseAttribute(int @base)
         {
-            this.Base = (NumericBaseKind)@base;
+            Base = (NumericBaseKind)@base;
         }
 
-        public NumericBaseAttribute(int @base, int dmax)
+        public NumericBaseAttribute(int @base, int digits)
         {
-            this.Base = (NumericBaseKind)@base;
-            this.MaxDigits = dmax;
+            Base = (NumericBaseKind)@base;
+            MaxDigits = digits;
         }
 
         public NumericBaseAttribute(NumericBaseKind @base)
         {
-            this.Base = @base;
+            Base = @base;
         }
-
-        public NumericBaseKind Base {get;}
-
-        public int? MaxDigits {get;}
     }
 }

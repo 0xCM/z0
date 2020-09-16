@@ -25,7 +25,7 @@ namespace Z0
 
         readonly PartId[] Parts;
 
-        readonly ManageCaptureStep Step;
+        readonly ManageCaptureHost Step;
 
         WfStepId StepId => Step.Id;
 
@@ -38,7 +38,7 @@ namespace Z0
             Sink = Wf.WfSink;
             Parts = Wf.Api.PartIdentities;
             Broker = state.CaptureBroker;
-            Step = new ManageCaptureStep();
+            Step = new ManageCaptureHost();
             Wf.Created(StepId);
         }
 

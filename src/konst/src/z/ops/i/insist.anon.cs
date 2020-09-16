@@ -23,7 +23,7 @@ namespace Z0
         public static T[] insist<T>(T[] src)
         {
             if(src is null)
-                sys.@throw(AppErrors.NullArg());            
+                sys.@throw(AppErrors.NullArg());
             return src;
         }
 
@@ -36,12 +36,12 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(UInt8k)]
         public static void insist<T>(T lhs, T rhs)
-            where T : IEquatable<T>            
+            where T : IEquatable<T>
         {
             if(z.nullnot(lhs) && z.nullnot(rhs) && lhs.Equals(rhs))
                 return;
-                        
-            require(false, () => AppErrors.NotEqual<T>(lhs,rhs));            
+
+            require(false, () => AppErrors.neq<T>(lhs,rhs));
         }
 
         [MethodImpl(Inline), Op, Closures(UInt8k)]

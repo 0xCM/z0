@@ -13,8 +13,8 @@ namespace Z0
     public readonly partial struct FormatOptions
     {
         [MethodImpl(Inline), Op]
-        public static HexFormatConfig hex(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, char? delimiter = null)
-            => new HexFormatConfig(zpad,specifier, uppercase, prespec, delimiter ?? Space);
+        public static HexFormatOptions hex(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, char? delimiter = null)
+            => new HexFormatOptions(zpad,specifier, uppercase, prespec, delimiter ?? Space);
 
         [MethodImpl(Inline), Op]
         public static SeqFormatConfig seq(string delimiter)

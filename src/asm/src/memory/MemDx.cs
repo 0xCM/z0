@@ -46,7 +46,7 @@ namespace Z0
             get => Value != 0;
         }
 
-        HexFormatConfig HexSpec
+        HexFormatOptions HexSpec
             => FormatOptions.hex(zpad:false, specifier:false);
 
         public string Format()

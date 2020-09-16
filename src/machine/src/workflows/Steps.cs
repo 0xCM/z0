@@ -10,6 +10,7 @@ namespace Z0
 
     using static RenderPatterns;
     using static Flow;
+    using static z;
 
     [WfHost]
     public sealed class EmitFieldMetadataHost : WfHost<EmitFieldMetadataHost>
@@ -28,10 +29,6 @@ namespace Z0
     [WfHost]
     public sealed class EmitFieldLiteralsHost : WfHost<EmitFieldLiteralsHost>
     {
-        public const string StepName = nameof(EmitFieldLiterals);
-
-        public override string Identifier => StepName;
-
         protected override void Execute(IWfShell wf)
         {
             using var step = new EmitFieldLiterals(wf, this);
@@ -47,9 +44,8 @@ namespace Z0
         public override string Identifier => StepName;
 
         public override void Run(IWfShell shell)
-        {
-            throw new NotImplementedException();
-        }
+            => throw missing();
+
     }
 
     [Step]
@@ -60,7 +56,7 @@ namespace Z0
     }
 
     [WfHost]
-    public class ProcessPartFilesStep : WfHost<ProcessPartFilesStep,IAsmContext>
+    public class ProcessPartFilesHost : WfHost<ProcessPartFilesHost,IAsmContext>
     {
         public const string StepName = nameof(ProcessPartFiles);
 
@@ -152,11 +148,11 @@ namespace Z0
         public static WfStepId StepId => step<EmitPeImageStep>();
     }
 
-    [Step]
-    public readonly struct EmitProjectDocsStep : IWfStep<EmitProjectDocsStep>
+    [WfHost]
+    public sealed class EmitProjectDocsHost : WfHost<EmitProjectDocsHost>
     {
         public static WfStepId StepId
-            => typeof(EmitProjectDocsStep);
+            => typeof(EmitProjectDocsHost);
     }
 
     [Step]

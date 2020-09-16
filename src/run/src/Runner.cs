@@ -216,7 +216,7 @@ namespace Z0
             var part = Parts.Canonical.Resolved;
             var id = component.Id();
 
-            using var step = new CapturePart(Wf, State.Asm, new CapturePartStep());
+            using var step = new CapturePart(Wf, State.Asm, new CapturePartHost());
             var captured = step.Capture(part);
             var dst = Wf.Paths.AppCaptureRoot + FileName.define(id.Format(), FileExtensions.Asm);
             using var writer = dst.Writer();
@@ -242,8 +242,7 @@ namespace Z0
             {
                 var src = typeof(RenderPatterns);
                 var dst = FS.dir(Wf.IndexRoot.Name) + FS.file("format-patterns", "csv");
-                using var step = new EmitFormatPatterns(State.Wf, (src, dst));
-                step.Run();
+                new EmitRenderPatternsHost().Run(Wf, (src,dst));
             }
 
             {
@@ -280,22 +279,29 @@ namespace Z0
                 var output = FS.path("J:/dev/projects/z0-logs/db/images.csv");
                 host.Run(Wf, (dlls,output));
             }
+
+            {
+                Wf.Running(StepId);
+
+                using var kernel = Native.kernel32();
+                Wf.DataRow(kernel);
+
+                var f = Native.func<OS.Delegates.GetProcAddress>(kernel, nameof(OS.Delegates.GetProcAddress));
+                Wf.DataRow(f);
+
+                var a = (MemoryAddress)f.Invoke(kernel, "CreateDirectoryA");
+                Wf.DataRow(a);
+
+                Wf.Ran(StepId);
+
+            }
         }
-
-
 
         public void Run()
         {
             Wf.Running(StepId);
 
-            using var kernel = Native.kernel32();
-            Wf.DataRow(kernel);
 
-            var f = Native.func<OS.Delegates.GetProcAddress>(kernel, nameof(OS.Delegates.GetProcAddress));
-            Wf.DataRow(f);
-
-            var a = (MemoryAddress)f.Invoke(kernel, "CreateDirectoryA");
-            Wf.DataRow(a);
 
             Wf.Ran(StepId);
         }

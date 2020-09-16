@@ -13,8 +13,8 @@ namespace Z0
     partial struct Literals
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static NumericLiteral<T> base2<T>(string Name, T Value, string Text)
+        public static NumericLiteral<T> base2<T>(string name, T value, string text)
             where T : unmanaged
-                => new NumericLiteral<T>(Name, Value, Text, NumericBaseKind.Base2);
+                => new NumericLiteral<T>(name, value, text, NumericBaseKind.Base2);
     }
 }

@@ -11,16 +11,16 @@ namespace Z0
     using static Konst;
     using static z;
     using api = Render;
-    
+
     public readonly struct HexDataFormatter<T>
         where T : unmanaged
-    {            
-        public readonly HexFormatConfig Config;
+    {
+        public readonly HexFormatOptions Config;
 
         public readonly byte CellSize;
-    
+
         [MethodImpl(Inline)]
-        public HexDataFormatter(in HexFormatConfig config)
+        public HexDataFormatter(in HexFormatOptions config)
         {
             Config = config;
             CellSize = (byte)size<T>();
@@ -35,17 +35,17 @@ namespace Z0
                 var symbols = Hex.symbols(skip(b,i), LowerCase);
                 for(var j=0u; j<CellSize; j++)
                     seek(dst,j) = skip(symbols, j);
-            }                    
+            }
         }
 
         [MethodImpl(Inline)]
         public void Format(ReadOnlySpan<T> src, StringBuilder dst)
             => api.hex(src,Config,dst);
-        
+
         public string Format(ReadOnlySpan<T> src)
         {
             var dst = text.build();
-            Format(src,dst);                        
+            Format(src,dst);
             return dst.ToString();
         }
     }

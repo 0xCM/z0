@@ -15,7 +15,7 @@ namespace Z0
     /// Identifies a workflow step
     /// </summary>
     public readonly struct WfStepId<T> : IWfStepId
-        where T :  IWfStep<T>, new()
+        where T : new()
     {
         [MethodImpl(Inline)]
         public static implicit operator WfStepId(WfStepId<T> src)

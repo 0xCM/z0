@@ -84,7 +84,7 @@ namespace Z0.Asm
             [MethodImpl(Inline), Op]
             static string label(string src, ulong baseaddress)
             {
-                var hex = HexFormatSpecs.ParseHex(src).ValueOrDefault();
+                var hex = HexNumericParser.parse(src).ValueOrDefault();
                 return (hex - baseaddress).FormatSmallHex(true);
             }
 

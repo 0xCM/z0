@@ -65,7 +65,6 @@ namespace Z0
         // ~ Levels
         // ~ ---------------------------------------------------------------------------
 
-
         void Trace<T>(WfStepId step, T data)
             => Raise(WfEvents.trace(step, data, Ct));
 
@@ -98,6 +97,14 @@ namespace Z0
         void Error(WfStepId step, Exception e)
             => Raise(WfEvents.error(step, e, Ct));
 
+        void Error<H>(H host, Exception e)
+            where H : WfHost<H>, new()
+                => Raise(WfEvents.error(host.Id, e, Ct));
+
+        void Error<H>(H host, string msg, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
+            where H : WfHost<H>, new()
+                => Raise(WfEvents.error(host.Id, msg, Ct, caller, file, line));
+
         // ~ Lifecycle
         // ~ ---------------------------------------------------------------------------
 
@@ -116,16 +123,14 @@ namespace Z0
         void Created(in WfStepId step)
             => Raise(WfEvents.created(step, Ct));
 
-
-       void Disposed(WfStepId step)
+        void Disposed(WfStepId step)
             => Raise(WfEvents.disposed(step, Ct));
-
 
         void Created<H>(H host)
             where H : WfHost<H>, new()
                 => Raise(WfEvents.created(host.Id, Ct));
 
-       void Disposed<H>(H host)
+        void Disposed<H>(H host)
             where H : WfHost<H>, new()
                 => Raise(WfEvents.disposed(host.Id, Ct));
 

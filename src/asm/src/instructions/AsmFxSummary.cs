@@ -15,43 +15,37 @@ namespace Z0.Asm
     public readonly struct AsmFxSummary
     {
         /// <summary>
-        /// The base address
+        /// The encoded bytes
         /// </summary>
-        public readonly MemoryAddress Base;
+        public readonly X86Code Encoded;
 
         /// <summary>
         /// The zero-based offset of the function, relative to the base address
         /// </summary>
-        public readonly ushort Offset {get;}
+        public readonly uint Offset;
 
         /// <summary>
         /// The instruction content, suitable for display
         /// </summary>
-        public readonly string Formatted {get;}
+        public readonly string Formatted;
 
         /// <summary>
         /// The instruction string paired with the op code
         /// </summary>
-        public readonly AsmSpecifier Spec {get;}
+        public readonly AsmSpecifier Spec;
 
         /// <summary>
         /// Describes the instruction operands
         /// </summary>
-        public readonly AsmOperandInfo[] Operands {get;}
-
-        /// <summary>
-        /// The encoded bytes
-        /// </summary>
-        public readonly byte[] Encoded {get;}
+        public readonly AsmOperandInfo[] Operands;
 
         [MethodImpl(Inline)]
-        public AsmFxSummary(MemoryAddress @base, ushort offset, string content, AsmSpecifier spec, AsmOperandInfo[] operands, byte[] encoded)
+        public AsmFxSummary(MemoryAddress @base, uint offset, string content, AsmSpecifier spec, AsmOperandInfo[] operands, byte[] encoded)
         {
-            Base = @base;
+            Encoded = new X86Code(@base, encoded);
             Offset = offset;
             Formatted = content;
             Operands = operands;
-            Encoded = encoded;
             Spec = spec;
         }
     }

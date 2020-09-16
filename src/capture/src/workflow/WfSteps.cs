@@ -4,24 +4,73 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
     using static z;
     using static Flow;
 
     using Asm;
 
+    [Step]
+    public sealed class EmitExtractReportHost : WfHost<EmitExtractReportHost>
+    {
+        protected override void Execute(IWfShell shell)
+            => throw missing();
+    }
+
+    [WfHost]
+    public sealed class EmitCilMembersHost : WfHost<EmitCilMembersHost>
+    {
+        protected override void Execute(IWfShell shell)
+            => throw missing();
+    }
+
+    [WfHost]
+    public sealed class DecodeApiMembersHost : WfHost<DecodeApiMembersHost>
+    {
+        protected override void Execute(IWfShell shell)
+            => throw missing();
+    }
+
+    [WfHost]
+    public sealed class SpecializeImmediatesHost : WfHost<SpecializeImmediatesHost>
+    {
+        protected override void Execute(IWfShell shell)
+            => throw missing();
+    }
+
+    [WfHost]
+    public sealed class CapturePartHost : WfHost<CapturePartHost>
+    {
+        protected override void Execute(IWfShell shell)
+            => throw missing();
+    }
+
+    [WfHost]
+    public sealed class ManageCaptureHost : WfHost<ManageCaptureHost>
+    {
+        protected override void Execute(IWfShell shell)
+            => throw missing();
+    }
+
+    [WfHost]
+    public sealed class EmitAsmTablesHost : WfHost<EmitAsmTablesHost>
+    {
+        protected override void Execute(IWfShell shell)
+            => throw missing();
+    }
+
     [WfHost]
     public sealed class EmitX86HexHost : WfHost<EmitX86HexHost>
     {
         protected override void Execute(IWfShell shell)
-        {
-
-        }
+            => throw missing();
     }
 
     [WfHost]
     public sealed class MatchEmissionsHost : WfHost<MatchEmissionsHost>
     {
-
+        protected override void Execute(IWfShell shell)
+            => throw missing();
     }
 
     [Step]
@@ -31,26 +80,10 @@ namespace Z0
     }
 
     [Step]
-    public readonly struct EmitExtractReportStep : IWfStep<EmitExtractReportStep>
-    {
-        public static WfStepId StepId
-            => Flow.step<EmitExtractReportStep>();
-    }
-
-    [Step]
     public readonly struct CaptureMemoryStep : IWfStep<CaptureMemoryStep>
     {
         public static WfStepId StepId
             => Flow.step<CaptureMemoryStep>();
-    }
-
-    [Step]
-    public class EmitAsmTablesHost : WfHost<EmitAsmTablesHost>
-    {
-        public override void Run(IWfShell shell)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 
     [Step]
@@ -74,21 +107,6 @@ namespace Z0
             => new CaptureControl(state);
 
         public static WfStepId StepId => step<WfCaptureControl>();
-    }
-
-    [Step]
-    public class CapturePartStep : WfHost<CapturePartStep>
-    {
-
-    }
-
-    [Step]
-    public class ManageCaptureStep : WfHost<ManageCaptureStep>
-    {
-        public override void Run(IWfShell shell)
-        {
-
-        }
     }
 
     [Step]
@@ -117,12 +135,6 @@ namespace Z0
         public static WfStepId StepId => step(typeof(CaptureHosts));
     }
 
-    [Step]
-    public readonly struct DecodeApiAsmStep : IWfStep<DecodeApiAsmStep>
-    {
-        public static WfStepId StepId => step(typeof(DecodeApiAsm));
-
-    }
 
     [Step]
     public readonly struct EmitHostArtifactsStep : IWfStep<EmitHostArtifactsStep>
@@ -152,15 +164,6 @@ namespace Z0
         public const string StepName = nameof(ExtractMembers);
 
         public static WfStepId StepId => type<ExtractMembersStep>();
-    }
-
-    [Step]
-    public class SpecializeImmediatesStep : WfHost<SpecializeImmediatesStep>
-    {
-        public override void Run(IWfShell shell)
-        {
-
-        }
     }
 
     [Step]

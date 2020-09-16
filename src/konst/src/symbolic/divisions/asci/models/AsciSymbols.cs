@@ -123,7 +123,7 @@ namespace Z0
             => Hex.format(ByteView);
 
         [MethodImpl(Inline), Op]
-        public string Format(in HexFormatConfig config)
+        public string Format(in HexFormatOptions config)
             => Hex.format(ByteView, config);
 
         public override int GetHashCode()

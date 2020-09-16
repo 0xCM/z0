@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
 
-    [Table]
-    public struct MemoryFileInfo : ITable<MemoryFileInfo>
+    public struct MemoryFileInfo
     {
         public MemoryAddress BaseAddress;
 

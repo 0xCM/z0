@@ -23,10 +23,10 @@ namespace Z0
         readonly CorrelationToken Ct;
 
         [MethodImpl(Inline)]
-        public EmitContentCatalog(IWfShell wf, CorrelationToken ct)
+        public EmitContentCatalog(IWfShell wf)
         {
             Wf = wf;
-            Ct = ct;
+            Ct = Wf.Ct;
             TargetPath =  Wf.IndexRoot + FileName.define("catalog", FileExtensions.Csv);
             EmissionCount = 0;
             Wf.Created(StepId);
@@ -34,9 +34,9 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Emitting<ContentLibEntry>(StepId, FS.path(TargetPath.Name));
+            Wf.Emitting<DocLibEntry>(StepId, FS.path(TargetPath.Name));
 
-            var provider = TableProvider.create();
+            var provider = Docs.content();
             var entries = z.span(provider.Provided.Array());
             EmissionCount = (uint)entries.Length;
 
@@ -52,7 +52,7 @@ namespace Z0
             using var dst = TargetPath.Writer();
             dst.Write(f.Format());
 
-            Wf.Emitted<ContentLibEntry>(StepId, EmissionCount, FS.path(TargetPath.Name));
+            Wf.Emitted<DocLibEntry>(StepId, EmissionCount, FS.path(TargetPath.Name));
         }
 
         public void Dispose()

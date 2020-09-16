@@ -94,6 +94,6 @@ namespace Z0.Asm
 
         public string SectionDelimiter;
 
-        public HexFormatConfig HeaderEncodingFormat;
+        public HexFormatOptions HeaderEncodingFormat;
     }
 }

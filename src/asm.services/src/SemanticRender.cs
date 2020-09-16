@@ -36,7 +36,7 @@ namespace Z0.Asm
             => text.concat(src.Source.Format(), " + ",  src.TargetOffset.FormatMinimal(), " -> ",  (src.Source + src.TargetOffset).Format());
 
         [MethodImpl(Inline), Op]
-        public static string render(in HexFormatConfig config, in MemDx src)
+        public static string render(in HexFormatOptions config, in MemDx src)
             => (src.Size switch{
                 MemDxSize.y1 => ((byte)src.Value).FormatHex(config),
                 MemDxSize.y2 => ((ushort)src.Value).FormatHex(config),
@@ -44,7 +44,7 @@ namespace Z0.Asm
                 _ => (src.Value).FormatHex(config),
             }) + "dx";
 
-        static HexFormatConfig HexSpec
+        static HexFormatOptions HexSpec
             => FormatOptions.hex(zpad:false, specifier:false);
 
         public static string format(in MemDx src)

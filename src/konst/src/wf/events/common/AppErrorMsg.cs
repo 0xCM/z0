@@ -78,6 +78,10 @@ namespace Z0
 
         public static AppMsg NotFalse(string msg, string caller, string file, int? line)
             => Fail($"{msg ?? "The source value is is not false"}", caller, file, line);
+
+        public static AppMsg NotImplemented(string caller, string file, int? line)
+            => Fail($"{"The implementation does not exist"}", caller, file, line);
+
         public static AppMsg CountMismatch(int lhs, int rhs, string caller, string file, int? line)
             => Fail($"Count mismatch: {lhs} != {rhs}", caller, file, line);
 

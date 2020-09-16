@@ -30,26 +30,38 @@ namespace Z0
         public AppMsgSource Source {get;}
 
         [MethodImpl(Inline)]
-        public WfError(string actor, T body, CorrelationToken ct, AppMsgSource source)
+        public WfError(string actor, T data, CorrelationToken ct, AppMsgSource source)
         {
             EventId = evid(EventName, ct);
             StepId = WfStepId.Empty;
             Actor = actor;
-            Data = body;
+            Data = data;
             Flair =  FlairKind.Error;
             Source = source;
         }
 
         [MethodImpl(Inline)]
-        public WfError(WfStepId step, T body, CorrelationToken ct, AppMsgSource source)
+        public WfError(WfStepId step, T data, CorrelationToken ct, AppMsgSource source)
         {
             EventId = (EventName, step, ct);
             Actor = EmptyString;
             StepId = step;
-            Data = body;
+            Data = data;
             Flair =  FlairKind.Error;
             Source = source;
         }
+
+        [MethodImpl(Inline)]
+        public WfError(WfStepId step, T data, string pattern, CorrelationToken ct, AppMsgSource source)
+        {
+            EventId = (EventName, step, ct);
+            Actor = EmptyString;
+            StepId = step;
+            Data = data;
+            Flair =  FlairKind.Error;
+            Source = source;
+        }
+
 
         [MethodImpl(Inline)]
         public string Format()

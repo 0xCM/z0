@@ -20,8 +20,6 @@ namespace Z0
     {
         public const string FormatPatternText = "{0}: {1}";
 
-        public static FormatPattern<N2> FormatPattern => FormatPatternText;
-
         /// <summary>
         /// The key discriminator
         /// </summary>

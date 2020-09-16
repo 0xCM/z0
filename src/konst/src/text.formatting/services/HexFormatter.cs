@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using api = Render;
 
-    public readonly struct HexFormatter<T> : ISpanFormatter<T,HexSeqFormat,HexFormatConfig>
+    public readonly struct HexFormatter<T> : ISpanFormatter<T,HexSeqFormat,HexFormatOptions>
         where T : unmanaged
     {
         readonly ISystemFormatter<T> BaseFormatter;
@@ -24,7 +24,7 @@ namespace Z0
             => FormatItem(src, DefaultConfig);
 
         [MethodImpl(Inline)]
-        public string FormatItem(T src, in HexFormatConfig hex)
+        public string FormatItem(T src, in HexFormatOptions hex)
             => string.Concat(
                 hex.Specifier && hex.Specifier ? HexFormatSpecs.PreSpec : string.Empty,
                 hex.ZPad ? BaseFormatter.Format(src, hex.FormatCode).PadLeft(Unsafe.SizeOf<T>()*2, '0') : BaseFormatter.Format(src, hex.FormatCode),
@@ -39,7 +39,7 @@ namespace Z0
             return dst;
         }
 
-        public string Format(ReadOnlySpan<T> src, in HexSeqFormat seq, in HexFormatConfig hex)
+        public string Format(ReadOnlySpan<T> src, in HexSeqFormat seq, in HexFormatOptions hex)
         {
             var result = string.Empty.Build();
 
@@ -76,7 +76,7 @@ namespace Z0
         public ReadOnlySpan<string> FormatItems(ReadOnlySpan<T> src)
             => FormatItems(src, DefaultSeqConfig);
 
-        static HexFormatConfig DefaultConfig
+        static HexFormatOptions DefaultConfig
             => FormatOptions.hex();
 
         static HexSeqFormat DefaultSeqConfig

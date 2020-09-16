@@ -14,9 +14,9 @@ namespace Z0
     {
         public readonly HexLineConfig LineConfig;
 
-        public readonly HexFormatConfig LabelConfig;
+        public readonly HexFormatOptions LabelConfig;
 
-        readonly HexFormatConfig DataConfig;
+        readonly HexFormatOptions DataConfig;
 
         readonly MemoryAddress BaseAddress;
 
@@ -26,7 +26,7 @@ namespace Z0
             LineConfig = config;
             BaseAddress = @base ?? MemoryAddress.Empty;
             LabelConfig = FormatOptions.hex(zpad:true, specifier: true, uppercase: false, prespec:false);
-            DataConfig = HexFormatConfig.HexData;
+            DataConfig = HexFormatOptions.HexData;
         }
 
         public string FormatLine(ReadOnlySpan<byte> data, ulong offset, char delimiter = Chars.Space)

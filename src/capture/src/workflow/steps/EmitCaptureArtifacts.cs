@@ -70,14 +70,14 @@ namespace Z0
 
             try
             {
-                SaveExtracts();
+                Run(new EmitExtractReportHost());
                 Parse();
                 if(ParsedMembers.Count != 0)
                 {
                     SaveParseReport();
                     Run(new EmitX86HexHost());
-                    SaveCil();
-                    Decode();
+                    Run(new EmitCilMembersHost());
+                    Run(new DecodeApiMembersHost());
                 }
             }
             catch(Exception e)
@@ -88,14 +88,14 @@ namespace Z0
             Wf.Ran(StepId);
         }
 
-        void SaveExtracts()
+        void Run(EmitExtractReportHost host)
         {
             try
             {
                 if(Extracts.Length == 0)
                     return;
 
-                using var step = new EmitExtractReport(State, HostUri, Extracts, ExtractPath, Ct);
+                using var step = new EmitExtractReport(Wf,host, HostUri, Extracts, FS.path(ExtractPath.Name));
                 step.Run();
             }
             catch(Exception e)
@@ -133,7 +133,7 @@ namespace Z0
 
         }
 
-        void SaveCil()
+        void Run(EmitCilMembersHost host)
         {
             if(ParsedMembers.Count== 0)
                 return;
@@ -151,12 +151,12 @@ namespace Z0
             Wf.Raise(new CilCodeSaved(StepId, HostUri, (uint)src.Length, FS.path(ParsedPath.Name), Ct));
         }
 
-        void Decode()
+        void Run(DecodeApiMembersHost host)
         {
             if(ParsedMembers.Count== 0)
                 return;
 
-            using var step = new DecodeApiAsm(State.Wf, State.CWf.Context, Ct);
+            using var step = new DecodeApiMembers(State.Wf, host, State.CWf.Context);
             var decoded = step.Run(HostUri, ParsedMembers);
             if(decoded.Length != 0)
             {

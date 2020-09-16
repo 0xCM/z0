@@ -73,10 +73,10 @@ namespace Z0
             Cases16 = Random.Fill(z8, (byte)bitsize<ushort>(), span<byte>(Reps));
             Cases32 = Random.Fill(z8, (byte)bitsize<uint>(), span<byte>(Reps));
             Cases64 = Random.Fill(z8, (byte)bitsize<uint>(), span<byte>(Reps));
-            Literals8 = Literals.attributed<byte>(base2, typeof(MaskLiterals));
-            Literals16 = Literals.attributed<ushort>(base2, typeof(MaskLiterals));
-            Literals32 = Literals.attributed<uint>(base2, typeof(MaskLiterals));
-            Literals64 = Literals.attributed<ulong>(base2, typeof(MaskLiterals));
+            Literals8 = Literals.tagged<byte>(base2, typeof(MaskLiterals));
+            Literals16 = Literals.tagged<ushort>(base2, typeof(MaskLiterals));
+            Literals32 = Literals.tagged<uint>(base2, typeof(MaskLiterals));
+            Literals64 = Literals.tagged<ulong>(base2, typeof(MaskLiterals));
             HiMaskResults8 = alloc<CheckHiMaskResult<byte>>(Reps);
             HiMaskResults16 = alloc<CheckHiMaskResult<ushort>>(Reps);
             HiMaskResults32 = alloc<CheckHiMaskResult<uint>>(Reps);

@@ -1,0 +1,428 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Iced/1.8.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/Iced.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/Iced.dll": {}
+        }
+      },
+      "z0.bitcore/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "z0.gmath": "1.0.43",
+          "z0.konst": "1.0.43"
+        },
+        "compile": {
+          "bin/placeholder/z0.bitcore.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.bitcore.dll": {}
+        }
+      },
+      "z0.check/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "z0.konst": "1.0.43"
+        },
+        "compile": {
+          "bin/placeholder/z0.check.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.check.dll": {}
+        }
+      },
+      "z0.gmath/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "z0.check": "1.0.43",
+          "z0.math": "1.0.43",
+          "z0.memories": "1.0.43"
+        },
+        "compile": {
+          "bin/placeholder/z0.gmath.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.gmath.dll": {}
+        }
+      },
+      "z0.imagine/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "z0.konst": "1.0.43",
+          "z0.part": "1.0.43",
+          "z0.sys": "1.0.43"
+        },
+        "compile": {
+          "bin/placeholder/z0.imagine.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.imagine.dll": {}
+        }
+      },
+      "z0.konst/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "z0.part": "1.0.43",
+          "z0.sys": "1.0.43"
+        },
+        "compile": {
+          "bin/placeholder/z0.konst.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.konst.dll": {}
+        }
+      },
+      "z0.math/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "z0.konst": "1.0.43"
+        },
+        "compile": {
+          "bin/placeholder/z0.math.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.math.dll": {}
+        }
+      },
+      "z0.memories/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "z0.imagine": "1.0.43"
+        },
+        "compile": {
+          "bin/placeholder/z0.memories.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.memories.dll": {}
+        }
+      },
+      "z0.part/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/z0.part.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.part.dll": {}
+        }
+      },
+      "z0.sys/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "z0.part": "1.0.43"
+        },
+        "compile": {
+          "bin/placeholder/z0.sys.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.sys.dll": {}
+        }
+      }
+    },
+    ".NETCoreApp,Version=v3.1/win-x64": {
+      "Iced/1.8.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/Iced.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/Iced.dll": {}
+        }
+      },
+      "z0.bitcore/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "z0.gmath": "1.0.43",
+          "z0.konst": "1.0.43"
+        },
+        "compile": {
+          "bin/placeholder/z0.bitcore.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.bitcore.dll": {}
+        }
+      },
+      "z0.check/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "z0.konst": "1.0.43"
+        },
+        "compile": {
+          "bin/placeholder/z0.check.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.check.dll": {}
+        }
+      },
+      "z0.gmath/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "z0.check": "1.0.43",
+          "z0.math": "1.0.43",
+          "z0.memories": "1.0.43"
+        },
+        "compile": {
+          "bin/placeholder/z0.gmath.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.gmath.dll": {}
+        }
+      },
+      "z0.imagine/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "z0.konst": "1.0.43",
+          "z0.part": "1.0.43",
+          "z0.sys": "1.0.43"
+        },
+        "compile": {
+          "bin/placeholder/z0.imagine.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.imagine.dll": {}
+        }
+      },
+      "z0.konst/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "z0.part": "1.0.43",
+          "z0.sys": "1.0.43"
+        },
+        "compile": {
+          "bin/placeholder/z0.konst.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.konst.dll": {}
+        }
+      },
+      "z0.math/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "z0.konst": "1.0.43"
+        },
+        "compile": {
+          "bin/placeholder/z0.math.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.math.dll": {}
+        }
+      },
+      "z0.memories/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "z0.imagine": "1.0.43"
+        },
+        "compile": {
+          "bin/placeholder/z0.memories.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.memories.dll": {}
+        }
+      },
+      "z0.part/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/z0.part.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.part.dll": {}
+        }
+      },
+      "z0.sys/1.0.43": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "z0.part": "1.0.43"
+        },
+        "compile": {
+          "bin/placeholder/z0.sys.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/z0.sys.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Iced/1.8.0": {
+      "sha512": "KQqoTZg3wf+eqG8ztGqlz9TozC/Dw/jnN82JkIRGZXTg/by0aPiQIMGb+b7hvvkOLnmCuWr3Ghr0mA2I+ASX1A==",
+      "type": "package",
+      "path": "iced/1.8.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "iced.1.8.0.nupkg.sha512",
+        "iced.nuspec",
+        "lib/net45/Iced.dll",
+        "lib/net45/Iced.xml",
+        "lib/netstandard2.0/Iced.dll",
+        "lib/netstandard2.0/Iced.xml",
+        "lib/netstandard2.1/Iced.dll",
+        "lib/netstandard2.1/Iced.xml",
+        "logo.png"
+      ]
+    },
+    "z0.bitcore/1.0.43": {
+      "type": "project",
+      "path": "../bitcore/z0.bitcore.csproj",
+      "msbuildProject": "../bitcore/z0.bitcore.csproj"
+    },
+    "z0.check/1.0.43": {
+      "type": "project",
+      "path": "../check/z0.check.csproj",
+      "msbuildProject": "../check/z0.check.csproj"
+    },
+    "z0.gmath/1.0.43": {
+      "type": "project",
+      "path": "../gmath/z0.gmath.csproj",
+      "msbuildProject": "../gmath/z0.gmath.csproj"
+    },
+    "z0.imagine/1.0.43": {
+      "type": "project",
+      "path": "../imagine/z0.imagine.csproj",
+      "msbuildProject": "../imagine/z0.imagine.csproj"
+    },
+    "z0.konst/1.0.43": {
+      "type": "project",
+      "path": "../konst/z0.konst.csproj",
+      "msbuildProject": "../konst/z0.konst.csproj"
+    },
+    "z0.math/1.0.43": {
+      "type": "project",
+      "path": "../math/z0.math.csproj",
+      "msbuildProject": "../math/z0.math.csproj"
+    },
+    "z0.memories/1.0.43": {
+      "type": "project",
+      "path": "../memories/z0.memories.csproj",
+      "msbuildProject": "../memories/z0.memories.csproj"
+    },
+    "z0.part/1.0.43": {
+      "type": "project",
+      "path": "../part/z0.part.csproj",
+      "msbuildProject": "../part/z0.part.csproj"
+    },
+    "z0.sys/1.0.43": {
+      "type": "project",
+      "path": "../sys/z0.sys.csproj",
+      "msbuildProject": "../sys/z0.sys.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETCoreApp,Version=v3.1": [
+      "Iced >= 1.8.0",
+      "z0.bitcore >= 1.0.43",
+      "z0.konst >= 1.0.43"
+    ]
+  },
+  "packageFolders": {
+    "J:\\cache\\nuget\\cache": {}
+  },
+  "project": {
+    "version": "1.0.43",
+    "restore": {
+      "projectUniqueName": "J:\\dev\\projects\\z0\\src\\asm.decoders\\z0.asm.decoders.csproj",
+      "projectName": "z0.asm.decoders",
+      "projectPath": "J:\\dev\\projects\\z0\\src\\asm.decoders\\z0.asm.decoders.csproj",
+      "packagesPath": "J:\\cache\\nuget\\cache",
+      "outputPath": "J:\\dev\\projects\\z0\\.build\\asmobj\\z0.asm.decoders\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "J:\\dev\\projects\\z0\\NuGet.Config",
+        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp3.1"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://dotnet.myget.org/F/dotnet-corefxlab/api/v3/index.json": {},
+        "https://dotnet.myget.org/F/roslyn/api/v3/index.json": {},
+        "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet3.1/nuget/v3/index.json": {},
+        "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet5/nuget/v3/index.json": {},
+        "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet6/nuget/v3/index.json": {},
+        "j:\\cache\\nuget\\cache": {}
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "projectReferences": {
+            "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj": {
+              "projectPath": "J:\\dev\\projects\\z0\\src\\bitcore\\z0.bitcore.csproj"
+            },
+            "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj": {
+              "projectPath": "J:\\dev\\projects\\z0\\src\\konst\\z0.konst.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
+        "dependencies": {
+          "Iced": {
+            "target": "Package",
+            "version": "[1.8.0, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Ref",
+            "version": "[3.1.2, 3.1.2]"
+          }
+        ],
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "j:\\tools\\netsdk\\sdk\\5.0.100-rc.1.20421.12\\RuntimeIdentifierGraph.json"
+      }
+    },
+    "runtimes": {
+      "win-x64": {
+        "#import": []
+      }
+    }
+  }
+}

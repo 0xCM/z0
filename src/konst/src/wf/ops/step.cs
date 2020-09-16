@@ -36,7 +36,7 @@ namespace Z0
         /// <typeparam name="T">The host type</typeparam>
         [MethodImpl(Inline)]
         public static WfStepId<T> step<T>()
-            where T : IWfStep<T>, new()
+            where T : new()
                 => default;
     }
 }

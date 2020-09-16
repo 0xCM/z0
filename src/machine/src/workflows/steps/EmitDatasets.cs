@@ -8,10 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using Z0.Asm;
-
     using static Konst;
-    using static EmitDatasetsStep;
 
     public ref partial struct EmitDatasets
     {
@@ -35,8 +32,7 @@ namespace Z0
             Wf.Created(host.Id);
         }
 
-
-        void Run(EmitProjectDocsStep kind)
+        void Run(EmitProjectDocsHost kind)
         {
             try
             {
@@ -160,7 +156,7 @@ namespace Z0
 
         void Run(EmitContentCatalogStep kind)
         {
-            using var step = new EmitContentCatalog(Wf, Ct);
+            using var step = new EmitContentCatalog(Wf);
             step.Run();
         }
 
@@ -172,20 +168,21 @@ namespace Z0
 
         public void Run()
         {
-            Run(new EmitImageConstantsStep());
-            Run(new EmitPeHeadersStep());
-            Run(new EmitImageDataStep());
-            Run(new EmitStringRecordsStep());
-            Run(new EmitImageBlobsStep());
-            Run(new EmitFieldMetadataHost());
-            Run(new EmitPartCilStep());
-            Run(new EmitBitMasksStep());
-            Run(new EmitProjectDocsStep());
-            Run(new EmitResBytesStep());
-            Run(new EmitEnumCatalogStep());
-            Run(new EmitFieldLiteralsHost());
-            Run(new EmitContentCatalogStep());
         }
+        //     Run(new EmitImageConstantsStep());
+        //     Run(new EmitPeHeadersStep());
+        //     Run(new EmitImageDataStep());
+        //     Run(new EmitStringRecordsStep());
+        //     Run(new EmitImageBlobsStep());
+        //     Run(new EmitFieldMetadataHost());
+        //     Run(new EmitPartCilStep());
+        //     Run(new EmitBitMasksStep());
+        //     Run(new EmitProjectDocsStep());
+        //     Run(new EmitResBytesStep());
+        //     Run(new EmitEnumCatalogStep());
+        //     Run(new EmitFieldLiteralsHost());
+        //     Run(new EmitContentCatalogStep());
+        // }
 
         // void Run(RecaptureStep kind)
         // {

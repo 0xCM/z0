@@ -10,6 +10,27 @@ namespace Z0
 
     using static Konst;
 
+    public enum EnumLiteralRecordField : ushort
+    {
+        PartId = 10,
+
+        TypeId = 10,
+
+        TypeAddress = 16,
+
+        NameAddress = 16,
+
+        TypeName = 30,
+
+        DataType = 10,
+
+        Index = 10,
+
+        ScalarValue = 16,
+
+        Name = 30,
+    }
+
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct EnumLiteralRecord : IComparable<EnumLiteralRecord>
     {

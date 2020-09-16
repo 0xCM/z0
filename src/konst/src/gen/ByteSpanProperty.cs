@@ -42,7 +42,7 @@ namespace Z0
             dst.Append(Chars.Space);
             dst.Append(Name);
             dst.Append(PropLambda);
-            dst.Append(string.Concat("new byte", text.bracket(Data.Length), text.embrace(Render.data<byte>(Data))));
+            dst.Append(string.Concat("new byte", text.bracket(Data.Length), text.embrace(Render.hexarray<byte>(Data))));
             dst.Append(Chars.Semicolon);
             return dst.ToString();
         }

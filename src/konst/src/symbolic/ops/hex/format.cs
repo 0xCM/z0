@@ -113,10 +113,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<byte> src)
-            => format(src, HexFormatConfig.HexData);
+            => format(src, HexFormatOptions.HexData);
 
         [MethodImpl(Inline), Op]
-        public static string format(ReadOnlySpan<byte> src, in HexFormatConfig config)
+        public static string format(ReadOnlySpan<byte> src, in HexFormatOptions config)
             => format(src, config.Delimiter, config.ZPad, config.Specifier);
 
         [MethodImpl(Inline), Op]

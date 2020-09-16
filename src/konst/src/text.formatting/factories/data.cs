@@ -8,13 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     partial struct Formatters
     {
         [MethodImpl(Inline), Op]
         public static HexDataFormatter data(MemoryAddress? @base = null, int bpl = 20, bool labels = true)
             => new HexDataFormatter(new HexLineConfig(bpl, labels), @base);
-                    
+
         /// <summary>
         /// Creates a data formatter
         /// </summary>
@@ -22,6 +22,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static HexDataFormatter<T> data<T>()
             where T : unmanaged
-                => new HexDataFormatter<T>(HexFormatConfig.HexData);
+                => new HexDataFormatter<T>(HexFormatOptions.HexData);
     }
 }

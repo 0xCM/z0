@@ -130,7 +130,7 @@ namespace Z0
         public string Format()
             => Encoded.FormatHexBytes();
 
-        public string Format(HexFormatConfig config)
+        public string Format(HexFormatOptions config)
             => Encoded.FormatHexBytes(config);
 
         public override int GetHashCode()

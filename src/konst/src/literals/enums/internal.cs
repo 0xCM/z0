@@ -5,10 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Collections.Concurrent;
-    using System.Linq;
 
     using static Konst;
 
@@ -18,11 +15,10 @@ namespace Z0
             = new ConcurrentDictionary<Type,object>();
 
         static ConcurrentDictionary<Type,object> LiteralCache {get;}
-            = new ConcurrentDictionary<Type, object>();        
+            = new ConcurrentDictionary<Type, object>();
 
         static ConcurrentDictionary<Type,object> ValueCache {get;}
             = new ConcurrentDictionary<Type,object>();
-
 
         /// <summary>
         /// Gets the literals defined by an enumeration together with their integral values
@@ -40,9 +36,8 @@ namespace Z0
                 var literal = index[i];
                 dst[i] =  evalue(literal, scalar<E,T>(literal.LiteralValue));
             }
-            return dst;        
+            return dst;
         }
-
 
         /// <summary>
         /// Gets the literals defined by an enumeration
@@ -55,7 +50,7 @@ namespace Z0
             var dst = new E[i.Length];
             for(var j = 0; j<dst.Length; j++)
                 dst[j] = i[j].LiteralValue;
-            return dst;    
+            return dst;
         }
     }
 }

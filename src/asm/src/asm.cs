@@ -38,10 +38,10 @@ namespace Z0
             get => ref state[index];
         }
 
-        ref readonly HexFormatConfig HexConfig
+        ref readonly HexFormatOptions HexConfig
         {
             [MethodImpl(Inline)]
-            get => ref z.@as<object,HexFormatConfig>(this[0]);
+            get => ref z.@as<object,HexFormatOptions>(this[0]);
         }
 
         public asm(int i)

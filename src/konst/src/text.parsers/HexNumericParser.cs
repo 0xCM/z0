@@ -14,15 +14,27 @@ namespace Z0
 
     public readonly struct HexNumericParser : IParametricParser
     {
-        public static HexNumericParser Service 
+        /// <summary>
+        /// Attempts to parse a hex string as an unsigned long
+        /// </summary>
+        /// <param name="src">The source text</param>
+        public static ParseResult<ulong> parse(string src)
+        {
+            if(ulong.TryParse(ClearSpecs(src), NumberStyles.HexNumber, null,  out ulong value))
+                return z.parsed(src,value);
+            else
+                return z.unparsed<ulong>(src);
+        }
+
+        public static HexNumericParser Service
             => default(HexNumericParser);
-        
+
         [MethodImpl(Inline)]
-        public T Parse<T>(string src, T @default)            
+        public T Parse<T>(string src, T @default)
             => Parse<T>(src).ValueOrDefault(@default);
 
         [MethodImpl(Inline)]
-        public ParseResult<T> Parse<T>(string src)            
+        public ParseResult<T> Parse<T>(string src)
         {
             if(typeof(T) == typeof(byte))
                 return U8(src).As<T>();
@@ -33,7 +45,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return U64(src).As<T>();
             else
-                throw Unsupported.define<T>();            
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]

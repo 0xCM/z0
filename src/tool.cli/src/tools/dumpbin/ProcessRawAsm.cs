@@ -87,7 +87,6 @@ namespace Z0.Tools
                 LineCount = 0;
                 IxCount = 0;
 
-                //Wf.Processing(ExtMap.Asm, src.EmissionPath, ActorName);
 
                 using var reader = src.EmissionPath.Reader();
                 using var writer = dst.Writer();
@@ -107,8 +106,6 @@ namespace Z0.Tools
 
                 writer.Flush();
                 writer.Dispose();
-
-                //Wf.Processed(StepId, ExtMap.Asm, src.EmissionPath, LineCount);
             }
 
             const string SearchPattern = "*.instructions.asm";

@@ -17,6 +17,10 @@ namespace Z0
 
         public virtual WfStepId Id {get;}
 
+        [MethodImpl(Inline)]
+        public static implicit operator WfStepId(WfHost<H> src)
+            => src.Id;
+
         public Type Type {get;}
 
         public StringRef Name

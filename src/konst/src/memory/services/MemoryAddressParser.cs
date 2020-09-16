@@ -12,7 +12,7 @@ namespace Z0
     public readonly struct MemoryAddressParser : ITextParser<MemoryAddress>
     {
         public static ParseResult<MemoryAddress> parse(string src)
-            => HexFormatSpecs.ParseHex(src).TryMap(x => z.address(x));
+            => HexNumericParser.parse(src).TryMap(x => z.address(x));
 
         [MethodImpl(Inline)]
         public static MemoryAddress succeed(string src)
@@ -22,7 +22,7 @@ namespace Z0
             => default(MemoryAddressParser);
 
         public ParseResult<MemoryAddress> Parse(string src)
-            => HexFormatSpecs.ParseHex(src).TryMap(x => z.address(x));
+            => HexNumericParser.parse(src).TryMap(x => z.address(x));
 
         [MethodImpl(Inline)]
         public MemoryAddress Parse(string src, MemoryAddress @default)

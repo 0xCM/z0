@@ -11,23 +11,17 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static EmitExtractReportStep;
-
     public ref struct EmitExtractReport
     {
-        public const string ActorName = nameof(EmitExtractReport);
-
-        readonly CorrelationToken Ct;
-
         readonly IWfShell Wf;
 
-        readonly IWfCaptureState State;
+        readonly EmitExtractReportHost Host;
 
-        readonly ApiHostUri Host;
+        readonly ApiHostUri Uri;
 
         readonly X86ApiExtract[] Source;
 
-        readonly FilePath Target;
+        readonly FS.FilePath Target;
 
         MemberExtractReport Artifact;
 
@@ -35,38 +29,37 @@ namespace Z0
             => Artifact;
 
         [MethodImpl(Inline)]
-        public EmitExtractReport(IWfCaptureState state, ApiHostUri host, X86ApiExtract[] data, FilePath dst, CorrelationToken ct)
+        public EmitExtractReport(IWfShell wf,  EmitExtractReportHost host, ApiHostUri uri, X86ApiExtract[] data, FS.FilePath dst)
         {
-            Ct = ct;
-            State = state;
-            Wf = State.Wf;
+            Wf = wf;
             Host = host;
+            Uri = uri;
             Source = data;
             Target = dst;
             Artifact = default;
-            Wf.Created(StepId);
+            Wf.Created(Host);
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
 
         public void Run()
         {
             try
             {
-                Artifact = MemberExtractReport.Create(Host, Source);
-                Wf.Raise(new ExtractReportCreated(StepId, Host, Artifact.RecordCount, Ct));
-                var result = Report.Save(Target);
+                Artifact = MemberExtractReport.Create(Uri, Source);
+                Wf.Raise(new ExtractReportCreated(Host, Uri, Artifact.RecordCount, Wf.Ct));
+                var result = Report.Save(FilePath.Define(Target.Name));
                 if(result)
-                    Wf.Raise(new ExtractReportSaved(StepId, Artifact.RecordCount, FS.path(Target.Name), Ct));
+                    Wf.Raise(new ExtractReportSaved(Host, Artifact.RecordCount, Target, Wf.Ct));
                 else
-                    Wf.Error(StepId, "Unable to save extract report");
+                    Wf.Error(Host, "Unable to save extract report");
             }
             catch(Exception e)
             {
-                Wf.Error(StepId, e);
+                Wf.Error(Host, e);
             }
         }
     }

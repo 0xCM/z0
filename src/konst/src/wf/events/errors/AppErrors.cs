@@ -23,31 +23,35 @@ namespace Z0
         /// Creates an error event
         /// </summary>
         /// <param name="content">The event content</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static AppError<T> define<T>(string source, T content)
             => new AppError<T>(EventId.define(nameof(AppError<T>), source), content);
 
-        [MethodImpl(NotInline)]
-        public static string NotEqual<T>(T lhs, T rhs)
+        public static AppException missing([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(AppErrorMsg.NotImplemented(caller,file,line));
+
+        public static string neq<T>(T lhs, T rhs)
              => string.Concat($"The operands are not equal", Delimiter, $"{lhs} != {rhs}");
 
-        [MethodImpl(NotInline)]
-        public static string NotEqual<T>(T lhs, T rhs, string caller, string file, int? line)
-             => string.Concat(NotEqual(lhs,rhs), Delimiter, AppMsg.source(caller,file,line));
+        public static string neq<T>(T lhs, T rhs, string caller, string file, int? line)
+             => string.Concat(neq(lhs,rhs), Delimiter, AppMsg.source(caller,file,line));
 
-        [MethodImpl(NotInline)]
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static string NotTrue<T>(T src)
             => string.Concat("Predicate evaluation failed", Delimiter, src);
 
-        [MethodImpl(NotInline)]
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static string NotTrue<T>(T src, string caller, string file, int? line)
              => string.Concat(NotTrue(src), Delimiter, AppMsg.source(caller,file,line));
+
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        public static AppException nonvalued<T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define($"A value of type {typeof(T).Name} was expected but does not exist", caller,file,line);
 
         const string Unknown = "???";
 
         const int UnknownInt = -1;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string FormatCallsite(string caller, string file, int? line)
             => $"line {line ?? UnknownInt}, member {caller ?? Unknown} in file {file ?? Unknown}";
 
@@ -86,9 +90,6 @@ namespace Z0
 
         public static AppException FileDoesNotExist(FilePath path, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(AppErrorMsg.FileDoesNotExist(path, caller, file, line));
-
-        public static AppException NoValue<T>([Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => AppException.Define($"A value of type {typeof(T).Name} was expected but does not exist", caller,file,line);
 
         public static ArgumentException BadArg(object arg, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new ArgumentException((arg?.ToString() ?? string.Empty) + FormatCallsite(caller, file,line));
