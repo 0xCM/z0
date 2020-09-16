@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     public class t_bitfields : t_bitcore<t_bitfields>
@@ -14,12 +14,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitFieldSegment segment<E>(E segid, byte startpos, byte endpos)
             where E : unmanaged, Enum
-                => BitFields.segment(segid, startpos, endpos); 
-                
+                => BitFields.segment(segid, startpos, endpos);
+
         enum BF_A : byte
         {
             F08_0 = 0,
-            
+
             F08_1 = 1,
 
             F08_2 = 2,
@@ -36,7 +36,7 @@ namespace Z0
                 segment(BF_A.F08_3, 6, 7)
                 );
 
-            
+
             Claim.eq((byte)4, spec.FieldCount);
             Claim.Eq((byte)0, spec[0].StartPos);
             Claim.Eq((byte)2, spec[1].StartPos);
@@ -51,8 +51,8 @@ namespace Z0
             for(var rep=0; rep<RepCount; rep++)
             {
                 var input = Random.Next<byte>();
-                
-                var seg0 = bf.Extract(spec[0], input);            
+
+                var seg0 = bf.Extract(spec[0], input);
                 var seg1 = bf.Extract(spec[1], input);
                 var seg2 = bf.Extract(spec[2], input);
                 var seg3 = bf.Extract(spec[3], input);
@@ -63,9 +63,9 @@ namespace Z0
                 Claim.Eq(Bits.slice(input, 6, 2), seg3);
 
                 var output =  gmath.or(
-                    gmath.sll(seg0, spec[0].StartPos), 
-                    gmath.sll(seg1, spec[1].StartPos), 
-                    gmath.sll(seg2, spec[2].StartPos), 
+                    gmath.sll(seg0, spec[0].StartPos),
+                    gmath.sll(seg1, spec[1].StartPos),
+                    gmath.sll(seg2, spec[2].StartPos),
                     gmath.sll(seg3, spec[3].StartPos));
                 Claim.Eq(input,output);
 
@@ -101,11 +101,11 @@ namespace Z0
                 var src = Random.Next<ushort>();
                 dst.Clear();
                 bf.Deposit(src,dst);
-                
+
                 var output =  gmath.or(
-                    gmath.sll(dst[0], spec[0].StartPos), 
-                    gmath.sll(dst[1], spec[1].StartPos), 
-                    gmath.sll(dst[2], spec[2].StartPos), 
+                    gmath.sll(dst[0], spec[0].StartPos),
+                    gmath.sll(dst[1], spec[1].StartPos),
+                    gmath.sll(dst[2], spec[2].StartPos),
                     gmath.sll(dst[3], spec[3].StartPos)
                 );
 
@@ -134,7 +134,7 @@ namespace Z0
 
             BFCW_3 = 6,
         }
-        
+
 
         public void bitfield_c()
         {
@@ -147,14 +147,14 @@ namespace Z0
             for(var rep=0; rep<RepCount; rep++)
             {
                 var src = Random.Next<byte>();
-                                
+
                 dst.Clear();
                 bf.Deposit(src, dst);
 
                 var result1 =  gmath.or(
-                    gmath.sll(dst[0], spec[0].StartPos), 
-                    gmath.sll(dst[1], spec[1].StartPos), 
-                    gmath.sll(dst[2], spec[2].StartPos), 
+                    gmath.sll(dst[0], spec[0].StartPos),
+                    gmath.sll(dst[1], spec[1].StartPos),
+                    gmath.sll(dst[2], spec[2].StartPos),
                     gmath.sll(dst[3], spec[3].StartPos)
                     );
 
@@ -164,23 +164,23 @@ namespace Z0
                     bf.Extract(spec[2], src, true),
                     bf.Extract(spec[3], src, true)
                     );
-                
-                Claim.Eq(src,result1);   
-                Claim.Eq(src,result2);   
+
+                Claim.Eq(src,result1);
+                Claim.Eq(src,result2);
             }
         }
 
         //[F1(0):0..7, F2(1):8..11, F3(2):12..13, F4(3):14..15, F5(4):16..18, F6(5):19..21, F7(6):22..26, F8(7):27..31, F9(8):32..40]
         enum BFD_W : byte
-        {            
+        {
             F0_Width = 8,
-            
+
             F1_Width = 4,
-            
+
             F2_Width = 2,
-            
+
             F3_Width = 2,
-            
+
             F4_Width = 3,
 
             F5_Width = 3,
@@ -193,15 +193,15 @@ namespace Z0
         }
 
         enum BFD_I : byte
-        {            
+        {
             F0 = 0,
-            
+
             F1 = 1,
-            
+
             F2 = 2,
-            
+
             F3 = 3,
-            
+
             F4 = 4,
 
             F5 = 5,
@@ -221,7 +221,7 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
                 result = MSvc.or<T>().Invoke(result, z.skip(src,(uint)i));
             return result;
-        }                
+        }
 
         public void bitfield_d()
         {
@@ -236,7 +236,7 @@ namespace Z0
             for(var rep=0; rep < RepCount; rep++)
             {
                 var src = Random.Next<ulong>();
-                                
+
                 dst.Clear();
                 tmp.Clear();
 
@@ -245,13 +245,13 @@ namespace Z0
                 bf.Deposit(src, dst);
                 gspan.sllv(dst, positions, tmp);
                 var result1 = or(tmp.ReadOnly());
-                                
+
                 var result2 = 0ul;
                 for(byte j=0; j<spec.FieldCount; j++)
                     result2 = gmath.or(result2, gmath.sll(dst[j], spec[j].StartPos));
-                
+
                 Claim.Eq(result1, result2);
-                
+
                 if(expect != result1)
                 {
                     Trace(src.FormatBits());
@@ -276,7 +276,7 @@ namespace Z0
             bf.Content.Bytes.FormatBits(32);
 
             bf[3] = byte.MaxValue;
-            
+
             Trace(bf.Content.Bytes.FormatBits(32));
         }
 
@@ -292,8 +292,6 @@ namespace Z0
             Claim.eq("Field1", m.Name(0));
             Claim.eq("Field2", m.Name(1));
             Claim.eq("Field3", m.Name(2));
-
-
         }
     }
 }

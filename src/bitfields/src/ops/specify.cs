@@ -6,9 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static Konst;    
+    using static Konst;
 
     partial class BitFields
     {
@@ -22,7 +21,7 @@ namespace Z0
             var total = 0u;
             for(byte i=0; i< spec.Segments.Length; i++)
                 total += spec.Segment(i).Width;
-            return total;            
+            return total;
         }
 
         /// <summary>
@@ -34,7 +33,7 @@ namespace Z0
             => new BitFieldSpec(segments);
 
         /// <summary>
-        /// Defines a bitfield predicated on an indexing enumeration I, with an assumed underlying 
+        /// Defines a bitfield predicated on an indexing enumeration I, with an assumed underlying
         /// numeric type of byte, and a width-defining enumeration W
         /// </summary>
         /// <typeparam name="I">The indexing enum type</typeparam>
@@ -53,7 +52,7 @@ namespace Z0
         /// <typeparam name="T">The underlying type of the indexing enum</typeparam>
         /// <typeparam name="W">The width enum type</typeparam>
         [MethodImpl(Inline)]
-        public static BitFieldSpec specify<I,U,W>()        
+        public static BitFieldSpec specify<I,U,W>()
             where I : unmanaged, Enum
             where U : unmanaged
             where W : unmanaged, Enum

@@ -36,7 +36,7 @@ namespace Z0
         {
             Wf.Emitting<DocLibEntry>(StepId, FS.path(TargetPath.Name));
 
-            var provider = Docs.content();
+            var provider = Docs.content<TableContentProvider>();
             var entries = z.span(provider.Provided.Array());
             EmissionCount = (uint)entries.Length;
 

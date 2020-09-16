@@ -301,7 +301,11 @@ namespace Z0
         {
             Wf.Running(StepId);
 
-
+            var bitfield = Ice.InstructionBitField.init();
+            var indices = bitfield.Indices;
+            var info = indices.Map(i => paired(i, (byte)i));
+            foreach(var i in info)
+                Wf.DataRow(i);
 
             Wf.Ran(StepId);
         }

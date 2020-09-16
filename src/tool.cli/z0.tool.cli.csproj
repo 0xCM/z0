@@ -3,11 +3,13 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <AssemblyName>ztool</AssemblyName>
-    <!-- <RuntimeIdentifier>win-x64</RuntimeIdentifier> -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Flow)" />
+    <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(Apps)" />
+
     <ProjectReference Include="$(ToolCore)" />
   </ItemGroup>
 

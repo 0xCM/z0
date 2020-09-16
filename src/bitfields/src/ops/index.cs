@@ -17,8 +17,8 @@ namespace Z0
             where U : unmanaged
             where W : unmanaged, Enum
         {
-            var indices = typeof(I).LiteralFields().Array();
-            var widths = typeof(W).LiteralFields().Array();
+            var indices = typeof(I).LiteralFields();
+            var widths = typeof(W).LiteralFields();
             var count = indices.Length;
             var indexed = new BitFieldIndexEntry<I,W>[count];
             for(var i=0; i < count; i++)
@@ -26,7 +26,6 @@ namespace Z0
             return indexed;
         }
 
-        [MethodImpl(Inline)]
         static BitFieldIndexEntry<I,W> entry<I,U,W>(int i, FieldInfo[] indices, FieldInfo[] widths)
             where U : unmanaged
             where I : unmanaged, Enum

@@ -5,7 +5,7 @@
 namespace Z0.Asm.Data
 {
     using System;
-    using static Root;
+    using static z;
 
     public class t_eflags : t_asmd<t_eflags>
     {
@@ -25,7 +25,7 @@ namespace Z0.Asm.Data
 
         public void test_flag_bits()
         {
-            var bits = BitField32.create<EFlagBits>();
+            var bits = BitFields.create<EFlagBits>(w32);
             bits[EFlagBits.ZF] = 1;
 
             var index = bits.FieldIndex(EFlagBits.ZF);

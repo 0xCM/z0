@@ -40,7 +40,7 @@ namespace Z0
             => MemoryMarshal.CreateReadOnlySpan(ref z.edit(src),1).Bytes();
 
         [Op, MethodImpl(Inline)]
-        public static void parse(in AppResourceDoc specs, Span<AsmOpCodeTable> dst)
+        public static void parse(in AppResourceDoc specs, Span<AsmOpCodeRow> dst)
         {
             var fields = Enums.literals<F>();
             var src = span(specs.Rows);
@@ -49,15 +49,15 @@ namespace Z0
         }
 
         [Op, MethodImpl(Inline)]
-        public static Span<AsmOpCodeTable> opcodes(in AppResourceDoc specs)
+        public static Span<AsmOpCodeRow> opcodes(in AppResourceDoc specs)
         {
-            var dst = Spans.alloc<AsmOpCodeTable>(specs.Rows.Length);
+            var dst = Spans.alloc<AsmOpCodeRow>(specs.Rows.Length);
             parse(specs, dst);
             return dst;
         }
 
         [Op]
-        static ref readonly AsmOpCodeTable parse(in TextRow src, ReadOnlySpan<F> fields, ref AsmOpCodeTable dst)
+        static ref readonly AsmOpCodeRow parse(in TextRow src, ReadOnlySpan<F> fields, ref AsmOpCodeRow dst)
         {
             ReadOnlySpan<string> cells = src.CellContent;
             var count = length(cells,fields);

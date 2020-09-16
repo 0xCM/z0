@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
 
     partial class BitFields
-    {            
+    {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public T extract<T>(in BitField<T> field, in BitFieldSegment seg, T src)
             where T : unmanaged
@@ -32,12 +32,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T extract<F,T>(F src, byte i0, byte i1)
             where F : IBitField<T>
-            where T : unmanaged 
+            where T : unmanaged
                 => gbits.extract(src.Content,i0,i1);
 
         [MethodImpl(Inline)]
         public static T extract<F,I,T>(F f, I i0, I i1)
-            where T : unmanaged 
+            where T : unmanaged
             where F : IBitField<T>
             where I : unmanaged, Enum
                 => extract<F,T>(f, Enums.e8u(i0), Enums.e8u(i1));
@@ -52,7 +52,6 @@ namespace Z0
             where T : unmanaged
             => offset ? gmath.sll(extract(seg, src), seg.StartPos) : extract(seg,src);
 
-
         [MethodImpl(Inline)]
         public static T extract<S,T>(in BitFieldSegment segment, in S src)
             where S : IScalarBitField<T>
@@ -60,11 +59,9 @@ namespace Z0
                 => gbits.slice(src.Scalar, segment.StartPos, segment.Width);
 
         [MethodImpl(Inline)]
-        public static T extract<S,T>(in BitFieldSegment segment, in S src, bool offset)            
+        public static T extract<S,T>(in BitFieldSegment segment, in S src, bool offset)
             where S : IScalarBitField<T>
             where T : unmanaged
-                => offset
-                 ? gmath.sll(extract<S,T>(segment, src), segment.StartPos)  
-                 : extract<S,T>(segment,src);
+                => offset ? gmath.sll(extract<S,T>(segment, src), segment.StartPos) : extract<S,T>(segment,src);
     }
 }

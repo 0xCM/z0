@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
-    using static Memories;
+    using static Konst;
+    using static z;
 
     partial class BitFields
     {
@@ -19,7 +19,7 @@ namespace Z0
         {
             var mask = Mask(dst,index);
             var conformed = gmath.and(src,mask);
-            var i  = Enums.scalar<F,byte>(index);    
+            var i  = Enums.scalar<F,byte>(index);
             dst.State = vcell(conformed, i, dst.State);
             return ref dst;
         }

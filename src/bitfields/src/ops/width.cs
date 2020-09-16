@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;    
-    using static Root;
+    using static Konst;
+    using static z;
 
     partial class BitFields
     {
@@ -22,8 +22,8 @@ namespace Z0
             var count = math.min(widths.Length, 32);
             var data = default(Vector256<byte>);
             for(var i=0; i<count; i++)
-                data = data.WithElement(i,skip(widths,i));  
-            return new BitFieldSpec256<F>(data);              
+                data = data.WithElement(i,skip(widths,i));
+            return new BitFieldSpec256<F>(data);
         }
     }
 }

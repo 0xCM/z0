@@ -16,11 +16,11 @@ namespace Z0
     public readonly struct AsmExpressions
     {
         [MethodImpl(Inline), Op]
-        public static MnemonicExpression mnemonic(in AsmOpCodeTable src)
+        public static MnemonicExpression mnemonic(in AsmOpCodeRow src)
             => new MnemonicExpression(src.Mnemonic);
 
         [MethodImpl(Inline), Op]
-        public static CpuidExpression cpuid(in AsmOpCodeTable src)
+        public static CpuidExpression cpuid(in AsmOpCodeRow src)
             => new CpuidExpression(src.CpuId);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static AsmOpCodeExpression opcode(in AsmOpCodeTable src)
+        public static AsmOpCodeExpression opcode(in AsmOpCodeRow src)
             => new AsmOpCodeExpression(src.OpCode);
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static AsmFxPattern fx(in AsmOpCodeTable src)
+        public static AsmFxPattern fx(in AsmOpCodeRow src)
             => new AsmFxPattern(src.Instruction);
     }
 }

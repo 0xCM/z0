@@ -13,6 +13,24 @@ namespace Z0
 
     partial class BitFields
     {
+        [MethodImpl(Inline), Op]
+        public static BitField32 create(W32 w, byte[] data)
+            => new BitField32(data);
+
+        [MethodImpl(Inline), Op]
+        public static BitField32 create(W32 w)
+            => new BitField32(sys.alloc<uint1>(32));
+
+        [MethodImpl(Inline)]
+        public static BitField32<E> create<E>(W32 w, E e = default)
+            where E : unmanaged
+                => new BitField32<E>(create(w));
+
+        [MethodImpl(Inline)]
+        public static BitField32<E> create<E>(W32 w, byte[] data, E e = default)
+            where E : unmanaged
+                => new BitField32<E>(create(w, data));
+
         [MethodImpl(Inline)]
         public static BitField256<F,T> create<F,T>(BitFieldSpec256<F> spec, Vector256<T> state)
             where F : unmanaged, Enum
@@ -69,7 +87,6 @@ namespace Z0
         /// <typeparam name="T">The numeric type</typeparam>
         /// <typeparam name="W"></typeparam>
         /// <typeparam name="W">A width-defining enumeration</typeparam>
-        [MethodImpl(Inline)]
         public static FixedBits<E,T,W> create<E,T,W>(uint bitcount)
             where E : unmanaged, Enum
             where T : unmanaged

@@ -14,23 +14,23 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmFxTokens tokens(in AsmTokenIndex index)
-            => new AsmFxTokens(index);
+        public static Asm.AsmTokens tokens(in AsmTokenIndex index)
+            => new Asm.AsmTokens(index);
 
         [MethodImpl(Inline), Op]
-        public static string definition(in AsmFxTokens tokens, AsmTokenKind id)
+        public static string definition(in Asm.AsmTokens tokens, AsmTokenKind id)
             => tokens.Definitions[(int)id];
 
         [MethodImpl(Inline), Op]
-        public static string meaning(in AsmFxTokens tokens, AsmTokenKind id)
+        public static string meaning(in Asm.AsmTokens tokens, AsmTokenKind id)
             => tokens.Meanings[(int)id];
 
         [MethodImpl(Inline), Op]
-        public static ref readonly TokenInfo token(in AsmFxTokens tokens, AsmTokenKind id)
+        public static ref readonly TokenInfo token(in Asm.AsmTokens tokens, AsmTokenKind id)
             => ref tokens.Models[(int)id];
 
         [MethodImpl(Inline), Op]
-        public static string identifier(in AsmFxTokens tokens, AsmTokenKind id)
+        public static string identifier(in Asm.AsmTokens tokens, AsmTokenKind id)
             => tokens.Identity[id];
     }
 }

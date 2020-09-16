@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
+    using static z;
 
     partial class VXTend
     {
@@ -41,22 +42,23 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string FormatHex<T>(this Vector128<T> src, char sep = ItemDelimiter, bool specifier = false)
             where T : unmanaged
-                => z.vspan(src).FormatHex(sep, specifier);
+                => vspan(src).FormatHex(sep, specifier);
+
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string FormatHex<T>(this Vector256<T> src, char sep = ItemDelimiter, bool specifier = false)
              where T : unmanaged
-                => z.vspan(src).FormatHex(sep, specifier);
+                => vspan(src).FormatHex(sep, specifier);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string Format<T>(this Vector128<T> src, char sep = ItemDelimiter, int pad = 2)
             where T : unmanaged
-                => z.vspan(src).Format(sep,0,pad,true);
+                => vspan(src).Format(sep,0,pad,true);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string Format<T>(this Vector256<T> src, char sep = ItemDelimiter, int pad = 2)
             where T : unmanaged
-                => z.vspan(src).Format(sep, 0, pad, true);
+                => vspan(src).Format(sep, 0, pad, true);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string Format<T>(this Vector512<T> src, char sep = ItemDelimiter, int pad = 2)
@@ -75,5 +77,21 @@ namespace Z0
                 => text.concat(
                     src.GetLower().Format(sep, pad), Chars.Space,
                     src.GetUpper().Format(sep, pad));
+
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string FormatAsmHex<T>(this Vector128<T> src)
+            where T : unmanaged
+                => vspan(src).FormatHex(Chars.Space, false);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string FormatAsmHex<T>(this Vector256<T> src)
+            where T : unmanaged
+                => vspan(src).FormatHex(Chars.Space, false);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static string FormatAsmHex<T>(this Vector512<T> src)
+            where T : unmanaged
+                => vspan(src).FormatHex(Chars.Space, false);
    }
 }

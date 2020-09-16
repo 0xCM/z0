@@ -5,17 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(Domain)" />
-    <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(Fixed)" />
+    <ProjectReference Include="$(Part)" />
   </ItemGroup>
 
    <ItemGroup>
     <EmbeddedResource Include="content/**/*.*" />
    </ItemGroup>
-
 
   <ItemGroup>
     <EmbeddedResource Include="index/TableIndex.resources">

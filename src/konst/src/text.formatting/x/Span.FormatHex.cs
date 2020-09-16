@@ -29,7 +29,7 @@ namespace Z0
                 if(i != src.Length - 1)
                     builder.Append(sep);
             }
-                        
+
             return builder.ToString();
         }
 
@@ -74,7 +74,6 @@ namespace Z0
         public static string FormatHex<T>(this IEnumerable<T> src, char sep, bool specifier)
             where T : unmanaged
                 => src.ToSpan().FormatHex(sep, specifier);
-
 
         /// <summary>
         /// Formats a span of natural length and integral type as a sequence of hex values

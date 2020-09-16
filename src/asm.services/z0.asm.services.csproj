@@ -12,6 +12,7 @@
     <ProjectReference Include="$(Structured)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Cil)" />
+    <ProjectReference Include="$(Apps)" />
   </ItemGroup>
 
 </Project>

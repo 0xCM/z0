@@ -157,11 +157,10 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Text;
+            => Text.Trim();
 
         public override string ToString()
-            => Text;
-
+            => Format();
 
         public const int Size = 32;
 

@@ -34,7 +34,7 @@ namespace Z0
             get => _Mnemonics.Symbols;
         }
 
-        public ReadOnlySpan<AsmOpCodeTable> OpCodes
+        public ReadOnlySpan<AsmOpCodeRow> OpCodes
         {
             [MethodImpl(Inline)]
             get => _OpCodes.Entries.View;
