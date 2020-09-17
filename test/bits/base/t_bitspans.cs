@@ -66,7 +66,7 @@ namespace Z0
                 var y = Random.BitBlock<T>(n);
                 var a = x % y;
                 var b = BitBlocks.modprod(x,y);
-                Claim.Require(a == b);            
+                Claim.Require(a == b);
             }
         }
 
@@ -89,7 +89,7 @@ namespace Z0
                 var b = BitBlocks.modprod(x,y);
                 if(a != b)
                     Notify($"nbc {n}x{Identify.numeric<T>()} is a problem");
-                Claim.Require(a == b);            
+                Claim.Require(a == b);
             }
         }
 
@@ -98,12 +98,12 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            int n = (int)value<N>();
+            int n = (int)nat64u<N>();
             var rep = default(N);
-            var segcount = (int)GridCells.mincells<T>(value<N>());
+            var segcount = (int)GridCells.mincells<T>(nat64u<N>());
             Claim.eq(BitBlock<N,T>.NeededCells, segcount);
             var totalcap = BitBlock<N,T>.RequiredWidth;
-            var segcap = bitsize<T>();
+            var segcap = bitwidth<T>();
             Claim.eq(BitBlock<N,T>.CellWidth, segcap);
 
             var src = Random.Span<T>(RepCount);
@@ -113,11 +113,11 @@ namespace Z0
                 var bc = bcSrc.ToNatBits(rep);
                 ClaimEqual(bc,bc.ToBitString());
                 Claim.eq(n, bc.Width);
-                Claim.eq(segcap * segcount, totalcap);                
+                Claim.eq(segcap * segcount, totalcap);
 
                 var x = src[i];
                 for(byte j = 0; j < n; j++)
-                    Claim.Eq(gbits.testbit(x,j), bc[j]);     
+                    Claim.Eq(gbits.testbit(x,j), bc[j]);
             }
         }
 
@@ -130,7 +130,7 @@ namespace Z0
                 term.print($"Executing {caller()}: {bitcount} bits covered by {segcount} segments of kind {typeof(T).DisplayName()}");
 
             var src = Random.Span<T>(RepCount);
-                        
+
             for(var i=0; i<RepCount; i += segcount)
             {
                 var data = src.Slice(i, segcount);
@@ -138,7 +138,7 @@ namespace Z0
                 var bs = data.ToBitString(bitcount);
                 Claim.eq(bc.BitCount, bitcount);
                 Claim.eq(bs.Length, bitcount);
-                
+
                 for(var j=0; j<bc.BitCount; j++)
                     Claim.Eq(bc[j], bs[j]);
             }
@@ -147,12 +147,12 @@ namespace Z0
         protected void bitblock_pop_check<N,T>(N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-        {            
-            //var size = (int)(Mod8.div((uint)n.NatValue) + (Mod8.mod((uint)n.NatValue) != 0 ? 1 : 0));            
+        {
+            //var size = (int)(Mod8.div((uint)n.NatValue) + (Mod8.mod((uint)n.NatValue) != 0 ? 1 : 0));
             var size = BitBlock<N,byte>.NeededCells;
             var src = Random.Span<byte>((int)size);
             var bc = BitBlocks.load<N,T>(src);
-            
+
             var pc1 = bc.Pop();
 
             var bs = BitString.scalars(src);

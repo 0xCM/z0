@@ -9,9 +9,9 @@ namespace Z0
 
     using static Konst;
     using static Memories;
-    
+
     partial class gbits
-    {    
+    {
         /// <summary>
         /// Extracts a contiguous range of bits from a primal source inclusively between two index positions
         /// </summary>
@@ -41,7 +41,7 @@ namespace Z0
             var cells = GridCells.minbytes(last - first + 1);
             var src = z.bytes<T>(seg).Slice(0,cells);
             src.CopyTo(dst,offset);
-        }   
+        }
 
         /// <summary>
         /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by an inclusive position range
@@ -55,24 +55,24 @@ namespace Z0
             where T : unmanaged
         {
             var bitcount = lastpos - firstpos;
-            if(bitcount > bitsize<T>())
+            if(bitcount > bitwidth<T>())
                 return NumericLiterals.maxval<T>();
 
             var sameSeg = firstpos.CellIndex == lastpos.CellIndex;
-            var firstCount = uint8(sameSeg ? bitcount : bitsize<T>() - firstpos.BitOffset);
+            var firstCount = uint8(sameSeg ? bitcount : bitwidth<T>() - firstpos.BitOffset);
             var part1 = gbits.slice(bitcell(src,firstpos), (byte)firstpos.BitOffset, firstCount);
-            
+
             if(sameSeg)
                 return part1;
             else
             {
                 var lastCount = uint8(bitcount - firstCount);
-                return gmath.or(part1, gmath.sal(gbits.slice(bitcell(src,lastpos), 0, lastCount), firstCount));              
+                return gmath.or(part1, gmath.sal(gbits.slice(bitcell(src,lastpos), 0, lastCount), firstCount));
             }
         }
 
         /// <summary>
-        /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by 
+        /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by
         /// an inclusive linear index range
         /// </summary>
         /// <param name="src">The bit source</param>
@@ -82,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T extract<T>(Span<T> src, int firstidx, int lastidx)
             where T : unmanaged
-                => extract(src, bitpos<T>(firstidx), bitpos<T>(lastidx));         
+                => extract(src, bitpos<T>(firstidx), bitpos<T>(lastidx));
 
         [MethodImpl(Inline)]
         static T extract_i<T>(T src, byte p0, byte p1)
@@ -112,7 +112,7 @@ namespace Z0
                  return generic<T>(Bits.extract(uint32(src), p0, p1));
             else if(typeof(T) == typeof(ulong))
                  return generic<T>(Bits.extract(uint64(src), p0, p1));
-            else 
+            else
                 return extract_i(src,p0,p1);
         }
 
@@ -124,7 +124,7 @@ namespace Z0
                  return generic<T>(Bits.extract(float32(src), p0, p1));
             else if(typeof(T) == typeof(double))
                  return generic<T>(Bits.extract(float64(src),  p0, p1));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
     }

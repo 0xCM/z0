@@ -12,7 +12,7 @@ namespace Z0.Image
     using static Images;
 
     [StructLayout(LayoutKind.Sequential)]
-    [Table("https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_section_header")]
+    [Url("https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_section_header")]
     public unsafe struct IMAGE_SECTION_HEADER
     {
         public string Name
@@ -30,9 +30,9 @@ namespace Z0.Image
         }
 
         public fixed byte NameBytes[IMAGE_SIZEOF_SHORT_NAME];
-        
+
         public uint VirtualSize;
-        
+
         /// <summary>
         /// The address of the first byte of the section when loaded into memory, relative to the image base. For object files, this is the address of the first byte before relocation is applied.
         /// </summary>

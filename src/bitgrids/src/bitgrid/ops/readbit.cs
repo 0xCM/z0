@@ -15,8 +15,8 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static bit readbit<T>(in T src, int bitpos)
-            where T : unmanaged   
-                => gbits.testbit(readcell(in src, bitpos), (byte)(bitpos % bitsize<T>()));
+            where T : unmanaged
+                => gbits.testbit(readcell(in src, bitpos), (byte)(bitpos % bitwidth<T>()));
 
         /// <summary>
         /// Reads a cell determined by a linear bit position
@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static ref readonly T readcell<T>(in T src, int bitpos)
             where T : unmanaged
-                => ref skip(in src, bitpos / bitsize<T>()); 
+                => ref skip(in src, bitpos / bitwidth<T>());
 
         /// <summary>
         /// Reads a bit from a grid

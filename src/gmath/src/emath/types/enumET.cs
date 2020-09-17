@@ -129,7 +129,7 @@ namespace Z0
         public DataWidth Width
         {
             [MethodImpl(Inline)]
-            get => (DataWidth)bitsize<T>();
+            get => (DataWidth)bitwidth<T>();
         }
 
         E IEnum<E>.Literal

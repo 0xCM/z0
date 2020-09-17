@@ -10,7 +10,7 @@ namespace Z0.Image
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential, Pack = 1)]
-    [Table("https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_file_header")]
+    [Url("https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_file_header")]
     public struct IMAGE_FILE_HEADER
     {
         /// <summary>

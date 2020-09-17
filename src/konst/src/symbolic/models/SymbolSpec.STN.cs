@@ -51,7 +51,7 @@ namespace Z0
         public ushort SegWidth
         {
             [MethodImpl(Inline)]
-            get => (ushort)bitsize<T>();
+            get => (ushort)bitwidth<T>();
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         public ushort Capacity
         {
             [MethodImpl(Inline)]
-            get => (ushort)((ushort)bitsize<T>()/(ushort)Widths.data<W>());
+            get => (ushort)((ushort)bitwidth<T>()/(ushort)Widths.data<W>());
         }
 
         public ArtifactIdentifier SegDomain

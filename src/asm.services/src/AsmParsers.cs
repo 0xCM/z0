@@ -66,7 +66,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         static int hipos(ulong src)
-            => (int)bitsize<ulong>() - 1 - nlz(src);
+            => (int)bitwidth<ulong>() - 1 - nlz(src);
 
         [MethodImpl(Inline)]
         static byte effsize(ulong src)

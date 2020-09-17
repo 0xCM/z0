@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;    
+    using static Memories;
 
     partial class gbits
-    {        
+    {
         /// <summary>
-        /// Constructs a bitsequence by interrogating the source with bit state tests 
+        /// Constructs a bitsequence by interrogating the source with bit state tests
         /// and populates a caller-supplied target with the result
         /// </summary>
         /// <param name="src">The source value</param>
@@ -22,7 +22,7 @@ namespace Z0
         public static Span<byte> testbits<T>(T src, Span<byte> dst, int offset = 0)
             where T : unmanaged
         {
-            var n = bitsize<T>();
+            var n = bitwidth<T>();
             ref var loc = ref seek(ref head(dst), offset);
 
             for(var i=0; i<n; i++)
@@ -39,7 +39,7 @@ namespace Z0
         public static Span<byte> testbits<T>(T src)
             where T : unmanaged
         {
-            Span<byte> dst = new byte[bitsize<T>()];
+            Span<byte> dst = new byte[bitwidth<T>()];
             testbits(src,dst);
             return dst;
         }

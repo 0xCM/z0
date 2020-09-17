@@ -27,13 +27,13 @@ namespace Z0
         /// The number of matrix rows
         /// </summary>
         public static int Rows
-            => (int)value<M>();
+            => (int)nat64u<M>();
 
         /// <summary>
         /// The number of matrix colums
         /// </summary>
         public static int Cols
-            => (int)value<N>();
+            => (int)nat64u<N>();
 
         /// <summary>
         /// The total number of matrix cells

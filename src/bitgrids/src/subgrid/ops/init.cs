@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
+    using static BitMasks.Literals;
 
     partial class SubGrid
     {
@@ -27,7 +28,7 @@ namespace Z0
             var n = n5;
             var w = n256;
             var dst = SpanBlocks.alloc<ulong>(w);
-            var mask = MaskLiterals.Lsb64x8x5;
+            var mask = Lsb64x8x5;
             var bs = BitString.alloc(w);
             for(int i=0, j=0 ; i< p.Length; i++, j+=5)
                 bs.BitMap(p[i].ToBitString(),j, 5);

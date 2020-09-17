@@ -84,7 +84,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var n = value<N>();
+            var n = nat64u<N>();
             var data = SpanBlocks.rectangle<T>(n256, n, n);
             for(var row=0u; row < n; row++)
                 random.MarkovSpan<T>(data.Slice((int)(row*n), (int)n));
@@ -96,7 +96,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var data = dst.Unsized;
-            var n = value<N>();
+            var n = nat64u<N>();
             for(var row=0u; row < n; row++)
                 random.MarkovSpan<T>(data.Slice((int)(row*n), (int)n));
             return ref dst;

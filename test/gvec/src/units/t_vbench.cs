@@ -6,17 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static z;
 
     public class t_vbench : t_inx<t_vbench>
-    {        
+    {
         protected override int CycleCount => Pow2.T08;
 
         protected override int RepCount => Pow2.T10;
 
-        public override bool Enabled 
+        public override bool Enabled
             => true;
 
         public void bitpack_bench()
@@ -58,7 +58,7 @@ namespace Z0
         }
 
         public void vsrl_bench()
-        {         
+        {
             vsrl_bench(w128);
             vsrl_bench(w256);
         }
@@ -155,7 +155,7 @@ namespace Z0
             vshift_bench(w,VSvc.vsll(w, z8), z8);
             vshift_bench(w,VSvc.vsll(w, z16), z16);
             vshift_bench(w,VSvc.vsll(w, z32), z32);
-            vshift_bench(w,VSvc.vsll(w, z64), z64);            
+            vshift_bench(w,VSvc.vsll(w, z64), z64);
         }
 
         void vsll_bench(N256 w)
@@ -164,7 +164,7 @@ namespace Z0
             vshift_bench(w,VSvc.vsll(w, z8), z8);
             vshift_bench(w,VSvc.vsll(w, z16), z16);
             vshift_bench(w,VSvc.vsll(w, z32), z32);
-            vshift_bench(w,VSvc.vsll(w, z64), z64);            
+            vshift_bench(w,VSvc.vsll(w, z64), z64);
         }
 
         void vsrl_bench(N256 w)
@@ -172,7 +172,7 @@ namespace Z0
             vshift_bench(w,VSvc.vsrl(w, z8), z8);
             vshift_bench(w,VSvc.vsrl(w, z16), z16);
             vshift_bench(w,VSvc.vsrl(w, z32), z32);
-            vshift_bench(w,VSvc.vsrl(w, z64), z64);            
+            vshift_bench(w,VSvc.vsrl(w, z64), z64);
         }
 
         void vsrl_bench(W128 w)
@@ -180,7 +180,7 @@ namespace Z0
             vshift_bench(w,VSvc.vsrl(w, z8), z8);
             vshift_bench(w,VSvc.vsrl(w, z16), z16);
             vshift_bench(w,VSvc.vsrl(w, z32), z32);
-            vshift_bench(w,VSvc.vsrl(w, z64), z64);            
+            vshift_bench(w,VSvc.vsrl(w, z64), z64);
         }
 
         void vbinop_bench<F,T>(W128 w, F f, T t = default, SystemCounter clock = default)
@@ -190,17 +190,17 @@ namespace Z0
             var last = Vectors.vzero(w,t);
             var blocklen = Widths.div(w,t);
             var blockcount = RepCount/blocklen;
-            var bitlen = bitsize(t);
+            var bitlen = bitwidth(t);
             var ops = 0;
 
-            for(var cycle = 0; cycle < CycleCount; cycle++)  
-            { 
+            for(var cycle = 0; cycle < CycleCount; cycle++)
+            {
                 var lData = Random.Blocks<T>(w,blockcount);
                 var rData = Random.Blocks<T>(w,blockcount);
 
                 clock.Start();
                 for(var block=0; block<blockcount; block++, ops++)
-                    last = f.Invoke(lData.LoadVector(block), rData.LoadVector(block));  
+                    last = f.Invoke(lData.LoadVector(block), rData.LoadVector(block));
                 clock.Stop();
             }
 
@@ -214,17 +214,17 @@ namespace Z0
             var last = Vectors.vzero(w,t);
             var blocklen = Widths.div(w,t);
             var blockcount = RepCount/blocklen;
-            var bitlen = bitsize(t);
+            var bitlen = bitwidth(t);
             var ops = 0;
 
-            for(var cycle = 0; cycle < CycleCount; cycle++)  
-            { 
+            for(var cycle = 0; cycle < CycleCount; cycle++)
+            {
                 var lData = Random.Blocks<T>(w,blockcount);
                 var rData = Random.Blocks<T>(w,blockcount);
 
                 clock.Start();
                 for(var block=0; block<blockcount; block++, ops++)
-                    last = f.Invoke(lData.LoadVector(block), rData.LoadVector(block));  
+                    last = f.Invoke(lData.LoadVector(block), rData.LoadVector(block));
                 clock.Stop();
             }
 
@@ -238,20 +238,20 @@ namespace Z0
             var last = Vectors.vzero(w,t);
             var blocklen = Widths.div(w,t);
             var blockcount = RepCount/blocklen;
-            var bitlen = bitsize(t);
+            var bitlen = bitwidth(t);
             var ops = 0;
 
-            for(var cycle = 0; cycle < CycleCount; cycle++)  
-            { 
+            for(var cycle = 0; cycle < CycleCount; cycle++)
+            {
                 var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
                 var data = Random.Blocks<T>(w,blockcount);
 
                 clock.Start();
                 for(var block=0; block<blockcount; block++, ops++)
-                    last = f.Invoke(data.LoadVector(block),offset);  
+                    last = f.Invoke(data.LoadVector(block),offset);
                 clock.Stop();
             }
-            
+
             ReportBenchmark(f, ops, clock,w,t);
         }
 
@@ -262,20 +262,20 @@ namespace Z0
             var last = Vectors.vzero(w,t);
             var blocklen = Widths.div(w,t);
             var blockcount = RepCount/blocklen;
-            var bitlen = bitsize(t);
+            var bitlen = bitwidth(t);
             var ops = 0;
 
-            for(var cycle = 0; cycle < CycleCount; cycle++)  
-            { 
+            for(var cycle = 0; cycle < CycleCount; cycle++)
+            {
                 var offset = Random.Next<byte>(2, (byte)(bitlen - 1));
                 var data = Random.Blocks<T>(w,blockcount);
 
                 clock.Start();
                 for(var block=0; block<blockcount; block++, ops++)
-                    last = f.Invoke(data.LoadVector(block),offset);  
+                    last = f.Invoke(data.LoadVector(block),offset);
                 clock.Stop();
             }
-            
+
             ReportBenchmark(f, ops, clock,w,t);
         }
 
@@ -293,14 +293,14 @@ namespace Z0
                     last = BitSpans.extract<uint>(data, i);
                 clock.Stop();
             }
-            
+
             ReportBenchmark("bitspan_scalar/32", ops, clock);
         }
 
         void bitpack_bench<T>(T t = default)
             where T : unmanaged
         {
-            var n = bitsize(t);
+            var n = bitwidth(t);
             var ops = 0;
             var composite = default(T);
             var clock = counter();
@@ -313,16 +313,16 @@ namespace Z0
                 for(var j=0u; j < bs.Length; j+= n, ops++)
                     gmath.or(composite, BitSpans.extract<T>(bs,(int)j));
                 clock.Stop();
-                
+
                 Random.SpanFill(packed);
             }
-            
+
             ReportBenchmark($"bitspan_pack/{n}", ops, clock);
         }
 
 
         void vpop_bench(N256 n, SystemCounter counter = default)
-        {            
+        {
             var total = 0ul;
             var opcount = 0;
             for(var cycle = 0; cycle < CycleCount; cycle++)
@@ -340,7 +340,7 @@ namespace Z0
         }
 
         void vpop_bench(W128 n, SystemCounter counter = default)
-        {            
+        {
             var total = 0ul;
             var opcount = 0;
             for(var cycle = 0; cycle < CycleCount; cycle++)
@@ -358,7 +358,7 @@ namespace Z0
         }
 
         void vpop_bench_ref(SystemCounter counter = default)
-        {            
+        {
             var total = 0u;
             var opcount = 0;
             Span<ulong> samples = stackalloc ulong[RepCount];

@@ -13,8 +13,6 @@ namespace Z0
     using static z;
     using static Checks;
 
-    using static CheckBitMasksStep;
-
     [ApiHost]
     public ref struct CheckBitMasks
     {
@@ -22,13 +20,15 @@ namespace Z0
 
         readonly IWfShell Wf;
 
+        readonly CheckBitMasksHost Host;
+
         uint SuccessCount;
 
         uint FailureCount;
 
         public Pair<uint> Counts;
 
-        readonly IPolyrand Random;
+        readonly IPolyrand DataSource;
 
         Span<byte> Cases8;
 
@@ -54,29 +54,30 @@ namespace Z0
 
         CheckHiMaskResults<ulong> HiMaskResults64;
 
-        public CheckBitMasks(IWfShell wf, IPolyrand random, StringBuilder log)
+        public CheckBitMasks(IWfShell wf, CheckBitMasksHost host, IPolyrand source, StringBuilder log)
             : this()
         {
             Wf = wf;
+            Host = host;
             Log = log;
             SuccessCount = 0;
             FailureCount = 0;
             Counts = default;
-            Random = random;
+            DataSource = source;
             Init();
-            Wf.Created(StepId);
+            Wf.Created(Host);
         }
 
         void Init()
         {
-            Cases8 = Random.Fill(z8, (byte)bitsize<byte>(), span<byte>(Reps));
-            Cases16 = Random.Fill(z8, (byte)bitsize<ushort>(), span<byte>(Reps));
-            Cases32 = Random.Fill(z8, (byte)bitsize<uint>(), span<byte>(Reps));
-            Cases64 = Random.Fill(z8, (byte)bitsize<uint>(), span<byte>(Reps));
-            Literals8 = Literals.tagged<byte>(base2, typeof(MaskLiterals));
-            Literals16 = Literals.tagged<ushort>(base2, typeof(MaskLiterals));
-            Literals32 = Literals.tagged<uint>(base2, typeof(MaskLiterals));
-            Literals64 = Literals.tagged<ulong>(base2, typeof(MaskLiterals));
+            Cases8 = DataSource.Fill(z8, (byte)bitwidth<byte>(), span<byte>(Reps));
+            Cases16 = DataSource.Fill(z8, (byte)bitwidth<ushort>(), span<byte>(Reps));
+            Cases32 = DataSource.Fill(z8, (byte)bitwidth<uint>(), span<byte>(Reps));
+            Cases64 = DataSource.Fill(z8, (byte)bitwidth<uint>(), span<byte>(Reps));
+            Literals8 = Literals.tagged<byte>(base2, typeof(BitMasks.Literals));
+            Literals16 = Literals.tagged<ushort>(base2, typeof(BitMasks.Literals));
+            Literals32 = Literals.tagged<uint>(base2, typeof(BitMasks.Literals));
+            Literals64 = Literals.tagged<ulong>(base2, typeof(BitMasks.Literals));
             HiMaskResults8 = alloc<CheckHiMaskResult<byte>>(Reps);
             HiMaskResults16 = alloc<CheckHiMaskResult<ushort>>(Reps);
             HiMaskResults32 = alloc<CheckHiMaskResult<uint>>(Reps);
@@ -118,7 +119,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running(StepId);
+            Wf.Running(Host);
 
             Check(base2);
             CheckLoMask(n0);
@@ -130,13 +131,13 @@ namespace Z0
             Himask(w64);
 
             Counts = (SuccessCount,FailureCount);
-            Wf.Ran(StepId, Counts);
+            Wf.Ran(Host, Counts);
 
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
 
         void Check(Base2 @base)
@@ -246,7 +247,7 @@ namespace Z0
             where W : unmanaged, ITypeWidth<W>
         {
             var mincount = (byte)1;
-            var maxcount = (byte)bitsize(t);
+            var maxcount = (byte)bitwidth(t);
             var cases = Cases(w);
 
             for(var i=0u; i<Reps; i++)
@@ -258,7 +259,7 @@ namespace Z0
                 dst.PopCount = (byte)gbits.pop(dst.Mask);
                 dst.Check1 = dst.PopCount  != dst.Count;
                 dst.Check1 = eq(dst.Count, gbits.pop(dst.Mask));
-                dst.Lowered = gmath.srl(dst.Mask, (byte)(bitsize(t) -  dst.Count));
+                dst.Lowered = gmath.srl(dst.Mask, (byte)(bitwidth(t) -  dst.Count));
                 dst.EffectiveWidth = (byte)gbits.effwidth(dst.Lowered);
                 dst.Check3 = dst.Count == dst.EffectiveWidth;
             }

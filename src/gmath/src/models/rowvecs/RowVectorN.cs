@@ -21,7 +21,7 @@ namespace Z0
         /// The vector's dimension
         /// </summary>
         public static int Dim
-            => (int)value<N>();
+            => (int)nat64u<N>();
 
         /// <summary>
         /// The zero vector

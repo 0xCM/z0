@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static z;
 
     partial class BitMatrix
-    {        
+    {
         /// <summary>
         /// Creates a new generic bitmatrix where each row is initialized to a common source vector
         /// </summary>
@@ -23,7 +23,7 @@ namespace Z0
         {
             var matrix = alloc<N,T>();
             var srcCellCount = BitBlock<N,T>.NeededCells;
-            var srcBitCount = value<N>();
+            var srcBitCount = nat64u<N>();
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
             for(var i=0u; i<srcBitCount; i++)
@@ -43,7 +43,7 @@ namespace Z0
         {
             var matrix = alloc<M,N,T>();
             var srcCellCount = BitBlock<N,T>.NeededCells;
-            var srcBitCount = value<N>();
+            var srcBitCount = nat64u<N>();
             ref readonly var src = ref row.Head;
             ref var dst = ref matrix.Head;
             for(var i=0u; i< srcBitCount; i++)

@@ -22,7 +22,7 @@ namespace Z0
         T Content {get;}
 
         uint ISized.Width
-            => bitsize<T>();
+            => bitwidth<T>();
     }
 
     public interface IAsmArg<W,T> : IAsmArg<T>

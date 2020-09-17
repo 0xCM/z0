@@ -44,8 +44,8 @@ namespace Z0
         void bitseq_check<T>(T t = default)
             where T : unmanaged
         {
-            Span<byte> s0 = stackalloc byte[bitsize<T>()];
-            Span<byte> s1 = stackalloc byte[bitsize<T>()];
+            Span<byte> s0 = stackalloc byte[bitwidth<T>()];
+            Span<byte> s1 = stackalloc byte[bitwidth<T>()];
             ReadOnlySpan<byte> s2 = default;
             for(var i=0; i<RepCount; i++)
             {

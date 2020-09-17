@@ -37,7 +37,7 @@ namespace Z0
             where T : unmanaged
         {
             var index = hipos(src);
-            var count = (bitsize<T>() / (index + 1) +  1);
+            var count = (bitwidth<T>() / (index + 1) +  1);
             var replicated = Bits.replicate(convert<T,ulong>(src), 0, index, count);
             return convert<T>(replicated);
         }
@@ -51,6 +51,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T replicate<T>(byte src)
             where T : unmanaged
-                => convert<T>(Bits.replicate((ulong)src, 0, 7, bitsize<T>() / 8));
+                => convert<T>(Bits.replicate((ulong)src, 0, 7, bitwidth<T>() / 8));
     }
 }

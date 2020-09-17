@@ -24,7 +24,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => new CpuBuffer<N,W,T>(new T[value<N>()]);
+                => new CpuBuffer<N,W,T>(new T[nat64u<N>()]);
 
         /// <summary>
         /// The number of bytes covered by the buffer

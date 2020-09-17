@@ -24,7 +24,7 @@ namespace Z0
         where N : unmanaged, ITypeNat
     {
         byte IAsmArgSequence.Count
-            => (byte)z.value<N>();
+            => (byte)z.nat64u<N>();
     }
 
 

@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int linear<N>(int row, int col, N n = default)
             where N : unmanaged, ITypeNat
-                => row * (int)value<N>() + col;
+                => row * (int)nat64u<N>() + col;
 
         /// <summary>
         /// Computes the 0-based linear index determined by a row/col coordinate and natural column width

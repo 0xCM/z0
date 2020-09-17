@@ -57,7 +57,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new Matrix<N, T>(
-                    Arrays.alloc((int)(value<N>()* value<N>()), fill));
+                    Arrays.alloc((int)(nat64u<N>()* nat64u<N>()), fill));
 
         /// <summary>
         /// Allocates a blocked square matrix of natual dimension
@@ -70,7 +70,7 @@ namespace Z0
         public static Matrix256<N,T> blockalloc<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => SpanBlocks.rectangle<T>(n256, value(n), value(n));
+                => SpanBlocks.rectangle<T>(n256, nat64u(n), nat64u(n));
 
         /// <summary>
         /// Allocates a blocked matrix of natual dimensions
@@ -86,7 +86,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => SpanBlocks.rectangle<T>(n256, value(m), value(n));
+                => SpanBlocks.rectangle<T>(n256, nat64u(m), nat64u(n));
 
         /// <summary>
         /// Allocates a matrix of natual dimensions
@@ -102,7 +102,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new Matrix<M, N, T>(array<T>((int)(value<M>() * value<N>()),fill));
+                => new Matrix<M, N, T>(array<T>((int)(nat64u<M>() * nat64u<N>()),fill));
 
         /// <summary>
         /// Loads a matrix of natural dimensions from an array
@@ -237,8 +237,8 @@ namespace Z0
             var options = fmt ?? TextDocFormat.Structured;
             var width = fmt?.ColWidth ?? src.ColFormatWidth();
             var sep = options.Delimiter;
-            var rows = (int)value<M>();
-            var cols = (int)value<N>();
+            var rows = (int)nat64u<M>();
+            var cols = (int)nat64u<N>();
             dst.WriteLine($"{options.CommentPrefix} {typeof(T).Name}[{rows}x{cols}]");
             if(options.HasDataHeader)
             {
@@ -273,8 +273,8 @@ namespace Z0
             where T : unmanaged
         {
             var doc = TextDocParser.parse(src).Require();
-            var m = (int)value<M>();
-            var n = (int)value<N>();
+            var m = (int)nat64u<M>();
+            var n = (int)nat64u<N>();
 
             if(m != doc.RowCount)
                 return default;
@@ -283,7 +283,7 @@ namespace Z0
                 return default;
 
             var parser = Parsers.numeric<T>();
-            var dst =  Matrix.blockload<M,N,T>(SpanBlocks.rectangle<T>(n256, value<M>(), value<N>()));
+            var dst =  Matrix.blockload<M,N,T>(SpanBlocks.rectangle<T>(n256, nat64u<M>(), nat64u<N>()));
             for(var i = 0; i<doc.Rows.Length; i++)
             {
                 ref readonly var row = ref doc[i];
@@ -324,8 +324,8 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var m = (int)value<M>();
-            var n = (int)value<N>();
+            var m = (int)nat64u<M>();
+            var n = (int)nat64u<N>();
             var tB = B.Transpose();
 
             for(var i=0; i< m; i++)

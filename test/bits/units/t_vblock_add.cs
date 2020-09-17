@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    
+
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_vblock_add : UnitTest<t_vblock_add>
-    {   
+    {
         static NatSeq<N1,N2,N3> L => default;
 
         public void vblock_add_123x8i()
@@ -54,7 +54,7 @@ namespace Z0
 
         public void vblock_add_123x8_bench()
             => vblock_add_bench(L,z8);
-        
+
         public void vblock_add_123x32i_bench()
             => vblock_add_bench(L,z32i);
 
@@ -63,7 +63,7 @@ namespace Z0
 
         public void vblock_add_123x64i_bench()
             => vblock_add_bench(L,z64i);
- 
+
         public void vblock_add_123x64_bench()
             => vblock_add_bench(L,z64);
 
@@ -74,7 +74,7 @@ namespace Z0
             => vblock_add_bench(L,z64f);
 
         public Span<T> add<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
-            where T : unmanaged        
+            where T : unmanaged
         {
             for(var i=0; i< Claim.length(lhs,rhs); i++)
                 lhs[i] = gmath.add(lhs[i], rhs[i]);
@@ -86,7 +86,7 @@ namespace Z0
             where T : unmanaged
         {
             var v4 = RowVectors.blockalloc<N,T>();
-            for(var i=0; i< CycleCount; i++)            
+            for(var i=0; i< CycleCount; i++)
             {
                 var v1 = Random.VectorBlock<N,T>();
                 var v2 = Random.VectorBlock<N,T>();
@@ -102,7 +102,7 @@ namespace Z0
         {
             var opcount = CycleCount*RoundCount;
             var sw = stopwatch(false);
-            var opname = $"vblock_add_{n}x{bitsize<T>()}";
+            var opname = $"vblock_add_{n}x{bitwidth<T>()}";
             var dst = RowVectors.blockalloc<N,T>();
             for(var i=0; i<opcount; i++)
             {

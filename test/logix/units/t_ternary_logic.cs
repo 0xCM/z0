@@ -7,7 +7,7 @@ namespace Z0.Logix
     using System;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_ternary_logic : LogixTest<t_ternary_logic>
     {
@@ -62,7 +62,7 @@ namespace Z0.Logix
         {
             for(var i=0; i<RepCount; i++)
             {
-                var width = bitsize<T>();
+                var width = bitwidth<T>();
                 var a = Random.BitVector<T>();
                 var b = Random.BitVector<T>();
                 var c = Random.BitVector<T>();
@@ -132,7 +132,7 @@ namespace Z0.Logix
         void check_op_equivalence<T>(TernaryBitLogicKind kind)
             where T: unmanaged
         {
-            var width = bitsize<T>();
+            var width = bitwidth<T>();
             for(var i=0; i<RepCount; i++)
             {
                 var a = Random.BitVector<T>();

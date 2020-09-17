@@ -19,12 +19,12 @@ namespace Z0
         /// <param name="cols">The number of columns in the grid</param>
         /// <param name="segwidth">The width of a grid cell</param>
         [MethodImpl(Inline), Op]
-        public static GridSpec grid(ushort rows, ushort cols, ushort segwidth)    
+        public static GridSpec grid(ushort rows, ushort cols, ushort segwidth)
         {
             var bytes = (uint)GridCells.tablesize(rows, cols);
             var bits = bytes*8;
-            var segs = GridCells.tablecells(rows, cols, segwidth);            
-            return new GridSpec(rows, cols, segwidth, bytes, bits, segs);        
+            var segs = GridCells.tablecells(rows, cols, segwidth);
+            return new GridSpec(rows, cols, segwidth, bytes, bits, segs);
         }
 
         /// <summary>
@@ -33,15 +33,15 @@ namespace Z0
         /// <param name="rows">The number of rows in the grid</param>
         /// <param name="cols">The number of columns in the grid</param>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static GridSpec grid<T>(ushort rows, ushort cols) 
-            where T : unmanaged   
-                => grid(rows, cols, (ushort)bitsize<T>());
+        public static GridSpec grid<T>(ushort rows, ushort cols)
+            where T : unmanaged
+                => grid(rows, cols, (ushort)bitwidth<T>());
 
         [MethodImpl(Inline)]
         public static GridSpec grid<M,N,T>(M m = default, N n = default, T zero = default)
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
             where T : unmanaged
-                => grid<T>((ushort)value<M>(), (ushort)value<N>());        
+                => grid<T>((ushort)nat64u<M>(), (ushort)nat64u<N>());
     }
 }

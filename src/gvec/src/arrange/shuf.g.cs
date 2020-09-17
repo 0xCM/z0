@@ -5,9 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-        
+
     using static Konst;
     using static As;
 
@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vshuf4x32<T>(Vector128<T> src, [Imm] byte spec)
             where T : unmanaged
-                => generic<T>(dvec.vshuf4x32(v32u(src), spec));
+                => generic<T>(z.vshuf4x32(v32u(src), spec));
 
         /// <summary>
         /// Shuffles unsigned 32-bit source segments within 128-bit lanes according to the shuffle spec
@@ -33,17 +33,17 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vshuf4x32<T>(Vector256<T> src, [Imm] byte spec)
             where T : unmanaged
-                => generic<T>(dvec.vshuf4x32(v32u(src), spec));
+                => generic<T>(z.vshuf4x32(v32u(src), spec));
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vshuf4x32<T>(Vector128<T> src, [Imm] Arrange4L spec)
             where T : unmanaged
-                => generic<T>(dvec.vshuf4x32(v32u(src), spec));
+                => generic<T>(z.vshuf4x32(v32u(src), spec));
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vshuf4x32<T>(Vector256<T> src, [Imm] Arrange4L spec)
             where T : unmanaged
-                => generic<T>(dvec.vshuf4x32(v32u(src), spec));
+                => generic<T>(z.vshuf4x32(v32u(src), spec));
 
         /// <summary>
         /// Shuffles unsigned 8-bit source segments according to the shuffle spec

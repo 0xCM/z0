@@ -29,6 +29,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static uint emit(FS.FilePath dst)
-            => emit(typeof(MaskLiterals), dst);
+            => emit(typeof(BitMasks.Literals), dst);
     }
 }

@@ -45,7 +45,7 @@ namespace Z0
             buffer<A,N>(src, out var target, out var pSrc);
             var pDst = pchar(target);
 
-            var len = value(n);
+            var len = nat64u(n);
             for(var i=0u; i<len; i++)
                 *pDst++ = (char)*pSrc++;
             return target;

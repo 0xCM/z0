@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using static System.Runtime.InteropServices.MemoryMarshal;
 
@@ -22,7 +22,7 @@ namespace Z0
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static NatSpan<N16,byte> bytes<T>(Span<T> src, N16 n)
-            where T : unmanaged            
+            where T : unmanaged
                 => load(AsBytes(src),n);
 
         /// <summary>
@@ -44,29 +44,29 @@ namespace Z0
         /// <param name="t">A cell type representative</param>
         /// <typeparam name="N">The cell count type</typeparam>
         /// <typeparam name="T">The cell data type</typeparam>
-        public static NatSpan<N,T> alloc<N,T>(N n = default, T t = default) 
+        public static NatSpan<N,T> alloc<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new NatSpan<N,T>(sys.alloc<T>(value<N>()));
+                => new NatSpan<N,T>(sys.alloc<T>(nat64u<N>()));
 
         /// <summary>
         /// Fills a target block with replicated cell data
         /// </summary>
         /// <param name="data">The data used to fill the block</param>
         /// <param name="dst">The target block</param>
-        /// <typeparam name="T">The cell type</typeparam>        
+        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static void broadcast<N,T>(T data, in NatSpan<N,T> dst)
             where N : unmanaged, ITypeNat
-            where T : unmanaged        
-                => dst.data.Fill(data); 
+            where T : unmanaged
+                => dst.data.Fill(data);
 
         [MethodImpl(Inline)]
         public static NatSpan<N,T> load<N,T>(T[] src, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-        {            
-            z.insist(src.Length >= (int)value<N>(), $"The source length {src.Length} >= N := {value<N>()}");
+        {
+            z.insist(src.Length >= (int)nat64u<N>(), $"The source length {src.Length} >= N := {nat64u<N>()}");
             return new NatSpan<N,T>(src);
         }
 
@@ -74,8 +74,8 @@ namespace Z0
         public static NatSpan<N,T> load<N,T>(Span<T> src, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-        {            
-            z.insist(src.Length >= (int)value<N>(), $"The source length {src.Length} >= N := {value<N>()}");
+        {
+            z.insist(src.Length >= (int)nat64u<N>(), $"The source length {src.Length} >= N := {nat64u<N>()}");
             return new NatSpan<N,T>(src);
         }
 
@@ -86,17 +86,17 @@ namespace Z0
         /// <param name="n">The length representative</param>
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]   
-        public static NatSpan<N,T> load<N,T>(ref T src, N n = default)    
+        [MethodImpl(Inline)]
+        public static NatSpan<N,T> load<N,T>(ref T src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-        {                
-            var data = CreateSpan(ref src, (int)value<N>());
+        {
+            var data = CreateSpan(ref src, (int)nat64u<N>());
             return new NatSpan<N,T>(data);
         }
 
-        [MethodImpl(Inline)]   
-        public static NatSpan<N,T> parts<N,T>(N n, params T[] cells) 
+        [MethodImpl(Inline)]
+        public static NatSpan<N,T> parts<N,T>(N n, params T[] cells)
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {

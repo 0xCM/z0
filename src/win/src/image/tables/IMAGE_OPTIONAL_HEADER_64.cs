@@ -9,8 +9,8 @@ namespace Z0.Image
     using System;
     using System.Runtime.InteropServices;
 
-    [Table(
-        "https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_optional_header64", 
+    [Url(
+        "https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_optional_header64",
         "https://www.pinvoke.net/default.aspx/Structures.IMAGE_OPTIONAL_HEADER32"
     )]
     [StructLayout(LayoutKind.Explicit)]
@@ -150,5 +150,5 @@ namespace Z0.Image
 
         [FieldOffset(232)]
         public IMAGE_DATA_DIRECTORY Reserved;
-    } 
+    }
 }

@@ -127,7 +127,7 @@ namespace Z0
         public static Block256<N,T> blockalloc<N,T>(N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Block256<N,T>.Load(SpanBlocks.square<T>(n256, value(n)));
+                => Block256<N,T>.Load(SpanBlocks.square<T>(n256, nat64u(n)));
 
         /// <summary>
         /// Allocates a block vector optionally filled with a specified value

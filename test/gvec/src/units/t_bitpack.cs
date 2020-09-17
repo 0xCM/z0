@@ -165,7 +165,7 @@ namespace Z0
         void unpack_check<T>(T src, in ReadOnlySpan<byte> y)
             where T : unmanaged
         {
-            var count = math.min(bitsize<T>(), y.Length);
+            var count = math.min(bitwidth<T>(), y.Length);
             for(var i=0; i<count; i++)
                 Claim.eq((byte)gbits.testbit(src, (byte)i), y[i]);
 

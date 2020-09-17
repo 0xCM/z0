@@ -9,7 +9,7 @@ namespace Z0.MS
     using System.Runtime.InteropServices;
 
     [StructLayout(LayoutKind.Sequential)]
-    [Table("https://msdn.microsoft.com/en-us/library/windows/desktop/aa380518.aspx")]
+    [Url("https://msdn.microsoft.com/en-us/library/windows/desktop/aa380518.aspx")]
     public struct UNICODE_STRING
     {
         /// <summary>

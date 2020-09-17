@@ -169,7 +169,7 @@ namespace Z0
         void bsand_check<T>(T t = default)
             where T : unmanaged
         {
-            var n = bitsize<T>();
+            var n = bitwidth<T>();
 
             for(var rep = 0u; rep <= RepCount; rep++)
             {
@@ -186,7 +186,7 @@ namespace Z0
         void bsor_check<T>(T t = default)
             where T : unmanaged
         {
-            var n = bitsize(t);
+            var n = bitwidth(t);
 
             for(var rep = 0; rep <= RepCount; rep++)
             {
@@ -203,7 +203,7 @@ namespace Z0
         void bsxor_check<T>(T t = default)
             where T : unmanaged
         {
-            var n = bitsize(t);
+            var n = bitwidth(t);
 
             for(var rep = 0; rep <= RepCount; rep++)
             {
@@ -220,7 +220,7 @@ namespace Z0
         void bsformat_check<T>(T t = default)
             where T : unmanaged
         {
-            var length = bitsize<T>();
+            var length = bitwidth<T>();
             var src = BitMasks.even(n2, n1, t);
             var bitspan = BitSpans.from<T>(src);
             var format = bitspan.Format();

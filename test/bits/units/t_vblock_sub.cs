@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using VecLen = NatSeq<N1,N2,N3>;
-    
+
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class vblock_sub : UnitTest<vblock_sub>
-    {   
+    {
         public void vblock_sub_123x8i()
         {
             vblock_sub_check<VecLen,sbyte>();
@@ -127,16 +127,16 @@ namespace Z0
         {
             var n = new N();
             var dst = RowVectors.blockalloc<N,T>();
-            for(var i=0; i< RepCount; i++)            
+            for(var i=0; i< RepCount; i++)
             {
                 var v1 = Random.VectorBlock<N,T>();
                 var v2 = Random.VectorBlock<N,T>();
 
 
-                var v3 = RowVectors.blockload(sub(v1.Unsized,v2.Unsized), n);                
+                var v3 = RowVectors.blockload(sub(v1.Unsized,v2.Unsized), n);
                 BlockVectorOps.sub(v1, v2, ref v1);
                 Claim.Require(v3 == v1);
-            } 
+            }
         }
 
         void vblock_sub_bench<N,T>(N n = default)
@@ -145,7 +145,7 @@ namespace Z0
         {
             var opcount = CycleCount*RoundCount;
             var sw = stopwatch(false);
-            var opname = $"vblock_sub_{n}x{bitsize<T>()}";
+            var opname = $"vblock_sub_{n}x{bitwidth<T>()}";
             var dst = RowVectors.blockalloc<N,T>();
             for(var i=0; i<opcount; i++)
             {

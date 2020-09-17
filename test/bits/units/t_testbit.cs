@@ -7,10 +7,10 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_testbit : t_bitcore<t_testbit>
-    {     
+    {
         public void testbit_8u()
             => testbit_check(z8);
 
@@ -41,9 +41,9 @@ namespace Z0
             if(NumericKinds.unsigned<T>())
             {
                 var src = maxval(t);
-                for(var i=0; i< bitsize<T>(); i++)
+                for(var i=0; i< bitwidth<T>(); i++)
                     Claim.Require(gbits.testbit(src,(byte)i));
-            }            
+            }
         }
     }
 }

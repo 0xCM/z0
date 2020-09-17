@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
     using static Memories;
 
     [ApiHost]
@@ -82,7 +82,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static bit testc<T>(T a)
             where T : unmanaged
-                => gbits.pop(a) == bitsize<T>();
+                => gbits.pop(a) == bitwidth<T>();
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T and<T>(T a, T b)
@@ -148,12 +148,12 @@ namespace Z0
         public static T cimpl<T>(T a, T b)
             where T : unmanaged
                 => gmath.cimpl(a,b);
-        
+
         [MethodImpl(Inline)]
         public static T cnonimpl<T>(T a, T b)
             where T : unmanaged
                 => gmath.cnonimpl(a,b);
-                
+
         [MethodImpl(Inline)]
         public static T xornot<T>(T a, T b)
             where T : unmanaged
@@ -178,21 +178,21 @@ namespace Z0
         public static T mod<T>(T a, T b)
             where T : unmanaged
                 => gmath.mod(a,b);
-        
+
         [MethodImpl(Inline)]
         public static T negate<T>(T a)
             where T : unmanaged
-                => gmath.negate(a); 
+                => gmath.negate(a);
 
         [MethodImpl(Inline)]
         public static T inc<T>(T a)
             where T : unmanaged
-                => gmath.inc(a); 
+                => gmath.inc(a);
 
         [MethodImpl(Inline)]
         public static T dec<T>(T a)
             where T : unmanaged
-                => gmath.dec(a); 
+                => gmath.dec(a);
 
         [MethodImpl(Inline)]
         public static T equals<T>(T a, T b)
@@ -226,7 +226,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bit same<T>(T a, T b)
-            where T : unmanaged                    
+            where T : unmanaged
                 => gmath.eq(a,b);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
@@ -271,7 +271,7 @@ namespace Z0
         public static T f02<T>(T a, T b, T c)
             where T : unmanaged
                 => and(c, nor(b,a));
- 
+
          // b nor a
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T f03<T>(T a, T b, T c)
@@ -324,7 +324,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T f0b<T>(T a, T b, T c)
             where T : unmanaged
-                => and(not(a), or(xor1(b),  c));   
+                => and(not(a), or(xor1(b),  c));
 
         // b and (not a)
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
@@ -355,14 +355,14 @@ namespace Z0
         public static T f10<T>(T a, T b, T c)
             where T : unmanaged
                 => and(a, nor(b, c));
-        
+
         // c nor b
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T f11<T>(T a, T b, T c)
             where T : unmanaged
                 => nor(c,b);
-        
-        // not b and (a xor c) 
+
+        // not b and (a xor c)
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T f12<T>(T a, T b, T c)
             where T : unmanaged

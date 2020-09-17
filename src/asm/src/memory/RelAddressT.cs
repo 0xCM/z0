@@ -11,38 +11,38 @@ namespace Z0
     using static NumericCast;
 
     public readonly struct RelAddress<T> : INullary<RelAddress<T>>, ITextual, INullity
-        where T : unmanaged         
+        where T : unmanaged
     {
         readonly T Offset;
 
-        NumericWidth Size 
+        NumericWidth Size
         {
-            [MethodImpl(Inline)] 
-            get => (NumericWidth)z.bitsize<T>();
+            [MethodImpl(Inline)]
+            get => (NumericWidth)z.bitwidth<T>();
         }
-        
-        public bool IsEmpty 
+
+        public bool IsEmpty
         {
-             [MethodImpl(Inline)] 
+             [MethodImpl(Inline)]
              get => Offset.Equals(default);
         }
 
-        public bool IsNonEmpty  
+        public bool IsNonEmpty
         {
-             [MethodImpl(Inline)] 
+             [MethodImpl(Inline)]
              get => !Offset.Equals(default);
         }
 
         public uint Hash
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => z.hash(Offset);
         }
 
-        public RelAddress<T> Zero 
+        public RelAddress<T> Zero
         {
-             [MethodImpl(Inline)] 
-             get => Empty; 
+             [MethodImpl(Inline)]
+             get => Empty;
         }
 
         [MethodImpl(Inline)]
@@ -74,20 +74,20 @@ namespace Z0
                     return convert<T,uint>(Offset).FormatAsmHex();
             }
         }
-        
-        public bool Equals(RelAddress<T> src)        
+
+        public bool Equals(RelAddress<T> src)
             => Offset.Equals(src.Offset);
 
         public override string ToString()
             => Format();
-        
+
         public override int GetHashCode()
-            => (int)Hash;        
-        
+            => (int)Hash;
+
         public override bool Equals(object src)
             => src is RelAddress l && Equals(l);
 
-        public static RelAddress<T> Empty 
+        public static RelAddress<T> Empty
             => default;
     }
 }

@@ -38,12 +38,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T hi<T>(int n, T t = default)
             where T : unmanaged
-                => convert<T>(lo64(n) << ((int)z.bitsize<T>() - n));
+                => convert<T>(lo64(n) << ((int)z.bitwidth<T>() - n));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T hi<T>(byte n, T t = default)
             where T : unmanaged
-                => convert<T>(lo64(n) << ((int)z.bitsize<T>() - n));
+                => convert<T>(lo64(n) << ((int)z.bitwidth<T>() - n));
 
         /// <summary>
         /// Produces a sequence of N enabled hi bits
@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong hi<N>(N n = default)
             where N : unmanaged, ITypeNat
-                => hi<ulong>((int)value(n));
+                => hi<ulong>((int)nat64u(n));
 
         /// <summary>
         /// Produces a sequence of n enabled hi bits
@@ -64,6 +64,6 @@ namespace Z0
         public static T hi<N,T>(N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => hi<T>((int)value(n));
+                => hi<T>((int)nat64u(n));
     }
 }

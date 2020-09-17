@@ -5,11 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    
+    using System.Runtime.CompilerServices;
+
     using static Konst;
-    using static As;
-    using static Typed;
+    using static z;
 
     partial class BitPack
     {
@@ -59,7 +58,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ulong pack<T>(ReadOnlySpan<T> src, N64 count, N8 mod, int offset = 0)
             where T : unmanaged
-                => pack(skip(src,(uint)offset),count,mod);        
+                => pack(skip(src,(uint)offset),count,mod);
 
         /// <summary>
         /// Packs bitsize[T] values taken from the least significant bit of each source byte

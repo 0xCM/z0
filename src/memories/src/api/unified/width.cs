@@ -16,8 +16,8 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline)]
-        public static TypeWidth width<T>()     
-            where T : struct       
-                => (TypeWidth)bitsize<T>();
+        public static TypeWidth width<T>()
+            where T : struct
+                => (TypeWidth)bitwidth<T>();
     }
 }

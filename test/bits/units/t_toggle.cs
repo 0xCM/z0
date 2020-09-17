@@ -7,13 +7,13 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_toggle : t_bitcore<t_toggle>
     {
         public void toggle_8i()
             => toggle_check<sbyte>();
-            
+
         public void toggle_8u()
             => toggle_check<byte>();
 
@@ -39,13 +39,13 @@ namespace Z0
             => toggle_check<float>();
 
         public void toggle_64f()
-            => toggle_check<double>();        
+            => toggle_check<double>();
 
         void toggle_check<T>(T t = default)
             where T : unmanaged
         {
             var src = Random.Span<T>(RepCount);
-            var tLen = bitsize<T>();
+            var tLen = bitwidth<T>();
             var srcLen = src.Length;
             for(var i = 0; i< srcLen; i++)
             {
@@ -64,16 +64,16 @@ namespace Z0
 
         public void bitsize()
         {
-            Claim.eq(8, bitsize<byte>());
-            Claim.eq(8, bitsize<sbyte>());
-            Claim.eq(16, bitsize<short>());
-            Claim.eq(16, bitsize<ushort>());
-            Claim.eq(32, bitsize<int>());
-            Claim.eq(32, bitsize<uint>());
-            Claim.eq(64, bitsize<long>());
-            Claim.eq(64, bitsize<ulong>());
-            Claim.eq(32, bitsize<float>());
-            Claim.eq(64, bitsize<double>());
+            Claim.eq(8, bitwidth<byte>());
+            Claim.eq(8, bitwidth<sbyte>());
+            Claim.eq(16, bitwidth<short>());
+            Claim.eq(16, bitwidth<ushort>());
+            Claim.eq(32, bitwidth<int>());
+            Claim.eq(32, bitwidth<uint>());
+            Claim.eq(64, bitwidth<long>());
+            Claim.eq(64, bitwidth<ulong>());
+            Claim.eq(32, bitwidth<float>());
+            Claim.eq(64, bitwidth<double>());
         }
 
         public void testbit_outline()
@@ -81,7 +81,7 @@ namespace Z0
             Claim.Require(gbits.testbit(0b00000101, (byte)0));
             Claim.nea(gbits.testbit(0b00000101, (byte)1));
             Claim.Require(gbits.testbit(0b00000101, (byte)2));
-            
+
             Claim.Require(gbits.testbit(0b00000111, (byte)0));
             Claim.Require(gbits.testbit(0b00000111, (byte)1));
             Claim.Require(gbits.testbit(0b00000111, (byte)2));
@@ -101,7 +101,7 @@ namespace Z0
             ClaimPrimalSeq.eq("10000000", y1.ToBitString());
 
             var x3 = -1;
-            Claim.eq(x3 >> 10, -1);            
+            Claim.eq(x3 >> 10, -1);
         }
     }
 }

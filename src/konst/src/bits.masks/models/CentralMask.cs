@@ -45,7 +45,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(RenderPattern, value<F>(), value<D>(), typeof(T).NumericKind().Format());
+            => text.format(RenderPattern, nat64u<F>(), nat64u<D>(), typeof(T).NumericKind().Format());
 
         public override string ToString()
             => Format();

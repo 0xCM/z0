@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
+    using static BitMasks.Literals;
 
     partial class BitPack
     {
@@ -21,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static byte pack<T>(in SpanBlock32<T> src, N8 mod, int block = 0)
             where T : unmanaged
-                => (byte)Bits.gather(uint32(src.BlockRef(block)), MaskLiterals.Lsb32x8x1);
+                => (byte)Bits.gather(uint32(src.BlockRef(block)), Lsb32x8x1);
 
         /// <summary>
         /// Packs 8 1-bit values taken from the least significant bit of each source byte of an index-identified block
@@ -64,6 +65,6 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         static byte pack8(ulong src)
-            => (byte)Bits.gather(src, MaskLiterals.Lsb64x8x1);
+            => (byte)Bits.gather(src, Lsb64x8x1);
     }
 }

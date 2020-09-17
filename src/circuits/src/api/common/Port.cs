@@ -8,14 +8,14 @@ namespace Z0
     using System.IO;
     using System.IO.Pipes;
     using System.Buffers;
-    
+
     using static Konst;
     using static Memories;
 
     public readonly struct InPort<T>
         where T : unmanaged
     {
-        public static readonly BitSize PortWidth = bitsize<T>();
+        public static readonly BitSize PortWidth = bitwidth<T>();
 
         public void Send(ReadOnlySequence<T> x)
         {
@@ -26,7 +26,7 @@ namespace Z0
     public readonly struct OutPort<T>
         where T : unmanaged
     {
-        public static readonly BitSize PortWidth = bitsize<T>();
+        public static readonly BitSize PortWidth = bitwidth<T>();
 
         public ReadOnlySequence<T> Receive()
         {
@@ -37,7 +37,7 @@ namespace Z0
     public readonly struct IoPort<T>
         where T : unmanaged
     {
-        public static readonly BitSize PortWidth = bitsize<T>();
+        public static readonly BitSize PortWidth = bitwidth<T>();
 
         public void Send(ReadOnlySequence<T> x)
         {
@@ -54,7 +54,7 @@ namespace Z0
         where T : unmanaged
     {
 
-        public void Send(ReadOnlySequence<InPair<T>> pairs)    
+        public void Send(ReadOnlySequence<InPair<T>> pairs)
         {
 
         }
@@ -62,6 +62,6 @@ namespace Z0
         public ReadOnlySequence<T> Receive()
         {
             return default;
-        }        
+        }
     }
 }

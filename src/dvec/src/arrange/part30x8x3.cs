@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static z;
-    using static Konst;
+    using static BitMasks.Literals;
 
     partial class dvec
     {
@@ -23,15 +23,15 @@ namespace Z0
         // 2 | [0_111_111_1 11_111_111 0_111_111_1 11_111_111] -> [0_000_000_1 11_000_000 0_000_000_1 11_000_000] {2,7} -->(6) [...]
         // 3 | [0_111_111_1 11_111_111 0_111_111_1 11_111_111] -> [0_000_111_0 00_000_000 0_000_111_0 00_000_000] {3,8} -->(9)
         // 4 | [0_111_111_1 11_111_111 0_111_111_1 11_111_111] -> [0_111_000_0 00_000_000 0_111_000_0 00_000_000] {4,9} -->(12)
-        const uint m0 = MaskLiterals.Lsb32x16x3;
+        const uint m0 = Lsb32x16x3;
 
-        const uint m1 = MaskLiterals.Lsb32x16x3 << 3;
+        const uint m1 = Lsb32x16x3 << 3;
 
-        const uint m2 = MaskLiterals.Lsb32x16x3 << 6;
+        const uint m2 = Lsb32x16x3 << 6;
 
-        const uint m3 = MaskLiterals.Lsb32x16x3 << 9;
+        const uint m3 = Lsb32x16x3 << 9;
 
-        const uint m4 = MaskLiterals.Lsb32x16x3 << 12;
+        const uint m4 = Lsb32x16x3 << 12;
 
         [MethodImpl(Inline)]
         static Vector256<uint> vpart30x8x3Mask(uint src)
@@ -65,8 +65,8 @@ namespace Z0
         public static Vector256<ushort> vpart30x8x3(uint src)
         {
             var a = src & uint.MaxValue >> 2;
-            var lo = uint16(MaskLiterals.Lsb16x16x15 & a);
-            var hi = uint16(MaskLiterals.Lsb16x16x15 & (a >> 15));
+            var lo = uint16(Lsb16x16x15 & a);
+            var hi = uint16(Lsb16x16x15 & (a >> 15));
             var m = vpart30x8x3Mask(src);
             var shifts = vparts(0, 3, 6, 9, 12, 0, 0, 0);
             var q = z.vbroadcast(w256, uint32(lo | hi << 16));

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static MaskLiterals;
+    using static BitMasks.Literals;
 
     partial class BitMasks
     {
@@ -467,25 +467,25 @@ namespace Z0
             where W : unmanaged, ITypeNat
         {
             if(typeof(W) == typeof(N4))
-                return MaskLiterals.Lsb4x2x1;
+                return Lsb4x2x1;
             else if(typeof(W) == typeof(N6))
-                return MaskLiterals.Lsb6x2x1;
+                return Lsb6x2x1;
             else if(typeof(W) == typeof(N8))
-                return MaskLiterals.Lsb8x2x1;
+                return Lsb8x2x1;
             else if(typeof(W) == typeof(N10))
-                return MaskLiterals.Lsb10x2x1;
+                return Lsb10x2x1;
             else if(typeof(W) == typeof(N12))
-                return MaskLiterals.Lsb12x2x1;
+                return Lsb12x2x1;
             else if(typeof(W) == typeof(N14))
-                return MaskLiterals.Lsb14x2x1;
+                return Lsb14x2x1;
             else if(typeof(W) == typeof(N16))
-                return MaskLiterals.Lsb16x2x1;
+                return Lsb16x2x1;
             else if(typeof(W) == typeof(N18))
-                return MaskLiterals.Lsb18x2x1;
+                return Lsb18x2x1;
             else if(typeof(W) == typeof(N32))
-                return MaskLiterals.Lsb32x2x1;
+                return Lsb32x2x1;
             else if(typeof(W) == typeof(N64))
-                return MaskLiterals.Lsb64x2x1;
+                return Lsb64x2x1;
             else
                 throw no<W>();
         }
@@ -495,23 +495,23 @@ namespace Z0
             where W : unmanaged, ITypeNat
         {
             if(typeof(W) == typeof(N6))
-                return MaskLiterals.Lsb6x3x1;
+                return Lsb6x3x1;
             else if(typeof(W) == typeof(N9))
-                return MaskLiterals.Lsb9x3x1;
+                return Lsb9x3x1;
             else if(typeof(W) == typeof(N12))
-                return MaskLiterals.Lsb12x3x1;
+                return Lsb12x3x1;
             else if(typeof(W) == typeof(N15))
-                return MaskLiterals.Lsb15x3x1;
+                return Lsb15x3x1;
             else if(typeof(W) == typeof(N18))
-                return MaskLiterals.Lsb18x3x1;
+                return Lsb18x3x1;
             else if(typeof(W) == typeof(N21))
-                return MaskLiterals.Lsb21x3x1;
+                return Lsb21x3x1;
             else if(typeof(W) == typeof(N24))
-                return MaskLiterals.Lsb24x3x1;
+                return Lsb24x3x1;
             else if(typeof(W) == typeof(N27))
-                return MaskLiterals.Lsb27x3x1;
+                return Lsb27x3x1;
             else if(typeof(W) == typeof(N30))
-                return MaskLiterals.Lsb30x3x1;
+                return Lsb30x3x1;
             else
                 return lsb_3x1_b(w,f,d);
         }
@@ -521,19 +521,19 @@ namespace Z0
             where W : unmanaged, ITypeNat
         {
             if(typeof(W) == typeof(N33))
-                return MaskLiterals.Lsb33x3x1;
+                return Lsb33x3x1;
             else if(typeof(W) == typeof(N36))
-                return MaskLiterals.Lsb36x3x1;
+                return Lsb36x3x1;
             else if(typeof(W) == typeof(N39))
-                return MaskLiterals.Lsb39x3x1;
+                return Lsb39x3x1;
             else if(typeof(W) == typeof(N41))
-                return MaskLiterals.Lsb41x3x1;
+                return Lsb41x3x1;
             else if(typeof(W) == typeof(N44))
-                return MaskLiterals.Lsb44x3x1;
+                return Lsb44x3x1;
             else if(typeof(W) == typeof(N48))
-                return MaskLiterals.Lsb48x3x1;
+                return Lsb48x3x1;
             else if(typeof(W) == typeof(N51))
-                return MaskLiterals.Lsb51x3x1;
+                return Lsb51x3x1;
             else
                 return lsb_3x1_c(w,f,d);
         }
@@ -543,13 +543,13 @@ namespace Z0
             where W : unmanaged, ITypeNat
         {
             if(typeof(W) == typeof(N54))
-                return MaskLiterals.Lsb54x3x1;
+                return Lsb54x3x1;
             else if(typeof(W) == typeof(N57))
-                return MaskLiterals.Lsb57x3x1;
+                return Lsb57x3x1;
             else if(typeof(W) == typeof(N60))
-                return MaskLiterals.Lsb60x3x1;
+                return Lsb60x3x1;
             else if(typeof(W) == typeof(N63))
-                return MaskLiterals.Lsb63x3x1;
+                return Lsb63x3x1;
             else
                  throw no<W>();
        }

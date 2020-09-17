@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; using static Memories;
+    using static Konst;
+    using static z;
 
     partial class BitMatrix
     {
@@ -19,17 +20,17 @@ namespace Z0
         public static BitVector<T> diagonal<T>(in BitMatrix<T> A)
             where T : unmanaged
         {
-            var n = bitsize<T>();            
+            var n = bitwidth<T>();
             var dst = default(T);
             for(byte i=0; i < n; i++)
                 dst = gbits.setbit(dst, i,A[i,i]);
-            return dst;                    
+            return dst;
         }
 
         [MethodImpl(Inline)]
-        public static BitVector4 diagonal(in BitMatrix4 A)                    
+        public static BitVector4 diagonal(in BitMatrix4 A)
             => (byte)Bits.gather((uint)A, 0b1000_0100_0010_0001);
-        
+
         [MethodImpl(Inline)]
         public static BitVector8 diagonal(in BitMatrix8 A)
         {
@@ -43,11 +44,11 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         public static BitVector16 diagonal(in BitMatrix16 A)
         {
-            const uint N = 16;            
+            const uint N = 16;
             var dst = (ushort)0;
             for(byte i=0; i < N; i++)
                 dst = gbits.setbit(dst, i,A[i,i]);
-            return dst;                    
+            return dst;
         }
 
         /// <summary>
@@ -56,11 +57,11 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         public static BitVector32 diagonal(in BitMatrix32 A)
         {
-            const uint N = 32;            
+            const uint N = 32;
             var dst = 0u;
             for(byte i=0; i < N; i++)
                 dst = gbits.setbit(dst, i,A[i,i]);
-            return dst;                    
+            return dst;
         }
 
         /// <summary>
@@ -69,11 +70,11 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         public static BitVector64 diagonal(in BitMatrix64 A)
         {
-            const uint N = 64;            
+            const uint N = 64;
             var dst = 0ul;
             for(byte i=0; i < N; i++)
                 dst = gbits.setbit(dst, i, A[i,i]);
-            return dst;                    
+            return dst;
         }
     }
 }

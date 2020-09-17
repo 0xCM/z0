@@ -29,7 +29,7 @@ namespace Z0
         BitMaskKind IMaskSpec.M => M;
 
         public string Format()
-            => text.format(RenderPattern, value<N>(), NumericKinds.kind<T>().Format());
+            => text.format(RenderPattern, nat64u<N>(), NumericKinds.kind<T>().Format());
 
             //=> $"n(f:{value<N>()}, t:{NumericKinds.kind<T>().Format()})";
     }

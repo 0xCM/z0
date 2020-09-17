@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
@@ -13,7 +13,7 @@ namespace Z0.Asm
     using static z;
 
     partial struct AsmEncoder
-    {            
+    {
         /// <summary>
         /// Defines a command from data supplied by a bytespan
         /// </summary>
@@ -28,16 +28,16 @@ namespace Z0.Asm
                 dst = dst.WithElement(i, skip(src,i));
             var c = new EncodedFx(dst.WithElement(15, (byte)count));
             var b = bytes(c);
-            return c;  
+            return c;
         }
 
         [MethodImpl(Inline), Nlz]
         static int nlz(ulong src)
-            => (int)Lzcnt.X64.LeadingZeroCount(src);    
+            => (int)Lzcnt.X64.LeadingZeroCount(src);
 
         [MethodImpl(Inline)]
-        static int hipos(ulong src)            
-            => (int)bitsize<ulong>() - 1 - nlz(src);
+        static int hipos(ulong src)
+            => (int)bitwidth<ulong>() - 1 - nlz(src);
 
         [MethodImpl(Inline)]
         static byte effsize(ulong src)
@@ -52,7 +52,7 @@ namespace Z0.Asm
         {
             var hi64 = (ulong)(effsize(lo64)/8) << 56;
             var v = v8u(Vector128.Create(lo64, hi64));
-            return new EncodedFx(v); 
+            return new EncodedFx(v);
         }
 
         /// <summary>

@@ -60,7 +60,7 @@ namespace Z0
             where T : unmanaged
         {
             var mincount = 1;
-            var maxcount = (int)bitsize<T>();
+            var maxcount = (int)bitwidth<T>();
             for(var i=0; i< RepCount; i++)
             {
                 var count = Random.One(mincount,maxcount);
@@ -75,7 +75,7 @@ namespace Z0
 
                 Claim.eq(count, gbits.pop(mask));
 
-                var lowered = gmath.srl(mask, (byte)(bitsize(t) -  count));
+                var lowered = gmath.srl(mask, (byte)(bitwidth(t) -  count));
                 var width = gbits.effwidth(lowered);
                 if(count != width)
                 {

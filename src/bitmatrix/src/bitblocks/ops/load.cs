@@ -34,7 +34,7 @@ namespace Z0
         public static BitBlock<N,T> load<N,T>(T[] src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new BitBlock<N,T>(src);    
+                => new BitBlock<N,T>(src);
 
         /// <summary>
         /// Creates a bitblock over an arbitrary number of segments
@@ -43,7 +43,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitBlock<T> load<T>(params T[] src)
             where T : unmanaged
-                => new BitBlock<T>(src, bitsize<T>()*(uint)src.Length);
+                => new BitBlock<T>(src, bitwidth<T>()*(uint)src.Length);
 
         /// <summary>
         /// Loads a natural bitcell container from a span
@@ -56,7 +56,7 @@ namespace Z0
         public static BitBlock<N,T> load<N,T>(Span<T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new BitBlock<N,T>(src);    
+                => new BitBlock<N,T>(src);
 
         /// <summary>
         /// Loads a natural bitblock from a readonly span; allocation required
@@ -74,6 +74,6 @@ namespace Z0
         public static BitBlock<N,T> load<N,T>(Span<byte> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new BitBlock<N,T>(src.Cast<byte,T>());    
+                => new BitBlock<N,T>(src.Cast<byte,T>());
     }
 }

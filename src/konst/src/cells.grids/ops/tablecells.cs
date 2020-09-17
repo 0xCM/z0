@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
+
     partial struct GridCells
     {
         /// <summary>
@@ -23,7 +23,7 @@ namespace Z0
             => count(rows,cols,w);
 
         /// <summary>
-        /// Computes the number of cells required to cover a rectangular region predicated on the 
+        /// Computes the number of cells required to cover a rectangular region predicated on the
         /// parametric cell type and supplied row/col dimensions
         /// </summary>
         /// <param name="rows">The number of rows in the grid</param>
@@ -32,8 +32,8 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static uint tablecells<T>(uint rows, uint cols)
             where T : unmanaged
-                => tablecells(rows, cols, bitsize<T>());
-    
+                => tablecells(rows, cols, bitwidth<T>());
+
         /// <summary>
         /// Computes the number of segments required cover a grid as characterized by parametric type information
         /// </summary>
@@ -48,6 +48,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => tablecells((uint)value(m), (uint)value(n), bitsize<T>());
+                => tablecells((uint)nat64u(m), (uint)nat64u(n), bitwidth<T>());
     }
 }

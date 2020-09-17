@@ -44,7 +44,7 @@ namespace Z0
         void vsllv_check<T>(W128 w, T t = default)
             where T : unmanaged
         {
-            var domain = Interval.closed(zero(t), convert<uint,T>( (uint)bitsize(t) - 1));
+            var domain = Interval.closed(zero(t), convert<uint,T>( (uint)bitwidth(t) - 1));
 
             Pair<Vector128<T>> @case(uint i)
             {
@@ -59,7 +59,7 @@ namespace Z0
         void vsllv_check<T>(W256 w, T t = default)
             where T : unmanaged
         {
-            var domain = Interval.closed(As.zero(t),convert<uint,T>((uint)bitsize(t) - 1));
+            var domain = Interval.closed(As.zero(t),convert<uint,T>((uint)bitwidth(t) - 1));
 
             Pair<Vector256<T>> @case(uint i)
             {

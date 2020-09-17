@@ -13,15 +13,15 @@ namespace Z0
     {
         public TableAttribute()
         {
-            Descriptions = Array.Empty<string>();
-        }                
-
-        public TableAttribute(params string[] descriptions)
-        {
-            Descriptions = descriptions;
+            Name = "";
         }
 
-        public string[] Descriptions {get;}
+        public TableAttribute(string name)
+        {
+            Name = name;
+        }
+
+        public string Name {get;}
     }
 
     public class TableFieldAttribute : Attribute
@@ -29,14 +29,14 @@ namespace Z0
         public TableFieldAttribute()
         {
             Descriptions = Array.Empty<string>();
-        }                
+        }
 
         public TableFieldAttribute(params string[] descriptions)
         {
             Descriptions = descriptions;
         }
 
-        public string[] Descriptions {get;}        
+        public string[] Descriptions {get;}
     }
-    
+
 }

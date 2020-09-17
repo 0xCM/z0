@@ -289,7 +289,7 @@ namespace Z0
         /// Rotates the bits leftwards by a specified offset
         /// </summary>
         /// <param name="offset">The magnitude of the rotation</param>
-        public static BitString RotL(this BitString bs, int offset)
+        public static BitString RotL(this BitString bs, uint offset)
             => BitString.rotl(bs, offset);
     }
 }

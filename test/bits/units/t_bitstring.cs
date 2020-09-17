@@ -7,12 +7,12 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_bitstring : t_bitcore<t_bitstring>
-    {                
+    {
         void bs_bitview()
         {
             var x = Random.CpuVector<int>(n128);
@@ -63,7 +63,7 @@ namespace Z0
 
         public void bs_convert_16u()
             => bs_convert_check<ushort>();
-        
+
         public void bs_convert_32u()
             => bs_convert_check<uint>();
 
@@ -102,7 +102,7 @@ namespace Z0
             => bs_parse_check<ushort>();
 
         public void bs_parse()
-        {            
+        {
             bs_parse_check<uint>();
             bs_parse_check<int>();
             bs_parse_check<ulong>();
@@ -122,13 +122,13 @@ namespace Z0
                     else
                         Claim.Eq(bs[j], bit.On);
                 }
-                
+
                 if(i <= 63)
                 {
                     var val1 = Pow2.pow((byte)i);
                     var val2 = bs.TakeScalar<ulong>();
                     Claim.Eq(val1,val2);
-                }    
+                }
             }
         }
 
@@ -138,9 +138,9 @@ namespace Z0
             var y = x.ToBitString();
             Claim.eq("10110110".ToBitString(), y);
             Claim.eq(5, y.PopCount());
-            
+
             var z = y.Pack();
-            Claim.eq(1,z.Length);            
+            Claim.eq(1,z.Length);
             Claim.Eq(x, z[0]);
         }
 
@@ -165,7 +165,7 @@ namespace Z0
 
             foreach(var aVal in srcA)
                 Claim.eq(aVal.ToBitString(), aVal.ToBitString());
-            
+
             foreach(var pair in pairs)
                 Claim.neq(pair.First.ToBitString(), pair.Second.ToBitString());
         }
@@ -186,31 +186,31 @@ namespace Z0
         }
 
         // public void bs_wordgen()
-        // {            
+        // {
         //     var wordLen = 8;
         //     var wordCount = Pow2.pow(wordLen);
         //     var words = BinaryLanguage.Get().Words(wordLen).ToArray();
         //     Claim.almost(wordCount, words.Length);
-            
+
         //     iter(words, w => Claim.eq(wordLen, w.Format().Length));
-            
+
         //     for(var i=0u; i<wordCount; i++)
         //     {
         //         var w = words[i];
         //         var value = w.TakeScalar<byte>();
         //         Numeric.eq(i, value);
         //     }
-        // }    
+        // }
 
         public void bs_partition()
         {
             var src = "0000010100001100101010001";
             var bs = BitString.parse(src);
             Claim.eq(bs.Length, 25);
-            
+
             var b1 = bs.Partition(1);
             Claim.eq(src.Length, b1.Length);
-            
+
             var b5 = bs.Partition(5);
             Claim.eq(5,b5.Length);
 
@@ -248,7 +248,7 @@ namespace Z0
             var x =  0b111010010110011010111001110000100001101ul;
             var xbs = BitString.parse("111010010110011010111001110000100001101");
             var ybs = x.ToBitString();
-            Claim.yea(xbs == ybs);                
+            Claim.yea(xbs == ybs);
 
             var y = xbs.TakeScalar<ulong>();
             Claim.Eq(x, y);
@@ -256,7 +256,7 @@ namespace Z0
             var z = ybs.TakeScalar<ulong>();
             Claim.Eq(x, z);
 
-            
+
             var byx = BitConverter.GetBytes(x).ToSpan();
             var byy = Bytes.write(x);
             ClaimNumeric.Eq(byx,byy);
@@ -271,19 +271,19 @@ namespace Z0
                 var bsX = x.ToBitString();
                 Claim.eq(64, bsX.Length);
                 var blocks = bsX.Partition(8);
-                Claim.eq(8, blocks.Length);   
+                Claim.eq(8, blocks.Length);
 
                 var bsY = BitString.assemble(blocks.Select(x => x.Format()).ToArray());
                 Claim.eq(bsX, bsY);
-                
+
                 var bytes = Arrays.alloc<byte>(8);
-                for(var i=0; i<8; i++)         
+                for(var i=0; i<8; i++)
                     bytes[i] = blocks[i].TakeScalar<byte>();
-                
+
                 var j = 0;
-                var y = Bits.concat(bytes[j++], bytes[j++], bytes[j++], bytes[j++], 
+                var y = Bits.concat(bytes[j++], bytes[j++], bytes[j++], bytes[j++],
                     bytes[j++], bytes[j++], bytes[j++], bytes[j++]);
-                Claim.Eq(x,y);                
+                Claim.Eq(x,y);
             }
         }
 
@@ -299,18 +299,18 @@ namespace Z0
                     var x0 = src[i];
                     var x1 = BitStore.storeseq(x0);
                     var seqlen = x1.Length;
-                    Claim.eq(seqlen, bitsize<T>());
+                    Claim.eq(seqlen, bitwidth<T>());
 
                     for(byte j = 0; j < seqlen; j++)
                         Claim.Eq(gbits.testbit(x0, j), (bit)(x1[j] == 1));
                 }
 
             }
-            
+
             case2();
 
         }
- 
+
         void bs_convert_check<T>()
             where T : unmanaged
         {
@@ -331,23 +331,23 @@ namespace Z0
             {
                 var x = BitString.bitchars(src[i]);
                 gbits.parse(x, 0, out T y);
-                Claim.Eq(src[i], y);                
+                Claim.Eq(src[i], y);
             }
         }
 
         void bs_parse_range_check(int minlen, int maxlen)
         {
             for(var cycle=0; cycle< CycleCount; cycle++)
-            {            
+            {
                 var x = Random.BitString(minlen, maxlen);
                 var y = BitString.parse(x).Format();
                 var z = BitString.parse(y);
 
                 Claim.eq(x.Length, y.Length);
-                Claim.eq(z.Length, y.Length);                
+                Claim.eq(z.Length, y.Length);
                 for(var i=0; i< x.Length; i++)
                     Claim.Eq(x[i], z[i]);
-                
+
                 Claim.Require(x.Equals(z));
                 Claim.eq(x,z);
             }

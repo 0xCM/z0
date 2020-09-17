@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    using static Memories;
-    
+    using static Konst;
+    using static z;
+
     partial class BitMatrixA
     {
         /// <summary>
@@ -36,9 +36,9 @@ namespace Z0
         /// <typeparam name="T">The matrix primal type</typeparam>
         public static BitMatrix<T> identity<T>()
             where T : unmanaged
-        {            
+        {
             var dst = zero<T>();
-            var len = bitsize<T>();
+            var len = bitwidth<T>();
             var one = NumericLiterals.one<T>();
             for(var i=0; i < len; i++)
                 dst[i] = gmath.sll(one,(byte)i);
@@ -53,13 +53,13 @@ namespace Z0
         public static BitMatrix<N,T> identity<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-       {            
+       {
             var dst = BitMatrix.alloc(n, t);
-            var order  = nati(n);
-            for(var i = 0; i< order; i++)
-                dst[i,i] = true;            
+            var order  = (int)nat64u(n);
+            for(var i = 0; i<order; i++)
+                dst[i,i] = true;
             return dst;
-        }    
+        }
 
         /// <summary>
         /// Allocates a 1-filled natural bitmatrix

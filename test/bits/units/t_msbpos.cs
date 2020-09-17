@@ -31,7 +31,7 @@ namespace Z0
             {
                 var x = Random.Next<T>();
                 var xPos = gbits.hipos(x);
-                ClaimNumeric.lt(xPos, (byte)bitsize<T>());
+                ClaimNumeric.lt(xPos, (byte)bitwidth<T>());
 
                 var xCount = gbits.nlz(x);
                 var y = BitString.scalar(x);

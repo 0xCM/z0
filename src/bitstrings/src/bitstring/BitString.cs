@@ -358,7 +358,7 @@ namespace Z0
         /// Returns a new bitstring of length no less than a specified minimum
         /// </summary>
         /// <param name="minlen">The minimum length</param>
-        public BitString Pad(int minlen)
+        public BitString Pad(uint minlen)
         {
             if(Length >= minlen)
                 return new BitString(data);
@@ -368,7 +368,6 @@ namespace Z0
             src.CopyTo(dst);
             return new BitString(dst);
         }
-
 
         /// <summary>
         /// Renders the content as a span of bits

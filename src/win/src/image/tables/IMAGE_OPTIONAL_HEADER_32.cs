@@ -9,8 +9,8 @@ namespace Z0.Image
     using System;
     using System.Runtime.InteropServices;
 
-    [Table(
-        "https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_optional_header32", 
+    [Url(
+        "https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_optional_header32",
         "https://www.pinvoke.net/default.aspx/Structures.IMAGE_OPTIONAL_HEADER32"
     )]
     [StructLayout(LayoutKind.Explicit)]

@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
@@ -131,7 +131,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ulong width<T>(in ArraySpan<T> src)
             where T : struct
-                => (ulong)(src.Content.Length * bitsize<T>());
+                => (ulong)(src.Content.Length * bitwidth<T>());
 
         /// <summary>
         /// Zero-fills the data source
@@ -171,13 +171,13 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe void locations<T>(in ArraySpan<T> src, in ArraySpan<ulong> dst)
             where T : struct
-        {            
+        {
             ref readonly var input = ref head(src);
             ref var target = ref head(dst);
             for(var i=0; i<src.Length; i++)
                 z.seek(target,i) = (ulong)z.pvoid(cell(src, i));
         }
-    
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<byte> bytes<T>(in ArraySpan<T> src)
             where T : struct
@@ -199,7 +199,7 @@ namespace Z0
                 => src.GetEnumerator();
 
         /// <summary>
-        /// Advances a data source reference to a cell-relative offset and presents the offset cell 
+        /// Advances a data source reference to a cell-relative offset and presents the offset cell
         /// reference as a reference to an 8-bit unsigned integer
         /// </summary>
         /// <param name="src">The data source</param>
@@ -211,7 +211,7 @@ namespace Z0
                 => ref @as<T,byte>(cell(src,offset));
 
         /// <summary>
-        /// Advances a data source reference to a cell-relative offset and presents the offset cell 
+        /// Advances a data source reference to a cell-relative offset and presents the offset cell
         /// reference as a reference to a 16-bit unsigned integer
         /// </summary>
         /// <param name="src">The data source</param>
@@ -223,7 +223,7 @@ namespace Z0
                 => ref @as<T,ushort>(cell(src,offset));
 
         /// <summary>
-        /// Advances a data source reference to a cell-relative offset and presents the offset cell 
+        /// Advances a data source reference to a cell-relative offset and presents the offset cell
         /// reference as a reference to a 32-bit unsigned integer
         /// </summary>
         /// <param name="src">The data source</param>
@@ -235,7 +235,7 @@ namespace Z0
                 => ref @as<T,uint>(cell(src,offset));
 
         /// <summary>
-        /// Advances a data source reference to a cell-relative offset and presents the offset cell 
+        /// Advances a data source reference to a cell-relative offset and presents the offset cell
         /// reference as a reference to a 32-bit unsigned integer
         /// </summary>
         /// <param name="src">The data source</param>
@@ -247,7 +247,7 @@ namespace Z0
                 => ref @as<T,ulong>(cell(src,offset));
 
         /// <summary>
-        /// Advances a data source reference to a cell-relative offset and presents the offset cell 
+        /// Advances a data source reference to a cell-relative offset and presents the offset cell
         /// reference as a readonly reference to an 8-bit unsigned integer
         /// </summary>
         /// <param name="src">The data source</param>
@@ -257,9 +257,9 @@ namespace Z0
         public static ref readonly byte skip8<T>(in ArraySpan<T> src, int offset = 0)
             where T : struct
                 => ref seek8(src,offset);
-                
+
         /// <summary>
-        /// Advances a data source reference to a cell-relative offset and presents the offset cell 
+        /// Advances a data source reference to a cell-relative offset and presents the offset cell
         /// reference as a readonly reference to a 16-bit unsigned integer
         /// </summary>
         /// <param name="src">The data source</param>
@@ -271,7 +271,7 @@ namespace Z0
                 => ref seek16(src,offset);
 
         /// <summary>
-        /// Advances a data source reference to a cell-relative offset and presents the offset cell 
+        /// Advances a data source reference to a cell-relative offset and presents the offset cell
         /// reference as a readonly reference to a 32-bit unsigned integer
         /// </summary>
         /// <param name="src">The data source</param>
@@ -283,7 +283,7 @@ namespace Z0
                 => ref seek32(src,offset);
 
         /// <summary>
-        /// Advances a data source reference to a cell-relative offset and presents the offset cell 
+        /// Advances a data source reference to a cell-relative offset and presents the offset cell
         /// reference as a readonly reference to a 32-bit unsigned integer
         /// </summary>
         /// <param name="src">The data source</param>
@@ -303,7 +303,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ReadOnlySpan<T> view<S,T>(in ArraySpan<S> src)
             where S : struct
-            where T : struct            
+            where T : struct
                 => z.recover<S,T>(span(src));
 
         [MethodImpl(Inline), Op, Closures(Closure)]

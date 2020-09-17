@@ -12,7 +12,7 @@ namespace Z0
     using static Memories;
 
     partial class BitGrid
-    {                
+    {
         public static string format<M,N,T>(in BitGrid<M,N,T> src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
@@ -25,11 +25,11 @@ namespace Z0
 
         public static string format<T>(BitGrid32<T> src, int? cols = null, bool showrow = false, int? maxbits = null)
             where T : unmanaged
-                => src.Cells.FormatMatrixBits(cols ?? bitsize<T>(), maxbits, showrow);
+                => src.Cells.FormatMatrixBits(cols ?? bitwidth<T>(), maxbits, showrow);
 
         public static string format<T>(BitGrid64<T> src, int? cols = null, bool showrow = false, int? maxbits = null)
             where T : unmanaged
-                => src.Cells.FormatMatrixBits(cols ?? bitsize<T>(), maxbits, showrow);
+                => src.Cells.FormatMatrixBits(cols ?? bitwidth<T>(), maxbits, showrow);
 
         public static string format<M,N,T>(BitGrid16<M,N,T> src, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat
@@ -105,7 +105,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
                 => z.bytes(data).FormatMatrixBits(nati<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
-        
+
         static string format<M,N,T>(Vector128<T> data, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat

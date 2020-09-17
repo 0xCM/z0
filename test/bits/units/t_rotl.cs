@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_rotl : t_bitcore<t_rotl>
     {
@@ -23,7 +23,7 @@ namespace Z0
 
         public void rotl_64()
             => rotl_check<ulong>();
- 
+
         /// <summary>
         /// Generic scalar bit left rotation check
         /// </summary>
@@ -31,20 +31,20 @@ namespace Z0
         void rotl_check<T>(T t = default)
             where T : unmanaged
         {
-            var offset = Random.Next(1, bitsize<T>());
+            var offset = Random.Next(1, bitwidth<T>());
             for(var i=0; i<RepCount; i++)
             {
-                var x = Random.Next<T>();                
+                var x = Random.Next<T>();
                 var y = BitString.scalar(x);
                 Claim.Eq(x, y.TakeScalar<T>());
-                
+
                 x = gbits.rotl(x, (byte)offset);
                 y = y.RotL(offset);
-                
+
                 var z = y.TakeScalar<T>();
                 Claim.Eq(x,z);
             }
         }
- 
+
     }
 }

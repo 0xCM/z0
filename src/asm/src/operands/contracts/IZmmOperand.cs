@@ -22,6 +22,6 @@ namespace Z0.Asm
         where N : unmanaged, ITypeNat
     {
         RegisterCode IRegOperand.Code
-            => (RegisterCode)value<N>();
+            => (RegisterCode)nat64u<N>();
     }
 }

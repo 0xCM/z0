@@ -25,13 +25,13 @@ namespace Z0
         public NatIdentity NaturalNumeric<N,T>(N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new NatIdentity(null,value<N>(), NumericKinds.kind<T>());
+                => new NatIdentity(null,nat64u<N>(), NumericKinds.kind<T>());
 
         [MethodImpl(Inline)]
         public NatIdentity NaturalNumeric<M,N,T>(M m = default,N n = default, T t = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => new NatIdentity(value<M>(),value<N>(), NumericKinds.kind<T>());
+                => new NatIdentity(nat64u<M>(),nat64u<N>(), NumericKinds.kind<T>());
     }
 }

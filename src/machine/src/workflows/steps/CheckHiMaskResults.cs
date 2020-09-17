@@ -9,9 +9,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static Checks;
-
-    using static CheckBitMasksStep;
 
     public readonly struct CheckHiMaskResults<T> : ITableSpan<CheckHiMaskResults<T>,CheckHiMaskResult<T>>
     {

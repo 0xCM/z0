@@ -25,7 +25,7 @@ namespace Z0
         /// The square matrix dimension
         /// </summary>
         public static int Order
-            => (int)value<N>();
+            => (int)nat64u<N>();
 
         /// <summary>
         /// The total number of allocated elements

@@ -32,7 +32,7 @@ namespace Z0
         public CellStreamProvider(IPolyrand src, Interval<T>? domain = null)
         {
             Random = src;
-            Name = $"fixed_rng_{default(F).BitWidth}x{bitsize<T>()}";
+            Name = $"fixed_rng_{default(F).BitWidth}x{bitwidth<T>()}";
             Width = (CellWidth)default(F).BitWidth;
             Kind = typeof(T).NumericKind();
             ValueEmitter = CreateEmitter();

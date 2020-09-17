@@ -15,7 +15,7 @@ namespace Z0
         where T : struct, IDataCell
     {
         public static uint CellWidth
-            => bitsize<T>();
+            => bitwidth<T>();
 
         readonly T[] Data;
 

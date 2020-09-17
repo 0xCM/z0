@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
-    
+
     public static class BvRng
-    {   
+    {
         /// <summary>
         /// Produces a 4-bit primal bitvector predicated on a random source
         /// </summary>
@@ -130,26 +130,26 @@ namespace Z0
         public static IRngStream<BitVector4> BitVectors(this IPolyrand random, N4 n)
         {
             IEnumerable<BitVector4> produce()
-            {            
+            {
                 while(true)
                     yield return random.BitVector(n4);
             }
 
-            return stream(produce(), random.RngKind);            
+            return stream(produce(), random.RngKind);
         }
 
         [MethodImpl(Inline)]
         static IRngStream<T> stream<T>(IEnumerable<T> src, RngKind rng)
             where T : unmanaged
                 =>  PolyStreams.create(src,rng);
- 
+
         /// <summary>
         /// Produces a generic bitvector
         /// </summary>
         /// <param name="random">The random source</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> BitVector<T>(this IPolyrand random)        
+        public static BitVector<T> BitVector<T>(this IPolyrand random)
             where T : unmanaged
                 => random.Next<T>();
 
@@ -159,13 +159,13 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<T> BitVector<T>(this IPolyrand random, int wmax)        
+        public static BitVector<T> BitVector<T>(this IPolyrand random, int wmax)
             where T : unmanaged
         {
             var v = random.Next<T>();
-            var clamp = bitsize<T>() - math.min(bitsize<T>(), wmax);
+            var clamp = bitwidth<T>() - math.min(bitwidth<T>(), wmax);
             return gmath.srl(v,(byte)clamp);
-        }    
+        }
 
         /// <summary>
         /// Produces a natural bitvector
@@ -175,17 +175,17 @@ namespace Z0
         /// <typeparam name="N">The bit width type</typeparam>
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> BitVector<N,T>(this IPolyrand random, N n = default, T t = default)        
+        public static BitVector<N,T> BitVector<N,T>(this IPolyrand random, N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
             var v = random.Next<T>();
-            var clamp = (byte)(bitsize<T>() - math.min(bitsize<T>(), (int)value(n)));
+            var clamp = (byte)(bitwidth<T>() - math.min(bitwidth<T>(), (int)value(n)));
             return gmath.srl(v,clamp);
-        }    
+        }
 
         [MethodImpl(Inline)]
-        public static BitVector128<N,T> BitVector<N,T>(this IPolyrand random, N128 block, N n = default, T t = default)        
+        public static BitVector128<N,T> BitVector<N,T>(this IPolyrand random, N128 block, N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {

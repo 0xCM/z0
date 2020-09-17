@@ -7,10 +7,10 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class t_zerohi : t_bitcore<t_zerohi>
-    {    
+    {
         public void sb_zerohi_8u()
             => sb_zerohi_check<byte>();
 
@@ -26,15 +26,15 @@ namespace Z0
         void sb_zerohi_check<T>(T t = default)
             where T : unmanaged
         {
-            var width = bitsize<T>();
+            var width = bitwidth<T>();
             for(var i=0; i< width; i++)
-                sb_zerohi_check<T>(i);            
+                sb_zerohi_check<T>(i);
         }
 
         void sb_zerohi_check<T>(int maxlen, T t = default)
             where T : unmanaged
         {
-            var width = bitsize<T>();
+            var width = bitwidth<T>();
 
             var bs0 = BitString.scalar(maxval(t));
             var bv0 = bs0.ToBitVector<T>();
@@ -43,7 +43,7 @@ namespace Z0
             Claim.eq(width, bs0.Length);
 
             Claim.eq(width, BitVector.pop(bv0));
-            
+
             var bs1 = bs0.Truncate(maxlen);
             Claim.eq(maxlen, bs1.PopCount());
             Claim.eq(maxlen, bs1.Length);
@@ -65,7 +65,7 @@ namespace Z0
                 var y0 = gbits.extract(y,0, (byte)(j - 1));
                 var y1 = gbits.extract(y,(byte)j, (byte)(width - 1));
                 Claim.Eq(x0,y0);
-                Claim.nea(gmath.nonz(y1));                        
+                Claim.nea(gmath.nonz(y1));
             }
         }
     }

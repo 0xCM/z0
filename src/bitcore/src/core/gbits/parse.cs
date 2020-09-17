@@ -15,14 +15,14 @@ namespace Z0
         [MethodImpl(Inline), Parse, Closures(UnsignedInts)]
         public static ref T parse<T>(ReadOnlySpan<char> src, byte offset, out T dst)
             where T : unmanaged
-        {            
-            var last = math.min(bitsize<T>(), src.Length) - 1;
-            ref readonly var input = ref head(src);            
+        {
+            var last = math.min(bitwidth<T>(), src.Length) - 1;
+            ref readonly var input = ref head(src);
             dst = default;
 
             for(int i=offset, pos = 0; i<= last; i++, pos++)
                 if(skip(input,i) == bit.One)
-                    dst = gbits.enable(dst, pos);                        
+                    dst = gbits.enable(dst, pos);
             return ref dst;
         }
     }

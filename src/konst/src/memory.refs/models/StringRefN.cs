@@ -23,12 +23,12 @@ namespace Z0
         public ref readonly StringRef Ref<I>(I i = default)
             where I : unmanaged, ITypeNat
         {
-            var idx = z.value(i);
+            var idx = z.nat64u(i);
             insist(idx < Count, $"{idx} < {Count}");
             return ref Refs[idx];
-        }        
+        }
 
         public uint Count
-            => (uint)z.value<N>();
+            => (uint)z.nat64u<N>();
     }
 }

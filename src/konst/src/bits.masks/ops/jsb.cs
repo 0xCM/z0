@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static NumericCast;
-    using static MaskLiterals;
+    using static BitMasks.Literals;
 
     partial class BitMasks
     {

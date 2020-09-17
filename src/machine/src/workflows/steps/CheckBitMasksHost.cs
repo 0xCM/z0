@@ -11,9 +11,14 @@ namespace Z0
     using static z;
 
     [Step]
-    public readonly struct CheckBitMasksStep : IWfStep<CheckBitMasksStep>
+    public sealed class CheckBitMasksHost : WfHost<CheckBitMasksHost>
     {
-        public static WfStepId StepId
-            => Flow.step<CheckBitMasksStep>();
+        public static void Control(IWfShell wf, IPolyrand source)
+        {
+            var log = text.build();
+            var host  = new CheckBitMasksHost();
+            using var step = new CheckBitMasks(wf, host, source, log);
+            step.Run();
+        }
     }
 }

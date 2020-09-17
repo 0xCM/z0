@@ -24,7 +24,7 @@ namespace Z0.Asm
         public RegisterKind Kind
         {
             [MethodImpl(Inline)]
-            get => AsmRegisterBits.join((RegisterCode)value<N>(), RegisterClass.YMM, RegisterWidth.W512);
+            get => AsmRegisterBits.join(nat<N,RegisterCode>(), RegisterClass.YMM, RegisterWidth.W512);
         }
     }
 }

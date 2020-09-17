@@ -44,7 +44,7 @@ namespace Z0
         /// <summary>
         /// The <typeparamref name='T' />-cell bit-width
         /// </summary>
-        ushort SegWidth => (ushort)bitsize<T>();
+        ushort SegWidth => (ushort)bitwidth<T>();
 
         /// <summary>
         /// The <typeparamref name='T' />-cell value
@@ -61,7 +61,7 @@ namespace Z0
         /// The bit-width value determined by <typeparamref name='N' />
         /// </summary>
         ushort SymWidth
-            => (ushort)value<N>();
+            => (ushort)nat64u<N>();
 
         /// <summary>
         /// The maximum number of symbols that can be packed into a storage cell

@@ -236,7 +236,7 @@ namespace Z0
         public readonly int Width
         {
             [MethodImpl(Inline)]
-            get => (int)bitsize<T>();
+            get => (int)bitwidth<T>();
         }
 
         /// <summary>
@@ -270,6 +270,18 @@ namespace Z0
         /// Reads/Manipulates a single bit
         /// </summary>
         public bit this[int index]
+        {
+            [MethodImpl(Inline)]
+            get => gbits.testbit(Data, (byte)index);
+
+            [MethodImpl(Inline)]
+            set => Data = gbits.setbit(Data, index, value);
+        }
+
+        /// <summary>
+        /// Reads/Manipulates a single bit
+        /// </summary>
+        public bit this[byte index]
         {
             [MethodImpl(Inline)]
             get => gbits.testbit(Data, (byte)index);

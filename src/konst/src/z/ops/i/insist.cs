@@ -32,7 +32,7 @@ namespace Z0
         public static ulong insist<N>(ulong src, N n = default, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where N : unmanaged, ITypeNat
         {
-            require(value<N>() == src,  $"The source value {src} does not match the required natural value {value<N>()}", caller, file, line);
+            require(nat64u<N>() == src,  $"The source value {src} does not match the required natural value {nat64u<N>()}", caller, file, line);
             return src;
         }
 

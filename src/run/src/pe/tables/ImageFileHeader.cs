@@ -12,7 +12,7 @@ namespace Z0
     partial struct ImageTables
     {
         [StructLayout(LayoutKind.Sequential, Pack = 1)]
-        [Table("https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_file_header")]
+        [Url("https://docs.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-image_file_header")]
         public struct ImageFileHeader
         {
             /// <summary>

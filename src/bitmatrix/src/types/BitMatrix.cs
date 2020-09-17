@@ -7,20 +7,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     /// <summary>
     /// Defines a square bitmatrix with order determined by the primal type over which it is defined
-    /// The intent is to provide a primal bitmatrix generalization 
+    /// The intent is to provide a primal bitmatrix generalization
     /// </summary>
     [StructLayout(LayoutKind.Sequential), IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public readonly ref struct BitMatrix<T>
         where T : unmanaged
-    {                        
+    {
         internal readonly Span<T> Data;
 
-        public static int N => bitsize<T>();
+        public static int N => bitwidth<T>();
 
         [MethodImpl(Inline)]
         public static BitVector<T> operator * (BitMatrix<T> A, BitVector<T> x)
@@ -37,7 +37,7 @@ namespace Z0
             this.Data.Fill(fill);
         }
 
-        public ref T Head 
+        public ref T Head
         {
             [MethodImpl(Inline)]
             get => ref head(Data);
@@ -74,7 +74,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => gbits.testbit(Data[row],(byte)col);
-            
+
             [MethodImpl(Inline)]
             set => Data[row] = gbits.setbit(Data[row], (byte)col, value);
         }
@@ -86,6 +86,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitMatrix<S> As<S>()
             where S : unmanaged
-                => new BitMatrix<S>(Content.Cast<T,S>());        
+                => new BitMatrix<S>(Content.Cast<T,S>());
     }
 }

@@ -33,7 +33,7 @@ namespace Z0
         public int RowCount
         {
             [MethodImpl(Inline)]
-            get => (int)value<M>();
+            get => (int)nat64u<M>();
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         public int ColCount
         {
             [MethodImpl(Inline)]
-            get => (int)value<N>();
+            get => (int)nat64u<N>();
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         public uint CellWidth
         {
             [MethodImpl(Inline)]
-            get => bitsize<T>();
+            get => bitwidth<T>();
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         public uint BlockWidth
         {
             [MethodImpl(Inline)]
-            get => bitsize<T>();
+            get => bitwidth<T>();
         }
 
         /// <summary>

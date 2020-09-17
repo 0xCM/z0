@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static z;
 
     /// <summary>
@@ -18,10 +18,10 @@ namespace Z0
     public readonly ref struct BitBlock<N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
-    {        
+    {
         readonly Span<T> data;
 
-        
+
         [MethodImpl(Inline)]
         public static implicit operator BitBlock<T>(in BitBlock<N,T> x)
             => new BitBlock<T>(x.data, (uint)new N().NatValue);
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitBlock<N,T> operator ~(in BitBlock<N,T> x)
-            => new BitBlock<N,T>(gspan.not(x.data, x.data.Replicate()));                        
+            => new BitBlock<N,T>(gspan.not(x.data, x.data.Replicate()));
 
         /// <summary>
         /// Computes the scalar product of the operands
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="lhs">The source operand</param>
         [MethodImpl(Inline)]
         public static BitBlock<N,T> operator -(in BitBlock<N,T> x)
-            => new BitBlock<N,T>(gspan.negate(x.data, x.data.Replicate()));                        
+            => new BitBlock<N,T>(gspan.negate(x.data, x.data.Replicate()));
 
         /// <summary>
         /// Returns true if the source vector is nonzero, false otherwise
@@ -86,18 +86,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit operator !=(in BitBlock<N,T> x, in BitBlock<N,T> y)
             => !x.Equals(y);
-        
+
         /// <summary>
         /// The number of bits covered by a cell
         /// </summary>
-        public static uint CellWidth 
-            => bitsize<T>();
+        public static uint CellWidth
+            => bitwidth<T>();
 
         /// <summary>
         /// The total number of bits covered by the block
         /// </summary>
-        public static uint BitCount 
-            => (uint)value<N>();
+        public static uint BitCount
+            => (uint)nat64u<N>();
 
         public static uint WholeCells
             => BitCount/CellWidth;
@@ -108,26 +108,26 @@ namespace Z0
         /// <summary>
         /// The minimum number of cells needed to cover a block
         /// </summary>
-        public static uint NeededCells 
+        public static uint NeededCells
             => WholeCells + (EvenlyCovered ? 0u : 1u);
-        
+
         /// <summary>
         /// The storage capacity needed to cover N-bits distributed over a contiguous T-cell sequence
         /// </summary>
-        public static uint RequiredWidth 
+        public static uint RequiredWidth
             => NeededCells * CellWidth;
 
         const string CapacityExceeded = "The required bit count exceeds allocated capacity";
 
         static string Format(uint capacity, uint needed)
-            => text.concat(CapacityExceeded.PadRight(70), Space, FieldDelimiter, Space, Chars.LBrace, 
+            => text.concat(CapacityExceeded.PadRight(70), Space, FieldDelimiter, Space, Chars.LBrace,
                     "CellWidth*CellCount", Space, Chars.Eq, Space, capacity, Chars.Space, Chars.Lt, Chars.Space, needed);
 
         [MethodImpl(Inline)]
         internal BitBlock(Span<T> src)
         {
             var allocated = CellWidth * (uint)src.Length;
-            z.insist(allocated >= BitCount, () => Format(allocated, BitCount));            
+            z.insist(allocated >= BitCount, () => Format(allocated, BitCount));
             data = src;
         }
 
@@ -185,7 +185,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => BitBlocks.readbit(in Head, bitpos);
-            
+
             [MethodImpl(Inline)]
             set => BitBlocks.setbit(bitpos, value, ref Head);
         }
@@ -225,7 +225,7 @@ namespace Z0
         /// </summary>
         /// <param name="state">The source state</param>
         public void Fill(bit state)
-        {            
+        {
             if(state)
                 data.Fill(NumericLiterals.maxval<T>());
             else
@@ -234,18 +234,18 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitBlock<T> Unsize()
-            => BitBlocks.load(Data, (int)value<N>()); 
+            => BitBlocks.load(Data, (int)nat64u<N>());
 
         [MethodImpl(Inline)]
         public bool Equals(in BitBlock<N,T> rhs)
-            => data.Identical(rhs.data);           
-        
+            => data.Identical(rhs.data);
+
         public override bool Equals(object obj)
             => throw new NotImplementedException();
-        
+
         public override int GetHashCode()
             => throw new NotImplementedException();
- 
+
         public override string ToString()
             => throw new NotImplementedException();
     }

@@ -374,10 +374,11 @@ namespace Z0
         /// <summary>
         /// Rotates the bits leftwards by a specified offset
         /// </summary>
-        /// <param name="shift">The magnitude of the rotation</param>
-        public static BitString rotl(BitString bs, int shift)
+        /// <param name="offset">The magnitude of the rotation</param>
+        public static BitString rotl(BitString bs, uint offset)
         {
             var dst = bs.data.Replicate();
+            var shift = (int)offset;
             Span<byte> src = stackalloc byte[bs.Length];
             dst.CopyTo(src);
             var cut = bs.Length - shift;

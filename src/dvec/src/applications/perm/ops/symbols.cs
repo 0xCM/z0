@@ -23,14 +23,14 @@ namespace Z0
                     let maps = (perm, format:perm.FormatMap())
                     orderby maps.perm descending
                     select maps;
-                            
+
         /// <summary>
         /// Deconstructs a permutation literal into an ordered sequence of symbols that define the permutation
         /// </summary>
         /// <param name="src">The perm literal</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> symbols(Perm2x4 src)
-            => symbols<Perm4Sym,byte>((byte)src, 4, bitsize<byte>());
+            => symbols<Perm4Sym,byte>((byte)src, 4, bitwidth<byte>());
 
         /// <summary>
         /// Deconstructs a permutation literal into an ordered sequence of symbols that define the permutation
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="src">The perm literal</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> symbols(Perm4L src)
-            => symbols<Perm4Sym,byte>((byte)src, 2, bitsize<byte>());
+            => symbols<Perm4Sym,byte>((byte)src, 2, bitwidth<byte>());
 
         /// <summary>
         /// Deconstructs a permutation literal into an ordered sequence of symbols that define the permutation
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="src">The perm literal</param>
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> symbols(Perm16L src)
-            => symbols<Perm16L,ulong>((ulong)src, 4, bitsize<ulong>());
+            => symbols<Perm16L,ulong>((ulong)src, 4, bitwidth<ulong>());
 
         /// <summary>
         /// Computes the minimum number of cells required to store a specified number of bits
@@ -74,7 +74,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Assumes that 
+        /// Assumes that
         /// 1. The source data source is a tape upon which fixed-width symbols are sequentially recorded
         /// 2. The symbol alphabet is defined by the last character of the literals defined by an enumeration
         /// With these preconditions, the operation returns the ordered sequence of symbols written to the tape
@@ -94,17 +94,17 @@ namespace Z0
             Span<char> symbols = new char[count];
             for(uint i=0, bitpos = 0; i<count; i++, bitpos += segwidth)
             {
-                var key = gbits.extract(src, (byte)bitpos, (byte)(bitpos + segwidth - 1));                
+                var key = gbits.extract(src, (byte)bitpos, (byte)(bitpos + segwidth - 1));
                 if(index.TryGetValue(key, out var value))
                     seek(symbols,i) = value;
                 else
                     ThrowKeyNotFound(key);
             }
             return symbols;
-        }     
+        }
 
-        static void ThrowKeyNotFound<T>(T key)   
+        static void ThrowKeyNotFound<T>(T key)
             where T : unmanaged
-                => throw new Exception($"The value {key}:{typeof(T).DisplayName()} does not exist in the index");            
+                => throw new Exception($"The value {key}:{typeof(T).DisplayName()} does not exist in the index");
     }
 }

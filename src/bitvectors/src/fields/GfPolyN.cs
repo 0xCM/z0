@@ -21,10 +21,10 @@ namespace Z0
     {
         readonly ulong Data;
 
-        public static byte degree => (byte)value<N>();
+        public static byte degree => (byte)nat64u<N>();
 
         public static GfPoly<N,T> Zero => default;
-        
+
         public static implicit operator T(GfPoly<N,T> src)
             => convert<T>(src.Data);
 
@@ -34,8 +34,8 @@ namespace Z0
             var count = exponents.Length;
 
             for(var i=0; i<count; i++)
-                result |= Pow2.pow(exponents[i]);            
-            
+                result |= Pow2.pow(exponents[i]);
+
             Data = result;
         }
 
@@ -82,20 +82,20 @@ namespace Z0
         }
 
         /// <summary>
-        /// Formats the polynomial 
+        /// Formats the polynomial
         /// </summary>
         public string Format(char? variable = null)
         {
             var bs = BitString.scalar(Data);
             var terms = new List<string>();
-            
+
             for(var i=0; i<bs.Length; i++)
-                if(bs[i]) 
+                if(bs[i])
                     terms.Add($"{variable ?? 'x'}^{i}");
-            
+
             var sb = text.build();
             terms.Reverse();
-            return string.Join($" + ", terms);            
+            return string.Join($" + ", terms);
         }
 
         public GfPoly<N,U> As<U>()

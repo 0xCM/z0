@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static z;
 
@@ -19,19 +19,19 @@ namespace Z0
     public struct Matrix<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
-        where T : unmanaged    
-    {        
+        where T : unmanaged
+    {
         T[] data;
 
         /// <summary>
         /// The number of rows in the structure
         /// </summary>
-        public static int Rows => (int)value<M>();
+        public static int Rows => (int)nat64u<M>();
 
         /// <summary>
         /// The number of columns in the structure
         /// </summary>
-        public static int Cols => (int)value<N>();
+        public static int Cols => (int)nat64u<N>();
 
         /// <summary>
         /// The total number of allocated elements
@@ -39,11 +39,11 @@ namespace Z0
         public static int Cells => (int)NatCalc.mul<M,N>();
 
         [MethodImpl(Inline)]
-        public static bool operator == (Matrix<M,N,T> lhs, Matrix<M,N,T> rhs) 
+        public static bool operator == (Matrix<M,N,T> lhs, Matrix<M,N,T> rhs)
             => lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static bool operator != (Matrix<M,N,T> lhs, Matrix<M,N,T> rhs) 
+        public static bool operator != (Matrix<M,N,T> lhs, Matrix<M,N,T> rhs)
             => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
@@ -75,24 +75,24 @@ namespace Z0
         /// Provides access to the underlying data as a linear unblocked span
         /// </summary>
         public T[] Data
-        {            
+        {
             [MethodImpl(Inline)]
             get => data;
         }
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         public ref T Cell(int r, int c)
             => ref data[Cols*r + c];
 
         public ref T this[int r, int c]
         {
-            [MethodImpl(Inline)]        
+            [MethodImpl(Inline)]
             get => ref Cell(r,c);
         }
 
         public ref T this[uint r, uint c]
         {
-            [MethodImpl(Inline)]        
+            [MethodImpl(Inline)]
             get => ref Cell((int)r,(int)c);
         }
 
@@ -101,7 +101,7 @@ namespace Z0
         /// </summary>
         public Block256<N,T> this[int r]
         {
-            [MethodImpl(Inline)]        
+            [MethodImpl(Inline)]
             get => GetRow(r);
         }
 
@@ -110,7 +110,7 @@ namespace Z0
         {
             if(row < 0 || row >= Rows)
                 throw AppErrors.IndexOutOfRange(row, 0, Rows - 1);
-            
+
             return RowVectors.blockload<N,T>(data.AsSpan().Slice(row * Cols, Cols));
         }
 
@@ -128,7 +128,7 @@ namespace Z0
         {
             if(col < 0 || col >= Cols)
                 throw AppErrors.IndexOutOfRange(col, 0, Cols - 1);
-            
+
             for(var row = 0; row < Rows; row++)
                 dst[row] = data[row*Cols + col];
             return ref dst;
@@ -159,7 +159,7 @@ namespace Z0
         {
             var dst = Matrix.alloc<N,M,T>();
             for(var row = 0; row < Rows; row++)
-                dst.SetCol(row, GetRow(row));            
+                dst.SetCol(row, GetRow(row));
             return dst;
         }
 
@@ -227,7 +227,7 @@ namespace Z0
 
         public override bool Equals(object rhs)
             => rhs is Matrix<M,N,T> x && Equals(x);
- 
+
         public override int GetHashCode()
             => data.GetHashCode();
     }

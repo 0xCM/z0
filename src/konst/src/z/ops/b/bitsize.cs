@@ -13,8 +13,8 @@ namespace Z0
 
     partial struct z
     {
-        [MethodImpl(Inline)]        
-        public static uint bitsize<T>(T t = default)
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static uint bitwidth<T>(T t = default)
             => (uint)SizeOf<T>() * 8;
     }
 }

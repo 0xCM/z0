@@ -20,18 +20,18 @@ namespace Z0
     {
         readonly Perm perm;
 
-        static int n => (int)value<N>();
+        static int n => (int)nat64u<N>();
 
         /// <summary>
         /// The canonical identity permutation of length N
         /// </summary>
-        public static NatPerm<N> Identity 
+        public static NatPerm<N> Identity
             => new NatPerm<N>(AllocIdentity());
 
         /// <summary>
         /// The empty permutation of length N
         /// </summary>
-        public static NatPerm<N> Empty 
+        public static NatPerm<N> Empty
             => new NatPerm<N>(new int[n]);
 
         [MethodImpl(Inline)]
@@ -113,8 +113,8 @@ namespace Z0
             else
             {
                 var tmp = new int[n];
-                
-                var m = src.Length;                                
+
+                var m = src.Length;
                 for(var i=0; i< m; i++)
                     tmp[i] = src[i];
 
@@ -151,7 +151,7 @@ namespace Z0
         /// <param name="swap">The transposition to apply</param>
         [MethodImpl(Inline)]
         public NatPerm<N> Swap(in NatSwap<N> src)
-        {            
+        {
             (var i, var j) = src;
             perm.Swap(src);
             return this;
@@ -163,7 +163,7 @@ namespace Z0
         /// <param name="swap">The transposition to apply</param>
         [MethodImpl(Inline)]
         public NatPerm<N> Swap(int i, int j)
-        {                        
+        {
             perm.Swap(i,j);
             return this;
         }
@@ -174,7 +174,7 @@ namespace Z0
         /// <param name="specs">The transpositions to apply</param>
         [MethodImpl(Inline)]
         public NatPerm<N> Swap(params (int i, int j)[] specs)
-        {                        
+        {
             perm.Swap(specs);
             return this;
         }
@@ -183,8 +183,8 @@ namespace Z0
         /// Effects a sequence of transpositions
         /// </summary>
         public NatPerm<N> Swap(params NatSwap<N>[] specs)
-        {            
-            for(var k=0; k<specs.Length; k++)            
+        {
+            for(var k=0; k<specs.Length; k++)
                 perm.Swap(specs[k]);
             return this;
         }
@@ -218,7 +218,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the inverse permutation t of the current permutation p 
+        /// Computes the inverse permutation t of the current permutation p
         /// such that p*t = t*p = I where I denotes the identity permutation
         /// </summary>
         public NatPerm<N> Invert()
@@ -232,7 +232,7 @@ namespace Z0
         /// <param name="g">The right permutation</param>
         public NatPerm<N> Compose(NatPerm<N> g)
             => new NatPerm<N>(perm.Compose(g.perm));
- 
+
         /// <summary>
         /// Applies a modular increment to the permutation in-place
         /// </summary>
@@ -253,7 +253,7 @@ namespace Z0
             return this;
         }
 
-        public Span<Swap> CalcSwaps()        
+        public Span<Swap> CalcSwaps()
             => perm.CalcSwaps();
 
         /// <summary>
@@ -276,7 +276,7 @@ namespace Z0
          public string Format(int? colwidth = null)
             => perm.Format(colwidth);
 
-         public override string ToString() 
+         public override string ToString()
             => this.Format();
 
          public override int GetHashCode()

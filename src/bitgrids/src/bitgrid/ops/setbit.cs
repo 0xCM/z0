@@ -20,9 +20,9 @@ namespace Z0
         /// <param name="dst">A reference to the grid storage</param>
         /// <typeparam name="T">The grid storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static void setbit<T>(int bitpos, bit state, ref T dst)    
+        public static void setbit<T>(int bitpos, bit state, ref T dst)
             where T : unmanaged
-                => cell(ref dst, bitpos) = gbits.setbit(cell(ref dst, bitpos), (byte)(bitpos % bitsize<T>()), state);      
+                => cell(ref dst, bitpos) = gbits.setbit(cell(ref dst, bitpos), (byte)(bitpos % bitwidth<T>()), state);
 
         /// <summary>
         /// Sets the state of an a coordinate-identified bit
@@ -34,7 +34,7 @@ namespace Z0
         /// <param name="state">The source state</param>
         /// <typeparam name="T">The grid storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static void setbit<T>(int width, int row, int col, bit state, ref T dst)    
+        public static void setbit<T>(int width, int row, int col, bit state, ref T dst)
             where T : unmanaged
                 => setbit(GridCells.linear(width,row,col), state, ref dst);
 
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="state">The source state</param>
         /// <typeparam name="T">The grid storage segment type</typeparam>
         [MethodImpl(Inline)]
-        public static void setbit<N,T>(N width, int row, int col, bit state, ref T dst)    
+        public static void setbit<N,T>(N width, int row, int col, bit state, ref T dst)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => setbit(GridCells.linear(nati(width),row,col), state, ref dst);

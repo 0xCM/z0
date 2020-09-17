@@ -27,8 +27,8 @@ namespace Z0
                 var B = Random.BitMatrix(n,t);
                 var C1 = BitMatrixA.and(A,B).Content;
                 var C2 = and(A.Content, B.Content);
-                ClaimNumeric.eq((ulong)A.Order, value<N>());
-                ClaimNumeric.eq((ulong)B.Order, value<N>());                
+                ClaimNumeric.eq((ulong)A.Order, nat64u<N>());
+                ClaimNumeric.eq((ulong)B.Order, nat64u<N>());
                 ClaimNumeric.Eq(C1,C2);
             }
         }
@@ -40,14 +40,14 @@ namespace Z0
             {
                 var A = Random.BitMatrix<T>();
                 var B = Random.BitMatrix<T>();
-                var C = BitMatrix.alloc<T>();                
+                var C = BitMatrix.alloc<T>();
                 BitMatrix.and(A,B,C);
 
                 var rbA = A.ToRowBits();
                 var rbB = B.ToRowBits();
                 var rbC = rbA & rbB;
 
-                Claim.Require(BitMatrix.same(rbC.ToBitMatrix(),C));                                                                     
+                Claim.Require(BitMatrix.same(rbC.ToBitMatrix(),C));
             }
         }
 
@@ -56,7 +56,7 @@ namespace Z0
         {
             for(var i=0; i< Claim.length(lhs,rhs); i++)
                 dst[i] = gmath.xor(lhs[i], rhs[i]);
-           return dst;        
+           return dst;
         }
 
         Span<T> xor<T>(Span<T> lhs, ReadOnlySpan<T> rhs)
@@ -73,8 +73,8 @@ namespace Z0
                 var B = Random.BitMatrix(n,t);
                 var C1 = BitMatrixA.xor(A, B).Content;
                 var C2 = xor(A.Content, B.Content);
-                ClaimNumeric.eq((ulong)A.Order, value<N>());
-                ClaimNumeric.eq((ulong)B.Order, value<N>());                
+                ClaimNumeric.eq((ulong)A.Order, nat64u<N>());
+                ClaimNumeric.eq((ulong)B.Order, nat64u<N>());
                 ClaimNumeric.Eq(C1,C2);
             }
         }
@@ -92,7 +92,7 @@ namespace Z0
                 for(var j =0; j< Z.Order; j++)
                 {
                     var a = A[i];
-                    var b = B[i];                    
+                    var b = B[i];
                     var z = Z[i];
 
                     var x = BitVector.xor(a,b);

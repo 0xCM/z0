@@ -20,7 +20,7 @@ namespace Z0
         public static Vector256<byte> vpart32x8x1(uint src)
         {
             var x = vbroadcast(w256, src);
-            var y = vbroadcast(w256, MaskLiterals.Msb32x8x7);
+            var y = vbroadcast(w256, BitMasks.Literals.Msb32x8x7);
             return v8u(vand(x,y));
         }
     }

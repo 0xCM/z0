@@ -28,6 +28,6 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static uint bitcount<T>(uint cellcount)
-            => bitcount(cellcount, z.bitsize<T>()*8);
+            => bitcount(cellcount, z.bitwidth<T>()*8);
     }
 }

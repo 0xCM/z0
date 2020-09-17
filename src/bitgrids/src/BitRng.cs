@@ -16,7 +16,7 @@ namespace Z0
     using BM = Z0.BitMatrix;
 
     public static class BitRng
-    {   
+    {
         /// <summary>
         /// Creates a 16-bit generic bitgrid
         /// </summary>
@@ -308,7 +308,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N1,N128,T> BitGrid<T>(this IPolyrand random, N1 m, N128 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => random.CpuVector<T>(n128);
 
         /// <summary>
@@ -320,7 +320,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N128,N1,T> BitGrid<T>(this IPolyrand random, N128 m, N1 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => random.CpuVector<T>(n128);
 
         /// <summary>
@@ -332,7 +332,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N2,N64,T> BitGrid<T>(this IPolyrand random, N2 m, N64 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => random.CpuVector<T>(n128);
 
         /// <summary>
@@ -344,7 +344,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N64,N2,T> BitGrid<T>(this IPolyrand random, N64 m, N2 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => random.CpuVector<T>(n128);
 
         /// <summary>
@@ -355,7 +355,7 @@ namespace Z0
         /// <param name="n">The col count representative</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N4,N32,T> BitGrid<T>(this IPolyrand random, N4 m, N32 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => random.CpuVector<T>(n128);
 
         /// <summary>
@@ -367,7 +367,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N32,N4,T> BitGrid<T>(this IPolyrand random, N32 m, N4 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => random.CpuVector<T>(n128);
 
         /// <summary>
@@ -379,7 +379,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N8,N16,T> BitGrid<T>(this IPolyrand random, N8 m, N16 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => random.CpuVector<T>(n128);
 
         /// <summary>
@@ -391,7 +391,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         [MethodImpl(Inline)]
         public static BitGrid128<N16,N8,T> BitGrid<T>(this IPolyrand random, N16 m, N8 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => random.CpuVector<T>(n128);
 
         /// <summary>
@@ -403,7 +403,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N1,N256,T> BitGrid<T>(this IPolyrand random, N1 m, N256 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => random.CpuVector<T>(n256);
 
         /// <summary>
@@ -415,7 +415,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N256,N1,T> BitGrid<T>(this IPolyrand random, N256 m, N1 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => random.CpuVector<T>(n256);
 
         /// <summary>
@@ -427,7 +427,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N2,N128,T> BitGrid<T>(this IPolyrand random, N2 m, N128 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => random.CpuVector<T>(n256);
 
         /// <summary>
@@ -439,7 +439,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N128,N2,T> BitGrid<T>(this IPolyrand random, N128 m, N2 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => random.CpuVector<T>(n256);
 
         /// <summary>
@@ -451,7 +451,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N4,N64,T> BitGrid<T>(this IPolyrand random, N4 m, N64 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => random.CpuVector<T>(n256);
 
         /// <summary>
@@ -463,7 +463,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N64,N4,T> BitGrid<T>(this IPolyrand random, N64 m, N4 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => random.CpuVector<T>(n256);
 
         /// <summary>
@@ -475,7 +475,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N8,N32,T> BitGrid<T>(this IPolyrand random, N8 m, N32 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => random.CpuVector<T>(n256);
 
         /// <summary>
@@ -487,7 +487,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N32,N8,T> BitGrid<T>(this IPolyrand random, N32 m, N8 n, T t = default)
-            where T : unmanaged            
+            where T : unmanaged
                 => random.CpuVector<T>(n256);
 
         /// <summary>
@@ -499,7 +499,7 @@ namespace Z0
         /// <param name="t">The cell type representative</param>
         [MethodImpl(Inline)]
         public static BitGrid256<N16,N16,T> BitGrid<T>(this IPolyrand random, N16 m, N16 n, T t = default)
-            where T : unmanaged             
+            where T : unmanaged
                 => random.CpuVector<T>(n256);
 
         /// <summary>
@@ -526,7 +526,7 @@ namespace Z0
             where T : unmanaged
         {
             random.Fill(dst.CellCount, ref dst.Head);
-            return ref dst;            
+            return ref dst;
         }
 
         /// <summary>
@@ -538,8 +538,8 @@ namespace Z0
         public static IEnumerable<BitPos<T>> BitPositions<T>(this IPolyrand random, ushort mincells, ushort maxcells)
             where T : unmanaged
         {
-            var s2 = random.Stream(Interval.closed(mincells,maxcells)).GetEnumerator();            
-            var s3 = random.Stream<byte>(Interval.closed((byte)0, (byte)bitsize<T>())).GetEnumerator();
+            var s2 = random.Stream(Interval.closed(mincells,maxcells)).GetEnumerator();
+            var s3 = random.Stream<byte>(Interval.closed((byte)0, (byte)bitwidth<T>())).GetEnumerator();
             while(true && s2.MoveNext() && s3.MoveNext())
                 yield return BitPos.FromCellIndex<T>(s2.Current, s3.Current);
         }
@@ -553,7 +553,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static IEnumerable<BitPos> BitPositions(this IPolyrand random, byte capacity, ushort mincells, ushort maxcells)
         {
-            var s2 = random.Stream(Interval.closed(mincells,maxcells)).GetEnumerator();            
+            var s2 = random.Stream(Interval.closed(mincells,maxcells)).GetEnumerator();
             var s3 = random.Stream<byte>(Interval.closed((byte)0, capacity)).GetEnumerator();
             while(true && s2.MoveNext() && s3.MoveNext())
                 yield return BitPos.FromCellIndex(capacity, s2.Current, s3.Current);
@@ -592,7 +592,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitMatrix<T> BitMatrix<T>(this IPolyrand random)
             where T : unmanaged
-        {                        
+        {
             var bytes = math.square(Z0.BitMatrix<T>.N) >> 3;
             var data = random.Span<byte>((int)bytes);
             return BM.load(data.Cast<byte,T>());
@@ -601,9 +601,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref BitMatrix<T> BitMatrix<T>(this IPolyrand random, ref BitMatrix<T> dst)
             where T : unmanaged
-        {                        
+        {
             random.Fill((int)Z0.BitMatrix<T>.N, ref dst.Head);
-            return ref dst;            
+            return ref dst;
         }
 
         /// <summary>
@@ -676,7 +676,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
         public static BitMatrix64 BitMatrix64(this IPolyrand random)
-            => BM.primal(n64,random.Array<ulong>(64));        
+            => BM.primal(n64,random.Array<ulong>(64));
 
         /// <summary>
         /// Produces a 64x64 bitmatrix from a random source
@@ -684,8 +684,8 @@ namespace Z0
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
         public static BitMatrix64 BitMatrix(this IPolyrand random, N64 n)
-            => BM.primal(n,random.Array<ulong>(64));        
-    
+            => BM.primal(n,random.Array<ulong>(64));
+
         /// <summary>
         /// Produces a generic bitmatrix of natural dimensions
         /// </summary>
@@ -712,6 +712,6 @@ namespace Z0
         public static BitMatrix<N,T> BitMatrix<N,T>(this IPolyrand random, N n = default, T t = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BM.load(n,random.Span<T>(BM.cellcount(n,n,t)));        
+                => BM.load(n,random.Span<T>(BM.cellcount(n,n,t)));
    }
 }

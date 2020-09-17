@@ -9,6 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
+    using static BitMasks.Literals;
     using static z;
 
     partial class Permute
@@ -31,10 +32,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Perm16 vspec(Vector128<byte> data)
-            => new Perm16(dvec.vand(data, z.vbroadcast(w128, MaskLiterals.Msb8x8x3)));
+            => new Perm16(dvec.vand(data, z.vbroadcast(w128, Msb8x8x3)));
 
         [MethodImpl(Inline), Op]
         public static Perm32 vspec(Vector256<byte> data)
-            => new Perm32(dvec.vand(data, z.vbroadcast(w256, MaskLiterals.Msb8x8x3)));
+            => new Perm32(dvec.vand(data, z.vbroadcast(w256, Msb8x8x3)));
     }
 }

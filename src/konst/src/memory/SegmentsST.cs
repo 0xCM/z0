@@ -16,10 +16,10 @@ namespace Z0
         where T : unmanaged
      {
         public static uint SegWidth
-            => bitsize<C>();
+            => bitwidth<C>();
 
         public static uint CellWidth
-            => bitsize<T>();
+            => bitwidth<T>();
 
         readonly Span<C> Data;
 

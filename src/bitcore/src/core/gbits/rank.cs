@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
-    using static Memories;
-    
+    using static z;
+
     partial class gbits
-    {                        
+    {
         /// <summary>
         /// Calculates the number of bits set up to and including the current bit
         /// </summary>
@@ -29,8 +29,8 @@ namespace Z0
                 return Bits.rank(uint32(src), pos);
             else if(typeof(T) == typeof(ulong))
                 return Bits.rank(uint64(src), pos);
-            else            
-                throw Unsupported.define<T>();
+            else
+                throw no<T>();
         }
     }
 }

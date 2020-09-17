@@ -41,11 +41,11 @@ namespace Z0
 
         public void bitchars_64f()
             => bitchars_check<double>();
- 
+
         protected void bitchars_check<T>(T t = default)
             where T : unmanaged
         {
-            Span<char> s0 = stackalloc char[bitsize<T>()];
+            Span<char> s0 = stackalloc char[bitwidth<T>()];
             ReadOnlySpan<char> s1 = default;
             for(var i=0; i<RepCount; i++)
             {
@@ -59,7 +59,7 @@ namespace Z0
                 var textB = BitString.scalar(a).Format();
                 ClaimPrimalSeq.eq(textA, textB);
             }
-        } 
+        }
     }
 
 }

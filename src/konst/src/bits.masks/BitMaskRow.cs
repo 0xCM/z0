@@ -11,10 +11,10 @@ namespace Z0
 
     using NBK = NumericBaseKind;
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential), Table(TableName)]
     public struct BitMaskRow
     {
-        public const string TableName = "bitmasks";
+        public const string TableName = "root.bitmasks";
 
         public string Name;
 

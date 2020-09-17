@@ -12,11 +12,11 @@ namespace Z0
     partial class Memories
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static int bitsize<T>()
-            => (int)z.bitsize<T>();
+        public static int bitwidth<T>()
+            => (int)z.bitwidth<T>();
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static BitSize bitsize<T>(T rep)
-            => z.bitsize<T>();
+        public static BitSize bitwidth<T>(T rep)
+            => z.bitwidth<T>();
     }
 }

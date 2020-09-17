@@ -47,7 +47,7 @@ namespace Z0
         public SymbolSpec(ushort symwidth, ArtifactIdentifier symdomain, params S[] symbols)
         {
             SymWidth = symwidth;
-            SegWidth = (ushort)bitsize<S>();
+            SegWidth = (ushort)bitwidth<S>();
             Capacity = (ushort)(SegWidth/SymWidth);
             SegDomain = typeof(S);
             SymDomain = symdomain;

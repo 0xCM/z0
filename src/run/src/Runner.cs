@@ -58,12 +58,6 @@ namespace Z0
 
         }
 
-        void RunChecks()
-        {
-            var log = text.build();
-            using var step = new CheckBitMasks(Wf, Random, log);
-            step.Run();
-        }
 
         void RunFsm()
         {
@@ -266,11 +260,6 @@ namespace Z0
                 step.Run();
             }
 
-            {
-                var dst = text.build();
-                using var step = new CheckBitMasks(Wf, Random, dst);
-                step.Run();
-            }
             {
                 var dir = FS.dir("J:/dev/labs/blend/App01/bin/x64/Release/net5.0/win-x64");
                 var ct = Wf.Ct;

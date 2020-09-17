@@ -21,8 +21,8 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var rows = (int)value(m);
-            var cols = (int)value(n);
+            var rows = (int)nat64u(m);
+            var cols = (int)nat64u(n);
             var points = rows*cols;
             var bytes = points/8 + (points % 8 != 0 ? 1 : 0);
             var bits = bytes*8;
@@ -30,7 +30,7 @@ namespace Z0
             var segments = bytes/segbytes + (bytes % segbytes != 0 ? 1 : 0);
 
             var grid = BitGrid.alloc(m,n,zero);
-            
+
             for(var i=0; i< RepCount; i++)
             {
                 var input = Random.BitString(grid.BitCount);
@@ -38,7 +38,7 @@ namespace Z0
                     grid.SetBit(index, input[index]);
 
                 var output = grid.ToBitString();
-                Claim.eq(input,output);                                            
+                Claim.eq(input,output);
             }
         }
 
@@ -65,8 +65,8 @@ namespace Z0
             where T : unmanaged
         {
             var last = bit.Off;
-            int M = (int)bitsize<T>();
-            int N = (int)bitsize<T>();
+            int M = (int)bitwidth<T>();
+            int N = (int)bitwidth<T>();
             for(var i = 0; i<CycleCount; i++)
             {
                 var src = Random.BitMatrix<T>();
@@ -89,7 +89,7 @@ namespace Z0
             {
                 var src = Random.BitString(M*N);
                 var pos = 0;
-                
+
                 counter.Start();
                 for(var row = 0; row< M; row++)
                 for(var col = 0; col< N; col++, pos++)
@@ -109,13 +109,13 @@ namespace Z0
             var gy = Random.BitGrid(m,n,t);
             var gz = BitGrid.alloc(m,n,t);
 
-            Claim.eq((uint)gz.BlockCount, BitCalcs.tableblocks(n256,m,n,t));            
+            Claim.eq((uint)gz.BlockCount, BitCalcs.tableblocks(n256,m,n,t));
             Claim.eq((uint)gz.CellCount, BitCalcs.tablecells(m,n,t));
-            
+
             BitGrid.and(gx,gy,gz);
-            
+
             for(var block=0; block<gx.BlockCount; block++)
-                Claim.veq(gvec.vand(gx[block], gy[block]), gz[block]);   
+                Claim.veq(gvec.vand(gx[block], gy[block]), gz[block]);
 
         }
 
@@ -128,13 +128,13 @@ namespace Z0
             var gy = Random.BitGrid(m,n,t);
             var gz = BitGrid.alloc(m,n,t);
 
-            Claim.eq((uint)gz.BlockCount, BitCalcs.tableblocks(n256,m,n,t));            
+            Claim.eq((uint)gz.BlockCount, BitCalcs.tableblocks(n256,m,n,t));
             Claim.eq((uint)gz.CellCount, BitCalcs.tablecells(m,n,t));
-            
+
             BitGrid.xor(gx,gy,gz);
-            
+
             for(var block=0; block<gx.BlockCount; block++)
-                Claim.veq(gvec.vxor(gx[block], gy[block]), gz[block]);   
+                Claim.veq(gvec.vxor(gx[block], gy[block]), gz[block]);
         }
 
         protected void bg_and_check<T>(uint m, uint n, T t = default)
@@ -144,13 +144,13 @@ namespace Z0
             var gy = Random.BitGrid(m,n,t);
             var gz = BitGrid.alloc(m,n,t);
 
-            Claim.eq((uint)gz.BlockCount, BitCalcs.tableblocks<T>(n256,m,n));            
+            Claim.eq((uint)gz.BlockCount, BitCalcs.tableblocks<T>(n256,m,n));
             Claim.eq((uint)gz.CellCount, BitCalcs.tablecells<T>(m,n));
-            
+
             BitGrid.and(gx,gy,gz);
-            
+
             for(var block=0; block<gx.BlockCount; block++)
-                Claim.veq(gvec.vand(gx[block], gy[block]), gz[block]);   
+                Claim.veq(gvec.vand(gx[block], gy[block]), gz[block]);
 
         }
 
@@ -161,13 +161,13 @@ namespace Z0
             var gy = Random.BitGrid(m,n,t);
             var gz = BitGrid.alloc(m,n,t);
 
-            Claim.eq((uint)gz.BlockCount, BitCalcs.tableblocks<T>(n256,m,n));            
+            Claim.eq((uint)gz.BlockCount, BitCalcs.tableblocks<T>(n256,m,n));
             Claim.eq((uint)gz.CellCount, BitCalcs.tablecells<T>(m,n));
-            
+
             BitGrid.xor(gx,gy,gz);
-            
+
             for(var block=0; block<gx.BlockCount; block++)
-                Claim.veq(gvec.vxor(gx[block], gy[block]), gz[block]);   
+                Claim.veq(gvec.vxor(gx[block], gy[block]), gz[block]);
         }
     }
 }

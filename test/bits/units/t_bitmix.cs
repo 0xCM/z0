@@ -31,7 +31,7 @@ namespace Z0
         void bitmix_check<T>(T t = default)
             where T : unmanaged
         {
-            var len = bitsize<T>();
+            var len = bitwidth<T>();
 
             for(var i=0; i<RepCount; i++)
             {

@@ -26,7 +26,7 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => (int)value<N>();
+            get => (int)nat64u<N>();
         }
 
         public Span<T> Content

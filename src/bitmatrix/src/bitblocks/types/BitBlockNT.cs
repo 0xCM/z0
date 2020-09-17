@@ -30,15 +30,15 @@ namespace Z0
         /// The maximum number of bits that can be placed a single segment segment
         /// </summary>
         public static uint CellWidth
-            => bitsize<T>();
+            => bitwidth<T>();
 
         [MethodImpl(Inline)]
         public static implicit operator BitBlock<T>(Span<T> src)
-            => new BitBlock<T>(src, bitsize<T>());
+            => new BitBlock<T>(src, bitwidth<T>());
 
         [MethodImpl(Inline)]
         public static implicit operator BitBlock<T>(T src)
-            => new BitBlock<T>(src, bitsize<T>());
+            => new BitBlock<T>(src, bitwidth<T>());
 
         [MethodImpl(Inline)]
         public static bit operator %(in BitBlock<T> x, in BitBlock<T> y)

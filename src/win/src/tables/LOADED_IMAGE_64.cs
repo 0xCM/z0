@@ -9,10 +9,10 @@ namespace Z0.Image
     using System;
     using System.Diagnostics;
     using System.Runtime.InteropServices;
-    
+
     using Z0.MS;
 
-    [Table("https://docs.microsoft.com/en-us/windows/win32/api/dbghelp/ns-dbghelp-loaded_image")]
+    [Url("https://docs.microsoft.com/en-us/windows/win32/api/dbghelp/ns-dbghelp-loaded_image")]
     public unsafe struct LOADED_IMAGE_64
     {
         /// <summary>

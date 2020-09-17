@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static z;
 
@@ -17,15 +17,15 @@ namespace Z0
     /// <typeparam name="T">The primal type</typeparam>
     public struct Matrix<N,T>
         where N : unmanaged, ITypeNat
-        where T : unmanaged    
-    {        
+        where T : unmanaged
+    {
         T[] data;
 
         /// <summary>
         /// The square matrix dimension
         /// </summary>
-        public static int Order => (int)value<N>();
-        
+        public static int Order => (int)nat64u<N>();
+
         /// <summary>
         /// The total number of allocated elements
         /// </summary>
@@ -48,11 +48,11 @@ namespace Z0
             => new Matrix<N, T>(src);
 
         [MethodImpl(Inline)]
-        public static bool operator == (Matrix<N,T> lhs, Matrix<N,T> rhs) 
+        public static bool operator == (Matrix<N,T> lhs, Matrix<N,T> rhs)
             => lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static bool operator != (Matrix<N,T> lhs, Matrix<N,T> rhs) 
+        public static bool operator != (Matrix<N,T> lhs, Matrix<N,T> rhs)
             => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
@@ -62,7 +62,7 @@ namespace Z0
             data = src;
         }
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         public ref T Cell(int r, int c)
             => ref data[Order*r + c];
 
@@ -70,7 +70,7 @@ namespace Z0
         /// The data contained in the matrix
         /// </summary>
         public T[] Data
-        {            
+        {
             [MethodImpl(Inline)]
             get => data;
         }
@@ -105,13 +105,13 @@ namespace Z0
 
         public ref T this[int r, int c]
         {
-            [MethodImpl(Inline)]        
+            [MethodImpl(Inline)]
             get => ref Cell(r,c);
         }
 
         public ref T this[uint r, uint c]
         {
-            [MethodImpl(Inline)]        
+            [MethodImpl(Inline)]
             get => ref Cell((int)r,(int)c);
         }
 
@@ -120,13 +120,13 @@ namespace Z0
         /// </summary>
         public RowVector<N,T> this[int r]
         {
-            [MethodImpl(Inline)]        
+            [MethodImpl(Inline)]
             get => Row(r);
         }
 
         [MethodImpl(Inline)]
         public RowVector<N,T> Row(int row)
-        {            
+        {
             var alloc = RowVectors.alloc<N,T>();
             return GetRow(row, ref alloc);
         }
@@ -138,7 +138,7 @@ namespace Z0
         {
             var dst = Matrix.alloc<N,T>();
             for(var i = 0; i < RowCount; i++)
-                dst.SetRow(i,Col(i));            
+                dst.SetRow(i,Col(i));
             return dst;
         }
 
@@ -153,8 +153,8 @@ namespace Z0
         public void SetRow(int row, RowVector<N,T> src)
         {
             CheckRowIndex(row);
-            var offset = row * Order; 
-            src.Data.AsSpan().CopyTo(data, offset);                         
+            var offset = row * Order;
+            src.Data.AsSpan().CopyTo(data, offset);
         }
 
         [MethodImpl(Inline)]
@@ -170,7 +170,7 @@ namespace Z0
         {
             if(col < 0 || col >= Order)
                 throw AppErrors.IndexOutOfRange(col, 0, Order - 1);
-            
+
             for(var row = 0; row < Order; row++)
                 dst[row] = data[row*Order + col];
             return ref dst;
@@ -183,7 +183,7 @@ namespace Z0
             return GetCol(col, ref alloc);
         }
 
-        
+
         /// <summary>
         /// Applies a function to each cell and overwites the existing cell value with the result
         /// </summary>
@@ -225,14 +225,14 @@ namespace Z0
             pos = (0,0);
             for(var r = 0; r < (int)Order; r ++)
             for(var c = 0; c < (int)Order; c ++)
-            {                
+            {
                 if(f(this[r,c]))
                 {
                     pos = (r,c);
                     return this[r,c];
                 }
             }
-            return default;            
+            return default;
         }
 
         public Option<T> First(Func<T,bool> f)
@@ -241,7 +241,7 @@ namespace Z0
             for(var c = 0; c < (int)Order; c ++)
                 if(f(this[r,c]))
                     return this[r,c];
-            return default;            
+            return default;
         }
 
         [MethodImpl(Inline)]
@@ -252,7 +252,7 @@ namespace Z0
         public Matrix<N,U> Convert<U>()
             where U : unmanaged
                => new Matrix<N,U>(NumericArray.to<T,U>(data));
-               
+
         /// <summary>
         /// Creates a copy of the matrix
         /// </summary>
@@ -262,7 +262,7 @@ namespace Z0
 
         public override bool Equals(object rhs)
             => rhs is Matrix<N,T> x && Equals(x);
- 
+
         public override int GetHashCode()
             => data.GetHashCode();
     }

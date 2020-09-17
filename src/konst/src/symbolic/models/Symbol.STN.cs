@@ -66,7 +66,7 @@ namespace Z0
         public static ushort SymWidth
         {
             [MethodImpl(Inline)]
-            get => (ushort)value<N>();
+            get => (ushort)nat64u<N>();
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Z0
         /// </summary>
         public static ushort SegWidth
         {
-            get => (ushort)bitsize<T>();
+            get => (ushort)bitwidth<T>();
         }
 
         /// <summary>

@@ -38,7 +38,7 @@ namespace Z0
         {
             RowCount = rows;
             ColCount = cols;
-            CellWidth = (ushort)bitsize<T>();
+            CellWidth = (ushort)bitwidth<T>();
             SegWidth = segwidth;
         }
 

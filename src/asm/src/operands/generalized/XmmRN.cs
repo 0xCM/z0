@@ -18,14 +18,12 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public Xmm(Cell128 value)
-        {
-            Content = value;
-        }
+            => Content = value;
 
         public RegisterCode Code
         {
             [MethodImpl(Inline)]
-            get => (RegisterCode)value<N>();
+            get => nat<N,RegisterCode>();
         }
 
         public RegisterKind Kind

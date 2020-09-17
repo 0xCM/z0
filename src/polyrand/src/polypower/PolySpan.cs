@@ -71,8 +71,8 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static Span<T> Span<N,T>(this IPolyrand src, N n = default, T t = default)
             where T : unmanaged
-            where N : unmanaged, ITypeNat        
-                => create<T>(src, (int)value(n), Interval<T>.Full);
+            where N : unmanaged, ITypeNat
+                => create<T>(src, (int)nat64u(n), Interval<T>.Full);
 
         /// <summary>
         /// Allocates a span of specified natural length and populates it with random T-values over a specified domain
@@ -82,8 +82,8 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static Span<T> Span<N,T>(this IPolyrand src, T min, T max, N n = default)
             where T : unmanaged
-            where N : unmanaged, ITypeNat        
-                => create<T>(src, (int)value(n), (min, max));
+            where N : unmanaged, ITypeNat
+                => create<T>(src, (int)nat64u(n), (min, max));
 
         /// <summary>
         /// Allocates a span of specified natural length and populates it with random T-values over a specified domain
@@ -93,8 +93,8 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         public static Span<T> Span<N,T>(this IPolyrand src, Interval<T> domain, N n = default)
             where T : unmanaged
-            where N : unmanaged, ITypeNat        
-                => create<T>(src, (int)value(n), domain);
+            where N : unmanaged, ITypeNat
+                => create<T>(src, (int)nat64u(n), domain);
 
         /// <summary>
         /// Allocates and produces a punctured span populated with nonzero random values
@@ -118,6 +118,6 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         public static Span<T> NonZeroSpan<T>(this IPolyrand random, int samples)
             where T : unmanaged
-                => random.Span<T>(samples, random.Domain<T>(), x => gmath.nonz(x));                
+                => random.Span<T>(samples, random.Domain<T>(), x => gmath.nonz(x));
     }
 }

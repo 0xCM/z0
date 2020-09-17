@@ -46,7 +46,7 @@ namespace Z0
             var description = text.build();
             var indent = "/// ";
             var bits = BitString.scalar(sample).Format(specifier:true);
-            var header = $"{indent}512x{bitsize(default(T))}, {maskspec}, {bits}";
+            var header = $"{indent}512x{bitwidth(default(T))}, {maskspec}, {bits}";
             var sfk = SequenceFormatKind.List;
             var sep = Chars.Comma;
             var pad = 2;
@@ -306,7 +306,7 @@ namespace Z0
             var t = default(T);
             var pn = n32;
 
-            Claim.eq(value(pn), NatCalc.divT(w,t) * 2);
+            Claim.eq(nat64u(pn), NatCalc.divT(w,t) * 2);
 
             var left = gvec.vinc(w, t);
             var right = gvec.vadd(left, gmath.add(left.LastCell(), As.one(t)));

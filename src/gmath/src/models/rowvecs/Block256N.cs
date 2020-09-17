@@ -28,7 +28,7 @@ namespace Z0
         /// <summary>
         /// Specifies the length of the vector, i.e. its component count
         /// </summary>
-        public static int Length => (int)value<N>();
+        public static int Length => (int)nat64u<N>();
 
         /// <summary>
         /// Vec => Slice

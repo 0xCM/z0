@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static z;
 
     /// <summary>
@@ -18,18 +18,18 @@ namespace Z0
     public readonly ref struct BitMatrix<N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
-    {        
+    {
         internal readonly Span<T> Data;
 
         static N NatRep => default;
 
         /// <summary>
-        /// The bit width of each row/column 
+        /// The bit width of each row/column
         /// </summary>
-        public static int RowWidth 
+        public static int RowWidth
         {
             [MethodImpl(Inline)]
-            get => (int)value<N>();
+            get => (int)nat64u<N>();
         }
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         public static int CellWidth
         {
             [MethodImpl(Inline)]
-            get => (int)bitsize<T>();
+            get => (int)bitwidth<T>();
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Z0
         public static int RowCellCount
         {
             [MethodImpl(Inline)]
-            get =>  GridCells.mincells((ulong)bitsize<T>(),value<N>()); 
+            get =>  GridCells.mincells((ulong)bitwidth<T>(),nat64u<N>());
         }
 
         public static int TotalCellCount
@@ -98,14 +98,14 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => this[row][col];
-            
+
             [MethodImpl(Inline)]
             set
             {
                 var index = TableIndex.Create(row, col, NatRep, NatRep, default(T));
-                Data[index.CellIndex] = gbits.setbit(Data[index.CellIndex], index.BitOffset, value);                
+                Data[index.CellIndex] = gbits.setbit(Data[index.CellIndex], index.BitOffset, value);
             }
-        }            
+        }
 
         /// <summary>
         /// Queries/Specifies a row
@@ -114,9 +114,9 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => new BitBlock<N,T>(GetRowData(row), true);
-            
+
             [MethodImpl(Inline)]
-            set => value.Data.CopyTo(GetRowData(row));     
+            set => value.Data.CopyTo(GetRowData(row));
         }
 
         /// <summary>
@@ -127,7 +127,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => RowWidth;
         }
-        
+
         /// <summary>
         /// Provides direct access to the underlying bitstore
         /// </summary>
@@ -167,7 +167,7 @@ namespace Z0
         /// <param name="value">The source value</param>
         [MethodImpl(Inline)]
         public void Fill(bit value)
-        {            
+        {
             if(value)
                 Content.Fill(NumericLiterals.maxval<T>());
             else
@@ -182,22 +182,22 @@ namespace Z0
                  sb.AppendLine(this[i].Format());
             return sb.ToString();
         }
- 
+
         public BitMatrix<N,T> Transpose()
         {
             var dst = BitMatrix.alloc<N,T>();
             for(var row = 0; row < Order; row++)
-                dst.SetCol(row, this[row]);            
+                dst.SetCol(row, this[row]);
             return dst;
         }
 
-        public bool Equals(BitMatrix<N,T> rhs)        
+        public bool Equals(BitMatrix<N,T> rhs)
         {
             for(var row = 0; row < Order; row++)
                 if(!this[row].Equals(rhs[row]))
                     return false;
-                    
-            return true;            
+
+            return true;
         }
 
         [MethodImpl(Inline)]
@@ -208,6 +208,6 @@ namespace Z0
             => 0;
 
         public override bool Equals(object rhs)
-            => throw new NotSupportedException();        
+            => throw new NotSupportedException();
     }
 }

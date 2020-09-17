@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T cell<T>(ref T src, int bitpos)
             where T : unmanaged
-                => ref seek(ref src, bitpos / bitsize<T>()); 
+                => ref seek(ref src, bitpos / bitwidth<T>());
 
         /// <summary>
         /// Reads/manipulates a cell identified by a linear bit position
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T cell<T>(in BitGrid<T> src, int bitpos)
             where T : unmanaged
-                => ref seek(ref src.Head, bitpos / bitsize<T>()); 
+                => ref seek(ref src.Head, bitpos / bitwidth<T>());
 
         /// <summary>
         /// Reads/manipulates a cell identified by a linear bit position
@@ -47,8 +47,8 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => ref seek(ref src.Head, bitpos / bitsize<T>()); 
- 
+                => ref seek(ref src.Head, bitpos / bitwidth<T>());
+
         [MethodImpl(Inline)]
         public static RowBits<T> rowcells<M,N,T>(in BitGrid<M,N,T> g, int row)
             where T : unmanaged

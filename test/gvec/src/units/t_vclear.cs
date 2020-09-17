@@ -34,9 +34,9 @@ namespace Z0
         {
             for(var i=0; i< RepCount; i++)
             {
-                byte start = Random.Next<byte>(0, (byte)bitsize<T>());
-                byte length = (byte)(bitsize<T>() - start);
-                var cellcount = n/bitsize(t);
+                byte start = Random.Next<byte>(0, (byte)bitwidth<T>());
+                byte length = (byte)(bitwidth<T>() - start);
+                var cellcount = n/bitwidth(t);
                 var x = Random.CpuVector<T>(n);
                 var x1 = VBits.vbitclear(x, start, length);
                 var x2 = gvec.vsrl(x1,start);
@@ -49,9 +49,9 @@ namespace Z0
         {
             for(var i=0; i< RepCount; i++)
             {
-                byte start = Random.Next<byte>(0, (byte)bitsize<T>());
-                byte length = (byte)(bitsize<T>() - start);
-                var cellcount = n/bitsize(t);
+                byte start = Random.Next<byte>(0, (byte)bitwidth<T>());
+                byte length = (byte)(bitwidth<T>() - start);
+                var cellcount = n/bitwidth(t);
                 var x = Random.CpuVector<T>(n);
                 var x1 = VBits.vbitclear(x, start, length);
                 var x2 = gvec.vsrl(x1,start);
