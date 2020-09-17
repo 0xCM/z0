@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Render;
 
     partial struct WfEvents
     {
@@ -28,5 +27,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static WfStepRunning<WfDataFlow<S,T>> running<S,T>(WfStepId step, WfDataFlow<S,T> flow, CorrelationToken ct)
             => new WfStepRunning<WfDataFlow<S,T>>(step, flow, ct);
+
+
+        [MethodImpl(Inline), Op]
+        public static ToolRunning running(WfToolId tool, CorrelationToken ct)
+            => new ToolRunning(tool, ct);
     }
 }

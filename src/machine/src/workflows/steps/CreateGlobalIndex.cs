@@ -223,11 +223,11 @@ namespace Z0
         {
             try
             {
+                var host = new EmitCallIndexHost();
                 foreach(var part in src)
                 {
                     Process(part);
-
-                    using var step = new EmitCallIndex(Wf, part, Ct);
+                    using var step = new EmitCallIndex(Wf, host, part);
                     step.Run();
                 }
             }

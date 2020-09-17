@@ -7,10 +7,14 @@ namespace Z0
     using System;
     using System.Linq;
 
-    public interface ITypeCodeSource
-    {
-        PartId Owner {get;}
+    using Z0.Asm;
 
-        ulong[] AssignedCodes {get;}
+    using static Konst;
+    using static z;
+
+    [WfHost]
+    public sealed class EmitCallIndexHost : WfHost<EmitCallIndexHost>
+    {
+
     }
 }

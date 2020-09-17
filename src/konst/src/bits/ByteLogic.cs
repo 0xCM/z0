@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Primal;
+    using static memory;
     using L = BitLogic;
     using static z;
 

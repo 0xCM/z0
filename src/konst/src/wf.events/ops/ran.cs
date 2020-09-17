@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Render;
 
     partial struct WfEvents
     {
@@ -20,5 +19,9 @@ namespace Z0
         public static WfStepRan<T> ran<H,T>(H host, T content, CorrelationToken ct)
             where H : IWfHost<H>, new()
                 => new WfStepRan<T>(host.Id, content, ct);
+
+        [MethodImpl(Inline), Op]
+        public static ToolRan ran(WfToolId tool, CorrelationToken ct)
+            => new ToolRan(tool, ct);
     }
 }

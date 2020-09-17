@@ -29,11 +29,6 @@ namespace Z0
                 => datasize/size<A>();
 
         [MethodImpl(Inline)]
-        public static ResourceSet<A> load<A>(in asci32 name, ReadOnlySpan<byte> src)
-            where A : unmanaged, IBytes
-                => new ResourceSet<A>(name, src);
-
-        [MethodImpl(Inline)]
         public static ResourceSet<A> create<A>(in asci32 name, ReadOnlySpan<string> src)
             where A : unmanaged, IBytes
         {

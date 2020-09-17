@@ -10,12 +10,13 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
+    using static z;
 
     partial struct Resources
     {
         [MethodImpl(Inline), Op]
         public static BinaryResource binary(PartId owner, string id, ReadOnlySpan<byte> src)
-            => new BinaryResource(owner, id, src.Length, z.address(src));
+            => new BinaryResource(owner, id, src.Length, address(src));
 
         [MethodImpl(Inline), Op]
         public static BinaryResource binary(PartId owner, string id, ByteSize size, MemoryAddress address)

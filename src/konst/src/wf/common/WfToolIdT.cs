@@ -6,13 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
 
-    public readonly struct WfToolId : ITextual
+    public readonly struct WfToolId<T> : ITextual
     {
-        readonly Type Type;
+        static Type Type = typeof(T);
 
         public string Name
         {
@@ -27,20 +26,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator WfToolId(string name)
-            => new WfToolId(typeof(void));
-
-        [MethodImpl(Inline)]
-        public static implicit operator WfToolId(Type src)
-            => new WfToolId(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator WfStepId(WfToolId src)
-            => new WfStepId(src.Type);
-
-        [MethodImpl(Inline)]
-        public WfToolId(Type src)
-            => Type = src;
+        public static implicit operator WfToolId(WfToolId<T> src)
+            => new WfToolId(WfToolId<T>.Type);
 
         [MethodImpl(Inline)]
         public string Format()

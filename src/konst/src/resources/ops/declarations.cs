@@ -23,6 +23,5 @@ namespace Z0
             => (from a in ApiQuery.resources(src).Accessors
                 let t = a.Member.DeclaringType
                 group a by t).Map(x => new ResourceDeclarations(x.Key, x.ToArray()));
-
     }
 }

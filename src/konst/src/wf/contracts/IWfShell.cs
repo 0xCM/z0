@@ -105,8 +105,6 @@ namespace Z0
         // ~ Lifecycle
         // ~ ---------------------------------------------------------------------------
 
-        void Created(WfToolId tool)
-            => Raise(created(tool, Ct));
 
         void Created(WfStepId id)
             => Raise(created(id, Ct));
@@ -219,5 +217,16 @@ namespace Z0
 
         static string callerName(string src)
             => Path.GetFileNameWithoutExtension(src);
+
+        // ~~ Tools
+
+        void Created(WfToolId tool)
+            => Raise(created(tool, Ct));
+
+        void Running(WfToolId tool)
+            => Raise(running(tool, Ct));
+
+        void Ran(WfToolId tool)
+            => Raise(ran(tool, Ct));
     }
 }

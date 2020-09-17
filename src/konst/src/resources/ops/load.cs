@@ -12,6 +12,15 @@ namespace Z0
 
     partial struct Resources
     {
+        [MethodImpl(Inline)]
+        public static ResourceSet<A> load<A>(in asci32 name, ReadOnlySpan<byte> src)
+            where A : unmanaged, IBytes
+                => new ResourceSet<A>(name, src);
+
+        [MethodImpl(Inline)]
+        public static ResourceSet<A> load<A>(string name, ReadOnlySpan<byte> src)
+            where A : unmanaged, IBytes
+                => new ResourceSet<A>(name, src);
 
     }
 }

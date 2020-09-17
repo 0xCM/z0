@@ -86,14 +86,6 @@ namespace Z0
     }
 
     [Step]
-    public readonly struct EmitCallIndexStep : IWfStep<EmitCallIndexStep>
-    {
-        public static WfStepId StepId
-            => step<EmitCallIndexStep>();
-    }
-
-
-    [Step]
     public readonly struct EmitBitMasksStep : IWfStep<EmitBitMasksStep>
     {
         public const string RunningPattern = "Emitting bitmasks to {0}";

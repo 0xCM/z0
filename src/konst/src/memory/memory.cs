@@ -11,9 +11,8 @@ namespace Z0
     using static z;
 
     [ApiHost]
-    public unsafe partial class memory
+    public unsafe class memory
     {
-
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Ref<T> @ref<T>(in T src, uint size)
             => new Ref<T>(new Ref(z.address(src), size));
@@ -206,6 +205,228 @@ namespace Z0
         /// <param name="dst">The target reference</param>
         [MethodImpl(Inline), Op]
         public static unsafe ref uint store64(ulong src, ref uint dst)
+        {
+            *(gptr<ulong>(dst)) = src;
+            return ref dst;
+        }
+
+
+        /// <summary>
+        /// Copies a byte
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="w">The target width selector</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe byte read(W8 w, in byte src)
+            => *(byte*)gptr(in src);
+
+        /// <summary>
+        /// Reads 16 bits from a contiguous sequence of 2 bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="w">The target width selector</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ushort read(W16 w, in byte src)
+            => *(ushort*)gptr(in src);
+
+        /// <summary>
+        /// Reads 32 bits from a contiguous sequence of 4 bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="w">The target width selector</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe uint read(W32 w, in byte src)
+            => *(uint*)gptr(in src);
+
+        /// <summary>
+        /// Reads 32 bits from a contiguous sequence of 2 16-bit integers
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="w">The target width selector</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe uint read(W32 w, in ushort src)
+            => *(uint*)gptr(in src);
+
+        /// <summary>
+        /// Reads 64 bits from a contiguous sequence of 8 bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="w">The target width selector</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ulong read(W64 w, in byte src)
+            => *(ulong*)gptr(in src);
+
+        /// <summary>
+        /// Reads 64 bits from a contiguous sequence of 4 16-bit integers
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="w">The target width selector</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ulong read(W16 w, in ushort src)
+            => *gptr<ulong>(src);
+
+        /// <summary>
+        /// Reads 64 bits from a contiguous sequence of 2 32-bit integers
+        /// </summary>
+        /// <param name="w">The target width selector</param>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ulong read(W32 w, in uint src)
+            => *gptr<ulong>(src);
+
+        /// <summary>
+        /// Reads 16 bits from a contiguous sequence of 2 bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="dst">The target</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ref ushort read(in byte src, out ushort dst)
+        {
+            dst = *(ushort*)gptr(in src);
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Reads 32 bits from a contiguous sequence of 4 bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="dst">The target</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ref uint read(W32 w, in byte src, out uint dst)
+        {
+            dst = *(uint*)gptr(in src);
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Reads 32 bits from a contiguous sequence of 2 16-bit integers
+        /// </summary>
+        /// <param name="src">The bit source</param>
+        /// <param name="dst">The target</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ref uint read(in ushort src, out uint dst)
+        {
+            dst = *(uint*)gptr(in src);
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Reads 64 bits from a contiguous sequence of 8 bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="dst">The target</param>
+
+        [MethodImpl(Inline), Op]
+        public static unsafe ref ulong read(in byte src, out ulong dst)
+        {
+            dst = *(ulong*)gptr(in src);
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Reads 64 bits from a contiguous sequence of 4 16-bit integers
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="dst">The target</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ref ulong read(in ushort src, out ulong dst)
+        {
+            dst = *(ulong*)gptr(in src);
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Reads 64 bits from a contiguous sequence of 2 32-bit integers
+        /// </summary>
+        /// <param name="src">The data source</param>
+         /// <param name="dst">The target</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ref ulong read(in uint src, out ulong dst)
+        {
+            dst = *(ulong*)gptr(in src);
+            return ref dst;
+        }
+
+
+        /// <summary>
+        /// Projects a source byte onto a byte reference
+        /// </summary>
+        /// <param name="src">The source data</param>
+        /// <param name="dst">The target reference</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ref byte write(byte src, ref byte dst)
+        {
+            *(gptr(dst)) = src;
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Projects 16 source bits onto a contiguous sequence of 2 bytes
+        /// </summary>
+        /// <param name="src">The source data</param>
+        /// <param name="dst">The target reference</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ref byte write(ushort src, ref byte dst)
+        {
+            *(gptr<ushort>(dst)) = src;
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Projects 32 source bits onto a contiguous sequence of 4 bytes
+        /// </summary>
+        /// <param name="src">The source</param>
+        /// <param name="dst">The target reference</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ref byte write(uint src, ref byte dst)
+        {
+             *(gptr<uint>(dst)) = src;
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Projects 32 source bits onto a contiguous sequence of 2 16-bit integers
+        /// </summary>
+        /// <param name="src">The source data</param>
+        /// <param name="dst">The target reference</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ref ushort write(uint src, ref ushort dst)
+        {
+            *(gptr<uint>(dst)) = src;
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Projects 64 source bits onto a contiguous sequence of 8 bytes
+        /// </summary>
+        /// <param name="src">The source data</param>
+        /// <param name="dst">The target reference</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ref byte write(ulong src, ref byte dst)
+        {
+             *(gptr<ulong>(dst)) = src;
+             return ref dst;
+        }
+
+        /// <summary>
+        /// Projects 64 source bits onto a contiguous sequence of 4 16-bit integers
+        /// </summary>
+        /// <param name="src">The source data</param>
+        /// <param name="dst">The target reference</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ref ushort write(ulong src, ref ushort dst)
+        {
+            *(gptr<ulong>(dst)) = src;
+            return ref dst;
+        }
+
+        /// <summary>
+        /// Projects 64 source bits onto a contiguous sequence of 2 32-bit integers
+        /// </summary>
+        /// <param name="src">The source data</param>
+        /// <param name="dst">The target reference</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe ref uint write(ulong src, ref uint dst)
         {
             *(gptr<ulong>(dst)) = src;
             return ref dst;

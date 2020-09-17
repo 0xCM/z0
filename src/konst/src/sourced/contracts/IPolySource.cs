@@ -42,5 +42,5 @@ namespace Z0
         T Next<T>(ClosedInterval<T> domain)
             where T : unmanaged
                 => Next(domain.Min, domain.Max);
-    }    
+    }
 }

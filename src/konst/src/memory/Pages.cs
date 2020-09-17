@@ -27,5 +27,4 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => new MemoryPage<N,W,T>(sys.alloc<T>(n.NatValue));
     }
-
 }
