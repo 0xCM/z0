@@ -155,8 +155,8 @@ namespace Z0
             var t = z32;
             var s = z16;
 
-            var zb = BufferBlocks.alloc<uint>(n512);
-            var eb = BufferBlocks.alloc<uint>(n512);
+            var zb = SpanBlocks.alloc<uint>(n512);
+            var eb = SpanBlocks.alloc<uint>(n512);
             var count = vcount(w,s);
 
             for(var i=0; i< RepCount; i ++)

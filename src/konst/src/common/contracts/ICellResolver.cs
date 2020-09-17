@@ -16,7 +16,7 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface ICellResolver<W,C,T> : IPrimalResolver<W,T>
         where W : unmanaged, ITypeWidth
-        where C : unmanaged, IDataCell<C,W,T>
+        where C : unmanaged, ICellHost<C,W,T>
         where T : unmanaged
     {
 

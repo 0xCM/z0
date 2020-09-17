@@ -11,14 +11,14 @@ namespace Z0
     {
         K Kind {get;}
 
-        ApiKeyKind IOpKind.KindId
-            => (ApiKeyKind)Kind;
+        ApiKeyId IOpKind.KindId
+            => (ApiKeyId)Kind;
     }
 
     public interface ICanonicalKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        ApiKeyKind IOpKind.KindId
+        ApiKeyId IOpKind.KindId
             => default(F).KindId;
     }
 

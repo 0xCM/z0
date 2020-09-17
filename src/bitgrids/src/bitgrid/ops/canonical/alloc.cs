@@ -18,7 +18,7 @@ namespace Z0
         {
             var blocksize = W256.W;
             var blocks = BitCalcs.tableblocks<T>(blocksize,(uint)m,(uint)n);
-            var data = Z0.BufferBlocks.alloc<T>(blocksize, blocks);
+            var data = Z0.SpanBlocks.alloc<T>(blocksize, blocks);
             return new BitGrid<T>(data,(int)m,(int)n);
         }
 
@@ -28,7 +28,7 @@ namespace Z0
         {
             var blocksize = W256.W;
             var blocks = BitCalcs.tableblocks<T>(blocksize,(uint)m,(uint)n);
-            var data = Z0.BufferBlocks.alloc<T>(blocksize, blocks);
+            var data = Z0.SpanBlocks.alloc<T>(blocksize, blocks);
             return new BitGrid<T>(data,(int)m,(int)n);
         }
 

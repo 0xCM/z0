@@ -78,7 +78,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Data?.ToString() ?? string.Empty;
+            => Data?.ToString() ?? EmptyString;
 
         public override string ToString()
             => Format();
@@ -90,6 +90,6 @@ namespace Z0
             => src is LiteralInfo v && Equals(v);
 
         public static LiteralInfo Empty
-            => new LiteralInfo(string.Empty, string.Empty, string.Empty, 0, false, false);
+            => new LiteralInfo(EmptyString, EmptyString, EmptyString, 0, false, false);
     }
 }

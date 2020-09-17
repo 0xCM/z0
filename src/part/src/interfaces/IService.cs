@@ -4,23 +4,23 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;    
+    using System;
 
     /// <summary>
     /// Characterizes nothing but is a marker for a type that, perhaps, defines something useful to someone
     /// </summary>
     public interface IService
     {
-        
+
     }
-    
+
     /// <summary>
-    /// Characterizes a service that extends a parametric context with operational semantics. 
+    /// Characterizes a service that extends a parametric context with operational semantics.
     /// </summary>
     /// <typeparam name="C">The context type</typeparam>
     public interface IService<C> : IService, IContextual<C>
     {
-        
+
     }
 
     /// <summary>
@@ -32,14 +32,5 @@ namespace Z0
     public interface IServiceAllocation : IService, IDisposable
     {
 
-    }
-
-    /// <summary>
-    /// Characterizes a stateful service that requires explcit resource managment
-    /// </summary>
-    /// <typeparam name="C">The context type</typeparam>
-    public interface IServiceAllocation<C> : IContextual<C>, IServiceAllocation
-    {
-        
     }
 }

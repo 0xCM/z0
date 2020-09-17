@@ -26,7 +26,7 @@ namespace Z0
             var stack = Stacks.alloc(w);
             ref var dst = ref Stacks.head<T>(ref stack);
             V0.vsave(src, ref dst);
-            return BufferBlocks.load(w, ref dst);
+            return SpanBlocks.load(w, ref dst);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
             var stack = Stacks.alloc(w);
             ref var dst = ref Stacks.head<T>(ref stack);
             V0.vsave(src, ref dst);
-            return BufferBlocks.load(w, ref dst);
+            return SpanBlocks.load(w, ref dst);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Z0
             var stack = Stacks.alloc(w);
             ref var dst = ref Stacks.head<T>(ref stack);
             V0.vsave(src, ref dst);
-            return BufferBlocks.load(w, ref dst);
+            return SpanBlocks.load(w, ref dst);
         }
 
         /// <summary>

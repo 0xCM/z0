@@ -20,9 +20,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         internal PackedInstruction(Vector256<byte> src)
-        {
-            Data = src;
-        }
+            => Data = src;
 
         public MemoryAddress NextRip
         {

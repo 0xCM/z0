@@ -21,7 +21,7 @@ namespace Z0
                 var attrib = (LiteralAttribute)target.GetCustomAttribute(typeof(LiteralAttribute));
                 var data = attrib.Description;
                 if(!string.IsNullOrWhiteSpace(data))
-                    return LiteralInfo.define(target.Name,
+                    return describe(target.Name,
                     target.GetRawConstantValue(), data,
                     Type.GetTypeCode(target.FieldType),
                     target.FieldType.IsEnum,

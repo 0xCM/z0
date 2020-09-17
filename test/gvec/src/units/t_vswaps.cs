@@ -33,7 +33,7 @@ namespace Z0
             var order = n4;
             var n = n128;
             var cells = order*order;
-            var src = BufferBlocks.alloc<uint>(n,order);
+            var src = SpanBlocks.alloc<uint>(n,order);
             int step = order;
 
             for(var i=0; i< cells; i++)

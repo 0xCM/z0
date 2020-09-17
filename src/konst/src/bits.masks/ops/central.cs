@@ -6,13 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Konst;
     using static z;
     using static MaskLiterals;
 
+    using NBI = NumericBaseIndicator;
+
     partial class BitMasks
     {
+
         [MethodImpl(Inline)]
         public static CentralMask<F,D,T> CentralSpec<F,D,T>(F f = default, D d = default, T t = default)
             where F : unmanaged, ITypeNat

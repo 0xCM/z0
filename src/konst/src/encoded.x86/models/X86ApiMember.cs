@@ -87,7 +87,7 @@ namespace Z0
             get => Encoded.Base;
         }
 
-        public ApiKeyKind KindId
+        public ApiKeyId KindId
              => Member.KindId;
 
         public OpIdentity Id

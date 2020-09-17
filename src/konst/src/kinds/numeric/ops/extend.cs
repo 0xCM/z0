@@ -11,7 +11,7 @@ namespace Z0
     using static NumericKinds;
 
     using NK = NumericKinds;
-    
+
     partial class XTend
     {
         /// <summary>
@@ -35,18 +35,18 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         public static bool IsUnsigned(this NumericKind src)
-            => unsigned(src);                        
+            => unsigned(src);
 
         /// <summary>
         /// Determines the type identifer of a numeric kind
         /// </summary>
         /// <param name="kind">The source kind</param>
         [MethodImpl(Inline)]
-        public static NumericTypeId NumericId(this NumericKind kind)
+        public static NumericApiKeyKind NumericId(this NumericKind kind)
         {
             var noclass = ((uint)kind << 3) >> 3;
             var nowidth = (noclass >> 16) << 16;
-            return (NumericTypeId)nowidth;            
+            return (NumericApiKeyKind)nowidth;
         }
     }
 }

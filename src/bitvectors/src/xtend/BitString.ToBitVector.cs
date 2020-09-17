@@ -30,7 +30,7 @@ namespace Z0
         public static BitVector128<N,T> ToBitVector<N,T>(this BitString src, N128 n, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => BufferBlocks.safeload(n,src.Pack().Cast<byte, T>()).LoadVector();
+                => SpanBlocks.safeload(n,src.Pack().Cast<byte, T>()).LoadVector();
 
         /// <summary>
         /// Constructs a 4-bit bitvector from bitstring

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ComparisonKeyKind;
+    using K = ComparisonApiKeyKind;
     using I = IComparisonKind;
 
     partial class Kinds

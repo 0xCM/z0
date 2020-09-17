@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using Id = ApiKeyKind;
+    using Id = ApiKeyId;
 
     /// <summary>
     /// Identifies binary comparison predicates

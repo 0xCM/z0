@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The souce methods</param>
         /// <param name="kind">The kind to match</param>
-        public static IEnumerable<MethodInfo> Kinded(IEnumerable<MethodInfo> src, ApiKeyKind kind)
+        public static IEnumerable<MethodInfo> Kinded(IEnumerable<MethodInfo> src, ApiKeyId kind)
             => from m in src where m.KindId() == kind select m;
 
         /// <summary>

@@ -9,16 +9,16 @@ namespace Z0.Asm
     using static RegisterWidth;
     using static RegisterBitFields;
 
-    using SRK = SegRegKind;
-    using FRK = FlagRegKind;
-    using XRK = XmmRegKind;
-    using YRK = YmmRegKind;
-    using ZRK = ZmmRegKind;
-    using G8K = Gp8Kind;
-    using G16K = Gp16Kind;
-    using G32K = Gp32Kind;
-    using G64K = Gp64Kind;
-    using MRK = MaskRegKind;
+    using SR = SegRegKind;
+    using F = FlagRegKind;
+    using X = XmmRegKind;
+    using Y = YmmRegKind;
+    using Z = ZmmRegKind;
+    using G8 = Gp8Kind;
+    using G16 = Gp16Kind;
+    using G32 = Gp32Kind;
+    using G64 = Gp64Kind;
+    using M = MaskRegKind;
 
     /// <summary>
     /// [RegisterCode:0..7 | RegisterClass:8..15 | RegisterWidth: 16..31]
@@ -28,149 +28,149 @@ namespace Z0.Asm
         // ~ FLAGS registers
         // ~ ------------------------------------------------------------------
 
-        FLAGS = FRK.Flags,
+        FLAGS = F.Flags,
 
-        EFLAGS = FRK.EFlags,
+        EFLAGS = F.EFlags,
 
-        RFLAGS = FRK.RFlags,
+        RFLAGS = F.RFlags,
 
         // ~ 16-bit segment registers
         // ~ ------------------------------------------------------------------
-        CS = SRK.CS,
+        CS = SR.CS,
 
-        DS = SRK.DS,
+        DS = SR.DS,
 
-        SS = SRK.SS,
+        SS = SR.SS,
 
-        ES = SRK.ES,
+        ES = SR.ES,
 
-        FS = SRK.FS,
+        FS = SR.FS,
 
-        GS = SRK.GS,
+        GS = SR.GS,
 
         // ~ 8-bit general-purpose registers
         // ~ ------------------------------------------------------------------
 
-        AL = G8K.AL,
+        AL = G8.AL,
 
-        CL = G8K.CL,
+        CL = G8.CL,
 
-        DL = G8K.DL,
+        DL = G8.DL,
 
-        BL = G8K.BL,
+        BL = G8.BL,
 
-        SPL = G8K.SPL,
+        SPL = G8.SPL,
 
-        BPL = G8K.BPL,
+        BPL = G8.BPL,
 
-        SIL = G8K.SIL,
+        SIL = G8.SIL,
 
-        DIL  = G8K.DIL,
+        DIL  = G8.DIL,
 
-        R8L = G8K.R8L,
+        R8L = G8.R8L,
 
-        R9L = G8K.R9L,
+        R9L = G8.R9L,
 
-        R10L = G8K.R10L,
+        R10L = G8.R10L,
 
-        R11L = G8K.R11L,
+        R11L = G8.R11L,
 
-        R12L = G8K.R12L,
+        R12L = G8.R12L,
 
-        R13L = G8K.R13L,
+        R13L = G8.R13L,
 
-        R14L = G8K.R14L,
+        R14L = G8.R14L,
 
-        R15L = G8K.R15L,
+        R15L = G8.R15L,
 
         // ~ 16-bit general-purpose registers
         // ~ ------------------------------------------------------------------
 
-        AX = G16K.AX,
+        AX = G16.AX,
 
-        CX = G16K.CX,
+        CX = G16.CX,
 
-        DX = G16K.DX,
+        DX = G16.DX,
 
-        BX = G16K.BX,
+        BX = G16.BX,
 
-        SP = G16K.SP,
+        SP = G16.SP,
 
-        BP = G16K.BP,
+        BP = G16.BP,
 
-        SI = G16K.SI,
+        SI = G16.SI,
 
-        DI = G16K.DI,
+        DI = G16.DI,
 
-        R8W = r0 | GPN << ClassIndex | W16 << WidthIndex,
+        R8W = G16.R8W,
 
-        R9W = r1 | GPN << ClassIndex | W16 << WidthIndex,
+        R9W = G16.R9W,
 
-        R10W = r2 | GPN << ClassIndex | W16 << WidthIndex,
+        R10W = G16.R10W,
 
-        R11W = r3 | GPN << ClassIndex | W16 << WidthIndex,
+        R11W = G16.R11W,
 
-        R12W = r4 | GPN << ClassIndex | W16 << WidthIndex,
+        R12W = G16.R12W,
 
-        R13W = r5 | GPN << ClassIndex | W16 << WidthIndex,
+        R13W = G16.R13W,
 
-        R14W = r6 | GPN << ClassIndex | W16 << WidthIndex,
+        R14W = G16.R14W,
 
-        R15W = r7 | GPN << ClassIndex | W16 << WidthIndex,
+        R15W = G16.R15W,
 
         // ~ 32-bit general-purpose registers
         // ~ ------------------------------------------------------------------
 
-        EAX = G32K.EAX,
+        EAX = G32.EAX,
 
-        ECX = G32K.ECX,
+        ECX = G32.ECX,
 
-        EDX = G32K.EDX,
+        EDX = G32.EDX,
 
-        EBX = G32K.EBX,
+        EBX = G32.EBX,
 
-        ESP = G32K.ESP,
+        ESP = G32.ESP,
 
-        EBP = G32K.EBP,
+        EBP = G32.EBP,
 
-        ESI = G32K.ESI,
+        ESI = G32.ESI,
 
-        EDI = G32K.EDI,
+        EDI = G32.EDI,
 
-        R8D = r0 | GPN << ClassIndex | W32 << WidthIndex,
+        R8D = G32.R8D,
 
-        R9D = r1 | GPN << ClassIndex | W32 << WidthIndex,
+        R9D = G32.R9D,
 
-        R10D = r2 | GPN << ClassIndex | W32 << WidthIndex,
+        R10D = G32.R10D,
 
-        R11D = r3 | GPN << ClassIndex | W32 << WidthIndex,
+        R11D = G32.R11D,
 
-        R12D = r4 | GPN << ClassIndex | W32 << WidthIndex,
+        R12D = G32.R12D,
 
-        R13D = r5 | GPN << ClassIndex | W32 << WidthIndex,
+        R13D = G32.R13D,
 
-        R14D = r6 | GPN << ClassIndex | W32 << WidthIndex,
+        R14D = G32.R14D,
 
-        R15D = r7 | GPN << ClassIndex | W32 << WidthIndex,
+        R15D = G32.R15D,
 
         // ~ 64-bit general-purpose registers
         // ~ ------------------------------------------------------------------
 
-        RAX = G64K.RAX,
+        RAX = G64.RAX,
 
-        RCX = G64K.RCX,
+        RCX = G64.RCX,
 
-        RDX = G64K.RDX,
+        RDX = G64.RDX,
 
-        RBX = G64K.RBX,
+        RBX = G64.RBX,
 
-        RSP = G64K.RSP,
+        RSP = G64.RSP,
 
-        RBP = G64K.RBP,
+        RBP = G64.RBP,
 
-        RSI = G64K.RSI,
+        RSI = G64.RSI,
 
-        RDI = G64K.RDI,
+        RDI = G64.RDI,
 
         R8Q = r0 | GPN << ClassIndex | W64 << WidthIndex,
 
@@ -191,39 +191,39 @@ namespace Z0.Asm
         // ~ 128-bit vectorized registers
         // ~ ------------------------------------------------------------------
 
-        XMM0 = XRK.XMM0,
+        XMM0 = X.XMM0,
 
-        XMM1 = XRK.XMM1,
+        XMM1 = X.XMM1,
 
-        XMM2 = XRK.XMM2,
+        XMM2 = X.XMM2,
 
-        XMM3 = XRK.XMM3,
+        XMM3 = X.XMM3,
 
-        XMM4 = XRK.XMM4,
+        XMM4 = X.XMM4,
 
-        XMM5 = XRK.XMM5,
+        XMM5 = X.XMM5,
 
-        XMM6 = XRK.XMM6,
+        XMM6 = X.XMM6,
 
-        XMM7 = XRK.XMM7,
+        XMM7 = X.XMM7,
 
-        XMM8 = XRK.XMM8,
+        XMM8 = X.XMM8,
 
-        XMM9 = XRK.XMM9,
+        XMM9 = X.XMM9,
 
-        XMM10 = XRK.XMM10,
+        XMM10 = X.XMM10,
 
-        XMM11 = XRK.XMM11,
+        XMM11 = X.XMM11,
 
-        XMM12 = XRK.XMM12,
+        XMM12 = X.XMM12,
 
-        XMM13 = XRK.XMM13,
+        XMM13 = X.XMM13,
 
-        XMM14 = XRK.XMM14,
+        XMM14 = X.XMM14,
 
-        XMM15 = XRK.XMM15,
+        XMM15 = X.XMM15,
 
-        XMM16 = XRK.XMM16,
+        XMM16 = X.XMM16,
 
         XMM17 = r17 | XMM << ClassIndex | W128 << WidthIndex,
 
@@ -258,17 +258,17 @@ namespace Z0.Asm
         // ~ 256-bit vectorized registers
         // ~ ------------------------------------------------------------------
 
-        YMM0 = YRK.YMM0,
+        YMM0 = Y.YMM0,
 
-        YMM1 = YRK.YMM1,
+        YMM1 = Y.YMM1,
 
-        YMM2 = YRK.YMM2,
+        YMM2 = Y.YMM2,
 
-        YMM3 = YRK.YMM3,
+        YMM3 = Y.YMM3,
 
-        YMM4 = YRK.YMM4,
+        YMM4 = Y.YMM4,
 
-        YMM5 = YRK.YMM5,
+        YMM5 = Y.YMM5,
 
         YMM6 = r6 | YMM << ClassIndex | W256 << WidthIndex,
 
@@ -325,13 +325,13 @@ namespace Z0.Asm
         // ~ 512-bit vectorized registers
         // ~ ------------------------------------------------------------------
 
-        ZMM0 = ZRK.ZMM0,
+        ZMM0 = Z.ZMM0,
 
-        ZMM1 = ZRK.ZMM1,
+        ZMM1 = Z.ZMM1,
 
-        ZMM2 = ZRK.ZMM2,
+        ZMM2 = Z.ZMM2,
 
-        ZMM3 = ZRK.ZMM0,
+        ZMM3 = Z.ZMM0,
 
         ZMM4 = r4 | ZMM << ClassIndex | W512 << WidthIndex,
 

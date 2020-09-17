@@ -40,7 +40,7 @@ namespace Z0
         static SpanBlock256<T> and<T>(SpanBlock256<T> lhs, SpanBlock256<T> rhs)
             where T : unmanaged
         {
-            var dst = BufferBlocks.alloc<T>(n256,lhs.BlockCount);
+            var dst = SpanBlocks.alloc<T>(n256,lhs.BlockCount);
             gspan.and(lhs,rhs, dst.Data);
             return dst;
         }

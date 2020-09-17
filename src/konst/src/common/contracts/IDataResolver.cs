@@ -43,7 +43,7 @@ namespace Z0
     public interface IDataResolver<W,D,C,T> : ICellResolver<W,C,T>
         where W : unmanaged, ITypeWidth
         where D : unmanaged
-        where C : unmanaged, IDataCell<C,W,T>
+        where C : unmanaged, ICellHost<C,W,T>
         where T : unmanaged
     {
         TypeWidth IDataResolver.TargetWidth
@@ -70,7 +70,7 @@ namespace Z0
     public interface IDataResolver<W,D,C,E,T> : IDataResolver<W,D,C,T>, IRefiningResolver<W,E,T>
         where W : unmanaged, ITypeWidth
         where D : unmanaged
-        where C : unmanaged, IDataCell<C,W,T>
+        where C : unmanaged, ICellHost<C,W,T>
         where E : unmanaged, Enum
         where T : unmanaged
     {

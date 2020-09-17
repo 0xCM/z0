@@ -3,11 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    public interface TNumericWidth<F> : INumericWidth<F>
-        where F : struct, TNumericWidth<F>
-    {     
-        NumericWidth INumericWidth.NumericWidth 
-            => Widths.numeric<F>();               
+{
+    public interface TNumericWidth<W> : INumericWidth<W>
+        where W : struct, TNumericWidth<W>
+    {
+        NumericWidth INumericWidth.NumericWidth
+            => Widths.numeric<W>();
+
+        TypeWidth ITypeWidth.TypeWidth
+            => Widths.type<W>();
     }
 }

@@ -11,7 +11,6 @@ namespace Z0
 
     partial struct FS
     {
-
         /// <summary>
         /// Defines a data flow from one path to another
         /// </summary>

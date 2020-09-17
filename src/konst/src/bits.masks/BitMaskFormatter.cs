@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using R = BitMaskTable;
+    using R = BitMaskRow;
     using F = NumericLiteralField;
 
     public readonly struct BitMaskFormatter : IValueFormatter<F,R>
@@ -39,7 +39,7 @@ namespace Z0
                 dst.EmitEol();
         }
 
-        static string Format(Base2 @base, BitMaskTable src)
+        static string Format(Base2 @base, BitMaskRow src)
             => Render.bits(src.Data, src.TypeCode);
 
         void IValueFormatter<F,R>.Format(in R src, IDatasetFormatter<F> dst)

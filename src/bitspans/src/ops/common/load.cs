@@ -51,7 +51,7 @@ namespace Z0
             var srcbits = 8*packed.Length;
             var dstbits = 32*srcbits;
             var blocks = dstbits/256 + (dstbits % 256 == 0 ? 0 : 1);
-            var dst = BufferBlocks.alloc<uint>(n256,blocks);
+            var dst = SpanBlocks.alloc<uint>(n256,blocks);
 
             for(var block=0; block<blocks; block++)
                 BitPack.unpack(packed, dst, block);

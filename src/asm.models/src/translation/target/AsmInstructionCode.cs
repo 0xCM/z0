@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Konst;
     using static z;
@@ -34,10 +33,10 @@ namespace Z0.Asm
         public string Format()
             => Render.format(SourceCode, Instruction);
 
-        PackedInstruction IDataFlow<PackedInstruction, AsmStatementCode>.Source
+        PackedInstruction IArrow<PackedInstruction, AsmStatementCode>.Source
             => Instruction;
 
-        AsmStatementCode IDataFlow<PackedInstruction, AsmStatementCode>.Target
+        AsmStatementCode IArrow<PackedInstruction, AsmStatementCode>.Target
             => SourceCode;
     }
 }

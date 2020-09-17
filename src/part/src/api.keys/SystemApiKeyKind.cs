@@ -11,26 +11,26 @@ namespace Z0
         /// <summary>
         /// Identifies operations that allocate memory/resources
         /// </summary>
-        Alloc = ApiKeyKind.Alloc,
+        Alloc = ApiKeyId.Alloc,
 
         /// <summary>
         /// Identifies operations that move data from A -> B
         /// </summary>
-        Store = ApiKeyKind.Store,
+        Store = ApiKeyId.Store,
 
         /// <summary>
         /// Identifies operations that move data from B -> A
         /// </summary>
-        Load = ApiKeyKind.Load,
+        Load = ApiKeyId.Load,
 
         /// <summary>
         /// Identifies operations that initialize a resource where allocation may be required...or not
         /// </summary>
-        Init = ApiKeyKind.Init,
+        Init = ApiKeyId.Init,
 
         /// <summary>
         /// Identifies operations assign kind classifiers
         /// </summary>
-        Kind = ApiKeyKind.Kind
+        Kind = ApiKeyId.Kind
     }
 }

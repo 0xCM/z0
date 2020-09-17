@@ -77,7 +77,7 @@ namespace Z0
 
         internal static FixedBits<T> fixedalloc<T>(uint bitcount)
             where T : unmanaged
-                => new FixedBits<T>(BufferBlocks.alloc<T>(n64, BufferBlocks.bitcover<T>(bitcount)), bitcount);
+                => new FixedBits<T>(SpanBlocks.alloc<T>(n64, SpanBlocks.bitcover<T>(bitcount)), bitcount);
 
         /// <summary>
         /// Defines and creates a fixed-width bitfield

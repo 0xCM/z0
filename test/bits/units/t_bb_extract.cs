@@ -18,7 +18,7 @@ namespace Z0
             var upper = Random.Stream(Interval.closed<byte>(32,64)).Take(RepCount).ToArray();
             for(var i=0; i< RepCount; i++)
             {
-                var v1 = BufferBlocks.literals(n256,src[i]);
+                var v1 = SpanBlocks.literals(n256,src[i]);
                 var v2 = BitVector.create(n64,src[i]);
                 Claim.eq(v1.ToBitVector(n64), v2);
 
@@ -44,7 +44,7 @@ namespace Z0
             var upper = Random.Stream(Interval.closed<byte>(16,32)).Take(RepCount).ToArray();
             for(var i=0; i< RepCount; i++)
             {
-                var v1 = BufferBlocks.literals(n256,src[i]);
+                var v1 = SpanBlocks.literals(n256,src[i]);
                 var v2 = BitVector.create(n32,src[i]);
                 Claim.eq(v1.ToBitVector(n32),v2);
 
@@ -61,7 +61,7 @@ namespace Z0
             var upper = Random.Stream(Interval.closed<byte>(8,16)).Take(RepCount).ToArray();
             for(var i=0; i< RepCount; i++)
             {
-                var v1 = BufferBlocks.literals(n256,src[i]);
+                var v1 = SpanBlocks.literals(n256,src[i]);
                 var v2 = BitVector.create(n16,src[i]);
                 Claim.eq(v1.ToBitVector(n16),v2);
 
@@ -86,7 +86,7 @@ namespace Z0
             byte x2 = 0b10100011;
             byte x3 = 0b10011101;
             byte x4 = 0b01011000;
-            var bcx = BufferBlocks.literals(n256,x0,x1,x2,x3,x4);
+            var bcx = SpanBlocks.literals(n256,x0,x1,x2,x3,x4);
 
             byte y0 = 0b0110;
             byte y1 = 0b1101;
@@ -103,10 +103,10 @@ namespace Z0
             byte y8 = 0b1000;
             byte y9 = 0b0101;
             var y89 = gmath.or(y8, gmath.sal(y9, 4));
-            var bcy = BufferBlocks.literals(n256,y01,y23,y45,y67,y89);
+            var bcy = SpanBlocks.literals(n256,y01,y23,y45,y67,y89);
 
             ulong z = 0b0101100010011101101000111001010111010110;
-            var bvz = BufferBlocks.literals(n256,z);
+            var bvz = SpanBlocks.literals(n256,z);
 
             var bsy = bcy.ToBitString().Format(true);
             var bsx = bcx.ToBitString().Format(true);

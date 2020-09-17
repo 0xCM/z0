@@ -178,7 +178,7 @@ namespace Z0
 
         public static Vector256<byte> videntity_shuffle()
         {
-            SpanBlock256<byte> mask = BufferBlocks.cellalloc<byte>(n256,1);
+            SpanBlock256<byte> mask = SpanBlocks.cellalloc<byte>(n256,1);
 
             //For the first 128-bit lane
             var half = mask.CellCount/2;

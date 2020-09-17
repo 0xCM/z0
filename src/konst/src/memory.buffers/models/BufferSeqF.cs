@@ -29,7 +29,7 @@ namespace Z0
         public unsafe BufferSeq(byte count)
         {
             BufferCount = count;
-            BufferSize = (uint)default(F).ByteCount;
+            BufferSize = (uint)default(F).Size;
             TotalSize = BufferCount*BufferSize;
             Buffered = Buffers.native(TotalSize);
             View = new Span<F>(Buffered.Handle.ToPointer(), (int)TotalSize);

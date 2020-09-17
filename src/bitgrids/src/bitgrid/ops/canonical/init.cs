@@ -509,7 +509,7 @@ namespace Z0
             where T : unmanaged
         {
             var w = W256.W;
-            var blocks = Z0.BufferBlocks.alloc<T>(w, BitCalcs.tableblocks<T>(w, m, n));
+            var blocks = Z0.SpanBlocks.alloc<T>(w, BitCalcs.tableblocks<T>(w, m, n));
             broadcast(d, blocks);
             return new BitGrid<T>(blocks,(int)m,(int)n);
         }

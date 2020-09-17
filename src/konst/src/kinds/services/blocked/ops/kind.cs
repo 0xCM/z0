@@ -8,7 +8,7 @@ namespace Z0
 
     using BK = BlockedKind;
     using TW = TypeWidth;
-    using ID = NumericTypeId;
+    using ID = NumericApiKeyKind;
 
     partial class BlockedKinds
     {
@@ -21,19 +21,19 @@ namespace Z0
             => kind(BlockedKinds.width(t), BlockedKinds.segment(t).NumericId());
 
         [Op]
-        public static BK kind(TW width, ID id)            
+        public static BK kind(TW width, ID id)
         {
-            var k = width switch 
-                    { TW.W16 => 
+            var k = width switch
+                    { TW.W16 =>
                         id switch {
                             ID.U8 => BK.b16x8u,
                             ID.I8 => BK.b16x8i,
                             ID.I16 => BK.b16x16i,
                             ID.U16 => BK.b16x16u,
                             _ => BK.None
-                            }, 
+                            },
 
-                        TW.W32 => 
+                        TW.W32 =>
                         id switch {
                             ID.U8 => BK.b32x8u,
                             ID.I8 => BK.b32x8i,
@@ -43,9 +43,9 @@ namespace Z0
                             ID.U32 => BK.b32x32u,
                             ID.F32 => BK.b32x32f,
                             _ => BK.None
-                            }, 
+                            },
 
-                        TW.W64 => 
+                        TW.W64 =>
                         id switch {
                             ID.U8 => BK.b64x8u,
                             ID.I8 => BK.b64x8i,
@@ -58,9 +58,9 @@ namespace Z0
                             ID.F32 => BK.b64x32f,
                             ID.F64 => BK.b64x64f,
                             _ => BK.None
-                            }, 
+                            },
 
-                        TW.W128 => 
+                        TW.W128 =>
                         id switch {
                             ID.U8 => BK.b128x8u,
                             ID.I8 => BK.b128x8i,
@@ -73,9 +73,9 @@ namespace Z0
                             ID.F32 => BK.b128x32f,
                             ID.F64 => BK.b128x64f,
                             _ => BK.None
-                            }, 
+                            },
 
-                        TW.W256 => 
+                        TW.W256 =>
                         id switch {
                             ID.U8 => BK.b256x8u,
                             ID.I8 => BK.b256x8i,
@@ -88,9 +88,9 @@ namespace Z0
                             ID.F32 => BK.b256x32f,
                             ID.F64 => BK.b256x64f,
                             _ => BK.None
-                            }, 
+                            },
 
-                        TW.W512 => 
+                        TW.W512 =>
                         id switch {
                             ID.U8 => BK.b512x8u,
                             ID.I8 => BK.b512x8i,
@@ -103,7 +103,7 @@ namespace Z0
                             ID.F32 => BK.b512x32f,
                             ID.F64 => BK.b512x64f,
                             _ => BK.None
-                            }, 
+                            },
 
                         _ => BK.None
                     };

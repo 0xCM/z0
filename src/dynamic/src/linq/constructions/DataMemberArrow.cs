@@ -12,7 +12,7 @@ namespace Z0.Dynamics
     /// <summary>
     /// Defines a directed association between two data members
     /// </summary>
-    public class DataMemberArrow : ITextual, IArrow<DataMember>
+    public class DataMemberArrow : IArrow<DataMember>
     {
         /// <summary>
         /// The supplier member
@@ -24,7 +24,7 @@ namespace Z0.Dynamics
         /// </summary>
         public readonly DataMember Target;
 
-        public string Identifier 
+        public string Identifier
             => text.concat(Source.Name, Colon, Source.DataType.Name, " -> ", Target.Name, Colon, Target.DataType.Name);
 
         [MethodImpl(Inline)]
@@ -35,16 +35,16 @@ namespace Z0.Dynamics
         }
 
         const char Colon = ':';
- 
-         DataMember IArrow<DataMember>.Src 
+
+         DataMember IArrow<DataMember,DataMember>.Source
             => Source;
 
-        DataMember IArrow<DataMember>.Dst 
+        DataMember IArrow<DataMember,DataMember>.Target
             => Target;
 
         public string Format()
             => Identifier;
-                    
+
 
         public override string ToString()
             => Format();
@@ -58,7 +58,7 @@ namespace Z0.Dynamics
     public readonly struct DataMemberArrow<X,Y>
     {
         readonly DataMemberArrow  Arrow;
-        
+
         [MethodImpl(Inline)]
         public static implicit operator DataMemberArrow(DataMemberArrow<X,Y> src)
             => src.Arrow;
@@ -72,7 +72,7 @@ namespace Z0.Dynamics
         /// <summary>
         /// The supplier member
         /// </summary>
-        public DataMember Source 
+        public DataMember Source
         {
             [MethodImpl(Inline)]
             get => Arrow.Source;
@@ -81,7 +81,7 @@ namespace Z0.Dynamics
         /// <summary>
         /// The client member
         /// </summary>
-        public DataMember Target 
+        public DataMember Target
         {
             [MethodImpl(Inline)]
             get => Arrow.Target;
@@ -95,8 +95,8 @@ namespace Z0.Dynamics
 
         public string Format()
             => Arrow.Format();
-                    
-        
+
+
         public override string ToString()
             => Format();
     }

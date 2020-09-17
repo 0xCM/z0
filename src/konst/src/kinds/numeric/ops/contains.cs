@@ -10,14 +10,14 @@ namespace Z0
     using static Konst;
 
     partial class NumericKinds
-    {            
+    {
         /// <summary>
         /// Tests whether an identified type is of specified numeric kind
         /// </summary>
         /// <param name="kind">The source kind</param>
         /// <param name="id">The kind to match</param>
         [MethodImpl(Inline), Op]
-        public static bool contains(NumericKind kind, NumericTypeId id)        
+        public static bool contains(NumericKind kind, NumericApiKeyKind id)
             => ((uint)kind & (uint)id) != 0;
     }
 }

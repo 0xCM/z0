@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Id = ApiKeyKind;
+    using Id = ApiKeyId;
 
     /// <summary>
     /// Identifies arithmetic operation kinds

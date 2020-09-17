@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using B = BufferBlocks;
+    using B = SpanBlocks;
 
     public static partial class PolyBlock
     {

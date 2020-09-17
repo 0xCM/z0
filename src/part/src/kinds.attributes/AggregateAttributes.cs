@@ -5,7 +5,7 @@
 namespace Z0
 {
     using A = OpKindAttribute;
-    using K = AggregateKeyKind;
+    using K = AggregateApiKeyKind;
 
     public sealed class SumAttribute : A { public SumAttribute() : base(K.Sum) {} }
 

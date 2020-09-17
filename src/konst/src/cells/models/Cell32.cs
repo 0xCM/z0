@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct Cell32 : IDataCell<Cell32,W32,uint>
+    public readonly struct Cell32 : ICellHost<Cell32,W32,uint>
     {
         internal readonly uint Data;
 
@@ -131,6 +131,5 @@ namespace Z0
             => src is Cell32 x && Equals(x);
 
         public static Cell32 Empty => default;
-
     }
 }

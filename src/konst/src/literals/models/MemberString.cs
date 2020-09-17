@@ -9,12 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    [Table]
     public struct MemberString
     {
-        public static ReadOnlySpan<byte> RenderWidths
-            => new byte[4]{10, 12, 12, 64};
-
         public Sequential<int> Sequence;
 
         public Address32 Offset;

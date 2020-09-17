@@ -4,9 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Characterizes an identifier
     /// </summary>
+    [Free]
     public interface IIdentified
     {
         string Identifier {get;}
@@ -18,6 +21,7 @@ namespace Z0
             => !IsEmpty;
     }
 
+    [Free]
     public interface IIdentified<T> : IIdentified
     {
         T Id {get;}

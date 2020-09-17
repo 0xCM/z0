@@ -13,7 +13,7 @@ namespace Z0
 
     using static Konst;
     using static Memories;
-    using static BufferBlocks;
+    using static SpanBlocks;
 
     partial class VBlockD
     {

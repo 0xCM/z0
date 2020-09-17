@@ -46,10 +46,10 @@ namespace Z0
             get => api.type(Source,Target);
         }
 
-        S IDataFlow<S,T>.Source
+        S IArrow<S,T>.Source
             => Source;
 
-        T IDataFlow<S,T>.Target
+        T IArrow<S,T>.Target
             => Target;
     }
 }

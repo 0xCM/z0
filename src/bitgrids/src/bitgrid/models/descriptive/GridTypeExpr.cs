@@ -107,7 +107,7 @@ namespace Z0
         public uint BlockCount
         {
             [MethodImpl(Inline)]
-            get => (uint)BufferBlocks.cellcover<W,M,N,T>();
+            get => (uint)SpanBlocks.cellcover<W,M,N,T>();
         }
 
         /// <summary>

@@ -45,7 +45,5 @@ namespace Z0.Asm
         R14Q = r6 | GPN << ClassIndex | W64 << WidthIndex,
 
         R15Q = r7 | GPN << ClassIndex | W64 << WidthIndex,
-
-
     }
 }

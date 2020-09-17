@@ -5,7 +5,7 @@
 namespace Z0
 {
     using A = OpKindAttribute;
-    using K = ComparisonKeyKind;
+    using K = ComparisonApiKeyKind;
 
     public sealed class EqAttribute : A { public EqAttribute() : base(K.Eq) {} }
 

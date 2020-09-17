@@ -48,8 +48,8 @@ namespace Z0
                 {
                     ref readonly var move = ref skip(moves,j);
 
-                    if(move.Src < Cut)
-                        writer.WriteLine(text.concat(move.Src.ToAddress().Format().PadRight(Col0Width), Sep, uri));
+                    if(move.Source < Cut)
+                        writer.WriteLine(text.concat(move.Source.ToAddress().Format().PadRight(Col0Width), Sep, uri));
                 }
             }
 

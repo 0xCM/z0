@@ -13,19 +13,19 @@ namespace Z0
     public struct Cell<T>
         where T : struct
     {
-        T Value;
+        T Content;
 
         [MethodImpl(Inline)]
         public Cell(T src)
-            => Value = src;
+            => Content = src;
 
         [MethodImpl(Inline)]
         public static T operator !(in Cell<T> src)
-            => src.Value;
+            => src.Content;
 
         [MethodImpl(Inline)]
         public static implicit operator T(in Cell<T> src)
-            => src.Value;
+            => src.Content;
 
         [MethodImpl(Inline)]
         public static implicit operator Cell<T>(in T src)
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Cell<T> assign(in T src, ref Cell<T> dst)
         {
-            dst.Value = src;
+            dst.Content = src;
             return ref dst;
         }
     }

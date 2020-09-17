@@ -15,5 +15,9 @@ namespace Z0
         {
 
         }
+
+        [Op]
+        public static BitMaskFormatter formatter()
+            => new BitMaskFormatter();
     }
 }

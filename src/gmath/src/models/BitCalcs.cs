@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ulong tableblocks<T>(N256 w, uint rows, uint cols)
             where T : unmanaged
-                => BufferBlocks.cellcover<T>(w, tablecells<T>(rows,cols));
+                => SpanBlocks.cellcover<T>(w, tablecells<T>(rows,cols));
 
         /// <summary>
         /// Computes the number of bits covered by a rectangular region and predicated on natural dimensions
@@ -103,6 +103,6 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => BufferBlocks.cellcover<T>(w, tablecells<T>((uint)value(m), (uint)value(n)));
+                => SpanBlocks.cellcover<T>(w, tablecells<T>((uint)value(m), (uint)value(n)));
     }
 }

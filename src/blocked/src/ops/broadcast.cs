@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static BufferBlocks;
+    using static SpanBlocks;
 
     partial class Blocked
     {

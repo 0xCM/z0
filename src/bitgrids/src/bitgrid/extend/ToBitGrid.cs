@@ -27,11 +27,11 @@ namespace Z0
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
         public static BitGrid<uint> ToBitGrid(this BitMatrix32 src)
-            => BitGrid.load(BufferBlocks.load(n256,src.Content),32,32);
+            => BitGrid.load(SpanBlocks.load(n256,src.Content),32,32);
 
         [MethodImpl(Inline)]
         public static BitGrid<N64,N64,ulong> ToBitGrid(this BitMatrix64 src, N64 n)
-            => BitGrid.load(BufferBlocks.load(n256,src.Content),n,n);
+            => BitGrid.load(SpanBlocks.load(n256,src.Content),n,n);
 
         /// <summary>
         /// Represents the source matrix as a generic bitgrid of dimension 64x64 over cells of width 64
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="src">The source matrix</param>
         [MethodImpl(Inline)]
         public static BitGrid<ulong> ToBitGrid(this BitMatrix64 src)
-            => BitGrid.load(BufferBlocks.load(n256,src.Content),64,64);
+            => BitGrid.load(SpanBlocks.load(n256,src.Content),64,64);
 
         /// <summary>
         /// Represents the source value as a 32-bit natural bitgrid of dimension 1x32

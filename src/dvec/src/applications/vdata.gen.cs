@@ -27,8 +27,8 @@ namespace Z0
         public static Vector128<T> vpalt<T>(N128 n, T a, T b)
             where T : unmanaged
         {
-            var data = BufferBlocks.alloc<T>(n);
-            var len = BufferBlocks.blocklength<T>(n);
+            var data = SpanBlocks.alloc<T>(n);
+            var len = SpanBlocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
                 seek(ref mem, i) = gmath.even(i) ? a : b;
@@ -46,8 +46,8 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = BufferBlocks.alloc<T>(n);
-            var len = BufferBlocks.blocklength<T>(n);
+            var data = SpanBlocks.alloc<T>(n);
+            var len = SpanBlocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
@@ -69,8 +69,8 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = BufferBlocks.alloc<T>(n);
-            var len = BufferBlocks.blocklength<T>(n);
+            var data = SpanBlocks.alloc<T>(n);
+            var len = SpanBlocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
@@ -92,8 +92,8 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = BufferBlocks.alloc<T>(n);
-            var len = BufferBlocks.blocklength<T>(n);
+            var data = SpanBlocks.alloc<T>(n);
+            var len = SpanBlocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
@@ -114,8 +114,8 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = BufferBlocks.alloc<T>(n);
-            var len = BufferBlocks.blocklength<T>(n);
+            var data = SpanBlocks.alloc<T>(n);
+            var len = SpanBlocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
@@ -129,8 +129,8 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = BufferBlocks.alloc<T>(n);
-            var len = BufferBlocks.blocklength<T>(n);
+            var data = SpanBlocks.alloc<T>(n);
+            var len = SpanBlocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
@@ -145,8 +145,8 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = BufferBlocks.alloc<T>(n);
-            var len = BufferBlocks.blocklength<T>(n);
+            var data = SpanBlocks.alloc<T>(n);
+            var len = SpanBlocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
@@ -167,8 +167,8 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = BufferBlocks.alloc<T>(n);
-            var len = BufferBlocks.blocklength<T>(n);
+            var data = SpanBlocks.alloc<T>(n);
+            var len = SpanBlocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
             {
@@ -188,8 +188,8 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = BufferBlocks.alloc<T>(n);
-            var len = BufferBlocks.blocklength<T>(n);
+            var data = SpanBlocks.alloc<T>(n);
+            var len = SpanBlocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
             {
@@ -204,8 +204,8 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = BufferBlocks.alloc<T>(n);
-            var len = BufferBlocks.blocklength<T>(n);
+            var data = SpanBlocks.alloc<T>(n);
+            var len = SpanBlocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
             {
@@ -220,8 +220,8 @@ namespace Z0
             where T : unmanaged
         {
             var current = first;
-            var data = BufferBlocks.alloc<T>(n);
-            var len = BufferBlocks.blocklength<T>(n);
+            var data = SpanBlocks.alloc<T>(n);
+            var len = SpanBlocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
             {
@@ -265,7 +265,7 @@ namespace Z0
         public static Span<T> DefineClearAlt<T>()
             where T : unmanaged
         {
-            var mask = BufferBlocks.cellalloc<T>(n256,1);
+            var mask = SpanBlocks.cellalloc<T>(n256,1);
             var chop = NumericLiterals.maxval<T>();
 
             //For the first 128-bit lane

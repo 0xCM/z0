@@ -53,7 +53,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var dst = BufferBlocks.alloc<T>(n128);
+            var dst = SpanBlocks.alloc<T>(n128);
             vsave(src.Data, dst);
             return dst;
         }
@@ -87,7 +87,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var dst = BufferBlocks.alloc<T>(n256);
+            var dst = SpanBlocks.alloc<T>(n256);
             vsave(src.Data, dst);
             return dst;
         }

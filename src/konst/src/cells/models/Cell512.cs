@@ -11,7 +11,7 @@ namespace Z0
 
     using F = Cell512;
 
-    public readonly struct Cell512  : IDataCell<Cell512,W512,Vector512<ulong>>
+    public readonly struct Cell512  : ICellHost<Cell512,W512,Vector512<ulong>>
     {
         readonly Cell256 X0;
 
@@ -37,7 +37,7 @@ namespace Z0
 
         public int BitWidth => 512;
 
-        public int ByteCount => 64;
+        public int Size => 64;
 
         public Cell512 Zero
         {

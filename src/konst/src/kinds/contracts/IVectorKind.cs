@@ -28,11 +28,11 @@ namespace Z0
     /// Characterizes an F-bound polymorphic reification that identifies an intrinsic vector generic type definition
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    public interface IVectorKind<F,W> :  TVectorWidth<F>, ITypedLiteral<F,VectorWidth,uint>
+    public interface IVectorKind<F,W> :  TVectorWidth<F>, ITypedLiteral<F,VectorWidth,uint>, IDataWidth
         where F : struct, IVectorKind<F,W>
         where W : unmanaged, ITypeWidth
     {
-
+        DataWidth IDataWidth.DataWidth => Widths.data<W>();
     }
 
     public interface IVectorKind<F,W,T> : IVectorKind<F,W>, IVectorKind

@@ -9,12 +9,12 @@ namespace Z0
 
     [AttributeUsage(AttributeTargets.Struct)]
     public class SegmentedAttribute : WidthAttribute
-    {            
-        public SegmentedAttribute(TypeWidth width, bool sequenced, params CellWidth[] segwidths)
+    {
+        public SegmentedAttribute(TypeWidth width, bool sequenced, params CellWidth[] widths)
             : base(width)
         {
             this.Sequenced = sequenced;
-            this.CellWidths = segwidths;
+            this.CellWidths = widths;
         }
 
         /// <summary>

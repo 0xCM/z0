@@ -22,7 +22,7 @@ namespace Z0
         public static Span<T> vspan<T>(Vector128<T> src)
             where T : unmanaged
         {
-            var dst = BufferBlocks.alloc<T>(w128);
+            var dst = SpanBlocks.alloc<T>(w128);
             z.vsave(src, ref dst.Head);
             return dst.Data;
         }
@@ -36,7 +36,7 @@ namespace Z0
         public static Span<T> vspan<T>(Vector256<T> src)
             where T : unmanaged
         {
-            var dst = BufferBlocks.alloc<T>(w256);
+            var dst = SpanBlocks.alloc<T>(w256);
             z.vsave(src, ref dst.Head);
             return dst.Data;
         }
@@ -50,7 +50,7 @@ namespace Z0
         public static Span<T> vspan<T>(Vector512<T> src)
             where T : unmanaged
         {
-            var dst = BufferBlocks.alloc<T>(w512);
+            var dst = SpanBlocks.alloc<T>(w512);
             z.vsave(src, ref dst.Head);
             return dst.Data;
         }

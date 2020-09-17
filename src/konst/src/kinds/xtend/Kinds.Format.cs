@@ -20,20 +20,20 @@ namespace Z0
             => src != 0;
 
         [MethodImpl(Inline)]
-        public static string Format(this ComparisonKeyKind kind)
+        public static string Format(this ComparisonApiKeyKind kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this ComparisonKeyKind kind, T arg1, T arg2)
+        public static string Format<T>(this ComparisonApiKeyKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
-        public static string Format(this ApiKeyKind id)
+        public static string Format(this ApiKeyId id)
             => id.ToString().ToLower();
 
-        public static string Format(this ApiKeyKind id, bool vectorized)
+        public static string Format(this ApiKeyId id, bool vectorized)
             => vectorized ? $"v{id.Format()}" : id.Format();
 
-        public static string Format(this ApiKeyKind? id)
+        public static string Format(this ApiKeyId? id)
             => id.HasValue ? id.Value.Format() : "unkinded";
 
         [MethodImpl(Inline)]

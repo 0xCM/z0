@@ -5,18 +5,18 @@
 namespace Z0
 {
     using System;
-    
+
     using DW = DataWidth;
-    using ID = NumericTypeId;
+    using ID = NumericApiKeyKind;
 
     /// <summary>
     /// Classifies system-defined numeric primitive types
     /// </summary>
     [Flags]
     public enum NumericKind : uint
-    {    
+    {
         None = 0,
-        
+
         /// <summary>
         /// When enabled, indicates a signed integral type
         /// </summary>
@@ -55,7 +55,7 @@ namespace Z0
         /// <summary>
         /// Identifies an usigned 32-bit integral type
         /// </summary>
-        U32 = ID.U32 | DW.W32 | Unsigned, 
+        U32 = ID.U32 | DW.W32 | Unsigned,
 
         /// <summary>
         /// Identifies a signed 32-bit integral type
@@ -76,12 +76,12 @@ namespace Z0
         /// Identifies a 32-bit floating-point type
         /// </summary>
         F32 = ID.F32 | DW.W32 | Float,
-        
+
         /// <summary>
         /// Identifies a 64-bit floating-point type
         /// </summary>
-        F64 = ID.F64 | DW.W64 | Float, 
-        
+        F64 = ID.F64 | DW.W64 | Float,
+
         /// <summary>
         /// Defines a classification that includes all signed primal integral types and no others
         /// </summary>
@@ -89,7 +89,7 @@ namespace Z0
 
         /// <summary>
         /// Defines a classification that includes all unsigned primal integral types and no others
-        /// </summary>        
+        /// </summary>
         UnsignedInts = U8 | U16 | U32 | U64,
 
         /// <summary>

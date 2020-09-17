@@ -17,8 +17,7 @@ namespace Z0
             if(!HasBinaryLiteral(target))
                 return NumericLiteral.Empty;
 
-            return NumericLiteral.Base2(target.Name, value,
-                target.Tag<BinaryLiteralAttribute>().Value.Text);
+            return NumericLiteral.Base2(target.Name, value, target.Tag<BinaryLiteralAttribute>().Value.Text);
         }
 
         public static bool HasBinaryLiteral(FieldInfo target)
@@ -27,18 +26,5 @@ namespace Z0
         public static bool HasMultiLiteral(FieldInfo target)
             => Attribute.IsDefined(target, typeof(MultiLiteralAttribute));
 
-        public static LiteralInfo MultiLiteral(FieldInfo target)
-            => target.Tag<MultiLiteralAttribute>()
-                     .MapValueOrDefault(tag => TargetValue(target, tag.Data), LiteralInfo.Empty);
-
-        static LiteralInfo TargetValue(FieldInfo target, string Text)
-            => LiteralInfo.define(
-                Name: target.Name,
-                Data: target.GetRawConstantValue(),
-                Text: Text,
-                TypeCode: Type.GetTypeCode(target.FieldType),
-                IsEnum: target.FieldType.IsEnum,
-                MultiLiteral: true
-                );
     }
 }
