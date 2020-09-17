@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using Z0.Asm;
-    using System.Reflection;
 
     struct App
     {
@@ -16,8 +15,7 @@ namespace Z0
             var wf = Flow.shell(args);
             var app = Apps.context(wf);
             var asm = new AsmContext(app, wf);
-            var state = new WfCaptureState(wf, asm);
-            using var control = new CaptureControl(state);
+            using var control = CaptureControlHost.create(new WfCaptureState(wf, asm));
             control.Run();
         }
     }

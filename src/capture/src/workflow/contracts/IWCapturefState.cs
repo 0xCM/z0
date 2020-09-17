@@ -20,7 +20,7 @@ namespace Z0
 
         IWfCaptureContext CWf {get;}
 
-        AsmFormatSpec FormatConfig {get;}
+        AsmFormatConfig FormatConfig {get;}
 
         AsmFormatter Formatter {get;}
 

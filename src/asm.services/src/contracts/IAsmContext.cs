@@ -40,8 +40,8 @@ namespace Z0.Asm
         /// <summary>
         /// The default asm formatting configuration
         /// </summary>
-        AsmFormatSpec FormatConfig
-            => AsmFormatSpec.DefaultStreamFormat;
+        AsmFormatConfig FormatConfig
+            => AsmFormatConfig.DefaultStreamFormat;
 
         /// <summary>
         /// The context formatter

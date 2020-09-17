@@ -13,24 +13,24 @@ namespace Z0
 
     public readonly struct WfCaptureContext : IWfCaptureContext
     {
+        public IWfShell Wf {get;}
+
         public ICaptureContext Context {get;}
 
         public IWfCaptureBroker Broker {get;}
 
         public CorrelationToken Ct {get;}
 
-        public IWfShell Wf {get;}
-
         readonly IWfEventLog Log;
 
         [MethodImpl(Inline)]
-        public WfCaptureContext(IAsmContext asm, IWfShell wf, IAsmDecoder decoder, IAsmFormatter formatter, AsmTextWriterFactory writerfactory, IPartCapturePaths archive, CorrelationToken ct)
+        public WfCaptureContext(IWfShell wf, IAsmDecoder decoder, IAsmFormatter formatter, IPartCapturePaths archive)
         {
-            Ct = ct;
             Wf = wf;
+            Ct = Wf.Ct;
             Log = Flow.log(wf.Init);
             Broker = AsmWorkflows.capture(wf);
-            Context = new CaptureContext(asm.ContextRoot, decoder, formatter, writerfactory, Broker, Ct);
+            Context = new CaptureContext(wf, decoder, formatter,  Broker);
         }
 
         public void Dispose()

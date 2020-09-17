@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly partial struct Page<N,W,T>
+    public readonly partial struct MemoryPage<N,W,T>
         where T : unmanaged
         where W : unmanaged, ITypeWidth
         where N : unmanaged, ITypeNat
@@ -17,7 +17,7 @@ namespace Z0
         readonly TableSpan<T> Data;
 
         [MethodImpl(Inline)]
-        internal Page(TableSpan<T> data)
+        internal MemoryPage(TableSpan<T> data)
         {
             Data = data;
         }

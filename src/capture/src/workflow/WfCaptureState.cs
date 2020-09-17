@@ -11,9 +11,9 @@ namespace Z0.Asm
 
     public readonly struct WfCaptureState : IWfCaptureState
     {
-        public IAppContext App {get;}
-
         public IWfShell Wf {get;}
+
+        public IAppContext App {get;}
 
         public IAsmContext Asm {get;}
 
@@ -23,7 +23,7 @@ namespace Z0.Asm
 
         public IWfInit Config {get;}
 
-        public AsmFormatSpec FormatConfig {get;}
+        public AsmFormatConfig FormatConfig {get;}
 
         public AsmFormatter Formatter {get;}
 
@@ -41,9 +41,9 @@ namespace Z0.Asm
         public WfCaptureState(IWfShell wf, IAsmContext asm)
         {
             Wf = wf;
+            Ct = Wf.Ct;
             Asm = asm;
             App = asm.ContextRoot;
-            Ct = wf.Ct;
             Config = wf.Init;
             var srcpath = FilePath.Define(wf.GetType().Assembly.Location).FolderPath;
             var dstpath = wf.Paths.AppCaptureRoot;
@@ -51,12 +51,12 @@ namespace Z0.Asm
             var dst = new ArchiveConfig(dstpath);
             Settings = CaptureConfig.From(wf.Settings);
             Services = CaptureServices.create(Asm);
-            FormatConfig = AsmFormatSpec.WithSectionDelimiter;
+            FormatConfig = AsmFormatConfig.WithSectionDelimiter;
             Formatter = Services.Formatter(FormatConfig);
             RoutineDecoder = Services.RoutineDecoder(FormatConfig);
-            CWf = new WfCaptureContext(Asm, Wf, RoutineDecoder, Formatter, Services.AsmWriterFactory, Archives.capture(Config.TargetArchive), Ct);
+            CWf = new WfCaptureContext(Wf, RoutineDecoder, Formatter, Archives.capture(Config.TargetArchive));
             CaptureBroker = AsmWorkflows.capture(wf);
-            Parts = Wf.Init.PartIdentities.Length == 0 ? Asm.ContextRoot.Api.Identifiers : Wf.Init.PartIdentities;
+            Parts = Wf.Init.PartIdentities.Length == 0 ? Wf.Api.Identifiers : Wf.Init.PartIdentities;
         }
 
         public void Dispose()
@@ -65,6 +65,6 @@ namespace Z0.Asm
         }
 
         public void Error(WfStepId step, Exception e)
-            => Wf.Error(step, e, Ct);
+            => Wf.Error(step, e);
     }
 }

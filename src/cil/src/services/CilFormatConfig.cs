@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     public readonly struct CilFormatConfig
     {
         public static CilFormatConfig Default
@@ -16,7 +16,7 @@ namespace Z0
             => true;
 
         public string SectionDelimiter
-            => new string(Chars.Dash, 120);        
+            => RenderPatterns.Dash120;
 
         public bool EmitSectionDelimiter
             => true;

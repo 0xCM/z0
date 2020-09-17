@@ -15,57 +15,6 @@ namespace Z0
 
     partial class XTend
     {
-       public static bool IsPrimitive(this ClrTypeCode src)
-            => ClrQueries.primitive(src);
-
-        public static bool IsValueType(this ClrTypeCode src)
-            => ClrQueries.valuetype(src);
-
-        public static bool IsObjectReference(this ClrTypeCode src)
-            => ClrQueries.objref(src);
-
-        public static Type GetTypeForElementType(this ClrTypeCode src)
-            => ClrQueries.represented(src);
-
-        public static string GetName(this ClrRootKind src)
-            => ClrQueries.name(src);
-
-        /// <summary>
-        /// Returns true of the specified op-code is a branch to a label.
-        /// </summary>
-        public static bool IsBranch(this ILOpCode opCode)
-            => ClrQueries.branch(opCode);
-
-        /// <summary>
-        /// Calculate the size of the specified branch instruction operand.
-        /// </summary>
-        /// <param name="opCode">Branch op-code.</param>
-        /// <returns>1 if <paramref name="opCode"/> is a short branch or 4 if it is a long branch.</returns>
-        /// <exception cref="ArgumentException">Specified <paramref name="opCode"/> is not a branch op-code.</exception>
-        public static int GetBranchOperandSize(this ILOpCode opCode)
-            => ClrQueries.branchOpSize(opCode);
-
-        /// <summary>
-        /// Get a short form of the specified branch op-code.
-        /// </summary>
-        /// <param name="opCode">Branch op-code.</param>
-        /// <returns>Short form of the branch op-code.</returns>
-        /// <exception cref="ArgumentException">Specified <paramref name="opCode"/> is not a branch op-code.</exception>
-        public static ILOpCode GetShortBranch(this ILOpCode opCode)
-            => ClrQueries.shortbranch(opCode);
-
-        /// <summary>
-        /// Get a long form of the specified branch op-code.
-        /// </summary>
-        /// <param name="opCode">Branch op-code.</param>
-        /// <returns>Long form of the branch op-code.</returns>
-        /// <exception cref="ArgumentException">Specified <paramref name="opCode"/> is not a branch op-code.</exception>
-        public static ILOpCode GetLongBranch(this ILOpCode opCode)
-            => ClrQueries.longBranch(opCode);
-
-        public static string GetName(this ClrHandleKind kind)
-            => ClrQueries.name(kind);
-
         public static int Search<Kind, Key>(this IReadOnlyList<Kind> list, Key key, Func<Kind, Key, int> compareTo)
         {
             int lower = 0;

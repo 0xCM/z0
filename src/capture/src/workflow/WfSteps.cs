@@ -5,22 +5,35 @@
 namespace Z0
 {
     using System;
+
     using static z;
     using static Flow;
 
     using Asm;
 
     [WfHost]
-    public sealed class CapturePartDataTypesStep : WfHost<CapturePartDataTypesStep>
+    public sealed class CaptureControlHost : WfHost<CaptureControlHost>
+    {
+        public static CaptureControl create(WfCaptureState state)
+            => new CaptureControl(state, new CaptureControlHost());
+    }
+
+    [WfHost]
+    public sealed class EmitParsedReportHost : WfHost<EmitParsedReportHost>
+    {
+    }
+
+    [WfHost]
+    public sealed class CapturePartDataTypesHost : WfHost<CapturePartDataTypesHost>
     {
         protected override void Execute(IWfShell wf)
             => throw missing();
     }
 
     [WfHost]
-    public sealed class CaptureHostsHost : WfHost<CaptureHostsHost>
+    public sealed class CaptureApiHostsHost : WfHost<CaptureApiHostsHost>
     {
-        public static WfStepId StepId => step(typeof(CaptureHosts));
+        public static WfStepId StepId => step(typeof(CaptureApiHosts));
 
         protected override void Execute(IWfShell wf)
             => throw missing();
@@ -109,10 +122,14 @@ namespace Z0
             => throw missing();
     }
 
-    [Step]
-    public readonly struct EmitCaptureIndexStep : IWfStep<EmitCaptureIndexStep>
+    [WfHost]
+    public sealed class EmitCaptureIndexHost : WfHost<EmitCaptureIndexHost>
     {
-        public static WfStepId StepId => Flow.step<EmitCaptureIndexStep>();
+        protected override void Execute(IWfShell wf)
+        {
+            using var step = new EmitCaptureIndex(wf,this);
+        }
+
     }
 
     [Step]
@@ -136,14 +153,6 @@ namespace Z0
             => step<ClearCaptureArchivesStep>();
     }
 
-    [Step]
-    public readonly struct WfCaptureControl : IWfStep<WfCaptureControl>
-    {
-        public static CaptureControl create(WfCaptureState state)
-            => new CaptureControl(state);
-
-        public static WfStepId StepId => step<WfCaptureControl>();
-    }
 
     [Step]
     public readonly struct EmitImmSpecialsStep : IWfStep<EmitImmSpecialsStep>
@@ -168,13 +177,6 @@ namespace Z0
 
         public static WfStepId StepId
             => step<EmitHostArtifactsStep>();
-    }
-
-    [Step]
-    public readonly struct EmitParsedReportStep : IWfStep<EmitParsedReportStep>
-    {
-        public static WfStepId StepId
-            => step<EmitParsedReportStep>();
     }
 
 

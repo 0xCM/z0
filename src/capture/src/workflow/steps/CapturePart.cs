@@ -37,7 +37,7 @@ namespace Z0
             Asm = asm;
             Host = host;
             Services = CaptureServices.create(Asm);
-            var format = AsmFormatSpec.DefaultStreamFormat;
+            var format = AsmFormatConfig.DefaultStreamFormat;
             Formatter = Services.Formatter(format);
             Decoder = Services.RoutineDecoder(format);
             Buffer = sys.alloc<byte>(Pow2.T16);

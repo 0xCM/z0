@@ -25,9 +25,9 @@ namespace Z0.Asm
         /// Formats the function header
         /// </summary>
         /// <param name="src">The source function</param>
-        public static ReadOnlySpan<string> header(AsmRoutine src, in AsmFormatSpec? cfg = null)
+        public static ReadOnlySpan<string> header(AsmRoutine src, in AsmFormatConfig? cfg = null)
         {
-            var config = cfg ?? AsmFormatSpec.Default;
+            var config = cfg ?? AsmFormatConfig.Default;
 
             var lines = new List<string>();
             lines.Add(comment($"{src.OpSig}, {src.Uri}"));

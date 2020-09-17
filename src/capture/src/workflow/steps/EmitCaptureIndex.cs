@@ -11,7 +11,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static EmitCaptureIndexStep;
 
     public class EmitCaptureIndex : IDisposable
     {
@@ -23,9 +22,14 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        public EmitCaptureIndex(IWfShell wf)
+        readonly EmitCaptureIndexHost Host;
+
+        public X86CodeIndex Index;
+
+        public EmitCaptureIndex(IWfShell wf, EmitCaptureIndexHost host)
         {
             Wf = wf;
+            Host = host;
             CodeAddress = dict<MemoryAddress,X86ApiCode>();
             UriAddress = dict<MemoryAddress,OpUri>();
             Locations = dict<OpUri,X86ApiCode>();
@@ -44,7 +48,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
 
         public PartId[] Parts
@@ -65,7 +69,12 @@ namespace Z0
         public KeyValuePairs<MemoryAddress,OpUri> Located
             => UriAddress.ToKVPairs();
 
-        public X86CodeIndex Freeze()
+        public void Run()
+        {
+            Index = Freeze();
+        }
+
+        X86CodeIndex Freeze()
         {
             var memories = Encoded;
             var locations = Located;

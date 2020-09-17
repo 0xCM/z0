@@ -21,11 +21,11 @@ namespace Z0
         /// <typeparam name="W">The cell width type</typeparam>
         /// <typeparam name="T">The cell data type</typeparam>
         [MethodImpl(Inline)]
-        public static Page<N,W,T> alloc<N,W,T>(N n = default, W w = default, T t = default)
+        public static MemoryPage<N,W,T> alloc<N,W,T>(N n = default, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeWidth
             where N : unmanaged, ITypeNat
-                => new Page<N,W,T>(sys.alloc<T>(n.NatValue));
+                => new MemoryPage<N,W,T>(sys.alloc<T>(n.NatValue));
     }
 
 }

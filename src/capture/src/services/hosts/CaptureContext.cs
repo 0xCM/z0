@@ -14,24 +14,17 @@ namespace Z0.Asm
     {
         public CorrelationToken Ct {get;}
 
-        public IAppContext ContextRoot {get;}
-
         public IAsmDecoder Decoder {get;}
 
         public IAsmFormatter Formatter {get;}
 
-        public AsmTextWriterFactory WriterFactory {get;}
-
         public IWfCaptureBroker CaptureBroker {get;}
 
-        public CaptureContext(IAppContext root, IAsmDecoder decoder, IAsmFormatter formatter, AsmTextWriterFactory wf,
-            IWfCaptureBroker broker, CorrelationToken ct)
+        public CaptureContext(IWfShell wf, IAsmDecoder decoder, IAsmFormatter formatter, IWfCaptureBroker broker)
         {
-            Ct = ct;
-            ContextRoot = root;
+            Ct = wf.Ct;
             Decoder = decoder;
             Formatter = formatter;
-            WriterFactory = wf;
             CaptureBroker = broker;
         }
 

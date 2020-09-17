@@ -58,31 +58,31 @@ namespace Z0
         /// <summary>
         /// Computes the population count of the content of 3 256-bit vectors
         /// </summary>
-        /// <param name="x">The first vector</param>
-        /// <param name="y">The second vector</param>
-        /// <param name="z">The third vector</param>
+        /// <param name="a">The first vector</param>
+        /// <param name="b">The second vector</param>
+        /// <param name="c">The third vector</param>
         /// <remarks>
         /// This is a vectorization of the scalar algorithm found at https://www.chessprogramming.org/Population_Count
         /// </remarks>
         [MethodImpl(Inline), Op]
-        public static uint vpop(Vector256<ulong> x, Vector256<ulong> y, Vector256<ulong> z)
+        public static uint vpop(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
         {
             const ulong kf = MaskLiterals.Lsb64x8x1;
 
             var k1 = K1;
             var k2 = K2;
             var k4 = K4;
-            var maj =  vor(vand(vxor(x,y),z), vand(x,y));
-            var odd =  vxor(vxor(x,y),z);
+            var maj =  z.vor(z.vand(z.vxor(a,b),c), z.vand(a,b));
+            var odd =  z.vxor(z.vxor(a,b),c);
 
-            maj = vsub(maj, vand(vsrl(maj, 1), k1));
-            odd = vsub(odd, vand(vsrl(odd, 1), k1));
+            maj = vsub(maj, vand(z.vsrl(maj, 1), k1));
+            odd = vsub(odd, vand(z.vsrl(odd, 1), k1));
 
-            maj = vadd(vand(maj,k2), vand(vsrl(maj, 2), k2));
-            odd = vadd(vand(odd,k2), vand(vsrl(odd, 2), k2));
+            maj = vadd(vand(maj,k2), vand(z.vsrl(maj, 2), k2));
+            odd = vadd(vand(odd,k2), vand(z.vsrl(odd, 2), k2));
 
-            maj = vand(vadd(maj, vsrl(maj,4)), k4);
-            odd = vand(vadd(odd, vsrl(odd,4)), k4);
+            maj = vand(vadd(maj, z.vsrl(maj,4)), k4);
+            odd = vand(vadd(odd, z.vsrl(odd,4)), k4);
 
             odd = vadd(vadd(maj, maj), odd);
 

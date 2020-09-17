@@ -10,32 +10,30 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static WfCaptureControl;
-
     using static z;
 
     public readonly ref struct CaptureControl
     {
-        readonly IAsmContext Asm;
-
         readonly CorrelationToken Ct;
 
         readonly IWfShell Wf;
 
         public WfCaptureState State {get;}
 
-        public CaptureControl(WfCaptureState state)
+        readonly CaptureControlHost Host;
+
+        public CaptureControl(WfCaptureState state, CaptureControlHost host)
         {
             State = state;
             Wf = state.Wf;
-            Ct = state.Ct;
-            Asm = AsmWorkflows.asm(state.App);
-            Wf.Created(StepId);
+            Host = host;
+            Ct = Wf.Ct;
+            Wf.Created(Host);
         }
 
         public void Run()
         {
-            Wf.Running(StepId, delimit(Wf.Init.PartIdentities));
+            Wf.Running(Host, delimit(Wf.Init.PartIdentities));
 
             try
             {
@@ -44,15 +42,15 @@ namespace Z0
             }
             catch(Exception e)
             {
-                State.Error(StepId, e);
+                State.Error(Host, e);
             }
 
-            Wf.Ran(StepId);
+            Wf.Ran(Host);
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
     }
 }

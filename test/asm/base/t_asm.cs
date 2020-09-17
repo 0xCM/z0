@@ -40,10 +40,10 @@ namespace Z0.Asm
             return Archives.hexwriter<X86UriHexWriter>(dstPath);
         }
 
-        protected IAsmTextWriter AsmWriter([Caller] string caller = null)
+        protected IAsmWriter AsmWriter([Caller] string caller = null)
         {
             var dst = TargetArchive.AsmPath(FileName.define($"{caller}", FileExtensions.Asm));
-            return AsmServices.Services.AsmWriter(dst, AsmFormatSpec.DefaultStreamFormat);
+            return AsmServices.Services.AsmWriter(dst, AsmFormatConfig.DefaultStreamFormat);
         }
 
         protected X86UriHex[] ReadHostBits(ApiHostUri host)

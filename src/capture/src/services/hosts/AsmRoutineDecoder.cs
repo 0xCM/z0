@@ -15,16 +15,16 @@ namespace Z0.Asm
 
     readonly struct AsmRoutineDecoder : IAsmDecoder
     {
-        readonly AsmFormatSpec AsmFormat;
+        readonly AsmFormatConfig AsmFormat;
 
         public static AsmRoutineDecoder Default
         {
             [MethodImpl(Inline)]
-            get => new AsmRoutineDecoder(AsmFormatSpec.Default);
+            get => new AsmRoutineDecoder(AsmFormatConfig.Default);
         }
 
         [MethodImpl(Inline)]
-        public AsmRoutineDecoder(in AsmFormatSpec format)
+        public AsmRoutineDecoder(in AsmFormatConfig format)
             => AsmFormat = format;
 
         public Option<AsmRoutine> Decode(X86ApiCapture src)

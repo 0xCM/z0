@@ -9,10 +9,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Hex4Kind;
     using static z;
 
-    public readonly partial struct Cil
+    partial struct Cil
     {
         [Op]
         public static string name(ILOpCode opcode)

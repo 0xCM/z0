@@ -11,7 +11,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static DecodeApiMembersHost;
 
     public readonly ref struct DecodeApiMembers
     {
@@ -60,7 +59,8 @@ namespace Z0
 
         public void SaveDecoded(AsmRoutine[] src, FilePath dst)
         {
-            using var writer = Capture.WriterFactory(dst, Capture.Formatter);
+            //using var writer =  Capture.WriterFactory(dst, Capture.Formatter);
+            using var writer = Capture.AsmWriter(FS.path(dst.Name));
             writer.WriteAsm(src);
         }
 

@@ -14,7 +14,6 @@ namespace Z0
     public delegate bit UnaryPredicate<W,T>(T a)
          where W : unmanaged, ITypeWidth;
 
-
     [SuppressUnmanagedCodeSecurity]
     public delegate bit UnaryPredicate1(bit a);
 

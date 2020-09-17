@@ -77,7 +77,7 @@ namespace Z0
 
         void Run(ManageCaptureHost step, params string[] args)
         {
-            using var control = WfCaptureControl.create(State);
+            using var control = CaptureControlHost.create(State);
             control.Run();
         }
 
@@ -92,11 +92,6 @@ namespace Z0
 
         void Run(EmitEnumCatalogHost host)
             => host.Run(Wf);
-
-        // {
-        //     using var step = new EmitEnumCatalog(Wf, host);
-        //     step.Run();
-        // }
 
         void Run(EmitFieldLiteralsHost host)
             => host.Run(Wf);

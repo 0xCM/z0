@@ -67,7 +67,7 @@ namespace Z0
             try
             {
                 var dst = Archives.capture(Config.TargetArchive.Root);
-                using var step = new CaptureHosts(State, Config.Api.Hosts, dst);
+                using var step = new CaptureApiHosts(State, Config.Api.Hosts, dst);
                 step.Run();
 
             }

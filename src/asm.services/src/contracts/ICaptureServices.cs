@@ -15,6 +15,6 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="context">The source context</param>
         /// <param name="format">The format configuration</param>
-        IAsmDecoder RoutineDecoder(in AsmFormatSpec? format = null);
+        IAsmDecoder RoutineDecoder(in AsmFormatConfig? format = null);
     }
 }

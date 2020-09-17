@@ -30,6 +30,18 @@ namespace Z0.Asm
             return new AsmRoutine(member.OpUri, sig, code, member.TermCode, new AsmFxList(asm, member.Encoded));
         }
 
+        [MethodImpl(Inline), Op]
+        public static AsmWriter writer(FS.FilePath dst)
+            => new AsmWriter(dst, new AsmFormatter());
+
+        [MethodImpl(Inline), Op]
+        public static AsmWriter writer(FS.FilePath dst, in AsmFormatConfig config)
+            => new AsmWriter(dst, new AsmFormatter(config));
+
+        [MethodImpl(Inline), Op]
+        public static AsmWriter writer(FS.FilePath dst, IAsmFormatter formatter)
+            => new AsmWriter(dst, formatter);
+
         [Op]
         public static AsmRoutine routine(OpUri uri, string sig, AsmBlock src, bool check = false)
         {

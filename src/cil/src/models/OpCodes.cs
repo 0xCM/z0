@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Reflection.Metadata;
 
-    [ApiHost]
-    public partial struct Cil
+    partial struct Cil
     {
         public readonly struct Nop : ICilOpCode<Nop>
         {

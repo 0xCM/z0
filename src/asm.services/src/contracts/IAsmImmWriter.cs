@@ -12,7 +12,7 @@ namespace Z0.Asm
         /// <summary>
         /// The api host
         /// </summary>
-        ApiHostUri Host {get;}
+        ApiHostUri Uri {get;}
 
         /// <summary>
         /// Saves an array of functions as formatted asm

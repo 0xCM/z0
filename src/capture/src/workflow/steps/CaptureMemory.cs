@@ -22,7 +22,7 @@ namespace Z0.Asm
 
         readonly IAsmFormatter Formatter;
 
-        readonly AsmFormatSpec FormatConfig;
+        readonly AsmFormatConfig FormatConfig;
 
         readonly byte[] ExtractBuffer;
 

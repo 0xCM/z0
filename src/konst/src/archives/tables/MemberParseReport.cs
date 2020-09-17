@@ -17,75 +17,76 @@ namespace Z0
 
     public class MemberParseReport : Report<MemberParseReport,F,R>
     {
-        [MethodImpl(Inline)]
-        public static MemberParseReport create(ApiHostUri host, params MemberParseRow[] src)
-            => new MemberParseReport(host, src);
+        // [MethodImpl(Inline)]
+        // public static MemberParseReport create(ApiHostUri host, params MemberParseRow[] src)
+        //     => new MemberParseReport(host, src);
 
-        public static MemberParseRow[] load(PartFiles src, PartId part)
-        {
-            var files = index(src, part);
-            if(files.TryGetValue(part, out var partFiles))
-            {
-                var count = partFiles.Length;
-                var view = @readonly(partFiles);
-                for(var j=0; j<count; j++)
-                {
-                    ref readonly var file = ref skip(view, j);
-                    var records = load(file.Path);
-                    if(records)
-                        return records.Value;
-                }
-            }
+        // public static MemberParseRow[] load(PartFiles src, PartId part)
+        // {
+        //     var files = index(src, part);
+        //     if(files.TryGetValue(part, out var partFiles))
+        //     {
+        //         var count = partFiles.Length;
+        //         var view = @readonly(partFiles);
+        //         for(var j=0; j<count; j++)
+        //         {
+        //             ref readonly var file = ref skip(view, j);
+        //             var records = load(file.Path);
+        //             if(records)
+        //                 return records.Value;
+        //         }
+        //     }
 
-            return sys.empty<MemberParseRow>();
-        }
+        //     return sys.empty<MemberParseRow>();
+        // }
+
+
+        // static MemberParseRow[] parse(FS.FilePath path)
+        // {
+        //     var rows = path.ReadLines();
+        //     var count = rows.Length;
+        //     if(count == 0)
+        //         return sys.empty<MemberParseRow>();
+
+        //     var buffer = alloc<MemberParseRow>(count - 1);
+        //     ref var dst =  ref first(span(buffer));
+        //     ref readonly var src = ref first(span(rows));
+
+        //     for(var i = 1u; i<count; i++)
+        //     {
+        //         var j=0u;
+        //         ref readonly var row = ref skip(src,i);
+        //         var fields = row.SplitClean(FieldDelimiter);
+        //         var numericParser = NumericParser.infallible<int>();
+        //         var addressParser = MemoryAddressParser.Service;
+        //         var dataParser = Parsers.hex(true);
+
+        //         var seq = numericParser.Parse(fields[j++]);
+        //         var srcSeq = numericParser.Parse(fields[j++]);
+        //         var address = addressParser.Parse(fields[j++], MemoryAddress.Empty);
+        //         var len = numericParser.Parse(fields[j++]);
+        //         var term = Enums.Parse(fields[j++], ExtractTermCode.None);
+        //         var uri = ApiUriParser.Service.Parse(fields[j++]);
+        //         var sig = fields[j++];
+        //         var data = new X86Code(address, dataParser.ParseData(fields[j++], sys.empty<byte>()));
+        //         seek(dst,i) = new R(
+        //             Seq: seq,
+        //             SourceSequence: srcSeq,
+        //             Address: address,
+        //             Length: len,
+        //             TermCode: default,
+        //             Uri:uri.Value,
+        //             OpSig:sig,
+        //             Data:data
+        //         );
+        //     }
+        //     return buffer;
+        // }
+
+        public ApiHostUri ApiHost {get;}
 
         public static ParseResult<MemberParseRow[]> load(FS.FilePath src)
             => load(FilePath.Define(src.Name));
-
-        static MemberParseRow[] parse(FS.FilePath path)
-        {
-            var rows = path.ReadLines();
-            var count = rows.Length;
-            if(count == 0)
-                return sys.empty<MemberParseRow>();
-
-            var buffer = alloc<MemberParseRow>(count - 1);
-            ref var dst =  ref first(span(buffer));
-            ref readonly var src = ref first(span(rows));
-
-            for(var i = 1u; i<count; i++)
-            {
-                var j=0u;
-                ref readonly var row = ref skip(src,i);
-                var fields = row.SplitClean(FieldDelimiter);
-                var numericParser = NumericParser.infallible<int>();
-                var addressParser = MemoryAddressParser.Service;
-                var dataParser = Parsers.hex(true);
-
-                var seq = numericParser.Parse(fields[j++]);
-                var srcSeq = numericParser.Parse(fields[j++]);
-                var address = addressParser.Parse(fields[j++], MemoryAddress.Empty);
-                var len = numericParser.Parse(fields[j++]);
-                var term = Enums.Parse(fields[j++], ExtractTermCode.None);
-                var uri = ApiUriParser.Service.Parse(fields[j++]);
-                var sig = fields[j++];
-                var data = new X86Code(address, dataParser.ParseData(fields[j++], sys.empty<byte>()));
-                seek(dst,i) = new R(
-                    Seq: seq,
-                    SourceSequence: srcSeq,
-                    Address: address,
-                    Length: len,
-                    TermCode: default,
-                    Uri:uri.Value,
-                    OpSig:sig,
-                    Data:data
-                );
-            }
-            return buffer;
-        }
-
-        public ApiHostUri ApiHost {get;}
 
         static ParseResult<MemberParseRow[]> load(FilePath src)
         {
@@ -111,28 +112,21 @@ namespace Z0
                     Data : extract.Encoded
                 );
 
-        public static MemberParseReport create(ApiHostUri host, X86ApiMembers members)
+        public static MemberParseRow[] create(ApiHostUri host, X86ApiMembers members)
         {
             var count = members.Count;
             var buffer = alloc<R>(count);
             var dst = span(buffer);
             var src = members.View;
-
             for(var i=0u; i<count; i++)
                 seek(dst,i) = record(skip(src,i), i);
-
-            return new MemberParseReport(host, buffer);
+            return buffer;
+            //return new MemberParseReport(host, buffer);
         }
-
-        public MemberParseReport(){}
 
         [MethodImpl(Inline)]
-        internal MemberParseReport(ApiHostUri host, params MemberParseRow[] src)
-            : base(src)
-        {
-            ApiHost = host;
-        }
-
+        public static Option<FilePath> save(MemberParseRow[] src, FS.FilePath dst)
+            => Log.Save(src, dst);
 
         static ParseResult<MemberParseRow> row(string src)
         {
@@ -160,18 +154,28 @@ namespace Z0
             }
         }
 
-        static Dictionary<PartId,PartFile[]> select(PartFileClass kind, FS.Files src, PartId[] parts)
+        public MemberParseReport(){}
+
+        [MethodImpl(Inline)]
+        internal MemberParseReport(ApiHostUri host, params MemberParseRow[] src)
+            : base(src)
         {
-            var partSet = parts.ToHashSet();
-            var files = (from f in src
-                        let part = f.Owner
-                        where part != PartId.None && partSet.Contains(part)
-                        let pf = new PartFile(part, kind, f)
-                        group pf by pf.Part).ToDictionary(x => x.Key, y => y.ToArray());
-            return files;
+            ApiHost = host;
         }
 
-        static Dictionary<PartId,PartFile[]> index(PartFiles src, params PartId[] parts)
-            => select(PartFileClass.Parsed, src.Parsed, parts);
+
+        // static Dictionary<PartId,PartFile[]> select(PartFileClass kind, FS.Files src, PartId[] parts)
+        // {
+        //     var partSet = parts.ToHashSet();
+        //     var files = (from f in src
+        //                 let part = f.Owner
+        //                 where part != PartId.None && partSet.Contains(part)
+        //                 let pf = new PartFile(part, kind, f)
+        //                 group pf by pf.Part).ToDictionary(x => x.Key, y => y.ToArray());
+        //     return files;
+        // }
+
+        // static Dictionary<PartId,PartFile[]> index(PartFiles src, params PartId[] parts)
+        //     => select(PartFileClass.Parsed, src.Parsed, parts);
     }
 }

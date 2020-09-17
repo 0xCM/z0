@@ -88,7 +88,7 @@ namespace Z0.Asm
             => text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}", src.Instruction, sep, src.OpCode, sep, encoded.Length, sep, encoded.FormatHexBytes(Space,true,false));
 
         [Op]
-        public static string format(in MemoryAddress @base, in AsmFxSummary src, in AsmFormatSpec config)
+        public static string format(in MemoryAddress @base, in AsmFxSummary src, in AsmFormatConfig config)
         {
             var description = text.build();
             var absolute = @base + src.Offset;
@@ -99,10 +99,10 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static string format(in MemoryAddress @base, in AsmFxSummary src)
-            => format(@base, src, AsmFormatSpec.Default);
+            => format(@base, src, AsmFormatConfig.Default);
 
         [Op]
-        public static string format(in AsmRoutines src, in AsmFormatSpec config)
+        public static string format(in AsmRoutines src, in AsmFormatConfig config)
         {
             var dst = text.build();
             for(var i=0; i<src.Data.Length; i++)
@@ -119,7 +119,7 @@ namespace Z0.Asm
         /// <param name="src">The source function</param>
         /// <param name="fmt">The format configuration</param>
         [Op]
-        public static string format(in AsmRoutine src, in AsmFormatSpec config)
+        public static string format(in AsmRoutine src, in AsmFormatConfig config)
         {
             var dst = text.build();
 

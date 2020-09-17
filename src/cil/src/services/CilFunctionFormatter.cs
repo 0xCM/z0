@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Text;
@@ -13,26 +13,25 @@ namespace Z0
     public readonly struct CilFunctionFormatter : ICilFunctionFormatter
     {
         readonly CilFormatConfig Config;
-        
+
         [MethodImpl(Inline)]
         public CilFunctionFormatter(CilFormatConfig? config = null)
             => Config = config ?? CilFormatConfig.Default;
-        
-        static string Comment(string text, string delimiter = "//", int pad = 0)
+
+        static string comment(string text, string delimiter = "//", int pad = 0)
             => pad == 0 ? $"{delimiter} {text}" : delimiter.PadRight(pad) + text;
 
         public string Format(CilFunction f)
         {
-            var rendered = new StringBuilder();
+            const string Margin = "    ";
 
-            var margin = new string(Chars.Space,4);
-            rendered.AppendLine(Comment(f.FullName));
-            rendered.AppendLine(Comment(f.ImplSpec.ToString()));            
-            rendered.AppendLine(Chars.LBrace.ToString());            
+            var rendered = text.build();
+            rendered.AppendLine(comment(f.FullName));
+            rendered.AppendLine(comment(f.Attributes.ToString()));
+            rendered.AppendLine(RenderPatterns.OpenSlot);
             foreach(var i in f.Instructions)
-                rendered.AppendLine(margin + i.ToString());
-            rendered.AppendLine(Chars.RBrace.ToString());                        
-            
+                rendered.AppendLine(Margin + i.Formatted);
+            rendered.AppendLine(RenderPatterns.CloseSlot);
             return rendered.ToString();
         }
     }

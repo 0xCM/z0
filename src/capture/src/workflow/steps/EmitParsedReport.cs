@@ -9,49 +9,52 @@ namespace Z0
 
     using static Konst;
     using static RenderPatterns;
-    using static EmitParsedReportStep;
 
-    public readonly ref struct EmitParsedReport
+    public ref struct EmitParsedReport
     {
-        readonly CorrelationToken Ct;
+        readonly IWfShell Wf;
 
-        readonly ApiHostUri Host;
+        readonly EmitParsedReportHost Host;
+
+        readonly ApiHostUri Uri;
 
         readonly X86ApiMembers Source;
 
-        readonly FilePath Target;
+        readonly FS.FilePath Target;
 
-        readonly IWfShell Wf;
+        public Span<MemberParseRow> Emitted;
 
         [MethodImpl(Inline)]
-        internal EmitParsedReport(IWfCaptureState state, ApiHostUri host, X86ApiMembers src, FilePath dst, CorrelationToken ct)
+        public EmitParsedReport(IWfCaptureState state, EmitParsedReportHost host, ApiHostUri uri, X86ApiMembers src, FS.FilePath dst)
         {
             Wf = state.Wf;
-            Ct = ct;
             Host = host;
+            Emitted = default;
+            Uri = uri;
             Source = src;
             Target = dst;
-            Wf.Created(StepId);
+            Wf.Created(Host);
         }
 
         public void Run()
         {
             try
             {
-                Wf.Running(StepId, Host);
-                var report = MemberParseReport.create(Host, Source);
-                report.Save(Target);
-                Wf.Ran(StepId, text.format(PSx2, Host, report.RecordCount));
+                Wf.Running(Host, Uri);
+                var report = MemberParseReport.create(Uri, Source);
+                MemberParseReport.save(report,Target);
+                Emitted = report;
+                Wf.Ran(Host, text.format(PSx2, Uri, Emitted.Length));
             }
             catch(Exception e)
             {
-                Wf.Error(StepId, e);
+                Wf.Error(Host, e);
             }
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
     }
 }

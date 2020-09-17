@@ -11,7 +11,7 @@ namespace Z0.Asm
         IImmSpecializer ICaptureServices.ImmSpecializer(IAsmDecoder decoder)
             => new ImmSpecializer(decoder);
 
-        IAsmDecoder ICaptureServices.RoutineDecoder(in AsmFormatSpec? format)
-            => new AsmRoutineDecoder(format ?? AsmFormatSpec.Default);
+        IAsmDecoder ICaptureServices.RoutineDecoder(in AsmFormatConfig? format)
+            => new AsmRoutineDecoder(format ?? AsmFormatConfig.Default);
     }
 }

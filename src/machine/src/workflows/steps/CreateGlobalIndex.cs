@@ -38,7 +38,7 @@ namespace Z0
             SourceFiles = src;
             EncodedIndex = default;
             Buffer = list<Instruction>(2000);
-            Wf.Created(Host.Id);
+            Wf.Created(Host);
         }
 
         public void Dispose()
@@ -48,13 +48,13 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running(Host.Id);
+            Wf.Running(Host);
 
             try
             {
                 var files = SourceFiles.Parsed.View;
                 var count = files.Length;
-                var builder = new EmitCaptureIndex(Wf);
+                var builder = new EmitCaptureIndex(Wf, new EmitCaptureIndexHost());
 
                 Wf.Status(Host.Id, text.format("Indexing {0} datasets",count));
 
@@ -75,7 +75,8 @@ namespace Z0
                 var status = builder.Status();
                 Wf.Status(Host.Id, text.format("Freeze: {0}", status.Format()));
 
-                EncodedIndex = builder.Freeze();
+                builder.Run();
+                EncodedIndex = builder.Index;
                 Wf.Raise(new CreatedPartIndex(Host.Id, EncodedIndex, Ct));
 
 
@@ -87,10 +88,10 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(e, Ct);
+                Wf.Error(Host,e);
             }
 
-            Wf.Ran(Host.Id);
+            Wf.Ran(Host);
         }
 
         void Index(ReadOnlySpan<MemberParseRow> src, EmitCaptureIndex dst)
@@ -116,16 +117,16 @@ namespace Z0
             Wf.Status(Host.Id, text.format("Decoding {0} entries from {1} parts", src.EntryCount, src.Parts.Length));
 
             var parts = src.Parts;
-            var dst = z.alloc<ApiPartRoutines>(parts.Length);
-            var hostFx = z.list<ApiHostRoutines>();
+            var dst = alloc<ApiPartRoutines>(parts.Length);
+            var hostFx = list<ApiHostRoutines>();
             var kMembers = 0u;
             var kHosts = 0u;
             var kParts = 0u;
             var kFx = 0u;
+
             for(var i=0; i<parts.Length; i++)
             {
                 hostFx.Clear();
-
                 var part = parts[i];
                 var hosts = src.Hosts.Where(h => h.Owner == part);
 
@@ -147,10 +148,9 @@ namespace Z0
                 kParts++;
 
                 Wf.Status(Host.Id, text.format(RenderPatterns.PSx4, kParts, kHosts, kMembers, kFx));
-
             }
 
-            Wf.Status(Host.Id, text.format("Completed decoding process for {1} parts", src.EntryCount, src.Parts.Length));
+            Wf.Status(Host.Id, text.format("Decoded {0} entries from {1} parts", src.EntryCount, src.Parts.Length));
             return dst;
         }
 
@@ -231,9 +231,9 @@ namespace Z0
                     step.Run();
                 }
             }
-            catch(Exception error)
+            catch(Exception e)
             {
-                Wf.Error(error, Ct);
+                Wf.Error(Host,e);
             }
         }
 
@@ -244,9 +244,9 @@ namespace Z0
                 var step = new ProcessInstructions(Wf,fx);
                 step.Run();
             }
-            catch(Exception error)
+            catch(Exception e)
             {
-                Wf.Error(error,Ct);
+                Wf.Error(Host,e);
             }
         }
     }

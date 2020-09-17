@@ -55,5 +55,5 @@ namespace Z0
         /// Weak WinRT handle.
         /// </summary>
         WeakWinRT = 9,
-    }            
+    }
 }

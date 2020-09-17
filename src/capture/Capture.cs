@@ -15,7 +15,7 @@ namespace Z0.Asm
             => default(CaptureServices);
 
         [MethodImpl(Inline)]
-        internal static IAsmCaptureFormatter formatter(in AsmFormatSpec config)
+        internal static IAsmCaptureFormatter formatter(in AsmFormatConfig config)
             => new AsmCaptureFormatter(config);
 
         [MethodImpl(Inline)]

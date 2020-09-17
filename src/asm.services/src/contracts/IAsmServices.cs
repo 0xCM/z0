@@ -30,7 +30,7 @@ namespace Z0.Asm
         /// Creates an asm formatter with an optional configuration
         /// </summary>
         /// <param name="config">The format configuration, if any</param>
-        AsmFormatter Formatter(in AsmFormatSpec? config = null)
+        AsmFormatter Formatter(in AsmFormatConfig? config = null)
             => new AsmFormatter(config);
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="config">The format configuration</param>
         /// <param name="dst">The target path</param>
-        AsmWriter AsmWriter(FilePath dst, in AsmFormatSpec config)
+        AsmWriter AsmWriter(FilePath dst, in AsmFormatConfig config)
             => new AsmWriter(dst, DefaultFormatter);
 
         /// <summary>

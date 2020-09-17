@@ -11,9 +11,9 @@ namespace Z0.Asm
     using static Render;
     using static z;
 
-    public readonly struct CilCodeSaved : IWfEvent<CilCodeSaved>
+    public readonly struct CilDataSaved : IWfEvent<CilDataSaved>
     {
-        public const string EventName = nameof(CilCodeSaved);
+        public const string EventName = nameof(CilDataSaved);
 
         public WfEventId EventId {get;}
 
@@ -28,7 +28,7 @@ namespace Z0.Asm
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public CilCodeSaved(WfStepId step, ApiHostUri host, uint count, FS.FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
+        public CilDataSaved(WfStepId step, ApiHostUri host, Count count, FS.FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
             StepId = step;

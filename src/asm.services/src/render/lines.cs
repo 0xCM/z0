@@ -3,10 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static z;
 
@@ -18,7 +18,7 @@ namespace Z0.Asm
         /// <param name="src">The source function</param>
         /// <param name="config">An optional format configuration</param>
         [Op]
-        public static ReadOnlySpan<string> lines(in AsmRoutine src, in AsmFormatSpec config)
+        public static ReadOnlySpan<string> lines(in AsmRoutine src, in AsmFormatConfig config)
         {
             var summaries = asm.summarize(src);
             var count = summaries.Length;
@@ -29,7 +29,7 @@ namespace Z0.Asm
             for(var i=0u; i< count; i++)
                 seek(dst,i)= format(src.BaseAddress, skip(summaries,i), config);
             return dst;
-        }    
+        }
 
         /// <summary>
         /// Formats a contiguous sequence of instructions defined in an instruction list
@@ -37,7 +37,7 @@ namespace Z0.Asm
         /// <param name="src">The instruction source</param>
         /// <param name="config">An optional format configuration</param>
         [Op]
-        public static ReadOnlySpan<string> lines(in AsmFxList src, in AsmFormatSpec config)
+        public static ReadOnlySpan<string> lines(in AsmFxList src, in AsmFormatConfig config)
         {
             var count = src.Count;
             if(count == 0)

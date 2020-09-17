@@ -5,41 +5,43 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Reflection.Emit;
     using System.Reflection.Metadata;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Konst;
     using static z;
 
+    [ApiHost("api")]
     public readonly partial struct Cil
     {
         readonly OpCodeDataset Data;
 
         [MethodImpl(Inline), Op]
+        public static CilFunctionFormatter formatter()
+            => new CilFunctionFormatter();
+
+        [MethodImpl(Inline), Op]
+        public static CilFunctionFormatter formatter(CilFormatConfig config)
+            => new CilFunctionFormatter(config);
+
+        [Op]
         public static Cil init()
         {
-            var buffer = sys.alloc<OpCodeTable>(300);
+            var buffer = sys.alloc<CilOpCode>(300);
             ref var dst = ref first(span(buffer));
             load(ref dst);
             return new Cil(buffer);
         }
 
         [MethodImpl(Inline)]
-        Cil(OpCodeTable[] src)
+        Cil(CilOpCode[] src)
         {
             Data = src;
         }
+    }
 
-        [MethodImpl(Inline), Op]
-        public static OpCodeSymbol symbol(ILOpCode id)
-            => new OpCodeSymbol(id);
+    public readonly partial struct DnCilModel
+    {
 
-        [MethodImpl(Inline)]
-        public static OpCodeSymbol symbol<K>(K k = default)
-            where K : unmanaged, ICilOpCode<K>
-                => new OpCodeSymbol((ILOpCode)(default(K).Id));
     }
 }

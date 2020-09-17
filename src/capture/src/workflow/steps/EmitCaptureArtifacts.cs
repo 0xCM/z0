@@ -31,11 +31,11 @@ namespace Z0
 
         readonly FilePath ExtractPath;
 
-        readonly FilePath ParsedPath;
+        readonly FS.FilePath ParsedPath;
 
         readonly FS.FilePath HexPath;
 
-        readonly FilePath CilDataPath;
+        readonly FS.FilePath CilDataPath;
 
         readonly FilePath AsmPath;
 
@@ -50,10 +50,10 @@ namespace Z0
             Target = HostCaptureArchive.create(dst.ArchiveRoot, HostUri);
             Extracts = extracts;
             ExtractPath = Target.HostExtractPath;
-            ParsedPath = Target.ParsedPath;
+            ParsedPath = FS.path(Target.ParsedPath.Name);
             HexPath = FS.path(Target.HostX86Path.Name);
             AsmPath = Target.HostAsmPath;
-            CilDataPath = Target.CilPath;
+            CilDataPath = FS.path(Target.CilPath.Name);
             Parser = ExtractParsers.member();
             ParsedMembers = default;
             Wf.Created(StepId);
@@ -71,14 +71,10 @@ namespace Z0
             try
             {
                 Run(new EmitExtractReportHost());
-                Parse();
-                if(ParsedMembers.Count != 0)
-                {
-                    SaveParseReport();
-                    Run(new EmitX86HexHost());
-                    Run(new EmitCilMembersHost());
-                    Run(new DecodeApiMembersHost());
-                }
+                Run(new EmitParsedReportHost());
+                Run(new EmitX86HexHost());
+                Run(new EmitCilMembersHost());
+                Run(new DecodeApiMembersHost());
             }
             catch(Exception e)
             {
@@ -104,24 +100,21 @@ namespace Z0
             }
         }
 
-        void Parse()
+
+        void Run(EmitParsedReportHost host)
         {
             if(Extracts.Length == 0)
                 return;
 
             ParsedMembers = Parser.ParseMembers(Extracts);
             Wf.Raise(new ExtractsParsed(StepId, HostUri, ParsedMembers.Count, Ct));
-        }
 
-        void SaveParseReport()
-        {
-            if(ParsedMembers.Count== 0)
+            if(ParsedMembers.Count == 0)
                 return;
 
-            using var step = new EmitParsedReport(State, HostUri, ParsedMembers, ParsedPath, Ct);
+            using var step = new EmitParsedReport(State, host, HostUri, ParsedMembers, ParsedPath);
             step.Run();
         }
-
 
         void Run(EmitX86HexHost host)
         {
@@ -130,7 +123,6 @@ namespace Z0
 
             using var step = new EmitX86ApiMembers(Wf, host, HostUri, ParsedMembers);
             step.Run();
-
         }
 
         void Run(EmitCilMembersHost host)
@@ -146,10 +138,9 @@ namespace Z0
                 ref readonly var parsed = ref skip(src,i);
                 var cil = FunctionDynamic.cil(parsed.Address, parsed.OpUri, parsed.Method);
                 dst.WriteLine(cil.Format());
-
             }
 
-            Wf.Raise(new CilCodeSaved(StepId, HostUri, (uint)src.Length, FS.path(ParsedPath.Name), Ct));
+            Wf.Raise(new CilDataSaved(StepId, HostUri, src.Length, CilDataPath, Ct));
         }
 
         void Run(DecodeApiMembersHost host)

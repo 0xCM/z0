@@ -9,9 +9,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    
+
     partial class dvec
-    {                
+    {
         /// <summary>
         /// Rotates each component the source vector leftwards by a specified bitcount
         /// </summary>
@@ -19,8 +19,8 @@ namespace Z0
         /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline), Rotl]
         public static Vector128<byte> vrotl(Vector128<byte> src, [Imm] byte count)
-            => V0d.vor(dvec.vsll(src, count),dvec.vsrl(src, (byte)(8 - count)));             
-        
+            => z.vor(dvec.vsll(src, count),dvec.vsrl(src, (byte)(8 - count)));
+
         /// <summary>
         /// Rotates each component the source vector leftwards by a specified bitcount
         /// </summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline), Rotl]
         public static Vector128<ushort> vrotl(Vector128<ushort> src, [Imm] byte count)
-            => V0d.vor(dvec.vsll(src, count), dvec.vsrl(src, (byte)(16 - count)));             
+            => z.vor(dvec.vsll(src, count), dvec.vsrl(src, (byte)(16 - count)));
 
         /// <summary>
         /// Rotates each component the source vector leftwards by a specified bitcount
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline), Rotl]
         public static Vector128<uint> vrotl(Vector128<uint> src, [Imm] byte count)
-            => V0d.vor(dvec.vsll(src, count), dvec.vsrl(src, (byte)(32-count)));
+            => z.vor(dvec.vsll(src, count), dvec.vsrl(src, (byte)(32-count)));
 
         /// <summary>
         /// Rotates each component the source vector leftwards by a specified bitcount
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline), Rotl]
         public static Vector128<ulong> vrotl(Vector128<ulong> src, [Imm] byte count)
-            => V0d.vor(dvec.vsll(src, count),dvec.vsrl(src, (byte)(64 - count)));             
+            => z.vor(dvec.vsll(src, count),dvec.vsrl(src, (byte)(64 - count)));
 
         /// <summary>
         /// Rotates each component the source vector leftwards by a specified bitcount
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline), Rotl]
         public static Vector256<byte> vrotl(Vector256<byte> src, [Imm] byte count)
-            => V0d.vor(dvec.vsll(src, count),dvec.vsrl(src, (byte)(8 - count)));             
+            => z.vor(dvec.vsll(src, count),dvec.vsrl(src, (byte)(8 - count)));
 
         /// <summary>
         /// Rotates each component the source vector leftwards by a specified bitcount
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline), Rotl]
         public static Vector256<ushort> vrotl(Vector256<ushort> src, [Imm] byte count)
-            => V0d.vor(dvec.vsll(src, count),dvec.vsrl(src, (byte)(16 - count)));             
+            => z.vor(dvec.vsll(src, count),dvec.vsrl(src, (byte)(16 - count)));
 
         /// <summary>
         /// Rotates each component the source vector leftwards by a specified bitcount
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline), Rotl]
         public static Vector256<uint> vrotl(Vector256<uint> src, [Imm] byte count)
-            => dvec.vor(dvec.vsll(src, count),dvec.vsrl(src, (byte)(32 - count)));             
+            => z.vor(dvec.vsll(src, count),dvec.vsrl(src, (byte)(32 - count)));
 
         /// <summary>
         /// Rotates each component the source vector leftwards by a specified bitcount
@@ -82,6 +82,6 @@ namespace Z0
         /// <param name="count">The magnitude of the rotation</param>
         [MethodImpl(Inline), Rotl]
         public static Vector256<ulong> vrotl(Vector256<ulong> src, [Imm] byte count)
-            => dvec.vor(dvec.vsll(src, count),dvec.vsrl(src, (byte)(64 - count)));
+            => z.vor(dvec.vsll(src, count),dvec.vsrl(src, (byte)(64 - count)));
     }
 }

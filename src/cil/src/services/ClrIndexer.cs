@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Linq;
     using System.Reflection;
@@ -11,47 +11,43 @@ namespace Z0
     using System.Collections.Concurrent;
     using System.Runtime.CompilerServices;
 
-    using Z0.CilSpecs;
-
     using static Konst;
     using static z;
 
-    using DnLib = dnlib.DotNet.Emit;
     using Dn = dnlib.DotNet;
+    using api = CilServices;
 
     class ClrIndexer : IClrIndexer
-    {                            
-        public static readonly IClrIndexer Empty = default(EmptyClrIndex);
+    {
+        public static ClrIndexer create(Assembly assembly)
+            => create(assembly.Modules.ToArray());
 
-        public static ClrIndexer Create(Assembly assembly)
-            => Create(assembly.Modules.ToArray());
-
-        static ClrIndexer Create(params Module[] modules)
+        public static ClrIndexer create(params Module[] modules)
             => new ClrIndexer(modules);
 
-        ConcurrentDictionary<int, Type> TypeIndex 
+        ConcurrentDictionary<int, Type> TypeIndex
             = new ConcurrentDictionary<int, Type>();
 
-        ConcurrentDictionary<int, MethodInfo> MethodIndex 
+        ConcurrentDictionary<int, MethodInfo> MethodIndex
             = new ConcurrentDictionary<int, MethodInfo>();
 
-        ConcurrentDictionary<int, Dn.ModuleDefMD> ModuleDefIndex 
+        ConcurrentDictionary<int, Dn.ModuleDefMD> ModuleDefIndex
             = new ConcurrentDictionary<int, Dn.ModuleDefMD>();
-        
-        ConcurrentDictionary<int, Dn.TypeDef> TypeDefIndex 
+
+        ConcurrentDictionary<int, Dn.TypeDef> TypeDefIndex
             = new ConcurrentDictionary<int, Dn.TypeDef>();
-        
-        ConcurrentDictionary<int, Dn.MethodDef> MethodDefIndex 
+
+        ConcurrentDictionary<int, Dn.MethodDef> MethodDefIndex
             = new ConcurrentDictionary<int, Dn.MethodDef>();
 
-        ClrIndexer(params Module[] modules)
+        internal ClrIndexer(params Module[] modules)
         {
             iter(modules, IndexModuleDef);
             iter(modules, IndexClrModule);
         }
 
         public Option<CilFunction> FindCil(int id)
-            => IsEmpty ? default : 
+            => IsEmpty ? default :
                 from def in MethodDefIndex.TryFind(id)
                 from f in GetCilFunction(def)
                 select f;
@@ -64,20 +60,20 @@ namespace Z0
 
         public bool IsEmpty
             => ModuleDefIndex.Count == 0;
-            
+
         void IndexClrMethod(MethodInfo src)
         {
             insist(MethodIndex.TryAdd(src.MetadataToken, src), $"Attempt to include {src} in the index failed");
         }
-        
+
         void IndexClrType(Type src)
         {
-            insist(TypeIndex.TryAdd(src.MetadataToken, src), $"Attempt to include {src} in the index failed");            
+            insist(TypeIndex.TryAdd(src.MetadataToken, src), $"Attempt to include {src} in the index failed");
             iter(src.DeclaredMethods(),IndexClrMethod);
         }
 
         void IndexClrModule(Module mod)
-        {            
+        {
             iter(mod.GetTypes(), IndexClrType);
         }
 
@@ -85,45 +81,14 @@ namespace Z0
         {
             if(!md.HasBody || !md.Body.HasInstructions)
                 return default;
-            
-            var mcil = new CilFunction((int)md.MDToken.Raw, 
-                md.FullName, 
-                ToSpec(md.ImplAttributes), 
-                md.Body.Instructions.Map(ToSpec));
+
+            var f = new CilFunction((int)md.MDToken.Raw, md.FullName, ToSpec(md.ImplAttributes), md.Body.Instructions.Map(api.ToSpec));
             md.FreeMethodBody();
-            return mcil;
-        }
-
-        public static Option<CilFunction> decode(MethodInfo src)
-        {            
-            var mod = src.DeclaringType.Module;
-            var dnMod = Dn.ModuleDefMD.Load(mod);
-            var types = dnMod.GetTypes();
-            foreach(var tDef in types)
-            {
-                foreach(var mDef in tDef.Methods)
-                {
-                    if(!mDef.HasBody || !mDef.Body.HasInstructions)
-                        continue;
-
-                    var token = mDef.MDToken.Raw;
-                    if(token == src.MetadataToken)
-                    {
-                        var mcil = new CilFunction((int)token, 
-                            mDef.FullName, 
-                            ToSpec(mDef.ImplAttributes), 
-                            mDef.Body.Instructions.Map(ToSpec)
-                            );
-                        mDef.FreeMethodBody();
-                        return mcil;                           
-                    }
-                }
-            }
-            return Option.none<CilFunction>();                        
+            return f;
         }
 
         void IndexMethodDef(Dn.MethodDef src)
-        {            
+        {
             insist(MethodDefIndex.TryAdd((int)src.MDToken.Raw, src), $"Attempt to include {src} in the index failed");
         }
 
@@ -140,46 +105,13 @@ namespace Z0
         }
 
         void IndexModuleDef(Module mod)
-        {            
+        {
             var md = AddModuleDef(Dn.ModuleDefMD.Load(mod));
-            iter(md.GetTypes(), IndexTypeDef);                        
-        }        
+            iter(md.GetTypes(), IndexTypeDef);
+        }
 
-        /// <summary>
-        /// Converts the dnlib-defined data structure to a Z0-defined replication of the dnlib structure
-        /// </summary>
-        /// <param name="src">The dnlib source value</param>
         [MethodImpl(Inline)]
-        public static CilSpecs.MethodImplAttributes ToSpec(Dn.MethodImplAttributes src)
-            => (CilSpecs.MethodImplAttributes)src;
-
-        /// <summary>
-        /// Converts the dnlib-defined data structure to a Z0-defined replication of the dnlib structure
-        /// </summary>
-        /// <param name="src">The dnlib source value</param>
-        [MethodImpl(Inline)]
-        public static Instruction ToSpec(DnLib.Instruction src)
-            => new Instruction{
-                OpCode = ToSpec(src.OpCode),
-                Operand = src.Operand,
-                Offset = src.Offset,
-                Formatted = src.ToString()
-            };
-
-        /// <summary>
-        /// Converts the dnlib-defined data structure to a Z0-defined replication of the dnlib structure
-        /// </summary>
-        /// <param name="src">The dnlib source value</param>
-        [MethodImpl(Inline)]
-        static OpCode ToSpec(DnLib.OpCode src)
-            => new OpCode(
-                name: src.Name, 
-                code: (Code)src.Code, 
-                operandType: (OperandType)src.OperandType, 
-                flowControl: (FlowControl)src.FlowControl, 
-                opCodeType:  (OpCodeType)src.OpCodeType, 
-                push: (StackBehaviour)src.StackBehaviourPush, 
-                pop: (StackBehaviour)src.StackBehaviourPop
-                );        
+        public static MethodImplAttributes ToSpec(Dn.MethodImplAttributes src)
+            => (MethodImplAttributes)src;
     }
 }

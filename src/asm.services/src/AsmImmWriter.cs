@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     public readonly struct AsmImmWriter : IAsmImmWriter
     {
-        public ApiHostUri Host {get;}
+        public ApiHostUri Uri {get;}
 
         public FolderPath ArchiveRoot {get;}
 
@@ -26,37 +26,16 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public AsmImmWriter(ApiHostUri host, IAsmFormatter formatter, FolderPath root)
         {
-            Host = host;
+            Uri = host;
             ArchiveRoot = root;
             AsmFormatter = formatter;
             HostArchive = HostCaptureArchive.create(root, host);
-            CilFormatter =  new CilFunctionFormatter(null);
-        }
-
-        public Option<FilePath> SaveAsm(AsmRoutine[] src, bool append)
-        {
-            try
-            {
-                var dst = HostArchive.HostAsmPath;
-                using var writer = new StreamWriter(dst.FullPath, append);
-                for(var i=0; i<src.Length; i++)
-                {
-                    ref readonly var f = ref src[i];
-                    if(f.IsNonEmpty)
-                        writer.Write(AsmFormatter.FormatFunction(f));
-                }
-                return dst;
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-                return Option.none<FilePath>();
-            }
+            CilFormatter =  Cil.formatter();
         }
 
         public Option<FilePath> SaveAsmImm(OpIdentity id, AsmRoutine[] src, bool append)
         {
-            var dst = HostArchive.AsmImmPath(Host.Owner, Host, id);
+            var dst = HostArchive.AsmImmPath(Uri.Owner, Uri, id);
             using var writer = dst.Writer();
             for(var i=0; i<src.Length; i++)
             {
@@ -69,7 +48,7 @@ namespace Z0.Asm
 
         public Option<FilePath> SaveHexImm(OpIdentity id, AsmRoutine[] src, bool append)
         {
-            var path = HostArchive.HexImmPath(Host.Owner, Host, id);
+            var path = HostArchive.HexImmPath(Uri.Owner, Uri, id);
             EncodedX86.save(src.Map(x => x.Code), FS.path(path.Name),append);
             return path;
         }

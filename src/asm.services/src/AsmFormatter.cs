@@ -3,15 +3,15 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-        
+
     public readonly struct AsmFormatter : IAsmFormatter
-    {      
-        public AsmFormatSpec Config {get;}
+    {
+        public AsmFormatConfig Config {get;}
 
         public static IAsmFormatter Default
         {
@@ -20,8 +20,8 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public AsmFormatter(AsmFormatSpec? config)
-            => Config = config ?? AsmFormatSpec.Default;
+        public AsmFormatter(AsmFormatConfig? config)
+            => Config = config ?? AsmFormatConfig.Default;
 
         /// <summary>
         /// Formats the assembly function detail
@@ -31,15 +31,15 @@ namespace Z0.Asm
         public string FormatFunction(AsmRoutine src)
             => AsmRender.format(src, Config);
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         public string FormatInstruction(in MemoryAddress @base, in AsmFxSummary src)
             => AsmRender.format(@base, src, Config);
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         public ReadOnlySpan<string> FormatLines(AsmFxList src)
             => AsmRender.lines(src, Config);
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         public ReadOnlySpan<string> FormatLines(AsmRoutine src)
             => AsmRender.lines(src, Config);
     }
