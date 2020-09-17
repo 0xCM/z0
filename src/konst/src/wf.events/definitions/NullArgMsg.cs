@@ -24,18 +24,4 @@ namespace Z0
         public static Func<string, string, int?, string> Sourced
             => format;
     }
-
-    partial class AppErrors
-    {
-        public static Func<string, string, int?, string> NullArgFormatter
-            => NullArgMsg.Sourced;
-
-        [MethodImpl(Inline), Op]
-        public static string NullArg()
-             => NullArgMsg.MsgText;
-
-        [MethodImpl(Inline), Op, Closures(UInt32k)]
-        public static string NullArg(string caller, string file, int? line)
-             => NullArgMsg.Sourced(caller,file,line);
-    }
 }

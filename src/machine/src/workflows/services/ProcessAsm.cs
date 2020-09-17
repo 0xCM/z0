@@ -17,7 +17,7 @@ namespace Z0
 
     public readonly struct ProcessAsm
     {
-        readonly Dictionary<Mnemonic, ArrayBuilder<AsmRecord>> Index;
+        readonly Dictionary<Mnemonic, ArrayBuilder<AsmRow>> Index;
 
         readonly IWfShell Wf;
 
@@ -53,12 +53,12 @@ namespace Z0
             Asm = state.Asm;
             Encoded = encoded;
             Parser = AsmMnemonicParser.Create();
-            Index = new Dictionary<Mnemonic, ArrayBuilder<AsmRecord>>();
+            Index = new Dictionary<Mnemonic, ArrayBuilder<AsmRow>>();
             Sequence = sys.alloc<int>(1);
             Offset = sys.alloc<uint>(1);
         }
 
-        public AsmRecordSets<Mnemonic> Process()
+        public AsmRowSets<Mnemonic> Process()
         {
             Wf.Running(StepId);
             var locations = span(Encoded.Locations);
@@ -90,11 +90,11 @@ namespace Z0
                 Process(src.Data, instructions.Value);
         }
 
-        AsmRecordSets<Mnemonic> Processed()
+        AsmRowSets<Mnemonic> Processed()
         {
             var keys = Index.Keys.ToArray();
             var count = keys.Length;
-            var sets = new AsmRecordSet<Mnemonic>[count];
+            var sets = new AsmRowSet<Mnemonic>[count];
             for(var i=0; i<count; i++)
             {
                 var key = keys[i];
@@ -130,14 +130,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-
         void Process(Address16 localOffset, Span<byte> encoded, in Instruction asm)
         {
             var mnemonic = asm.Mnemonic;
 
             if(mnemonic != 0)
             {
-                var record = new AsmRecord(
+                var record = new AsmRow(
                     Sequence: NextSequence,
                     Address: asm.IP,
                     LocalOffset: localOffset,

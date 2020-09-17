@@ -11,14 +11,14 @@ namespace Z0
 
     using static Konst;
 
-    public struct ApiAsmProcessor : IApiAsmProcessor
+    public struct WfAsmProcessor : IApiAsmProcessor
     {
         public IWfShell Wf {get;}
 
         public IWfDataBroker<Mnemonic,ApiInstruction> Broker {get;}
 
         [MethodImpl(Inline)]
-        public ApiAsmProcessor(IWfShell context)
+        public WfAsmProcessor(IWfShell context)
         {
             Wf = context;
             Broker = Flow.broker<Mnemonic,ApiInstruction>((int)Mnemonic.LAST);

@@ -12,13 +12,13 @@ namespace Z0.Asm
     /// <summary>
     /// Describes an instruction within the context of the defining api member
     /// </summary>
-    public readonly struct ApiInstruction
+    public readonly struct ApiInstruction : IAsmInstruction<ApiInstruction>
     {
         public X86ApiCode Encoded {get;}
 
         public Instruction Instruction {get;}
 
-        public MemoryAddress BaseAddress {get;}
+        public MemoryAddress Base {get;}
 
         public OpUri OpUri
             => Encoded.OpUri;
@@ -73,7 +73,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public ApiInstruction(MemoryAddress @base, Instruction fx, X86ApiCode encoded)
         {
-            BaseAddress = @base;
+            Base = @base;
             Instruction = fx;
             Encoded = encoded;
         }

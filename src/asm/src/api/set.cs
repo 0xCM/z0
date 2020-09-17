@@ -14,15 +14,15 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static AsmRecordSet<T> set<T>(T key, AsmRecord[] src)
-            => new AsmRecordSet<T>(key,src);
+        public static AsmRowSet<T> set<T>(T key, AsmRow[] src)
+            => new AsmRowSet<T>(key,src);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static AsmTableSeg<T> segment<T>(T key, ArraySegment<AsmRecord> src)
+        public static AsmTableSeg<T> segment<T>(T key, ArraySegment<AsmRow> src)
             => new AsmTableSeg<T>(key,src);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static AsmRecordSets<T> sets<T>(AsmRecordSet<T>[] src)
-            => new AsmRecordSets<T>(src);
+        public static AsmRowSets<T> sets<T>(AsmRowSet<T>[] src)
+            => new AsmRowSets<T>(src);
     }
 }

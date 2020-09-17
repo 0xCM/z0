@@ -11,11 +11,11 @@ namespace Z0
 
     using static Konst;
 
-    using F = Asm.AsmRecordField;
+    using F = Asm.AsmTableField;
 
     partial struct asm
     {
-        public static string format(in AsmRecord src, char delimiter = FieldDelimiter)
+        public static string format(in AsmRow src, char delimiter = FieldDelimiter)
             => format(src, Formatters.dataset<F>(delimiter)).Render();
 
         public static string format(in AsmCall src)
@@ -29,7 +29,7 @@ namespace Z0
             return $"{client_field} | {target} | {offset} | {actual} | {delta}";
         }
 
-        public static ref readonly DatasetFormatter<AsmRecordField> format(in AsmRecord src, in DatasetFormatter<AsmRecordField> dst)
+        public static ref readonly DatasetFormatter<AsmTableField> format(in AsmRow src, in DatasetFormatter<AsmTableField> dst)
         {
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.Address, src.Address);

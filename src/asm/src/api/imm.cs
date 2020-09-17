@@ -18,7 +18,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ImmInfo imminfo(byte value, bool direct)
-            => new ImmInfo(W.W8, value, direct, null);
+            => new ImmInfo(W.W8, value, direct);
 
         [MethodImpl(Inline), Op]
         public static ImmInfo imminfo(short value, bool direct, Sx sek)
@@ -26,7 +26,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ImmInfo imminfo(ushort value, bool direct)
-            => new ImmInfo(W.W16, value, direct, null);
+            => new ImmInfo(W.W16, value, direct);
 
         [MethodImpl(Inline), Op]
         public static ImmInfo imminfo(int value, bool direct, Sx sek)
@@ -69,7 +69,7 @@ namespace Z0
                     return asm.imminfo((int)src.Immediate32to64, false, (W.W32, W.W64));
 			}
 
-            return ImmInfo.Empty;
+            return default;
 		}
 
     }

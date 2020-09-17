@@ -105,5 +105,52 @@ namespace Z0
 
         public static void ThrowBadSize(int expect, int actual, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => sys.@throw(new Exception($"The size {actual} is not aligned with {expect}:{FormatCallsite(caller,file,line)}"));
+
+        public static Func<string, string, int?, string> NullArgFormatter
+            => NullArgMsg.Sourced;
+
+        [MethodImpl(Inline), Op]
+        public static string NullArg()
+             => NullArgMsg.MsgText;
+
+        [MethodImpl(Inline), Op, Closures(UInt32k)]
+        public static string NullArg(string caller, string file, int? line)
+             => NullArgMsg.Sourced(caller,file,line);
+
+        public static void ThrowNotEqual<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw new Exception(neq(lhs,rhs,caller,file,line));
+
+        public static T ThrowNotEqualNoCaller<T>(T lhs, T rhs)
+            => throw new Exception(neq(lhs,rhs));
+
+        public static AppException InvariantFailure(object description, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(AppErrorMsg.InvariantFailure(description, caller, file, line));
+
+        public static void ThrowInvariantFailure(object description, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw InvariantFailure(description, caller, file, line);
+
+        public static void ThrowIfFalse(bool test, object msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        {
+            if(!test)
+                ThrowInvariantFailure(msg, caller, file, line);
+        }
+
+        public static void ThrowOutOfRange<T>(int index, int min, int max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw IndexOutOfRange(index, min, max, caller, file, line);
+
+        public static void ThrowOutOfRange<T>(T value, T min, T max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw IndexOutOfRange(value,min,max,caller,file,line);
+
+        public static IndexOutOfRangeException IndexOutOfRange(int index, int min, int max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new IndexOutOfRangeException(AppErrorMsg.IndexOutOfRange(index, min, max, caller, file, line).ToString());
+
+        public static IndexOutOfRangeException IndexOutOfRange<T>(T value, T min, T max, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new IndexOutOfRangeException($"Value {value} is not between {min} and {max}: line {line}, member {caller} in file {file}");
+
+        public static IndexOutOfRangeException TooManyBytes(int requested, int available, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new IndexOutOfRangeException(AppErrorMsg.TooManyBytes(requested, available, caller, file, line).ToString());
+
+        public static void ThrowTooShort(int dstLen, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => throw new IndexOutOfRangeException($"The target length {dstLen} is tooShort:{FormatCallsite(caller,file,line)}");
     }
 }

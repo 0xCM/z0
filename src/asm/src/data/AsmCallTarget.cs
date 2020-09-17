@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct CallTarget
+    public struct AsmCallTarget
     {
         /// <summary>
         /// The target's identifier
@@ -23,14 +23,14 @@ namespace Z0
         public MemoryAddress Base;
 
         [MethodImpl(Inline)]
-        public CallTarget(MemoryAddress @base)
+        public AsmCallTarget(MemoryAddress @base)
         {
             Id = EmptyString;
             Base = @base;
         }
 
         [MethodImpl(Inline)]
-        public CallTarget(string id, MemoryAddress @base)
+        public AsmCallTarget(string id, MemoryAddress @base)
         {
             Id = id;
             Base = @base;

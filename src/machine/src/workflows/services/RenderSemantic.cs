@@ -139,7 +139,7 @@ namespace Z0
         void Render(ApiInstruction src, MemoryOffset address,  OffsetSequence sequence)
         {
             var id = src.OpId;
-            var @base = src.BaseAddress;
+            var @base = src.Base;
             var fx = src.Instruction;
             var encoded = Format(src.Encoded);
             var location = LineLocation(fx, address, sequence);

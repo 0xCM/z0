@@ -206,15 +206,15 @@ namespace Z0
             }
         }
 
-        void Process(in AsmRecordSet<Mnemonic> src)
+        void Process(in AsmRowSet<Mnemonic> src)
         {
             var count = src.Count;
             var records = span(src.Sequenced);
             var dir = Wf.Paths.ResourceRoot + FolderName.Define("tables") + FolderName.Define("asm");
             var dst = dir + FileName.define(src.Key.ToString(), FileExtensions.Csv);
-            var formatter = Formatters.dataset<AsmRecordField>();
+            var formatter = Formatters.dataset<AsmTableField>();
             using var writer = dst.Writer();
-            writer.WriteLine(Table.header53<AsmRecordField>());
+            writer.WriteLine(Table.header53<AsmTableField>());
             for(var i=0; i<count; i++)
                 writer.WriteLine(asm.format(skip(records,i), formatter).Render());
         }

@@ -79,61 +79,64 @@ namespace Z0
         {
             var mnemonic = fx.Mnemonic;
             var kind = JmpKind.None;
+            var classifier = new AsmJmpClassifier();
+            classifier.Handle(fx);
+            kind = classifier.Result;
 
-            switch(fx.Mnemonic)
-            {
-                case Mnemonic.Ja:
-                    kind = JmpKind.JA;
-                    break;
-                case Mnemonic.Jae:
-                    kind = JmpKind.JAE;
-                    break;
-                case Mnemonic.Jb:
-                    kind = JmpKind.JB;
-                    break;
-                case Mnemonic.Jbe:
-                    kind = JmpKind.JE;
-                    break;
-                case Mnemonic.Jcxz:
-                    kind = JmpKind.JCXZ;
-                    break;
-                case Mnemonic.Je:
-                    kind = JmpKind.JE;
-                    break;
-                case Mnemonic.Jg:
-                    kind = JmpKind.JG;
-                    break;
-                case Mnemonic.Jge:
-                    kind = JmpKind.JGE;
-                    break;
-                case Mnemonic.Jl:
-                    kind = JmpKind.JL;
-                    break;
-                case Mnemonic.Jle:
-                    kind = JmpKind.JLE;
-                    break;
-                case Mnemonic.Jmp:
-                    kind = JmpKind.JMP;
-                    break;
-                case Mnemonic.Jne:
-                    kind = JmpKind.JNE;
-                    break;
-                case Mnemonic.Jno:
-                    kind = JmpKind.JNO;
-                    break;
-                case Mnemonic.Jnp:
-                    kind = JmpKind.JNP;
-                    break;
-                case Mnemonic.Jns:
-                    kind = JmpKind.JNS;
-                    break;
-                case Mnemonic.Jo:
-                    kind = JmpKind.JO;
-                    break;
-                case Mnemonic.Jp:
-                    kind = JmpKind.JP;
-                    break;
-            }
+            // switch(fx.Mnemonic)
+            // {
+            //     case Mnemonic.Ja:
+            //         kind = JmpKind.JA;
+            //         break;
+            //     case Mnemonic.Jae:
+            //         kind = JmpKind.JAE;
+            //         break;
+            //     case Mnemonic.Jb:
+            //         kind = JmpKind.JB;
+            //         break;
+            //     case Mnemonic.Jbe:
+            //         kind = JmpKind.JE;
+            //         break;
+            //     case Mnemonic.Jcxz:
+            //         kind = JmpKind.JCXZ;
+            //         break;
+            //     case Mnemonic.Je:
+            //         kind = JmpKind.JE;
+            //         break;
+            //     case Mnemonic.Jg:
+            //         kind = JmpKind.JG;
+            //         break;
+            //     case Mnemonic.Jge:
+            //         kind = JmpKind.JGE;
+            //         break;
+            //     case Mnemonic.Jl:
+            //         kind = JmpKind.JL;
+            //         break;
+            //     case Mnemonic.Jle:
+            //         kind = JmpKind.JLE;
+            //         break;
+            //     case Mnemonic.Jmp:
+            //         kind = JmpKind.JMP;
+            //         break;
+            //     case Mnemonic.Jne:
+            //         kind = JmpKind.JNE;
+            //         break;
+            //     case Mnemonic.Jno:
+            //         kind = JmpKind.JNO;
+            //         break;
+            //     case Mnemonic.Jnp:
+            //         kind = JmpKind.JNP;
+            //         break;
+            //     case Mnemonic.Jns:
+            //         kind = JmpKind.JNS;
+            //         break;
+            //     case Mnemonic.Jo:
+            //         kind = JmpKind.JO;
+            //         break;
+            //     case Mnemonic.Jp:
+            //         kind = JmpKind.JP;
+            //         break;
+            // }
 
             var dst = default(JmpInfo);
             Fill(fx, kind, ref dst);
@@ -174,11 +177,14 @@ namespace Z0
             SaveCollected();
         }
 
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[7]{16,16,16,16,16,16,32};
+
         void SaveCollected()
         {
             if(Collected.Count != 0)
             {
-                var widths = JmpInfo.RenderWidths;
+                var widths = RenderWidths;
                 var formatter = Table.rowformatter<JmpInfo>(widths);
                 using var writer = Target.Writer();
                 writer.WriteLine(formatter.FormatHeader());
@@ -202,9 +208,9 @@ namespace Z0
 
         void Fill(in ApiInstruction src, JmpKind jk, ref JmpInfo dst)
         {
-            var target = asm.branch(src.BaseAddress, src.Instruction, 0);
+            var target = asm.branch(src.Base, src.Instruction, 0);
             dst.Kind = jk;
-            dst.Base = src.BaseAddress;
+            dst.Base = src.Base;
             dst.Source = src.IP;
             dst.FxSize = src.Encoded.Size;
             dst.CallSite = dst.Source + dst.FxSize;

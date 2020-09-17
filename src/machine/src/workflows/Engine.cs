@@ -47,7 +47,7 @@ namespace Z0
                 Run(new EmitPeHeadersStep());
                 Run(new EmitImageConstantsStep());
                 Run(new EmitImageDataStep());
-                Run(new EmitStringRecordsStep());
+                Run(new EmitStringRecordHost());
                 Run(new EmitProjectDocsHost());
                 Run(new EmitResBytesStep());
                 Run(new EmitImageBlobsStep());
@@ -132,9 +132,9 @@ namespace Z0
             step.Run();
         }
 
-        void Run(EmitStringRecordsStep host)
+        void Run(EmitStringRecordHost host)
         {
-            using var step = new EmitStringRecords(Wf, Wf.Api.Parts, Ct);
+            using var step = new EmitStringRecords(Wf, host);
             step.Run();
         }
 
@@ -151,9 +151,10 @@ namespace Z0
         }
 
         void Run(ProcessPartFilesHost host)
-        {
-            using var step = new ProcessPartFiles(Wf, Asm, Ct);
-            step.Run();
-        }
+            => host.Run(Wf,Asm);
+        // {
+        //     using var step = new ProcessPartFiles(Wf, Asm, Ct);
+        //     step.Run();
+        // }
     }
 }

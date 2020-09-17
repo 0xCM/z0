@@ -76,8 +76,8 @@ namespace Z0
             where R : ITextual
                 => Raise(new WfStatus<C,R>(f, result, Ct));
 
-        void Warn<T>(WfStepId id, T content)
-            => Raise(warn(id, content, Ct));
+        void Warn<T>(WfStepId step, T content)
+            => Raise(warn(step, content, Ct));
 
         void Error(Exception e, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
             => Raise(WfEvents.error(e, Ct, caller, file, line));
@@ -90,9 +90,6 @@ namespace Z0
 
         void Error<T>(WfStepId step, T body)
             => Raise(error(step, body, Ct));
-
-        void Error(string actor, Exception e, CorrelationToken? ct = null)
-            => Raise(error(actor, e, ct ?? Ct));
 
         void Error(WfStepId step, Exception e)
             => Raise(WfEvents.error(step, e, Ct));
@@ -133,7 +130,6 @@ namespace Z0
         void Disposed<H>(H host)
             where H : WfHost<H>, new()
                 => Raise(WfEvents.disposed(host.Id, Ct));
-
 
         // ~ Initialization
         // ~ ---------------------------------------------------------------------------

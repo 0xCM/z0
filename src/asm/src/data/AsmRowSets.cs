@@ -9,23 +9,24 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmTableSeg<T>
+    public readonly struct AsmRowSets<T>
     {
-        public readonly T Key;
-
-        public readonly ArraySegment<AsmRow> Content;
+        readonly AsmRowSet<T>[] Data;
 
         [MethodImpl(Inline)]
-        public AsmTableSeg(T key, ArraySegment<AsmRow> data)
+        public AsmRowSets(params AsmRowSet<T>[] src)
+            => Data = src;
+
+        public ReadOnlySpan<AsmRowSet<T>> View
         {
-            Key = key;
-            Content = data;
+            [MethodImpl(Inline)]
+            get => Data;
         }
 
         public int Count
         {
             [MethodImpl(Inline)]
-            get => Content.Count;
+            get => Data.Length;
         }
     }
 }

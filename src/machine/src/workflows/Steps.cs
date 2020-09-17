@@ -13,6 +13,25 @@ namespace Z0
     using static z;
 
     [WfHost]
+    public class RecaptureHost : WfHost<RecaptureHost>
+    {
+
+
+    }
+
+    [WfHost]
+    public sealed class EmitDatasetsHost : WfHost<EmitDatasetsHost>
+    {
+
+    }
+
+    [WfHost]
+    public sealed class EmitMetadataSetsHost : WfHost<EmitMetadataSetsHost>
+    {
+
+    }
+
+    [WfHost]
     public sealed class EmitFieldMetadataHost : WfHost<EmitFieldMetadataHost>
     {
         public const string StepName = nameof(EmitFieldMetadata);
@@ -39,13 +58,8 @@ namespace Z0
     [WfHost]
     public class CreateGlobalIndexStep : WfHost<CreateGlobalIndexStep>
     {
-        public const string StepName = nameof(CreateGlobalIndex);
-
-        public override string Identifier => StepName;
-
         public override void Run(IWfShell shell)
             => throw missing();
-
     }
 
     [Step]
@@ -58,15 +72,17 @@ namespace Z0
     [WfHost]
     public class ProcessPartFilesHost : WfHost<ProcessPartFilesHost,IAsmContext>
     {
-        public const string StepName = nameof(ProcessPartFiles);
-
-        public override string Identifier => StepName;
-
         public override void Run(IWfShell wf, IAsmContext state)
         {
             using var step = new ProcessPartFiles(wf, state, wf.Ct);
             step.Run();
         }
+    }
+
+    [WfHost]
+    public sealed class CaptureResBytesHost : WfHost<CaptureResBytesHost>
+    {
+
     }
 
     [Step]
@@ -76,11 +92,6 @@ namespace Z0
             => step<EmitCallIndexStep>();
     }
 
-    [WfHost]
-    public sealed class CaptureResBytesStep : WfHost<CaptureResBytesStep>
-    {
-
-    }
 
     [Step]
     public readonly struct EmitBitMasksStep : IWfStep<EmitBitMasksStep>
@@ -108,14 +119,6 @@ namespace Z0
         public const string DatasetExt = EmissionType + ExtSep +  DataExt;
     }
 
-    [Step]
-    public class RecaptureStep : WfHost<RecaptureStep>
-    {
-        public override void Run(IWfShell shell)
-        {
-            throw new NotImplementedException();
-        }
-    }
 
     [Step]
     public readonly struct ProcessAsmStep : IWfStep<ProcessAsmStep>
@@ -170,7 +173,7 @@ namespace Z0
     }
 
     [Step]
-    public readonly struct EmitStringRecordsStep : IWfStep<EmitStringRecordsStep>
+    public sealed class EmitStringRecordHost : WfHost<EmitStringRecordHost>
     {
         public const string DataType = "strings";
 
@@ -191,19 +194,19 @@ namespace Z0
         public const string SystemKindExt = SystemKind + ExtSep + DataTypeExt;
 
         public static WfStepId StepId
-            => step<EmitStringRecordsStep>();
+            => step<EmitStringRecordHost>();
     }
 
     [Step]
     public readonly struct EmitPartStringsStep : IWfStep<EmitPartStringsStep>
     {
-        public const string EmissionType = EmitStringRecordsStep.DataType;
+        public const string EmissionType = EmitStringRecordHost.DataType;
 
         public static WfStepId StepId
             => Flow.step<EmitPartStringsStep>();
 
         public static string ExtName(PartStringKind kind)
-            => (kind == PartStringKind.System ? EmitStringRecordsStep.SystemKindExt : EmitStringRecordsStep.UserKindExt).ToLower();
+            => (kind == PartStringKind.System ? EmitStringRecordHost.SystemKindExt : EmitStringRecordHost.UserKindExt).ToLower();
     }
 
     [Step]
@@ -248,11 +251,6 @@ namespace Z0
             => Flow.step<ParseAsmFilesStep>();
     }
 
-    [Step]
-    public sealed class EmitDatasetsStep : WfHost<EmitDatasetsStep>
-    {
-
-    }
 
     [Step]
     public readonly struct EmitImageDataStep : IWfStep<EmitImageDataStep>
@@ -261,11 +259,6 @@ namespace Z0
             => step<EmitImageDataStep>();
     }
 
-    [WfHost]
-    public sealed class EmitMetadataSetsHost : WfHost<EmitMetadataSetsHost>
-    {
-
-    }
 
     [Step]
     public readonly struct EmitStepListStep : IWfStep<EmitStepListStep>

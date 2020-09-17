@@ -5,9 +5,7 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Collections;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Konst;
 
@@ -71,7 +69,7 @@ namespace Z0.Asm
             Uri = src.Length != 0 ? src[0].OpUri : OpUri.Empty;
             Instructions = src;
             HostAddress = @base;
-            BaseAddress = src.Length != 0 ? src[0].BaseAddress : MemoryAddress.Empty;
+            BaseAddress = src.Length != 0 ? src[0].Base : MemoryAddress.Empty;
         }
 
         public static ApiRoutine Empty

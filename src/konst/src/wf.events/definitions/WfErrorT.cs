@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfError(string actor, T data, CorrelationToken ct, AppMsgSource source)
         {
-            EventId = evid(EventName, ct);
+            EventId = (EventName, ct);
             StepId = WfStepId.Empty;
             Actor = actor;
             Data = data;

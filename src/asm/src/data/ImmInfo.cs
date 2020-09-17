@@ -45,13 +45,23 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public ImmInfo(NumericWidth size, long value, bool direct, Sx? sek = null)
+        public ImmInfo(NumericWidth size, long value, bool direct)
         {
             Width = size;
             Value = (ulong)value;
             Signed = true;
             Direct = direct;
-            SignExtension = sek ?? Sx.None;
+            SignExtension = Sx.None;
+        }
+
+        [MethodImpl(Inline)]
+        public ImmInfo(NumericWidth size, long value, bool direct, Sx sek)
+        {
+            Width = size;
+            Value = (ulong)value;
+            Signed = true;
+            Direct = direct;
+            SignExtension = sek;
         }
 
         public bool IsEmpty
@@ -65,8 +75,5 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => !IsEmpty;
         }
-
-        public static ImmInfo Empty
-            => default;
     }
 }

@@ -23,10 +23,6 @@ namespace Z0
         public Textual<T> Content {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator WfTermEvent(WfTermEvent<T> src)
-            => new WfTermEvent(src.EventId, src.Actor, src.StepId, src.Content.Text, src.Flair);
-
-        [MethodImpl(Inline)]
         public WfTermEvent(WfEventId e, WfActor actor, WfStepId step, Textual<T> body,  FlairKind flair)
         {
             EventId = e;

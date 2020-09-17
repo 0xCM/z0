@@ -35,100 +35,100 @@ namespace Z0
             Wf.Disposed(Host.Id);
         }
 
-        public void Run()
-        {
-            Wf.Running(Host.Id);
-            Run(new EmitImageConstantsStep());
-            Run(new EmitPeHeadersStep());
-            Run(new EmitPartCil());
-            Run(new EmitImageDataStep());
-            Run(new EmitStringRecordsStep());
-            Run(new EmitImageBlobsStep());
-            Run(new EmitFieldMetadataHost());
-            Wf.Ran(Host.Id);
-        }
+        // public void Run()
+        // {
+        //     Wf.Running(Host.Id);
+        //     Run(new EmitImageConstantsStep());
+        //     Run(new EmitPeHeadersStep());
+        //     Run(new EmitPartCil());
+        //     Run(new EmitImageDataStep());
+        //     Run(new EmitStringRecordsStep());
+        //     Run(new EmitImageBlobsStep());
+        //     Run(new EmitFieldMetadataHost());
+        //     Wf.Ran(Host.Id);
+        // }
 
-        void Run(EmitImageConstantsStep kind)
-        {
-            try
-            {
-                using var step = new EmitImageConstants(Wf, Parts, Ct);
-                step.Run();
-            }
-            catch(Exception e)
-            {
-                Wf.Error(kind.GetType(), e);
-            }
-        }
+        // void Run(EmitImageConstantsStep kind)
+        // {
+        //     try
+        //     {
+        //         using var step = new EmitImageConstants(Wf, Parts, Ct);
+        //         step.Run();
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         Wf.Error(kind.GetType(), e);
+        //     }
+        // }
 
-        void Run(EmitPeHeadersStep kind)
-        {
-            try
-            {
-                using var step = new EmitPeHeaders(Wf, Parts, Ct);
-                step.Run();
-            }
-            catch(Exception e)
-            {
-                Wf.Error(kind.GetType(), e);
-            }
-        }
+        // void Run(EmitPeHeadersStep kind)
+        // {
+        //     try
+        //     {
+        //         using var step = new EmitPeHeaders(Wf, Parts, Ct);
+        //         step.Run();
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         Wf.Error(kind.GetType(), e);
+        //     }
+        // }
 
-        void Run(EmitPartCil kind)
-        {
-            try
-            {
-                // using var step = new EmitPartCil(Wf, Parts, Ct);
-                // step.Run();
-            }
-            catch(Exception e)
-            {
-                Wf.Error(typeof(EmitPartCil), e);
-            }
-        }
+        // void Run(EmitPartCil kind)
+        // {
+        //     try
+        //     {
+        //         // using var step = new EmitPartCil(Wf, Parts, Ct);
+        //         // step.Run();
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         Wf.Error(typeof(EmitPartCil), e);
+        //     }
+        // }
 
-        void Run(EmitImageDataStep kind)
-        {
-            try
-            {
-                using var step = new EmitImageData(Wf, Parts, Ct);
-                step.Run();
-            }
-            catch(Exception e)
-            {
-                Wf.Error(kind.GetType(), e);
-            }
-        }
+        // void Run(EmitImageDataStep kind)
+        // {
+        //     try
+        //     {
+        //         using var step = new EmitImageData(Wf, Parts, Ct);
+        //         step.Run();
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         Wf.Error(kind.GetType(), e);
+        //     }
+        // }
 
-        void Run(EmitStringRecordsStep kind)
-        {
-            try
-            {
-                using var step = new EmitStringRecords(Wf, Parts, Ct);
-                step.Run();
-            }
-            catch(Exception e)
-            {
-                Wf.Error(kind.GetType(), e);
-            }
-        }
+        // void Run(EmitStringRecordsStep host)
+        // {
+        //     try
+        //     {
+        //         using var step = new EmitStringRecords(Wf,host);
+        //         step.Run();
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         Wf.Error(host.GetType(), e);
+        //     }
+        // }
 
-        void Run(EmitImageBlobsStep kind)
-        {
+        // void Run(EmitImageBlobsStep kind)
+        // {
 
-            try
-            {
-                using var step = new EmitImageBlobs(Wf, Parts, Ct);
-                step.Run();
-            }
-            catch(Exception e)
-            {
-                Wf.Error(e, Ct);
-            }
-        }
+        //     try
+        //     {
+        //         using var step = new EmitImageBlobs(Wf, Parts, Ct);
+        //         step.Run();
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         Wf.Error(e, Ct);
+        //     }
+        // }
 
-        void Run(EmitFieldMetadataHost host)
-            => host.Run(Wf);
+        // void Run(EmitFieldMetadataHost host)
+        //     => host.Run(Wf);
 
     }
 }

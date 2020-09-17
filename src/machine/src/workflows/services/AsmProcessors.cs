@@ -34,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static IApiAsmProcessor create(IWfShell wf)
         {
-            var processor = new ApiAsmProcessor(wf) as IApiAsmProcessor;
+            var processor = new WfAsmProcessor(wf) as IApiAsmProcessor;
             processor.Connect();
             return processor;
         }

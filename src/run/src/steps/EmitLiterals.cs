@@ -57,7 +57,7 @@ namespace Z0
                 }
                 catch(Exception e)
                 {
-                    Wf.Warn(Host.Id, e.Message);
+                    Wf.Warn(Host, e.Message);
                 }
             }
             Emitted = src;
@@ -83,13 +83,13 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(e);
+                Wf.Error(Host, e);
             }
         }
 
         public void Dispose()
         {
-           Wf.Disposed(Host.Id);
+           Wf.Disposed(Host);
         }
     }
 }

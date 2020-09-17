@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static EmitStringRecordsStep;
+    using static EmitStringRecordHost;
 
     public ref struct EmitStringRecords
     {
@@ -25,18 +25,22 @@ namespace Z0
 
         readonly IWfShell Wf;
 
+        readonly EmitStringRecordHost Host;
+
         readonly CorrelationToken Ct;
+
 
         readonly IPart[] Parts;
 
         [MethodImpl(Inline)]
-        public EmitStringRecords(IWfShell wf, IPart[] parts, CorrelationToken ct)
+        public EmitStringRecords(IWfShell wf, EmitStringRecordHost host)
         {
             Wf = wf;
-            Ct = ct;
-            Parts = parts;
+            Ct = Wf.Ct;
+            Host = host;
+            Parts = Wf.Api.Parts;
             EmissionCount = 0;
-            PartCount = (uint)parts.Length;
+            PartCount = (uint)Parts.Length;
             Wf.Created(StepId);
         }
 

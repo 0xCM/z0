@@ -15,7 +15,7 @@ namespace Z0.Asm
     // using api = asm;
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct AsmRecord //: ITabular<F,R>, ITable<AsmRecordField,AsmRecord>
+    public struct AsmRow
     {
         public int Sequence;
 
@@ -40,7 +40,7 @@ namespace Z0.Asm
         public OpCodeId OpCodeId;
 
         [MethodImpl(Inline)]
-        public AsmRecord(
+        public AsmRow(
             int Sequence,
             MemoryAddress Address,
             Address32 GlobalOffset,

@@ -22,11 +22,11 @@ namespace Z0
             => new Branch(kind, dst, size, selector);
 
         [MethodImpl(Inline), Op]
-        public static CallTarget target(MemoryAddress @base)
-            => new CallTarget(@base);
+        public static AsmCallTarget target(MemoryAddress @base)
+            => new AsmCallTarget(@base);
 
         [MethodImpl(Inline), Op]
-        public static CallTarget target(string id, MemoryAddress @base)
-            => new CallTarget(id, @base);
+        public static AsmCallTarget target(string id, MemoryAddress @base)
+            => new AsmCallTarget(id, @base);
     }
 }

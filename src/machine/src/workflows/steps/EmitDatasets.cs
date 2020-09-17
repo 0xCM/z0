@@ -20,9 +20,9 @@ namespace Z0
 
         readonly bool Recapture;
 
-        readonly EmitDatasetsStep Host;
+        readonly EmitDatasetsHost Host;
 
-        public EmitDatasets(IWfShell wf, EmitDatasetsStep host)
+        public EmitDatasets(IWfShell wf, EmitDatasetsHost host)
         {
             Wf = wf;
             Host = host;

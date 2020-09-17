@@ -73,7 +73,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(StepName, e, Ct);
+                Wf.Error(StepId, e);
            }
         }
 
@@ -128,7 +128,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(StepName, e, Ct);
+                Wf.Error(StepId, e);
             }
         }
     }

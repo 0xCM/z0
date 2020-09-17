@@ -27,15 +27,15 @@ namespace Z0.Asm
         /// <summary>
         /// The argument supplied to the call instruction
         /// </summary>
-        public CallTarget CalledTarget;
+        public AsmCallTarget CalledTarget;
 
         /// <summary>
         /// The base address of the intended target, magically-known
         /// </summary>
-        public CallTarget ActualTarget;
+        public AsmCallTarget ActualTarget;
 
         [MethodImpl(Inline)]
-        public AsmCall(CallClient client, ushort site, CallTarget called, CallTarget actual = default)
+        public AsmCall(CallClient client, ushort site, AsmCallTarget called, AsmCallTarget actual = default)
         {
             Client = client;
             CallSite = site;

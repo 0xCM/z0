@@ -9,33 +9,33 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmRecordSet<T>
+    public readonly struct AsmRowSet<T>
     {
         public readonly T Key;
 
-        readonly AsmRecord[] Records;
+        readonly AsmRow[] Rows;
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmRecord[](AsmRecordSet<T> src)
-            => src.Records;
+        public static implicit operator AsmRow[](AsmRowSet<T> src)
+            => src.Rows;
 
         [MethodImpl(Inline)]
-        public AsmRecordSet(T key, AsmRecord[] data)
+        public AsmRowSet(T key, AsmRow[] data)
         {
             Key = key;
-            Records = data;
+            Rows = data;
         }
 
-        public AsmRecord[] Sequenced
+        public AsmRow[] Sequenced
         {
             [MethodImpl(Inline)]
-            get => Records.OrderBy(x => x.Sequence);
+            get => Rows.OrderBy(x => x.Sequence);
         }
 
         public int Count
         {
             [MethodImpl(Inline)]
-            get => Records.Length;
+            get => Rows.Length;
         }
     }
 }

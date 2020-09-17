@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using W = AsmOpCodeFieldWidths;
 
-    public enum AsmRecordField : uint
+    public enum AsmTableField : uint
     {
         Sequence = 0 | (W.Sequence << WidthOffset),
 
@@ -21,9 +21,9 @@ namespace Z0.Asm
 
         LocalOffset = 3 | (16 << WidthOffset),
 
-        Mnemonic = 4 | (W.Mnemonic << WidthOffset),
+        Mnemonic = 4 | (16 << WidthOffset),
 
-        OpCode = 5 | (W.OpCode << WidthOffset),
+        OpCode = 5 | (16 << WidthOffset),
 
         Instruction = 6 | (W.Instruction << WidthOffset),
 

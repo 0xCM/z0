@@ -13,11 +13,6 @@ namespace Z0
 
     public struct JmpInfo
     {
-        public const byte FieldCount = 7;
-
-        public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{16,16,16,16,16,16,32};
-
         public MemoryAddress Base;
 
         public MemoryAddress Source;
@@ -32,5 +27,4 @@ namespace Z0
 
         public string Asm;
     }
-
 }

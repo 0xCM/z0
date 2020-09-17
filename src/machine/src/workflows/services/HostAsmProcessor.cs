@@ -10,6 +10,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
+    using static z;
 
     public readonly struct HostAsmProcessor : IAsmDataProcessor<AsmHandlerKind,ApiHostRoutines>
     {
@@ -33,11 +34,14 @@ namespace Z0
         {
             var processor = AsmProcessors.create(Wf);
             var count = Source.RoutineCount;
+            var routines = @readonly(Source.Routines);
             for(var j=0; j<count; j++)
             {
-                ref readonly var member = ref Source[j];
-                for(var k=0; k<member.Length; k++)
-                    processor.Process(member[k]);
+                ref readonly var routine = ref skip(routines,j);
+                var instructions = routine.Instructions.View;
+                var iCount = instructions.Length;
+                for(var k=0; k<iCount; k++)
+                    processor.Process(skip(instructions,k));
             }
         }
 
@@ -45,11 +49,15 @@ namespace Z0
         public void Process(ApiHostRoutines src)
         {
             var processor = AsmProcessors.create(Wf);
-            for(var j=0; j<Source.RoutineCount; j++)
+            var routines = @readonly(src.Routines);
+            var count = routines.Length;
+            for(var j=0; j<count; j++)
             {
-                ref readonly var member = ref src[j];
-                for(var k=0; k<member.Length; k++)
-                    processor.Process(member[k]);
+                ref readonly var routine = ref skip(routines,j);
+                var instructions = routine.Instructions.View;
+                var iCount = instructions.Length;
+                for(var k=0; k<iCount; k++)
+                    processor.Process(skip(instructions,k));
             }
         }
     }
