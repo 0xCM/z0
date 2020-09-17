@@ -37,11 +37,11 @@ namespace Z0
             dst.Delimit(F.LocalOffset, src.LocalOffset);
             dst.Delimit(F.Mnemonic, src.Mnemonic);
             dst.Delimit(F.OpCode, src.OpCode);
+            dst.Delimit(F.Instruction, src.Instruction);
+            dst.Delimit(F.SourceCode, src.SourceCode);
             dst.Delimit(F.Encoded, src.Encoded);
-            dst.Delimit(F.InstructionFormat, src.InstructionFormat);
-            dst.Delimit(F.InstructionCode, src.InstructionCode);
             dst.Delimit(F.CpuId, src.CpuId);
-            dst.Delimit(F.CodeId, src.CodeId);
+            dst.Delimit(F.OpCodeId, src.OpCodeId);
             return ref dst;
         }
     }

@@ -9,26 +9,25 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-
     using static z;
 
-    partial struct Literals
+    partial class Enums
     {
         [Op]
-        public static ReadOnlySpan<EnumLiteralRecord> records(PartId part, Type src)
+        public static ReadOnlySpan<EnumLiteralRow> rows(PartId part, Type src)
         {
             var fields = span(src.LiteralFields());
-            var dst = span<EnumLiteralRecord>(fields.Length);
+            var dst = span<EnumLiteralRow>(fields.Length);
             var tc = PrimalKinds.ecode(src);
-            store(part, src, tc, fields, dst);
+            Enums.store(part, src, tc, fields, dst);
             return dst;
         }
 
         [Op]
-        public static Span<EnumLiteralRecord> records(TextDoc src)
+        public static Span<EnumLiteralRow> rows(TextDoc src)
         {
             var rc = src.RowCount;
-            var dst = z.alloc<EnumLiteralRecord>(rc);
+            var dst = z.alloc<EnumLiteralRow>(rc);
             for(var i=0; i<rc; i++)
             {
                 ref readonly var row = ref src[i];

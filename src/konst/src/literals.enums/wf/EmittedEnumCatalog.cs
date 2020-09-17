@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static RenderPatterns;
 
     [Event]
     public readonly struct EmittedEnumCatalog : IWfEvent<EmittedEnumCatalog>
@@ -17,19 +16,23 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public readonly FilePath TargetPath;
+        public readonly FS.FilePath TargetPath;
 
         public readonly Count Count;
 
+        public FlairKind Flair {get;}
+
         [MethodImpl(Inline)]
-        public EmittedEnumCatalog(FilePath target, uint count, CorrelationToken ct)
+        public EmittedEnumCatalog(WfStepId step, FS.FilePath target, uint count, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
         {
-            EventId = WfEventId.define(EventName, ct);
+            EventId = (EventName, step, ct);
             TargetPath = target;
             Count = count;
+            Flair = flair;
         }
 
+        [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx3, EventId, Count, TargetPath);
+            => Render.format(EventId, Count, TargetPath);
     }
 }

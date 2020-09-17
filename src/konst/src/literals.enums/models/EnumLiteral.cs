@@ -11,7 +11,6 @@ namespace Z0
 
     using F = EnumLiteralField;
 
-    [ApiClass(DataStructure)]
     public struct EnumLiteral
     {
         public string TypeName;

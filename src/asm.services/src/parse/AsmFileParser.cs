@@ -13,6 +13,7 @@ namespace Z0.Asm
     [ApiHost]
     public readonly struct AsmFileParser
     {
+        #if AYB
         [Op]
         public static void ParseAsmFile(FilePath src, Action<int,AsmStatementEncoding[]> AsmParsed, Action<AsmRoutineHeader> HeaderParsed = null)
         {
@@ -66,5 +67,7 @@ namespace Z0.Asm
                 commands.Add(parsed.Value);
             }
         }
+    #endif
     }
+
 }

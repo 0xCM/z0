@@ -170,14 +170,6 @@ namespace Z0
     }
 
     [Step]
-    public readonly struct EmitEnumCatalogStep : IWfStep<EmitEnumCatalogStep>
-    {
-        public static WfStepId StepId
-            => step<EmitEnumCatalogStep>();
-    }
-
-
-    [Step]
     public readonly struct EmitStringRecordsStep : IWfStep<EmitStringRecordsStep>
     {
         public const string DataType = "strings";

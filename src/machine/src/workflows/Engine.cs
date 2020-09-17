@@ -52,7 +52,7 @@ namespace Z0
                 Run(new EmitResBytesStep());
                 Run(new EmitImageBlobsStep());
                 Run(new EmitPartCilStep());
-                Run(new EmitEnumCatalogStep());
+                Run(new EmitEnumCatalogHost());
                 Run(new EmitFieldLiteralsHost());
                 Run(new EmitContentCatalogStep());
                 Run(new EmitBitMasksStep());
@@ -90,11 +90,13 @@ namespace Z0
         void Run(EmitFieldMetadataHost host)
             => host.Run(Wf);
 
-        void Run(EmitEnumCatalogStep host)
-        {
-            using var step = new EmitEnumCatalog(Wf, Ct);
-            step.Run();
-        }
+        void Run(EmitEnumCatalogHost host)
+            => host.Run(Wf);
+
+        // {
+        //     using var step = new EmitEnumCatalog(Wf, host);
+        //     step.Run();
+        // }
 
         void Run(EmitFieldLiteralsHost host)
             => host.Run(Wf);

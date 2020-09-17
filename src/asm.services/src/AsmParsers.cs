@@ -25,9 +25,9 @@ namespace Z0.Asm
             => Enums.Parse(src, Mnemonic.INVALID);
 
         [MethodImpl(Inline), Op]
-        public static ParseResult<AsmStatementEncoding> statement(string src, ref uint seq)
+        public static ParseResult<AsmStatementInfo> statement(string src, ref uint seq)
         {
-            var fail = ParseResult<AsmStatementEncoding>.Fail(src);
+            var fail = ParseResult<AsmStatementInfo>.Fail(src);
 
             if(IsBlankLine(src))
                 return fail;
@@ -56,7 +56,8 @@ namespace Z0.Asm
             if(encoded.Failed)
                 return fail;
 
-            return ParseResult.Success(src, new AsmStatementEncoding(seq++, statement.Value, new AsmSpecifier(pattern, code), encoded.Value));
+            var specifier = new AsmSpecifier(pattern, code);
+            return ParseResult.Success(src, new AsmStatementInfo(seq++, statement.Value, specifier, encoded.Value));
         }
 
         [MethodImpl(Inline), Nlz]

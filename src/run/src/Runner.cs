@@ -297,7 +297,7 @@ namespace Z0
             }
         }
 
-        public void Run()
+        void IceStuff()
         {
             Wf.Running(StepId);
 
@@ -308,6 +308,11 @@ namespace Z0
                 Wf.DataRow(i);
 
             Wf.Ran(StepId);
+        }
+
+        public void Run()
+        {
+            new EmitAsmOpCodesHost().Configure(Wf.Paths.DbRoot + FS.file("AsmOpcodes",GlobalExtensions.Csv)).Run(Wf);
         }
     }
 }

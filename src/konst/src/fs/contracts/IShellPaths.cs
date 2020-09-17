@@ -33,6 +33,9 @@ namespace Z0
         FolderPath LogRoot
             => EnvVars.Common.LogRoot;
 
+        FS.FolderPath DbRoot
+            => FS.dir(LogRoot.Name) + FS.folder("db");
+
         FS.FolderPath AppLogRoot
             => FS.dir(text.format("{0}/apps/{1}/logs", LogRoot.Name, ShellName));
 

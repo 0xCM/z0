@@ -18,10 +18,19 @@ namespace Z0
 
         readonly FS.FilePath Target;
 
-        public EmitAsmOpCodes(IWfShell context, FS.FilePath dst)
+        readonly EmitAsmOpCodesHost Host;
+
+        [MethodImpl(Inline)]
+        public EmitAsmOpCodes(IWfShell context, EmitAsmOpCodesHost host, FS.FilePath dst)
         {
             Wf = context;
+            Host = host;
             Target = dst;
+        }
+
+        public void Dispose()
+        {
+            Wf.Disposed(Host);
         }
 
         public void Run()

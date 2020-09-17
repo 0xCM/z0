@@ -13,7 +13,7 @@ namespace Z0.Asm
 
     public class t_opcodes : t_asmd<t_opcodes>
     {
-        void emit(ReadOnlySpan<AsmFxPattern> src)
+        void emit(ReadOnlySpan<AsmInstructionPattern> src)
         {
             var dstPath = CasePath($"InstructionExpression");
             using var writer = dstPath.Writer();
@@ -25,7 +25,7 @@ namespace Z0.Asm
             }
         }
 
-        void emit(ReadOnlySpan<AsmOpCodeId> src)
+        void emit(ReadOnlySpan<AsmOpCodePattern> src)
         {
             var dstPath = CasePath($"OpCodeIdentifiers");
             using var writer = dstPath.Writer();

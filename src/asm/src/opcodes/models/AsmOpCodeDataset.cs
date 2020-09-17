@@ -13,9 +13,9 @@ namespace Z0.Asm
     {
         public readonly TableSpan<AsmOpCodeRow> Entries;
 
-        public readonly TableSpan<AsmOpCodeId> Identity;
+        public readonly TableSpan<AsmOpCodePattern> Identity;
 
-        public AsmOpCodeDataset(AsmOpCodeRow[] records, AsmOpCodeId[] identifiers)
+        public AsmOpCodeDataset(AsmOpCodeRow[] records, AsmOpCodePattern[] identifiers)
         {
             Entries = records;
             Identity = identifiers;
@@ -24,7 +24,7 @@ namespace Z0.Asm
         public int OpCodeCount
             => Entries.Length;
 
-        public ref readonly AsmOpCodeId this[ushort index]
+        public ref readonly AsmOpCodePattern this[ushort index]
         {
             [MethodImpl(Inline)]
             get => ref Identity[index];

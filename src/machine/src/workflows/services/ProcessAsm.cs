@@ -143,11 +143,10 @@ namespace Z0
                     LocalOffset: localOffset,
                     GlobalOffset: NextOffset,
                     Mnemonic: mnemonic.ToString().ToUpper(),
-                    //OpCode: asm.InstructionCode.OpCode.Replace("o32 ", EmptyString),
-                    OpCode: asm.InstructionCode.Code,
+                    OpCode: asm.InstructionCode.OpCode,
                     Encoded: new BinaryCode(encoded.TrimEnd().ToArray()),
-                    InstructionFormat: asm.FormattedInstruction,
-                    InstructionCode: asm.InstructionCode.Pattern,
+                    SourceCode: asm.FormattedInstruction,
+                    Instruction: asm.InstructionCode.Instruction,
                     CpuId: text.embrace(asm.CpuidFeatures.Select(x => x.ToString()).Concat(",")),
                     Id: (OpCodeId)asm.Code
                     );

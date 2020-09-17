@@ -40,8 +40,5 @@ namespace Z0.Asm
 
         public override string ToString()
             => Format();
-
-        public static AsmStatement Empty
-            => new AsmStatement(Mnemonic.INVALID, sys.empty<string>());
     }
 }

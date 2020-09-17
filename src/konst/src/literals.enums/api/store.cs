@@ -9,13 +9,12 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-
     using static z;
 
-    partial struct Literals
+    partial class Enums
     {
         [Op]
-        public static void store(PartId part, Type src, Span<EnumLiteralRecord> dst)
+        public static void store(PartId part, Type src, Span<EnumLiteralRow> dst)
         {
             var fields = span(src.LiteralFields());
             var tc = PrimalKinds.ecode(src);
@@ -23,7 +22,7 @@ namespace Z0
         }
 
         [Op]
-        public static void store(PartId part, Type type, EnumTypeCode tc, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteralRecord> dst)
+        public static void store(PartId part, Type type, EnumTypeCode tc, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteralRow> dst)
         {
             var count = fields.Length;
             var address = type.TypeHandle.Value;
@@ -31,7 +30,7 @@ namespace Z0
             {
                 ref readonly var f = ref z.skip(fields,i);
                 var nameAddress = z.address(f.Name);
-                seek(dst,i) = new EnumLiteralRecord(part, type, address, (ushort)i, f.Name, nameAddress, (EnumScalarKind)tc, Enums.unbox(tc, f.GetRawConstantValue()));
+                seek(dst,i) = new EnumLiteralRow(part, type, address, (ushort)i, f.Name, nameAddress, (EnumScalarKind)tc, Enums.unbox(tc, f.GetRawConstantValue()));
             }
         }
     }

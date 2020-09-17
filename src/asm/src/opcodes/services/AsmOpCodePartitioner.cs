@@ -54,7 +54,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        void Process(in AsmFxPattern src, in AsmOpCodeGroup handler)
+        void Process(in AsmInstructionPattern src, in AsmOpCodeGroup handler)
         {
             handler.Include(this, src);
         }
@@ -90,7 +90,7 @@ namespace Z0.Asm
             => new AsmOpCodeExpression(src.OpCode);
 
         [MethodImpl(Inline), Op]
-        static AsmFxPattern Instruction(in AsmOpCodeRow src)
-            => new AsmFxPattern(src.Instruction);
+        static AsmInstructionPattern Instruction(in AsmOpCodeRow src)
+            => new AsmInstructionPattern(src.Instruction);
     }
 }

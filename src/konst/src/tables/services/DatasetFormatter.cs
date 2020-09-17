@@ -78,12 +78,7 @@ namespace Z0
         {
             var h = header();
             for(var i=0; i<h.Fields.Length; i++)
-            {
-                if(i == 0)
-                    Append(h.Fields[i], h.Labels[i]);
-                else
-                    Delimit(h.Fields[i], h.Labels[i]);
-            }
+                Delimit(h.Fields[i], h.Labels[i]);
 
             if(eol)
                 State.Append(Eol);

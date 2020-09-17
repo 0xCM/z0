@@ -10,8 +10,6 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    using F = Z0.Asm.AsmOpCodeField;
-
     partial struct AsmOpCodes
     {
         [Op]

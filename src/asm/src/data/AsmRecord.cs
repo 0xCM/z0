@@ -10,12 +10,12 @@ namespace Z0.Asm
 
     using static Konst;
 
-    using F = AsmRecordField;
-    using R = AsmRecord;
-    using api = asm;
+    // using F = AsmRecordField;
+    // using R = AsmRecord;
+    // using api = asm;
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct AsmRecord : ITabular<F,R>, ITable<AsmRecordField,AsmRecord>
+    public struct AsmRecord //: ITabular<F,R>, ITable<AsmRecordField,AsmRecord>
     {
         public int Sequence;
 
@@ -27,17 +27,17 @@ namespace Z0.Asm
 
 		public asci16 Mnemonic;
 
-		public asci32 OpCode;
+		public AsmOpCodePattern OpCode;
+
+        public AsmInstructionPattern Instruction;
+
+        public asci64 SourceCode;
 
         public BinaryCode Encoded;
 
-        public asci32 InstructionFormat;
-
-        public asci32 InstructionCode;
-
 		public asci16 CpuId;
 
-        public OpCodeId CodeId;
+        public OpCodeId OpCodeId;
 
         [MethodImpl(Inline)]
         public AsmRecord(
@@ -46,10 +46,10 @@ namespace Z0.Asm
             Address32 GlobalOffset,
             Address16 LocalOffset,
             asci16 Mnemonic,
-            asci32 OpCode,
+            AsmOpCodePattern OpCode,
             BinaryCode Encoded,
-            asci32 InstructionFormat,
-            asci32 InstructionCode,
+            AsmInstructionPattern Instruction,
+            asci64 SourceCode,
             asci16 CpuId,
             OpCodeId Id)
         {
@@ -59,17 +59,17 @@ namespace Z0.Asm
             this.LocalOffset = LocalOffset;
             this.Mnemonic = Mnemonic;
             this.OpCode = OpCode;
+            this.Instruction = Instruction;
+            this.SourceCode = SourceCode;
             this.Encoded = Encoded;
-            this.InstructionFormat = InstructionFormat;
-            this.InstructionCode = InstructionCode;
             this.CpuId = CpuId;
-            this.CodeId = Id;
+            this.OpCodeId = Id;
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Sequence == 0 && CodeId == OpCodeId.INVALID;
+            get => Sequence == 0 && OpCodeId == OpCodeId.INVALID;
         }
 
         public bool IsNonEmpty
@@ -78,13 +78,13 @@ namespace Z0.Asm
             get => !IsEmpty;
         }
 
-        public string DelimitedText(char delimiter)
-            => api.format(this,delimiter);
+        // public string DelimitedText(char delimiter)
+        //     => api.format(this,delimiter);
 
-        public string Format()
-            => DelimitedText(FieldDelimiter);
+        // public string Format()
+        //     => DelimitedText(FieldDelimiter);
 
-        public override string ToString()
-            => Format();
+        // public override string ToString()
+        //     => Format();
     }
 }

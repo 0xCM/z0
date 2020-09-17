@@ -14,17 +14,6 @@ namespace Z0
 
     partial struct Table
     {
-        public static WfDataFlow<EnumLiteral[],FilePath> emit<E>(EnumLiteral[] src, FilePath dst)
-            where E : unmanaged, Enum
-        {
-            var literals = @readonly(src);
-            var count = literals.Length;
-            using var writer = dst.Writer();
-            writer.WriteLine(Table.header53<E>());
-            for(var i=0; i<count; i++)
-                writer.WriteLine(skip(literals,i).DelimitedText(FieldDelimiter));
-            return (src,dst);
-        }
 
         public static WfDataFlow<TableEmission<F,T>,FilePath> emit<F,T>(in TableEmission<F,T> src, FilePath dst, IRowFormatter<F> formatter, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum

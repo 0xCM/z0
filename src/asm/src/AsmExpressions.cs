@@ -36,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static AsmFxPattern fx(in AsmOpCodeRow src)
-            => new AsmFxPattern(src.Instruction);
+        public static AsmInstructionPattern fx(in AsmOpCodeRow src)
+            => new AsmInstructionPattern(src.Instruction);
     }
 }

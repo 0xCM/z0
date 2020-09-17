@@ -51,11 +51,11 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The source record</param>
         [MethodImpl(Inline), Op]
-        public static AsmOpCodeId identity(in AsmOpCodeRow src)
-            => new AsmOpCodeId(src.OpCode);
+        public static AsmOpCodePattern identity(in AsmOpCodeRow src)
+            => new AsmOpCodePattern(src.OpCode);
 
         [MethodImpl(Inline), Op]
-        public static void identify(ReadOnlySpan<AsmOpCodeRow> src, Span<AsmOpCodeId> dst)
+        public static void identify(ReadOnlySpan<AsmOpCodeRow> src, Span<AsmOpCodePattern> dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
@@ -116,7 +116,7 @@ namespace Z0.Asm
         static StreamWriter CaseWriter(string name)
             =>  CasePath(name).Writer();
 
-        void emit(ReadOnlySpan<AsmFxPattern> src)
+        void emit(ReadOnlySpan<AsmInstructionPattern> src)
         {
             var dstPath = CasePath($"InstructionExpression");
             using var writer = dstPath.Writer();
@@ -128,7 +128,7 @@ namespace Z0.Asm
             }
         }
 
-        public void emit(ReadOnlySpan<AsmOpCodeId> src)
+        public void emit(ReadOnlySpan<AsmOpCodePattern> src)
         {
             var dstPath = CasePath($"OpCodeIdentifiers");
             using var writer = dstPath.Writer();

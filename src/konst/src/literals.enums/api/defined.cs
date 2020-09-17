@@ -6,12 +6,84 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+    using System.Reflection;
+
     using static Konst;
     using static z;
 
     partial class Enums
     {
+        public static EnumLiteral[] enums<E>()
+            where E : unmanaged, Enum
+        {
+            var literals = Enums.index<E>();
+            var count = literals.Length;
+            var dst = new EnumLiteral[count];
+            var primal = typeof(E).GetEnumUnderlyingType();
+            var flags = typeof(E).Tagged<FlagsAttribute>();
+            var baseTag =typeof(E).Tag<NumericBaseAttribute>();
+            var @base = baseTag.MapValueOrDefault(x => x.Base, NumericBaseKind.Base10);
+            var bitmax = baseTag.MapValueOrDefault(x => x.MaxDigits, (int?)null);
+            var hexmax = bitmax != null ? bitmax.Value/4 : (int?)null;
+            var declarer = typeof(E).Name;
+
+            for(var i=0; i<dst.Length; i++)
+            {
+                var literal = literals[i];
+                var description = Literals.tagged(typeof(E).Field(literal.ToString()).Require()).Text;
+                if(string.IsNullOrWhiteSpace(description) && flags)
+                    description = literal.LiteralValue.ToString();
+                var bs = @base == NumericBaseKind.Base2 ? Formatters.value().FormatEnum(literal.LiteralValue, n2, bitmax) : EmptyString;
+                var hex = Formatters.value().FormatEnum(literal.LiteralValue, n16, hexmax);
+                dst[i] = new EnumLiteral(declarer, literal.Position, literal.Name, hex, bs, description);
+            }
+
+            return dst;
+        }
+
+        public static FieldValues<E,T> enums<E,T>(Type src)
+            where E : unmanaged, Enum
+            where T : unmanaged
+        {
+            var tValues = Literals.fields<T>(src);
+            var count = tValues.Length;
+            var eValueBuffer = sys.alloc<EnumFieldValue<E,T>>(count);
+            var dst = span(eValueBuffer);
+
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var srcVal = ref tValues[i];
+                ref readonly var tVal = ref srcVal.Value;
+                ref readonly var srcField = ref srcVal.Field;
+                seek(dst, i) = new EnumFieldValue<E,T>(srcField, Literals.read<E,T>(tVal), tVal);
+            }
+
+            return index(eValueBuffer);
+        }
+
+        [Op]
+        public static void enums(PartId part, Type type, EnumTypeCode ecode, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteralRow> dst)
+        {
+            var count = fields.Length;
+            var address = type.TypeHandle.Value;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var f = ref z.skip(fields,i);
+                var nameAddress = z.address(f.Name);
+                seek(dst,i) = new EnumLiteralRow(part, type, address, (ushort)i, f.Name, nameAddress, (EnumScalarKind)ecode, Enums.unbox(ecode, f.GetRawConstantValue()));
+            }
+        }
+
+        [Op]
+        public static ReadOnlySpan<EnumLiteralRow> enums(PartId part, Type src)
+        {
+            var fields = span(src.LiteralFields());
+            var dst = span<EnumLiteralRow>(fields.Length);
+            var ecode = PrimalKinds.ecode(src);
+            enums(part, src, ecode, fields, dst);
+            return dst;
+        }
+
         /// <summary>
         /// Determines whether an enum defines a name-identified literal
         /// </summary>
@@ -20,7 +92,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool defined<E>(string name)
             where E : unmanaged, Enum
-                => Enum.IsDefined(typeof(E), name);    
+                => Enum.IsDefined(typeof(E), name);
 
         /// <summary>
         /// Determines whether an enum value is valid
@@ -45,6 +117,5 @@ namespace Z0
             where E : unmanaged, Enum
             where V : unmanaged
                 => Enum.IsDefined(typeof(E), v);
-
     }
 }

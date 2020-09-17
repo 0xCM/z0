@@ -216,11 +216,7 @@ namespace Z0
             using var writer = dst.Writer();
             writer.WriteLine(Table.header53<AsmRecordField>());
             for(var i=0; i<count; i++)
-            {
-                //ref readonly var record = ref skip(records,i);
                 writer.WriteLine(asm.format(skip(records,i), formatter).Render());
-                //writer.WriteLine(record.Format());
-            }
         }
 
         void Process(ReadOnlySpan<ApiPartRoutines> src)

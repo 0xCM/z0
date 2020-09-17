@@ -12,22 +12,22 @@ namespace Z0.Asm
     /// <summary>
     /// Defines an encoded instruction
     /// </summary>
-    public struct AsmStatementEncoding
+    public struct AsmStatementInfo
     {
         public uint Sequence;
 
         public AsmStatement Source;
 
-        public AsmSpecifier OpCode;
+        public AsmSpecifier Spec;
 
         public EncodedFx Encoded;
 
         [MethodImpl(Inline)]
-        public AsmStatementEncoding(uint seq, AsmStatement statement, AsmSpecifier code, EncodedFx encoded)
+        public AsmStatementInfo(uint seq, AsmStatement statement, AsmSpecifier code, EncodedFx encoded)
         {
             Sequence = seq;
             Source = statement;
-            OpCode = code;
+            Spec = code;
             Encoded = encoded;
         }
     }

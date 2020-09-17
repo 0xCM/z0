@@ -122,14 +122,6 @@ namespace Z0
             where E : unmanaged, Enum
                 => (E[])LiteralCache.GetOrAdd(typeof(E), _ => CreateLiteralArray<E>());
 
-        public static ReadOnlySpan<E> literals<E>(int crop)
-            where E : unmanaged, Enum
-        {
-            var literals = span(literals<E>());
-            var count = literals.Length - crop;
-            return literals.Slice(0,count);
-        }
-
         /// <summary>
         /// Constructs a arbitrarily deduplicated value-to-member index
         /// </summary>

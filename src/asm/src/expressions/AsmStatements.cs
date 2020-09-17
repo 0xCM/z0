@@ -11,15 +11,14 @@ namespace Z0.Asm
 
     public readonly struct AsmStatements
     {
-        public AsmRoutineHeader Header {get;}
-
-        public readonly AsmStatement[] Statements;
+        readonly TableSpan<AsmStatement> Data;
 
         [MethodImpl(Inline)]
-        public AsmStatements(AsmRoutineHeader header, AsmStatement[] src)
-        {
-            Header = header;
-            Statements = src;
-        }
+        public AsmStatements(AsmStatement[] src)
+            => Data = src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator AsmStatements(AsmStatement[] src)
+            => new AsmStatements(src);
     }
 }

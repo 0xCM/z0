@@ -14,20 +14,27 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct AsmSpecifier : ITextual
     {
-        public readonly string Pattern;
+        public readonly AsmInstructionPattern Instruction;
 
-        public readonly string Code;
+        public readonly AsmOpCodePattern OpCode;
 
         [MethodImpl(Inline)]
         public AsmSpecifier(string pattern, string opcode)
         {
-            Pattern = pattern;
-            Code = opcode.Replace("o32 ", EmptyString);
+            Instruction = pattern;
+            OpCode = opcode;
+        }
+
+        [MethodImpl(Inline)]
+        public AsmSpecifier(in AsmInstructionPattern pattern, in AsmOpCodePattern opcode)
+        {
+            Instruction = pattern;
+            OpCode = opcode;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => String.Concat(Pattern, SpacePipe, Code);
+            => Render.format(Instruction, OpCode);
 
         public override string ToString()
             => Format();

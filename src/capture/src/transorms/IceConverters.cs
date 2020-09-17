@@ -100,7 +100,7 @@ namespace Z0.Asm
         /// <param name="src">The iced source value</param>
         [MethodImpl(Inline), Op]
         public OpCodeId Thaw(Iced.Code src)
-            => (OpCodeId)src;
+            => Enums.Parse(src.ToString(), OpCodeId.INVALID);
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure

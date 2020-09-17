@@ -39,18 +39,18 @@ namespace Z0.Asm
         //         Emit(skip(sets,i));
         // }
 
-        void Emit(in AsmRecordSet<Mnemonic> src)
-        {
-            var count = src.Count;
-            var records = src.Sequenced.ToReadOnlySpan();
-            using var writer = CaseWriter($"{src.Key}");
-            writer.WriteLine(Table.header53<AsmRecordField>());
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var record = ref skip(records,i);
-                writer.WriteLine(record.Format());
-            }
-        }
+        // void Emit(in AsmRecordSet<Mnemonic> src)
+        // {
+        //     var count = src.Count;
+        //     var records = src.Sequenced.ToReadOnlySpan();
+        //     using var writer = CaseWriter($"{src.Key}");
+        //     writer.WriteLine(Table.header53<AsmRecordField>());
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         ref readonly var record = ref skip(records,i);
+        //         writer.WriteLine(record.Format());
+        //     }
+        // }
 
     }
 }

@@ -12,38 +12,38 @@ namespace Z0.Asm
     /// <summary>
     /// Represents an opcode identifier
     /// </summary>
-    public readonly struct AsmOpCodeId
-    {                
+    public readonly struct AsmOpCodePattern : ITextual
+    {
         public readonly asci32 Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator string(AsmOpCodeId src)
+        public static implicit operator string(AsmOpCodePattern src)
             => src.Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmOpCodeId(string src)
-            => new AsmOpCodeId(src);
+        public static implicit operator AsmOpCodePattern(string src)
+            => new AsmOpCodePattern(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator asci32(AsmOpCodeId src)
+        public static implicit operator asci32(AsmOpCodePattern src)
             => src.Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmOpCodeId(asci32 src)
-            => new AsmOpCodeId(src);
+        public static implicit operator AsmOpCodePattern(asci32 src)
+            => new AsmOpCodePattern(src);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(AsmOpCodeId d1, AsmOpCodeId d2)
+        public static bool operator ==(AsmOpCodePattern d1, AsmOpCodePattern d2)
             => d1.Equals(d2);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(AsmOpCodeId d1, AsmOpCodeId d2)
+        public static bool operator !=(AsmOpCodePattern d1, AsmOpCodePattern d2)
             => !d1.Equals(d2);
 
         [MethodImpl(Inline)]
-        public AsmOpCodeId(asci32 src)
+        public AsmOpCodePattern(string src)
         {
-            Value = src;
+            Value = src.Replace("o32 ", EmptyString);
         }
 
         public bool IsEmpty
@@ -64,27 +64,27 @@ namespace Z0.Asm
             get => asci.decode(Value);
         }
 
-        public AsmOpCodeId Zero 
+        public AsmOpCodePattern Zero
             => Empty;
-        
+
         [MethodImpl(Inline)]
         public string Format()
             => asci.format(Value);
 
         [MethodImpl(Inline)]
-        public bool Equals(AsmOpCodeId src)
+        public bool Equals(AsmOpCodePattern src)
             => Value.Equals(src.Value);
-        
+
         public override string ToString()
             => Format();
-        
+
         public override int GetHashCode()
             => Value.GetHashCode();
-        
-        public override bool Equals(object src)
-            => src is AsmOpCodeId id && Equals(id);
 
-        public static AsmOpCodeId Empty 
-            => new AsmOpCodeId(asci.Null);
+        public override bool Equals(object src)
+            => src is AsmOpCodePattern id && Equals(id);
+
+        public static AsmOpCodePattern Empty
+            => new AsmOpCodePattern(EmptyString);
     }
 }

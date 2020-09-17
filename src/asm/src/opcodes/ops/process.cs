@@ -10,8 +10,6 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    using F = Z0.Asm.AsmOpCodeField;
-
     partial struct AsmOpCodes
     {
         [MethodImpl(Inline), Op]
@@ -30,7 +28,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        static void process(in AsmFxPattern src, in AsmOpCodeGroup handler, uint seq)
+        static void process(in AsmInstructionPattern src, in AsmOpCodeGroup handler, uint seq)
         {
             handler.Include(seq, src);
         }

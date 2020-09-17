@@ -18,7 +18,7 @@ namespace Z0
     /// <typeparam name="K">The key type</typeparam>
     /// <typeparam name="V">The value type</typeparam>
     public readonly struct KeyValuePairs<K,V> : IKeyValuePairs<K,V>
-    {        
+    {
         public readonly K[] Keys;
 
         public readonly V[] Values;
@@ -35,13 +35,13 @@ namespace Z0
             get => ValueSet;
         }
 
-        public V this[K key] 
+        public V this[K key]
         {
             [MethodImpl(Inline)]
             get => KeyedValues[key];
         }
-        
-        public int Count 
+
+        public int Count
         {
             [MethodImpl(Inline)]
             get => KeyedValues.Count;
@@ -81,7 +81,7 @@ namespace Z0
             Keys = Array.Empty<K>();
             Values = Array.Empty<V>();
         }
-        
+
         public KeyValuePairs(IReadOnlyDictionary<K,V> data)
         {
             KeyedValues = data;
@@ -101,12 +101,12 @@ namespace Z0
             IndexedValues = data.Flip();
         }
 
-        IEnumerable<K> IReadOnlyDictionary<K,V>.Keys 
+        IEnumerable<K> IReadOnlyDictionary<K,V>.Keys
             => Keys;
-        
-        IEnumerable<V> IReadOnlyDictionary<K,V>.Values 
+
+        IEnumerable<V> IReadOnlyDictionary<K,V>.Values
             => Values;
-        
+
         IEnumerator<KeyValuePair<K,V>> IEnumerable<KeyValuePair<K,V>>.GetEnumerator()
             => KeyedValues.GetEnumerator();
 
@@ -114,16 +114,16 @@ namespace Z0
             => KeyedValues.GetEnumerator();
 
 
-        K[] IKeyValuePairs<K,V>.Keys 
+        K[] IKeyValuePairs<K,V>.Keys
             => Keys;
 
-        V[] IKeyValuePairs<K,V>.Values 
+        V[] IKeyValuePairs<K,V>.Values
             => Values;
 
         /// <summary>
         /// A hashtable that hashes nothing
         /// </summary>
-        public static KeyValuePairs<K,V> Empty 
+        public static KeyValuePairs<K,V> Empty
             => new KeyValuePairs<K,V>(0);
     }
 }

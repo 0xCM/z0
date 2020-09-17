@@ -20,24 +20,24 @@ namespace Z0.Asm
     /// 3 operands: {Mnemonic}{ }{op1}{,}{op2},{op3}
     /// Example: PCMPISTRI xmm1, xmm2/m128, imm8
     /// <remarks>
-    public readonly struct AsmFxPattern
+    public readonly struct AsmInstructionPattern : ITextual
     {
         public readonly asci64 Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator TextExpression(AsmFxPattern src)
+        public static implicit operator TextExpression(AsmInstructionPattern src)
             => new TextExpression(src.Value.Format());
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmFxPattern(string src)
-            => new AsmFxPattern(src);
+        public static implicit operator AsmInstructionPattern(string src)
+            => new AsmInstructionPattern(src);
 
         [MethodImpl(Inline)]
-        public AsmFxPattern(string src)
-            => asci.encode(src, out Value);
+        public AsmInstructionPattern(string src)
+            => Value = src;
 
         [MethodImpl(Inline)]
-        public AsmFxPattern(asci64 src)
+        public AsmInstructionPattern(in asci64 src)
             => Value = src;
 
         /// <summary>
@@ -73,26 +73,27 @@ namespace Z0.Asm
             get => asci.decode(Value);
         }
 
-        public AsmFxPattern Zero
+        public AsmInstructionPattern Zero
             => Empty;
 
         [MethodImpl(Inline)]
-        public bool Equals(AsmFxPattern src)
+        public bool Equals(AsmInstructionPattern src)
              => src.Value.Equals(Value);
 
         public override bool Equals(object src)
-            => src is AsmFxPattern x && Equals(x);
+            => src is AsmInstructionPattern x && Equals(x);
 
         public override int GetHashCode()
             => Value.GetHashCode();
 
+        [MethodImpl(Inline)]
         public string Format()
             => Value.Format();
 
         public override string ToString()
             => Format();
 
-        public static AsmFxPattern Empty
-            => new AsmFxPattern(asci.Null);
+        public static AsmInstructionPattern Empty
+            => new AsmInstructionPattern(EmptyString);
     }
 }
