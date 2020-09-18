@@ -8,18 +8,32 @@ namespace Z0
 
     partial struct RenderPatterns
     {
+        [StringLiteral(Dash2, 1)]
+        public const string Dash1 = Dash;
+
+        [StringLiteral(Dash2, 2)]
+        public const string Dash2 = Dash1 + Dash1;
+
+        [StringLiteral(Dash3, 3)]
+        public const string Dash3 = Dash2 + Dash1;
+
+        [StringLiteral(Dash4, 4)]
+        public const string Dash4 = Dash3 + Dash1;
+
+        [StringLiteral(Dash5, 5)]
+        public const string Dash5 = Dash4 + Dash1;
 
         /// <summary>
         /// Delimiter between total/segment widths of a segmented type
         /// </summary>
         [StringLiteral(SegSep)]
-        public const string SegSep = "x";
+        public const string SegSep = x;
 
         /// <summary>
         /// Pluralizes something
         /// </summary>
-        [StringLiteral(Plural)]
-        public const string Plural = "s";
+        [StringLiteral(Plural,1)]
+        public const string Plural = s;
 
         /// <summary>
         /// Suffix used to pluralize a possessive
@@ -30,19 +44,19 @@ namespace Z0
         /// <summary>
         /// Defines the default field delimiter
         /// </summary>
-        [StringLiteral(FieldSep)]
+        [StringLiteral(FieldSep, 3)]
         public const string FieldSep = " | ";
 
         /// <summary>
-        /// Defines the literal '->'
+        /// Defines the literal '|'
         /// </summary>
-        [StringLiteral(Pipe)]
+        [StringLiteral(Pipe, 1)]
         public const string Pipe = "|";
 
         /// <summary>
         /// Defines the literal '.'
         /// </summary>
-        [StringLiteral(Dot)]
+        [StringLiteral(Dot, 1)]
         public const string Dot = ".";
 
         /// <summary>
@@ -81,18 +95,6 @@ namespace Z0
         public const string Dash80 = Dash40 + Dash40;
 
         /// <summary>
-        /// Defines the default extension for structured data
-        /// </summary>
-        [StringLiteral("------------------------------------------------------------------------------------------------------------------------")]
-        public const string Dash120 = Dash80 + Dash40;
-
-        /// <summary>
-        /// Defines the default extension for structured data
-        /// </summary>
-        [StringLiteral("----------------------------------------------------------------------------------------------------------------------------------------------------------------")]
-        public const string Dash160 = Dash80 + Dash80;
-
-        /// <summary>
         /// Defines the literal '{'
         /// </summary>
         [StringLiteral("{")]
@@ -121,23 +123,5 @@ namespace Z0
         /// </summary>
         [StringLiteral("\"{\"}")]
         public const string QSlot0 = OpenQSlot + D0 + CloseQSlot;
-
-        [StringLiteral(PageBreak20)]
-        public const string PageBreak10 = "----------";
-
-        [StringLiteral(PageBreak20)]
-        public const string PageBreak20 = PageBreak10 + PageBreak10;
-
-        [StringLiteral(PageBreak40)]
-        public const string PageBreak40 = PageBreak20 + PageBreak20;
-
-        [StringLiteral(PageBreak80)]
-        public const string PageBreak80 = PageBreak40 + PageBreak40;
-
-        [StringLiteral(PageBreak120)]
-        public const string PageBreak120 = PageBreak80 + PageBreak40;
-
-        [StringLiteral(PageBreak160)]
-        public const string PageBreak160 = PageBreak80 + PageBreak80;
     }
 }

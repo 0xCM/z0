@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = SystemApiKeyKind;
+    using K = SystemApiKey;
     using I = ISystemOpKind;
 
     /// <summary>

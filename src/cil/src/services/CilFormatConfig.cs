@@ -16,7 +16,7 @@ namespace Z0
             => true;
 
         public string SectionDelimiter
-            => RenderPatterns.Dash120;
+            => RenderPatterns.PageBreak120;
 
         public bool EmitSectionDelimiter
             => true;

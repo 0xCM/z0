@@ -31,7 +31,7 @@ namespace Z0
         static bit to_a<T>(T src)
         {
             if(typeof(T) == typeof(bool))
-                return (bit)bool8(src);
+                return (bit)@bool(src);
             else if(typeof(T) == typeof(char))
                 return  (bit)char16(src);
             else

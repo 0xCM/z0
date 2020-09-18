@@ -61,6 +61,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static bool bool8<T>(T src)
-            => z.bool8(src);
+            => z.@bool(src);
     }
 }

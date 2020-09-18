@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using K = Pow2x16;
+
     /// <summary>
     /// Defines operand kind identity classifiers
     /// </summary>
@@ -388,10 +390,11 @@ namespace Z0
 
         KindFactory,
 
+        Intrinsic = K.P2ᐞ11,
 
         /// <summary>
         /// Identifies a function that invokes framework/system operations which are located in an external scope that does not dissolve
         /// </summary>
-        Opaque = 25000,
+        Opaque = K.P2ᐞ12,
     }
 }

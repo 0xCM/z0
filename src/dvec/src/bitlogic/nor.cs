@@ -5,18 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Avx;
-    
-    using static Konst; 
+
+    using static Konst;
 
     partial class dvec
-    {         
+    {
         /// <summary>
         /// Computes ~(x | y) for vectors x and y
         /// </summary>
@@ -96,8 +96,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Nor]
         public static Vector128<float> vnor(Vector128<float> x, Vector128<float> y)
-            => dinxfp.vnot(Or(x, y));
-        
+            => z.vnot(Or(x, y));
+
         /// <summary>
         /// Computes ~(x | y) for vectors x and y
         /// </summary>
@@ -105,7 +105,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Nor]
         public static Vector128<double> vnor(Vector128<double> x, Vector128<double> y)
-            => dinxfp.vnot(Or(x, y));
+            => z.vnot(Or(x, y));
 
         /// <summary>
         /// Computes ~(x | y) for vectors x and y
@@ -186,8 +186,8 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Nor]
         public static Vector256<float> vnor(Vector256<float> x, Vector256<float> y)
-            => dinxfp.vnot(Or(x, y));
-        
+            => z.vnot(Or(x, y));
+
         /// <summary>
         /// Computes ~(x | y) for vectors x and y
         /// </summary>
@@ -195,6 +195,6 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Nor]
         public static Vector256<double> vnor(Vector256<double> x, Vector256<double> y)
-            => dinxfp.vnot(Or(x, y));
+            => z.vnot(Or(x, y));
    }
 }

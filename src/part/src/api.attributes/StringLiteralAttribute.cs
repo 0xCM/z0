@@ -15,17 +15,21 @@ namespace Z0
 
         public object Value {get;}
 
+        public int Length {get;}
+
         public StringLiteralAttribute(string value)
             : base(value ?? "")
         {
             Text = value ?? "";
             Value = value;
+            Length = Text.Length;
         }
 
         public StringLiteralAttribute()
         {
             Text = "";
             Value = "";
+            Length = Text.Length;
         }
 
         public StringLiteralAttribute(byte value)
@@ -33,6 +37,7 @@ namespace Z0
         {
             Text = "";
             Value = value;
+            Length = Text.Length;
         }
 
         public StringLiteralAttribute(sbyte value)
@@ -40,6 +45,7 @@ namespace Z0
         {
             Text = "";
             Value = value;
+            Length = Text.Length;
         }
 
         public StringLiteralAttribute(short value)
@@ -47,6 +53,7 @@ namespace Z0
         {
             Text = "";
             Value = value;
+            Length = Text.Length;
         }
 
         public StringLiteralAttribute(ushort value)
@@ -54,6 +61,7 @@ namespace Z0
         {
             Text = "";
             Value = value;
+            Length = Text.Length;
         }
 
         public StringLiteralAttribute(int value)
@@ -61,6 +69,7 @@ namespace Z0
         {
             Text = "";
             Value = value;
+            Length = Text.Length;
         }
 
         public StringLiteralAttribute(uint value)
@@ -68,6 +77,7 @@ namespace Z0
         {
             Text = "";
             Value = value;
+            Length = Text.Length;
         }
 
         public StringLiteralAttribute(long value)
@@ -75,6 +85,7 @@ namespace Z0
         {
             Text = "";
             Value = value;
+            Length = Text.Length;
         }
 
         public StringLiteralAttribute(ulong value)
@@ -82,6 +93,7 @@ namespace Z0
         {
             Text = "";
             Value = value;
+            Length = Text.Length;
         }
 
         public StringLiteralAttribute(float value)
@@ -89,6 +101,7 @@ namespace Z0
         {
             Text = "";
             Value = value;
+            Length = Text.Length;
         }
 
         public StringLiteralAttribute(double value)
@@ -96,6 +109,7 @@ namespace Z0
         {
             Text = "";
             Value = value;
+            Length = Text.Length;
         }
 
         public StringLiteralAttribute(decimal value)
@@ -103,7 +117,15 @@ namespace Z0
         {
             Text = "";
             Value = value;
+            Length = Text.Length;
         }
 
+
+        public StringLiteralAttribute(string value, uint length)
+        {
+            Text = value ?? "";
+            Value = Text;
+            Length = (int)length;
+        }
     }
 }

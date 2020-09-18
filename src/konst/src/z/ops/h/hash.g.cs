@@ -105,7 +105,7 @@ namespace Z0
             if(typeof(T) == typeof(char))
                 return hash(char16(src));
             else if(typeof(T) == typeof(bool))
-                return hash(bool8(src));
+                return hash(@bool(src));
             else
                 return fallback(src);
         }

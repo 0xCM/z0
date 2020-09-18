@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
@@ -14,7 +14,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Sse41;
-    
+
     using static Konst;
 
     partial struct z
@@ -146,7 +146,6 @@ namespace Z0
         [MethodImpl(Inline), Not]
         public static Vector256<ulong> vnot(Vector256<ulong> x)
             => Xor(x, CompareEqual(x, x));
-
 
         [MethodImpl(Inline), Op]
         public static Vector128<float> vnot(Vector128<float> src)

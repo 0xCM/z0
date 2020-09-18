@@ -14,6 +14,8 @@ namespace Z0
     {
         public const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
 
+        public const MethodImplOptions NotInline = MethodImplOptions.NoInlining;
+
         public const string EmptyString = "";
 
         public const string Connector = " -> ";

@@ -5,10 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst; 
+
+    using static Konst;
     using static As;
 
     partial class gvec
@@ -70,9 +70,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxfp.vxornot(v32f(x), v32f(y)));
+                return generic<T>(z.vxornot(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinxfp.vxornot(v64f(x), v64f(y)));
+                return generic<T>(z.vxornot(v64f(x), v64f(y)));
             else
                 throw Unsupported.define<T>();
         }
@@ -114,9 +114,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxfp.vxornot(v32f(x), v32f(y)));
+                return generic<T>(z.vxornot(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinxfp.vxornot(v64f(x), v64f(y)));
+                return generic<T>(z.vxornot(v64f(x), v64f(y)));
             else
                 throw Unsupported.define<T>();
         }

@@ -41,12 +41,12 @@ namespace Z0
 
         Pair<string> Labels => ("method", "asm");
 
-        PairEvalOutcomes<T> init<T>()
+        PairEvalResults<T> init<T>()
             where T : unmanaged
         {
             var count = PointCount<T>();
             var dst = Tuples.index(sys.alloc<Pair<T>>(count));
-            return Evaluated.pairs(Labels, dst);
+            return Evaluations.pairs(Labels, dst);
         }
 
         void error(Exception e)
@@ -59,7 +59,7 @@ namespace Z0
         {
             var target = init<T>();
             var src = Random.Array<T>(target.PointCount);
-            var context = Evaluations.context(buffers, code, Evaluated.unary(src, target));
+            var context = Evaluations.context(buffers, code, Evaluations.unary(src, target));
             return Evaluate.compute(context, error);
         }
 
@@ -68,7 +68,7 @@ namespace Z0
         {
             var target = init<T>();
             var src = Random.Pairs<T>(target.PointCount);
-            var context = Evaluations.context(buffers, code, Evaluated.binary(src, target));
+            var context = Evaluations.context(buffers, code, Evaluations.binary(src, target));
             return Evaluate.compute(context, error);
         }
 

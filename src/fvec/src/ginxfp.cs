@@ -14,10 +14,10 @@ namespace Z0
     /// <summary>
     /// Generic intrinsics over floating-point domains
     /// </summary>
-    [ApiHost(ApiHostKind.Generic)]
+    [ApiHost]
     public static class ginxfp
     {
-       [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+       [MethodImpl(Inline), Op, Closures(Floats)]
        public static Vector128<T> vadd<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -26,10 +26,10 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vadd(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-       [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+       [MethodImpl(Inline), Op, Closures(Floats)]
        public static Vector256<T> vadd<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -38,10 +38,10 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vadd(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-       [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+       [MethodImpl(Inline), Op, Closures(Floats)]
        public static Vector128<T> vsub<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -50,10 +50,10 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vsub(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-       [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+       [MethodImpl(Inline), Op, Closures(Floats)]
        public static Vector256<T> vsub<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -62,10 +62,10 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vsub(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector128<T> vhadd<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -74,10 +74,10 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vhadd(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector256<T> vhadd<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -86,10 +86,10 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vhadd(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector128<T> vdiv<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -98,10 +98,10 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vdiv(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector256<T> vdiv<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -110,109 +110,109 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vdiv(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector128<T> vand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxfp.vand(v32f(x), v32f(y)));
+                return generic<T>(z.vand(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinxfp.vand(v64f(x), v64f(y)));
+                return generic<T>(z.vand(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
 
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector256<T> vand<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxfp.vand(v32f(x), v32f(y)));
+                return generic<T>(z.vand(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinxfp.vand(v64f(x), v64f(y)));
+                return generic<T>(z.vand(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
 
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector128<T> vor<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxfp.vor(v32f(x), v32f(y)));
+                return generic<T>(z.vor(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinxfp.vor(v64f(x), v64f(y)));
+                return generic<T>(z.vor(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector256<T> vor<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxfp.vor(v32f(x), v32f(y)));
+                return generic<T>(z.vor(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinxfp.vor(v64f(x), v64f(y)));
+                return generic<T>(z.vor(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector128<T> vxor<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxfp.vxor(v32f(x), v32f(y)));
+                return generic<T>(z.vxor(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinxfp.vxor(v64f(x), v64f(y)));
+                return generic<T>(z.vxor(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector256<T> vxor<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxfp.vxor(v32f(x), v32f(y)));
+                return generic<T>(z.vxor(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinxfp.vxor(v64f(x), v64f(y)));
+                return generic<T>(z.vxor(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector128<T> vxornot<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxfp.vxornot(v32f(x), v32f(y)));
+                return generic<T>(z.vxornot(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinxfp.vxornot(v64f(x), v64f(y)));
+                return generic<T>(z.vxornot(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector256<T> vxornot<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(dinxfp.vxornot(v32f(x), v32f(y)));
+                return generic<T>(z.vxornot(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(dinxfp.vxornot(v64f(x), v64f(y)));
+                return generic<T>(z.vxornot(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector128<T> vmin<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -221,10 +221,10 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vmin(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector256<T> vmin<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -233,10 +233,10 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vmin(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector128<T> vmax<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
@@ -245,10 +245,10 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vmax(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector256<T> vmax<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
@@ -257,10 +257,10 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vmax(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector128<T> vnegate<T>(Vector128<T> src)
             where T : unmanaged
         {
@@ -269,10 +269,10 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vnegate(v64f(src)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, NumericClosures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Floats)]
         public static Vector256<T> vnegate<T>(Vector256<T> src)
             where T : unmanaged
         {
@@ -281,7 +281,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(dinxfp.vnegate(v64f(src)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>

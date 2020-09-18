@@ -22,15 +22,5 @@ namespace Z0
             where T : unmanaged
                 => z.gptr(src);
 
-        /// <summary>
-        /// Presents a readonly reference as a generic pointer displaced by an element offset
-        /// </summary>
-        /// <param name="src">The memory reference</param>
-        /// <param name="offset">The number of elements to skip</param>
-        /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static unsafe T* constptr<T>(in T src, int offset)
-            where T : unmanaged
-                => z.gptr(src,offset);
     }
 }
