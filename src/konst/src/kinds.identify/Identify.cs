@@ -15,7 +15,7 @@ namespace Z0
     using static UriDelimiters;
 
     using NK = NumericKind;
-    using ID = NumericApiKeyKind;
+    using ID = NumericApiKey;
 
     [ApiHost]
     public partial class Identify

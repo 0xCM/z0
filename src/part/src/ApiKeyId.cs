@@ -280,6 +280,7 @@ namespace Z0
 
         Slice,
 
+        BitClear,
 
         BitCell,
 
@@ -384,6 +385,9 @@ namespace Z0
         VMap,
 
         Recover,
+
+        KindFactory,
+
 
         /// <summary>
         /// Identifies a function that invokes framework/system operations which are located in an external scope that does not dissolve

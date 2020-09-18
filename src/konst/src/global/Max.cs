@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     partial struct Konst
     {
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         /// The maximum representable <see cref='ulong'/> value
         /// </summary>
         public const ulong Max64u = ulong.MaxValue;
- 
+
         /// <summary>
         /// The minimum representable <see cref='long'/> value
         /// </summary>
@@ -64,7 +64,7 @@ namespace Z0
         /// <summary>
         /// The maximum representable <see cref='long'/> value
         /// </summary>
-        public const long Max64i = long.MaxValue;        
+        public const long Max64i = long.MaxValue;
 
         /// <summary>
         /// The maximum representable <see cref='float'/> value
@@ -75,5 +75,10 @@ namespace Z0
         /// The maximum representable <see cref='double'/> value
         /// </summary>
         public const double Max64f = double.MaxValue;
+
+        /// <summary>
+        /// The maximum representable <see cref='decimal'/> value
+        /// </summary>
+        public const decimal Mak128f = decimal.MaxValue;
     }
 }

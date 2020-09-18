@@ -9,7 +9,7 @@ namespace Z0.Logix
 
     }
 
-    public interface IShiftOpExpr<T> : IShiftOpExpr, IOperatorExpr<T, BitShiftApiKeyKind>
+    public interface IShiftOpExpr<T> : IShiftOpExpr, IOperatorExpr<T, BitShiftApiKey>
         where T : unmanaged
     {
         /// <summary>

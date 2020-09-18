@@ -19,7 +19,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ComparisonExpr compare(BinaryComparisonApiKeyKind kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] variables)
+        public static ComparisonExpr compare(BinaryComparisonApiKey kind, ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] variables)
             => ComparisonExpr.define(kind, lhs,rhs,variables);
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Z0.Logix
         /// <param name="rhs">The right expression</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static ComparisonExpr<T> compare<T>(BinaryComparisonApiKeyKind kind, ILogicExpr<T> lhs, ILogicExpr<T> rhs, params IVarExpr<T>[] variables)
+        public static ComparisonExpr<T> compare<T>(BinaryComparisonApiKey kind, ILogicExpr<T> lhs, ILogicExpr<T> rhs, params IVarExpr<T>[] variables)
             where T : unmanaged
                 => ComparisonExpr.define(kind, lhs,rhs, variables);
 
@@ -42,7 +42,7 @@ namespace Z0.Logix
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
         public static ComparisonExpr equals(ILogicExpr lhs, ILogicExpr rhs, params ILogicVarExpr[] variables)
-            => ComparisonExpr.define(BinaryComparisonApiKeyKind.Eq, lhs,rhs,variables);
+            => ComparisonExpr.define(BinaryComparisonApiKey.Eq, lhs,rhs,variables);
 
         /// <summary>
         /// Defines an equality comparison expression
@@ -53,6 +53,6 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static ComparisonExpr<T> equals<T>(ILogicExpr<T> lhs, ILogicExpr<T> rhs, params IVarExpr<T>[] variables)
             where T : unmanaged
-                => ComparisonExpr.define(BinaryComparisonApiKeyKind.Eq, lhs,rhs, variables);
+                => ComparisonExpr.define(BinaryComparisonApiKey.Eq, lhs,rhs, variables);
     }
 }

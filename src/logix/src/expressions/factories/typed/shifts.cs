@@ -9,7 +9,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using BSK = BitShiftApiKeyKind;
+    using BSK = BitShiftApiKey;
 
     partial class TypedLogicSpec
     {

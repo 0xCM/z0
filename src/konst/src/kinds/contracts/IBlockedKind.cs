@@ -6,7 +6,7 @@ namespace Z0
 {
     public interface IBlockedKind : ILiteralKind<BlockedKind>
     {
-
+        TypeWidth BlockWidth => default;
     }
 
     public interface IBlockedKind<B> : IBlockedKind, ILiteralKind<B,BlockedKind>
@@ -22,7 +22,7 @@ namespace Z0
         BlockedKind ITypedLiteral<BlockedKind>.Class
             => BlockedKinds.kind<W,T>();
 
-        TypeWidth BlockWidth
+        TypeWidth IBlockedKind.BlockWidth
             => default(W).TypeWidth;
     }
 

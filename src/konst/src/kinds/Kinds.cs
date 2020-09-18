@@ -9,7 +9,6 @@ namespace Z0
     [ApiHost]
     public partial class Kinds
     {
-
-
+        const NumericKind Closure = NumericKind.All;
     }
 }

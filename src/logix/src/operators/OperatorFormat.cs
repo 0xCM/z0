@@ -20,16 +20,16 @@ namespace Z0
             => $"{kind.Format()}({arg})";
 
         [MethodImpl(Inline)]
-        public static string format(UnaryArithmeticApiKeyKind kind)
+        public static string format(UnaryArithmeticApiKey kind)
             => kind switch {
-                UnaryArithmeticApiKeyKind.Inc => "++",
-                UnaryArithmeticApiKeyKind.Dec => "--",
-                UnaryArithmeticApiKeyKind.Negate => "-",
+                UnaryArithmeticApiKey.Inc => "++",
+                UnaryArithmeticApiKey.Dec => "--",
+                UnaryArithmeticApiKey.Negate => "-",
                 _ => kind.ToString()
             };
 
         [MethodImpl(Inline)]
-        public static string format<T>(UnaryArithmeticApiKeyKind kind, T arg)
+        public static string format<T>(UnaryArithmeticApiKey kind, T arg)
             => $"{kind.Format()}({arg})";
 
         [MethodImpl(Inline)]
@@ -41,15 +41,15 @@ namespace Z0
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]
-        public static string format<T>(BinaryArithmeticApiKeyKind kind, T arg1, T arg2)
+        public static string format<T>(BinaryArithmeticApiKey kind, T arg1, T arg2)
             => $"{kind.ToString().ToLower()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]
-        public static string format(BinaryComparisonApiKeyKind kind)
+        public static string format(BinaryComparisonApiKey kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string format<T>(BinaryComparisonApiKeyKind kind, T arg1, T arg2)
+        public static string format<T>(BinaryComparisonApiKey kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
     }
 }

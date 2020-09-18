@@ -11,7 +11,7 @@ namespace Z0.Logix
 
     }
 
-    public interface IBinaryArithmeticOpExpr<T> : IBinaryArithmeticOpExpr, IArithmeticOpExpr<T,BinaryArithmeticApiKeyKind>
+    public interface IBinaryArithmeticOpExpr<T> : IBinaryArithmeticOpExpr, IArithmeticOpExpr<T,BinaryArithmeticApiKey>
         where T : unmanaged
     {
         IExpr<T> LeftArg {get;}

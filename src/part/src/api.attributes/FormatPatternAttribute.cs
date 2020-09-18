@@ -9,8 +9,8 @@ namespace Z0
     [AttributeUsage(AttributeTargets.Field)]
     public class FormatPatternAttribute : StringLiteralAttribute
     {
-        public FormatPatternAttribute(string src)
-            : base(src)
+        public FormatPatternAttribute(string pattern)
+            : base(pattern)
         {
 
         }
@@ -20,5 +20,21 @@ namespace Z0
         {
 
         }
+
+        public FormatPatternAttribute(byte args)
+        {
+            ArgCount = args;
+        }
+
+        public FormatPatternAttribute(byte args, string pattern)
+            : base(pattern)
+        {
+            ArgCount = args;
+
+        }
+
+        public byte ArgCount {get;}
+
+        public string PatternText => Text;
     }
 }

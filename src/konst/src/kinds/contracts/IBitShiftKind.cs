@@ -7,9 +7,9 @@ namespace Z0
     /// <summary>
     /// Characterizes a bitshift operation classifier
     /// </summary>
-    public interface IBitShiftKind : IOpKind, IOpKind<BitShiftApiKeyKind>
+    public interface IBitShiftKind : IOpKind, IOpKind<BitShiftApiKey>
     {
-        BitShiftApiKeyKind Kind {get;}
+        BitShiftApiKey Kind {get;}
 
         ApiKeyId IOpKind.KindId
             => (ApiKeyId)Kind;
@@ -19,7 +19,7 @@ namespace Z0
     /// Characterizes a reified bitlogic operation classifier
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    public interface IBitShiftKind<F> : IBitShiftKind, IOpKind<F,BitShiftApiKeyKind>
+    public interface IBitShiftKind<F> : IBitShiftKind, IOpKind<F,BitShiftApiKey>
         where F : unmanaged, IBitShiftKind
     {
         ApiKeyId IOpKind.KindId
@@ -34,7 +34,7 @@ namespace Z0
     public interface IBitShiftKind<K,T> : IBitShiftKind<K>
         where K : unmanaged, IBitShiftKind
     {
-        BitShiftApiKeyKind IBitShiftKind.Kind => default(K).Kind;
+        BitShiftApiKey IBitShiftKind.Kind => default(K).Kind;
 
         /// <summary>
         /// The parametrically-identified numeric kind

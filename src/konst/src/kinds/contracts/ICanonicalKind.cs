@@ -5,7 +5,7 @@
 namespace Z0
 {
     using I = ICanonicalKind;
-    using K = CanonicalApiKeyKind;
+    using K = CanonicalApiKey;
 
     public interface ICanonicalKind : IOpKind, IOpKind<K>
     {

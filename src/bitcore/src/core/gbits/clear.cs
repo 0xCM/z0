@@ -9,9 +9,9 @@ namespace Z0
 
     using static Konst;
     using static Memories;
-    
+
     partial class gbits
-    {    
+    {
         /// <summary>
         /// Disables a sequence of 8 source bits starting at a specified index
         /// </summary>
@@ -25,11 +25,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return default;
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.byteclear(uint16(src), index));
+                return generic<T>(Bits.clear8(uint16(src), index));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.byteclear(uint32(src), index));
+                return generic<T>(Bits.clear8(uint32(src), index));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.byteclear(uint64(src), index));
+                return generic<T>(Bits.clear8(uint64(src), index));
             else
                 throw Unsupported.define<T>();
         }
@@ -51,13 +51,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.clear(uint8(src), index, count));
+                return generic<T>(Bits.bitclear(uint8(src), index, count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.clear(uint16(src), index, count));
+                return generic<T>(Bits.bitclear(uint16(src), index, count));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.clear(uint32(src), index, count));
+                return generic<T>(Bits.bitclear(uint32(src), index, count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.clear(uint64(src), index, count));
+                return generic<T>(Bits.bitclear(uint64(src), index, count));
             else
                 return clear_i(src,index,count);
         }
@@ -67,13 +67,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(Bits.clear(int8(src), index, count));
+                return generic<T>(Bits.bitclear(int8(src), index, count));
             else if(typeof(T) == typeof(short))
-                return generic<T>(Bits.clear(int16(src), index, count));
+                return generic<T>(Bits.bitclear(int16(src), index, count));
             else if(typeof(T) == typeof(int))
-                return generic<T>(Bits.clear(int32(src), index, count));
+                return generic<T>(Bits.bitclear(int32(src), index, count));
             else if(typeof(T) == typeof(long))
-                return generic<T>(Bits.clear(int64(src), index, count));
+                return generic<T>(Bits.bitclear(int64(src), index, count));
             else
                 throw Unsupported.define<T>();
         }

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ArithmeticApiKeyKind;
+    using K = ArithmeticApiKey;
     using I = IArithmeticKind;
 
     /// <summary>
@@ -16,6 +16,9 @@ namespace Z0
         /// The literal identifier that will be lifted to the type-level
         /// </summary>
         K Kind {get;}
+
+        NumericKind OperandKind
+            => default;
 
         ApiKeyId IOpKind.KindId
             => (ApiKeyId)Kind;
@@ -46,7 +49,7 @@ namespace Z0
         /// <summary>
         /// The parametrically-identified numeric kind
         /// </summary>
-        NumericKind NumericKind
+        NumericKind IArithmeticKind.OperandKind
             => NumericKinds.kind<T>();
     }
 

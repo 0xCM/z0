@@ -32,11 +32,5 @@ namespace Z0
     }
 
 
-    partial class XTend
-    {
-        [MethodImpl(Inline)]
-        public static string Format<K>(this K kind)
-            where K : IOpKind
-                => kind.Format();
-    }
+
 }

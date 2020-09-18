@@ -29,12 +29,6 @@ namespace Z0
         /// </summary>
         public const string QSlot4 = OpenQSlot + D4 + CloseQSlot;
 
-        [FormatPattern("{0} ")]
-        public const string RSpace = "{0} ";
-
-        [FormatPattern(" {0}")]
-        public const string LSpace = " {0}";
-
         /// <summary>
         /// Defines the literal " |"
         /// </summary>

@@ -17,10 +17,10 @@ namespace Z0
     using BLK = BinaryLogicKind;
     using TLK = TernaryBitLogicKind;
     using ULK = UnaryBitLogicKind;
-    using UAR = UnaryArithmeticApiKeyKind;
-    using BAR = BinaryArithmeticApiKeyKind;
-    using BCK = BinaryComparisonApiKeyKind;
-    using BSK = BitShiftApiKeyKind;
+    using UAR = UnaryArithmeticApiKey;
+    using BAR = BinaryArithmeticApiKey;
+    using BCK = BinaryComparisonApiKey;
+    using BSK = BitShiftApiKey;
 
     /// <summary>
     /// Defines the canonical shape of a 2-argument function over a parametric domain and boolean codomain

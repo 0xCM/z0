@@ -71,7 +71,7 @@ namespace Z0
             Values = values.Select(v => (ulong)v).ToArray();
         }
 
-        public ClosuresAttribute(ImmClosureKind spec, params Imm8Kind[] values)
+        public ClosuresAttribute(ImmClosureKind spec, params byte[] values)
             : this()
         {
             Spec = (ulong)spec;

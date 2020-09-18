@@ -8,6 +8,13 @@ namespace Z0
 
     partial struct RenderPatterns
     {
+
+        /// <summary>
+        /// Delimiter between total/segment widths of a segmented type
+        /// </summary>
+        [StringLiteral(SegSep)]
+        public const string SegSep = "x";
+
         /// <summary>
         /// Pluralizes something
         /// </summary>

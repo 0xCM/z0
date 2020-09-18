@@ -9,8 +9,14 @@ namespace Z0
 
     using static Konst;
 
+
     partial class XTend
     {
+        [MethodImpl(Inline)]
+        public static string Format<K>(this K kind)
+            where K : IOpKind
+                => kind.Format();
+
         /// <summary>
         /// Determines whether the kind has a nonzero value
         /// </summary>
@@ -20,11 +26,11 @@ namespace Z0
             => src != 0;
 
         [MethodImpl(Inline)]
-        public static string Format(this ComparisonApiKeyKind kind)
+        public static string Format(this ComparisonApiKey kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this ComparisonApiKeyKind kind, T arg1, T arg2)
+        public static string Format<T>(this ComparisonApiKey kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
         public static string Format(this ApiKeyId id)
@@ -37,37 +43,37 @@ namespace Z0
             => id.HasValue ? id.Value.Format() : "unkinded";
 
         [MethodImpl(Inline)]
-        public static string Format(this ArithmeticApiKeyKind kind)
+        public static string Format(this ArithmeticApiKey kind)
             => kind switch {
-                ArithmeticApiKeyKind.Inc => "++",
-                ArithmeticApiKeyKind.Dec => "--",
-                ArithmeticApiKeyKind.Negate => "-",
+                ArithmeticApiKey.Inc => "++",
+                ArithmeticApiKey.Dec => "--",
+                ArithmeticApiKey.Negate => "-",
                 _ => kind.ToString()
             };
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this ArithmeticApiKeyKind kind, T arg1, T arg2)
+        public static string Format<T>(this ArithmeticApiKey kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
-        public static string Format(this BitShiftApiKeyKind kind)
+        public static string Format(this BitShiftApiKey kind)
             => kind switch {
-                BitShiftApiKeyKind.Sll => "<<",
-                BitShiftApiKeyKind.Srl => ">>",
-                BitShiftApiKeyKind.Rotl => "<<>",
-                BitShiftApiKeyKind.Rotr => ">><",
+                BitShiftApiKey.Sll => "<<",
+                BitShiftApiKey.Srl => ">>",
+                BitShiftApiKey.Rotl => "<<>",
+                BitShiftApiKey.Rotr => ">><",
                 _ => kind.ToString()
             };
 
-        public static string Format<S,T>(this BitShiftApiKeyKind kind, S arg1, T arg2)
+        public static string Format<S,T>(this BitShiftApiKey kind, S arg1, T arg2)
             => $"{arg1} {kind.Format()} {arg2}";
 
 
         [MethodImpl(Inline)]
-        public static string Format(this BitLogicApiKeyKind kind)
+        public static string Format(this BitLogicApiKey kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string Format<T>(this BitLogicApiKeyKind kind, T arg1, T arg2)
+        public static string Format<T>(this BitLogicApiKey kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
     }
 }

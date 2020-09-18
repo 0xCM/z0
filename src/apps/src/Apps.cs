@@ -23,7 +23,7 @@ namespace Z0
         }
 
         public static IAppContext context(IWfShell wf)
-            => context(wf.Modules, wf.Paths);
+            => new AppContext(wf.Paths, wf.Api, random(), settings(wf.Paths), WfMsgExchange.Create(wf));
 
         public static IAppContext context()
         {

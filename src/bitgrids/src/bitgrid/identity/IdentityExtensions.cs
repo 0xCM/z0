@@ -31,8 +31,8 @@ namespace Z0
             => (CellWidth)((ushort)k);
 
         [MethodImpl(Inline)]
-        public static GridCategory Category(this GridKind k)
-            => (GridCategory)(((uint)k >> 16) << 16);
+        public static GridClass Category(this GridKind k)
+            => (GridClass)(((uint)k >> 16) << 16);
 
         [MethodImpl(Inline)]
         public static bool IsSome(this GridKind k)
@@ -48,7 +48,7 @@ namespace Z0
              : (k & Z0.GridKind.NaturalUnfixed) != 0 ? GridIndicators.Natural
              :  k.ToString();
 
-        public static NatIdentity GridClosures(this Type src )
+        public static NatKind GridClosures(this Type src )
         {
             var args = src.GridKind().MapValueOrDefault(k => src.SuppliedTypeArgs().ToArray(), array<Type>());
             if(args.Length == 1)
@@ -60,11 +60,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static bool IsSome(this NatIdentity src)
+        public static bool IsSome(this NatKind src)
             => !src.IsEmpty;
 
         [MethodImpl(Inline)]
-        public static int NonEmptyCount(this NatIdentity src)
+        public static int NonEmptyCount(this NatKind src)
             => (src.M != 0 ? 1 : 0) + (src.N != 0 ? 1 : 0)  + (src.T.IsSome() ? 1 : 0);
 
         public static Option<GridKind> GridKind(this Type src)

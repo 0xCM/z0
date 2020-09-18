@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ComparisonApiKeyKind;
+    using K = ComparisonApiKey;
     using I = IComparisonKind;
 
     /// <summary>

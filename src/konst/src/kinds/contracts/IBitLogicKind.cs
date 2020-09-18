@@ -6,7 +6,7 @@ namespace Z0
 {
     using static Konst;
 
-    using K = BitLogicApiKeyKind;
+    using K = BitLogicApiKey;
     using I = IBitLogicKind;
 
     /// <summary>
@@ -15,6 +15,9 @@ namespace Z0
     public interface IBitLogicKind : IOpKind, IOpKind<K>
     {
         K Kind {get;}
+
+        NumericKind NumericKind
+            => default;
 
         ApiKeyId IOpKind.KindId
             => (ApiKeyId)Kind;
@@ -39,13 +42,14 @@ namespace Z0
     public interface IBitLogicKind<F,T> : IBitLogicKind<F>
         where F : unmanaged, I
     {
-        BitLogicApiKeyKind I.Kind
+        BitLogicApiKey I.Kind
             => default(F).Kind;
+    }
 
-        /// <summary>
-        /// The parametrically-identified numeric kind
-        /// </summary>
-        NumericKind NumericKind
+    public interface IBitLogicKindHost<H,T> : IBitLogicKind<H,T>
+        where H : unmanaged, I
+    {
+        NumericKind IBitLogicKind.NumericKind
             => NumericKinds.kind<T>();
     }
 
@@ -62,6 +66,6 @@ namespace Z0
         /// <summary>
         /// The parametrically-identified operand width
         /// </summary>
-        TypeWidth OperandWidth => Widths.type<W>();
+        TypeWidth OperandWidth {get;}
     }
 }

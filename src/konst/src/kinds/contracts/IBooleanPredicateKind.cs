@@ -6,7 +6,7 @@ namespace Z0
 {
     using static Konst;
 
-    using K = BooleanPredicateApiKeyKind;
+    using K = BooleanPredicateApiKey;
     using I = IBooleanPredicateKind;
 
     /// <summary>

@@ -15,7 +15,7 @@ namespace Z0
         public readonly struct Or<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged
         {
-            public const BitLogicApiKeyKind OpKind = BitLogicApiKeyKind.Or;
+            public const BitLogicApiKey OpKind = BitLogicApiKey.Or;
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)

@@ -10,7 +10,7 @@ namespace Z0.Logix
 
     using static TypedLogicSpec;
 
-    using KK = BitShiftApiKeyKind;
+    using KK = BitShiftApiKey;
     public class t_shift_expr : TypedLogixTest<t_shift_expr>
     {
        // ~ sll

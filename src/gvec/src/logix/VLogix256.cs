@@ -15,9 +15,9 @@ namespace Z0
     using ULK = UnaryBitLogicKind;
     using BLK = BinaryLogicKind;
     using TLK = TernaryBitLogicKind;
-    using BSK = BitShiftApiKeyKind;
-    using BCK = BinaryComparisonApiKeyKind;
-    using BAR = BinaryArithmeticApiKeyKind;
+    using BSK = BitShiftApiKey;
+    using BCK = BinaryComparisonApiKey;
+    using BAR = BinaryArithmeticApiKey;
 
     partial class VLogix
     {
