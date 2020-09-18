@@ -20,8 +20,8 @@ namespace Z0
             => new ApiHostQuery(host);
 
         [MethodImpl(Inline), Op]
-        public static NeededPart needs(PartId src, PartId dst)
-            => new NeededPart(src,dst);
+        public static PartDependency needs(PartId src, PartId dst)
+            => new PartDependency(src,dst);
 
         [MethodImpl(Inline), Op]
         public static ApiPartTypes types(IPart src)

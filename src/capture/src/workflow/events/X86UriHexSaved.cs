@@ -41,6 +41,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Host, MemberCount, Target);
+            => format(EventId, Host, MemberCount, Target.ToUri());
     }
 }

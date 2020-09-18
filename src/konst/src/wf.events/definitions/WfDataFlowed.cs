@@ -20,11 +20,11 @@ namespace Z0
         public WfEventId EventId {get;}
         public H Host {get;}
 
-        public WfDataFlow<S,T,R> Flow {get;}
+        public DataFlow<S,T,R> Flow {get;}
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfDataFlowed(H host, WfDataFlow<S,T,R> flow, CorrelationToken ct, FlairKind flair = Ran)
+        public WfDataFlowed(H host, DataFlow<S,T,R> flow, CorrelationToken ct, FlairKind flair = Ran)
         {
             Host = host;
             EventId = (EventName, Host.Id, ct);

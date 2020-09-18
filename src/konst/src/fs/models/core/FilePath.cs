@@ -133,6 +133,10 @@ namespace Z0
             public string Format()
                 => Name.Format();
 
+            [MethodImpl(Inline)]
+            public FileUri ToUri()
+                => new FileUri(this);
+
             public override string ToString()
                 => Format();
         }

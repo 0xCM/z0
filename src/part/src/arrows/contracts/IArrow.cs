@@ -6,14 +6,11 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using api = Arrows;
-
     [Free]
     public interface IArrow : ILink
     {
 
     }
-
 
     [Free]
     public interface IArrow<S,T> : IArrow, ILink<S,T>
@@ -29,7 +26,7 @@ namespace Z0
             => Target;
 
         string IIdentified.Identifier
-            => api.identify(Source,Target);
+            => string.Format("{0} -> {1}", Source, Target);
     }
 
     [Free]

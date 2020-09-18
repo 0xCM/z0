@@ -8,26 +8,37 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Render;
 
     public readonly struct MembersExtracted : IWfEvent<MembersExtracted>
     {
-        public WfEventId EventId  => WfEventId.define("Placeholder");
+        public const string EventName = nameof(MembersExtracted);
+
+        public WfEventId EventId {get;}
 
         public readonly ApiHostUri Host;
 
         public readonly X86ApiExtract[] Members;
 
+        public readonly Count MemberCount;
+
+        public readonly FS.FilePath Target;
+
+        public FlairKind Flair {get;}
+
         [MethodImpl(Inline)]
-        public MembersExtracted(ApiHostUri host, X86ApiExtract[] members)
+        public MembersExtracted(WfStepId step, ApiHostUri host, X86ApiExtract[] members, FS.FilePath dst,  CorrelationToken ct, FlairKind flair = Ran)
         {
+            EventId = (EventName, step, ct);
             Host = host;
+            Target = dst;
             Members = members;
+            MemberCount = Members.Length;
+            Flair = flair;
         }
 
+        [MethodImpl(Inline)]
         public string Format()
-            => $"{Members.Length} {Host} members extracted";
-
-        public static MembersExtracted Empty
-            => new MembersExtracted(ApiHostUri.Empty, Array.Empty<X86ApiExtract>());
+            => format(EventId, Host, MemberCount, Target.ToUri());
     }
 }

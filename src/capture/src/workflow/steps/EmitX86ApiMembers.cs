@@ -20,7 +20,7 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        readonly EmitX86HexHost Host;
+        readonly WfHost Host;
 
         readonly ApiHostUri Uri;
 
@@ -28,7 +28,7 @@ namespace Z0
 
         readonly FS.FilePath Target;
 
-        public EmitX86ApiMembers(IWfShell wf, EmitX86HexHost host, ApiHostUri uri, X86ApiMembers src)
+        public EmitX86ApiMembers(IWfShell wf, WfHost host, ApiHostUri uri, X86ApiMembers src)
         {
             Wf = wf;
             Host = host;

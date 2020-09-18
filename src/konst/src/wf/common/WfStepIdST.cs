@@ -21,7 +21,7 @@ namespace Z0
         public const string RenderPattern = "{0} -> {1}";
 
         [MethodImpl(Inline)]
-        public static implicit operator WfType<S,T>(WfStepId<S,T> src)
+        public static implicit operator ArrowType<S,T>(WfStepId<S,T> src)
             => src.Type;
 
         [MethodImpl(Inline)]
@@ -30,7 +30,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Type(WfStepId<S,T> src)
-            => WfType<S,T>.Type;
+            => ArrowType<S,T>.Type;
 
         /// <summary>
         /// The step name
@@ -50,7 +50,7 @@ namespace Z0
         public Type Target
             => typeof(S);
 
-        public WfType<S,T> Type
+        public ArrowType<S,T> Type
             => default;
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
         public uint Hashed
         {
             [MethodImpl(Inline)]
-            get => default(WfType<S,T>).Hashed;
+            get => default(ArrowType<S,T>).Hashed;
         }
 
         public ulong Hash64

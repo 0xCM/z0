@@ -15,6 +15,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static IWfEventLog log(WfInit config, bool clear = true)
             => new WfTermEventLog(FilePath.Define(config.StatusPath.Name), FilePath.Define(config.ErrorPath.Name), clear);
-
     }
 }

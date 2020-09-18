@@ -151,7 +151,7 @@ namespace Z0
             where H :  IWfHost<H>, new()
                 => Raise(running(host, content, Ct));
 
-        void Running<S,T>(WfStepId step, WfDataFlow<S,T> df)
+        void Running<S,T>(WfStepId step, DataFlow<S,T> df)
             => Raise(running(step, df, Ct));
 
         // ~ Ran
@@ -167,7 +167,7 @@ namespace Z0
             where H : IWfHost<H>, new()
                 => Raise(ran(host, content, Ct));
 
-        void Ran<H,S,T,R>(H host, WfDataFlow<S,T,R> df)
+        void Ran<H,S,T,R>(H host, DataFlow<S,T,R> df)
             where H : IWfHost<H>, new()
                 => Raise(flowed(host, df,Ct));
 
@@ -201,10 +201,10 @@ namespace Z0
         void Emitted(WfStepId step, TableId table, uint count, FS.FilePath dst)
             => Raise(WfEvents.emitted(step, table, count, dst, Ct));
 
-        void Processed<T>(WfStepId step, WfDataFlow<T> flow)
+        void Processed<T>(WfStepId step, DataFlow<T> flow)
             => Raise(WfEvents.processed(step, flow, Ct));
 
-        void Processed<S,T>(WfStepId step, WfDataFlow<S,T> flow)
+        void Processed<S,T>(WfStepId step, DataFlow<S,T> flow)
             => Raise(WfEvents.processed(step, flow, Ct));
 
         void DataRow<T>(T content)

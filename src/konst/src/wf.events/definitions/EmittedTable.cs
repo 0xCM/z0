@@ -33,7 +33,7 @@ namespace Z0
                 StepId = step;
                 Dataset = dataset;
                 RowCount = count;
-                Target = FS.path (target.Name);
+                Target = FS.path(target.Name);
             }
 
             [MethodImpl(Inline)]
@@ -48,7 +48,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format()
-                => text.format(PSx5, EventId, StepId, Dataset, RowCount, Target);
+                => text.format(PSx5, EventId, StepId, Dataset, RowCount, Target.ToUri());
 
             public override string ToString()
                 => Format();

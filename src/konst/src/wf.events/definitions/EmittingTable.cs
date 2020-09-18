@@ -45,7 +45,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format()
-                => Render.format(EventId, StepId, Dataset, Target);
+                => Render.format(EventId, StepId, Dataset, Target.ToUri());
         }
     }
 }

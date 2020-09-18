@@ -9,9 +9,9 @@ namespace Z0
 
     using static Konst;
 
-    public sealed class EmitRenderPatternsHost : WfHost<EmitRenderPatternsHost, WfDataFlow<Type, FS.FilePath>>
+    public sealed class EmitRenderPatternsHost : WfHost<EmitRenderPatternsHost, DataFlow<Type, FS.FilePath>>
     {
-        public override void Run(IWfShell wf, WfDataFlow<Type,FS.FilePath> df)
+        public override void Run(IWfShell wf, DataFlow<Type,FS.FilePath> df)
         {
             using var step = new EmitRenderPatterns(wf,this, df);
             step.Run();
@@ -24,10 +24,10 @@ namespace Z0
 
         readonly EmitRenderPatternsHost Host;
 
-        public WfDataFlow<Type,FS.FilePath> Df;
+        public DataFlow<Type,FS.FilePath> Df;
 
         [MethodImpl(Inline)]
-        public EmitRenderPatterns(IWfShell wf, EmitRenderPatternsHost host, WfDataFlow<Type,FS.FilePath> df)
+        public EmitRenderPatterns(IWfShell wf, EmitRenderPatternsHost host, DataFlow<Type,FS.FilePath> df)
         {
             Wf = wf;
             Host = host;

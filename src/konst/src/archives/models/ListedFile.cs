@@ -22,7 +22,7 @@ namespace Z0
     /// <summary>
     /// Defines an entry in list of files
     /// </summary>
-    public readonly struct ListedFile : ITable<ListedFileField,ListedFile>
+    public readonly struct ListedFile
     {
         public readonly uint Index;
 

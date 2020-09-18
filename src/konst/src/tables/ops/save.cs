@@ -17,7 +17,7 @@ namespace Z0
             where R : struct, ITabular
                 => store<F,R>().Save(src, dst);
 
-        public static WfDataFlow<Rowset<T>,ArchivedTable<T>> save<T,M,K>(T[] src, TableArchive dst, string header, Func<T,string> render,  M m = default)
+        public static DataFlow<Rowset<T>,ArchivedTable<T>> save<T,M,K>(T[] src, TableArchive dst, string header, Func<T,string> render,  M m = default)
             where T : struct
             where M : struct, IDataModel
             where K : unmanaged, Enum

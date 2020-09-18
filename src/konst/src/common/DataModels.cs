@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="dst"></param>
         /// <typeparam name="T"></typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static WfDataFlow<T[],BinaryCode> flow<T>(T[] src, BinaryCode dst)
+        public static DataFlow<T[],BinaryCode> flow<T>(T[] src, BinaryCode dst)
             where T : struct
                 => z.paired(src,dst);
     }

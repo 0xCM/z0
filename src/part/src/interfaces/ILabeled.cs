@@ -13,18 +13,18 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes an F-bound polymorphic type that defines a Lable facet
+    /// Characterizes an F-bound polymorphic type that defines a label facet
     /// </summary>
     public interface ILabeled<F> : ILabeled, IFacet<string>
         where F : ILabeled<F>
     {
-        string ILabeled.Label 
+        string ILabeled.Label
             => LabelAttribute.TargetLabel<F>();
 
-        string IFacet.FacetName 
+        string IFacet.FacetName
             => nameof(Label);
-        
-        string IFacet<string>.FacetValue 
+
+        string IFacet<string>.FacetValue
             => Label;
     }
 }

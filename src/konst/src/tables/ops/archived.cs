@@ -18,7 +18,7 @@ namespace Z0
                 => new ArchivedTable<T>(src);
 
         [MethodImpl(Inline)]
-        public static WfDataFlow<Rowset<T>,ArchivedTable<T>> archived<T,M,K>(Rowset<T> src, TableArchive dst, M m = default)
+        public static DataFlow<Rowset<T>,ArchivedTable<T>> archived<T,M,K>(Rowset<T> src, TableArchive dst, M m = default)
             where T : struct
             where M : struct, IDataModel
             where K : unmanaged, Enum
@@ -28,7 +28,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static WfDataFlow<Rowset<T>, ArchivedTable<T>> archived<T>(Rowset<T> src, FS.FilePath dst)
+        public static DataFlow<Rowset<T>, ArchivedTable<T>> archived<T>(Rowset<T> src, FS.FilePath dst)
             where T : struct
                 => (src, new ArchivedTable<T>(dst));
     }

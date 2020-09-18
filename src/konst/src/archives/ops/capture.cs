@@ -25,7 +25,7 @@ namespace Z0
             => new PartCaptureArchive(EnvVars.Common.LogRoot, FolderName.Define("capture"), FolderName.Define(part.Format()));
 
         [MethodImpl(Inline), Op]
-        public static IPartCaptureArchive capture(ArchiveConfig config)
+        public static IPartCaptureArchive capture(ArchiveSettings config)
             => capture(FS.dir(config.Root.Name));
     }
 }

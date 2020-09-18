@@ -49,7 +49,5 @@ namespace Z0
             }
             return sys.array(literals);
         }
-
-
     }
 }

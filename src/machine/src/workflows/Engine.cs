@@ -9,7 +9,6 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static Engines;
     using static z;
 
     public class Engine : IDisposable
@@ -20,17 +19,20 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        internal Engine(WfCaptureState state, CorrelationToken ct)
+        readonly WfHost Host;
+
+        internal Engine(WfCaptureState state, WfHost host)
         {
             State = state;
             Wf = State.Wf;
-            Ct = ct;
-            Wf.Created(StepId, delimit(Wf.Api.PartIdentities));
+            Host = host;
+            Ct = Wf.Ct;
+            Wf.Created(Host, delimit(Wf.Api.PartIdentities));
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
 
         IAsmContext Asm
@@ -38,7 +40,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running(StepId);
+            Wf.Running(Host);
 
             try
             {
@@ -47,24 +49,24 @@ namespace Z0
                 Run(new EmitPeHeadersStep());
                 Run(new EmitImageConstantsStep());
                 Run(new EmitImageDataStep());
-                Run(new EmitStringRecordHost());
+                Run(new EmitStringRecordsHost());
                 Run(new EmitProjectDocsHost());
                 Run(new EmitResBytesStep());
-                Run(new EmitImageBlobsStep());
-                Run(new EmitPartCilStep());
+                Run(new EmitImageBlobsHost());
+                Run(new EmitPartCilHost());
                 Run(new EmitEnumCatalogHost());
                 Run(new EmitFieldLiteralsHost());
-                Run(new EmitContentCatalogStep());
-                Run(new EmitBitMasksStep());
+                Run(new EmitContentCatalogHost());
+                Run(new EmitBitMasksHost());
                 Run(new CreateGlobalIndexHost());
 
             }
             catch(Exception e)
             {
-                term.error(e);
+                Wf.Error(Host,e);
             }
 
-            Wf.Ran(StepId);
+            Wf.Ran(Host);
         }
 
         void Run(CreateGlobalIndexHost host)
@@ -83,7 +85,7 @@ namespace Z0
 
         void Run(EmitImageConstantsStep host)
         {
-            using var step = new EmitImageConstants(Wf, Wf.Api.Parts, Ct);
+            using var step = new EmitImageConstants(Wf, host);
             step.Run();
         }
 
@@ -96,27 +98,27 @@ namespace Z0
         void Run(EmitFieldLiteralsHost host)
             => host.Run(Wf);
 
-        void Run(EmitContentCatalogStep kind)
-        {
-            using var step = new EmitContentCatalog(Wf);
-            step.Run();
-        }
+        void Run(EmitPartCilHost host)
+            => host.Run(Wf);
 
-        void Run(EmitBitMasksStep kind)
-        {
-            using var step = new EmitBitMasks(Wf, Ct);
-            step.Run();
-        }
+        void Run(ProcessPartFilesHost host)
+            => host.Run(Wf,Asm);
 
-        void Run(EmitPartCilStep host)
-        {
-            using var step = new EmitPartCil(Wf, host);
-            step.Run();
-        }
+        void Run(EmitContentCatalogHost host)
+            => host.Run(Wf);
 
-        void Run(EmitImageBlobsStep host)
+        void Run(EmitBitMasksHost host)
+            => host.Run(Wf);
+
+        void Run(EmitProjectDocsHost host)
+            => host.Run(Wf);
+
+        void Run(EmitStringRecordsHost host)
+            => host.Run(Wf);
+
+        void Run(EmitImageBlobsHost host)
         {
-            using var step = new EmitImageBlobs(Wf, Wf.Api.Parts, Ct);
+            using var step = new EmitImageBlobs(Wf, host);
             step.Run();
         }
 
@@ -132,29 +134,10 @@ namespace Z0
             step.Run();
         }
 
-        void Run(EmitStringRecordHost host)
-        {
-            using var step = new EmitStringRecords(Wf, host);
-            step.Run();
-        }
-
-        void Run(EmitProjectDocsHost host)
-        {
-            using var step = new EmitProjectDocs(Wf, Ct);
-            step.Run();
-        }
-
         void Run(EmitResBytesStep host)
         {
             using var step = new EmitResBytes(Wf, Ct);
             step.Run();
         }
-
-        void Run(ProcessPartFilesHost host)
-            => host.Run(Wf,Asm);
-        // {
-        //     using var step = new ProcessPartFiles(Wf, Asm, Ct);
-        //     step.Run();
-        // }
     }
 }

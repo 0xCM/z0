@@ -84,6 +84,5 @@ namespace Z0
 
         public static R Empty
             => new R(0, MemoryAddress.Empty, 0, OpUri.Empty, EmptyString, X86Code.Empty);
-
     }
 }

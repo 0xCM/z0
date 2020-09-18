@@ -9,23 +9,23 @@ namespace Z0.Asm
 
     using static Konst;
     using static z;
-    using static ClearCaptureArchivesStep;
+    using static ClearCaptureArchivesHost;
 
     public readonly ref struct ClearCaptureArchives
     {
         readonly IWfShell Wf;
 
+        readonly WfHost Host;
+
         readonly IWfInit Config;
 
-        readonly CorrelationToken Ct;
-
         [MethodImpl(Inline)]
-        public ClearCaptureArchives(IWfShell wf, IWfInit config, CorrelationToken ct)
+        public ClearCaptureArchives(IWfShell wf, WfHost host, IWfInit config)
         {
             Wf = wf;
+            Host = host;
             Config = config;
-            Ct = ct;
-            Wf.Created(StepId, Ct);
+            Wf.Created(Host, Wf.Ct);
         }
 
         /// <summary>
@@ -40,10 +40,10 @@ namespace Z0.Asm
 
         Outcome<uint> Clear(PartId part, FS.Files src, [CallerMemberName] string caller = null)
         {
-            static void Success(IWfShell wf,  PartId part, Outcome<uint> result, string caller)
-                => wf.Trace(StepId, text.nest(part.Format(), caller, result.Data));
+            void Success(IWfShell wf,  PartId part, Outcome<uint> result, string caller)
+                => wf.Trace(StepId, delimit(part.Format(), caller, result.Data));
 
-            static void Failure(IWfShell wf,  PartId part, Outcome<uint> result, string caller)
+            void Failure(IWfShell wf,  PartId part, Outcome<uint> result, string caller)
                 => wf.Error(StepId, result.Error);
 
             var wf = Wf;
@@ -68,25 +68,23 @@ namespace Z0.Asm
         void ClearPartFiles(IPartCaptureArchive archive, PartId part)
         {
             var total = 0u;
-            Wf.Running<string>(StepId, text.delimit(FieldDelimiter, nameof(ClearPartFiles), part));
+            Wf.Running(Host, delimit(nameof(ClearPartFiles), part));
             total += ClearExtracts(archive,part);
             total += ClearParsed(archive,part);
             total += ClearAsm(archive,part);
             total += ClearX86(archive,part);
             total += ClearCil(archive,part);
-            Wf.Ran<string>(StepId, text.delimit(FieldDelimiter, nameof(ClearPartFiles), part, total));
-
+            Wf.Ran(Host, delimit(nameof(ClearPartFiles), part, total));
         }
 
         public void Run()
         {
-            var parts = Config.PartIdentities;
             Clear(Config.PartIdentities);
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
     }
 }

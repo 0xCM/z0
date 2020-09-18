@@ -60,7 +60,7 @@ namespace Z0
             }
         }
 
-        WfType<S,T> Type
-            => api.type<S,T>();
+        ArrowType<S,T> Type
+            => Arrows.type<S,T>();
     }
 }

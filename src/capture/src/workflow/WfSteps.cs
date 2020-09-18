@@ -11,6 +11,13 @@ namespace Z0
 
     using Asm;
 
+    [Step]
+    public sealed class ClearCaptureArchivesHost : WfHost<ClearCaptureArchivesHost>
+    {
+        public static WfStepId StepId
+            => step<ClearCaptureArchivesHost>();
+    }
+
     [WfHost]
     public sealed class CaptureControlHost : WfHost<CaptureControlHost>
     {
@@ -146,12 +153,6 @@ namespace Z0
             => step<EvaluateStep>();
     }
 
-    [Step]
-    public readonly struct ClearCaptureArchivesStep : IWfStep<ClearCaptureArchivesStep>
-    {
-        public static WfStepId StepId
-            => step<ClearCaptureArchivesStep>();
-    }
 
 
     [Step]

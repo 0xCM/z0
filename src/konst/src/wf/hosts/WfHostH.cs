@@ -21,6 +21,10 @@ namespace Z0
         public static implicit operator WfStepId(WfHost<H> src)
             => src.Id;
 
+        [MethodImpl(Inline)]
+        public static implicit operator WfHost(WfHost<H> src)
+            => new WfHost(src.Id, src.Type, src.Execute);
+
         public Type Type {get;}
 
         public StringRef Name

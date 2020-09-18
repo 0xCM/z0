@@ -15,7 +15,7 @@ namespace Z0
     partial struct Table
     {
 
-        public static WfDataFlow<TableEmission<F,T>,FilePath> emit<F,T>(in TableEmission<F,T> src, FilePath dst, IRowFormatter<F> formatter, char delimiter = FieldDelimiter)
+        public static DataFlow<TableEmission<F,T>,FilePath> emit<F,T>(in TableEmission<F,T> src, FilePath dst, IRowFormatter<F> formatter, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
             where T : struct, ITable<F,T>
         {
@@ -31,7 +31,7 @@ namespace Z0
             return (src,dst);
         }
 
-        public static WfDataFlow<Dictionary<string,E>,FilePath> emit<E>(Dictionary<string,E> src, FilePath dst)
+        public static DataFlow<Dictionary<string,E>,FilePath> emit<E>(Dictionary<string,E> src, FilePath dst)
             where E : unmanaged, Enum
         {
             var header = text.concat("Seq". PadRight(10), SpacePipe, typeof(E).Name);
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="src">The source</param>
         /// <param name="dst">The target</param>
         /// <typeparam name="E">The enum type</typeparam>
-        public static WfDataFlow<EnumLiteralDetails<E>,FilePath> emit<E>(in EnumLiteralDetails<E> src, FilePath dst)
+        public static DataFlow<EnumLiteralDetails<E>,FilePath> emit<E>(in EnumLiteralDetails<E> src, FilePath dst)
             where E : unmanaged, Enum
         {
             var name = typeof(E).Name;

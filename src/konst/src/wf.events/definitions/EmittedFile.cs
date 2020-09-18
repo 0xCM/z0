@@ -36,7 +36,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format()
-                => format(EventId, Content);
+                => format(EventId, Path.ToUri());
         }
     }
 }

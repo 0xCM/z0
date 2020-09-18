@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static EmitImageBlobsStep;
+    using static EmitImageBlobsHost;
     using static z;
 
     using F = ImageBlobField;
@@ -22,19 +22,19 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        readonly CorrelationToken Ct;
-
         readonly IPart[] Parts;
 
+        readonly WfHost Host;
+
         [MethodImpl(Inline)]
-        public EmitImageBlobs(IWfShell wf, IPart[] parts, CorrelationToken ct)
+        public EmitImageBlobs(IWfShell wf, WfHost host)
         {
             Wf = wf;
-            Ct = ct;
-            Parts = parts;
+            Host = host;
+            Parts = Wf.Api.Parts;
             TargetDir = wf.ResourceRoot + FolderName.Define("blobs");
             EmissionCount = 0;
-            Wf.Created(StepId, ct);
+            Wf.Created(Host);
         }
 
         public ReadOnlySpan<ImageBlob> Read(IPart part)
@@ -64,7 +64,7 @@ namespace Z0
             var id = part.Id;
             var dstPath =  TargetDir + FileName.define(id.Format(), "blob.csv");
 
-            Wf.Emitting<ImageBlob>(StepId, FS.path(dstPath.Name));
+            Wf.Emitting<ImageBlob>(Host, FS.path(dstPath.Name));
 
             var data = Read(part);
             var count = (uint)data.Length;
@@ -78,22 +78,22 @@ namespace Z0
 
             EmissionCount += count;
 
-            Wf.Emitted<ImageBlob>(StepId, count, FS.path(dstPath.Name));
+            Wf.Emitted<ImageBlob>(Host, count, FS.path(dstPath.Name));
         }
 
         public void Run()
         {
-            Wf.Running(StepId, new {EmissionType, TargetDir});
+            Wf.Running(Host, delimit(EmissionType, TargetDir));
 
             foreach(var part in Parts)
                 Emit(part);
 
-            Wf.Ran(StepId, new {EmissionType, EmissionCount, TargetDir});
+            Wf.Ran(Host, delimit(EmissionType, EmissionCount, TargetDir));
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
     }
 }

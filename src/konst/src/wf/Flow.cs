@@ -13,8 +13,6 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Flow
     {
-        [MethodImpl(Inline), Op]
-        public static bool eq(WfType a, WfType b)
-            => a.Source == b.Source && a.Target == b.Target;
+
     }
 }

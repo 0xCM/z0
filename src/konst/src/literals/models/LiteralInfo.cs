@@ -14,10 +14,6 @@ namespace Z0
     /// </summary>
     public readonly struct LiteralInfo : ILiteral<LiteralInfo>
     {
-        [MethodImpl(Inline)]
-        public static LiteralInfo define(string Name, object Data, string Text, TypeCode TypeCode, bool IsEnum, bool MultiLiteral)
-            => new LiteralInfo(Name,Data, Text, TypeCode, IsEnum, MultiLiteral);
-
         public string Name {get;}
 
         public object Data {get;}

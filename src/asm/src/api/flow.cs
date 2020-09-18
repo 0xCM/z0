@@ -16,10 +16,10 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static WfDataFlow<Vector128<byte>,EncodedFx> flow(Vector128<byte> src, out EncodedFx dst)
+        public static DataFlow<Vector128<byte>,EncodedFx> flow(Vector128<byte> src, out EncodedFx dst)
         {
             dst = asm.encoded(src);
-            return new WfDataFlow<Vector128<byte>, EncodedFx>(src, dst);
+            return new DataFlow<Vector128<byte>, EncodedFx>(src, dst);
         }
 
         [MethodImpl(Inline), Op]

@@ -66,7 +66,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format()
-                => Text;
+                => Text?.Trim() ?? EmptyString;
 
             [MethodImpl(Inline)]
             public PathPart[] Split(char delimiter)

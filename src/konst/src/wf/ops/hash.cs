@@ -14,11 +14,11 @@ namespace Z0
     partial struct Flow
     {
         [MethodImpl(Inline), Op]
-        public static ulong hash32(WfType src)
+        public static ulong hash32(ArrowType src)
             => hash(src.Source) ^ hash(src.Target);
 
         [MethodImpl(Inline), Op]
-        public static ulong hash64(WfType src)
+        public static ulong hash64(ArrowType src)
             => (ulong)hash(src.Source) | ((ulong)hash(src.Target) << 32);
     }
 }

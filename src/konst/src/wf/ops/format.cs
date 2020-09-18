@@ -13,10 +13,6 @@ namespace Z0
 
     partial struct Flow
     {
-        [MethodImpl(Inline), Op]
-        public static string format(WfType t)
-            => text.format("{0} -> {1}", t.Source.Name, t.Target.Name);
-
         public static void format(WfError<Exception> error, StringBuilder dst)
         {
             const string ErrorTrace = "{0} | {1} | {2} | Outer | {3} | {4} | {5}";

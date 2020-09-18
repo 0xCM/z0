@@ -8,9 +8,14 @@ namespace Z0
 
     using Z0.Asm;
 
-    using static RenderPatterns;
     using static Flow;
     using static z;
+
+    [WfHost]
+    public sealed class EmitPeImageHost : WfHost<EmitPeImageHost>
+    {
+
+    }
 
     [WfHost]
     public class RecaptureHost : WfHost<RecaptureHost>
@@ -45,15 +50,6 @@ namespace Z0
         }
     }
 
-    [WfHost]
-    public sealed class EmitFieldLiteralsHost : WfHost<EmitFieldLiteralsHost>
-    {
-        protected override void Execute(IWfShell wf)
-        {
-            using var step = new EmitFieldLiterals(wf, this);
-            step.Run();
-        }
-    }
 
     [WfHost]
     public class CreateGlobalIndexStep : WfHost<CreateGlobalIndexStep>
@@ -85,31 +81,6 @@ namespace Z0
 
     }
 
-    [Step]
-    public readonly struct EmitBitMasksStep : IWfStep<EmitBitMasksStep>
-    {
-        public const string RunningPattern = "Emitting bitmasks to {0}";
-
-        public const string RanPattern = "Emitted {0} bitmasks to {1}";
-
-        public static WfStepId StepId
-            => step<EmitBitMasksStep>();
-    }
-
-    [Step]
-    public readonly struct EmitPartCilStep : IWfStep<EmitPartCilStep>
-    {
-        public const string DatasetName = "Cil";
-
-        public const string EmissionType = "il";
-
-        public static WfStepId StepId
-            => typeof(EmitPartCilStep);
-
-        public const string DataFolder = EmissionType;
-
-        public const string DatasetExt = EmissionType + ExtSep +  DataExt;
-    }
 
 
     [Step]
@@ -120,7 +91,7 @@ namespace Z0
     }
 
     [Step]
-    public readonly struct Engines : IWfStep<Engines>
+    public sealed class Engines : WfHost<Engines>
     {
         public static WfStepId StepId
             => step<Engines>();
@@ -133,72 +104,25 @@ namespace Z0
             => step<EmitPeHeadersStep>();
     }
 
-    [Step]
-    public readonly struct EmitPeImageStep : IWfStep<EmitPeImageStep>
-    {
-        public const string DataType = "hexline";
-
-        public const string DatasetName = "PeImage";
-
-        public static WfStepId StepId => step<EmitPeImageStep>();
-    }
-
-    [WfHost]
-    public sealed class EmitProjectDocsHost : WfHost<EmitProjectDocsHost>
-    {
-        public static WfStepId StepId
-            => typeof(EmitProjectDocsHost);
-    }
 
     [Step]
-    public readonly struct EmitContentCatalogStep : IWfStep<EmitContentCatalogStep>
-    {
-        public static WfStepId StepId
-            => step<EmitContentCatalogStep>();
-    }
-
-    [Step]
-    public readonly struct EmitImageConstantsStep : IWfStep<EmitImageConstantsStep>
+    public sealed class EmitImageConstantsStep : WfHost<EmitImageConstantsStep>
     {
         public static WfStepId StepId
             => step<EmitImageConstantsStep>();
     }
 
-    [Step]
-    public sealed class EmitStringRecordHost : WfHost<EmitStringRecordHost>
-    {
-        public const string DataType = "strings";
-
-        public const string UserKind = nameof(PartStringKind.User);
-
-        public const string SystemKind = nameof(PartStringKind.System);
-
-        public const string TargetFolder = DataType + Plural;
-
-        public const string UserTargetFolder = "strings.user";
-
-        public const string SystemTargetFolder = "strings.system";
-
-        public const string DataTypeExt = DataType + ExtSep + DataExt;
-
-        public const string UserKindExt = UserKind + ExtSep + DataTypeExt;
-
-        public const string SystemKindExt = SystemKind + ExtSep + DataTypeExt;
-
-        public static WfStepId StepId
-            => step<EmitStringRecordHost>();
-    }
 
     [Step]
     public readonly struct EmitPartStringsStep : IWfStep<EmitPartStringsStep>
     {
-        public const string EmissionType = EmitStringRecordHost.DataType;
+        public const string EmissionType = EmitStringRecordsHost.DataType;
 
         public static WfStepId StepId
             => Flow.step<EmitPartStringsStep>();
 
         public static string ExtName(PartStringKind kind)
-            => (kind == PartStringKind.System ? EmitStringRecordHost.SystemKindExt : EmitStringRecordHost.UserKindExt).ToLower();
+            => (kind == PartStringKind.System ? EmitStringRecordsHost.SystemKindExt : EmitStringRecordsHost.UserKindExt).ToLower();
     }
 
     [Step]
@@ -211,12 +135,12 @@ namespace Z0
     }
 
     [Step]
-    public readonly struct EmitImageBlobsStep : IWfStep<EmitImageBlobsStep>
+    public sealed class EmitImageBlobsHost : WfHost<EmitImageBlobsHost>
     {
         public const string EmissionType = "Metablobs";
 
         public static WfStepId StepId
-            => Flow.step<EmitBitMasksStep>();
+            => Flow.step<EmitBitMasksHost>();
     }
 
     [Step]

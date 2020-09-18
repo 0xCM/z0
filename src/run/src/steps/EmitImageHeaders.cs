@@ -34,10 +34,10 @@ namespace Z0
 
         public readonly EmitImageHeadersHost Host;
 
-        public readonly WfDataFlow<FS.Files, FS.FilePath> Df;
+        public readonly DataFlow<FS.Files, FS.FilePath> Df;
 
         [MethodImpl(Inline)]
-        public EmitImageHeaders(IWfShell wf, EmitImageHeadersHost host, WfDataFlow<FS.Files, FS.FilePath> df)
+        public EmitImageHeaders(IWfShell wf, EmitImageHeadersHost host, DataFlow<FS.Files, FS.FilePath> df)
         {
             Wf = wf;
             Host = host;

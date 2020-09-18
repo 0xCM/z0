@@ -24,9 +24,9 @@ namespace Z0
     }
 
     [WfHost]
-    public sealed class EmitImageHeadersHost : WfHost<EmitImageHeadersHost, WfDataFlow<FS.Files, FS.FilePath>>
+    public sealed class EmitImageHeadersHost : WfHost<EmitImageHeadersHost, DataFlow<FS.Files, FS.FilePath>>
     {
-        public override void Run(IWfShell wf, WfDataFlow<FS.Files, FS.FilePath> state)
+        public override void Run(IWfShell wf, DataFlow<FS.Files, FS.FilePath> state)
         {
             using var step = new EmitImageHeaders(wf, this, state);
             step.Run();

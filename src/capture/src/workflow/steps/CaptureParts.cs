@@ -97,7 +97,7 @@ namespace Z0
         {
             var count = src.Length;
             var hosts = @readonly(src);
-            using var step = new CaptureHostMembers(State, dst, Ct);
+            using var step = new CaptureHostMembers(State, dst);
             for(var i=0; i<count; i++)
             {
                 ref readonly var host = ref skip(hosts,i);
@@ -123,7 +123,7 @@ namespace Z0
         {
             try
             {
-                using var step = new ClearCaptureArchives(Wf, Config, Ct);
+                using var step = new ClearCaptureArchives(Wf, new ClearCaptureArchivesHost(), Config);
                 step.Run();
             }
             catch(Exception e)

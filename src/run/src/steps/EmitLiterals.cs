@@ -15,7 +15,7 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
-        public readonly WfDataFlow<IPart,FilePath> Df;
+        public readonly DataFlow<IPart,FilePath> Df;
 
         readonly EmitLiteralsHost Host;
 

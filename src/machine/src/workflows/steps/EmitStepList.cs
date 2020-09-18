@@ -17,7 +17,7 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        public WfDataFlow<Assembly,FilePath> Df;
+        public DataFlow<Assembly,FilePath> Df;
 
         public EmitStepList(IWfShell wf, Assembly src, CorrelationToken ct)
         {

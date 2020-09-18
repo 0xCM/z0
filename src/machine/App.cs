@@ -17,7 +17,7 @@ namespace Z0
         {
             var wf = Apps.shell(Assembly.GetEntryAssembly(), args, out var app);
             var state = new WfCaptureState(wf, new AsmContext(app, wf));
-            using var machine = new Engine(state, wf.Ct);
+            using var machine = new Engine(state, new Engines());
             machine.Run();
         }
     }

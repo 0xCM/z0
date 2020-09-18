@@ -20,12 +20,12 @@ namespace Z0
 
             public WfEventId EventId {get;}
 
-            public WfDataFlow<T> DataFlow {get;}
+            public DataFlow<T> DataFlow {get;}
 
             public FlairKind Flair {get;}
 
             [MethodImpl (Inline)]
-            public Processed(WfStepId step, WfDataFlow<T> flow, CorrelationToken ct, FlairKind flair = Ran)
+            public Processed(WfStepId step, DataFlow<T> flow, CorrelationToken ct, FlairKind flair = Ran)
             {
                 EventId = (EventName, step, ct);
                 DataFlow = flow;
@@ -44,12 +44,12 @@ namespace Z0
 
             public WfEventId EventId {get;}
 
-            public WfDataFlow<S,T> DataFlow {get;}
+            public DataFlow<S,T> DataFlow {get;}
 
             public FlairKind Flair {get;}
 
             [MethodImpl (Inline)]
-            public Processed(WfStepId step, WfDataFlow<S,T> flow, CorrelationToken ct, FlairKind flair = Ran)
+            public Processed(WfStepId step, DataFlow<S,T> flow, CorrelationToken ct, FlairKind flair = Ran)
             {
                 EventId = (EventName, step, ct);
                 DataFlow = flow;

@@ -13,7 +13,7 @@ namespace Z0
 
     partial class Enums
     {
-        public static WfDataFlow<EnumLiteral[],FilePath> emit<E>(EnumLiteral[] src, FilePath dst)
+        public static DataFlow<EnumLiteral[],FilePath> emit<E>(EnumLiteral[] src, FilePath dst)
             where E : unmanaged, Enum
         {
             var literals = @readonly(src);

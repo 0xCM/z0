@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static EmitImageConstantsStep;
     using static RenderPatterns;
     using static z;
 
@@ -19,25 +18,25 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
-        readonly CorrelationToken Ct;
+        readonly WfHost Host;
 
         readonly FolderPath TargetDir;
 
         readonly IPart[] Parts;
 
         [MethodImpl(Inline)]
-        public EmitImageConstants(IWfShell wf, IPart[] parts, CorrelationToken ct)
+        public EmitImageConstants(IWfShell wf, WfHost host)
         {
             Wf = wf;
-            Ct = ct;
-            Parts = parts;
+            Host = host;
+            Parts = Wf.Api.Parts;
             TargetDir = wf.ResourceRoot + FolderName.Define("constants");
-            Wf.Created(StepId);
+            Wf.Created(Host);
         }
 
         public void Run()
         {
-            Wf.Running(StepId);
+            Wf.Running(Host);
 
             foreach(var part in Parts)
             {
@@ -47,11 +46,11 @@ namespace Z0
                 }
                 catch(Exception e)
                 {
-                    Wf.Error(StepId, e);
+                    Wf.Error(Host, e);
                 }
             }
 
-            Wf.Ran(StepId);
+            Wf.Ran(Host);
         }
 
         ReadOnlySpan<ImageConstantRecord> Read(IPart part)
@@ -64,7 +63,7 @@ namespace Z0
         {
             var id = part.Id;
             var dstPath = TargetDir + FileName.define(id.Format(), DataExt);
-            Wf.Running(StepId, dstPath.Name);
+            Wf.Running(Host, dstPath.Name);
 
             var data = Read(part);
             var count = data.Length;
@@ -77,7 +76,7 @@ namespace Z0
             using var writer = dstPath.Writer();
             writer.Write(dst.Render());
 
-            Wf.Ran(StepId, delimit(id, count));
+            Wf.Ran(Host, delimit(id, count));
         }
 
         static ref readonly RecordFormatter<F,W> format(in ImageConstantRecord src, in RecordFormatter<F,W> dst, bool eol = true)
@@ -94,7 +93,7 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
     }
 }

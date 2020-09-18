@@ -22,15 +22,12 @@ namespace Z0
 
         readonly IPartCapturePaths Target;
 
-        public CorrelationToken Ct {get;}
-
         [MethodImpl(Inline)]
-        public CaptureHostMembers(WfCaptureState state, IPartCapturePaths dst, CorrelationToken ct)
+        public CaptureHostMembers(WfCaptureState state, IPartCapturePaths dst)
         {
             Wf = state.Wf;
             State = state;
             Target = dst;
-            Ct = ct;
             Wf.Created(StepId);
         }
 

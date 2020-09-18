@@ -26,10 +26,6 @@ namespace Z0
             return string.Concat(buffer);
         }
 
-        // [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        // public static string delimit<T>(T[] src, char delimiter)
-        //     => text.delimit(src,$" {delimiter} ");
-
         [MethodImpl(Inline), Op]
         public static string delimit(char delimiter, params object[] src)
             => delimit(src,delimiter);

@@ -9,11 +9,9 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using D = WfDelegates;
 
     partial struct Flow
     {
-
         [MethodImpl(Inline)]
         public static WfFunc<H> func<H>([CallerMemberName] string name = null)
             where H : struct, IWfStep<H>

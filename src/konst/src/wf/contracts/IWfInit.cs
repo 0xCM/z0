@@ -44,7 +44,7 @@ namespace Z0
         /// <summary>
         /// The output data archive configuration
         /// </summary>
-        ArchiveConfig TargetArchive {get;}
+        ArchiveSettings TargetArchive {get;}
 
         /// <summary>
         /// The persistent settings supplied by a json.config
@@ -54,12 +54,12 @@ namespace Z0
         /// <summary>
         /// The resource staging area
         /// </summary>
-        ArchiveConfig Resources {get;}
+        ArchiveSettings Resources {get;}
 
         /// <summary>
         /// The application-specific data root
         /// </summary>
-        ArchiveConfig AppData {get;}
+        ArchiveSettings AppData {get;}
 
         /// <summary>
         /// The specified log configuration
