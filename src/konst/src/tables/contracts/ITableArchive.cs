@@ -8,37 +8,34 @@ namespace Z0
     using System.Security;
     using System.Collections.Generic;
     using System.Linq;
-
     [SuppressUnmanagedCodeSecurity]
-    public interface ITableArchive
+    public interface ITableArchive : IFileDb
     {
-        FolderPath ArchiveRoot {get;}
-
-        Option<FilePath> Deposit<F,R>(R[] src, FileName name)
+        Option<FilePath> Deposit<F,R>(R[] src, FS.FileName name)
             where F : unmanaged, Enum
             where R : struct, ITabular;
 
-        Option<FilePath> Deposit<F,R>(R[] src, FolderName folder, FileName name)
+        Option<FilePath> Deposit<F,R>(R[] src, FS.FolderName folder, FS.FileName name)
             where F : unmanaged, Enum
             where R : struct, ITabular;
 
         void Clear()
-            => ArchiveRoot.Clear();
+            => Root.Clear();
 
-        void Clear(FolderName folder)
-            => (ArchiveRoot + folder).Clear();
+        void Clear(FS.FolderName folder)
+            => (Root + folder).Clear();
 
-        ParseResult<TextDoc> Dataset(FilePath src)
+        ParseResult<TextDoc> Dataset(FS.FilePath src)
             => TextDocParser.parse(src);
 
-        ParseResult<TextDoc> Dataset(FileName name)
+        ParseResult<TextDoc> Dataset(FS.FileName name)
             => (from p in DatasetPaths().Where(p => p.FileName == name)
                 select Dataset(p)).FirstOrDefault();
 
         ParseResult<TextDoc> Dataset(string name)
-            => Dataset(ArchiveRoot + FileName.define(name, FileExtensions.Csv));
+            => Dataset(Root + FS.file(name, GlobalExtensions.Csv));
 
-        IEnumerable<FilePath> DatasetPaths(FolderName subject = default)
-            => (ArchiveRoot + (subject ?? FolderName.Define("asm"))).Files(FileExtensions.Csv, true);
+        IEnumerable<FS.FilePath> DatasetPaths(FS.FolderName? subject = default)
+            => (Root + (subject ?? FS.folder("asm"))).Files(GlobalExtensions.Csv, true);
     }
 }

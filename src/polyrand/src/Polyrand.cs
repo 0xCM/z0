@@ -13,10 +13,22 @@ namespace Z0
     /// </summary>
     public class Polyrand : IPolyrand
     {
+        public static IPolyrand @default()
+            => Polyrand.Pcg64(PolySeed64.Seed05);
+
+        public static IPolyrand @default(ulong seed)
+            => Polyrand.Pcg64(seed);
+
+        public static IWfShell install(IWfShell dst)
+            => dst.WithSource(@default());
+
+        public static IWfShell install(IPolyrand src, IWfShell dst)
+            => dst.WithSource(src);
+
         /// <summary>
         /// Creates a 64-bit Pcg RNG
         /// </summary>
-        /// <param name="seed">The inital rng state</param>
+        /// <param name="seed">The initial rng state</param>
         /// <param name="index">The stream index, if any</param>
         public static IPolyrand Pcg64(ulong? seed = null, ulong? index = null)
             => Polyrand.Create(Z0.Pcg64.Define(seed ?? PolySeed64.Seed00, index));
@@ -31,7 +43,7 @@ namespace Z0
         /// <summary>
         /// Creates a splitmix 64-bit generator
         /// </summary>
-        /// <param name="seed">The initial state of the generator, if specified; 
+        /// <param name="seed">The initial state of the generator, if specified;
         /// otherwise, the seed is obtained from an entropy source</param>
         public static IPolyrand SplitMix(ulong? seed = null)
             => Polyrand.Create(SplitMix64.Define(seed ?? PolySeed64.Seed00));
@@ -65,18 +77,18 @@ namespace Z0
         [MethodImpl(Inline)]
         Polyrand(IRngBoundPointSource<ulong> Points)
         {
-            this.Points = Points;            
+            this.Points = Points;
             this.Navigator = default;
         }
 
         [MethodImpl(Inline)]
         Polyrand(IRngNav<ulong> Points)
         {
-            this.Points = Points;            
+            this.Points = Points;
             this.Navigator = Option.some(Points as IRngNav);
         }
 
-        public RngKind RngKind 
+        public RngKind RngKind
             => Points.RngKind;
 
         [MethodImpl(Inline)]
@@ -84,14 +96,14 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(UInt8Source.Next());                
+                return generic<T>(UInt8Source.Next());
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(UInt16Source.Next());                
+                return generic<T>(UInt16Source.Next());
             else if(typeof(T) == typeof(uint))
-                return generic<T>(UInt32Source.Next());                
+                return generic<T>(UInt32Source.Next());
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(UInt64Source.Next());                
-            else 
+                return generic<T>(UInt64Source.Next());
+            else
                 return Next_i<T>();
         }
 
@@ -99,14 +111,14 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(Int8Source.Next());                
+                return generic<T>(Int8Source.Next());
             else if(typeof(T) == typeof(short))
-                return generic<T>(Int16Source.Next());                
+                return generic<T>(Int16Source.Next());
             else if(typeof(T) == typeof(int))
-                return generic<T>(Int32Source.Next());                
+                return generic<T>(Int32Source.Next());
             else if(typeof(T) == typeof(long))
-                return generic<T>(Int64Source.Next());                
-            else 
+                return generic<T>(Int64Source.Next());
+            else
                 return Next_f<T>();
 
         }
@@ -115,11 +127,11 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(Float32Source.Next());                
+                return generic<T>(Float32Source.Next());
             else if(typeof(T) == typeof(double))
-                return generic<T>(Float64Source.Next());                
-            else 
-                throw Unsupported.define<T>();                
+                return generic<T>(Float64Source.Next());
+            else
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -127,14 +139,14 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(UInt8Source.Next(uint8(max)));                
+                return generic<T>(UInt8Source.Next(uint8(max)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(UInt16Source.Next(uint16(max)));                
+                return generic<T>(UInt16Source.Next(uint16(max)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(UInt32Source.Next(uint32(max)));                
+                return generic<T>(UInt32Source.Next(uint32(max)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(UInt64Source.Next(uint64(max)));                
-            else 
+                return generic<T>(UInt64Source.Next(uint64(max)));
+            else
                 return Next_i(max);
         }
 
@@ -143,14 +155,14 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(Int8Source.Next(int8(max)));                
+                return generic<T>(Int8Source.Next(int8(max)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(Int16Source.Next(int16(max)));                
+                return generic<T>(Int16Source.Next(int16(max)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(Int32Source.Next(int32(max)));                
+                return generic<T>(Int32Source.Next(int32(max)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(Int64Source.Next(int64(max)));                
-            else 
+                return generic<T>(Int64Source.Next(int64(max)));
+            else
                 return Next_f(max);
         }
 
@@ -159,11 +171,11 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(Float32Source.Next(float32(max)));                
+                return generic<T>(Float32Source.Next(float32(max)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(Float64Source.Next(float64(max)));                
-            else 
-                throw Unsupported.define<T>();                
+                return generic<T>(Float64Source.Next(float64(max)));
+            else
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -171,14 +183,14 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(UInt8Source.Next(uint8(min), uint8(max)));                
+                return generic<T>(UInt8Source.Next(uint8(min), uint8(max)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(UInt16Source.Next(uint16(min), uint16(max)));                
+                return generic<T>(UInt16Source.Next(uint16(min), uint16(max)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(UInt32Source.Next(uint32(min), uint32(max)));                
+                return generic<T>(UInt32Source.Next(uint32(min), uint32(max)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(UInt64Source.Next(uint64(min), uint64(max)));                
-            else 
+                return generic<T>(UInt64Source.Next(uint64(min), uint64(max)));
+            else
                 return Next_i(min,max);
         }
 
@@ -188,14 +200,14 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(Int8Source.Next(int8(min), int8(max)));                
+                return generic<T>(Int8Source.Next(int8(min), int8(max)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(UInt16Source.Next(uint16(min), uint16(max)));                
+                return generic<T>(UInt16Source.Next(uint16(min), uint16(max)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(UInt32Source.Next(uint32(min), uint32(max)));                
+                return generic<T>(UInt32Source.Next(uint32(min), uint32(max)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(UInt64Source.Next(uint64(min), uint64(max)));                
-            else 
+                return generic<T>(UInt64Source.Next(uint64(min), uint64(max)));
+            else
                 return Next_f(min,max);
         }
 
@@ -204,11 +216,11 @@ namespace Z0
             where T : struct
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(Float32Source.Next(float32(min), float32(max)));                
+                return generic<T>(Float32Source.Next(float32(min), float32(max)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(Float64Source.Next(float64(min), float64(max)));                
-            else 
-                throw Unsupported.define<T>();                
+                return generic<T>(Float64Source.Next(float64(min), float64(max)));
+            else
+                throw Unsupported.define<T>();
         }
 
         [MethodImpl(Inline)]
@@ -288,7 +300,7 @@ namespace Z0
         [MethodImpl(Inline)]
         sbyte ISource<sbyte>.Next()
              => (sbyte) (Points.Next((ulong)sbyte.MaxValue*2) - (ulong)SByte.MaxValue);
- 
+
         [MethodImpl(Inline)]
         sbyte IBoundValueSource<sbyte>.Next(sbyte max)
         {
@@ -300,8 +312,8 @@ namespace Z0
         sbyte IBoundValueSource<sbyte>.Next(sbyte min, sbyte max)
         {
             var delta = math.sub(max, min);
-            return delta > 0 
-                ? math.add(min, (sbyte)Points.Next((ulong)delta)) 
+            return delta > 0
+                ? math.add(min, (sbyte)Points.Next((ulong)delta))
                 : math.add(min, (sbyte)Points.Next((ulong)math.negate(delta)));
         }
 
@@ -332,8 +344,8 @@ namespace Z0
         short IBoundValueSource<short>.Next(short min, short max)
         {
             var delta = math.sub(max, min);
-            return delta > 0 
-                ? math.add(min, (short)Points.Next((ulong)delta)) 
+            return delta > 0
+                ? math.add(min, (short)Points.Next((ulong)delta))
                 : math.add(min, (short)Points.Next((ulong)math.negate(delta)));
         }
 
@@ -368,8 +380,8 @@ namespace Z0
         int IBoundValueSource<int>.Next(int min, int max)
         {
             var delta = math.sub(max, min);
-            return delta > 0 
-                ? min + (int)Points.Next((ulong)delta) 
+            return delta > 0
+                ? min + (int)Points.Next((ulong)delta)
                 : min + (int)Points.Next((ulong)math.negate(delta));
         }
 
@@ -422,8 +434,8 @@ namespace Z0
         long IBoundValueSource<long>.Next(long min, long max)
         {
             var delta = math.sub(max, min);
-            return delta > 0 
-                ? min + (long)Points.Next((ulong)delta) 
+            return delta > 0
+                ? min + (long)Points.Next((ulong)delta)
                 : min + (long)Points.Next((ulong)math.negate(delta));
         }
 
@@ -477,25 +489,25 @@ namespace Z0
 
         [MethodImpl(Inline)]
         float NextF32()
-            => ((float)Points.Next())/float.MaxValue; 
+            => ((float)Points.Next())/float.MaxValue;
 
         [MethodImpl(Inline)]
         double NextF64()
             => ((double)Points.Next())/double.MaxValue;
 
-        public Interval<T> Domain<T>() 
+        public Interval<T> Domain<T>()
             where T : unmanaged
-        {            
+        {
             if(typeof(T) == typeof(double))
                 return (convert<T>(long.MinValue/2), convert<T>(long.MaxValue/2));
             else if(typeof(T) == typeof(float))
                 return (convert<T>(int.MinValue/2), convert<T>(int.MaxValue/2));
             else
             {
-                var min = NumericKinds.signed<T>() ? gmath.negate(gmath.sra(As.maxval<T>(), 1)) : As.minval<T>();                
+                var min = NumericKinds.signed<T>() ? gmath.negate(gmath.sra(As.maxval<T>(), 1)) : As.minval<T>();
                 var max = NumericKinds.signed<T>() ? gmath.sra(As.maxval<T>(), 1)  : As.maxval<T>();
                 return (min,max);
-            }            
+            }
         }
     }
 }

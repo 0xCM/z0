@@ -8,17 +8,17 @@ namespace Z0
 
     class App : AppShell<App,IAppContext>
     {
-        static IAppContext CreateAppContext()
-        {
-            var resolved = ApiQuery.combine(P.Imagine.Resolved);
-            var random = Polyrand.Pcg64(PolySeed64.Seed05);
-            var settings = SettingValues.Load(AppPaths.AppConfigPath);
-            var exchange = AppMsgExchange.Create();
-            return Apps.context(resolved, random, settings, exchange);
-        }
+        // static IAppContext CreateAppContext()
+        // {
+        //     var resolved = ApiQuery.combine(P.Imagine.Resolved);
+        //     var random = Polyrand.Pcg64(PolySeed64.Seed05);
+        //     var settings = SettingValues.Load(AppPaths.AppConfigPath);
+        //     var exchange = AppMsgExchange.Create();
+        //     return Apps.context(resolved, random, settings, exchange);
+        // }
 
         public App()
-            : base(CreateAppContext())
+            : base(Apps.context())
         {
         }
 

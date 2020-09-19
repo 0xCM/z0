@@ -23,7 +23,7 @@ namespace Z0
             where M : struct, IDataModel
             where K : unmanaged, Enum
         {
-            var path = FS.dir(dst.ArchiveRoot.Name) + FS.folder(m.Name) + FS.file(typeof(T).Name);
+            var path = FS.dir(dst.Root.Name) + FS.folder(m.Name) + FS.file(typeof(T).Name);
             return (src, new ArchivedTable<T>(path));
         }
 

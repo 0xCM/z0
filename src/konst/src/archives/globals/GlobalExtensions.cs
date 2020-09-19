@@ -19,6 +19,8 @@ namespace Z0
 
         public static FileExt Cil => ext(cil);
 
+        public static FileExt Txt => ext(txt);
+
         public static FileExt Cpp => ext(cpp);
 
         public static FileExt Cs => ext(cs);

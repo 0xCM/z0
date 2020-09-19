@@ -15,51 +15,51 @@ namespace Z0
 
     public readonly struct TableArchive : ITableArchive
     {
-        public FolderPath ArchiveRoot {get;}
+        public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
-        public static TableArchive create(FS.FolderPath root)
+        public static ITableArchive create(FS.FolderPath root)
             => new TableArchive(root);
 
         [MethodImpl(Inline)]
-        public TableArchive(FolderPath root)
-            => ArchiveRoot = root;
-
-        [MethodImpl(Inline)]
         public TableArchive(FS.FolderPath root)
-            => ArchiveRoot = FolderPath.Define(root.Name);
+            => Root = root;
 
         public void Clear()
-            => ArchiveRoot.Clear();
-
-        public void Clear(FolderName folder)
-            => (ArchiveRoot + folder).Clear();
+            => Root.Clear();
 
         public void Clear(FS.FolderName folder)
-            => (FS.dir(ArchiveRoot.Name) + folder).Clear();
+            => (FS.dir(Root.Name) + folder).Clear();
 
-
-        public IEnumerable<FilePath> Files()
-            => ArchiveRoot.Files(FileExtensions.Csv, true);
+        public IEnumerable<FS.FilePath> Files()
+            => Root.Files(GlobalExtensions.Csv, true);
 
         public Option<FilePath> Deposit<F,R>(R[] src, FS.FileName name)
             where F : unmanaged, Enum
             where R : struct, ITabular
-                => api.store<F,R>().Save(src, api.renderspec<F>(), ArchiveRoot + FileName.define(name.Name));
+                => api.store<F,R>().Save(src, api.renderspec<F>(), Root + FS.file(name.Name));
 
         public Option<FilePath> Deposit<F,R>(R[] src, FS.FolderName folder, FS.FileName name)
             where F : unmanaged, Enum
             where R : struct, ITabular
-                => api.store<F,R>().Save(src, api.renderspec<F>(), (FS.dir(ArchiveRoot.Name) + folder) + name);
+                => api.store<F,R>().Save(src, api.renderspec<F>(), (FS.dir(Root.Name) + folder) + name);
 
-        public Option<FilePath> Deposit<F,R>(R[] src, FileName name)
-            where F : unmanaged, Enum
-            where R : struct, ITabular
-                => api.store<F,R>().Save(src, api.renderspec<F>(), ArchiveRoot + name);
+        public DataFlow<Rowset<T>,ArchivedTable<T>> Deposit<T,M,K>(T[] src, string header, Func<T,string> render,  M m = default)
+            where T : struct
+            where M : struct, IDataModel
+            where K : unmanaged, Enum
+        {
+            var path = Root + FS.folder(m.Name) + FS.file(typeof(T).Name);
+            var records = z.span(src);
+            var count = records.Length;
 
-        public Option<FilePath> Deposit<F,R>(R[] src, FolderName folder, FileName name)
-            where F : unmanaged, Enum
-            where R : struct, ITabular
-                => api.store<F,R>().Save(src, api.renderspec<F>(), (ArchiveRoot + folder) + name);
+            using var writer = path.Writer();
+            writer.WriteLine(header);
+
+            for(var i=0u; i<count; i++)
+                writer.WriteLine(render(z.skip(records, i)));
+
+            return (Table.rowset<T>(src), new ArchivedTable<T>(path));
+        }
     }
 }

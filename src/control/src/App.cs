@@ -12,10 +12,8 @@ namespace Z0
     {
         public static void Main(params string[] args)
         {
-            var wf = Flow.shell(args);
-            var app = Apps.context(wf);
-            var asm = new AsmContext(app, wf);
-            using var control = CaptureControlHost.create(new WfCaptureState(wf, asm));
+            var wf = Polyrand.install(Flow.shell(args));
+            using var control = CaptureControlHost.create(new WfCaptureState(wf, new AsmContext(Apps.context(wf), wf)));
             control.Run();
         }
     }

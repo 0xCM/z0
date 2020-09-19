@@ -10,10 +10,10 @@ namespace Z0
     [LiteralProvider]
     public readonly struct XedSourceMarkers
     {
-        public static string FuncHeader(string name)
+        public static string RuleHeader(string name)
             => $"{name}()::";
 
-        public const string FUNC_MARKER = "()::";
+        public const string RuleMarker = "()::";
 
         /// <summary>
         /// Whe encountered, signals a list  of  insruction specifications to follow,
@@ -21,7 +21,7 @@ namespace Z0
         /// a line containing a single left-brace and below by a line cotaining a
         /// single right-brace
         /// </summary>
-        public const string INSTRUCTION_SEQ = "INSTRUCTIONS()::";
+        public const string InstructionSeq = "INSTRUCTIONS()::";
 
         /// <summary>
         /// When encountered, signals a sequence of lines that describe an instruction

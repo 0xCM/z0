@@ -59,9 +59,9 @@ namespace Z0
                 writer.WriteLine(line);
         }
 
-        public static void Overwrite(this FilePath dst, params string[] src)
+        public static void Overwrite(this FS.FilePath dst, params string[] src)
         {
-            using var writer = new StreamWriter(reifyParent(dst).Name, false);
+            using var writer = new StreamWriter(dst.CreateParentIfMissing().Name, false);
             foreach(var line in src)
                 writer.WriteLine(line);
         }

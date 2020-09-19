@@ -12,43 +12,16 @@ namespace Z0
 
     public readonly struct Apps
     {
-        public static IAppContext context(ApiParts composition, IPolyrand random, ISettings settings, IAppMsgQueue queue)
-            => new AppContext(composition, random, settings, queue);
-
-        public static IWfShell shell(Assembly control, string[] args, out IAppContext app)
-        {
-            var shell = Flow.shell(control, args);
-            app = context(shell.Modules, shell.Paths);
-            return shell;
-        }
-
         public static IAppContext context(IWfShell wf)
-            => new AppContext(wf.Paths, wf.Api, random(), settings(wf.Paths), WfMsgExchange.Create(wf));
+            => new AppContext(wf.Paths, wf.Api, Polyrand.@default(), settings(wf.Paths), WfMsgExchange.Create(wf));
 
         public static IAppContext context()
-        {
-            var entry = Assembly.GetEntryAssembly();
-            var srcRoot = FS.path(entry.Location).FolderPath;
-            var modules = ApiQuery.modules(srcRoot);
-            return context(modules, ShellPaths.Default);
-        }
-
-        public static WfInit init(Assembly control, string[] args)
-        {
-            var modules = ApiQuery.modules(control, args);
-            return new WfInit(Flow.context(control, modules, args), args, modules);
-        }
+            => context(Flow.modules(Assembly.GetEntryAssembly()), ShellPaths.Default);
 
         public static IAppContext context(ApiModules src, IShellPaths paths)
-            => new AppContext(paths, src.Api, random(), settings(paths), exchange());
+            => new AppContext(paths, src.Api, Polyrand.@default(), settings(paths), AppMsgExchange.Create());
 
         static ISettings settings(IShellPaths paths)
             => SettingValues.Load(paths.AppConfigPath);
-
-        static AppMsgExchange exchange()
-            => AppMsgExchange.Create();
-
-        static IPolyrand random()
-            => Polyrand.Pcg64(PolySeed64.Seed05);
     }
 }

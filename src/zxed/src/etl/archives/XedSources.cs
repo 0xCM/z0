@@ -10,22 +10,22 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    public readonly struct XedSourceArchive : IPartFilePaths
+    public readonly struct XedSources : IPartFilePaths
     {
-        public static XedSourceArchive Create(FS.FolderPath root)
-            => new XedSourceArchive(root);
+        public static XedSources Create(FS.FolderPath root)
+            => new XedSources(root);
 
-        public FolderPath ArchiveRoot {get;}
+        public FS.FolderPath ArchiveRoot {get;}
 
-        public FilePath[] Files {get;}
+        public FS.FilePath[] Files {get;}
 
-        public XedSourceArchive(FS.FolderPath root)
+        public XedSources(FS.FolderPath root)
         {
-            ArchiveRoot = FolderPath.Define(root.Name);
-            Files = ArchiveRoot.Files(FileExtensions.Txt,true).Array();
+            ArchiveRoot = root;
+            Files = ArchiveRoot.Files(GlobalExtensions.Txt,true).Array();
         }
 
-        bool ContainsMarker(FilePath file, string marker)
+        bool ContainsMarker(FS.FilePath file, string marker)
         {
             using var reader = file.Reader();
             while(!reader.EndOfStream)
@@ -37,31 +37,31 @@ namespace Z0
             return false;
         }
 
-        bool DefinesInstructions(FilePath file)
-            => ContainsMarker(file, XedSourceMarkers.INSTRUCTION_SEQ);
+        bool DefinesInstructions(FS.FilePath file)
+            => ContainsMarker(file, XedSourceMarkers.InstructionSeq);
 
-        bool DefinesFunctions(FilePath file)
+        bool DefinesFunctions(FS.FilePath file)
         {
             using var reader = file.Reader();
             while(!reader.EndOfStream)
             {
                 var line = reader.ReadLine();
                 if(
-                    line.Contains(XedSourceMarkers.FUNC_MARKER) &&
-                    !line.Contains(XedSourceMarkers.INSTRUCTION_SEQ)
+                    line.Contains(XedSourceMarkers.RuleMarker) &&
+                    !line.Contains(XedSourceMarkers.InstructionSeq)
                     )
                     return true;
             }
             return false;
         }
 
-        public FilePath[] InstructionFiles
+        public FS.FilePath[] InstructionFiles
             => Files.Where(DefinesInstructions);
 
-        public FilePath[] FunctionFiles
+        public FS.FilePath[] FunctionFiles
             => Files.Where(DefinesFunctions);
 
-        public FilePath[] EnumFiles
+        public FS.FilePath[] EnumFiles
             => Files.Where(f => f.FileName.EndsWith("enum"));
     }
 

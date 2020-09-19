@@ -15,7 +15,7 @@ namespace Z0
 
     partial struct XedOps
     {
-        public static XedPattern[] patterns(XedInstructionData src)
+        public static XedPattern[] patterns(in XedInstructionDoc src)
         {
             var patterns = list<XedPattern>();
             for(var i=0; i<src.RowCount; i++)
@@ -39,7 +39,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ListedFiles sources(in XedEtlConfig config)
+        public static ListedFiles sources(in XedConfig config)
             => Archives.list(FS.dir(config.SourceRoot.Name),"*.*", true);
     }
 }

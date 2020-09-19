@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Reflection;
 
     /// <summary>
     /// Characterizes a context that carries and provides access to a composition
@@ -19,12 +18,6 @@ namespace Z0
             => (e => term.print(e));
 
         ApiParts Api {get;}
-
-        PartId[] PartIdentities
-            => Api.Identifiers;
-
-        Assembly[] Components
-            => Api.Components;
 
         void ISink<IAppMsg>.Deposit(IAppMsg msg)
             => MessageQueue.Deposit(msg);

@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
 
     using F = XedInstructionField;
-    using R = XedInstructionRecord;
+    using R = XedInstructionRow;
 
     public enum XedInstructionField : uint
     {
@@ -29,7 +29,7 @@ namespace Z0
         Reg = 5 | 8 << WidthOffset,
     }
 
-    public struct XedInstructionRecord : ITabular<F,R>
+    public struct XedInstructionRow : ITabular<F,R>
     {
         public int Sequence;
 
@@ -44,7 +44,7 @@ namespace Z0
         public asci8 Reg;
 
         [MethodImpl(Inline)]
-        public XedInstructionRecord(int Sequence, asci16 Mnemonic, asci16 Extension, asci8 BaseCode, asci4 Mod, asci8 Reg)
+        public XedInstructionRow(int Sequence, asci16 Mnemonic, asci16 Extension, asci8 BaseCode, asci4 Mod, asci8 Reg)
         {
             this.Sequence = Sequence;
             this.Mnemonic = Mnemonic;

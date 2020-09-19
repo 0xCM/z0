@@ -13,11 +13,11 @@ namespace Z0
 
     static class PatternSummaryEtl
     {
-        public static string ExtractProp(this XedInstructionData src, string name)
+        public static string ExtractProp(this XedInstructionDoc src, string name)
         {
             for(var i=0; i<src.RowCount; i++)
             {
-                var row = src.Rows[i];
+                var row = src.Data[i];
                 var rowText = row.Text;
                 if(text.nonempty(rowText) && rowText.StartsWith(name))
                 {

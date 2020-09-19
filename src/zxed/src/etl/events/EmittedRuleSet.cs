@@ -10,32 +10,35 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ParsingXedInstructions : IWfEvent<ParsingXedInstructions>
+    public readonly struct EmittedRuleSet : IWfEvent<EmittedRuleSet>
     {
-        public static Type EventType => typeof(ParsingXedInstructions);
+        public static Type EventType => typeof(EmittedRuleSet);
 
         /// <summary>
         /// The event identifier
         /// </summary>
         public WfEventId EventId {get;}
 
+        public Count LineCount {get;}
+
         /// <summary>
         /// The input file path
         /// </summary>
-        public readonly FS.FilePath Source;
+        public readonly FS.FileUri Target;
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ParsingXedInstructions(WfStepId step, FS.FilePath source, CorrelationToken ct, FlairKind flair = FlairKind.Running)
+        public EmittedRuleSet(WfStepId step, Count lines, FS.FileUri dst, CorrelationToken ct, FlairKind flair = FlairKind.Running)
         {
             EventId = (EventType, step, ct);
-            Source = source;
+            LineCount = lines;
+            Target = dst;
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, Source.ToUri());
+            => Render.format(EventId, LineCount, Target);
     }
 }

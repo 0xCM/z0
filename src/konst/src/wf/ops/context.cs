@@ -22,8 +22,7 @@ namespace Z0
         {
             var control = Assembly.GetEntryAssembly();
             var args = Environment.GetCommandLineArgs();
-            var modules = ApiQuery.modules(control, args);
-            return context(control, modules, args);
+            return context(control, Flow.modules(control, args), args);
         }
 
         /// <summary>

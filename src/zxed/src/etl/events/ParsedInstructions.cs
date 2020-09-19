@@ -10,11 +10,11 @@ namespace Z0.Xed
 
     using static Konst;
     using static Render;
-    using static Flow;
 
     public readonly struct ParsedXedInstructions : IWfEvent<ParsedXedInstructions>
     {
         public const string EventName = nameof(ParsedXedInstructions);
+
         /// <summary>
         /// The event identifier
         /// </summary>
@@ -46,6 +46,6 @@ namespace Z0.Xed
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, Count, Source);
+            => Render.format(EventId, Count, Source.ToUri());
     }
 }

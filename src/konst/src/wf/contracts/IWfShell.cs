@@ -33,8 +33,18 @@ namespace Z0
 
         WfInit Init {get;}
 
+        IPolyrand Random {get;}
+
+        IWfShell WithSource(IPolyrand random);
+
         FolderPath AppDataRoot
             => Shell.Paths.AppDataRoot;
+
+        IFileDb FileDb()
+            => new FileDb(FS.dir(Paths.LogRoot.Name) + FS.folder("db"));
+
+        IFileDb FileDb(FS.FolderPath root)
+            => new FileDb(root);
 
         FolderPath ArchiveRoot
             => FolderPath.Define(@"k:/z0/archives");
@@ -104,7 +114,6 @@ namespace Z0
 
         // ~ Lifecycle
         // ~ ---------------------------------------------------------------------------
-
 
         void Created(WfStepId id)
             => Raise(created(id, Ct));

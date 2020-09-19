@@ -10,26 +10,29 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct XedFunctionData
+    public readonly struct XedRuleSet
     {
-        public FileName SourceFile {get;}
+        public FS.FileName SourceFile {get;}
+
+        public FS.FileName TargetFile {get;}
 
         public string Name {get;}
 
         public string ReturnType {get;}
 
-        public string[] Body {get;}
+        public XedRule[] Terms {get;}
 
-        public string Declaration
-            => text.concat(SourceFile, Chars.FSlash, XedSourceMarkers.FuncHeader(Name), ReturnType);
+        public string Description {get;}
 
         [MethodImpl(Inline)]
-        public XedFunctionData(FileName src, string name, string returns, string[] body)
+        public XedRuleSet(FS.FileName src, string name, string returns, XedRule[] terms, FS.FileName dst)
         {
             SourceFile = src;
+            TargetFile = dst;
             Name = name;
             ReturnType = returns;
-            Body = body;
+            Terms = terms;
+            Description =  text.concat("# ", SourceFile, Chars.FSlash, XedSourceMarkers.RuleHeader(Name), ReturnType);
         }
     }
 }

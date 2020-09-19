@@ -129,6 +129,14 @@ namespace Z0
             public FilePath Replace(char src, char dst)
                 => new FilePath(Name.Replace(src,dst));
 
+            /// <summary>
+            /// Determines whether the filename, including the extension, ends with a specified substring
+            /// </summary>
+            /// <param name="substring">The substring to match</param>
+            [MethodImpl(Inline)]
+            public bool EndsWith(string substring)
+                => FileName.EndsWith(substring);
+
             [MethodImpl(Inline)]
             public string Format()
                 => Name.Format();

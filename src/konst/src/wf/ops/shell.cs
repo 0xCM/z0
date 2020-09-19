@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="control">The controlling assembly</param>
         /// <param name="args">The shell args</param>
         public static IWfShell shell(Assembly control, ApiModules modules, params string[] args)
-            => shell(new WfInit(Flow.context(control, modules, args), args, modules));
+            => shell(new WfInit(context(control, modules, args), args, modules));
 
         /// <summary>
         /// Reifies a <see cref='IWfShell'/> predicated on a controlling assembly and zero or more arguments
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="control">The controlling assembly</param>
         /// <param name="args">The shell args</param>
         public static IWfShell shell(Assembly control, params string[] args)
-            => shell(control, ApiQuery.modules(control, args), args);
+            => shell(control, modules(control, args), args);
 
         public static IWfShell shell(params string[] args)
             => shell(Assembly.GetEntryAssembly(), args);

@@ -8,6 +8,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Konst;
     using static z;
     using static XedSourceMarkers;
 
@@ -15,15 +16,16 @@ namespace Z0
     {
         public static XedSourceParser Service => default;
 
-        public TextFileRows LoadSource(FilePath src)
+        public TextDocRows LoadSource(FS.FilePath src)
             => TextDocParser.parse(src,TextDocFormat.Unstructured)
-                    .MapValueOrDefault(c => TextFileRows.define(src, c.RowData), TextFileRows.Empty);
+                    .MapValueOrDefault(c => new TextDocRows(src, c.RowData), TextDocRows.Empty);
 
-        public XedInstructionData ParseInstruction(TextFileRows src, in int idxStart, ref int idxterm)
+        public XedInstructionDoc ParseInstruction(TextDocRows src, in int idxStart, ref int ix)
         {
             var rows = list<TextRow>();
             var parsing = false;
-            for(var i = idxStart; i<src.RowCount;  i++, idxterm++)
+            var count = src.RowCount;
+            for(var i = idxStart; i<count; i++, ix++)
             {
                 var row = src[i];
 
@@ -31,7 +33,7 @@ namespace Z0
                     continue;
 
                 if(IsRightDelimiter(row))
-                {   --idxterm;
+                {   --ix;
                     break;
                 }
 
@@ -42,12 +44,12 @@ namespace Z0
                     rows.Add(row);
 
             }
-            return new XedInstructionData(rows.ToArray());
+            return new XedInstructionDoc(rows.ToArray());
         }
 
-        XedInstructionData[] ParseSequence(TextFileRows data, int idx)
+        XedInstructionDoc[] ParseSequence(TextDocRows data, int ix)
         {
-            var dst = list<XedInstructionData>();
+            var dst = list<XedInstructionDoc>();
             for(var i=0; i<data.RowCount; i++)
             {
                 var parsed = ParseInstruction(data, ++i, ref i);
@@ -57,15 +59,15 @@ namespace Z0
             return dst.ToArray();
         }
 
-        public XedInstructionData[] ParseInstructions(FilePath src)
+        public XedInstructionDoc[] ParseInstructions(FS.FilePath src)
         {
             var data = LoadSource(src);
             for(var i=0; i<data.RowCount; i++)
             {
-                if(data[i].Text.ContainsAny(INSTRUCTION_SEQ))
+                if(data[i].Text.ContainsAny(InstructionSeq))
                     return ParseSequence(data, i);
             }
-            return z.array<XedInstructionData>();
+            return z.array<XedInstructionDoc>();
         }
 
         static void Advance(ref int index)
@@ -74,31 +76,31 @@ namespace Z0
         static void Retreat(ref int index)
             => --index;
 
-        XedFunctionData ParseFunction(TextFileRows data, ref int index)
+        XedRuleSet ParseFunction(TextDocRows data, ref int ix)
         {
-            var title = data[index].Text.LeftOf(FUNC_MARKER);
+            var title = data[ix].Text.LeftOf(RuleMarker);
             var body = list<string>();
-            var first = index;
-            for(var i = index; i<data.RowCount; i++)
+            var first = ix;
+            for(var i = ix; i<data.RowCount; i++)
             {
-                ref readonly var row = ref data[index];
+                ref readonly var row = ref data[ix];
 
-                var isHeader = Contains(row,FUNC_MARKER);
+                var isHeader = Contains(row,RuleMarker);
                 if(isHeader)
                 {
                     if(i != first)
                     {
-                        Retreat(ref index);
+                        Retreat(ref ix);
                         break;
                     }
                     else
                     {
-                        Advance(ref index);
+                        Advance(ref ix);
                         continue;
                     }
                 }
 
-                Advance(ref index);
+                Advance(ref ix);
 
                 if(IsComment(row))
                     continue;
@@ -112,18 +114,20 @@ namespace Z0
 
             var parts = title.SplitClean(Chars.Space);
             var rt = parts.Length == 2 ? parts[0] : string.Empty;
-            var name = parts.Length == 1 ? parts[0] : (parts.Length == 2 ? parts[1] : string.Empty);
-            return new XedFunctionData(data.Source.FileName, name, rt, body.ToArray());
+            var name = parts.Length == 1 ? parts[0] : (parts.Length == 2 ? parts[1] : EmptyString);
+            var srcName = data.Source.FileName;
+            return new XedRuleSet(srcName, name, rt, body.Map(x => new XedRule(x)), XedOps.TargetRuleFile(srcName, name));
         }
 
-        public XedFunctionData[] ParseFunctions(FilePath src)
+
+        public XedRuleSet[] ParseFunctions(FS.FilePath src)
         {
-            var dst = list<XedFunctionData>();
+            var dst = list<XedRuleSet>();
             var data = LoadSource(src);
             for(var i=0; i<data.RowCount; i++)
             {
                 var row = data[i];
-                if(Contains(data[i], FUNC_MARKER))
+                if(Contains(data[i], RuleMarker))
                     dst.Add(ParseFunction(data, ref i));
             }
 

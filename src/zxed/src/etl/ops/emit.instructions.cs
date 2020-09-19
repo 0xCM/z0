@@ -12,7 +12,7 @@ namespace Z0
     using static z;
 
     using F = XedInstructionField;
-    using S = XedInstructionRecord;
+    using S = XedInstructionRow;
     using Target = DatasetFormatter<XedInstructionField>;
 
     partial struct XedOps

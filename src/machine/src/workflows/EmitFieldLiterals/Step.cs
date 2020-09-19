@@ -19,13 +19,11 @@ namespace Z0
         FolderPath Target
             => Wf.ResourceRoot + FolderName.Define("fieldlits");
 
-        ApiModules Modules
-            => ApiQuery.modules();
-
         public EmitFieldLiterals(IWfShell wf, EmitFieldLiteralsHost host)
         {
             Host = host;
             Wf = wf;
+
             Wf.Created(Host);
         }
 
@@ -39,7 +37,7 @@ namespace Z0
         public void Run()
         {
             Target.Clear();
-            var parts = span(Modules.Parts.Storage.Map(part => ApiQuery.types(part)));
+            var parts = span(Wf.Modules.Parts.Storage.Map(part => ApiQuery.types(part)));
             foreach(var part in parts)
             {
                 try

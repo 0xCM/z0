@@ -3,23 +3,30 @@
 // Copyright   : (c) Chris Moore, 2020
 // License     : Apache
 //-----------------------------------------------------------------------------
-namespace Z0.Xed
+namespace Z0
 {
     using System;
 
-    using xed_ext = xed_extension_enum_t;
-    using xed_cat = xed_category_enum_t;
+    using xed_ext = Xed.xed_extension_enum_t;
+    using xed_cat = Xed.xed_category_enum_t;
 
-    public readonly struct XedEtlConfig
+    public readonly struct XedConfig
     {
-        public XedEtlConfig(IWfShell shell, WfSettings settings)
+        public XedConfig(IWfShell wf, WfSettings settings)
         {
-            Settings = settings;
-            SourceRoot = FS.dir(shell.Paths.DevRoot.Name) + FS.folder("data") + FS.folder("sources") + FS.folder("xed");
-            TargetRoot = FS.dir(shell.Paths.LogRoot.Name) + FS.folder("data") + FS.folder("xed");
+            Settings = XedSettings.Default();
+            SourceRoot = FS.dir(wf.Paths.DevRoot.Name) + FS.folder("data") + FS.folder("sources") + FS.folder("xed");
+            TargetRoot = FS.dir(wf.Paths.LogRoot.Name) + FS.folder("data") + FS.folder("xed");
+            Target = TableArchive.create(wf.FileDb().Root + FS.folder("tables") + FS.folder("xed"));
         }
 
-        public readonly WfSettings Settings;
+        public readonly ITableArchive Target;
+
+        public FS.FileName SummaryFile
+            => FS.file(text.format("{0}.{1}", "xed", "summary"), DataFileExt);
+
+
+        public readonly XedSettings Settings;
 
         public readonly FS.FolderPath SourceRoot;
 
@@ -29,16 +36,16 @@ namespace Z0.Xed
             => TargetRoot + FS.folder("extracts");
 
         public FS.FolderPath PubRoot
-            => TargetRoot + FS.folder("datasets");
+            => Target.Root;
 
         public FS.FolderName ExtensionFolder
             => FS.folder("extensions");
 
-        public FolderName CategoryFolder
-            => FolderName.Define("categories");
+        public FS.FolderName CategoryFolder
+            => FS.folder("categories");
 
-        public FileExtension DataFileExt
-            => FileExtensions.Csv;
+        public FS.FileExt DataFileExt
+            => GlobalExtensions.Csv;
 
         public xed_ext[] Extensions
         {

@@ -13,6 +13,7 @@ namespace Z0
     [ApiHost("api")]
     public readonly partial struct XedOps
     {
-
+        public static FS.FileName TargetRuleFile(FS.FileName src, string name)
+            => FS.file(text.format("{0}.{1}.{2}.{3}", "xed", "rules", src.WithoutExtension, name), GlobalExtensions.Csv);
     }
 }

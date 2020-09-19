@@ -10,36 +10,36 @@ namespace Z0.Xed
     using System.Collections.Generic;
     using System.Linq;
 
-    public readonly struct XedStagingArchive : IPartFilePaths
+    public readonly struct XedStage : IPartFilePaths
     {
-        public static XedStagingArchive Create(FS.FolderPath root)
-            => new XedStagingArchive(root);
+        public static XedStage Create(FS.FolderPath root)
+            => new XedStage(root);
 
-        public FolderPath ArchiveRoot {get;}
+        public FS.FolderPath ArchiveRoot {get;}
 
-        public FolderName InstructionFolder
-            => FolderName.Define("instructions");
+        public FS.FolderName InstructionFolder
+            => FS.folder("instructions");
 
-        public FolderName FunctionFolder
-            => FolderName.Define("functions");
+        public FS.FolderName FunctionFolder
+            => FS.folder("functions");
 
-        public FolderPath InstructionDir
+        public FS.FolderPath InstructionDir
             => ArchiveRoot + InstructionFolder;
 
-        public FolderPath FunctionDir
+        public FS.FolderPath FunctionDir
             => ArchiveRoot + FunctionFolder;
 
-        public XedStagingArchive(FS.FolderPath root)
+        public XedStage(FS.FolderPath root)
         {
-            ArchiveRoot = FolderPath.Define(root.Name);
+            ArchiveRoot = root;
         }
 
-        public IEnumerable<FilePath> Files
-            => ArchiveRoot.Files(FileExtensions.Txt,true);
+        public IEnumerable<FS.FilePath> Files
+            => ArchiveRoot.Files(GlobalExtensions.Txt,true);
 
         public int FileCount => Files.Count();
 
-        public void Deposit(ReadOnlySpan<XedInstructionData> src, FileName name)
+        public void Deposit(ReadOnlySpan<XedInstructionDoc> src, FS.FileName name)
         {
             var path = InstructionDir + name;
             using var writer = path.Writer();
@@ -53,19 +53,17 @@ namespace Z0.Xed
             }
         }
 
-        public void Deposit(XedFunctionData[] src, FileName name)
+        public void Deposit(XedRuleSet[] src, FS.FileName name)
         {
             var path = FunctionDir + name;
             using var writer = path.Writer();
             for(var i=0; i<src.Length; i++)
             {
-
                 ref readonly var f = ref src[i];
-                var body = f.Body;
+                var body = f.Terms;
                 if(body.Length != 0)
                 {
-
-                    writer.WriteLine(f.Declaration);
+                    writer.WriteLine(f.Description);
                     writer.WriteLine(HSep);
 
                     for(var j = 0; j < body.Length; j++)
@@ -74,11 +72,9 @@ namespace Z0.Xed
                     if(i != src.Length - 1)
                         writer.WriteLine();
                 }
-
             }
         }
 
         const string HSep = RenderPatterns.PageBreak120;
     }
-
 }

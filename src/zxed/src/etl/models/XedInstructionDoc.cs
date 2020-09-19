@@ -15,26 +15,26 @@ namespace Z0
     /// <summary>
     /// Defines a container over the data found in an instruction resource file for a single instruction
     /// </summary>
-    public readonly struct XedInstructionData
+    public readonly struct XedInstructionDoc
     {
-        public readonly TextRow[] Rows {get;}
+        public readonly TextRow[] Data {get;}
 
         [MethodImpl(Inline)]
-        public XedInstructionData(params TextRow[] rows)
+        public XedInstructionDoc(params TextRow[] rows)
         {
-            Rows = rows;
+            Data = rows;
         }
 
         public ref readonly TextRow this[int i]
         {
             [MethodImpl(Inline)]
-            get => ref Rows[i];
+            get => ref Data[i];
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => (Rows?.Length ?? 0) == 0;
+            get => (Data?.Length ?? 0) == 0;
         }
 
         public bool IsNonEmpty
@@ -44,7 +44,7 @@ namespace Z0
         }
 
         public int RowCount
-            => Rows.Length;
+            => Data.Length;
 
         public string Class
             => this.ExtractProp(M.ICLASS);

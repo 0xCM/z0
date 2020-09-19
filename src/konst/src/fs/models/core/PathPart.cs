@@ -57,14 +57,6 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            public PathPart Remove(string substring)
-                => Text.Remove(substring);
-
-            [MethodImpl(Inline)]
-            public bool Contains(string substring)
-                => Text.Contains(substring);
-
-            [MethodImpl(Inline)]
             public string Format()
                 => Text?.Trim() ?? EmptyString;
 
@@ -106,6 +98,22 @@ namespace Z0
 
             public override bool Equals(object src)
                 => src is PathPart x && Equals(x);
+
+            [MethodImpl(Inline)]
+            public PathPart Remove(string substring)
+                => Text.Remove(substring);
+
+            [MethodImpl(Inline)]
+            public bool Contains(string substring)
+                => Text.Contains(substring);
+
+            /// <summary>
+            /// Determines whether the filename, including the extension, ends with a specified substring
+            /// </summary>
+            /// <param name="substring">The substring to match</param>
+            [MethodImpl(Inline)]
+            public bool EndsWith(string substring)
+                => Text.EndsWith(substring, NoCase);
         }
     }
 }

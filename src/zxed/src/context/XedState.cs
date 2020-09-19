@@ -3,23 +3,22 @@
 // Copyright   : (c) Chris Moore, 2020
 // License     : Apache
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Xed
 {
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    
+
     using Z0.ClrData;
-    
+
     using static Konst;
 
-    using Xed;
 
     [ApiHost]
-    public readonly struct XedContextData
+    public readonly struct XedState
     {
         public readonly EnumLiteralNames[] EnumNames;
-        
+
         public readonly Indexed<FieldInfo> DataFields;
 
         public readonly Type ContextType;
@@ -27,7 +26,7 @@ namespace Z0
         public readonly ClrTypes TypeIndex;
 
         [MethodImpl(Inline), Op]
-        public XedContextData(Type t, ClrTypes index, Indexed<FieldInfo> fields, params EnumLiteralNames[] names)
+        public XedState(Type t, ClrTypes index, Indexed<FieldInfo> fields, params EnumLiteralNames[] names)
         {
             ContextType = t;
             TypeIndex = index;
@@ -40,7 +39,7 @@ namespace Z0
             [MethodImpl(Inline), Op]
             get => ref EnumNames[0];
         }
-        
+
         public ref readonly EnumLiteralNames ExtensionNames
         {
             [MethodImpl(Inline), Op]
@@ -89,11 +88,11 @@ namespace Z0
                 return ClassNames[z.uint16(id)];
             else
                 throw no<E>();
-        }        
-        
+        }
+
         [MethodImpl(Inline)]
         readonly ReadOnlySpan<char> chars<E>(E id)
             where E : unmanaged, Enum
                 => name(id);
-    }    
+    }
 }

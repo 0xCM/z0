@@ -3,48 +3,45 @@
 // Copyright   : (c) Chris Moore, 2020
 // License     : Apache
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Xed
 {
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
 
-    using Z0.Xed;
-
     using static z;
     using static Konst;
 
-    using xed_ext = Xed.xed_extension_enum_t;
-    using xed_cat = Xed.xed_category_enum_t;
+    using xed_ext = xed_extension_enum_t;
+    using xed_cat = xed_category_enum_t;
 
     using F = XedPatternField;
     using R = XedPatternSummary;
-    using static RenderPatterns;
 
     [ApiHost]
     public readonly ref struct XedWf
     {
-        readonly XedEtlConfig Config;
+        readonly XedConfig Config;
+
+        readonly XedSettings Settings;
 
         readonly IWfShell Wf;
 
-        readonly XedSourceArchive Src;
+        readonly XedSources Source;
 
-        readonly XedStagingArchive Dst;
+        readonly XedStage Stage;
 
-        readonly TableArchive Pub;
+        readonly ITableArchive Target;
 
-        readonly CorrelationToken Ct;
-
-        public XedWf(IWfShell wf, XedEtlConfig config)
+        public XedWf(IWfShell wf, XedConfig config)
         {
             Wf = wf;
             Config = config;
-            Ct = Wf.Ct;
-            Src = XedSourceArchive.Create(Config.SourceRoot);
-            Dst = XedStagingArchive.Create(Config.ExtractRoot);
-            Pub = TableArchive.create(Config.PubRoot);
+            Settings = config.Settings;
+            Source = XedSources.Create(Config.SourceRoot);
+            Stage = XedStage.Create(Config.ExtractRoot);
+            Target = TableArchive.create(Config.PubRoot);
             Wf.Created(typeof(XedWf));
         }
 
@@ -58,19 +55,19 @@ namespace Z0
             var step = Flow.step(typeof(void),typeof(XedWf));
             var patterns = list<XedPattern>();
             var parser = XedSourceParser.Service;
-            var files = @readonly(Src.InstructionFiles);
+            var files = @readonly(Source.InstructionFiles);
             try
             {
                 for(var i=0; i< files.Length; i++)
                 {
                     ref readonly var file = ref skip(files,i);
-                    var id = Wf.Raise(new ParsingXedInstructions(ParseInstructionsStep.StepId, file,Ct));
+                    var id = Wf.Raise(new ParsingXedInstructions(ParseInstructionsStep.StepId, file, Wf.Ct));
                     var parsed = span(parser.ParseInstructions(file));
                     for(var j = 0; j< parsed.Length; j++)
                     {
                         ref readonly var p = ref skip(parsed,j);
                         patterns.AddRange(p.Patterns);
-                        Dst.Deposit(parsed, file.FileName);
+                        Stage.Deposit(parsed, file.FileName);
                     }
 
                     Wf.Raise(new ParsedXedInstructions(step, FS.path(file.Name), parsed.Length, Wf.Ct));
@@ -84,17 +81,17 @@ namespace Z0
             return patterns.ToArray();
         }
 
-        public XedFunctionData[] ExtractFunctions()
+        public XedRuleSet[] ExtractRules()
         {
-            var functions = list<XedFunctionData>();
+            var functions = list<XedRuleSet>();
             var parser = XedSourceParser.Service;
-            foreach(var file in Src.FunctionFiles)
+            foreach(var file in Source.FunctionFiles)
             {
                 var parsed = parser.ParseFunctions(file);
                 if(parsed.Length != 0)
                 {
                     functions.AddRange(parsed);
-                    Dst.Deposit(parsed, file.FileName);
+                    Stage.Deposit(parsed, file.FileName);
                 }
             }
             return functions.ToArray();
@@ -104,77 +101,123 @@ namespace Z0
         {
             var sorted = (src as IEnumerable<XedPattern>).OrderBy(x => x.Class).ThenBy(x => x.Category).ThenBy(x => x.Extension).ThenBy(x => x.IsaSet).Array();
             var records = sorted.Map(p => XedOps.summary(p));
-            Pub.Deposit<F,R>(records, FileName.define("summary", FileExtensions.Csv));
+
+            Target.Deposit<F,R>(records, Config.SummaryFile);
             return records;
         }
 
         XedPatternSummary[] Filter(XedPatternSummary[] src, xed_ext match)
-            => src.Where(p => p.Extension == Xed.XedConst.Name(match)).ToArray();
+            => src.Where(p => p.Extension  == XedConst.Name(match)).ToArray();
 
         XedPatternSummary[] Filter(XedPatternSummary[] src, xed_cat match)
-            => src.Where(p => p.Category == Xed.XedConst.Name(match)).ToArray();
+            => src.Where(p => p.Category == XedConst.Name(match)).ToArray();
 
         void SaveExtensions(XedPatternSummary[] src)
         {
             foreach(var selected in Config.Extensions)
-                Pub.Deposit<F,R>(Filter(src, selected),
-                    Config.ExtensionFolder, FS.file(Xed.XedConst.Name(selected), Config.DataFileExt));
+                Target.Deposit<F,R>(Filter(src, selected),
+                    Config.ExtensionFolder, FS.file(XedConst.Name(selected), Config.DataFileExt));
         }
 
         void SaveCategories(XedPatternSummary[] src)
         {
             foreach(var selected in Config.Categories)
-                Pub.Deposit<F,R>(Filter(src, selected),
+                Target.Deposit<F,R>(Filter(src, selected),
                     Config.CategoryFolder,
-                    FileName.define(Xed.XedConst.Name(selected), Config.DataFileExt)
+                    FS.file(XedConst.Name(selected), Config.DataFileExt)
                     );
         }
 
         void SaveMnemonics(XedPatternSummary[] src)
         {
             var upper = src.Select(s => s.Class).Distinct().OrderBy(x => x).ToArray();
-            var dst = Pub.ArchiveRoot + FileName.define("mnemonics.csv");
+            var dst = Target.Root + FS.file("mnemonics.csv");
             dst.Overwrite(upper);
         }
 
-        void SaveFunctions(XedFunctionData[] src)
+        const string RuleFormatPattern = "{0,-80} | {1, -12} | {2}";
+
+        const string RulePageBreak = RenderPatterns.PageBreak120;
+
+        void EmitRules()
         {
-            var path = Pub.ArchiveRoot + FileName.define("rules.txt");
-            using var writer = path.Writer();
-            for(var i=0; i<src.Length; i++)
+            var functions = list<XedRuleSet>();
+            var parser = XedSourceParser.Service;
+            var paths = @readonly(Source.FunctionFiles);
+            var count = paths.Length;
+            for(var i=0; i< count; i++)
             {
-                    ref readonly var f = ref src[i];
-                    var body = f.Body;
-                    if(body.Length != 0)
+                ref readonly var path = ref skip(paths,i);
+                var rules = parser.ParseFunctions(path);
+                var jCount = rules.Length;
+                if(jCount != 0)
+                {
+                    Stage.Deposit(rules, path.FileName);
+
+                    var view = @readonly(rules);
+                    for(var j=0; j<jCount; j++)
                     {
-                        writer.WriteLine(f.Declaration);
-                        writer.WriteLine(PageBreak);
+                        ref readonly var ruleset = ref skip(view,j);
+                        var content = @readonly(ruleset.Terms);
+                        var kCount = content.Length;
+                        if(kCount != 0)
+                        {
+                            var target = Target.File(ruleset.TargetFile);
+                            using var writer = target.Writer();
+                            writer.WriteLine(ruleset.Description);
+                            writer.WriteLine(RulePageBreak);
+                            writer.WriteLine(text.format(RuleFormatPattern, "Source", "Operator", "Target"));
+                            for(var k=0; k<kCount; k++)
+                            {
+                                var line = skip(content,k).Format();
+                                if(line.Contains('|'))
+                                {
+                                    var parts = line.SplitClean('|');
+                                    if(parts.Length == 2)
+                                        writer.WriteLine(text.format(RuleFormatPattern, parts[0], ":=", parts[1]));
 
-                        for(var j = 0; j < body.Length; j++)
-                            writer.WriteLine(body[j]);
+                                }
+                                else if(line.Contains("->"))
+                                {
+                                    var parts = line.SplitClean("->");
+                                    if(parts.Length == 2)
+                                        writer.WriteLine(text.format(RuleFormatPattern, parts[0], "->", parts[1]));
+                                }
+                                else
+                                    writer.WriteLine(line);
+                            }
 
-                        if(i != src.Length - 1)
-                            writer.WriteLine();
+                            Wf.Raise(new EmittedRuleSet(typeof(XedWf), kCount, target, Wf.Ct));
+                        }
                     }
+                }
             }
         }
 
         public void Run()
         {
-            Pub.Clear();
-            Pub.Clear(Config.ExtensionFolder);
-            Pub.Clear(Config.CategoryFolder);
+            Target.Clear();
 
             var patterns = ExtractPatterns();
             var summaries = PublishSummary(patterns);
-            var functions = ExtractFunctions();
 
-            SaveExtensions(summaries);
-            SaveCategories(summaries);
-            SaveMnemonics(summaries);
-            SaveFunctions(functions);
+            if(Settings.EmitExtensions)
+            {
+                Target.Clear(Config.ExtensionFolder);
+                SaveExtensions(summaries);
+            }
+
+            if(Settings.EmitCatagories)
+            {
+                Target.Clear(Config.CategoryFolder);
+                SaveCategories(summaries);
+            }
+
+            if(Settings.EmitMnemonicList)
+                SaveMnemonics(summaries);
+
+            if(Settings.EmitRules)
+                EmitRules();
         }
-
-        const string PageBreak = PageBreak120;
     }
 }

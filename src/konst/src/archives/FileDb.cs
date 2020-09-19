@@ -6,15 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
     using static z;
 
-    partial struct ApiQuery
+    public readonly struct FileDb : IFileDbHost<FileDb>
     {
-        [MethodImpl(Inline), Op]
-        public static Assembly[] owners(in ApiModules src)
-            => src.Components.Where(isPart);
+        public FS.FolderPath Root {get;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator FileDb(FS.FolderPath src)
+            => new FileDb(src);
+
+        [MethodImpl(Inline)]
+        public FileDb(FS.FolderPath root)
+            => Root = root;
     }
 }

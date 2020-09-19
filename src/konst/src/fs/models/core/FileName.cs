@@ -20,6 +20,14 @@ namespace Z0
             public static FileName operator +(FileName a, FileExt b)
                 => file(text.format("{0}.{1}",a,b));
 
+            [MethodImpl(Inline)]
+            public static bool operator ==(FileName a, FileName b)
+                => a.Equals(b);
+
+            [MethodImpl(Inline)]
+            public static bool operator !=(FileName a, FileName b)
+                => !a.Equals(b);
+
             public FileExt FileExt
             {
                 [MethodImpl(Inline)]
@@ -80,6 +88,25 @@ namespace Z0
             /// <param name="host">The owner to test</param>
             public bool HostedBy(ApiHostUri host)
                 => Name.Text.StartsWith(string.Concat(host.Owner.Format(), Chars.Dot, host.Name.ToLower(), Chars.Dot));
+            public FileName ChangeExtension(FileExt ext)
+                => FS.file(Path.GetFileNameWithoutExtension(Name), ext);
+
+            public override int GetHashCode()
+                => Name.GetHashCode();
+
+            public bool Equals(FileName src)
+                => Name == src.Name;
+
+            public override bool Equals(object src)
+                => src is FileName x && Equals(x);
+
+            /// <summary>
+            /// Determines whether the filename, including the extension, ends with a specified substring
+            /// </summary>
+            /// <param name="substring">The substring to match</param>
+            [MethodImpl(Inline)]
+            public bool EndsWith(string substring)
+                => Name.EndsWith(substring);
 
             const string ExtPattern = "{0}.{1}";
 

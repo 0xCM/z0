@@ -12,12 +12,12 @@ namespace Z0
     using static z;
 
     using F = XedPatternField;
-    using Target = FieldFormatter<XedPatternField>;
+    using Formatter = FieldFormatter<XedPatternField>;
 
     partial struct XedOps
     {
         [MethodImpl(Inline), Op]
-        public static ref readonly Target emit(in XedPattern src, in Target dst)
+        public static ref readonly Formatter emit(in XedPattern src, in Formatter dst)
         {
             dst.Delimit(F.Class, src.Class);
             dst.Delimit(F.Category, src.Category);
@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ref readonly Target emit(in XedPatternSummary src, in Target dst)
+        public static ref readonly Formatter emit(in XedPatternSummary src, in Formatter dst)
         {
             dst.Delimit(F.Class, src.Class);
             dst.Delimit(F.Category, src.Category);

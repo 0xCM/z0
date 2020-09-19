@@ -10,24 +10,25 @@ namespace Z0
 
     using static Konst;
 
-    using Xed;
-
-    [ApiHost]
-    public readonly partial struct XedContext
+    public struct XedSettings
     {
-        readonly XedState[] Data;
-
-        public ref readonly XedState ContextData
-        {
-            [MethodImpl(Inline), Op]
-            get => ref Data[0];
-        }
-
         [MethodImpl(Inline)]
-        XedContext(in XedState data)
-            : this()
+        public static XedSettings Default()
         {
-            Data = new XedState[1]{data};
+            var settings = new XedSettings();
+            settings.EmitSummary = true;
+            settings.EmitRules = true;
+            return settings;
         }
+
+        public bool EmitSummary;
+
+        public bool EmitCatagories;
+
+        public bool EmitMnemonicList;
+
+        public bool EmitExtensions;
+
+        public bool EmitRules;
     }
 }

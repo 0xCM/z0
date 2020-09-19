@@ -17,8 +17,8 @@ namespace Z0
         /// Creates an index over the known parts
         /// </summary>
         [Op]
-        public static PartIndex index()
-            => index(modules().Parts);
+        public static PartIndex index(ApiModules src)
+            => index(src.Parts);
 
         public static PartIndex index(IPart[] src)
         {

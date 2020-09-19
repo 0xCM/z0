@@ -10,24 +10,21 @@ namespace Z0
 
     using static Konst;
 
-    using Xed;
-
-    [ApiHost]
-    public readonly partial struct XedContext
+    public readonly struct XedRule : ITextual
     {
-        readonly XedState[] Data;
+        public readonly string Expression;
 
-        public ref readonly XedState ContextData
+        [MethodImpl(Inline)]
+        public XedRule(string src)
         {
-            [MethodImpl(Inline), Op]
-            get => ref Data[0];
+            Expression = src;
         }
 
         [MethodImpl(Inline)]
-        XedContext(in XedState data)
-            : this()
-        {
-            Data = new XedState[1]{data};
-        }
+        public string Format()
+            => Expression;
+
+        public override string ToString()
+            => Expression;
     }
 }

@@ -53,6 +53,8 @@ namespace Z0
 
         public Assembly Control {get;}
 
+        public IPolyrand Random {get; private set;}
+
         [MethodImpl(Inline)]
         public WfShell(WfInit config)
         {
@@ -76,7 +78,15 @@ namespace Z0
             Settings = SettingValues.Load(Paths.AppConfigPath);
             ResourceRoot = FolderPath.Define(Init.ResDir.Name);
             IndexRoot = FolderPath.Define(Init.IndexDir.Name);
+            Random = default;
             Broker = new WfBroker(WfSink, Ct);
+        }
+
+        [MethodImpl(Inline)]
+        public IWfShell WithSource(IPolyrand random)
+        {
+            Random = random;
+            return this;
         }
 
         public void Dispose()

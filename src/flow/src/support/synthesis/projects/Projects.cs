@@ -35,11 +35,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static FileName filename(in Project src, string type)
-            => new FileName(src.Name, type);
+        public static FS.FileName filename(in Project src, string type)
+            => FS.file(src.Name, type);
 
         [Op]
-        public static void save(in Project src, string type, FolderPath dst)
+        public static void save(in Project src, string type, FS.FolderPath dst)
             => (dst + filename(src,type)).Overwrite(src.Render());
 
         [MethodImpl(Inline), Op]
