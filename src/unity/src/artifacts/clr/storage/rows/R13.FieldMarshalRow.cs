@@ -22,7 +22,5 @@ namespace Z0
 
             public uint NativeType;
         }
-
     }
-
 }

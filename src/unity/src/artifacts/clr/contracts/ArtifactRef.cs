@@ -50,5 +50,4 @@ namespace Z0
         public static implicit operator ClrArtifactRef(ClrArtifactRef<A> src)
             => new ClrArtifactRef(src.Id, src.Kind, src.Name);
     }
-
 }

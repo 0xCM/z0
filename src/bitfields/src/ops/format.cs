@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
-    using static Konst;    
+    using static Konst;
 
     partial class BitFields
-    {        
+    {
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<BitFieldSegment> src)
             => BitFieldFormatter.format(src);
@@ -21,18 +21,16 @@ namespace Z0
             where T : unmanaged
                 => BitFieldFormatter.format(src);
 
-        [MethodImpl(Inline)]
         public static string format<T>(ReadOnlySpan<BitFieldSegment<T>> src)
             where T : unmanaged
                 => BitFieldFormatter.format(src);
 
-        [MethodImpl(Inline)]
         public static string format<F>(F src)
             where F : unmanaged, IBitFieldIndexEntry<F>
                 => BitFieldFormatter.format(src);
 
         public static string[] format(in BitFieldModel src)
-            => BitFieldFormatter.format(src);
+            => BitFieldFormatter.lines(src);
 
         public static string format<W>(in BitFieldIndexEntry<W> src)
             where W : unmanaged, Enum

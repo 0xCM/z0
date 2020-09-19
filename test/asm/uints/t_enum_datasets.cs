@@ -49,7 +49,6 @@ namespace Z0.Asm
             where E : unmanaged, Enum
                 => FS.path(CasePath($"{typeof(E).Name}.Identifiers").Name);
 
-
         void emit<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged

@@ -30,7 +30,5 @@ namespace Z0
 
             public Characteristics Characteristics;
         }
-
     }
-
 }

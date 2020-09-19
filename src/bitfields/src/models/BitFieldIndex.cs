@@ -19,9 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitFieldIndex(BitFieldIndexEntry[] entries)
-        {
-            Storage = entries;
-        }
+            => Storage = entries;
 
         public ReadOnlySpan<BitFieldIndexEntry> Entries
         {

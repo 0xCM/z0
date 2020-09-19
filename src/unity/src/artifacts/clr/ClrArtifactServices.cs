@@ -10,11 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using A = ClrArtifacts;
-    using S = System;
-    using R = System.Reflection;
-    using api = ClrArtifacts;
-
     [ApiHost("artifacts.clr.services")]
     public readonly partial struct ClrArtifactServices
     {

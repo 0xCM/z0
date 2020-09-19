@@ -20,10 +20,6 @@ namespace Z0
             public uint Parent;
 
             public uint PropertyList;
-
         }
-
-
     }
-
 }

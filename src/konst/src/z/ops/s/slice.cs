@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static System.Runtime.InteropServices.MemoryMarshal;
-    
+
     partial struct z
     {
         /// <summary>
@@ -55,6 +55,17 @@ namespace Z0
             => cover(skip(src, offset), length);
 
         /// <summary>
+        /// Draws a specified count of T-cells from a source span beginning at a specified offset
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The T-measured offset count</param>
+        /// <param name="length"></param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<T> slice<T>(ReadOnlySpan<T> src, ulong offset, ulong length)
+            => cover(skip(src, offset), length);
+
+        /// <summary>
         /// Selects a segment [offset, length(src) - 1] from a source span src:Span[T]
         /// </summary>
         /// <param name="src">The data source</param>
@@ -94,7 +105,19 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> slice<T>(Span<T> src, uint offset, uint length)
-            => CreateSpan(ref seek(first(src), offset), (int)length);      
+            => CreateSpan(ref seek(first(src), offset), (int)length);
+
+        /// <summary>
+        /// Draws a specified count of T-cells from a source span beginning at a specified offset
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="offset">The T-measured offset count</param>
+        /// <param name="length"></param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> slice<T>(Span<T> src, ulong offset, ulong length)
+            => CreateSpan(ref seek(first(src), offset), (int)length);
+
 
         /// <summary>
         /// Extracts a substring beginning at a specified offset
@@ -104,7 +127,7 @@ namespace Z0
         /// <param name="length">The substring length</param>
         [MethodImpl(Inline)]
         public static string slice(string src, int offset)
-            => src.Substring(offset);        
+            => src.Substring(offset);
 
         /// <summary>
         /// Extracts a substring beginning at a specified offset
@@ -114,7 +137,7 @@ namespace Z0
         /// <param name="length">The substring length</param>
         [MethodImpl(Inline), Op]
         public static string slice(string src, uint offset)
-            => src.Substring((int)offset);        
+            => src.Substring((int)offset);
 
         /// <summary>
         /// Extracts a substring of specified length beginning at a specified offset
@@ -124,7 +147,7 @@ namespace Z0
         /// <param name="length">The substring length</param>
         [MethodImpl(Inline), Op]
         public static string slice(string src, uint offset, uint length)
-            => src.Substring((int)offset, (int)length);        
+            => src.Substring((int)offset, (int)length);
 
         /// <summary>
         /// Extracts a substring of specified length beginning at a specified offset
@@ -134,6 +157,6 @@ namespace Z0
         /// <param name="length">The substring length</param>
         [MethodImpl(Inline)]
         public static string slice(string src, int offset, int length)
-            => src.Substring(offset, length);        
+            => src.Substring(offset, length);
     }
 }

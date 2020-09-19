@@ -9,13 +9,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using System.Collections.Generic;
-    using System.Text;
-    using System.IO;
-    using System.Diagnostics;
-
     using SH = ClrStorage.SigHeaderCode;
-    using CA = ClrStorage.CustomAttributeCode;
 
     partial struct ClrStorage
     {
@@ -53,9 +47,9 @@ namespace Z0
 
             public const byte SignatureHeaderMask = 0x7F;
 
-            public static bool IsMethodSignature(byte src) {
-                return ((SH)src & SH.CallingConventionMask) <= SH.VarArgCall;
-            }
+            public static bool IsMethodSignature(byte src)
+                => ((SH)src & SH.CallingConventionMask) <= SH.VarArgCall;
+
             public static bool IsVarArgCallSignature(
                 byte src
             ) {
@@ -90,7 +84,6 @@ namespace Z0
                 return ((SH)src & SH.Generic) == SH.Generic;
             }
             }
-
 
     }
 }

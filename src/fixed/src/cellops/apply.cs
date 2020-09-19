@@ -7,8 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
+    using System.Security;
 
     using static Konst;
+
+    [SuppressUnmanagedCodeSecurity, ApiHost("operators")]
+    public partial class CellOps : IApiHost<CellOps>
+    {
+
+    }
 
     partial class CellOps
     {
@@ -43,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector512<T> apply<T>(UnaryOp512 f, in Vector512<T> x)
             where T : unmanaged
-                => f(x.ToFixed()).ToVector<T>();
+                => f(x.ToCell()).ToVector<T>();
 
         /// <summary>
         /// Evaluates a 128-bit binary operator over a pair of vectors
@@ -79,6 +86,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector512<T> apply<T>(BinaryOp512 f, Vector512<T> x, Vector512<T> y)
             where T : unmanaged
-                => f(x.ToFixed(), y.ToFixed()).ToVector<T>();
+                => f(x.ToCell(), y.ToCell()).ToVector<T>();
     }
 }

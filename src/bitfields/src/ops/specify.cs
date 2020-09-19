@@ -19,7 +19,8 @@ namespace Z0
         public static uint width(in BitFieldSpec spec)
         {
             var total = 0u;
-            for(byte i=0; i< spec.Segments.Length; i++)
+            var count = spec.Segments.Length;
+            for(byte i=0; i<count; i++)
                 total += spec.Segment(i).Width;
             return total;
         }

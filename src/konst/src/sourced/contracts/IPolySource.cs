@@ -15,7 +15,7 @@ namespace Z0
     public interface IPolySource : IBoundValueSource, IValueSource
     {
         /// <summary>
-        /// Returns the default domain used when producing random points for a parametrically-identifed type
+        /// Returns the default domain used when producing random points for a parametrically-identified type
         /// </summary>
         /// <typeparam name="T">The point type</typeparam>
         Interval<T> Domain<T>()

@@ -10,13 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [Step]
-    public struct EmitAsmSymbolsStep : IWfStep<EmitAsmSymbolsStep>
-    {
-        public static WfStepId StepId
-            => type<EmitAsmSymbolsStep>();
-    }
-
     [WfHost]
     public sealed class EmitLiteralsHost : WfHost<EmitLiteralsHost>
     {

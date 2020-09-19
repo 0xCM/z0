@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    public static partial class XTend
     {
         [MethodImpl(Inline)]
         public static Vector256<T> Apply<T>(this UnaryOp256 f, Vector256<T> x)

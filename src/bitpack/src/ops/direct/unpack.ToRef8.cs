@@ -8,9 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static As;
-    using static Root;
-    using static Typed;
+    using static z;
+    // using static As;
+    // using static Root;
+    // using static Typed;
 
     partial class BitPack
     {
@@ -63,7 +64,7 @@ namespace Z0
         public static void unpack(ulong packed, ref byte unpacked)
         {
             unpack((uint)packed, ref unpacked);
-            unpack((uint)(packed >> 32), ref seek(ref unpacked, 32));
+            unpack((uint)(packed >> 32), ref seek(unpacked, 32));
         }
     }
 }

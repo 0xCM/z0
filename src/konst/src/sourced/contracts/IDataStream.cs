@@ -7,6 +7,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     using System;
+    using System.Collections.Generic;
 
     [Free]
     public interface IDataStream<I,T> : IValueSource<T>
@@ -15,11 +16,13 @@ namespace Z0
     {
         ref T Next(ref T dst);
 
-        ReadOnlySpan<T> Read(I count);
+        ReadOnlySpan<T> Read(I wanted, I actual);
 
-        ref T Read(I count, ref T dst);
+        I Read(I wanted, ref T dst);
 
-        void Read(I count, Span<T> dst);
+        I Read(I count, Span<T> dst);
+
+        IEnumerable<T> Forever();
     }
 
     [Free]

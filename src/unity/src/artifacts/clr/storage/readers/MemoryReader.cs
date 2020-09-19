@@ -18,6 +18,7 @@ namespace Z0
 
     partial struct ClrStorageReaders
     {
+
         unsafe internal struct MemoryReader
         {
             //^ [SpecPublic]
@@ -99,14 +100,6 @@ namespace Z0
                 return true;
             }
 
-            //^ bool EnsureOffsetRange(
-            //^   int offset,
-            //^   int byteCount
-            //^ )
-            //^   //^ ensures result == this.Offset + byteCount <= this.Length;
-            //^ {
-            //^   return this.Offset + offset + byteCount <= this.Length;
-            //^ }
             internal void SkipBytes(int count)
             {
                 if (checked(this.CurrentPointer - this.Buffer + count) > this.Length)
@@ -127,12 +120,7 @@ namespace Z0
             }
 
             internal MemoryBlock RemainingMemoryBlock
-            {
-                get
-                {
-                    return new MemoryBlock(this.CurrentPointer, this.RemainingBytes);
-                }
-            }
+                => new MemoryBlock(CurrentPointer, RemainingBytes);
 
             //^ requires this.CurrentPointer - this.Buffer + offset + length <= this.Length;
             internal MemoryBlock GetMemoryBlockAt(uint offset, uint length)
@@ -302,9 +290,9 @@ namespace Z0
                     int offsetIter = (int)offset + 1;
                     result = (uint)((headerByte & 0x3f) << 24) | (uint)(this.PeekByte(offsetIter) << 16);
                     offsetIter++;
-                    result |= (uint)(this.PeekByte(offsetIter) << 8);
+                    result |= (uint)(PeekByte(offsetIter) << 8);
                     offsetIter++;
-                    result |= (uint)this.PeekByte(offsetIter);
+                    result |= (uint)PeekByte(offsetIter);
                     numberOfBytesRead = 4;
                 }
                 return result;
@@ -753,6 +741,7 @@ namespace Z0
                 this.CurrentPointer = pb;
                 return new String(buffer, 0, j);
             }
+
         }
     }
 }
