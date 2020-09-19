@@ -234,7 +234,7 @@ namespace Z0
                 return null;
 
             ulong mt;
-            if (field.ElementType == ClrTypeCode.IntI)
+            if (field.ElementType == ClrMdTypeCode.IntI)
                 mt = (ulong)GetField<IntPtr>("m_handle");
             else
                 mt = (ulong)GetValueTypeField("m_handle").GetField<IntPtr>("m_ptr");
@@ -262,7 +262,7 @@ namespace Z0
         /// </exception>
         public string GetStringField(string fieldName, int maxLength = 4096)
         {
-            ulong address = GetFieldAddress(fieldName, ClrTypeCode.String, out ClrType stringType, "string");
+            ulong address = GetFieldAddress(fieldName, ClrMdTypeCode.String, out ClrType stringType, "string");
             IDataReader dataReader = Helpers.DataReader;
             if (!dataReader.ReadPointer(address, out ulong strPtr))
                 throw new MemoryReadException(address);
@@ -282,7 +282,7 @@ namespace Z0
             return ValueReader.GetStringContents(type, Helpers.DataReader, Address, maxLength);
         }
 
-        private ulong GetFieldAddress(string fieldName, ClrTypeCode element, out ClrType fieldType, string typeName)
+        private ulong GetFieldAddress(string fieldName, ClrMdTypeCode element, out ClrType fieldType, string typeName)
         {
             ClrType type = GetTypeOrThrow();
 

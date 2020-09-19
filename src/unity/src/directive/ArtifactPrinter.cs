@@ -22,7 +22,7 @@ namespace Z0
             => Wf = wf;
 
         [MethodImpl(Inline)]
-        public void Print<A>(Artifacts<A> src)
+        public void Print<A>(ClrArtifactSet<A> src)
             where A : struct, IClrArtifact<A>
         {
             if(src.IsNonEmpty)

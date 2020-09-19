@@ -119,7 +119,7 @@ namespace Z0
         /// <exception cref="MemoryReadException">There was an error reading the value of this field out of the data target.</exception>
         public string GetStringField(string fieldName, int maxLength = 4096)
         {
-            ulong address = GetFieldAddress(fieldName, ClrTypeCode.String, "string");
+            ulong address = GetFieldAddress(fieldName, ClrMdTypeCode.String, "string");
             if (!DataReader.ReadPointer(address, out ulong str))
                 throw new MemoryReadException(address);
 
@@ -130,7 +130,7 @@ namespace Z0
             return obj.AsString(maxLength);
         }
 
-        private ulong GetFieldAddress(string fieldName, ClrTypeCode element, string typeName)
+        private ulong GetFieldAddress(string fieldName, ClrMdTypeCode element, string typeName)
         {
             ClrInstanceField? field = Type.GetFieldByName(fieldName);
             if (field is null)

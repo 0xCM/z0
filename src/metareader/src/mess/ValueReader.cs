@@ -36,22 +36,22 @@ namespace Z0
                 return default;
             }
 
-            internal static object GetValueAtAddress(ClrHeap heap, IDataReader reader, ClrTypeCode cet, ulong addr)
+            internal static object GetValueAtAddress(ClrHeap heap, IDataReader reader, ClrMdTypeCode cet, ulong addr)
             {
                 switch (cet)
                 {
-                    case ClrTypeCode.String:
+                    case ClrMdTypeCode.String:
                         return GetStringContents(heap.StringType, reader, addr, 4096);
 
-                    case ClrTypeCode.Class:
-                    case ClrTypeCode.Array:
-                    case ClrTypeCode.Cells:
-                    case ClrTypeCode.Object:
+                    case ClrMdTypeCode.Class:
+                    case ClrMdTypeCode.Array:
+                    case ClrMdTypeCode.Cells:
+                    case ClrMdTypeCode.Object:
                         {
                             return reader.ReadPointer(addr);
                         }
 
-                    case ClrTypeCode.Bool8:
+                    case ClrMdTypeCode.Bool8:
                         {
                             if (!reader.Read(addr, out byte val))
                                 return null;
@@ -59,7 +59,7 @@ namespace Z0
                             return val != 0;
                         }
 
-                    case ClrTypeCode.Int32i:
+                    case ClrMdTypeCode.Int32i:
                         {
                             if (!reader.Read(addr, out int val))
                                 return null;
@@ -67,7 +67,7 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrTypeCode.Int32u:
+                    case ClrMdTypeCode.Int32u:
                         {
                             if (!reader.Read(addr, out uint val))
                                 return null;
@@ -75,7 +75,7 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrTypeCode.Int64i:
+                    case ClrMdTypeCode.Int64i:
                         {
                             if (!reader.Read(addr, out long val))
                                 return long.MaxValue;
@@ -83,7 +83,7 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrTypeCode.Int64u:
+                    case ClrMdTypeCode.Int64u:
                         {
                             if (!reader.Read(addr, out ulong val))
                                 return long.MaxValue;
@@ -91,19 +91,19 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrTypeCode.IntU: // native unsigned int
-                    case ClrTypeCode.Ptr:
-                    case ClrTypeCode.PtrFx:
+                    case ClrMdTypeCode.IntU: // native unsigned int
+                    case ClrMdTypeCode.Ptr:
+                    case ClrMdTypeCode.PtrFx:
                         {
                             return reader.ReadPointer(addr);
                         }
 
-                    case ClrTypeCode.IntI: // native int
+                    case ClrMdTypeCode.IntI: // native int
                         {
                             return reader.ReadPointer(addr);
                         }
 
-                    case ClrTypeCode.Int8i:
+                    case ClrMdTypeCode.Int8i:
                         {
                             if (!reader.Read(addr, out sbyte val))
                                 return null;
@@ -111,7 +111,7 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrTypeCode.Int8u:
+                    case ClrMdTypeCode.Int8u:
                         {
                             if (!reader.Read(addr, out byte val))
                                 return null;
@@ -119,7 +119,7 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrTypeCode.Float32:
+                    case ClrMdTypeCode.Float32:
                         {
                             if (!reader.Read(addr, out float val))
                                 return null;
@@ -127,7 +127,7 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrTypeCode.Float64: // double
+                    case ClrMdTypeCode.Float64: // double
                         {
                             if (!reader.Read(addr, out double val))
                                 return null;
@@ -135,7 +135,7 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrTypeCode.Int16i:
+                    case ClrMdTypeCode.Int16i:
                         {
                             if (!reader.Read(addr, out short val))
                                 return null;
@@ -143,7 +143,7 @@ namespace Z0
                             return val;
                         }
 
-                    case ClrTypeCode.Char16: // u2
+                    case ClrMdTypeCode.Char16: // u2
                         {
                             if (!reader.Read(addr, out ushort val))
                                 return null;
@@ -151,7 +151,7 @@ namespace Z0
                             return (char)val;
                         }
 
-                    case ClrTypeCode.Int16u:
+                    case ClrMdTypeCode.Int16u:
                         {
                             if (!reader.Read(addr, out ushort val))
                                 return null;

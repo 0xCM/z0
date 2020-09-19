@@ -21,7 +21,7 @@ namespace Z0.MS
 
         FieldAttributes _attributes = FieldAttributes.ReservedMask;
 
-        public override ClrTypeCode ElementType { get; }
+        public override ClrMdTypeCode ElementType { get; }
 
         public override bool IsObjectReference
             => ElementType.IsObjectReference();
@@ -80,7 +80,7 @@ namespace Z0.MS
 
             // Must be the last use of 'data' in this constructor.
             _type = _helpers.Factory.GetOrCreateType(data.TypeMethodTable, 0);
-            if (ElementType == ClrTypeCode.Class && _type != null)
+            if (ElementType == ClrMdTypeCode.Class && _type != null)
                 ElementType = _type.ElementType;
 
             DebugOnlyLoadLazyValues();
@@ -179,9 +179,9 @@ namespace Z0.MS
 
             if (res)
             {
-                ClrTypeCode type = (ClrTypeCode)etype;
+                ClrMdTypeCode type = (ClrMdTypeCode)etype;
 
-                if (type == ClrTypeCode.Array)
+                if (type == ClrMdTypeCode.Array)
                 {
                     res = sigParser.PeekElemType(out etype);
                     res = res && sigParser.SkipExactlyOne();
@@ -191,30 +191,30 @@ namespace Z0.MS
 
                     if (res)
                     {
-                        ClrType inner = factory.GetOrCreateBasicType((ClrTypeCode)etype);
+                        ClrType inner = factory.GetOrCreateBasicType((ClrMdTypeCode)etype);
                         result = factory.GetOrCreateArrayType(inner, ranks);
                     }
                 }
-                else if (type == ClrTypeCode.Cells)
+                else if (type == ClrMdTypeCode.Cells)
                 {
                     sigParser.PeekElemType(out etype);
-                    type = (ClrTypeCode)etype;
+                    type = (ClrMdTypeCode)etype;
 
                     if (type.IsObjectReference())
                     {
-                        result = factory.GetOrCreateBasicType(ClrTypeCode.Cells);
+                        result = factory.GetOrCreateBasicType(ClrMdTypeCode.Cells);
                     }
                     else
                     {
-                        ClrType inner = factory.GetOrCreateBasicType((ClrTypeCode)etype);
+                        ClrType inner = factory.GetOrCreateBasicType((ClrMdTypeCode)etype);
                         result = factory.GetOrCreateArrayType(inner, 1);
                     }
                 }
-                else if (type == ClrTypeCode.Ptr)
+                else if (type == ClrMdTypeCode.Ptr)
                 {
                     // Only deal with single pointers for now and types that have already been constructed
                     sigParser.GetElemType(out etype);
-                    type = (ClrTypeCode)etype;
+                    type = (ClrMdTypeCode)etype;
 
                     sigParser.GetToken(out int token);
 
@@ -227,7 +227,7 @@ namespace Z0.MS
                         result = factory.GetOrCreatePointerType(innerType, 1);
                     }
                 }
-                else if (type == ClrTypeCode.Object || type == ClrTypeCode.Class)
+                else if (type == ClrMdTypeCode.Object || type == ClrMdTypeCode.Class)
                 {
                     result = heap.ObjectType;
                 }
@@ -242,7 +242,7 @@ namespace Z0.MS
                         result = factory.GetOrCreateTypeFromToken(module, token);
 
                     if (result is null)
-                        result = factory.GetOrCreateBasicType((ClrTypeCode)etype);
+                        result = factory.GetOrCreateBasicType((ClrMdTypeCode)etype);
                 }
             }
 
@@ -273,7 +273,7 @@ namespace Z0.MS
                 if (token != 0 && module != null)
                     clrmdType.SetComponentType(factory.GetOrCreateTypeFromToken(module, token));
                 else
-                    clrmdType.SetComponentType(factory.GetOrCreateBasicType((ClrTypeCode)etype));
+                    clrmdType.SetComponentType(factory.GetOrCreateBasicType((ClrMdTypeCode)etype));
             }
 
             return result;
@@ -331,13 +331,13 @@ namespace Z0.MS
             return objRef + (ulong)(Offset + IntPtr.Size);
         }
 
-        internal static int GetSize(ClrType type, ClrTypeCode cet)
+        internal static int GetSize(ClrType type, ClrMdTypeCode cet)
         {
             // todo:  What if we have a struct which is not fully constructed (null MT,
             //        null type) and need to get the size of the field?
             switch (cet)
             {
-                case ClrTypeCode.Struct:
+                case ClrMdTypeCode.Struct:
                     if (type is null)
                         return 1;
 
@@ -358,35 +358,35 @@ namespace Z0.MS
 
                     return last.Offset + last.Size;
 
-                case ClrTypeCode.Int8i:
-                case ClrTypeCode.Int8u:
-                case ClrTypeCode.Bool8:
+                case ClrMdTypeCode.Int8i:
+                case ClrMdTypeCode.Int8u:
+                case ClrMdTypeCode.Bool8:
                     return 1;
 
-                case ClrTypeCode.Float32:
-                case ClrTypeCode.Int32i:
-                case ClrTypeCode.Int32u:
+                case ClrMdTypeCode.Float32:
+                case ClrMdTypeCode.Int32i:
+                case ClrMdTypeCode.Int32u:
                     return 4;
 
-                case ClrTypeCode.Float64: // double
-                case ClrTypeCode.Int64i:
-                case ClrTypeCode.Int64u:
+                case ClrMdTypeCode.Float64: // double
+                case ClrMdTypeCode.Int64i:
+                case ClrMdTypeCode.Int64u:
                     return 8;
 
-                case ClrTypeCode.String:
-                case ClrTypeCode.Class:
-                case ClrTypeCode.Array:
-                case ClrTypeCode.Cells:
-                case ClrTypeCode.Object:
-                case ClrTypeCode.IntI: // native int
-                case ClrTypeCode.IntU: // native unsigned int
-                case ClrTypeCode.Ptr:
-                case ClrTypeCode.PtrFx:
+                case ClrMdTypeCode.String:
+                case ClrMdTypeCode.Class:
+                case ClrMdTypeCode.Array:
+                case ClrMdTypeCode.Cells:
+                case ClrMdTypeCode.Object:
+                case ClrMdTypeCode.IntI: // native int
+                case ClrMdTypeCode.IntU: // native unsigned int
+                case ClrMdTypeCode.Ptr:
+                case ClrMdTypeCode.PtrFx:
                     return IntPtr.Size;
 
-                case ClrTypeCode.Int16u:
-                case ClrTypeCode.Int16i:
-                case ClrTypeCode.Char16: // u2
+                case ClrMdTypeCode.Int16u:
+                case ClrMdTypeCode.Int16i:
+                case ClrMdTypeCode.Char16: // u2
                     return 2;
             }
 

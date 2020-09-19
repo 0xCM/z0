@@ -11,7 +11,6 @@ namespace Z0
 
     partial struct ClrStorage
     {
-
         public static class HasSemanticsTag
         {
             public const int NumberOfBits = 1;

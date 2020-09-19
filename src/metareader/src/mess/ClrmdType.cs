@@ -32,7 +32,7 @@ namespace Z0.MS
 
         ImmutableArray<ClrStaticField> _statics;
 
-        ClrTypeCode _elementType;
+        ClrMdTypeCode _elementType;
 
         GCDesc _gcDesc;
 
@@ -60,7 +60,7 @@ namespace Z0.MS
 
         public override GCDesc GCDesc => GetOrCreateGCDesc();
 
-        public override ClrTypeCode ElementType
+        public override ClrMdTypeCode ElementType
             => GetElementType();
 
         public bool Shared { get; }
@@ -189,48 +189,48 @@ namespace Z0.MS
             return result;
         }
 
-        private ClrTypeCode GetElementType()
+        private ClrMdTypeCode GetElementType()
         {
-            if (_elementType != ClrTypeCode.None)
+            if (_elementType != ClrMdTypeCode.None)
                 return _elementType;
 
             if (this == Heap.ObjectType)
-                return _elementType = ClrTypeCode.Object;
+                return _elementType = ClrMdTypeCode.Object;
 
             if (this == Heap.StringType)
-                return _elementType = ClrTypeCode.String;
+                return _elementType = ClrMdTypeCode.String;
 
             if (ComponentSize > 0)
-                return _elementType = StaticSize > (uint)(3 * IntPtr.Size) ? ClrTypeCode.Array : ClrTypeCode.Cells;
+                return _elementType = StaticSize > (uint)(3 * IntPtr.Size) ? ClrMdTypeCode.Array : ClrMdTypeCode.Cells;
 
             ClrType? baseType = BaseType;
             if (baseType is null || baseType == Heap.ObjectType)
-                return _elementType = ClrTypeCode.Object;
+                return _elementType = ClrMdTypeCode.Object;
 
             if (baseType.Name != "System.ValueType")
             {
-                ClrTypeCode et = baseType.ElementType;
+                ClrMdTypeCode et = baseType.ElementType;
                 return _elementType = et;
             }
 
             return _elementType = Name switch
             {
-                "System.Int32" => ClrTypeCode.Int32i,
-                "System.Int16" => ClrTypeCode.Int16i,
-                "System.Int64" => ClrTypeCode.Int64i,
-                "System.IntPtr" => ClrTypeCode.IntI,
-                "System.UInt16" => ClrTypeCode.Int16u,
-                "System.UInt32" => ClrTypeCode.Int32u,
-                "System.UInt64" => ClrTypeCode.Int64u,
-                "System.UIntPtr" => ClrTypeCode.IntU,
-                "System.Boolean" => ClrTypeCode.Bool8,
-                "System.Single" => ClrTypeCode.Float32,
-                "System.Double" => ClrTypeCode.Float64,
-                "System.Byte" => ClrTypeCode.Int8u,
-                "System.Char" => ClrTypeCode.Char16,
-                "System.SByte" => ClrTypeCode.Int8i,
-                "System.Enum" => ClrTypeCode.Int32i,
-                _ => ClrTypeCode.Struct,
+                "System.Int32" => ClrMdTypeCode.Int32i,
+                "System.Int16" => ClrMdTypeCode.Int16i,
+                "System.Int64" => ClrMdTypeCode.Int64i,
+                "System.IntPtr" => ClrMdTypeCode.IntI,
+                "System.UInt16" => ClrMdTypeCode.Int16u,
+                "System.UInt32" => ClrMdTypeCode.Int32u,
+                "System.UInt64" => ClrMdTypeCode.Int64u,
+                "System.UIntPtr" => ClrMdTypeCode.IntU,
+                "System.Boolean" => ClrMdTypeCode.Bool8,
+                "System.Single" => ClrMdTypeCode.Float32,
+                "System.Double" => ClrMdTypeCode.Float64,
+                "System.Byte" => ClrMdTypeCode.Int8u,
+                "System.Char" => ClrMdTypeCode.Char16,
+                "System.SByte" => ClrMdTypeCode.Int8i,
+                "System.Enum" => ClrMdTypeCode.Int32i,
+                _ => ClrMdTypeCode.Struct,
             };
         }
 

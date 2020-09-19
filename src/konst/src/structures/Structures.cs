@@ -56,7 +56,7 @@ namespace Z0
             return dst;
         }
 
-         [MethodImpl(Inline), Op, Closures(Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static string format<T>(in T src)
             where T : struct
         {
@@ -74,7 +74,6 @@ namespace Z0
 
             return text.format(dst);
         }
-
 
         /// <summary>
         /// Determines whether at least one byte of two structural values differs
@@ -132,5 +131,20 @@ namespace Z0
                     return false;
             return true;
         }
+
+        [MethodImpl(Inline), Op]
+        public static Span<byte> edit<T>(in T src)
+            where T : struct
+                => bytes(src);
+
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<byte> view<T>(in T src)
+            where T : struct
+                => bytes(src);
+
+        [MethodImpl(Inline), Op]
+        public static uint hash<T>(in T src)
+            where T : struct
+                => z.hash(bytes(src));
     }
 }

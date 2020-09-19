@@ -21,7 +21,7 @@ namespace Z0.MS
 
         private FieldAttributes _attributes = FieldAttributes.ReservedMask;
 
-        public override ClrTypeCode ElementType { get; }
+        public override ClrMdTypeCode ElementType { get; }
 
         public override bool IsObjectReference
             => ElementType.IsObjectReference();

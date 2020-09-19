@@ -35,5 +35,7 @@ namespace Z0
         /// and is placed in ECX/RCX
         /// </summary>
         public const CC ThisCall = CC.ThisCall;
+
+        public const LayoutKind DefaultLayout = LayoutKind.Sequential;
     }
 }

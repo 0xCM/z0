@@ -18,8 +18,8 @@ namespace Z0.Dac
 
         public IFieldHelpers Helpers => _helpers!;
 
-        public ClrTypeCode ElementType
-            => (ClrTypeCode)_fieldData.ElementType;
+        public ClrMdTypeCode ElementType
+            => (ClrMdTypeCode)_fieldData.ElementType;
 
         public int Token => (int)_fieldData.FieldToken;
 

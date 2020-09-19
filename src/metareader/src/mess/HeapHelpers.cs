@@ -813,14 +813,14 @@ namespace Z0.MS
 
         public ClrHeap GetOrCreateHeap() => _heap;
 
-        public ClrType GetOrCreateBasicType(ClrTypeCode basicType)
+        public ClrType GetOrCreateBasicType(ClrMdTypeCode basicType)
         {
             CheckDisposed();
 
             ClrType?[]? basicTypes = _basicTypes;
             if (basicTypes is null)
             {
-                basicTypes = new ClrType[(int)ClrTypeCode.Cells];
+                basicTypes = new ClrType[(int)ClrMdTypeCode.Cells];
                 int count = 0;
                 ClrModule bcl = GetOrCreateRuntime().BaseClassLibrary;
                 if (bcl != null && bcl.MetadataImport != null)
@@ -828,28 +828,28 @@ namespace Z0.MS
                     foreach ((ulong mt, int _) in bcl.EnumerateTypeDefToMethodTableMap())
                     {
                         string? name = _sos.GetMethodTableName(mt);
-                        ClrTypeCode type = name switch
+                        ClrMdTypeCode type = name switch
                         {
-                            "System.Boolean" => ClrTypeCode.Bool8,
-                            "System.Char" => ClrTypeCode.Char16,
-                            "System.SByte" => ClrTypeCode.Int8i,
-                            "System.Byte" => ClrTypeCode.Int8u,
-                            "System.Int16" => ClrTypeCode.Int16i,
-                            "System.UInt16" => ClrTypeCode.Int16u,
-                            "System.Int32" => ClrTypeCode.Int32i,
-                            "System.UInt32" => ClrTypeCode.Int32u,
-                            "System.Int64" => ClrTypeCode.Int64i,
-                            "System.UInt64" => ClrTypeCode.Int64u,
-                            "System.Single" => ClrTypeCode.Float32,
-                            "System.Double" => ClrTypeCode.Float64,
-                            "System.IntPtr" => ClrTypeCode.IntI,
-                            "System.UIntPtr" => ClrTypeCode.IntU,
-                            "System.ValueType" => ClrTypeCode.Struct,
-                            "System.Array" => ClrTypeCode.Cells,
-                            _ => ClrTypeCode.None,
+                            "System.Boolean" => ClrMdTypeCode.Bool8,
+                            "System.Char" => ClrMdTypeCode.Char16,
+                            "System.SByte" => ClrMdTypeCode.Int8i,
+                            "System.Byte" => ClrMdTypeCode.Int8u,
+                            "System.Int16" => ClrMdTypeCode.Int16i,
+                            "System.UInt16" => ClrMdTypeCode.Int16u,
+                            "System.Int32" => ClrMdTypeCode.Int32i,
+                            "System.UInt32" => ClrMdTypeCode.Int32u,
+                            "System.Int64" => ClrMdTypeCode.Int64i,
+                            "System.UInt64" => ClrMdTypeCode.Int64u,
+                            "System.Single" => ClrMdTypeCode.Float32,
+                            "System.Double" => ClrMdTypeCode.Float64,
+                            "System.IntPtr" => ClrMdTypeCode.IntI,
+                            "System.UIntPtr" => ClrMdTypeCode.IntU,
+                            "System.ValueType" => ClrMdTypeCode.Struct,
+                            "System.Array" => ClrMdTypeCode.Cells,
+                            _ => ClrMdTypeCode.None,
                         };
 
-                        if (type != ClrTypeCode.None)
+                        if (type != ClrMdTypeCode.None)
                         {
                             basicTypes[(int)type - 1] = GetOrCreateType(mt, 0);
                             count++;
@@ -973,7 +973,7 @@ namespace Z0.MS
                     result = GetOrCreateType(data.ElementTypeHandle, 0);
 
                 if (result is null && data.ElementType != 0)
-                    result = GetOrCreateBasicType((ClrTypeCode)data.ElementType);
+                    result = GetOrCreateBasicType((ClrMdTypeCode)data.ElementType);
 
                 type.SetComponentType(result);
             }

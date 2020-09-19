@@ -12,7 +12,7 @@ namespace Z0.MS
 
         ulong ElementTypeHandle { get; }
 
-        ClrTypeCode ElementType { get; }
+        ClrMdTypeCode ElementType { get; }
 
         ulong RCW { get; }
 

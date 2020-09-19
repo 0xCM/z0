@@ -40,8 +40,8 @@ namespace Z0.Dac
 
         public ClrDataAddress CCW;
 
-        ClrTypeCode IObjectData.ElementType
-            => (ClrTypeCode)ElementType;
+        ClrMdTypeCode IObjectData.ElementType
+            => (ClrMdTypeCode)ElementType;
 
         ulong IObjectData.ElementTypeHandle
             => ElementTypeHandle;

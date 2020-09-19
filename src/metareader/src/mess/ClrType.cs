@@ -64,9 +64,9 @@ namespace Z0
         public abstract ClrModule Module { get; }
 
         /// <summary>
-        /// Gets the <see cref="ClrTypeCode"/> of this Type.  Can return <see cref="ClrTypeCode.None"/> on error.
+        /// Gets the <see cref="ClrMdTypeCode"/> of this Type.  Can return <see cref="ClrMdTypeCode.None"/> on error.
         /// </summary>
-        public abstract ClrTypeCode ElementType { get; }
+        public abstract ClrMdTypeCode ElementType { get; }
 
         /// <summary>
         /// Gets a value indicating whether this type is a primitive (<see cref="int"/>, <see cref="float"/>, etc).
@@ -277,7 +277,7 @@ namespace Z0
             if (other.IsPointer)
                 return ComponentType == other.ComponentType;
 
-            if (IsPrimitive && other.IsPrimitive && ElementType != ClrTypeCode.None)
+            if (IsPrimitive && other.IsPrimitive && ElementType != ClrMdTypeCode.None)
                 return ElementType == other.ElementType;
 
             // Ok we aren't a primitive type, or a pointer, and our MethodTables are 0.  Last resort is to

@@ -12,7 +12,6 @@ namespace Z0
     using static z;
 
     using api = ClrArtifacts;
-    using A = ClrArtifacts;
 
     struct App
     {
@@ -48,7 +47,7 @@ namespace Z0
             Print(wf,modules.Files().ToReadOnlySpan());
         }
 
-        static void Traverse(IWfShell wf, A.Artifacts<ClrArtifacts.Field> src)
+        static void Traverse(IWfShell wf, ClrArtifactSet<ClrArtifacts.FieldView> src)
         {
             var count = src.Length;
             if(count == 0)

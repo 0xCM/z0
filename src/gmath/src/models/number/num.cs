@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-       
-    using static Konst;
 
+    using static Konst;
 
     [ApiHost]
     public readonly struct num
@@ -88,12 +87,12 @@ namespace Z0
         public static num<T> sll<T>(num<T> a, byte offset)
             where T : unmanaged
                 => from(gmath.sll(a.Value, offset));
-        
+
         [MethodImpl(Inline), Srl, Closures(Integers)]
         public static num<T> srl<T>(num<T> a, byte offset)
             where T : unmanaged
                 => from(gmath.srl(a.Value, offset));
-        
+
         [MethodImpl(Inline), Eq, Closures(AllNumeric)]
         public static bit eq<T>(num<T> a, num<T> b)
             where T : unmanaged

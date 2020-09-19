@@ -26,69 +26,69 @@ namespace Z0
             _ => "unknown handle"
         };
 
-        public static bool IsPrimitive(this ClrTypeCode src)
+        public static bool IsPrimitive(this ClrMdTypeCode src)
         {
-            return src >= ClrTypeCode.Bool8 && src <= ClrTypeCode.Float64
-                || src == ClrTypeCode.IntI || src == ClrTypeCode.IntU
-                || src == ClrTypeCode.Ptr || src == ClrTypeCode.PtrFx;
+            return src >= ClrMdTypeCode.Bool8 && src <= ClrMdTypeCode.Float64
+                || src == ClrMdTypeCode.IntI || src == ClrMdTypeCode.IntU
+                || src == ClrMdTypeCode.Ptr || src == ClrMdTypeCode.PtrFx;
         }
 
-        public static bool IsValueType(this ClrTypeCode src)
-            => src == ClrTypeCode.Struct;
+        public static bool IsValueType(this ClrMdTypeCode src)
+            => src == ClrMdTypeCode.Struct;
 
-        public static bool IsObjectReference(this ClrTypeCode src)
+        public static bool IsObjectReference(this ClrMdTypeCode src)
         {
-            return src == ClrTypeCode.String || src == ClrTypeCode.Class
-                || src == ClrTypeCode.Array || src == ClrTypeCode.Cells
-                || src == ClrTypeCode.Object;
+            return src == ClrMdTypeCode.String || src == ClrMdTypeCode.Class
+                || src == ClrMdTypeCode.Array || src == ClrMdTypeCode.Cells
+                || src == ClrMdTypeCode.Object;
         }
 
-        public static Type GetTypeForElementType(this ClrTypeCode src)
+        public static Type GetTypeForElementType(this ClrMdTypeCode src)
         {
             switch (src)
             {
-                case ClrTypeCode.Bool8:
+                case ClrMdTypeCode.Bool8:
                     return typeof(bool);
 
-                case ClrTypeCode.Char16:
+                case ClrMdTypeCode.Char16:
                     return typeof(char);
 
-                case ClrTypeCode.Float64:
+                case ClrMdTypeCode.Float64:
                     return typeof(double);
 
-                case ClrTypeCode.Float32:
+                case ClrMdTypeCode.Float32:
                     return typeof(float);
 
-                case ClrTypeCode.Ptr:
-                case ClrTypeCode.IntI:
-                case ClrTypeCode.PtrFx:
+                case ClrMdTypeCode.Ptr:
+                case ClrMdTypeCode.IntI:
+                case ClrMdTypeCode.PtrFx:
                     return typeof(IntPtr);
 
-                case ClrTypeCode.IntU:
+                case ClrMdTypeCode.IntU:
                     return typeof(UIntPtr);
 
-                case ClrTypeCode.Int16i:
+                case ClrMdTypeCode.Int16i:
                     return typeof(short);
 
-                case ClrTypeCode.Int32i:
+                case ClrMdTypeCode.Int32i:
                     return typeof(int);
 
-                case ClrTypeCode.Int64i:
+                case ClrMdTypeCode.Int64i:
                     return typeof(long);
 
-                case ClrTypeCode.Int8i:
+                case ClrMdTypeCode.Int8i:
                     return typeof(sbyte);
 
-                case ClrTypeCode.Int16u:
+                case ClrMdTypeCode.Int16u:
                     return typeof(ushort);
 
-                case ClrTypeCode.Int32u:
+                case ClrMdTypeCode.Int32u:
                     return typeof(uint);
 
-                case ClrTypeCode.Int64u:
+                case ClrMdTypeCode.Int64u:
                     return typeof(ulong);
 
-                case ClrTypeCode.Int8u:
+                case ClrMdTypeCode.Int8u:
                     return typeof(byte);
 
                 default:

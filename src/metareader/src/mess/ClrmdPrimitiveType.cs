@@ -14,7 +14,7 @@ namespace Z0.MS
 
     public class ClrmdPrimitiveType : ClrType
     {
-        public ClrmdPrimitiveType(ITypeHelpers helpers, ClrModule module, ClrHeap heap, ClrTypeCode type)
+        public ClrmdPrimitiveType(ITypeHelpers helpers, ClrModule module, ClrHeap heap, ClrMdTypeCode type)
         {
             if (helpers is null)
                 throw new ArgumentNullException(nameof(helpers));
@@ -34,7 +34,7 @@ namespace Z0.MS
 
         public override IClrObjectHelpers ClrObjectHelpers { get; }
 
-        public override ClrTypeCode ElementType { get; }
+        public override ClrMdTypeCode ElementType { get; }
 
         public override bool IsShared => false;
 
@@ -72,21 +72,21 @@ namespace Z0.MS
 
         public override string Name => ElementType switch
         {
-            ClrTypeCode.Bool8 => "System.Boolean",
-            ClrTypeCode.Char16 => "System.Char",
-            ClrTypeCode.Int8i => "System.SByte",
-            ClrTypeCode.Int8u => "System.Byte",
-            ClrTypeCode.Int16i => "System.Int16",
-            ClrTypeCode.Int16u => "System.UInt16",
-            ClrTypeCode.Int32i => "System.Int32",
-            ClrTypeCode.Int32u => "System.UInt32",
-            ClrTypeCode.Int64i => "System.Int64",
-            ClrTypeCode.Int64u => "System.UInt64",
-            ClrTypeCode.Float32 => "System.Single",
-            ClrTypeCode.Float64 => "System.Double",
-            ClrTypeCode.IntI => "System.IntPtr",
-            ClrTypeCode.IntU => "System.UIntPtr",
-            ClrTypeCode.Struct => "Sytem.ValueType",
+            ClrMdTypeCode.Bool8 => "System.Boolean",
+            ClrMdTypeCode.Char16 => "System.Char",
+            ClrMdTypeCode.Int8i => "System.SByte",
+            ClrMdTypeCode.Int8u => "System.Byte",
+            ClrMdTypeCode.Int16i => "System.Int16",
+            ClrMdTypeCode.Int16u => "System.UInt16",
+            ClrMdTypeCode.Int32i => "System.Int32",
+            ClrMdTypeCode.Int32u => "System.UInt32",
+            ClrMdTypeCode.Int64i => "System.Int64",
+            ClrMdTypeCode.Int64u => "System.UInt64",
+            ClrMdTypeCode.Float32 => "System.Single",
+            ClrMdTypeCode.Float64 => "System.Double",
+            ClrMdTypeCode.IntI => "System.IntPtr",
+            ClrMdTypeCode.IntU => "System.UIntPtr",
+            ClrMdTypeCode.Struct => "Sytem.ValueType",
             _ => ElementType.ToString(),
         };
 

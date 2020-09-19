@@ -35,7 +35,7 @@ namespace Z0
 
         ClrType GetOrCreateType(ulong mt, ulong obj);
 
-        ClrType GetOrCreateBasicType(ClrTypeCode basicType);
+        ClrType GetOrCreateBasicType(ClrMdTypeCode basicType);
 
         ClrType GetOrCreateArrayType(ClrType inner, int ranks);
 

@@ -12,7 +12,7 @@ namespace Z0.MS
     {
         IFieldHelpers Helpers { get; }
 
-        ClrTypeCode ElementType { get; }
+        ClrMdTypeCode ElementType { get; }
 
         int Token { get; }
 

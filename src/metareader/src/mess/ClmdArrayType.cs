@@ -68,7 +68,7 @@ namespace Z0.MS
                 return null;
 
             ClrType? componentType = ComponentType;
-            ClrTypeCode cet;
+            ClrMdTypeCode cet;
             if (componentType != null)
             {
                 cet = componentType.ElementType;
@@ -83,10 +83,10 @@ namespace Z0.MS
                 cet = data.ElementType;
             }
 
-            if (cet == ClrTypeCode.None)
+            if (cet == ClrMdTypeCode.None)
                 return null;
 
-            if (cet == ClrTypeCode.String)
+            if (cet == ClrMdTypeCode.String)
                 address = DataReader.ReadPointer(address);
 
             return ValueReader.GetValueAtAddress(Heap, DataReader, cet, address);
@@ -96,7 +96,7 @@ namespace Z0.MS
         {
             ulong address = GetArrayElementAddress(objRef, 0);
             ClrType? componentType = ComponentType;
-            ClrTypeCode cet;
+            ClrMdTypeCode cet;
             if (componentType != null)
             {
                 cet = componentType.ElementType;
@@ -111,7 +111,7 @@ namespace Z0.MS
                 cet = data.ElementType;
             }
 
-            if (cet == ClrTypeCode.None)
+            if (cet == ClrMdTypeCode.None)
                 return null;
 
             if (address == 0)

@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
 
@@ -28,5 +27,9 @@ namespace Z0
             }
             return rolling;
         }
+
+        [MethodImpl(Inline)]
+        public static uint hash<T>(Span<T> src)
+            => hash(@readonly(src));
     }
 }

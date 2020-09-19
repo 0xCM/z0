@@ -50,7 +50,7 @@ namespace Z0.MS
         public ClrmdConstructedType(ClrType componentType, int ranks, bool pointer)
         {
             ComponentType = componentType ?? throw new ArgumentNullException(nameof(componentType));
-            ElementType = pointer ? ClrTypeCode.Ptr : ClrTypeCode.Cells;
+            ElementType = pointer ? ClrMdTypeCode.Ptr : ClrMdTypeCode.Cells;
             _ranks = ranks;
 
             if (ranks <= 0)
@@ -63,7 +63,7 @@ namespace Z0.MS
         public override ClrEnum AsEnum() => throw new InvalidOperationException();
 
         // We have no good way of finding this value, unfortunately
-        public override ClrTypeCode ElementType { get; }
+        public override ClrMdTypeCode ElementType { get; }
 
         public override ulong MethodTable => 0;
 

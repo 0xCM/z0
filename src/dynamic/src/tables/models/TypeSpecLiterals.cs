@@ -9,7 +9,7 @@ namespace Z0
     using static System.Reflection.TypeAttributes;
 
     using static z;
-    using static Konst;
+    //using static Konst;
 
     public readonly struct TableSpecLiterals
     {

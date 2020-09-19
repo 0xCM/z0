@@ -12,13 +12,13 @@ namespace Z0.Dac
 
     public readonly struct FieldModel
     {
-        public FieldModel(ClrTypeCode type, FieldData data)
+        public FieldModel(ClrMdTypeCode type, FieldData data)
         {
             ElementType = type;
             Data = data;
         }
 
-        public readonly ClrTypeCode ElementType;
+        public readonly ClrMdTypeCode ElementType;
 
         public readonly FieldData Data;
 

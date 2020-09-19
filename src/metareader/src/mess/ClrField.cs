@@ -36,7 +36,7 @@ namespace Z0.MS
         /// Gets the element type of this field.  Note that even when Type is <see langword="null"/>, this should still tell you
         /// the element type of the field.
         /// </summary>
-        public abstract ClrTypeCode ElementType { get; }
+        public abstract ClrMdTypeCode ElementType { get; }
 
         /// <summary>
         /// Gets a value indicating whether this field is a primitive (<see cref="int"/>, <see cref="float"/>, etc).
