@@ -9,11 +9,11 @@ namespace Z0
     /// <summary>
     /// Applied to an exposed surface to classify its role/purpose
     /// </summary>
-    public class ApiClassAttribute : Attribute
+    public class ApiProviderAttribute : Attribute
     {
-        public ApiClassKind Kind {get;}
+        public ApiProviderKind Kind {get;}
 
-        public ApiClassAttribute(ApiClassKind kind)
+        public ApiProviderAttribute(ApiProviderKind kind)
         {
             Kind = kind;
         }

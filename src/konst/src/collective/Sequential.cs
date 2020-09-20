@@ -16,6 +16,5 @@ namespace Z0
             where I : unmanaged
             where H : ISequentialHost<H,I,T>
                 => src.Terms;
-
     }
 }

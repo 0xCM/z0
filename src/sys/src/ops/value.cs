@@ -7,18 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-            
+
     using static Part;
 
-    using O = OpacityKind;
+    using O = OpacityApiKey;
 
     partial struct sys
-    {                
+    {
         [MethodImpl(Options), Opaque(O.GetFieldValue)]
         public static object value(object src, FieldInfo field)
             => proxy.value(src,field);
 
-        [MethodImpl(Options), Opaque(O.GetGenericType), Closures(Closure)]                
+        [MethodImpl(Options), Opaque(O.GetGenericType), Closures(Closure)]
         public static T value<T>(object src, FieldInfo field)
             => proxy.value<T>(src,field);
     }

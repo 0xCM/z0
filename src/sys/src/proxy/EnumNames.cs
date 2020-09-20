@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    using static OpacityKind;
-    
+    using static OpacityApiKey;
+
     partial struct proxy
     {
         [MethodImpl(Options), Opaque(GetEnumNames)]

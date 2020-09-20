@@ -3,11 +3,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;    
+    using System;
     using System.Runtime.CompilerServices;
-    
+
     public class GridIndicators
-    {   
+    {
         public const string Natural = "bgnu";
 
         public const string Generic = "bgu";
@@ -18,5 +18,4 @@ namespace Z0
 
         public const string FixedSubgrid = "bgs";
     }
-
 }

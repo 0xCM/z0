@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ActionClassKind;
+    using K = ApiActionClass;
 
     public readonly struct ActionClass : IOperational<K>
     {

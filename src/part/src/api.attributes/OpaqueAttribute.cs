@@ -6,7 +6,7 @@ namespace Z0
 {
     public class OpaqueAttribute : OpKindAttribute
     {
-        public OpaqueAttribute(OpacityKind id)
+        public OpaqueAttribute(OpacityApiKey id)
             : base(id)
         {
 

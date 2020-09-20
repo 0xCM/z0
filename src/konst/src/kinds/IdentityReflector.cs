@@ -12,8 +12,8 @@ namespace Z0
     using static Konst;
 
     using AC = ArityClassKind;
-    using OC = OperatorClassKind;
-    using PC = PredicateClassKind;
+    using OC = ApiOperatorClass;
+    using PC = ApiPredicateClass;
 
     [ApiHost]
     public readonly struct IdentityReflector : TIdentityReflector
@@ -217,7 +217,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         [Op]
-        public static MethodInfo[] WithPredicateClass(MethodInfo[] src, PredicateClassKind @class)
+        public static MethodInfo[] WithPredicateClass(MethodInfo[] src, ApiPredicateClass @class)
             => from m in src where ClassifyPredicate(m) == @class select m;
 
         /// <summary>
@@ -241,7 +241,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         [Op]
-        public static MethodInfo[] WithOperatorClass(MethodInfo[] src, OperatorClassKind @class)
+        public static MethodInfo[] WithOperatorClass(MethodInfo[] src, ApiOperatorClass @class)
             => from m in src where m.ClassifyOperator() == @class select m;
 
         /// <summary>
@@ -258,7 +258,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         [Op]
-        public static PredicateClassKind ClassifyPredicate(MethodInfo m)
+        public static ApiPredicateClass ClassifyPredicate(MethodInfo m)
         {
             if(IsPredicate(m))
             {
@@ -288,7 +288,7 @@ namespace Z0
             };
 
         [Op]
-        public static int ArityValue(OperatorClassKind src)
+        public static int ArityValue(ApiOperatorClass src)
             => src switch{
                OC.UnaryOp => 1,
                OC.BinaryOp => 2,

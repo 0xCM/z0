@@ -9,6 +9,8 @@ namespace Z0
 
     using static Konst;
 
+    using NK = NumericKind;
+
     partial class VectorType
     {
         /// <summary>
@@ -41,26 +43,26 @@ namespace Z0
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline), Op]
         public static bool unsigned(VectorKind k)
-            => (k & VectorKind.Unsigned) != 0;
+            => (k & (VectorKind)NK.Unsigned) != 0;
 
         /// <summary>
-        /// Determines whether a classfied vector is defined over primal signed integer components
+        /// Determines whether a classified vector is defined over primal signed integer components
         /// </summary>
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline), Op]
         public static bool signed(VectorKind k)
-            => (k & VectorKind.Signed) != 0;
+            => (k & (VectorKind)NK.Signed) != 0;
 
         /// <summary>
-        /// Determines whether a classfied vector is defined over floating-point components
+        /// Determines whether a classified vector is defined over floating-point components
         /// </summary>
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline), Op]
         public static bool floating(VectorKind k)
-            => (k & VectorKind.Float) != 0;
+            => (k & (VectorKind)NK.Float) != 0;
 
         /// <summary>
-        /// Determines whether a classfied vector is defined over primal integer components
+        /// Determines whether a classified vector is defined over primal integer components
         /// </summary>
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline), Op]

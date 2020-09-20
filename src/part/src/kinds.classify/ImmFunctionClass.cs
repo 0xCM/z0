@@ -6,11 +6,13 @@ namespace Z0
 {
     using System;
 
+    using p = Pow2x8;
+
     /// <summary>
     /// Classifies operations according to their immediate needs
     /// </summary>
     [Flags]
-    public enum ImmFunctionClassKind : byte
+    public enum ImmFunctionClass : byte
     {
         /// <summary>
         /// The empty class
@@ -20,42 +22,42 @@ namespace Z0
         /// <summary>
         /// Classifies operations that accept one or more immediate values
         /// </summary>
-        Imm8 = 1,
+        Imm8 = p.P2ᐞ00,
 
         /// <summary>
         /// Classifies operations that accept immediate values in the first parameter
         /// </summary>
-        ImmSlot0 = 2,
+        ImmSlot0 = p.P2ᐞ01,
 
         /// <summary>
         /// Classifies operations that accept immediate values in the second parameter
         /// </summary>
-        ImmSlot1 = 4,
+        ImmSlot1 = p.P2ᐞ02,
 
         /// <summary>
         /// Classifies operations that accept immediate values in the third parameter
         /// </summary>
-        ImmSlot2 = 8,
+        ImmSlot2 = p.P2ᐞ03,
 
         /// <summary>
         /// Classifies operations that accept immediate values in the fourth parameter
         /// </summary>
-        ImmSlot3 = 16,
+        ImmSlot3 = p.P2ᐞ04,
 
         /// <summary>
         /// Classifies operations that accept immediate values in the fifth parameter
         /// </summary>
-        ImmSlot4 = 32,
+        ImmSlot4 = p.P2ᐞ05,
 
         /// <summary>
         /// Classifies operations that immediate one immediate value
         /// </summary>
-        ImmCount1 = 64,
+        ImmCount1 = p.P2ᐞ06,
 
         /// <summary>
         /// Classifies operations that immediate two immediate values
         /// </summary>
-        ImmCount2 = 128,
+        ImmCount2 = p.P2ᐞ07,
 
         /// <summary>
         /// F:A -> byte -> A

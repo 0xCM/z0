@@ -311,118 +311,53 @@ namespace Z0
         b512x64f = b512 | Seg64f,
 
         /// <summary>
-        /// Redeclaration of <see cref="NK.Unsigned" />
-        /// </summary>
-        Unsigned = NK.Unsigned,
-
-        /// <summary>
-        /// Redeclaration of <see cref="NK.Signed" />
-        /// </summary>
-        Signed = NK.Signed,
-
-        /// <summary>
-        /// Redeclaration of <see cref="NK.Float" />
-        /// </summary>
-        Float = NK.Float,
-
-        /// <summary>
-        /// Redeclaration of <see cref="NK.I8" />
-        /// </summary>
-        I8 = NK.I8,
-
-        /// <summary>
-        /// Redeclaration of <see cref="NK.U8" />
-        /// </summary>
-        U8 = NK.U8,
-
-        /// <summary>
-        /// Redeclaration of <see cref="NK.I16" />
-        /// </summary>
-        I16 = NK.I16,
-
-        /// <summary>
-        /// Redeclaration of <see cref="NK.U16" />
-        /// </summary>
-        U16 = NK.U16,
-
-        /// <summary>
-        /// Redeclaration of <see cref="NK.I32" />
-        /// </summary>
-        I32 = NK.I32,
-
-        /// <summary>
-        /// Redeclaration of <see cref="NK.U32" />
-        /// </summary>
-        U32 = NK.U32,
-
-        /// <summary>
-        /// Redeclaration of <see cref="NK.I64" />
-        /// </summary>
-        I64 = NK.I64,
-
-        /// <summary>
-        /// Redeclaration of <see cref="NK.U64" />
-        /// </summary>
-        U64 = NK.U64,
-
-        /// <summary>
-        /// Redeclaration of <see cref="NK.F32" />
-        /// </summary>
-        F32 = NK.F32,
-
-        /// <summary>
-        /// Redeclaration of <see cref="NK.F64" />
-        /// </summary>
-        F64 = NK.F64,
-
-        /// <summary>
         /// A block defined over 8-bit unsigned segments
         /// </summary>
-        Seg8u = U8 | Unsigned,
+        Seg8u = NK.U8 | NK.Unsigned,
 
         /// <summary>
         /// A block defined over 8-bit signed segments
         /// </summary>
-        Seg8i = I8 | Signed,
+        Seg8i = NK.I8 | NK.Signed,
 
         /// <summary>
         /// A block defined over 16-bit unsigned segments
         /// </summary>
-        Seg16u = U16 | Unsigned,
+        Seg16u = NK.U16 | NK.Unsigned,
 
         /// <summary>
         /// A block defined over 16-bit signed segments
         /// </summary>
-        Seg16i = I16 | Signed,
+        Seg16i = NK.I16 | NK.Signed,
 
         /// <summary>
         /// A block defined over 32-bit unsigned segments
         /// </summary>
-        Seg32u = U32 | Unsigned,
+        Seg32u = NK.U32 | NK.Unsigned,
 
         /// <summary>
         /// A block defined over 32-bit signed segments
         /// </summary>
-        Seg32i = I32 | Signed,
+        Seg32i = NK.I32 | NK.Signed,
 
         /// <summary>
         /// A block defined over 64-bit unsigned segments
         /// </summary>
-        Seg64u = U64 | Unsigned,
+        Seg64u = NK.U64 | NK.Unsigned,
 
         /// <summary>
         /// A block defined over 64-bit signed segments
         /// </summary>
-        Seg64i = I64 | Signed,
+        Seg64i = NK.I64 | NK.Signed,
 
         /// <summary>
         /// A block defined over 32-bit floating-point segments
         /// </summary>
-        Seg32f = F32 | Float,
+        Seg32f = NK.F32 | NK.Float,
 
         /// <summary>
         /// A block defined over 64-bit floating-point segments
         /// </summary>
-        Seg64f = F64 | Float,
+        Seg64f = NK.F64 | NK.Float,
     }
 }

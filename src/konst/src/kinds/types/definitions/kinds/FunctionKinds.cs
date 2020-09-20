@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = FunctionClassKind;
+    using K = ApiFunctionClass;
 
     partial class Kinds
     {

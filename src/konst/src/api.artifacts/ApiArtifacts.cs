@@ -11,7 +11,7 @@ namespace Z0
     using static z;
 
     [ApiHost]
-    public readonly struct Artifacts
+    public readonly struct ApiArtifacts
     {
         [MethodImpl(Inline)]
         public static ArtifactToken<K,A> identify<K,A>(K kind, A id)

@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
 
-    using W = CellWidth;
-    using NK = NumericKind;
+    using static NumericKind;
+    using static CellWidth;
 
     /// <summary>
     /// Classifies concrete intrinsic vectors of total width w over components of width t and sign indicator s where:
@@ -169,85 +169,5 @@ namespace Z0
         /// A 512-bit vector covering 4 64-bit floating-point segments
         /// </summary>
         v512x64f = W512 | F64,
-
-        /// <summary>
-        /// Redeclaration of <see cref="NK.Signed"/>
-        /// </summary>
-        Signed = NK.Signed,
-
-        /// <summary>
-        /// Redeclaration of <see cref="NK.Unsigned"/>
-        /// </summary>
-        Unsigned = NK.Unsigned,
-
-        /// <summary>
-        /// Redeclaration of <see cref="NK.Float"/>
-        /// </summary>
-        Float = NK.Float,
-
-        /// <summary>
-        /// Redeclaration of <see cref="W.W128"/>
-        /// </summary>
-        W128 = W.W128,
-
-        /// <summary>
-        /// Redeclaration of <see cref="W.W256"/>
-        /// </summary>
-        W256 = W.W256,
-
-        /// <summary>
-        /// Redeclaration of <see cref="W.W512"/>
-        /// </summary>
-        W512 = W.W512,
-
-        /// <summary>
-        /// A vector defined over 8-bit unsigned segments
-        /// </summary>
-        U8 = NK.U8 | Unsigned,
-
-        /// <summary>
-        /// A vector defined over 8-bit signed segments
-        /// </summary>
-        I8 = NK.I8 | Signed,
-
-        /// <summary>
-        /// A vector defined over 16-bit unsigned segments
-        /// </summary>
-        U16 = NK.U16 | Unsigned,
-
-        /// <summary>
-        /// A vector defined over 16-bit signed segments
-        /// </summary>
-        I16 = NK.I16 | Signed,
-
-        /// <summary>
-        /// A vector defined over 32-bit unsigned segments
-        /// </summary>
-        U32 = NK.U32 | Unsigned,
-
-        /// <summary>
-        /// A vector defined over 32-bit signed segments
-        /// </summary>
-        I32 = NK.I32 | Signed,
-
-        /// <summary>
-        /// A vector defined over 64-bit unsigned segments
-        /// </summary>
-        U64 = NK.U64 | Unsigned,
-
-        /// <summary>
-        /// A vector defined over 64-bit signed segments
-        /// </summary>
-        I64 = NK.I64 | Signed,
-
-        /// <summary>
-        /// A vector defined over 32-bit floating-point segments
-        /// </summary>
-        F32 = NK.F32 | Float,
-
-        /// <summary>
-        /// A vector defined over 64-bit floating-point segments
-        /// </summary>
-        F64 = NK.F64 | Float,
     }
 }

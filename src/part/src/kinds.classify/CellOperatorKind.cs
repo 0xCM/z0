@@ -6,14 +6,14 @@ namespace Z0
 {
     using System;
 
-    using FW = CellWidth;
-    using FC = SegOpClass;
+    using W = CellWidth;
+    using L = ApiClassLimits;
 
     /// <summary>
-    /// Classifies operators over <see cref='MemoryClass.Segment' /> domains
+    /// Defines operator classifiers
     /// </summary>
     [Flags]
-    public enum SegOpKind : uint
+    public enum CellOperatorKind : uint
     {
        /// <summary>
        /// Classifies nothing
@@ -23,7 +23,7 @@ namespace Z0
        /// <summary>
        /// Classifies functions with fixed operand and return types
        /// </summary>
-        FixedSigClass = FC.LastClass << 1,
+        FixedSigClass = L.FirstCellOperator,
 
        /// <summary>
        /// Classifies a signature position
@@ -33,7 +33,7 @@ namespace Z0
        /// <summary>
        /// Classifies a fixed operand type
        /// </summary>
-        Operand = FixedSigClass << 1,
+        Operand = FixedSlot << 1,
 
        /// <summary>
        /// Classifies a fixed return type
@@ -230,85 +230,46 @@ namespace Z0
         /// </summary>
         TernaryOp512 = Operator | Fixed512x0 | Fixed512x1 | Fixed512x2 | Return512,
 
-        /// <summary>
-        /// Redeclaration of <see cref="FW.W1"/>
-        /// </summary>
-        Fixed1 = FW.W1,
-
-        /// <summary>
-        /// Redeclaration of <see cref="FW.W8"/>
-        /// </summary>
-        Fixed8 = FW.W8,
-
-        /// <summary>
-        /// Redeclaration of <see cref="FW.W16"/>
-        /// </summary>
-        Fixed16 = FW.W16,
-
-        /// <summary>
-        /// Redeclaration of <see cref="FW.W32"/>
-        /// </summary>
-        Fixed32 = FW.W32,
-
-        /// <summary>
-        /// Redeclaration of <see cref="FW.W64"/>
-        /// </summary>
-        Fixed64 = FW.W64,
-
-        /// <summary>
-        /// Redeclaration of <see cref="FW.W128"/>
-        /// </summary>
-        Fixed128 = FW.W128,
-
-        /// <summary>
-        /// Redeclaration of <see cref="FW.W256"/>
-        /// </summary>
-        Fixed256 = FW.W256,
-
-        /// <summary>
-        /// Redeclaration of <see cref="FW.W512"/>
-        /// </summary>
-        Fixed512 = FW.W512,
 
         /// <summary>
         /// 1-bit value in slot
         /// </summary>
-        FixedSlot1 = FixedSlot | Fixed1,
+        FixedSlot1 = FixedSlot | W.W1,
 
         /// <summary>
         /// 8-bit value in slot
         /// </summary>
-        FixedSlot8 = FixedSlot | Fixed8,
+        FixedSlot8 = FixedSlot | W.W8,
 
         /// <summary>
         /// 16-bit value in slot
         /// </summary>
-        FixedSlot16 = FixedSlot | Fixed16,
+        FixedSlot16 = FixedSlot | W.W16,
 
         /// <summary>
         /// 32-bit value in slot
         /// </summary>
-        FixedSlot32 = FixedSlot | Fixed32,
+        FixedSlot32 = FixedSlot | W.W32,
 
         /// <summary>
         /// 54-bit value in slot
         /// </summary>
-        FixedSlot64 = FixedSlot | Fixed64,
+        FixedSlot64 = FixedSlot | W.W64,
 
         /// <summary>
         /// 128-bit value in slot
         /// </summary>
-        FixedSlot128 = FixedSlot | Fixed128,
+        FixedSlot128 = FixedSlot | W.W128,
 
         /// <summary>
         /// 256-bit value in slot
         /// </summary>
-        FixedSlot256 = FixedSlot | Fixed256,
+        FixedSlot256 = FixedSlot | W.W256,
 
         /// <summary>
         /// 512-bit value in slot
         /// </summary>
-        FixedSlot512 = FixedSlot | Fixed512,
+        FixedSlot512 = FixedSlot | W.W512,
 
         /// <summary>
         /// The first operand slot

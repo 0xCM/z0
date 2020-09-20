@@ -12,12 +12,12 @@ namespace Z0
     using static Konst;
 
     using MZ = Asm.MemorySize;
-    using SK = SegKind;
+    using SK = SegmentKind;
 
     partial struct asm
     {
         [Op]
-        public static SegKind seg(MemorySize src)
+        public static SegmentKind seg(MemorySize src)
             => src switch {
                     MZ.UInt8 => SK.Int8u,
                     MZ.UInt16 => SK.Int16u,
@@ -49,10 +49,7 @@ namespace Z0
                     MZ.Packed256_UInt64 =>  SK.Seg256x64u,
                     MZ.Packed256_Float32 => SK.Seg256x32f,
                     MZ.Packed256_Float64 =>  SK.Seg256x64f,
-                _ => SegKind.None
+                _ => SegmentKind.None
             };
-
-
     }
-
 }

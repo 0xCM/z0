@@ -43,7 +43,7 @@ namespace Z0
         I8 = ID.I8 | DW.W8 | Signed,
 
         /// <summary>
-        /// Identifies an usigned 16-bit integral type
+        /// Identifies an unsigned 16-bit integral type
         /// </summary>
         U16 = ID.U16 | DW.W16 | Unsigned,
 
@@ -53,7 +53,7 @@ namespace Z0
         I16 = ID.I16 | DW.W16 | Signed,
 
         /// <summary>
-        /// Identifies an usigned 32-bit integral type
+        /// Identifies an unsigned 32-bit integral type
         /// </summary>
         U32 = ID.U32 | DW.W32 | Unsigned,
 
@@ -63,7 +63,7 @@ namespace Z0
         I32 = ID.I32 | DW.W32 | Signed,
 
         /// <summary>
-        /// Identifies an usigned 64-bit integral type
+        /// Identifies an unsigned 64-bit integral type
         /// </summary>
         U64 = ID.U64 | DW.W64 | Unsigned,
 

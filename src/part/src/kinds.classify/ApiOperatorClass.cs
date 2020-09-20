@@ -6,13 +6,13 @@ namespace Z0
 {
     using System;
 
-    using OC = OperationClassKind;
-    
+    using OC = ApiClass;
+
     /// <summary>
     /// Classifies operators of arity up to 3
     /// </summary>
     [Flags]
-    public enum OperatorClassKind : ushort
+    public enum ApiOperatorClass : ushort
     {
         /// <summary>
         /// The empty class
@@ -21,42 +21,42 @@ namespace Z0
 
         /// <summary>
         /// Classifies an emitter as an operator
-        /// </summary>        
+        /// </summary>
         Emitter = OC.Emitter,
 
         /// <summary>
         /// Classifies functions for which operands and return type are homogenous
-        /// </summary>        
+        /// </summary>
         Operator = OC.Operator,
 
         /// <summary>
         /// Classifies operators that accept one argument
-        /// </summary>        
+        /// </summary>
         UnaryOp = OC.UnaryOp,
 
         /// <summary>
         /// Classifies operators that accept two arguments
-        /// </summary>        
+        /// </summary>
         BinaryOp = OC.BinaryOp,
-        
+
         /// <summary>
         /// Classifies operators that accept three arguments
-        /// </summary>        
+        /// </summary>
         TernaryOp = OC.TernaryOp,
 
         /// <summary>
         /// Classifies shift operators
-        /// </summary>        
+        /// </summary>
         ShiftOp = OC.ShiftOp,
 
         /// <summary>
         /// Classifies shift operators with one operand under shift
-        /// </summary>        
+        /// </summary>
         UnaryShiftOp = OC.UnaryShiftOp,
 
         /// <summary>
         /// Classifies shift operators with two operands under shift
-        /// </summary>        
+        /// </summary>
         BinaryShiftOp = OC.BinaryShiftOp
-    }     
+    }
 }

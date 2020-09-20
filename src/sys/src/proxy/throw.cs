@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-            
-    using static OpacityKind;
+
+    using static OpacityApiKey;
 
     partial struct proxy
-    {        
+    {
         [MethodImpl(Options), Opaque(Throw)]
         public static void @throw(string msg)
             => throw new Exception(msg);

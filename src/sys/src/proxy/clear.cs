@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static OpacityKind;
+
+    using static OpacityApiKey;
 
     partial struct proxy
     {
@@ -16,6 +16,6 @@ namespace Z0
         {
             src.Clear();
             return ref src;
-        }        
+        }
     }
 }

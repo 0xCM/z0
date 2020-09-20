@@ -6,19 +6,19 @@ namespace Z0
 {
     using System;
 
-    using W = DataWidth;  
+    using W = DataWidth;
 
     /// <summary>
     /// Defines <see cref='MemoryClass.Segment' /> classifiers
     /// </summary>
     [Flags]
-    public enum SegKind : ushort
-    {        
+    public enum SegmentKind : ushort
+    {
         /// <summary>
         /// Classifier that classifies nothing
         /// </summary>
         None = 0,
-                
+
         /// <summary>
         /// A 16-bit linear memory segment covering 2 unsigned 8-bit segments
         /// </summary>
@@ -272,7 +272,7 @@ namespace Z0
         /// <summary>
         /// A 512-bit linear memory segment covering 4 64-bit floating-point segments
         /// </summary>
-        Seg512x64f = W512 | Float64,         
+        Seg512x64f = W512 | Float64,
 
         W8 = W.W8,
 
@@ -299,7 +299,7 @@ namespace Z0
         Bit = W1,
 
         /// <summary>
-        /// Classifies signed integral types; if sign bit is not enabled and float bit 
+        /// Classifies signed integral types; if sign bit is not enabled and float bit
         /// is not enabled, the number is considered unsigned
         /// </summary>
         Signed = 2,

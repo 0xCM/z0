@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using static OpacityKind;
-    
+    using static OpacityApiKey;
+
     partial struct proxy
     {
-        public static Assembly EntryAssembly 
+        public static Assembly EntryAssembly
         {
             [MethodImpl(Options), Opaque(GetEntryAssembly)]
             get => Assembly.GetEntryAssembly();

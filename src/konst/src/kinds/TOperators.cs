@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using OC = OperatorClassKind;
+    using OC = ApiOperatorClass;
 
     partial interface TIdentityReflector
     {
@@ -29,7 +29,7 @@ namespace Z0
         bool AcceptsVector(MethodInfo src, int index, W256 w)
             => IdentityReflector.AcceptsVector(src,index,w);
 
-        int ArityValue(OperatorClassKind src)
+        int ArityValue(ApiOperatorClass src)
             => src switch{
                OC.UnaryOp => 1,
                OC.BinaryOp => 2,

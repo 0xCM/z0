@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines an E-parametric literal index
     /// </summary>
-    [ApiClass(DataIndex)]
+    [ApiProviderAttribute(DataIndex)]
     public readonly struct EnumLiteralDetails<E> : IEnumerable<EnumLiteralDetail<E>>, IConstIndex<EnumLiteralDetail<E>>
         where E : unmanaged, Enum
     {

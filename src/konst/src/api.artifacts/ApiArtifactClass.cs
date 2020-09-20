@@ -5,16 +5,19 @@
 namespace Z0
 {
     using System;
-    
-    [Flags]
-    public enum ApiHostKind
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+    using p = Pow2x32;
+
+    public enum ApiArtifactClass : uint
     {
         None = 0,
 
-        Direct = 1,
+        ClrRuntime = p.P2ᐞ00,
 
-        Generic = 2,
+        CilCode = p.P2ᐞ01,
 
-        DirectAndGeneric = Direct | Generic
-    }    
+        AsmCode = p.P2ᐞ02
+    }
 }

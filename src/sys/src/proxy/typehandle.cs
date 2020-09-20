@@ -6,17 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static OpacityKind;
-    
+
+    using static OpacityApiKey;
+
     partial struct proxy
     {
         [MethodImpl(Options), Opaque(GetTypeHandle)]
-        public static IntPtr handle(Type src) 
+        public static IntPtr handle(Type src)
             => src.TypeHandle.Value;
 
         [MethodImpl(Options), Opaque(GetGenericTypeHandle), Closures(Closure)]
-        public static IntPtr handle<T>() 
+        public static IntPtr handle<T>()
             => typeof(T).TypeHandle.Value;
     }
 }

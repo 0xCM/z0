@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static OpacityKind;
-    
+
+    using static OpacityApiKey;
+
     partial struct proxy
     {
         [MethodImpl(Options), Opaque(GetGenericTypeCode), Closures(Closure)]

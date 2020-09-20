@@ -183,15 +183,15 @@ namespace Z0
         /// </summary>
         public static Base16 base16 => default;
 
-        public const OpacityKind Opaque = OpacityKind.Closure;
+        public const OpacityApiKey Opaque = OpacityApiKey.Closure;
 
         public const string Connector = " -> ";
 
-        public const ApiClassKind DataStructure = ApiClassKind.DataStructure;
+        public const ApiProviderKind DataStructure = ApiProviderKind.DataStructure;
 
-        public const ApiClassKind DataSummary = ApiClassKind.DataSummary;
+        public const ApiProviderKind DataSummary = ApiProviderKind.DataSummary;
 
-        public const ApiClassKind DataIndex = ApiClassKind.DataSummary;
+        public const ApiProviderKind DataIndex = ApiProviderKind.DataSummary;
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T zed<T>(T t = default)

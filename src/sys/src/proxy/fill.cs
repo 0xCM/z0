@@ -9,7 +9,7 @@ namespace Z0
 
     using static System.Runtime.CompilerServices.Unsafe;
 
-    using static OpacityKind;
+    using static OpacityApiKey;
 
     partial struct proxy
     {
@@ -26,6 +26,6 @@ namespace Z0
         {
             InitBlock(ref dst, src, length);
             return ref dst;
-        }            
+        }
     }
 }

@@ -6,34 +6,34 @@ namespace Z0
 {
     using System;
 
-    using OC = OperationClassKind;
+    using OC = ApiClass;
 
     [Flags]
-    public enum PredicateClassKind : ushort
+    public enum ApiPredicateClass : ushort
     {
         /// <summary>
         /// The empty class
-        /// </summary>        
+        /// </summary>
         None = 0,
-       
+
         /// <summary>
         /// Classifies functions that return a system boolean value or a bit value
-        /// </summary>        
+        /// </summary>
         Predicate = OC.Predicate,
 
         /// <summary>
         /// Classifies predicates that accept one argument
-        /// </summary>        
+        /// </summary>
         UnaryPredicate = OC.UnaryPredicate,
 
         /// <summary>
         /// Classifies predicates that accept two arguments
-        /// </summary>        
+        /// </summary>
         BinaryPredicate = OC.BinaryPredicate,
 
         /// <summary>
         /// Classifies predicates that accept three arguments
-        /// </summary>        
+        /// </summary>
         TernaryPredicate = OC.TernaryPredicate,
-    }    
+    }
 }

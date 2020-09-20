@@ -9,10 +9,10 @@ namespace Z0
     /// <summary>
     /// Direct vectorized intrinsics over floating-point domains
     /// </summary>
-    [ApiHost(ApiHostKind.Direct)]
+    [ApiHost]
     public static partial class dinxfp
     {
-    
+
     }
 
 }

@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
 
-    using OC = OperationClassKind;    
+    using OC = ApiClass;
 
     [Flags]
-    public enum ActionClassKind : ushort
-    { 
+    public enum ApiActionClass : ushort
+    {
         /// <summary>
         /// Classifies nothing
         /// </summary>
@@ -18,7 +18,7 @@ namespace Z0
 
         /// <summary>
         /// Classifies operations with void return
-        /// </summary>        
+        /// </summary>
         Action = OC.Action,
 
         /// <summary>

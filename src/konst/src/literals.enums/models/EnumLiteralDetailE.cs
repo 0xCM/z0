@@ -20,7 +20,7 @@ namespace Z0
     /// Thus, enum value duplication isn't an issue since all data are preserved, the api end-user can decide what
     /// value duplication means in a given context
     /// </remarks>
-    [ApiClass(DataSummary)]
+    [ApiProviderAttribute(DataSummary)]
     public readonly struct EnumLiteralDetail<E> : IEnumLiteral<EnumLiteralDetail<E>, E>
         where E : unmanaged, Enum
     {

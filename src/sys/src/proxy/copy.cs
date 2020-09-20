@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static System.Runtime.CompilerServices.Unsafe;
-    
-    using static OpacityKind;
 
-    using O = OpacityKind;
+    using static System.Runtime.CompilerServices.Unsafe;
+
+    using static OpacityApiKey;
+
+    using O = OpacityApiKey;
 
     partial struct proxy
     {

@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-            
+
     using static Part;
 
-    using O = OpacityKind;
+    using O = OpacityApiKey;
 
     partial struct proxy
-    {                
-        [MethodImpl(Options), Opaque(O.GetGenericType), Closures(Closure)]                
+    {
+        [MethodImpl(Options), Opaque(O.GetGenericType), Closures(Closure)]
         public static Type type<T>()
             => typeof(T);
 

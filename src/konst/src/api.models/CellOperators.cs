@@ -7,14 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static System.Runtime.CompilerServices.Unsafe;
+    using static z;
+    using static Konst;
 
-    using O = OpacityApiKey;
 
-    partial struct proxy
+    [ApiHost]
+    public readonly struct CellOperators
     {
-        [MethodImpl(Options), Opaque(O.Write), Closures(Closure)]
-        public static void write<T>(in T src, ref byte dst)
-            => WriteUnaligned(ref dst, src);
+        // [MethodImpl(Inline), Op]
+        // public ClosedInterval<CellOperatorClass> classes()
+        //     => (CellOperatorClass.Nullary, CellOperatorClass.FixedClass);
     }
 }

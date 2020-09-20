@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines a K-V lookup table
     /// </summary>
-    [ApiClass(DataStructure)]
+    [ApiProviderAttribute(DataStructure)]
     public struct LookupTable<K,V>
         where K : unmanaged
     {

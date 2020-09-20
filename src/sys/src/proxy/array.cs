@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    using static OpacityKind;
+    using static OpacityApiKey;
 
     partial struct proxy
     {

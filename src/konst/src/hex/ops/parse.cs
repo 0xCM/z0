@@ -14,7 +14,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static bool parse(char src, out byte dst)
-        {            
+        {
             if(isNumber(src))
             {
                 dst = Bytes.sub((byte)src, MinScalarCode);

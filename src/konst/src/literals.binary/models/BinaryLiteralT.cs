@@ -12,7 +12,7 @@ namespace Z0
 
     using api = Literals;
 
-    [ApiClass(DataStructure)]
+    [ApiProviderAttribute(DataStructure)]
     public readonly struct BinaryLiteral<T> : ILiteral<BinaryLiteral<T>,T>
         where T : unmanaged
     {

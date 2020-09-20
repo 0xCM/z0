@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using OC = OperatorClassKind;
+    using OC = ApiOperatorClass;
 
     partial class XTend
     {
@@ -39,7 +39,7 @@ namespace Z0
         /// Classifies a methods that is an operator and has arity between 1 and 3; otherwise, returns None
         /// </summary>
         /// <param name="src">The method to examine</param>
-        public static OperatorClassKind ClassifyOperator(this MethodInfo src)
+        public static ApiOperatorClass ClassifyOperator(this MethodInfo src)
         {
             if(IsOperator(src))
             {
@@ -52,6 +52,6 @@ namespace Z0
                 };
             }
             return 0;
-        } 
+        }
      }
 }

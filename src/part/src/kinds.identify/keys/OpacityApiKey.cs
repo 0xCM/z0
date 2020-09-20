@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum OpacityKind : ulong
+    public enum OpacityApiKey : ulong
     {
         None = 0,
 

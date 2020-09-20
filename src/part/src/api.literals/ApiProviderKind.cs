@@ -4,13 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial class XTend
+    using System;
+
+    [Flags]
+    public enum ApiProviderKind : ulong
     {
+        None,
+
         /// <summary>
-        /// Determines the numeric arity of a classified operator
+        /// Indicates a classical or domain-specific value type that organizes data by some principle
         /// </summary>
-        /// <param name="src">The operator class</param>
-        public static int ArityValue(this ApiOperatorClass src)
-            => RC.ArityValue(src);
+        DataStructure,
+
+        DataType,
+
+        Stateless,
+
+        DataSummary,
     }
 }

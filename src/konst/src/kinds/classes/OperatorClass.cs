@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using K = OperatorClassKind;
+    using K = ApiOperatorClass;
 
     public readonly struct OperatorClass : IOperatorClass<OperatorClass,K>
     {

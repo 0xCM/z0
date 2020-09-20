@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-            
-    using static OpacityKind;
+
+    using static OpacityApiKey;
 
     partial struct proxy
-    {        
+    {
         [MethodImpl(Options), Opaque(ArrayToList), Closures(Closure)]
         public static List<T> list<T>(params T[] src)
             => src.ToList();

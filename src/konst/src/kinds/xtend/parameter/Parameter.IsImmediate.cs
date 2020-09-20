@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static ImmFunctionClassKind;
+    using static ImmFunctionClass;
 
     partial class XTend
     {
@@ -61,10 +61,10 @@ namespace Z0
         /// Returns a method's immediate parameter types
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static IEnumerable<Type> ImmParameterTypes(this MethodInfo src, ImmRefinementKind kind)
+        public static Type[] ImmParameterTypes(this MethodInfo src, ImmRefinementKind kind)
             => src.ImmParameters(kind).Select(p => p.ParameterType);
 
-        static ImmFunctionClassKind ImmSlot(this ParameterInfo p)
+        static ImmFunctionClass ImmSlot(this ParameterInfo p)
         {
             switch(p.Position)
             {

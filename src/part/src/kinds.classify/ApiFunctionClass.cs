@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
 
-    using OC = OperationClassKind;
+    using OC = ApiClass;
 
     [Flags]
-    public enum FunctionClassKind : ushort
+    public enum ApiFunctionClass : ushort
     {
         /// <summary>
         /// Classifies nothing
@@ -41,19 +41,5 @@ namespace Z0
         /// </summary>
         TernaryFunc = OC.TernaryFunc,
 
-        /// <summary>
-        /// Classifies operators that accept one argument
-        /// </summary>
-        UnaryOp = OC.UnaryOp,
-
-        /// <summary>
-        /// Classifies operators that accept two arguments
-        /// </summary>
-        BinaryOp = OC.BinaryOp,
-
-        /// <summary>
-        /// Classifies operators that accept three arguments
-        /// </summary>
-        TernaryOp = OC.TernaryOp,
     }
 }

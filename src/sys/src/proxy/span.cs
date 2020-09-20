@@ -9,8 +9,8 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    using static OpacityKind;
-    
+    using static OpacityApiKey;
+
     partial struct proxy
     {
         [MethodImpl(Options), Opaque(AllocSpan), Closures(Closure)]

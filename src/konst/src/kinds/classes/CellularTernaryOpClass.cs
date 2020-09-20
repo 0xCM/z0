@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using C = OperatorClassKind;
+    using C = ApiOperatorClass;
     using K = Kinds;
 
     public readonly struct CellularTernaryOpClass : ICellularOpClass<CellularTernaryOpClass,C>

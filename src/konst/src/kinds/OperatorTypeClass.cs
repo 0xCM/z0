@@ -20,7 +20,7 @@ namespace Z0
         /// <summary>
         /// The operator classification
         /// </summary>
-        public readonly OperatorClassKind OperatorClass;
+        public readonly ApiOperatorClass OperatorClass;
 
         public static OperatorTypeClass Infer(MethodInfo src)
         {
@@ -32,12 +32,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal OperatorTypeClass(Type type, OperatorClassKind @class)
+        internal OperatorTypeClass(Type type, ApiOperatorClass @class)
         {
             OperandType = type;
-            OperatorClass = @class;                                    
+            OperatorClass = @class;
         }
-        
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -51,16 +51,16 @@ namespace Z0
         }
 
         public string Format()
-            => IsEmpty 
-            ? string.Empty 
+            => IsEmpty
+            ? string.Empty
             : OperandType.DisplayName()
                          .Replicate(OperatorClass.ArityValue() + 1)
                          .Intersperse(AsciArrow)
-                         .Concat();        
+                         .Concat();
         public override string ToString()
             => Format();
-        
-        public static OperatorTypeClass Empty 
+
+        public static OperatorTypeClass Empty
             => new OperatorTypeClass(typeof(void), 0);
-    }    
+    }
 }

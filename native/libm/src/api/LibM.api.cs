@@ -8,8 +8,8 @@ namespace Z0
 	using System.Runtime.CompilerServices;
 
 	using static Konst;
-    
-    [ApiHost("api", ApiHostKind.Direct)]
+
+    [ApiHost("api")]
     public static class libm
     {
         [MethodImpl(Inline), Op]
@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static double fma(double x, double y, double z)
             => LibMc.fma(x,y,z);
-            
+
         [MethodImpl(Inline), Op]
         public static double fmax(double x, double y)
             => LibMc.fmax(x,y);

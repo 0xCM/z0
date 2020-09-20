@@ -6,11 +6,13 @@ namespace Z0
 {
     using System;
 
+    using p = Pow2x16;
+
     /// <summary>
     /// Classifies an operation in various ways
     /// </summary>
     [Flags]
-    public enum OperationClassKind : ushort
+    public enum ApiClass : ushort
     {
         /// <summary>
         /// The empty class
@@ -20,52 +22,52 @@ namespace Z0
         /// <summary>
         /// Classifies operations of arity 0
         /// </summary>
-        Nullary = 1,
+        Nullary = p.P2ᐞ00,
 
         /// <summary>
         /// Classifies operations of arity 1
         /// </summary>
-        Unary = 2,
+        Unary = p.P2ᐞ01,
 
         /// <summary>
         /// Classifies operations of arity 2
         /// </summary>
-        Binary = 4,
+        Binary = p.P2ᐞ02,
 
         /// <summary>
         /// Classifies operations of arity 3
         /// </summary>
-        Ternary = 8,
+        Ternary = p.P2ᐞ03,
 
         /// <summary>
         /// Classifies operations with void return
         /// </summary>
-        Action = 16,
+        Action = p.P2ᐞ04,
 
         /// <summary>
         /// Classifies operations as those with non-void return
         /// </summary>
-        Function = 32,
+        Function = p.P2ᐞ05,
 
         /// <summary>
         /// Classifies functions for which operands and return type are homogenous
         /// </summary>
-        Operator = 64,
+        Operator = p.P2ᐞ06,
 
         /// <summary>
         /// Classifies functions that return a system boolean value or a bit value
         /// </summary>
-        Predicate = 128,
+        Predicate = p.P2ᐞ07,
 
         /// <summary>
         /// Classifies functions that shift/rotate bits
         /// </summary>
-        Shift = 256,
+        Shift = p.P2ᐞ08,
 
         /// <summary>
         /// Classifies system-level operations
         /// </summary>
-        System = 512,
+        System = p.P2ᐞ09,
 
         /// <summary>
         /// The last pure classifier

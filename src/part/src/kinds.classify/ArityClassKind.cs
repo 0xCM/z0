@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using OC = OperationClassKind;
+    using OC = ApiClass;
 
     [Flags]
     public enum ArityClassKind : ushort
@@ -18,22 +18,22 @@ namespace Z0
 
         /// <summary>
         /// Classifies operations of arity 0
-        /// </summary>        
+        /// </summary>
         Nullary = OC.Nullary,
 
         /// <summary>
         /// Classifies operations of arity 1
-        /// </summary>        
+        /// </summary>
         Unary = OC.Unary,
 
         /// <summary>
         /// Classifies operations of arity 2
-        /// </summary>        
+        /// </summary>
         Binary = OC.Binary,
 
         /// <summary>
         /// Classifies operations of arity 3
-        /// </summary>        
-        Ternary = OC.Ternary,   
-    }    
+        /// </summary>
+        Ternary = OC.Ternary,
+    }
 }
