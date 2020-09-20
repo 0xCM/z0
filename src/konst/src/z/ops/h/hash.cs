@@ -38,6 +38,15 @@ namespace Z0
             => (ulong)hash(t1) | (ulong)hash(t2) << 32;
 
         /// <summary>
+        /// Creates a 64-bit hash code predicated on three types
+        /// </summary>
+        /// <typeparam name="S">The first type</typeparam>
+        /// <typeparam name="T">The second type</typeparam>
+        [MethodImpl(Inline)]
+        public static ulong hash(Type t1, Type t2, Type t3)
+            => hash(t1,t2) ^ hash(t1, t3);
+
+        /// <summary>
         /// Creates an unsigned hash code
         /// </summary>
         /// <param name="x">The source value</param>

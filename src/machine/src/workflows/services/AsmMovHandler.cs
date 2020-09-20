@@ -64,7 +64,7 @@ namespace Z0.Asm
         void Handle(Imm64 src, IceRegister dst)
         {
             if(HasCapacity)
-                this[Index++] = Arrows.connect(src, dst);
+                this[Index++] = DataFlows.connect(src, dst);
         }
     }
 }

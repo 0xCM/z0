@@ -1,6 +1,8 @@
 <Project  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
+
+
     <ToolCoreId>tool.core</ToolCoreId>
     <ToolCliId>tool.cli</ToolCliId>
 
@@ -10,6 +12,9 @@
 
   <PropertyGroup>
     <Part>$(Src)part/z0.part.csproj</Part>
+
+    <Derivatives>$(Src)derivatives/z0.derivatives.csproj</Derivatives>
+
     <Sys>$(Src)sys/z0.sys.csproj</Sys>
     <Domain>$(Src)domain/z0.domain.csproj</Domain>
 

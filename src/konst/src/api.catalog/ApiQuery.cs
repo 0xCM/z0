@@ -19,9 +19,9 @@ namespace Z0
         public static ApiHostQuery host(IApiHost host)
             => new ApiHostQuery(host);
 
-        [MethodImpl(Inline), Op]
-        public static PartDependency needs(PartId src, PartId dst)
-            => new PartDependency(src,dst);
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ApiDependency<T> needs<T>(T src, T dst)
+            => new ApiDependency<T>(src,dst);
 
         [MethodImpl(Inline), Op]
         public static ApiPartTypes types(IPart src)

@@ -15,9 +15,6 @@ namespace Z0
 
     using M = CilModel;
     using C = System.Reflection.Metadata.ILOpCode;
-    // using CT = System.Reflection.Emit.OpCodeType;
-    // using OT = System.Reflection.Emit.OperandType;
-    // using SB = System.Reflection.Emit.StackBehaviour;
 
     using CT = CilModel.OpCodeType;
     using OT = CilModel.OperandType;
