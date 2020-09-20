@@ -13,17 +13,11 @@ namespace Z0
 
     partial struct ClrStorage
     {
-        //  0x0B
+        //  0x07
         [StructLayout(LayoutKind.Sequential)]
-        public struct ConstantRow
+        public struct ParamPtrRow
         {
-            public byte Type;
-
-            public uint Parent;
-
-            public uint Value;
-
+            public uint Param;
         }
     }
-
 }

@@ -8,6 +8,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using Derivatives.SRM;
 
     partial struct ClrStorage
     {
@@ -32,7 +33,7 @@ namespace Z0
             public const TableMask TablesReferenced = TableMask.TypeDef
                 | TableMask.TypeRef
                 | TableMask.ModuleRef
-                | TableMask.Method
+                | TableMask.MethodSpec
                 | TableMask.TypeSpec;
 
             public static TokenTypeIds[] TagToTokenTypeArray = { TokenTypeIds.TypeDef, TokenTypeIds.TypeRef, TokenTypeIds.ModuleRef,

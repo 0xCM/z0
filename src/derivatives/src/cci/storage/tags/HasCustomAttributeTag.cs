@@ -9,9 +9,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using SH = ClrStorage.SigHeaderCode;
-    using CA = ClrStorage.CustomAttributeCode;
+    using Derivatives.SRM;
 
+    using CA = ClrStorage.CustomAttributeCode;
 
     partial struct ClrStorage
     {
@@ -72,7 +72,8 @@ namespace Z0
                 TokenTypeIds.Signature, TokenTypeIds.ModuleRef, TokenTypeIds.TypeSpec, TokenTypeIds.Assembly, TokenTypeIds.AssemblyRef, TokenTypeIds.File, TokenTypeIds.ExportedType,
                 TokenTypeIds.ManifestResource, TokenTypeIds.GenericParam, TokenTypeIds.GenericParamConstraint, TokenTypeIds.MethodSpec };
 
-            public const TableMask TablesReferenced = TableMask.Method
+            public const TableMask TablesReferenced
+                = TableMask.MethodSpec
                 | TableMask.Field
                 | TableMask.TypeRef
                 | TableMask.TypeDef
@@ -134,6 +135,5 @@ namespace Z0
                 return result;
             }
         }
-
     }
 }

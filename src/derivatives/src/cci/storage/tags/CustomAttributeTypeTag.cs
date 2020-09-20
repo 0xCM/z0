@@ -8,6 +8,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using Derivatives.SRM;
 
     partial struct ClrStorage
     {
@@ -25,9 +26,6 @@ namespace Z0
 
             public static TokenTypeIds[] TagToTokenTypeArray = { 0, 0, TokenTypeIds.MethodDef, TokenTypeIds.MemberRef, 0 };
 
-            public const TableMask TablesReferenced =
-                TableMask.Method
-                | TableMask.MemberRef;
             public static uint ConvertToToken(uint customAttributeType) {
                 return (uint)CustomAttributeTypeTag.TagToTokenTypeArray[customAttributeType & CustomAttributeTypeTag.TagMask] | customAttributeType >> CustomAttributeTypeTag.NumberOfBits;
             }

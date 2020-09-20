@@ -34,8 +34,5 @@ namespace Z0
 
             public int BaseOfData;
         }
-
-
     }
-
 }

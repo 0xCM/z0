@@ -9,6 +9,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Derivatives.SRM;
+
     partial struct ClrStorage
     {
         public readonly struct MethodDefOrRefTag
@@ -23,7 +25,7 @@ namespace Z0
 
             public const uint TagMask = 0x00000001;
 
-            public const TableMask TablesReferenced = TableMask.Method | TableMask.MemberRef;
+            public const TableMask TablesReferenced = TableMask.MethodSpec | TableMask.MemberRef;
 
             public static TokenTypeIds[] TagToTokenTypeArray = { TokenTypeIds.MethodDef, TokenTypeIds.MemberRef };
 

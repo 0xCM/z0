@@ -28,7 +28,5 @@ namespace Z0
 
             public short NumberOfIdEntries;
         }
-
     }
-
 }

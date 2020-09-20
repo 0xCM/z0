@@ -9,6 +9,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Derivatives.SRM;
+
     partial struct ClrStorage
     {
         public static class TypeOrMethodDefTag
@@ -25,7 +27,7 @@ namespace Z0
 
             public static TokenTypeIds[] TagToTokenTypeArray = {TokenTypeIds.TypeDef, TokenTypeIds.MethodDef };
 
-            public const TableMask TablesReferenced = TableMask.TypeDef | TableMask.Method;
+            public const TableMask TablesReferenced = TableMask.TypeDef | TableMask.MethodSpec;
 
             public static uint ConvertToToken(uint typeOrMethodDef)
                 => (uint)TypeOrMethodDefTag.TagToTokenTypeArray[typeOrMethodDef & TypeOrMethodDefTag.TagMask] | typeOrMethodDef >> TypeOrMethodDefTag.NumberOfBits;
