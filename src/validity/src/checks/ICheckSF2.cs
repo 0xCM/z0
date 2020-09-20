@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Structured;
+    using static SFx;
 
     readonly struct CheckBinaryOpSF<T> : ICheckSF<T,T,T>
         where T : unmanaged

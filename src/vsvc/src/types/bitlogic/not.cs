@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         [Closures(Integers), Not]
         public readonly struct Not128<T> : IUnaryOp128D<T>
@@ -18,7 +18,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => gvec.vnot(x);
-            
+
             [MethodImpl(Inline)]
             public T Invoke(T a) => gmath.not(a);
         }

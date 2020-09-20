@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         [Closures(AllNumeric), Gt]
         public readonly struct Gt128<T> : IBinaryOp128D<T>
@@ -32,6 +32,6 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) => gmath.gtz(a,b);
-        } 
+        }
     }
 }

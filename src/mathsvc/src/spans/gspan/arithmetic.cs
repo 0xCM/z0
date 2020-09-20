@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
-    using static Structured;
+
+    using static Konst;
+    using static z;
+    using static SFx;
 
     partial class gspan
     {
@@ -90,7 +90,7 @@ namespace Z0
             checked
             {
                 var count = src.Length;
-                ref readonly var input = ref head(src);
+                ref readonly var input = ref first(src);
                 var result = default(T);
 
                 for(var i=0; i< src.Length; i++)

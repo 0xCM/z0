@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static Memories;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         [Closures(Integers), Nand]
         public readonly struct Nand128<T> : IBinaryOp128D<T>
@@ -19,7 +19,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => gvec.vnand(x,y);
-            
+
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) => gmath.nand(a,b);
         }

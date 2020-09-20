@@ -9,7 +9,6 @@
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(Asm)" />
     <ProjectReference Include="$(Extract)" />
-    <ProjectReference Include="$(Structured)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Cil)" />
     <ProjectReference Include="$(Apps)" />

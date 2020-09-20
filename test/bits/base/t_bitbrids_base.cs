@@ -13,7 +13,7 @@ namespace Z0
 
     public abstract class t_bitgrids_base<U> : t_bitcore<U>
         where U : t_bitgrids_base<U>, new()
-    {          
+    {
         /// <summary>
         /// Asserts logical bitvector/bitstring equality
         /// </summary>
@@ -38,6 +38,6 @@ namespace Z0
         [MethodImpl(Inline), And, Closures(Integers)]
         public static Span<T> and<T>(Span<T> lhs, Span<T> rhs)
             where T : unmanaged
-                => Structured.apply(MSvc.and<T>(),lhs,rhs);
+                => SFx.apply(MSvc.and<T>(),lhs,rhs);
     }
 }

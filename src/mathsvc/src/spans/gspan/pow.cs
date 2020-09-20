@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gspan
     {
@@ -24,12 +24,12 @@ namespace Z0
             where T : unmanaged
         {
             var count = dst.Length;
-            ref readonly var bases = ref head(src);
-            ref var results = ref head(dst);
+            ref readonly var bases = ref first(src);
+            ref var results = ref first(dst);
 
-            for(var i = 0; i<count; i++) 
-                seek(ref results,i) = gmath.pow(skip(bases,i), exp);
-            
+            for(var i = 0; i<count; i++)
+                seek(results,i) = gmath.pow(skip(bases,i), exp);
+
             return dst;
         }
     }

@@ -10,18 +10,18 @@ namespace Z0
 
     using static Konst;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         [NumericClosures(Integers), Dec]
         public readonly struct Dec128<T> : IUnaryOp128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x) 
+            public Vector128<T> Invoke(Vector128<T> x)
                 => gvec.vdec(x);
-            
+
             [MethodImpl(Inline)]
-            public T Invoke(T a) 
+            public T Invoke(T a)
                 => gmath.dec(a);
         }
 
@@ -30,11 +30,11 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x) 
+            public Vector256<T> Invoke(Vector256<T> x)
                 => gvec.vdec(x);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a) 
+            public T Invoke(T a)
                 => gmath.dec(a);
         }
     }

@@ -8,13 +8,13 @@ namespace Z0
 
     using static Konst;
 
-    public partial class VSvcHosts
+    public partial class VServices
     {
 
     }
 
     [FunctionalService]
-    public partial class VSvc : IFunctional<VSvc,VSvcHosts>
+    public partial class VSvc : ISFxRoot<VSvc,VServices>
     {
         const NumericKind Closure = UInt64k;
     }

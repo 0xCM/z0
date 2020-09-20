@@ -10,15 +10,15 @@ namespace Z0
 
     using static Konst;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         public readonly struct TakeMask128<T> : IVUnaryScalarFunc128<T,ushort>
             where T : unmanaged
         {
 
             [MethodImpl(Inline)]
-            public ushort Invoke(Vector128<T> x) 
-                => gvec.vtakemask(x);            
+            public ushort Invoke(Vector128<T> x)
+                => gvec.vtakemask(x);
         }
 
         public readonly struct TakeMask256<T> : ISVUnaryScalarFunc256<T,uint>
@@ -26,8 +26,8 @@ namespace Z0
         {
 
             [MethodImpl(Inline)]
-            public uint Invoke(Vector256<T> x) 
+            public uint Invoke(Vector256<T> x)
                 => gvec.vtakemask(x);
-        }    
+        }
     }
 }

@@ -5,28 +5,27 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
+    using static Konst;
+    using static VBitServices;
 
-    [ApiHost("api")]
-    public partial class VBits : IApiHost<VBits>
+    public partial class VBitServices
     {
-
-    }
-
-    [ApiHost]
-    public partial class VMask : IApiHost<VMask>
-    {
-
-    }
-
-    public partial class VBitSvcTypes
-    {        
 
     }
 
     [FunctionalService]
-    public partial class VBitSvc : IFunctional<VBitSvc,VBitSvcTypes>
+    public class VBitSvc : ISFxRoot<VBitSvc,VBitServices>
     {
-    
+        [MethodImpl(Inline)]
+        public static BitClear128<T> vbitclear<T>(N128 w, T t = default)
+            where T : unmanaged
+                => default(BitClear128<T>);
+
+        [MethodImpl(Inline)]
+        public static BitClear256<T> vbitclear<T>(N256 w, T t = default)
+            where T : unmanaged
+                => default(BitClear256<T>);
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         public readonly struct Units128<T> : IEmitter128<T>
             where T : unmanaged

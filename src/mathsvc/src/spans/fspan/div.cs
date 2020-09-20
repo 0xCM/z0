@@ -6,15 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
-        
+
+    using static Konst;
+    using static z;
+
     partial class fspan
-    {                
+    {
         /// <summary>
         /// Computes the floating-point quotient of cells in the left and right operands,
-        /// overwriting each left operand cell with the result. 
+        /// overwriting each left operand cell with the result.
         /// Specifically, lhs[i] = lhs[i] / rhs[i] for i = 0...n - 1 where n is the common length of the operands
         /// </summary>
         /// <param name="lhs">The left source span</param>
@@ -25,11 +25,11 @@ namespace Z0
             where T : unmanaged
         {
             var count = math.min(lhs.Length, rhs.Length);
-            ref readonly var a = ref head(lhs);
-            ref readonly var b = ref head(rhs);
-            ref var c = ref head(lhs);
+            ref readonly var a = ref first(lhs);
+            ref readonly var b = ref first(rhs);
+            ref var c = ref first(lhs);
             for(var i=0; i<count; i++)
-                seek(ref c, i) = gfp.div(skip(a, i), skip(b, i));
+                seek(c, i) = gfp.div(skip(a, i), skip(b, i));
             return lhs;
         }
 
@@ -44,10 +44,10 @@ namespace Z0
             where T : unmanaged
         {
             var count = src.Length;
-            ref readonly var a = ref head(src);
-            ref var b = ref head(src);
+            ref readonly var a = ref first(src);
+            ref var b = ref first(src);
             for(var i =0; i<count; i++)
-                seek(ref b, i) = gfp.div(skip(a, i), rhs);
+                seek(b, i) = gfp.div(skip(a, i), rhs);
             return src;
         }
 
@@ -64,11 +64,11 @@ namespace Z0
             where T : unmanaged
         {
             var count = math.min(lhs.Length, dst.Length);
-            ref readonly var a = ref head(lhs);
-            ref readonly var b = ref head(rhs);
-            ref var c = ref head(dst);
+            ref readonly var a = ref first(lhs);
+            ref readonly var b = ref first(rhs);
+            ref var c = ref first(dst);
             for(var i=0; i<count; i++)
-                seek(ref c, i) = gfp.div(skip(a, i), skip(b, i));
+                seek(c, i) = gfp.div(skip(a, i), skip(b, i));
             return dst;
         }
     }

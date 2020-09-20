@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         [Closures(Integers), Xor]
         public readonly struct Xor128<T> : IBinaryOp128D<T>

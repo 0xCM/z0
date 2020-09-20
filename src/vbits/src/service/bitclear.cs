@@ -9,22 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static VBitSvcTypes;
 
-    partial class VBitSvc
-    {
-        [MethodImpl(Inline)]
-        public static BitClear128<T> vbitclear<T>(N128 w, T t = default)
-            where T : unmanaged
-                => default(BitClear128<T>);
-
-        [MethodImpl(Inline)]
-        public static BitClear256<T> vbitclear<T>(N256 w, T t = default)
-            where T : unmanaged
-                => default(BitClear256<T>);
-    }
-
-    partial class VBitSvcTypes
+    partial class VBitServices
     {
         [Closures(Integers)]
         public readonly struct BitClear128<T> : IUnaryImm8x2Op128D<T>
@@ -32,7 +18,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, byte offset, byte count)
-                => VBits.vbitclear(x,offset,count);
+                => gvec.vbitclear(x,offset,count);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, byte b, byte c)
@@ -45,7 +31,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(Vector256<T> x, byte offset, byte count)
-                => VBits.vbitclear(x,offset, count);
+                => gvec.vbitclear(x,offset, count);
 
             [MethodImpl(Inline)]
             public T Invoke(T a, byte b, byte c)

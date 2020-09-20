@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gspan
     {
@@ -23,13 +23,13 @@ namespace Z0
             where T : unmanaged
         {
             var count = lhs.Length;
-            ref readonly var lSrc = ref head(lhs);
-            ref readonly var rSrc = ref head(rhs);
+            ref readonly var lSrc = ref first(lhs);
+            ref readonly var rSrc = ref first(rhs);
             var dst = default(T);
 
             for(var i = 0; i< count; i++)
                 dst = gmath.fma(skip(lSrc, i), skip(rSrc,i), dst);
-            return dst;                
+            return dst;
         }
     }
 }

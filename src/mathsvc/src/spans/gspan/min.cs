@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gspan
     {
@@ -24,13 +24,13 @@ namespace Z0
             var count = src.Length;
             if(count == 0)
                 return default;
-            
-            ref readonly var input = ref head(src);
+
+            ref readonly var input = ref first(src);
             var result = input;
 
             for(var i = 1; i< count; i++)
             {
-                ref readonly var test = ref skip(in input, i);
+                ref readonly var test = ref skip(input, i);
                 if(gmath.lt(test, result))
                     result = test;
             }

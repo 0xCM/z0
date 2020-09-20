@@ -10,7 +10,6 @@
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(Symbolic)" />
     <ProjectReference Include="$(V0)" />
-    <ProjectReference Include="$(Structured)" />
   </ItemGroup>
 
 </Project>

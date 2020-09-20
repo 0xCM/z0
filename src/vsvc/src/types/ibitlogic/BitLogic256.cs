@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     using K = Kinds;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         [NumericClosures(Integers)]
         public readonly struct BitLogic256<T> : IBitLogic<Vector256<T>>
@@ -80,33 +80,33 @@ namespace Z0
                 => gvec.vxnor(a,b);
 
             [MethodImpl(Inline)]
-            public Vector256<T> eval<K>(Vector256<T> a, K kind = default) 
+            public Vector256<T> eval<K>(Vector256<T> a, K kind = default)
                 where K : unmanaged, IBitLogicKind
                     => eval_unary_1(a,kind);
 
             [MethodImpl(Inline)]
-            public Vector256<T> eval<K>(Vector256<T> a, Vector256<T> b, K kind = default) 
+            public Vector256<T> eval<K>(Vector256<T> a, Vector256<T> b, K kind = default)
                 where K : unmanaged, IBitLogicKind
                     => eval_binary_1(a,b,kind);
 
             [MethodImpl(Inline)]
-            public Vector256<T> eval<K>(Vector256<T> a, Vector256<T> b, Vector256<T> c, K kind = default) 
+            public Vector256<T> eval<K>(Vector256<T> a, Vector256<T> b, Vector256<T> c, K kind = default)
                 where K : unmanaged, IBitLogicKind
                     => eval_ternary_1(a, b, c,kind);
 
             [MethodImpl(Inline)]
             Vector256<T> eval_unary_1<B>(Vector256<T> a, B kind)
-                where B : unmanaged, IBitLogicKind      
+                where B : unmanaged, IBitLogicKind
             {
                 if(typeof(B) == typeof(K.Not))
                     return not(a);
-                else 
+                else
                     throw Unsupported.define<T>();
             }
 
             [MethodImpl(Inline)]
             Vector256<T> eval_binary_1<B>(Vector256<T> a, Vector256<T> b, B kind)
-                where B : unmanaged, IBitLogicKind      
+                where B : unmanaged, IBitLogicKind
             {
                 if(typeof(B) == typeof(K.And))
                     return and(a,b);
@@ -126,7 +126,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             Vector256<T> eval_binary_2<B>(Vector256<T> a, Vector256<T> b, B kind)
-                where B : unmanaged, IBitLogicKind      
+                where B : unmanaged, IBitLogicKind
             {
                 if(typeof(B) == typeof(K.Impl))
                     return impl(a,b);
@@ -142,13 +142,13 @@ namespace Z0
 
             [MethodImpl(Inline)]
             Vector256<T> eval_ternary_1<B>(Vector256<T> a, Vector256<T> b, Vector256<T> c, B kind)
-                where B : unmanaged, IBitLogicKind      
+                where B : unmanaged, IBitLogicKind
             {
                 if(typeof(B) == typeof(K.Select))
                     return select(a,b,c);
                 else
                     throw Unsupported.define<T>();
-            }              
-        }         
+            }
+        }
     }
 }

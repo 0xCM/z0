@@ -7,8 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    using static Memories;
+    using static Konst;
 
     partial class XTend
     {
@@ -19,7 +18,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static double Sum(this Span<double> src)
             => src.ReadOnly().Sum();
- 
+
         [MethodImpl(Inline)]
         public static float Avg(this Span<float> src)
             => fspan.avg<float>(src);
@@ -34,6 +33,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static double Avg(this ReadOnlySpan<double> src)
-            => fspan.avg(src); 
+            => fspan.avg(src);
     }
 }

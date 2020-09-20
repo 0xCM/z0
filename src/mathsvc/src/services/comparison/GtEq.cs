@@ -6,18 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
-    using static Structured;
+    using static SFx;
 
     partial class MSvcHosts
     {
         [Closures(AllNumeric), GtEq]
         public readonly struct GtEq<T> : IFunc<T,T,bit>, IBinarySpanPred<T>
-            where T : unmanaged        
+            where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public bit Invoke(T a, T b) 
+            public bit Invoke(T a, T b)
                 => gmath.gteq(a,b);
 
             [MethodImpl(Inline)]

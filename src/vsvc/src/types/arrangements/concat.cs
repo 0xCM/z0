@@ -8,17 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst; 
-    using static Memories;
+    using static Konst;
+    using static z;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         public readonly struct Concat2x128<T> : IMerge2x128x256<T,T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector128<T> x, Vector128<T> y) 
-                => V0.vconcat(x,y);           
+            public Vector256<T> Invoke(Vector128<T> x, Vector128<T> y)
+                => V0.vconcat(x,y);
         }
     }
 }

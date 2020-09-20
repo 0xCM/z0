@@ -9,9 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         [Closures(Integers), Or]
         public readonly struct Or128<T> : IBinaryOp128D<T>
@@ -19,7 +18,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => gvec.vor(x,y);
-            
+
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) => gmath.or(a,b);
         }

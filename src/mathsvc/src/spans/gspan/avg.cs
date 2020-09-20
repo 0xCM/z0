@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gspan
     {
@@ -36,10 +36,10 @@ namespace Z0
         public static T avgz<T>(ReadOnlySpan<T> src)
             where T : unmanaged
         {
-            ref readonly var reader = ref head(src);
+            ref readonly var reader = ref first(src);
             T result = reader;
             for(var i=1; i<src.Length; i++)
-                result = gmath.avgz(result, skip(in reader, i));
+                result = gmath.avgz(result, skip(reader, i));
             return result;
         }
 
@@ -62,7 +62,7 @@ namespace Z0
                 return generic<T>(math.avg(Spans.s64u(src)));
             else
                 return avg_i(src, @checked);
-        }           
+        }
 
         [MethodImpl(Inline)]
         static T avg_i<T>(ReadOnlySpan<T> src, bool @checked)
@@ -78,7 +78,7 @@ namespace Z0
                 return generic<T>(math.avg(Spans.s64i(src), @checked));
             else
                 return fspan.avg(src, @checked);
-        }           
+        }
 
     }
 }

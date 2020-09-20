@@ -6,21 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;    
-        
+
+    using static Konst;
+    using static z;
+
     partial class fspan
-    {                
+    {
         [MethodImpl(Inline), Abs, Closures(Floats)]
         public static Span<T> abs<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
         {
             var count = src.Length;
-            ref var a = ref head(dst);
-            ref readonly var b = ref head(src);
+            ref var a = ref first(dst);
+            ref readonly var b = ref first(src);
             for(var i =0; i<count; i++)
-                seek(ref a, i) = gfp.abs(skip(b, i));
+                seek(a, i) = gfp.abs(skip(b, i));
             return dst;
         }
     }

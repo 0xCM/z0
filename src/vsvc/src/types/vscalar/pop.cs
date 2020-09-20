@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         [Closures(Integers), Pop]
         public readonly struct Pop128<T> : ISVTernaryScalar128D<T,uint>
@@ -18,7 +18,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public uint Invoke(Vector128<T> x,Vector128<T> y,Vector128<T> z) => gvec.vpop(x,y,z);
-            
+
             [MethodImpl(Inline)]
             public uint Invoke(T a, T b, T c) => gbits.pop(a,b,c);
         }
@@ -32,6 +32,6 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public uint Invoke(T a, T b, T c) => gbits.pop(a,b,c);
-        }    
+        }
     }
 }

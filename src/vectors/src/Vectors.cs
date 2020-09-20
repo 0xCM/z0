@@ -9,22 +9,17 @@ namespace Z0
     [ApiHost("api")]
     public partial class Vectors : IApiHost<Vectors>
     {
-        
-    }
-
-    public static partial class SBlock
-    {
 
     }
 
     [ApiHost]
     public partial class VBlockD : IApiHost<VBlockD>
     {
-        
+
     }
 
     public static partial class XTend
     {
-        
+
     }
 }

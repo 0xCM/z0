@@ -10,15 +10,15 @@ namespace Z0
 
     using static Konst;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         [Closures(Integers), Srlx]
          public readonly struct Srlx128<T> : IShiftOp128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, byte count) 
-                => gvec.vsrlx(x,count);            
+            public Vector128<T> Invoke(Vector128<T> x, byte count)
+                => gvec.vsrlx(x,count);
         }
 
         [Closures(Integers), Srlx]
@@ -26,7 +26,7 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, byte count) 
+            public Vector256<T> Invoke(Vector256<T> x, byte count)
                 => gvec.vsrlx(x,count);
         }
    }

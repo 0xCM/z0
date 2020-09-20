@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         [Closures(Integers), NonImpl]
         public readonly struct NonImpl128<T> : IBinaryOp128D<T>
@@ -19,7 +19,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => gvec.vnonimpl(x,y);
-            
+
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) => gmath.nonimpl(a,b);
 

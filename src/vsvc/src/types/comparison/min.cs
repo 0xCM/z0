@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
-    
-    partial class VSvcHosts
+
+    partial class VServices
     {
         [Closures(AllNumeric), Min]
         public readonly struct Min128<T> : IBinaryOp128D<T>

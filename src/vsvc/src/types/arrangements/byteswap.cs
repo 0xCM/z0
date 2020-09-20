@@ -8,16 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst; 
+    using static Konst;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         public readonly struct ByteSwap128<T> : IUnaryOp128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x) => gvec.vbyteswap(x);
-            
+
             [MethodImpl(Inline)]
             public T Invoke(T a) => gbits.byteswap(a);
         }

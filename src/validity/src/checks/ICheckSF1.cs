@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static Structured;
+    using static SFx;
 
     readonly struct CheckUnaryOpSF<T> : ICheckSF<T,T>
         where T : unmanaged

@@ -25,12 +25,12 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<HexCodeLo> digits(SRM.BlobHandle src)
         {
-            return Structures.digits(src, LowerCase);
+            return ValueTypes.digits(src, LowerCase);
         }
 
         [MethodImpl(Inline), Op]
         public static string format(SRM.BlobHandle src)
-            => Structures.format(src);
+            => ValueTypes.format(src);
 
         [MethodImpl(Inline), Op]
         public static bool primitive(ClrMdTypeCode src)

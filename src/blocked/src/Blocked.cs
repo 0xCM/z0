@@ -19,7 +19,7 @@ namespace Z0
     }
 
     [FunctionalService]
-    public partial class BSvc : IFunctional<BSvc,BSvcHosts>
+    public partial class BSvc : ISFxRoot<BSvc,BSvcHosts>
     {
 
     }

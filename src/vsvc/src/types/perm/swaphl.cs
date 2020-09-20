@@ -10,13 +10,13 @@ namespace Z0
 
     using static Konst;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         public readonly struct SwapHiLo128<T> : IUnaryOp128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x) => gvec.vswaphl(x);            
+            public Vector128<T> Invoke(Vector128<T> x) => gvec.vswaphl(x);
         }
 
         public readonly struct SwapHiLo256<T> : IUnaryOp256<T>

@@ -7,27 +7,26 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-
     [ApiHost]
-    public partial class gspan : IApiHost<gspan>
+    public partial class gspan
     {
 
     }
 
     [ApiHost]
-    public partial class fspan : IApiHost<fspan>
-    {                
+    public partial class fspan
+    {
 
 
     }
 
     public sealed partial class MSvcHosts
     {
-    
+
     }
 
     [FunctionalService]
-    public partial class MSvc : IFunctional<MSvc,MSvcHosts>
+    public partial class MSvc : ISFxRoot<MSvc,MSvcHosts>
     {
 
     }
@@ -35,6 +34,6 @@ namespace Z0
     public static partial class XTend
     {
 
-        
+
     }
 }

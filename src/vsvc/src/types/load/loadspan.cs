@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static Memories;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         public readonly struct LoadSpan128<T> : ISpanLoader128<T,T>
             where T : unmanaged

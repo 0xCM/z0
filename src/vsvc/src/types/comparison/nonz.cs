@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         [Closures(AllNumeric), Nonz]
         public readonly struct NonZ128<T> : IUnaryPred128D<T>

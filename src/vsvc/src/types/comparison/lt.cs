@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         [Closures(AllNumeric), Lt]
         public readonly struct Lt128<T> : IBinaryOp128D<T>
@@ -28,12 +28,12 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y) 
+            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> y)
                 => gvec.vlt(x,y);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b) 
-                => gmath.ltz(a,b); 
+            public T Invoke(T a, T b)
+                => gmath.ltz(a,b);
         }
     }
 }

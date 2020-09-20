@@ -5,19 +5,47 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
-    
-    using static Konst; 
+
+    using static Konst;
     using static z;
 
     partial struct z
     {
+        /// <summary>
+        /// Combines two 128-bit source vectors into a 256-bit target vector via alternating application of a mapping function
+        /// dst[j] = f(lhs[i])
+        /// dst[j+1] = f(rhs[i])
+        /// </summary>
+        /// <param name="x">The left source vector</param>
+        /// <param name="y">The right source vector</param>
+        /// <param name="f">The mapping function</param>
+        /// <typeparam name="S">The source primal type</typeparam>
+        /// <typeparam name="T">The target primal type</typeparam>
+        public static Vector256<T> vmerge<T>(Vector128<T> x, Vector128<T> y, Func<T,T> f)
+            where T : unmanaged
+        {
+            var srcLen = z.vcount<T>(n128);
+            var dstLen = 2*srcLen;
+            var lhsData = x.ToSpan();
+            var rhsData = y.ToSpan();
+            Span<T> dst = new T[dstLen];
+            var j=0;
+            for(var i=0; i< srcLen; i++)
+            {
+                dst[j++] = f(lhsData[i]);
+                dst[j++] = f(rhsData[i]);
+            }
+
+            return z.vload(n256, in z.first(dst));
+        }
+
         [MethodImpl(Inline), Op]
         public static Vector256<sbyte> vmerge(Vector128<sbyte> x, Vector128<sbyte> y)
             => vconcat(vmergelo(x,y),vmergehi(x,y));
@@ -72,7 +100,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Op]
         public static Vector512<byte> vmerge(Vector256<byte> x, Vector256<byte> y)
-        {         
+        {
             var a = UnpackLow(x,y);
             var b = UnpackHigh(x,y);
             var c = vperm2x128(a,b, Perm2x4.AC);

@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Imagine)" />
-    <ProjectReference Include="$(Structured)" />
     <ProjectReference Include="$(GMath)" />
   </ItemGroup>
 

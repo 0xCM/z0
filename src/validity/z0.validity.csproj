@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Imagine)" />
-    <ProjectReference Include="$(Structured)" />
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Identify)" />

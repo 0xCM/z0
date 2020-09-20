@@ -6,12 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;    
-        
+
+    using static Konst;
+
     partial class fspan
-    {                
+    {
         [MethodImpl(Inline), Sqrt, Closures(Floats)]
         public static Span<T> sqrt<T>(Span<T> src)
             where T : unmanaged

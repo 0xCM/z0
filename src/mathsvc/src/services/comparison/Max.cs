@@ -6,18 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
-    using static Structured;
+    using static SFx;
 
     partial class MSvcHosts
     {
         [Closures(AllNumeric), Max]
         public readonly struct Max<T> : IBinaryOp<T>, IBinarySpanOp<T>
-            where T : unmanaged        
+            where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b) 
+            public T Invoke(T a, T b)
                 => gmath.max(a, b);
 
             [MethodImpl(Inline)]

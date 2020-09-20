@@ -10,22 +10,22 @@ namespace Z0
 
     using static Konst;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         public readonly struct Lo128<T> : IUnaryOp128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x) 
-                => gvec.vlo(x);            
+            public Vector128<T> Invoke(Vector128<T> x)
+                => gvec.vlo(x);
         }
 
         public readonly struct Lo256<T> : IReducer256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector256<T> x) 
-                => gvec.vlo(x);           
+            public Vector128<T> Invoke(Vector256<T> x)
+                => gvec.vlo(x);
         }
     }
 }

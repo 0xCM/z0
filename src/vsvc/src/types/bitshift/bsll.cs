@@ -8,16 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;    
+    using static Konst;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         [Closures(Integers), Bsll]
         public readonly struct Bsll128<T> : IShiftOp128<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, byte count) 
+            public Vector128<T> Invoke(Vector128<T> x, byte count)
                 => gvec.vbsll(x,count);
         }
 
@@ -26,8 +26,8 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, byte count)  
+            public Vector256<T> Invoke(Vector256<T> x, byte count)
                 => gvec.vbsll(x,count);
-        }    
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     /// <summary>
     /// Defines operators over square bit domains
     /// </summary>
@@ -17,7 +17,7 @@ namespace Z0
     }
 
     [FunctionalService]
-    public partial class LogicSquares : IFunctional<LogicSquares>
+    public partial class LogicSquares : ISFxHost<LogicSquares>
     {
 
     }

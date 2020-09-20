@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         [Closures(AllNumeric), TestC]
         public readonly struct TestC128<T> : IBinaryPred128D<T>

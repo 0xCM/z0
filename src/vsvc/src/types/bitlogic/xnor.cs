@@ -9,17 +9,16 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
 
-    partial class VSvcHosts
+    partial class VServices
     {
-        [NumericClosures(Integers), Xnor]
+        [Closures(Integers), Xnor]
         public readonly struct Xnor128<T> : IBinaryOp128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => gvec.vxnor(x,y);
-            
+
             [MethodImpl(Inline)]
             public T Invoke(T a, T b) => gmath.xnor(a,b);
         }

@@ -8,20 +8,20 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
-    partial class VSvcHosts
+    partial class VServices
     {
         public readonly struct Sllv128<T> : IBinaryOp128D<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> offsets) 
+            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> offsets)
                 => gvec.vsllv(x,offsets);
-            
+
             [MethodImpl(Inline)]
-            public T Invoke(T a, T offset) 
+            public T Invoke(T a, T offset)
                 => gmath.sll(a,convert<T,byte>(offset));
         }
 
@@ -29,11 +29,11 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> offsets) 
+            public Vector256<T> Invoke(Vector256<T> x, Vector256<T> offsets)
                 => gvec.vsllv(x,offsets);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T offset) 
+            public T Invoke(T a, T offset)
                 => gmath.sll(a,convert<T,byte>(offset));
         }
     }

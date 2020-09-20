@@ -6,15 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
-    using static Structured;
+    using static SFx;
 
     partial class MSvcHosts
     {
         [Closures(AllNumeric), Neq]
         public readonly struct Neq<T> : IFunc<T,T,bit>, IBinarySpanPred<T>
-            where T : unmanaged        
+            where T : unmanaged
         {
             [MethodImpl(Inline)]
             public readonly bit Invoke(T x, T y) => gmath.neq(x,y);

@@ -6,18 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
-    using static Structured;
+    using static SFx;
 
     partial class MSvcHosts
     {
         [Closures(AllNumeric), Negative]
         public readonly struct NegativeOp<T> : IFunc<T,bit>, IUnarySpanPred<T>
-            where T : unmanaged        
+            where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public bit Invoke(T a) 
+            public bit Invoke(T a)
                 => gmath.negative(a);
 
             [MethodImpl(Inline)]
