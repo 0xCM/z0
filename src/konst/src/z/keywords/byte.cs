@@ -25,5 +25,9 @@ namespace Z0
         public static ref byte @byte<T>(in T src)
             where T : unmanaged
                 => ref As<T,byte>(ref edit(src));
+
+        [MethodImpl(Inline), Op]
+        public static unsafe byte @byte(in ulong src, byte index)
+            => *((byte*)gptr(src) + index);
     }
 }

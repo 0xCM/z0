@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
 
@@ -43,10 +42,10 @@ namespace Z0
             Key = key;
             First = first;
             Second = second;
-        }    
+        }
 
         [MethodImpl(Inline)]
-        public void Deconstruct(out P first, out Q second)  
+        public void Deconstruct(out P first, out Q second)
         {
             first = First;
             second = Second;
@@ -54,6 +53,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(RenderPatterns.SlotTuple3, Key, First, Second);
+            => text.format(RenderPatterns.Tuple3, Key, First, Second);
     }
 }

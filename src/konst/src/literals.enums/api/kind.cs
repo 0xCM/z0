@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     partial class Enums
@@ -20,7 +20,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static EnumScalarKind kind<E>(E e = default)
-            where E : unmanaged, Enum 
+            where E : unmanaged, Enum
                 => kind(typeof(E));
     }
 }

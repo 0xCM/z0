@@ -6,7 +6,7 @@ namespace Z0.Mkl
 {
     using System;
     using System.Linq;
-    
+
     public class t_extrema: UnitTest<t_extrema>
     {
 
@@ -41,7 +41,7 @@ namespace Z0.Mkl
         {
             var cycles = Pow2.T12;
             var samples = Pow2.T14;
-            var src = As.transform<double>(Random.Span<long>(samples, Interval.closed(-2000L, 2000L)));
+            var src = z.transform<double>(Random.Span<long>(samples, Interval.closed(-2000L, 2000L)));
             var ds = Observations.Load(src);
             var dst = 0.0;
             var last = 0.0;
@@ -53,18 +53,18 @@ namespace Z0.Mkl
 
             var sw2 = stopwatch();
             for(var i=0; i<cycles; i++)
-                last = src.Avg();     
+                last = src.Avg();
             sw2.Stop();
 
             ReportBenchmark("mkl-ssmean", cycles*samples, sw1.Elapsed);
             ReportBenchmark("direct", cycles*samples, sw2.Elapsed);
         }
-        
+
         public void mean()
         {
             var src = Random.Span<long>(Pow2.T14, Interval.closed(-2000L, 2000L));
             var expect = gspan.avg(src);
-            var converted = As.transform<double>(src);
+            var converted = z.transform<double>(src);
             var actual = (long)Observations.Load(converted).Mean()[0];
             Claim.eq(expect,actual);
         }

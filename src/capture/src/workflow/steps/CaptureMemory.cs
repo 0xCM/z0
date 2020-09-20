@@ -37,7 +37,7 @@ namespace Z0.Asm
             FormatConfig = root.FormatConfig;
             ExtractBuffer = alloc<byte>(bufferlen);
             ParseBuffer = alloc<byte>(bufferlen);
-            Decoder = AsmDecoderProxy.Service;
+            Decoder = root.RoutineDecoder;
             Wf.Created(StepId);
         }
 

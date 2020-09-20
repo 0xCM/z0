@@ -33,7 +33,7 @@ namespace Z0
         public static TypedLiteral<E,T> typed<E,T>(T value)
             where E : unmanaged, Enum
             where T : unmanaged
-                => new TypedLiteral<E,T>(eval<E,T>(value), value);
+                => new TypedLiteral<E,T>(Enums.eval<E,T>(value), value);
 
         /// <summary>
         /// Creates a <see cref='TypedLiteral{E,T}'/>

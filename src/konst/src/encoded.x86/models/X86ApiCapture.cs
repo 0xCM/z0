@@ -101,7 +101,6 @@ namespace Z0
              get => new X86UriHex(BaseAddress, OpUri, Parsed);
         }
 
-
         public OpIdentity MemberId
         {
             [MethodImpl(Inline)]

@@ -17,6 +17,8 @@ namespace Z0.Asm
         /// <param name="src">The source data</param>
         Option<AsmRoutine> Decode(X86ApiCapture src);
 
+        bool Decode(X86ApiCapture src, out AsmRoutine dst);
+
         /// <summary>
         /// Decodes a function from member capture data
         /// </summary>

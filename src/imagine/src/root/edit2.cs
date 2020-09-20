@@ -12,22 +12,13 @@ namespace Z0
 
     partial class Root
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static unsafe Span<T> edit<T>(MemoryAddress src, int length)
-            => CreateSpan(ref src.Ref<T>(), length);
-
-        [MethodImpl(Inline), Op]
-        public static unsafe Span<byte> edit(MemoryAddress src, int length)
-            => CreateSpan(ref src.Ref<byte>(), length);
-
-
         [MethodImpl(Inline)]
         public static ref T edit<T>(in T src)
             => ref Unsafe.AsRef(in src);
 
         [MethodImpl(Inline)]
         public static ref T edit<S,T>(in S src)
-            => ref Unsafe.As<S,T>(ref edit(src));        
+            => ref Unsafe.As<S,T>(ref edit(src));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref byte edit8u<T>(in T src)

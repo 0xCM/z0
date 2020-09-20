@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static AsciCharText;
-
     partial struct RenderPatterns
     {
         [StringLiteral(PageBreak5, 5)]

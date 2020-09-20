@@ -26,10 +26,10 @@ namespace Z0.Asm
         public static CaptureExchange exchange(IAsmContext context, Span<byte> buffer)
             => new CaptureExchange(context.CaptureCore, buffer);
 
-        public static AsmDecoderProxy DefaultDecoder
+        public static IAsmDecoder DefaultDecoder
         {
              [MethodImpl(Inline)]
-             get => AsmDecoderProxy.Service;
+             get => AsmRoutineDecoder.Default;
         }
     }
 }

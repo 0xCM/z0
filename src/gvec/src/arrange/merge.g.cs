@@ -5,10 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
-    
+
     using static Konst;
     using static V0;
 
@@ -23,17 +22,17 @@ namespace Z0
         public static Vector256<T> vmerge<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 return vmerge_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 return vmerge_i(x,y);
-            else 
+            else
                 throw no<T>();
         }
 
@@ -46,17 +45,17 @@ namespace Z0
         public static Vector512<T> vmerge<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 return vmerge_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 return vmerge_i(x,y);
-            else 
+            else
                 throw no<T>();
         }
 
@@ -84,7 +83,7 @@ namespace Z0
                 return vgeneric<T>(z.vmerge(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
                 return vgeneric<T>(z.vmerge(v32u(x), v32u(y)));
-            else 
+            else
                 return vgeneric<T>(z.vmerge(v64u(x), v64u(y)));
         }
 
@@ -112,7 +111,7 @@ namespace Z0
                 return vgeneric<T>(z.vmerge(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
                 return vgeneric<T>(z.vmerge(v32u(x), v32u(y)));
-            else 
+            else
                 return vgeneric<T>(z.vmerge(v64u(x), v64u(y)));
         }
     }

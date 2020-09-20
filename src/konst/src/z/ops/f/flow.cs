@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static DataFlow<S,T> flow<S,T>(S src, T dst)
+        public static DataFlow<S,T> flow<S,T>(in S src, in T dst)
             => new DataFlow<S,T>(src,dst);
     }
 }

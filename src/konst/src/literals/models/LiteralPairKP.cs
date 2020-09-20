@@ -46,10 +46,10 @@ namespace Z0
             Key = key;
             First = first;
             Second = second;
-        }  
+        }
 
         [MethodImpl(Inline)]
-        public void Deconstruct(out P first, out P second)  
+        public void Deconstruct(out P first, out P second)
         {
             first = First;
             second = Second;
@@ -57,6 +57,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(RenderPatterns.SlotTuple3, Key, First, Second);        
+            => text.format(RenderPatterns.Tuple3, Key, First, Second);
     }
 }

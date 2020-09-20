@@ -1,0 +1,25 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Reflection;
+
+    using static Konst;
+    using static XPress;
+
+    public readonly struct EmitterFactory<T> : IEmitterOpFactory<T>
+    {
+        public static IEmitterOpFactory<T> Service => default(EmitterFactory<T>);
+
+        public Func<T> Manufacture(MethodInfo method, object host = null)
+        {
+            var xCall = call(host, method);
+            var xConvert = convert<T>(xCall);
+            var f = emitter<T>(xConvert);
+            return f.Compile();
+        }
+    }
+}

@@ -9,6 +9,56 @@ namespace Z0
     partial struct RenderPatterns
     {
         /// <summary>
+        /// Defines the literal '"{1}"'
+        /// </summary>
+        public const string QSlot1 = OpenQSlot + D1 + CloseQSlot;
+
+        /// <summary>
+        /// Defines the literal '"{2}"'
+        /// </summary>
+        public const string QSlot2 = OpenQSlot + D2 + CloseQSlot;
+
+        /// <summary>
+        /// Defines the literal '"{3}"'
+        /// </summary>
+        public const string QSlot3 = OpenQSlot + D3 + CloseQSlot;
+
+        /// <summary>
+        /// Defines the literal '"{4}"'
+        /// </summary>
+        public const string QSlot4 = OpenQSlot + D4 + CloseQSlot;
+
+        /// <summary>
+        /// Defines the literal '{'
+        /// </summary>
+        [StringLiteral("{")]
+        public const string OpenSlot = LBrace;
+
+        /// <summary>
+        /// Defines the literal '}'
+        /// </summary>
+        [StringLiteral("}")]
+        public const string CloseSlot = RBrace;
+
+        /// <summary>
+        /// Defines the literal '"{'
+        /// </summary>
+        [StringLiteral("\"{")]
+        public const string OpenQSlot = DQuote + LBrace;
+
+        /// <summary>
+        /// Defines the literal '"}'
+        /// </summary>
+        [StringLiteral("\"}")]
+        public const string CloseQSlot = RBrace + DQuote;
+
+        /// <summary>
+        /// Defines the literal '"{0}"'
+        /// </summary>
+        [StringLiteral("\"{\"}")]
+        public const string QSlot0 = OpenQSlot + D0 + CloseQSlot;
+
+        /// <summary>
         /// Defines the literal '{0}'
         /// </summary>
         [FormatPattern(1, "{0}")]
@@ -246,25 +296,26 @@ namespace Z0
         [FormatPattern(5, "{0}.{1}.{2}.{3}.{4}")]
         public const string SlotDot5 = SlotDot4 + Dot + Slot4;
 
-        public const string SlotTuple1 = OpenTuple + Slot0 + CloseTuple;
+        [FormatPattern(1, Tuple1)]
+        public const string Tuple1 = OpenTuple + Slot0 + CloseTuple;
 
-        [FormatPattern(2, SlotTuple2)]
-        public const string SlotTuple2 = "({0}, {1})";
+        [FormatPattern(2, Tuple2)]
+        public const string Tuple2 = "({0}, {1})";
 
-        [FormatPattern(3, SlotTuple3)]
-        public const string SlotTuple3 = "({0}, {1}, {2})";
+        [FormatPattern(3, Tuple3)]
+        public const string Tuple3 = "({0}, {1}, {2})";
 
-        [FormatPattern(4, SlotTuple4)]
-        public const string SlotTuple4 = "({0}, {1}, {2}, {3})";
+        [FormatPattern(4, Tuple4)]
+        public const string Tuple4 = "({0}, {1}, {2}, {3})";
 
-        [FormatPattern(SlotTuple5)]
-        public const string SlotTuple5 = "({0}, {1}, {2}, {3}, {4})";
+        [FormatPattern(5, Tuple5)]
+        public const string Tuple5 = "({0}, {1}, {2}, {3}, {4})";
 
-        [FormatPattern(SlotTuple6)]
-        public const string SlotTuple6 = "({0}, {1}, {2}, {3}, {4}, {5})";
+        [FormatPattern(6, Tuple6)]
+        public const string Tuple6 = "({0}, {1}, {2}, {3}, {4}, {5})";
 
-        [FormatPattern("({0}, {1}, {2}, {3}, {4}, {5}, {6})")]
-        public const string SlotTuple7 = "({0}, {1}, {2}, {3}, {4}, {5}, {6})";
+        [FormatPattern(7, "({0}, {1}, {2}, {3}, {4}, {5}, {6})")]
+        public const string Tuple7 = "({0}, {1}, {2}, {3}, {4}, {5}, {6})";
 
         [FormatPattern(1, "{0} ")]
         public const string RSpace = "{0} ";

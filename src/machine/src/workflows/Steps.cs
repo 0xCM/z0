@@ -67,9 +67,9 @@ namespace Z0
     [WfHost]
     public class ProcessPartFilesHost : WfHost<ProcessPartFilesHost,IAsmContext>
     {
-        public override void Run(IWfShell wf, IAsmContext state)
+        public override void Run(IWfShell<IAsmContext> wf)
         {
-            using var step = new ProcessPartFiles(wf, state, wf.Ct);
+            using var step = new ProcessPartFiles(wf.Shell, wf.Context, wf.Ct);
             step.Run();
         }
     }

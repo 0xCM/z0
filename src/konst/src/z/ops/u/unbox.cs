@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {        
+    {
         /// <summary>
         /// Takes a value out of a box
         /// </summary>

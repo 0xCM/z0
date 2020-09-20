@@ -42,5 +42,12 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static long sign(ulong src)
             => (long)src;
+
+        [MethodImpl(Inline), Op]
+        public static NumericSign sign(sbyte src)
+            => src < 0 ? new NumericSign(NumericSignKind.Negative)
+            : src > 0 ? new NumericSign(NumericSignKind.Positive)
+                : new NumericSign(0);
+
     }
 }

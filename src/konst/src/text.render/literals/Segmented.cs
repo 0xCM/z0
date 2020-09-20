@@ -9,7 +9,7 @@ namespace Z0
     partial struct RenderPatterns
     {
         [FormatPattern(2)]
-        public const string SegWxT = "{0}x{1}";
+        public const string AxB = "{0}x{1}";
 
         [FormatPattern(1)]
         public const string Wx8u = Slot0 + SegSep + t8u;

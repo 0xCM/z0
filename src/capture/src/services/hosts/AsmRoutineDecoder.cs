@@ -121,5 +121,20 @@ namespace Z0.Asm
 
         public Option<AsmRoutine> Decode(X86ApiMember src)
             => from i in Decode(src.Encoded) select AsmServices.routine(src,i);
+
+        public bool Decode(X86ApiCapture src, out AsmRoutine dst)
+        {
+            var decoded = Decode(src);
+            if(decoded)
+            {
+                dst = decoded.Value;
+                return true;
+            }
+            else
+            {
+                dst = default;
+                return false;
+            }
+        }
     }
 }

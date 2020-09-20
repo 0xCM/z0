@@ -10,8 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public abstract class WfHost<H,S> : WfHost<H>, IWfHost<H,S>
-        where H : WfHost<H,S>, new()
+    public abstract class WfHost<H,C> : WfHost<H>, IWfHost<H,C>
+        where H : WfHost<H,C>, new()
     {
         [MethodImpl(Inline)]
         protected WfHost()
@@ -23,6 +23,6 @@ namespace Z0
         public override void Run(IWfShell shell)
             => throw new InvalidOperationException();
 
-        public abstract void Run(IWfShell wf, S state);
+        public abstract void Run(IWfShell<C> wf);
     }
 }

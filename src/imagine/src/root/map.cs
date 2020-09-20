@@ -49,14 +49,13 @@ namespace Z0
             where S : struct
                 => src != null ? some(src.Value) : none();
 
-
         /// <summary>
         /// Projects a source span to target span via a supplied transformation
         /// </summary>
         /// <param name="src">The source</param>
         /// <param name="f">The transformation</param>
         /// <typeparam name="S">The source type</typeparam>
-        /// <typeparam name="T">The target type</typeparam>        
+        /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static void map<S,T>(ReadOnlySpan<S> src, Func<S,T> f, Span<T> dst)
         {
@@ -70,7 +69,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source</param>
         /// <param name="f">The operator</param>
-        /// <typeparam name="T">The operand type</typeparam>        
+        /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void apply<T>(ReadOnlySpan<T> src, Func<T,T> f, Span<T> dst)
         {
@@ -85,7 +84,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         /// <param name="f">The operator</param>
-        /// <typeparam name="T">The operand type</typeparam>        
+        /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void map<T>(ReadOnlySpan<T> x, ReadOnlySpan<T> y, Func<T,T,T> f, Span<T> dst)
         {
@@ -107,12 +106,12 @@ namespace Z0
         public static void map<S,T,R>(ReadOnlySpan<S> x, ReadOnlySpan<T> y, Func<S,T,R> f, Span<R> dst)
         {
             var count = length(x,y);
-            for(var i=0; i<count; i++)            
-                seek(dst,i) = f(skip(x,i),skip(y,i));            
+            for(var i=0; i<count; i++)
+                seek(dst,i) = f(skip(x,i),skip(y,i));
         }
 
         /// <summary>
-        /// Iterates a pair of readonly spans in tandem, invoking a function for each cell pair, 
+        /// Iterates a pair of readonly spans in tandem, invoking a function for each cell pair,
         /// and deposits the result to an allocated target that is returned
         /// </summary>
         /// <param name="x">The first operand</param>
@@ -126,6 +125,6 @@ namespace Z0
             var dst = sys.alloc<R>(length(x,y));
             map(x,y,f,dst);
             return dst;
-        }         
+        }
     }
 }

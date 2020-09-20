@@ -9,14 +9,13 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Root;
-    using static Typed;
+    using static z;
 
     partial class Permute
     {
         [MethodImpl(Inline), Op]
         public static Vector128<byte> shuffles(NatPerm<N16> src)
-            => V0.vload(n128, head(As.transform<byte>(src.Terms)));
+            => z.vload(n128, first(z.transform<byte>(src.Terms)));
 
         /// <summary>
         /// Shuffles the permutation in-place using a provided random source.

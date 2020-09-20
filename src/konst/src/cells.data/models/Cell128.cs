@@ -14,7 +14,7 @@ namespace Z0
 
     using F = Cell128;
 
-    public readonly struct Cell128 : ICellHost<F,W128,Vector128<ulong>>
+    public readonly struct Cell128 : IDataCell<F,W128,Vector128<ulong>>
     {
         internal readonly Vector128<ulong> Data;
 

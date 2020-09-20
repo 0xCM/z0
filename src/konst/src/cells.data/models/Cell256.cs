@@ -16,7 +16,7 @@ namespace Z0
 
     using F = Cell256;
 
-    public readonly struct Cell256 : ICellHost<Cell256,W256,Vector256<ulong>>
+    public readonly struct Cell256 : IDataCell<Cell256,W256,Vector256<ulong>>
     {
         internal readonly Vector256<ulong> Data;
 

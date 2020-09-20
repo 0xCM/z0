@@ -140,6 +140,7 @@ namespace Z0
             Wf.Disposed(Host);
         }
 
+
         [Op]
         public static void CheckLoMasks(ref byte index, ref ulong log)
         {
@@ -158,7 +159,7 @@ namespace Z0
             eq((Pow2.pow(59) - 1)^Pow2.pow(59), lo64(59), ref index, ref log);
         }
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static void CheckLoMask(N1 @case, ref byte index, ref ulong log)
         {
             eq(4u, Bits.pop(lo64(3)), ref index, ref log);
@@ -168,7 +169,7 @@ namespace Z0
             eq(59u, Bits.pop(lo64(58)), ref index, ref log);
         }
 
-        [Op]
+        [MethodImpl(Inline), Op]
         public static void CheckLoMask(N2 @case, ref byte index, ref ulong log)
         {
             var lomask = BitMasks.lo<uint>(6);

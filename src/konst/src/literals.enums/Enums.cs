@@ -16,12 +16,6 @@ namespace Z0
     public partial class Enums
     {
         [MethodImpl(Inline)]
-        public static Refinement<V,T> refine<V,T>(V src, T t = default)
-            where V : unmanaged, Enum
-            where T : unmanaged
-                => new Refinement<V,T>(src);
-
-        [MethodImpl(Inline)]
         public static E zero<E>()
             where E : unmanaged, Enum
                 => default(E);
@@ -45,18 +39,6 @@ namespace Z0
         public static EnumTypeCode typecode<E>()
             where E : unmanaged, Enum
                 => PrimalKinds.ecode<E>();
-
-        /// <summary>
-        /// Reads a generic numeric value from a generic enum.
-        /// </summary>
-        /// <param name="e">The enum value to reinterpret</param>
-        /// <typeparam name="E">The enum source type</typeparam>
-        /// <typeparam name="V">The value type</typeparam>
-        [MethodImpl(Inline)]
-        public static unsafe T scalar<E,T>(E e)
-            where E : unmanaged, Enum
-            where T : unmanaged
-                => EnumValue.scalar<E,T>(e);
 
         /// <summary>
         /// Reads a generic enum member from a generic value

@@ -13,10 +13,9 @@ namespace Z0
 
     partial class XTend
     {
-       [MethodImpl(Inline)]
        public static Pair<T> Pair<T>(this IValueSource source, T t = default)
             where T : struct
-                => PairSource.next(source,t);
+                => Sourced.pair(source,t);
 
         public static IEnumerable<Pair<T>> PairStream<T>(this IValueSource source, T t = default)
             where T : struct

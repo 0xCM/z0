@@ -15,6 +15,11 @@ namespace Z0
 
     partial class Enums
     {
+        public static string format<E1,E2>(in EnumPair<E1,E2> src)
+            where E1: unmanaged, Enum
+            where E2: unmanaged, Enum
+                => $"{src.Name}([{Enums.scalar<E1,ulong>(src.First)}: {typeof(E1).Name}], [{Enums.scalar<E2,ulong>(src.Second)}: {typeof(E2).Name}])";
+
         public static void format(in EnumLiteralRow src, TableFormatter<EnumLiteralTableField> dst, bool eol = true)
         {
             dst.Append(F.PartId, src.PartId);

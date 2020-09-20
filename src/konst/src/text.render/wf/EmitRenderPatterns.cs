@@ -11,9 +11,9 @@ namespace Z0
 
     public sealed class EmitRenderPatternsHost : WfHost<EmitRenderPatternsHost, DataFlow<Type, FS.FilePath>>
     {
-        public override void Run(IWfShell wf, DataFlow<Type,FS.FilePath> df)
+        public override void Run(IWfShell<DataFlow<Type,FS.FilePath>> wf)
         {
-            using var step = new EmitRenderPatterns(wf,this, df);
+            using var step = new EmitRenderPatterns(wf.Shell, this, wf.Context);
             step.Run();
         }
     }
@@ -22,12 +22,12 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
-        readonly EmitRenderPatternsHost Host;
+        readonly WfHost Host;
 
         public DataFlow<Type,FS.FilePath> Df;
 
         [MethodImpl(Inline)]
-        public EmitRenderPatterns(IWfShell wf, EmitRenderPatternsHost host, DataFlow<Type,FS.FilePath> df)
+        public EmitRenderPatterns(IWfShell wf, WfHost host, DataFlow<Type,FS.FilePath> df)
         {
             Wf = wf;
             Host = host;

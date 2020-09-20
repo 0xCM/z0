@@ -55,7 +55,7 @@ namespace Z0
                 ref readonly var srcVal = ref tValues[i];
                 ref readonly var tVal = ref srcVal.Value;
                 ref readonly var srcField = ref srcVal.Field;
-                seek(dst, i) = new EnumFieldValue<E,T>(srcField, Literals.read<E,T>(tVal), tVal);
+                seek(dst, i) = new EnumFieldValue<E,T>(srcField, read<E,T>(tVal), tVal);
             }
 
             return index(eValueBuffer);
@@ -104,7 +104,6 @@ namespace Z0
         public static bool defined<E>(E e)
             where E : unmanaged, Enum
                 => Enum.IsDefined(typeof(E), e);
-
 
         /// <summary>
         /// Determines whether an enum has a specified integral value

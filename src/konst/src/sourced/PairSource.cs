@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using VS = ValueSource;
+    using VS = Sourced;
     using BVS = BoundValueSource;
 
     [ApiHost]
@@ -21,14 +21,14 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Pair<T> next<T>(IValueSource source, T t = default)
             where T : struct
-                => Tuples.pair(VS.next(source, t), VS.next(source, t));
+                => Tuples.pair(VS.one(source, t), VS.one(source, t));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static IEnumerable<Pair<T>> stream<T>(IValueSource source, T t = default)
             where T : struct
         {
             while(true)
-                yield return next(source,t);
+                yield return Sourced.pair(source,t);
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
@@ -49,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ConstPair<T> constant<T>(IValueSource source, T t = default)
             where T : struct
-                => (VS.next(source, t), VS.next(source, t));
+                => (VS.one(source, t), VS.one(source, t));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ConstPair<T> constant<T>(IBoundValueSource source, T min, T max)

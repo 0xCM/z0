@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct Cell64 : ICellHost<Cell64,W64,ulong>
+    public readonly struct Cell64 : IDataCell<Cell64,W64,ulong>
     {
         internal readonly ulong Data;
 

@@ -33,4 +33,9 @@ namespace Z0
         Assembly Control
             => Assembly.GetEntryAssembly();
     }
+
+    public interface IShellContext<C> : IShellContext, IContextual<C>
+    {
+
+    }
 }

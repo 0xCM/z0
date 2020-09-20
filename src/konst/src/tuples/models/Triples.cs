@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
 
@@ -37,7 +36,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref Select(index);
-        }        
+        }
 
         public int Count
         {

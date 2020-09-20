@@ -17,18 +17,16 @@ namespace Z0
         /// <summary>
         /// The invariant number of bits covered by the reifying type
         /// </summary>
-        int BitWidth {get;}
+        uint BitWidth {get;}
 
         ByteSize Size {get;}
     }
 
-    [SuppressUnmanagedCodeSecurity]
-    public interface ICellHost<C,T> : IDataCell, IContented<T>, IEquatable<C>, INullary<C,T>
-        where C : struct, ICellHost<C,T>
+    public interface IDataCell<T> : IDataCell
         where T : struct
     {
-        int IDataCell.BitWidth
-            => Unsafe.SizeOf<T>()*8;
+        uint IDataCell.BitWidth
+            => (uint)Unsafe.SizeOf<T>()*8;
 
         ByteSize IDataCell.Size
             => Unsafe.SizeOf<T>();
@@ -41,16 +39,25 @@ namespace Z0
     }
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ICellHost<C,W,T> : ICellHost<C,T>
-        where C : unmanaged, ICellHost<C,W,T>
+    public interface IDataCell<C,T> : IDataCell<T>, IEquatable<C>, INullary<C,T>
+        where C : struct, IDataCell<C,T>
+        where T : struct
+    {
+
+    }
+
+
+    [SuppressUnmanagedCodeSecurity]
+    public interface IDataCell<C,W,T> : IDataCell<C,T>
+        where C : unmanaged, IDataCell<C,W,T>
         where W : unmanaged, ITypeWidth
         where T : struct
     {
         TypeWidth TypeWidth
             => Widths.type<W>();
 
-        int IDataCell.BitWidth
-            => (int)TypeWidth;
+        uint IDataCell.BitWidth
+            => (uint)TypeWidth;
 
         ByteSize IDataCell.Size
             => ((int)TypeWidth)/8;

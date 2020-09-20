@@ -3,12 +3,12 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Security;
 
     /// <summary>
-    /// Characterizes a value emitter that supports placcing upper and/or lower bounds on
+    /// Characterizes a value emitter that supports placing upper and/or lower bounds on
     /// the values produced
     /// </summary>
     /// <typeparam name="T">The production value type</typeparam>
@@ -21,14 +21,14 @@ namespace Z0
         /// </summary>
         /// <param name="max">The exclusive upper bound</param>
         /// <typeparam name="T">The point type</typeparam>
-        T Next(T max);    
-        
+        T Next(T max);
+
         /// <summary>
         /// Retrieves the next point from the source, constrained by upper and lower bounds
         /// </summary>
         /// <param name="min">The inclusive lower bound</param>
         /// <param name="max">The exclusive max value</param>
-        T Next(T min, T max);        
+        T Next(T min, T max);
     }
 
     public interface IBoundValueSource
@@ -49,5 +49,25 @@ namespace Z0
         /// <typeparam name="T">The point type</typeparam>
         T Next<T>(T min, T max)
             where T : struct;
+
+        /// <summary>
+        /// Retrieves the next point from the source, bound within a specified interval
+        /// </summary>
+        /// <param name="src">The random source</param>
+        /// <param name="domain">The domain of the random variable</param>
+        /// <typeparam name="T">The point type</typeparam>
+        T Next<T>(Interval<T> domain)
+            where T : unmanaged
+                => Next(domain.Left, domain.Right);
+
+        /// <summary>
+        /// Retrieves the next point from the source, bound within a specified interval
+        /// </summary>
+        /// <param name="src">The random source</param>
+        /// <param name="domain">The domain of the random variable</param>
+        /// <typeparam name="T">The point type</typeparam>
+        T Next<T>(ClosedInterval<T> domain)
+            where T : unmanaged
+                => Next(domain.Min, domain.Max);
     }
 }

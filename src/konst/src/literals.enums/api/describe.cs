@@ -38,13 +38,13 @@ namespace Z0
             where T : unmanaged
         {
             var dst = span(buffer);
-            for(var i=0u; i<dst.Length; i++)
+            var count = dst.Length;
+            for(var i=0u; i<count; i++)
             {
                 var entry = dataset[(int)i];
                 seek(dst,i) = describe(entry.Id, entry.Index, entry.Name, entry.EnumValue, entry.ScalarValue);
             }
             return buffer;
         }
-
     }
 }

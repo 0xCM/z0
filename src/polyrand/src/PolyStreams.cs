@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     public static class PolyStreams
     {
         [MethodImpl(Inline)]
@@ -19,25 +19,6 @@ namespace Z0
             where T : struct
                 => new PolyStream<T>(kind,src);
 
-        /// <summary>
-        /// Produces a random stream of bytes
-        /// </summary>
-        /// <param name="random">The random source</param>
-        public static IRngStream<byte> bytes(IPolyrand random)
-        {
-            IEnumerable<byte> produce()
-            {
-                while(true)
-                {
-                    var bytes = BitConverter.GetBytes(random.Next<ulong>());
-                    for(var i = 0; i< bytes.Length; i++)
-                        if(i == 0)
-                            yield return bytes[i];
-                }
-            }
-            return PolyStreams.create(produce(), random.RngKind);
-        }
-        
         /// <summary>
         /// Produces a random stream of unfiltered/unbounded points from a source
         /// </summary>
@@ -68,15 +49,15 @@ namespace Z0
 
         static IEnumerable<T> forever<T>(IPolyrand src, ClosedInterval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => filter != null 
-                ? some(src, Interval.closed(domain.Min, domain.Max), filter) 
-                : forever(src, domain);        
+                => filter != null
+                ? some(src, Interval.closed(domain.Min, domain.Max), filter)
+                : forever(src, domain);
 
         static IEnumerable<T> forever<T>(IPolyrand src, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => filter != null 
-                ? some(src, domain, filter) 
-                : forever(src, domain);        
+                => filter != null
+                ? some(src, domain, filter)
+                : forever(src, domain);
 
         static IEnumerable<T> forever<T>(IPolyrand src, T min, T max)
             where T : unmanaged
@@ -110,11 +91,11 @@ namespace Z0
         static IEnumerable<T> some<T>(IPolyrand src, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
         {
-            var next = default(T);    
+            var next = default(T);
             var tries = 0;
             var tryMax = 10;
-            
-            while(true)            
+
+            while(true)
             {
                 next = src.Next<T>(domain);
                 if(filter(next))

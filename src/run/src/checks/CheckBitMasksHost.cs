@@ -13,7 +13,7 @@ namespace Z0
     [WfHost]
     public sealed class CheckBitMasksHost : WfHost<CheckBitMasksHost>
     {
-        public static void Control(IWfShell wf, IPolyrand source)
+        public static void control(IWfShell wf, IPolyrand source)
         {
             var log = text.build();
             var host  = new CheckBitMasksHost();

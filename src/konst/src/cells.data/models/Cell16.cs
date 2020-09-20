@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct Cell16 : ICellHost<Cell16,W16,ushort>
+    public readonly struct Cell16 : IDataCell<Cell16,W16,ushort>
     {
         internal readonly ushort Data;
 

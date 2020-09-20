@@ -9,8 +9,8 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static As;
-        
+    using static z;
+
     partial class gvec
     {
         /// <summary>
@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vmakemask<T>(ushort src)
             where T : unmanaged
-                => generic<T>(v8u(dvec.vmakemask(src)));
+                => generic<T>(z.v8u(dvec.vmakemask(src)));
 
         /// <summary>
         /// Distributes each bit of the source to a specified bit of each byte in a 128-bit target vector

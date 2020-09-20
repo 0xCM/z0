@@ -14,5 +14,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string @string(in StringRef src)
             => sys.@string(view(src));
+
+        [MethodImpl(Inline), Op]
+        public static unsafe string @string(char* pSrc)
+            => new string(pSrc);
+
+        [MethodImpl(Inline), Op]
+        public static unsafe string @string(ReadOnlySpan<byte> src)
+            => new string(gptr(recover<sbyte>(src)));
     }
 }

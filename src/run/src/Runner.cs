@@ -31,6 +31,8 @@ namespace Z0
 
         IPolyrand Random;
 
+        IAsmContext Asm;
+
         [MethodImpl(Inline)]
         public Runner(WfCaptureState wf)
         {
@@ -39,6 +41,7 @@ namespace Z0
             State = wf;
             Buffer = z.span<string>(256);
             offset = 0;
+            Asm = wf.Asm;
             Random = wf.App.Random;
         }
 
@@ -236,7 +239,7 @@ namespace Z0
             {
                 var src = typeof(RenderPatterns);
                 var dst = FS.dir(Wf.IndexRoot.Name) + FS.file("format-patterns", "csv");
-                new EmitRenderPatternsHost().Run(Wf, (src,dst));
+                new EmitRenderPatternsHost().Run(Wf.With(flow(src,dst)));
             }
 
             {
@@ -265,7 +268,7 @@ namespace Z0
                 var dlls = dir.Files(false).Where(f => f.FileExt.Name.Contains("dll"));
                 var host = new EmitImageHeadersHost();
                 var output = FS.path("J:/dev/projects/z0-logs/db/images.csv");
-                host.Run(Wf, (dlls,output));
+                host.Run(Wf.With(flow(dlls,output)));
             }
 
             {
@@ -281,7 +284,6 @@ namespace Z0
                 Wf.DataRow(a);
 
                 Wf.Ran(StepId);
-
             }
         }
 
@@ -305,7 +307,27 @@ namespace Z0
 
         public void Run()
         {
+            var methods = typeof(CheckBitMasks).Methods().WithNameStartingWith("CheckLoMask").Select(m =>  new IdentifiedMethod(m.Identify(),m));
+            var results = @readonly(CaptureAlt.capture(methods));
+            var decoder = Asm.RoutineDecoder;
+            var count = results.Length;
+            var formatter = Asm.Formatter;
+            var dstpath = Wf.Paths.AppLogRoot + FS.file("runner",GlobalExtensions.Asm);
+            using var writer = dstpath.Writer();
 
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var captured = ref skip(results,i);
+                if(decoder.Decode(captured, out var fx))
+                {
+                    Wf.DataRow(fx.BaseAddress);
+                    var asm = formatter.FormatFunction(fx);
+                    writer.Write(asm);
+
+                }
+            }
+
+            CheckBitMasksHost.control(Wf, Random);
         }
     }
 }

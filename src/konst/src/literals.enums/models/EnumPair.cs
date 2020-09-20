@@ -9,6 +9,8 @@ namespace Z0
 
     using static Konst;
 
+    using api = Enums;
+
     /// <summary>
     /// Captures name-corellated literals values
     /// </summary>
@@ -38,10 +40,11 @@ namespace Z0
             First = first;
             Second = second;
         }
+
         public string Format()
-            => $"{Name} ([{Enums.scalar<E1,ulong>(First)}: {typeof(E1).Name}], [{Enums.scalar<E2,ulong>(Second)}: {typeof(E2).Name}])";
+            => api.format(this);
 
         public override string ToString()
-            => Format();            
+            => Format();
     }
 }

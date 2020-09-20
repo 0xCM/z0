@@ -35,10 +35,6 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {
-            // var parts = PartIdParser.Service.ParseValid(args);
-            // if(parts.Length == 0)
-            //     parts = Context.Api.PartIdentities;
-
             using var wf = Flow.shell(args);
             using var state = AsmWorkflows.state(wf, AsmWorkflows.asm(Context));
 

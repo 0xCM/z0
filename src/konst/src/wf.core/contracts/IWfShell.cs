@@ -15,6 +15,11 @@ namespace Z0
 
     using static WfEvents;
 
+    public interface IWfShell<C> : IShellContext<C>
+    {
+        IWfShell Shell {get;}
+    }
+
     public interface IWfShell : IShellContext, IDisposable
     {
         ApiParts Api {get;}
@@ -39,6 +44,9 @@ namespace Z0
 
         FolderPath AppDataRoot
             => Shell.Paths.AppDataRoot;
+
+        IWfShell<C> With<C>(C src)
+            => new WfShell<C>(this,src);
 
         IFileDb FileDb()
             => new FileDb(FS.dir(Paths.LogRoot.Name) + FS.folder("db"));

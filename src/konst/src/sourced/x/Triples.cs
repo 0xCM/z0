@@ -15,22 +15,18 @@ namespace Z0
     {
         public static Triple<T> Triple<T>(this IValueSource source, T t = default)
             where T : struct
-                => TripleSource.next(source, t);
+                => Sourced.triple(source, t);
 
-        public static IEnumerable<Triple<T>> TripleStream<T>(this IValueSource source, T t = default)
+        public static IEnumerable<Triple<T>> Triples<T>(this IValueSource source, T t = default)
             where T : struct
-                => TripleSource.stream(source, t);
+                => Sourced.triples(source, t);
 
         public static Triples<T> Triples<T>(this IValueSource source, int count, T t = default)
             where T : struct
-                => TripleSource.index(source, count, t);
+                => Sourced.triples(source, count, t);
 
         public static Triples<T> Triples<T>(this IValueSource source, Span<Triple<T>> dst)
             where T : struct
-                => TripleSource.index(source, dst);
-
-        public static Triples<T> Triples<T>(this IValueSource source, Triple<T>[] dst)
-            where T : struct
-                => TripleSource.index(source, dst);
+                => Sourced.triples(source, dst);
     }
 }

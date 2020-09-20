@@ -6,18 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using static System.Runtime.CompilerServices.Unsafe;
 
     using static Konst;
 
     partial struct z
-    {            
+    {
+
         /// <summary>
         /// If possible, applies the conversion S -> T
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static T convert<S,T>(S src)
             => convert_u<S,T>(src);
 
@@ -44,7 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(ushort src)
             => convert16u_u<T>(src);
 
@@ -53,7 +55,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(short src)
             => convert16i_u<T>(src);
 
@@ -62,7 +64,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(int src)
             => convert32i_u<T>(src);
 
@@ -71,7 +73,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(uint src)
             => convert32u_u<T>(src);
 
@@ -80,7 +82,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(long src)
             => convert64i_u<T>(src);
 
@@ -89,7 +91,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(ulong src)
             => convert64u_u<T>(src);
 
@@ -98,7 +100,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(float src)
             => convert32f_u<T>(src);
 
@@ -107,7 +109,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(double src)
             => convert64f_u<T>(src);
 
@@ -116,7 +118,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(char src)
             => convert16c_u<T>(src);
 
@@ -124,9 +126,9 @@ namespace Z0
         /// If possible, applies the conversion byte -> T
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="t">A target representative used only for type inference</param>        
+        /// <param name="t">A target representative used only for type inference</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(byte src, T t)
             where T : unmanaged
                 => z.convert<T>(src);
@@ -135,9 +137,9 @@ namespace Z0
         /// If possible, applies the conversion sbyte -> T
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="t">A target representative used only for type inference</param>        
+        /// <param name="t">A target representative used only for type inference</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(sbyte src, T t)
             where T : unmanaged
                 => z.convert<T>(src);
@@ -146,9 +148,9 @@ namespace Z0
         /// If possible, applies the conversion ushort -> T
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="t">A target representative used only for type inference</param>        
+        /// <param name="t">A target representative used only for type inference</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(ushort src, T t)
             where T : unmanaged
                 => z.convert<T>(src);
@@ -157,9 +159,9 @@ namespace Z0
         /// If possible, applies the conversion short -> T
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="t">A target representative used only for type inference</param>        
+        /// <param name="t">A target representative used only for type inference</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(short src, T t)
             where T : unmanaged
                 => z.convert<T>(src);
@@ -168,9 +170,9 @@ namespace Z0
         /// If possible, applies the conversion int -> T
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="t">A target representative used only for type inference</param>        
+        /// <param name="t">A target representative used only for type inference</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(int src, T t)
             where T : unmanaged
                 => z.convert<T>(src);
@@ -179,9 +181,9 @@ namespace Z0
         /// If possible, applies the conversion uint -> T
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="t">A target representative used only for type inference</param>        
+        /// <param name="t">A target representative used only for type inference</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(uint src, T t)
             where T : unmanaged
                 => z.convert<T>(src);
@@ -190,9 +192,9 @@ namespace Z0
         /// If possible, applies the conversion long -> T
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="t">A target representative used only for type inference</param>        
+        /// <param name="t">A target representative used only for type inference</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(long src, T t)
             where T : unmanaged
                 => z.convert<T>(src);
@@ -201,9 +203,9 @@ namespace Z0
         /// If possible, applies the conversion ulong -> T
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="t">A target representative used only for type inference</param>        
+        /// <param name="t">A target representative used only for type inference</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(ulong src, T t)
             where T : unmanaged
                 => z.convert<T>(src);
@@ -212,9 +214,9 @@ namespace Z0
         /// If possible, applies the conversion float -> T
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="t">A target representative used only for type inference</param>        
+        /// <param name="t">A target representative used only for type inference</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(float src, T t)
             where T : unmanaged
                 => z.convert<T>(src);
@@ -223,9 +225,9 @@ namespace Z0
         /// If possible, applies the conversion double -> T
         /// </summary>
         /// <param name="src">The source value</param>
-        /// <param name="t">A target representative used only for type inference</param>        
+        /// <param name="t">A target representative used only for type inference</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(double src, T t)
             where T : unmanaged
                 => z.convert<T>(src);
@@ -256,7 +258,7 @@ namespace Z0
                 return convert<T>(int32(src));
             else if(typeof(S) == typeof(long))
                 return convert<T>(int64(src));
-            else 
+            else
                 return convert_x<S,T>(src);
         }
 
@@ -269,8 +271,8 @@ namespace Z0
                 return convert<T>(float64(src));
             else if(typeof(S) == typeof(char))
                 return convert<T>(char16(src));
-            else            
+            else
                 return no<S,T>();
-        }             
+        }
     }
 }

@@ -32,9 +32,9 @@ namespace Z0
             => typeof(H).Name;
     }
 
-    public interface IWfHost<H,S> : IWfHost<H>
-        where H : IWfHost<H,S>, new()
+    public interface IWfHost<H,C> : IWfHost<H>
+        where H : IWfHost<H,C>, new()
     {
-        void Run(IWfShell wf, S state);
+        void Run(IWfShell<C> wf);
     }
 }
