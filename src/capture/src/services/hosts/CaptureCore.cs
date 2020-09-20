@@ -16,7 +16,7 @@ namespace Z0.Asm
     {
         public static CaptureCore Service => default;
 
-        public Option<ParsedBuffer> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
+        public Option<ApiParseResult> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return none<ParsedBuffer>();
+                return none<ApiParseResult>();
             }
         }
 
@@ -34,8 +34,8 @@ namespace Z0.Asm
             try
             {
                 var summary = capture(exchange, src.Id, src.Address);
-                var size = summary.Encoded.Length;
-                var code = new X86ApiCapture(src.Id, src.Method, summary.Encoded.Input, summary.Encoded.Output, summary.Outcome.TermCode);
+                var size = summary.DataFlow.Length;
+                var code = new X86ApiCapture(src.Id, src.Method, summary.DataFlow.Input, summary.DataFlow.Output, summary.Outcome.TermCode);
                 return new CapturedMember(src, code);
             }
             catch(Exception e)
@@ -52,7 +52,7 @@ namespace Z0.Asm
                 var pSrc = jit(src);
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;
-                var captured = DefineMember(id, src, summary.Encoded, outcome.TermCode);
+                var captured = DefineMember(id, src, summary.DataFlow, outcome.TermCode);
                 Demands.insist((MemoryAddress)pSrc, captured.BaseAddress);
                 return exchange.CaptureComplete(outcome.State, captured);
             }
@@ -70,7 +70,7 @@ namespace Z0.Asm
                 var pSrc = jit(src).Handle;
                 var summary = capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;
-                var captured = new X86ApiCapture(id, src.SourceMethod, summary.Encoded.Input, summary.Encoded.Output, outcome.TermCode);
+                var captured = new X86ApiCapture(id, src.SourceMethod, summary.DataFlow.Input, summary.DataFlow.Output, outcome.TermCode);
                 Demands.insist((MemoryAddress)pSrc,captured.BaseAddress);
                 return exchange.CaptureComplete(outcome.State, captured);
             }
@@ -82,7 +82,7 @@ namespace Z0.Asm
             }
         }
 
-        public Option<ParsedBuffer> Capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)
+        public Option<ApiParseResult> Capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return none<ParsedBuffer>();
+                return none<ApiParseResult>();
             }
         }
 
@@ -102,7 +102,7 @@ namespace Z0.Asm
                 var pSrc = jit(src);
                 var summary = capture(exchange, id, pSrc);
                 var outcome = summary.Outcome;
-                var captured = DefineMember(id, src, summary.Encoded, outcome.TermCode);
+                var captured = DefineMember(id, src, summary.DataFlow, outcome.TermCode);
                 Demands.insist((MemoryAddress)pSrc,captured.BaseAddress);
                 return exchange.CaptureComplete(outcome.State, captured);
             }
@@ -126,23 +126,23 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        static X86ApiCapture DefineMember(OpIdentity id, MethodInfo src, Z0.ParsedEncoding bits, ExtractTermCode term)
+        static X86ApiCapture DefineMember(OpIdentity id, MethodInfo src, Z0.X86DataFlow bits, ExtractTermCode term)
             => new X86ApiCapture(id, src, bits.Input, bits.Output, term);
 
         [MethodImpl(Inline)]
-        static X86ApiCapture DefineMember(OpIdentity id, Delegate src, Z0.ParsedEncoding bits, ExtractTermCode term)
+        static X86ApiCapture DefineMember(OpIdentity id, Delegate src, Z0.X86DataFlow bits, ExtractTermCode term)
             => new X86ApiCapture(id, src.Method, bits.Input, bits.Output, term);
 
         [MethodImpl(Inline)]
-        static ParsedBuffer capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
+        static ApiParseResult capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
             => capture(exchange, id, (byte*)Unsafe.AsPointer(ref src));
 
         [MethodImpl(Inline)]
-        static ParsedBuffer capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)
+        static ApiParseResult capture(in CaptureExchange exchange, OpIdentity id, IntPtr src)
             => capture(exchange, id, src.ToPointer<byte>());
 
         [MethodImpl(Inline)]
-        static ParsedBuffer capture(in CaptureExchange exchange, OpIdentity id, byte* pSrc)
+        static ApiParseResult capture(in CaptureExchange exchange, OpIdentity id, byte* pSrc)
         {
             var limit = exchange.BufferLength - 1;
             var start = (long)pSrc;
@@ -180,13 +180,13 @@ namespace Z0.Asm
             => new CaptureOutcome(state, ((ulong)start, (ulong)(end + delta)), tc);
 
         [MethodImpl(Inline)]
-        static ParsedBuffer SummarizeParse(in CaptureExchange exchange, in ExtractState state, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
+        static ApiParseResult SummarizeParse(in CaptureExchange exchange, in ExtractState state, OpIdentity id, ExtractTermCode tc, long start, long end, int delta)
         {
             var outcome = Complete(state, tc, start, end, delta);
             var raw = exchange.Target(0, (int)(end - start)).ToArray();
             var trimmed = exchange.Target(0, outcome.ByteCount).ToArray();
-            var bits = new Z0.ParsedEncoding((MemoryAddress)start, raw, trimmed);
-            return new ParsedBuffer(id, outcome, bits);
+            var bits = new Z0.X86DataFlow((MemoryAddress)start, raw, trimmed);
+            return new ApiParseResult(id, outcome, bits);
         }
 
         static ExtractTermCode? CalcTerm(in CaptureExchange exchange, int offset, int? ret_offset, out int delta)

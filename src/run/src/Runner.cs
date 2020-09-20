@@ -240,8 +240,7 @@ namespace Z0
             }
 
             {
-                using var step = new CheckResources(Wf);
-                step.Run();
+                new CheckResourcesHost().Run(Wf);
             }
 
             {
@@ -256,7 +255,7 @@ namespace Z0
             }
 
             {
-                using var step = new CheckCredits(Wf);
+                using var step = new CheckCredits(Wf, new CheckCreditsHost());
                 step.Run();
             }
 
@@ -299,9 +298,14 @@ namespace Z0
             Wf.Ran(StepId);
         }
 
-        public void Run()
+        void EmitOpCodes()
         {
             new EmitAsmOpCodesHost().Configure(Wf.Paths.DbRoot + FS.file("AsmOpcodes",GlobalExtensions.Csv)).Run(Wf);
+        }
+
+        public void Run()
+        {
+
         }
     }
 }

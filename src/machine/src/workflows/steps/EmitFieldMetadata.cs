@@ -13,14 +13,14 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
-        readonly EmitFieldMetadataHost Host;
+        readonly WfHost Host;
 
         readonly IPart[] Parts;
 
         readonly FolderPath TargetDir;
 
         [MethodImpl(Inline)]
-        public EmitFieldMetadata(IWfShell wf, EmitFieldMetadataHost host)
+        public EmitFieldMetadata(IWfShell wf, WfHost host)
         {
             Wf = wf;
             Host = host;

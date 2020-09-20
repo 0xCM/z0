@@ -14,7 +14,6 @@ namespace Z0
     using F = CreditTypes.DocField;
     using Entity = ContentRef;
 
-
     partial class Credits
     {
         /// <summary>

@@ -61,7 +61,7 @@ namespace Z0.Asm
         /// <param name="exchange">The selected exchange</param>
         /// <param name="id">The operation identity to confer</param>
         /// <param name="src">The source buffer</param>
-        Option<ParsedBuffer> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src);
+        Option<ApiParseResult> ParseBuffer(in CaptureExchange exchange, OpIdentity id, Span<byte> src);
 
         /// <summary>
         /// Captures jitted x86 encoded assembly for a dynamic delegate

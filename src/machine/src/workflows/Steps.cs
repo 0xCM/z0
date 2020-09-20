@@ -12,6 +12,11 @@ namespace Z0
     using static z;
 
     [WfHost]
+    public sealed class MachineControl : WfHost<MachineControl>
+    {
+    }
+
+    [WfHost]
     public sealed class EmitPeImageHost : WfHost<EmitPeImageHost>
     {
 
@@ -26,12 +31,6 @@ namespace Z0
 
     [WfHost]
     public sealed class EmitDatasetsHost : WfHost<EmitDatasetsHost>
-    {
-
-    }
-
-    [WfHost]
-    public sealed class EmitMetadataSetsHost : WfHost<EmitMetadataSetsHost>
     {
 
     }
@@ -52,7 +51,7 @@ namespace Z0
 
 
     [WfHost]
-    public class CreateGlobalIndexStep : WfHost<CreateGlobalIndexStep>
+    public class CreateGlobalIndexHost : WfHost<CreateGlobalIndexHost>
     {
         public override void Run(IWfShell shell)
             => throw missing();
@@ -82,7 +81,6 @@ namespace Z0
     }
 
 
-
     [Step]
     public readonly struct ProcessAsmStep : IWfStep<ProcessAsmStep>
     {
@@ -90,12 +88,6 @@ namespace Z0
             => step<ProcessAsmStep>();
     }
 
-    [Step]
-    public sealed class Engines : WfHost<Engines>
-    {
-        public static WfStepId StepId
-            => step<Engines>();
-    }
 
     [Step]
     public readonly struct EmitPeHeadersStep : IWfStep<EmitPeHeadersStep>
@@ -123,15 +115,6 @@ namespace Z0
 
         public static string ExtName(PartStringKind kind)
             => (kind == PartStringKind.System ? EmitStringRecordsHost.SystemKindExt : EmitStringRecordsHost.UserKindExt).ToLower();
-    }
-
-    [Step]
-    public sealed class CreateGlobalIndexHost : WfHost<CreateGlobalIndexHost>
-    {
-        public const string StepName = nameof(CreateGlobalIndex);
-
-        public override string Identifier => StepName;
-
     }
 
     [Step]

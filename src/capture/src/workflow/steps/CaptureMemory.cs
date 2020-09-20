@@ -84,7 +84,7 @@ namespace Z0.Asm
                         offset += size;
                     }
 
-                    captured = new CapturedMemory(new ParsedEncoding(src, raw, parsed), decoded, formatBuffer);
+                    captured = new CapturedMemory(new X86DataFlow(src, raw, parsed), decoded, formatBuffer);
                 }
             }
 

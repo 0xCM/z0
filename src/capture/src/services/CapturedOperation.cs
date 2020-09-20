@@ -2,20 +2,28 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    public readonly struct CapturedMemory
+    readonly struct CapturedOperation
     {
-        public X86DataFlow Encoded {get;}
+        public OpIdentity Id {get;}
 
-        public AsmFxList Decoded {get;}
+        public readonly CaptureOutcome Outcome;
 
-        public string[] Formatted {get;}
+        public readonly X86DataFlow Encoded;
+
+        public byte[] Data
+        {
+            [MethodImpl(Inline)]
+            get => Encoded.Output;
+        }
 
         public int Length
         {
@@ -41,23 +49,12 @@ namespace Z0.Asm
             get => Encoded.IsNonEmpty;
         }
 
-
         [MethodImpl(Inline)]
-        public CapturedMemory(X86DataFlow encoded, AsmFxList fxList, string[] formatted)
+        public CapturedOperation(OpIdentity id, CaptureOutcome outcome, X86DataFlow code)
         {
-            Encoded = encoded;
-            Decoded = fxList;
-            Formatted = formatted;
+            Id = id;
+            Outcome = outcome;
+            Encoded = code;
         }
-
-        [MethodImpl(Inline)]
-        public bool Equals(CapturedMemory src)
-            => Encoded.Equals(src.Encoded);
-
-        public string Format()
-            => Encoded.Format();
-
-        public override string ToString()
-            => Format();
     }
 }

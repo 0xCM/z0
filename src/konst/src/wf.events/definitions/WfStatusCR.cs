@@ -14,7 +14,7 @@ namespace Z0
 
     [Event]
     public readonly struct WfStatus<C,R> : IWfEvent<WfStatus<C,R>, R>
-        where C : struct, IWfStep<C>
+        where C : IWfStep<C>, new()
         where R : ITextual
     {
         public const string EventName = nameof(WfStatus<C,R>);

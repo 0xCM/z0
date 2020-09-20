@@ -18,7 +18,7 @@ namespace Z0
             var wf = Flow.shell(Assembly.GetEntryAssembly(), args);
             var app = Apps.context(wf);
             var state = new WfCaptureState(wf, new AsmContext(app, wf));
-            using var machine = new Engine(state, new Engines());
+            using var machine = new Machine(state, new MachineControl());
             machine.Run();
         }
     }

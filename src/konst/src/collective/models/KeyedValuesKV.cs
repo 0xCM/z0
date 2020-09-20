@@ -41,18 +41,6 @@ namespace Z0
             }
         }
 
-        public bool IsEmpty
-        {
-            [MethodImpl(Inline)]
-            get => Pairs == null || Pairs.Length == 0;
-        }
-
-        public bool IsNonEmpty
-        {
-            [MethodImpl(Inline)]
-            get => !IsEmpty;
-        }
-
         public static KeyedValues<K,V> Empty
             => default;
 
@@ -187,13 +175,25 @@ namespace Z0
         public uint Count
         {
             [MethodImpl(Inline)]
-            get => (uint)Pairs.Length;
+            get => (uint)(Pairs?.Length ?? 0);
         }
 
         public int Length
         {
             [MethodImpl(Inline)]
-            get => (int)Pairs.Length;
+            get => (int)(Pairs?.Length ?? 0);
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Count == 0;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Count != 0;
         }
     }
 }

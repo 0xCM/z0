@@ -9,8 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    using api = Flow;
-
     public readonly struct DataFlow<S,T> : IDataFlow<S,T>
     {
         public readonly S Source;

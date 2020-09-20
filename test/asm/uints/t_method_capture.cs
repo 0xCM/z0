@@ -64,11 +64,6 @@ namespace Z0.Asm
                 AsmCheck.Capture(m.Identify(), m).OnSome(capture => AsmCheck.WriteAsm(capture, dst));
         }
 
-        public void capture_imm()
-        {
-
-        }
-
         public void capture_dynamic_delegates()
         {
             using var dst = CaseWriter(FileExtensions.Asm);

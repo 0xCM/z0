@@ -24,6 +24,13 @@ namespace Z0
             return src.Method.MethodHandle.GetFunctionPointer();
         }
 
+        [MethodImpl(Inline)]
+        public static MemoryAddress jit(MethodInfo src)
+        {
+            RuntimeHelpers.PrepareMethod(src.MethodHandle);
+            return src.MethodHandle.GetFunctionPointer();
+        }
+
         public static ApiMembers jit(IApiHost src)
         {
             var direct = JitLocatedDirect(src).Array();

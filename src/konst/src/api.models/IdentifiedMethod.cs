@@ -7,22 +7,18 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
-    public readonly struct IdentifiedMethod : ITextual<IdentifiedMethod>
+    public readonly struct IdentifiedMethod : ITextual
     {
-        [MethodImpl(Inline)]
-        public static IdentifiedMethod Define(OpIdentity id, MethodInfo method)
-            => new IdentifiedMethod(id,method);
-        
         public readonly OpIdentity Id;
 
         public readonly MethodInfo Method;
 
         [MethodImpl(Inline)]
         public static implicit operator IdentifiedMethod((OpIdentity id, MethodInfo method) src)
-            => Define(src.id,src.method);
+            => new IdentifiedMethod(src.id,src.method);
 
         [MethodImpl(Inline)]
         public IdentifiedMethod(OpIdentity id, MethodInfo method)
@@ -30,10 +26,11 @@ namespace Z0
             Id = id;
             Method = method;
         }
-        
+
+        [MethodImpl(Inline)]
         public string Format()
             => Id.ToString();
- 
+
         public override string ToString()
             => Format();
     }

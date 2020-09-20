@@ -14,21 +14,23 @@ namespace Z0
 
     public readonly ref struct CaptureControl
     {
-        readonly CorrelationToken Ct;
-
         readonly IWfShell Wf;
 
         public WfCaptureState State {get;}
 
-        readonly CaptureControlHost Host;
+        readonly WfHost Host;
 
-        public CaptureControl(WfCaptureState state, CaptureControlHost host)
+        public CaptureControl(WfCaptureState state, WfHost host)
         {
             State = state;
             Wf = state.Wf;
             Host = host;
-            Ct = Wf.Ct;
             Wf.Created(Host);
+        }
+
+        public void Dispose()
+        {
+            Wf.Disposed(Host);
         }
 
         public void Run()
@@ -37,7 +39,7 @@ namespace Z0
 
             try
             {
-                using var host = new ManageCapture(State, Ct);
+                using var host = new ManageCapture(State, Wf.Ct);
                 host.Run();
             }
             catch(Exception e)
@@ -46,11 +48,6 @@ namespace Z0
             }
 
             Wf.Ran(Host);
-        }
-
-        public void Dispose()
-        {
-            Wf.Disposed(Host);
         }
     }
 }

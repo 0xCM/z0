@@ -17,8 +17,6 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
-        readonly CorrelationToken Ct;
-
         readonly PartFiles SourceFiles;
 
         public X86CodeIndex EncodedIndex;
@@ -33,7 +31,6 @@ namespace Z0
         {
             Wf = wf;
             Host = host;
-            Ct = Wf.Ct;
             State = state;
             SourceFiles = src;
             EncodedIndex = default;
@@ -77,7 +74,7 @@ namespace Z0
 
                 builder.Run();
                 EncodedIndex = builder.Index;
-                Wf.Raise(new CreatedPartIndex(Host.Id, EncodedIndex, Ct));
+                Wf.Raise(new CreatedPartIndex(Host, EncodedIndex, Wf.Ct));
 
 
                 var index = EncodedIndex;
@@ -180,12 +177,12 @@ namespace Z0
         {
             try
             {
-                var id = new CreateGlobalIndexStep().Id;
+                var id = new CreateGlobalIndexHost().Id;
                 Wf.Running(id);
 
                 var processor = new ProcessAsm(State, encoded);
                 var parts = Wf.Api.PartIdentities;
-                Wf.Raise(new ProcessingParts(id, parts, Ct));
+                Wf.Raise(new ProcessingParts(id, parts, Wf.Ct));
                 var result = processor.Process();
                 Wf.Ran(id, result.Count);
 
