@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
 
     using K = Kinds;
@@ -53,7 +53,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T xnor(T a, T b)
-                => gmath.xnor(a,b);        
+                => gmath.xnor(a,b);
 
             [MethodImpl(Inline)]
             public T cimpl(T a, T b)
@@ -81,32 +81,32 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public T eval<K>(T a, K kind = default)
-                where K : unmanaged, IBitLogicKind      
+                where K : unmanaged, IBitLogicApiKey
                     => eval_unary_1(a,kind);
 
             [MethodImpl(Inline)]
             public T eval<K>(T a, T b, K kind = default)
-                where K : unmanaged, IBitLogicKind      
+                where K : unmanaged, IBitLogicApiKey
                     => eval_binary_1(a,b,kind);
 
             [MethodImpl(Inline)]
             public T eval<K>(T a, T b, T c, K kind = default)
-                where K : unmanaged, IBitLogicKind      
+                where K : unmanaged, IBitLogicApiKey
                     => eval_ternary_1(a, b, c,kind);
 
             [MethodImpl(Inline)]
             T eval_unary_1<B>(T a, B kind)
-                where B : unmanaged, IBitLogicKind      
+                where B : unmanaged, IBitLogicApiKey
             {
                 if(typeof(B) == typeof(K.Not))
                     return not(a);
-                else 
+                else
                     throw Unsupported.define<T>();
             }
 
             [MethodImpl(Inline)]
             T eval_binary_1<B>(T a, T b, B kind)
-                where B : unmanaged, IBitLogicKind      
+                where B : unmanaged, IBitLogicApiKey
             {
                 if(typeof(B) == typeof(K.And))
                     return and(a,b);
@@ -126,7 +126,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             T eval_binary_2<B>(T a, T b, B kind)
-                where B : unmanaged, IBitLogicKind      
+                where B : unmanaged, IBitLogicApiKey
             {
                 if(typeof(B) == typeof(K.Impl))
                     return impl(a,b);
@@ -142,7 +142,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             T eval_ternary_1<B>(T a, T b, T c, B kind)
-                where B : unmanaged, IBitLogicKind      
+                where B : unmanaged, IBitLogicApiKey
             {
                 if(typeof(B) == typeof(K.Select))
                     return select(a,b,c);

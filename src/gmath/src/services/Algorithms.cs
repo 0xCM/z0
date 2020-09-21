@@ -22,20 +22,20 @@ namespace Z0
             var min = src.Left;
             var max = src.Right;
             var current = min;
-            var count = z.convert<T,int>(src.Length()) + 1;
+            var count = z.force<T,int>(src.Length()) + 1;
             Span<T> increments = sys.alloc<T>(count);
             var index = 0u;
             while(lteq(current,max) && index < increments.Length)
             {
                 //increments.Add(current);
                 z.seek(increments, index++) = current;
-                
+
                 if(lt(current, max))
                     current = inc(current);
                 else
                     break;
             }
-            
+
             return increments;
         }
 
@@ -133,7 +133,7 @@ namespace Z0
             var min = Unsafe.As<T,sbyte>(ref x0);
             var max = Unsafe.As<T,sbyte>(ref x1);
             var _step = Unsafe.As<T?, sbyte?>(ref step) ??(sbyte)1;
-            for(var i = min; i <= max; i += _step)            
+            for(var i = min; i <= max; i += _step)
                 yield return Unsafe.As<sbyte,T>(ref i);
         }
 
@@ -143,17 +143,17 @@ namespace Z0
             var min = Unsafe.As<T,byte>(ref x0);
             var max = Unsafe.As<T,byte>(ref x1);
             var _step = Unsafe.As<T?, byte?>(ref step) ??(byte)1;
-            for(var i = min; i <= max; i += _step)            
+            for(var i = min; i <= max; i += _step)
                 yield return Unsafe.As<byte,T>(ref i);
         }
-        
+
         static IEnumerable<T> range16i<T>(T x0, T x1, T? step = null)
             where T : unmanaged
         {
             var min = Unsafe.As<T,short>(ref x0);
             var max = Unsafe.As<T,short>(ref x1);
             var _step = Unsafe.As<T?, short?>(ref step) ?? (short)1;
-            for(var i = min; i <= max; i += _step)            
+            for(var i = min; i <= max; i += _step)
                 yield return Unsafe.As<short,T>(ref i);
         }
 
@@ -163,7 +163,7 @@ namespace Z0
             var min = Unsafe.As<T,ushort>(ref x0);
             var max = Unsafe.As<T,ushort>(ref x1);
             var _step = Unsafe.As<T?, ushort?>(ref step) ?? (ushort)1;
-            for(var i = min; i <= max; i += _step)            
+            for(var i = min; i <= max; i += _step)
                 yield return Unsafe.As<ushort,T>(ref i);
         }
 
@@ -173,7 +173,7 @@ namespace Z0
             var min = Unsafe.As<T,int>(ref x0);
             var max = Unsafe.As<T,int>(ref x1);
             var _step = Unsafe.As<T?, int?>(ref step) ?? 1;
-            for(var i = min; i <= max; i += _step)            
+            for(var i = min; i <= max; i += _step)
                 yield return Unsafe.As<int,T>(ref i);
         }
 
@@ -183,7 +183,7 @@ namespace Z0
             var min = Unsafe.As<T,uint>(ref x0);
             var max = Unsafe.As<T,uint>(ref x1);
             var _step = Unsafe.As<T?, uint?>(ref step) ?? 1u;
-            for(var i = min; i <= max; i += _step)            
+            for(var i = min; i <= max; i += _step)
                 yield return Unsafe.As<uint,T>(ref i);
         }
 
@@ -193,7 +193,7 @@ namespace Z0
             var min = Unsafe.As<T,long>(ref x0);
             var max = Unsafe.As<T,long>(ref x1);
             var _step = Unsafe.As<T?, long?>(ref step) ?? 1L;
-            for(var i = min; i <= max; i += _step)            
+            for(var i = min; i <= max; i += _step)
                 yield return Unsafe.As<long,T>(ref i);
         }
 
@@ -203,7 +203,7 @@ namespace Z0
             var min = Unsafe.As<T,ulong>(ref x0);
             var max = Unsafe.As<T,ulong>(ref x1);
             var _step = Unsafe.As<T?, ulong?>(ref step) ?? 1ul;
-            for(var i = min; i <= max; i += _step)            
+            for(var i = min; i <= max; i += _step)
                 yield return Unsafe.As<ulong,T>(ref i);
         }
 
@@ -213,7 +213,7 @@ namespace Z0
             var min = Unsafe.As<T,float>(ref x0);
             var max = Unsafe.As<T,float>(ref x1);
             var _step = Unsafe.As<T?, float?>(ref step) ?? 1f;
-            for(var i = min; i <= max; i += _step)            
+            for(var i = min; i <= max; i += _step)
                 yield return Unsafe.As<float,T>(ref i);
         }
 
@@ -223,7 +223,7 @@ namespace Z0
             var min = Unsafe.As<T,double>(ref x0);
             var max = Unsafe.As<T,double>(ref x1);
             var _step = Unsafe.As<T?, double?>(ref step) ?? 1d;
-            for(var i = min; i <= max; i += _step)            
+            for(var i = min; i <= max; i += _step)
                 yield return Unsafe.As<double,T>(ref i);
         }
 
@@ -235,9 +235,9 @@ namespace Z0
         /// <param name="ys">The right span</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static bit identical<T>(Span<T> xs, Span<T> ys)  
-            where T : unmanaged       
-        {            
+        public static bit identical<T>(Span<T> xs, Span<T> ys)
+            where T : unmanaged
+        {
             if(xs.Length != ys.Length)
                 return false;
             return Algorithms.identical(ref z.first(xs), ref z.first(ys), (uint)xs.Length);
@@ -250,13 +250,13 @@ namespace Z0
         /// <param name="ys">The right span</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static bit identical<T>(ReadOnlySpan<T> xs, ReadOnlySpan<T> ys)  
-            where T : unmanaged       
+        public static bit identical<T>(ReadOnlySpan<T> xs, ReadOnlySpan<T> ys)
+            where T : unmanaged
         {
             if(xs.Length != ys.Length)
                 return false;
             return Algorithms.identical(ref z.edit(in z.first(xs)), ref z.edit(in z.first(ys)), (uint)xs.Length);
-        }        
+        }
 
         /// <summary>
         ///  Adapted from corefx repo
@@ -268,17 +268,17 @@ namespace Z0
             if (Unsafe.AreSame(ref first, ref second))
                 return true;
 
-            var offset = 0; 
+            var offset = 0;
             T x;
             T y;
             while (length >= 8)
             {
                 length -= 8;
-                
+
                 x = z.add<T>(first, offset + 0);
                 y = z.add<T>(second, offset + 0);
                 if(neq(x, y))
-                    return false;                
+                    return false;
                 x = z.add<T>(first, offset + 1);
                 y = z.add<T>(second, offset + 1);
                 if(neq(x, y))
@@ -346,6 +346,6 @@ namespace Z0
             }
 
             return true;
-        } 
+        }
     }
 }

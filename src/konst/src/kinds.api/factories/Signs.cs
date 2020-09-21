@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="s">The sign choice, used only for type inference</param>
         /// <typeparam name="S">The choice type: Negative, Neutral or Positive</typeparam>
         public static Sign<S> sign<S>(S s = default)
-            where S : unmanaged, ISign<S>
+            where S : unmanaged, ISigned<S>
                 => default;
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="s">The sign classifier, used only for type inference</param>
         /// <typeparam name="S">The choice type: Negative, Neutral or Positive</typeparam>
         public static SignKind kind<S>(S s = default)
-            where S : unmanaged, ISign
+            where S : unmanaged, ISigned
                 => s.Kind;
 
         /// <summary>

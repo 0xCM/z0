@@ -28,6 +28,8 @@ public enum PartId : ulong
 
     ToolCore = 8,
 
+    Api = 9,
+
     Domain = 18,
 
     Check = 19,

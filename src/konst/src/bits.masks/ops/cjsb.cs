@@ -27,13 +27,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(CJsb8x8x2x1);
+                return force<byte,T>(CJsb8x8x2x1);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(CJsb16x8x2x1);
+                return force<ushort,T>(CJsb16x8x2x1);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(CJsb32x8x2x1);
+                return force<uint,T>(CJsb32x8x2x1);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(CJsb64x8x2x1);
+                return force<ulong,T>(CJsb64x8x2x1);
             else
                 throw no<T>();
         }
@@ -52,13 +52,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(CJsb8x8x2x2);
+                return force<byte,T>(CJsb8x8x2x2);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(CJsb16x8x2x2);
+                return force<ushort,T>(CJsb16x8x2x2);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(CJsb32x8x2x2);
+                return force<uint,T>(CJsb32x8x2x2);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(CJsb64x8x2x2);
+                return force<ulong,T>(CJsb64x8x2x2);
             else
                 throw no<T>();
         }
@@ -76,13 +76,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(CJsb8x8x4x1);
+                return force<byte,T>(CJsb8x8x4x1);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(CJsb16x8x4x1);
+                return force<ushort,T>(CJsb16x8x4x1);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(CJsb32x8x4x1);
+                return force<uint,T>(CJsb32x8x4x1);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(CJsb64x8x4x1);
+                return force<ulong,T>(CJsb64x8x4x1);
             else
                 throw no<T>();
         }

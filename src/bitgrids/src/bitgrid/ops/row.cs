@@ -12,7 +12,7 @@ namespace Z0
     using static Memories;
 
     partial class BitGrid
-    {        
+    {
         /// <summary>
         /// Extracts an index-identified row from a 16-bit grid
         /// </summary>
@@ -158,7 +158,7 @@ namespace Z0
             where T : unmanaged
         {
             uint cell = v8u(g.Content).GetElement(index/2);
-            return NumericCast.convert<byte>((gmath.odd(index) ? cell >> 4 : 0xF & cell));
+            return NumericCast.force<byte>((gmath.odd(index) ? cell >> 4 : 0xF & cell));
         }
 
         /// <summary>
@@ -375,6 +375,6 @@ namespace Z0
             where T : unmanaged
                 => (ushort)Bits.extract(g,index*16, 16);
 
-        #endif                
+        #endif
     }
 }

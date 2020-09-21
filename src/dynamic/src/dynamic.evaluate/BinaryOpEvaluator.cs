@@ -13,14 +13,14 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static T eval<K,T>(K k, ReadOnlySpan<byte> code, T x, T y)
-            where K : unmanaged, IOpKind
+            where K : unmanaged, IApiKey
             where T : unmanaged
                 => create(x, y, k.Format(), code)(x,y);
 
         [MethodImpl(Inline)]
         public static T eval<K,T>(K k, BinaryCode code, T x, T y)
             where T : unmanaged
-            where K : unmanaged, IOpKind
+            where K : unmanaged, IApiKey
                 => create(x, y, k.Format(), code)(x,y);
 
         [MethodImpl(Inline)]

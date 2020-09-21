@@ -20,7 +20,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bit match<K>(Vector256<T> x, Vector256<T> y, K k = default)
-            where K : unmanaged, IBitLogicKind
+            where K : unmanaged, IBitLogicApiKey
         {
             var mSvc = MSvc.bitlogic<T>();
             var vSvc = VSvc.vbitlogic<T>(w);

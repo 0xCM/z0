@@ -12,7 +12,7 @@ namespace Z0
     using C = ApiOperatorClass;
     using K = Kinds;
 
-    public readonly struct CellularUnaryOpClass : ICellularOpClass<CellularUnaryOpClass,C>
+    public readonly struct CellularUnaryOpClass : ICellularOp<CellularUnaryOpClass,C>
     {
         public TypeWidth Width {get;}
 
@@ -31,7 +31,7 @@ namespace Z0
             => Width = width;
     }
 
-    public readonly struct CellularUnaryOpClass<W> : ICellularOpClass<CellularUnaryOpClass<W>,W,C>
+    public readonly struct CellularUnaryOpClass<W> : ICellularOp<CellularUnaryOpClass<W>,W,C>
         where W : unmanaged, ITypeWidth
     {
         [MethodImpl(Inline)]

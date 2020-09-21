@@ -47,7 +47,7 @@ namespace Z0.Logix
             => gmath.range(Min,Max,Step);
 
         public int? Length
-            => convert<T,int>(gmath.sub(Max,Min));
+            => force<T,int>(gmath.sub(Max,Min));
 
         public string Format()
             => text.embrace($"{Min}...{Max}") + text.bracket($"{Step}") ;

@@ -5,7 +5,7 @@
 namespace Z0
 {
     using K = BitShiftApiKey;
-    using I = IBitShiftKind;
+    using I = IBitShiftApiKey;
 
     partial class Kinds
     {
@@ -25,16 +25,16 @@ namespace Z0
         //~ Parametric
         //~ -------------------------------------------------------------------
 
-        public readonly struct Sll<T> : IBitShiftKind<Sll,T> {}
+        public readonly struct Sll<T> : IBitShiftApiKey<Sll,T> {}
 
-        public readonly struct Sllv<T> : IBitShiftKind<Sllv,T> {}
+        public readonly struct Sllv<T> : IBitShiftApiKey<Sllv,T> {}
 
-        public readonly struct Srl<T> : IBitShiftKind<Srl,T> {}
+        public readonly struct Srl<T> : IBitShiftApiKey<Srl,T> {}
 
-        public readonly struct Srlv<T> : IBitShiftKind<Srlv,T> {}
+        public readonly struct Srlv<T> : IBitShiftApiKey<Srlv,T> {}
 
-        public readonly struct Rotl<T> : IBitShiftKind<Rotl,T> {}
+        public readonly struct Rotl<T> : IBitShiftApiKey<Rotl,T> {}
 
-        public readonly struct Rotr<T> : IBitShiftKind<Rotr,T> {}
+        public readonly struct Rotr<T> : IBitShiftApiKey<Rotr,T> {}
     }
 }

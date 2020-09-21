@@ -11,7 +11,7 @@ namespace Z0
 
     using C = ApiOperatorClass;
 
-    public readonly struct CellularBinaryOpClass : ICellularOpClass<CellularBinaryOpClass,C>
+    public readonly struct CellularBinaryOpClass : ICellularOp<CellularBinaryOpClass,C>
     {
         public TypeWidth Width {get;}
 
@@ -36,7 +36,7 @@ namespace Z0
         }
     }
 
-    public readonly struct CellularBinaryOpClass<W> : ICellularOpClass<CellularBinaryOpClass<W>,W,C>
+    public readonly struct CellularBinaryOpClass<W> : ICellularOp<CellularBinaryOpClass<W>,W,C>
         where W : unmanaged, ITypeWidth
     {
         [MethodImpl(Inline)]

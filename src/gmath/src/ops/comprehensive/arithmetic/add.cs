@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-                
-    using static Konst; 
+
+    using static Konst;
     using static z;
 
     partial class gmath
-    {                
+    {
         /// <summary>
         /// Adds two primal values
         /// </summary>
@@ -30,17 +30,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static T add_u<T>(T a, T b)
-            where T : unmanaged                
+            where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<T>(math.add(convert<T,uint>(a), convert<T,uint>(b)));
+                return force<T>(math.add(force<T,uint>(a), force<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
-                return convert<T>(math.add(convert<T,uint>(a), convert<T,uint>(b)));
+                return force<T>(math.add(force<T,uint>(a), force<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(math.add(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.add(uint64(a),  uint64(b)));
-            else    
+            else
                 return add_i(a,b);
         }
 
@@ -49,9 +49,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return convert<T>(math.add(convert<T,int>(a), convert<T,int>(b)));
+                return force<T>(math.add(force<T,int>(a), force<T,int>(b)));
             else if(typeof(T) == typeof(short))
-                return convert<T>(math.add(convert<T,int>(a), convert<T,int>(b)));
+                return force<T>(math.add(force<T,int>(a), force<T,int>(b)));
             else if(typeof(T) == typeof(int))
                  return generic<T>(math.add(int32(a), int32(b)));
             else if(typeof(T) == typeof(long))

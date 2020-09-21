@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static NumericCast;    
+    using static NumericCast;
 
     public static class GammaSpec
     {
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static GammaSpec<T> From<T>(IDistributionSpec<T> src)
             where T : unmanaged
-                => (GammaSpec<T>)src;        
+                => (GammaSpec<T>)src;
 
         /// <summary>
         /// Defines a gamma distribution
@@ -66,7 +66,7 @@ namespace Z0
         /// <summary>
         /// Classifies the distribution spec
         /// </summary>
-        public DistributionKind DistKind 
+        public DistributionKind DistKind
             => DistributionKind.Gamma;
     }
 
@@ -76,9 +76,9 @@ namespace Z0
         public static T recip<T>(T value)
             where T : unmanaged
         {
-            var x = convert<T,double>(value);
+            var x = force<T,double>(value);
             var r = 1.0/x;
-            return convert<T>(r);
+            return force<T>(r);
         }
     }
 }

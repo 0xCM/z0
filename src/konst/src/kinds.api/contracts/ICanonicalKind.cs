@@ -7,19 +7,19 @@ namespace Z0
     using I = ICanonicalKind;
     using K = CanonicalApiKey;
 
-    public interface ICanonicalKind : IOpKind, IOpKind<K>
+    public interface ICanonicalKind : IApiKey, IOpKind<K>
     {
         K Kind {get;}
 
-        ApiKeyId IOpKind.KindId
+        ApiKeyId IApiKey.Id
             => (ApiKeyId)Kind;
     }
 
     public interface ICanonicalKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        ApiKeyId IOpKind.KindId
-            => default(F).KindId;
+        ApiKeyId IApiKey.Id
+            => default(F).Id;
     }
 
     public interface ICanonicalKind<F,T> : ICanonicalKind<F>

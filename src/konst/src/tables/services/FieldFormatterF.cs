@@ -52,6 +52,7 @@ namespace Z0
             return this;
         }
 
+        [MethodImpl(Inline)]
         public string Format()
             => Target.ToString();
 

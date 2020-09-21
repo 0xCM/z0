@@ -7,7 +7,7 @@ namespace Z0
     using Id = ApiKeyId;
 
     /// <summary>
-    /// Classifies bitwise shift operators
+    /// Identifies bitwise shift operators
     /// </summary>
     public enum BitShiftApiKey : ushort
     {
@@ -17,57 +17,57 @@ namespace Z0
         None = 0,
 
         /// <summary>
-        /// Classifies a logical left-shift
+        /// Identifies a logical left-shift operator
         /// </summary>
         Sll = Id.Sll,
 
         /// <summary>
-        /// Classifies a variable logical left-shift
+        /// Identifies a variable logical left-shift operator
         /// </summary>
         Sllv = Id.Sllv,
 
         /// <summary>
-        /// Classifies a logical right-shift
+        /// Identifies a logical right-shift operator
         /// </summary>
         Srl = Id.Srl,
 
         /// <summary>
-        /// Classifies a variable logical right-shift
+        /// Identifies a variable logical right-shift operator
         /// </summary>
         Srlv = Id.Srlv,
 
         /// <summary>
-        /// Classifies an arithmetic left-shift
+        /// Identifies an arithmetic left-shift operator
         /// </summary>
         Sal = Id.Sal,
 
         /// <summary>
-        /// Classifies an arithmetic right-shift
+        /// Identifies an arithmetic right-shift operator
         /// </summary>
         Sra = Id.Sra,
 
         /// <summary>
-        /// Classifies a left circular shift
+        /// Identifies a left circular shift operator
         /// </summary>
         Rotl = Id.Rotl,
 
         /// <summary>
-        /// Classifies a right circular shift
+        /// Identifies a right circular shift operator
         /// </summary>
         Rotr  = Id.Rotr,
 
         /// <summary>
-        /// Classifies the composite operation a^(a << offset)
+        /// Identifies a composite shift operator of the form a^(a << offset)
         /// </summary>
         XorSl = Id.XorSl,
 
         /// <summary>
-        /// Classifies the composite operation a^(a >> offset)
+        /// Identifies a composite shift operator of the form a^(a >> offset)
         /// </summary>
         XorSr = Id.XorSr,
 
         /// <summary>
-        /// Classifies the composite operation a ^ ((a << offset) ^ (a >> offset))
+        /// Identifies a composite shift operator of the form a ^ ((a << offset) ^ (a >> offset))
         /// </summary>
         Xors = Id.Xors,
 
@@ -82,6 +82,5 @@ namespace Z0
         Sllx = Id.Sllx,
 
         Srlx = Id.Srlx,
-
     }
 }

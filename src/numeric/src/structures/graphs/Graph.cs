@@ -107,7 +107,7 @@ namespace Z0
         {
             Span<Vertex<V>> dst = new Vertex<V>[count];
             for(var i=0; i<count; i++)
-                dst[i] = new Vertex<V>(convert<V>(i));
+                dst[i] = new Vertex<V>(force<V>(i));
             return dst;
         }
 
@@ -121,11 +121,11 @@ namespace Z0
             where V : unmanaged
             where T : unmanaged
         {
-            var start = convert<V,ulong>(s0);
+            var start = force<V,ulong>(s0);
             Span<Vertex<V,T>> dst = new Vertex<V,T>[data.Length];
 
             for(var i=0; i<data.Length; i++, start++)
-                dst[i] = new Vertex<V,T>(convert<V>(start),data[i]);
+                dst[i] = new Vertex<V,T>(force<V>(start),data[i]);
             return dst;
         }
 

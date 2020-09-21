@@ -7,16 +7,16 @@ namespace Z0
     using static Konst;
 
     using K = MemoryApiKey;
-    using I = IMemoryOpKind;
+    using I = IMemoryApiKey;
 
     /// <summary>
     /// Characterizes a system operation classifier
     /// </summary>
-    public interface IMemoryOpKind : IOpKind, IOpKind<K>
+    public interface IMemoryApiKey : IApiKey, IOpKind<K>
     {
         K Kind {get;}
 
-        ApiKeyId IOpKind.KindId
+        ApiKeyId IApiKey.Id
             => (ApiKeyId)Kind;
     }
 
@@ -27,8 +27,8 @@ namespace Z0
     public interface IMemoryOpKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        ApiKeyId IOpKind.KindId
-            => default(F).KindId;
+        ApiKeyId IApiKey.Id
+            => default(F).Id;
     }
 
     /// <summary>

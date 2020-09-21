@@ -5,7 +5,7 @@
 namespace Z0
 {
     using K = BitLogicApiKey;
-    using I = IBitLogicKind;
+    using I = IBitLogicApiKey;
 
     partial class Kinds
     {

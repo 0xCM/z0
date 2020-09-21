@@ -4,8 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = BooleanPredicateApiKey;
-    using I = IBooleanPredicateKind;
+    using K = PredicateApiKey;
+    using I = IPredicateApiKey;
 
     partial class Kinds
     {

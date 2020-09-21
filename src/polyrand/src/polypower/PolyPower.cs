@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
+
     public static class PolyPower
     {
         /// <summary>
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T Power<T>(this IPolyrand random, T t = default)
             where T : unmanaged
-                => convert<ulong,T>(Z0.Pow2.pow(random.Log2(t)));
+                => force<ulong,T>(Z0.Pow2.pow(random.Log2(t)));
 
         /// <summary>
         /// Produces a random power of 2 with specified min/max exponent values
@@ -35,12 +35,12 @@ namespace Z0
             where T : unmanaged
         {
             var exp = random.Next((byte)minexp, (byte)(maxexp + 1));
-            return convert<ulong,T>(Z0.Pow2.pow(exp));
+            return force<ulong,T>(Z0.Pow2.pow(exp));
         }
 
         /// <summary>
-        /// Produces a power-of-2 exponent n (i.e. log base 2) such that 2^n < maxvalue[T]; 
-        /// consequently, the exponentiation of the retrieved value will be confiled to 
+        /// Produces a power-of-2 exponent n (i.e. log base 2) such that 2^n < maxvalue[T];
+        /// consequently, the exponentiation of the retrieved value will be confiled to
         /// the domain of the type (ignoring sign)
         /// </summary>
         /// <param name="random">The random source</param>

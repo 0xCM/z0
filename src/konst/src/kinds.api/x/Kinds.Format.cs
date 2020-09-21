@@ -9,52 +9,59 @@ namespace Z0
 
     using static Konst;
 
-
-    partial class XTend
+    partial class KXTend
     {
+        [MethodImpl(Inline), Op]
+        public static string Format(this SpanKind kind)
+            => kind != 0 ? (kind == SpanKind.Mutable ? IDI.Span : IDI.USpan) : EmptyString;
+
         [MethodImpl(Inline)]
         public static string Format<K>(this K kind)
-            where K : IOpKind
+            where K : IApiKey
                 => kind.Format();
 
         /// <summary>
         /// Determines whether the kind has a nonzero value
         /// </summary>
         /// <param name="src">The source kind</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool IsSome(this CellWidth src)
             => src != 0;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string Format(this ComparisonApiKey kind)
             => kind.ToString().ToLower();
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static string Format<T>(this ComparisonApiKey kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
+        [MethodImpl(Inline), Op]
         public static string Format(this ApiKeyId id)
             => id.ToString().ToLower();
 
+        [MethodImpl(Inline), Op]
         public static string Format(this ApiKeyId id, bool vectorized)
             => vectorized ? $"v{id.Format()}" : id.Format();
 
+        [MethodImpl(Inline), Op]
         public static string Format(this ApiKeyId? id)
             => id.HasValue ? id.Value.Format() : "unkinded";
 
-        [MethodImpl(Inline)]
-        public static string Format(this ArithmeticApiKey kind)
-            => kind switch {
+        [MethodImpl(Inline), Op]
+        public static string Format(this ArithmeticApiKey key)
+            => key switch {
                 ArithmeticApiKey.Inc => "++",
                 ArithmeticApiKey.Dec => "--",
                 ArithmeticApiKey.Negate => "-",
-                _ => kind.ToString()
+                _ => key.ToString()
             };
 
-        [MethodImpl(Inline)]
-        public static string Format<T>(this ArithmeticApiKey kind, T arg1, T arg2)
-            => $"{kind.Format()}({arg1}, {arg2})";
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static string Format<T>(this ArithmeticApiKey key, T a, T b)
+            => $"{key.Format()}({a}, {b})";
 
+        [Op]
         public static string Format(this BitShiftApiKey kind)
             => kind switch {
                 BitShiftApiKey.Sll => "<<",
@@ -64,16 +71,15 @@ namespace Z0
                 _ => kind.ToString()
             };
 
-        public static string Format<S,T>(this BitShiftApiKey kind, S arg1, T arg2)
-            => $"{arg1} {kind.Format()} {arg2}";
+        public static string Format<S,T>(this BitShiftApiKey key, S a, T b)
+            => $"{a} {key.Format()} {b}";
 
+        [MethodImpl(Inline), Op]
+        public static string Format(this BitLogicApiKey key)
+            => key.ToString().ToLower();
 
-        [MethodImpl(Inline)]
-        public static string Format(this BitLogicApiKey kind)
-            => kind.ToString().ToLower();
-
-        [MethodImpl(Inline)]
-        public static string Format<T>(this BitLogicApiKey kind, T arg1, T arg2)
-            => $"{kind.Format()}({arg1}, {arg2})";
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static string Format<T>(this BitLogicApiKey key, T a, T b)
+            => text.format("{0}({1}, {2})", key.Format(), a, b);
     }
 }

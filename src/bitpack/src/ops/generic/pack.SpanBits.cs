@@ -38,13 +38,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return convert<T>(pack(src, n8));
+                return force<T>(pack(src, n8));
             else if(typeof(T) == typeof(short))
-                return convert<T>(pack(src, n16));
+                return force<T>(pack(src, n16));
             else if(typeof(T) == typeof(int))
-                return convert<T>(pack(src, n32));
+                return force<T>(pack(src, n32));
             else if(typeof(T) == typeof(long))
-                return convert<T>(pack(src, n64));
+                return force<T>(pack(src, n64));
             else
                 throw no<T>();
         }

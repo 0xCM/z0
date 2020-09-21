@@ -321,7 +321,7 @@ namespace Z0
             var tc = 0;
             for(var i=0; i< perm.Length; i++)
             {
-                var ti = convert<T>(i);
+                var ti = force<T>(i);
                 var identity = gmath.eq(ti ,perm[i]);
                 if(!identity)
                 {
@@ -426,13 +426,13 @@ namespace Z0
             var perm = Perm.Init(dst.Data);
             for(var i=0; i< perm.Length; i++)
             {
-                var identity = gmath.eq(convert<T>(i), perm[i]);
+                var identity = gmath.eq(force<T>(i), perm[i]);
                 if(!identity)
                 {
                     var j = perm[i];
                     var k = perm[j];
 
-                    Claim.Require(gmath.eq(convert<T>(i),k));
+                    Claim.Require(gmath.eq(force<T>(i),k));
                 }
             }
         }
@@ -454,13 +454,13 @@ namespace Z0
             var perm = Perm.Init(dst.Data);
             for(var i=0; i< perm.Length; i++)
             {
-                var identity = gmath.eq(convert<T>(i), perm[i]);
+                var identity = gmath.eq(force<T>(i), perm[i]);
                 if(!identity)
                 {
                     var j = perm[i];
                     var k = perm[j];
 
-                    Claim.Require(gmath.eq(convert<T>(i),k));
+                    Claim.Require(gmath.eq(force<T>(i),k));
                 }
             }
         }

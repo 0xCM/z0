@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static NumericCast;
-    
+
     /// <summary>
     /// Defines a graph in which data may be associated with each node
     /// </summary>
@@ -26,7 +26,7 @@ namespace Z0
         internal Graph(Vertex<V,T>[] vertices, Edge<V>[] edges)
         {
             this.vertices = vertices;
-            this.edges = edges;            
+            this.edges = edges;
         }
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="index">The vertex index</param>
         [MethodImpl(Inline)]
         public ref Vertex<V,T> Vertex(V index)
-            => ref vertices[convert<V,ulong>(index)];
+            => ref vertices[force<V,ulong>(index)];
 
         /// <summary>
         /// Looks up an edge based on its index
@@ -67,5 +67,5 @@ namespace Z0
             get => ref Vertex(index);
         }
     }
- 
+
 }

@@ -58,13 +58,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Msb8x8x1);
+                return force<byte,T>(Msb8x8x1);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Msb16x16x1);
+                return force<ushort,T>(Msb16x16x1);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Msb32x32x1);
+                return force<uint,T>(Msb32x32x1);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Msb64x64x1);
+                return force<ulong,T>(Msb64x64x1);
             else
                 throw no<T>();
         }
@@ -81,13 +81,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Msb8x2x1);
+                return force<byte,T>(Msb8x2x1);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Msb16x2x1);
+                return force<ushort,T>(Msb16x2x1);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Msb32x2x1);
+                return force<uint,T>(Msb32x2x1);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Msb64x2x1);
+                return force<ulong,T>(Msb64x2x1);
             else
                 throw no<T>();
         }
@@ -104,13 +104,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Msb8x4x1);
+                return force<byte,T>(Msb8x4x1);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Msb16x4x1);
+                return force<ushort,T>(Msb16x4x1);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Msb32x4x1);
+                return force<uint,T>(Msb32x4x1);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Msb64x4x1);
+                return force<ulong,T>(Msb64x4x1);
             else
                 throw no<T>();
         }
@@ -127,13 +127,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Msb8x8x1);
+                return force<byte,T>(Msb8x8x1);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Msb16x8x1);
+                return force<ushort,T>(Msb16x8x1);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Msb32x8x1);
+                return force<uint,T>(Msb32x8x1);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Msb64x8x1);
+                return force<ulong,T>(Msb64x8x1);
             else
                 throw no<T>();
         }
@@ -152,11 +152,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return default;
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Msb16x16x1);
+                return force<ushort,T>(Msb16x16x1);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Msb32x16x1);
+                return force<uint,T>(Msb32x16x1);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Msb64x16x1);
+                return force<ulong,T>(Msb64x16x1);
             else
                 throw no<T>();
         }
@@ -173,13 +173,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Msb8x8x2);
+                return force<byte,T>(Msb8x8x2);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Msb16x8x2);
+                return force<ushort,T>(Msb16x8x2);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Msb32x8x2);
+                return force<uint,T>(Msb32x8x2);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Msb64x8x2);
+                return force<ulong,T>(Msb64x8x2);
             else
                 throw no<T>();
         }
@@ -196,13 +196,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Msb8x8x3);
+                return force<byte,T>(Msb8x8x3);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Msb16x8x3);
+                return force<ushort,T>(Msb16x8x3);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Msb32x8x3);
+                return force<uint,T>(Msb32x8x3);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Msb64x8x3);
+                return force<ulong,T>(Msb64x8x3);
             else
                 throw no<T>();
         }
@@ -219,13 +219,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Msb8x8x4);
+                return force<byte,T>(Msb8x8x4);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Msb16x8x4);
+                return force<ushort,T>(Msb16x8x4);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Msb32x8x4);
+                return force<uint,T>(Msb32x8x4);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Msb64x8x4);
+                return force<ulong,T>(Msb64x8x4);
             else
                 throw no<T>();
         }
@@ -242,13 +242,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Msb8x8x5);
+                return force<byte,T>(Msb8x8x5);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Msb16x8x5);
+                return force<ushort,T>(Msb16x8x5);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Msb32x8x5);
+                return force<uint,T>(Msb32x8x5);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Msb64x8x5);
+                return force<ulong,T>(Msb64x8x5);
             else
                 throw no<T>();
         }
@@ -265,13 +265,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Msb8x8x6);
+                return force<byte,T>(Msb8x8x6);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Msb16x8x6);
+                return force<ushort,T>(Msb16x8x6);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Msb32x8x6);
+                return force<uint,T>(Msb32x8x6);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Msb64x8x6);
+                return force<ulong,T>(Msb64x8x6);
             else
                 throw no<T>();
         }
@@ -289,13 +289,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Msb8x8x7);
+                return force<byte,T>(Msb8x8x7);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Msb16x8x7);
+                return force<ushort,T>(Msb16x8x7);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Msb32x8x7);
+                return force<uint,T>(Msb32x8x7);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Msb64x8x7);
+                return force<ulong,T>(Msb64x8x7);
             else
                 throw no<T>();
         }

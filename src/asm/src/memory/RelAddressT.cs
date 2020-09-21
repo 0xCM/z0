@@ -67,11 +67,11 @@ namespace Z0
             switch(Size)
             {
                 case NumericWidth.W8:
-                    return convert<T,byte>(Offset).FormatAsmHex();
+                    return force<T,byte>(Offset).FormatAsmHex();
                 case NumericWidth.W16:
-                    return convert<T,ushort>(Offset).FormatAsmHex();
+                    return force<T,ushort>(Offset).FormatAsmHex();
                 default:
-                    return convert<T,uint>(Offset).FormatAsmHex();
+                    return force<T,uint>(Offset).FormatAsmHex();
             }
         }
 

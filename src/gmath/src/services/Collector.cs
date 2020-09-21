@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -17,7 +17,7 @@ namespace Z0
     public class Collector
     {
         int count;
-        
+
         double min;
 
         double max;
@@ -36,7 +36,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Collector Create<T>(T seed = default)
             where T : unmanaged
-                => new Collector(z.convert<T,double>(seed));
+                => new Collector(z.force<T,double>(seed));
 
         [MethodImpl(Inline)]
         public static Collector operator +(Collector a, byte value)
@@ -349,7 +349,7 @@ namespace Z0
         /// <summary>
         /// The number of accumulated observations
         /// </summary>
-        public int Count 
+        public int Count
         {
             [MethodImpl(Inline)]
             get => count;
@@ -363,12 +363,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => m1;
         }
-                    
+
         /// <summary>
         /// The accumulated variance
         /// </summary>
-        public double Variance   
-        {     
+        public double Variance
+        {
             [MethodImpl(Inline)]
             get => count > 1 ? s0/(count - 1) : 0;
         }
@@ -403,17 +403,17 @@ namespace Z0
         public void Collect<T>(T src)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 Collect_u(src);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 Collect_i(src);
-            else 
+            else
                 Collect_f(src);
         }
 
@@ -437,9 +437,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public void CollectItems<T>(params T[] src)
             where T : unmanaged
-        {   
-            var count = src.Length;            
-            if(count == 0)         
+        {
+            var count = src.Length;
+            if(count == 0)
                 return;
 
             ref readonly var data = ref Arrays.head(src);
@@ -482,7 +482,7 @@ namespace Z0
         Collector(double seed)
         {
             s1 = 0;
-            s0 = 0;            
+            s0 = 0;
             m1 = seed;
             m0 = seed;
             count = 0;
@@ -498,15 +498,15 @@ namespace Z0
 
             var delta = value - m0;
             m1 = m0 + delta/count;
-            s1 = s0 + delta*(value - m1);            
+            s1 = s0 + delta*(value - m1);
             m0 = m1;
-            s0 = s1;                
+            s0 = s1;
 
             if(value > max)
                 max = value;
-            
+
             if(value < min)
-                min = value;            
+                min = value;
         }
 
         public string Format(int? scale = null)
@@ -516,7 +516,7 @@ namespace Z0
 
         public override string ToString()
             => Format();
- 
+
         [MethodImpl(Inline)]
         void Collect_i<T>(T src)
             where T : unmanaged
@@ -527,7 +527,7 @@ namespace Z0
                 Merge(z.int16(src));
             else if(typeof(T) == typeof(int))
                 Merge(z.int32(src));
-            else 
+            else
                 Merge(z.int64(src));
         }
 
@@ -541,7 +541,7 @@ namespace Z0
                 Merge(z.uint16(src));
             else if(typeof(T) == typeof(uint))
                 Merge(z.uint32(src));
-            else 
+            else
                 Merge(z.uint64(src));
         }
 

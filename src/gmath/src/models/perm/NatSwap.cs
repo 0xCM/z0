@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;    
-    
+    using static z;
+
     /// <summary>
     /// Defines a transposition in the context of a permutation of natural length
     /// </summary>
@@ -20,7 +20,7 @@ namespace Z0
         /// The first index
         /// </summary>
         Mod<N> i;
-        
+
         /// <summary>
         /// The second index
         /// </summary>
@@ -30,7 +30,7 @@ namespace Z0
         /// The empty element
         /// </summary>
         public static NatSwap<N> Empty => (-1,-1);
-        
+
         /// <summary>
         /// The monodial zero
         /// </summary>
@@ -106,7 +106,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool operator !=(NatSwap<N> lhs, NatSwap<N> rhs)
-            => !(lhs == rhs);                    
+            => !(lhs == rhs);
 
         [MethodImpl(Inline)]
         public NatSwap((int i, int j) src)
@@ -127,10 +127,10 @@ namespace Z0
         /// </summary>
         public string Format()
             => $"({i} {j})";
-        
+
         public bool IsEmpy
             => i == Empty.i && j == Empty.j;
-            
+
         /// <summary>
         /// Determines whether this transposition is identical to another.
         /// Note that the order of indices is immaterial
@@ -161,7 +161,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public (T i, T j) ToTuple<T>()
             where T : unmanaged
-                => (z.convert<T>(i), z.convert<T>(j));
+                => (z.force<T>(i), z.force<T>(j));
 
         /// <summary>
         /// Creates a copy
@@ -172,7 +172,7 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
-             
+
         public override bool Equals(object o)
             => throw new NotSupportedException();
     }

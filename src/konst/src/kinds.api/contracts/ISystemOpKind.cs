@@ -10,11 +10,11 @@ namespace Z0
     /// <summary>
     /// Characterizes a system operation classifier
     /// </summary>
-    public interface ISystemOpKind : IOpKind, IOpKind<K>
+    public interface ISystemOpKind : IApiKey, IOpKind<K>
     {
         K Kind {get;}
 
-        ApiKeyId IOpKind.KindId
+        ApiKeyId IApiKey.Id
             => (ApiKeyId)Kind;
     }
 
@@ -25,8 +25,8 @@ namespace Z0
     public interface ISystemOpKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        ApiKeyId IOpKind.KindId
-            => default(F).KindId;
+        ApiKeyId IApiKey.Id
+            => default(F).Id;
     }
 
     /// <summary>

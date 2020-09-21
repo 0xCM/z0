@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static byte pack<T>(in SpanBlock64<T> src, N8 mod, int block = 0)
             where T : unmanaged
-                => pack8(convert<T,ulong>(src.BlockRef(block)));
+                => pack8(force<T,ulong>(src.BlockRef(block)));
 
         /// <summary>
         /// Pack 16 1-bit values taken from the least significant bit of each source byte

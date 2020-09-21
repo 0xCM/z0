@@ -5,7 +5,7 @@
 namespace Z0
 {
     using K = BitFunctionApiKey;
-    using I = IBitFunctionKind;
+    using I = IBitFunctionApiKey;
 
     partial class Kinds
     {

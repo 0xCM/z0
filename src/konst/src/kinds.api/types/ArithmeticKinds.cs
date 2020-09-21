@@ -5,7 +5,7 @@
 namespace Z0
 {
     using K = ArithmeticApiKey;
-    using I = IArithmeticKind;
+    using I = IArithmeticApiKey;
 
     partial class Kinds
     {

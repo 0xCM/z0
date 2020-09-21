@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-        
+
     public interface IBitLogic<T>
         where T : struct
     {
@@ -40,12 +40,12 @@ namespace Z0
         T identity(T a);
 
         T eval<K>(T a, K kind = default)
-            where K : unmanaged, IBitLogicKind;      
+            where K : unmanaged, IBitLogicApiKey;
 
         T eval<K>(T a, T b, K kind = default)
-            where K : unmanaged, IBitLogicKind;      
+            where K : unmanaged, IBitLogicApiKey;
 
         T eval<K>(T a, T b, T c, K kind = default)
-            where K : unmanaged, IBitLogicKind;      
+            where K : unmanaged, IBitLogicApiKey;
     }
 }

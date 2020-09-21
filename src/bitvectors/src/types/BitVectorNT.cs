@@ -38,7 +38,7 @@ namespace Z0
         public static T MaxValue
         {
             [MethodImpl(Inline)]
-            get => convert<ulong,T>(NatCalc.pow2m1<N>());
+            get => force<ulong,T>(NatCalc.pow2m1<N>());
         }
 
         public static T Zero => default;
@@ -335,7 +335,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitVector<N,U> As<U>()
             where U : unmanaged
-                => convert<T,U>(Data);
+                => force<T,U>(Data);
 
         public readonly override bool Equals(object obj)
             => obj is BitVector<N,T> x && Equals(x);

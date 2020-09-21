@@ -27,7 +27,7 @@ namespace Z0
             where S : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(S a) => Vectors.vbroadcast(n128, convert<S,T>(a));
+            public Vector128<T> Invoke(S a) => Vectors.vbroadcast(n128, force<S,T>(a));
         }
 
         [Closures(AllNumeric)]
@@ -44,7 +44,7 @@ namespace Z0
             where S : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(S a) => Vectors.vbroadcast(n256, convert<S,T>(a));
+            public Vector256<T> Invoke(S a) => Vectors.vbroadcast(n256, force<S,T>(a));
         }
     }
 }

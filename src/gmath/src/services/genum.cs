@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst; 
+
+    using static Konst;
     using static z;
     using static Enums;
 
@@ -17,25 +17,25 @@ namespace Z0
         public static T and<E,T>(E a, E b, T t = default)
             where E : unmanaged, Enum
             where T : unmanaged
-                => gmath.and(scalar<E,T>(a), scalar<E,T>(b));       
+                => gmath.and(scalar<E,T>(a), scalar<E,T>(b));
 
         [MethodImpl(Inline)]
         public static T or<E,T>(E a, E b, T t = default)
             where E : unmanaged, Enum
             where T : unmanaged
-                => gmath.or(scalar<E,T>(a), scalar<E,T>(b));       
+                => gmath.or(scalar<E,T>(a), scalar<E,T>(b));
 
         [MethodImpl(Inline)]
         public static T xor<E,T>(E a, E b, T t = default)
             where E : unmanaged, Enum
             where T : unmanaged
-                => gmath.xor(scalar<E,T>(a), scalar<E,T>(b));       
+                => gmath.xor(scalar<E,T>(a), scalar<E,T>(b));
 
         [MethodImpl(Inline)]
         public static T sll<E,T>(E src, byte count, T t = default)
             where E : unmanaged, Enum
             where T : unmanaged
-                => gmath.sll(scalar<E,T>(src),count);       
+                => gmath.sll(scalar<E,T>(src),count);
 
         /// <summary>
         /// Converts a source enume value src:E to a parametrically-identified numeric type S,
@@ -54,7 +54,7 @@ namespace Z0
             where E : unmanaged, Enum
             where S : unmanaged
             where T : unmanaged
-                => convert<S,T>(gmath.sll(scalar<E,S>(src), count));     
+                => force<S,T>(gmath.sll(scalar<E,S>(src), count));
 
         /// <summary>
         /// Converts a source enume value src:E to a parametrically-identified numeric type S,
@@ -75,14 +75,14 @@ namespace Z0
             where C : unmanaged, Enum
             where S : unmanaged
             where T : unmanaged
-                => convert<S,T>(gmath.sll(scalar<E,S>(src), scalar<C,byte>(count)));     
+                => force<S,T>(gmath.sll(scalar<E,S>(src), scalar<C,byte>(count)));
 
 
         [MethodImpl(Inline)]
         public static T srl<E,T>(E src, byte count, T t = default)
             where E : unmanaged, Enum
             where T : unmanaged
-                => gmath.srl(scalar<E,T>(src),count);       
+                => gmath.srl(scalar<E,T>(src),count);
 
     }
 }

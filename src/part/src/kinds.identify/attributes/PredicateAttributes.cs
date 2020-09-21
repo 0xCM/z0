@@ -5,7 +5,7 @@
 namespace Z0
 {
     using A = OpKindAttribute;
-    using K = BooleanPredicateApiKey;
+    using K = PredicateApiKey;
 
     public sealed class EvenAttribute : A { public EvenAttribute(object group = null) : base(K.Even, group) {} }
 

@@ -31,7 +31,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BinaryOp<T> create<T,K>(K kind, in BinaryCode code, bool generic)
-            where K : unmanaged, IOpKind
+            where K : unmanaged, IApiKey
             where T : unmanaged
                 => emit<T>(identify<T,K>(kind, generic), Address.liberate(code).Ref);
 
@@ -40,11 +40,11 @@ namespace Z0
             => emit<T>(id, Address.liberate(code).Ref);
 
         static OpIdentity identify<T,K>(K k, bool generic)
-            where K : unmanaged, IOpKind
+            where K : unmanaged, IApiKey
             where T : unmanaged
         {
             var operand = Identities.Services.Diviner.Identify(typeof(T));
-            return OpIdentityBuilder.build(k.KindId, NumericKinds.from<T>(),generic);
+            return OpIdentityBuilder.build(k.Id, NumericKinds.from<T>(),generic);
         }
 
         static OpIdentity identify<T>(string name)

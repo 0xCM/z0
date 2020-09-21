@@ -499,9 +499,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(double))
-                return (convert<T>(long.MinValue/2), convert<T>(long.MaxValue/2));
+                return (force<T>(long.MinValue/2), force<T>(long.MaxValue/2));
             else if(typeof(T) == typeof(float))
-                return (convert<T>(int.MinValue/2), convert<T>(int.MaxValue/2));
+                return (force<T>(int.MinValue/2), force<T>(int.MaxValue/2));
             else
             {
                 var min = NumericKinds.signed<T>() ? gmath.negate(gmath.sra(As.maxval<T>(), 1)) : As.minval<T>();

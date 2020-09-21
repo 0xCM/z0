@@ -53,12 +53,12 @@ namespace Z0
                         return MatchBinaryOps(buffers, n256, paired);
 
                     default:
-                        return Evaluations.result(seq, (paired.Left.Uri, paired.Right.Uri), clock, AppMsg.error($"Handler not found"));
+                        return Eval.result(seq, (paired.Left.Uri, paired.Right.Uri), clock, AppMsg.error($"Handler not found"));
                 }
             }
             catch(Exception error)
             {
-                return Evaluations.result(seq, (paired.Left.Uri, paired.Right.Uri), clock, error);
+                return Eval.result(seq, (paired.Left.Uri, paired.Right.Uri), clock, error);
             }
         }
 
@@ -235,11 +235,11 @@ namespace Z0
             try
             {
                 action();
-                return Evaluations.result(seq, f, clock, true);
+                return Eval.result(seq, f, clock, true);
             }
             catch(Exception e)
             {
-                return Evaluations.result(seq, f, clock, e);
+                return Eval.result(seq, f, clock, e);
             }
         }
 
@@ -250,11 +250,11 @@ namespace Z0
             try
             {
                 action();
-                return Evaluations.result(seq, (f,g), clock, true );
+                return Eval.result(seq, (f,g), clock, true );
             }
             catch(Exception e)
             {
-                return Evaluations.result(seq, (f,g), clock, e);
+                return Eval.result(seq, (f,g), clock, e);
             }
         }
 

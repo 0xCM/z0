@@ -25,13 +25,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Even8);
+                return force<byte,T>(Even8);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Even16);
+                return force<ushort,T>(Even16);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Even32);
+                return force<uint,T>(Even32);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Even64);
+                return force<ulong,T>(Even64);
             else
                 throw no<T>();
         }
@@ -48,13 +48,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Even8x2);
+                return force<byte,T>(Even8x2);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Even16x2);
+                return force<ushort,T>(Even16x2);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Even32x2);
+                return force<uint,T>(Even32x2);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Even64x2);
+                return force<ulong,T>(Even64x2);
             else
                 throw no<T>();
         }
@@ -71,13 +71,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Odd8);
+                return force<byte,T>(Odd8);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Odd16);
+                return force<ushort,T>(Odd16);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Odd32);
+                return force<uint,T>(Odd32);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Odd64);
+                return force<ulong,T>(Odd64);
             else
                 throw no<T>();
         }
@@ -95,13 +95,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Odd8x2);
+                return force<byte,T>(Odd8x2);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Odd16x2);
+                return force<ushort,T>(Odd16x2);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Odd32x2);
+                return force<uint,T>(Odd32x2);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Odd64x2);
+                return force<ulong,T>(Odd64x2);
             else
                 throw no<T>();
         }

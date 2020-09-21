@@ -25,7 +25,7 @@ namespace Z0
         {
             var dst = alloc<T>(w256,(ulong)src.CellCount);
             for(var i=0; i< src.CellCount; i++)
-                dst[i] = z.convert<S,T>(src[i]);
+                dst[i] = z.force<S,T>(src[i]);
             return dst;
         }
     }

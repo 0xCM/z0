@@ -77,7 +77,7 @@ namespace Z0
             {
                 if(SP.parse(src, out byte x))
                 {
-                    dst = convert<T>(x);
+                    dst = force<T>(x);
                     return true;
                 }
                 else
@@ -87,7 +87,7 @@ namespace Z0
             {
                 if(SP.parse(src, out ushort x))
                 {
-                    dst = convert<T>(x);
+                    dst = force<T>(x);
                     return true;
                 }
                 else
@@ -98,7 +98,7 @@ namespace Z0
             {
                 if(SP.parse(src, out uint x))
                 {
-                    dst = convert<T>(x);
+                    dst = force<T>(x);
                     return true;
                 }
                 else
@@ -109,7 +109,7 @@ namespace Z0
             {
                 if(SP.parse(src, out ulong x))
                 {
-                    dst = convert<T>(x);
+                    dst = force<T>(x);
                     return true;
                 }
                 else
@@ -129,7 +129,7 @@ namespace Z0
             {
                 if(SP.parse(src, out sbyte x))
                 {
-                    dst = convert<T>(x);
+                    dst = force<T>(x);
                     return true;
                 }
                 else
@@ -139,7 +139,7 @@ namespace Z0
             {
                 if(SP.parse(src, out short x))
                 {
-                    dst = convert<T>(x);
+                    dst = force<T>(x);
                     return true;
                 }
                 else
@@ -150,7 +150,7 @@ namespace Z0
             {
                 if(SP.parse(src, out int x))
                 {
-                    dst = convert<T>(x);
+                    dst = force<T>(x);
                     return true;
                 }
                 else
@@ -161,7 +161,7 @@ namespace Z0
             {
                 if(SP.parse(src, out long x))
                 {
-                    dst = convert<T>(x);
+                    dst = force<T>(x);
                     return true;
                 }
                 else
@@ -182,7 +182,7 @@ namespace Z0
             {
                 if(SP.parse(src, out float x))
                 {
-                    dst = convert<T>(x);
+                    dst = force<T>(x);
                     return true;
                 }
                 else
@@ -192,7 +192,7 @@ namespace Z0
             {
                 if(SP.parse(src, out double x))
                 {
-                    dst = convert<T>(x);
+                    dst = force<T>(x);
                     return true;
                 }
                 else

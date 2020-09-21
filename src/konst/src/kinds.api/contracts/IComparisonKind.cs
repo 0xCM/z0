@@ -5,16 +5,16 @@
 namespace Z0
 {
     using K = ComparisonApiKey;
-    using I = IComparisonKind;
+    using I = IComparisonApiKey;
 
     /// <summary>
     /// Characterizes a bitshift operation classifier
     /// </summary>
-    public interface IComparisonKind : IOpKind, IOpKind<K>
+    public interface IComparisonApiKey : IApiKey, IOpKind<K>
     {
         K Kind {get;}
 
-        ApiKeyId IOpKind.KindId
+        ApiKeyId IApiKey.Id
             => (ApiKeyId)Kind;
     }
 
@@ -25,8 +25,8 @@ namespace Z0
     public interface IComparisonKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        ApiKeyId IOpKind.KindId
-            => default(F).KindId;
+        ApiKeyId IApiKey.Id
+            => default(F).Id;
     }
 
     /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
     /// <typeparam name="T">The numeric type</typeparam>
     public interface IComparisonKind<F,W,T> : IComparisonKind<F,T>
         where W : unmanaged, ITypeWidth
-        where F : unmanaged, IComparisonKind
+        where F : unmanaged, IComparisonApiKey
     {
         /// <summary>
         /// The parametrically-identified operand width

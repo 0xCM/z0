@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static NumericCast;    
+    using static NumericCast;
 
     /// <summary>
     /// Defines a permanent/immutable seed store to support pseudorandom reproducibility
@@ -21,10 +21,10 @@ namespace Z0
         /// Produces a non-deterministic seed
         /// </summary>
         /// <typeparam name="T">The seed type</typeparam>
-        public static T Entropic<T>()            
+        public static T Entropic<T>()
             where T : unmanaged
                 => Entropy.Value<T>();
-        
+
         /// <summary>
         /// Produces a seed from embedded application resources that, for a given index, remanins fixed
         /// </summary>
@@ -32,16 +32,16 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T Configured<T>(T index)
             where T : unmanaged
-                => TakeSingle<T>(convert<T,int>(index));
+                => TakeSingle<T>(force<T,int>(index));
 
         public static IEnumerable<ulong> ToU64Stream(this IEnumerable<Guid> guids)
         {
             foreach(var guid in guids)
             {
-                var bytes = guid.ToByteArray();      
+                var bytes = guid.ToByteArray();
                 yield return BitConverter.ToUInt64(bytes,0);
                 yield return BitConverter.ToUInt64(bytes,4);
-            }            
+            }
         }
 
         public static ulong[] ToU64Array(this IEnumerable<Guid> guids)
@@ -56,7 +56,7 @@ namespace Z0
         //     => src.Select(d => d == BinaryDigit.Zed ? bit.Off : bit.On).ToSpan();
 
         /// <summary>
-        /// The total number of bytes in the embedded data 
+        /// The total number of bytes in the embedded data
         /// </summary>
         public static ByteSize SourceLength
             => Bytes.Length;
@@ -88,9 +88,9 @@ namespace Z0
             where T : unmanaged
         {
             VerifyIndex<T>(offset* Unsafe.SizeOf<T>() + length* Unsafe.SizeOf<T>());
-            return Spans.cast<T>(Bytes, offset,length);            
+            return Spans.cast<T>(Bytes, offset,length);
         }
-                     
+
         /// <summary>
         /// Checks that a requested offset for a given data type is within bounds
         /// </summary>
@@ -4210,7 +4210,7 @@ namespace Z0
             0x0e, 0x65, 0x58, 0x14, 0x1f, 0xc2, 0xda, 0x0b,
             0x4b, 0x68, 0xd7, 0xb4, 0xef, 0xb2, 0x18, 0x6a,
             0x56, 0x6c, 0x49, 0x1f, 0xc5, 0x6a, 0x4e, 0x96,
-            0x3c, 0x68, 0x5c, 0x48, 0xeb, 0xdb, 0x25, 0xf4,            
+            0x3c, 0x68, 0x5c, 0x48, 0xeb, 0xdb, 0x25, 0xf4,
         };
     }
 }

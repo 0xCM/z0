@@ -11,15 +11,9 @@ namespace Z0
 
     using K = ApiOperatorClass;
 
-    partial class XTend
-    {
-        public static BinaryOpClass<T> As<T>(this BinaryOpClass src)
-             where T : unmanaged => default;
-
-        public static BinaryOpClass<W> Fixed<W>(this BinaryOpClass src)
-            where W : unmanaged, ITypeWidth => default;
-    }
-
+    /// <summary>
+    /// Defines a type-level lift for the <see cref='K.BinaryOp'/> classifier
+    /// </summary>
     public readonly struct BinaryOpClass : IOperatorClass<BinaryOpClass,K>
     {
         public static implicit operator OperatorClass(BinaryOpClass src)
@@ -32,6 +26,9 @@ namespace Z0
             => new OperatorClass(Kind);
     }
 
+    /// <summary>
+    /// Defines an operand-parametric type-level lift for the <see cref='K.BinaryOp'/> classifier
+    /// </summary>
     public readonly struct BinaryOpClass<T> : IOperatorClass<BinaryOpClass<T>,K,T>
     {
         public K Kind

@@ -55,13 +55,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Central8x8x2);
+                return force<byte,T>(Central8x8x2);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Central16x8x2);
+                return force<ushort,T>(Central16x8x2);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Central32x8x2);
+                return force<uint,T>(Central32x8x2);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Central64x8x2);
+                return force<ulong,T>(Central64x8x2);
             else
                 throw no<T>();
         }
@@ -78,13 +78,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Central8x8x4);
+                return force<byte,T>(Central8x8x4);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Central16x8x4);
+                return force<ushort,T>(Central16x8x4);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Central32x8x4);
+                return force<uint,T>(Central32x8x4);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Central64x8x4);
+                return force<ulong,T>(Central64x8x4);
             else
                 throw no<T>();
         }
@@ -101,13 +101,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<byte,T>(Central8x8x6);
+                return force<byte,T>(Central8x8x6);
             else if(typeof(T) == typeof(ushort))
-                return convert<ushort,T>(Central16x8x6);
+                return force<ushort,T>(Central16x8x6);
             else if(typeof(T) == typeof(uint))
-                return convert<uint,T>(Central32x8x6);
+                return force<uint,T>(Central32x8x6);
             else if(typeof(T) == typeof(ulong))
-                return convert<ulong,T>(Central64x8x6);
+                return force<ulong,T>(Central64x8x6);
             else
                 throw no<T>();
         }

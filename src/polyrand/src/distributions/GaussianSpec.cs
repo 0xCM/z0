@@ -27,7 +27,7 @@ namespace Z0
         /// <typeparam name="T">The sample element type</typeparam>
         [MethodImpl(Inline)]
         public static GaussianSpec<T> Define(T mu, T sigma)
-            => new GaussianSpec<T>(mu,sigma);        
+            => new GaussianSpec<T>(mu,sigma);
 
         [MethodImpl(Inline)]
         public static implicit operator (T mu, T sigma)(GaussianSpec<T> spec)
@@ -54,44 +54,44 @@ namespace Z0
         /// </summary>
         public readonly T StdDev;
 
-        public T Variance 
+        public T Variance
         {
             [MethodImpl(Inline)]
             get
             {
-                var sig = convert<T,double>(StdDev);
+                var sig = force<T,double>(StdDev);
                 insist(sig != 0, $"The invariant k := (sigma == 0) failed");
 
-                return convert<T>(sig*sig);
-            }            
+                return force<T>(sig*sig);
+            }
         }
 
-        public T Precision 
+        public T Precision
         {
             [MethodImpl(Inline)]
             get
             {
-                var sig = convert<T,double>(StdDev);
+                var sig = force<T,double>(StdDev);
                 insist(sig != 0, $"The invariant k := (sigma == 0) failed");
 
                 var prec = MathUtil.recip(sig*sig);
-                return convert<T>(prec);
+                return force<T>(prec);
             }
         }
 
         /// <summary>
         /// Classifies the distribution spec
         /// </summary>
-        public DistributionKind DistKind 
+        public DistributionKind DistKind
             => DistributionKind.Gaussian;
 
         [MethodImpl(Inline)]
         public GaussianSpec<float> ToFloat32()
-            => new GaussianSpec<float>(convert<T,float>(Mean), convert<T,float>(StdDev));
+            => new GaussianSpec<float>(force<T,float>(Mean), force<T,float>(StdDev));
 
         [MethodImpl(Inline)]
         public GaussianSpec<double> ToFloat64()
-            => new GaussianSpec<double>(convert<T,double>(Mean), convert<T,double>(StdDev));
+            => new GaussianSpec<double>(force<T,double>(Mean), force<T,double>(StdDev));
     }
 
 }

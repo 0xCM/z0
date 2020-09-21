@@ -7,23 +7,23 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static z;
-    
+
     partial class gmath
     {
         /// <summary>
         /// Populates a span of length n with consecutive values 0,1,...n - 1
         /// </summary>
         /// <param name="dst">The target span</param>
-        /// <typeparam name="T">The target value type</typeparam>    
+        /// <typeparam name="T">The target value type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Span<T> increments<T>(Span<T> dst)
             where T : unmanaged
         {
             var count = dst.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = convert<T>(i);
+                seek(dst,i) = force<T>(i);
             return dst;
         }
 
@@ -33,13 +33,13 @@ namespace Z0
         /// <param name="first">The first value</param>
         /// <param name="count">The number of values to populate</param>
         /// <param name="dst">The target memory reference</param>
-        /// <typeparam name="T">The target value type</typeparam>    
+        /// <typeparam name="T">The target value type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void increments<T>(T first, uint count, ref T dst)
             where T : unmanaged
         {
             for(var i=0; i<count; i++)
-                seek(dst,i) = add(first, convert<T>(i));
+                seek(dst,i) = add(first, force<T>(i));
         }
 
         /// <summary>
@@ -47,13 +47,13 @@ namespace Z0
         /// </summary>
         /// <param name="count">The number of terms to populate</param>
         /// <param name="dst">The target reference</param>
-        /// <typeparam name="T">The sequence term type</typeparam>    
+        /// <typeparam name="T">The sequence term type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void increments<T>(uint count, ref T dst)
             where T : unmanaged
         {
             for(var i=0; i<count; i++)
-                seek(dst,i) = convert<T>(i);
+                seek(dst,i) = force<T>(i);
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The value of the first term</param>
         /// <param name="dst">The target span</param>
-        /// <typeparam name="T">The target value type</typeparam>    
+        /// <typeparam name="T">The target value type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void increments<T>(T k, Span<T> dst)
             where T : unmanaged

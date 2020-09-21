@@ -81,22 +81,22 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public Vector256<T> eval<K>(Vector256<T> a, K kind = default)
-                where K : unmanaged, IBitLogicKind
+                where K : unmanaged, IBitLogicApiKey
                     => eval_unary_1(a,kind);
 
             [MethodImpl(Inline)]
             public Vector256<T> eval<K>(Vector256<T> a, Vector256<T> b, K kind = default)
-                where K : unmanaged, IBitLogicKind
+                where K : unmanaged, IBitLogicApiKey
                     => eval_binary_1(a,b,kind);
 
             [MethodImpl(Inline)]
             public Vector256<T> eval<K>(Vector256<T> a, Vector256<T> b, Vector256<T> c, K kind = default)
-                where K : unmanaged, IBitLogicKind
+                where K : unmanaged, IBitLogicApiKey
                     => eval_ternary_1(a, b, c,kind);
 
             [MethodImpl(Inline)]
             Vector256<T> eval_unary_1<B>(Vector256<T> a, B kind)
-                where B : unmanaged, IBitLogicKind
+                where B : unmanaged, IBitLogicApiKey
             {
                 if(typeof(B) == typeof(K.Not))
                     return not(a);
@@ -106,7 +106,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             Vector256<T> eval_binary_1<B>(Vector256<T> a, Vector256<T> b, B kind)
-                where B : unmanaged, IBitLogicKind
+                where B : unmanaged, IBitLogicApiKey
             {
                 if(typeof(B) == typeof(K.And))
                     return and(a,b);
@@ -126,7 +126,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             Vector256<T> eval_binary_2<B>(Vector256<T> a, Vector256<T> b, B kind)
-                where B : unmanaged, IBitLogicKind
+                where B : unmanaged, IBitLogicApiKey
             {
                 if(typeof(B) == typeof(K.Impl))
                     return impl(a,b);
@@ -142,7 +142,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             Vector256<T> eval_ternary_1<B>(Vector256<T> a, Vector256<T> b, Vector256<T> c, B kind)
-                where B : unmanaged, IBitLogicKind
+                where B : unmanaged, IBitLogicApiKey
             {
                 if(typeof(B) == typeof(K.Select))
                     return select(a,b,c);

@@ -10,7 +10,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
-    using static Memories;
+    using static z;
     using static Kinds;
 
     using K = Kinds;
@@ -46,7 +46,7 @@ namespace Z0
         {
             var count = PointCount<T>();
             var dst = Tuples.index(sys.alloc<Pair<T>>(count));
-            return Evaluations.pairs(Labels, dst);
+            return Eval.pairs(Labels, dst);
         }
 
         void error(Exception e)
@@ -59,7 +59,7 @@ namespace Z0
         {
             var target = init<T>();
             var src = Random.Array<T>(target.PointCount);
-            var context = Evaluations.context(buffers, code, Evaluations.unary(src, target));
+            var context = Eval.context(buffers, code, Eval.unary(src, target));
             return Evaluate.compute(context, error);
         }
 
@@ -68,7 +68,7 @@ namespace Z0
         {
             var target = init<T>();
             var src = Random.Pairs<T>(target.PointCount);
-            var context = Evaluations.context(buffers, code, Evaluations.binary(src, target));
+            var context = Eval.context(buffers, code, Eval.binary(src, target));
             return Evaluate.compute(context, error);
         }
 
@@ -139,7 +139,7 @@ namespace Z0
         }
 
         HashSet<ApiKeyId> EvalSkip {get;}
-            = new HashSet<ApiKeyId>(seq(ApiKeyId.Inc));
+            = new HashSet<ApiKeyId>(array(ApiKeyId.Inc));
 
         void Analyze<T>(in X86ApiMember api, in UnaryEvaluations<T> eval)
             where T : unmanaged

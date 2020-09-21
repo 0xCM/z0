@@ -11,7 +11,7 @@ namespace Z0
 
     using BK = BlockedKind;
 
-    public readonly struct BlockedKind<W,T> : IBlockedKind<BlockedKind<W,T>, W,T>
+    public readonly struct BlockedKind<W,T> : IBlockedOp<BlockedKind<W,T>, W,T>
         where T : unmanaged
         where W : unmanaged, ITypeWidth
     {

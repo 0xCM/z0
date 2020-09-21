@@ -11,7 +11,7 @@ namespace Z0
 
     using BK = BlockedKind;
 
-   public readonly struct BlockedKind<T> : IBlockedKind<BlockedKind<T>>
+   public readonly struct BlockedKind<T> : IBlockedOp<BlockedKind<T>>
         where T : unmanaged
     {
         public BK Class {get;}

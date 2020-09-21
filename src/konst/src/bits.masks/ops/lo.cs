@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T lo<T>(int n, T t = default)
             where T : unmanaged
-                => convert<ulong,T>(lo64(n));
+                => force<ulong,T>(lo64(n));
 
         /// <summary>
         /// Produces a sequence of N enabled bits, starting from index 0 and extending to index n - 1
@@ -49,6 +49,6 @@ namespace Z0
         public static T lo<N,T>(N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => convert<ulong,T>(lo(n));
+                => force<ulong,T>(lo(n));
     }
 }

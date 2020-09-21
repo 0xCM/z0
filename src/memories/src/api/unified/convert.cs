@@ -17,110 +17,110 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static T convert<S,T>(S src)
             where T : unmanaged
             where S : unmanaged
-                => z.convert<S,T>(src);
+                => z.force<S,T>(src);
 
         /// <summary>
         /// If possible, applies the conversion byte -> T
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(byte src, T t = default)
             where T : unmanaged
-                => z.convert<T>(src);
+                => z.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion sbyte -> T
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(sbyte src, T t = default)
             where T : unmanaged
-                => z.convert<T>(src);
+                => z.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion ushort -> T
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(ushort src, T t = default)
             where T : unmanaged
-                => z.convert<T>(src);
+                => z.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion short -> T
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(short src, T t = default)
             where T : unmanaged
-                => z.convert<T>(src);
+                => z.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion int -> T
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(int src, T t = default)
             where T : unmanaged
-                => z.convert<T>(src);
+                => z.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion uint -> T
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(uint src, T t = default)
             where T : unmanaged
-                => z.convert<T>(src);
+                => z.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion long -> T
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(long src, T t = default)
             where T : unmanaged
-                => z.convert<T>(src);
+                => z.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion ulong -> T
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(ulong src, T t = default)
             where T : unmanaged
-                => z.convert<T>(src);
+                => z.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion float -> T
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(float src, T t = default)
             where T : unmanaged
-                => z.convert<T>(src);
+                => z.force<T>(src);
 
         /// <summary>
         /// If possible, applies the conversion double -> T
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]   
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T convert<T>(double src, T t = default)
             where T : unmanaged
-                => z.convert<T>(src);
+                => z.force<T>(src);
     }
 }

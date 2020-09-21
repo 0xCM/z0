@@ -9,15 +9,28 @@ namespace Z0
 
     using static Konst;
 
-    public interface IOpKind : IKind, ITextual
+    public interface IApiKey : IKind, ITextual
     {
-        ApiKeyId KindId {get;}
+        ApiKeyId Id {get;}
 
         string ITextual.Format()
-            => KindId.ToString().ToLower();
+            => Id.ToString().ToLower();
     }
 
-    public interface IOpKind<E> : IOpKind, ILiteralKind<E>
+    /// <summary>
+    /// Characterizes a subkey group
+    /// </summary>
+    /// <typeparam name="G">The group key kind</typeparam>
+    public interface IApiKey<G> : IApiKey
+        where G : unmanaged, Enum
+    {
+        new G Id {get;}
+
+        ApiKeyId IApiKey.Id
+            => (ApiKeyId)Enums.e16u(Id);
+    }
+
+    public interface IOpKind<E> : IApiKey, ILiteralKind<E>
         where E : unmanaged, Enum
     {
         E ITypedLiteral<E>.Class
@@ -30,7 +43,4 @@ namespace Z0
     {
         K Kind => default;
     }
-
-
-
 }

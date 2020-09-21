@@ -24,7 +24,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static byte pack<T>(in T src, N8 count, N8 mod)
             where T : unmanaged
-                => (byte)Bits.gather(convert<T,ulong>(src), Lsb64x8x1);
+                => (byte)Bits.gather(force<T,ulong>(src), Lsb64x8x1);
 
         /// <summary>
         /// Packs 16 1-bit values taken from the least significant bit of each source byte

@@ -25,7 +25,7 @@ namespace Z0
         new T Base {get;}
 
         MemoryAddress IAddressable.Base
-            => z.convert<T,ulong>(Base);
+            => z.force<T,ulong>(Base);
     }
 
     /// <summary>

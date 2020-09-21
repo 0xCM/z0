@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="index">The vertex index</param>
         [MethodImpl(Inline)]
         public ref Vertex<V,T> Vertex(V index)
-            => ref vertices[convert<V,ulong>(index)];
+            => ref vertices[force<V,ulong>(index)];
 
         /// <summary>
         /// Looks up an edge based on its index

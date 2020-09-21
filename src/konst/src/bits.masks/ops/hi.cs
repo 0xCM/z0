@@ -38,12 +38,12 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T hi<T>(int n, T t = default)
             where T : unmanaged
-                => convert<T>(lo64(n) << ((int)z.bitwidth<T>() - n));
+                => force<T>(lo64(n) << ((int)z.bitwidth<T>() - n));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T hi<T>(byte n, T t = default)
             where T : unmanaged
-                => convert<T>(lo64(n) << ((int)z.bitwidth<T>() - n));
+                => force<T>(lo64(n) << ((int)z.bitwidth<T>() - n));
 
         /// <summary>
         /// Produces a sequence of N enabled hi bits

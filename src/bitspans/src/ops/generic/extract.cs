@@ -46,15 +46,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return convert<T>(SB.extract(src, n8, offset));
+                return force<T>(SB.extract(src, n8, offset));
             else if(typeof(T) == typeof(short))
-                return convert<T>(SB.extract(src, n16, offset));
+                return force<T>(SB.extract(src, n16, offset));
             else if(typeof(T) == typeof(int))
-                return convert<T>(SB.extract(src, n32, offset));
+                return force<T>(SB.extract(src, n32, offset));
             else if(typeof(T) == typeof(long))
-                return convert<T>(SB.extract(src, n64, offset));
+                return force<T>(SB.extract(src, n64, offset));
             else
-                throw no<T>();            
+                throw no<T>();
         }
     }
 }

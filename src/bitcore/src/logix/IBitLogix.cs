@@ -24,7 +24,7 @@ namespace Z0
         bit Evaluate(BLK kind, bit a, bit b);
 
         bit Evaluate<F>(bit a, bit b, F kind = default)
-            where F : unmanaged, IBitLogicKind;
+            where F : unmanaged, IBitLogicApiKey;
 
         bit Evaluate(TLK kind, bit a, bit b, bit c);
 

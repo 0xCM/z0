@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-                
-    using static Konst; 
+
+    using static Konst;
     using static z;
 
     partial class gmath
@@ -20,23 +20,23 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T pow2<T>(byte i)
             where T : unmanaged
-                => convert<ulong,T>(1ul << i); 
+                => force<ulong,T>(1ul << i);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T pow<T>(T b, uint exp)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 return pow_u(b,exp);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 return pow_i(b,exp);
-            else 
+            else
                 return gfp.pow(b,exp);
         }
 
@@ -64,7 +64,7 @@ namespace Z0
                 return generic<T>(math.pow(uint16(b), exp));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(math.pow(uint32(b), exp));
-            else 
+            else
                 return generic<T>(math.pow(uint64(b), exp));
         }
     }

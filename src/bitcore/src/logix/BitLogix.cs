@@ -26,7 +26,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bit Evaluate<F>(bit a, bit b, F kind = default)
-            where F : unmanaged, IBitLogicKind
+            where F : unmanaged, IBitLogicApiKey
                 => BitLogixOps.eval(a, b, kind);
 
         [MethodImpl(Inline), Op]

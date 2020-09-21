@@ -80,8 +80,8 @@ namespace Z0
             const uint O = MaskLiterals.Odd32;
 
             var mask = gvec.vtakemask(src, (byte)i);
-            var gT = gcell(g0, i, convert<T>(Bits.gather(mask, E)));
-            gT = gcell(gT, j, convert<T>(Bits.gather(mask, O)));
+            var gT = gcell(g0, i, force<T>(Bits.gather(mask, E)));
+            gT = gcell(gT, j, force<T>(Bits.gather(mask, O)));
             return gT;
         }
 

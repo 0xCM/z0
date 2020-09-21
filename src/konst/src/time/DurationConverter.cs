@@ -18,11 +18,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public T Convert<T>(Duration src)
-            => convert<T>(src.Ticks);
+            => force<T>(src.Ticks);
 
         [MethodImpl(Inline)]
         public Duration Convert<T>(T src)
-            => convert<T,long>(src);
+            => force<T,long>(src);
 
         public Option<object> ConvertFromTarget(object incoming, Type dst)
             => Option.Try(() => rebox(((Duration)incoming).Ticks, dst.NumericKind()));

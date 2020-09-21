@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static BitVector<T> alt<T>(bit parity)
             where T : unmanaged
-                => parity ? convert<T>(Even64) : convert<T>(Odd64);
+                => parity ? force<T>(Even64) : force<T>(Odd64);
 
         /// <summary>
         /// Creates a bitvector with uniformly alternating states where the state of
@@ -33,7 +33,7 @@ namespace Z0
         public static BitVector<N,T> alt<N,T>(bit parity, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => natural<N,T>(parity ? convert<T>(Even64) : convert<T>(Odd64));
+                => natural<N,T>(parity ? force<T>(Even64) : force<T>(Odd64));
 
         /// <summary>
         /// Creates a bitvector with uniformly alternating states where the state of the
