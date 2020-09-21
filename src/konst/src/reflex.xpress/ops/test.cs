@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     using XPR = System.Linq.Expressions.Expression;
-    
+
     partial class XPress
     {
         /// <summary>
@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The value to test</param>
         /// <param name="t">The type to test against</param>
-        [MethodImpl(Inline)]
+        [Op]
         public static TypeBinaryExpression test(object value, Type t)
             => XPR.TypeIs(constant(value), t);
 

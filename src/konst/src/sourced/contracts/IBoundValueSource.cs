@@ -5,14 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Characterizes a value emitter that supports placing upper and/or lower bounds on
     /// the values produced
     /// </summary>
     /// <typeparam name="T">The production value type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IBoundValueSource<T> : IValueSource<T>
         where T : struct
     {
@@ -31,6 +31,7 @@ namespace Z0
         T Next(T min, T max);
     }
 
+    [Free]
     public interface IBoundValueSource
     {
         /// <summary>

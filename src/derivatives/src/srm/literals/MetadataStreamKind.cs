@@ -6,7 +6,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Part;
 
     partial struct ClrStorage
     {

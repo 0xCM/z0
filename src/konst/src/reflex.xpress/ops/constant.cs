@@ -18,7 +18,7 @@ namespace Z0
         /// Creates a constant expression
         /// </summary>
         /// <param name="src">The source value</param>
-        [MethodImpl(Inline)]
+        [Op]
         public static ConstantExpression constant(object src)
             => XPR.Constant(src);
     }

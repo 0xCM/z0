@@ -10,9 +10,9 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {        
+    {
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<char> src)
-            => sys.format(src);
+            => new string(src);
     }
 }

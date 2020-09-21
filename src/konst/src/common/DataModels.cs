@@ -12,16 +12,6 @@ namespace Z0
     [ApiHost]
     public readonly struct DataModels
     {
-        /// <summary>
-        /// Defines a
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="dst"></param>
-        /// <typeparam name="T"></typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static DataFlow<T[],BinaryCode> flow<T>(T[] src, BinaryCode dst)
-            where T : struct
-                => z.paired(src,dst);
-    }
 
+    }
 }

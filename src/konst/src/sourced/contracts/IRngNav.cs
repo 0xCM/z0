@@ -3,7 +3,9 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
+    using System.Security;
+
     /// <summary>
     /// Characterizes a random stream navigator
     /// </summary>
@@ -26,7 +28,7 @@ namespace Z0
     /// Characterizes a random source that can be navigated
     /// </summary>
     /// <typeparam name="T">The primal element type</typeparam>
-    public interface IRngNav<T> : IRngNav, IRngBoundPointSource<T> 
+    public interface IRngNav<T> : IRngNav, IRngBoundPointSource<T>
         where T : struct
     {
 

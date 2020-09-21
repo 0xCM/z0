@@ -5,6 +5,6 @@
 namespace Z0
 {
     public partial class XPress
-    { 
+    {
     }
 }

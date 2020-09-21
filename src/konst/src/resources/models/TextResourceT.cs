@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Describes/models a literal text resource with an enum-predicated identity
     /// </summary>
-    public readonly struct TextResource<E> : ITextResource<E>
+    public readonly struct TextResource<E>
         where E : unmanaged, Enum
     {
         /// <summary>
@@ -23,25 +23,19 @@ namespace Z0
         /// <summary>
         /// The resource address
         /// </summary>
-        public MemoryAddress Location {get;}
-    
+        public MemoryAddress Address {get;}
+
         /// <summary>
         /// The resource value extracted from the accompanying location
         /// </summary>
-        public string Content {get;}    
-        
+        public string Content {get;}
+
         [MethodImpl(Inline)]
         public TextResource(E id, MemoryAddress location, string value)
         {
             Identifier = id;
-            Location = location;
+            Address = location;
             Content = value;
         }
-
-        ulong ITextResource.Location 
-            => Location;
-
-        ulong ITextResource.Identifier 
-            => EnumValue.e64u(Identifier);
     }
 }

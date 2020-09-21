@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="e">The source expression</param>
         /// <param name="dstType">The target type</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static UnaryExpression convert(XPR e, Type dstType)
             => XPR.Convert(e, dstType);
 
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The target type</typeparam>
         /// <param name="e">The source expression</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static UnaryExpression convert<T>(XPR e)
             => convert(e, typeof(T));
     }

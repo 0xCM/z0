@@ -60,7 +60,7 @@ namespace Z0
             }
         }
 
-        ArrowType<S,T> Type
+        FlowType<S,T> Type
             => DataFlows.type<S,T>();
     }
 }

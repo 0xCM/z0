@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using System.Linq.Expressions;
-    
+
     using static Konst;
 
     /// <summary>
@@ -37,7 +37,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public XFunc(Func<X1,X2,R> f)
-            => this.Fx = (x1, x2) => f(x1,x2);
+            => Fx = (x1, x2) => f(x1,x2);
 
         /// <summary>
         /// The expression derived from the source function

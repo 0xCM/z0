@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct FieldValues<T>
     {
-        public readonly FieldValue<T>[] Data;
+        readonly FieldValue<T>[] Data;
 
         [MethodImpl(Inline)]
         public static implicit operator FieldValues<T>(FieldValue<T>[] src)

@@ -4,37 +4,32 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Derivatives.SRM
 {
     using System;
     using System.Runtime.InteropServices;
 
-    using static Part;
-
-    partial struct ClrStorage
+    [StructLayout(LayoutKind.Sequential)]
+    public struct SectionHeader
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct SectionHeader
-        {
-            public string Name;
+        public string Name;
 
-            public uint VirtualSize;
+        public uint VirtualSize;
 
-            public uint VirtualAddress;
+        public uint VirtualAddress;
 
-            public uint SizeOfRawData;
+        public uint SizeOfRawData;
 
-            public uint OffsetToRawData;
+        public uint OffsetToRawData;
 
-            public uint RVAToRelocations;
+        public uint RVAToRelocations;
 
-            public uint PointerToLineNumbers;
+        public uint PointerToLineNumbers;
 
-            public ushort NumberOfRelocations;
+        public ushort NumberOfRelocations;
 
-            public ushort NumberOfLineNumbers;
+        public ushort NumberOfLineNumbers;
 
-            public SectionCharacteristics SectionCharacteristics;
-        }
+        public SectionCharacteristics SectionCharacteristics;
     }
 }

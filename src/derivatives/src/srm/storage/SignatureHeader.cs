@@ -9,8 +9,7 @@ namespace Z0.Derivatives.SRM
     using System;
     using System.Runtime.CompilerServices;
 
-    using SH = ClrStorage.SigHeaderCode;
-
+    using SH = SigHeaderCode;
 
     public readonly struct SignatureHeader
     {

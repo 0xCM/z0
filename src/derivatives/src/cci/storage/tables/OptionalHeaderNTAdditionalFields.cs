@@ -4,60 +4,54 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Derivatives.SRM
 {
     using System;
     using System.Runtime.InteropServices;
 
-    using static Part;
-
-    partial struct ClrStorage
+    [StructLayout(LayoutKind.Sequential)]
+    public struct OptionalHeaderNTAdditionalFields
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct OptionalHeaderNTAdditionalFields
-        {
-            public ulong ImageBase;
+        public ulong ImageBase;
 
-            public int SectionAlignment;
+        public int SectionAlignment;
 
-            public uint FileAlignment;
+        public uint FileAlignment;
 
-            public ushort MajorOperatingSystemVersion;
+        public ushort MajorOperatingSystemVersion;
 
-            public ushort MinorOperatingSystemVersion;
+        public ushort MinorOperatingSystemVersion;
 
-            public ushort MajorImageVersion;
+        public ushort MajorImageVersion;
 
-            public ushort MinorImageVersion;
+        public ushort MinorImageVersion;
 
-            public ushort MajorSubsystemVersion;
+        public ushort MajorSubsystemVersion;
 
-            public ushort MinorSubsystemVersion;
+        public ushort MinorSubsystemVersion;
 
-            public uint Win32VersionValue;
+        public uint Win32VersionValue;
 
-            public int SizeOfImage;
+        public int SizeOfImage;
 
-            public int SizeOfHeaders;
+        public int SizeOfHeaders;
 
-            public uint CheckSum;
+        public uint CheckSum;
 
-            public Subsystem Subsystem;
+        public Subsystem Subsystem;
 
-            public DllCharacteristics DllCharacteristics;
+        public DllCharacteristics DllCharacteristics;
 
-            public ulong SizeOfStackReserve;
+        public ulong SizeOfStackReserve;
 
-            public ulong SizeOfStackCommit;
+        public ulong SizeOfStackCommit;
 
-            public ulong SizeOfHeapReserve;
+        public ulong SizeOfHeapReserve;
 
-            public ulong SizeOfHeapCommit;
+        public ulong SizeOfHeapCommit;
 
-            public uint LoaderFlags;
+        public uint LoaderFlags;
 
-            public int NumberOfRvaAndSizes;
-        }
-
+        public int NumberOfRvaAndSizes;
     }
 }

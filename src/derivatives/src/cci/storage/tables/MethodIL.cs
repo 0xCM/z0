@@ -4,26 +4,24 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Derivatives.SRM
 {
     using System.Runtime.InteropServices;
 
     using static Part;
 
-    partial struct ClrStorage
+    [StructLayout(LayoutKind.Sequential)]
+    public struct MethodIL
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct MethodIL
-        {
-            public bool LocalVariablesInited;
+        public bool LocalVariablesInited;
 
-            public ushort MaxStack;
+        public ushort MaxStack;
 
-            public uint LocalSignatureToken;
+        public uint LocalSignatureToken;
 
-            public MemoryBlock EncodedILMemoryBlock;
+        public MemoryBlock EncodedILMemoryBlock;
 
-            public SEHTableEntry[]  SEHTable;
-        }
+        public SEHTableEntry[]  SEHTable;
     }
+
 }

@@ -6,28 +6,29 @@ namespace Z0
 {
     using System;
     using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ICellSource<T> : IValueSource<T>
         where T : struct, IDataCell
     {
 
     }
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ICellSource : IValueSource
     {
 
     }
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IBoundCellSource<T> : IBoundValueSource<T>
         where T : struct, IDataCell
     {
 
     }
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IBoundCellSource : IBoundValueSource
     {
 

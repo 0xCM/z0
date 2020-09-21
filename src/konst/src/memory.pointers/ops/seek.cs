@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     unsafe partial struct Pointers
     {
@@ -21,19 +22,20 @@ namespace Z0
         public static ref Ptr<T> seek<T>(in Ptr<T> src, uint count)
             where T : unmanaged
         {
-            ref var dst = ref z.edit(src);
+            ref var dst = ref edit(src);
             dst.P += count;
             return ref dst;
         }
 
         /// <summary>
-        /// Advances the source by a uint
+        /// Advances the source by a specified count
         /// </summary>
         /// <param name="src">The source pointer</param>
+        /// <param name="count">The number of elements to skip</param>
         [MethodImpl(Inline), Op]
         public static ref Ptr8 seek(in Ptr8 src, uint count)
         {
-            ref var dst = ref z.edit(src);
+            ref var dst = ref edit(src);
             dst.P += count;
             return ref dst;
         }
@@ -45,7 +47,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref Ptr16 seek(in Ptr16 src, uint count)
         {
-            ref var dst = ref z.edit(src);
+            ref var dst = ref edit(src);
             dst.P += count;
             return ref dst;
         }
@@ -72,6 +74,6 @@ namespace Z0
             ref var dst = ref z.edit(src);
             dst.P += count;
             return ref dst;
-        }        
+        }
     }
 }

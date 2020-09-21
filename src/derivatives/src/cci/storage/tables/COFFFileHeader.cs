@@ -4,31 +4,26 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Derivatives.SRM
 {
     using System;
     using System.Runtime.InteropServices;
 
-    using static Part;
-
-    partial struct ClrStorage
+    [StructLayout(LayoutKind.Sequential)]
+    public struct COFFFileHeader
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct COFFFileHeader
-        {
-            public Machine Machine;
+        public Machine Machine;
 
-            public short NumberOfSections;
+        public short NumberOfSections;
 
-            public int TimeDateStamp;
+        public int TimeDateStamp;
 
-            public int PointerToSymbolTable;
+        public int PointerToSymbolTable;
 
-            public int NumberOfSymbols;
+        public int NumberOfSymbols;
 
-            public short SizeOfOptionalHeader;
+        public short SizeOfOptionalHeader;
 
-            public Characteristics Characteristics;
-        }
+        public Characteristics Characteristics;
     }
 }

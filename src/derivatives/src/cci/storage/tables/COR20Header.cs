@@ -4,42 +4,35 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Derivatives.SRM
 {
-    using System;
     using System.Runtime.InteropServices;
 
-    using static Part;
-
-    partial struct ClrStorage
+    [StructLayout(LayoutKind.Sequential)]
+    public struct COR20Header
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct COR20Header
-        {
-            public uint CountBytes;
+        public uint CountBytes;
 
-            public ushort MajorRuntimeVersion;
+        public ushort MajorRuntimeVersion;
 
-            public ushort MinorRuntimeVersion;
+        public ushort MinorRuntimeVersion;
 
-            public DirectoryEntry MetaDataDirectory;
+        public DirectoryEntry MetaDataDirectory;
 
-            public COR20Flags COR20Flags;
+        public COR20Flags COR20Flags;
 
-            public uint EntryPointTokenOrRVA;
+        public uint EntryPointTokenOrRVA;
 
-            public DirectoryEntry ResourcesDirectory;
+        public DirectoryEntry ResourcesDirectory;
 
-            public DirectoryEntry StrongNameSignatureDirectory;
+        public DirectoryEntry StrongNameSignatureDirectory;
 
-            public DirectoryEntry CodeManagerTableDirectory;
+        public DirectoryEntry CodeManagerTableDirectory;
 
-            public DirectoryEntry VtableFixupsDirectory;
+        public DirectoryEntry VtableFixupsDirectory;
 
-            public DirectoryEntry ExportAddressTableJumpsDirectory;
+        public DirectoryEntry ExportAddressTableJumpsDirectory;
 
-            public DirectoryEntry ManagedNativeHeaderDirectory;
-        }
-
+        public DirectoryEntry ManagedNativeHeaderDirectory;
     }
 }

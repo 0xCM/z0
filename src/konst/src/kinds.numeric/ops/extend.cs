@@ -10,8 +10,6 @@ namespace Z0
     using static Konst;
     using static NumericKinds;
 
-    using NK = NumericKinds;
-
     partial class XTend
     {
         /// <summary>

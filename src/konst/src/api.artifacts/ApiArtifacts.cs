@@ -42,8 +42,8 @@ namespace Z0
         /// <param name="name">The facet name</param>
         /// <param name="value">The facet value</param>
         [MethodImpl(Inline), Op]
-        public static ArrowFacet<ArtifactIdentifier> facet(ArtifactIdentifier src, ArtifactIdentifier dst, in asci32 name, in variant value)
-            => new ArrowFacet<ArtifactIdentifier>((src,dst), name, value);
+        public static RelationFacet<ArtifactIdentifier> facet(ArtifactIdentifier src, ArtifactIdentifier dst, in asci32 name, in variant value)
+            => new RelationFacet<ArtifactIdentifier>((src,dst), name, value);
 
         /// <summary>
         /// Defines a facet closed over a <see cref='ArtifactIdentifier'/>
@@ -53,8 +53,8 @@ namespace Z0
         /// <param name="name">The facet name</param>
         /// <param name="value">The facet value</param>
         [MethodImpl(Inline), Op]
-        public static ArrowFacet<ArtifactIdentifier> facet(ArtifactIdentifier src, ArtifactIdentifier dst, string name, in variant value)
-            => new ArrowFacet<ArtifactIdentifier>((src,dst), name, value);
+        public static RelationFacet<ArtifactIdentifier> facet(ArtifactIdentifier src, ArtifactIdentifier dst, string name, in variant value)
+            => new RelationFacet<ArtifactIdentifier>((src,dst), name, value);
 
         /// <summary>
         /// Defines a facet closed over a <see cref='ArtifactIdentifier'/>
@@ -65,8 +65,8 @@ namespace Z0
         /// <param name="value"></param>
         /// <typeparam name="A"></typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ArrowFacet<ArtifactIdentifier> facet<A>(ArtifactIdentifier src, ArtifactIdentifier dst, string name, A value)
+        public static RelationFacet<ArtifactIdentifier> facet<A>(ArtifactIdentifier src, ArtifactIdentifier dst, string name, A value)
             where A : unmanaged
-                => new ArrowFacet<ArtifactIdentifier>((src,dst), name, Variant.from(value));
+                => new RelationFacet<ArtifactIdentifier>((src,dst), name, Variant.from(value));
     }
 }

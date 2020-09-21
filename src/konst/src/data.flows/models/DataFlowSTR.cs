@@ -24,7 +24,7 @@ namespace Z0
             => new DataFlow<S,T,R>(x.src, x.dst, x.result);
 
         [MethodImpl(Inline)]
-        public static implicit operator ArrowType<S,T>(DataFlow<S,T,R> x)
+        public static implicit operator FlowType<S,T>(DataFlow<S,T,R> x)
             => x.Type;
 
         [MethodImpl(Inline)]
@@ -39,7 +39,7 @@ namespace Z0
         public string Format()
             => text.format("{0} -> {1} | {2}", Source, Target, Outcome);
 
-        public ArrowType<S,T> Type
+        public FlowType<S,T> Type
         {
             [MethodImpl(Inline)]
             get => DataFlows.type(Source,Target);

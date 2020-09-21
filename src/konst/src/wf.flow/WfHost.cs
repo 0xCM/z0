@@ -43,4 +43,31 @@ namespace Z0
             Launch(shell);
         }
     }
+
+    public readonly struct WfHostProxy : IWfHost<WfHostProxy>
+    {
+        readonly object Real;
+
+        readonly IWfShell Wf;
+
+        public Type Type {get;}
+
+        public WfStepId Id => Type;
+
+        public StringRef Name  => Type.Name;
+
+
+        public WfHostProxy(IWfShell wf, object real)
+        {
+            Wf = wf;
+            Real = real;
+            Type = real.GetType();
+            Wf.Created(this);
+        }
+
+        public void Run(IWfShell shell)
+        {
+
+        }
+    }
 }

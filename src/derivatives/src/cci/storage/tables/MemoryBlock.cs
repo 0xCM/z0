@@ -4,33 +4,29 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Derivatives.SRM
 {
     using System;
     using System.Runtime.InteropServices;
 
     using static Part;
 
-    partial struct ClrStorage
+    public unsafe struct MemoryBlock
     {
-        public unsafe struct MemoryBlock
+        public byte* Buffer;
+
+        public int Length;
+
+        public MemoryBlock(byte* buffer, int length)
         {
-            public byte* Buffer;
-
-            public int Length;
-
-            public MemoryBlock(byte* buffer, int length)
-            {
-                Buffer = buffer;
-                Length = length;
-            }
-
-            public MemoryBlock(byte* buffer, uint length)
-            {
-                Buffer = buffer;
-                Length = (int)length;
-            }
+            Buffer = buffer;
+            Length = length;
         }
 
+        public MemoryBlock(byte* buffer, uint length)
+        {
+            Buffer = buffer;
+            Length = (int)length;
+        }
     }
 }

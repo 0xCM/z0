@@ -4,18 +4,15 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Derivatives.SRM
 {
-    using System;
     using System.Runtime.InteropServices;
 
-    using static Part;
-
-    partial struct ClrStorage
+    partial struct MetadataRows
     {
         //  0x12
         [StructLayout(LayoutKind.Sequential)]
-        public struct EventMapRow
+        public struct EventMap
         {
             public uint Parent;
 

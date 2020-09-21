@@ -4,29 +4,27 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Derivatives.SRM
 {
     using System;
     using System.Runtime.InteropServices;
 
     using static Part;
 
-    partial struct ClrStorage
+    [StructLayout(LayoutKind.Sequential)]
+    public struct MetadataHeader
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct MetadataHeader
-        {
-            public uint Signature;
+        public uint Signature;
 
-            public ushort MajorVersion;
+        public ushort MajorVersion;
 
-            public ushort MinorVersion;
+        public ushort MinorVersion;
 
-            public uint ExtraData;
+        public uint ExtraData;
 
-            public int VersionStringSize;
+        public int VersionStringSize;
 
-            public string VersionString;
-        }
+        public string VersionString;
     }
+
 }

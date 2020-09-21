@@ -9,6 +9,7 @@ namespace Z0
     using System;
     using System.Text;
 
+    using Derivatives.SRM;
     using static Part;
 
     static class ClrStorageX

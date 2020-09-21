@@ -22,17 +22,17 @@ namespace Z0
                 => src.ToFunc();
 
             [MethodImpl(Inline)]
-            internal BinaryPredicate(Z0.BinaryPredicate<T> f, OpIdentity id)            
+            internal BinaryPredicate(Z0.BinaryPredicate<T> f, OpIdentity id)
             {
-                this.F = f;
-                this.Id = id;
+                F = f;
+                Id = id;
             }
 
             [MethodImpl(Inline)]
-            internal BinaryPredicate(Z0.BinaryPredicate<T> f, string name)            
+            internal BinaryPredicate(Z0.BinaryPredicate<T> f, string name)
             {
-                this.F = f;
-                this.Id = Identify.sfunc<T>(name);
+                F = f;
+                Id = Identify.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]

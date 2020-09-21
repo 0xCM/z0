@@ -4,12 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Characterizes a distribution specifier
     /// </summary>
     public interface IDistributionSpec
     {
-        DistributionKind DistKind {get;}        
+        DistributionKind DistKind {get;}
     }
 
     /// <summary>
@@ -19,7 +21,7 @@ namespace Z0
     public interface IDistributionSpec<T> : IDistributionSpec
         where T : unmanaged
     {
-        
+
     }
 
     /// <summary>
@@ -31,6 +33,6 @@ namespace Z0
         where T : unmanaged
         where F : unmanaged, IDistributionSpec<F,T>
     {
-        
+
     }
 }

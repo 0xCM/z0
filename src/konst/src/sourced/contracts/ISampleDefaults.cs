@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     public interface ISampleDefaults<T>
         where T : unmanaged
     {

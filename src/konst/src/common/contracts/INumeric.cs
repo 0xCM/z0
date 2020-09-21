@@ -7,19 +7,11 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Chracterizes a numeric thing
+    /// Characterizes a numeric thing
     /// </summary>
     public interface INumeric : IComparable, IConvertible, IFormattable
     {
 
     }
 
-    /// <summary>
-    /// Chracterizes a parametric numeric thing
-    /// </summary>
-    public interface INumeric<T> : IComparable<T>, IConvertible, IFormattable, IEquatable<T>
-        where T : unmanaged
-    {
-        
-    }
 }

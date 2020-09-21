@@ -3,15 +3,16 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Collections.Generic;
     using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IValueStream<T> : IEnumerable<T>, IValueSource<T>
         where T : struct
     {
-    
+
     }
 }

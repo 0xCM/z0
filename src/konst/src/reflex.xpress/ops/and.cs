@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left expression</param>
         /// <param name="rhs">The right expression</param>
-        [MethodImpl(Inline)]
+        [Op]
         public static BinaryExpression and(XPR lhs, XPR rhs)
             => XPR.AndAlso(lhs, rhs);
 

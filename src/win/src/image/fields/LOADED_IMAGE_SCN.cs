@@ -8,7 +8,7 @@ namespace Z0.Image
 {
     using System;
 
-    [TableField("https://docs.microsoft.com/en-us/windows/win32/api/dbghelp/ns-dbghelp-loaded_image")]
+    [Url("https://docs.microsoft.com/en-us/windows/win32/api/dbghelp/ns-dbghelp-loaded_image")]
     [Flags]
     public enum LOADED_IMAGE_SCN : ulong
     {

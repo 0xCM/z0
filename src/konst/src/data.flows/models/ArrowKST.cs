@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         public readonly T Target;
 
-        public static Type Type => ArrowType<K,S,T>.Type;
+        public static Type Type => FlowType<K,S,T>.Type;
 
         [MethodImpl(Inline)]
         public static implicit operator Arrow<K,S,T>((K kind, S client, T supplier) x)

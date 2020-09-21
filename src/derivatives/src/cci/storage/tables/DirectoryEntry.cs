@@ -4,21 +4,19 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Derivatives.SRM
 {
     using System;
     using System.Runtime.InteropServices;
 
     using static Part;
 
-    partial struct ClrStorage
+    [StructLayout(LayoutKind.Sequential)]
+    public struct DirectoryEntry
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct DirectoryEntry
-        {
-            public uint RelativeVirtualAddress;
+        public uint RelativeVirtualAddress;
 
-            public uint Size;
-        }
+        public uint Size;
     }
+
 }

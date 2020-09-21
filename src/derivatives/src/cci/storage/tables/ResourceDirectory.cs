@@ -4,29 +4,24 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Derivatives.SRM
 {
     using System;
     using System.Runtime.InteropServices;
 
-    using static Part;
-
-    partial struct ClrStorage
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ResourceDirectory
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct ResourceDirectory
-        {
-            public uint Charecteristics;
+        public uint Charecteristics;
 
-            public uint TimeDateStamp;
+        public uint TimeDateStamp;
 
-            public short MajorVersion;
+        public short MajorVersion;
 
-            public short MinorVersion;
+        public short MinorVersion;
 
-            public short NumberOfNamedEntries;
+        public short NumberOfNamedEntries;
 
-            public short NumberOfIdEntries;
-        }
+        public short NumberOfIdEntries;
     }
 }

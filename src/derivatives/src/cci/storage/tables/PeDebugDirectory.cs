@@ -9,28 +9,23 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    using static Part;
-
-    partial struct ClrStorage
+    [StructLayout(LayoutKind.Sequential)]
+    public struct PeDebugDirectory
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct PeDebugDirectory
-        {
-            public uint Characteristics;
+        public uint Characteristics;
 
-            public uint TimeDateStamp;
+        public uint TimeDateStamp;
 
-            public ushort MajorVersion;
+        public ushort MajorVersion;
 
-            public ushort MinorVersion;
+        public ushort MinorVersion;
 
-            public uint Type;
+        public uint Type;
 
-            public uint SizeOfData;
+        public uint SizeOfData;
 
-            public uint AddressOfRawData;
+        public uint AddressOfRawData;
 
-            public uint PointerToRawData;
-        }
+        public uint PointerToRawData;
     }
 }

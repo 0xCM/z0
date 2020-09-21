@@ -17,5 +17,4 @@ namespace Z0
         public static int index<T>(ReadOnlySpan<T> src, in T match, RefComparer<T> comparer)
             => new RefSearch<T>(comparer).Search(src,match);
     }
-
 }

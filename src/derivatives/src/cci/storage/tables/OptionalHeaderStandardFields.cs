@@ -4,35 +4,32 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Derivatives.SRM
 {
     using System;
     using System.Runtime.InteropServices;
 
     using static Part;
 
-    partial struct ClrStorage
+    [StructLayout(LayoutKind.Sequential)]
+    public struct OptionalHeaderStandardFields
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct OptionalHeaderStandardFields
-        {
-            public PEMagic PEMagic;
+        public PEMagic PEMagic;
 
-            public byte MajorLinkerVersion;
+        public byte MajorLinkerVersion;
 
-            public byte MinorLinkerVersion;
+        public byte MinorLinkerVersion;
 
-            public int SizeOfCode;
+        public int SizeOfCode;
 
-            public int SizeOfInitializedData;
+        public int SizeOfInitializedData;
 
-            public int SizeOfUninitializedData;
+        public int SizeOfUninitializedData;
 
-            public int RVAOfEntryPoint;
+        public int RVAOfEntryPoint;
 
-            public int BaseOfCode;
+        public int BaseOfCode;
 
-            public int BaseOfData;
-        }
+        public int BaseOfData;
     }
 }

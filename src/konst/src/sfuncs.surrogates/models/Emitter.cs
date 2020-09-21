@@ -29,17 +29,17 @@ namespace Z0
                 => src.ToEmitter();
 
             [MethodImpl(Inline)]
-            public Emitter(Z0.Emitter<T> f, OpIdentity id)            
+            public Emitter(Z0.Emitter<T> f, OpIdentity id)
             {
                 this.F = f;
                 this.Id = id;
             }
 
             [MethodImpl(Inline)]
-            public Emitter(Z0.Emitter<T> f, string name)            
+            public Emitter(Z0.Emitter<T> f, string name)
             {
-                this.F = f;
-                this.Id = Identify.sfunc<T>(name);
+                F = f;
+                Id = Identify.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]

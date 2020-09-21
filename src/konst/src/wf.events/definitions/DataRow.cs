@@ -15,25 +15,26 @@ namespace Z0
         public readonly struct DataRow<T> : IWfEvent<DataRow<T>>
             where T : ITextual
         {
-            public const string EventName = nameof(DataRow<T>);
+            public Type DataType {get;}
 
             public WfEventId EventId {get;}
 
-            public T Data {get;}
+            public T Content {get;}
 
             public FlairKind Flair {get;}
 
             [MethodImpl(Inline)]
             public DataRow(T data, CorrelationToken ct, FlairKind flair = FlairKind.DataRow)
             {
-                EventId = (EventName, ct);
-                Data = data;
+                DataType = typeof(T);
+                EventId = (DataType, ct);
+                Content = data;
                 Flair = flair;
             }
 
             [MethodImpl(Inline)]
             public string Format()
-                =>  Render.format(EventId, Data);
+                =>  Render.format(EventId, Content);
         }
 
         public readonly struct DataRow<T,K> : IWfEvent<DataRow<T,K>>
@@ -41,26 +42,29 @@ namespace Z0
         {
             public const string EventName = nameof(DataRow<T,K>);
 
+            public Type DataType {get;}
+
+            public DataKind<K> DataKind {get;}
+
             public WfEventId EventId {get;}
 
-            public T Data {get;}
-
-            public DataKind<K> Class {get;}
+            public T Content {get;}
 
             public FlairKind Flair {get;}
 
             [MethodImpl(Inline)]
             public DataRow(T data, K kind, CorrelationToken ct, FlairKind flair = FlairKind.DataRow)
             {
-                EventId = (EventName, ct);
-                Data = data;
-                Class = kind;
+                DataType = typeof(T);
+                DataKind = kind;
+                EventId = (text.format("{0}/{1}", DataKind, DataType.Name), ct);
+                Content = data;
                 Flair = flair;
             }
 
             [MethodImpl(Inline)]
             public string Format()
-                =>  Render.format(EventId, Class, Data);
+                => Render.format(EventId, Content);
         }
     }
 }

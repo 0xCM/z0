@@ -4,28 +4,23 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Derivatives.SRM
 {
     using System.Runtime.InteropServices;
 
-    using static Part;
-
-    partial struct ClrStorage
+    [StructLayout(LayoutKind.Sequential)]
+    public struct SEHTableEntry
     {
-        [StructLayout(LayoutKind.Sequential)]
-        public struct SEHTableEntry
-        {
-            public SEHFlags SEHFlags;
+        public SEHFlags SEHFlags;
 
-            public uint TryOffset;
+        public uint TryOffset;
 
-            public uint TryLength;
+        public uint TryLength;
 
-            public uint HandlerOffset;
+        public uint HandlerOffset;
 
-            public uint HandlerLength;
+        public uint HandlerLength;
 
-            public uint ClassTokenOrFilterOffset;
-        }
+        public uint ClassTokenOrFilterOffset;
     }
 }

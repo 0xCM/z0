@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Linq.Expressions;
+    using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Option;
+    using static z;
 
     using XPR = System.Linq.Expressions.Expression;
     using PX = System.Linq.Expressions.ParameterExpression;
@@ -22,6 +23,7 @@ namespace Z0
         /// <param name="Host">The object that exposes the method if not static; otherwise null</param>
         /// <param name="m">The method to be invoked</param>
         /// <param name="args">The arguments supplied to the method when invoked</param>
+        [MethodImpl(Inline), Op]
         public static MethodCallExpression call(object Host, MethodInfo m, params PX[] args)
             => XPR.Call(ifNotNull(Host, h => constant(h)), m, args);
 
@@ -30,6 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to be invoked</param>
         /// <param name="args">The arguments supplied to the method when invoked</param>
+        [MethodImpl(Inline), Op]
         public static MethodCallExpression call(MethodInfo m, params PX[] args)
             => call(null, m, args);
     }

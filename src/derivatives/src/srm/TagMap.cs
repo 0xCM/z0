@@ -15,19 +15,6 @@ namespace Z0.Derivatives.SRM
 
     using static Tags;
 
-    public readonly struct MetadataHandle<T>
-    {
-        public readonly T Data;
-
-        [MethodImpl(Inline)]
-        public MetadataHandle(T src)
-            => Data = src;
-
-        [MethodImpl(Inline)]
-        public static implicit operator MetadataHandle<T>(T src)
-            => new MetadataHandle<T>(src);
-    }
-
     public readonly struct MetadataHandleE
     {
         // bits:
@@ -118,10 +105,11 @@ namespace Z0.Derivatives.SRM
         /// <see cref="MethodSpecificationHandle"/>.
         /// </param>
         /// <exception cref="ArgumentException">Unexpected handle kind.</exception>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static uint HasCustomAttribute(MetadataHandleE handle)
             => (handle.RowId << (byte)HasCustomAttributeTag.BitCount) | (uint)CustomAttribute(handle.Kind);
 
+        [Op]
         public static HasCustomAttributeTag CustomAttribute(HandleKind kind)
         {
             switch (kind)

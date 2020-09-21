@@ -12,7 +12,9 @@ namespace Z0
         public static int Main(params string[] args)
         {
             using var wf = Flow.shell(args);
-            iter(wf.Modules.Files, m => wf.Raise(WfEvents.data(m, wf.Ct)));
+            using var runner = new WfRunner(wf);
+            runner.Run();
+            // iter(wf.Modules.Files, m => wf.Raise(WfEvents.data(m, wf.Ct)));
             return 0;
         }
     }

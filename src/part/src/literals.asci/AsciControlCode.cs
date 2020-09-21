@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using Sym = AsciControl;
 
     /// <summary>
@@ -14,13 +14,13 @@ namespace Z0
         /// <summary>
         /// The backspace control symbol code
         /// </summary>
-        Backspace = (byte)Sym.Backspace,        
+        BS = (byte)Sym.BS,
 
         /// <summary>
         /// The tab control symbol, asci code 9
         /// </summary>
         Tab = (byte)Sym.Tab,
-        
+
         /// <summary>
         /// The line-feed/new-line control symbol, asci code 10
         /// </summary>

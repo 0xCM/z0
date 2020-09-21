@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Security;
+
    public interface IRngSampler<T> : IRngStream<T>
         where T : struct
     {
@@ -13,7 +15,7 @@ namespace Z0
         int BufferLength {get;}
 
         /// <summary>
-        /// The type of distibution being sampled
+        /// The type of distribution being sampled
         /// </summary>
         DistributionKind DistKind{get;}
     }

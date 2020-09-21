@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -12,32 +13,35 @@ namespace Z0
     /// <summary>
     /// Describes/models a literal text resource
     /// </summary>
-    public readonly struct TextResource : ITextResource
+    public struct TextResource : ITextual
     {
+        const string RenderPattern = "{0,-10} | {1,-16} | {2}";
+
         /// <summary>
         /// The resource identifier
         /// </summary>
-        public readonly ulong Identifier {get;}
+        public FieldInfo Source;
 
         /// <summary>
         /// The resource address
         /// </summary>
-        public MemoryAddress Location {get;}
+        public MemoryAddress Address;
 
         /// <summary>
         /// The resource value extracted from the accompanying location
         /// </summary>
-        public string Content {get;}
-
-        ulong ITextResource.Location
-            => Location;
+        public string Value;
 
         [MethodImpl(Inline)]
-        public TextResource(ulong id, MemoryAddress location, string value)
+        public TextResource(FieldInfo src, MemoryAddress address, string value)
         {
-            Identifier = id;
-            Location = location;
-            Content = value;
+            Source = src;
+            Address = address;
+            Value = value;
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => text.format(RenderPattern, Source.Name, Address, Value);
     }
 }

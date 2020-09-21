@@ -3,9 +3,11 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
+    using System.Security;
+
     /// <summary>
-    /// Characterizes source capable of producing an interminable sequence of pseudorandom bounded points 
+    /// Characterizes source capable of producing an interminable sequence of pseudorandom bounded points
     /// of any numeric type among: sbyte, byte, short, ushort, int, uint, long, ulong, float, double
     /// </summary>
     public interface IPolyrand : IPolySource,
@@ -13,24 +15,24 @@ namespace Z0
         IRngBoundPointSource<byte>,
         IRngBoundPointSource<short>,
         IRngBoundPointSource<ushort>,
-        IRngBoundPointSource<int>, 
-        IRngBoundPointSource<uint>, 
+        IRngBoundPointSource<int>,
+        IRngBoundPointSource<uint>,
         IRngBoundPointSource<long>,
-        IRngBoundPointSource<ulong>, 
+        IRngBoundPointSource<ulong>,
         IRngBoundPointSource<float>,
-        IRngBoundPointSource<double> 
+        IRngBoundPointSource<double>
     {
         /// <summary>
         /// Retrieves the random stream navigator, if supported
         /// </summary>
-        Option<IRngNav> Navigator {get;}    
-    } 
+        Option<IRngNav> Navigator {get;}
+    }
 
     /// <summary>
-    /// Characterizes a type that provides access to a stateful and parametric-polymorphic 
+    /// Characterizes a type that provides access to a stateful and parametric-polymorphic
     /// pseudorandom number generator
     /// </summary>
-    public interface IPolyrandProvider 
+    public interface IPolyrandProvider
     {
         IPolyrand Random {get;}
     }

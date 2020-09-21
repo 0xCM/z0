@@ -3,29 +3,30 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
+    using static z;
 
     partial struct Projectors
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BoxedValueMap<T> convert<T>(Func<object,T> f)
             where T : struct
-                => convert(f, sys.alloc<T>(1));
+                => convert(f, alloc<T>(1));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static BoxedValueMap<T> convert<T>(Func<ValueType,T> f)
             where T : struct
-                => convert(f, sys.alloc<T>(1));
+                => convert(f, alloc<T>(1));
 
         [MethodImpl(Inline)]
         public static ValueMap<S,T> convert<S,T>(Func<S,T> f)
             where S : struct
             where T : struct
-                => convert(f, sys.alloc<T>(1));
+                => convert(f, alloc<T>(1));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         static BoxedValueMap<T> convert<T>(Func<object,T> f, T[] dst)

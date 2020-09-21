@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="f">An expression representing the function to invoke</param>
         /// <param name="args">The function arguments</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static InvocationExpression invoke(XPR f, params XPR[] args)
             => XPR.Invoke(f, args);
 

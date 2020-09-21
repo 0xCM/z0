@@ -139,7 +139,7 @@ namespace Z0
             => Raise(WfEvents.disposed(step, Ct));
 
         void Created<H>(H host)
-            where H : WfHost<H>, new()
+            where H : IWfHost<H>, new()
                 => Raise(WfEvents.created(host.Id, Ct));
 
         void Disposed<H>(H host)
@@ -226,7 +226,7 @@ namespace Z0
 
         void DataRow<T>(T content)
             where T : ITextual
-                => Raise(WfEvents.data(typeof(T).Name, content, Ct));
+                => Raise(WfEvents.data(content, Ct));
 
         void DataRow<K,T>(K kind, T content)
             where T : ITextual

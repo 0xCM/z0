@@ -4,48 +4,23 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Derivatives.SRM
 {
     using System;
     using System.Runtime.InteropServices;
 
-    using static Part;
-
-    partial struct ClrStorage
+    partial struct MetadataRows
     {
         //  0x1B
         [StructLayout(LayoutKind.Sequential)]
-        public struct TypeSpecRow
+        public struct TypeSpec
         {
             public uint Signature;
         }
 
-        //  0x1C
-        [StructLayout(LayoutKind.Sequential)]
-        public struct ImplMapRow
-        {
-            public PInvokeMapFlags PInvokeMapFlags;
-
-            public uint MemberForwarded;
-
-            public uint ImportName;
-
-            public uint ImportScope;
-        }
-
-        //  0x1D
-        [StructLayout(LayoutKind.Sequential)]
-        public struct FieldRVARow
-        {
-            public uint RVA;
-
-            public uint Field;
-
-        }
-
         //  0x1E
         [StructLayout(LayoutKind.Sequential)]
-        public struct EnCLogRow
+        public struct EnCLog
         {
             public uint Token;
 
@@ -55,96 +30,10 @@ namespace Z0
 
         //  0x1F
         [StructLayout(LayoutKind.Sequential)]
-        public struct EnCMapRow
+        public struct EnCMap
         {
             public uint Token;
 
-        }
-
-        //  0x20
-        [StructLayout(LayoutKind.Sequential)]
-        public struct AssemblyRow
-        {
-            public uint HashAlgId;
-
-            public ushort MajorVersion;
-
-            public ushort MinorVersion;
-
-            public ushort BuildNumber;
-
-            public ushort RevisionNumber;
-
-            public AssemblyFlags Flags;
-
-            public uint PublicKey;
-
-
-            public uint Name;
-
-
-            public uint Culture;
-        }
-
-        //  0x21
-        [StructLayout(LayoutKind.Sequential)]
-        public struct AssemblyProcessorRow
-        {
-            public uint Processor;
-        }
-
-        //  0x22
-        [StructLayout(LayoutKind.Sequential)]
-        public struct AssemblyOSRow
-        {
-            public uint OSPlatformId;
-
-            public uint OSMajorVersionId;
-
-            public uint OSMinorVersionId;
-
-        }
-
-        //  0x23
-        [StructLayout(LayoutKind.Sequential)]
-        public struct AssemblyRefRow
-        {
-            public ushort MajorVersion;
-
-            public ushort MinorVersion;
-
-            public ushort BuildNumber;
-
-            public ushort RevisionNumber;
-
-            public AssemblyFlags Flags;
-
-            public uint PublicKeyOrToken;
-
-            public uint Name;
-
-            public uint Culture;
-
-            public uint HashValue;
-        }
-
-        //  0x24
-        [StructLayout(LayoutKind.Sequential)]
-        public struct AssemblyRefProcessorRow
-        {
-            public uint Processor;
-            public uint AssemblyRef;
-
-        }
-
-        //  0x25
-        [StructLayout(LayoutKind.Sequential)]
-        public struct AssemblyRefOSRow
-        {
-            public uint OSPlatformId;
-            public uint OSMajorVersionId;
-            public uint OSMinorVersionId;
-            public uint AssemblyRef;
         }
 
         //  0x26
@@ -158,32 +47,9 @@ namespace Z0
             public uint HashValue;
         }
 
-        //  0x27
-        [StructLayout(LayoutKind.Sequential)]
-        public struct ExportedTypeRow
-        {
-            public TypeDefFlags Flags;
-
-            public uint TypeDefId;
-
-            public uint TypeName;
-
-            public uint TypeNamespace;
-
-            public uint Implementation;
-
-            public bool IsNested
-            {
-                get
-                {
-                    return (this.Flags & TypeDefFlags.NestedMask) != 0;
-                }
-            }
-        }
-
         //  0x28
         [StructLayout(LayoutKind.Sequential)]
-        public struct ManifestResourceRow
+        public struct ManifestResource
         {
             public uint Offset;
 
@@ -205,7 +71,7 @@ namespace Z0
 
         //  0x2A
         [StructLayout(LayoutKind.Sequential)]
-        public struct GenericParamRow
+        public struct GenericParam
         {
             public ushort Number;
 
@@ -219,7 +85,7 @@ namespace Z0
 
         //  0x2B
         [StructLayout(LayoutKind.Sequential)]
-        public struct MethodSpecRow
+        public struct MethodSpec
         {
             public uint Method;
 
@@ -228,7 +94,7 @@ namespace Z0
 
         //  0x2C
         [StructLayout(LayoutKind.Sequential)]
-        public struct GenericParamConstraintRow
+        public struct GenericParamConstraint
         {
             public uint Owner;
 

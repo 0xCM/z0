@@ -5,18 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Reflection;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    using XPR = System.Linq.Expressions.Expression;
-
     public partial class XQuery
-    { 
+    {
         /// <summary>
         /// Tests whether an expression is a conversion
         /// </summary>

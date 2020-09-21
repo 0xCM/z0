@@ -34,26 +34,5 @@ namespace Z0
 
         const int ResLength = 0xA;
 
-        [MethodImpl(Inline), Op]
-        static ReadOnlySpan<char> Symbols(ReadOnlySpan<byte> src)
-            => Spans.cast<char>(src);
-
-        [MethodImpl(Inline), Op]
-        static string Render(ReadOnlySpan<char> src)
-            => new string(src);
-
-        [MethodImpl(Inline), Op]
-        public static int read(ReadOnlySpan<MemoryAddress> locations, Span<TextResource> dst)
-        {
-            var count = Math.Min(locations.Length, dst.Length);
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var address = ref skip(locations,(uint)i);
-                var data = Address.view<byte>(address, ResLength);
-                var content = Render(Symbols(data));
-                seek(dst, (uint)i) = new TextResource((ulong)address, address, content);
-            }
-            return count;
-        }
     }
 }

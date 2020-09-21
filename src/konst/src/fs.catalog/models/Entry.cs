@@ -16,12 +16,12 @@ namespace Z0
         {
             const string FormatPattern = "{0}: {1}";
 
-            public readonly FS.ObjectKind Kind; 
+            public readonly ObjectKind Kind;
 
-            public readonly AsciEncoded Name;       
-            
+            public readonly AsciEncoded Name;
+
             [MethodImpl(Inline)]
-            public Entry(string name, FS.ObjectKind kind)
+            public Entry(string name, ObjectKind kind)
             {
                 Name = name;
                 Kind = kind;
@@ -40,8 +40,8 @@ namespace Z0
 
             public override int GetHashCode()
                 => Name.GetHashCode();
-        
-            public override bool Equals(object src)        
+
+            public override bool Equals(object src)
                 => src is Entry x && Equals(x);
         }
     }

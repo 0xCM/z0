@@ -3,7 +3,9 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
+    using System.Security;
+
     /// <summary>
     /// Identifies a source of random data
     /// </summary>

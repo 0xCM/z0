@@ -20,7 +20,7 @@ namespace Z0
         /// </summary>
         /// <param name="declaringType">The type to search</param>
         /// <param name="argTypes">The method parameter types in ordinal position</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static Option<ConstructorInfo> ctor(Type declaringType, params Type[] argTypes)
             => declaringType.GetConstructor(BF_Instance, null, argTypes, new ParameterModifier[]{});
 
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="args">The method parameter types in ordinal position</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static Option<ConstructorInfo> ctor<T>(params Type[] args)
             => ctor(typeof(T), args);
 
@@ -50,18 +50,17 @@ namespace Z0
         static Option<ConstructorInfo> ctor<X1,X2,T>()
             => ctor(typeof(T), typeof(X1), typeof(X2));
 
-
         /// <summary>
         /// Defines a function expression for an emitter
         /// </summary>
         /// <typeparam name="X">The emission type</typeparam>
         /// <param name="f">The emitter</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         static XFunc<X> fmake<X>(Func<X> f)
             => f;
 
         /// <summary>
-        /// Defines a function expression for a heterogenous fuction of arity 1
+        /// Defines a function expression for a heterogenous function of arity 1
         /// </summary>
         /// <typeparam name="X">The function argument type</typeparam>
         /// <typeparam name="Y">The return type</typeparam>
@@ -71,7 +70,7 @@ namespace Z0
             => f;
 
         /// <summary>
-        /// Defines a function expression for a heterogenous fuction of arity 2
+        /// Defines a function expression for a heterogenous function of arity 2
         /// </summary>
         /// <typeparam name="X1">The type of the first argument</typeparam>
         /// <typeparam name="X2">The type of the second argument</typeparam>

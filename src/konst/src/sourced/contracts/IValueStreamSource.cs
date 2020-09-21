@@ -3,14 +3,16 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Security;
 
-    [SuppressUnmanagedCodeSecurity]
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IValueStreamSource<T> : IValueSource<T>
         where T : struct
-    {        
-        ValueStreamEmitter<T> Emitter {get;}        
-    }          
+    {
+        ValueStreamEmitter<T> Emitter {get;}
+    }
 }

@@ -13,7 +13,7 @@ namespace Z0
     partial struct FS
     {
         [Table]
-        public struct EntryDetail : ITable<EntryDetail>
+        public struct EntryDetail
         {
             public FS.FilePath Path;
 

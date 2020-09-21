@@ -28,7 +28,7 @@ namespace Z0
             => src.WriteValues(dst);
 
         [MethodImpl(Inline)]
-        public static void values<T>(ref T src, Span<object> dst)
+        public static void values<T>(ref T src, Span<FieldValue> dst)
             where T : struct
         {
             var fields = span(typeof(T).DeclaredFields());
@@ -36,19 +36,54 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void values<T>(ref T src, ReadOnlySpan<FieldInfo> fields, Span<object> dst)
+        public static void values<T>(ref T src, ReadOnlySpan<FieldInfo> fields, Span<FieldValue> dst)
             where T : struct
         {
             ref var target = ref first(dst);
             var tRef = __makeref(src);
             var count = fields.Length;
             for(var i=0u; i<count; i++)
-                seek(target,i) = skip(fields,i).GetValueDirect(tRef);
+            {
+                ref readonly var f = ref skip(fields,i);
+                seek(target,i) = (f,f.GetValueDirect(tRef));
+            }
         }
-
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] values<T>(Type src)
             => map(search<T>(src),value<T>);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static FieldValue<T>[] values2<T>(Type src)
+        {
+            var fields = @readonly(search<T>(src));
+            var buffer = alloc<FieldValue<T>>(fields.Length);
+            var dst = span(buffer);
+            ref var target = ref first(dst);
+            var tRef = __makeref(src);
+            var count = fields.Length;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var f = ref skip(fields,i);
+                seek(target,i) = (f,(T)f.GetValueDirect(tRef));
+            }
+            return buffer;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static void values<S,T>(Span<FieldValue<T>> dst)
+            where S : struct
+        {
+            var src = typeof(S);
+            var fields = @readonly(search<T>(src));
+            ref var target = ref first(dst);
+            var tRef = __makeref(src);
+            var count = fields.Length;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var f = ref skip(fields,i);
+                seek(target,i) = (f,(T)f.GetValueDirect(tRef));
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Option;
+    using static z;
 
     using XPR = System.Linq.Expressions.Expression;
     using PX = System.Linq.Expressions.ParameterExpression;
@@ -70,7 +70,7 @@ namespace Z0
             }));
 
         /// <summary>
-        /// Creates and caches a delegate for a method realizing a function f:X->Y 
+        /// Creates and caches a delegate for a method realizing a function f:X->Y
         /// </summary>
         /// <typeparam name="X">The operand type</typeparam>
         /// <typeparam name="Y">The return type</typeparam>
@@ -79,13 +79,13 @@ namespace Z0
         public static Option<Func<X,Y>> func<X,Y>(MethodInfo m, object host = null)
             => Try(() => (Func<X,Y>)_cache.GetOrAdd(m, method =>
             {
-                var args = seq(paramX<X>());
-                var f = call(host, m, args.ToArray());
+                var args = array(paramX<X>());
+                var f = call(host, m, args);
                 return lambda<X, Y>(args, f).Compile();
             }));
 
         /// <summary>
-        /// Creates and caches a delegate for a method realizing a function f:X->Y 
+        /// Creates and caches a delegate for a method realizing a function f:X->Y
         /// </summary>
         /// <typeparam name="X">The operand type</typeparam>
         /// <typeparam name="Y">The return type</typeparam>
@@ -129,7 +129,7 @@ namespace Z0
             var typeDef = typeof(Func<,,>).GetGenericTypeDefinition();
             var type = typeDef.MakeGenericType(types);
             var args = new PX[]{
-                paramX(parameters[0].ParameterType, parameters[0].Name), 
+                paramX(parameters[0].ParameterType, parameters[0].Name),
                 paramX(parameters[1].ParameterType, parameters[1].Name)
                 };
 
@@ -156,7 +156,7 @@ namespace Z0
             }));
 
         /// <summary>
-        /// Creates and caches a function delegate for a method realizing a function f:X1->X2->X3->Y 
+        /// Creates and caches a function delegate for a method realizing a function f:X1->X2->X3->Y
         /// </summary>
         /// <typeparam name="X1">The first operand type</typeparam>
         /// <typeparam name="X2">The second operand type</typeparam>
@@ -173,7 +173,7 @@ namespace Z0
             });
 
         /// <summary>
-        /// Creates and caches a function delegate for a method realizing a function f:X1->X2->X3->X4->Y 
+        /// Creates and caches a function delegate for a method realizing a function f:X1->X2->X3->X4->Y
         /// </summary>
         /// <typeparam name="X1">The first operand type</typeparam>
         /// <typeparam name="X2">The second operand type</typeparam>

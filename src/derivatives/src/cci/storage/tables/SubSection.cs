@@ -4,20 +4,17 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Derivatives.SRM
 {
     using System;
     using System.Runtime.CompilerServices;
 
-    partial struct ClrStorage
+    public struct SubSection
     {
-        public struct SubSection
-        {
-            public string SectionName;
+        public string SectionName;
 
-            public uint Offset;
+        public uint Offset;
 
-            public MemoryBlock MemoryBlock;
-        }
+        public MemoryBlock MemoryBlock;
     }
 }

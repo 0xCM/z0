@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="X">The parameter type</typeparam>
         /// <param name="name">The parameter name</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static PX paramX<X>(string name = "x1")
             => XPR.Parameter(typeof(X), name);
 

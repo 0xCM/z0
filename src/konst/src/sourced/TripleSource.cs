@@ -19,11 +19,6 @@ namespace Z0
     public readonly struct TripleSource
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Triples<T> index<T>(IValueSource source, Triple<T>[] dst, T t = default)
-            where T : struct
-                => store(Sourced.triples(source, t).Take(dst.Length),dst);
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ConstTriple<T> constant<T>(IValueSource source, T t = default)
             where T : struct
                 => (VS.one(source, t), VS.one(source, t), VS.one(source, t));

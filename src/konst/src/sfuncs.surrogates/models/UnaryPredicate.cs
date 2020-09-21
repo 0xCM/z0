@@ -22,14 +22,14 @@ namespace Z0
                 => src.ToFunc();
 
             [MethodImpl(Inline)]
-            internal UnaryPredicate(Z0.UnaryPredicate<T> f, OpIdentity id)            
+            internal UnaryPredicate(Z0.UnaryPredicate<T> f, OpIdentity id)
             {
-                this.F = f;
-                this.Id = id;
+                F = f;
+                Id = id;
             }
 
             [MethodImpl(Inline)]
-            internal UnaryPredicate(Z0.UnaryPredicate<T> f, string name)            
+            internal UnaryPredicate(Z0.UnaryPredicate<T> f, string name)
             {
                 F = f;
                 Id = Identify.sfunc<T>(name);
