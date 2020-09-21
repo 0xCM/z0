@@ -17,7 +17,7 @@ namespace Z0.Asm
         void check_fixed_lists()
         {
 
-            var kinds = CellOpKinds.Known.ToArray();
+            var kinds = CellOps.kinds();
             Root.iter(kinds, k => Trace(k));
         }
     }

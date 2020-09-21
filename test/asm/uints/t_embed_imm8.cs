@@ -71,7 +71,7 @@ namespace Z0.Asm
 
         void check_imm(MethodInfo src, W128 w, Type tVector, StreamWriter dst)
         {
-            var kVector = VectorType.kind(tVector);
+            var kVector = VectorKinds.kind(tVector);
             var tCell = kVector.CellType();
             var vbroadcast = Search.vbroadcast(tCell,w);
             var vones = vbroadcast.Invoke(null, new object[]{w,one(tCell).Boxed});
@@ -130,7 +130,7 @@ namespace Z0.Asm
 
         void check_imm(MethodInfo src, W256 w, Type tVector, StreamWriter dst)
         {
-            var kVector = VectorType.kind(tVector);
+            var kVector = VectorKinds.kind(tVector);
             var tCell = kVector.CellType();
             var vbroadcast = Search.vbroadcast(tCell,w);
             var vones = vbroadcast.Invoke(null, new object[]{w,one(tCell).Boxed});
@@ -170,7 +170,7 @@ namespace Z0.Asm
 
         void check_cell_type(Type tVector, W128 w)
         {
-            var kVector = VectorType.kind(tVector);
+            var kVector = VectorKinds.kind(tVector);
             var tCell = kVector.CellType();
 
             if(TraceDetailEnabled)
@@ -228,7 +228,7 @@ namespace Z0.Asm
 
         void check_cell_type(Type tVector, W256 w)
         {
-            var kVector = VectorType.kind(tVector);
+            var kVector = VectorKinds.kind(tVector);
             var tCell = kVector.CellType();
 
             if(TraceDetailEnabled)

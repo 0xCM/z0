@@ -16,6 +16,7 @@
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Fixed)" />
     <ProjectReference Include="$(GVec)" />
+    <ProjectReference Include="$(CheckDynamic)" />
 
 
   </ItemGroup>

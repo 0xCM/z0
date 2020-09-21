@@ -22,6 +22,7 @@
     <Konst>$(Src)konst/z0.konst.csproj</Konst>
 
     <Check>$(Src)check/z0.check.csproj</Check>
+    <CheckDynamic>$(Src)check.dynamic/z0.check.dynamic.csproj</CheckDynamic>
 
     <Data>$(Src)data/z0.data.csproj</Data>
     <Expressive>$(Src)expressive/z0.expressive.csproj</Expressive>

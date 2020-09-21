@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class VectorType
+    partial class VectorKinds
     {
         /// <summary>
         /// Returns true if a type is an open generic 128-bit intrinsic vector

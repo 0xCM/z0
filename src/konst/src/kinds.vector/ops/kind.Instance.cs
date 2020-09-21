@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class VectorType
+    partial class VectorKinds
     {
         /// <summary>
         /// Computes a vector kind classifier from a 128-bit vector instance

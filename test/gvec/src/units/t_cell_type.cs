@@ -8,19 +8,19 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     public class t_cell_type : t_vectors<t_cell_type>
-    {    
+    {
         public void check_cell_types()
         {
-            iter(VectorType.Types128, t => check_cell_type(t,n128));
-            iter(VectorType.Types256, t => check_cell_type(t,n256));            
+            iter(VectorKinds.Types128, t => check_cell_type(t,n128));
+            iter(VectorKinds.Types256, t => check_cell_type(t,n256));
         }
-        
+
         void check_cell_type(Type tVector, N128 w)
         {
-            var kVector = VectorType.kind(tVector);
+            var kVector = VectorKinds.kind(tVector);
             var tCell = kVector.CellType();
 
             if(TraceDetailEnabled)
@@ -29,7 +29,7 @@ namespace Z0
                 Notify($"kVector := {kVector}");
                 Notify($"tCell := {tCell.Name}");
             }
-            
+
             Claim.Require(tCell.IsNonEmpty());
 
             if(tVector == typeof(Vector128<sbyte>))
@@ -91,7 +91,7 @@ namespace Z0
 
         void check_cell_type(Type tVector, N256 w)
         {
-            var kVector = VectorType.kind(tVector);
+            var kVector = VectorKinds.kind(tVector);
             var tCell = kVector.CellType();
 
             if(TraceDetailEnabled)
@@ -100,7 +100,7 @@ namespace Z0
                 Notify($"kVector := {kVector}");
                 Notify($"tCell := {tCell.Name}");
             }
-            
+
             Claim.Require(tCell.IsNonEmpty());
 
             if(tVector == typeof(Vector256<sbyte>))

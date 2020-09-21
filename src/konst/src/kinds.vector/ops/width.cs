@@ -13,7 +13,7 @@ namespace Z0
     using TW = TypeWidth;
     using VW = VectorWidth;
 
-    partial class VectorType
+    partial class VectorKinds
     {
         [MethodImpl(Inline)]
         public static VW width<W>(W w = default)

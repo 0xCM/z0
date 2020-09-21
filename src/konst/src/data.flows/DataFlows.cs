@@ -51,5 +51,19 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Arrow<S,T> connect<S,T>(S src, T dst)
             => new Arrow<S,T>(src, dst);
+
+
+        [MethodImpl(Inline)]
+        public static Facet<N,A,S,T> facet<N,A,S,T>(N name, A value, S s = default, T t = default)
+            => new Facet<N,A,S,T>(name,value);
+
+        [MethodImpl(Inline), Op]
+        public static Facet<S,T> facet<S,T>(in asci32 name, in variant value, Dependency<S,T> r = default)
+            => new Facet<S,T>(name,value);
+
+        [MethodImpl(Inline), Op]
+        public static Facet<S,T> facet<A,S,T>(in asci32 name, A value, Dependency<S,T> r = default)
+            where A : unmanaged
+                => new Facet<S,T>(name, Variant.from(value));
     }
 }

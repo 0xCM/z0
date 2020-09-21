@@ -8,7 +8,6 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Expressive)" />
     <ProjectReference Include="$(Identity)" />
-    <ProjectReference Include="$(Fixed)" />
   </ItemGroup>
 
 </Project>

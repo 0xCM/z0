@@ -9,36 +9,35 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static Graphs;
 
     public readonly struct MultiArrow<A> : IMultiArrow<A>, IEquatable<MultiArrow<A>>, INullary<MultiArrow<A>>
         where A : IEquatable<A>
     {
         A[] Head {get;}
-        
+
         A[] Tail {get;}
 
-        public static MultiArrow<A> Empty 
-            => new MultiArrow<A>(Arrays.empty<A>());        
+        public static MultiArrow<A> Empty
+            => new MultiArrow<A>(Arrays.empty<A>());
 
-        public Span<A> Nodes 
+        public Span<A> Nodes
             => Head.Concat(Tail).ToSpan();
-        
+
         public string Identifier {get;}
 
-        public MultiArrow<A> Src 
+        public MultiArrow<A> Src
             => new MultiArrow<A>(Head);
 
         public MultiArrow<A> Dst
              => default;
 
-        public int Length 
+        public int Length
             => Head.Length + Tail.Length;
-        
+
         [MethodImpl(Inline)]
         public static implicit operator MultiArrow<A>(A[] src)
             => new MultiArrow<A>(src);
-        
+
         internal MultiArrow(MultiArrow<A> head, MultiArrow<A> tail)
         {
             Head = head.Nodes.ToArray();
@@ -59,16 +58,16 @@ namespace Z0
         {
             Head = nodes;
             Tail = Arrays.empty<A>();
-            Identifier = DefineIdentifier(Head,Tail);        
-        }        
-        
+            Identifier = DefineIdentifier(Head,Tail);
+        }
+
         public bool IsEmpty
-        {            
+        {
             [MethodImpl(Inline)]
             get => Arrays.empty(Head) && Arrays.empty(Tail);
         }
 
-        MultiArrow<A> INullary<MultiArrow<A>>.Zero 
+        MultiArrow<A> INullary<MultiArrow<A>>.Zero
             => Empty;
 
         [MethodImpl(Inline)]
@@ -94,23 +93,23 @@ namespace Z0
             var length = src.Head.Length;
             if(length != Head.Length)
                 return false;
-            
+
             for(var i=0; i<length; i++)
                 if(!this[i].Equals(src[i]))
                     return false;
 
             return true;
         }
-            
+
         public override int GetHashCode()
             => Identifier.GetHashCode();
 
         public override bool Equals(object src)
-            => src is MultiArrow<A> p && Equals(p);        
+            => src is MultiArrow<A> p && Equals(p);
 
         public override string ToString()
             => Format();
- 
+
         static string DefineIdentifier(A[] head, A[] tail)
             => head.Concat(tail).Select(c => $"{c}").Intersperse(Connector).Concat();
     }

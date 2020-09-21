@@ -8,16 +8,6 @@ namespace Z0
     {
         object[] Nodes {get;}
     }
-    
-    public interface IMixedArrow<A,S,T> : IIdentification<A>
-        where S : IIdentification<S>, new()
-        where T : IIdentification<T>, new()
-        where A : IMixedArrow<A,S,T>, new()
-    {
-        S Src {get;}
-
-        T Dst {get;}
-    }
 
     /// <summary>
     /// Characterizes a path between heterogeneous nodes
@@ -35,7 +25,7 @@ namespace Z0
     }
 
     public interface IMixedPath<A,B,C> : IMixedPath<A,B>
-    {        
+    {
         C c {get;}
 
         object[] IMixedPath.Nodes

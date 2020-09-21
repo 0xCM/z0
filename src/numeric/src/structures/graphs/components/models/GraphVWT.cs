@@ -6,16 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static NumericCast;
-    
-    /// <summary>
-    /// Defines a graph in which data may be associated with each node and edges are weighted
-    /// </summary>
-    /// <typeparam name="V">The vertex index type</typeparam>
-    /// <typeparam name="W">The weight type</typeparam>
-    /// <typeparam name="T">The vertext payload type</typeparam>
+
     public class Graph<V,W,T>
         where V : unmanaged
         where W : unmanaged
@@ -28,7 +22,7 @@ namespace Z0
         internal Graph(Vertex<V,T>[] vertices, Edge<V,W>[] edges)
         {
             this.vertices = vertices;
-            this.edges = edges;            
+            this.edges = edges;
         }
 
         /// <summary>
@@ -69,5 +63,5 @@ namespace Z0
             get => ref Vertex(index);
         }
     }
- 
+
 }

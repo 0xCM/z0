@@ -4,8 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [ApiHost]
+    [ApiHost("kinds.numeric")]
     public partial class NumericKinds
-    {            
+    {
+        public static NK<T> from<T>()
+            where T : unmanaged
+                => default;
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static NumericCast;
 
@@ -19,28 +19,28 @@ namespace Z0
     /// <remarks>For terminology consult, for example, https://xlinux.nist.gov/dads/<remarks>
     public class Graph<V>
         where V : unmanaged
-    {        
-        readonly Vertex<V>[] vertices;
+    {
+        readonly Vertex<V>[] Vertices;
 
-        readonly Edge<V>[] edges;
-        
-        readonly NodeIndex<V> index;
+        readonly Edge<V>[] Edges;
+
+        readonly NodeIndex<V> Index;
 
         [MethodImpl(Inline)]
         internal Graph(Vertex<V>[] vertices, Edge<V>[] edges)
         {
-            this.vertices = vertices;
-            this.edges = edges; 
-            this.index = NodeIndex<V>.Build(vertices, edges);            
+            Vertices = vertices;
+            Edges = edges;
+            Index = NodeIndex<V>.Build(vertices, edges);
         }
-                    
+
         /// <summary>
-        /// Retrieves the indices of a targets' source vertices 
+        /// Retrieves the indices of a targets' source vertices
         /// </summary>
         /// <param name="source">The source vertex</param>
         [MethodImpl(Inline)]
         public List<V> Sources(V target)
-            => index.Sources(target);
+            => Index.Sources(target);
 
         /// <summary>
         /// Retrieves the indices of a sources' target vertices
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="source">The source vertex</param>
         [MethodImpl(Inline)]
         public List<V> Targets(V source)
-            => index.Targets(source);
+            => Index.Targets(source);
 
         /// <summary>
         /// Looks up a vertex based on its index
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="index">The vertex index</param>
         [MethodImpl(Inline)]
         public ref Vertex<V> Vertex(V index)
-            => ref vertices[convert<V,ulong>(index)];
+            => ref Vertices[convert<V,ulong>(index)];
 
         /// <summary>
         /// Looks up an edge based on its index
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="index">The vertex index</param>
         [MethodImpl(Inline)]
         public ref Edge<V> Edge(int index)
-            => ref edges[index];
+            => ref Edges[index];
 
         /// <summary>
         /// Looks up a vertex based on its index
@@ -80,13 +80,13 @@ namespace Z0
         /// Specifies the edges declared by the graph
         /// </summary>
         public int EdgeCount
-            => edges.Length;
+            => Edges.Length;
 
         /// <summary>
         /// Specifies the number of vertices declared by the graph
         /// </summary>
         public int VertexCount
-            => vertices.Length;
+            => Vertices.Length;
 
         /// <summary>
         /// Computes the in-degree of a vertex; i.e. the count of incoming vertices
@@ -103,7 +103,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public int OutDegree(V source)
             => Targets(source).Count;
-        
+
         /// <summary>
         /// Determines whether a vertex is disconnected from the graph
         /// </summary>
@@ -116,7 +116,7 @@ namespace Z0
         /// Determines whether the vertex is a sink, i.e. has no outgoing edges
         /// </summary>
         /// <param name="vertex">The vertex to test</param>
-        /// <remarks>An isolated node in this context is not considered to be a 
+        /// <remarks>An isolated node in this context is not considered to be a
         /// sink (or source) so "degenerate" sinks are excluded
         /// </remarks>
         [MethodImpl(Inline)]
@@ -127,7 +127,7 @@ namespace Z0
         /// Determines whether the vertex is a source, i.e. has only outgoing edges
         /// </summary>
         /// <param name="vertex">The vertex to test</param>
-        /// <remarks>An isolated node in this context is not considered to be a 
+        /// <remarks>An isolated node in this context is not considered to be a
         /// sink (or source) so "degenerate" sources are excluded
         /// </remarks>
         [MethodImpl(Inline)]
@@ -135,7 +135,7 @@ namespace Z0
             => OutDegree(vertex) != 0 && InDegree(vertex) == 0;
 
         /// <summary>
-        /// Traverses the graph until a sink is reached, a cycle is  detected, 
+        /// Traverses the graph until a sink is reached, a cycle is  detected,
         /// or an optionally-specified vertex is reached
         /// </summary>
         /// <param name="v0">The start vertex</param>
@@ -147,9 +147,9 @@ namespace Z0
             {
                 traversed(target);
 
-                if(target.Equals(v0) || target.Equals(vEnd)) 
-                    break;                
-                                
+                if(target.Equals(v0) || target.Equals(vEnd))
+                    break;
+
                 Traverse(target, traversed, v0);
             }
         }
@@ -162,15 +162,15 @@ namespace Z0
         public IEnumerable<V> Path(V v0,  V vEnd = default)
         {
             foreach(var target in Targets(v0))
-            {                
+            {
                 yield return target;
-                
-                if(target.Equals(v0) || target.Equals(vEnd)) 
-                    break;                
-                
+
+                if(target.Equals(v0) || target.Equals(vEnd))
+                    break;
+
                 foreach(var subnode in Path(target,  v0))
                     yield return subnode;
             }
-        }    
-    } 
+        }
+    }
 }

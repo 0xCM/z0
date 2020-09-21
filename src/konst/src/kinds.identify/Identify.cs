@@ -17,7 +17,7 @@ namespace Z0
     using NK = NumericKind;
     using ID = NumericApiKey;
 
-    [ApiHost]
+    [ApiHost("kinds.identify")]
     public partial class Identify
     {
         /// <summary>

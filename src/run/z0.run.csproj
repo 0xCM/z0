@@ -21,6 +21,7 @@
     <ProjectReference Include="$(Json)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Cil)" />
+    <ProjectReference Include="$(CheckDynamic)" />
 
   </ItemGroup>
 
