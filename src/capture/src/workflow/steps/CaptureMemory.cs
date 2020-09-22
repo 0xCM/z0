@@ -53,15 +53,15 @@ namespace Z0.Asm
             ParseBuffer.Clear();
         }
 
-        public CapturedMemory Run(MemoryAddress src)
+        public CapturedMemoryBlock Run(MemoryAddress src)
         {
             Wf.Running(StepId, src);
 
             ClearBuffers();
 
-            var raw = X86Extraction.extract(src, ExtractBuffer);
-            var tryParse = X86Extraction.parse(raw, ParseBuffer);
-            var captured = default(CapturedMemory);
+            var raw = ApiCodeExtractors.extract(src, ExtractBuffer);
+            var tryParse = ApiCodeExtractors.parse(raw, ParseBuffer);
+            var captured = default(CapturedMemoryBlock);
             if(tryParse.IsSome())
             {
                 var parsed = tryParse.Value;
@@ -84,7 +84,7 @@ namespace Z0.Asm
                         offset += size;
                     }
 
-                    captured = new CapturedMemory(new X86DataFlow(src, raw, parsed), decoded, formatBuffer);
+                    captured = new CapturedMemoryBlock(new CodeBlockDataFlow(src, raw, parsed), decoded, formatBuffer);
                 }
             }
 

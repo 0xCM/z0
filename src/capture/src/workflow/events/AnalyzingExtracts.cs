@@ -18,13 +18,13 @@ namespace Z0.Events
 
         public string ActorName {get;}
 
-        public X86ApiExtract[] Extracts {get;}
+        public ApiMemberExtract[] Extracts {get;}
 
         public uint ExtractCount
             => (uint)Extracts.Length;
 
         [MethodImpl(Inline)]
-        internal AnalyzingExtracts(string worker, X86ApiExtract[] extracts, CorrelationToken ct)
+        internal AnalyzingExtracts(string worker, ApiMemberExtract[] extracts, CorrelationToken ct)
         {
             EventId = evid(nameof(AnalyzingExtracts), ct);
             ActorName = worker;

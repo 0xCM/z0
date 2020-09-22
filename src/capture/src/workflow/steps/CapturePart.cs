@@ -169,7 +169,7 @@ namespace Z0
         public ReadOnlySpan<AsmRoutineCode> Capture(ApiHostUri host, ReadOnlySpan<MethodInfo> src, FilePath dst)
         {
             var count = src.Length;
-            var code = span<ApiCapture>(count);
+            var code = span<ApiCaptureBlock>(count);
             var target = span<AsmRoutineCode>(count);
 
             using var writer = dst.Writer();
@@ -178,7 +178,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var method = ref skip(src,i);
-                var captured = quick.Capture(method).ValueOrDefault(ApiCapture.Empty);
+                var captured = quick.Capture(method).ValueOrDefault(ApiCaptureBlock.Empty);
                 if(captured.IsNonEmpty)
                 {
                     seek(code, i) = captured;
@@ -191,7 +191,7 @@ namespace Z0
             return target;
         }
 
-        void Save(ApiCapture code, StreamWriter dst)
+        void Save(ApiCaptureBlock code, StreamWriter dst)
         {
             var asm = Decoder.Decode(code).Require();
             var formatted = Formatter.FormatFunction(asm);

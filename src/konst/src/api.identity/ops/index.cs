@@ -53,7 +53,7 @@ namespace Z0
         }
 
         [Op]
-        public static ApiCodeIndex index(ApiMemberIndex members, OpIndex<ApiCodeBlock> code)
+        public static ApiCodeIndex index(ApiMemberIndex members, ApiOpIndex<ApiCodeBlock> code)
             => ApiCodeIndex.create(members,code);
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The members to index</param>
         /// <typeparam name="M">The member type</typeparam>
-        public static OpIndex<M> index<M>(ReadOnlySpan<M> src)
+        public static ApiOpIndex<M> index<M>(ReadOnlySpan<M> src)
             where M : struct, IApiMember
                 => index(src.MapArray(h => (h.Id, h)));
 
@@ -70,13 +70,13 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         [Op]
-        public static OpIndex<ApiCodeBlock> index(IEnumerable<ApiCodeBlock> src)
+        public static ApiOpIndex<ApiCodeBlock> index(IEnumerable<ApiCodeBlock> src)
             => index(src.Select(x => (x.OpUri.OpId, x)));
 
         static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new Exception(text.concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
 
-        public static OpIndex<T> index<T>(IEnumerable<(OpIdentity,T)> src, bool deduplicate = true)
+        public static ApiOpIndex<T> index<T>(IEnumerable<(OpIdentity,T)> src, bool deduplicate = true)
         {
             var items = src.ToArray();
             var identities = items.Select(x => x.Item1).ToArray();
@@ -97,7 +97,7 @@ namespace Z0
                 HashTable = src.ToDictionary();
 
             var duplicated = duplicates.Select(d => ApiIdentityParser.parse(d)).ToArray();
-            return new OpIndex<T>(HashTable, duplicated);
+            return new ApiOpIndex<T>(HashTable, duplicated);
         }
     }
 }

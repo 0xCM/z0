@@ -30,7 +30,7 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {
-            var parts = PartIdParser.Service.ParseValid(args);
+            var parts = ApiPartIdParser.Service.ParseValid(args);
             RunApp(parts);
         }
 

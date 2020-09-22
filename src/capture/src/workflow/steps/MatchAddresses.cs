@@ -21,11 +21,11 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        readonly X86ApiExtract[] Extracted;
+        readonly ApiMemberExtract[] Extracted;
 
         readonly AsmRoutine[] Decoded;
 
-        public MatchAddresses(IWfCaptureState state, X86ApiExtract[] extracted, AsmRoutine[] decoded, CorrelationToken ct)
+        public MatchAddresses(IWfCaptureState state, ApiMemberExtract[] extracted, AsmRoutine[] decoded, CorrelationToken ct)
         {
             State = state;
             Wf =state.Wf;

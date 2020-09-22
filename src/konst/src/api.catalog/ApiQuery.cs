@@ -54,15 +54,6 @@ namespace Z0
         public static string format(PartId src)
             => Part.format(src);
 
-
-        [MethodImpl(Inline), Op]
-        public static bool contains(in PartIndex src, PartId id)
-            => src.Data.ContainsKey(id);
-
-        [MethodImpl(Inline), Op]
-        public static Option<IPart> search(in PartIndex src, PartId id)
-            => src.Data.TryGetValue(id, out var part) ? some(part) : none<IPart>();
-
         public static bool nonempty(Assembly src)
             => src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Count() > 0;
 

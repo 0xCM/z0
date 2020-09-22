@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost]
+    [ApiHost("formatting.options")]
     public readonly partial struct FormatOptions
     {
         [MethodImpl(Inline), Op]

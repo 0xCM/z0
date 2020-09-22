@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Uri for .net clr assembly
     /// </summary>
-    public readonly struct PartUri : IUri<PartUri>, INullary<PartUri>
+    public readonly struct PartUri : IApiUri<PartUri>, INullary<PartUri>
     {
         /// <summary>
         /// The assembly identifier, constrained to the defining enumeration

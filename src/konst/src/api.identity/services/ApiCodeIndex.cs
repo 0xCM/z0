@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     public readonly struct ApiCodeIndex
     {
-        internal static ApiCodeIndex create(ApiMemberIndex members, OpIndex<ApiCodeBlock> code)
+        internal static ApiCodeIndex create(ApiMemberIndex members, ApiOpIndex<ApiCodeBlock> code)
         {
             var apicode = from pair in members.Intersect(code).Enumerated
                           let l = pair.Item1
@@ -29,7 +29,7 @@ namespace Z0
         readonly IReadOnlyDictionary<OpIdentity,ApiMemberCode> Hashtable;
 
         [MethodImpl(Inline)]
-        public ApiCodeIndex(in OpIndex<ApiMemberCode> code)
+        public ApiCodeIndex(in ApiOpIndex<ApiMemberCode> code)
         {
             Hashtable = code.Enumerated.ToDictionary();
         }
@@ -95,7 +95,7 @@ namespace Z0
                 where code.Method.IsKindedOperator() && code.Method.ArityValue() == arity
                 select code;
 
-        static OpIndex<T> create<T>(IEnumerable<(OpIdentity,T)> src)
+        static ApiOpIndex<T> create<T>(IEnumerable<(OpIdentity,T)> src)
         {
             try
             {
@@ -110,12 +110,12 @@ namespace Z0
                     dst = items.Where(i => !duplicates.Contains(i.Item1.Identifier)).ToDictionary();
                 else
                     dst = src.ToDictionary();
-                return new OpIndex<T>(dst, duplicates.Select(d => ApiIdentityParser.parse(d)).Array());
+                return new ApiOpIndex<T>(dst, duplicates.Select(d => ApiIdentityParser.parse(d)).Array());
             }
             catch(Exception e)
             {
                 term.error(e);
-                return OpIndex<T>.Empty;
+                return ApiOpIndex<T>.Empty;
             }
         }
     }

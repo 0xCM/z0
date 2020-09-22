@@ -18,7 +18,7 @@ namespace Z0.Asm
 
         public readonly ApiHostUri Host;
 
-        public readonly X86ApiExtract[] Members;
+        public readonly ApiMemberExtract[] Members;
 
         public readonly Count MemberCount;
 
@@ -27,7 +27,7 @@ namespace Z0.Asm
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public MembersExtracted(WfStepId step, ApiHostUri host, X86ApiExtract[] members, FS.FilePath dst,  CorrelationToken ct, FlairKind flair = Ran)
+        public MembersExtracted(WfStepId step, ApiHostUri host, ApiMemberExtract[] members, FS.FilePath dst,  CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
             Host = host;

@@ -14,6 +14,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static PartId[] parts(string[] args, PartId[] fallback)
-            => PartIdParser.parse(args,fallback);
+            => ApiPartIdParser.parse(args,fallback);
     }
 }

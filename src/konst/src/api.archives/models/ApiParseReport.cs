@@ -11,28 +11,28 @@ namespace Z0
     using static z;
 
     using F = ApiParseField;
-    using R = ApiParseRow;
+    using R = ApiParseBlock;
 
     public class ApiParseReport : Report<ApiParseReport,F,R>
     {
         public ApiHostUri ApiHost {get;}
 
-        public static ParseResult<ApiParseRow[]> load(FS.FilePath src)
+        public static ParseResult<ApiParseBlock[]> load(FS.FilePath src)
             => load(FilePath.Define(src.Name));
 
-        static ParseResult<ApiParseRow[]> load(FilePath src)
+        static ParseResult<ApiParseBlock[]> load(FilePath src)
         {
             var attempts = src.ReadLines().Skip(1).Select(ApiParseReport.row);
             var failed = attempts.Where(r => !r.Succeeded);
             var success = attempts.Where(r => r.Succeeded).Select(r => r.Value);
             if(failed.Length != 0 && success.Length == 0)
-                return ParseResult.Fail<ApiParseRow[]>(src.Name, failed[0].Reason);
+                return ParseResult.Fail<ApiParseBlock[]>(src.Name, failed[0].Reason);
             else
                 return ParseResult.Success(src.Name, success);
         }
 
-        static ApiParseRow record(in ApiMemberCode extract, uint seq)
-            => new ApiParseRow
+        static ApiParseBlock record(in ApiMemberCode extract, uint seq)
+            => new ApiParseBlock
                 (
                     Seq : (int)seq,
                     SourceSequence: (int)extract.Sequence,
@@ -44,7 +44,7 @@ namespace Z0
                     Data : extract.Encoded
                 );
 
-        public static ApiParseRow[] create(ApiHostUri host, ApiMemberCodeTable members)
+        public static ApiParseBlock[] create(ApiHostUri host, ApiMemberCodeTable members)
         {
             var count = members.Count;
             var buffer = alloc<R>(count);
@@ -56,16 +56,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Option<FilePath> save(ApiParseRow[] src, FS.FilePath dst)
+        public static Option<FilePath> save(ApiParseBlock[] src, FS.FilePath dst)
             => Log.Save(src, dst);
 
-        static ParseResult<ApiParseRow> row(string src)
+        static ParseResult<ApiParseBlock> row(string src)
         {
             try
             {
                 var fields = src.SplitClean(FieldDelimiter);
                 if(fields.Length !=  (uint)R.FieldCount)
-                    return ParseResult.Fail<ApiParseRow>(src,"No data");
+                    return ParseResult.Fail<ApiParseBlock>(src,"No data");
 
                 var dst = new R();
                 var index = 0;
@@ -81,14 +81,14 @@ namespace Z0
             }
             catch(Exception e)
             {
-                return ParseResult.Fail<ApiParseRow>(src, e);
+                return ParseResult.Fail<ApiParseBlock>(src, e);
             }
         }
 
         public ApiParseReport(){}
 
         [MethodImpl(Inline)]
-        internal ApiParseReport(ApiHostUri host, params ApiParseRow[] src)
+        internal ApiParseReport(ApiHostUri host, params ApiParseBlock[] src)
             : base(src)
         {
             ApiHost = host;

@@ -15,6 +15,14 @@ namespace Z0
     [ApiHost]
     public readonly struct ApiArchives
     {
+        [MethodImpl(Inline), Op]
+        public static ApiPartCodeBlocks combine(PartId part, ApiHostCodeBlocks[] src)
+            => new ApiPartCodeBlocks(part,src);
+
+        [MethodImpl(Inline), Op]
+        public static ApiHostCodeIndex index(ApiHostUri host, ApiCodeBlock[] code)
+            => new ApiHostCodeIndex(host,code);
+
         public static Dictionary<PartId,PartFile[]> index(PartFileClass kind, PartFiles src, params PartId[] parts)
         {
             switch(kind)
@@ -68,33 +76,33 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ApiHexArchive hex(IWfShell wf)
-            => new ApiHexArchive(wf);
+        public static ApiCodeArchive hex(IWfShell wf)
+            => new ApiCodeArchive(wf);
 
         [MethodImpl(Inline), Op]
-        public static ApiHexArchive hex(FS.FolderPath root)
-            => new ApiHexArchive(root);
+        public static ApiCodeArchive hex(FS.FolderPath root)
+            => new ApiCodeArchive(root);
 
         [MethodImpl(Inline), Op]
         public static ApiCodeBlock[] hex_data(IWfShell wf, ApiHostUri host)
             => hex(wf).Read(host);
 
         [MethodImpl(Inline)]
-        public static ApiHexWriter hexwriter<H>(FS.FilePath dst, H rep = default)
+        public static ApiCodeWriter hexwriter<H>(FS.FilePath dst, H rep = default)
             where H : struct, IArchiveWriter<H>
         {
-            if(typeof(H) == typeof(ApiHexWriter))
-                return new ApiHexWriter(dst);
+            if(typeof(H) == typeof(ApiCodeWriter))
+                return new ApiCodeWriter(dst);
             else
                 throw no<H>();
         }
 
         [MethodImpl(Inline)]
-        public static IApiHexReader hexreader<H>(H rep = default)
+        public static IApiCodeReader hexreader<H>(H rep = default)
             where H : struct, IArchiveReader
         {
-            if(typeof(H) == typeof(ApiHexReader))
-                return new ApiHexReader();
+            if(typeof(H) == typeof(ApiCodeReader))
+                return new ApiCodeReader();
             else
                 throw no<H>();
         }

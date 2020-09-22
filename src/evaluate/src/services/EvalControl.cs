@@ -51,7 +51,7 @@ namespace Z0.Asm
             }
         }
 
-        void ExecuteCatalog(IPartCatalog catalog)
+        void ExecuteCatalog(IApiPartCatalog catalog)
         {
             using var buffers = Buffers.sequence(BufferSize, BufferCount);
 

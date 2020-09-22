@@ -18,7 +18,7 @@ namespace Z0
 
         readonly IApiHost Source;
 
-        public X86ApiExtract[] Extracts;
+        public ApiMemberExtract[] Extracts;
 
         [MethodImpl(Inline)]
         public ExtractHostMembers(IWfShell wf, IApiHost src, IPartCapturePaths dst)
@@ -26,7 +26,7 @@ namespace Z0
             Ct = wf.Ct;
             Wf = wf;
             Source = src;
-            Extracts = new X86ApiExtract[0]{};
+            Extracts = new ApiMemberExtract[0]{};
             Wf.Created(StepId);
         }
 

@@ -13,7 +13,7 @@ namespace Z0
 
     using api = ApiIdentity;
 
-    public readonly struct OpUri : IUri<OpUri>, INullary<OpUri>
+    public readonly struct OpUri : IApiUri<OpUri>, INullary<OpUri>
     {
         /// <summary>
         /// The full uri in the form {scheme}://{hostpath}/{opid}

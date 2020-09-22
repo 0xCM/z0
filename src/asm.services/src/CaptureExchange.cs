@@ -52,7 +52,7 @@ namespace Z0.Asm
             => TargetBuffer.Slice(start, length);
 
         [MethodImpl(Inline)]
-        public ref readonly ApiCapture CaptureComplete(in ExtractState state, in ApiCapture captured)
+        public ref readonly ApiCaptureBlock CaptureComplete(in ExtractState state, in ApiCaptureBlock captured)
             => ref captured;
 
         [MethodImpl(Inline)]

@@ -29,7 +29,7 @@ namespace Z0
         BP Parser
         {
             [MethodImpl(Inline)]
-            get => ExtractParsers.pattern(Buffer.Clear());
+            get => ApiExtractParsers.pattern(Buffer.Clear());
         }
 
         [MethodImpl(Inline)]
@@ -92,7 +92,7 @@ namespace Z0
         //     }
         // }
 
-        public Outcome<ApiMemberCode> ParseMember(in X86ApiExtract src, uint seq)
+        public Outcome<ApiMemberCode> ParseMember(in ApiMemberExtract src, uint seq)
         {
             try
             {
@@ -113,7 +113,7 @@ namespace Z0
             }
         }
 
-        public ApiMemberCodeTable ParseMembers(ReadOnlySpan<X86ApiExtract> src)
+        public ApiMemberCodeTable ParseMembers(ReadOnlySpan<ApiMemberExtract> src)
         {
             var count = src.Length;
             if(count == 0)

@@ -41,15 +41,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public Option<ApiCapture> Capture(MethodInfo src)
+        public Option<ApiCaptureBlock> Capture(MethodInfo src)
             => Service.Capture(z.insist(src).Identify(), src);
 
         [MethodImpl(Inline)]
-        public Option<CapturedMember> Capture(ApiMember src)
+        public Option<ApiMemberCapture> Capture(ApiMember src)
             => Service.Capture(src);
 
         [MethodImpl(Inline)]
-        public Option<ApiCapture> Capture(ApiHostUri hos, MethodInfo src)
+        public Option<ApiCaptureBlock> Capture(ApiHostUri hos, MethodInfo src)
             => Service.Capture(z.insist(src).Identify(),src);
 
         public void Dispose()

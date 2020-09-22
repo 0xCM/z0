@@ -77,7 +77,7 @@ namespace Z0
            }
         }
 
-        void CapturePart(IPartCatalog src, IPartCapturePaths dst)
+        void CapturePart(IApiPartCatalog src, IPartCapturePaths dst)
         {
             if(src.IsEmpty)
                 return;
@@ -87,7 +87,7 @@ namespace Z0
             Context.Raise(new CapturedPart(src.PartId));
         }
 
-        void CaptureHosts(IPartCatalog src, IPartCapturePaths dst)
+        void CaptureHosts(IApiPartCatalog src, IPartCapturePaths dst)
         {
             Capture(src.ApiDataTypes, dst);
             Capture(src.Operations, dst);

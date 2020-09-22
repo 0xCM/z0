@@ -20,14 +20,14 @@ namespace Z0
         /// <summary>
         /// The catalog to interrogate
         /// </summary>
-        public IPartCatalog Source {get;}
+        public IApiPartCatalog Source {get;}
 
         [MethodImpl(Inline)]
-        public static ApiCatalogQuery create(IPartCatalog src)
+        public static ApiCatalogQuery create(IApiPartCatalog src)
             => new ApiCatalogQuery(src);
 
         [MethodImpl(Inline)]
-        public ApiCatalogQuery(IPartCatalog src)
+        public ApiCatalogQuery(IApiPartCatalog src)
             => Source = src;
 
         public MethodInfo[] Vectorized<T>(W128 w, bool generic)

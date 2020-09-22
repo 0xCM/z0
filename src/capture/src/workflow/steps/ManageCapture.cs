@@ -83,7 +83,7 @@ namespace Z0
                 CollectAsmStats(e.Host, e.Functions);
         }
 
-        public void OnEvent(ApiHexTableSaved e)
+        public void OnEvent(ApiCodeTableSaved e)
         {
             Sink.Deposit(e);
 

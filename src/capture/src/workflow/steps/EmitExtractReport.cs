@@ -19,7 +19,7 @@ namespace Z0
 
         readonly ApiHostUri Uri;
 
-        readonly X86ApiExtract[] Source;
+        readonly ApiMemberExtract[] Source;
 
         readonly FS.FilePath Target;
 
@@ -29,7 +29,7 @@ namespace Z0
             => Artifact;
 
         [MethodImpl(Inline)]
-        public EmitExtractReport(IWfShell wf,  EmitExtractReportHost host, ApiHostUri uri, X86ApiExtract[] data, FS.FilePath dst)
+        public EmitExtractReport(IWfShell wf,  EmitExtractReportHost host, ApiHostUri uri, ApiMemberExtract[] data, FS.FilePath dst)
         {
             Wf = wf;
             Host = host;

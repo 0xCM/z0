@@ -12,7 +12,7 @@ namespace Z0
 
     using NK = EnumTypeCode;
 
-    [ApiHost]
+    [ApiHost("formatting.values")]
     public readonly struct ValueFormatter
     {
         [MethodImpl(Inline), Op,Closures(Integers)]

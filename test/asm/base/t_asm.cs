@@ -34,10 +34,10 @@ namespace Z0.Asm
         protected BufferSeqId Main
             => BufferSeqId.Main;
 
-        protected IApiHexWriter HexWriter([Caller] string caller = null)
+        protected IApiCodeWriter HexWriter([Caller] string caller = null)
         {
             var dstPath = TargetArchive.HexPath(FileName.define(caller, FileExtensions.HexLine));
-            return ApiArchives.hexwriter<ApiHexWriter>(FS.path(dstPath.Name));
+            return ApiArchives.hexwriter<ApiCodeWriter>(FS.path(dstPath.Name));
         }
 
         protected IAsmWriter AsmWriter([Caller] string caller = null)

@@ -19,7 +19,7 @@ namespace Z0
 
         readonly CorrelationToken Ct;
 
-        readonly X86ApiExtract[] Extracts;
+        readonly ApiMemberExtract[] Extracts;
 
         readonly ApiHostUri HostUri;
 
@@ -41,7 +41,7 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        public EmitCaptureArtifacts(IWfCaptureState state, ApiHostUri src, X86ApiExtract[] extracts, IPartCapturePaths dst)
+        public EmitCaptureArtifacts(IWfCaptureState state, ApiHostUri src, ApiMemberExtract[] extracts, IPartCapturePaths dst)
         {
             Wf = state.Wf;
             State = state;
@@ -54,7 +54,7 @@ namespace Z0
             HexPath = FS.path(Target.HostX86Path.Name);
             AsmPath = Target.HostAsmPath;
             CilDataPath = FS.path(Target.CilPath.Name);
-            Parser = ExtractParsers.member();
+            Parser = ApiExtractParsers.member();
             ParsedMembers = default;
             Wf.Created(StepId);
         }
@@ -121,7 +121,7 @@ namespace Z0
             if(ParsedMembers.Count== 0)
                 return;
 
-            using var step = new EmitApiHexTable(Wf, host, HostUri, ParsedMembers);
+            using var step = new EmitApiCodeTable(Wf, host, HostUri, ParsedMembers);
             step.Run();
         }
 

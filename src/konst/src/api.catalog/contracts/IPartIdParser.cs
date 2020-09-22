@@ -10,8 +10,8 @@ namespace Z0
         PartId[] ParseValid(params string[] args);
     }
 
-    public interface IPartIdParser : IPartIdParser<PartIdParser>
+    public interface IPartIdParser : IPartIdParser<ApiPartIdParser>
     {
-    
+
     }
 }

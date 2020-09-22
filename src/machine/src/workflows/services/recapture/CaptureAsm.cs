@@ -16,7 +16,7 @@ namespace Z0
 
     partial struct Recapture
     {
-        void Save(ApiCapture capture, StreamWriter dst)
+        void Save(ApiCaptureBlock capture, StreamWriter dst)
         {
             var asm = Context.RoutineDecoder.Decode(capture).Require();
             var formatted = Context.Formatter.FormatFunction(asm);
@@ -29,7 +29,7 @@ namespace Z0
         public CapturedAccessor[] Capture(ApiHostUri host, ReadOnlySpan<ResourceAccessor> src, FilePath dst)
         {
             var count = src.Length;
-            var codes = span(alloc<ApiCapture>(count));
+            var codes = span(alloc<ApiCaptureBlock>(count));
             var captured = alloc<CapturedAccessor>(count);
             var target = span(captured);
 
@@ -39,7 +39,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var accessor = ref skip(src,i);
-                var code = quick.Capture(accessor.Member).ValueOrDefault(ApiCapture.Empty);
+                var code = quick.Capture(accessor.Member).ValueOrDefault(ApiCaptureBlock.Empty);
                 seek(codes, i) = code;
 
                 if(code.IsNonEmpty)
@@ -53,7 +53,7 @@ namespace Z0
             return captured;
         }
 
-        Option<AsmRoutineCode> CreateFunction(ApiCapture capture)
+        Option<AsmRoutineCode> CreateFunction(ApiCaptureBlock capture)
         {
             var decoded = Context.RoutineDecoder.Decode(capture);
             if(decoded)

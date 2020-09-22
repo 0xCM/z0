@@ -11,15 +11,15 @@ namespace Z0.Asm
     using static Render;
     using static z;
 
-    public readonly struct ApiHexTableSaved : IWfEvent<ApiHexTableSaved>
+    public readonly struct ApiCodeTableSaved : IWfEvent<ApiCodeTableSaved>
     {
-        public const string EventName = nameof(ApiHexTableSaved);
+        public const string EventName = nameof(ApiCodeTableSaved);
 
         public WfEventId EventId {get;}
 
         public readonly ApiHostUri Host;
 
-        public readonly ApiHexRow[] Rows;
+        public readonly ApiCodeRow[] Rows;
 
         public readonly Count MemberCount;
 
@@ -28,7 +28,7 @@ namespace Z0.Asm
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ApiHexTableSaved(WfStepId step, ApiHostUri host, ApiHexRow[] code, FS.FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
+        public ApiCodeTableSaved(WfStepId step, ApiHostUri host, ApiCodeRow[] code, FS.FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
             Host = host;

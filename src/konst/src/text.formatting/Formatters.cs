@@ -9,9 +9,9 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost]
+    [ApiHost("formatting.factories")]
     public readonly partial struct Formatters
-    {                        
+    {
 
     }
 }

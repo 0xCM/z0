@@ -9,33 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct UserTypeInfo
-    {
-        [MethodImpl(Inline)]
-        public static UserTypeInfo<T> FromType<T>(UserTypeCode<T> code)
-            => new UserTypeInfo<T>(code);
-
-        /// <summary>
-        ///  The identity allocated to the type
-        /// </summary>
-        ulong UserTypeId {get;}
-
-        /// <summary>
-        /// The implementation type
-        /// </summary>
-        Type DefiningType  {get;}
-
-        /// <summary>
-        /// Specifies whether type arguments are required
-        /// </summary>
-        bool IsParametric {get;}
-
-        /// <summary>
-        /// The number of type arguments required
-        /// </summary>
-        int ParameterCount {get;}
-    }
-
     public readonly struct UserTypeInfo<T>
     {
         [MethodImpl(Inline)]

@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ApiMemberIndex : IOpIndex<ApiMember>
+    public readonly struct ApiMemberIndex : IApiOpIndex<ApiMember>
     {
         readonly Dictionary<OpIdentity, ApiMember> Data;
 

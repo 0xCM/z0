@@ -16,7 +16,7 @@ namespace Z0
         [Op]
         public static ApiModules modules(Assembly control, string[] args)
         {
-            var parts = PartIdParser.parse(args);
+            var parts = ApiPartIdParser.parse(args);
             if(parts.Length != 0)
                return new ApiModules(control, parts);
             else

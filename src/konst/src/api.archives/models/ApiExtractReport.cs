@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
 
     using F = ApiExtractField;
-    using R = ApiExtractRow;
+    using R = ApiExtractBlock;
 
     using Report = ApiExtractReport;
 
@@ -32,14 +32,14 @@ namespace Z0
         public override string ReportName
             => $"Extract report for {ApiHost.Format()}";
 
-        public static Report Create(ApiHostUri host, X86ApiExtract[] src)
+        public static Report Create(ApiHostUri host, ApiMemberExtract[] src)
         {
             var count = src.Length;
-            var records = new ApiExtractRow[count];
+            var records = new ApiExtractBlock[count];
             for(var i=0; i< count; i++)
             {
                 var op = src[i];
-                records[i] = new ApiExtractRow(
+                records[i] = new ApiExtractBlock(
                     Sequence : i,
                     Address : op.Member.Address,
                     Length : op.Encoded.Length,

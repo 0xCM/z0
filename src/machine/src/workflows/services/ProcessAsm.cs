@@ -23,7 +23,7 @@ namespace Z0
 
         readonly IAsmContext Asm;
 
-        readonly ApiHexIndex Encoded;
+        readonly ApiCaptureIndex Encoded;
 
         readonly int[] Sequence;
 
@@ -47,7 +47,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ProcessAsm(IWfCaptureState state, in ApiHexIndex encoded)
+        public ProcessAsm(IWfCaptureState state, in ApiCaptureIndex encoded)
         {
             Wf = state.Wf;
             Asm = state.Asm;
@@ -83,7 +83,7 @@ namespace Z0
                 Process(src.Code, decoded.Value);
         }
 
-        void Process(in ApiParseRow src)
+        void Process(in ApiParseBlock src)
         {
             var instructions = Decoder.Decode(src.Data);
             if(instructions)

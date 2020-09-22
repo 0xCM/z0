@@ -41,10 +41,10 @@ namespace Z0
             Wf.Disposed(Host.Id);
         }
 
-        public void Run(ApiHostUri host, ReadOnlySpan<ApiHexRow> x86data, FS.FilePath x86file)
+        public void Run(ApiHostUri host, ReadOnlySpan<ApiCodeRow> x86data, FS.FilePath x86file)
         {
             var wfStateless = Capture.Services;
-            var reader = ApiArchives.hexreader<ApiHexReader>();
+            var reader = ApiArchives.hexreader<ApiCodeReader>();
             var fileSrc = @readonly(reader.Read(FilePath.Define(x86file.Name)));
 
             Claim.Eq(fileSrc.Length, x86data.Length);

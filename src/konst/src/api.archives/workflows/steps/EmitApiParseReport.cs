@@ -22,7 +22,7 @@ namespace Z0
 
         readonly FS.FilePath Target;
 
-        public Span<ApiParseRow> Emitted;
+        public Span<ApiParseBlock> Emitted;
 
         [MethodImpl(Inline)]
         public EmitApiParseReport(IWfShell wf, WfHost host, ApiHostUri uri, ApiMemberCodeTable src, FS.FilePath dst)

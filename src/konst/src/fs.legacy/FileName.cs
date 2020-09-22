@@ -126,7 +126,7 @@ namespace Z0
         /// Specifies the file's owning part, if any
         /// </summary>
         public PartId Owner
-            => PartIdParser.single(WithoutExtension.Name.Remove("z0."));
+            => ApiPartIdParser.single(WithoutExtension.Name.Remove("z0."));
 
         /// <summary>
         /// Determines whether the name of a file is of the form {owner}.{host}.{*}

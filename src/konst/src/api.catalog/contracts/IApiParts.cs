@@ -17,7 +17,7 @@ namespace Z0
 
         Assembly[] Components {get;}
 
-        IPartCatalog[] Catalogs {get;}
+        IApiPartCatalog[] Catalogs {get;}
 
         IApiHost[] Hosts {get;}
 
@@ -25,7 +25,7 @@ namespace Z0
 
         Option<IApiHost> FindHost(ApiHostUri uri);
 
-        IEnumerable<IPartCatalog> MatchingCatalogs(params PartId[] parts);
+        IEnumerable<IApiPartCatalog> MatchingCatalogs(params PartId[] parts);
 
         IEnumerable<IApiHost> DefinedHosts(params PartId[] parts);
 

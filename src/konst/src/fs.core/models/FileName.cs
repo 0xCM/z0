@@ -74,7 +74,7 @@ namespace Z0
             /// Specifies the file's owning part, if any
             /// </summary>
             public PartId Owner
-                => PartIdParser.single(WithoutExtension.Name.Remove("z0."));
+                => ApiPartIdParser.single(WithoutExtension.Name.Remove("z0."));
 
             public static FileName Empty
             {

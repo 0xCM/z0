@@ -17,7 +17,7 @@ namespace Z0
 
         public readonly CaptureOutcome Outcome;
 
-        public readonly X86DataFlow Encoded;
+        public readonly CodeBlockDataFlow Encoded;
 
         public byte[] Data
         {
@@ -50,7 +50,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public CapturedOperation(OpIdentity id, CaptureOutcome outcome, X86DataFlow code)
+        public CapturedOperation(OpIdentity id, CaptureOutcome outcome, CodeBlockDataFlow code)
         {
             Id = id;
             Outcome = outcome;

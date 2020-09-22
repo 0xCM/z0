@@ -11,6 +11,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static ApiCaptureIndexParts;
 
     public class CaptureIndexBuilder : IDisposable
     {
@@ -24,9 +25,9 @@ namespace Z0
 
         readonly WfHost Host;
 
-        public ApiHexIndex Index;
+        public ApiCaptureIndex Index;
 
-        public static ApiHexIndex create(IWfShell wf, WfHost host, in PartFiles src)
+        public static ApiCaptureIndex create(IWfShell wf, WfHost host, in PartFiles src)
         {
             var files = src.Parsed.View;
             var count = files.Length;
@@ -54,7 +55,7 @@ namespace Z0
             return builder.Index;
         }
 
-        static void index(IWfShell wf, WfHost host, in ApiParseRow src, CaptureIndexBuilder dst)
+        static void index(IWfShell wf, WfHost host, in ApiParseBlock src, CaptureIndexBuilder dst)
         {
             if(src.Address.IsEmpty)
                 return;
@@ -65,7 +66,7 @@ namespace Z0
                 wf.Warn(host, $"Duplicate | {src.Uri.Format()}");
         }
 
-        static void index(IWfShell wf, WfHost host, ReadOnlySpan<ApiParseRow> src, CaptureIndexBuilder dst)
+        static void index(IWfShell wf, WfHost host, ReadOnlySpan<ApiParseBlock> src, CaptureIndexBuilder dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
@@ -81,14 +82,14 @@ namespace Z0
             Locations = dict<OpUri,ApiCodeBlock>();
         }
 
-        public X86IndexStatus Status()
+        public CaptureIndexStatus Status()
         {
-            var dst = default(X86IndexStatus);
+            var dst = default(CaptureIndexStatus);
             dst.Parts = Parts;
             dst.Hosts = Hosts;
             dst.Addresses = Addresses;
             dst.MemberCount = MemberCount;
-            dst.Encoded = new ApiPartAddresses(dst.Parts, Encoded);
+            dst.Encoded = new PartAddresses(dst.Parts, Encoded);
             return dst;
         }
 
@@ -120,7 +121,7 @@ namespace Z0
             Index = Freeze();
         }
 
-        ApiHexIndex Freeze()
+        ApiCaptureIndex Freeze()
         {
             var memories = Encoded;
             var locations = Located;
@@ -128,12 +129,12 @@ namespace Z0
             var code = CodeAddress.Values.Select(x => (x.Uri.Host, Code: x))
                 .Array()
                 .GroupBy(g => g.Host)
-                .Select(x => (new X86HostCode(x.Key, x.Select(y => y.Code).ToArray()))).Array();
+                .Select(x => (new CodeBlocks(x.Key, x.Select(y => y.Code).ToArray()))).Array();
 
-            return new ApiHexIndex(parts,
-                   new ApiPartAddresses(parts, memories),
-                   new ApiUriAddresses(parts, locations),
-                   new X86PartCodeIndex(parts, code.Select(x => (x.Host, x)).ToDictionary()));
+            return new ApiCaptureIndex(parts,
+                   new PartAddresses(parts, memories),
+                   new UriAddresses(parts, locations),
+                   new PartCode(parts, code.Select(x => (x.Host, x)).ToDictionary()));
         }
 
         public Triple<bool> Include(in ApiCodeBlock src)

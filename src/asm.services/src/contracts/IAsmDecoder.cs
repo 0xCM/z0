@@ -15,9 +15,9 @@ namespace Z0.Asm
         /// Decodes a function from member capture data
         /// </summary>
         /// <param name="src">The source data</param>
-        Option<AsmRoutine> Decode(ApiCapture src);
+        Option<AsmRoutine> Decode(ApiCaptureBlock src);
 
-        bool Decode(ApiCapture src, out AsmRoutine dst);
+        bool Decode(ApiCaptureBlock src, out AsmRoutine dst);
 
         /// <summary>
         /// Decodes a function from member capture data
@@ -33,7 +33,7 @@ namespace Z0.Asm
 
         Option<AsmInstructions> Decode(ApiCodeBlock src);
 
-        Option<AsmRoutine> Decode(ApiCapture src, Action<Asm.Instruction> f);
+        Option<AsmRoutine> Decode(ApiCaptureBlock src, Action<Asm.Instruction> f);
 
         Option<AsmFxList> Decode(ApiCodeBlock src, Action<Instruction> f);
 

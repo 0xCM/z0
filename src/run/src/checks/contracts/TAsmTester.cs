@@ -20,8 +20,8 @@ namespace Z0.Asm
         IAsmFormatter Formatter
             => Context.Formatter;
 
-        ApiHexQuery UriBitQuery
-            => Z0.ApiHexQuery.Service;
+        ApiCodeQuery UriBitQuery
+            => Z0.ApiCodeQuery.Service;
 
         IPolyrand IPolyrandProvider.Random
             => Context.Random;
@@ -33,14 +33,14 @@ namespace Z0.Asm
         IPartCapturePaths CaptureArchive(FolderPath root)
             => ApiArchives.capture(root);
 
-        void WriteAsm(ApiCapture capture, StreamWriter dst)
+        void WriteAsm(ApiCaptureBlock capture, StreamWriter dst)
         {
             var asm = Decoder.Decode(capture).Require();
             var formatted = Formatter.FormatFunction(asm);
             dst.Write(formatted);
         }
 
-        void WriteAsm(ApiCapture[] src, StreamWriter dst)
+        void WriteAsm(ApiCaptureBlock[] src, StreamWriter dst)
         {
             for(var i=0; i<src.Length; i++)
                 WriteAsm(src[i], dst);

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Part;
 
-    [ApiHost]
+    [ApiHost("formatting.codes")]
     public readonly struct FormatCodes
     {
         const string OpenSlot = "{0:";

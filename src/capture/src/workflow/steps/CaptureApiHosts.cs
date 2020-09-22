@@ -50,7 +50,7 @@ namespace Z0
             }
         }
 
-        void Store(ApiHostUri host, X86ApiExtract[] extracts, IPartCapturePaths dst)
+        void Store(ApiHostUri host, ApiMemberExtract[] extracts, IPartCapturePaths dst)
         {
             using var step = new EmitCaptureArtifacts(State, host, extracts, dst);
             step.Run();

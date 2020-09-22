@@ -17,7 +17,7 @@ namespace Z0
     {
         const string ProjectName = "bytes";
 
-        readonly ApiHexArchive Archive;
+        readonly ApiCodeArchive Archive;
 
         public readonly FolderPath SourceDir;
 

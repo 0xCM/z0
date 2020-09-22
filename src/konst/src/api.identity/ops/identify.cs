@@ -16,7 +16,7 @@ namespace Z0
         [Op]
         public static ApiCodeIndex index(IApiMemberLocator locator, ApiParts api, ApiHostUri uri, FilePath src)
         {
-            var code = ApiIdentity.index(ApiHexReader.Service.Read(src));
+            var code = ApiIdentity.index(ApiCodeReader.Service.Read(src));
             var members = index(locator.Locate(api.FindHost(uri).Require()));
             return ApiIdentity.index(members, code);
         }
@@ -28,8 +28,8 @@ namespace Z0
             var idx = index(members);
             var archive =  ApiArchives.capture(root);
             var paths =  HostCaptureArchive.create(root, host);
-            var code = ApiHexReader.Service.Read(paths.HostX86Path);
-            var opIndex =  ApiHexQuery.Service.CreateIndex(code);
+            var code = ApiCodeReader.Service.Read(paths.HostX86Path);
+            var opIndex =  ApiCodeQuery.Service.CreateIndex(code);
             return ApiIdentity.index(idx, opIndex);
         }
 

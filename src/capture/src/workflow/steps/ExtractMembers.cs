@@ -26,7 +26,7 @@ namespace Z0
             Wf = wf;
             Host = host;
             Ct = Wf.Ct;
-            Extractor = X86Extraction.service(X86Extraction.DefaultBufferLength);
+            Extractor = ApiCodeExtractors.service(ApiCodeExtractors.DefaultBufferLength);
             Wf.Created(Host);
         }
 
@@ -35,7 +35,7 @@ namespace Z0
             Wf.Disposed(Host);
         }
 
-        public X86ApiExtract[] Extract(IApiHost host)
+        public ApiMemberExtract[] Extract(IApiHost host)
         {
             try
             {
@@ -44,11 +44,11 @@ namespace Z0
             catch(Exception e)
             {
                 Wf.Error(Host, e);
-                return sys.empty<X86ApiExtract>();
+                return sys.empty<ApiMemberExtract>();
             }
         }
 
-        public X86ApiExtract[] Extract(IApiHost[] hosts)
+        public ApiMemberExtract[] Extract(IApiHost[] hosts)
         {
             try
             {
@@ -57,13 +57,13 @@ namespace Z0
             catch(Exception e)
             {
                 Wf.Error(Host, e);
-                return sys.empty<X86ApiExtract>();
+                return sys.empty<ApiMemberExtract>();
             }
         }
 
-        public X86ApiExtract[] Extract(ApiDataTypes types)
+        public ApiMemberExtract[] Extract(ApiDataTypes types)
         {
-            var extracted = sys.empty<X86ApiExtract>();
+            var extracted = sys.empty<ApiMemberExtract>();
             try
             {
                 return Extractor.Extract(ApiMemberJit.jit(types));
@@ -71,7 +71,7 @@ namespace Z0
             catch(Exception e)
             {
                 Wf.Error(Host, e);
-                return sys.empty<X86ApiExtract>();
+                return sys.empty<ApiMemberExtract>();
             }
         }
     }

@@ -29,7 +29,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="exchange">The selected exchange</param>
         /// <param name="src">The api member</param>
-        Option<CapturedMember> Capture(in ApiMember src)
+        Option<ApiMemberCapture> Capture(in ApiMember src)
             => CaptureService.Capture(CaptureExchange.Context, src);
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The source method</param>
-        Option<ApiCapture> Capture(OpIdentity id, MethodInfo src)
+        Option<ApiCaptureBlock> Capture(OpIdentity id, MethodInfo src)
             => CaptureService.Capture(CaptureExchange.Context, id, src);
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0.Asm
         /// If the method is open generic, it is closed over supplied type arguments or
         /// If the method is nongeneric or closed-generic, the method is captured as-is
         /// </remarks>
-        Option<ApiCapture> Capture(MethodInfo src, params Type[] args)
+        Option<ApiCaptureBlock> Capture(MethodInfo src, params Type[] args)
             => CaptureService.Capture(CaptureExchange.Context, src, args);
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The dynamic delegate to capture</param>
-        Option<ApiCapture> Capture(OpIdentity id, in DynamicDelegate src)
+        Option<ApiCaptureBlock> Capture(OpIdentity id, in DynamicDelegate src)
             => CaptureService.Capture(CaptureExchange.Context, id, src);
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The delegate to capture</param>
-        Option<ApiCapture> Capture(OpIdentity id, Delegate src)
+        Option<ApiCaptureBlock> Capture(OpIdentity id, Delegate src)
             => CaptureService.Capture(CaptureExchange.Context, id, src);
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The dynamic delegate to capture</param>
-        Option<ApiCapture> Capture<D>(OpIdentity id, DynamicDelegate<D> src)
+        Option<ApiCaptureBlock> Capture<D>(OpIdentity id, DynamicDelegate<D> src)
             where D : Delegate => Capture(id, src.Untyped);
     }
 }

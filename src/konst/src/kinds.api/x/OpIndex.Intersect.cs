@@ -8,8 +8,8 @@ namespace Z0
     using System.Linq;
 
     partial class XTend
-    {        
-        public static OpIndex<(L left, R right)> Intersect<L,R>(this IOpIndex<L> left, IOpIndex<R> right)
+    {
+        public static ApiOpIndex<(L left, R right)> Intersect<L,R>(this IApiOpIndex<L> left, IApiOpIndex<R> right)
         {
              var keys = left.Keys.ToHashSet();
              keys.IntersectWith(right.Keys);
@@ -22,6 +22,6 @@ namespace Z0
                 entries[i] = (key, (left[key], right[key]));
              }
              return entries.ToOpIndex();
-         }           
+         }
     }
 }

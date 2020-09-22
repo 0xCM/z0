@@ -12,7 +12,7 @@ namespace Z0
 
     using api = Render;
 
-    [ApiHost]
+    [ApiHost("formatting.bits")]
     public readonly struct BitFormatter : IBitFormatter
     {
         public static BitFormatter Service => default;

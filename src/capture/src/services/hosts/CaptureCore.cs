@@ -29,23 +29,23 @@ namespace Z0.Asm
             }
         }
 
-        public Option<CapturedMember> Capture(in CaptureExchange exchange, in ApiMember src)
+        public Option<ApiMemberCapture> Capture(in CaptureExchange exchange, in ApiMember src)
         {
             try
             {
                 var summary = capture(exchange, src.Id, src.Address);
                 var size = summary.DataFlow.Length;
-                var code = new ApiCapture(src.Id, src.Method, summary.DataFlow.Input, summary.DataFlow.Output, summary.Outcome.TermCode);
-                return new CapturedMember(src, code);
+                var code = new ApiCaptureBlock(src.Id, src.Method, summary.DataFlow.Input, summary.DataFlow.Output, summary.Outcome.TermCode);
+                return new ApiMemberCapture(src, code);
             }
             catch(Exception e)
             {
                 term.error(e);
-                return none<CapturedMember>();
+                return none<ApiMemberCapture>();
             }
         }
 
-        public Option<ApiCapture> Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src)
+        public Option<ApiCaptureBlock> Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src)
         {
             try
             {
@@ -59,18 +59,18 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return none<ApiCapture>();
+                return none<ApiCaptureBlock>();
             }
         }
 
-        public Option<ApiCapture> Capture(in CaptureExchange exchange, OpIdentity id, in DynamicDelegate src)
+        public Option<ApiCaptureBlock> Capture(in CaptureExchange exchange, OpIdentity id, in DynamicDelegate src)
         {
             try
             {
                 var pSrc = jit(src).Handle;
                 var summary = capture(exchange, id, pSrc);
                 var outcome =  summary.Outcome;
-                var captured = new ApiCapture(id, src.SourceMethod, summary.DataFlow.Input, summary.DataFlow.Output, outcome.TermCode);
+                var captured = new ApiCaptureBlock(id, src.SourceMethod, summary.DataFlow.Input, summary.DataFlow.Output, outcome.TermCode);
                 Demands.insist((MemoryAddress)pSrc,captured.BaseAddress);
                 return exchange.CaptureComplete(outcome.State, captured);
             }
@@ -78,7 +78,7 @@ namespace Z0.Asm
             {
                 term.error($"Capture service failure");
                 term.error(e);
-                return none<ApiCapture>();
+                return none<ApiCaptureBlock>();
             }
         }
 
@@ -95,7 +95,7 @@ namespace Z0.Asm
             }
         }
 
-        public Option<ApiCapture> Capture(in CaptureExchange exchange, OpIdentity id, Delegate src)
+        public Option<ApiCaptureBlock> Capture(in CaptureExchange exchange, OpIdentity id, Delegate src)
         {
             try
             {
@@ -109,11 +109,11 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return none<ApiCapture>();
+                return none<ApiCaptureBlock>();
             }
         }
 
-        public Option<ApiCapture> Capture(in CaptureExchange exchange, MethodInfo src, params Type[] args)
+        public Option<ApiCaptureBlock> Capture(in CaptureExchange exchange, MethodInfo src, params Type[] args)
         {
             if(src.IsOpenGeneric())
             {
@@ -126,12 +126,12 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        static ApiCapture DefineMember(OpIdentity id, MethodInfo src, Z0.X86DataFlow bits, ExtractTermCode term)
-            => new ApiCapture(id, src, bits.Input, bits.Output, term);
+        static ApiCaptureBlock DefineMember(OpIdentity id, MethodInfo src, Z0.CodeBlockDataFlow bits, ExtractTermCode term)
+            => new ApiCaptureBlock(id, src, bits.Input, bits.Output, term);
 
         [MethodImpl(Inline)]
-        static ApiCapture DefineMember(OpIdentity id, Delegate src, Z0.X86DataFlow bits, ExtractTermCode term)
-            => new ApiCapture(id, src.Method, bits.Input, bits.Output, term);
+        static ApiCaptureBlock DefineMember(OpIdentity id, Delegate src, Z0.CodeBlockDataFlow bits, ExtractTermCode term)
+            => new ApiCaptureBlock(id, src.Method, bits.Input, bits.Output, term);
 
         [MethodImpl(Inline)]
         static ApiParseResult capture(in CaptureExchange exchange, OpIdentity id, ref byte src)
@@ -185,7 +185,7 @@ namespace Z0.Asm
             var outcome = Complete(state, tc, start, end, delta);
             var raw = exchange.Target(0, (int)(end - start)).ToArray();
             var trimmed = exchange.Target(0, outcome.ByteCount).ToArray();
-            var bits = new Z0.X86DataFlow((MemoryAddress)start, raw, trimmed);
+            var bits = new Z0.CodeBlockDataFlow((MemoryAddress)start, raw, trimmed);
             return new ApiParseResult(id, outcome, bits);
         }
 

@@ -14,13 +14,6 @@ namespace Z0
 
     readonly struct TypeIdentityDiviner : ITypeIdentityDiviner
     {
-        /// <summary>
-        /// Determines whether a type is a natural span
-        /// </summary>
-        /// <param name="t">The type to examine</param>
-        public static bool IsNatSpan(Type t)
-            => t.GenericDefinition2() == typeof(NatSpan<,>) && t.IsClosedGeneric();
-
         public TypeIdentity DivineIdentity(Type arg)
             => TryDivine(arg).ValueOrElse(() => TypeIdentity.define(arg.DisplayName()));
 
@@ -138,7 +131,7 @@ namespace Z0
 
 
         static readonly ITypeIdentityProvider DefaultProvider
-            = new FunctionalProvider(DoDivination);
+            = new TypeIdentityProvider(DoDivination);
 
         internal static ITypeIdentityProvider CreateProvider(Type t)
         {
@@ -148,19 +141,6 @@ namespace Z0
             else if(t.Reifies<ITypeIdentityProvider>())
                 provider = HostedProvider(t);
             return provider.ValueOrElse(() => DefaultProvider);
-        }
-
-        readonly struct FunctionalProvider : ITypeIdentityProvider
-        {
-            readonly Func<Type,TypeIdentity> f;
-
-            [MethodImpl(Inline)]
-            public FunctionalProvider(Func<Type, TypeIdentity> f)
-                => this.f = f;
-
-            [MethodImpl(Inline)]
-            public TypeIdentity Identify(Type src)
-                => f(src);
         }
     }
 }

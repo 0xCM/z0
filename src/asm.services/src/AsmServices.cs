@@ -15,7 +15,7 @@ namespace Z0.Asm
         public static IAsmServices Services => default(AsmServices);
 
         [MethodImpl(Inline), Op]
-        public static AsmRoutine routine(ApiCapture captured, AsmFxList src)
+        public static AsmRoutine routine(ApiCaptureBlock captured, AsmFxList src)
         {
             var code = new ApiCodeBlock(captured.OpUri, captured.Parsed);
             var sig = captured.Method.Signature().Format();

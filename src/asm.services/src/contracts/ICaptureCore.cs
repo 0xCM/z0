@@ -17,7 +17,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="exchange">The selected exchange</param>
         /// <param name="src">The api member</param>
-        Option<CapturedMember> Capture(in CaptureExchange exchange, in ApiMember src);
+        Option<ApiMemberCapture> Capture(in CaptureExchange exchange, in ApiMember src);
 
         /// <summary>
         /// Captures jitted x86 encoded assembly for nongeneric methods
@@ -25,7 +25,7 @@ namespace Z0.Asm
         /// <param name="exchange">The selected exchange</param>
         /// <param name="id">The identity to confer to the captured member</param>
         /// <param name="src">The source method</param>
-        Option<ApiCapture> Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src);
+        Option<ApiCaptureBlock> Capture(in CaptureExchange exchange, OpIdentity id, MethodInfo src);
 
         /// <summary>
         /// Captures jitted x86 encoded assembly for generic or nongeneric methods
@@ -37,7 +37,7 @@ namespace Z0.Asm
         /// If the method is open generic, it is closed over supplied type arguments or
         /// If the method is nongeneric or closed-generic, the method is captured as-is
         /// </remarks>
-        Option<ApiCapture> Capture(in CaptureExchange exchange, MethodInfo src, params Type[] args);
+        Option<ApiCaptureBlock> Capture(in CaptureExchange exchange, MethodInfo src, params Type[] args);
 
         /// <summary>
         /// Captures jitted x86 encoded assembly for a dynamic delegate
@@ -45,7 +45,7 @@ namespace Z0.Asm
         /// <param name="exchange">The selected exchange</param>
         /// <param name="id">The operation identity to confer</param>
         /// <param name="src">The dynamic delegate to capture</param>
-        Option<ApiCapture> Capture(in CaptureExchange exchange, OpIdentity id, in DynamicDelegate src);
+        Option<ApiCaptureBlock> Capture(in CaptureExchange exchange, OpIdentity id, in DynamicDelegate src);
 
         /// <summary>
         /// Captures jitted x86 encoded assembly for a delegate
@@ -53,7 +53,7 @@ namespace Z0.Asm
         /// <param name="exchange">The selected exchange</param>
         /// <param name="id">The operation identity to confer</param>
         /// <param name="src">The delegate to capture</param>
-        Option<ApiCapture> Capture(in CaptureExchange exchange, OpIdentity id, Delegate src);
+        Option<ApiCaptureBlock> Capture(in CaptureExchange exchange, OpIdentity id, Delegate src);
 
         /// <summary>
         /// Captures encoded data from a caller-supplied source buffer.
@@ -69,7 +69,7 @@ namespace Z0.Asm
         /// <param name="exchange">The selected exchange</param>
         /// <param name="id">The operation identity to confer</param>
         /// <param name="src">The dynamic delegate to capture</param>
-        Option<ApiCapture> Capture<D>(in CaptureExchange exchange, OpIdentity id, DynamicDelegate<D> src)
+        Option<ApiCaptureBlock> Capture<D>(in CaptureExchange exchange, OpIdentity id, DynamicDelegate<D> src)
             where D : Delegate => Capture(exchange,id, src.Untyped);
     }
 }

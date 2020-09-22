@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.CompilerServices;
 
     using static Konst;
 
@@ -50,5 +51,18 @@ namespace Z0
 
         TypeIdentity IIdentityProvider<Type,TypeIdentity>.Identify(Type src)
             => api.type(Identify(src).Identifier);
+    }
+
+    public readonly struct TypeIdentityProvider : ITypeIdentityProvider
+    {
+        readonly Func<Type,TypeIdentity> f;
+
+        [MethodImpl(Inline)]
+        public TypeIdentityProvider(Func<Type, TypeIdentity> f)
+            => this.f = f;
+
+        [MethodImpl(Inline)]
+        public TypeIdentity Identify(Type src)
+            => f(src);
     }
 }
