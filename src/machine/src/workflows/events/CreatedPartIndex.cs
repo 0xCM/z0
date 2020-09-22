@@ -17,12 +17,12 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public readonly X86CodeIndex Index;
+        public readonly ApiHexIndex Index;
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public CreatedPartIndex(WfStepId step, X86CodeIndex index, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
+        public CreatedPartIndex(WfStepId step, ApiHexIndex index, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
         {
             EventId = (EventName, step, ct);
             Index = index;

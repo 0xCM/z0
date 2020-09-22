@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Pairs a part with owned code
     /// </summary>
-    public readonly struct X86PartHosts
+    public readonly struct ApiPartHexIndex
     {
         /// <summary>
         /// The owning part
@@ -25,7 +25,7 @@ namespace Z0
         public readonly X86HostIndex[] Data;
 
         [MethodImpl(Inline)]
-        public X86PartHosts(PartId part, X86HostIndex[] src)
+        public ApiPartHexIndex(PartId part, X86HostIndex[] src)
         {
             Part = part;
             Data = src;

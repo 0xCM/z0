@@ -13,21 +13,21 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public ref struct CreateGlobalIndex
+    public ref struct CreateApiHexIndex
     {
         readonly IWfShell Wf;
 
         readonly PartFiles SourceFiles;
 
-        public X86CodeIndex EncodedIndex;
+        public ApiHexIndex EncodedIndex;
 
         readonly List<Instruction> Buffer;
 
         readonly IWfCaptureState State;
 
-        readonly CreateGlobalIndexHost Host;
+        readonly WfHost Host;
 
-        public CreateGlobalIndex(IWfShell wf, CreateGlobalIndexHost host, IWfCaptureState state, PartFiles src)
+        public CreateApiHexIndex(IWfShell wf, WfHost host, IWfCaptureState state, PartFiles src)
         {
             Wf = wf;
             Host = host;
@@ -43,39 +43,46 @@ namespace Z0
             Wf.Disposed(Host.Id);
         }
 
+        void BuildIndex()
+        {
+            EncodedIndex = CaptureIndexBuilder.create(Wf, Host, SourceFiles);
+        }
+
         public void Run()
         {
             Wf.Running(Host);
 
             try
             {
-                var files = SourceFiles.Parsed.View;
-                var count = files.Length;
-                var builder = new EmitCaptureIndex(Wf, new EmitCaptureIndexHost());
+                // var files = SourceFiles.Parsed.View;
+                // var count = files.Length;
+                // var builder = new CaptureIndexBuilder(Wf, new EmitCaptureIndexHost());
 
-                Wf.Status(Host.Id, text.format("Indexing {0} datasets",count));
+                // Wf.Status(Host.Id, text.format("Indexing {0} datasets",count));
 
-                for(var i=0; i<count; i++)
-                {
-                    ref readonly var path = ref skip(files,i);
+                // for(var i=0; i<count; i++)
+                // {
+                //     ref readonly var path = ref skip(files,i);
 
-                    var result = MemberParseReport.load(path);
-                    if(result)
-                    {
-                        Index(result.Value, builder);
-                        Wf.Status(Host.Id, text.format("Indexed {0}", path));
-                    }
-                    else
-                        Wf.Error(Host.Id, $"Could not parse {path}");
-                }
+                //     var result = MemberParseReport.load(path);
+                //     if(result)
+                //     {
+                //         Index(result.Value, builder);
+                //         Wf.Status(Host.Id, text.format("Indexed {0}", path));
+                //     }
+                //     else
+                //         Wf.Error(Host.Id, $"Could not parse {path}");
+                // }
 
-                var status = builder.Status();
-                Wf.Status(Host.Id, text.format("Freeze: {0}", status.Format()));
+                // var status = builder.Status();
+                // Wf.Status(Host.Id, text.format("Freeze: {0}", status.Format()));
 
-                builder.Run();
-                EncodedIndex = builder.Index;
+                // builder.Run();
+                // EncodedIndex = builder.Index;
+
+                BuildIndex();
+
                 Wf.Raise(new CreatedPartIndex(Host, EncodedIndex, Wf.Ct));
-
 
                 var index = EncodedIndex;
                 Process(index);
@@ -91,14 +98,14 @@ namespace Z0
             Wf.Ran(Host);
         }
 
-        void Index(ReadOnlySpan<MemberParseRow> src, EmitCaptureIndex dst)
+        void Index(ReadOnlySpan<MemberParseRow> src, CaptureIndexBuilder dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
                 Index(skip(src,i), dst);
         }
 
-        void Index(in MemberParseRow src, EmitCaptureIndex dst)
+        void Index(in MemberParseRow src, CaptureIndexBuilder dst)
         {
             if(src.Address.IsEmpty)
                 return;
@@ -109,7 +116,7 @@ namespace Z0
                 Wf.Warn(Host.Id, $"Duplicate | {src.Uri.Format()}");
         }
 
-        Span<ApiPartRoutines> DecodeParts(X86CodeIndex src)
+        Span<ApiPartRoutines> DecodeParts(ApiHexIndex src)
         {
             Wf.Status(Host.Id, text.format("Decoding {0} entries from {1} parts", src.EntryCount, src.Parts.Length));
 
@@ -173,7 +180,7 @@ namespace Z0
             return new ApiHostRoutines(hcs.Host, instructions.ToArray());
         }
 
-        void Process(X86CodeIndex encoded)
+        void Process(ApiHexIndex encoded)
         {
             try
             {

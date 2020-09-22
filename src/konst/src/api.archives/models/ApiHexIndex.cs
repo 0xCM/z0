@@ -11,18 +11,18 @@ namespace Z0
     using static Konst;
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct X86CodeIndex
+    public struct ApiHexIndex
     {
-        X86MemoryIndex Memories;
+        ApiHexAddresses Memories;
 
-        X86UriAddresses UriLocations;
+        ApiUriAddresses UriLocations;
 
         X86PartCodeIndex PartIndex;
 
         public readonly PartId[] Parts;
 
         [MethodImpl(Inline)]
-        public X86CodeIndex(PartId[] parts, X86MemoryIndex members, X86UriAddresses memuri, X86PartCodeIndex code)
+        public ApiHexIndex(PartId[] parts, ApiHexAddresses members, ApiUriAddresses memuri, X86PartCodeIndex code)
         {
             Parts = parts;
             Memories = members;
@@ -84,7 +84,7 @@ namespace Z0
             => EncodedX86.index(id, PartIndex[id]);
 
         [MethodImpl(Inline)]
-        public X86PartHosts CodeSet(PartId id)
+        public ApiPartHexIndex CodeSet(PartId id)
             => EncodedX86.index(id, Hosts.Map(CodeSet));
 
         public X86ApiCode this[MemoryAddress location]
@@ -99,7 +99,7 @@ namespace Z0
             get => CodeSet(id);
         }
 
-        public X86PartHosts this[PartId id]
+        public ApiPartHexIndex this[PartId id]
         {
             [MethodImpl(Inline)]
             get => CodeSet(id);

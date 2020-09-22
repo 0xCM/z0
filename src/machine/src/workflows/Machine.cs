@@ -72,7 +72,7 @@ namespace Z0
         void Run(CreateGlobalIndexHost host)
         {
             Wf.Running(host.Id);
-            using var step = new CreateGlobalIndex(Wf, host, State, Archives.partfiles(Wf.CaptureRoot));
+            using var step = new CreateApiHexIndex(Wf, host, State, ApiArchives.partfiles(Wf.CaptureRoot));
             step.Run();
             Wf.Ran(host.Id);
         }

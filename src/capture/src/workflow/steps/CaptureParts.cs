@@ -41,7 +41,7 @@ namespace Z0
         {
             Wf.Running(StepId);
             Clear();
-            Capture(Archives.capture(Config.TargetArchive.Root));
+            Capture(ApiArchives.capture(Config.TargetArchive.Root));
             Wf.Ran(StepId);
         }
 
@@ -66,7 +66,7 @@ namespace Z0
 
             try
             {
-                var dst = Archives.capture(Config.TargetArchive.Root);
+                var dst = ApiArchives.capture(Config.TargetArchive.Root);
                 using var step = new CaptureApiHosts(State, Config.Api.Hosts, dst);
                 step.Run();
 

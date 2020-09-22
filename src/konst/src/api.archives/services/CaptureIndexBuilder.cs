@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public class EmitCaptureIndex : IDisposable
+    public class CaptureIndexBuilder : IDisposable
     {
         readonly Dictionary<MemoryAddress,X86ApiCode> CodeAddress;
 
@@ -22,11 +22,57 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        readonly EmitCaptureIndexHost Host;
+        readonly WfHost Host;
 
-        public X86CodeIndex Index;
+        public ApiHexIndex Index;
 
-        public EmitCaptureIndex(IWfShell wf, EmitCaptureIndexHost host)
+        public static ApiHexIndex create(IWfShell wf, WfHost host, in PartFiles src)
+        {
+            var files = src.Parsed.View;
+            var count = files.Length;
+            var builder = new CaptureIndexBuilder(wf, host);
+                wf.Status(host, text.format("Indexing {0} datasets",count));
+
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var path = ref skip(files,i);
+
+                var result = MemberParseReport.load(path);
+                if(result)
+                {
+                    index(wf, host, result.Value, builder);
+                    wf.Status(host, text.format("Indexed {0}", path));
+                }
+                else
+                    wf.Error(host, $"Could not parse {path}");
+            }
+
+            var status = builder.Status();
+            wf.Status(host, text.format("Freeze: {0}", status.Format()));
+
+            builder.Run();
+            return builder.Index;
+        }
+
+        static void index(IWfShell wf, WfHost host, in MemberParseRow src, CaptureIndexBuilder dst)
+        {
+            if(src.Address.IsEmpty)
+                return;
+
+            var code = new X86ApiCode(src.Uri, src.Data);
+            var inclusion = dst.Include(code);
+            if(inclusion.Any(x => x == false))
+                wf.Warn(host, $"Duplicate | {src.Uri.Format()}");
+        }
+
+        static void index(IWfShell wf, WfHost host, ReadOnlySpan<MemberParseRow> src, CaptureIndexBuilder dst)
+        {
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                index(wf, host, skip(src,i), dst);
+        }
+
+        public CaptureIndexBuilder(IWfShell wf, WfHost host)
         {
             Wf = wf;
             Host = host;
@@ -42,7 +88,7 @@ namespace Z0
             dst.Hosts = Hosts;
             dst.Addresses = Addresses;
             dst.MemberCount = MemberCount;
-            dst.Encoded = new X86MemoryIndex(dst.Parts, Encoded);
+            dst.Encoded = new ApiHexAddresses(dst.Parts, Encoded);
             return dst;
         }
 
@@ -74,7 +120,7 @@ namespace Z0
             Index = Freeze();
         }
 
-        X86CodeIndex Freeze()
+        ApiHexIndex Freeze()
         {
             var memories = Encoded;
             var locations = Located;
@@ -84,9 +130,9 @@ namespace Z0
                 .GroupBy(g => g.Host)
                 .Select(x => (new X86HostCode(x.Key, x.Select(y => y.Code).ToArray()))).Array();
 
-            return new X86CodeIndex(parts,
-                   new X86MemoryIndex(parts, memories),
-                   new X86UriAddresses(parts, locations),
+            return new ApiHexIndex(parts,
+                   new ApiHexAddresses(parts, memories),
+                   new ApiUriAddresses(parts, locations),
                    new X86PartCodeIndex(parts, code.Select(x => (x.Host, x)).ToDictionary()));
         }
 

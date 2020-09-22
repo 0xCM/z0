@@ -133,11 +133,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         IPartCaptureArchive CaptureArchive(PartId part)
-            => Archives.capture(part);
+            => ApiArchives.capture(part);
 
         [MethodImpl(Inline)]
         IPartCaptureArchive CaptureArchive(FolderPath root)
-            => Archives.capture(root);
+            => ApiArchives.capture(root);
 
         [MethodImpl(Inline)]
         FilePath AsmFilePath<T>(PartId part)
@@ -148,7 +148,7 @@ namespace Z0.Asm
             => CaptureArchive(part).HexPath<T>();
 
         [MethodImpl(Inline)]
-        X86UriHexArchive UriBitsArchive(FolderPath root)
-            => Archives.x86(root);
+        ApiHexArchive UriBitsArchive(FolderPath root)
+            => ApiArchives.hex(FS.dir(root.Name));
     }
 }

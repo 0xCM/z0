@@ -31,7 +31,7 @@ namespace Z0.Asm
 
 
         IPartCapturePaths CaptureArchive(FolderPath root)
-            => Z0.Archives.capture(root);
+            => ApiArchives.capture(root);
 
         void WriteAsm(X86ApiCapture capture, StreamWriter dst)
         {

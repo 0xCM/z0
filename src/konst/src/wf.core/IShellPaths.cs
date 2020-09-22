@@ -13,10 +13,10 @@ namespace Z0
     public interface IShellPaths
     {
         IPartCaptureArchive PartCaptureArchive
-            => Archives.capture(FS.dir(LogRoot.Name) + FS.folder(FN.Capture));
+            => ApiArchives.capture(FS.dir(LogRoot.Name) + FS.folder(FN.Capture));
 
         IPartCaptureArchive CaptureArchive()
-            => Archives.capture(FS.dir(LogRoot.Name) + FS.folder(Capture) + FS.folder(ArtifactFolder));
+            => ApiArchives.capture(FS.dir(LogRoot.Name) + FS.folder(Capture) + FS.folder(ArtifactFolder));
 
         IHostCaptureArchive CaptureArchive(ApiHostUri host)
             => HostCaptureArchive.create(CaptureArchive().ArchiveRoot, host);

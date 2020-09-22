@@ -11,18 +11,18 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct X86UriHexArchive
+    public readonly struct ApiHexArchive
     {
         readonly FolderPath ArchiveRoot;
 
         [MethodImpl(Inline)]
-        public X86UriHexArchive(FS.FolderPath root)
+        public ApiHexArchive(FS.FolderPath root)
         {
             ArchiveRoot = FolderPath.Define(root.Name);
         }
 
         [MethodImpl(Inline)]
-        public X86UriHexArchive(IWfShell wf)
+        public ApiHexArchive(IWfShell wf)
         {
             ArchiveRoot = wf.ArchiveRoot;
         }
@@ -49,7 +49,7 @@ namespace Z0
         public IEnumerable<FilePath> Files(PartId owner)
             => ArchiveRoot.Files(owner, FileExtensions.HexLine, true);
 
-        public IEnumerable<X86UriIndex> Indices(params PartId[] owners)
+        public IEnumerable<ApiHostHexIndex> Indices(params PartId[] owners)
         {
             if(owners.Length != 0)
             {
@@ -107,7 +107,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source path</param>
         public ApiHex[] Read(FilePath src)
-            => X86UriHexReader.Service.Read(src);
+            => ApiHexReader.Service.Read(src);
 
         /// <summary>
         /// Reads the bits of an identified operation
@@ -116,12 +116,12 @@ namespace Z0
         public ApiHex[] Read(OpIdentity id)
             => Read(ArchiveRoot + FileName.define(id, FileExtensions.HexLine));
 
-        public X86UriIndex Index(FilePath src)
+        public ApiHostHexIndex Index(FilePath src)
         {
             var uri = ApiUriParser.host(src.FileName);
             if(uri.Failed || uri.Value.IsEmpty)
             {
-                return X86UriIndex.Empty;
+                return ApiHostHexIndex.Empty;
             }
 
             var dst = z.list<ApiHex>();
@@ -136,6 +136,6 @@ namespace Z0
             => root.Files(FileExtensions.HexLine, true).Array();
 
         static ApiHex[] read(FilePath src)
-            => X86UriHexReader.Service.Read(src).Where(x => x.IsNonEmpty);
+            => ApiHexReader.Service.Read(src).Where(x => x.IsNonEmpty);
     }
 }

@@ -11,14 +11,14 @@ namespace Z0
 
     using KVP = KeyValuePairs<MemoryAddress,X86ApiCode>;
 
-    public readonly struct X86MemoryIndex
+    public readonly struct ApiHexAddresses
     {
         public readonly PartId[] Parts;
 
         readonly KVP Data;
 
         [MethodImpl(Inline)]
-        public X86MemoryIndex(PartId[] parts, KVP src)
+        public ApiHexAddresses(PartId[] parts, KVP src)
         {
             Data = src;
             Parts = parts;
@@ -48,7 +48,7 @@ namespace Z0
             get => Data[src];
         }
 
-        public static X86MemoryIndex Empty
-            => new X86MemoryIndex(sys.empty<PartId>(), KVP.Empty);
+        public static ApiHexAddresses Empty
+            => new ApiHexAddresses(sys.empty<PartId>(), KVP.Empty);
     }
 }

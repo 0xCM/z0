@@ -17,7 +17,7 @@ namespace Z0
     {
         const string ProjectName = "bytes";
 
-        readonly X86UriHexArchive Archive;
+        readonly ApiHexArchive Archive;
 
         public readonly FolderPath SourceDir;
 
@@ -33,14 +33,14 @@ namespace Z0
             Ct = ct;
             SourceDir = context.Paths.AppCaptureRoot;
             TargetDir = context.Paths.ResourceRoot + FolderName.Define(ProjectName);
-            Archive = Archives.x86(SourceDir);
+            Archive = ApiArchives.hex(FS.dir(SourceDir.Name));
             Wf.Created(StepId);
         }
 
         public void Run()
         {
             Wf.Running(StepId, flow(SourceDir, TargetDir));
-            var archive = ApiArchives.x86(FS.dir(SourceDir.Name));
+            var archive = ApiArchives.hex(FS.dir(SourceDir.Name));
             var indices = archive.Indices();
             foreach(var index in indices)
             {
@@ -64,7 +64,7 @@ namespace Z0
             Wf.Disposed(StepId);
         }
 
-        void Emit(X86UriIndex src, FolderPath dst)
+        void Emit(ApiHostHexIndex src, FolderPath dst)
         {
             var path = (dst + FolderName.Define("src")) + src.Host.FileName(FileExtensions.Cs);
             var resources = HostResources.from(src);

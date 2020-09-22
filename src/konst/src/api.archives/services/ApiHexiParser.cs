@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
 
-    public readonly struct X86UriParser : ITextParser<ApiHex>
+    public readonly struct ApiHexParser : ITextParser<ApiHex>
     {
         /// <summary>
         /// Parses a row of identified hex text

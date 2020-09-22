@@ -23,7 +23,7 @@ namespace Z0
 
         readonly IAsmContext Asm;
 
-        readonly X86CodeIndex Encoded;
+        readonly ApiHexIndex Encoded;
 
         readonly int[] Sequence;
 
@@ -47,7 +47,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ProcessAsm(IWfCaptureState state, in X86CodeIndex encoded)
+        public ProcessAsm(IWfCaptureState state, in ApiHexIndex encoded)
         {
             Wf = state.Wf;
             Asm = state.Asm;

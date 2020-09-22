@@ -11,14 +11,14 @@ namespace Z0
 
     using KVP = KeyValuePairs<MemoryAddress,OpUri>;
 
-    public readonly struct X86UriAddresses
+    public readonly struct ApiUriAddresses
     {
         public readonly PartId[] Parts;
 
         readonly KVP Data;
 
         [MethodImpl(Inline)]
-        public X86UriAddresses(PartId[] parts, KVP src)
+        public ApiUriAddresses(PartId[] parts, KVP src)
         {
             Parts = parts;
             Data = src;

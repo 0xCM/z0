@@ -22,7 +22,7 @@ namespace Z0
 
         public Count MemberCount;
 
-        public X86MemoryIndex Encoded;
+        public ApiHexAddresses Encoded;
 
         [MethodImpl(Inline)]
         public string Format()

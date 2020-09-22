@@ -134,7 +134,7 @@ namespace Z0
     {
         protected override void Execute(IWfShell wf)
         {
-            using var step = new EmitCaptureIndex(wf,this);
+            using var step = new CaptureIndexBuilder(wf,this);
         }
 
     }

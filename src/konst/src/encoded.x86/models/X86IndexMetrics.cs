@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Collects statistics of encoded data known to a <see cref='X86CodeIndex'/>
+    /// Collects statistics of encoded data known to a <see cref='ApiHexIndex'/>
     /// </summary>
     public struct X86IndexMetrics
     {
@@ -30,7 +30,7 @@ namespace Z0
         public string Format()
             => text.format("{0}", new {PartCount, HostCount, AddressCount, FunctionCount, IdentityCount, ByteCount});
 
-        public static X86IndexMetrics from(X86CodeIndex src)
+        public static X86IndexMetrics from(ApiHexIndex src)
         {
             var stats = default(X86IndexMetrics);
             stats.PartCount = (uint)src.Parts.Length;

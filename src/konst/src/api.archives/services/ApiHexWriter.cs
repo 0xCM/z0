@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct X86UriHexWriter : IApiHexWriter<X86UriHexWriter>
+    public readonly struct ApiHexWriter : IApiHexWriter<ApiHexWriter>
     {
         /// <summary>
         /// The writer's target path
@@ -20,10 +20,17 @@ namespace Z0
         readonly StreamWriter StreamOut;
 
         [MethodImpl(Inline)]
-        public X86UriHexWriter(FilePath path)
+        public ApiHexWriter(FilePath path)
         {
             TargetPath = path;
-            StreamOut = new StreamWriter(path.CreateParentIfMissing().FullPath,false);
+            StreamOut = new StreamWriter(TargetPath.CreateParentIfMissing().FullPath,false);
+        }
+
+        [MethodImpl(Inline)]
+        public ApiHexWriter(FS.FilePath path)
+        {
+            TargetPath = FilePath.Define(path.Name);
+            StreamOut = new StreamWriter(TargetPath.CreateParentIfMissing().FullPath,false);
         }
 
         public void Write(X86ApiCode src, int idpad = 60)
