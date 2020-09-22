@@ -17,32 +17,32 @@ namespace Z0
         readonly Vector128<uint> Components;
 
         [MethodImpl(Inline)]
-        public static implicit operator DirectiveIdentity(in ConstQuad<ArtifactIdentifier> src)
+        public static implicit operator DirectiveIdentity(in ConstQuad<ApiArtifactKey> src)
             => new DirectiveIdentity(src);
 
         [MethodImpl(Inline)]
-        public DirectiveIdentity(in ConstQuad<ArtifactIdentifier> src)
+        public DirectiveIdentity(in ConstQuad<ApiArtifactKey> src)
             => Components = vparts(n128,(uint)src.First, (uint)src.Second, (uint)src.Third, (uint)src.Fourth);
 
-        public ArtifactIdentifier Kind
+        public ApiArtifactKey Kind
         {
             [MethodImpl(Inline)]
             get => vcell(Components,0);
         }
 
-        public ArtifactIdentifier Command
+        public ApiArtifactKey Command
         {
             [MethodImpl(Inline)]
             get => vcell(Components,1);
         }
 
-        public ArtifactIdentifier Response
+        public ApiArtifactKey Response
         {
             [MethodImpl(Inline)]
             get => vcell(Components,2);
         }
 
-        public ArtifactIdentifier Host
+        public ApiArtifactKey Host
         {
             [MethodImpl(Inline)]
             get => vcell(Components,3);
@@ -58,34 +58,34 @@ namespace Z0
     public readonly struct ActorIdentity: IModelIdentity<ActorIdentity>
     {
         [MethodImpl(Inline)]
-        public static implicit operator ActorIdentity(in ConstQuad<ArtifactIdentifier> src)
+        public static implicit operator ActorIdentity(in ConstQuad<ApiArtifactKey> src)
             => new ActorIdentity(src);
 
         [MethodImpl(Inline)]
-        public ActorIdentity(in ConstQuad<ArtifactIdentifier> src)
+        public ActorIdentity(in ConstQuad<ApiArtifactKey> src)
             => Components = vparts(n128,(uint)src.First, (uint)src.Second, (uint)src.Third, (uint)src.Fourth);
 
         readonly Vector128<uint> Components;
 
-        public ArtifactIdentifier Kind
+        public ApiArtifactKey Kind
         {
             [MethodImpl(Inline)]
             get => vcell(Components,0);
         }
 
-        public ArtifactIdentifier Command
+        public ApiArtifactKey Command
         {
             [MethodImpl(Inline)]
             get => vcell(Components,1);
         }
 
-        public ArtifactIdentifier Response
+        public ApiArtifactKey Response
         {
             [MethodImpl(Inline)]
             get => vcell(Components,2);
         }
 
-        public ArtifactIdentifier Host
+        public ApiArtifactKey Host
         {
             [MethodImpl(Inline)]
             get => vcell(Components,3);

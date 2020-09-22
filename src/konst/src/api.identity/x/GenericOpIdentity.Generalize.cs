@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static OpIdentity Generalize(this GenericOpIdentity src)
-            => OpIdentityParser.parse(src.Identifier);
+            => ApiIdentityParser.parse(src.Identifier);
     }
 }

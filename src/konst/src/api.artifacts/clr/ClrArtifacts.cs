@@ -21,7 +21,7 @@ namespace Z0
     public readonly partial struct ClrArtifacts
     {
         [MethodImpl(Inline), Op]
-        public static ArtifactToken<ClrArtifactKind,ArtifactIdentifier> identify(FieldInfo src)
+        public static ArtifactToken<ClrArtifactKind,ApiArtifactKey> identify(FieldInfo src)
             => (ClrArtifactKind.Field, src.MetadataToken);
 
         [MethodImpl(Inline)]

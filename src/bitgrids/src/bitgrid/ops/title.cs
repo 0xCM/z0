@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     partial class BitGrid
-    {                
+    {
         /// <summary>
         /// Defines a grid title suffixed with its signature
         /// </summary>
@@ -25,8 +25,8 @@ namespace Z0
             where W: unmanaged, ITypeNat
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
-            where T: unmanaged        
-                => $"{label} {sigtext(w,m,n,t)}";            
+            where T: unmanaged
+                => $"{label} {sigtext(w,m,n,t)}";
 
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Z0
             where W: unmanaged, ITypeNat
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
-            where T: unmanaged        
-                => $"v{w}_{m}x{n}x{Identify.numeric(t)}";
+            where T: unmanaged
+                => $"v{w}_{m}x{n}x{ApiIdentityKinds.numeric(t)}";
     }
 }

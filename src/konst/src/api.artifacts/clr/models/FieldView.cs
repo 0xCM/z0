@@ -37,7 +37,7 @@ namespace Z0
                 get => Subject.Name;
             }
 
-            public ArtifactIdentifier Id
+            public ApiArtifactKey Id
             {
                 [MethodImpl(Inline)]
                 get => Subject.MetadataToken;

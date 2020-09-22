@@ -20,7 +20,7 @@ namespace Z0
     {
         ClrTypeKind Kind {get;}
 
-        ArtifactIdentifier Id {get;}
+        ApiArtifactKey Id {get;}
 
         /// <summary>
         /// Models of the types nested within the subject, if any

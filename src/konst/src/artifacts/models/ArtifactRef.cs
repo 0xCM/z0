@@ -15,7 +15,7 @@ namespace Z0
     /// </summary>
     public readonly struct ArtifactRef
     {
-        public readonly ArtifactIdentifier Id;
+        public readonly ApiArtifactKey Id;
 
         [MethodImpl(Inline)]
         public ArtifactRef(Type t)
@@ -24,7 +24,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ArtifactRef(ArtifactIdentifier src)
+        public ArtifactRef(ApiArtifactKey src)
         {
             Id = src;
         }

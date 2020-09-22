@@ -6,7 +6,7 @@ namespace Z0
 {
     public interface IReflected
     {
-        ArtifactIdentifier Id {get;}
+        ApiArtifactKey Id {get;}
     }
 
     public interface IReflected<F> : IReflected

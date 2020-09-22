@@ -27,37 +27,37 @@ namespace Z0
             => new ArtifactRef(src);
 
         /// <summary>
-        /// Defines an <see cref='ArtifactRef'/> predicated on an a <see cref='ArtifactIdentifier'/>
+        /// Defines an <see cref='ArtifactRef'/> predicated on an a <see cref='ApiArtifactKey'/>
         /// </summary>
         /// <param name="src">The defining type</param>
         [MethodImpl(Inline), Op]
-        public static ArtifactRef reference(ArtifactIdentifier src)
+        public static ArtifactRef reference(ApiArtifactKey src)
             => new ArtifactRef(src);
 
         /// <summary>
-        /// Defines a facet closed over a <see cref='ArtifactIdentifier'/>
+        /// Defines a facet closed over a <see cref='ApiArtifactKey'/>
         /// </summary>
         /// <param name="src">The source artifact identifier</param>
         /// <param name="dst">The target artifact identifier</param>
         /// <param name="name">The facet name</param>
         /// <param name="value">The facet value</param>
         [MethodImpl(Inline), Op]
-        public static RelationFacet<ArtifactIdentifier> facet(ArtifactIdentifier src, ArtifactIdentifier dst, in asci32 name, in variant value)
-            => new RelationFacet<ArtifactIdentifier>((src,dst), name, value);
+        public static RelationFacet<ApiArtifactKey> facet(ApiArtifactKey src, ApiArtifactKey dst, in asci32 name, in variant value)
+            => new RelationFacet<ApiArtifactKey>((src,dst), name, value);
 
         /// <summary>
-        /// Defines a facet closed over a <see cref='ArtifactIdentifier'/>
+        /// Defines a facet closed over a <see cref='ApiArtifactKey'/>
         /// </summary>
         /// <param name="src">The source artifact identifier</param>
         /// <param name="dst">The target artifact identifier</param>
         /// <param name="name">The facet name</param>
         /// <param name="value">The facet value</param>
         [MethodImpl(Inline), Op]
-        public static RelationFacet<ArtifactIdentifier> facet(ArtifactIdentifier src, ArtifactIdentifier dst, string name, in variant value)
-            => new RelationFacet<ArtifactIdentifier>((src,dst), name, value);
+        public static RelationFacet<ApiArtifactKey> facet(ApiArtifactKey src, ApiArtifactKey dst, string name, in variant value)
+            => new RelationFacet<ApiArtifactKey>((src,dst), name, value);
 
         /// <summary>
-        /// Defines a facet closed over a <see cref='ArtifactIdentifier'/>
+        /// Defines a facet closed over a <see cref='ApiArtifactKey'/>
         /// </summary>
         /// <param name="src"></param>
         /// <param name="dst"></param>
@@ -65,8 +65,8 @@ namespace Z0
         /// <param name="value"></param>
         /// <typeparam name="A"></typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static RelationFacet<ArtifactIdentifier> facet<A>(ArtifactIdentifier src, ArtifactIdentifier dst, string name, A value)
+        public static RelationFacet<ApiArtifactKey> facet<A>(ApiArtifactKey src, ApiArtifactKey dst, string name, A value)
             where A : unmanaged
-                => new RelationFacet<ArtifactIdentifier>((src,dst), name, Variant.from(value));
+                => new RelationFacet<ApiArtifactKey>((src,dst), name, Variant.from(value));
     }
 }

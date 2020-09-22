@@ -151,7 +151,7 @@ namespace Z0
                 get
                 {
                     var instruction = instructions.ToArray().TryGetFirst().ValueOrDefault(IntrinsicsDocument.instruction.Empty);
-                    return text.ifblank(instruction.name, name);
+                    return text.ifempty(instruction.name, name);
                 }
             }
         }

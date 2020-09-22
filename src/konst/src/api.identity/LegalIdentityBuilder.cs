@@ -9,93 +9,40 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct LegalIdentityBuilder : ILegalIdentityBuilder
+    using api = ApiIdentity;
+
+    public struct LegalIdentityBuilder : IIdentityBuilder<string,OpIdentity>
     {
-        readonly LegalIdentityOptions Options;
+        LegalIdentityOptions Options;
 
-        public static string code(OpIdentity src)
-            => LegalIdentityBuilder.Service(CodeOptions).Legalize(src);
+        readonly LegalIdentityOptions CodeOptions;
 
-        public static string file(OpIdentity src)
-            => LegalIdentityBuilder.Service(FileOptions).Legalize(src);
+        readonly LegalIdentityOptions FileOptions;
 
         [MethodImpl(Inline)]
-        public static LegalIdentityBuilder Service(LegalIdentityOptions options)
+        public static string code(OpIdentity src)
+            => service(CreateCodeOptions()).Build(src);
+
+        [MethodImpl(Inline)]
+        public static string file(OpIdentity src)
+            => service(CreateFileOptions()).Build(src);
+
+        [MethodImpl(Inline)]
+        public static LegalIdentityBuilder service(LegalIdentityOptions options)
             => new LegalIdentityBuilder(options);
 
         [MethodImpl(Inline)]
-        public LegalIdentityBuilder(LegalIdentityOptions options)
-            => Options = options;
-
-        public string Legalize(OpIdentity src)
+        internal LegalIdentityBuilder(LegalIdentityOptions options)
         {
-            var length = src.Identifier.Length;
-            Span<char> dst = stackalloc char[length];
-            for(var i=0; i< length; i++)
-            {
-                var c = src.Identifier[i];
-                switch(c)
-                {
-                    case IDI.TypeArgsOpen:
-                        dst[i] = Options.TypeArgsOpen;
-                    break;
-
-                    case IDI.TypeArgsClose:
-                        dst[i] = Options.TypeArgsClose;
-                    break;
-
-                    case IDI.ArgsOpen:
-                        dst[i] = Options.ArgsOpen;
-                    break;
-
-                    case IDI.ArgsClose:
-                        dst[i] = Options.ArgsClose;
-                    break;
-
-                    case IDI.ArgSep:
-                        dst[i] = Options.ArgSep;
-                    break;
-
-                    case IDI.ModSep:
-                        dst[i] = Options.ModSep;
-                    break;
-
-                    case IDI.Refines:
-                        dst[i] = (char)SymNotKind.Pipe;
-                    break;
-
-                    case Chars.Dot:
-                        dst[i] = (char)SymNotKind.Dot;
-                        break;
-
-                    case Chars.Gt:
-                        dst[i] = (char)SymNotKind.Gt;
-                        break;
-
-                    case Chars.Lt:
-                        dst[i] = (char)SymNotKind.Lt;
-                        break;
-
-                    default:
-                        dst[i] = c;
-                    break;
-                }
-            }
-            return new string(dst.Trim());
+            Options = options;
+            CodeOptions = CreateCodeOptions();
+            FileOptions = CreateFileOptions();
         }
 
+        public string Build(OpIdentity src)
+            => api.legalize(src,Options);
 
-        static LegalIdentityOptions CodeOptions
-            => new LegalIdentityOptions(
-                TypeArgsOpen: SymNot.Lt,
-                TypeArgsClose: SymNot.Gt,
-                ArgsOpen: SymNot.Circle,
-                ArgsClose: SymNot.Circle,
-                ArgSep: SymNot.Dot,
-                ModSep: (char)SymNotKind.Plus
-                );
-
-        static LegalIdentityOptions FileOptions
+        static LegalIdentityOptions CreateFileOptions()
             => new LegalIdentityOptions(
                 TypeArgsOpen: Chars.LBracket,
                 TypeArgsClose: Chars.RBracket,
@@ -103,5 +50,14 @@ namespace Z0
                 ArgsClose: Chars.RParen,
                 ArgSep: Chars.Comma,
                 ModSep: IDI.ModSep);
+        static LegalIdentityOptions CreateCodeOptions()
+            => new LegalIdentityOptions(
+            TypeArgsOpen: SymNot.Lt,
+            TypeArgsClose: SymNot.Gt,
+            ArgsOpen: SymNot.Circle,
+            ArgsClose: SymNot.Circle,
+            ArgSep: SymNot.Dot,
+            ModSep: (char)SymNotKind.Plus
+            );
     }
 }

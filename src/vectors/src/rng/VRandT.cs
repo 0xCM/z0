@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    
+
     public readonly struct VRandom128<T> : IEmitter128<T>
         where T : unmanaged
     {
@@ -19,12 +19,12 @@ namespace Z0
 
         readonly IPolyrand Random;
 
-        public OpIdentity Id => Identify.sfunc(Name, VKind);
+        public OpIdentity Id => ApiIdentityKinds.sfunc(Name, VKind);
 
         [MethodImpl(Inline)]
-        internal VRandom128(IPolyrand random)            
+        internal VRandom128(IPolyrand random)
             => this.Random = random;
-        
+
         [MethodImpl(Inline)]
         public Vector128<T> Invoke() => Random.CpuVector<T>(VKind);
     }
@@ -38,12 +38,12 @@ namespace Z0
 
         public Vec256Kind<T> VKind => default;
 
-        public OpIdentity Id => Identify.sfunc(Name,VKind);
+        public OpIdentity Id => ApiIdentityKinds.sfunc(Name,VKind);
 
         [MethodImpl(Inline)]
-        internal VRandom256(IPolyrand random)            
+        internal VRandom256(IPolyrand random)
             => this.Random = random;
-        
+
         [MethodImpl(Inline)]
         public Vector256<T> Invoke() => Random.CpuVector<T>(VKind);
     }

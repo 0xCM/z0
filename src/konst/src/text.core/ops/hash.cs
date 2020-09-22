@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// Returns a system-provided hash code for a specified character span
         /// </summary>
-        /// <param name="src">The data soruce</param>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static int syshash(ReadOnlySpan<char> src)
             => string.GetHashCode(src);
@@ -23,7 +23,7 @@ namespace Z0
         /// <summary>
         /// Returns a hash code predicated on the address of the leading character
         /// </summary>
-        /// <param name="src">The data soruce</param>
+        /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static uint hash(ReadOnlySpan<char> src)
             => z.hash(address(first(src)));

@@ -30,7 +30,7 @@ namespace Z0
             => string.Concat(src);
 
         /// <summary>
-        /// Concatenates a sequence of strings intersprsed by a character delimiter with a space on either side
+        /// Concatenates a sequence of strings interspersed by a character delimiter with a space on either side
         /// </summary>
         /// <param name="src">The characters to concatenate</param>
         [MethodImpl(Inline), Op]

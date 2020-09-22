@@ -13,15 +13,6 @@ namespace Z0
     partial class text
     {
         /// <summary>
-        /// Inserts a string into the intern pool if it is not already there and, in any case, returns the string's address
-        /// </summary>
-        /// <param name="src"></param>
-        [MethodImpl(Inline), Op]
-        public static MemoryAddress intern(string src)
-            => address(string.Intern(src));
-
-
-        /// <summary>
         /// Performs a string comparison according to a specified comparison type
         /// </summary>
         /// <param name="a">The first string</param>

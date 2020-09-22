@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="M">The member type</typeparam>
         public static OpIndex<M> index<M>(ReadOnlySpan<M> src)
             where M : struct, IApiMember
-                => Identify.index(src.MapArray(h => (h.Id, h)));
+                => ApiIdentityKinds.index(src.MapArray(h => (h.Id, h)));
 
         public static ApiCodeIndex index(IMemberLocator locator, ApiParts api, ApiHostUri uri, FilePath src)
         {
@@ -45,7 +45,7 @@ namespace Z0
 
         public static ApiMemberIndex index(ApiMembers src)
         {
-            var index = Identify.index(src.Storage.Select(h => (h.Id, h)),true);
+            var index = ApiIdentityKinds.index(src.Storage.Select(h => (h.Id, h)),true);
             return new ApiMemberIndex(index.HashTable, index.Duplicates);
         }
     }

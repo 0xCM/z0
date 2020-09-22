@@ -67,7 +67,7 @@ namespace Z0
         public static EntityHandle EntityHandle(TableIndex tableIndex, uint row)
             => MetadataTokens.EntityHandle(tableIndex, (int)row);
 
-        public static EntityHandle EntityHandle(ArtifactIdentifier id)
+        public static EntityHandle EntityHandle(ApiArtifactKey id)
             => MetadataTokens.EntityHandle((int)id);
 
         public static MethodDefinitionHandle MethodDefinitionHandle(uint row)

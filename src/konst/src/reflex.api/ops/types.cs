@@ -14,7 +14,7 @@ namespace Z0
     partial struct Reflex
     {
         [MethodImpl(Inline), Op]
-        public static ArtifactIdentifier identity(in Type src)
+        public static ApiArtifactKey identity(in Type src)
             => src.MetadataToken;
 
         [MethodImpl(Inline), Op]
@@ -22,7 +22,7 @@ namespace Z0
             => src.GetTypes();
 
         [MethodImpl(Inline), Op]
-        public static Type type(in Indexed<Type>  src, ArtifactIdentifier id)
+        public static Type type(in Indexed<Type>  src, ApiArtifactKey id)
         {
             for(var i=0; i<src.Length; i++)
             {

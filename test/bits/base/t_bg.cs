@@ -58,7 +58,7 @@ namespace Z0
                 counter.Stop();
             }
 
-            ReportBenchmark($"gbg_read_{Identify.numeric<T>()}", CycleCount*M*N, counter);
+            ReportBenchmark($"gbg_read_{ApiIdentityKinds.numeric<T>()}", CycleCount*M*N, counter);
         }
 
         protected void bm_bitread_bench<T>(SystemCounter counter = default)
@@ -78,7 +78,7 @@ namespace Z0
                 counter.Stop();
             }
 
-            ReportBenchmark($"gbm_bitread_{Identify.numeric<T>()}", CycleCount*M*N, counter);
+            ReportBenchmark($"gbm_bitread_{ApiIdentityKinds.numeric<T>()}", CycleCount*M*N, counter);
         }
 
         protected void bg_bitwrite_bench<T>(ushort M, ushort N, SystemCounter counter = default)
@@ -97,7 +97,7 @@ namespace Z0
                 counter.Stop();
             }
 
-            ReportBenchmark($"gbg_bitwrite_{Identify.numeric<T>()}", CycleCount*M*N, counter);
+            ReportBenchmark($"gbg_bitwrite_{ApiIdentityKinds.numeric<T>()}", CycleCount*M*N, counter);
         }
 
         protected void bg_and_check<M,N,T>(M m = default, N n = default, T t = default)

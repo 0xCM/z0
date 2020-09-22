@@ -30,7 +30,7 @@ namespace Z0
         /// <summary>
         /// The storage cell type identifier
         /// </summary>
-        public ArtifactIdentifier SegDomain {get;}
+        public ApiArtifactKey SegDomain {get;}
 
         /// <summary>
         /// The number of bits occupied by a symbol
@@ -50,7 +50,7 @@ namespace Z0
             get => (ushort)(SegWidth/SymWidth);
         }
 
-        public ArtifactIdentifier SymDomain
+        public ApiArtifactKey SymDomain
         {
             [MethodImpl(Inline)]
             get => typeof(S);
@@ -63,7 +63,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public SymbolSpec(ushort segwidth, ArtifactIdentifier segdomain, params S[] symbols)
+        public SymbolSpec(ushort segwidth, ApiArtifactKey segdomain, params S[] symbols)
         {
             SegDomain = segdomain;
             SegWidth = segwidth;

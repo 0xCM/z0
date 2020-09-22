@@ -27,7 +27,7 @@ namespace Z0.ClrData
             get => Reflex.@struct(Definition);
         }
 
-        public ArtifactIdentifier Id
+        public ApiArtifactKey Id
 
         {
             [MethodImpl(Inline)]

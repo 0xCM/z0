@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static IdentityShare;
     using static z;
+
+    using api = ApiIdentity;
 
     public readonly struct ApiHostUri : IUri<ApiHostUri>, INullary<ApiHostUri>
     {
@@ -28,7 +29,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => text.blank(Name);
+            get => text.empty(Name);
         }
 
         public bool IsNonEmpty

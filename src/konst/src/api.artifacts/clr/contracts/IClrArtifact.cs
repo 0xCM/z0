@@ -9,7 +9,7 @@ namespace Z0
     {
         ClrArtifactKind Kind {get;}
 
-        ArtifactIdentifier Id {get;}
+        ApiArtifactKey Id {get;}
 
         string Name {get;}
 

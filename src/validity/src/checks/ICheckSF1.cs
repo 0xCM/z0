@@ -65,7 +65,7 @@ namespace Z0
             where F : IFunc<T,R>
             where G : IFunc<T,R>
         {
-            var casename = Identify.TestCaseText(Context.HostType, g);
+            var casename = ApiIdentityKinds.TestCaseText(Context.HostType, g);
             var succeeded = true;
             var count = RepCount;
             var clock = counter();

@@ -13,7 +13,7 @@ namespace Z0
     {
         ClrArtifactKind Kind {get;}
 
-        ArtifactIdentifier Id {get;}
+        ApiArtifactKey Id {get;}
 
         ClrName Name {get;}
 

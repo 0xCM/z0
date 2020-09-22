@@ -18,9 +18,9 @@ namespace Z0
         {
             public ClrArtifactRef Key;
 
-            public ArtifactIdentifier DeclaringType;
+            public ApiArtifactKey DeclaringType;
 
-            public ArtifactIdentifier DataType;
+            public ApiArtifactKey DataType;
 
             public FieldAttributes Attributes;
 

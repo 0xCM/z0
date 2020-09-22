@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
 
     partial class BC
@@ -19,7 +19,7 @@ namespace Z0
 
             public static Bfly<N,T> Op => default;
 
-            public OpIdentity Id => Identify.sfunc<N,T>(Name);
+            public OpIdentity Id => ApiIdentityKinds.sfunc<N,T>(Name);
 
             [MethodImpl(Inline)]
             public T Invoke(T a) => gbits.bfly<N,T>(a);

@@ -21,7 +21,7 @@ namespace Z0
         {
             var src = LiteralSequence<E,T>();
             var count = src.Length;
-            var token = ArtifactIdentifier.from<E>();
+            var token = ApiArtifactKey.from<E>();
             var datatype = kind<E>();
             var description = string.Empty;
             var enumData = UserMetadata.Empty;
@@ -31,7 +31,7 @@ namespace Z0
             var numeric = sys.alloc<T>(count);
             var descriptions = sys.alloc<string>(count);
             var userData = sys.alloc<UserMetadata>(count);
-            var tokens = sys.alloc<ArtifactIdentifier>(count);
+            var tokens = sys.alloc<ApiArtifactKey>(count);
 
             var dst = new EnumDataset<E,T>(token, description,  UserMetadata.Empty, datatype,
                 tokens, indices,  names, literals, numeric, descriptions, userData);

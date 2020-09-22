@@ -29,7 +29,7 @@ namespace Z0
             {
                 ref readonly var type = ref skip(types,i);
                 var attrib = type.Tag<ApiDataTypeAttribute>();
-                var name =  text.ifblank(attrib.MapValueOrDefault(a => a.Name, type.Name),type.Name).ToLower();
+                var name =  text.ifempty(attrib.MapValueOrDefault(a => a.Name, type.Name),type.Name).ToLower();
                 var uri = new ApiHostUri(part, name);
                 seek(dst,i) = new ApiDataType(type, name, part, uri);
             }

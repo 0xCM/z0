@@ -15,7 +15,7 @@ namespace Z0
     {
         public readonly PartId PartId;
 
-        public readonly ArtifactIdentifier TypeId;
+        public readonly ApiArtifactKey TypeId;
 
         public readonly MemoryAddress TypeAddress;
 

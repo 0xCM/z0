@@ -16,6 +16,6 @@ namespace Z0
         /// </summary>
         /// <param name="k">The primal kind</param>
         public static HashSet<Type> DistinctTypes(this NumericKind k)
-            => Identify.typeset(k);
+            => ApiIdentityKinds.typeset(k);
     }
 }

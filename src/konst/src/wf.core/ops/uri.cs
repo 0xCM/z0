@@ -19,7 +19,7 @@ namespace Z0
             var typename = src.Name;
             var partName = typename.LeftOf('_');
             var part = PartIdParser.single(partName);
-            var host = text.ifblank(typename.RightOf('_'), "anonymous");
+            var host = text.ifempty(typename.RightOf('_'), "anonymous");
             return new ApiHostUri(part, host);
         }
     }

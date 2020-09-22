@@ -21,7 +21,7 @@ namespace Z0
         static ApiMemberIndex IndexApi(ApiMembers src)
         {
             var pairs = src.Storage.Select(h => (h.Id, h));
-            var ops = Identify.index(pairs,true);
+            var ops = ApiIdentityKinds.index(pairs,true);
             return new ApiMemberIndex(ops.HashTable, ops.Duplicates);
         }
 

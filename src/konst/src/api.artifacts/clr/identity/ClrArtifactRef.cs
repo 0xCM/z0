@@ -15,12 +15,12 @@ namespace Z0
     {
         public ClrArtifactKind Kind {get;}
 
-        public ArtifactIdentifier Id {get;}
+        public ApiArtifactKey Id {get;}
 
         public ClrName Name {get;}
 
         [MethodImpl(Inline)]
-        public ClrArtifactRef(ArtifactIdentifier id, ClrArtifactKind kind, ClrName name)
+        public ClrArtifactRef(ApiArtifactKey id, ClrArtifactKind kind, ClrName name)
         {
             Id = id;
             Kind = kind;

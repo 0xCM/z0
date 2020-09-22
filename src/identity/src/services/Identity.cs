@@ -23,7 +23,7 @@ namespace Z0
             if(!src.IsGenericMethod)
                 return GenericOpIdentity.Empty;
 
-            var id = Identify.ApiMemberName(src);
+            var id = ApiIdentityKinds.ApiMemberName(src);
             id += IDI.PartSep;
             id += IDI.Generic;
 
@@ -53,7 +53,7 @@ namespace Z0
                 id += last;
             }
 
-            return GenericOpIdentity.Define(id);
+            return ApiIdentity.generic(id);
         }
 
         /// <summary>
@@ -122,12 +122,12 @@ namespace Z0
             RequireConstructed(src);
 
             var id = EmptyString;
-            id += Identify.ApiMemberName(src);
+            id += ApiIdentityKinds.ApiMemberName(src);
             id += IDI.PartSep;
             id += IDI.Generic;
             id += TypeArgIdentity(src);
             id += ValueParamIdentity(src);
-            return OpIdentityParser.parse(id);
+            return ApiIdentityParser.parse(id);
         }
 
         /// <summary>
@@ -139,11 +139,11 @@ namespace Z0
             RequireNonGeneric(src);
 
             var id = EmptyString;
-            id += Identify.ApiMemberName(src);
+            id += ApiIdentityKinds.ApiMemberName(src);
             id += IDI.PartSep;
             id += SequenceIdentity(IDI.ArgsOpen, IDI.ArgsClose, IDI.ArgSep, ValueParamIdentities(src));
 
-            return OpIdentityParser.parse(id);
+            return ApiIdentityParser.parse(id);
         }
 
         /// <summary>

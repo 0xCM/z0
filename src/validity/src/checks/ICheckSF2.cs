@@ -49,7 +49,7 @@ namespace Z0
             where F : IFunc<T0,T1,R>
             where G : IFunc<T0,T1,R>
         {
-            var casename = Identify.TestCaseText(Context.HostType, g);
+            var casename = ApiIdentityKinds.TestCaseText(Context.HostType, g);
             var succeeded = true;
             var clock = counter();
 

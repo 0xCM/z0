@@ -23,13 +23,13 @@ namespace Z0
                 var duplicates = (from g in identities.GroupBy(i => i.Identifier)
                                 where g.Count() > 1
                                 select g.Key).ToHashSet();
-                
-                var dst = new Dictionary<OpIdentity,T>();                        
+
+                var dst = new Dictionary<OpIdentity,T>();
                 if(duplicates.Count() != 0)
                     dst = items.Where(i => !duplicates.Contains(i.Item1.Identifier)).ToDictionary();
                 else
-                    dst = src.ToDictionary();            
-                return new OpIndex<T>(dst, duplicates.Select(d => OpIdentityParser.parse(d)).Array());
+                    dst = src.ToDictionary();
+                return new OpIndex<T>(dst, duplicates.Select(d => ApiIdentityParser.parse(d)).Array());
             }
             catch(Exception e)
             {

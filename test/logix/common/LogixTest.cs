@@ -7,14 +7,14 @@ namespace Z0.Logix
     using System;
     using System.Linq;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static Memories;
-    
+
     using static BitLogicSpec;
     using static LogicEngine;
     using static BinaryLogicKind;
-    
+
     using BL = BinaryLogicKind;
 
     public abstract class LogixTest<X> : UnitTest<X, CheckVectorBits, ICheckVectorBits>
@@ -42,7 +42,7 @@ namespace Z0.Logix
             var v2 = lvar(2);
             var expr = binary(kind, v1,v2);
 
-            foreach(var seq in bitcombo(n2)) 
+            foreach(var seq in bitcombo(n2))
             {
                 var s1 = seq[0];
                 var s2 = seq[1];
@@ -315,7 +315,7 @@ namespace Z0.Logix
         protected void bm_delegate_bench<T>(BinaryLogicKind opkind, SystemCounter clock = default)
             where T : unmanaged
         {
-            var opname = $"bm_{opkind.Format()}_{Identify.numeric<T>()}_delegate";
+            var opname = $"bm_{opkind.Format()}_{ApiIdentityKinds.numeric<T>()}_delegate";
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = Random.BitMatrix<T>();
@@ -326,14 +326,14 @@ namespace Z0.Logix
             clock.Start();
 
             for(var i=0; i<CycleCount; i++)
-            {            
+            {
                 Op(A, B, Z);
                 opcount++;
                 for(var sample=0; sample< RepCount; sample++)
                 {
-                    Op(Z, A, Z);                    
-                    Op(B, Z, Z); 
-                    opcount +=2;                   
+                    Op(Z, A, Z);
+                    Op(B, Z, Z);
+                    opcount +=2;
                 }
             }
 
@@ -345,7 +345,7 @@ namespace Z0.Logix
         protected void bm_api_bench<T>(BinaryLogicKind op, SystemCounter clock = default)
             where T : unmanaged
         {
-            var opname = $"bm_{op.Format()}_{Identify.numeric<T>()}_api";
+            var opname = $"bm_{op.Format()}_{ApiIdentityKinds.numeric<T>()}_api";
 
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
@@ -356,14 +356,14 @@ namespace Z0.Logix
             clock.Start();
 
             for(var i=0; i<CycleCount; i++)
-            {            
+            {
                 SquareBitLogix.eval(op, A, B, Z);
                 opcount++;
                 for(var sample=0; sample< RepCount; sample++)
                 {
-                    SquareBitLogix.eval(op, Z, A, Z);                    
-                    SquareBitLogix.eval(op, B, Z, Z); 
-                    opcount +=2;                   
+                    SquareBitLogix.eval(op, Z, A, Z);
+                    SquareBitLogix.eval(op, B, Z, Z);
+                    opcount +=2;
                 }
             }
 
@@ -375,7 +375,7 @@ namespace Z0.Logix
         protected void bm_and_bench<T>(SystemCounter clock = default)
             where T : unmanaged
         {
-            var opname = $"bm_and_{Identify.numeric<T>()}";
+            var opname = $"bm_and_{ApiIdentityKinds.numeric<T>()}";
 
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
@@ -386,14 +386,14 @@ namespace Z0.Logix
             clock.Start();
 
             for(var i=0; i<CycleCount; i++)
-            {            
+            {
                 SquareBitLogix.and(A, B, Z);
                 opcount++;
                 for(var sample=0; sample< RepCount; sample++)
                 {
-                    SquareBitLogix.and(Z, A, Z);                    
-                    SquareBitLogix.and(B, Z, Z); 
-                    opcount +=2;                   
+                    SquareBitLogix.and(Z, A, Z);
+                    SquareBitLogix.and(B, Z, Z);
+                    opcount +=2;
                 }
             }
 
@@ -405,7 +405,7 @@ namespace Z0.Logix
         protected void bm_xor_bench<T>(SystemCounter clock = default)
             where T : unmanaged
         {
-            var opname = $"bm_xor_{Identify.numeric<T>()}";
+            var opname = $"bm_xor_{ApiIdentityKinds.numeric<T>()}";
 
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
@@ -416,14 +416,14 @@ namespace Z0.Logix
             clock.Start();
 
             for(var i=0; i<CycleCount; i++)
-            {            
+            {
                 SquareBitLogix.xor(A, B, Z);
                 opcount++;
                 for(var sample=0; sample< RepCount; sample++)
                 {
-                    SquareBitLogix.xor(Z, A, Z);                    
-                    SquareBitLogix.xor(B, Z, Z); 
-                    opcount +=2;                   
+                    SquareBitLogix.xor(Z, A, Z);
+                    SquareBitLogix.xor(B, Z, Z);
+                    opcount +=2;
                 }
             }
 
@@ -435,11 +435,11 @@ namespace Z0.Logix
        protected void bitwise_logic_check<T>(BinaryLogicKind kind)
             where T : unmanaged
         {
-            for(var i=0; i< RepCount; i++)   
-            {   
+            for(var i=0; i< RepCount; i++)
+            {
                 var a = Random.Next<T>();
                 var b = Random.Next<T>();
-                var result1 = NumericLogixHost.eval(kind,a,b);    
+                var result1 = NumericLogixHost.eval(kind,a,b);
                 var result2 = BitVectorLogix.Service.EvalDirect(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
                 var result3 = BitVectorLogix.Service.EvalRef(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
                 var result4 = VLogixOps.eval(kind, Vectors.vbroadcast(n128,a), Vectors.vbroadcast(n128,b)).ToScalar();

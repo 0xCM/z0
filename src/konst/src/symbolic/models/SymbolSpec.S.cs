@@ -26,14 +26,14 @@ namespace Z0
         /// </summary>
         public ushort Capacity {get;}
 
-        public ArtifactIdentifier SegDomain {get;}
+        public ApiArtifactKey SegDomain {get;}
 
-        public ArtifactIdentifier SymDomain {get;}
+        public ApiArtifactKey SymDomain {get;}
 
         public S[] Symbols {get;}
 
         [MethodImpl(Inline)]
-        public SymbolSpec(ushort symwidth, ushort segwidth, ArtifactIdentifier segdomain,  ArtifactIdentifier symdomain, params S[] symbols)
+        public SymbolSpec(ushort symwidth, ushort segwidth, ApiArtifactKey segdomain,  ApiArtifactKey symdomain, params S[] symbols)
         {
             SymWidth = symwidth;
             SegWidth = segwidth;
@@ -44,7 +44,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public SymbolSpec(ushort symwidth, ArtifactIdentifier symdomain, params S[] symbols)
+        public SymbolSpec(ushort symwidth, ApiArtifactKey symdomain, params S[] symbols)
         {
             SymWidth = symwidth;
             SegWidth = (ushort)bitwidth<S>();

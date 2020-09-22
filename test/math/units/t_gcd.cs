@@ -63,8 +63,8 @@ namespace Z0
                 compare.Stop();
             }
 
-            ReportBenchmark($"gcdbin{Identify.numeric<T>()}", OpCount,subject);
-            ReportBenchmark($"gcd{Identify.numeric<T>()}", OpCount,compare);
+            ReportBenchmark($"gcdbin{ApiIdentityKinds.numeric<T>()}", OpCount,subject);
+            ReportBenchmark($"gcd{ApiIdentityKinds.numeric<T>()}", OpCount,compare);
         }
 
         /// <summary>
@@ -75,32 +75,32 @@ namespace Z0
         /// <param name="u"></param>
         /// <param name="v"></param>
         /// <remarks>Adapted from http://www.hackersdelight.org/MontgomeryMultiplication.pdf</remarks>
-        static void binxgcd(ulong a, ulong b, out ulong u, out ulong v)     
+        static void binxgcd(ulong a, ulong b, out ulong u, out ulong v)
         {
             if(!math.ispow2(a))
                 throw new Exception($"{a} is not a power of 2");
-            
+
             if(!gmath.odd(b))
                 throw new Exception($"{b} is not odd");
-            
+
             u = 1ul;
             v = 0ul;
-            
+
             // Note that alpha is even and beta is odd.
-            var alpha = a; 
-            var beta = b; 
-            
+            var alpha = a;
+            var beta = b;
+
             // The invariant maintained from here on is: 2a = u*2*alpha - v*beta.
-            while (a > 0) 
+            while (a > 0)
             {
                 a = a >> 1;
-                if ((u & 1) == 0) 
+                if ((u & 1) == 0)
                 {
                     // Delete a common factor of 2 in u and v
-                    u = u >> 1; 
-                    v = v >> 1; 
+                    u = u >> 1;
+                    v = v >> 1;
                 }
-                else 
+                else
                 {
                     // We want to set u = (u + beta) >> 1, but that can overflow, so we use Dietz's method.
                     u = ((u ^ beta) >> 1) + (u & beta);
@@ -120,29 +120,29 @@ namespace Z0
         /// <param name="y"></param>
         /// <param name="z"></param>
         /// <remarks>Adapted from http://www.hackersdelight.org/MontgomeryMultiplication.pdf</remarks>
-        static ulong mod(ulong x, ulong y, ulong z) 
+        static ulong mod(ulong x, ulong y, ulong z)
         {
-            if (x >= z) 
+            if (x >= z)
                 throw new Exception("Bad call to modul64, must have x < z.");
-                        
-            for (var i = 1; i <= 64; i++) 
-            { 
+
+            for (var i = 1; i <= 64; i++)
+            {
                 // All 1's if x(63) = 1.
-                var t = (ulong)((long)x >> 63); 
+                var t = (ulong)((long)x >> 63);
 
                 // Shift x || y left
-                x = (x << 1) | (y >> 63); 
+                x = (x << 1) | (y >> 63);
 
                 // one bit.
                 y = y << 1;
 
-                if ((x | t) >= z) 
+                if ((x | t) >= z)
                 {
                     x = x - z;
                     y = y + 1;
                 }
             }
             return x; // Quotient is y.
-        } 
+        }
     }
 }

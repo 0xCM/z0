@@ -15,20 +15,20 @@ namespace Z0
     /// </summary>
     public readonly struct ArtifactRelation
     {
-        public readonly ArtifactIdentifier Source;
+        public readonly ApiArtifactKey Source;
 
-        public readonly ArtifactIdentifier Target;
+        public readonly ApiArtifactKey Target;
 
         [MethodImpl(Inline)]
-        public static implicit operator ArtifactRelation((ArtifactIdentifier src, ArtifactIdentifier dst) x)
+        public static implicit operator ArtifactRelation((ApiArtifactKey src, ApiArtifactKey dst) x)
             => new ArtifactRelation(x.src, x.dst);
 
         [MethodImpl(Inline)]
-        public static implicit operator Pair<ArtifactIdentifier>(ArtifactRelation r)
+        public static implicit operator Pair<ApiArtifactKey>(ArtifactRelation r)
             =>  pair(r.Source, r.Target);
 
         [MethodImpl(Inline)]
-        public ArtifactRelation(ArtifactIdentifier src, ArtifactIdentifier dst)
+        public ArtifactRelation(ApiArtifactKey src, ApiArtifactKey dst)
         {
             Source = src;
             Target = dst;

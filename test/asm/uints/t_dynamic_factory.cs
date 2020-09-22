@@ -128,8 +128,8 @@ namespace Z0.Asm
 
         TestCaseRecord TestVectorMatch(BufferTokens dst, string name, TypeWidth w, NumericKind kind)
         {
-            var dId = OpIdentityBuilder.build(name, w, kind, false);
-            var gId = OpIdentityBuilder.build(name, w, kind, true);
+            var dId = ApiIdentityBuilder.build(name, w, kind, false);
+            var gId = ApiIdentityBuilder.build(name, w, kind, true);
             var archive = X86UriHexArchive.create(TargetArchive.X86Dir);
             var dBits = archive.Read(ApiQuery.host<dvec>().Uri).Where(x => x.Id == dId).Single();
             var gBits = archive.Read(ApiQuery.host<gvec>().Uri).Where(x => x.Id == gId).Single();

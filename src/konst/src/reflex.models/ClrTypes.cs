@@ -11,10 +11,10 @@ namespace Z0.ClrData
     using static Konst;
     using static z;
 
-    using Storage = KeyedValues<ArtifactIdentifier,System.Type>;
-    using T = KeyedValue<ArtifactIdentifier,System.Type>;
+    using Storage = KeyedValues<ApiArtifactKey,System.Type>;
+    using T = KeyedValue<ApiArtifactKey,System.Type>;
     using V = System.Type;
-    using K = ArtifactIdentifier;
+    using K = ApiArtifactKey;
 
     public readonly struct ClrTypes
     {

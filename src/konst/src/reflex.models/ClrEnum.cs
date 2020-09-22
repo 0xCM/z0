@@ -13,7 +13,7 @@ namespace Z0.ClrData
     {
         public Type Definition {get;}
 
-        public ArtifactIdentifier Id
+        public ApiArtifactKey Id
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

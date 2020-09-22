@@ -13,22 +13,22 @@ namespace Z0
     public readonly struct KindIdentity : IModelIdentity<KindIdentity>
     {
         [MethodImpl(Inline)]
-        public static implicit operator KindIdentity(in Pair<ArtifactIdentifier> src)
+        public static implicit operator KindIdentity(in Pair<ApiArtifactKey> src)
             => new KindIdentity(src);
 
         [MethodImpl(Inline)]
-        public KindIdentity(in Pair<ArtifactIdentifier> src)
+        public KindIdentity(in Pair<ApiArtifactKey> src)
             => Components = (ulong)src.Left | ((ulong)src.Right << 32);
 
         readonly ulong Components;
 
-        public ArtifactIdentifier Host
+        public ApiArtifactKey Host
         {
             [MethodImpl(Inline)]
             get => (uint)Components;
         }
 
-        public ArtifactIdentifier Kind
+        public ApiArtifactKey Kind
         {
             [MethodImpl(Inline)]
             get => (uint)(Components >> 32);

@@ -14,12 +14,12 @@ namespace Z0
 
     public readonly struct ApiOpSig : IApiOpSig<ApiOpSig>
     {
-        public ArtifactIdentifier Host {get;}
+        public ApiArtifactKey Host {get;}
     }
 
     public readonly struct ApiOpSig<S> : IApiOpSig<ApiOpSig<S>>
     {
-        public ArtifactIdentifier Host {get;}
+        public ApiArtifactKey Host {get;}
     }
 
     public readonly struct ApiOpSig<K,T0>

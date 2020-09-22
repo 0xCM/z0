@@ -31,7 +31,7 @@ namespace Z0
             else if(arg.IsTypeNat())
                 return NatId(arg);
             else if(arg.IsSystemDefined())
-                return Identify.primal(arg).AsTypeIdentity().ToOption();
+                return ApiIdentityKinds.primal(arg).AsTypeIdentity().ToOption();
             else if(arg.IsEnum)
                 return some(EnumIdentity.Define(arg).AsTypeIdentity());
             else if(arg.IsSegmented())

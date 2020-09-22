@@ -15,10 +15,10 @@ namespace Z0
         /// <summary>
         /// If the test string is null, returns the empty string; otherwise, returns the test string
         /// </summary>
-        /// <param name="test">The subject string</param>
+        /// <param name="src">The subject string</param>
         /// <param name="replace">The replacement value if blank</param>
         [MethodImpl(Inline), Op]
-        public static string denullify(string test)
-            => empty(test) ? EmptyString : test;
+        public static string denullify(string src)
+            => src == null ? EmptyString : src;
     }
 }

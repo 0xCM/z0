@@ -14,7 +14,7 @@ namespace Z0.ClrData
     {
         public readonly PropertyInfo Definition;
 
-        public ArtifactIdentifier Id
+        public ApiArtifactKey Id
 
         {
             [MethodImpl(Inline)]

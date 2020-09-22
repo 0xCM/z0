@@ -312,7 +312,7 @@ namespace Z0
             var decoder = Asm.RoutineDecoder;
             var count = results.Length;
             var formatter = Asm.Formatter;
-            var dstpath = Wf.Paths.AppLogRoot + FS.file("runner",GlobalExtensions.Asm);
+            var dstpath = Wf.Paths.AppLogRoot + FS.file("runner", GlobalExtensions.Asm);
             using var writer = dstpath.Writer();
 
             for(var i=0; i<count; i++)

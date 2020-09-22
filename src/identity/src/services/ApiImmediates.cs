@@ -26,7 +26,7 @@ namespace Z0
 
         static DirectApiGroup[] direct(ApiHost src)
             => (from d in DirectOpSpecs(src).GroupBy(op => op.Method.Name)
-                select new DirectApiGroup(OpIdentityParser.parse(d.Key), src, d)).Array();
+                select new DirectApiGroup(ApiIdentityParser.parse(d.Key), src, d)).Array();
 
         static IEnumerable<DirectApiMethod> DirectOpSpecs(IApiHost src)
             => from m in TaggedOps(src).NonGeneric() select new DirectApiMethod(src, Diviner.Identify(m), m);

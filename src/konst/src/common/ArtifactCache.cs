@@ -17,14 +17,14 @@ namespace Z0
     /// </summary>
     public readonly struct ArtifactCache
     {
-        static readonly ConcurrentDictionary<ArtifactIdentifier,object> Data = new ConcurrentDictionary<ArtifactIdentifier, object>();
+        static readonly ConcurrentDictionary<ApiArtifactKey,object> Data = new ConcurrentDictionary<ApiArtifactKey, object>();
 
         [MethodImpl(NotInline)]
-        public static object acquire<T>(ArtifactIdentifier id, Func<ArtifactIdentifier,T> factory)
+        public static object acquire<T>(ApiArtifactKey id, Func<ApiArtifactKey,T> factory)
             => Data.GetOrAdd(id,factory);
 
         [MethodImpl(NotInline)]
-        public static Option<T> search<T>(ArtifactIdentifier id)
+        public static Option<T> search<T>(ApiArtifactKey id)
         {
             if(Data.TryGetValue(id, out var dst))
                 return some((T)dst);
@@ -33,7 +33,7 @@ namespace Z0
         }
 
         [MethodImpl(NotInline)]
-        public static void insert<T>(ArtifactIdentifier id, T value)
+        public static void insert<T>(ApiArtifactKey id, T value)
             => Data[id] = value;
     }
 
@@ -43,14 +43,14 @@ namespace Z0
     /// </summary>
     public readonly struct ArtifactCache<T>
     {
-        static readonly ConcurrentDictionary<ArtifactIdentifier,T> Data = new ConcurrentDictionary<ArtifactIdentifier, T>();
+        static readonly ConcurrentDictionary<ApiArtifactKey,T> Data = new ConcurrentDictionary<ApiArtifactKey, T>();
 
         [MethodImpl(NotInline)]
-        public static object acquire(ArtifactIdentifier id, Func<ArtifactIdentifier,T> factory)
+        public static object acquire(ApiArtifactKey id, Func<ApiArtifactKey,T> factory)
             => Data.GetOrAdd(id,factory);
 
         [MethodImpl(NotInline)]
-        public static Option<T> search(ArtifactIdentifier id)
+        public static Option<T> search(ApiArtifactKey id)
         {
             if(Data.TryGetValue(id, out var dst))
                 return some((T)dst);
@@ -59,7 +59,7 @@ namespace Z0
         }
 
         [MethodImpl(NotInline)]
-        public static void insert(ArtifactIdentifier id, T value)
+        public static void insert(ApiArtifactKey id, T value)
             => Data[id] = value;
     }
 }

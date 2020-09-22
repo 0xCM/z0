@@ -11,10 +11,10 @@ namespace Z0
 
     partial class Surrogates
     {
-        public readonly struct TernaryOp<T> : Z0.ITernaryOp<T> 
+        public readonly struct TernaryOp<T> : Z0.ITernaryOp<T>
         {
             readonly Z0.TernaryOp<T> F;
-            
+
             public OpIdentity Id {get;}
 
             [MethodImpl(Inline)]
@@ -26,17 +26,17 @@ namespace Z0
                 => src.ToTernaryOp();
 
             [MethodImpl(Inline)]
-            internal TernaryOp(Z0.TernaryOp<T> f, OpIdentity id)            
+            internal TernaryOp(Z0.TernaryOp<T> f, OpIdentity id)
             {
                 this.F = f;
                 this.Id = id;
             }
 
             [MethodImpl(Inline)]
-            internal TernaryOp(Z0.TernaryOp<T> f, string name)            
+            internal TernaryOp(Z0.TernaryOp<T> f, string name)
             {
                 this.F = f;
-                this.Id = Identify.sfunc<T>(name);
+                this.Id = ApiIdentityKinds.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]
@@ -51,6 +51,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public Func<T,T,T,T> AsFunc()
                 => this.ToFunc();
-        }            
+        }
     }
 }

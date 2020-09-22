@@ -38,7 +38,7 @@ namespace Z0
         /// <typeparam name="T">The label specialization type</typeparam>
         public static OpIdentity id<T>([Caller] string label = null)
             where T : unmanaged
-                => Identify.NumericOp($"{label}", typeof(T).NumericKind());
+                => ApiIdentityKinds.NumericOp($"{label}", typeof(T).NumericKind());
 
         /// <summary>
         /// Produces a test case name predicated on an operation identity
@@ -67,6 +67,6 @@ namespace Z0
         public static string name<W,C>(Type host, string label, bool generic)
             where W : unmanaged, ITypeWidth
             where C : unmanaged
-                => $"{Identify.OwningPartText(host)}/{host.Name}{UriPathSep}{OpIdentityBuilder.build(label, default(W).TypeWidth, NumericKinds.kind<C>(), generic)}";
+                => $"{ApiIdentityKinds.OwningPartText(host)}/{host.Name}{UriPathSep}{ApiIdentityBuilder.build(label, default(W).TypeWidth, NumericKinds.kind<C>(), generic)}";
     }
 }

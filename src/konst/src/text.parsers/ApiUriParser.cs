@@ -60,7 +60,7 @@ namespace Z0
             if(path.Failed)
                 return ParseResult.Fail<OpUri>(src, path.Reason);
 
-            var id = OpIdentityParser.parse(rest.TakeAfter(UriFragment));
+            var id = ApiIdentityParser.parse(rest.TakeAfter(UriFragment));
             var group = rest.Between(UriQuery,UriFragment);
             var uri = OpUri.Define(scheme, path.Value, group, id);
             return parsed(src, uri);

@@ -16,7 +16,7 @@ namespace Z0
         readonly ulong Hi;
 
         [MethodImpl(Inline)]
-        internal ApiKey(ApiKeyId id, PartId part, ArtifactIdentifier host, ArtifactIdentifier method)
+        internal ApiKey(ApiKeyId id, PartId part, ApiArtifactKey host, ApiArtifactKey method)
         {
             Lo = (ulong)id |((ulong)host  << 16) | ((ulong)part << 32);
             Hi = (ulong)method;

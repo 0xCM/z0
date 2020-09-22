@@ -67,7 +67,7 @@ namespace Z0
         /// <summary>
         /// The metadata token that identifies the backing field
         /// </summary>
-        public ArtifactIdentifier Id
+        public ApiArtifactKey Id
         {
             [MethodImpl(Inline)]
             get => BackingField;

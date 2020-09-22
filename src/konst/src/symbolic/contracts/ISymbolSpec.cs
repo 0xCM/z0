@@ -12,9 +12,9 @@ namespace Z0
 
         ushort Capacity {get;}
 
-        ArtifactIdentifier SegDomain {get;}
+        ApiArtifactKey SegDomain {get;}
 
-        ArtifactIdentifier SymDomain {get;}
+        ApiArtifactKey SymDomain {get;}
     }
 
     public interface ISymbolSpec<S> : ISymbolSpec

@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="src">The encoded operation</param>
         /// <param name="match">The kind to match</param>
         public static bool accepts(X86UriHex src, NumericKind match)
-            => Identify.numeric(src.Id.TextComponents.Skip(1)).Contains(match);
+            => ApiIdentityKinds.numeric(src.Id.TextComponents.Skip(1)).Contains(match);
 
         /// <summary>
         /// Determines the arity of the encoded operation
@@ -37,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         public static OpIndex<X86UriHex> index(IEnumerable<X86UriHex> src)
-            => Identify.index(src.Select(x => (x.OpUri.OpId, x)));
+            => ApiIdentityKinds.index(src.Select(x => (x.OpUri.OpId, x)));
 
         /// <summary>
         /// Excludes source operations that do not accept two parameters of specified numeric kind
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="k2">The second parameter kind</param>
         public static IEnumerable<X86UriHex> filter(IEnumerable<X86UriHex> src, NumericKind k1, NumericKind k2)
             => from code in src
-                let kinds = Identify.numeric(code.OpUri.OpId.TextComponents.Skip(1))
+                let kinds = ApiIdentityKinds.numeric(code.OpUri.OpId.TextComponents.Skip(1))
                 where kinds.Contains(k1) && kinds.Contains(k2)
                 select code;
 

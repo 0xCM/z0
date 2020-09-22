@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
 
     partial struct BitLogix
     {
@@ -21,7 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static bit @true(bit a, bit b, bit c)
-            => bit.On;        
+            => bit.On;
 
         // a nor (b or c)
         [MethodImpl(Inline), Op]
@@ -76,7 +76,7 @@ namespace Z0
         // not a and ((b xor 1) or c)
         [MethodImpl(Inline), Op]
         public static bit f0b(bit a, bit b, bit c)
-            => and(not(a), or(not(b),  c));   
+            => and(not(a), or(not(b),  c));
 
         // b and (not a)
         [MethodImpl(Inline), Op]
@@ -102,13 +102,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bit f10(bit a, bit b, bit c)
             => and(a, nor(b, c));
-        
+
         // c nor b
         [MethodImpl(Inline), Op]
         public static bit f11(bit a, bit b, bit c)
             => nor(c,b);
-        
-        // not b and (a xor c) 
+
+        // not b and (a xor c)
         [MethodImpl(Inline), Op]
         public static bit f12(bit a, bit b, bit c)
             => and(not(b), xor(a,c));
@@ -147,12 +147,12 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bit f19(bit a, bit b, bit c)
             => not(xor(xor(b,c), and(a, and(b,c))));
-            
+
         // not ((a and b)) and (a xor c)
         [MethodImpl(Inline), Op]
         public static bit f1a(bit a, bit b, bit c)
             => and(not(and(a,b)), xor(a,c));
-            
+
         // c ? not a : not b
         [MethodImpl(Inline), Op]
         public static bit f1b(bit a, bit b, bit c)
@@ -247,7 +247,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bit f2d(bit a, bit b, bit c)
             => xor(a,(or(b,not(c))));
-            
+
         // (B or C) xor (A and B)
         [MethodImpl(Inline), Op]
         public static bit f2e(bit a, bit b, bit c)
@@ -257,7 +257,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bit f2f(bit a, bit b, bit c)
             => or(not(a), and(not(b),c));
-    
+
         // a and not(b)
         [MethodImpl(Inline), Op]
         public static bit f30(bit a, bit b, bit c)
@@ -560,8 +560,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bit f6f(bit a, bit b, bit c)
             => default;
-
-
-
     }
 }

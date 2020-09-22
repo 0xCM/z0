@@ -4,13 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IIdentityBuilder
+    public interface IIdentityBuilder<S,T>
+        where T : struct
     {
-
-    }
-
-    public interface ILegalIdentityBuilder : IIdentityBuilder
-    {
-        string Legalize(OpIdentity src);
+        S Build(T src);
     }
 }

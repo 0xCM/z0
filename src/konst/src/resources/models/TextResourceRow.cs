@@ -12,7 +12,7 @@ namespace Z0
 
     public struct TextResourceRow
     {
-        public ArtifactIdentifier Id;
+        public ApiArtifactKey Id;
 
         public MemoryAddress Address;
 

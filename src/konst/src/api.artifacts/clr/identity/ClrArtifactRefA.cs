@@ -20,7 +20,7 @@ namespace Z0
 
         public ClrArtifactKind Kind => Artifact.Kind;
 
-        public ArtifactIdentifier Id  => Artifact.Id;
+        public ApiArtifactKey Id  => Artifact.Id;
 
         public ClrName Name => Artifact.Name;
 
