@@ -39,11 +39,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        static ApiArtifactKey identify<T>()
+        static ClrArtifactKey identify<T>()
             => typeof(T).MetadataToken;
 
         [MethodImpl(Inline), Op]
-        static ApiArtifactKey identify(Type t)
+        static ClrArtifactKey identify(Type t)
             => t.MetadataToken;
 
         [MethodImpl(Inline), Op]

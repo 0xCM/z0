@@ -15,13 +15,13 @@ namespace Z0
     {
         /// <summary>
         /// Assigns host-independent api member identity to a generic method; if the
-        /// source method is nongeneric, returns <see cref='GenericOpIdentity.Empty' />
+        /// source method is nongeneric, returns <see cref='ApiGenericOpIdentity.Empty' />
         /// </summary>
         /// <param name="src">The source method</param>
-        public static GenericOpIdentity GenericIdentity(MethodInfo src)
+        public static ApiGenericOpIdentity GenericIdentity(MethodInfo src)
         {
             if(!src.IsGenericMethod)
-                return GenericOpIdentity.Empty;
+                return ApiGenericOpIdentity.Empty;
 
             var id = ApiIdentityKinds.ApiMemberName(src);
             id += IDI.PartSep;

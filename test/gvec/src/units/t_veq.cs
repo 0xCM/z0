@@ -72,7 +72,7 @@ namespace Z0
         void veq_basecase<T>(W128 w, T t = default)
             where T : unmanaged
         {
-            var name = CaseName(ApiIdentityKinds.sfunc(nameof(veq_basecase), w.VectorKind<T>()));
+            var name = CaseName(ApiIdentity.sfunc(nameof(veq_basecase), w.VectorKind<T>()));
             var f = VSvc.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/z.vcount(w,t));
             var result = SpanBlocks.alloc<T>(w, x.BlockCount);
@@ -84,7 +84,7 @@ namespace Z0
             where T : unmanaged
         {
 
-            var name = CaseName(ApiIdentityKinds.sfunc(nameof(veq_basecase), w.VectorKind<T>()));
+            var name = CaseName(ApiIdentity.sfunc(nameof(veq_basecase), w.VectorKind<T>()));
             var f = VSvc.veq(w,t);
             var x = Random.Blocks<T>(w, RepCount/z.vcount(w,t));
             var result = SpanBlocks.alloc<T>(w, x.BlockCount);

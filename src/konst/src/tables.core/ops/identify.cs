@@ -24,6 +24,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static TableId identify(string name)
-            => new TableId(ApiArtifactKey.Empty, name);
+            => new TableId(ClrArtifactKey.Empty, name);
     }
 }

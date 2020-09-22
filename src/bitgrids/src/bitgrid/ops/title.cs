@@ -28,7 +28,6 @@ namespace Z0
             where T: unmanaged
                 => $"{label} {sigtext(w,m,n,t)}";
 
-
         /// <summary>
         /// Renders the grid signature as text
         /// </summary>
@@ -45,6 +44,6 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => $"v{w}_{m}x{n}x{ApiIdentityKinds.numeric(t)}";
+                => $"v{w}_{m}x{n}x{ApiIdentity.numeric(t)}";
     }
 }

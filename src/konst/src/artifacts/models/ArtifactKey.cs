@@ -12,22 +12,22 @@ namespace Z0
 
     public readonly struct ArtifactKey
     {
-        public readonly Key<ArtifactKind,ApiArtifactKey> Value;
+        public readonly Key<ArtifactKind,ClrArtifactKey> Value;
 
-        public ApiArtifactKey Id => Value.Identifier;
+        public ClrArtifactKey Id => Value.Identifier;
 
         public ArtifactKind Kind => Value.Kind;
 
         [MethodImpl(Inline)]
-        public static implicit operator ArtifactKey(Paired<ArtifactKind,ApiArtifactKey> src)
+        public static implicit operator ArtifactKey(Paired<ArtifactKind,ClrArtifactKey> src)
             => new ArtifactKey(src.Left, src.Right);
 
         [MethodImpl(Inline)]
-        public static implicit operator Paired<ArtifactKind,ApiArtifactKey>(ArtifactKey src)
+        public static implicit operator Paired<ArtifactKind,ClrArtifactKey>(ArtifactKey src)
             => paired(src.Kind, src.Id);
 
         [MethodImpl(Inline)]
-        public ArtifactKey(ArtifactKind kind, ApiArtifactKey id)
+        public ArtifactKey(ArtifactKind kind, ClrArtifactKey id)
         {
             Value = (kind,id);
         }

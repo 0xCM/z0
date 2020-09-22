@@ -54,7 +54,7 @@ namespace Z0
         {
             Owner = owner;
             Name = insist(name);
-            UriText = owner != 0 ? text.format("{0}{1}{2}", Owner.Format(), UriDelimiters.UriPathSep, Name) : Name;
+            UriText = owner != 0 ? text.format("{0}{1}{2}", Owner.Format(), ApiUriDelimiters.UriPathSep, Name) : Name;
         }
 
         [MethodImpl(Inline)]

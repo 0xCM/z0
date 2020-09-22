@@ -19,10 +19,12 @@ namespace Z0
 
             public const string Name = "byteswap";
 
-            public OpIdentity Id => ApiIdentityKinds.sfunc<T>(Name);
+            public OpIdentity Id
+                => ApiIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a) => gbits.byteswap(a);
+            public T Invoke(T a)
+                => gbits.byteswap(a);
         }
     }
 }

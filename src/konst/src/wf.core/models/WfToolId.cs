@@ -20,7 +20,7 @@ namespace Z0
             get => Type.Name;
         }
 
-        public ApiArtifactKey Id
+        public ClrArtifactKey Id
         {
             [MethodImpl(Inline)]
             get => Type.MetadataToken;

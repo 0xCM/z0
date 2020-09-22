@@ -12,12 +12,12 @@ namespace Z0
 
     public readonly struct TableId : ITextual
     {
-        public readonly ApiArtifactKey Shape;
+        public readonly ClrArtifactKey Shape;
 
         public readonly CharBlock32 Name;
 
         [MethodImpl(Inline)]
-        public static implicit operator TableId((ApiArtifactKey shape, string name) src)
+        public static implicit operator TableId((ClrArtifactKey shape, string name) src)
             => new TableId(src.shape,src.name);
 
         [MethodImpl(Inline)]
@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public TableId(ApiArtifactKey shape, string name)
+        public TableId(ClrArtifactKey shape, string name)
         {
             Shape = shape;
             Name = StorageBlocks.init(name, CharBlock32.Empty, out Name);

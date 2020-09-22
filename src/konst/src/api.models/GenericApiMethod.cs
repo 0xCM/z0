@@ -24,7 +24,7 @@ namespace Z0
         /// <summary>
         /// The generic operation identity
         /// </summary>
-        public GenericOpIdentity GenericId {get;}
+        public ApiGenericOpIdentity GenericId {get;}
 
         /// <summary>
         /// The supported closures
@@ -49,7 +49,7 @@ namespace Z0
             => Host.Uri;
 
         [MethodImpl(Inline)]
-        public GenericApiMethod(IApiHost host, GenericOpIdentity id, MethodInfo method, NumericKind[] kinds)
+        public GenericApiMethod(IApiHost host, ApiGenericOpIdentity id, MethodInfo method, NumericKind[] kinds)
         {
             Kinds = kinds;
             Host = host;

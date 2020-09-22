@@ -21,7 +21,7 @@ namespace Z0
         /// <summary>
         /// The literal's surrogate identifier
         /// </summary>
-        public MemberIdentity Id;
+        public ClrMemberIdentity Id;
 
         /// <summary>
         /// The name of the declaring type

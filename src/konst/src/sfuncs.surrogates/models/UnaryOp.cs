@@ -32,7 +32,7 @@ namespace Z0
             internal UnaryOp(Z0.UnaryOp<T> f, string name)
             {
                 F = f;
-                Id = ApiIdentityKinds.sfunc<T>(name);
+                Id = ApiIdentity.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]

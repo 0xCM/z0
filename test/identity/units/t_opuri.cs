@@ -24,9 +24,9 @@ namespace Z0
             Claim.eq(opid, uri.OpId);
             Claim.eq(true, opid.IsGeneric);
             Claim.eq("vgeneric", opid.Name);
-            var parts  = ApiIdentityKinds.Parts(opid).ToArray();
+            var parts  = ApiIdentity.components(opid).ToArray();
             foreach(var p in parts)
-                Trace(p.PartKind, p);
+                Trace(p.Kind, p);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Z0
             => default;
 
         [MethodImpl(Inline), Op]
-        public static ArtifactKey key(ArtifactKind kind, ApiArtifactKey id)
+        public static ArtifactKey key(ArtifactKind kind, ClrArtifactKey id)
             => new ArtifactKey(kind,id);
     }
 }

@@ -15,7 +15,7 @@ namespace Z0
         /// </summary>
         public static OpIdentity WithoutGeneric(this OpIdentity src)
         {
-            var parts = ApiIdentityKinds.Parts(src).ToArray();
+            var parts = ApiIdentity.components(src).ToArray();
             if(parts.Length < 2)
                 return src;
 
@@ -23,7 +23,7 @@ namespace Z0
                 return src;
 
             parts[1] = parts[1].WithText(parts[1].Identifier.Substring(1));
-            return ApiIdentityBuilder.build(parts);
+            return ApiIdentity.build(parts);
         }
     }
 }

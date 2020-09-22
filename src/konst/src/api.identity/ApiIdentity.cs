@@ -39,59 +39,21 @@ namespace Z0
         public static IMultiDiviner diviner()
             => new ArtifactIdentities();
 
-        /// <summary>
-        /// Extracts an 8-bit immediate value from an identity if it contains an immediate suffix; otherwise, returns none
-        /// </summary>
-        /// <param name="src">The source identity</param>
-        [MethodImpl(Inline), Op]
-        public static Option<byte> imm8(OpIdentity src)
-        {
-            if(src.HasImm && byte.TryParse(src.Identifier.RightOfLast(IDI.Imm), out var immval))
-                return immval;
-            else
-                return Option.none<byte>();
-        }
 
         /// <summary>
-        /// Returns the duplicate identities found in the source stream, if any; otherwise, returns an empty array
+        /// Disables the generic indicator
         /// </summary>
-        /// <param name="src">The identities to search for duplicates</param>
-        [Op]
-        public static OpIdentity[] duplicates(OpIdentity[] src)
+        static OpIdentity WithoutGeneric(OpIdentity src)
         {
-            var index = new Dictionary<OpIdentity,int>();
-            var distinct = src.ToHashSet();
-            if(distinct.Count != src.Count())
-            {
-                foreach(var id in src)
-                {
-                    if(index.TryGetValue(id, out var count ))
-                        index[id] = ++count;
-                    else
-                        index[id] = 1;
-                }
-            }
+            var parts = ApiIdentity.components(src).ToArray();
+            if(parts.Length < 2)
+                return src;
 
-            return (from kvp in index where kvp.Value > 1 select kvp.Key).ToArray();
-        }
+            if(parts[1].Identifier[0] != IDI.Generic)
+                return src;
 
-        readonly struct ArtifactIdentities : IMultiDiviner
-        {
-            [MethodImpl(Inline)]
-            public TypeIdentity DivineIdentity(Type src)
-                => identify(src);
-
-            [MethodImpl(Inline)]
-            public OpIdentity DivineIdentity(MethodInfo src)
-                => identify(src);
-
-            [MethodImpl(Inline)]
-            public OpIdentity DivineIdentity(Delegate src)
-                => identify(src);
-
-            [MethodImpl(Inline)]
-            public GenericOpIdentity GenericIdentity(MethodInfo src)
-                => generic(src);
+            parts[1] = parts[1].WithText(parts[1].Identifier.Substring(1));
+            return ApiIdentity.build(parts);
         }
     }
 }

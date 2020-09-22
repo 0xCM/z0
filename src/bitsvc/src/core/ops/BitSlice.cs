@@ -19,9 +19,11 @@ namespace Z0
 
             public const string Name = "bitslice";
 
-            public OpIdentity Id => ApiIdentityKinds.sfunc<T>(Name);
+            public OpIdentity Id
+                => ApiIdentity.sfunc<T>(Name);
 
-            public T Invoke(T a, byte k1, byte k2) => gbits.slice(a,k1,k2);
+            public T Invoke(T a, byte k1, byte k2)
+                => gbits.slice(a,k1,k2);
         }
     }
 }

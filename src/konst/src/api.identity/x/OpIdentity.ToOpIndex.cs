@@ -10,6 +10,6 @@ namespace Z0
     partial class XTend
     {
         public static OpIndex<T> ToOpIndex<T>(this IEnumerable<(OpIdentity,T)> src, bool deduplicate = true)
-            => ApiIdentityKinds.index(src,deduplicate);
+            => ApiIdentity.index(src,deduplicate);
     }
 }

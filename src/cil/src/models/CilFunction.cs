@@ -16,7 +16,7 @@ namespace Z0
     /// </summary>
     public readonly struct CilFunction
     {
-        public readonly ApiArtifactKey Id;
+        public readonly ClrArtifactKey Id;
 
         public readonly MethodImplAttributes Attributes;
 
@@ -25,7 +25,7 @@ namespace Z0
         public readonly Instruction[] Instructions;
 
         [MethodImpl(Inline)]
-        public CilFunction(ApiArtifactKey id, string name, MethodImplAttributes attribs, Instruction[] instructions)
+        public CilFunction(ClrArtifactKey id, string name, MethodImplAttributes attribs, Instruction[] instructions)
         {
             Id = id;
             FullName = name;

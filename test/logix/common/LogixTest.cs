@@ -315,7 +315,7 @@ namespace Z0.Logix
         protected void bm_delegate_bench<T>(BinaryLogicKind opkind, SystemCounter clock = default)
             where T : unmanaged
         {
-            var opname = $"bm_{opkind.Format()}_{ApiIdentityKinds.numeric<T>()}_delegate";
+            var opname = $"bm_{opkind.Format()}_{ApiIdentity.numeric<T>()}_delegate";
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
             var C = Random.BitMatrix<T>();
@@ -345,7 +345,7 @@ namespace Z0.Logix
         protected void bm_api_bench<T>(BinaryLogicKind op, SystemCounter clock = default)
             where T : unmanaged
         {
-            var opname = $"bm_{op.Format()}_{ApiIdentityKinds.numeric<T>()}_api";
+            var opname = $"bm_{op.Format()}_{ApiIdentity.numeric<T>()}_api";
 
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
@@ -375,7 +375,7 @@ namespace Z0.Logix
         protected void bm_and_bench<T>(SystemCounter clock = default)
             where T : unmanaged
         {
-            var opname = $"bm_and_{ApiIdentityKinds.numeric<T>()}";
+            var opname = $"bm_and_{ApiIdentity.numeric<T>()}";
 
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();
@@ -405,7 +405,7 @@ namespace Z0.Logix
         protected void bm_xor_bench<T>(SystemCounter clock = default)
             where T : unmanaged
         {
-            var opname = $"bm_xor_{ApiIdentityKinds.numeric<T>()}";
+            var opname = $"bm_xor_{ApiIdentity.numeric<T>()}";
 
             var A = Random.BitMatrix<T>();
             var B = Random.BitMatrix<T>();

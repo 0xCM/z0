@@ -17,7 +17,7 @@ namespace Z0
 
         public static Type TableType => typeof(T);
 
-        public ApiArtifactKey Shape => TableType;
+        public ClrArtifactKey Shape => TableType;
 
         public CharBlock32 Name => TableType.Name;
 

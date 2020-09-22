@@ -17,32 +17,32 @@ namespace Z0
         readonly Vector128<uint> Components;
 
         [MethodImpl(Inline)]
-        public static implicit operator DirectiveIdentity(in ConstQuad<ApiArtifactKey> src)
+        public static implicit operator DirectiveIdentity(in ConstQuad<ClrArtifactKey> src)
             => new DirectiveIdentity(src);
 
         [MethodImpl(Inline)]
-        public DirectiveIdentity(in ConstQuad<ApiArtifactKey> src)
+        public DirectiveIdentity(in ConstQuad<ClrArtifactKey> src)
             => Components = vparts(n128,(uint)src.First, (uint)src.Second, (uint)src.Third, (uint)src.Fourth);
 
-        public ApiArtifactKey Kind
+        public ClrArtifactKey Kind
         {
             [MethodImpl(Inline)]
             get => vcell(Components,0);
         }
 
-        public ApiArtifactKey Command
+        public ClrArtifactKey Command
         {
             [MethodImpl(Inline)]
             get => vcell(Components,1);
         }
 
-        public ApiArtifactKey Response
+        public ClrArtifactKey Response
         {
             [MethodImpl(Inline)]
             get => vcell(Components,2);
         }
 
-        public ApiArtifactKey Host
+        public ClrArtifactKey Host
         {
             [MethodImpl(Inline)]
             get => vcell(Components,3);
@@ -58,34 +58,34 @@ namespace Z0
     public readonly struct ActorIdentity: IModelIdentity<ActorIdentity>
     {
         [MethodImpl(Inline)]
-        public static implicit operator ActorIdentity(in ConstQuad<ApiArtifactKey> src)
+        public static implicit operator ActorIdentity(in ConstQuad<ClrArtifactKey> src)
             => new ActorIdentity(src);
 
         [MethodImpl(Inline)]
-        public ActorIdentity(in ConstQuad<ApiArtifactKey> src)
+        public ActorIdentity(in ConstQuad<ClrArtifactKey> src)
             => Components = vparts(n128,(uint)src.First, (uint)src.Second, (uint)src.Third, (uint)src.Fourth);
 
         readonly Vector128<uint> Components;
 
-        public ApiArtifactKey Kind
+        public ClrArtifactKey Kind
         {
             [MethodImpl(Inline)]
             get => vcell(Components,0);
         }
 
-        public ApiArtifactKey Command
+        public ClrArtifactKey Command
         {
             [MethodImpl(Inline)]
             get => vcell(Components,1);
         }
 
-        public ApiArtifactKey Response
+        public ClrArtifactKey Response
         {
             [MethodImpl(Inline)]
             get => vcell(Components,2);
         }
 
-        public ApiArtifactKey Host
+        public ClrArtifactKey Host
         {
             [MethodImpl(Inline)]
             get => vcell(Components,3);

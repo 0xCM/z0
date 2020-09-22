@@ -42,7 +42,7 @@ namespace Z0
     {
         public Count Sequence;
 
-        public ApiArtifactKey ParentId;
+        public ClrArtifactKey ParentId;
 
         public string Source;
 

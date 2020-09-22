@@ -12,7 +12,7 @@ namespace Z0
     partial class XTend
     {
         [MethodImpl(Inline)]
-        public static OpIdentity Generalize(this GenericOpIdentity src)
+        public static OpIdentity Generalize(this ApiGenericOpIdentity src)
             => ApiIdentityParser.parse(src.Identifier);
     }
 }

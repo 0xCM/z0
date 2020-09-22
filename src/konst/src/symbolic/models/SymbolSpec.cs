@@ -17,12 +17,12 @@ namespace Z0
 
         public ushort Capacity {get;}
 
-        public ApiArtifactKey SegDomain {get;}
+        public ClrArtifactKey SegDomain {get;}
 
-        public ApiArtifactKey SymDomain {get;}
+        public ClrArtifactKey SymDomain {get;}
 
         [MethodImpl(Inline)]
-        public SymbolSpec(ushort symwidth, ushort segwidth, ApiArtifactKey seg, ApiArtifactKey sym)
+        public SymbolSpec(ushort symwidth, ushort segwidth, ClrArtifactKey seg, ClrArtifactKey sym)
         {
             SymWidth = symwidth;
             SegWidth = segwidth;

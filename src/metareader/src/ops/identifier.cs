@@ -15,17 +15,17 @@ namespace Z0
     partial class PeTableReader
     {
         [MethodImpl(Inline), Op]
-        public static ApiArtifactKey identifier(in ReaderState state, EntityHandle src)
+        public static ClrArtifactKey identifier(in ReaderState state, EntityHandle src)
             => MetadataTokens.GetToken(state.Reader, src);
 
 
         [MethodImpl(Inline), Op]
-        public static ApiArtifactKey identifier(Handle src)
+        public static ClrArtifactKey identifier(Handle src)
             => MetadataTokens.GetToken(src);
 
 
         [MethodImpl(Inline), Op]
-        public static ApiArtifactKey identifier(in ReaderState state, Handle handle)
+        public static ClrArtifactKey identifier(in ReaderState state, Handle handle)
             => MetadataTokens.GetToken(state.Reader, handle);
     }
 }

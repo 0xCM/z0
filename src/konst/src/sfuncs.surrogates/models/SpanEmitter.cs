@@ -16,26 +16,26 @@ namespace Z0
         /// </summary>
         public readonly struct SpanEmitter<T> : ISpanEmitter<T>
         {
-            public OpIdentity Id {get;}
-
             readonly Z0.SpanEmitter<T> F;
 
-            [MethodImpl(Inline)]
-            public SpanEmitter(Z0.SpanEmitter<T> f, OpIdentity id)            
-            {
-                this.F = f;
-                this.Id = id;
-            }            
+            public OpIdentity Id {get;}
 
             [MethodImpl(Inline)]
-            public Span<T> Invoke() => F();
+            public SpanEmitter(Z0.SpanEmitter<T> f, OpIdentity id)
+            {
+                F = f;
+                Id = id;
+            }
+
+            [MethodImpl(Inline)]
+            public Span<T> Invoke()
+                => F();
 
             public Z0.SpanEmitter<T> Subject
             {
                 [MethodImpl(Inline)]
                 get => F;
             }
-
-        }        
+        }
     }
 }

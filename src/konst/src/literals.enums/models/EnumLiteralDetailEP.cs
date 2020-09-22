@@ -74,7 +74,7 @@ namespace Z0
             get => Enums.@base<E>();
         }
 
-        public ApiArtifactKey Token
+        public ClrArtifactKey Token
         {
             [MethodImpl(Inline)]
             get => Spec.Id;

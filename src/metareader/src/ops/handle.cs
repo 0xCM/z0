@@ -14,7 +14,7 @@ namespace Z0
     partial class PeTableReader
     {
        [MethodImpl(Inline), Op]
-       public static Handle handle(ApiArtifactKey token)
+       public static Handle handle(ClrArtifactKey token)
             => MetadataTokens.Handle((int)token);
     }
 }

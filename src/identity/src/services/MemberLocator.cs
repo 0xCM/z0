@@ -8,14 +8,13 @@ namespace Z0
       using System.Runtime.CompilerServices;
       using System.Collections.Generic;
       using System.Linq;
-      using System.Reflection;
 
       using static Konst;
 
-      public readonly struct MemberLocator : IMemberLocator
+      public readonly struct MemberLocator : IApiMemberLocator
       {
         public static MemberLocator Service
-                => default;
+            => default;
 
         public static ApiMembers locate(IApiHost src)
         {
@@ -26,26 +25,22 @@ namespace Z0
         }
 
         public ApiMembers Locate(IApiHost src)
-                => locate(src);
+            => locate(src);
 
-        public static IEnumerable<ApiMember> HostedDirect(IApiHost src)
-                => from m in Reflex.DirectApiMethods(src)
-                let id = Diviner.Identify(m)
+        static IEnumerable<ApiMember> HostedDirect(IApiHost src)
+            => from m in Reflex.DirectApiMethods(src)
+                let id = MultiDiviner.Service.Identify(m)
                 let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
                 let located = FunctionDynamic.jit(m)
                 select new ApiMember(uri, located,  m.KindId());
 
-
-        public static IEnumerable<ApiMember> HostedGeneric(IApiHost src)
+        static IEnumerable<ApiMember> HostedGeneric(IApiHost src)
                 => from m in Reflex.GenericApiMethods(src)
                 from closure in Reflex.NumericClosureTypes(m)
                 let reified = m.MakeGenericMethod(closure)
-                let id = Diviner.Identify(reified)
+                let id = MultiDiviner.Service.Identify(reified)
                 let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
                 let located = FunctionDynamic.jit(m)
                 select new ApiMember(uri, located, m.KindId());
-
-        static IMultiDiviner Diviner
-                => MultiDiviner.Service;
       }
 }

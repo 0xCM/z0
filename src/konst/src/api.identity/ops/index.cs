@@ -14,8 +14,32 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    partial class ApiIdentityKinds
+    using static Konst;
+    using static z;
+
+    partial struct ApiIdentity
     {
+        [Op]
+        public static ApiCodeIndex index(ApiMemberIndex members, OpIndex<X86UriHex> code)
+            => ApiCodeIndex.create(members,code);
+
+        /// <summary>
+        /// Creates an operation index from an api member span, readonly that is
+        /// </summary>
+        /// <param name="src">The members to index</param>
+        /// <typeparam name="M">The member type</typeparam>
+        public static OpIndex<M> index<M>(ReadOnlySpan<M> src)
+            where M : struct, IApiMember
+                => index(src.MapArray(h => (h.Id, h)));
+
+        /// <summary>
+        /// Creates an operation index from a uri bitstream
+        /// </summary>
+        /// <param name="src">The source bits</param>
+        [Op]
+        public static OpIndex<X86UriHex> index(IEnumerable<X86UriHex> src)
+            => index(src.Select(x => (x.OpUri.OpId, x)));
+
         static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new Exception(text.concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
 

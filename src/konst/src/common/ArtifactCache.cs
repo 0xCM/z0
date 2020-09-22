@@ -17,14 +17,14 @@ namespace Z0
     /// </summary>
     public readonly struct ArtifactCache
     {
-        static readonly ConcurrentDictionary<ApiArtifactKey,object> Data = new ConcurrentDictionary<ApiArtifactKey, object>();
+        static readonly ConcurrentDictionary<ClrArtifactKey,object> Data = new ConcurrentDictionary<ClrArtifactKey, object>();
 
         [MethodImpl(NotInline)]
-        public static object acquire<T>(ApiArtifactKey id, Func<ApiArtifactKey,T> factory)
+        public static object acquire<T>(ClrArtifactKey id, Func<ClrArtifactKey,T> factory)
             => Data.GetOrAdd(id,factory);
 
         [MethodImpl(NotInline)]
-        public static Option<T> search<T>(ApiArtifactKey id)
+        public static Option<T> search<T>(ClrArtifactKey id)
         {
             if(Data.TryGetValue(id, out var dst))
                 return some((T)dst);
@@ -33,7 +33,7 @@ namespace Z0
         }
 
         [MethodImpl(NotInline)]
-        public static void insert<T>(ApiArtifactKey id, T value)
+        public static void insert<T>(ClrArtifactKey id, T value)
             => Data[id] = value;
     }
 
@@ -43,14 +43,14 @@ namespace Z0
     /// </summary>
     public readonly struct ArtifactCache<T>
     {
-        static readonly ConcurrentDictionary<ApiArtifactKey,T> Data = new ConcurrentDictionary<ApiArtifactKey, T>();
+        static readonly ConcurrentDictionary<ClrArtifactKey,T> Data = new ConcurrentDictionary<ClrArtifactKey, T>();
 
         [MethodImpl(NotInline)]
-        public static object acquire(ApiArtifactKey id, Func<ApiArtifactKey,T> factory)
+        public static object acquire(ClrArtifactKey id, Func<ClrArtifactKey,T> factory)
             => Data.GetOrAdd(id,factory);
 
         [MethodImpl(NotInline)]
-        public static Option<T> search(ApiArtifactKey id)
+        public static Option<T> search(ClrArtifactKey id)
         {
             if(Data.TryGetValue(id, out var dst))
                 return some((T)dst);
@@ -59,7 +59,7 @@ namespace Z0
         }
 
         [MethodImpl(NotInline)]
-        public static void insert(ApiArtifactKey id, T value)
+        public static void insert(ClrArtifactKey id, T value)
             => Data[id] = value;
     }
 }

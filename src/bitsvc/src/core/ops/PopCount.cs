@@ -19,10 +19,12 @@ namespace Z0
 
             public const string Name = "popcount";
 
-            public OpIdentity Id => ApiIdentityKinds.sfunc<T>(Name);
+            public OpIdentity Id
+                => ApiIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
-            public uint Invoke(T a) => gbits.pop(a);
+            public uint Invoke(T a)
+                => gbits.pop(a);
         }
     }
 }

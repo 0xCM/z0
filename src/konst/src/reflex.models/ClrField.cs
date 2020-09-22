@@ -14,7 +14,7 @@ namespace Z0.ClrData
     {
         public readonly FieldInfo Definition;
 
-        public ApiArtifactKey Id
+        public ClrArtifactKey Id
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

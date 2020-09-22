@@ -14,15 +14,15 @@ namespace Z0
     partial struct Reflex
     {
         [MethodImpl(Inline), Op]
-        public static MemberIdentity identity(FieldInfo src)
-            => new MemberIdentity(src);
+        public static ClrMemberIdentity identity(FieldInfo src)
+            => new ClrMemberIdentity(src);
 
         [MethodImpl(Inline), Op]
-        public static MemberIdentity identity(PropertyInfo src)
-            => new MemberIdentity(src);
+        public static ClrMemberIdentity identity(PropertyInfo src)
+            => new ClrMemberIdentity(src);
 
         [MethodImpl(Inline), Op]
-        public static MemberIdentity identity(MethodInfo src)
-            => new MemberIdentity(src);
+        public static ClrMemberIdentity identity(MethodInfo src)
+            => new ClrMemberIdentity(src);
     }
 }

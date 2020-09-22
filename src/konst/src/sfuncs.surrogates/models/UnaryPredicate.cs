@@ -32,11 +32,12 @@ namespace Z0
             internal UnaryPredicate(Z0.UnaryPredicate<T> f, string name)
             {
                 F = f;
-                Id = ApiIdentityKinds.sfunc<T>(name);
+                Id = ApiIdentity.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]
-            public bit Invoke(T a) => F(a);
+            public bit Invoke(T a)
+                => F(a);
 
             public Z0.UnaryPredicate<T> Subject
             {

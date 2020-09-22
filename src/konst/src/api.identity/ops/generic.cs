@@ -17,15 +17,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to identify</param>
         [MethodImpl(Inline), Op]
-        public static GenericOpIdentity generic(MethodInfo src)
-            => new GenericOpIdentity(identify(src));
+        public static ApiGenericOpIdentity generic(MethodInfo src)
+            => new ApiGenericOpIdentity(identify(src));
 
         /// <summary>
         /// Creates a moniker directly from source text
         /// </summary>
         /// <param name="src">The source text</param>
         [MethodImpl(Inline), Op]
-        public static GenericOpIdentity generic(string src)
-            => new GenericOpIdentity(src);
+        public static ApiGenericOpIdentity generic(string src)
+            => new ApiGenericOpIdentity(src);
     }
 }

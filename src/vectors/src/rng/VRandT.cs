@@ -19,7 +19,7 @@ namespace Z0
 
         readonly IPolyrand Random;
 
-        public OpIdentity Id => ApiIdentityKinds.sfunc(Name, VKind);
+        public OpIdentity Id => ApiIdentity.sfunc(Name, VKind);
 
         [MethodImpl(Inline)]
         internal VRandom128(IPolyrand random)
@@ -38,7 +38,7 @@ namespace Z0
 
         public Vec256Kind<T> VKind => default;
 
-        public OpIdentity Id => ApiIdentityKinds.sfunc(Name,VKind);
+        public OpIdentity Id => ApiIdentity.sfunc(Name,VKind);
 
         [MethodImpl(Inline)]
         internal VRandom256(IPolyrand random)

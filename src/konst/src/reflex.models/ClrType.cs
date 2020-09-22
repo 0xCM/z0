@@ -22,7 +22,7 @@ namespace Z0.ClrData
             Definition = src;
         }
 
-        public ApiArtifactKey Id
+        public ClrArtifactKey Id
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;

@@ -12,7 +12,7 @@ namespace Z0
     using System.Collections.Concurrent;
 
     using static Konst;
-    using static UriDelimiters;
+    using static ApiUriDelimiters;
 
     using NK = NumericKind;
     using ID = NumericApiKey;

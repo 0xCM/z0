@@ -56,6 +56,6 @@ namespace Z0
         TypeIdentity Identify(Type src)
             => DivineIdentity(src);
 
-        GenericOpIdentity GenericIdentity(MethodInfo src);
+        ApiGenericOpIdentity GenericIdentity(MethodInfo src);
     }
 }

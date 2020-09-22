@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         public readonly struct TypeRef<T>
         {
-            public ApiArtifactKey Id
+            public ClrArtifactKey Id
             {
                 [MethodImpl(Inline)]
                 get => typeof(T).MetadataToken;

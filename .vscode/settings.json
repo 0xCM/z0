@@ -470,6 +470,7 @@
         "vcount",
         "vdec",
         "vdecrements",
+        "vdirect",
         "vdot",
         "vdup",
         "veven",

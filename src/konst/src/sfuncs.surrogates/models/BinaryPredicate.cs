@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Konst;
 
@@ -13,9 +14,9 @@ namespace Z0
     {
         public readonly struct BinaryPredicate<T> : IFunc<T,T,bit>
         {
-            public OpIdentity Id {get;}
-
             readonly Z0.BinaryPredicate<T> F;
+
+            public OpIdentity Id {get;}
 
             [MethodImpl(Inline)]
             public static implicit operator Func<T,T,bit>(BinaryPredicate<T> src)
@@ -32,7 +33,7 @@ namespace Z0
             internal BinaryPredicate(Z0.BinaryPredicate<T> f, string name)
             {
                 F = f;
-                Id = ApiIdentityKinds.sfunc<T>(name);
+                Id = ApiIdentity.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]

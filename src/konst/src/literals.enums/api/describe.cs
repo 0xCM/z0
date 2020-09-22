@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The scalar type refined by the enum</typeparam>
         /// <typeparam name="A">The asci identifier type</typeparam>
         [MethodImpl(Inline)]
-        public static EnumLiteralInfo<E,T> describe<E,T>(ApiArtifactKey token, uint index, string identifier, E literal, T scalar)
+        public static EnumLiteralInfo<E,T> describe<E,T>(ClrArtifactKey token, uint index, string identifier, E literal, T scalar)
             where E : unmanaged, Enum
             where T : unmanaged
                 => new EnumLiteralInfo<E,T>(token, index, identifier, literal, scalar);

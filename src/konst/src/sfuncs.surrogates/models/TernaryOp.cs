@@ -36,7 +36,7 @@ namespace Z0
             internal TernaryOp(Z0.TernaryOp<T> f, string name)
             {
                 this.F = f;
-                this.Id = ApiIdentityKinds.sfunc<T>(name);
+                this.Id = ApiIdentity.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]

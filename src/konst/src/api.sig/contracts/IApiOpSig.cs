@@ -16,7 +16,7 @@ namespace Z0
         /// <summary>
         /// The declaring api host
         /// </summary>
-        ApiArtifactKey Host {get;}
+        ClrArtifactKey Host {get;}
     }
 
     public interface IApiOpSig<S> : IApiOpSig

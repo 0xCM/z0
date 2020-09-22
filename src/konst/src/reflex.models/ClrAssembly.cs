@@ -17,10 +17,10 @@ namespace Z0
         {
             public SR.Assembly Definition {get;}
 
-            public ApiArtifactKey Id
+            public ClrArtifactKey Id
             {
                 [MethodImpl(Inline)]
-                get => new ApiArtifactKey(Definition);
+                get => new ClrArtifactKey(Definition);
             }
 
             [MethodImpl(Inline)]

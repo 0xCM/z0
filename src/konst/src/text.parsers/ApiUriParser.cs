@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static UriDelimiters;
+    using static ApiUriDelimiters;
     using static z;
 
     public readonly struct ApiUriParser : ITextParser<OpUri>
@@ -20,7 +20,7 @@ namespace Z0
 
         public static ParseResult<ApiHostUri> host(FileName src)
         {
-            var input = src.WithoutExtension.Name.Replace(Chars.Dot, UriDelimiters.UriPathSep);
+            var input = src.WithoutExtension.Name.Replace(Chars.Dot, ApiUriDelimiters.UriPathSep);
             return host(input);
         }
 
@@ -30,7 +30,7 @@ namespace Z0
             if(text.blank(src))
                 return failure;
 
-            var parts = src.SplitClean(UriDelimiters.UriPathSep);
+            var parts = src.SplitClean(ApiUriDelimiters.UriPathSep);
             var count = parts.Length;
             if(count != 2)
                 return failure.WithReason(text.concat("Component count ", count," != ", 2));

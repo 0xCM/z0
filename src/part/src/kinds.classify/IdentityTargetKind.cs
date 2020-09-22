@@ -4,9 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     /// <summary>
     /// Enumerates the identifiable things
     /// </summary>
+    [Flags]
     public enum IdentityTargetKind : byte
     {
         None = 0,

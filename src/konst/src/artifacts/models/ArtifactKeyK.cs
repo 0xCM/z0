@@ -14,10 +14,10 @@ namespace Z0
     public readonly struct ArtifactKey<K>
         where K : unmanaged, IArtifactKind<K>
     {
-        public readonly ApiArtifactKey Id;
+        public readonly ClrArtifactKey Id;
 
         [MethodImpl(Inline)]
-        public static implicit operator ArtifactKey<K>(ApiArtifactKey id)
+        public static implicit operator ArtifactKey<K>(ClrArtifactKey id)
             => new ArtifactKey<K>(id);
 
         [MethodImpl(Inline)]
@@ -25,7 +25,7 @@ namespace Z0
             => new ArtifactKey(src.Kind.Index, src.Id);
 
         [MethodImpl(Inline)]
-        public ArtifactKey(ApiArtifactKey id)
+        public ArtifactKey(ClrArtifactKey id)
             => Id = id;
 
         public TableIndex Index => Kind.Index;

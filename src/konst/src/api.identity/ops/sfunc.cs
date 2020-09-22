@@ -8,8 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    partial class ApiIdentityKinds
+    partial struct ApiIdentity
     {
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
@@ -23,7 +24,7 @@ namespace Z0
         public static OpIdentity sfunc<W,T>(string opname, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeNat
             where T : unmanaged
-                => ApiIdentityBuilder.build(opname, (TypeWidth)TypeNats.value<W>(), NumericKinds.kind<T>(), generic);
+                => build(opname, (TypeWidth)TypeNats.value<W>(), NumericKinds.kind<T>(), generic);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -33,7 +34,7 @@ namespace Z0
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static OpIdentity sfunc<T>(string opname)
-            => ApiIdentityKinds.NumericOp(opname, typeof(T).NumericKind());
+            => NumericOp(opname, typeof(T).NumericKind());
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -44,7 +45,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static OpIdentity sfunc<T>(string opname, Vec128Kind<T> k)
             where T : unmanaged
-                => ApiIdentityBuilder.build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
+                => build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
 
         /// <summary>
         /// Defines an operand identifier of the form {opname}_N{u | i | f} that identifies an operation over a primal type of bit width N := bitsize[T]
@@ -55,6 +56,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static OpIdentity sfunc<T>(string opname, Vec256Kind<T> k)
             where T : unmanaged
-                => ApiIdentityBuilder.build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
+                => build(opname, (TypeWidth)k.Width, typeof(T).NumericKind(), true);
     }
 }

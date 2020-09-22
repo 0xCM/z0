@@ -14,7 +14,7 @@ namespace Z0
     {
         X86Code Case(ApiKeyId k, params NumericKind[] kinds)
         {
-            var id = ApiIdentityKinds.NumericOp(k, kinds).ToPropertyName();
+            var id = ApiIdentity.NumericOp(k, kinds).ToPropertyName();
             var resource = TryFind(id);
             if(!resource)
                 throw new KeyNotFoundException(id);

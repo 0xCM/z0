@@ -11,22 +11,22 @@ namespace Z0
 
     public interface IIdentification : IIdentified, ITextual, IComparable
     {
-        IdentityTargetKind TargetKind  
+        IdentityTargetKind TargetKind
             => IdentityTargetKind.Type;
 
-        protected string DenullifiedIdentity 
+        protected string DenullifiedIdentity
             => Identifier ?? string.Empty;
 
-        int HashCode 
+        int HashCode
             => DenullifiedIdentity.GetHashCode();
 
-        bool Same(object src) 
-            => src is IIdentification t 
-            && string.Equals(DenullifiedIdentity, t.DenullifiedIdentity, 
+        bool Same(object src)
+            => src is IIdentification t
+            && string.Equals(DenullifiedIdentity, t.DenullifiedIdentity,
                     StringComparison.InvariantCultureIgnoreCase);
-    
+
         [MethodImpl(Inline)]
-        string ITextual.Format() 
+        string ITextual.Format()
             => DenullifiedIdentity;
 
         int IComparable.CompareTo(object src)
@@ -36,7 +36,7 @@ namespace Z0
     /// <summary>
     /// Specifies what it means to be a reified identifier
     /// </summary>
-    public interface IIdentification<T> :  IIdentification, IEquatable<T>, IComparable<T>
+    public interface IIdentification<T> : IIdentification, IEquatable<T>, IComparable<T>
         where T : IIdentification<T>, new()
     {
         [MethodImpl(Inline)]
@@ -46,5 +46,6 @@ namespace Z0
         [MethodImpl(Inline)]
         int IComparable<T>.CompareTo(T src)
             => DenullifiedIdentity.CompareTo(src.DenullifiedIdentity);
-    }    
+    }
+
 }
