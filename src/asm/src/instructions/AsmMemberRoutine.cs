@@ -20,7 +20,7 @@ namespace Z0.Asm
         /// <summary>
         /// The x86 encoded content
         /// </summary>
-        public X86ApiCapture Encoded;
+        public ApiCapture Encoded;
 
         /// <summary>
         /// The assembly routine

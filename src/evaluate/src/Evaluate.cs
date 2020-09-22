@@ -105,7 +105,7 @@ namespace Z0
             }
         }
 
-        static bool CheckBufferSize(X86ApiMember code, BufferToken buffer, out AppMsg msg)
+        static bool CheckBufferSize(ApiMemberHex code, BufferToken buffer, out AppMsg msg)
         {
             if(buffer.BufferSize < code.Encoded.Length)
             {

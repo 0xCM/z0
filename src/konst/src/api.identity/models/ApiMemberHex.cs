@@ -13,15 +13,27 @@ namespace Z0
     /// <summary>
     /// Pairs an api member with the executable code derived from that member
     /// </summary>
-    public readonly struct X86ApiMember
+    public readonly struct ApiMemberHex
     {
-        public ApiMember Member {get;}
+        /// <summary>
+        /// The extraction index
+        /// </summary>
+        public readonly uint Sequence;
 
-        public ApiHex Encoded {get;}
+        /// <summary>
+        /// The member to which executable code is attached
+        /// </summary>
+        public readonly ApiMember Member;
 
-        public uint Sequence {get;}
+        /// <summary>
+        /// The extraction termination code
+        /// </summary>
+        public readonly ExtractTermCode TermCode;
 
-        public ExtractTermCode TermCode {get;}
+        /// <summary>
+        /// The encoded data
+        /// </summary>
+        public readonly ApiHex Encoded;
 
         public OpUri OpUri
         {
@@ -60,11 +72,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(X86ApiMember src)
+        public static implicit operator BinaryCode(ApiMemberHex src)
             => src.Encoded.Encoded;
 
         [MethodImpl(Inline)]
-        public X86ApiMember(ApiMember member, ApiHex code, uint seq = 0, ExtractTermCode term = 0)
+        public ApiMemberHex(ApiMember member, ApiHex code, uint seq = 0, ExtractTermCode term = 0)
         {
             Sequence = seq;
             Member = member;
@@ -73,7 +85,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public X86ApiMember(ApiMember member, BinaryCode code, uint seq = 0, ExtractTermCode term = 0)
+        public ApiMemberHex(ApiMember member, BinaryCode code, uint seq = 0, ExtractTermCode term = 0)
         {
             Sequence = seq;
             Member = member;
@@ -103,14 +115,14 @@ namespace Z0
              => Member.Method;
 
 
-        public bool Equals(X86ApiMember src)
+        public bool Equals(ApiMemberHex src)
             => Encoded.Equals(src.Encoded);
 
         public override int GetHashCode()
             => Uri.GetHashCode();
 
         public override bool Equals(object src)
-            => src is X86ApiMember m && Equals(m);
+            => src is ApiMemberHex m && Equals(m);
 
         public string Format(int uripad)
             => text.concat(Member.OpUri.Format().PadRight(uripad), Encoded.Format());
@@ -121,7 +133,7 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public static X86ApiMember Empty
-            => new X86ApiMember(ApiMember.Empty, BinaryCode.Empty);
+        public static ApiMemberHex Empty
+            => new ApiMemberHex(ApiMember.Empty, BinaryCode.Empty);
     }
 }

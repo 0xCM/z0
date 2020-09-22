@@ -83,14 +83,14 @@ namespace Z0
                 CollectAsmStats(e.Host, e.Functions);
         }
 
-        public void OnEvent(X86UriHexSaved e)
+        public void OnEvent(ApiHexTableSaved e)
         {
             Sink.Deposit(e);
 
             if(State.Settings.MatchEmissions)
             {
                 using var step = new MatchEmissions(Wf);
-                step.Run(e.Host, e.ApiHex, e.Target);
+                step.Run(e.Host, e.Rows, e.Target);
                 Broker.Raise(step.Event);
             }
         }

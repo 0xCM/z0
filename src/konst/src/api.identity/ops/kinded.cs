@@ -11,6 +11,10 @@ namespace Z0
 
     partial class ApiIdentityKinds
     {
+        [MethodImpl(Inline)]
+        static NumericKind nkind<T>(T t = default)
+            => NumericKinds.kind<T>();
+
         /// <summary>
         /// Produces the canonical name of a kinded operation
         /// </summary>
@@ -45,7 +49,7 @@ namespace Z0
         /// <param name="k">The operation kind id</param>
         /// <typeparam name="T">The numeric type</typeparam>
         public static OpIdentity sfunc<T>(ApiKeyId k, T t = default)
-            => NumericOp(name(k), nkind(t));
+            => ApiIdentity.NumericOp(name(k), nkind(t));
 
         /// <summary>
         /// Produces an identifier for a kinded numeric structural function
@@ -53,7 +57,7 @@ namespace Z0
         /// <param name="k">The operation kind id</param>
         /// <param name="nk">The operation numeric kind</param>
         public static OpIdentity sfunc(ApiKeyId k, NumericKind nk)
-            => NumericOp(name(k), nk);
+            => ApiIdentity.NumericOp(name(k), nk);
 
         /// <summary>
         /// Produces an identifier for a kinded structural function of segmented type

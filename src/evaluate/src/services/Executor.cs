@@ -15,7 +15,7 @@ namespace Z0
 
     public readonly struct Executor
     {
-        public static EvalResult<ExecutorContext> validate(ExecutorContext context, in BufferSeq buffers, BinaryOpClass k, N8 w, in ConstPair<X86ApiMember> pair)
+        public static EvalResult<ExecutorContext> validate(ExecutorContext context, in BufferSeq buffers, BinaryOpClass k, N8 w, in ConstPair<ApiMemberHex> pair)
         {
             var f = buffers[Left].EmitFixedBinaryOp(w, pair.Left.Encoded);
             var g = buffers[Right].EmitFixedBinaryOp(w, pair.Right.Encoded);

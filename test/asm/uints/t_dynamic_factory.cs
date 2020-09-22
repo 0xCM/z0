@@ -78,7 +78,7 @@ namespace Z0.Asm
                 foreach(var t in method.ParameterTypes())
                 {
                     Claim.yea(t.IsBlocked(), $"The parameter {t.Name} from the method {method.Name} is not of blocked type");
-                    var width = Widths.divine(t);
+                    var width = ApiIdentity.width(t);
                     Claim.yea(width == TypeWidth.W128 || width == TypeWidth.W256, $"{width}");
                 }
             }

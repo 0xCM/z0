@@ -8,23 +8,24 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    partial class Widths
-    {        
+    partial struct ApiIdentity
+    {
         /// <summary>
         /// Divines the bit-width of a specified type, if possible
         /// </summary>
         /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static TypeWidth divine(Type t)
+        [Op]
+        public static TypeWidth width(Type t)
         {
             if(t.IsVector())
-                return vector(t);
+                return Widths.vector(t);
             else if(t.IsBlocked())
-                return blocked(t);
+                return Widths.blocked(t);
             if(NumericKinds.test(t))
-                return (TypeWidth)numeric(t);
-            else 
+                return (TypeWidth)Widths.numeric(t);
+            else
                 return t.Tag<WidthAttribute>().MapValueOrDefault(a => a.TypeWidth, TypeWidth.None);
         }
     }

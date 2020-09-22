@@ -41,7 +41,7 @@ namespace Z0
             Wf.Disposed(Host.Id);
         }
 
-        public void Run(ApiHostUri host, ReadOnlySpan<X86ApiCodeRow> x86data, FS.FilePath x86file)
+        public void Run(ApiHostUri host, ReadOnlySpan<ApiHexRow> x86data, FS.FilePath x86file)
         {
             var wfStateless = Capture.Services;
             var reader = ApiArchives.hexreader<ApiHexReader>();

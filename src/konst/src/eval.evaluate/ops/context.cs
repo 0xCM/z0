@@ -17,7 +17,7 @@ namespace Z0
                 => new UnaryEvalContext<T>(src, content);
 
         [MethodImpl(Inline)]
-        public static UnaryEvalContext<T> context<T>(BufferTokens buffers, X86ApiMember code, in UnaryEvaluations<T> content)
+        public static UnaryEvalContext<T> context<T>(BufferTokens buffers, ApiMemberHex code, in UnaryEvaluations<T> content)
             where T : unmanaged
                 => context<T>(new EvalContext(buffers,code), content);
 
@@ -27,7 +27,7 @@ namespace Z0
                 => new BinaryEvalContext<T>(src, content);
 
         [MethodImpl(Inline)]
-        public static BinaryEvalContext<T> context<T>(BufferTokens buffers, X86ApiMember code, in BinaryEvaluations<T> content)
+        public static BinaryEvalContext<T> context<T>(BufferTokens buffers, ApiMemberHex code, in BinaryEvaluations<T> content)
             where T : unmanaged
                 => context<T>(new EvalContext(buffers,code), content);
     }

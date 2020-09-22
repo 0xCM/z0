@@ -9,32 +9,35 @@ namespace Z0
 
     using static Konst;
 
+    /// <summary>
+    /// Defines a sequence of <see cref='ApiMemberHex'/> records
+    /// </summary>
     [ApiDataType]
-    public readonly struct X86ApiMembers
+    public readonly struct ApiHexTable : ITableSpan<ApiMemberHex>
     {
-        readonly TableSpan<X86ApiMember> Data;
+        readonly TableSpan<ApiMemberHex> Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator X86ApiMembers(X86ApiMember[] src)
-            => new X86ApiMembers(src);
+        public static implicit operator ApiHexTable(ApiMemberHex[] src)
+            => new ApiHexTable(src);
 
         [MethodImpl(Inline)]
-        public X86ApiMembers(X86ApiMember[] src)
+        public ApiHexTable(ApiMemberHex[] src)
             => Data = src;
 
-        public ReadOnlySpan<X86ApiMember> View
+        public ReadOnlySpan<ApiMemberHex> View
         {
             [MethodImpl(Inline)]
             get => Data.View;
         }
 
-        public Span<X86ApiMember> Edit
+        public Span<ApiMemberHex> Edit
         {
             [MethodImpl(Inline)]
             get => Data.Edit;
         }
 
-        public ref X86ApiMember First
+        public ref ApiMemberHex First
         {
             [MethodImpl(Inline)]
             get => ref Data.First;
@@ -46,7 +49,7 @@ namespace Z0
             get => Data.Count;
         }
 
-        public X86ApiMember[] Storage
+        public ApiMemberHex[] Storage
         {
             [MethodImpl(Inline)]
             get => Data;

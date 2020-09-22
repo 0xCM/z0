@@ -15,7 +15,7 @@ namespace Z0
     [ApiHost]
     public readonly unsafe struct CaptureAlt
     {
-        public static X86ApiCapture[] capture(IdentifiedMethod[] src)
+        public static ApiCapture[] capture(IdentifiedMethod[] src)
             => capture(src, sys.alloc<byte>(Pow2.T14));
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="src">The source method</param>
         /// <param name="id">The identity to confer to the captured result</param>
         /// <param name="buffer">The target buffer</param>
-        public static X86ApiCapture capture(MethodInfo src, OpIdentity id, Span<byte> buffer)
+        public static ApiCapture capture(MethodInfo src, OpIdentity id, Span<byte> buffer)
         {
             var summary = capture(buffer, id, ApiMemberJit.jit(src));
             var outcome = summary.Outcome;
@@ -37,7 +37,7 @@ namespace Z0
         /// <param name="src">The source method</param>
         /// <param name="id">The identity to confer to the captured result, if specified</param>
         /// <param name="buffersize">The target buffer size to allocate,</param>
-        public static X86ApiCapture capture(MethodInfo src, OpIdentity? id = null, uint buffersize = Pow2.T14)
+        public static ApiCapture capture(MethodInfo src, OpIdentity? id = null, uint buffersize = Pow2.T14)
         {
             var _id = id ?? OpIdentity.define(src.MetadataToken.ToString());
             var summary = capture(alloc<byte>(buffersize), _id, ApiMemberJit.jit(src));
@@ -45,14 +45,14 @@ namespace Z0
             return DefineMember(_id, src, summary.Encoded, outcome.TermCode);
         }
 
-        public static X86ApiCapture[] capture(IdentifiedMethod[] src, Span<byte> buffer)
+        public static ApiCapture[] capture(IdentifiedMethod[] src, Span<byte> buffer)
         {
             var count = src.Length;
             var located = alloc<LocatedMethod>(count);
             for(var i=0; i<count; i++)
                 located[i] = FunctionDynamic.jit(src[i].Method);
 
-            var captured = alloc<X86ApiCapture>(count);
+            var captured = alloc<ApiCapture>(count);
 
             for(var i=0; i<count; i++)
             {
@@ -68,29 +68,29 @@ namespace Z0
         {
             var summary = capture(buffer, src.Id, ApiMemberJit.jit(src));
             var size = summary.Data.Length;
-            var code = new X86ApiCapture(src.Id, src.Method, summary.Encoded.Input, summary.Encoded.Output, summary.Outcome.TermCode);
+            var code = new ApiCapture(src.Id, src.Method, summary.Encoded.Input, summary.Encoded.Output, summary.Outcome.TermCode);
             return new CapturedMember(src, code);
         }
 
-        public static X86ApiCapture capture(LocatedMethod located, Span<byte> buffer)
+        public static ApiCapture capture(LocatedMethod located, Span<byte> buffer)
         {
             var summary = capture(buffer, located.Id, located.Address);
             return DefineMember(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
         }
 
-        public static X86ApiCapture capture(IdentifiedMethod src, Span<byte> buffer)
+        public static ApiCapture capture(IdentifiedMethod src, Span<byte> buffer)
         {
             var located = FunctionDynamic.jit(src.Method);
             var summary = capture(buffer, src.Id, located.Address);
             return DefineMember(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
         }
 
-        public static X86ApiCapture capture(IdentifiedMethod src)
+        public static ApiCapture capture(IdentifiedMethod src)
             => capture(src, sys.alloc<byte>(Pow2.T14));
 
         [MethodImpl(Inline)]
-        static X86ApiCapture DefineMember(OpIdentity id, MethodInfo src, Z0.X86DataFlow bits, ExtractTermCode term)
-            => new X86ApiCapture(id, src, bits.Input, bits.Output, term);
+        static ApiCapture DefineMember(OpIdentity id, MethodInfo src, Z0.X86DataFlow bits, ExtractTermCode term)
+            => new ApiCapture(id, src, bits.Input, bits.Output, term);
 
         [MethodImpl(Inline)]
         static CapturedOperation capture(Span<byte> buffer, OpIdentity id, MemoryAddress src)

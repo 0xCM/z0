@@ -12,11 +12,11 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public ref struct EmitX86ApiMembers
+    public ref struct EmitApiHexTable
     {
-        public X86ApiCodeRow[] Emitted;
+        public ApiHexRow[] Emitted;
 
-        public X86UriHexSaved Event;
+        public ApiHexTableSaved Event;
 
         readonly IWfShell Wf;
 
@@ -24,11 +24,11 @@ namespace Z0
 
         readonly ApiHostUri Uri;
 
-        readonly X86ApiMembers Source;
+        readonly ApiHexTable Source;
 
         readonly FS.FilePath Target;
 
-        public EmitX86ApiMembers(IWfShell wf, WfHost host, ApiHostUri uri, X86ApiMembers src)
+        public EmitApiHexTable(IWfShell wf, WfHost host, ApiHostUri uri, ApiHexTable src)
         {
             Wf = wf;
             Host = host;
@@ -48,7 +48,7 @@ namespace Z0
         public void Run()
         {
             Emitted = EncodedX86.save(Source.Storage.Map(x => new X86ApiCode(x.Uri, x.Address, x.Encoded)), Target);
-            Event = new X86UriHexSaved(Host.Id, Uri, Emitted, Target, Wf.Ct);
+            Event = new ApiHexTableSaved(Host.Id, Uri, Emitted, Target, Wf.Ct);
             Wf.Raise(Event);
         }
     }

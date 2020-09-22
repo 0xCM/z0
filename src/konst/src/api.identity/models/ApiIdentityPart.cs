@@ -30,8 +30,9 @@ namespace Z0
         public static ApiIdentityPart Define(byte index, ApiIdentityPartKind kind, string text)
             => new ApiIdentityPart(index, kind, text);
 
+        [MethodImpl(Inline)]
         public static implicit operator ApiIdentityPart((byte index, ApiIdentityPartKind kind, string text) src)
-            => Define(src.index, src.kind, src.text);
+            => new ApiIdentityPart(src.index, src.kind, src.text);
 
         [MethodImpl(Inline)]
         public static implicit operator string(ApiIdentityPart src)
@@ -65,7 +66,7 @@ namespace Z0
             => Kind == ApiIdentityPartKind.Segment;
 
         public ApiIdentityPart WithText(string src)
-            => Define(Index, Kind, src);
+            => new ApiIdentityPart(Index, Kind, src);
 
         [MethodImpl(Inline)]
         public bool Equals(ApiIdentityPart src)

@@ -10,14 +10,14 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class IXTend
     {
         /// <summary>
-        /// Determines whether a type is classified as a blocked type via attribution
+        /// Returns true if the source type is intrinsic or blocked
         /// </summary>
         /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsBlocked(this Type t)
-            => t.Tagged<BlockedAttribute>();
+        [MethodImpl(Inline), Op]
+        public static bool IsSegmented(this Type t)
+            => t.IsBlocked() || t.IsVector();
     }
 }

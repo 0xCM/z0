@@ -7,13 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    partial class XTend
+
+    using static Konst;
+
+    partial class IXTend
     {
         /// <summary>
         /// Determines whether a type is classified as an intrinsic vector
         /// </summary>
         /// <param name="t">The type to test</param>
+        [Op]
         public static bool IsVector(this Type t)
         {
             var eff = t.EffectiveType();

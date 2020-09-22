@@ -27,7 +27,7 @@ namespace Z0
 
         readonly IExtractParser Parser;
 
-        public X86ApiMembers ParsedMembers;
+        public ApiHexTable ParsedMembers;
 
         readonly FilePath ExtractPath;
 
@@ -121,7 +121,7 @@ namespace Z0
             if(ParsedMembers.Count== 0)
                 return;
 
-            using var step = new EmitX86ApiMembers(Wf, host, HostUri, ParsedMembers);
+            using var step = new EmitApiHexTable(Wf, host, HostUri, ParsedMembers);
             step.Run();
         }
 

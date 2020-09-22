@@ -11,16 +11,16 @@ namespace Z0
 
     partial struct EncodedX86
     {
-        public static X86ApiCodeRow[] save(ReadOnlySpan<X86ApiCode> src, FS.FilePath dst, bool append = false)
+        public static ApiHexRow[] save(ReadOnlySpan<X86ApiCode> src, FS.FilePath dst, bool append = false)
         {
-            var formatter = Table.rowformatter<X86ApiCodeRow>(X86TableWidths);
+            var formatter = Table.rowformatter<ApiHexRow>(X86TableWidths);
             var count = src.Length;
             var header = (dst.Exists && append) ? false : true;
             using var writer = dst.Writer(append);
             if(header)
                 writer.WriteLine(formatter.FormatHeader());
 
-            var buffer = alloc<X86ApiCodeRow>(count);
+            var buffer = alloc<ApiHexRow>(count);
             var records = span(buffer);
             for(var i=0u; i<src.Length; i++)
             {

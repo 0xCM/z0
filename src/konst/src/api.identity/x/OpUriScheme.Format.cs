@@ -5,9 +5,11 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    partial class XTend
+    partial class IXTend
     {
+       [Op]
        public static string Format(this ApiUriScheme src)
             => src.ToString().ToLower();
     }

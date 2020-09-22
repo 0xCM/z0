@@ -53,6 +53,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static TypeIdentity resource(string basename, ITypeNat w1, ITypeNat w2, NumericKind kind)
             => new TypeIdentity($"{basename}{w1}x{w2}x{kind.Format()}");
-
     }
 }

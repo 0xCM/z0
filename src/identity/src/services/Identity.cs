@@ -23,7 +23,7 @@ namespace Z0
             if(!src.IsGenericMethod)
                 return ApiGenericOpIdentity.Empty;
 
-            var id = ApiIdentityKinds.ApiMemberName(src);
+            var id = ApiUri.MemberName(src);
             id += IDI.PartSep;
             id += IDI.Generic;
 
@@ -43,9 +43,9 @@ namespace Z0
                 else if(argtype.IsOpenGeneric())
                 {
                     if(argtype.IsVector())
-                        last = text.concat(IDI.Vector, BitWidth(argtype).FormatValue());
+                        last = text.concat(IDI.Vector, ApiIdentity.width(argtype).FormatValue());
                     else if(argtype.IsBlocked())
-                        last = text.concat(IDI.Block, BitWidth(argtype).FormatValue());
+                        last = text.concat(IDI.Block, ApiIdentity.width(argtype).FormatValue());
                     else if(SpanTypes.IsSystemSpan(argtype))
                         last = SpanTypes.kind(argtype).Format();
                 }
@@ -99,8 +99,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
         public static TypeWidth BitWidth(Type t)
-            => Widths.divine(t);
-
+            => ApiIdentity.width(t);
 
         /// <summary>
         /// Closes generic operations over the set of primal types that each operation supports
@@ -122,7 +121,7 @@ namespace Z0
             RequireConstructed(src);
 
             var id = EmptyString;
-            id += ApiIdentityKinds.ApiMemberName(src);
+            id += ApiUri.MemberName(src);
             id += IDI.PartSep;
             id += IDI.Generic;
             id += TypeArgIdentity(src);
@@ -139,7 +138,7 @@ namespace Z0
             RequireNonGeneric(src);
 
             var id = EmptyString;
-            id += ApiIdentityKinds.ApiMemberName(src);
+            id += ApiUri.MemberName(src);
             id += IDI.PartSep;
             id += SequenceIdentity(IDI.ArgsOpen, IDI.ArgsClose, IDI.ArgSep, ValueParamIdentities(src));
 

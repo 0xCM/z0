@@ -5,23 +5,41 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
+    using System.Linq;
     using System.Collections.Generic;
+    using System.Collections.Concurrent;
 
     using static Konst;
 
     using api = ApiIdentity;
 
     [ApiHost]
-    public readonly struct ApiIdentityProviders
+    public readonly struct ApiIdentityManager
     {
+        public static ApiIdentityManager create(IWfShell wf)
+            => new ApiIdentityManager(wf);
+
+        readonly IWfShell Wf;
+
+        readonly ConcurrentDictionary<NumericKind, HashSet<NumericKind>> NumericKindSets;
+
+        readonly ConcurrentDictionary<NumericKind, HashSet<Type>> NumericTypeSets;
+
+        internal ApiIdentityManager(IWfShell wf)
+        {
+            Wf = wf;
+            NumericKindSets = new ConcurrentDictionary<NumericKind, HashSet<NumericKind>>();
+            NumericTypeSets = new ConcurrentDictionary<NumericKind, HashSet<Type>>();
+        }
+
         [MethodImpl(Inline), Op]
-        public static EnumIdentityProvider enums()
+        public EnumIdentityProvider EnumProvider()
             => new EnumIdentityProvider();
 
         [MethodImpl(Inline), Op]
-        public static NumericIdentityProvider numeric()
+        public NumericIdentityProvider NumericProvider()
             => new NumericIdentityProvider();
 
         public readonly struct EnumIdentityProvider : ITypeIdentityProvider<EnumIdentityProvider,EnumIdentity>

@@ -6,15 +6,24 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    partial class XTend
+    using System.Linq;
+    using System.Collections.Generic;
+
+    using static Konst;
+    using static z;
+
+    using NK = NumericKind;
+    using ID = NumericApiKey;
+
+    partial struct ApiIdentity
     {
         /// <summary>
-        /// For a system-defined type, returns the C#-specific keyword for the type if it has one; 
+        /// For a system-defined type, returns the C#-specific keyword for the type if it has one;
         /// otherwise, returns an empty string
         /// </summary>
         /// <param name="src">The type to test</param>
-        public static string SystemKeyword(this Type src)
+        [Op]
+        public static string keyword(Type src)
         {
             if(src.IsSByte())
                 return "sbyte";
@@ -48,8 +57,45 @@ namespace Z0
                 return "void";
             else if(src.IsObject())
                 return "object";
-            else 
-                return string.Empty;
-        } 
+            else
+                return EmptyString;
+        }
+
+        [Op]
+        public static HashSet<NumericKind> distinct(NumericKind k)
+        {
+            var dst = new HashSet<NumericKind>();
+            if(NumericKinds.contains(k, ID.U8))
+                dst.Add(NK.U8);
+
+            if(NumericKinds.contains(k, ID.I8))
+                dst.Add(NK.I8);
+
+            if(NumericKinds.contains(k, ID.U16))
+                dst.Add(NK.U16);
+
+            if(NumericKinds.contains(k, ID.I16))
+                dst.Add(NK.I16);
+
+            if(NumericKinds.contains(k, ID.U32))
+                dst.Add(NK.U32);
+
+            if(NumericKinds.contains(k, ID.I32))
+                dst.Add(NK.I32);
+
+            if(NumericKinds.contains(k, ID.U64))
+                dst.Add(NK.U64);
+
+            if(NumericKinds.contains(k, ID.I64))
+                dst.Add(NK.I64);
+
+            if(NumericKinds.contains(k, ID.F32))
+                dst.Add(NK.F32);
+
+            if(NumericKinds.contains(k, ID.F64))
+                dst.Add(NK.F64);
+
+            return dst;
+        }
     }
 }

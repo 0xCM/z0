@@ -45,7 +45,7 @@ namespace Z0
                 }
             }
 
-            CheckAction(check, CaseName(ApiIdentityKinds.NumericOp<T>(nameof(gbits.copy))));
+            CheckAction(check, CaseName(ApiIdentity.NumericOp<T>(nameof(gbits.copy))));
         }
     }
 }

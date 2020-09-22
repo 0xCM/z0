@@ -5,18 +5,19 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    partial class XTend
+    partial class IXTend
     {
         /// <summary>
-        /// Produces a canonical text representation of the source kind
+        /// Determines whether a type is classified as a blocked type via attribution
         /// </summary>
-        /// <param name="src">The source kind</param>
-        [MethodImpl(Inline)]
-        public static string Format(this CellWidth src)
-            => $"{(int)src}";
+        /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline), Op]
+        public static bool IsBlocked(this Type t)
+            => t.Tagged<BlockedAttribute>();
     }
 }

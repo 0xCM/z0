@@ -31,7 +31,7 @@ namespace Z0
             else if(arg.IsTypeNat())
                 return NatId(arg);
             else if(arg.IsSystemDefined())
-                return ApiIdentityKinds.primal(arg).AsTypeIdentity().ToOption();
+                return ApiIdentity.primal(arg).AsTypeIdentity().ToOption();
             else if(arg.IsEnum)
                 return some(EnumIdentity.Define(arg).AsTypeIdentity());
             else if(arg.IsSegmented())
@@ -40,7 +40,7 @@ namespace Z0
                 return ArrayId(arg);
             else if(SpanTypes.IsSystemSpan(arg))
                 return SystemSpanId(arg);
-            else if(IsNatSpan(arg))
+            else if(ApiIdentity.IsNatSpan(arg))
                 return NatSpanId(arg);
             else
                 return none<TypeIdentity>();
@@ -73,29 +73,19 @@ namespace Z0
         static TypeIdentity PointerId(Type arg)
             => TypeIdentity.define(text.concat(DoDivination(arg.Unwrap()), IDI.ModSep, IDI.Pointer));
 
-        static Option<TypeIndicator> SegIndicator(Type t)
-        {
-            if(t.IsBlocked())
-                return TypeIndicator.Define(IDI.Block);
-            else if(t.IsVector())
-                return TypeIndicator.Define(IDI.Vector);
-            else
-                return none<TypeIndicator>();
-        }
-
         static Option<TypeIdentity> SegmentedId(Type t)
-            =>  from i in SegIndicator(t)
-                let segwidth = Identity.BitWidth(t)
+            =>  from i in ApiIdentity.SegIndicator(t)
+                let segwidth = ApiIdentity.width(t)
                 where segwidth.IsSome()
-                let segfmt = segwidth.FormatValue()
+                let segFmt = segwidth.FormatValue()
                 let arg = t.GetGenericArguments().Single()
-                let argwidth = Identity.BitWidth(arg)
+                let argwidth = ApiIdentity.width(arg)
                 where argwidth.IsSome()
-                let argfmt = argwidth.FormatValue()
+                let argFmt = argwidth.FormatValue()
                 let nk = arg.NumericKind()
                 where  nk != 0
                 let nki = nk.Indicator().Format()
-                let identifer = text.concat(i, segfmt, IDI.SegSep,argfmt, nki)
+                let identifer = text.concat(i, segFmt, IDI.SegSep,argFmt, nki)
                 select SegmentedIdentity.define(i,segwidth,nk).AsTypeIdentity();
 
         static Option<TypeIdentity> NatId(Type arg)
@@ -108,8 +98,8 @@ namespace Z0
             var kind = SpanTypes.kind(arg);
             if(kind != 0 && kind != SpanKind.Custom)
             {
-                var cellid = DoDivination(arg.GetGenericArguments().Single());
-                return TypeIdentity.define(text.concat(kind.Format(), cellid));
+                var idCell = DoDivination(arg.GetGenericArguments().Single());
+                return TypeIdentity.define(text.concat(kind.Format(), idCell));
             }
             else
                 return none<TypeIdentity>();
@@ -130,10 +120,10 @@ namespace Z0
         /// <summary>
         /// Defines an identity for a type-natural span type
         /// </summary>
-        /// <param name="src">The type to examin</param>
+        /// <param name="src">The type to examine</param>
         static Option<TypeIdentity> NatSpanId(Type src)
         {
-            if(IsNatSpan(src))
+            if(ApiIdentity.IsNatSpan(src))
             {
                 var typeargs = src.SuppliedTypeArgs();
                 var text = IDI.NSpan;

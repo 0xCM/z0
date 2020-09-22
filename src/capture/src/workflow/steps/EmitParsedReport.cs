@@ -18,14 +18,14 @@ namespace Z0
 
         readonly ApiHostUri Uri;
 
-        readonly X86ApiMembers Source;
+        readonly ApiHexTable Source;
 
         readonly FS.FilePath Target;
 
         public Span<MemberParseRow> Emitted;
 
         [MethodImpl(Inline)]
-        public EmitParsedReport(IWfCaptureState state, EmitParsedReportHost host, ApiHostUri uri, X86ApiMembers src, FS.FilePath dst)
+        public EmitParsedReport(IWfCaptureState state, EmitParsedReportHost host, ApiHostUri uri, ApiHexTable src, FS.FilePath dst)
         {
             Wf = state.Wf;
             Host = host;

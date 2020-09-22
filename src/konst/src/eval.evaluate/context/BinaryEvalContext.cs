@@ -42,7 +42,7 @@ namespace Z0
         public BufferTokens Buffers
             => Context.Buffers;
 
-        public X86ApiMember ApiCode
+        public ApiMemberHex ApiCode
             => Context.ApiCode;
 
         public ApiMember Member

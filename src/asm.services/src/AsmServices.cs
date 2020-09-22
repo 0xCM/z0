@@ -15,7 +15,7 @@ namespace Z0.Asm
         public static IAsmServices Services => default(AsmServices);
 
         [MethodImpl(Inline), Op]
-        public static AsmRoutine routine(X86ApiCapture captured, AsmFxList src)
+        public static AsmRoutine routine(ApiCapture captured, AsmFxList src)
         {
             var code = new X86ApiCode(captured.OpUri, captured.Parsed);
             var sig = captured.Method.Signature().Format();
@@ -23,7 +23,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline), Op]
-        public static AsmRoutine routine(X86ApiMember member, AsmInstructions asm)
+        public static AsmRoutine routine(ApiMemberHex member, AsmInstructions asm)
         {
             var code = new X86ApiCode(member.OpUri, member.Encoded);
             var sig = member.Method.Signature().Format();

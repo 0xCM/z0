@@ -22,19 +22,19 @@ namespace Z0
             var apicode = from pair in members.Intersect(code).Enumerated
                           let l = pair.Item1
                           let r = pair.Item2
-                          select new X86ApiMember(r.left, r.right);
+                          select new ApiMemberHex(r.left, r.right);
             return new ApiCodeIndex(create(apicode.Select(c => (c.Id, c))));
         }
 
-        readonly IReadOnlyDictionary<OpIdentity,X86ApiMember> Hashtable;
+        readonly IReadOnlyDictionary<OpIdentity,ApiMemberHex> Hashtable;
 
         [MethodImpl(Inline)]
-        public ApiCodeIndex(in OpIndex<X86ApiMember> code)
+        public ApiCodeIndex(in OpIndex<ApiMemberHex> code)
         {
             Hashtable = code.Enumerated.ToDictionary();
         }
 
-        public X86ApiMember this[OpIdentity id]
+        public ApiMemberHex this[OpIdentity id]
         {
             [MethodImpl(Inline)]
             get => Hashtable[id];
@@ -46,51 +46,51 @@ namespace Z0
         public IEnumerable<OpIdentity> Keys
             => Hashtable.Keys;
 
-        IEnumerable<X86ApiMember> Values
+        IEnumerable<ApiMemberHex> Values
             => Hashtable.Values;
 
         public IEnumerable<MethodInfo> Methods
             => Values.Select(v => v.Member.Method);
 
-        public IEnumerable<X86ApiMember> Search(ArityClassKind arity)
+        public IEnumerable<ApiMemberHex> Search(ArityClassKind arity)
             => from code in  Values
                 let method = code.Member.Method
                 where method.ArityValue() == (int)arity
                 select code;
 
-        public IEnumerable<X86ApiMember> Search(ApiOperatorClass @class)
+        public IEnumerable<ApiMemberHex> Search(ApiOperatorClass @class)
             => from code in  Values
                 let method = code.Member.Method
                 where method.ClassifyOperator() == @class
                 select code;
 
-        public IEnumerable<X86ApiMember> Search(ApiKeyId id)
+        public IEnumerable<ApiMemberHex> Search(ApiKeyId id)
             => from code in  Values
                 let method = code.Member.Method
                 where method.KindId() == id
                 select code;
 
-        public IEnumerable<X86ApiMember> Operators
+        public IEnumerable<ApiMemberHex> Operators
             => Values.Where(x => x.Member.Method.IsOperator());
 
-        public IEnumerable<X86ApiMember> UnaryOperators
+        public IEnumerable<ApiMemberHex> UnaryOperators
             => Search(ApiOperatorClass.UnaryOp);
 
-        public IEnumerable<X86ApiMember> BinaryOperators
+        public IEnumerable<ApiMemberHex> BinaryOperators
             => Search(ApiOperatorClass.BinaryOp);
 
-        public IEnumerable<X86ApiMember> TernaryOperators
+        public IEnumerable<ApiMemberHex> TernaryOperators
             => Search(ApiOperatorClass.TernaryOp);
 
-        public IEnumerable<X86ApiMember> NumericOperators(int? arity = null)
+        public IEnumerable<ApiMemberHex> NumericOperators(int? arity = null)
             => Values.Where(x => x.Member.Method.IsNumericOperator(arity));
 
-        public IEnumerable<X86ApiMember> KindedOperators()
+        public IEnumerable<ApiMemberHex> KindedOperators()
             => from code in Values
                 where code.Method.IsKindedOperator()
                 select code;
 
-        public IEnumerable<X86ApiMember> KindedOperators(int arity)
+        public IEnumerable<ApiMemberHex> KindedOperators(int arity)
             => from code in Values
                 where code.Method.IsKindedOperator() && code.Method.ArityValue() == arity
                 select code;

@@ -42,7 +42,7 @@ namespace Z0
         public int DstCount
             => Target.Target.PointCount;
 
-        public X86ApiMember ApiCode
+        public ApiMemberHex ApiCode
             => Context.ApiCode;
 
         public BufferTokens Buffers

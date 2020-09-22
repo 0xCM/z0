@@ -5,8 +5,11 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    partial class XTend
+    using static Konst;
+
+    partial class RXTend
     {
         /// <summary>
         /// Determines whether a source type is predicated on a specified match type, including nullable wrappers, references and enums
@@ -14,6 +17,7 @@ namespace Z0
         /// <typeparam name="T">The type to match</typeparam>
         /// <param name="candidate">The source type</param>
         /// <param name="match">The type to match</param>
+        [MethodImpl(Inline), Op]
         public static bool IsTypeOf(this Type candidate, Type match)
             => candidate.TEffective() == match
             || candidate.TEffective().IsNullable(match)
@@ -24,8 +28,10 @@ namespace Z0
         /// </summary>
         /// <param name="match">The source type</param>
         /// <typeparam name="T">The type to match</typeparam>
+
+        [MethodImpl(Inline), Op]
         public static bool IsTypeOf<T>(this Type match)
-            => match.TEffective() == typeof(T) 
+            => match.TEffective() == typeof(T)
             || match.TEffective().IsNullable<T>()
             || match.TEffective().IsEnum && match.TEffective().GetEnumUnderlyingType() == typeof(T);
     }

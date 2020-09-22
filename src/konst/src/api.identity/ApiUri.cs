@@ -12,6 +12,34 @@ namespace Z0
     [ApiHost]
     public readonly struct ApiUri
     {
+        /// <summary>
+        /// Defines an 8-bit immediate suffix predicated on an immediate value
+        /// </summary>
+        /// <param name="imm8">The source immediate</param>
+        public static string Imm8Suffix(byte imm8)
+            => $"{IDI.SuffixSep}{IDI.Imm}{imm8}";
+
+        /// <summary>
+        /// Defines the name of an api member predicated on a tag, if present, or the metadata-defined name if not
+        /// </summary>
+        /// <param name="m">The source method</param>
+        public static string MemberName(MethodInfo m)
+        {
+            var attrib = m.Tag<OpAttribute>();
+            if(attrib.IsNone())
+                return m.Name;
+            else
+                return attrib.Value.GroupName;
+        }
+
+        /// <summary>
+        /// Produces the name of the test case for the specified function
+        /// </summary>
+        /// <param name="f">The function</param>
+        [Op]
+        public static string TestCase(Type host, IFunc f)
+            => $"{ApiIdentityKinds.OwningPartText(host)}{UriPathSep}{host.Name}{UriPathSep}{f.Id}";
+
         [Op]
         public static string QueryText(ApiUriScheme scheme, PartId catalog, string host, string group)
             => $"{scheme.Format()}{UriEndOfScheme}{catalog.Format()}{UriPathSep}{host}{UriQuery}{group}";
@@ -29,8 +57,7 @@ namespace Z0
             => QueryText(scheme, host.Owner, host.Name, group);
 
         /// <summary>
-        /// Produces an identifier of the form {owner}/{host} where owner is the formatted identifier of the declaring assembly
-        /// and host is the name of the type
+        /// Produces an identifier of the form {owner}/{host} where owner is the formatted identifier of the declaring assembly and host is the name of the type
         /// </summary>
         /// <param name="host">The source type</param>
         [Op]

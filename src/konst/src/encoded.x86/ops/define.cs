@@ -34,11 +34,11 @@ namespace Z0
             => new BinaryCode(data);
 
         [MethodImpl(Inline), Op]
-        public static X86ApiMember define(in ApiMember member, in ApiHex data)
-            => new X86ApiMember(member, data);
+        public static ApiMemberHex define(in ApiMember member, in ApiHex data)
+            => new ApiMemberHex(member, data);
 
         [MethodImpl(Inline), Op]
-        public static X86ApiCapture define(OpIdentity id, MethodInfo method, X86Code extracted, X86Code parsed, ExtractTermCode term)
-            => new X86ApiCapture(id, method, extracted, parsed, term);
+        public static ApiCapture define(OpIdentity id, MethodInfo method, X86Code extracted, X86Code parsed, ExtractTermCode term)
+            => new ApiCapture(id, method, extracted, parsed, term);
     }
 }

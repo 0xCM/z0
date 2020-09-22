@@ -6,11 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
-    partial class XTend 
+    using static Konst;
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct ApiHexRow
     {
-        public static NumericWidth NumericWidth(this Type t)
-            => Widths.numeric(t);
+        public MemoryAddress Base;
 
+        public string Uri;
+
+        public BinaryCode Encoded;
     }
 }

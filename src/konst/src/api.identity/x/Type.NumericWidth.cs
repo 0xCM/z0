@@ -6,17 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct X86ApiCodeRow
+    partial class IXTend
     {
-        public MemoryAddress Base;
-
-        public string Uri;
-
-        public BinaryCode Encoded;
+        [MethodImpl(Inline), Op]
+        public static NumericWidth NumericWidth(this Type t)
+            => Widths.numeric(t);
     }
 }

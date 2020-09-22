@@ -16,14 +16,14 @@ namespace Z0.Asm
 
         public AsmRoutine Routine {get;}
 
-        public X86ApiCapture Code {get;}
+        public ApiCapture Code {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmRoutineCode((AsmRoutine f, X86ApiCapture code) src)
+        public static implicit operator AsmRoutineCode((AsmRoutine f, ApiCapture code) src)
             => new AsmRoutineCode(src.f, src.code);
 
         [MethodImpl(Inline)]
-        public AsmRoutineCode(AsmRoutine f, X86ApiCapture code)
+        public AsmRoutineCode(AsmRoutine f, ApiCapture code)
         {
             Routine = f;
             Code = code;

@@ -5,19 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    partial class XTend
+    partial struct ApiIdentity
     {
         /// <summary>
-        /// Returns true if the source type is intrinsic or blocked
+        /// Determines whether a type is a natural span
         /// </summary>
         /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
-        public static bool IsSegmented(this Type t)
-            => t.IsBlocked() || t.IsVector();
+        [MethodImpl(Inline), Op]
+        public static bool IsNatSpan(Type t)
+            => t.GenericDefinition2() == typeof(NatSpan<,>) && t.IsClosedGeneric();
     }
 }

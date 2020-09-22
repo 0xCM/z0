@@ -15,7 +15,7 @@ namespace Z0
     ///  Defines the dataset accumulated for an operation-targeted capture workflow
     /// </summary>
     [ApiDataType]
-    public struct X86ApiCapture
+    public struct ApiCapture
     {
         readonly X86Code Extracted;
 
@@ -30,7 +30,7 @@ namespace Z0
         public CilCode Cil;
 
         [MethodImpl(Inline)]
-        public X86ApiCapture(OpIdentity id, MethodInfo method, X86Code extracted, X86Code parsed, ExtractTermCode term)
+        public ApiCapture(OpIdentity id, MethodInfo method, X86Code extracted, X86Code parsed, ExtractTermCode term)
         {
             Extracted = extracted;
             Parsed = parsed;
@@ -126,11 +126,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Identical(in X86ApiCapture src)
+        public bool Identical(in ApiCapture src)
             => Parsed.Equals(src.Parsed);
 
         [MethodImpl(Inline)]
-        public int Compare(in X86ApiCapture src)
+        public int Compare(in ApiCapture src)
             => BaseAddress.CompareTo(src.BaseAddress);
 
         [MethodImpl(Inline)]
@@ -182,9 +182,9 @@ namespace Z0
             => (int)Hash;
 
         public override bool Equals(object src)
-            => src is X86ApiCapture x && Identical(x);
+            => src is ApiCapture x && Identical(x);
 
-        public static X86ApiCapture Empty
+        public static ApiCapture Empty
             => default;
     }
 }

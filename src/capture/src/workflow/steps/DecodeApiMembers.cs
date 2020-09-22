@@ -29,7 +29,7 @@ namespace Z0
             Wf.Created(Host);
         }
 
-        public AsmRoutine[] Run(ApiHostUri apihost, X86ApiMembers src)
+        public AsmRoutine[] Run(ApiHostUri apihost, ApiHexTable src)
         {
             try
             {
@@ -63,7 +63,7 @@ namespace Z0
             writer.WriteAsm(src);
         }
 
-        void HandleFailure(in X86ApiMember member)
+        void HandleFailure(in ApiMemberHex member)
         {
             Wf.Error(Host, $"Could not decode {member}");
         }

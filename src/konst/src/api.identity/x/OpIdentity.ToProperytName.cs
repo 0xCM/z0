@@ -4,9 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+
+    using api = ApiIdentity;
+
     partial class XTend
     {
-        public static string ToPropertyName(this OpIdentity src)
+         [Op]
+         public static string ToPropertyName(this OpIdentity src)
             => LegalIdentityBuilder.code(src);
     }
 }

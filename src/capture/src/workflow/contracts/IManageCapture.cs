@@ -39,7 +39,7 @@ namespace Z0.Asm
         void OnEvent<T>(WfStatus<T> e)
             => Sink.Deposit(e);
 
-        void OnEvent(X86UriHexSaved e)
+        void OnEvent(ApiHexTableSaved e)
             => Sink.Deposit(e);
 
         void OnEvent(ExtractReportCreated e)

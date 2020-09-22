@@ -6,17 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Collections.Generic;
 
     using static Konst;
+    using static z;
 
-    partial class XTend
+    partial struct ApiIdentity
     {
-        /// <summary>
-        /// Produces a canonical text representation of the source kind
-        /// </summary>
-        /// <param name="src">The source kind</param>
-        [MethodImpl(Inline)]
-        public static string Format(this CellWidth src)
-            => $"{(int)src}";
+        [Op]
+        public static HashSet<Type> typeset(NumericKind k)
+            => distinct(k).Select(NumericKinds.type).ToHashSet();
     }
 }

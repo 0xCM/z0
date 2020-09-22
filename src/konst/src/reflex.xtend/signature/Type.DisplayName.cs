@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.ComponentModel;
-    
+
     partial class XTend
     {
         /// <summary>
@@ -18,7 +18,7 @@ namespace Z0
         {
             if(src == null)
                 sys.@throw(new ArgumentNullException(nameof(src)));
-                
+
             if(Attribute.IsDefined(src, typeof(DisplayNameAttribute)))
                 return src.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
 
@@ -27,10 +27,10 @@ namespace Z0
 
             if(src.IsPointer)
                 return $"{src.GetElementType().DisplayName()}*";
-            
+
             if(src.IsSystemDefined())
             {
-                var kw = src.SystemKeyword();
+                var kw = ApiIdentity.keyword(src);
                 return string.IsNullOrWhiteSpace(kw) ? src.Name : kw;
             }
 
@@ -45,7 +45,7 @@ namespace Z0
 
         static string FormatGeneric(this Type src)
         {
-            var name = src.Name;                
+            var name = src.Name;
             var args = src.GetGenericArguments();
             if(args.Length != 0)
             {
@@ -56,10 +56,10 @@ namespace Z0
                     name += args[i].DisplayName();
                     if(i != args.Length - 1)
                         name += ",";
-                }                                
+                }
                 name += ">";
             }
             return name;
-        } 
+        }
     }
 }

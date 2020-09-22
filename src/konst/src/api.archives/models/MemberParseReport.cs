@@ -31,7 +31,7 @@ namespace Z0
                 return ParseResult.Success(src.Name, success);
         }
 
-        static MemberParseRow record(in X86ApiMember extract, uint seq)
+        static MemberParseRow record(in ApiMemberHex extract, uint seq)
             => new MemberParseRow
                 (
                     Seq : (int)seq,
@@ -44,7 +44,7 @@ namespace Z0
                     Data : extract.Encoded
                 );
 
-        public static MemberParseRow[] create(ApiHostUri host, X86ApiMembers members)
+        public static MemberParseRow[] create(ApiHostUri host, ApiHexTable members)
         {
             var count = members.Count;
             var buffer = alloc<R>(count);

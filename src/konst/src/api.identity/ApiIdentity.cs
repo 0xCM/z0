@@ -5,12 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Linq;
 
     using static Konst;
+
+    [ApiHost("api.identity.extensions")]
+    public static partial class IXTend
+    {
+
+    }
 
     [ApiHost("api.identity")]
     public readonly partial struct ApiIdentity
