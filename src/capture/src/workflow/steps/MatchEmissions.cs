@@ -48,7 +48,7 @@ namespace Z0
             var fileSrc = @readonly(reader.Read(FilePath.Define(x86file.Name)));
 
             Claim.Eq(fileSrc.Length, x86data.Length);
-            Claim.Eq(Spans.count<X86UriHex>(fileSrc, s => s.OpUri.IsEmpty),0);
+            Claim.Eq(Spans.count<ApiHex>(fileSrc, s => s.OpUri.IsEmpty),0);
             for(var i=0; i<x86data.Length; i++)
             {
                 Claim.Eq(skip(fileSrc,i).OpUri.Format(), skip(x86data,i).Uri);

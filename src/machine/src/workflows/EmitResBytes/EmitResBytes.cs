@@ -40,7 +40,7 @@ namespace Z0
         public void Run()
         {
             Wf.Running(StepId, flow(SourceDir, TargetDir));
-            var archive = X86UriHexArchive.create(FS.dir(SourceDir.Name));
+            var archive = ApiArchives.x86(FS.dir(SourceDir.Name));
             var indices = archive.Indices();
             foreach(var index in indices)
             {

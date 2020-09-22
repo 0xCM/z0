@@ -39,7 +39,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static IX86UriHexReader reader<H>(H rep = default)
+        public static IApiHexReader reader<H>(H rep = default)
             where H : struct, IArchiveReader
         {
             if(typeof(H) == typeof(X86UriHexReader))
@@ -50,6 +50,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static X86UriHexArchive x86(FolderPath root)
-            => X86UriHexArchive.create(FS.dir(root.Name));
+            => ApiArchives.x86(FS.dir(root.Name));
     }
 }

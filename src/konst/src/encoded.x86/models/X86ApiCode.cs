@@ -93,8 +93,8 @@ namespace Z0
             => src.Encoded;
 
         [MethodImpl(Inline)]
-        public static implicit operator X86UriHex(X86ApiCode src)
-            => new X86UriHex(src.Base, src.OpUri, src.Encoded);
+        public static implicit operator ApiHex(X86ApiCode src)
+            => new ApiHex(src.Base, src.OpUri, src.Encoded);
 
         public MemoryAddress Base
         {

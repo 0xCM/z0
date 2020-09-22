@@ -20,7 +20,40 @@ namespace Z0
     partial struct ApiIdentity
     {
         [Op]
-        public static ApiCodeIndex index(ApiMemberIndex members, OpIndex<X86UriHex> code)
+        public static ApiIdentityToken[] index(ReadOnlySpan<OpIdentity> src, out uint duplicates)
+        {
+            var dst = alloc<ApiIdentityToken>(src.Length);
+            duplicates = index(src,dst);
+            return dst;
+        }
+
+        [Op]
+        public static uint index(ReadOnlySpan<OpIdentity> src, Span<ApiIdentityToken> dst)
+        {
+            var count = min(src.Length,dst.Length);
+            if(count == 0)
+                return 0;
+
+            var duplicates = 0u;
+            ref readonly var source = ref first(src);
+
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var identity = ref skip(source,i);
+                var k = ApiIdentityTokens.key(identity);
+                if(ApiIdentityTokens.Index.TryAdd(k, identity))
+                    seek(dst,i) = new ApiIdentityToken(k);
+                else
+                {
+                    seek(dst,i) = ApiIdentityToken.Empty;
+                    duplicates++;
+                }
+            }
+            return duplicates;
+        }
+
+        [Op]
+        public static ApiCodeIndex index(ApiMemberIndex members, OpIndex<ApiHex> code)
             => ApiCodeIndex.create(members,code);
 
         /// <summary>
@@ -37,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         [Op]
-        public static OpIndex<X86UriHex> index(IEnumerable<X86UriHex> src)
+        public static OpIndex<ApiHex> index(IEnumerable<ApiHex> src)
             => index(src.Select(x => (x.OpUri.OpId, x)));
 
         static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

@@ -22,7 +22,7 @@ namespace Z0
             ApiCode = code;
         }
 
-        public X86UriHex ApiBits
+        public ApiHex ApiBits
         {
             [MethodImpl(Inline)]
             get => ApiCode.Encoded;

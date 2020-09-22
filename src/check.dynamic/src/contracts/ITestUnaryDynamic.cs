@@ -13,7 +13,7 @@ namespace Z0
 
     public interface ITestUnaryDynamic : TTester, TTestOperatorMatch, TCheckDynamic
     {
-        TestCaseRecord Match(K k, TypeWidth w, X86UriHex a, X86UriHex b, BufferTokens dst)
+        TestCaseRecord Match(K k, TypeWidth w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             switch(w)
             {
@@ -38,42 +38,42 @@ namespace Z0
             throw Unsupported.define(w.GetType());
         }
 
-        TestCaseRecord Match(K k, W8 w, X86UriHex a, X86UriHex b, BufferTokens dst)
+        TestCaseRecord Match(K k, W8 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
             var g = Dynamic.EmitFixedUnary(dst[Right], w, b);
             return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        TestCaseRecord Match(K k, W16 w, X86UriHex a, X86UriHex b, BufferTokens dst)
+        TestCaseRecord Match(K k, W16 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
             var g = Dynamic.EmitFixedUnary(dst[Right], w, b);
             return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        TestCaseRecord Match(K k, W32 w, X86UriHex a, X86UriHex b, BufferTokens dst)
+        TestCaseRecord Match(K k, W32 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
             var g = Dynamic.EmitFixedUnary(dst[Right], w, b);
             return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        TestCaseRecord Match(K k, W64 w, X86UriHex a, X86UriHex b, BufferTokens dst)
+        TestCaseRecord Match(K k, W64 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
             var g = Dynamic.EmitFixedUnary(dst[Right], w, b);
             return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        TestCaseRecord Match(K k,  W128 w, X86UriHex a, X86UriHex b, BufferTokens dst)
+        TestCaseRecord Match(K k,  W128 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
             var g = Dynamic.EmitFixedUnary(dst[Right], w, b);
             return Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        TestCaseRecord Match(K k, W256 w, X86UriHex a, X86UriHex b, BufferTokens dst)
+        TestCaseRecord Match(K k, W256 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedUnary(dst[Left], w, a);
             var g = Dynamic.EmitFixedUnary(dst[Right], w, b);

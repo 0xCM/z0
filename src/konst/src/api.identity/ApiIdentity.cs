@@ -39,7 +39,6 @@ namespace Z0
         public static IMultiDiviner diviner()
             => new ArtifactIdentities();
 
-
         /// <summary>
         /// Disables the generic indicator
         /// </summary>

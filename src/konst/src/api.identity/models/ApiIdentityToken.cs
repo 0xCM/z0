@@ -12,15 +12,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class XTend
-    {
-        [MethodImpl(Inline)]
-        public static ApiIdentityToken Tokenize(this OpIdentity src)
-            => ApiIdentityTokens.dispense(src);
-    }
-
     public readonly struct ApiIdentityToken : IApiToken<ApiIdentityToken,ulong>
     {
+        public static ApiIdentityToken Empty => new ApiIdentityToken(0ul);
+
         internal readonly ulong Data;
 
         [MethodImpl(Inline)]
@@ -50,7 +45,7 @@ namespace Z0
 
     public readonly struct ApiIdentityTokens
     {
-        static ConcurrentDictionary<ulong,OpIdentity> Index = new ConcurrentDictionary<ulong, OpIdentity>();
+        internal static ConcurrentDictionary<ulong,OpIdentity> Index = new ConcurrentDictionary<ulong, OpIdentity>();
 
         static OpIdentity Empty = OpIdentity.Empty;
 
@@ -76,7 +71,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ulong key(OpIdentity src)
+        internal static ulong key(in OpIdentity src)
             => hash(src.Identifier);
     }
 }

@@ -102,7 +102,7 @@ namespace Z0
                 if(term != ExtractTermCode.Fail)
                 {
                     var code = Locate(src.Encoded.Base, parser.Parsed, term == ExtractTermCode.CTC_Zx7 ? Zx7Cut : 0);
-                    return new X86ApiMember(src.Member, new X86UriHex(code.Base, src.OpUri, code), seq, term);
+                    return new X86ApiMember(src.Member, new ApiHex(code.Base, src.OpUri, code), seq, term);
                 }
                 else
                     return z.fail<X86ApiMember>(term.ToString());

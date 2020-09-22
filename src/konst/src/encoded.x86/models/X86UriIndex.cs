@@ -13,10 +13,10 @@ namespace Z0
     {
         public readonly ApiHostUri Host;
 
-        public readonly X86UriHex[] Code;
+        public readonly ApiHex[] Code;
 
         [MethodImpl(Inline)]
-        public X86UriIndex(ApiHostUri host, X86UriHex[] code)
+        public X86UriIndex(ApiHostUri host, ApiHex[] code)
         {
             z.insist(host.IsNonEmpty, $"Empty host uri");
             Host = host;
@@ -36,13 +36,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public X86UriIndex(X86UriHex[] code)
+        public X86UriIndex(ApiHex[] code)
         {
             Host = ApiHostUri.Empty;
             Code = code;
         }
 
         public static X86UriIndex Empty
-            => new X86UriIndex(sys.empty<X86UriHex>());
+            => new X86UriIndex(sys.empty<ApiHex>());
     }
 }

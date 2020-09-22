@@ -13,22 +13,7 @@ namespace Z0
 
     public readonly struct X86UriHexArchive
     {
-        public static X86UriHex[] read(IWfShell wf, ApiHostUri host)
-            => create(wf).Read(host);
-
-        [MethodImpl(Inline)]
-        public static X86UriHexArchive create(FS.FolderPath src)
-            => new X86UriHexArchive(src);
-
-        [MethodImpl(Inline)]
-        public static X86UriHexArchive create(FolderPath src)
-            => new X86UriHexArchive(FS.dir(src.Name));
-
-        [MethodImpl(Inline)]
-        public static X86UriHexArchive create(IWfShell src)
-            => new X86UriHexArchive(src);
-
-        public FolderPath ArchiveRoot {get;}
+        readonly FolderPath ArchiveRoot;
 
         [MethodImpl(Inline)]
         public X86UriHexArchive(FS.FolderPath root)
@@ -42,11 +27,10 @@ namespace Z0
             ArchiveRoot = wf.ArchiveRoot;
         }
 
-
         /// <summary>
         /// Reads the archived files owned by a specified host
         /// </summary>
-        public X86UriHex[] Read(ApiHostUri host)
+        public ApiHex[] Read(ApiHostUri host)
         {
             var hfn = FileName.define(host.Owner, host.Name, FileExtensions.HexLine);
             var path = files(ArchiveRoot).Where(f => f.FileName == hfn).FirstOrDefault(FilePath.Empty);
@@ -54,9 +38,9 @@ namespace Z0
         }
 
         /// <summary>
-       /// Enumerates the archived files
-       /// </summary>
-       public IEnumerable<FilePath> Files()
+        /// Enumerates the archived files
+        /// </summary>
+        public IEnumerable<FilePath> Files()
             => ArchiveRoot.Files(FileExtensions.HexLine, true);
 
         /// <summary>
@@ -91,13 +75,13 @@ namespace Z0
         /// <summary>
         /// Enumerates the content of all archived files
         /// </summary>
-        public IEnumerable<X86UriHex> Read()
+        public IEnumerable<ApiHex> Read()
             => Read(_ => true);
 
         /// <summary>
         /// Enumerates the content of archived files owned by a specified part
         /// </summary>
-        public IEnumerable<X86UriHex> Read(PartId owner)
+        public IEnumerable<ApiHex> Read(PartId owner)
         {
             foreach(var file in Files(owner))
             foreach(var item in Read(file))
@@ -108,7 +92,7 @@ namespace Z0
         /// <summary>
         /// Reads the archived files with names that satisfy a specified predicate
         /// </summary>
-        public IEnumerable<X86UriHex> Read(Func<FileName,bool> predicate)
+        public IEnumerable<ApiHex> Read(Func<FileName,bool> predicate)
         {
             foreach(var file in Files().Where(f => predicate(f.FileName)))
             foreach(var item in Read(file))
@@ -118,19 +102,18 @@ namespace Z0
             }
         }
 
-
         /// <summary>
         /// Reads the code defined by a specified file
         /// </summary>
         /// <param name="src">The source path</param>
-        public X86UriHex[] Read(FilePath src)
+        public ApiHex[] Read(FilePath src)
             => X86UriHexReader.Service.Read(src);
 
         /// <summary>
         /// Reads the bits of an identified operation
         /// </summary>
         /// <param name="id">The source path</param>
-        public X86UriHex[] Read(OpIdentity id)
+        public ApiHex[] Read(OpIdentity id)
             => Read(ArchiveRoot + FileName.define(id, FileExtensions.HexLine));
 
         public X86UriIndex Index(FilePath src)
@@ -141,7 +124,7 @@ namespace Z0
                 return X86UriIndex.Empty;
             }
 
-            var dst = z.list<X86UriHex>();
+            var dst = z.list<ApiHex>();
             foreach(var item in read(src))
                 if(item.IsNonEmpty)
                     dst.Add(item);
@@ -152,7 +135,7 @@ namespace Z0
         static FilePath[] files(FolderPath root)
             => root.Files(FileExtensions.HexLine, true).Array();
 
-        static X86UriHex[] read(FilePath src)
+        static ApiHex[] read(FilePath src)
             => X86UriHexReader.Service.Read(src).Where(x => x.IsNonEmpty);
     }
 }

@@ -15,7 +15,7 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmBlock block(X86UriHex encoded, Instruction[] decoded, ExtractTermCode term)
+        public static AsmBlock block(ApiHex encoded, Instruction[] decoded, ExtractTermCode term)
             => new AsmBlock(encoded, decoded, term);
 
     }

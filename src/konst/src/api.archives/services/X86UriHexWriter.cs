@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct X86UriHexWriter : IX86UriHexWriter<X86UriHexWriter>
+    public readonly struct X86UriHexWriter : IApiHexWriter<X86UriHexWriter>
     {
         /// <summary>
         /// The writer's target path
@@ -29,7 +29,7 @@ namespace Z0
         public void Write(X86ApiCode src, int idpad = 60)
             => StreamOut.WriteLine(src.Format(idpad));
 
-        public void Write(X86UriHex src, int idpad = 60)
+        public void Write(ApiHex src, int idpad = 60)
             => StreamOut.WriteLine(src.Format(idpad));
 
         public void Dispose()

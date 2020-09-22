@@ -95,10 +95,10 @@ namespace Z0
             get => Parsed.IsNonEmpty;
         }
 
-        public X86UriHex UriHex
+        public ApiHex UriHex
         {
              [MethodImpl(Inline)]
-             get => new X86UriHex(BaseAddress, OpUri, Parsed);
+             get => new ApiHex(BaseAddress, OpUri, Parsed);
         }
 
         public OpIdentity MemberId

@@ -27,13 +27,13 @@ namespace Z0
             StreamOut = new StreamWriter(dst.CreateParentIfMissing().Name, false);
         }
 
-        public void Write(in X86UriHex src, int idpad)
+        public void Write(in ApiHex src, int idpad)
             => StreamOut.WriteLine(src.Format(idpad));
 
-        public void WriterLine(in X86UriHex src)
+        public void WriterLine(in ApiHex src)
             => StreamOut.WriteLine(src.Format(0));
 
-        public void WriteLines(X86UriHex[] src)
+        public void WriteLines(ApiHex[] src)
         {
             var uripad = src.Max(x => x.OpUri.UriText.Length) + 1;
             for(var i=0; i< src.Length; i++)
@@ -48,15 +48,15 @@ namespace Z0
         }
 
 
-        public static X86UriHex[] save(X86ApiMembers src, FS.FilePath dst)
+        public static ApiHex[] save(X86ApiMembers src, FS.FilePath dst)
         {
             using var writer = new X86ApiWriter(dst);
-            var data = src.Storage.Map(x => new X86UriHex(x.Address, x.OpUri, x.Encoded.Encoded));
+            var data = src.Storage.Map(x => new ApiHex(x.Address, x.OpUri, x.Encoded.Encoded));
             writer.WriteLines(data);
             return data;
         }
 
-        public void Write(in X86UriHex code)
+        public void Write(in ApiHex code)
             => Write(code,60);
     }
 }

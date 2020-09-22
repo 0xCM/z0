@@ -17,7 +17,7 @@ namespace Z0
     {
         public ApiMember Member {get;}
 
-        public X86UriHex Encoded {get;}
+        public ApiHex Encoded {get;}
 
         public uint Sequence {get;}
 
@@ -64,7 +64,7 @@ namespace Z0
             => src.Encoded.Encoded;
 
         [MethodImpl(Inline)]
-        public X86ApiMember(ApiMember member, X86UriHex code, uint seq = 0, ExtractTermCode term = 0)
+        public X86ApiMember(ApiMember member, ApiHex code, uint seq = 0, ExtractTermCode term = 0)
         {
             Sequence = seq;
             Member = member;
@@ -77,7 +77,7 @@ namespace Z0
         {
             Sequence = seq;
             Member = member;
-            Encoded = new X86UriHex(member.Address, member.OpUri, code);
+            Encoded = new ApiHex(member.Address, member.OpUri, code);
             TermCode = term;
         }
 

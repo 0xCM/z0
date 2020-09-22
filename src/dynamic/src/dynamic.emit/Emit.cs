@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp8 EmitFixedBinaryOp(this BufferToken buffer, N8 w, X86UriHex src)
+        public static BinaryOp8 EmitFixedBinaryOp(this BufferToken buffer, N8 w, ApiHex src)
             => buffer.Load(src.Encoded).EmitFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp16 EmitFixedBinaryOp(this BufferToken buffer, N16 w, X86UriHex src)
+        public static BinaryOp16 EmitFixedBinaryOp(this BufferToken buffer, N16 w, ApiHex src)
             => buffer.Load(src.Encoded).EmitFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp32 EmitFixedBinaryOp(this BufferToken buffer, N32 w, X86UriHex src)
+        public static BinaryOp32 EmitFixedBinaryOp(this BufferToken buffer, N32 w, ApiHex src)
             => buffer.Load(src.Encoded).EmitFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp64 EmitFixedBinaryOp(this BufferToken buffer, N64 w, X86UriHex src)
+        public static BinaryOp64 EmitFixedBinaryOp(this BufferToken buffer, N64 w, ApiHex src)
             => buffer.Load(src.Encoded).EmitFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp128 EmitFixedBinaryOp(this BufferToken buffer, N128 w, X86UriHex src)
+        public static BinaryOp128 EmitFixedBinaryOp(this BufferToken buffer, N128 w, ApiHex src)
             => buffer.Load(src.Encoded).EmitFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="w">The width selector</param>
         /// <param name="src">The source code</param>
         [MethodImpl(Inline)]
-        public static BinaryOp256 EmitFixedBinaryOp(this BufferToken buffer, N256 w, X86UriHex src)
+        public static BinaryOp256 EmitFixedBinaryOp(this BufferToken buffer, N256 w, ApiHex src)
             => buffer.Load(src.Encoded).EmitFixedBinaryOp(w, src.Id);
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The target buffer</param>
         /// <param name="src">The executable source</param>
-        public static FixedFunc<X0,R> EmitFixedFunc<X0,R>(this BufferToken dst, X86UriHex src)
+        public static FixedFunc<X0,R> EmitFixedFunc<X0,R>(this BufferToken dst, ApiHex src)
             => (FixedFunc<X0,R>)dst.Handle.EmitFixed(src.Id, typeof(FixedFunc<X0,R>), typeof(R), typeof(X0));
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The target buffer</param>
         /// <param name="src">The executable source</param>
-        public static FixedFunc<X0,X1,R> EmitFixedFunc<X0,X1,R>(this BufferToken dst, X86UriHex src)
+        public static FixedFunc<X0,X1,R> EmitFixedFunc<X0,X1,R>(this BufferToken dst, ApiHex src)
             => (FixedFunc<X0,X1,R>)dst.Handle.EmitFixed(src.Id, typeof(FixedFunc<X0,X1,R>), typeof(R), typeof(X0), typeof(X1));
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The target buffer</param>
         /// <param name="src">The executable source</param>
-        public static FixedFunc<X0,X1,X2,R> EmitFixedFunc<X0,X1,X2,R>(this BufferToken dst, X86UriHex src)
+        public static FixedFunc<X0,X1,X2,R> EmitFixedFunc<X0,X1,X2,R>(this BufferToken dst, ApiHex src)
             => (FixedFunc<X0,X1,X2,R>)dst.Handle.EmitFixed(src.Id, typeof(FixedFunc<X0,X1,X2,R>), typeof(R), typeof(X0), typeof(X1), typeof(X2));
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Z0
         /// <param name="buffer">The target buffer</param>
         /// <param name="src">The executable source</param>
         /// <typeparam name="F">The fixed operand type</typeparam>
-        public static FixedUnaryOp<F> EmitFixedUnaryOp<F>(this BufferToken dst, X86UriHex src)
+        public static FixedUnaryOp<F> EmitFixedUnaryOp<F>(this BufferToken dst, ApiHex src)
             => (FixedUnaryOp<F>)dst.Handle.EmitFixed(src.Id,  typeof(FixedUnaryOp<F>), typeof(F), typeof(F));
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Z0
         /// <param name="buffer">The target buffer</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="F">The fixed operand type</typeparam>
-        public static FixedBinaryOp<F> EmitFixedBinaryOp<F>(this BufferToken buffer, X86UriHex src)
+        public static FixedBinaryOp<F> EmitFixedBinaryOp<F>(this BufferToken buffer, ApiHex src)
             => (FixedBinaryOp<F>)buffer.Load(src.Encoded).EmitFixedBinaryOp(src.Id, typeof(FixedBinaryOp<F>), typeof(F));
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Z0
         /// <param name="dst">The target buffer</param>
         /// <param name="src">The executable source</param>
         /// <typeparam name="F">The fixed operand type</typeparam>
-        public static FixedTernaryOp<F> EmitFixedTernaryOp<F>(this BufferToken dst, X86UriHex src)
+        public static FixedTernaryOp<F> EmitFixedTernaryOp<F>(this BufferToken dst, ApiHex src)
             => (FixedTernaryOp<F>)dst.Handle.EmitFixed(src.Id, typeof(FixedTernaryOp<F>), typeof(F), typeof(F), typeof(F), typeof(F));
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Z0
         /// <param name="buffer">The buffer token</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public static UnaryOp<T> EmitUnaryOp<T>(this BufferToken buffer, X86UriHex src)
+        public static UnaryOp<T> EmitUnaryOp<T>(this BufferToken buffer, ApiHex src)
             where T : unmanaged
                 => buffer.Load(src.Encoded).EmitUnaryOp<T>(src.Id);
 
@@ -138,7 +138,7 @@ namespace Z0
         /// <param name="buffer">The buffer token</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public static BinaryOp<T> EmitBinaryOp<T>(this BufferToken buffer, X86UriHex src)
+        public static BinaryOp<T> EmitBinaryOp<T>(this BufferToken buffer, ApiHex src)
             where T : unmanaged
                 => buffer.Load(src.Encoded).EmitBinaryOp<T>(src.Id);
 
@@ -148,7 +148,7 @@ namespace Z0
         /// <param name="dst">The buffer token</param>
         /// <param name="src">The code to load</param>
         /// <typeparam name="T">The operand type</typeparam>
-        public static TernaryOp<T> EmitTernaryOp<T>(this BufferToken dst, X86UriHex src)
+        public static TernaryOp<T> EmitTernaryOp<T>(this BufferToken dst, ApiHex src)
             where T : unmanaged
                 => dst.Load(src.Encoded).EmitTernaryOp<T>(src.Id);
     }

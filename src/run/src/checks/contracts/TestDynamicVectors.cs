@@ -36,14 +36,14 @@ namespace Z0
         IPolyrand Random
             => Context.Random;
 
-        public TestCaseRecord Match<T>(BinaryOp<Vector128<T>> f, X86UriHex bits)
+        public TestCaseRecord Match<T>(BinaryOp<Vector128<T>> f, ApiHex bits)
             where T : unmanaged
         {
             var g = Dynamic.EmitFixedBinary(Buffer, w128, bits);
             return Match<T>(f, g, bits.OpUri.OpId);
         }
 
-        public TestCaseRecord Match<T>(BinaryOp<Vector256<T>> f, X86UriHex bits)
+        public TestCaseRecord Match<T>(BinaryOp<Vector256<T>> f, ApiHex bits)
             where T : unmanaged
         {
             var g = Dynamic.EmitFixedBinary(Buffer, w256, bits);

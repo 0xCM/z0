@@ -31,13 +31,13 @@ namespace Z0.Asm
         /// <param name="src">The code source</param>
         Option<AsmFxList> Decode(X86Code src);
 
-        Option<AsmInstructions> Decode(X86UriHex src);
+        Option<AsmInstructions> Decode(ApiHex src);
 
         Option<AsmRoutine> Decode(X86ApiCapture src, Action<Asm.Instruction> f);
 
         Option<AsmFxList> Decode(X86ApiCode src, Action<Instruction> f);
 
-        Option<AsmFxList> Decode(X86UriHex src, Action<Instruction> f);
+        Option<AsmFxList> Decode(ApiHex src, Action<Instruction> f);
 
         Option<AsmFxList> Decode(X86Code src, Action<Instruction> f);
     }

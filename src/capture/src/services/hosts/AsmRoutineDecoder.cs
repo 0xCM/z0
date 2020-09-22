@@ -35,7 +35,7 @@ namespace Z0.Asm
         public Option<AsmFxList> Decode(X86Code src)
             => Decode(src.Encoded, src.Base).TryMap(x => asm.list(x, src));
 
-        public Option<AsmInstructions> Decode(X86UriHex src)
+        public Option<AsmInstructions> Decode(ApiHex src)
             => Decode(src.Encoded, src.Base);
 
         public Option<AsmRoutine> Decode(X86ApiCapture src, Action<Asm.Instruction> f)
@@ -107,7 +107,7 @@ namespace Z0.Asm
             }
         }
 
-        public Option<AsmFxList> Decode(X86UriHex src, Action<Instruction> f)
+        public Option<AsmFxList> Decode(ApiHex src, Action<Instruction> f)
         {
             var x86 = new X86Code(src.Base,src.Data);
             return Decode(x86,f);

@@ -5,15 +5,19 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
     using System.Runtime.CompilerServices;
+    using System.Collections.Concurrent;
 
     using static Konst;
     using static z;
 
-    partial struct ApiIdentity
+    using api = ApiIdentity;
+
+    partial class XTend
     {
-        [MethodImpl(Inline), Op]
-        public static ApiIdentityToken token(OpIdentity src)
-            => ApiIdentityTokens.dispense(src);
+        [MethodImpl(Inline)]
+        public static ApiIdentityToken Tokenize(this OpIdentity src)
+            => ApiIdentity.token(src);
     }
 }

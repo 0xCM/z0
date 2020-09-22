@@ -7,20 +7,20 @@ namespace Z0
     using System;
     using System.Linq;
 
-    public readonly struct X86UriParser : ITextParser<X86UriHex>
+    public readonly struct X86UriParser : ITextParser<ApiHex>
     {
         /// <summary>
         /// Parses a row of identified hex text
         /// </summary>
         /// <param name="src">The formatted text</param>
-        ParseResult<X86UriHex> ITextParser<X86UriHex>.Parse(string src)
+        ParseResult<ApiHex> ITextParser<ApiHex>.Parse(string src)
             => parse(src);
 
         /// <summary>
         /// Parses a row of identified hex text
         /// </summary>
         /// <param name="src">The formatted text</param>
-        public static Option<X86UriHex> row(string src)
+        public static Option<ApiHex> row(string src)
         {
             try
             {
@@ -29,9 +29,9 @@ namespace Z0
                 var uri = ApiUriParser.operation(uritext);
                 var bytes = src.TakeAfter(Chars.Space).SplitClean(HexFormatSpecs.DataDelimiter).Select(parser.Succeed);
                 if(uri)
-                    return new X86UriHex(MemoryAddress.Empty, uri.Value, bytes);
+                    return new ApiHex(MemoryAddress.Empty, uri.Value, bytes);
                 else
-                    return Option.none<X86UriHex>();
+                    return Option.none<ApiHex>();
 
             }
             catch(Exception e)
@@ -41,7 +41,7 @@ namespace Z0
             }
         }
 
-        public static ParseResult<X86UriHex> parse(string src)
+        public static ParseResult<ApiHex> parse(string src)
         {
             var parts = src.SplitClean(Chars.Pipe);
             var parser = Parsers.hex(true);
@@ -50,7 +50,7 @@ namespace Z0
                 var address = Parsers.hex().Parse(parts[0]).ValueOrDefault();
                 var uri = ApiUriParser.operation(parts[1].Trim()).Require();
                 var bytes = parts[2].SplitClean(HexFormatSpecs.DataDelimiter).Select(parser.Succeed).ToArray();
-                return z.parsed(src, new X86UriHex(address,uri,bytes));
+                return z.parsed(src, new ApiHex(address,uri,bytes));
             }
             else if(parts.Length == 2)
             {
@@ -59,10 +59,10 @@ namespace Z0
                                      .SplitClean(HexFormatSpecs.DataDelimiter)
                                      .Select(parser.Succeed)
                                      .ToArray();
-                return z.parsed(src, new X86UriHex(0ul, uri, bytes));
+                return z.parsed(src, new ApiHex(0ul, uri, bytes));
             }
             else
-                return z.unparsed<X86UriHex>(src);
+                return z.unparsed<ApiHex>(src);
         }
     }
 }

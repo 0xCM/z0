@@ -35,7 +35,7 @@ namespace Z0
 
         IDynexus Dynamic => CheckDynamic.Checker.Dynamic;
 
-        public TestCaseRecord Match(K k, TypeWidth w, X86UriHex a, X86UriHex b, BufferTokens dst)
+        public TestCaseRecord Match(K k, TypeWidth w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             switch(w)
             {
@@ -61,42 +61,42 @@ namespace Z0
             throw Unsupported.define(w.GetType());
         }
 
-        public TestCaseRecord Match(K k, W8 w, X86UriHex a, X86UriHex b, BufferTokens dst)
+        public TestCaseRecord Match(K k, W8 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
             return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        public TestCaseRecord Match(K k, W16 w, X86UriHex a, X86UriHex b, BufferTokens dst)
+        public TestCaseRecord Match(K k, W16 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
             return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        public TestCaseRecord Match(K k, W32 w, X86UriHex a, X86UriHex b, BufferTokens dst)
+        public TestCaseRecord Match(K k, W32 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
             return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        public TestCaseRecord Match(K k, W64 w, X86UriHex a, X86UriHex b, BufferTokens dst)
+        public TestCaseRecord Match(K k, W64 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
             return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        public TestCaseRecord Match(K k,  W128 w, X86UriHex a, X86UriHex b, BufferTokens dst)
+        public TestCaseRecord Match(K k,  W128 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
             return Matcher.Match(f, a.Id.WithAsm(), g, b.Id.WithAsm());
         }
 
-        public TestCaseRecord Match(K k, W256 w, X86UriHex a, X86UriHex b, BufferTokens dst)
+        public TestCaseRecord Match(K k, W256 w, ApiHex a, ApiHex b, BufferTokens dst)
         {
             var f = Dynamic.EmitFixedBinary(dst[Left], w, a);
             var g = Dynamic.EmitFixedBinary(dst[Right], w, b);
