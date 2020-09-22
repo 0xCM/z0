@@ -54,31 +54,6 @@ namespace Z0
 
             try
             {
-                // var files = SourceFiles.Parsed.View;
-                // var count = files.Length;
-                // var builder = new CaptureIndexBuilder(Wf, new EmitCaptureIndexHost());
-
-                // Wf.Status(Host.Id, text.format("Indexing {0} datasets",count));
-
-                // for(var i=0; i<count; i++)
-                // {
-                //     ref readonly var path = ref skip(files,i);
-
-                //     var result = MemberParseReport.load(path);
-                //     if(result)
-                //     {
-                //         Index(result.Value, builder);
-                //         Wf.Status(Host.Id, text.format("Indexed {0}", path));
-                //     }
-                //     else
-                //         Wf.Error(Host.Id, $"Could not parse {path}");
-                // }
-
-                // var status = builder.Status();
-                // Wf.Status(Host.Id, text.format("Freeze: {0}", status.Format()));
-
-                // builder.Run();
-                // EncodedIndex = builder.Index;
 
                 BuildIndex();
 
@@ -98,19 +73,19 @@ namespace Z0
             Wf.Ran(Host);
         }
 
-        void Index(ReadOnlySpan<MemberParseRow> src, CaptureIndexBuilder dst)
+        void Index(ReadOnlySpan<ApiParseRow> src, CaptureIndexBuilder dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
                 Index(skip(src,i), dst);
         }
 
-        void Index(in MemberParseRow src, CaptureIndexBuilder dst)
+        void Index(in ApiParseRow src, CaptureIndexBuilder dst)
         {
             if(src.Address.IsEmpty)
                 return;
 
-            var code = new X86ApiCode(src.Uri, src.Data);
+            var code = new ApiHex(src.Uri, src.Data);
             var inclusion = dst.Include(code);
             if(inclusion.Any(x => x == false))
                 Wf.Warn(Host.Id, $"Duplicate | {src.Uri.Format()}");
@@ -132,26 +107,33 @@ namespace Z0
             {
                 hostFx.Clear();
                 var part = parts[i];
-                var hosts = src.Hosts.Where(h => h.Owner == part);
-
-                Wf.Status(Host.Id, text.format("Decoding {0}", part.Format()));
-
-                for(var j=0; j<hosts.Length; j++)
+                if(part == 0)
                 {
-                    var host = hosts[j];
-                    var members = src[host];
-                    var fx = Decode(members);
-                    hostFx.Add(fx);
-
-                    kHosts++;
-                    kMembers += fx.RoutineCount;
-                    kFx += fx.InstructionCount;
+                    dst[i] = new ApiPartRoutines(part, sys.empty<ApiHostRoutines>());
                 }
-                dst[i] = new ApiPartRoutines(part, hostFx.ToArray());
+                else
+                {
 
-                kParts++;
+                    var hosts = src.Hosts.Where(h => h.Owner == part);
+                    Wf.Status(Host.Id, text.format("Decoding {0}", part.Format()));
 
-                Wf.Status(Host.Id, text.format(RenderPatterns.PSx4, kParts, kHosts, kMembers, kFx));
+                    for(var j=0; j<hosts.Length; j++)
+                    {
+                        var host = hosts[j];
+                        var members = src[host];
+                        var fx = Decode(members);
+                        hostFx.Add(fx);
+
+                        kHosts++;
+                        kMembers += fx.RoutineCount;
+                        kFx += fx.InstructionCount;
+                    }
+
+                    dst[i] = new ApiPartRoutines(part, hostFx.ToArray());
+
+                    kParts++;
+                    Wf.Status(Host.Id, text.format(RenderPatterns.PSx4, kParts, kHosts, kMembers, kFx));
+                }
             }
 
             Wf.Status(Host.Id, text.format("Decoded {0} entries from {1} parts", src.EntryCount, src.Parts.Length));

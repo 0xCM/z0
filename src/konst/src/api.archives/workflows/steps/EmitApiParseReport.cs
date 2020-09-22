@@ -10,11 +10,11 @@ namespace Z0
     using static Konst;
     using static RenderPatterns;
 
-    public ref struct EmitParsedReport
+    public ref struct EmitApiParseReport
     {
         readonly IWfShell Wf;
 
-        readonly EmitParsedReportHost Host;
+        readonly WfHost Host;
 
         readonly ApiHostUri Uri;
 
@@ -22,12 +22,12 @@ namespace Z0
 
         readonly FS.FilePath Target;
 
-        public Span<MemberParseRow> Emitted;
+        public Span<ApiParseRow> Emitted;
 
         [MethodImpl(Inline)]
-        public EmitParsedReport(IWfCaptureState state, EmitParsedReportHost host, ApiHostUri uri, ApiHexTable src, FS.FilePath dst)
+        public EmitApiParseReport(IWfShell wf, WfHost host, ApiHostUri uri, ApiHexTable src, FS.FilePath dst)
         {
-            Wf = state.Wf;
+            Wf = wf;
             Host = host;
             Emitted = default;
             Uri = uri;
@@ -41,8 +41,8 @@ namespace Z0
             try
             {
                 Wf.Running(Host, Uri);
-                var report = MemberParseReport.create(Uri, Source);
-                MemberParseReport.save(report,Target);
+                var report = ApiParseReport.create(Uri, Source);
+                ApiParseReport.save(report,Target);
                 Emitted = report;
                 Wf.Ran(Host, text.format(PSx2, Uri, Emitted.Length));
             }

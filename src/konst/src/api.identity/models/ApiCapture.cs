@@ -17,9 +17,9 @@ namespace Z0
     [ApiDataType]
     public struct ApiCapture
     {
-        readonly X86Code Extracted;
+        readonly BasedCodeBlock Extracted;
 
-        public X86Code Parsed;
+        public BasedCodeBlock Parsed;
 
         public OpUri OpUri;
 
@@ -30,7 +30,7 @@ namespace Z0
         public CilCode Cil;
 
         [MethodImpl(Inline)]
-        public ApiCapture(OpIdentity id, MethodInfo method, X86Code extracted, X86Code parsed, ExtractTermCode term)
+        public ApiCapture(OpIdentity id, MethodInfo method, BasedCodeBlock extracted, BasedCodeBlock parsed, ExtractTermCode term)
         {
             Extracted = extracted;
             Parsed = parsed;

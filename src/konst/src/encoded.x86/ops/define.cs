@@ -14,16 +14,16 @@ namespace Z0
     partial struct EncodedX86
     {
         [MethodImpl(Inline), Op]
-        public static X86ApiCode define(OpUri uri, MemoryAddress address, in BinaryCode data)
-            => new X86ApiCode(uri, new X86Code(address, data));
+        public static ApiHex define(OpUri uri, MemoryAddress address, in BinaryCode data)
+            => new ApiHex(uri, new BasedCodeBlock(address, data));
 
         [MethodImpl(Inline), Op]
-        public static X86ApiCode define(OpUri uri, in X86Code data)
-            => new X86ApiCode(uri, data);
+        public static ApiHex define(OpUri uri, in BasedCodeBlock data)
+            => new ApiHex(uri, data);
 
         [MethodImpl(Inline), Op]
-        public static X86Code define(MemoryAddress address, in BinaryCode code)
-            => new X86Code(address, code);
+        public static BasedCodeBlock define(MemoryAddress address, in BinaryCode code)
+            => new BasedCodeBlock(address, code);
 
         [MethodImpl(Inline), Op]
         public static ApiHex define(MemoryAddress address, OpUri uri, in BinaryCode data)
@@ -38,7 +38,7 @@ namespace Z0
             => new ApiMemberHex(member, data);
 
         [MethodImpl(Inline), Op]
-        public static ApiCapture define(OpIdentity id, MethodInfo method, X86Code extracted, X86Code parsed, ExtractTermCode term)
+        public static ApiCapture define(OpIdentity id, MethodInfo method, BasedCodeBlock extracted, BasedCodeBlock parsed, ExtractTermCode term)
             => new ApiCapture(id, method, extracted, parsed, term);
     }
 }

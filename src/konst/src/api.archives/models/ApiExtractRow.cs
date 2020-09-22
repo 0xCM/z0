@@ -9,10 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    using F = MemberExtractField;
-    using R = MemberExtractRow;
+    using F = ApiExtractField;
+    using R = ApiExtractRow;
 
-    public enum MemberExtractField : uint
+    public enum ApiExtractField : uint
     {
         Sequence = 0 | 10 << WidthOffset,
 
@@ -27,7 +27,7 @@ namespace Z0
         Data = 5 | 1 << WidthOffset
     }
 
-    public readonly struct MemberExtractRow : ITabular<F,R>
+    public readonly struct ApiExtractRow : ITabular<F,R>
     {
         public readonly int Sequence;
 
@@ -39,7 +39,7 @@ namespace Z0
 
         public readonly string OpSig;
 
-        public readonly X86Code Data;
+        public readonly BasedCodeBlock Data;
 
         const int FieldCount = 6;
 
@@ -56,11 +56,11 @@ namespace Z0
             var uri = ApiUriParser.Service.Parse(fields[3]).ValueOrDefault(OpUri.Empty);
             var sig = fields[4];
             var data = fields[5].SplitClean(HexFormatSpecs.DataDelimiter).Select(Parsers.hex(true).Succeed).ToArray();
-            var extract = new X86Code(address, data);
+            var extract = new BasedCodeBlock(address, data);
             return new R(seq, address, len, uri, sig, extract);
         }
 
-        public MemberExtractRow(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, X86Code Data)
+        public ApiExtractRow(int Sequence, MemoryAddress Address, int Length, OpUri Uri, string OpSig, BasedCodeBlock Data)
         {
             this.Sequence = Sequence;
             this.Address = Address;
@@ -83,6 +83,6 @@ namespace Z0
         }
 
         public static R Empty
-            => new R(0, MemoryAddress.Empty, 0, OpUri.Empty, EmptyString, X86Code.Empty);
+            => new R(0, MemoryAddress.Empty, 0, OpUri.Empty, EmptyString, BasedCodeBlock.Empty);
     }
 }

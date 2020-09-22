@@ -10,29 +10,29 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using F = MemberParseField;
-    using R = MemberParseRow;
+    using F = ApiParseField;
+    using R = ApiParseRow;
 
-    public class MemberParseReport : Report<MemberParseReport,F,R>
+    public class ApiParseReport : Report<ApiParseReport,F,R>
     {
         public ApiHostUri ApiHost {get;}
 
-        public static ParseResult<MemberParseRow[]> load(FS.FilePath src)
+        public static ParseResult<ApiParseRow[]> load(FS.FilePath src)
             => load(FilePath.Define(src.Name));
 
-        static ParseResult<MemberParseRow[]> load(FilePath src)
+        static ParseResult<ApiParseRow[]> load(FilePath src)
         {
-            var attempts = src.ReadLines().Skip(1).Select(MemberParseReport.row);
+            var attempts = src.ReadLines().Skip(1).Select(ApiParseReport.row);
             var failed = attempts.Where(r => !r.Succeeded);
             var success = attempts.Where(r => r.Succeeded).Select(r => r.Value);
             if(failed.Length != 0 && success.Length == 0)
-                return ParseResult.Fail<MemberParseRow[]>(src.Name, failed[0].Reason);
+                return ParseResult.Fail<ApiParseRow[]>(src.Name, failed[0].Reason);
             else
                 return ParseResult.Success(src.Name, success);
         }
 
-        static MemberParseRow record(in ApiMemberHex extract, uint seq)
-            => new MemberParseRow
+        static ApiParseRow record(in ApiMemberHex extract, uint seq)
+            => new ApiParseRow
                 (
                     Seq : (int)seq,
                     SourceSequence: (int)extract.Sequence,
@@ -44,7 +44,7 @@ namespace Z0
                     Data : extract.Encoded
                 );
 
-        public static MemberParseRow[] create(ApiHostUri host, ApiHexTable members)
+        public static ApiParseRow[] create(ApiHostUri host, ApiHexTable members)
         {
             var count = members.Count;
             var buffer = alloc<R>(count);
@@ -56,16 +56,16 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Option<FilePath> save(MemberParseRow[] src, FS.FilePath dst)
+        public static Option<FilePath> save(ApiParseRow[] src, FS.FilePath dst)
             => Log.Save(src, dst);
 
-        static ParseResult<MemberParseRow> row(string src)
+        static ParseResult<ApiParseRow> row(string src)
         {
             try
             {
                 var fields = src.SplitClean(FieldDelimiter);
                 if(fields.Length !=  (uint)R.FieldCount)
-                    return ParseResult.Fail<MemberParseRow>(src,"No data");
+                    return ParseResult.Fail<ApiParseRow>(src,"No data");
 
                 var dst = new R();
                 var index = 0;
@@ -76,19 +76,19 @@ namespace Z0
                 dst.TermCode = Enums.Parse(fields[index++], ExtractTermCode.None);
                 dst.Uri = ApiUriParser.Service.Parse(fields[index++]).Require();
                 dst.OpSig = fields[index++];
-                dst.Data = new X86Code(dst.Address, Parsers.hex(true).ParseData(fields[index++], sys.empty<byte>()));
+                dst.Data = new BasedCodeBlock(dst.Address, Parsers.hex(true).ParseData(fields[index++], sys.empty<byte>()));
                 return ParseResult.Success(src, dst);
             }
             catch(Exception e)
             {
-                return ParseResult.Fail<MemberParseRow>(src, e);
+                return ParseResult.Fail<ApiParseRow>(src, e);
             }
         }
 
-        public MemberParseReport(){}
+        public ApiParseReport(){}
 
         [MethodImpl(Inline)]
-        internal MemberParseReport(ApiHostUri host, params MemberParseRow[] src)
+        internal ApiParseReport(ApiHostUri host, params ApiParseRow[] src)
             : base(src)
         {
             ApiHost = host;

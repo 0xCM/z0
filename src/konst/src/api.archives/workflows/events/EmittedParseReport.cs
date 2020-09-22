@@ -20,12 +20,12 @@ namespace Z0.Asm
 
         public string ActorName {get;}
 
-        public readonly MemberParseReport Report;
+        public readonly ApiParseReport Report;
 
         public readonly FilePath Target;
 
         [MethodImpl(Inline)]
-        public EmittedParseReport(string actor, MemberParseReport report, FilePath dst, CorrelationToken ct)
+        public EmittedParseReport(string actor, ApiParseReport report, FilePath dst, CorrelationToken ct)
         {
             EventId = evid(EventName, ct);
             ActorName = actor;

@@ -47,7 +47,7 @@ namespace Z0
 
         public void Run()
         {
-            Emitted = EncodedX86.save(Source.Storage.Map(x => new X86ApiCode(x.Uri, x.Address, x.Encoded)), Target);
+            Emitted = EncodedX86.save(Source.Storage.Map(x => new ApiHex(x.Uri, x.Address, x.Encoded)), Target);
             Event = new ApiHexTableSaved(Host.Id, Uri, Emitted, Target, Wf.Ct);
             Wf.Raise(Event);
         }

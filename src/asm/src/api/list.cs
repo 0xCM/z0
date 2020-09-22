@@ -15,7 +15,7 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmFxList list(Instruction[] src, X86Code data)
+        public static AsmFxList list(Instruction[] src, BasedCodeBlock data)
             => new AsmFxList(src, data);
     }
 }

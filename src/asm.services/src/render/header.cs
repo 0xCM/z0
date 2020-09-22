@@ -18,7 +18,7 @@ namespace Z0.Asm
         /// <param name="src">The source bits</param>
 
         [MethodImpl(Inline), Op]
-        public static string header(X86Code src, OpIdentity id)
+        public static string header(BasedCodeBlock src, OpIdentity id)
             => comment(new ByteSpanProperty(id.ToPropertyName(), src).Format());
 
         /// <summary>
@@ -33,9 +33,9 @@ namespace Z0.Asm
             lines.Add(comment($"{src.OpSig}, {src.Uri}"));
 
             if(config.EmitFunctionHeaderEncoding)
-                lines.Add(AsmRender.header(src.Code.Encoded, src.OpId));
+                lines.Add(AsmRender.header(src.Code.Code, src.OpId));
             else
-                lines.Add(comment(src.Code.OpUri.OpId));
+                lines.Add(comment(src.Code.Uri.OpId));
 
             if(config.EmitBaseAddress)
                 lines.Add(comment(text.concat("Base", text.spaced(Chars.Eq), src.Code.Base)));

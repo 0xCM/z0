@@ -9,26 +9,26 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct MemberExtractRows
+    public readonly struct ApiExtractRows
     {
-        readonly MemberExtractRow[] Data;
+        readonly ApiExtractRow[] Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator MemberExtractRow[](MemberExtractRows src)
+        public static implicit operator ApiExtractRow[](ApiExtractRows src)
             => src.Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator MemberExtractRows(MemberExtractRow[] src)
-            => new MemberExtractRows(src);
+        public static implicit operator ApiExtractRows(ApiExtractRow[] src)
+            => new ApiExtractRows(src);
 
         [MethodImpl(Inline)]
-        public MemberExtractRows(MemberExtractRow[] data)
+        public ApiExtractRows(ApiExtractRow[] data)
             => Data = data;
 
         public int Length
             => Data.Length;
 
-        public ref readonly MemberExtractRow this[int index]
+        public ref readonly ApiExtractRow this[int index]
         {
             [MethodImpl(Inline)]
             get =>  ref Data[index];

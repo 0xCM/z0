@@ -54,16 +54,16 @@ namespace Z0
             return dstLen <= 0 ? src.Length : dstLen;
         }
 
-        X86Code Locate(MemoryAddress address, byte[] src, int cut = 0)
+        BasedCodeBlock Locate(MemoryAddress address, byte[] src, int cut = 0)
         {
             if(cut == 0)
-                return new X86Code(address, src);
+                return new BasedCodeBlock(address, src);
             else
             {
                 Span<byte> data = src;
                 var len = CalcLength(data, cut, 0xC3);
                 var keep = data.Slice(0, len);
-                return new X86Code(address, keep.ToArray());
+                return new BasedCodeBlock(address, keep.ToArray());
             }
         }
 

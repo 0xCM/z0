@@ -38,8 +38,5 @@ namespace Z0.Asm
 
         public static Option<AsmInstructions> decode(ApiHex src)
             => Capture.DefaultDecoder.Decode(src);
-
-        public static Option<AsmFxList> decode(X86ApiCode src)
-            => Capture.DefaultDecoder.Decode(src.Encoded);
     }
 }

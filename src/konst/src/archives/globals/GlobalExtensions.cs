@@ -29,7 +29,7 @@ namespace Z0
 
         public static FileExt Exe => ext(exe);
 
-        public static FileExt H => ext(h);
+        public static FileExt Hex => ext(hex);
 
         public static FileExt Lib => ext(lib);
 

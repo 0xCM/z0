@@ -9,14 +9,14 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ApiHostHexIndex
+    public readonly struct ApiHostCodeIndex
     {
         public readonly ApiHostUri Host;
 
         public readonly ApiHex[] Code;
 
         [MethodImpl(Inline)]
-        public ApiHostHexIndex(ApiHostUri host, ApiHex[] code)
+        public ApiHostCodeIndex(ApiHostUri host, ApiHex[] code)
         {
             z.insist(host.IsNonEmpty, $"Empty host uri");
             Host = host;
@@ -36,13 +36,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ApiHostHexIndex(ApiHex[] code)
+        public ApiHostCodeIndex(ApiHex[] code)
         {
             Host = ApiHostUri.Empty;
             Code = code;
         }
 
-        public static ApiHostHexIndex Empty
-            => new ApiHostHexIndex(sys.empty<ApiHex>());
+        public static ApiHostCodeIndex Empty
+            => new ApiHostCodeIndex(sys.empty<ApiHex>());
     }
 }

@@ -11,6 +11,8 @@ namespace Z0
 
     using static Konst;
 
+    using api = ApiArchives;
+
     public readonly struct ApiHexArchive
     {
         readonly FolderPath ArchiveRoot;
@@ -24,7 +26,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public ApiHexArchive(IWfShell wf)
         {
-            ArchiveRoot = wf.ArchiveRoot;
+            ArchiveRoot = FolderPath.Define((wf.CaptureRoot + FS.folder("code")).Name);
+        }
+
+        public FS.FolderPath Root
+        {
+            [MethodImpl(Inline)]
+            get => FS.dir(ArchiveRoot.Name);
         }
 
         /// <summary>
@@ -36,6 +44,12 @@ namespace Z0
             var path = files(ArchiveRoot).Where(f => f.FileName == hfn).FirstOrDefault(FilePath.Empty);
             return read(path);
         }
+
+        public ApiHex[] Read(FS.FilePath src)
+            => ApiHexReader.read(src).Where(x => x.IsNonEmpty);
+
+        public ListedFiles List()
+            => FS.dir(ArchiveRoot.Name).Files(GlobalExtensions.Hex);
 
         /// <summary>
         /// Enumerates the archived files
@@ -49,7 +63,7 @@ namespace Z0
         public IEnumerable<FilePath> Files(PartId owner)
             => ArchiveRoot.Files(owner, FileExtensions.HexLine, true);
 
-        public IEnumerable<ApiHostHexIndex> Indices(params PartId[] owners)
+        public IEnumerable<ApiHostCodeIndex> Indices(params PartId[] owners)
         {
             if(owners.Length != 0)
             {
@@ -76,7 +90,17 @@ namespace Z0
         /// Enumerates the content of all archived files
         /// </summary>
         public IEnumerable<ApiHex> Read()
-            => Read(_ => true);
+        {
+            var list = List();
+            var iCount = list.Count;
+            for(var i=0; i<iCount; i++)
+            {
+                var path = list[i].Path;
+                var items = api.hex(path);
+                var jCount = items.Length;
+                for(var j=0; j<jCount; j++)
+                    yield return items[j];            }
+        }
 
         /// <summary>
         /// Enumerates the content of archived files owned by a specified part
@@ -116,12 +140,12 @@ namespace Z0
         public ApiHex[] Read(OpIdentity id)
             => Read(ArchiveRoot + FileName.define(id, FileExtensions.HexLine));
 
-        public ApiHostHexIndex Index(FilePath src)
+        public ApiHostCodeIndex Index(FilePath src)
         {
             var uri = ApiUriParser.host(src.FileName);
             if(uri.Failed || uri.Value.IsEmpty)
             {
-                return ApiHostHexIndex.Empty;
+                return ApiHostCodeIndex.Empty;
             }
 
             var dst = z.list<ApiHex>();

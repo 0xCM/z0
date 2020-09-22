@@ -70,7 +70,7 @@ namespace Z0
                     continue;
                 }
 
-                seek(dst, i) = asm.summarize(@base, instruction, src.Code.Encoded, instruction.FormattedInstruction, offset);
+                seek(dst, i) = asm.summarize(@base, instruction, src.Code.Code, instruction.FormattedInstruction, offset);
                 offset += size;
             }
             return dst;

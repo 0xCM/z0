@@ -14,11 +14,11 @@ namespace Z0
 
     public class CaptureIndexBuilder : IDisposable
     {
-        readonly Dictionary<MemoryAddress,X86ApiCode> CodeAddress;
+        readonly Dictionary<MemoryAddress,ApiHex> CodeAddress;
 
         readonly Dictionary<MemoryAddress,OpUri> UriAddress;
 
-        readonly Dictionary<OpUri,X86ApiCode> Locations;
+        readonly Dictionary<OpUri,ApiHex> Locations;
 
         readonly IWfShell Wf;
 
@@ -37,7 +37,7 @@ namespace Z0
             {
                 ref readonly var path = ref skip(files,i);
 
-                var result = MemberParseReport.load(path);
+                var result = ApiParseReport.load(path);
                 if(result)
                 {
                     index(wf, host, result.Value, builder);
@@ -54,18 +54,18 @@ namespace Z0
             return builder.Index;
         }
 
-        static void index(IWfShell wf, WfHost host, in MemberParseRow src, CaptureIndexBuilder dst)
+        static void index(IWfShell wf, WfHost host, in ApiParseRow src, CaptureIndexBuilder dst)
         {
             if(src.Address.IsEmpty)
                 return;
 
-            var code = new X86ApiCode(src.Uri, src.Data);
+            var code = new ApiHex(src.Uri, src.Data);
             var inclusion = dst.Include(code);
             if(inclusion.Any(x => x == false))
                 wf.Warn(host, $"Duplicate | {src.Uri.Format()}");
         }
 
-        static void index(IWfShell wf, WfHost host, ReadOnlySpan<MemberParseRow> src, CaptureIndexBuilder dst)
+        static void index(IWfShell wf, WfHost host, ReadOnlySpan<ApiParseRow> src, CaptureIndexBuilder dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
@@ -76,9 +76,9 @@ namespace Z0
         {
             Wf = wf;
             Host = host;
-            CodeAddress = dict<MemoryAddress,X86ApiCode>();
+            CodeAddress = dict<MemoryAddress,ApiHex>();
             UriAddress = dict<MemoryAddress,OpUri>();
-            Locations = dict<OpUri,X86ApiCode>();
+            Locations = dict<OpUri,ApiHex>();
         }
 
         public X86IndexStatus Status()
@@ -109,7 +109,7 @@ namespace Z0
         public uint MemberCount
             => (uint)CodeAddress.Keys.Count;
 
-        public KeyValuePairs<MemoryAddress,X86ApiCode> Encoded
+        public KeyValuePairs<MemoryAddress,ApiHex> Encoded
             => CodeAddress.ToKVPairs();
 
         public KeyValuePairs<MemoryAddress,OpUri> Located
@@ -125,7 +125,7 @@ namespace Z0
             var memories = Encoded;
             var locations = Located;
             var parts = Parts;
-            var code = CodeAddress.Values.Select(x => (x.OpUri.Host, Code: x))
+            var code = CodeAddress.Values.Select(x => (x.Uri.Host, Code: x))
                 .Array()
                 .GroupBy(g => g.Host)
                 .Select(x => (new X86HostCode(x.Key, x.Select(y => y.Code).ToArray()))).Array();
@@ -136,11 +136,11 @@ namespace Z0
                    new X86PartCodeIndex(parts, code.Select(x => (x.Host, x)).ToDictionary()));
         }
 
-        public Triple<bool> Include(in X86ApiCode src)
+        public Triple<bool> Include(in ApiHex src)
         {
             var a = CodeAddress.TryAdd(src.Base, src);
-            var b = UriAddress.TryAdd(src.Base, src.OpUri);
-            var c = Locations.TryAdd(src.OpUri, src);
+            var b = UriAddress.TryAdd(src.Base, src.Uri);
+            var c = Locations.TryAdd(src.Uri, src);
             return (a,b,c);
         }
     }

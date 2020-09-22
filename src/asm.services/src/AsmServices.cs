@@ -17,7 +17,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmRoutine routine(ApiCapture captured, AsmFxList src)
         {
-            var code = new X86ApiCode(captured.OpUri, captured.Parsed);
+            var code = new ApiHex(captured.OpUri, captured.Parsed);
             var sig = captured.Method.Signature().Format();
             return new AsmRoutine(captured.OpUri, sig, code, captured.TermCode, src);
         }
@@ -25,7 +25,7 @@ namespace Z0.Asm
         [MethodImpl(Inline), Op]
         public static AsmRoutine routine(ApiMemberHex member, AsmInstructions asm)
         {
-            var code = new X86ApiCode(member.OpUri, member.Encoded);
+            var code = new ApiHex(member.OpUri, member.Encoded);
             var sig = member.Method.Signature().Format();
             return new AsmRoutine(member.OpUri, sig, code, member.TermCode, new AsmFxList(asm, member.Encoded));
         }
@@ -55,14 +55,14 @@ namespace Z0.Asm
                 var instruction = src[i];
                 if(check)
                     CheckInstructionSize(instruction, offset, src);
-                info[i] = asm.summarize(@base, instruction, src.Encoded.Encoded, instruction.FormattedInstruction, offset);
+                info[i] = asm.summarize(@base, instruction, src.Encoded.Code, instruction.FormattedInstruction, offset);
                 offset += (uint)instruction.ByteLength;
             }
 
             if(check)
                 CheckBlockLength(src);
 
-            var instructions = asm.list(src.Decoded, src.Encoded.Encoded);
+            var instructions = asm.list(src.Decoded, src.Encoded.Code);
             return new AsmRoutine(uri, sig, src.Encoded, src.TermCode, instructions);
         }
     }

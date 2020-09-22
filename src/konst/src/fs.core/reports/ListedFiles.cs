@@ -8,10 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     public readonly struct ListedFiles
     {
-        public readonly TableSpan<ListedFile> Data;
+        readonly TableSpan<ListedFile> Data;
 
         [MethodImpl(Inline)]
         public ListedFiles(ListedFile[] src)
@@ -43,6 +44,12 @@ namespace Z0
             get => Data.Edit;
         }
 
+        public ListedFile[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
         public ref ListedFile this[ulong index]
         {
             [MethodImpl(Inline)]
@@ -59,6 +66,20 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ref Data.First;
+        }
+
+        public void Save(Z0.FilePath dst)
+        {
+            var records = View;
+            var count = records.Length;
+            var header = Table.header<ListedFileField>();
+            using var writer = dst.Writer();
+            writer.WriteLine(header.HeaderText);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var record = ref skip(records,i);
+                writer.WriteLine(Archives.format(record));
+            }
         }
     }
 }

@@ -108,7 +108,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         AsmFxList ToList(AsmInstructions src)
-            => asm.list(src, new X86Code(BaseAddress, src.Encoded));
+            => asm.list(src, new BasedCodeBlock(BaseAddress, src.Encoded));
 
         void RunPipe(ReadOnlySpan<ApiHex> src, StreamWriter log)
         {

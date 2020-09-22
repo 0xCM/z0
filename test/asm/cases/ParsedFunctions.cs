@@ -12,14 +12,14 @@ namespace Z0
 
     public interface IAsmFunctionCases : IBinaryResourceIndex
     {
-        X86Code Case(ApiKeyId k, params NumericKind[] kinds)
+        BasedCodeBlock Case(ApiKeyId k, params NumericKind[] kinds)
         {
             var id = ApiIdentity.NumericOp(k, kinds).ToPropertyName();
             var resource = TryFind(id);
             if(!resource)
                 throw new KeyNotFoundException(id);
 
-            return new X86Code(MemoryAddress.Empty, resource.Require().Data.ToArray());
+            return new BasedCodeBlock(MemoryAddress.Empty, resource.Require().Data.ToArray());
         }
     }
 

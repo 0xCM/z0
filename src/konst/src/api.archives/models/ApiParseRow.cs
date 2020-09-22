@@ -5,16 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
     using static z;
 
-    using F = MemberParseField;
-    using R = MemberParseRow;
+    using F = ApiParseField;
+    using R = ApiParseRow;
 
-    public enum MemberParseField : uint
+    public enum ApiParseField : uint
     {
         Seq = 0 | 12 << 16,
 
@@ -33,7 +31,7 @@ namespace Z0
         Data = 7 | 1 << 16
     }
 
-    public struct MemberParseRow : ITabular<F,R>
+    public struct ApiParseRow : ITabular<F,R>
     {
         public const int FieldCount = 8;
 
@@ -51,10 +49,10 @@ namespace Z0
 
         public string OpSig;
 
-        public X86Code Data;
+        public BasedCodeBlock Data;
 
-        public MemberParseRow(int Seq, int SourceSequence, MemoryAddress Address, int Length,
-            ExtractTermCode TermCode, OpUri Uri, string OpSig, X86Code Data)
+        public ApiParseRow(int Seq, int SourceSequence, MemoryAddress Address, int Length,
+            ExtractTermCode TermCode, OpUri Uri, string OpSig, BasedCodeBlock Data)
         {
             this.Seq = Seq;
             this.SourceSeq = SourceSequence;

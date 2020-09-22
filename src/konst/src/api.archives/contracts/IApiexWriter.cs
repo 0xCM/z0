@@ -14,9 +14,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="idpad">The padding amount</param>
-        void Write(X86ApiCode src, int idpad = 60);
-
         void Write(ApiHex src, int idpad = 60);
+
 
     }
 

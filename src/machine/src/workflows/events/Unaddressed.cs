@@ -17,10 +17,10 @@ namespace Z0
 
         public readonly OpUri Uri;
 
-        public readonly X86Code Code;
+        public readonly BasedCodeBlock Code;
 
         [MethodImpl(Inline)]
-        public Unaddressed(OpUri uri, X86Code code, CorrelationToken ct)
+        public Unaddressed(OpUri uri, BasedCodeBlock code, CorrelationToken ct)
         {
             EventId = WfEventId.define(nameof(Unaddressed), ct);
             Uri = uri;

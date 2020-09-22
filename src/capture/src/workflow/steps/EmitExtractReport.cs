@@ -23,9 +23,9 @@ namespace Z0
 
         readonly FS.FilePath Target;
 
-        MemberExtractReport Artifact;
+        ApiExtractReport Artifact;
 
-        public MemberExtractReport Report
+        public ApiExtractReport Report
             => Artifact;
 
         [MethodImpl(Inline)]
@@ -49,7 +49,7 @@ namespace Z0
         {
             try
             {
-                Artifact = MemberExtractReport.Create(Uri, Source);
+                Artifact = ApiExtractReport.Create(Uri, Source);
                 Wf.Raise(new ExtractReportCreated(Host, Uri, Artifact.RecordCount, Wf.Ct));
                 var result = Report.Save(FilePath.Define(Target.Name));
                 if(result)

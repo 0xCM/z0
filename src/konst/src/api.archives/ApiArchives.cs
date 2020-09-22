@@ -15,7 +15,6 @@ namespace Z0
     [ApiHost]
     public readonly struct ApiArchives
     {
-
         public static Dictionary<PartId,PartFile[]> index(PartFileClass kind, PartFiles src, params PartId[] parts)
         {
             switch(kind)
@@ -26,6 +25,11 @@ namespace Z0
                     return dict<PartId,PartFile[]>();
             }
         }
+
+        public static ApiHex[] hex(FS.FilePath src)
+            => from line in src.ReadLines().Select(ApiHexParser.row)
+                where line.IsSome()
+                select line.Value;
 
         static Dictionary<PartId,PartFile[]> select(PartFileClass kind, FS.Files src, PartId[] parts)
         {

@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct EncodedX86
     {
-        public static ApiHexRow[] save(ReadOnlySpan<X86ApiCode> src, FS.FilePath dst, bool append = false)
+        public static ApiHexRow[] save(ReadOnlySpan<ApiHex> src, FS.FilePath dst, bool append = false)
         {
             var formatter = Table.rowformatter<ApiHexRow>(X86TableWidths);
             var count = src.Length;

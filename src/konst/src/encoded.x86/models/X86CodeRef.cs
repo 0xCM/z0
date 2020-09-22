@@ -12,7 +12,7 @@ namespace Z0.Asm
     using static z;
 
     public readonly struct X86CodeRef
-    {                
+    {
         [MethodImpl(Inline)]
         public static unsafe X86CodeRef create(MemoryAddress @base, ref byte src, ByteSize size)
             => new X86CodeRef(@base, new Ref<byte>(gptr(src), size));
@@ -50,9 +50,9 @@ namespace Z0.Asm
             get => Ref.Buffer;
         }
 
-        public X86Code Dereference()
-            => new X86Code(Ref.Address, Ref.Buffer.ToArray());
-        
+        public BasedCodeBlock Dereference()
+            => new BasedCodeBlock(Ref.Address, Ref.Buffer.ToArray());
+
         public uint Size
         {
             [MethodImpl(Inline)]

@@ -112,7 +112,7 @@ namespace Z0
             if(ParsedMembers.Count == 0)
                 return;
 
-            using var step = new EmitParsedReport(State, host, HostUri, ParsedMembers, ParsedPath);
+            using var step = new EmitApiParseReport(Wf, host, HostUri, ParsedMembers, ParsedPath);
             step.Run();
         }
 

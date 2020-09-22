@@ -15,7 +15,7 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline)]
-        public static ApiRoutine routine(MemoryAddress @base, X86ApiCode uriCode, Instruction[] src)
+        public static ApiRoutine routine(MemoryAddress @base, ApiHex uriCode, Instruction[] src)
             => new ApiRoutine(@base, ApiInstruction.map(uriCode, src));
     }
 }

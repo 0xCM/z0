@@ -76,14 +76,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void Process(in X86ApiCode src)
+        void Process(in ApiHex src)
         {
-            var decoded = Decoder.Decode(src.Encoded);
+            var decoded = Decoder.Decode(src.Code);
             if(decoded)
-                Process(src.Encoded, decoded.Value);
+                Process(src.Code, decoded.Value);
         }
 
-        void Process(in MemberParseRow src)
+        void Process(in ApiParseRow src)
         {
             var instructions = Decoder.Decode(src.Data);
             if(instructions)
@@ -103,7 +103,7 @@ namespace Z0
             return asm.sets(sets);
         }
 
-        void Process(in X86Code code, in AsmFxList asm)
+        void Process(in BasedCodeBlock code, in AsmFxList asm)
         {
             var data = code.Data;
             var bytes = data.ToReadOnlySpan();

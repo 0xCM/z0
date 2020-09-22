@@ -14,14 +14,14 @@ namespace Z0.Asm
     /// </summary>
     public readonly struct ApiInstruction : IAsmInstruction<ApiInstruction>
     {
-        public X86ApiCode Encoded {get;}
+        public ApiHex Encoded {get;}
 
         public Instruction Instruction {get;}
 
         public MemoryAddress Base {get;}
 
         public OpUri OpUri
-            => Encoded.OpUri;
+            => Encoded.Uri;
 
         public OpIdentity OpId
             => OpUri.OpId;
@@ -48,10 +48,10 @@ namespace Z0.Asm
             => Instruction.ByteLength;
 
         [MethodImpl(Inline)]
-        public static ApiInstruction define(MemoryAddress @base, Instruction fx, X86ApiCode encoded)
+        public static ApiInstruction define(MemoryAddress @base, Instruction fx, ApiHex encoded)
             => new ApiInstruction(@base, fx, encoded);
 
-        public static ApiInstruction[] map(X86ApiCode code, Instruction[] src)
+        public static ApiInstruction[] map(ApiHex code, Instruction[] src)
         {
             var @base = code.Base;
             var offseq = OffsetSequence.Zero;
@@ -61,9 +61,9 @@ namespace Z0.Asm
             for(ushort i=0; i<count; i++)
             {
                 var fx = src[i];
-                var data = z.span(code.Encoded.Data);
+                var data = z.span(code.Code.Data);
                 var slice = data.Slice((int)offseq.Offset, fx.ByteLength).ToArray();
-                var recoded = new X86ApiCode(code.OpUri, fx.IP, slice);
+                var recoded = new ApiHex(code.Uri, fx.IP, slice);
                 dst[i] = define(@base, fx, recoded);
                 offseq = offseq.AccrueOffset((uint)fx.ByteLength);
             }
@@ -71,7 +71,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public ApiInstruction(MemoryAddress @base, Instruction fx, X86ApiCode encoded)
+        public ApiInstruction(MemoryAddress @base, Instruction fx, ApiHex encoded)
         {
             Base = @base;
             Instruction = fx;

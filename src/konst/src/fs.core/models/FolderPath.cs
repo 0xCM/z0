@@ -90,15 +90,21 @@ namespace Z0
                 ? Directory.EnumerateDirectories(Name, SearchAll, option(recurse)).Map(x => FS.dir(x))
                 : sys.empty<FolderPath>();
 
-            // public FolderPath Clear(bool recurse = false)
-            // {
-            //     if(Directory.Exists(Name))
-            //     {
-            //         foreach(var f in Files(recurse))
-            //             f.Delete();
-            //     }
-            //     return this;
-            // }
+            /// <summary>
+            /// Nonrecursively enumerates part-owned folder files
+            /// </summary>
+            /// <param name="part">The owning part</param>
+            /// <param name="ext">The extension to match</param>
+            public FilePath[] Files(PartId part, FileExt ext)
+                => Files(ext).Where(f => f.OwnedBy(part));
+
+            /// <summary>
+            /// Nonrecursively enumerates host-owned folder files
+            /// </summary>
+            /// <param name="part">The owning part</param>
+            /// <param name="ext">The extension to match</param>
+            public FilePath[] Files(ApiHostUri host, FileExt ext)
+                => Files(ext).Where(f => f.HostedBy(host));
 
             /// <summary>
             /// Enumerates files in the folder, with optional recursion, that match a specified extension

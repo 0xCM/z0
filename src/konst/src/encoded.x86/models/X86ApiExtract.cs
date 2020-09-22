@@ -15,7 +15,7 @@ namespace Z0
     /// </summary>
     public readonly struct X86ApiExtract
     {
-        public readonly X86Code Encoded;
+        public readonly BasedCodeBlock Encoded;
 
         public readonly OpIdentity Id;
 
@@ -54,7 +54,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public X86ApiExtract(OpIdentity id, OpUri uri, ApiMember member, X86Code encoded)
+        public X86ApiExtract(OpIdentity id, OpUri uri, ApiMember member, BasedCodeBlock encoded)
         {
             Id = id;
             OpUri = uri;
@@ -63,7 +63,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public X86ApiExtract(ApiMember member, X86Code encoded)
+        public X86ApiExtract(ApiMember member, BasedCodeBlock encoded)
             : this(member.Id, member.OpUri, member, encoded)
             {
 
@@ -93,6 +93,6 @@ namespace Z0
             => Encoded.Equals(src.Encoded);
 
         public static X86ApiExtract Empty
-            => new X86ApiExtract(ApiMember.Empty, X86Code.Empty);
+            => new X86ApiExtract(ApiMember.Empty, BasedCodeBlock.Empty);
     }
 }

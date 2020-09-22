@@ -28,7 +28,7 @@ namespace Z0
         [Op]
         public static void format(ListedFiles src, StringBuilder dst)
         {
-            var records = span(src.Data);
+            var records = src.View;
             var count = records.Length;
             var header = Table.header<ListedFileField>();
             dst.AppendLine(header.HeaderText);

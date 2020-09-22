@@ -7,22 +7,22 @@ namespace Z0
     using System;
     using System.Linq;
 
-    using F = MemberExtractField;
-    using R = MemberExtractRow;
+    using F = ApiExtractField;
+    using R = ApiExtractRow;
 
-    using Report = MemberExtractReport;
+    using Report = ApiExtractReport;
 
-    public class MemberExtractReport : Report<Report,F,R>
+    public class ApiExtractReport : Report<Report,F,R>
     {
         /// <summary>
         /// Loads a saved extract report
         /// </summary>
         /// <param name="src">The report path</param>
-        public static MemberExtractReport Load(FilePath src)
+        public static ApiExtractReport Load(FilePath src)
         {
             var lines = src.ReadLines().Skip(1). Select(R.Parse).ToArray();
             if(lines.Length != 0)
-                return new MemberExtractReport(lines[0].Uri.Host, lines);
+                return new ApiExtractReport(lines[0].Uri.Host, lines);
             else
                 return Empty;
         }
@@ -35,11 +35,11 @@ namespace Z0
         public static Report Create(ApiHostUri host, X86ApiExtract[] src)
         {
             var count = src.Length;
-            var records = new MemberExtractRow[count];
+            var records = new ApiExtractRow[count];
             for(var i=0; i< count; i++)
             {
                 var op = src[i];
-                records[i] = new MemberExtractRow(
+                records[i] = new ApiExtractRow(
                     Sequence : i,
                     Address : op.Member.Address,
                     Length : op.Encoded.Length,
@@ -52,9 +52,9 @@ namespace Z0
             return new Report(host, records);
         }
 
-        public MemberExtractReport(){}
+        public ApiExtractReport(){}
 
-        internal MemberExtractReport(ApiHostUri host, R[] records)
+        internal ApiExtractReport(ApiHostUri host, R[] records)
             : base(records)
         {
             ApiHost = host;

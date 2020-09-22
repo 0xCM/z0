@@ -10,16 +10,16 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct X86DataFlow : IDataFlow<X86Code>
+    public readonly struct X86DataFlow : IDataFlow<BasedCodeBlock>
     {
         public readonly MemoryAddress Base;
 
-        public readonly X86Code Input;
+        public readonly BasedCodeBlock Input;
 
-        public readonly X86Code Output;
+        public readonly BasedCodeBlock Output;
 
         [MethodImpl(Inline)]
-        public X86DataFlow(MemoryAddress @base, X86Code input, X86Code output)
+        public X86DataFlow(MemoryAddress @base, BasedCodeBlock input, BasedCodeBlock output)
         {
             insist(@base, input.Base);
             insist(@base, output.Base);
@@ -32,12 +32,12 @@ namespace Z0
         public X86DataFlow(MemoryAddress @base, byte[] input, byte[] output)
         {
             Base = @base;
-            Input = new X86Code(@base, input);
-            Output = new X86Code(@base, output);
+            Input = new BasedCodeBlock(@base, input);
+            Output = new BasedCodeBlock(@base, output);
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator DataFlow<X86Code> (X86DataFlow src)
+        public static implicit operator DataFlow<BasedCodeBlock> (X86DataFlow src)
             => (src.Input,src.Output);
 
         public int Length
@@ -64,10 +64,10 @@ namespace Z0
             get => Output.IsNonEmpty;
         }
 
-        X86Code IArrow<X86Code, X86Code>.Source
+        BasedCodeBlock IArrow<BasedCodeBlock, BasedCodeBlock>.Source
             => Input;
 
-        X86Code IArrow<X86Code, X86Code>.Target
+        BasedCodeBlock IArrow<BasedCodeBlock, BasedCodeBlock>.Target
             => Output;
 
 

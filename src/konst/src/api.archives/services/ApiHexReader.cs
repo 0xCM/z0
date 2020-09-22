@@ -15,5 +15,11 @@ namespace Z0
             => from line in src.ReadLines().Select(ApiHexParser.row)
                 where line.IsSome()
                 select line.Value;
+
+        public static ApiHex[] read(FS.FilePath src)
+            => from line in src.ReadLines().Select(ApiHexParser.row)
+                where line.IsSome()
+                select line.Value;
+
     }
 }

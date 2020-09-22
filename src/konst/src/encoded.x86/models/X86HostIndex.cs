@@ -22,26 +22,26 @@ namespace Z0
         /// <summary>
         /// The host-owned code
         /// </summary>
-        readonly TableSpan<X86ApiCode> Data;
+        readonly TableSpan<ApiHex> Data;
 
         [MethodImpl(Inline)]
-        public X86HostIndex(ApiHostUri id, X86ApiCode[] code)
+        public X86HostIndex(ApiHostUri id, ApiHex[] code)
         {
             Host = id;
             Data = code.OrderBy(x => x.Base);
         }
 
         [MethodImpl(Inline)]
-        public ref readonly X86ApiCode Cell(ulong index)
+        public ref readonly ApiHex Cell(ulong index)
             => ref Data[index];
 
-        public ref readonly X86ApiCode this[long index]
+        public ref readonly ApiHex this[long index]
         {
              [MethodImpl(Inline)]
              get => ref Data[index];
         }
 
-        public ref readonly X86ApiCode this[ulong index]
+        public ref readonly ApiHex this[ulong index]
         {
              [MethodImpl(Inline)]
              get => ref Data[index];

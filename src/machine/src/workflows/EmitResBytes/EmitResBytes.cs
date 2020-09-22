@@ -64,7 +64,7 @@ namespace Z0
             Wf.Disposed(StepId);
         }
 
-        void Emit(ApiHostHexIndex src, FolderPath dst)
+        void Emit(ApiHostCodeIndex src, FolderPath dst)
         {
             var path = (dst + FolderName.Define("src")) + src.Host.FileName(FileExtensions.Cs);
             var resources = HostResources.from(src);

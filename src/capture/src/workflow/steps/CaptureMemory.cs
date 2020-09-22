@@ -79,7 +79,7 @@ namespace Z0.Asm
                     {
                         ref readonly var fx = ref skip(fxView, i);
                         var size = (byte)fx.ByteLength;
-                        var summary = asm.Summarize(src, fx, new X86Code(src + offset, slice(parsedView, offset, size).ToArray()), fx.FormattedInstruction, offset);
+                        var summary = asm.Summarize(src, fx, new BasedCodeBlock(src + offset, slice(parsedView, offset, size).ToArray()), fx.FormattedInstruction, offset);
                         seek(formatTarget,i) = Formatter.FormatInstruction(src,summary);
                         offset += size;
                     }

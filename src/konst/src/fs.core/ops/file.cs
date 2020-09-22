@@ -12,7 +12,7 @@ namespace Z0
     partial struct FS
     {
         [MethodImpl(Inline)]
-        public static FileName file(PartId part, FileExtension ext)
+        public static FileName file(PartId part, FileExt ext)
             => file(text.concat(part.Format()), ext);
 
         /// <summary>
@@ -36,11 +36,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static FileName file(PathPart name, string ext)
             => new FileName(name, FS.ext(ext));
-
-        [MethodImpl(Inline)]
-        public static FileName file(PartId owner, string hostname, FileExtension ext)
-            => file(text.concat(owner.Format(), Chars.Dot, hostname), ext);
-
 
         [MethodImpl(Inline)]
         public static FileName file(string name)

@@ -51,7 +51,7 @@ namespace Z0
         /// <summary>
         /// All indexed code
         /// </summary>
-        public X86ApiCode[] MemberCode
+        public ApiHex[] MemberCode
         {
             [MethodImpl(Inline)]
             get => Memories.Encoded;
@@ -76,18 +76,22 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public X86ApiCode Code(MemoryAddress location)
+        public ApiHex Code(MemoryAddress location)
             => Memories[location];
 
         [MethodImpl(Inline)]
         public X86HostIndex CodeSet(ApiHostUri id)
-            => EncodedX86.index(id, PartIndex[id]);
+        {
+            var y = PartIndex[id];
+            var x = EncodedX86.index(id, y);
+            return new X86HostIndex(id, x.Code);
+        }
 
         [MethodImpl(Inline)]
-        public ApiPartHexIndex CodeSet(PartId id)
+        public ApiPartCodeIndex CodeSet(PartId id)
             => EncodedX86.index(id, Hosts.Map(CodeSet));
 
-        public X86ApiCode this[MemoryAddress location]
+        public ApiHex this[MemoryAddress location]
         {
             [MethodImpl(Inline)]
             get => Code(location);
@@ -99,7 +103,7 @@ namespace Z0
             get => CodeSet(id);
         }
 
-        public ApiPartHexIndex this[PartId id]
+        public ApiPartCodeIndex this[PartId id]
         {
             [MethodImpl(Inline)]
             get => CodeSet(id);

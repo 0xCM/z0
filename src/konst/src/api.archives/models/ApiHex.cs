@@ -15,11 +15,6 @@ namespace Z0
     public readonly struct ApiHex : ITextual
     {
         /// <summary>
-        /// The code's base address
-        /// </summary>
-        public readonly MemoryAddress Base;
-
-        /// <summary>
         /// The operation uri
         /// </summary>
         public readonly OpUri Uri;
@@ -27,22 +22,44 @@ namespace Z0
         /// <summary>
         /// The encoded operation data
         /// </summary>
-        public readonly BinaryCode Code;
+        public readonly BasedCodeBlock Code;
 
         [MethodImpl(Inline)]
         public static implicit operator BinaryCode(ApiHex src)
             => src.Code;
 
         [MethodImpl(Inline)]
-        public static implicit operator X86Code(ApiHex src)
-            => new X86Code(src.Base, src.Code);
+        public static implicit operator BasedCodeBlock(ApiHex src)
+            => new BasedCodeBlock(src.Base, src.Code);
 
         [MethodImpl(Inline)]
         public ApiHex(MemoryAddress @base, OpUri uri, BinaryCode src)
         {
-            Base = @base;
             Uri = uri;
-            Code = src;
+            Code = new BasedCodeBlock(@base,src);
+        }
+
+        [MethodImpl(Inline)]
+        public ApiHex(OpUri uri, MemoryAddress @base, BinaryCode src)
+        {
+            Uri = uri;
+            Code = new BasedCodeBlock(@base,src);
+        }
+
+        [MethodImpl(Inline)]
+        public ApiHex(OpUri uri, BasedCodeBlock code)
+        {
+            Code = code;
+            Uri = uri;
+        }
+
+        /// <summary>
+        /// The code's base address
+        /// </summary>
+        public MemoryAddress Base
+        {
+             [MethodImpl(Inline)]
+             get => Code.Base;
         }
 
         /// <summary>
@@ -76,6 +93,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Encoded.Data;
+        }
+
+        public uint Size
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Encoded.Length;
         }
 
         public int Length
@@ -129,6 +152,6 @@ namespace Z0
         /// No code, no identity, no life
         /// </summary>
         public static ApiHex Empty
-            => new ApiHex(MemoryAddress.Empty, OpUri.Empty, BinaryCode.Empty);
+            => default;
     }
 }

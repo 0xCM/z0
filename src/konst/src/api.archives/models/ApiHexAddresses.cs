@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    using KVP = KeyValuePairs<MemoryAddress,X86ApiCode>;
+    using KVP = KeyValuePairs<MemoryAddress,ApiHex>;
 
     public readonly struct ApiHexAddresses
     {
@@ -30,7 +30,7 @@ namespace Z0
             get => Data.Keys;
         }
 
-        public X86ApiCode[] Encoded
+        public ApiHex[] Encoded
         {
             [MethodImpl(Inline)]
             get => Data.Values;
@@ -42,7 +42,7 @@ namespace Z0
             get => (uint)Data.Count;
         }
 
-        public X86ApiCode this[MemoryAddress src]
+        public ApiHex this[MemoryAddress src]
         {
             [MethodImpl(Inline)]
             get => Data[src];

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using  api = Archives;
 
     /// <summary>
     /// Defines the fields in a <see  cref='ListedFile'/> table
@@ -22,7 +23,7 @@ namespace Z0
     /// <summary>
     /// Defines an entry in list of files
     /// </summary>
-    public readonly struct ListedFile
+    public readonly struct ListedFile : ITextual
     {
         public readonly uint Index;
 
@@ -49,5 +50,9 @@ namespace Z0
             Index = (uint)index;
             Path = path;
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => api.format(this);
     }
 }
