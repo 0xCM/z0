@@ -18,8 +18,8 @@ namespace Z0
         /// outcomes of successful parse operations and any unfortunate failures
         /// </summary>
         /// <param name="src">The source extracts</param>
-        ApiHexTable ParseMembers(ReadOnlySpan<X86ApiExtract> src);
+        ApiMemberCodeTable ParseMembers(ReadOnlySpan<X86ApiExtract> src);
 
-        Outcome<ApiMemberHex> ParseMember(in X86ApiExtract src, uint seq);
+        Outcome<ApiMemberCode> ParseMember(in X86ApiExtract src, uint seq);
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ApiHexIndex
     {
-        ApiHexAddresses Memories;
+        ApiPartAddresses Memories;
 
         ApiUriAddresses UriLocations;
 
@@ -22,7 +22,7 @@ namespace Z0
         public readonly PartId[] Parts;
 
         [MethodImpl(Inline)]
-        public ApiHexIndex(PartId[] parts, ApiHexAddresses members, ApiUriAddresses memuri, X86PartCodeIndex code)
+        public ApiHexIndex(PartId[] parts, ApiPartAddresses members, ApiUriAddresses memuri, X86PartCodeIndex code)
         {
             Parts = parts;
             Memories = members;
@@ -51,7 +51,7 @@ namespace Z0
         /// <summary>
         /// All indexed code
         /// </summary>
-        public ApiHex[] MemberCode
+        public ApiCodeBlock[] MemberCode
         {
             [MethodImpl(Inline)]
             get => Memories.Encoded;
@@ -76,7 +76,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ApiHex Code(MemoryAddress location)
+        public ApiCodeBlock Code(MemoryAddress location)
             => Memories[location];
 
         [MethodImpl(Inline)]
@@ -91,7 +91,7 @@ namespace Z0
         public ApiPartCodeIndex CodeSet(PartId id)
             => EncodedX86.index(id, Hosts.Map(CodeSet));
 
-        public ApiHex this[MemoryAddress location]
+        public ApiCodeBlock this[MemoryAddress location]
         {
             [MethodImpl(Inline)]
             get => Code(location);

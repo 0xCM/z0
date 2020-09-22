@@ -54,7 +54,7 @@ namespace Z0
             term.error(e);
         }
 
-        UnaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiMemberHex code, UnaryOpClass<T> k)
+        UnaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiMemberCode code, UnaryOpClass<T> k)
             where T : unmanaged
         {
             var target = init<T>();
@@ -63,7 +63,7 @@ namespace Z0
             return Evaluate.compute(context, error);
         }
 
-        BinaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiMemberHex code, BinaryOpClass<T> k)
+        BinaryEvaluations<T> eval<T>(BufferTokens buffers, in ApiMemberCode code, BinaryOpClass<T> k)
             where T : unmanaged
         {
             var target = init<T>();
@@ -80,7 +80,7 @@ namespace Z0
         public void Notify(AppMsg msg)
             => Sink.NotifyConsole(msg);
 
-        public bit EvalFixedOperators(BufferTokens buffers, ApiMemberHex[] api)
+        public bit EvalFixedOperators(BufferTokens buffers, ApiMemberCode[] api)
         {
             for(var i=0; i<api.Length; i++)
                 EvalFixedOperator(buffers, api[i]);
@@ -101,7 +101,7 @@ namespace Z0
             return s1.Zip(s2).Select(a =>  Tuples.pair(a.First, a.Second)).ToArray();
         }
 
-        public bit EvalFixedOperator(BufferTokens buffers, in ApiMemberHex api)
+        public bit EvalFixedOperator(BufferTokens buffers, in ApiMemberCode api)
         {
             var nk = api.Method.ReturnType.NumericKind();
             var kid = api.Member.KindId;
@@ -141,7 +141,7 @@ namespace Z0
         HashSet<ApiKeyId> EvalSkip {get;}
             = new HashSet<ApiKeyId>(array(ApiKeyId.Inc));
 
-        void Analyze<T>(in ApiMemberHex api, in UnaryEvaluations<T> eval)
+        void Analyze<T>(in ApiMemberCode api, in UnaryEvaluations<T> eval)
             where T : unmanaged
         {
             if(EvalSkip.Contains(api.KindId))
@@ -172,7 +172,7 @@ namespace Z0
             }
         }
 
-       void Analyze<T>(in ApiMemberHex api, in BinaryEvaluations<T> eval)
+       void Analyze<T>(in ApiMemberCode api, in BinaryEvaluations<T> eval)
             where T : unmanaged
         {
             if(EvalSkip.Contains(api.KindId))
@@ -201,7 +201,7 @@ namespace Z0
             }
         }
 
-        public void Dispatch(BufferTokens buffers, in ApiMemberHex api, K.UnaryOpClass k)
+        public void Dispatch(BufferTokens buffers, in ApiMemberCode api, K.UnaryOpClass k)
         {
             var kid = api.Member.KindId;
             int count = 128;
@@ -253,7 +253,7 @@ namespace Z0
             }
         }
 
-        public void Dispatch(BufferTokens buffers, in ApiMemberHex api, BinaryOpClass k)
+        public void Dispatch(BufferTokens buffers, in ApiMemberCode api, BinaryOpClass k)
         {
             var kid = api.Member.KindId;
             int count = 128;
@@ -313,7 +313,7 @@ namespace Z0
         /// <param name="index">The index of the target buffer</param>
         /// <param name="src">The executable source that conforms to a fixed binary operator</param>
         /// <typeparam name="F">The operand type</typeparam>
-        FixedBinaryOp<F> LoadFixedinaryOp<F>(BufferTokens buffers, BufferSeqId index, ApiMemberHex src)
+        FixedBinaryOp<F> LoadFixedinaryOp<F>(BufferTokens buffers, BufferSeqId index, ApiMemberCode src)
             where F : unmanaged, IDataCell
                 => buffers[index].EmitFixedBinaryOp<F>(src.Encoded);
 
@@ -326,11 +326,11 @@ namespace Z0
         /// <param name="x">The first operand</param>
         /// <param name="y">The second operand</param>
         /// <typeparam name="F">The operand type</typeparam>
-        F ExecBinaryOp<F>(BufferTokens buffers, BufferSeqId index, ApiMemberHex src, F x, F y)
+        F ExecBinaryOp<F>(BufferTokens buffers, BufferSeqId index, ApiMemberCode src, F x, F y)
             where F : unmanaged, IDataCell
                 => LoadFixedinaryOp<F>(buffers, index, src)(x,y);
 
-        void Analyze(in Pairs<byte> src, in Triples<byte> dst, in ApiMemberHex api)
+        void Analyze(in Pairs<byte> src, in Triples<byte> dst, in ApiMemberCode api)
         {
             for(var i=0; i< 10; i++)
             {
@@ -342,7 +342,7 @@ namespace Z0
             }
         }
 
-        bit Dispatch(BufferTokens buffers, in Pairs<byte> src, in ApiMemberHex api)
+        bit Dispatch(BufferTokens buffers, in Pairs<byte> src, in ApiMemberCode api)
         {
 
             var dst = Evaluator(buffers).Eval(api, K.BinaryOp, src);
@@ -350,7 +350,7 @@ namespace Z0
             return 1;
         }
 
-        void Analyze(in Pairs<Cell8> src, in Triples<Cell8> dst, in ApiMemberHex api)
+        void Analyze(in Pairs<Cell8> src, in Triples<Cell8> dst, in ApiMemberCode api)
         {
             for(var i=0; i< 10; i++)
             {
@@ -362,7 +362,7 @@ namespace Z0
             }
         }
 
-        bit Dispatch(BufferTokens buffers, in Pairs<Cell8> src, in ApiMemberHex api)
+        bit Dispatch(BufferTokens buffers, in Pairs<Cell8> src, in ApiMemberCode api)
         {
 
             var dst = Evaluator(buffers).EvalFixed(api, K.BinaryOp, src);
@@ -370,7 +370,7 @@ namespace Z0
             return 1;
         }
 
-        bit Dispatch(BufferTokens buffers, in Pairs<Cell16> src, in ApiMemberHex api)
+        bit Dispatch(BufferTokens buffers, in Pairs<Cell16> src, in ApiMemberCode api)
         {
 
             var dst = Evaluator(buffers).EvalFixed(api, K.BinaryOp, src);
@@ -378,14 +378,14 @@ namespace Z0
             return 1;
         }
 
-        void Analyze<T>(in Pairs<T> src, in Triples<T> dst, in ApiMemberHex api)
+        void Analyze<T>(in Pairs<T> src, in Triples<T> dst, in ApiMemberCode api)
             where T : unmanaged
 
         {
 
         }
 
-        Triples<T> Dispatch<E,T>(BufferTokens buffers, in ApiMemberHex api, IOperational<E,T> k, in Pairs<T> src)
+        Triples<T> Dispatch<E,T>(BufferTokens buffers, in ApiMemberCode api, IOperational<E,T> k, in Pairs<T> src)
             where E : unmanaged, Enum
             where T : unmanaged
         {

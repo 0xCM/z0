@@ -42,7 +42,7 @@ namespace Z0
         public int DstCount
             => Target.Target.PointCount;
 
-        public ApiMemberHex ApiCode
+        public ApiMemberCode ApiCode
             => Context.ApiCode;
 
         public BufferTokens Buffers
@@ -51,7 +51,7 @@ namespace Z0
         public ApiMember Member
             => Context.Member;
 
-        public ApiHex ApiBits
+        public ApiCodeBlock ApiBits
             => Context.ApiBits;
     }
 }

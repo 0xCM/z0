@@ -14,7 +14,6 @@ namespace Z0
 
     using Uri = ApiDataUriPart;
 
-
     public struct ApiDataUri
     {
         Vector128<uint> Parts;

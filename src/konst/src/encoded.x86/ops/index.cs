@@ -12,7 +12,7 @@ namespace Z0
     partial struct EncodedX86
     {
         [MethodImpl(Inline), Op]
-        public static ApiHostCodeIndex index(ApiHostUri host, ApiHex[] code)
+        public static ApiHostCodeIndex index(ApiHostUri host, ApiCodeBlock[] code)
             => new ApiHostCodeIndex(host,code);
 
         [MethodImpl(Inline), Op]

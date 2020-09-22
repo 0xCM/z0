@@ -85,7 +85,7 @@ namespace Z0
             if(src.Address.IsEmpty)
                 return;
 
-            var code = new ApiHex(src.Uri, src.Data);
+            var code = new ApiCodeBlock(src.Uri, src.Data);
             var inclusion = dst.Include(code);
             if(inclusion.Any(x => x == false))
                 Wf.Warn(Host.Id, $"Duplicate | {src.Uri.Format()}");

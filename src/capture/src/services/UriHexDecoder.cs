@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     public readonly struct UriHexDecoder
     {
-        public static int decode(ReadOnlySpan<ApiHex> src, Span<AsmInstructions> dst)
+        public static int decode(ReadOnlySpan<ApiCodeBlock> src, Span<AsmInstructions> dst)
         {
             var decoder = Capture.Services.RoutineDecoder();
             var count = src.Length;
@@ -20,7 +20,7 @@ namespace Z0.Asm
             return count;
         }
 
-        public static AsmInstructions[] decode(ReadOnlySpan<ApiHex> src)
+        public static AsmInstructions[] decode(ReadOnlySpan<ApiCodeBlock> src)
         {
             var count = src.Length;
             var dst = alloc<AsmInstructions>(count);
@@ -28,7 +28,7 @@ namespace Z0.Asm
             return dst;
         }
 
-        public static AsmInstructions[] decode(params ApiHex[] src)
+        public static AsmInstructions[] decode(params ApiCodeBlock[] src)
         {
             var count = src.Length;
             var dst = alloc<AsmInstructions>(count);
@@ -36,7 +36,7 @@ namespace Z0.Asm
             return dst;
         }
 
-        public static Option<AsmInstructions> decode(ApiHex src)
+        public static Option<AsmInstructions> decode(ApiCodeBlock src)
             => Capture.DefaultDecoder.Decode(src);
     }
 }

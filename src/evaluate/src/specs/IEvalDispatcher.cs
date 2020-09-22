@@ -8,12 +8,12 @@ namespace Z0
 
     public interface IEvalDispatcher
     {
-        bit EvalFixedOperators(BufferTokens buffers, ApiMemberHex[] api);
+        bit EvalFixedOperators(BufferTokens buffers, ApiMemberCode[] api);
 
-        void Dispatch(BufferTokens buffers, in ApiMemberHex api, BinaryOpClass k);
+        void Dispatch(BufferTokens buffers, in ApiMemberCode api, BinaryOpClass k);
 
-        void Dispatch(BufferTokens buffers, in ApiMemberHex api, K.UnaryOpClass k);
+        void Dispatch(BufferTokens buffers, in ApiMemberCode api, K.UnaryOpClass k);
 
-        bit EvalFixedOperator(BufferTokens buffers, in ApiMemberHex api);
+        bit EvalFixedOperator(BufferTokens buffers, in ApiMemberCode api);
     }
 }

@@ -24,11 +24,11 @@ namespace Z0
 
         readonly ApiHostUri Uri;
 
-        readonly ApiHexTable Source;
+        readonly ApiMemberCodeTable Source;
 
         readonly FS.FilePath Target;
 
-        public EmitApiHexTable(IWfShell wf, WfHost host, ApiHostUri uri, ApiHexTable src)
+        public EmitApiHexTable(IWfShell wf, WfHost host, ApiHostUri uri, ApiMemberCodeTable src)
         {
             Wf = wf;
             Host = host;
@@ -47,7 +47,7 @@ namespace Z0
 
         public void Run()
         {
-            Emitted = EncodedX86.save(Source.Storage.Map(x => new ApiHex(x.Uri, x.Address, x.Encoded)), Target);
+            Emitted = EncodedX86.save(Source.Storage.Map(x => new ApiCodeBlock(x.Uri, x.Address, x.Encoded)), Target);
             Event = new ApiHexTableSaved(Host.Id, Uri, Emitted, Target, Wf.Ct);
             Wf.Raise(Event);
         }

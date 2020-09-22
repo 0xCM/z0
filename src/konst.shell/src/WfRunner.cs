@@ -64,7 +64,7 @@ namespace Z0
             Print(listing);
         }
 
-        void Summarize(ApiHex src)
+        void Summarize(ApiCodeBlock src)
         {
             Wf.Status(Id, src.OpUri);
         }

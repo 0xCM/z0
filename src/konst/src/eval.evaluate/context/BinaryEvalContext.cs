@@ -42,13 +42,13 @@ namespace Z0
         public BufferTokens Buffers
             => Context.Buffers;
 
-        public ApiMemberHex ApiCode
+        public ApiMemberCode ApiCode
             => Context.ApiCode;
 
         public ApiMember Member
             => Context.Member;
 
-        public ApiHex ApiBits
+        public ApiCodeBlock ApiBits
             => Context.ApiBits;
     }
 }

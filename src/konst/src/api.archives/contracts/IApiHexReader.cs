@@ -6,7 +6,7 @@ namespace Z0
 {
     public interface IApiHexReader : IArchiveReader
     {
-        ApiHex[] Read(FilePath src);
+        ApiCodeBlock[] Read(FilePath src);
     }
 
     public interface IApiHexReader<H> : IApiHexReader, IArchiveReader<H>

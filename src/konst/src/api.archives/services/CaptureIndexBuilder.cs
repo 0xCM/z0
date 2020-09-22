@@ -14,11 +14,11 @@ namespace Z0
 
     public class CaptureIndexBuilder : IDisposable
     {
-        readonly Dictionary<MemoryAddress,ApiHex> CodeAddress;
+        readonly Dictionary<MemoryAddress,ApiCodeBlock> CodeAddress;
 
         readonly Dictionary<MemoryAddress,OpUri> UriAddress;
 
-        readonly Dictionary<OpUri,ApiHex> Locations;
+        readonly Dictionary<OpUri,ApiCodeBlock> Locations;
 
         readonly IWfShell Wf;
 
@@ -59,7 +59,7 @@ namespace Z0
             if(src.Address.IsEmpty)
                 return;
 
-            var code = new ApiHex(src.Uri, src.Data);
+            var code = new ApiCodeBlock(src.Uri, src.Data);
             var inclusion = dst.Include(code);
             if(inclusion.Any(x => x == false))
                 wf.Warn(host, $"Duplicate | {src.Uri.Format()}");
@@ -76,9 +76,9 @@ namespace Z0
         {
             Wf = wf;
             Host = host;
-            CodeAddress = dict<MemoryAddress,ApiHex>();
+            CodeAddress = dict<MemoryAddress,ApiCodeBlock>();
             UriAddress = dict<MemoryAddress,OpUri>();
-            Locations = dict<OpUri,ApiHex>();
+            Locations = dict<OpUri,ApiCodeBlock>();
         }
 
         public X86IndexStatus Status()
@@ -88,7 +88,7 @@ namespace Z0
             dst.Hosts = Hosts;
             dst.Addresses = Addresses;
             dst.MemberCount = MemberCount;
-            dst.Encoded = new ApiHexAddresses(dst.Parts, Encoded);
+            dst.Encoded = new ApiPartAddresses(dst.Parts, Encoded);
             return dst;
         }
 
@@ -109,7 +109,7 @@ namespace Z0
         public uint MemberCount
             => (uint)CodeAddress.Keys.Count;
 
-        public KeyValuePairs<MemoryAddress,ApiHex> Encoded
+        public KeyValuePairs<MemoryAddress,ApiCodeBlock> Encoded
             => CodeAddress.ToKVPairs();
 
         public KeyValuePairs<MemoryAddress,OpUri> Located
@@ -131,12 +131,12 @@ namespace Z0
                 .Select(x => (new X86HostCode(x.Key, x.Select(y => y.Code).ToArray()))).Array();
 
             return new ApiHexIndex(parts,
-                   new ApiHexAddresses(parts, memories),
+                   new ApiPartAddresses(parts, memories),
                    new ApiUriAddresses(parts, locations),
                    new X86PartCodeIndex(parts, code.Select(x => (x.Host, x)).ToDictionary()));
         }
 
-        public Triple<bool> Include(in ApiHex src)
+        public Triple<bool> Include(in ApiCodeBlock src)
         {
             var a = CodeAddress.TryAdd(src.Base, src);
             var b = UriAddress.TryAdd(src.Base, src.Uri);

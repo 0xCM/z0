@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Pairs an api member with the executable code derived from that member
     /// </summary>
-    public readonly struct ApiMemberHex
+    public readonly struct ApiMemberCode
     {
         /// <summary>
         /// The extraction index
@@ -33,7 +33,7 @@ namespace Z0
         /// <summary>
         /// The encoded data
         /// </summary>
-        public readonly ApiHex Encoded;
+        public readonly ApiCodeBlock Encoded;
 
         public OpUri OpUri
         {
@@ -72,11 +72,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(ApiMemberHex src)
+        public static implicit operator BinaryCode(ApiMemberCode src)
             => src.Encoded.Encoded;
 
         [MethodImpl(Inline)]
-        public ApiMemberHex(ApiMember member, ApiHex code, uint seq = 0, ExtractTermCode term = 0)
+        public ApiMemberCode(ApiMember member, ApiCodeBlock code, uint seq = 0, ExtractTermCode term = 0)
         {
             Sequence = seq;
             Member = member;
@@ -85,11 +85,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ApiMemberHex(ApiMember member, BinaryCode code, uint seq = 0, ExtractTermCode term = 0)
+        public ApiMemberCode(ApiMember member, BinaryCode code, uint seq = 0, ExtractTermCode term = 0)
         {
             Sequence = seq;
             Member = member;
-            Encoded = new ApiHex(member.Address, member.OpUri, code);
+            Encoded = new ApiCodeBlock(member.Address, member.OpUri, code);
             TermCode = term;
         }
 
@@ -115,14 +115,14 @@ namespace Z0
              => Member.Method;
 
 
-        public bool Equals(ApiMemberHex src)
+        public bool Equals(ApiMemberCode src)
             => Encoded.Equals(src.Encoded);
 
         public override int GetHashCode()
             => Uri.GetHashCode();
 
         public override bool Equals(object src)
-            => src is ApiMemberHex m && Equals(m);
+            => src is ApiMemberCode m && Equals(m);
 
         public string Format(int uripad)
             => text.concat(Member.OpUri.Format().PadRight(uripad), Encoded.Format());
@@ -133,7 +133,7 @@ namespace Z0
         public override string ToString()
             => Format();
 
-        public static ApiMemberHex Empty
-            => new ApiMemberHex(ApiMember.Empty, BinaryCode.Empty);
+        public static ApiMemberCode Empty
+            => new ApiMemberCode(ApiMember.Empty, BinaryCode.Empty);
     }
 }

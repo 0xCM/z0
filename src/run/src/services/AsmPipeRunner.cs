@@ -110,7 +110,7 @@ namespace Z0.Asm
         AsmFxList ToList(AsmInstructions src)
             => asm.list(src, new BasedCodeBlock(BaseAddress, src.Encoded));
 
-        void RunPipe(ReadOnlySpan<ApiHex> src, StreamWriter log)
+        void RunPipe(ReadOnlySpan<ApiCodeBlock> src, StreamWriter log)
         {
             var t1 = asm.trigger(Mnemonic.Vinserti128, Handlers.OnVinserti128);
             var t2 = asm.trigger(Mnemonic.Vmovupd, Handlers.OnVmovupd);

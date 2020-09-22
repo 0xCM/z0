@@ -38,14 +38,14 @@ namespace Z0
         /// <summary>
         /// Reads the archived files owned by a specified host
         /// </summary>
-        public ApiHex[] Read(ApiHostUri host)
+        public ApiCodeBlock[] Read(ApiHostUri host)
         {
             var hfn = FileName.define(host.Owner, host.Name, FileExtensions.HexLine);
             var path = files(ArchiveRoot).Where(f => f.FileName == hfn).FirstOrDefault(FilePath.Empty);
             return read(path);
         }
 
-        public ApiHex[] Read(FS.FilePath src)
+        public ApiCodeBlock[] Read(FS.FilePath src)
             => ApiHexReader.read(src).Where(x => x.IsNonEmpty);
 
         public ListedFiles List()
@@ -89,7 +89,7 @@ namespace Z0
         /// <summary>
         /// Enumerates the content of all archived files
         /// </summary>
-        public IEnumerable<ApiHex> Read()
+        public IEnumerable<ApiCodeBlock> Read()
         {
             var list = List();
             var iCount = list.Count;
@@ -105,7 +105,7 @@ namespace Z0
         /// <summary>
         /// Enumerates the content of archived files owned by a specified part
         /// </summary>
-        public IEnumerable<ApiHex> Read(PartId owner)
+        public IEnumerable<ApiCodeBlock> Read(PartId owner)
         {
             foreach(var file in Files(owner))
             foreach(var item in Read(file))
@@ -116,7 +116,7 @@ namespace Z0
         /// <summary>
         /// Reads the archived files with names that satisfy a specified predicate
         /// </summary>
-        public IEnumerable<ApiHex> Read(Func<FileName,bool> predicate)
+        public IEnumerable<ApiCodeBlock> Read(Func<FileName,bool> predicate)
         {
             foreach(var file in Files().Where(f => predicate(f.FileName)))
             foreach(var item in Read(file))
@@ -130,14 +130,14 @@ namespace Z0
         /// Reads the code defined by a specified file
         /// </summary>
         /// <param name="src">The source path</param>
-        public ApiHex[] Read(FilePath src)
+        public ApiCodeBlock[] Read(FilePath src)
             => ApiHexReader.Service.Read(src);
 
         /// <summary>
         /// Reads the bits of an identified operation
         /// </summary>
         /// <param name="id">The source path</param>
-        public ApiHex[] Read(OpIdentity id)
+        public ApiCodeBlock[] Read(OpIdentity id)
             => Read(ArchiveRoot + FileName.define(id, FileExtensions.HexLine));
 
         public ApiHostCodeIndex Index(FilePath src)
@@ -148,7 +148,7 @@ namespace Z0
                 return ApiHostCodeIndex.Empty;
             }
 
-            var dst = z.list<ApiHex>();
+            var dst = z.list<ApiCodeBlock>();
             foreach(var item in read(src))
                 if(item.IsNonEmpty)
                     dst.Add(item);
@@ -159,7 +159,7 @@ namespace Z0
         static FilePath[] files(FolderPath root)
             => root.Files(FileExtensions.HexLine, true).Array();
 
-        static ApiHex[] read(FilePath src)
+        static ApiCodeBlock[] read(FilePath src)
             => ApiHexReader.Service.Read(src).Where(x => x.IsNonEmpty);
     }
 }

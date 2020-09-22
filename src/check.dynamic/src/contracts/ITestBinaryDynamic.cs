@@ -16,31 +16,31 @@ namespace Z0
     public interface ITestBinaryDynamic : TTestOperatorMatch, TCheckDynamic
     {
         [MethodImpl(Inline)]
-        TestCaseRecord Match(K k, TypeWidth w, ApiHex a, ApiHex b, BufferTokens dst)
+        TestCaseRecord Match(K k, TypeWidth w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
             => Test.Check((TTestFixedBinaryOp)this).Match(k,w,a,b,dst);
 
         [MethodImpl(Inline)]
-        TestCaseRecord Match(K k, W8 w, ApiHex a, ApiHex b, BufferTokens dst)
+        TestCaseRecord Match(K k, W8 w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
             => Test.Check((TTestFixedBinaryOp)this).Match(k,w,a,b,dst);
 
         [MethodImpl(Inline)]
-        TestCaseRecord Match(K k, W16 w, ApiHex a, ApiHex b, BufferTokens dst)
+        TestCaseRecord Match(K k, W16 w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
             => Test.Check((TTestFixedBinaryOp)this).Match(k,w,a,b,dst);
 
         [MethodImpl(Inline)]
-        TestCaseRecord Match(K k, W32 w, ApiHex a, ApiHex b, BufferTokens dst)
+        TestCaseRecord Match(K k, W32 w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
             => Test.Check((TTestFixedBinaryOp)this).Match(k,w,a,b,dst);
 
         [MethodImpl(Inline)]
-        TestCaseRecord Match(K k, W64 w, ApiHex a, ApiHex b, BufferTokens dst)
+        TestCaseRecord Match(K k, W64 w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
             => Test.Check((TTestFixedBinaryOp)this).Match(k,w,a,b,dst);
 
         [MethodImpl(Inline)]
-        TestCaseRecord Match(K k,  W128 w, ApiHex a, ApiHex b, BufferTokens dst)
+        TestCaseRecord Match(K k,  W128 w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
             => Test.Check((TTestFixedBinaryOp)this).Match(k,w,a,b,dst);
 
         [MethodImpl(Inline)]
-        TestCaseRecord Match(K k, W256 w, ApiHex a, ApiHex b, BufferTokens dst)
+        TestCaseRecord Match(K k, W256 w, ApiCodeBlock a, ApiCodeBlock b, BufferTokens dst)
             => Test.Check((TTestFixedBinaryOp)this).Match(k,w,a,b,dst);
     }
 }

@@ -76,7 +76,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void Process(in ApiHex src)
+        void Process(in ApiCodeBlock src)
         {
             var decoded = Decoder.Decode(src.Code);
             if(decoded)

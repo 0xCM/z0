@@ -10,34 +10,34 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Defines a sequence of <see cref='ApiMemberHex'/> records
+    /// Defines a sequence of <see cref='ApiMemberCode'/> records
     /// </summary>
     [ApiDataType]
-    public readonly struct ApiHexTable : ITableSpan<ApiMemberHex>
+    public readonly struct ApiMemberCodeTable : ITableSpan<ApiMemberCode>
     {
-        readonly TableSpan<ApiMemberHex> Data;
+        readonly TableSpan<ApiMemberCode> Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator ApiHexTable(ApiMemberHex[] src)
-            => new ApiHexTable(src);
+        public static implicit operator ApiMemberCodeTable(ApiMemberCode[] src)
+            => new ApiMemberCodeTable(src);
 
         [MethodImpl(Inline)]
-        public ApiHexTable(ApiMemberHex[] src)
+        public ApiMemberCodeTable(ApiMemberCode[] src)
             => Data = src;
 
-        public ReadOnlySpan<ApiMemberHex> View
+        public ReadOnlySpan<ApiMemberCode> View
         {
             [MethodImpl(Inline)]
             get => Data.View;
         }
 
-        public Span<ApiMemberHex> Edit
+        public Span<ApiMemberCode> Edit
         {
             [MethodImpl(Inline)]
             get => Data.Edit;
         }
 
-        public ref ApiMemberHex First
+        public ref ApiMemberCode First
         {
             [MethodImpl(Inline)]
             get => ref Data.First;
@@ -49,7 +49,7 @@ namespace Z0
             get => Data.Count;
         }
 
-        public ApiMemberHex[] Storage
+        public ApiMemberCode[] Storage
         {
             [MethodImpl(Inline)]
             get => Data;

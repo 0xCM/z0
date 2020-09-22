@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// The hex bits found at the end of a uri
     /// </summary>
-    public readonly struct ApiHex : ITextual
+    public readonly struct ApiCodeBlock : ITextual
     {
         /// <summary>
         /// The operation uri
@@ -25,29 +25,29 @@ namespace Z0
         public readonly BasedCodeBlock Code;
 
         [MethodImpl(Inline)]
-        public static implicit operator BinaryCode(ApiHex src)
+        public static implicit operator BinaryCode(ApiCodeBlock src)
             => src.Code;
 
         [MethodImpl(Inline)]
-        public static implicit operator BasedCodeBlock(ApiHex src)
+        public static implicit operator BasedCodeBlock(ApiCodeBlock src)
             => new BasedCodeBlock(src.Base, src.Code);
 
         [MethodImpl(Inline)]
-        public ApiHex(MemoryAddress @base, OpUri uri, BinaryCode src)
+        public ApiCodeBlock(MemoryAddress @base, OpUri uri, BinaryCode src)
         {
             Uri = uri;
             Code = new BasedCodeBlock(@base,src);
         }
 
         [MethodImpl(Inline)]
-        public ApiHex(OpUri uri, MemoryAddress @base, BinaryCode src)
+        public ApiCodeBlock(OpUri uri, MemoryAddress @base, BinaryCode src)
         {
             Uri = uri;
             Code = new BasedCodeBlock(@base,src);
         }
 
         [MethodImpl(Inline)]
-        public ApiHex(OpUri uri, BasedCodeBlock code)
+        public ApiCodeBlock(OpUri uri, BasedCodeBlock code)
         {
             Code = code;
             Uri = uri;
@@ -135,7 +135,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(ApiHex src)
+        public bool Equals(ApiCodeBlock src)
             => Encoded.Equals(src.Encoded);
 
         public string Format(int uripad)
@@ -151,7 +151,7 @@ namespace Z0
         /// <summary>
         /// No code, no identity, no life
         /// </summary>
-        public static ApiHex Empty
+        public static ApiCodeBlock Empty
             => default;
     }
 }

@@ -32,7 +32,7 @@ namespace Z0.Asm
         /// <summary>
         /// The function encoding
         /// </summary>
-        public ApiHex Code {get;}
+        public ApiCodeBlock Code {get;}
 
         /// <summary>
         /// The encoded instructions
@@ -45,7 +45,7 @@ namespace Z0.Asm
         public ExtractTermCode TermCode {get;}
 
         [MethodImpl(Inline)]
-        public AsmRoutine(OpUri uri, string sig, ApiHex code, ExtractTermCode term, AsmFxList instructions)
+        public AsmRoutine(OpUri uri, string sig, ApiCodeBlock code, ExtractTermCode term, AsmFxList instructions)
         {
             Uri = uri;
             OpId = uri.OpId;
@@ -80,6 +80,6 @@ namespace Z0.Asm
             => InstructionCount != 0;
 
         public static AsmRoutine Empty
-            => new AsmRoutine(OpUri.Empty, EmptyString, ApiHex.Empty, 0, AsmFxList.Empty);
+            => new AsmRoutine(OpUri.Empty, EmptyString, ApiCodeBlock.Empty, 0, AsmFxList.Empty);
     }
 }

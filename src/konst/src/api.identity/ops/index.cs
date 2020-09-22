@@ -53,7 +53,7 @@ namespace Z0
         }
 
         [Op]
-        public static ApiCodeIndex index(ApiMemberIndex members, OpIndex<ApiHex> code)
+        public static ApiCodeIndex index(ApiMemberIndex members, OpIndex<ApiCodeBlock> code)
             => ApiCodeIndex.create(members,code);
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         [Op]
-        public static OpIndex<ApiHex> index(IEnumerable<ApiHex> src)
+        public static OpIndex<ApiCodeBlock> index(IEnumerable<ApiCodeBlock> src)
             => index(src.Select(x => (x.OpUri.OpId, x)));
 
         static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

@@ -37,7 +37,7 @@ namespace Z0
             get => Data.Keys.ToArray();
         }
 
-        public TableSpan<ApiHex> this[ApiHostUri src]
+        public TableSpan<ApiCodeBlock> this[ApiHostUri src]
         {
             [MethodImpl(Inline)]
             get => Data[src].Code;

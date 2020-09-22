@@ -35,7 +35,7 @@ namespace Z0.Asm
         public Option<AsmFxList> Decode(BasedCodeBlock src)
             => Decode(src.Encoded, src.Base).TryMap(x => asm.list(x, src));
 
-        public Option<AsmInstructions> Decode(ApiHex src)
+        public Option<AsmInstructions> Decode(ApiCodeBlock src)
             => Decode(src.Encoded, src.Base);
 
         public Option<AsmRoutine> Decode(ApiCapture src, Action<Asm.Instruction> f)
@@ -107,13 +107,13 @@ namespace Z0.Asm
             }
         }
 
-        public Option<AsmFxList> Decode(ApiHex src, Action<Instruction> f)
+        public Option<AsmFxList> Decode(ApiCodeBlock src, Action<Instruction> f)
         {
             var x86 = new BasedCodeBlock(src.Base,src.Data);
             return Decode(x86,f);
         }
 
-        public Option<AsmRoutine> Decode(ApiMemberHex src)
+        public Option<AsmRoutine> Decode(ApiMemberCode src)
             => from i in Decode(src.Encoded) select AsmServices.routine(src,i);
 
         public bool Decode(ApiCapture src, out AsmRoutine dst)

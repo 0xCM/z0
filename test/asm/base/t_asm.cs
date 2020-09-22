@@ -46,7 +46,7 @@ namespace Z0.Asm
             return AsmServices.Services.AsmWriter(dst, AsmFormatConfig.DefaultStreamFormat);
         }
 
-        protected ApiHex[] ReadHostBits(ApiHostUri host)
+        protected ApiCodeBlock[] ReadHostBits(ApiHostUri host)
         {
             var paths = AppPaths.ForApp(PartId.Control);
             var root = paths.AppCaptureRoot;

@@ -23,7 +23,7 @@ namespace Z0.Asm
         /// Decodes a function from member capture data
         /// </summary>
         /// <param name="src">The source data</param>
-        Option<AsmRoutine> Decode(ApiMemberHex src);
+        Option<AsmRoutine> Decode(ApiMemberCode src);
 
         /// <summary>
         /// Decodes an instruction list
@@ -31,11 +31,11 @@ namespace Z0.Asm
         /// <param name="src">The code source</param>
         Option<AsmFxList> Decode(BasedCodeBlock src);
 
-        Option<AsmInstructions> Decode(ApiHex src);
+        Option<AsmInstructions> Decode(ApiCodeBlock src);
 
         Option<AsmRoutine> Decode(ApiCapture src, Action<Asm.Instruction> f);
 
-        Option<AsmFxList> Decode(ApiHex src, Action<Instruction> f);
+        Option<AsmFxList> Decode(ApiCodeBlock src, Action<Instruction> f);
 
         Option<AsmFxList> Decode(BasedCodeBlock src, Action<Instruction> f);
     }

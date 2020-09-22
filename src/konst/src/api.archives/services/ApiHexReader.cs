@@ -8,15 +8,15 @@ namespace Z0
     {
         public static IApiHexReader Service => default(ApiHexReader);
 
-        public ApiHex[] Read(FilePath src)
+        public ApiCodeBlock[] Read(FilePath src)
             => read(src);
 
-        public static ApiHex[] read(FilePath src)
+        public static ApiCodeBlock[] read(FilePath src)
             => from line in src.ReadLines().Select(ApiHexParser.row)
                 where line.IsSome()
                 select line.Value;
 
-        public static ApiHex[] read(FS.FilePath src)
+        public static ApiCodeBlock[] read(FS.FilePath src)
             => from line in src.ReadLines().Select(ApiHexParser.row)
                 where line.IsSome()
                 select line.Value;

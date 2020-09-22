@@ -92,7 +92,7 @@ namespace Z0
         //     }
         // }
 
-        public Outcome<ApiMemberHex> ParseMember(in X86ApiExtract src, uint seq)
+        public Outcome<ApiMemberCode> ParseMember(in X86ApiExtract src, uint seq)
         {
             try
             {
@@ -102,10 +102,10 @@ namespace Z0
                 if(term != ExtractTermCode.Fail)
                 {
                     var code = Locate(src.Encoded.Base, parser.Parsed, term == ExtractTermCode.CTC_Zx7 ? Zx7Cut : 0);
-                    return new ApiMemberHex(src.Member, new ApiHex(code.Base, src.OpUri, code), seq, term);
+                    return new ApiMemberCode(src.Member, new ApiCodeBlock(code.Base, src.OpUri, code), seq, term);
                 }
                 else
-                    return z.fail<ApiMemberHex>(term.ToString());
+                    return z.fail<ApiMemberCode>(term.ToString());
             }
             catch(Exception e)
             {
@@ -113,13 +113,13 @@ namespace Z0
             }
         }
 
-        public ApiHexTable ParseMembers(ReadOnlySpan<X86ApiExtract> src)
+        public ApiMemberCodeTable ParseMembers(ReadOnlySpan<X86ApiExtract> src)
         {
             var count = src.Length;
             if(count == 0)
                 return default;
 
-            var buffer = alloc<ApiMemberHex>(src.Length);
+            var buffer = alloc<ApiMemberCode>(src.Length);
             ref var dst = ref first(span(buffer));
             for(var i=0u; i<count; i++)
             {
@@ -127,7 +127,7 @@ namespace Z0
                 if(outcome)
                     seek(dst,i) = outcome.Data;
                 else
-                    seek(dst,i) = ApiMemberHex.Empty;
+                    seek(dst,i) = ApiMemberCode.Empty;
             }
             return buffer;
         }

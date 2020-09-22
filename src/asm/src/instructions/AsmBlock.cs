@@ -17,7 +17,7 @@ namespace Z0.Asm
         /// <summary>
         /// Encoded assembly
         /// </summary>
-        public readonly ApiHex Encoded;
+        public readonly ApiCodeBlock Encoded;
 
         /// <summary>
         /// The decoded instructions
@@ -30,9 +30,9 @@ namespace Z0.Asm
         public readonly ExtractTermCode TermCode;
 
         [MethodImpl(Inline)]
-        public AsmBlock(ApiHex encoded, Instruction[] decoded, ExtractTermCode term)
+        public AsmBlock(ApiCodeBlock encoded, Instruction[] decoded, ExtractTermCode term)
         {
-            Encoded = new ApiHex(encoded.Uri, encoded.Base, encoded.Code);
+            Encoded = new ApiCodeBlock(encoded.Uri, encoded.Base, encoded.Code);
             Decoded = decoded;
             TermCode = term;
         }

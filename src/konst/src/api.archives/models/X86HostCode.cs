@@ -13,10 +13,10 @@ namespace Z0
     {
         public readonly ApiHostUri Host;
 
-        public readonly TableSpan<ApiHex> Code;
+        public readonly TableSpan<ApiCodeBlock> Code;
 
         [MethodImpl(Inline)]
-        public X86HostCode(ApiHostUri host, ApiHex[] code)
+        public X86HostCode(ApiHostUri host, ApiCodeBlock[] code)
         {
             Host = host;
             Code = code;

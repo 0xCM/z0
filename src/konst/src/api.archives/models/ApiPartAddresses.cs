@@ -9,16 +9,16 @@ namespace Z0
 
     using static Konst;
 
-    using KVP = KeyValuePairs<MemoryAddress,ApiHex>;
+    using KVP = KeyValuePairs<MemoryAddress,ApiCodeBlock>;
 
-    public readonly struct ApiHexAddresses
+    public readonly struct ApiPartAddresses
     {
         public readonly PartId[] Parts;
 
         readonly KVP Data;
 
         [MethodImpl(Inline)]
-        public ApiHexAddresses(PartId[] parts, KVP src)
+        public ApiPartAddresses(PartId[] parts, KVP src)
         {
             Data = src;
             Parts = parts;
@@ -30,7 +30,7 @@ namespace Z0
             get => Data.Keys;
         }
 
-        public ApiHex[] Encoded
+        public ApiCodeBlock[] Encoded
         {
             [MethodImpl(Inline)]
             get => Data.Values;
@@ -42,13 +42,13 @@ namespace Z0
             get => (uint)Data.Count;
         }
 
-        public ApiHex this[MemoryAddress src]
+        public ApiCodeBlock this[MemoryAddress src]
         {
             [MethodImpl(Inline)]
             get => Data[src];
         }
 
-        public static ApiHexAddresses Empty
-            => new ApiHexAddresses(sys.empty<PartId>(), KVP.Empty);
+        public static ApiPartAddresses Empty
+            => new ApiPartAddresses(sys.empty<PartId>(), KVP.Empty);
     }
 }

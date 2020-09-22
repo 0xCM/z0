@@ -13,7 +13,7 @@ namespace Z0
     partial struct EncodedX86
     {
         [MethodImpl(Inline), Op]
-        public static ApiHexRow row(ApiHex src)
+        public static ApiHexRow row(ApiCodeBlock src)
         {
             var dst = new ApiHexRow();
             row(src,ref dst);
@@ -21,7 +21,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ref ApiHexRow row(ApiHex src, ref ApiHexRow dst)
+        public static ref ApiHexRow row(ApiCodeBlock src, ref ApiHexRow dst)
         {
             dst.Base = src.Code.Base;
             dst.Encoded = src.Data;

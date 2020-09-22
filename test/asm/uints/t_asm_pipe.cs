@@ -26,7 +26,7 @@ namespace Z0.Asm
         }
 
 
-        void check_unary_ops(ApiHex[] src)
+        void check_unary_ops(ApiCodeBlock[] src)
         {
             var query = AsmCheck.UriBitQuery;
             foreach(var code in query.WithParameterCount(src, 1))

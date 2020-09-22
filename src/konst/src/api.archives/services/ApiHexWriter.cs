@@ -33,7 +33,7 @@ namespace Z0
             StreamOut = new StreamWriter(TargetPath.CreateParentIfMissing().FullPath,false);
         }
 
-        public void Write(ApiHex src, int idpad = 60)
+        public void Write(ApiCodeBlock src, int idpad = 60)
             => StreamOut.WriteLine(src.Format(idpad));
 
         public void Dispose()

@@ -26,7 +26,7 @@ namespace Z0
             }
         }
 
-        public static ApiHex[] hex(FS.FilePath src)
+        public static ApiCodeBlock[] hex(FS.FilePath src)
             => from line in src.ReadLines().Select(ApiHexParser.row)
                 where line.IsSome()
                 select line.Value;
@@ -76,7 +76,7 @@ namespace Z0
             => new ApiHexArchive(root);
 
         [MethodImpl(Inline), Op]
-        public static ApiHex[] hex_data(IWfShell wf, ApiHostUri host)
+        public static ApiCodeBlock[] hex_data(IWfShell wf, ApiHostUri host)
             => hex(wf).Read(host);
 
         [MethodImpl(Inline)]

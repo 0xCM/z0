@@ -27,7 +27,7 @@ namespace Z0
 
         readonly IExtractParser Parser;
 
-        public ApiHexTable ParsedMembers;
+        public ApiMemberCodeTable ParsedMembers;
 
         readonly FilePath ExtractPath;
 
