@@ -21,17 +21,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public ProvidedFormatter(IFormatProvider provider, C config)
         {
-            Provider = provider;            
+            Provider = provider;
             Config = config;
         }
-        
+
         [MethodImpl(Inline)]
         public string Format(string pattern, in T src)
-            => src.ToString(pattern, Provider);        
-        
+            => src.ToString(pattern, Provider);
+
         [MethodImpl(Inline)]
         public string Format(in T src)
-            => Format(RenderPatterns.Slot0, src);
+            => Format(RP.Slot0, src);
 
         [MethodImpl(Inline)]
         public object GetFormat(Type formatType)

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
     using static Render;
-    using static RenderPatterns;
+    using static RP;
     using static z;
 
     partial struct WfEvents

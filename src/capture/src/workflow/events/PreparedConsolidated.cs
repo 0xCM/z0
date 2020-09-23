@@ -9,16 +9,16 @@ namespace Z0.Asm
 
     using static Konst;
     using static z;
-    using static RenderPatterns;
+    using static RP;
 
     public readonly struct PreparedConsolidated : IWfEvent<PreparedConsolidated>
-    {            
+    {
         public const string EventName = nameof(PreparedConsolidated);
-        
+
         public WfEventId EventId {get;}
 
         public string ActorName {get;}
-        
+
         public readonly IApiHost[] Hosts;
 
         public readonly ApiMember[] Members;
@@ -36,5 +36,5 @@ namespace Z0.Asm
             => new {MemberCount = Members.Length, HostCount = Hosts.Length};
         public string Format()
             => text.format(PSx3, EventId, ActorName, Description);
-    }    
+    }
 }

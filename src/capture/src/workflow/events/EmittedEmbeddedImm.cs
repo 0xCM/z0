@@ -57,7 +57,7 @@ namespace Z0.Asm
         }
 
         public string Format()
-            => text.format(RenderPatterns.PSx6, EventId, Host, Generic, ImmSource, Refinement, TargetFile);
+            => text.format(RP.PSx6, EventId, Host, Generic, ImmSource, Refinement, TargetFile);
 
         public EmittedEmbeddedImm Zero
             => default;

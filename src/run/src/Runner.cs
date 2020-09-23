@@ -237,7 +237,7 @@ namespace Z0
         void Run59()
         {
             {
-                var src = typeof(RenderPatterns);
+                var src = typeof(RP);
                 var dst = FS.dir(Wf.IndexRoot.Name) + FS.file("format-patterns", "csv");
                 new EmitRenderPatternsHost().Run(Wf.WithState(flow(src,dst)));
             }

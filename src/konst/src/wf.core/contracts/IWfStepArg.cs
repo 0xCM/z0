@@ -4,19 +4,57 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    /// <summary>
+    /// Defines an untyped characterization of a wokflow operand
+    /// </summary>
     public interface IWfStepArg
     {
-        string Name {get;}
+        /// <summary>
+        /// An integer that identifies an argument within the context of the defining step
+        /// </summary>
+        byte Index {get;}
 
-        string Value {get;}
+        /// <summary>
+        /// The (boxed) argument value
+        /// </summary>
+        object Value {get;}
     }
 
+    /// <summary>
+    /// Characterizes a workflow operand
+    /// </summary>
+    /// <typeparam name="T">The operand type</typeparam>
     public interface IWfStepArg<T> : IWfStepArg
-        where T : ITextual
     {
         new T Value {get;}
 
-        string IWfStepArg.Value
-            => Value.Format();
+        object IWfStepArg.Value
+            => Value;
+    }
+
+    /// <summary>
+    /// Characterizes a workflow operand argument with parametric index type
+    /// </summary>
+    /// <typeparam name="T">The operand type</typeparam>
+    /// <typeparam name="H">The operand type</typeparam>
+    public interface IWfStepArg<I,T> : IWfStepArg<T>
+        where I : unmanaged
+    {
+        new I Index {get;}
+
+        byte IWfStepArg.Index
+            => z.uint8(Index);
+    }
+
+    /// <summary>
+    /// Characterizes a refied workflow operand argument with parametric index type
+    /// </summary>
+    /// <typeparam name="T">The operand type</typeparam>
+    /// <typeparam name="H">The operand type</typeparam>
+    public interface IWfStepArg<H,I,T> : IWfStepArg<I,T>
+        where I : unmanaged
+        where H : struct, IWfStepArg<H,I,T>
+    {
+
     }
 }

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct RenderPatterns
+    partial struct RP
     {
         [StringLiteral(PageBreak5, 5)]
         public const string PageBreak5 = Dash5;

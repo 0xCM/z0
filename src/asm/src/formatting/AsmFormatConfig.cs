@@ -32,7 +32,7 @@ namespace Z0.Asm
 
         public const string SectionSep = text.PageBreak + text.PageBreak;
 
-        public const string FieldSep = RenderPatterns.FieldSep;
+        public const string FieldSep = RP.FieldSep;
 
         public static AsmFormatConfig Default
             => create();

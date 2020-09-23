@@ -8,16 +8,16 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static RenderPatterns;
+    using static RP;
 
     public readonly struct RunningConsolidated : IWfEvent<RunningConsolidated>
-    {            
+    {
         public const string EventName = nameof(RunningConsolidated);
 
         public WfEventId EventId {get;}
 
         public string ActorName {get;}
-        
+
         public readonly uint CatalogCount;
 
         [MethodImpl(Inline)]
@@ -27,11 +27,11 @@ namespace Z0.Asm
             ActorName = actor;
             CatalogCount = count;
         }
-        
-        public object Description 
+
+        public object Description
             => new {CatalogCount};
-        
-        public string Format() 
+
+        public string Format()
             => text.format(PSx3, EventId, ActorName, Description);
-    }    
+    }
 }

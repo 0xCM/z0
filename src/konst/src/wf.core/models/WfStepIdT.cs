@@ -19,7 +19,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static implicit operator WfStepId(WfStepId<T> src)
-            => new WfStepId(src.Control, src.Effect);
+            => new WfStepId(src.Control);
 
         [MethodImpl(Inline)]
         public static implicit operator WfStepId<T>(Type effect)

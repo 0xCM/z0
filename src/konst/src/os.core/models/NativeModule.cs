@@ -40,6 +40,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(RenderPatterns.PSx2, Base, Name);
+            => text.format(RP.PSx2, Base, Name);
     }
 }

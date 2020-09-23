@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static RenderPatterns;
+    using static RP;
 
     [Step]
     public sealed class EmitPartCilHost : WfHost<EmitPartCilHost>

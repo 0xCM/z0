@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
     using static EmitStringRecordsHost;
-    using static RenderPatterns;
+    using static RP;
 
 
     public ref struct EmitStringRecords

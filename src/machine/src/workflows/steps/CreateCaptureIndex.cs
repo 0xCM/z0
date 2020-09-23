@@ -132,7 +132,7 @@ namespace Z0
                     dst[i] = new ApiPartRoutines(part, hostFx.ToArray());
 
                     kParts++;
-                    Wf.Status(Host.Id, text.format(RenderPatterns.PSx4, kParts, kHosts, kMembers, kFx));
+                    Wf.Status(Host.Id, text.format(RP.PSx4, kParts, kHosts, kMembers, kFx));
                 }
             }
 

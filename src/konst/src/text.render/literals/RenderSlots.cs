@@ -6,7 +6,7 @@ namespace Z0
 {
     using static AsciCharText;
 
-    partial struct RenderPatterns
+    partial struct RP
     {
         /// <summary>
         /// Defines the literal '"{1}"'

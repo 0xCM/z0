@@ -30,6 +30,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(RenderPatterns.Tuple3, C0, C1, C2);
+            => text.format(RP.Tuple3, C0, C1, C2);
     }
 }

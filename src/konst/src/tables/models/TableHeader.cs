@@ -49,7 +49,7 @@ namespace Z0
         {
             var dst = text.build();
             for(var i=0; i<Count; i++)
-                dst.Append(text.format(RenderPatterns.SlottedSpacePipe, Data[i].Format()));
+                dst.Append(text.format(RP.SlottedSpacePipe, Data[i].Format()));
             return dst.ToString();
         }
         public static TableHeader Empty

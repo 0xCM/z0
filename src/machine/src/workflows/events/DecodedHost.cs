@@ -10,7 +10,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static RenderPatterns;
+    using static RP;
     using static Render;
 
     [Event]

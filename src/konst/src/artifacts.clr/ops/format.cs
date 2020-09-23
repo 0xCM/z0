@@ -14,6 +14,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string format(in ClrArtifactRef src)
-            => text.format(RenderPatterns.PSx3, src.Kind, src.Key, src.Name);
+            => text.format(RP.PSx3, src.Kind, src.Key, src.Name);
     }
 }

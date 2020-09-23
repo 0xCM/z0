@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static RenderPatterns;
+    using static RP;
     using static z;
 
     partial struct Render
@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static string format<T>(T src)        
+        public static string format<T>(T src)
             => text.format(Slot0, src);
 
         /// <summary>
@@ -30,11 +30,11 @@ namespace Z0
         /// <typeparam name="A">The first value type</typeparam>
         /// <typeparam name="B">The second value type</typeparam>
         [MethodImpl(Inline)]
-        public static string format<A,B>(A a, B b)        
+        public static string format<A,B>(A a, B b)
             where A : ITextual
             where B : ITextual
                 => string.Format(PSx2, a.Format(),  b.Format());
-                
+
         /// <summary>
         /// Renders a triple of <see cref='ITextual'/> values as <see cref='Pipe'/> delimited text
         /// </summary>
@@ -45,11 +45,11 @@ namespace Z0
         /// <typeparam name="B">The second value type</typeparam>
         /// <typeparam name="C">The third value type</typeparam>
         [MethodImpl(Inline)]
-        public static string format<A,B,C>(A a, B b, C c)        
+        public static string format<A,B,C>(A a, B b, C c)
             where A : ITextual
             where B : ITextual
             where C : ITextual
-                => string.Format(PSx3, a.Format(), b.Format(), c.Format());                
+                => string.Format(PSx3, a.Format(), b.Format(), c.Format());
 
         /// <summary>
         /// Renders a quartet of <see cref='ITextual'/> values as <see cref='Pipe'/> delimited text
@@ -63,7 +63,7 @@ namespace Z0
         /// <typeparam name="C">The third value type</typeparam>
         /// <typeparam name="D">The fourth value type</typeparam>
         [MethodImpl(Inline)]
-        public static string format<A,B,C,D>(A a, B b, C c, D d)        
+        public static string format<A,B,C,D>(A a, B b, C c, D d)
             where A : ITextual
             where B : ITextual
             where C : ITextual
@@ -85,7 +85,7 @@ namespace Z0
         /// <typeparam name="D">The fourth value type</typeparam>
         /// <typeparam name="E">The fifth value type</typeparam>
         [MethodImpl(Inline)]
-        public static string format<A,B,C,D,E>(A a, B b, C c, D d, E e)        
+        public static string format<A,B,C,D,E>(A a, B b, C c, D d, E e)
             where A : ITextual
             where B : ITextual
             where C : ITextual

@@ -245,7 +245,7 @@ namespace Z0
                 var normalized = BitString.normalize(m.Text);
                 var bs = BitString.scalar(m.Data);
                 var expr = text.format("{0} {1} {2}", normalized, sym, bs);
-                var description = text.format(RenderPatterns.PSx3, title, m.Name, expr);
+                var description = text.format(RP.PSx3, title, m.Name, expr);
                 Log.AppendLine(description);
             }
         }

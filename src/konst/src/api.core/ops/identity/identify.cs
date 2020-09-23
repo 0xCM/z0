@@ -57,7 +57,7 @@ namespace Z0
         public static TypeIdentity identify(Type src)
         {
             var component = src.Assembly;
-            var id = text.format(RenderPatterns.SlotDot3,
+            var id = text.format(RP.SlotDot3,
                 "type",
                 ClrArtifactKey.from(component),
                 ClrArtifactKey.from(src)
@@ -74,7 +74,7 @@ namespace Z0
         {
             var type = src.DeclaringType;
             var component = type.Assembly;
-            var id = text.format(RenderPatterns.SlotDot4,
+            var id = text.format(RP.SlotDot4,
                 "method",
                 ClrArtifactKey.from(component),
                 ClrArtifactKey.from(type),
@@ -94,7 +94,7 @@ namespace Z0
             var method =src.Method;
             var type = method.DeclaringType;
             var component = type.Assembly;
-            var id = text.format(RenderPatterns.SlotDot5,
+            var id = text.format(RP.SlotDot5,
                 "delegate",
                 ClrArtifactKey.from(component),
                 ClrArtifactKey.from(type),

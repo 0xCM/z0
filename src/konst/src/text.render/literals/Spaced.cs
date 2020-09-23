@@ -6,7 +6,7 @@ namespace Z0
 {
     using static AsciCharText;
 
-    partial struct RenderPatterns
+    partial struct RP
     {
         /// <summary>
         /// Defines a string consisting of 2 spaces

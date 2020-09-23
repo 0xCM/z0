@@ -41,6 +41,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static string fullName(string @namespace, string name)
-            => text.format(RenderPatterns.SlotDot2, @namespace, name);
+            => text.format(RP.SlotDot2, @namespace, name);
     }
 }

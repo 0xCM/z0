@@ -45,6 +45,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Ok ? text.format(RenderPatterns.Slot0, Data.Value) : text.format(Error.Value);
+            => Ok ? text.format(RP.Slot0, Data.Value) : text.format(Error.Value);
     }
 }

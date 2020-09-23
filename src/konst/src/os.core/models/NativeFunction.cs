@@ -50,6 +50,6 @@ namespace Z0
         }
 
         public string Format()
-            => text.format(RenderPatterns.PSx3, Base, Source, Name);
+            => text.format(RP.PSx3, Base, Source, Name);
     }
 }

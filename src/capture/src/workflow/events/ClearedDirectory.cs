@@ -8,8 +8,8 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static RenderPatterns;
-    
+    using static RP;
+
     public readonly struct ClearedDirectory : IWfEvent<ClearedDirectory>
     {
         public const string EventName = nameof(ClearedDirectory);
@@ -27,11 +27,11 @@ namespace Z0.Asm
             ActorName = actor;
             Path = path;
         }
-        
-        public object Description 
+
+        public object Description
             => new {Path};
 
-        public string Format() 
+        public string Format()
             => text.format(PSx3, EventId, ActorName, Description);
-    }    
+    }
 }

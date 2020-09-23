@@ -30,7 +30,7 @@ namespace Z0
         ClrName Name {get;}
 
         string ITextual.Format()
-            => text.format(RenderPatterns.PSx3, Kind, Key, Name);
+            => text.format(RP.PSx3, Kind, Key, Name);
     }
 
     public interface IClrArtifactRef<A> : IClrArtifactRef

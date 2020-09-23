@@ -6,7 +6,7 @@ namespace Z0
 {
     using static NumericIndicators;
 
-    partial struct RenderPatterns
+    partial struct RP
     {
         [FormatPattern(2)]
         public const string AxB = "{0}x{1}";

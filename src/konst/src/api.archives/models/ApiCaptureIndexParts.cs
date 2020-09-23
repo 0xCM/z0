@@ -31,7 +31,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format()
-                => text.format(RenderPatterns.PSx5, Parts.Length, Hosts.Length, MemberCount, Addresses.Length, Encoded.Count);
+                => text.format(RP.PSx5, Parts.Length, Hosts.Length, MemberCount, Addresses.Length, Encoded.Count);
 
             public override string ToString()
                 => Format();

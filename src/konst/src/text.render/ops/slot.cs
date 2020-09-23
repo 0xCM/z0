@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using static RenderPatterns;
+    using static RP;
 
     partial struct Render
     {

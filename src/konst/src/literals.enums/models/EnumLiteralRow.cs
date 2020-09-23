@@ -34,7 +34,7 @@ namespace Z0
         public string Identifier
         {
             [MethodImpl(Inline)]
-            get => text.format(RenderPatterns.SlotDot3, PartId.Format(), TypeId, Index);
+            get => text.format(RP.SlotDot3, PartId.Format(), TypeId, Index);
         }
 
         [MethodImpl(Inline)]

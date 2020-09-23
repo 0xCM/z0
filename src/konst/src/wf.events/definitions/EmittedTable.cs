@@ -8,7 +8,7 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static RenderPatterns;
+    using static RP;
 
     partial struct WfEvents
     {

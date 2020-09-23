@@ -6,7 +6,7 @@ namespace Z0
 {
     using static AsciCharText;
 
-    partial struct RenderPatterns
+    partial struct RP
     {
         [StringLiteral(Dash2, 1)]
         public const string Dash1 = Dash;

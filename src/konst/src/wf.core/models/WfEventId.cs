@@ -105,7 +105,7 @@ namespace Z0
         {
             Ts = ts ?? timestamp();
             Ct = ct;
-            Identifier = text.format("{0} | {1} | {2} | {3}", Ts, Ct, fx.StepId.Effect.Name, fx.Name.Format());
+            Identifier = text.format("{0} | {1} | {2} | {3}", Ts, Ct, fx.StepId.Control.Name, fx.Name.Format());
         }
 
         /// <summary>

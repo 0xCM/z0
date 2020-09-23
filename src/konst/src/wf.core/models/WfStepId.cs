@@ -10,6 +10,9 @@ namespace Z0
     using static Konst;
     using static z;
 
+    /// <summary>
+    /// Identifies a workflow step - which is synonymous with its actuator/host/controller
+    /// </summary>
     public readonly struct WfStepId : IWfStepId
     {
         /// <summary>
@@ -18,35 +21,18 @@ namespace Z0
         public Type Control {get;}
 
         /// <summary>
-        /// The Step implementation
-        /// </summary>
-        public Type Effect {get;}
-
-        /// <summary>
         /// The step name
         /// </summary>
         public string Name
             => Control.Name.Remove("Step");
 
         [MethodImpl(Inline)]
-        public static implicit operator WfStepId(Pair<Type> src)
-            => new WfStepId(src.Left, src.Right);
-
-        [MethodImpl(Inline)]
         public static implicit operator WfStepId(Type control)
             => new WfStepId(control);
 
         [MethodImpl(Inline)]
-        public WfStepId(Type control, Type effect)
-        {
-            Effect = effect;
-            Control = control;
-        }
-
-        [MethodImpl(Inline)]
         public WfStepId(Type control)
         {
-            Effect = control;
             Control = control;
         }
 
@@ -56,7 +42,7 @@ namespace Z0
         public WfToken Token
         {
             [MethodImpl(Inline)]
-            get => Flow.token(WfPartKind.Step, Effect);
+            get => Flow.token(WfPartKind.Step, Control);
         }
 
         public bool IsEmpty
@@ -99,6 +85,6 @@ namespace Z0
             => Format();
 
         public static WfStepId Empty
-            => new WfStepId(typeof(void), typeof(void));
+            => new WfStepId(typeof(void));
     }
 }

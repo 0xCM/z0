@@ -19,16 +19,8 @@ namespace Z0
         /// <param name="control">The controller type</param>
         [MethodImpl(Inline), Op]
         public static WfStepId step(Type control)
-            => new WfStepId(control, control);
+            => new WfStepId(control);
 
-        /// <summary>
-        /// Creates an identifier for a workflow step
-        /// </summary>
-        /// <param name="control">The contoller type</param>
-        /// <param name="effect">The effector type</param>
-        [MethodImpl(Inline), Op]
-        public static WfStepId step(Type control, Type effect)
-            => new WfStepId(control, effect);
 
         /// <summary>
         /// Defines a workflow step id predicated on a parametric controller type

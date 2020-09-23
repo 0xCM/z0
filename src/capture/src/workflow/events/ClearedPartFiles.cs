@@ -8,15 +8,15 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static RenderPatterns;
+    using static RP;
     using static z;
 
     public readonly struct ClearedPartFiles : IWfEvent<ClearedPartFiles>
-    {            
+    {
         const string ItemPattern = "{0} file {1} Deleted";
-        
+
         public WfEventId EventId {get;}
-        
+
         public readonly KeyedValues<PartId,FilePath[]> Files;
 
         [MethodImpl(Inline)]
@@ -28,7 +28,7 @@ namespace Z0.Asm
 
         ReadOnlySpan<string> Descriptions
         {
-            get 
+            get
             {
                 var totalFileCount = Files.Count;
                 var dst = z.span<string>(totalFileCount);
@@ -37,20 +37,20 @@ namespace Z0.Asm
                     ref readonly var next = ref Files[i];
                     var part = next.Key;
                     var partFiles =  span(next.Value);
-                    var partFileCount = partFiles.Length;                    
+                    var partFileCount = partFiles.Length;
                     var partName = part.Format();
 
                     for(var j = 0u; j<partFileCount; j++)
                     {
                         ref readonly var file = ref skip(partFiles,j);
                         seek(dst, i) = text.format(ItemPattern, partName, file);
-                    }                    
+                    }
                 }
                 return dst;
             }
         }
-        
-        public string Format()                        
+
+        public string Format()
             => text.format(PSx3, nameof(ClearedPartFiles), Eol, text.join(Eol, Descriptions));
-    }    
+    }
 }

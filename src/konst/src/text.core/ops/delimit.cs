@@ -60,7 +60,7 @@ namespace Z0
 
         [Op]
         public static string nest(params object[] src)
-            => text.format(RenderPatterns.SSx5,
+            => text.format(RP.SSx5,
                 FieldDelimiter,
                 NestedLeftFence,
                 text.concat(src.Select(x => delimit(src,FieldDelimiter))),

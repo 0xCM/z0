@@ -153,7 +153,7 @@ namespace Z0
             if(decoded.Length != 0)
             {
                 step.SaveDecoded(decoded, AsmPath);
-                Wf.Status(StepId, text.format(RenderPatterns.PSx3, decoded.Length,HostUri.Format(), AsmPath));
+                Wf.Status(StepId, text.format(RP.PSx3, decoded.Length,HostUri.Format(), AsmPath));
 
                 using var match = new MatchAddresses(State, Extracts, decoded, Ct);
                 match.Run();

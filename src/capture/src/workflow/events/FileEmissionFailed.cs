@@ -8,7 +8,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static RenderPatterns;
+    using static RP;
 
     public readonly struct FileEmissionFailed : IWfEvent<FileEmissionFailed>
     {

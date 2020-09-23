@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static RenderPatterns;
+    using static RP;
 
     public readonly struct AsmRenderPatterns
     {
@@ -18,9 +18,9 @@ namespace Z0
 
         public const byte OffsetAddrPad = 12;
 
-        public const byte AddressPad = 16;     
+        public const byte AddressPad = 16;
 
-        public const byte SizePad = 5;   
+        public const byte SizePad = 5;
 
         public const byte FxWidth = 80;
 
@@ -46,7 +46,7 @@ namespace Z0
 
         public const string Assign = " = ";
 
-        public static string SectionSep 
-            => new string(Chars.Dash, SectionWidth);   
+        public static string SectionSep
+            => new string(Chars.Dash, SectionWidth);
     }
 }

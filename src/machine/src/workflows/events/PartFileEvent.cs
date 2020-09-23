@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static RenderPatterns;
-    
+    using static RP;
+
     [Event]
     public readonly struct PartFileEvent : IWfEvent<PartFileEvent>
     {
@@ -38,11 +38,11 @@ namespace Z0
 
         public string Format()
              => text.format(Pattern, Timestamp, Label,Content);
-    
-        public PartFileEvent Zero 
-            => Empty;                
 
-        public static PartFileEvent Empty 
+        public PartFileEvent Zero
+            => Empty;
+
+        public static PartFileEvent Empty
             => default;
     }
 }

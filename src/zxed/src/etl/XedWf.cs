@@ -52,7 +52,7 @@ namespace Z0.Xed
 
         public XedPattern[] ExtractPatterns()
         {
-            var step = Flow.step(typeof(void),typeof(XedWf));
+            var step = Flow.step(typeof(XedWf));
             var patterns = list<XedPattern>();
             var parser = XedSourceParser.Service;
             var files = @readonly(Source.InstructionFiles);
@@ -137,7 +137,7 @@ namespace Z0.Xed
 
         const string RuleFormatPattern = "{0,-80} | {1, -12} | {2}";
 
-        const string RulePageBreak = RenderPatterns.PageBreak120;
+        const string RulePageBreak = RP.PageBreak120;
 
         void EmitRules()
         {

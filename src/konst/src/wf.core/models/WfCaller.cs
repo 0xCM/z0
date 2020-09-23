@@ -9,22 +9,11 @@ namespace Z0
 
     using static Konst;
 
-    public enum WfCallerField : ushort
-    {
-        Part,
-
-        Name,
-
-        File,
-
-        FileLine
-    }
-
     /// <summary>
     /// Captures invocation origin details
     /// </summary>
     [Table]
-    public struct WfCaller : ITextual, ITable<WfCallerField,WfCaller>
+    public struct WfCaller : ITextual
     {
         /// <summary>
         /// The part from which the call originated
@@ -66,6 +55,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(RenderPatterns.PSx4, Part.Format(), Name, FileLine, File);
+            => text.format(RP.PSx4, Part.Format(), Name, FileLine, File);
     }
 }

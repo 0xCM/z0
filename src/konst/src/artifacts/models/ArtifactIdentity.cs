@@ -45,7 +45,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public string Format()
-            => text.format(RenderPatterns.SlotDot2, Kind, Key);
+            => text.format(RP.SlotDot2, Kind, Key);
 
         [MethodImpl(Inline), Op]
         public bool Equals(ArtifactIdentity<K,I> src)

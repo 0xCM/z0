@@ -52,7 +52,7 @@ namespace Z0
             => Format(false);
 
         public string Format(bool json)
-            => json ? text.format(RenderPatterns.JsonProp, Name.Format(), Value) : text.format(Value);
+            => json ? text.format(RP.JsonProp, Name.Format(), Value) : text.format(Value);
 
         public override string ToString()
             => Format();

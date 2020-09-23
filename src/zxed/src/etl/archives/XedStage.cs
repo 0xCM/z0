@@ -75,6 +75,6 @@ namespace Z0.Xed
             }
         }
 
-        const string HSep = RenderPatterns.PageBreak120;
+        const string HSep = RP.PageBreak120;
     }
 }

@@ -28,10 +28,10 @@ namespace Z0
             var rendered = text.build();
             rendered.AppendLine(comment(f.FullName));
             rendered.AppendLine(comment(f.Attributes.ToString()));
-            rendered.AppendLine(RenderPatterns.OpenSlot);
+            rendered.AppendLine(RP.OpenSlot);
             foreach(var i in f.Instructions)
                 rendered.AppendLine(Margin + i.Formatted);
-            rendered.AppendLine(RenderPatterns.CloseSlot);
+            rendered.AppendLine(RP.CloseSlot);
             return rendered.ToString();
         }
     }
