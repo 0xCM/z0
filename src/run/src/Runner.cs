@@ -239,7 +239,7 @@ namespace Z0
             {
                 var src = typeof(RenderPatterns);
                 var dst = FS.dir(Wf.IndexRoot.Name) + FS.file("format-patterns", "csv");
-                new EmitRenderPatternsHost().Run(Wf.With(flow(src,dst)));
+                new EmitRenderPatternsHost().Run(Wf.WithState(flow(src,dst)));
             }
 
             {
@@ -268,7 +268,7 @@ namespace Z0
                 var dlls = dir.Files(false).Where(f => f.FileExt.Name.Contains("dll"));
                 var host = new EmitImageHeadersHost();
                 var output = FS.path("J:/dev/projects/z0-logs/db/images.csv");
-                host.Run(Wf.With(flow(dlls,output)));
+                host.Run(Wf.WithState(flow(dlls,output)));
             }
 
             {

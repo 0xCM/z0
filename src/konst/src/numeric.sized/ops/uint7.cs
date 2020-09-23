@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static S uint7(ulong src)
-            => new S((byte)((byte)src & S.MaxVal));
+            => new S((byte)((byte)src & S.MaxLiteral));
 
         /// <summary>
         /// Constructs a uint7 value from a sequence of bits ranging from low to high
@@ -162,7 +162,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal static byte crop7(byte x)
-            => (byte)(S.MaxVal & x);
+            => (byte)(S.MaxLiteral & x);
 
         [MethodImpl(Inline), Op]
         internal static byte reduce7(byte x)

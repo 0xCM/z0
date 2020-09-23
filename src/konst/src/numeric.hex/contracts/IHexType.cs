@@ -11,7 +11,7 @@ namespace Z0
 
     public interface IHexType
     {
-        Hex8Kind Value {get;}
+        Hex8Seq Value {get;}
     }
 
     public interface IHexType<H> : IHexType

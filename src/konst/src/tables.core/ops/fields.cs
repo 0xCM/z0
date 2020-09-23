@@ -19,10 +19,10 @@ namespace Z0
             if(!type.IsStruct() || type.IsPrimitive)
                 return TableFields.Empty;
 
-            var declared = type.SequentialFields();
-            var src = span(declared);
+            var declared = type.Fields();
+            var src = @readonly(declared);
             var count = declared.Length;
-            var buffer = alloc<TableField>(declared.Length);
+            var buffer = alloc<TableField>(count);
             var dst = span(buffer);
 
             for(ushort i=0; i<count; i++)

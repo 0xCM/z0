@@ -77,7 +77,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal static byte crop2(byte x)
-            => (byte)(uint2.MaxVal & x);
+            => (byte)(uint2.MaxLiteral & x);
 
         [MethodImpl(Inline), Op]
         internal static byte reduce2(byte x)

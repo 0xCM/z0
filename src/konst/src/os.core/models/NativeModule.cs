@@ -6,15 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Security;
 
     using static Konst;
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface INativeModule : IDisposable, IAddressable
-    {
-        StringRef Name {get;}
-    }
 
     public readonly struct NativeModule : INativeModule
     {

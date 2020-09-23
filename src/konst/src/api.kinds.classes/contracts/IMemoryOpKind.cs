@@ -6,12 +6,14 @@ namespace Z0
 {
     using static Konst;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
     using K = MemoryApiKey;
     using I = IMemoryApiKey;
 
     /// <summary>
     /// Characterizes a system operation classifier
     /// </summary>
+    [Free]
     public interface IMemoryApiKey : IApiKey, IOpKind<K>
     {
         K Kind {get;}
@@ -24,6 +26,7 @@ namespace Z0
     /// Characterizes a reified system operation classifier
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
+    [Free]
     public interface IMemoryOpKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
@@ -36,6 +39,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="F">The kind classifier type</typeparam>
     /// <typeparam name="T">The numeric type</typeparam>
+    [Free]
     public interface IMemoryOpKind<F,T> : IMemoryOpKind<F>
         where F : unmanaged, I
     {

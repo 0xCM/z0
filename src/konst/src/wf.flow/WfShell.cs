@@ -89,6 +89,10 @@ namespace Z0
             return this;
         }
 
+        [MethodImpl(Inline)]
+        public WfShell<S> WithState<S>(S src)
+            => new WfShell<S>(this, src);
+
         public void Dispose()
         {
             Broker.Dispose();

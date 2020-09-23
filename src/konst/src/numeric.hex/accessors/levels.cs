@@ -3,14 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
-    using H = Hex8Kind;
+{
+    using H = Hex8Seq;
 
     partial struct HexLevel
     {
         // ~ x00 - x0F
         // ~ ------------------------------------------------------------------
-        
+
         public const H x00 = H.x00;
 
         public const H x01 = H.x01;
@@ -41,11 +41,11 @@ namespace Z0
 
         public const H x0E = H.x0e;
 
-        public const H x0F = H.x0f;        
+        public const H x0F = H.x0f;
 
         // ~ x10 - x1F
         // ~ ------------------------------------------------------------------
-        
+
         public const H x10 = H.x10;
 
         public const H x11 = H.x11;
@@ -76,12 +76,12 @@ namespace Z0
 
         public const H x1E = H.x1e;
 
-        public const H x1F = H.x1f;                
+        public const H x1F = H.x1f;
 
 
         // ~ x20 - x2F
         // ~ ------------------------------------------------------------------
-        
+
         public const H x20 = H.x20;
 
         public const H x21 = H.x21;
@@ -112,11 +112,11 @@ namespace Z0
 
         public const H x2E = H.x2e;
 
-        public const H x2F = H.x2f;                
+        public const H x2F = H.x2f;
 
         // ~ x30 - x3F
         // ~ ------------------------------------------------------------------
-        
+
         public const H x30 = H.x30;
 
         public const H x31 = H.x31;
@@ -147,12 +147,12 @@ namespace Z0
 
         public const H x3E = H.x3e;
 
-        public const H x3F = H.x3f;                
+        public const H x3F = H.x3f;
 
 
         // ~ x40 - x4F
         // ~ ------------------------------------------------------------------
-        
+
         public const H x40 = H.x40;
 
         public const H x41 = H.x41;
@@ -183,11 +183,11 @@ namespace Z0
 
         public const H x4E = H.x4e;
 
-        public const H x4F = H.x4f;                        
+        public const H x4F = H.x4f;
 
         // ~ x50 - x5F
         // ~ ------------------------------------------------------------------
-        
+
         public const H x50 = H.x50;
 
         public const H x51 = H.x51;
@@ -218,11 +218,11 @@ namespace Z0
 
         public const H x5E = H.x5e;
 
-        public const H x5F = H.x5f;                
+        public const H x5F = H.x5f;
 
         // ~ x60 - x6F
         // ~ ------------------------------------------------------------------
-        
+
         public const H x60 = H.x60;
 
         public const H x61 = H.x61;
@@ -253,11 +253,11 @@ namespace Z0
 
         public const H x6E = H.x6e;
 
-        public const H x6F = H.x6f;                
+        public const H x6F = H.x6f;
 
         // ~ x70 - x7F
         // ~ ------------------------------------------------------------------
-        
+
         public const H x70 = H.x70;
 
         public const H x71 = H.x71;
@@ -288,11 +288,11 @@ namespace Z0
 
         public const H x7E = H.x7e;
 
-        public const H x7F = H.x7f;                
+        public const H x7F = H.x7f;
 
         // ~ x80 - x8F
         // ~ ------------------------------------------------------------------
-        
+
         public const H x80 = H.x80;
 
         public const H x81 = H.x81;
@@ -323,11 +323,11 @@ namespace Z0
 
         public const H x8E = H.x8e;
 
-        public const H x8F = H.x8f;                
+        public const H x8F = H.x8f;
 
         // ~ x90 - x9F
         // ~ ------------------------------------------------------------------
-        
+
         public const H x90 = H.x90;
 
         public const H x91 = H.x91;
@@ -362,7 +362,7 @@ namespace Z0
 
         // ~ xA0 - xAF
         // ~ ------------------------------------------------------------------
-        
+
         public const H xA0 = H.xa0;
 
         public const H xA1 = H.xa1;
@@ -397,7 +397,7 @@ namespace Z0
 
         // ~ xB0 - xBF
         // ~ ------------------------------------------------------------------
-        
+
         public const H xB0 = H.xb0;
 
         public const H xB1 = H.xb1;
@@ -432,7 +432,7 @@ namespace Z0
 
        // ~ xC0 - xCF
        // ~ ------------------------------------------------------------------
-        
+
         public const H xC0 = H.xc0;
 
         public const H xC1 = H.xc1;
@@ -467,7 +467,7 @@ namespace Z0
 
        // ~ xD0 - xDF
        // ~ ------------------------------------------------------------------
-        
+
         public const H xD0 = H.xd0;
 
         public const H xD1 = H.xd1;
@@ -503,7 +503,7 @@ namespace Z0
 
        // ~ xE0 - xEF
        // ~ ------------------------------------------------------------------
-        
+
         public const H xE0 = H.xe0;
 
         public const H xE1 = H.xe1;
@@ -538,7 +538,7 @@ namespace Z0
 
      // ~ xF0 - xFF
        // ~ ------------------------------------------------------------------
-        
+
         public const H xF0 = H.xf0;
 
         public const H xF1 = H.xf1;

@@ -79,7 +79,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static U uint1(ulong src)
-            => new U((byte)((byte)src & U.MaxVal));
+            => new U((byte)((byte)src & U.MaxLiteral));
 
         [MethodImpl(Inline), Op]
         public static U add(U x, U y)
@@ -154,7 +154,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal static byte crop1(byte x)
-            => (byte)(U.MaxVal & x);
+            => (byte)(U.MaxLiteral & x);
 
         [MethodImpl(Inline), Op]
         internal static byte reduce1(byte x)

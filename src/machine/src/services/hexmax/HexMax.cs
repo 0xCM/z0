@@ -18,7 +18,7 @@ namespace Z0
         Vector128<byte> State;
 
         [MethodImpl(Inline), Op]
-        public void Process(ReadOnlySpan<Hex8Kind> src)
+        public void Process(ReadOnlySpan<Hex8Seq> src)
         {
             var count = src.Length;
             ref readonly var kind = ref first(src);
@@ -33,14 +33,14 @@ namespace Z0
         }
 
         [Op]
-        public sbyte Process(Hex8Kind code)
+        public sbyte Process(Hex8Seq code)
         {
             Process(h00, h0F, code);
             return (sbyte)vcell(State, 15);
         }
 
         [Op]
-        public void Process(X00 a, X0F b, Hex8Kind code)
+        public void Process(X00 a, X0F b, Hex8Seq code)
         {
             switch(code)
             {
@@ -65,7 +65,7 @@ namespace Z0
         }
 
         [Op, Closures(UInt64k)]
-        public void Process<T>(X00 a, X3F b, Hex8Kind code, in T src)
+        public void Process<T>(X00 a, X3F b, Hex8Seq code, in T src)
             where T : struct
         {
             switch(code)
@@ -138,7 +138,7 @@ namespace Z0
         }
 
         [Op]
-        public void Process(X10 a, X1F b, Hex8Kind code)
+        public void Process(X10 a, X1F b, Hex8Seq code)
         {
             switch(code)
             {
@@ -163,7 +163,7 @@ namespace Z0
         }
 
         [Op]
-        public void Process(X20 a, X2F b, Hex8Kind code)
+        public void Process(X20 a, X2F b, Hex8Seq code)
         {
             switch(code)
             {
@@ -188,7 +188,7 @@ namespace Z0
         }
 
         [Op]
-        public void Process(X30 a, X3F b, Hex8Kind code)
+        public void Process(X30 a, X3F b, Hex8Seq code)
         {
             switch(code)
             {
@@ -213,7 +213,7 @@ namespace Z0
         }
 
         [Op]
-        public void Process(X40 a, X4F b, Hex8Kind code)
+        public void Process(X40 a, X4F b, Hex8Seq code)
         {
             switch(code)
             {
@@ -238,7 +238,7 @@ namespace Z0
         }
 
         [Op]
-        public void Process(X50 a, X5F b, Hex8Kind code)
+        public void Process(X50 a, X5F b, Hex8Seq code)
         {
             switch(code)
             {
@@ -263,7 +263,7 @@ namespace Z0
         }
 
         [Op]
-        public void Process(X60 a, X6F b, Hex8Kind code)
+        public void Process(X60 a, X6F b, Hex8Seq code)
         {
             switch(code)
             {

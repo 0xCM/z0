@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
-    using static z;
-
+    [Free]
     public interface ITableDispatcher<F,T,D,S,Y>
         where F : unmanaged, Enum
         where T : struct, ITable<F,T,D>

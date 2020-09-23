@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -11,10 +11,10 @@ namespace Z0
 
     public interface IHexLookup<T> : IConstIndex<T>
     {
-        ref readonly T this[Hex8Kind index] {get;}
+        ref readonly T this[Hex8Seq index] {get;}
 
         [MethodImpl(Inline)]
-        ref readonly T Lookup(Hex8Kind index)
+        ref readonly T Lookup(Hex8Seq index)
             => ref this[index];
     }
 
@@ -26,5 +26,5 @@ namespace Z0
         [MethodImpl(Inline)]
         ref readonly T Lookup(K index)
             => ref this[index];
-    }    
+    }
 }

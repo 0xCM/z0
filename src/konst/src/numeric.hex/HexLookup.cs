@@ -44,14 +44,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static HexLookup<Hex5Kind,T> define<T>(N5 n, HexLookupEntry<Hex5Kind,T>[] src)
+        public static HexLookup<Hex5Seq,T> define<T>(N5 n, HexLookupEntry<Hex5Seq,T>[] src)
             where T : struct
-                => define<Hex5Kind,T>(src, sys.alloc<T>(32));
+                => define<Hex5Seq,T>(src, sys.alloc<T>(32));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static HexLookup<Hex8Kind,T> define<T>(N8 n, HexLookupEntry<Hex8Kind,T>[] src)
+        public static HexLookup<Hex8Seq,T> define<T>(N8 n, HexLookupEntry<Hex8Seq,T>[] src)
             where T : struct
-                => define<Hex8Kind,T>(src, sys.alloc<T>(256));
+                => define<Hex8Seq,T>(src, sys.alloc<T>(256));
 
         /// <summary>
         /// Creates an index that correlates up to 255 unsigned 8-bit integers with arbitrary structural T-parameteric values

@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using OC = ApiClass;
-
     public readonly struct ApiClassLimits
     {
         public const ApiClass FirstApiClass = ApiClass.Nullary;

@@ -7,86 +7,86 @@ namespace Z0
     /// <summary>
     /// Defines identifiers corresponding to each value that can be represented with a 4-bit unsigned integer
     /// </summary>
-    public enum Hex4Kind : byte
+    public enum Hex4Seq : byte
     {
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x00 := 0
-        /// </summary> 
+        /// </summary>
         x00 = 0x00,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x01 := 1
-        /// </summary> 
+        /// </summary>
         x01 = 0x01,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x02 := 2
-        /// </summary> 
+        /// </summary>
         x02 = 0x02,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x03 := 3
-        /// </summary> 
+        /// </summary>
         x03 = 0x03,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x04 := 4
-        /// </summary> 
+        /// </summary>
         x04 = 0x04,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x05 := 5
-        /// </summary> 
+        /// </summary>
         x05 = 0x05,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x06 := 6
-        /// </summary> 
+        /// </summary>
         x06 = 0x06,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x07 := 7
-        /// </summary> 
+        /// </summary>
         x07 = 0x07,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x08 := 8
-        /// </summary> 
+        /// </summary>
         x08 = 0x08,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x09 := 9
-        /// </summary> 
+        /// </summary>
         x09 = 0x09,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x0A := 10
-        /// </summary> 
+        /// </summary>
         x0A = 0x0A,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x0B := 11
-        /// </summary> 
+        /// </summary>
         x0B = 0x0B,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x0C := 12
-        /// </summary> 
+        /// </summary>
         x0C = 0x0C,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x0D := 13
-        /// </summary> 
+        /// </summary>
         x0D = 0x0D,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x0E := 14
-        /// </summary> 
+        /// </summary>
         x0E = 0x0E,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x0F := 15
-        /// </summary> 
+        /// </summary>
         x0F = 0x0F,
     }
 }

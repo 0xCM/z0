@@ -45,8 +45,7 @@ namespace Z0
         FolderPath AppDataRoot
             => Shell.Paths.AppDataRoot;
 
-        IWfShell<C> With<C>(C src)
-            => new WfShell<C>(this,src);
+        WfShell<S> WithState<S>(S src);
 
         IFileDb FileDb()
             => new FileDb(FS.dir(Paths.LogRoot.Name) + FS.folder("db"));
@@ -142,6 +141,10 @@ namespace Z0
             where H : IWfHost<H>, new()
                 => Raise(WfEvents.created(host.Id, Ct));
 
+        void CreatedStep<H>(H host, Type step)
+            where H : IWfHost<H>, new()
+                => Raise(WfEvents.created(host.Id, step, Ct));
+
         void Disposed<H>(H host)
             where H : WfHost<H>, new()
                 => Raise(WfEvents.disposed(host.Id, Ct));
@@ -168,6 +171,11 @@ namespace Z0
             where H :  IWfHost<H>, new()
                 => Raise(running(host, content, Ct));
 
+        void RunningStep<H>(H host, Type step)
+            where H :  IWfHost<H>, new()
+                => Raise(running(host, step, Ct));
+
+
         void Running<S,T>(WfStepId step, DataFlow<S,T> df)
             => Raise(running(step, df, Ct));
 
@@ -183,6 +191,11 @@ namespace Z0
         void Ran<H,T>(H host, T content)
             where H : IWfHost<H>, new()
                 => Raise(ran(host, content, Ct));
+
+        void RanStep<H>(H host, Type step)
+            where H : IWfHost<H>, new()
+                => Raise(ran(host, step, Ct));
+
 
         void Ran<H,S,T,R>(H host, DataFlow<S,T,R> df)
             where H : IWfHost<H>, new()

@@ -5,7 +5,9 @@
 namespace Z0
 {
     using System;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IVectorKind : IVectorWidth
     {
         /// <summary>
@@ -28,13 +30,16 @@ namespace Z0
     /// Characterizes an F-bound polymorphic reification that identifies an intrinsic vector generic type definition
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
+    [Free]
     public interface IVectorKind<F,W> : TVectorWidth<F>, ITypedLiteral<F,VectorWidth,uint>, IDataWidth
         where F : struct, IVectorKind<F,W>
         where W : unmanaged, ITypeWidth
     {
-        DataWidth IDataWidth.DataWidth => Widths.data<W>();
+        DataWidth IDataWidth.DataWidth
+            => Widths.data<W>();
     }
 
+    [Free]
     public interface IVectorKind<F,W,T> : IVectorKind<F,W>, IVectorKind
         where F : struct, IVectorKind<F,W,T>
         where W : unmanaged, ITypeWidth

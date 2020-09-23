@@ -4,9 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
     using I = ICanonicalKind;
     using K = CanonicalApiKey;
 
+    [Free]
     public interface ICanonicalKind : IApiKey, IOpKind<K>
     {
         K Kind {get;}
@@ -15,6 +17,7 @@ namespace Z0
             => (ApiKeyId)Kind;
     }
 
+    [Free]
     public interface ICanonicalKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
@@ -22,6 +25,7 @@ namespace Z0
             => default(F).Id;
     }
 
+    [Free]
     public interface ICanonicalKind<F,T> : ICanonicalKind<F>
         where F : unmanaged, I
     {
@@ -35,6 +39,7 @@ namespace Z0
     /// <typeparam name="K">The kind classifier type</typeparam>
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="T">The numeric type</typeparam>
+    [Free]
     public interface ICanonicalKind<F,W,T> : ICanonicalKind<F,T>
         where W : unmanaged, ITypeWidth
         where F : unmanaged, ICanonicalKind

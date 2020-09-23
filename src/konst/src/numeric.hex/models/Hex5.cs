@@ -3,17 +3,17 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
     using H = Hex5;
-    using K = Hex5Kind;
+    using K = Hex5Seq;
 
     public readonly struct Hex5 : IHexNumber<H,K>
-    {                
+    {
         public readonly K Value;
 
         [MethodImpl(Inline)]
@@ -71,7 +71,7 @@ namespace Z0
         public static explicit operator ulong(H src)
             => (ulong)src.Value;
 
-        K IHexNumber<K>.Value 
+        K IHexNumber<K>.Value
             => Value;
 
         [MethodImpl(Inline)]

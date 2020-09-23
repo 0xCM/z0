@@ -6,7 +6,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Hex8Kind;
+    using static Hex8Seq;
 
     public enum CorElementType : byte
     {

@@ -7,16 +7,16 @@ namespace Z0
     /// <summary>
     /// Defines identifiers corresponding to the hex digits 0 and 1
     /// </summary>
-    public enum Hex1Kind : byte
+    public enum Hex1Seq : byte
     {
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x00 := 0
-        /// </summary> 
+        /// </summary>
         x00 = 0x0,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x01 := 1
-        /// </summary> 
+        /// </summary>
         x01 = 0x1,
     }
 }

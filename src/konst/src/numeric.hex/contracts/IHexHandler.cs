@@ -3,10 +3,10 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     public interface IHexHandler
     {
-        void OnHex(Hex8Kind src);
+        void OnHex(Hex8Seq src);
     }
 
     public interface IHexHandler<H> : IHexHandler
@@ -14,13 +14,13 @@ namespace Z0
     {
         void OnHex(H h);
 
-        void IHexHandler.OnHex(Hex8Kind src)
+        void IHexHandler.OnHex(Hex8Seq src)
             => OnHex(default);
     }
 
     public interface IHexMapper<T>
     {
-        T Map(Hex8Kind src);
+        T Map(Hex8Seq src);
     }
 
     public interface IHexMapper<H,T> : IHexMapper<T>
@@ -28,7 +28,7 @@ namespace Z0
     {
         T Map(H src);
 
-        T IHexMapper<T>.Map(Hex8Kind src)
+        T IHexMapper<T>.Map(Hex8Seq src)
             => Map(default);
     }
 }

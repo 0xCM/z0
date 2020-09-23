@@ -3,8 +3,8 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
-    using static Hex8Kind;
+{
+    using static Hex8Seq;
 
     using K = RegisterKind;
 
@@ -40,6 +40,6 @@ namespace Z0.Asm
         /// <summary>
         /// Specifies the override code for the <see cref='K.GS'/> register
         /// </summary>
-        GS = x65        
+        GS = x65
     }
 }

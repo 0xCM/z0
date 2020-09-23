@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Hex8Kind;
+    using static Hex8Seq;
 
     public enum PartFileClass : byte
     {
@@ -16,12 +16,12 @@ namespace Z0
         /// <summary>
         /// Formatted assembly
         /// </summary>
-        Asm = x01, 
+        Asm = x01,
 
         /// <summary>
         /// Text-formatted CIL instructions
         /// </summary>
-        Cil = x02,        
+        Cil = x02,
 
         /// <summary>
         ///  Delimited data rows
@@ -37,7 +37,7 @@ namespace Z0
         ///  An executable module
         /// </summary>
         Exe = x05,
-                
+
         /// <summary>
         /// Text data
         /// </summary>
@@ -57,7 +57,7 @@ namespace Z0
         /// Unprocessed x86-encoded data
         /// </summary>
         Extract = x09, //*.x.csv
-        
+
         /// <summary>
         /// Text-formatted x86-encoded/executable data
         /// </summary>
@@ -75,17 +75,17 @@ namespace Z0
 
         /// <summary>
         /// Line-oriented hex data where each line is prefixed with an absolute/relative offset
-        /// </summary>       
+        /// </summary>
         Dat = x0d,
 
         /// <summary>
         /// A text document of some sort
-        /// </summary>       
+        /// </summary>
         Doc = x0e,
-       
+
         /// <summary>
         /// A file produced by some sort of tool
-        /// </summary>       
+        /// </summary>
         Tool = 128,
-    }   
+    }
 }

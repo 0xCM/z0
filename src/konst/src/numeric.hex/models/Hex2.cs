@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     using H = Hex2;
-    using K = Hex2Kind;
+    using K = Hex2Seq;
 
     public readonly struct Hex2 : IHexNumber<H,K>
     {
@@ -87,7 +87,7 @@ namespace Z0
             => (ulong)src.Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator H(Hex1Kind src)
+        public static implicit operator H(Hex1Seq src)
             => new H((byte)src);
         K IHexNumber<K>.Value
             => Value;

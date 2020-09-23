@@ -14,23 +14,38 @@ namespace Z0
     using K = BitSeq1;
     using W = W1;
     using T = System.Byte;
+    using N = N1;
 
     /// <summary>
     /// Represents the value of a type-level single and thus has domain {0,1}
     /// </summary>
     public readonly struct uint1 : ISizedInt<S,W,K,T>
     {
-        internal readonly byte data;
+        internal readonly T data;
 
-        public const byte MinVal = 0;
+        /// <summary>
+        /// Specifies the inclusive lower bound of the <see cref='S'/> data type as a literal value
+        /// </summary>
+        public const T MinLiteral = 0;
 
-        public const byte MaxVal = 1;
+        /// <summary>
+        /// Specifies the inclusive upper bound of the <see cref='S'/> data type as a literal value
+        /// </summary>
+        public const T MaxLiteral = 1;
 
-        public const uint Count = MaxVal + 1;
+        /// <summary>
+        /// Specifies the count of unique values representable by a <see cref='S'/>
+        /// </summary>
+        public const uint Count = MaxLiteral + 1;
 
+        /// <summary>
+        /// Specifies the bit-width represented by <see cref='S'/>
+        /// </summary>
         public const byte Width = 1;
 
         public static W W => default;
+
+        public static N N => default;
 
         /// <summary>
         /// Specifies the minimum <see cref='S'/> value
@@ -38,7 +53,7 @@ namespace Z0
         public static S Min
         {
             [MethodImpl(Inline)]
-            get => new S(MinVal,true);
+            get => new S(MinLiteral,true);
         }
 
         /// <summary>
@@ -47,7 +62,7 @@ namespace Z0
         public static S Max
         {
             [MethodImpl(Inline)]
-            get => new S(MaxVal,true);
+            get => new S(MaxLiteral,true);
         }
 
         /// <summary>
@@ -238,7 +253,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static S operator ~(S src)
-            => wrap1(~src.data & MaxVal);
+            => wrap1(~src.data & MaxLiteral);
 
         [MethodImpl(Inline)]
         public static S operator ++(S x)
@@ -274,11 +289,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal uint1(octet src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint1(byte src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint1(byte src, bool @unchecked)
@@ -286,27 +301,27 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal uint1(sbyte src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((uint)src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint1(short src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((uint)src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint1(ushort src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint1(int x)
-            => data = (byte)((uint)x & MaxVal);
+            => data = (byte)((uint)x & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint1(uint src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint1(long src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((uint)src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint1(uint src, bool safe)
@@ -346,7 +361,7 @@ namespace Z0
         public bool IsMax
         {
             [MethodImpl(Inline)]
-            get => data == MaxVal;
+            get => data == MaxLiteral;
         }
 
         /// <summary>
@@ -355,7 +370,7 @@ namespace Z0
         public bool IsMin
         {
             [MethodImpl(Inline)]
-            get => data == MinVal;
+            get => data == MinLiteral;
         }
 
         /// <summary>

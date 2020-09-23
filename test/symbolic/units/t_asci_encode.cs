@@ -13,16 +13,16 @@ namespace Z0
     using C = AsciCharCode;
 
     public class t_asci_encode : t_symbolic<t_asci_encode>
-    {        
+    {
         public void unpack_4()
         {
             void check(char x, AsciCharCode y)
                 => Claim.Eq(encode(x), y);
-            
+
             var src = span(array('1','2','3','4'));
             var dst = span(alloc<AsciCharCode>(4));
             encode(src,dst);
-            iter(src, dst, check);            
+            iter(src, dst, check);
         }
 
         public void test_case_01()
@@ -41,7 +41,7 @@ namespace Z0
             Claim.eq(a2, "AZ");
 
             //var tc = AsciTestCase02.Create(c0);
-            
+
             // var a2d = asci.chars(tc.A2);
             // var a2c = asci.codes((sbyte)c0, (sbyte)asci2.Size);
             // Claim.yea(asci.eq(a2d,a2c));
@@ -49,7 +49,7 @@ namespace Z0
             // var a4d = asci.chars(tc.A4);
             // var a4c = asci.codes((sbyte)c0, (sbyte)asci4.Size);
             // Claim.yea(asci.eq(a4d,a4c));
-            
+
             // var a8d = asci.chars(tc.A8);
             // var a8c = asci.codes((sbyte)c0, (sbyte)asci8.Size);
             // Claim.yea(asci.eq(a8d,a8c));
@@ -64,17 +64,17 @@ namespace Z0
 
             // var a64d = asci.chars(tc.A64);
             // var a64c = asci.codes((sbyte)c0, (sbyte)asci64.Size);
-            // Claim.yea(asci.eq(a64d,a64c));        
+            // Claim.yea(asci.eq(a64d,a64c));
         }
 
         public void res_HexKind()
         {
-            var res = Resources.create<Hex8Kind,asci4>();
+            var res = Resources.create<Hex8Seq,asci4>();
             for(var i=0; i<res.EntryCount; i++)
-            {                
+            {
                 var expect = asci.encode(n4, text.concat('x', As.uint8(i).FormatHex(true, false)));
                 ref readonly var actual = ref res[i];
-                Claim.Eq(expect,actual);                        
+                Claim.Eq(expect,actual);
             }
         }
     }

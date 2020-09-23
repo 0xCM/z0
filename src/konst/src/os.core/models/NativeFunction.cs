@@ -10,21 +10,6 @@ namespace Z0
 
     using static Konst;
 
-    [SuppressUnmanagedCodeSecurity]
-    public interface INativeFunction : IAddressable
-    {
-        StringRef Name {get;}
-
-        NativeModule Source {get;}
-    }
-
-    [SuppressUnmanagedCodeSecurity]
-    public interface INativeFunction<D> : INativeFunction
-        where D : Delegate
-    {
-        D Delegate {get;}
-    }
-
     public readonly struct NativeFunction : INativeFunction
     {
         public MemoryAddress Base {get;}

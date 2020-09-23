@@ -8,8 +8,6 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using Z0.Data;
-
     using static Konst;
 
     public readonly struct TestLog

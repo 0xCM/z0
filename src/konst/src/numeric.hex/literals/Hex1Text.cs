@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = Hex1Kind;
+    using K = Hex1Seq;
 
     public readonly struct Hex1Text
     {

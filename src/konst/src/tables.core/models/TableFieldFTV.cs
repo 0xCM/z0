@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     public readonly struct TableField<F,T,V>
-        where F : unmanaged, Enum
+        where F : unmanaged
         where T : struct, ITable<T>
     {
         public StringRef FieldName {get;}

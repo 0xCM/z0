@@ -22,17 +22,17 @@ namespace Z0
     /// </summary>
     public readonly struct uint2 : ISizedInt<S,W,K,T>
     {
-        internal readonly byte data;
+        internal readonly T data;
 
         /// <summary>
         /// Specifies the inclusive lower bound of the <see cref='S'/> data type as a literal value
         /// </summary>
-        public const byte MinVal = 0;
+        public const T MinLiteral = 0;
 
         /// <summary>
         /// Specifies the inclusive upper bound of the <see cref='S'/> data type as a literal value
         /// </summary>
-        public const byte MaxVal = 3;
+        public const T MaxLiteral = 3;
 
         /// <summary>
         /// Specifies the bit-width of the <see cref='S'/> data type
@@ -42,7 +42,7 @@ namespace Z0
         /// <summary>
         /// Specifies the count of unique values representable by a <see cref='S'/>
         /// </summary>
-        public const uint Count = MaxVal + 1;
+        public const uint Count = MaxLiteral + 1;
 
         /// <summary>
         /// Specifies a <see cref='S'/> bitwidth <see ref='W'/> representative
@@ -60,7 +60,7 @@ namespace Z0
         public static S Min
         {
             [MethodImpl(Inline)]
-            get => new S(MinVal,true);
+            get => new S(MinLiteral,true);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace Z0
         public static S Max
         {
             [MethodImpl(Inline)]
-            get => new S(MaxVal,true);
+            get => new S(MaxLiteral,true);
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace Z0
             => (K)src.data;
 
         [MethodImpl(Inline)]
-        public static implicit operator S(Hex2Kind src)
+        public static implicit operator S(Hex2Seq src)
             => (byte)src;
 
         [MethodImpl(Inline)]
@@ -260,7 +260,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static S operator ~(S src)
-            => wrap2(~src.data & MaxVal);
+            => wrap2(~src.data & MaxLiteral);
 
         [MethodImpl(Inline)]
         public static S operator ++(S x)
@@ -296,11 +296,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal uint2(octet src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint2(byte src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint2(byte src, bool @unchecked)
@@ -308,27 +308,27 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal uint2(sbyte src)
-            => data = (byte)((byte)src & MaxVal);
+            => data = (byte)((byte)src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint2(short src)
-            => data = (byte)((byte)src & MaxVal);
+            => data = (byte)((byte)src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint2(ushort src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint2(int x)
-            => data = (byte)((byte)x & MaxVal);
+            => data = (byte)((byte)x & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint2(uint src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint2(long src)
-            => data = (byte)((byte)src & MaxVal);
+            => data = (byte)((byte)src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint2(uint src, bool safe)
@@ -381,7 +381,7 @@ namespace Z0
         public bool IsMax
         {
             [MethodImpl(Inline)]
-            get => data == MaxVal;
+            get => data == MaxLiteral;
         }
 
         /// <summary>
@@ -390,7 +390,7 @@ namespace Z0
         public bool IsMin
         {
             [MethodImpl(Inline)]
-            get => data == MinVal;
+            get => data == MinLiteral;
         }
 
         /// <summary>

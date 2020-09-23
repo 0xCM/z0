@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(AsmModels)" />
   </ItemGroup>
 
   <ItemGroup>

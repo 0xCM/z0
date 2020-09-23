@@ -9,14 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    public sealed class EmitRenderPatternsHost : WfHost<EmitRenderPatternsHost, DataFlow<Type, FS.FilePath>>
-    {
-        public override void Run(IWfShell<DataFlow<Type,FS.FilePath>> wf)
-        {
-            using var step = new EmitRenderPatterns(wf.Shell, this, wf.Context);
-            step.Run();
-        }
-    }
 
     public ref struct EmitRenderPatterns
     {

@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static S uint3(ulong src)
-            => new S((byte)((byte)src & S.MaxVal));
+            => new S((byte)((byte)src & S.MaxLiteral));
 
         /// <summary>
         /// Creates a 3-bit unsigned integer from a 3-term bit sequence
@@ -176,7 +176,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal static byte crop3(byte x)
-            => (byte)(S.MaxVal & x);
+            => (byte)(S.MaxLiteral & x);
 
         static BitFormat FormatConfig3
             => BitFormatter.limited(S.Width,S.Width);

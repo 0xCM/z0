@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -17,7 +17,7 @@ namespace Z0
         public const sbyte z8i = 0;
 
         /// <summary>
-        /// The zero-value for an 8-bit usigned integer
+        /// The zero-value for an 8-bit unsigned integer
         /// </summary>
         public const byte z8 = 0;
 
@@ -37,7 +37,7 @@ namespace Z0
         public const int z32i = 0;
 
         /// <summary>
-        /// The zero-value for a 32-bit usigned integer
+        /// The zero-value for a 32-bit unsigned integer
         /// </summary>
         public const uint z32 = 0;
 
@@ -47,7 +47,7 @@ namespace Z0
         public const long z64i = 0;
 
         /// <summary>
-        /// The zero-value for a 64-bit usigned integer
+        /// The zero-value for a 64-bit unsigned integer
         /// </summary>
         public const ulong z64 = 0;
 
@@ -88,6 +88,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T zed<T>(T t = default)
             where T : unmanaged
-                => default;            
+                => default;
     }
 }

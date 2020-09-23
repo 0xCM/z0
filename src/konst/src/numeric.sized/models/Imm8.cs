@@ -9,13 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    using W = W16;
+    using W = W8;
 
     /// <summary>
-    /// Defines a refined 16-bit immediate value
+    /// Defines a refined 8-bit immediate value
     /// </summary>
-    public readonly struct Imm16<E> : IAsmArg<Imm16<E>,W16, E>
-        where E : unmanaged, Enum
+    public readonly struct Imm8<E> : ISized<Imm8<E>,W>
+        where E : unmanaged
     {
         public readonly E Data;
 
@@ -27,25 +27,17 @@ namespace Z0
             get => Data;
         }
 
-        public AsmOperandKind OpKind
-        {
-            [MethodImpl(Inline)]
-            get => AsmOperandKind.Imm;
-        }
-
         [MethodImpl(Inline)]
-        public static implicit operator E(Imm16<E> src)
+        public static implicit operator E(Imm8<E> src)
             => src.Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm16<E>(E src)
-            => new Imm16<E>(src);
+        public static implicit operator Imm8<E>(E src)
+            => new Imm8<E>(src);
 
         [MethodImpl(Inline)]
-        public Imm16(E value)
-        {
-            Data = value;
-        }
+        public Imm8(E src)
+            => Data = src;
 
         [MethodImpl(Inline)]
         public string Format()
@@ -62,6 +54,5 @@ namespace Z0
 
         public override int GetHashCode()
             => (int)Hash;
-
     }
 }

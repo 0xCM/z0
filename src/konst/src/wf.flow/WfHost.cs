@@ -56,7 +56,6 @@ namespace Z0
 
         public StringRef Name  => Type.Name;
 
-
         public WfHostProxy(IWfShell wf, object real)
         {
             Wf = wf;

@@ -85,7 +85,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static uint2 create(W2 w, ulong src)
-            => new uint2((byte)((byte)src & uint2.MaxVal));
+            => new uint2((byte)((byte)src & uint2.MaxLiteral));
 
         /// <summary>
         /// Creates a 2-bit unsigned integer from a 2-term bit sequence

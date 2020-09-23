@@ -9,7 +9,6 @@ namespace Z0
     using Q = ClrQuerySpec;
     using B = System.Reflection.BindingFlags;
 
-    [EnumApi(Q.Default)]
     public readonly struct ClrQuerySpecs
     {
         public readonly struct Meanings

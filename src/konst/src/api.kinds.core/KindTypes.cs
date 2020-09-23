@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-
     [ApiHost]
     public readonly struct KindTypes
     {
@@ -21,5 +20,4 @@ namespace Z0
             Nested = typeof(Kinds).GetNestedTypes();
         }
     }
-
 }

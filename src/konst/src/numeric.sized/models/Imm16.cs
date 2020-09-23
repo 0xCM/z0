@@ -9,29 +9,37 @@ namespace Z0
 
     using static Konst;
 
-    using W = W64;
+    using W = W16;
 
     /// <summary>
-    /// Defines a refined 64-bit immediate value
+    /// Defines a refined 16-bit immediate value
     /// </summary>
-    public readonly struct Imm64<E> : ISized<Imm64<E>,W64>
-        where E : unmanaged, Enum
+    public readonly struct Imm16<E> : ISized<Imm16<E>,W16>
+        where E : unmanaged
     {
         public readonly E Data;
 
         public static W W => default;
 
+        public E Content
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
         [MethodImpl(Inline)]
-        public static implicit operator E(Imm64<E> src)
+        public static implicit operator E(Imm16<E> src)
             => src.Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm64<E>(E src)
-            => new Imm64<E>(src);
+        public static implicit operator Imm16<E>(E src)
+            => new Imm16<E>(src);
 
         [MethodImpl(Inline)]
-        public Imm64(E src)
-            => Data = src;
+        public Imm16(E value)
+        {
+            Data = value;
+        }
 
         [MethodImpl(Inline)]
         public string Format()
@@ -48,5 +56,6 @@ namespace Z0
 
         public override int GetHashCode()
             => (int)Hash;
+
     }
 }

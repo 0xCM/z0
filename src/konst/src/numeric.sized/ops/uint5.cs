@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static S uint5(ulong src)
-            => new S((byte)((byte)src & S.MaxVal));
+            => new S((byte)((byte)src & S.MaxLiteral));
 
         /// <summary>
         /// Creates a 5-bit unsigned integer from a 5-term bit sequence
@@ -167,7 +167,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal static byte crop5(byte x)
-            => (byte)(S.MaxVal & x);
+            => (byte)(S.MaxLiteral & x);
 
         [MethodImpl(Inline), Op]
         internal static byte reduce5(byte x)

@@ -12,33 +12,33 @@ namespace Z0
     partial class Hex
     {
         [MethodImpl(Inline), Op]
-        public static Hex1 hex(Hex1Kind src)
+        public static Hex1 hex(Hex1Seq src)
             => new Hex1(src);
 
 
         [MethodImpl(Inline), Op]
-        public static Hex2 hex(Hex2Kind src)
+        public static Hex2 hex(Hex2Seq src)
             => new Hex2(src);
 
         [MethodImpl(Inline), Op]
-        public static Hex3 hex(Hex3Kind src)
+        public static Hex3 hex(Hex3Seq src)
             => new Hex3(src);
 
 
         [MethodImpl(Inline), Op]
-        public static Hex4 hex(Hex4Kind src)
+        public static Hex4 hex(Hex4Seq src)
             => new Hex4(src);
 
         [MethodImpl(Inline), Op]
-        public static Hex5 hex(Hex5Kind src)
+        public static Hex5 hex(Hex5Seq src)
             => new Hex5(src);
 
         [MethodImpl(Inline), Op]
-        public static Hex6 hex(Hex6Kind src)
+        public static Hex6 hex(Hex6Seq src)
             => new Hex6(src);
 
         [MethodImpl(Inline), Op]
-        public static Hex8 hex(Hex8Kind src)
+        public static Hex8 hex(Hex8Seq src)
             => new Hex8(src);
 
         [MethodImpl(Inline), Op]

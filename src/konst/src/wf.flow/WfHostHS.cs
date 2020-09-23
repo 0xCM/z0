@@ -10,8 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public abstract class WfHost<H,C> : WfHost<H>, IWfHost<H,C>
-        where H : WfHost<H,C>, new()
+    public abstract class WfHost<H,S> : WfHost<H>, IWfHost<H,S>
+        where H : WfHost<H,S>, new()
     {
         [MethodImpl(Inline)]
         protected WfHost()
@@ -20,9 +20,21 @@ namespace Z0
 
         }
 
+        public void Run(IWfShell<S> wf)
+        {
+            try
+            {
+                Execute(wf);
+            }
+            catch(Exception e)
+            {
+                wf.Shell.Error(Id,e);
+            }
+        }
+
+        protected abstract void Execute(IWfShell<S> wf);
+
         public override void Run(IWfShell shell)
             => throw new InvalidOperationException();
-
-        public abstract void Run(IWfShell<C> wf);
     }
 }

@@ -60,13 +60,13 @@ namespace Z0
             where S : unmanaged, ISizedInt<S>
         {
             if(typeof(S) == typeof(uint1))
-                return cast<S>(Q.uint1.MaxVal);
+                return cast<S>(Q.uint1.MaxLiteral);
             else if(typeof(S) == typeof(uint2))
-                return cast<S>(Q.uint2.MaxVal);
+                return cast<S>(Q.uint2.MaxLiteral);
             else if(typeof(S) == typeof(uint3))
-                return cast<S>(Q.uint3.MaxVal);
+                return cast<S>(Q.uint3.MaxLiteral);
             else if(typeof(S) == typeof(uint4))
-                return cast<S>(Q.uint4.MaxVal);
+                return cast<S>(Q.uint4.MaxLiteral);
             else
                 return maxval<S>(z.w5);
         }
@@ -76,13 +76,13 @@ namespace Z0
             where S : unmanaged, ISizedInt<S>
         {
             if(typeof(S) == typeof(uint5))
-                return cast<S>(Q.uint5.MaxVal);
+                return cast<S>(Q.uint5.MaxLiteral);
             else if(typeof(S) == typeof(uint6))
-                return cast<S>(Q.uint6.MaxVal);
+                return cast<S>(Q.uint6.MaxLiteral);
             else if(typeof(S) == typeof(uint7))
-                return cast<S>(Q.uint7.MaxVal);
+                return cast<S>(Q.uint7.MaxLiteral);
             else if(typeof(S) == typeof(octet))
-                return cast<S>(Q.octet.MaxVal);
+                return cast<S>(Q.octet.MaxLiteral);
             else
                 return maxval<S>(z.w16);
         }

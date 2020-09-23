@@ -3,19 +3,19 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
     using H = Hex8;
-    using K = Hex8Kind;
+    using K = Hex8Seq;
 
     public readonly struct Hex8 : IHexNumber<H,K>
-    {                        
+    {
         public readonly K Value;
-        
+
         [MethodImpl(Inline)]
         public Hex8(K src)
             => Value = src;
@@ -52,7 +52,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator H(byte src)
-            => new Hex8((Hex8Kind)src);
+            => new Hex8((Hex8Seq)src);
 
         [MethodImpl(Inline)]
         public static implicit operator byte(H src)
@@ -71,26 +71,26 @@ namespace Z0
             => (ulong)src.Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator H(Hex1Kind src)
+        public static implicit operator H(Hex1Seq src)
             => new H((byte)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator H(Hex2Kind src)
+        public static implicit operator H(Hex2Seq src)
             => new H((byte)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator H(Hex3Kind src)
+        public static implicit operator H(Hex3Seq src)
             => new H((byte)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator H(Hex4Kind src)
+        public static implicit operator H(Hex4Seq src)
             => new H((byte)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator H(Hex5Kind src)
+        public static implicit operator H(Hex5Seq src)
             => new H((byte)src);
 
-        K IHexNumber<K>.Value 
+        K IHexNumber<K>.Value
             => Value;
 
         [MethodImpl(Inline)]

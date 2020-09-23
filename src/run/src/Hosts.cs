@@ -19,19 +19,16 @@ namespace Z0
     [WfHost]
     public sealed class EmitImageHeadersHost : WfHost<EmitImageHeadersHost, DataFlow<FS.Files, FS.FilePath>>
     {
-        public override void Run(IWfShell<DataFlow<FS.Files, FS.FilePath>> wf)
+        protected override void Execute(IWfShell<DataFlow<FS.Files, FS.FilePath>> wf)
         {
-            using var step = new EmitImageHeaders(wf.Shell, this, wf.Context);
+            using var step = new EmitImageHeaders(wf.Shell, this, wf.State);
             step.Run();
         }
     }
 
-    public sealed class EmitModuleReportHost : WfHost<EmitModuleReportHost, FS.FilePath>
+    public sealed class EmitModuleReportHost : WfHost<EmitModuleReportHost>
     {
-        public override void Run(IWfShell<FS.FilePath> wf)
-        {
 
-        }
     }
 
 }

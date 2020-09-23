@@ -3,17 +3,17 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
     using H = Hex3;
-    using K = Hex3Kind;
+    using K = Hex3Seq;
 
     public readonly struct Hex3 : IHexNumber<H,K>
-    {                
+    {
         public readonly K Value;
 
         [MethodImpl(Inline)]
@@ -31,7 +31,7 @@ namespace Z0
         public const K KMin = K.x00;
 
         public const K KMax = K.x03;
-        
+
         public const K KOne = K.x01;
 
         public static H Zero => KMin;
@@ -63,16 +63,16 @@ namespace Z0
             => new Hex8((byte)src.Value);
 
         [MethodImpl(Inline)]
-        public static implicit operator Hex4Kind(Hex3 src)
-            => (Hex4Kind)src;
+        public static implicit operator Hex4Seq(Hex3 src)
+            => (Hex4Seq)src;
 
         [MethodImpl(Inline)]
-        public static implicit operator Hex5Kind(Hex3 src)
-            => (Hex5Kind)src;
+        public static implicit operator Hex5Seq(Hex3 src)
+            => (Hex5Seq)src;
 
         [MethodImpl(Inline)]
-        public static implicit operator Hex8Kind(Hex3 src)
-            => (Hex8Kind)src;
+        public static implicit operator Hex8Seq(Hex3 src)
+            => (Hex8Seq)src;
 
         [MethodImpl(Inline)]
         public static implicit operator H(byte src)
@@ -95,14 +95,14 @@ namespace Z0
             => (ulong)src.Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator H(Hex1Kind src)
+        public static implicit operator H(Hex1Seq src)
             => new H((byte)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator H(Hex2Kind src)
+        public static implicit operator H(Hex2Seq src)
             => new H((byte)src);
 
-        K IHexNumber<K>.Value 
+        K IHexNumber<K>.Value
             => Value;
 
         [MethodImpl(Inline)]

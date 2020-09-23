@@ -26,9 +26,9 @@ namespace Z0
         {
             Machine = new HexMax(state);
         }
-        
+
         [MethodImpl(Inline), Op]
-        public void Process(ReadOnlySpan<Hex8Kind> data)
+        public void Process(ReadOnlySpan<Hex8Seq> data)
         {
             Machine.Process(data);
         }

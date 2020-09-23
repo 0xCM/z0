@@ -8,326 +8,326 @@ namespace Z0
     /// <summary>
     /// Defines identifiers corresponding to each value that can be represented with a 6-bit unsigned integer
     /// </summary>
-    public enum Hex6Kind : byte
+    public enum Hex6Seq : byte
     {
-        /// <summary> 
+        /// <summary>
         /// Defines 0x00 = 0
-        /// </summary> 
+        /// </summary>
         x00 = 0x00,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x01 = 1
-        /// </summary> 
+        /// </summary>
         x01 = 0x01,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x02 = 2
-        /// </summary> 
+        /// </summary>
         x02 = 0x02,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x03 = 3
-        /// </summary> 
+        /// </summary>
         x03 = 0x03,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x04 = 4
-        /// </summary> 
+        /// </summary>
         x04 = 0x04,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x05 = 5
-        /// </summary> 
+        /// </summary>
         x05 = 0x05,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x06 = 6
-        /// </summary> 
+        /// </summary>
         x06 = 0x06,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x07 = 7
-        /// </summary> 
+        /// </summary>
         x07 = 0x07,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x08 = 8
-        /// </summary> 
+        /// </summary>
         x08 = 0x08,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x09 = 9
-        /// </summary> 
+        /// </summary>
         x09 = 0x09,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x0a = 10
-        /// </summary> 
+        /// </summary>
         x0a = 0x0a,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x0b = 11
-        /// </summary> 
+        /// </summary>
         x0b = 0x0b,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x0c = 12
-        /// </summary> 
+        /// </summary>
         x0c = 0x0c,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x0d = 13
-        /// </summary> 
+        /// </summary>
         x0d = 0x0D,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x0e = 14
-        /// </summary> 
+        /// </summary>
         x0e = 0x0e,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x0f = 15
-        /// </summary> 
+        /// </summary>
         x0f = 0x0f,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x10 = 16
-        /// </summary> 
+        /// </summary>
         x10 = 0x10,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x11 = 17
-        /// </summary> 
+        /// </summary>
         x11 = 0x11,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x12 = 18
-        /// </summary> 
+        /// </summary>
         x12 = 0x12,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x13 = 19
-        /// </summary> 
+        /// </summary>
         x13 = 0x13,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x14 = 20
-        /// </summary> 
+        /// </summary>
         x14 = 0x14,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x15 = 21
-        /// </summary> 
+        /// </summary>
         x15 = 0x15,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x16 = 22
-        /// </summary> 
+        /// </summary>
         x16 = 0x16,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x17 = 23
-        /// </summary> 
+        /// </summary>
         x17 = 0x17,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x18 = 24
-        /// </summary> 
+        /// </summary>
         x18 = 0x18,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x19 = 25
-        /// </summary> 
+        /// </summary>
         x19 = 0x19,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x1a = 26
-        /// </summary> 
+        /// </summary>
         x1a = 0x1a,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x1b = 27
-        /// </summary> 
+        /// </summary>
         x1b = 0x1b,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x1c = 28
-        /// </summary> 
+        /// </summary>
         x1c = 0x1c,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x1d = 29
-        /// </summary> 
+        /// </summary>
         x1d = 0x1D,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x1e = 30
-        /// </summary> 
+        /// </summary>
         x1e = 0x1e,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x1f = 31
-        /// </summary> 
+        /// </summary>
         x1f = 0x1f,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x20 = 32
-        /// </summary> 
+        /// </summary>
         x20 = 0x20,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x21 = 33
-        /// </summary> 
+        /// </summary>
         x21 = 0x21,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x22 = 34
-        /// </summary> 
+        /// </summary>
         x22 = 0x22,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x23 = 35
-        /// </summary> 
+        /// </summary>
         x23 = 0x23,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x24 = 36
-        /// </summary> 
+        /// </summary>
         x24 = 0x24,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x25 = 37
-        /// </summary> 
+        /// </summary>
         x25 = 0x25,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x26 = 38
-        /// </summary> 
+        /// </summary>
         x26 = 0x26,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x27 = 39
-        /// </summary> 
+        /// </summary>
         x27 = 0x27,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x28 = 40
-        /// </summary> 
+        /// </summary>
         x28 = 0x28,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x29 = 41
-        /// </summary> 
+        /// </summary>
         x29 = 0x29,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x2a = 42
-        /// </summary> 
+        /// </summary>
         x2a = 0x2a,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x2b = 43
-        /// </summary> 
+        /// </summary>
         x2b = 0x2b,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x2c = 44
-        /// </summary> 
+        /// </summary>
         x2c = 0x2c,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x2d = 45
-        /// </summary> 
+        /// </summary>
         x2d = 0x2D,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x2e = 46
-        /// </summary> 
+        /// </summary>
         x2e = 0x2e,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x2f = 47
-        /// </summary> 
+        /// </summary>
         x2f = 0x2f,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x30 = 48
-        /// </summary> 
+        /// </summary>
         x30 = 0x30,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x31 = 49
-        /// </summary> 
+        /// </summary>
         x31 = 0x31,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x32 = 50
-        /// </summary> 
+        /// </summary>
         x32 = 0x32,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x33 = 51
-        /// </summary> 
+        /// </summary>
         x33 = 0x33,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x34 = 52
-        /// </summary> 
+        /// </summary>
         x34 = 0x34,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x35 = 53
-        /// </summary> 
+        /// </summary>
         x35 = 0x35,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x36 = 54
-        /// </summary> 
+        /// </summary>
         x36 = 0x36,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x37 = 55
-        /// </summary> 
+        /// </summary>
         x37 = 0x37,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x38 = 56
-        /// </summary> 
+        /// </summary>
         x38 = 0x38,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x39 = 57
-        /// </summary> 
+        /// </summary>
         x39 = 0x39,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x3a = 58
-        /// </summary> 
+        /// </summary>
         x3a = 0x3a,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x3b = 59
-        /// </summary> 
+        /// </summary>
         x3b = 0x3b,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x3c = 60
-        /// </summary> 
+        /// </summary>
         x3c = 0x3c,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x3d = 61
-        /// </summary> 
+        /// </summary>
         x3d = 0x3D,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x3e = 62
-        /// </summary> 
+        /// </summary>
         x3e = 0x3e,
 
-        /// <summary> 
+        /// <summary>
         /// Defines 0x3f = 63
-        /// </summary> 
+        /// </summary>
         x3f = 0x3f,
     }
 }

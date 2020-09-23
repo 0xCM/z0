@@ -12,14 +12,14 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Hex4Kind;
+    using static Hex4Seq;
     using static z;
 
     [ApiHost]
     public ref struct Dispatchers
     {
         [Op]
-        public Hex4Kind dispatch(Hex4Kind src, Hex4Kind dst)
+        public Hex4Seq dispatch(Hex4Seq src, Hex4Seq dst)
         {
             switch(src)
             {

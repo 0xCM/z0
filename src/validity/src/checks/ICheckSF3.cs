@@ -11,7 +11,7 @@ namespace Z0
     using static z;
     using static SFx;
 
-    readonly struct CheckTernaryOpSF<T> : ICheckSF<T,T,T,T>
+    public readonly struct CheckTernaryOpSF<T> : ICheckSF<T,T,T,T>
         where T : unmanaged
     {
         public ITestContext Context {get;}
@@ -26,7 +26,7 @@ namespace Z0
         }
     }
 
-    readonly struct CheckTernaryPredSF<T> : ICheckSF<T,T,T,bit>
+    public readonly struct CheckTernaryPredSF<T> : ICheckSF<T,T,T,bit>
         where T : unmanaged
     {
         public ITestContext Context {get;}

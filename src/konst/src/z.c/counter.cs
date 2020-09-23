@@ -11,12 +11,12 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {            
+    {
         /// <summary>
         /// Allocates and optionally starts a system counter
         /// </summary>
-        [MethodImpl(Inline)]   
-        SystemCounter counter(bool start = false)
+        [MethodImpl(Inline), Op]
+        public static SystemCounter counter(bool start = false)
             => SystemCounters.counter(start);
     }
 }

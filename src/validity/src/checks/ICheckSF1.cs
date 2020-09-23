@@ -11,7 +11,7 @@ namespace Z0
     using static z;
     using static SFx;
 
-    readonly struct CheckUnaryOpSF<T> : ICheckSF<T,T>
+    public readonly struct CheckUnaryOpSF<T> : ICheckSF<T,T>
         where T : unmanaged
     {
         public ITestContext Context {get;}

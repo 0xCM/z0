@@ -9,40 +9,28 @@ namespace Z0
 
     using static Konst;
 
-    using W = W8;
+    using W = W64;
 
     /// <summary>
-    /// Defines a refined 8-bit immediate value
+    /// Defines a refined 64-bit immediate value
     /// </summary>
-    public readonly struct Imm8<E> : IAsmArg<Imm8<E>,W,E>
-        where E : unmanaged, Enum
+    public readonly struct Imm64<E> : ISized<Imm64<E>,W64>
+        where E : unmanaged
     {
         public readonly E Data;
 
         public static W W => default;
 
-        public E Content
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        public AsmOperandKind OpKind
-        {
-            [MethodImpl(Inline)]
-            get => AsmOperandKind.Imm;
-        }
-
         [MethodImpl(Inline)]
-        public static implicit operator E(Imm8<E> src)
+        public static implicit operator E(Imm64<E> src)
             => src.Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator Imm8<E>(E src)
-            => new Imm8<E>(src);
+        public static implicit operator Imm64<E>(E src)
+            => new Imm64<E>(src);
 
         [MethodImpl(Inline)]
-        public Imm8(E src)
+        public Imm64(E src)
             => Data = src;
 
         [MethodImpl(Inline)]

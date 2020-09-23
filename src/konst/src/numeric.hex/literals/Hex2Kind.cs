@@ -7,26 +7,26 @@ namespace Z0
     /// <summary>
     /// Defines identifiers corresponding to the hex digits 0,..,3
     /// </summary>
-    public enum Hex2Kind : byte
+    public enum Hex2Seq : byte
     {
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x00 := 0
-        /// </summary> 
+        /// </summary>
         x00 = 0x0,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x01 := 1
-        /// </summary> 
+        /// </summary>
         x01 = 0x1,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x02 := 2
-        /// </summary> 
+        /// </summary>
         x02 = 0x2,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x03 := 3
-        /// </summary> 
+        /// </summary>
         x03 = 0x3,
     }
 }

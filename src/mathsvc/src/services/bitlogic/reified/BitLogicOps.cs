@@ -101,7 +101,7 @@ namespace Z0
                 if(typeof(B) == typeof(K.Not))
                     return not(a);
                 else
-                    throw Unsupported.define<T>();
+                    throw no<T>();
             }
 
             [MethodImpl(Inline)]
@@ -137,7 +137,7 @@ namespace Z0
                 else if(typeof(B) == typeof(K.CNonImpl))
                     return cnonimpl(a,b);
                 else
-                    throw Unsupported.define<T>();
+                    throw no<T>();
             }
 
             [MethodImpl(Inline)]
@@ -147,7 +147,7 @@ namespace Z0
                 if(typeof(B) == typeof(K.Select))
                     return select(a,b,c);
                 else
-                    throw Unsupported.define<T>();
+                    throw no<T>();
             }
         }
     }

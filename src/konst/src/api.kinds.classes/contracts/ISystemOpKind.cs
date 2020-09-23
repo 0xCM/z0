@@ -4,6 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
     using K = SystemApiKey;
     using I = ISystemOpKind;
 

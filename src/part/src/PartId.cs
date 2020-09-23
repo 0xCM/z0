@@ -73,6 +73,8 @@ public enum PartId : ulong
 
     CheckDynamic = 72,
 
+    MathTest = 73,
+
     // ~ 100
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -242,7 +244,6 @@ public enum PartId : ulong
 
     MachinesTest = Machines | Test,
 
-    MathTest = Math | Test,
 
     BitsTest = BitSuite | Test,
 

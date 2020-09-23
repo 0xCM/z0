@@ -38,6 +38,5 @@ namespace Z0
         public readonly struct TestBits : I {  K I.Kind => K.TestBits; }
 
         public readonly struct Stitch : I {  K I.Kind => K.Stitch; }
-
     }
 }

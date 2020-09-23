@@ -26,7 +26,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void OnHex(Hex8Kind kind)
+        public void OnHex(Hex8Seq kind)
         {
             if(kind == Code.Value)
                 OnHex(Code);

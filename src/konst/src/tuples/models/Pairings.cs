@@ -21,7 +21,7 @@ namespace Z0
         /// <summary>
         /// The captured sequence
         /// </summary>
-        public readonly Span<Paired<S,T>> Data;
+        readonly Span<Paired<S,T>> Data;
 
         [MethodImpl(Inline)]
         public static implicit operator Pairings<S,T>(Span<Paired<S,T>> src)
@@ -39,19 +39,21 @@ namespace Z0
         /// Returns a mutable reference to an index-identified sequence element
         /// </summary>
         /// <param name="index">The zero-based sequence index</param>
-        [MethodImpl(Inline)]
-        public ref Paired<S,T> Select(int index)
-            => ref z.seek(Data, (uint)index);
+        public ref Paired<S,T> this[long index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(Data, (uint)index);
+        }
 
         /// <summary>
         /// Returns a mutable reference to an index-identified sequence element
         /// </summary>
         /// <param name="index">The zero-based sequence index</param>
-        public ref Paired<S,T> this[int index]
+        public ref Paired<S,T> this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => ref Select(index);
-        }        
+            get => ref seek(Data,index);
+        }
 
         /// <summary>
         /// Specifies the number of elements in the sequence

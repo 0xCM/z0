@@ -21,17 +21,26 @@ namespace Z0
     /// </summary>
     public readonly struct octet : ISizedInt<S,W,K,T>
     {
-        internal readonly byte data;
+        internal readonly T data;
 
-        public const byte MinVal = 0;
+        public const T MinLiteral = 0;
 
-        public const byte MaxVal = byte.MaxValue;
+        public const T MaxLiteral = byte.MaxValue;
 
+        /// <summary>
+        /// Specifies the bit-width represented by <see cref='S'/>
+        /// </summary>
         public const byte Width = 8;
 
         public const uint Count = 256;
 
         public static W W => default;
+
+        public static N N => default;
+
+        public static S Zero => 0;
+
+        public static S One => 1;
 
         /// <summary>
         /// Specifies the minimum <see cref='S'/> value
@@ -39,7 +48,7 @@ namespace Z0
         public static S Min
         {
             [MethodImpl(Inline)]
-            get => new S(MinVal);
+            get => new S(MinLiteral);
         }
 
         /// <summary>
@@ -48,14 +57,8 @@ namespace Z0
         public static S Max
         {
             [MethodImpl(Inline)]
-            get => new S(MaxVal);
+            get => new S(MaxLiteral);
         }
-
-        public static S Zero => 0;
-
-        public static S One => 1;
-
-        public static N N => default;
 
         [MethodImpl(Inline)]
         public static implicit operator S(K src)
@@ -252,7 +255,7 @@ namespace Z0
         public bool IsMax
         {
             [MethodImpl(Inline)]
-            get => data == MaxVal;
+            get => data == MaxLiteral;
         }
 
         /// <summary>
@@ -261,7 +264,7 @@ namespace Z0
         public bool IsMin
         {
             [MethodImpl(Inline)]
-            get => data == MinVal;
+            get => data == MinLiteral;
         }
 
         [MethodImpl(Inline)]

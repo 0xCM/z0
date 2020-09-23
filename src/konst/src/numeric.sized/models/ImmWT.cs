@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public struct Imm<W,T> : IAsmImmArg<Imm<W,T>, W,T>
+    public struct Imm<W,T> : ISized<Imm<W,T>,W>
         where W : unmanaged, INumericWidth
         where T : unmanaged
     {
@@ -54,7 +54,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Imm<W,T>(ushort src)
             => new Imm<W,T>(Cast.to<ushort,T>(src));
-
 
         [MethodImpl(Inline)]
         public static implicit operator Imm<W,T>(uint src)

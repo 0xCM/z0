@@ -22,16 +22,31 @@ namespace Z0
     /// </summary>
     public readonly struct uint3 : ISizedInt<S,W,K,T>
     {
-        internal readonly byte data;
+        internal readonly T data;
 
-        public const byte MinVal = 0;
+        /// <summary>
+        /// Specifies the inclusive lower bound of the <see cref='S'/> data type as a literal value
+        /// </summary>
+        public const T MinLiteral = 0;
 
-        public const byte MaxVal = 7;
+        /// <summary>
+        /// Specifies the inclusive upper bound of the <see cref='S'/> data type as a literal value
+        /// </summary>
+        public const T MaxLiteral = 7;
 
-        public const int Width = 3;
+        /// <summary>
+        /// Specifies the bit-width represented by <see cref='S'/>
+        /// </summary>
+        public const byte Width = 3;
 
-        public const byte Count = (byte)MaxVal + 1;
+        /// <summary>
+        /// Specifies the count of unique values representable by a <see cref='S'/>
+        /// </summary>
+        public const byte Count = (byte)MaxLiteral + 1;
 
+        /// <summary>
+        /// Specifies the <see cref='Width'/> values as a type-level natural
+        /// </summary>
         public static N N => default;
 
         public static W W => default;
@@ -42,7 +57,7 @@ namespace Z0
         public static S Min
         {
             [MethodImpl(Inline)]
-            get => new S(MinVal,true);
+            get => new S(MinLiteral,true);
         }
 
         /// <summary>
@@ -51,7 +66,7 @@ namespace Z0
         public static S Max
         {
             [MethodImpl(Inline)]
-            get => new S(MaxVal,true);
+            get => new S(MaxLiteral,true);
         }
 
         /// <summary>
@@ -218,7 +233,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static S operator ~(S src)
-            => wrap3(~src.data & MaxVal);
+            => wrap3(~src.data & MaxLiteral);
 
         [MethodImpl(Inline)]
         public static S operator ++(S x)
@@ -254,11 +269,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal uint3(octet src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint3(byte src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint3(byte src, bool @unchecked)
@@ -266,27 +281,27 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal uint3(sbyte src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((uint)src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint3(short src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((uint)src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint3(ushort src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint3(int x)
-            => data = (byte)((uint)x & MaxVal);
+            => data = (byte)((uint)x & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint3(uint src)
-            => data = (byte)(src & MaxVal);
+            => data = (byte)(src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint3(long src)
-            => data = (byte)((uint)src & MaxVal);
+            => data = (byte)((uint)src & MaxLiteral);
 
         [MethodImpl(Inline)]
         internal uint3(uint src, bool safe)
@@ -339,7 +354,7 @@ namespace Z0
         public bool IsMax
         {
             [MethodImpl(Inline)]
-            get => data == MaxVal;
+            get => data == MaxLiteral;
         }
 
         /// <summary>
@@ -348,7 +363,7 @@ namespace Z0
         public bool IsMin
         {
             [MethodImpl(Inline)]
-            get => data == MinVal;
+            get => data == MinLiteral;
         }
 
         /// <summary>

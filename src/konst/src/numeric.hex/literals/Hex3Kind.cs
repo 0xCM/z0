@@ -3,50 +3,50 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     /// <summary>
     /// Defines identifiers corresponding to the hex digits 0,..,7
     /// </summary>
-    public enum Hex3Kind : byte
+    public enum Hex3Seq : byte
     {
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x00 := 0
-        /// </summary> 
+        /// </summary>
         x00 = 0x0,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x01 := 1
-        /// </summary> 
+        /// </summary>
         x01 = 0x1,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x02 := 2
-        /// </summary> 
+        /// </summary>
         x02 = 0x2,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x03 := 3
-        /// </summary> 
+        /// </summary>
         x03 = 0x3,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x04 := 4
-        /// </summary> 
+        /// </summary>
         x04 = 0x4,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x05 := 5
-        /// </summary> 
+        /// </summary>
         x05 = 0x5,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x06 := 6
-        /// </summary> 
+        /// </summary>
         x06 = 0x6,
 
-        /// <summary> 
+        /// <summary>
         /// Identifies the hex value 0x07 := 7
-        /// </summary> 
+        /// </summary>
         x07 = 0x7,
     }
 }

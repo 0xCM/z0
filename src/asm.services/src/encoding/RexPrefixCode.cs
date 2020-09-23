@@ -3,9 +3,9 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
-    using static Hex8Kind;
-    
+{
+    using static Hex8Seq;
+
     public enum RexPrefixCode : byte
     {
         Rex40 = x40,

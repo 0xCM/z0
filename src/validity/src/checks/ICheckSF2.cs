@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static SFx;
 
-    readonly struct CheckBinaryOpSF<T> : ICheckSF<T,T,T>
+    public readonly struct CheckBinaryOpSF<T> : ICheckSF<T,T,T>
         where T : unmanaged
     {
         public ITestContext Context {get;}
@@ -25,7 +25,7 @@ namespace Z0
         }
     }
 
-    readonly struct CheckBinaryPredSF<T> : ICheckSF<T,T,bit>
+    public readonly struct CheckBinaryPredSF<T> : ICheckSF<T,T,bit>
         where T : unmanaged
     {
         public ITestContext Context {get;}

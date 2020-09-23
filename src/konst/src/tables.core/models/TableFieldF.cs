@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     public struct TableField<F>
-        where F : unmanaged, Enum
+        where F : unmanaged
     {
         public F Id {get;}
 

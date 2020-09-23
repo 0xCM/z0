@@ -3,13 +3,13 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
- 
+
     partial class Hex
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
@@ -44,7 +44,7 @@ namespace Z0
             ref readonly var codes = ref first(UpperDigits);
             var storage = Stacks.char2();
             ref var dst = ref storage.C0;
-                        
+
             seek(dst,0) = (char)skip(codes, (byte)(0xF & src));
             seek(dst,1) = (char)skip(codes, (byte)((src >> 4) & 0xF));
             return Stacks.span(ref storage);
@@ -99,27 +99,27 @@ namespace Z0
             for(var i=0; i < count; i++)
                 Stacks.cell(ref dst, i) = (char)skip(in codes, (uint) ((src >> i*4) & 0xF));
             return Stacks.span(ref storage);
-        }               
+        }
 
         [MethodImpl(Inline), Op]
         public static void chars(byte src, Span<char> dst, int offset)
         {
             ref readonly var codes = ref first(UpperDigits);
             ref var target = ref first(dst);
-            
+
             seek(target, offset + 0) = (char)skip(in codes, (byte)(src & 0xF));
-            seek(target, offset + 1) = (char)skip(in codes, (byte)((src >> 4) & 0xF));            
+            seek(target, offset + 1) = (char)skip(in codes, (byte)((src >> 4) & 0xF));
         }
-        
+
         [MethodImpl(Inline), Op]
         public static void chars(ushort src, Span<char> dst, int offset)
         {
             ref readonly var codes = ref first(UpperDigits);
             ref var target = ref first(dst);
             seek(target, offset + 0) = (char)skip(in codes, (ushort)(src & 0xF));
-            seek(target, offset + 1) = (char)skip(in codes, (ushort)((src >> 1*4) & 0xF));            
+            seek(target, offset + 1) = (char)skip(in codes, (ushort)((src >> 1*4) & 0xF));
             seek(target, offset + 2) = (char)skip(in codes, (ushort)((src >> 2*4) & 0xF));
-            seek(target, offset + 3) = (char)skip(in codes, (ushort)((src >> 3*4) & 0xF));            
+            seek(target, offset + 3) = (char)skip(in codes, (ushort)((src >> 3*4) & 0xF));
         }
 
         [MethodImpl(Inline), Op]
@@ -128,9 +128,9 @@ namespace Z0
             ref readonly var codes = ref first(UpperDigits);
             ref var target = ref first(dst);
             seek(target, offset + 0) = (char)skip(in codes, src & 0xF);
-            seek(target, offset + 1) = (char)skip(in codes, (src >> 1*4) & 0xF);            
-            seek(target, offset + 2) = (char)skip(in codes, (src >> 2*4) & 0xF);            
-            seek(target, offset + 3) = (char)skip(in codes, (src >> 3*4) & 0xF);            
+            seek(target, offset + 1) = (char)skip(in codes, (src >> 1*4) & 0xF);
+            seek(target, offset + 2) = (char)skip(in codes, (src >> 2*4) & 0xF);
+            seek(target, offset + 3) = (char)skip(in codes, (src >> 3*4) & 0xF);
         }
 
         [MethodImpl(Inline), Op]
@@ -139,45 +139,45 @@ namespace Z0
             ref readonly var codes = ref first(UpperDigits);
             ref var target = ref first(dst);
             seek(target, offset + 0) = (char)skip(in codes, src & 0xF);
-            seek(target, offset + 1) = (char)skip(in codes, (src >> 1*4) & 0xF);            
-            seek(target, offset + 2) = (char)skip(in codes, (src >> 2*4) & 0xF);            
-            seek(target, offset + 3) = (char)skip(in codes, (src >> 3*4) & 0xF);            
-            seek(target, offset + 4) = (char)skip(in codes, (src >> 4*4) & 0xF);            
-            seek(target, offset + 5) = (char)skip(in codes, (src >> 5*4) & 0xF);            
-            seek(target, offset + 6) = (char)skip(in codes, (src >> 6*4) & 0xF);            
-            seek(target, offset + 7) = (char)skip(in codes, (src >> 7*4) & 0xF);            
-        }        
+            seek(target, offset + 1) = (char)skip(in codes, (src >> 1*4) & 0xF);
+            seek(target, offset + 2) = (char)skip(in codes, (src >> 2*4) & 0xF);
+            seek(target, offset + 3) = (char)skip(in codes, (src >> 3*4) & 0xF);
+            seek(target, offset + 4) = (char)skip(in codes, (src >> 4*4) & 0xF);
+            seek(target, offset + 5) = (char)skip(in codes, (src >> 5*4) & 0xF);
+            seek(target, offset + 6) = (char)skip(in codes, (src >> 6*4) & 0xF);
+            seek(target, offset + 7) = (char)skip(in codes, (src >> 7*4) & 0xF);
+        }
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(in HexText<Hex1Kind> src, Hex1Kind kind)
+        public static ReadOnlySpan<char> chars(in HexText<Hex1Seq> src, Hex1Seq kind)
             => src.Chars(kind);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(in HexText<Hex2Kind> src, Hex2Kind kind)
+        public static ReadOnlySpan<char> chars(in HexText<Hex2Seq> src, Hex2Seq kind)
             => src.Chars(kind);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(in HexText<Hex3Kind> src, Hex3Kind kind)
+        public static ReadOnlySpan<char> chars(in HexText<Hex3Seq> src, Hex3Seq kind)
             => src.Chars(kind);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(in HexText<Hex4Kind> src, Hex4Kind kind)
+        public static ReadOnlySpan<char> chars(in HexText<Hex4Seq> src, Hex4Seq kind)
             => src.Chars(kind);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(Hex1Kind kind)
+        public static ReadOnlySpan<char> chars(Hex1Seq kind)
             => chars(text(n1), kind);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(Hex2Kind kind)
+        public static ReadOnlySpan<char> chars(Hex2Seq kind)
             => chars(text(n2), kind);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(Hex3Kind kind)
+        public static ReadOnlySpan<char> chars(Hex3Seq kind)
             => chars(text(n3), kind);
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> chars(Hex4Kind kind)
+        public static ReadOnlySpan<char> chars(Hex4Seq kind)
             => chars(text(n4), kind);
 
         [MethodImpl(Inline)]
@@ -242,6 +242,6 @@ namespace Z0
                 chars(int64(value), dst, offset);
             else
                 throw Unsupported.define<T>();
-        }            
+        }
     }
 }

@@ -31,8 +31,8 @@ namespace Z0
             [MethodImpl(Inline)]
             public Emitter(Z0.Emitter<T> f, OpIdentity id)
             {
-                this.F = f;
-                this.Id = id;
+                F = f;
+                Id = id;
             }
 
             [MethodImpl(Inline)]

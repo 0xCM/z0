@@ -3,17 +3,17 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
     using H = Hex4;
-    using K = Hex4Kind;
+    using K = Hex4Seq;
 
     public readonly struct Hex4 : IHexNumber<H,K>
-    {                
+    {
         public readonly K Value;
 
         [MethodImpl(Inline)]
@@ -31,7 +31,7 @@ namespace Z0
         public const K KMin = K.x00;
 
         public const K KMax = K.x0F;
-    
+
         public const K KOne = K.x01;
 
         public static H Zero => KMin;
@@ -80,18 +80,18 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public static implicit operator H(Hex1Kind src)
+        public static implicit operator H(Hex1Seq src)
             => new H((byte)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator H(Hex2Kind src)
+        public static implicit operator H(Hex2Seq src)
             => new H((byte)src);
 
         [MethodImpl(Inline)]
-        public static implicit operator H(Hex3Kind src)
+        public static implicit operator H(Hex3Seq src)
             => new H((byte)src);
 
-        K IHexNumber<K>.Value 
+        K IHexNumber<K>.Value
             => Value;
 
         [MethodImpl(Inline)]

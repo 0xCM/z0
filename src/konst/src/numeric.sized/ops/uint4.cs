@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static S uint4(ulong src)
-            => new S((byte)((byte)src & S.MaxVal));
+            => new S((byte)((byte)src & S.MaxLiteral));
 
         /// <summary>
         /// Creates a 4-bit unsigned integer from a 4-term bit sequence
@@ -158,7 +158,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal static byte crop4(byte x)
-            => (byte)(S.MaxVal & x);
+            => (byte)(S.MaxLiteral & x);
 
         static BitFormat FormatConfig4
             => BitFormatter.limited(S.Width, S.Width);

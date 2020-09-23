@@ -20,6 +20,10 @@ namespace Z0
             => text.ifempty(f.GetType().Tag<OpKindAttribute>()
                    .MapValueOrDefault(a => f.GetType().DisplayName(), f.GetType().DisplayName()),  f.GetType().DisplayName());
 
+        [Op]
+        public static string name(IFunc f, IFunc g)
+            => text.format("{0} <-> {1}", name(f), name(g));
+
         /// <summary>
         /// Produces the formatted identifier of the declaring assembly
         /// </summary>

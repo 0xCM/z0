@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     using H = Hex1;
-    using K = Hex1Kind;
+    using K = Hex1Seq;
 
     public readonly struct Hex1 : IHexNumber<H,K>
     {

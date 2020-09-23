@@ -6,19 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
 
     /// <summary>
     /// Defines a memory store index
     /// </summary>
     public struct MemorySlot
-    {   
-        Hex8Kind Index;
+    {
+        Hex8Seq Index;
 
         [MethodImpl(Inline)]
         public static MemorySlot Init()
-            => new MemorySlot(FirstKey);        
+            => new MemorySlot(FirstKey);
 
         [MethodImpl(Inline)]
         public static MemorySlot operator++(MemorySlot src)
@@ -34,14 +34,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator MemorySlot(int src)
-            => new MemorySlot((Hex8Kind)src);
+            => new MemorySlot((Hex8Seq)src);
 
         [MethodImpl(Inline)]
         public static implicit operator MemorySlot(byte src)
-            => new MemorySlot((Hex8Kind)src);
+            => new MemorySlot((Hex8Seq)src);
 
         [MethodImpl(Inline)]
-        public MemorySlot(Hex8Kind value)
+        public MemorySlot(Hex8Seq value)
             => Index = value;
 
         [MethodImpl(Inline)]
@@ -64,8 +64,8 @@ namespace Z0
             return this;
         }
 
-        const Hex8Kind FirstKey = Hex8Kind.x00;
+        const Hex8Seq FirstKey = Hex8Seq.x00;
 
-        const Hex8Kind LastKey = Hex8Kind.xff;
+        const Hex8Seq LastKey = Hex8Seq.xff;
     }
 }

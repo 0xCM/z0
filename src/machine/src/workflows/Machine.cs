@@ -96,7 +96,7 @@ namespace Z0
             => host.Run(Wf);
 
         void Run(ProcessPartFilesHost host)
-            => host.Run(Wf.With(Asm));
+            => host.Run(Wf.WithState(Asm));
 
         void Run(EmitContentCatalogHost host)
             => host.Run(Wf);

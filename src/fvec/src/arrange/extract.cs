@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;    
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Sse41;
-    
-    using static Konst;    
+
+    using static Konst;
 
     partial class dinxfp
     {
@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="pos">The zero-based index of the source component to extract</param>
         [MethodImpl(Inline), Op]
-        public static float vextract(Vector128<float> src, Hex2Kind pos)
+        public static float vextract(Vector128<float> src, Hex2Seq pos)
             => Extract(src, (byte)pos);
 
         /// <summary>

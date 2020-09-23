@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     public interface IReaderState
     {
@@ -14,6 +15,6 @@ namespace Z0
     public interface IReaderState<S> : IReaderState
         where S : struct, ISourceFacets
     {
-        S Facets {get;}        
+        S Facets {get;}
     }
 }
