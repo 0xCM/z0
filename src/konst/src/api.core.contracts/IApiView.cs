@@ -5,15 +5,16 @@
 namespace Z0
 {
     using System;
-    using static z;
+    using System.Reflection;
 
-    readonly struct App
+    public interface IApiView<S>
     {
-        public static int Main(params string[] args)
-        {
-            using var wf = Flow.shell(args);
-            iter(wf.Modules.ManagedSources, m => wf.Raise(WfEvents.data(m, wf.Ct)));
-            return 0;
-        }
+        S Source {get;}
+    }
+
+    public interface IApiView<H,S> : IApiView<S>
+        where H : IApiView<H,S>, new()
+    {
+
     }
 }

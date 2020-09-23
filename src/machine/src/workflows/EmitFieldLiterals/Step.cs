@@ -37,7 +37,7 @@ namespace Z0
         public void Run()
         {
             Target.Clear();
-            var parts = span(Wf.Modules.Parts.Storage.Map(part => ApiQuery.types(part)));
+            var parts = span(Wf.Api.Parts.Storage.Map(part => ApiQuery.types(part)));
             foreach(var part in parts)
             {
                 try

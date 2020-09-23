@@ -5,15 +5,18 @@
 namespace Z0
 {
     using System;
-    using static z;
+    using System.Runtime.CompilerServices;
 
-    readonly struct App
+    using static Konst;
+
+    public interface IApiContext
     {
-        public static int Main(params string[] args)
-        {
-            using var wf = Flow.shell(args);
-            iter(wf.Modules.ManagedSources, m => wf.Raise(WfEvents.data(m, wf.Ct)));
-            return 0;
-        }
+
+    }
+
+    public interface IApiContext<H,C> : IApiContext, IStateful<C>
+        where H : struct, IApiContext<H,C>
+    {
+
     }
 }

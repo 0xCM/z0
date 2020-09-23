@@ -5,15 +5,16 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Reflection;
+
+    using static Konst;
     using static z;
 
-    readonly struct App
+    partial struct ApiQuery
     {
-        public static int Main(params string[] args)
-        {
-            using var wf = Flow.shell(args);
-            iter(wf.Modules.ManagedSources, m => wf.Raise(WfEvents.data(m, wf.Ct)));
-            return 0;
-        }
+        [MethodImpl(Inline), Op]
+        public static Assembly[] owners(in ApiModules src)
+            => src.Assemblies.Where(isPart);
     }
 }
