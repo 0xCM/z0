@@ -381,6 +381,7 @@
         "mullo",
         "multibyte",
         "multiword",
+        "nfunc",
         "noconfig",
         "nologo",
         "nonz",

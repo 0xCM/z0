@@ -6,12 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
 
     /// <summary>
-    /// Defines an arrow to clr-specific artifact
+    /// Defines a reference to clr-specific artifact
     /// </summary>
     public readonly struct ClrArtifactRef<A> : IClrArtifactRef<A>
         where A : struct, IClrArtifact<A>
@@ -20,7 +19,7 @@ namespace Z0
 
         public ClrArtifactKind Kind => Artifact.Kind;
 
-        public ClrArtifactKey Id  => Artifact.Id;
+        public ClrArtifactKey Key  => Artifact.Id;
 
         public ClrName Name => Artifact.Name;
 
@@ -33,6 +32,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ClrArtifactRef(ClrArtifactRef<A> src)
-            => new ClrArtifactRef(src.Id, src.Kind, src.Name);
+            => new ClrArtifactRef(src.Key, src.Kind, src.Name);
     }
 }

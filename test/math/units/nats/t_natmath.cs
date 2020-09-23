@@ -5,13 +5,13 @@
 namespace Z0
 {
     using System;
- 
+
     using static Konst;
     using static Memories;
     using static NatCalc;
 
     public class t_natmath : UnitTest<t_natmath>
-    {    
+    {
         public void add_check()
         {
 
@@ -23,7 +23,7 @@ namespace Z0
             where A : unmanaged, ITypeNat
             where B : unmanaged, ITypeNat
         {
-            var sum1 = add(a,b);   
+            var sum1 = TypeNats.add(a,b);
             var sum2 = default(A).NatValue + default(B).NatValue;
             ClaimNumeric.eq(expect, sum1);
             ClaimNumeric.eq(expect, sum2);
@@ -33,7 +33,7 @@ namespace Z0
             where A : unmanaged, ITypeNat
             where B : unmanaged, ITypeNat
         {
-            var sum1 = (int)add(a,b);   
+            var sum1 = (int)TypeNats.add(a,b);
             ClaimNumeric.eq(expect, sum1);
         }
     }

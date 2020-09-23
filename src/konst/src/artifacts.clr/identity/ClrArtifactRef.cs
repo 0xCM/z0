@@ -15,14 +15,14 @@ namespace Z0
     {
         public ClrArtifactKind Kind {get;}
 
-        public ClrArtifactKey Id {get;}
+        public ClrArtifactKey Key {get;}
 
         public ClrName Name {get;}
 
         [MethodImpl(Inline)]
         public ClrArtifactRef(ClrArtifactKey id, ClrArtifactKind kind, ClrName name)
         {
-            Id = id;
+            Key = id;
             Kind = kind;
             Name = name;
         }

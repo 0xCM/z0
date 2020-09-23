@@ -5,15 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    public class DataSourceAttribute : Attribute
+    /// <summary>
+    /// Applied to a target to specify the target definition source
+    /// </summary>
+    public class OriginAttribute : Attribute
     {
-        public DataSourceAttribute(object value)
+        public OriginAttribute(object src)
         {
-            Value = value;
+            Source = src;
         }
 
-        public object Value {get;}
+        public object Source {get;}
     }
 }

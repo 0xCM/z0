@@ -9,16 +9,28 @@ namespace Z0
 
     using static Konst;
 
+    /// <summary>
+    /// Characterizes an clr artifact reference
+    /// </summary>
     public interface IClrArtifactRef : ITextual
     {
+        /// <summary>
+        /// The artifact classifier
+        /// </summary>
         ClrArtifactKind Kind {get;}
 
-        ClrArtifactKey Id {get;}
+        /// <summary>
+        /// The artifact key that, together with the artifact kind, forms an identity
+        /// </summary>
+        ClrArtifactKey Key {get;}
 
+        /// <summary>
+        /// The name of the referenced artifact
+        /// </summary>
         ClrName Name {get;}
 
         string ITextual.Format()
-            => text.format(RenderPatterns.PSx3, Kind, Id, Name);
+            => text.format(RenderPatterns.PSx3, Kind, Key, Name);
     }
 
     public interface IClrArtifactRef<A> : IClrArtifactRef

@@ -19,6 +19,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] alloc<T>(long count)
-            => sys.alloc<T>((int)count);
+            => sys.alloc<T>(count);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static T[] alloc<T>(ulong count)
+            => sys.alloc<T>(count);
     }
 }

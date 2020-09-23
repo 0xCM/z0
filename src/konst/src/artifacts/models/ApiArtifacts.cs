@@ -13,7 +13,7 @@ namespace Z0
     public readonly struct ApiArtifacts
     {
         [MethodImpl(Inline)]
-        public static ArtifactToken<K,A> identify<K,A>(K kind, A id)
+        public static ArtifactIdentity<K,A> identify<K,A>(K kind, A id)
             where K : unmanaged
             where A : unmanaged
                 => (kind, id);

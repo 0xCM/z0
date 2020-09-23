@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static TypeWidth width(EnumScalarKind @base)
         {
-            var exp = (byte)(@base & EnumScalarKind.WidthMask);
+            var exp = (byte)(@base & EnumScalarKindE.WidthMask);
             return (TypeWidth)Pow2.pow(exp);
         }
 

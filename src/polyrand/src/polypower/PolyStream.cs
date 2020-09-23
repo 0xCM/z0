@@ -51,9 +51,6 @@ namespace Z0
         /// <typeparam name="T">The element type</typeparam>
         public static IRngStream<T> Stream<T>(this IPolyrand src, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => PolyStreams.create(src, domain, filter);                            
-
-
-
+                => PolyStreams.create(src, domain, filter);
     }
 }

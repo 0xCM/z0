@@ -3,15 +3,15 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Linq;
     using System.Collections.Generic;
- 
+
     public static partial class TypeNats
-    {        
+    {
         /// <summary>
-        /// Consructs the canonical sequence representatives for the natural numbers within an inclusive range
+        /// Constructs the canonical sequence representatives for the natural numbers within an inclusive range
         /// </summary>
         /// <param name="min">The minimum value</param>
         /// <param name="max">The maximum value</param>

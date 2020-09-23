@@ -65,7 +65,7 @@ namespace Z0
         public static void Traverse(IWfShell wf, Assembly src)
         {
             var printer = new ArtifactPrinter(wf);
-            var models = api.types(src);
+            var models = api.sTypes(src);
             var count = models.Length;
             ref readonly var lead = ref models.First;
             for(var i=0; i<count; i++)
@@ -73,7 +73,7 @@ namespace Z0
                 ref readonly var current = ref skip(lead,i);
                 printer.Print(current);
 
-                Traverse(wf,api.fields(current));
+                Traverse(wf,api.vFields(current));
             }
         }
 

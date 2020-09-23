@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
+    using static TypeNats;
 
     partial class XTend
     {
@@ -23,9 +24,9 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
         public static NatSpan<N,T> NatSpan<N,T>(this IPolyrand random, Interval<T> domain, N n = default, Func<T,bool> filter = null)
-            where T : unmanaged  
+            where T : unmanaged
             where N : unmanaged, ITypeNat
-                => TypeNats.span(random.Span<T>((int)value(n), domain, filter), n);                                    
+                => TypeNats.span(random.Span<T>((int)value(n), domain, filter), n);
 
         /// <summary>
         /// Allocates a table span of natural dimensions and populates the cells with random values
@@ -38,7 +39,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
         public static TableSpan<M,N,T> TableSpan<M,N,T>(this IPolyrand random, M rows = default, N cols = default)
-            where T : unmanaged  
+            where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
                 => Z0.TableSpan.load<M,N,T>(random.Span<T>((int)NatCalc.mul(rows, cols)), rows, cols);
@@ -56,7 +57,7 @@ namespace Z0
         /// <typeparam name="T">The primal random value type</typeparam>
         [MethodImpl(Inline)]
         public static TableSpan<M,N,T> TableSpan<M,N,T>(this IPolyrand random, M rows, N cols, Interval<T> domain)
-            where T : unmanaged  
+            where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
                 => Z0.TableSpan.load<M,N,T>(random.Span<T>((int)NatCalc.mul(rows, cols), domain), rows, cols);

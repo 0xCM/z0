@@ -1,0 +1,44 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    /// <summary>
+    /// Characterizes type that defines a Description facet
+    /// </summary>
+    public interface IMeaning : ITextual
+    {
+        object Content {get;}
+
+        string ITextual.Format()
+            => string.Format("{0}", Content);
+    }
+
+    /// <summary>
+    /// Characterizes type that defines a Description facet
+    /// </summary>
+    public interface IMeaning<M> : IMeaning
+    {
+        new M Content {get;}
+
+        object IMeaning.Content
+            => Content;
+    }
+
+    public interface IMeaning<H,M> : IMeaning<M>, IFacet<M>
+        where H : IMeaning<H,M>
+    {
+        string IFacet.FacetName
+            => nameof(Meaning);
+
+        M IFacet<M>.FacetValue
+            => Content;
+    }
+
+    public interface IMeaning<H,M,T> : IMeaning<H,M>
+        where H : IMeaning<H,M,T>
+    {
+        T Target {get;}
+    }
+}

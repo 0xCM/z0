@@ -12,11 +12,23 @@ namespace Z0
     partial struct proxy
     {
         [MethodImpl(Options), Opaque(Alloc), Closures(Closure)]
-        public static T[] alloc<T>(int count)
+        public static T[] alloc<T>(byte count)
             => new T[count];
 
-        [MethodImpl(Options),  Opaque(Alloc)]
-        public static byte[] alloc(int count)
-            => new byte[count];
+        [MethodImpl(Options), Opaque(Alloc), Closures(Closure)]
+        public static T[] alloc<T>(ushort count)
+            => new T[count];
+
+        [MethodImpl(Options), Opaque(Alloc), Closures(Closure)]
+        public static T[] alloc<T>(uint count)
+            => new T[count];
+
+        [MethodImpl(Options), Opaque(Alloc), Closures(Closure)]
+        public static T[] alloc<T>(ulong count)
+            => new T[count];
+
+        [MethodImpl(Options), Opaque(Alloc), Closures(Closure)]
+        public static T[] alloc<T>(long count)
+            => new T[count];
     }
 }

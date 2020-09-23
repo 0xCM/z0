@@ -6,7 +6,7 @@ namespace Z0
 {
     /// <summary>
     /// Identifies the primal numeric kinds
-    /// </summary>    
+    /// </summary>
     /// <remarks>
     /// As a bitfield, Width = [0..2], Sign = [3], Floating = [4]
     /// <remarks>
@@ -63,11 +63,14 @@ namespace Z0
         /// Specifies a signed 64-bit floating-point number
         /// </summary>
         F64 = 0b10110,
-        
-        WidthMask = 0b0111,
+    }
 
-        SignMask = 0b1000,
+    public readonly struct PrimalNumericKindE
+    {
+        public const PrimalNumericKind WidthMask = (PrimalNumericKind)0b0111;
 
-        FloatMask = 0b10000,
+        public const PrimalNumericKind SignMask = (PrimalNumericKind)0b1000;
+
+        public const PrimalNumericKind FloatMask = (PrimalNumericKind)0b10000;
     }
 }

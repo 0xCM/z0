@@ -53,9 +53,12 @@ namespace Z0
         /// Specifies an enum type refines a signed 64-bit integer
         /// </summary>
         I64 = PN.I64,
+    }
 
-        WidthMask = PN.WidthMask,
+    public readonly struct EnumScalarKindE
+    {
+        public const EnumScalarKind WidthMask = (EnumScalarKind)PrimalNumericKindE.WidthMask;
 
-        SignMask = PN.SignMask,
+        public const EnumScalarKind SignMask = (EnumScalarKind)PrimalNumericKindE.SignMask;
     }
 }

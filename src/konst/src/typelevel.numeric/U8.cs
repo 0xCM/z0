@@ -9,20 +9,25 @@ namespace Z0
 
     using static Konst;
 
+    using P = System.Byte;
     using NK = NumericKind;
 
-    public readonly struct U8 : INumericKind<byte>
+    public readonly struct U8 : INumericKind<P>
     {
+        public const P MaxLiteral = P.MaxValue;
+
+        public const P MinLiteral = P.MinValue;
+
         [MethodImpl(Inline)]
         public static implicit operator NK(U8 src)
             => NK.U8;
 
         [MethodImpl(Inline)]
-        public static implicit operator U8(NK<byte> src)
+        public static implicit operator U8(NK<P> src)
             => default(U8);
 
         [MethodImpl(Inline)]
-        public static implicit operator NK<byte>(U8 src)
+        public static implicit operator NK<P>(U8 src)
             => default(U8);
     }
 }
