@@ -167,7 +167,7 @@ namespace Z0
         public TableSpan<M,N,T> Natural
         {
             [MethodImpl(Inline)]
-            get => TableSpan.load<M,N,T>(data);
+            get => TableSpans.load<M,N,T>(data);
         }
 
         /// <summary>

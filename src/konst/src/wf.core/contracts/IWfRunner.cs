@@ -3,25 +3,24 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
-
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IWfRunner : IWfActor
     {
         void Run();
     }
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IWfRunner<A> : IWfRunner
     {
         void Run(A args);
     }
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IWfRunner<H,A> : IWfRunner<H>
         where H : struct, IWfRunner<H,A>
     {

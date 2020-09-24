@@ -10,6 +10,11 @@ namespace Z0
     using static Konst;
     using static z;
 
+    public readonly struct WfRunSpec
+    {
+
+    }
+
     public readonly struct WfRunSpec<C,S,T>
     {
         public readonly C Config;

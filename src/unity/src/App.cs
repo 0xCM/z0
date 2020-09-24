@@ -31,7 +31,7 @@ namespace Z0
                 for(var i=0u; i<count; i++)
                 {
                     ref readonly var current = ref skip(lead, i);
-                    wf.DataRow(current);
+                    wf.Row(current);
                 }
             }
         }
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         static void Print<T>(IWfShell wf, in T src)
             where T : ITextual
-                => wf.DataRow(src);
+                => wf.Row(src);
 
         static void PrintBuildModules(IWfShell wf)
         {

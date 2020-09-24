@@ -37,6 +37,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Print<A>(in A src)
             where A : struct, IClrArtifact<A>
-                => Wf.DataRow(src);
+                => Wf.Row(src);
     }
 }

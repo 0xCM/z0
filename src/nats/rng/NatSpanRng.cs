@@ -42,7 +42,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Z0.TableSpan.load<M,N,T>(random.Span<T>((int)NatCalc.mul(rows, cols)), rows, cols);
+                => Z0.TableSpans.load<M,N,T>(random.Span<T>((int)NatCalc.mul(rows, cols)), rows, cols);
 
         /// <summary>
         /// Allocates a table span of natural dimensions and populates the cells with random values that
@@ -60,6 +60,6 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => Z0.TableSpan.load<M,N,T>(random.Span<T>((int)NatCalc.mul(rows, cols), domain), rows, cols);
+                => Z0.TableSpans.load<M,N,T>(random.Span<T>((int)NatCalc.mul(rows, cols), domain), rows, cols);
     }
 }

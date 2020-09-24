@@ -74,7 +74,7 @@ namespace Z0
             return e.EventId;
         }
 
-        void Raise<T>(DataRow<T>[] src)
+        void Raise<T>(RowCreated<T>[] src)
             where T : ITextual
         {
             foreach(var row in src)
@@ -177,7 +177,6 @@ namespace Z0
             where H :  IWfHost<H>, new()
                 => Raise(running(host, step, Ct));
 
-
         void Running<S,T>(WfStepId step, DataFlow<S,T> df)
             => Raise(running(step, df, Ct));
 
@@ -197,7 +196,6 @@ namespace Z0
         void RanStep<H>(H host, Type step)
             where H : IWfHost<H>, new()
                 => Raise(ran(host, step, Ct));
-
 
         void Ran<H,S,T,R>(H host, DataFlow<S,T,R> df)
             where H : IWfHost<H>, new()
@@ -239,13 +237,14 @@ namespace Z0
         void Processed<S,T>(WfStepId step, DataFlow<S,T> flow)
             => Raise(WfEvents.processed(step, flow, Ct));
 
-        void DataRow<T>(T content)
+        void Row<T>(T content)
             where T : ITextual
-                => Raise(WfEvents.data(content, Ct));
+                => Raise(WfEvents.row(content, Ct));
 
-        void DataRow<K,T>(K kind, T content)
+        void Row<K,T>(K kind, T content)
             where T : ITextual
-                => Raise(data(kind, content, Ct));
+            where K : unmanaged
+                => Raise(row(kind, content, Ct));
 
         static string callerName(string src)
             => Path.GetFileNameWithoutExtension(src);

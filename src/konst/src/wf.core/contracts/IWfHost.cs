@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using L = WfStepLaunchers;
+
     public interface IWfHost : IWfStep, ITextual
     {
         Type Type {get;}
@@ -17,6 +19,8 @@ namespace Z0
 
         string ITextual.Format()
             => Id.Format();
+
+        L.Launch Launcher => Run;
     }
 
     public interface IWfHost<H> : IWfHost, IWfStep<H>

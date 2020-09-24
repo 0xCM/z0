@@ -422,6 +422,7 @@
         "setcc",
         "setif",
         "sfunc",
+        "sfuncs",
         "shufflehi",
         "shufflelo",
         "slli",

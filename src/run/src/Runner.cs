@@ -275,13 +275,13 @@ namespace Z0
                 Wf.Running(StepId);
 
                 using var kernel = Native.kernel32();
-                Wf.DataRow(kernel);
+                Wf.Row(kernel);
 
                 var f = Native.func<OS.Delegates.GetProcAddress>(kernel, nameof(OS.Delegates.GetProcAddress));
-                Wf.DataRow(f);
+                Wf.Row(f);
 
                 var a = (MemoryAddress)f.Invoke(kernel, "CreateDirectoryA");
-                Wf.DataRow(a);
+                Wf.Row(a);
 
                 Wf.Ran(StepId);
             }
@@ -295,7 +295,7 @@ namespace Z0
             var indices = bitfield.Indices;
             var info = indices.Map(i => paired(i, (byte)i));
             foreach(var i in info)
-                Wf.DataRow(i);
+                Wf.Row(i);
 
             Wf.Ran(StepId);
         }
@@ -320,7 +320,7 @@ namespace Z0
                 ref readonly var captured = ref skip(results,i);
                 if(decoder.Decode(captured, out var fx))
                 {
-                    Wf.DataRow(fx.BaseAddress);
+                    Wf.Row(fx.BaseAddress);
                     var asm = formatter.FormatFunction(fx);
                     writer.Write(asm);
 

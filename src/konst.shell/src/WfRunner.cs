@@ -42,7 +42,7 @@ namespace Z0
             {
                 ref readonly var res = ref skip(resources,i);
                 ref readonly var row = ref skip(rows,i);
-                Wf.DataRow(delimit(row.Id, row.Address, row.Value));
+                Wf.Row(delimit(row.Id, row.Address, row.Value));
             }
 
             Wf.Ran(Id);
@@ -52,7 +52,7 @@ namespace Z0
         void Print(in ListedFiles src)
         {
             for(var i=0; i<src.Count; i++)
-                Wf.DataRow(src[i]);
+                Wf.Row(src[i]);
         }
 
         void ListApiHex()

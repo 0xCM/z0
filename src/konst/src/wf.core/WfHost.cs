@@ -10,10 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public delegate void WfStepLauncher(IWfShell wf);
-
-    public delegate void WfStepLauncher<H>(IWfShell wf, H host)
-        where H : IWfHost<H>,new();
+    using L = WfStepLaunchers;
 
     public readonly struct WfHost : IWfHost<WfHost>
     {
@@ -23,50 +20,23 @@ namespace Z0
 
         public StringRef Name {get;}
 
-        readonly WfStepLauncher Launch;
+        public L.Launch Launcher {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator WfStepId(WfHost src)
             => src.Id;
 
         [MethodImpl(Inline)]
-        public WfHost(WfStepId id, Type type, WfStepLauncher launch)
+        public WfHost(WfStepId id, Type type, L.Launch launch)
         {
             Id =id;
             Type = type;
             Name = type.Name;
-            Launch = launch;
+            Launcher = launch;
         }
 
+        [MethodImpl(Inline)]
         public void Run(IWfShell shell)
-        {
-            Launch(shell);
-        }
-    }
-
-    public readonly struct WfHostProxy : IWfHost<WfHostProxy>
-    {
-        readonly object Real;
-
-        readonly IWfShell Wf;
-
-        public Type Type {get;}
-
-        public WfStepId Id => Type;
-
-        public StringRef Name  => Type.Name;
-
-        public WfHostProxy(IWfShell wf, object real)
-        {
-            Wf = wf;
-            Real = real;
-            Type = real.GetType();
-            Wf.Created(this);
-        }
-
-        public void Run(IWfShell shell)
-        {
-
-        }
+            => Launcher(shell);
     }
 }

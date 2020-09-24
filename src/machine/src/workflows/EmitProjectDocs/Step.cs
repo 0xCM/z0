@@ -10,6 +10,7 @@ namespace Z0
     using System.Linq;
     using System.Xml;
     using System.IO;
+    using static Commented;
 
     using static Konst;
 
@@ -29,7 +30,7 @@ namespace Z0
         public void Run()
         {
             Wf.Running(Host);
-            collect();
+            Commented.collect(Wf);
             Wf.Ran(Host);
         }
 

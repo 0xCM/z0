@@ -10,6 +10,7 @@ namespace Z0.Parts
     {
 
     }
+
 }
 
 namespace Z0
@@ -18,5 +19,21 @@ namespace Z0
     public static partial class XTend
     {
 
+    }
+
+    [LiteralProvider]
+    readonly struct ApiNames
+    {
+        public const string Api = "api";
+
+        public const string Wf = "wf";
+
+        public const string Tables = "tables";
+
+        public const string SymbolicHex = "symbolic.hex";
+
+        public const string SfuncSurrogates = "sfuncs.surrogates";
+
+        public const string SfuncProjectors = "sfuncs.projectors";
     }
 }
