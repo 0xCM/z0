@@ -5,7 +5,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using System;
     using System.Runtime.CompilerServices;
 
@@ -14,22 +13,7 @@ namespace Z0
     using F = XedInstructionField;
     using R = XedInstructionRow;
 
-    public enum XedInstructionField : uint
-    {
-        Sequence = 0 | 16 << WidthOffset,
-
-        Mnemonic = 1 | 16 << WidthOffset,
-
-        Extension = 2 | 16 << WidthOffset,
-
-        BaseCode = 3 | 8 << WidthOffset,
-
-        Mod = 4 | 4 << WidthOffset,
-
-        Reg = 5 | 8 << WidthOffset,
-    }
-
-    public struct XedInstructionRow : ITabular<F,R>
+    public struct XedInstructionRow
     {
         public int Sequence;
 
@@ -44,14 +28,14 @@ namespace Z0
         public asci8 Reg;
 
         [MethodImpl(Inline)]
-        public XedInstructionRow(int Sequence, asci16 Mnemonic, asci16 Extension, asci8 BaseCode, asci4 Mod, asci8 Reg)
+        public XedInstructionRow(int seq, string mnemonic, string ext, string @base, string mod, string reg)
         {
-            this.Sequence = Sequence;
-            this.Mnemonic = Mnemonic;
-            this.Extension = Extension;
-            this.BaseCode = BaseCode;
-            this.Mod = Mod;
-            this.Reg = Reg;
+            Sequence = seq;
+            Mnemonic = mnemonic;
+            Extension = ext;
+            BaseCode = @base;
+            Mod = mod;
+            Reg = reg;
         }
 
         public string DelimitedText(char delimiter)

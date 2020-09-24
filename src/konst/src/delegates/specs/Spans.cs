@@ -6,10 +6,11 @@ namespace Z0
 {
     using System;
     using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
-    /// Defines the signature of an operator that accepts a primal value and 
-    /// partitions the value, or portion thereof, into segments of common length 
+    /// Defines the signature of an operator that accepts a primal value and
+    /// partitions the value, or portion thereof, into segments of common length
     /// </summary>
     /// <param name="src">The source value</param>
     /// <param name="dst">The target span of sufficent length to receive the partition segments</param>

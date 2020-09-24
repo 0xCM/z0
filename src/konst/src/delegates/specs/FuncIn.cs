@@ -4,15 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate R FuncIn<A,R>(in A a);
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate R FuncIn<A,B,R>(in A a, in B b);
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate R FuncIn<A,B,C,R>(in A a, in B b, in C c);
 }

@@ -12,7 +12,7 @@ namespace Z0
     using static z;
 
     public readonly struct TableFields<F>
-        where F : unmanaged, Enum
+        where F : unmanaged
     {
         public TableSpan<TableField<F>> Table {get;}
 

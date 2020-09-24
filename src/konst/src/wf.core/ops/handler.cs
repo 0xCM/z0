@@ -15,8 +15,8 @@ namespace Z0
     partial struct Flow
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static WfDataHandler<T> handler<T>(DataReceiver<T> receiver)
-            => new WfDataHandler<T>(receiver);
+        public static DataHandler<T> handler<T>(DataReceiver<T> receiver)
+            => new DataHandler<T>(receiver);
 
         [MethodImpl(Inline)]
         public static WfDataHandler<S,T> handler<S,T>(IWfShell wf, Map<S,T> f, S[] src, T[] dst)

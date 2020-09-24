@@ -10,16 +10,16 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    public readonly struct XedSources : IPartFilePaths
+    public readonly struct XedSourceArchive : IPartFilePaths
     {
-        public static XedSources Create(FS.FolderPath root)
-            => new XedSources(root);
+        public static XedSourceArchive Create(FS.FolderPath root)
+            => new XedSourceArchive(root);
 
         public FS.FolderPath ArchiveRoot {get;}
 
         public FS.FilePath[] Files {get;}
 
-        public XedSources(FS.FolderPath root)
+        public XedSourceArchive(FS.FolderPath root)
         {
             ArchiveRoot = root;
             Files = ArchiveRoot.Files(GlobalExtensions.Txt,true).Array();
@@ -64,5 +64,4 @@ namespace Z0
         public FS.FilePath[] EnumFiles
             => Files.Where(f => f.FileName.EndsWith("enum"));
     }
-
 }

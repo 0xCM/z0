@@ -12,17 +12,16 @@ namespace Z0
 
     partial class BitFields
     {
-
         [MethodImpl(Inline)]
         internal static T Mask<F,T>(BitField256<F,T> src, F index)
             where T : unmanaged
-            where F : unmanaged, Enum
+            where F : unmanaged
                 => BitMasks.lo<T>(src.Spec[index]);
 
         [MethodImpl(Inline)]
         public static T read<F,T>(in BitField256<F,T> src, F index)
             where T : unmanaged
-            where F : unmanaged, Enum
-                => gmath.and(vcell(src.State, Enums.scalar<F,byte>(index)), Mask(src,index));
+            where F : unmanaged
+                => gmath.and(vcell(src.State, z.@as<F,byte>(index)), Mask(src,index));
     }
 }

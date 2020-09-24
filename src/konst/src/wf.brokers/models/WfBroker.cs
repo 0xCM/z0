@@ -9,6 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
+    using static z;
 
     public class WfBroker : IWfBroker
     {
@@ -66,12 +67,12 @@ namespace Z0
 
         void Emit(IWfEvent e)
         {
-            z.iter(Receivers.Values, r => r(e));
+            iter(Receivers.Values, r => r(e));
         }
 
         void Emit(IAppEvent e)
         {
-            z.iter(Receivers.Values, r => r(e));
+            iter(Receivers.Values, r => r(e));
         }
 
         public void Raise(IWfEvent e)

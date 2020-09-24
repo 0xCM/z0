@@ -15,10 +15,14 @@ namespace Z0
     {
         public readonly T[] Data {get;}
 
-        public FilePath Target {get;}
+        public FS.FilePath Target {get;}
 
         [MethodImpl(Inline)]
-        public TableEmission(T[] src, FilePath dst)
+        public static implicit operator DataFlow<T[],FS.FilePath>(TableEmission<F,T> src)
+            => (src.Data,src.Target);
+
+        [MethodImpl(Inline)]
+        public TableEmission(T[] src, FS.FilePath dst)
         {
             Data = src;
             Target = dst;

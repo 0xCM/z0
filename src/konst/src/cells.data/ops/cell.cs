@@ -48,22 +48,22 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Cell8 c8<T>(T src)
             where T : unmanaged
-                => Cell8.From(Cast.to<T,byte>(src));
+                => Cell8.From(z.force<T,byte>(src));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Cell16 c16<T>(T src)
             where T : unmanaged
-                => Cell16.From(Cast.to<T,ushort>(src));
+                => Cell16.From(z.force<T,ushort>(src));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Cell32 c32<T>(T src)
             where T : unmanaged
-                => Cell32.init(Cast.to<T,uint>(src));
+                => Cell32.init(z.force<T,uint>(src));
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Cell64 c64<T>(T src)
             where T : unmanaged
-                => Cell64.From(Cast.to<T,ulong>(src));
+                => Cell64.From(z.force<T,ulong>(src));
 
         [MethodImpl(Inline)]
         public static F fix<T,F>(T src)

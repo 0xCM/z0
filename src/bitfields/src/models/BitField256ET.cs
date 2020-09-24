@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     public struct BitField256<E,T>
-        where E : unmanaged, Enum
+        where E : unmanaged
         where T : unmanaged
     {
         internal Vector256<T> State;

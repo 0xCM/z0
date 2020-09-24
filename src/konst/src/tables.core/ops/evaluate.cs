@@ -41,7 +41,7 @@ namespace Z0
         }
 
         [Op]
-        public static TableFieldEval<F,T> evaluate<F,T>(T src, TableFields<F> fields, Action<Exception> handler = null)
+        public static TableFieldValues<F,T> evaluate<F,T>(T src, TableFields<F> fields, Action<Exception> handler = null)
             where F : unmanaged, Enum
             where T : struct, ITable<F,T>
         {
@@ -62,7 +62,7 @@ namespace Z0
                         term.print(e);
                 }
             }
-            return new TableFieldEval<F,T>(src, fields, buffer);
+            return new TableFieldValues<F,T>(src, fields, buffer);
         }
     }
 }

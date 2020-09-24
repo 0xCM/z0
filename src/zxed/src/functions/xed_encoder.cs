@@ -107,5 +107,22 @@ namespace Z0.Xed
                 }
             }
         }
+
+        [Op]
+        public static void rex_prefix_enc(ReadOnlySpan<Func<byte?>> tests, ref xed_decoded_inst_t state)
+        {
+            var count = tests.Length;
+
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var f = ref skip(tests,i);
+                var test = f();
+                if(test.HasValue)
+                {
+                    state.ev._iforms.x_REX_PREFIX_ENC = test.Value;
+                    break;
+                }
+            }
+        }
     }
 }

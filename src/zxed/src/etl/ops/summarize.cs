@@ -14,6 +14,7 @@ namespace Z0
 
     partial struct XedOps
     {
+        [Op]
         public static XedPatternSummary summary(in XedPattern src)
         {
             var modidx = src.Parts.TryFind(x => x.StartsWith(MODIDX)).MapValueOrDefault(x => x.RightOf(ASSIGN).Trim(), EmptyString);

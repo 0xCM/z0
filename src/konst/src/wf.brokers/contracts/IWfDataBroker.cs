@@ -7,19 +7,19 @@ namespace Z0
     using System;
 
     public interface IWfDataBroker<K,T>
-        where K : unmanaged, Enum
+        where K : unmanaged
     {
-        ref readonly WfDataHandler<T> Get(K key);
+        ref readonly DataHandler<T> Get(K key);
 
-        ref WfDataHandler<T> Set(K key, in WfDataHandler<T> handler);
+        ref DataHandler<T> Set(K key, in DataHandler<T> handler);
 
         void Relay(K key, T value);
 
-        ref WfDataHandler<T> this[K key] {get;}
+        ref DataHandler<T> this[K key] {get;}
     }
 
     public interface IWfDataBroker<K,C,T>
-        where K : unmanaged, Enum
+        where K : unmanaged
     {
         ref readonly DataHandler<C,T> Get(K key);
 

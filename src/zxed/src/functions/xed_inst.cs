@@ -96,7 +96,6 @@ namespace Z0.Xed
           public static xed_uint32_t xed_operand_is_register(in xed_operand_enum_t name)
                => name >= XED_OPERAND_REG0 && name <= XED_OPERAND_REG8;
 
-
           /// @ingroup DEC
           /// Tests the enum for inclusion in XED_OPERAND_{BASE0,BASE1,INDEX,SEG0,SEG1}
           /// @param name the operand name, type #xed_operand_enum_t

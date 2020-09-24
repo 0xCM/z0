@@ -66,43 +66,43 @@ namespace Z0
             return () => default;
 
             [MethodImpl(Inline)]
-            F f8i() => z.@as<sbyte,F>(source.Next<sbyte>());
+            F f8i() => @as<sbyte,F>(source.Next<sbyte>());
 
             [MethodImpl(Inline)]
-            F f8u() => z.@as<byte,F>(source.Next<byte>());
+            F f8u() => @as<byte,F>(source.Next<byte>());
 
             [MethodImpl(Inline)]
-            F f16u() => z.@as<ushort,F>(source.Next<ushort>());
+            F f16u() => @as<ushort,F>(source.Next<ushort>());
 
             [MethodImpl(Inline)]
-            F f16i() => z.@as<short,F>(source.Next<short>());
+            F f16i() => @as<short,F>(source.Next<short>());
 
             [MethodImpl(Inline)]
-            F f32i() => z.@as<int,F>(source.Next<int>());
+            F f32i() => @as<int,F>(source.Next<int>());
 
             [MethodImpl(Inline)]
-            F f32u() => z.@as<uint,F>(source.Next<uint>());
+            F f32u() => @as<uint,F>(source.Next<uint>());
 
             [MethodImpl(Inline)]
-            F f64u() => z.@as<ulong,F>(source.Next<ulong>());
+            F f64u() => @as<ulong,F>(source.Next<ulong>());
 
             [MethodImpl(Inline)]
-            F f64i() => z.@as<long,F>(source.Next<long>());
+            F f64i() => @as<long,F>(source.Next<long>());
 
             [MethodImpl(Inline)]
-            F f32f() => z.@as<float,F>(source.Next<float>());
+            F f32f() => @as<float,F>(source.Next<float>());
 
             [MethodImpl(Inline)]
-            F f64f() => z.@as<double,F>(source.Next<double>());
+            F f64f() => @as<double,F>(source.Next<double>());
 
             [MethodImpl(Inline)]
-            F f128() => z.@as<Cell128,F>(source.Cell(w128));
+            F f128() => @as<Cell128,F>(source.Cell(w128));
 
             [MethodImpl(Inline)]
-            F f256() => z.@as<Cell256,F>(source.Cell(w256));
+            F f256() => @as<Cell256,F>(source.Cell(w256));
 
             [MethodImpl(Inline)]
-            F f512() => z.@as<Cell512,F>(source.Cell(w512));
+            F f512() => @as<Cell512,F>(source.Cell(w512));
         }
 
         [MethodImpl(Inline)]

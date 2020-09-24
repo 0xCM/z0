@@ -12,12 +12,12 @@ namespace Z0
     using static z;
 
     using F = XedPatternField;
-    using Formatter = FieldFormatter<XedPatternField>;
+    using XF = XedInstructionField;
 
     partial struct XedOps
     {
         [MethodImpl(Inline), Op]
-        public static ref readonly Formatter emit(in XedPattern src, in Formatter dst)
+        public static ref readonly FieldFormatter<XedPatternField> render(in XedPattern src, in FieldFormatter<XedPatternField> dst)
         {
             dst.Delimit(F.Class, src.Class);
             dst.Delimit(F.Category, src.Category);
@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ref readonly Formatter emit(in XedPatternSummary src, in Formatter dst)
+        public static ref readonly FieldFormatter<XedPatternField> render(in XedPatternSummary src, in FieldFormatter<XedPatternField> dst)
         {
             dst.Delimit(F.Class, src.Class);
             dst.Delimit(F.Category, src.Category);
@@ -43,6 +43,18 @@ namespace Z0
             dst.Delimit(F.Reg, src.Reg);
             dst.Delimit(F.Pattern, src.Pattern);
             dst.Delimit(F.Operands, src.Operands);
+            return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static ref readonly DatasetFormatter<XedInstructionField> render(in XedInstructionRow src, in DatasetFormatter<XedInstructionField> dst)
+        {
+            dst.Delimit(XF.Sequence, src.Sequence);
+            dst.Delimit(XF.Mnemonic, src.Mnemonic);
+            dst.Delimit(XF.Extension, src.Extension);
+            dst.Delimit(XF.BaseCode, src.BaseCode);
+            dst.Delimit(XF.Mod, src.Mod);
+            dst.Delimit(XF.Reg, src.Reg);
             return ref dst;
         }
     }

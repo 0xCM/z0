@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         [MethodImpl(Inline)]
-        public static BitVector4 BitVector(this IPolyrand random, N4 n)
+        public static BitVector4 BitVector(this IDomainValues random, N4 n)
             => random.Next<byte>(0,17);
 
         /// <summary>
@@ -28,17 +28,17 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         [MethodImpl(Inline)]
-        public static BitVector8 BitVector(this IPolyrand random, N8 n)
+        public static BitVector8 BitVector(this IPolySource random, N8 n)
             => random.Next<byte>();
 
         /// <summary>
-        /// Produces an 8-bit primal bitvector of a specified maximial effective width
+        /// Produces an 8-bit primal bitvector of a specified maximal effective width
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         /// <param name="wmax">The effecive width</param>
         [MethodImpl(Inline)]
-        public static BitVector8 BitVector(this IPolyrand random, N8 n, int wmax)
+        public static BitVector8 BitVector(this IPolySource random, N8 n, int wmax)
         {
             var v = random.Next<byte>();
             var clamp = (int)value(n) - (int)math.min(value(n), (uint)wmax);
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         [MethodImpl(Inline)]
-        public static BitVector16 BitVector(this IPolyrand random, N16 n)
+        public static BitVector16 BitVector(this IPolySource random, N16 n)
             => random.Next<ushort>();
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// <param name="n">The primal bitvector selector</param>
         /// <param name="wmax">The effected width</param>
         [MethodImpl(Inline)]
-        public static BitVector16 BitVector(this IPolyrand random, N16 n, int wmax)
+        public static BitVector16 BitVector(this IPolySource random, N16 n, int wmax)
         {
             var v = random.Next<ushort>();
             var clamp = (int)value(n) - (int)math.min(value(n), (uint)wmax);
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         [MethodImpl(Inline)]
-        public static BitVector32 BitVector(this IPolyrand random, N32 n)
+        public static BitVector32 BitVector(this IPolySource random, N32 n)
             => random.Next<uint>();
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="n">The primal bitvector selector</param>
         /// <param name="wmax">The maximum effected width</param>
         [MethodImpl(Inline)]
-        public static BitVector32 BitVector(this IPolyrand random, N32 n, int wmax)
+        public static BitVector32 BitVector(this IPolySource random, N32 n, int wmax)
         {
             var v = random.Next<uint>();
             var clamp = (int)value(n) - (int)math.min(value(n), (uint)wmax);
@@ -97,7 +97,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         [MethodImpl(Inline)]
-        public static BitVector64 BitVector(this IPolyrand random, N64 n)
+        public static BitVector64 BitVector(this IPolySource random, N64 n)
             => random.Next<ulong>();
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Z0
         /// <param name="n">The primal bitvector selector</param>
         /// <param name="wmax">The maximum effected width</param>
         [MethodImpl(Inline)]
-        public static BitVector64 BitVector(this IPolyrand random, N64 n, int wmax)
+        public static BitVector64 BitVector(this IPolySource random, N64 n, int wmax)
         {
             var v = random.Next<ulong>();
             var clamp = (int)value(n) - (int)math.min(value(n), (uint)wmax);
@@ -175,7 +175,7 @@ namespace Z0
         /// <typeparam name="N">The bit width type</typeparam>
         /// <typeparam name="T">The underlying primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> BitVector<N,T>(this IPolyrand random, N n = default, T t = default)
+        public static BitVector<N,T> BitVector<N,T>(this IPolySource random, N n = default, T t = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {

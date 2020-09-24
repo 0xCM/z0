@@ -5,11 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate A Imm8UnaryOp<A>(A a, byte b);
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate A Imm8BinaryOp<A>(A a, A b, byte c);
 }

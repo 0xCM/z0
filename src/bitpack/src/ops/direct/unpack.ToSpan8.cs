@@ -8,9 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static As;
-    using static Root;
-    using static Typed;
+    using static z;
+    // using static As;
+    // using static Root;
+    // using static Typed;
 
     partial class BitPack
     {
@@ -23,7 +24,7 @@ namespace Z0
         public static void unpack(byte src, Span<byte> dst)
         {
             var mask = BitMasks.lsb<ulong>(n8,n1);
-            ref var lead = ref head(dst);
+            ref var lead = ref first(dst);
 
             seek64(lead, 0) = Bits.scatter((ulong)(byte)src, mask);
         }
@@ -37,7 +38,7 @@ namespace Z0
         public static void unpack(ushort src, Span<byte> dst)
         {
             var mask = BitMasks.lsb<ulong>(n8,n1);
-            ref var lead = ref head(dst);
+            ref var lead = ref first(dst);
 
             seek64(lead, 0) = Bits.scatter((ulong)(byte)src, mask);
             seek64(lead, 1) = Bits.scatter((ulong)((byte)(src >> 8)), mask);
@@ -52,7 +53,7 @@ namespace Z0
         public static void unpack(uint src, Span<byte> dst)
         {
             var mask = BitMasks.lsb<ulong>(n8,n1);
-            ref var lead = ref head(dst);
+            ref var lead = ref first(dst);
 
             seek64(lead, 0) = Bits.scatter((ulong)(byte)src, mask);
             seek64(lead, 1) = Bits.scatter((ulong)((byte)(src >> 8)), mask);

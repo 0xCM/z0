@@ -22,7 +22,7 @@ namespace Z0
         public static T force<S,T>(S src)
             where T : unmanaged
             where S : unmanaged
-                => Cast.to<S,T>(src);
+                => z.force<S,T>(src);
 
         /// <summary>
         /// If possible, applies the conversion byte -> T

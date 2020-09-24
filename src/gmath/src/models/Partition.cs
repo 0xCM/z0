@@ -23,11 +23,11 @@ namespace Z0
         [Op, Closures(AllNumeric)]
         public static IEnumerable<T> stream<T>(Interval<T> src, T width, int? precision = null)
             where T : unmanaged
-        {            
+        {
             var scale = precision ?? 4;
             if(src.LeftClosed)
                 yield return src.Left;
-            
+
             var next = gfp.round(gmath.add(src.Left, width), scale);
             while(gmath.lt(next,src.Right))
             {
@@ -38,7 +38,6 @@ namespace Z0
             if(src.RightClosed)
                 yield return src.Right;
         }
-
 
         /// <summary>
         /// Computes the points that determine a partitioning predicated on partition width
@@ -85,7 +84,7 @@ namespace Z0
             var lastIx = points.Length - 1;
             var lastCycleIx = lastIx - 1;
             var model = default(Interval<T>);
-            
+
             for(var i = 0; i < lastIx; i++)
             {
                 var left = points[i];
@@ -103,7 +102,7 @@ namespace Z0
                 else
                     dst[i] = model.New(left,right, IntervalKind.LeftClosed);
             }
-            return dst;            
+            return dst;
         }
 
         /// <summary>
@@ -117,21 +116,21 @@ namespace Z0
             where T : unmanaged
         {
             var len =  gmath.length(src);
-            var count = Cast.to<T,int>(gmath.div(len, width));            
+            var count = z.force<T,int>(gmath.div(len, width));
             var dst = Spans.alloc<T>(count + 1);
             var point = src.Left;
             var lastix = dst.Length - 1;
 
             for(var i=0; i < dst.Length; i++)
             {
-                if(i == 0)            
+                if(i == 0)
                     dst[i] = src.Left;
                 else if(i == dst.Length - 1)
-                    dst[i] = src.Right;                        
+                    dst[i] = src.Right;
                 else
-                    dst[i] = point;                            
+                    dst[i] = point;
 
-                if(i != lastix)    
+                if(i != lastix)
                     point = gmath.add(point, width);
             }
 
@@ -145,7 +144,7 @@ namespace Z0
             var scale = 4;
             var len =  gfp.round(gmath.length(src), scale);
             var fcount = gfp.div(len, width);
-            var count = convert<T,int>(gfp.ceil(fcount));            
+            var count = convert<T,int>(gfp.ceil(fcount));
             var dst = Spans.alloc<T>(count + 1);
 
             var point = src.Left;
@@ -154,15 +153,15 @@ namespace Z0
             {
                 if(i > 0 && i < lastix)
                     dst[i] = point;
-                else if(i == 0)            
+                else if(i == 0)
                     dst[i] = src.Left;
                 else if(i == lastix)
-                    dst[i] = src.Right;                        
+                    dst[i] = src.Right;
 
                 if(i != lastix)
                     point = gfp.round(gfp.add(point, width), scale);
             }
-            
+
             return dst;
         }
     }

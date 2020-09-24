@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
     using static Konst;
 
@@ -127,7 +127,7 @@ namespace Z0
             var count = input.Length;
             var target = dst.ToSpan();
             for(var i=0; i<count; i++)
-                z.seek(target,(uint)i) = Cast.to<S,T>(z.skip(input,(uint)i));        
+                z.seek(target,(uint)i) = z.force<S,T>(z.skip(input,(uint)i));
             return dst;
         }
 
@@ -146,7 +146,7 @@ namespace Z0
             var buffer = sys.alloc<T>(count);
             var dst = buffer.ToSpan();
             for(var i=0; i<count; i++)
-                z.seek(dst,(uint)i) = Cast.to<S,T>(z.skip(input,(uint)i));        
+                z.seek(dst,(uint)i) = z.force<S,T>(z.skip(input,(uint)i));
             return buffer;
         }
     }

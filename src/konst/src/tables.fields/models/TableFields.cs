@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct TableFields : ITableSpan<TableField>
+    public readonly struct TableFields : ITableSpan<TableFields,TableField>
     {
         readonly TableSpan<TableField> Data;
 
@@ -96,5 +96,10 @@ namespace Z0
 
         public static TableFields Empty
             => new TableFields(sys.empty<TableField>());
+
+        [MethodImpl(Inline)]
+        public TableFields Refresh(TableField[] src)
+            => src;
+
     }
 }

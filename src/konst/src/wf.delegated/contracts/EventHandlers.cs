@@ -5,21 +5,21 @@
 namespace Z0
 {
     using System;
-    using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     partial struct WfDelegates
     {
-        [SuppressUnmanagedCodeSecurity]
+        [Free]
         public delegate void EventHandler(IWfEvent src);
 
-        [SuppressUnmanagedCodeSecurity]
+        [Free]
         public delegate void EventHandler<E>(in E src)
             where E : struct, IWfEvent<E>;
 
-        [SuppressUnmanagedCodeSecurity]
+        [Free]
         public interface IEventHandler : IHandler<IWfEvent> { }
 
-        [SuppressUnmanagedCodeSecurity]
+        [Free]
         public interface IEventHandler<E> : IHandler<E>
             where E : struct, IWfEvent<E> { }
     }

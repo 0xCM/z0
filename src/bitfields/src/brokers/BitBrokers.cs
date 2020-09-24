@@ -18,7 +18,7 @@ namespace Z0
                 => new BitBroker<K,T>(kind);
 
         [MethodImpl(Inline)]
-        public static BitBroker<K,T> broker64<K,T>(WfDataHandler<T>[] buffer, K kind = default)
+        public static BitBroker<K,T> broker64<K,T>(DataHandler<T>[] buffer, K kind = default)
             where K : unmanaged, Enum
                 => new BitBroker<K,T>(kind, buffer);
     }

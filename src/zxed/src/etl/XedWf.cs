@@ -28,9 +28,9 @@ namespace Z0.Xed
 
         readonly IWfShell Wf;
 
-        readonly XedSources Source;
+        readonly XedSourceArchive Source;
 
-        readonly XedStage Stage;
+        readonly XedStageArchive Stage;
 
         readonly ITableArchive Target;
 
@@ -39,8 +39,8 @@ namespace Z0.Xed
             Wf = wf;
             Config = config;
             Settings = config.Settings;
-            Source = XedSources.Create(Config.SourceRoot);
-            Stage = XedStage.Create(Config.ExtractRoot);
+            Source = XedOps.SourceArchive(Config.SourceRoot);
+            Stage = XedStageArchive.Create(Config.ExtractRoot);
             Target = TableArchive.create(Config.PubRoot);
             Wf.Created(typeof(XedWf));
         }
@@ -139,6 +139,7 @@ namespace Z0.Xed
 
         const string RulePageBreak = RP.PageBreak120;
 
+        [Op]
         void EmitRules()
         {
             var functions = list<XedRuleSet>();

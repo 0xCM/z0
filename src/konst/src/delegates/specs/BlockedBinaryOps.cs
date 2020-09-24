@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [SuppressUnmanagedCodeSecurity]
     public delegate ref readonly SpanBlock8<T> BinaryBlockedOp8<T>(in SpanBlock8<T> a, in SpanBlock8<T> b, in SpanBlock8<T> dst)

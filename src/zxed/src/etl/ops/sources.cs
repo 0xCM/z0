@@ -9,37 +9,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
-    using static XedSourceMarkers;
-    using Xed;
 
     partial struct XedOps
     {
-        public static XedPattern[] patterns(in XedInstructionDoc src)
-        {
-            var patterns = list<XedPattern>();
-            for(var i=0; i<src.RowCount; i++)
-            {
-                if(src.IsProp(i,PATTERN) && i != (src.RowCount - 1))
-                {
-                    if(src.IsProp(i + 1, OPERANDS))
-                    {
-                        patterns.Add(new XedPattern(
-                            src.Class,
-                            src.Category,
-                            src.Extension,
-                            src.IsaSet,
-                            src.ExtractProp(i),
-                            src.ExtractProp(i + 1)
-                            ));
-                    }
-                }
-            }
-            return patterns.ToArray();
-        }
+        [MethodImpl(Inline), Op]
+        public static ListedFiles SourceFiles(in XedConfig config)
+            => Archives.list(FS.dir(config.SourceRoot.Name),"*.*", true);
 
         [MethodImpl(Inline), Op]
-        public static ListedFiles sources(in XedConfig config)
-            => Archives.list(FS.dir(config.SourceRoot.Name),"*.*", true);
+        public static XedSourceArchive SourceArchive(FS.FolderPath root)
+            => new XedSourceArchive(root);
     }
 }

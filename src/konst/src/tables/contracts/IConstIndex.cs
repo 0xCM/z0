@@ -5,19 +5,21 @@ namespace Z0
 {
     using System;
     using System.Security;
-        
-    [SuppressUnmanagedCodeSecurity]
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IConstIndex<T> : IMeasured
     {
-        ref readonly T this[int index] {get;}  
+        ref readonly T this[int index] {get;}
 
-        ref readonly T this[ulong index] 
+        ref readonly T this[ulong index]
             => ref this[(int)index];
 
-        ref readonly T Lookup(int index) 
-            => ref this[index];    
+        ref readonly T Lookup(int index)
+            => ref this[index];
 
-        ref readonly T Lookup(ulong index) 
-            => ref this[index];    
+        ref readonly T Lookup(ulong index)
+            => ref this[index];
     }
 }

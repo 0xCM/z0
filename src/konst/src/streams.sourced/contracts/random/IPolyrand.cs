@@ -12,16 +12,6 @@ namespace Z0
     /// </summary>
     [Free]
     public interface IPolyrand : IRngSource, IPolySourced
-        // IPolySource<sbyte>,
-        // IPolySource<byte>,
-        // IPolySource<short>,
-        // IPolySource<ushort>,
-        // IPolySource<int>,
-        // IPolySource<uint>,
-        // IPolySource<long>,
-        // IPolySource<ulong>,
-        // IPolySource<float>,
-        // IPolySource<double>
     {
         /// <summary>
         /// Retrieves the random stream navigator, if supported

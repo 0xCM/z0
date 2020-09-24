@@ -10,10 +10,10 @@ namespace Z0.Xed
     using System.Collections.Generic;
     using System.Linq;
 
-    public readonly struct XedStage : IPartFilePaths
+    public readonly struct XedStageArchive : IPartFilePaths
     {
-        public static XedStage Create(FS.FolderPath root)
-            => new XedStage(root);
+        public static XedStageArchive Create(FS.FolderPath root)
+            => new XedStageArchive(root);
 
         public FS.FolderPath ArchiveRoot {get;}
 
@@ -29,7 +29,7 @@ namespace Z0.Xed
         public FS.FolderPath FunctionDir
             => ArchiveRoot + FunctionFolder;
 
-        public XedStage(FS.FolderPath root)
+        public XedStageArchive(FS.FolderPath root)
         {
             ArchiveRoot = root;
         }

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     partial struct WfDelegates
     {
@@ -15,13 +16,13 @@ namespace Z0
         /// </summary>
         /// <param name="k">The enum literal to map to an integer value</param>
         /// <typeparam name="E">The enum type</typeparam>
-        [SuppressUnmanagedCodeSecurity]
+        [Free]
         public delegate ulong Indexer<E>(E k)
-            where E : unmanaged, Enum;
+            where E : unmanaged;
 
-        [SuppressUnmanagedCodeSecurity]
+        [Free]
         public delegate T Indexer<E,T>(E k)
-            where E : unmanaged, Enum
+            where E : unmanaged
             where T : unmanaged;
     }
 }

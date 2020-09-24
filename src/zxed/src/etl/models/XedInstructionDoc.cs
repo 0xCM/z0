@@ -21,9 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public XedInstructionDoc(params TextRow[] rows)
-        {
-            Data = rows;
-        }
+            => Data = rows;
 
         public ref readonly TextRow this[int i]
         {

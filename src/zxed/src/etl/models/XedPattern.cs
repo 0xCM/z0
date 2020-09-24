@@ -10,10 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    using F = XedPatternField;
-    using R = XedPattern;
-
-    public readonly struct XedPattern : ITabular<F,R>
+    public readonly struct XedPattern
     {
         public string Class {get;}
 
@@ -43,8 +40,5 @@ namespace Z0
             OperandText = operandText ?? string.Empty;
             Operands = OperandText.SplitClean(Space);
         }
-
-        public string DelimitedText(char delimiter)
-            => XedOps.format(this, delimiter);
     }
 }

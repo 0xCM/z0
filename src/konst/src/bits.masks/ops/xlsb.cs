@@ -13,8 +13,8 @@ namespace Z0
 
     using static Konst;
 
-    partial class Bits
-    {                
+    partial class BitMasks
+    {
         /// <summary>
         /// unsigned int _blsi_u32 (unsigned int a)BLSI reg, reg/m32
         /// Extracts the least set bit and is logically equivalent to the composite operation (-src) & src
@@ -23,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static byte xlsb(byte src)
             => (byte)ExtractLowestSetBit(src);
- 
+
         /// <summary>
         /// unsigned int _blsi_u32 (unsigned int a)BLSI reg, reg/m32
         /// Extracts the least set bit and is logically equivalent to the composite operation (-src) & src
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ushort xlsb(ushort src)
             => (ushort)ExtractLowestSetBit(src);
- 
+
         /// <summary>
         /// unsigned int _blsi_u32 (unsigned int a)BLSI reg, reg/m32
         /// Extracts the least set bit and is logically equivalent to the composite operation (-src) & src

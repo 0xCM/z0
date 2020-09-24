@@ -11,15 +11,25 @@ namespace Z0
     using static z;
 
     using G = Lcg64;
-    using api = Lcg;
+    using api = Lcg64Ops;
 
     [ApiHost]
-    public readonly partial struct Lcg
+    public readonly partial struct Lcg64Ops
     {
+        [MethodImpl(Inline), Op]
+        public static void spin(ref G g, Func<ulong,bool> f)
+        {
+            while(true)
+            {
+                if(!f(next(g)))
+                    break;
+            }
+        }
+
+
         [MethodImpl(Inline), Op]
         public static G create(N64 n, ulong mul, ulong inc, ulong mod, ulong seed)
             => new G(mul, inc, mod, seed);
-
 
         [MethodImpl(Inline), Op]
         public static void capture(ref G g, Span<ulong> dst)

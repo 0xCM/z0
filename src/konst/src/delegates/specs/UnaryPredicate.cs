@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [SuppressUnmanagedCodeSecurity]
     public delegate bit UnaryPredicate<T>(T a);

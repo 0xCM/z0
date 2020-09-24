@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
-        
+    using static z;
+
     partial class gbits
     {
         /// <summary>
@@ -21,15 +21,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(Bits.xlsb(uint8(src)));
+                return generic<T>(BitMasks.xlsb(uint8(src)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(Bits.xlsb(uint16(src)));
+                return generic<T>(BitMasks.xlsb(uint16(src)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(Bits.xlsb(uint32(src)));
+                return generic<T>(BitMasks.xlsb(uint32(src)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(Bits.xlsb(uint64(src)));
-            else            
-                throw Unsupported.define<T>();
-        }           
+                return generic<T>(BitMasks.xlsb(uint64(src)));
+            else
+                throw no<T>();
+        }
     }
 }

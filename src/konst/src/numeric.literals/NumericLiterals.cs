@@ -8,17 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     [ApiHost]
     public readonly struct NumericLiterals
-    {       
+    {
         /// <summary>
         /// The zero-value for an 8-bit signed integer
         /// </summary>
         const sbyte z8i = 0;
 
         /// <summary>
-        /// The zero-value for an 8-bit usigned integer
+        /// The zero-value for an 8-bit unsigned integer
         /// </summary>
         const byte z8 = 0;
 
@@ -38,7 +39,7 @@ namespace Z0
         const int z32i = 0;
 
         /// <summary>
-        /// The zero-value for a 32-bit usigned integer
+        /// The zero-value for a 32-bit unsigned integer
         /// </summary>
         const uint z32 = 0;
 
@@ -48,7 +49,7 @@ namespace Z0
         const long z64i = 0;
 
         /// <summary>
-        /// The zero-value for a 64-bit usigned integer
+        /// The zero-value for a 64-bit unsigned integer
         /// </summary>
         const ulong z64 = 0;
 
@@ -68,7 +69,7 @@ namespace Z0
         const sbyte i8max = sbyte.MaxValue;
 
         /// <summary>
-        /// The maximum value for an 8-bit usigned integer
+        /// The maximum value for an 8-bit unsigned integer
         /// </summary>
         const byte u8max = byte.MaxValue;
 
@@ -88,7 +89,7 @@ namespace Z0
         const int i32max = int.MaxValue;
 
         /// <summary>
-        /// The maximum value for a 32-bit usigned integer
+        /// The maximum value for a 32-bit unsigned integer
         /// </summary>
         const uint u32max = uint.MaxValue;
 
@@ -98,7 +99,7 @@ namespace Z0
         const long i64max = long.MaxValue;
 
         /// <summary>
-        /// The maximum value for a 64-bit usigned integer
+        /// The maximum value for a 64-bit unsigned integer
         /// </summary>
         const ulong u64max = ulong.MaxValue;
 
@@ -166,7 +167,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T one<T>(T t = default)
             where T : unmanaged
-                => Cast.to<T>(1);
+                => force<T>(1);
 
         /// <summary>
         /// Ones all bits each and every ... one
@@ -186,19 +187,19 @@ namespace Z0
         public static T minval<T>(T t = default)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 return minval_i<T>();
-            else if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            else if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 return minval_u<T>();
             else
                 return minval_f<T>();
-        }                
+        }
 
         /// <summary>
         /// Returns the maximim value supported by a parametrically-identified primal type
@@ -208,19 +209,19 @@ namespace Z0
         public static T maxval<T>(T t = default)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 return maxval_i<T>();
-            else if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            else if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 return maxval_u<T>();
             else
                 return maxval_f<T>();
-        }                
+        }
 
 
         [MethodImpl(Inline)]
@@ -228,13 +229,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return Cast.to<T>(z8i);
+                return z.force<T>(z8i);
             else if(typeof(T) == typeof(short))
-                return Cast.to<T>(z16i);
+                return z.force<T>(z16i);
             else if(typeof(T) == typeof(int))
-                return Cast.to<T>(z32i);
+                return z.force<T>(z32i);
             else
-                return Cast.to<T>(z64i);
+                return z.force<T>(z64i);
         }
 
         [MethodImpl(Inline)]
@@ -242,13 +243,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return Cast.to<T>(z8);
+                return z.force<T>(z8);
             else if(typeof(T) == typeof(ushort))
-                return Cast.to<T>(z16);
+                return z.force<T>(z16);
             else if(typeof(T) == typeof(uint))
-                return Cast.to<T>(z32);
+                return z.force<T>(z32);
             else
-                return Cast.to<T>(z64);
+                return z.force<T>(z64);
         }
 
         [MethodImpl(Inline)]
@@ -256,11 +257,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return Cast.to<T>(z32f);
+                return force<T>(z32f);
             else if(typeof(T) == typeof(double))
-                return Cast.to<T>(z64f);
+                return force<T>(z64f);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -268,13 +269,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return Cast.to<T>(i8max);
+                return z.force<T>(i8max);
             else if(typeof(T) == typeof(short))
-                return Cast.to<T>(i16max);
+                return z.force<T>(i16max);
             else if(typeof(T) == typeof(int))
-                return Cast.to<T>(i32max);
+                return z.force<T>(i32max);
             else
-                return Cast.to<T>(i64max);
+                return z.force<T>(i64max);
         }
 
         [MethodImpl(Inline)]
@@ -282,13 +283,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return Cast.to<T>(u8max);
+                return z.force<T>(u8max);
             else if(typeof(T) == typeof(ushort))
-                return Cast.to<T>(u16max);
+                return z.force<T>(u16max);
             else if(typeof(T) == typeof(uint))
-                return Cast.to<T>(u32max);
+                return z.force<T>(u32max);
             else
-                return Cast.to<T>(u64max);
+                return z.force<T>(u64max);
         }
 
         [MethodImpl(Inline)]
@@ -296,9 +297,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return Cast.to<T>(f32max);
+                return z.force<T>(f32max);
             else if(typeof(T) == typeof(double))
-                return Cast.to<T>(f64max);
+                return z.force<T>(f64max);
             else
                 throw Unsupported.define<T>();
         }
@@ -308,14 +309,14 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return Cast.to<T>(Ones8u);
+                return z.force<T>(Ones8u);
             else if(typeof(T) == typeof(ushort))
-                return Cast.to<T>(Ones16u);
+                return z.force<T>(Ones16u);
             else if(typeof(T) == typeof(uint))
-                return Cast.to<T>(Ones32u);
+                return z.force<T>(Ones32u);
             else if(typeof(T) == typeof(ulong))
-                return Cast.to<T>(Ones64u);
-            else 
+                return z.force<T>(Ones64u);
+            else
                 return ones_i<T>();
         }
 
@@ -324,13 +325,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return Cast.to<T>(Ones8i);
+                return z.force<T>(Ones8i);
             else if(typeof(T) == typeof(short))
-                return Cast.to<T>(Ones16i);
+                return z.force<T>(Ones16i);
             else if(typeof(T) == typeof(int))
-                return Cast.to<T>(Ones32i);
+                return z.force<T>(Ones32i);
             else if(typeof(T) == typeof(long))
-                return Cast.to<T>(Ones64i);
+                return z.force<T>(Ones64i);
             else
                  return ones_f<T>();
        }
@@ -340,9 +341,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return Cast.to<T>((float)Ones32u);
+                return z.force<T>((float)Ones32u);
             else if(typeof(T) == typeof(double))
-                return Cast.to<T>((double)Ones64u);
+                return z.force<T>((double)Ones64u);
             else
                  throw Unsupported.define<T>();
        }

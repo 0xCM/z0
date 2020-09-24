@@ -6,6 +6,8 @@ namespace Z0
 {
     using System.Security;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     [SuppressUnmanagedCodeSecurity]
     public delegate R FixedEmitter<R>()
         where R : IDataCell;

@@ -10,8 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct TableFieldEval<F,T>
-        where F : unmanaged, Enum
+    public struct TableFieldValues<F,T>
+        where F : unmanaged
         where T : struct, ITable<F,T>
     {
         public T Source;
@@ -21,7 +21,7 @@ namespace Z0
         public NamedValues<object> Values;
 
         [MethodImpl(Inline)]
-        public TableFieldEval(T source, TableFields<F> fields, NamedValue<object>[] values)
+        public TableFieldValues(T source, TableFields<F> fields, NamedValue<object>[] values)
         {
             Source = source;
             Fields = fields;

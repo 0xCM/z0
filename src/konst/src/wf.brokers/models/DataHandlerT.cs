@@ -8,22 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    public readonly struct TableReader<S,T>
-        where T : struct
-        where S : struct, ISourceFacets
+    public readonly struct DataHandler<T> : IDataHandler<T>
     {
-        public readonly ReaderState<S> State;
+        readonly DataReceiver<T> Receiver;
 
         [MethodImpl(Inline)]
-        public TableReader(ReaderState<S> state)
-            => State = state;
-
-        public ReadOnlySpan<T> Read()
+        public DataHandler(DataReceiver<T> receiver)
         {
-            var data = State.Source;
-            return cover<byte,T>(data[0], 0);
+            Receiver = receiver;
         }
+
+        [MethodImpl(Inline)]
+        public void Handle(T data)
+            => Receiver(data);
+
+        public static DataHandler<T> Empty
+            => new DataHandler<T>(t => {});
     }
 }

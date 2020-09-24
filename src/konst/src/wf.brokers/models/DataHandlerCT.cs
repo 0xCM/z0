@@ -11,8 +11,6 @@ namespace Z0
 
     public readonly struct DataHandler<C,T> : IDataHandler<C,T>
     {
-        public static DataHandler<C,T> Empty => new DataHandler<C,T>((c,t) => {});
-
         readonly DataReceiver<C,T> Receiver;
 
         [MethodImpl(Inline)]
@@ -22,5 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Handle(C context, T data)
             => Receiver(context, data);
+
+        public static DataHandler<C,T> Empty => new DataHandler<C,T>((c,t) => {});
     }
 }

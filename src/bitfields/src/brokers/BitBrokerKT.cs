@@ -16,26 +16,26 @@ namespace Z0
     public readonly struct BitBroker<K,T> : IWfDataProcessor<T>, IWfDataBroker<K,T>
         where K : unmanaged, Enum
     {
-        readonly WfDataHandler<T>[] handlers;
+        readonly DataHandler<T>[] handlers;
 
         readonly BitField64<K> Bits;
 
-        Span<WfDataHandler<T>> Handlers
+        Span<DataHandler<T>> Handlers
         {
             [MethodImpl(Inline)]
             get => handlers;
         }
 
         [MethodImpl(Inline)]
-        internal BitBroker(WfDataHandler<T>[] buffer)
+        internal BitBroker(DataHandler<T>[] buffer)
         {
             Bits = default;
             handlers = buffer;
-            Handlers.Fill(WfDataHandler<T>.Empty);
+            Handlers.Fill(DataHandler<T>.Empty);
         }
 
         [MethodImpl(Inline)]
-        public BitBroker(K kind, WfDataHandler<T>[] buffer)
+        public BitBroker(K kind, DataHandler<T>[] buffer)
             : this(buffer)
         {
             Bits = BitFields.bf64(kind);
@@ -43,13 +43,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitBroker(K kind)
-            : this(kind, new WfDataHandler<T>[64])
+            : this(kind, new DataHandler<T>[64])
         {
 
         }
 
         [MethodImpl(Inline)]
-        public ref WfDataHandler<T> Set(K kind, in WfDataHandler<T> handler)
+        public ref DataHandler<T> Set(K kind, in DataHandler<T> handler)
         {
             ref var dst = ref seek(Handlers, Bits.Index(kind));
             dst = handler;
@@ -57,10 +57,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ref readonly WfDataHandler<T> Get(K kind)
+        public ref readonly DataHandler<T> Get(K kind)
             => ref skip(Handlers, Bits.Index(kind));
 
-        public ref WfDataHandler<T> this[K kind]
+        public ref DataHandler<T> this[K kind]
         {
             [MethodImpl(Inline)]
             get => ref seek(Handlers, Bits.Index(kind));

@@ -19,7 +19,7 @@ namespace Z0
             => BitBrokers.broker64<AsmHandlerKind,ApiHostRoutines>(kind);
 
         [MethodImpl(Inline), Op]
-        public static BitBroker<AsmHandlerKind,ApiHostRoutines> broker(WfDataHandler<ApiHostRoutines>[] buffer, AsmHandlerKind kind = default)
+        public static BitBroker<AsmHandlerKind,ApiHostRoutines> broker(DataHandler<ApiHostRoutines>[] buffer, AsmHandlerKind kind = default)
             => BitBrokers.broker64<AsmHandlerKind,ApiHostRoutines>(buffer, kind);
 
         [MethodImpl(Inline), Op]
@@ -27,7 +27,7 @@ namespace Z0
             => BitBrokers.broker64<JmpKind,ApiInstruction>();
 
         [MethodImpl(Inline), Op]
-        public static BitBroker<JmpKind,ApiInstruction> jmp(WfDataHandler<ApiInstruction>[] buffer, JmpKind kind = default)
+        public static BitBroker<JmpKind,ApiInstruction> jmp(DataHandler<ApiInstruction>[] buffer, JmpKind kind = default)
             => BitBrokers.broker64<JmpKind,ApiInstruction>(buffer, kind);
     }
 }

@@ -47,37 +47,37 @@ namespace Z0
             where T : unmanaged
                 => create(forever(src, domain, filter), src.RngKind);
 
-        static IEnumerable<T> forever<T>(IPolyrand src, ClosedInterval<T> domain, Func<T,bool> filter)
+        static IEnumerable<T> forever<T>(IPolySource src, ClosedInterval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => filter != null
                 ? some(src, Interval.closed(domain.Min, domain.Max), filter)
                 : forever(src, domain);
 
-        static IEnumerable<T> forever<T>(IPolyrand src, Interval<T> domain, Func<T,bool> filter)
+        static IEnumerable<T> forever<T>(IPolySource src, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
                 => filter != null
                 ? some(src, domain, filter)
                 : forever(src, domain);
 
-        static IEnumerable<T> forever<T>(IPolyrand src, T min, T max)
+        static IEnumerable<T> forever<T>(IPolySource src, T min, T max)
             where T : unmanaged
         {
             while(true)
                 yield return src.Next<T>(min, max);
         }
 
-        static IEnumerable<T> forever<T>(IPolyrand src)
+        static IEnumerable<T> forever<T>(IPolySource src)
             where T : unmanaged
         {
             while(true)
                 yield return src.Next<T>();
         }
 
-        static IEnumerable<T> forever<T>(IPolyrand src, Interval<T> domain)
+        static IEnumerable<T> forever<T>(IPolySource src, Interval<T> domain)
             where T : unmanaged
                 => domain.IsEmpty ? forever<T>(src) : forever(src, domain.Left, domain.Right);
 
-        static IEnumerable<T> forever<T>(IPolyrand src, ClosedInterval<T> domain)
+        static IEnumerable<T> forever<T>(IPolySource src, ClosedInterval<T> domain)
             where T : unmanaged
                 => domain.IsEmpty ? forever<T>(src) : forever(src, domain.Min, domain.Max);
 
@@ -88,7 +88,7 @@ namespace Z0
         /// <param name="domain">The source domain</param>
         /// <param name="filter">The filter predicate</param>
         /// <typeparam name="T">The production type</typeparam>
-        static IEnumerable<T> some<T>(IPolyrand src, Interval<T> domain, Func<T,bool> filter)
+        static IEnumerable<T> some<T>(IPolySource src, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
         {
             var next = default(T);
