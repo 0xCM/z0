@@ -34,7 +34,7 @@ namespace Z0
             else if(w.IsSome())
                 return ApiIdentityParser.parse(text.concat(opname, IDI.PartSep, $"{g}{w.Format()}{IDI.SegSep}{k.Format()}"));
             else
-                return ApiIdentityParser.parse(text.concat($"{opname}_{g}{k.Format()}"));
+                return ApiIdentityParser.parse(Render.concat($"{opname}_{g}{k.Format()}"));
         }
 
         /// <summary>

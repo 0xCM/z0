@@ -76,19 +76,13 @@ namespace Z0
                 => Directory.EnumerateFiles(Name).Map(FS.path);
 
             public Files Files(string pattern, bool recurse)
-                =>  Exists
-                  ? Directory.EnumerateFiles(Name, pattern, option(recurse)).Map(f => FS.path(f))
-                  : sys.empty<FilePath>();
+                =>  Exists ? Directory.EnumerateFiles(Name, pattern, option(recurse)).Map(f => FS.path(f)) : sys.empty<FilePath>();
 
             public Files Files(bool recurse)
-                => Exists
-                 ? Directory.EnumerateFiles(Name, SearchAll, option(recurse)).Map(f => FS.path(f))
-                 : sys.empty<FilePath>();
+                => Exists ? Directory.EnumerateFiles(Name, SearchAll, option(recurse)).Map(f => FS.path(f)) : sys.empty<FilePath>();
 
             public FolderPath[] SubDirs(bool recurse = false)
-                => Directory.Exists(Name)
-                ? Directory.EnumerateDirectories(Name, SearchAll, option(recurse)).Map(x => FS.dir(x))
-                : sys.empty<FolderPath>();
+                => Directory.Exists(Name) ? Directory.EnumerateDirectories(Name, SearchAll, option(recurse)).Map(x => FS.dir(x)) : sys.empty<FolderPath>();
 
             /// <summary>
             /// Nonrecursively enumerates part-owned folder files

@@ -22,7 +22,7 @@ namespace Z0
         public XedSourceArchive(FS.FolderPath root)
         {
             ArchiveRoot = root;
-            Files = ArchiveRoot.Files(GlobalExtensions.Txt,true).Array();
+            Files = ArchiveRoot.Files(ArchiveExt.Txt,true).Array();
         }
 
         bool ContainsMarker(FS.FilePath file, string marker)

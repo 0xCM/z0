@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using static GlobalFolderNames;
-    using FN = GlobalFolderNames;
+    using static ArchiveNames.Folders;
+
+    using FN = ArchiveNames.Folders;
 
     public interface IShellPaths
     {

@@ -52,6 +52,5 @@ namespace Z0.Asm
             dst.Delimit(F.CodeId, src.CodeId);
             return ref dst;
         }
-
     }
 }

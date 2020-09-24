@@ -54,7 +54,7 @@ namespace Z0
         uint Emit(IPart part)
         {
             var t = new ImageFieldTable();
-            var file = FS.file(string.Format("{0}.{1}", part.Id.Format(), ImageFieldTable.TableName), GlobalExtensions.Csv);
+            var file = FS.file(string.Format("{0}.{1}", part.Id.Format(), ImageFieldTable.TableName), ArchiveExt.Csv);
             var path = FS.dir(TargetDir.Name) +  file;
             Wf.Emitting(Host, t, FS.path(path.Name));
 

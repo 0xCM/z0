@@ -163,7 +163,7 @@ namespace Z0.Xed
                         var kCount = content.Length;
                         if(kCount != 0)
                         {
-                            var target = Target.File(ruleset.TargetFile);
+                            var target = Target.Table(ruleset.TargetFile);
                             using var writer = target.Writer();
                             writer.WriteLine(ruleset.Description);
                             writer.WriteLine(RulePageBreak);

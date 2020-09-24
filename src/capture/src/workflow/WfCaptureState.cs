@@ -47,8 +47,8 @@ namespace Z0.Asm
             Config = wf.Init;
             var srcpath = FilePath.Define(wf.GetType().Assembly.Location).FolderPath;
             var dstpath = wf.Paths.AppCaptureRoot;
-            var src = new ArchiveSettings(srcpath);
-            var dst = new ArchiveSettings(dstpath);
+            var src = new ArchiveConfig(srcpath);
+            var dst = new ArchiveConfig(dstpath);
             Settings = CaptureConfig.From(wf.Settings);
             Services = CaptureServices.create(Asm);
             FormatConfig = AsmFormatConfig.WithSectionDelimiter;

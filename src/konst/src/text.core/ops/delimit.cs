@@ -21,7 +21,7 @@ namespace Z0
             var dst = span(buffer);
             var b = span(delimiter);
             for(var i=0u; i<count; i++)
-                seek(dst,i) = format(span(skip(input,i).ToString()),b);
+                seek(dst,i) = Render.format(span(skip(input,i).ToString()),b);
 
             return string.Concat(buffer);
         }
@@ -38,7 +38,7 @@ namespace Z0
             var dst = span(buffer);
             var b = span(delimiter);
             for(var i=0u; i< count; i++)
-                seek(dst,i) = format(skip(src,i), b);
+                seek(dst,i) = Render.format(skip(src,i), b);
             return string.Concat(buffer);
         }
 

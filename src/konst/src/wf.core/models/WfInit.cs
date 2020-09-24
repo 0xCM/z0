@@ -48,7 +48,7 @@ namespace Z0
         /// <summary>
         /// The output data archive configuration
         /// </summary>
-        public ArchiveSettings TargetArchive {get;}
+        public ArchiveConfig TargetArchive {get;}
 
         /// <summary>
         /// The persistent settings supplied by a json.config
@@ -58,12 +58,12 @@ namespace Z0
         /// <summary>
         /// The resource staging area
         /// </summary>
-        public ArchiveSettings Resources {get;}
+        public ArchiveConfig Resources {get;}
 
         /// <summary>
         /// The application-specific data root
         /// </summary>
-        public ArchiveSettings AppData {get;}
+        public ArchiveConfig AppData {get;}
 
         /// <summary>
         /// The specified log configuration
@@ -90,23 +90,6 @@ namespace Z0
         public FS.FolderPath IndexDir
             => ResDir + FS.folder("index");
 
-        // [MethodImpl(Inline)]
-        // public WfInit(IShellContext shell, string[] args, ApiModules modules, ArchiveConfig target,
-        //     PartId[] parts, FolderPath resroot, FolderPath appdata, FS.FolderPath logroot, WfSettings settings)
-        // {
-        //     Shell = insist(shell);
-        //     Paths = shell.Paths;
-        //     Args = args;
-        //     Modules = modules;
-        //     Api = Modules.Api;
-        //     ControlId = Part.ExecutingPart;
-        //     TargetArchive = target;
-        //     PartIdentities = parts;
-        //     Resources = new ArchiveConfig(resroot);
-        //     AppData = new ArchiveConfig(appdata);
-        //     Settings = settings;
-        //     Logs = new WfLogConfig(ControlId, logroot);
-        // }
 
         [MethodImpl(Inline)]
         public WfInit(IShellContext shell, string[] args, ApiModules modules)
@@ -117,10 +100,10 @@ namespace Z0
             Modules = modules;
             Api = Modules.Api;
             ControlId = Part.ExecutingPart;
-            TargetArchive = new ArchiveSettings(FS.dir(Paths.LogRoot.Name) + FS.folder("capture/artifacts"));
+            TargetArchive = new ArchiveConfig(FS.dir(Paths.LogRoot.Name) + FS.folder("capture/artifacts"));
             PartIdentities = Flow.parts(args, Api.PartIdentities);
-            Resources = new ArchiveSettings(Paths.ResourceRoot);
-            AppData = new ArchiveSettings(Paths.AppDataRoot);
+            Resources = new ArchiveConfig(Paths.ResourceRoot);
+            AppData = new ArchiveConfig(Paths.AppDataRoot);
             Settings = Flow.settings(Shell);
             Logs = new WfLogConfig(ControlId, Paths.AppLogRoot);
         }

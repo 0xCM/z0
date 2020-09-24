@@ -32,7 +32,7 @@ namespace Z0
             => (FS.dir(Root.Name) + folder).Clear();
 
         public IEnumerable<FS.FilePath> Files()
-            => Root.Files(GlobalExtensions.Csv, true);
+            => Root.Files(ArchiveExt.Csv, true);
 
         public Option<FilePath> Deposit<F,R>(R[] src, FS.FileName name)
             where F : unmanaged, Enum

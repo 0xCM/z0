@@ -72,7 +72,7 @@ namespace Z0
                 seek(dst, j--) = (char)Hex.code(LowerCase, Sized.srl(d, n4, w4));
             }
 
-            return text.format(dst);
+            return Render.format(dst);
         }
 
         /// <summary>

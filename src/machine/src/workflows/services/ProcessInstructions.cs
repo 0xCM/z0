@@ -43,7 +43,7 @@ namespace Z0
             {
                 ProcessJumps();
                 AsmProcessors.parts(Wf).Process(Source);
-                RenderSemantic.Render(Source);
+                SemanticRender.render(Source);
             }
             catch(Exception e)
             {

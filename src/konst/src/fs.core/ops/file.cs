@@ -13,7 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static FileName file(PartId part, FileExt ext)
-            => file(text.concat(part.Format()), ext);
+            => file(Render.concat(part.Format()), ext);
 
         /// <summary>
         /// Defines a host-specialized filename

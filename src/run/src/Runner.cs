@@ -302,7 +302,7 @@ namespace Z0
 
         void EmitOpCodes()
         {
-            new EmitAsmOpCodesHost().Configure(Wf.Paths.DbRoot + FS.file("AsmOpcodes",GlobalExtensions.Csv)).Run(Wf);
+            new EmitAsmOpCodesHost().Configure(Wf.Paths.DbRoot + FS.file("AsmOpcodes",ArchiveExt.Csv)).Run(Wf);
         }
 
         public void Run()
@@ -312,7 +312,7 @@ namespace Z0
             var decoder = Asm.RoutineDecoder;
             var count = results.Length;
             var formatter = Asm.Formatter;
-            var dstpath = Wf.Paths.AppLogRoot + FS.file("runner", GlobalExtensions.Asm);
+            var dstpath = Wf.Paths.AppLogRoot + FS.file("runner", ArchiveExt.Asm);
             using var writer = dstpath.Writer();
 
             for(var i=0; i<count; i++)

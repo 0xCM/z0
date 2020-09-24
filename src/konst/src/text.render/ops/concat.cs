@@ -6,12 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Konst;
     using static z;
 
     partial struct Render
     {
+        /// <summary>
+        /// Concatenates a sequence of characters with no intervening delimiter
+        /// </summary>
+        /// <param name="src">The characters to concatenate</param>
+        [MethodImpl(Inline), Op]
+        public static string concat(IEnumerable<char> src)
+            => string.Concat(src);
+
         [Op]
         public static string concat(ReadOnlySpan<string> src, char? delimiter)
         {

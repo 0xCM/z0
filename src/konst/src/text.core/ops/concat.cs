@@ -22,14 +22,6 @@ namespace Z0
             => string.Concat(src);
 
         /// <summary>
-        /// Concatenates a sequence of characters with no intervening delimiter
-        /// </summary>
-        /// <param name="src">The characters to concatenate</param>
-        [MethodImpl(Inline), Op]
-        public static string concat(IEnumerable<char> src)
-            => string.Concat(src);
-
-        /// <summary>
         /// Concatenates a sequence of strings interspersed by a character delimiter with a space on either side
         /// </summary>
         /// <param name="src">The characters to concatenate</param>

@@ -9,6 +9,7 @@ namespace Z0.Asm
 
     using static OpKind;
     using static Konst;
+    using static z;
 
     [ApiHost]
     public readonly struct SemanticRender
@@ -17,6 +18,32 @@ namespace Z0.Asm
 
         public static string label(in Branch src)
             => format(src.Kind, src.Size);
+
+        public static void render(in ApiPartRoutines src)
+        {
+            var part = src.Part;
+            var dst = Archives.semantic();
+            render(src,dst);
+        }
+
+        public static void render(in ApiPartRoutines src, ISemanticArchive dst)
+        {
+            var part = src.Part;
+            var dir = dst.SemanticDir(part).Clear();
+            var view = src.ViewHosts;
+            var buffer = list<string>();
+            var count = view.Length;
+            var semantic = new SemanticRenderSvc(buffer);
+            for(var i=0u; i<count; i++)
+            {
+                buffer.Clear();
+
+                ref readonly var host = ref skip(view,i);
+                var path = dst.SemanticPath(host.Uri);
+                using var writer = path.Writer();
+                semantic.Render(host, writer);
+            }
+        }
 
         public static string format(in Branch src)
         {
@@ -57,7 +84,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static string format(in ImmInfo src)
-            => text.concat(src.Value.FormatHex(zpad:false, prespec:false));
+            => Z0.Render.concat(src.Value.FormatHex(zpad:false, prespec:false));
 
         public string Render(IceRegister src)
             => text.format("{0}",src);
@@ -148,7 +175,7 @@ namespace Z0.Asm
             => SemanticRender.Service.RenderAspects<IAsmFxMemory>(src);
 
         public string RenderAddress(Instruction src, int pad = 16)
-            => text.concat(src.IP.FormatHex(zpad:false, prespec:false)).PadRight(pad);
+            => Z0.Render.concat(src.IP.FormatHex(zpad:false, prespec:false)).PadRight(pad);
 
         public string Render(MemorySize src)
             => asm.identify(src).Format();

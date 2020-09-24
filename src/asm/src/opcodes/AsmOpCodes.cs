@@ -116,7 +116,41 @@ namespace Z0.Asm
         static StreamWriter CaseWriter(string name)
             =>  CasePath(name).Writer();
 
-        void emit(ReadOnlySpan<AsmInstructionPattern> src)
+
+        public void instruction_tokens()
+        {
+            var opcodes = AsmOpCodes.Tokens.View;
+            using var dst = CaseWriter("InstructionTokens", FileExtensions.Csv);
+            var header = text.concat($"Identifier".PadRight(20), "| ", "Token".PadRight(20), "| ", "Meaning");
+            dst.WriteLine(header);
+            for(var i=1; i<opcodes.Length; i++)
+            {
+                ref readonly var token = ref skip(opcodes,i);
+                var line = text.concat(token.Identifier.Format().PadRight(20), "| ", token.Value.Format().PadRight(20), "| ", token.Description);
+                dst.WriteLine(line);
+            }
+        }
+
+        void opcode_tokens()
+        {
+            var data = AsmOpCodes.dataset();
+            var count = data.OpCodeCount;
+            var records = data.Entries.View;
+            var identifers = data.Identity.View;
+            insist(count, records.Length);
+            insist(count, identifers.Length);
+
+            var processor = new AsmOpCodePartitoner();
+            var handler = AsmOpCodeGroup.Create(count);
+            processor.Partition(records, handler);
+
+            emit(handler.Instructions);
+            emit(handler.OpCodes);
+            emit(handler.Mnemonics);
+        }
+
+
+        public void emit(ReadOnlySpan<AsmInstructionPattern> src)
         {
             var dstPath = CasePath($"InstructionExpression");
             using var writer = dstPath.Writer();
@@ -164,36 +198,5 @@ namespace Z0.Asm
             }
         }
 
-        public void instruction_tokens()
-        {
-            var opcodes = AsmOpCodes.Tokens.View;
-            using var dst = CaseWriter("InstructionTokens", FileExtensions.Csv);
-            var header = text.concat($"Identifier".PadRight(20), "| ", "Token".PadRight(20), "| ", "Meaning");
-            dst.WriteLine(header);
-            for(var i=1; i<opcodes.Length; i++)
-            {
-                ref readonly var token = ref skip(opcodes,i);
-                var line = text.concat(token.Identifier.Format().PadRight(20), "| ", token.Value.Format().PadRight(20), "| ", token.Description);
-                dst.WriteLine(line);
-            }
-        }
-
-        void opcode_tokens()
-        {
-            var data = AsmOpCodes.dataset();
-            var count = data.OpCodeCount;
-            var records = data.Entries.View;
-            var identifers = data.Identity.View;
-            insist(count, records.Length);
-            insist(count, identifers.Length);
-
-            var processor = new AsmOpCodePartitoner();
-            var handler = AsmOpCodeGroup.Create(count);
-            processor.Partition(records, handler);
-
-            emit(handler.Instructions);
-            emit(handler.OpCodes);
-            emit(handler.Mnemonics);
-        }
     }
 }
