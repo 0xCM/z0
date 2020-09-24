@@ -174,5 +174,37 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string FormatHex(this long src, HexFormatOptions config)
             => src.FormatHex(config.ZPad, config.Specifier, config.Uppercase, config.PreSpec);
+
+        [MethodImpl(Inline)]
+        public static string FormatHexData(this byte src)
+            => src.FormatHex(HexFormatOptions.HexData);
+
+        [MethodImpl(Inline)]
+        public static string FormatHexData(this sbyte src)
+            => src.FormatHex(HexFormatOptions.HexData);
+
+        [MethodImpl(Inline)]
+        public static string FormatHexData(this short src)
+            => src.FormatHex(HexFormatOptions.HexData);
+
+        [MethodImpl(Inline)]
+        public static string FormatHexData(this ushort src)
+            => src.FormatHex(HexFormatOptions.HexData);
+
+        [MethodImpl(Inline)]
+        public static string FormatHexData(this int src)
+            => src.FormatHex(HexFormatOptions.HexData);
+
+        [MethodImpl(Inline)]
+        public static string FormatHexData(this uint src)
+            => src.FormatHex(HexFormatOptions.HexData);
+
+        [MethodImpl(Inline)]
+        public static string FormatHexData(this ulong src)
+            => src.FormatHex(HexFormatOptions.HexData);
+
+        [MethodImpl(Inline)]
+        public static string FormatHexData(this long src)
+            => src.FormatHex(HexFormatOptions.HexData);
     }
 }

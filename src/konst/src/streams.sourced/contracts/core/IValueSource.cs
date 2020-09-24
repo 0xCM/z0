@@ -4,11 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IValueSource : ISource
+    public interface IValueSource
     {
         /// <summary>
         /// Retrieves the next point from the source, bound only by the domain of the type

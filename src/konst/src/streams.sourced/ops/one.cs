@@ -17,7 +17,7 @@ namespace Z0
                 => src.Next<T>();
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ref readonly T one<T>(ICachedSource<T> src)
+        public static ref readonly T one<T>(IRefSource<T> src)
             where T : struct
                 => ref src.Next();
     }

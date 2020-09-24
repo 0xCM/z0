@@ -13,7 +13,7 @@ namespace Z0
     using static z;
 
     using VS = Sourced;
-    using BVS = BoundValueSource;
+    using BVS = DomainValues;
 
     [ApiHost]
     public readonly struct PairSource
@@ -52,7 +52,7 @@ namespace Z0
                 => (VS.one(source, t), VS.one(source, t));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ConstPair<T> constant<T>(IBoundValueSource source, T min, T max)
+        public static ConstPair<T> constant<T>(IDomainValues source, T min, T max)
             where T : struct
                 => (BVS.next(source,min,max), BVS.next(source,min,max));
     }

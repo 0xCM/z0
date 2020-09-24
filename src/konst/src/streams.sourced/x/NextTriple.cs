@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial class XTend
-    {        
+    {
         /// <summary>
         /// Produces the next source-provided triple
         /// </summary>
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="max">The exclusive maximum value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ConstTriple<T> NextTriple<T>(this IBoundValueSource source, T min, T max)
+        public static ConstTriple<T> NextTriple<T>(this IDomainValues source, T min, T max)
             where T : struct
                 => TripleSource.constant<T>(source, min, max);
     }

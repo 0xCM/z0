@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Collections.Generic;
-
 
     using static Konst;
 
@@ -19,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         public static ref readonly Cell128 ToCell<T>(this in Vector128<T> x)
             where T : unmanaged
                 => ref Cells.from(x);
@@ -29,12 +27,12 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         public static ref readonly Cell256 ToCell<T>(this in Vector256<T> x)
             where T : unmanaged
                 => ref Cells.from(x);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         public static Cell512 ToCell<T>(this Vector512<T> x)
             where T : unmanaged
                 => Unsafe.As<Vector512<T>,Cell512>(ref x);

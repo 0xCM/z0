@@ -13,7 +13,7 @@ namespace Z0
     [ApiHost]
     public readonly struct CellStream
     {
-        public static IEnumerable<F> create<F>(ICellSource<F> source)
+        public static IEnumerable<F> create<F>(ICellValues<F> source)
             where F : struct, IDataCell
         {
             while(true)

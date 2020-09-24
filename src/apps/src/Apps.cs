@@ -15,6 +15,9 @@ namespace Z0
         public static IAppContext context(IWfShell wf)
             => new AppContext(wf.Paths, wf.Api, Polyrand.@default(), settings(wf.Paths), WfMsgExchange.Create(wf));
 
+        public static IAppContext context(IWfShell wf, IPolyrand random)
+            => new AppContext(wf.Paths, wf.Api, random, settings(wf.Paths), WfMsgExchange.Create(wf));
+
         public static IAppContext context()
             => context(Flow.modules(Assembly.GetEntryAssembly()), ShellPaths.Default);
 

@@ -27,7 +27,7 @@ namespace Z0
         /// Produces a bitstring with randomized length
         /// </summary>
         /// <param name="random">The random source</param>
-        /// <param name="minlen">The mininimum length of the bitstring</param>
+        /// <param name="minlen">The minimum length of the bitstring</param>
         /// <param name="maxlen">The maximum length of the bitstring</param>
         [MethodImpl(Inline)]
         public static BitString BitString(this IPolyrand random, int minlen, int maxlen)
@@ -37,7 +37,7 @@ namespace Z0
         /// Produces a bitstring with randomized length
         /// </summary>
         /// <param name="random">The random source</param>
-        /// <param name="minlen">The mininimum length of the bitstring</param>
+        /// <param name="minlen">The minimum length of the bitstring</param>
         /// <param name="maxlen">The maximum length of the bitstring</param>
         [MethodImpl(Inline)]
         public static BitString BitString(this IPolyrand random, Interval<int> length)
@@ -57,7 +57,7 @@ namespace Z0
         /// Produces a random sequence of bitstrings with randomized length
         /// </summary>
         /// <param name="random">The random source</param>
-        /// <param name="minlen">The mininimum length of the bitstring</param>
+        /// <param name="minlen">The minimum length of the bitstring</param>
         /// <param name="maxlen">The maximum length of the bitstring</param>
         public static IRngStream<BitString> BitStrings(this IPolyrand random, int minlen, int maxlen)
         {
@@ -66,7 +66,7 @@ namespace Z0
                 while(true)
                     yield return random.BitString(minlen, maxlen);
             }
-            
+
             return PolyStreams.create(produce(), random.RngKind);
         }
     }

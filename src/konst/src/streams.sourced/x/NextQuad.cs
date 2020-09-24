@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
 
     partial class XTend
-    {        
+    {
         /// <summary>
         /// Produces the next triple of random primal values
         /// </summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="max">The exclusive maximum value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ConstQuad<T> NextQuad<T>(this IBoundValueSource random, T min, T max)
+        public static ConstQuad<T> NextQuad<T>(this IDomainValues random, T min, T max)
             where T : struct
                 => (random.NextPair<T>(min,max), random.NextPair<T>(min,max));
     }

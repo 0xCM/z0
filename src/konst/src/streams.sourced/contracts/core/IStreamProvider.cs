@@ -5,13 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Security;
+    using System.Collections.Generic;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ICallbackSource<T> : ISource
+    public interface IStreamProvider<T>
     {
-        event Action<T> Next;
+        /// <summary>
+        /// In infinite T-stream
+        /// </summary>
+        IEnumerable<T> Stream {get;}
     }
 }

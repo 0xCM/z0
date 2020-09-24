@@ -236,62 +236,62 @@ namespace Z0
                 yield return Next<T>();
         }
 
-        IBoundValueSource<sbyte> Int8Source
+        IDomainValues<sbyte> Int8Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
-        IRngBoundPointSource<byte> UInt8Source
+        IDomainValues<byte> UInt8Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
-        IBoundValueSource<short> Int16Source
+        IDomainValues<short> Int16Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
 
-        IBoundValueSource<ushort> UInt16Source
+        IDomainValues<ushort> UInt16Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
-        IBoundValueSource<int> Int32Source
+        IDomainValues<int> Int32Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
-        IBoundValueSource<uint> UInt32Source
+        IDomainValues<uint> UInt32Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
-        IBoundValueSource<long> Int64Source
+        IDomainValues<long> Int64Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
-        IBoundValueSource<ulong> UInt64Source
+        IDomainValues<ulong> UInt64Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
-        IBoundValueSource<float> Float32Source
+        IDomainValues<float> Float32Source
         {
             [MethodImpl(Inline)]
             get => this;
         }
 
-        IBoundValueSource<double> Float64Source
+        IDomainValues<double> Float64Source
         {
             [MethodImpl(Inline)]
             get => this;
@@ -302,14 +302,14 @@ namespace Z0
              => (sbyte) (Points.Next((ulong)sbyte.MaxValue*2) - (ulong)SByte.MaxValue);
 
         [MethodImpl(Inline)]
-        sbyte IBoundValueSource<sbyte>.Next(sbyte max)
+        sbyte IDomainValues<sbyte>.Next(sbyte max)
         {
             var amax = (ulong)math.abs(max);
             return (sbyte) (Points.Next(amax * 2) - amax);
         }
 
         [MethodImpl(Inline)]
-        sbyte IBoundValueSource<sbyte>.Next(sbyte min, sbyte max)
+        sbyte IDomainValues<sbyte>.Next(sbyte min, sbyte max)
         {
             var delta = math.sub(max, min);
             return delta > 0
@@ -318,11 +318,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        byte IBoundValueSource<byte>.Next(byte min, byte max)
+        byte IDomainValues<byte>.Next(byte min, byte max)
             => (byte)Points.Next((ulong)min, (ulong)max);
 
         [MethodImpl(Inline)]
-        byte IBoundValueSource<byte>.Next(byte max)
+        byte IDomainValues<byte>.Next(byte max)
             => (byte)Points.Next((ulong)max);
 
         [MethodImpl(Inline)]
@@ -334,14 +334,14 @@ namespace Z0
             => (short) (Points.Next((ulong)short.MaxValue*2) - (ulong)Int16.MaxValue);
 
         [MethodImpl(Inline)]
-        short IBoundValueSource<short>.Next(short max)
+        short IDomainValues<short>.Next(short max)
         {
             var amax = (ulong)math.abs(max);
             return (short) (Points.Next(amax * 2) - amax);
         }
 
         [MethodImpl(Inline)]
-        short IBoundValueSource<short>.Next(short min, short max)
+        short IDomainValues<short>.Next(short min, short max)
         {
             var delta = math.sub(max, min);
             return delta > 0
@@ -358,11 +358,11 @@ namespace Z0
             => (ushort)Points.Next((ushort)ushort.MaxValue);
 
         [MethodImpl(Inline)]
-        ushort IBoundValueSource<ushort>.Next(ushort max)
+        ushort IDomainValues<ushort>.Next(ushort max)
             => (ushort)Points.Next((ulong)max);
 
         [MethodImpl(Inline)]
-        ushort IBoundValueSource<ushort>.Next(ushort min, ushort max)
+        ushort IDomainValues<ushort>.Next(ushort min, ushort max)
             => (ushort)Points.Next((ulong)min, (ulong)max);
 
         [MethodImpl(Inline)]
@@ -370,14 +370,14 @@ namespace Z0
             => (int) (Points.Next((ulong)int.MaxValue*2) - Int32.MaxValue);
 
         [MethodImpl(Inline)]
-        int IBoundValueSource<int>.Next(int max)
+        int IDomainValues<int>.Next(int max)
         {
             var amax = (ulong)math.abs(max);
             return (int) (Points.Next(amax * 2) - amax);
         }
 
         [MethodImpl(Inline)]
-        int IBoundValueSource<int>.Next(int min, int max)
+        int IDomainValues<int>.Next(int min, int max)
         {
             var delta = math.sub(max, min);
             return delta > 0
@@ -394,11 +394,11 @@ namespace Z0
             =>(uint)Points.Next((ulong)uint.MaxValue);
 
         [MethodImpl(Inline)]
-        uint IBoundValueSource<uint>.Next(uint max)
+        uint IDomainValues<uint>.Next(uint max)
             => (uint)Points.Next((ulong)max);
 
         [MethodImpl(Inline)]
-        uint IBoundValueSource<uint>.Next(uint min, uint max)
+        uint IDomainValues<uint>.Next(uint min, uint max)
             => (uint)Points.Next((ulong)min, (ulong)max);
 
         [MethodImpl(Inline)]
@@ -424,14 +424,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        long IBoundValueSource<long>.Next(long max)
+        long IDomainValues<long>.Next(long max)
         {
             var amax = (ulong)math.abs(max);
             return (long) (Points.Next(amax * 2) - amax);
         }
 
         [MethodImpl(Inline)]
-        long IBoundValueSource<long>.Next(long min, long max)
+        long IDomainValues<long>.Next(long min, long max)
         {
             var delta = math.sub(max, min);
             return delta > 0
@@ -444,11 +444,11 @@ namespace Z0
             => Points.Next();
 
         [MethodImpl(Inline)]
-        ulong IBoundValueSource<ulong>.Next(ulong max)
+        ulong IDomainValues<ulong>.Next(ulong max)
             => Points.Next(max);
 
         [MethodImpl(Inline)]
-        ulong IBoundValueSource<ulong>.Next(ulong min, ulong max)
+        ulong IDomainValues<ulong>.Next(ulong min, ulong max)
             => Points.Next(min, max);
 
         [MethodImpl(Inline)]
@@ -456,14 +456,14 @@ namespace Z0
             => NextF32();
 
         [MethodImpl(Inline)]
-        float IBoundValueSource<float>.Next(float max)
+        float IDomainValues<float>.Next(float max)
         {
             var whole = (float)Int32Source.Next((int)max);
             return whole + NextF32();
         }
 
         [MethodImpl(Inline)]
-        float IBoundValueSource<float>.Next(float min, float max)
+        float IDomainValues<float>.Next(float min, float max)
         {
             var whole = (float)Int32Source.Next((int)min, (int)max);
             return whole + NextF32();
@@ -474,14 +474,14 @@ namespace Z0
             => NextF64();
 
         [MethodImpl(Inline)]
-        double IBoundValueSource<double>.Next(double min, double max)
+        double IDomainValues<double>.Next(double min, double max)
         {
             var whole = (double)Int64Source.Next((long)min, (long)max);
             return whole + NextF64();
         }
 
         [MethodImpl(Inline)]
-        double IBoundValueSource<double>.Next(double max)
+        double IDomainValues<double>.Next(double max)
         {
             var whole = (double)Int64Source.Next((long)max);
             return whole + NextF64();

@@ -4,18 +4,28 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial class XTend
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+    using static z;
+
+    partial class Cells
     {
-        public static string FormatHex(this Cell8 src, HexFormatOptions? config = null)
-            => src.Content.FormatHex(config == null ? HexFormatOptions.HexData : config.Value);
+        [MethodImpl(Inline), Op]
+        public static string format(Cell8 src)
+            => src.Content.FormatHexData();
 
-        public static string FormatHex(this Cell16 src, HexFormatOptions? config = null)
-            => src.Content.FormatHex(config == null ? HexFormatOptions.HexData : config.Value);
+        [MethodImpl(Inline), Op]
+        public static string format(Cell16 src)
+            => src.Content.FormatHexData();
 
-        public static string FormatHex(this Cell32 src, HexFormatOptions? config = null)
-            => src.Content.FormatHex(config == null ? HexFormatOptions.HexData : config.Value);
+        [MethodImpl(Inline), Op]
+        public static string format(Cell32 src)
+            => src.Content.FormatHexData();
 
-        public static string FormatHex(this Cell64 src, HexFormatOptions? config = null)
-            => src.Content.FormatHex(config == null ? HexFormatOptions.HexData : config.Value);
+        [MethodImpl(Inline), Op]
+        public static string format(Cell64 src)
+            => src.Content.FormatHexData();
     }
 }

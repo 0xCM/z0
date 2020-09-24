@@ -3,20 +3,19 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
-    using System;
-    using System.Security;
+{
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
-    /// Characterizes an emission service taht may run out of values to emit
+    /// Characterizes an emission service that may run out of values to emit
     /// </summary>
     /// <typeparam name="T">The emission value type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface ILimitedSource<T> : ISource
+    [Free]
+    public interface ILimitedSource<T>
     {
         /// <summary>
-        /// Emits the next source value, if any
+        /// Populates the target with the next value if it exists
         /// </summary>
-        Option<T> Next();
+        bool Next(out T dst);
     }
 }

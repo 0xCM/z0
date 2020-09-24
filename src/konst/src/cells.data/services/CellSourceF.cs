@@ -11,7 +11,7 @@ namespace Z0
     using static z;
     using static CellValues;
 
-    public struct CellSource<F> : ICellSource<F>
+    public struct CellSource<F> : ICellValues<F>
         where F : struct, IDataCell
     {
         readonly IValueSource Values;

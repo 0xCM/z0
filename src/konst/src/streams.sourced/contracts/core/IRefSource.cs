@@ -3,24 +3,23 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
-    using System;
-    using System.Security;
+{
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [SuppressUnmanagedCodeSecurity]
-    public interface ICachedSource : ISource
+    [Free]
+    public interface IRefSource
     {
         ref readonly T Next<T>()
             where T : struct;
     }
-    
-    [SuppressUnmanagedCodeSecurity]
-    public interface ICachedSource<T> : ISource<T>
+
+    [Free]
+    public interface IRefSource<T> : ISource<T>
         where T : struct
-    {        
+    {
         new ref readonly T Next();
 
-        T ISource<T>.Next() 
+        T ISource<T>.Next()
             => Next();
     }
 }

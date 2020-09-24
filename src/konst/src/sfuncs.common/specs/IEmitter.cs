@@ -12,7 +12,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The production type</typeparam>
     [SuppressUnmanagedCodeSecurity]
-    public interface IEmitter<A> : IFunc<A>, ISource
+    public interface IEmitter<A> : IFunc<A>
     {
 
     }

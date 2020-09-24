@@ -4,23 +4,24 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Characterizes source capable of producing an interminable sequence of pseudorandom bounded points
     /// of any numeric type among: sbyte, byte, short, ushort, int, uint, long, ulong, float, double
     /// </summary>
-    public interface IPolyrand : IPolySource,
-        IRngBoundPointSource<sbyte>,
-        IRngBoundPointSource<byte>,
-        IRngBoundPointSource<short>,
-        IRngBoundPointSource<ushort>,
-        IRngBoundPointSource<int>,
-        IRngBoundPointSource<uint>,
-        IRngBoundPointSource<long>,
-        IRngBoundPointSource<ulong>,
-        IRngBoundPointSource<float>,
-        IRngBoundPointSource<double>
+    [Free]
+    public interface IPolyrand : IRngSource, IPolySourced
+        // IPolySource<sbyte>,
+        // IPolySource<byte>,
+        // IPolySource<short>,
+        // IPolySource<ushort>,
+        // IPolySource<int>,
+        // IPolySource<uint>,
+        // IPolySource<long>,
+        // IPolySource<ulong>,
+        // IPolySource<float>,
+        // IPolySource<double>
     {
         /// <summary>
         /// Retrieves the random stream navigator, if supported

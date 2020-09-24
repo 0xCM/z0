@@ -8,11 +8,13 @@ namespace Z0
     using System.Security;
     using System.Collections.Generic;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Defines the canonical shape of an emitter
     /// </summary>
     /// <typeparam name="T">The production type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate T Emitter<T>();
 
     /// <summary>
@@ -20,7 +22,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The production type</typeparam>
     /// <typeparam name="C">The cell type into which the production type is segmented</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate T Emitter<T,C>();
 
     /// <summary>
@@ -28,7 +30,7 @@ namespace Z0
     /// </summary>
     /// <param name="count">If specified, the number of elements to produce</param>
     /// <typeparam name="T">The emission type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate IEnumerable<T> StreamEmitter<T>();
 
     /// <summary>
@@ -36,32 +38,32 @@ namespace Z0
     /// </summary>
     /// <param name="count">If specified, the number of elements to produce</param>
     /// <typeparam name="T">The emission type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate IEnumerable<T> ValueStreamEmitter<T>()
         where T : struct;
 
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate bit Emitter1();
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate Cell8 Emitter8();
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate Cell16 Emitter16();
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate Cell32 Emitter32();
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate Cell64 Emitter64();
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate Cell128 Emitter128();
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate Cell256 Emitter256();
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate Cell512 Emitter512();
 }

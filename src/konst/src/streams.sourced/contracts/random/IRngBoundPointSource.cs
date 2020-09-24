@@ -6,12 +6,13 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    public interface ISampleDefaults<T>
-        where T : unmanaged
+    /// <summary>
+    /// Characterizes a random source that can produce points bounded by a range
+    /// </summary>
+    /// <typeparam name="T">The primal type</typeparam>
+    [Free]
+    public interface IRngBoundPointSource<T> : IRngPointSource<T>, IDomainValues<T>
+        where T : struct
     {
-        /// <summary>
-        /// The domain of potential values
-        /// </summary>
-        Interval<T> SampleDomain {get;}
     }
 }

@@ -19,9 +19,9 @@ namespace Z0
         public static Func<Cell64> emitter(IValueSource source, W64 w, NumericKind nk)
             => emitter<Cell64>(source, CellWidth.W64, nk);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Func<F> emitter<F>(IValueSource source, CellWidth width, NumericKind nk)
-            where F : unmanaged, IDataCell
+            where F : unmanaged
         {
 
             if(width <= CellWidth.W64)

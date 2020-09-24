@@ -21,7 +21,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The production element type</typeparam>
     [Free]
-    public interface ISource<T> : ISource
+    public interface ISource<T>
     {
         /// <summary>
         /// Retrieves the next item from the source

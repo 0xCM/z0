@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     public interface IAppMsgQueue : IAppMsgSink, ICallbackSource<IAppMsg>
     {
         IReadOnlyList<IAppMsg> Dequeue();

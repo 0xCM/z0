@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial class XTend
-    {        
+    {
         /// <summary>
         /// Yields the next source-provided pair
         /// </summary>
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="max">The exclusive maximum value</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static ConstPair<T> NextPair<T>(this IBoundValueSource source, T min, T max)
+        public static ConstPair<T> NextPair<T>(this IDomainValues source, T min, T max)
             where T : struct
                 => PairSource.constant(source, min, max);
     }

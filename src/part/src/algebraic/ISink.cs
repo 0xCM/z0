@@ -10,7 +10,7 @@ namespace Z0
     /// <summary>
     /// Sink interface root
     /// </summary>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ISink
     {
 
@@ -20,7 +20,7 @@ namespace Z0
     /// Characterizes a sink that accepts a single input value
     /// </summary>
     /// <typeparam name="A">The input type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ISink<A> : ISink
     {
         /// <summary>
@@ -30,7 +30,7 @@ namespace Z0
         void Deposit(A src);
     }
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IDataSink<A> : ISink
         where A : struct
     {

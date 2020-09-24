@@ -4,15 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Security;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IValueStreamSource<T> : IValueSource<T>
+    public interface IHostedValues<H,T> : IValueSource<T>
         where T : struct
+        where H : struct, IHostedValues<H,T>
     {
-        ValueStreamEmitter<T> Emitter {get;}
+
     }
 }

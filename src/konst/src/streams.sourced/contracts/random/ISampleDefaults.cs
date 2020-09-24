@@ -4,16 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    /// <summary>
-    /// Identifies a source of random data
-    /// </summary>
-    public interface IRngSource
+    [Free]
+    public interface ISampleDefaults<T>
+        where T : unmanaged
     {
         /// <summary>
-        /// Identifies the rng that drives the source
+        /// The domain of potential values
         /// </summary>
-        RngKind RngKind {get;}
+        Interval<T> SampleDomain {get;}
     }
 }

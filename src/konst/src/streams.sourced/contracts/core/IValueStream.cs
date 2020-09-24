@@ -3,10 +3,16 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    public interface IRngPointSource<T> : IRngSource, IValueSource<T>
+{
+    using System;
+    using System.Collections.Generic;
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
+    public interface IValueStream<T> : IEnumerable<T>, IValueSource<T>
         where T : struct
     {
-    
+
     }
 }

@@ -17,9 +17,7 @@ namespace Z0
         where W : unmanaged, ITypeWidth
         where T : unmanaged
     {
-        readonly IValueSource Random;
-
-        //readonly string Name;
+        readonly IValueSource Source;
 
         readonly CellWidth Width;
 
@@ -31,8 +29,7 @@ namespace Z0
 
         public CellStreamProvider(IValueSource src, Interval<T> domain)
         {
-            Random = src;
-            //Name = $"cell_rng_{default(F).BitWidth}x{bitwidth<T>()}";
+            Source = src;
             Width = (CellWidth)default(F).BitWidth;
             Kind = typeof(T).NumericKind();
             CellDomain = domain;
@@ -139,14 +136,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Cell128 f128V(W128 w)
-            => Random.NextPair<ulong>();
+            => Source.NextPair<ulong>();
 
         [MethodImpl(Inline)]
         public Cell256 Fixed(W256 w)
-            =>  (Random.Cell(w128), Random.Cell(w128));
+            =>  (Source.Cell(w128), Source.Cell(w128));
 
         [MethodImpl(Inline)]
         public Cell512 Fixed(W512 w)
-            => (Random.Cell(w256), Random.Cell(w256));
+            => (Source.Cell(w256), Source.Cell(w256));
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The production value type</typeparam>
     [Free]
-    public interface IBoundValueSource<T> : IValueSource<T>
+    public interface IDomainValues<T> : IValueSource<T>
         where T : struct
     {
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
     }
 
     [Free]
-    public interface IBoundValueSource
+    public interface IDomainValues
     {
         /// <summary>
         /// Retrieves the next point from the source, constrained by an upper bounds

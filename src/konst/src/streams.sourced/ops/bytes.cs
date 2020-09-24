@@ -17,11 +17,11 @@ namespace Z0
         /// Produces stream of bytes
         /// </summary>
         /// <param name="source">The random source</param>
+        [Op]
         public static Seq<byte> bytes(IValueSource source)
-        {
-            return z.seq(stream(w8, source));
-        }
+            => z.seq(stream(w8, source));
 
+        [Op]
         static IEnumerable<byte> stream(W8 w, IValueSource source)
         {
             while(true)

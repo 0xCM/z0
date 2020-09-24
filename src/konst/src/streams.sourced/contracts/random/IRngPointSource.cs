@@ -6,12 +6,10 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    /// <summary>
-    /// Characterizes a random source that can produce points bounded by a range
-    /// </summary>
-    /// <typeparam name="T">The primal type</typeparam>
-    public interface IRngBoundPointSource<T> : IRngPointSource<T>, IBoundValueSource<T>
+    [Free]
+    public interface IRngPointSource<T> : IRngSource, IValueSource<T>
         where T : struct
     {
+
     }
 }

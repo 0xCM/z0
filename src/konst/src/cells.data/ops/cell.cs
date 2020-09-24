@@ -13,6 +13,38 @@ namespace Z0
 
     partial class Cells
     {
+        [MethodImpl(Inline), Op]
+        public static Cell8 cell(byte src)
+            => src;
+
+        [MethodImpl(Inline), Op]
+        public static Cell8 cell(sbyte src)
+            => src;
+
+        [MethodImpl(Inline), Op]
+        public static Cell16 cell(short src)
+            => src;
+
+        [MethodImpl(Inline), Op]
+        public static Cell16 cell(ushort src)
+            => src;
+
+        [MethodImpl(Inline), Op]
+        public static Cell32 cell(int src)
+            => src;
+
+        [MethodImpl(Inline), Op]
+        public static Cell32 cell(uint src)
+            => src;
+
+        [MethodImpl(Inline), Op]
+        public static Cell64 cell(long src)
+            => src;
+
+        [MethodImpl(Inline), Op]
+        public static Cell64 cell(ulong src)
+            => src;
+
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Cell8 c8<T>(T src)
             where T : unmanaged

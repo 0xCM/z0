@@ -3,15 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
-    using System.Security;
+{
+    using System;
 
-    [SuppressUnmanagedCodeSecurity]
-    public interface ISingletonSource<T> : ISource<T>
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
+    public interface ICallbackSource<T>
     {
-        T Value {get;}
-
-        T ISource<T>.Next() 
-            => Value;
+        event Action<T> Next;
     }
 }

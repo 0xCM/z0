@@ -4,16 +4,17 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    public interface IStreamProvider<T>
+    /// <summary>
+    /// Identifies a source of random data
+    /// </summary>
+    [Free]
+    public interface IRngSource
     {
         /// <summary>
-        /// In infinite T-stream
+        /// Identifies the rng that drives the source
         /// </summary>
-        IEnumerable<T> Stream {get;}
+        RngKind RngKind {get;}
     }
 }

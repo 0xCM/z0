@@ -11,28 +11,32 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct Cells<T>
+    public readonly struct Cells<T> : ITableSpan<Cells<T>, T>
         where T : struct, IDataCell
     {
         public static uint CellWidth
             => bitwidth<T>();
 
-        readonly T[] Data;
+        readonly TableSpan<T> Data;
 
         [MethodImpl(Inline)]
         public Cells(T[] src)
             => Data = src;
 
+        [MethodImpl(Inline)]
+        public static implicit operator Cells<T>(T[] src)
+            => new Cells<T>(src);
+
         public Span<T> Edit
         {
             [MethodImpl(Inline)]
-            get =>  Data;
+            get =>  Data.Edit;
         }
 
         public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]
-            get =>  Data;
+            get =>  Data.View;
         }
 
         public ref T this[long index]
@@ -41,9 +45,11 @@ namespace Z0
             get => ref Data[index];
         }
 
-        [MethodImpl(Inline)]
-        public ref T Seek(long index)
-            => ref this[index];
+        public ref T this[ulong index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
 
         public int Length
         {
@@ -56,5 +62,15 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (uint)Data.Length;
         }
+
+        public T[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data.Storage;
+        }
+
+        public Cells<T> Refresh(T[] src)
+            => src;
+
     }
 }

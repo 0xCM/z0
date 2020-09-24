@@ -6,9 +6,11 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-   public interface ICellStreamProvider<F> : IStreamProvider<F>
+    [Free]
+    public interface ICellStreamProvider<F> : IStreamProvider<F>
         where F : unmanaged, IDataCell
     {
         new IEnumerable<F> Stream {get;}
