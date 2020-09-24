@@ -11,9 +11,11 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The random value type</typeparam>
     [Free]
-    public interface IRngStream<T> : IRngSource, IValueSource<T>, IValueStream<T>
+    public interface IRngStream<T> : IRngSource, IPolyStream<T>
         where T : struct
     {
 
     }
+
+
 }

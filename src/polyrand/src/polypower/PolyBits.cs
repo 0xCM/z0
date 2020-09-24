@@ -15,7 +15,7 @@ namespace Z0
         /// Produces an interminable stream of random bits
         /// </summary>
         /// <param name="random">The random source</param>
-        public static IEnumerable<bit> BitStream32(this IPolyrand random)
+        public static IEnumerable<bit> BitStream32(this IPolySource random)
         {
             const int w = 64;
             while(true)
@@ -30,14 +30,14 @@ namespace Z0
         /// Produces an interminable stream of random bits from a value sequence of parametric type
         /// </summary>
         /// <param name="random">The random source</param>
-        public static IEnumerable<T> BitStream<T>(this IPolyrand src)
+        public static IEnumerable<T> BitStream<T>(this IPolySource src)
             where T : unmanaged
         {
             while(true)
             {
                 var data = src.Next<ulong>();
                 for(var i=0; i<64; i++)
-                    yield return Cast.to<byte,T>((byte)As.testbit(data,i));
+                    yield return z.force<byte,T>((byte)As.testbit(data,i));
             }
         }
     }

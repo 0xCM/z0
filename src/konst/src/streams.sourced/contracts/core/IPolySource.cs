@@ -28,6 +28,13 @@ namespace Z0
     }
 
     [Free]
+    public interface IPolyStream<T> : IValueSource<T>, IValueStream<T>
+        where T : struct
+    {
+
+    }
+
+    [Free]
     public interface IPolySourced : IPolySource,
         IPolySource<sbyte>,
         IPolySource<byte>,
