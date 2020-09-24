@@ -86,6 +86,6 @@ namespace Z0
         public static string FormatHex<N,T>(this NatSpan<N,T> src, char sep = Chars.Space, bool specifier = false)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => src.Data.FormatHex(sep, specifier);
+                => src.Edit.FormatHex(sep, specifier);
     }
 }

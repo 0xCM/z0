@@ -28,7 +28,7 @@ namespace Z0
             _Registers = registers;
         }
 
-        public SymbolSet<Mnemonic,ushort> Mnemonics
+        public Symbols<Mnemonic,ushort> Mnemonics
         {
             [MethodImpl(Inline)]
             get => _Mnemonics.Symbols;
@@ -40,7 +40,7 @@ namespace Z0
             get => _OpCodes.Entries.View;
         }
 
-        public SymbolSet<RegisterKind,uint> Registers
+        public Symbols<RegisterKind,uint> Registers
         {
             [MethodImpl(Inline)]
             get => _Registers.Symbols;

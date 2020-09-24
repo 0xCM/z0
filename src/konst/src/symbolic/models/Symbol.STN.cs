@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines an S-symbol value, of bit-width N, covered by a T-storage cell
     /// </summary>
-    public readonly struct Symbol<S,T,N> : ISymbol<S,N,T>
+    public readonly struct Symbol<S,T,N> : ISymbol<S,T,N>
         where S : unmanaged
         where T : unmanaged
         where N : unmanaged, ITypeNat

@@ -21,8 +21,8 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         public static string FormatList<N,T>(this NatSpan<N,T> src, char delimiter = ',', int offset = 0, int pad = 2)
             where N : unmanaged, ITypeNat
-            where T : unmanaged 
-                => src.Data.Format(delimiter, offset, pad);
+            where T : unmanaged
+                => src.Edit.Format(delimiter, offset, pad);
 
         /// <summary>
         /// Formats a sequence of objects as a delimited list

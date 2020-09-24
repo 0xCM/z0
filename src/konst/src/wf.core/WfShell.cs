@@ -55,6 +55,8 @@ namespace Z0
 
         public IPolyrand Random {get; private set;}
 
+        public ApiContext ApiContext {get;}
+
         [MethodImpl(Inline)]
         public WfShell(WfInit config)
         {
@@ -80,6 +82,7 @@ namespace Z0
             IndexRoot = FolderPath.Define(Init.IndexDir.Name);
             Random = default;
             Broker = new WfBroker(WfSink, Ct);
+            ApiContext = new ApiContext(new ApiContextState(Modules));
         }
 
         [MethodImpl(Inline)]

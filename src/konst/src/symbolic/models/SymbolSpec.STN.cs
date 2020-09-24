@@ -22,15 +22,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator SymbolSpec(SymbolSpec<S,T,W> src)
-            => new SymbolSpec(src.SymWidth, src.SegWidth, src.SegDomain, src.SymDomain);
+            => new SymbolSpec(src.SymbolWidth, src.SegmentWidth, src.SegmentDomain, src.SymbolDomain);
 
         [MethodImpl(Inline)]
         public static implicit operator SymbolSpec<S>(SymbolSpec<S,T,W> src)
-            => new SymbolSpec<S>(src.SymWidth, src.SegWidth, src.SegDomain, src.SymDomain, src.Symbols);
+            => new SymbolSpec<S>(src.SymbolWidth, src.SegmentWidth, src.SegmentDomain, src.SymbolDomain, src.Symbols);
 
         [MethodImpl(Inline)]
         public static implicit operator SymbolSpec<S,W>(SymbolSpec<S,T,W> src)
-            => new SymbolSpec<S,W>(src.SegWidth, src.SegDomain, src.Symbols);
+            => new SymbolSpec<S,W>(src.SegmentWidth, src.SegmentDomain, src.Symbols);
 
         [MethodImpl(Inline)]
         public SymbolSpec(params S[] symbols)
@@ -39,7 +39,7 @@ namespace Z0
         /// <summary>
         /// The number of bits occupied by a symbol
         /// </summary>
-        public ushort SymWidth
+        public ushort SymbolWidth
         {
             [MethodImpl(Inline)]
             get => (ushort) Widths.data<W>();
@@ -48,7 +48,7 @@ namespace Z0
         /// <summary>
         /// The width of the underlying numeric primitive
         /// </summary>
-        public ushort SegWidth
+        public ushort SegmentWidth
         {
             [MethodImpl(Inline)]
             get => (ushort)bitwidth<T>();
@@ -57,19 +57,19 @@ namespace Z0
         /// <summary>
         /// The maximum number of symbols that can be stored in a segment
         /// </summary>
-        public ushort Capacity
+        public ushort SegmentCapacity
         {
             [MethodImpl(Inline)]
             get => (ushort)((ushort)bitwidth<T>()/(ushort)Widths.data<W>());
         }
 
-        public ClrArtifactKey SegDomain
+        public ClrArtifactKey SegmentDomain
         {
             [MethodImpl(Inline)]
             get => typeof(T);
         }
 
-        public ClrArtifactKey SymDomain
+        public ClrArtifactKey SymbolDomain
         {
             [MethodImpl(Inline)]
             get => typeof(S);

@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    using System.Linq;
 
     using static Konst;
     using static z;
@@ -35,5 +34,12 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ApiContext context(in ApiContextState state)
             => new ApiContext(state);
+
+        /// <summary>
+        /// Creates a <see cref='ApiContext'/> over a specified set of modules
+        /// </summary>
+        [MethodImpl(Inline), Op]
+        public static ApiContext context(in ApiModules src)
+            => new ApiContext(new ApiContextState(src));
     }
 }

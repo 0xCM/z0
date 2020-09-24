@@ -11,24 +11,27 @@ namespace Z0
 
     public readonly struct SymbolSpec : ISymbolSpec
     {
-        public ushort SymWidth {get;}
+        public ushort SymbolWidth {get;}
 
-        public ushort SegWidth {get;}
+        public ushort SegmentWidth {get;}
 
-        public ushort Capacity {get;}
+        public ushort SegmentCapacity {get;}
 
-        public ClrArtifactKey SegDomain {get;}
+        public ClrArtifactKey SegmentDomain {get;}
 
-        public ClrArtifactKey SymDomain {get;}
+        public ClrArtifactKey SymbolDomain {get;}
+
+        public ClrArtifactKey KindDomain {get;}
 
         [MethodImpl(Inline)]
-        public SymbolSpec(ushort symwidth, ushort segwidth, ClrArtifactKey seg, ClrArtifactKey sym)
+        public SymbolSpec(ushort symwidth, ushort segwidth, ClrArtifactKey seg, ClrArtifactKey sym, ClrArtifactKey kind = default)
         {
-            SymWidth = symwidth;
-            SegWidth = segwidth;
-            Capacity = (ushort)(SegWidth/SymWidth);
-            SegDomain = seg;
-            SymDomain = sym;
+            SymbolWidth = symwidth;
+            SegmentWidth = segwidth;
+            SegmentCapacity = (ushort)(SegmentWidth/SymbolWidth);
+            SegmentDomain = seg;
+            SymbolDomain = sym;
+            KindDomain = kind;
         }
     }
 }

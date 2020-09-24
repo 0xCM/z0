@@ -6,7 +6,6 @@ namespace Z0
 {
     partial struct z
     {
-
         public static N0 n0 => default;
 
         public static N1 n1 => default;
@@ -14,7 +13,7 @@ namespace Z0
         public static N2 n2 => default;
 
         public static N3 n3 => default;
-        
+
         public static N4 n4 => default;
 
         public static N5 n5 => default;
@@ -24,11 +23,11 @@ namespace Z0
         public static N7 n7 => default;
 
         public static N8 n8 => default;
-        
+
         public static N9 n9 => default;
 
         public static N10 n10 => default;
-        
+
         public static N11 n11 => default;
 
         public static N12 n12 => default;
@@ -83,7 +82,7 @@ namespace Z0
 
         public static N1024 n1024 => default;
 
-        
+
         public static N33 n33 => default;
 
         public static N34 n34 => default;

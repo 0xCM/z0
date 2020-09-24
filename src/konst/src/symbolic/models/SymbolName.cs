@@ -9,6 +9,9 @@ namespace Z0
 
     using static Konst;
 
+    /// <summary>
+    /// Defines the name of a symbol
+    /// </summary>
     public readonly struct SymbolName
     {
         readonly StringRef Ref;

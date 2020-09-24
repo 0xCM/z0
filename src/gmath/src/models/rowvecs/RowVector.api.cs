@@ -40,7 +40,7 @@ namespace Z0
         internal static SpanBlock256<T> safeload<N,T>(N256 n, in NatSpan<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => SpanBlocks.safeload(n,src.Data);
+                => SpanBlocks.safeload(n,src.Edit);
 
         public static RowVector<T> alloc<T>(int minlen)
             where T : unmanaged

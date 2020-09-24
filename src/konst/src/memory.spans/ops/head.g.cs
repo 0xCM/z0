@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;    
+    using System.Runtime.InteropServices;
 
     using static Konst;
 
@@ -21,6 +21,6 @@ namespace Z0
         public static ref T first<N,T>(NatSpan<N,T> src)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => ref MemoryMarshal.GetReference<T>(src.Data);             
+                => ref MemoryMarshal.GetReference<T>(src.Edit);
     }
 }

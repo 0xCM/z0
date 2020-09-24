@@ -15,9 +15,9 @@ namespace Z0
         /// Retrieves the value of a type natural represented as a signed integer
         /// </summary>
         /// <typeparam name="N">The nat type</typeparam>
-        [MethodImpl(Inline)]   
-        public static int nati<N>(N n = default) 
+        [MethodImpl(Inline)]
+        public static int nati<N>(N n = default)
             where N : unmanaged, ITypeNat
-                => (int)value<N>();
+                => z.nat32i(n);
     }
 }

@@ -32,7 +32,7 @@ namespace Z0
             ref readonly var b = ref @as<T,byte>(src);
             for(var i=0u; i<CellSize; i++)
             {
-                var symbols = Hex.symbols(skip(b,i), LowerCase);
+                var symbols = SymbolStore.hex(skip(b,i), LowerCase);
                 for(var j=0u; j<CellSize; j++)
                     seek(dst,j) = skip(symbols, j);
             }

@@ -6,20 +6,29 @@ namespace Z0
 {
     public interface ISymbolSpec
     {
-        ushort SymWidth {get;}
+        ushort SymbolWidth {get;}
 
-        ushort SegWidth {get;}
+        ushort SegmentWidth {get;}
 
-        ushort Capacity {get;}
+        ushort SegmentCapacity {get;}
 
-        ClrArtifactKey SegDomain {get;}
+        ClrArtifactKey SegmentDomain {get;}
 
-        ClrArtifactKey SymDomain {get;}
+        ClrArtifactKey SymbolDomain {get;}
+
+        ClrArtifactKey KindDomain => ClrArtifactKey.Empty;
     }
 
     public interface ISymbolSpec<S> : ISymbolSpec
         where S : unmanaged
     {
         S[] Symbols {get;}
+    }
+
+    public interface ISymbolSpec<K,S> : ISymbolSpec<S>
+        where S : unmanaged
+        where K : unmanaged
+    {
+        K[] Kinds {get;}
     }
 }

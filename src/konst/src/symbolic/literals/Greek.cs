@@ -11,7 +11,7 @@ namespace Z0
         public const char α = alpha;
 
         public const char Alpha = 'Α';
-        
+
         public const char beta = 'β';
 
         public const char Beta = 'Β';
@@ -21,7 +21,7 @@ namespace Z0
         public const char δ = 'δ';
 
         public const char Δ = 'Δ';
-      
+
         public const char gamma = 'γ';
 
         public const char γ = gamma;
@@ -43,7 +43,7 @@ namespace Z0
         public const char Lambda = 'Λ';
 
         public const char Λ = Lambda;
-        
+
         public const char Mu = 'Μ';
 
         public const char mu = 'μ';
@@ -51,7 +51,7 @@ namespace Z0
         public const char η = 'η';
 
         public const char Omega = 'Ω';
-        
+
         public const char Ω = Omega;
 
         public const char π = 'π';
@@ -60,7 +60,7 @@ namespace Z0
 
         public const char rho = 'ρ';
 
-        public const char ρ = rho; 
+        public const char ρ = rho;
 
         public const char Rho = 'Ρ';
 
@@ -77,11 +77,9 @@ namespace Z0
         public const char Tau = 'Τ';
 
         public const char Τ = Tau;
-      
+
         public const char Theta = 'Θ';
 
         public const char θ = Theta;
-
-        
     }
 }

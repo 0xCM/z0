@@ -52,7 +52,7 @@ namespace Z0
         T Cell => Unsafe.As<S,T>(ref edit(Value));
     }
 
-    public interface ISymbol<S,N,T> : ISymbol<S,T>
+    public interface ISymbol<S,T,N> : ISymbol<S,T>
         where S : unmanaged
         where T : unmanaged
         where N : unmanaged, ITypeNat

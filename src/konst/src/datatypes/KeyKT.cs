@@ -16,7 +16,7 @@ namespace Z0
     /// <remarks>
     ///  The key is denoted symbolically by <see cref='Key{K,T}.Identifier'/>: <see cref='Key{K,T}.Kind'/>
     /// </remarks>
-    public readonly struct Key<K,T>
+    public readonly struct Key<K,T> : ITextual
     {
         public const string FormatPatternText = "{0}: {1}";
 

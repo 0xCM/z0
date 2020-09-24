@@ -25,17 +25,17 @@ namespace Z0
         /// <summary>
         /// The bit-width of a storage cell
         /// </summary>
-        public ushort SegWidth {get;}
+        public ushort SegmentWidth {get;}
 
         /// <summary>
         /// The storage cell type identifier
         /// </summary>
-        public ClrArtifactKey SegDomain {get;}
+        public ClrArtifactKey SegmentDomain {get;}
 
         /// <summary>
         /// The number of bits occupied by a symbol
         /// </summary>
-        public ushort SymWidth
+        public ushort SymbolWidth
         {
             [MethodImpl(Inline)]
             get => (ushort)Widths.data<W>();
@@ -44,16 +44,22 @@ namespace Z0
         /// <summary>
         /// The maximum number of symbols that can be stored in a segment
         /// </summary>
-        public ushort Capacity
+        public ushort SegmentCapacity
         {
             [MethodImpl(Inline)]
-            get => (ushort)(SegWidth/SymWidth);
+            get => (ushort)(SegmentWidth/SymbolWidth);
         }
 
-        public ClrArtifactKey SymDomain
+        public ClrArtifactKey SymbolDomain
         {
             [MethodImpl(Inline)]
             get => typeof(S);
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Symbols == null  || Symbols.Length == 0;
         }
 
         public bool IsNonEmpty
@@ -65,17 +71,17 @@ namespace Z0
         [MethodImpl(Inline)]
         public SymbolSpec(ushort segwidth, ClrArtifactKey segdomain, params S[] symbols)
         {
-            SegDomain = segdomain;
-            SegWidth = segwidth;
+            SegmentDomain = segdomain;
+            SegmentWidth = segwidth;
             Symbols = symbols;
         }
 
         [MethodImpl(Inline)]
         public static implicit operator SymbolSpec(SymbolSpec<S,W> src)
-            => new SymbolSpec(src.SymWidth, src.SegWidth, src.SegDomain, src.SymDomain);
+            => new SymbolSpec(src.SymbolWidth, src.SegmentWidth, src.SegmentDomain, src.SymbolDomain);
 
         [MethodImpl(Inline)]
         public static implicit operator SymbolSpec<S>(SymbolSpec<S,W> src)
-            => new SymbolSpec<S>(src.SymWidth, src.SegWidth, src.SegDomain, src.SymDomain);
+            => new SymbolSpec<S>(src.SymbolWidth, src.SegmentWidth, src.SegmentDomain, src.SymbolDomain);
     }
 }

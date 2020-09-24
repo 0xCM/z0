@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct TokenInfo
     {
-        public readonly uint Index;
+        public readonly Sequential Index;
 
         public readonly StringRef Identifier;
 
@@ -38,6 +38,6 @@ namespace Z0
             => string.Concat(Identifier, " := ", Value, "; ", Description);
 
         public static TokenInfo Empty
-            => new TokenInfo(0, EmptyString, EmptyString, EmptyString);
+            => default;
     }
 }

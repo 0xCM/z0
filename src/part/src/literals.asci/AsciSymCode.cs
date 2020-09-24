@@ -81,12 +81,12 @@ namespace Z0
         /// <summary>
         /// The '(' character code 40
         /// </summary>
-        LParen = (byte)S.LParen,        
+        LParen = (byte)S.LParen,
 
         /// <summary>
         /// The ')' character code 41
         /// </summary>
-        RParen = (byte)S.RParen,        
+        RParen = (byte)S.RParen,
 
         /// <summary>
         /// The ':' character code 58

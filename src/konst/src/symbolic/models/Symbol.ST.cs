@@ -22,6 +22,15 @@ namespace Z0
         /// </summary>
         public S Value {get;}
 
+        /// <summary>
+        /// The symbol value, from storage cell perspective
+        /// </summary>
+        public T Cell
+        {
+            [MethodImpl(Inline)]
+            get => z.@as<S,T>(Value);
+        }
+
         [MethodImpl(Inline)]
         public static explicit operator char(Symbol<S,T> src)
             => @char(src);
@@ -44,14 +53,6 @@ namespace Z0
             get => new Symbol<S>(Value);
         }
 
-        /// <summary>
-        /// The symbol value, from storage cell perspective
-        /// </summary>
-        public T Cell
-        {
-            [MethodImpl(Inline)]
-            get => z.@as<S,T>(Value);
-        }
 
         public Type ValueType
             => typeof(S);

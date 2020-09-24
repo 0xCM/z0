@@ -59,7 +59,7 @@ namespace Z0
         public static void broadcast<N,T>(T data, in NatSpan<N,T> dst)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => dst.data.Fill(data);
+                => dst.Edit.Fill(data);
 
         [MethodImpl(Inline)]
         public static NatSpan<N,T> load<N,T>(T[] src, N n = default)

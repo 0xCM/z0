@@ -15,9 +15,9 @@ namespace Z0
         byte Index {get;}
 
         /// <summary>
-        /// The (boxed) argument value
+        /// The encoded argument value
         /// </summary>
-        object Value {get;}
+        ulong Value {get;}
     }
 
     /// <summary>
@@ -28,8 +28,8 @@ namespace Z0
     {
         new T Value {get;}
 
-        object IWfStepArg.Value
-            => Value;
+        ulong IWfStepArg.Value
+            => z.uint64(Value);
     }
 
     /// <summary>

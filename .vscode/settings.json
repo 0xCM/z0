@@ -160,6 +160,7 @@
         "PSUBUSB",
         "PTEST",
         "PUBONLY",
+        "Pinnable",
         "Popi",
         "Posix",
         "Printf",

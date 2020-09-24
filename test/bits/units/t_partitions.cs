@@ -21,7 +21,7 @@ namespace Z0
             BitMasks.part4x4(src, ref dst.Head);
             var segment = uint8(0b1010).ToBitSpan();
             var expect = segment.Replicate(4);
-            var actual = dst.Data.ToBitSpan();
+            var actual = dst.Edit.ToBitSpan();
             Claim.Require(expect.Equals(actual));
 
         }
@@ -50,7 +50,7 @@ namespace Z0
             BitMasks.part27x3(src, ref dst.Head);
 
             var expect = BitSpans.parse("000001110000011100000111000001110000011100000111000001110000011100000111");
-            var actual = dst.Data.ToBitSpan();
+            var actual = dst.Edit.ToBitSpan();
 
             Notify(expect.Format());
             Notify(actual.Format());

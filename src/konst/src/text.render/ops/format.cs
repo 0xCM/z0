@@ -91,6 +91,31 @@ namespace Z0
             where C : ITextual
             where D : ITextual
             where E : ITextual
-                => string.Format(PSx4, a.Format(), b.Format(), c.Format(), d.Format());
+                => string.Format(PSx5, a.Format(), b.Format(), c.Format(), d.Format(), e.Format());
+
+        /// <summary>
+        /// Renders a sextet of <see cref='ITextual'/> values as <see cref='Pipe'/> delimited text
+        /// </summary>
+        /// <param name="a">The first value</param>
+        /// <param name="b">The second value</param>
+        /// <param name="c">The third value</param>
+        /// <param name="d">The fourth value</param>
+        /// <param name="e">The fifth value</param>
+        /// <param name="f">The sixth value</param>
+        /// <typeparam name="A">The first value type</typeparam>
+        /// <typeparam name="B">The second value type</typeparam>
+        /// <typeparam name="C">The third value type</typeparam>
+        /// <typeparam name="D">The fourth value type</typeparam>
+        /// <typeparam name="E">The fifth value type</typeparam>
+        /// <typeparam name="F">The sixth value type</typeparam>
+        [MethodImpl(Inline)]
+        public static string format<A,B,C,D,E,F>(A a, B b, C c, D d, E e, F f)
+            where A : ITextual
+            where B : ITextual
+            where C : ITextual
+            where D : ITextual
+            where E : ITextual
+            where F : ITextual
+                => string.Format(PSx5, a.Format(), b.Format(), c.Format(), d.Format(), e.Format(), f.Format());
     }
 }

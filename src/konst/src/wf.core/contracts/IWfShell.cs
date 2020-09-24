@@ -42,6 +42,8 @@ namespace Z0
 
         IWfShell WithSource(IPolyrand random);
 
+        ApiContext ApiContext {get;}
+
         FolderPath AppDataRoot
             => Shell.Paths.AppDataRoot;
 

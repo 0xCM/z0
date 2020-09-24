@@ -8,13 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     partial class XTend
     {
         [MethodImpl(Inline)]
         public static void CopyTo<N,T>(this in NatSpan<N,T> src, Span<T> dst)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => src.Data.CopyTo(dst);
+                => src.Edit.CopyTo(dst);
     }
 }

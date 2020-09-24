@@ -27,6 +27,6 @@ namespace Z0
         public static string format<N,T>(NatSpan<N,T> src, BitFormat config)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => format(src.Data.ReadOnly(), config);
+                => format(src.Edit.ReadOnly(), config);
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     readonly struct TypeIdentityDiviner : ITypeIdentityDiviner
     {
@@ -119,7 +119,7 @@ namespace Z0
             if(ApiIdentity.IsNatSpan(src))
             {
                 var typeargs = src.SuppliedTypeArgs();
-                var text = IDI.NSpan;
+                var text = IDI.NatSpan;
                 text += typeargs[0].NatValue();
                 text += IDI.SegSep;
                 text += typeargs[1].NumericKind().Format();
@@ -128,7 +128,6 @@ namespace Z0
             else
                 return none<TypeIdentity>();
         }
-
 
         static readonly ITypeIdentityProvider DefaultProvider
             = new TypeIdentityProvider(DoDivination);

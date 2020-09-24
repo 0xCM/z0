@@ -10,6 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using api = BitFields;
+
     /// <summary>
     /// Defines a minimalistic 32-bit bitfield
     /// </summary>
@@ -17,7 +19,7 @@ namespace Z0
     {
         public const byte BitCount = 32;
 
-        readonly Span<uint1> Data;
+        readonly NatSpan<N32,uint1> Data;
 
         [MethodImpl(Inline)]
         public BitField32(Span<uint1> data)
@@ -29,7 +31,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         ref uint1 Bit(uint5 index)
-            => ref seek(Data, index);
+            => ref Data[index];
+
+        public ReadOnlySpan<uint1> View
+        {
+            [MethodImpl(Inline)]
+            get => Data.View;
+        }
 
         public uint1 this[uint5 index]
         {
@@ -42,11 +50,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-        {
-            Span<char> dst = stackalloc char[BitCount];
-            for(var i=0u; i<BitCount; i++)
-                seek(dst,i) = skip(Data,i).ToChar();
-            return new string(dst);
-        }
+            => api.format(this);
     }
 }

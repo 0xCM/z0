@@ -28,7 +28,7 @@ namespace Z0
         public void numeq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => ClaimNumeric.Eq(lhs.Data,rhs.Data);
+                => ClaimNumeric.Eq(lhs.Edit,rhs.Edit);
 
         /// <summary>
         /// Asserts content equality for two tabular spans of coincident dimension

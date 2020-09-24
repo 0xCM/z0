@@ -5,27 +5,26 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    using System.Runtime.InteropServices;
+    using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static TypeNats;
+    using static z;
 
     /// <summary>
     /// Defines a span of natural length N
     /// </summary>
-    [CustomSpan("nspan")]
+    [CustomSpan(IDI.NatSpan)]
     public readonly ref struct NatSpan<N,T>
         where N : unmanaged, ITypeNat
         where T : unmanaged
     {
-        internal readonly Span<T> data;
+        readonly Span<T> Data;
 
-        static N n => default;    
+        static N n => default;
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(in NatSpan<N,T> src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator NatSpan<N,T>(Span<T> src)
@@ -33,19 +32,34 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T> (in NatSpan<N,T> src)
-            => src.data;
+            => src.Data;
 
         [MethodImpl(Inline)]
         internal NatSpan(Span<T> src)
-            => this.data = src;
+            => Data = src;
 
         /// <summary>
         /// The backing storage
         /// </summary>
-        public Span<T> Data
+        public Span<T> Edit
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Data;
+        }
+
+        public uint Count
+        {
+            [MethodImpl(Inline)]
+            get => nat32u<N>();
+        }
+
+        public N NatCount
+            => n;
+
+        public ReadOnlySpan<T> View
+        {
+            [MethodImpl(Inline)]
+            get => Data;
         }
 
         /// <summary>
@@ -54,7 +68,7 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref MemoryMarshal.GetReference(data);
+            get => ref first(Data);
         }
 
         /// <summary>
@@ -63,42 +77,87 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => data.IsEmpty;
+            get => Data.IsEmpty;
         }
-        
-        public int Length 
+
+        /// <summary>
+        /// True if no capacity exist, false otherwise
+        /// </summary>
+        public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => (int)value<N>();
+            get => !Data.IsEmpty;
+        }
+
+        public int Length
+        {
+            [MethodImpl(Inline)]
+            get => nat32i<N>();
         }
 
         /// <summary>
         /// Queries/manipulates an index-identified cell
         /// </summary>
-        public ref T this[int index] 
+        public ref T this[long index]
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.Add(ref Head, index);
+            get => ref Unsafe.Add(ref Head, (int)index);
         }
 
         /// <summary>
-        /// Queries/manipulates the underlying strorage through the perspective of another type
+        /// Queries/manipulates an index-identified cell
+        /// </summary>
+        public ref T this[byte index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Unsafe.Add(ref Head, (int)index);
+        }
+
+        /// <summary>
+        /// Queries/manipulates an index-identified cell
+        /// </summary>
+        public ref T this[ushort index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Unsafe.Add(ref Head, (int)index);
+        }
+
+        /// <summary>
+        /// Queries/manipulates an index-identified cell
+        /// </summary>
+        public ref T this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Unsafe.Add(ref Head, (int)index);
+        }
+
+        /// <summary>
+        /// Queries/manipulates an index-identified cell
+        /// </summary>
+        public ref T this[ulong index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Unsafe.Add(ref Head, (int)index);
+        }
+
+        /// <summary>
+        /// Queries/manipulates the underlying storage through the perspective of another type
         /// </summary>
         [MethodImpl(Inline)]
-        public ref S Cell<S>(int index)
-            => ref Unsafe.Add(ref Unsafe.As<T,S>(ref Head), index);
+        public ref S Cell<S>(ulong index)
+            => ref Unsafe.Add(ref @as<T,S>(Head), (int)index);
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()
-            => data.GetEnumerator();
+            => Data.GetEnumerator();
 
         [MethodImpl(Inline)]
         public ref T GetPinnableReference()
-            => ref data.GetPinnableReference();
-               
+            => ref Data.GetPinnableReference();
+
         [MethodImpl(Inline)]
         public NatSpan<N,S> As<S>()
             where S : unmanaged
-                => new NatSpan<N,S>(MemoryMarshal.Cast<T,S>(data));
+                => new NatSpan<N,S>(recover<T,S>(Data));
     }
 }

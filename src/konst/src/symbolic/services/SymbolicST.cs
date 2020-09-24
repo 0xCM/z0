@@ -15,12 +15,12 @@ namespace Z0
         where S : unmanaged
         where T : unmanaged
     {
-        readonly SymbolSet<S,T> _Symbols;
+        readonly Symbols<S,T> _Symbols;
 
         readonly NamedSymbols<S> _Names;
 
         [MethodImpl(Inline)]
-        internal Symbolic(SymbolSet<S,T> src, NamedSymbols<S> names)
+        internal Symbolic(Symbols<S,T> src, NamedSymbols<S> names)
         {
             _Symbols = src;
             _Names = names;
@@ -35,7 +35,7 @@ namespace Z0
             get => _Names.Storage.Where(x => x.IsNonEmpty);
         }
 
-        public SymbolSet<S,T> Symbols
+        public Symbols<S,T> Symbols
         {
             [MethodImpl(Inline)]
             get => _Symbols;

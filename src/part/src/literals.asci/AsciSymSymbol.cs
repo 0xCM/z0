@@ -49,7 +49,7 @@ namespace Z0
         /// <summary>
         /// The '_' character
         /// </summary>
-        US = '_', 
+        US = '_',
 
         /// <summary>
         /// The ' ' character
@@ -88,12 +88,12 @@ namespace Z0
         /// <summary>
         /// The '(' symbol
         /// </summary>
-        LParen = '(',        
+        LParen = '(',
 
         /// <summary>
         /// The ')' symbol
         /// </summary>
-        RParen = ')',                
+        RParen = ')',
 
         /// <summary>
         /// The ':' character
@@ -111,7 +111,7 @@ namespace Z0
         DQuote = '\"',
 
         /// <summary>
-        /// The ''' (single-quote) character 
+        /// The ''' (single-quote) character
         /// </summary>
         SQuote = '\'',
     }

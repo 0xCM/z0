@@ -69,15 +69,4 @@ namespace Z0
         ApiContextState IStateful<ApiContextState>.State
             => State;
     }
-
-    public readonly struct ApiContextState
-    {
-        internal readonly ApiModules Modules;
-
-        [MethodImpl(Inline)]
-        internal ApiContextState(in ApiModules modules)
-        {
-            Modules = modules;
-        }
-    }
 }

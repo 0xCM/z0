@@ -45,10 +45,10 @@ namespace Z0
             var symbols = asm.symbols();
             var src = symbols.Mnemonics.View;
             var count = src.Length;
-            var fields = Enums.literals<SymbolFieldKind>();
+            var fields = Enums.literals<SymbolAspectKind>();
             var symType = typeof(Asm.Mnemonic);
             var cellType = typeof(ushort);
-            var header = text.format(Pattern, SymbolFieldKind.SymbolValue, SymbolFieldKind.SymbolType, SymbolFieldKind.CellValue, SymbolFieldKind.CellType);
+            var header = text.format(Pattern, SymbolAspectKind.SymbolValue, SymbolAspectKind.SymbolType, SymbolAspectKind.CellValue, SymbolAspectKind.CellType);
             using var writer = dst.Writer();
             writer.WriteLine(header);
             for(var i=0u; i<count; i++)

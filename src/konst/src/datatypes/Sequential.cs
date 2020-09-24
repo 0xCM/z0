@@ -9,25 +9,24 @@ namespace Z0
 
     using static Konst;
 
-    public struct Sequential<T> : ITextual
-        where T : unmanaged
+    public struct Sequential : ITextual
     {
-        public T Value;
+        public uint Value;
 
         [MethodImpl(Inline)]
-        public static Sequential<T> operator ++(Sequential<T> src)
-            => default;
+        public static Sequential operator ++(Sequential src)
+            => new Sequential(++src.Value);
 
         [MethodImpl(Inline)]
-        public static implicit operator Sequential<T>(T src)
-            => new Sequential<T>(src);
+        public static implicit operator Sequential(uint src)
+            => new Sequential(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator T(Sequential<T> src)
+        public static implicit operator uint(Sequential src)
             => src.Value;
 
         [MethodImpl(Inline)]
-        public Sequential(T src)
+        public Sequential(uint src)
             => Value = src;
 
         [MethodImpl(Inline)]

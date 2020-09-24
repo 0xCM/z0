@@ -28,7 +28,7 @@ namespace Z0
             if(domain != null)
                 random.Fill(domain.Value, len, ref dst[0]);
             else
-                random.Fill(len, ref dst[0]);            
+                random.Fill(len, ref dst[0]);
             return dst;
         }
 
@@ -42,7 +42,7 @@ namespace Z0
         /// <typeparam name="S">The source domain type</typeparam>
         /// <typeparam name="T">The target domain type</typeparam>
         [MethodImpl(Inline)]
-        public static RowVector256<T> VectorBlock<S,T>(this IPolyrand random, int len, Interval<S>? domain = null)        
+        public static RowVector256<T> VectorBlock<S,T>(this IPolyrand random, int len, Interval<S>? domain = null)
             where S: unmanaged
             where T : unmanaged
                 => random.VectorBlock<S>(len,domain).Convert<T>();
@@ -137,7 +137,7 @@ namespace Z0
             if(domain != null)
                 random.Fill(domain.Value, len, ref dst[0]);
             else
-                random.Fill(len, ref dst[0]);            
+                random.Fill(len, ref dst[0]);
             return dst;
         }
 
@@ -216,7 +216,7 @@ namespace Z0
         /// <typeparam name="S">The source domain type</typeparam>
         /// <typeparam name="T">The target domain type</typeparam>
         [MethodImpl(Inline)]
-        public static RowVector<T> Vector<S,T>(this IPolyrand random, int len, Interval<S>? domain = null)        
+        public static RowVector<T> Vector<S,T>(this IPolyrand random, int len, Interval<S>? domain = null)
             where S: unmanaged
             where T : unmanaged
                 => random.Vector<S>(len,domain).Convert<T>();
@@ -247,11 +247,11 @@ namespace Z0
         public static void Fill<N,T>(this IPolyrand random, ref RowVector<N,T> vector, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => random.Fill<T>(nati<N>(), ref vector.Data[0]);
+                => random.Fill<T>(z.nat32i<N>(), ref vector.Data[0]);
 
 
         /// <summary>
-        /// Effects a component-wise contraction on the source vector on a source vector of unsigned primal type, 
+        /// Effects a component-wise contraction on the source vector on a source vector of unsigned primal type,
         /// dst[i] = src[i].Contract(max[i])
         /// </summary>
         /// <param name="src">The vector to contract</param>
@@ -262,14 +262,14 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var dst = Z0.NatSpan.alloc<N, T>();
-            for(var i=0; i<dst.Length; i++)
+            var dst = Z0.NatSpan.alloc<N,T>();
+            for(var i=0; i<dst.Count; i++)
                 dst[i] = gmath.squeeze(src[i],max[i]);
             return dst;
         }
 
         /// <summary>
-        /// Effects a component-wise contraction on the source vector on a source vector of unsigned primal type, 
+        /// Effects a component-wise contraction on the source vector on a source vector of unsigned primal type,
         /// dst[i] = src[i].Contract(max[i])
         /// </summary>
         /// <param name="src">The vector to contract</param>

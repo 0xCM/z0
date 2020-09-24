@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct Key<T>
+    public readonly struct Key<T> : ITextual
         where T : unmanaged
     {
         readonly T Value;

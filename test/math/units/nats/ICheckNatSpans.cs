@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
     using static AppErrorMsg;
-    
+
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
@@ -27,9 +27,9 @@ namespace Z0
         /// <typeparam name="N">The length type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         void eq<N,T>(NatSpan<N,T> lhs, NatSpan<N,T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            where T : unmanaged 
-            where N : unmanaged, ITypeNat             
-                => Eq(lhs.Data,rhs.Data);
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => Eq(lhs.Edit,rhs.Edit);
 
         /// <summary>
         /// Asserts content equality for two tabular spans of coincident dimension
@@ -45,7 +45,7 @@ namespace Z0
         void eq<M,N,T>(TableSpan<M,N,T> lhs, TableSpan<M,N,T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-            where T : unmanaged 
-                => Eq(lhs.Data, rhs.Data);        
+            where T : unmanaged
+                => Eq(lhs.Data, rhs.Data);
     }
 }

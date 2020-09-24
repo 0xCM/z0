@@ -19,7 +19,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The bitfield content type</typeparam>
     public interface IBitField<T> : IBitField
-        where T : unmanaged 
+        where T : unmanaged
     {
         /// <summary>
         /// The raw bitfield data
@@ -30,22 +30,22 @@ namespace Z0
     /// <summary>
     /// Characterizes a content and index-parametric bitfield
     /// </summary>
-    /// <typeparam name="I">The bifield index type that defines 0-based sequential index corresponding to each bitfield segment</typeparam>
+    /// <typeparam name="I">The bitfield index type that defines 0-based sequential index corresponding to each bitfield segment</typeparam>
     /// <typeparam name="T">The bitfield content type</typeparam>
     public interface IBitField<I,T> : IBitField<T>
         where I : unmanaged
-        where T : unmanaged 
+        where T : unmanaged
     {
-        
+
     }
 
    public interface IRefinedBitField<F,T> : IBitField<T>
         where F : unmanaged, Enum
-        where T : unmanaged 
+        where T : unmanaged
     {
         F Kind {get;}
 
-        T IBitField<T>.Content 
+        T IBitField<T>.Content
             => EnumValue.scalar<F,T>(Kind);
     }
 
@@ -58,7 +58,7 @@ namespace Z0
     public interface IBitField<I,P,T> : IBitField<I,T>
         where I : unmanaged, Enum
         where P : unmanaged
-        where T : unmanaged 
+        where T : unmanaged
     {
         P Position(I index);
     }
@@ -73,7 +73,7 @@ namespace Z0
     public interface IBitField<I,P,T,S> : IBitField<I,P,T>
         where I : unmanaged, Enum
         where P : unmanaged
-        where T : unmanaged 
+        where T : unmanaged
         where S : unmanaged
     {
         S Segment(I index);
@@ -84,7 +84,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Segment(index);
-            
+
             [MethodImpl(Inline)]
             set => Segment(index, value);
         }
@@ -102,7 +102,7 @@ namespace Z0
         where F : struct, IBitField<F,I,P,T,S,W>
         where I : unmanaged, Enum
         where P : unmanaged
-        where T : unmanaged 
+        where T : unmanaged
         where S : unmanaged
         where W : unmanaged
     {

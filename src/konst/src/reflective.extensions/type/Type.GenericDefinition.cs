@@ -6,12 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
     using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
-    using static ReflectionFlags;
     using static z;
 
     partial class XTend
@@ -36,9 +33,9 @@ namespace Z0
             else if(effective.IsGenericTypeDefinition)
                 return effective;
             else
-                return default;            
-        }        
-                
+                return default;
+        }
+
         /// <summary>
         /// For a generic type or reference to a generic type, retrieves the generic type definition;
         /// otherwise, returns the void type
@@ -53,7 +50,7 @@ namespace Z0
             else if(effective.IsGenericTypeDefinition)
                 return effective;
             else
-                return typeof(void);            
+                return typeof(void);
         }
     }
 }

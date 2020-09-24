@@ -9,9 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    using DF = DecimalSymFacet;
-    using BF = BinarySymFacet;
-
     partial struct asci
     {
         [MethodImpl(Inline)]
@@ -28,26 +25,26 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static Symbol<BinarySym,byte,N1> symbol(BinaryDigit src)
-            => Symbolic.symbol<BinarySym,byte,N1>((BinarySym)(src + (byte)BF.First));
+            => SymbolStore.symbol(src);
 
         [MethodImpl(Inline), Op]
         public static Symbol<OctalSym,byte,N3> symbol(OctalDigit src)
-            => Symbolic.symbol<OctalSym,byte,N3>((OctalSym)((byte)src + (byte)OctalSym.First));
+            => SymbolStore.symbol(src);
 
         [MethodImpl(Inline), Op]
         public static Symbol<BinarySym,byte,N1> symbol(Base2 @base, byte src)
-            => Symbolic.symbol<BinarySym,byte,N1>((BinarySym)(src + (byte)BF.First));
+            => SymbolStore.symbol(@base, src);
 
         [MethodImpl(Inline), Op]
         public static Symbol<DecimalSym,byte,N4> symbol(DecimalDigit src)
-            => Symbolic.symbol<DecimalSym,byte,N4>((DecimalSym)((byte)src + DecimalSymFacet.First));
+            => SymbolStore.symbol(src);
 
         [MethodImpl(Inline), Op]
         public static Symbol<HexSym,byte,N4> symbol(UpperCased @case, HexDigit src)
-            => Symbolic.symbol<HexSym,byte,N4>(((HexSym)asci.code(@case, src)));
+            => SymbolStore.symbol(@case,src);
 
         [MethodImpl(Inline), Op]
         public static Symbol<HexSym,byte,N4> symbol(LowerCased @case, HexDigit src)
-            => Symbolic.symbol<HexSym,byte,N4>(((HexSym)asci.code(@case, src)));
+            => SymbolStore.symbol(@case,src);
    }
 }

@@ -16,7 +16,7 @@ namespace Z0
         public static Symbolic<S> cover<S>(S s = default)
             where S : unmanaged, Enum
         {
-            var symbols = enumerate<S>();
+            var symbols = symbols<S>();
             var names = new NamedSymbols<S>(alloc<NamedSymbol<S>>(symbols.Count));
             return new Symbolic<S>(symbols, names);
         }
@@ -26,7 +26,7 @@ namespace Z0
             where S : unmanaged, Enum
             where T : unmanaged
         {
-            var symbols = enumerate<S,T>();
+            var symbols = symbols<S,T>();
             var names = new NamedSymbols<S>(alloc<NamedSymbol<S>>(symbols.Count));
             return new Symbolic<S,T>(symbols, names);
         }
@@ -37,7 +37,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var symbols = enumerate<S,T,N>();
+            var symbols = symbols<S,T,N>();
             var names = new NamedSymbols<S>(alloc<NamedSymbol<S>>(symbols.Count));
             return new Symbolic<S,T,N>(symbols, names);
         }
