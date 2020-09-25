@@ -29,6 +29,10 @@ namespace Z0
             => src.Value;
 
         [MethodImpl(Inline)]
+        public static implicit operator Count(ushort src)
+            => new Count(src);
+
+        [MethodImpl(Inline)]
         public static explicit operator int(Count src)
             => (int)src.Value;
 

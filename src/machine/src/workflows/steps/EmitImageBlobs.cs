@@ -31,7 +31,7 @@ namespace Z0
         {
             Wf = wf;
             Host = host;
-            Parts = Wf.Api.Parts;
+            Parts = Wf.Api.Storage;
             TargetDir = wf.ResourceRoot + FolderName.Define("blobs");
             EmissionCount = 0;
             Wf.Created(Host);

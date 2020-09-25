@@ -40,7 +40,7 @@ namespace Z0
         }
 
         static string Format(Base2 @base, NumericLiteral src)
-            => Render.bits(src.Data, src.TypeCode);
+            => BitFormatter.bits(src.Data, src.TypeCode);
 
         void IValueFormatter<F,R>.Format(in R src, IDatasetFormatter<F> dst)
         {

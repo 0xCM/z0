@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using L = BitMasks.Literals;
 
     public class t_bitmix : t_bitcore<t_bitmix>
     {
@@ -65,7 +66,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 BitVector64 x = Random.BitVector(n64);
-                BitVector32 y = (uint)Bits.gather(x, MaskLiterals.Even64);
+                BitVector32 y = (uint)Bits.gather(x, L.Even64);
                 BitVector32 z = default;
 
                 for(int j=0, k = 0; j<64; j+=2, k++)
@@ -77,7 +78,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 BitVector64 x = Random.BitVector(n64);
-                BitVector32 y = (uint)Bits.gather(x, MaskLiterals.Odd64);
+                BitVector32 y = (uint)Bits.gather(x, L.Odd64);
                 BitVector32 z = default;
 
                 for(int j=1, k = 0; j<64; j+=2, k++)
@@ -91,10 +92,10 @@ namespace Z0
         {
             var x = Random.Next<uint>();
             var y = Random.Next<uint>();
-            var xE = Bits.scatter(Bits.gather(x,MaskLiterals.Even32), MaskLiterals.Even32);
-            var xO = Bits.scatter(Bits.gather(x,MaskLiterals.Odd32), MaskLiterals.Even32);
-            var yE = Bits.scatter(Bits.gather(y,MaskLiterals.Even32), MaskLiterals.Odd32);
-            var yO = Bits.scatter(Bits.gather(y,MaskLiterals.Odd32), MaskLiterals.Odd32);
+            var xE = Bits.scatter(Bits.gather(x,L.Even32), L.Even32);
+            var xO = Bits.scatter(Bits.gather(x,L.Odd32), L.Even32);
+            var yE = Bits.scatter(Bits.gather(y,L.Even32), L.Odd32);
+            var yO = Bits.scatter(Bits.gather(y,L.Odd32), L.Odd32);
             var xEy = xE | yE;
             var xOy = xO | yO;
             var t = text.build();

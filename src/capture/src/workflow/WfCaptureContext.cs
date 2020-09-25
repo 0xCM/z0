@@ -19,16 +19,13 @@ namespace Z0
 
         public IWfCaptureBroker Broker {get;}
 
-        public CorrelationToken Ct {get;}
-
-        readonly IWfEventLog Log;
+        //readonly IWfEventLog Log;
 
         [MethodImpl(Inline)]
         public WfCaptureContext(IWfShell wf, IAsmDecoder decoder, IAsmFormatter formatter, IPartCapturePaths archive)
         {
             Wf = wf;
-            Ct = Wf.Ct;
-            Log = Flow.log(wf.Init);
+            //Log = Flow.log(wf.Init);
             Broker = AsmWorkflows.capture(wf);
             Context = new CaptureContext(wf, decoder, formatter,  Broker);
         }
@@ -36,7 +33,7 @@ namespace Z0
         public void Dispose()
         {
             Broker.Dispose();
-            Log.Dispose();
+            //Log.Dispose();
         }
     }
 }

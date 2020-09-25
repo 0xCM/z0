@@ -184,7 +184,7 @@ namespace Z0
         public BitVector64 Lo
         {
             [MethodImpl(Inline)]
-            get => V0.vcell(v64u(Data),0);
+            get => z.vcell(v64u(Data),0);
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace Z0
         public BitVector64 Hi
         {
             [MethodImpl(Inline)]
-            get => V0.vcell(v64u(Data),1);
+            get => z.vcell(v64u(Data),1);
         }
 
         /// <summary>

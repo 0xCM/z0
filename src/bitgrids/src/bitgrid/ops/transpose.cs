@@ -76,8 +76,8 @@ namespace Z0
         static Vector256<T> vT16x16step<T>(in Vector256<T> src, in Vector256<T> g0, int i, int j)
             where T : unmanaged
         {
-            const uint E = MaskLiterals.Even32;
-            const uint O = MaskLiterals.Odd32;
+            const uint E = BitMasks.Literals.Even32;
+            const uint O = BitMasks.Literals.Odd32;
 
             var mask = gvec.vtakemask(src, (byte)i);
             var gT = gcell(g0, i, force<T>(Bits.gather(mask, E)));

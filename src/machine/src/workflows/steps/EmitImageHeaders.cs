@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static EmitPeHeadersStep;
+    using static EmitImageHeadersHost;
 
     using F = PeHeaderField;
 
@@ -17,32 +17,32 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
+        readonly WfHost Host;
+
         readonly IPart[] Parts;
 
         readonly FilePath TargetPath;
 
-        readonly CorrelationToken Ct;
-
         [MethodImpl(Inline)]
-        public EmitImageHeaders(IWfShell wf, IPart[] src, CorrelationToken ct)
+        public EmitImageHeaders(IWfShell wf, WfHost host)
         {
             Wf = wf;
-            Ct = ct;
-            Parts = src;
+            Host = host;
+            Parts = Wf.Api.Storage;
             TargetPath = wf.ResourceRoot + FileName.define("z0", "pe.csv");
-            Wf.Created(StepId, TargetPath);
+            Wf.Created(Host, TargetPath);
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
 
         public void Run()
         {
             var pCount = Parts.Length;
             var total = 0u;
-            Wf.Running(StepId, pCount);
+            Wf.Running(Host, pCount);
 
             var formatter = Formatters.dataset<F>();
             using var writer = TargetPath.Writer();
@@ -63,7 +63,7 @@ namespace Z0
                 total += count;
             }
 
-            Wf.Ran(StepId, delimit(pCount, total));
+            Wf.Ran(Host, delimit(pCount, total));
         }
 
         static void format(in ImageSectionHeader src, DatasetFormatter<F> dst)

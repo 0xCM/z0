@@ -42,7 +42,7 @@ namespace Z0.Asm
 
         public void check_bit_masks()
         {
-            var src = typeof(MaskLiterals);
+            var src = typeof(BitMasks.Literals);
             var data = binlits<ulong>(src, msg => Trace(msg));
             Trace(data.Length);
 
@@ -51,7 +51,7 @@ namespace Z0.Asm
         public void test_bit_parse()
         {
             var src = Random.Bytes(8).Array();
-            var formatted = Render.bitchars(src);
+            var formatted = BitFormatter.bitchars(src);
             Trace(formatted.ToString());
         }
 

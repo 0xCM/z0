@@ -29,7 +29,7 @@ namespace Z0
                 else if(LiteralAttributes.HasBinaryLiteral(field))
                     dst.Add(BitMasks.row(LiteralAttributes.BinaryLiteral(field,vRaw)));
                 else
-                    dst.Add(BitMasks.row(NumericLiteral.Base2(field.Name, vRaw, Render.bits(vRaw, tc))));
+                    dst.Add(BitMasks.row(NumericLiteral.Base2(field.Name, vRaw, BitFormatter.bits(vRaw, tc))));
             }
             return dst.ToArray();
         }

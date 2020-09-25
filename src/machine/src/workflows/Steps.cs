@@ -11,16 +11,12 @@ namespace Z0
     using static Flow;
     using static z;
 
+
     [WfHost]
     public sealed class MachineControl : WfHost<MachineControl>
     {
     }
 
-    [WfHost]
-    public sealed class EmitPeImageHost : WfHost<EmitPeImageHost>
-    {
-
-    }
 
     [WfHost]
     public class RecaptureHost : WfHost<RecaptureHost>
@@ -36,27 +32,11 @@ namespace Z0
     }
 
     [WfHost]
-    public sealed class EmitFieldMetadataHost : WfHost<EmitFieldMetadataHost>
-    {
-        public const string StepName = nameof(EmitFieldMetadata);
-
-        public override string Identifier => StepName;
-
-        protected override void Execute(IWfShell wf)
-        {
-            using var step = new EmitFieldMetadata(wf, this);
-            step.Run();
-        }
-    }
-
-
-    [WfHost]
     public class CreateGlobalIndexHost : WfHost<CreateGlobalIndexHost>
     {
         public override void Run(IWfShell shell)
             => throw missing();
     }
-
 
     [WfHost]
     public class ProcessPartFilesHost : WfHost<ProcessPartFilesHost,IAsmContext>
@@ -75,24 +55,6 @@ namespace Z0
     }
 
 
-
-
-    [Step]
-    public readonly struct EmitPeHeadersStep : IWfStep<EmitPeHeadersStep>
-    {
-        public static WfStepId StepId
-            => step<EmitPeHeadersStep>();
-    }
-
-
-    [Step]
-    public sealed class EmitImageConstantsStep : WfHost<EmitImageConstantsStep>
-    {
-        public static WfStepId StepId
-            => step<EmitImageConstantsStep>();
-    }
-
-
     [Step]
     public readonly struct EmitPartStringsStep : IWfStep<EmitPartStringsStep>
     {
@@ -105,44 +67,11 @@ namespace Z0
             => (kind == PartStringKind.System ? EmitStringRecordsHost.SystemKindExt : EmitStringRecordsHost.UserKindExt).ToLower();
     }
 
-    [Step]
-    public sealed class EmitImageBlobsHost : WfHost<EmitImageBlobsHost>
-    {
-        public const string EmissionType = "Metablobs";
-
-        public static WfStepId StepId
-            => Flow.step<EmitBitMasksHost>();
-    }
-
-    [Step]
-    public readonly struct EmitImageSummariesStep : IWfStep<EmitImageSummariesStep>
-    {
-        public static WfStepId StepId
-            => Flow.step<EmitImageSummariesStep>();
-    }
-
-    [Step]
-    public readonly struct EmitResBytesStep : IWfStep<EmitResBytesStep>
-    {
-        public const string StepName = nameof(EmitResBytes);
-
-        public static WfStepId StepId
-            => Flow.step<EmitResBytesStep>();
-    }
 
 
     [Step]
-    public readonly struct EmitImageDataStep : IWfStep<EmitImageDataStep>
+    public sealed class EmitStepListStep : IWfStep<EmitStepListStep>
     {
-        public static WfStepId StepId
-            => step<EmitImageDataStep>();
-    }
 
-
-    [Step]
-    public readonly struct EmitStepListStep : IWfStep<EmitStepListStep>
-    {
-        public static WfStepId StepId
-            => step<EmitStepListStep>();
     }
 }

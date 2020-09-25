@@ -7,13 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
-    partial struct Flow
+    [WfHost]
+    public sealed class EmitImageBlobsHost : WfHost<EmitImageBlobsHost>
     {
-        [MethodImpl(Inline), Op]
-        public static WfToken token(WfPartKind kind, Type src)
-            => new WfToken((((uint)src.MetadataToken & BitMasks.Literals.Lo24u) | ((uint)kind << 24) ) | hash2(src.AssemblyQualifiedName));
+        public const string EmissionType = "Metablobs";
+
+        protected override void Execute(IWfShell wf)
+        {
+            using var step = new EmitImageBlobs(wf,this);
+            step.Run();
+        }
     }
 }

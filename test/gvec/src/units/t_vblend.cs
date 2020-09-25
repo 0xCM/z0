@@ -14,6 +14,8 @@ namespace Z0
     using static V0d;
     using static V0;
 
+    using M = BitMasks.Literals;
+
     public class t_vblend : t_inx<t_vblend>
     {
         public void vblend_256x32f_outline()
@@ -37,7 +39,7 @@ namespace Z0
         public void vblend_128x16u_outline()
         {
             var w = n128;
-            var alt = (uint)MaskLiterals.Msb16x8x1 << 16;
+            var alt = (uint)M.Msb16x8x1 << 16;
             z.vcover(V0.v16u(V0d.vbroadcast(w,alt)), out Vector128<byte> spec);
             var a = gvec.vinc(w,z16);
             var b = gvec.vdec(w,Max16u);
@@ -47,8 +49,8 @@ namespace Z0
         public void vblend_256x16u_outline()
         {
             var w = n256;
-            var altOdd = (uint)MaskLiterals.Msb16x8x1 << 16;
-            var altEven = (uint)MaskLiterals.Msb16x8x1;
+            var altOdd = (uint)M.Msb16x8x1 << 16;
+            var altEven = (uint)M.Msb16x8x1;
             z.vcover(V0.v16u(Vectors.vbroadcast<uint>(w, altOdd)), out Vector256<byte> spec);
             var a = gvec.vinc(w,z16);
             var b = gvec.vdec(w,Max16u);

@@ -31,7 +31,7 @@ namespace Z0
         {
             Wf = wf;
             Host = host;
-            Parts = wf.Api.Parts;
+            Parts = wf.Api.Storage;
             PartCount = (uint)Parts.Length;
             TargetDir = Wf.ResourceRoot + FolderName.Define(DataFolder);
             EmissionCount = 0;

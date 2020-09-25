@@ -6,13 +6,67 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Text;
 
     using static Konst;
     using static z;
 
-    partial struct Render
+
+    [ApiHost("formatting.bits")]
+    public readonly struct BitFormatter : IBitFormatter
     {
+        public static BitFormatter Service => default;
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static BitFormatter<T> create<T>()
+            where T : struct
+                => default;
+
+        [MethodImpl(Inline), Op]
+        public static BitFormat configure(bool tlz = false)
+            => FormatOptions.bits(tlz);
+
+        [MethodImpl(Inline), Op]
+        public static BitFormat limited(uint maxbits, int? zpad = null)
+            => FormatOptions.bitmax(maxbits, zpad);
+
+        [MethodImpl(Inline), Op]
+        public static BitFormat blocked(int width, char? sep = null, uint? maxbits = null, bool specifier = false)
+            => FormatOptions.bitblock(width, sep, maxbits, specifier);
+
+        [MethodImpl(Inline), Op]
+        public void Format(byte src, uint maxbits, Span<char> dst, ref int k)
+            => bits(src, maxbits, dst, ref k);
+
+        [MethodImpl(Inline), Op]
+        public void Format(in byte src, int length, uint maxbits, Span<char> dst)
+            => bits(src,length,maxbits,dst);
+
+        [MethodImpl(Inline), Op]
+        public static void format(in byte src, int length, uint maxbits, Span<char> dst)
+            => bits(src, length, maxbits, dst);
+
+        [MethodImpl(Inline), Op]
+        public void Format(ReadOnlySpan<byte> src, uint maxbits, Span<char> dst)
+            => Format(first(src), src.Length, maxbits, dst);
+
+        [MethodImpl(Inline), Op]
+        public static void format(byte src, uint maxbits, Span<char> dst, ref int k)
+            => bits(src, maxbits, dst, ref k);
+
+        [MethodImpl(Inline)]
+        public static string format<T>(T src, in BitFormat config)
+            where T : struct
+                => format(z.bytes(src), config);
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static string format<T>(T src)
+            where T : struct
+                => format(src, BitFormatter.configure());
+
+        [MethodImpl(Inline), Op]
+        public static string format(ReadOnlySpan<byte> src, in BitFormat config)
+            => bits(src,config);
+
         [MethodImpl(Inline), Op]
         public static void bits(in byte src, int length, uint maxbits, Span<char> dst)
         {
@@ -24,6 +78,7 @@ namespace Z0
                     break;
             }
         }
+
 
         [MethodImpl(Inline), Op]
         public static void bits(ReadOnlySpan<byte> src, Count maxbits, Span<char> dst)
@@ -51,13 +106,13 @@ namespace Z0
         public static string bits(object src, TypeCode type)
         {
             if(type == TypeCode.Byte || type == TypeCode.SByte)
-                return Formatters.bits<byte>().Format((byte)rebox(src, NumericKind.U8));
+                return BitFormatter.create<byte>().Format((byte)rebox(src, NumericKind.U8));
             else if(type == TypeCode.UInt16 || type == TypeCode.Int16)
-                return Formatters.bits<ushort>().Format((ushort)rebox(src, NumericKind.U16));
+                return BitFormatter.create<ushort>().Format((ushort)rebox(src, NumericKind.U16));
             else if(type == TypeCode.UInt32  || type == TypeCode.Int32 || type == TypeCode.Single)
-                return Formatters.bits<uint>().Format((uint)rebox(src, NumericKind.U32));
+                return BitFormatter.create<uint>().Format((uint)rebox(src, NumericKind.U32));
             else if(type == TypeCode.UInt64 || type == TypeCode.Int64 || type == TypeCode.Double)
-                return Formatters.bits<ulong>().Format((ulong)rebox(src, NumericKind.U64));
+                return BitFormatter.create<ulong>().Format((ulong)rebox(src, NumericKind.U64));
             else
                 return EmptyString;
         }

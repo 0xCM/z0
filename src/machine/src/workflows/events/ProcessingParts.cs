@@ -17,7 +17,6 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-
         public PartId[] Parts {get;}
 
         public FlairKind Flair {get;}

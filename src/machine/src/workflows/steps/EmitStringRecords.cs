@@ -12,7 +12,6 @@ namespace Z0
     using static EmitStringRecordsHost;
     using static RP;
 
-
     public ref struct EmitStringRecords
     {
         /// <summary>
@@ -36,7 +35,7 @@ namespace Z0
         {
             Wf = wf;
             Host = host;
-            Parts = Wf.Api.Parts;
+            Parts = Wf.Api.Storage;
             EmissionCount = 0;
             PartCount = (uint)Parts.Length;
             Wf.Created(Host);

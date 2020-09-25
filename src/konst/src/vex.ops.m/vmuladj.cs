@@ -5,18 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static System.Runtime.Intrinsics.X86.Ssse3;
     using static System.Runtime.Intrinsics.X86.Avx2;
-    
+
     using static Konst;
-    
-    partial struct V0d
+
+    partial struct z
     {
         /// <summary>
-        /// __m128i _mm_maddubs_epi16 (__m128i a, __m128i b)PMADDUBSW xmm, xmm/m128
+        /// __m128i _mm_maddubs_epi16 (__m128i a, __m128i b) PMADDUBSW xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>

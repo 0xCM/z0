@@ -58,10 +58,6 @@ namespace Z0
             get => Storage.Length;
         }
 
-
-        public ApiParts Parts
-            => this;
-
         public Option<IApiHost> FindHost(ApiHostUri uri)
             => z.option(Hosts.Where(h => h.Uri == uri).FirstOrDefault());
 

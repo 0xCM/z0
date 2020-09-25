@@ -11,13 +11,15 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-    using static EmitImageDataStep;
+    using static EmitImageDataHost;
 
     using static z;
 
     public ref struct EmitImageData
     {
         readonly IWfShell Wf;
+
+        readonly WfHost Host;
 
         readonly Span<IPart> Parts;
 
@@ -42,20 +44,21 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public EmitImageData(IWfShell wf, IPart[] parts, CorrelationToken ct)
+        public EmitImageData(IWfShell wf, WfHost host)
         {
             Wf = wf;
-            Parts = parts;
+            Host = host;
+            Parts = Wf.Api.Storage;
             Index = default;
             TargetDir = wf.ResourceRoot + FolderName.Define("images");
             var process = Process.GetCurrentProcess();
             Images = process.Modules.Cast<ProcessModule>().Map(from).OrderBy(x => x.BaseAddress);
-            Wf.Created(StepId);
+            Wf.Created(Host);
         }
 
         public void Dispose()
         {
-             Wf.Disposed(StepId);
+             Wf.Disposed(Host);
         }
 
         static MemoryAddress BaseAddress(IPart src)
@@ -67,7 +70,7 @@ namespace Z0
 
         public void Run()
         {
-             Wf.Running(StepId);
+             Wf.Running(Host);
 
              Index = span<LocatedPart>(Parts.Length);
              for(var i=0u; i< Parts.Length; i++)
@@ -81,10 +84,11 @@ namespace Z0
                 seek(Index,i) = new LocatedPart(part, @base, (uint)(step.OffsetAddress - @base));
              }
 
-            using var summarize = new EmitImageSummaries(Wf, Images, Wf.Ct);
+            var host = new EmitImageSummariesHost();
+            using var summarize = new EmitImageSummaries(Wf, host, Images);
             summarize.Run();
 
-            Wf.Ran(StepId);
+            Wf.Ran(Host);
         }
     }
 }

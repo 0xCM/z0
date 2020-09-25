@@ -1,16 +1,21 @@
-// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Reflection.Emit;
-using System.Runtime.ExceptionServices;
-using System.Threading;
-
+//-----------------------------------------------------------------------------
+// Derivative Work
+// Copyright  : Microsoft/.Net foundation
+// Copyright  : (c) Chris Moore, 2020
+// License    :  MIT
+//-----------------------------------------------------------------------------
 namespace System.Reflection
 {
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Reflection;
+    using System.Reflection.Emit;
+    using System.Runtime.ExceptionServices;
+    using System.Threading;
+
+    using DP = Z0.DispatcherProxy;
+
     // Helper class to handle the IL EMIT for the generation of proxies.
     // Much of this code was taken directly from the Silverlight proxy generation.
     // Differences between this and the Silverlight version are:
@@ -38,7 +43,7 @@ namespace System.Reflection
     //     the proxy's 'this' becomes the equivalent of RealProxy's backpointer to RealProxy, so we were
     //     able to remove an extraneous field and ctor arg from the DispatchProxy proxies.
     //
-    internal static class DispatchProxyGenerator
+    public static class DispatchProxyGenerator
     {
         // Generated proxies have a private Action field that all generated methods
         // invoke.  It is the first field in the class and the first ctor parameter.
@@ -57,12 +62,14 @@ namespace System.Reflection
         // This approach is used to prevent regenerating identical proxy types for identical T/Proxy pairs,
         // which would ultimately be a more expensive leak.
         // Proxy instances are not cached.  Their lifetime is entirely owned by the caller of DispatchProxy.Create.
-        private static readonly Dictionary<Type, Dictionary<Type, Type>> s_baseTypeAndInterfaceToGeneratedProxyType = new Dictionary<Type, Dictionary<Type, Type>>();
-        private static readonly ProxyAssembly s_proxyAssembly = new ProxyAssembly();
-        private static readonly MethodInfo s_dispatchProxyInvokeMethod = typeof(DispatchProxy).GetTypeInfo().GetDeclaredMethod("Invoke")!;
+        static readonly Dictionary<Type, Dictionary<Type, Type>> s_baseTypeAndInterfaceToGeneratedProxyType = new Dictionary<Type, Dictionary<Type, Type>>();
+
+        static readonly ProxyAssembly s_proxyAssembly = new ProxyAssembly();
+
+        static readonly MethodInfo s_dispatchProxyInvokeMethod = typeof(DispatchProxy).GetTypeInfo().GetDeclaredMethod("Invoke")!;
 
         // Returns a new instance of a proxy the derives from 'baseType' and implements 'interfaceType'
-        internal static object CreateProxyInstance(Type baseType, Type interfaceType)
+        public static object CreateProxyInstance(Type baseType, Type interfaceType)
         {
             Debug.Assert(baseType != null);
             Debug.Assert(interfaceType != null);
@@ -71,7 +78,7 @@ namespace System.Reflection
             return Activator.CreateInstance(proxiedType, (Action<object[]>)DispatchProxyGenerator.Invoke)!;
         }
 
-        private static Type GetProxyType(Type baseType, Type interfaceType)
+        static Type GetProxyType(Type baseType, Type interfaceType)
         {
             lock (s_baseTypeAndInterfaceToGeneratedProxyType)
             {
@@ -92,7 +99,7 @@ namespace System.Reflection
         }
 
         // Unconditionally generates a new proxy type derived from 'baseType' and implements 'interfaceType'
-        private static Type GenerateProxyType(Type baseType, Type interfaceType)
+        static Type GenerateProxyType(Type baseType, Type interfaceType)
         {
             // Parameter validation is deferred until the point we need to create the proxy.
             // This prevents unnecessary overhead revalidating cached proxy types.
@@ -139,7 +146,7 @@ namespace System.Reflection
         // All generated proxy methods call this static helper method to dispatch.
         // Its job is to unpack the arguments and the 'this' instance and to dispatch directly
         // to the (abstract) DispatchProxy.Invoke() method.
-        private static void Invoke(object?[] args)
+        static void Invoke(object?[] args)
         {
             PackedArgs packed = new PackedArgs(args);
             MethodBase method = s_proxyAssembly.ResolveMethodToken(packed.DeclaringType, packed.MethodToken);
@@ -161,30 +168,42 @@ namespace System.Reflection
             }
         }
 
-        private class PackedArgs
+        class PackedArgs
         {
             internal const int DispatchProxyPosition = 0;
+
             internal const int DeclaringTypePosition = 1;
+
             internal const int MethodTokenPosition = 2;
+
             internal const int ArgsPosition = 3;
+
             internal const int GenericTypesPosition = 4;
+
             internal const int ReturnValuePosition = 5;
 
             internal static readonly Type[] PackedTypes = new Type[] { typeof(object), typeof(Type), typeof(int), typeof(object[]), typeof(Type[]), typeof(object) };
 
             private readonly object?[] _args;
+
             internal PackedArgs() : this(new object[PackedTypes.Length]) { }
+
             internal PackedArgs(object?[] args) { _args = args; }
 
             internal DispatchProxy? DispatchProxy { get { return (DispatchProxy?)_args[DispatchProxyPosition]; } }
+
             internal Type? DeclaringType { get { return (Type?)_args[DeclaringTypePosition]; } }
+
             internal int MethodToken { get { return (int)_args[MethodTokenPosition]!; } }
+
             internal object[]? Args { get { return (object[]?)_args[ArgsPosition]; } }
+
             internal Type[]? GenericTypes { get { return (Type[]?)_args[GenericTypesPosition]; } }
+
             internal object? ReturnValue { /*get { return args[ReturnValuePosition]; }*/ set { _args[ReturnValuePosition] = value; } }
         }
 
-        private class ProxyAssembly
+        class ProxyAssembly
         {
             private readonly AssemblyBuilder _ab;
             private readonly ModuleBuilder _mb;
@@ -549,131 +568,6 @@ namespace System.Reflection
                 return types;
             }
 
-            // TypeCode does not exist in ProjectK or ProjectN.
-            // This lookup method was copied from PortableLibraryThunks\Internal\PortableLibraryThunks\System\TypeThunks.cs
-            // but returns the integer value equivalent to its TypeCode enum.
-            private static int GetTypeCode(Type? type)
-            {
-                if (type == null)
-                    return 0;   // TypeCode.Empty;
-
-                if (type == typeof(bool))
-                    return 3;   // TypeCode.Boolean;
-
-                if (type == typeof(char))
-                    return 4;   // TypeCode.Char;
-
-                if (type == typeof(sbyte))
-                    return 5;   // TypeCode.SByte;
-
-                if (type == typeof(byte))
-                    return 6;   // TypeCode.Byte;
-
-                if (type == typeof(short))
-                    return 7;   // TypeCode.Int16;
-
-                if (type == typeof(ushort))
-                    return 8;   // TypeCode.UInt16;
-
-                if (type == typeof(int))
-                    return 9;   // TypeCode.Int32;
-
-                if (type == typeof(uint))
-                    return 10;  // TypeCode.UInt32;
-
-                if (type == typeof(long))
-                    return 11;  // TypeCode.Int64;
-
-                if (type == typeof(ulong))
-                    return 12;  // TypeCode.UInt64;
-
-                if (type == typeof(float))
-                    return 13;  // TypeCode.Single;
-
-                if (type == typeof(double))
-                    return 14;  // TypeCode.Double;
-
-                if (type == typeof(decimal))
-                    return 15;  // TypeCode.Decimal;
-
-                if (type == typeof(DateTime))
-                    return 16;  // TypeCode.DateTime;
-
-                if (type == typeof(string))
-                    return 18;  // TypeCode.String;
-
-                if (type.GetTypeInfo().IsEnum)
-                    return GetTypeCode(Enum.GetUnderlyingType(type));
-
-                return 1;   // TypeCode.Object;
-            }
-
-            private static readonly OpCode[] s_convOpCodes = new OpCode[] {
-                OpCodes.Nop, //Empty = 0,
-                OpCodes.Nop, //Object = 1,
-                OpCodes.Nop, //DBNull = 2,
-                OpCodes.Conv_I1, //Boolean = 3,
-                OpCodes.Conv_I2, //Char = 4,
-                OpCodes.Conv_I1, //SByte = 5,
-                OpCodes.Conv_U1, //Byte = 6,
-                OpCodes.Conv_I2, //Int16 = 7,
-                OpCodes.Conv_U2, //UInt16 = 8,
-                OpCodes.Conv_I4, //Int32 = 9,
-                OpCodes.Conv_U4, //UInt32 = 10,
-                OpCodes.Conv_I8, //Int64 = 11,
-                OpCodes.Conv_U8, //UInt64 = 12,
-                OpCodes.Conv_R4, //Single = 13,
-                OpCodes.Conv_R8, //Double = 14,
-                OpCodes.Nop, //Decimal = 15,
-                OpCodes.Nop, //DateTime = 16,
-                OpCodes.Nop, //17
-                OpCodes.Nop, //String = 18,
-            };
-
-            private static readonly OpCode[] s_ldindOpCodes = new OpCode[] {
-                OpCodes.Nop, //Empty = 0,
-                OpCodes.Nop, //Object = 1,
-                OpCodes.Nop, //DBNull = 2,
-                OpCodes.Ldind_I1, //Boolean = 3,
-                OpCodes.Ldind_I2, //Char = 4,
-                OpCodes.Ldind_I1, //SByte = 5,
-                OpCodes.Ldind_U1, //Byte = 6,
-                OpCodes.Ldind_I2, //Int16 = 7,
-                OpCodes.Ldind_U2, //UInt16 = 8,
-                OpCodes.Ldind_I4, //Int32 = 9,
-                OpCodes.Ldind_U4, //UInt32 = 10,
-                OpCodes.Ldind_I8, //Int64 = 11,
-                OpCodes.Ldind_I8, //UInt64 = 12,
-                OpCodes.Ldind_R4, //Single = 13,
-                OpCodes.Ldind_R8, //Double = 14,
-                OpCodes.Nop, //Decimal = 15,
-                OpCodes.Nop, //DateTime = 16,
-                OpCodes.Nop, //17
-                OpCodes.Ldind_Ref, //String = 18,
-            };
-
-            private static readonly OpCode[] s_stindOpCodes = new OpCode[] {
-                OpCodes.Nop, //Empty = 0,
-                OpCodes.Nop, //Object = 1,
-                OpCodes.Nop, //DBNull = 2,
-                OpCodes.Stind_I1, //Boolean = 3,
-                OpCodes.Stind_I2, //Char = 4,
-                OpCodes.Stind_I1, //SByte = 5,
-                OpCodes.Stind_I1, //Byte = 6,
-                OpCodes.Stind_I2, //Int16 = 7,
-                OpCodes.Stind_I2, //UInt16 = 8,
-                OpCodes.Stind_I4, //Int32 = 9,
-                OpCodes.Stind_I4, //UInt32 = 10,
-                OpCodes.Stind_I8, //Int64 = 11,
-                OpCodes.Stind_I8, //UInt64 = 12,
-                OpCodes.Stind_R4, //Single = 13,
-                OpCodes.Stind_R8, //Double = 14,
-                OpCodes.Nop, //Decimal = 15,
-                OpCodes.Nop, //DateTime = 16,
-                OpCodes.Nop, //17
-                OpCodes.Stind_Ref, //String = 18,
-            };
-
             private static void Convert(ILGenerator il, Type source, Type target, bool isAddress)
             {
                 Debug.Assert(!target.IsByRef);
@@ -695,7 +589,7 @@ namespace System.Reflection
                 {
                     if (sourceTypeInfo.IsValueType)
                     {
-                        OpCode opCode = s_convOpCodes[GetTypeCode(target)];
+                        OpCode opCode = DP.conv()[DP.GetTypeCode(target)];
                         Debug.Assert(!opCode.Equals(OpCodes.Nop));
                         il.Emit(opCode);
                     }
@@ -732,7 +626,7 @@ namespace System.Reflection
 
             private static void Ldind(ILGenerator il, Type type)
             {
-                OpCode opCode = s_ldindOpCodes[GetTypeCode(type)];
+                OpCode opCode = DP.ldind()[DP.GetTypeCode(type)];
                 if (!opCode.Equals(OpCodes.Nop))
                 {
                     il.Emit(opCode);
@@ -745,7 +639,7 @@ namespace System.Reflection
 
             private static void Stind(ILGenerator il, Type type)
             {
-                OpCode opCode = s_stindOpCodes[GetTypeCode(type)];
+                OpCode opCode = DP.stind()[DP.GetTypeCode(type)];
                 if (!opCode.Equals(OpCodes.Nop))
                 {
                     il.Emit(opCode);

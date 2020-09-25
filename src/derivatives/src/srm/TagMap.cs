@@ -1,3 +1,4 @@
+//-----------------------------------------------------------------------------
 // Derivative Work
 // Origin:    : https://github.com/microsoft/scalar
 // Copyright  : Microsoft/.Net foundation

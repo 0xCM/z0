@@ -5,10 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-        
-    using static Konst; 
+
+    using static Konst;
     using static As;
 
     partial class gvec
@@ -22,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Pop, Closures(Integers)]
         public static uint vpop<T>(Vector128<T> x, Vector128<T> y, Vector128<T> z)
             where T : unmanaged
-                => dvec.vpop(v64u(x), v64u(y), v64u(z));
+                => BitPop.vpop(v64u(x), v64u(y), v64u(z));
 
         /// <summary>
         /// Computes the population count of the content of 3 128-bit vectors
@@ -33,6 +33,6 @@ namespace Z0
         [MethodImpl(Inline), Pop, Closures(Integers)]
         public static uint vpop<T>(Vector256<T> x, Vector256<T> y, Vector256<T> z)
             where T : unmanaged
-                => dvec.vpop(v64u(x), v64u(y), v64u(z));
+                => BitPop.vpop(v64u(x), v64u(y), v64u(z));
     }
 }

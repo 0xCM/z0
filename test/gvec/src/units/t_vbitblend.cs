@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static V0;
+    using static z;
 
     public class t_vbitblend : t_inx<t_vbitblend>
     {
@@ -21,7 +21,6 @@ namespace Z0
             var ones = gvec.vones<byte>(n);
             var blend = gvec.vblendbits<byte>(zero, ones, mask);
             Claim.veq(blend,mask);
-
         }
 
         public void bitblend_128x8u()
@@ -60,7 +59,7 @@ namespace Z0
                 var mask = Random.CpuVector(w,t);
                 var blended = gvec.vblendbits(x,y,mask);
 
-                for(var i = 0; i<count; i++)
+                for(byte i = 0; i<count; i++)
                     Claim.Eq(vcell(blended,i),gmath.blend(vcell(x,i),vcell(y,i), vcell(mask,i)));
 
                 vcheckmask(x,y,mask,blended);
@@ -94,7 +93,7 @@ namespace Z0
                 var m = Random.CpuVector(w,t);
                 var r = gvec.vblendbits(x,y,m);
 
-                for(var i = 0; i<count; i++)
+                for(byte i = 0; i<count; i++)
                     Claim.Eq(vcell(r,i),gmath.blend(vcell(x,i),vcell(y,i), vcell(m,i)));
             }
         }

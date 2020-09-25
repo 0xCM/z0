@@ -15,8 +15,6 @@ namespace Z0
     {
         readonly WfCaptureState State;
 
-        readonly CorrelationToken Ct;
-
         readonly IWfShell Wf;
 
         readonly WfHost Host;
@@ -26,7 +24,6 @@ namespace Z0
             State = state;
             Wf = State.Wf;
             Host = host;
-            Ct = Wf.Ct;
             Wf.Created(Host, delimit(Wf.Api.PartIdentities));
         }
 
@@ -34,9 +31,6 @@ namespace Z0
         {
             Wf.Disposed(Host);
         }
-
-        IAsmContext Asm
-            => State.Asm;
 
         public void Run()
         {
@@ -46,12 +40,12 @@ namespace Z0
             {
                 Run(new EmitFieldMetadataHost());
                 Run(new ProcessPartFilesHost());
-                Run(new EmitPeHeadersStep());
-                Run(new EmitImageConstantsStep());
-                Run(new EmitImageDataStep());
+                Run(new EmitImageHeadersHost());
+                Run(new EmitImageConstantsHost());
+                Run(new EmitImageDataHost());
                 Run(new EmitStringRecordsHost());
                 Run(new EmitProjectDocsHost());
-                Run(new EmitResBytesStep());
+                Run(new EmitResBytesHost());
                 Run(new EmitImageBlobsHost());
                 Run(new EmitPartCilHost());
                 Run(new EmitEnumCatalogHost());
@@ -77,11 +71,8 @@ namespace Z0
             Wf.Ran(host.Id);
         }
 
-        void Run(EmitImageConstantsStep host)
-        {
-            using var step = new EmitImageConstants(Wf, host);
-            step.Run();
-        }
+        void Run(EmitImageConstantsHost host)
+            => host.Run(Wf);
 
         void Run(EmitFieldMetadataHost host)
             => host.Run(Wf);
@@ -96,7 +87,7 @@ namespace Z0
             => host.Run(Wf);
 
         void Run(ProcessPartFilesHost host)
-            => host.Run(Wf.WithState(Asm));
+            => host.Run(Wf.WithState(State.Asm));
 
         void Run(EmitContentCatalogHost host)
             => host.Run(Wf);
@@ -111,27 +102,15 @@ namespace Z0
             => host.Run(Wf);
 
         void Run(EmitImageBlobsHost host)
-        {
-            using var step = new EmitImageBlobs(Wf, host);
-            step.Run();
-        }
+            => host.Run(Wf);
 
-        void Run(EmitPeHeadersStep host)
-        {
-            using var step = new EmitImageHeaders(Wf, Wf.Api.Parts, Ct);
-            step.Run();
-        }
+        void Run(EmitImageHeadersHost host)
+            => host.Run(Wf);
 
-        void Run(EmitImageDataStep host)
-        {
-            using var step = new EmitImageData(Wf, Wf.Api.Parts, Ct);
-            step.Run();
-        }
+        void Run(EmitImageDataHost host)
+            => host.Run(Wf);
 
-        void Run(EmitResBytesStep host)
-        {
-            using var step = new EmitResBytes(Wf, Ct);
-            step.Run();
-        }
+        void Run(EmitResBytesHost host)
+            => host.Run(Wf);
     }
 }

@@ -101,7 +101,7 @@ namespace Z0
                         if(parsed.Count != 0)
                         {
                             dst[id] = parsed;
-                            wf.Status(typeof(EmitParsedReportHost), $"Parsed {dst[id].Count} entries from {xmlfile}");
+                            wf.Status(typeof(SummaryComment), $"Parsed {dst[id].Count} entries from {xmlfile}");
                         }
                     }
                 }

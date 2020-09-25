@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static RP;
+    using static Render;
 
     [Event]
     public readonly struct EmittedHostBytes : IWfEvent<EmittedHostBytes>
@@ -17,22 +17,19 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public string ActorName {get;}
-
         public ApiHostUri Host {get;}
 
-        public ushort AccessorCount {get;}
+        public Count AccessorCount {get;}
 
         [MethodImpl(Inline)]
-        public EmittedHostBytes(string worker, ApiHostUri host, ushort count, CorrelationToken ct)
+        public EmittedHostBytes(WfStepId step, ApiHostUri host, ushort count, CorrelationToken ct, FlairKind flair = Running)
         {
-            EventId = z.evid(EventName, ct);
+            EventId = (EventName,step,ct);
             Host= host;
-            ActorName = worker;
             AccessorCount = count;
         }
 
         public string Format()
-            => text.format(PSx4, EventId, ActorName, Host.Format(), AccessorCount);
+            => format(EventId, Host, AccessorCount);
     }
 }

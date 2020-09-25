@@ -10,7 +10,6 @@ namespace Z0
 
     using static CodeGenerator;
     using static Konst;
-    using static EmitResBytesStep;
     using static z;
 
     public readonly ref struct EmitResBytes
@@ -19,32 +18,31 @@ namespace Z0
 
         readonly ApiCodeArchive Archive;
 
+        readonly WfHost Host;
         public readonly FS.FolderPath SourceDir;
 
         public readonly FS.FolderPath TargetDir;
 
         readonly IWfShell Wf;
 
-        readonly CorrelationToken Ct;
-
-        public EmitResBytes(IWfShell context, CorrelationToken ct)
+        public EmitResBytes(IWfShell context, WfHost host)
         {
             Wf = context;
-            Ct = ct;
+            Host = host;
             SourceDir = FS.dir(context.Paths.AppCaptureRoot.Name);
             TargetDir = FS.dir((context.Paths.ResourceRoot + FolderName.Define(ProjectName)).Name);
             Archive = ApiArchives.hex(FS.dir(SourceDir.Name));
-            Wf.Created(StepId);
+            Wf.Created(Host);
         }
 
         public void Run()
         {
-            Wf.Running(StepId, flow(SourceDir, TargetDir));
+            Wf.Running(Host, flow(SourceDir, TargetDir));
             var archive = ApiArchives.hex(FS.dir(SourceDir.Name));
             var indices = archive.Indices();
             foreach(var index in indices)
             {
-                Wf.Status(StepId, $"Loaded {index.Code.Length} {index.Host} code blocks");
+                Wf.Status(Host, $"Loaded {index.Code.Length} {index.Host} code blocks");
 
                 try
                 {
@@ -52,16 +50,16 @@ namespace Z0
                 }
                 catch(Exception e)
                 {
-                    Wf.Error(StepId, e);
+                    Wf.Error(Host, e);
                 }
             }
 
-            Wf.Ran(StepId, flow(SourceDir, TargetDir));
+            Wf.Ran(Host, flow(SourceDir, TargetDir));
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
 
         void Emit(ApiHostCodeIndex src, FS.FolderPath dst)
@@ -88,7 +86,7 @@ namespace Z0
             CloseTypeDeclaration(writer);
             CloseFileNamespace(writer);
 
-            Wf.Raise(new EmittedHostBytes(StepName, src.Host, (ushort)resources.Count, Ct));
+            Wf.Raise(new EmittedHostBytes(Host, src.Host, (ushort)resources.Count, Wf.Ct));
         }
     }
 }

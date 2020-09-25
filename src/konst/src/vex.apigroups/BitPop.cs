@@ -9,11 +9,48 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static BitPop;
     using static z;
+    using static BitMasks.Literals;
 
-    partial class dvec
+    [ApiHost]
+    public readonly struct BitPop
     {
+        static Vector256<ulong> K1
+        {
+            [MethodImpl(Inline), Op]
+            get => vbroadcast(n256, Even64);
+        }
+
+        static Vector256<ulong> K2
+        {
+            [MethodImpl(Inline), Op]
+            get => vbroadcast(n256, Even64x2);
+        }
+
+        static Vector256<ulong> K4
+        {
+            [MethodImpl(Inline), Op]
+            get => vbroadcast(n256, Lsb64x8x4);
+        }
+
+        static Vector128<ulong> v128K1
+        {
+            [MethodImpl(Inline), Op]
+            get => vbroadcast(n128, Even64);
+        }
+
+        static Vector128<ulong> v128K2
+        {
+            [MethodImpl(Inline), Op]
+            get => vbroadcast(n128, Even64x2);
+        }
+
+        static Vector128<ulong> v128K4
+        {
+            [MethodImpl(Inline), Op]
+            get => vbroadcast(n128, Lsb64x8x4);
+        }
+
         /// <summary>
         /// Computes the population count of the content of 3 128-bit vectors
         /// </summary>
@@ -26,7 +63,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint vpop(Vector128<ulong> x, Vector128<ulong> y, Vector128<ulong> z)
         {
-            const ulong kf = BitMasks.Literals.Lsb64x8x1;
+            const ulong kf = Lsb64x8x1;
 
             var k1 = v128K1;
             var k2 = v128K2;
@@ -67,7 +104,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint vpop(Vector256<ulong> a, Vector256<ulong> b, Vector256<ulong> c)
         {
-            const ulong kf = MaskLiterals.Lsb64x8x1;
+            const ulong kf = Lsb64x8x1;
 
             var k1 = K1;
             var k2 = K2;

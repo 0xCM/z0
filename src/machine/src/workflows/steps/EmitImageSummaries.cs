@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static EmitImageSummariesStep;
 
     using static z;
 
@@ -16,23 +15,20 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
-        readonly CorrelationToken Ct;
-
-        public WfStepId Id;
+        readonly WfHost Host;
 
         readonly LocatedImages Images;
 
-        readonly FilePath TargetPath;
+        readonly FS.FilePath TargetPath;
 
         [MethodImpl(Inline)]
-        public EmitImageSummaries(IWfShell wf, LocatedImages images, CorrelationToken ct)
+        public EmitImageSummaries(IWfShell wf, WfHost host, LocatedImages images)
         {
             Wf = wf;
-            Ct = ct;
-            Id = Flow.step(typeof(EmitImageSummaries));
+            Host = host;
             Images = images;
-            TargetPath = Wf.IndexRoot + FileName.define("machine.images", FileExtensions.Csv);
-            Wf.Created(StepId);
+            TargetPath = FS.path((Wf.IndexRoot + FileName.define("machine.images", FileExtensions.Csv)).Name);
+            Wf.Created(Host);
         }
 
         public void Run()
@@ -42,10 +38,10 @@ namespace Z0
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
 
-        static void Summarize(LocatedImages src, FilePath dst)
+        static void Summarize(LocatedImages src, FS.FilePath dst)
         {
             var system = Imaging.SystemImages;
             var count = src.Count;
