@@ -17,9 +17,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         internal EncodedInstruction(Vector128<byte> src)
-        {
-            Storage = src;
-        }
+            => Storage = src;
     }
 
     public readonly struct AsmStatementCode : ITextual
@@ -37,5 +35,8 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public string Format()
             => Asm.Format();
+
+        public override string ToString()
+            => Format();
     }
 }

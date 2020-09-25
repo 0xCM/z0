@@ -8,18 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst;
-    using static As;
 
-    partial struct V0
-    {                        
+    using static Konst;
+
+    partial struct z
+    {
         /// <summary>
         /// Presents a readonly reference to 128-bit vector as a readonly T-reference
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric & (~NumericKind.U8))]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector128<byte> src)
             => ref vread<byte,T>(src);
 
@@ -28,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric & (~NumericKind.I8))]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector128<sbyte> src)
             => ref vread<sbyte,T>(src);
 
@@ -37,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric & (~NumericKind.I16))]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector128<short> src)
             => ref vread<short,T>(src);
 
@@ -46,7 +45,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric & (~NumericKind.U16))]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector128<ushort> src)
             => ref vread<ushort,T>(src);
 
@@ -55,7 +54,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric & (~NumericKind.I32))]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector128<int> src)
             => ref vread<int,T>(src);
 
@@ -64,7 +63,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric & (~NumericKind.U32))]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector128<uint> src)
             => ref vread<uint,T>(src);
 
@@ -73,7 +72,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric & (~NumericKind.I64))]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector128<long> src)
             => ref vread<long,T>(src);
 
@@ -82,7 +81,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric & (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector128<ulong> src)
             => ref vread<ulong,T>(src);
 
@@ -91,7 +90,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric & (~NumericKind.F32))]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector128<float> src)
             => ref vread<float,T>(src);
 
@@ -100,7 +99,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric & (~NumericKind.F64))]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector128<double> src)
             => ref vread<double,T>(src);
 
@@ -109,7 +108,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric & (~NumericKind.U8))]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector256<byte> src)
             => ref vread<byte,T>(src);
 
@@ -118,7 +117,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric & (~NumericKind.I8))]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector256<sbyte> src)
             => ref vread<sbyte,T>(src);
 
@@ -244,7 +243,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric& (~NumericKind.U32))]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector512<uint> src)
             => ref vread<uint,T>(src);
 
@@ -253,7 +252,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric& (~NumericKind.I64))]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector512<long> src)
             => ref vread<long,T>(src);
 
@@ -262,7 +261,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric& (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector512<ulong> src)
             => ref vread<ulong,T>(src);
 
@@ -271,7 +270,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric& (~NumericKind.F32))]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector512<float> src)
             => ref vread<float,T>(src);
 
@@ -280,8 +279,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target reference type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric & (~NumericKind.F64))]
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector512<double> src)
-            => ref vread<double,T>(src);            
+            => ref vread<double,T>(src);
     }
 }

@@ -5,12 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Security;
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
-    /// Characterizes a function reified as a (structural) type, referred to as a (S)tructural (Func)tion
+    /// Characterizes a function reified as a (structural) type, referred to as a structural function
     /// </summary>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IFunc
     {
         string Name
@@ -27,7 +28,7 @@ namespace Z0
     /// Characterizes a structural emitter; that is, the contract characterizes a type that implements an emitter
     /// </summary>
     /// <typeparam name="A">The emission type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IFunc<A> : IFunc
     {
         A Invoke();
@@ -41,7 +42,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="A">The first operand type</typeparam>
     /// <typeparam name="B">The result type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IFunc<A,B> : IFunc
     {
         B Invoke(A a);
@@ -56,7 +57,7 @@ namespace Z0
     /// <typeparam name="A">The first operand type</typeparam>
     /// <typeparam name="B">The second operand type</typeparam>
     /// <typeparam name="C">The third result type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IFunc<A,B,C> : IFunc
     {
         /// <summary>
@@ -78,7 +79,7 @@ namespace Z0
     /// <typeparam name="B">The second operand type</typeparam>
     /// <typeparam name="C">The third operand type</typeparam>
     /// <typeparam name="D">The result type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IFunc<A,B,C,D> : IFunc
     {
         /// <summary>

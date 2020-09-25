@@ -25,7 +25,7 @@ namespace Z0
             => TestC(src, vones<sbyte>(w128));
 
         /// <summary>
-        /// int _mm_testc_si128 (__m128i a, __m128i b)PTEST xmm, xmm/m128
+        /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), TestC]
@@ -33,7 +33,7 @@ namespace Z0
             => TestC(src, vones<byte>(w128));
 
         /// <summary>
-        /// int _mm_testc_si128 (__m128i a, __m128i b)PTEST xmm, xmm/m128
+        /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), TestC]
@@ -41,7 +41,7 @@ namespace Z0
             => TestC(src, vones<ushort>(w128));
 
         /// <summary>
-        /// int _mm_testc_si128 (__m128i a, __m128i b)PTEST xmm, xmm/m128
+        /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), TestC]
@@ -49,7 +49,7 @@ namespace Z0
             => TestC(src, vones<int>(w128));
 
         /// <summary>
-        /// int _mm_testc_si128 (__m128i a, __m128i b)PTEST xmm, xmm/m128
+        /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), TestC]
@@ -57,7 +57,7 @@ namespace Z0
             => TestC(src, vones<uint>(w128));
 
         /// <summary>
-        /// int _mm_testc_si128 (__m128i a, __m128i b)PTEST xmm, xmm/m128
+        /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), TestC]
@@ -65,7 +65,7 @@ namespace Z0
             => TestC(src, vones<long>(w128));
 
         /// <summary>
-        /// int _mm_testc_si128 (__m128i a, __m128i b)PTEST xmm, xmm/m128
+        /// int _mm_testc_si128 (__m128i a, __m128i b) PTEST xmm, xmm/m128
         /// </summary>
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), TestC]

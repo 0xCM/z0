@@ -36,6 +36,7 @@ namespace Z0
             public override string ToString()
                 => Format();
         }
+
         public readonly struct UriAddresses
         {
             public readonly PartId[] Parts;

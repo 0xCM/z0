@@ -4,16 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public unsafe interface IPointedMap<S,T>
         where S : unmanaged
     {
         T Map(S* pSrc);
     }
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IPointedMap<H,S,T> : IPointedMap<S,T>
         where S : unmanaged
         where H : struct, IPointedMap<H,S,T>

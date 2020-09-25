@@ -8,20 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    public readonly struct BuildArchive : IBuildArchive
+    public readonly struct Projected<S,T>
     {
-        [MethodImpl(Inline)]
-        public static IBuildArchive create(FS.FolderPath root)
-            => new BuildArchive(root);
+        public readonly S Source;
 
-        public FS.FolderPath Root {get;}
+        public readonly T Target;
 
         [MethodImpl(Inline)]
-        public BuildArchive(FS.FolderPath root)
+        public Projected(S src, T dst)
         {
-            Root = root;
+            Source = src;
+            Target = dst;
         }
     }
 }

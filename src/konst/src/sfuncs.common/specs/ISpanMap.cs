@@ -5,16 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Security;
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Characterizes a structural transformation function defined over parametric spans
     /// </summary>
     /// <typeparam name="A">The source span cell type</typeparam>
     /// <typeparam name="B">The target span cell type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ISpanMap<A,B> : IFunc
     {
         Span<B> Invoke(Span<A> src);
-    }    
+    }
 }

@@ -3,16 +3,20 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
-    
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IValueProjector
     {
         ValueType Project(ValueType src);
-        
+
         object Project(object src);
     }
-    
+
+    [Free]
     public interface IValueProjector<T> : IValueProjector
         where T : struct
     {
@@ -22,6 +26,7 @@ namespace Z0
             =>  Project(src);
     }
 
+    [Free]
     public interface IValueProjector<S,T> : IValueProjector<T>
         where S : struct
         where T : struct
@@ -29,6 +34,6 @@ namespace Z0
         ref T Project(in S src);
 
         ref T IValueProjector<T>.Project(object src)
-            => ref Project(z.unbox<T>(src));        
+            => ref Project(z.unbox<T>(src));
     }
 }

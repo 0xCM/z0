@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Part;
 
@@ -15,7 +14,7 @@ namespace Z0
     public interface IHashed
     {
         /// <summary>
-        /// The hash code as an usigned 32-bit integer
+        /// The hash code as an unsigned 32-bit integer
         /// </summary>
         uint Hash {get;}
 
@@ -36,5 +35,5 @@ namespace Z0
 
      {
 
-     }    
+     }
 }

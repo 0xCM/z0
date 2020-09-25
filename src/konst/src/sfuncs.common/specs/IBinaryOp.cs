@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Security;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Characterizes a structural binary operator
     /// </summary>
@@ -14,8 +16,8 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public interface IBinaryOp<A> : IFunc<A,A,A>
     {
-        new BinaryOp<A> Operation 
-            => (this as IFunc<A,A,A>).Operation.ToBinaryOp();    
+        new BinaryOp<A> Operation
+            => (this as IFunc<A,A,A>).Operation.ToBinaryOp();
     }
 
     [SuppressUnmanagedCodeSecurity]

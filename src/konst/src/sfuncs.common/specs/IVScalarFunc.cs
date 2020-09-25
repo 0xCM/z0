@@ -4,14 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Security;
     using System.Runtime.Intrinsics;
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Defines trait for a vectorized unary scalar function that supports componentwise decomposition/evaluation
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IVUnaryScalarFunc<T,K> : IFunc
         where T : unmanaged
         where K : unmanaged
@@ -23,7 +24,7 @@ namespace Z0
     /// Defines trait for a vectorized binary scalar function that supports componentwise decomposition/evaluation
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IVBinaryScalarFunc<T,K> : IFunc
         where T : unmanaged
         where K : unmanaged
@@ -35,7 +36,7 @@ namespace Z0
     /// Defines trait for a vectorized binary scalar function that supports componentwise decomposition/evaluation
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IVTernaryScalarFunc<T,K> : IFunc
         where T : unmanaged
         where K : unmanaged
@@ -50,7 +51,7 @@ namespace Z0
     /// <typeparam name="V">The vector type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IVScalarFunc<W,V,T,K> : IFunc<V,K>
         where W : unmanaged, TTypeWidth<W>
         where V : struct
@@ -70,7 +71,7 @@ namespace Z0
     /// <typeparam name="T1">The component type of the first vector</typeparam>
     /// <typeparam name="T2">The component type of the second vector</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IVScalarFunc<W1,W2,V1,V2,T1,T2,K> : IFunc<V1,V2,K>
         where W1 : unmanaged, ITypeWidth
         where W2 : unmanaged, ITypeWidth
@@ -96,7 +97,7 @@ namespace Z0
     /// <typeparam name="T2">The component type of the second vector</typeparam>
     /// <typeparam name="T3">The component type of the third vector</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IVScalarFunc<W1,W2,W3,V1,V2,V3,T1,T2,T3,K> : IFunc<V1,V2,V3,K>
         where W1 : unmanaged, ITypeWidth
         where W2 : unmanaged, ITypeWidth
@@ -115,7 +116,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IVUnaryScalarFunc128<T,K> : IVScalarFunc<W128,Vector128<T>,T,K>, IFunc128<T>
         where T : unmanaged
         where K : unmanaged
@@ -129,7 +130,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ISVBinaryScalar128D<T,K> : IVScalarFunc<W128, W128, Vector128<T>,Vector128<T>,T,T,K>, IVBinaryScalarFunc<T,K>, IFunc128<T>
         where T : unmanaged
         where K : unmanaged
@@ -143,7 +144,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ISVTernaryScalar128D<T,K> : IVScalarFunc<W128, W128, W128, Vector128<T>, Vector128<T>, Vector128<T>, T,T,T,K>, IVTernaryScalarFunc<T,K>, IFunc128<T>
         where K : unmanaged
         where T : unmanaged
@@ -156,7 +157,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ISVUnaryScalarFunc256<T,K> : IVScalarFunc<W256,Vector256<T>,T,K>, IFunc256<T>
         where K : unmanaged
         where T : unmanaged
@@ -170,7 +171,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ISVUnaryScalarFunc256D<T,K> : IVScalarFunc<W256,Vector256<T>,T,K>, IVUnaryScalarFunc<T,K>, IFunc256<T>
         where K : unmanaged
         where T : unmanaged
@@ -184,7 +185,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ISVBinaryScalarFunc256D<T,K> : IVScalarFunc<W256, W256, Vector256<T>,Vector256<T>, T,T,K>, IVBinaryScalarFunc<T,K>, IFunc256<T>
         where T : unmanaged
         where K : unmanaged
@@ -198,7 +199,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="T">The vector component type</typeparam>
     /// <typeparam name="K">The scalar result type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ISVTernaryScalarFunc256D<T,K> : IVScalarFunc<W256, W256, W256, Vector256<T>, Vector256<T>, Vector256<T>, T,T,T,K>, IVTernaryScalarFunc<T,K>, IFunc256<T>
         where T : unmanaged
         where K : unmanaged

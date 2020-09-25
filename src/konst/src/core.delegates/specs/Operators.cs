@@ -45,7 +45,7 @@ namespace Z0
         where W : unmanaged, ITypeWidth;
 
     /// <summary>
-    /// Defines the canonical shape of a tenary operator
+    /// Defines the canonical shape of a terneray operator
     /// </summary>
     /// <param name="a">The first operand</param>
     /// <param name="b">The second operand</param>

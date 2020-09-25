@@ -4,9 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
-
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
@@ -15,13 +12,6 @@ namespace Z0
     /// <typeparam name="T">The input type</typeparam>
     [Free]
     public delegate void Receiver<T>(in T src);
-
-    /// <summary>
-    /// Characterizes a receiver that accepts a stream
-    /// </summary>
-    /// <typeparam name="T">The stream element type</typeparam>
-    [Free]
-    public delegate void StreamReceiver<T>(IEnumerable<T> src);
 
     /// <summary>
     /// Characterizes a receiver that accepts a pointer

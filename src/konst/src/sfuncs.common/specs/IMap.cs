@@ -5,15 +5,16 @@
 namespace Z0
 {
     using System.Runtime.Intrinsics;
-    using System.Security;
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Characterizes a structural transformation function
     /// </summary>
     /// <typeparam name="A">The source domain type</typeparam>
     /// <typeparam name="B">The target domain type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IMap<A,B> : IFunc<A,B>
+    [Free]
+    public interface IProjector<A,B> : IFunc<A,B>
     {
 
     }
@@ -22,11 +23,11 @@ namespace Z0
     /// Characterizes an operator that materializes a primal value from a string
     /// </summary>
     /// <typeparam name="T">The primal value type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ISFParser<T> : IFunc<string,T>
         where T : unmanaged
     {
-        
+
     }
 
     /// <summary>
@@ -38,8 +39,8 @@ namespace Z0
     /// <typeparam name="V2">The target operand type</typeparam>
     /// <typeparam name="T1">The source component type</typeparam>
     /// <typeparam name="T2">The target component type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
-    public interface IMap<W1,W2,V1,V2,T1,T2> : IMap<V1,V2>
+    [Free]
+    public interface IMap<W1,W2,V1,V2,T1,T2> : IProjector<V1,V2>
         where W1 : unmanaged, ITypeWidth
         where W2 : unmanaged, ITypeWidth
         where V1 : struct
@@ -55,7 +56,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The source component type</typeparam>
     /// <typeparam name="T">The target component type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IMap128<S,T> : IMap<W128,W128,Vector128<S>,Vector128<T>,S,T>
         where S : unmanaged
         where T : unmanaged
@@ -68,11 +69,11 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The source component type</typeparam>
     /// <typeparam name="T">The target component type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IMap256<S,T> : IMap<W256,W256,Vector256<S>,Vector256<T>,S,T>
         where S : unmanaged
         where T : unmanaged
     {
 
-    }    
+    }
 }

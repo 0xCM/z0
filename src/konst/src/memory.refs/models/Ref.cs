@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
     using System.Runtime.Intrinsics;
-    using System.Runtime.InteropServices;
 
     using static System.Runtime.InteropServices.MemoryMarshal;
     using static System.Runtime.CompilerServices.Unsafe;
@@ -17,7 +15,7 @@ namespace Z0
 
     public readonly struct Ref : ISegRef<byte>
     {
-        internal readonly Vector128<ulong> Segment;    
+        internal readonly Vector128<ulong> Segment;
 
         /// <summary>
         /// Dereferences the reference
@@ -30,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator ==(Ref lhs, Ref rhs)
             => lhs.Equals(rhs);
-        
+
         [MethodImpl(Inline)]
         public static bool operator !=(Ref lhs, Ref rhs)
             => !lhs.Equals(rhs);
@@ -57,7 +55,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => (uint)Segment.GetElement(1);
-        } 
+        }
 
         public ulong Location
         {
@@ -65,7 +63,7 @@ namespace Z0
             get => Segment.GetElement(0);
         }
 
-        public uint CellSize 
+        public uint CellSize
         {
             [MethodImpl(Inline)]
             get => 1;
@@ -80,7 +78,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe ref byte Cell(int index)
             => ref Unsafe.AsRef<byte>((void*)(Location + (uint)index));
-        
+
         public ref byte this[int index]
         {
             [MethodImpl(Inline)]
@@ -91,9 +89,9 @@ namespace Z0
         public bool Equals(Ref src)
             => Segment.Equals(src.Segment);
 
-        public override bool Equals(object src)        
+        public override bool Equals(object src)
             => src is Ref r && Equals(r);
-        
+
         public override int GetHashCode()
             => (int) Location;
 
@@ -107,14 +105,14 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static unsafe Span<T> cover<T>(ulong location, uint count)
-            => cover<T>((void*)location, count); 
+            => cover<T>((void*)location, count);
 
         [MethodImpl(Inline)]
         static unsafe Span<T> cover<T>(void* pSrc, uint count)
-            => CreateSpan(ref @as<T>(pSrc), (int)count); 
+            => CreateSpan(ref @as<T>(pSrc), (int)count);
 
         [MethodImpl(Inline)]
         static unsafe ref T @as<T>(void* pSrc)
-            => ref AsRef<T>(pSrc);           
-    }        
+            => ref AsRef<T>(pSrc);
+    }
 }

@@ -9,9 +9,18 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost]
-    public readonly struct DataModels
+    public readonly struct Projector<S,T> : IProjector<S,T>
     {
+        readonly Func<S,T> Fx;
 
+        [MethodImpl(Inline)]
+        public Projector(Func<S,T> fx)
+        {
+            Fx = fx;
+        }
+
+        [MethodImpl(Inline)]
+        public T Invoke(S a)
+            => Fx(a);
     }
 }

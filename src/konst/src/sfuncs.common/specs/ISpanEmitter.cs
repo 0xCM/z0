@@ -5,16 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Security;
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Characterizes an emitter that shoots out spans
     /// </summary>
     /// <typeparam name="T">The span element type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ISpanEmitter<T> : IFunc
     {
         Span<T> Invoke();
     }
-
 }

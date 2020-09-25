@@ -29,11 +29,4 @@ namespace Z0
     /// <typeparam name="T">The emission type</typeparam>
     [Free]
     public delegate Span<T> SpanEmitter<T>();
-
-    /// <summary>
-    /// Characterizes a receiver that accepts a span
-    /// </summary>
-    /// <typeparam name="T">The stream element type</typeparam>
-    [Free]
-    public delegate void SpanReceiver<T>(Span<T> src);
 }

@@ -13,12 +13,13 @@ namespace Z0
     [ApiHost]
     public readonly struct DataFlows
     {
-        /// <summary>
-        /// Defines a
-        /// </summary>
-        /// <param name="src"></param>
-        /// <param name="dst"></param>
-        /// <typeparam name="T"></typeparam>
+        public static TypeArrow<S,T> connect<S,T>()
+            => default;
+
+        [MethodImpl(Inline), Op]
+        public static TypeArrow connect(Type src, Type dst)
+            => (src,dst);
+
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static DataFlow<T[],BinaryCode> define<T>(T[] src, BinaryCode dst)
             where T : struct

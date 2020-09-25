@@ -5,7 +5,8 @@
 namespace Z0
 {
     using System.Runtime.Intrinsics;
-    using System.Security;
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Characterizes a function that produces a vector predicated on a source value
@@ -14,7 +15,7 @@ namespace Z0
     /// <typeparam name="S">The source value type</typeparam>
     /// <typeparam name="V">The target vector type</typeparam>
     /// <typeparam name="T">The target vector component type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IFactory<W,S,V,T> : IFunc<S,V>
         where W : unmanaged, TTypeWidth<W>
         where T : unmanaged
@@ -28,7 +29,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The source value type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IFactory128<S,T> : IFactory<W128,S,Vector128<T>,T>, IFunc128<T>
         where T : unmanaged
     {
@@ -40,7 +41,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="S">The source value type</typeparam>
     /// <typeparam name="T">The vector component type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IFactory256<S,T> : IFactory<W256,S,Vector256<T>,T>, IFunc256<T>
         where T : unmanaged
     {

@@ -5,9 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IBinaryImm8Op<A> : IFunc<A,A,byte,A>
     {
 

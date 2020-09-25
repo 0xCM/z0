@@ -4,15 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IRefMap<S,T>
     {
         void Map(in S src, ref T dst);
     }
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IRefMap<H,S,T> : IRefMap<S,T>
         where H : struct, IRefMap<H,S,T>
     {
