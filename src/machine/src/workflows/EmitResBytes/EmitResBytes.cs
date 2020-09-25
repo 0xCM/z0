@@ -19,9 +19,9 @@ namespace Z0
 
         readonly ApiCodeArchive Archive;
 
-        public readonly FolderPath SourceDir;
+        public readonly FS.FolderPath SourceDir;
 
-        public readonly FolderPath TargetDir;
+        public readonly FS.FolderPath TargetDir;
 
         readonly IWfShell Wf;
 
@@ -31,8 +31,8 @@ namespace Z0
         {
             Wf = context;
             Ct = ct;
-            SourceDir = context.Paths.AppCaptureRoot;
-            TargetDir = context.Paths.ResourceRoot + FolderName.Define(ProjectName);
+            SourceDir = FS.dir(context.Paths.AppCaptureRoot.Name);
+            TargetDir = FS.dir((context.Paths.ResourceRoot + FolderName.Define(ProjectName)).Name);
             Archive = ApiArchives.hex(FS.dir(SourceDir.Name));
             Wf.Created(StepId);
         }
@@ -64,9 +64,9 @@ namespace Z0
             Wf.Disposed(StepId);
         }
 
-        void Emit(ApiHostCodeIndex src, FolderPath dst)
+        void Emit(ApiHostCodeIndex src, FS.FolderPath dst)
         {
-            var path = (dst + FolderName.Define("src")) + src.Host.FileName(FileExtensions.Cs);
+            var path = (dst + FS.folder("src")) + FS.file(src.Host.FileName(FileExtensions.Cs).Name);
             var resources = HostResources.from(src);
             var typename = text.concat(src.Host.Owner.Format(), Chars.Underscore, src.Host.Name);
             var members = new HashSet<string>();

@@ -20,9 +20,9 @@ namespace Z0
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> vsave<T>(Vector128<T> src, Span<T> dst)
-            where T : unmanaged            
+            where T : unmanaged
         {
-            z.vsave(src, ref first(dst));
+            vsave(src, ref first(dst));
             return dst;
         }
 
@@ -34,10 +34,10 @@ namespace Z0
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> vsave<T>(Vector256<T> src, Span<T> dst)
-            where T : unmanaged            
+            where T : unmanaged
         {
-            z.vsave(src, ref first(dst));
-            return dst;        
+            vsave(src, ref first(dst));
+            return dst;
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void vsave<T>(Vector128<T> src, Span<T> dst, int offset)
             where T : unmanaged
-                => z.vsave(src, ref first(dst), offset);
+                => vsave(src, ref first(dst), offset);
 
         /// <summary>
         /// Stores vector content to a span
@@ -62,7 +62,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void vsave<T>(Vector256<T> src, Span<T> dst, int offset)
             where T : unmanaged
-                => z.vsave(src, ref first(dst), offset);
+                => vsave(src, ref first(dst), offset);
 
         /// <summary>
         /// Stores vector content to a span
@@ -74,6 +74,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void vsave<T>(Vector512<T> src, Span<T> dst, int offset)
             where T : unmanaged
-                => z.vsave(src, ref first(dst), offset);
+                => vsave(src, ref first(dst), offset);
     }
 }

@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+
     partial struct WfDelegates
     {
         [Free]
@@ -15,12 +16,5 @@ namespace Z0
         [Free]
         public delegate void EventHandler<E>(in E src)
             where E : struct, IWfEvent<E>;
-
-        [Free]
-        public interface IEventHandler : IHandler<IWfEvent> { }
-
-        [Free]
-        public interface IEventHandler<E> : IHandler<E>
-            where E : struct, IWfEvent<E> { }
     }
 }

@@ -17,14 +17,14 @@ namespace Z0
     {
         [MethodImpl(Inline), TestZ]
         public static bool testz(ulong a, ulong b)
-            => TestZ(z.vbroadcast(w128,a), vbroadcast(w128,b));
+            => TestZ(vbroadcast(w128, a), vbroadcast(w128,b));
 
         [MethodImpl(Inline), TestZ]
         public static bool testc(ulong a, ulong b)
-            => TestC(z.vbroadcast(w128,a), vbroadcast(w128,b));
+            => TestC(vbroadcast(w128, a), vbroadcast(w128,b));
 
         [MethodImpl(Inline), TestZ]
         public static bool testc(ulong a)
-            => TestC(z.vbroadcast(w128,a), vones<ulong>(w128));
+            => TestC(vbroadcast(w128, a), vones<ulong>(w128));
     }
 }

@@ -5,13 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Sse2;
     using static System.Runtime.Intrinsics.X86.Avx2;
-    
-    using static Konst; 
+
+    using static Konst;
 
     partial struct z
     {
@@ -33,7 +33,7 @@ namespace Z0
         /// <param name="spec">The permutation spec</param>
         [MethodImpl(Inline), Op]
         public static Vector128<ushort> vpermlo4x16(Vector128<ushort> src, [Imm] Perm4L spec)
-            => ShuffleLow(src, (byte)spec);        
+            => ShuffleLow(src, (byte)spec);
 
         /// <summary>
         /// __m256i _mm256_shufflelo_epi16 (__m256i a, const int imm8) VPSHUFLW ymm, ymm/m256, imm8
@@ -45,12 +45,12 @@ namespace Z0
             => ShuffleLow(src, (byte)spec);
 
         /// <summary>
-        /// __m256i _mm256_shufflelo_epi16 (__m256i a, const int imm8)VPSHUFLW ymm, ymm/m256,imm8
+        /// __m256i _mm256_shufflelo_epi16 (__m256i a, const int imm8) VPSHUFLW ymm, ymm/m256,imm8
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="spec">The permutation spec</param>
         [MethodImpl(Inline), Op]
         public static Vector256<ushort> vpermlo4x16(Vector256<ushort> src, [Imm] Perm4L spec)
-            => ShuffleLow(src, (byte)spec);        
+            => ShuffleLow(src, (byte)spec);
     }
 }

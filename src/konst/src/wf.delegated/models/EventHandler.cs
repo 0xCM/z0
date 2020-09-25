@@ -8,13 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static WfDelegates;
 
     using D = WfDelegates;
 
     partial struct Delegated
     {
-        public readonly struct EventHandler : IEventHandler
+        public readonly struct EventHandler : IWfEventReceiver
         {
             readonly D.EventHandler Fx;
 

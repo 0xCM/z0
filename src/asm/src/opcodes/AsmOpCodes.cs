@@ -104,11 +104,11 @@ namespace Z0.Asm
             return from(dst);
         }
 
-        static FilePath CasePath(string name)
-            => ShellPaths.Default.AppDataRoot + FileName.define(name);
+        static FS.FilePath CasePath(string name)
+            => FS.path((ShellPaths.Default.AppDataRoot + FileName.define(name)).Name);
 
-        static FilePath CasePath(string name, FileExtension ext)
-            => ShellPaths.Default.AppDataRoot + FileName.define(name, ext);
+        static FS.FilePath CasePath(string name, FileExtension ext)
+            => FS.path((ShellPaths.Default.AppDataRoot + FileName.define(name, ext)).Name);
 
         static StreamWriter CaseWriter(string name, FileExtension ext)
             =>  CasePath(name, ext).Writer();
@@ -116,18 +116,17 @@ namespace Z0.Asm
         static StreamWriter CaseWriter(string name)
             =>  CasePath(name).Writer();
 
-
-        public void instruction_tokens()
+        public static void emit(ReadOnlySpan<TokenInfo> src, FS.FilePath dst)
         {
-            var opcodes = AsmOpCodes.Tokens.View;
-            using var dst = CaseWriter("InstructionTokens", FileExtensions.Csv);
+            var count = src.Length;
+            using var writer = dst.Writer();
             var header = text.concat($"Identifier".PadRight(20), "| ", "Token".PadRight(20), "| ", "Meaning");
-            dst.WriteLine(header);
-            for(var i=1; i<opcodes.Length; i++)
+            writer.WriteLine(header);
+            for(var i=1; i<count; i++)
             {
-                ref readonly var token = ref skip(opcodes,i);
+                ref readonly var token = ref skip(src,i);
                 var line = text.concat(token.Identifier.Format().PadRight(20), "| ", token.Value.Format().PadRight(20), "| ", token.Description);
-                dst.WriteLine(line);
+                writer.WriteLine(line);
             }
         }
 
@@ -149,10 +148,13 @@ namespace Z0.Asm
             emit(handler.Mnemonics);
         }
 
-
         public void emit(ReadOnlySpan<AsmInstructionPattern> src)
         {
-            var dstPath = CasePath($"InstructionExpression");
+            emit(src,CasePath($"InstructionExpression"));
+        }
+
+        public void emit(ReadOnlySpan<AsmInstructionPattern> src, FS.FilePath dstPath)
+        {
             using var writer = dstPath.Writer();
             writer.WriteLine("Instruction");
             for(var i=0; i<src.Length; i++)
@@ -197,6 +199,5 @@ namespace Z0.Asm
                 writer.WriteLine(id.Format().PadRight(id.Value.Capacity));
             }
         }
-
     }
 }

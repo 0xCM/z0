@@ -57,12 +57,6 @@ namespace Z0
             => throw missing();
     }
 
-    [Step]
-    public readonly struct ProcessInstructionsStep : IWfStep<ProcessInstructionsStep>
-    {
-        public static WfStepId StepId
-            => step<ProcessInstructionsStep>();
-    }
 
     [WfHost]
     public class ProcessPartFilesHost : WfHost<ProcessPartFilesHost,IAsmContext>
@@ -81,12 +75,6 @@ namespace Z0
     }
 
 
-    [Step]
-    public readonly struct ProcessAsmStep : IWfStep<ProcessAsmStep>
-    {
-        public static WfStepId StepId
-            => step<ProcessAsmStep>();
-    }
 
 
     [Step]
@@ -140,14 +128,6 @@ namespace Z0
 
         public static WfStepId StepId
             => Flow.step<EmitResBytesStep>();
-
-    }
-
-    [Step]
-    public readonly struct ParseAsmFilesStep : IWfStep<ParseAsmFilesStep>
-    {
-        public static WfStepId StepId
-            => Flow.step<ParseAsmFilesStep>();
     }
 
 

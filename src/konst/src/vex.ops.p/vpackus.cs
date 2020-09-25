@@ -18,7 +18,7 @@ namespace Z0
     partial struct z
     {
         /// <summary>
-        ///  __m128i _mm_packus_epi16 (__m128i a, __m128i b)PACKUSWB xmm, xmm/m128
+        ///  __m128i _mm_packus_epi16 (__m128i a, __m128i b) PACKUSWB xmm, xmm/m128
         /// (8x16w,8x16w) -> 16x8w
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -28,7 +28,7 @@ namespace Z0
             => PackUnsignedSaturate(x,y);
 
         /// <summary>
-        ///__m128i _mm_packus_epi32 (__m128i a, __m128i b)PACKUSDW xmm, xmm/m128
+        ///__m128i _mm_packus_epi32 (__m128i a, __m128i b) PACKUSDW xmm, xmm/m128
         /// (4x32w,4x32w) -> 8x16w
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -38,7 +38,7 @@ namespace Z0
             => PackUnsignedSaturate(x,y);
 
         /// <summary>
-        /// __m256i _mm256_packus_epi16 (__m256i a, __m256i b)VPACKUSWB ymm, ymm, ymm/m256
+        /// __m256i _mm256_packus_epi16 (__m256i a, __m256i b) VPACKUSWB ymm, ymm, ymm/m256
         /// (16x8w,16x8w) -> 32x8w
         /// </summary>
         /// <param name="x">The left vector</param>

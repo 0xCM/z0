@@ -4,10 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IWfEvent : IAppEvent
     {
         WfEventId EventId {get;}
@@ -20,7 +19,7 @@ namespace Z0
     /// Characterizes a reified event
     /// </summary>
     /// <typeparam name="H">The reifying type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IWfEvent<H> : IWfEvent, IAppEvent<H>
         where H : struct, IWfEvent<H>
     {
@@ -32,7 +31,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="H">The event type</typeparam>
     /// <typeparam name="T">The content type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IWfEvent<H,T> : IWfEvent<H>
         where H : struct, IWfEvent<H,T>
     {

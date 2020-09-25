@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.IO;
 
     using static Konst;
     using static z;
@@ -14,5 +13,11 @@ namespace Z0
     public struct WfStepInfo
     {
         public WfStepId Id;
+
+        [MethodImpl(Inline)]
+        public WfStepInfo(WfStepId id)
+        {
+            Id = id;
+        }
     }
 }

@@ -5,9 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Security;
 
-    [SuppressUnmanagedCodeSecurity]
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IWfEventSink : ISink<IWfEvent>, IDisposable
     {
 

@@ -227,7 +227,7 @@ namespace Z0
         {
             try
             {
-                var step = new ProcessInstructions(Wf,fx);
+                var step = new ProcessInstructions(Wf, new ProcessInstructionsStep(), fx);
                 step.Run();
             }
             catch(Exception e)

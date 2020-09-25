@@ -4,10 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Id = ApiKeyId;
 
     public enum AsmApiKey : ushort
     {
-        None = 0,
+        CVTSS2SI = Id.Intrinsic + 1,
 
+        CVTSD2SI,
     }
 }

@@ -19,16 +19,24 @@ namespace Z0.Asm
 
         readonly FS.FolderPath Target;
 
+        public readonly ReadOnlySpan<TokenInfo> Tokens;
+
+        readonly AsmTokenIndex TokenIndex;
+
         public EmitAsmOpCodes(IWfShell wf, WfHost host, FS.FolderPath dst)
         {
             Wf = wf;
             Host = host;
+            Target = dst;
+            TokenIndex = AsmTokenIndex.create();
+            Tokens = TokenIndex.Model;
         }
 
         public void Run()
         {
 
         }
+
         public void Dispose()
         {
 

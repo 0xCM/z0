@@ -11,12 +11,12 @@ namespace Z0
 
     public readonly ref struct CaptureResBytes
     {
-        readonly Recapture Workflow;
+        readonly AsmRecapture Workflow;
 
         readonly CorrelationToken Ct;
 
         [MethodImpl(Inline)]
-        public CaptureResBytes(Recapture workflow, CorrelationToken ct)
+        public CaptureResBytes(AsmRecapture workflow, CorrelationToken ct)
         {
             Workflow = workflow;
             Ct = ct;

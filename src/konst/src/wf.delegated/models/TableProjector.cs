@@ -8,13 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static WfDelegates;
 
     using D = WfDelegates;
 
     partial struct Delegated
     {
-        public readonly struct TableProjector<S,T> : ITableProjector<S,T>
+        public readonly struct TableProjector<S,T> : IDataProjector<S,T>
             where S : struct
         {
             readonly D.TableProjector<S,T> Fx;

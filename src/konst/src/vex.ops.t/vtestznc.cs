@@ -38,7 +38,7 @@ namespace Z0
         /// FI
         /// </algorithm>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector128<sbyte> x, Vector128<sbyte> y)
+        public static bool vtestznc(Vector128<sbyte> x, Vector128<sbyte> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector128<byte> x, Vector128<byte> y)
+        public static bool vtestznc(Vector128<byte> x, Vector128<byte> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector128<short> x, Vector128<short> y)
+        public static bool vtestznc(Vector128<short> x, Vector128<short> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector128<ushort> x, Vector128<ushort> y)
+        public static bool vtestznc(Vector128<ushort> x, Vector128<ushort> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector128<int> x, Vector128<int> y)
+        public static bool vtestznc(Vector128<int> x, Vector128<int> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -83,7 +83,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector128<uint> x, Vector128<uint> y)
+        public static bool vtestznc(Vector128<uint> x, Vector128<uint> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector128<long> x, Vector128<long> y)
+        public static bool vtestznc(Vector128<long> x, Vector128<long> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector128<ulong> x, Vector128<ulong> y)
+        public static bool vtestznc(Vector128<ulong> x, Vector128<ulong> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector128<float> x, Vector128<float> y)
+        public static bool vtestznc(Vector128<float> x, Vector128<float> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector128<double> x, Vector128<double> y)
+        public static bool vtestznc(Vector128<double> x, Vector128<double> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector256<sbyte> x, Vector256<sbyte> y)
+        public static bool vtestznc(Vector256<sbyte> x, Vector256<sbyte> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector256<byte> x, Vector256<byte> y)
+        public static bool vtestznc(Vector256<byte> x, Vector256<byte> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector256<short> x, Vector256<short> y)
+        public static bool vtestznc(Vector256<short> x, Vector256<short> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -155,7 +155,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector256<ushort> x, Vector256<ushort> y)
+        public static bool vtestznc(Vector256<ushort> x, Vector256<ushort> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -164,7 +164,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector256<int> x, Vector256<int> y)
+        public static bool vtestznc(Vector256<int> x, Vector256<int> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector256<uint> x, Vector256<uint> y)
+        public static bool vtestznc(Vector256<uint> x, Vector256<uint> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -182,7 +182,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector256<long> x, Vector256<long> y)
+        public static bool vtestznc(Vector256<long> x, Vector256<long> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector256<ulong> x, Vector256<ulong> y)
+        public static bool vtestznc(Vector256<ulong> x, Vector256<ulong> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector256<float> x, Vector256<float> y)
+        public static bool vtestznc(Vector256<float> x, Vector256<float> y)
             => TestNotZAndNotC(x, y);
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), TestZnC]
-        public static bit vtestznc(Vector256<double> x, Vector256<double> y)
+        public static bool vtestznc(Vector256<double> x, Vector256<double> y)
             => TestNotZAndNotC(x, y);
     }
 }

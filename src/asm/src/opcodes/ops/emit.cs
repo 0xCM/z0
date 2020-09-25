@@ -20,10 +20,13 @@ namespace Z0.Asm
         /// <param name="dst">The target path</param>
         [Op]
         public static void emit(FS.FilePath dst)
+            => emit(AsmOpCodes.dataset(), dst);
+
+        [Op]
+        public static void emit(in AsmOpCodeDataset src, FS.FilePath dst)
         {
-            var data = AsmOpCodes.dataset();
-            var records = data.Entries.View;
-            var count = data.OpCodeCount;
+            var records = src.Entries.View;
+            var count = src.OpCodeCount;
             var formatter = formatter<F>();
             using var writer = dst.Writer();
             writer.WriteLine(formatter.HeaderText);

@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {        
+    {
         /// <summary>
         /// Computes the vector component count for a given bit-width and component type
         /// </summary>

@@ -13,7 +13,6 @@ namespace Z0
     [SuppressUnmanagedCodeSecurity]
     public delegate void DataReceiver<C,T>(C context,T data);
 
-
     [SuppressUnmanagedCodeSecurity]
     public delegate void EventReceiver(IDataEvent e);
 

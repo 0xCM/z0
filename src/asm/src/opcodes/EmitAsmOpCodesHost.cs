@@ -9,10 +9,8 @@ namespace Z0.Asm
 
     using static Konst;
 
-
     public class EmitAsmOpCodesHost : WfHost<EmitAsmOpCodesHost>
     {
-
         public FS.FolderPath Target {get;set;}
 
         protected override void Execute(IWfShell wf)

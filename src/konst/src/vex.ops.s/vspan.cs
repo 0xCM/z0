@@ -18,12 +18,12 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static Span<T> vspan<T>(Vector128<T> src)
             where T : unmanaged
         {
             var dst = SpanBlocks.alloc<T>(w128);
-            z.vsave(src, ref dst.Head);
+            vsave(src, ref dst.Head);
             return dst.Data;
         }
 
@@ -32,12 +32,12 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static Span<T> vspan<T>(Vector256<T> src)
             where T : unmanaged
         {
             var dst = SpanBlocks.alloc<T>(w256);
-            z.vsave(src, ref dst.Head);
+            vsave(src, ref dst.Head);
             return dst.Data;
         }
 
@@ -46,13 +46,46 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The component type</typeparam>
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static Span<T> vspan<T>(Vector512<T> src)
             where T : unmanaged
         {
             var dst = SpanBlocks.alloc<T>(w512);
-            z.vsave(src, ref dst.Head);
+            vsave(src, ref dst.Head);
             return dst.Data;
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> vspan2<T>(Vector128<T> src)
+            where T : unmanaged
+        {
+            var w = w128;
+            var dst = vinit<T>(w);
+            ref var storage = ref vfirst(dst);
+            vsave(src, ref storage);
+            return cover(storage, vcount<T>(w));
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> vspan2<T>(Vector256<T> src)
+            where T : unmanaged
+        {
+            var w = w256;
+            var dst = vinit<T>(w);
+            ref var storage = ref vfirst(dst);
+            vsave(src, ref storage);
+            return cover(storage, vcount<T>(w));
+        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<T> vspan2<T>(Vector512<T> src)
+            where T : unmanaged
+        {
+            var w = w512;
+            var dst = vinit<T>(w);
+            ref var storage = ref vfirst(dst);
+            vsave(src, ref storage);
+            return cover(storage, vcount<T>(w));
         }
     }
 }
