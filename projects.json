@@ -2,21 +2,29 @@
 	{
 		"name": "0xcm/z0",
 		"rootPath": "j:\\dev\\projects\\z0",
+		"paths": [],
+		"group": "",
 		"enabled": true
 	},
 	{
 		"name": "0xcm/z0/logs",
 		"rootPath": "j:\\dev\\projects\\z0-logs",
+		"paths": [],
+		"group": "",
 		"enabled": true
 	},
 	{
 		"name": "0xcm/z0/archives",
 		"rootPath": "k:\\z0\\archives",
+		"paths": [],
+		"group": "",
 		"enabled": true
 	},
 	{
 		"name": "ms/runtime",
 		"rootPath": "j:\\lang\\net\\runtime",
+		"paths": [],
+		"group": "",
 		"enabled": true
 	},
 	{
@@ -29,11 +37,15 @@
 	{
 		"name": "ms/typeloader",
 		"rootPath": "j:\\lang\\net\\tools\\corert\\src\\Native\\System.Private.TypeLoader.Native",
+		"paths": [],
+		"group": "",
 		"enabled": true
 	},
 	{
 		"name": "ms/test.tools",
 		"rootPath": "j:\\dev\\projects\\z0-test.tools",
+		"paths": [],
+		"group": "",
 		"enabled": true
 	},
 	{
@@ -263,6 +275,13 @@
 	{
 		"name": "ms/command-line",
 		"rootPath": "j:\\lang\\net\\command-line-api",
+		"paths": [],
+		"group": "",
+		"enabled": true
+	},
+	{
+		"name": "ms/runtime/private",
+		"rootPath": "j:\\lang\\net\\runtime\\src\\libraries\\System.Private.CoreLib",
 		"paths": [],
 		"group": "",
 		"enabled": true

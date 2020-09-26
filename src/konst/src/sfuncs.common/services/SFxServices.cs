@@ -12,21 +12,6 @@ namespace Z0
 
     public readonly struct SFxServices
     {
-        [MethodImpl(Inline)]
-        public static S func<S>()
-            where S : unmanaged, IFunc
-                => default(S);
-
-        [MethodImpl(Inline)]
-        public static ISFxHost<S> host<S>()
-            where S : ISFxHost<S>, new()
-                => default(SFxHost<S>);
-
-        [MethodImpl(Inline)]
-        public static ISFxRoot<F,H> root<F,H>()
-            where F : ISFxRoot<F,H>, new()
-                => default(SFxRoot<F,H>);
-
         /// <summary>
         /// Instantiates a service operation host
         /// </summary>
@@ -56,7 +41,5 @@ namespace Z0
         [Op]
         public static ISFxHost[] hosts(Assembly src)
             => src.GetTypes().Where(t => t.Tagged<FunctionalServiceAttribute>()).Select(host);
-
-
     }
 }

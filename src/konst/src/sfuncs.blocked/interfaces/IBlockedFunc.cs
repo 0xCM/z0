@@ -5,13 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Security;
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    partial struct SFx
+    {
+
+
+    }
 
     /// <summary>
     /// Characterizes structured blocked functions
     /// </summary>
-    [SuppressUnmanagedCodeSecurity]
+    [Free, SFx]
     public interface IBlockedFunc : IFunc
     {
         OpIdentity IFunc.Id => OpIdentity.Empty;
@@ -21,7 +27,7 @@ namespace Z0
     /// Characterizes identified SBF operations that are width-parametric
     /// </summary>
     /// <typeparam name="W">The width type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free, SFx]
     public interface IBlockedFunc<W> : IBlockedFunc
         where W : unmanaged, ITypeWidth
     {
@@ -33,7 +39,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="W">The width type</typeparam>
     /// <typeparam name="T">The cell type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free, SFx]
     public interface IBlockedFunc<W,T> : IBlockedFunc<W>
         where W : unmanaged, ITypeWidth
         where T : unmanaged

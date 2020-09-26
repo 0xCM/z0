@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst; 
+
+    using static Konst;
     using static As;
-        
+
     partial class gvec
     {
         /// <summary>
@@ -51,14 +51,14 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vimpl(v8u(x), v8u(y)));
+                return generic<T>(z.vimpl(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vimpl(v16u(x),v16u(y)));
+                return generic<T>(z.vimpl(v16u(x),v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vimpl(v32u(x), v32u(y)));
+                return generic<T>(z.vimpl(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vimpl(v64u(x), v64u(y)));
-            else 
+                return generic<T>(z.vimpl(v64u(x), v64u(y)));
+            else
                 return vimpl_i(x,y);
         }
 
@@ -67,15 +67,15 @@ namespace Z0
             where T : unmanaged
         {
              if(typeof(T) == typeof(sbyte))
-                return generic<T>(dvec.vimpl(v8i(x), v8i(y)));
+                return generic<T>(z.vimpl(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dvec.vimpl(v16i(x),v16i(y)));
+                return generic<T>(z.vimpl(v16i(x),v16i(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dvec.vimpl(v32i(x), v32i(y)));
+                return generic<T>(z.vimpl(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dvec.vimpl(v64i(x), v64i(y)));
-            else 
-                throw Unsupported.define<T>();
+                return generic<T>(z.vimpl(v64i(x), v64i(y)));
+            else
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -83,31 +83,31 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vimpl(v8u(x), v8u(y)));
+                return generic<T>(z.vimpl(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vimpl(v16u(x),v16u(y)));
+                return generic<T>(z.vimpl(v16u(x),v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vimpl(v32u(x), v32u(y)));
+                return generic<T>(z.vimpl(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vimpl(v64u(x), v64u(y)));
-            else 
+                return generic<T>(z.vimpl(v64u(x), v64u(y)));
+            else
                 return vimpl_i(x,y);
-        } 
+        }
 
         [MethodImpl(Inline)]
         static Vector256<T> vimpl_i<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
              if(typeof(T) == typeof(sbyte))
-                return generic<T>(dvec.vimpl(v8i(x), v8i(y)));
+                return generic<T>(z.vimpl(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dvec.vimpl(v16i(x),v16i(y)));
+                return generic<T>(z.vimpl(v16i(x),v16i(y)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dvec.vimpl(v32i(x), v32i(y)));
+                return generic<T>(z.vimpl(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dvec.vimpl(v64i(x), v64i(y)));
-            else 
-                throw Unsupported.define<T>();
-        } 
+                return generic<T>(z.vimpl(v64i(x), v64i(y)));
+            else
+                throw no<T>();
+        }
     }
 }

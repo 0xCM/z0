@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst; 
+
+    using static Konst;
     using static V0;
-    
+
     partial class gvec
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
@@ -22,20 +22,20 @@ namespace Z0
         public static Vector256<T> vnegate<T>(Vector256<T> src)
             where T : unmanaged
                 => vnegate_u(src);
- 
+
         [MethodImpl(Inline)]
         static Vector128<T> vnegate_u<T>(Vector128<T> x)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(V0d.vnegate(v8u(x)));
+                return vgeneric<T>(z.vnegate(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(V0d.vnegate(v16u(x)));
+                return vgeneric<T>(z.vnegate(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(V0d.vnegate(v32u(x)));
+                return vgeneric<T>(z.vnegate(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(V0d.vnegate(v64u(x)));
-            else 
+                return vgeneric<T>(z.vnegate(v64u(x)));
+            else
                 return vnegate_i(x);
         }
 
@@ -44,13 +44,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return vgeneric<T>(V0d.vnegate(v8i(x)));
+                 return vgeneric<T>(z.vnegate(v8i(x)));
             else if(typeof(T) == typeof(short))
-                 return vgeneric<T>(V0d.vnegate(v16i(x)));
+                 return vgeneric<T>(z.vnegate(v16i(x)));
             else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(V0d.vnegate(v32i(x)));
+                 return vgeneric<T>(z.vnegate(v32i(x)));
             else if(typeof(T) == typeof(long))
-                 return vgeneric<T>(V0d.vnegate(v64i(x)));
+                 return vgeneric<T>(z.vnegate(v64i(x)));
             else
                 return ginxfp.vnegate(x);
         }
@@ -60,13 +60,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return vgeneric<T>(V0d.vnegate(v8i(x)));
+                 return vgeneric<T>(z.vnegate(v8i(x)));
             else if(typeof(T) == typeof(short))
-                 return vgeneric<T>(V0d.vnegate(v16i(x)));
+                 return vgeneric<T>(z.vnegate(v16i(x)));
             else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(V0d.vnegate(v32i(x)));
+                 return vgeneric<T>(z.vnegate(v32i(x)));
             else if(typeof(T) == typeof(long))
-                 return vgeneric<T>(V0d.vnegate(v64i(x)));
+                 return vgeneric<T>(z.vnegate(v64i(x)));
             else
                 return ginxfp.vnegate(x);
         }
@@ -76,14 +76,14 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(V0d.vnegate(v8u(x)));
+                return vgeneric<T>(z.vnegate(v8u(x)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(V0d.vnegate(v16u(x)));
+                return vgeneric<T>(z.vnegate(v16u(x)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(V0d.vnegate(v32u(x)));
+                return vgeneric<T>(z.vnegate(v32u(x)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(V0d.vnegate(v64u(x)));
-            else 
+                return vgeneric<T>(z.vnegate(v64u(x)));
+            else
                 return vnegate_i(x);
         }
     }

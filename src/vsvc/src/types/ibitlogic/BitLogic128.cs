@@ -15,7 +15,7 @@ namespace Z0
 
     partial class VServices
     {
-        [NumericClosures(Integers)]
+        [Closures(Integers)]
         public readonly struct BitLogic128<T> : IBitLogic<Vector128<T>>
             where T : unmanaged
         {
@@ -137,7 +137,7 @@ namespace Z0
                 else if(typeof(B) == typeof(K.CNonImpl))
                     return cnonimpl(a,b);
                 else
-                    throw Unsupported.define<T>();
+                    throw no<T>();
             }
 
             [MethodImpl(Inline)]
@@ -147,7 +147,7 @@ namespace Z0
                 if(typeof(B) == typeof(K.Select))
                     return select(a,b,c);
                 else
-                    throw Unsupported.define<T>();
+                    throw no<T>();
             }
         }
     }

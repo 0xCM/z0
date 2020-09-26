@@ -5,20 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Ssse3;
-    
-    using static Konst;    
-    using static V0;
-    using static V0d;
-    
+
+    using static Konst;
+    using static z;
+
     partial class dvec
-    {    
+    {
         /// <summary>
-        /// __m128i _mm_abs_epi8 (__m128i a)PABSB xmm, xmm/m128
+        /// __m128i _mm_abs_epi8 (__m128i a) PABSB xmm, xmm/m128
         /// Computes the absolute value of each source component
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -27,7 +26,7 @@ namespace Z0
             => v8i(Abs(src));
 
         /// <summary>
-        /// __m128i _mm_abs_epi16 (__m128i a)PABSW xmm, xmm/m128
+        /// __m128i _mm_abs_epi16 (__m128i a) PABSW xmm, xmm/m128
         /// Computes the absolute value of each source component
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -51,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline), Abs]
         public static Vector128<long> vabs(Vector128<long> src)
         {
-            var mask = vnegate(vsrl(src, 63));                        
+            var mask = z.vnegate(vsrl(src, 63));
             return vsub(vxor(mask, src), mask);
         }
 
@@ -80,8 +79,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         [MethodImpl(Inline), Abs]
         public static Vector256<int> vabs(Vector256<int> src)
-            => v32i(Abs(src));        
- 
+            => v32i(Abs(src));
+
         /// <summary>
         /// Computes the absolute value of each source component
         /// </summary>
@@ -89,7 +88,7 @@ namespace Z0
         [MethodImpl(Inline), Abs]
         public static Vector256<long> vabs(Vector256<long> src)
         {
-            var mask = vnegate(vsrl(src, 63));
+            var mask = z.vnegate(vsrl(src, 63));
             return vsub(vxor(mask, src), mask);
         }
     }

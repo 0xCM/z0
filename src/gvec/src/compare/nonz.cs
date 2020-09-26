@@ -5,13 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Runtime.Intrinsics.X86;
 
-    using static Konst; 
-    using static As;
-    
+    using static Konst;
+    using static z;
+
     partial class gvec
     {
         /// <summary>
@@ -20,20 +19,20 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline), Nonz, Closures(AllNumeric)]
-        public static bit vnonz<T>(Vector128<T> src)
+        public static bool vnonz<T>(Vector128<T> src)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 return vnonz_u(src);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 return vnonz_i(src);
-            else 
+            else
                 return vnonz_f(src);
         }
 
@@ -43,20 +42,20 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline), Nonz, Closures(AllNumeric)]
-        public static bit vnonz<T>(Vector256<T> src)
+        public static bool vnonz<T>(Vector256<T> src)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 return vnonz_u(src);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 return vnonz_i(src);
-            else 
+            else
                 return vnonz_f(src);
         }
 
@@ -66,12 +65,12 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline), Nonz, Closures(AllNumeric)]
-        public static bit vnonz<T>(in Vector512<T> src)
+        public static bool vnonz<T>(in Vector512<T> src)
             where T : unmanaged
-                => vnonz(src.Lo) || vnonz(src.Hi);       
+                => vnonz(src.Lo) || vnonz(src.Hi);
 
         [MethodImpl(Inline)]
-        static bit vnonz_i<T>(Vector128<T> src)
+        static bool vnonz_i<T>(Vector128<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -80,12 +79,12 @@ namespace Z0
                 return z.vnonz(v16i(src));
             else if(typeof(T) == typeof(int))
                 return z.vnonz(v32i(src));
-            else 
+            else
                 return z.vnonz(v64i(src));
         }
 
         [MethodImpl(Inline)]
-        static bit vnonz_u<T>(Vector128<T> src)
+        static bool vnonz_u<T>(Vector128<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -94,24 +93,24 @@ namespace Z0
                 return z.vnonz(v16u(src));
             else if(typeof(T) == typeof(uint))
                 return z.vnonz(v32u(src));
-            else 
+            else
                 return z.vnonz(v64u(src));
         }
 
         [MethodImpl(Inline)]
-        static bit vnonz_f<T>(Vector128<T> src)
+        static bool vnonz_f<T>(Vector128<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
                 return z.vnonz(v32f(src));
             else if(typeof(T) == typeof(double))
                 return z.vnonz(v64f(src));
-            else 
+            else
                 throw no<T>();
         }
 
         [MethodImpl(Inline)]
-        static bit vnonz_i<T>(Vector256<T> src)
+        static bool vnonz_i<T>(Vector256<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -120,12 +119,12 @@ namespace Z0
                 return z.vnonz(v16i(src));
             else if(typeof(T) == typeof(int))
                 return z.vnonz(v32i(src));
-            else 
+            else
                 return z.vnonz(v64i(src));
         }
 
         [MethodImpl(Inline)]
-        static bit vnonz_u<T>(Vector256<T> src)
+        static bool vnonz_u<T>(Vector256<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -134,19 +133,19 @@ namespace Z0
                 return z.vnonz(v16u(src));
             else if(typeof(T) == typeof(uint))
                 return z.vnonz(v32u(src));
-            else 
+            else
                 return z.vnonz(v64u(src));
         }
 
         [MethodImpl(Inline)]
-        static bit vnonz_f<T>(Vector256<T> src)
+        static bool vnonz_f<T>(Vector256<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
                 return z.vnonz(v32f(src));
             else if(typeof(T) == typeof(double))
                 return z.vnonz(v64f(src));
-            else 
+            else
                 throw no<T>();
         }
     }

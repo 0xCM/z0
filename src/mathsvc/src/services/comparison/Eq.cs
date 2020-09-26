@@ -13,15 +13,15 @@ namespace Z0
     partial class MSvcHosts
     {
         [Closures(AllNumeric), Eq]
-        public readonly struct Eq<T> : IFunc<T,T,bit>, IBinarySpanPred<T>
+        public readonly struct Eq<T> : IFunc<T,T,bool>, IBinarySpanPred<T,bool>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T x, T y)
+            public readonly bool Invoke(T x, T y)
                 => gmath.eq(x,y);
 
             [MethodImpl(Inline)]
-            public Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
+            public Span<bool> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bool> dst)
                 => apply(this, lhs,rhs,dst);
         }
     }

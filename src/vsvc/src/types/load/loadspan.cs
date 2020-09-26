@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class VServices
     {
@@ -18,7 +18,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector128<T> Invoke(ReadOnlySpan<T> x, int offset)
-                => z.vload(n128,x,offset);
+                => vload(n128,x,offset);
         }
 
         public readonly struct LoadSpan256<T> : ISpanLoader256<T,T>
@@ -26,7 +26,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             public Vector256<T> Invoke(ReadOnlySpan<T> x, int offset)
-                => z.vload(n256,x,offset);
+                => vload(n256,x,offset);
         }
     }
 }

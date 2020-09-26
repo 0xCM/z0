@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst; 
+
+    using static Konst;
     using static V0;
     using static Typed;
-        
+
     partial class gvec
-    {                        
+    {
         /// <summary>
         /// Computes the component-wise difference between two vectors
         /// </summary>
@@ -33,7 +33,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Sub, Closures(AllNumeric)]
         public static Vector256<T> vsub<T>(Vector256<T> x, Vector256<T> y)
-            where T : unmanaged 
+            where T : unmanaged
                 => vsub_u(x,y);
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Z0
         public static Vector256<T> vsub<T>(Vector256<T> x, T a)
             where T : unmanaged
                 => vsub(x, Vectors.vbroadcast(n256,a));
-    
+
         /// <summary>
         /// Subtracts each vector component from a constant value
         /// </summary>
@@ -85,29 +85,29 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(V0d.vsub(v8u(x), v8u(y)));
+                return vgeneric<T>(z.vsub(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(V0d.vsub(v16u(x), v16u(y)));
+                return vgeneric<T>(z.vsub(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(V0d.vsub(v32u(x), v32u(y)));
+                return vgeneric<T>(z.vsub(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(V0d.vsub(v64u(x), v64u(y)));
+                return vgeneric<T>(z.vsub(v64u(x), v64u(y)));
             else
                 return vsub_i(x,y);
         }
-    
+
         [MethodImpl(Inline)]
         static Vector128<T> vsub_i<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return vgeneric<T>(V0d.vsub(v8i(x), v8i(y)));
+                 return vgeneric<T>(z.vsub(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                 return vgeneric<T>(V0d.vsub(v16i(x), v16i(y)));
+                 return vgeneric<T>(z.vsub(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(V0d.vsub(v32i(x), v32i(y)));
+                 return vgeneric<T>(z.vsub(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                 return vgeneric<T>(V0d.vsub(v64i(x), v64i(y)));
+                 return vgeneric<T>(z.vsub(v64i(x), v64i(y)));
             else
                 return ginxfp.vsub(x,y);
         }
@@ -117,31 +117,31 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(V0d.vsub(v8u(x), v8u(y)));
+                return vgeneric<T>(z.vsub(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(V0d.vsub(v16u(x), v16u(y)));
+                return vgeneric<T>(z.vsub(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(V0d.vsub(v32u(x), v32u(y)));
+                return vgeneric<T>(z.vsub(v32u(x), v32u(y)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(V0d.vsub(v64u(x), v64u(y)));
+                return vgeneric<T>(z.vsub(v64u(x), v64u(y)));
             else
                 return vsub_i(x,y);
-        }    
+        }
 
         [MethodImpl(Inline)]
         static Vector256<T> vsub_i<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return vgeneric<T>(V0d.vsub(v8i(x), v8i(y)));
+                 return vgeneric<T>(z.vsub(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                 return vgeneric<T>(V0d.vsub(v16i(x), v16i(y)));
+                 return vgeneric<T>(z.vsub(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(V0d.vsub(v32i(x), v32i(y)));
+                 return vgeneric<T>(z.vsub(v32i(x), v32i(y)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(V0d.vsub(v64i(x), v64i(y)));
+                return vgeneric<T>(z.vsub(v64i(x), v64i(y)));
             else
                 return ginxfp.vsub(x,y);
-        }    
+        }
     }
 }

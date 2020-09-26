@@ -17,10 +17,12 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y) => gvec.vlt(x,y);
+            public Vector128<T> Invoke(Vector128<T> x, Vector128<T> y)
+                => gvec.vlt(x,y);
 
             [MethodImpl(Inline)]
-            public T Invoke(T a, T b) => gmath.ltz(a,b);
+            public T Invoke(T a, T b)
+                => gmath.ltz(a,b);
         }
 
         [Closures(AllNumeric), Lt]

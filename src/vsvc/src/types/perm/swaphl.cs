@@ -16,14 +16,16 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(Vector128<T> x) => gvec.vswaphl(x);
+            public Vector128<T> Invoke(Vector128<T> x)
+                => gvec.vswaphl(x);
         }
 
         public readonly struct SwapHiLo256<T> : IUnaryOp256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(Vector256<T> x) => gvec.vswaphl(x);
+            public Vector256<T> Invoke(Vector256<T> x)
+                => gvec.vswaphl(x);
         }
     }
 }

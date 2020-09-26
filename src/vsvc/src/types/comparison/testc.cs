@@ -17,7 +17,8 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public bit Invoke(Vector128<T> x, Vector128<T> y) => gvec.vtestc(x,y);
+            public bit Invoke(Vector128<T> x, Vector128<T> y)
+                => gvec.vtestc(x,y);
 
             [MethodImpl(Inline)]
             public bit Invoke(T a, T b) => default;

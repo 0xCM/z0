@@ -17,10 +17,12 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public bit Invoke(Vector128<T> x,Vector128<T> y) => gvec.vtestz(x,y);
+            public bit Invoke(Vector128<T> x,Vector128<T> y)
+                => gvec.vtestz(x,y);
 
             [MethodImpl(Inline)]
-            public bit Invoke(T a, T b) => default;
+            public bit Invoke(T a, T b)
+                => default;
         }
 
         [Closures(AllNumeric), TestZ]
@@ -28,10 +30,12 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public bit Invoke(Vector256<T> x,Vector256<T> y) => gvec.vtestz(x,y);
+            public bit Invoke(Vector256<T> x,Vector256<T> y)
+                => gvec.vtestz(x,y);
 
             [MethodImpl(Inline)]
-            public bit InvokeScalar(T a, T b) => default;
+            public bit InvokeScalar(T a, T b)
+                => default;
         }
    }
 }

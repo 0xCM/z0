@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class VServices
     {
@@ -17,14 +17,16 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke() => gvec.vones<T>(w128);
+            public Vector128<T> Invoke()
+                => gvec.vones<T>(w128);
         }
 
         public readonly struct Ones256<T> : IEmitter256<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke() => gvec.vones<T>(w256);
+            public Vector256<T> Invoke()
+                => gvec.vones<T>(w256);
         }
     }
 }

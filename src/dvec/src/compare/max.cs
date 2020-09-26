@@ -5,16 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static System.Runtime.Intrinsics.X86.Sse;    
-    using static System.Runtime.Intrinsics.X86.Sse2;    
-    using static System.Runtime.Intrinsics.X86.Sse41;    
-    using static System.Runtime.Intrinsics.X86.Avx;    
-    using static System.Runtime.Intrinsics.X86.Avx2;    
-    
-    using static z;    
+    using static System.Runtime.Intrinsics.X86.Sse;
+    using static System.Runtime.Intrinsics.X86.Sse2;
+    using static System.Runtime.Intrinsics.X86.Sse41;
+    using static System.Runtime.Intrinsics.X86.Avx;
+    using static System.Runtime.Intrinsics.X86.Avx2;
+
+    using static z;
 
     public partial class dvec
     {
@@ -89,8 +89,8 @@ namespace Z0
         [MethodImpl(Inline), Max]
         public static Vector128<long> vmax(Vector128<long> x, Vector128<long> y)
         {
-            var xL = vinsert(x,default,0);
-            var yL = vinsert(y,default,0);
+            var xL = z.vinsert(x,default, BitState.Off);
+            var yL = z.vinsert(y,default, BitState.Off);
             return z.vlo(vmax(xL,yL));
         }
 
@@ -147,7 +147,7 @@ namespace Z0
         [MethodImpl(Inline), Max]
         public static Vector256<uint> vmax(Vector256<uint> x, Vector256<uint> y)
             => Max(x, y);
-            
+
         /// <summary>
         /// Computes the maximum values of corresponding components
         /// </summary>

@@ -11,7 +11,7 @@ namespace Z0
     using S = Surrogates;
 
     public class t_compare : t_mathsvc<t_compare>
-    {     
+    {
         public void eq_check()
         {
             const string name = "eq";
@@ -30,11 +30,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void eq_check<T>(S.BinaryPredicate<T> f, T t = default)
+        void eq_check<T>(S.BinaryPredicate8<T> f, T t = default)
             where  T : unmanaged
         {
             var g = MSvc.eq(t);
-            var validator = this.BinaryPredicateMatch(t);
+            var validator = this.BinaryPredicateMatch8(t);
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
         }
@@ -106,7 +106,7 @@ namespace Z0
             // gteq_check(S.predicate(math.gteq, name, z64));
             // gteq_check(S.predicate(math.gteq, name, z64i));
             // gteq_check(S.predicate(fmath.gteq, name, z32f));
-            // gteq_check(S.predicate(fmath.gteq, name, z64f));            
+            // gteq_check(S.predicate(fmath.gteq, name, z64f));
         }
 
         void gteq_check<T>(S.BinaryPredicate<T> f, T t = default)

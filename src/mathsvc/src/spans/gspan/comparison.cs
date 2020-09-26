@@ -13,7 +13,7 @@ namespace Z0
     partial class gspan
     {
         [MethodImpl(Inline), SpanOp, Closures(Integers)]
-        public static Span<bit> eq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bit> dst)
+        public static Span<bool> eq<T>(ReadOnlySpan<T> l, ReadOnlySpan<T> r, Span<bool> dst)
             where T : unmanaged
                 => apply(MSvc.eq<T>(), l, r, dst);
 

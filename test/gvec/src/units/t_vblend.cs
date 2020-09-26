@@ -113,10 +113,10 @@ namespace Z0
             var left = vparts(n,0,1,2,3);
             var right = vparts(n,4,5,6,7);
 
-            Claim.veq(vparts(n,0,5,2,7),dvec.vblend(left, right, Blend4x64.LRLR));
-            Claim.veq(vparts(n,4,1,6,3),dvec.vblend(left, right, Blend4x64.RLRL));
-            Claim.veq(vparts(n,0,1,2,3),dvec.vblend(left, right, Blend4x64.LLLL));
-            Claim.veq(vparts(n,4,5,6,7),dvec.vblend(left, right, Blend4x64.RRRR));
+            Claim.veq(vparts(n,0,5,2,7), z.vblend(left, right, Blend4x64.LRLR));
+            Claim.veq(vparts(n,4,1,6,3), z.vblend(left, right, Blend4x64.RLRL));
+            Claim.veq(vparts(n,0,1,2,3), z.vblend(left, right, Blend4x64.LLLL));
+            Claim.veq(vparts(n,4,5,6,7), z.vblend(left, right, Blend4x64.RRRR));
         }
 
         public void vblend_2x64_basecases()

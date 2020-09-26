@@ -619,6 +619,5 @@ namespace Z0
 
             return x0F;
         }
-
     }
 }

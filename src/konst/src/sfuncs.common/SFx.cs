@@ -4,15 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection;
-
-    using static Konst;
-
     [ApiHost]
     public readonly partial struct SFx
     {
-
+        const NumericKind Closure = NumericKind.I8 | NumericKind.U64;
     }
 }

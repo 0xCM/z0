@@ -280,8 +280,8 @@ namespace Z0
         public static Vector256<byte> vswaphl(Vector256<byte> x)
         {
             Vector256<byte> y = default;
-            y = dvec.vinsert(vhi(x), y, 0);
-            y = dvec.vinsert(vlo(x), y, 1);
+            y = z.vinsert(vhi(x), y, BitState.Off);
+            y = z.vinsert(vlo(x), y, BitState.On);
             return y;
         }
 
@@ -300,7 +300,7 @@ namespace Z0
         {
             for(var i=0; i<RepCount; i++)
             {
-                var src = V0.vinc<ulong>(n256);
+                var src = z.vinc<ulong>(n256);
                 var x = z.vperm4x64(src, Perm4L.BADC);
                 var srcs = src.ToSpan();
                 var y = Vector256.Create(srcs[1], srcs[0], srcs[3], srcs[2]);

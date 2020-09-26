@@ -5,16 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static System.Runtime.Intrinsics.X86.Sse;    
-    using static System.Runtime.Intrinsics.X86.Sse2;    
-    using static System.Runtime.Intrinsics.X86.Sse41;    
-    using static System.Runtime.Intrinsics.X86.Avx;    
-    using static System.Runtime.Intrinsics.X86.Avx2;    
-    
-    using static z;    
+    using static System.Runtime.Intrinsics.X86.Sse;
+    using static System.Runtime.Intrinsics.X86.Sse2;
+    using static System.Runtime.Intrinsics.X86.Sse41;
+    using static System.Runtime.Intrinsics.X86.Avx;
+    using static System.Runtime.Intrinsics.X86.Avx2;
+
+    using static z;
 
     public partial class dvec
     {
@@ -80,9 +80,9 @@ namespace Z0
         [MethodImpl(Inline), Min]
         public static Vector128<long> vmin(Vector128<long> x, Vector128<long> y)
         {
-            var xL = V0d.vinsert(x,default, BitState.Off);
-            var yL = V0d.vinsert(y,default, BitState.Off);
-            return V0d.vlo(vmin(xL,yL));
+            var xL = z.vinsert(x,default, BitState.Off);
+            var yL = z.vinsert(y,default, BitState.Off);
+            return z.vlo(vmin(xL,yL));
         }
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Z0
             => Min(x, y);
 
         /// <summary>
-        /// __m256i _mm256_min_epi8 (__m256i a, __m256i b)VPMINSB ymm, ymm, ymm/m256
+        /// __m256i _mm256_min_epi8 (__m256i a, __m256i b) VPMINSB ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -113,7 +113,7 @@ namespace Z0
             => Min(x, y);
 
         /// <summary>
-        /// __m256i _mm256_min_epi16 (__m256i a, __m256i b)VPMINSW ymm, ymm, ymm/m256
+        /// __m256i _mm256_min_epi16 (__m256i a, __m256i b) VPMINSW ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>

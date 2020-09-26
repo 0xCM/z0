@@ -18,5 +18,6 @@ namespace Z0
             for(var i=0; i<count; i++)
                 f.Invoke(i);
         }
+
     }
 }
