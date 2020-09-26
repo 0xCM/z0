@@ -46,7 +46,7 @@ namespace Z0
                 get => file(Path.GetFileName(Name));
             }
 
-            public FileExt FileExt
+            public FileExt Ext
             {
                 [MethodImpl(Inline)]
                 get => FS.ext(Path.GetExtension(Name).TrimStart('.'));
@@ -109,7 +109,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public bool Is(FileExt ext)
-                => string.Compare(FileExt.Text, ext.Text, NoCase) == 0;
+                => string.Compare(Ext.Text, ext.Text, NoCase) == 0;
 
             public FilePath ChangeExtension(FileExt ext)
                 => FolderPath + FS.file(Path.ChangeExtension(Path.GetFileName(Name), ext.Name));
@@ -118,12 +118,7 @@ namespace Z0
                 => File.ReadAllText(Name);
 
             public FilePath Timestamped()
-            {
-                var name = FileName.WithoutExtension;
-                var ext = FileExt;
-                var stamped = FS.file(text.format("{0}.{1}.{2}", name, timestamp(), ext));
-                return FolderPath + stamped;
-            }
+                => timestamped(this);
 
             [MethodImpl(Inline)]
             public FilePath Replace(char src, char dst)

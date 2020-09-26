@@ -3,7 +3,7 @@
 | Op/En | Operand 1 | Operand 2 | Operand 3 | Operand 4 |
 | D     | Offset    | NA        | NA        | NA        |
 
-# JCC - Flags Red
+# JCC - Flags Read
 -----------------------------------------------------------------------------------------------------------------------
 | Jo_rel8_16   | OF         |          | Read |
 | Jo_rel8_32   | OF         | INTEL386 | Read |

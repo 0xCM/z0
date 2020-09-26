@@ -11,6 +11,7 @@ namespace Z0
 
     using static z;
 
+
     public readonly struct TableContentProvider : IContentProvider
     {
         public static TableContentProvider create()

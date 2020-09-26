@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;    
+    using static Konst;
 
     partial class Vectors
     {
@@ -20,8 +20,8 @@ namespace Z0
         /// <typeparam name="T">The component type</typeparam>
         [MethodImpl(Inline)]
         public static unsafe Vector128<T> vload<T>(W128 w, in T src)
-            where T : unmanaged                    
-                => V0.vload(As.gptr(src), out Vector128<T> _);
+            where T : unmanaged
+                => z.vload(As.gptr(src), out Vector128<T> _);
 
         /// <summary>
         /// Loads a 256-bit vector from a readonly memory reference
@@ -32,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe Vector256<T> vload<T>(W256 w, in T src)
             where T : unmanaged
-                => V0.vload(As.gptr(src), out Vector256<T> _);
+                => z.vload(As.gptr(src), out Vector256<T> _);
 
         /// <summary>
         /// Loads a 256-bit vector from a readonly memory reference
@@ -43,6 +43,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe ref Vector256<T> vload<T>(in T src, out Vector256<T> dst)
             where T : unmanaged
-                => ref vload(As.gptr(src), out dst);
+                => ref z.vload(As.gptr(src), out dst);
     }
 }

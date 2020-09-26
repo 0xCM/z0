@@ -12,8 +12,6 @@ namespace Z0
 
     public readonly struct XOrGate : IBinaryLogicGate
     {
-        internal static readonly XOrGate Gate = default;        
-        
         [MethodImpl(Inline)]
         public bit Invoke(bit x, bit y)
             => (x ^ y);

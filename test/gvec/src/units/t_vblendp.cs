@@ -70,7 +70,7 @@ namespace Z0
             var source = gvec.vinc(w,t);
             var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), z.maxval<ulong>());
             var target = gvec.vblendp(source, blendspec);
-            var expect = Vectors.vparts(w,0,5,2,7,4,1,6,3);
+            var expect = z.vparts(w,0,5,2,7,4,1,6,3);
             Claim.Require(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z8)), source,target);
@@ -92,7 +92,7 @@ namespace Z0
             var source = gvec.vinc(w,t);
             var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
-            var expect = Vectors.vparts(w,0,1,2,7,4,5,6,3);
+            var expect = z.vparts(w,0,1,2,7,4,5,6,3);
             Claim.Require(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z8)), source,target);
@@ -115,7 +115,7 @@ namespace Z0
             var source = gvec.vinc(w,t);
             var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
-            var expect = Vectors.vparts(w,4,1,6,3,0,5,2,7);
+            var expect = z.vparts(w,4,1,6,3,0,5,2,7);
             Claim.Require(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z8)), source,target);
@@ -137,7 +137,7 @@ namespace Z0
             var source = gvec.vinc(w,t);
             var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
-            var expect = Vectors.vparts(w,4,5,2,3,0,1,6,7);
+            var expect = z.vparts(w,4,5,2,3,0,1,6,7);
             Claim.Require(gvec.vsame(expect,target));
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z8)), source,target);
@@ -159,7 +159,7 @@ namespace Z0
             var source = gvec.vinc(w,t);
             var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
-            var expect = Vectors.vparts(w,8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7);
+            var expect = z.vparts(w,8,  9,  2,  3,  4,  5, 14, 15,  0,  1, 10, 11, 12, 13,  6,  7);
 
             Claim.Require(gvec.vsame(expect,target));
 
@@ -182,7 +182,7 @@ namespace Z0
             var source = gvec.vinc(w,t);
             var blendspec = gvec.vbroadcast(n256, BitMasks.mask(maskspec), maxval(t));
             var target = gvec.vblendp(source, blendspec);
-            var expect = Vectors.vparts(w,16, 17,  2,  3,  4,  5, 22, 23, 24, 25, 10, 11, 12, 13, 30, 31,  0,  1, 18, 19, 20, 21,  6,  7,  8,  9, 26, 27, 28, 29, 14, 15);
+            var expect = z.vparts(w,16, 17,  2,  3,  4,  5, 22, 23, 24, 25, 10, 11, 12, 13, 30, 31,  0,  1, 18, 19, 20, 21,  6,  7,  8,  9, 26, 27, 28, 29, 14, 15);
             Claim.eq(expect,target);
 
             var descrition = describe(maskspec, BitMasks.mask(maskspec.As(z32)), source,target);

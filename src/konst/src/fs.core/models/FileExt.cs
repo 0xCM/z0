@@ -42,7 +42,7 @@ namespace Z0
             {
 
                 var left = Name.View;
-                var right = src.FileExt.Name.View;
+                var right = src.Ext.Name.View;
                 return left.ContentEqual(right);
             }
 

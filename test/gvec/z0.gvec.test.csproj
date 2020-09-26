@@ -17,7 +17,6 @@
     <ProjectReference Include="$(BitStrings)" />
     <ProjectReference Include="$(BitSvc)" />
     <ProjectReference Include="$(BitVectors)" />
-    <ProjectReference Include="$(VBits)" />
     <ProjectReference Include="$(Circuits)" />
   </ItemGroup>
 

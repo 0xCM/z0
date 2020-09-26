@@ -265,7 +265,7 @@ namespace Z0
             {
                 var dir = FS.dir("J:/dev/labs/blend/App01/bin/x64/Release/net5.0/win-x64");
                 var ct = Wf.Ct;
-                var dlls = dir.Files(false).Where(f => f.FileExt.Name.Contains("dll"));
+                var dlls = dir.Files(false).Where(f => f.Ext.Name.Contains("dll"));
                 var host = new EmitImageHeadersHost();
                 var output = FS.path("J:/dev/projects/z0-logs/db/images.csv");
                 host.Run(Wf.WithState(flow(dlls,output)));

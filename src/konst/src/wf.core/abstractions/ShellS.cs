@@ -25,7 +25,7 @@ namespace Z0
         }
 
         protected Shell(IShellContext context)
-            : this(context, new TermEventSink())
+            : this(context, term.sink(context.Ct))
         {
 
         }

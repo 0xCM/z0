@@ -63,7 +63,7 @@ namespace Z0
             Init = config;
             Id = config.ControlId;
             Ct = correlate(Id);
-            WfSink = Flow.log(config);
+            WfSink = WfEvents.log(config.Logs);
             Shell = insist(Init.Shell);
             Modules = Init.Modules;
             Api = Modules.Api;

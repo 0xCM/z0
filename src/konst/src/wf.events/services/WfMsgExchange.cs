@@ -54,36 +54,5 @@ namespace Z0
             Wf = wf;
             Next = x => {};
         }
-
-        // void Relay(IAppMsg src)
-        // {
-
-        // }
-
-
-        // [MethodImpl(Inline)]
-        // public void Notify(string msg, MessageKind? severity = null)
-        // {
-
-        // }
-
-        // public IReadOnlyList<IAppMsg> Dequeue()
-        //     => z.list<IAppMsg>();
-
-        // public void Emit(FilePath dst)
-        // {
-
-        // }
-
-        // public IReadOnlyList<IAppMsg> Flush(Exception e)
-        //     => z.list<IAppMsg>();
-
-        // public void Flush(Exception e, IAppMsgSink target)
-        // {
-
-        // }
-
-        // public void Deposit(IAppMsg msg)
-        // {}
     }
 }

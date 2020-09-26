@@ -6,13 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    using static Part;
+    using static Konst;
+    using static z;
 
-    public enum ContentLibField : ushort
+
+    using Z0.Xed;
+
+    readonly struct Shell
     {
-        Name = 80,
-
-        Type = 20,
+        public static void Main(params string[] args)
+            => XedWf.Go(args);
     }
 }

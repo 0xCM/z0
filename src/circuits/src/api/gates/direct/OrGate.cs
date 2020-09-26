@@ -7,13 +7,11 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     public readonly struct OrGate : IBinaryLogicGate
     {
-        internal static readonly OrGate Gate = default;        
-        
         [MethodImpl(Inline)]
         public bit Invoke(bit x, bit y)
             => (x | y);

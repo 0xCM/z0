@@ -12,5 +12,4 @@ namespace Z0.Logix
         public string Format()
             => string.Empty;
     }
-
 }

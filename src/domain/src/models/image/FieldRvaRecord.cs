@@ -30,7 +30,7 @@ namespace Z0
             Rva = rva;
             TypeName = typeName;
             FieldName = name;
-            Sig = sig;;
+            Sig = sig;
         }
 
         public int CompareTo(FieldRvaRecord src)

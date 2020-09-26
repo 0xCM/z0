@@ -27,7 +27,7 @@ namespace Z0
         public FS.FileExt FileExt
         {
             [MethodImpl(Inline)]
-            get => FilePath.FileExt;
+            get => FilePath.Ext;
         }
 
         public FS.FileName FileName

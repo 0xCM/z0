@@ -12,8 +12,38 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using I = System.Reflection.Metadata.Ecma335.TableIndex;
+
     partial class PeTableReader
     {
+        internal static TableIndex? index(Handle handle)
+        {
+            if(MetadataTokens.TryGetTableIndex(handle.Kind, out var table))
+                return table;
+            else
+                return null;
+        }
+
+        public static ConstantHandle ConstantHandle(uint row)
+            => MetadataTokens.ConstantHandle((int)row);
+
+        public static HandleInfo? describe(in ReaderState state, Handle handle)
+        {
+            if(!handle.IsNil)
+            {
+                var table = index(handle);
+                var token = state.Reader.GetToken(handle);
+                if (table != null)
+                    return new HandleInfo(token, table.Value);
+            }
+
+            return null;
+        }
+
+        [MethodImpl(Inline), Op]
+        public static int ConstantCount(in ReaderState state)
+            => state.Reader.GetTableRowCount(I.Constant);
+
         public static ReadOnlySpan<ImageConstantRecord> constants(in ReaderState state)
         {
             var reader = state.Reader;

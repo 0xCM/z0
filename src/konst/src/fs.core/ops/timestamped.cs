@@ -11,11 +11,15 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost, Events]
-    public readonly partial struct WfEvents
+    partial struct FS
     {
-        [MethodImpl(Inline), Op]
-        public static IWfEventLog log(WfLogConfig config, bool clear = true)
-            => new WfEventLog(FilePath.Define(config.StatusLog.Name), FilePath.Define(config.ErrorLog.Name), clear);
+        [Op]
+        public static FilePath timestamped(FilePath src)
+        {
+            var name = src.FileName.WithoutExtension;
+            var ext = src.Ext;
+            var stamped = file(text.format("{0}.{1}.{2}", name, z.timestamp(), ext));
+            return src.FolderPath + stamped;
+        }
     }
 }

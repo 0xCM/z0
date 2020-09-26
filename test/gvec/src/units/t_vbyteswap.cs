@@ -39,7 +39,7 @@ namespace Z0
                 0xFFFF0000, 0x0000FFFF,
                 0xFF000000, 0x000000FF
                 );
-            var y32 = Vectors.vparts(n128,
+            var y32 = z.vparts(n128,
                 0x0000FFFF, 0xFFFF0000,
                 0x000000FF, 0xFF000000
                 );

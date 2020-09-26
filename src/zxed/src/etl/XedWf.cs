@@ -9,6 +9,7 @@ namespace Z0.Xed
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Reflection;
 
     using static z;
     using static Konst;
@@ -22,6 +23,19 @@ namespace Z0.Xed
     [ApiHost]
     public readonly ref struct XedWf
     {
+
+        public static void Go(params string[] args)
+        {
+            var control = Assembly.GetEntryAssembly();
+            var modules = Flow.modules(control, args);
+            var context = Flow.context(control, modules, args);
+            var wfInit = new WfInit(context, args, modules);
+            var settings = wfInit.Settings;
+            using var wf = Flow.shell(wfInit);
+            using var step = new XedWf(wf, new XedConfig(wf, settings));
+            step.Run();
+        }
+
         readonly XedConfig Config;
 
         readonly XedSettings Settings;

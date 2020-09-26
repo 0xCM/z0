@@ -17,6 +17,15 @@ namespace Z0
 
     partial struct z
     {
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static void vstore<T>(Vector128<T> src, ref Cell128 dst)
+            where T : unmanaged
+                => z.vsave(src, ref Cells.head<Cell128,T>(ref dst));
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static void vstore<T>(Vector256<T> src, ref Cell256 dst)
+            where T : unmanaged
+                => z.vsave(src, ref Cells.head<Cell256,T>(ref dst));
 
         /// <summary>
         /// Stores the source vector to the head of a blocked container

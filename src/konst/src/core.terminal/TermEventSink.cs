@@ -22,41 +22,31 @@ namespace Z0
         readonly CorrelationToken Ct;
 
         [MethodImpl(Inline)]
-        public TermEventSink(CorrelationToken ct)
+        internal TermEventSink(CorrelationToken ct)
             => Ct = ct;
 
         [MethodImpl(Inline)]
         public void Deposit<E>(in E e)
             where E : IAppEvent
-        {
-            term.print(e.Format(), e.Flair);
-        }
+                => term.print(e.Format(), e.Flair);
 
+        [MethodImpl(Inline)]
         public void Deposit(IAppMsg e)
-        {
-            term.print(e);
-        }
+            => term.print(e);
 
+        [MethodImpl(Inline)]
         public void Deposit(IWfEvent e)
-        {
-            term.print(e);
-        }
+            => term.print(e);
 
+        [MethodImpl(Inline)]
         public void Deposit(IAppEvent e)
-        {
-            term.print(e);
-        }
+            => term.print(e);
 
-        public void Deposit<T>(T content, CorrelationToken ct, MessageKind kind = MessageKind.Info,
-            [Caller]string caller = null, [File] string file = null, [Line] int? line = null)
-        {
-            var msg = AppMsg.called(content, kind, caller, file, line);
-            term.print(msg);
-        }
+        [MethodImpl(Inline)]
+        public void Deposit<T>(T content, CorrelationToken ct, MessageKind kind = MessageKind.Info, [Caller]string caller = null, [File] string file = null, [Line] int? line = null)
+                => term.print(AppMsg.called(content, kind, caller, file, line));
 
         public void Dispose()
-        {
-            Deposit("Finished", Ct);
-        }
+            => Deposit("Finished", Ct);
     }
 }

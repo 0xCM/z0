@@ -2,14 +2,12 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-
-[assembly: PartId(PartId.ToolDocs)]
-
-namespace Z0.Parts
+namespace Z0
 {
-    public sealed class ToolDocs : Part<ToolDocs>
-    {
+    using System;
+    using System.Runtime.CompilerServices;
 
-    }
+    using static Part;
+
+
 }
-

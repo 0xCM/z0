@@ -9,9 +9,9 @@ namespace Z0
 
     using static Konst;
     using static Memories;
-    
+
     public class t_bg_define : t_bitgrids<t_bg_define>
-    {        
+    {
         public void bg_define_3x5x8()
             => nbg_define_check(n3, n5, z8);
 
@@ -74,7 +74,7 @@ namespace Z0
             for(var col = 0; col < n; col++)
                 Claim.Eq(grid[row,col], matrix[row,col]);
 
-            nbg_define_check(n,n,zero);                
+            nbg_define_check(n,n,zero);
         }
 
         public void nbg_define_basecase()
@@ -87,8 +87,8 @@ namespace Z0
             // ....
             //32 32 32 32   row[127]
 
-            // Linear index 0 ... 511            
-            // 0    1   2   3 
+            // Linear index 0 ... 511
+            // 0    1   2   3
             // 4    5   6   7
             // 8    9   10  11
             // ...
@@ -97,27 +97,26 @@ namespace Z0
             // 504 505 506 507
             // 508 509 510 511
 
-
             var w = n512;
             var n = n128;
             var cpr = 4; //cells per row
 
-            var grid = BitGrid.alloc(n128, n128, z32);            
+            var grid = BitGrid.alloc(n128, n128, z32);
             Random.Fill(grid);
-            
+
             var g128 = grid.Content.Reblock(n128);
             var g32 = grid.Content.Reblock(n32);
             Claim.eq(g32.BlockCount,w);
 
             ref var g32src = ref g32.Head;
-            
-            var row124 = Vectors.vload(n, g32.BlockRef(124*cpr));
-            var row125 = Vectors.vload(n, g32.BlockRef(125*cpr));
-            var row126 = Vectors.vload(n, g32.BlockRef(126*cpr));
-            var row127 = Vectors.vload(n, g32.BlockRef(127*cpr));
-            
-            var diagA = dvec.vgather(n, in g32src, Vectors.vparts(n, 496, 501, 506, 511));
-            var diagB = Vectors.vparts(n, g32[496], g32[501], g32[506], g32[511]);
+
+            var row124 = z.vload(n, g32.BlockRef(124*cpr));
+            var row125 = z.vload(n, g32.BlockRef(125*cpr));
+            var row126 = z.vload(n, g32.BlockRef(126*cpr));
+            var row127 = z.vload(n, g32.BlockRef(127*cpr));
+
+            var diagA = dvec.vgather(n, in g32src, z.vparts(n, 496, 501, 506, 511));
+            var diagB = z.vparts(n, g32[496], g32[501], g32[506], g32[511]);
             Claim.veq(diagA,diagB);
         }
     }

@@ -199,11 +199,11 @@ namespace Z0
             {
                 var xs = Random.Blocks<ulong>(n);
                 var x = xs.LoadVector();
-                Claim.veq(x,Vectors.vparts(n, xs[0], xs[1], xs[2], xs[3]));
+                Claim.veq(x, z.vparts(n, xs[0], xs[1], xs[2], xs[3]));
 
                 var ys = Random.Blocks<ulong>(n);
                 var y = ys.LoadVector();
-                Claim.veq(y,Vectors.vparts(n, ys[0], ys[1], ys[2], ys[3]));
+                Claim.veq(y, z.vparts(n, ys[0], ys[1], ys[2], ys[3]));
 
                 var m = z.vblendspec(n256,false,n64);
                 var es = SpanBlocks.alloc<ulong>(n);

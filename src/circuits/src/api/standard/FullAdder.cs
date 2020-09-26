@@ -8,11 +8,11 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
 
     [ApiHost]
-    public class FullAdder : IApiHost<FullAdder>
+    public class FullAdder
     {
         [MethodImpl(Inline), Op]
         public static void Compute(bit x, bit y, bit cin, out bit sum, out bit cout)
@@ -56,7 +56,7 @@ namespace Z0
             sum = gmath.xor(a, cin);
             cout = gmath.or(b, c);
         }
-        
+
         [MethodImpl(Inline), Op, NumericClosures(UnsignedInts)]
         public static void Compute<T>(Vector256<T> x, Vector256<T> y, Vector256<T> cin, out Vector256<T> sum, out Vector256<T> cout)
             where T : unmanaged

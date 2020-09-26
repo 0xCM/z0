@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="src">The source cell width selector</param>
         /// <param name="dst">The target cell width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> packusLo(N256 w, N32 src, N16 dst)
+        public static Vector256<byte> vpackuslo(N256 w, N32 src, N16 dst)
             => z.vload(w,PackUSLo32x256x16u);
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="src">The source cell width selector</param>
         /// <param name="dst">The target cell width selector</param>
         [MethodImpl(Inline), Op]
-        public static Vector256<byte> packusHi(N256 w, N32 src, N16 dst)
+        public static Vector256<byte> vpackushi(N256 w, N32 src, N16 dst)
             => z.vload(w,PackUSHi32x256x16u);
     }
 }

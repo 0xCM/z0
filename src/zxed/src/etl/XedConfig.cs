@@ -25,7 +25,6 @@ namespace Z0
         public FS.FileName SummaryFile
             => FS.file(text.format("{0}.{1}", "xed", "summary"), DataFileExt);
 
-
         public readonly XedSettings Settings;
 
         public readonly FS.FolderPath SourceRoot;

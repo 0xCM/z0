@@ -1603,8 +1603,11 @@ namespace Z0.Xed
         XED_ICLASS_XSAVES,
         XED_ICLASS_XSAVES64,
         XED_ICLASS_XSETBV,
+
         XED_ICLASS_XSTORE,
+
         XED_ICLASS_XTEST,
+
         XED_ICLASS_LAST
     }
 }

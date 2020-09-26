@@ -147,27 +147,6 @@ namespace Z0
 
         public ReadOnlySpan<ImageFieldTable> ReadFields()
             => PeTableReader.fields(State);
-        // {
-        //     var reader = State.Reader;
-        //     var handles = reader.FieldDefinitions.ToReadOnlySpan();
-        //     var count = handles.Length;
-        //     var dst = Spans.alloc<ImageFieldTable>(count);
-
-        //     for(var i=0u; i<count; i++)
-        //     {
-        //         ref readonly var handle = ref skip(handles,i);
-        //         var entry = reader.GetFieldDefinition(handle);
-        //         int offset = entry.GetOffset();
-
-        //         seek(dst,i) = new ImageFieldTable(
-        //             seq: i,
-        //             name: name(State, entry, i),
-        //             sig: sig(State, entry, i),
-        //             attribs: format(entry.Attributes)
-        //         );
-        //     }
-        //     return dst;
-        // }
 
         public ReadOnlySpan<FieldRvaRecord> ReadFieldRva()
             => rva(State);

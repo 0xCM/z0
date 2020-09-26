@@ -15,6 +15,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static bool has(FilePath src, FileExt ext)
-            => src.FileExt == ext;
+            => src.Ext == ext;
     }
 }
