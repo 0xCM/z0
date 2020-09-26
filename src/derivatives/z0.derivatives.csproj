@@ -2,11 +2,16 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="$(Part)" />
   </ItemGroup>
+
+   <ItemGroup>
+    <Compile Include="lib/**/*.*" />
+   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Win32.Registry" Version="4.7.0" />

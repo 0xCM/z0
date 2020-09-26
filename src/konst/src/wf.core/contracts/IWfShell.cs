@@ -139,6 +139,9 @@ namespace Z0
         void Disposed(WfStepId step)
             => Raise(WfEvents.disposed(step, Ct));
 
+        void Disposed<T>(WfStepId step, T payload)
+            => Raise(WfEvents.disposed(step, payload, Ct));
+
         void Created<H>(H host)
             where H : IWfHost<H>, new()
                 => Raise(WfEvents.created(host.Id, Ct));

@@ -14,7 +14,6 @@ namespace Z0
             using var wf = Flow.shell(args);
             using var runner = new WfRunner(wf);
             runner.Run();
-            // iter(wf.Modules.Files, m => wf.Raise(WfEvents.data(m, wf.Ct)));
             return 0;
         }
     }

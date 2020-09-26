@@ -15,14 +15,14 @@ namespace Z0
     }
 
     [Free]
-    public interface IWfRunner<A> : IWfRunner
+    public interface IWfRunner<A>
     {
         void Run(A args);
     }
 
     [Free]
     public interface IWfRunner<H,A> : IWfRunner<H>
-        where H : struct, IWfRunner<H,A>
+        where H : IWfRunner<H,A>
     {
     }
 }

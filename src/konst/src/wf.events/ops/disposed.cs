@@ -11,8 +11,23 @@ namespace Z0
 
     partial struct WfEvents
     {
+        /// <summary>
+        /// Defines a <see cref='WfDisposed'/> event
+        /// </summary>
+        /// <param name="id">The step identifier</param>
+        /// <param name="ct">The correlation token</param>
         [MethodImpl(Inline), Op]
         public static WfDisposed disposed(WfStepId step, CorrelationToken ct)
             => new WfDisposed(step,ct);
+
+        /// <summary>
+        /// Defines a <see cref='WfDisposed{T}'/> event that carries a specified payload
+        /// </summary>
+        /// <param name="id">The step identifier</param>
+        /// <param name="payload">The payload data</param>
+        /// <param name="ct">The correlation token</param>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static WfDisposed<T> disposed<T>(WfStepId step, T payload, CorrelationToken ct)
+            => new WfDisposed<T>(step,payload,ct);
     }
 }

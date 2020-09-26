@@ -32,6 +32,12 @@ namespace Z0
         public static WfStepCreated<T> created<T>(WfStepId id, T content, CorrelationToken ct, FlairKind flair = Created)
             => new WfStepCreated<T>(id, content, ct, flair);
 
+        /// <summary>
+        /// Defines a <see cref='ToolCreated'/> event
+        /// </summary>
+        /// <param name="tool"></param>
+        /// <param name="ct"></param>
+        /// <param name="flair"></param>
         [MethodImpl(Inline), Op]
         public static ToolCreated created(WfToolId tool, CorrelationToken ct, FlairKind flair = Created)
             => new ToolCreated(tool, ct, flair);
