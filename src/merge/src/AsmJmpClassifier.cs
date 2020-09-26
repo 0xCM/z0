@@ -10,72 +10,72 @@ namespace Z0
 
     using Z0.Asm;
 
-    public struct AsmJmpClassifier : IAsmHandler<AsmJmpClassifier>
+    public struct AsmJmpClassifier
     {
         public Outcome<JmpKind> Result;
 
-        public void Handle<T>(in T src)
-            where T : struct, IAsmInstruction<T>
+        public static Outcome<JmpKind> classify(Mnemonic src)
         {
-            var kind = JmpKind.None;
+            Outcome<JmpKind> kind = default;
 
-            switch(src.Mnemonic)
+            switch(src)
             {
                 case Mnemonic.Ja:
-                    Result = JmpKind.JA;
+                    kind = JmpKind.JA;
                     break;
                 case Mnemonic.Jae:
-                    Result = JmpKind.JAE;
+                    kind = JmpKind.JAE;
                     break;
                 case Mnemonic.Jb:
-                    Result = JmpKind.JB;
+                    kind = JmpKind.JB;
                     break;
                 case Mnemonic.Jbe:
-                    Result = JmpKind.JE;
+                    kind = JmpKind.JE;
                     break;
                 case Mnemonic.Jcxz:
-                    Result = JmpKind.JCXZ;
+                    kind = JmpKind.JCXZ;
                     break;
                 case Mnemonic.Je:
-                    Result = JmpKind.JE;
+                    kind = JmpKind.JE;
                     break;
                 case Mnemonic.Jg:
-                    Result = JmpKind.JG;
+                    kind = JmpKind.JG;
                     break;
                 case Mnemonic.Jge:
-                    Result = JmpKind.JGE;
+                    kind = JmpKind.JGE;
                     break;
                 case Mnemonic.Jl:
-                    Result = JmpKind.JL;
+                    kind = JmpKind.JL;
                     break;
                 case Mnemonic.Jle:
-                    Result = JmpKind.JLE;
+                    kind = JmpKind.JLE;
                     break;
                 case Mnemonic.Jmp:
-                    Result = JmpKind.JMP;
+                    kind = JmpKind.JMP;
                     break;
                 case Mnemonic.Jne:
-                    Result = JmpKind.JNE;
+                    kind = JmpKind.JNE;
                     break;
                 case Mnemonic.Jno:
-                    Result = JmpKind.JNO;
+                    kind = JmpKind.JNO;
                     break;
                 case Mnemonic.Jnp:
-                    Result = JmpKind.JNP;
+                    kind = JmpKind.JNP;
                     break;
                 case Mnemonic.Jns:
-                    Result = JmpKind.JNS;
+                    kind = JmpKind.JNS;
                     break;
                 case Mnemonic.Jo:
-                    Result = JmpKind.JO;
+                    kind = JmpKind.JO;
                     break;
                 case Mnemonic.Jp:
-                    Result= JmpKind.JP;
+                    kind= JmpKind.JP;
                     break;
                 default:
-                    Result = z.fail<JmpKind>(text.format("{0} unanticipated", src.Mnemonic));
+                    kind = z.fail<JmpKind>(text.format("{0} unanticipated", src));
                 break;
             }
+            return kind;
         }
     }
 }

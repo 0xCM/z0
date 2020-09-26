@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Describes an instruction within the context of the defining api member
     /// </summary>
-    public readonly struct ApiInstruction : IAsmInstruction<ApiInstruction>
+    public readonly struct ApiInstruction
     {
         public ApiCodeBlock Encoded {get;}
 
@@ -46,29 +46,6 @@ namespace Z0.Asm
         /// </summary>
         public int ByteLength
             => Instruction.ByteLength;
-
-        [MethodImpl(Inline)]
-        public static ApiInstruction define(MemoryAddress @base, Instruction fx, ApiCodeBlock encoded)
-            => new ApiInstruction(@base, fx, encoded);
-
-        public static ApiInstruction[] map(ApiCodeBlock code, Instruction[] src)
-        {
-            var @base = code.Base;
-            var offseq = OffsetSequence.Zero;
-            var count = src.Length;
-            var dst = new ApiInstruction[count];
-
-            for(ushort i=0; i<count; i++)
-            {
-                var fx = src[i];
-                var data = z.span(code.Code.Data);
-                var slice = data.Slice((int)offseq.Offset, fx.ByteLength).ToArray();
-                var recoded = new ApiCodeBlock(code.Uri, fx.IP, slice);
-                dst[i] = define(@base, fx, recoded);
-                offseq = offseq.AccrueOffset((uint)fx.ByteLength);
-            }
-            return dst;
-        }
 
         [MethodImpl(Inline)]
         public ApiInstruction(MemoryAddress @base, Instruction fx, ApiCodeBlock encoded)

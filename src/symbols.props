@@ -34,6 +34,8 @@
     <AsmServices>$(Src)asm.services/z0.asm.services.csproj</AsmServices>
     <AsmDecoders>$(Src)asm.decoders/z0.asm.decoders.csproj</AsmDecoders>
 
+    <Merge>$(Src)merge/z0.merge.csproj</Merge>
+
     <Encoded>$(Src)encoded/z0.encoded.csproj</Encoded>
 
     <Run>$(Src)run/z0.run.csproj</Run>

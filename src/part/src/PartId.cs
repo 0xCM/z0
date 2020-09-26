@@ -16,8 +16,6 @@ public enum PartId : ulong
 
     Konst = 3,
 
-    KonstShell = Konst | Shell,
-
     Math = 4,
 
     BitMasks = 5,
@@ -36,6 +34,8 @@ public enum PartId : ulong
 
     Imagine = 20,
 
+    KonstShell = 21,
+
     Memories = 24,
 
     Json = 28,
@@ -49,6 +49,7 @@ public enum PartId : ulong
     Tools = 40,
 
     ToolDocs = 41,
+
 
     // ~ 50
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -109,6 +110,8 @@ public enum PartId : ulong
     Matrix = 117,
 
     Machines = 118,
+
+    Merge = 119,
 
     Identity = 120,
 

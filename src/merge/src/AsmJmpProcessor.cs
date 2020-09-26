@@ -13,7 +13,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-
     public interface IJmpProcessor
     {
         void OnJA(ApiInstruction src)
@@ -78,65 +77,7 @@ namespace Z0
         void Dispatch(in ApiInstruction fx)
         {
             var mnemonic = fx.Mnemonic;
-            var kind = JmpKind.None;
-            var classifier = new AsmJmpClassifier();
-            classifier.Handle(fx);
-            kind = classifier.Result;
-
-            // switch(fx.Mnemonic)
-            // {
-            //     case Mnemonic.Ja:
-            //         kind = JmpKind.JA;
-            //         break;
-            //     case Mnemonic.Jae:
-            //         kind = JmpKind.JAE;
-            //         break;
-            //     case Mnemonic.Jb:
-            //         kind = JmpKind.JB;
-            //         break;
-            //     case Mnemonic.Jbe:
-            //         kind = JmpKind.JE;
-            //         break;
-            //     case Mnemonic.Jcxz:
-            //         kind = JmpKind.JCXZ;
-            //         break;
-            //     case Mnemonic.Je:
-            //         kind = JmpKind.JE;
-            //         break;
-            //     case Mnemonic.Jg:
-            //         kind = JmpKind.JG;
-            //         break;
-            //     case Mnemonic.Jge:
-            //         kind = JmpKind.JGE;
-            //         break;
-            //     case Mnemonic.Jl:
-            //         kind = JmpKind.JL;
-            //         break;
-            //     case Mnemonic.Jle:
-            //         kind = JmpKind.JLE;
-            //         break;
-            //     case Mnemonic.Jmp:
-            //         kind = JmpKind.JMP;
-            //         break;
-            //     case Mnemonic.Jne:
-            //         kind = JmpKind.JNE;
-            //         break;
-            //     case Mnemonic.Jno:
-            //         kind = JmpKind.JNO;
-            //         break;
-            //     case Mnemonic.Jnp:
-            //         kind = JmpKind.JNP;
-            //         break;
-            //     case Mnemonic.Jns:
-            //         kind = JmpKind.JNS;
-            //         break;
-            //     case Mnemonic.Jo:
-            //         kind = JmpKind.JO;
-            //         break;
-            //     case Mnemonic.Jp:
-            //         kind = JmpKind.JP;
-            //         break;
-            // }
+            var kind = AsmJmpClassifier.classify(fx.Mnemonic);
 
             var dst = default(JmpInfo);
             Fill(fx, kind, ref dst);

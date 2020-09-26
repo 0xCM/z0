@@ -2,18 +2,15 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+
+[assembly: PartId(PartId.Merge)]
+
+namespace Z0.Parts
 {
-    using System;
-
-    using Z0.Asm;
-
-    using static Flow;
-    using static z;
-
-    [WfHost]
-    public sealed class EmitImageSummariesHost : WfHost<EmitImageSummariesHost>
+    public sealed class Merge : Part<Merge>
     {
-
+        public override PartId[] Needs
+            => parts(PartId.Konst);
     }
 }
+

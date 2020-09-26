@@ -479,29 +479,6 @@ namespace Z0.Asm
         //     Checks if it's a call far [mem] instruction
         public bool IsCallFarIndirect {get; set;}
 
-		/// <summary>
-		/// Creates an instruction
-		/// </summary>
-		/// <param name="code">Code value</param>
-		/// <param name="memory">Memory operand</param>
-		public static Instruction Create(OpCodeId code, in MemoryOperand memory) {
-			Instruction instruction = default;
-			instruction.Code = code;
-
-			instruction.Op0Kind = OpKind.Memory;
-			instruction.MemoryBase = memory.Base;
-			instruction.MemoryIndex = memory.Index;
-			instruction.MemoryIndexScale = memory.Scale;
-			instruction.MemoryDisplSize = memory.DisplSize;
-			instruction.MemoryDisplacement = (uint)memory.Displacement;
-			instruction.IsBroadcast = memory.IsBroadcast;
-			instruction.SegmentPrefix = memory.SegmentPrefix;
-
-			Debug.Assert(instruction.OpCount == 1);
-			return instruction;
-		}
-
-
         public override string ToString()
             => FormattedInstruction;
     }

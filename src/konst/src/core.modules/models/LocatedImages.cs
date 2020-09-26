@@ -12,15 +12,12 @@ namespace Z0
 
     public readonly struct LocatedImages
     {
-        public static int summarize(LocatedImages x)
-            => 0;
-        
         public readonly LocatedImage[] Data;
 
         [MethodImpl(Inline)]
         public LocatedImages(LocatedImage[] src)
             => Data = src;
-        
+
         [MethodImpl(Inline)]
         public static implicit operator LocatedImages(LocatedImage[] src)
             => new LocatedImages(src);

@@ -5,17 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Linq;
-
     using Z0.Asm;
 
     using static Konst;
+    using static z;
 
-    partial struct asm
+    [Step]
+    public sealed class ProcessInstructionsStep : WfHost<ProcessInstructionsStep>
     {
-        [MethodImpl(Inline)]
-        public static ApiRoutine routine(MemoryAddress @base, ApiCodeBlock uriCode, Instruction[] src)
-            => new ApiRoutine(@base, ApiInstruction.map(uriCode, src));
+        public static void run(IWfShell wf, ApiPartRoutines fx)
+        {
+            var step = new ProcessInstructions(wf, new ProcessInstructionsStep(), fx);
+            step.Run();
+        }
     }
 }

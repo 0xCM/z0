@@ -73,24 +73,6 @@ namespace Z0
             Wf.Ran(Host);
         }
 
-        void Index(ReadOnlySpan<ApiParseBlock> src, CaptureIndexBuilder dst)
-        {
-            var count = src.Length;
-            for(var i=0; i<count; i++)
-                Index(skip(src,i), dst);
-        }
-
-        void Index(in ApiParseBlock src, CaptureIndexBuilder dst)
-        {
-            if(src.Address.IsEmpty)
-                return;
-
-            var code = new ApiCodeBlock(src.Uri, src.Data);
-            var inclusion = dst.Include(code);
-            if(inclusion.Any(x => x == false))
-                Wf.Warn(Host.Id, $"Duplicate | {src.Uri.Format()}");
-        }
-
         Span<ApiPartRoutines> DecodeParts(ApiCaptureIndex src)
         {
             Wf.Status(Host.Id, text.format("Decoding {0} entries from {1} parts", src.EntryCount, src.Parts.Length));
@@ -113,7 +95,6 @@ namespace Z0
                 }
                 else
                 {
-
                     var hosts = src.Hosts.Where(h => h.Owner == part);
                     Wf.Status(Host.Id, text.format("Decoding {0}", part.Format()));
 
@@ -142,7 +123,7 @@ namespace Z0
 
         ApiHostRoutines Decode(ApiHostCodeBlocks hcs)
         {
-            var instructions = Root.list<ApiRoutine>();
+            var instructions = list<ApiRoutine>();
             var ip = MemoryAddress.Empty;
             var decoder = State.RoutineDecoder;
             var target = Buffer;
@@ -156,7 +137,7 @@ namespace Z0
                 if(i == 0)
                     ip = Buffer[0].IP;
 
-                instructions.Add(asm.routine(ip, uriCode, Buffer.ToArray()));
+                instructions.Add(AsmProjections.project(ip, uriCode, Buffer.ToArray()));
             }
 
             return new ApiHostRoutines(hcs.Host, instructions.ToArray());
@@ -224,16 +205,17 @@ namespace Z0
         }
 
         void Process(ApiPartRoutines fx)
-        {
-            try
-            {
-                var step = new ProcessInstructions(Wf, new ProcessInstructionsStep(), fx);
-                step.Run();
-            }
-            catch(Exception e)
-            {
-                Wf.Error(Host,e);
-            }
-        }
+            => ProcessInstructionsStep.run(Wf, fx);
+        // {
+        //     try
+        //     {
+        //         var step = new ProcessInstructions(Wf, new ProcessInstructionsStep(), fx);
+        //         step.Run();
+        //     }
+        //     catch(Exception e)
+        //     {
+        //         Wf.Error(Host,e);
+        //     }
+        // }
     }
 }

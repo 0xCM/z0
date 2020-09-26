@@ -10,12 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [Step]
-    public sealed class ProcessInstructionsStep : WfHost<ProcessInstructionsStep>
-    {
-
-    }
-
     public ref struct ProcessInstructions
     {
         readonly IWfShell Wf;
@@ -50,7 +44,7 @@ namespace Z0
             {
                 ProcessJumps();
                 AsmProcessors.parts(Wf).Process(Source);
-                SemanticRender.render(Source);
+                SemanticRenderSvc.run(Source);
             }
             catch(Exception e)
             {

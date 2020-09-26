@@ -52,7 +52,8 @@ namespace Z0
                 Run(new EmitFieldLiteralsHost());
                 Run(new EmitContentCatalogHost());
                 Run(new EmitBitMasksHost());
-                Run(new CreateGlobalIndexHost());
+                //Run(new CreateGlobalIndexHost());
+                CreateCaptureIndexHost.run(Wf, State);
 
             }
             catch(Exception e)
@@ -63,13 +64,13 @@ namespace Z0
             Wf.Ran(Host);
         }
 
-        void Run(CreateGlobalIndexHost host)
-        {
-            Wf.Running(host.Id);
-            using var step = new CreateCaptureIndex(Wf, host, State, ApiArchives.partfiles(Wf.CaptureRoot));
-            step.Run();
-            Wf.Ran(host.Id);
-        }
+        // void Run(CreateGlobalIndexHost host)
+        // {
+        //     Wf.Running(host.Id);
+        //     using var step = new CreateCaptureIndex(Wf, host, State, ApiArchives.partfiles(Wf.CaptureRoot));
+        //     step.Run();
+        //     Wf.Ran(host.Id);
+        // }
 
         void Run(EmitImageConstantsHost host)
             => host.Run(Wf);
