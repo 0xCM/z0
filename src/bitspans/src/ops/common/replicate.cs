@@ -10,7 +10,7 @@ namespace Z0
     partial class BitSpans
     {
         /// <summary>
-        /// Replicates the content of a source bitspan into a target bitspan, repeatedly 
+        /// Replicates the content of a source bitspan into a target bitspan, repeatedly
         /// or partially depending on the available space in the target
         /// </summary>
         /// <param name="src">The source bits</param>
@@ -24,8 +24,8 @@ namespace Z0
             {
                 var q = dst.Length / src.Length;
                 var r = dst.Length % src.Length;
-                for(var i=0; i<q; i++)                
-                    src.Data.CopyTo(dst.Data, i*src.Length);                
+                for(var i=0; i<q; i++)
+                    src.Data.CopyTo(dst.Data, i*src.Length);
                 src.Data.Slice(0,r).CopyTo(dst.Data, q*src.Length);
             }
             else
@@ -44,10 +44,10 @@ namespace Z0
         [Op]
         public static BitSpan replicate(in BitSpan src, int count = 1)
         {
-            Span<bit> data = new bit[src.Length * count];
+            Span<Bit32> data = new Bit32[src.Length * count];
             for(var i=0; i<count; i++)
                 src.Data.CopyTo(data, i*src.Length);
-            return load(data);                
-        }        
+            return load(data);
+        }
     }
 }

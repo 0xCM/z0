@@ -7,24 +7,24 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
 
     partial struct BitLogix
     {
         [MethodImpl(Inline), Op]
-        public static bit not(bit a)
+        public static Bit32 not(Bit32 a)
             => !a;
 
         [MethodImpl(Inline), Op]
-        public static bit identity(bit a)
+        public static Bit32 identity(Bit32 a)
             => a;
 
         [MethodImpl(Inline), Op]
-        public static bit @false(bit a)
-            => bit.Off;
+        public static Bit32 @false(Bit32 a)
+            => Bit32.Off;
 
         [MethodImpl(Inline), Op]
-        public static bit @true(bit a)
-            => bit.On;
+        public static Bit32 @true(Bit32 a)
+            => Bit32.On;
     }
 }

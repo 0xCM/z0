@@ -14,13 +14,13 @@ namespace Z0
     /// An anti-succinct representation of a bit
     /// </summary>
     [
-        IdentityProvider(typeof(bit)),
+        IdentityProvider(typeof(Bit32)),
         UserType(UserTypeId.BitId),
         Width(TypeWidth.W1),
-        ConversionProvider(typeof(BitDataTypeConverter)),
+        ConversionProvider(typeof(Bit32Converter)),
         ApiHost
     ]
-    public readonly struct bit : ITextual<bit>, ITypeIdentityProvider<bit>
+    public readonly struct Bit32 : ITextual<Bit32>, ITypeIdentityProvider<Bit32>
     {
         public const char Zero = '0';
 
@@ -29,11 +29,11 @@ namespace Z0
         readonly uint state;
 
         [MethodImpl(Inline), Op]
-        unsafe bit(bool on)
+        unsafe Bit32(bool on)
             => this.state  = *((byte*)(&on));
 
         [MethodImpl(Inline)]
-        bit(uint state)
+        Bit32(uint state)
             => this.state = state;
 
         [MethodImpl(Inline), Op]
@@ -41,18 +41,18 @@ namespace Z0
             => (char)(state + 48);
 
         [MethodImpl(Inline), Op]
-        public static bit Parse(char c)
+        public static Bit32 Parse(char c)
             => c == One;
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T generic<T>(bit src)
-            => Unsafe.As<bit,T>(ref src);
+        public static T generic<T>(Bit32 src)
+            => Unsafe.As<Bit32,T>(ref src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static bit specific<T>(T src)
-            => Unsafe.As<T,bit>(ref src);
+        public static Bit32 specific<T>(T src)
+            => Unsafe.As<T,Bit32>(ref src);
 
-        public static bit Parse(string src)
+        public static Bit32 Parse(string src)
             => OnLabels.Contains(src.Trim().ToLower());
 
         static string[] OnLabels
@@ -61,32 +61,32 @@ namespace Z0
         /// <summary>
         /// Constructs a disabled bit
         /// </summary>
-        public static bit Off
+        public static Bit32 Off
         {
              [MethodImpl(Inline)]
-             get  => new bit(0u);
+             get  => new Bit32(0u);
         }
 
         /// <summary>
         /// Constructs an enabled bit
         /// </summary>
-        public static bit On
+        public static Bit32 On
         {
              [MethodImpl(Inline)]
-             get  => new bit(1u);
+             get  => new Bit32(1u);
         }
 
-        public static bit[] B01
+        public static Bit32[] B01
         {
             [MethodImpl(Inline)]
-            get => new bit[]{Off,On};
+            get => new Bit32[]{Off,On};
         }
 
         [MethodImpl(Inline), Op]
-        public unsafe static bit From(bool src)
+        public unsafe static Bit32 From(bool src)
         {
             uint state = *((byte*)(&src));
-            return new bit(state);
+            return new Bit32(state);
         }
 
         /// <summary>
@@ -95,8 +95,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static bit test(sbyte src, byte pos)
-            => new bit((src & (1 << pos)) != 0);
+        public static Bit32 test(sbyte src, byte pos)
+            => new Bit32((src & (1 << pos)) != 0);
 
         /// <summary>
         /// Tests the state of an index-identified source bit
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static bit test(byte src, int pos)
+        public static Bit32 test(byte src, int pos)
             => Wrap(((uint)src >> pos) & 1);
 
         /// <summary>
@@ -113,8 +113,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static bit test(short src, int pos)
-            => new bit((src & (1 << pos)) != 0);
+        public static Bit32 test(short src, int pos)
+            => new Bit32((src & (1 << pos)) != 0);
 
         /// <summary>
         /// Tests the state of an index-identified source bit
@@ -122,7 +122,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static bit test(ushort src, int pos)
+        public static Bit32 test(ushort src, int pos)
             => Wrap(((uint)src >> pos) & 1);
 
         /// <summary>
@@ -131,8 +131,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static bit test(int src, int pos)
-            => new bit((src & (1 << pos)) != 0);
+        public static Bit32 test(int src, int pos)
+            => new Bit32((src & (1 << pos)) != 0);
 
         /// <summary>
         /// Tests the state of an index-identified source bit
@@ -140,8 +140,8 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static bit test(long src, int pos)
-            => new bit((src & (1L << pos)) != 0);
+        public static Bit32 test(long src, int pos)
+            => new Bit32((src & (1L << pos)) != 0);
 
         /// <summary>
         /// Tests the state of an index-identified source bit
@@ -149,7 +149,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static bit test(uint src, int pos)
+        public static Bit32 test(uint src, int pos)
             => Wrap((src >> pos) & 1);
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static bit test(ulong src, int pos)
+        public static Bit32 test(ulong src, int pos)
             => Wrap((uint)((src >> pos) & 1));
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static sbyte set(sbyte src, byte pos, bit state)
+        public static sbyte set(sbyte src, byte pos, Bit32 state)
         {
             var c = ~(sbyte)state + 1;
             src ^= (sbyte)((c ^ src) & (1 << pos));
@@ -182,7 +182,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static byte set(byte src, byte pos, bit state)
+        public static byte set(byte src, byte pos, Bit32 state)
         {
             var c = ~(byte)state + 1;
             src ^= (byte)((c ^ src) & (1 << pos));
@@ -196,7 +196,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static short set(short src, byte pos, bit state)
+        public static short set(short src, byte pos, Bit32 state)
         {
             var c = ~(short)state + 1;
             src ^= (short)((c ^ src) & (1 << pos));
@@ -210,7 +210,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static ushort set(ushort src, byte pos, bit state)
+        public static ushort set(ushort src, byte pos, Bit32 state)
         {
             var c = ~(ushort)state + 1;
             src ^= (ushort)((c ^ src) & (1 << pos));
@@ -224,7 +224,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static int set(int src, byte pos, bit state)
+        public static int set(int src, byte pos, Bit32 state)
         {
             var c = ~(int)state + 1;
             src ^= (c ^ src) & (1 << pos);
@@ -238,7 +238,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static uint set(uint src, byte pos, bit state)
+        public static uint set(uint src, byte pos, Bit32 state)
         {
             var c = ~(uint)state + 1u;
             src ^= (c ^ src) & (1u << pos);
@@ -252,7 +252,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static long set(long src, byte pos, bit state)
+        public static long set(long src, byte pos, Bit32 state)
         {
             var c = ~(long)state + 1L;
             src ^= (c ^ src) & (1L << pos);
@@ -266,7 +266,7 @@ namespace Z0
         /// <param name="index">The source bit index</param>
         /// <param name="value">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static ulong set(ulong src, byte pos, bit state)
+        public static ulong set(ulong src, byte pos, Bit32 state)
         {
             var c = ~(ulong)state + 1ul;
             src ^= (c ^ src) & (1ul << pos);
@@ -278,7 +278,7 @@ namespace Z0
         /// </summary>
         /// <param name="b">The source bit</param>
         [MethodImpl(Inline), Op]
-        public static bit identity(bit b)
+        public static Bit32 identity(Bit32 b)
             => b;
 
         /// <summary>
@@ -287,7 +287,7 @@ namespace Z0
         /// <param name="a">The left bit</param>
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline), Op]
-        public static bit and(bit a, bit b)
+        public static Bit32 and(Bit32 a, Bit32 b)
             => Wrap(a.state & b.state);
 
         /// <summary>
@@ -296,7 +296,7 @@ namespace Z0
         /// <param name="a">The left bit</param>
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline), Op]
-        public static bit or(bit a, bit b)
+        public static Bit32 or(Bit32 a, Bit32 b)
             => Wrap(a.state | b.state);
 
         /// <summary>
@@ -305,7 +305,7 @@ namespace Z0
         /// <param name="a">The left bit</param>
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline), Op]
-        public static bit xor(bit a, bit b)
+        public static Bit32 xor(Bit32 a, Bit32 b)
             => Wrap(a.state ^ b.state);
 
         /// <summary>
@@ -313,7 +313,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source bit</param>
         [MethodImpl(Inline), Op]
-        public static bit not(bit a)
+        public static Bit32 not(Bit32 a)
             => SafeWrap(~a.state);
 
         /// <summary>
@@ -322,7 +322,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Op]
-        public static bit nand(bit a, bit b)
+        public static Bit32 nand(Bit32 a, Bit32 b)
             => SafeWrap(~(a.state & b.state));
 
         /// <summary>
@@ -332,7 +332,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Logical_biconditional</remarks>
         [MethodImpl(Inline), Op]
-        public static bit nor(bit a, bit b)
+        public static Bit32 nor(Bit32 a, Bit32 b)
             => SafeWrap(~(a.state | b.state));
 
         /// <summary>
@@ -342,7 +342,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Logical_biconditional</remarks>
         [MethodImpl(Inline), Op]
-        public static bit xnor(bit a, bit b)
+        public static Bit32 xnor(Bit32 a, Bit32 b)
             => SafeWrap(~(a.state ^ b.state));
 
         /// <summary>
@@ -352,7 +352,7 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <remarks>See https://en.wikipedia.org/wiki/Material_conditional</remarks>
         [MethodImpl(Inline), Op]
-        public static bit impl(bit a, bit b)
+        public static Bit32 impl(Bit32 a, Bit32 b)
             => or(a,  not(b));
 
         /// <summary>
@@ -361,7 +361,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Op]
-        public static bit nonimpl(bit a, bit b)
+        public static Bit32 nonimpl(Bit32 a, Bit32 b)
             => and(not(a),  b);
 
         /// <summary>
@@ -370,7 +370,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Op]
-        public static bit cimpl(bit a, bit b)
+        public static Bit32 cimpl(Bit32 a, Bit32 b)
             => or(not(a),  b);
 
         /// <summary>
@@ -379,7 +379,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Op]
-        public static bit cnonimpl(bit a, bit b)
+        public static Bit32 cnonimpl(Bit32 a, Bit32 b)
             => and(a, not(b));
 
         /// <summary>
@@ -388,7 +388,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline), Op]
-        public static bit select(bit a, bit b, bit c)
+        public static Bit32 select(Bit32 a, Bit32 b, Bit32 c)
             => SafeWrap((a.state & b.state) | (~a.state & c.state));
 
         /// <summary>
@@ -396,7 +396,7 @@ namespace Z0
         /// </summary>
         /// <param name="b">The bit to test</param>
         [MethodImpl(Inline), Op]
-        public static bool operator true(bit b)
+        public static bool operator true(Bit32 b)
             => b.state != 0;
 
         /// <summary>
@@ -404,7 +404,7 @@ namespace Z0
         /// </summary>
         /// <param name="b">The bit to test</param>
         [MethodImpl(Inline), Op]
-        public static bool operator false(bit b)
+        public static bool operator false(Bit32 b)
             => b.state == 0;
 
         /// <summary>
@@ -412,15 +412,15 @@ namespace Z0
         /// </summary>
         /// <param name="state">The state of the bit to construct</param>
         [MethodImpl(Inline), Op]
-        public static implicit operator bit(bool state)
-            => new bit(state);
+        public static implicit operator Bit32(bool state)
+            => new Bit32(state);
 
         /// <summary>
         /// Implicitly constructs a bool from a bit
         /// </summary>
         /// <param name="state">The state of the bit to construct</param>
         [MethodImpl(Inline), Op]
-        public static implicit operator bool(bit src)
+        public static implicit operator bool(Bit32 src)
             => src.state != 0;
 
         /// <summary>
@@ -428,7 +428,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
-        public static explicit operator byte(bit src)
+        public static explicit operator byte(Bit32 src)
             => (byte)src.state;
 
         /// <summary>
@@ -436,7 +436,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
-        public static explicit operator sbyte(bit src)
+        public static explicit operator sbyte(Bit32 src)
             => (sbyte)src.state;
 
         /// <summary>
@@ -444,7 +444,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static explicit operator bit(byte src)
+        public static explicit operator Bit32(byte src)
             => SafeWrap(src);
 
         /// <summary>
@@ -452,7 +452,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
-        public static explicit operator ushort(bit src)
+        public static explicit operator ushort(Bit32 src)
             => (ushort)src.state;
 
         /// <summary>
@@ -460,7 +460,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
-        public static explicit operator short(bit src)
+        public static explicit operator short(Bit32 src)
             => (short)src.state;
 
         /// <summary>
@@ -468,7 +468,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static explicit operator bit(ushort src)
+        public static explicit operator Bit32(ushort src)
             => SafeWrap(src);
 
         /// <summary>
@@ -476,7 +476,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
-        public static explicit operator int(bit src)
+        public static explicit operator int(Bit32 src)
             => (int)src.state;
 
         /// <summary>
@@ -484,7 +484,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
-        public static implicit operator bit(int src)
+        public static implicit operator Bit32(int src)
             => SafeWrap(src);
 
         /// <summary>
@@ -492,7 +492,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
-        public static explicit operator uint(bit src)
+        public static explicit operator uint(Bit32 src)
             => src.state;
 
         /// <summary>
@@ -500,7 +500,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
-        public static explicit operator long(bit src)
+        public static explicit operator long(Bit32 src)
             => src.state;
 
         /// <summary>
@@ -508,7 +508,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
-        public static explicit operator float(bit src)
+        public static explicit operator float(Bit32 src)
             => src.state;
 
         /// <summary>
@@ -516,7 +516,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
-        public static explicit operator double(bit src)
+        public static explicit operator double(Bit32 src)
             => src.state;
 
         /// <summary>
@@ -524,7 +524,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static explicit operator bit(uint src)
+        public static explicit operator Bit32(uint src)
             => SafeWrap(src);
 
         /// <summary>
@@ -532,15 +532,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bit</param>
         [MethodImpl(Inline), Op]
-        public static explicit operator ulong(bit src)
+        public static explicit operator ulong(Bit32 src)
             => src.state;
 
         [MethodImpl(Inline), Op]
-        public static implicit operator bit(BitState src)
-            => new bit((byte)src);
+        public static implicit operator Bit32(BitState src)
+            => new Bit32((byte)src);
 
         [MethodImpl(Inline), Op]
-        public static implicit operator BitState(bit src)
+        public static implicit operator BitState(Bit32 src)
             => (BitState)(byte)src;
 
         /// <summary>
@@ -548,7 +548,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static explicit operator bit(ulong src)
+        public static explicit operator Bit32(ulong src)
             => SafeWrap(src);
 
         /// <summary>
@@ -557,7 +557,7 @@ namespace Z0
         /// <param name="a">The left bit</param>
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline)]
-        public static bit operator + (bit a, bit b)
+        public static Bit32 operator + (Bit32 a, Bit32 b)
             => Wrap(a.state ^ b.state);
 
         /// <summary>
@@ -566,7 +566,7 @@ namespace Z0
         /// <param name="a">The left bit</param>
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline)]
-        public static bit operator & (bit a, bit b)
+        public static Bit32 operator & (Bit32 a, Bit32 b)
             => and(a,b);
 
         /// <summary>
@@ -575,7 +575,7 @@ namespace Z0
         /// <param name="a">The left bit</param>
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline)]
-        public static bit operator | (bit a, bit b)
+        public static Bit32 operator | (Bit32 a, Bit32 b)
             => or(a,b);
 
         /// <summary>
@@ -584,7 +584,7 @@ namespace Z0
         /// <param name="a">The left bit</param>
         /// <param name="b">The right bit</param>
         [MethodImpl(Inline)]
-        public static bit operator ^ (bit a, bit b)
+        public static Bit32 operator ^ (Bit32 a, Bit32 b)
             => xor(a,b);
 
         /// <summary>
@@ -592,7 +592,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source bit</param>
         [MethodImpl(Inline)]
-        public static bit operator ~(bit a)
+        public static Bit32 operator ~(Bit32 a)
             => not(a);
 
         /// <summary>
@@ -600,15 +600,15 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source bit</param>
         [MethodImpl(Inline)]
-        public static bit operator !(bit a)
+        public static Bit32 operator !(Bit32 a)
             => not(a);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(bit a, bit b)
+        public static bool operator ==(Bit32 a, Bit32 b)
             => a.state == b.state;
 
         [MethodImpl(Inline)]
-        public static bool operator !=(bit a, bit b)
+        public static bool operator !=(Bit32 a, Bit32 b)
             => a.state != b.state;
 
         /// <summary>
@@ -623,11 +623,11 @@ namespace Z0
                 => this ? NumericLiterals.maxval<T>() : default;
 
         [MethodImpl(Inline), Op]
-        public bool Equals(bit b)
+        public bool Equals(Bit32 b)
             => state == b.state;
 
         public override bool Equals(object b)
-            => b is bit x && Equals(x);
+            => b is Bit32 x && Equals(x);
 
         public override int GetHashCode()
             => (int)state;
@@ -639,28 +639,28 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline), Op]
-        static bit Wrap(uint state)
-            => new bit(state);
+        static Bit32 Wrap(uint state)
+            => new Bit32(state);
 
         [MethodImpl(Inline), Op]
-        static bit SafeWrap(byte state)
-            => new bit((uint)state & 1);
+        static Bit32 SafeWrap(byte state)
+            => new Bit32((uint)state & 1);
 
         [MethodImpl(Inline), Op]
-        static bit SafeWrap(ushort state)
-            => new bit((uint)state & 1);
+        static Bit32 SafeWrap(ushort state)
+            => new Bit32((uint)state & 1);
 
         [MethodImpl(Inline), Op]
-        static bit SafeWrap(uint state)
-            => new bit(state & 1);
+        static Bit32 SafeWrap(uint state)
+            => new Bit32(state & 1);
 
         [MethodImpl(Inline), Op]
-        static bit SafeWrap(int state)
-            => new bit((uint)state & 1);
+        static Bit32 SafeWrap(int state)
+            => new Bit32((uint)state & 1);
 
         [MethodImpl(Inline), Op]
-        static bit SafeWrap(ulong state)
-            => new bit((uint)state & 1);
+        static Bit32 SafeWrap(ulong state)
+            => new Bit32((uint)state & 1);
 
         [MethodImpl(Inline)]
         public TypeIdentity Identity()
@@ -670,16 +670,16 @@ namespace Z0
     /// <summary>
     /// Conversion provider for the bit data type
     /// </summary>
-    readonly struct BitDataTypeConverter : IConversionProvider<BitDataTypeConverter, bit>, IBiconverter<bit>
+    readonly struct Bit32Converter : IConversionProvider<Bit32Converter,Bit32>, IBiconverter<Bit32>
     {
-        public BitDataTypeConverter Converter => default;
+        public Bit32Converter Converter => default;
 
         [MethodImpl(Inline)]
-        public T Convert<T>(bit src)
+        public T Convert<T>(Bit32 src)
             => BitConversionOps.from<T>(src);
 
         [MethodImpl(Inline)]
-        public bit Convert<T>(T src)
+        public Bit32 Convert<T>(T src)
             => BitConversionOps.to<T>(src);
 
         [MethodImpl(Inline)]

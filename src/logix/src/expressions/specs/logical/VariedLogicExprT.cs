@@ -14,9 +14,9 @@ namespace Z0.Logix
     /// <summary>
     /// Defines a typed logic expression over one or more variables
     /// </summary>
-    public sealed class VariedLogicExpr<T> : IVariedLogicExpr<T> 
+    public sealed class VariedLogicExpr<T> : IVariedLogicExpr<T>
         where T : unmanaged
-    {        
+    {
         /// <summary>
         /// The variable-dependent expression
         /// </summary>
@@ -26,7 +26,7 @@ namespace Z0.Logix
         /// The variables that parametrize the base expression
         /// </summary>
         public ILogicVarExpr<T>[] Vars {get;}
-    
+
         [MethodImpl(Inline)]
         public VariedLogicExpr(ILogicExpr<T> baseExpr, params ILogicVarExpr<T>[] variables)
         {
@@ -34,10 +34,10 @@ namespace Z0.Logix
             this.Vars = variables;
         }
 
-        ILogicExpr IVariedLogicExpr.BaseExpr 
+        ILogicExpr IVariedLogicExpr.BaseExpr
             => BaseExpr;
 
-        ILogicVarExpr[] IVariedLogicExpr.Vars 
+        ILogicVarExpr[] IVariedLogicExpr.Vars
             => Vars.Map(v => v);
 
         public void SetVars(params ILogicExpr<T>[] values)
@@ -53,7 +53,7 @@ namespace Z0.Logix
         public void SetVars(params ILogicExpr[] values)
             => SetVars(values.Cast<ILogicExpr<T>>().ToArray());
 
-        public void SetVars(params bit[] values)
+        public void SetVars(params Bit32[] values)
             => throw new NotSupportedException();
     }
 }

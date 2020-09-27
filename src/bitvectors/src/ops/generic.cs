@@ -50,7 +50,7 @@ namespace Z0
         /// Creates a byte-generic bitvector from 4 bits
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static BitVector<byte> generic(N8 n, bit b0, bit b1, bit b2, bit b3)
+        public static BitVector<byte> generic(N8 n, Bit32 b0, Bit32 b1, Bit32 b2, Bit32 b3)
             => create(n, b0, b1, b2, b3);
 
         /// <summary>

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     /// <summary>
@@ -16,13 +16,13 @@ namespace Z0
     /// <typeparam name="M">The row dimension</typeparam>
     /// <typeparam name="N">The column dimension</typeparam>
     /// <typeparam name="T">The element type</typeparam>
-    public readonly ref struct BitMatrix<M,N,T> 
-        where M : unmanaged, ITypeNat        
+    public readonly ref struct BitMatrix<M,N,T>
+        where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
-    {        
+    {
         internal readonly Span<T> Data;
-        
+
         public static M RowDim => default;
 
         public static N ColDim => default;
@@ -54,7 +54,7 @@ namespace Z0
         {
             this.Data = src;
         }
-        
+
         /// <summary>
         /// Presents matrix storage as a span of generic cells
         /// </summary>
@@ -112,22 +112,22 @@ namespace Z0
         /// <summary>
         /// Queries/manipulates a bit at a specified row/col
         /// </summary>
-        public bit this[int row, int col]
+        public Bit32 this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get 
+            get
             {
                 var index = TableIndex.Create(row, col, RowDim, ColDim, default(T));
                 return gbits.testbit(Data[index.CellIndex], index.BitOffset);
             }
 
             [MethodImpl(Inline)]
-            set 
+            set
             {
                 var index = TableIndex.Create(row, col, RowDim, ColDim, default(T));
-                Data[index.CellIndex] = gbits.setbit(Data[index.CellIndex], index.BitOffset, value);                
+                Data[index.CellIndex] = gbits.setbit(Data[index.CellIndex], index.BitOffset, value);
            }
-        }            
+        }
 
         int RowCellCount
         {
@@ -142,17 +142,17 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => ReadRow(row);
-            
+
             [MethodImpl(Inline)]
             set  => value.Data.Slice(0, RowCellCount).CopyTo(Data,row);
         }
-                
+
         [MethodImpl(Inline)]
-        public BitBlock<N,T> ReadRow(int row)  
+        public BitBlock<N,T> ReadRow(int row)
             => new BitBlock<N,T>(Data.Slice(row*RowCellCount, RowCellCount));
 
         [MethodImpl(Inline)]
-        public readonly BitBlock<N,T> CopyRow(int row)                    
+        public readonly BitBlock<N,T> CopyRow(int row)
             => new BitBlock<N,T>(Data.Slice(row*RowCellCount, RowCellCount).Replicate());
 
         /// <summary>
@@ -175,8 +175,8 @@ namespace Z0
         {
             var cidx = ColCount - col - 1;
             var cv = BitBlocks.alloc<M,T>();
-            for(var row = 0; row < RowCount; row++)            
-                cv[row] = this[row, cidx];                        
+            for(var row = 0; row < RowCount; row++)
+                cv[row] = this[row, cidx];
             return cv;
         }
 
@@ -185,7 +185,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The source value</param>
         [MethodImpl(Inline)]
-        public void Fill(bit value)
+        public void Fill(Bit32 value)
         {
             if(value)
                 Content.Fill(maxval<T>());
@@ -200,7 +200,7 @@ namespace Z0
         {
             var dst = BitMatrix.alloc<N,M,T>();
             for(var row = 0; row < RowCount; row++)
-                dst.SetCol(row, CopyRow(row));            
+                dst.SetCol(row, CopyRow(row));
             return dst;
         }
 
@@ -213,18 +213,18 @@ namespace Z0
             return sb.ToString();
         }
 
-        public bool Equals(BitMatrix<M,N,T> rhs)        
+        public bool Equals(BitMatrix<M,N,T> rhs)
         {
             for(var row = 0; row < RowCount; row++)
                 if(!this[row].Equals(rhs[row]))
                     return false;
-                    
-            return true;            
+
+            return true;
         }
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();
-        
+
         public override int GetHashCode()
             => throw new NotSupportedException();
     }

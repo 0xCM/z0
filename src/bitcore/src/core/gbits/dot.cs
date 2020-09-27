@@ -8,9 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     partial class gbits
-    {    
+    {
         /// <summary>
         /// Pretends that the operands are bitvectors and computes their scalar product
         /// </summary>
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="y">The right scalar</param>
         /// <typeparam name="T">The primal unsigned integral type</typeparam>
         [MethodImpl(Inline), Dot, Closures(Integers)]
-        public static bit dot<T>(T x, T y)
+        public static Bit32 dot<T>(T x, T y)
             where T : unmanaged
                 => gmath.odd(pop(gmath.and(x,y)));
     }

@@ -63,11 +63,11 @@ namespace Z0
             => new BitGrid16<T>(src);
 
         [MethodImpl(Inline)]
-        public static bit operator ==(BitGrid16<T> gx, BitGrid16<T> gy)
+        public static Bit32 operator ==(BitGrid16<T> gx, BitGrid16<T> gy)
             => gx.Data == gy.Data;
 
         [MethodImpl(Inline)]
-        public static bit operator !=(BitGrid16<T> gx, BitGrid16<T> gy)
+        public static Bit32 operator !=(BitGrid16<T> gx, BitGrid16<T> gy)
             => gx.Data != gy.Data;
 
         [MethodImpl(Inline)]

@@ -74,7 +74,7 @@ namespace Z0
         /// Fills a caller-supplied target with random bits
         /// </summary>
         /// <param name="random">The random source</param>
-        public static void Fill(this IPolyrand random, Span<bit> dst)
+        public static void Fill(this IPolyrand random, Span<Bit32> dst)
         {
             const int w = 64;
             var pos = -1;
@@ -86,7 +86,7 @@ namespace Z0
 
                 var i = -1;
                 while(++pos <= last && ++i < w)
-                    dst[pos] = bit.test(data,i);
+                    dst[pos] = Bit32.test(data,i);
             }
         }
     }

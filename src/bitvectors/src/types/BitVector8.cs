@@ -164,7 +164,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static bit operator %(BitVector8 x, BitVector8 y)
+        public static Bit32 operator %(BitVector8 x, BitVector8 y)
             => BitVector.dot(x,y);
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The ource operand</param>
         [MethodImpl(Inline)]
-        public static bit operator !(BitVector8 src)
+        public static Bit32 operator !(BitVector8 src)
             => src.Empty;
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator ==(BitVector8 x, BitVector8 y)
+        public static Bit32 operator ==(BitVector8 x, BitVector8 y)
             => math.eq(x,y);
 
         /// <summary>
@@ -222,7 +222,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator !=(BitVector8 x, BitVector8 y)
+        public static Bit32 operator !=(BitVector8 x, BitVector8 y)
             => math.neq(x,y);
 
         /// <summary>
@@ -231,7 +231,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator <(BitVector8 x, BitVector8 y)
+        public static Bit32 operator <(BitVector8 x, BitVector8 y)
             => math.lt(x,y);
 
         /// <summary>
@@ -240,7 +240,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator >(BitVector8 x, BitVector8 y)
+        public static Bit32 operator >(BitVector8 x, BitVector8 y)
             => math.gt(x,y);
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator <=(BitVector8 x, BitVector8 y)
+        public static Bit32 operator <=(BitVector8 x, BitVector8 y)
             => math.lteq(x,y);
 
         /// <summary>
@@ -258,7 +258,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator >=(BitVector8 x, BitVector8 y)
+        public static Bit32 operator >=(BitVector8 x, BitVector8 y)
             => math.gteq(x,y);
 
         [MethodImpl(Inline)]
@@ -295,7 +295,7 @@ namespace Z0
         /// <summary>
         /// Returns true if no bits are enabled, false otherwise
         /// </summary>
-        public readonly bit Empty
+        public readonly Bit32 Empty
         {
             [MethodImpl(Inline)]
             get => Data == 0;
@@ -304,7 +304,7 @@ namespace Z0
         /// <summary>
         /// Returns true if the vector has at least one enabled bit; false otherwise
         /// </summary>
-        public readonly bit NonEmpty
+        public readonly Bit32 NonEmpty
         {
             [MethodImpl(Inline)]
             get => !Empty;
@@ -313,7 +313,7 @@ namespace Z0
         /// <summary>
         /// Returns true if all bits are enabled, false otherwise
         /// </summary>
-        public readonly bit AllOn
+        public readonly Bit32 AllOn
         {
             [MethodImpl(Inline)]
             get => (0xFF & Data) == 0xFF;
@@ -340,13 +340,13 @@ namespace Z0
         /// <summary>
         /// Gets/sets the state of an index-identified bit
         /// </summary>
-        public bit this[int index]
+        public Bit32 this[int index]
         {
             [MethodImpl(Inline)]
-            get => bit.test(Data, index);
+            get => Bit32.test(Data, index);
 
             [MethodImpl(Inline)]
-            set => Data = bit.set(Data, (byte)index, value);
+            set => Data = Bit32.set(Data, (byte)index, value);
         }
 
         /// <summary>

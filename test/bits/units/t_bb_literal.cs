@@ -14,8 +14,8 @@ namespace Z0
     {
         public void bb_literal_40x64()
         {
-            var n = n40;      
-            ulong x = 0b01011_00010_01110_11010_00111_00101_01110_10110;     
+            var n = n40;
+            ulong x = 0b01011_00010_01110_11010_00111_00101_01110_10110;
             var bvz = BitBlocks.single(x,n);
             Span<byte> xSrc =  bytes(x);
             var bvx = BitBlocks.load(xSrc.Slice(0,5).ToArray());
@@ -29,9 +29,9 @@ namespace Z0
         public void bb_literal_12x32()
         {
             var bv = BitBlocks.single(0b101110001110u, n12);
-            Claim.Eq(bv[0], bit.Off);
-            Claim.Eq(bv[1], bit.On);
-            Claim.Eq(bv[11], bit.On);
+            Claim.Eq(bv[0], Bit32.Off);
+            Claim.Eq(bv[1], Bit32.On);
+            Claim.Eq(bv[11], Bit32.On);
         }
     }
 }

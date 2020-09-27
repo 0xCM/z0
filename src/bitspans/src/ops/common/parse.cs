@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     partial class BitSpans
@@ -16,15 +16,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [Op]
-        public static BitSpan parse(string src)                
-        {            
+        public static BitSpan parse(string src)
+        {
             var data = BitString.normalize(src);
             var len = data.Length;
             var lastix = len - 1;
-            Span<bit> bits = new bit[len];
+            Span<Bit32> bits = new Bit32[len];
             for(var i=0; i<= lastix; i++)
-               bits[lastix - i] = data[i] == bit.Zero ? bit.Off : bit.On;
+               bits[lastix - i] = data[i] == Bit32.Zero ? Bit32.Off : Bit32.On;
             return BitSpans.load(bits);
-        }         
+        }
     }
 }

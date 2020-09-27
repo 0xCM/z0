@@ -46,18 +46,18 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BitVector4 create(N4 n, ulong src)
             => (byte)src;
-        
+
         /// <summary>
         /// Creates a 4-bit bitvector from 2 explicit bits
         /// </summary>
         /// <param name="n">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static BitVector4 create(N4 n, bit b0, bit b1)
+        public static BitVector4 create(N4 n, Bit32 b0, Bit32 b1)
         {
             var data = 0u;
-            if(b0) 
+            if(b0)
                 data |= (1 << 0);
-            if(b1) 
+            if(b1)
                 data |= (1 << 1);
 
             return (byte)data;
@@ -68,10 +68,10 @@ namespace Z0
         /// </summary>
         /// <param name="n">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static BitVector4 create(N4 n, bit b0, bit b1, bit b2)
+        public static BitVector4 create(N4 n, Bit32 b0, Bit32 b1, Bit32 b2)
         {
             var data = create(n4,b0,b1);
-            if(b2) 
+            if(b2)
                 data |= (1 << 2);
             return (byte)data;
         }
@@ -81,10 +81,10 @@ namespace Z0
         /// </summary>
         /// <param name="n">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static BitVector4 create(N4 n, bit b0, bit b1, bit b2, bit b3)
+        public static BitVector4 create(N4 n, Bit32 b0, Bit32 b1, Bit32 b2, Bit32 b3)
         {
             var data = create(n,b0,b1,b2);
-            if(b3) 
+            if(b3)
                 data |= (1 << 3);
             return data;
         }
@@ -96,7 +96,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
         public static BitVector4 create(N4 n, BitString src)
-            => new BitVector4(src.IsEmpty ? (byte)0 : src.Pack()[0]);            
+            => new BitVector4(src.IsEmpty ? (byte)0 : src.Pack()[0]);
 
         /// <summary>
         /// Creates a vector from a bitstring
@@ -112,7 +112,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static BitVector8 create(N8 n, bit b0, bit b1, bit b2, bit b3)
+        public static BitVector8 create(N8 n, Bit32 b0, Bit32 b1, Bit32 b2, Bit32 b3)
             => (byte)Bits.pack(b0, b1, b2, b3);
 
         /// <summary>
@@ -120,7 +120,7 @@ namespace Z0
         /// </summary>
         /// <param name="n">The target width selector</param>
         [MethodImpl(Inline), Op]
-        public static BitVector8 create(N8 n, bit b0, bit b1, bit b2, bit b3, bit b4, bit b5, bit b6, bit b7)
+        public static BitVector8 create(N8 n, Bit32 b0, Bit32 b1, Bit32 b2, Bit32 b3, Bit32 b4, Bit32 b5, Bit32 b6, Bit32 b7)
             => (byte)Bits.pack(b0, b1, b2, b3, b4, b5, b6, b7);
 
         /// <summary>
@@ -257,13 +257,13 @@ namespace Z0
             => Bits.concat(x0,x1,x2,x3);
 
         /// <summary>
-        /// Creates a 64-bit bitvector where the first 8 bits a populated with a specified value and 
+        /// Creates a 64-bit bitvector where the first 8 bits a populated with a specified value and
         /// all others are zero
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static BitVector64 create(N64 n, byte src)
-            => new BitVector64(src);    
+            => new BitVector64(src);
 
         /// <summary>
         /// Creates a vector from a primal source value
@@ -271,7 +271,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static BitVector64 create(N64 n, ushort src)
-            => new BitVector64(src);    
+            => new BitVector64(src);
 
         /// <summary>
         /// Creates a vector from a primal source value
@@ -279,7 +279,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static BitVector64 create(N64 n, uint src)
-            => new BitVector64(src);    
+            => new BitVector64(src);
 
         /// <summary>
         /// Creates a vector from a primal source value
@@ -287,7 +287,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static BitVector64 create(N64 n, ulong src)
-            => new BitVector64(src);    
+            => new BitVector64(src);
 
         /// <summary>
         /// Creates a vector from two unsigned 32-bit integers

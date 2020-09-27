@@ -6,14 +6,14 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
     /// Defines an untyped logic expression over one or more variables
     /// </summary>
     public sealed class VariedLogicExpr : IVariedLogicExpr
-    {        
+    {
         /// <summary>
         /// The variable-dependent expression
         /// </summary>
@@ -38,7 +38,7 @@ namespace Z0.Logix
                 Vars[i].Set(values[i]);
         }
 
-        public void SetVars(params bit[] values)
+        public void SetVars(params Bit32[] values)
         {
             var n = Math.Min(Vars.Length, values.Length);
             for(var i=0; i<n; i++)

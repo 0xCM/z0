@@ -13,12 +13,12 @@ namespace Z0
     {
         public string CaseName {get;}
 
-        public bit Success {get;}
+        public Bit32 Success {get;}
 
         public string Description {get;}
 
         [MethodImpl(Inline)]
-        public TestCaseResult(string name, bit success, string description)
+        public TestCaseResult(string name, Bit32 success, string description)
         {
             CaseName = name;
             Success = success;

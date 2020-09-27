@@ -98,7 +98,7 @@ namespace Z0
         /// <summary>
         /// Specifies whether the matrix is square; if so, it can be represented by one of the primal matrices
         /// </summary>
-        public bit IsSquare
+        public Bit32 IsSquare
         {
             [MethodImpl(Inline)]
             get => Width == RowCount;

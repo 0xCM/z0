@@ -28,7 +28,7 @@ namespace Z0
                 => BV.and<T>().Invoke(x,y);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public bit dot<T>(BitVector<T> x, BitVector<T> y)
+        public Bit32 dot<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BV.dot<T>().Invoke(x,y);
 

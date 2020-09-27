@@ -209,13 +209,13 @@ namespace Z0
             {
                 var x = Random.BitVector(n64);
                 var y = Random.BitVector(n64);
-                bit a = x % y;
+                Bit32 a = x % y;
                 var b = modprod(x,y);
                 Claim.Require(a == b);
 
                 var zx = x.ToNatBits();
                 var zy = y.ToNatBits();
-                bit c = zx % zy;
+                Bit32 c = zx % zy;
                 Claim.Require(a == c);
             }
 
@@ -269,7 +269,7 @@ namespace Z0
                 {
                     var x = Random.BitVector<N,T>();
                     var y = Random.BitVector<N,T>();
-                    bit a = x % y;
+                    Bit32 a = x % y;
                     var b = BitVector.modprod(x,y);
                     Claim.Eq(a,b);
                 }

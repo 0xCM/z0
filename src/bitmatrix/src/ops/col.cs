@@ -12,14 +12,14 @@ namespace Z0
     partial class BitMatrix
     {
         /// <summary>
-        /// Queries the matrix for the data in an index-identified column 
+        /// Queries the matrix for the data in an index-identified column
         /// </summary>
         /// <param name="index">The row index</param>
         public static BitVector4 col(in BitMatrix4 A, int index)
         {
             byte col = 0;
             for(var r = 0; r < BitMatrix4.N; r++)
-                col = bit.set(col, (byte)r, bit.test(A[r].Scalar, index));
+                col = Bit32.set(col, (byte)r, Bit32.test(A[r].Scalar, index));
             return col;
         }
 

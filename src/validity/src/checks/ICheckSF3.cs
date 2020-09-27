@@ -26,7 +26,7 @@ namespace Z0
         }
     }
 
-    public readonly struct CheckTernaryPredSF<T> : ICheckSF<T,T,T,bit>
+    public readonly struct CheckTernaryPredSF<T> : ICheckSF<T,T,T,Bit32>
         where T : unmanaged
     {
         public ITestContext Context {get;}

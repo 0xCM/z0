@@ -59,7 +59,7 @@ namespace Z0
             Wf.Emitting(Host, t, FS.path(path.Name));
 
             var assembly = part.Owner;
-            using var reader = PeTableReader.open(FilePath.Define(assembly.Location));
+            using var reader = PeTableReader.open(FS.path(assembly.Location));
             var src = reader.ReadFields();
             var count = (uint)src.Length;
 

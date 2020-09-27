@@ -22,7 +22,7 @@ namespace Z0
     public interface IBinaryPred<T> : IFunc
         where T : unmanaged
     {
-        bit Invoke(T x, T y);
+        Bit32 Invoke(T x, T y);
     }
 
     /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
     /// <typeparam name="W">The natural type</typeparam>
     /// <typeparam name="V">The non-primal operand type</typeparam>
     [Free, SFx]
-    public interface IBinaryPred<W,V> : IFunc, IFunc<V,V,bit>
+    public interface IBinaryPred<W,V> : IFunc, IFunc<V,V,Bit32>
         where W : unmanaged, TTypeWidth<W>
         where V : struct
     {

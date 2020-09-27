@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
-        public static bit eval(TLK kind, bit a, bit b, bit c)
+        public static Bit32 eval(TLK kind, Bit32 a, Bit32 b, Bit32 c)
         {
             switch(kind)
             {

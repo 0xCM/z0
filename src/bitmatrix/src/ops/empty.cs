@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;        
+    using static Konst;
 
     partial class BitMatrix
     {
@@ -15,7 +15,7 @@ namespace Z0
         /// Determines whether the matrix is 0-filled
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static bit empty<T>(in BitMatrix<T> A)
+        public static Bit32 empty<T>(in BitMatrix<T> A)
             where T : unmanaged
                 => BitMatrix.testz(A);
 
@@ -23,28 +23,28 @@ namespace Z0
         /// Determines whether the matrix is 0-filled
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static bit empty(in BitMatrix8 A)
+        public static Bit32 empty(in BitMatrix8 A)
             => BitMatrix.testz(A);
 
         /// <summary>
         /// Determines whether the matrix is 0-filled
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static bit empty(in BitMatrix16 A)
+        public static Bit32 empty(in BitMatrix16 A)
             => BitMatrix.testz(A);
 
         /// <summary>
         /// Determines whether the matrix is 0-filled
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static bit empty(in BitMatrix32 A)
+        public static Bit32 empty(in BitMatrix32 A)
             => BitMatrix.testz(A);
 
         /// <summary>
         /// Determines whether the matrix is 0-filled
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static bit empty(in BitMatrix64 A)
+        public static Bit32 empty(in BitMatrix64 A)
             => BitMatrix.testz(A);
     }
 }

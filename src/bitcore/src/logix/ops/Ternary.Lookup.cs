@@ -19,7 +19,7 @@ namespace Z0
         /// Returns a kind-indentified ternary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
-        public static TernaryOp<bit> lookup(TLK kind)
+        public static TernaryOp<Bit32> lookup(TLK kind)
         {
             switch(kind)
             {

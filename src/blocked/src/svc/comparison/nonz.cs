@@ -19,7 +19,7 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Span<bit> Invoke(in SpanBlock128<T> src, Span<bit> dst)
+            public Span<Bit32> Invoke(in SpanBlock128<T> src, Span<Bit32> dst)
                 => map(src, dst, VSvc.vnonz<T>(w128));
         }
 
@@ -28,7 +28,7 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Span<bit> Invoke(in SpanBlock256<T> src, Span<bit> dst)
+            public Span<Bit32> Invoke(in SpanBlock256<T> src, Span<Bit32> dst)
                 => map(src, dst, VSvc.vnonz<T>(w256));
         }
     }

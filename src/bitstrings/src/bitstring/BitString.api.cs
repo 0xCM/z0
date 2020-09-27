@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static Root;
 
@@ -14,7 +14,7 @@ namespace Z0
     {
         /// <summary>
         /// Constructs a sequence of n characters {ci} := [c_n-1,..., c_0]
-        /// over the domain {'0','1'} according to whether the bit in the i'th 
+        /// over the domain {'0','1'} according to whether the bit in the i'th
         /// position of the source is respecively disabled/enabled
         /// </summary>
         /// <param name="src">The source value</param>
@@ -26,7 +26,7 @@ namespace Z0
 
         /// <summary>
         /// Constructs a sequence of n characters {ci} := [c_n-1,..., c_0]
-        /// over the domain {'0','1'} according to whether the bit in the i'th 
+        /// over the domain {'0','1'} according to whether the bit in the i'th
         /// position of the source is respecively disabled/enabled
         /// </summary>
         /// <param name="src">The source value</param>
@@ -58,19 +58,19 @@ namespace Z0
                 bitchars(skip(input,i)).CopyTo(dst, i*seglen);
             return maxlen != null && dst.Length >= maxlen ?  dst.Slice(0,maxlen.Value) :  dst;
         }
-        
+
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Span<char> bitchars<T>(Span<T> src, int? maxlen = null)
             where T : unmanaged
-                => bitchars(src.ReadOnly(), maxlen);        
-         
+                => bitchars(src.ReadOnly(), maxlen);
+
         /// <summary>
         /// Removes characters related to formating/presentation that do not impact the value of the bitstring literal;
         /// leading zeroes, however, are considered part of the literal and are not removed
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static string normalize(string src)        
+        public static string normalize(string src)
             => src.RemoveAny(Chars.LBracket, Chars.RBracket, Chars.Space, Chars.Underscore, (char)AsciLetter.b);
 
         /// <summary>
@@ -87,15 +87,15 @@ namespace Z0
         /// <param name="src">The source pattern</param>
         /// <param name="reps">The number of times to repeat the pattern</param>
         /// <typeparam name="T">The primal source type</typeparam>
-        public static BitString replicate<T>(T src, int reps)                
+        public static BitString replicate<T>(T src, int reps)
             where T : unmanaged
         {
             var capacity = bitsize<T>();
-            var bitseq = sys.alloc<byte>(capacity*reps);            
+            var bitseq = sys.alloc<byte>(capacity*reps);
             var pattern = scalar(src);
             for(var i=0; i<reps; i++)
                 pattern.BitSeq.CopyTo(bitseq, i*capacity);
-            return BitString.load(bitseq);            
+            return BitString.load(bitseq);
         }
 
         /// <summary>
@@ -104,10 +104,10 @@ namespace Z0
         /// <param name="f">The transformation</param>
         /// <typeparam name="T">The span element type</typeparam>
         [MethodImpl(Inline)]
-        public static void map<T>(BitString src, Func<bit,T> f, Span<T> dst)
+        public static void map<T>(BitString src, Func<Bit32,T> f, Span<T> dst)
         {
             for(var i=0; i<dst.Length; i++)
-                dst[i] = f((bit)src.data[i]);
+                dst[i] = f((Bit32)src.data[i]);
         }
     }
 }

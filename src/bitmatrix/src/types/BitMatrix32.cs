@@ -7,16 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     /// <summary>
     /// Defines a 32x32 matrix of bits
-    /// </summary>    
+    /// </summary>
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public readonly ref struct BitMatrix32
-    {                
-        internal readonly Span<uint> Data;        
+    {
+        internal readonly Span<uint> Data;
 
         /// <summary>
         /// The matrix order
@@ -32,7 +32,7 @@ namespace Z0
         /// Allocates a 32x32 zero bitmatrix
         /// </summary>
         public static BitMatrix32 Zero => new BitMatrix32(new uint[N]);
-                
+
         [MethodImpl(Inline)]
         public static implicit operator BitMatrix<uint>(in BitMatrix32 src)
             => BitMatrix.load(src.Data);
@@ -78,7 +78,7 @@ namespace Z0
             => this.Data = src;
 
         [MethodImpl(Inline)]
-        internal BitMatrix32(bit fill)
+        internal BitMatrix32(Bit32 fill)
         {
             this.Data = new uint[N];
             if(fill)
@@ -108,7 +108,7 @@ namespace Z0
         /// </summary>
         public unsafe ref uint Head
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => ref head(Data);
         }
 
@@ -126,14 +126,14 @@ namespace Z0
         /// </summary>
         /// <param name="row">The row index</param>
         /// <param name="col">The column index</param>
-        public bit this[int row, int col]
+        public Bit32 this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => bit.test(Data[row], col);
+            get => Bit32.test(Data[row], col);
 
             [MethodImpl(Inline)]
-            set =>  Data[row] = bit.set(Data[row], (byte)col, value);
-        }            
+            set =>  Data[row] = Bit32.set(Data[row], (byte)col, value);
+        }
 
         /// <summary>
         /// Queries/manipulates row data
@@ -151,10 +151,10 @@ namespace Z0
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();
-        
+
         public override int GetHashCode()
             => throw new NotSupportedException();
-        
+
         public override string ToString()
             => throw new NotSupportedException();
     }

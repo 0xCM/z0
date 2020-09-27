@@ -21,7 +21,7 @@ namespace Z0
     [Free, SFx]
     public interface IUnarySpanPred<T> : IFunc
     {
-        Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst);
+        Span<Bit32> Invoke(ReadOnlySpan<T> src, Span<Bit32> dst);
     }
 
     /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
     [Free, SFx]
     public interface IBinarySpanPred<T> : IFunc
     {
-        Span<bit> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst);
+        Span<Bit32> Invoke(ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<Bit32> dst);
     }
 
     /// <summary>
@@ -51,6 +51,6 @@ namespace Z0
     [Free, SFx]
     public interface ITernarySpanPred<T> : IFunc
     {
-        Span<bit> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<bit> dst);
+        Span<Bit32> Invoke(ReadOnlySpan<T> a, ReadOnlySpan<T> b, ReadOnlySpan<T> c, Span<Bit32> dst);
     }
 }

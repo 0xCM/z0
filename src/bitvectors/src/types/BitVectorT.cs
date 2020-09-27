@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static bit operator %(BitVector<T> x, BitVector<T> y)
+        public static Bit32 operator %(BitVector<T> x, BitVector<T> y)
             => BitVector.dot(x,y);
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator ==(BitVector<T> x, BitVector<T> y)
+        public static Bit32 operator ==(BitVector<T> x, BitVector<T> y)
             => gmath.eq(x.Data,y.Data);
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator !=(BitVector<T> x, BitVector<T> y)
+        public static Bit32 operator !=(BitVector<T> x, BitVector<T> y)
             => gmath.neq(x.Data,y.Data);
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator <(BitVector<T> x, BitVector<T> y)
+        public static Bit32 operator <(BitVector<T> x, BitVector<T> y)
             => gmath.lt(x.Data,y.Data);
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator >(BitVector<T> x, BitVector<T> y)
+        public static Bit32 operator >(BitVector<T> x, BitVector<T> y)
             => gmath.gt(x.Data,y.Data);
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator <=(BitVector<T> x, BitVector<T> y)
+        public static Bit32 operator <=(BitVector<T> x, BitVector<T> y)
             => gmath.lteq(x.Data,y.Data);
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator >=(BitVector<T> x, BitVector<T> y)
+        public static Bit32 operator >=(BitVector<T> x, BitVector<T> y)
             => gmath.gteq(x.Data,y.Data);
 
         [MethodImpl(Inline)]
@@ -251,7 +251,7 @@ namespace Z0
         /// <summary>
         /// Specifies whether all bits are disabled
         /// </summary>
-        public bit Empty
+        public Bit32 Empty
         {
             [MethodImpl(Inline)]
             get => !gmath.nonz(Data);
@@ -260,7 +260,7 @@ namespace Z0
         /// <summary>
         /// Specifies whether at least one bit is enabled
         /// </summary>
-        public readonly bit NonEmpty
+        public readonly Bit32 NonEmpty
         {
             [MethodImpl(Inline)]
             get => gmath.nonz(Data);
@@ -269,7 +269,7 @@ namespace Z0
         /// <summary>
         /// Reads/Manipulates a single bit
         /// </summary>
-        public bit this[int index]
+        public Bit32 this[int index]
         {
             [MethodImpl(Inline)]
             get => gbits.testbit(Data, (byte)index);
@@ -281,7 +281,7 @@ namespace Z0
         /// <summary>
         /// Reads/Manipulates a single bit
         /// </summary>
-        public bit this[byte index]
+        public Bit32 this[byte index]
         {
             [MethodImpl(Inline)]
             get => gbits.testbit(Data, (byte)index);

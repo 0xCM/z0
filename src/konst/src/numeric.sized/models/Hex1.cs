@@ -47,7 +47,7 @@ namespace Z0
         public static H Max => KMax;
 
         [MethodImpl(Inline)]
-        public static implicit operator Hex1(bit src)
+        public static implicit operator Hex1(Bit32 src)
             => new Hex1((byte)(src ? 1 : 0));
 
         [MethodImpl(Inline)]

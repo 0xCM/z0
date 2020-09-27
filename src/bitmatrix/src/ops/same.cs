@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    using static Memories;    
+    using static Konst;
+    using static Memories;
 
     partial class BitMatrix
     {
@@ -17,23 +17,23 @@ namespace Z0
         /// </summary>
         /// <param name="a">The left matrix</param>
         /// <param name="b">The right matrix</param>
-        /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>        
+        /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>
         [MethodImpl(Inline)]
-        public static bit same<T>(in BitMatrix<T> a, in BitMatrix<T> b)
+        public static Bit32 same<T>(in BitMatrix<T> a, in BitMatrix<T> b)
             where T : unmanaged
         {
             var Z = BitMatrix.alloc<T>();
             LogicSquare.xnor(a.Head, b.Head, ref Z.Head);
             return LogicSquare.testc(in Z.Head);
         }
-        
+
         /// <summary>
         /// Determines whether two primal bitmatrices are identical, returning an enabled bit if so and a disabled bit otherwise
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static bit same(BitMatrix4 A, BitMatrix4 B)
+        public static Bit32 same(BitMatrix4 A, BitMatrix4 B)
             => (ushort)A == (ushort)B;
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static bit same(in BitMatrix8 A, in BitMatrix8 B)
+        public static Bit32 same(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = BitMatrix.alloc(n8);
             LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static bit same(in BitMatrix16 A, in BitMatrix16 B)
+        public static Bit32 same(in BitMatrix16 A, in BitMatrix16 B)
         {
             var Z = BitMatrix.alloc(n16);
             LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
@@ -68,7 +68,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static bit same(in BitMatrix32 A, in BitMatrix32 B)
+        public static Bit32 same(in BitMatrix32 A, in BitMatrix32 B)
         {
             var Z = BitMatrix.alloc(n32);
             LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         [MethodImpl(Inline)]
-        public static bit same(in BitMatrix64 A, in BitMatrix64 B)
+        public static Bit32 same(in BitMatrix64 A, in BitMatrix64 B)
         {
             var Z = BitMatrix.alloc(n64);
             LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);

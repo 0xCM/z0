@@ -46,6 +46,6 @@ namespace Z0
         where T : struct;
 
     [Free]
-    public delegate bit Emitter1();
+    public delegate Bit32 Emitter1();
 
 }

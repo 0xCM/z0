@@ -26,8 +26,8 @@ namespace Z0
                 => f.Invoke(x,y);
 
         [MethodImpl(Inline)]
-        public static Span<bit> apply<F,T>(F f, ReadOnlySpan<T> src, Span<bit> dst)
-            where F : IFunc<T,bit>
+        public static Span<Bit32> apply<F,T>(F f, ReadOnlySpan<T> src, Span<Bit32> dst)
+            where F : IFunc<T,Bit32>
         {
             var count = dst.Length;
             ref readonly var input = ref first(src);
@@ -59,8 +59,8 @@ namespace Z0
                 => apply(f,lhs.ReadOnly(), rhs.ReadOnly());
 
         [MethodImpl(Inline)]
-        public static Span<bit> apply<F,T>(F f, ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<bit> dst)
-            where F : IFunc<T,T,bit>
+        public static Span<Bit32> apply<F,T>(F f, ReadOnlySpan<T> lhs, ReadOnlySpan<T> rhs, Span<Bit32> dst)
+            where F : IFunc<T,T,Bit32>
         {
             var count = dst.Length;
             ref readonly var lSrc = ref first(lhs);

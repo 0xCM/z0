@@ -6,32 +6,32 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
+
+    using static Konst;
     using static Memories;
 
     partial class gmath
     {
         [MethodImpl(Inline), Divides, Closures(Integers)]
-        public static bit divides<T>(T a, T b)
+        public static Bit32 divides<T>(T a, T b)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 return divides_u(a,b);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 return divides_i(a,b);
-            else 
+            else
                 return gfp.divides(a,b);
         }
 
         [MethodImpl(Inline)]
-        static bit divides_i<T>(T a, T b)
+        static Bit32 divides_i<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -45,7 +45,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit divides_u<T>(T a, T b)
+        static Bit32 divides_u<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -54,7 +54,7 @@ namespace Z0
                 return math.divides(uint16(a), uint16(b));
             else if(typeof(T) == typeof(uint))
                 return math.divides(uint32(a), uint32(b));
-            else 
+            else
                 return math.divides(uint64(a), uint64(b));
         }
 

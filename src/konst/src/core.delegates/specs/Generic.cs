@@ -32,13 +32,13 @@ namespace Z0
     public delegate F FixedTernaryOp<F>(F a, F b, F c);
 
     [Free]
-    public delegate bit FixedUnaryPred<F>(F a);
+    public delegate Bit32 FixedUnaryPred<F>(F a);
 
     [Free]
-    public delegate bit FixedBinaryPred<F>(F a, F b);
+    public delegate Bit32 FixedBinaryPred<F>(F a, F b);
 
     [Free]
-    public delegate bit FixedTernaryPred<F>(F a, F b, F c);
+    public delegate Bit32 FixedTernaryPred<F>(F a, F b, F c);
 
     [Free]
     public delegate void FixedAction<X0>(X0 x0);

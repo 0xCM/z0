@@ -13,7 +13,7 @@ namespace Z0
     public readonly struct OrGate : IBinaryLogicGate
     {
         [MethodImpl(Inline)]
-        public bit Invoke(bit x, bit y)
+        public Bit32 Invoke(Bit32 x, Bit32 y)
             => (x | y);
     }
 

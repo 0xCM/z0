@@ -23,8 +23,8 @@ namespace Z0
         public static byte slice(in BitSpan src, W8 w, int offset, int count)
         {
             var buffer = Stacks.alloc(w64);
-            var unpacked = Stacks.span<bit>(ref buffer);
-            ref var dst = ref Stacks.head<bit>(ref buffer);
+            var unpacked = Stacks.span<Bit32>(ref buffer);
+            ref var dst = ref Stacks.head<Bit32>(ref buffer);
             memory.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked,Konst.z8);
         }
@@ -40,8 +40,8 @@ namespace Z0
         public static ushort slice(in BitSpan src, W16 w, int offset, int count)
         {
             var buffer = Stacks.alloc(w128);
-            var unpacked = Stacks.span<bit>(ref buffer);
-            ref var dst = ref Stacks.head<bit>(ref buffer);
+            var unpacked = Stacks.span<Bit32>(ref buffer);
+            ref var dst = ref Stacks.head<Bit32>(ref buffer);
             memory.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked, z16);
         }
@@ -57,7 +57,7 @@ namespace Z0
         public static uint slice(in BitSpan src, W32 w, int offset, int count)
         {
             var buffer = Stacks.alloc(w256);
-            var unpacked = Stacks.span<bit>(ref buffer);
+            var unpacked = Stacks.span<Bit32>(ref buffer);
             var take = math.min(src.Edit.Length -offset, count);
             src.Edit.Slice(offset,take).CopyTo(unpacked);
             return BitPack.pack(unpacked, z32);
@@ -74,8 +74,8 @@ namespace Z0
         public static ulong slice(in BitSpan src, W64 w, int offset, int count)
         {
             var buffer = Stacks.alloc(w512);
-            var unpacked = Stacks.span<bit>(ref buffer);
-            ref var dst = ref Stacks.head<bit>(ref buffer);
+            var unpacked = Stacks.span<Bit32>(ref buffer);
+            ref var dst = ref Stacks.head<Bit32>(ref buffer);
             memory.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked, z64);
         }
@@ -84,8 +84,8 @@ namespace Z0
         internal static sbyte islice(in BitSpan src, W8 w, int offset, int count)
         {
             var buffer = Stacks.alloc(w64);
-            var unpacked = Stacks.span<bit>(ref buffer);
-            ref var dst = ref Stacks.head<bit>(ref buffer);
+            var unpacked = Stacks.span<Bit32>(ref buffer);
+            ref var dst = ref Stacks.head<Bit32>(ref buffer);
             memory.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked, z8i);
         }
@@ -94,8 +94,8 @@ namespace Z0
         internal static short islice(in BitSpan src, W16 w, int offset, int count)
         {
             var buffer = Stacks.alloc(w128);
-            var unpacked = Stacks.span<bit>(ref buffer);
-            ref var dst = ref Stacks.head<bit>(ref buffer);
+            var unpacked = Stacks.span<Bit32>(ref buffer);
+            ref var dst = ref Stacks.head<Bit32>(ref buffer);
             memory.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked, z16i);
         }
@@ -104,8 +104,8 @@ namespace Z0
         internal static int islice(in BitSpan src, W32 w, int offset, int count)
         {
             var buffer = Stacks.alloc(w256);
-            var unpacked = Stacks.span<bit>(ref buffer);
-            ref var dst = ref Stacks.head<bit>(ref buffer);
+            var unpacked = Stacks.span<Bit32>(ref buffer);
+            ref var dst = ref Stacks.head<Bit32>(ref buffer);
             memory.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked,z32i);
         }
@@ -114,8 +114,8 @@ namespace Z0
         internal static long islice(in BitSpan src, W64 w, int offset, int count)
         {
             var buffer = Stacks.alloc(w512);
-            var unpacked = Stacks.span<bit>(ref buffer);
-            ref var dst = ref Stacks.head<bit>(ref buffer);
+            var unpacked = Stacks.span<Bit32>(ref buffer);
+            ref var dst = ref Stacks.head<Bit32>(ref buffer);
             memory.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked, z64i);
         }

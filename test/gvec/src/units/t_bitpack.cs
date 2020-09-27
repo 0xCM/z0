@@ -99,7 +99,7 @@ namespace Z0
                 var src = Random.One(z64);
                 BitPack.unpack<ulong>(src, dst);
                 for(var i=0; i< dst.Length; i++)
-                    Claim.eq((uint)bit.test(src,i), dst[i]);
+                    Claim.eq((uint)Bit32.test(src,i), dst[i]);
             }
         }
 
@@ -114,14 +114,14 @@ namespace Z0
                 var bitseq = bs.BitSeq.Blocked(block);
                 uint packed = BitPack.pack(bitseq,n8);
                 for(var i=0; i< count; i++)
-                    Claim.Eq(bs[i], bit.test(packed, i));
+                    Claim.Eq(bs[i], Bit32.test(packed, i));
             }
         }
 
         public void pack_32()
         {
             var n = 32;
-            Span<bit> buffer = new bit[n];
+            Span<Bit32> buffer = new Bit32[n];
             for(var i=0; i<RepCount; i++)
             {
                 var bits = Random.BitStream32().Take(Random.Next<uint>(5,25)).ToSpan();

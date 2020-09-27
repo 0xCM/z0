@@ -9,13 +9,14 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    public readonly struct bit
     {
-        [MethodImpl(Inline)]
-        public static void OnSome(this Bit32 x, Action f)
-        {
-            if(x)
-                f();
-        }
+        readonly bool State;
+    }
+
+    public struct bit<T>
+        where T : unmanaged
+    {
+        T State;
     }
 }

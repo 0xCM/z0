@@ -9,14 +9,14 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     [SuppressUnmanagedCodeSecurity]
-    public interface ICheckSF128<S,T> : IFunc<S,Vector128<T>,bit>
+    public interface ICheckSF128<S,T> : IFunc<S,Vector128<T>,Bit32>
         where S : unmanaged
         where T : unmanaged
     {
 
     }
 
-    public interface ICheckSF256<S,T> : IFunc<S, Vector256<T>, bit>
+    public interface ICheckSF256<S,T> : IFunc<S, Vector256<T>, Bit32>
         where S : unmanaged
         where T : unmanaged
     {

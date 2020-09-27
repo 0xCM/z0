@@ -11,19 +11,19 @@ namespace Z0
     using static Memories;
 
     partial class gbits
-    {        
+    {
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, false otherwise
         /// </summary>
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to chech</param>
         [MethodImpl(Inline), TestBit, Closures(Integers)]
-        public static bit testbit<T>(T src, byte pos)
+        public static Bit32 testbit<T>(T src, byte pos)
             where T : unmanaged
                 => testbit_u(src,pos);
 
         [MethodImpl(Inline)]
-        static bit testbit_u<T>(T src, byte pos)
+        static Bit32 testbit_u<T>(T src, byte pos)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -39,7 +39,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit testbit_i<T>(T src, byte pos)
+        static Bit32 testbit_i<T>(T src, byte pos)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -55,7 +55,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit testbit_f<T>(T src, byte pos)
+        static Bit32 testbit_f<T>(T src, byte pos)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
@@ -64,6 +64,6 @@ namespace Z0
                  return Bits.testbit(float64(src), pos);
             else
                 throw Unsupported.define<T>();
-        }           
+        }
     }
 }

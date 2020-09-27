@@ -24,8 +24,8 @@ namespace Z0
                 Claim.eq(bv.BitCount, bs.Length);
                 for(var i=0; i<bv.BitCount; i+= 2)
                 {
-                    bv[i] = bit.Off;
-                    bs[i] = bit.Off;
+                    bv[i] = Bit32.Off;
+                    bs[i] = Bit32.Off;
                 }
 
                 Claim.eq(bv.ToBitString(),bs);
@@ -44,8 +44,8 @@ namespace Z0
                 Claim.eq(bc.Width, bs.Length);
                 for(var i=0; i<bc.Width; i+= 2)
                 {
-                    bc[i] = bit.Off;
-                    bs[i] = bit.Off;
+                    bc[i] = Bit32.Off;
+                    bs[i] = Bit32.Off;
                 }
 
                 Claim.eq(bc.ToBitString(),bs);
@@ -85,7 +85,7 @@ namespace Z0
             {
                 var x = Random.BitBlock<N,T>();
                 var y = Random.BitBlock<N,T>();
-                bit a = x % y;
+                Bit32 a = x % y;
                 var b = BitBlocks.modprod(x,y);
                 if(a != b)
                     Notify($"nbc {n}x{ApiIdentity.numeric<T>()} is a problem");

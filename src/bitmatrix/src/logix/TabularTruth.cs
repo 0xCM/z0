@@ -12,9 +12,9 @@ namespace Z0
     [ApiHost]
     public readonly struct TabularTruth : IApiHost<TabularTruth>
     {
-        static bit on => bit.On;
+        static Bit32 on => Bit32.On;
 
-        static bit off => bit.Off;
+        static Bit32 off => Bit32.Off;
 
         static BitLogix bitlogix => BitLogix.Service;
 

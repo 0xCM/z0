@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
 
     partial class XTend
@@ -18,8 +18,8 @@ namespace Z0
         /// <param name="ys">The right span</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline)]
-        public static bit Identical<T>(this Span<T> xs, Span<T> ys)  
-            where T : unmanaged       
+        public static Bit32 Identical<T>(this Span<T> xs, Span<T> ys)
+            where T : unmanaged
                 => Algorithms.identical(xs,ys);
 
         /// <summary>
@@ -29,8 +29,8 @@ namespace Z0
         /// <param name="ys">The right span</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline)]
-        public static bit Identical<T>(this ReadOnlySpan<T> xs, ReadOnlySpan<T> ys)  
-            where T : unmanaged       
+        public static Bit32 Identical<T>(this ReadOnlySpan<T> xs, ReadOnlySpan<T> ys)
+            where T : unmanaged
                 => Algorithms.identical(xs,ys);
     }
 }

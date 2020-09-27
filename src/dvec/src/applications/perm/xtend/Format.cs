@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst;    
+    using static Konst;
 
     using API = Permute;
 
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="src">The permutation spec</param>
         public static string FormatMap(this Perm4L src)
         {
-            static char letter(bit x, bit y)
+            static char letter(Bit32 x, Bit32 y)
             {
                 if(x && y)
                     return 'D';
@@ -66,8 +66,8 @@ namespace Z0
                 int i=0, j=0;
                 letters[i++] = letter(bs[j++], bs[j++]);
                 letters[i++] = letter(bs[j++], bs[j++]);
-                letters[i++] = letter(bs[j++], bs[j++]);            
-                letters[i++] = letter(bs[j++], bs[j++]);            
+                letters[i++] = letter(bs[j++], bs[j++]);
+                letters[i++] = letter(bs[j++], bs[j++]);
                 return new string(letters);
             }
 

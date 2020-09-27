@@ -6,7 +6,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     /// <summary>
@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public readonly ref struct BitMatrix64
-    {                
+    {
         internal readonly Span<ulong> Data;
 
         /// <summary>
@@ -56,11 +56,11 @@ namespace Z0
             => BitMatrix.mul(A,B);
 
         [MethodImpl(Inline)]
-        public static bit operator ==(BitMatrix64 A, BitMatrix64 B)
+        public static Bit32 operator ==(BitMatrix64 A, BitMatrix64 B)
             => BitMatrix.same(A,B);
 
         [MethodImpl(Inline)]
-        public static bit operator !=(BitMatrix64 A, BitMatrix64 B)
+        public static Bit32 operator !=(BitMatrix64 A, BitMatrix64 B)
             => !BitMatrix.same(A,B);
 
         [MethodImpl(Inline)]
@@ -68,7 +68,7 @@ namespace Z0
             => this.Data = src;
 
         [MethodImpl(Inline)]
-        internal BitMatrix64(bit fill)
+        internal BitMatrix64(Bit32 fill)
         {
             this.Data = new ulong[N];
             if(fill)
@@ -107,7 +107,7 @@ namespace Z0
         /// </summary>
         public ref ulong Head
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => ref head(Data);
         }
 
@@ -117,14 +117,14 @@ namespace Z0
         /// <param name="row">The row index</param>
         /// <param name="col">The column index</param>
         /// <param name="src">The source value</param>
-        public bit this[int row, int col]
+        public Bit32 this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => bit.test(Data[row], col);
+            get => Bit32.test(Data[row], col);
 
             [MethodImpl(Inline)]
-            set => Data[row] = bit.set(Data[row], (byte)col, value);
-        }            
+            set => Data[row] = Bit32.set(Data[row], (byte)col, value);
+        }
 
         /// <summary>
         /// Gets or sets the data for a specified row
@@ -143,7 +143,7 @@ namespace Z0
             for(var r = 0; r < N; r++)
                 col = Bits.setif(Data[r], index, col, r);
             return col;
-        }        
+        }
 
         /// <summary>
         /// Interchanges the i'th and j'th rows where  0 <= i,j < 64
@@ -162,9 +162,9 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline)] 
+        [MethodImpl(Inline)]
         public readonly BitMatrix64 Replicate()
-            => new BitMatrix64(Data.Replicate()); 
+            => new BitMatrix64(Data.Replicate());
 
         [MethodImpl(Inline)]
         public bool Equals(BitMatrix64 rhs)
@@ -172,23 +172,23 @@ namespace Z0
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();
-        
+
         public override int GetHashCode()
             => throw new NotSupportedException();
-        
+
         public override string ToString()
-            => throw new NotSupportedException();       
+            => throw new NotSupportedException();
 
         /// <summary>
         /// Defines the 64x64 identity bitmatrix
         /// </summary>
-        public static BitMatrix64 Identity 
+        public static BitMatrix64 Identity
             => BitMatrix.identity(n64);
 
         /// <summary>
         /// Defines the 64x64 zero bitmatrix
         /// </summary>
-        public static BitMatrix64 Zero 
+        public static BitMatrix64 Zero
             => new BitMatrix64(new ulong[N]);
     }
 }

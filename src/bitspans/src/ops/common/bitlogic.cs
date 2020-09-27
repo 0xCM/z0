@@ -73,7 +73,7 @@ namespace Z0
             or(z,tmp,z);
             return ref z;
         }
-        
+
         /// <summary>
         /// Computes the ternary select s := a ? b : c = (a & b) | (~a & c)
         /// </summary>
@@ -88,12 +88,12 @@ namespace Z0
         {
             a.Data.Slice(0, offset).CopyTo(z.Data, offset);
             for(var i=0; i<offset; i++)
-                z[i] = bit.Off;
+                z[i] = Bit32.Off;
             return ref z;
         }
 
         [MethodImpl(Inline), Op]
-        public static bit same(in BitSpan a, in BitSpan b)
+        public static Bit32 same(in BitSpan a, in BitSpan b)
         {
             if(a.Length != b.Length)
                 return false;
@@ -116,7 +116,7 @@ namespace Z0
             var bitcount = src.Length;
             for(var i=0; i< bitcount; i++)
                 enabled += (int)src[i];
-            return enabled;                            
-        }        
+            return enabled;
+        }
     }
 }

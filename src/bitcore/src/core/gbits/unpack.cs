@@ -14,13 +14,13 @@ namespace Z0
     partial class gbits
     {
         [MethodImpl(Inline), Unpack, Closures(UnsignedInts)]
-        public static Span<bit> unpack<T>(ReadOnlySpan<T> src, Span<bit> dst)
+        public static Span<Bit32> unpack<T>(ReadOnlySpan<T> src, Span<Bit32> dst)
             where T : unmanaged
         {
             var srcsize = bitsize<T>();
             var bitcount = bitsize<T>()*src.Length;
-            insist(dst.Length >= bitcount);            
-            
+            insist(dst.Length >= bitcount);
+
             ref var target = ref head(dst);
             var k = 0;
             for(var i=0; i < src.Length; i++)
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="dst">The target span of length at least bitsize[T]*length(Span[T])</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline), Unpack, Closures(UnsignedInts)]
-        public static Span<bit> unpack<T>(Span<T> src, Span<bit> dst)
+        public static Span<Bit32> unpack<T>(Span<T> src, Span<Bit32> dst)
             where T : unmanaged
                 => unpack(src.ReadOnly(),dst);
 
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="dst">The target array of length at least bitsize[T]*length(Span[T])</param>
         /// <typeparam name="T">The source value type</typeparam>
         [MethodImpl(Inline), Unpack, Closures(UnsignedInts)]
-        public static Span<bit> unpack<T>(Span<T> src, bit[] dst)
+        public static Span<Bit32> unpack<T>(Span<T> src, Bit32[] dst)
             where T : unmanaged
                 => unpack(src, dst.AsSpan());
 
@@ -67,7 +67,7 @@ namespace Z0
             var len = bitsize<S>();
             insist(dst.Length - offset >= len);
             for(var i=0; i< len; i++)
-                seek(dst,offset + i)  = testbit(src, (byte)i) == bit.On ? As.one<T>() : As.zero<T>();            
+                seek(dst,offset + i)  = testbit(src, (byte)i) == Bit32.On ? As.one<T>() : As.zero<T>();
             return dst;
         }
 
@@ -83,8 +83,8 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
         {
-            if(typeof(T) == typeof(bit))
-                return MemoryMarshal.Cast<bit,T>(unpack(src, MemoryMarshal.Cast<T,bit>(dst)));
+            if(typeof(T) == typeof(Bit32))
+                return MemoryMarshal.Cast<Bit32,T>(unpack(src, MemoryMarshal.Cast<T,Bit32>(dst)));
             else
             {
                 var srcsize = bitsize<S>();
@@ -94,7 +94,7 @@ namespace Z0
                 var k = 0;
                 for(var i=0; i < src.Length; i++)
                 for(byte j=0; j < srcsize; j++)
-                    seek(dst,k++)  = testbit(skip(src,i), j) == bit.On ? As.one<T>() : As.zero<T>();            
+                    seek(dst,k++)  = testbit(skip(src,i), j) == Bit32.On ? As.one<T>() : As.zero<T>();
                 return dst;
             }
         }
@@ -103,6 +103,6 @@ namespace Z0
         public static Span<T> unpack<S,T>(Span<S> src, Span<T> dst)
             where S : unmanaged
             where T : unmanaged
-                => unpack(src.ReadOnly(), dst);        
+                => unpack(src.ReadOnly(), dst);
     }
 }

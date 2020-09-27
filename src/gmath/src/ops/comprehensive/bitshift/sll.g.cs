@@ -6,14 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
+
+    using static Konst;
     using static Memories;
 
     partial class gmath
     {
         [MethodImpl(Inline)]
-        public static uint sll<E>(bit x, E offset)
+        public static uint sll<E>(Bit32 x, E offset)
             where E : unmanaged, Enum
                 => sll((uint)x, Enums.scalar<E,byte>(offset));
 

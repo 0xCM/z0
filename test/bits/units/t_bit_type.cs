@@ -6,12 +6,12 @@ namespace Z0
 {
     public class t_bit_type : t_bitcore<t_bit_type>
     {
-        static bit On = bit.On;
-        
-        static bit Off = bit.Off;
+        static Bit32 On = Bit32.On;
+
+        static Bit32 Off = Bit32.Off;
 
         public void sb_bit_convert()
-        {            
+        {
             Claim.Eq((byte)0, (byte)Off);
             Claim.Eq((byte)1, (byte)On);
 
@@ -27,10 +27,10 @@ namespace Z0
         }
 
         public void sb_bit_parse()
-        {            
+        {
             //parse
-            Claim.Eq(Off, bit.Parse('0'));
-            Claim.Eq(On, bit.Parse('1'));
+            Claim.Eq(Off, Bit32.Parse('0'));
+            Claim.Eq(On, Bit32.Parse('1'));
         }
 
         public void sb_bit_not()
@@ -53,7 +53,7 @@ namespace Z0
             Claim.Eq(On, On | Off);
             Claim.Eq(Off, Off | Off);
             Claim.Eq(On, On | On);
-        } 
+        }
 
         public void bit_xor()
         {

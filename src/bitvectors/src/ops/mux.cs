@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
 
     partial class BitVector
     {
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="control">Specifies the output selection</param>
         /// <param name="src">The input from which a bit will be selected</param>
         [MethodImpl(Inline), Op]
-        public static bit mux(BitVector8 src,BitVector4 control)
+        public static Bit32 mux(BitVector8 src,BitVector4 control)
             => src[control.Data];
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="src">The input from which a bit will be selected</param>
         /// <param name="control">Specifies the output selection</param>
         [MethodImpl(Inline), Op]
-        public static bit mux(BitVector16 src, BitVector4 control)
+        public static Bit32 mux(BitVector16 src, BitVector4 control)
             => src[control.Data];
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="src">The input from which a bit will be selected</param>
         /// <param name="control">Specifies the output selection</param>
         [MethodImpl(Inline), Op]
-        public static bit mux(BitVector32 src, BitVector8 control)
+        public static Bit32 mux(BitVector32 src, BitVector8 control)
             => src[control.Data];
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="src">The input from which a bit will be selected</param>
         /// <param name="control">Specifies the output selection</param>
         [MethodImpl(Inline), Op]
-        public static bit mux(BitVector64 src, BitVector8 control)
+        public static Bit32 mux(BitVector64 src, BitVector8 control)
             => src[control.Data];
     }
 }

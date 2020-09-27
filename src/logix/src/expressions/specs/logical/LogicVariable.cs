@@ -29,7 +29,7 @@ namespace Z0.Logix
         public string Name => Symbol.ToString();
 
         [MethodImpl(Inline)]
-        public LogicVariable(uint name, bit init)
+        public LogicVariable(uint name, Bit32 init)
         {
             Symbol = name;
             Value = new LiteralLogicExpr(init);
@@ -40,7 +40,7 @@ namespace Z0.Logix
             => Value = value;
 
         [MethodImpl(Inline)]
-        public void Set(bit value)
+        public void Set(Bit32 value)
             => Value = new LiteralLogicExpr(value);
 
         [MethodImpl(Inline)]

@@ -21,7 +21,7 @@ namespace Z0
         public static T bitslice<T>(in BitSpan src, int offset)
             where T : unmanaged
         {
-            var dst = span<bit>(bitwidth<T>());
+            var dst = span<Bit32>(bitwidth<T>());
             var len = math.min(dst.Length, src.Length - offset);
             Copier.copy(src.Edit, offset, len, dst);
             return BitPack.pack<T>(dst);
@@ -36,7 +36,7 @@ namespace Z0
         public static T bitslice<T>(in BitSpan src)
             where T : unmanaged
         {
-            var dst = span<bit>(bitwidth<T>());
+            var dst = span<Bit32>(bitwidth<T>());
             var len = math.min(dst.Length, src.Length);
             Copier.copy(src.Edit, 0, len, dst);
             return BitPack.pack<T>(dst);
@@ -53,7 +53,7 @@ namespace Z0
         public static T bitslice<T>(in BitSpan src, int offset, int count)
             where T : unmanaged
         {
-            var dst = span<bit>(bitwidth<T>());
+            var dst = span<Bit32>(bitwidth<T>());
             var len = math.min(count, src.Length - offset);
             Copier.copy(src.Edit, offset, len, dst);
             return BitPack.pack<T>(dst);

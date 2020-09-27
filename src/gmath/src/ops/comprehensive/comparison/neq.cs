@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
+
+    using static Konst;
     using static Memories;
 
     partial class gmath
@@ -18,12 +18,12 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline), Neq, Closures(AllNumeric)]
-        public static bit neq<T>(T a, T b)
+        public static Bit32 neq<T>(T a, T b)
             where T : unmanaged
                 => neq_u(a,b);
 
         [MethodImpl(Inline)]
-        static bit neq_u<T>(T a, T b)
+        static Bit32 neq_u<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -39,7 +39,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit neq_i<T>(T a, T b)
+        static Bit32 neq_i<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -50,7 +50,7 @@ namespace Z0
                  return math.neq(int32(a), int32(b));
             else if(typeof(T) == typeof(long))
                  return math.neq(int64(a), int64(b));
-            else 
+            else
                 return gfp.neq(a,b);
         }
     }

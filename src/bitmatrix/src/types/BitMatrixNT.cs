@@ -94,7 +94,7 @@ namespace Z0
             get => ref first(Data);
         }
 
-        public bit this[int row, int col]
+        public Bit32 this[int row, int col]
         {
             [MethodImpl(Inline)]
             get => this[row][col];
@@ -166,7 +166,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The source value</param>
         [MethodImpl(Inline)]
-        public void Fill(bit value)
+        public void Fill(Bit32 value)
         {
             if(value)
                 Content.Fill(NumericLiterals.maxval<T>());

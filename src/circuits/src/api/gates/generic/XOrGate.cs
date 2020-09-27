@@ -11,15 +11,15 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct XOrGate<T> : 
-        IBinaryGate<T>, 
-        IBinaryGate128<T>, 
+    public readonly struct XOrGate<T> :
+        IBinaryGate<T>,
+        IBinaryGate128<T>,
         IBinaryGate256<T>,
         IBinaryGate512<T>
             where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public bit Invoke(bit x, bit y)
+        public Bit32 Invoke(Bit32 x, Bit32 y)
             => x ^ y;
 
         [MethodImpl(Inline)]

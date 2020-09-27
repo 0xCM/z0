@@ -97,7 +97,7 @@ namespace Z0
             {
                 Random.SpanFill(packed);
                 BitPack.unpack(packed, unpacked);
-                var bitspan = BitSpans.load(unpacked.As<bit>());
+                var bitspan = BitSpans.load(unpacked.As<Bit32>());
                 bitspan_check(packed,bitspan);
             }
         }
@@ -231,12 +231,12 @@ namespace Z0
                 if(gmath.even(i))
                 {
                     Claim.Require(bitspan[i]);
-                    ClaimPrimalSeq.eq(bit.One, format[(int)j]);
+                    ClaimPrimalSeq.eq(Bit32.One, format[(int)j]);
                 }
                 else
                 {
                     Claim.nea(bitspan[i]);
-                    ClaimPrimalSeq.eq(bit.Zero, format[(int)j]);
+                    ClaimPrimalSeq.eq(Bit32.Zero, format[(int)j]);
                 }
             }
         }
@@ -314,7 +314,7 @@ namespace Z0
             var bitcount = bitspan.Length;
             for(int i=0, k = 0; i < packed.Length; i++, k += 8)
             for(var j=0; j < 8; j++)
-                Claim.Eq(bit.test(packed[i], j), bitspan[k + j]);
+                Claim.Eq(Bit32.test(packed[i], j), bitspan[k + j]);
         }
     }
 }

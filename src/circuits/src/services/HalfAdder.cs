@@ -8,15 +8,15 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static Circuits;
 
     [ApiHost]
     public readonly struct HalfAdder : IApiHost<HalfAdder>, IHalfAdder
-    {        
+    {
         [MethodImpl(Inline), Op]
-        public ConstPair<bit> Invoke(bit a, bit b)        
+        public ConstPair<Bit32> Invoke(Bit32 a, Bit32 b)
             => (Gates.xor().Invoke(a, b), Gates.and().Invoke(a, b));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
@@ -53,10 +53,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public ConstPair<Vector256<T>> Invoke(Vector256<T> a, Vector256<T> b)
-            => (Gates.xor<T>().Invoke(a,b), Gates.and<T>().Invoke(a,b));        
+            => (Gates.xor<T>().Invoke(a,b), Gates.and<T>().Invoke(a,b));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public ConstPair<Vector512<T>> Invoke(in Vector512<T> a, in Vector512<T> b)
-            => (Gates.xor<T>().Invoke(a,b), Gates.and<T>().Invoke(a,b));        
+            => (Gates.xor<T>().Invoke(a,b), Gates.and<T>().Invoke(a,b));
     }
 }

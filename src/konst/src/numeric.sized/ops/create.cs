@@ -93,7 +93,7 @@ namespace Z0
         /// <param name="x0">The term at index 0</param>
         /// <param name="x1">The term at index 1</param>
         [MethodImpl(Inline), Op]
-        public static uint2 create(W2 w, bit x0, bit x1 = default)
+        public static uint2 create(W2 w, Bit32 x0, Bit32 x1 = default)
              => new uint2(((uint)x0 << 0) | ((uint)x1 << 1), true);
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
     partial class XTend
     {
         [MethodImpl(Inline)]
-        public static void OnNone(this bit x, Action f)
+        public static void OnNone(this Bit32 x, Action f)
         {
             if(!x)
                 f();

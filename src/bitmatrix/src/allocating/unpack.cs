@@ -17,9 +17,9 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         /// <typeparam name="T">The element type of the target matrix</typeparam>
-        public static Matrix<N8,bit> unpack(in BitMatrix8 A)
+        public static Matrix<N8,Bit32> unpack(in BitMatrix8 A)
         {
-            var Z = Matrix.alloc<N8,bit>();
+            var Z = Matrix.alloc<N8,Bit32>();
             BitMatrix.unpack(A, Z);
             return Z;
         }
@@ -30,9 +30,9 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         /// <typeparam name="T">The element type of the target matrix</typeparam>
-        public static Matrix<N8, bit> unpack(in BitMatrix<byte> A)
+        public static Matrix<N8, Bit32> unpack(in BitMatrix<byte> A)
         {
-            var Z = Matrix.alloc<N8,bit>();
+            var Z = Matrix.alloc<N8,Bit32>();
             BitMatrix.unpack(A, Z);
             return  Z;
         }
@@ -43,9 +43,9 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         /// <typeparam name="T">The element type of the target matrix</typeparam>
-        public static Matrix<N16,bit> unpack(in BitMatrix16 A)
+        public static Matrix<N16,Bit32> unpack(in BitMatrix16 A)
         {
-            var Z = Matrix.alloc<N16,bit>();
+            var Z = Matrix.alloc<N16,Bit32>();
             BitMatrix.unpack(A, Z);
             return  Z;
         }
@@ -56,9 +56,9 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         /// <typeparam name="T">The element type of the target matrix</typeparam>
-        public static Matrix<N16,bit> unpack(in BitMatrix<ushort> A)
+        public static Matrix<N16,Bit32> unpack(in BitMatrix<ushort> A)
         {
-            var Z = Matrix.alloc<N16,bit>();
+            var Z = Matrix.alloc<N16,Bit32>();
             BitMatrix.unpack(A, Z);
             return  Z;
         }
@@ -69,9 +69,9 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         /// <typeparam name="T">The element type of the target matrix</typeparam>
-        public static Matrix<N32,bit> unpack(in BitMatrix32 A)
+        public static Matrix<N32,Bit32> unpack(in BitMatrix32 A)
         {
-            var Z = Matrix.alloc<N32,bit>();
+            var Z = Matrix.alloc<N32,Bit32>();
             BitMatrix.unpack(A, Z);
             return  Z;
         }
@@ -82,9 +82,9 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         /// <typeparam name="T">The element type of the target matrix</typeparam>
-        public static Matrix<N32,bit> unpack(in BitMatrix<uint> A)
+        public static Matrix<N32,Bit32> unpack(in BitMatrix<uint> A)
         {
-            var Z = Matrix.alloc<N32,bit>();
+            var Z = Matrix.alloc<N32,Bit32>();
             BitMatrix.unpack(A, Z);
             return  Z;
         }
@@ -95,9 +95,9 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         /// <typeparam name="T">The element type of the target matrix</typeparam>
-        public static Matrix<N64,bit> unpack(in BitMatrix64 A)
+        public static Matrix<N64,Bit32> unpack(in BitMatrix64 A)
         {
-            var Z = Matrix.alloc<N64,bit>();
+            var Z = Matrix.alloc<N64,Bit32>();
             BitMatrix.unpack(A, Z);
             return Z;
         }
@@ -108,9 +108,9 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         /// <typeparam name="T">The element type of the target matrix</typeparam>
-        public static Matrix<N64,bit> unpack(in BitMatrix<ulong> A)
+        public static Matrix<N64,Bit32> unpack(in BitMatrix<ulong> A)
         {
-            var Z = Matrix.alloc<N64,bit>();
+            var Z = Matrix.alloc<N64,Bit32>();
             BitMatrix.unpack(A, Z);
             return  Z;
         }

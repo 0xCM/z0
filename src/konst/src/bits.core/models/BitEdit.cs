@@ -9,18 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    public static class BitEdit
-    {
-        /// <summary>
-        /// Wraps a bitview around a generic reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The generic type</typeparam>
-        public static BitEdit<T> Over<T>(ref T src)
-            where T : unmanaged
-                => new BitEdit<T>(ref src);
-    }
-
     /// <summary>
     /// Represents a value as an ordered sequence of bits/bytes
     /// </summary>
@@ -76,13 +64,13 @@ namespace Z0
         /// <summary>
         /// Queries/Manipulates the source at the bit-level
         /// </summary>
-        public bit this[ByteSize offset, byte pos]
+        public Bit32 this[ByteSize offset, byte pos]
         {
             [MethodImpl(Inline)]
-            get => bit.test(Bytes[offset], pos);
+            get => Bit32.test(Bytes[offset], pos);
 
             [MethodImpl(Inline)]
-            set => Bytes[offset] = bit.set(Bytes[offset], pos, value);
+            set => Bytes[offset] = Bit32.set(Bytes[offset], pos, value);
         }
 
         [MethodImpl(Inline)]

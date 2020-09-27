@@ -46,7 +46,7 @@ namespace Z0
         protected void bg_bitread_bench<T>(uint M, uint N, SystemCounter counter = default)
             where T : unmanaged
         {
-            var last = bit.Off;
+            var last = Bit32.Off;
             for(var i = 0; i<CycleCount; i++)
             {
                 var src = Random.BitGrid<T>(M,N);
@@ -64,7 +64,7 @@ namespace Z0
         protected void bm_bitread_bench<T>(SystemCounter counter = default)
             where T : unmanaged
         {
-            var last = bit.Off;
+            var last = Bit32.Off;
             int M = (int)bitwidth<T>();
             int N = (int)bitwidth<T>();
             for(var i = 0; i<CycleCount; i++)

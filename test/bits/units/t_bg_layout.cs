@@ -76,7 +76,7 @@ namespace Z0
             ref readonly var src = ref As.first64(data);
             var spec = GridCells.grid(n8, n8, byte.MinValue);
             var map = spec.Map();
-            var state = bit.Off;
+            var state = Bit32.Off;
             Claim.eq(map.CellCount, data.Length * bitwidth<byte>());
             for(var row = 0; row < map.RowCount; row++)
             for(var col = 0; col < map.ColCount; col++)

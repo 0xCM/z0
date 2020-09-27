@@ -21,7 +21,7 @@ namespace Z0
         public static ref readonly Matrix<N16,T> unpack<T>(in BitMatrix16 src, in Matrix<N16,T> dst)
             where T : unmanaged
         {
-            gbits.unpack(src.Content, dst.Data.AsSpan());            
+            gbits.unpack(src.Content, dst.Data.AsSpan());
             return ref dst;
         }
 
@@ -35,7 +35,7 @@ namespace Z0
         public static ref readonly Matrix<N8,T> unpack<T>(in BitMatrix8 src, in Matrix<N8,T> dst)
             where T : unmanaged
         {
-            gbits.unpack(src.Data, dst.Data.AsSpan());            
+            gbits.unpack(src.Data, dst.Data.AsSpan());
             return ref dst;
         }
 
@@ -49,7 +49,7 @@ namespace Z0
         public static ref readonly Matrix<N32,T> unpack<T>(in BitMatrix32 src, in Matrix<N32,T> dst)
             where T : unmanaged
         {
-            gbits.unpack(src.Content, dst.Data.AsSpan());            
+            gbits.unpack(src.Content, dst.Data.AsSpan());
             return ref dst;
         }
 
@@ -63,7 +63,7 @@ namespace Z0
         public static ref readonly Matrix<N64,T> unpack<T>(in BitMatrix64 src, in Matrix<N64,T> dst)
             where T : unmanaged
         {
-            gbits.unpack(src.Content, dst.Data.AsSpan());            
+            gbits.unpack(src.Content, dst.Data.AsSpan());
             return ref dst;
         }
 
@@ -78,8 +78,8 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where S : unmanaged
             where T : unmanaged
-        {            
-            gbits.unpack(src.Content, Z.Data.AsSpan());            
+        {
+            gbits.unpack(src.Content, Z.Data.AsSpan());
             return ref Z;
         }
 
@@ -97,7 +97,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            gbits.unpack(src.Content, dst.Data.AsSpan());            
+            gbits.unpack(src.Content, dst.Data.AsSpan());
             return ref dst;
         }
 
@@ -117,7 +117,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            gbits.unpack(src.Content, dst.Data.AsSpan());            
+            gbits.unpack(src.Content, dst.Data.AsSpan());
             return ref dst;
         }
 
@@ -136,7 +136,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            gbits.unpack(src.Content, dst.Unblocked);            
+            gbits.unpack(src.Content, dst.Unblocked);
             return ref dst;
         }
 
@@ -156,7 +156,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            gbits.unpack(src.Content, dst.Unblocked);            
+            gbits.unpack(src.Content, dst.Unblocked);
             return ref dst;
         }
 
@@ -166,9 +166,9 @@ namespace Z0
         /// <param name="A">The source bitmatrix</param>
         /// <param name="Z">The target matrix</param>
         [MethodImpl(Inline), Unpack]
-        public static ref readonly Matrix<N8,bit> unpack(in BitMatrix8 A, in Matrix<N8,bit> Z)
+        public static ref readonly Matrix<N8,Bit32> unpack(in BitMatrix8 A, in Matrix<N8,Bit32> Z)
         {
-            gbits.unpack(A.Data, Z.Data);            
+            gbits.unpack(A.Data, Z.Data);
             return ref Z;
         }
 
@@ -178,9 +178,9 @@ namespace Z0
         /// <param name="A">The source bitmatrix</param>
         /// <param name="Z">The target matrix</param>
         [MethodImpl(Inline), Unpack]
-        public static ref readonly Matrix<N8,bit> unpack(in BitMatrix<byte> A, in Matrix<N8,bit> Z)
+        public static ref readonly Matrix<N8,Bit32> unpack(in BitMatrix<byte> A, in Matrix<N8,Bit32> Z)
         {
-            gbits.unpack(A.Content, Z.Data);            
+            gbits.unpack(A.Content, Z.Data);
             return ref Z;
         }
 
@@ -190,9 +190,9 @@ namespace Z0
         /// <param name="A">The source bitmatrix</param>
         /// <param name="Z">The target matrix</param>
         [MethodImpl(Inline), Unpack]
-        public static ref readonly Matrix<N16,bit> unpack(in BitMatrix16 A, in Matrix<N16,bit> Z)
+        public static ref readonly Matrix<N16,Bit32> unpack(in BitMatrix16 A, in Matrix<N16,Bit32> Z)
         {
-            gbits.unpack(A.Content, Z.Data);            
+            gbits.unpack(A.Content, Z.Data);
             return ref Z;
         }
 
@@ -202,9 +202,9 @@ namespace Z0
         /// <param name="A">The source bitmatrix</param>
         /// <param name="Z">The target matrix</param>
         [MethodImpl(Inline), Unpack]
-        public static ref readonly Matrix<N16,bit> unpack(in BitMatrix<ushort> A, in Matrix<N16,bit> Z)
+        public static ref readonly Matrix<N16,Bit32> unpack(in BitMatrix<ushort> A, in Matrix<N16,Bit32> Z)
         {
-            gbits.unpack(A.Content, Z.Data);            
+            gbits.unpack(A.Content, Z.Data);
             return ref Z;
         }
 
@@ -214,9 +214,9 @@ namespace Z0
         /// <param name="A">The source bitmatrix</param>
         /// <param name="Z">The target matrix</param>
         [MethodImpl(Inline), Unpack]
-        public static ref readonly Matrix<N32,bit> unpack(in BitMatrix32 A, in Matrix<N32,bit> Z)
+        public static ref readonly Matrix<N32,Bit32> unpack(in BitMatrix32 A, in Matrix<N32,Bit32> Z)
         {
-            gbits.unpack(A.Content, Z.Data);            
+            gbits.unpack(A.Content, Z.Data);
             return ref Z;
         }
 
@@ -226,9 +226,9 @@ namespace Z0
         /// <param name="A">The source bitmatrix</param>
         /// <param name="Z">The target matrix</param>
         [MethodImpl(Inline), Unpack]
-        public static ref readonly Matrix<N32,bit> unpack(in BitMatrix<uint> A, in Matrix<N32,bit> Z)
+        public static ref readonly Matrix<N32,Bit32> unpack(in BitMatrix<uint> A, in Matrix<N32,Bit32> Z)
         {
-            gbits.unpack(A.Content, Z.Data);            
+            gbits.unpack(A.Content, Z.Data);
             return ref Z;
         }
 
@@ -238,9 +238,9 @@ namespace Z0
         /// <param name="A">The source bitmatrix</param>
         /// <param name="Z">The target matrix</param>
         [MethodImpl(Inline), Unpack]
-        public static ref readonly Matrix<N64,bit> unpack(in BitMatrix64 A, in Matrix<N64,bit> Z)
+        public static ref readonly Matrix<N64,Bit32> unpack(in BitMatrix64 A, in Matrix<N64,Bit32> Z)
         {
-            gbits.unpack(A.Content, Z.Data);            
+            gbits.unpack(A.Content, Z.Data);
             return ref Z;
         }
 
@@ -250,9 +250,9 @@ namespace Z0
         /// <param name="A">The source bitmatrix</param>
         /// <param name="Z">The target matrix</param>
         [MethodImpl(Inline), Unpack]
-        public static ref readonly Matrix<N64,bit> unpack(in BitMatrix<ulong> A, in Matrix<N64,bit> Z)
+        public static ref readonly Matrix<N64,Bit32> unpack(in BitMatrix<ulong> A, in Matrix<N64,Bit32> Z)
         {
-            gbits.unpack(A.Content, Z.Data);            
+            gbits.unpack(A.Content, Z.Data);
             return ref Z;
         }
    }

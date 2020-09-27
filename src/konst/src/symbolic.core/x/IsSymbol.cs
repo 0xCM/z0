@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bit IsSymbol(this Perm4L src)
+        public static Bit32 IsSymbol(this Perm4L src)
             => Symbolic.test(src);
 
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bit IsSymbol(this Perm8L src)
+        public static Bit32 IsSymbol(this Perm8L src)
             => Symbolic.test(src);
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The value to inspect</param>
         [MethodImpl(Inline)]
-        public static bit IsSymbol(this Perm16L src)
-            => Symbolic.test(src);        
+        public static Bit32 IsSymbol(this Perm16L src)
+            => Symbolic.test(src);
     }
 }

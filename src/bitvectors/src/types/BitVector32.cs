@@ -106,7 +106,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static bit operator %(BitVector32 x, BitVector32 y)
+        public static Bit32 operator %(BitVector32 x, BitVector32 y)
             => BitVector.dot(x,y);
 
         /// <summary>
@@ -205,7 +205,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The ource operand</param>
         [MethodImpl(Inline)]
-        public static bit operator !(BitVector32 src)
+        public static Bit32 operator !(BitVector32 src)
             => src.Empty;
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator ==(BitVector32 x, BitVector32 y)
+        public static Bit32 operator ==(BitVector32 x, BitVector32 y)
             => x.Data == y.Data;
 
         /// <summary>
@@ -223,7 +223,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator !=(BitVector32 x, BitVector32 y)
+        public static Bit32 operator !=(BitVector32 x, BitVector32 y)
             => x.Data != y.Data;
 
         /// <summary>
@@ -232,7 +232,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator <(BitVector32 x, BitVector32 y)
+        public static Bit32 operator <(BitVector32 x, BitVector32 y)
             => math.lt(x,y);
 
         /// <summary>
@@ -241,7 +241,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator >(BitVector32 x, BitVector32 y)
+        public static Bit32 operator >(BitVector32 x, BitVector32 y)
             => math.gt(x,y);
 
         /// <summary>
@@ -250,7 +250,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator <=(BitVector32 x, BitVector32 y)
+        public static Bit32 operator <=(BitVector32 x, BitVector32 y)
             => math.lteq(x,y);
 
         /// <summary>
@@ -259,7 +259,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator >=(BitVector32 x, BitVector32 y)
+        public static Bit32 operator >=(BitVector32 x, BitVector32 y)
             => math.gteq(x,y);
 
         /// <summary>
@@ -330,13 +330,13 @@ namespace Z0
         /// <summary>
         /// Queries/Manipulates index-identified bits
         /// </summary>
-        public bit this[int pos]
+        public Bit32 this[int pos]
         {
             [MethodImpl(Inline)]
-            get => bit.test(Data, pos);
+            get => Bit32.test(Data, pos);
 
             [MethodImpl(Inline)]
-            set => Data = bit.set(Data, (byte)pos, value);
+            set => Data = Bit32.set(Data, (byte)pos, value);
        }
 
         /// <summary>

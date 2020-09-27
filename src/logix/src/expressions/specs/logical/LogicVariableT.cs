@@ -35,7 +35,7 @@ namespace Z0.Logix
         }
 
         [MethodImpl(Inline)]
-        internal LogicVariable(uint symbol, bit init)
+        internal LogicVariable(uint symbol, Bit32 init)
         {
             Symbol = symbol;
             Value = new LiteralLogicExpr<T>(init);
@@ -53,7 +53,7 @@ namespace Z0.Logix
             => Value = value;
 
         [MethodImpl(Inline)]
-        public void Set(bit value)
+        public void Set(Bit32 value)
             => Value = new LiteralLogicExpr<T>(value);
 
         public string Format()

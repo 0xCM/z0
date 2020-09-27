@@ -32,7 +32,7 @@ namespace Z0
             => NatSpan.alloc(n128,Konst.z64);
 
         [DisplayName("n256x1u")]
-        public static NatSpan<N256,bit> Case_n128x1u
-            => NatSpan.alloc<N256,bit>();
+        public static NatSpan<N256,Bit32> Case_n128x1u
+            => NatSpan.alloc<N256,Bit32>();
     }
 }

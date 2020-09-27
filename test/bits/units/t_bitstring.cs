@@ -16,7 +16,7 @@ namespace Z0
         void bs_bitview()
         {
             var x = Random.CpuVector<int>(n128);
-            var y = BitEdit.Over(ref x);
+            var y = Bit.editor(ref x);
             var ys = y.Bytes.ToBitString();
             var xs = x.ToBitString();
             Claim.eq(ys,xs);
@@ -118,9 +118,9 @@ namespace Z0
                 for(var j=0; j<bs.Length; j++)
                 {
                     if(j != bs.Length - 1)
-                        Claim.Eq(bs[j], bit.Off);
+                        Claim.Eq(bs[j], Bit32.Off);
                     else
-                        Claim.Eq(bs[j], bit.On);
+                        Claim.Eq(bs[j], Bit32.On);
                 }
 
                 if(i <= 63)
@@ -302,7 +302,7 @@ namespace Z0
                     Claim.eq(seqlen, bitwidth<T>());
 
                     for(byte j = 0; j < seqlen; j++)
-                        Claim.Eq(gbits.testbit(x0, j), (bit)(x1[j] == 1));
+                        Claim.Eq(gbits.testbit(x0, j), (Bit32)(x1[j] == 1));
                 }
 
             }

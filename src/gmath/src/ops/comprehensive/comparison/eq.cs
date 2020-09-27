@@ -19,12 +19,12 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <typeparam name="T">The numeric type</typeparam>
         [MethodImpl(Inline), Eq, Closures(AllNumeric)]
-        public static bit eq<T>(T a, T b)
+        public static Bit32 eq<T>(T a, T b)
             where T : unmanaged
                 => eq_u(a,b);
 
         [MethodImpl(Inline)]
-        static bit eq_u<T>(T a, T b)
+        static Bit32 eq_u<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -40,7 +40,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit eq_i<T>(T a, T b)
+        static Bit32 eq_i<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

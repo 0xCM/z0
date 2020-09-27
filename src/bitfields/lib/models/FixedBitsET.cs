@@ -41,7 +41,7 @@ namespace Z0
         public T BitSlice(byte start, byte length)
             => Data.BitSlice(start,length);
 
-        public bit this[ByteSize offset, byte pos]
+        public Bit32 this[ByteSize offset, byte pos]
         {
             [MethodImpl(Inline)]
             get => Data[offset,pos];

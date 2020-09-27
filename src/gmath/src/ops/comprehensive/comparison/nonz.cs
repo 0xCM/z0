@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
+
+    using static Konst;
     using static Memories;
 
     partial class gmath
@@ -18,12 +18,12 @@ namespace Z0
         /// <param name="src">The source operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline), Nonz, Closures(Integers)]
-        public static bit nonz<T>(T src)
+        public static Bit32 nonz<T>(T src)
             where T : unmanaged
-                => nonz_u(src); 
+                => nonz_u(src);
 
         [MethodImpl(Inline)]
-        static bit nonz_u<T>(T a)
+        static Bit32 nonz_u<T>(T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -34,12 +34,12 @@ namespace Z0
                  return math.nonz(uint32(a));
             else if(typeof(T) == typeof(ulong))
                  return math.nonz(uint64(a));
-            else 
+            else
                 return nonz_i(a);
         }
 
         [MethodImpl(Inline)]
-        static bit nonz_i<T>(T a)
+        static Bit32 nonz_i<T>(T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -50,20 +50,20 @@ namespace Z0
                  return math.nonz(int32(a));
             else if(typeof(T) == typeof(long))
                  return math.nonz(int64(a));
-            else 
+            else
                 return gfp.nonz(a);
         }
-    
+
         [MethodImpl(Inline)]
-        static bit nonz_f<T>(T a)
+        static Bit32 nonz_f<T>(T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
                 return fmath.nonz(float32(a));
             else if(typeof(T) == typeof(double))
                 return fmath.nonz(float64(a));
-            else            
+            else
                 throw Unsupported.define<T>();
-        }     
+        }
     }
 }

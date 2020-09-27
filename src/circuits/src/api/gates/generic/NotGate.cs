@@ -8,15 +8,15 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
 
-    public readonly struct NotGate<T> : IUnaryGate<T>, IUnaryGate<Vector128<T>>, IUnaryGate<Vector256<T>>        
+    public readonly struct NotGate<T> : IUnaryGate<T>, IUnaryGate<Vector128<T>>, IUnaryGate<Vector256<T>>
         where T : unmanaged
-    {        
+    {
         [MethodImpl(Inline)]
-        public bit Invoke(bit input)
-            => !input;    
+        public Bit32 Invoke(Bit32 input)
+            => !input;
 
         [MethodImpl(Inline)]
         public T Invoke(T x)

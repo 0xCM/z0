@@ -8,7 +8,7 @@ namespace Z0
 
     using static Konst;
     using static Memories;
-                
+
     public class t_bitview : t_bitcore<t_bitview>
     {
         public void bitview_8()
@@ -27,13 +27,13 @@ namespace Z0
             where T : unmanaged
         {
             var src = maxval<T>();
-            var view = BitEdit.Over(ref src);
+            var view = Bit.editor(ref src);
             var bytecount = size<T>();
 
             for(var i=0; i<bytecount; i++)
             for(byte j=0; j<8; j++)
                 view[i,j] = j % 2 == 0;
-            
+
             var bs = BitString.scalar(src);
             for(var i=0; i< bytecount*8; i++)
                 Claim.Require(bs[i] == (i%2 == 0));

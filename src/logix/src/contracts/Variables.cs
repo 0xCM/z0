@@ -12,7 +12,7 @@ namespace Z0.Logix
         /// <summary>
         /// The name of the variable
         /// </summary>
-        string Name {get;}            
+        string Name {get;}
 
     }
 
@@ -33,7 +33,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="literal">The literal value to assign to the variable</param>
         void Set(T literal);
-        
+
         /// <summary>
         /// The current value of the variable
         /// </summary>
@@ -56,8 +56,8 @@ namespace Z0.Logix
         /// Updates the expression value
         /// </summary>
         /// <param name="literal">The literal value to assign to the variable</param>
-        void Set(bit literal);
-        
+        void Set(Bit32 literal);
+
         /// <summary>
         /// The current value of the variable
         /// </summary>
@@ -75,7 +75,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="expr">The value to assigned to the variable</param>
         void Set(ILogicExpr<T> expr);
-        
+
         /// <summary>
         /// The current value of the variable
         /// </summary>

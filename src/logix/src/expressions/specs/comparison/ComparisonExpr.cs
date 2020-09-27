@@ -65,7 +65,7 @@ namespace Z0.Logix
                 Vars[i].Set(values[i]);
         }
 
-        public void SetVars(params bit[] values)
+        public void SetVars(params Bit32[] values)
         {
             var count = Math.Min(Vars.Length, values.Length);
             for(var i=0; i<count; i++)
@@ -73,20 +73,20 @@ namespace Z0.Logix
         }
 
         [MethodImpl(Inline)]
-        public void SetVar(bit a)
+        public void SetVar(Bit32 a)
         {
             Vars[0].Set(a);
         }
 
         [MethodImpl(Inline)]
-        public void SetVars(bit a, bit b)
+        public void SetVars(Bit32 a, Bit32 b)
         {
             Vars[0].Set(a);
             Vars[1].Set(b);
         }
 
         [MethodImpl(Inline)]
-        public void SetVars(bit a, bit b, bit c)
+        public void SetVars(Bit32 a, Bit32 b, Bit32 c)
         {
             Vars[0].Set(a);
             Vars[1].Set(b);

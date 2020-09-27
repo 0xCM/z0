@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-                
-    using static Konst; 
+
+    using static Konst;
     using static Memories;
 
     partial class gmath
@@ -19,12 +19,12 @@ namespace Z0
         /// <param name="min">The lower bound</param>
         /// <param name="max">The uppper bound</param>
         [MethodImpl(Inline), Between, Closures(Integers)]
-        public static bit between<T>(T src, T min, T max)
+        public static Bit32 between<T>(T src, T min, T max)
             where T : unmanaged
                 => between_u(src,min,max);
 
         [MethodImpl(Inline)]
-        static bit between_u<T>(T x, T min, T max)
+        static Bit32 between_u<T>(T x, T min, T max)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -40,7 +40,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit between_i<T>(T x, T min, T max)
+        static Bit32 between_i<T>(T x, T min, T max)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

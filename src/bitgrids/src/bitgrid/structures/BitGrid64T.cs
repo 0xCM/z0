@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     /// <summary>
@@ -18,13 +18,13 @@ namespace Z0
     [IdentityProvider(typeof(BitGridIdentityProvider))]
     public readonly ref struct BitGrid64<T>
         where T : unmanaged
-    {                
+    {
         internal readonly ulong Data;
 
         /// <summary>
         /// The number of covered bits
         /// </summary>
-        public int BitCount => 64;        
+        public int BitCount => 64;
 
         public ulong Content { [MethodImpl(Inline)] get => Data; }
 
@@ -39,11 +39,11 @@ namespace Z0
             => src.Data;
 
         [MethodImpl(Inline)]
-        public static bit operator ==(BitGrid64<T> gx, BitGrid64<T> gy)
+        public static Bit32 operator ==(BitGrid64<T> gx, BitGrid64<T> gy)
             => gx.Data == gy.Data;
 
         [MethodImpl(Inline)]
-        public static bit operator !=(BitGrid64<T> gx, BitGrid64<T> gy)
+        public static Bit32 operator !=(BitGrid64<T> gx, BitGrid64<T> gy)
             => gx.Data != gy.Data;
 
         [MethodImpl(Inline)]

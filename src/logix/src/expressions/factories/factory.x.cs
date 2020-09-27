@@ -6,11 +6,11 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;    
+
+    using static Konst;
 
     public static class ExprX
-    {        
+    {
         /// <summary>
         /// Assigns a random value to a variable and returns that value to the caller
         /// </summary>
@@ -43,7 +43,7 @@ namespace Z0.Logix
             return x;
         }
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         static IVarExpr<T> Assign<T>(this IVarExpr<T> v, IExpr<T> value)
             where T : unmanaged
         {
@@ -59,7 +59,7 @@ namespace Z0.Logix
             v.Set(value);
             return v;
         }
-        
+
         /// <summary>
         /// Returns the source expression variable at index 0
         /// </summary>
@@ -264,7 +264,7 @@ namespace Z0.Logix
         /// <param name="bs">The source bitstring</param>
         public static LiteralLogicSeqExpr ToLogicSeq(this BitString bs)
         {
-            var terms = new bit[bs.Length];
+            var terms = new Bit32[bs.Length];
             for(var i=0; i<terms.Length; i++)
                 terms[i] = bs[i];
             return new LiteralLogicSeqExpr(terms);

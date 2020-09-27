@@ -6,13 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
 
     public interface IHalfAdder
     {
-        ConstPair<bit> Invoke(bit a, bit b);        
-        
+        ConstPair<Bit32> Invoke(Bit32 a, Bit32 b);
+
         ConstPair<T> Invoke<T>(T a, T b)
             where T : unmanaged;
 
@@ -23,12 +23,12 @@ namespace Z0
             where T : unmanaged;
 
         ConstPair<Vector512<T>> Invoke<T>(in Vector512<T> a, in Vector512<T> b)
-            where T : unmanaged;        
+            where T : unmanaged;
     }
 
     public interface IHalfAdder<T> :
-        IHalfAdder64<T>, 
-        IHalfAdder128<T>, 
+        IHalfAdder64<T>,
+        IHalfAdder128<T>,
         IHalfAdder256<T>,
         IHalfAdder512<T>
             where T : unmanaged

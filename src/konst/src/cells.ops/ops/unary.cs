@@ -15,7 +15,7 @@ namespace Z0
     partial class CellOps
     {
         [MethodImpl(Inline), Op]
-        public static UnaryOp1 unary(UnaryOp<bit> f)
+        public static UnaryOp1 unary(UnaryOp<Bit32> f)
             => a => f(a);
 
         [MethodImpl(Inline), Op]
@@ -51,7 +51,7 @@ namespace Z0
             => a => f(a.Content);
 
         [MethodImpl(Inline), Op]
-        public static UnaryOp1 unary(MethodInfo f, UnaryOpClass<bit> k)
+        public static UnaryOp1 unary(MethodInfo f, UnaryOpClass<Bit32> k)
             => unary(uFx(f,k));
 
         [MethodImpl(Inline), Op]

@@ -53,7 +53,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public static RexPrefixBits Define(bit b, bit x, bit r, bit w, RexPrefixCode code)
+        public static RexPrefixBits Define(Bit32 b, Bit32 x, Bit32 r, Bit32 w, RexPrefixCode code)
         {
             var data = (byte)gmath.or(
                 gmath.sll(b, RFI.B),
@@ -91,7 +91,7 @@ namespace Z0.Asm
         public RexPrefixBits(byte src)
             => Data = src;
 
-        public bit B
+        public Bit32 B
         {
             [MethodImpl(Inline)]
             get => gbits.testbit(Scalar,(byte)RFI.B);
@@ -100,7 +100,7 @@ namespace Z0.Asm
             set => Update(gbits.setbit(Scalar,(byte)RFI.B, value));
         }
 
-        public bit X
+        public Bit32 X
         {
             [MethodImpl(Inline)]
             get => gbits.testbit(Scalar, (byte)RFI.X);
@@ -109,7 +109,7 @@ namespace Z0.Asm
             set => Update(gbits.setbit(Scalar, (byte)RFI.X, value));
         }
 
-        public bit R
+        public Bit32 R
         {
             [MethodImpl(Inline)]
             get => gbits.testbit(Scalar, (byte)RFI.R);
@@ -118,7 +118,7 @@ namespace Z0.Asm
             set => Update(gbits.setbit(Scalar, (byte)RFI.R, value));
         }
 
-        public bit W
+        public Bit32 W
         {
             [MethodImpl(Inline)]
             get => gbits.testbit(Scalar, (byte)RFI.W);

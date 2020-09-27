@@ -7,22 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     /// <summary>
     /// Defines a 16x16 matrix of bits
     /// </summary>
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
-    public readonly ref struct BitMatrix16 
-    {   
+    public readonly ref struct BitMatrix16
+    {
         internal readonly Span<ushort> Data;
 
         /// <summary>
         /// The matrix order
         /// </summary>
         public const uint N = 16;
-                                
+
         /// <summary>
         /// Defines the 16x16 identity bitmatrix
         /// </summary>
@@ -34,18 +34,18 @@ namespace Z0
         public static BitMatrix16 Zero => new BitMatrix16(new ushort[N]);
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 Alloc()        
+        public static BitMatrix16 Alloc()
             => From(new ushort[N]);
 
         /// <summary>
         /// Allocates a matrix with a fill value
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitMatrix16 Alloc(bit fill)                
+        public static BitMatrix16 Alloc(Bit32 fill)
             => new BitMatrix16(fill);
 
         [MethodImpl(Inline)]
-        public static BitMatrix16 From(ushort[] src)        
+        public static BitMatrix16 From(ushort[] src)
             => new BitMatrix16(src);
 
         [MethodImpl(Inline)]
@@ -84,18 +84,18 @@ namespace Z0
             => BitMatrix.mul(A, B);
 
         [MethodImpl(Inline)]
-        public static bit operator ==(in BitMatrix16 A, in BitMatrix16 B)
+        public static Bit32 operator ==(in BitMatrix16 A, in BitMatrix16 B)
             => BitMatrix.same(A,B);
 
         [MethodImpl(Inline)]
-        public static bit operator !=(in BitMatrix16 A, in BitMatrix16 B)
+        public static Bit32 operator !=(in BitMatrix16 A, in BitMatrix16 B)
             => !BitMatrix.same(A,B);
 
         [MethodImpl(Inline)]
         internal BitMatrix16(Span<ushort> src)
             => this.Data = src;
 
-        internal BitMatrix16(bit fill)
+        internal BitMatrix16(Bit32 fill)
         {
             this.Data = new ushort[N];
             if(fill)
@@ -125,7 +125,7 @@ namespace Z0
         /// </summary>
         public ref ushort Head
         {
-            [MethodImpl(Inline)] 
+            [MethodImpl(Inline)]
             get => ref head(Data);
         }
 
@@ -141,14 +141,14 @@ namespace Z0
         /// <param name="row">The row index</param>
         /// <param name="col">The column index</param>
         /// <param name="src">The source value</param>
-        public bit this[int row, int col]
+        public Bit32 this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => bit.test(skip(in Head, row), col);
+            get => Bit32.test(skip(in Head, row), col);
 
             [MethodImpl(Inline)]
-            set => seek(ref Head, row) = bit.set(seek(ref Head, row), (byte)col, value);
-        }            
+            set => seek(ref Head, row) = Bit32.set(seek(ref Head, row), (byte)col, value);
+        }
 
         /// <summary>
         /// Gets/sets an identified row
@@ -187,7 +187,7 @@ namespace Z0
         }
 
         public readonly BitMatrix16 Replicate()
-            => From(Data.ToArray());        
+            => From(Data.ToArray());
 
         [MethodImpl(Inline)]
         public string Format()
@@ -203,7 +203,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public override bool Equals(object obj)
             => throw new NotSupportedException();
-        
+
         public override int GetHashCode()
             => throw new NotSupportedException();
    }

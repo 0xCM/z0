@@ -7,19 +7,19 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
 
     partial class BV
     {
         [Closures(UnsignedInts), Dot]
         public readonly struct Dot<T> : IBinaryPred<T>
-            where T : unmanaged        
-        {    
+            where T : unmanaged
+        {
             [MethodImpl(Inline)]
-            public readonly bit Invoke(BitVector<T> a, BitVector<T> b) => BitVector.dot(a,b);
+            public readonly Bit32 Invoke(BitVector<T> a, BitVector<T> b) => BitVector.dot(a,b);
 
             [MethodImpl(Inline)]
-            public bit Invoke(T a, T b) => gbits.dot(a,b);
+            public Bit32 Invoke(T a, T b) => gbits.dot(a,b);
         }
     }
 }

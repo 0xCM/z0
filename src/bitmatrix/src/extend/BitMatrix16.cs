@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     public static class BitMatrix16x
-    {   
+    {
         /// <summary>
         /// Converts the matrix to a bitvector
         /// </summary>
@@ -28,7 +28,7 @@ namespace Z0
         {
             var dst = BitMatrix16.Alloc();
             for(var row = 0; row<perm.Length; row++)
-                dst[row,perm[row]] = bit.On;
+                dst[row,perm[row]] = Bit32.On;
             return dst;
         }
 
@@ -56,8 +56,8 @@ namespace Z0
         /// <summary>
         /// Determines whether this matrix is equivalent to the canonical 0 matrix
         /// </summary>
-        [MethodImpl(Inline)] 
-        public static bit IsZero(this BitMatrix16 A)
+        [MethodImpl(Inline)]
+        public static Bit32 IsZero(this BitMatrix16 A)
             => BitMatrix.empty(A);
 
         /// <summary>

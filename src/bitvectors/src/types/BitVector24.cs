@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    using static Memories;    
+    using static Konst;
+    using static Memories;
 
     /// <summary>
     /// Defines a 32-bit bitvector
     /// </summary>
-    public struct BitVector24 
-    {        
+    public struct BitVector24
+    {
         internal uint Data;
 
         const uint MaxValue = uint.MaxValue >> 8;
@@ -36,7 +36,7 @@ namespace Z0
 
         public static N24 N => default;
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static BitVector24 FromEnum<T>(T src)
             where T : unmanaged, Enum
                 => Enums.scalar<T,uint>(src);
@@ -59,7 +59,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator uint(BitVector24 src)
-            => src.Data;        
+            => src.Data;
 
         /// <summary>
         /// Implicitly converts a scalar value to a 32-bit bitvector
@@ -73,7 +73,7 @@ namespace Z0
         /// Implicitly converts a scalar value to a 32-bit bitvector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]    
+        [MethodImpl(Inline)]
         public static implicit operator BitVector24(byte src)
             => (uint)src;
 
@@ -81,7 +81,7 @@ namespace Z0
         /// Implicitly converts a scalar value to a 32-bit bitvector
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]    
+        [MethodImpl(Inline)]
         public static implicit operator BitVector24(ushort src)
             => (uint)src;
 
@@ -89,7 +89,7 @@ namespace Z0
         /// Implicitly constructs a bitvector from a tuple
         /// </summary>
         /// <param name="src">The source vector</param>
-        [MethodImpl(Inline)]    
+        [MethodImpl(Inline)]
         public static implicit operator BitVector24((ushort lo, byte hi) src)
             => new BitVector24(src.lo, src.hi);
 
@@ -117,7 +117,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline)]
-        public static bit operator %(BitVector24 x, BitVector24 y)
+        public static Bit32 operator %(BitVector24 x, BitVector24 y)
             => BitVector.dot(x.Data, y.Data);
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace Z0
             => x.Data | y.Data;
 
         /// <summary>
-        /// Computes the bitwise complement of the operand. 
+        /// Computes the bitwise complement of the operand.
         /// </summary>
         /// <param name="x">The source operand</param>
         [MethodImpl(Inline)]
@@ -182,7 +182,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The ource operand</param>
         [MethodImpl(Inline)]
-        public static bit operator !(BitVector24 src)
+        public static Bit32 operator !(BitVector24 src)
             => src.Empty;
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator ==(BitVector24 x, BitVector24 y)
+        public static Bit32 operator ==(BitVector24 x, BitVector24 y)
             => x.Data == y.Data;
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator !=(BitVector24 x, BitVector24 y)
+        public static Bit32 operator !=(BitVector24 x, BitVector24 y)
             => x.Data != y.Data;
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator <(BitVector24 x, BitVector24 y)
+        public static Bit32 operator <(BitVector24 x, BitVector24 y)
             => math.lt(x,y);
 
         /// <summary>
@@ -218,7 +218,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator >(BitVector24 x, BitVector24 y)
+        public static Bit32 operator >(BitVector24 x, BitVector24 y)
             => math.gt(x,y);
 
         /// <summary>
@@ -227,7 +227,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator <=(BitVector24 x, BitVector24 y)
+        public static Bit32 operator <=(BitVector24 x, BitVector24 y)
             => math.lteq(x,y);
 
         /// <summary>
@@ -236,7 +236,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline)]
-        public static bit operator >=(BitVector24 x, BitVector24 y)
+        public static Bit32 operator >=(BitVector24 x, BitVector24 y)
             => math.gteq(x,y);
 
         /// <summary>
@@ -317,7 +317,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (ushort)(Data >> 8);
         }
-        
+
         /// <summary>
         /// Presents bitvector content as a bytespan
         /// </summary>
@@ -348,13 +348,13 @@ namespace Z0
         /// <summary>
         /// Queries/Manipulates index-identified bits
         /// </summary>
-        public bit this[int pos]
+        public Bit32 this[int pos]
         {
             [MethodImpl(Inline)]
-            get => bit.test(Data, pos);
-            
+            get => Bit32.test(Data, pos);
+
             [MethodImpl(Inline)]
-            set => Data = bit.set(Data, (byte)pos, value);
+            set => Data = Bit32.set(Data, (byte)pos, value);
        }
 
         /// <summary>
@@ -377,10 +377,10 @@ namespace Z0
 
         public override bool Equals(object obj)
             => obj is BitVector24 x ? Equals(x) : false;
-        
+
         public override int GetHashCode()
             => Data.GetHashCode();
- 
+
         public override string ToString()
             => Data.ToBitString(24).Format();
     }

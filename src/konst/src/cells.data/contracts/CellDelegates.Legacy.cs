@@ -28,28 +28,28 @@ namespace Z0
     public delegate Cell512 BinaryOp512(Cell512 a, Cell512 b);
 
     [Free]
-    public delegate bit BinaryPredicate1(bit a, bit b);
+    public delegate Bit32 BinaryPredicate1(Bit32 a, Bit32 b);
 
     [Free]
-    public delegate bit BinaryPredicate8(Cell8 a, Cell8 b);
+    public delegate Bit32 BinaryPredicate8(Cell8 a, Cell8 b);
 
     [Free]
-    public delegate bit BinaryPredicate16(Cell16 a, Cell16 b);
+    public delegate Bit32 BinaryPredicate16(Cell16 a, Cell16 b);
 
     [Free]
-    public delegate bit BinaryPredicate32(Cell32 a, Cell32 b);
+    public delegate Bit32 BinaryPredicate32(Cell32 a, Cell32 b);
 
     [Free]
-    public delegate bit BinaryPredicate64(Cell64 a, Cell64 b);
+    public delegate Bit32 BinaryPredicate64(Cell64 a, Cell64 b);
 
     [Free]
-    public delegate bit BinaryPredicate128(Cell128 a, Cell128 b);
+    public delegate Bit32 BinaryPredicate128(Cell128 a, Cell128 b);
 
     [Free]
-    public delegate bit BinaryPredicate256(Cell256 a, Cell256 b);
+    public delegate Bit32 BinaryPredicate256(Cell256 a, Cell256 b);
 
     [Free]
-    public delegate bit BinaryPredicate512(Cell512 a, Cell512 b);
+    public delegate Bit32 BinaryPredicate512(Cell512 a, Cell512 b);
 
 
     [Free]
@@ -95,26 +95,26 @@ namespace Z0
     public delegate Cell512 UnaryOp512(Cell512 a);
 
     [Free]
-    public delegate bit UnaryPredicate1(bit a);
+    public delegate Bit32 UnaryPredicate1(Bit32 a);
 
     [Free]
-    public delegate bit UnaryPredicate8(Cell8 a);
+    public delegate Bit32 UnaryPredicate8(Cell8 a);
 
     [Free]
-    public delegate bit UnaryPredicate16(Cell16 a);
+    public delegate Bit32 UnaryPredicate16(Cell16 a);
 
     [Free]
-    public delegate bit UnaryPredicate32(Cell32 a);
+    public delegate Bit32 UnaryPredicate32(Cell32 a);
 
     [Free]
-    public delegate bit UnaryPredicate64(Cell64 a);
+    public delegate Bit32 UnaryPredicate64(Cell64 a);
 
     [Free]
-    public delegate bit UnaryPredicate128(Cell128 a);
+    public delegate Bit32 UnaryPredicate128(Cell128 a);
 
     [Free]
-    public delegate bit UnaryPredicate256(Cell256 a);
+    public delegate Bit32 UnaryPredicate256(Cell256 a);
 
     [Free]
-    public delegate bit UnaryPredicate512(Cell512 a);
+    public delegate Bit32 UnaryPredicate512(Cell512 a);
 }

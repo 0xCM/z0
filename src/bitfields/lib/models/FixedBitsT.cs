@@ -42,13 +42,13 @@ namespace Z0
         public T BitSlice(byte start, byte length)
             => gbits.slice(Data[start/CellWidth], (byte)(start % CellWidth), length);
 
-        public bit this[ByteSize offset, byte pos]
+        public Bit32 this[ByteSize offset, byte pos]
         {
             [MethodImpl(Inline)]
-            get => bit.test(Bytes[offset], pos);
+            get => Bit32.test(Bytes[offset], pos);
 
             [MethodImpl(Inline)]
-            set => Bytes[offset] = bit.set(Bytes[offset], pos, value);
+            set => Bytes[offset] = Bit32.set(Bytes[offset], pos, value);
         }
     }
 }

@@ -3,9 +3,9 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Logix
-{    
+{
 
-    public interface ILiteralLogicSeqExpr : ILiteralSeqExpr<bit>, ILogicExpr
+    public interface ILiteralLogicSeqExpr : ILiteralSeqExpr<Bit32>, ILogicExpr
     {
 
     }

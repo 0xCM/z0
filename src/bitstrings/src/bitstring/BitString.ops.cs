@@ -77,7 +77,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline)]
-        public static BitString load(ReadOnlySpan<bit> src)
+        public static BitString load(ReadOnlySpan<Bit32> src)
             => new BitString(src);
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace Z0
             var lastix = len - 1;
             Span<byte> dst = sys.alloc(len);
             for(var i=0; i<= lastix; i++)
-                dst[lastix - i] = src[i] == bit.Zero ? (byte)0 : (byte)1;
+                dst[lastix - i] = src[i] == Bit32.Zero ? (byte)0 : (byte)1;
             return new BitString(dst);
         }
 
@@ -367,7 +367,7 @@ namespace Z0
         public static BitString clear(BitString src, int i0, int i1)
         {
             for(var i=i0; i<=i1; i++)
-                src[i] = bit.Off;
+                src[i] = Bit32.Off;
             return src;
         }
 

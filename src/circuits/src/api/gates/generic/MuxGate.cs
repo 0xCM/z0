@@ -15,7 +15,7 @@ namespace Z0
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public bit Invoke(bit a, bit b, bit c)
+        public Bit32 Invoke(Bit32 a, Bit32 b, Bit32 c)
             => a ? b : c;
 
         [MethodImpl(Inline)]

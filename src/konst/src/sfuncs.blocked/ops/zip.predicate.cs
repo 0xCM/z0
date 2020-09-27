@@ -13,7 +13,7 @@ namespace Z0
     partial class SBlock
     {
         [MethodImpl(Inline)]
-        public static Span<bit> zip<F,T>(in SpanBlock128<T> a, SpanBlock128<T> b, Span<bit> dst, F f)
+        public static Span<Bit32> zip<F,T>(in SpanBlock128<T> a, SpanBlock128<T> b, Span<Bit32> dst, F f)
             where T : unmanaged
             where F : IBinaryPred128<T>
         {
@@ -25,7 +25,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Span<bit> zip<F,T>(in SpanBlock256<T> a, in SpanBlock256<T> b, Span<bit> dst, F f)
+        public static Span<Bit32> zip<F,T>(in SpanBlock256<T> a, in SpanBlock256<T> b, Span<Bit32> dst, F f)
             where T : unmanaged
             where F : IBinaryPred256<T>
         {

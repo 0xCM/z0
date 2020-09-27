@@ -7,9 +7,9 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public delegate bit UnaryPredicate<T>(T a);
+    public delegate Bit32 UnaryPredicate<T>(T a);
 
     [Free]
-    public delegate bit UnaryPredicate<W,T>(T a)
+    public delegate Bit32 UnaryPredicate<W,T>(T a)
          where W : unmanaged, ITypeWidth;
 }

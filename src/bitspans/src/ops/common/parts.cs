@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The sorce bits</param>
         [MethodImpl(Inline), Op]
-        public static BitSpan parts(params bit[] src)
-            => new BitSpan(src);         
+        public static BitSpan parts(params Bit32[] src)
+            => new BitSpan(src);
     }
 }

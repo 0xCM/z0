@@ -6,20 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
 
     partial class MSvcHosts
     {
         [Closures(Integers), Odd]
-        public readonly struct Odd<T> : IFunc<T,bit>, IUnarySpanPred<T>
-            where T : unmanaged        
+        public readonly struct Odd<T> : IFunc<T,Bit32>, IUnarySpanPred<T>
+            where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public readonly bit Invoke(T a) => gmath.odd(a);
+            public readonly Bit32 Invoke(T a) => gmath.odd(a);
 
             [MethodImpl(Inline)]
-            public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
+            public Span<Bit32> Invoke(ReadOnlySpan<T> src, Span<Bit32> dst)
                 => gspan.odd(src,dst);
         }
     }

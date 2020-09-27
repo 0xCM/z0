@@ -28,7 +28,7 @@ namespace Z0
         readonly ReaderState State;
 
         [MethodImpl(Inline)]
-        public static IPeTableReader open(FilePath src)
+        public static IPeTableReader open(FS.FilePath src)
         {
             var stream = File.OpenRead(src.Name);
             var reader = new PEReader(stream);

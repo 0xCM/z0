@@ -80,7 +80,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static bit testc<T>(T a)
+        public static Bit32 testc<T>(T a)
             where T : unmanaged
                 => gbits.pop(a) == bitwidth<T>();
 
@@ -225,7 +225,7 @@ namespace Z0
                 => gmath.gteq(a,b).Promote<T>();
 
         [MethodImpl(Inline)]
-        public static bit same<T>(T a, T b)
+        public static Bit32 same<T>(T a, T b)
             where T : unmanaged
                 => gmath.eq(a,b);
 

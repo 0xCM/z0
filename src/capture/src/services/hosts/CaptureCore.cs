@@ -285,18 +285,18 @@ namespace Z0.Asm
                 && (exchange[offset - 0] == ZED);
 
         [MethodImpl(Inline)]
-        static bit match((byte x, byte y) a, (byte x, byte y) b)
+        static Bit32 match((byte x, byte y) a, (byte x, byte y) b)
             => a.x == a.y
             && b.x == b.y;
 
         [MethodImpl(Inline)]
-        static bit match((byte x, byte y) a, (byte x, byte y) b, (byte x, byte y) c)
+        static Bit32 match((byte x, byte y) a, (byte x, byte y) b, (byte x, byte y) c)
             => a.x == a.y
             && b.x == b.y
             && c.x == c.y;
 
         [MethodImpl(Inline)]
-        static bit match((byte x, byte y) a, (byte x, byte y) b, (byte x, byte y) c, (byte x, byte y) d, (byte x, byte y) e)
+        static Bit32 match((byte x, byte y) a, (byte x, byte y) b, (byte x, byte y) c, (byte x, byte y) d, (byte x, byte y) e)
             => a.x == a.y
             && b.x == b.y
             && c.x == c.y

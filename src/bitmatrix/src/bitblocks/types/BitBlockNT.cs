@@ -41,7 +41,7 @@ namespace Z0
             => new BitBlock<T>(src, bitwidth<T>());
 
         [MethodImpl(Inline)]
-        public static bit operator %(in BitBlock<T> x, in BitBlock<T> y)
+        public static Bit32 operator %(in BitBlock<T> x, in BitBlock<T> y)
             => BitBlocks.dot(x,y);
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace Z0
         /// <summary>
         /// Is true if at least one enabled bit; false otherwise
         /// </summary>
-        public readonly bit NonEmpty
+        public readonly Bit32 NonEmpty
         {
             [MethodImpl(Inline)]
             get => Pop() != 0;
@@ -121,7 +121,7 @@ namespace Z0
         /// <summary>
         /// A bit-level accessor/manipulator
         /// </summary>
-        public bit this[int index]
+        public Bit32 this[int index]
         {
             [MethodImpl(Inline)]
             get => BitBlocks.testbit(data,index);

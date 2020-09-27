@@ -12,9 +12,9 @@ namespace Z0
 
     public class t_bm_permute : t_bitmatrix<t_bm_permute>
     {
-        bit on => bit.On;
+        Bit32 on => Bit32.On;
 
-        bit off => bit.Off;
+        Bit32 off => Bit32.Off;
 
         public void bm_fromperm_8x8x8()
         {
@@ -95,7 +95,7 @@ namespace Z0
         {
             for(var i= 0; i<RepCount; i++)
             {
-                //Creates an "exchange" matrix            
+                //Creates an "exchange" matrix
                 var perm = Permute.natural(n32).Reverse();
                 var mat = perm.ToBitMatrix();
 
@@ -110,7 +110,7 @@ namespace Z0
         {
             for(var i= 0; i<RepCount; i++)
             {
-                //Creates an "exchange" matrix            
+                //Creates an "exchange" matrix
                 var perm = Permute.natural(n64).Reverse();
                 var mat = perm.ToBitMatrix();
 
@@ -120,7 +120,7 @@ namespace Z0
                 v3 = BitVector.reverse(v3);
                 Claim.eq(v3,v2);
             }
-        }        
+        }
     }
 
 }

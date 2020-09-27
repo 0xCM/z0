@@ -55,7 +55,7 @@ namespace Z0
         {
             var w = w128;
             var t = default(T);
-            var success = bit.On;
+            var success = Bit32.On;
             var clock = Time.counter(true);
             var count = PointCount<T>();
 
@@ -74,7 +74,7 @@ namespace Z0
         {
             var w = w256;
             var t = default(T);
-            var success = bit.On;
+            var success = Bit32.On;
             var clock = Time.counter(true);
             var count = PointCount<T>();
 

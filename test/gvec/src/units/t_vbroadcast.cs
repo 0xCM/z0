@@ -39,10 +39,10 @@ namespace Z0
 
         public OpIdentity Id => ApiIdentity.sfunc(Name,VKind);
 
-        public bit Invoke(S a, Vector128<T> x)
+        public Bit32 Invoke(S a, Vector128<T> x)
         {
             var count = vcount<T>(w128);
-            var result = bit.On;
+            var result = Bit32.On;
             var y = x.As<T,S>();
             for(var i=0; i< count; i++)
                 result &= gmath.eq(a, y.Cell(i));
@@ -62,10 +62,10 @@ namespace Z0
 
         public OpIdentity Id => ApiIdentity.sfunc(Name,VKind);
 
-        public bit Invoke(S a, Vector256<T> x)
+        public Bit32 Invoke(S a, Vector256<T> x)
         {
             var count = vcount<T>(w256);
-            var result = bit.On;
+            var result = Bit32.On;
             var y = x.As<T,S>();
             for(var i=0; i< count; i++)
                 result &= gmath.eq(a, y.Cell(i));

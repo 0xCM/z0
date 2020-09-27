@@ -19,7 +19,7 @@ namespace Z0.Logix
         /// </summary>
         [MethodImpl(Inline)]
         public static LiteralLogicExpr @true()
-            => literal(bit.On);
+            => literal(Z0.Bit32.On);
 
         /// <summary>
         /// Creates a logical TRUE expression, i.e. an expression that is always true
@@ -27,14 +27,14 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         static LiteralLogicExpr<T> @true<T>()
             where T : unmanaged
-            => literal<T>(bit.On);
+            => literal<T>(Z0.Bit32.On);
 
         /// <summary>
         /// Creates a logical FALSE expression, i.e. an expression that is always false
         /// </summary>
         [MethodImpl(Inline)]
         public static LiteralLogicExpr @false()
-            => literal(bit.Off);
+            => literal(Z0.Bit32.Off);
 
         /// <summary>
         /// Creates a logical FALSE expression, i.e. an expression that is always false
@@ -42,14 +42,14 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         static LiteralLogicExpr<T> @false<T>()
             where T : unmanaged
-                => literal<T>(bit.Off);
+                => literal<T>(Z0.Bit32.Off);
 
         /// <summary>
         /// Creates a bit literal expression
         /// </summary>
         /// <param name="a">The literal value</param>
         [MethodImpl(Inline)]
-        public static LiteralLogicExpr literal(bit a)
+        public static LiteralLogicExpr literal(Bit32 a)
             => new LiteralLogicExpr(a);
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="a">The literal value</param>
         [MethodImpl(Inline)]
-        public static LiteralLogicExpr<T> literal<T>(bit a)
+        public static LiteralLogicExpr<T> literal<T>(Bit32 a)
             where T : unmanaged
                 => new LiteralLogicExpr<T>(a);
 
@@ -106,7 +106,7 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        static UnaryLogicOpExpr<T> unary<T>(UnaryBitLogicKind op, bit a)
+        static UnaryLogicOpExpr<T> unary<T>(UnaryBitLogicKind op, Bit32 a)
             where T : unmanaged
                 => new UnaryLogicOpExpr<T>(op,literal<T>(a));
 
@@ -117,7 +117,7 @@ namespace Z0.Logix
         /// <param name="a">The operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline)]
-        public static UnaryLogicOpExpr unary(UnaryBitLogicKind kind, bit a)
+        public static UnaryLogicOpExpr unary(UnaryBitLogicKind kind, Bit32 a)
             => new UnaryLogicOpExpr(kind,literal(a));
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr binary(BinaryBitLogicKind kind, bit a, bit b)
+        public static BinaryLogicOpExpr binary(BinaryBitLogicKind kind, Bit32 a, Bit32 b)
             => new BinaryLogicOpExpr(kind,literal(a),literal(b));
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        static BinaryLogicOpExpr<T> binary<T>(BinaryBitLogicKind kind, bit a, bit b)
+        static BinaryLogicOpExpr<T> binary<T>(BinaryBitLogicKind kind, Bit32 a, Bit32 b)
             where T : unmanaged
                 => new BinaryLogicOpExpr<T>(kind,literal<T>(a),literal<T>(b));
 
@@ -193,7 +193,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         [MethodImpl(Inline)]
-        public static TernaryLogicOpExpr ternary(TernaryBitLogicKind kind, bit a, bit b, bit c)
+        public static TernaryLogicOpExpr ternary(TernaryBitLogicKind kind, Bit32 a, Bit32 b, Bit32 c)
             => new TernaryLogicOpExpr(kind,literal(a),literal(b),literal(c));
 
         /// <summary>
@@ -204,7 +204,7 @@ namespace Z0.Logix
         /// <param name="b">The second operand</param>
         /// <param name="c">The third operand</param>
         [MethodImpl(Inline)]
-        static TernaryLogicOpExpr<T> ternary<T>(TernaryBitLogicKind kind, bit a, bit b, bit c)
+        static TernaryLogicOpExpr<T> ternary<T>(TernaryBitLogicKind kind, Bit32 a, Bit32 b, Bit32 c)
             where T : unmanaged
                 => new TernaryLogicOpExpr<T>(kind,literal<T>(a),literal<T>(b),literal<T>(c));
     }

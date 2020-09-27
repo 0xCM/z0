@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="parity">The state of the first bit</param>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static BitVector<T> alt<T>(bit parity)
+        public static BitVector<T> alt<T>(Bit32 parity)
             where T : unmanaged
                 => parity ? force<T>(Even64) : force<T>(Odd64);
 
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="parity">The state of the first bit</param>
         /// <param name="n">The width selector</param>
         [MethodImpl(Inline)]
-        public static BitVector<N,T> alt<N,T>(bit parity, N n = default)
+        public static BitVector<N,T> alt<N,T>(Bit32 parity, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
                 => natural<N,T>(parity ? force<T>(Even64) : force<T>(Odd64));
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="n">The width selector</param>
         /// <param name="parity">The state of the first bit</param>
         [MethodImpl(Inline), Op]
-        public static BitVector8 alt(N8 n, bit parity)
+        public static BitVector8 alt(N8 n, Bit32 parity)
             => parity ? Even8 : Odd8;
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
         /// <param name="n">The width selector</param>
         /// <param name="parity">The state of the first bit</param>
         [MethodImpl(Inline), Op]
-        public static BitVector16 alt(N16 n, bit parity)
+        public static BitVector16 alt(N16 n, Bit32 parity)
             => parity ? Even16 : Odd16;
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="n">The width selector</param>
         /// <param name="parity">The state of the first bit</param>
         [MethodImpl(Inline), Op]
-        public static BitVector32 alt(N32 n, bit parity)
+        public static BitVector32 alt(N32 n, Bit32 parity)
             => parity ? Even32 : Odd32;
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="n">The width selector</param>
         /// <param name="parity">The state of the first bit</param>
         [MethodImpl(Inline), Op]
-        public static BitVector64 alt(N64 n, bit parity)
+        public static BitVector64 alt(N64 n, Bit32 parity)
             => parity ? Even64 : Odd64;
     }
 }

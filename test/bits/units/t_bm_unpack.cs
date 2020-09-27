@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static Memories;
 
@@ -21,10 +21,10 @@ namespace Z0
             {
                 var src = Random.BitMatrix8();
                 BitMatrix.unpack(src, dst);
-                
+
                 for(var i=0; i< m; i++)
                 for(var j=0; j< n; j++)
-                    Claim.Eq(src[i,j], dst[i,j] == 0 ? bit.Off : bit.On);
+                    Claim.Eq(src[i,j], dst[i,j] == 0 ? Bit32.Off : Bit32.On);
             }
         }
 
@@ -37,10 +37,10 @@ namespace Z0
             {
                 var src = Random.BitMatrix64();
                 BitMatrix.unpack(src, dst);
-                
+
                 for(var i=0; i< m; i++)
                 for(var j=0; j< n; j++)
-                    Claim.Eq(src[i,j], dst[i,j] == 0 ? bit.Off : bit.On);
+                    Claim.Eq(src[i,j], dst[i,j] == 0 ? Bit32.Off : Bit32.On);
 
             }
         }

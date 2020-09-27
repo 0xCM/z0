@@ -10,7 +10,7 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    
+
     partial class gmath
     {
         /// <summary>
@@ -20,7 +20,7 @@ namespace Z0
         /// <param name="point">The point to test</param>
         /// <typeparam name="T">The primal numeric type over which the interval is defined</typeparam>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static bit contains<T>(Interval<T> src, T point)
+        public static Bit32 contains<T>(Interval<T> src, T point)
             where T : unmanaged
         {
             switch(src.Kind)
@@ -31,21 +31,21 @@ namespace Z0
                     return gt(point, src.Left) && lt(point, src.Right);
                 case IntervalKind.LeftClosed:
                     return gteq(point, src.Left) && lt(point, src.Right);
-                default:        
+                default:
                     return gt(point, src.Left) && lteq(point, src.Right);
             }
-        }                
+        }
 
         [MethodImpl(Inline), Op, Closures(UInt32k)]
-        public static bit contains<T>(Span<T> xs, T match)  
-            where T : unmanaged       
+        public static Bit32 contains<T>(Span<T> xs, T match)
+            where T : unmanaged
                 => contains(z.first(xs), match, (uint)xs.Length);
 
         /// <summary>
         ///  Adapted from corefx repo
         /// </summary>
         [MethodImpl(Inline), Op, Closures(UInt32k)]
-        public static bit contains<T>(in T src, T match, uint length)
+        public static Bit32 contains<T>(in T src, T match, uint length)
             where T : unmanaged
         {
             var index = 0u;
@@ -73,12 +73,12 @@ namespace Z0
                     return true;
                 index += 1;
             }
-            return false;        
-        }          
+            return false;
+        }
 
         [MethodImpl(Inline), Op, Closures(UInt32k)]
         static bool test8<T>(in T src, T match, uint index)
-            where T : unmanaged 
+            where T : unmanaged
                 =>  eq(match, z.add(src, index + 0)) ||
                     eq(match, z.add(src, index + 1)) ||
                     eq(match, z.add(src, index + 2)) ||
@@ -91,7 +91,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(UInt32k)]
         static bool test4<T>(in T src, T match, uint index)
-            where T : unmanaged 
+            where T : unmanaged
                 =>  eq(match, z.add(src, index + 0)) ||
                     eq(match, z.add(src, index + 1)) ||
                     eq(match, z.add(src, index + 2)) ||

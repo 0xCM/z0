@@ -15,7 +15,7 @@ namespace Z0
 
     partial class BitLogixOps
     {
-        public static UnaryOp<bit> lookup(ULK kind)
+        public static UnaryOp<Bit32> lookup(ULK kind)
         {
             switch(kind)
             {

@@ -22,7 +22,7 @@ namespace Z0
             Claim.Eq(y2.Scalar,bv.Scalar);
 
             for(var i=0; i<y2.Width; i++)
-                Claim.Eq(y2[i], i % 8 == 0 ? bit.On : bit.Off);
+                Claim.Eq(y2[i], i % 8 == 0 ? Bit32.On : Bit32.Off);
         }
 
         public void gather_8()

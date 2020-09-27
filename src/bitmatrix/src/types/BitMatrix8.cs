@@ -124,13 +124,13 @@ namespace Z0
         /// <param name="row">The row index</param>
         /// <param name="col">The column index</param>
         /// <param name="src">The source value</param>
-        public bit this[int row, int col]
+        public Bit32 this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => bit.test(skip(in Head,row), col);
+            get => Bit32.test(skip(in Head,row), col);
 
             [MethodImpl(Inline)]
-            set => seek(ref Head, row) = bit.set(seek(ref Head, row), (byte)col, value);
+            set => seek(ref Head, row) = Bit32.set(seek(ref Head, row), (byte)col, value);
         }
 
         /// <summary>

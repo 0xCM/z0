@@ -16,7 +16,7 @@ namespace Z0
             => !src;
 
         [MethodImpl(Inline), Op]
-        public static bit not(bit src)
+        public static Bit32 not(Bit32 src)
             => !src;
     }
 }

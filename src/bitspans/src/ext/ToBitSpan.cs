@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
-        public static BitSpan ToBitSpan(this Span<bit> src)
+        public static BitSpan ToBitSpan(this Span<Bit32> src)
             => BitSpans.load(src);
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source array</param>
          [MethodImpl(Inline)]
-         public static BitSpan ToBitSpan(this bit[] src)
+         public static BitSpan ToBitSpan(this Bit32[] src)
             => BitSpans.load(src);
 
          [MethodImpl(Inline)]

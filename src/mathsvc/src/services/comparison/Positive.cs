@@ -13,15 +13,15 @@ namespace Z0
     partial class MSvcHosts
     {
         [Closures(AllNumeric), Positive]
-        public readonly struct PositiveOp<T> : IFunc<T,bit>, IUnarySpanPred<T>
+        public readonly struct PositiveOp<T> : IFunc<T,Bit32>, IUnarySpanPred<T>
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public bit Invoke(T a)
+            public Bit32 Invoke(T a)
                 => gmath.positive(a);
 
             [MethodImpl(Inline)]
-            public Span<bit> Invoke(ReadOnlySpan<T> src, Span<bit> dst)
+            public Span<Bit32> Invoke(ReadOnlySpan<T> src, Span<Bit32> dst)
                 => apply(this, src, dst);
         }
     }

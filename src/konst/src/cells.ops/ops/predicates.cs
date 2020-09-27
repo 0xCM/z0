@@ -12,7 +12,7 @@ namespace Z0
     partial class CellOps
     {
         [MethodImpl(Inline), Op]
-        public static UnaryPredicate1 cellular(UnaryPredicate<bit> f)
+        public static UnaryPredicate1 cellular(UnaryPredicate<Bit32> f)
             => a => f(a);
 
         [MethodImpl(Inline), Op]
@@ -48,7 +48,7 @@ namespace Z0
             => a => f(a.Content);
 
         [MethodImpl(Inline), Op]
-        public static BinaryPredicate1 cellular(BinaryPredicate<bit> f)
+        public static BinaryPredicate1 cellular(BinaryPredicate<Bit32> f)
             => (a, b) => f(a, b);
 
         [MethodImpl(Inline), Op]

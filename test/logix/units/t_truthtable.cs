@@ -151,10 +151,10 @@ namespace Z0.Logix
         void check_truth(BinaryBitLogicKind op)
         {
             var dst = BitVector.alloc(n4);
-            dst[0] = bitlogix.Evaluate(op, bit.Off,bit.Off);
-            dst[1] = bitlogix.Evaluate(op, bit.On,bit.Off);
-            dst[2] = bitlogix.Evaluate(op, bit.Off,bit.On);
-            dst[3] = bitlogix.Evaluate(op, bit.On,bit.On);
+            dst[0] = bitlogix.Evaluate(op, Z0.Bit32.Off, Z0.Bit32.Off);
+            dst[1] = bitlogix.Evaluate(op, Z0.Bit32.On, Z0.Bit32.Off);
+            dst[2] = bitlogix.Evaluate(op, Z0.Bit32.Off, Z0.Bit32.On);
+            dst[3] = bitlogix.Evaluate(op, Z0.Bit32.On, Z0.Bit32.On);
             var sig = TabularTruth.vector(n4, op);
             Claim.eq(sig,dst);
         }

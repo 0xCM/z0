@@ -7,24 +7,24 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     [IdentityProvider(typeof(BitMatrixIdentityProvider))]
     public ref struct BitMatrix4
-    {        
+    {
         internal ushort Data;
 
         /// <summary>
         /// The matrix order
         /// </summary>
         public const uint N = 4;
-                                        
+
         /// <summary>
         /// Allocates a 4x4 identity bitmatrix
         /// </summary>
-        public static BitMatrix4 Identity => BitMatrix.identity(n4); 
-        
+        public static BitMatrix4 Identity => BitMatrix.identity(n4);
+
         public static BitMatrix4 Zero => new BitMatrix4(ushort.MinValue);
 
         public static BitMatrix4 Ones => new BitMatrix4(ushort.MaxValue);
@@ -33,11 +33,11 @@ namespace Z0
         /// Allocates a matrix, optionally assigning each element to the specified bit value
         /// </summary>
         [MethodImpl(Inline)]
-        public static BitMatrix4 Alloc(bit fill)                
-            => fill == bit.On ? new BitMatrix4(ushort.MaxValue) : new BitMatrix4(ushort.MinValue);
+        public static BitMatrix4 Alloc(Bit32 fill)
+            => fill == Bit32.On ? new BitMatrix4(ushort.MaxValue) : new BitMatrix4(ushort.MinValue);
 
         [MethodImpl(Inline)]
-        public static BitMatrix4 From(ushort src)        
+        public static BitMatrix4 From(ushort src)
             => new BitMatrix4(src);
 
         [MethodImpl(Inline)]
@@ -103,7 +103,7 @@ namespace Z0
         public BitEdit<ushort> Content
         {
             [MethodImpl(Inline)]
-            get => BitEdit.Over(ref Data);
+            get => Bit.editor(ref Data);
         }
 
         /// <summary>
@@ -123,14 +123,14 @@ namespace Z0
             Data = result;
         }
 
-        public bit this[int row, int col]
+        public Bit32 this[int row, int col]
         {
             [MethodImpl(Inline)]
-            get => bit.test(Data, row*4 + col);
+            get => Bit32.test(Data, row*4 + col);
 
             [MethodImpl(Inline)]
-            set => Data = bit.set(Data, (byte)(row*4 + col), value);
-        }            
+            set => Data = Bit32.set(Data, (byte)(row*4 + col), value);
+        }
 
         public BitVector4 this[int row]
         {
@@ -141,14 +141,14 @@ namespace Z0
             set => SetRow(row, value);
 
         }
-            
+
         [MethodImpl(Inline)]
         public readonly bool Equals(in BitMatrix4 B)
             => Data == B.Data;
 
         public override bool Equals(object obj)
             => throw new NotSupportedException();
-        
+
         public override int GetHashCode()
             => throw new NotSupportedException();
     }

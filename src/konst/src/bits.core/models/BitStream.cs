@@ -14,18 +14,18 @@ namespace Z0
     [ApiHost]
     public readonly struct BitStream
     {
-        public static bit[] from<T>(T src)
+        public static Bit32[] from<T>(T src)
             where T : struct
         {
             var bytes = z.bytes(src);
-            var buffer = sys.alloc<bit>(bytes.Length*8);
+            var buffer = sys.alloc<Bit32>(bytes.Length*8);
             var dst = span(buffer);
 
             for(var i=0u; i<bytes.Length; i++)
             {
                 var b = skip(bytes,i);
                 for(byte j=0; j<8; j++)
-                    seek(dst,j) = bit.test(b,j);
+                    seek(dst,j) = Bit32.test(b,j);
             }
             return buffer;
         }
@@ -35,7 +35,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The primal type</typeparam>
-        public static IEnumerable<bit> from<T>(IEnumerator<T> src)
+        public static IEnumerable<Bit32> from<T>(IEnumerator<T> src)
             where T : struct
         {
             while(src.MoveNext())
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static IEnumerable<bit> from<T>(IEnumerable<T> src)
+        public static IEnumerable<Bit32> from<T>(IEnumerable<T> src)
             where T : struct
                 => from<T>(src.GetEnumerator());
 

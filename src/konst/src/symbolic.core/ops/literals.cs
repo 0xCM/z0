@@ -11,21 +11,21 @@ namespace Z0
     using static z;
 
     partial struct Symbolic
-    {        
+    {
         /// <summary>
         /// Extracts the ordered sequence of symbolic literals that define a 16-symbol permutation to a caller-supplied target
         /// </summary>
         /// <param name="src">The canonical literal representation</param>
         /// <param name="dst">The literal receiver</param>
         [MethodImpl(Inline), Op]
-        public static bit literals(Perm16L src, Span<Perm16L> dst)
+        public static Bit32 literals(Perm16L src, Span<Perm16L> dst)
         {
             const int length = 16;
 
             for(var i=0; i< length; i++)
                 if(!literal(src, i, out seek(dst,(uint)i)))
                     return false;
-            
+
             return true;
         }
 
@@ -35,10 +35,10 @@ namespace Z0
         /// <param name="src">The canonical literal representation</param>
         [MethodImpl(Inline)]
         public static Span<Perm16L> literals(Perm16L src)
-        {            
+        {
             Span<Perm16L> dst = new Perm16L[16];
             if(!Symbolic.literals(src,dst))
-                return Span<Perm16L>.Empty;            
+                return Span<Perm16L>.Empty;
             return dst;
         }
 
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="src">The canonical literal representation</param>
         [MethodImpl(Inline), Op]
         public static Span<Perm4L> literals(Perm4L src)
-        {            
+        {
             const int length = 4;
 
             Span<Perm4L> dst = new Perm4L[length];
@@ -72,7 +72,7 @@ namespace Z0
             for(var i=0; i< length; i++)
                 if(!literal(src, i, out seek(dst,(uint)i)))
                     return false;
-            
+
             return true;
         }
 
@@ -82,9 +82,9 @@ namespace Z0
         /// <param name="src">The canonical literal representation</param>
         [MethodImpl(Inline)]
         public static Span<Perm8L> literals(Perm8L src)
-        {            
+        {
             const int length = 8;
-            
+
             Span<Perm8L> dst = new Perm8L[length];
             if(!literals(src, dst))
                 return Span<Perm8L>.Empty;

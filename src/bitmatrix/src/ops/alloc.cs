@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
     using static Memories;
-    
+
     partial class BitMatrix
-    {        
+    {
         /// <summary>
         /// Allocates a square generic bitmatrix filled with a specified row
         /// </summary>
@@ -105,19 +105,19 @@ namespace Z0
                 => BitMatrix<M,N,T>.Alloc();
 
         /// <summary>
-        /// Allocates a primal bitmatrix 
+        /// Allocates a primal bitmatrix
         /// </summary>
         /// <param name="n">The bitness selector</param>
         /// <param name="fill">The value with which the allocated matrix is filled</param>
-        public static BitMatrix4 alloc(N4 n, bit fill = default)
-            => fill == bit.On ? new BitMatrix4(ushort.MaxValue) : new BitMatrix4(ushort.MinValue);
-            
+        public static BitMatrix4 alloc(N4 n, Bit32 fill = default)
+            => fill == Bit32.On ? new BitMatrix4(ushort.MaxValue) : new BitMatrix4(ushort.MinValue);
+
         /// <summary>
-        /// Allocates a primal bitmatrix 
+        /// Allocates a primal bitmatrix
         /// </summary>
         /// <param name="n">The bitness selector</param>
         /// <param name="fill">The value with which the allocated matrix is filled</param>
-        public static BitMatrix8 alloc(N8 n, bit fill = default)
+        public static BitMatrix8 alloc(N8 n, Bit32 fill = default)
             => new BitMatrix8(((uint)fill)*UInt64.MaxValue);
 
         /// <summary>
@@ -132,11 +132,11 @@ namespace Z0
         }
 
         /// <summary>
-        /// Allocates a primal bitmatrix 
+        /// Allocates a primal bitmatrix
         /// </summary>
         /// <param name="n">The bitness selector</param>
         /// <param name="fill">The value with which the allocated matrix is filled</param>
-        public static BitMatrix16 alloc(N16 n, bit fill = default)
+        public static BitMatrix16 alloc(N16 n, Bit32 fill = default)
             => BitMatrix16.Alloc(fill);
 
         /// <summary>
@@ -151,11 +151,11 @@ namespace Z0
         }
 
         /// <summary>
-        /// Allocates a primal bitmatrix 
+        /// Allocates a primal bitmatrix
         /// </summary>
         /// <param name="n">The bitness selector</param>
         /// <param name="fill">The value with which the allocated matrix is filled</param>
-        public static BitMatrix32 alloc(N32 n, bit fill = default)
+        public static BitMatrix32 alloc(N32 n, Bit32 fill = default)
             => new BitMatrix32(fill);
 
         /// <summary>
@@ -170,18 +170,18 @@ namespace Z0
         }
 
         /// <summary>
-        /// Allocates a primal bitmatrix 
+        /// Allocates a primal bitmatrix
         /// </summary>
         /// <param name="n">The bitness selector</param>
         /// <param name="fill">The value with which the allocated matrix is filled</param>
-        public static BitMatrix64 alloc(N64 n, bit fill = default)
+        public static BitMatrix64 alloc(N64 n, Bit32 fill = default)
             => new BitMatrix64(fill);
- 
+
         /// <summary>
         /// Allocates a primal bitmatrix with rows filled by a specified vector
         /// </summary>
         /// <param name="fill">The row with which the allocated matrix is filled</param>
-        public static BitMatrix64 alloc(BitVector64 fill)        
+        public static BitMatrix64 alloc(BitVector64 fill)
         {
             Span<ulong> data = new ulong[64];
             data.Fill(fill);

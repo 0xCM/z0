@@ -15,7 +15,7 @@ namespace Z0
     {
 
         [MethodImpl(Inline), Op]
-        public static BinaryOp1 cellular(BinaryOp<bit> f)
+        public static BinaryOp1 cellular(BinaryOp<Bit32> f)
             => (a,b) => f(a,b);
 
         [MethodImpl(Inline), Op]

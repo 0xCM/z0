@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    using static Memories;    
+    using static Konst;
+    using static Memories;
 
     partial class BitMatrix
     {
@@ -18,10 +18,10 @@ namespace Z0
         /// <param name="a">The source matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
         [MethodImpl(Inline), TestC, Closures(UnsignedInts)]
-        public static bit testc<T>(in BitMatrix<T> a)
+        public static Bit32 testc<T>(in BitMatrix<T> a)
             where T : unmanaged
                 => LogicSquare.testc(a.Head);
-                
+
         /// <summary>
         /// Returns true if all bits in a matrix are enabled, false otherwise
         /// </summary>
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="B">The mask matrix</param>
         /// <typeparam name="T">The primal component type</typeparam>
         [MethodImpl(Inline), TestC, Closures(UnsignedInts)]
-        public static bit testc<T>(in BitMatrix<T> a, in BitMatrix<T> mask)
+        public static Bit32 testc<T>(in BitMatrix<T> a, in BitMatrix<T> mask)
             where T : unmanaged
                 => LogicSquare.testc(a.Head, mask.Head);
 
@@ -38,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source matrix</param>
         [MethodImpl(Inline), TestC]
-        public static bit testc(in BitMatrix8 a)
+        public static Bit32 testc(in BitMatrix8 a)
             => LogicSquare.testc(a.Head);
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Z0
         /// <param name="a">The source matrix</param>
         /// <param name="mask">The mask matrix</param>
         [MethodImpl(Inline), TestC]
-        public static bit testc(in BitMatrix8 a, in BitMatrix8 mask)
+        public static Bit32 testc(in BitMatrix8 a, in BitMatrix8 mask)
             => LogicSquare.testc(a.Head, mask.Head);
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source matrix</param>
         [MethodImpl(Inline), TestC]
-        public static bit testc(in BitMatrix16 a)
+        public static Bit32 testc(in BitMatrix16 a)
             => LogicSquare.testc(a.Head);
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="a">The source matrix</param>
         /// <param name="mask">The mask matrix</param>
         [MethodImpl(Inline), TestC]
-        public static bit testc(in BitMatrix16 a, in BitMatrix16 mask)
+        public static Bit32 testc(in BitMatrix16 a, in BitMatrix16 mask)
             => LogicSquare.testc(a.Head, mask.Head);
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source matrix</param>
         [MethodImpl(Inline), TestC]
-        public static bit testc(in BitMatrix32 a)
+        public static Bit32 testc(in BitMatrix32 a)
             => LogicSquare.testc(a.Head);
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="a">The source matrix</param>
         /// <param name="mask">The mask matrix</param>
         [MethodImpl(Inline), TestC]
-        public static bit testc(in BitMatrix32 a, in BitMatrix32 mask)
+        public static Bit32 testc(in BitMatrix32 a, in BitMatrix32 mask)
             => LogicSquare.testc(a.Head, mask.Head);
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source matrix</param>
         [MethodImpl(Inline), TestC]
-        public static bit testc(in BitMatrix64 a)
+        public static Bit32 testc(in BitMatrix64 a)
             => LogicSquare.testc(a.Head);
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="a">The source matrix</param>
         /// <param name="mask">The mask matrix</param>
         [MethodImpl(Inline), TestC]
-        public static bit testc(in BitMatrix64 a, in BitMatrix64 mask)
+        public static Bit32 testc(in BitMatrix64 a, in BitMatrix64 mask)
             => LogicSquare.testc(a.Head, mask.Head);
     }
 }

@@ -29,7 +29,7 @@ namespace Z0
     /// <param name="b">The second operand</param>
     /// <typeparam name="T">The domain over which the predicate is evaluated</typeparam>
     [Free]
-    public delegate bit BinaryPred<T>(T a, T b)
+    public delegate Bit32 BinaryPred<T>(T a, T b)
         where T : unmanaged;
 
     /// <summary>
@@ -82,7 +82,7 @@ namespace Z0
             => Enums.literals<BCK>();
 
         [Closures(Integers)]
-        public static bit eval<T>(BCK kind, T a, T b)
+        public static Bit32 eval<T>(BCK kind, T a, T b)
             where T : unmanaged
         {
             switch(kind)

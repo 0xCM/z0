@@ -418,8 +418,8 @@ namespace Z0
         long ISource<long>.Next()
         {
             var next = (long)Points.Next(long.MaxValue);
-            var negative = bit.test(next, 7);
-            var result = bit.test(next, 7) ? enable(next, 63) : next;
+            var negative = Bit32.test(next, 7);
+            var result = Bit32.test(next, 7) ? enable(next, 63) : next;
             return result;
         }
 

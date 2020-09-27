@@ -21,7 +21,7 @@ namespace Z0
             dst = default;
 
             for(int i=offset, pos = 0; i<= last; i++, pos++)
-                if(skip(input,i) == bit.One)
+                if(skip(input,i) == Bit32.One)
                     dst = gbits.enable(dst, pos);
             return ref dst;
         }

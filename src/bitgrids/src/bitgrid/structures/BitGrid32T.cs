@@ -42,11 +42,11 @@ namespace Z0
             => src.Data;
 
         [MethodImpl(Inline)]
-        public static bit operator ==(BitGrid32<T> gx, BitGrid32<T> gy)
+        public static Bit32 operator ==(BitGrid32<T> gx, BitGrid32<T> gy)
             => gx.Data == gy.Data;
 
         [MethodImpl(Inline)]
-        public static bit operator !=(BitGrid32<T> gx, BitGrid32<T> gy)
+        public static Bit32 operator !=(BitGrid32<T> gx, BitGrid32<T> gy)
             => gx.Data != gy.Data;
 
         [MethodImpl(Inline)]

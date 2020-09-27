@@ -12,7 +12,7 @@ namespace Z0
     partial class CellOps
     {
         [MethodImpl(Inline), Op]
-        public static Emitter1 emitter(Emitter<bit> f)
+        public static Emitter1 emitter(Emitter<Bit32> f)
             => () => f();
 
         [MethodImpl(Inline), Op]

@@ -19,7 +19,7 @@ namespace Z0
         W128 w => default;
 
         [MethodImpl(Inline)]
-        public bit match<K>(Vector128<T> x, Vector128<T> y, K k = default)
+        public Bit32 match<K>(Vector128<T> x, Vector128<T> y, K k = default)
             where K : unmanaged, IBitLogicKind
         {
             var mSvc = MSvc.bitlogic<T>();

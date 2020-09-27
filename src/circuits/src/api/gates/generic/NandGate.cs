@@ -8,14 +8,14 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
 
      public readonly struct NandGate<T> : IBinaryGate<T>, IBinaryGate<Vector128<T>>, IBinaryGate<Vector256<T>>
         where T : unmanaged
     {
         [MethodImpl(Inline)]
-        public bit Invoke(bit x, bit y)
+        public Bit32 Invoke(Bit32 x, Bit32 y)
             => !(x & y);
 
         [MethodImpl(Inline)]

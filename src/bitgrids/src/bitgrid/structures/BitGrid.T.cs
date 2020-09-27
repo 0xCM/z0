@@ -82,7 +82,7 @@ namespace Z0
             get => Data.BlockCount;
         }
 
-        public bit this[int row, int col]
+        public Bit32 this[int row, int col]
         {
             [MethodImpl(Inline)]
             get => BitGrid.readbit(ColCount, in Head, row, col);
@@ -92,11 +92,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public void SetBit(int index, bit state)
+        public void SetBit(int index, Bit32 state)
             => BitGrid.setbit(index, state, ref Head);
 
         [MethodImpl(Inline)]
-        public bit ReadBit(int index)
+        public Bit32 ReadBit(int index)
             => BitGrid.readbit(in Head, index);
 
         /// <summary>

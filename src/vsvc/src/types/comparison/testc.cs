@@ -17,11 +17,11 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public bit Invoke(Vector128<T> x, Vector128<T> y)
+            public Bit32 Invoke(Vector128<T> x, Vector128<T> y)
                 => gvec.vtestc(x,y);
 
             [MethodImpl(Inline)]
-            public bit Invoke(T a, T b) => default;
+            public Bit32 Invoke(T a, T b) => default;
         }
 
         [Closures(AllNumeric), TestC]
@@ -29,10 +29,10 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public bit Invoke(Vector256<T> x, Vector256<T> y) => gvec.vtestc(x,y);
+            public Bit32 Invoke(Vector256<T> x, Vector256<T> y) => gvec.vtestc(x,y);
 
             [MethodImpl(Inline)]
-            public bit Invoke(T a, T b) => default;
+            public Bit32 Invoke(T a, T b) => default;
         }
     }
 }

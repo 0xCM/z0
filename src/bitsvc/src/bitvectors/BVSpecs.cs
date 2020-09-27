@@ -13,8 +13,8 @@ namespace Z0
             where T : unmanaged
         {
             T Invoke(T a);
-        }        
-        
+        }
+
         public interface IBinaryOp<T> : Z0.IBinaryOp<BitVector<T>>
             where T : unmanaged
         {
@@ -26,18 +26,18 @@ namespace Z0
         {
 
             T Invoke(T a, T b, T c);
-        }    
+        }
 
-        public interface IUnaryPredBV<T> : Z0.IFunc<BitVector<T>, bit>
+        public interface IUnaryPredBV<T> : Z0.IFunc<BitVector<T>, Bit32>
             where T : unmanaged
         {
-            bit Invoke(T a);
-        }        
+            Bit32 Invoke(T a);
+        }
 
-        public interface IBinaryPred<T> : Z0.IFunc<BitVector<T>,BitVector<T>,bit>
+        public interface IBinaryPred<T> : Z0.IFunc<BitVector<T>,BitVector<T>,Bit32>
             where T : unmanaged
         {
-            bit Invoke(T a, T b);
+            Bit32 Invoke(T a, T b);
         }
 
     }

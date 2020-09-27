@@ -235,7 +235,7 @@ namespace Z0
         /// <param name="ys">The right span</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static bit identical<T>(Span<T> xs, Span<T> ys)
+        public static Bit32 identical<T>(Span<T> xs, Span<T> ys)
             where T : unmanaged
         {
             if(xs.Length != ys.Length)
@@ -250,7 +250,7 @@ namespace Z0
         /// <param name="ys">The right span</param>
         /// <typeparam name="T">The span cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static bit identical<T>(ReadOnlySpan<T> xs, ReadOnlySpan<T> ys)
+        public static Bit32 identical<T>(ReadOnlySpan<T> xs, ReadOnlySpan<T> ys)
             where T : unmanaged
         {
             if(xs.Length != ys.Length)
@@ -262,7 +262,7 @@ namespace Z0
         ///  Adapted from corefx repo
         /// </summary>
         [Op, Closures(UnsignedInts)]
-        public static bit identical<T>(ref T first, ref T second, uint length)
+        public static Bit32 identical<T>(ref T first, ref T second, uint length)
             where T : unmanaged
         {
             if (Unsafe.AreSame(ref first, ref second))

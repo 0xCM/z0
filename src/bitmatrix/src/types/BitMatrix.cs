@@ -70,7 +70,7 @@ namespace Z0
             get => ref AsBitVector(ref head(Data, row));
         }
 
-        public bit this[int row, int col]
+        public Bit32 this[int row, int col]
         {
             [MethodImpl(Inline)]
             get => gbits.testbit(Data[row],(byte)col);

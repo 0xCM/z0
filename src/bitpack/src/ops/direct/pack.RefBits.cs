@@ -92,7 +92,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Span<uint> convert(Span<bit> src, int offset, int count)
-           => src.Slice(offset, count).Cast<bit,uint>();
+        static Span<uint> convert(Span<Bit32> src, int offset, int count)
+           => src.Slice(offset, count).Cast<Bit32,uint>();
     }
 }

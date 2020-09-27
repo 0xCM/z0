@@ -23,22 +23,22 @@ namespace Z0
                 => ref BSvc.gt<T>(w256).Invoke(a, b, dst);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Span<bit> nonz<T>(in SpanBlock128<T> a, Span<bit> dst)
+        public static Span<Bit32> nonz<T>(in SpanBlock128<T> a, Span<Bit32> dst)
             where T : unmanaged
                 => BSvc.nonz<T>(w128).Invoke(a, dst);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Span<bit> nonz<T>(in SpanBlock256<T> a, Span<bit> dst)
+        public static Span<Bit32> nonz<T>(in SpanBlock256<T> a, Span<Bit32> dst)
             where T : unmanaged
                 => BSvc.nonz<T>(w256).Invoke(a, dst);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Span<bit> testc<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, Span<bit> dst)
+        public static Span<Bit32> testc<T>(in SpanBlock128<T> a, in SpanBlock128<T> b, Span<Bit32> dst)
             where T : unmanaged
                 => BSvc.testc<T>(w128).Invoke(a, b, dst);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Span<bit> testc<T>(in SpanBlock256<T> a, in SpanBlock256<T> b, Span<bit> dst)
+        public static Span<Bit32> testc<T>(in SpanBlock256<T> a, in SpanBlock256<T> b, Span<Bit32> dst)
             where T : unmanaged
                 => BSvc.testc<T>(w256).Invoke(a, b, dst);
     }

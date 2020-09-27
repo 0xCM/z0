@@ -23,19 +23,19 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static string sig(ULK kind)
-            => text.concat(format(kind), Chars.Colon, nameof(bit));
+            => text.concat(format(kind), Chars.Colon, nameof(Bit32));
 
         [MethodImpl(Inline)]
         public static string sig(BLK kind)
-            => text.concat(format(kind), Chars.Colon, nameof(bit));
+            => text.concat(format(kind), Chars.Colon, nameof(Bit32));
 
         [MethodImpl(Inline)]
         public static string sig(TLK kind)
-            => text.concat(format(kind), Chars.Colon, nameof(bit));
+            => text.concat(format(kind), Chars.Colon, nameof(Bit32));
 
         [MethodImpl(Inline)]
         public static string sig(BinaryBitLogicApiKey kind)
-            => text.concat(format(kind), Chars.Colon, nameof(bit));
+            => text.concat(format(kind), Chars.Colon, nameof(Bit32));
 
         [MethodImpl(Inline)]
         public static string sig<T>(ULK kind)

@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="index">The linear index of the target bit, relative to the sequence head</param>
         /// <typeparam name="T">The sequence type</typeparam>
         [MethodImpl(Inline), TestBit, Closures(AllNumeric)]
-        public static bit testbit<T>(in SpanBlock256<T> src, int index)
+        public static Bit32 testbit<T>(in SpanBlock256<T> src, int index)
             where T : unmanaged
         {
             var loc = gbits.bitpos<T>(index);
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="index">The linear index of the target bit, relative to the sequence head</param>
         /// <typeparam name="T">The sequence type</typeparam>
         [MethodImpl(Inline), SetBit, Closures(AllNumeric)]
-        public static void setbit<T>(in SpanBlock256<T> src, int index, bit value)
+        public static void setbit<T>(in SpanBlock256<T> src, int index, Bit32 value)
             where T : unmanaged
         {
             var loc = gbits.bitpos<T>(index);
@@ -76,7 +76,7 @@ namespace Z0
                 => ref skip(in src, bitpos / bitwidth<X>());
 
         [MethodImpl(Inline)]
-        internal static bit readbit<X>(in X src, int bitpos)
+        internal static Bit32 readbit<X>(in X src, int bitpos)
             where X : unmanaged
                 => gbits.testbit(readcell(in src, bitpos), (byte)(bitpos % bitwidth<X>()));
 
@@ -99,7 +99,7 @@ namespace Z0
         /// <param name="dst">A reference to the grid storage</param>
         /// <typeparam name="T">The grid storage segment type</typeparam>
         [MethodImpl(Inline)]
-        internal static void setbit<X>(int bitpos, bit state, ref X dst)
+        internal static void setbit<X>(int bitpos, Bit32 state, ref X dst)
             where X : unmanaged
                 => cell(ref dst, bitpos) = gbits.setbit(cell(ref dst, bitpos), (byte)(bitpos % bitwidth<X>()), state);
 
@@ -122,7 +122,7 @@ namespace Z0
         /// <param name="x">The first vector</param>
         /// <param name="y">The second vector</param>
         /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
-        public static bit modprod<T>(in BitBlock<T> x, in BitBlock<T> y)
+        public static Bit32 modprod<T>(in BitBlock<T> x, in BitBlock<T> y)
             where T : unmanaged
         {
             var result = 0u;
@@ -144,7 +144,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
         [MethodImpl(Inline)]
-        public static bit modprod<N,T>(in BitBlock<N,T> x, in BitBlock<N,T> y)
+        public static Bit32 modprod<N,T>(in BitBlock<N,T> x, in BitBlock<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => modprod(x.Unsize(),y.Unsize());

@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
+
+    using static Konst;
     using static Memories;
 
     partial class gmath
@@ -18,9 +18,9 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Negative, Closures(Integers)]
-        public static bit negative<T>(T src)
+        public static Bit32 negative<T>(T src)
             where T : unmanaged
-        {                        
+        {
             if(typeof(T) == typeof(sbyte))
                 return math.negative(int8(src));
             else if(typeof(T) == typeof(short))
@@ -33,8 +33,8 @@ namespace Z0
                 return fmath.negative(float32(src));
             else if(typeof(T) == typeof(double))
                 return fmath.negative(float64(src));
-            else            
+            else
                  return false;
-       }           
+       }
     }
 }

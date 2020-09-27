@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline), Op]
-        public static BitSpan load(Span<bit> src)
+        public static BitSpan load(Span<Bit32> src)
             => new BitSpan(src);
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source array</param>
         [MethodImpl(Inline), Op]
-        public static BitSpan load(bit[] src)
+        public static BitSpan load(Bit32[] src)
             => new BitSpan(src);
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="bits">The bit source</param>
         /// <param name="count">The number of bits to load</param>
         [MethodImpl(Inline), Op]
-        public static BitSpan load(ref bit bits, int count)
+        public static BitSpan load(ref Bit32 bits, int count)
             => new BitSpan(cover(bits,count));
 
         /// <summary>
@@ -56,7 +56,7 @@ namespace Z0
             for(var block=0; block<blocks; block++)
                 BitPack.unpack(packed, dst, block);
 
-            return load(dst.As<bit>());
+            return load(dst.As<Bit32>());
         }
 
         /// <summary>

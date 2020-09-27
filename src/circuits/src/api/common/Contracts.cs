@@ -11,7 +11,7 @@ namespace Z0
 
     /// <summary>
     /// Represents one (or more) logic gates, which is intended to represent
-    /// a physical component that receives one or more bits of input and emits a single bit of output; 
+    /// a physical component that receives one or more bits of input and emits a single bit of output;
     /// i.e., boolean function reification
     /// </summary>
     public interface ILogicGate
@@ -24,7 +24,7 @@ namespace Z0
     /// </summary>
     public interface IUnaryLogicGate : ILogicGate
     {
-        bit Invoke(bit a);
+        Bit32 Invoke(Bit32 a);
     }
 
     /// <summary>
@@ -32,7 +32,7 @@ namespace Z0
     /// </summary>
     public interface IBinaryLogicGate : ILogicGate
     {
-        bit Invoke(bit a, bit b);
+        Bit32 Invoke(Bit32 a, Bit32 b);
     }
 
     /// <summary>
@@ -40,8 +40,8 @@ namespace Z0
     /// </summary>
     public interface ITernaryLogicGate : ILogicGate
     {
-        bit Invoke(bit a, bit b, bit c);
-        
+        Bit32 Invoke(Bit32 a, Bit32 b, Bit32 c);
+
     }
 
     /// <summary>
@@ -51,17 +51,17 @@ namespace Z0
     public interface IUnaryGate<T> : IUnaryLogicGate, IUnaryOp<T>
         where T : unmanaged
     {
-        
+
     }
 
     /// <summary>
-    /// Characterizes a set of logic gates where each member accepts 2 bits of input 
+    /// Characterizes a set of logic gates where each member accepts 2 bits of input
     /// </summary>
     /// <typeparam name="T">A type that defines a finite sequence of bits</typeparam>
     public interface IBinaryGate<T> : IBinaryLogicGate, IBinaryOp<T>
         where T : unmanaged
     {
-        
+
     }
 
     public interface IBinaryGateIn<T> : IBinaryOpIn<T>
@@ -71,21 +71,21 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a set of logic gates where each member accepts 3 bits of input 
+    /// Characterizes a set of logic gates where each member accepts 3 bits of input
     /// </summary>
     /// <typeparam name="T">A type that defines a finite sequence of bits</typeparam>
     public interface ITernaryGate<T> : ITernaryLogicGate, ITernaryOp<T>
         where T : unmanaged
     {
-        
+
     }
 
     public interface IVUnaryGate128<T> : IUnaryGate<Vector128<T>>
         where T : unmanaged
     {
 
-    }    
-    
+    }
+
     public interface IVUnaryGate256<T> : IUnaryGate<Vector256<T>>
         where T : unmanaged
     {
@@ -102,8 +102,8 @@ namespace Z0
         where T : unmanaged
     {
 
-    }    
-    
+    }
+
     public interface IBinaryGate256<T> : IBinaryGate<Vector256<T>>
         where T : unmanaged
     {
@@ -120,8 +120,8 @@ namespace Z0
         where T : unmanaged
     {
 
-    }    
-    
+    }
+
     public interface IVTernaryGate256<T> : ITernaryGate<Vector256<T>>
         where T : unmanaged
     {

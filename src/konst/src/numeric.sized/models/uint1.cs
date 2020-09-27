@@ -120,7 +120,7 @@ namespace Z0
             => src.data == 1;
 
         [MethodImpl(Inline)]
-        public static implicit operator S(bit src)
+        public static implicit operator S(Bit32 src)
             => new S((uint)src);
 
         /// <summary>

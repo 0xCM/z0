@@ -35,7 +35,7 @@ namespace Z0
         {
             var dst = BitMatrix.alloc(n8);
             for(var row = 0; row<perm.Length; row++)
-                dst[row, perm[row]] = bit.On;
+                dst[row, perm[row]] = Bit32.On;
             return dst;
         }
 
@@ -61,7 +61,7 @@ namespace Z0
         /// Determines whether this matrix is equivalent to the canonical 0 matrix
         /// </summary>
         [MethodImpl(Inline)]
-        public static bit IsZero(this BitMatrix8 A)
+        public static Bit32 IsZero(this BitMatrix8 A)
             => BitMatrix.empty(A);
 
         /// <summary>

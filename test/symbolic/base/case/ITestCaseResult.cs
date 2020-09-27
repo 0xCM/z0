@@ -10,7 +10,7 @@ namespace Z0
     {
         string CaseName {get;}
 
-        bit Success {get;}
+        Bit32 Success {get;}
 
         string Description {get;}
 
@@ -22,7 +22,7 @@ namespace Z0
 
         C Case {get;}
 
-        string ITestCaseResult.CaseName 
-            => Case.CaseName;        
-    }    
+        string ITestCaseResult.CaseName
+            => Case.CaseName;
+    }
 }

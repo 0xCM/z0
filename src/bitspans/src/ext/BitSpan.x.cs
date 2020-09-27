@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="n">The length representative</param>
         /// <typeparam name="N">The length type</typeparam>
         [MethodImpl(Inline)]
-        public static NatSpan<N,bit> ToNatSpan<N>(this in BitSpan src, N n = default)
+        public static NatSpan<N,Bit32> ToNatSpan<N>(this in BitSpan src, N n = default)
             where N : unmanaged, ITypeNat
                 => NatSpan.load(src.Edit,n);
 

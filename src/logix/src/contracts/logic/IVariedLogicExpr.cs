@@ -9,13 +9,13 @@ namespace Z0.Logix
     /// </summary>
     public interface IVariedLogicExpr : IVariedExpr, ILogicExpr
     {
-        ILogicExpr BaseExpr {get;}        
+        ILogicExpr BaseExpr {get;}
 
-        ILogicVarExpr[] Vars {get;}        
+        ILogicVarExpr[] Vars {get;}
 
-        void SetVars(params ILogicExpr[] values);        
+        void SetVars(params ILogicExpr[] values);
 
-        void SetVars(params bit[] values);        
+        void SetVars(params Bit32[] values);
     }
 
     /// <summary>
@@ -25,11 +25,11 @@ namespace Z0.Logix
     public interface IVariedLogicExpr<T> : IVariedLogicExpr,  ILogicExpr<T>
         where T : unmanaged
     {
-     
-        new ILogicExpr<T> BaseExpr {get;}        
 
-        new ILogicVarExpr<T>[] Vars {get;}        
+        new ILogicExpr<T> BaseExpr {get;}
 
-        void SetVars(params ILogicExpr<T>[] values);        
+        new ILogicVarExpr<T>[] Vars {get;}
+
+        void SetVars(params ILogicExpr<T>[] values);
     }
 }

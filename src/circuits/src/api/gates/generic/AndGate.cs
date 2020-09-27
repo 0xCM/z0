@@ -8,12 +8,12 @@ namespace Z0
     using System.Linq;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
 
-    public readonly struct AndGate<T> : 
-        IBinaryGate<T>, 
-        IBinaryGate128<T>, 
+    public readonly struct AndGate<T> :
+        IBinaryGate<T>,
+        IBinaryGate128<T>,
         IBinaryGate256<T>,
         IBinaryGate512<T>
             where T : unmanaged
@@ -24,7 +24,7 @@ namespace Z0
         /// <param name="x">The first input value</param>
         /// <param name="y">The second input value</param>
         [MethodImpl(Inline)]
-        public bit Invoke(bit x, bit y)
+        public Bit32 Invoke(Bit32 x, Bit32 y)
             => x & y;
 
         /// <summary>

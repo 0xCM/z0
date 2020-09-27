@@ -5,9 +5,9 @@
 namespace Z0
 {
     using System;
-    
+
     public class t_replicate : t_bitcore<t_replicate>
-    {                
+    {
         public void replicate_8x32()
         {
             for(var i=0; i<RepCount; i++)
@@ -17,7 +17,7 @@ namespace Z0
                 Claim.Eq(x0, pattern);
                 Claim.Eq(x1, pattern);
                 Claim.Eq(x2, pattern);
-                Claim.Eq(x3, pattern);                
+                Claim.Eq(x3, pattern);
             }
         }
 
@@ -31,8 +31,8 @@ namespace Z0
             var expect = BitVector.alloc(n32);
             for(int i=0; i< expect.Width; i++)
                 if(math.between( i % 6,3,5))
-                    expect[i] = bit.On;
-            
+                    expect[i] = Bit32.On;
+
             Claim.Eq(expect.Scalar,actual.Scalar);
         }
 
@@ -44,12 +44,12 @@ namespace Z0
 
             var width = gbits.effwidth(src);
             Claim.eq(6,width);
-            
+
             var expect = BitVector.alloc(n64);
             for(int i=0; i< expect.Width; i++)
                 if(math.between( i % 6,3,5))
-                    expect[i] = bit.On;
-            
+                    expect[i] = Bit32.On;
+
             Claim.Eq(expect.Scalar,actual.Scalar);
 
             void report()

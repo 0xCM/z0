@@ -16,7 +16,7 @@ namespace Z0
     /// </summary>
     public readonly ref partial struct BitSpan
     {
-        internal readonly Span<bit> Data;
+        internal readonly Span<Bit32> Data;
 
         [MethodImpl(Inline)]
         public static BitSpan operator +(in BitSpan head, in BitSpan tail)
@@ -39,18 +39,18 @@ namespace Z0
             => not(x);
 
         [MethodImpl(Inline)]
-        public static bit operator ==(in BitSpan x, in BitSpan y)
+        public static Bit32 operator ==(in BitSpan x, in BitSpan y)
             => same(x,y);
 
         [MethodImpl(Inline)]
-        public static bit operator !=(in BitSpan x, in BitSpan y)
+        public static Bit32 operator !=(in BitSpan x, in BitSpan y)
             => !same(x,y);
 
         [MethodImpl(Inline)]
-        public BitSpan(Span<bit> src)
+        public BitSpan(Span<Bit32> src)
             => Data = src;
 
-        public Span<bit> Edit
+        public Span<Bit32> Edit
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -62,7 +62,7 @@ namespace Z0
             get => Data.Length;
         }
 
-        ref bit Head
+        ref Bit32 Head
         {
             [MethodImpl(Inline)]
             get => ref first(Data);
@@ -71,7 +71,7 @@ namespace Z0
         /// <summary>
         /// Queries/Manipulates an index-identified bit
         /// </summary>
-        public ref bit this[int index]
+        public ref Bit32 this[int index]
         {
             [MethodImpl(Inline)]
             get => ref seek(Head, index);
@@ -80,7 +80,7 @@ namespace Z0
         /// <summary>
         /// Queries/Manipulates an index-identified bit
         /// </summary>
-        public ref bit this[uint index]
+        public ref Bit32 this[uint index]
         {
             [MethodImpl(Inline)]
             get => ref seek(Head, index);

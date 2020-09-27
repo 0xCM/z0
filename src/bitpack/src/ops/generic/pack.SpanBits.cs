@@ -13,12 +13,12 @@ namespace Z0
     partial class BitPack
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T pack<T>(Span<bit> src, T t = default)
+        public static T pack<T>(Span<Bit32> src, T t = default)
             where T : unmanaged
                 => pack_u<T>(src);
 
         [MethodImpl(Inline)]
-        static T pack_u<T>(Span<bit> src)
+        static T pack_u<T>(Span<Bit32> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -34,7 +34,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static T pack_i<T>(Span<bit> src)
+        static T pack_i<T>(Span<Bit32> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))

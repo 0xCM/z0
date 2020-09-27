@@ -51,7 +51,7 @@ namespace Z0
             vand_check(w, z64i);
         }
 
-        static bit vand<T>(Vector128<T> x, Vector128<T> y)
+        static Bit32 vand<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             var svc = MSvc.bitlogic<T>();

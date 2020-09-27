@@ -6,10 +6,10 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;    
+
+    using static Konst;
     using static Memories;
-    
+
     partial class BitLogicSpec
     {
         /// <summary>
@@ -17,7 +17,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="terms">The sequence terms</param>
         [MethodImpl(Inline)]
-        public static LiteralLogicSeqExpr bitseq(params bit[] terms)
+        public static LiteralLogicSeqExpr bitseq(params Bit32[] terms)
             => new LiteralLogicSeqExpr(terms);
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0.Logix
         /// <param name="length">The natural length of the sequence</param>
         /// <param name="terms">The sequence terms</param>
         [MethodImpl(Inline)]
-        public static LiteralLogicSeqExpr<N> bitseq<N>(N length, params bit[] terms)
+        public static LiteralLogicSeqExpr<N> bitseq<N>(N length, params Bit32[] terms)
             where N : unmanaged, ITypeNat
         {
             z.insist<N>(terms.Length);

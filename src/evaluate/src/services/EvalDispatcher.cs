@@ -80,7 +80,7 @@ namespace Z0
         public void Notify(AppMsg msg)
             => Sink.NotifyConsole(msg);
 
-        public bit EvalFixedOperators(BufferTokens buffers, ApiMemberCode[] api)
+        public Bit32 EvalFixedOperators(BufferTokens buffers, ApiMemberCode[] api)
         {
             for(var i=0; i<api.Length; i++)
                 EvalFixedOperator(buffers, api[i]);
@@ -101,7 +101,7 @@ namespace Z0
             return s1.Zip(s2).Select(a =>  Tuples.pair(a.First, a.Second)).ToArray();
         }
 
-        public bit EvalFixedOperator(BufferTokens buffers, in ApiMemberCode api)
+        public Bit32 EvalFixedOperator(BufferTokens buffers, in ApiMemberCode api)
         {
             var nk = api.Method.ReturnType.NumericKind();
             var kid = api.Member.KindId;
@@ -342,7 +342,7 @@ namespace Z0
             }
         }
 
-        bit Dispatch(BufferTokens buffers, in Pairs<byte> src, in ApiMemberCode api)
+        Bit32 Dispatch(BufferTokens buffers, in Pairs<byte> src, in ApiMemberCode api)
         {
 
             var dst = Evaluator(buffers).Eval(api, K.BinaryOp, src);
@@ -362,7 +362,7 @@ namespace Z0
             }
         }
 
-        bit Dispatch(BufferTokens buffers, in Pairs<Cell8> src, in ApiMemberCode api)
+        Bit32 Dispatch(BufferTokens buffers, in Pairs<Cell8> src, in ApiMemberCode api)
         {
 
             var dst = Evaluator(buffers).EvalFixed(api, K.BinaryOp, src);
@@ -370,7 +370,7 @@ namespace Z0
             return 1;
         }
 
-        bit Dispatch(BufferTokens buffers, in Pairs<Cell16> src, in ApiMemberCode api)
+        Bit32 Dispatch(BufferTokens buffers, in Pairs<Cell16> src, in ApiMemberCode api)
         {
 
             var dst = Evaluator(buffers).EvalFixed(api, K.BinaryOp, src);

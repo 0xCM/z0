@@ -6,19 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
-   
+
     partial class Bits
-    {                        
+    {
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, 0 otherwise
         /// </summary>
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to chech</param>
         [MethodImpl(Inline), TestBit]
-        public static bit testbit(sbyte src, byte pos)        
-            => bit.test(src,pos);
+        public static Bit32 testbit(sbyte src, byte pos)
+            => Bit32.test(src,pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, 0 otherwise
@@ -26,8 +26,8 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to chech</param>
         [MethodImpl(Inline), TestBit]
-        public static bit testbit(byte src, byte pos)        
-            => bit.test(src,pos);
+        public static Bit32 testbit(byte src, byte pos)
+            => Bit32.test(src,pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, 0 otherwise
@@ -35,8 +35,8 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to chech</param>
         [MethodImpl(Inline), TestBit]
-        public static bit testbit(short src, byte pos)        
-            => bit.test(src,pos);
+        public static Bit32 testbit(short src, byte pos)
+            => Bit32.test(src,pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, 0 otherwise
@@ -44,8 +44,8 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to chech</param>
         [MethodImpl(Inline), TestBit]
-        public static bit testbit(ushort src, byte pos)        
-            => bit.test(src,pos);
+        public static Bit32 testbit(ushort src, byte pos)
+            => Bit32.test(src,pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, 0 otherwise
@@ -53,8 +53,8 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to chech</param>
         [MethodImpl(Inline), TestBit]
-        public static bit testbit(int src, byte pos)        
-            => bit.test(src,pos);
+        public static Bit32 testbit(int src, byte pos)
+            => Bit32.test(src,pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, 0 otherwise
@@ -62,8 +62,8 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to chech</param>
         [MethodImpl(Inline), TestBit]
-        public static bit testbit(uint src, byte pos)        
-            => bit.test(src,pos);
+        public static Bit32 testbit(uint src, byte pos)
+            => Bit32.test(src,pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, 0 otherwise
@@ -71,8 +71,8 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to chech</param>
         [MethodImpl(Inline), TestBit]
-        public static bit testbit(long src, byte pos)        
-            => bit.test(src,pos);
+        public static Bit32 testbit(long src, byte pos)
+            => Bit32.test(src,pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, 0 otherwise
@@ -80,8 +80,8 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to chech</param>
         [MethodImpl(Inline), TestBit]
-        public static bit testbit(ulong src, byte pos)        
-            => bit.test(src,pos);
+        public static Bit32 testbit(ulong src, byte pos)
+            => Bit32.test(src,pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, false otherwise
@@ -89,8 +89,8 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to chech</param>
         [MethodImpl(Inline), TestBit]
-        public static bit testbit(float src, byte pos)        
-           => bit.test(BitConverter.SingleToInt32Bits(src),pos); 
+        public static Bit32 testbit(float src, byte pos)
+           => Bit32.test(BitConverter.SingleToInt32Bits(src),pos);
 
         /// <summary>
         /// Returns 1 if an index-identified bit is enabled, false otherwise
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to chech</param>
         [MethodImpl(Inline), TestBit]
-        public static bit testbit(double src, byte pos)        
-            => bit.test(BitConverter.DoubleToInt64Bits(src),pos);
+        public static Bit32 testbit(double src, byte pos)
+            => Bit32.test(BitConverter.DoubleToInt64Bits(src),pos);
     }
 }

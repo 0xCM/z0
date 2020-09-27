@@ -26,7 +26,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="a">The operand</param>
         [MethodImpl(Inline)]
-        public static UnaryLogicOpExpr not(bit a)
+        public static UnaryLogicOpExpr not(Bit32 a)
             => unary(Not, a);
 
         /// <summary>
@@ -43,7 +43,7 @@ namespace Z0.Logix
         /// </summary>
         /// <param name="a">The operand</param>
         [MethodImpl(Inline)]
-        public static UnaryLogicOpExpr<T> not<T>(bit a)
+        public static UnaryLogicOpExpr<T> not<T>(Bit32 a)
             where T : unmanaged
                 => unary<T>(Not, a);
 
@@ -62,7 +62,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr and(bit a, bit b)
+        public static BinaryLogicOpExpr and(Bit32 a, Bit32 b)
             => binary(And, a, b);
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        static BinaryLogicOpExpr<T> and<T>(bit a, bit b)
+        static BinaryLogicOpExpr<T> and<T>(Bit32 a, Bit32 b)
             where T:  unmanaged
                 => binary<T>(And, a, b);
 
@@ -100,7 +100,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr nand(bit a, bit b)
+        public static BinaryLogicOpExpr nand(Bit32 a, Bit32 b)
             => binary(Nand, a, b);
 
         /// <summary>
@@ -119,7 +119,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        static BinaryLogicOpExpr<T> nand<T>(bit a, bit b)
+        static BinaryLogicOpExpr<T> nand<T>(Bit32 a, Bit32 b)
             where T : unmanaged
             => binary<T>(Nand, a, b);
 
@@ -138,7 +138,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr or(bit a, bit b)
+        public static BinaryLogicOpExpr or(Bit32 a, Bit32 b)
             => binary(Or, a, b);
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        static BinaryLogicOpExpr<T> or<T>(bit a, bit b)
+        static BinaryLogicOpExpr<T> or<T>(Bit32 a, Bit32 b)
             where T : unmanaged
                 => binary<T>(Or, a, b);
 
@@ -187,7 +187,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr nor(bit a, bit b)
+        public static BinaryLogicOpExpr nor(Bit32 a, Bit32 b)
             => binary(Nor, a, b);
 
         /// <summary>
@@ -196,7 +196,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        static BinaryLogicOpExpr<T> nor<T>(bit a, bit b)
+        static BinaryLogicOpExpr<T> nor<T>(Bit32 a, Bit32 b)
             where T : unmanaged
                 => binary<T>(Nor, a, b);
 
@@ -215,7 +215,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr xor(bit a, bit b)
+        public static BinaryLogicOpExpr xor(Bit32 a, Bit32 b)
             => binary(Xor, a, b);
 
         /// <summary>
@@ -234,7 +234,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        static BinaryLogicOpExpr<T> xor<T>(bit a, bit b)
+        static BinaryLogicOpExpr<T> xor<T>(Bit32 a, Bit32 b)
             where T : unmanaged
                 => binary<T>(Xor, a, b);
 
@@ -253,7 +253,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr xnor(bit a, bit b)
+        public static BinaryLogicOpExpr xnor(Bit32 a, Bit32 b)
             => binary(Xnor, a, b);
 
         /// <summary>
@@ -272,7 +272,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        static BinaryLogicOpExpr<T> xnor<T>(bit a, bit b)
+        static BinaryLogicOpExpr<T> xnor<T>(Bit32 a, Bit32 b)
             where T : unmanaged
                 => binary<T>(Xnor, a, b);
 
@@ -301,7 +301,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr left(bit a, bit b)
+        public static BinaryLogicOpExpr left(Bit32 a, Bit32 b)
             => binary(LProject, a, b);
 
         /// <summary>
@@ -310,7 +310,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        static BinaryLogicOpExpr<T> left<T>(bit a, bit b)
+        static BinaryLogicOpExpr<T> left<T>(Bit32 a, Bit32 b)
             where T : unmanaged
                 => binary<T>(LProject, a, b);
 
@@ -329,7 +329,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr right(bit a, bit b)
+        public static BinaryLogicOpExpr right(Bit32 a, Bit32 b)
             => binary(RProject, a, b);
 
         /// <summary>
@@ -348,7 +348,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        static BinaryLogicOpExpr<T> right<T>(bit a, bit b)
+        static BinaryLogicOpExpr<T> right<T>(Bit32 a, Bit32 b)
             where T : unmanaged
                 => binary<T>(RProject, a, b);
 
@@ -367,7 +367,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr lnot(bit a, bit b)
+        public static BinaryLogicOpExpr lnot(Bit32 a, Bit32 b)
             => binary(LNot, a, b);
 
         /// <summary>
@@ -386,7 +386,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        static BinaryLogicOpExpr<T> lnot<T>(bit a, bit b)
+        static BinaryLogicOpExpr<T> lnot<T>(Bit32 a, Bit32 b)
             where T : unmanaged
                 => binary<T>(LNot, a, b);
 
@@ -405,7 +405,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr rnot(bit a, bit b)
+        public static BinaryLogicOpExpr rnot(Bit32 a, Bit32 b)
             => binary(RNot, a, b);
 
         /// <summary>
@@ -424,7 +424,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        static BinaryLogicOpExpr<T> rnot<T>(bit a, bit b)
+        static BinaryLogicOpExpr<T> rnot<T>(Bit32 a, Bit32 b)
             where T : unmanaged
                 => binary<T>(RNot, a, b);
 
@@ -443,7 +443,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr imply(bit a, bit b)
+        public static BinaryLogicOpExpr imply(Bit32 a, Bit32 b)
             => binary(Impl, a, b);
 
         /// <summary>
@@ -462,7 +462,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        static BinaryLogicOpExpr<T> imply<T>(bit a, bit b)
+        static BinaryLogicOpExpr<T> imply<T>(Bit32 a, Bit32 b)
             where T : unmanaged
                 => binary<T>(Impl, a, b);
 
@@ -481,7 +481,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr notimply(bit a, bit b)
+        public static BinaryLogicOpExpr notimply(Bit32 a, Bit32 b)
             => binary(NonImpl, a, b);
 
         /// <summary>
@@ -500,7 +500,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        static BinaryLogicOpExpr<T> notimply<T>(bit a, bit b)
+        static BinaryLogicOpExpr<T> notimply<T>(Bit32 a, Bit32 b)
             where T : unmanaged
                 => binary<T>(NonImpl, a, b);
 
@@ -519,7 +519,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr cimply(bit a, bit b)
+        public static BinaryLogicOpExpr cimply(Bit32 a, Bit32 b)
             => binary(CImpl, a, b);
 
         /// <summary>
@@ -538,7 +538,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        static BinaryLogicOpExpr<T> cimply<T>(bit a, bit b)
+        static BinaryLogicOpExpr<T> cimply<T>(Bit32 a, Bit32 b)
             where T : unmanaged
                 => binary<T>(CImpl, a, b);
 
@@ -557,7 +557,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static BinaryLogicOpExpr cnotimply(bit a, bit b)
+        public static BinaryLogicOpExpr cnotimply(Bit32 a, Bit32 b)
             => binary(CNonImpl, a, b);
 
         /// <summary>
@@ -576,7 +576,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        static BinaryLogicOpExpr<T> cnotimply<T>(bit a, bit b)
+        static BinaryLogicOpExpr<T> cnotimply<T>(Bit32 a, Bit32 b)
             where T : unmanaged
                 => binary<T>(CNonImpl, a, b);
 
@@ -595,7 +595,7 @@ namespace Z0.Logix
         /// <param name="a">The first operand</param>
         /// <param name="b">The second operand</param>
         [MethodImpl(Inline)]
-        public static TernaryLogicOpExpr select(bit a, bit b, bit c)
+        public static TernaryLogicOpExpr select(Bit32 a, Bit32 b, Bit32 c)
             => ternary(TernaryBitLogicKind.XCA, a, b, c);
 
         /// <summary>

@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="count">The number of bits to pack</param>
         [MethodImpl(Inline), Op]
-        public static byte pack(Span<bit> src, N8 count)
+        public static byte pack(Span<Bit32> src, N8 count)
         {
             var v0 = vload(n256, z.first(convert(src, 0, (byte)z.bitwidth<byte>())));
             return (byte)packlsb(z.vcompact(v0,n128,z8), n8);
@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="count">The number of bits to pack</param>
         [MethodImpl(Inline), Op]
-        public static ushort pack(Span<bit> src, N16 count)
+        public static ushort pack(Span<Bit32> src, N16 count)
         {
             ref readonly var unpacked = ref z.first(convert(src, 0, (byte)z.bitwidth<ushort>()));
             return pack(unpacked, count, w16);
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="count">The number of bits to pack</param>
         [MethodImpl(Inline), Op]
-        public static uint pack(Span<bit> src, N32 count)
+        public static uint pack(Span<Bit32> src, N32 count)
         {
             ref readonly var unpacked = ref z.first(convert(src, 0, (byte)z.bitwidth<uint>()));
             return pack(unpacked,count, w32);
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="count">The number of bits to pack</param>
         [MethodImpl(Inline), Op]
-        public static ulong pack(Span<bit> src, N64 count)
+        public static ulong pack(Span<Bit32> src, N64 count)
         {
             ref readonly var unpacked = ref z.first(convert(src, 0, (byte)z.bitwidth<ulong>()));
             return pack(unpacked, count, w64);

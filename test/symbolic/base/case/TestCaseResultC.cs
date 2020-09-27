@@ -14,11 +14,11 @@ namespace Z0
     {
         public C Case {get;}
 
-        public bit Success {get;}
+        public Bit32 Success {get;}
 
         public string Description {get;}
 
-        public string CaseName 
+        public string CaseName
             => Case.CaseName;
 
         [MethodImpl(Inline)]
@@ -26,11 +26,11 @@ namespace Z0
             => new TestCaseResult(src.CaseName, src.Success, src.Description);
 
         [MethodImpl(Inline)]
-        public TestCaseResult(C tc, bit success, string description)
+        public TestCaseResult(C tc, Bit32 success, string description)
         {
             Case = tc;
             Success = success;
             Description = description;
-        }       
+        }
     }
 }

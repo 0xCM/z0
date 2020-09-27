@@ -31,7 +31,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The primal type</typeparam>
-        public static IEnumerable<bit> ToBitStream<T>(this IEnumerator<T> src)
+        public static IEnumerable<Bit32> ToBitStream<T>(this IEnumerator<T> src)
             where T : unmanaged
         {
             while(src.MoveNext())
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static IEnumerable<bit> ToBitStream<T>(this IEnumerable<T> src)
+        public static IEnumerable<Bit32> ToBitStream<T>(this IEnumerable<T> src)
             where T : unmanaged
                 => src.GetEnumerator().ToBitStream();
 
@@ -137,15 +137,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this Span<bit> src)
-            => BitString.load((ReadOnlySpan<bit>)src);
+        public static BitString ToBitString(this Span<Bit32> src)
+            => BitString.load((ReadOnlySpan<Bit32>)src);
 
         /// <summary>
         /// Converts a readonly span of bits to a bitstring
         /// </summary>
         /// <param name="src">The source bits</param>
         [MethodImpl(Inline)]
-        public static BitString ToBitString(this ReadOnlySpan<bit> src)
+        public static BitString ToBitString(this ReadOnlySpan<Bit32> src)
             => BitString.load(src);
 
         /// <summary>

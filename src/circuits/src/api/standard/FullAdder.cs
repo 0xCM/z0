@@ -15,7 +15,7 @@ namespace Z0
     public class FullAdder
     {
         [MethodImpl(Inline), Op]
-        public static void Compute(bit x, bit y, bit cin, out bit sum, out bit cout)
+        public static void Compute(Bit32 x, Bit32 y, Bit32 cin, out Bit32 sum, out Bit32 cout)
         {
             var a = x ^ y;
             var b = a & cin;
@@ -25,7 +25,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static OutPair<bit> Compute(bit x, bit y, bit cin)
+        public static OutPair<Bit32> Compute(Bit32 x, Bit32 y, Bit32 cin)
         {
             var a = x ^ y;
             var b = a & cin;

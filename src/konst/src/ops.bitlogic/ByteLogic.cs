@@ -71,15 +71,15 @@ namespace Z0
                 => write(L.xor(read(w64,A), L.not(read(w64,B))), ref Z);
 
             [MethodImpl(Inline), TestZ]
-            public static bit testz(in byte A, in byte B)
+            public static Bit32 testz(in byte A, in byte B)
                 => z.testz(read(w64,A), read(w64,B));
 
             [MethodImpl(Inline), TestC]
-            public static bit testc(in byte A, in byte B)
+            public static Bit32 testc(in byte A, in byte B)
                 => z.testc(read(w64,A),read(w64,B));
 
             [MethodImpl(Inline), TestC]
-            public static bit testc(in byte A)
+            public static Bit32 testc(in byte A)
                 => z.testc(read(w64,A));
         }
     }

@@ -47,7 +47,7 @@ namespace Z0
                 => default(NumericParserNoFail<T>);
 
         [MethodImpl(Inline), Op, NumericClosures(AllNumeric)]
-        static bit parse<T>(string src, out T dst)
+        static Bit32 parse<T>(string src, out T dst)
             where T : unmanaged
                 => parse_u(src, out dst);
 
@@ -69,7 +69,7 @@ namespace Z0
             => ScalarParser.Service;
 
         [MethodImpl(Inline)]
-        static bit parse_u<T>(string src, out T dst)
+        static Bit32 parse_u<T>(string src, out T dst)
             where T : unmanaged
         {
             dst = default;
@@ -121,7 +121,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit parse_i<T>(string src, out T dst)
+        static Bit32 parse_i<T>(string src, out T dst)
             where T : unmanaged
         {
             dst = default;
@@ -173,7 +173,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit parse_f<T>(string src, out T dst)
+        static Bit32 parse_f<T>(string src, out T dst)
             where T : unmanaged
         {
             dst = default;

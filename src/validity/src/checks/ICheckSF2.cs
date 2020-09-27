@@ -25,7 +25,7 @@ namespace Z0
         }
     }
 
-    public readonly struct CheckBinaryPredSF<T> : ICheckSF<T,T,bit>
+    public readonly struct CheckBinaryPredSF<T> : ICheckSF<T,T,Bit32>
         where T : unmanaged
     {
         public ITestContext Context {get;}

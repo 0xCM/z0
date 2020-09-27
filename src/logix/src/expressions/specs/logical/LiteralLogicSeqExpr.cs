@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -14,10 +14,10 @@ namespace Z0.Logix
     /// </summary>
     public readonly struct LiteralLogicSeqExpr : ILiteralLogicSeqExpr
     {
-        public bit[] Terms {get;}
+        public Bit32[] Terms {get;}
 
         [MethodImpl(Inline)]
-        internal LiteralLogicSeqExpr(bit[] terms)
+        internal LiteralLogicSeqExpr(Bit32[] terms)
         {
             this.Terms = terms;
         }
@@ -28,24 +28,24 @@ namespace Z0.Logix
         public LogicExprKind ExprKind
             => LogicExprKind.Literal;
 
-        public bit this[int index]
+        public Bit32 this[int index]
         {
             [MethodImpl(Inline)]
             get => Terms[index];
-            
+
             [MethodImpl(Inline)]
             set => Terms[index] = value;
         }
-        
+
         public int Length
             => Terms.Length;
 
         public BitString ToBitString()
             => BitString.load(Terms);
-        
+
         public string Format()
             => ToBitString().Format();
-    
+
         public override string ToString()
             => Format();
     }

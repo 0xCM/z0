@@ -71,7 +71,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        BitString(ReadOnlySpan<bit> src)
+        BitString(ReadOnlySpan<Bit32> src)
         {
             data = new byte[src.Length];
             for(var i=0; i<src.Length; i++)
@@ -81,7 +81,7 @@ namespace Z0
         /// <summary>
         /// Queries/manipulates bit at specified index
         /// </summary>
-        public bit this[int index]
+        public Bit32 this[int index]
         {
             [MethodImpl(Inline)]
             get => data[index] == 1;
@@ -372,11 +372,11 @@ namespace Z0
         /// <summary>
         /// Renders the content as a span of bits
         /// </summary>
-        public Span<bit> ToBits()
+        public Span<Bit32> ToBits()
         {
-            Span<bit> dst = new bit[data.Length];
+            Span<Bit32> dst = new Bit32[data.Length];
             for(var i=0; i< data.Length; i++)
-                dst[i] = (bit)data[i];
+                dst[i] = (Bit32)data[i];
             return dst;
         }
 
@@ -397,12 +397,12 @@ namespace Z0
         /// <summary>
         /// Renders the content as a natural block of bits
         /// </summary>
-        public NatSpan<N,bit> ToNatBits<N>(N n = default)
+        public NatSpan<N,Bit32> ToNatBits<N>(N n = default)
             where N : unmanaged, ITypeNat
         {
-            var dst = NatSpan.alloc<N,bit>();
+            var dst = NatSpan.alloc<N,Bit32>();
             for(var i=0; i< data.Length; i++)
-                dst[i] = (bit)data[i];
+                dst[i] = (Bit32)data[i];
             return dst;
         }
 

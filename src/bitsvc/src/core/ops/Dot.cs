@@ -12,7 +12,7 @@ namespace Z0
     partial class BC
     {
         [Closures(Integers)]
-        public readonly struct Dot<T> : IFunc<T,T,bit>
+        public readonly struct Dot<T> : IFunc<T,T,Bit32>
             where T : unmanaged
         {
             public static Dot<T> Op => default;
@@ -22,7 +22,7 @@ namespace Z0
             public OpIdentity Id => ApiIdentity.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
-            public bit Invoke(T a, T b) => gbits.dot(a,b);
+            public Bit32 Invoke(T a, T b) => gbits.dot(a,b);
         }
     }
 }

@@ -11,23 +11,23 @@ namespace Z0
     using static Memories;
 
     public class t_bvperm : t_bitvectors<t_bvperm>
-    {        
+    {
         public void pbv_perm_8()
-        {        
+        {
             var perm = Permute.natural<N8>((2,3), (6,7));
             var bs1 = ((byte)0b10001101).ToBitString();
             var bs2 = BitString.parse("01001101");
             var bs3 = bs1.Permute(perm);
-            Claim.eq(bs2, bs3);            
+            Claim.eq(bs2, bs3);
 
         }
 
         public void pbv_perm_16()
-        {        
+        {
             var p2 = Permute.natural<N16>((1,10), (2,11), (3, 8));
             var bsx2 = ((ushort)0b1000110111000100).ToBitString();
             var bsy2 =  BitString.load(bsx2.BitSeq.Permute(p2));
-            var bsz2 = bsx2.Permute(p2);            
+            var bsz2 = bsx2.Permute(p2);
             Claim.eq(bsy2, bsz2);
         }
 
@@ -40,9 +40,9 @@ namespace Z0
             Claim.eq(p1[3], 3);
 
             var bm = p1.ToBitMatrix();
-            Claim.Eq(bm[0,31], bit.On);
-            Claim.Eq(bm[1,30], bit.On);
-            Claim.Eq(bm[2,29], bit.On);
+            Claim.Eq(bm[0,31], Bit32.On);
+            Claim.Eq(bm[1,30], Bit32.On);
+            Claim.Eq(bm[2,29], Bit32.On);
 
 
             var v1 = BitVector32.Zero;
@@ -57,7 +57,7 @@ namespace Z0
         {
             var p = Permute.natural(n64, (0,1),(1,2),(2,3),(3,4),(4,5),(5,6));
             var bv = BitVector.perm(BitVector64.One,p);
-            Claim.Eq(bv[6], bit.On);
+            Claim.Eq(bv[6], Bit32.On);
 
             for(var j=0; j<RepCount; j++)
             {

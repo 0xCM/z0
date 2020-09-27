@@ -17,7 +17,7 @@ namespace Z0
         {
             var buffer = Stacks.alloc(w64);
             ref var tmp = ref Stacks.head<byte>(ref buffer);
-            ref var target = ref Unsafe.As<bit,uint>(ref first(dst.Edit));
+            ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
             BitPack.unpack(src, ref tmp);
             distribute(in tmp, 0, ref target);
@@ -29,7 +29,7 @@ namespace Z0
         {
             var buffer = Stacks.alloc(w128);
             ref var tmp = ref Stacks.head<byte>(ref buffer);
-            ref var target = ref Unsafe.As<bit,uint>(ref first(dst.Edit));
+            ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
             BitPack.unpack(src, ref tmp);
             distribute(in tmp, 0, ref target);
@@ -40,8 +40,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref readonly BitSpan fill(uint src, in BitSpan dst)
         {
-            ref var tmp = ref first(dst.Edit.Slice(24,8).Cast<bit,byte>());
-            ref var target = ref Unsafe.As<bit,uint>(ref first(dst.Edit));
+            ref var tmp = ref first(dst.Edit.Slice(24,8).Cast<Bit32,byte>());
+            ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
             BitPack.unpack(src, ref tmp);
             distribute(in tmp, 0, ref target);
@@ -55,8 +55,8 @@ namespace Z0
         public static ref readonly BitSpan fill(ulong src, in BitSpan dst)
         {
             var buffer = Stacks.alloc(w512);
-            ref var tmp = ref first(dst.Edit.Slice(56,8).Cast<bit,byte>());
-            ref var target = ref Unsafe.As<bit,uint>(ref first(dst.Edit));
+            ref var tmp = ref first(dst.Edit.Slice(56,8).Cast<Bit32,byte>());
+            ref var target = ref Unsafe.As<Bit32,uint>(ref first(dst.Edit));
 
             BitPack.unpack((uint)src, ref tmp);
             distribute(in tmp, 0, ref target, 0);

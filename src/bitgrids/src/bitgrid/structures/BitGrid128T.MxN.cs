@@ -86,11 +86,11 @@ namespace Z0
             => BitGrid.negate(gx);
 
         [MethodImpl(Inline)]
-        public static bit operator ==(in BitGrid128<M,N,T> g1, in BitGrid128<M,N,T> g2)
+        public static Bit32 operator ==(in BitGrid128<M,N,T> g1, in BitGrid128<M,N,T> g2)
             => BitGrid.same(g1,g2);
 
         [MethodImpl(Inline)]
-        public static bit operator !=(in BitGrid128<M,N,T> g1, in BitGrid128<M,N,T> g2)
+        public static Bit32 operator !=(in BitGrid128<M,N,T> g1, in BitGrid128<M,N,T> g2)
             => !BitGrid.same(g1,g2);
 
         [MethodImpl(Inline)]

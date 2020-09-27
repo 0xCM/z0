@@ -18,10 +18,10 @@ namespace Z0
                 where T : unmanaged
                     => format(src.ReadOnly(), config);
 
-        public static string format(ReadOnlySpan<bit> src, BitFormat? fmt = null)
+        public static string format(ReadOnlySpan<Bit32> src, BitFormat? fmt = null)
             => src.ToBitString().Format(fmt);
 
-        public static string format(Span<bit> src,  BitFormat? fmt = null)
+        public static string format(Span<Bit32> src,  BitFormat? fmt = null)
             => format(src.ReadOnly(), fmt);
 
         public static string format<N,T>(NatSpan<N,T> src, BitFormat config)

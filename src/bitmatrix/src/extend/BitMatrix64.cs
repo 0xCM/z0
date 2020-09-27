@@ -10,7 +10,7 @@ namespace Z0
     using static Konst; using static Memories;
 
     public static class BitMatrix64x
-    {   
+    {
         /// <summary>
         /// Converts the matrix to a bitvector
         /// </summary>
@@ -23,11 +23,11 @@ namespace Z0
         /// </summary>
         /// <param name="perm">The source permutation</param>
         [MethodImpl(Inline)]
-        public static BitMatrix64 ToBitMatrix(this NatPerm<N64> perm)            
+        public static BitMatrix64 ToBitMatrix(this NatPerm<N64> perm)
         {
             var dst = BitMatrix.alloc(n64);
             for(var row = 0; row<perm.Length; row++)
-                dst[row,perm[row]] = bit.On;
+                dst[row,perm[row]] = Bit32.On;
             return dst;
         }
 
@@ -53,14 +53,14 @@ namespace Z0
             => BitMatrix.load(n64,A.Content);
 
         [MethodImpl(Inline)]
-        public static string Format(this BitMatrix64 src)            
-            => src.Content.FormatMatrixBits(src.Order);        
-    
+        public static string Format(this BitMatrix64 src)
+            => src.Content.FormatMatrixBits(src.Order);
+
         /// <summary>
         /// Determines whether this matrix is equivalent to the canonical 0 matrix
         /// </summary>
-        [MethodImpl(Inline)] 
-        public static bit IsZero(this BitMatrix64 A)
+        [MethodImpl(Inline)]
+        public static Bit32 IsZero(this BitMatrix64 A)
             => BitMatrix.empty(A);
 
 

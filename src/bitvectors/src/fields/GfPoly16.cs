@@ -16,7 +16,7 @@ namespace Z0
     public readonly struct GfPoly16
     {
         readonly ushort data;
-        
+
         readonly byte degree;
 
         public static readonly GfPoly16 Zero = default;
@@ -34,7 +34,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator BitVector16(GfPoly16 src)
             => src.ToBitVector();
-        
+
 
         [MethodImpl(Inline)]
         public static implicit operator GfPoly<N9,ushort>(GfPoly16 src)
@@ -57,7 +57,7 @@ namespace Z0
         /// <summary>
         /// Returns a bit indicating whether the coefficient for x^i is 1 or 0
         /// </summary>
-        public bit this[byte i]
+        public Bit32 this[byte i]
         {
             [MethodImpl(Inline)]
             get => gbits.testbit(data,i);
@@ -103,7 +103,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public GfPoly<N9,ushort> ToNatPoly()
             => new GfPoly<N9, ushort>(data);
-        
+
         /// <summary>
         /// Formats the polynomial
         /// </summary>

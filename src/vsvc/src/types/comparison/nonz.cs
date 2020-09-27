@@ -18,11 +18,11 @@ namespace Z0
         {
 
             [MethodImpl(Inline)]
-            public bit Invoke(Vector128<T> x)
+            public Bit32 Invoke(Vector128<T> x)
                 => gvec.vnonz(x);
 
             [MethodImpl(Inline)]
-            public bit Invoke(T a)
+            public Bit32 Invoke(T a)
                 => gmath.nonz(a);
         }
 
@@ -31,11 +31,11 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public bit Invoke(Vector256<T> x)
+            public Bit32 Invoke(Vector256<T> x)
                 => gvec.vnonz(x);
 
             [MethodImpl(Inline)]
-            public bit Invoke(T a)
+            public Bit32 Invoke(T a)
                 => gmath.nonz(a);
 
         }

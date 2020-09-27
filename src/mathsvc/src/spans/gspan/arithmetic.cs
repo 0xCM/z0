@@ -74,12 +74,12 @@ namespace Z0
                 => apply(MSvc.abs<T>(), src, dst);
 
         [MethodImpl(Inline), Even, Closures(Integers)]
-        public static Span<bit> even<T>(ReadOnlySpan<T> src, Span<bit> dst)
+        public static Span<Bit32> even<T>(ReadOnlySpan<T> src, Span<Bit32> dst)
             where T : unmanaged
                 => apply(MSvc.even<T>(), src,dst);
 
         [MethodImpl(Inline), Odd, Closures(Integers)]
-        public static Span<bit> odd<T>(ReadOnlySpan<T> src, Span<bit> dst)
+        public static Span<Bit32> odd<T>(ReadOnlySpan<T> src, Span<Bit32> dst)
             where T : unmanaged
                 => apply(MSvc.odd<T>(), src,dst);
 

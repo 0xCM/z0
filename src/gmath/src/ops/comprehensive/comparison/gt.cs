@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-                
-    using static Konst; 
+
+    using static Konst;
     using static Memories;
 
     partial class gmath
@@ -19,12 +19,12 @@ namespace Z0
         /// <param name="b">The second operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline), Gt, Closures(Integers)]
-        public static bit gt<T>(T a, T b)
+        public static Bit32 gt<T>(T a, T b)
             where T : unmanaged
                 => gt_u(a,b);
 
         [MethodImpl(Inline)]
-        static bit gt_u<T>(T a, T b)
+        static Bit32 gt_u<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -40,7 +40,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static bit gt_i<T>(T a, T b)
+        static Bit32 gt_i<T>(T a, T b)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
