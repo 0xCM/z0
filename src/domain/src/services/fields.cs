@@ -53,23 +53,5 @@ namespace Z0
 
         internal static string format(FieldAttributes src)
             => src.ToString();
-
-        public static ReadOnlySpan<ImageFieldTable> fields(in ReaderState state)
-        {
-            var reader = state.Reader;
-            var handles = reader.FieldDefinitions.ToReadOnlySpan();
-            var count = handles.Length;
-            var dst = Spans.alloc<ImageFieldTable>(count);
-
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var handle = ref skip(handles,i);
-                var entry = reader.GetFieldDefinition(handle);
-                int offset = entry.GetOffset();
-
-                seek(dst,i) = new ImageFieldTable(i, name(state, entry, i), sig(state, entry, i), format(entry.Attributes));
-            }
-            return dst;
-        }
     }
 }

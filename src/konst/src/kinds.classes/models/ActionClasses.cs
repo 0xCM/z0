@@ -54,5 +54,4 @@ namespace Z0
     {
         public K Kind => K.TernaryAction;
     }
-
 }

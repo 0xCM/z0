@@ -16,6 +16,8 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using I = System.Reflection.Metadata.Ecma335.TableIndex;
+
     [ApiHost]
     public partial class PeTableReader : IPeTableReader
     {
@@ -38,7 +40,7 @@ namespace Z0
             using var stream = File.OpenRead(src.Name);
             using var reader = new PEReader(stream);
 
-            var dst = Root.list<ImageSectionHeader>();
+            var dst = z.list<ImageSectionHeader>();
             var headers = reader.PEHeaders;
             var sections = headers.SectionHeaders;
 
@@ -139,16 +141,75 @@ namespace Z0
 
             return values.ToArray();
         }
+
         public ReadOnlySpan<ImageBlob> ReadBlobs()
             => blobs(State);
 
+        internal static TableIndex? index(Handle handle)
+        {
+            if(MetadataTokens.TryGetTableIndex(handle.Kind, out var table))
+                return table;
+            else
+                return null;
+        }
+
+        public static ConstantHandle ConstantHandle(uint row)
+            => MetadataTokens.ConstantHandle((int)row);
+
+        [MethodImpl(Inline), Op]
+        public static int ConstantCount(in ReaderState state)
+            => state.Reader.GetTableRowCount(I.Constant);
+
+        public static HandleInfo? describe(in ReaderState state, Handle handle)
+        {
+            if(!handle.IsNil)
+            {
+                var table = index(handle);
+                var token = state.Reader.GetToken(handle);
+                if (table != null)
+                    return new HandleInfo(token, table.Value);
+            }
+
+            return null;
+        }
+
+
         public ReadOnlySpan<ImageConstantRecord> ReadConstants()
-            => constants(State);
+        {
+            var reader = State.Reader;
+            var count = ConstantCount(State);
+            var dst = span<ImageConstantRecord>(count);
+            for(var i=1u; i<=count; i++)
+            {
+                var k = ConstantHandle(i);
+                var entry = reader.GetConstant(k);
+                var parent = describe(State, entry.Parent);
+                var blob = reader.GetBlobBytes(entry.Value);
+                seek(dst, i - 1u) = new ImageConstantRecord(i, parent ?? HandleInfo.Empty, entry.TypeCode, blob);
+            }
+            return dst;
+        }
 
         public ReadOnlySpan<ImageFieldTable> ReadFields()
-            => PeTableReader.fields(State);
+        {
+            var reader = State.Reader;
+            var handles = reader.FieldDefinitions.ToReadOnlySpan();
+            var count = handles.Length;
+            var dst = Spans.alloc<ImageFieldTable>(count);
+
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var handle = ref skip(handles,i);
+                var entry = reader.GetFieldDefinition(handle);
+                int offset = entry.GetOffset();
+
+                seek(dst,i) = new ImageFieldTable(i, name(State, entry, i), sig(State, entry, i), format(entry.Attributes));
+            }
+            return dst;
+        }
 
         public ReadOnlySpan<FieldRvaRecord> ReadFieldRva()
             => rva(State);
+
     }
 }

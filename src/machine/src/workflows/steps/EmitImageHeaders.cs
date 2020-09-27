@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static EmitImageHeadersHost;
 
     using F = PeHeaderField;
 
@@ -68,7 +67,7 @@ namespace Z0
 
         static void format(in ImageSectionHeader src, DatasetFormatter<F> dst)
         {
-            dst.Append(F.FileName, src.File);
+            dst.Delimit(F.FileName, src.File);
             dst.Delimit(F.Section, src.SectionName);
             dst.Delimit(F.Address, src.RawData);
             dst.Delimit(F.Size, src.RawDataSize);

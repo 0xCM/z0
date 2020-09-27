@@ -20,7 +20,6 @@ namespace Z0
 
         public const ushort Col0Width = 16;
 
-
         public void SaveIndex(ReadOnlySpan<CapturedAccessor> src, FilePath dst)
         {
             const ulong Cut = 0x55005500550;

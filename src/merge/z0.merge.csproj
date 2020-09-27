@@ -10,7 +10,6 @@
     <ProjectReference Include="$(Flow)" />
     <ProjectReference Include="$(AsmServices)" />
     <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(MetaReader)" />
     <ProjectReference Include="$(BitVectors)" />
   </ItemGroup>
 

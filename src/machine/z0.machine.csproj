@@ -7,15 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- <ProjectReference Include="$(Konst)" />
-    <ProjectReference Include="$(Capture)" />
-    <ProjectReference Include="$(Flow)" />
-    <ProjectReference Include="$(AsmServices)" />
-    <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(MetaReader)" />
-    <ProjectReference Include="$(BitVectors)" /> -->
     <ProjectReference Include="$(Merge)" />
-
   </ItemGroup>
 
   <ItemGroup>
