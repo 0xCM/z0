@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Konst;
-    
+
     partial struct z
     {
         /// <summary>
@@ -19,7 +18,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static sbyte set(sbyte src, byte pos, BitState state)            
+        public static sbyte set(sbyte src, byte pos, BitState state)
         {
             var c = ~(sbyte)state + 1;
             src ^= (sbyte)((c ^ src) & (1 << pos));
@@ -33,7 +32,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static byte set(byte src, byte pos, BitState state)            
+        public static byte set(byte src, byte pos, BitState state)
         {
             var c = ~(byte)state + 1;
             src ^= (byte)((c ^ src) & (1 << pos));
@@ -47,7 +46,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static short set(short src, byte pos, BitState state)            
+        public static short set(short src, byte pos, BitState state)
         {
             var c = ~(short)state + 1;
             src ^= (short)((c ^ src) & (1 << pos));
@@ -61,7 +60,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static ushort set(ushort src, byte pos, BitState state)            
+        public static ushort set(ushort src, byte pos, BitState state)
         {
             var c = ~(ushort)state + 1;
             src ^= (ushort)((c ^ src) & (1 << pos));
@@ -75,7 +74,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static int set(int src, byte pos, BitState state)            
+        public static int set(int src, byte pos, BitState state)
         {
             var c = ~(int)state + 1;
             src ^= (c ^ src) & (1 << pos);
@@ -89,7 +88,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static uint set(uint src, byte pos, BitState state)            
+        public static uint set(uint src, byte pos, BitState state)
         {
             var c = ~(uint)state + 1u;
             src ^= (c ^ src) & (1u << pos);
@@ -103,7 +102,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static long set(long src, byte pos, BitState state)            
+        public static long set(long src, byte pos, BitState state)
         {
             var c = ~(long)state + 1L;
             src ^= (c ^ src) & (1L << pos);
@@ -131,7 +130,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static sbyte set(sbyte src, byte pos, bool state)            
+        public static sbyte set(sbyte src, byte pos, bool state)
         {
             var c = ~@sbyte(state) + 1;
             src ^= (sbyte)((c ^ src) & (1 << pos));
@@ -145,7 +144,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static byte set(byte src, byte pos, bool state)            
+        public static byte set(byte src, byte pos, bool state)
         {
             var c = ~@byte(state) + 1;
             src ^= (byte)((c ^ src) & (1 << pos));
@@ -159,7 +158,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static short set(short src, byte pos, bool state)            
+        public static short set(short src, byte pos, bool state)
         {
             var c = ~@short(state) + 1;
             src ^= (short)((c ^ src) & (1 << pos));
@@ -173,7 +172,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static ushort set(ushort src, byte pos, bool state)            
+        public static ushort set(ushort src, byte pos, bool state)
         {
             var c = ~@ushort(state) + 1;
             src ^= (ushort)((c ^ src) & (1 << pos));
@@ -187,7 +186,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static int set(int src, byte pos, bool state)            
+        public static int set(int src, byte pos, bool state)
         {
             var c = ~@int(state) + 1;
             src ^= (c ^ src) & (1 << pos);
@@ -201,7 +200,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static uint set(uint src, byte pos, bool state)            
+        public static uint set(uint src, byte pos, bool state)
         {
             var c = ~@uint(state) + 1u;
             src ^= (c ^ src) & (1u << pos);
@@ -215,7 +214,7 @@ namespace Z0
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
         [MethodImpl(Inline), Op]
-        public static long set(long src, byte pos, bool state)            
+        public static long set(long src, byte pos, bool state)
         {
             var c = ~@long(state) + 1L;
             src ^= (c ^ src) & (1L << pos);

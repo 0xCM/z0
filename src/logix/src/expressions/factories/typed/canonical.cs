@@ -9,7 +9,7 @@ namespace Z0.Logix
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using BLK = BinaryLogicKind;
+    using BLK = BinaryBitLogicKind;
 
     partial class TypedLogicSpec
     {
@@ -149,7 +149,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static BinaryBitwiseOpExpr<T> nand<T>(IExpr<T> lhs, IExpr<T> rhs)
             where T : unmanaged
-                => binary(BinaryLogicKind.Nand, lhs,rhs);
+                => binary(BinaryBitLogicKind.Nand, lhs,rhs);
 
         /// <summary>
         /// Defines a bitwise NAND expression with literal operands

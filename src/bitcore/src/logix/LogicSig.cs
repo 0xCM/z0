@@ -11,7 +11,7 @@ namespace Z0
     using static Memories;
 
     using ULK = UnaryBitLogicKind;
-    using BLK = BinaryLogicKind;
+    using BLK = BinaryBitLogicKind;
     using TLK = TernaryBitLogicKind;
 
     public class LogicSig
@@ -34,7 +34,7 @@ namespace Z0
             => text.concat(format(kind), Chars.Colon, nameof(bit));
 
         [MethodImpl(Inline)]
-        public static string sig(BitLogicApiKey kind)
+        public static string sig(BinaryBitLogicApiKey kind)
             => text.concat(format(kind), Chars.Colon, nameof(bit));
 
         [MethodImpl(Inline)]
@@ -80,7 +80,7 @@ namespace Z0
         public static string format(BLK kind)
             => kind.ToString().ToLower();
 
-        public static string format(BitLogicApiKey kind)
+        public static string format(BinaryBitLogicApiKey kind)
             => kind.Format();
     }
 }

@@ -13,9 +13,9 @@ namespace Z0.Logix
 
     using static BitLogicSpec;
     using static LogicEngine;
-    using static BinaryLogicKind;
+    using static BinaryBitLogicKind;
 
-    using BL = BinaryLogicKind;
+    using BL = BinaryBitLogicKind;
 
     public abstract class LogixTest<X> : UnitTest<X, CheckVectorBits, ICheckVectorBits>
         where X : LogixTest<X>
@@ -86,7 +86,7 @@ namespace Z0.Logix
             ReportBenchmark(opname, opcount,clock);
         }
 
-         protected void bm_and_check<N,T>(BinaryLogicKind op = And)
+         protected void bm_and_check<N,T>(BinaryBitLogicKind op = And)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -111,7 +111,7 @@ namespace Z0.Logix
             }
         }
 
-         protected void bm_nand_check<N,T>(BinaryLogicKind op = Nand)
+         protected void bm_nand_check<N,T>(BinaryBitLogicKind op = Nand)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -136,7 +136,7 @@ namespace Z0.Logix
             }
         }
 
-         protected void bm_or_check<N,T>(BinaryLogicKind op = Or)
+         protected void bm_or_check<N,T>(BinaryBitLogicKind op = Or)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -161,7 +161,7 @@ namespace Z0.Logix
             }
         }
 
-         protected void bm_nor_check<N,T>(BinaryLogicKind op = Nor)
+         protected void bm_nor_check<N,T>(BinaryBitLogicKind op = Nor)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -186,7 +186,7 @@ namespace Z0.Logix
             }
         }
 
-        protected void bm_xor_check<N,T>(BinaryLogicKind op = Xor)
+        protected void bm_xor_check<N,T>(BinaryBitLogicKind op = Xor)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -211,7 +211,7 @@ namespace Z0.Logix
             }
         }
 
-        protected void bm_xnor_check<N,T>(BinaryLogicKind op = Xnor)
+        protected void bm_xnor_check<N,T>(BinaryBitLogicKind op = Xnor)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -237,7 +237,7 @@ namespace Z0.Logix
         }
 
 
-        protected void bm_imply_check<N,T>(BinaryLogicKind op = Impl)
+        protected void bm_imply_check<N,T>(BinaryBitLogicKind op = Impl)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -262,7 +262,7 @@ namespace Z0.Logix
             }
         }
 
-        protected void bm_notimply_check<N,T>(BinaryLogicKind op = NonImpl)
+        protected void bm_notimply_check<N,T>(BinaryBitLogicKind op = NonImpl)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -287,7 +287,7 @@ namespace Z0.Logix
             }
         }
 
-        protected void bm_not_check<N,T>(BinaryLogicKind op = LNot)
+        protected void bm_not_check<N,T>(BinaryBitLogicKind op = LNot)
             where T : unmanaged
             where N : unmanaged, ITypeNat
 
@@ -312,7 +312,7 @@ namespace Z0.Logix
             }
         }
 
-        protected void bm_delegate_bench<T>(BinaryLogicKind opkind, SystemCounter clock = default)
+        protected void bm_delegate_bench<T>(BinaryBitLogicKind opkind, SystemCounter clock = default)
             where T : unmanaged
         {
             var opname = $"bm_{opkind.Format()}_{ApiIdentity.numeric<T>()}_delegate";
@@ -342,7 +342,7 @@ namespace Z0.Logix
             ReportBenchmark(opname, opcount, clock);
         }
 
-        protected void bm_api_bench<T>(BinaryLogicKind op, SystemCounter clock = default)
+        protected void bm_api_bench<T>(BinaryBitLogicKind op, SystemCounter clock = default)
             where T : unmanaged
         {
             var opname = $"bm_{op.Format()}_{ApiIdentity.numeric<T>()}_api";
@@ -432,7 +432,7 @@ namespace Z0.Logix
             ReportBenchmark(opname, opcount, clock);
         }
 
-       protected void bitwise_logic_check<T>(BinaryLogicKind kind)
+       protected void bitwise_logic_check<T>(BinaryBitLogicKind kind)
             where T : unmanaged
         {
             for(var i=0; i< RepCount; i++)

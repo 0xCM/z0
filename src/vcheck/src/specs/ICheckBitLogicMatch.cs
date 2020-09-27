@@ -15,13 +15,13 @@ namespace Z0
         [MethodImpl(Inline)]
         bit match<K,T>(Vector128<T> x, Vector128<T> y, K k = default, W128 w = default)
             where T : unmanaged
-            where K : unmanaged, IBitLogicApiKey
+            where K : unmanaged, IBitLogicKind
                 => CheckBitLogic128<T>.Checker.match(x, y, k);
 
         [MethodImpl(Inline)]
         bit match<K,T>(Vector256<T> x, Vector256<T> y, K k = default, W256 w = default)
             where T : unmanaged
-            where K : unmanaged, IBitLogicApiKey
+            where K : unmanaged, IBitLogicKind
                 =>  CheckBitLogic256<T>.Checker.match(x, y, k);
     }
 
@@ -30,6 +30,6 @@ namespace Z0
         where W : unmanaged, ITypeWidth
     {
         bit match<K>(T x, T y, K k = default)
-            where K : unmanaged, IBitLogicApiKey;
+            where K : unmanaged, IBitLogicKind;
     }
 }

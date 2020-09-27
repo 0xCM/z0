@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline), Op]
-        public static byte eval(And f, byte x, byte y)
+        public static byte eval(BitLogicKinds.And f, byte x, byte y)
             => (byte)(x&y);
     }
 }

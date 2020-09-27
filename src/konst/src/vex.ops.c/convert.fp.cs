@@ -75,7 +75,7 @@ namespace Z0
             => ConvertToVector128Single(src);
 
         /// <summary>
-        /// __m256d _mm256_cvtepi32_pd (__m128i a)VCVTDQ2PD ymm, xmm/m128
+        /// __m256d _mm256_cvtepi32_pd (__m128i a) VCVTDQ2PD ymm, xmm/m128
         /// 4x32i ->4x64f
         /// </summary>
         /// <param name="src">The source vector</param>

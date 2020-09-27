@@ -8,14 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Linq;
-    using System.Security;
 
     using static Konst;
     using static Memories;
     using static LogicSig;
 
     using ULK = UnaryBitLogicKind;
-    using BLK = BinaryLogicKind;
+    using BLK = BinaryBitLogicKind;
     using TLK = TernaryBitLogicKind;
     using BSK = BitShiftApiKey;
     using BCK = BinaryComparisonApiKey;
@@ -36,7 +35,7 @@ namespace Z0
             => Enums.literals<BLK>();
 
         /// <summary>
-        /// Advertises the supported ternary bitlogic opeators
+        /// Advertises the supported ternary bitlogic operators
         /// </summary>
         public static ReadOnlySpan<TLK> TernaryBitLogicKinds
             => gmath.range((byte)1,(byte)TLK.X18).Cast<TLK>().ToArray();

@@ -4,9 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    public interface IBitLogic<T>
+    [Free]
+    public interface IBinaryBitLogic<T>
         where T : struct
     {
         T and(T a, T b);
@@ -21,10 +22,6 @@ namespace Z0
 
         T xnor(T a, T b);
 
-        T not(T a);
-
-        T select(T a, T b, T c);
-
         T impl(T a, T b);
 
         T nonimpl(T a, T b);
@@ -33,19 +30,7 @@ namespace Z0
 
         T cnonimpl(T a, T b);
 
-        T @true();
-
-        T @false();
-
-        T identity(T a);
-
-        T eval<K>(T a, K kind = default)
-            where K : unmanaged, IBitLogicApiKey;
-
         T eval<K>(T a, T b, K kind = default)
-            where K : unmanaged, IBitLogicApiKey;
-
-        T eval<K>(T a, T b, T c, K kind = default)
-            where K : unmanaged, IBitLogicApiKey;
+            where K : unmanaged, IBitLogicKind;
     }
 }

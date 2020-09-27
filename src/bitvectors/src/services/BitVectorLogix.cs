@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static LogicSig;
 
-    using BLK = BinaryLogicKind;
+    using BLK = BinaryBitLogicKind;
 
     /// <summary>
     /// Implements reference bitvector operations

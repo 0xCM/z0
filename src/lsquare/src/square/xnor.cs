@@ -6,13 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
+    using static Konst;
+    using static z;
     using static In;
-    using static Konst; 
-    using static Memories;
-    
-    using BL = ByteLogic;
-    
+
+    using BL = BitLogics.Bytes;
+
     /// <summary>
     /// Defines operators over square bit domains
     /// </summary>
@@ -23,7 +23,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               BL.xnor(in uint8(in a), in uint8(in b), ref As.uint8(ref dst));
+               BL.xnor(in uint8(in a), in uint8(in b), ref uint8(ref dst));
             else if(typeof(T) == typeof(ushort))
                 xnor(w, in a, in b, ref dst);
             else if(typeof(T) == typeof(uint))
@@ -31,7 +31,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 xnor(w, 16, 4, in a, in b, ref dst);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

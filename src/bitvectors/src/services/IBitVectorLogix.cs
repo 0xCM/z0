@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using BLK = BinaryLogicKind;
+    using BLK = BinaryBitLogicKind;
 
     public interface IBitVectorLogix
     {
@@ -16,5 +16,5 @@ namespace Z0
 
         BitVector<T> EvalRef<T>(BLK kind, BitVector<T> x, BitVector<T> y)
             where T : unmanaged;
-    }    
+    }
 }

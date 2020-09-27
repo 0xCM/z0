@@ -11,26 +11,28 @@ namespace Z0
     using static LogicSig;
     using static BitLogix;
 
-    using BLK = BinaryLogicKind;
+    using BLK = BinaryBitLogicKind;
+
+    using K = BitLogicKinds;
 
     partial class BitLogixOps
     {
         [MethodImpl(Inline)]
         public static bit eval<F>(bit a, bit b, F kind = default)
-            where F : unmanaged, IBitLogicApiKey
+            where F : unmanaged, IBitLogicKind
                 => eval_1(a,b, kind);
 
         [MethodImpl(Inline)]
         static bit eval_1<F>(bit a, bit b, F kind = default)
-            where F : unmanaged, IBitLogicApiKey
+            where F : unmanaged, IBitLogicKind
         {
-            if(typeof(F) == typeof(Kinds.True))
+            if(typeof(F) == typeof(K.True))
                 return @true(a, b);
-            else if(typeof(F) == typeof(Kinds.False))
+            else if(typeof(F) == typeof(K.False))
                 return @false(a, b);
-            else if(typeof(F) == typeof(Kinds.And))
+            else if(typeof(F) == typeof(K.And))
                 return and(a, b);
-            else if (typeof(F) == typeof(Kinds.Nand))
+            else if (typeof(F) == typeof(K.Nand))
                 return nand(a, b);
             else
                 return eval_2(a, b, kind);
@@ -38,15 +40,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static bit eval_2<F>(bit a, bit b, F kind = default)
-            where F : unmanaged, IBitLogicApiKey
+            where F : unmanaged, IBitLogicKind
         {
-            if (typeof(F) == typeof(Kinds.Or))
+            if (typeof(F) == typeof(K.Or))
                 return or(a, b);
-            else if (typeof(F) == typeof(Kinds.Nor))
+            else if (typeof(F) == typeof(K.Nor))
                 return nor(a, b);
-            else if (typeof(F) == typeof(Kinds.Xor))
+            else if (typeof(F) == typeof(K.Xor))
                 return xor(a, b);
-            else if (typeof(F) == typeof(Kinds.Xnor))
+            else if (typeof(F) == typeof(K.Xnor))
                 return xnor(a, b);
             else
                 return eval_3(a, b, kind);
@@ -54,15 +56,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static bit eval_3<F>(bit a, bit b, F kind = default)
-            where F : unmanaged, IBitLogicApiKey
+            where F : unmanaged, IBitLogicKind
         {
-            if (typeof(F) == typeof(Kinds.Impl))
+            if (typeof(F) == typeof(K.Impl))
                 return impl(a, b);
-            else if (typeof(F) == typeof(Kinds.NonImpl))
+            else if (typeof(F) == typeof(K.NonImpl))
                 return nonimpl(a, b);
-            else if (typeof(F) == typeof(Kinds.LProject))
+            else if (typeof(F) == typeof(K.LProject))
                 return left(a, b);
-            else if (typeof(F) == typeof(Kinds.RProject))
+            else if (typeof(F) == typeof(K.RProject))
                 return right(a, b);
             else
                 return eval_4(a, b, kind);
@@ -70,18 +72,18 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static bit eval_4<F>(bit a, bit b, F kind = default)
-            where F : unmanaged, IBitLogicApiKey
+            where F : unmanaged, IBitLogicKind
         {
-            if (typeof(F) == typeof(Kinds.LNot))
+            if (typeof(F) == typeof(K.LNot))
                 return lnot(a, b);
-            else if (typeof(F) == typeof(Kinds.RNot))
+            else if (typeof(F) == typeof(K.RNot))
                 return rnot(a, b);
-            else if (typeof(F) == typeof(Kinds.CImpl))
+            else if (typeof(F) == typeof(K.CImpl))
                 return cimpl(a, b);
-            else if (typeof(F) == typeof(Kinds.CNonImpl))
+            else if (typeof(F) == typeof(K.CNonImpl))
                 return cnonimpl(a, b);
             else
-                throw Unsupported.define<F>();
+                throw no<F>();
         }
 
         /// <summary>

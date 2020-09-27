@@ -5,10 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public partial class LogicSquares
     {
@@ -22,6 +22,6 @@ namespace Z0
         public static And<W,T> and<W,T>(W w = default, T t = default)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => sfunc(w, sfunc<And<W,T>>(), t);                
+                => sfunc(w, sfunc<And<W,T>>(), t);
     }
 }

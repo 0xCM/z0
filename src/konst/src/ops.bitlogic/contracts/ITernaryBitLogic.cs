@@ -4,15 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static z;
-    using static Konst;
-
-    [ApiHost]
-    public readonly partial struct BitLogic
+    [Free]
+    public interface ITernaryBitLogic<T>
+        where T : struct
     {
-
+        T select(T a, T b, T c);
     }
 }

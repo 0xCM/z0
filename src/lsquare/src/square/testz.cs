@@ -6,19 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
+    using static Konst;
+    using static z;
     using static In;
-    using static Konst; 
-    using static Memories;
-    
-    using BL = ByteLogic;
-    
+
+    using BL = BitLogics.Bytes;
+
     /// <summary>
     /// Defines operators over square bit domains
     /// </summary>
     partial class LogicSquare
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bit testz<T>(in T a, in T b)
             where T : unmanaged
         {
@@ -31,7 +31,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                return testz(w, 16, 4, in uint64(in a), in uint64(in b));
             else
-                throw Unsupported.define<T>();
-        }        
+                throw no<T>();
+        }
     }
 }

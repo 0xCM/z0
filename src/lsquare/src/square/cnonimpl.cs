@@ -6,24 +6,24 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
+    using static Konst;
+    using static z;
     using static In;
-    using static Konst; 
-    using static Memories;
-    
-    using BL = ByteLogic;
-        
+
+    using BL = BitLogics.Bytes;
+
     /// <summary>
     /// Defines operators over square bit domains
     /// </summary>
     partial class LogicSquare
     {
-        [MethodImpl(Inline), CNonImpl, Closures(UnsignedInts)]
+        [MethodImpl(Inline), CNonImpl, Closures(Closure)]
         public static void cnonimpl<T>(in T A, in T B, ref T Z)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               BL.cnonimpl(in uint8(in A), in uint8(in B), ref As.uint8(ref Z));
+               BL.cnonimpl(in uint8(in A), in uint8(in B), ref uint8(ref Z));
             else if(typeof(T) == typeof(ushort))
                 cnonimpl(w, in A, in B, ref Z);
             else if(typeof(T) == typeof(uint))
@@ -31,7 +31,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 cnonimpl(w, 16, 4, in A, in B, ref Z);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

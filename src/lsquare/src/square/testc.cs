@@ -6,19 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
+    using static Konst;
+    using static z;
     using static In;
-    using static Konst; 
-    using static Memories;
-    
-    using BL = ByteLogic;
-    
+
+    using BL = BitLogics.Bytes;
+
     /// <summary>
     /// Defines operators over square bit domains
     /// </summary>
     partial class LogicSquare
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bit testc<T>(in T a)
             where T : unmanaged
         {
@@ -34,7 +34,7 @@ namespace Z0
                 throw no<T>();
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bit testc<T>(in T A, in T B)
             where T : unmanaged
         {

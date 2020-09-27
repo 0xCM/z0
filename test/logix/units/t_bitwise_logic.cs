@@ -7,8 +7,8 @@ namespace Z0.Logix
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static BinaryLogicKind;
+
+    using static BinaryBitLogicKind;
 
     /// <summary>
     /// Verifies the bit-level equivalence of the binary bitwise operators and the binary logical operators
@@ -23,7 +23,7 @@ namespace Z0.Logix
             bitwise_logic_check<uint>(op);
             bitwise_logic_check<ulong>(op);
         }
-        
+
         public void bwl_nand_check()
         {
             var op = Nand;
@@ -32,7 +32,7 @@ namespace Z0.Logix
             bitwise_logic_check<uint>(op);
             bitwise_logic_check<ulong>(op);
         }
-        
+
         public void bwl_or_check()
         {
             var op = Or;
@@ -41,7 +41,7 @@ namespace Z0.Logix
             bitwise_logic_check<uint>(op);
             bitwise_logic_check<ulong>(op);
         }
-        
+
         public void bwl_nor_check()
         {
             var op = Nor;
@@ -59,7 +59,7 @@ namespace Z0.Logix
             bitwise_logic_check<uint>(op);
             bitwise_logic_check<ulong>(op);
         }
-        
+
         public void bwl_xnor_check()
         {
             var op = Xnor;
@@ -77,7 +77,7 @@ namespace Z0.Logix
             bitwise_logic_check<uint>(op);
             bitwise_logic_check<ulong>(op);
         }
-        
+
         public void bwl_rnot_check()
         {
             var op = RNot;
@@ -95,7 +95,7 @@ namespace Z0.Logix
             bitwise_logic_check<uint>(op);
             bitwise_logic_check<ulong>(op);
         }
-        
+
         public void bwl_notimply_check()
         {
             var op = NonImpl;
@@ -113,7 +113,7 @@ namespace Z0.Logix
             bitwise_logic_check<uint>(op);
             bitwise_logic_check<ulong>(op);
         }
-        
+
         public void bwl_cnotimply_check()
         {
             var op = CNonImpl;

@@ -15,7 +15,7 @@ namespace Z0
         public readonly struct Nand<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged
         {
-            public const BitLogicApiKey OpKind = BitLogicApiKey.Nand;
+            public const BinaryBitLogicApiKey OpKind = BinaryBitLogicApiKey.Nand;
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)

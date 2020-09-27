@@ -15,7 +15,7 @@ namespace Z0
         public readonly struct Not<T> : IUnaryOp<T>, IUnarySpanOp<T>
             where T : unmanaged
         {
-            public const BitLogicApiKey OpKind = BitLogicApiKey.Not;
+            public const UnaryBitLogicApiKey OpKind = UnaryBitLogicApiKey.Not;
 
             [MethodImpl(Inline)]
             public T Invoke(T a)

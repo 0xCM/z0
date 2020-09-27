@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Logix
 {
-    public interface IBinaryBitwiseOpExpr<T> : IBinaryOpExpr<IExpr<T>>, IOperatorExpr<T,BinaryLogicKind>
+    public interface IBinaryBitwiseOpExpr<T> : IBinaryOpExpr<IExpr<T>>, IOperatorExpr<T,BinaryBitLogicKind>
         where T : unmanaged
     {
     }

@@ -5,31 +5,31 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static Root;
     using static V0;
-        
+
     partial class LogicSquare
-    {     
-        [MethodImpl(Inline), Xor, Closures(UnsignedInts)]
+    {
+        [MethodImpl(Inline), Xor, Closures(Closure)]
         public static Vector128<T> vxor<T>(W128 w, in T a, in T b)
             where T : unmanaged
                 => gvec.vxor(vload(w, in a),vload(w, in b));
 
-        [MethodImpl(Inline), Xor, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Xor, Closures(Closure)]
         public static Vector256<T> vxor<T>(W256 w, in T a, in T b)
             where T : unmanaged
                 => gvec.vxor(vload(w, in a),vload(w, in b));
 
-        [MethodImpl(Inline), Xor, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Xor, Closures(Closure)]
         public static void xor<T>(W128 n, in T a, in T b, ref T z)
             where T : unmanaged
                 => vsave(vxor(n, in a, in b), ref z);
 
-        [MethodImpl(Inline), Xor, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Xor, Closures(Closure)]
         public static void xor<T>(W128 n, int vcount, int blocklen, in T a, in T b, ref T z)
             where T : unmanaged
         {
@@ -37,12 +37,12 @@ namespace Z0
                 xor(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
         }
 
-        [MethodImpl(Inline), Xor, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Xor, Closures(Closure)]
         public static void xor<T>(W256 n, in T a, in T b, ref T z)
             where T : unmanaged
                 => vsave(vxor(n, in a, in b), ref z);
- 
-        [MethodImpl(Inline), Xor, Closures(UnsignedInts)]
+
+        [MethodImpl(Inline), Xor, Closures(Closure)]
         public static void xor<T>(W256 n, int vcount, int blocklen, in T a, in T b, ref T z)
             where T : unmanaged
         {

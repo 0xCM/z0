@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using ULK = UnaryBitLogicKind;
-    using BLK = BinaryLogicKind;
+    using BLK = BinaryBitLogicKind;
     using TLK = TernaryBitLogicKind;
 
     public interface IBitLogix
@@ -24,7 +24,7 @@ namespace Z0
         bit Evaluate(BLK kind, bit a, bit b);
 
         bit Evaluate<F>(bit a, bit b, F kind = default)
-            where F : unmanaged, IBitLogicApiKey;
+            where F : unmanaged, IBitLogicKind;
 
         bit Evaluate(TLK kind, bit a, bit b, bit c);
 

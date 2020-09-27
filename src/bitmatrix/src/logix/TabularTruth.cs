@@ -36,7 +36,7 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The operator kind</param>
         [Op]
-        public static BitVector4 vector(N4 n, BinaryLogicKind kind)
+        public static BitVector4 vector(N4 n, BinaryBitLogicKind kind)
         {
             var x = BitVector.alloc(n);
             x[0] = bitlogix.Evaluate(kind, off, off);
@@ -71,7 +71,7 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The operator kind</param>
         [Op]
-        public static BitVector16 vector(N16 n, BinaryLogicKind kind)
+        public static BitVector16 vector(N16 n, BinaryBitLogicKind kind)
         {
             var dst = BitVector.alloc(n16);
             var s = ((byte)vector(n4, kind)).ToBitString().Truncate(4);
@@ -107,7 +107,7 @@ namespace Z0
 
 
         [Op]
-        public static BitMatrix<N4,N3,byte> table(BinaryLogicKind kind)
+        public static BitMatrix<N4,N3,byte> table(BinaryBitLogicKind kind)
         {
             var tt = BitMatrix.alloc<N4,N3,byte>();
             var f = bitlogix.Lookup(kind);
@@ -141,7 +141,7 @@ namespace Z0
                 save(src[i], writer);
         }
 
-        public static void save(ReadOnlySpan<BinaryLogicKind> src, StreamWriter dst)
+        public static void save(ReadOnlySpan<BinaryBitLogicKind> src, StreamWriter dst)
         {
             var writer = BitMatrixWriter.Share(dst);
             for(var i=0; i<src.Length; i++)
@@ -162,7 +162,7 @@ namespace Z0
             return table;
         }
 
-        public static BitMatrix<N4,N3,byte> save(BinaryLogicKind spec, IBitMatrixWriter dst)
+        public static BitMatrix<N4,N3,byte> save(BinaryBitLogicKind spec, IBitMatrixWriter dst)
         {
             var table = TabularTruth.table(spec);
             dst.Write(table,spec);

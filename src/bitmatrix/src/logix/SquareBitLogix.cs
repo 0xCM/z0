@@ -11,7 +11,7 @@ namespace Z0
     using static LogicSig;
 
     using ULK = UnaryBitLogicKind;
-    using BLK = BinaryLogicKind;
+    using BLK = BinaryBitLogicKind;
 
     partial class SquareBitLogix
     {

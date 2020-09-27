@@ -8,7 +8,7 @@ namespace Z0.Logix
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static BinaryLogicKind;
+    using static BinaryBitLogicKind;
     using static UnaryBitLogicKind;
 
     public static partial class BitLogicSpec

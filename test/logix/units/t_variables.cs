@@ -21,9 +21,9 @@ namespace Z0.Logix
             var ops = NumericLogixHost.BinaryLogicKinds.ToArray();
             var pairs = from op1 in ops
                         from op2 in ops
-                        select (op1, op2);            
+                        select (op1, op2);
             pairs.Iter(o => check_4x2(o.op1,o.op2));
-                     
+
         }
 
         public void check_binop_vars()
@@ -39,7 +39,7 @@ namespace Z0.Logix
             var expr2 = y;
             var result = solve(expr1, expr2,(1,0xFF));
             Notify($"Expression is satisfied by {result.Count} values");
-            Claim.nea(result.IsEmpty());                                                
+            Claim.nea(result.IsEmpty());
         }
 
         public void minimize()
@@ -89,7 +89,7 @@ namespace Z0.Logix
             return sln;
         }
 
-        void check_4x2(BinaryLogicKind k0, BinaryLogicKind k1)
+        void check_4x2(BinaryBitLogicKind k0, BinaryBitLogicKind k1)
         {
             check_4x2<byte>(k0,k1);
             check_4x2<ushort>(k0,k1);
@@ -97,7 +97,7 @@ namespace Z0.Logix
             check_4x2<ulong>(k0,k1);
         }
 
-        void check_4x2<T>(BinaryLogicKind k0, BinaryLogicKind k1)
+        void check_4x2<T>(BinaryBitLogicKind k0, BinaryBitLogicKind k1)
             where T : unmanaged
         {
             var v0 = variable<T>(0u);
@@ -114,8 +114,8 @@ namespace Z0.Logix
             var method = MethodInfo.GetCurrentMethod().DisplayName<T>();
             // var msg = AppMsg.Babble($"{method}");
             // Deposit(msg);
-                        
-            var expr = binary(k1, binary(k0, v0,v1), binary(k0, v2,v3));            
+
+            var expr = binary(k1, binary(k0, v0,v1), binary(k0, v2,v3));
             var op0 = NumericLogixHost.lookup<T>(k0);
             var op1 = NumericLogixHost.lookup<T>(k1);
 
@@ -128,11 +128,11 @@ namespace Z0.Logix
 
                 var expect = op1(op0(a,b), op0(c,d));
                 var actual = LogicEngine.eval(expr).Value;
-                Claim.Eq(expect,actual);            
+                Claim.Eq(expect,actual);
             }
         }
 
-        void check_binop_vars(BinaryLogicKind kind)
+        void check_binop_vars(BinaryBitLogicKind kind)
         {
             check_binop_vars<byte>(kind);
             check_binop_vars<ushort>(kind);
@@ -140,7 +140,7 @@ namespace Z0.Logix
             check_binop_vars<ulong>(kind);
         }
 
-        void check_binop_vars<T>(BinaryLogicKind kind)
+        void check_binop_vars<T>(BinaryBitLogicKind kind)
             where T : unmanaged
         {
             var v0 = variable<T>(0u);
@@ -152,9 +152,9 @@ namespace Z0.Logix
             {
                 var a = Random.SetNext(v0);
                 var b = Random.SetNext(v1);
-                var expect = op(a, b);   
+                var expect = op(a, b);
                 var actual = LogicEngine.eval(expr).Value;
-                Claim.Eq(expect,actual);          
+                Claim.Eq(expect,actual);
             }
         }
     }

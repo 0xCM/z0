@@ -33,11 +33,11 @@ namespace Z0
             => $"{kind.Format()}({arg})";
 
         [MethodImpl(Inline)]
-        public static string format(BinaryLogicKind kind)
+        public static string format(BinaryBitLogicKind kind)
             => kind.ToString().ToLower();
 
         [MethodImpl(Inline)]
-        public static string format<T>(BinaryLogicKind kind, T arg1, T arg2)
+        public static string format<T>(BinaryBitLogicKind kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
         [MethodImpl(Inline)]

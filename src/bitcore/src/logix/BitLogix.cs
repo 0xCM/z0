@@ -9,12 +9,13 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
+    using static z;
 
-    using BLK = BinaryLogicKind;
+    using BLK = BinaryBitLogicKind;
     using TLK = TernaryBitLogicKind;
     using ULK = UnaryBitLogicKind;
 
-    using K = Kinds;
+    using K = BitLogicKinds;
 
     /// <summary>
     /// Defines logical operations over 1, 2 or 3 bits
@@ -26,16 +27,16 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public bit Evaluate<F>(bit a, bit b, F kind = default)
-            where F : unmanaged, IBitLogicApiKey
+            where F : unmanaged, IBitLogicKind
                 => BitLogixOps.eval(a, b, kind);
 
         [MethodImpl(Inline), Op]
         public bit Nand_kind(bit a, bit b)
-            => BitLogixOps.eval(a, b, K.nand());
+            => BitLogixOps.eval(a, b, K.nand(n2));
 
         [MethodImpl(Inline), Op]
         public bit Xor_kind(bit a, bit b)
-            => BitLogixOps.eval(a, b, K.xor());
+            => BitLogixOps.eval(a, b, K.xor(n2));
 
         /// <summary>
         /// Advertises the supported unary operators
@@ -89,7 +90,7 @@ namespace Z0
             => BitLogixOps.eval(kind,a);
 
         /// <summary>
-        /// Evaluates a bianry operator over supplied operands
+        /// Evaluates a binary operator over supplied operands
         /// </summary>
         /// <param name="kind">The operator kind</param>
         /// <param name="a">The operand</param>

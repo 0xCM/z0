@@ -11,9 +11,9 @@ namespace Z0
     using static CalculatorCode;
 
     using E = BinaryOpEvaluator;
-    
+
     public readonly struct CalcNative
-    {        
+    {
         /// <summary>
         /// Executes the code defined by <see cref="mul_ᐤ8uㆍ8uᐤ" over caller-supplied operands/>
         /// </summary>
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="f">The function selector</param>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
-        public static byte eval(Kinds.And f, byte x, byte y)
+        public static byte eval(BitLogicKinds.And f, byte x, byte y)
             => E.eval(f, and_ᐤ8uㆍ8uᐤ, x, y);
     }
 }

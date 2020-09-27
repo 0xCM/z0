@@ -5,13 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
     using static In;
 
-    using BL = ByteLogic;
+    using BL = BitLogics.Bytes;
+    using LS = LogicSquare;
 
     partial class LogicSquares
     {
@@ -23,24 +24,24 @@ namespace Z0
             public void Invoke(in T src, ref T dst)
             {
                 if(typeof(W) == typeof(W64))
-                    BL.not(in uint8(in src), ref As.uint8(ref dst));
+                    BL.not(in uint8(in src), ref z.uint8(ref dst));
                 else if(typeof(W) == typeof(W128))
-                    LogicSquare.not(w128, src, ref dst);   
+                    LS.not(w128, src, ref dst);
                 else if(typeof(W) == typeof(W256))
-                    LogicSquare.not(w256, src, ref dst);   
+                    LS.not(w256, src, ref dst);
                 else
-                    throw Unsupported.define<W>();
+                    throw no<W>();
             }
 
             [MethodImpl(Inline)]
             public void Invoke(int count, int step, in T src, ref T dst)
             {
                 if(typeof(W) == typeof(W128))
-                    LogicSquare.not(w128, count, step, src, ref dst);
+                    LS.not(w128, count, step, src, ref dst);
                 else if(typeof(W) == typeof(W256))
-                    LogicSquare.not(w256, count, step, src, ref dst);
+                    LS.not(w256, count, step, src, ref dst);
                 else
-                    throw Unsupported.define<W>();
+                    throw no<W>();
             }
         }
     }

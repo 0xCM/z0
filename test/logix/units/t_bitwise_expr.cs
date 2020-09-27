@@ -27,7 +27,7 @@ namespace Z0.Logix
 
         public void check_and_scalar_expr()
         {
-            var op = BinaryLogicKind.And;
+            var op = BinaryBitLogicKind.And;
 
             check_scalar_expr<byte>(op);
             check_scalar_expr<ushort>(op);
@@ -37,7 +37,7 @@ namespace Z0.Logix
 
         public void check_or_scalar_expr()
         {
-            var op = BinaryLogicKind.Or;
+            var op = BinaryBitLogicKind.Or;
 
             check_scalar_expr<byte>(op);
             check_scalar_expr<ushort>(op);
@@ -47,7 +47,7 @@ namespace Z0.Logix
 
         public void check_xor_scalar_expr()
         {
-            var op = BinaryLogicKind.Xor;
+            var op = BinaryBitLogicKind.Xor;
 
             check_scalar_expr<byte>(op);
             check_scalar_expr<ushort>(op);
@@ -57,7 +57,7 @@ namespace Z0.Logix
 
         public void check_nand_scalar_expr()
         {
-            var op = BinaryLogicKind.Nand;
+            var op = BinaryBitLogicKind.Nand;
 
             check_scalar_expr<byte>(op);
             check_scalar_expr<ushort>(op);
@@ -67,7 +67,7 @@ namespace Z0.Logix
 
         public void check_nor_scalar_expr()
         {
-            var op = BinaryLogicKind.Nor;
+            var op = BinaryBitLogicKind.Nor;
 
             check_scalar_expr<byte>(op);
             check_scalar_expr<ushort>(op);
@@ -77,7 +77,7 @@ namespace Z0.Logix
 
         public void check_xnor_scalar_expr()
         {
-            var op = BinaryLogicKind.Xnor;
+            var op = BinaryBitLogicKind.Xnor;
 
             check_scalar_expr<byte>(op);
             check_scalar_expr<ushort>(op);
@@ -98,7 +98,7 @@ namespace Z0.Logix
         public void check_and_128_expr()
         {
             var n = n128;
-            var op = BinaryLogicKind.And;
+            var op = BinaryBitLogicKind.And;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -108,7 +108,7 @@ namespace Z0.Logix
         public void check_or_128_expr()
         {
             var n = n128;
-            var op = BinaryLogicKind.Or;
+            var op = BinaryBitLogicKind.Or;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -118,7 +118,7 @@ namespace Z0.Logix
         public void check_xor_128_expr()
         {
             var n = n128;
-            var op = BinaryLogicKind.Xor;
+            var op = BinaryBitLogicKind.Xor;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -128,7 +128,7 @@ namespace Z0.Logix
         public void check_nand_128_expr()
         {
             var n = n128;
-            var op = BinaryLogicKind.Nand;
+            var op = BinaryBitLogicKind.Nand;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -138,7 +138,7 @@ namespace Z0.Logix
         public void check_nor_128_expr()
         {
             var n = n128;
-            var op = BinaryLogicKind.Nor;
+            var op = BinaryBitLogicKind.Nor;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -148,7 +148,7 @@ namespace Z0.Logix
         public void check_xnor_128_expr()
         {
             var n = n128;
-            var op = BinaryLogicKind.Xnor;
+            var op = BinaryBitLogicKind.Xnor;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -168,7 +168,7 @@ namespace Z0.Logix
         public void check_and_256_expr()
         {
             var n = n256;
-            var op = BinaryLogicKind.And;
+            var op = BinaryBitLogicKind.And;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -178,7 +178,7 @@ namespace Z0.Logix
         public void check_or_256_expr()
         {
             var n = n256;
-            var op = BinaryLogicKind.Or;
+            var op = BinaryBitLogicKind.Or;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -188,7 +188,7 @@ namespace Z0.Logix
         public void check_xor_256_expr()
         {
             var n = n256;
-            var op = BinaryLogicKind.Xor;
+            var op = BinaryBitLogicKind.Xor;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -198,7 +198,7 @@ namespace Z0.Logix
         public void check_nand_256_expr()
         {
             var n = n256;
-            var op = BinaryLogicKind.Nand;
+            var op = BinaryBitLogicKind.Nand;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -208,7 +208,7 @@ namespace Z0.Logix
         public void check_nor_256_expr()
         {
             var n = n256;
-            var op = BinaryLogicKind.Nor;
+            var op = BinaryBitLogicKind.Nor;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -218,7 +218,7 @@ namespace Z0.Logix
         public void check_xnor_256_expr()
         {
             var n = n256;
-            var op = BinaryLogicKind.Xnor;
+            var op = BinaryBitLogicKind.Xnor;
             check_cpu_expr<byte>(n, op);
             check_cpu_expr<ushort>(n, op);
             check_cpu_expr<uint>(n, op);
@@ -310,7 +310,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_scalar_expr<T>(BinaryLogicKind op)
+        void check_scalar_expr<T>(BinaryBitLogicKind op)
             where T : unmanaged
         {
             var v1 = variable<T>(1);
@@ -364,7 +364,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_cpu_expr<T>(N128 n, BinaryLogicKind op)
+        void check_cpu_expr<T>(N128 n, BinaryBitLogicKind op)
             where T : unmanaged
         {
             var v1 = variable(1, default(Vector128<T>));
@@ -383,7 +383,7 @@ namespace Z0.Logix
             }
         }
 
-        void check_cpu_expr<T>(N256 n, BinaryLogicKind op)
+        void check_cpu_expr<T>(N256 n, BinaryBitLogicKind op)
             where T : unmanaged
         {
 

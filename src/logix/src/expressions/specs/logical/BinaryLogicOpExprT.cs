@@ -6,7 +6,7 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     /// <summary>
@@ -28,24 +28,24 @@ namespace Z0.Logix
         /// <summary>
         /// The operator kind
         /// </summary>
-        public BinaryLogicKind OpKind {get;}
+        public BinaryBitLogicKind OpKind {get;}
 
         [MethodImpl(Inline)]
-        public BinaryLogicOpExpr(BinaryLogicKind op, ILogicExpr<T> left, ILogicExpr<T> right)
+        public BinaryLogicOpExpr(BinaryBitLogicKind op, ILogicExpr<T> left, ILogicExpr<T> right)
         {
             this.OpKind = op;
             this.LeftArg = left;
             this.RightArg = right;
         }
 
-        ILogicExpr IBinaryOpExpr<ILogicExpr>.LeftArg 
+        ILogicExpr IBinaryOpExpr<ILogicExpr>.LeftArg
             => LeftArg;
 
-        ILogicExpr IBinaryOpExpr<ILogicExpr>.RightArg 
+        ILogicExpr IBinaryOpExpr<ILogicExpr>.RightArg
             => RightArg;
 
         public string Format()
-            => OpKind.Format(LeftArg,RightArg);        
+            => OpKind.Format(LeftArg,RightArg);
 
         public override string ToString()
             => Format();

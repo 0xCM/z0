@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     using ULK = UnaryBitLogicKind;
-    using BLK = BinaryLogicKind;
+    using BLK = BinaryBitLogicKind;
     using TLK = TernaryBitLogicKind;
     using BAR = BinaryArithmeticApiKey;
     using BCK = BinaryComparisonApiKey;
@@ -32,7 +32,7 @@ namespace Z0
             => VLogix.BinaryBitLogicKinds;
 
         /// <summary>
-        /// Advertises the supported ternary bitlogic opeators
+        /// Advertises the supported ternary bitlogic operators
         /// </summary>
         public static ReadOnlySpan<TLK> TernaryBitLogicKinds
             => VLogix.TernaryBitLogicKinds;

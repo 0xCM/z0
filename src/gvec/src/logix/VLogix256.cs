@@ -13,7 +13,7 @@ namespace Z0
     using static LogicSig;
 
     using ULK = UnaryBitLogicKind;
-    using BLK = BinaryLogicKind;
+    using BLK = BinaryBitLogicKind;
     using TLK = TernaryBitLogicKind;
     using BSK = BitShiftApiKey;
     using BCK = BinaryComparisonApiKey;

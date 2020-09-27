@@ -4,25 +4,20 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Id = ApiKeyId;
+    using System;
 
     /// <summary>
     /// Classifies binary boolean and bitwise logical operations
     /// </summary>
-    public enum BitLogicApiKey : ushort
+    public enum BinaryBitLogicKind : ushort
     {
-        /// <summary>
-        /// The empty identity which, unfortunately conflicts with the inescapable defintion of 'False'
-        /// </summary>
-        None = 0b000,
-
         /// <summary>
         /// Classifies a logical  binary operator false(a,b) := bv(0000)
         /// </summary>
         /// <remarks>
         /// bv(0000) = id(True)
         /// </remarks>
-        False = Id.None,
+        False = 0,
 
         /// <summary>
         /// Classifies a logical binary operator and(a,b) := bv(1000)
@@ -34,7 +29,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        And = Id.And,
+        And = 0b0001,
 
         /// <summary>
         /// Classifies a logical binary operator cnotimply(a,b) := and(a, ~b) = bv(0010)
@@ -47,7 +42,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 0
         /// </remarks>
-        CNonImpl = Id.CNonImpl,
+        CNonImpl = 0b0010,
 
         /// <summary>
         /// Classifies a logical binary operator left(a,b) := a = bv(1010)
@@ -60,7 +55,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        LProject = Id.LProject,
+        LProject = 0b0011,
 
         /// <summary>
         /// Identifies a logical binary operator notimply(a,b) := and(~a, b) = bv(0100)
@@ -73,7 +68,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        NonImpl = Id.NonImpl,
+        NonImpl = 0b0100,
 
         /// <summary>
         /// Classifies a logical binary operator right(a,b) := b = bv(1100)
@@ -86,7 +81,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 1
         /// </remarks>
-        RProject = Id.RProject,
+        RProject = 0b0101,
 
         /// <summary>
         /// Classifies a logical binary operator xor(a,b) := bv(0110)
@@ -99,7 +94,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        Xor = Id.Xor,
+        Xor = 0b0110,
 
         /// <summary>
         /// Classifies a logical binary operator or(a,b) := bv(1110)
@@ -112,7 +107,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 1
         /// </remarks>
-        Or = Id.Or,
+        Or = 0b0111,
 
         /// <summary>
         /// Classifies a logical binary operator that computes nor(a,b) := not(or(a,b)) = bv(0001)
@@ -125,7 +120,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 0
         /// </remarks>
-        Nor = Id.Nor,
+        Nor = 0b1000,
 
         /// <summary>
         /// Classifies a binary operator xnor(a,b) := not(xor(a,b)) = bv(1001)
@@ -138,10 +133,10 @@ namespace Z0
         /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        Xnor = Id.Xnor,
+        Xnor = 0b1001,
 
         /// <summary>
-        /// Classifes a logical binary operator rnot(a,b) := not(b) = bv(0011)
+        /// Classifies a logical binary operator rnot(a,b) := not(b) = bv(0011)
         /// </summary>
         /// <remarks>
         /// bv(0011) = id(LeftProject)
@@ -151,7 +146,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 0
         /// </remarks>
-        RNot = Id.RNot,
+        RNot = 0b1010,
 
         /// <summary>
         /// Classifies a logical binary operator imply(a,b) := or(a, not(b)) = bv(1011)
@@ -164,7 +159,7 @@ namespace Z0
         /// 0 1 0
         /// 1 1 1
         /// </remarks>
-        Impl = Id.Impl,
+        Impl = 0b1011,
 
         /// <summary>
         /// Classifies a logical binary operator lnot(a,b) := not(a) = bv(0101)
@@ -177,10 +172,10 @@ namespace Z0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        LNot = Id.LNot,
+        LNot = 0b1100,
 
         /// <summary>
-        /// Classifies a logical binary operator cimply(a,b) := or(not(a), b) = bv(1101)
+        /// Classifies a logical binary operator cimpl(a,b) := or(not(a), b) = bv(1101)
         /// </summary>
         /// bv(1101) = id(ConverseImplication)
         /// <remarks>
@@ -190,7 +185,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 1
         /// </remarks>
-        CImpl = Id.CImpl,
+        CImpl = 0b1101,
 
         /// <summary>
         /// Classifies a logical binary operator nand(a,b) := not(and(a,b)) = bv(0111)
@@ -203,7 +198,7 @@ namespace Z0
         /// 0 1 1
         /// 1 1 0
         /// </remarks>
-        Nand = Id.Nand,
+        Nand = 0b1110,
 
         /// <summary>
         /// Classifies a logical binary operator true(a,b) = bv(1111)
@@ -211,12 +206,6 @@ namespace Z0
         /// <remarks>
         /// bv(1111) = id(False)
         /// </remarks>
-        True = Id.True,
-
-        Not = Id.Not,
-
-        Select = Id.Select,
-
-        XorNot = Id.XorNot
+        True = 0b1111,
     }
 }

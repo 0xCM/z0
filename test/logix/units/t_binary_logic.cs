@@ -6,21 +6,21 @@ namespace Z0.Logix
 {
     using System;
     using System.Linq;
-    
+
     using static Konst;
     using static Memories;
 
     using static BitLogicSpec;
     using static LogicEngine;
 
-    
-    using BLK = BinaryLogicKind;
+
+    using BLK = BinaryBitLogicKind;
     using BL = BitLogix;
 
     public class t_binary_logic : LogixTest<t_binary_logic>
     {
         protected override int CycleCount => Pow2.T08;
-                
+
         public void and_op_check()
             => logic_op_check(BLK.And, (a,b) => a & b);
 
@@ -85,8 +85,8 @@ namespace Z0.Logix
                 a.Set(s0);
                 b.Set(s1);
                 var actual = eval(expr6);
-                Claim.Eq(expect,actual);        
-            }            
+                Claim.Eq(expect,actual);
+            }
         }
 
         public void t_sop_expr()
@@ -110,7 +110,7 @@ namespace Z0.Logix
                 Claim.Eq(expect,actual);
             }
         }
-        
+
         public void t_andnot_expr()
         {
             var v1 = lvar(1);
@@ -147,7 +147,7 @@ namespace Z0.Logix
             var terms = bitcombo(width).Select(x => x.Terms).SelectMany(x => x).ToSpan();
             var expectations = terms.ToBitString().Pack().AsUInt64();
             var matrix = BitMatrix.alloc<ulong>();
-            
+
             for(int i=0, j=0; i< terms.Length; i+= 64, j++)
             {
                 //BitVector<ulong> actual = gbits.bitpack<ulong>(terms.Slice(i));
@@ -155,14 +155,14 @@ namespace Z0.Logix
                 BitVector<ulong> expect = expectations[j];
                 Claim.eq(actual,expect);
                 matrix[j] = actual;
-            
+
                 Notify(actual.Format(8));
-            }            
+            }
         }
 
         public void t_bitseq_check()
         {
-            for(var sample=0; sample<RepCount; sample++)          
+            for(var sample=0; sample<RepCount; sample++)
             {
                 var bs = Random.BitString(2,7);
                 var x = bs.ToLogicSeq();

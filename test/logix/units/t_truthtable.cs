@@ -9,9 +9,9 @@ namespace Z0.Logix
     using System.IO;
 
     using static Konst;
-    using static BinaryLogicKind;
+    using static BinaryBitLogicKind;
 
-    using BLK = BinaryLogicKind;
+    using BLK = BinaryBitLogicKind;
 
     public class t_truthtable : UnitTest<t_truthtable>
     {
@@ -134,7 +134,7 @@ namespace Z0.Logix
         public void check_typed_cnotimply_truth()
             => check_typed_truth(CNonImpl);
 
-        void check_typed_truth(BinaryLogicKind op)
+        void check_typed_truth(BinaryBitLogicKind op)
         {
             const byte on = 1;
             const byte off = 0;
@@ -148,7 +148,7 @@ namespace Z0.Logix
             Claim.eq(sig,dst);
         }
 
-        void check_truth(BinaryLogicKind op)
+        void check_truth(BinaryBitLogicKind op)
         {
             var dst = BitVector.alloc(n4);
             dst[0] = bitlogix.Evaluate(op, bit.Off,bit.Off);

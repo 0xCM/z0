@@ -14,7 +14,7 @@ namespace Z0
     using static LogicSig;
     using static NumericLogix;
 
-    using BLK = BinaryLogicKind;
+    using BLK = BinaryBitLogicKind;
     using TLK = TernaryBitLogicKind;
     using ULK = UnaryBitLogicKind;
     using UAR = UnaryArithmeticApiKey;

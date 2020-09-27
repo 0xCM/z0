@@ -5,16 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     using LS = LogicSquares;
 
-    partial class LogicSquared 
+    partial class LogicSquared
     {
-        [MethodImpl(Inline), And, Closures(UnsignedInts)]
+        [MethodImpl(Inline), And, Closures(Closure)]
         public static void and<T>(in T a, in T b, ref T dst)
             where T : unmanaged
         {
@@ -27,7 +27,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 LS.and(w256, default(T)).Invoke(16, 4, a, b, ref dst);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }
