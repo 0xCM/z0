@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static System.Runtime.Intrinsics.X86.Pclmulqdq;
- 
-    using static Konst;    
+
+    using static Konst;
     using static z;
 
     partial class dvec
@@ -75,7 +75,7 @@ namespace Z0
         [MethodImpl(Inline), ClMul]
         public static ulong clmulr(N8 r, ulong a, ulong b, ulong poly)
         {
-            var product = clmul64(a,b);            
+            var product = clmul64(a,b);
             product ^= clmul64(product >> 8, poly);
             product ^= clmul64(product >> 8, poly);
             return product;
@@ -151,8 +151,8 @@ namespace Z0
         public static Vector128<ulong> vclmulr(Vector128<ulong> a, Vector128<ulong> b, Vector128<ulong> poly)
         {
             var prod = vclmul(a,b);
-            prod = vxor(prod, vclmul(vsrl(prod, 64), poly, ClMulMask.X00));
-            prod = vxor(prod, vclmul(vsrl(prod, 64), poly, ClMulMask.X00));
+            prod = vxor(prod, vclmul(z.vsrl(prod, 64), poly, ClMulMask.X00));
+            prod = vxor(prod, vclmul(z.vsrl(prod, 64), poly, ClMulMask.X00));
             return prod;
         }
     }

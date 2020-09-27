@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector128<T> src)
             where T : unmanaged
-                => ref z.vref(ref edit(src));
+                => ref vref(ref edit(src));
 
         /// <summary>
         /// Returns a readonly reference to the leading component of the source
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector256<T> src)
             where T : unmanaged
-                => ref z.vref(ref edit(src));
+                => ref vref(ref edit(src));
 
         /// <summary>
         /// Returns a readonly reference to the leading component of the source
@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref readonly T vread<T>(in Vector512<T> src)
             where T : unmanaged
-                => ref z.vref(ref edit(src));
+                => ref vref(ref edit(src));
 
         /// <summary>
         /// Presents a readonly reference to 128-bit S-vector as a readonly T-reference

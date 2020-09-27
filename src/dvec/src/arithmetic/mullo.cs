@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
 
@@ -36,7 +36,7 @@ namespace Z0
             => MultiplyLow(x, y);
 
         /// <summary>
-        /// __m128i _mm_mullo_epi32 (__m128i a, __m128i b)PMULLD xmm, xmm/m128
+        /// __m128i _mm_mullo_epi32 (__m128i a, __m128i b) PMULLD xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -45,7 +45,7 @@ namespace Z0
             => MultiplyLow(x, y);
 
         /// <summary>
-        /// __m128i _mm_mullo_epi32 (__m128i a, __m128i b)PMULLD xmm, xmm/m128
+        /// __m128i _mm_mullo_epi32 (__m128i a, __m128i b) PMULLD xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -54,7 +54,7 @@ namespace Z0
             => MultiplyLow(x, y);
 
         /// <summary>
-        /// __m256i _mm256_mullo_epi16 (__m256i a, __m256i b)VPMULLW ymm, ymm, ymm/m256
+        /// __m256i _mm256_mullo_epi16 (__m256i a, __m256i b) VPMULLW ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>

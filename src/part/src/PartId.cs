@@ -187,10 +187,11 @@ public enum PartId : ulong
 
     AsmServices = 186,
 
-
     Derivatives = 190,
 
     DerivativesRunner = 191,
+
+    BitFieldsRun = 192,
 
     // ~ 200
     // ~ -------------------------------------------------------------------------------

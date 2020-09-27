@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    //using static Konst;
     using static Konst;
     using static z;
 
@@ -85,7 +84,7 @@ namespace Z0
 
             v0 = vload(n256, skip(src,6*8));
             v1 = vload(n256, skip(src,7*8));
-            y = dvec.vcompact(v0,v1,n256,z16);
+            y = z.vcompact(v0,v1,n256,z16);
 
             packed |= (ulong)packlsb(z.vcompact(x,y,n256,z8), n8) << 32;
 

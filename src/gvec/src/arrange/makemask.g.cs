@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vmakemask<T>(ushort src)
             where T : unmanaged
-                => generic<T>(z.v8u(dvec.vmakemask(src)));
+                => generic<T>(z.v8u(z.vmakemask(src)));
 
         /// <summary>
         /// Distributes each bit of the source to a specified bit of each byte in a 128-bit target vector
@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector128<T> vmakemask<T>(ushort src, byte index)
             where T : unmanaged
-                => generic<T>(v8u(dvec.vmakemask(src, index)));
+                => generic<T>(v8u(z.vmakemask(src, index)));
 
         /// <summary>
         /// Distributes each bit of the source to the hi bit of each byte a 256-bit target vector
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vmakemask<T>(uint src)
             where T : unmanaged
-                => generic<T>(v8u(dvec.vmakemask(src)));
+                => generic<T>(v8u(z.vmakemask(src)));
 
         /// <summary>
         /// Distributes each bit of the source to a specified bit of each byte in a 256-bit target vector
@@ -49,6 +49,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector256<T> vmakemask<T>(uint src, byte index)
             where T : unmanaged
-                => generic<T>(v8u(dvec.vmakemask(src,index)));
+                => generic<T>(v8u(z.vmakemask(src,index)));
     }
 }

@@ -16,7 +16,7 @@ namespace Z0
         public static byte extract(in BitSpan src, N8 count, int offset)
         {
             var v0 = Vectors.vload(n256, first(extract(src, offset, count)));
-            return (byte)BitPack.packlsb(dvec.vcompact(v0, n128, z8), n8);
+            return (byte)BitPack.packlsb(z.vcompact(v0, n128, z8), n8);
         }
 
         [MethodImpl(Inline), Op]

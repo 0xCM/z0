@@ -33,8 +33,8 @@ namespace Z0
             var x = vscalar(n128,(ulong)A);
             for(var i=7; i>= 0; i--)
             {
-                Z[i] = (byte)dvec.vtakemask(v8u(x));
-                x = dvec.vsll(x,1);
+                Z[i] = (byte)z.vtakemask(v8u(x));
+                x = z.vsll(x,1);
             }
             return ref Z;
         }

@@ -21,8 +21,8 @@ namespace Z0
             var src = Vectors.vscalar(n128,g);
             for(var i=7; i>= 0; i--)
             {
-                dst.Cell(i) = (byte)dvec.vtakemask(v8u(src));
-                src = dvec.vsll(src,1);
+                dst.Cell(i) = (byte)z.vtakemask(v8u(src));
+                src = z.vsll(src,1);
             }
             return dst.As<T>();
         }

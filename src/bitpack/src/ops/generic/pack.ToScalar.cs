@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ushort pack<T>(in T src, N16 count, N8 mod)
             where T : unmanaged
-                => vtakemask(gvec.vsll(vload(n128, As.view64u(src)),7));
+                => z.vtakemask(gvec.vsll(vload(n128, As.view64u(src)),7));
 
         /// <summary>
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static uint pack<T>(in T src, N32 count, N8 mod)
             where T : unmanaged
-                => vtakemask(gvec.vsll(vload(n256, As.view64u(src)),7));
+                => z.vtakemask(gvec.vsll(vload(n256, As.view64u(src)),7));
 
         /// <summary>
         /// Packs 64 1-bit values taken from the least significant bit of each source byte

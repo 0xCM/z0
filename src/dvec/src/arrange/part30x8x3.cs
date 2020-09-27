@@ -70,7 +70,7 @@ namespace Z0
             var m = vpart30x8x3Mask(src);
             var shifts = vparts(0, 3, 6, 9, 12, 0, 0, 0);
             var q = z.vbroadcast(w256, uint32(lo | hi << 16));
-            var r = v16u(vsrlv(z.vand(q,m), shifts));
+            var r = v16u(z.vsrlv(z.vand(q,m), shifts));
             var s = vpart30x8x3Assemble(r);
             return s;
         }

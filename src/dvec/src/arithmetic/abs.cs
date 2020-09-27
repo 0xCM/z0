@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline), Abs]
         public static Vector128<long> vabs(Vector128<long> src)
         {
-            var mask = z.vnegate(vsrl(src, 63));
+            var mask = z.vnegate(z.vsrl(src, 63));
             return vsub(vxor(mask, src), mask);
         }
 
@@ -88,7 +88,7 @@ namespace Z0
         [MethodImpl(Inline), Abs]
         public static Vector256<long> vabs(Vector256<long> src)
         {
-            var mask = z.vnegate(vsrl(src, 63));
+            var mask = z.vnegate(z.vsrl(src, 63));
             return vsub(vxor(mask, src), mask);
         }
     }

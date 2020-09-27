@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static As;
-    
+
     partial class gvec
     {
         /// <summary>
@@ -23,15 +23,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vrotl(v8u(x), count));
+                return generic<T>(z.vrotl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vrotl(v16u(x), count));
+                return generic<T>(z.vrotl(v16u(x), count));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vrotl(v32u(x), count));
+                return generic<T>(z.vrotl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vrotl(v64u(x), count));
+                return generic<T>(z.vrotl(v64u(x), count));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -44,15 +44,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vrotl(v8u(x), count));
+                return generic<T>(z.vrotl(v8u(x), count));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vrotl(v16u(x), count));
+                return generic<T>(z.vrotl(v16u(x), count));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vrotl(v32u(x), count));
+                return generic<T>(z.vrotl(v32u(x), count));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vrotl(v64u(x), count));
+                return generic<T>(z.vrotl(v64u(x), count));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

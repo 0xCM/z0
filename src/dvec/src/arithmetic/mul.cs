@@ -193,12 +193,12 @@ namespace Z0
         static Vector256<ulong> vmul(Vector256<ulong> x, Vector256<ulong> y)
         {
             var loMask = vbroadcast(w256, 0x00000000fffffffful);
-            var xh = v32u(vsrl(x, 32));
+            var xh = v32u(z.vsrl(x, 32));
             var yl = v32u(vand(y, loMask));
             return vadd(
                 Multiply(v32u(vand(x, loMask)), yl),
-                vadd(vsll(Multiply(xh, yl), 32),
-                    vsll(Multiply(xh, v32u(vsrl(y, 32))), 32)));
+                vadd(z.vsll(Multiply(xh, yl), 32),
+                    z.vsll(Multiply(xh, v32u(z.vsrl(y, 32))), 32)));
         }
     }
 }

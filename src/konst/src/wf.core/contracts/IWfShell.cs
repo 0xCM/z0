@@ -40,6 +40,9 @@ namespace Z0
 
         IPolyrand Random {get;}
 
+        IPolySource PolySource
+            => Random;
+
         IWfShell WithSource(IPolyrand random);
 
         ApiContext ApiContext {get;}

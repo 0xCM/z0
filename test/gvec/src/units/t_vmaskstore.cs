@@ -21,9 +21,9 @@ namespace Z0
             var n = n128;
             var dst = SpanBlocks.alloc<byte>(n);
             var m0 = vparts(n128,Y,Y,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N);
-            var m1 = dvec.vsllx(m0,32);
-            var m2 = dvec.vsllx(m1,32);
-            var m3 = dvec.vsllx(m2,32);
+            var m1 = vsllx(m0,32);
+            var m2 = vsllx(m1,32);
+            var m3 = vsllx(m2,32);
 
             for(var i = 0; i<RepCount; i++)
             {

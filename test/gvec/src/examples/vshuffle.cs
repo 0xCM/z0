@@ -97,10 +97,10 @@ namespace Z0
                 );
 
         public static Vector256<byte> vshuffle_spec_2(Vector256<ushort> src)
-            => dvec.vcompact(src, gvec.vinc(w256, As.uint16(16)),n256,z8);
+            => z.vcompact(src, gvec.vinc(w256, As.uint16(16)),n256,z8);
 
         public static Vector256<ushort> vshuf16x16(Vector256<ushort> a, Vector256<ushort> spec)
-            => V0.v16u(z.vshuf32x8(V0.v8u(a), vshuffle_spec_1(spec)));
+            => z.v16u(z.vshuf32x8(V0.v8u(a), vshuffle_spec_1(spec)));
 
         public void vshuf16x16()
         {

@@ -2,11 +2,16 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(BitCore)" />
   </ItemGroup>
+
+   <ItemGroup>
+    <Compile Include="lib/**/*.cs" />
+   </ItemGroup>
 
 </Project>

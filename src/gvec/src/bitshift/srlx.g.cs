@@ -10,18 +10,18 @@ namespace Z0
 
     using static Konst;
     using static As;
-    
+
     partial class gvec
-    {        
+    {
         /// <summary>
         /// Shifts the full 128 bits of a vector rightward at bit-level resolution
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to shift</param>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Vector128<T> vsrlx<T>(Vector128<T> src, [Imm] byte count)        
+        public static Vector128<T> vsrlx<T>(Vector128<T> src, [Imm] byte count)
             where T : unmanaged
-                => generic<T>(dvec.vsrlx(v64u(src), count));
+                => generic<T>(z.vsrlx(v64u(src), count));
 
         /// <summary>
         /// Shifts each 128 bit lane rightward at bit-level resolution
@@ -29,8 +29,8 @@ namespace Z0
         /// <param name="src">The source vector</param>
         /// <param name="count">The number of bits to shift</param>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Vector256<T> vsrlx<T>(Vector256<T> src, [Imm] byte count)        
+        public static Vector256<T> vsrlx<T>(Vector256<T> src, [Imm] byte count)
             where T : unmanaged
-                => generic<T>(dvec.vsrlx(v64u(src), count));
+                => generic<T>(z.vsrlx(v64u(src), count));
     }
 }

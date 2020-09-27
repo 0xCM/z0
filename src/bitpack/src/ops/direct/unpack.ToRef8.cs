@@ -9,9 +9,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    // using static As;
-    // using static Root;
-    // using static Typed;
 
     partial class BitPack
     {
