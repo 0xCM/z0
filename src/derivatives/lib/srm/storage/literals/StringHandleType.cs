@@ -26,6 +26,7 @@ namespace Z0.Derivatives.SRM
 
         // Reserved values that can be used for future strings:
         public const uint ReservedString1 = (2 << HeapHandleType.OffsetBitCount);
+
         public const uint ReservedString2 = (3 << HeapHandleType.OffsetBitCount);
 
         // Virtual string identified by a virtual index

@@ -13,17 +13,10 @@ namespace Z0.Derivatives.SRM
     /// </summary>
     public enum OperationCode
     {
-        /// <summary>
-        ///
-        /// </summary>
         Nop=0x00,
-        /// <summary>
-        ///
-        /// </summary>
+
         Break=0x01,
-        /// <summary>
-        ///
-        /// </summary>
+
         Ldarg_0=0x02,
 
         Ldarg_1=0x03,
@@ -93,25 +86,15 @@ namespace Z0.Derivatives.SRM
         Ldc_R8=0x23,
 
         Dup=0x25,
-        /// <summary>
-        ///
-        /// </summary>
+
         Pop=0x26,
-        /// <summary>
-        ///
-        /// </summary>
+
         Jmp=0x27,
-        /// <summary>
-        ///
-        /// </summary>
+
         Call=0x28,
-        /// <summary>
-        ///
-        /// </summary>
+
         Calli=0x29,
-        /// <summary>
-        ///
-        /// </summary>
+
         Ret=0x2a,
 
         Br_S=0x2b,
@@ -169,51 +152,25 @@ namespace Z0.Derivatives.SRM
         Ble_Un=0x43,
 
         Blt_Un=0x44,
-        /// <summary>
-        ///
-        /// </summary>
+
         Switch=0x45,
-        /// <summary>
-        ///
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
+
         Ldind_I1=0x46,
-        /// <summary>
-        ///
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
+
         Ldind_U1=0x47,
-        /// <summary>
-        ///
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
+
         Ldind_I2=0x48,
-        /// <summary>
-        ///
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
+
         Ldind_U2=0x49,
-        /// <summary>
-        ///
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
+
         Ldind_I4=0x4a,
-        /// <summary>
-        ///
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
+
         Ldind_U4=0x4b,
-        /// <summary>
-        ///
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
+
         Ldind_I8=0x4c,
 
         Ldind_I=0x4d,
-        /// <summary>
-        ///
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
+
         Ldind_R4=0x4e,
         /// <summary>
         ///
@@ -676,11 +633,7 @@ namespace Z0.Derivatives.SRM
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
         Add_Ovf=0xd6,
-        /// <summary>
-        ///
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", MessageId="Member")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
+
         Add_Ovf_Un=0xd7,
         /// <summary>
         ///
@@ -717,51 +670,25 @@ namespace Z0.Derivatives.SRM
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
         Leave_S=0xde,
-        /// <summary>
-        ///
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
+
         Stind_I=0xdf,
-        /// <summary>
-        ///
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
+
         Conv_U=0xe0,
-        /// <summary>
-        ///
-        /// </summary>
+
         Arglist=0xfe00,
-        /// <summary>
-        ///
-        /// </summary>
+
         Ceq=0xfe01,
-        /// <summary>
-        ///
-        /// </summary>
+
         Cgt=0xfe02,
-        /// <summary>
-        ///
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", MessageId="Member")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
+
         Cgt_Un=0xfe03,
-        /// <summary>
-        ///
-        /// </summary>
+
         Clt=0xfe04,
-        /// <summary>
-        ///
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase", MessageId="Member")]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
+
         Clt_Un=0xfe05,
-        /// <summary>
-        ///
-        /// </summary>
+
         Ldftn=0xfe06,
-        /// <summary>
-        ///
-        /// </summary>
+
         Ldvirtftn=0xfe07,
 
         Ldarg=0xfe09,
@@ -777,24 +704,13 @@ namespace Z0.Derivatives.SRM
         Stloc=0xfe0e,
 
         Localloc=0xfe0f,
-        /// <summary>
-        ///
-        /// </summary>
+
         Endfilter=0xfe11,
-        /// <summary>
-        ///
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
+
         Unaligned_=0xfe12,
-        /// <summary>
-        ///
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
+
         Volatile_=0xfe13,
-        /// <summary>
-        ///
-        /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1707:IdentifiersShouldNotContainUnderscores", MessageId="Member")]
+
         Tail_=0xfe14,
 
         Initobj=0xfe15,
@@ -827,5 +743,4 @@ namespace Z0.Derivatives.SRM
 
         Invalid,
     }
-
 }

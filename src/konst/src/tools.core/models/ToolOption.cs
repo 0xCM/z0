@@ -12,17 +12,6 @@ namespace Z0
 
     public readonly struct ToolOption
     {
-        [MethodImpl(Inline)]
-        public static implicit operator ToolOption((string name, string value) src)
-            => new ToolOption(src.name, src.value);
-        
-        [MethodImpl(Inline)]
-        public ToolOption(string name, string value)
-        {
-            Name = name;
-            Value = value;
-        }
-        
         /// <summary>
         /// The option name
         /// </summary>
@@ -34,14 +23,25 @@ namespace Z0
         public readonly StringRef Value;
 
         [MethodImpl(Inline)]
+        public static implicit operator ToolOption((string name, string value) src)
+            => new ToolOption(src.name, src.value);
+
+        [MethodImpl(Inline)]
+        public ToolOption(string name, string value)
+        {
+            Name = name;
+            Value = value;
+        }
+
+        [MethodImpl(Inline)]
         public string Format(string pattern)
             => text.format(pattern, Name.Format(), Value.Format());
-        
+
         [MethodImpl(Inline)]
         public string Format()
             => Format("{0}={1}");
 
-        public override string ToString() 
+        public override string ToString()
             => Format();
     }
 }

@@ -12,12 +12,12 @@ namespace Z0
     public struct ToolPath<T>
         where T : struct, ITool<T>
     {
-        public WfToolId ToolId {get;}
+        public ToolId ToolId {get;}
 
         public FS.FilePath Source {get;}
 
         [MethodImpl(Inline)]
-        public ToolPath(WfToolId tool, string src)
+        public ToolPath(ToolId tool, string src)
         {
             Source = new FS.FilePath(src);
             ToolId = tool;

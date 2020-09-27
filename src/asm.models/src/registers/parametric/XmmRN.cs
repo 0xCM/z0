@@ -10,8 +10,8 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    public readonly struct Xmm<R,N> : IXmmOperand<Xmm<R,N>, N>
-        where R : unmanaged, IXmmOperand
+    public readonly struct Xmm<R,N> : IXmmReg<Xmm<R,N>, N>
+        where R : unmanaged, IXmmReg
         where N : unmanaged, ITypeNat
     {
         public Cell128 Content {get;}

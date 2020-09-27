@@ -254,13 +254,13 @@ namespace Z0
 
         // ~~ Tools
 
-        void Created(WfToolId tool)
+        void Created(ToolId tool)
             => Raise(created(tool, Ct));
 
-        void Running(WfToolId tool)
+        void Running(ToolId tool)
             => Raise(running(tool, Ct));
 
-        void Ran(WfToolId tool)
+        void Ran(ToolId tool)
             => Raise(ran(tool, Ct));
     }
 }

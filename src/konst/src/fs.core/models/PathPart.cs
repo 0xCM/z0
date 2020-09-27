@@ -61,6 +61,10 @@ namespace Z0
                 => Text?.Trim() ?? EmptyString;
 
             [MethodImpl(Inline)]
+            public string Format(PathSeparator sep)
+                => FS.normalize(Text?.Trim() ?? EmptyString, sep);
+
+            [MethodImpl(Inline)]
             public PathPart[] Split(char delimiter)
                 => Text.SplitClean(delimiter).Select(from);
 

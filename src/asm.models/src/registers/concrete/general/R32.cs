@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Konst;
     using static math;
 
-    public readonly struct R32 : IRegOperand<R32,W32,uint>
+    public readonly struct R32 : IRegister<R32,W32,uint>
     {
         readonly ulong Data;
 

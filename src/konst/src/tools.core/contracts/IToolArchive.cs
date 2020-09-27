@@ -11,7 +11,7 @@ namespace Z0
         /// <summary>
         /// The identifier of the owning tool
         /// </summary>
-        WfToolId OwnerId {get;}
+        ToolId OwnerId {get;}
 
         /// <summary>
         /// The tool output directory
@@ -35,7 +35,7 @@ namespace Z0
         /// <summary>
         /// The identifier of the owning tool
         /// </summary>
-        WfToolId IToolArchive.OwnerId
+        ToolId IToolArchive.OwnerId
             => Owner.ToolId;
 
         ToolFiles<T> Dir()

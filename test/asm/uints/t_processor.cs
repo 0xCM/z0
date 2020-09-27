@@ -6,8 +6,6 @@ namespace Z0.Asm.Data
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using Dsl;
 
     public class t_procesor : t_asmd<t_procesor>
     {
@@ -23,7 +21,7 @@ namespace Z0.Asm.Data
                 var offset = address - @base;
                 var reg = Root.skip(data,i);
                 term.print($"{address} | {offset} | {reg.Kind}");
-            }        
+            }
         }
 
     }

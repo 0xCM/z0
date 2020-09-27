@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct Zmm : IZmmOperand
+    public readonly struct Zmm : IZmmReg
     {
         public Cell512 Content {get;}
 

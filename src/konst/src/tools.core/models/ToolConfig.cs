@@ -11,14 +11,14 @@ namespace Z0
 
     public struct ToolConfig : IToolConfig
     {
-        public WfToolId ToolId {get;}
+        public ToolId ToolId {get;}
 
         public FolderPath Source {get;}
 
         public FolderPath Target {get;}
 
         [MethodImpl(Inline)]
-        public ToolConfig(WfToolId tool, FolderPath src, FolderPath dst)
+        public ToolConfig(ToolId tool, FolderPath src, FolderPath dst)
         {
             Source = src;
             ToolId = tool;

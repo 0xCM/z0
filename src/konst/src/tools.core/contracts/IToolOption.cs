@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     public interface IToolOption<F>
-        where F : unmanaged, Enum
+        where F : unmanaged
     {
         F Flag {get;}
 
@@ -22,8 +22,8 @@ namespace Z0
         where K : unmanaged, Enum
     {
         new K Value {get;}
-        
-        string IToolOption<F>.Value 
+
+        string IToolOption<F>.Value
             => Value.ToString();
     }
 }

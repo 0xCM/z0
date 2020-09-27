@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct R8 : IRegOperand<R8,W8,byte>
+    public readonly struct R8 : IRegister<R8,W8,byte>
     {
         public readonly byte Content  {get;}
 

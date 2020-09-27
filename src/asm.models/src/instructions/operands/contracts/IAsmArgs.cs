@@ -16,7 +16,6 @@ namespace Z0
         A First  => this[n0];
     }
 
-
     public interface IAsmArgs<F,A,B> : IAsmArgSequence<F,N2>
         where F : struct, IAsmArgs<F,A,B>
         where A : IAsmArg
@@ -39,7 +38,6 @@ namespace Z0
         where B : IAsmArg
         where C : IAsmArg
     {
-
         A this[N0 n] {get;}
 
         B this[N1 n] {get;}

@@ -17,48 +17,8 @@ namespace Z0.Asm
     public readonly struct AsmParsers
     {
         [MethodImpl(Inline), Op]
-        public static AsmStatementParser statement()
-            => new AsmStatementParser(ParseMnemonic);
-
-        [MethodImpl(Inline), Op]
         public static Mnemonic ParseMnemonic(string src)
             => Enums.Parse(src, Mnemonic.INVALID);
-
-        [MethodImpl(Inline), Op]
-        public static ParseResult<AsmStatementInfo> statement(string src, ref uint seq)
-        {
-            var fail = ParseResult<AsmStatementInfo>.Fail(src);
-
-            if(IsBlankLine(src))
-                return fail;
-
-            if(IsCommentLine(src))
-                return fail;
-
-            var parts = src.SplitClean(BodySep);
-            if(parts.Length != 2)
-                return fail;
-
-            var body = parts[0];
-            var sParser = AsmParsers.statement();
-            var statement = sParser.Parse(body);
-            if(statement.Failed)
-                return fail;
-
-            var info = parts[1];
-            var descriptors = info.SplitClean(DescriptorSep);
-            if(descriptors.Length !=3)
-                return fail;
-
-            var pattern = descriptors[0];
-            var code = descriptors[1];
-            var encoded = ParseEncoded(descriptors[2]);
-            if(encoded.Failed)
-                return fail;
-
-            var specifier = new AsmSpecifier(pattern, code);
-            return ParseResult.Success(src, new AsmStatementInfo(seq++, statement.Value, specifier, encoded.Value));
-        }
 
         [MethodImpl(Inline), Nlz]
         static int nlz(ulong src)

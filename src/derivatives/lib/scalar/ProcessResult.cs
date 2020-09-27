@@ -7,19 +7,19 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Derivatives.Scalar
 {
-    public class ProcessResult
+    public struct ProcessResult
     {
-        public ProcessResult(string output, string errors, int exitCode)
-        {
-            this.Output = output;
-            this.Errors = errors;
-            this.ExitCode = exitCode;
-        }
+        public string Output {get;}
 
-        public string Output { get; }
-
-        public string Errors { get; }
+        public string Errors {get;}
 
         public int ExitCode { get; }
+
+        public ProcessResult(string output, string errors, int exitCode)
+        {
+            Output = output;
+            Errors = errors;
+            ExitCode = exitCode;
+        }
     }
 }

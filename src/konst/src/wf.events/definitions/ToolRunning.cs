@@ -17,12 +17,12 @@ namespace Z0
         {
             public WfEventId EventId {get;}
 
-            public WfToolId ToolId {get;}
+            public ToolId ToolId {get;}
 
             public FlairKind Flair {get;}
 
             [MethodImpl(Inline)]
-            public ToolRunning(WfToolId tool, CorrelationToken ct, FlairKind flair = Running)
+            public ToolRunning(ToolId tool, CorrelationToken ct, FlairKind flair = Running)
             {
                 EventId = (tool, ct);
                 ToolId = tool;

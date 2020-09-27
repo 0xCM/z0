@@ -21,7 +21,7 @@ namespace Z0
                 => new WfStepRan<T>(host.Id, content, ct);
 
         [MethodImpl(Inline), Op]
-        public static ToolRan ran(WfToolId tool, CorrelationToken ct)
+        public static ToolRan ran(ToolId tool, CorrelationToken ct)
             => new ToolRan(tool, ct);
     }
 }

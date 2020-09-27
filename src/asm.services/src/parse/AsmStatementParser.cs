@@ -9,10 +9,10 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmStatementParser : ITextParser<AsmStatement>
-    {        
+    public readonly struct AsmStatementParser
+    {
         readonly Func<string,Mnemonic> MnemonicParse;
-        
+
         [MethodImpl(Inline)]
         public AsmStatementParser(Func<string,Mnemonic> parser)
         {
@@ -28,7 +28,7 @@ namespace Z0.Asm
                 return ParseResult.Success(src, new AsmStatement(mnemonic, operands));
             }
             else
-                return ParseResult.Fail<AsmStatement>(src);            
+                return ParseResult.Fail<AsmStatement>(src);
         }
     }
 }

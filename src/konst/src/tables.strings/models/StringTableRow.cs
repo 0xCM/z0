@@ -17,6 +17,10 @@ namespace Z0
         public StringTableRow(string[] cells)
             => Data = cells;
 
+        [MethodImpl(Inline)]
+        public static implicit operator StringTableRow(string[] src)
+            => new StringTableRow(src);
+
         public int Length
         {
             [MethodImpl(Inline)]
@@ -27,6 +31,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => (uint)Data.Length;
+        }
+
+        public Span<StringTableCell> Cells
+        {
+            [MethodImpl(Inline)]
+            get => Data.Edit;
         }
 
         public ref StringTableCell this[long index]

@@ -3,7 +3,7 @@
 // See https://llvm.org/LICENSE.txt for license information.
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
 //===----------------------------------------------------------------------===//
-namespace Z0.Tools.LLVM
+namespace Z0.Derivatives.LLVM
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -42,6 +42,18 @@ namespace Z0.Tools.LLVM
                 return dst != byte.MaxValue;
             }
 
+            // [MethodImpl(Inline), Op]
+            // public static bool decode(byte src, out char dst)
+            // {
+            //     const string Chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._";
+
+            //     if((src & ~63) == 0)
+            //         dst = skip(span(Chars), src);
+            //     else
+            //         dst = '\0';
+
+            //     return dst != '\0';
+            // }
         }
     }
 }

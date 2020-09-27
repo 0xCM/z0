@@ -13,11 +13,11 @@ namespace Z0.Tools
     {
         public const string Name = "dumpbin";
 
-        public static WfToolId Id => Name;
+        public static ToolId Id => Name;
 
         public IWfShell Wf;
 
-        public WfToolId ToolId {get;}
+        public ToolId ToolId {get;}
 
         public string ToolName {get;}
 

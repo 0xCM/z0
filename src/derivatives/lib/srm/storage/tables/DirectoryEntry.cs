@@ -9,8 +9,6 @@ namespace Z0.Derivatives.SRM
     using System;
     using System.Runtime.InteropServices;
 
-    using static Part;
-
     [StructLayout(LayoutKind.Sequential)]
     public struct DirectoryEntry
     {
@@ -18,5 +16,4 @@ namespace Z0.Derivatives.SRM
 
         public uint Size;
     }
-
 }

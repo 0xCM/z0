@@ -9,8 +9,8 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct R16<R> : IRegOperand16<R16<R>,R>
-        where R : unmanaged, IRegOperand16
+    public readonly struct R16<R> : IReg16<R16<R>,R>
+        where R : unmanaged, IReg16
     {
         public readonly ushort Data;
 

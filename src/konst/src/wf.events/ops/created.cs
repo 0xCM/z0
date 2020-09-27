@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="ct"></param>
         /// <param name="flair"></param>
         [MethodImpl(Inline), Op]
-        public static ToolCreated created(WfToolId tool, CorrelationToken ct, FlairKind flair = Created)
+        public static ToolCreated created(ToolId tool, CorrelationToken ct, FlairKind flair = Created)
             => new ToolCreated(tool, ct, flair);
     }
 }

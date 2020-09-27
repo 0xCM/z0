@@ -15,32 +15,32 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static R8<R> reg<R>(byte data, R r = default)
-            where R : unmanaged, IRegOperand<R>
+            where R : unmanaged, IRegister<R>
                 => new R8<R>(data);
 
         [MethodImpl(Inline)]
         public static R16<R> reg<R>(ushort data, R r = default)
-            where R : unmanaged, IRegOperand16
+            where R : unmanaged, IReg16
                 => new R16<R>(data);
 
         [MethodImpl(Inline)]
         public static R32<R> reg<R>(uint data, R n = default)
-            where R : unmanaged, IRegOperand32
+            where R : unmanaged, IReg32
                 => new R32<R>(data);
 
         [MethodImpl(Inline)]
         public static R64<R> reg<R>(ulong data, R n = default)
-            where R : unmanaged, IRegOperand64
+            where R : unmanaged, IReg64
                 => new R64<R>(data);
 
         [MethodImpl(Inline)]
         public static Xmm<R> reg<R>(Cell128 data, R r = default)
-            where R : unmanaged, IXmmOperand
+            where R : unmanaged, IXmmReg
                 => new Xmm<R>(data);
 
         [MethodImpl(Inline)]
         public static Ymm<R> reg<R>(Cell256 data, R n = default)
-            where R : unmanaged, IYmmOperand
+            where R : unmanaged, IYmmReg
                 => new Ymm<R>(data);
     }
 }

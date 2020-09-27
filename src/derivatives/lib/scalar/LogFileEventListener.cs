@@ -13,6 +13,7 @@ namespace Z0.Derivatives.Scalar
     public class LogFileEventListener : EventListener
     {
         private FileStream logFile;
+
         private TextWriter writer;
 
         public LogFileEventListener(string logFilePath, EventLevel maxVerbosity, Keywords keywordFilter, IEventListenerEventSink eventSink)

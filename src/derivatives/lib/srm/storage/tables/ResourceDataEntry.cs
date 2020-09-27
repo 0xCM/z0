@@ -8,7 +8,6 @@ namespace Z0.Derivatives.SRM
 {
     using System.Runtime.InteropServices;
 
-
     [StructLayout(LayoutKind.Sequential)]
     public struct ResourceDataEntry
     {
@@ -20,6 +19,4 @@ namespace Z0.Derivatives.SRM
 
         public int Reserved;
     }
-
-
 }

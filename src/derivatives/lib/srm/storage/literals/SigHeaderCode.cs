@@ -40,5 +40,4 @@ namespace Z0.Derivatives.SRM
 
         SignatureHeaderMask = 0x7F,
     }
-
 }

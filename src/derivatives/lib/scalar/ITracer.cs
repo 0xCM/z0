@@ -54,10 +54,15 @@ namespace Z0.Derivatives.Scalar
     public enum EventLevel
     {
         LogAlways = 0,
+
         Critical = 1,
+
         Error = 2,
+
         Warning = 3,
+
         Informational = 4,
+
         Verbose = 5
     }
 
@@ -66,6 +71,7 @@ namespace Z0.Derivatives.Scalar
         ITracer StartActivity(string activityName, EventLevel level);
 
         ITracer StartActivity(string activityName, EventLevel level, EventMetadata metadata);
+
         ITracer StartActivity(string activityName, EventLevel level, Keywords startStopKeywords, EventMetadata metadata);
 
         void SetGitCommandSessionId(string sessionId);

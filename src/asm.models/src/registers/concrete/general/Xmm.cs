@@ -9,12 +9,11 @@ namespace Z0.Asm
 
     using static Konst;
     using static z;
+    using static AsmRegisters;
 
     using K = RegisterKind;
 
-    using Z0.Asm.Dsl;
-
-    public readonly struct Xmm : IXmmOperand
+    public readonly struct Xmm : IXmmReg
     {
         public Cell128 Content {get;}
 

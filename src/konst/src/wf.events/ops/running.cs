@@ -30,7 +30,7 @@ namespace Z0
 
 
         [MethodImpl(Inline), Op]
-        public static ToolRunning running(WfToolId tool, CorrelationToken ct)
+        public static ToolRunning running(ToolId tool, CorrelationToken ct)
             => new ToolRunning(tool, ct);
     }
 }

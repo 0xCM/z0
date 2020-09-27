@@ -21,14 +21,13 @@ namespace Z0
         public StringTableCell(string src)
             => Data = src;
 
-        [MethodImpl(Inline)]
-        public string Format()
-            => Data;
-
         public string Content
         {
             [MethodImpl(Inline)]
             get => Data;
+
+            [MethodImpl(Inline)]
+            set => Data = value;
         }
 
         [MethodImpl(Inline)]
@@ -37,6 +36,10 @@ namespace Z0
             Data = src;
             return this;
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Data;
 
         [MethodImpl(Inline)]
         public override string ToString()

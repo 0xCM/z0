@@ -10,7 +10,7 @@ namespace Z0
 
     public interface IToolFile
     {
-        WfToolId ToolId {get;}
+        ToolId ToolId {get;}
 
         FS.FilePath EmissionPath {get;}
     }
@@ -20,7 +20,7 @@ namespace Z0
     {
         T Tool => default(T);
 
-        WfToolId IToolFile.ToolId
+        ToolId IToolFile.ToolId
             => Tool.ToolId;
     }
 

@@ -12,7 +12,7 @@ namespace Z0
     public readonly struct ToolArchives
     {
         [MethodImpl(Inline)]
-        public static ToolArchive<T,F> create<T,F>(WfToolId id, FS.FolderPath root)
+        public static ToolArchive<T,F> create<T,F>(ToolId id, FS.FolderPath root)
             where T : struct, ITool<T,F>
             where F : unmanaged, Enum
                 => new ToolArchive<T,F>(id, root);

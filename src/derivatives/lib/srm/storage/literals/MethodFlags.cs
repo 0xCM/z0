@@ -57,5 +57,4 @@ namespace Z0.Derivatives.SRM
 
         RequiresSecurityObjectReserved = 0x8000,
     }
-
 }

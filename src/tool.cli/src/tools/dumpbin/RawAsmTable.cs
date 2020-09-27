@@ -22,7 +22,7 @@ namespace Z0
         Instruction = 60
     }
 
-    public readonly struct RawAsmTable : ITable<RawAsmField,RawAsmTable>
+    public readonly struct RawAsmTable
     {
         public static RawAsmTable Empty
             => new RawAsmTable(0, 0, EmptyString, EmptyString);

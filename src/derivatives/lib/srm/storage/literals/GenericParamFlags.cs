@@ -7,9 +7,6 @@
 namespace Z0.Derivatives.SRM
 {
     using System;
-    using System.Runtime.InteropServices;
-
-    using static Part;
 
     [Flags]
     public enum GenericParamFlags : ushort
@@ -28,5 +25,4 @@ namespace Z0.Derivatives.SRM
 
         DefaultConstructorConstraint = 0x0010,
     }
-
 }

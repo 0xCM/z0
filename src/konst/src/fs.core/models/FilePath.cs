@@ -137,6 +137,10 @@ namespace Z0
                 => Name.Format();
 
             [MethodImpl(Inline)]
+            public string Format(PathSeparator sep)
+                => Name.Format(sep);
+
+            [MethodImpl(Inline)]
             public FileUri ToUri()
                 => new FileUri(this);
 

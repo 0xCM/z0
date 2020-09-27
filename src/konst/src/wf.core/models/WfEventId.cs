@@ -45,7 +45,7 @@ namespace Z0
             => new WfEventId(src.name, src.actor, src.ct);
 
         [MethodImpl(Inline)]
-        public static implicit operator WfEventId((WfToolId tool, CorrelationToken ct) src)
+        public static implicit operator WfEventId((ToolId tool, CorrelationToken ct) src)
             => new WfEventId(src.tool, src.ct);
 
         [MethodImpl(Inline)]
@@ -69,7 +69,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public WfEventId(WfToolId tool, CorrelationToken ct, Timestamp? ts = null)
+        public WfEventId(ToolId tool, CorrelationToken ct, Timestamp? ts = null)
         {
             Ts = ts ?? timestamp();
             Ct = ct;

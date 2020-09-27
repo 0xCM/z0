@@ -18,11 +18,13 @@ namespace Z0.Derivatives.Scalar
     /// </summary>
     public class NamedPipeStreamReader
     {
-        private const int InitialListSize = 1024;
-        private const byte TerminatorByte = 0x3;
-        private readonly byte[] buffer;
+        const int InitialListSize = 1024;
 
-        private Stream stream;
+        const byte TerminatorByte = 0x3;
+
+        readonly byte[] buffer;
+
+        Stream stream;
 
         public NamedPipeStreamReader(Stream stream)
         {

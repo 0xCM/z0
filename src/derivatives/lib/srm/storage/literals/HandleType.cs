@@ -74,7 +74,6 @@ namespace Z0.Derivatives.SRM
 
         public const uint GenericParamConstraint = (uint)TableIndex.GenericParamConstraint;
 
-
         // debug tables:
         public const uint Document = (uint)TableIndex.Document;
 

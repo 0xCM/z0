@@ -9,8 +9,8 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct R8<R> : IRegOperand8<R8<R>,byte>
-        where R : unmanaged, IRegOperand<R>
+    public readonly struct R8<R> : IReg8<R8<R>,byte>
+        where R : unmanaged, IRegister<R>
     {
         public readonly byte Data;
 

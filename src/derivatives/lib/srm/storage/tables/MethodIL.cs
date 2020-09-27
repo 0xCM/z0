@@ -8,8 +8,6 @@ namespace Z0.Derivatives.SRM
 {
     using System.Runtime.InteropServices;
 
-    using static Part;
-
     [StructLayout(LayoutKind.Sequential)]
     public struct MethodIL
     {
@@ -23,5 +21,4 @@ namespace Z0.Derivatives.SRM
 
         public SEHTableEntry[]  SEHTable;
     }
-
 }

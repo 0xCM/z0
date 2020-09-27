@@ -11,7 +11,7 @@ namespace Z0
 
     public interface ITool
     {
-        WfToolId ToolId {get;}
+        ToolId ToolId {get;}
 
         FS.FolderPath Source  => FS.FolderPath.Empty;
     }
@@ -21,7 +21,7 @@ namespace Z0
     {
         T Tool => default;
 
-        WfToolId ITool.ToolId
+        ToolId ITool.ToolId
             => Tool.ToolId;
 
         IToolArchive<T> Archive {get;}

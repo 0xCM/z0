@@ -17,21 +17,21 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The tool type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static WfToolId<T> identify<T>()
+        public static ToolId<T> identify<T>()
             => default;
 
         /// <summary>
         /// Creates a predicated tool identifier
         /// </summary>
         [MethodImpl(Inline)]
-        public static WfToolId identify(Type t)
-            => new WfToolId(t);
+        public static ToolId identify(Type t)
+            => new ToolId(t);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static string format<T>(WfToolId<T> src)
+        public static string format<T>(ToolId<T> src)
             =>  src.Name;
 
-        public static async Task<int> start(WfToolCommand spec, WfStatusRelay dst)
+        public static async Task<int> start(ToolCommand spec, WfStatusRelay dst)
         {
             var info = new ProcessStartInfo
             {

@@ -18,19 +18,25 @@ namespace Z0.Derivatives.Scalar
     {
         public const string NetworkErrorEventName = "NetworkError";
 
-        private readonly ConcurrentBag<EventListener> listeners;
-        private readonly ConcurrentDictionary<EventListener, string> failedListeners = new ConcurrentDictionary<EventListener, string>();
+        readonly ConcurrentBag<EventListener> listeners;
 
-        private readonly string activityName;
-        private readonly Guid parentActivityId;
-        private readonly Guid activityId;
-        private readonly Stopwatch duration = Stopwatch.StartNew();
+        readonly ConcurrentDictionary<EventListener, string> failedListeners = new ConcurrentDictionary<EventListener, string>();
 
-        private readonly EventLevel startStopLevel;
-        private readonly Keywords startStopKeywords;
+        readonly string activityName;
 
-        private bool isDisposed = false;
-        private bool stopped = false;
+        readonly Guid parentActivityId;
+
+        readonly Guid activityId;
+
+        readonly Stopwatch duration = Stopwatch.StartNew();
+
+        readonly EventLevel startStopLevel;
+
+        readonly Keywords startStopKeywords;
+
+        bool isDisposed = false;
+
+        bool stopped = false;
 
         public JsonTracer(string providerName, string activityName, bool disableTelemetry = false)
             : this(providerName, Guid.Empty, activityName, enlistmentId: null, disableTelemetry: disableTelemetry)
@@ -43,30 +49,9 @@ namespace Z0.Derivatives.Scalar
         }
 
         public JsonTracer(string providerName, Guid providerActivityId, string activityName, string enlistmentId, bool disableTelemetry = false)
-            : this(
-                  null,
-                  providerActivityId,
-                  activityName,
-                  EventLevel.Informational,
-                  Keywords.Telemetry)
+            : this(null, providerActivityId, activityName, EventLevel.Informational, Keywords.Telemetry)
         {
-            // if (!disableTelemetry)
-            // {
-            //     string gitBinRoot = ScalarPlatform.Instance.GitInstallation.GetInstalledGitBinPath();
 
-            //     // If we do not have a git binary, then we cannot check if we should set up telemetry
-            //     // We also cannot log this, as we are setting up tracer.
-            //     if (string.IsNullOrEmpty(gitBinRoot))
-            //     {
-            //         return;
-            //     }
-
-            //     TelemetryDaemonEventListener daemonListener = TelemetryDaemonEventListener.CreateIfEnabled(gitBinRoot, providerName, enlistmentId, this);
-            //     if (daemonListener != null)
-            //     {
-            //         this.listeners.Add(daemonListener);
-            //     }
-            // }
         }
 
         private JsonTracer(ConcurrentBag<EventListener> listeners, Guid parentActivityId, string activityName, EventLevel startStopLevel, Keywords startStopKeywords)
@@ -116,17 +101,17 @@ namespace Z0.Derivatives.Scalar
 
         public void AddDiagnosticConsoleEventListener(EventLevel maxVerbosity, Keywords keywordFilter)
         {
-            this.AddEventListener(new DiagnosticConsoleEventListener(maxVerbosity, keywordFilter, this));
+            AddEventListener(new DiagnosticConsoleEventListener(maxVerbosity, keywordFilter, this));
         }
 
         public void AddPrettyConsoleEventListener(EventLevel maxVerbosity, Keywords keywordFilter)
         {
-            this.AddEventListener(new PrettyConsoleEventListener(maxVerbosity, keywordFilter, this));
+            AddEventListener(new PrettyConsoleEventListener(maxVerbosity, keywordFilter, this));
         }
 
         public void AddLogFileEventListener(string logFilePath, EventLevel maxVerbosity, Keywords keywordFilter)
         {
-            this.AddEventListener(new LogFileEventListener(logFilePath, maxVerbosity, keywordFilter, this));
+            AddEventListener(new LogFileEventListener(logFilePath, maxVerbosity, keywordFilter, this));
         }
 
         public void Dispose()

@@ -15,7 +15,7 @@ namespace Z0.Derivatives.Scalar
 
     public static class ProcessHelper
     {
-        private static string currentProcessVersion = null;
+        static string currentProcessVersion = null;
 
         public static ProcessResult Run(string programName, string args, bool redirectOutput = true)
         {
@@ -27,7 +27,6 @@ namespace Z0.Derivatives.Scalar
             processInfo.WindowStyle = ProcessWindowStyle.Hidden;
             processInfo.CreateNoWindow = redirectOutput;
             processInfo.Arguments = args;
-
             return Run(processInfo);
         }
 
@@ -136,7 +135,7 @@ namespace Z0.Derivatives.Scalar
             }
         }
 
-        private static string StartProcess(Process executingProcess)
+        static string StartProcess(Process executingProcess)
         {
             executingProcess.Start();
 

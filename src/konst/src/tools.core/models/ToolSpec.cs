@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct ToolSpec
     {
-        public readonly WfToolId Id;
+        public readonly ToolId Id;
 
         public readonly ToolFlag[] Flags;
 

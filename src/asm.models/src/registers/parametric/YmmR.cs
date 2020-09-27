@@ -9,8 +9,8 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct Ymm<R> : IYmmOperand<Ymm<R>,R>
-        where R : unmanaged, IRegOperand
+    public readonly struct Ymm<R> : IYmmReg<Ymm<R>,R>
+        where R : unmanaged, IRegister
     {
         public Cell256 Content {get;}
 

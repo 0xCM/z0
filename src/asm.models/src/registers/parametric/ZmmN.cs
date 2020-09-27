@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    public readonly struct Zmm<N> : IZmmOperand<Zmm<N>,N>
+    public readonly struct Zmm<N> : IZmmReg<Zmm<N>,N>
         where N : unmanaged, ITypeNat
     {
         public Cell512 Content {get;}
