@@ -12,12 +12,12 @@ namespace Z0.Asm
     {
         public readonly OpIdentity Id;
 
-        public readonly CodeBlockDataFlow DataFlow;
+        public readonly CapturedCodeBlock DataFlow;
 
         public readonly CaptureOutcome Outcome;
 
         [MethodImpl(Inline)]
-        public ApiParseResult(OpIdentity id, CaptureOutcome info, CodeBlockDataFlow encoded)
+        public ApiParseResult(OpIdentity id, CaptureOutcome info, CapturedCodeBlock encoded)
         {
             Id = id;
             Outcome = info;

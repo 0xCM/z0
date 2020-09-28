@@ -7,29 +7,25 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    using SR = System.Reflection;
 
     using static Konst;
 
-    partial struct Reflected
+    public readonly struct ClrAssembly
     {
-        public readonly struct Assembly
+        public Assembly Definition {get;}
+
+        public ClrArtifactKey Id
         {
-            public SR.Assembly Definition {get;}
-
-            public ClrArtifactKey Id
-            {
-                [MethodImpl(Inline)]
-                get => new ClrArtifactKey(Definition);
-            }
-
             [MethodImpl(Inline)]
-            public Assembly(SR.Assembly src)
-                => Definition = src;
-
-            [MethodImpl(Inline)]
-            public static implicit operator SR.Assembly(Assembly src)
-                => src.Definition;
+            get => new ClrArtifactKey(Definition);
         }
+
+        [MethodImpl(Inline)]
+        public ClrAssembly(Assembly src)
+            => Definition = src;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Assembly(ClrAssembly src)
+            => src.Definition;
     }
 }

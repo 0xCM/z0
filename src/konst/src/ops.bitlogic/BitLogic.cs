@@ -10,16 +10,7 @@ namespace Z0
     using static z;
     using static Konst;
 
-    using K = BinaryBitLogicApiKey;
-    using I = IBitLogicKind;
-
-    [ApiHost]
     public readonly partial struct BitLogic
-    {
-
-    }
-
-    public readonly partial struct BitLogics
     {
 
 

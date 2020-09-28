@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.ClrData
+namespace Z0
 {
     using System;
     using System.Reflection;
@@ -12,7 +12,7 @@ namespace Z0.ClrData
 
     public readonly struct ClrField
     {
-        public readonly FieldInfo Definition;
+        public FieldInfo Definition {get;}
 
         public ClrArtifactKey Id
         {

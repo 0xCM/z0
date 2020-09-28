@@ -126,11 +126,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        static ApiCaptureBlock DefineMember(OpIdentity id, MethodInfo src, Z0.CodeBlockDataFlow bits, ExtractTermCode term)
+        static ApiCaptureBlock DefineMember(OpIdentity id, MethodInfo src, Z0.CapturedCodeBlock bits, ExtractTermCode term)
             => new ApiCaptureBlock(id, src, bits.Input, bits.Output, term);
 
         [MethodImpl(Inline)]
-        static ApiCaptureBlock DefineMember(OpIdentity id, Delegate src, Z0.CodeBlockDataFlow bits, ExtractTermCode term)
+        static ApiCaptureBlock DefineMember(OpIdentity id, Delegate src, Z0.CapturedCodeBlock bits, ExtractTermCode term)
             => new ApiCaptureBlock(id, src.Method, bits.Input, bits.Output, term);
 
         [MethodImpl(Inline)]
@@ -185,7 +185,7 @@ namespace Z0.Asm
             var outcome = Complete(state, tc, start, end, delta);
             var raw = exchange.Target(0, (int)(end - start)).ToArray();
             var trimmed = exchange.Target(0, outcome.ByteCount).ToArray();
-            var bits = new Z0.CodeBlockDataFlow((MemoryAddress)start, raw, trimmed);
+            var bits = new Z0.CapturedCodeBlock((MemoryAddress)start, raw, trimmed);
             return new ApiParseResult(id, outcome, bits);
         }
 

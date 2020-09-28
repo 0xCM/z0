@@ -35,8 +35,5 @@ namespace Z0.Asm
             decode(src, dst);
             return dst;
         }
-
-        public static Option<AsmInstructions> decode(ApiCodeBlock src)
-            => Capture.DefaultDecoder.Decode(src);
     }
 }

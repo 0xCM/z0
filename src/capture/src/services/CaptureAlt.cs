@@ -89,7 +89,7 @@ namespace Z0
             => capture(src, sys.alloc<byte>(Pow2.T14));
 
         [MethodImpl(Inline)]
-        static ApiCaptureBlock DefineMember(OpIdentity id, MethodInfo src, Z0.CodeBlockDataFlow bits, ExtractTermCode term)
+        static ApiCaptureBlock DefineMember(OpIdentity id, MethodInfo src, Z0.CapturedCodeBlock bits, ExtractTermCode term)
             => new ApiCaptureBlock(id, src, bits.Input, bits.Output, term);
 
         [MethodImpl(Inline)]
@@ -138,7 +138,7 @@ namespace Z0
             var outcome = Complete(state, tc, start, end, delta);
             var raw = buffer.Slice(0, (int)(end - start)).ToArray();
             var trimmed = buffer.Slice(0, outcome.ByteCount).ToArray();
-            var bits = new Z0.CodeBlockDataFlow(start, raw, trimmed);
+            var bits = new Z0.CapturedCodeBlock(start, raw, trimmed);
             return new CapturedOperation(id, outcome, bits);
         }
 

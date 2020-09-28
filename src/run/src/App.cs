@@ -5,16 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Text;
 
     using static Konst;
     using static z;
-    using static RunnerShell;
+    using static AppHost;
 
     [Step]
-    readonly struct RunnerShell : IWfStep<RunnerShell>
+    sealed class AppHost : WfHost<AppHost>
     {
-        public static WfStepId StepId => typeof(RunnerShell);
+        public static WfStepId StepId => typeof(AppHost);
     }
 
     class App : AppShell<App,IAppContext>
@@ -36,7 +35,7 @@ namespace Z0
         public override void RunShell(params string[] args)
         {
             using var wf = Flow.shell(args);
-            using var state = AsmWorkflows.state(wf, AsmWorkflows.asm(Context));
+            using var state = AsmWorkflows.state(wf, AsmWorkflows.context(Context));
 
             try
             {

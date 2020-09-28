@@ -9,6 +9,8 @@ namespace Z0
 
     using static Konst;
 
+    using BL = BitLogic.Scalar;
+
     partial class BitGrid
     {
         /// <summary>
@@ -20,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Xnor, Closures(UInt8x16k)]
         public static BitGrid16<T> xnor<T>(BitGrid16<T> gx, BitGrid16<T> gy)
             where T : unmanaged
-                => init16<T>(BitLogic.xnor(gx,gy));
+                => init16<T>(BL.xnor(gx,gy));
 
         /// <summary>
         /// Computes the bitwise XNOR between generic bitgrids
@@ -31,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Xnor, Closures(UInt8x16x32k)]
         public static BitGrid32<T> xnor<T>(BitGrid32<T> gx, BitGrid32<T> gy)
             where T : unmanaged
-                => init32<T>(BitLogic.xnor(gx,gy));
+                => init32<T>(BL.xnor(gx,gy));
 
         /// <summary>
         /// Computes the bitwise XNOR between generic bitgrids
@@ -42,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline), Xnor, Closures(UnsignedInts)]
         public static BitGrid64<T> xnor<T>(BitGrid64<T> gx, BitGrid64<T> gy)
             where T : unmanaged
-                => init64<T>(BitLogic.xnor(gx,gy));
+                => init64<T>(BL.xnor(gx,gy));
 
         /// <summary>
         /// Computes the bitwise XNOR between generic bitgrids and stores the result to a caller-supplied target
@@ -72,7 +74,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => BitLogic.xnor(gx,gy);
+                => BL.xnor(gx,gy);
 
         /// <summary>
         /// Computes the bitwise XNOR between natural bitgrids
@@ -85,7 +87,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => BitLogic.xnor(gx,gy);
+                => BL.xnor(gx,gy);
 
         /// <summary>
         /// Computes the bitwise XNOR between natural bitgrids

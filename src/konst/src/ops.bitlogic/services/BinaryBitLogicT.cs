@@ -6,31 +6,42 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static z;
     using static Konst;
 
-    partial struct BitLogics
+    partial struct BitLogic
     {
-        public readonly struct Unary<T>
+        public readonly struct UnaryMachine<T>
             where T : struct
         {
 
 
         }
 
-        public readonly struct Binary<T>
+
+        public readonly struct TernaryMachine<T>
             where T : struct
         {
 
 
         }
 
-        public readonly struct Ternary<T>
-            where T : struct
+        public readonly struct BinaryMachine<W,T> : IBinaryBitLogicMachine<BinaryMachine<W,T>,W,T>
+            where T : unmanaged
+            where W : unmanaged, ITypeWidth
         {
+            public T Evaluate<K>(T a, T b, K k = default)
+                where K : unmanaged, IBitLogicKind
+            {
+                return default;
+            }
 
-
+            public T Evaluate(T a, T b, BinaryBitLogicKind kind)
+            {
+                throw new NotImplementedException();
+            }
         }
 
     }

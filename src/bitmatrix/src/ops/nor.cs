@@ -10,6 +10,8 @@ namespace Z0
     using static Konst;
     using static Memories;
 
+    using BL = BitLogic.Scalar;
+
     partial class BitMatrix
     {
         /// <summary>
@@ -50,7 +52,7 @@ namespace Z0
         {
             var a = (ushort)A;
             var b = (ushort)B;
-            return BitLogic.nor(a,b);
+            return BL.nor(a,b);
         }
 
         /// <summary>

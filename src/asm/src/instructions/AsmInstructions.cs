@@ -32,7 +32,13 @@ namespace Z0.Asm
         public static AsmInstructions Create(Instruction[] src, BinaryCode data)
             => new AsmInstructions(src, data);
 
-        public ref readonly Instruction this[int index]
+        public ref readonly Instruction this[long index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
+
+        public ref readonly Instruction this[ulong index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
@@ -44,10 +50,10 @@ namespace Z0.Asm
             get => Data.Length;
         }
 
-        public int Count
+        public uint Count
         {
             [MethodImpl(Inline)]
-            get => Data.Length;
+            get => (uint)Data.Length;
         }
 
         public bool IsEmpty

@@ -9,8 +9,10 @@ namespace Z0
 
     using static Konst;
 
+    using BL = BitLogic.Scalar;
+
     partial class gmath
-    {        
+    {
         /// <summary>
         /// Computes xor(a,not(b))
         /// </summary>

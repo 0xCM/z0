@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
 
-    using Z0.ClrData;
-
     /// <summary>
     /// Characterizes a model of a clr enum type
     /// </summary>

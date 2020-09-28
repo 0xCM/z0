@@ -9,6 +9,8 @@ namespace Z0
 
     using static Konst;
 
+    using BL = BitLogic.Scalar;
+
     partial class BitGrid
     {
         /// <summary>
@@ -20,7 +22,7 @@ namespace Z0
         [MethodImpl(Inline), Nor, Closures(UInt8x16k)]
         public static BitGrid16<T> nor<T>(BitGrid16<T> gx, BitGrid16<T> gy)
             where T : unmanaged
-                => init16<T>(BitLogic.nor(gx,gy));
+                => init16<T>(BL.nor(gx,gy));
 
         /// <summary>
         /// Computes the bitwise NOR between fixed-width 32-bit generic bitgrids
@@ -31,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Nor, Closures(UInt8x16x32k)]
         public static BitGrid32<T> nor<T>(BitGrid32<T> gx, BitGrid32<T> gy)
             where T : unmanaged
-                => init32<T>(BitLogic.nor(gx,gy));
+                => init32<T>(BL.nor(gx,gy));
 
         /// <summary>
         /// Computes the bitwise NOR between fixed-width 64-bit grids
@@ -42,7 +44,7 @@ namespace Z0
         [MethodImpl(Inline), Nor, Closures(UnsignedInts)]
         public static BitGrid64<T> nor<T>(BitGrid64<T> gx, BitGrid64<T> gy)
             where T : unmanaged
-                => init64<T>(BitLogic.nor(gx,gy));
+                => init64<T>(BL.nor(gx,gy));
 
         /// <summary>
         /// Computes the bitwise NOR between generic bitgrids and stores the result to a caller-supplied target
@@ -72,7 +74,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => BitLogic.nor(gx,gy);
+                => BL.nor(gx,gy);
 
         /// <summary>
         /// Computes the bitwise NOR between fixed-width 32-bit natural bitgrids
@@ -85,7 +87,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => BitLogic.nor(gx,gy);
+                => BL.nor(gx,gy);
 
         /// <summary>
         /// Computes the bitwise NOR between fixed-width 64-bit natural bitgrids
@@ -98,7 +100,7 @@ namespace Z0
             where T : unmanaged
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => BitLogic.nor(gx,gy);
+                => BL.nor(gx,gy);
 
         /// <summary>
         /// Computes the bitwise NOR between 128-bit fixed-width natural bitgrids

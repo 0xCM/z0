@@ -66,8 +66,9 @@ namespace Z0
 
             try
             {
+                var host = new CaptureApiHostsHost();
                 var dst = ApiArchives.capture(Config.TargetArchive.Root);
-                using var step = new CaptureApiHosts(State, Config.Api.Hosts, dst);
+                using var step = new CaptureApiHosts(State, host, Config.Api.Hosts, dst);
                 step.Run();
 
             }
@@ -97,7 +98,7 @@ namespace Z0
         {
             var count = src.Length;
             var hosts = @readonly(src);
-            using var step = new CaptureHostMembers(State, dst);
+            using var step = new CaptureMembers(State, dst);
             for(var i=0; i<count; i++)
             {
                 ref readonly var host = ref skip(hosts,i);
@@ -114,7 +115,7 @@ namespace Z0
             for(var i=0; i<extracted.Length; i++)
             {
                 ref readonly var x = ref skip(extracted,i);
-                using var emit = new EmitCaptureArtifacts(State, x.Key, x.Value, dst);
+                using var emit = new EmitCaptureArtifacts(State, new EmitHostArtifactsHost(), x.Key, x.Value, dst);
                 emit.Run();
             }
         }

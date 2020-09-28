@@ -19,21 +19,17 @@ namespace Z0
 
         public IWfCaptureBroker Broker {get;}
 
-        //readonly IWfEventLog Log;
-
         [MethodImpl(Inline)]
         public WfCaptureContext(IWfShell wf, IAsmDecoder decoder, IAsmFormatter formatter, IPartCapturePaths archive)
         {
             Wf = wf;
-            //Log = Flow.log(wf.Init);
-            Broker = AsmWorkflows.capture(wf);
+            Broker = AsmWorkflows.broker(wf);
             Context = new CaptureContext(wf, decoder, formatter,  Broker);
         }
 
         public void Dispose()
         {
             Broker.Dispose();
-            //Log.Dispose();
         }
     }
 }

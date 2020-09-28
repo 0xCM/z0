@@ -9,10 +9,8 @@ namespace Z0.Xed
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using Z0.ClrData;
 
     using static Konst;
-
 
     [ApiHost]
     public readonly struct XedState

@@ -16,12 +16,12 @@ namespace Z0
     {
         public IWfShell Wf {get;}
 
-        readonly DecodeApiMembersHost Host;
+        readonly WfHost Host;
 
         readonly ICaptureContext Capture;
 
         [MethodImpl(Inline)]
-        internal DecodeApiMembers(IWfShell wf, DecodeApiMembersHost host, ICaptureContext capture)
+        internal DecodeApiMembers(IWfShell wf, WfHost host, ICaptureContext capture)
         {
             Wf = wf;
             Host = host;

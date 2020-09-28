@@ -10,40 +10,44 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    using static CaptureMemoryStep;
-
     public ref struct CaptureMemory
     {
         readonly IWfShell Wf;
 
-        readonly IAsmContext Root;
+        readonly WfHost Host;
 
         readonly IAsmDecoder Decoder;
 
         readonly IAsmFormatter Formatter;
 
-        readonly AsmFormatConfig FormatConfig;
-
         readonly byte[] ExtractBuffer;
 
         readonly byte[] ParseBuffer;
 
+        public readonly ReadOnlySpan<MemoryAddress> Sources;
+
+        public readonly uint SourceCount;
+
+        public readonly Span<CapturedBlock> Captured;
+
         [MethodImpl(Inline)]
-        public CaptureMemory(IWfShell wf, IAsmContext root, int bufferlen)
+        public CaptureMemory(IWfShell wf, WfHost host, IAsmContext asm, MemoryAddress[] addresses, uint bufferlen = Pow2.T14)
         {
-            Root = root;
+            Host = host;
             Wf = wf;
-            Formatter = root.Formatter;
-            FormatConfig = root.FormatConfig;
+            Formatter = asm.Formatter;
             ExtractBuffer = alloc<byte>(bufferlen);
             ParseBuffer = alloc<byte>(bufferlen);
-            Decoder = root.RoutineDecoder;
-            Wf.Created(StepId);
+            Decoder = asm.RoutineDecoder;
+            Sources = addresses;
+            SourceCount = (uint)addresses.Length;
+            Captured = alloc<CapturedBlock>(SourceCount);
+            Wf.Created(Host);
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
 
         [MethodImpl(Inline)]
@@ -53,15 +57,22 @@ namespace Z0.Asm
             ParseBuffer.Clear();
         }
 
-        public CapturedMemoryBlock Run(MemoryAddress src)
+        public void Run()
         {
-            Wf.Running(StepId, src);
+            ref readonly var address = ref first(Sources);
+            for(var i=0u; i<SourceCount; i++)
+                seek(Captured,i) = Capture(skip(Sources,i));
+        }
+
+        CapturedBlock Capture(MemoryAddress src)
+        {
+            Wf.Running(Host, src);
 
             ClearBuffers();
 
             var raw = ApiCodeExtractors.extract(src, ExtractBuffer);
             var tryParse = ApiCodeExtractors.parse(raw, ParseBuffer);
-            var captured = default(CapturedMemoryBlock);
+            var captured = default(CapturedBlock);
             if(tryParse.IsSome())
             {
                 var parsed = tryParse.Value;
@@ -84,11 +95,11 @@ namespace Z0.Asm
                         offset += size;
                     }
 
-                    captured = new CapturedMemoryBlock(new CodeBlockDataFlow(src, raw, parsed), decoded, formatBuffer);
+                    captured = new CapturedBlock(new CapturedCodeBlock(src, raw, parsed), decoded, formatBuffer);
                 }
             }
 
-            Wf.Ran(StepId, captured);
+            Wf.Ran(Host, captured);
 
             return captured;
         }

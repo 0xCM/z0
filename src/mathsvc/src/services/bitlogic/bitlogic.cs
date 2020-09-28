@@ -15,8 +15,8 @@ namespace Z0
     partial class MSvc
     {
         [MethodImpl(Inline)]
-        public static PrimalBinaryBitLogic<T> bitlogic<T>(T t = default)
+        public static NumericBinaryBitLogic<T> bitlogic<T>(T t = default)
             where T : unmanaged
-                => default(PrimalBinaryBitLogic<T>);
+                => default(NumericBinaryBitLogic<T>);
     }
 }

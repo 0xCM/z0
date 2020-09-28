@@ -29,9 +29,9 @@ namespace Z0
 
         readonly Span<byte> Buffer;
 
-        readonly CapturePartHost Host;
+        readonly WfHost Host;
 
-        public CapturePart(IWfShell wf, IAsmContext asm, CapturePartHost host)
+        public CapturePart(IWfShell wf, IAsmContext asm, WfHost host)
         {
             Wf = wf;
             Asm = asm;

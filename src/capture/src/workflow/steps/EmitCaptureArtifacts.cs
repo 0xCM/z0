@@ -11,7 +11,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static EmitHostArtifactsStep;
 
     public ref struct EmitCaptureArtifacts
     {
@@ -41,9 +40,12 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        public EmitCaptureArtifacts(IWfCaptureState state, ApiHostUri src, ApiMemberExtract[] extracts, IPartCapturePaths dst)
+        readonly WfHost Host;
+
+        public EmitCaptureArtifacts(IWfCaptureState state, WfHost host, ApiHostUri src, ApiMemberExtract[] extracts, IPartCapturePaths dst)
         {
             Wf = state.Wf;
+            Host = host;
             State = state;
             Ct = Wf.Ct;
             HostUri = src;
@@ -56,17 +58,17 @@ namespace Z0
             CilDataPath = FS.path(Target.CilPath.Name);
             Parser = ApiExtractParsers.member();
             ParsedMembers = default;
-            Wf.Created(StepId);
+            Wf.Created(Host);
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
 
         public void Run()
         {
-            Wf.Running(StepId);
+            Wf.Running(Host);
 
             try
             {
@@ -78,10 +80,10 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(StepId, e);
+                Wf.Error(Host, e);
             }
 
-            Wf.Ran(StepId);
+            Wf.Ran(Host);
         }
 
         void Run(EmitExtractReportHost host)
@@ -107,7 +109,7 @@ namespace Z0
                 return;
 
             ParsedMembers = Parser.ParseMembers(Extracts);
-            Wf.Raise(new ExtractsParsed(StepId, HostUri, ParsedMembers.Count, Ct));
+            Wf.Raise(new ExtractsParsed(Host, HostUri, ParsedMembers.Count, Ct));
 
             if(ParsedMembers.Count == 0)
                 return;
@@ -140,7 +142,7 @@ namespace Z0
                 dst.WriteLine(cil.Format());
             }
 
-            Wf.Raise(new CilDataSaved(StepId, HostUri, src.Length, CilDataPath, Ct));
+            Wf.Raise(new CilDataSaved(Host, HostUri, src.Length, CilDataPath, Ct));
         }
 
         void Run(DecodeApiMembersHost host)
@@ -153,7 +155,7 @@ namespace Z0
             if(decoded.Length != 0)
             {
                 step.SaveDecoded(decoded, AsmPath);
-                Wf.Status(StepId, text.format(RP.PSx3, decoded.Length,HostUri.Format(), AsmPath));
+                Wf.Status(Host, text.format(RP.PSx3, decoded.Length,HostUri.Format(), AsmPath));
 
                 using var match = new MatchAddresses(State, Extracts, decoded, Ct);
                 match.Run();

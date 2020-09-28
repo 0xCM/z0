@@ -10,6 +10,8 @@ namespace Z0
     using static Konst;
     using static Memories;
 
+    using BL = BitLogic.Scalar;
+
     partial class gmath
     {
         /// <summary>
@@ -28,13 +30,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<T>(BitLogic.xor(convert<T,uint>(a), convert<T,uint>(b)));
+                return convert<T>(BL.xor(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
-                return convert<T>(BitLogic.xor(convert<T,uint>(a), convert<T,uint>(b)));
+                return convert<T>(BL.xor(convert<T,uint>(a), convert<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(BitLogic.xor(uint32(a), uint32(b)));
+                return generic<T>(BL.xor(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(BitLogic.xor(uint64(a), uint64(b)));
+                return generic<T>(BL.xor(uint64(a), uint64(b)));
             else
                 return xor_i(a,b);
         }
@@ -44,13 +46,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return convert<T>(BitLogic.xor(convert<T,int>(a), convert<T,int>(b)));
+                return convert<T>(BL.xor(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(short))
-                return convert<T>(BitLogic.xor(convert<T,int>(a), convert<T,int>(b)));
+                return convert<T>(BL.xor(convert<T,int>(a), convert<T,int>(b)));
             else if(typeof(T) == typeof(int))
-                 return generic<T>(BitLogic.xor(int32(a), int32(b)));
+                 return generic<T>(BL.xor(int32(a), int32(b)));
             else if(typeof(T) == typeof(long))
-                 return generic<T>(BitLogic.xor(int64(a), int64(b)));
+                 return generic<T>(BL.xor(int64(a), int64(b)));
             else
                 throw Unsupported.define<T>();
         }

@@ -17,7 +17,6 @@
 
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(Tools)" />
-    <ProjectReference Include="$(Win)" />
     <ProjectReference Include="$(Json)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Cil)" />

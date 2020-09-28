@@ -137,43 +137,6 @@ namespace Z0
         public string Format()
             => Parsed.Format();
 
-        // [Ignore]
-        // bool INullity.IsEmpty
-        // {
-        //     [MethodImpl(Inline)]
-        //     get => Parsed.IsEmpty;
-        // }
-
-        // [Ignore]
-        // bool INullity.IsNonEmpty
-        // {
-        //     [MethodImpl(Inline)]
-        //     get => Parsed.IsNonEmpty;
-        // }
-
-        // [Ignore]
-        // bool IEquatable<X86ApiCapture>.Equals(X86ApiCapture src)
-        //     => Identical(src);
-
-        // [Ignore]
-        // int IComparable<X86ApiCapture>.CompareTo(X86ApiCapture src)
-        //     => Compare(src);
-
-        // [Ignore]
-        // string ITextual.Format()
-        //     => Format();
-
-        // [Ignore]
-        // public X86Code Encoded
-        //     => Parsed;
-
-        // [Ignore]
-        // BinaryCode IEncoded.Encoded
-        //     => Encoded;
-
-        // [Ignore]
-        // int IMeasured.Length
-        //     => Parsed.Length;
 
         public override string ToString()
             => Format();

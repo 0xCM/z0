@@ -55,7 +55,7 @@ namespace Z0.Asm
             Formatter = Services.Formatter(FormatConfig);
             RoutineDecoder = Services.RoutineDecoder(FormatConfig);
             CWf = new WfCaptureContext(Wf, RoutineDecoder, Formatter, ApiArchives.capture(Config.TargetArchive));
-            CaptureBroker = AsmWorkflows.capture(wf);
+            CaptureBroker = AsmWorkflows.broker(wf);
             Parts = Wf.Init.PartIdentities.Length == 0 ? Wf.Api.Identifiers : Wf.Init.PartIdentities;
         }
 

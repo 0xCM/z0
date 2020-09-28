@@ -10,6 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using BL = BitLogic.Scalar;
+
     public struct BitField64<T> : ITextual
         where T : unmanaged
     {
@@ -25,7 +27,7 @@ namespace Z0
         /// <param name="index">An integer in the range [0,63]</param>
         [MethodImpl(Inline)]
         public uint1 Test(byte index)
-            => math.nonz(BitLogic.and(Pow2.pow(index), State));
+            => math.nonz(BL.and(Pow2.pow(index), State));
 
         /// <summary>
         /// Enables or disables an index-identified bit

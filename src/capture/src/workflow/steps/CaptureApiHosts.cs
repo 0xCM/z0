@@ -11,26 +11,28 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static CaptureApiHostsHost;
 
     public readonly ref struct CaptureApiHosts
     {
-        public IWfCaptureState State {get;}
+        readonly IWfShell Wf;
 
-        public IWfShell Wf {get;}
+        readonly WfHost Host;
+
+        public IWfCaptureState State {get;}
 
         public IApiHost[] Sources {get;}
 
         public IPartCapturePaths Target {get;}
 
         [MethodImpl(Inline)]
-        public CaptureApiHosts(WfCaptureState state, IApiHost[] src, IPartCapturePaths dst)
+        public CaptureApiHosts(WfCaptureState state, WfHost host, IApiHost[] src, IPartCapturePaths dst)
         {
             State = state;
+            Host = host;
             Wf = state.Wf;
             Sources = src;
             Target = dst;
-            Wf.Created(StepId);
+            Wf.Created(Host);
         }
 
         public void Run()
@@ -50,15 +52,15 @@ namespace Z0
             }
         }
 
-        void Store(ApiHostUri host, ApiMemberExtract[] extracts, IPartCapturePaths dst)
+        void Store(ApiHostUri src, ApiMemberExtract[] extracts, IPartCapturePaths dst)
         {
-            using var step = new EmitCaptureArtifacts(State, host, extracts, dst);
+            using var step = new EmitCaptureArtifacts(State, new EmitHostArtifactsHost(), src, extracts, dst);
             step.Run();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
     }
 }

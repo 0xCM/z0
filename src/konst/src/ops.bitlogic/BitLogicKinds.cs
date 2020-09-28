@@ -16,6 +16,7 @@ namespace Z0
 
     using static Konst;
 
+    [ApiHost("bitlogic.kinds")]
     public readonly struct BitLogicKinds
     {
         const NumericKind Closure = UnsignedInts;

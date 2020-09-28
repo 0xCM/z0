@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Konst;
     using static z;
-    using static ClearCaptureArchivesHost;
 
     public readonly ref struct ClearCaptureArchives
     {
@@ -25,7 +24,7 @@ namespace Z0.Asm
             Wf = wf;
             Host = host;
             Config = config;
-            Wf.Created(Host, Wf.Ct);
+            Wf.Created(Host);
         }
 
         /// <summary>
@@ -40,14 +39,15 @@ namespace Z0.Asm
 
         Outcome<uint> Clear(PartId part, FS.Files src, [CallerMemberName] string caller = null)
         {
-            void Success(IWfShell wf,  PartId part, Outcome<uint> result, string caller)
-                => wf.Trace(StepId, delimit(part.Format(), caller, result.Data));
-
-            void Failure(IWfShell wf,  PartId part, Outcome<uint> result, string caller)
-                => wf.Error(StepId, result.Error);
 
             var wf = Wf;
-            return src.Delete().OnSuccess(x => Success(wf, part,x, caller)).OnFailure(x => Failure(wf,part,x, caller));
+            var result = src.Delete();
+            if(result)
+                wf.Trace(Host, delimit(part.Format(), caller, result.Data));
+            else
+                wf.Error(Host, result.Error);
+
+            return result;
         }
 
         Outcome<uint> ClearExtracts(IPartCaptureArchive archive, PartId part)

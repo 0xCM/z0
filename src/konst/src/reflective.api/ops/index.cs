@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using Z0.ClrData;
-
     using static Konst;
     using static z;
 

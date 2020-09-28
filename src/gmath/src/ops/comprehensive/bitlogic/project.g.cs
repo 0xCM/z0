@@ -8,7 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+    using BL = BitLogic.Scalar;
+
     partial class gmath
     {
         [MethodImpl(Inline), LProject, Closures(Integers)]

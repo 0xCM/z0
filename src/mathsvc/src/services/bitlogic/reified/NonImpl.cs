@@ -15,7 +15,7 @@ namespace Z0
         public readonly struct NonImpl<T> : IBinaryOp<T>, IBinarySpanOp<T>
             where T : unmanaged
         {
-            public const BinaryBitLogicApiKey OpKind = BinaryBitLogicApiKey.NonImpl;
+            public const BinaryBitLogicKind OpKind = BinaryBitLogicKind.NonImpl;
 
             [MethodImpl(Inline)]
             public T Invoke(T a, T b)

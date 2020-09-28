@@ -8,18 +8,17 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
-    using Z0.ClrData;
-    
     using static Konst;
+    using static z;
 
     partial struct Reflex
     {
         [MethodImpl(Inline), Op]
-        public static Indexed<Type> interfaces(Type src)                   
+        public static Indexed<Type> interfaces(Type src)
             => src.GetInterfaces();
 
         [MethodImpl(Inline), Op]
-        public static InterfaceMapping imap(Type src, Type iface)                   
-            => src.GetInterfaceMap(iface);
+        public static ClrInterfaceMap imap(Type host, Type contract)
+            => @as<InterfaceMapping,ClrInterfaceMap>(host.GetInterfaceMap(contract));
     }
 }
