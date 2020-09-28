@@ -87,12 +87,27 @@ namespace Z0.Asm
         public static string format(AsmSpecifier src, byte[] encoded, string sep)
             => text.format("{0,-32}{1}{2,-32}{3}{4,-3}{5}{6}", src.Instruction, sep, src.OpCode, sep, encoded.Length, sep, encoded.FormatHexBytes(Space,true,false));
 
+        /// <summary>
+        /// Formats a line label
+        /// </summary>
+        /// <param name="src">The relative line location</param>
+        [MethodImpl(Inline), Op]
+        public static string label(ushort src)
+            => text.concat(src.FormatSmallHex(), HexFormatSpecs.PostSpec, Space);
+
+
+        [MethodImpl(Inline), Op]
+        public static string label(ulong src)
+            => text.concat(src.FormatAsmHex(), Space);
+
+
         [Op]
         public static string format(in MemoryAddress @base, in AsmFxSummary src, in AsmFormatConfig config)
         {
             var description = text.build();
             var absolute = @base + src.Offset;
-            description.Append(text.concat(label(src.Offset), src.Formatted.PadRight(config.InstructionPad, Space)));
+            var ll = label(absolute);
+            description.Append(text.concat(ll, src.Formatted.PadRight(config.InstructionPad, Space)));
             description.Append(comment(format(src.Spec, src.Encoded, config.FieldDelimiter)));
             return description.ToString();
         }

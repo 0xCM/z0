@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
 
-    [ApiDataType]
     public readonly struct Meaning : IMeaning<Meaning,object>
     {
         public object Content {get;}

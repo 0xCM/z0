@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiDataType]
     public readonly struct WfToken : ITextual, IEquatable<WfToken>, IComparable<WfToken>
     {
         public readonly ulong Value;

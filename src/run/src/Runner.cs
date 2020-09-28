@@ -306,32 +306,31 @@ namespace Z0
             new EmitAsmOpCodesHost().Configure(Wf.Paths.DbRoot + FS.file("AsmOpcodes",ArchiveExt.Csv)).Run(Wf);
         }
 
-        void Capture(MethodInfo[] src, string label)
+        AsmRoutineCode[] Capture(MethodInfo[] src, string label)
         {
             var methods = src.Select(m =>  new IdentifiedMethod(m.Identify(),m));
-            foreach(var m in methods)
-                Wf.Row(m);
-
-
             var results = CaptureAlt.capture(methods);
             var decoder = Asm.RoutineDecoder;
             var count = results.Length;
             var formatter = Asm.Formatter;
             var dstpath = Wf.Paths.AppLogRoot + FS.file(label, ArchiveExt.Asm);
 
+            var routines = sys.alloc<AsmRoutineCode>(count);
+            var dst = span(routines);
+
             using var writer = dstpath.Writer();
-            for(var i=0; i<count; i++)
+            for(var i=0u; i<count; i++)
             {
                 ref readonly var captured = ref skip(results,i);
                 if(decoder.Decode(captured, out var fx))
                 {
+                    seek(dst,i) = new AsmRoutineCode(fx,captured);
                     Wf.Row(fx.BaseAddress);
                     var asm = formatter.FormatFunction(fx);
                     writer.Write(asm);
-
                 }
             }
-
+            return routines;
         }
         void CheckBitMasks()
         {
@@ -342,7 +341,11 @@ namespace Z0
 
         public void Run()
         {
-            Capture(typeof(Blm32u).StaticMethods(), "blm32u");
+            var captured = Capture(typeof(Blm32u).DeclaredMethods(), "blm32u");
+            for(var i=0; i<captured.Length; i++)
+            {
+
+            }
         }
     }
 }

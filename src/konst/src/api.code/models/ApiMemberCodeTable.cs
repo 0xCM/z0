@@ -12,7 +12,6 @@ namespace Z0
     /// <summary>
     /// Defines a sequence of <see cref='ApiMemberCode'/> records
     /// </summary>
-    [ApiDataType]
     public readonly struct ApiMemberCodeTable : ITableSpan<ApiMemberCode>
     {
         readonly TableSpan<ApiMemberCode> Data;

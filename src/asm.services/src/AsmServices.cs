@@ -62,8 +62,7 @@ namespace Z0.Asm
             if(check)
                 CheckBlockLength(src);
 
-            var instructions = asm.list(src.Decoded, src.Encoded.Code);
-            return new AsmRoutine(uri, sig, src.Encoded, src.TermCode, instructions);
+            return new AsmRoutine(uri, sig, src.Encoded, src.TermCode, asm.list(src.Decoded, src.Encoded.Code));
         }
     }
 }

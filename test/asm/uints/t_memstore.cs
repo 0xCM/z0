@@ -11,7 +11,6 @@ namespace Z0
 
     using Z0.Asm.Data;
 
-    [ApiDataType]
     public class t_memstore : t_asmd<t_memstore>
     {
         public void read_ref_1()

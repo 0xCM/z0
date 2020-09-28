@@ -12,14 +12,13 @@ namespace Z0
 
     partial struct ProjectModel
     {
-        [ApiDataType]
         public readonly struct OutputType : IProjectProperty<OutputType>
         {
             public readonly string Value;
-                        
+
             [MethodImpl(Inline)]
             public OutputType(string value)
-                => Value = value;            
+                => Value = value;
 
             [MethodImpl(Inline)]
             public string Render()
@@ -44,7 +43,7 @@ namespace Z0
                 => (int)Hash;
 
             [Ignore]
-            public override string ToString() 
+            public override string ToString()
                 => Render();
 
             [Ignore]
@@ -54,10 +53,10 @@ namespace Z0
             [Ignore]
             string IProjectElement.Name
                 => nameof(OutputType);
-            
+
             [Ignore]
             string IProjectProperty.Value
-                => Value;   
-        }       
+                => Value;
+        }
     }
 }

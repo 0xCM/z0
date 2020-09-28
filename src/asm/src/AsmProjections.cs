@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Konst;
 
-
     [ApiHost]
     public partial class AsmProjections
     {
@@ -18,11 +17,9 @@ namespace Z0.Asm
         public static ApiInstruction project(MemoryAddress @base, Instruction fx, ApiCodeBlock encoded)
             => new ApiInstruction(@base,fx,encoded);
 
-
         [MethodImpl(Inline)]
         public static ApiRoutine project(MemoryAddress @base, ApiCodeBlock uriCode, Instruction[] src)
             => new ApiRoutine(@base, project(uriCode, src));
-
 
         public static ApiInstruction[] project(ApiCodeBlock code, Instruction[] src)
         {
@@ -42,6 +39,5 @@ namespace Z0.Asm
             }
             return dst;
         }
-
     }
 }
