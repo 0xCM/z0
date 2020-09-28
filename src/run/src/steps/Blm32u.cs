@@ -60,13 +60,6 @@ namespace Z0
         static uint nand(uint a, uint b)
             => BL.nand(a,b);
 
-        [Ignore]
-        public uint Evaluate<K>(uint a, uint b, K k = default)
-            where K : unmanaged, IBitLogicKind
-        {
-            return 0;
-        }
-
         public uint Evaluate(uint a, uint b, BinaryBitLogicKind k)
         {
             switch(k)

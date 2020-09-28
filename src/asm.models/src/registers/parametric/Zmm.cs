@@ -8,19 +8,20 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    public readonly struct Ymm<R> : IYmmReg<Ymm<R>,R>
+    public readonly struct Zmm<R> : IRegister<Zmm<R>,W512,Cell512>
         where R : unmanaged, IRegister
     {
-        public Cell256 Content {get;}
+        public Cell512 Content {get;}
 
         [MethodImpl(Inline)]
-        public Ymm(Cell256 value)
+        public Zmm(Cell512 value)
         {
             Content = value;
         }
 
         public RegisterKind Kind
-            => default;
+            => default(R).Kind;
     }
 }

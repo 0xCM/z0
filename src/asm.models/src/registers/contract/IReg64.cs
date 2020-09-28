@@ -10,10 +10,5 @@ namespace Z0.Asm
             => RegisterClass.GP;
     }
 
-    public interface IReg64<F,T> : IReg64
-        where F : unmanaged, IReg64<F,T>
-        where T : unmanaged
-    {
 
-    }
 }

@@ -69,7 +69,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static CilCode cil(MethodInfo src)
-            => new CilCode(src.Name, src.GetMethodBody().GetILAsByteArray(), src.GetMethodImplementationFlags());
+        {
+            var body = src.GetMethodBody()?.GetILAsByteArray() ?? sys.empty<byte>();
+            return new CilCode(src.Name, body, src.GetMethodImplementationFlags());
+        }
 
         [MethodImpl(Inline), Op]
         public static CilCode cil(MemoryAddress @base, OpUri uri, MethodInfo src)
@@ -107,10 +110,8 @@ namespace Z0
         public static LocatedMethod jit(MethodInfo src, int? size = null)
         {
             RuntimeHelpers.PrepareMethod(src.MethodHandle);
-            var location = (MemoryAddress)src.MethodHandle.GetFunctionPointer();
-            return  new LocatedMethod(OpIdentity.Empty, src, location, size);
+            return new LocatedMethod(OpIdentity.Empty, src, (MemoryAddress)src.MethodHandle.GetFunctionPointer(), size);
         }
-
 
         /// <summary>
         /// Jits the method declared by a specified type

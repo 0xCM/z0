@@ -11,10 +11,9 @@ namespace Z0.Asm
 
     using K = RegisterKind;
 
-    partial struct AsmRegisters
+    partial struct AsmRegisterTypes
     {
-
-        public readonly struct xmm0 : IXmmReg<xmm0,N0>
+        public readonly struct xmm0 : IRegister<xmm0,W128,Cell128>
         {
             public Cell128 Content {get;}
 
@@ -25,7 +24,7 @@ namespace Z0.Asm
             public K Kind => K.XMM0;
         }
 
-        public readonly struct xmm1 : IXmmReg<xmm1,N1>
+        public readonly struct xmm1 : IRegister<xmm1,W128,Cell128>
         {
             public Cell128 Content {get;}
 
@@ -37,7 +36,7 @@ namespace Z0.Asm
             public K Kind => K.XMM1;
         }
 
-        public readonly struct xmm2 : IXmmReg<xmm2,N2>
+        public readonly struct xmm2 : IRegister<xmm2,W128,Cell128>
         {
             public Cell128 Content {get;}
 
@@ -48,7 +47,7 @@ namespace Z0.Asm
             public K Kind => K.XMM2;
         }
 
-        public readonly struct xmm3 : IXmmReg<xmm3,N3>
+        public readonly struct xmm3 : IRegister<xmm3,W128,Cell128>
         {
             public Cell128 Content {get;}
 
@@ -59,7 +58,7 @@ namespace Z0.Asm
             public K Kind => K.XMM3;
         }
 
-        public readonly struct xmm4 : IXmmReg<xmm4,N4>
+        public readonly struct xmm4 : IRegister<xmm4,W128,Cell128>
         {
             public Cell128 Content {get;}
 
@@ -73,7 +72,7 @@ namespace Z0.Asm
             public K Kind => K.XMM4;
         }
 
-        public readonly struct xmm5 : IXmmReg<xmm5,N5>
+        public readonly struct xmm5 : IRegister<xmm5,W128,Cell128>
         {
             public Cell128 Content {get;}
 
@@ -86,7 +85,7 @@ namespace Z0.Asm
             public K Kind => K.XMM5;
         }
 
-        public readonly struct xmm6 : IXmmReg<xmm6,N6>
+        public readonly struct xmm6 : IRegister<xmm6,W128,Cell128>
         {
             public Cell128 Content {get;}
 
@@ -97,7 +96,7 @@ namespace Z0.Asm
             public K Kind => K.XMM6;
         }
 
-        public readonly struct xmm7 : IXmmReg<xmm7,N7>
+        public readonly struct xmm7 : IRegister<xmm7,W128,Cell128>
         {
             public Cell128 Content {get;}
 
@@ -110,7 +109,7 @@ namespace Z0.Asm
             public K Kind => K.XMM7;
         }
 
-        public readonly struct xmm8 : IXmmReg<xmm8,N8>
+        public readonly struct xmm8 : IRegister<xmm8,W128,Cell128>
         {
             public Cell128 Content {get;}
 
@@ -123,7 +122,7 @@ namespace Z0.Asm
             public K Kind => K.XMM8;
         }
 
-        public readonly struct xmm9 : IXmmReg<xmm9,N9>
+        public readonly struct xmm9 : IRegister<xmm9,W128,Cell128>
         {
             public Cell128 Content {get;}
 
@@ -134,7 +133,7 @@ namespace Z0.Asm
             public K Kind => K.XMM9;
         }
 
-        public readonly struct xmm10 : IXmmReg<xmm10,N10>
+        public readonly struct xmm10 : IRegister<xmm10,W128,Cell128>
         {
             public Cell128 Content {get;}
 
@@ -147,7 +146,7 @@ namespace Z0.Asm
             public K Kind => K.XMM10;
         }
 
-        public readonly struct xmm11 : IXmmReg<xmm11,N11>
+        public readonly struct xmm11 : IRegister<xmm11,W128,Cell128>
         {
             public Cell128 Content {get;}
 

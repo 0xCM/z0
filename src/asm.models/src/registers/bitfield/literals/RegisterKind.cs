@@ -172,21 +172,21 @@ namespace Z0.Asm
 
         RDI = G64.RDI,
 
-        R8Q = r0 | GPN << ClassIndex | W64 << WidthIndex,
+        R8Q = G64.R8Q,
 
-        R9Q = r1 | GPN << ClassIndex | W64 << WidthIndex,
+        R9Q = G64.R9Q,
 
-        R10Q = r2 | GPN << ClassIndex | W64 << WidthIndex,
+        R10Q = G64.R10Q,
 
-        R11Q = r3 | GPN << ClassIndex | W64 << WidthIndex,
+        R11Q = G64.R11Q,
 
-        R12Q = r4 | GPN << ClassIndex | W64 << WidthIndex,
+        R12Q = G64.R12Q,
 
-        R13Q = r5 | GPN << ClassIndex | W64 << WidthIndex,
+        R13Q = G64.R13Q,
 
-        R14Q = r6 | GPN << ClassIndex | W64 << WidthIndex,
+        R14Q = G64.R14Q,
 
-        R15Q = r7 | GPN << ClassIndex | W64 << WidthIndex,
+        R15Q = G64.R15Q,
 
         // ~ 128-bit vectorized registers
         // ~ ------------------------------------------------------------------
@@ -225,25 +225,25 @@ namespace Z0.Asm
 
         XMM16 = X.XMM16,
 
-        XMM17 = r17 | XMM << ClassIndex | W128 << WidthIndex,
+        XMM17 = X.XMM17,
 
-        XMM18 = r18 | XMM << ClassIndex | W128 << WidthIndex,
+        XMM18 = X.XMM18,
 
-        XMM19 = r19 | XMM << ClassIndex | W128 << WidthIndex,
+        XMM19 = X.XMM19,
 
-        XMM20 = r20 | XMM << ClassIndex | W128 << WidthIndex,
+        XMM20 = X.XMM20,
 
-        XMM21 = r21 | XMM << ClassIndex | W128 << WidthIndex,
+        XMM21 = X.XMM21,
 
-        XMM22 = r22 | XMM << ClassIndex | W128 << WidthIndex,
+        XMM22 = X.XMM22,
 
-        XMM23 = r23 | XMM << ClassIndex | W128 << WidthIndex,
+        XMM23 = X.XMM23,
 
-        XMM24 = r24 | XMM << ClassIndex | W128 << WidthIndex,
+        XMM24 = X.XMM24,
 
-        XMM25 = r25 | XMM << ClassIndex | W128 << WidthIndex,
+        XMM25 = X.XMM25,
 
-        XMM26 = r26 | XMM << ClassIndex | W128 << WidthIndex,
+        XMM26 = X.XMM26,
 
         XMM27 = r27 | XMM << ClassIndex | W128 << WidthIndex,
 
@@ -270,27 +270,27 @@ namespace Z0.Asm
 
         YMM5 = Y.YMM5,
 
-        YMM6 = r6 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM6 = Y.YMM6,
 
-        YMM7 = r7 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM7 = Y.YMM7,
 
-        YMM8 = RegisterCode.r8 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM8 = Y.YMM8,
 
-        YMM9 = r9 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM9 = Y.YMM9,
 
-        YMM10 = r10 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM10 = Y.YMM10,
 
         YMM11 = r11 | YMM << ClassIndex | W256 << WidthIndex,
 
         YMM12 = r12 | YMM << ClassIndex | W256 << WidthIndex,
 
-        YMM13 = r13 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM13 = Y.YMM13,
 
-        YMM14 = r14 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM14 = Y.YMM14,
 
-        YMM15 = r15 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM15 = Y.YMM15,
 
-        YMM16 = RegisterCode.r16 | YMM << ClassIndex | W256 << WidthIndex,
+        YMM16 = Y.YMM16,
 
         YMM17 = r17 | YMM << ClassIndex | W256 << WidthIndex,
 
@@ -331,25 +331,25 @@ namespace Z0.Asm
 
         ZMM2 = Z.ZMM2,
 
-        ZMM3 = Z.ZMM0,
+        ZMM3 = Z.ZMM3,
 
-        ZMM4 = r4 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM4 = Z.ZMM4,
 
-        ZMM5 = r5 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM5 = Z.ZMM5,
 
-        ZMM6 = r6 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM6 = Z.ZMM6,
 
-        ZMM7 = r7 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM7 = Z.ZMM7,
 
-        ZMM8 = RegisterCode.r8 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM8 = Z.ZMM8,
 
-        ZMM9 = r9 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM9 = Z.ZMM9,
 
-        ZMM10 = r10 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM10 = Z.ZMM10,
 
-        ZMM11 = r11 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM11 = Z.ZMM11,
 
-        ZMM12 = r12 | ZMM << ClassIndex | W512 << WidthIndex,
+        ZMM12 = Z.ZMM12,
 
         ZMM13 = r13 | ZMM << ClassIndex | W512 << WidthIndex,
 
@@ -392,15 +392,15 @@ namespace Z0.Asm
         // ~ 64-bit mask registers
         // ~ ------------------------------------------------------------------
 
-        K0 = r0 | Mask << ClassIndex | W64 << WidthIndex,
+        K0 = M.K0,
 
-        K1 = r1 | Mask << ClassIndex | W64 << WidthIndex,
+        K1 = M.K1,
 
-        K2 = r2 | Mask << ClassIndex | W64 << WidthIndex,
+        K2 = M.K2,
 
-        K3 = r3 | Mask << ClassIndex | W64 << WidthIndex,
+        K3 = M.K3,
 
-        K4 = r4 | Mask << ClassIndex | W64 << WidthIndex,
+        K4 = M.K4,
 
         K5 = r5 | Mask << ClassIndex | W64 << WidthIndex,
 

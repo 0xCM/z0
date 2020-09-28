@@ -11,9 +11,9 @@ namespace Z0.Asm
 
     public readonly struct R8 : IRegister<R8,W8,byte>
     {
-        public readonly byte Content  {get;}
+        public byte Content  {get;}
 
-        public readonly RegisterKind Kind {get;}
+        public RegisterKind Kind {get;}
 
         [MethodImpl(Inline)]
         public R8(byte value, RegisterKind kind)

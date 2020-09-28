@@ -46,6 +46,12 @@ namespace Z0.Asm
                 WriteAsm(src[i], dst);
         }
 
+        void WriteAsm(ReadOnlySpan<ApiCaptureBlock> src, StreamWriter dst)
+        {
+            for(var i=0; i<src.Length; i++)
+                WriteAsm(src[i], dst);
+        }
+
         void WriteAsm(AsmRoutine f, StreamWriter dst)
             => dst.WriteLine(Formatter.FormatFunction(f));
     }

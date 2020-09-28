@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.Reflection;
 
     using System.Text;
 
@@ -305,16 +306,20 @@ namespace Z0
             new EmitAsmOpCodesHost().Configure(Wf.Paths.DbRoot + FS.file("AsmOpcodes",ArchiveExt.Csv)).Run(Wf);
         }
 
-        public void Run()
+        void Capture(MethodInfo[] src, string label)
         {
-            var methods = typeof(CheckBitMasks).Methods().WithNameStartingWith("CheckLoMask").Select(m =>  new IdentifiedMethod(m.Identify(),m));
-            var results = @readonly(CaptureAlt.capture(methods));
+            var methods = src.Select(m =>  new IdentifiedMethod(m.Identify(),m));
+            foreach(var m in methods)
+                Wf.Row(m);
+
+
+            var results = CaptureAlt.capture(methods);
             var decoder = Asm.RoutineDecoder;
             var count = results.Length;
             var formatter = Asm.Formatter;
-            var dstpath = Wf.Paths.AppLogRoot + FS.file("runner", ArchiveExt.Asm);
-            using var writer = dstpath.Writer();
+            var dstpath = Wf.Paths.AppLogRoot + FS.file(label, ArchiveExt.Asm);
 
+            using var writer = dstpath.Writer();
             for(var i=0; i<count; i++)
             {
                 ref readonly var captured = ref skip(results,i);
@@ -327,7 +332,17 @@ namespace Z0
                 }
             }
 
+        }
+        void CheckBitMasks()
+        {
+            var methods = typeof(CheckBitMasks).Methods().WithNameStartingWith("CheckLoMask");
+            Capture(methods, "bitmasks");
             CheckBitMasksHost.control(Wf, Random);
+        }
+
+        public void Run()
+        {
+            Capture(typeof(Blm32u).StaticMethods(), "blm32u");
         }
     }
 }

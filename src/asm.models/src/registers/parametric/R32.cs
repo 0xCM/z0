@@ -9,13 +9,13 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct R64<R> : IReg64<R64<R>,R>
-        where R : unmanaged, IReg64
+    public readonly struct R32<R> : IRegister<R32<R>,W32,uint>
+        where R : unmanaged, IRegister
     {
-        public readonly ulong Data;
+        public readonly uint Data;
 
         [MethodImpl(Inline)]
-        public R64(ulong value)
+        public R32(uint value)
             => Data = value;
 
         public RegisterKind Kind
@@ -24,7 +24,7 @@ namespace Z0.Asm
             get => default(R).Kind;
         }
 
-        ulong IAsmArg<ulong>.Content
+        uint IAsmArg<uint>.Content
             => Data;
     }
 }

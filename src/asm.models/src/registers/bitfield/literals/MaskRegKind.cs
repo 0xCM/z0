@@ -4,30 +4,30 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
+    using static RegisterBitFields;
+    using static RegisterCode;
     using static RegisterClass;
     using static RegisterWidth;
-
-    using RK = RegisterKind;
 
     /// <summary>
     /// Defines classifiers for <see cref='Mask'/> registers of width <see cref='W64'/>
     /// </summary>
     public enum MaskRegKind : uint
     {
-        K0 = RK.K0,
+        K0 = r0 | Mask << ClassIndex | W64 << WidthIndex,
 
-        K1 = RK.K1,
+        K1 = r1 | Mask << ClassIndex | W64 << WidthIndex,
 
-        K2 = RK.K2,
+        K2 = r2 | Mask << ClassIndex | W64 << WidthIndex,
 
-        K3 = RK.K3,
+        K3 = r3 | Mask << ClassIndex | W64 << WidthIndex,
 
-        K4 = RK.K4,
+        K4 = r4 | Mask << ClassIndex | W64 << WidthIndex,
 
-        K5 = RK.K5,
+        K5 = r5 | Mask << ClassIndex | W64 << WidthIndex,
 
-        K6 = RK.K6,
+        K6 = r6 | Mask << ClassIndex | W64 << WidthIndex,
 
-        K7 = RK.K7,
+        K7 = r7 | Mask << ClassIndex | W64 << WidthIndex,
     }
 }

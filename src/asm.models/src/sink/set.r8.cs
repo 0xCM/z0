@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    using static AsmRegisters;
+    using static AsmRegisterTypes;
 
     partial struct AsmSink
     {

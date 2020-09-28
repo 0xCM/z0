@@ -15,7 +15,7 @@ namespace Z0
     [ApiHost]
     public readonly unsafe struct CaptureAlt
     {
-        public static ApiCaptureBlock[] capture(IdentifiedMethod[] src)
+        public static ReadOnlySpan<ApiCaptureBlock> capture(ReadOnlySpan<IdentifiedMethod> src)
             => capture(src, sys.alloc<byte>(Pow2.T14));
 
         /// <summary>
@@ -45,21 +45,34 @@ namespace Z0
             return DefineMember(_id, src, summary.Encoded, outcome.TermCode);
         }
 
-        public static ApiCaptureBlock[] capture(IdentifiedMethod[] src, Span<byte> buffer)
+        static Span<LocatedMethod> locate(ReadOnlySpan<IdentifiedMethod> src)
         {
             var count = src.Length;
-            var located = alloc<LocatedMethod>(count);
-            for(var i=0; i<count; i++)
-                located[i] = FunctionDynamic.jit(src[i].Method);
+            var located = span<LocatedMethod>(count);
+            for(var i=0u; i<count; i++)
+                seek(located,i) = FunctionDynamic.jit(skip(src,i).Method);
+            return located;
+        }
 
-            var captured = alloc<ApiCaptureBlock>(count);
+        public static ReadOnlySpan<ApiCaptureBlock> capture(ReadOnlySpan<IdentifiedMethod> src, Span<byte> buffer)
+        {
+            var located = locate(src);
+            var count = located.Length;
+            var captured = span<ApiCaptureBlock>(count);
 
-            for(var i=0; i<count; i++)
+            for(var i=0u; i<count; i++)
             {
-                var method = located[i];
-                var summary = capture(buffer, method.Id, method.Address);
-                var outcome = summary.Outcome;
-                captured[i] = DefineMember(method.Id, method.Method, summary.Encoded, outcome.TermCode);
+                ref readonly var method = ref skip(located, i);
+                try
+                {
+                    var summary = capture(buffer, method.Id, method.Address);
+                    var outcome = summary.Outcome;
+                    seek(captured,i) = DefineMember(method.Id, method.Method, summary.Encoded, outcome.TermCode);
+                }
+                catch(Exception e)
+                {
+                    term.errlabel(e, method.Method.Name);
+                }
             }
             return captured;
         }

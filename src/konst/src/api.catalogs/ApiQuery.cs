@@ -38,10 +38,15 @@ namespace Z0
         [Op]
         public static ApiHostUri uri(Type host)
         {
-            var tag = host.Tag<ApiHostAttribute>();
-            var name = ifempty(tag.MapValueOrDefault(x => x.HostName), host.Name);
-            var owner = host.Assembly.Id();
-            return new ApiHostUri(owner, name);
+            if(host != null)
+            {
+                var tag = host.Tag<ApiHostAttribute>();
+                var name = ifempty(tag.MapValueOrDefault(x => x.HostName), host.Name);
+                var owner = host.Assembly.Id();
+                return new ApiHostUri(owner, name);
+            }
+            else
+                return ApiHostUri.Empty;
         }
 
         static Type[] ResAccessorTypes

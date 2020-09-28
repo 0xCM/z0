@@ -54,4 +54,14 @@ namespace Z0.Asm
     {
 
     }
+
+    public interface IRegister<F,W,T,N> : IRegister<F,W,T>
+        where F : struct, IRegister<F,W,T>
+        where W : unmanaged, IDataWidth
+        where T : unmanaged
+        where N : unmanaged, ITypeNat
+    {
+        RegisterCode IRegister.Code
+            => (RegisterCode)z.nat8u<N>();
+    }
 }

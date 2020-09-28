@@ -9,22 +9,18 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct R16<R> : IReg16<R16<R>,R>
-        where R : unmanaged, IReg16
+    public readonly struct Ymm<R> : IRegister<Ymm<R>,W256,Cell256>
+        where R : unmanaged, IRegister
     {
-        public readonly ushort Data;
+        public Cell256 Content {get;}
 
         [MethodImpl(Inline)]
-        public R16(ushort value)
-            => Data = value;
-
-        public RegisterKind Kind
+        public Ymm(Cell256 value)
         {
-            [MethodImpl(Inline)]
-            get => default(R).Kind;
+            Content = value;
         }
 
-        ushort IAsmArg<ushort>.Content
-            => Data;
+        public RegisterKind Kind
+            => default;
     }
 }

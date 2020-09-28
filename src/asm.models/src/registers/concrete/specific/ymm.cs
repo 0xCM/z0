@@ -11,10 +11,10 @@ namespace Z0.Asm
 
     using K = RegisterKind;
 
-    partial struct AsmRegisters
+    partial struct AsmRegisterTypes
     {
 
-        public readonly struct ymm0 : IYmmReg<ymm0,N0>
+        public readonly struct ymm0 : IRegister<ymm0,W256,Cell256>
         {
             public Cell256 Content {get;}
 
@@ -27,7 +27,7 @@ namespace Z0.Asm
             public K Kind => K.XMM0;
         }
 
-        public readonly struct ymm1 : IYmmReg<ymm1,N1>
+        public readonly struct ymm1 : IRegister<ymm1,W256,Cell256>
         {
             public Cell256 Content {get;}
 
@@ -41,7 +41,7 @@ namespace Z0.Asm
             public K Kind => K.XMM1;
         }
 
-        public readonly struct ymm2 : IYmmReg<ymm2,N2>
+        public readonly struct ymm2 : IRegister<ymm2,W256,Cell256>
         {
             public Cell256 Content {get;}
 
@@ -54,7 +54,7 @@ namespace Z0.Asm
             public K Kind => K.XMM2;
         }
 
-        public readonly struct ymm3 : IYmmReg<ymm3,N3>
+        public readonly struct ymm3 : IRegister<ymm3,W256,Cell256>
         {
             public Cell256 Content {get;}
 

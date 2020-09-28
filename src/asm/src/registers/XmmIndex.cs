@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    using static AsmRegisters;
+    using static AsmRegisterTypes;
 
     public unsafe readonly ref struct XmmIndex
     {

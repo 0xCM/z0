@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct Xmm<R> : IXmmReg<Xmm<R>,R>
+    public readonly struct Xmm<R> : IRegister<Xmm<R>,W128,Cell128>
         where R : unmanaged, IRegister
     {
         public Cell128 Content {get;}

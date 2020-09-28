@@ -11,9 +11,9 @@ namespace Z0.Asm
 
     using K = RegisterKind;
 
-    partial struct AsmRegisters
+    partial struct AsmRegisterTypes
     {
-        public readonly struct al : IRegister<al,W8,byte>
+        public readonly struct al : IRegister<al,W8,byte,N0>
         {
             public readonly byte Data;
 
@@ -38,7 +38,7 @@ namespace Z0.Asm
             }
         }
 
-        public readonly struct cl : IRegister<cl,W8,byte>
+        public readonly struct cl : IRegister<cl,W8,byte,N1>
         {
             public readonly byte Data;
 
@@ -64,7 +64,7 @@ namespace Z0.Asm
             public K Kind => K.CL;
         }
 
-        public readonly struct dl : IRegister<dl,W8,byte>
+        public readonly struct dl : IRegister<dl,W8,byte,N2>
         {
             public readonly byte Data;
 
@@ -90,7 +90,7 @@ namespace Z0.Asm
             public K Kind => K.DL;
         }
 
-        public readonly struct bl : IRegister<bl,W8,byte>
+        public readonly struct bl : IRegister<bl,W8,byte,N3>
         {
             public readonly byte Data;
 
@@ -291,11 +291,9 @@ namespace Z0.Asm
             }
 
             public K Kind => K.R10L;
-
-
         }
 
-        public readonly struct r11b : IReg8<r11b,byte>
+        public readonly struct r11b : IRegister<r11b,W8,byte>
         {
             public readonly byte Data;
 
@@ -318,7 +316,7 @@ namespace Z0.Asm
 
         }
 
-        public readonly struct r12b : IReg8<r12b,byte>
+        public readonly struct r12b : IRegister<r12b,W8,byte>
         {
             public readonly byte Data;
 
@@ -340,7 +338,7 @@ namespace Z0.Asm
             public K Kind => K.R12L;
         }
 
-        public readonly struct r13b : IReg8<r13b,byte>
+        public readonly struct r13b : IRegister<r13b,W8,byte>
         {
             public readonly byte Data;
 
@@ -363,7 +361,7 @@ namespace Z0.Asm
 
         }
 
-        public readonly struct r14b : IReg8<r14b,byte>
+        public readonly struct r14b : IRegister<r14b,W8,byte>
         {
             public readonly byte Data;
 
@@ -386,7 +384,7 @@ namespace Z0.Asm
 
         }
 
-        public readonly struct r15b : IReg8<r15b,byte>
+        public readonly struct r15b : IRegister<r15b,W8,byte>
         {
             public readonly byte Data;
 
@@ -396,7 +394,7 @@ namespace Z0.Asm
             public R8 Generalized
             {
                 [MethodImpl(Inline)]
-                get =>new R8(Data, Kind);
+                get => new R8(Data, Kind);
             }
 
             [MethodImpl(Inline)]

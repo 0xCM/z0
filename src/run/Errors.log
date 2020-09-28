@@ -22,3 +22,19 @@ System.TypeLoadException: Method 'Run' in type 'Z0.ProcessPartFilesHost' from as
    at System.Activator.CreateInstance[T]()
    at Z0.Shell`1.Launch(String[] args) in J:\dev\projects\z0\src\konst\src\wf.core\abstractions\ShellS.cs:line 85
 
+Failure trapped by capture at J:\dev\projects\z0\src\capture\src\services\CaptureAlt.cs 79
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Z0.CaptureAlt.capture(ReadOnlySpan`1 src, Span`1 buffer) in J:\dev\projects\z0\src\capture\src\services\CaptureAlt.cs:line 64
+
+GetHashCodeOfPtr: Failure occurred at capture J:\dev\projects\z0\src\capture\src\services\CaptureAlt.cs 79
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Z0.CaptureAlt.capture(ReadOnlySpan`1 src, Span`1 buffer) in J:\dev\projects\z0\src\capture\src\services\CaptureAlt.cs:line 64
+
+GetHashCodeOfPtr: Failure occurred at capture J:\dev\projects\z0\src\capture\src\services\CaptureAlt.cs 74
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Z0.CaptureAlt.capture(ReadOnlySpan`1 src, Span`1 buffer) in J:\dev\projects\z0\src\capture\src\services\CaptureAlt.cs:line 59
+
+GetHashCodeOfPtr: Failure occurred at capture J:\dev\projects\z0\src\capture\src\services\CaptureAlt.cs 74
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Z0.CaptureAlt.capture(ReadOnlySpan`1 src, Span`1 buffer) in J:\dev\projects\z0\src\capture\src\services\CaptureAlt.cs:line 59
+
