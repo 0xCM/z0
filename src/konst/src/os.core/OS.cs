@@ -9,6 +9,8 @@ namespace Z0
     using System;
     using System.Security;
     using System.Runtime.InteropServices;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
 
     using static Konst;
     using static z;

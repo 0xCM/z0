@@ -86,6 +86,12 @@ namespace Z0
             get => ref Encoded[index];
         }
 
+        public uint Count
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Encoded.Length;
+        }
+
         [MethodImpl(Inline)]
         public BinaryCode(byte[] bytes)
             => Encoded = z.insist(bytes);

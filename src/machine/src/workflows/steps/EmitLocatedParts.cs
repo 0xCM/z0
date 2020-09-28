@@ -1,0 +1,75 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
+//-----------------------------------------------------------------------------
+namespace Z0
+{
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Linq;
+    using System.Diagnostics;
+
+    using static Konst;
+
+    using static z;
+
+    public ref struct EmitLocatedParts
+    {
+        readonly IWfShell Wf;
+
+        readonly WfHost Host;
+
+        readonly Span<IPart> Parts;
+
+        readonly LocatedImages Images;
+
+        readonly FolderPath TargetDir;
+
+        public Span<LocatedPart> Index;
+
+        [MethodImpl(Inline)]
+        public EmitLocatedParts(IWfShell wf, WfHost host)
+        {
+            Wf = wf;
+            Host = host;
+            Parts = Wf.Api.Storage;
+            Index = default;
+            TargetDir = wf.ResourceRoot + FolderName.Define("images");
+            var process = Process.GetCurrentProcess();
+            Images = process.Modules.Cast<ProcessModule>().Map(ProcessImages.locate).OrderBy(x => x.BaseAddress);
+            Wf.Created(Host);
+        }
+
+        public void Dispose()
+        {
+             Wf.Disposed(Host);
+        }
+
+        public void Run()
+        {
+             Wf.Running(Host);
+             var count = Parts.Length;
+
+             Index = span<LocatedPart>(count);
+             for(var i=0u; i<count; i++)
+             {
+                ref readonly var part = ref skip(Parts, i);
+                var @base = ProcessImages.@base(part);
+                var dstpath = TargetDir + FileName.define(part.Format(), FileExtension.Define("csv"));
+
+                var h = EmitImageDataHost.create(part);
+                using var step = h.Step(Wf, out var _);
+                step.Run();
+
+                // using var step = new EmitImageContent(Wf, new EmitImageContentHost(), part);
+                // step.Run();
+
+                seek(Index,i) = new LocatedPart(part, @base, (uint)(step.OffsetAddress - @base));
+             }
+
+            EmitImageSummariesHost.create(Images).Run(Wf);
+
+            Wf.Ran(Host);
+        }
+    }
+}

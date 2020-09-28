@@ -93,23 +93,23 @@ namespace Z0
             => Enums.literals<DocStructureKind>().Where(x => x != 0).OrderBy(x => format(x));
 
         [Op]
-        static ReadOnlySpan<SystemImageSymbol> SystemImages
+        static ReadOnlySpan<ImageToken> SystemImages
         {
             get
             {
                 var doc = structured(nameof(SystemImages));
                 if(doc.RowCount != 0)
                 {
-                    var dst = sys.alloc<SystemImageSymbol>(doc.RowCount);
+                    var dst = sys.alloc<ImageToken>(doc.RowCount);
                     for(var i=0; i<doc.RowCount; i++)
                     {
                         ref readonly var row = ref doc[i];
                         if(row.CellCount >= 2)
-                            dst[i] = new SystemImageSymbol(row[0], row[1]);
+                            dst[i] = new ImageToken(row[0], row[1]);
                     }
                     return dst;
                 }
-                return sys.empty<SystemImageSymbol>();
+                return sys.empty<ImageToken>();
             }
         }
 

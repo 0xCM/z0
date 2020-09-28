@@ -561,6 +561,7 @@
         "rpad",
         "rspace",
         "ruleset",
+        "runas",
         "segprefix",
         "segwidth",
         "sequentials",

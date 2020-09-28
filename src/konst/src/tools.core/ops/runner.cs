@@ -12,7 +12,7 @@ namespace Z0
     partial struct Tooling
     {
         [Op]
-        public static ToolRunner runner(IWfShell context, string command, ToolRunnerConfig config)
-            => new ToolRunner(command, config);
+        public static ToolProcess runner(IWfShell context, string command, ToolProcessOptions config)
+            => new ToolProcess(command, config);
     }
 }

@@ -6,18 +6,82 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Diagnostics;
+    using System.Threading.Tasks;
 
     using static Konst;
+    using static z;
 
     [ApiHost("api")]
     public readonly partial struct Tooling
     {
+        /// <summary>
+        /// Creates a parametrically-predicated tool identifier
+        /// </summary>
+        /// <typeparam name="T">The tool type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ToolId<T> identify<T>()
+            => default;
+
+        /// <summary>
+        /// Creates a predicated tool identifier
+        /// </summary>
+        [MethodImpl(Inline)]
+        public static ToolId identify(Type t)
+            => new ToolId(t);
+
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static string format<T>(ToolId<T> src)
+            =>  src.Name;
+
+        public static async Task<int> start(ToolExecSpec spec, WfStatusRelay dst)
+        {
+            var info = new ProcessStartInfo
+            {
+                FileName = spec.ToolPath.Name,
+                Arguments = spec.Args,
+                RedirectStandardError = true,
+                RedirectStandardOutput = true,
+                RedirectStandardInput = true
+            };
+
+            var process = new Process {StartInfo = info};
+
+            if (!spec.WorkingDir.IsNonEmpty)
+                process.StartInfo.WorkingDirectory = spec.WorkingDir.Name;
+
+            iter(spec.Vars.Storage, v => process.StartInfo.Environment.Add(v.Name, v.Value));
+
+            process.OutputDataReceived += (s,d) => dst.OnInfo(d.Data ?? EmptyString);
+            process.ErrorDataReceived += (s,d) => dst.OnError(d.Data ?? EmptyString);
+            process.Start();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+            return await wait(process);
+        }
+
+        static async Task<int> wait(Process process)
+        {
+            return await Task.Run(() => {
+                process.WaitForExit();
+                return Task.FromResult(process.ExitCode);
+            });
+        }
+
+        /// <summary>
+        /// Creates a tool process
+        /// </summary>
+        /// <param variable="commandLine">The command line to run as a subprocess</param>
+        /// <param variable="options">Options for the process</param>
+        public static ToolProcess process(string commandLine, ToolProcessOptions options = null)
+            => ToolProcess.create(commandLine, options ?? new ToolProcessOptions());
+
         [Op]
-        public static ToolStatus status(ToolRunner runner)
+        public static ToolStatus status(ToolProcess runner)
             => runner.Status();
 
         [Op]
-        public static ref ToolStatus status(ToolRunner runner, ref ToolStatus dst)
+        public static ref ToolStatus status(ToolProcess runner, ref ToolStatus dst)
             => ref runner.Status(ref dst);
 
         internal static FolderPath ToolSourceDir
@@ -62,6 +126,5 @@ namespace Z0
             where T : unmanaged
             where F : unmanaged, Enum
                 => new ToolSpec(typeof(T).Name, flags.Map(f => flag(f.ToString())), options);
-
     }
 }

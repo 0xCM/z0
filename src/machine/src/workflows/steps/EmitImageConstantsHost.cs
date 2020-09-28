@@ -14,6 +14,5 @@ namespace Z0
             using var step = new EmitImageConstants(wf, this);
             step.Run();
         }
-
     }
 }

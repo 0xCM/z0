@@ -17,6 +17,9 @@ namespace Z0
         public static PartId part(FilePath src)
             => ApiPartIdParser.single(src.FileName.Name.Replace("z0.", EmptyString).Replace(".dll", EmptyString).Replace(".exe", EmptyString));
 
+        public static PartId part(FS.FilePath src)
+            => part(FilePath.Define(src.Name));
+
         public ParseResult<PartId> Parse(string src)
             => parse<PartId>(src);
 

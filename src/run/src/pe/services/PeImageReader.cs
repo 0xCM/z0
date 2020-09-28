@@ -7,15 +7,13 @@
 namespace Z0
 {
     using System;
-    using System.IO;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
 
-    using static ImageReader;
-    using static ImageTables;
-    using static ImageLiterals;
+    using T = ImageTables;
+    using L = ImageLiterals;
 
     public struct PeImageReader : IDisposable
     {
@@ -33,22 +31,22 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool magical(ushort src)
-            => src == Magical;
+            => src == L.Magical;
 
-        ImageOffsets Offsets;
+        T.ImageOffsets Offsets;
 
-        public Outcome Read(ImageStream src, out ImageContent dst)
+        public Outcome Read(ImageStream src, out T.ImageContent dst)
         {
             dst = default;
             var magic = src.Read<ushort>(0);
             if(magical(magic))
             {
-                var index = src.Read<uint>(SigOffset);
+                var index = src.Read<uint>(L.SigOffset);
                 if(index != 0)
                 {
-                    Offsets = ImageOffsets.FromHeaderIndex(index);
+                    Offsets = T.ImageOffsets.FromHeaderIndex(index);
                     var peSignature = src.Read<int>(index);
-                    if(peSignature == SigExpect)
+                    if(peSignature == L.SigExpect)
                         Read(ref dst);
                     return true;
                 }
@@ -57,15 +55,15 @@ namespace Z0
             return false;
         }
 
-        public void Read(ref ImageContent dst)
+        public void Read(ref T.ImageContent dst)
         {
-            if (Stream.TryRead(Offsets.HeaderOffset, out ImageHeader header))
+            if (Stream.TryRead(Offsets.HeaderOffset, out T.ImageHeader header))
                 dst.Header = header;
 
             dst.Directories = ReadDataDirectories(Stream, Offsets.DataDirectoryOffset);
         }
 
-        public bool Read(out ImageHeader dst)
+        public bool Read(out T.ImageHeader dst)
             => Stream.TryRead(Offsets.HeaderOffset, out dst);
 
         public void Dispose()
@@ -75,11 +73,11 @@ namespace Z0
 
         void ReadImageOptionalHeader()
         {
-            if (Stream.TryRead(Offsets.OptionalHeaderOffset, out OptionalHeaderA optional))
+            if (Stream.TryRead(Offsets.OptionalHeaderOffset, out T.OptionalHeaderA optional))
             {
                 var is32Bit = optional.Magic == 0x010b;
                 Stream.SeekTo(Offsets.SpecificHeaderOffset);
-                var specific = default(OptionalHeaderS);
+                var specific = default(T.OptionalHeaderS);
                 if(is32Bit)
                     Read(n32, ref specific);
                 else
@@ -87,7 +85,7 @@ namespace Z0
             }
         }
 
-        public void Read(N32 arch, ref OptionalHeaderS dst)
+        public void Read(N32 arch, ref T.OptionalHeaderS dst)
         {
             dst.SizeOfStackReserve = Stream.Read<uint>();
             dst.SizeOfStackCommit = Stream.Read<uint>();
@@ -97,7 +95,7 @@ namespace Z0
             dst.NumberOfRvaAndSizes = Stream.Read<uint>();
         }
 
-        public void Read(N64 arch, ref OptionalHeaderS dst)
+        public void Read(N64 arch, ref T.OptionalHeaderS dst)
         {
             dst.SizeOfStackReserve = Stream.Read<ulong>();
             dst.SizeOfStackCommit = Stream.Read<ulong>();
@@ -107,12 +105,12 @@ namespace Z0
             dst.NumberOfRvaAndSizes = Stream.Read<uint>();
         }
 
-        public static DirectoryEntry[] ReadDataDirectories(ImageStream src, uint offset)
+        public static T.DirectoryEntry[] ReadDataDirectories(ImageStream src, uint offset)
         {
-            DirectoryEntry[] directories = new DirectoryEntry[ImageDataDirectoryCount];
+            T.DirectoryEntry[] directories = new T.DirectoryEntry[L.ImageDataDirectoryCount];
             src.SeekTo(offset);
             for (int i = 0; i < directories.Length; i++)
-                directories[i] = src.Read<DirectoryEntry>();
+                directories[i] = src.Read<T.DirectoryEntry>();
             return directories;
         }
     }
