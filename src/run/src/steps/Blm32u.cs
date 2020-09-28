@@ -60,6 +60,7 @@ namespace Z0
         static uint nand(uint a, uint b)
             => BL.nand(a,b);
 
+
         public uint Evaluate(uint a, uint b, BinaryBitLogicKind k)
         {
             switch(k)

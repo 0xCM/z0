@@ -16,7 +16,7 @@ namespace Z0
     partial class BitLogixOps
     {
         /// <summary>
-        /// Returns a kind-indentified ternary operator
+        /// Returns a kind-identified ternary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
         public static TernaryOp<Bit32> lookup(TLK kind)
@@ -125,5 +125,4 @@ namespace Z0
             }
         }
     }
-
 }

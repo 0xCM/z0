@@ -24,27 +24,27 @@ namespace Z0.Image
         /// <summary>
         /// Gets a set of COMIMAGE_FLAGS.
         /// </summary>
-        public COMIMAGE_FLAGS Flags 
-            => (COMIMAGE_FLAGS)_header.Flags;
+        public ComImageKind Flags
+            => (ComImageKind)_header.Flags;
 
-        public ushort MajorRuntimeVersion 
+        public ushort MajorRuntimeVersion
             => _header.MajorRuntimeVersion;
 
-        public ushort MinorRuntimeVersion 
+        public ushort MinorRuntimeVersion
             => _header.MinorRuntimeVersion;
 
         // Symbol table and startup information
-        public IMAGE_DATA_DIRECTORY Metadata 
+        public IMAGE_DATA_DIRECTORY Metadata
             => _header.MetaData;
 
-        public uint NativeEntryPoint 
-            => (Flags & COMIMAGE_FLAGS.NATIVE_ENTRYPOINT) 
-            == COMIMAGE_FLAGS.NATIVE_ENTRYPOINT 
+        public uint NativeEntryPoint
+            => (Flags & ComImageKind.NATIVE_ENTRYPOINT)
+            == ComImageKind.NATIVE_ENTRYPOINT
             ? _header.EntryPoint.RVA : throw new InvalidOperationException();
 
-        public uint ManagedEntryPoint 
-            => (Flags & COMIMAGE_FLAGS.NATIVE_ENTRYPOINT) 
-            != COMIMAGE_FLAGS.NATIVE_ENTRYPOINT 
+        public uint ManagedEntryPoint
+            => (Flags & ComImageKind.NATIVE_ENTRYPOINT)
+            != ComImageKind.NATIVE_ENTRYPOINT
             ? _header.EntryPoint.Token : throw new InvalidOperationException();
 
         /// <summary>
@@ -53,29 +53,29 @@ namespace Z0.Image
         /// System.Assembly.GetManifestResourceStream.  The meta data has a table that maps names to offsets into
         /// this blob, so logically the blob is a set of resources.
         /// </summary>
-        public IMAGE_DATA_DIRECTORY Resources 
+        public IMAGE_DATA_DIRECTORY Resources
             => _header.Resources;
 
         /// <summary>
         /// IL assemblies can be signed with a public-private key to validate who created it.  The signature goes
         /// here if this feature is used.
         /// </summary>
-        public IMAGE_DATA_DIRECTORY StrongNameSignature 
+        public IMAGE_DATA_DIRECTORY StrongNameSignature
             => _header.StrongNameSignature;
 
         /// <summary>
         /// Used for managed code that has unmanaged code inside of it (or exports methods as unmanaged entry points) .
         /// </summary>
-        public IMAGE_DATA_DIRECTORY VTableFixups 
+        public IMAGE_DATA_DIRECTORY VTableFixups
             => _header.VTableFixups;
 
-        public IMAGE_DATA_DIRECTORY ExportAddressTableJumps 
+        public IMAGE_DATA_DIRECTORY ExportAddressTableJumps
             => _header.ExportAddressTableJumps;
 
         /// <summary>
         /// This is <see langword="null"/> for ordinary IL images.  NGEN images it points at a CORCOMPILE_HEADER structure.
         /// </summary>
-        public IMAGE_DATA_DIRECTORY ManagedNativeHeader 
+        public IMAGE_DATA_DIRECTORY ManagedNativeHeader
             => _header.ManagedNativeHeader;
     }
 

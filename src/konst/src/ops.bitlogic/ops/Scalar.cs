@@ -1058,6 +1058,150 @@ namespace Z0
                 => ~ (a ^ b);
 
             /// <summary>
+            /// Computes the bitwise not of the left operand
+            /// </summary>
+            /// <param name="a">The left operand</param>
+            /// <param name="b">The right operand</param>
+            [MethodImpl(Inline), LNot]
+            public static sbyte lnot(sbyte a, sbyte b)
+                => not(a);
+
+            /// <summary>
+            /// Computes the bitwise not of the left operand
+            /// </summary>
+            /// <param name="a">The left operand</param>
+            /// <param name="b">The right operand</param>
+            [MethodImpl(Inline), LNot]
+            public static byte lnot(byte a, byte b)
+                => not(a);
+
+            /// <summary>
+            /// Computes the bitwise not of the left operand
+            /// </summary>
+            /// <param name="a">The left operand</param>
+            /// <param name="b">The right operand</param>
+            [MethodImpl(Inline), LNot]
+            public static short lnot(short a, short b)
+                => not(a);
+
+            /// <summary>
+            /// Computes the bitwise not of the left operand
+            /// </summary>
+            /// <param name="a">The left operand</param>
+            /// <param name="b">The right operand</param>
+            [MethodImpl(Inline), LNot]
+            public static ushort lnot(ushort a, ushort b)
+                => not(a);
+
+            /// <summary>
+            /// Computes the bitwise not of the left operand
+            /// </summary>
+            /// <param name="a">The left operand</param>
+            /// <param name="b">The right operand</param>
+            [MethodImpl(Inline), LNot]
+            public static int lnot(int a, int b)
+                => not(a);
+
+            /// <summary>
+            /// Computes the bitwise not of the left operand
+            /// </summary>
+            /// <param name="a">The left operand</param>
+            /// <param name="b">The right operand</param>
+            [MethodImpl(Inline), LNot]
+            public static uint lnot(uint a, uint b)
+                => not(a);
+
+            /// <summary>
+            /// Computes the bitwise not of the left operand
+            /// </summary>
+            /// <param name="a">The left operand</param>
+            /// <param name="b">The right operand</param>
+            [MethodImpl(Inline), LNot]
+            public static long lnot(long a, long b)
+                => not(a);
+
+            /// <summary>
+            /// Computes the bitwise not of the left operand
+            /// </summary>
+            /// <param name="a">The left operand</param>
+            /// <param name="b">The right operand</param>
+            [MethodImpl(Inline), LNot]
+            public static ulong lnot(ulong a, ulong b)
+                => not(a);
+
+            /// <summary>
+            /// Computes the bitwise not of the right operand
+            /// </summary>
+            /// <param name="a">The left operand</param>
+            /// <param name="b">The right operand</param>
+            [MethodImpl(Inline), RNot]
+            public static sbyte rnot(sbyte a, sbyte b)
+                => not(b);
+
+            /// <summary>
+            /// Computes the bitwise not of the right operand
+            /// </summary>
+            /// <param name="a">The left operand</param>
+            /// <param name="b">The right operand</param>
+            [MethodImpl(Inline), RNot]
+            public static byte rnot(byte a, byte b)
+                => not(b);
+
+            /// <summary>
+            /// Computes the bitwise not of the right operand
+            /// </summary>
+            /// <param name="a">The left operand</param>
+            /// <param name="b">The right operand</param>
+            [MethodImpl(Inline), RNot]
+            public static short rnot(short a, short b)
+                => not(b);
+
+            /// <summary>
+            /// Computes the bitwise not of the right operand
+            /// </summary>
+            /// <param name="a">The left operand</param>
+            /// <param name="b">The right operand</param>
+            [MethodImpl(Inline), RNot]
+            public static ushort rnot(ushort a, ushort b)
+                => not(b);
+
+            /// <summary>
+            /// Computes the bitwise not of the right operand
+            /// </summary>
+            /// <param name="a">The left operand</param>
+            /// <param name="b">The right operand</param>
+            [MethodImpl(Inline), RNot]
+            public static int rnot(int a, int b)
+                => not(b);
+
+            /// <summary>
+            /// Computes the bitwise not of the right operand
+            /// </summary>
+            /// <param name="a">The left operand</param>
+            /// <param name="b">The right operand</param>
+            [MethodImpl(Inline), RNot]
+            public static uint rnot(uint a, uint b)
+                => not(b);
+
+            /// <summary>
+            /// Computes the bitwise not of the right operand
+            /// </summary>
+            /// <param name="a">The left operand</param>
+            /// <param name="b">The right operand</param>
+            [MethodImpl(Inline), RNot]
+            public static long rnot(long a, long b)
+                => not(b);
+
+            /// <summary>
+            /// Computes the bitwise not of the right operand
+            /// </summary>
+            /// <param name="a">The left operand</param>
+            /// <param name="b">The right operand</param>
+            [MethodImpl(Inline), RNot]
+            public static ulong rnot(ulong a, ulong b)
+                => not(b);
+
+            /// <summary>
             /// Computes the bitwise select of the operands
             /// </summary>
             /// <param name="a">The first operand</param>

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static LogicSig;
 
     using ULK = UnaryBitLogicKind;
 
@@ -27,7 +26,6 @@ namespace Z0
                 return Bit32.On;
             else
                 return Unsupported.raise<Bit32>(kind.ToString());
-                //return Unsupported.raise<bit>(sig(kind));
         }
     }
 }

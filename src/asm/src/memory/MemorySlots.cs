@@ -15,6 +15,23 @@ namespace Z0
     /// </summary>
     public readonly struct MemorySlots
     {
+        public static string[] format<E>(MemorySlots<E> src)
+            where E : unmanaged, Enum
+        {
+            var dst = sys.alloc<string>(src.Length);
+            format(src,dst);
+            return dst;
+        }
+
+        public static void format<E>(MemorySlots<E> src, Span<string> dst)
+            where E : unmanaged, Enum
+        {
+            var count = src.Length;
+            ref readonly var lead = ref src.Lookup(default(E));
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = skip(lead,i).Format();
+        }
+
         readonly SegRef[] Data;
 
         [MethodImpl(Inline)]
