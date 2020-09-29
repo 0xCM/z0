@@ -50,7 +50,7 @@ namespace Z0
             var count = src.Length;
             var located = span<LocatedMethod>(count);
             for(var i=0u; i<count; i++)
-                seek(located,i) = FunctionDynamic.jit(skip(src,i).Method);
+                seek(located,i) = ApiDynamic.jit(skip(src,i).Method);
             return located;
         }
 
@@ -93,7 +93,7 @@ namespace Z0
 
         public static ApiCaptureBlock capture(IdentifiedMethod src, Span<byte> buffer)
         {
-            var located = FunctionDynamic.jit(src.Method);
+            var located = ApiDynamic.jit(src.Method);
             var summary = capture(buffer, src.Id, located.Address);
             return DefineMember(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
         }

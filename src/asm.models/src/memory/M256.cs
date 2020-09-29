@@ -10,7 +10,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public struct M256 : IAsmMemoryArg<M256,W256,Cell256>
+    public struct M256 : IMemoryArg<M256,W256,Cell256>
     {
         public Cell256 Data;
 

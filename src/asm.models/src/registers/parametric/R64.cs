@@ -12,19 +12,16 @@ namespace Z0.Asm
     public readonly struct R64<R> : IRegister<R64<R>,W64,ulong>
         where R : unmanaged, IRegister
     {
-        public readonly ulong Data;
+        public ulong Content {get;}
 
         [MethodImpl(Inline)]
         public R64(ulong value)
-            => Data = value;
+            => Content = value;
 
         public RegisterKind Kind
         {
             [MethodImpl(Inline)]
             get => default(R).Kind;
         }
-
-        ulong IAsmArg<ulong>.Content
-            => Data;
     }
 }

@@ -16,18 +16,18 @@ namespace Z0
         /// </summary>
         public readonly struct AsmKeyword
         {
-            public readonly AsmKeywordKey Key;
+            public readonly AsmKeywordCode Key;
 
             [MethodImpl(Inline)]
-            public AsmKeyword(AsmKeywordKey key)
+            public AsmKeyword(AsmKeywordCode key)
                 => Key = key;
 
             [MethodImpl(Inline)]
-            public static implicit operator AsmKeyword(AsmKeywordKey src)
+            public static implicit operator AsmKeyword(AsmKeywordCode src)
                 => new AsmKeyword(src);
 
             [MethodImpl(Inline)]
-            public static implicit operator AsmKeywordKey(AsmKeyword src)
+            public static implicit operator AsmKeywordCode(AsmKeyword src)
                 => src.Key;
         }
     }

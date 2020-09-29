@@ -2,30 +2,30 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
-    public interface IAsmMemoryArg : IAsmArg
+    public interface IMemoryArg : IAsmArg
     {
         AsmOperandKind IAsmArg.OpKind
             => AsmOperandKind.M;
     }
 
-    public interface IAsmMemoryArg<T> : IAsmMemoryArg, IAsmArg<T>
+    public interface IMemoryArg<T> : IMemoryArg, IAsmArg<T>
         where T : unmanaged
     {
 
     }
 
-    public interface IAsmMemoryArg<W,T> : IAsmMemoryArg<T>, IAsmArg<W,T>
+    public interface IMemoryArg<W,T> : IMemoryArg<T>, IAsmArg<W,T>
         where T : unmanaged
         where W : unmanaged, ITypeWidth
     {
 
     }
 
-    public interface IAsmMemoryArg<F,W,T> : IAsmMemoryArg<W,T>, IAsmArg<F,W,T>
+    public interface IMemoryArg<F,W,T> : IMemoryArg<W,T>, IAsmArg<F,W,T>
         where T : unmanaged
-        where F : unmanaged, IAsmMemoryArg<F,W,T>
+        where F : unmanaged, IMemoryArg<F,W,T>
         where W : unmanaged, ITypeWidth
     {
 

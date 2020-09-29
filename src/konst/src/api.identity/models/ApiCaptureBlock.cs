@@ -27,7 +27,7 @@ namespace Z0
 
         public ExtractTermCode TermCode;
 
-        public CilCode Cil;
+        public CilMethod Cil;
 
         [MethodImpl(Inline)]
         public ApiCaptureBlock(OpIdentity id, MethodInfo method, BasedCodeBlock extracted, BasedCodeBlock parsed, ExtractTermCode term)
@@ -38,7 +38,7 @@ namespace Z0
             insist(extracted.Base, parsed.Base);
             OpUri = OpUri.hex(ApiQuery.uri(method.DeclaringType), method.Name, id);
             TermCode = term;
-            Cil = FunctionDynamic.cil(method);
+            Cil = ApiDynamic.cil(method);
         }
 
         public ReadOnlySpan<byte> InputData

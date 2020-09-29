@@ -13,7 +13,7 @@ namespace Z0.Asm
     /// Captures an operand
     /// </summary>
     public struct AsmArgs<A> : IAsmArgs<AsmArgs<A>,A>
-        where A : unmanaged, IAsmArg
+        where A : unmanaged
     {
         public A _A;
 
@@ -36,8 +36,8 @@ namespace Z0.Asm
     /// Captures an operand pair
     /// </summary>
     public struct AsmArgs<A,B>: IAsmArgs<AsmArgs<A,B>,A,B>
-        where A : unmanaged, IAsmArg
-        where B : unmanaged, IAsmArg
+        where A : unmanaged
+        where B : unmanaged
     {
         A _A;
 
@@ -82,9 +82,9 @@ namespace Z0.Asm
     /// Captures an operand triple
     /// </summary>
     public struct AsmArgs<A,B,C> : IAsmArgs<AsmArgs<A,B,C>,A,B,C>
-        where A : unmanaged, IAsmArg
-        where B : unmanaged, IAsmArg
-        where C : unmanaged, IAsmArg
+        where A : unmanaged
+        where B : unmanaged
+        where C : unmanaged
     {
         A _A;
 
@@ -135,10 +135,10 @@ namespace Z0.Asm
     /// Captures an operand quartet
     /// </summary>
     public struct AsmArgs<A,B,C,D> : IAsmArgs<AsmArgs<A,B,C,D>,A,B,C,D>
-        where A : unmanaged, IAsmArg<A>
-        where B : unmanaged, IAsmArg<B>
-        where C : unmanaged, IAsmArg<C>
-        where D : unmanaged, IAsmArg<D>
+        where A : unmanaged
+        where B : unmanaged
+        where C : unmanaged
+        where D : unmanaged
     {
         A _A;
 

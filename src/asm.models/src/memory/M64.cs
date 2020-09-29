@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public struct M64 : IAsmMemoryArg<M64,W64,ulong>
+    public struct M64 : IMemoryArg<M64,W64,ulong>
     {
         public ulong Data;
 

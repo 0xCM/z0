@@ -12,21 +12,16 @@ namespace Z0.Asm
     public readonly struct R8<R> : IRegister<R8<R>,W8,byte>
         where R : unmanaged, IRegister
     {
-        public readonly byte Data;
+        public byte Content {get;}
 
         [MethodImpl(Inline)]
         public R8(byte value)
-        {
-            Data = value;
-        }
+            => Content = value;
 
         public RegisterKind Kind
         {
             [MethodImpl(Inline)]
             get => default(R).Kind;
         }
-
-        byte IAsmArg<byte>.Content
-            => Data;
     }
 }

@@ -10,7 +10,7 @@
   </ItemGroup>
 
    <ItemGroup>
-    <Compile Include="lib/**/*.*" />
+    <Compile Include="lib/**/*.cs" />
    </ItemGroup>
 
   <ItemGroup>

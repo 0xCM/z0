@@ -12,19 +12,16 @@ namespace Z0.Asm
     public readonly struct R16<R> : IRegister<R16<R>,W16,ushort>
         where R : unmanaged, IRegister
     {
-        public readonly ushort Data;
+        public ushort Content {get;}
 
         [MethodImpl(Inline)]
         public R16(ushort value)
-            => Data = value;
+            => Content = value;
 
         public RegisterKind Kind
         {
             [MethodImpl(Inline)]
             get => default(R).Kind;
         }
-
-        ushort IAsmArg<ushort>.Content
-            => Data;
     }
 }

@@ -4,7 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-
     /// <summary>
     /// Characterizes a model of an unmanaged type
     /// </summary>
@@ -13,5 +12,4 @@ namespace Z0
         ClrTypeKind IClrType.Kind
             => ClrTypeKind.Struct;
     }
-
 }

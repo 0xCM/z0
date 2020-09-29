@@ -12,12 +12,6 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost("reflex.extensions")]
-    public static partial class RXTend
-    {
-
-    }
-
     [ApiHost]
     public readonly partial struct Reflex
     {

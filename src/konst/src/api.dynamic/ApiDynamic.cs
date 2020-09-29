@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
 
     [ApiHost]
-    public readonly struct FunctionDynamic
+    public readonly struct ApiDynamic
     {
         /// <summary>
         /// Finds the magical function pointer for a dynamic method
@@ -64,26 +64,26 @@ namespace Z0
             => src.Tag<SizeAttribute>().MapValueOrDefault(a => (ByteSize)a.Size, ByteSize.Empty);
 
         [MethodImpl(Inline), Op]
-        public static CilCode cil(DynamicMethod src)
-            => new CilCode(src.Name, bytes(src), src.GetMethodImplementationFlags());
+        public static CilMethod cil(DynamicMethod src)
+            => new CilMethod(src.Name, bytes(src), src.GetMethodImplementationFlags());
 
         [MethodImpl(Inline), Op]
-        public static CilCode cil(MethodInfo src)
+        public static CilMethod cil(MethodInfo src)
         {
             var body = src.GetMethodBody()?.GetILAsByteArray() ?? sys.empty<byte>();
-            return new CilCode(src.Name, body, src.GetMethodImplementationFlags());
+            return new CilMethod(src.Name, body, src.GetMethodImplementationFlags());
         }
 
         [MethodImpl(Inline), Op]
-        public static CilCode cil(MemoryAddress @base, OpUri uri, MethodInfo src)
-            => new CilCode(@base, uri, src.GetMethodBody().GetILAsByteArray(), src.GetMethodImplementationFlags());
+        public static CilMethod cil(MemoryAddress @base, OpUri uri, MethodInfo src)
+            => new CilMethod(@base, uri, src.GetMethodBody().GetILAsByteArray(), src.GetMethodImplementationFlags());
 
         [MethodImpl(Inline), Op]
-        public static CilCode cil(DynamicDelegate src)
+        public static CilMethod cil(DynamicDelegate src)
             => cil(src.TargetMethod);
 
         [MethodImpl(Inline)]
-        public static CilCode cil<D>(DynamicDelegate<D> src)
+        public static CilMethod cil<D>(DynamicDelegate<D> src)
             where D : Delegate
                 => cil(src.Untyped);
 

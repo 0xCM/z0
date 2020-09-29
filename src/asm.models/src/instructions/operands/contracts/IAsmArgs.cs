@@ -9,7 +9,7 @@ namespace Z0
 
     public interface IAsmArgs<F,A> : IAsmArgSequence<F,N1>
         where F : struct, IAsmArgs<F,A>
-        where A : IAsmArg
+        where A : unmanaged
     {
         A this[N0 n] {get;}
 
@@ -18,8 +18,8 @@ namespace Z0
 
     public interface IAsmArgs<F,A,B> : IAsmArgSequence<F,N2>
         where F : struct, IAsmArgs<F,A,B>
-        where A : IAsmArg
-        where B : IAsmArg
+        where A : unmanaged
+        where B : unmanaged
     {
 
         A this[N0 n] {get;}
@@ -34,9 +34,9 @@ namespace Z0
 
     public interface IAsmArgs<F,A,B,C> : IAsmArgSequence<F,N3>
         where F : struct, IAsmArgs<F,A,B,C>
-        where A : IAsmArg
-        where B : IAsmArg
-        where C : IAsmArg
+        where A : unmanaged
+        where B : unmanaged
+        where C : unmanaged
     {
         A this[N0 n] {get;}
 
@@ -53,10 +53,10 @@ namespace Z0
 
     public interface IAsmArgs<F,A,B,C,D> : IAsmArgSequence<F,N4>
         where F : struct, IAsmArgs<F,A,B,C,D>
-        where A : IAsmArg
-        where B : IAsmArg
-        where C : IAsmArg
-        where D : IAsmArg
+        where A : unmanaged
+        where B : unmanaged
+        where C : unmanaged
+        where D : unmanaged
     {
         A this[N0 n] {get;}
 

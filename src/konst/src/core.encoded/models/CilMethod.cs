@@ -10,9 +10,9 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct CilCode : IEncoded
+    public readonly struct CilMethod
     {
-        public const string FormatPattern = "{0,-16} | {1, -80} | {2}";
+        const string FormatPattern = "{0,-16} | {1, -80} | {2}";
 
         /// <summary>
         /// The code's base address
@@ -32,7 +32,7 @@ namespace Z0
         public readonly MethodImplAttributes ImplSpec;
 
         [MethodImpl(Inline)]
-        public CilCode(MemoryAddress @base, OpUri uri, BinaryCode data, MethodImplAttributes impl)
+        public CilMethod(MemoryAddress @base, OpUri uri, BinaryCode data, MethodImplAttributes impl)
         {
             Base = @base;
             Name = uri.Format();
@@ -41,7 +41,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public CilCode(string name, BinaryCode data, MethodImplAttributes impl)
+        public CilMethod(string name, BinaryCode data, MethodImplAttributes impl)
         {
             Base = 0;
             Name = name;
@@ -49,9 +49,8 @@ namespace Z0
             ImplSpec = impl;
         }
 
-        BinaryCode IEncoded.Encoded
-            => Encoded;
 
+        [MethodImpl(Inline)]
         public string Format()
             => text.format(FormatPattern, Base, Name, Encoded.Format());
 

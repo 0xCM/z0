@@ -19,18 +19,5 @@ namespace Z0
 
             mul = AsciMathCode.Mul
         }
-
-        public enum AsmOperatorKey : byte
-        {
-            None = 0,
-
-            add,
-
-            sub,
-
-            mul,
-
-            deref,
-        }
     }
 }

@@ -31,8 +31,8 @@ namespace Z0
             var name = nameof(gvec.vbsll);
             var src = typeof(gvec).DeclaredMethods().WithName(name).OfKind(v128).Single();
             var op = Dynop.EmbedVUnaryOpImm(vk128<uint>(), Z0.Identity.identify(src), src, imm8);
-            var handle = FunctionDynamic.handle(op.Target);
-            var dst = FunctionDynamic.method(handle);
+            var handle = ApiDynamic.handle(op.Target);
+            var dst = ApiDynamic.method(handle);
             Claim.eq(dst.Name, name);
         }
 

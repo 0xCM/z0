@@ -28,7 +28,7 @@ namespace Z0
 
         public ApiHostUri HostUri {get;}
 
-        public CilCode Cil {get;}
+        public CilMethod Cil {get;}
 
         public ApiMember Zero
             => Empty;
@@ -42,7 +42,7 @@ namespace Z0
             Method = z.insist(method);
             Address = address;
             HostUri = OpUri.Host;
-            Cil = FunctionDynamic.cil(method);
+            Cil = ApiDynamic.cil(method);
         }
 
         [MethodImpl(Inline)]
@@ -54,7 +54,7 @@ namespace Z0
             Method = method.Method;
             Address = method.Address;
             HostUri = OpUri.Host;
-            Cil = FunctionDynamic.cil(Method);
+            Cil = ApiDynamic.cil(Method);
         }
 
         [MethodImpl(Inline)]

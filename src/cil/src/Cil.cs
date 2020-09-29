@@ -14,7 +14,7 @@ namespace Z0
     [ApiHost("api")]
     public readonly partial struct Cil
     {
-        readonly OpCodeDataset Data;
+        readonly CilOpCodeDataset Data;
 
         [MethodImpl(Inline), Op]
         public static CilFunctionFormatter formatter()
@@ -27,21 +27,16 @@ namespace Z0
         [Op]
         public static Cil init()
         {
-            var buffer = sys.alloc<CilOpCode>(300);
+            var buffer = sys.alloc<CilOpCodeRow>(300);
             ref var dst = ref first(span(buffer));
             load(ref dst);
             return new Cil(buffer);
         }
 
         [MethodImpl(Inline)]
-        Cil(CilOpCode[] src)
+        Cil(CilOpCodeRow[] src)
         {
             Data = src;
         }
-    }
-
-    public readonly partial struct DnCilModel
-    {
-
     }
 }

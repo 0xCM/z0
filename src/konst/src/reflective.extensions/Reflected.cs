@@ -10,6 +10,12 @@ namespace Z0
     using static Konst;
     using static z;
 
+    [ApiHost("reflected.extensions")]
+    public static partial class RXTend
+    {
+
+    }
+
     [ApiHost]
     public partial struct Reflected
     {

@@ -6,7 +6,7 @@ namespace Z0
 {
 	using System.Collections.Generic;
 
-    partial struct DnCilModel
+    public partial struct DnCilModel
     {
         /// <summary>
         /// A CIL opcode

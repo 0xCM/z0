@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public struct M512 : IAsmMemoryArg<M512,W512,Cell512>
+    public struct M512 : IMemoryArg<M512,W512,Cell512>
     {
         public Cell512 Data;
 

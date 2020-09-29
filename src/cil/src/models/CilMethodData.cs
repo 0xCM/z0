@@ -10,8 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct ImageMethodBody
+    public struct CilMethodData
     {
         public BinaryCode Sig;
 

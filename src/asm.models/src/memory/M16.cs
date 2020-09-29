@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public struct M16 : IAsmMemoryArg<M16,W16,ushort>
+    public struct M16 : IMemoryArg<M16,W16,ushort>
     {
         public ushort Data;
 

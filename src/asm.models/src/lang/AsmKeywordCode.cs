@@ -15,7 +15,7 @@ namespace Z0
         /// Defines surrogate identifiers for (actual) asm keywords, registers, instructions and other syntax that may appear
         /// in a raw x86 assembly language statement
         /// </summary>
-        public enum AsmKeywordKey : ushort
+        public enum AsmKeywordCode : ushort
         {
             None = 0,
 

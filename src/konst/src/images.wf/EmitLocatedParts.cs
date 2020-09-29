@@ -61,9 +61,6 @@ namespace Z0
                 using var step = h.Step(Wf, out var _);
                 step.Run();
 
-                // using var step = new EmitImageContent(Wf, new EmitImageContentHost(), part);
-                // step.Run();
-
                 seek(Index,i) = new LocatedPart(part, @base, (uint)(step.OffsetAddress - @base));
              }
 

@@ -5,40 +5,23 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Reflection.Emit;
     using System.Reflection.Metadata;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
 
-    using M = CilModel;
     using C = System.Reflection.Metadata.ILOpCode;
 
-    using CT = CilModel.OpCodeType;
-    using OT = CilModel.OperandType;
-    using SB = CilModel.StackBehaviour;
+    using CT = CilOpCodeType;
+    using OT = CilOperandType;
+    using SB = CilStackBehaviour;
 
     partial struct Cil
     {
-        public readonly struct OpCodeDataset
-        {
-            public readonly TableSpan<CilOpCode> Data;
-
-            public static implicit operator OpCodeDataset(CilOpCode[] src)
-                => new OpCodeDataset(src);
-
-            [MethodImpl(Inline), Op]
-            public OpCodeDataset(CilOpCode[] src)
-            {
-                Data = src;
-            }
-        }
-
         [MethodImpl(Inline), Op]
-        public static CilOpCode pack(ILOpCode id, string name, M.OpCodeType type, M.OperandType optype, byte opcount, ushort code, M.StackBehaviour sb1, M.StackBehaviour sb2)
-            => new CilOpCode(id, name, type, optype, opcount, sb1, sb2);
+        public static CilOpCodeRow pack(ILOpCode id, string name, CilOpCodeType type, CilOperandType optype, byte opcount, ushort code, CilStackBehaviour sb1, CilStackBehaviour sb2)
+            => new CilOpCodeRow(id, name, type, optype, opcount, sb1, sb2);
 
         /// <summary>
         /// Populates an opcode dataset
@@ -46,7 +29,7 @@ namespace Z0
         /// <param name="dst"></param>
         /// <remarks>This implementation of this method was derived from test code in the System.Reflection.Metadata .net core repo</remarks>
         [Op]
-        public static uint load(ref CilOpCode dst)
+        public static uint load(ref CilOpCodeRow dst)
         {
             var i=0u;
             seek(dst,i++) = pack(C.Add, "add", CT.Primitive, OT.InlineNone, 1, 0x58, SB.Pop1_pop1, SB.Push1);

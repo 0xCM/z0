@@ -17,7 +17,7 @@ namespace Z0.Asm
         {
             public readonly byte Data;
 
-            byte IAsmArg<byte>.Content
+            byte IRegister<byte>.Content
                 => Data;
 
             [MethodImpl(Inline)]
@@ -42,7 +42,7 @@ namespace Z0.Asm
         {
             public readonly byte Data;
 
-            byte IAsmArg<byte>.Content
+            byte IRegister<byte>.Content
                 => Data;
 
             public R8 Generalized
@@ -68,7 +68,7 @@ namespace Z0.Asm
         {
             public readonly byte Data;
 
-            byte IAsmArg<byte>.Content
+            byte IRegister<byte>.Content
                 => Data;
 
             public R8 Generalized
@@ -94,7 +94,7 @@ namespace Z0.Asm
         {
             public readonly byte Data;
 
-            byte IAsmArg<byte>.Content
+            byte IRegister<byte>.Content
                 => Data;
 
             public R8 Generalized
@@ -121,7 +121,7 @@ namespace Z0.Asm
         {
             public readonly byte Data;
 
-            byte IAsmArg<byte>.Content
+            byte IRegister<byte>.Content
                 => Data;
 
             public R8 Generalized
@@ -147,7 +147,7 @@ namespace Z0.Asm
         {
             public readonly byte Data;
 
-            byte IAsmArg<byte>.Content
+            byte IRegister<byte>.Content
                 => Data;
 
             public R8 Generalized
@@ -174,7 +174,7 @@ namespace Z0.Asm
         {
             public readonly byte Data;
 
-            byte IAsmArg<byte>.Content
+            byte IRegister<byte>.Content
                 => Data;
 
             public R8 Generalized
@@ -200,7 +200,7 @@ namespace Z0.Asm
         {
             public readonly byte Data;
 
-            byte IAsmArg<byte>.Content
+            byte IRegister<byte>.Content
                 => Data;
 
             public R8 Generalized
@@ -226,7 +226,7 @@ namespace Z0.Asm
         {
             public readonly byte Data;
 
-            byte IAsmArg<byte>.Content
+            byte IRegister<byte>.Content
                 => Data;
 
             public R8 Generalized
@@ -253,7 +253,7 @@ namespace Z0.Asm
         {
             public readonly byte Data;
 
-            byte IAsmArg<byte>.Content
+            byte IRegister<byte>.Content
                 => Data;
 
             public R8 Generalized
@@ -275,7 +275,7 @@ namespace Z0.Asm
         {
             public readonly byte Data;
 
-            byte IAsmArg<byte>.Content
+            byte IRegister<byte>.Content
                 => Data;
 
             public R8 Generalized
@@ -297,7 +297,7 @@ namespace Z0.Asm
         {
             public readonly byte Data;
 
-            byte IAsmArg<byte>.Content
+            byte IRegister<byte>.Content
                 => Data;
 
             public R8 Generalized
@@ -320,7 +320,7 @@ namespace Z0.Asm
         {
             public readonly byte Data;
 
-            byte IAsmArg<byte>.Content
+            byte IRegister<byte>.Content
                 => Data;
 
             public R8 Generalized
@@ -342,7 +342,7 @@ namespace Z0.Asm
         {
             public readonly byte Data;
 
-            byte IAsmArg<byte>.Content
+            byte IRegister<byte>.Content
                 => Data;
 
             public R8 Generalized
@@ -365,7 +365,7 @@ namespace Z0.Asm
         {
             public readonly byte Data;
 
-            byte IAsmArg<byte>.Content
+            byte IRegister<byte>.Content
                 => Data;
 
             public R8 Generalized
@@ -388,7 +388,7 @@ namespace Z0.Asm
         {
             public readonly byte Data;
 
-            byte IAsmArg<byte>.Content
+            byte IRegister<byte>.Content
                 => Data;
 
             public R8 Generalized

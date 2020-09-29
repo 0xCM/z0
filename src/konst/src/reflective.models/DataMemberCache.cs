@@ -8,9 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.Collections.Concurrent;
-    using System.Collections.Generic;
 
-    using static ReflectionFlags;
     using static Konst;
 
     public readonly struct DataMemberCache
@@ -30,7 +28,7 @@ namespace Z0
             var backingFields = afquery.ToSet();
 
             var propertyidx = t.Properties().Instance().Select(x => (x.Name, x)).ToDictionary();
-            
+
             var candidates = propertyidx.Keys.Map(x =>
                     (prop: propertyidx[x], Name:  $"\u003C{x}\u003Ek__BackingField"));
             var autoprops = z.list<DataMember>();
@@ -39,7 +37,7 @@ namespace Z0
                 backingFields.TryGetFirst(f => f.Name == candidate.Name)
                             .OnSome(f => autoprops.Add(new DataMember(candidate.prop, f)));
             }
-            return autoprops.ToArray();       
+            return autoprops.ToArray();
         }
 
         /// <summary>
@@ -49,10 +47,10 @@ namespace Z0
         public static DataMember[] Lookup(Type src)
             => Index.GetOrAdd(src, t =>
             {
-                var members = z.list<DataMember>();        
+                var members = z.list<DataMember>();
 
                 members.AddRange(AutoProps(src));
-                
+
                 var fields = t.Fields().Instance().Select(x => new DataMember(x));
                 members.AddRange(fields);
                 var properties = t.Properties().Instance().Where(x => x.CanRead && x.CanWrite).Select(x => new DataMember(x));

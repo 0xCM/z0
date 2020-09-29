@@ -138,7 +138,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var parsed = ref skip(src,i);
-                var cil = FunctionDynamic.cil(parsed.Address, parsed.OpUri, parsed.Method);
+                var cil = ApiDynamic.cil(parsed.Address, parsed.OpUri, parsed.Method);
                 dst.WriteLine(cil.Format());
             }
 

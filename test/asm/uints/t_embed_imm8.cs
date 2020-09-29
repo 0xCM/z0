@@ -93,7 +93,7 @@ namespace Z0.Asm
             var src = typeof(gvec).DeclaredMethods().WithName(name).OfKind(K.v128).Single();
             var id = Z0.Identity.identify(src);
             var f = Dynop.EmbedVUnaryOpImm(K.vk128<uint>(), id, src, imm8);
-            var method = FunctionDynamic.method(FunctionDynamic.handle(f.Target));
+            var method = ApiDynamic.method(ApiDynamic.handle(f.Target));
             Claim.eq(method.Name, name);
 
             var capture = AsmCheck.Capture(id, f).Require();
@@ -108,7 +108,7 @@ namespace Z0.Asm
             var src = typeof(V0d).DeclaredMethods().WithName(name).OfKind(vKind).Single();
             var id = Z0.Identity.identify(src);
             var f = Dynop.EmbedVUnaryOpImm(vKind, id, src, imm8);
-            var method = FunctionDynamic.method(FunctionDynamic.handle(f.Target));
+            var method = ApiDynamic.method(ApiDynamic.handle(f.Target));
             Claim.eq(method.Name, name);
 
             var capture = AsmCheck.Capture(id, f).Require();

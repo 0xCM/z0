@@ -12,19 +12,16 @@ namespace Z0.Asm
     public readonly struct R32<R> : IRegister<R32<R>,W32,uint>
         where R : unmanaged, IRegister
     {
-        public readonly uint Data;
+        public uint Content {get;}
 
         [MethodImpl(Inline)]
         public R32(uint value)
-            => Data = value;
+            => Content = value;
 
         public RegisterKind Kind
         {
             [MethodImpl(Inline)]
             get => default(R).Kind;
         }
-
-        uint IAsmArg<uint>.Content
-            => Data;
     }
 }

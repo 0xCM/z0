@@ -5,33 +5,29 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Reflection.Emit;
     using System.Reflection.Metadata;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    using M = CilModel;
-
-    public struct CilOpCode
+    public struct CilOpCodeRow
     {
         public ILOpCode OpCode;
 
         public asci16 Name;
 
-        public M.OpCodeType CodeType;
+        public CilOpCodeType CodeType;
 
-        public M.OperandType ArgType;
+        public CilOperandType ArgType;
 
         public byte ArgCount;
 
-        public M.StackBehaviour Sb1;
+        public CilStackBehaviour Sb1;
 
-        public M.StackBehaviour Sb2;
+        public CilStackBehaviour Sb2;
 
         [MethodImpl(Inline)]
-        public CilOpCode(ILOpCode id, string name, M.OpCodeType type, M.OperandType optype, byte opcount, M.StackBehaviour sb1, M.StackBehaviour sb2)
+        public CilOpCodeRow(ILOpCode id, string name, CilOpCodeType type,CilOperandType optype, byte opcount, CilStackBehaviour sb1, CilStackBehaviour sb2)
         {
             OpCode = id;
             Name =  name;

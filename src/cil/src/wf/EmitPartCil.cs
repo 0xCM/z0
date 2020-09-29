@@ -65,17 +65,17 @@ namespace Z0
 
         uint Emit(IPart part, FilePath dst)
         {
-            Wf.Emitting<ImageMethodBody>(Host, FS.path(dst.Name));
+            Wf.Emitting<CilMethodData>(Host, FS.path(dst.Name));
 
-            var methods = PeTableReader.methods(FS.path(part.Owner.Location));
+            var methods = Cil.data(FS.path(part.Owner.Location));
             var count = (uint)methods.Length;
             using var writer = dst.Writer();
-            writer.WriteLine(ImageMethodBody.Header);
+            writer.WriteLine(CilMethodData.Header);
 
             for(var i=0u; i<count; i++)
                 writer.WriteLine(skip(methods,i).Format());
 
-            Wf.Emitted<ImageMethodBody>(Host, count, FS.path(dst.Name));
+            Wf.Emitted<CilMethodData>(Host, count, FS.path(dst.Name));
             return count;
         }
     }
