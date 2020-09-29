@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
     using static HexConst;
-    using static VectorKonst;
+    using static KonstBytes;
 
     partial struct z
     {

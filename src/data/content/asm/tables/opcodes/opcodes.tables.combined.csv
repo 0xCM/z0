@@ -1,6 +1,0 @@
-# AsmIdOcTCombined
----------------------------------------------------------------------------------------
-| Symbol | Meaning                                                                    |
-| Ev     | The ModR/M byte follows the opcode to specify a word or doubleword operand |
-| Gv     | The reg field of the ModR/M byte selects a general-purpose register        |
-| Ib     | Immediate data is encoded in the subsequent byte of the instruction.       |

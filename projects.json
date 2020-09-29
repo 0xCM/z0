@@ -285,5 +285,12 @@
 		"paths": [],
 		"group": "",
 		"enabled": true
+	},
+	{
+		"name": "other/ilspy",
+		"rootPath": "j:\\lang\\net\\ilspy",
+		"paths": [],
+		"group": "",
+		"enabled": true
 	}
 ]

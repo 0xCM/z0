@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static VectorKonst;
+    using static KonstBytes;
     partial struct z
     {
         /// <summary>

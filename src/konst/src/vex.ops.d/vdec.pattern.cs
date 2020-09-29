@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-       
-    using static Konst; 
-    using static VectorKonst;
-    
+
+    using static Konst;
+    using static KonstBytes;
+
     partial struct z
     {
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Integers)]
         public  static Vector256<T> vdec<T>(N256 w)
             where T : unmanaged
-        {            
+        {
             if(typeof(T) == typeof(byte) || typeof(T) == typeof(sbyte))
                 return vload<T>(w,Dec256x8u);
             else if(typeof(T) == typeof(ushort) || typeof(T) == typeof(short))
@@ -53,6 +53,6 @@ namespace Z0
                 return vload<T>(w,Dec256x64u);
             else
                 throw no<T>();
-        }            
+        }
     }
 }

@@ -160,6 +160,7 @@
         "PADDW",
         "PALIGNR",
         "PAND",
+        "PAVGB",
         "PAVGW",
         "PBLENDVB",
         "PBLENDW",

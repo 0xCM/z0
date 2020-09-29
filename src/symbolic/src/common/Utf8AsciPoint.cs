@@ -10,10 +10,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     /// <summary>
-    /// Represents the least 8 bits of a unicode code point which, by definition of the encoding,
-    /// is equivalent to the 7 ascii bits.
+    /// Represents the least 8 bits of a unicode code point which, by definition of the encoding, is equivalent to the 7 ascii bits.
     /// </summary>
     public readonly struct Utf8AsciPoint : IEquatable<Utf8AsciPoint>, IComparable<Utf8AsciPoint>
     {
@@ -23,6 +22,7 @@ namespace Z0
 
         public static Utf8AsciPoint MaxValue => From(127);
 
+
         public static IEnumerable<Utf8AsciPoint> All
         {
             get
@@ -30,8 +30,8 @@ namespace Z0
                 for(var i=0; i <= 127; i++)
                     yield return From(i);
             }
-        }        
-        
+        }
+
         [MethodImpl(Inline)]
         public static Utf8AsciPoint operator &(Utf8AsciPoint a, Utf8AsciPoint b)
             => From(a.Code & b.Code);
@@ -65,7 +65,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Utf8AsciPoint operator +(Utf8AsciPoint a, Utf8AsciPoint b)
             => From((a.Code + b.Code) % 128);
-                    
+
         [MethodImpl(Inline)]
         public static bool operator == (Utf8AsciPoint a, Utf8AsciPoint b)
             => a.Code == b.Code;
@@ -97,7 +97,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator byte (Utf8AsciPoint src)
             => src.Code;
-    
+
         [MethodImpl(Inline)]
         internal static Utf8AsciPoint From(int src)
             => new Utf8AsciPoint((byte)src);
@@ -108,7 +108,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public char ToChar()
-            => (char)Code;          
+            => (char)Code;
 
         public bool IsSymbol
         {
@@ -173,7 +173,7 @@ namespace Z0
             => Code.GetHashCode();
 
 
-        public override string ToString() 
+        public override string ToString()
         {
             var num = Code.ToString("0x");
             var str = IsControl ? "___"  : $"'{ToChar()}'";

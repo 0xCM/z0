@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static VectorKonst;
+    using static KonstBytes;
 
     partial class VKonst
     {
