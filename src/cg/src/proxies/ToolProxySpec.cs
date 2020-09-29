@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public struct ToolProxy
+    public struct ToolProxySpec
     {
         public string Name;
 
@@ -20,7 +20,7 @@ namespace Z0
         public FS.FilePath TargetPath;
 
         [MethodImpl(Inline)]
-        public ToolProxy(string name, FS.FilePath src, FS.FolderPath dst)
+        public ToolProxySpec(string name, FS.FilePath src, FS.FolderPath dst)
         {
             Name = name;
             Source = src;

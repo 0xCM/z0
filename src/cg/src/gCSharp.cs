@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using Microsoft.CodeAnalysis;
     using Microsoft.CodeAnalysis.CSharp;
-    
-    public readonly struct CodeGen
+
+    public readonly struct gCSharp
     {
         public static PortableExecutableReference pe<T>()
             => PortableExecutableReference.CreateFromFile(typeof(T).Assembly.Location);
@@ -24,5 +24,11 @@ namespace Z0
 
         public static SyntaxTree parse(string src)
             => CSharpSyntaxTree.ParseText(src);
+
+        public static CSharpCompilation compilation(string name, MetadataReference[] refs)
+            => compilation(name).AddReferences(refs);
+
+        public static CSharpCompilation compilation(string name, MetadataReference[] refs, params SyntaxTree[] syntax)
+            => compilation(name,refs).AddSyntaxTrees(syntax);
     }
 }

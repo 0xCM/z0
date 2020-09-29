@@ -26,7 +26,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static WfHost create()
+        public static new WfHost create()
         {
             var host = new EmitImageSummariesHost();
             host.Source = Process.GetCurrentProcess().Modules.Cast<ProcessModule>().Map(ProcessImages.locate).OrderBy(x => x.BaseAddress);;

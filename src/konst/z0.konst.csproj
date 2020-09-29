@@ -10,5 +10,4 @@
     <ProjectReference Include="$(Data)" />
   </ItemGroup>
 
-
 </Project>
