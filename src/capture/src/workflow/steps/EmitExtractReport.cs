@@ -5,62 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static z;
+    using static Flow;
 
-    using Z0.Asm;
-
-    public ref struct EmitExtractReport
+    [WfHost]
+    public sealed class EmitExtractReport : WfHost<EmitExtractReport>
     {
-        readonly IWfShell Wf;
-
-        readonly EmitExtractReportHost Host;
-
-        readonly ApiHostUri Uri;
-
-        readonly ApiMemberExtract[] Source;
-
-        readonly FS.FilePath Target;
-
-        ApiExtractReport Artifact;
-
-        public ApiExtractReport Report
-            => Artifact;
-
-        [MethodImpl(Inline)]
-        public EmitExtractReport(IWfShell wf,  EmitExtractReportHost host, ApiHostUri uri, ApiMemberExtract[] data, FS.FilePath dst)
-        {
-            Wf = wf;
-            Host = host;
-            Uri = uri;
-            Source = data;
-            Target = dst;
-            Artifact = default;
-            Wf.Created(Host);
-        }
-
-        public void Dispose()
-        {
-            Wf.Disposed(Host);
-        }
-
-        public void Run()
-        {
-            try
-            {
-                Artifact = ApiExtractReport.Create(Uri, Source);
-                Wf.Raise(new ExtractReportCreated(Host, Uri, Artifact.RecordCount, Wf.Ct));
-                var result = Report.Save(FilePath.Define(Target.Name));
-                if(result)
-                    Wf.Raise(new ExtractReportSaved(Host, Artifact.RecordCount, Target, Wf.Ct));
-                else
-                    Wf.Error(Host, "Unable to save extract report");
-            }
-            catch(Exception e)
-            {
-                Wf.Error(Host, e);
-            }
-        }
+        protected override void Execute(IWfShell shell)
+            => throw missing();
     }
 }

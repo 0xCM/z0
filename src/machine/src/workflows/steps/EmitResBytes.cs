@@ -31,14 +31,14 @@ namespace Z0
             Host = host;
             SourceDir = FS.dir(context.Paths.AppCaptureRoot.Name);
             TargetDir = FS.dir((context.Paths.ResourceRoot + FolderName.Define(ProjectName)).Name);
-            Archive = ApiArchives.hex(FS.dir(SourceDir.Name));
+            Archive = ApiHexArchives.create(FS.dir(SourceDir.Name));
             Wf.Created(Host);
         }
 
         public void Run()
         {
             Wf.Running(Host, flow(SourceDir, TargetDir));
-            var archive = ApiArchives.hex(FS.dir(SourceDir.Name));
+            var archive = ApiHexArchives.create(FS.dir(SourceDir.Name));
             var indices = archive.Indices();
             foreach(var index in indices)
             {

@@ -6,16 +6,16 @@ namespace Z0
 {
     using System;
 
-    using static z;
-    using static Flow;
-
     [WfHost]
-    public sealed class CaptureApiHostsHost : WfHost<CaptureApiHostsHost>
+    public sealed class EmitCodeBlockReport : WfHost<EmitCodeBlockReport>
     {
-        public static WfStepId StepId => step(typeof(CaptureApiHosts));
+        public static EmitCodeBlockReport create()
+            => new EmitCodeBlockReport();
 
         protected override void Execute(IWfShell wf)
-            => throw missing();
+        {
+            using var step = new EmitCodeBlockReportStep(wf, this);
+            step.Run();
+        }
     }
-
 }

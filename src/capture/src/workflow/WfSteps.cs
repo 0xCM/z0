@@ -9,35 +9,6 @@ namespace Z0
     using static z;
     using static Flow;
 
-    [WfHost]
-    public sealed class SpecializeImmediatesHost : WfHost<SpecializeImmediatesHost>
-    {
-        protected override void Execute(IWfShell wf)
-            => throw missing();
-    }
-
-    [WfHost]
-    public sealed class ManageCaptureHost : WfHost<ManageCaptureHost>
-    {
-        protected override void Execute(IWfShell wf)
-            => throw missing();
-    }
-
-
-    [WfHost]
-    public sealed class EmitX86HexHost : WfHost<EmitX86HexHost>
-    {
-        protected override void Execute(IWfShell wf)
-            => throw missing();
-    }
-
-    [WfHost]
-    public sealed class MatchEmissionsHost : WfHost<MatchEmissionsHost>
-    {
-        protected override void Execute(IWfShell wf)
-            => throw missing();
-    }
-
     [Step]
     public sealed class EvaluateStep : WfHost<EvaluateStep>
     {
@@ -46,24 +17,11 @@ namespace Z0
     }
 
     [Step]
-    public sealed class EmitImmSpecialsStep : WfHost<EmitImmSpecialsStep>
+    public sealed class SpecializeImm : WfHost<SpecializeImm>
     {
         public static WfStepId StepId
-            => Flow.step<EmitImmSpecialsStep>();
+            => Flow.step<SpecializeImm>();
     }
 
-    [Step]
-    public readonly struct ManagePartCaptureStep : IWfStep<ManagePartCaptureStep>
-    {
-        public const string StepName = nameof(CaptureParts);
 
-        public static WfStepId StepId => step<ManagePartCaptureStep>();
-    }
-
-    [Step]
-    public readonly struct MatchAddressesStep : IWfStep<MatchAddressesStep>
-    {
-        public static WfStepId StepId
-            => step<MatchAddressesStep>();
-    }
 }

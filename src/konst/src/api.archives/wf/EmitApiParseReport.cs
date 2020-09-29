@@ -18,14 +18,14 @@ namespace Z0
 
         readonly ApiHostUri Uri;
 
-        readonly ApiMemberCodeTable Source;
+        readonly ApiMemberCodeBlocks Source;
 
         readonly FS.FilePath Target;
 
         public Span<ApiParseBlock> Emitted;
 
         [MethodImpl(Inline)]
-        public EmitApiParseReport(IWfShell wf, WfHost host, ApiHostUri uri, ApiMemberCodeTable src, FS.FilePath dst)
+        public EmitApiParseReport(IWfShell wf, WfHost host, ApiHostUri uri, ApiMemberCodeBlocks src, FS.FilePath dst)
         {
             Wf = wf;
             Host = host;

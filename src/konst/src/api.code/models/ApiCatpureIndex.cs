@@ -90,7 +90,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ApiPartCodeBlocks PartCodeBlocks(PartId id)
-            => ApiArchives.combine(id, Hosts.Map(HostCodeBlocks));
+            => ApiHexArchives.combine(id, Hosts.Map(HostCodeBlocks));
 
         public ApiCodeBlock this[MemoryAddress location]
         {

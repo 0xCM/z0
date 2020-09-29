@@ -29,7 +29,6 @@ namespace Z0.Asm
         ICaptureCore ICaptureServiceProxy.CaptureService
             => Context.CaptureCore;
 
-
         IPartCapturePaths CaptureArchive(FolderPath root)
             => ApiArchives.capture(root);
 

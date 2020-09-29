@@ -12,16 +12,16 @@ namespace Z0
     /// <summary>
     /// Defines a sequence of <see cref='ApiMemberCode'/> records
     /// </summary>
-    public readonly struct ApiMemberCodeTable : ITableSpan<ApiMemberCode>
+    public readonly struct ApiMemberCodeBlocks : ITableSpan<ApiMemberCode>
     {
         readonly TableSpan<ApiMemberCode> Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator ApiMemberCodeTable(ApiMemberCode[] src)
-            => new ApiMemberCodeTable(src);
+        public static implicit operator ApiMemberCodeBlocks(ApiMemberCode[] src)
+            => new ApiMemberCodeBlocks(src);
 
         [MethodImpl(Inline)]
-        public ApiMemberCodeTable(ApiMemberCode[] src)
+        public ApiMemberCodeBlocks(ApiMemberCode[] src)
             => Data = src;
 
         public ReadOnlySpan<ApiMemberCode> View

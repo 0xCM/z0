@@ -58,7 +58,7 @@ namespace Z0
 
         void ListApiHex()
         {
-            var archive = ApiArchives.hex(Wf);
+            var archive = ApiHexArchives.create(Wf);
             var listing = archive.List();
             if(listing.Count == 0)
                 Wf.Warn(Id, $"No files found in archive with root {archive.Root}");
@@ -72,7 +72,7 @@ namespace Z0
 
         ApiCodeBlockInfo[] DescribeCodeBlocks()
         {
-            var archive = ApiArchives.hex(Wf);
+            var archive = ApiHexArchives.create(Wf);
             var files = archive.List();
             var dst = list<ApiCodeBlockInfo>();
             foreach(var file in files.Storage)
@@ -94,8 +94,8 @@ namespace Z0
         [Op]
         public void Run()
         {
-            var host = new EmitCodeBlockReportHost();
-            host.Run(Wf);
+            EmitCodeBlockReport.create().Run(Wf);
+
             // Wf.Running(Id);
             // var dst = Wf.Paths.AppDataDir + FS.file("apihex","csv");
             // var blocks = DescribeCodeBlocks();

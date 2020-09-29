@@ -6,20 +6,19 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Konst;
     using static z;
 
-    partial struct ApiArchives
+    partial struct ApiHexArchives
     {
-        [MethodImpl(Inline)]
-        public static IApiCodeReader hexreader<H>(H rep = default)
-            where H : struct, IArchiveReader
-        {
-            if(typeof(H) == typeof(ApiCodeReader))
-                return new ApiCodeReader();
-            else
-                throw no<H>();
-        }
+        [MethodImpl(Inline), Op]
+        public static ApiCodeArchive create(IWfShell wf)
+            => new ApiCodeArchive(wf);
+
+        [MethodImpl(Inline), Op]
+        public static ApiCodeArchive create(FS.FolderPath root)
+            => new ApiCodeArchive(root);
     }
 }

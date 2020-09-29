@@ -12,6 +12,14 @@ namespace Z0
 
     partial struct ApiHexArchives
     {
-
+        [MethodImpl(Inline)]
+        public static ApiCodeWriter writer<H>(FS.FilePath dst, H rep = default)
+            where H : struct, IArchiveWriter<H>
+        {
+            if(typeof(H) == typeof(ApiCodeWriter))
+                return new ApiCodeWriter(dst);
+            else
+                throw no<H>();
+        }
     }
 }

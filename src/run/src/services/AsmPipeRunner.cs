@@ -149,6 +149,6 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         ApiCodeArchive UriBitsArchive(FolderPath root)
-            => ApiArchives.hex(FS.dir(root.Name));
+            => ApiHexArchives.create(FS.dir(root.Name));
     }
 }

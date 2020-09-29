@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public ref struct EmitCaptureArtifacts
+    public ref struct EmitCaptureArtifactsStep
     {
         public IWfCaptureState State {get;}
 
@@ -26,13 +26,11 @@ namespace Z0
 
         readonly IExtractParser Parser;
 
-        public ApiMemberCodeTable ParsedMembers;
+        public ApiMemberCodeBlocks ParsedMembers;
 
         readonly FilePath ExtractPath;
 
         readonly FS.FilePath ParsedPath;
-
-        readonly FS.FilePath HexPath;
 
         readonly FS.FilePath CilDataPath;
 
@@ -42,7 +40,7 @@ namespace Z0
 
         readonly WfHost Host;
 
-        public EmitCaptureArtifacts(IWfCaptureState state, WfHost host, ApiHostUri src, ApiMemberExtract[] extracts, IPartCapturePaths dst)
+        public EmitCaptureArtifactsStep(IWfCaptureState state, WfHost host, ApiHostUri src, ApiMemberExtract[] extracts, IPartCapturePaths dst)
         {
             Wf = state.Wf;
             Host = host;
@@ -53,7 +51,6 @@ namespace Z0
             Extracts = extracts;
             ExtractPath = Target.HostExtractPath;
             ParsedPath = FS.path(Target.ParsedPath.Name);
-            HexPath = FS.path(Target.HostX86Path.Name);
             AsmPath = Target.HostAsmPath;
             CilDataPath = FS.path(Target.CilPath.Name);
             Parser = ApiExtractParsers.member();
@@ -72,11 +69,11 @@ namespace Z0
 
             try
             {
-                Run(new EmitExtractReportHost());
+                Run(new EmitExtractReport());
                 Run(new EmitParsedReportHost());
-                Run(new EmitX86HexHost());
+                EmitApiCodeBlocksHost.create(HostUri, ParsedMembers).Run(Wf);
                 Run(new EmitCilMembersHost());
-                Run(new DecodeApiMembersHost());
+                Run(new DecodeApiMembers());
             }
             catch(Exception e)
             {
@@ -86,14 +83,14 @@ namespace Z0
             Wf.Ran(Host);
         }
 
-        void Run(EmitExtractReportHost host)
+        void Run(EmitExtractReport host)
         {
             try
             {
                 if(Extracts.Length == 0)
                     return;
 
-                using var step = new EmitExtractReport(Wf, host, HostUri, Extracts, FS.path(ExtractPath.Name));
+                using var step = new EmitExtractReportStep(Wf, host, HostUri, Extracts, FS.path(ExtractPath.Name));
                 step.Run();
             }
             catch(Exception e)
@@ -101,7 +98,6 @@ namespace Z0
                 Wf.Error(e);
             }
         }
-
 
         void Run(EmitParsedReportHost host)
         {
@@ -115,15 +111,6 @@ namespace Z0
                 return;
 
             using var step = new EmitApiParseReport(Wf, host, HostUri, ParsedMembers, ParsedPath);
-            step.Run();
-        }
-
-        void Run(EmitX86HexHost host)
-        {
-            if(ParsedMembers.Count== 0)
-                return;
-
-            using var step = new EmitApiCodeTable(Wf, host, HostUri, ParsedMembers);
             step.Run();
         }
 
@@ -145,19 +132,19 @@ namespace Z0
             Wf.Raise(new CilDataSaved(Host, HostUri, src.Length, CilDataPath, Ct));
         }
 
-        void Run(DecodeApiMembersHost host)
+        void Run(DecodeApiMembers host)
         {
             if(ParsedMembers.Count== 0)
                 return;
 
-            using var step = new DecodeApiMembers(State.Wf, host, State.CWf.Context);
+            using var step = new DecodeApiMembersStep(State.Wf, host, State.CWf.Context);
             var decoded = step.Run(HostUri, ParsedMembers);
             if(decoded.Length != 0)
             {
                 step.SaveDecoded(decoded, AsmPath);
                 Wf.Status(Host, text.format(RP.PSx3, decoded.Length,HostUri.Format(), AsmPath));
 
-                using var match = new MatchAddresses(State, Extracts, decoded, Ct);
+                using var match = new MatchAddressesStep(State, new MatchAddresses(), Extracts, decoded, Ct);
                 match.Run();
             }
         }

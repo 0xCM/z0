@@ -15,7 +15,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly ref struct CapturePart
+    public readonly ref struct CapturePartStep
     {
         readonly IAsmContext Asm;
 
@@ -31,7 +31,7 @@ namespace Z0
 
         readonly WfHost Host;
 
-        public CapturePart(IWfShell wf, IAsmContext asm, WfHost host)
+        public CapturePartStep(IWfShell wf, IAsmContext asm, WfHost host)
         {
             Wf = wf;
             Asm = asm;
@@ -135,36 +135,6 @@ namespace Z0
             }
             return dst;
         }
-
-        // public ReadOnlySpan<AsmMemberRoutine> Capture(Assembly src)
-        // {
-        //     Wf.Running(Host.Id);
-
-        //     var buffer = span<byte>(Pow2.T14);
-        //     var catalog = ApiQuery.catalog(src);
-        //     var members = Identify(catalog.ApiDataTypes);
-        //     var count = members.Length;
-        //     var target = sys.alloc<AsmMemberRoutine>(count);
-        //     var dst = span(target);
-        //     for(var j=0u; j<count; j++)
-        //     {
-        //         buffer.Clear();
-
-        //         ref readonly var method = ref skip(members, j);
-        //         var capture = CaptureAlt.capture(method,buffer);
-        //         var decoded = Decoder.Decode(capture).Require();
-        //         seek(dst, j).Member = method;
-        //         seek(dst, j).Encoded = capture;
-        //         seek(dst, j).Routine = decoded;
-        //         seek(dst, j).Asm = Formatter.FormatFunction(decoded);
-        //     }
-
-        //     Array.Sort(target);
-
-        //     Wf.Ran(Host.Id);
-
-        //     return dst;
-        // }
 
         public ReadOnlySpan<AsmRoutineCode> Capture(ApiHostUri host, ReadOnlySpan<MethodInfo> src, FilePath dst)
         {

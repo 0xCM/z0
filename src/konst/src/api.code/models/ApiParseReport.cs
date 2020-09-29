@@ -44,7 +44,7 @@ namespace Z0
                     Data : extract.Encoded
                 );
 
-        public static ApiParseBlock[] create(ApiHostUri host, ApiMemberCodeTable members)
+        public static ApiParseBlock[] create(ApiHostUri host, ApiMemberCodeBlocks members)
         {
             var count = members.Count;
             var buffer = alloc<R>(count);

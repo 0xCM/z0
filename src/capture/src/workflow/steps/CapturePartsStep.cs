@@ -11,10 +11,10 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static ManagePartCaptureStep;
+    using static ManagePartCapture;
     using static z;
 
-    public struct CaptureParts : IDisposable
+    public struct CapturePartsStep : IDisposable
     {
         readonly WfCaptureState State;
 
@@ -27,7 +27,7 @@ namespace Z0
         readonly ICaptureContext Context;
 
         [MethodImpl(Inline)]
-        public CaptureParts(WfCaptureState state)
+        public CapturePartsStep(WfCaptureState state)
         {
             State = state;
             Wf = state.Wf;
@@ -66,9 +66,9 @@ namespace Z0
 
             try
             {
-                var host = new CaptureApiHostsHost();
+                var host = new CaptureApiHosts();
                 var dst = ApiArchives.capture(Config.TargetArchive.Root);
-                using var step = new CaptureApiHosts(State, host, Config.Api.Hosts, dst);
+                using var step = new CaptureApiHostsStep(State, host, Config.Api.Hosts, dst);
                 step.Run();
 
             }
@@ -98,7 +98,7 @@ namespace Z0
         {
             var count = src.Length;
             var hosts = @readonly(src);
-            using var step = new CaptureMembers(State, dst);
+            using var step = new CaptureMembersStep(State, dst);
             for(var i=0; i<count; i++)
             {
                 ref readonly var host = ref skip(hosts,i);
@@ -115,7 +115,7 @@ namespace Z0
             for(var i=0; i<extracted.Length; i++)
             {
                 ref readonly var x = ref skip(extracted,i);
-                using var emit = new EmitCaptureArtifacts(State, new EmitHostArtifactsHost(), x.Key, x.Value, dst);
+                using var emit = new EmitCaptureArtifactsStep(State, new EmitHostArtifactsHost(), x.Key, x.Value, dst);
                 emit.Run();
             }
         }
@@ -124,7 +124,7 @@ namespace Z0
         {
             try
             {
-                using var step = new ClearCaptureArchives(Wf, new ClearCaptureArchivesHost(), Config);
+                using var step = new ClearCaptureArchivesStep(Wf, new ClearCaptureArchives(), Config);
                 step.Run();
             }
             catch(Exception e)

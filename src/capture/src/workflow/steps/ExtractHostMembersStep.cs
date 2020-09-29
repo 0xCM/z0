@@ -7,24 +7,25 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
-
     using static Konst;
-    using static z;
 
-    public readonly ref struct CaptureControl
+    ref struct ExtractHostMembersStep
     {
         readonly IWfShell Wf;
 
-        public WfCaptureState State {get;}
-
         readonly WfHost Host;
 
-        public CaptureControl(WfCaptureState state, WfHost host)
+        readonly IApiHost Source;
+
+        public ApiMemberExtract[] Extracts;
+
+        [MethodImpl(Inline)]
+        public ExtractHostMembersStep(IWfShell wf, WfHost host, IApiHost src, IPartCapturePaths dst)
         {
-            State = state;
-            Wf = state.Wf;
+            Wf = wf;
             Host = host;
+            Source = src;
+            Extracts = new ApiMemberExtract[0]{};
             Wf.Created(Host);
         }
 
@@ -35,16 +36,16 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running(Host, delimit(Wf.Init.PartIdentities));
-
+            Wf.Running(Host);
             try
             {
-                using var host = new ManageCaptureStep(State, Wf.Ct);
-                host.Run();
+                using var step = new ExtractMembers(Wf, new ExtractMembersHost());
+                Extracts = step.Extract(Source);
+
             }
             catch(Exception e)
             {
-                State.Error(Host, e);
+                Wf.Error(Host, e);
             }
 
             Wf.Ran(Host);

@@ -11,7 +11,7 @@ namespace Z0
     using static z;
     using static Konst;
 
-    ref struct EmitCodeBlockReport
+    ref struct EmitCodeBlockReportStep
     {
         readonly IWfShell Wf;
 
@@ -24,11 +24,11 @@ namespace Z0
         TableSpan<ApiCodeBlockInfo> Descriptions;
 
         [MethodImpl(Inline)]
-        public EmitCodeBlockReport(IWfShell wf, WfHost host)
+        public EmitCodeBlockReportStep(IWfShell wf, WfHost host)
         {
             Wf = wf;
             Host = host;
-            Target = Wf.CaptureRoot + FS.file("apihex","csv");
+            Target = Wf.CaptureRoot + FS.file("apihexindex","csv");
             EmissionCount = 0;
             Descriptions = default;
             Wf.Created(Host);
@@ -50,7 +50,7 @@ namespace Z0
 
         ApiCodeBlockInfo[] DescribeCodeBlocks()
         {
-            var archive = ApiArchives.hex(Wf);
+            var archive = ApiHexArchives.create(Wf);
             var files = archive.List();
             var dst = list<ApiCodeBlockInfo>();
             foreach(var file in files.Storage)

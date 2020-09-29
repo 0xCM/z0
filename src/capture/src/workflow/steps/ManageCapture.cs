@@ -5,118 +5,22 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using Z0.Asm;
+    using static z;
+    using static Flow;
 
-    public struct ManageCapture : IManageCapture
+    [WfHost]
+    public sealed class ManageCapture : WfHost<ManageCapture>
     {
-        readonly WfCaptureState State;
+        protected override void Execute(IWfShell wf)
+            => throw missing();
+    }
 
-        readonly IWfShell Wf;
+    [Step]
+    public sealed class ManagePartCapture : WfHost<ManagePartCapture>
+    {
+        public const string StepName = nameof(CapturePartsStep);
 
-        readonly CorrelationToken Ct;
-
-        public IWfCaptureBroker Broker {get;}
-
-        public IWfEventSink Sink {get;}
-
-        readonly IAppContext App;
-
-        readonly PartId[] Parts;
-
-        readonly ManageCaptureHost Step;
-
-        WfStepId StepId => Step.Id;
-
-        public ManageCapture(WfCaptureState state, CorrelationToken ct)
-        {
-            State = state;
-            App = state.Asm.ContextRoot;
-            Wf = state.Wf;
-            Ct = ct;
-            Sink = Wf.WfSink;
-            Parts = Wf.Api.PartIdentities;
-            Broker = state.CaptureBroker;
-            Step = new ManageCaptureHost();
-            Wf.Created(StepId);
-        }
-
-        public void Dispose()
-        {
-            Wf.Disposed(StepId);
-        }
-
-        public void Run()
-        {
-            (this as IManageCapture).Connect();
-
-            Wf.Running(StepId);
-
-            {
-                Wf.Raise(new CapturingParts(Step.Name, State.Parts, Ct));
-                using var manage = new CaptureParts(State);
-                manage.Run();
-            }
-
-            {
-                using var step = new EmitImmSpecials(Wf, State.Asm, State.Formatter, State.RoutineDecoder, Wf.Init.TargetArchive.Root);
-                step.ClearArchive(Parts);
-                step.EmitRefined(Parts);
-            }
-
-            {
-                Wf.Running(EvaluateStep.StepId);
-                var evaluate = Evaluate.control(App, Wf.Paths.AppCaptureRoot, Pow2.T14);
-                evaluate.Execute();
-                Wf.Ran(EvaluateStep.StepId);
-            }
-
-            Wf.Ran(StepId);
-        }
-
-        public void OnEvent(FunctionsDecoded e)
-        {
-            Sink.Deposit(e);
-
-            if(State.Settings.CollectAsmStats)
-                CollectAsmStats(e.Host, e.Functions);
-        }
-
-        public void OnEvent(ApiCodeTableSaved e)
-        {
-            Sink.Deposit(e);
-
-            if(State.Settings.MatchEmissions)
-            {
-                using var step = new MatchEmissions(Wf);
-                step.Run(e.Host, e.Rows, e.Target);
-                Broker.Raise(step.Event);
-            }
-        }
-
-        public void OnEvent(MembersLocated e)
-        {
-            Sink.Deposit(e);
-
-            if(State.Settings.DuplicateCheck)
-                CheckDuplicates(e.Host, e.Members);
-        }
-
-        void CollectAsmStats(ApiHostUri host, ReadOnlySpan<AsmRoutine> functions)
-        {
-            var count = 0u;
-            for(var i = 0u; i<functions.Length; i++)
-                count += (uint)z.skip(functions,i).InstructionCount;
-
-           Wf.Raise(new CountedInstructions(Step.Name, host, count, Ct));
-        }
-
-        void CheckDuplicates(ApiHostUri host, ReadOnlySpan<ApiMember> src)
-        {
-            var index = ApiIdentity.index(src);
-            foreach(var key in index.DuplicateKeys)
-                Wf.Warn(StepId, $"Duplicate key {key}");
-        }
+        public static WfStepId StepId => step<ManagePartCapture>();
     }
 }

@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public ref struct EmitApiCodeTable
+    public ref struct EmitApiCodeBlocksStep
     {
         public ApiCodeRow[] Emitted;
 
@@ -24,11 +24,11 @@ namespace Z0
 
         readonly ApiHostUri Uri;
 
-        readonly ApiMemberCodeTable Source;
+        readonly ApiMemberCodeBlocks Source;
 
         readonly FS.FilePath Target;
 
-        public EmitApiCodeTable(IWfShell wf, WfHost host, ApiHostUri uri, ApiMemberCodeTable src)
+        public EmitApiCodeBlocksStep(IWfShell wf, WfHost host, ApiHostUri uri, ApiMemberCodeBlocks src)
         {
             Wf = wf;
             Host = host;

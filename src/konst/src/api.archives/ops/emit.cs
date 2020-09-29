@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ApiArchives
+    partial struct ApiHexArchives
     {
         [Op]
         public static void emit(ListedFiles src, FS.FilePath dst)

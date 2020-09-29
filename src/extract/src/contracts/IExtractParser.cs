@@ -18,7 +18,7 @@ namespace Z0
         /// outcomes of successful parse operations and any unfortunate failures
         /// </summary>
         /// <param name="src">The source extracts</param>
-        ApiMemberCodeTable ParseMembers(ReadOnlySpan<ApiMemberExtract> src);
+        ApiMemberCodeBlocks ParseMembers(ReadOnlySpan<ApiMemberExtract> src);
 
         Outcome<ApiMemberCode> ParseMember(in ApiMemberExtract src, uint seq);
     }

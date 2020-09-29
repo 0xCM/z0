@@ -37,7 +37,7 @@ namespace Z0.Asm
         protected IApiCodeWriter HexWriter([Caller] string caller = null)
         {
             var dstPath = TargetArchive.HexPath(FileName.define(caller, FileExtensions.HexLine));
-            return ApiArchives.hexwriter<ApiCodeWriter>(FS.path(dstPath.Name));
+            return ApiHexArchives.writer<ApiCodeWriter>(FS.path(dstPath.Name));
         }
 
         protected IAsmWriter AsmWriter([Caller] string caller = null)
@@ -51,7 +51,7 @@ namespace Z0.Asm
             var paths = AppPaths.ForApp(PartId.Control);
             var root = paths.AppCaptureRoot;
             var capture = ApiArchives.capture(root);
-            var archive = ApiArchives.hex(FS.dir(root.Name));
+            var archive = ApiHexArchives.create(FS.dir(root.Name));
             return archive.Read(capture.HexPath(host)).ToArray();
         }
 

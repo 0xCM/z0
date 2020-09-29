@@ -54,7 +54,6 @@ namespace Z0.Asm
         void ExecuteCatalog(IApiPartCatalog catalog)
         {
             using var buffers = Buffers.sequence(BufferSize, BufferCount);
-
             foreach(var host in catalog.Operations)
                 ExecuteHost(buffers.Tokenize(), host);
         }

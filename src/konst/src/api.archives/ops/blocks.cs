@@ -10,10 +10,15 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ApiArchives
+    partial struct ApiHexArchives
     {
+        public static ApiCodeBlock[] blocks(FS.FilePath src)
+            => from line in src.ReadLines().Select(ApiCodeParser.parse)
+                where line.Succeeded
+                select line.Value;
+
         [MethodImpl(Inline), Op]
-        public static ApiCodeBlock[] hexdata(IWfShell wf, ApiHostUri host)
-            => hex(wf).Read(host);
+        public static ApiCodeBlock[] blocks(IWfShell wf, ApiHostUri host)
+            => create(wf).Read(host);
     }
 }

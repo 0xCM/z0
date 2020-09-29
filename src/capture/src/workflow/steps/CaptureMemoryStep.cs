@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    public ref struct CaptureMemory
+    ref struct CaptureMemoryStep
     {
         readonly IWfShell Wf;
 
@@ -31,7 +31,7 @@ namespace Z0.Asm
         public readonly Span<CapturedBlock> Captured;
 
         [MethodImpl(Inline)]
-        public CaptureMemory(IWfShell wf, WfHost host, IAsmContext asm, MemoryAddress[] addresses, uint bufferlen = Pow2.T14)
+        public CaptureMemoryStep(IWfShell wf, WfHost host, IAsmContext asm, MemoryAddress[] addresses, uint bufferlen = Pow2.T14)
         {
             Host = host;
             Wf = wf;

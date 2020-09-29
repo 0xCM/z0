@@ -11,7 +11,7 @@ namespace Z0
     using static z;
 
     [Step]
-    public sealed class CaptureMemoryHost : WfHost<CaptureMemoryHost>
+    public sealed class CaptureMemory : WfHost<CaptureMemory>
     {
         IAsmContext Asm;
 
@@ -21,9 +21,9 @@ namespace Z0
         /// Creates a memory capture service
         /// </summary>
         /// <param name="buffer">The buffer size to allocate</param>
-        public static CaptureMemoryHost create(IAsmContext asm, MemoryAddress[] addresses)
+        public static CaptureMemory create(IAsmContext asm, MemoryAddress[] addresses)
         {
-            var host = new CaptureMemoryHost();
+            var host = new CaptureMemory();
             host.Asm = asm;
             host.Sources = addresses;
             return host;
@@ -31,7 +31,7 @@ namespace Z0
 
         protected override void Execute(IWfShell wf)
         {
-            using var step = new CaptureMemory(wf, this, Asm, Sources);
+            using var step = new CaptureMemoryStep(wf, this, Asm, Sources);
             step.Run();
         }
     }

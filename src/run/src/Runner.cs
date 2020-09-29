@@ -213,7 +213,7 @@ namespace Z0
             var part = Parts.Canonical.Resolved;
             var id = component.Id();
 
-            using var step = new CapturePart(Wf, State.Asm, new CapturePartHost());
+            using var step = new CapturePartStep(Wf, State.Asm, new CapturePartHost());
             var captured = step.Capture(part);
             var dst = Wf.Paths.AppCaptureRoot + FileName.define(id.Format(), FileExtensions.Asm);
             using var writer = dst.Writer();

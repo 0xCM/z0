@@ -9,10 +9,8 @@ namespace Z0
     using static z;
     using static Flow;
 
-    [Step]
-    public sealed class CaptureMembersHost : WfHost<CaptureMembersHost>
+    [WfHost]
+    public sealed class EmitParsedReportHost : WfHost<EmitParsedReportHost>
     {
-        public static WfStepId StepId
-            => step<CaptureMembersHost>();
     }
 }

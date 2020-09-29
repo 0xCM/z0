@@ -10,14 +10,14 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ApiArchives
+    partial struct ApiHexArchives
     {
         [MethodImpl(Inline)]
-        public static ApiCodeWriter hexwriter<H>(FS.FilePath dst, H rep = default)
-            where H : struct, IArchiveWriter<H>
+        public static IApiCodeReader reader<H>(H rep = default)
+            where H : struct, IArchiveReader
         {
-            if(typeof(H) == typeof(ApiCodeWriter))
-                return new ApiCodeWriter(dst);
+            if(typeof(H) == typeof(ApiCodeReader))
+                return new ApiCodeReader();
             else
                 throw no<H>();
         }

@@ -88,7 +88,7 @@ namespace Z0
             }
         }
 
-        public ApiMemberCodeTable ParseMembers(ReadOnlySpan<ApiMemberExtract> src)
+        public ApiMemberCodeBlocks ParseMembers(ReadOnlySpan<ApiMemberExtract> src)
         {
             var count = src.Length;
             if(count == 0)
