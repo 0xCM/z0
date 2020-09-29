@@ -12,13 +12,13 @@ namespace Z0
             => read(src);
 
         public static ApiCodeBlock[] read(FilePath src)
-            => from line in src.ReadLines().Select(ApiHexParser.row)
-                where line.IsSome()
+            => from line in src.ReadLines().Select(ApiCodeParser.parse)
+                where line.Succeeded
                 select line.Value;
 
         public static ApiCodeBlock[] read(FS.FilePath src)
-            => from line in src.ReadLines().Select(ApiHexParser.row)
-                where line.IsSome()
+            => from line in src.ReadLines().Select(ApiCodeParser.parse)
+                where line.Succeeded
                 select line.Value;
     }
 }

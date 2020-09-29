@@ -5,18 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst; 
+
+    using static Konst;
     using static V0;
-    
-    
+
     partial class gvec
     {
         /// <summary>
         /// Compares corresponding components in each vector for equality. For equal
-        /// components, the corresponding component the result vector has all bits 
+        /// components, the corresponding component the result vector has all bits
         /// enabled; otherwise, all component bits are are disabled
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -25,23 +24,23 @@ namespace Z0
         public static Vector128<T> veq<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 return veq_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 return veq_i(x,y);
-            else 
+            else
                 return veq_f<T>(x,y);
         }
 
         /// <summary>
         /// Compares corresponding components in each vector for equality. For equal
-        /// components, the corresponding component the result vector has all bits 
+        /// components, the corresponding component the result vector has all bits
         /// enabled; otherwise, all bits the component are disabled
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -50,23 +49,23 @@ namespace Z0
         public static Vector256<T> veq<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 return veq_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 return veq_i(x,y);
-            else 
+            else
                 return veq_f<T>(x,y);
         }
 
         /// <summary>
         /// Compares corresponding components in each vector for equality. For equal
-        /// components, the corresponding component the result vector has all bits 
+        /// components, the corresponding component the result vector has all bits
         /// enabled; otherwise, all bits the component are disabled
         /// </summary>
         /// <param name="x">The left vector</param>
@@ -75,19 +74,19 @@ namespace Z0
         public static Vector512<T> veq<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
                 => (veq(x.Lo, y.Lo), veq(x.Hi, y.Hi));
-        
+
         [MethodImpl(Inline)]
         static Vector128<T> veq_i<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(V0d.veq(v8i(x), v8i(y)));
+                return vgeneric<T>(z.veq(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(V0d.veq(v16i(x), v16i(y)));
+                return vgeneric<T>(z.veq(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(V0d.veq(v32i(x), v32i(y)));
-            else 
-                return vgeneric<T>(V0d.veq(v64i(x), v64i(y)));
+                return vgeneric<T>(z.veq(v32i(x), v32i(y)));
+            else
+                return vgeneric<T>(z.veq(v64i(x), v64i(y)));
         }
 
         [MethodImpl(Inline)]
@@ -95,13 +94,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(V0d.veq(v8u(x), v8u(y)));
+                return vgeneric<T>(z.veq(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(V0d.veq(v16u(x), v16u(y)));
+                return vgeneric<T>(z.veq(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(V0d.veq(v32u(x), v32u(y)));
-            else 
-                return vgeneric<T>(V0d.veq(v64u(x), v64u(y)));
+                return vgeneric<T>(z.veq(v32u(x), v32u(y)));
+            else
+                return vgeneric<T>(z.veq(v64u(x), v64u(y)));
         }
 
         [MethodImpl(Inline)]
@@ -109,10 +108,10 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(V0d.veq(v32f(x), v32f(y)));
+                return vgeneric<T>(z.veq(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(V0d.veq(v64f(x), v64f(y)));
-            else 
+                return vgeneric<T>(z.veq(v64f(x), v64f(y)));
+            else
                 throw no<T>();
         }
 
@@ -121,13 +120,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(V0d.veq(v8i(x), v8i(y)));
+                return vgeneric<T>(z.veq(v8i(x), v8i(y)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(V0d.veq(v16i(x), v16i(y)));
+                return vgeneric<T>(z.veq(v16i(x), v16i(y)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(V0d.veq(v32i(x), v32i(y)));
-            else 
-                return vgeneric<T>(V0d.veq(v64i(x), v64i(y)));
+                return vgeneric<T>(z.veq(v32i(x), v32i(y)));
+            else
+                return vgeneric<T>(z.veq(v64i(x), v64i(y)));
         }
 
         [MethodImpl(Inline)]
@@ -135,13 +134,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(V0d.veq(v8u(x), v8u(y)));
+                return vgeneric<T>(z.veq(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(V0d.veq(v16u(x), v16u(y)));
+                return vgeneric<T>(z.veq(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(V0d.veq(v32u(x), v32u(y)));
-            else 
-                return vgeneric<T>(V0d.veq(v64u(x), v64u(y)));
+                return vgeneric<T>(z.veq(v32u(x), v32u(y)));
+            else
+                return vgeneric<T>(z.veq(v64u(x), v64u(y)));
         }
 
         [MethodImpl(Inline)]
@@ -149,10 +148,10 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return vgeneric<T>(V0d.veq(v32f(x), v32f(y)));
+                return vgeneric<T>(z.veq(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return vgeneric<T>(V0d.veq(v64f(x), v64f(y)));
-            else 
+                return vgeneric<T>(z.veq(v64f(x), v64f(y)));
+            else
                 throw no<T>();
         }
     }

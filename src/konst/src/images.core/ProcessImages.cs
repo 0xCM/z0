@@ -14,12 +14,14 @@ namespace Z0
     using static Konst;
     using static z;
 
+    [ApiHost]
     public readonly struct ProcessImages
     {
         /// <summary>
         /// Creates a <see cref='LocatedImage'/> description from a specified <see cref='ProcessModule'/>
         /// </summary>
         /// <param name="src">The source module</param>
+        [MethodImpl(Inline), Op]
         public static LocatedImage locate(ProcessModule src)
         {
             var path = FS.path(src.FileName);
@@ -30,6 +32,15 @@ namespace Z0
             return new LocatedImage(path, part, entry, @base, size);
         }
 
+        [MethodImpl(Inline), Op]
+        public static LocatedImage[] locate(Process src)
+            => src.Modules.Cast<ProcessModule>().Map(locate).OrderBy(x => x.BaseAddress);
+
+        [MethodImpl(Inline), Op]
+        public static LocatedImage[] locate()
+            => locate(Process.GetCurrentProcess());
+
+        [MethodImpl(Inline), Op]
         public static MemoryAddress @base(IPart src)
         {
             var match =  Path.GetFileNameWithoutExtension(src.Owner.Location);
@@ -37,15 +48,12 @@ namespace Z0
             return module.Base;
         }
 
-        public static ReadOnlySpan<LocatedImageSummary> processes()
-        {
-            var process = Process.GetCurrentProcess();
-            var images = process.Modules.Cast<ProcessModule>().Map(locate).OrderBy(x => x.BaseAddress);
-            return summarize(images);
-        }
+        [MethodImpl(Inline), Op]
+        public static ReadOnlySpan<LocatedImageSummary> summaries()
+            => summaries(locate());
 
         [Op]
-        public static ReadOnlySpan<LocatedImageSummary> summarize(LocatedImages src)
+        public static ReadOnlySpan<LocatedImageSummary> summaries(LocatedImages src)
         {
             var count = src.Count;
             var images = src.View;
@@ -71,6 +79,7 @@ namespace Z0
             return summaries;
         }
 
+        [Op]
         public static void summarize(LocatedImages src, FS.FilePath dst)
         {
             var system = SystemImages;
@@ -164,6 +173,7 @@ namespace Z0
         /// returns the first match; otherwise returns an empty document
         /// </summary>
         /// <param name="match">The resource identifier to match</param>
+        [MethodImpl(Inline), Op]
         public static AppResourceDoc structured(Assembly src, string match)
             => ResExtractor.Service(src).MatchDocument(match);
     }

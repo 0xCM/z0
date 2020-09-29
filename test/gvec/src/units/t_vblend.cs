@@ -30,17 +30,17 @@ namespace Z0
         public void vblend_256x8u_outline()
         {
             var w = n256;
-            var x = gvec.vinc(w, z8);
-            var y = gvec.vdec(w, Max8u);
-            var spec = V0.v8u(V0d.vbroadcast(w, (ushort)((ushort)Pow2.T07 << 8)));
-            var z = gvec.vblend(x,y,spec);
+            var a = gvec.vinc(w, z8);
+            var b = gvec.vdec(w, Max8u);
+            var spec = z.v8u(z.vbroadcast(w, (ushort)((ushort)Pow2.T07 << 8)));
+            var c = gvec.vblend(a,b,spec);
         }
 
         public void vblend_128x16u_outline()
         {
             var w = n128;
             var alt = (uint)M.Msb16x8x1 << 16;
-            z.vcover(V0.v16u(V0d.vbroadcast(w,alt)), out Vector128<byte> spec);
+            z.vcover(V0.v16u(z.vbroadcast(w,alt)), out Vector128<byte> spec);
             var a = gvec.vinc(w,z16);
             var b = gvec.vdec(w,Max16u);
             var c = gvec.vblend(a,b,spec);
@@ -51,7 +51,7 @@ namespace Z0
             var w = n256;
             var altOdd = (uint)M.Msb16x8x1 << 16;
             var altEven = (uint)M.Msb16x8x1;
-            z.vcover(V0.v16u(Vectors.vbroadcast<uint>(w, altOdd)), out Vector256<byte> spec);
+            z.vcover(V0.v16u(z.vbroadcast<uint>(w, altOdd)), out Vector256<byte> spec);
             var a = gvec.vinc(w,z16);
             var b = gvec.vdec(w,Max16u);
             var c = gvec.vblend(a,b,spec);
@@ -65,8 +65,8 @@ namespace Z0
             void example1()
             {
                 var n = n128;
-                var x = V0d.vbroadcast(n, (byte)1);
-                var y = V0d.vbroadcast(n, (byte)2);
+                var x = z.vbroadcast(n, (byte)1);
+                var y = z.vbroadcast(n, (byte)2);
                 Trace($"x{n}", x.Format());
                 Trace($"y{n}", y.Format());
                 Trace("valignr/3",gvec.valignr(x,y, 3).Format());
@@ -80,8 +80,8 @@ namespace Z0
             void example2()
             {
                 var n = n256;
-                var x = vbroadcast(n, (byte)1);
-                var y = vbroadcast(n, (byte)2);
+                var x = z.vbroadcast(n, (byte)1);
+                var y = z.vbroadcast(n, (byte)2);
                 Trace($"x{n}", x.FormatLanes());
                 Trace($"y{n}", y.FormatLanes());
                 Trace("valignr/3", gvec.valignr(x,y, 3).FormatLanes());
@@ -96,13 +96,13 @@ namespace Z0
         public void vblend_8x16_basecases()
         {
             var n = n128;
-            var x = vparts(n, 0,2,4,6,8,A,C,E);
-            var y = vparts(n, 1,3,5,7,9,B,D,F);
+            var x = z.vparts(n, 0,2,4,6,8,A,C,E);
+            var y = z.vparts(n, 1,3,5,7,9,B,D,F);
 
             Claim.veq(x, z.vblend(x,y, Blend8x16.LLLLLLLL));
             Claim.veq(y, z.vblend(x,y, Blend8x16.RRRRRRRR));
-            Claim.veq(vparts(n, 0,2,4,6,9,B,D,F), z.vblend(x,y, Blend8x16.LLLLRRRR));
-            Claim.veq(vparts(n, 1,3,5,7,8,A,C,E), z.vblend(x,y, Blend8x16.RRRRLLLL));
+            Claim.veq(z.vparts(n, 0,2,4,6,9,B,D,F), z.vblend(x,y, Blend8x16.LLLLRRRR));
+            Claim.veq(z.vparts(n, 1,3,5,7,8,A,C,E), z.vblend(x,y, Blend8x16.RRRRLLLL));
 
         }
 
@@ -154,7 +154,7 @@ namespace Z0
             Claim.veq(vparts(0,1,A,B,4,5,E,F), z.vblend(left,right, Blend8x32.LLRRLLRR));
             Claim.veq(vparts(8,9,2,3,C,D,6,7), z.vblend(left,right, Blend8x32.RRLLRRLL));
 
-            var lrpattern = z.v32u(vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
+            var lrpattern = z.v32u(z.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
             for(byte i=0; i < 8; i++)
                 Claim.eq(z.vcell(lrpattern,i), gmath.even(i) ? 0u : uint.MaxValue);
 

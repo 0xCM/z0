@@ -96,7 +96,7 @@ namespace Z0
             for(var i=0; i<iCount; i++)
             {
                 var path = list[i].Path;
-                var items = api.hex(path);
+                var items = api.hexblocks(path);
                 var jCount = items.Length;
                 for(var j=0; j<jCount; j++)
                     yield return items[j];            }

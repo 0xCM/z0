@@ -80,9 +80,9 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var sum = V0d.vadd(v64u(x.Data), v64u(y.Data));
-            Bit32 carry = x.Lo > Vectors.vcell(sum,0);
-            return  As.generic<T>(V0d.vadd(sum, V0d.vbroadcast(n128, (ulong)carry)));
+            var sum = z.vadd(z.v64u(x.Data), z.v64u(y.Data));
+            Bit32 carry = x.Lo > z.vcell(sum,0);
+            return  z.generic<T>(z.vadd(sum, z.vbroadcast(n128, (ulong)carry)));
         }
     }
 }

@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static z;
     using static Konst;
@@ -69,24 +70,37 @@ namespace Z0
             Wf.Status(Id, src.OpUri);
         }
 
+        ApiCodeBlockInfo[] DescribeCodeBlocks()
+        {
+            var archive = ApiArchives.hex(Wf);
+            var files = archive.List();
+            var dst = list<ApiCodeBlockInfo>();
+            foreach(var file in files.Storage)
+                dst.AddRange(archive.Read(file.Path).Select(x => x.Describe()));
+            return dst.OrderBy(x => x.Base).ToArray();
+        }
+
+        void Emit(ReadOnlySpan<ApiCodeBlockInfo> src, FS.FilePath dst)
+        {
+            using var writer = dst.Writer();
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(src,i);
+                writer.WriteLine(string.Format(ApiCodeBlockInfo.FormatPattern, block.Part, block.Host, block.Base, block.Size, block.Uri));
+            }
+        }
+
         [Op]
         public void Run()
         {
-            Wf.Running(Id);
-
-            var archive = ApiArchives.hex(Wf);
-            var files = archive.List();
-            foreach(var file in files.Storage)
-            {
-                var lines = archive.Read(file.Path);
-                foreach(var line in lines)
-                {
-                    Summarize(line);
-                }
-
-            }
-
-            Wf.Ran(Id);
+            var host = new EmitCodeBlockReportHost();
+            host.Run(Wf);
+            // Wf.Running(Id);
+            // var dst = Wf.Paths.AppDataDir + FS.file("apihex","csv");
+            // var blocks = DescribeCodeBlocks();
+            // Emit(blocks,dst);
+            // Wf.Ran(Id);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace Z0
 {
     public enum LocatedImageField : ushort
     {
-        ImagePath = 20,
+        ImageName = 60,
 
         PartId = 12,
 

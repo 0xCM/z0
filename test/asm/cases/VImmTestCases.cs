@@ -23,7 +23,7 @@ namespace Z0
         public static MethodInfo vbroadcast<W>(this VMethodSearch search, Type tCell, W w = default)
             where W : unmanaged, ITypeWidth
             => typeof(V0d).DeclaredMethods()
-                    .WithName(nameof(z.vbroadcast))
+                    .WithName("vbroadcast")
                     .WithParameterTypes(w.GetType(), tCell)
                     .WithParameterCount(2)
                     .Single();

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static EmitPartCilHost;
 
     using static z;
 
@@ -24,16 +23,16 @@ namespace Z0
 
         readonly IPart[] Parts;
 
-        readonly EmitPartCilHost Host;
+        readonly WfHost Host;
 
         [MethodImpl(Inline)]
-        public EmitPartCil(IWfShell wf, EmitPartCilHost host)
+        public EmitPartCil(IWfShell wf, WfHost host)
         {
             Wf = wf;
             Host = host;
             Parts = wf.Api.Storage;
             PartCount = (uint)Parts.Length;
-            TargetDir = Wf.ResourceRoot + FolderName.Define(DataFolder);
+            TargetDir = Wf.ResourceRoot + FolderName.Define("il");
             EmissionCount = 0;
             Wf.Created(Host);
         }
@@ -52,7 +51,7 @@ namespace Z0
             {
                 try
                 {
-                    EmissionCount += Emit(part, TargetDir + FileName.define(part.Id.Format(), DatasetExt));
+                    EmissionCount += Emit(part, TargetDir + FileName.define(part.Id.Format(), "csv"));
                 }
                 catch(Exception e)
                 {

@@ -14,6 +14,19 @@ namespace Z0
     [ApiHost]
     public readonly partial struct ApiCodeBlocks
     {
+        [Op]
+        public static uint emit(ReadOnlySpan<ApiCodeBlockInfo> src, FS.FilePath dst)
+        {
+            using var writer = dst.Writer();
+            var count = (uint)src.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var block = ref skip(src,i);
+                writer.WriteLine(string.Format(ApiCodeBlockInfo.FormatPattern, block.Part, block.Host, block.Base, block.Size, block.Uri));
+            }
+            return count;
+        }
+
         [MethodImpl(Inline), Op]
         public static ApiCodeBlock define(OpUri uri, MemoryAddress address, in BinaryCode data)
             => new ApiCodeBlock(uri, new BasedCodeBlock(address, data));

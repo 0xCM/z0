@@ -19,10 +19,6 @@ namespace Z0
 
     partial struct Cil
     {
-        [MethodImpl(Inline), Op]
-        public static CilOpCodeRow pack(ILOpCode id, string name, CilOpCodeType type, CilOperandType optype, byte opcount, ushort code, CilStackBehaviour sb1, CilStackBehaviour sb2)
-            => new CilOpCodeRow(id, name, type, optype, opcount, sb1, sb2);
-
         /// <summary>
         /// Populates an opcode dataset
         /// </summary>

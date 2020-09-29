@@ -153,5 +153,16 @@ namespace Z0
         /// </summary>
         public static ApiCodeBlock Empty
             => default;
+
+        public ApiCodeBlockInfo Describe()
+        {
+            var dst = new ApiCodeBlockInfo();
+            dst.Part = Uri.Part;
+            dst.Host = Uri.Host.Name;
+            dst.Base = Code.Base;
+            dst.Size = Code.Length;
+            dst.Uri = Identifier;
+            return dst;
+        }
     }
 }

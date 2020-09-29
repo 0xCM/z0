@@ -6,9 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static RP;
-
-    [Step]
+    [WfHost]
     public sealed class EmitPartCilHost : WfHost<EmitPartCilHost>
     {
         protected override void Execute(IWfShell wf)
@@ -16,14 +14,5 @@ namespace Z0
             using var step = new EmitPartCil(wf, this);
             step.Run();
         }
-
-        public const string DatasetName = "Cil";
-
-        public const string EmissionType = "il";
-
-        public const string DataFolder = EmissionType;
-
-        public const string DatasetExt = EmissionType + ExtSep +  DataExt;
     }
-
 }

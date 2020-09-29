@@ -5,32 +5,32 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
-    using static Konst; 
+    using static Konst;
     using static z;
 
     partial class gvec
     {
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vgather<T>(in T src, Vector128<T> vidx)
-            where T : unmanaged        
+            where T : unmanaged
                 => vgather_u(n128,src,vidx);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vgather<T>(in T src, Vector256<T> vidx)
-            where T : unmanaged        
+            where T : unmanaged
                 => vgather_u(n256,src,vidx);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vgather<T>(ReadOnlySpan<T> src, Vector128<T> vidx)
-            where T : unmanaged        
+            where T : unmanaged
                 => vgather_u(n128, first(src),vidx);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vgather<T>(ReadOnlySpan<T> src, Vector256<T> vidx)
-            where T : unmanaged        
+            where T : unmanaged
                 => vgather_u(n256, first(src), vidx);
 
         [MethodImpl(Inline)]
@@ -38,14 +38,14 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vgather(w, u8(src), v8u(vidx)));
+                return generic<T>(z.vgather(w, u8(src), v8u(vidx)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vgather(w, u16(src), v16u(vidx)));
+                return generic<T>(z.vgather(w, u16(src), v16u(vidx)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vgather(w, u32(src), v32u(vidx)));
+                return generic<T>(z.vgather(w, u32(src), v32u(vidx)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vgather(w, u64(src), v64u(vidx)));
-            else 
+                return generic<T>(z.vgather(w, u64(src), v64u(vidx)));
+            else
                 return vgather_i(w,src,vidx);
         }
 
@@ -54,14 +54,14 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dvec.vgather(w, i8(src), v8i(vidx)));
+                return generic<T>(z.vgather(w, i8(src), v8i(vidx)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dvec.vgather(w, i16(src), v16i(vidx)));
+                return generic<T>(z.vgather(w, i16(src), v16i(vidx)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dvec.vgather(w, i32(src), v32i(vidx)));
+                return generic<T>(z.vgather(w, i32(src), v32i(vidx)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dvec.vgather(w, i64(src), v64i(vidx)));
-            else 
+                return generic<T>(z.vgather(w, i64(src), v64i(vidx)));
+            else
                 throw no<T>();
         }
 
@@ -70,14 +70,14 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(dvec.vgather(w, u8(src), v8u(vidx)));
+                return generic<T>(z.vgather(w, u8(src), v8u(vidx)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(dvec.vgather(w, u16(src), v16u(vidx)));
+                return generic<T>(z.vgather(w, u16(src), v16u(vidx)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(dvec.vgather(w, u32(src), v32u(vidx)));
+                return generic<T>(z.vgather(w, u32(src), v32u(vidx)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(dvec.vgather(w, u64(src), v64u(vidx)));
-            else 
+                return generic<T>(z.vgather(w, u64(src), v64u(vidx)));
+            else
                 return vgather_i(w,src,vidx);
         }
 
@@ -86,14 +86,14 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(dvec.vgather(w, i8(src), v8i(vidx)));
+                return generic<T>(z.vgather(w, i8(src), v8i(vidx)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(dvec.vgather(w, i16(src), v16i(vidx)));
+                return generic<T>(z.vgather(w, i16(src), v16i(vidx)));
             else if(typeof(T) == typeof(int))
-                return generic<T>(dvec.vgather(w, i32(src), v32i(vidx)));
+                return generic<T>(z.vgather(w, i32(src), v32i(vidx)));
             else if(typeof(T) == typeof(long))
-                return generic<T>(dvec.vgather(w, i64(src), v64i(vidx)));
-            else 
+                return generic<T>(z.vgather(w, i64(src), v64i(vidx)));
+            else
                 throw no<T>();
         }
     }

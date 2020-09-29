@@ -40,7 +40,7 @@ namespace Z0
             {
                 Run(new EmitFieldMetadataHost());
                 Run(new ProcessPartFilesHost());
-                Run(new EmitImageHeadersHost());
+                Run(new EmitSectionHeadersHost());
                 Run(new EmitImageConstantsHost());
                 Run(new EmitLocatedPartsHost());
                 Run(new EmitStringRecordsHost());
@@ -96,7 +96,7 @@ namespace Z0
         void Run(EmitImageBlobsHost host)
             => host.Run(Wf);
 
-        void Run(EmitImageHeadersHost host)
+        void Run(EmitSectionHeadersHost host)
             => host.Run(Wf);
 
         void Run(EmitLocatedPartsHost host)
