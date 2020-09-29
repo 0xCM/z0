@@ -177,7 +177,7 @@ public enum PartId : ulong
 
     VCheck = 164,
 
-    ZXed = 165,
+    Xed = 165,
 
     V0 = 170,
 

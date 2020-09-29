@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XTendFS
     {
         public static FS.FilePath PartPath(this IPart part)
             => FS.path(part.Owner.Location);

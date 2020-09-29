@@ -13,7 +13,7 @@ namespace Z0
     public abstract class WfHost<H> : IWfHost<H>
         where H : WfHost<H>, new()
     {
-        public static H Host => new H();
+        public static H create() => new H();
 
         public virtual WfStepId Id {get;}
 

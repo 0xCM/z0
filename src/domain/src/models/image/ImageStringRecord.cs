@@ -9,6 +9,33 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
+    using static RP;
+
+    public enum PartStringKind
+    {
+        System = 0,
+
+        User = 1,
+    }
+
+    public readonly struct ImageStringRecords
+    {
+        public const string DataType = "strings";
+
+        public const string UserKind = "user";
+
+        public const string SystemKind = "system";
+
+        public const string UserTargetFolder = DataType + ExtSep + UserKind;
+
+        public const string SystemTargetFolder = DataType + ExtSep + SystemKind;
+
+        public const string DataTypeExt = DataType + ExtSep + DataExt;
+
+        public const string UserKindExt = UserKind + ExtSep + DataTypeExt;
+
+        public const string SystemKindExt = SystemKind + ExtSep + DataTypeExt;
+    }
 
     public enum ImgStringSource : byte
     {

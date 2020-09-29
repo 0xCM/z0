@@ -9,9 +9,6 @@ namespace Z0
     [WfHost]
     public sealed class EmitCodeBlockReport : WfHost<EmitCodeBlockReport>
     {
-        public static EmitCodeBlockReport create()
-            => new EmitCodeBlockReport();
-
         protected override void Execute(IWfShell wf)
         {
             using var step = new EmitCodeBlockReportStep(wf, this);

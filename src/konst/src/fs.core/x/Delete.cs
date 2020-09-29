@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XTendFS
     {
         /// <summary>
         /// Deletes the file if it exists

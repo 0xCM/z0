@@ -10,6 +10,7 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(AsmModels)" />
     <ProjectReference Include="$(Derivatives)" />
+    <ProjectReference Include="$(Xed)" />
   </ItemGroup>
 
   <ItemGroup>

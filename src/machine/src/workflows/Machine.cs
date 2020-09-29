@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public class Machine : IDisposable
+    class Machine : IDisposable
     {
         readonly WfCaptureState State;
 
@@ -39,11 +39,11 @@ namespace Z0
             try
             {
                 Run(new EmitFieldMetadataHost());
-                Run(new ProcessPartFilesHost());
+                Run(new ProcessPartFiles());
                 Run(new EmitSectionHeadersHost());
                 Run(new EmitImageConstantsHost());
                 Run(new EmitLocatedPartsHost());
-                Run(new EmitStringRecordsHost());
+                Run(new EmitStringRecords());
                 Run(new EmitProjectDocsHost());
                 Run(new EmitResBytesHost());
                 Run(new EmitImageBlobsHost());
@@ -78,8 +78,8 @@ namespace Z0
         void Run(EmitPartCilHost host)
             => host.Run(Wf);
 
-        void Run(ProcessPartFilesHost host)
-            => host.Run(Wf.WithState(State.Asm));
+        void Run(ProcessPartFiles host)
+            => host.Run(Wf, AsmContextProvider.create(State.Asm));
 
         void Run(EmitContentCatalogHost host)
             => host.Run(Wf);
@@ -90,7 +90,7 @@ namespace Z0
         void Run(EmitProjectDocsHost host)
             => host.Run(Wf);
 
-        void Run(EmitStringRecordsHost host)
+        void Run(EmitStringRecords host)
             => host.Run(Wf);
 
         void Run(EmitImageBlobsHost host)

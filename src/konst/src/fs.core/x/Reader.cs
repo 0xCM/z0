@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.IO;
+
     using static Konst;
 
     partial class XTend

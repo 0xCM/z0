@@ -94,13 +94,9 @@ namespace Z0
         [Op]
         public void Run()
         {
-            EmitCodeBlockReport.create().Run(Wf);
+            //XedRunner.Run(Wf);
+            XedEtlWfHost.create().Run(Wf);
 
-            // Wf.Running(Id);
-            // var dst = Wf.Paths.AppDataDir + FS.file("apihex","csv");
-            // var blocks = DescribeCodeBlocks();
-            // Emit(blocks,dst);
-            // Wf.Ran(Id);
         }
     }
 }

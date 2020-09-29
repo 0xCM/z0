@@ -21,6 +21,8 @@
     <Tables>$(Src)tables/z0.tables.csproj</Tables>
     <Konst>$(Src)konst/z0.konst.csproj</Konst>
 
+    <Xed>$(Src)xed/z0.xed.csproj</Xed>
+
     <Check>$(Src)check/z0.check.csproj</Check>
     <CheckDynamic>$(Src)check.dynamic/z0.check.dynamic.csproj</CheckDynamic>
 

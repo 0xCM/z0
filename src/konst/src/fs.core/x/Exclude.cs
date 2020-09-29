@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XTendFS
     {
         [MethodImpl(Inline)]
         public static FS.FilePath[] Exclude(this FS.FilePath[] src, string match)
