@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class BitBlocks
     {
@@ -87,9 +87,9 @@ namespace Z0
         /// <param name="src">A reference to grid storage</param>
         /// <typeparam name="T">The storage segment type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        internal static ref X cell<X>(ref X src, int bitpos)
+        internal static ref X cell<X>(ref X src, uint bitpos)
             where X : unmanaged
-                => ref seek(ref src, bitpos / bitwidth<X>());
+                => ref seek(src, bitpos / bitwidth<X>());
 
         /// <summary>
         /// Sets the state of a grid bit identified by its linear position
@@ -99,7 +99,7 @@ namespace Z0
         /// <param name="dst">A reference to the grid storage</param>
         /// <typeparam name="T">The grid storage segment type</typeparam>
         [MethodImpl(Inline)]
-        internal static void setbit<X>(int bitpos, Bit32 state, ref X dst)
+        internal static void setbit<X>(uint bitpos, Bit32 state, ref X dst)
             where X : unmanaged
                 => cell(ref dst, bitpos) = gbits.setbit(cell(ref dst, bitpos), (byte)(bitpos % bitwidth<X>()), state);
 
@@ -158,7 +158,7 @@ namespace Z0
         public static int cellcount<T>(int bitcount)
             where T : unmanaged
         {
-            var q = Math.DivRem(bitcount, bitwidth<T>(), out int r);
+            var q = Math.DivRem(bitcount, (int)bitwidth<T>(), out int r);
             return r == 0 ? q : q + 1;
         }
    }

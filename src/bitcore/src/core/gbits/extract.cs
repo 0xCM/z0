@@ -76,13 +76,13 @@ namespace Z0
         /// an inclusive linear index range
         /// </summary>
         /// <param name="src">The bit source</param>
-        /// <param name="firstidx">The sequence-relative index of the first bit</param>
-        /// <param name="lastidx">The sequence-relative index of the last bit</param>
+        /// <param name="first">The sequence-relative index of the first bit</param>
+        /// <param name="last">The sequence-relative index of the last bit</param>
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static T extract<T>(Span<T> src, int firstidx, int lastidx)
+        public static T extract<T>(Span<T> src, int first, int last)
             where T : unmanaged
-                => extract(src, bitpos<T>(firstidx), bitpos<T>(lastidx));
+                => extract(src, bitpos<T>(first), bitpos<T>(last));
 
         [MethodImpl(Inline)]
         static T extract_i<T>(T src, byte p0, byte p1)
@@ -125,7 +125,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                  return generic<T>(Bits.extract(float64(src),  p0, p1));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

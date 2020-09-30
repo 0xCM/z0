@@ -45,7 +45,7 @@ namespace Z0
                 Run(new EmitLocatedPartsHost());
                 Run(new EmitStringRecords());
                 Run(new EmitProjectDocsHost());
-                Run(new EmitResBytesHost());
+                Run(new EmitResBytes());
                 Run(new EmitImageBlobs());
                 Run(new EmitPartCilHost());
                 Run(new EmitEnumCatalogHost());
@@ -102,7 +102,7 @@ namespace Z0
         void Run(EmitLocatedPartsHost host)
             => host.Run(Wf);
 
-        void Run(EmitResBytesHost host)
+        void Run(EmitResBytes host)
             => host.Run(Wf);
     }
 }

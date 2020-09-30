@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     partial class gbits
     {
@@ -19,13 +19,11 @@ namespace Z0
         {
             var srcsize = bitsize<T>();
             var bitcount = bitsize<T>()*src.Length;
-            insist(dst.Length >= bitcount);
-
-            ref var target = ref head(dst);
+            ref var target = ref first(dst);
             var k = 0;
             for(var i=0; i < src.Length; i++)
             for(byte j=0; j < srcsize; j++, k++)
-                seek(ref target, k) = testbit(skip(src,i), j);
+                seek(target, k) = testbit(skip(src,i), j);
             return dst;
         }
 
@@ -39,7 +37,6 @@ namespace Z0
         public static Span<Bit32> unpack<T>(Span<T> src, Span<Bit32> dst)
             where T : unmanaged
                 => unpack(src.ReadOnly(),dst);
-
 
         /// <summary>
         /// Extracts each bit from each source element into caller-supplied target at the corresponding index
@@ -55,18 +52,17 @@ namespace Z0
         /// <summary>
         /// Projects each bit from a source value into target span element at the corresponding index
         /// </summary>
-        /// <param name="src">The bit soure</param>
+        /// <param name="src">The bit source</param>
         /// <param name="dst">The bit target</param>
         /// <typeparam name="T">The bit source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<T> unpack<S,T>(S src, Span<T> dst, int offset = 0)
+        public static Span<T> unpack<S,T>(S src, Span<T> dst, uint offset = 0)
             where S : unmanaged
             where T : unmanaged
         {
             var len = bitsize<S>();
-            insist(dst.Length - offset >= len);
-            for(var i=0; i< len; i++)
+            for(var i=0u; i< len; i++)
                 seek(dst,offset + i)  = testbit(src, (byte)i) == Bit32.On ? As.one<T>() : As.zero<T>();
             return dst;
         }
@@ -74,7 +70,7 @@ namespace Z0
         /// <summary>
         /// Projects each source bit from each source element into an element of the target span at the corresponding index
         /// </summary>
-        /// <param name="src">The bit soure</param>
+        /// <param name="src">The bit source</param>
         /// <param name="dst">The bit target</param>
         /// <typeparam name="T">The bit source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
@@ -89,9 +85,7 @@ namespace Z0
             {
                 var srcsize = bitsize<S>();
                 var bitcount = bitsize<S>()*src.Length;
-                insist(dst.Length >= bitcount);
-
-                var k = 0;
+                var k = 0u;
                 for(var i=0; i < src.Length; i++)
                 for(byte j=0; j < srcsize; j++)
                     seek(dst,k++)  = testbit(skip(src,i), j) == Bit32.On ? As.one<T>() : As.zero<T>();

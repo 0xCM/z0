@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ushort packmsb<T>(Vector128<T> src, N8 mod)
             where T : unmanaged
-                => gvec.vtakemask(src);
+                => z.vtakemask(src);
 
         /// <summary>
         /// Packs 32 1-bit values taken from the most significant bit of each source byte
@@ -28,6 +28,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ulong packmsb<T>(Vector256<T> src, N8 mod)
             where T : unmanaged
-                => gvec.vtakemask(src);
+                => z.vtakemask(src);
     }
 }

@@ -15,7 +15,7 @@ namespace Z0
         public static NumericSeq<T> Empty<T>()
             where T : unmanaged
                 => NumericSeq<T>.Empty;
-        
+
         [MethodImpl(Inline)]
         public static NumericSeq<T> From<T>(params T[] src)
             where T : unmanaged
@@ -32,7 +32,7 @@ namespace Z0
                 => new NumericSeq<T>(src.ToArray());
 
         [MethodImpl(Inline)]
-        public static NumericSeq<T> From<T>(params NumericSeqTerm<T>[] src)
+        public static NumericSeq<T> From<T>(params SeqTerm<T>[] src)
             where T : unmanaged
                 => new NumericSeq<T>(src);
     }

@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="tail">The remaining elements of the stream</param>
         /// <typeparam name="T">The streamed element type</typeparam>
         [Op, Closures(UInt64k)]
-        public static Seq<T> nonempty<T>(T head, params T[] tail)
+        public static Source<T> nonempty<T>(T head, params T[] tail)
             => z.seq(nes(head,tail));
 
         [Op, Closures(UInt64k)]
@@ -39,7 +39,7 @@ namespace Z0
         /// <param name="src">The stream elements</param>
         /// <typeparam name="T">The streamed element type</typeparam>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static Seq<T> from<T>(params T[] src)
+        public static Source<T> from<T>(params T[] src)
             => src;
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// <param name="tail">The last part of the sequence</param>
         /// <typeparam name="T">The streamed element type</typeparam>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static Seq<T> from<T>(Seq<T> head, Seq<T> tail)
+        public static Source<T> from<T>(Source<T> head, Source<T> tail)
             => head.Concat(tail);
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="s3">The terminal segment</param>
         /// <typeparam name="T">The streamed element type</typeparam>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static Seq<T> from<T>(Seq<T> s1, Seq<T> s2, Seq<T> s3)
+        public static Source<T> from<T>(Source<T> s1, Source<T> s2, Source<T> s3)
             => s1.Concat(s2).Concat(s3);
 
         /// <summary>
@@ -69,16 +69,16 @@ namespace Z0
         /// <param name="src">The source streams</param>
         /// <typeparam name="T">The streamed element type</typeparam>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static Seq<T> join<T>(params IEnumerable<T>[] src)
+        public static Source<T> join<T>(params IEnumerable<T>[] src)
             => src.SelectMany(x => x);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static Seq<T> from<T>(IEnumerable<T> src)
-            => new Seq<T>(src);
+        public static Source<T> from<T>(IEnumerable<T> src)
+            => new Source<T>(src);
 
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static Seq<T> empty<T>()
-            => Seq<T>.Empty;
+        public static Source<T> empty<T>()
+            => Source<T>.Empty;
     }
 }

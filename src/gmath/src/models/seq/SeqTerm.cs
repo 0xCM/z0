@@ -12,40 +12,40 @@ namespace Z0
     /// <summary>
     /// Defines a sequence term
     /// </summary>
-    public readonly struct NumericSeqTerm<T> : IEquatable<NumericSeqTerm<T>>
+    public readonly struct SeqTerm<T> : IEquatable<SeqTerm<T>>
         where T : unmanaged
     {
         /// <summary>
         /// The integer that maps to the term value
         /// </summary>
-        public readonly int Index;
+        public readonly uint Index;
 
         /// <summary>
         /// The term's value
-        /// </summary>        
+        /// </summary>
         public readonly T Value;
 
-        public static NumericSeqTerm<T> Empty => default;
-                        
+        public static SeqTerm<T> Empty => default;
+
         [MethodImpl(Inline)]
-        public static implicit operator (int i, T t)(NumericSeqTerm<T> src)
+        public static implicit operator (uint i, T t)(SeqTerm<T> src)
             => (src.Index, src.Value);
 
         [MethodImpl(Inline)]
-        public static implicit operator T(NumericSeqTerm<T> src)
+        public static implicit operator T(SeqTerm<T> src)
             => src.Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator NumericSeqTerm<T>((int i, T t) src)
-            => new NumericSeqTerm<T>(src.i, src.t);
+        public static implicit operator SeqTerm<T>((uint i, T t) src)
+            => new SeqTerm<T>(src.i, src.t);
 
         [MethodImpl(Inline)]
-        public NumericSeqTerm(int index, T value)
+        public SeqTerm(uint index, T value)
         {
             Index = index;
             Value = value;
         }
-        
+
         /// <summary>
         /// Specifies whether the term is empty
         /// </summary>
@@ -58,14 +58,14 @@ namespace Z0
         /// <param name="id">The sequence identifier, if specified</param>
         public string Format(char? id = null)
             => IsEmpty ? "{}" : $"{id ?? 'a'}_{Index} = {Value}";
-        
+
         [MethodImpl(Inline)]
-        public bool Equals(NumericSeqTerm<T> rhs)
+        public bool Equals(SeqTerm<T> rhs)
             => Index == rhs.Index && gmath.eq(Value, rhs.Value);
-        
+
         public override bool Equals(object rhs)
-            => rhs is NumericSeqTerm<T> t && Equals(t);
-        
+            => rhs is SeqTerm<T> t && Equals(t);
+
         public override int GetHashCode()
             => HashCode.Combine(Index,Value);
     }

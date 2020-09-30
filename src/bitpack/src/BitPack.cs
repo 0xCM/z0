@@ -5,11 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
     [ApiHost("api")]
     public partial class BitPack
     {
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
+        const NumericKind Closure = Konst.UnsignedInts;
     }
 }

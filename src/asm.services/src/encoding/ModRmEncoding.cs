@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -19,18 +19,21 @@ namespace Z0.Asm
 
         public readonly ModRm Encoded;
 
-        public readonly uint3 Rm 
+        public readonly uint3 Rm
         {
+            [MethodImpl(Inline)]
             get => (uint3)Input;
         }
-        
-        public readonly uint3 Reg 
+
+        public readonly uint3 Reg
         {
+            [MethodImpl(Inline)]
             get => (uint3)(srl(Input,3));
         }
 
-        public readonly uint2 Mod 
+        public readonly uint2 Mod
         {
+            [MethodImpl(Inline)]
             get => (uint2)(srl(Input,3 + 3));
         }
 
@@ -38,23 +41,7 @@ namespace Z0.Asm
         public ModRmEncoding(uint3 rm, BitSeq3 reg, BitSeq2 mod, ModRm encoded)
         {
             Input = or((byte)rm, sll((byte)reg,3), sll((byte)mod, 3 + 3));
-            // Rm = rm;
-            // Reg = reg;
-            // Mod = mod;
             Encoded = encoded;
         }
-        
-        // public string Format()
-        // {
-        //     const string Sep = " | ";
-
-        //     const string Assign = " = ";
-
-        //     var a = Rm.Format();
-        //     var b = Reg.Format();
-        //     var c = Mod.Format();
-        //     var e = Encoded.Format();
-        //     return text.concat(a, Sep, b, Sep, c, Assign, e);
-        // }
     }
 }

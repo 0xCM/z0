@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="dst">The buffer to populate</param>
         /// <param name="recurse">Specifies whether subdirectories should be searched</param>
         [MethodImpl(Inline), Op]
-        public static Seq<FilePath> managed(FolderPath src, bool recurse = false)
+        public static Source<FilePath> managed(FolderPath src, bool recurse = false)
             => files(src, recurse, ArchiveExt.Dll, ArchiveExt.Exe).Where(managed);
     }
 }

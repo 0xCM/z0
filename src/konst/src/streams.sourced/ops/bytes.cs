@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="source">The random source</param>
         [Op]
-        public static Seq<byte> bytes(IValueSource source)
+        public static Source<byte> bytes(IValueSource source)
             => z.seq(stream(w8, source));
 
         [Op]

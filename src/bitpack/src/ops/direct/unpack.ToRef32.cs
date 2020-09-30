@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Memories;
+    using static Konst;
+    using static z;
 
     partial class BitPack
     {
@@ -21,12 +22,12 @@ namespace Z0
         public static void unpack(in byte src, int count, ref uint dst)
         {
             var buffer = z64;
-            ref var tmp = ref z.uint8(ref buffer);
+            ref var tmp = ref uint8(ref buffer);
 
-            for(var i = 0; i < count; i++)
+            for(var i=0; i < count; i++)
             {
-                unpack(skip(in src, i), ref tmp);
-                z.vconvert(n64, in tmp, n256, n32).StoreTo(ref seek(ref dst, i*8));
+                unpack(skip(src, i), ref tmp);
+                vconvert(n64, in tmp, n256, n32).StoreTo(ref seek(dst, i*8));
             }
         }
     }

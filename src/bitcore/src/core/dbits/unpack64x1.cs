@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
     using static z;
 
@@ -20,7 +20,6 @@ namespace Z0
         [MethodImpl(Inline), Unpack]
         public static void unpack64x1(ulong src, Span<byte> dst)
             => unpack64x1(src, ref first64(dst));
-
 
         [MethodImpl(Inline), Unpack]
         static void unpack64x1(ulong src, ref ulong dst)

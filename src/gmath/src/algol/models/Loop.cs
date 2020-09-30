@@ -5,14 +5,20 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    [WfHost]
-    public sealed class EmitResBytesHost : WfHost<EmitResBytesHost>
+    using static Konst;
+    using static z;
+
+    public struct Loop<I>
+        where I : unmanaged
     {
-        protected override void Execute(IWfShell wf)
-        {
-            using var step = new EmitResBytes(wf, this);
-            step.Run();
-        }
+        public I Lower;
+
+        public bool LowerInclusive;
+
+        public I Upper;
+
+        public bool UpperInclusive;
     }
 }

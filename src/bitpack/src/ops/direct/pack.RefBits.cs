@@ -22,7 +22,7 @@ namespace Z0
         public static byte pack(in uint src, N8 count, W8 dst)
         {
             var v0 = vload(n256, skip(src,0*8));
-            return (byte)packlsb(z.vcompact(v0, n128, z8),n8);
+            return (byte)packlsb(vcompact(v0, n128, z8),n8);
         }
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Z0
         {
             var v0 = vload(n256, skip(src,0*8));
             var v1 = vload(n256, skip(src,1*8));
-            return packlsb(z.vcompact(v0, v1, n128, z8), n8);
+            return packlsb(vcompact(v0, v1, n128, z8), n8);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         {
             var v0 = vload(n256, skip(src,0*8));
             var v1 = vload(n256, skip(src,1*8));
-            var x = z.vcompact(v0,v1,n256,z16);
+            var x = vcompact(v0,v1,n256,z16);
 
             v0 = vload(n256, skip(src,2*8));
             v1 = vload(n256, skip(src,3*8));
@@ -76,17 +76,17 @@ namespace Z0
             v1 = vload(n256, skip(src,3*8));
             var y = z.vcompact(v0,v1,n256,z16);
 
-            var packed = (ulong)packlsb(z.vcompact(x,y,n256,z8), n8);
+            var packed = (ulong)packlsb(vcompact(x,y,n256,z8), n8);
 
             v0 = vload(n256, skip(src,4*8));
             v1 = vload(n256, skip(src,5*8));
-            x = z.vcompact(v0,v1,n256,z16);
+            x = vcompact(v0,v1,n256,z16);
 
             v0 = vload(n256, skip(src,6*8));
             v1 = vload(n256, skip(src,7*8));
-            y = z.vcompact(v0,v1,n256,z16);
+            y = vcompact(v0,v1,n256,z16);
 
-            packed |= (ulong)packlsb(z.vcompact(x,y,n256,z8), n8) << 32;
+            packed |= (ulong)packlsb(vcompact(x,y,n256,z8), n8) << 32;
 
             return packed;
         }

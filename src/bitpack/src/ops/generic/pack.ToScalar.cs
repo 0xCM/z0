@@ -7,10 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static dvec;
     using static Konst;
     using static z;
-    using static V0;
     using static BitMasks.Literals;
 
     partial class BitPack
@@ -21,10 +19,10 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="mod">The bit selection modulus</param>
         /// <param name="block">The index of the block to pack</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte pack<T>(in T src, N8 count, N8 mod)
             where T : unmanaged
-                => (byte)Bits.gather(force<T,ulong>(src), Lsb64x8x1);
+                => (byte)BitMasks.gather(force<T,ulong>(src), Lsb64x8x1);
 
         /// <summary>
         /// Packs 16 1-bit values taken from the least significant bit of each source byte
@@ -32,10 +30,10 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="count">The number of bits to pack</param>
         /// <param name="mod">The bit selection modulus</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ushort pack<T>(in T src, N16 count, N8 mod)
             where T : unmanaged
-                => z.vtakemask(gvec.vsll(vload(n128, As.view64u(src)),7));
+                => z.vtakemask(gvec.vsll(z.vload(n128, z.view64u(src)),7));
 
         /// <summary>
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
@@ -43,10 +41,10 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="count">The number of bits to pack</param>
         /// <param name="mod">The bit selection modulus</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint pack<T>(in T src, N32 count, N8 mod)
             where T : unmanaged
-                => z.vtakemask(gvec.vsll(vload(n256, As.view64u(src)),7));
+                => z.vtakemask(gvec.vsll(z.vload(n256, z.view64u(src)),7));
 
         /// <summary>
         /// Packs 64 1-bit values taken from the least significant bit of each source byte
@@ -54,7 +52,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="count">The number of bits to pack</param>
         /// <param name="mod">The bit selection modulus</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ulong pack<T>(in T src, N64 count, N8 mod)
             where T : unmanaged
         {

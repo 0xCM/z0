@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The packed bit source</param>
         /// <param name="dst">The unpacked bit target</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void unpack<T>(ReadOnlySpan<T> src, in SpanBlock256<uint> dst)
             where T : unmanaged
         {
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="dst">The unpacked bit target</param>
         /// <param name="block">The target block index</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly SpanBlock256<uint> unpack<T>(ReadOnlySpan<T> src, in SpanBlock256<uint> dst, int block)
             where T : unmanaged
         {

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class gbits
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// Returns 1 if an index-identified bit is enabled, false otherwise
         /// </summary>
         /// <param name="src">The value to test</param>
-        /// <param name="pos">The bit index to chech</param>
+        /// <param name="pos">The bit index to check</param>
         [MethodImpl(Inline), TestBit, Closures(Integers)]
         public static Bit32 testbit<T>(T src, byte pos)
             where T : unmanaged
@@ -63,7 +63,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                  return Bits.testbit(float64(src), pos);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

@@ -11,11 +11,6 @@ namespace Z0.Asm
 
     public interface IAsmServices : TIdentities, IDynamic
     {
-        /// <summary>
-        /// Writer factory accessor
-        /// </summary>
-        AsmTextWriterFactory AsmWriterFactory
-            => Asm.AsmWriter.Factory;
 
         /// <summary>
         /// Default asm formatter accessor

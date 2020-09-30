@@ -37,8 +37,8 @@ namespace Z0
         {
             const ulong M = (ulong)L.Lsb64x8x1;
 
-            seek(dst, 0) = scatter(src, M);
-            seek(dst, 1) = scatter(uint16(src >> 8), M);
+            seek(dst, 0) = BitMasks.scatter(src, M);
+            seek(dst, 1) = BitMasks.scatter(uint16(src >> 8), M);
         }
     }
 }

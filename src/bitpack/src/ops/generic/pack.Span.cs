@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="count">The number of bits to pack</param>
         /// <param name="mod">The selection modulus</param>
         /// <param name="offset">The source offset</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte pack<T>(ReadOnlySpan<T> src, N8 count, N8 mod, int offset = 0)
             where T : unmanaged
                 => pack8(uint64(skip(src,(uint)offset)));
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="count">The number of bits to pack</param>
         /// <param name="mod">The selection modulus</param>
         /// <param name="offset">The source offset</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ushort pack<T>(ReadOnlySpan<T> src, N16 count, N8 mod, int offset = 0)
             where T : unmanaged
                 => pack(skip(src,(uint)offset), count, mod);
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="count">The number of bits to pack</param>
         /// <param name="mod">The selection modulus</param>
         /// <param name="offset">The source offset</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint pack<T>(ReadOnlySpan<T> src, N32 count, N8 mod, int offset = 0)
             where T : unmanaged
                 => pack(skip(src,(uint)offset), count, mod);
@@ -55,7 +55,7 @@ namespace Z0
         /// <param name="count">The number of bits to pack</param>
         /// <param name="mod">The selection modulus</param>
         /// <param name="offset">The source offset</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ulong pack<T>(ReadOnlySpan<T> src, N64 count, N8 mod, int offset = 0)
             where T : unmanaged
                 => pack(skip(src,(uint)offset),count,mod);

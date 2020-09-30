@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static BitMasks;
 
     partial class BitPack
     {
@@ -20,10 +21,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack(byte src, Span<byte> dst)
         {
-            var mask = BitMasks.lsb<ulong>(n8,n1);
+            var mask = lsb<ulong>(n8,n1);
             ref var lead = ref first(dst);
 
-            seek64(lead, 0) = Bits.scatter((ulong)(byte)src, mask);
+            seek64(lead, 0) = scatter((ulong)(byte)src, mask);
         }
 
         /// <summary>
@@ -34,11 +35,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack(ushort src, Span<byte> dst)
         {
-            var mask = BitMasks.lsb<ulong>(n8,n1);
+            var mask = lsb<ulong>(n8,n1);
             ref var lead = ref first(dst);
 
-            seek64(lead, 0) = Bits.scatter((ulong)(byte)src, mask);
-            seek64(lead, 1) = Bits.scatter((ulong)((byte)(src >> 8)), mask);
+            seek64(lead, 0) = scatter((ulong)(byte)src, mask);
+            seek64(lead, 1) = scatter((ulong)((byte)(src >> 8)), mask);
         }
 
         /// <summary>
@@ -49,13 +50,13 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack(uint src, Span<byte> dst)
         {
-            var mask = BitMasks.lsb<ulong>(n8,n1);
+            var mask = lsb<ulong>(n8,n1);
             ref var lead = ref first(dst);
 
-            seek64(lead, 0) = Bits.scatter((ulong)(byte)src, mask);
-            seek64(lead, 1) = Bits.scatter((ulong)((byte)(src >> 8)), mask);
-            seek64(lead, 2) = Bits.scatter((ulong)((byte)(src >> 16)), mask);
-            seek64(lead, 3) = Bits.scatter((ulong)((byte)(src >> 24)), mask);
+            seek64(lead, 0) = scatter((ulong)(byte)src, mask);
+            seek64(lead, 1) = scatter((ulong)((byte)(src >> 8)), mask);
+            seek64(lead, 2) = scatter((ulong)((byte)(src >> 16)), mask);
+            seek64(lead, 3) = scatter((ulong)((byte)(src >> 24)), mask);
         }
 
         /// <summary>

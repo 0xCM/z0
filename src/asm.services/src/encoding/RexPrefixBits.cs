@@ -15,8 +15,7 @@ namespace Z0.Asm
     using RF = RexFieldIndex;
 
     /// <summary>
-    /// A prefix that occurs at most once and is applicable to instructions in 64-bit mode and which
-    /// facilitates specifying
+    /// A prefix that occurs at most once and is applicable to instructions in 64-bit mode and which facilitates specifying
     /// a) gp and sse register operands
     /// b) 64-bit operand size
     /// c) extended control register operands

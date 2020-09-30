@@ -12,13 +12,13 @@ namespace Z0
     using static As;
 
     public class t_scatter : t_bitcore<t_scatter>
-    {        
+    {
         public void sb_scatter_basecase()
         {
             var src1 = 0b00000000_00000000_00000000_10101010u;
-            var m1 =   0b00000011_00000011_00000011_00000011u;             
+            var m1 =   0b00000011_00000011_00000011_00000011u;
             var d1e =  0b00000010_00000010_00000010_00000010u;
-            var d1a = Bits.scatter(src1, m1);
+            var d1a = BitMasks.scatter(src1, m1);
             Claim.Eq(d1e,d1a);
         }
 
@@ -39,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         /// <param name="mask">The scatter spec</param>
-        /// <typeparam name="T">The identifiying mask</typeparam>
+        /// <typeparam name="T">The mask type</typeparam>
         [MethodImpl(Inline)]
         static T scatter<T>(T src, T mask)
             where T : unmanaged
@@ -52,9 +52,9 @@ namespace Z0
                 return generic<T>(scatter(uint32(src), uint32(mask)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(scatter(uint64(src), uint64(mask)));
-            else            
-                throw Unsupported.define<T>();
-        }           
+            else
+                throw no<T>();
+        }
 
         /// <summary>
         /// Scatters contiguous low bits from the source across a target according to a mask
@@ -135,7 +135,7 @@ namespace Z0
             }
             return dst;
         }
- 
+
         /// <summary>
         /// Generic scalar bit scatter check
         /// </summary>
@@ -151,6 +151,6 @@ namespace Z0
                 var s2 = gbits.scatter(src,mask);
                 Claim.Eq(s1,s2);
             }
-        }             
+        }
     }
 }

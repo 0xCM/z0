@@ -6,8 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    
+
     using static Konst;
     using static z;
 
@@ -27,9 +26,9 @@ namespace Z0
 		/// <summary>
 		/// The bit-width of a cell
 		/// </summary>
-		public byte CellWidth;	
+		public byte CellWidth;
 
-		ushort Padding;		 
+		ushort Padding;
 
 		/// <summary>
 		/// Defines a bit position predicated on the width of a storage cell and the 0-based linear bit index
@@ -68,14 +67,14 @@ namespace Z0
 		public static BitPos<T> FromBitIndex<T>(uint index)
 			where T : unmanaged
 				=> BitPos<T>.FromLinearIndex(index);
-				
+
         /// <summary>
         /// Computes the cell index of a linear bit index
         /// </summary>
         /// <param name="w">The width of a storage cell</param>
         /// <param name="index">The linear bit index</param>
 		[MethodImpl(Inline)]
-        public static ushort linear(byte w, uint index) 
+        public static ushort linear(byte w, uint index)
 			=> uint16(index/w);
 
         /// <summary>
@@ -84,7 +83,7 @@ namespace Z0
         /// <param name="w">The cell width</param>
         /// <param name="index">The linear bit index</param>
 		[MethodImpl(Inline)]
-        public static byte offset(byte w, uint index) 
+        public static byte offset(byte w, uint index)
 			=> uint8(index % w);
 
 		/// <summary>
@@ -139,8 +138,8 @@ namespace Z0
 		}
 
 		[MethodImpl(Inline)]
-		public static bool operator <(BitPos lpos, BitPos rpos)		
-			=> lpos.BitIndex < rpos.BitIndex;		
+		public static bool operator <(BitPos lpos, BitPos rpos)
+			=> lpos.BitIndex < rpos.BitIndex;
 
 		[MethodImpl(Inline)]
 		public static bool operator <=(BitPos lpos, BitPos rpos)
@@ -179,7 +178,7 @@ namespace Z0
 			[MethodImpl(Inline)]
 			get => linear(CellWidth, CellIndex, BitOffset);
 		}
-		
+
 		[MethodImpl(Inline)]
         public void Add(uint bitindex)
         {
@@ -201,7 +200,7 @@ namespace Z0
             {
 				CellIndex = 0;
 				BitOffset = 0;
-			}    
+			}
         }
 
 		[MethodImpl(Inline)]
@@ -215,7 +214,7 @@ namespace Z0
                 {
                     BitOffset = (byte)(CellWidth - 1);
                     --CellIndex;
-                }            
+                }
             }
         }
 

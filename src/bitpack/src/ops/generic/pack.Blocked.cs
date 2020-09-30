@@ -10,6 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
     using static BitMasks.Literals;
+    using static BitMasks;
 
     partial class BitPack
     {
@@ -19,10 +20,10 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="mod">The bit selection modulus</param>
         /// <param name="block">The index of the block to pack</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte pack<T>(in SpanBlock32<T> src, N8 mod, int block = 0)
             where T : unmanaged
-                => (byte)Bits.gather(uint32(src.BlockRef(block)), Lsb32x8x1);
+                => (byte)gather(uint32(src.BlockRef(block)), Lsb32x8x1);
 
         /// <summary>
         /// Packs 8 1-bit values taken from the least significant bit of each source byte of an index-identified block
@@ -30,7 +31,7 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="mod">The bit selection modulus</param>
         /// <param name="block">The index of the block to pack</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte pack<T>(in SpanBlock64<T> src, N8 mod, int block = 0)
             where T : unmanaged
                 => pack8(force<T,ulong>(src.BlockRef(block)));
@@ -39,7 +40,7 @@ namespace Z0
         /// Pack 16 1-bit values taken from the least significant bit of each source byte
         /// </summary>
         /// <param name="src">The pack source</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ushort pack<T>(in SpanBlock128<T> src, N8 mod, int block = 0)
             where T : unmanaged
                 => pack(src.BlockRef(block), n16, mod);
@@ -47,7 +48,7 @@ namespace Z0
         /// <summary>
         /// Packs 32 1-bit values taken from the least significant bit of each source byte
         /// </summary>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint pack<T>(in SpanBlock256<T> src, N8 mod, int block = 0)
             where T : unmanaged
                 => pack(src.BlockRef(block), n32, mod);
@@ -55,7 +56,7 @@ namespace Z0
         /// <summary>
         /// Packs 64 1-bit values taken from the least significant bit of each source byte
         /// </summary>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ulong pack<T>(in SpanBlock512<T> src, N8 mod, int block = 0)
             where T : unmanaged
                 => pack(src.BlockRef(block), n64, mod);
@@ -65,6 +66,6 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline)]
         static byte pack8(ulong src)
-            => (byte)Bits.gather(src, Lsb64x8x1);
+            => (byte)gather(src, Lsb64x8x1);
     }
 }

@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="dst">The bit target</param>
         [MethodImpl(Inline), Unpack]
         public static void unpack8x1(byte src, ref ulong dst)
-            => dst = scatter(src, (ulong)L.Lsb64x8x1);
+            => dst = BitMasks.scatter(src, (ulong)L.Lsb64x8x1);
 
         /// <summary>
         /// Sends each source bit to a corresponding target cell

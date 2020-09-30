@@ -18,11 +18,11 @@ namespace Z0
             => new Lazy<T>(factory);
 
         [MethodImpl(Inline)]
-        public static Seq<T> defer<T>(IEnumerable<T> src)
-            => new Seq<T>(src);
+        public static Source<T> defer<T>(IEnumerable<T> src)
+            => new Source<T>(src);
 
         [MethodImpl(Inline)]
-        public static Seq<T> defer<T>(params T[] src)
-            => new Seq<T>(src);
+        public static Source<T> defer<T>(params T[] src)
+            => new Source<T>(src);
     }
 }

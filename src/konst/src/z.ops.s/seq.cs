@@ -14,7 +14,7 @@ namespace Z0
     partial struct z
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static Seq<T> seq<T>(IEnumerable<T> src)
-            => new Seq<T>(src);
+        public static Source<T> seq<T>(IEnumerable<T> src)
+            => new Source<T>(src);
     }
 }

@@ -95,7 +95,5 @@ namespace Z0
                 dst.EmitEol();
             return ref dst;
         }
-
-
     }
 }

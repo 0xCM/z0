@@ -21,7 +21,6 @@ namespace Z0
     {
         readonly Span<T> data;
 
-
         [MethodImpl(Inline)]
         public static implicit operator BitBlock<T>(in BitBlock<N,T> x)
             => new BitBlock<T>(x.data, (uint)new N().NatValue);
@@ -187,7 +186,7 @@ namespace Z0
             get => BitBlocks.readbit(in Head, bitpos);
 
             [MethodImpl(Inline)]
-            set => BitBlocks.setbit(bitpos, value, ref Head);
+            set => BitBlocks.setbit((uint)bitpos, value, ref Head);
         }
 
         /// <summary>

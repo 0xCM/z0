@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static BitMasks;
 
     partial class BitPack
     {
@@ -20,8 +21,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack(byte packed, ref byte unpacked)
         {
-            var m = BitMasks.lsb<ulong>(n8,n1);
-            seek64(unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
+            var m = lsb<ulong>(n8,n1);
+            seek64(unpacked, 0) = scatter((ulong)(byte)packed, m);
         }
 
         /// <summary>
@@ -32,9 +33,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack(ushort packed, ref byte unpacked)
         {
-            var m = BitMasks.lsb<ulong>(n8,n1);
-            seek64(unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
-            seek64(unpacked, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
+            var m = lsb<ulong>(n8,n1);
+            seek64(unpacked, 0) = scatter((ulong)(byte)packed, m);
+            seek64(unpacked, 1) = scatter((ulong)((byte)(packed >> 8)), m);
         }
 
         /// <summary>
@@ -45,11 +46,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack(uint packed, ref byte unpacked)
         {
-            var m = BitMasks.lsb<ulong>(n8,n1);
-            seek64(unpacked, 0) = Bits.scatter((ulong)(byte)packed, m);
-            seek64(unpacked, 1) = Bits.scatter((ulong)((byte)(packed >> 8)), m);
-            seek64(unpacked, 2) = Bits.scatter((ulong)((byte)(packed >> 16)), m);
-            seek64(unpacked, 3) = Bits.scatter((ulong)((byte)(packed >> 24)), m);
+            var m = lsb<ulong>(n8,n1);
+            seek64(unpacked, 0) = scatter((ulong)(byte)packed, m);
+            seek64(unpacked, 1) = scatter((ulong)((byte)(packed >> 8)), m);
+            seek64(unpacked, 2) = scatter((ulong)((byte)(packed >> 16)), m);
+            seek64(unpacked, 3) = scatter((ulong)((byte)(packed >> 24)), m);
         }
 
         /// <summary>

@@ -6,15 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
 
     partial class XTend
     {
         /// <summary>
-        /// Extracts the bitcells froma span
+        /// Loads a <see cref='BitBlock{T}'/> from a <see cref='Span{T}'/>
         /// </summary>
         /// <param name="src">The source span</param>
         /// <param name="len">The bitvector length, if specified</param>

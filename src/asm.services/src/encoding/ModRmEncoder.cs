@@ -9,22 +9,27 @@ namespace Z0.Asm
 
     using static Konst;
     using static z;
+    using static ModRmMasks;
+
+    public readonly struct ModRmMasks
+    {
+        public const byte RmIndex = 0;
+
+        public const byte RegIndex = 2;
+
+        public const byte ModIndex = 6;
+
+        public const byte RmMask = 0b00000111;
+
+        public const byte RegMask = 0b00111000;
+
+        public const byte ModMask = 0b11000000;
+
+    }
 
     [ApiHost]
     public readonly struct ModRmEncoder
     {
-        internal const byte RmIndex = 0;
-
-        internal const byte RegIndex = 2;
-
-        internal const byte ModIndex = 6;
-
-        internal const byte RmMask = 0b00000111;
-
-        internal const byte RegMask = 0b00111000;
-
-        internal const byte ModMask = 0b11000000;
-
         [MethodImpl(Inline), Op]
         public static ModRm define(byte src)
             => new ModRm(src);

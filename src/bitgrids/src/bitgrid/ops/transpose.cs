@@ -45,15 +45,15 @@ namespace Z0
             var c = A.ColCount;
             var R = math.pow2m1(r);
 
-            var c0 = Bits.gather(A.Content, C << 0);
-            var c1 = Bits.gather(A.Content, C << 1);
-            var c2 = Bits.gather(A.Content, C << 2);
-            var c3 = Bits.gather(A.Content, C << 3);
+            var c0 = BitMasks.gather(A.Content, C << 0);
+            var c1 = BitMasks.gather(A.Content, C << 1);
+            var c2 = BitMasks.gather(A.Content, C << 2);
+            var c3 = BitMasks.gather(A.Content, C << 3);
 
-            var r0 = Bits.scatter(c0, R << 0*r);
-            var r1 = Bits.scatter(c1, R << 1*r);
-            var r2 = Bits.scatter(c2, R << 2*r);
-            var r3 = Bits.scatter(c3, R << 3*r);
+            var r0 = BitMasks.scatter(c0, R << 0*r);
+            var r1 = BitMasks.scatter(c1, R << 1*r);
+            var r2 = BitMasks.scatter(c2, R << 2*r);
+            var r3 = BitMasks.scatter(c3, R << 3*r);
             return r0 | r1 | r2 | r3;
 
         }
@@ -80,8 +80,8 @@ namespace Z0
             const uint O = BitMasks.Literals.Odd32;
 
             var mask = gvec.vtakemask(src, (byte)i);
-            var gT = gcell(g0, i, force<T>(Bits.gather(mask, E)));
-            gT = gcell(gT, j, force<T>(Bits.gather(mask, O)));
+            var gT = gcell(g0, i, force<T>(BitMasks.gather(mask, E)));
+            gT = gcell(gT, j, force<T>(BitMasks.gather(mask, O)));
             return gT;
         }
 

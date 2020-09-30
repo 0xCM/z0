@@ -12,7 +12,7 @@ namespace Z0
 
     partial class BitPack
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T pack<T>(Span<Bit32> src, T t = default)
             where T : unmanaged
                 => pack_u<T>(src);

@@ -3,12 +3,12 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static ModRmEncoder;
+    using static ModRmMasks;
 
     /// <summary>
     /// Defines a byte that follows an opcode that specifies either
@@ -17,7 +17,7 @@ namespace Z0.Asm
     /// ModRM = [Mod:[7 6] | Reg:[5 4 3] | Rm:[2 1 0] ]
     /// </summary>
     public readonly struct ModRm : ITextual
-    {                
+    {
         readonly octet Data;
 
         [MethodImpl(Inline)]
@@ -28,13 +28,11 @@ namespace Z0.Asm
         public ModRm(uint3 rm, uint3 reg, uint2 mod)
         {
             Data = (octet)rm | ((octet)reg << RegIndex ) | ((octet)mod << ModIndex);
-        }        
+        }
 
         [MethodImpl(Inline)]
         public ModRm(octet src)
-        {
-            Data = src;
-        }
+            => Data = src;
 
         /// <summary>
         /// Defines bits [2:0] of the modrm byte
@@ -78,7 +76,6 @@ namespace Z0.Asm
 
         public override string ToString()
             => Format();
-
 
         public static ModRm Empty => default;
 

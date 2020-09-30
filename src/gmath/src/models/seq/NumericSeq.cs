@@ -15,51 +15,53 @@ namespace Z0
     /// </summary>
     public readonly ref struct NumericSeq<T>
         where T : unmanaged
-    {            
-        readonly Span<NumericSeqTerm<T>> terms;
+    {
+        readonly Span<SeqTerm<T>> Terms;
 
-        public static NumericSeq<T> Empty => new NumericSeq<T>(NumericSeqTerm<T>.Empty);
-
-        internal NumericSeq(params T[] terms)
+        internal NumericSeq(params T[] src)
         {
-            if(terms.Length != 0)
+            var input = @readonly(src);
+            if(src.Length != 0)
             {
-                this.terms = new NumericSeqTerm<T>[terms.Length];
-                for(var i=0; i<terms.Length; i++)
-                    this.terms[i] = (i,terms[i]);
+                this.Terms = new SeqTerm<T>[src.Length];
+                for(var i=0u; i<src.Length; i++)
+                    seek(this.Terms,i) = new SeqTerm<T>(i, skip(input,i));
             }
             else
-                this.terms = Empty.terms;
+                Terms = Empty.Terms;
         }
 
         [MethodImpl(Inline)]
-        internal NumericSeq(params NumericSeqTerm<T>[] terms)
+        internal NumericSeq(params SeqTerm<T>[] src)
         {
-            if(terms.Length != 0)
-                this.terms = terms;
+            if(src.Length != 0)
+                Terms = src;
             else
-                this.terms = Empty.terms;
+                Terms = Empty.Terms;
         }
 
-        internal NumericSeq(Span<T> terms)
+        internal NumericSeq(Span<T> src)
         {
-            if(terms.Length != 0)
+            if(src.Length != 0)
             {
-                this.terms = new NumericSeqTerm<T>[terms.Length];
-                for(var i=0; i<terms.Length; i++)
-                    this.terms[i] = (i,terms[i]);
+                this.Terms = new SeqTerm<T>[src.Length];
+                for(var i=0u; i<src.Length; i++)
+                    seek(this.Terms,i) = new SeqTerm<T>(i, skip(src,i));
             }
             else
-                this.terms = Empty.terms;
+                Terms = Empty.Terms;
         }
 
-        /// <summary>
-        /// The sequence terms
-        /// </summary>
-        public ReadOnlySpan<NumericSeqTerm<T>> Terms
+        public ReadOnlySpan<SeqTerm<T>> TermView
         {
             [MethodImpl(Inline)]
-            get => terms;
+            get => Terms;
+        }
+
+        public Span<SeqTerm<T>> TermEdit
+        {
+            [MethodImpl(Inline)]
+            get => Terms;
         }
 
         /// <summary>
@@ -68,48 +70,50 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => terms.Length;
+            get => Terms.Length;
         }
 
         /// <summary>
         /// Returns a reference to an index-identified term
         /// </summary>
-        public ref NumericSeqTerm<T> this[int idx]
+        public ref SeqTerm<T> this[int idx]
         {
             [MethodImpl(Inline)]
-            get => ref seek(terms, (uint)idx);
+            get => ref seek(Terms, (uint)idx);
         }
 
         /// <summary>
-        /// Returns a reference to the first term of the seqence
+        /// Returns a reference to the first term of the sequence
         /// </summary>
-        public ref NumericSeqTerm<T> First
+        public ref SeqTerm<T> First
         {
             [MethodImpl(Inline)]
             get => ref this[0];
         }
 
-        public ref readonly NumericSeqTerm<T> Last
+        public ref SeqTerm<T> Last
         {
             [MethodImpl(Inline)]
             get => ref this[Length - 1];
         }
 
-        public string Format(char? delimiter = null)
+        public string Format(char delimiter)
         {
             var fmt = text.build();
             fmt.Append(Chars.LBrace);
-            for(var i=0; i<terms.Length; i++)
+            for(var i=0; i<Terms.Length; i++)
             {
-                fmt.Append(terms[i].Format());
-                if(i != terms.Length - 1)
+                fmt.Append(Terms[i].Format());
+                if(i != Terms.Length - 1)
                 {
-                    fmt.Append(delimiter ?? Chars.Comma);
+                    fmt.Append(delimiter);
                     fmt.Append(Chars.Space);
-                }                
+                }
             }
             fmt.Append(Chars.RBrace);
             return fmt.ToString();
-        }        
+        }
+
+        public static NumericSeq<T> Empty => new NumericSeq<T>(SeqTerm<T>.Empty);
     }
 }

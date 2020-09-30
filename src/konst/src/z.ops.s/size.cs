@@ -13,9 +13,25 @@ namespace Z0
 
     partial struct z
     {
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         public static uint size<T>(T t = default)
             => (uint)SizeOf<T>();
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static byte size<T>(W8 w)
+            => (byte)SizeOf<T>();
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ushort size<T>(W16 w)
+            => (ushort)SizeOf<T>();
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static uint size<T>(W32 w)
+            => (uint)SizeOf<T>();
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ulong size<T>(W64 w)
+            => (ulong)SizeOf<T>();
 
         [MethodImpl(Inline)]
         public static uint size<T>(uint count)
