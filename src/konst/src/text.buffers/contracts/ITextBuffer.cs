@@ -5,18 +5,31 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
 
-    public interface ITextBuffer : ITextual
+    public interface ITextBuffer : IBuffered<string,string>
     {
-        void Write(string src);
+        void AppendLine(string src)
+        {
+            Append(src);
+            Append(Eol);
+        }
+        void AppendLine()
+            => Append(Eol);
 
-        string Emit(bool reset = true);
+        void Append(ReadOnlySpan<char> src)
+            => Append(new string(src));
 
-        void Clear();
+        void Append(char[] src)
+            => Append(new string(src));
+
+        void Append(char c)
+            => Append(c.ToString());
+
+        void AppendFormat(string pattern, params object[] args)
+            => Append(string.Format(pattern, args));
     }
 
     public interface ITextBuffer<H> : ITextBuffer

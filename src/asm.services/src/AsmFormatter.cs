@@ -36,11 +36,11 @@ namespace Z0.Asm
             => AsmRender.format(@base, src, Config);
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<string> FormatLines(AsmFxList src)
-            => AsmRender.lines(src, Config);
+        public void Format(in AsmRoutines src, ITextBuffer dst)
+            => AsmRender.format(src, Config, dst);
 
         [MethodImpl(Inline)]
-        public ReadOnlySpan<string> FormatLines(AsmRoutine src)
-            => AsmRender.lines(src, Config);
+        public void Format(in AsmRoutine src, ITextBuffer dst)
+            => AsmRender.format(src, Config, dst);
     }
 }

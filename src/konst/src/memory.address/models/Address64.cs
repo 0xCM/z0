@@ -46,6 +46,10 @@ namespace Z0
             => (ulong)src.ToInt64();
 
         [MethodImpl(Inline)]
+        public static implicit operator ulong(A src)
+            => src.Location;
+
+        [MethodImpl(Inline)]
         public static implicit operator Address<W,T>(A src)
             => new Address<W,T>(src.Location);
 

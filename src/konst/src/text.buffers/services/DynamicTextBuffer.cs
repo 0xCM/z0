@@ -33,14 +33,38 @@ namespace Z0
             => Target.Clear();
 
         [MethodImpl(Inline)]
-        public void Write(string src)
+        public void Append(string src)
             => Target.Append(src);
 
-        public override string ToString()
-            => Emit();
+        [MethodImpl(Inline)]
+        public void AppendLine(string src)
+            => Target.AppendLine(src);
 
         [MethodImpl(Inline)]
-        public string Format()
-            => Emit();
+        public void AppendLine()
+            => Target.AppendLine();
+
+        [MethodImpl(Inline)]
+        public void Append(char src)
+            => Target.Append(src);
+
+        [MethodImpl(Inline)]
+        public void Append(ReadOnlySpan<char> src)
+            => Target.Append(src);
+
+        [MethodImpl(Inline)]
+        public void Append(params string[] src)
+            => iter(src, Append);
+
+        [MethodImpl(Inline)]
+        public void Append(char[] src)
+            => Target.Append(src);
+
+        [MethodImpl(Inline)]
+        public void AppendFormat(string pattern, params object[] args)
+            => Target.AppendFormat(pattern, args);
+
+        public override string ToString()
+            => Target.ToString();
     }
 }

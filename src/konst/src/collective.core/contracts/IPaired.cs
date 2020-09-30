@@ -4,11 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Characterizes a parametric join of arity 2
     /// </summary>
     /// <typeparam name="L">The left value type</typeparam>
     /// <typeparam name="R">The right value type</typeparam>
+    [Free]
     public interface IPaired<L,R>
     {
         /// <summary>
@@ -20,5 +23,5 @@ namespace Z0
         /// The right value
         /// </summary>
         R Right {get;}
-    }    
+    }
 }

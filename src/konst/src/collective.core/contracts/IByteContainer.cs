@@ -6,10 +6,13 @@ namespace Z0
 {
     using System;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Characterizes a container that reifies an asci sequence
     /// </summary>
     /// <typeparam name="A">The asci sequence type</typeparam>
+    [Free]
     public interface IByteContainer<A> : IBytes, IContented<A>
         where A : unmanaged, IBytes
     {

@@ -322,6 +322,5 @@ namespace Z0
 
         [FormatPattern(1, " {0}")]
         public const string LSpace = " {0}";
-
     }
 }

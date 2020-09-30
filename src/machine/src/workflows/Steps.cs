@@ -23,12 +23,6 @@ namespace Z0
     }
 
     [WfHost]
-    public sealed class EmitDatasetsHost : WfHost<EmitDatasetsHost>
-    {
-
-    }
-
-    [WfHost]
     public class CreateGlobalIndexHost : WfHost<CreateGlobalIndexHost>
     {
         public override void Run(IWfShell shell)

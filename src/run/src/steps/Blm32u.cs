@@ -57,9 +57,24 @@ namespace Z0
             => BL.xnor(a,b);
 
         [MethodImpl(NotInline)]
+        static uint rnot(uint a, uint b)
+            => BL.rnot(a,b);
+
+        [MethodImpl(NotInline)]
+        static uint impl(uint a, uint b)
+            => BL.impl(a,b);
+
+        [MethodImpl(NotInline)]
+        static uint lnot(uint a, uint b)
+            => BL.lnot(a,b);
+
+        [MethodImpl(NotInline)]
+        static uint cimpl(uint a, uint b)
+            => BL.cimpl(a,b);
+
+        [MethodImpl(NotInline)]
         static uint nand(uint a, uint b)
             => BL.nand(a,b);
-
 
         public uint Evaluate(uint a, uint b, BinaryBitLogicKind k)
         {

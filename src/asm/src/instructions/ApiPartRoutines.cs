@@ -6,7 +6,6 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
     using System.Linq;
 
     using static Konst;
@@ -70,7 +69,7 @@ namespace Z0.Asm
         public uint InstructionCount
             => (uint)_Hosts.Storage.Sum(i => (long)i.InstructionCount);
 
-        public ApiInstruction[] Instructions
+        public ApiInstructions Instructions
             => _Hosts.Storage.SelectMany(x => x.Routines).SelectMany(x => x.Instructions.Storage).OrderBy(x => x.IP).Array();
     }
 }

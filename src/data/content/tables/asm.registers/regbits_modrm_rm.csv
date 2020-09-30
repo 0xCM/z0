@@ -1,4 +1,4 @@
-# AsmTRegBits_modrm_rm - ModRm.rm Prefix Encodings, AMD Vol4 Table 1-10
+# ModRm.rm Prefix Encodings, AMD Vol4 Table 1-10
 -----------------------------------------------------
 | rm    | mod | Encoded |
 | rAX   | 11  | 000     |

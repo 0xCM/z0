@@ -15,12 +15,6 @@ namespace Z0
     partial class XTend
     {
         /// <summary>
-        /// Creates a new stringbuilder
-        /// </summary>
-        static StringBuilder build()
-            => new StringBuilder();
-
-        /// <summary>
         /// Joins the strings provided by the enumerable with an optional separator
         /// </summary>
         /// <param name="src">The source strings</param>
@@ -46,7 +40,7 @@ namespace Z0
             => new string(chars.Intersperse(sep).ToSpan());
 
         /// <summary>
-        /// Forms a string by source character justapostion
+        /// Forms a string by source character juxtaposition
         /// </summary>
         /// <param name="src">The characters to concatenate</param>
         public static string Concat(this IEnumerable<char> src)
@@ -56,38 +50,38 @@ namespace Z0
         /// Forms a string from a character array
         /// </summary>
         /// <param name="src">The source array</param>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static string Concat(this char[] src)
             => new string(src);
 
         /// <summary>
-        /// Forms a string by source character justapostion
+        /// Forms a string by source character juxtaposition
         /// </summary>
         /// <param name="src">The source span</param>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static string Concat(this ReadOnlySpan<char> src)
             => new string(src);
 
         /// <summary>
-        /// Forms a string by source character justapostion
+        /// Forms a string by source character juxtaposition
         /// </summary>
         /// <param name="src">The source span</param>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static string Concat(this Span<char> src)
             => new string(src);
 
         /// <summary>
-        /// Forms a string by source character justapostion
+        /// Forms a string by source character juxtaposition
         /// </summary>
         /// <param name="src">The source span</param>
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static ReadOnlySpan<char> Concat(this ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)
             => lhs.Concat() + rhs.Concat();
 
         public static string Concat(this Span<string> src, string sep)
         {
-            var dst = build();
-            for(var i=0; i<src.Length; i++)   
+            var dst = text.build();
+            for(var i=0; i<src.Length; i++)
             {
                 ref var cell = ref src[i];
                 if(i != src.Length - 1)
@@ -110,6 +104,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source text</param>
         public static string Concat(this Span<string> src, char sep)
-            => src.Concat(sep.ToString()); 
+            => src.Concat(sep.ToString());
     }
 }

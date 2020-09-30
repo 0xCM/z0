@@ -75,12 +75,11 @@ namespace Z0
             }
         }
 
-        public void Render(ApiRoutine src, StreamWriter dst)
+        public void Render(ApiRoutineObsolete src, StreamWriter dst)
         {
             Buffer.Clear();
 
-            var id = src.OpId;
-            Buffer.Add(id);
+            Buffer.Add(src.OpId);
             Buffer.Add(SectionSep);
 
             var sequence = OffsetSequence.Zero;
@@ -144,7 +143,6 @@ namespace Z0
 
         public void Render(ApiInstruction src, MemoryOffset address,  OffsetSequence sequence)
         {
-            var id = src.OpId;
             var @base = src.Base;
             var fx = src.Instruction;
             var encoded = Format(src.Encoded);

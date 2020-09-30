@@ -31,14 +31,14 @@ namespace Z0.Asm
             => (byte)Fx.ByteLength;
 
         public BinaryCode Encoded
-            => Fx.Encoded;
+            => Fx.EncodedData;
 
         [MethodImpl(Inline)]
         public AsmCallInfo(ApiInstruction src)
         {
             Fx = src;
             Target = MemoryAddress.Empty;
-            var bytes = z.span(src.Encoded.Data);
+            var bytes = z.span(src.EncodedData.Data);
             var count = (byte)(bytes.Length - 1); //op code takes up one byte
             var offset = ByteRead.read(bytes.Slice(1));
             Target = src.NextIp + offset;

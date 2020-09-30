@@ -1,4 +1,4 @@
-# AsmTRegBits32_reg Specified by reg Field During 32-Bit Data Operations
+# Specified by reg Field During 32-Bit Data Operations
 -----------------------------------------------------------------------
 | reg | w = 0 | w = 1 | Notes                                   |
 | 000 | AL    | EAX   |                                         |

@@ -38,21 +38,21 @@ namespace Z0
 
             try
             {
-                Run(new EmitFieldMetadataHost());
+                Run(new EmitFieldMetadata());
                 Run(new ProcessPartFiles());
                 Run(new EmitSectionHeadersHost());
-                Run(new EmitImageConstantsHost());
+                Run(new EmitImageConstants());
                 Run(new EmitLocatedPartsHost());
                 Run(new EmitStringRecords());
                 Run(new EmitProjectDocsHost());
                 Run(new EmitResBytesHost());
-                Run(new EmitImageBlobsHost());
+                Run(new EmitImageBlobs());
                 Run(new EmitPartCilHost());
                 Run(new EmitEnumCatalogHost());
-                Run(new EmitFieldLiteralsHost());
+                Run(new EmitFieldLiterals());
                 Run(new EmitContentCatalogHost());
                 Run(new EmitBitMasksHost());
-                CreateCaptureIndexHost.run(Wf, State);
+                CreateCaptureIndex.run(Wf, State);
 
             }
             catch(Exception e)
@@ -63,16 +63,16 @@ namespace Z0
             Wf.Ran(Host);
         }
 
-        void Run(EmitImageConstantsHost host)
+        void Run(EmitImageConstants host)
             => host.Run(Wf);
 
-        void Run(EmitFieldMetadataHost host)
+        void Run(EmitFieldMetadata host)
             => host.Run(Wf);
 
         void Run(EmitEnumCatalogHost host)
             => host.Run(Wf);
 
-        void Run(EmitFieldLiteralsHost host)
+        void Run(EmitFieldLiterals host)
             => host.Run(Wf);
 
         void Run(EmitPartCilHost host)
@@ -93,7 +93,7 @@ namespace Z0
         void Run(EmitStringRecords host)
             => host.Run(Wf);
 
-        void Run(EmitImageBlobsHost host)
+        void Run(EmitImageBlobs host)
             => host.Run(Wf);
 
         void Run(EmitSectionHeadersHost host)

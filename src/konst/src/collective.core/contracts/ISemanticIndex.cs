@@ -5,8 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface ISemanticIndex
     {
         Count EntryCount {get;}
@@ -19,6 +21,7 @@ namespace Z0
 
     }
 
+    [Free]
     public interface ISemanticIndex<K> : ISemanticIndex
         where K : unmanaged, Enum
     {
@@ -51,6 +54,7 @@ namespace Z0
 
     }
 
+    [Free]
     public interface ILiteralSemanticIndex<K> : ISemanticIndex<K>
         where K : unmanaged, Enum
     {
@@ -58,11 +62,13 @@ namespace Z0
     }
 
 
+    [Free]
     public interface ILiteralStringIndex<K>
     {
 
     }
 
+    [Free]
     public interface ISemanticIndex<K,T> : ISemanticIndex<K>
         where K : unmanaged, Enum
     {
@@ -76,12 +82,11 @@ namespace Z0
             => View.Length;
     }
 
+     [Free]
     public interface ISemanticIndex<H,K,T> : ISemanticIndex<K,T>
         where H : struct, ISemanticIndex<H,K,T>
         where K : unmanaged, Enum
     {
 
     }
-
-
 }

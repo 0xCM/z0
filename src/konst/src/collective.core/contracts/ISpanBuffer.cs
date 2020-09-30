@@ -5,8 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Security;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface ISpanBuffer
     {
         /// <summary>
@@ -31,7 +33,7 @@ namespace Z0
 
     }
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ISpanBuffer<T> : ISpanBuffer
     {
         T[] Storage {get;}
@@ -61,7 +63,7 @@ namespace Z0
             => Length != 0;
     }
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ISpanBuffer<H,T> : ISpanBuffer<T>
         where H : struct, ISpanBuffer<H,T>
     {

@@ -86,7 +86,7 @@ namespace Z0
                 let i = a.Instruction
                 where i.Mnemonic == Mnemonic.Call
                 select a;
-        public AspectData<AsmCallInfo>[] CallData
+        public AspectData<AsmCallInfo>[] CallAspects
             => (from c in CallInfo
                 let values = c.AspectValues
                 select new AspectData<AsmCallInfo>(c, c.AspectValues.ToArray())).Array();

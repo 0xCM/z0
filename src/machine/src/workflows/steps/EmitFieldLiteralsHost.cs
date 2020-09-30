@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     [WfHost]
-    public sealed class EmitFieldLiteralsHost : WfHost<EmitFieldLiteralsHost>
+    public sealed class EmitFieldLiterals : WfHost<EmitFieldLiterals>
     {
         protected override void Execute(IWfShell wf)
         {
-            using var step = new EmitFieldLiterals(wf, this);
+            using var step = new EmitFieldLiteralsStep(wf, this);
             step.Run();
         }
     }

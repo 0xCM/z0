@@ -62,6 +62,12 @@ namespace Z0
              get => Code.Base;
         }
 
+        public string OpId
+        {
+             [MethodImpl(Inline)]
+             get => Uri.OpId.Identifier;
+        }
+
         /// <summary>
         /// An identifier populated with parsed operation uri text, when possible; otherwise populated with unparsed uri text
         /// </summary>

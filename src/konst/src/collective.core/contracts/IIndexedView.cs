@@ -5,7 +5,9 @@
 namespace Z0
 {
     using System;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IIndexedView<T> : IMeasured
     {
         ref readonly T Lookup(int index);
@@ -14,6 +16,7 @@ namespace Z0
             => ref Lookup(index);
     }
 
+    [Free]
     public interface IIndexedView<E,T> : IIndexedView<T>
         where E : unmanaged, Enum
     {

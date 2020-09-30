@@ -13,6 +13,8 @@ namespace Z0
 
     public struct JmpInfo
     {
+        public const string RenderPattern = "{0,-16} | {1,-16} | {2,-16} | {3,-16} | {4,-16} | {5,-16:g} | {6,-32}";
+
         public MemoryAddress Base;
 
         public MemoryAddress Source;

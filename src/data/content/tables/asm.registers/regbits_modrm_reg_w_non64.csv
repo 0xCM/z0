@@ -1,4 +1,4 @@
-# AsmTRegBits_reg_ModRm - Register Specified by reg Field During 32-Bit Data Operations When Mod/RM w Field is Present in Instruction; non 64-bit modes
+# Register Specified by reg Field During 32-Bit Data Operations When Mod/RM w Field is Present in Instruction; non 64-bit modes
 ----------------------------------------------------------------------------------------------------------------------------
 | reg | w = 0 | w = 1 |
 | 000 | AL    | EAX   |

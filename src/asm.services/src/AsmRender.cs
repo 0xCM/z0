@@ -7,14 +7,17 @@ namespace Z0.Asm
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.Text;
 
     using static Konst;
     using static z;
 
     [ApiHost]
-    public readonly partial struct AsmRender
+    public readonly struct AsmRender
     {
         const char Space = Chars.Space;
+
+        const string PageBreak = text.PageBreak;
 
         /// <summary>
         /// Formats source bits on a single line intended for emission in the function header
@@ -76,26 +79,19 @@ namespace Z0.Asm
             return dst;
         }
 
-        /// <summary>
-        /// Formats a contiguous sequence of instructions defined in an instruction list
-        /// </summary>
-        /// <param name="src">The instruction source</param>
-        /// <param name="config">An optional format configuration</param>
         [Op]
-        public static ReadOnlySpan<string> lines(in AsmFxList src, in AsmFormatConfig config)
+        public static uint format(in AsmFxList src, in AsmFormatConfig config, Span<string> dst)
         {
             var count = src.Count;
             if(count == 0)
-                return default;
+                return 0;
 
-            //var config = cfg ?? AsmFormatSpec.Default;
             var summaries =  asm.summarize(src);
-            var lines = span<string>(count);
             var @base = src[0].IP;
-
             for(var i=0u; i<(uint)count; i++)
-                seek(lines,i) = format(@base, skip(summaries,i), config);
-            return lines;
+                seek(dst,i) = format(@base, skip(summaries,i), config);
+
+            return count;
         }
 
         [MethodImpl(Inline), Op]
@@ -121,12 +117,18 @@ namespace Z0.Asm
         [Op]
         public static string format(in MemoryAddress @base, in AsmFxSummary src, in AsmFormatConfig config)
         {
-            var description = text.build();
+            var dst = text.build();
+            format(@base, src, config, dst);
+            return dst.ToString();
+        }
+
+        [Op]
+        public static void format(in MemoryAddress @base, in AsmFxSummary src, in AsmFormatConfig config, StringBuilder dst)
+        {
             var absolute = @base + src.Offset;
             var ll = label((ushort)src.Offset);
-            description.Append(text.concat(ll, src.Formatted.PadRight(config.InstructionPad, Space)));
-            description.Append(comment(format(src.Spec, src.Encoded, config.FieldDelimiter)));
-            return description.ToString();
+            dst.Append(text.concat(ll, src.Formatted.PadRight(config.InstructionPad, Space)));
+            dst.Append(comment(format(src.Spec, src.Encoded, config.FieldDelimiter)));
         }
 
         [MethodImpl(Inline), Op]
@@ -134,27 +136,36 @@ namespace Z0.Asm
             => format(@base, src, AsmFormatConfig.Default);
 
         [Op]
-        public static string format(in AsmRoutines src, in AsmFormatConfig config)
+        public static void format(in AsmRoutines src, in AsmFormatConfig config, ITextBuffer dst)
         {
-            var dst = text.build();
-            for(var i=0; i<src.Data.Length; i++)
+            var count = src.Count;
+            if(count != 0)
             {
-                dst.Append(lines(src.Data[i], config).Concat());
-                dst.AppendLine(text.PageBreak);
+                ref var x = ref src.First;
+                for(var i=0; i<count; i++)
+                {
+                    var l = lines(skip(x,i), config);
+                    dst.Append(l.Concat(Eol));
+
+                    if(config.EmitSectionDelimiter)
+                        dst.AppendLine(PageBreak);
+                    else
+                        dst.AppendLine();
+                }
             }
-            return dst.ToString();
         }
 
-        /// <summary>
-        /// Formats the assembly function detail
-        /// </summary>
-        /// <param name="src">The source function</param>
-        /// <param name="fmt">The format configuration</param>
         [Op]
         public static string format(in AsmRoutine src, in AsmFormatConfig config)
         {
             var dst = text.build();
+            format(src,config, dst);
+            return dst.ToString();
+        }
 
+        [Op]
+        public static void format(in AsmRoutine src, in AsmFormatConfig config, StringBuilder dst)
+        {
             if(config.EmitSectionDelimiter)
                 dst.AppendLine(config.SectionDelimiter);
 
@@ -162,9 +173,20 @@ namespace Z0.Asm
                 foreach(var line in header(src, config))
                     dst.AppendLine(line);
 
-            dst.AppendLine(lines(src, config).Concat(Chars.Eol));
+            dst.AppendLine(lines(src, config).Concat(Eol));
+        }
 
-            return dst.ToString();
+        [Op]
+        public static void format(in AsmRoutine src, in AsmFormatConfig config, ITextBuffer dst)
+        {
+            if(config.EmitSectionDelimiter)
+                dst.AppendLine(config.SectionDelimiter);
+
+            if(config.EmitFunctionHeader)
+                foreach(var line in header(src, config))
+                    dst.AppendLine(line);
+
+            dst.AppendLine(lines(src, config).Concat(Eol));
         }
     }
 }

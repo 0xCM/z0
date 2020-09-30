@@ -13,30 +13,30 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public interface IJmpProcessor
-    {
-        void OnJA(ApiInstruction src)
-        {
-            term.announce();
-        }
+    // public interface IJmpProcessor
+    // {
+    //     void OnJA(ApiInstruction src)
+    //     {
+    //         term.announce();
+    //     }
 
-        void OnJAE(ApiInstruction src)
-        {
-            term.announce();
-        }
+    //     void OnJAE(ApiInstruction src)
+    //     {
+    //         term.announce();
+    //     }
 
-        void OnJB(ApiInstruction src)
-        {
-            term.announce();
-        }
+    //     void OnJB(ApiInstruction src)
+    //     {
+    //         term.announce();
+    //     }
 
-        void OnJBE(ApiInstruction src)
-        {
-            term.announce();
-        }
-    }
+    //     void OnJBE(ApiInstruction src)
+    //     {
+    //         term.announce();
+    //     }
+    // }
 
-    public struct AsmJmpProcessor : IJmpProcessor, IDisposable
+    public struct AsmJmpProcessor : IDisposable
     {
         readonly BitBroker<JmpKind,ApiInstruction> broker;
 
@@ -44,18 +44,18 @@ namespace Z0
 
         public readonly ApiPartRoutines Source;
 
-        public readonly FilePath Target;
+        public readonly FS.FilePath Target;
 
         readonly List<JmpInfo> Collected;
 
-        [MethodImpl(Inline)]
-        public void Connect()
-        {
-            broker[JmpKind.JA] = Flow.handler<ApiInstruction>(OnJA);
-            broker[JmpKind.JAE] = Flow.handler<ApiInstruction>(OnJAE);
-            broker[JmpKind.JB] = Flow.handler<ApiInstruction>(OnJB);
-            broker[JmpKind.JBE] = Flow.handler<ApiInstruction>(OnJBE);
-        }
+        // [MethodImpl(Inline)]
+        // public void Connect()
+        // {
+        //     broker[JmpKind.JA] = Flow.handler<ApiInstruction>(OnJA);
+        //     broker[JmpKind.JAE] = Flow.handler<ApiInstruction>(OnJAE);
+        //     broker[JmpKind.JB] = Flow.handler<ApiInstruction>(OnJB);
+        //     broker[JmpKind.JBE] = Flow.handler<ApiInstruction>(OnJBE);
+        // }
 
         public void Dispose()
         {
@@ -69,9 +69,9 @@ namespace Z0
             broker = AsmBrokers.jmp();
             Source = src;
             Collected = list<JmpInfo>();
-            Target = wf.AsmTables + FolderName.Define("jumps") + FileName.define(src.Part.Format(), FileExtensions.Csv) ;
-            if(connect)
-                Connect();
+            Target = wf.AsmTables + FS.folder("jumps") + FS.file(src.Part.Format(), FileExtensions.Csv) ;
+            // if(connect)
+            //     Connect();
         }
 
         void Dispatch(in ApiInstruction fx)
@@ -134,15 +134,18 @@ namespace Z0
                 for(var i=0u; i<count; i++)
                 {
                     ref readonly var jmp = ref skip(jumps,i);
-                    var j=0;
-                    formatter.Delimit(skip(widths,j++), jmp.Base);
-                    formatter.Delimit(skip(widths,j++), jmp.Source);
-                    formatter.Delimit(skip(widths,j++), jmp.FxSize);
-                    formatter.Delimit(skip(widths,j++), jmp.CallSite);
-                    formatter.Delimit(skip(widths,j++), jmp.Target);
-                    formatter.Delimit(skip(widths,j++), jmp.Kind.Value());
-                    formatter.Delimit(skip(widths,j++), jmp.Asm);
-                    writer.WriteLine(formatter.Render(true));
+                    var rendered = string.Format(JmpInfo.RenderPattern, jmp.Base, jmp.Source, jmp.FxSize, jmp.CallSite, jmp.Target, jmp.Kind, jmp.Asm);
+                    writer.WriteLine(rendered);
+
+                    //var j=0;
+                    // formatter.Delimit(skip(widths,j++), jmp.Base);
+                    // formatter.Delimit(skip(widths,j++), jmp.Source);
+                    // formatter.Delimit(skip(widths,j++), jmp.FxSize);
+                    // formatter.Delimit(skip(widths,j++), jmp.CallSite);
+                    // formatter.Delimit(skip(widths,j++), jmp.Target);
+                    // formatter.Delimit(skip(widths,j++), jmp.Kind.Value());
+                    // formatter.Delimit(skip(widths,j++), jmp.Asm);
+                    // writer.WriteLine(formatter.Render(true));
                 }
             }
         }
@@ -159,28 +162,28 @@ namespace Z0
             dst.Asm = src.FormattedInstruction;
         }
 
-        [MethodImpl(Inline)]
-        public void OnJA(ApiInstruction fx)
-        {
+        // [MethodImpl(Inline)]
+        // public void OnJA(ApiInstruction fx)
+        // {
 
-        }
+        // }
 
-        [MethodImpl(Inline)]
-        public void OnJAE(ApiInstruction fx)
-        {
+        // [MethodImpl(Inline)]
+        // public void OnJAE(ApiInstruction fx)
+        // {
 
-        }
+        // }
 
-        [MethodImpl(Inline)]
-        public void OnJB(ApiInstruction fx)
-        {
+        // [MethodImpl(Inline)]
+        // public void OnJB(ApiInstruction fx)
+        // {
 
-        }
+        // }
 
-        [MethodImpl(Inline)]
-        public void OnJBE(ApiInstruction fx)
-        {
+        // [MethodImpl(Inline)]
+        // public void OnJBE(ApiInstruction fx)
+        // {
 
-        }
+        // }
     }
 }

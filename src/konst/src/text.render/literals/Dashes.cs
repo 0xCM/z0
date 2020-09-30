@@ -17,14 +17,20 @@ namespace Z0
         [StringLiteral(Dash3, 3)]
         public const string Dash3 = Dash2 + Dash1;
 
+        /// <summary>
+        /// Defines a literal consisting of 4 '-' characters
+        /// </summary>
         [StringLiteral(Dash4, 4)]
         public const string Dash4 = Dash3 + Dash1;
 
+        /// <summary>
+        /// Defines a literal consisting of 5 '-' characters
+        /// </summary>
         [StringLiteral(Dash5, 5)]
         public const string Dash5 = Dash4 + Dash1;
 
         /// <summary>
-        /// Defines the default extension for structured data
+        /// Defines a literal consisting of 40 '-' characters
         /// </summary>
         [StringLiteral(Dash40, 40)]
         public const string Dash40 = "----------------------------------------";

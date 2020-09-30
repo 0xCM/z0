@@ -6,6 +6,9 @@ namespace Z0
 {
     using System;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IBytes : INullity, ITextual
     {
         /// <summary>
@@ -24,11 +27,13 @@ namespace Z0
         int Length {get;}
     }
 
+    [Free]
     public interface IBytes<F> : IBytes
         where F : struct, IBytes<F>
     {
     }
 
+    [Free]
     public interface IBytes<F,N> : IBytes<F>, IEquatable<F>, INullary<F>
         where N : unmanaged, ITypeNat
         where F : struct, IBytes<F,N>

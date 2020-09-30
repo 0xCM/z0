@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IListed<T> : IMeasured
     {
         /// <summary>
@@ -17,7 +20,8 @@ namespace Z0
         T Tail {get;}
     }
 
-    public interface IListed<S,T> : IListed<T>, IReversible<S,T> 
+    [Free]
+    public interface IListed<S,T> : IListed<T>, IReversible<S,T>
         where S : IListed<S,T>, new()
     {
 

@@ -1,4 +1,4 @@
-# AsmTRegBits_vex_vvvv VEX/XOP.vvvv Encoding - AMD Vol4 Table 1-21
+# VEX/XOP.vvvv Encoding - AMD Vol4 Table 1-21
 ------------------------------------------------
 | reg   | Encoding |
 | XMM15 | 0000     |

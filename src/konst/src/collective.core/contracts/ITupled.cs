@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Characterizes a potentially non-homogenous 2-tuple
@@ -12,18 +13,19 @@ namespace Z0
     /// <typeparam name="K">The reifying type</typeparam>
     /// <typeparam name="T0">The first member type</typeparam>
     /// <typeparam name="T1">The second member type</typeparam>
+    [Free]
     public interface ITupled<K,T0,T1> : ITuple<K>
-        where K : ITupled<K,T0,T1>        
+        where K : ITupled<K,T0,T1>
     {
-        void Deconstruct(out T0 x0, out T1 x1);    
+        void Deconstruct(out T0 x0, out T1 x1);
 
         /// <summary>
-        /// The left member 
+        /// The left member
         /// </summary>
-        T0 Left {get;}        
+        T0 Left {get;}
 
         /// <summary>
-        /// The right member 
+        /// The right member
         /// </summary>
         T1 Right {get;}
 
@@ -36,12 +38,13 @@ namespace Z0
     /// <typeparam name="T0">The first member type</typeparam>
     /// <typeparam name="T1">The second member type</typeparam>
     /// <typeparam name="T2">The third member type</typeparam>
+    [Free]
     public interface ITupled<K,T0,T1,T2> : ITuple<K>
         where K : ITupled<K,T0,T1,T2>
     {
         void Deconstruct(out T0 x0, out T1 x1, out T2 x2);
 
-        T0 First {get;}        
+        T0 First {get;}
 
         T1 Second {get;}
 
@@ -57,9 +60,10 @@ namespace Z0
     /// <typeparam name="T1">The second member type</typeparam>
     /// <typeparam name="T2">The third member type</typeparam>
     /// <typeparam name="T3">The fourth member type</typeparam>
+    [Free]
     public interface ITupled<K,T0,T1,T2,T3> : ITuple<K>
         where K : ITupled<K,T0,T1,T2,T3>
     {
-        void Deconstruct(out T0 x0, out T1 x1, out T2 x2, out T3 x3);                
+        void Deconstruct(out T0 x0, out T1 x1, out T2 x2, out T3 x3);
     }
 }

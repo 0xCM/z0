@@ -1,4 +1,4 @@
-# AsmTRegBits64_reg_NoModRm - Encoding of reg Field When Mod/RM w Field is Not Present in Instruction; 64-bit mode
+# Encoding of reg Field When Mod/RM w Field is Not Present in Instruction; 64-bit mode
 -------------------------------------------------------------------------------------------------------------------------------
 | reg | Register Selected for 16-Bit Data Ops | Register Selected for 32-Bit Data Ops | Register Selected for 64-Bit Data Ops |
 | 000 | AX                                    | EAX                                   | RAX                                   |

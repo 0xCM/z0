@@ -43,6 +43,9 @@ namespace Z0
         IPolySource PolySource
             => Random;
 
+        FS.FolderPath Resources
+            => FS.dir(ResourceRoot.Name);
+
         IWfShell WithSource(IPolyrand random);
 
         ApiContext ApiContext {get;}
@@ -67,8 +70,8 @@ namespace Z0
         FolderPath ToolProcessDir(string tool)
             => ArchiveRoot + FolderName.Define("tools") + FolderName.Define(tool) + FolderName.Define("processed");
 
-        FolderPath AsmTables
-            => ResourceRoot + FolderName.Define("tables");
+        FS.FolderPath AsmTables
+            => Resources + FS.folder("tables");
 
         WfEventId Raise<E>(in E e)
             where E : IWfEvent

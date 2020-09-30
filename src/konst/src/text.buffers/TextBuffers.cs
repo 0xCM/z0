@@ -21,6 +21,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static DynamicTextBuffer dynamic(StringBuilder dst)
             => new DynamicTextBuffer(dst);
-
     }
 }

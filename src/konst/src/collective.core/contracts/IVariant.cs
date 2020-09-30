@@ -5,7 +5,9 @@
 namespace Z0
 {
     using System;
-    
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IVariant : ITextual
     {
         /// <summary>
@@ -20,21 +22,23 @@ namespace Z0
 
     }
 
+    [Free]
     public interface IVariant<V> : IVariant
         where V : unmanaged, IVariant<V>
     {
 
     }
 
+    [Free]
     public interface ISegmentedVariant<V>  : IVariant, IEquatable<V>
         where V : unmanaged, ISegmentedVariant<V>
     {
 
         /// <summary>
-        /// If covering scalar data, the cell count will always be 1; when blocked or vector data 
+        /// If covering scalar data, the cell count will always be 1; when blocked or vector data
         /// is enclosed the cell count will vary based on the specific type
         /// </summary>
-        int CellCount 
+        int CellCount
             => 1;
 
         /// <summary>
@@ -47,7 +51,7 @@ namespace Z0
         /// <summary>
         /// For scalar data this bit will always be off; otherwise, it will be on
         /// </summary>
-        bool Segmented 
-            => CellWidth < DataWidth;        
+        bool Segmented
+            => CellWidth < DataWidth;
     }
 }

@@ -8,13 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     [WfHost]
-    public sealed class EmitImageBlobsHost : WfHost<EmitImageBlobsHost>
+    public sealed class EmitImageBlobs : WfHost<EmitImageBlobs>
     {
         public const string EmissionType = "Metablobs";
 
         protected override void Execute(IWfShell wf)
         {
-            using var step = new EmitImageBlobs(wf,this);
+            using var step = new EmitImageBlobsStep(wf,this);
             step.Run();
         }
     }

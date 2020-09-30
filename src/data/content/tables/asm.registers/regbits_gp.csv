@@ -1,4 +1,4 @@
-# AsmTRegBitsGp - Intel Vol2A, Table 3-1
+# Intel Vol2A, Table 3-1
 ------------------------------------------------------
 | Register | Size | REX.B | FieldCode | 64-bit Only |
 | AL       | 8    | N     | 000       | F           |

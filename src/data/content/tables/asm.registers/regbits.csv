@@ -1,5 +1,3 @@
-# AsmTRegBitfieldDef
-------------------------------------------------------
 | Name       | Type           | Description
 | Register   | token          | Register identifier
 | Size       | integer:base10 | Register bit-width

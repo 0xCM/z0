@@ -1,4 +1,4 @@
-# AsmTRegBitsMmx_reg_ModRm - ModRM.reg Field Encodings, AMD Vol4 Table 1-10
+# ModRM.reg Field Encodings, AMD Vol4 Table 1-10
 -----------------------------------------------------
 | reg  | Encoded |
 | MMX0 | 000     |

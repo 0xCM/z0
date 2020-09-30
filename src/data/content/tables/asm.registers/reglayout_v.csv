@@ -1,35 +1,33 @@
-# AsmTRegLayoutV
----------------------------------------------------------------------
-[511:0] | [255:0] | [127:0]
-ZMM0    | YMM0    | XMM0
-ZMM1    | YMM1    | XMM1
-ZMM2    | YMM2    | XMM2
-ZMM3    | YMM3    | XMM3
-ZMM4    | YMM4    | XMM4
-ZMM5    | YMM5    | XMM5
-ZMM6    | YMM6    | XMM6
-ZMM7    | YMM7    | XMM7
-ZMM8    | YMM8    | XMM8
-ZMM9    | YMM9    | XMM9
-ZMM10   | YMM10   | XMM10
-ZMM11   | YMM11   | XMM11
-ZMM12   | YMM12   | XMM12
-ZMM13   | YMM13   | XMM13
-ZMM14   | YMM14   | XMM14
-ZMM15   | YMM15   | XMM15
-ZMM16   | YMM16   | XMM16
-ZMM17   | YMM17   | XMM17
-ZMM18   | YMM18   | XMM18
-ZMM19   | YMM19   | XMM19
-ZMM20   | YMM20   | XMM20
-ZMM21   | YMM21   | XMM21
-ZMM22   | YMM22   | XMM22
-ZMM23   | YMM23   | XMM23
-ZMM24   | YMM24   | XMM24
-ZMM25   | YMM25   | XMM25
-ZMM26   | YMM26   | XMM26
-ZMM27   | YMM27   | XMM27
-ZMM28   | YMM28   | XMM28
-ZMM29   | YMM29   | XMM29
-ZMM30   | YMM30   | XMM30
-ZMM31   | YMM31   | XMM31
+| [511:0] | [255:0] | [127:0] |
+| zmm0    | ymm0    | xmm0    |
+| zmm1    | ymm1    | xmm1    |
+| zmm2    | ymm2    | xmm2    |
+| zmm3    | ymm3    | xmm3    |
+| zmm4    | ymm4    | xmm4    |
+| zmm5    | ymm5    | xmm5    |
+| zmm6    | ymm6    | xmm6    |
+| zmm7    | ymm7    | xmm7    |
+| zmm8    | ymm8    | xmm8    |
+| zmm9    | ymm9    | xmm9    |
+| zmm10   | ymm10   | xmm10   |
+| zmm11   | ymm11   | xmm11   |
+| zmm12   | ymm12   | xmm12   |
+| zmm13   | ymm13   | xmm13   |
+| zmm14   | ymm14   | xmm14   |
+| zmm15   | ymm15   | xmm15   |
+| zmm16   | ymm16   | xmm16   |
+| zmm17   | ymm17   | xmm17   |
+| zmm18   | ymm18   | xmm18   |
+| zmm19   | ymm19   | xmm19   |
+| zmm20   | ymm20   | xmm20   |
+| zmm21   | ymm21   | xmm21   |
+| zmm22   | ymm22   | xmm22   |
+| zmm23   | ymm23   | xmm23   |
+| zmm24   | ymm24   | xmm24   |
+| zmm25   | ymm25   | xmm25   |
+| zmm26   | ymm26   | xmm26   |
+| zmm27   | ymm27   | xmm27   |
+| zmm28   | ymm28   | xmm28   |
+| zmm29   | ymm29   | xmm29   |
+| zmm30   | ymm30   | xmm30   |
+| zmm31   | ymm31   | xmm31   |

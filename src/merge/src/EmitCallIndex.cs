@@ -5,71 +5,19 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
 
     using Z0.Asm;
 
     using static Konst;
     using static z;
 
-    public ref struct EmitCallIndex
+    [WfHost]
+    public sealed class EmitCallIndex : WfHost<EmitCallIndex,ApiPartRoutines>
     {
-        readonly IWfShell Wf;
-
-        readonly EmitCallIndexHost Host;
-
-        public DataFlow<ApiPartRoutines,FilePath> Df;
-
-        public EmitCallIndex(IWfShell wf, EmitCallIndexHost host, ApiPartRoutines src)
+        protected override void Execute(IWfShell wf, in ApiPartRoutines state)
         {
-            Wf = wf;
-            Host = host;
-            Df = (src, (Wf.ResourceRoot + FolderName.Define("calls")) + FileName.define($"{src.Part.Format()}.calls", FileExtensions.Csv));
-            Wf.Created(Host);
-        }
-
-        public void Run()
-        {
-            Wf.Running(Host, Df.Target);
-
-            ApiInstructions instructions = Df.Source.Instructions;
-            var sep = Chars.Pipe;
-            using var writer = Df.Target.Writer();
-
-            var calls = instructions.CallData;
-            var delimited = calls.Select(x => Delimit(x.Rows, sep));
-            var names = Delimit(AsmCallInfo.AspectNames, sep);
-            writer.WriteLine(names);
-            z.iter(delimited, writer.WriteLine);
-
-            Wf.Ran(Host, calls.Length);
-        }
-
-        public void Dispose()
-        {
-            Wf.Disposed(Host);
-        }
-
-        static string Delimit(string[] src, char delimiter)
-        {
-            var dst = text.build();
-            var last = src.Length - 1;
-            for(var i=0; i<src.Length; i++)
-            {
-                if(i != 0)
-                {
-                    dst.Append(Chars.Space);
-                    dst.Append(delimiter);
-                    dst.Append(Chars.Space);
-                }
-
-                if(i != last)
-                    dst.Append(src[i].PadRight(16));
-                else
-                    dst.Append(src[i]);
-            }
-
-            return dst.ToString();
+            using var step = new EmitCallIndexStep(wf, this, state);
+            step.Run();
         }
     }
 }

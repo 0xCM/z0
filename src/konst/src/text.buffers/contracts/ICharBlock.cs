@@ -14,6 +14,5 @@ namespace Z0
         where T : unmanaged, ICharBlock<T>
     {
 
-
     }
 }

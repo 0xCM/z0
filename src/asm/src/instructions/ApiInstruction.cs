@@ -20,11 +20,11 @@ namespace Z0.Asm
 
         public MemoryAddress Base {get;}
 
-        public OpUri OpUri
-            => Encoded.Uri;
+        public string OpId
+            => Encoded.OpId;
 
-        public OpIdentity OpId
-            => OpUri.OpId;
+        public BinaryCode EncodedData
+            => Encoded.Data;
 
         public string FormattedInstruction
             => Instruction.FormattedInstruction;

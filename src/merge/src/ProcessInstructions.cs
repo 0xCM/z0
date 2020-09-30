@@ -10,47 +10,13 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public ref struct ProcessInstructions
+    [Step]
+    public sealed class ProcessInstructions : WfHost<ProcessInstructions,ApiPartRoutines>
     {
-        readonly IWfShell Wf;
-
-        readonly WfHost Host;
-
-        readonly ApiPartRoutines Source;
-
-        public ProcessInstructions(IWfShell wf, WfHost host, ApiPartRoutines src)
+        protected override void Execute(IWfShell wf, in ApiPartRoutines state)
         {
-            Wf = wf;
-            Host = host;
-            Source = src;
-            Wf.Created(Host);
-        }
-
-        public void Dispose()
-        {
-            Wf.Disposed(Host);
-        }
-
-        void ProcessJumps()
-        {
-            using var processor = new AsmJmpProcessor(Wf, Source);
-            processor.Process();
-        }
-
-        public void Run()
-        {
-            Wf.Running(Host, Source.Part);
-            try
-            {
-                ProcessJumps();
-                AsmProcessors.parts(Wf).Process(Source);
-                SemanticRenderSvc.run(Source);
-            }
-            catch(Exception e)
-            {
-                Wf.Error(e);
-            }
-            Wf.Ran(Host, Source.Part);
+            var step = new ProcessInstructionsStep(wf, this, state);
+            step.Run();
         }
     }
 }

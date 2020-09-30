@@ -67,6 +67,10 @@ namespace Z0
             => src.Location;
 
         [MethodImpl(Inline)]
+        public static explicit operator ulong(A src)
+            => src.Location;
+
+        [MethodImpl(Inline)]
         public static A operator+(A x, T y)
             => new A((T)(x.Location + y));
 

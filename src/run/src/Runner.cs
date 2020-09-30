@@ -291,7 +291,7 @@ namespace Z0
         {
             Wf.Running(StepId);
 
-            var bitfield = Ice.InstructionBitField.init();
+            var bitfield = Ice.IceInstructionBits.init();
             var indices = bitfield.Indices;
             var info = indices.Map(i => paired(i, (byte)i));
             foreach(var i in info)
@@ -305,22 +305,52 @@ namespace Z0
             new EmitAsmOpCodesHost().Configure(Wf.Paths.DbRoot + FS.file("AsmOpcodes",ArchiveExt.Csv)).Run(Wf);
         }
 
-        AsmRoutineCode[] Capture(MethodInfo[] src, string label)
+        ReadOnlySpan<ApiCaptureBlock> Blocks(MethodInfo[] src)
         {
             var methods = src.Select(m =>  new IdentifiedMethod(m.Identify(),m));
             var results = CaptureAlt.capture(methods);
+            return results;
+        }
+
+        ReadOnlySpan<ApiCaptureBlock> Blocks(Type src)
+            => Blocks(src.DeclaredMethods());
+
+
+        ReadOnlySpan<AsmRoutineCode> Capture(MethodInfo[] src, string label)
+        {
+            var results = Blocks(src);
+            var target = Wf.Paths.AppLogRoot + FS.file(label, ArchiveExt.Asm);
+            return Decode(results, target);
+        }
+
+        void Decode(ReadOnlySpan<ApiCaptureBlock> src, Span<AsmRoutineCode> dst)
+        {
+            var count = src.Length;
             var decoder = Asm.RoutineDecoder;
-            var count = results.Length;
             var formatter = Asm.Formatter;
-            var dstpath = Wf.Paths.AppLogRoot + FS.file(label, ArchiveExt.Asm);
-
-            var routines = sys.alloc<AsmRoutineCode>(count);
-            var dst = span(routines);
-
-            using var writer = dstpath.Writer();
             for(var i=0u; i<count; i++)
             {
-                ref readonly var captured = ref skip(results,i);
+                ref readonly var captured = ref skip(src,i);
+                if(decoder.Decode(captured, out var fx))
+                {
+                    var asm = formatter.FormatFunction(fx);
+
+                    seek(dst,i) = new AsmRoutineCode(fx,captured);
+                }
+            }
+        }
+
+        ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<ApiCaptureBlock> src, FS.FilePath target)
+        {
+            var count = src.Length;
+            var dst = span<AsmRoutineCode>(count);
+            var decoder = Asm.RoutineDecoder;
+            var formatter = Asm.Formatter;
+
+            using var writer = target.Writer();
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var captured = ref skip(src,i);
                 if(decoder.Decode(captured, out var fx))
                 {
                     seek(dst,i) = new AsmRoutineCode(fx,captured);
@@ -329,22 +359,32 @@ namespace Z0
                     writer.Write(asm);
                 }
             }
-            return routines;
+            return dst;
+
         }
         void CheckBitMasks()
         {
             var methods = typeof(CheckBitMasks).Methods().WithNameStartingWith("CheckLoMask");
-            Capture(methods, "bitmasks");
+            var routines = Capture(methods, "bitmasks");
             CheckBitMasksHost.control(Wf, Random);
         }
 
+
         public void Run()
         {
-            var captured = Capture(typeof(Blm32u).DeclaredMethods(), "blm32u");
-            for(var i=0; i<captured.Length; i++)
+
+            var blocks = Blocks(typeof(Switch16));
+            var count = blocks.Length;
+            Wf.Row((Count)count);
+
+            for(var i=0; i<count; i++)
             {
 
             }
+
+
         }
     }
+
+
 }

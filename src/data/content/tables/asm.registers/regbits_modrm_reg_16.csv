@@ -1,4 +1,4 @@
-# AsmTRegBits16_reg_ModRm - Register Specified by reg Field During 16-Bit Data Operations
+# Register Specified by reg Field During 16-Bit Data Operations
 ------------------------------------------------------------------
 | reg | w = 0 | w = 1 | Notes                                   |
 | 000 | AL    | AX    |                                         |

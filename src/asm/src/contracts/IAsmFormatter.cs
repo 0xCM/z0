@@ -30,15 +30,17 @@ namespace Z0.Asm
         string FormatInstruction(in MemoryAddress @base, in AsmFxSummary src);
 
         /// <summary>
-        /// Formats the instruction in the source and returns a line for each and every one
+        /// Renders a routine to a caller-supplied buffer
         /// </summary>
-        /// <param name="src">The source function</param>
-        ReadOnlySpan<string> FormatLines(AsmRoutine src);
+        /// <param name="src">The source routine</param>
+        /// <param name="dst">The target buffer</param>
+        void Format(in AsmRoutine src, ITextBuffer dst);
 
         /// <summary>
-        /// Formats the instruction in the source and returns a line for each and every one
+        /// Renders a routine sequence to a caller-supplied buffer
         /// </summary>
-        /// <param name="src">The source function</param>
-        ReadOnlySpan<string> FormatLines(AsmFxList src);
+        /// <param name="src">The source routines</param>
+        /// <param name="dst">The target buffer</param>
+        void Format(in AsmRoutines src, ITextBuffer dst);
     }
 }
