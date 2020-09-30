@@ -26,15 +26,6 @@ namespace Z0
             public FS.FilePath Target {get;}
 
             [MethodImpl(Inline)]
-            public EmittingTable(WfStepId step, TableId dataset, FilePath target, CorrelationToken ct)
-            {
-                EventId = (EventName, step, ct);
-                StepId = step;
-                Dataset = dataset;
-                Target = FS.path(target.Name);
-            }
-
-            [MethodImpl(Inline)]
             public EmittingTable(WfStepId step, TableId dataset, FS.FilePath target, CorrelationToken ct)
             {
                 EventId = (EventName,step,ct);

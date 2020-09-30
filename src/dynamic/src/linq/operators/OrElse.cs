@@ -6,6 +6,7 @@ namespace Z0.Dynamics.Operators
 {
     using System;
     using System.Linq.Expressions;
+
     using static Z0.XPress;
 
     public static class OrElse<T>

@@ -11,6 +11,10 @@ namespace Z0.Tools
 
     public partial struct DumpBin : ITool<DumpBin,DumpBinFlag>
     {
+        [MethodImpl(Inline)]
+        public ProcessRawAsm Processor(DumpBinFlag flags, DumpBinOptions options = default)
+            => new ProcessRawAsm(Wf, Wf.ToolOuputDir(DumpBin.Name), Wf.ToolProcessDir(DumpBin.Name), flags, options);
+
         public const string Name = "dumpbin";
 
         public static ToolId Id => Name;

@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The target type</typeparam>
         /// <param name="e">The source expression</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static UnaryExpression convert<T>(XPR e)
             => convert(e, typeof(T));
     }

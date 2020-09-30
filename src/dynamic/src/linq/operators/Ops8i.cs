@@ -13,7 +13,6 @@ namespace Z0.Dynamics.Operators
 
     public readonly struct Ops8i
     {
-
         public static Expression<Func<sbyte, sbyte, sbyte>> Add
             => f<sbyte>((x, y) => (sbyte)(x + y));
 

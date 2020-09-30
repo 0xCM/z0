@@ -14,7 +14,7 @@ namespace Z0
     using static Konst;
     using static Option;
 
-    partial class XTend
+    partial class XFuncX
     {
         [MethodImpl(Inline)]
         static T cast<T>(object src)

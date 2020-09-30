@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static Option;
 
-    partial class XTend
+    partial class XFuncX
     {
         /// <summary>
         /// Creates a delegate for an emitter

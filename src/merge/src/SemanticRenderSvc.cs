@@ -197,7 +197,7 @@ namespace Z0
             => text.concat(src.Source.Format(), " + ",  src.TargetOffset.FormatMinimal(), " -> ",  (src.Source + src.TargetOffset).Format());
 
         static HexFormatOptions HexSpec
-            => FormatOptions.hex(zpad:false, specifier:false);
+            => HexFormatOptions.define(zpad:false, specifier:false);
 
         public static string format(in MemDx src)
             => (src.Size switch{

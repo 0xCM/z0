@@ -43,35 +43,4 @@ namespace Z0
             => Identifier;
     }
 
-    public readonly struct ApiIdentityTokens
-    {
-        internal static ConcurrentDictionary<ulong,OpIdentity> Index = new ConcurrentDictionary<ulong, OpIdentity>();
-
-        static OpIdentity Empty = OpIdentity.Empty;
-
-        [MethodImpl(Inline)]
-        public static ApiIdentityToken dispense(OpIdentity src)
-        {
-            var _key = key(src);
-            Index.GetOrAdd(_key, k => src);
-            return new ApiIdentityToken(_key);
-        }
-
-        [MethodImpl(Inline)]
-        public static bool identity(ApiIdentityToken token, out OpIdentity dst)
-            => Index.TryGetValue(token.Data, out dst);
-
-        [MethodImpl(Inline)]
-        public static OpIdentity identity(ApiIdentityToken token)
-        {
-            if(identity(token, out var dst))
-                return dst;
-            else
-                return Empty;
-        }
-
-        [MethodImpl(Inline)]
-        internal static ulong key(in OpIdentity src)
-            => hash(src.Identifier);
-    }
 }

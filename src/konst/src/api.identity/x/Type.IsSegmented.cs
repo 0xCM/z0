@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class IXTend
+    partial class XApiIdentity
     {
         /// <summary>
         /// Returns true if the source type is intrinsic or blocked

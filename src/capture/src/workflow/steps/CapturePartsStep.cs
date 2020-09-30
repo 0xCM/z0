@@ -115,7 +115,7 @@ namespace Z0
             for(var i=0; i<extracted.Length; i++)
             {
                 ref readonly var x = ref skip(extracted,i);
-                using var emit = new EmitCaptureArtifactsStep(State, new EmitHostArtifactsHost(), x.Key, x.Value, dst);
+                using var emit = new EmitCaptureArtifactsStep(State, new EmitCaptureArtifacts(), x.Key, x.Value, dst);
                 emit.Run();
             }
         }

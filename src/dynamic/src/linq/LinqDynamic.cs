@@ -14,21 +14,25 @@ namespace Z0
     using static XPress;
     using static z;
 
+    using static DynamicOps;
+
     [ApiHost]
     public readonly struct LinqDynamic
-    {        
-        [MethodImpl(Inline)]
-        public static Negate<T> negate<T>() 
-            where T : unmanaged
-                => new Negate<T>(lambda<T,T>(Expression.Negate).Compile());     
+    {
+        const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline)]
-        public static And<T> and<T>() 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Negate<T> negate<T>()
             where T : unmanaged
-                => new And<T>(lambda<T,T,T>(Expression.And).Compile());     
+                => new Negate<T>(lambda<T,T>(Expression.Negate).Compile());
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Xor<T> xor<T>() 
+        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        public static And<T> and<T>()
+            where T : unmanaged
+                => new And<T>(lambda<T,T,T>(Expression.And).Compile());
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Xor<T> xor<T>()
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -42,7 +46,7 @@ namespace Z0
             else
                 throw no<T>();
         }
-            
+
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static GtEq<T> gteq<T>()
             where T : unmanaged
@@ -50,11 +54,11 @@ namespace Z0
             if(typeof(T) == typeof(byte))
                 return new GtEq<T>(generic<T>(Ops8u.GtEq.Compile()));
             else if(typeof(T) == typeof(ushort))
-                return new GtEq<T>(Root.cast<Func<T,T,bool>>(Ops16u.GtEq.Compile()));
+                return new GtEq<T>(z.cast<Func<T,T,bool>>(Ops16u.GtEq.Compile()));
             else if(typeof(T) == typeof(uint))
-                return new GtEq<T>(Root.cast<Func<T,T,bool>>(Ops32u.GtEq.Compile()));
+                return new GtEq<T>(z.cast<Func<T,T,bool>>(Ops32u.GtEq.Compile()));
             else if(typeof(T) == typeof(ulong))
-                return new GtEq<T>(Root.cast<Func<T,T,bool>>(Ops64u.GtEq.Compile()));
+                return new GtEq<T>(z.cast<Func<T,T,bool>>(Ops64u.GtEq.Compile()));
             else
                 return new GtEq<T>(lambda<T,T,bool>(Expression.GreaterThanOrEqual).Compile());
         }

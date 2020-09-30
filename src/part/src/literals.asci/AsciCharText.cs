@@ -290,6 +290,8 @@ namespace Z0
 
         public const string Colon = ":";
 
+        public const string Comma = ",";
+
         public const string Semicolon = ";";
 
         public const string Dash = "-";

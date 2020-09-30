@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
     using System.Linq.Expressions;
 
     using static Konst;
@@ -18,6 +17,11 @@ namespace Z0
     /// <typeparam name="Y">The function return type</typeparam>
     public readonly struct XFunc<X,R>
     {
+        /// <summary>
+        /// The expression derived from the source function
+        /// </summary>
+        public Expression<Func<X,R>> Fx {get;}
+
         /// <summary>
         /// Implicitly converts a func expression to linq expression
         /// </summary>
@@ -37,10 +41,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public XFunc(Func<X,R> f)
             => Fx = x => f(x);
-
-        /// <summary>
-        /// The expression derived from the source function
-        /// </summary>
-        public Expression<Func<X,R>> Fx { get; }
     }
 }

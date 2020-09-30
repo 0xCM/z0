@@ -12,11 +12,12 @@ namespace Z0
     using static Konst;
 
     public partial class XQuery
-    { 
+    {
         /// <summary>
         /// Returns the method invoked by an expression, if any
         /// </summary>
         /// <param name="x">The expression to test</param>
+        [MethodImpl(Inline), Op]
         public static Option<MethodInfo> called(Expression x)
             => cast<MethodCallExpression>(x)?.Method;
     }

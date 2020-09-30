@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XFuncX
     {
         /// <summary>
         /// Extracts the property info for the property referenced by an expression delegate
@@ -28,6 +28,6 @@ namespace Z0
         /// <param name="selector">The selecting expression that identifies the desired member</param>
         public static PropertyInfo GetProperty<T,P>(this Expression<Func<T,P>> selector)
             => XQuery.property(selector);
-            
+
     }
 }

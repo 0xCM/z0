@@ -5,9 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
     using System.Reflection;
-    using System.Linq;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
 
@@ -21,6 +19,7 @@ namespace Z0
         /// <typeparam name="T">The first selector parameter</typeparam>
         /// <typeparam name="M">The member type</typeparam>
         /// <param name="selector">The selecting expression that identifies the desired member</param>
+        [MethodImpl(Inline)]
         public static MemberInfo member<T,M>(Expression<Func<T,M>> selector)
             => cast<MemberInfo>(cast<MemberExpression>(selector.Body).Member);
     }

@@ -25,7 +25,7 @@ namespace Z0
         {
             LineConfig = config;
             BaseAddress = @base ?? MemoryAddress.Empty;
-            LabelConfig = FormatOptions.hex(zpad:true, specifier: true, uppercase: false, prespec:false);
+            LabelConfig = HexFormatOptions.define(zpad:true, specifier: true, uppercase: false, prespec:false);
             DataConfig = HexFormatOptions.HexData;
         }
 

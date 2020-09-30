@@ -48,15 +48,15 @@ namespace Z0
             }
         }
 
-        protected virtual void Execute(IWfShell wf, in S state)
+        protected virtual void Execute(IWfShell wf, in S src)
             => Execute(wf);
 
-        public void Run(IWfShell wf, in S state)
+        public void Run(IWfShell wf, in S src)
         {
             try
             {
-                Configure(state);
-                Execute(wf, state);
+                Configure(src);
+                Execute(wf, src);
             }
             catch(Exception e)
             {

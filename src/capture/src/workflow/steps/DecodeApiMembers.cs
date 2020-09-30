@@ -5,14 +5,30 @@
 namespace Z0
 {
     using System;
+    using Z0.Asm;
 
     using static z;
-    using static Flow;
 
     [WfHost]
-    public sealed class DecodeApiMembers : WfHost<DecodeApiMembers>
+    public sealed class DecodeApiMembers : WfHost<DecodeApiMembers,ApiMemberCodeBlocks, AsmRoutines>
     {
-        protected override void Execute(IWfShell wf)
-            => throw missing();
+        ICaptureContext Capture;
+
+        ApiHostUri ApiHost;
+
+        public static DecodeApiMembers create(ICaptureContext capture, ApiHostUri host)
+        {
+            var dst = create();
+            dst.Capture = capture;
+            dst.ApiHost = host;
+            return dst;
+        }
+
+        protected override ref AsmRoutines Execute(IWfShell wf, in ApiMemberCodeBlocks src, out AsmRoutines dst)
+        {
+            using var step = new DecodeApiMembersStep(wf, this, Capture);
+            dst = step.Run(ApiHost, src);
+            return ref dst;
+        }
     }
 }

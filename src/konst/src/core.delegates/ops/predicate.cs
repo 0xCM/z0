@@ -12,11 +12,11 @@ namespace Z0
 
     partial class Delegates
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static UnaryPredicate<T> predicate<T>(System.Func<T,Bit32> f)
             => new UnaryPredicate<T>(f);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Z0.BinaryPredicate<T> predicate<T>(System.Func<T,T,Bit32> f)
             => new Z0.BinaryPredicate<T>(f);
     }

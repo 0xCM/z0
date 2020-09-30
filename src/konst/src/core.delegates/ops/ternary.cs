@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source method</param>
         /// <typeparam name="T">The operand type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static TernaryOp<T> ternary<T>(MethodInfo src, object host = null)
             where T : unmanaged
                 => from<TernaryOp<T>>(src, host);

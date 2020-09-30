@@ -23,6 +23,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The emission type</typeparam>
         /// <param name="f">The emitter</param>
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Expression<Func<T>> func<T>(Func<T> f)
             => fmake(f);
 

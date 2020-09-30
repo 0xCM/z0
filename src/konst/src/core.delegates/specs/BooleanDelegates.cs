@@ -15,6 +15,6 @@ namespace Z0
         public delegate bool BinaryOp(bool a, bool b);
 
         [Free]
-        public delegate bool TernaryOp(bool a, bool b);
+        public delegate bool TernaryOp(bool a, bool b, bool c);
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XFuncX
     {
         /// <summary>
         /// Extracts the method info for the function referenced by an expression delegate

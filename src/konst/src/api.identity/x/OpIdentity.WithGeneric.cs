@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
-    partial class IXTend
+    partial class XApiIdentity
     {
        /// <summary>
         /// Enables the generic indicator

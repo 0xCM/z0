@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The value to test</param>
         /// <param name="t">The type to test against</param>
-        [Op]
+        [MethodImpl(Inline), Op]
         public static TypeBinaryExpression test(object value, Type t)
             => XPR.TypeIs(constant(value), t);
 
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="value">The value to test</param>
         /// <typeparam name="T">The type to test against</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static TypeBinaryExpression test<T>(object value)
             => XPR.TypeIs(constant(value), typeof(T));
     }

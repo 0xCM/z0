@@ -56,8 +56,6 @@ namespace Z0
             var t = new ImageFieldTable();
             var file = FS.file(string.Format("{0}.{1}", part.Id.Format(), ImageFieldTable.TableName), ArchiveExt.Csv);
             var path = FS.dir(TargetDir.Name) +  file;
-            Wf.Emitting(Host, t, FS.path(path.Name));
-
             var assembly = part.Owner;
             using var reader = PeTableReader.open(FS.path(assembly.Location));
             var src = reader.ReadFields();
@@ -69,7 +67,7 @@ namespace Z0
             foreach(var item in src)
                 writer.WriteLine(formatter.FormatRow(item));
 
-            Wf.Emitted(Host, t, count, FS.path(path.Name));
+            Wf.EmittedTable(Host, t, count, FS.path(path.Name));
             return count;
         }
 

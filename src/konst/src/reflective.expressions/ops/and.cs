@@ -18,11 +18,11 @@ namespace Z0
         /// <summary>
         /// Creates a conjunction of a left and right expression
         /// </summary>
-        /// <param name="lhs">The left expression</param>
-        /// <param name="rhs">The right expression</param>
-        [Op]
-        public static BinaryExpression and(XPR lhs, XPR rhs)
-            => XPR.AndAlso(lhs, rhs);
+        /// <param name="a">The left expression</param>
+        /// <param name="b">The right expression</param>
+        [MethodImpl(Inline), Op]
+        public static BinaryExpression and(XPR a, XPR b)
+            => XPR.AndAlso(a, b);
 
         /// <summary>
         /// Forms a conjunction from two function predicates

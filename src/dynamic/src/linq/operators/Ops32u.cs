@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 
-namespace Z0.Dynamics.Operators
+namespace Z0
 {
     using System;
     using System.Linq;
@@ -11,6 +11,12 @@ namespace Z0.Dynamics.Operators
 
     using static Konst;
     using static XFunc;
+
+    partial struct DynamicOps
+    {
+
+
+    }
 
     public class Ops32u
     {

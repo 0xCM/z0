@@ -40,7 +40,7 @@ namespace Z0
         /// <typeparam name="T">The aligned delegate type</typeparam>
         /// <param name="parameters">The expression parameters</param>
         /// <param name="body">The expression body</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline)]
         public static Expression<T> lambda<T>((PX p1, PX p2) parameters, Expression body)
             where T : Delegate
                 => XPR.Lambda<T>(body, seq(parameters.p1, parameters.p2));
@@ -51,6 +51,7 @@ namespace Z0
         /// <typeparam name="T">The aligned delegate type</typeparam>
         /// <param name="parameters">The expression parameters</param>
         /// <param name="body">The expression body</param>
+        [MethodImpl(Inline)]
         public static Expression<T> lambda<T>((PX p1, PX p2, PX p3) parameters, Expression body)
             where T : Delegate
                 => XPR.Lambda<T>(body, seq(parameters.p1, parameters.p2, parameters.p3));
@@ -60,6 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="parameters">The expression parameters</param>
         /// <param name="body">The expression body</param>
+        [MethodImpl(Inline)]
         public static Expression<Func<T>> emitter<T>(XPR body)
             => XPR.Lambda<Func<T>>(body);
 
@@ -68,6 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="parameters">The expression parameters</param>
         /// <param name="body">The expression body</param>
+        [MethodImpl(Inline)]
         public static Expression<Func<X,Y>> lambda<X,Y>(IEnumerable<PX> parameters, XPR body)
             => XPR.Lambda<Func<X,Y>>(body, parameters);
 
@@ -76,6 +79,7 @@ namespace Z0
         /// </summary>
         /// <param name="parameters">The expression parameters</param>
         /// <param name="body">The expression body</param>
+        [MethodImpl(Inline)]
         public static Expression<Func<X1,X2,Y>> lambda<X1,X2,Y>(IEnumerable<PX> parameters, XPR body)
             => XPR.Lambda<Func<X1,X2,Y>>(body, parameters);
 
@@ -84,6 +88,7 @@ namespace Z0
         /// </summary>
         /// <param name="parameters">The expression parameters</param>
         /// <param name="body">The expression body</param>
+        [MethodImpl(Inline)]
         public static Expression<Func<X1,X2,X3,Y>> lambda<X1,X2,X3,Y>(IEnumerable<PX> parameters, XPR body)
             => XPR.Lambda<Func<X1,X2,X3,Y>>(body, parameters);
 
@@ -92,6 +97,7 @@ namespace Z0
         /// </summary>
         /// <param name="parameters">The expression parameters</param>
         /// <param name="body">The expression body</param>
+        [MethodImpl(Inline)]
         public static Expression<Func<X1,X2,X3,X4,Y>> lambda<X1,X2,X3,X4,Y>(IEnumerable<PX> parameters, XPR body)
             => XPR.Lambda<Func<X1,X2,X3,X4,Y>>(body, parameters);
 
@@ -99,17 +105,19 @@ namespace Z0
         /// Creates a unary lambda expression
         /// </summary>
         /// <param name="f">The defining function</param>
+        [MethodImpl(Inline)]
         public static Expression<Func<X,Y>> lambda<X,Y>(Func<XPR,UnaryExpression> f)
         {
             var p1 = paramX<X>();
             var eval = f(p1);
-            return lambda<Func<X, Y>>(seq(p1), eval);
+            return lambda<Func<X,Y>>(seq(p1), eval);
         }
 
         /// <summary>
         /// Creates a binary lambda expression
         /// </summary>
         /// <param name="f">The defining function</param>
+        [MethodImpl(Inline)]
         public static Expression<Func<X,Y,Z>> lambda<X,Y,Z>(Func<XPR,XPR,BinaryExpression> f)
         {
             var args = paramX<X,Y>();

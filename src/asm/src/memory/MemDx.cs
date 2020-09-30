@@ -47,7 +47,7 @@ namespace Z0
         }
 
         HexFormatOptions HexSpec
-            => FormatOptions.hex(zpad:false, specifier:false);
+            => HexFormatOptions.define(zpad:false, specifier:false);
 
         public string Format()
             => (Size switch{

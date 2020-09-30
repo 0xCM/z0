@@ -12,6 +12,12 @@ namespace Z0.Dynamics.Operators
     using static Konst;
     using static XFunc;
 
+    partial struct DynamicOps
+    {
+
+
+    }
+
     public class Ops16i
     {
         public static Expression<Func<short, short>> Abs

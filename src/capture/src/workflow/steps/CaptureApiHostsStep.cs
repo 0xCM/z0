@@ -54,7 +54,7 @@ namespace Z0
 
         void Store(ApiHostUri src, ApiMemberExtract[] extracts, IPartCapturePaths dst)
         {
-            using var step = new EmitCaptureArtifactsStep(State, new EmitHostArtifactsHost(), src, extracts, dst);
+            using var step = new EmitCaptureArtifactsStep(State, new EmitCaptureArtifacts(), src, extracts, dst);
             step.Run();
         }
 

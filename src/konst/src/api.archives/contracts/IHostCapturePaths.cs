@@ -8,8 +8,8 @@ namespace Z0
     {
         ApiHostUri Host {get;}
 
-        FolderPath HostAsmDir
-            => AsmDir + PartFolderName(Host.Owner);
+        FS.FolderPath HostAsmDir
+            => FS.dir((AsmDir + PartFolderName(Host.Owner)).Name);
 
         FileName ExtractFileName
             => LegalFileName(Host, Extract);
@@ -29,10 +29,10 @@ namespace Z0
         FilePath HostX86Path
             => X86Dir + X86FileName;
 
-        FileName AsmFile
-            => LegalFileName(Host, Asm);
+        FS.FileName AsmFile
+            => FS.file(LegalFileName(Host, Asm).Name);
 
-        FilePath HostAsmPath
+        FS.FilePath HostAsmPath
             => HostAsmDir + AsmFile;
 
         FileName CilFile

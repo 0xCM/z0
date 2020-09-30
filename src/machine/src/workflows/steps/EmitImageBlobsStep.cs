@@ -63,9 +63,6 @@ namespace Z0
         {
             var id = part.Id;
             var dstPath =  TargetDir + FileName.define(id.Format(), "blob.csv");
-
-            Wf.Emitting<ImageBlob>(Host, FS.path(dstPath.Name));
-
             var data = Read(part);
             var count = (uint)data.Length;
             var target = sink();
@@ -78,7 +75,7 @@ namespace Z0
 
             EmissionCount += count;
 
-            Wf.Emitted<ImageBlob>(Host, count, FS.path(dstPath.Name));
+            Wf.EmittedTable<ImageBlob>(Host, count, FS.path(dstPath.Name));
         }
 
         public void Run()

@@ -6,20 +6,22 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-
     using System.Linq.Expressions;
 
     using static Konst;
 
+    [ApiHost(ApiNames.XFunc)]
     public class XFunc
     {
+        const NumericKind Closure = UnsignedInts;
+
         /// <summary>
         /// Creates a function expression for an emitter
         /// </summary>
         /// <param name="f">The source delegate</param>
         /// <typeparam name="X">The function argument type</typeparam>
         /// <typeparam name="Y">The return type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static XFunc<X> f<X>(Func<X> f)
             => f;
 
@@ -116,5 +118,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Expression<Func<X1,X2,X3,R>> fx<X1,X2,X3,R>(Func<X1,X2,X3,R> f)
             => XFunc.f(f);
+    }
+
+    [ApiHost(ApiNames.XFuncX)]
+    public static partial class XFuncX
+    {
+        const NumericKind Closure = UnsignedInts;
     }
 }

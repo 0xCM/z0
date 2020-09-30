@@ -20,9 +20,6 @@ namespace Z0.Asm
 
         public readonly FilePath TargetFile;
 
-        [MethodImpl(Inline)]
-        public static FileEmissionFailed Define(ApiHostUri host, bool generic, FilePath dst)
-            => new FileEmissionFailed(host,generic, dst);
 
         [MethodImpl(Inline)]
         internal FileEmissionFailed(ApiHostUri uri, bool generic, FilePath dst)

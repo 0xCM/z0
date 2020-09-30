@@ -14,7 +14,7 @@ namespace Z0.Dynamics.Operators
 
     public class Ops32f
     {
-        public static Expression<Func<float, float, float>> Add
+        public static Expression<Func<float,float,float>> Add
             => f<float>((x, y) => (float)(x + y));
 
         public static Expression<Func<float, float, float>> Sub

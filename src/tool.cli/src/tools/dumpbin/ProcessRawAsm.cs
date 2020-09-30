@@ -20,12 +20,6 @@ namespace Z0.Tools
 
     partial struct DumpBin
     {
-        [MethodImpl(Inline)]
-        public ProcessRawAsm Processor(DumpBinFlag flags, DumpBinOptions options= default)
-            => new ProcessRawAsm(Wf,
-                FS.dir(Wf.ToolOuputDir(DumpBin.Name).Name),
-                FS.dir(Wf.ToolProcessDir(DumpBin.Name).Name),
-                flags, options);
 
         public struct ProcessRawAsm : IToolProcessor<DumpBin,DumpBinFlag>
         {

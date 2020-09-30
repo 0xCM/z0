@@ -14,6 +14,10 @@ namespace Z0
     /// </summary>
     public readonly struct HexFormatOptions
     {
+        [MethodImpl(Inline)]
+        public static HexFormatOptions define(bool zpad = true, bool specifier = true, bool uppercase = false, bool prespec = true, char? delimiter = null)
+            => new HexFormatOptions(zpad,specifier, uppercase, prespec, delimiter ?? Space);
+
         /// <summary>
         /// Indicates whether the numeric content should be left-padded with zeros
         /// </summary>

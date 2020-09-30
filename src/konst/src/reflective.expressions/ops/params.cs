@@ -23,7 +23,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="X">The parameter type</typeparam>
         /// <param name="name">The parameter name</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static PX paramX<X>(string name = "x1")
             => XPR.Parameter(typeof(X), name);
 
@@ -78,7 +78,7 @@ namespace Z0
         /// Creates a parameter expression from a reflected parameter
         /// </summary>
         /// <param name="p">The reflected parameter</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static PX paramX(ParameterInfo p)
             => Expression.Parameter(p.ParameterType, p.Name);
 
@@ -86,7 +86,7 @@ namespace Z0
         /// Creates a parameter expression where the parameter name is predicated on an integer value
         /// </summary>
         /// <param name="i">The paremeter index</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static PX paramX(Type paramType, int i)
             => Expression.Parameter(paramType, "x" + i.ToString());
 
@@ -95,6 +95,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="X1">The type of the first parameter</typeparam>
         /// <typeparam name="X2">The type of the second parameter</typeparam>
+        [MethodImpl(Inline)]
         public static (PX x1, PX x2) paramXPair<X1,X2>()
             => (paramX<X1>("x1"), paramX<X2>("x2"));
 
@@ -104,6 +105,7 @@ namespace Z0
         /// <typeparam name="X1">The type of the first parameter</typeparam>
         /// <typeparam name="X2">The type of the second parameter</typeparam>
         /// <typeparam name="X3">The type of the third parameter</typeparam>
+        [MethodImpl(Inline)]
         public static (PX x1, PX x2, PX x3) paramXTriple<X1,X2,X3>()
             => (paramX<X1>("x1"), paramX<X2>("x2"), paramX<X3>("x3"));
 

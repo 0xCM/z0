@@ -20,6 +20,7 @@ namespace Z0
             return (name, value);
         }
 
+        [Op]
         public static Option<object> evaluate(Expression x)
         {
             var value = XQuery.constant(x);

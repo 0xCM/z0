@@ -59,8 +59,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Emitting<ImageData>(Host, TargetPath);
-
+            Wf.Running(Host);
             using var stream = SourcePath.Reader();
             using var reader = stream.BinaryReader();
             using var dst = TargetPath.Writer();
@@ -79,7 +78,7 @@ namespace Z0
                 k = Read(reader, buffer);
             }
 
-            Wf.Emitted<ImageData>(Host, LineCount, FS.path(TargetPath.Name));
+            Wf.EmittedTable<ImageData>(Host, LineCount, FS.path(TargetPath.Name));
         }
 
         public MemoryAddress OffsetAddress

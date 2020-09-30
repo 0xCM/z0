@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     /// <summary>
     /// Defines a sequence term
     /// </summary>
-    public readonly struct SeqTerm<T> : IEquatable<SeqTerm<T>>
-        where T : unmanaged
+    public readonly struct SeqTerm<T>
     {
         /// <summary>
         /// The integer that maps to the term value
@@ -50,23 +50,13 @@ namespace Z0
         /// Specifies whether the term is empty
         /// </summary>
         public bool IsEmpty
-            => Index == 0 && !gmath.nonz(Value);
+            => Value == null ||  (Index == 0 && Value.Equals(default));
 
         /// <summary>
         /// Renders the term by default as 'a_i = Value' where i denotes the term index
         /// </summary>
-        /// <param name="id">The sequence identifier, if specified</param>
-        public string Format(char? id = null)
-            => IsEmpty ? "{}" : $"{id ?? 'a'}_{Index} = {Value}";
-
-        [MethodImpl(Inline)]
-        public bool Equals(SeqTerm<T> rhs)
-            => Index == rhs.Index && gmath.eq(Value, rhs.Value);
-
-        public override bool Equals(object rhs)
-            => rhs is SeqTerm<T> t && Equals(t);
-
-        public override int GetHashCode()
-            => HashCode.Combine(Index,Value);
+        /// <param name="name">The sequence identifier, if specified</param>
+        public string Format(char? name = null)
+            => IsEmpty ? "{}" : $"{name ?? 'a'}_{Index} = {Value}";
     }
 }

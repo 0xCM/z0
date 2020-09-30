@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="args">The method parameter types in ordinal position</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         static Option<ConstructorInfo> ctor<T>(params Type[] args)
             => ctor(typeof(T), args);
 
@@ -55,7 +55,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="X">The emission type</typeparam>
         /// <param name="f">The emitter</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         static XFunc<X> fmake<X>(Func<X> f)
             => f;
 

@@ -13,15 +13,11 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost]
-    public static partial class DXTend
-    {
-
-    }
-
-    [ApiHost]
+    [ApiHost(ApiNames.Delegates)]
     public partial class Delegates
     {
+        const NumericKind Closure = UnsignedInts;
+
         /// <summary>
         /// Creates an action delegate from a method
         /// </summary>
@@ -49,5 +45,11 @@ namespace Z0
                 ? Expression.GetActionType(args)
                 : Expression.GetFuncType(z.concat(args, z.array(src.ReturnType)));
         }
+    }
+
+    [ApiHost(ApiNames.DelegatesX)]
+    public static partial class XDelegates
+    {
+
     }
 }

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    partial class IXTend
+    partial class XApiIdentity
     {
        [Op]
        public static string Format(this ApiUriScheme src)

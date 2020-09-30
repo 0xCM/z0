@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class IXTend
+    partial class XApiIdentity
     {
         [MethodImpl(Inline)]
         public static OpIdentity Generalize(this ApiGenericOpIdentity src)

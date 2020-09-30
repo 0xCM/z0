@@ -12,7 +12,7 @@ namespace Z0
 
     using api = ApiIdentity;
 
-    partial class IXTend
+    partial class XApiIdentity
     {
         [MethodImpl(Inline)]
         public static ApiIdentityToken Tokenize(this OpIdentity src)

@@ -12,19 +12,19 @@ namespace Z0
 
     partial class Delegates
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static System.Func<T> func<T>(Emitter<T> f)
             => new System.Func<T>(f);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static System.Func<T,T> func<T>(Z0.UnaryOp<T> f)
             => new System.Func<T,T>(f);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static System.Func<T,T,T> func<T>(BinaryOp<T> f)
             => new System.Func<T,T,T>(f);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static System.Func<T,T,T,T> func<T>(Z0.TernaryOp<T> f)
             => new System.Func<T,T,T,T>(f);
 
@@ -34,15 +34,15 @@ namespace Z0
             where C : unmanaged
                 => new System.Func<T>(f);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static System.Func<T,T,Bit32> func<T>(BinaryPredicate<T> f)
             => new System.Func<T,T,Bit32>(f);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static System.Func<T,T,bool> func<T>(BinaryPredicate8<T> f)
             => new System.Func<T,T,bool>(f);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static System.Func<T,Bit32> func<T>(UnaryPredicate<T> f)
             => new System.Func<T,Bit32>(f);
 

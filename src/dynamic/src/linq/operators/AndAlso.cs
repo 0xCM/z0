@@ -7,6 +7,8 @@ namespace Z0.Dynamics.Operators
     using System;
     using System.Linq.Expressions;
 
+    using Z0.Dynamics.Operators;
+
     using static XPress;
 
     public static class AndAlso<T>

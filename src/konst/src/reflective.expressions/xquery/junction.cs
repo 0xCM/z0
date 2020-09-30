@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     public partial class XQuery
-    {                 
+    {
         /// <summary>
         /// If the source expression is a logical disjunction, returns the expression; otherwise, returns none
         /// </summary>
@@ -31,7 +31,7 @@ namespace Z0
                 => x.NodeType == ExpressionType.AndAlso ? x : Option.none<X>();
 
         /// <summary>
-        /// Deterines whether the test expression is either a logical conjuntion or disjunction
+        /// Deterines whether the test expression is either a logical conjunction or disjunction
         /// </summary>
         /// <param name="X">The expression to examine</param>
         [MethodImpl(Inline)]

@@ -9,8 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    using K = BitLogicKinds;
-
     partial class MSvcHosts
     {
         [Closures(Integers)]

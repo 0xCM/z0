@@ -20,7 +20,8 @@ namespace Z0.Asm
 
         public Count Count {get;}
 
-        public FS.FilePath Target {get;}
+        public FS.FileUri Target {get;}
+
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]

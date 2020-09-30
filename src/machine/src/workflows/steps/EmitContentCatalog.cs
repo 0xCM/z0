@@ -38,7 +38,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Emitting<DocLibEntry>(Host, FS.path(TargetPath.Name));
+            Wf.Running(Host);
 
             var provider = Docs.content<TableContentProvider>();
             var entries = z.span(provider.Provided.Array());
@@ -56,7 +56,7 @@ namespace Z0
             using var dst = TargetPath.Writer();
             dst.Write(f.Format());
 
-            Wf.Emitted<DocLibEntry>(Host, EmissionCount, FS.path(TargetPath.Name));
+            Wf.EmittedTable<DocLibEntry>(Host, EmissionCount, FS.path(TargetPath.Name));
         }
     }
 }

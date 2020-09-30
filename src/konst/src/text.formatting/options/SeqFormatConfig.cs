@@ -11,6 +11,9 @@ namespace Z0
 
     public readonly struct SeqFormatConfig : ISeqFormat<SeqFormatConfig>
     {
+        [MethodImpl(Inline), Op]
+        public static SeqFormatConfig define(string delimiter = AsciCharText.Comma)
+            => new SeqFormatConfig(delimiter);
         public string Delimiter {get;}
 
         [MethodImpl(Inline)]

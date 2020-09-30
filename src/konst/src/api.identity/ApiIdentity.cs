@@ -10,13 +10,8 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost("api.identity.extensions")]
-    public static partial class IXTend
-    {
 
-    }
-
-    [ApiHost("api.identity")]
+    [ApiHost(ApiNames.ApiIdentity)]
     public readonly partial struct ApiIdentity
     {
         [MethodImpl(Inline)]
@@ -58,5 +53,11 @@ namespace Z0
             parts[1] = parts[1].WithText(parts[1].Identifier.Substring(1));
             return ApiIdentity.build(parts);
         }
+    }
+
+    [ApiHost(ApiNames.ApiIdentityX)]
+    public static partial class XApiIdentity
+    {
+
     }
 }

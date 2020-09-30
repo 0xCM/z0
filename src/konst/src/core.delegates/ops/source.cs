@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source method</param>
         /// <param name="host">The host instance if not static</param>
         /// <typeparam name="T">The emission type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Emitter<T> source<T>(MethodInfo src, object host = null)
             where T : unmanaged
                 => from<Emitter<T>>(src, host);

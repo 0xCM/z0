@@ -23,7 +23,7 @@ namespace Z0.Asm
 
         public readonly Count MemberCount;
 
-        public readonly FS.FilePath Target;
+        public FS.FilePath Target {get;}
 
         public FlairKind Flair {get;}
 

@@ -28,19 +28,19 @@ namespace Z0
         public TableId(Type shape)
         {
             Shape = shape;
-            Name = StorageBlocks.init(shape.Name, CharBlock32.Empty, out Name);
+            Name = CharBlocks.init(shape.Name, CharBlock32.Empty, out Name);
         }
 
         [MethodImpl(Inline)]
         public TableId(ClrArtifactKey shape, string name)
         {
             Shape = shape;
-            Name = StorageBlocks.init(name, CharBlock32.Empty, out Name);
+            Name = CharBlocks.init(name, CharBlock32.Empty, out Name);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx2, Shape, StorageBlocks.format(Name));
+            => text.format(PSx2, Shape, DataBlocks.format(Name));
 
         public override string ToString()
             => Format();

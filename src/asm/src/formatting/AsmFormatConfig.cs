@@ -93,7 +93,7 @@ namespace Z0.Asm
            this.EmitLineAddresses = ShowLineAddresses;
            this.FieldDelimiter = FieldSep;
            this.SectionDelimiter  = SectionSep;
-           this.HeaderEncodingFormat = FormatOptions.hex();
+           this.HeaderEncodingFormat = HexFormatOptions.define();
        }
 
     }

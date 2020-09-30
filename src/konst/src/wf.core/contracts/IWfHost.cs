@@ -36,9 +36,18 @@ namespace Z0
             => typeof(H).Name;
     }
 
-    public interface IWfHost<H,C> : IWfHost<H>
-        where H : IWfHost<H,C>, new()
+    public interface IWfHost<H,S> : IWfHost<H>
+        where H : IWfHost<H,S>, new()
     {
-        void Run(IWfShell<C> wf);
+        void Run(IWfShell wf, in S src);
+    }
+
+    public interface IWfHost<H,S,T> : IWfHost<H,S>
+        where H : IWfHost<H,S,T>, new()
+    {
+        ref T Run(IWfShell wf, in S src, out T dst);
+
+        void IWfHost<H,S>.Run(IWfShell wf, in S src)
+            => Run(wf,src, out var _);
     }
 }

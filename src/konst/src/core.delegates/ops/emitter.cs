@@ -12,8 +12,7 @@ namespace Z0
 
     partial class Delegates
     {
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Emitter<T> emitter<T>(System.Func<T> f)
             => new Emitter<T>(f);
 

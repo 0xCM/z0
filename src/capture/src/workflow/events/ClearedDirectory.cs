@@ -18,10 +18,10 @@ namespace Z0.Asm
 
         public string ActorName {get;}
 
-        public readonly FolderPath Path;
+        public readonly FS.FolderPath Path;
 
         [MethodImpl(Inline)]
-        public ClearedDirectory(string actor, FolderPath path, CorrelationToken ct)
+        public ClearedDirectory(string actor, FS.FolderPath path, CorrelationToken ct)
         {
             EventId = WfEventId.define(EventName, ct);
             ActorName = actor;

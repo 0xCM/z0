@@ -64,7 +64,7 @@ namespace Z0
 
         uint Emit(IPart part, FilePath dst)
         {
-            Wf.Emitting<CilMethodData>(Host, FS.path(dst.Name));
+            Wf.Running(Host);
 
             var methods = Cil.data(FS.path(part.Owner.Location));
             var count = (uint)methods.Length;
@@ -74,7 +74,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
                 writer.WriteLine(skip(methods,i).Format());
 
-            Wf.Emitted<CilMethodData>(Host, count, FS.path(dst.Name));
+            Wf.EmittedTable<CilMethodData>(Host, count, FS.path(dst.Name));
             return count;
         }
     }

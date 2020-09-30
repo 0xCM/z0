@@ -26,6 +26,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx2, Shape, StorageBlocks.format(Name));
+            => text.format(PSx2, Shape, DataBlocks.format(Name));
     }
 }

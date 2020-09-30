@@ -32,5 +32,17 @@ namespace Z0.Asm
             [MethodImpl(Inline)]
             get => ref Data[0];
         }
+
+        public ReadOnlySpan<AsmRoutine> View
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        public AsmRoutine[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
     }
 }

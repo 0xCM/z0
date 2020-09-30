@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XFuncX
     {
         /// <summary>
         /// Extracts the field info for the field referenced by an expression delegate

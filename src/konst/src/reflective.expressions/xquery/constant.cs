@@ -12,12 +12,12 @@ namespace Z0
     using static Konst;
 
     public partial class XQuery
-    { 
+    {
         /// <summary>
         /// Extracts a value from a constant expression if possible
         /// </summary>
         /// <param name="x">The expression to examine</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Option<object> constant(Expression x)
             => Option.TryCast<ConstantExpression>(x).TryMap(c => c.Value);
     }

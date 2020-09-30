@@ -13,30 +13,30 @@ namespace Z0.Dynamics
     using static Z0.XPress;
     using static Z0.XFunc;
 
-    public class StandardOperators 
-    {    
+    public class StandardOperators
+    {
         public static NotNullOperator IsNotNull => new NotNullOperator();
-        
+
         public static IsNullOperator IsNull => new IsNullOperator();
-        
+
         public static FalseOperator False => new FalseOperator();
-        
+
         public static TrueOperator True => new TrueOperator();
-        
+
         public static EqualOperator Equal => new EqualOperator();
-        
+
         public static NotEqualOperator NotEqual => new NotEqualOperator();
-        
+
         public static GreaterThanOperator GreaterThan => new GreaterThanOperator();
-        
+
         public static LessThanOperator LessThan => new LessThanOperator();
-        
+
         public static GreaterThanOrEqualOperator GreaterThanOrEqual => new GreaterThanOrEqualOperator();
-        
+
         public static LessThanOrEqualOperator LessThanOrEqual => new LessThanOrEqualOperator();
-        
+
         public static AndOperator And => new AndOperator();
-        
+
         public static OrOperator Or => new OrOperator();
     }
 
@@ -44,7 +44,7 @@ namespace Z0.Dynamics
     {
         internal GreaterThanOperator()
             : base("gt", ">")
-        { 
+        {
 
         }
     }
@@ -53,7 +53,7 @@ namespace Z0.Dynamics
     {
         internal LessThanOperator()
             : base("lt", "<")
-        { 
+        {
 
         }
     }
@@ -62,7 +62,7 @@ namespace Z0.Dynamics
     {
         internal GreaterThanOrEqualOperator()
             : base("gteq", ">=")
-        { 
+        {
 
         }
     }
@@ -71,7 +71,7 @@ namespace Z0.Dynamics
     {
         internal LessThanOrEqualOperator()
             : base("lteq", "<=")
-        { 
+        {
 
         }
     }

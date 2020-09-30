@@ -21,19 +21,5 @@ namespace Z0
 
     }
 
-    [LiteralProvider]
-    readonly struct ApiNames
-    {
-        public const string Api = "api";
 
-        public const string Wf = "wf";
-
-        public const string Tables = "tables";
-
-        public const string SymbolicHex = "symbolic.hex";
-
-        public const string SfuncSurrogates = "sfuncs.surrogates";
-
-        public const string SfuncProjectors = "sfuncs.projectors";
-    }
 }

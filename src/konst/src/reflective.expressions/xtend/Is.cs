@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using System.Linq;
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
 
@@ -15,7 +12,7 @@ namespace Z0
 
     using XPR = System.Linq.Expressions.Expression;
 
-    partial class XTend
+    partial class XFuncX
     {
         /// <summary>
         /// Tests whether an expression is a conversion

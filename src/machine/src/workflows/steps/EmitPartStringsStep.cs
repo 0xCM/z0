@@ -63,7 +63,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Emitting<ImageStringRecord>(StepId, FS.path(TargetPath.Name));
+            Wf.Running(StepId);
 
             var data = ReadData();
             EmissionCount = (uint)data.Length;
@@ -76,7 +76,7 @@ namespace Z0
                 format(skip(data,i), target);
             writer.Write(target.Render());
 
-            Wf.Emitted<ImageStringRecord>(StepId, EmissionCount,FS.path(TargetPath.Name));
+            Wf.EmittedTable<ImageStringRecord>(StepId, EmissionCount,FS.path(TargetPath.Name));
         }
 
         ReadOnlySpan<ImageStringRecord> ReadData()

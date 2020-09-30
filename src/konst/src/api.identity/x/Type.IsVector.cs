@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class IXTend
+    partial class XApiIdentity
     {
         /// <summary>
         /// Determines whether a type is classified as an intrinsic vector

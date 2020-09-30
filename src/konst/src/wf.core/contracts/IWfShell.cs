@@ -61,14 +61,14 @@ namespace Z0
         IFileDb FileDb(FS.FolderPath root)
             => new FileDb(root);
 
-        FolderPath ArchiveRoot
-            => FolderPath.Define(@"k:/z0/archives");
+        FS.FolderPath ArchiveRoot
+            => FS.dir(@"k:/z0/archives");
 
-        FolderPath ToolOuputDir(string tool)
-            => ArchiveRoot + FolderName.Define("tools") + FolderName.Define(tool) + FolderName.Define("output");
+        FS.FolderPath ToolOuputDir(string tool)
+            => ArchiveRoot + FS.folder("tools") + FS.folder(tool) + FS.folder("output");
 
-        FolderPath ToolProcessDir(string tool)
-            => ArchiveRoot + FolderName.Define("tools") + FolderName.Define(tool) + FolderName.Define("processed");
+        FS.FolderPath ToolProcessDir(string tool)
+            => ArchiveRoot + FS.folder("tools") + FS.folder(tool) + FS.folder("processed");
 
         FS.FolderPath AsmTables
             => Resources + FS.folder("tables");
@@ -78,13 +78,6 @@ namespace Z0
         {
             WfSink.Deposit(e);
             return e.EventId;
-        }
-
-        void Raise<T>(RowCreated<T>[] src)
-            where T : ITextual
-        {
-            foreach(var row in src)
-                Raise(row);
         }
 
         // ~ Levels
@@ -105,10 +98,10 @@ namespace Z0
             => Raise(warn(step, content, Ct));
 
         void Error(Exception e, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-            => Raise(WfEvents.error(e, Ct, caller, file, line));
+            => Raise(error(e, Ct, caller, file, line));
 
         void Error(Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-            => Raise(WfEvents.error(e,  Ct, caller, file, line));
+            => Raise(error(e,  Ct, caller, file, line));
 
         void Error(WfStepId step, Exception e, CorrelationToken? ct = null, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
             => Raise(error(e, ct ?? Ct, caller, file, line));
@@ -130,67 +123,54 @@ namespace Z0
         // ~ Lifecycle
         // ~ ---------------------------------------------------------------------------
 
+        void Created(ToolId tool)
+            => Raise(created(tool, Ct));
+
         void Created(WfStepId id)
             => Raise(created(id, Ct));
 
         void Created<T>(WfStepId id, T content)
-            => Raise(WfEvents.created(id, content, Ct));
-
-        void Created(WfStepId step, CorrelationToken ct)
-            => Raise(new WfStepCreated(step, Ct));
-
-        void Created(in WfStepId step)
-            => Raise(WfEvents.created(step, Ct));
-
-        void Disposed(WfStepId step)
-            => Raise(WfEvents.disposed(step, Ct));
-
-        void Disposed<T>(WfStepId step, T payload)
-            => Raise(WfEvents.disposed(step, payload, Ct));
+            => Raise(created(id, content, Ct));
 
         void Created<H>(H host)
             where H : IWfHost<H>, new()
-                => Raise(WfEvents.created(host.Id, Ct));
+                => Raise(created(host.Id, Ct));
 
-        void CreatedStep<H>(H host, Type step)
+        void Created<H>(H host, WfStepId step)
             where H : IWfHost<H>, new()
-                => Raise(WfEvents.created(host.Id, step, Ct));
+                => Raise(created(host.Id, step, Ct));
+
+        void Disposed(WfStepId step)
+            => Raise(disposed(step, Ct));
+
+        void Disposed<T>(WfStepId step, T payload)
+            => Raise(disposed(step, payload, Ct));
 
         void Disposed<H>(H host)
             where H : WfHost<H>, new()
-                => Raise(WfEvents.disposed(host.Id, Ct));
-
-        // ~ Initialization
-        // ~ ---------------------------------------------------------------------------
-
-        void Initializing(WfStepId step, CorrelationToken ct)
-            => Raise(new Initializing(step, Ct));
-
-        void Initialized(WfStepId step, CorrelationToken ct)
-            => Raise(new Initialized(step, Ct));
+                => Raise(disposed(host.Id, Ct));
 
         // ~ Running
         // ~ ---------------------------------------------------------------------------
 
-        void Running(WfStepId step, string actor = "fixme")
-            => Raise(running(callerName(actor), step, Ct));
+        void Running(WfStepId step)
+            => Raise(running(step, Ct));
 
         void Running<T>(WfStepId step, T content)
-            => Raise(WfEvents.running(step, content, Ct));
+            => Raise(running(step, content, Ct));
 
         void Running<H,T>(H host, T content)
-            where H :  IWfHost<H>, new()
+            where H : IWfHost<H>, new()
                 => Raise(running(host, content, Ct));
-
-        void RunningStep<H>(H host, Type step)
-            where H :  IWfHost<H>, new()
-                => Raise(running(host, step, Ct));
 
         void Running<S,T>(WfStepId step, DataFlow<S,T> df)
             => Raise(running(step, df, Ct));
 
         // ~ Ran
         // ~ ---------------------------------------------------------------------------
+
+        void Ran(ToolId tool)
+            => Raise(ran(tool, Ct));
 
         void Ran<T>(WfStepId step, T content)
             => Raise(new WfStepRan<T>(step, content, Ct));
@@ -202,71 +182,34 @@ namespace Z0
             where H : IWfHost<H>, new()
                 => Raise(ran(host, content, Ct));
 
-        void RanStep<H>(H host, Type step)
-            where H : IWfHost<H>, new()
-                => Raise(ran(host, step, Ct));
+        void Emitted(WfStepId step, FS.FilePath dst)
+            => Raise(emitted(step, dst, Ct));
 
-        void Ran<H,S,T,R>(H host, DataFlow<S,T,R> df)
-            where H : IWfHost<H>, new()
-                => Raise(flowed(host, df,Ct));
-
-        // ~ Processing
-        // ~ ---------------------------------------------------------------------------
-
-        void Emitting(WfStepId step, Type table, FS.FilePath dst)
-            => Raise(new EmittingTable(step, table, dst, Ct));
-
-        void Emitting<T>(WfStepId step, FS.FilePath dst)
+        void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst)
             where T : struct
-                => Raise(new EmittingTable(step, typeof(T), dst, Ct));
+                => Raise(new TableEmitted(step, typeof(T), count, dst, Ct));
 
-        void Emitting<H,T>(H host, T t, FS.FilePath dst)
+        void EmittedTable<H,T>(H host, T t, Count count, FS.FilePath dst)
             where H : IWfHost<H>, new()
             where T : struct
-                => Raise(new EmittingTable(host.Id, typeof(H), dst, Ct));
+                => Raise(new TableEmitted(host.Id, typeof(T), count, dst, Ct));
 
-        void Emitted<T>(WfStepId step, Count count, FS.FilePath dst)
-            where T : struct
-                => Raise(new EmittedTable(step, typeof(T), count, dst, Ct));
-
-        void Emitted<H,T>(H host, T t, Count count, FS.FilePath dst)
-            where H : IWfHost<H>, new()
-            where T : struct
-                => Raise(new EmittedTable(host.Id, typeof(T), count, dst, Ct));
-
-        void Emitting(WfStepId step, TableId table, FS.FilePath dst)
-            => Raise(new EmittingTable(step, table, dst, Ct));
-
-        void Emitted(WfStepId step, TableId table, uint count, FS.FilePath dst)
-            => Raise(WfEvents.emitted(step, table, count, dst, Ct));
+        void EmittedTable(WfStepId step, Type t, Count count, FS.FilePath dst)
+            => Raise(emitted(step, t, count, dst, Ct));
 
         void Processed<T>(WfStepId step, DataFlow<T> flow)
-            => Raise(WfEvents.processed(step, flow, Ct));
+            => Raise(processed(step, flow, Ct));
 
         void Processed<S,T>(WfStepId step, DataFlow<S,T> flow)
-            => Raise(WfEvents.processed(step, flow, Ct));
+            => Raise(processed(step, flow, Ct));
 
         void Row<T>(T content)
             where T : ITextual
-                => Raise(WfEvents.row(content, Ct));
+                => Raise(row(content, Ct));
 
         void Row<K,T>(K kind, T content)
             where T : ITextual
             where K : unmanaged
                 => Raise(row(kind, content, Ct));
-
-        static string callerName(string src)
-            => Path.GetFileNameWithoutExtension(src);
-
-        // ~~ Tools
-
-        void Created(ToolId tool)
-            => Raise(created(tool, Ct));
-
-        void Running(ToolId tool)
-            => Raise(running(tool, Ct));
-
-        void Ran(ToolId tool)
-            => Raise(ran(tool, Ct));
     }
 }

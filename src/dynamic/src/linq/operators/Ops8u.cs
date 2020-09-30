@@ -28,7 +28,7 @@ namespace Z0.Dynamics.Operators
         public static Expression<Func<byte,byte,byte>> Mod
             => f<byte>((x, y) => (byte)(x % y));
 
-        public static Func<byte,byte,byte> And 
+        public static Func<byte,byte,byte> And
             => (x,y) => (byte)(x & y);
 
         public static Func<byte,byte,byte> Or
