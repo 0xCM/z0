@@ -6,26 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Text;
 
     using static Konst;
     using static z;
 
-    partial struct Table
+    partial struct TableRows
     {
         [MethodImpl(Inline)]
-        public static TableRows<T> rows<T>(ReadOnlySpan<T> src)
+        public static TableRow<T> alloc<T>(uint cells)
             where T : struct
-                => rows(fields<T>(), src);
+                => new TableRow<T>(0,default(T), sys.alloc<object>(cells));
 
         [MethodImpl(Inline)]
-        public static TableRows<T> rows<T>(in TableFields fields, ReadOnlySpan<T> src)
+        public static TableRows<T> alloc<T>(in TableFieldIndex fields, uint rowcount)
             where T : struct
-        {
-            var kRows = (uint)src.Length;
-            var dst = rowalloc<T>(fields, kRows);
-            for(var i=0u; i<kRows; i++)
-                fill(fields, i, skip(src,i), ref dst[i]);
-            return dst;
-        }
+                => first(recover<byte,TableRows<T>>(span<byte>(rowsize<T>(rowcount, fields.Count))));
     }
 }

@@ -126,7 +126,7 @@ namespace Z0
             if(Collected.Count != 0)
             {
                 var widths = RenderWidths;
-                var formatter = Table.rowformatter<JmpInfo>(widths);
+                var formatter = TableRows.formatter<JmpInfo>(widths);
                 using var writer = Target.Writer();
                 writer.WriteLine(formatter.FormatHeader());
                 var jumps = @readonly(Collected.ToArray());

@@ -8,7 +8,7 @@ namespace Z0
 
     public interface ITableFieldEval
     {
-        TableFields Fields {get;}
+        TableFieldIndex Fields {get;}
 
         Type SourceType {get;}
 
@@ -28,7 +28,7 @@ namespace Z0
         where T : struct, ITable<F,T>
     {
 
-        new TableFields<F> Fields {get;}
+        new TableFieldIndex<F> Fields {get;}
 
         Type ITableFieldEval.SourceType
             => typeof(T);

@@ -19,23 +19,6 @@ namespace Z0
             where W : unmanaged, Enum
                 => new RecordFormatter<F,W>(text.build(), delimiter);
 
-        [MethodImpl(Inline), Op]
-        public static RowFormatter formatter(Type table, char delimiter = FieldDelimiter)
-            => new RowFormatter(table, fields(table), text.build(), delimiter);
-
-        [MethodImpl(Inline), Op]
-        public static RowFormatter formatter(Type table, StringBuilder dst, char delimiter = FieldDelimiter)
-            => new RowFormatter(table, fields(table), dst, delimiter);
-
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static RowFormatter<T> rowformatter<T>(char delimiter = FieldDelimiter)
-            where T : struct
-                => new RowFormatter<T>(fields<T>(), text.build(), FieldDelimiter);
-
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static RowFormatter<T> rowformatter<T>(ReadOnlySpan<byte> widths, T t = default, char delimiter = FieldDelimiter)
-            where T : struct
-                => new RowFormatter<T>(fields<T>(widths), text.build(), FieldDelimiter);
 
         [MethodImpl(Inline)]
         public static TableFormatter<F> formatter<F>(in LiteralFields<F> fields, StringBuilder dst, char delimiter)

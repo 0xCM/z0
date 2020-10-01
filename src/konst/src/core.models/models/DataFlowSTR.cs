@@ -9,8 +9,6 @@ namespace Z0
 
     using static Part;
 
-    using api = DataFlows;
-
     public readonly struct DataFlow<S,T,R> : IDataFlow<S,T,R>
     {
         public readonly S Source;

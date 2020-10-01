@@ -61,6 +61,9 @@ namespace Z0
         public static void Throw(AppMsg msg)
             => throw AppException.Define(msg);
 
+        public static void Throw(Exception e)
+            => throw e;
+
         public static AppException Equal(object lhs, object rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(AppErrorMsg.Equal(lhs,rhs,caller,file,line));
 

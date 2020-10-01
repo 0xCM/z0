@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [ApiHost]
+    [ApiHost(ApiNames.Resources)]
     public readonly partial struct Resources
     {
 

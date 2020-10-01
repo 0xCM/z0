@@ -16,10 +16,10 @@ namespace Z0
     {
         public readonly Type TableType;
 
-        readonly TableFields _Fields;
+        readonly TableFieldIndex _Fields;
 
         [MethodImpl(Inline)]
-        internal TableDefinition(Type type, TableFields fields)
+        internal TableDefinition(Type type, TableFieldIndex fields)
         {
             TableType = type;
             _Fields = fields;

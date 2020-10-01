@@ -6,17 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
-    using System.Reflection;
+    using System.Text;
 
     using static Konst;
     using static z;
 
-    partial struct Resources
+    partial struct TableRows
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe ReadOnlySpan<T> extract<T>(in ResMember member, int i0, int i1)
-            where T : unmanaged
-                => segment(member.Address.Pointer<T>(), i0, i1);
+        public static ByteSize rowsize<T>(uint cells)
+            where T : struct
+                => z.size<T>() + sizeof(uint) + z.size<object>() * cells;
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ByteSize rowsize<T>(uint rows, uint cells)
+            where T : struct
+                => rowsize<T>(cells)*rows;
     }
 }

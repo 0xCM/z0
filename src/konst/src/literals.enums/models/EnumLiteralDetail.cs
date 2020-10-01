@@ -7,13 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.InteropServices;
 
-    using static Konst;
-
-    /// <summary>
-    /// Defines a boxed enumeration literal as the triple (index,identifier,value)
-    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public struct EnumLiteralDetail : ITable<EnumLiteralDetail>
+    public struct EnumLiteralDetail
     {
         public static ReadOnlySpan<byte> RenderWidths
             => new byte[6]{24, 24, 16, 12, 24, 16};

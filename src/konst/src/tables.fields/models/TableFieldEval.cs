@@ -14,12 +14,12 @@ namespace Z0
     {
         public object Source {get;}
 
-        public TableFields Fields {get;}
+        public TableFieldIndex Fields {get;}
 
         public NamedValues<object> Values {get;}
 
         [MethodImpl(Inline)]
-        public TableFieldEval(object src, TableFields fields, NamedValue<object>[] values)
+        public TableFieldEval(object src, TableFieldIndex fields, NamedValue<object>[] values)
         {
             Source = src;
             Fields = fields;
@@ -27,7 +27,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public TableFieldEval(object src, TableFields fields, NamedValues<object> values)
+        public TableFieldEval(object src, TableFieldIndex fields, NamedValues<object> values)
         {
             Source = src;
             Fields = fields;

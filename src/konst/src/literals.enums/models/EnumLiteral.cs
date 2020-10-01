@@ -6,11 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Konst;
 
     using F = EnumLiteralField;
 
+    [StructLayout(LayoutKind.Sequential)]
     public struct EnumLiteral
     {
         public string TypeName;

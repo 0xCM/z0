@@ -9,6 +9,7 @@ namespace Z0
     using System;
     using System.IO;
     using System.Runtime.CompilerServices;
+
     using PEReader = System.Reflection.PortableExecutable.PEReader;
 
     using static Konst;
@@ -37,8 +38,8 @@ namespace Z0
                 dst.File = filename;
                 dst.EntryPoint = (Address32)peHeaders.PEHeader.AddressOfEntryPoint;
                 dst.CodeBase = (Address32)peHeaders.PEHeader.BaseOfCode;
-                dst.GlobalPointerTable = (Address32)peHeaders.PEHeader.GlobalPointerTableDirectory.RelativeVirtualAddress;
-                dst.GlobalPointerTableSize = (ByteSize)peHeaders.PEHeader.GlobalPointerTableDirectory.Size;
+                dst.GptRva = (Address32)peHeaders.PEHeader.GlobalPointerTableDirectory.RelativeVirtualAddress;
+                dst.GptSize = (ByteSize)peHeaders.PEHeader.GlobalPointerTableDirectory.Size;
                 dst.SectionAspects = src.SectionCharacteristics;
                 dst.SectionName = src.Name;
                 dst.RawData = (Address32)src.PointerToRawData;

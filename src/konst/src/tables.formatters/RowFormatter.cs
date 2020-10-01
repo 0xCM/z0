@@ -17,7 +17,7 @@ namespace Z0
     {
         readonly Type TableType;
 
-        readonly TableFields Fields;
+        readonly TableFieldIndex Fields;
 
         readonly TableSpan<ushort> Widths;
 
@@ -26,7 +26,7 @@ namespace Z0
         readonly char Delimiter;
 
         [MethodImpl(Inline)]
-        public RowFormatter(Type table, TableFields fields, StringBuilder dst = null, char delimiter = FieldDelimiter)
+        public RowFormatter(Type table, TableFieldIndex fields, StringBuilder dst = null, char delimiter = FieldDelimiter)
         {
             TableType = table;
             Fields = fields;
@@ -50,15 +50,7 @@ namespace Z0
         public string FormatHeader()
         {
             var dst = text.build();
-            var view = Fields.View;
-            var count = view.Length;
-            for(var i=0u; i<count; i++)
-            {
-                dst.Append(Delimiter);
-                dst.Append(Space);
-                ref readonly var field = ref skip(view,i);
-                dst.Append(field.Name.PadRight(Widths[i]));
-            }
+            TableFields.header(Fields, Delimiter, dst);
             return dst.ToString();
         }
 

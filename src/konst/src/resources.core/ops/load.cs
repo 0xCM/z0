@@ -21,6 +21,5 @@ namespace Z0
         public static ResourceSet<A> load<A>(string name, ReadOnlySpan<byte> src)
             where A : unmanaged, IBytes
                 => new ResourceSet<A>(name, src);
-
     }
 }

@@ -53,6 +53,9 @@ namespace Z0
         FolderPath AppDataRoot
             => Shell.Paths.AppDataRoot;
 
+        FS.FolderPath AppData
+            => FS.dir(Shell.Paths.AppDataRoot.Name);
+
         WfShell<S> WithState<S>(S src);
 
         IFileDb FileDb()

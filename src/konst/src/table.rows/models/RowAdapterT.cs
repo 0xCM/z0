@@ -9,30 +9,30 @@ namespace Z0
 
     using static Konst;
 
-    using api = Table;
+    using api = TableRows;
 
     public ref struct RowAdapter<T>
         where T : struct
     {
-        public readonly TableFields Fields;
+        public readonly TableFieldIndex Fields;
 
         T Source;
 
         TableRow<T> Row;
 
         [MethodImpl(Inline)]
-        public RowAdapter(TableFields fields)
+        public RowAdapter(TableFieldIndex fields)
         {
             Source = default;
             Fields = fields;
-            Row = api.rowalloc<T>(fields.Count);
+            Row = api.alloc<T>(fields.Count);
         }
 
         [MethodImpl(Inline)]
         public RowAdapter<T> Adapt(uint index, in T src)
         {
             Source = src;
-            api.fill(Fields, index, Source, ref Row);
+            api.load(Fields, index, Source, ref Row);
             return this;
         }
     }

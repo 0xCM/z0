@@ -11,17 +11,17 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct TableFields<F>
+    public readonly struct TableFieldIndex<F>
         where F : unmanaged
     {
         public TableSpan<TableField<F>> Table {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator TableFields<F>(TableField<F>[] src)
-            => new TableFields<F>(src);
+        public static implicit operator TableFieldIndex<F>(TableField<F>[] src)
+            => new TableFieldIndex<F>(src);
 
         [MethodImpl(Inline)]
-        public TableFields(TableField<F>[] src)
+        public TableFieldIndex(TableField<F>[] src)
             => Table = src;
 
         public Count Count

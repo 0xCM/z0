@@ -14,7 +14,7 @@ namespace Z0
     partial struct Table
     {
         [MethodImpl(Inline), Op]
-        public static void render(TableFields fields, object src, StringBuilder dst, bool eol = true)
+        public static void render(TableFieldIndex fields, object src, StringBuilder dst, bool eol = true)
         {
             var count = fields.Count;
             var view = fields.View;
@@ -30,7 +30,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static void render<T>(TableFields fields, in T src, StringBuilder dst, bool eol = true)
+        public static void render<T>(TableFieldIndex fields, in T src, StringBuilder dst, bool eol = true)
             where T : struct
         {
             var count = fields.Count;

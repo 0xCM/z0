@@ -14,6 +14,6 @@ namespace Z0
     partial struct Table
     {
         public static TableDefinition define(Type t)
-            => new TableDefinition(t, fields(t));
+            => new TableDefinition(t, TableFields.index(t));
     }
 }

@@ -13,15 +13,17 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct ImageSectionHeader
     {
+        public static ReadOnlySpan<byte> RenderWidths => new byte[9]{60,16,16,12,12,60,16,16,16};
+
         public FS.FileName File;
 
         public string SectionName;
 
         public Address32 CodeBase;
 
-        public Address32 GlobalPointerTable;
+        public Address32 GptRva;
 
-        public ByteSize GlobalPointerTableSize;
+        public ByteSize GptSize;
 
         public SectionCharacteristics SectionAspects;
 

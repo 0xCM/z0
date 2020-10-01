@@ -11,33 +11,30 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Table
+    partial struct TableFields
     {
         [Op]
-        public static TableFields fields(Type type)
+        public static TableFieldIndex index(Type type)
         {
             if(!type.IsStruct() || type.IsPrimitive)
-                return TableFields.Empty;
+                return TableFieldIndex.Empty;
 
             var declared = type.Fields();
-            var src = @readonly(declared);
             var count = declared.Length;
             var buffer = alloc<TableField>(count);
-            var dst = span(buffer);
 
-            for(ushort i=0; i<count; i++)
-                map(skip(src,i), i, ref seek(dst,i));
+            map(declared, buffer);
 
-            return new TableFields(buffer);
+            return new TableFieldIndex(buffer);
         }
 
-        public static TableFields fields(Type src, bool recurse)
+        public static TableFieldIndex index(Type src, bool recurse)
         {
             var collected = list<TableField>();
             ushort j = 0;
             if(src.IsStruct() && !src.IsPrimitive)
             {
-                var defs = @readonly(src.SequentialFields());
+                var defs = @readonly(src.DeclaredInstanceFields());
                 var count = defs.Length;
                 for(var i=0u; i<count; i++)
                 {
@@ -47,7 +44,7 @@ namespace Z0
                     var ft = def.FieldType;
                     if(ft.IsStruct() && !ft.IsPrimitive && recurse)
                     {
-                        var subfields = fields(ft,recurse);
+                        var subfields = index(ft,recurse);
                         collected.AddRange(subfields.Storage);
                     }
                 }
@@ -62,73 +59,50 @@ namespace Z0
             return final;
         }
 
-        public static TableFields fields<T>()
+        [Op, Closures(UnsignedInts)]
+        public static TableFieldIndex index<T>(ReadOnlySpan<byte> widths)
             where T : struct
         {
             var type = typeof(T);
-            var declared = @readonly(type.SequentialFields());
+            var declared = @readonly(type.DeclaredInstanceFields());
+            var count = declared.Length;
+            if(count != widths.Length)
+                @throw(AppErrors.LengthMismatch(count, widths.Length));
+
+            var buffer = alloc<TableField>(count);
+            var fields = span(buffer);
+            for(ushort i=0; i<count; i++)
+                map(skip(declared,i), i, skip(widths,i), ref seek(fields,i));
+
+            return new TableFieldIndex(buffer);
+        }
+
+
+        [Op, Closures(UnsignedInts)]
+        public static TableFieldIndex index<T>()
+            where T : struct
+        {
+            var type = typeof(T);
+            var declared = @readonly(type.DeclaredInstanceFields());
             var count = declared.Length;
             var buffer = alloc<TableField>(count);
             var fields = span(buffer);
             for(ushort i=0; i<count; i++)
                 map(skip(declared,i), i, ref seek(fields,i));
 
-            return new TableFields(buffer);
+            return new TableFieldIndex(buffer);
         }
 
-        public static TableFields fields<T>(ReadOnlySpan<byte> widths)
-            where T : struct
-        {
-            var type = typeof(T);
-            var declared = @readonly(type.SequentialFields());
-            var count = declared.Length;
-            var buffer = alloc<TableField>(count);
-            var fields = span(buffer);
-            for(ushort i=0; i<count; i++)
-                map(skip(declared,i), i, skip(widths,i), ref seek(fields,i));
-
-            return new TableFields(buffer);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref TableField map(FieldInfo src, ushort index, ref TableField dst)
-        {
-            dst.Index = index;
-            dst.TableType = src.DeclaringType;
-            dst.DataType = src.FieldType;
-            dst.Offset = Interop.offset(src.DeclaringType, src.Name);
-            dst.Id = (Address16)dst.Offset;
-            dst.RenderWidth = 16;
-            dst.Size = default;
-            dst.Definition = src;
-            return ref dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public static ref TableField map(FieldInfo src, ushort index, byte width, ref TableField dst)
-        {
-            dst.Index = index;
-            dst.TableType = src.DeclaringType;
-            dst.DataType = src.FieldType;
-            dst.Offset = Interop.offset(src.DeclaringType, src.Name);
-            dst.Id = (Address16)dst.Offset;
-            dst.RenderWidth = width;
-            dst.Size = default;
-            dst.Definition = src;
-            return ref dst;
-        }
-
-        [Op]
-        public static TableFields<F> fields<F,T>()
+        public static TableFieldIndex<F> index<F,T>()
             where F : unmanaged, Enum
             where T : struct, ITable<F,T>
         {
             var t = typeof(T);
-            var tFields = fields(t);
+            var tFields = TableFields.index(t);
             var literals = Literals.fields<F>();
             var lFields = literals.Specs;
 
-            var specs = fields<T>();
+            var specs = index<T>();
             var dst = list<TableField<F>>(lFields.Length);
             for(var i=0u; i<lFields.Length; i++)
             {
@@ -136,7 +110,7 @@ namespace Z0
                 var name = literals.Name(i);
                 var spec = specs[name];
                 if(spec.IsSome())
-                    dst.Add(field<F,T>(literal, spec.Value));
+                    dst.Add(define<F,T>(literal, spec.Value));
 
             }
             return dst.ToArray();

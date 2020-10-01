@@ -27,9 +27,17 @@ namespace Z0
 
         const string delegates = nameof(delegates);
 
+        const string expressions = nameof(expressions);
+
         const string extensions = nameof(extensions);
 
         const string identity = nameof(identity);
+
+        const string formatters = nameof(formatters);
+
+        const string functions = nameof(functions);
+
+        const string fields = nameof(fields);
 
         const string hex = nameof(hex);
 
@@ -37,7 +45,9 @@ namespace Z0
 
         const string logic = nameof(logic);
 
-        const string functions = nameof(functions);
+        const string rows = nameof(rows);
+
+        const string resources = nameof(resources);
 
         const string sfunc = nameof(sfunc);
 
@@ -49,14 +59,11 @@ namespace Z0
 
         const string projectors = nameof(projectors);
 
-        const string expressions = nameof(expressions);
-
         const string query = nameof(query);
-
-        const string formatters = nameof(formatters);
 
         const string options = nameof(options);
 
+        const string text = nameof(text);
 
         const string tables = nameof(tables);
 
@@ -92,7 +99,7 @@ namespace Z0
 
         public const string CharBlocks = blocks + dot + chars;
 
-        const string BitLogic = bits + dot + logic;
+        public const string BitLogic = bits + dot + logic;
 
         public const string BitLogicBits = BitLogic + dot + bits;
 
@@ -101,5 +108,15 @@ namespace Z0
         public const string BitLogicScalar = BitLogic + dot + scalar;
 
         public const string BitLogicBytes = BitLogic + dot + bytes;
+
+        public const string Resources = resources;
+
+        public const string TextResources = Resources + dot + text;
+
+        public const string Tables = tables;
+
+        public const string TableFields = tables + dot + fields;
+
+        public const string TableRows = tables + dot + rows;
     }
 }

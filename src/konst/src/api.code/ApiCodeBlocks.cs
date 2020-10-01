@@ -66,7 +66,7 @@ namespace Z0
 
         public static ApiCodeRow[] save(ReadOnlySpan<ApiCodeBlock> src, FS.FilePath dst, bool append = false)
         {
-            var formatter = Table.rowformatter<ApiCodeRow>(X86TableWidths);
+            var formatter = TableRows.formatter<ApiCodeRow>(X86TableWidths);
             var count = src.Length;
             var header = (dst.Exists && append) ? false : true;
             using var writer = dst.Writer(append);

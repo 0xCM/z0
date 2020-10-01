@@ -26,7 +26,6 @@ namespace Z0
         public RenderWidth(T value)
             => Value = value;
 
-
         [MethodImpl(Inline)]
         public string Format()
             => Value.ToString();

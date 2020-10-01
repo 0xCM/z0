@@ -18,14 +18,14 @@ namespace Z0
     {
         readonly Type TableType;
 
-        readonly TableFields Fields;
+        readonly TableFieldIndex Fields;
 
         readonly StringBuilder Target;
 
         readonly char Delimiter;
 
         [MethodImpl(Inline)]
-        public RowFormatter(TableFields fields, StringBuilder dst = null, char delimiter = FieldDelimiter)
+        public RowFormatter(TableFieldIndex fields, StringBuilder dst = null, char delimiter = FieldDelimiter)
         {
             TableType = typeof(T);
             Fields = fields;
@@ -50,19 +50,11 @@ namespace Z0
             return content;
         }
 
+
         public string FormatHeader()
         {
             var dst = text.build();
-            var view = Fields.View;
-            var count = view.Length;
-            for(var i=0u; i<count; i++)
-            {
-                dst.Append(Delimiter);
-                dst.Append(Space);
-                ref readonly var field = ref skip(view,i);
-                var width = field.RenderWidth;
-                dst.Append(field.Name.PadRight(width));
-            }
+            TableFields.header(Fields, Delimiter, dst);
             return dst.ToString();
         }
 

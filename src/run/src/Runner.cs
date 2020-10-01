@@ -88,7 +88,7 @@ namespace Z0
         static void format(ValueType src, StringBuilder dst)
         {
             var type = src.GetType();
-            var fields = Table.fields(src.GetType()).View;
+            var fields = TableFields.index(src.GetType()).View;
             var count = fields.Length;
             for(var i=0; i<count; i++)
             {
@@ -112,7 +112,7 @@ namespace Z0
                 return;
 
             var type = src.GetType();
-            var fields = Table.fields(type).View;
+            var fields = TableFields.index(type).View;
             var count = fields.Length;
             for(var i=0; i<count; i++)
             {
@@ -247,11 +247,11 @@ namespace Z0
                 new CheckResourcesHost().Run(Wf);
             }
 
-            {
-                var host = new EmitLiteralsHost();
-                using var step = new EmitLiterals(Wf, Parts.Konst.Assembly, host);
-                step.Run();
-            }
+            // {
+            //     var host = new EmitLiterals();
+            //     using var step = new EmitLiteralsStep(Wf, Parts.Konst.Assembly, host);
+            //     step.Run();
+            // }
 
             {
                 using var step = new EmitAsmSymbols(Wf);
@@ -263,14 +263,6 @@ namespace Z0
                 step.Run();
             }
 
-            {
-                var dir = FS.dir("J:/dev/labs/blend/App01/bin/x64/Release/net5.0/win-x64");
-                var ct = Wf.Ct;
-                var dlls = dir.Files(false).Where(f => f.Ext.Name.Contains("dll"));
-                var host = new EmitImageHeadersHost();
-                var output = FS.path("J:/dev/projects/z0-logs/db/images.csv");
-                host.Run(Wf, flow(dlls,output));
-            }
 
             {
                 Wf.Running(StepId);
@@ -371,8 +363,42 @@ namespace Z0
         }
 
 
+        void ListTextResources()
+        {
+            var rows = TextResources.rows(TextResources.from(typeof(Db.Literals))).View;
+            var count = rows.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var row = ref skip(rows,i);
+                Wf.Row(row);
+            }
+        }
+
+        void Run77()
+        {
+            var build = FS.dir("J:/dev/labs/blend/App01/bin/x64/Release/net5.0/win-x64");
+            var dllFiles = build.Files(false).Where(f => f.Ext.Name.Contains("dll"));
+            var dllTarget = FS.path("J:/dev/projects/z0-logs/db/images.dll.csv");
+            var exeFiles = build.Files(false).Where(f => f.Ext.Name.Contains("exe"));
+            var exeTarget = FS.path("J:/dev/projects/z0-logs/db/images.exe.csv");
+            EmitImageHeaders.create(dllFiles, dllTarget).Run(Wf);
+            EmitImageHeaders.create(exeFiles, exeTarget).Run(Wf);
+        }
+
+        public void Run89(params Assembly[] src)
+        {
+            for(var i=0; i<src.Length; i++)
+            {
+                EmitEnums.create().Run(Wf, src[i]);
+
+            }
+        }
+
         public void Run()
         {
+            ListTextResources();
+            Run77();
+            Run89(Parts.Konst.Assembly, Parts.Asm.Assembly);
 
             var blocks = Blocks(typeof(Switch16));
             var count = blocks.Length;
@@ -382,10 +408,6 @@ namespace Z0
             {
 
             }
-
-
         }
     }
-
-
 }

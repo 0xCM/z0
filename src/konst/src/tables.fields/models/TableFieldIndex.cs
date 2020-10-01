@@ -10,16 +10,16 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct TableFields : ITableSpan<TableFields,TableField>
+    public readonly struct TableFieldIndex : ITableSpan<TableFieldIndex,TableField>
     {
         readonly TableSpan<TableField> Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator TableFields(TableField[] src)
-            => new TableFields(src);
+        public static implicit operator TableFieldIndex(TableField[] src)
+            => new TableFieldIndex(src);
 
         [MethodImpl(Inline)]
-        public TableFields(TableField[] src)
+        public TableFieldIndex(TableField[] src)
             => Data = src;
 
         public Count Count
@@ -94,11 +94,11 @@ namespace Z0
             get => Data.Storage;
         }
 
-        public static TableFields Empty
-            => new TableFields(sys.empty<TableField>());
+        public static TableFieldIndex Empty
+            => new TableFieldIndex(sys.empty<TableField>());
 
         [MethodImpl(Inline)]
-        public TableFields Refresh(TableField[] src)
+        public TableFieldIndex Refresh(TableField[] src)
             => src;
 
     }

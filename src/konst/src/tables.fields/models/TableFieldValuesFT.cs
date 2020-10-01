@@ -16,12 +16,12 @@ namespace Z0
     {
         public T Source;
 
-        public TableFields<F> Fields;
+        public TableFieldIndex<F> Fields;
 
         public NamedValues<object> Values;
 
         [MethodImpl(Inline)]
-        public TableFieldValues(T source, TableFields<F> fields, NamedValue<object>[] values)
+        public TableFieldValues(T source, TableFieldIndex<F> fields, NamedValue<object>[] values)
         {
             Source = source;
             Fields = fields;

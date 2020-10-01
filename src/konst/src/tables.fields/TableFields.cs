@@ -11,12 +11,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Table
+    [ApiHost(ApiNames.TableFields)]
+    public readonly partial struct TableFields
     {
-        [MethodImpl(Inline)]
-        public static TableField<F> field<F,T>(F id, TableField spec, ushort? width = null)
-            where F : unmanaged, Enum
-            where T : struct, ITable<F,T>
-                => new TableField<F>(id,spec, width ?? (new RenderWidth<ushort>(@as<F,ushort>(id))));
+
     }
 }

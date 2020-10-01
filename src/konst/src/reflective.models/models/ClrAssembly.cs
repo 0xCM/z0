@@ -27,5 +27,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Assembly(ClrAssembly src)
             => src.Definition;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrAssembly(Assembly src)
+            => new ClrAssembly(src);
     }
 }

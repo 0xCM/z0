@@ -11,7 +11,16 @@ namespace Z0
     /// </summary>
     public class WfHostAttribute : Attribute
     {
+        public WfHostAttribute()
+        {
+            CommandName = Konst.EmptyString;
+        }
 
+        public WfHostAttribute(string name)
+        {
+            CommandName = name;
+        }
 
+        public string CommandName {get;}
     }
 }

@@ -44,15 +44,14 @@ namespace Z0
             var headers = reader.PEHeaders;
             var sections = headers.SectionHeaders;
 
-
             foreach(var section in sections)
             {
                 var record = default(ImageSectionHeader);
                 record.File = FS.file(src.FileName.Name);
                 record.EntryPoint = (Address32)headers.PEHeader.AddressOfEntryPoint;
                 record.CodeBase = (Address32)headers.PEHeader.BaseOfCode;
-                record.GlobalPointerTable = (Address32)headers.PEHeader.GlobalPointerTableDirectory.RelativeVirtualAddress;
-                record.GlobalPointerTableSize = (ByteSize)headers.PEHeader.GlobalPointerTableDirectory.Size;
+                record.GptRva = (Address32)headers.PEHeader.GlobalPointerTableDirectory.RelativeVirtualAddress;
+                record.GptSize = (ByteSize)headers.PEHeader.GlobalPointerTableDirectory.Size;
                 record.SectionAspects = section.SectionCharacteristics;
                 record.SectionName = section.Name;
                 record.RawData = (Address32)section.PointerToRawData;

@@ -12,7 +12,6 @@ namespace Z0
 
     public readonly struct TypeArrow<S,T>
     {
-
         public Type Source
             => typeof(S);
 

@@ -35,15 +35,15 @@ namespace Z0
         void PrintLetterns()
         {
             Wf.Running(Id);
-            var data = Resources.text(typeof(AsciLetterLoText));
+            var data = TextResources.from(typeof(AsciLetterLoText));
             var resources = @readonly(data);
-            var rows = Resources.rows(data).View;
+            var rows = TextResources.rows(data).View;
             var count = resources.Length;
             for(var i=0; i<count; i++)
             {
                 ref readonly var res = ref skip(resources,i);
                 ref readonly var row = ref skip(rows,i);
-                Wf.Row(delimit(row.Id, row.Address, row.Value));
+                Wf.Row(row);
             }
 
             Wf.Ran(Id);

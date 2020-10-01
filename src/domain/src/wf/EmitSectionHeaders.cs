@@ -73,8 +73,8 @@ namespace Z0
             dst.Delimit(F.Size, src.RawDataSize);
             dst.Delimit(F.EntryPoint, src.EntryPoint);
             dst.Delimit(F.CodeBase, src.CodeBase);
-            dst.Delimit(F.Gpt, src.GlobalPointerTable);
-            dst.Delimit(F.GptSize, src.GlobalPointerTableSize);
+            dst.Delimit(F.Gpt, src.GptRva);
+            dst.Delimit(F.GptSize, src.GptSize);
         }
     }
 }

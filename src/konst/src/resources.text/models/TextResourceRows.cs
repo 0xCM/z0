@@ -10,16 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct TextResourceRow
-    {
-        public ClrArtifactKey Id;
-
-        public MemoryAddress Address;
-
-        public Ptr<char> Value;
-    }
-
-
     public readonly struct TextResourceRows
     {
         readonly TableSpan<TextResourceRow> Data;

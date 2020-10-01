@@ -14,7 +14,7 @@ namespace Z0
     partial struct Table
     {
         [Op]
-        public static TableFieldEval evaluate(object src, TableFields fields, Action<Exception> handler = null)
+        public static TableFieldEval evaluate(object src, TableFieldIndex fields, Action<Exception> handler = null)
         {
             var buffer = alloc<NamedValue<object>>(fields.Length);
             var dst = span(buffer);
@@ -41,7 +41,7 @@ namespace Z0
         }
 
         [Op]
-        public static TableFieldValues<F,T> evaluate<F,T>(T src, TableFields<F> fields, Action<Exception> handler = null)
+        public static TableFieldValues<F,T> evaluate<F,T>(T src, TableFieldIndex<F> fields, Action<Exception> handler = null)
             where F : unmanaged, Enum
             where T : struct, ITable<F,T>
         {
