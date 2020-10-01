@@ -18,17 +18,6 @@ namespace Z0
         public static string format(in AsmRow src, char delimiter = FieldDelimiter)
             => format(src, Formatters.dataset<F>(delimiter)).Render();
 
-        public static string format(in AsmCall src)
-        {
-            var site = asm.offset(src);
-            var target =  src.CalledTarget.Base;
-            var offset = (site - target).Location;
-            var delta = (src.ActualTarget.Base - site).Location;
-            var actual = src.ActualTarget.Id;
-            var client_field = text.concat(src.Client.Id, text.embrace(site.Format()));
-            return $"{client_field} | {target} | {offset} | {actual} | {delta}";
-        }
-
         public static ref readonly DatasetFormatter<AsmTableField> format(in AsmRow src, in DatasetFormatter<AsmTableField> dst)
         {
             dst.Delimit(F.Sequence, src.Sequence);

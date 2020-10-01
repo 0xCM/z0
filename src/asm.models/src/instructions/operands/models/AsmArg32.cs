@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a 32-bit operand
     /// </summary>
-    public readonly struct AsmArg32 : IAsmArg<AsmArg32,W32,uint>
+    public readonly struct AsmArg32 : IAsmOperand<AsmArg32,W32,uint>
     {
         public uint Content {get;}
 

@@ -15,7 +15,9 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
-        public readonly IPart Source;
+        public readonly ClrAssembly Source;
+
+        public readonly Name SourceName;
 
         public readonly FS.FilePath Target;
 
@@ -24,12 +26,13 @@ namespace Z0
         public ReadOnlySpan<EnumLiteralDetail> Emitted;
 
         [MethodImpl(Inline)]
-        public EmitEnumsStep(IWfShell wf, WfHost host, Assembly src)
+        public EmitEnumsStep(IWfShell wf, WfHost host, ClrAssembly src)
         {
             Wf = wf;
             Host = host;
-            Source = ApiQuery.part(src).Require();
-            Target = wf.AppData + FS.file(Source.Id.Format(), "enums.csv");
+            Source = src;
+            SourceName = src.IsPart ? src.Definition.Id().Format() : src.SimpleName;
+            Target = wf.AppData + FS.file(SourceName, "enums.csv");
             Emitted = default;
             Wf.Created(Host);
         }
@@ -43,7 +46,7 @@ namespace Z0
 
         void Execute()
         {
-            var src = Enums.details(Source.Owner).View;
+            var src = Enums.details(Source).View;
             var count = src.Length;
             var formatter = TableRows.formatter<EnumLiteralDetail>(EnumLiteralDetail.RenderWidths);
             var dst = Target.Writer();

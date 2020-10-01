@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a 128-bit operand
     /// </summary>
-    public readonly struct AsmArg128: IAsmArg<AsmArg128,W128,Cell128>
+    public readonly struct AsmArg128: IAsmOperand<AsmArg128,W128,Cell128>
     {
         public Cell128 Content {get;}
 

@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static z;
-    using static Flow;
+    using static WfCore;
 
     [Step]
     public sealed class EvaluateStep : WfHost<EvaluateStep>
@@ -20,7 +20,7 @@ namespace Z0
     public sealed class SpecializeImm : WfHost<SpecializeImm>
     {
         public static WfStepId StepId
-            => Flow.step<SpecializeImm>();
+            => WfCore.step<SpecializeImm>();
     }
 
 

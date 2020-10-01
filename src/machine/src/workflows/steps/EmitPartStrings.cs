@@ -15,7 +15,7 @@ namespace Z0
         public const string EmissionType = ImageStringRecords.DataType;
 
         public static WfStepId StepId
-            => Flow.step<EmitPartStrings>();
+            => WfCore.step<EmitPartStrings>();
 
         public static string ExtName(PartStringKind kind)
             => (kind == PartStringKind.System ? ImageStringRecords.SystemKindExt : ImageStringRecords.UserKindExt).ToLower();

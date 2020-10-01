@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a 256-bit operand
     /// </summary>
-    public readonly struct AsmArg256: IAsmArg<AsmArg256,W256,Cell256>
+    public readonly struct AsmArg256: IAsmOperand<AsmArg256,W256,Cell256>
     {
         public Cell256 Content {get;}
 

@@ -88,7 +88,7 @@ namespace Z0.Asm
             using var writer = CaseWriter("OpCodes");
             writer.WriteLine(header());
             for(var i=0; i<records.Length; i++)
-                writer.WriteLine(skip(records,i).Format());
+                writer.WriteLine(AsmOpCodes.format(skip(records,i)));
         }
 
         // void opcode_tokens()

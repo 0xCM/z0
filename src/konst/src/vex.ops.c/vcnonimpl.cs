@@ -19,6 +19,7 @@ namespace Z0
     {
         /// <summary>
         /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// __m128i _mm_andnot_si128 (__m128i a, __m128i b) PANDN xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -28,6 +29,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// __m128i _mm_andnot_si128 (__m128i a, __m128i b) PANDN xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -37,6 +39,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// __m128i _mm_andnot_si128 (__m128i a, __m128i b) PANDN xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -46,6 +49,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// __m128i _mm_andnot_si128 (__m128i a, __m128i b) PANDN xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -55,6 +59,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// __m128i _mm_andnot_si128 (__m128i a, __m128i b) PANDN xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -64,6 +69,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// __m128i _mm_andnot_si128 (__m128i a, __m128i b) PANDN xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -73,6 +79,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// __m128i _mm_andnot_si128 (__m128i a, __m128i b) PANDN xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -91,6 +98,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b) VPANDN ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -100,6 +108,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b) VPANDN ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -109,6 +118,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b) VPANDN ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -127,6 +137,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b) VPANDN ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -136,6 +147,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b) VPANDN ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -145,6 +157,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b) VPANDN ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -154,6 +167,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the converse nonimplication z := x & (~y) for operands x and y
+        /// __m256i _mm256_andnot_si256 (__m256i a, __m256i b) VPANDN ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>

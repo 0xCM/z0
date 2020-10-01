@@ -310,8 +310,8 @@ namespace Z0
 
         public void vperm_256u8_outline()
         {
-            var a = V0.vinc<byte>(n256);
-            var b = VKonst.vdecrements<byte>(n256);
+            var a = z.vinc<byte>(n256);
+            var b = z.vdec<byte>(n256);
             var c = z.vreverse(z.vshuf32x8(a,b));
             Claim.veq(a,c);
         }

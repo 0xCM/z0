@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Flow
+    partial struct WfCore
     {
         /// <summary>
         /// Creates an event sink that emits persistent log data and renders events to the terminal

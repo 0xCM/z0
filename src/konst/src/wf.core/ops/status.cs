@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Flow
+    partial struct WfCore
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void status<T>(IWfShell wf, WfStepId step, T body, CorrelationToken ct)

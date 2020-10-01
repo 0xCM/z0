@@ -38,7 +38,7 @@ namespace Z0
         public Runner(WfCaptureState wf)
         {
             Ct = wf.Ct;
-            StepId = Flow.step(typeof(Runner));
+            StepId = WfCore.step(typeof(Runner));
             State = wf;
             Buffer = z.span<string>(256);
             offset = 0;

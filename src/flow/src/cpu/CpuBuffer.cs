@@ -10,13 +10,13 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
-    public readonly struct CpuBuffer
+    [ApiDataType]
+    public ref struct CpuBuffer
     {
-        readonly byte[] Data;
+        readonly Span<byte> Data;
 
         [MethodImpl(Inline), Op]
-        public static CpuBuffers alloc(int size)
+        public static CpuBuffers alloc(uint size)
             => new CpuBuffers(size);
 
         [MethodImpl(Inline)]
@@ -29,43 +29,41 @@ namespace Z0
         /// <summary>
         /// The number of bytes covered by the buffer
         /// </summary>
-        public const int BufferSize = 64;
+        public const uint BufferSize = 32*64;
 
         /// <summary>
         /// The number of 16-bit elements covered by the buffer
         /// </summary>
-        public const int Buffer16 = BufferSize/2;
+        public const uint Buffer16 = BufferSize/2;
 
         /// <summary>
         /// The number of 32-bit elements covered by the buffer
         /// </summary>
-        public const int Buffer32 = BufferSize/4;
+        public const uint Buffer32 = BufferSize/4;
 
         /// <summary>
         /// The number of 64-bit elements covered by the buffer
         /// </summary>
-        public const int Buffer64 = BufferSize/8;
+        public const uint Buffer64 = BufferSize/8;
 
         /// <summary>
         /// The number of 128-bit elements covered by the buffer
         /// </summary>
-        public const int Buffer128 = BufferSize/16;
+        public const uint Buffer128 = BufferSize/16;
 
         /// <summary>
         /// The number of 256-bit elements covered by the buffer
         /// </summary>
-        public const int Buffer256 = BufferSize/32;
+        public const uint Buffer256 = BufferSize/32;
 
         /// <summary>
         /// The number of 512-bit elements covered by the buffer
         /// </summary>
-        public const int Buffer512 = BufferSize/64;
+        public const uint Buffer512 = BufferSize/64;
 
         [MethodImpl(Inline)]
         public CpuBuffer(byte[] data)
-        {
-            Data = data;
-        }
+            => Data = data;
 
         public int Length
         {
@@ -102,5 +100,21 @@ namespace Z0
         {
             first(Content.Cast<byte,Cell128>()) = Cell128.Empty;
         }
+
+        [MethodImpl(Inline), Op]
+        public void Clear(W256 w)
+        {
+            first(Content.Cast<byte,Cell256>()) = Cell256.Empty;
+        }
+
+        [MethodImpl(Inline), Op]
+        public void Clear(W512 w)
+        {
+            first(Content.Cast<byte,Cell512>()) = Cell512.Empty;
+        }
+
+        [MethodImpl(Inline), Op]
+        public ref Cell512 cell(W512 w, uint5 index)
+            => ref seek(Content.Cast<byte,Cell512>(), index);
     }
 }

@@ -10,6 +10,7 @@ namespace Z0.Tools
 
     using static Konst;
 
+
     public partial struct ProcDump : ITool<ProcDump>
     {
         [StringLiteral]

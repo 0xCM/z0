@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CpuBuffers
+    public ref struct CpuBuffers
     {
         readonly CpuBuffer<N64,W8,HexCode> step;
 
@@ -19,9 +19,9 @@ namespace Z0
         readonly char[] log;
 
         [MethodImpl(Inline)]
-        public CpuBuffers(int size)
+        public CpuBuffers(uint size)
         {
-            log = Root.alloc<char>(size);
+            log = z.alloc<char>(size);
             step = CpuBuffer.alloc<N64,W8,HexCode>();
             run = CpuBuffer.alloc<N64,W8,HexCode>();
         }
@@ -30,12 +30,12 @@ namespace Z0
         public Span<HexCode> Step()
         {
             step.Clear(w128);
-            return step.Content;
+            return step.Edit;
         }
 
         [MethodImpl(Inline), Op]
         public Span<HexCode> Run()
-            => run.Content;
+            => run.Edit;
 
         [MethodImpl(Inline), Op]
         public Span<char> Log()

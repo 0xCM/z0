@@ -93,17 +93,6 @@ namespace Z0
         public static unsafe Vector128<long> vconvert(in SpanBlock16<byte> src, N128 w, long t)
             => ConvertToVector128Int64(gptr(src.Head));
 
-        // /// <summary>
-        // /// PMOVZXBQ xmm, m16
-        // /// 2x8u -> 2x64i
-        // /// </summary>
-        // /// <param name="src">The memory source</param>
-        // /// <param name="block">The block index</param>
-        // /// <param name="dst">The target vector</param>
-        // [MethodImpl(Inline), Op]
-        // public static unsafe Vector128<long> vconvert(in Block16<byte> src, int block, N128 w, long t)
-        //     => ConvertToVector128Int64(gptr(src.BlockRef(block)));
-
         /// <summary>
         /// PMOVZXBQ xmm, m16
         /// 2x8u -> 2x64u
@@ -396,8 +385,8 @@ namespace Z0
         /// 8x16u -> 8x64u
         /// </summary>
         /// <param name="src">The blocked memory source</param>
-        /// <param name="lo">The lower taret</param>
-        /// <param name="hi">The upper taret</param>
+        /// <param name="lo">The lower target</param>
+        /// <param name="hi">The upper target</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector512<ulong> vconvert(in SpanBlock128<ushort> src, N512 w, ulong t)
             => (v64u(ConvertToVector256Int64(gptr(src.Head))),
@@ -408,8 +397,8 @@ namespace Z0
         /// 8x32u -> 8x64u
         /// </summary>
         /// <param name="src">The blocked memory source</param>
-        /// <param name="lo">The lower taret</param>
-        /// <param name="hi">The upper taret</param>
+        /// <param name="lo">The lower target</param>
+        /// <param name="hi">The upper target</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector512<ulong> vconvert(in SpanBlock256<uint> src, N512 w, ulong t)
             => (v64u(ConvertToVector256Int64(gptr(src.Head))),

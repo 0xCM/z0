@@ -11,8 +11,7 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {        
-
+    {
         /// <summary>
         /// Returns a reference to an index-identified cell
         /// </summary>
@@ -33,7 +32,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T vcellref<T>(in Vector256<T> src, byte index)
             where T : unmanaged
-                => ref add(vfirst(src), index);                
+                => ref add(vfirst(src), index);
 
         /// <summary>
         /// Returns a reference to an index-identified cell
@@ -43,7 +42,7 @@ namespace Z0
         /// <typeparam name="T">The vector cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T vcellref<T>(in Vector512<T> src, byte index)
-            where T : unmanaged            
+            where T : unmanaged
                 => ref add(vfirst(src), index);
     }
 }

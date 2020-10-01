@@ -32,10 +32,10 @@ namespace Z0
                 var v2 = Random.CpuVector<byte>(n);
                 var v3 = Random.CpuVector<byte>(n);
 
-                dvec.vmaskstore(v0, m0, dst);
-                dvec.vmaskstore(v1, m1, dst);
-                dvec.vmaskstore(v2, m2, dst);
-                dvec.vmaskstore(v3, m3, dst);
+                z.vmaskstore(v0, m0, dst);
+                z.vmaskstore(v1, m1, dst);
+                z.vmaskstore(v2, m2, dst);
+                z.vmaskstore(v3, m3, dst);
 
                 var v4 = z.vload(dst);
                 var v5 = vparts(n128,

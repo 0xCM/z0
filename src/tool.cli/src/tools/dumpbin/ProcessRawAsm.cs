@@ -15,7 +15,7 @@ namespace Z0.Tools
     public readonly struct ProcessRawAsmStep : IWfStep<ProcessRawAsmStep>
     {
         public static WfStepId StepId
-            => Flow.step<ProcessRawAsmStep>();
+            => WfCore.step<ProcessRawAsmStep>();
     }
 
     partial struct DumpBin

@@ -18,7 +18,7 @@ namespace Z0
         public const string ShellName = nameof(PartId.ToolCli) + "/" + nameof(App);
 
         public static WfStepId StepId
-            => Flow.step<Shelly>();
+            => WfCore.step<Shelly>();
     }
 
     class App : AppShell<App,IAppContext>
@@ -36,7 +36,7 @@ namespace Z0
         {
             try
             {
-                using var wf = Flow.shell(args);
+                using var wf = WfCore.shell(args);
                 wf.Status(StepId, new {Message ="Running shell", Args = text.bracket(args.FormatList())});
                 wf.Status(StepId, "Shell run complete");
             }

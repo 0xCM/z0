@@ -261,7 +261,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vmove(in byte src, N8 n, W32 w)
-            => v32u(ConvertToVector256Int32(z.gptr(src)));
+            => v32u(ConvertToVector256Int32(gptr(src)));
 
         /// <summary>
         /// VPMOVZXBW ymm, m128
@@ -273,7 +273,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<ushort> vmove(in byte src, N16 n, W16 w)
-            => v16u(ConvertToVector256Int16(z.gptr(src)));
+            => v16u(ConvertToVector256Int16(gptr(src)));
 
         /// <summary>
         /// PMOVZXWQ xmm, m32
@@ -285,7 +285,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<ulong> vmove(in ushort src, N2 n, W64 w)
-            => v64u(ConvertToVector128Int64(z.gptr(src)));
+            => v64u(ConvertToVector128Int64(gptr(src)));
 
         /// <summary>
         /// VPMOVZXWQ ymm, m64
@@ -296,7 +296,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<ulong> vmove(in ushort src, N4 n, W64 w)
-            => v64u(ConvertToVector256Int64(z.gptr(src)));
+            => v64u(ConvertToVector256Int64(gptr(src)));
 
         /// <summary>
         /// PMOVSXWD xmm, m64
@@ -308,7 +308,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<uint> vmove(in ushort src, N4 n, W32 w)
-            => v32u(ConvertToVector128Int32(z.gptr(in src)));
+            => v32u(ConvertToVector128Int32(gptr(in src)));
 
         /// <summary>
         /// VPMOVZXWD ymm, m128
@@ -320,7 +320,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<uint> vmove(in ushort src, N8 n, W32 w)
-            => v32u(ConvertToVector256Int32(z.gptr(src)));
+            => v32u(ConvertToVector256Int32(gptr(src)));
 
         /// <summary>
         /// PMOVZXBQ xmm, m16
@@ -333,7 +333,7 @@ namespace Z0
         /// <param name="i">Signals a sign extension</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<long> vmove(in byte src, N2 n, W64 w, N1 i)
-            => ConvertToVector128Int64(z.gptr(src));
+            => ConvertToVector128Int64(gptr(src));
 
         /// <summary>
         /// PMOVZXBD xmm, m32
@@ -346,7 +346,7 @@ namespace Z0
         /// <param name="i">Signals a sign extension</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<int> vmove(in byte src, N128 w, W32 n, N1 i)
-            => ConvertToVector128Int32(z.gptr(src));
+            => ConvertToVector128Int32(gptr(src));
 
         /// <summary>
         /// VPMOVZXBQ ymm, m32
@@ -359,7 +359,7 @@ namespace Z0
         /// <param name="i">Signals a sign extension</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<long> vmove(in byte src, W256 w, W64 n, N1 i)
-            => ConvertToVector256Int64(z.gptr(src));
+            => ConvertToVector256Int64(gptr(src));
 
         /// <summary>
         /// PMOVZXBW xmm, m64
@@ -372,7 +372,7 @@ namespace Z0
         /// <param name="i">Signals a sign extension</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<short> vmove(in byte src, N8 n, W16 w, N1 i)
-            => ConvertToVector128Int16(z.gptr(src));
+            => ConvertToVector128Int16(gptr(src));
 
         /// <summary>
         /// VPMOVZXBW ymm, m128
@@ -385,7 +385,7 @@ namespace Z0
         /// <param name="i">Signals a sign extension</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector256<short> vmove(in byte src, N16 n, W16 w, N1 i)
-            => ConvertToVector256Int16(z.gptr(src));
+            => ConvertToVector256Int16(gptr(src));
 
         /// <summary>
         /// PMOVSXWQ xmm, m32
@@ -397,7 +397,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<long> vmove(in short src, N2 n, W64 w)
-            => ConvertToVector128Int64(z.gptr(src));
+            => ConvertToVector128Int64(gptr(src));
 
         /// <summary>
         /// PMOVSXWD xmm, m64
@@ -409,7 +409,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<int> vmove(in short src, N4 n, W32 w)
-            => ConvertToVector128Int32(z.gptr(src));
+            => ConvertToVector128Int32(gptr(src));
 
         /// <summary>
         /// PMOVZXWQ xmm, m32
@@ -421,7 +421,7 @@ namespace Z0
         /// <param name="i">Signals a sign extension</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<long> vmove(in ushort src, N2 n, W64 w, N1 i)
-            => ConvertToVector128Int64(z.gptr(src));
+            => ConvertToVector128Int64(gptr(src));
 
         /// <summary>
         /// PMOVSXDQ xmm, m64
@@ -433,7 +433,7 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector128<long> vmove(in int src, N2 n, W64 w)
-            => ConvertToVector128Int64(z.gptr(src));
+            => ConvertToVector128Int64(gptr(src));
 
         /// <summary>
         /// VPMOVZXWD ymm, m128
@@ -445,8 +445,8 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector512<uint> vmove(in ushort src, N16 n, W32 w)
-            => (v32u(ConvertToVector256Int32(z.gptr(src))),
-                v32u(ConvertToVector256Int32(z.gptr(src, 8))));
+            => (v32u(ConvertToVector256Int32(gptr(src))),
+                v32u(ConvertToVector256Int32(gptr(src, 8))));
 
         /// <summary>
         /// VPMOVSXWD ymm, m128
@@ -458,8 +458,8 @@ namespace Z0
         /// <param name="w">The target component width</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector512<int> vmove(in short src, N16 n, W32 w)
-            => (ConvertToVector256Int32(z.gptr(in src)),
-                ConvertToVector256Int32(z.gptr(in src, 8)));
+            => (ConvertToVector256Int32(gptr(in src)),
+                ConvertToVector256Int32(gptr(in src, 8)));
 
         /// <summary>
         /// VPMOVZXBW ymm, m128
@@ -471,8 +471,8 @@ namespace Z0
         /// <param name="hi">The hi target</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector512<ushort> vmove(in byte src, N32 n, W16 w)
-            => (v16u(ConvertToVector256Int16(z.gptr(src))),
-                v16u(ConvertToVector256Int16(z.gptr(src,16))));
+            => (v16u(ConvertToVector256Int16(gptr(src))),
+                v16u(ConvertToVector256Int16(gptr(src,16))));
 
         /// <summary>
         /// VPMOVZXWQ ymm, m64
@@ -480,12 +480,12 @@ namespace Z0
         /// Projects 8 unsigned 16-bit integers onto 8 unsigned 64-bit integers
         /// </summary>
         /// <param name="src">The blocked memory source</param>
-        /// <param name="lo">The lower taret</param>
-        /// <param name="hi">The upper taret</param>
+        /// <param name="lo">The lower target</param>
+        /// <param name="hi">The upper target</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector512<ulong> vmove(in ushort src, N8 n, W64 w)
-            => (v64u(ConvertToVector256Int64(z.gptr(src))),
-                v64u(ConvertToVector256Int64(z.gptr(src,4))));
+            => (v64u(ConvertToVector256Int64(gptr(src))),
+                v64u(ConvertToVector256Int64(gptr(src,4))));
 
         /// <summary>
         /// VPMOVZXDQ ymm, m128
@@ -493,11 +493,11 @@ namespace Z0
         /// Projects 8 unsigned 32-bit integers onto 8 unsigned 64-bit integers
         /// </summary>
         /// <param name="src">The blocked memory source</param>
-        /// <param name="lo">The lower taret</param>
-        /// <param name="hi">The upper taret</param>
+        /// <param name="lo">The lower target</param>
+        /// <param name="hi">The upper target</param>
         [MethodImpl(Inline), Op]
         public static unsafe Vector512<ulong> vmove(in uint src, N8 n, W64 w)
-            => (v64u(ConvertToVector256Int64(z.gptr(src))),
-                v64u(ConvertToVector256Int64(z.gptr(src,4))));
+            => (v64u(ConvertToVector256Int64(gptr(src))),
+                v64u(ConvertToVector256Int64(gptr(src,4))));
     }
 }

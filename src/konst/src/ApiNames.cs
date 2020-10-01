@@ -23,6 +23,10 @@ namespace Z0
 
         const string chars = nameof(chars);
 
+        const string cmd = nameof(cmd);
+
+        const string core = nameof(core);
+
         const string data = nameof(data);
 
         const string delegates = nameof(delegates);
@@ -118,5 +122,9 @@ namespace Z0
         public const string TableFields = tables + dot + fields;
 
         public const string TableRows = tables + dot + rows;
+
+        public const string WfCore = wf + dot + core;
+
+        public const string WfCmd = wf + dot + cmd;
     }
 }

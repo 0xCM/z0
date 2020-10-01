@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Flow
+    partial struct WfCore
     {
         /// <summary>
         /// Reifies a <see cref='IShellContet'/> predicated on the entry <see cref='Assembly'/>, a <see cref='ApiModules'/> derived
@@ -22,7 +22,7 @@ namespace Z0
         {
             var control = Assembly.GetEntryAssembly();
             var args = Environment.GetCommandLineArgs();
-            return context(control, Flow.modules(control, args), args);
+            return context(control, WfCore.modules(control, args), args);
         }
 
         /// <summary>

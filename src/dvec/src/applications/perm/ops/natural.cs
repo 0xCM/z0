@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class Permute
-    {         
+    {
         /// <summary>
         /// Reifies a permutation of length 8 from its canonical scalar specification
         /// </summary>
@@ -42,7 +42,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Reifies a permutation of length 16 from its canonical scalar representative 
+        /// Reifies a permutation of length 16 from its canonical scalar representative
         /// </summary>
         /// <param name="spec">The representative</param>
         [MethodImpl(Inline), Op]
@@ -55,7 +55,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Reifies a permutation of length 16 from its canonical scalar representative 
+        /// Reifies a permutation of length 16 from its canonical scalar representative
         /// </summary>
         /// <param name="spec">The representative</param>
         [MethodImpl(Inline), Op]
@@ -121,7 +121,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            if(terms.Length != (int)value(n))
+            if(terms.Length != z.nat32i(n))
                 AppErrors.ThrowInvariantFailure($"{n} != {terms.Length}");
             return new NatPerm<N,T>(Perm.Init(terms));
         }

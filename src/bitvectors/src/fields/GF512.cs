@@ -7,8 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; using static Memories;
-    
+    using static Konst;
+    using static Memories;
+
     public static class Gf512
     {
         public const int MemberCount = 512;
@@ -17,7 +18,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static BitVector16 mul(BitVector16 a, BitVector16 b)
-            => dvec.clmulr(n16, a.Scalar,b.Scalar,Redux.Scalar);
+            => z.clmulr(n16, a.Scalar,b.Scalar,Redux.Scalar);
 
         /// <summary>
         /// Computes the full multiplication table for GF512
@@ -31,7 +32,7 @@ namespace Z0
                 dst[i, j] = Gf512.mul(i,j);
             return ref dst;
         }
- 
+
         public static BitVector16 mul_ref(BitVector16 a, BitVector16 b)
         {
             ulong r = Redux;
@@ -49,7 +50,7 @@ namespace Z0
                 if((p & (1ul << i)) != 0)
                     p^= (r <<(i-16));
             }
-         
+
             return (ushort)p;
         }
     }

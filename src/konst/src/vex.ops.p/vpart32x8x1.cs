@@ -13,7 +13,7 @@ namespace Z0
     partial struct z
     {
         /// <summary>
-        /// Partitions a 32-bit source value into 32 8-bit peices each with an effective width of q
+        /// Partitions a 32-bit source value into 32 8-bit pieces each with an effective width of q
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]

@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Flow
+    partial struct WfCore
     {
         public static IWfShell shell(WfInit init)
             => new WfShell(init);

@@ -19,6 +19,7 @@ namespace Z0
     {
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m128i _mm_xor_si128 (__m128i a, __m128i b) PXOR xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -28,6 +29,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m128i _mm_xor_si128 (__m128i a, __m128i b) PXOR xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -37,6 +39,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m128i _mm_xor_si128 (__m128i a, __m128i b) PXOR xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -46,6 +49,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m128i _mm_xor_si128 (__m128i a, __m128i b) PXOR xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -55,6 +59,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m128i _mm_xor_si128 (__m128i a, __m128i b) PXOR xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -64,6 +69,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m128i _mm_xor_si128 (__m128i a, __m128i b) PXOR xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -73,6 +79,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m128i _mm_xor_si128 (__m128i a, __m128i b) PXOR xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -82,6 +89,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m128i _mm_xor_si128 (__m128i a, __m128i b) PXOR xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -89,9 +97,9 @@ namespace Z0
         public static Vector128<ulong> vxor(Vector128<ulong> x, Vector128<ulong> y)
             => Xor(x, y);
 
-
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m256i _mm256_xor_si256 (__m256i a, __m256i b) VPXOR ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -101,6 +109,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m256i _mm256_xor_si256 (__m256i a, __m256i b) VPXOR ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -110,6 +119,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m256i _mm256_xor_si256 (__m256i a, __m256i b) VPXOR ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -119,6 +129,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m256i _mm256_xor_si256 (__m256i a, __m256i b) VPXOR ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -128,6 +139,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m256i _mm256_xor_si256 (__m256i a, __m256i b) VPXOR ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -137,6 +149,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m256i _mm256_xor_si256 (__m256i a, __m256i b) VPXOR ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -146,6 +159,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m256i _mm256_xor_si256 (__m256i a, __m256i b) VPXOR ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -155,6 +169,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m256i _mm256_xor_si256 (__m256i a, __m256i b) VPXOR ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -209,6 +224,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m128d _mm_xor_pd (__m128d a, __m128d b) XORPD xmm, xmm/m128
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -218,6 +234,7 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m256 _mm256_xor_ps (__m256 a, __m256 b) VXORPS ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
@@ -227,27 +244,12 @@ namespace Z0
 
         /// <summary>
         /// Computes the bitwise XOR between operands
+        /// __m256d _mm256_xor_pd (__m256d a, __m256d b) VXORPS ymm, ymm, ymm/m256
         /// </summary>
         /// <param name="x">The left operand</param>
         /// <param name="y">The right operand</param>
         [MethodImpl(Inline), Op]
         public static Vector256<double> vxor(in Vector256<double> x, in Vector256<double> y)
             => Xor(x, y);
-
-          [MethodImpl(Inline), Op]
-        public static Vector128<float> vor(Vector128<float> x, Vector128<float> y)
-            => Or(x, y);
-
-        [MethodImpl(Inline), Op]
-        public static Vector128<double> vor(Vector128<double> x, Vector128<double> y)
-            => Or(x, y);
-
-        [MethodImpl(Inline), Op]
-        public static Vector256<float> vor(Vector256<float> x, Vector256<float> y)
-            => Or(x, y);
-
-        [MethodImpl(Inline), Op]
-        public static Vector256<double> vor(Vector256<double> x, Vector256<double> y)
-            => Or(x, y);
    }
 }

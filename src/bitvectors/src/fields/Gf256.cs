@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst; using static Memories;
-    
+
     public static class Gf256
     {
         public const int MemberCount = 256;
@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="b">The right operand</param>
         [MethodImpl(Inline)]
         public static byte clmul(byte a, byte b)
-            => dvec.clmulr(n8,a,b,Redux);
+            => z.clmulr(n8,a,b,Redux);
 
         /// <summary>
         /// Fills caller-allocated memory with a GF(256) multiplication table
@@ -32,7 +32,7 @@ namespace Z0
         public static void products(byte min, byte max, ref byte dst)
         {
             var width = max - min + 1;
-            var cells = width*width;            
+            var cells = width*width;
             var index = 0;
             for(byte i=min; i<= max; i++)
             for(byte j=min; j<= max; j++)
@@ -50,7 +50,7 @@ namespace Z0
             products(1, (byte)n.NatValue, ref dst.Unblocked[0]);
             return dst;
         }
- 
+
         /// <summary>
         /// Computes the full multiplication table for GF(256) modulo the canonical polynomial
         /// </summary>
@@ -63,7 +63,7 @@ namespace Z0
                 dst[i, j] = clmul((byte)i,(byte)j);
             return ref dst;
         }
- 
+
         /// <summary>
         /// The reference (slow) implementation of GF(256) multiplication reduced
         /// via the canonical polynomial

@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines an 8-bit operand
     /// </summary>
-    public readonly struct AsmArg8 : IAsmArg<AsmArg8,W8,byte>
+    public readonly struct AsmArg8 : IAsmOperand<AsmArg8,W8,byte>
     {
         public byte Content {get;}
 

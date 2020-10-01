@@ -22,7 +22,7 @@ namespace Z0
         // ~ Scalar conversions
 
         /// <summary>
-        /// int _mm_cvtsi128_si32 (__m128i a)MOVD reg/m32, xmm
+        /// int _mm_cvtsi128_si32 (__m128i a) MOVD reg/m32, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
@@ -42,7 +42,7 @@ namespace Z0
             => ConvertToUInt32(src);
 
         /// <summary>
-        /// __int64 _mm_cvtsi128_si64 (__m128i a)MOVQ reg/m64, xmm
+        /// __int64 _mm_cvtsi128_si64 (__m128i a) MOVQ reg/m64, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>
@@ -52,7 +52,7 @@ namespace Z0
             => ConvertToInt64(src);
 
         /// <summary>
-        /// __int64 _mm_cvtsi128_si64 (__m128i a)MOVQ reg/m64, xmm
+        /// __int64 _mm_cvtsi128_si64 (__m128i a) MOVQ reg/m64, xmm
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <param name="w">The target width</param>

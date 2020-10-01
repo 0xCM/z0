@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public struct M32 : IMemoryArg<M32,W32,uint>
+    public struct M32 : IAsmMemOp<M32,W32,uint>
     {
         public uint Data;
 
@@ -25,7 +25,7 @@ namespace Z0.Asm
         public M32(uint src)
             => Data = src;
 
-        uint IAsmArg<uint>.Content
+        uint IAsmOperand<uint>.Content
             => Data;
     }
 }

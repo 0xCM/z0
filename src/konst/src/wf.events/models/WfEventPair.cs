@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
     using static Render;
-    using static Flow;
+    using static WfCore;
 
     public readonly struct WfEventPair<S,T>
         where S : struct, IWfEvent<S>

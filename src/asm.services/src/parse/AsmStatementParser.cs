@@ -9,26 +9,38 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmStatementParser
+    public struct AsmStatementParser
     {
-        readonly Func<string,Mnemonic> MnemonicParse;
+        AsmStatement Statement;
+
+        bool Succeeded;
+
 
         [MethodImpl(Inline)]
-        public AsmStatementParser(Func<string,Mnemonic> parser)
+        public AsmStatementParser(byte i)
         {
-            MnemonicParse = parser;
+            Statement = default;
+            Succeeded = false;
         }
 
-        public ParseResult<AsmStatement> Parse(string src)
+        public bool Parse(string src, ref AsmStatement dst)
         {
-            var mnemonic = MnemonicParse(src.LeftOf(Chars.Space));
-            if(mnemonic != Mnemonic.INVALID)
+            RunParser(src);
+            if(Succeeded)
             {
-                var operands = src.RightOf(Chars.Space).SplitClean(Chars.Comma);
-                return ParseResult.Success(src, new AsmStatement(mnemonic, operands));
+                dst = Statement;
+                return true;
             }
             else
-                return ParseResult.Fail<AsmStatement>(src);
+            {
+                return false;
+            }
+
+        }
+
+        void RunParser(ReadOnlySpan<char> src)
+        {
+
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public struct M64 : IMemoryArg<M64,W64,ulong>
+    public struct M64 : IAsmMemOp<M64,W64,ulong>
     {
         public ulong Data;
 
@@ -28,7 +28,7 @@ namespace Z0.Asm
         public DataWidth Width
             => DataWidth.W64;
 
-        ulong IAsmArg<ulong>.Content
+        ulong IAsmOperand<ulong>.Content
             => Data;
     }
 }

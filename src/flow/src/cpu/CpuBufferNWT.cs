@@ -10,12 +10,12 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CpuBuffer<N,W,T>
+    public ref struct CpuBuffer<N,W,T>
         where N : unmanaged, ITypeNat
         where W : unmanaged, ITypeWidth
         where T : unmanaged
     {
-        readonly T[] Data;
+        readonly Span<T> Data;
 
         [MethodImpl(Inline)]
         public CpuBuffer(T[] data)
@@ -29,7 +29,7 @@ namespace Z0
             get => (int)nat64u<N>();
         }
 
-        public Span<T> Content
+        public Span<T> Edit
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -38,25 +38,25 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Clear(W16 w)
         {
-            first(Content.Cast<T,ushort>()) = Zero16u;
+            first(Data.Cast<T,ushort>()) = Zero16u;
         }
 
         [MethodImpl(Inline)]
         public void Clear(W32 w)
         {
-            first(Content.Cast<T,uint>()) = Zero32u;
+            first(Data.Cast<T,uint>()) = Zero32u;
         }
 
         [MethodImpl(Inline)]
         public void Clear(W64 w)
         {
-            first(Content.Cast<T,ulong>()) = Zero64u;
+            first(Data.Cast<T,ulong>()) = Zero64u;
         }
 
         [MethodImpl(Inline)]
         public void Clear(W128 w)
         {
-            first(Content.Cast<T,Cell128>()) = Cell128.Empty;
+            first(Data.Cast<T,Cell128>()) = Cell128.Empty;
         }
     }
 }

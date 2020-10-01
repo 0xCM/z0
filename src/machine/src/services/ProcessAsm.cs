@@ -19,7 +19,7 @@ namespace Z0
     public readonly struct ProcessAsmStep : IWfStep<ProcessAsmStep>
     {
         public static WfStepId StepId
-            => Flow.step<ProcessAsmStep>();
+            => WfCore.step<ProcessAsmStep>();
     }
 
 

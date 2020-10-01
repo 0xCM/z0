@@ -17,4 +17,11 @@ namespace Z0
             step.Run();
         }
     }
+
+    public struct EmitEnumsSpec
+    {
+        public FS.FilePath Source;
+
+        public FS.FilePath Target;
+    }
 }

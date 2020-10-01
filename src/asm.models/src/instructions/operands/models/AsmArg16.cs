@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines a 16-bit operand
     /// </summary>
-    public readonly struct AsmArg16 : IAsmArg<AsmArg16,W16,ushort>
+    public readonly struct AsmArg16 : IAsmOperand<AsmArg16,W16,ushort>
     {
         public ushort Content {get;}
 

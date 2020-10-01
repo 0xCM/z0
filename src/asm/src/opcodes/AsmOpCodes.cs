@@ -9,7 +9,6 @@ namespace Z0.Asm
     using System.IO;
 
     using F = AsmOpCodeField;
-    using R = AsmOpCodeRow;
 
     using static Konst;
     using static z;

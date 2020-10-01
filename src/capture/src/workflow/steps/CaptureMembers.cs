@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static z;
-    using static Flow;
+    using static WfCore;
 
     [Step]
     public sealed class CaptureMembers : WfHost<CaptureMembers>

@@ -9,7 +9,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Flow
+    partial struct WfCore
     {
         [Op]
         public static ApiHostUri uri(Type src)

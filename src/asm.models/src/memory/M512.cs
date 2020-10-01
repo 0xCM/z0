@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public struct M512 : IMemoryArg<M512,W512,Cell512>
+    public struct M512 : IAsmMemOp<M512,W512,Cell512>
     {
         public Cell512 Data;
 
@@ -29,7 +29,7 @@ namespace Z0.Asm
         public static implicit operator Cell512(M512 src)
             => src.Data;
 
-        Cell512 IAsmArg<Cell512>.Content
+        Cell512 IAsmOperand<Cell512>.Content
             => Data;
     }
 }

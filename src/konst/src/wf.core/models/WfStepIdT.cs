@@ -53,7 +53,7 @@ namespace Z0
         public WfToken Token
         {
             [MethodImpl(Inline)]
-            get => Flow.token(WfPartKind.Step, Effect);
+            get => WfCore.token(WfPartKind.Step, Effect);
         }
 
         public bool IsEmpty

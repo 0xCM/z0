@@ -10,6 +10,7 @@ namespace Z0
 
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
+    using static System.Runtime.Intrinsics.X86.Sse3;
 
     using static Konst;
 
@@ -57,6 +58,15 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<ulong> vduplicate(N1 parity, N64 w, Vector256<ulong> src)
             => v64u(vdup64(parity, v64f(src)));
+
+        /// <summary>
+        /// __m128d _mm_loaddup_pd (double const* mem_addr) MOVDDUP xmm, m64
+        /// </summary>
+        /// <param name="w">The width selector</param>
+        /// <param name="src">The data source</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector128<double> vdup64(in double src)
+            => LoadAndDuplicateToVector128(gptr(src));
 
         /// <summary>
         /// __m256 _mm256_moveldup_ps (__m256 a) VMOVSLDUP ymm, ymm/m256

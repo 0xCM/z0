@@ -31,7 +31,7 @@ namespace Z0
         }
 
         protected Shell()
-            : this(Flow.context())
+            : this(WfCore.context())
         {
 
         }

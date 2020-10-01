@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     partial class Permute
     {
@@ -20,11 +19,11 @@ namespace Z0
         public static Perm4L pack(NatPerm<N4> src)
         {
             const int segwidth = 2;
-            const int length = 4;            
+            const int length = 4;
 
-            var dst = 0u;            
+            var dst = 0u;
             for(int i=0, offset = 0; i< length; i++, offset +=segwidth)
-                dst |= (uint)src[i] << offset;                        
+                dst |= (uint)src[i] << offset;
             return (Perm4L)dst;
         }
 
@@ -38,9 +37,9 @@ namespace Z0
             const int segwidth = 3;
             const int length = 8;
 
-            var dst = 0u;          
+            var dst = 0u;
             for(int i=0, offset = 0; i< length; i++, offset +=segwidth)
-                dst |= (uint)src[i] << offset;                        
+                dst |= (uint)src[i] << offset;
             return (Perm8L)dst;
         }
 
@@ -53,10 +52,10 @@ namespace Z0
         {
             const int segwidth = 4;
             const int length = 16;
-            
-            var dst = 0ul;                        
+
+            var dst = 0ul;
             for(int i=0, offset = 0; i< length; i++, offset +=segwidth)
-                dst |= (ulong)src[i] << offset;                        
+                dst |= (ulong)src[i] << offset;
             return (Perm16L)dst;
         }
     }

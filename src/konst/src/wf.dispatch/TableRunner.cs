@@ -21,7 +21,7 @@ namespace Z0
         public IWfShell Wf {get;}
 
         public WfStepId StepId
-            => Flow.step(typeof(TableRunner<F,T,D,S,Y>));
+            => WfCore.step(typeof(TableRunner<F,T,D,S,Y>));
 
         readonly TableMaps<D,S,T,Y> Processors;
 

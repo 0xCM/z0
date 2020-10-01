@@ -24,6 +24,18 @@ namespace Z0
         public ClrAssembly(Assembly src)
             => Definition = src;
 
+        public bool IsPart
+        {
+            [MethodImpl(Inline)]
+            get => Definition.Id() != 0;
+        }
+
+        public string SimpleName
+        {
+            [MethodImpl(Inline)]
+            get => Definition.GetSimpleName();
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator Assembly(ClrAssembly src)
             => src.Definition;

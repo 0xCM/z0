@@ -72,7 +72,7 @@ namespace Z0
         public static WfStepExec<H,T> executor<H,T>(IWfShell wf, WfStepArgs? args = null, WfStepId? id = null)
             where H : struct, IWfStepExec<T>, IWfStep<H>
         {
-            var e = new WfStepExec<H,T>(wf, id ?? Flow.step<H>());
+            var e = new WfStepExec<H,T>(wf, id ?? WfCore.step<H>());
             e.Configure(args ?? WfStepArgs.Empty);
             return e;
         }

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = Flow;
+    using api = WfCore;
 
     public struct WfStepExec<H,T> : IWfStepExec<T>
         where H : struct, IWfStepExec<T>, IWfStep<H>

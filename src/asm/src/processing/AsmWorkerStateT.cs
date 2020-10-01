@@ -15,7 +15,7 @@ namespace Z0
     {
         T[] Current;
 
-        List<IAsmArgSequence> Operands;
+        List<IAsmOpererands> Operands;
 
         public ref readonly T View
         {
@@ -30,14 +30,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public AsmWorkerState(T state, params IAsmArgSequence[] operands)
+        public AsmWorkerState(T state, params IAsmOpererands[] operands)
         {
             Current = new T[1]{state};
             Operands = operands.ToList();
         }
 
         [MethodImpl(Inline)]
-        public void Handled(IAsmArgSequence cmd)
+        public void Handled(IAsmOpererands cmd)
             => Operands.Add(cmd);
     }
 }

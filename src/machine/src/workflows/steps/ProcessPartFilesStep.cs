@@ -13,7 +13,7 @@ namespace Z0
 
     public ref struct ProcessPartFilesStep
     {
-        const int DefaultBufferSize = CpuBuffer.BufferSize;
+        const uint DefaultBufferSize = CpuBuffer.BufferSize;
 
         readonly IWfShell Wf;
 

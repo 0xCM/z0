@@ -79,7 +79,7 @@ namespace Z0
 
         public static void Main(params string[] args)
         {
-            var wf = Flow.shell(args);
+            var wf = WfCore.shell(args);
             Traverse(wf,Assembly.GetEntryAssembly());
 
         }

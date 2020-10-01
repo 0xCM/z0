@@ -5,11 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst; 
-    using static V0;
+
+    using static Konst;
+    using static z;
 
     partial class gvec
     {
@@ -18,15 +18,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dvec.vabs(v8i(x)));
+                return generic<T>(z.vabs(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dvec.vabs(v16i(x)));
+                return generic<T>(z.vabs(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dvec.vabs(v32i(x)));
+                return generic<T>(z.vabs(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dvec.vabs(v64i(x)));
+                return generic<T>(z.vabs(v64i(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline), Abs, Closures(SignedInts)]
@@ -34,15 +34,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(dvec.vabs(v8i(x)));
+                return generic<T>(z.vabs(v8i(x)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(dvec.vabs(v16i(x)));
+                return generic<T>(z.vabs(v16i(x)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(dvec.vabs(v32i(x)));
+                return generic<T>(z.vabs(v32i(x)));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(dvec.vabs(v64i(x)));
+                return generic<T>(z.vabs(v64i(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

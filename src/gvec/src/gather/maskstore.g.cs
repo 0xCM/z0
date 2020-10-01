@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static As;
+    using static z;
 
     partial class gvec
     {
@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vmaskstore8<T>(Vector128<T> src, Vector128<byte> mask, in SpanBlock128<byte> dst)
             where T : unmanaged
-                => dvec.vmaskstore(v8u(src),mask, dst);
+                => z.vmaskstore(v8u(src),mask, dst);
 
         /// <summary>
         /// Conditionally stores 8-bit segments from the source vector to memory according to a vectorized mask
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vmaskstore8<T>(Vector256<T> src, Vector256<byte> mask, in SpanBlock256<byte> dst)
             where T : unmanaged
-                => dvec.vmaskstore(v8u(src),mask, dst);
+                => z.vmaskstore(v8u(src),mask, dst);
 
         /// <summary>
         /// Conditionally stores 32-bit segments from the source vector to memory according to a vectorized mask
@@ -53,7 +53,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vmaskstore32<T>(Vector128<T> src, Vector128<uint> mask, in SpanBlock128<uint> dst)
             where T : unmanaged
-                => dvec.vmaskstore(v32u(src),mask,dst);
+                => z.vmaskstore(v32u(src),mask,dst);
 
         /// <summary>
         /// Conditionally stores 32-bit segments from the source vector to memory according to a vectorized mask
@@ -67,7 +67,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vmaskstore32<T>(Vector256<T> src, Vector256<uint> mask, in SpanBlock256<uint> dst)
             where T : unmanaged
-                => dvec.vmaskstore(v32u(src),mask, dst);
+                => z.vmaskstore(v32u(src),mask, dst);
 
         /// <summary>
         /// Conditionally stores 64-bit segments from the source vector to memory according to a vectorized mask
@@ -81,7 +81,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vmaskstore64<T>(Vector128<T> src, Vector128<ulong> mask, in SpanBlock128<ulong> dst)
             where T : unmanaged
-                => dvec.vmaskstore(v64u(src),mask,dst);
+                => z.vmaskstore(v64u(src),mask,dst);
 
         /// <summary>
         /// Conditionally stores 64-bit segments from the source vector to memory according to a vectorized mask
@@ -95,6 +95,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static void vmaskstore64<T>(Vector256<T> src, Vector256<ulong> mask, in SpanBlock256<ulong> dst)
             where T : unmanaged
-                => dvec.vmaskstore(v64u(src),mask, dst);
+                => z.vmaskstore(v64u(src),mask, dst);
     }
 }
