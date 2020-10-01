@@ -5,22 +5,22 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;    
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Avx;
     using static System.Runtime.Intrinsics.X86.Avx2;
     using static System.Runtime.Intrinsics.X86.Sse;
     using static System.Runtime.Intrinsics.X86.Sse2;
-    
+
     using static Konst;
 
-    partial class dinxfp
+    partial struct z
     {
        /// <summary>
         /// __m128 _mm_unpacklo_ps (__m128 a, __m128 b) UNPCKLPS xmm, xmm/m128
         /// Creates a 128-bit vector where the lower 64 bits are taken from the
-        /// lower 64 bits of the first source vector and the higher 64 bits are taken 
+        /// lower 64 bits of the first source vector and the higher 64 bits are taken
         /// from the lower 64 bits of the second source vector
         /// </summary>
         /// <param name="x">The left source vector</param>
@@ -32,7 +32,7 @@ namespace Z0
         /// <summary>
         /// __m128d _mm_unpacklo_pd (__m128d a, __m128d b) UNPCKLPD xmm, xmm/m128
         /// Creates a 128-bit vector where the lower 64 bits are taken from the
-        /// lower 64 bits of the first source vector and the higher 64 bits are taken 
+        /// lower 64 bits of the first source vector and the higher 64 bits are taken
         /// from the lower 64 bits of the second source vector
         /// </summary>
         /// <param name="x">The left source vector</param>
@@ -44,7 +44,7 @@ namespace Z0
         /// <summary>
         /// __m256 _mm256_unpacklo_ps (__m256 a, __m256 b) VUNPCKLPS ymm, ymm, ymm/m256
         /// Creates a 256-bit vector where the lower 128 bits are taken from the
-        /// lower 128 bits of the first source vector and the higher 128 bits are taken 
+        /// lower 128 bits of the first source vector and the higher 128 bits are taken
         /// from the lower 128 bits of the second source vector
         /// </summary>
         /// <param name="x">The left source vector</param>
@@ -56,7 +56,7 @@ namespace Z0
         /// <summary>
         /// __m256d _mm256_unpacklo_pd (__m256d a, __m256d b) VUNPCKLPD ymm, ymm, ymm/m256
         /// Creates a 256-bit vector where the lower 128 bits are taken from the
-        /// lower 128 bits of the first source vector and the higher 128 bits are taken 
+        /// lower 128 bits of the first source vector and the higher 128 bits are taken
         /// from the lower 128 bits of the second source vector
         /// </summary>
         /// <param name="x">The left source vector</param>

@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using static System.Runtime.Intrinsics.X86.Sse;
@@ -32,7 +32,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         [MethodImpl(Inline), Add]
-        public static Vector128<sbyte> vadd(Vector128<sbyte> x, Vector128<sbyte> y) 
+        public static Vector128<sbyte> vadd(Vector128<sbyte> x, Vector128<sbyte> y)
             => Add(x, y);
 
         /// <summary>
@@ -160,7 +160,7 @@ namespace Z0
         [MethodImpl(Inline), Add]
         public static Vector256<ulong> vadd(Vector256<ulong> x, Vector256<ulong> y)
             => Add(x, y);
-        
+
         [MethodImpl(Inline), Add]
         public static Vector512<byte> vadd(in Vector512<byte> x, in Vector512<byte> y)
             => (Add(x.Lo, y.Lo), Add(x.Hi, y.Hi));
@@ -192,5 +192,41 @@ namespace Z0
         [MethodImpl(Inline), Add]
         public static Vector512<ulong> vadd(in Vector512<ulong> x, in Vector512<ulong> y)
             => (Add(x.Lo, y.Lo), Add(x.Hi, y.Hi));
+
+        /// <summary>
+        /// __m128 _mm_add_ps (__m128 a, __m128 b) ADDPS xmm, xmm/m128
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<float> vadd(Vector128<float> x, Vector128<float> y)
+            => Add(x, x);
+
+        /// <summary>
+        /// __m128d _mm_add_pd (__m128d a, __m128d b)ADDPD xmm, xmm/m128
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<double> vadd(Vector128<double> x, Vector128<double> y)
+            => Add(x, y);
+
+        /// <summary>
+        /// __m256 _mm256_add_ps (__m256 a, __m256 b) VADDPS ymm, ymm, ymm/m256
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<float> vadd(Vector256<float> x, Vector256<float> y)
+            => Add(x, y);
+
+        /// <summary>
+        /// __m256d _mm256_add_pd (__m256d a, __m256d b) VADDPD ymm, ymm, ymm/m256
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline), Op]
+        public static Vector256<double> vadd(Vector256<double> x, Vector256<double> y)
+            => Add(x, y);
    }
 }

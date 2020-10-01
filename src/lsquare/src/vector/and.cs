@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Root;
-    using static V0;
+    using static z;
 
     partial class LogicSquare
     {
@@ -29,7 +28,7 @@ namespace Z0
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                and(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                and(n, in skip(in a, offset), in skip(in b, offset), ref seek(z, offset));
         }
 
         [MethodImpl(Inline), And, Closures(Closure)]
@@ -47,7 +46,7 @@ namespace Z0
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                and(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                and(n, in skip(in a, offset), in skip(in b, offset), ref seek(z, offset));
         }
    }
 }

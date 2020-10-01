@@ -32,7 +32,7 @@ namespace Z0
             for(var i=0; i<count; i++)
                 seek(ref dst, i) = mSvc.eval(vcell(x,i), vcell(y,i), k);
 
-            var v1 = Vectors.vload(w, dst);
+            var v1 = z.vload(w, dst);
             var v2 = vSvc.eval(x,y,k);
             return gvec.vsame(v2,v1);
         }

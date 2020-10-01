@@ -292,5 +292,12 @@
 		"paths": [],
 		"group": "",
 		"enabled": true
+	},
+	{
+		"name": "llvm/main",
+		"rootPath": "j:\\lang\\cpp\\llvm.code-workspace",
+		"paths": [],
+		"group": "",
+		"enabled": true
 	}
 ]

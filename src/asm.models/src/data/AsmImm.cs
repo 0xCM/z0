@@ -12,42 +12,42 @@ namespace Z0
     /// <summary>
     /// Defines an immediate value of any width in the range [0..64]
     /// </summary>
-    public readonly struct AsmImmOp : ITextual, IAsmImmOp
+    public readonly struct AsmImm : ITextual
     {
         const string RenderPattern = "x{0}";
 
         readonly ulong Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmImmOp(byte src)
-            => new AsmImmOp(src);
+        public static implicit operator AsmImm(byte src)
+            => new AsmImm(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmImmOp(ushort src)
-            => new AsmImmOp(src);
+        public static implicit operator AsmImm(ushort src)
+            => new AsmImm(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmImmOp(uint src)
-            => new AsmImmOp(src);
+        public static implicit operator AsmImm(uint src)
+            => new AsmImm(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator AsmImmOp(ulong src)
-            => new AsmImmOp(src);
+        public static implicit operator AsmImm(ulong src)
+            => new AsmImm(src);
 
         [MethodImpl(Inline)]
-        public AsmImmOp(byte src)
+        public AsmImm(byte src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public AsmImmOp(ushort src)
+        public AsmImm(ushort src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public AsmImmOp(uint src)
+        public AsmImm(uint src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public AsmImmOp(ulong src)
+        public AsmImm(ulong src)
             => Data = src;
 
         public uint Width

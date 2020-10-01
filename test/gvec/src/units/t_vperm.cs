@@ -127,10 +127,10 @@ namespace Z0
         {
             var n = n128;
 
-            var u = V0.vinc<uint>(n);
+            var u = z.vinc<uint>(n);
             Claim.veq(vparts(n,0,1,2,3), u);
 
-            var v = V0.vdec<uint>(n);
+            var v = z.vdec<uint>(n);
             Claim.veq(vparts(n,3,2,1,0),v);
 
             Claim.veq(v, z.vperm4x32(u, Perm4L.DCBA));

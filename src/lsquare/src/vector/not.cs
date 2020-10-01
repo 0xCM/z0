@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Root;
-    using static V0;
+    using static z;
 
     partial class LogicSquare
     {
@@ -40,7 +39,7 @@ namespace Z0
             where T : unmanaged
         {
             for(int i=0, offset = 0; i<count; i++, offset += step)
-                not(w, skip(src, offset), ref seek(ref dst, offset));
+                not(w, skip(src, offset), ref seek(dst, offset));
         }
 
         [MethodImpl(Inline), Op, Closures(Closure)]
@@ -53,7 +52,7 @@ namespace Z0
             where T : unmanaged
         {
             for(int i=0, offset=0; i<count; i++, offset+=step)
-                not(w, skip(src, offset), ref seek(ref dst, offset));
+                not(w, skip(src, offset), ref seek(dst, offset));
         }
     }
 }

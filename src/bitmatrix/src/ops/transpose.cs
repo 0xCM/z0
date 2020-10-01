@@ -30,7 +30,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref BitMatrix8 transpose_v1(in BitMatrix8 A, ref BitMatrix8 Z)
         {
-            var x = vscalar(n128,(ulong)A);
+            var x = z.vscalar(n128,(ulong)A);
             for(var i=7; i>= 0; i--)
             {
                 Z[i] = (byte)z.vtakemask(v8u(x));
@@ -107,7 +107,6 @@ namespace Z0
             data = data ^ t ^ (t << 14);
             t = (data ^ (data >> 28)) & 0x00000000F0F0F0F0ul;
             data = data ^ t ^ (t << 28);
-            //bytes(data).CopyTo(Z.data);
             As.uint64(ref Z.Head) = data;
         }
 

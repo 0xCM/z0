@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public static class BvRng
     {
@@ -36,12 +36,12 @@ namespace Z0
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
-        /// <param name="wmax">The effecive width</param>
+        /// <param name="wmax">The effective width</param>
         [MethodImpl(Inline)]
-        public static BitVector8 BitVector(this IPolySource random, N8 n, int wmax)
+        public static BitVector8 BitVector(this IPolySource random, N8 n, byte wmax)
         {
             var v = random.Next<byte>();
-            var clamp = (int)value(n) - (int)math.min(value(n), (uint)wmax);
+            var clamp = (byte)(nat8u(n) - math.min(nat8u(n), wmax));
             return (v >>= clamp);
         }
 
@@ -55,16 +55,16 @@ namespace Z0
             => random.Next<ushort>();
 
         /// <summary>
-        /// Produces a 16-bit primal bitvector of a specified maximial effective width
+        /// Produces a 16-bit primal bitvector of a specified maximal effective width
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         /// <param name="wmax">The effected width</param>
         [MethodImpl(Inline)]
-        public static BitVector16 BitVector(this IPolySource random, N16 n, int wmax)
+        public static BitVector16 BitVector(this IPolySource random, N16 n, byte wmax)
         {
             var v = random.Next<ushort>();
-            var clamp = (int)value(n) - (int)math.min(value(n), (uint)wmax);
+            var clamp = (byte)(nat8u(n) - math.min(nat8u(n), wmax));
             return (v >>= clamp);
         }
 
@@ -78,16 +78,16 @@ namespace Z0
             => random.Next<uint>();
 
         /// <summary>
-        /// Produces a 32-bit primal bitvector of a specified maximial effective width
+        /// Produces a 32-bit primal bitvector of a specified maximal effective width
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="n">The primal bitvector selector</param>
         /// <param name="wmax">The maximum effected width</param>
         [MethodImpl(Inline)]
-        public static BitVector32 BitVector(this IPolySource random, N32 n, int wmax)
+        public static BitVector32 BitVector(this IPolySource random, N32 n, byte wmax)
         {
             var v = random.Next<uint>();
-            var clamp = (int)value(n) - (int)math.min(value(n), (uint)wmax);
+            var clamp = (byte)(nat8u(n) - math.min(nat8u(n), wmax));
             return (v >>= clamp);
         }
 
@@ -107,10 +107,10 @@ namespace Z0
         /// <param name="n">The primal bitvector selector</param>
         /// <param name="wmax">The maximum effected width</param>
         [MethodImpl(Inline)]
-        public static BitVector64 BitVector(this IPolySource random, N64 n, int wmax)
+        public static BitVector64 BitVector(this IPolySource random, N64 n, byte wmax)
         {
             var v = random.Next<ulong>();
-            var clamp = (int)value(n) - (int)math.min(value(n), (uint)wmax);
+            var clamp = (byte)(nat8u(n) - math.min(nat8u(n), wmax));
             return (v >>= clamp);
         }
 
@@ -180,7 +180,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             var v = random.Next<T>();
-            var clamp = (byte)(bitwidth<T>() - math.min(bitwidth<T>(), (int)value(n)));
+            var clamp = (byte)(bitwidth<T>() - math.min(bitwidth<T>(), nat32u(n)));
             return gmath.srl(v,clamp);
         }
 
@@ -191,7 +191,7 @@ namespace Z0
         {
             var w = Z0.BitVector128<N,T>.MaxWidth;
             var v = random.CpuVector<T>(w);
-            var clamp = value(w) - NatCalc.min(w, n);
+            var clamp = nat8u(w) - NatCalc.min(w, n);
             return gvec.vsrlx(v,(byte)clamp);
         }
     }

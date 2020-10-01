@@ -6,73 +6,13 @@ namespace Z0
 {
     using System;
 
+    using static ApiNameAtoms;
+
+    using A = ApiNameAtoms;
+
     [LiteralProvider]
     readonly struct ApiNames
     {
-        const string dot = AsciCharText.Dot;
-
-        const string api = nameof(api);
-
-        const string bits = nameof(bits);
-
-        const string blocks = nameof(blocks);
-
-        const string bytes = nameof(bytes);
-
-        const string @char = "char";
-
-        const string chars = nameof(chars);
-
-        const string cmd = nameof(cmd);
-
-        const string core = nameof(core);
-
-        const string data = nameof(data);
-
-        const string delegates = nameof(delegates);
-
-        const string expressions = nameof(expressions);
-
-        const string extensions = nameof(extensions);
-
-        const string identity = nameof(identity);
-
-        const string formatters = nameof(formatters);
-
-        const string functions = nameof(functions);
-
-        const string fields = nameof(fields);
-
-        const string hex = nameof(hex);
-
-        const string kinds = nameof(kinds);
-
-        const string logic = nameof(logic);
-
-        const string rows = nameof(rows);
-
-        const string resources = nameof(resources);
-
-        const string sfunc = nameof(sfunc);
-
-        const string surrogates = nameof(surrogates);
-
-        const string symbolic = nameof(symbolic);
-
-        const string scalar = nameof(scalar);
-
-        const string projectors = nameof(projectors);
-
-        const string query = nameof(query);
-
-        const string options = nameof(options);
-
-        const string text = nameof(text);
-
-        const string tables = nameof(tables);
-
-        const string wf = nameof(wf);
-
         public const string SymHex = symbolic + dot + hex;
 
         public const string SFxSurrogates = sfunc + dot + surrogates;
@@ -115,7 +55,7 @@ namespace Z0
 
         public const string Resources = resources;
 
-        public const string TextResources = Resources + dot + text;
+        public const string TextResources = Resources + dot + A.text;
 
         public const string Tables = tables;
 

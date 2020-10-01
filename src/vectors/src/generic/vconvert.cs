@@ -59,46 +59,6 @@ namespace Z0
                 => x.AsByte();
 
         /// <summary>
-        /// Presents a generic cpu vector as a cpu vector with components of type int16
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<short> v16i<T>(Vector128<T> x)
-            where T : unmanaged
-                => x.AsInt16();
-
-        /// <summary>
-        /// Presents a generic cpu vector as a cpu vector with components of type uint16
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<ushort> v16u<T>(Vector128<T> x)
-            where T : unmanaged
-                => x.AsUInt16();
-
-        /// <summary>
-        /// Presents a generic cpu vector as a cpu vector with components of type int32
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<int> v32i<T>(Vector128<T> x)
-            where T : unmanaged
-                => x.AsInt32();
-
-        /// <summary>
-        /// Presents a generic cpu vector as a cpu vector with components of type uint32
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static Vector128<uint> v32u<T>(Vector128<T> x)
-            where T : unmanaged
-                => x.AsUInt32();
-
-        /// <summary>
         /// Presents a generic cpu vector as a cpu vector with components of type int64
         /// </summary>
         /// <param name="x">The source vector</param>
@@ -236,6 +196,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector256<double> v64f<T>(Vector256<T> x)
             where T : unmanaged
-                => x.AsDouble(); 
+                => x.AsDouble();
     }
 }

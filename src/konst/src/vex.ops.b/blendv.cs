@@ -97,7 +97,7 @@ namespace Z0
             => BlendVariable(x,y,spec);
 
         /// <summary>
-        /// __m128 _mm_blendv_ps (__m128 a, __m128 b, __m128 mask)BLENDVPS xmm, xmm/m128,xmm0
+        /// __m128 _mm_blendv_ps (__m128 a, __m128 b, __m128 mask) BLENDVPS xmm, xmm/m128,xmm0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
@@ -107,7 +107,7 @@ namespace Z0
             => BlendVariable(x,y,spec);
 
         /// <summary>
-        /// _m128d _mm_blendv_pd (__m128d a, __m128d b, __m128d mask)BLENDVPD xmm, xmm/m128, xmm0
+        /// _m128d _mm_blendv_pd (__m128d a, __m128d b, __m128d mask) BLENDVPD xmm, xmm/m128, xmm0
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>

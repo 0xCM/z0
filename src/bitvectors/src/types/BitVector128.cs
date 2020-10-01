@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static V0;
+    using static z;
 
     /// <summary>
     /// Defines a natural bitvector over an intrinsic vector

@@ -9,5 +9,8 @@ namespace Z0
     public readonly struct CheckPrimal : TCheckPrimal
     {
         public static TCheckPrimal Checker => default(CheckPrimal);
+
+
+
     }
 }

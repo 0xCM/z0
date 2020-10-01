@@ -20,6 +20,12 @@ namespace Z0
             HostName = name;
         }
 
+        public ApiHostAttribute(string name, bool global)
+            : base(ApiProviderKind.Stateless, global)
+        {
+            HostName = name;
+        }
+
         public ApiHostAttribute()
             : this(string.Empty)
         {

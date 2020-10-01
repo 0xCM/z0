@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static KonstBytes;
 
-    partial class VKonst
+    partial struct z
     {
         /// <summary>
         /// Produces the lo shuffle spec for packing (128x32, 128x32) -> 128x16
@@ -24,16 +24,6 @@ namespace Z0
             => z.vload(w, PackUSLo32x128x16u);
 
         /// <summary>
-        /// Produces the hi shuffle spec for packing (128x32, 128x32) -> 128x16
-        /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="src">The source cell width selector</param>
-        /// <param name="dst">The target cell width selector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<byte> packusHi(N128 w, N32 src, N16 dst)
-            => z.vload(w,PackUSHi32x128x16u);
-
-        /// <summary>
         /// Produces the lo shuffle spec for packing (128x16,128x16) -> 128x8
         /// </summary>
         /// <param name="w">The vector width selector</param>
@@ -43,23 +33,9 @@ namespace Z0
         public static Vector128<byte> packusLo(N128 w, N16 src, N8 dst)
             => z.vload(w, PackUSLo16x128x8u);
 
-        /// <summary>
-        /// Produces the hi shuffle spec for packing (128x16,128x16) -> 128x8
-        /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="src">The source cell width selector</param>
-        /// <param name="dst">The target cell width selector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector128<byte> packusHi(N128 w, N16 src, N8 dst)
-            => z.vload(w, PackUSHi16x128x8u);
-
         [MethodImpl(Inline), Op]
         public static Vector256<byte> packusLo(N256 w, N16 src, N8 dst)
             => z.vload(w, PackUSLo16x256x8u);
-
-        [MethodImpl(Inline), Op]
-        public static Vector256<byte> packusHi(N256 w, N16 src, N8 dst)
-            => z.vload(w, PackUSHi16x256x8u);
 
         /// <summary>
         /// Retrieves the lo shuffle spec for packing 256x32x2 -> 256x16
@@ -70,15 +46,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<byte> vpackuslo(N256 w, N32 src, N16 dst)
             => z.vload(w,PackUSLo32x256x16u);
-
-        /// <summary>
-        /// Retrieves the hi shuffle spec for packing 256x32x2 -> 256x16
-        /// </summary>
-        /// <param name="w">The vector width selector</param>
-        /// <param name="src">The source cell width selector</param>
-        /// <param name="dst">The target cell width selector</param>
-        [MethodImpl(Inline), Op]
-        public static Vector256<byte> vpackushi(N256 w, N32 src, N16 dst)
-            => z.vload(w,PackUSHi32x256x16u);
     }
 }

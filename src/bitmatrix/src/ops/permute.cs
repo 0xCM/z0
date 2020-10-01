@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    using static Memories;    
+    using static Konst;
+    using static z;
 
     partial class BitMatrix
     {
@@ -77,7 +77,7 @@ namespace Z0
                     A.RowSwap(row, perm[row]);
             return ref A;
         }
-        
+
         /// <summary>
         /// Creates a canonical permutation matrix by swapping matrix rows of the identity matrix as specified by a permutation
         /// </summary>

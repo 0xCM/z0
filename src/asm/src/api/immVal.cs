@@ -22,7 +22,7 @@ namespace Z0
 		/// <param name="src">The source instruction</param>
 		/// <param name="index">The operand index</param>
         [Op]
-        public static AsmImmOp? immval(Instruction src, byte index)
+        public static AsmImm? immval(Instruction src, byte index)
         {
 			return kind(src, index) switch
             {

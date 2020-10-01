@@ -31,7 +31,7 @@ namespace Z0
             var count = vcount<T>(w);
             for(byte i=0; i<count; i++)
                 seek(dst, i) = mSvc.eval(vcell(x,i), vcell(y,i), k);
-            var v1 = Vectors.vload(w, dst);
+            var v1 = z.vload(w, dst);
 
             var v2 = vSvc.eval(x,y,k);
 

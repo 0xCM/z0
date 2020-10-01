@@ -100,14 +100,14 @@ namespace Z0
             => z.vcompact(src, gvec.vinc(w256, As.uint16(16)),n256,z8);
 
         public static Vector256<ushort> vshuf16x16(Vector256<ushort> a, Vector256<ushort> spec)
-            => z.v16u(z.vshuf32x8(V0.v8u(a), vshuffle_spec_1(spec)));
+            => z.v16u(z.vshuf32x8(z.v8u(a), vshuffle_spec_1(spec)));
 
         public void vshuf16x16()
         {
             var w = n256;
             var x = gvec.vinc(w,z16);
-            var reverse = V0.vdec<ushort>(w);
-            var identity = V0.vinc<ushort>(w);
+            var reverse = z.vdec<ushort>(w);
+            var identity = z.vinc<ushort>(w);
             var pairswap = vparts(w256,1,0,3,2,5,4,7,6,9,8,11,10,13,11,15,12);
 
             var y1 = vshuf16x16(x,reverse);

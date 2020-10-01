@@ -6,15 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
+    using System.Reflection;
+    using System.Reflection.Emit;
+    using System.Runtime.InteropServices;
 
     using static Konst;
-    using static HexConst;
-    using static KonstBytes;
+    using static z;
 
-    partial class VKonst
+    public readonly partial struct Dynamo
     {
-
 
     }
 }

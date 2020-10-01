@@ -8,8 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
-    using static V0;
+    using static z;
 
     partial class LogicSquare
     {

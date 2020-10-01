@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    
+
     partial class Vectors
     {
         /// <summary>
@@ -79,7 +79,7 @@ namespace Z0
         public static T vcell<T>(Vector256<T> src, int index)
             where T : unmanaged
                 => src.GetElement(index);
-                
+
         /// <summary>
         /// Sets an index-identified component to a specified value
         /// </summary>
@@ -111,46 +111,6 @@ namespace Z0
         public static byte vcell8<T>(Vector128<T> x, int index)
             where T : unmanaged
                 => v8u(x).GetElement(index);
-
-        /// <summary>
-        /// Extract an index-identified component of a reinterpreted vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static short vcell16i<T>(Vector128<T> x, int index)
-            where T : unmanaged
-                => v16i(x).GetElement(index);
-
-        /// <summary>
-        /// Extract an index-identified component of a reinterpreted vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static ushort vcell16<T>(Vector128<T> x, int index)
-            where T : unmanaged
-                => v16u(x).GetElement(index);
-
-        /// <summary>
-        /// Extract an index-identified component of a reinterpreted vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static int vcell32i<T>(Vector128<T> x, int index)
-            where T : unmanaged
-                => v32i(x).GetElement(index);
-
-        /// <summary>
-        /// Extract an index-identified component of a reinterpreted vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        /// <typeparam name="T">The source vector primal component type</typeparam>
-        [MethodImpl(Inline)]
-        public static uint vcell32<T>(Vector128<T> x, int index)
-            where T : unmanaged
-                => v32u(x).GetElement(index);
 
         /// <summary>
         /// Extract an index-identified component of a reinterpreted vector
@@ -191,7 +151,7 @@ namespace Z0
         public static double vcell64f<T>(Vector128<T> x, int index)
             where T : unmanaged
                 => v64f(x).GetElement(index);
-            
+
         /// <summary>
         /// Extract an index-identified component of a reinterpreted vector
         /// </summary>

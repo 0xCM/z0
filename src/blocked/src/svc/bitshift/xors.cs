@@ -9,8 +9,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
-    using static SBlock;
 
     partial class BSvcHosts
     {
@@ -23,7 +21,7 @@ namespace Z0
             {
                 var blocks = dst.BlockCount;
                 for(var block = 0; block < blocks; block++)
-                    Vectors.vstore(gvec.vxors(a.LoadVector(block), count), ref dst.BlockRef(block));
+                    z.vsave(gvec.vxors(a.LoadVector(block), count), ref dst.BlockRef(block));
                 return ref dst;
             }
         }
@@ -37,7 +35,7 @@ namespace Z0
             {
                 var blocks = dst.BlockCount;
                 for(var block = 0; block < blocks; block++)
-                    Vectors.vstore(gvec.vxors(a.LoadVector(block), count), ref dst.BlockRef(block));
+                    z.vsave(gvec.vxors(a.LoadVector(block), count), ref dst.BlockRef(block));
                 return ref dst;
             }
         }

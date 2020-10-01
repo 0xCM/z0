@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static Vectors;
+    using static z;
 
     partial class t_vexamples
     {
@@ -36,11 +36,11 @@ namespace Z0
 
             var w = n256;
             var t = z32;
-            var count = V0.vcount(w,t);
-            var x = gvec.vinc(w,t);
-            var y = gvec.vinc(w, (x.LastCell() + 1));
-            var _z = z.vmergelo(x,y);
-            var fmt = $"({x.Format()},{y.Format()}) -> {_z.Format()}";
+            var count = z.vcount(w,t);
+            var a = gvec.vinc(w,t);
+            var b = gvec.vinc(w, (a.LastCell() + 1));
+            var c = vmergelo(a,b);
+            var fmt = $"({a.Format()},{b.Format()}) -> {c.Format()}";
         }
 
         public void vmerge_256()

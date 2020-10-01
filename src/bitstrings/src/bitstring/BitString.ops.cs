@@ -48,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString load<T>(Vector128<T> src, int? maxbits = null)
             where T : unmanaged
-                => scalars(cover(z.vref(ref src), vcount<T>(W128.W)), maxbits);
+                => scalars(cover(z.vref(ref src), z.vcount<T>(W128.W)), maxbits);
 
         /// <summary>
         /// Populates a bitstring from a 256-bit cpu vector
@@ -59,7 +59,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString load<T>(Vector256<T> src, int? maxbits = null)
             where T : unmanaged
-                => scalars(cover(z.vref(ref src), vcount<T>(W256.W)), maxbits);
+                => scalars(cover(z.vref(ref src), z.vcount<T>(W256.W)), maxbits);
 
         /// <summary>
         /// Populates a bitstring from a 256-bit cpu vector
@@ -70,7 +70,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static BitString load<T>(Vector512<T> src, int? maxbits = null)
             where T : unmanaged
-                => scalars(cover(z.vref(ref src), vcount<T>(W512.W)), maxbits);
+                => scalars(cover(z.vref(ref src), z.vcount<T>(W512.W)), maxbits);
 
         /// <summary>
         /// Constructs a bitstring from a span of bits

@@ -13,9 +13,18 @@ namespace Z0
     {
         public ApiProviderKind Kind {get;}
 
+        public bool Global {get;}
+
         public ApiProviderAttribute(ApiProviderKind kind)
         {
             Kind = kind;
+            Global = false;
+        }
+
+        public ApiProviderAttribute(ApiProviderKind kind, bool global)
+        {
+            Kind = kind;
+            Global = global;
         }
     }
 }

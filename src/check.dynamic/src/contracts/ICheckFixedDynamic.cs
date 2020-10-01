@@ -8,8 +8,8 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static BufferSeqId;
     using static z;
+    using static BufferSeqId;
 
     using K = Kinds;
 
@@ -29,4 +29,5 @@ namespace Z0
             iter(points, x => checker.Eq(f(x), g(x)));
         }
     }
+
 }

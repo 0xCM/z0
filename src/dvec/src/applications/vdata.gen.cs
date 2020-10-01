@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Vectors;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Generates the data presented by VData
@@ -31,7 +30,7 @@ namespace Z0
             var len = SpanBlocks.blocklength<T>(n);
             ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
-                seek(ref mem, i) = gmath.even(i) ? a : b;
+                seek(mem, i) = gmath.even(i) ? a : b;
             return vload(n, in data.Head);
         }
 
@@ -51,7 +50,7 @@ namespace Z0
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
-                seek(ref mem, i) = current;
+                seek(mem, i) = current;
                 current = gmath.dec(current);
             }
 
@@ -74,7 +73,7 @@ namespace Z0
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
-                seek(ref mem, i) = current;
+                seek(mem, i) = current;
                 current = gmath.dec(current);
             }
 
@@ -97,7 +96,7 @@ namespace Z0
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
-                seek(ref mem, i) = current;
+                seek(mem, i) = current;
                 current = gmath.sub(current, step);
             }
             return vload(n, in mem);
@@ -119,7 +118,7 @@ namespace Z0
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
-                seek(ref mem, i) = current;
+                seek(mem, i) = current;
                 current = gmath.sub(current, step);
             }
             return vload(n, in mem);
@@ -134,7 +133,7 @@ namespace Z0
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
-                seek(ref mem, i) = current;
+                seek(mem, i) = current;
                 current = gmath.dec(current);
             }
 
@@ -150,7 +149,7 @@ namespace Z0
             ref var mem = ref data.Head;
             for(var i=0; i < len; i++)
             {
-                seek(ref mem, i) = current;
+                seek(mem, i) = current;
                 current = gmath.dec(current);
             }
 
@@ -172,7 +171,7 @@ namespace Z0
             ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
             {
-                seek(ref mem, i) = current;
+                seek(mem, i) = current;
                 current = gmath.add(current, step);
             }
             return vload(n, in mem);
@@ -193,7 +192,7 @@ namespace Z0
             ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
             {
-                seek(ref mem, i) = current;
+                seek(mem, i) = current;
                 current = gmath.add(current, step);
             }
 
@@ -209,7 +208,7 @@ namespace Z0
             ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
             {
-                seek(ref mem, i) = current;
+                seek(mem, i) = current;
                 current = gmath.inc(current);
             }
 
@@ -225,7 +224,7 @@ namespace Z0
             ref var mem = ref data.Head;
             for(var i=0; i<len; i++)
             {
-                seek(ref mem, i) = current;
+                seek(mem, i) = current;
                 current = gmath.inc(current);
             }
 
@@ -275,7 +274,7 @@ namespace Z0
                 if(i % 2 != 0)
                     mask[i] = chop;
                 else
-                    mask[i] = convert<byte,T>(i);
+                    mask[i] = force<byte,T>(i);
             }
 
             //For the second 128-bit lane
@@ -284,7 +283,7 @@ namespace Z0
                 if(i % 2 != 0)
                     mask[i + half] = chop;
                 else
-                    mask[i + half] = convert<byte,T>(i);
+                    mask[i + half] = force<byte,T>(i);
             }
 
             return mask;

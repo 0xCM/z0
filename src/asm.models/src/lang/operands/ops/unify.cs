@@ -1,4 +1,3 @@
-
 //-----------------------------------------------------------------------------
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
@@ -10,8 +9,14 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public readonly struct AsmMemOp
+    partial struct AsmLang
     {
-        readonly ulong Data;
+        partial struct Operands
+        {
+            [MethodImpl(Inline)]
+            public static Operand<T> unify<T>(T src)
+                where T : unmanaged, IOperand<T>
+                    => src;
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace Z0
     using static Konst;
     using static z;
 
+
     public readonly struct GenericDynamic
     {
         public static UnaryOp<T> unary<T>(BufferToken dst, ApiCodeBlock src)

@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Root;
-    using static V0;
+    using static z;
 
     partial class LogicSquare
     {
@@ -20,34 +19,34 @@ namespace Z0
                 => gvec.vnonimpl(vload(w, in a),vload(w, in b));
 
         [MethodImpl(Inline), NonImpl, Closures(Closure)]
-        public static Vector256<T> vnotimpl<T>(W256 w, in T a, in T b)
+        public static Vector256<T> vnonimpl<T>(W256 w, in T a, in T b)
             where T : unmanaged
                 => gvec.vnonimpl(vload(w, in a),vload(w, in b));
 
         [MethodImpl(Inline), NonImpl, Closures(Closure)]
-        public static void nonimpl<T>(W128 w, in T a, in T b, ref T z)
+        public static void nonimpl<T>(W128 w, in T a, in T b, ref T dst)
             where T : unmanaged
-                => vsave(vnonimpl(w, in a, in b), ref z);
+                => vsave(vnonimpl(w, in a, in b), ref dst);
 
         [MethodImpl(Inline), NonImpl, Closures(Closure)]
-        public static void nonimpl<T>(W256 w, in T a, in T b, ref T z)
+        public static void nonimpl<T>(W256 w, in T a, in T b, ref T dst)
             where T : unmanaged
-                => vsave(vnotimpl(w, in a, in b), ref z);
+                => vsave(vnonimpl(w, in a, in b), ref dst);
 
         [MethodImpl(Inline), NonImpl, Closures(Closure)]
-        public static void nonimpl<T>(W128 n, int vcount, int blocklen, in T a, in T b, ref T z)
+        public static void nonimpl<T>(W128 n, int vcount, int blocklen, in T a, in T b, ref T dst)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                nonimpl(n, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                nonimpl(n, in skip(in a, offset), in skip(in b, offset), ref seek(dst, offset));
         }
 
         [MethodImpl(Inline), NonImpl, Closures(Closure)]
-        public static void nonimpl<T>(W256 w, int vcount, int blocklen, in T a, in T b, ref T z)
+        public static void nonimpl<T>(W256 w, int vcount, int blocklen, in T a, in T b, ref T dst)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                nonimpl(LogicSquare.w, in skip(in a, offset), in skip(in b, offset), ref seek(ref z, offset));
+                nonimpl(LogicSquare.w, in skip(in a, offset), in skip(in b, offset), ref seek(dst, offset));
         }
     }
 }

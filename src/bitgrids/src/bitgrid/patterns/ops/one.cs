@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
     using static gvec;
     using static BitGrid;
 
@@ -59,7 +59,7 @@ namespace Z0
             where T : unmanaged
         {
             var x = vmakemask<T>(BitMasks.lsb(n2,n1,Konst.z32),0);
-            var offsets = V0.vinc<T>(w);
+            var offsets = z.vinc<T>(w);
             var pattern = vsllv(x,offsets);
             return pattern;
         }

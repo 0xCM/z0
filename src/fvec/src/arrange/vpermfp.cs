@@ -100,6 +100,6 @@ namespace Z0
             => vperm8x32(src,MRev256f32);
 
         static Vector256<int> MRev256f32
-            => V0.vparts(w256i, 7, 6, 5, 4, 3, 2, 1, 0);
+            => z.vparts(w256i, 7, 6, 5, 4, 3, 2, 1, 0);
     }
 }
