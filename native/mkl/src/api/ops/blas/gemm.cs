@@ -6,9 +6,9 @@ namespace Z0.Mkl
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class mkl
     {
@@ -36,12 +36,12 @@ namespace Z0.Mkl
             {
                 var x = X.As<double>();
                 gemm(A.As<double>(), B.As<double>(), ref x);
-            }                            
+            }
             else if(typeof(T) == typeof(int)|| typeof(T) == typeof(uint) || typeof(T) == typeof(short) || typeof(T) == typeof(ushort))
             {
                 var Z = X.Convert<double>();
-                X = gemm(A.Convert<double>(), B.Convert<double>(), ref Z).Convert<T>();            
-            }            
+                X = gemm(A.Convert<double>(), B.Convert<double>(), ref Z).Convert<T>();
+            }
             else if(typeof(T) == typeof(long) || typeof(T) == typeof(ulong))
             {
                 var Z = X.Convert<double>();
@@ -76,12 +76,12 @@ namespace Z0.Mkl
             {
                 var x = X.As<double>();
                 gemm(A.As<double>(), B.As<double>(), ref x);
-            }                            
+            }
             else if(typeof(T) == typeof(int)|| typeof(T) == typeof(uint) || typeof(T) == typeof(short) || typeof(T) == typeof(ushort))
             {
                 var Z = X.Convert<double>();
-                X = gemm(A.Convert<double>(), B.Convert<double>(), ref Z).Convert<T>();            
-            }            
+                X = gemm(A.Convert<double>(), B.Convert<double>(), ref Z).Convert<T>();
+            }
             else if(typeof(T) == typeof(long) || typeof(T) == typeof(ulong))
             {
                 var Z = X.Convert<double>();
@@ -108,16 +108,16 @@ namespace Z0.Mkl
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var m = nati<M>();
-            var k = nati<K>();
-            var n = nati<N>();
+            var m = nat32i<M>();
+            var k = nat32i<K>();
+            var n = nat32i<N>();
             var lda = k;
             var ldb = n;
             var ldx = n;
             var X = Matrix.blockalloc<M,N,float>();
             CBLAS.cblas_sgemm(RowMajor, NoTranspose, NoTranspose, m, n, k, 1.0f, ref head(A), lda, ref head(B), ldb, 0, ref head(X), ldx);
             return X;
-        }    
+        }
 
         /// <summary>
         /// Allocates a target matrix and populates it with the product of the operands
@@ -132,17 +132,17 @@ namespace Z0.Mkl
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var m = nati<M>();
-            var k = nati<K>();
-            var n = nati<N>();
+            var m = nat32i<M>();
+            var k = nat32i<K>();
+            var n = nat32i<N>();
             var lda = k;
             var ldb = n;
             var ldx = n;
             var X = Matrix.blockalloc<M,N,double>();
             CBLAS.cblas_dgemm(RowMajor, NoTranspose, NoTranspose, m, n, k, 1.0f, ref head(A), lda, ref head(B), ldb, 0, ref head(X), ldx);
             return X;
-        }    
-        
+        }
+
         /// <summary>
         /// Populates a target matrix with the product of the operands
         /// </summary>
@@ -156,9 +156,9 @@ namespace Z0.Mkl
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var m = nati<M>();
-            var k = nati<K>();
-            var n = nati<N>();
+            var m = nat32i<M>();
+            var k = nat32i<K>();
+            var n = nat32i<N>();
             var lda = k;
             var ldb = n;
             var ldx = n;
@@ -179,9 +179,9 @@ namespace Z0.Mkl
             where K : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var m = nati<M>();
-            var k = nati<K>();
-            var n = nati<N>();
+            var m = nat32i<M>();
+            var k = nat32i<K>();
+            var n = nat32i<N>();
             var lda = k;
             var ldb = n;
             var ldx = n;
@@ -199,7 +199,7 @@ namespace Z0.Mkl
         public static ref Matrix256<N,float> gemm<N>(Matrix256<N,float> A, Matrix256<N,float> B, ref Matrix256<N,float> X)
             where N : unmanaged, ITypeNat
         {
-            var n = nati<N>();
+            var n = nat32i<N>();
             var ld = n;
             CBLAS.cblas_sgemm(RowMajor, NoTranspose, NoTranspose, n, n, n, 1, ref head(A), ld, ref head(B), ld, 0, ref head(X), ld);
             return ref X;
@@ -215,7 +215,7 @@ namespace Z0.Mkl
         public static ref Matrix256<N,double> gemm<N>(Matrix256<N,double> A, Matrix256<N,double> B, ref Matrix256<N,double> X)
             where N : unmanaged, ITypeNat
         {
-            var n = nati<N>();
+            var n = nat32i<N>();
             var ld = n;
             CBLAS.cblas_dgemm(RowMajor, NoTranspose, NoTranspose, n, n, n, 1, ref head(A), ld, ref head(B), ld, 0, ref head(X), ld);
             return ref X;

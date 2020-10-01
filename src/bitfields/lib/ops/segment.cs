@@ -56,7 +56,7 @@ namespace Z0
         public static BitFieldSegment segment<I,W>(BitField64<I,W> src, I index)
             where I : unmanaged, Enum
             where W : unmanaged, Enum
-                => Root.skip(src.Spec.Segments, Enums.scalar<I,byte>(index));
+                => z.skip(src.Spec.Segments, Enums.scalar<I,byte>(index));
 
         [MethodImpl(Inline)]
         public static BitFieldSegment segment<E>(E id, byte startpos, byte endpos)

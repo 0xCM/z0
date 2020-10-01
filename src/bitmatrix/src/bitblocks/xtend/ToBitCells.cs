@@ -18,12 +18,12 @@ namespace Z0
         /// <param name="len">The bitvector length, if specified</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static BitBlock<T> ToBitCells<T>(this Span<T> src, int len)
+        public static BitBlock<T> ToBitBLock<T>(this Span<T> src, int len)
             where T : unmanaged
                 => BitBlocks.load(src,len);
 
         [MethodImpl(Inline)]
-        public static BitBlock<N,T> ToBitCells<N,T>(this BitVector128<N,T> src, N n = default)
+        public static BitBlock<N,T> ToBitBlock<N,T>(this BitVector128<N,T> src, N n = default)
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => BitBlocks.load(src.Content.ToSpan(),n);

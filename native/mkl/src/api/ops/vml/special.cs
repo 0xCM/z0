@@ -8,10 +8,9 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     public static class special
-    {            
+    {
         /// <summary>
         /// The error function
         /// </summary>

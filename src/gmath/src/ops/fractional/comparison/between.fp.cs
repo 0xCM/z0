@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline), Between, Closures(NumericKind.Floats)]
+        [MethodImpl(Inline), Between, Closures(Closure)]
         public static Bit32 between<T>(T x, T a, T b)
             where T : unmanaged
         {

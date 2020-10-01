@@ -7,9 +7,8 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
- 
+
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// mkl + u = Unsafe, Unsized, Unchecked and Unblocked
@@ -22,7 +21,7 @@ namespace Z0.Mkl
     public static partial class mkl
     {
         const BlasTrans NoTranspose = BlasTrans.None;
-        
+
         const BlasLayout RowMajor = BlasLayout.RowMajor;
 
         [MethodImpl(Inline)]
@@ -88,8 +87,8 @@ namespace Z0.Mkl
         static ref T head<T>(Span<T> src)
             =>  ref MemoryMarshal.GetReference<T>(src);
 
-        [MethodImpl(Inline)]   
-        static int length<T>(RowVector256<T> lhs, RowVector256<T> rhs) 
+        [MethodImpl(Inline)]
+        static int length<T>(RowVector256<T> lhs, RowVector256<T> rhs)
             where T : unmanaged
                 => Check.length(lhs,rhs);
     }

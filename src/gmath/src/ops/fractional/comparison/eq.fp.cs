@@ -12,7 +12,7 @@ namespace Z0
 
     partial class gfp
     {
-        [MethodImpl(Inline), Eq, Closures(NumericKind.Floats)]
+        [MethodImpl(Inline), Eq, Closures(Closure)]
         public static Bit32 eq<T>(T a, T b)
             where T : unmanaged
         {

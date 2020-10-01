@@ -22,6 +22,16 @@ namespace Z0
             return dst;
         }
 
+        [Op]
+        public static PartFiles partfiles(FS.FolderPath root)
+        {
+            var src = ApiArchives.capture(FolderPath.Define(root.Name));
+            var parsed = src.ParsePaths.Select(x => FS.path(x.Name));
+            var hex = src.HexPaths.Select(x => FS.path(x.Name));
+            var asm = src.AsmPaths.Select(x => FS.path(x.Name));
+            return new PartFiles(root, parsed, hex, asm);
+        }
+
         [MethodImpl(Inline), Op]
         public static ref PathSettings defaults(ref PathSettings dst)
         {

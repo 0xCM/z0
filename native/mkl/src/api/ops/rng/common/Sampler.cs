@@ -11,12 +11,11 @@ namespace Z0.Mkl
     using System.Linq;
 
     using static Konst;
-    using static Memories;
 
-    abstract class Sampler<T,S> : IRngSampler<T>    
+    abstract class Sampler<T,S> : IRngSampler<T>
         where T : unmanaged
         where S : IDistributionSpec
-    {        
+    {
         [MethodImpl(Inline)]
         public static implicit operator MklRng(Sampler<T,S> src)
             => src.Source;
@@ -31,7 +30,7 @@ namespace Z0.Mkl
             this.DistSpec = distspec;
         }
 
-        public RngKind RngKind 
+        public RngKind RngKind
             => Source.RngKind;
 
         public DistributionKind DistKind
@@ -49,7 +48,7 @@ namespace Z0.Mkl
         /// Characterizes the distribution that will be used when sampling
         /// </summary>
         protected readonly S DistSpec;
-        
+
         protected abstract int FillBuffer(Span<T> buffer);
 
         public IEnumerator<T> GetEnumerator()
@@ -75,7 +74,7 @@ namespace Z0.Mkl
                         yield return Buffer[Remaining - 1];
 
                     Remaining = FillBuffer(Buffer);
-                }                
+                }
             }
         }
     }

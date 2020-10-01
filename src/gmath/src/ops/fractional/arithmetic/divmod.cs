@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gfp
     {
@@ -22,10 +22,10 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return ConstPair.generic<T>(fmath.divmod(float32(a), float32(b)));   
+                return ConstPair.generic<T>(fmath.divmod(float32(a), float32(b)));
             else if(typeof(T) == typeof(float))
-                return ConstPair.generic<T>(fmath.divmod(float64(a), float64(b)));   
-            else            
+                return ConstPair.generic<T>(fmath.divmod(float64(a), float64(b)));
+            else
                 throw Unsupported.define<T>();
         }
     }

@@ -7,14 +7,14 @@ namespace Z0.Mkl
     using System;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class mkl
     {
        public static bool potrf<N>(Matrix256<N,float> A, TriangularKind tk = TriangularKind.Lower)
             where N : unmanaged, ITypeNat
         {
-            var n = nati<N>();
+            var n = nat32i<N>();
             var lda = n;
             var lu = tk == TriangularKind.Lower ? 'L' : 'U';
 
@@ -24,7 +24,7 @@ namespace Z0.Mkl
                 return false;
             else if(exitcode == 0)
                 return true;
-            else            
+            else
                 throw MklException.Define(exitcode);
         }
 
@@ -39,17 +39,17 @@ namespace Z0.Mkl
         public static bool potrf<N>(Matrix256<N,double> A, TriangularKind tk = TriangularKind.Lower)
             where N : unmanaged, ITypeNat
         {
-            var n = nati<N>();
+            var n = nat32i<N>();
             var lda = n;
             var lu = tk == TriangularKind.Lower ? 'L' : 'U';
-            
+
             var exitcode = LAPACK.LAPACKE_dpotrf(RowMajor, lu, n, ref head(A), lda);
-            
+
             if (exitcode > 0)
                 return false;
             else if(exitcode == 0)
                 return true;
-            else            
+            else
                 throw MklException.Define(exitcode);
         }
 
@@ -60,7 +60,7 @@ namespace Z0.Mkl
         /// <typeparam name="N">The square dimenion type</typeparam>
         public static bool posdef<N>(Matrix256<N,float> A)
             where N : unmanaged, ITypeNat
-                => potrf<N>(A.Replicate());        
+                => potrf<N>(A.Replicate());
 
         /// <summary>
         /// Returns true if the matrix is positive-definite, false otherwise
@@ -69,6 +69,6 @@ namespace Z0.Mkl
         /// <typeparam name="N">The square dimenion type</typeparam>
         public static bool posdef<N>(Matrix256<N,double> A)
             where N : unmanaged, ITypeNat
-                => potrf<N>(A.Replicate());        
+                => potrf<N>(A.Replicate());
     }
 }

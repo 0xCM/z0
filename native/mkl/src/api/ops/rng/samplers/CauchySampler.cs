@@ -8,7 +8,7 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     sealed class CauchySampler<T> : Sampler<T, CauchySpec<T>>
         where T : unmanaged
@@ -28,13 +28,13 @@ namespace Z0.Mkl
         }
 
         protected override int FillBuffer(Span<T> buffer)
-        {            
+        {
             if(typeof(T) == typeof(float))
                 sample.cauchy(Source, float32(DistSpec.Location), float32(DistSpec.Scale), Spans.s32f(buffer));
             else if (typeof(T) == typeof(double))
                 sample.cauchy(Source, float64(DistSpec.Location), float64(DistSpec.Scale), Spans.s64f(buffer));
-            else 
-                throw Unsupported.define<T>();            
+            else
+                throw Unsupported.define<T>();
             return buffer.Length;
         }
     }

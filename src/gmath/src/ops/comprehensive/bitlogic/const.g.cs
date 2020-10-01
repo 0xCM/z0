@@ -9,8 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    using BL = BitLogic.Scalar;
-
     partial class gmath
     {
         [MethodImpl(Inline), False, Closures(Integers)]
@@ -31,7 +29,7 @@ namespace Z0
         [MethodImpl(Inline), True, Closures(Integers)]
         public static T @true<T>()
             where T:unmanaged
-                => As.ones<T>();
+                => z.ones<T>();
 
         [MethodImpl(Inline), True, Closures(Integers)]
         public static T @true<T>(T a)

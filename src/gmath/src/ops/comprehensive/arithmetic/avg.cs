@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-                
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gmath
-    {        
+    {
         /// <summary>
         /// Computes the average of unsigned integral operands, rounding toward zero
         /// </summary>
@@ -30,7 +30,7 @@ namespace Z0
                 return generic<T>(math.avgz(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.avgz(uint64(a), uint64(b)));
-            else 
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -52,7 +52,7 @@ namespace Z0
                 return generic<T>(math.avgi(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.avgi(uint64(a), uint64(b)));
-            else 
+            else
                 throw Unsupported.define<T>();
         }
     }

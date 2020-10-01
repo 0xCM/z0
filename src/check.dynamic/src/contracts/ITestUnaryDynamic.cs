@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static BufferSeqId;
-    using static Memories;
+    using static z;
 
     using K = Kinds.UnaryOpClass;
 

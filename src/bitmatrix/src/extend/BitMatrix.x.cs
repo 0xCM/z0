@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T BitSeg<T>(this SpanBlock256<T> src, int first, int last)
             where T : unmanaged
-                => BitBlocks.bitseg(src,first,last);
+                => BitBlocks.segment(src,first,last);
 
         /// <summary>
         /// Loads a generic bitmatrix from size-conformant sequence of row bits

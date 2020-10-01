@@ -8,8 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
-    
+    using static z;
+
     partial class gbits
     {
         [MethodImpl(Inline)]
@@ -29,7 +29,7 @@ namespace Z0
                 return bfly(n16,a);
             else
                 throw Unsupported.define<N>();
-        }            
+        }
 
         /// <summary>
         /// Effects a butterfly permutation on the source that swaps the interior two bits of each 4-bit segment.
@@ -48,7 +48,7 @@ namespace Z0
                 return generic<T>(Bits.bfly(n,uint32(x)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.bfly(n,uint64(x)));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -69,7 +69,7 @@ namespace Z0
                 return generic<T>(Bits.bfly(n,uint32(x)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.bfly(n,uint64(x)));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -91,7 +91,7 @@ namespace Z0
                 return generic<T>(Bits.bfly(n,uint32(x)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.bfly(n,uint64(x)));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -111,7 +111,7 @@ namespace Z0
                 return generic<T>(Bits.bfly(n,uint32(x)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.bfly(n,uint64(x)));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
 
@@ -128,7 +128,7 @@ namespace Z0
                 return x;
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.bfly(n,uint64(x)));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
     }

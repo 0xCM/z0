@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Reflection;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class ImmSpecializer : IImmSpecializer
     {

@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static As;
+    using static z;
 
     partial class gvec
     {
@@ -74,7 +74,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(z.vxornot(v64f(x), v64f(y)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]

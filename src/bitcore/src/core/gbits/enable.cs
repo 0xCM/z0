@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using static Memories;
-    
+    using static z;
+
     partial class gbits
-    {                       
+    {
         /// <summary>
         /// Enables an index-identified source bit
         /// </summary>
@@ -22,17 +22,17 @@ namespace Z0
         public static T enable<T>(T src, int pos)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 return enable_u(src,pos);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 return enable_i(src,pos);
-            else 
+            else
                 return enable_f(src,pos);
         }
 
@@ -46,7 +46,7 @@ namespace Z0
                  return generic<T>(Bits.enable(int16(src), pos));
             else if(typeof(T) == typeof(int))
                  return generic<T>(Bits.enable(int32(src), pos));
-            else 
+            else
                  return generic<T>(Bits.enable(int64(src), pos));
         }
 
@@ -60,8 +60,8 @@ namespace Z0
                  return generic<T>(Bits.enable(uint16(src), pos));
             else if(typeof(T) == typeof(uint))
                  return generic<T>(Bits.enable(uint32(src), pos));
-            else 
-                 return generic<T>(Bits.enable(uint64(src), pos));            
+            else
+                 return generic<T>(Bits.enable(uint64(src), pos));
         }
 
         [MethodImpl(Inline)]

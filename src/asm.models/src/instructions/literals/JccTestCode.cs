@@ -9,7 +9,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines the 16 possible jcc condition codes
     /// </summary>
-    public enum JccTestKind : byte
+    public enum JccTestCode : byte
     {
         /// <summary>
         /// Overflow

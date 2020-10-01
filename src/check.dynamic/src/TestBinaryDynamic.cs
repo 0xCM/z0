@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static BufferSeqId;
-    using static Memories;
+    using static z;
 
     using K = BinaryOpClass;
 

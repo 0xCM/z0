@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
     using static z;
-
 
     partial class gfp
     {
@@ -23,6 +22,6 @@ namespace Z0
                 return generic<T>(fmath.max(float64(a), float64(b)));
             else
                 throw Unsupported.define<T>();
-        }        
+        }
     }
 }

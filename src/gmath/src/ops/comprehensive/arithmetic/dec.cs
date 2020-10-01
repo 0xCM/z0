@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-                
-    using static Konst; 
-    using static Memories;
-    
+
+    using static Konst;
+    using static z;
+
     partial class gmath
     {
         [MethodImpl(Inline), Dec, Closures(Integers)]
@@ -22,9 +22,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<T>(math.dec(convert<T,uint>(a)));
+                return force<T>(math.dec(force<T,uint>(a)));
             else if(typeof(T) == typeof(ushort))
-                return convert<T>(math.dec(convert<T,uint>(a)));
+                return force<T>(math.dec(force<T,uint>(a)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(math.dec(uint32(a)));
             else if(typeof(T) == typeof(ulong))
@@ -38,9 +38,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return convert<T>(math.dec(convert<T,int>(a)));
+                return force<T>(math.dec(force<T,int>(a)));
             else if(typeof(T) == typeof(short))
-                return convert<T>(math.dec(convert<T,int>(a)));
+                return force<T>(math.dec(force<T,int>(a)));
             else if(typeof(T) == typeof(int))
                  return generic<T>(math.dec(int32(a)));
             else if(typeof(T) == typeof(long))

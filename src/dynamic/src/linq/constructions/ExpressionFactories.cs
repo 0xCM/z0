@@ -10,7 +10,6 @@ namespace Z0.Dynamics
     using System.Linq.Expressions;
 
     using static Konst;
-    using static Memories;
 
     using XPR = System.Linq.Expressions.Expression;
 
@@ -42,7 +41,7 @@ namespace Z0.Dynamics
             return XPR.Lambda<Func<T, bool>>
                   (XPR.OrElse(left.Body, invokedExpr), left.Parameters);
         }
-       
+
         /// <summary>
         /// Creates an expression that defines a logical AND function
         /// </summary>

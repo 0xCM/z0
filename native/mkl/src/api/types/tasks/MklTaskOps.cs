@@ -6,9 +6,8 @@ namespace Z0.Mkl
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using static Memories;
 
     static class MklTaskOps
     {
@@ -27,13 +26,13 @@ namespace Z0.Mkl
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-               VSL.vslsSSEditTask(task, param, ref As.float32(ref value)).AutoThrow(file,line); 
+               VSL.vslsSSEditTask(task, param, ref As.float32(ref value)).AutoThrow(file,line);
             else if(typeof(T) == typeof(double))
-                VSL.vsldSSEditTask(task, param, ref As.float64(ref value)).AutoThrow(file,line); 
+                VSL.vsldSSEditTask(task, param, ref As.float64(ref value)).AutoThrow(file,line);
             else
                 throw Unsupported.define<T>();
         }
-            
+
         [MethodImpl(Inline)]
         public static void Compute(this VslSSTaskHandle<float> task, VslSSComputeRoutine routine, VslSSComputeMethod method, [CallerFilePath]string file = null, [CallerLineNumber]int? line = null)
             => VSL.vslsSSCompute(task, routine, method).AutoThrow(file,line);

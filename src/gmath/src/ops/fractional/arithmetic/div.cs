@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gfp
     {
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="a">The left operand</param>
         /// <param name="b">The right operand</param>
         /// <typeparam name="T">The primal floating-point type</typeparam>
-        [MethodImpl(Inline), Div, Closures(Floats)]
+        [MethodImpl(Inline), Div, Closures(Closure)]
         public static T div<T>(T a, T b)
             where T : unmanaged
         {
@@ -26,11 +26,11 @@ namespace Z0
                  return generic<T>(fmath.div(float32(a), float32(b)));
             else if(typeof(T) == typeof(double))
                  return generic<T>(fmath.div(float64(a), float64(b)));
-            else            
-                throw Unsupported.define<T>();
+            else
+                throw no<T>();
         }
 
-        [MethodImpl(Inline), Divides, Closures(NumericKind.Floats)]
+        [MethodImpl(Inline), Divides, Closures(Closure)]
         public static bool divides<T>(T a, T b)
             where T : unmanaged
         {
@@ -38,8 +38,8 @@ namespace Z0
                  return fmath.divides(float32(a), float32(b));
             else if(typeof(T) == typeof(double))
                  return fmath.divides(float64(a), float64(b));
-            else            
-                throw Unsupported.define<T>();
+            else
+                throw no<T>();
         }
     }
 }

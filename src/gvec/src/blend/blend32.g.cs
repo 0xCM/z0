@@ -5,16 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst; 
-    using static V0;
+
+    using static Konst;
+    using static z;
 
     partial class gvec
     {
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Vector128<T> vblend4x32<T>(Vector128<T> x, Vector128<T> y, [Imm] byte spec)        
+        public static Vector128<T> vblend4x32<T>(Vector128<T> x, Vector128<T> y, [Imm] byte spec)
             where T : unmanaged
                 => vblend4x32_u(x,y,spec);
 
@@ -25,12 +25,12 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Vector256<T> vblend8x32<T>(Vector256<T> x, Vector256<T> y, [Imm] byte spec)        
+        public static Vector256<T> vblend8x32<T>(Vector256<T> x, Vector256<T> y, [Imm] byte spec)
             where T : unmanaged
                 => vblend8x32_u(x,y,spec);
 
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Vector128<T> vblend4x32<T>(Vector128<T> x, Vector128<T> y, Blend4x32 spec)        
+        public static Vector128<T> vblend4x32<T>(Vector128<T> x, Vector128<T> y, Blend4x32 spec)
             where T : unmanaged
                 => vblend4x32(x,y,(byte)spec);
 
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="y">The right vector</param>
         /// <param name="spec">The blend specification</param>
         [MethodImpl(Inline), Op, Closures(Integers)]
-        public static Vector256<T> vblend8x32<T>(Vector256<T> x, Vector256<T> y, Blend8x32 spec)        
+        public static Vector256<T> vblend8x32<T>(Vector256<T> x, Vector256<T> y, Blend8x32 spec)
             where T : unmanaged
                 => vblend8x32(x,y,(byte)spec);
 
@@ -50,13 +50,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(v8u(z.vblend4x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v8u(z.vblend4x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(v16u(z.vblend4x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v16u(z.vblend4x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(z.vblend4x32(v32u(x), v32u(y), spec));
+                return generic<T>(z.vblend4x32(v32u(x), v32u(y), spec));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(v64u(z.vblend4x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v64u(z.vblend4x32(v32u(x), v32u(y), spec)));
             else
                 return vblend4x32_i(x, y, spec);
         }
@@ -66,14 +66,14 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(v8i(z.vblend4x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v8i(z.vblend4x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(v16i(z.vblend4x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v16i(z.vblend4x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(z.vblend4x32(v32i(x), v32i(y), spec));
+                return generic<T>(z.vblend4x32(v32i(x), v32i(y), spec));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(v64i(z.vblend4x32(v32u(x), v32u(y), spec)));
-            else 
+                return generic<T>(v64i(z.vblend4x32(v32u(x), v32u(y), spec)));
+            else
                 throw no<T>();
         }
 
@@ -82,13 +82,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(v8u(z.vblend8x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v8u(z.vblend8x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(v16u(z.vblend8x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v16u(z.vblend8x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(z.vblend8x32(v32u(x), v32u(y), spec));
+                return generic<T>(z.vblend8x32(v32u(x), v32u(y), spec));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(v64u(z.vblend8x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v64u(z.vblend8x32(v32u(x), v32u(y), spec)));
             else
                 return vblend8x32_i(x, y, spec);
         }
@@ -98,14 +98,14 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return vgeneric<T>(v8i(z.vblend8x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v8i(z.vblend8x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(short))
-                return vgeneric<T>(v16i(z.vblend8x32(v32u(x), v32u(y), spec)));
+                return generic<T>(v16i(z.vblend8x32(v32u(x), v32u(y), spec)));
             else if(typeof(T) == typeof(int))
-                return vgeneric<T>(z.vblend8x32(v32i(x), v32i(y), spec));
+                return generic<T>(z.vblend8x32(v32i(x), v32i(y), spec));
             else if(typeof(T) == typeof(long))
-                return vgeneric<T>(v64i(z.vblend8x32(v32u(x), v32u(y), spec)));
-            else 
+                return generic<T>(v64i(z.vblend8x32(v32u(x), v32u(y), spec)));
+            else
                 throw no<T>();
         }
     }

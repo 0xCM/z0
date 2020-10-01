@@ -8,7 +8,6 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// Defines factory methods for creating distribution samplers
@@ -22,8 +21,8 @@ namespace Z0.Mkl
         /// <param name="dst">The receiving buffer</param>
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
-        public static IRngSampler<uint> bits32(MklRng src, int? capacity = null)        
-            => new UniformBitsSampler<uint>(src, capacity); 
+        public static IRngSampler<uint> bits32(MklRng src, int? capacity = null)
+            => new UniformBitsSampler<uint>(src, capacity);
 
         /// <summary>
         /// Creates a bitwise uniform 64-bit sampler
@@ -32,8 +31,8 @@ namespace Z0.Mkl
         /// <param name="dst">The receiving buffer</param>
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
-        public static IRngSampler<ulong> bits64(MklRng src, int? capacity = null)        
-            => new UniformBitsSampler<ulong>(src, capacity); 
+        public static IRngSampler<ulong> bits64(MklRng src, int? capacity = null)
+            => new UniformBitsSampler<ulong>(src, capacity);
 
         /// <summary>
         /// Creates 32-bit sampler of uninform bits
@@ -42,8 +41,8 @@ namespace Z0.Mkl
         /// <param name="dst">The receiving buffer</param>
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
-        public static IRngSampler<uint> bits(MklRng src, UniformBitsSpec<uint> spec, int? capacity = null)        
-            => new UniformBitsSampler<uint>(src, capacity); 
+        public static IRngSampler<uint> bits(MklRng src, UniformBitsSpec<uint> spec, int? capacity = null)
+            => new UniformBitsSampler<uint>(src, capacity);
 
         /// <summary>
         /// Creates 64-bit sampler of uninform bits
@@ -52,8 +51,8 @@ namespace Z0.Mkl
         /// <param name="dst">The receiving buffer</param>
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
-        public static IRngSampler<ulong> bits(MklRng src, UniformBitsSpec<ulong> spec, int? capacity = null)        
-            => new UniformBitsSampler<ulong>(src, capacity); 
+        public static IRngSampler<ulong> bits(MklRng src, UniformBitsSpec<ulong> spec, int? capacity = null)
+            => new UniformBitsSampler<ulong>(src, capacity);
 
         /// <summary>
         /// Creates a uniform sampler for 32-bit integers
@@ -63,7 +62,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
         public static IRngSampler<int> uniform(MklRng src, Interval<int> range, int? capacity = null)
-            => new UniformSampler<int>(src, range, capacity); 
+            => new UniformSampler<int>(src, range, capacity);
 
 
         /// <summary>
@@ -74,7 +73,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
         public static IRngSampler<int> uniform(MklRng src, int min, int max, int? capacity = null)
-            => new UniformSampler<int>(src, (min,max), capacity); 
+            => new UniformSampler<int>(src, (min,max), capacity);
 
         /// <summary>
         /// Creates a uniform sampler for 32-bit floating point
@@ -84,7 +83,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
         public static IRngSampler<float> uniform(MklRng src, float min, float max, int? capacity = null)
-            => new UniformSampler<float>(src, (min,max), capacity); 
+            => new UniformSampler<float>(src, (min,max), capacity);
 
         /// <summary>
         /// Creates a uniform sampler for 32-bit floating point
@@ -93,8 +92,8 @@ namespace Z0.Mkl
         /// <param name="range">The range of potenial sample values</param>
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
-        public static IRngSampler<float> uniform(MklRng src, Interval<float> range, int? capacity = null)                    
-            => new UniformSampler<float>(src, range, capacity); 
+        public static IRngSampler<float> uniform(MklRng src, Interval<float> range, int? capacity = null)
+            => new UniformSampler<float>(src, range, capacity);
 
 
         /// <summary>
@@ -105,7 +104,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
         public static IRngSampler<double> uniform(MklRng src, double min, double max, int? capacity = null)
-            => new UniformSampler<double>(src, (min,max), capacity); 
+            => new UniformSampler<double>(src, (min,max), capacity);
 
         /// <summary>
         /// Creates a uniform sampler for 64-bit floating point
@@ -114,8 +113,8 @@ namespace Z0.Mkl
         /// <param name="range">The range of potenial sample values</param>
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
-        public static IRngSampler<double> uniform(MklRng src, Interval<double> range, int? capacity = null)                    
-            => new UniformSampler<double>(src, range, capacity); 
+        public static IRngSampler<double> uniform(MklRng src, Interval<double> range, int? capacity = null)
+            => new UniformSampler<double>(src, range, capacity);
 
         /// <summary>
         /// Creates a uniform sampler for 32-bit integers
@@ -125,7 +124,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
         public static IRngSampler<int> uniform(MklRng src, UniformSpec<int> spec, int? capacity = null)
-            => new UniformSampler<int>(src, spec, capacity); 
+            => new UniformSampler<int>(src, spec, capacity);
 
         /// <summary>
         /// Creates a uniform sampler for 32-bit floating point
@@ -135,7 +134,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
         public static IRngSampler<float> uniform(MklRng src, UniformSpec<float> spec, int? capacity = null)
-            => new UniformSampler<float>(src, spec, capacity); 
+            => new UniformSampler<float>(src, spec, capacity);
 
         /// <summary>
         /// Creates a uniform sampler for 64-bit floating point
@@ -144,8 +143,8 @@ namespace Z0.Mkl
         /// <param name="spec">The distribution specifier</param>
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
-        public static IRngSampler<double> uniform(MklRng src, UniformSpec<double> spec, int? capacity = null)                    
-            => new UniformSampler<double>(src, spec, capacity); 
+        public static IRngSampler<double> uniform(MklRng src, UniformSpec<double> spec, int? capacity = null)
+            => new UniformSampler<double>(src, spec, capacity);
 
         /// <summary>
         /// Creates a Bernoulli sampler
@@ -176,9 +175,9 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
         public static IRngSampler<float> gaussian(MklRng src, float mu, float sigma, int? capacity = null)
-            => new GaussianSampler<float>(src, mu,sigma, capacity); 
+            => new GaussianSampler<float>(src, mu,sigma, capacity);
 
- 
+
         /// <summary>
         /// Creates a double-precision Gaussian sampler
         /// </summary>
@@ -188,7 +187,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
         public static IRngSampler<double> gaussian(MklRng src, double mu, double sigma, int? capacity = null)
-            => new GaussianSampler<double>(src, mu,sigma, capacity); 
+            => new GaussianSampler<double>(src, mu,sigma, capacity);
 
         /// <summary>
         /// Creates gaussian sampler for 32-bit floating point
@@ -198,7 +197,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
         public static IRngSampler<float> gaussian(MklRng src, GaussianSpec<float> spec, int? capacity = null)
-            => new GaussianSampler<float>(src, spec.Mean, spec.StdDev, capacity); 
+            => new GaussianSampler<float>(src, spec.Mean, spec.StdDev, capacity);
 
         /// <summary>
         /// Creates gaussian sampler for 64-bit floating point
@@ -208,7 +207,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
         public static IRngSampler<double> gaussian(MklRng src, GaussianSpec<double> spec, int? capacity = null)
-            => new GaussianSampler<double>(src, spec.Mean, spec.StdDev, capacity); 
+            => new GaussianSampler<double>(src, spec.Mean, spec.StdDev, capacity);
 
         /// <summary>
         /// Creates a geometric sampler
@@ -357,8 +356,8 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of buffer allocations</param>
         [MethodImpl(Inline)]
         public static IRngSampler<float> cauchy(MklRng src, float location, float scale, int? capacity = null)
-            => new CauchySampler<float>(src, location, scale, capacity); 
- 
+            => new CauchySampler<float>(src, location, scale, capacity);
+
         /// <summary>
         /// Creates a Cauchy sampler for 64-bit floating point
         /// </summary>
@@ -368,7 +367,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of buffer allocations</param>
         [MethodImpl(Inline)]
         public static IRngSampler<double> cauchy(MklRng src, double location, double scale, int? capacity = null)
-            => new CauchySampler<double>(src, location, scale, capacity); 
+            => new CauchySampler<double>(src, location, scale, capacity);
 
         /// <summary>
         /// Creates a Cauchy sampler for 32-bit floating point
@@ -379,7 +378,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of buffer allocations</param>
         [MethodImpl(Inline)]
         public static IRngSampler<float> cauchy(MklRng src, CauchySpec<float> spec, int? capacity = null)
-            => new CauchySampler<float>(src, spec, capacity); 
+            => new CauchySampler<float>(src, spec, capacity);
 
         /// <summary>
         /// Creates a Cauchy sampler for 64-bit floating point
@@ -390,7 +389,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of buffer allocations</param>
         [MethodImpl(Inline)]
         public static IRngSampler<double> cauchy(MklRng src, CauchySpec<double> spec, int? capacity = null)
-            => new CauchySampler<double>(src, spec, capacity); 
+            => new CauchySampler<double>(src, spec, capacity);
 
         /// <summary>
         /// Creates a Laplace sampler for 32-bit floating point
@@ -401,7 +400,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of buffer allocations</param>
         [MethodImpl(Inline)]
         public static IRngSampler<float> laplace(MklRng src, float location, float scale, int? capacity = null)
-            => new LaplaceSampler<float>(src, location, scale, capacity); 
+            => new LaplaceSampler<float>(src, location, scale, capacity);
 
         /// <summary>
         /// Creates a Laplace sampler for 32-bit floating point
@@ -412,7 +411,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of buffer allocations</param>
         [MethodImpl(Inline)]
         public static IRngSampler<float> laplace(MklRng src, LaplaceSpec<float> spec, int? capacity = null)
-            => new LaplaceSampler<float>(src, spec, capacity); 
+            => new LaplaceSampler<float>(src, spec, capacity);
 
         /// <summary>
         /// Creates a Laplace sampler for 64-bit floating point
@@ -423,8 +422,8 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of buffer allocations</param>
         [MethodImpl(Inline)]
         public static IRngSampler<double> laplace(MklRng src, double location, double scale, int? capacity = null)
-            => new LaplaceSampler<double>(src, location, scale, capacity); 
- 
+            => new LaplaceSampler<double>(src, location, scale, capacity);
+
         /// <summary>
         /// Creates a Laplace sampler for 64-bit floating point
         /// </summary>
@@ -434,7 +433,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of buffer allocations</param>
         [MethodImpl(Inline)]
         public static IRngSampler<double> laplace(MklRng src, LaplaceSpec<double> spec, int? capacity = null)
-            => new LaplaceSampler<double>(src, spec, capacity); 
+            => new LaplaceSampler<double>(src, spec, capacity);
 
         /// <summary>
         /// Creates a uniform sampler for 32-bit integers
@@ -444,7 +443,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
         public static IRngSampler<int> sampler(MklRng src, UniformSpec<int> spec, int? capacity = null)
-            => new UniformSampler<int>(src, spec, capacity); 
+            => new UniformSampler<int>(src, spec, capacity);
 
         /// <summary>
         /// Creates a uniform sampler for 32-bit floating point
@@ -454,7 +453,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
         public static IRngSampler<float> sampler(MklRng src, UniformSpec<float> spec, int? capacity = null)
-            => new UniformSampler<float>(src, spec, capacity); 
+            => new UniformSampler<float>(src, spec, capacity);
 
         /// <summary>
         /// Creates a uniform sampler for 64-bit floating point
@@ -463,8 +462,8 @@ namespace Z0.Mkl
         /// <param name="spec">The distribution specifier</param>
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
-        public static IRngSampler<double> sampler(MklRng src, UniformSpec<double> spec, int? capacity = null)                    
-            => new UniformSampler<double>(src, spec, capacity); 
+        public static IRngSampler<double> sampler(MklRng src, UniformSpec<double> spec, int? capacity = null)
+            => new UniformSampler<double>(src, spec, capacity);
 
         /// <summary>
         /// Creates 32-bit sampler of uninform bits
@@ -473,8 +472,8 @@ namespace Z0.Mkl
         /// <param name="dst">The receiving buffer</param>
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
-        public static IRngSampler<uint> sampler(MklRng src, UniformBitsSpec<uint> spec, int? capacity = null)        
-            => new UniformBitsSampler<uint>(src, capacity); 
+        public static IRngSampler<uint> sampler(MklRng src, UniformBitsSpec<uint> spec, int? capacity = null)
+            => new UniformBitsSampler<uint>(src, capacity);
 
         /// <summary>
         /// Creates 64-bit sampler of uninform bits
@@ -483,8 +482,8 @@ namespace Z0.Mkl
         /// <param name="dst">The receiving buffer</param>
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
-        public static IRngSampler<ulong> sampler(MklRng src, UniformBitsSpec<ulong> spec, int? capacity = null)        
-            => new UniformBitsSampler<ulong>(src, capacity); 
+        public static IRngSampler<ulong> sampler(MklRng src, UniformBitsSpec<ulong> spec, int? capacity = null)
+            => new UniformBitsSampler<ulong>(src, capacity);
 
         /// <summary>
         /// Creates a Bernoulli sampler
@@ -534,7 +533,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
         public static IRngSampler<float> sampler(MklRng src, GaussianSpec<float> spec, int? capacity = null)
-            => new GaussianSampler<float>(src, spec.Mean, spec.StdDev, capacity); 
+            => new GaussianSampler<float>(src, spec.Mean, spec.StdDev, capacity);
 
         /// <summary>
         /// Creates gaussian sampler for 64-bit floating point
@@ -544,7 +543,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of the sampler's buffer</param>
         [MethodImpl(Inline)]
         public static IRngSampler<double> sampler(MklRng src, GaussianSpec<double> spec, int? capacity = null)
-            => new GaussianSampler<double>(src, spec.Mean, spec.StdDev, capacity); 
+            => new GaussianSampler<double>(src, spec.Mean, spec.StdDev, capacity);
 
         /// <summary>
         /// Creates an exponential sampler for 32-bit floating point
@@ -595,7 +594,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of buffer allocations</param>
         [MethodImpl(Inline)]
         public static IRngSampler<float> sampler(MklRng src, CauchySpec<float> spec, int? capacity = null)
-            => new CauchySampler<float>(src, spec, capacity); 
+            => new CauchySampler<float>(src, spec, capacity);
 
         /// <summary>
         /// Creates a Cauchy sampler for 64-bit floating point
@@ -606,7 +605,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of buffer allocations</param>
         [MethodImpl(Inline)]
         public static IRngSampler<double> sampler(MklRng src, double location, double scale, int? capacity = null)
-            => new CauchySampler<double>(src, location, scale, capacity); 
+            => new CauchySampler<double>(src, location, scale, capacity);
 
         /// <summary>
         /// Creates a Laplace sampler for 32-bit floating point
@@ -617,7 +616,7 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of buffer allocations</param>
         [MethodImpl(Inline)]
         public static IRngSampler<float> sampler(MklRng src, LaplaceSpec<float> spec, int? capacity = null)
-            => new LaplaceSampler<float>(src, spec, capacity); 
+            => new LaplaceSampler<float>(src, spec, capacity);
 
         /// <summary>
         /// Creates a Laplace sampler for 64-bit floating point
@@ -628,6 +627,6 @@ namespace Z0.Mkl
         /// <param name="capacity">The length of buffer allocations</param>
         [MethodImpl(Inline)]
         public static IRngSampler<double> sampler(MklRng src, LaplaceSpec<double> spec, int? capacity = null)
-            => new LaplaceSampler<double>(src, spec, capacity); 
+            => new LaplaceSampler<double>(src, spec, capacity);
     }
 }

@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class gbits
     {
@@ -48,7 +48,7 @@ namespace Z0
                 x0 = generic<T>(y0);
                 x1 = generic<T>(y1);
             }
-            else            
+            else
                 throw Unsupported.define<T>();
         }
     }

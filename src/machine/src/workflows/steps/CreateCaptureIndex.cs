@@ -12,7 +12,7 @@ namespace Z0
         public static void run(IWfShell wf, IWfCaptureState state)
         {
             var host = new CreateCaptureIndex();
-            var files = ApiHexArchives.partfiles(wf.CaptureRoot);
+            var files = ApiArchives.partfiles(wf.CaptureRoot);
             using var step = new CreateCaptureIndexStep(wf, host, state, files);
             step.Run();
         }

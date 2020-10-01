@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-                
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gmath
-    {        
+    {
         /// <summary>
         /// Computes dst = (div(a,b), mod(a,b))
         /// </summary>
@@ -22,17 +22,17 @@ namespace Z0
         public static ConstPair<T> divmod<T>(T a, T b)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 return divmod_u(a,b);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 return divmod_i(a,b);
-            else 
+            else
                 return gfp.divmod(a,b);
         }
 
@@ -60,7 +60,7 @@ namespace Z0
                 return ConstPair.generic<T>(math.divmod(uint16(a), uint16(m)));
             else if(typeof(T) == typeof(uint))
                 return ConstPair.generic<T>(math.divmod(uint32(a), uint32(m)));
-            else 
+            else
                 return ConstPair.generic<T>(math.divmod(uint64(a), uint64(m)));
         }
     }

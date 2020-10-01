@@ -13,58 +13,6 @@ namespace Z0
     partial class BitBlocks
     {
         /// <summary>
-        /// Tests a bit value in a T-sequence predicated on a linear index
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="index">The linear index of the target bit, relative to the sequence head</param>
-        /// <typeparam name="T">The sequence type</typeparam>
-        [MethodImpl(Inline), TestBit, Closures(AllNumeric)]
-        public static Bit32 testbit<T>(in SpanBlock256<T> src, int index)
-            where T : unmanaged
-        {
-            var loc = gbits.bitpos<T>(index);
-            return gbits.testbit(src[loc.CellIndex], (byte)loc.BitOffset);
-        }
-
-        /// <summary>
-        /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by an inclusive position range
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="firstpos">The sequence-relative position of the first bit</param>
-        /// <param name="lastpos">The sequence-relative position of the last bit</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Extract, Closures(UnsignedInts)]
-        public static T bitseg<T>(in SpanBlock256<T> src, BitPos<T> firstpos, BitPos<T> lastpos)
-            where T : unmanaged
-                => gbits.extract(src.Data, firstpos,lastpos);
-
-        /// <summary>
-        /// Sets a bit value in a T-sequence predicated on a linear index
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="index">The linear index of the target bit, relative to the sequence head</param>
-        /// <typeparam name="T">The sequence type</typeparam>
-        [MethodImpl(Inline), SetBit, Closures(AllNumeric)]
-        public static void setbit<T>(in SpanBlock256<T> src, int index, Bit32 value)
-            where T : unmanaged
-        {
-            var loc = gbits.bitpos<T>(index);
-            src[loc.CellIndex] = gbits.setbit(src[loc.CellIndex], (byte)loc.BitOffset, value);
-        }
-
-        /// <summary>
-        /// Extracts a T-valued segment, cross-cell or same-cell, from the source as determined by
-        /// an inclusive linear index range
-        /// </summary>
-        /// <param name="src">The bit source</param>
-        /// <param name="i0">The sequence-relative index of the first bit</param>
-        /// <param name="i1">The sequence-relative index of the last bit</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Extract, Closures(UnsignedInts)]
-        public static T bitseg<T>(in SpanBlock256<T> src, int i0, int i1)
-            where T : unmanaged
-                => gbits.extract(src.Data, gbits.bitpos<T>(i0), gbits.bitpos<T>(i1));
-        /// <summary>
         /// Reads a cell determined by a linear bit position
         /// </summary>
         /// <param name="bitpos">The linear bit position</param>
@@ -92,18 +40,6 @@ namespace Z0
                 => ref seek(src, bitpos / bitwidth<X>());
 
         /// <summary>
-        /// Sets the state of a grid bit identified by its linear position
-        /// </summary>
-        /// <param name="bitpos">The 0-based linear bit index</param>
-        /// <param name="state">The source state</param>
-        /// <param name="dst">A reference to the grid storage</param>
-        /// <typeparam name="T">The grid storage segment type</typeparam>
-        [MethodImpl(Inline)]
-        internal static void setbit<X>(uint bitpos, Bit32 state, ref X dst)
-            where X : unmanaged
-                => cell(ref dst, bitpos) = gbits.setbit(cell(ref dst, bitpos), (byte)(bitpos % bitwidth<X>()), state);
-
-        /// <summary>
         /// Transfers span content to a bitblock without checks
         /// </summary>
         /// <param name="src">The source span</param>
@@ -115,39 +51,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
                 => new BitBlock<N,T>(src,true);
-
-        /// <summary>
-        /// Computes the Euclidean scalar product between two bitvectors using modular arithmetic
-        /// </summary>
-        /// <param name="x">The first vector</param>
-        /// <param name="y">The second vector</param>
-        /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
-        public static Bit32 modprod<T>(in BitBlock<T> x, in BitBlock<T> y)
-            where T : unmanaged
-        {
-            var result = 0u;
-            for(var i=0; i<x.BitCount; i++)
-            {
-                var a = (uint)x[i];
-                var b = (uint)y[i];
-                result += a*b;
-            }
-            return gmath.odd(result);
-        }
-
-        /// <summary>
-        /// Computes the Euclidean scalar product between two natural bitvectors using modular arithmetic
-        /// </summary>
-        /// <param name="x">The first vector</param>
-        /// <param name="y">The second vector</param>
-        /// <typeparam name="N">The bitwidth type</typeparam>
-        /// <typeparam name="T">The cell type</typeparam>
-        /// <remarks>This should be considered a reference implementation; the dot operation is considerably faster</remarks>
-        [MethodImpl(Inline)]
-        public static Bit32 modprod<N,T>(in BitBlock<N,T> x, in BitBlock<N,T> y)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-                => modprod(x.Unsize(),y.Unsize());
 
         /// <summary>
         /// Computes the number of primal cells required to cover a specified number of bits

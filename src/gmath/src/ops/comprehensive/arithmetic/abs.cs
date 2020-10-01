@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
-    
+
+    using static Konst;
+    using static z;
+
     partial class gmath
     {
         /// <summary>
@@ -31,8 +31,8 @@ namespace Z0
                 return generic<T>(math.abs(int64(src)));
             else if(NumericKinds.unsigned<T>())
                 return src;
-            else 
+            else
                 return gfp.abs(src);
-        }           
+        }
    }
 }

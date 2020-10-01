@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-                
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gmath
     {
@@ -34,9 +34,9 @@ namespace Z0
                 return generic<T>(math.xors(uint32(a), offset));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.xors(uint64(a), offset));
-            else            
+            else
                 return xors_i(a,offset);
-        }           
+        }
 
         [MethodImpl(Inline)]
         static T xors_i<T>(T a, byte offset)
@@ -50,8 +50,8 @@ namespace Z0
                 return generic<T>(math.xors(int32(a), offset));
             else if(typeof(T) == typeof(long))
                 return generic<T>(math.xors(int64(a), offset));
-            else            
+            else
                 throw Unsupported.define<T>();
-        }           
+        }
     }
 }

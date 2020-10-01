@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
-    
+
     partial class XTend
-    {    
+    {
         /// <summary>
         /// Retrieves, at most, one cell's worth of bits defined by an inclusive bit index range
         /// </summary>
@@ -20,6 +19,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static T BitSeg<T>(this Span<T> src, int first, int last)
             where T : unmanaged
-                => gbits.extract(src,first,last); 
+                => gbits.extract(src,first,last);
     }
 }

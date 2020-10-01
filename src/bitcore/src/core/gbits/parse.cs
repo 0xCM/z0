@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class gbits
     {
@@ -17,7 +17,7 @@ namespace Z0
             where T : unmanaged
         {
             var last = math.min(bitwidth<T>(), src.Length) - 1;
-            ref readonly var input = ref head(src);
+            ref readonly var input = ref first(src);
             dst = default;
 
             for(int i=offset, pos = 0; i<= last; i++, pos++)

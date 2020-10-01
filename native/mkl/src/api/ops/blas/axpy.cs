@@ -5,8 +5,9 @@
 namespace Z0.Mkl
 {
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
+    using static z;
 
     partial class mkl
     {
@@ -16,13 +17,13 @@ namespace Z0.Mkl
         /// <param name="a">A scalar by which the components of X are multiplied</param>
         /// <param name="X">The vector to be scaled</param>
         /// <param name="Y">The vector to be added</param>
-        /// <param name="Z">The target vector</param>        
+        /// <param name="Z">The target vector</param>
         [MethodImpl(Inline)]
         public static void axpy<N>(float a, Block256<N,float> X, Block256<N,float> Y, ref Block256<N,float> Z)
             where N : unmanaged, ITypeNat
         {
-            Y.CopyTo(ref Z);        
-            CBLAS.cblas_saxpy(Memories.nati<N>(), a, ref head(X), 1, ref head(Z), 1);
+            Y.CopyTo(ref Z);
+            CBLAS.cblas_saxpy(nat32i<N>(), a, ref head(X), 1, ref head(Z), 1);
         }
 
         /// <summary>
@@ -31,11 +32,11 @@ namespace Z0.Mkl
         /// <param name="a">A scalar by which the components of X are multiplied</param>
         /// <param name="X">The vector to be scaled</param>
         /// <param name="Y">The vector to be added</param>
-        /// <param name="Z">The target vector</param>        
+        /// <param name="Z">The target vector</param>
         [MethodImpl(Inline)]
         public static void axpy(float a, RowVector256<float> X, RowVector256<float> Y, ref RowVector256<float> Z)
         {
-            Y.CopyTo(ref Z);        
+            Y.CopyTo(ref Z);
             CBLAS.cblas_saxpy(length(X,Y), a, ref head(X), 1, ref head(Z), 1);
         }
 
@@ -45,11 +46,11 @@ namespace Z0.Mkl
         /// <param name="a">A scalar by which the components of X are multiplied</param>
         /// <param name="X">The vector to be scaled</param>
         /// <param name="Y">The vector to be added</param>
-        /// <param name="Z">The target vector</param>        
+        /// <param name="Z">The target vector</param>
         [MethodImpl(Inline)]
         public static void axpy(double a, RowVector256<double> X, RowVector256<double> Y, ref RowVector256<double> Z)
         {
-            Y.CopyTo(ref Z);        
+            Y.CopyTo(ref Z);
             CBLAS.cblas_daxpy(length(X,Y), a, ref head(X), 1, ref head(Z), 1);
         }
     }

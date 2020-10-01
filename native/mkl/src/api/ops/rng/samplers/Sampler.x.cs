@@ -8,7 +8,7 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class mklx
     {
@@ -31,10 +31,10 @@ namespace Z0.Mkl
                     sampler = rng.UniformBitsSampler<T>(Distributions.uniformbits(spec));
                     break;
                 case DistributionKind.Bernoulli:
-                    sampler = rng.BernoulliSampler<T>(Distributions.bernoulli(spec));                    
+                    sampler = rng.BernoulliSampler<T>(Distributions.bernoulli(spec));
                     break;
                 case DistributionKind.Gaussian:
-                    sampler = rng.GaussianSampler<T>(Distributions.gaussian(spec));                    
+                    sampler = rng.GaussianSampler<T>(Distributions.gaussian(spec));
                     break;
                 default:
                     throw Unsupported.define<T>();
@@ -59,10 +59,10 @@ namespace Z0.Mkl
                 sampler = samplers.uniform(rng, _spec.ToInt32()) as IRngSampler<T>;
             else if(typeof(T) == typeof(float))
                 sampler = samplers.uniform(rng, _spec.ToFloat32()) as IRngSampler<T>;
-            else if(typeof(T) == typeof(double))                    
+            else if(typeof(T) == typeof(double))
                 sampler = samplers.uniform(rng, _spec.ToFloat64()) as IRngSampler<T>;
             else
-                throw Unsupported.define<T>();                                        
+                throw Unsupported.define<T>();
             return sampler;
         }
 
@@ -83,7 +83,7 @@ namespace Z0.Mkl
             else if(typeof(T) == typeof(ulong))
                 sampler = samplers.bits(rng, _spec.ToUInt64()) as IRngSampler<T>;
             else
-                throw Unsupported.define<T>();                                        
+                throw Unsupported.define<T>();
             return sampler;
         }
 
@@ -101,7 +101,7 @@ namespace Z0.Mkl
             if(typeof(T) == typeof(int))
                 sampler = samplers.bernoulli(rng,spec) as IRngSampler<T>;
             else
-                throw Unsupported.define<T>();                                        
+                throw Unsupported.define<T>();
             return sampler;
         }
 
@@ -121,7 +121,7 @@ namespace Z0.Mkl
             else if(typeof(T) == typeof(double))
                 sampler = samplers.gaussian(rng, spec.ToFloat64()) as IRngSampler<T>;
             else
-                throw Unsupported.define<T>();                                        
+                throw Unsupported.define<T>();
             return sampler;
         }
     }

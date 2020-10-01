@@ -9,7 +9,7 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
     using static ExtractTermCode;
 
     public unsafe readonly struct CaptureCore : ICaptureCore
@@ -20,7 +20,7 @@ namespace Z0.Asm
         {
             try
             {
-                return capture(exchange, id, ref head(src));
+                return capture(exchange, id, ref first(src));
             }
             catch(Exception e)
             {

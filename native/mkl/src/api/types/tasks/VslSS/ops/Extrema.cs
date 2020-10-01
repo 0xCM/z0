@@ -6,9 +6,8 @@ namespace Z0.Mkl
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using static Memories;
 
     using static VslSSTaskParameter;
     using static VslSSComputeRoutine;
@@ -23,7 +22,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="src">The sample</param>
         [MethodImpl(Inline)]
-        public static Observations<float> Mean(this Observations<float> src)        
+        public static Observations<float> Mean(this Observations<float> src)
             => src.CalcMean(Observations.Alloc<float>(src.Dim,1));
 
         /// <summary>
@@ -31,7 +30,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="src">The sample</param>
         [MethodImpl(Inline)]
-        public static Observations<double> Mean(this Observations<double> src)        
+        public static Observations<double> Mean(this Observations<double> src)
             => src.CalcMean(Observations.Alloc<double>(src.Dim,1));
 
         /// <summary>
@@ -39,14 +38,14 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="src">The sample</param>
         [MethodImpl(Inline)]
-        public static Observations<double> Variance(this Observations<double> src)        
+        public static Observations<double> Variance(this Observations<double> src)
             => src.CalcVariance(Observations.Alloc<double>(src.Dim,1));
 
         /// <summary>
         /// Calculates the mean
         /// </summary>
         [MethodImpl(Inline)]
-        public static ref double Mean(this Observations<double> src, ref double dst)        
+        public static ref double Mean(this Observations<double> src, ref double dst)
             => ref src.CalcMean(ref dst);
 
         /// <summary>
@@ -54,7 +53,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="src">The sample</param>
         [MethodImpl(Inline)]
-        public static Observations<float> Sum(this Observations<float> src)        
+        public static Observations<float> Sum(this Observations<float> src)
             => src.CalcSum(Observations.Alloc<float>(src.Dim,1));
 
         /// <summary>
@@ -62,7 +61,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="src">The sample</param>
         [MethodImpl(Inline)]
-        public static Observations<double> Sum(this Observations<double> src)        
+        public static Observations<double> Sum(this Observations<double> src)
             => src.CalcSum(Observations.Alloc<double>(src.Dim,1));
 
         /// <summary>
@@ -70,7 +69,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="src">The sample</param>
         [MethodImpl(Inline)]
-        public static Observations<float> Min(this Observations<float> src)        
+        public static Observations<float> Min(this Observations<float> src)
             => src.CalcMin(Observations.Alloc<float>(src.Dim,1));
 
         /// <summary>
@@ -78,7 +77,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="src">The sample</param>
         [MethodImpl(Inline)]
-        public static Observations<double> Min(this Observations<double> src)        
+        public static Observations<double> Min(this Observations<double> src)
             => src.CalcMin(Observations.Alloc<double>(src.Dim,1));
 
         /// <summary>
@@ -86,7 +85,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="src">The sample</param>
         [MethodImpl(Inline)]
-        public static Observations<float> Max(this Observations<float> src)        
+        public static Observations<float> Max(this Observations<float> src)
             => src.CalcMax(Observations.Alloc<float>(src.Dim,1));
 
         /// <summary>
@@ -94,7 +93,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="src">The sample</param>
         [MethodImpl(Inline)]
-        public static Observations<double> Max(this Observations<double> src)        
+        public static Observations<double> Max(this Observations<double> src)
             => src.CalcMax(Observations.Alloc<double>(src.Dim,1));
 
         /// <summary>
@@ -102,7 +101,7 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="src">The sample</param>
         [MethodImpl(Inline)]
-        public static Observations<float> Extrema(this Observations<float> src)        
+        public static Observations<float> Extrema(this Observations<float> src)
             => src.CalcExtrema(Observations.Alloc<float>(src.Dim,2));
 
         /// <summary>
@@ -110,10 +109,10 @@ namespace Z0.Mkl
         /// </summary>
         /// <param name="src">The sample</param>
         [MethodImpl(Inline)]
-        public static Observations<double> Extrema(this Observations<double> src)        
+        public static Observations<double> Extrema(this Observations<double> src)
             => src.CalcExtrema(Observations.Alloc<double>(src.Dim,2));
 
-        static unsafe Observations<T> CalcMin<T>(this Observations<T> samples, Observations<T> dst)        
+        static unsafe Observations<T> CalcMin<T>(this Observations<T> samples, Observations<T> dst)
             where T : unmanaged
         {
             using var h2 = VslSSTaskHandle.Create(samples);
@@ -122,7 +121,7 @@ namespace Z0.Mkl
             return dst;
         }
 
-        static unsafe Observations<T> CalcMax<T>(this Observations<T> samples, Observations<T> dst)        
+        static unsafe Observations<T> CalcMax<T>(this Observations<T> samples, Observations<T> dst)
             where T : unmanaged
         {
             using var h2 = VslSSTaskHandle.Create(samples);
@@ -131,7 +130,7 @@ namespace Z0.Mkl
             return dst;
         }
 
-        static unsafe Observations<T> CalcSum<T>(this Observations<T> samples, Observations<T> dst)        
+        static unsafe Observations<T> CalcSum<T>(this Observations<T> samples, Observations<T> dst)
             where T : unmanaged
         {
             using var h2 = VslSSTaskHandle.Create(samples);
@@ -140,7 +139,7 @@ namespace Z0.Mkl
             return dst;
         }
 
-        static unsafe Observations<T> CalcExtrema<T>(this Observations<T> samples, Observations<T> dst)        
+        static unsafe Observations<T> CalcExtrema<T>(this Observations<T> samples, Observations<T> dst)
             where T : unmanaged
         {
             using var h2 = VslSSTaskHandle.Create(samples);
@@ -151,7 +150,7 @@ namespace Z0.Mkl
         }
 
 
-        static unsafe ref T CalcMean<T>(this Observations<T> samples, ref T dst)        
+        static unsafe ref T CalcMean<T>(this Observations<T> samples, ref T dst)
             where T : unmanaged
         {
             using var h2 = VslSSTaskHandle.Create(samples);
@@ -160,7 +159,7 @@ namespace Z0.Mkl
             return ref dst;
         }
 
-        static unsafe Observations<T> CalcMean<T>(this Observations<T> samples, Observations<T> dst)        
+        static unsafe Observations<T> CalcMean<T>(this Observations<T> samples, Observations<T> dst)
             where T : unmanaged
         {
             using var h2 = VslSSTaskHandle.Create(samples);
@@ -169,7 +168,7 @@ namespace Z0.Mkl
             return dst;
         }
 
-        static unsafe Observations<T> CalcVariance<T>(this Observations<T> samples, Observations<T> dst)        
+        static unsafe Observations<T> CalcVariance<T>(this Observations<T> samples, Observations<T> dst)
             where T : unmanaged
         {
             using var h2 = VslSSTaskHandle.Create(samples);

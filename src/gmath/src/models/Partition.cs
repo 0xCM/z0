@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public partial class Partition
     {
@@ -57,7 +57,7 @@ namespace Z0
         /// <typeparam name="T">The interval primal type</typeparam>
         public static Span<T> counted<T>(Interval<T> src, int count)
             where T : unmanaged
-                => measured(src,gmath.div(gmath.sub(src.Right, src.Left), convert<T>(count - 1)));
+                => measured(src,gmath.div(gmath.sub(src.Right, src.Left), force<T>(count - 1)));
 
         /// <summary>
         /// Partitions an interval predicated on a specified partition count
@@ -67,7 +67,7 @@ namespace Z0
         /// <typeparam name="T">The interval primal type</typeparam>
         public static Span<Interval<T>> counted<S,T>(Interval<T> src, int count)
             where T : unmanaged
-                => width(src,gmath.div(gmath.sub(src.Right, src.Left), convert<T>(count)));
+                => width(src,gmath.div(gmath.sub(src.Right, src.Left), force<T>(count)));
 
         /// <summary>
         /// Partitions an interval predicated on a specified partition width
@@ -144,7 +144,7 @@ namespace Z0
             var scale = 4;
             var len =  gfp.round(gmath.length(src), scale);
             var fcount = gfp.div(len, width);
-            var count = convert<T,int>(gfp.ceil(fcount));
+            var count = force<T,int>(gfp.ceil(fcount));
             var dst = Spans.alloc<T>(count + 1);
 
             var point = src.Left;

@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a permutation of natural length N over the natural numbers 0,1,...,N-1
@@ -21,25 +21,25 @@ namespace Z0
     {
         readonly Perm<T> perm;
 
-        static T nT => convert<T>(TypeNats.value<N>());
+        static T nT => force<T>(TypeNats.value<N>());
 
         static int n => (int)TypeNats.value<N>();
 
         /// <summary>
         /// The canonical identity permutation of length N
         /// </summary>
-        public static NatPerm<N,T> Identity 
+        public static NatPerm<N,T> Identity
             => new NatPerm<N,T>(AllocIdentity());
 
         /// <summary>
         /// The empty permutation of length N
         /// </summary>
-        public static NatPerm<N,T> Empty 
+        public static NatPerm<N,T> Empty
             => new NatPerm<N,T>(new T[n]);
 
         [MethodImpl(Inline)]
         static T[] AllocIdentity()
-            => gmath.range<T>(default, convert<T>(n - 1)).ToArray();
+            => gmath.range<T>(default, force<T>(n - 1)).ToArray();
 
         /// <summary>
         /// Allocates an empty permutation
@@ -116,8 +116,8 @@ namespace Z0
             else
             {
                 var tmp = new T[n];
-                
-                var m = src.Length;                                
+
+                var m = src.Length;
                 for(var i=0; i< m; i++)
                     tmp[i] = src[i];
 
@@ -163,7 +163,7 @@ namespace Z0
         /// <param name="swap">The transposition to apply</param>
         [MethodImpl(Inline)]
         public NatPerm<N,T> Swap(in NatSwap<N> src)
-        {            
+        {
             perm.Swap(src.ToTuple());
             return this;
         }
@@ -174,7 +174,7 @@ namespace Z0
         /// <param name="swap">The transposition to apply</param>
         [MethodImpl(Inline)]
         public NatPerm<N,T> Swap(int i, int j)
-        {                        
+        {
             perm.Swap(i,j);
             return this;
         }
@@ -185,8 +185,8 @@ namespace Z0
         /// <param name="specs">The transpositions to apply</param>
         [MethodImpl(Inline)]
         public NatPerm<N,T> Swap(params (int i, int j)[] specs)
-        {            
-            
+        {
+
             perm.Swap(specs);
             return this;
         }
@@ -195,8 +195,8 @@ namespace Z0
         /// Effects a sequence of transpositions
         /// </summary>
         public NatPerm<N,T> Swap(params NatSwap<N>[] specs)
-        {            
-            for(var k=0; k<specs.Length; k++)            
+        {
+            for(var k=0; k<specs.Length; k++)
                 perm.Swap(specs[k].ToTuple());
             return this;
         }
@@ -205,8 +205,8 @@ namespace Z0
         /// Effects a sequence of transpositions
         /// </summary>
         public NatPerm<N,T> Swap(params NatSwap<N,T>[] specs)
-        {            
-            for(var k=0; k<specs.Length; k++)            
+        {
+            for(var k=0; k<specs.Length; k++)
                 perm.Swap(specs[k].ToTuple());
             return this;
         }
@@ -239,7 +239,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the inverse permutation t of the current permutation p 
+        /// Computes the inverse permutation t of the current permutation p
         /// such that p*t = t*p = I where I denotes the identity permutation
         /// </summary>
         [MethodImpl(Inline)]
@@ -255,7 +255,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public NatPerm<N,T> Compose(NatPerm<N,T> g)
             => new NatPerm<N,T>(perm.Compose(g.perm));
- 
+
         /// <summary>
         /// Applies a modular increment to the permutation in-place
         /// </summary>
@@ -282,7 +282,7 @@ namespace Z0
         /// <param name="start">The domain point at which evaluation will begin</param>
         [MethodImpl(Inline)]
         public PermCycle<T> Cycle(int start)
-            => perm.Cycle(convert<T>(start));
+            => perm.Cycle(force<T>(start));
 
         /// <summary>
         /// Computes a permutation cycle originating at a specified point
@@ -305,7 +305,7 @@ namespace Z0
          public string Format(int? colwidth = null)
             => perm.Format(colwidth);
 
-         public override string ToString() 
+         public override string ToString()
             =>throw new NotSupportedException();
 
          public override int GetHashCode()

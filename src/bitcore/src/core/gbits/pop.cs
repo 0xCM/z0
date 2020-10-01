@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class gbits
     {
@@ -40,7 +40,7 @@ namespace Z0
         [MethodImpl(Inline), Pop, Closures(Integers)]
         public static uint pop<T>(T x0, T x1, T x2)
             where T : unmanaged
-                => Bits.pop(convert<T,ulong>(x0), convert<T,ulong>(x1), convert<T,ulong>(x2));
+                => Bits.pop(force<T,ulong>(x0), force<T,ulong>(x1), force<T,ulong>(x2));
 
         /// <summary>
         /// Counts the number of enabled primal operand bits
@@ -49,7 +49,7 @@ namespace Z0
         [MethodImpl(Inline), Pop, Closures(Integers)]
         public static uint pop<T>(T x0, T x1, T x2, T x3)
             where T : unmanaged
-                => Bits.pop(convert<T,ulong>(x0), convert<T,ulong>(x1), convert<T,ulong>(x2), convert<T,ulong>(x3));
+                => Bits.pop(force<T,ulong>(x0), force<T,ulong>(x1), force<T,ulong>(x2), force<T,ulong>(x3));
 
         /// <summary>
         /// Counts the number of enabled primal operand bits
@@ -59,14 +59,14 @@ namespace Z0
         public static uint pop<T>(T x0, T x1, T x2, T x3,T x4, T x5, T x6, T x7)
             where T : unmanaged
                 => Bits.pop(
-                    convert<T,ulong>(x0),convert<T,ulong>(x1), convert<T,ulong>(x2), convert<T,ulong>(x3),
-                    convert<T,ulong>(x4),convert<T,ulong>(x5), convert<T,ulong>(x6), convert<T,ulong>(x7)
+                    force<T,ulong>(x0),force<T,ulong>(x1), force<T,ulong>(x2), force<T,ulong>(x3),
+                    force<T,ulong>(x4),force<T,ulong>(x5), force<T,ulong>(x6), force<T,ulong>(x7)
                     );
 
         [MethodImpl(Inline)]
         static uint pop_u<T>(T src)
             where T : unmanaged
-        {        
+        {
             if(typeof(T) == typeof(byte))
                  return Bits.pop(uint8(src));
             else if(typeof(T) == typeof(ushort))
@@ -75,14 +75,14 @@ namespace Z0
                  return Bits.pop(uint32(src));
             else if(typeof(T) == typeof(ulong))
                  return Bits.pop(uint64(src));
-            else 
+            else
                 return  pop_i(src);
-        } 
+        }
 
         [MethodImpl(Inline)]
         static uint pop_i<T>(T src)
             where T : unmanaged
-        {        
+        {
             if(typeof(T) == typeof(sbyte))
                  return Bits.pop(int8(src));
             else if(typeof(T) == typeof(short))

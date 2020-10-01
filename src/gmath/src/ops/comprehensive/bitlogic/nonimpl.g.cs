@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     using BL = BitLogic.Scalar;
 
@@ -29,9 +29,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<T>(BL.nonimpl(convert<T,uint>(a), convert<T,uint>(b)));
+                return force<T>(BL.nonimpl(force<T,uint>(a), force<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
-                return convert<T>(BL.nonimpl(convert<T,uint>(a), convert<T,uint>(b)));
+                return force<T>(BL.nonimpl(force<T,uint>(a), force<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(BL.nonimpl(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
@@ -45,9 +45,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return convert<T>(BL.nonimpl(convert<T,int>(a), convert<T,int>(b)));
+                return force<T>(BL.nonimpl(force<T,int>(a), force<T,int>(b)));
             else if(typeof(T) == typeof(short))
-                return convert<T>(BL.nonimpl(convert<T,int>(a), convert<T,int>(b)));
+                return force<T>(BL.nonimpl(force<T,int>(a), force<T,int>(b)));
             else if(typeof(T) == typeof(int))
                 return generic<T>(BL.nonimpl(int32(a), int32(b)));
             else if(typeof(T) == typeof(long))

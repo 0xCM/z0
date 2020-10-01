@@ -7,7 +7,7 @@ namespace Z0.Mkl
     using System;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     sealed class GaussianSampler<T> : Sampler<T, GaussianSpec<T>>
         where T : unmanaged
@@ -30,7 +30,7 @@ namespace Z0.Mkl
                 sample.gaussian(Source, float32(DistSpec.Mean), float32(DistSpec.StdDev), Spans.s32f(buffer));
             else if(typeof(T) == typeof(double))
                 sample.gaussian(Source, float64(DistSpec.Mean), float64(DistSpec.StdDev), Spans.s64f(buffer));
-            else 
+            else
                 throw Unsupported.define<T>();
 
             return buffer.Length;

@@ -9,10 +9,10 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     /// <summary>
-    /// Represents a polynomial 
+    /// Represents a polynomial
     /// </summary>
     /// <typeparam name="M">The coefficient modulus</typeparam>
     /// <typeparam name="N">The polynomial degree</typeparam>
@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// The canonical zero polynomial - with one term of order 0 with coefficient 0
         /// </summary>
-        public static readonly Polynomial<T> Zero = Define((As.zero<T>(), 0));
+        public static readonly Polynomial<T> Zero = Define((zero<T>(), 0));
 
         /// <summary>
         /// Constructs a polynomial from a sparse term sequence of scalar coefficients  paired with the
@@ -35,11 +35,11 @@ namespace Z0
         {
             var expanse = new Monomial<T>[terms[0].exp + 1];
             for(var i = 0; i < terms.Length; i++)
-                expanse[terms[i].exp] = terms[i];  
-            expanse.Reverse();              
+                expanse[terms[i].exp] = terms[i];
+            expanse.Reverse();
             return new Polynomial<T>(expanse);
         }
-        
+
         /// <summary>
         /// Initializes a polynomial from a dense sequence of monomials
         /// </summary>
@@ -58,7 +58,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => terms[0].Exp;
         }
-        
+
         /// <summary>
         /// The dense sequence of terms that define the polynomial
         /// </summary>
@@ -154,7 +154,7 @@ namespace Z0
         public string Format(char? variable = null)
         {
             var dst = new List<string>();
-            for(var i=0; i< terms.Length; i++)            
+            for(var i=0; i< terms.Length; i++)
                 if(terms[i].Nonzero)
                 {
                     if(dst.Count != 0)
@@ -167,7 +167,7 @@ namespace Z0
 
                     dst.Add(terms[i].Format(variable,true));
                 }
-            
+
             return dst.Concat();
         }
 
@@ -176,7 +176,7 @@ namespace Z0
     }
 
     /// <summary>
-    /// Represents a base-M polynomial of degree N over values of primal type T 
+    /// Represents a base-M polynomial of degree N over values of primal type T
     /// </summary>
     /// <typeparam name="M">The coefficient modulus</typeparam>
     /// <typeparam name="N">The polynomial degree</typeparam>
@@ -189,7 +189,7 @@ namespace Z0
         public readonly Monomial<M,T>[] Terms;
 
         public static readonly uint Degree = (uint)new N().NatValue;
-        
+
         /// <summary>
         /// The zero polynomial of degree N
         /// </summary>
@@ -198,7 +198,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Polynomial(params Monomial<M,T>[] terms)
         {
-            insist(terms[0].Exp == Degree);
+            insist(terms[0].Exp == Degree, "no");
             this.Terms = terms;
         }
 

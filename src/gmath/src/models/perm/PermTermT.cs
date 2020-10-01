@@ -10,19 +10,19 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Describes an indivual term of a permutation p: the point of evaluation i and its image p(i)
+    /// Describes an individual term of a permutation p: the point of evaluation i and its image p(i)
     /// </summary>
     public readonly struct PermTerm<T>
         where T : unmanaged
     {
         /// <summary>
-        /// The point at which the permuation is evaluated
+        /// The point at which the permutation is evaluated
         /// </summary>
         public readonly T Source;
 
         /// <summary>
-        /// The result of evaluating the permuation over the source
-        /// </summary>                
+        /// The result of evaluating the permutation over the source
+        /// </summary>
         public readonly T Target;
 
         [MethodImpl(Inline)]
@@ -39,7 +39,7 @@ namespace Z0
             this.Source = src;
             this.Target = dst;
         }
-        
+
         public bool IsDegenerate
             => gmath.eq(Source,Target);
 
@@ -54,7 +54,7 @@ namespace Z0
         public (T i, T j) ToTuple()
             => (Source,Target);
 
-        public override string ToString() 
+        public override string ToString()
             => $"{Source} -> {Target}";
     }
 }

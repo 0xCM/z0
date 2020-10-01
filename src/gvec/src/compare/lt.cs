@@ -13,17 +13,17 @@ namespace Z0
 
     partial class gvec
     {
-        [MethodImpl(Inline), Op, Closures(Integers& (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector128<T> vlt<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vlt_u(x,y);
 
-        [MethodImpl(Inline), Op, Closures(Integers& (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector256<T> vlt<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vlt_u(x,y);
 
-        [MethodImpl(Inline), Op, Closures(Integers& (~NumericKind.U64))]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static Vector512<T> vlt<T>(in Vector512<T> x, in Vector512<T> y)
             where T : unmanaged
                 => (vlt(x.Lo, y.Lo), vlt(x.Hi, y.Hi));

@@ -6,17 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gmath
-    {        
+    {
         [MethodImpl(Inline), Max, Closures(Integers)]
         public static T max<T>(T a, T b)
             where T : unmanaged
                 => max_u(a,b);
-        
+
         [MethodImpl(Inline)]
         static T max_u<T>(T a, T b)
             where T : unmanaged
@@ -45,7 +45,7 @@ namespace Z0
                  return generic<T>(math.max(int32(a), int32(b)));
             else if(typeof(T) == typeof(long))
                  return generic<T>(math.max(int64(a), int64(b)));
-            else 
+            else
                 return gfp.max(a,b);
         }
     }

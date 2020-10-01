@@ -6,7 +6,7 @@ namespace Z0.Mkl
 {
     using System;
 
-    using static Memories;
+    using static z;
 
     partial class mkl
     {
@@ -22,8 +22,8 @@ namespace Z0.Mkl
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var m = nati<M>();
-            var n = nati<N>();
+            var m = nat32i<M>();
+            var n = nat32i<N>();
             var lda = n;
             CBLAS.cblas_dgemv(RowMajor, NoTranspose, m, n, alpha: 1.0, ref head(A), lda, ref head(x), incX: 1, beta: 0, ref head(y), incY: 1);
             return ref y;
@@ -41,8 +41,8 @@ namespace Z0.Mkl
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var m = nati<M>();
-            var n = nati<N>();
+            var m = nat32i<M>();
+            var n = nat32i<N>();
             var lda = n;
             CBLAS.cblas_sgemv(RowMajor, NoTranspose, m, n, alpha: 1f, ref head(A), lda, ref head(x), incX: 1, beta: 0, ref head(y), incY: 1);
             return ref y;

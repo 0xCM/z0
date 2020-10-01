@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gmath
     {
@@ -16,15 +16,15 @@ namespace Z0
         public static T square<T>(T a)
             where T : unmanaged
                 => square_u(a);
-                
+
         [MethodImpl(Inline)]
         static T square_u<T>(T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<T>(math.square(convert<T,uint>(a)));
+                return force<T>(math.square(force<T,uint>(a)));
             else if(typeof(T) == typeof(ushort))
-                return convert<T>(math.square(convert<T,uint>(a)));
+                return force<T>(math.square(force<T,uint>(a)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(math.square(uint32(a)));
             else if(typeof(T) == typeof(ulong))
@@ -38,9 +38,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return convert<T>(math.square(convert<T,int>(a)));
+                return force<T>(math.square(force<T,int>(a)));
             else if(typeof(T) == typeof(short))
-                return convert<T>(math.square(convert<T,int>(a)));
+                return force<T>(math.square(force<T,int>(a)));
             else if(typeof(T) == typeof(int))
                  return generic<T>(math.square(int32(a)));
             else if(typeof(T) == typeof(long))

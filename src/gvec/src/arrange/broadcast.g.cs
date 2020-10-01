@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Root;
-    using static V0;
+    using static z;
 
     partial class gvec
     {
@@ -30,8 +29,8 @@ namespace Z0
             var buffer = z.vzero<T>(w);
             ref var dst = ref z.vref(ref buffer);
             var length = min(count, bitsize<S>());
-            for(var i=0; i<length; i++)
-                seek(ref dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
+            for(var i=0u; i<length; i++)
+                seek(dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
             return buffer;
         }
 
@@ -51,8 +50,8 @@ namespace Z0
             var buffer = z.vzero<T>(w);
             ref var dst = ref z.vref(ref buffer);
             var length = min(count, bitsize<S>());
-            for(var i=0; i<length; i++)
-                seek(ref dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
+            for(var i=0u; i<length; i++)
+                seek(dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
             return buffer;
         }
 

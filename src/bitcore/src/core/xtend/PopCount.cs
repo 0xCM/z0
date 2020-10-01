@@ -8,11 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
-    
+
     partial class XTend
-    {    
-        [MethodImpl(Inline)]   
+    {
+        [MethodImpl(Inline)]
         public static ulong PopCount(this Span<byte> src)
             => gbits.pop(src.ReadOnly());
     }

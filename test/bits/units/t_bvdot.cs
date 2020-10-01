@@ -242,8 +242,8 @@ namespace Z0
                 ClaimNumeric.lteq(x.ToBitString().Nlz(), x.Width);
 
                 var a = x % y;
-                var xc = x.ToBitCells();
-                var yc = y.ToBitCells();
+                var xc = x.ToBitBlock();
+                var yc = y.ToBitBlock();
                 var b = xc % yc;
                 ClaimNumeric.Eq(a,b);
             }

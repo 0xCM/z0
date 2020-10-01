@@ -10,6 +10,17 @@ namespace Z0
     using static Konst;
     using static z;
 
+    public interface IScalarBits<T>
+        where T : unmanaged
+    {
+        /// <summary>
+        /// The value over which the bitvector is defined
+        /// </summary>
+        T Scalar {get;}
+
+        TypeWidth Width => (TypeWidth)z.bitwidth<T>();
+    }
+
     public interface IBitVector : ITextual<IBitVector,BitFormat>
     {
         /// <summary>

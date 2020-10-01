@@ -6,21 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;    
-        
+
+    using static Konst;
+    using static z;
+
     partial class fspan
-    {                
+    {
         [MethodImpl(Inline), Ceil, Closures(Floats)]
         public static Span<T> ceil<T>(ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
         {
             var count = math.min(src.Length, dst.Length);
-            ref var output = ref head(dst);
-            ref readonly var input = ref head(src);
+            ref var output = ref first(dst);
+            ref readonly var input = ref first(src);
             for(var i =0; i<count; i++)
-                seek(ref output, i) = gfp.ceil(skip(input, i));
+                seek(output, i) = gfp.ceil(skip(input, i));
             return dst;
         }
 
@@ -29,10 +29,10 @@ namespace Z0
             where T : unmanaged
         {
             var count = src.Length;
-            ref var a = ref head(src);
-            ref readonly var b = ref head(src);
+            ref var a = ref first(src);
+            ref readonly var b = ref first(src);
             for(var i =0; i<count; i++)
-                seek(ref a, i) = gfp.ceil(skip(b, i));
+                seek(a, i) = gfp.ceil(skip(b, i));
             return src;
         }
     }

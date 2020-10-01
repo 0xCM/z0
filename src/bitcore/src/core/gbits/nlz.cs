@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class gbits
-    {        
+    {
         /// <summary>
         /// Counts the number of leading zero bits the source
         /// </summary>
@@ -28,7 +28,7 @@ namespace Z0
                  return Bits.nlz(uint32(src));
             else if(typeof(T) == typeof(ulong))
                  return Bits.nlz(uint64(src));
-            else 
+            else
                 throw Unsupported.define<T>();
         }
     }

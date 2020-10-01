@@ -227,7 +227,6 @@ namespace Z0
                 yield return Unsafe.As<double,T>(ref i);
         }
 
-
         /// <summary>
         /// Returns 1 if the left and right spans contain identical content and 0 otherwise
         /// </summary>

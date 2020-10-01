@@ -8,10 +8,10 @@ namespace Z0.Mkl
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class mkl
-    {            
+    {
 		/// <summary>
 		/// Computes dst[i] = lhs[i] + rhs[i] for i = 0...n-1
 		/// </summary>
@@ -48,7 +48,7 @@ namespace Z0.Mkl
         public static ref Block256<N,float> add<N>(Block256<N,float> lhs, Block256<N,float> rhs, ref Block256<N,float> dst)
             where N : unmanaged, ITypeNat
         {
-            VmlImport.vsAdd(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));
+            VmlImport.vsAdd(nat32i<N>(), ref head(lhs), ref head(rhs), ref head(dst));
             return ref dst;
         }
 
@@ -62,7 +62,7 @@ namespace Z0.Mkl
         public static ref Block256<N,double> add<N>(Block256<N,double> lhs, Block256<N,double> rhs, ref Block256<N,double> dst)
             where N : unmanaged, ITypeNat
         {
-            VmlImport.vdAdd(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));
+            VmlImport.vdAdd(nat32i<N>(), ref head(lhs), ref head(rhs), ref head(dst));
             return ref dst;
         }
 
@@ -102,7 +102,7 @@ namespace Z0.Mkl
         public static ref Block256<N,float> sub<N>(Block256<N,float> lhs, Block256<N,float> rhs, ref Block256<N,float> dst)
             where N : unmanaged, ITypeNat
         {
-            VmlImport.vsSub(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));
+            VmlImport.vsSub(nat32i<N>(), ref head(lhs), ref head(rhs), ref head(dst));
             return ref dst;
         }
 
@@ -116,7 +116,7 @@ namespace Z0.Mkl
         public static ref Block256<N,double> sub<N>(Block256<N,double> lhs, Block256<N,double> rhs, ref Block256<N,double> dst)
             where N : unmanaged, ITypeNat
         {
-            VmlImport.vdSub(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));
+            VmlImport.vdSub(nat32i<N>(), ref head(lhs), ref head(rhs), ref head(dst));
             return ref dst;
         }
 
@@ -156,7 +156,7 @@ namespace Z0.Mkl
         public static ref Block256<N,float> mul<N>(Block256<N,float> lhs, Block256<N,float> rhs, ref Block256<N,float> dst)
             where N : unmanaged, ITypeNat
         {
-            VmlImport.vsMul(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));
+            VmlImport.vsMul(nat32i<N>(), ref head(lhs), ref head(rhs), ref head(dst));
             return ref dst;
         }
 
@@ -170,7 +170,7 @@ namespace Z0.Mkl
         public static ref Block256<N,double> mul<N>(Block256<N,double> lhs, Block256<N,double> rhs, ref Block256<N,double> dst)
             where N : unmanaged, ITypeNat
         {
-            VmlImport.vdMul(nati<N>(), ref head(lhs), ref head(rhs), ref head(dst));
+            VmlImport.vdMul(nat32i<N>(), ref head(lhs), ref head(rhs), ref head(dst));
             return ref dst;
         }
 
@@ -201,7 +201,7 @@ namespace Z0.Mkl
         }
 
 		/// <summary>
-		/// Computes dst[i] = lhs[i] % rhs[i] for i = 0...n-1 
+		/// Computes dst[i] = lhs[i] % rhs[i] for i = 0...n-1
 		/// </summary>
 		/// <param name="lhs">The left vector</param>
   		/// <param name="rhs">The right vector</param>
@@ -212,7 +212,7 @@ namespace Z0.Mkl
             VmlImport.vsFmod(length(lhs,rhs), ref head(lhs), ref head(rhs), ref head(dst));
             return ref dst;
         }
-        
+
 		/// <summary>
 		/// Computes dst[i] = lhs[i] % rhs[i] for i = 0...n-1
 		/// </summary>
@@ -259,7 +259,7 @@ namespace Z0.Mkl
         }
 
         /// <summary>
-        /// Truncates the source vector and deposits the result in trunc and the fractional part 
+        /// Truncates the source vector and deposits the result in trunc and the fractional part
         /// that was removed when producing the truncation
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -273,7 +273,7 @@ namespace Z0.Mkl
         }
 
         /// <summary>
-        /// Truncates the source vector and deposits the result in trunc and the fractional part 
+        /// Truncates the source vector and deposits the result in trunc and the fractional part
         /// that was removed when producing the truncation
         /// </summary>
         /// <param name="src">The source vector</param>
@@ -285,10 +285,10 @@ namespace Z0.Mkl
             VmlImport.vdModf(length(lhs,rhs), ref head(lhs), ref head(rhs), ref head(dst));
             return ref dst;
         }
-        
+
 
 		/// <summary>
-		/// Computes dst[i] = remainder(lhs[i] / rhs[i]) for i = 0...n-1 
+		/// Computes dst[i] = remainder(lhs[i] / rhs[i]) for i = 0...n-1
 		/// </summary>
 		/// <param name="lhs">The left vector</param>
   		/// <param name="rhs">The right vector</param>
@@ -301,7 +301,7 @@ namespace Z0.Mkl
         }
 
 		/// <summary>
-		/// Computes dst[i] = remainder(lhs[i] / rhs[i]) for i = 0...n-1 
+		/// Computes dst[i] = remainder(lhs[i] / rhs[i]) for i = 0...n-1
 		/// </summary>
 		/// <param name="lhs">The left vector</param>
   		/// <param name="rhs">The right vector</param>
@@ -319,7 +319,7 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> frac(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> frac(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsFrac(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -331,7 +331,7 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> frac(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> frac(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdFrac(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -343,19 +343,19 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> square(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> square(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsSqr(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
-            
+
 		/// <summary>
 		/// Computes dst[i] = (src[i])^2 for i=0..n-1
 		/// </summary>
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> square(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> square(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdSqr(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -367,19 +367,19 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> sqrt(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> sqrt(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsSqrt(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
-            
+
 		/// <summary>
 		/// Computes dst[i] = (src[i])^(1/2) for i=0..n-1
 		/// </summary>
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> sqrt(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> sqrt(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdSqrt(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -391,19 +391,19 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> abs(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> abs(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsAbs(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
-            
+
 		/// <summary>
 		/// Computes dst[i] = |src[i]| for i = 0...n-1
 		/// </summary>
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> abs(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> abs(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdAbs(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -515,14 +515,14 @@ namespace Z0.Mkl
         }
 
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> copySign(RowVector256<float> a, RowVector256<float> b, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> copySign(RowVector256<float> a, RowVector256<float> b, ref RowVector256<float> dst)
         {
             VmlImport.vsCopySign(dst.Length, ref head(a), ref head(b), ref head(dst));
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> copySign(RowVector256<double> a, RowVector256<double> b, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> copySign(RowVector256<double> a, RowVector256<double> b, ref RowVector256<double> dst)
         {
             VmlImport.vdCopySign(dst.Length, ref head(a), ref head(b), ref head(dst));
             return ref dst;
@@ -534,7 +534,7 @@ namespace Z0.Mkl
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> next(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> next(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsNextAfter(dst.Length, ref head(src), ref head(src), ref head(dst));
             return ref dst;
@@ -546,7 +546,7 @@ namespace Z0.Mkl
         /// <param name="src">The source vector</param>
         /// <param name="dst">The target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> next(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> next(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdNextAfter(dst.Length, ref head(src), ref head(src), ref head(dst));
             return ref dst;
@@ -558,7 +558,7 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> round(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> round(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsRound(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -570,7 +570,7 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> round(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> round(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdRound(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -609,7 +609,7 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> trunc(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> trunc(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsTrunc(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -621,7 +621,7 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> trunc(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> trunc(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdTrunc(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -659,7 +659,7 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> floor(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> floor(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsFloor(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -671,7 +671,7 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> floor(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> floor(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdFloor(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -683,7 +683,7 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> ceil(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> ceil(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsCeil(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -695,7 +695,7 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> ceil(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> ceil(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdCeil(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -707,26 +707,26 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> recip(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> recip(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsInv(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
-            
+
 		/// <summary>
 		/// Computes dst[i] = 1/src[i] for i=0..n-1
 		/// </summary>
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> recip(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> recip(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdInv(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
 
 		/// <summary>
-		/// Computes dst[i] = lhs[i]^rhs[i] for i = 0...n-1 
+		/// Computes dst[i] = lhs[i]^rhs[i] for i = 0...n-1
 		/// </summary>
 		/// <param name="lhs">The left vector</param>
   		/// <param name="rhs">The right vector</param>
@@ -739,7 +739,7 @@ namespace Z0.Mkl
         }
 
 		/// <summary>
-		/// Computes dst[i] = lhs[i]^rhs[i] for i = 0...n-1 
+		/// Computes dst[i] = lhs[i]^rhs[i] for i = 0...n-1
 		/// </summary>
 		/// <param name="lhs">The left vector</param>
   		/// <param name="rhs">The right vector</param>
@@ -752,7 +752,7 @@ namespace Z0.Mkl
         }
 
 		/// <summary>
-		/// Computes dst[i] = src[i]^exp for i = 0...n-1 
+		/// Computes dst[i] = src[i]^exp for i = 0...n-1
 		/// </summary>
 		/// <param name="src">The left vector</param>
   		/// <param name="exp">The right scalar</param>
@@ -765,7 +765,7 @@ namespace Z0.Mkl
         }
 
 		/// <summary>
-		/// Computes dst[i] = src[i]^exp for i = 0...n-1 
+		/// Computes dst[i] = src[i]^exp for i = 0...n-1
 		/// </summary>
 		/// <param name="src">The left vector</param>
   		/// <param name="exp">The right scalar</param>
@@ -783,43 +783,43 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> exp(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> exp(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsExp(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
-            
+
 		/// <summary>
 		/// Computes dst[i] = e^src[i] for i=0..n-1
 		/// </summary>
 		/// <param name="src">The source array</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> exp(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> exp(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdExp(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
-       
+
  		/// <summary>
 		/// Computes dst[i] = 2^src[i] for i=0..n-1
 		/// </summary>
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> exp2(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> exp2(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsExp2(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
-            
+
 		/// <summary>
 		/// Computes dst[i] = 2^src[i] for i=0..n-1
 		/// </summary>
 		/// <param name="src">The source array</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> exp2(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> exp2(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdExp2(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -831,19 +831,19 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> exp10(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> exp10(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsExp10(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
-            
+
 		/// <summary>
 		/// Computes dst[i] = 10^src[i] for i=0..n-1
 		/// </summary>
 		/// <param name="src">The source array</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> exp10(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> exp10(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdExp10(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -855,19 +855,19 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> ln(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> ln(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsLn(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
-            
+
 		/// <summary>
 		/// Computes dst[i] =ln(src[i]) for i=0..n-1 where ln denotes the natural log
 		/// </summary>
 		/// <param name="src">The source array</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> ln(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> ln(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdLn(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -879,19 +879,19 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> log2(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> log2(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsLog2(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
-            
+
 		/// <summary>
 		/// Computes dst[i] =log2(src[i]) for i=0..n-1 where log2 denotes the base 2 log
 		/// </summary>
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> log2(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> log2(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdLog2(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -903,19 +903,19 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> log10(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> log10(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsLog10(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
-            
+
 		/// <summary>
 		/// Computes dst[i] =log10(src[i]) for i=0..n-1 where log10 denotes the base 10 log
 		/// </summary>
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> log10(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> log10(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdLog10(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -927,19 +927,19 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> erf(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> erf(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsErf(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
-            
+
 		/// <summary>
 		/// Computes the error function dst[i] =erf(src[i]) for i=0..n-1
 		/// </summary>
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> erf(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> erf(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdErf(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -951,19 +951,19 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> erfInv(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> erfInv(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsErfInv(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
-            
+
 		/// <summary>
 		/// Computes the inverse error function dst[i] =erfInv(src[i]) for i=0..n-1
 		/// </summary>
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> erfInv(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> erfInv(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdErfInv(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -975,31 +975,31 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> erfc(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> erfc(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsErfc(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
- 
+
 		/// <summary>
 		/// Computes the complementary error function dst[i] =erfc(src[i]) for i=0..n-1
 		/// </summary>
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> erfc(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> erfc(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdErfc(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
- 
+
 		/// <summary>
 		/// Computes the inverse complementary error function dst[i] =erfcInv(src[i]) for i=0..n-1
 		/// </summary>
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> erfcInv(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> erfcInv(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsErfcInv(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -1011,7 +1011,7 @@ namespace Z0.Mkl
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> erfcInv(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> erfcInv(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdErfcInv(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -1024,7 +1024,7 @@ namespace Z0.Mkl
         /// <param name="src">The source vector containing the lower integration bounds</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> expInt(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> expInt(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsExpInt1(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -1037,7 +1037,7 @@ namespace Z0.Mkl
         /// <param name="src">The source vector containing the lower integration bounds</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> expInt(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> expInt(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdExpInt1(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -1049,19 +1049,19 @@ namespace Z0.Mkl
 		/// <param name="src">The source vectro</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> cdfNorm(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> cdfNorm(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsCdfNorm(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
-            
+
 		/// <summary>
 		/// Computes dst[i] = cdfnorm(src[i]) for i=0..n-1
 		/// </summary>
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> cdfNorm(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> cdfNorm(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdCdfNorm(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -1073,19 +1073,19 @@ namespace Z0.Mkl
 		/// <param name="src">The source vectro</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> cdfNormInv(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> cdfNormInv(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsCdfNormInv(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
-            
+
 		/// <summary>
 		/// Computes dst[i] = cdfnormInv(src[i]) for i=0..n-1
 		/// </summary>
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> cdfNormInv(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> cdfNormInv(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdCdfNormInv(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -1097,19 +1097,19 @@ namespace Z0.Mkl
 		/// <param name="src">The source vectro</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> gamma(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> gamma(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsTGamma(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
-            
+
 		/// <summary>
 		/// Computes the gamma function: dst[i] = gamma(src[i])
 		/// </summary>
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> gamma(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> gamma(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdTGamma(src.Length, ref head(src), ref head(dst));
             return ref dst;
@@ -1121,19 +1121,19 @@ namespace Z0.Mkl
 		/// <param name="src">The source vectro</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<float> lgamma(RowVector256<float> src, ref RowVector256<float> dst)        
+        public static ref RowVector256<float> lgamma(RowVector256<float> src, ref RowVector256<float> dst)
         {
             VmlImport.vsLGamma(src.Length, ref head(src), ref head(dst));
             return ref dst;
         }
-            
+
 		/// <summary>
 		/// Computes of natural logarithm of the absolute value of gamma function: dst[i] = lgamma(src[i])
 		/// </summary>
 		/// <param name="src">The source vector</param>
 		/// <param name="dst">The caller-allocated target vector</param>
         [MethodImpl(Inline)]
-        public static ref RowVector256<double> lgamma(RowVector256<double> src, ref RowVector256<double> dst)        
+        public static ref RowVector256<double> lgamma(RowVector256<double> src, ref RowVector256<double> dst)
         {
             VmlImport.vdLGamma(src.Length, ref head(src), ref head(dst));
             return ref dst;

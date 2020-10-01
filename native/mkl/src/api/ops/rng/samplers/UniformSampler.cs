@@ -7,7 +7,7 @@ namespace Z0.Mkl
     using System;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     sealed class UniformSampler<T> : Sampler<T, UniformSpec<T>>
         where T : unmanaged
@@ -26,7 +26,7 @@ namespace Z0.Mkl
                 sample.uniform(Source, float32(DistSpec.Min), float32(DistSpec.Max), Spans.s32f(buffer));
             else if(typeof(T) == typeof(double))
                 sample.uniform(Source, float64(DistSpec.Min), float64(DistSpec.Max), Spans.s64f(buffer));
-            else 
+            else
                 throw Unsupported.define<T>();
 
             return buffer.Length;

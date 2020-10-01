@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     using BL = BitLogic.Scalar;
 
@@ -48,7 +48,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                  return generic<T>(BL.not(int64(a)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

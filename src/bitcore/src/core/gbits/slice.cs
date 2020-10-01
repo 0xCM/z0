@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class gbits
     {
@@ -22,7 +22,7 @@ namespace Z0
         public static T slice<T>(T src, byte start, byte length)
             where T : unmanaged
                 => slice_u(src,start,length);
-            
+
         [MethodImpl(Inline)]
         static T slice_i<T>(T lhs, byte start, byte length)
             where T : unmanaged
@@ -37,7 +37,7 @@ namespace Z0
                 return generic<T>(Bits.slice(int64(lhs), start, length));
             else
                 throw Unsupported.define<T>();
-        }           
+        }
 
         [MethodImpl(Inline)]
         static T slice_u<T>(T lhs, byte start, byte length)
@@ -53,6 +53,6 @@ namespace Z0
                 return generic<T>(Bits.slice(uint64(lhs), start, length));
             else
                 return slice_i(lhs,start,length);
-        }           
+        }
     }
 }

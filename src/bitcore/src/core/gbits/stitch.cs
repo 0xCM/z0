@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class gbits
     {
@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="rdx">The rightward displacement</param>
         /// <typeparam name="T">The primal type</typeparam>
         /// <remarks>
-        /// The way to think about this function is as follows: 
+        /// The way to think about this function is as follows:
         /// The left value is displaced upwards, shifting in zeros, and is combined
         /// with the right value after it is displaced downwards.
         /// This composite is then displaced downwards the same amount by which the
@@ -39,7 +39,7 @@ namespace Z0
                 return generic<T>(Bits.stitch(uint32(left), ldx, uint32(right), rdx));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.stitch(uint64(left), ldx, uint64(right), rdx));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
     }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     public readonly struct @enum<E> : IEnum<E>, IEquatable<@enum<E>>
         where E : unmanaged, Enum

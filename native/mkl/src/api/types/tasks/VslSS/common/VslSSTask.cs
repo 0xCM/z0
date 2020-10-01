@@ -6,9 +6,9 @@ namespace Z0.Mkl
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using static As;
+    using static z;
 
     public interface IVslSSTask<T> : IMklTask<T>
         where T : unmanaged
@@ -33,7 +33,7 @@ namespace Z0.Mkl
     {
         public VslSSTask(int Dim,  T[] Samples, bool autofill = false)
         {
-            this.Storage = VslSSMatrixStorage.VSL_SS_MATRIX_STORAGE_ROWS;            
+            this.Storage = VslSSMatrixStorage.VSL_SS_MATRIX_STORAGE_ROWS;
             this.Dim = Dim;
             this.Samples = Samples;
             this.SampleCount = Samples.Length / Dim;
@@ -56,7 +56,7 @@ namespace Z0.Mkl
 
         public VslSSTask(int Dim,  T[] Samples, T[] Weights, int[] Indices)
         {
-            
+
             this.Storage = VslSSMatrixStorage.VSL_SS_MATRIX_STORAGE_ROWS;
             this.Dim = Dim;
             this.Samples = Samples;
@@ -78,22 +78,22 @@ namespace Z0.Mkl
         /// <summary>
         /// Defines the observations/samples over which the task will compute
         /// </summary>
-        public readonly T[] Samples;        
+        public readonly T[] Samples;
 
         /// <summary>
         /// Defines the weights applied to the sample vectors
         /// </summary>
         public readonly T[] Weights;
-                     
+
         /// <summary>
         /// Specifies the indices of the vector components that will be processed
-        /// </summary>             
+        /// </summary>
         public readonly int[] Indices;
 
-        ReadOnlySpan<T> IVslSSTask<T>.Samples 
+        ReadOnlySpan<T> IVslSSTask<T>.Samples
             => Samples;
 
-        int IVslSSTask<T>.Dimension 
+        int IVslSSTask<T>.Dimension
             => Dim;
 
         public override void Dispose()

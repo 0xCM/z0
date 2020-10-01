@@ -12,7 +12,7 @@ namespace Z0
     using System.Linq;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public static class DynamicImmediate
     {

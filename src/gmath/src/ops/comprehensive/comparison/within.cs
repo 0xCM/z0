@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class gmath
     {
@@ -29,9 +29,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return math.within(convert<T,uint>(a), convert<T,uint>(b), convert<T,uint>(delta));
+                return math.within(force<T,uint>(a), force<T,uint>(b), force<T,uint>(delta));
             else if(typeof(T) == typeof(ushort))
-                return math.within(convert<T,uint>(a), convert<T,uint>(b), convert<T,uint>(delta));
+                return math.within(force<T,uint>(a), force<T,uint>(b), force<T,uint>(delta));
             else if(typeof(T) == typeof(uint))
                 return math.within(uint32(a), uint32(b), uint32(delta));
             else if(typeof(T) == typeof(ulong))
@@ -45,9 +45,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return math.within(convert<T,int>(a), convert<T,int>(b), convert<T,int>(delta));
+                return math.within(force<T,int>(a), force<T,int>(b), force<T,int>(delta));
             else if(typeof(T) == typeof(short))
-                return math.within(convert<T,int>(a), convert<T,int>(b), convert<T,int>(delta));
+                return math.within(force<T,int>(a), force<T,int>(b), force<T,int>(delta));
             else if(typeof(T) == typeof(int))
                 return math.within(int32(a), int32(b), int32(delta));
             else if(typeof(T) == typeof(long))

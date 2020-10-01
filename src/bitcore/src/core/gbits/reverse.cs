@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
-    using static Memories;
-   
+    using static z;
+
     partial class gbits
-    {                        
+    {
         /// <summary>
         /// Reverses the bits in the source
         /// </summary>
@@ -29,7 +29,7 @@ namespace Z0
                 return generic<T>(Bits.reverse(uint32(src)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.reverse(uint64(src)));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
     }

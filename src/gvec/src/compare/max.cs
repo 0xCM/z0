@@ -9,16 +9,16 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static As;
+    using static z;
 
     partial class gvec
     {
-        [MethodImpl(Inline), Max, Closures(AllNumeric & (~NumericKind.U64))]
+        [MethodImpl(Inline), Max, Closures(AllNumeric)]
         public static Vector128<T> vmax<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
                 => vmax_u(x,y);
 
-        [MethodImpl(Inline), Max, Closures(AllNumeric& (~NumericKind.U64))]
+        [MethodImpl(Inline), Max, Closures(AllNumeric)]
         public static Vector256<T> vmax<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
                 => vmax_u(x,y);

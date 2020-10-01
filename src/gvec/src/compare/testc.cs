@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static As;
-    using static Typed;
+    using static z;
 
     partial class gvec
     {

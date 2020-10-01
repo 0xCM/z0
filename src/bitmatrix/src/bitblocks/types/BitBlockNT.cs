@@ -137,7 +137,7 @@ namespace Z0
         /// <param name="last">The linear index of the last bit</param>
         [MethodImpl(Inline)]
         public T TakeScalarBits(int first, int last)
-            => BitBlocks.bitseg(data, first,last);
+            => BitBlocks.segment(data, first,last);
 
         /// <summary>
         /// Extracts the represented data as a bitstring

@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
 
     partial class Bits
-    {                
+    {
         /// <summary>
         /// Replicates source bits [from..to] a specified number of times subject to the constraints imposed by the replicant type
         /// </summary>

@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gfp
     {
@@ -22,6 +22,6 @@ namespace Z0
                 return generic<T>(fmath.floor(float64(src)));
             else
                 throw Unsupported.define<T>();
-        }        
+        }
     }
 }

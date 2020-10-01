@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-                
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gmath
-    {        
+    {
         /// <summary>
         /// Subtracts the right value from the left
         /// </summary>
@@ -33,14 +33,14 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<T>(math.sub(convert<T,uint>(a), convert<T,uint>(b)));
+                return force<T>(math.sub(force<T,uint>(a), force<T,uint>(b)));
             else if(typeof(T) == typeof(ushort))
-                return convert<T>(math.sub(convert<T,uint>(a), convert<T,uint>(b)));
+                return force<T>(math.sub(force<T,uint>(a), force<T,uint>(b)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(math.sub(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.sub(uint64(a), uint64(b)));
-            else 
+            else
                 return sub_i(a,b);
         }
 
@@ -49,14 +49,14 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return convert<T>(math.sub(convert<T,int>(a), convert<T,int>(b)));
+                return force<T>(math.sub(force<T,int>(a), force<T,int>(b)));
             else if(typeof(T) == typeof(short))
-                return convert<T>(math.sub(convert<T,int>(a), convert<T,int>(b)));
+                return force<T>(math.sub(force<T,int>(a), force<T,int>(b)));
             else if(typeof(T) == typeof(int))
                  return generic<T>(math.sub(int32(a), int32(b)));
             else if(typeof(T) == typeof(long))
                  return generic<T>(math.sub(int64(a), int64(b)));
-            else 
+            else
                 return gfp.sub(a,b);
         }
     }

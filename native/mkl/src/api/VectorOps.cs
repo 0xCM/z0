@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-        
+    using System.Runtime.CompilerServices;
+
     using Z0.Mkl;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     public static class VectorOps
-    {             
+    {
         /// <summary>
         /// Add the first vector to the second and populates the third with the result
         /// </summary>
@@ -25,7 +25,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref Block256<N,T> Add<N,T>(in Block256<N,T> x, in Block256<N,T> y, ref Block256<N,T> z)
             where N : unmanaged, ITypeNat
-            where T : unmanaged    
+            where T : unmanaged
         {
             if(typeof(T) == typeof(float))
             {
@@ -38,7 +38,7 @@ namespace Z0
                 mkl.add(x.As<double>(), y.As<double>(), ref dst);
             }
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
 
             return ref z;
         }
@@ -54,7 +54,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return generic<T>(mkl.dot(x.As<double>(), y.As<double>()));
             else
-                return gspan.dot<T>(x.Unsized, y.Unsized);                
-        }        
+                return gspan.dot<T>(x.Unsized, y.Unsized);
+        }
     }
 }

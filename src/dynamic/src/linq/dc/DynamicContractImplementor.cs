@@ -11,7 +11,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Generates an implementation of a specified interface type that delegates to an implementation

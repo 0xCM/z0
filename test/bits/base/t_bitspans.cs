@@ -32,25 +32,6 @@ namespace Z0
             }
         }
 
-        protected void bitblock_disable_check<N,T>(N n = default, T rep = default)
-            where T : unmanaged
-            where N : unmanaged, ITypeNat
-        {
-            for(var k=0; k<RepCount; k++)
-            {
-                var bc = Random.BitBlock<N,T>();
-                var bs = bc.ToBitString();
-                Claim.almost(bc.Width, n.NatValue);
-                Claim.eq(bc.Width, bs.Length);
-                for(var i=0; i<bc.Width; i+= 2)
-                {
-                    bc[i] = Bit32.Off;
-                    bs[i] = Bit32.Off;
-                }
-
-                Claim.eq(bc.ToBitString(),bs);
-            }
-        }
 
         /// <summary>
         /// Verifies the generic bit cell dot product operation
@@ -70,28 +51,6 @@ namespace Z0
             }
         }
 
-        /// <summary>
-        /// Verifies the natural bit cell dot product operation
-        /// </summary>
-        /// <param name="n">The bitvector width</param>
-        /// <param name="zero">A scalar representative</param>
-        /// <typeparam name="N">The bitvector width type</typeparam>
-        /// <typeparam name="T">The scalar type</typeparam>
-        protected void bitblock_dot_check<N,T>(N n = default, T zero = default)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            for(var i=0; i<RepCount; i++)
-            {
-                var x = Random.BitBlock<N,T>();
-                var y = Random.BitBlock<N,T>();
-                Bit32 a = x % y;
-                var b = BitBlocks.modprod(x,y);
-                if(a != b)
-                    Notify($"nbc {n}x{ApiIdentity.numeric<T>()} is a problem");
-                Claim.Require(a == b);
-            }
-        }
 
 
         protected void check_bitblock_range<N,T>(N _ = default, T t = default)
@@ -121,28 +80,6 @@ namespace Z0
             }
         }
 
-        protected void check_bitblock_create<T>(int bitcount)
-            where T : unmanaged
-        {
-            var segcount = (int)GridCells.mincells<T>((ulong)bitcount);
-
-            if(DiagnosticMode)
-                term.print($"Executing {caller()}: {bitcount} bits covered by {segcount} segments of kind {typeof(T).DisplayName()}");
-
-            var src = Random.Span<T>(RepCount);
-
-            for(var i=0; i<RepCount; i += segcount)
-            {
-                var data = src.Slice(i, segcount);
-                var bc = data.ToBitCells(bitcount);
-                var bs = data.ToBitString(bitcount);
-                Claim.eq(bc.BitCount, bitcount);
-                Claim.eq(bs.Length, bitcount);
-
-                for(var j=0; j<bc.BitCount; j++)
-                    Claim.Eq(bc[j], bs[j]);
-            }
-        }
 
         protected void bitblock_pop_check<N,T>(N n = default)
             where T : unmanaged

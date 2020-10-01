@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
-        
+
+    using static Konst;
+    using static z;
+
     partial class fspan
-    {                
+    {
         [MethodImpl(Inline), Avg, Closures(Floats)]
         public static T avg<T>(ReadOnlySpan<T> src, bool @checked)
             where T : unmanaged
@@ -20,9 +20,9 @@ namespace Z0
                 return generic<T>(fmath.avg(Spans.s32f(src), @checked));
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.avg(Spans.s64f(src), @checked));
-            else            
-                throw Unsupported.define<T>();
-        }           
+            else
+                throw no<T>();
+        }
 
         [MethodImpl(Inline), Avg, Closures(Floats)]
         public static T avg<T>(ReadOnlySpan<T> src)

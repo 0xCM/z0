@@ -21,7 +21,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return fmath.nonz(float64(a));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

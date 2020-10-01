@@ -74,6 +74,6 @@ namespace Z0
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Op]
         public static BitState msb(long src)
-            => As.testbit(src,63);
+            => z.testbit(src,63);
     }
 }

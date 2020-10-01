@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class gbits
     {
@@ -23,10 +23,10 @@ namespace Z0
             where T : unmanaged
         {
             var n = bitwidth<T>();
-            ref var loc = ref seek(ref head(dst), offset);
+            ref var loc = ref seek(first(dst), offset);
 
             for(var i=0; i<n; i++)
-                seek(ref loc, i) = (byte)testbit(src, (byte)i);
+                seek(loc, i) = (byte)testbit(src, (byte)i);
             return dst;
         }
 

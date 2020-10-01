@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gmath
     {
@@ -36,7 +36,7 @@ namespace Z0
                 return math.signum(uint64(a));
             else
                 return signum_i(a);
-       }           
+       }
 
         [MethodImpl(Inline)]
         static SignKind signum_i<T>(T a)
@@ -52,6 +52,6 @@ namespace Z0
                 return math.signum(int64(a));
             else
                 return gfp.signum(a);
-        }        
+        }
     }
 }

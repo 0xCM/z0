@@ -6,14 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gfp
     {
 
-        [MethodImpl(Inline), Op, Closures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T sub<T>(T a, T b)
             where T : unmanaged
         {
@@ -21,7 +21,7 @@ namespace Z0
                 return generic<T>(fmath.sub(float32(a), float32(b)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.sub(float64(a), float64(b)));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
     }

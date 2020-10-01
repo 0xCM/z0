@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gmath
     {
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T nonz<T>(T src, T alt)
             where T : unmanaged
-                => nonz_u(src, alt); 
+                => nonz_u(src, alt);
 
         [MethodImpl(Inline)]
         static T nonz_u<T>(T a, T alt)
@@ -35,7 +35,7 @@ namespace Z0
                  return generic<T>(math.nonz(uint32(a), uint32(alt)));
             else if(typeof(T) == typeof(ulong))
                  return generic<T>(math.nonz(uint64(a), uint64(alt)));
-            else 
+            else
                 return nonz_i(a, alt);
         }
 
@@ -51,10 +51,10 @@ namespace Z0
                  return generic<T>(math.nonz(int32(a), int32(alt)));
             else if(typeof(T) == typeof(long))
                  return generic<T>(math.nonz(int64(a), int64(alt)));
-            else 
+            else
                 return nonz_f(a,alt);
         }
-    
+
         [MethodImpl(Inline)]
         static T nonz_f<T>(T a, T alt)
             where T : unmanaged
@@ -63,8 +63,8 @@ namespace Z0
                 return generic<T>(fmath.nonz(float32(a),float32(alt)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.nonz(float64(a),float64(alt)));
-            else            
+            else
                 throw Unsupported.define<T>();
-        }     
+        }
     }
 }

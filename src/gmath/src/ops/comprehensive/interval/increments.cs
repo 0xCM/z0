@@ -57,7 +57,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Produces a monotonic sequence k, k + 1, ... k + (N - 1) where N denoties the length of the target
+        /// Produces a monotonic sequence k, k + 1, ... k + (N - 1) where N denotes the length of the target
         /// </summary>
         /// <param name="k">The value of the first term</param>
         /// <param name="dst">The target span</param>

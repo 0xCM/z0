@@ -13,7 +13,6 @@ namespace Z0.Dynamics
     using System.Reflection;
 
     using static Konst;
-    using static Memories;
 
     using X = System.Linq.Expressions;
 
@@ -23,17 +22,17 @@ namespace Z0.Dynamics
             => new ModelSpecifier<M,T>(provider);
     }
 
-    public class ModelSpecifier<T> : 
-        IModelSpecifier, 
-        IQueryable<T>, 
-        IQueryable, 
-        IEnumerable<T>, 
-        IEnumerable, 
-        IOrderedQueryable<T>, 
+    public class ModelSpecifier<T> :
+        IModelSpecifier,
+        IQueryable<T>,
+        IQueryable,
+        IEnumerable<T>,
+        IEnumerable,
+        IOrderedQueryable<T>,
         IOrderedQueryable
     {
         protected readonly IQueryProvider Provider;
-        
+
         protected readonly Expression Content;
 
         public ModelSpecifier(ModelQueryProvider provider)

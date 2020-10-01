@@ -8,7 +8,6 @@ namespace Z0.Dynamics
     using System.Linq;
 
     using static Konst;
-    using static Memories;
 
     /// <summary>
     /// Represents a binary operator

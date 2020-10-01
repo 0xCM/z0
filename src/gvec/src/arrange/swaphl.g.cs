@@ -5,11 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst; 
-    using static As;
+
+    using static Konst;
+    using static z;
 
     partial class gvec
     {
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static Vector128<T> vswaphl<T>(Vector128<T> x)
             where T : unmanaged
-                => generic<T>(z.vswaphl(v64u(x)));        
+                => generic<T>(z.vswaphl(v64u(x)));
 
         /// <summary>
         /// Swaps hi/lo 128-bit lanes of the source vector

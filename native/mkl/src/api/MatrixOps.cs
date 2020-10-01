@@ -5,17 +5,16 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
-    using Z0.Mkl;        
+    using Z0.Mkl;
 
     using static Konst;
-    using static Memories;
 
     public static class MatrixOps
     {
         /// <summary>
-        /// Allocates and computes a matrix X = AB of natural dimension MxN 
+        /// Allocates and computes a matrix X = AB of natural dimension MxN
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
@@ -30,7 +29,7 @@ namespace Z0
                 => Matrix.blockload<M,N,float>(mkl.gemm<M,K,N>(A.Unsized, B.Unsized));
 
         /// <summary>
-        /// Allocates and computes a matrix X = AB of natural dimension MxN 
+        /// Allocates and computes a matrix X = AB of natural dimension MxN
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
@@ -78,7 +77,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where K : unmanaged, ITypeNat
         {
-            mkl.gemm(A, B, ref X);   
+            mkl.gemm(A, B, ref X);
             return ref X;
         }
 
@@ -112,7 +111,7 @@ namespace Z0
             mkl.gemm(A, B, ref X);
             return ref X;
         }
-        
+
         [MethodImpl(Inline)]
         public static Matrix256<N,T> Map<N,S,T>(this Matrix256<N,S> A, Func<S,T> f)
             where N : unmanaged, ITypeNat
@@ -141,9 +140,9 @@ namespace Z0
 
             var i = exp;
             while(--i > 2)
-                mkl.gemm(X,X,ref X);    
-            
-            return X;                        
+                mkl.gemm(X,X,ref X);
+
+            return X;
         }
     }
 }

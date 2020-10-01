@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines the matrix api surface
@@ -108,7 +108,7 @@ namespace Z0
         public static void Fill<N,T>(this IPolyrand random, Interval<T> domain, ref Block256<N,T> vector, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => random.Fill<T>(domain, nati<N>(), ref vector.Unsized[0]);
+                => random.Fill<T>(domain, nat32i<N>(), ref vector.Unsized[0]);
 
         /// <summary>
         /// Populates a vector of natural length with random values from the source
@@ -122,7 +122,7 @@ namespace Z0
         public static void Fill<N,T>(this IPolyrand random, ref Block256<N,T> vector, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => random.Fill<T>(nati<N>(), ref vector.Unsized[0]);
+                => random.Fill<T>(nat32i<N>(), ref vector.Unsized[0]);
 
         /// <summary>
         /// Produces a generic vector
@@ -233,7 +233,7 @@ namespace Z0
         public static void Fill<N,T>(this IPolyrand random, Interval<T> domain, ref RowVector<N,T> vector, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => random.Fill<T>(domain, nati<N>(), ref vector.Data[0]);
+                => random.Fill<T>(domain, nat32i<N>(), ref vector.Data[0]);
 
         /// <summary>
         /// Populates a vector of natural length with random values from the source

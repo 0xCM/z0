@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class gmath
     {
@@ -28,9 +28,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return math.gteq(convert<T,uint>(a), convert<T,uint>(b));
+                return math.gteq(force<T,uint>(a), force<T,uint>(b));
             else if(typeof(T) == typeof(ushort))
-                return math.gteq(convert<T,uint>(a), convert<T,uint>(b));
+                return math.gteq(force<T,uint>(a), force<T,uint>(b));
             else if(typeof(T) == typeof(uint))
                 return math.gteq(uint32(a), uint32(b));
             else if(typeof(T) == typeof(ulong))
@@ -44,9 +44,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return math.gteq(convert<T,int>(a), convert<T,int>(b));
+                return math.gteq(force<T,int>(a), force<T,int>(b));
             else if(typeof(T) == typeof(short))
-                return math.gteq(convert<T,int>(a), convert<T,int>(b));
+                return math.gteq(force<T,int>(a), force<T,int>(b));
             else if(typeof(T) == typeof(int))
                  return math.gteq(int32(a), int32(b));
             else if(typeof(T) == typeof(long))

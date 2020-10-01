@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Memories;
+    using static z;
 
     using Eq = CheckEquatable;
 

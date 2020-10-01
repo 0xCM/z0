@@ -7,9 +7,9 @@ namespace Z0.Mkl
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using static Memories;
+    using static z;
 
     unsafe struct VslSSTaskHandle<T> : IDisposable
         where T : unmanaged
@@ -33,7 +33,7 @@ namespace Z0.Mkl
             this.MatrixFormat = new VslSSMatrixStorage[]{0};
             this.SampleCount = new int[]{0};
         }
-        
+
         VslSSTaskHandle(Span<T> samples, int dim)
         {
             this.Dim = new int[]{dim};
@@ -42,13 +42,13 @@ namespace Z0.Mkl
             this.TaskPtr = IntPtr.Zero;
 
             if(typeof(T) == typeof(float))
-                VSL.vslsSSNewTask(ref TaskPtr, ref Dim[0], ref SampleCount[0], ref MatrixFormat[0], 
+                VSL.vslsSSNewTask(ref TaskPtr, ref Dim[0], ref SampleCount[0], ref MatrixFormat[0],
                     ref MemoryMarshal.Cast<T,float>(samples)[0]).AutoThrow();
             else if(typeof(T) == typeof(double))
-                VSL.vsldSSNewTask(ref TaskPtr, ref Dim[0], ref SampleCount[0], ref MatrixFormat[0], 
+                VSL.vsldSSNewTask(ref TaskPtr, ref Dim[0], ref SampleCount[0], ref MatrixFormat[0],
                     ref MemoryMarshal.Cast<T,double>(samples)[0]).AutoThrow();
             else
-                throw Unsupported.define<T>();            
+                throw Unsupported.define<T>();
         }
 
         IntPtr TaskPtr;
@@ -58,7 +58,7 @@ namespace Z0.Mkl
         int[] SampleCount;
 
         VslSSMatrixStorage[] MatrixFormat;
-        
+
         public void Dispose()
             => VSL.vslSSDeleteTask(ref edit(in TaskPtr)).AutoThrow();
     }

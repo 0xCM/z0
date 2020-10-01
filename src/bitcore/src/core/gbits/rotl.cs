@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using static Memories;
-    
+    using static z;
+
     partial class gbits
     {
         /// <summary>
@@ -24,10 +24,10 @@ namespace Z0
         public static void rotl<T>(in T src, byte offset, ref T dst, int count)
             where T : unmanaged
         {
-            for(var i=0; i<count; i++)   
-               seek(ref dst, i) =  gbits.rotl(skip(in src, i),offset);
+            for(var i=0; i<count; i++)
+               seek(dst, i) =  gbits.rotl(skip(in src, i),offset);
         }
- 
+
         /// <summary>
         /// Rotates the source bits leftward by a specified shift amount
         /// </summary>
@@ -45,9 +45,9 @@ namespace Z0
                 return generic<T>(Bits.rotl(uint32(src), offset));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.rotl(uint64(src), offset));
-            else            
+            else
                 throw Unsupported.define<T>();
-        }           
+        }
 
         /// <summary>
         /// Rotates the source bits leftward by a specified shift amount
@@ -67,8 +67,8 @@ namespace Z0
                 return generic<T>(Bits.rotl(uint32(src), offset, width));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.rotl(uint64(src), offset, width));
-            else            
-                throw Unsupported.define<T>();
-        }           
+            else
+                throw no<T>();
+        }
     }
 }

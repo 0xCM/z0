@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gmath
-    {        
+    {
         /// <summary>
         /// Clamps the source value to an inclusive maximum
         /// </summary>
@@ -30,7 +30,7 @@ namespace Z0
                 return generic<T>(math.clamp(uint32(a), uint32(b)));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(math.clamp(uint64(a), uint64(b)));
-            else 
+            else
                 return clamp_i(a,b);
         }
 
@@ -46,7 +46,7 @@ namespace Z0
                 return generic<T>(math.clamp(int32(a), int32(b)));
             else if(typeof(T) == typeof(long))
                 return generic<T>(math.clamp(int64(a), int64(b)));
-            else 
+            else
                 return clamp_f(a,b);
         }
 
@@ -58,7 +58,7 @@ namespace Z0
                 return generic<T>(fmath.clamp(float32(a), float32(b)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.clamp(float64(a), float64(b)));
-            else 
+            else
                 throw Unsupported.define<T>();
         }
     }

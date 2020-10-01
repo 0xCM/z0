@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gmath
     {
@@ -59,12 +59,12 @@ namespace Z0
         [MethodImpl(Inline)]
         static T fma_f<T>(T x, T y, T z)
             where T : unmanaged
-        {            
+        {
             if(typeof(T) == typeof(float))
                 return generic<T>(fmath.fma(float32(x), float32(y), float32(z)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.fma(float64(x), float64(y), float64(z)));
-            else            
+            else
                 throw Unsupported.define<T>();
         }
     }

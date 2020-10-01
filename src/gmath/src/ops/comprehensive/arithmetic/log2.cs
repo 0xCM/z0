@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gmath
-    {        
+    {
         [MethodImpl(Inline), Closures(UnsignedInts)]
         public static T log2<T>(T a)
             where T : unmanaged

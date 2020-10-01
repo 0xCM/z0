@@ -6,12 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gfp
     {
-        [MethodImpl(Inline), Op, Closures(NumericKind.Floats)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static T square<T>(T src)
             where T : unmanaged
         {
@@ -19,8 +20,8 @@ namespace Z0
                 return generic<T>(fmath.square(float32(src)));
             else if(typeof(T) == typeof(double))
                 return generic<T>(fmath.square(float64(src)));
-            else            
-                throw Unsupported.define<T>();
-        }           
+            else
+                throw no<T>();
+        }
     }
 }

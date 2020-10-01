@@ -8,7 +8,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
     using static z;
 
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Perm<T> From(ReadOnlySpan<T> src)
             => new Perm<T>(src.ToArray());
-        
+
         [MethodImpl(Inline)]
         public static implicit operator Perm<T>(Span<T> src)
             => From(src);
@@ -94,7 +94,7 @@ namespace Z0
         public Perm(T n, Swap<T>[] swaps)
         {
             terms = Perm.Identity(n).terms;
-            Swap(swaps);            
+            Swap(swaps);
         }
 
         [MethodImpl(Inline)]
@@ -122,7 +122,7 @@ namespace Z0
             terms = new T[count];
 
             var m = src.Length;
-            
+
             for(var i=0; i< m; i++)
                 terms[i] = src[i];
 
@@ -136,7 +136,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref first(terms);
         }
-                        
+
         /// <summary>
         /// Term accessor where the term index is in the inclusive range [0, N-1]
         /// </summary>
@@ -157,7 +157,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Perm<T> Swap(T i, T j)
-        {            
+        {
             refswap(ref terms[iVal(i)], ref terms[iVal(j)]);
             return this;
         }
@@ -168,7 +168,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Perm<T> Swap(int i, int j)
-        {            
+        {
             refswap(ref seek(Head, i), ref seek(Head,j));
             return this;
         }
@@ -177,7 +177,7 @@ namespace Z0
         /// Effects a sequence of in-place transpositions
         /// </summary>
         public Perm<T> Swap(params (T i, T j)[] specs)
-        {            
+        {
             for(var k=0; k<specs.Length; k++)
                 refswap(ref terms[iVal(specs[k].i)], ref terms[iVal(specs[k].j)]);
             return this;
@@ -187,7 +187,7 @@ namespace Z0
         /// Effects a sequence of in-place transpositions
         /// </summary>
         public Perm<T> Swap(params (int i, int j)[] specs)
-        {            
+        {
             for(var k=0; k<specs.Length; k++)
                 refswap(ref terms[specs[k].i], ref terms[specs[k].j]);
             return this;
@@ -299,12 +299,12 @@ namespace Z0
         public readonly PermCycle<T> Cycle(T start)
         {
             var iStart = iVal(start);
-            Root.insist(iStart >= 0 && iStart < Length);
+            z.insist(iStart >= 0 && iStart < Length, "no");
             Span<PermTerm<T>> cterms = stackalloc PermTerm<T>[Length];
             var traversed = new HashSet<T>(Length);
             var index = start;
             var ctix = 0;
-            
+
             while(true)
             {
                 var image = terms[iVal(index)];
@@ -312,24 +312,24 @@ namespace Z0
                     break;
                 else
                 {
-                    traversed.Add(image);                    
+                    traversed.Add(image);
                     cterms[ctix++] = new PermTerm<T>(index, image);
                     index = image;
-                }                
+                }
             }
 
             return new PermCycle<T>(cterms.Slice(0, ctix).ToArray());
         }
-        
+
         public readonly bool Equals(in Perm<T> rhs)
-        {   
+        {
             var len = rhs.Length;
             if(len != terms.Length)
                 return(false);
-            
+
             for(var i=0; i<len; i++)
                 if(gmath.neq(terms[i], rhs.terms[i]))
-                    return false;            
+                    return false;
             return true;
         }
 

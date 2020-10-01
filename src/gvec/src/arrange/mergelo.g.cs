@@ -5,11 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
-    using static As;
+    using static z;
 
     partial class gvec
     {
@@ -23,17 +23,17 @@ namespace Z0
         public static Vector128<T> vmergelo<T>(Vector128<T> x, Vector128<T> y)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 return vmergelo_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 return vmergelo_i(x,y);
-            else 
+            else
                 throw no<T>();
         }
 
@@ -47,17 +47,17 @@ namespace Z0
         public static Vector256<T> vmergelo<T>(Vector256<T> x, Vector256<T> y)
             where T : unmanaged
         {
-            if(typeof(T) == typeof(byte) 
-            || typeof(T) == typeof(ushort) 
-            || typeof(T) == typeof(uint) 
+            if(typeof(T) == typeof(byte)
+            || typeof(T) == typeof(ushort)
+            || typeof(T) == typeof(uint)
             || typeof(T) == typeof(ulong))
                 return vmergelo_u(x,y);
-            else if(typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            else if(typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long))
                 return vmergelo_i(x,y);
-            else 
+            else
                 throw no<T>();
         }
 
@@ -85,7 +85,7 @@ namespace Z0
                 return generic<T>(z.vmergelo(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(z.vmergelo(v32u(x), v32u(y)));
-            else 
+            else
                 return generic<T>(z.vmergelo(v64u(x), v64u(y)));
         }
 
@@ -101,7 +101,7 @@ namespace Z0
                  return generic<T>(z.vmergelo(v32i(x), v32i(y)));
             else
                  return generic<T>(z.vmergelo(v64i(x), v64i(y)));
-        }    
+        }
 
         [MethodImpl(Inline)]
         static Vector256<T> vmergelo_u<T>(Vector256<T> x, Vector256<T> y)
@@ -113,8 +113,8 @@ namespace Z0
                 return generic<T>(z.vmergelo(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(z.vmergelo(v32u(x), v32u(y)));
-            else 
+            else
                 return generic<T>(z.vmergelo(v64u(x), v64u(y)));
-        }    
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     [ApiHost]
     public readonly struct Perm
-    {        
+    {
         const NumericKind Closure = UnsignedInts;
 
         /// <summary>
@@ -33,11 +33,11 @@ namespace Z0
         /// <param name="p">The permutation to apply</param>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static void apply<T>(Perm p, ReadOnlySpan<T> src, Span<T> dst)
-        {   
-            var terms = span(p.terms);                     
+        {
+            var terms = span(p.terms);
             var count = terms.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = skip(src,(uint)skip(terms,i));                
+                seek(dst,i) = skip(src,(uint)skip(terms,i));
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="j">The second index</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Span<T> apply<T>(Span<T> src, params Swap[] swaps)           
+        public static Span<T> apply<T>(Span<T> src, params Swap[] swaps)
             where T : unmanaged
         {
             var len = swaps.Length;
@@ -169,7 +169,7 @@ namespace Z0
         public static Perm<T> Init<T>(T n, Swap<T>[] swaps)
             where T : unmanaged
                 => new Perm<T>(n, swaps);
-                
+
         /// <summary>
         /// Creates a permutation from the elements in a span
         /// </summary>
@@ -255,7 +255,7 @@ namespace Z0
         public Perm(int n, Swap[] src)
         {
             terms = Identity(n).terms;
-            Apply(src);            
+            Apply(src);
         }
 
         [MethodImpl(Inline)]
@@ -270,7 +270,7 @@ namespace Z0
             terms = new int[n];
 
             var m = src.Length;
-            
+
             for(var i=0; i< m; i++)
                 terms[i] = src[i];
 
@@ -278,13 +278,13 @@ namespace Z0
             for(var i=m; i< n; i++)
                 terms[i] = identity[i - m];
         }
-        
+
         [MethodImpl(Inline)]
         public Perm(IEnumerable<int> src)
         {
             terms = src.ToArray();
         }
-                
+
         /// <summary>
         /// Term accessor where the term index is in the inclusive range [0, N-1]
         /// </summary>
@@ -307,12 +307,12 @@ namespace Z0
         /// Effects an in-place transposition, returning the result for convenience
         /// </summary>
         /// <remarks>
-        /// A transposition (l,r) is interpreted as a function composition 
+        /// A transposition (l,r) is interpreted as a function composition
         /// that carries the l-value (from the domain) to the r-value
         /// (in the l-relative codomain) and then the r-value to the l-value
         /// (in the r-relative codomain & l-relative domain). So, if
         /// a function f sends l to r and a function g sends r to l then
-        /// the transposition t is the function t(l) = g(f(l)) == l. 
+        /// the transposition t is the function t(l) = g(f(l)) == l.
         /// </remarks>
         [MethodImpl(Inline)]
         public Perm Swap(int i, int j)
@@ -383,7 +383,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the inverse permutation t of the current permutation p 
+        /// Computes the inverse permutation t of the current permutation p
         /// such that p*t = t*p = I where I denotes the identity permutation
         /// </summary>
         public Perm Invert()
@@ -438,7 +438,7 @@ namespace Z0
             Span<Swap> swaps = new Swap[max];
             var count = 0;
             for(var i=0; i< max; i++)
-            {                
+            {
                 var image = terms[i];
 
                 if(i != image)
@@ -459,12 +459,12 @@ namespace Z0
         /// <param name="start">The domain point at which evaluation will begin</param>
         public PermCycle Cycle(int start)
         {
-            Root.insist(start >= 0 && start < Length);
+            z.insist(start >= 0 && start < Length, "");
             Span<PermTerm> cterms = stackalloc PermTerm[Length];
             var traversed = new HashSet<int>(Length);
             var index = start;
             var ctix = 0;
-            
+
             while(true)
             {
                 var image = terms[index];
@@ -472,10 +472,10 @@ namespace Z0
                     break;
                 else
                 {
-                    traversed.Add(image);                    
+                    traversed.Add(image);
                     cterms[ctix++] = new PermTerm(index, image);
                     index = image;
-                }                
+                }
             }
 
             return new PermCycle(cterms.Slice(0, ctix).ToArray());
@@ -487,22 +487,22 @@ namespace Z0
         /// <param name="src">The source permutation</param>
         /// <param name="colwidth">The width of the matrix columns, if specified</param>
         [MethodImpl(Inline)]
-        public string Format(int? colwidth = null)        
+        public string Format(int? colwidth = null)
             => Terms.FormatAsPerm(colwidth);
 
         public override int GetHashCode()
             => terms.GetHashCode();
-        
+
         public bool Equals(Perm rhs)
-        {   
+        {
             var len = rhs.Length;
             if(len != terms.Length)
                 return(false);
-            
+
             for(var i=0; i<len; i++)
                 if(terms[i] != rhs.terms[i])
                     return false;
-            
+
             return true;
         }
 

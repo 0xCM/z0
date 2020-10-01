@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     using ULK = UnaryBitLogicKind;
     using BLK = BinaryBitLogicKind;
@@ -51,17 +51,17 @@ namespace Z0
             where T : unmanaged
                 => text.concat(format(kind), Chars.Colon, keyword<T>());
 
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static string sig<T>(BitShiftApiKey kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static string sig<T>(BinaryComparisonApiKey kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";
 
-        [MethodImpl(Inline), Op, NumericClosures(Integers)]
+        [MethodImpl(Inline), Op, Closures(Integers)]
         public static string sig<T>(UnaryArithmeticApiKey kind)
             where T : unmanaged
                 => $"{kind}:{typeof(T).NumericKind().Keyword()}";

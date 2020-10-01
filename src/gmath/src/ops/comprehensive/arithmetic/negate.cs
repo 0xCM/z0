@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gmath
     {
@@ -23,7 +23,7 @@ namespace Z0
         public static T negate<T>(T src)
             where T : unmanaged
                 => negate_u(src);
-            
+
         [MethodImpl(Inline)]
         static T negate_u<T>(T src)
             where T : unmanaged
@@ -52,7 +52,7 @@ namespace Z0
                  return generic<T>(math.negate(int32(src)));
             else if(typeof(T) == typeof(long))
                  return generic<T>(math.negate(int64(src)));
-            else 
+            else
                 return gfp.negate(src);
         }
     }

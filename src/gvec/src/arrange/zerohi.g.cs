@@ -5,18 +5,17 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
-    using System.Runtime.Intrinsics;    
-    using System.Runtime.Intrinsics.X86;
-    
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+
     using static System.Runtime.Intrinsics.X86.Sse;
-    using static System.Runtime.Intrinsics.X86.Sse2;    
-    
+    using static System.Runtime.Intrinsics.X86.Sse2;
+
     using static Konst;
-    using static As;
-    
+    using static z;
+
     partial class gvec
-    {        
+    {
         /// <summary>
         /// __m128i _mm_move_epi64 (__m128i a) MOVQ xmm, xmm
         /// Clears the high 64 bits of the source vector

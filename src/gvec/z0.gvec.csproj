@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Imagine)" />
+    <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Check)" />
     <ProjectReference Include="$(Vectors)" />
     <ProjectReference Include="$(VData)" />

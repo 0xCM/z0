@@ -6,16 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst; 
-    using static Memories;
-    
+
+    using static Konst;
+    using static z;
+
     partial class gfp
     {
         /// <summary>
         /// Computes the absolute value of a primal FP scalar
         /// </summary>
-        /// <param name="src">The soruce value</param>
+        /// <param name="src">The source value</param>
         /// <typeparam name="T">The FP type</typeparam>
         [MethodImpl(Inline), Abs, Closures(Floats)]
         public static T abs<T>(T src)
@@ -27,6 +27,6 @@ namespace Z0
                 return generic<T>(fmath.abs(float64(src)));
             else
                 throw Unsupported.define<T>();
-        }        
+        }
     }
 }

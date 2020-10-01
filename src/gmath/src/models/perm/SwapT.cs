@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
-    using static Memories;
-    
+    using static Konst;
+    using static z;
+
     /// <summary>
     /// Defines a transposition, i.e. a specification for the transposition
     /// of two elements, denoted by an ordered pair of space-delimited indices (i j)
@@ -21,12 +21,12 @@ namespace Z0
         /// The first index
         /// </summary>
         public T i;
-        
+
         /// <summary>
         /// The second index
         /// </summary>
         public T j;
-        
+
         /// <summary>
         /// The monodial zero
         /// </summary>
@@ -48,12 +48,12 @@ namespace Z0
 
         public static Swap<T> Parse(string src)
             => throw new NotImplementedException();
-            
+
         // {
         //     var indices = src.RemoveAny(Chars.LParen, Chars.RParen).Trim().Split(Chars.Space);
         //     if(indices.Length != 2)
         //         return Zero;
-            
+
         //     var parser = NumericParser.create<T>();
         //     var result = Try(() => (parser.Parse(indices[0]).ValueOrDefault(), parser.Parse(indices[1]).ValueOrDefault()));
         //     if(result.IsSome())
@@ -85,7 +85,7 @@ namespace Z0
             ref var dst = ref edit(in src);
             if(gmath.nonz(src.i))
                 dst.i = gmath.dec(dst.i);
-            
+
             if(gmath.nonz(src.j))
                 dst.j = gmath.dec(dst.j);
             return dst;
@@ -97,7 +97,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool operator !=(Swap<T> lhs, Swap<T> rhs)
-            => !(lhs == rhs);                    
+            => !(lhs == rhs);
 
         [MethodImpl(Inline)]
         public Swap((T i, T j) src)
@@ -118,10 +118,10 @@ namespace Z0
         /// </summary>
         public string Format()
             => $"({i} {j})";
-        
+
         public bool IsEmpy
             => !gmath.nonz(i) && !gmath.nonz(j);
-            
+
         /// <summary>
         /// Determines whether this transposition is identical to another.
         /// Note that the order of indices is immaterial
@@ -129,7 +129,7 @@ namespace Z0
         /// <param name="rhs">The right transposition</param>
         [MethodImpl(Inline)]
         public bool Equals(Swap<T> rhs)
-            => (gmath.eq(i, rhs.i) && gmath.eq(j ,rhs.j) || 
+            => (gmath.eq(i, rhs.i) && gmath.eq(j ,rhs.j) ||
                (gmath.eq(i, rhs.j) && gmath.eq(j, rhs.i)));
 
         [MethodImpl(Inline)]
@@ -152,7 +152,7 @@ namespace Z0
 
         public override int GetHashCode()
             => throw new NotSupportedException();
-             
+
         public override bool Equals(object o)
             => o is Swap<T> x ? Equals(x) : false;
     }

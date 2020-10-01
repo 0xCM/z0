@@ -6,12 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gmath
-    {        
+    {
         /// <summary>
         /// Computes z := (a*b) mod m
         /// </summary>
@@ -29,9 +29,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return generic<T>(math.modmul(convert<T,uint>(a), convert<T,uint>(b), convert<T,uint>(m)));
+                return generic<T>(math.modmul(force<T,uint>(a), force<T,uint>(b), force<T,uint>(m)));
             else if(typeof(T) == typeof(ushort))
-                return generic<T>(math.modmul(convert<T,uint>(a), convert<T,uint>(b), convert<T,uint>(m)));
+                return generic<T>(math.modmul(force<T,uint>(a), force<T,uint>(b), force<T,uint>(m)));
             else if(typeof(T) == typeof(uint))
                 return generic<T>(math.modmul(uint32(a), uint32(b), uint32(m)));
             else if(typeof(T) == typeof(ulong))
@@ -45,15 +45,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return generic<T>(math.modmul(convert<T,int>(a), convert<T,int>(b), convert<T,int>(m)));
+                return generic<T>(math.modmul(force<T,int>(a), force<T,int>(b), force<T,int>(m)));
             else if(typeof(T) == typeof(short))
-                return generic<T>(math.modmul(convert<T,int>(a), convert<T,int>(b), convert<T,int>(m)));
+                return generic<T>(math.modmul(force<T,int>(a), force<T,int>(b), force<T,int>(m)));
             else if(typeof(T) == typeof(int))
                 return generic<T>(math.modmul(int32(a), int32(b), int32(m)));
             else if(typeof(T) == typeof(long))
                 return generic<T>(math.modmul(int64(a), int64(b), int64(m)));
             else
-                return gfp.modmul(a,b,m);            
+                return gfp.modmul(a,b,m);
         }
     }
 }

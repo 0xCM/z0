@@ -54,5 +54,29 @@ namespace Z0
         public void bb_create_n32x32u()
             => check_bitblock_range<N32,uint>();
 
+
+         protected void check_bitblock_create<T>(int bitcount)
+            where T : unmanaged
+        {
+            var segcount = (int)GridCells.mincells<T>((ulong)bitcount);
+
+            if(DiagnosticMode)
+                term.print($"Executing {caller()}: {bitcount} bits covered by {segcount} segments of kind {typeof(T).DisplayName()}");
+
+            var src = Random.Span<T>(RepCount);
+
+            for(var i=0; i<RepCount; i += segcount)
+            {
+                var data = src.Slice(i, segcount);
+                var bc = data.ToBitBLock(bitcount);
+                var bs = data.ToBitString(bitcount);
+                Claim.eq(bc.BitCount, bitcount);
+                Claim.eq(bs.Length, bitcount);
+
+                for(var j=0; j<bc.BitCount; j++)
+                    Claim.Eq(bc[j], bs[j]);
+            }
+        }
+
     }
 }

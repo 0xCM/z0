@@ -6,16 +6,14 @@ namespace Z0.Dynamics
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
 
-   
+
     public class TypeSelectionBuilder<R>
     {
         public static implicit operator Selector<Type,object,R>(TypeSelectionBuilder<R> builder)
             => builder.Finish();
 
-        Dictionary<Type, Func<object,R>> functions { get; } 
+        Dictionary<Type, Func<object,R>> functions { get; }
             = new Dictionary<Type, Func<object,R>>();
 
         readonly object value;

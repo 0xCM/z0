@@ -6,10 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics.X86;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class gbits
     {
@@ -24,7 +23,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T replicate<T>(T src, byte i0, byte i1, int reps)
             where T : unmanaged
-                => convert<T>(Bits.replicate(convert<T,ulong>(src), i0, i1, reps));
+                => force<T>(Bits.replicate(force<T,ulong>(src), i0, i1, reps));
 
         /// <summary>
         /// [000...000101] -> [101101...101101]
@@ -37,9 +36,9 @@ namespace Z0
             where T : unmanaged
         {
             var index = hipos(src);
-            var count = (bitwidth<T>() / (index + 1) +  1);
-            var replicated = Bits.replicate(convert<T,ulong>(src), 0, index, count);
-            return convert<T>(replicated);
+            var count = ((int)bitwidth<T>() / (index + 1) +  1);
+            var replicated = Bits.replicate(force<T,ulong>(src), 0, index, count);
+            return force<T>(replicated);
         }
 
         /// <summary>
@@ -51,6 +50,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T replicate<T>(byte src)
             where T : unmanaged
-                => convert<T>(Bits.replicate((ulong)src, 0, 7, bitwidth<T>() / 8));
+                => force<T>(Bits.replicate((ulong)src, 0, 7, (int)bitwidth<T>() / 8));
     }
 }

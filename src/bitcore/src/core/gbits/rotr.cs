@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class gbits
     {
@@ -24,8 +24,8 @@ namespace Z0
         public static void rotr<T>(in T src, byte offset, ref T dst, int count)
             where T : unmanaged
         {
-            for(var i=0; i<count; i++)   
-               seek(ref dst, i) =  gbits.rotr(skip(in src, i),offset);
+            for(var i=0; i<count; i++)
+               seek(dst, i) =  gbits.rotr(skip(in src, i),offset);
         }
 
         /// <summary>
@@ -46,9 +46,9 @@ namespace Z0
                 return generic<T>(Bits.rotr(uint32(src), offset));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.rotr(uint64(src), offset));
-            else            
-                throw Unsupported.define<T>();
-        }           
+            else
+                throw no<T>();
+        }
 
         /// <summary>
         /// Rotates bits in the source rightwards by a specified shift amount
@@ -68,8 +68,8 @@ namespace Z0
                 return generic<T>(Bits.rotr(uint32(src), offset, width));
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.rotr(uint64(src), offset, width));
-            else            
+            else
                 throw Unsupported.define<T>();
-        }           
+        }
     }
 }

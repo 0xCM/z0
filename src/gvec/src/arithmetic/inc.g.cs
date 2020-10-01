@@ -5,14 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    
-    using static Konst; 
-    using static V0;
-    
+
+    using static Konst;
+    using static z;
+
     partial class gvec
-    {        
+    {
         /// <summary>
         /// Increments each component by unit value
         /// </summary>
@@ -64,20 +64,20 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector512<T> vinc<T>(W512 w, T x0)
             where T : unmanaged
-                => vadd(V0.vinc<T>(w), x0); 
+                => vadd(V0.vinc<T>(w), x0);
 
         [MethodImpl(Inline)]
         static Vector128<T> vinc_u<T>(Vector128<T> src)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(z.vinc(v8u(src)));
+                return generic<T>(z.vinc(v8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(z.vinc(v16u(src)));
+                return generic<T>(z.vinc(v16u(src)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(z.vinc(v32u(src)));
+                return generic<T>(z.vinc(v32u(src)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(z.vinc(v64u(src)));
+                return generic<T>(z.vinc(v64u(src)));
             else
                 return vinc_i(src);
         }
@@ -87,15 +87,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return vgeneric<T>(z.vinc(v8i(src)));
+                 return generic<T>(z.vinc(v8i(src)));
             else if(typeof(T) == typeof(short))
-                 return vgeneric<T>(z.vinc(v16i(src)));
+                 return generic<T>(z.vinc(v16i(src)));
             else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(z.vinc(v32i(src)));
+                 return generic<T>(z.vinc(v32i(src)));
             else if(typeof(T) == typeof(long))
-                 return vgeneric<T>(z.vinc(v64i(src)));
-            else 
-                throw Unsupported.define<T>();
+                 return generic<T>(z.vinc(v64i(src)));
+            else
+                throw no<T>();
         }
 
         [MethodImpl(Inline)]
@@ -103,13 +103,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return vgeneric<T>(z.vinc(v8u(src)));
+                return generic<T>(z.vinc(v8u(src)));
             else if(typeof(T) == typeof(ushort))
-                return vgeneric<T>(z.vinc(v16u(src)));
+                return generic<T>(z.vinc(v16u(src)));
             else if(typeof(T) == typeof(uint))
-                return vgeneric<T>(z.vinc(v32u(src)));
+                return generic<T>(z.vinc(v32u(src)));
             else if(typeof(T) == typeof(ulong))
-                return vgeneric<T>(z.vinc(v64u(src)));
+                return generic<T>(z.vinc(v64u(src)));
             else
                 return vinc_i(src);
         }
@@ -119,15 +119,15 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return vgeneric<T>(z.vinc(v8i(src)));
+                 return generic<T>(z.vinc(v8i(src)));
             else if(typeof(T) == typeof(short))
-                 return vgeneric<T>(z.vinc(v16i(src)));
+                 return generic<T>(z.vinc(v16i(src)));
             else if(typeof(T) == typeof(int))
-                 return vgeneric<T>(z.vinc(v32i(src)));
+                 return generic<T>(z.vinc(v32i(src)));
             else if(typeof(T) == typeof(long))
-                 return vgeneric<T>(z.vinc(v64i(src)));
-            else 
-                throw Unsupported.define<T>();
+                 return generic<T>(z.vinc(v64i(src)));
+            else
+                throw no<T>();
         }
     }
 }

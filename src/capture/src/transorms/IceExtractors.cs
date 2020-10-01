@@ -44,7 +44,7 @@ namespace Z0.Asm
 
         [MethodImpl(Inline), Op]
         public static OpAccess[] OpAccess(Iced.InstructionInfo src)
-            => Memories.array(
+            => z.array(
                     Deicer.Thaw(src.Op0Access),
                     Deicer.Thaw(src.Op0Access),
                     Deicer.Thaw(src.Op2Access),

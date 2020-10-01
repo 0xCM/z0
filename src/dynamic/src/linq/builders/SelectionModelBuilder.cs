@@ -12,9 +12,9 @@ namespace Z0.Dynamics
 
     using X = System.Linq.Expressions;
     using G = System.Collections.Generic;
-    
+
     using static Konst;
-    using static Memories;
+    using static z;
 
     public class SelectionModelBuilder
     {
@@ -23,13 +23,13 @@ namespace Z0.Dynamics
 
         public static SelectionModel CreateModel<T>(IQueryable<T> q, params SelectionFacet[] facets)
             => (q.Provider as IModelQueryProvider).CreateModel<SelectionModel>(q.Expression, facets);
-       
+
         static SelectionModel BuildModel(Expression X, params SelectionFacet[] facets)
         {
             var builder = new SelectionModelBuilder(X);
             var selection = new MemberSelection(builder.selections);
-            var order = builder.orders.Count != 0 
-                      ? some(new MemberOrdering(builder.orders)) 
+            var order = builder.orders.Count != 0
+                      ? some(new MemberOrdering(builder.orders))
                       : none<MemberOrdering>();
 
             iter(builder.junctions, j => j.Flatten());
@@ -44,9 +44,9 @@ namespace Z0.Dynamics
         readonly G.List<Junction> junctions = new G.List<Junction>();
 
         G.List<MemberItemOrder> orders = new G.List<MemberItemOrder>();
-        
+
         Tuple<BinaryExpression, Junction> CurrentJunction;
-       
+
         SelectionModelBuilder(Expression X, params SelectionFacet[] facets)
         {
             this.facets = facets.ToList();
@@ -95,6 +95,7 @@ namespace Z0.Dynamics
                 CurrentJunction.Item2.Criteria.Add(predicate);
         }
 
+
         void HandleMethodCall(OrderSpecificationMethod method, MethodCallExpression node)
         {
             var arguments = node.Arguments.ToList();
@@ -142,10 +143,10 @@ namespace Z0.Dynamics
         }
 
         void HandleMethodCall(SelectMethod method, MethodCallExpression X)
-        {            
+        {
             if (X.Arguments.Count != 2)
                 return;
-           
+
             var N = ((X.Arguments[1] as UnaryExpression)?.Operand as LambdaExpression)?.Body as NewExpression;
             if (N == null || N.Members.Count != N.Arguments.Count)
                 return;
@@ -232,6 +233,6 @@ namespace Z0.Dynamics
         {
             var visitor = new LinqExpressionVisitor();
             visitor.Visit(p);
-        }        
+        }
     }
 }

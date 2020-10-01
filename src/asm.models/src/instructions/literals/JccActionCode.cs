@@ -4,10 +4,10 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using static JccTestKind;
+    using static JccTestCode;
     using static Hex8Seq;
 
-    public enum JccActionKind : byte
+    public enum JccActionCode : byte
     {
         JCC = x70,
 

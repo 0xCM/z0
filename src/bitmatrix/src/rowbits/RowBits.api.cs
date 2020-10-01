@@ -15,10 +15,10 @@ namespace Z0
     partial class RowBits
     {
         /// <summary>
-        /// xllocates a specified number of rows
+        /// Allocates a specified number of rows
         /// </summary>
         /// <param name="rows">The row count</param>
-        /// <typeparam name="T">The primal type that implicitly defines the number of coluns in each row</typeparam>
+        /// <typeparam name="T">The primal type that implicitly defines the number of columns in each row</typeparam>
         public static RowBits<T> alloc<T>(int rows)
             where T : unmanaged
                 => new RowBits<T>(new T[rows]);
@@ -27,17 +27,17 @@ namespace Z0
         /// Loads loads rows from a bytespan
         /// </summary>
         /// <param name="src">The data source</param>
-        /// <typeparam name="T">The primal type that implicitly defines the number of matrix coluns</typeparam>
+        /// <typeparam name="T">The primal type that implicitly defines the number of matrix columns</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static RowBits<T> load<T>(Span<byte> src)
             where T : unmanaged
                 => new RowBits<T>(Spans.cast<T>(src));
-                
+
         /// <summary>
         /// Loads loads rows from a span
         /// </summary>
         /// <param name="src">The data source</param>
-        /// <typeparam name="T">The primal type that implicitly defines the number of matrix coluns</typeparam>
+        /// <typeparam name="T">The primal type that implicitly defines the number of matrix columns</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static RowBits<T> load<T>(Span<T> src)
             where T : unmanaged
@@ -47,7 +47,7 @@ namespace Z0
         /// Loads rows from an array
         /// </summary>
         /// <param name="src">The data source</param>
-        /// <typeparam name="T">The primal type that implicitly defines the number of matrix coluns</typeparam>
+        /// <typeparam name="T">The primal type that implicitly defines the number of matrix columns</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static RowBits<T> load<T>(params T[] src)
             where T : unmanaged
@@ -66,9 +66,9 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static RowBits<T> not<T>(in RowBits<T> x, in RowBits<T> dst)
             where T : unmanaged
-        {            
+        {
             for(var i=0; i<x.RowCount; i++)
-                dst[i] = BitVector.not(x[i]); 
+                dst[i] = BitVector.not(x[i]);
             return dst;
         }
 

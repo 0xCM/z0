@@ -34,7 +34,7 @@ namespace Z0
 
         public void bb_disable_213x64()
             => bitblock_disable_check<ulong>(213);
-        
+
         public void bb_disable_n213x8()
             => bitblock_disable_check(n213, z8);
 
@@ -53,6 +53,28 @@ namespace Z0
             Claim.eq(707,(int)n707.NatValue);
             bitblock_disable_check(n707, (ulong)0);
         }
+
+
+        protected void bitblock_disable_check<N,T>(N n = default, T rep = default)
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+        {
+            for(var k=0; k<RepCount; k++)
+            {
+                var bc = Random.BitBlock<N,T>();
+                var bs = bc.ToBitString();
+                Claim.almost(bc.Width, n.NatValue);
+                Claim.eq(bc.Width, bs.Length);
+                for(var i=0; i<bc.Width; i+= 2)
+                {
+                    bc[i] = Bit32.Off;
+                    bs[i] = Bit32.Off;
+                }
+
+                Claim.eq(bc.ToBitString(),bs);
+            }
+        }
+
     }
 
 }

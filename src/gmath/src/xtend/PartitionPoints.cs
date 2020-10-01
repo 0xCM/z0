@@ -7,9 +7,8 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-       
+
     using static Konst;
-    using static Memories;
 
     partial class XTend
     {

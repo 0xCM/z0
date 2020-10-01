@@ -7,18 +7,18 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    
+
     using Asm;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
-    /// Parses sequences of bytes, governed by patterns supplied upon initialization 
+    /// Parses sequences of bytes, governed by patterns supplied upon initialization
     /// </summary>
     public ref struct BytePatternParser<T>
         where T : unmanaged, Enum
-    {        
+    {
         readonly Span<byte> Buffer;
 
         int Offset;
@@ -32,13 +32,13 @@ namespace Z0
         readonly Dictionary<byte,int> Accepted;
 
         readonly IBytePatternSet<T> Patterns;
-        
+
         public byte[] Parsed
             => ParsedSlice.ToArray();
 
         ReadOnlySpan<byte> ParsedSlice
-            =>  (Offset + Delta - 1) > 0 
-              ? Buffer.Slice(0, Offset + Delta - 1) 
+            =>  (Offset + Delta - 1) > 0
+              ? Buffer.Slice(0, Offset + Delta - 1)
               : Root.array<byte>();
 
         internal BytePatternParser(IBytePatternSet<T> patterns, byte[] buffer)
@@ -61,7 +61,7 @@ namespace Z0
             Outcome = default;
             Delta = default;
         }
-        
+
         public BytePatternParserState Parse(Span<byte> src)
         {
             Start();
@@ -69,29 +69,29 @@ namespace Z0
             var i=0;
 
             while(i < src.Length && !State.Finished())
-                Parse(src[i++]);                
-            
+                Parse(src[i++]);
+
             if(State == BytePatternParserState.Accepting)
                 State = BytePatternParserState.Unmatched;
-            
+
             return State;
         }
 
         [MethodImpl(Inline)]
         public BytePatternParserState Parse(byte[] src)
-            => Parse(src.AsSpan());        
+            => Parse(src.AsSpan());
 
         public BytePatternParserState Parse(byte src)
         {
             if(State == BytePatternParserState.Accepting && Offset < Buffer.Length)
             {
                 Root.seek(Buffer, Offset++) = src;
-                
+
                 if(Accepted.TryGetValue(src, out var count))
                     Accepted[src] = ++ count;
                 else
                     Accepted[src] = 1;
-                
+
                 if(TryMatch(out Outcome, out Delta))
                 {
                     if(Patterns.IsSuccessPattern(Outcome))
@@ -111,8 +111,8 @@ namespace Z0
         {
             mc = default;
             delta = 0;
-            
-            ref readonly var codes = ref head(Patterns.FullPatternKinds);
+
+            ref readonly var codes = ref first(Patterns.FullPatternKinds);
             for(var i=0; i < Patterns.FullPatternCount; i++)
             {
                 var match = skip(codes,i);
@@ -121,17 +121,17 @@ namespace Z0
 
                 var matched = Offset > len
                     ? Buffer.Slice(Offset -  1 - len, len).EndsWith(pattern)
-                    : false;                           
+                    : false;
 
                 if(matched)
                 {
                     mc = match;
                     delta = (int)Patterns.MatchOffset(match);
                     return true;
-                }                
+                }
             }
-            
+
             return false;
-        }            
-    } 
+        }
+    }
 }

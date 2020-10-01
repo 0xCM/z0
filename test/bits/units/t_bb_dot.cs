@@ -85,6 +85,27 @@ namespace Z0
         public void nbb_dot_256x64()
             => bitblock_dot_check(n256, z64);
 
+        /// <summary>
+        /// Verifies the natural bit cell dot product operation
+        /// </summary>
+        /// <param name="n">The bitvector width</param>
+        /// <param name="zero">A scalar representative</param>
+        /// <typeparam name="N">The bitvector width type</typeparam>
+        /// <typeparam name="T">The scalar type</typeparam>
+        protected void bitblock_dot_check<N,T>(N n = default, T zero = default)
+            where N : unmanaged, ITypeNat
+            where T : unmanaged
+        {
+            for(var i=0; i<RepCount; i++)
+            {
+                var x = Random.BitBlock<N,T>();
+                var y = Random.BitBlock<N,T>();
+                Bit32 a = x % y;
+                var b = BitBlocks.modprod(x,y);
+                if(a != b)
+                    Notify($"nbc {n}x{ApiIdentity.numeric<T>()} is a problem");
+                Claim.Require(a == b);
+            }
+        }
     }
 }
-

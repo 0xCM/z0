@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
-    
+    using static z;
+
     partial class gbits
-    {    
+    {
         /// <summary>
         /// Enables a contiguous sequence of source bits starting at a specified index
         /// </summary>

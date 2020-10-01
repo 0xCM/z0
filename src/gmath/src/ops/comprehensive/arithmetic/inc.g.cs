@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-                
-    using static Konst; 
-    using static Memories;
+
+    using static Konst;
+    using static z;
 
     partial class gmath
     {
@@ -22,13 +22,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return convert<T>(math.inc(convert<T,uint>(a)));
+                return z.force<T>(math.inc(z.force<T,uint>(a)));
             else if(typeof(T) == typeof(ushort))
-                return convert<T>(math.inc(convert<T,uint>(a)));
+                return z.force<T>(math.inc(z.force<T,uint>(a)));
             else if(typeof(T) == typeof(uint))
-                return generic<T>(math.inc(uint32(a)));
+                return z.force<T>(math.inc(uint32(a)));
             else if(typeof(T) == typeof(ulong))
-                return generic<T>(math.inc(uint64(a)));
+                return z.force<T>(math.inc(uint64(a)));
             else
                 return inc_i(a);
         }
@@ -38,9 +38,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return convert<T>(math.inc(convert<T,int>(a)));
+                return z.force<T>(math.inc(z.force<T,int>(a)));
             else if(typeof(T) == typeof(short))
-                return convert<T>(math.inc(convert<T,int>(a)));
+                return z.force<T>(math.inc(z.force<T,int>(a)));
             else if(typeof(T) == typeof(int))
                  return generic<T>(math.inc(int32(a)));
             else if(typeof(T) == typeof(long))
@@ -48,6 +48,5 @@ namespace Z0
             else
                 return gfp.inc(a);
         }
-
     }
 }

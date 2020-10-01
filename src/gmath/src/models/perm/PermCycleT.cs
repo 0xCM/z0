@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Root;
+    using static z;
 
     /// <summary>
     /// Describes cycle in a perutation
@@ -20,8 +20,8 @@ namespace Z0
         {
             var len = src.Length;
             if(len > 1)
-                insist(gmath.eq(src[0].Source, src[len - 1].Target));
-            
+                insist(gmath.eq(src[0].Source, src[len - 1].Target), "no");
+
             this.Terms = src;
         }
 
@@ -30,7 +30,7 @@ namespace Z0
         {
             Terms = src.ToArray();
         }
-        
+
         /// <summary>
         /// The terms that define the cycle
         /// </summary>
@@ -45,10 +45,10 @@ namespace Z0
         {
             var sb = text.build();
             sb.Append(Chars.LParen);
-            for(var i=0; i< Terms.Length; i++)            
+            for(var i=0; i< Terms.Length; i++)
             {
                 sb.Append(Terms[i].Source);
-                if(i != Terms.Length - 1)                
+                if(i != Terms.Length - 1)
                     sb.Append(Chars.Space);
             }
 

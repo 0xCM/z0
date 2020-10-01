@@ -7,7 +7,7 @@ namespace Z0.Mkl
     using System;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class mkl
     {
@@ -23,13 +23,13 @@ namespace Z0.Mkl
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var m = nati<M>();
-            var n = nati<N>();
+            var m = nat32i<M>();
+            var n = nat32i<N>();
             var lda = n;
-            
+
             A.CopyTo(ref X);
             checkx(LAPACK.LAPACKE_dgetrf(RowMajor, m, n, ref head(X), lda, ref head(P)));
-            
+
             return ref X;
         }
 
@@ -44,13 +44,13 @@ namespace Z0.Mkl
         public static ref Matrix256<N,double> getrf<N>(Matrix256<N,double> A, Span<int> P, ref Matrix256<N,double> X)
             where N : unmanaged, ITypeNat
         {
-            var n = nati<N>();
+            var n = nat32i<N>();
             var lda = n;
-            
+
             A.CopyTo(ref X);
             var exit = LAPACK.LAPACKE_dgetrf(RowMajor, n, n, ref head(X), lda, ref head(P));
             checkx(exit);
-            
+
             return ref X;
         }
     }
