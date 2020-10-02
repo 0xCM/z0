@@ -7,9 +7,19 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     using static Konst;
     using static z;
 
+    [Free]
+    public interface ITable<F,T,K> : ITable<F,T>
+        where F : unmanaged
+        where T : struct, ITable<F,T>
+        where K : unmanaged
+    {
+        K Key {get;}
+    }
     public interface ITableMap<T,Y> : IWfTableWorker
         where T : struct, ITable
     {
@@ -31,11 +41,11 @@ namespace Z0
     /// <typeparam name="T">The data type</typeparam>
     /// <typeparam name="Y">The output type</typeparam>
     public interface ITableMap<D,S,T,Y> : ITableMap<T,Y>
-        where D : unmanaged, Enum
+        where D : unmanaged
         where T : struct, ITable
         where S : unmanaged
     {
-        TableSelector<D,S> Id {get;}
+        KeyMap<D,S> Id {get;}
     }
 
     /// <summary>
@@ -48,7 +58,7 @@ namespace Z0
     /// <typeparam name="Y">The output type</typeparam>
     public interface ITableMap<H,D,S,T,Y> : ITableMap<D,S,T,Y>
         where H : struct, ITableMap<H,D,S,T,Y>
-        where D : unmanaged, Enum
+        where D : unmanaged
         where T : struct, ITable
         where S : unmanaged
     {

@@ -69,6 +69,25 @@ namespace Z0
         public const string Spaced10 = Spaced9 + Space;
 
         /// <summary>
+        /// Defines a string consisting of 11 spaces
+        /// </summary>
+        [StringLiteral(Spaced11, 11)]
+        public const string Spaced11 = Spaced10 + Space;
+
+        /// <summary>
+        /// Defines a string consisting of 12 spaces
+        /// </summary>
+        [StringLiteral(Spaced12, 12)]
+        public const string Spaced12 = Spaced11 + Space;
+
+       /// <summary>
+        /// Defines a string consisting of 13 spaces
+        /// </summary>
+        [StringLiteral(Spaced13, 13)]
+        public const string Spaced13 = Spaced12 + Space;
+
+
+        /// <summary>
         /// Defines a string consisting of 16 spaces
         /// </summary>
         [StringLiteral(Spaced16, 16)]

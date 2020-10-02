@@ -12,20 +12,20 @@ namespace Z0
     using static z;
 
     using api = CharBlocks;
-    using B = CharBlock4;
 
-    /// <summary>
-    /// Defines a character block b with capacity(b) = 4x16u
-    /// </summary>
+
     [StructLayout(LayoutKind.Sequential)]
-    public struct CharBlock4 : ICharBlock<B>
+    public struct CharBlock11 : ICharBlock<CharBlock11>
     {
         /// <summary>
         /// The lower content
         /// </summary>
-        public CharBlock2 Lo;
+        public CharBlock10 Lo;
 
-        public CharBlock2 Hi;
+        /// <summary>
+        /// The upper content
+        /// </summary>
+        public CharBlock1 Hi;
 
         /// <summary>
         /// The block content presented as an editable buffer
@@ -33,24 +33,15 @@ namespace Z0
         public Span<char> Data
         {
             [MethodImpl(Inline)]
-           get => cover<B,char>(this, CharCount);
-        }
-
-        public uint Length
-        {
-            [MethodImpl(Inline)]
-            get => CharCount;
+           get => cover<CharBlock11,char>(this, CharCount);
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator B(string src)
-            => api.init(src, out B dst);
+        public static implicit operator CharBlock11(string src)
+            => api.init(src, out CharBlock11 dst);
 
-        public static B Empty => RP.Spaced4;
+        public static CharBlock11 Empty => RP.Spaced11;
 
-        /// <summary>
-        /// The block capacity
-        /// </summary>
-        public const ushort CharCount = 4;
+        public const ushort CharCount = 11;
     }
 }

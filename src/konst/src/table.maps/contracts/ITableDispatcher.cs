@@ -9,9 +9,9 @@ namespace Z0
 
     [Free]
     public interface ITableDispatcher<F,T,D,S,Y>
-        where F : unmanaged, Enum
+        where F : unmanaged
         where T : struct, ITable<F,T,D>
-        where D : unmanaged, Enum
+        where D : unmanaged
         where S : unmanaged
     {
         void Process(T[] src, Y[] dst);

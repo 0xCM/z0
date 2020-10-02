@@ -35,7 +35,11 @@ namespace Z0
 
         public const string XQuery = expressions + dot + query;
 
-        public const string BitFormatter = bits + dot + formatters + dot + api;
+        public const string BitFormatter = bits + dot + formatters;
+
+        public const string BitStream = bits + dot + stream;
+
+        public const string BitParser = bits + dot + parser + dot;
 
         public const string BitFormatOptions = bits + dot + formatters + dot + options;
 
@@ -62,6 +66,8 @@ namespace Z0
         public const string TableFields = tables + dot + fields;
 
         public const string TableRows = tables + dot + rows;
+
+        public const string TableMaps = tables + dot + maps;
 
         public const string WfCore = wf + dot + core;
 

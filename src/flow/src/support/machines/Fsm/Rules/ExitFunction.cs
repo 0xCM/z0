@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Collections.Generic;
-    
+
     using static Konst;
     using static z;
 
@@ -17,12 +17,10 @@ namespace Z0
     public class ExitFunction<S,A> : IFsmFunc
     {
         public ExitFunction(IEnumerable<IFsmActionRule<A>> rules)
-        {
-            this.RuleIndex = rules.Select(rule => (rule.RuleId, rule)).ToDictionary();
-        }
-        
+            => RuleIndex = rules.Select(rule => (rule.RuleId, rule)).ToDictionary();
+
         readonly Dictionary<int, IFsmActionRule<A>> RuleIndex;
-        
+
         public Option<A> Eval(S source)
             => Rule(Fsm.exitKey(source)).TryMap(r => r.Action);
 

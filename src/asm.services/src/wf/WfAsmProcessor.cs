@@ -18,9 +18,9 @@ namespace Z0
         public IWfDataBroker<Mnemonic,ApiInstruction> Broker {get;}
 
         [MethodImpl(Inline)]
-        public WfAsmProcessor(IWfShell context)
+        public WfAsmProcessor(IWfShell wf)
         {
-            Wf = context;
+            Wf = wf;
             Broker = WfControl.broker<Mnemonic,ApiInstruction>((int)Mnemonic.LAST);
         }
 

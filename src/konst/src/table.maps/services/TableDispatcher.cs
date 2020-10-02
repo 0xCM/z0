@@ -13,10 +13,10 @@ namespace Z0
     /// <summary>
     /// Table process orchestrator
     /// </summary>
-    public readonly ref struct TableDispatcher<F,T,D,S,Y>
+    public readonly ref struct TableDispatcher<F,T,K,S,Y>
         where F : unmanaged, Enum
-        where T : struct, ITable<F,T,D>
-        where D : unmanaged, Enum
+        where T : struct, ITable<F,T,K>
+        where K : unmanaged, Enum
         where S : unmanaged
     {
         /// <summary>
@@ -37,18 +37,18 @@ namespace Z0
         /// <summary>
         /// The table processors that define/apply target -> source projection
         /// </summary>
-        readonly Span<TableMap<D,S,T,Y>> Processors;
+        readonly Span<TableMap<K,S,T,Y>> Processors;
 
         /// <summary>
         /// Processor selection keys
         /// </summary>
-        readonly TableSectors<D,S> Selectors;
+        readonly KeyMapIndex<K,S> Selectors;
 
         uint SourceCount
             => (uint)Source.Length;
 
         [MethodImpl(Inline)]
-        public TableDispatcher(IWfShell wf, T[] tables, TableMaps<D,S,T,Y> processors, TableSectors<D,S> selectors, Y[] dst)
+        public TableDispatcher(IWfShell wf, T[] tables, TableProcessors<K,S,T,Y> processors, KeyMapIndex<K,S> selectors, Y[] dst)
         {
             Wf = wf;
             Source = tables;
@@ -73,21 +73,21 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref Y Map(in T src, ref Y dst)
         {
-            dst = Processor(src.Id).Map(src);
+            dst = Processor(src.Key).Map(src);
             return ref dst;
         }
 
         [MethodImpl(Inline)]
-        public ref readonly Y Processed(D id)
+        public ref readonly Y Processed(K id)
             => ref skip(Target, Index(id));
 
 
         [MethodImpl(Inline)]
-        public ulong Index(D id)
+        public ulong Index(K id)
         {
             ref readonly var selector = ref Selectors[id];
-            var position = selector.Position;
-            return Table.index(selector, Selectors.Offset);
+            var position = selector.Index;
+            return TableMaps.index(selector, Selectors.Offset);
         }
 
         /// <summary>
@@ -95,10 +95,10 @@ namespace Z0
         /// </summary>
         /// <param name="id">The projector identity</param>
         [MethodImpl(Inline)]
-        public ref readonly TableMap<D,S,T,Y> Processor(D id)
+        public ref readonly TableMap<K,S,T,Y> Processor(K id)
         {
             ref readonly var selector = ref Selectors[id];
-            var position = selector.Position;
+            var position = selector.Index;
             var idx = Index(id);
             ref readonly var p = ref skip(Processors, idx);
             return ref p;

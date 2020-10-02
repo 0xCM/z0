@@ -19,8 +19,10 @@ namespace Z0
             Source = MemoryFile.open(src.Name);
             Wf = wf;
             Pe = new PEReader(Source.BaseAddress.Pointer<byte>(), (int)Source.Size);
+            ImageSize = Source.Size;
+            ImagePointer = Pe.GetEntireImage().Pointer;
             Reader = Pe.GetMetadataReader();
-            PeMemory = Pe.GetMetadata();
+            CliMetadata = Pe.GetMetadata();
         }
 
         public DebugMetadataHeader DebugMetadataHeader

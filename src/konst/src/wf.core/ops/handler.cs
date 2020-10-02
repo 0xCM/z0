@@ -10,8 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using static TableFunctions;
-
     partial struct WfCore
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
@@ -19,7 +17,7 @@ namespace Z0
             => new DataHandler<T>(receiver);
 
         [MethodImpl(Inline)]
-        public static WfDataHandler<S,T> handler<S,T>(IWfShell wf, Map<S,T> f, S[] src, T[] dst)
+        public static WfDataHandler<S,T> handler<S,T>(IWfShell wf, RefMap<S,T> f, S[] src, T[] dst)
             => new WfDataHandler<S,T>(wf, f,src,dst);
     }
 }

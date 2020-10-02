@@ -9,19 +9,18 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static TableFunctions;
 
     [ApiHost]
     public readonly struct WfControl
     {
         /// <summary>
-        /// Creates a T-parametric sink predicated on a <see cref='Receive{T}'/> process function
+        /// Creates a T-parametric sink predicated on a <see cref='ValueReceiver{T}'/> process function
         /// </summary>
         /// <param name="wf">The workflow context</param>
         /// <param name="f">The process function</param>
         /// <typeparam name="T">The data type</typeparam>
         [MethodImpl(Inline)]
-        public static TableSink<T> sink<T>(IWfShell wf, Receive<T> f)
+        public static TableSink<T> sink<T>(IWfShell wf, ValueReceiver<T> f)
             where T : struct, ITable<T>
                 => new TableSink<T>(wf, f);
 
@@ -77,12 +76,6 @@ namespace Z0
             return e;
         }
 
-        [MethodImpl(Inline)]
-        public static TableRunner<F,T,D,S,Y> runner<F,T,D,S,Y>(IWfShell wf, TableMaps<D,S,T,Y> processors, TableSectors<D,S> selectors)
-            where F : unmanaged, Enum
-            where T : struct, ITable<F,T,D>
-            where D : unmanaged, Enum
-            where S : unmanaged
-                => new TableRunner<F,T,D,S,Y>(wf, processors, selectors);
+
     }
 }

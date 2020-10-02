@@ -13,6 +13,14 @@ namespace Z0
     {
         internal readonly bool State;
 
+        public const char Zero = '0';
+
+        public const char One = '1';
+
+        [MethodImpl(Inline), Op]
+        public static bit Parse(char c)
+            => c == One;
+
         [MethodImpl(Inline)]
         public bit(bool state)
             => State = state;
@@ -47,6 +55,58 @@ namespace Z0
 
         public bit(ulong state)
             => State = state != 0;
+
+        /// <summary>
+        /// Computes the bitwise AND between the operands
+        /// </summary>
+        /// <param name="a">The left bit</param>
+        /// <param name="b">The right bit</param>
+        [MethodImpl(Inline)]
+        public static bit operator & (bit a, bit b)
+            => a.State & b.State;
+
+        /// <summary>
+        /// Computes the bitwise OR between the operands
+        /// </summary>
+        /// <param name="a">The left bit</param>
+        /// <param name="b">The right bit</param>
+        [MethodImpl(Inline)]
+        public static bit operator | (bit a, bit b)
+            => a.State | b.State;
+
+        /// <summary>
+        /// Computes the bitwise XOR between the operands
+        /// </summary>
+        /// <param name="a">The left bit</param>
+        /// <param name="b">The right bit</param>
+        [MethodImpl(Inline)]
+        public static bit operator ^ (bit a, bit b)
+            => a.State ^ b.State;
+
+        /// <summary>
+        /// Combines the states of the source bits
+        /// </summary>
+        /// <param name="a">The left bit</param>
+        /// <param name="b">The right bit</param>
+        [MethodImpl(Inline)]
+        public static bit operator + (bit a, bit b)
+            => a.State ^ b.State;
+
+        /// <summary>
+        /// Inverts the state of the source bit
+        /// </summary>
+        /// <param name="a">The source bit</param>
+        [MethodImpl(Inline)]
+        public static bit operator ~(bit a)
+            => !a.State;
+
+        /// <summary>
+        /// Inverts the state of the source bit
+        /// </summary>
+        /// <param name="a">The source bit</param>
+        [MethodImpl(Inline)]
+        public static bit operator !(bit a)
+            => !a.State;
 
         [MethodImpl(Inline)]
         public static implicit operator bit(bool src)
@@ -184,6 +244,14 @@ namespace Z0
         public static implicit operator bit(BitState src)
             => new bit((byte)src);
 
+        [MethodImpl(Inline)]
+        public static bool operator ==(bit a, bit b)
+            => a.State == b.State;
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(bit a, bit b)
+            => a.State != b.State;
+
         /// <summary>
         /// Constructs a disabled bit
         /// </summary>
@@ -202,5 +270,108 @@ namespace Z0
              get => true;
         }
 
+        /// <summary>
+        /// Promotes a bit to a numeric value where all target bits are enabled if the state of the
+        /// bit is on; otherwise all target bits are disabled
+        /// </summary>
+        /// <param name="src">The source bit</param>
+        /// <typeparam name="T">The target numeric type</typeparam>
+        [MethodImpl(Inline), Op]
+        public T Promote<T>()
+            where T : unmanaged
+                => this ? NumericLiterals.maxval<T>() : default;
+
+        [MethodImpl(Inline), Op]
+        public bool Equals(bit b)
+            => State == b.State;
+
+        public override bool Equals(object b)
+            => b is bit x && Equals(x);
+
+        public override int GetHashCode()
+            => (int)(u8(State));
+
+        [MethodImpl(Inline), Op]
+        public char ToChar()
+            => (char)(u8(State) + 48);
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => State ? "1" : "0";
+
+        public override string ToString()
+            => Format();
+
+        /// <summary>
+        /// Tests the state of an index-identified source bit
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="pos">The 0-based index of the bit to test</param>
+        [MethodImpl(Inline), Op]
+        public static bit test(sbyte src, byte pos)
+            => new bit((src & (1 << pos)) != 0);
+
+        /// <summary>
+        /// Tests the state of an index-identified source bit
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="pos">The 0-based index of the bit to test</param>
+        [MethodImpl(Inline), Op]
+        public static bit test(byte src, int pos)
+            => new bit(((uint)src >> pos) & 1);
+
+        /// <summary>
+        /// Tests the state of an index-identified source bit
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="pos">The 0-based index of the bit to test</param>
+        [MethodImpl(Inline), Op]
+        public static bit test(short src, int pos)
+            => new bit((src & (1 << pos)) != 0);
+
+        /// <summary>
+        /// Tests the state of an index-identified source bit
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="pos">The 0-based index of the bit to test</param>
+        [MethodImpl(Inline), Op]
+        public static bit test(ushort src, int pos)
+            => new bit(((uint)src >> pos) & 1);
+
+        /// <summary>
+        /// Tests the state of an index-identified source bit
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="pos">The 0-based index of the bit to test</param>
+        [MethodImpl(Inline), Op]
+        public static bit test(int src, int pos)
+            => new bit((src & (1 << pos)) != 0);
+
+        /// <summary>
+        /// Tests the state of an index-identified source bit
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="pos">The 0-based index of the bit to test</param>
+        [MethodImpl(Inline), Op]
+        public static bit test(long src, int pos)
+            => new bit((src & (1L << pos)) != 0);
+
+        /// <summary>
+        /// Tests the state of an index-identified source bit
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="pos">The 0-based index of the bit to test</param>
+        [MethodImpl(Inline), Op]
+        public static bit test(uint src, int pos)
+            => new bit((src >> pos) & 1);
+
+        /// <summary>
+        /// Tests the state of an index-identified source bit
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="pos">The 0-based index of the bit to test</param>
+        [MethodImpl(Inline), Op]
+        public static bit test(ulong src, int pos)
+            => new bit((uint)((src >> pos) & 1));
     }
 }

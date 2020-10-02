@@ -24,11 +24,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe Ref<T> from<T>(in T src, uint count)
-            => new Ref<T>(seg(pvoid(src), size<T>(count)));
+            => new Ref<T>(segref(pvoid(src), size<T>(count)));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe Ref<T> from<T>(in T src, int count)
-            => new Ref<T>(seg(pvoid(src), size<T>((uint)count)));
+            => new Ref<T>(segref(pvoid(src), size<T>((uint)count)));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe Ref<T> from<T>(T[] src)
@@ -36,15 +36,15 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static unsafe Ref<sbyte> from(sbyte[] src)
-            => seg(address(src), (uint)src.Length);
+            => segref(address(src), (uint)src.Length);
 
         [MethodImpl(Inline), Op]
         public static unsafe Ref<byte> from(byte[] src)
-            => seg(address(src), (uint)src.Length);
+            => segref(address(src), (uint)src.Length);
 
         [MethodImpl(Inline), Op]
         public static unsafe Ref<ulong> from(ulong[] src)
-            => seg(address(src), (uint)src.Length);
+            => segref(address(src), (uint)src.Length);
 
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]

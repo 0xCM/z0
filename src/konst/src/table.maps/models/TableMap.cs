@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static TableFunctions;
 
     using static z;
 
@@ -16,16 +15,16 @@ namespace Z0
     /// Defines a projection operator project:T[] -> Y[] where T conforms to <see cref='ITable'/> and Y is arbitrary
     /// </summary>
     public readonly struct TableMap<D,S,T,Y> : ITableMap<TableMap<D,S,T,Y>, D,S,T,Y>
-        where D : unmanaged, Enum
+        where D : unmanaged
         where T : struct, ITable
         where S : unmanaged
     {
-        public TableSelector<D,S> Id {get;}
+        public KeyMap<D,S> Id {get;}
 
-        readonly MapTable<T,Y> Fx;
+        readonly Func<T,Y> Fx;
 
         [MethodImpl(Inline)]
-        public TableMap(MapTable<T,Y> f, TableSelector<D,S> id)
+        public TableMap(Func<T,Y> f, KeyMap<D,S> id)
         {
             Id = id;
             Fx = f;

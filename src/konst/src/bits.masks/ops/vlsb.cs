@@ -13,7 +13,6 @@ namespace Z0
 
     partial class BitMasks
     {
-
         /// <summary>
         /// [000...001]
         /// The least bit, relative to the component, is enabled

@@ -12,6 +12,7 @@ namespace Z0
     using static z;
 
     using api = CharBlocks;
+    using B = CharBlock1;
 
     /// <summary>
     /// Defines a character block b with capacity(b) = 1x16u
@@ -28,6 +29,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
            get => cover<CharBlock1,char>(this, CharCount);
+        }
+
+        public uint Length
+        {
+            [MethodImpl(Inline)]
+            get => CharCount;
         }
 
         [MethodImpl(Inline)]

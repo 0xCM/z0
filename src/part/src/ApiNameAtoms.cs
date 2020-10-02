@@ -55,15 +55,25 @@ namespace Z0
 
         public const string logic = nameof(logic);
 
+        public const string maps = nameof(maps);
+
+        public const string options = nameof(options);
+
         public const string operators = nameof(operators);
 
         public const string operands = nameof(operands);
 
+        public const string projectors = nameof(projectors);
+
         public const string rows = nameof(rows);
+
+        public const string parser = nameof(parser);
 
         public const string resources = nameof(resources);
 
         public const string sfunc = nameof(sfunc);
+
+        public const string stream = nameof(stream);
 
         public const string surrogates = nameof(surrogates);
 
@@ -71,11 +81,7 @@ namespace Z0
 
         public const string scalar = nameof(scalar);
 
-        public const string projectors = nameof(projectors);
-
         public const string query = nameof(query);
-
-        public const string options = nameof(options);
 
         public const string text = nameof(text);
 

@@ -12,16 +12,11 @@ namespace Z0
 
     partial struct Table
     {
-        [MethodImpl(Inline)]
-        public static TableSelector<D,S> selector<D,S>(D id, S s = default)
-            where D : unmanaged, Enum
-            where S : unmanaged
-                => new TableSelector<D,S>(id);
 
         [MethodImpl(Inline)]
-        public static TableSectors<D,S> selectors<D,S>(TableSelector<D,S>[] src, S min, S max)
+        public static KeyMapIndex<D,S> selectors<D,S>(KeyMap<D,S>[] src, S min, S max)
             where D : unmanaged, Enum
             where S : unmanaged
-                => new TableSectors<D,S>(src,min,max);
+                => new KeyMapIndex<D,S>(src,min,max);
     }
 }

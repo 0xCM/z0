@@ -30,17 +30,17 @@ namespace Z0
         public readonly ushort CellWidth;
 
         /// <summary>
-        /// The the toal number of allocated storage cells
+        /// The the total number of allocated storage cells
         /// </summary>
         public readonly uint CellCount;
 
         /// <summary>
-        /// The the toal number of segment-aligned bits allocated for storage
+        /// The the total number of segment-aligned bits allocated for storage
         /// </summary>
         public readonly uint StoreWidth;
 
         /// <summary>
-        /// The the toal number of segment-aligned bytes allocated for storage
+        /// The the total number of segment-aligned bytes allocated for storage
         /// </summary>
         public readonly uint StoreSize;
 

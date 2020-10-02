@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static TableFunctions;
 
     public readonly ref struct WfDataHandler<S,T>
     {
@@ -17,12 +16,12 @@ namespace Z0
 
         readonly Span<T> Target;
 
-        readonly Map<S,T> Fx;
+        readonly RefMap<S,T> Fx;
 
         readonly IWfShell Wf;
 
         [MethodImpl(Inline)]
-        public WfDataHandler(IWfShell wf, Map<S,T> f, S[] src, T[] dst)
+        public WfDataHandler(IWfShell wf, RefMap<S,T> f, S[] src, T[] dst)
         {
             Wf = wf;
             Fx = f;

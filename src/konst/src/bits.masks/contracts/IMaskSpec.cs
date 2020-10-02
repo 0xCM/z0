@@ -9,8 +9,6 @@ namespace Z0
         BitMaskKind M {get;}
 
         NumericKind K {get;}
-
-
     }
 
     public interface IMaskSpec<T> : IMaskSpec

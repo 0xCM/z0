@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe ConstRef<T> @const<T>(in T src, uint count)
-            => new ConstRef<T>(seg(pvoid(src), size<T>(count)));
+            => new ConstRef<T>(segref(pvoid(src), size<T>(count)));
 
         /// <summary>
         /// Captures a sized readonly parametric reference to source span content
@@ -28,7 +28,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe ConstRef<T> @cost<T>(ReadOnlySpan<T> src)
-            => new ConstRef<T>(seg(pvoid(first(src)), size<T>((uint)src.Length)));
+            => new ConstRef<T>(segref(pvoid(first(src)), size<T>((uint)src.Length)));
 
         /// <summary>
         /// Captures a readonly character reference to source string content

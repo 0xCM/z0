@@ -9,17 +9,17 @@ namespace Z0
 
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
-    
+
     partial struct z
-    {         
+    {
         /// <summary>
-        /// Adds an offset, measured by segments of bit-width <see cref='W64'/>, to a source reference and presents the cell 
-        /// at the offset as an unsigned integer of bit-width <see cref='W64'/>
+        /// Adds an offset, measured by segments of bit-width <see cref='W32'/>, to a source reference and presents the cell
+        /// at the offset as an unsigned integer of bit-width <see cref='W32'/>
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="count">The number of 32-bit segments to skip</param>
         /// <typeparam name="T">The (arbitrary) source type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref uint seek32<T>(in T src, uint count)
             => ref Add(ref As<T,uint>(ref edit(src)), (int)count);
 
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="count">The number of 32-bit segments to skip</param>
         /// <typeparam name="T">The source element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref uint seek32<T>(Span<T> src, uint count)
             => ref Add(ref As<T,uint>(ref first(src)), (int)count);
     }

@@ -12,9 +12,6 @@ namespace Z0
 
     partial struct Table
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ClosedInterval<ulong> positions<S>(S min, S max)
-            where S : unmanaged
-                => Intervals.closed(uint64(min), uint64(max));
+
     }
 }

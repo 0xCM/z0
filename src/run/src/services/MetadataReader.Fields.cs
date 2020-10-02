@@ -24,7 +24,11 @@ namespace Z0
 
         readonly SysReader Reader;
 
-        readonly PEMemoryBlock PeMemory;
+        ulong ImageSize;
+
+        readonly Ptr<byte> ImagePointer;
+
+        readonly PEMemoryBlock CliMetadata;
 
         TableSpan<AssemblyFileHandle> _AssemblyFileHandles;
 

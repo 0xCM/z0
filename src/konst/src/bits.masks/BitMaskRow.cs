@@ -9,13 +9,9 @@ namespace Z0
 
     using static Konst;
 
-    using NBK = NumericBaseKind;
-
-    [StructLayout(LayoutKind.Sequential), Table(TableName)]
+    [StructLayout(LayoutKind.Sequential)]
     public struct BitMaskRow
     {
-        public const string TableName = "root.bitmasks";
-
         public string Name;
 
         public TypeCode TypeCode;
@@ -24,6 +20,6 @@ namespace Z0
 
         public string Text;
 
-        public NBK Base;
+        public NumericBaseKind Base;
     }
 }

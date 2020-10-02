@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     partial struct z
     {
         /// <summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// <summary>
         /// Adds an offset to a reference, measured in bytes
         /// </summary>
-        /// <param name="src">The soruce reference</param>
+        /// <param name="src">The source reference</param>
         /// <param name="count">The number of bytes to add</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]

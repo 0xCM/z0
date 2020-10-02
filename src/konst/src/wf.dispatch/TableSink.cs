@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static TableFunctions;
 
     /// <summary>
     /// Defines a canonical table sink predicated on a process function
@@ -19,10 +18,10 @@ namespace Z0
     {
         public IWfShell Wf {get;}
 
-        readonly Receive<T> Fx;
+        readonly ValueReceiver<T> Fx;
 
         [MethodImpl(Inline)]
-        public TableSink(IWfShell wf, Receive<T> f)
+        public TableSink(IWfShell wf, ValueReceiver<T> f)
         {
             Wf = wf;
             Fx = f;

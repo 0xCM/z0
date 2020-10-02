@@ -18,7 +18,7 @@ namespace Z0
             => State  = state;
 
         [MethodImpl(Inline)]
-        public void Push(BitState src)
+        public void Push(bit src)
         {
             State <<= 1;
             State |= (uint)src;
@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public BitState Pop()
         {
-            var val = (BitState)(State & 1);
+            var val = (bit)(State & 1);
             State >>= 1;
             return val;
         }

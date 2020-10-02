@@ -32,18 +32,5 @@ namespace Z0
 
     }
 
-    /// <summary>
-    /// Characterizes a discriminated table
-    /// </summary>
-    /// <typeparam name="F">The field type</typeparam>
-    /// <typeparam name="T">The data type</typeparam>
-    /// <typeparam name="D">The discriminator type</typeparam>
-    [Free]
-    public interface ITable<F,T,D> : ITable<F,T>
-        where F : unmanaged, Enum
-        where T : struct, ITable<F,T>
-        where D : unmanaged, Enum
-    {
-        D Id {get;}
-    }
+
 }

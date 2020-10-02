@@ -5,9 +5,8 @@
 namespace Z0
 {
     using System;
- 
+
     using static Konst;
-    using static Memories;
 
     public sealed class t_bitstream : UnitTest<t_bitstream>
     {
@@ -16,7 +15,7 @@ namespace Z0
             check_singletons<byte>();
             check_singletons<ushort>();
             check_singletons<uint>();
-            check_singletons<ulong>();            
+            check_singletons<ulong>();
         }
 
         void check_singletons<T>()

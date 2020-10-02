@@ -19,7 +19,7 @@ namespace Z0
         /// The triggering event
         /// </summary>
         public E Trigger {get;}
-    
+
         /// <summary>
         /// The source state
         /// </summary>
@@ -40,10 +40,13 @@ namespace Z0
         }
 
         public override int GetHashCode()
-            => Hash; 
+            => Hash;
 
-        public override string ToString() 
+        [MethodImpl(Inline)]
+        public string Format()
+            => string.Format(RP.Tuple2, Source, Trigger);
+
+        public override string ToString()
             => $"({Source}, {Trigger})";
     }
-
 }

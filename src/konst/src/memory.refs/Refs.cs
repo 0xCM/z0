@@ -35,10 +35,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe Ref<T> one<T>(in T src)
-            => new Ref<T>(seg(pvoid(src), size<T>()));
+            => new Ref<T>(segref(pvoid(src), size<T>()));
 
         [MethodImpl(Inline), Op]
         public static unsafe Ref boxed(object src)
-            => seg(pvoid(src), 8);
+            => segref(pvoid(src), 8);
     }
 }

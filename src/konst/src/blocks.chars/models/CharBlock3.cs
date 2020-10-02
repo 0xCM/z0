@@ -12,12 +12,13 @@ namespace Z0
     using static z;
 
     using api = CharBlocks;
+    using B = CharBlock3;
 
     /// <summary>
     /// Defines a character block b with capacity(b) = 3x16u
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
-    public struct CharBlock3 : ICharBlock<CharBlock3>
+    public struct CharBlock3 : ICharBlock<B>
     {
         /// <summary>
         /// The lower content
@@ -32,7 +33,17 @@ namespace Z0
         public ReadOnlySpan<char> Data
         {
             [MethodImpl(Inline)]
-           get => cover<CharBlock3,char>(this, CharCount);
+           get => cover<B,char>(this, CharCount);
+        }
+
+        [MethodImpl(Inline)]
+        public static implicit operator B(string src)
+            => api.init(src, out B dst);
+
+        public uint Length
+        {
+            [MethodImpl(Inline)]
+            get => CharCount;
         }
 
         /// <summary>

@@ -11,21 +11,24 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
+    [ApiHost(ApiNames.BitStream, true)]
     public readonly struct BitStream
     {
-        public static Bit32[] from<T>(T src)
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static bit[] from<T>(T src)
             where T : struct
         {
-            var bytes = z.bytes(src);
-            var buffer = sys.alloc<Bit32>(bytes.Length*8);
-            var dst = span(buffer);
+            var width = bitsize<T>();
+            var size = z.size<T>();
+            ref readonly var input = ref uint8(ref src);
+            var buffer = sys.alloc<bit>(width);
+            ref var dst = ref first(span(buffer));
 
-            for(var i=0u; i<bytes.Length; i++)
+            for(var i=0u; i<size; i++)
             {
-                var b = skip(bytes,i);
+                ref readonly var b = ref skip(input,i);
                 for(byte j=0; j<8; j++)
-                    seek(dst,j) = Bit32.test(b,j);
+                    seek(dst,j) = bit.test(b,j);
             }
             return buffer;
         }
@@ -35,7 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The primal type</typeparam>
-        public static IEnumerable<Bit32> from<T>(IEnumerator<T> src)
+        public static IEnumerable<bit> from<T>(IEnumerator<T> src)
             where T : struct
         {
             while(src.MoveNext())
@@ -49,13 +52,9 @@ namespace Z0
         /// <param name="src">The source stream</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static IEnumerable<Bit32> from<T>(IEnumerable<T> src)
+        public static IEnumerable<bit> from<T>(IEnumerable<T> src)
             where T : struct
                 => from<T>(src.GetEnumerator());
 
-        // [MethodImpl(Inline)]
-        // public static IStreamSource<bit> source<T>(IEnumerable<T> src)
-        //     where T : struct
-        //         => new BitStream<T>(src);
     }
 }

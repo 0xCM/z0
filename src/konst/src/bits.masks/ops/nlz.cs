@@ -8,26 +8,26 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
     using System.Runtime.Intrinsics.X86;
- 
+
     using static Konst;
 
-    partial class Bit
+    partial class BitMasks
     {
         /// <summary>
         /// Counts the number of leading zero bits in the source
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Nlz]
-        public static int nlz(byte src)
-            => (int)(Lzcnt.LeadingZeroCount((uint)src) - 24);
+        public static byte nlz(byte src)
+            => (byte)(Lzcnt.LeadingZeroCount((uint)src) - 24);
 
         /// <summary>
         /// Counts the number of leading zero bits in the source
         /// </summary>
         /// <param name="src">The bit source</param>
         [MethodImpl(Inline), Nlz]
-        public static int nlz(ushort src)
-            => (int)(Lzcnt.LeadingZeroCount((uint)src) - 16);
+        public static byte nlz(ushort src)
+            => (byte)(Lzcnt.LeadingZeroCount((uint)src) - 16);
 
         /// <summary>
         /// _lzcnt_u32
@@ -35,8 +35,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Nlz]
-        public static int nlz(uint src)
-            => (int)Lzcnt.LeadingZeroCount(src);
+        public static byte nlz(uint src)
+            => (byte)Lzcnt.LeadingZeroCount(src);
 
         /// <summary>
         /// _lzcnt_u64:
@@ -45,6 +45,6 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Nlz]
         public static int nlz(ulong src)
-            => (int)Lzcnt.X64.LeadingZeroCount(src);            
+            => (byte)Lzcnt.X64.LeadingZeroCount(src);
     }
 }

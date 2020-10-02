@@ -23,16 +23,16 @@ namespace Z0
         public WfStepId StepId
             => WfCore.step(typeof(TableRunner<F,T,D,S,Y>));
 
-        readonly TableMaps<D,S,T,Y> Processors;
+        readonly TableProcessors<D,S,T,Y> Processors;
 
-        readonly TableSectors<D,S> Selectors;
+        readonly KeyMapIndex<D,S> Selectors;
 
         readonly T[] Source;
 
         readonly Y[] Target;
 
         [MethodImpl(Inline)]
-        public TableRunner(IWfShell wf, TableMaps<D,S,T,Y> processors, TableSectors<D,S> selectors)
+        public TableRunner(IWfShell wf, TableProcessors<D,S,T,Y> processors, KeyMapIndex<D,S> selectors)
         {
             Wf = wf;
             Processors = processors;
@@ -43,7 +43,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public TableRunner(IWfShell wf, TableMaps<D,S,T,Y> processors, TableSectors<D,S> selectors, T[] src, Y[] dst)
+        public TableRunner(IWfShell wf, TableProcessors<D,S,T,Y> processors, KeyMapIndex<D,S> selectors, T[] src, Y[] dst)
         {
             Wf = wf;
             Processors = processors;

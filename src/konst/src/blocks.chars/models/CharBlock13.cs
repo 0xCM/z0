@@ -6,18 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Konst;
     using static z;
 
-    public readonly struct TableFunctions
-    {
-        public delegate ref T Map<S,T>(in S src, ref T dst);
+    using api = CharBlocks;
 
-        public delegate Y MapTable<T,Y>(in T src)
-            where T : struct;
-
-        public delegate void Receive<T>(in T src)
-            where T : struct;
-    }
 }

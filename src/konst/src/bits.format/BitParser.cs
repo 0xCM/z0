@@ -6,15 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static AsciCharCode;
     using static Konst;
     using static z;
 
-    [ApiHost]
+    [ApiHost(ApiNames.BitParser,true)]
     public readonly struct BitParser
     {
-        static ReadOnlySpan<AsciCharCode> Filter 
+        static ReadOnlySpan<AsciCharCode> Filter
             => new AsciCharCode[]{LBracket, RBracket, AsciCharCode.Space, Underscore, b};
 
         [MethodImpl(Inline), Op]
@@ -31,20 +31,20 @@ namespace Z0
         /// </summary>
         /// <param name="src">The bit source</param>
         [Op]
-        public static ReadOnlySpan<uint1> parse(string input)                
-        {            
+        public static ReadOnlySpan<bit> parse(string input)
+        {
             var src = span(input);
             var count = src.Length;
-            var dst = sys.span<uint1>(count);
+            var dst = sys.span<bit>(count);
 
             var j=0u;
             for(uint i=0u; i<count; i++)
             {
                 ref readonly var c = ref skip(src,i);
                 if(!exclude(c))
-                    seek(dst, j++) = skip(src,i) == '1';
+                    seek(dst, j++) = skip(src,i) == bit.One;
             }
             return slice(dst,0,j);
-        }         
+        }
     }
 }

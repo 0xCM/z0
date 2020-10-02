@@ -10,19 +10,19 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct TableSelector<D,S>
-        where D : unmanaged, Enum      
-        where S : unmanaged  
+    public readonly struct KeyMap<K,I>
+        where K : unmanaged
+        where I : unmanaged
     {
-        public readonly D Id;
+        public readonly K Key;
 
-        public readonly S Position;
+        public readonly I Index;
 
-        [MethodImpl(Inline)]        
-        public TableSelector(D id)
+        [MethodImpl(Inline)]
+        public KeyMap(K key, I pos)
         {
-            Id = id;
-            Position = Enums.scalar<D,S>(Id);
+            Key = key;
+            Index = pos;
         }
     }
 }
