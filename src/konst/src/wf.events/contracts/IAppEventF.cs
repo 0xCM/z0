@@ -4,14 +4,14 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Security;
+
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Characterizes a reified application event
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IAppEvent<F> : IAppEvent, INullary<F>, ICorrelated<F>, IChronic<F>
         where F : struct, IAppEvent<F>
     {
@@ -19,7 +19,7 @@ namespace Z0
             => default;
     }
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IAppEvent<F,T> : IAppEvent<F>
         where F : struct, IAppEvent<F,T>
     {

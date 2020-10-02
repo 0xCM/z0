@@ -4,25 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
-    using static Render;
-    using static WfCore;
-    using static z;
-
+    [Free]
     public interface IWfStatus : IWfEvent
     {
 
     }
 
+    [Free]
     public interface IWfStatus<T> : IWfStatus
     {
         WfPayload<T> Content {get;}
     }
 
 
+    [Free]
     public interface IWfTrace<T> : IWfEvent
     {
         WfPayload<T> Content {get;}

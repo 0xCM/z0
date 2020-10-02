@@ -31,7 +31,7 @@ namespace Z0
                 Flair = flair;
             }
 
-            public WfPayload<FS.FilePath> Content
+            public WfPayload<FS.FilePath> Payload
                 => Path;
 
             [MethodImpl(Inline)]

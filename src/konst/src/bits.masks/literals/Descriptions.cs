@@ -9,8 +9,12 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct BitMaskDescription
+    partial class BitMasks
     {
-        public const string LsbIxJx1 = "For a field of width {0} partitioned into segments of width {1}, the least significant bit of each segment is enabled";
+        public readonly struct Descriptions
+        {
+            public const string LsbIxJx1 = "For a field of width {0} partitioned into segments of width {1}, the least significant bit of each segment is enabled";
+        }
     }
+
 }

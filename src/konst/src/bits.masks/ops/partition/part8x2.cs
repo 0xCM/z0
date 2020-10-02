@@ -15,6 +15,15 @@ namespace Z0
     partial class BitMasks
     {
         /// <summary>
+        /// Partitions the source into 4 target segments of physical width 8 and effective width 2
+        /// </summary>
+        /// <param name="src">The source value</param>
+        /// <param name="dst">The target memory location</param>
+        [MethodImpl(Inline), Op]
+        public static ref byte part8x2(byte src, ref byte dst)
+            => ref part8x2((uint)src, ref dst);
+
+        /// <summary>
         /// Partitions the first 8 bits of a 32-bit source into 4 target segments each with an effective width of 2
         /// </summary>
         /// <param name="src">The source value</param>
@@ -28,14 +37,5 @@ namespace Z0
             seek(dst, 3) = (byte)(src >> 6 & L.Lsb8x8x2);
             return ref dst;
         }
-
-        /// <summary>
-        /// Partitions the source into 4 target segments of physical width 8 and effective width 2
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="dst">The target memory location</param>
-        [MethodImpl(Inline), Op]
-        public static ref byte part8x2(byte src, ref byte dst)
-            => ref part8x2((uint)src, ref dst);
     }
 }

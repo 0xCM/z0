@@ -3,15 +3,17 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System.Security;
 
-    [SuppressUnmanagedCodeSecurity]
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IDataEvent : IAppEvent
     {
         StringRef Id {get;}
 
-        BinaryCode Encoded {get;}    
+        BinaryCode Encoded {get;}
         string ITextual.Format()
         {
             var dst = text.build();
@@ -20,17 +22,17 @@ namespace Z0
             dst.Append(Chars.Pipe);
             dst.AppendLine(Encoded.Format());
             return dst.ToString();
-        }    
+        }
     }
 
     /// <summary>
     /// Characterizes a reified application event
     /// </summary>
     /// <typeparam name="F">The reification type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IDataEvent<H> : IDataEvent, IAppEvent<H>
         where H : struct, IDataEvent<H>
     {
 
-    }    
+    }
 }

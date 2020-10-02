@@ -21,7 +21,7 @@ namespace Z0
                 => default;
 
         /// <summary>
-        /// [10000001]
+        /// [10000001] | JSB := (msb | lsb)(f,d) where f := 8 and d := 1
         /// </summary>
         /// <param name="f">The frequency selector</param>
         /// <param name="d">The bit density</param>
@@ -45,7 +45,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// [11000011]
+        /// [11000011] | JSB := (msb | lsb)(f,d) where f := 8 and d := 2
         /// </summary>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>
@@ -69,7 +69,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// [11100111]
+        /// [11100111] | JSB := (msb | lsb)(f,d) where f := 3 and d := 3
         /// </summary>
         /// <param name="f">The repetition frequency</param>
         /// <param name="d">The bit density</param>

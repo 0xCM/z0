@@ -4,8 +4,6 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static BitMaskDescription;
-
     partial class BitMasks
     {
         partial struct Literals
@@ -87,7 +85,6 @@ namespace Z0
             /// </summary>
             [BitMask ("[11100111 11100111 11100111 11100111 11100111 11100111 11100111 11100111]")]
             public const ulong Jsb64x8x3 = (ulong) Jsb32x8x3 | (ulong) Jsb32x8x3 << 32;
-
         }
     }
 }

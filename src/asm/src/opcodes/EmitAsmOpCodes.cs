@@ -9,10 +9,8 @@ namespace Z0.Asm
 
     using static Konst;
 
-
     public ref struct EmitAsmOpCodes
     {
-
         readonly IWfShell Wf;
 
         readonly WfHost Host;

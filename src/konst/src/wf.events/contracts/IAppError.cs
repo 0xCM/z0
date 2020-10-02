@@ -7,10 +7,12 @@ namespace Z0
     using System;
     using System.Security;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Characterizes an event that describes an error
     /// </summary>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IAppError : IAppEvent
     {
         FlairKind IAppEvent.Flair
@@ -23,7 +25,7 @@ namespace Z0
     /// <summary>
     /// Characterizes an error event reification
     /// </summary>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IAppError<F> : IAppError, IAppEvent<F>
         where F : struct, IAppError<F>
     {

@@ -15,6 +15,8 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using Z0.Lang.Cs;
+
     public readonly struct ToolProxies
     {
         public static EmitResult create(ToolProxySpec config)
@@ -30,10 +32,10 @@ namespace Z0
         public static CSharpCompilation compilation(ToolProxySpec config)
         {
             z.insist(config.Source.Exists, $"The file {config.Source}, it must exist");
-            var refs = gCSharp.pe(typeof(object),typeof(Enumerable),typeof(ProcessStartInfo));
+            var refs = CsLang.pe(typeof(object),typeof(Enumerable),typeof(ProcessStartInfo));
             var dst = FS.create(config.OutDir) + FS.file(config.Name, ArchiveExt.Exe);
             var code = new ToolProxyCode(dst);
-            return gCSharp.compilation(config.Name, refs, gCSharp.parse(code.Generate()));
+            return CsLang.compilation(config.Name, refs, CsLang.parse(code.Generate()));
         }
 
         public static bool create(ToolProxySpec spec, out EmitResult dst, out string[] errors)

@@ -19,7 +19,7 @@ namespace Z0
 
         public WfStepId StepId {get;}
 
-        public WfPayload<T> Content {get;}
+        public WfPayload<T> Payload {get;}
 
         public FlairKind Flair {get;}
 
@@ -27,11 +27,11 @@ namespace Z0
         public WfWarn(WfStepId step, T content, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
-            Content = content;
+            Payload = content;
             StepId = step;
             Flair = FlairKind.Warning;
         }
         public string Format()
-            => Render.format(EventId, StepId, Content);
+            => Render.format(EventId, StepId, Payload);
     }
 }

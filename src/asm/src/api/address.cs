@@ -13,23 +13,23 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline)]
-        public static RelAddress<BW,RW,B,R> address<BW,RW,B,R>(B @base, R offset, BW bw = default, RW rw = default)
+        public static RelativeAddress<BW,RW,B,R> address<BW,RW,B,R>(B @base, R offset, BW bw = default, RW rw = default)
             where BW: unmanaged, INumericWidth
             where RW: unmanaged, INumericWidth
             where B: unmanaged
             where R: unmanaged
-                => new RelAddress<BW,RW,B,R>(@base, offset);
+                => new RelativeAddress<BW,RW,B,R>(@base, offset);
 
         [MethodImpl(Inline), Op]
-        public static RelAddress<W32,W16,uint,ushort> address(uint @base, ushort offset)
+        public static RelativeAddress<W32,W16,uint,ushort> address(uint @base, ushort offset)
             => address(@base, offset, w32, w16);
 
         [MethodImpl(Inline), Op]
-        public static RelAddress<W64,W8,ulong,byte> address(ulong @base, byte offset)
+        public static RelativeAddress<W64,W8,ulong,byte> address(ulong @base, byte offset)
             => address(@base, offset, w64, w8);
 
         [MethodImpl(Inline), Op]
-        public static RelAddress<W64,W16,ulong,ushort> address(ulong @base, ushort offset)
+        public static RelativeAddress<W64,W16,ulong,ushort> address(ulong @base, ushort offset)
             => address(@base, offset, w64, w16);
 
         [MethodImpl(Inline), Op]

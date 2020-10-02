@@ -14,7 +14,7 @@ namespace Z0
     using static memory;
 
     [ApiHost]
-    public readonly struct Bytes
+    public readonly partial struct Bytes
     {
         [MethodImpl(Inline), Not]
         public static byte not(byte src)
@@ -28,30 +28,6 @@ namespace Z0
         public static void and(in byte A, in byte B, ref byte Z)
             => store8(and(read8(A), read8(B)), ref Z);
 
-        [MethodImpl(Inline), Or]
-        public static byte or(byte a, byte b, byte c)
-            => (byte)(a | b | c);
-
-        [MethodImpl(Inline), Or]
-        public static byte or(byte a, byte b, byte c, byte d)
-            => (byte)(a | b | c | d);
-
-        [MethodImpl(Inline), Or]
-        public static byte or(byte a, byte b, byte c, byte d, byte e)
-
-            => (byte)(a | b | c | d | e);
-
-        [MethodImpl(Inline), Or]
-        public static void or(in byte A, in byte B, ref byte Z)
-            => store8(or(read8(A), read8(B)), ref Z);
-
-        [MethodImpl(Inline), Xor]
-        public static byte xor(byte a, byte b)
-            => (byte)(a ^ b);
-
-        [MethodImpl(Inline), Xor]
-        public static void xor(in byte A, in byte B, ref byte Z)
-            => store8(xor(read8(A), read8(B)), ref Z);
 
         /// <summary>
         /// Computes the bitwise nand c := ~(a & b) for operands a and b

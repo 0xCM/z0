@@ -12,13 +12,25 @@ namespace Z0
 
     using static Konst;
 
+    /// <summary>
+    /// Describes a <see cref='ApiDataType'/> member operation
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public readonly struct ApiDataTypeRoutine
     {
+        /// <summary>
+        /// The defining type
+        /// </summary>
         public readonly ApiDataType DataType;
 
+        /// <summary>
+        /// The defining method
+        /// </summary>
         public readonly IdentifiedMethod Member;
 
+        /// <summary>
+        /// The asm content derived from the defining method
+        /// </summary>
         public readonly AsmMemberRoutine Routine;
 
         [MethodImpl(Inline)]

@@ -30,7 +30,5 @@ namespace Z0
 
         public string Format()
             => text.format(RenderPattern, nat64u<N>(), NumericKinds.kind<T>().Format());
-
-            //=> $"n(f:{value<N>()}, t:{NumericKinds.kind<T>().Format()})";
     }
 }

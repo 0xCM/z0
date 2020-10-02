@@ -12,6 +12,27 @@ namespace Z0.Asm
     [ApiHost]
     public readonly partial struct AsmLang
     {
+
+        [MethodImpl(Inline), Op]
+        public static AsmTokens tokens(in AsmTokenIndex index)
+            => new AsmTokens(index);
+
+        [MethodImpl(Inline), Op]
+        public static string definition(in AsmTokens tokens, AsmTokenKind id)
+            => tokens.Definitions[(int)id];
+
+        [MethodImpl(Inline), Op]
+        public static string meaning(in AsmTokens tokens, AsmTokenKind id)
+            => tokens.Meanings[(int)id];
+
+        [MethodImpl(Inline), Op]
+        public static ref readonly TokenInfo token(in AsmTokens tokens, AsmTokenKind id)
+            => ref tokens.Models[(int)id];
+
+        [MethodImpl(Inline), Op]
+        public static string identifier(in AsmTokens tokens, AsmTokenKind id)
+            => tokens.Identity[id];
+
         public interface IElement : ITextual
         {
             string RenderPattern {get;}

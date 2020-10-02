@@ -72,5 +72,9 @@ namespace Z0
         public const string WfCore = wf + dot + core;
 
         public const string WfCmd = wf + dot + cmd;
+
+        public const string PrimalKinds = primal + dot + kinds;
+
+        public const string PrimalKindBits = primal + dot + kinds + dot + bitfield;
     }
 }

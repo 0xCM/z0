@@ -5,7 +5,9 @@
 namespace Z0
 {
     using System;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IWfEventLog : IWfEventSink, IDataSink<WfTermEvent>, ISink<IAppEvent>, ISink<IAppMsg>, ISink<IWfEvent>, IDisposable
     {
 

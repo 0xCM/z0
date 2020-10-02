@@ -18,7 +18,10 @@ namespace Z0
         /// <param name="src">The bit source</param>
         /// <param name="dst">The partition target</param>
         [MethodImpl(Inline), Op]
-        public static void part2x8(ushort src, ref byte dst)
-            => seek16(dst,0) = src;
+        public static ref byte part2x8(ushort src, ref byte dst)
+        {
+            seek16(dst,0) = src;
+            return ref dst;
+        }
     }
 }

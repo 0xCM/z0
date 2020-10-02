@@ -20,7 +20,7 @@ namespace Z0
 
         public WfStepId StepId {get;}
 
-        public WfPayload<T> Content {get;}
+        public WfPayload<T> Payload {get;}
 
         public FlairKind Flair {get;}
 
@@ -29,12 +29,12 @@ namespace Z0
         {
             EventId = (EventName, step, ct);
             StepId = step;
-            Content = data;
+            Payload = data;
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, Content);
+            => Render.format(EventId, Payload);
     }
 }

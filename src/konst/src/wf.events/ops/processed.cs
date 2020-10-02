@@ -12,8 +12,8 @@ namespace Z0
     partial struct WfEvents
     {
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static ProcessedFile processed(WfStepId step, DataFlow<FS.FileUri> flow, uint size, CorrelationToken ct)
-            => new ProcessedFile(step, flow, size, ct);
+        public static ProcessedFile processed(WfStepId step, FS.FilePath file, uint size, CorrelationToken ct)
+            => new ProcessedFile(step, file, size, ct);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static Processed<T> processed<T>(WfStepId step, DataFlow<T> flow, CorrelationToken ct)

@@ -20,24 +20,24 @@ namespace Z0
 
             public WfEventId EventId {get;}
 
-            public DataFlow<FS.FileUri> DataFlow {get;}
+            public FS.FileUri File {get;}
 
             public Count ProcessedSize {get;}
 
             public FlairKind Flair {get;}
 
             [MethodImpl (Inline)]
-            public ProcessedFile(WfStepId step, DataFlow<FS.FileUri> flow, uint size, CorrelationToken ct, FlairKind flair = Ran)
+            public ProcessedFile(WfStepId step, FS.FilePath file, uint size, CorrelationToken ct, FlairKind flair = Ran)
             {
                 EventId = (EventName, step, ct);
-                DataFlow = flow;
+                File = file;
                 ProcessedSize = size;
                 Flair = flair;
             }
 
             [MethodImpl (Inline)]
             public string Format()
-                => Render.format(EventId, DataFlow, ProcessedSize);
+                => Render.format(EventId, File, ProcessedSize);
         }
     }
 }

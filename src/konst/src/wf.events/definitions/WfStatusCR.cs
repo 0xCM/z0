@@ -23,7 +23,7 @@ namespace Z0
 
         public WfFunc<C,R> Func {get;}
 
-        public WfPayload<R> Content {get;}
+        public WfPayload<R> Payload {get;}
 
         public FlairKind Flair {get;}
 
@@ -33,7 +33,7 @@ namespace Z0
             EventId = (f, ct);
             Func = f;
             Flair =  flair;
-            Content = content;
+            Payload = content;
         }
 
         public WfStepId StepId
@@ -41,6 +41,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Content);
+            => format(EventId, Payload);
     }
 }

@@ -19,6 +19,10 @@ namespace Z0
 
         public const string blocks = nameof(blocks);
 
+        public const string bitfield = nameof(bitfield);
+
+        public const string bitfields = nameof(bitfields);
+
         public const string bytes = nameof(bytes);
 
         public const string @char = "char";
@@ -88,5 +92,7 @@ namespace Z0
         public const string tables = nameof(tables);
 
         public const string wf = nameof(wf);
+
+        public const string primal = nameof(primal);
     }
 }

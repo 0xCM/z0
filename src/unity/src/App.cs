@@ -53,7 +53,7 @@ namespace Z0
             if(count == 0)
                 return;
 
-            var printer = new ArtifactPrinter(wf);
+            var printer = new ClrArtifactPrinter(wf);
             ref readonly var lead = ref src.First;
             for(var i=0; i<count; i++)
             {
@@ -64,7 +64,7 @@ namespace Z0
 
         public static void Traverse(IWfShell wf, Assembly src)
         {
-            var printer = new ArtifactPrinter(wf);
+            var printer = new ClrArtifactPrinter(wf);
             var models = api.sTypes(src);
             var count = models.Length;
             ref readonly var lead = ref models.First;

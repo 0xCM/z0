@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static BitMaskDescription;
+    using static BitMasks.Descriptions;
 
     partial class BitMasks
     {
