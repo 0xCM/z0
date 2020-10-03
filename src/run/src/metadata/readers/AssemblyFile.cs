@@ -17,7 +17,6 @@ namespace Z0
         public ReadOnlySpan<AssemblyFileHandle> AssemblyFileHandles()
             => Reader.AssemblyFiles.ToReadOnlySpan();
 
-
         [MethodImpl(Inline), Op]
         public AssemblyFile Read(AssemblyFileHandle src)
             => Reader.GetAssemblyFile(src);

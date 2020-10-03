@@ -80,6 +80,12 @@ namespace Z0
                 get => text.nonempty(Text) && Text.Length > 0;
             }
 
+            public uint Length
+            {
+                [MethodImpl(Inline)]
+                get => (uint)Text.Length;
+            }
+
             public static PathPart Empty
             {
                 [MethodImpl(Inline)]
@@ -118,6 +124,8 @@ namespace Z0
             [MethodImpl(Inline)]
             public bool EndsWith(string substring)
                 => Text.EndsWith(substring, NoCase);
+
+
         }
     }
 }

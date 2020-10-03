@@ -6,20 +6,22 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Reflection.Metadata;
-    using System.Reflection;
 
     using static Konst;
     using static z;
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct ManifestResourceData
+    partial class MetadataReader
     {
-        public string Name;
+        [MethodImpl(Inline), Op]
+        public BinaryCode Read(BlobHandle src)
+            => Reader.GetBlobBytes(src);
 
-        public ulong Offset;
-
-        public ManifestResourceAttributes Attributes;
+        [MethodImpl(Inline), Op]
+        public ref BinaryCode Read(BlobHandle src, ref BinaryCode dst)
+        {
+            dst = Read(src);
+            return ref dst;
+        }
     }
 }

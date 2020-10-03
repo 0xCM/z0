@@ -11,18 +11,17 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct utf<T>
+    public readonly struct Utf<T>
         where T : unmanaged
     {
         readonly T[] Data;
 
-
         [MethodImpl(Inline)]
-        public utf(T[] src)
+        public Utf(T[] src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator utf<T>(T[] src)
-            => new utf<T>(src);
+        public static implicit operator Utf<T>(T[] src)
+            => new Utf<T>(src);
     }
 }

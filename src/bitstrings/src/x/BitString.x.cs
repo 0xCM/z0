@@ -18,7 +18,7 @@ namespace Z0
         public static BitString ToBitString(this string src)
             => BitString.parse(src);
 
-        public static string Format(this Utf8AsciPoint src)
+        public static string Format(this Utf8Point src)
         {
             var bits = src.Code.FormatBits();
             var num = src.Code.FormatHex();

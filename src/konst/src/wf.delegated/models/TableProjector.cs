@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct Delegated
     {
-        public readonly struct TableProjector<S,T> : IDataProjector<S,T>
+        public readonly struct TableProjector<S,T>
             where S : struct
         {
             readonly D.TableProjector<S,T> Fx;

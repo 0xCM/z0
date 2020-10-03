@@ -24,10 +24,10 @@ namespace Z0
         {
             public PathPart Name {get;}
 
-            public string Text
+            public uint PathLength
             {
                 [MethodImpl(Inline)]
-                get => Name.Text;
+                get => Name.Length;
             }
 
             public bool IsEmpty

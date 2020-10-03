@@ -8,7 +8,7 @@ namespace Z0.Images
 {
     using System.Runtime.InteropServices;
 
-    partial struct ClrMetadata
+    public partial struct ClrMetadata
     {
         //  0x00
         [StructLayout(LayoutKind.Sequential)]

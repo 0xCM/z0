@@ -21,6 +21,7 @@
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Cil)" />
     <ProjectReference Include="$(CheckDynamic)" />
+    <ProjectReference Include="$(Derivatives)" />
 
   </ItemGroup>
 

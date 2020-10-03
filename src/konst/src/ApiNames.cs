@@ -129,5 +129,6 @@ namespace Z0
 
         const string octets = nameof(octets);
 
+        public const string TextEncoders = A.text + dot + "encoders";
     }
 }

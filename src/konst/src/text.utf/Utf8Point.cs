@@ -14,16 +14,15 @@ namespace Z0
     /// <summary>
     /// Represents the least 8 bits of a unicode code point which, by definition of the encoding, is equivalent to the 7 ascii bits.
     /// </summary>
-    public readonly struct Utf8AsciPoint : IEquatable<Utf8AsciPoint>, IComparable<Utf8AsciPoint>
+    public readonly struct Utf8Point : IEquatable<Utf8Point>, IComparable<Utf8Point>
     {
         public readonly byte Code;
 
-        public static Utf8AsciPoint MinValue => From(0);
+        public static Utf8Point MinValue => From(0);
 
-        public static Utf8AsciPoint MaxValue => From(127);
+        public static Utf8Point MaxValue => From(127);
 
-
-        public static IEnumerable<Utf8AsciPoint> All
+        public static IEnumerable<Utf8Point> All
         {
             get
             {
@@ -33,19 +32,19 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Utf8AsciPoint operator &(Utf8AsciPoint a, Utf8AsciPoint b)
+        public static Utf8Point operator &(Utf8Point a, Utf8Point b)
             => From(a.Code & b.Code);
 
         [MethodImpl(Inline)]
-        public static Utf8AsciPoint operator |(Utf8AsciPoint a, Utf8AsciPoint b)
+        public static Utf8Point operator |(Utf8Point a, Utf8Point b)
             => From(a.Code | b.Code);
 
         [MethodImpl(Inline)]
-        public static Utf8AsciPoint operator ^(Utf8AsciPoint a, Utf8AsciPoint b)
+        public static Utf8Point operator ^(Utf8Point a, Utf8Point b)
             => From(a.Code ^ b.Code);
 
         [MethodImpl(Inline)]
-        public static Utf8AsciPoint operator ++(Utf8AsciPoint a)
+        public static Utf8Point operator ++(Utf8Point a)
         {
             if(a < MaxValue)
                 return From(a.Code + 1);
@@ -54,7 +53,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Utf8AsciPoint operator --(Utf8AsciPoint a)
+        public static Utf8Point operator --(Utf8Point a)
         {
             if(a > MinValue)
                 return From(a.Code - 1);
@@ -63,47 +62,47 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Utf8AsciPoint operator +(Utf8AsciPoint a, Utf8AsciPoint b)
+        public static Utf8Point operator +(Utf8Point a, Utf8Point b)
             => From((a.Code + b.Code) % 128);
 
         [MethodImpl(Inline)]
-        public static bool operator == (Utf8AsciPoint a, Utf8AsciPoint b)
+        public static bool operator == (Utf8Point a, Utf8Point b)
             => a.Code == b.Code;
 
         [MethodImpl(Inline)]
-        public static bool operator != (Utf8AsciPoint a, Utf8AsciPoint b)
+        public static bool operator != (Utf8Point a, Utf8Point b)
             => a.Code != b.Code;
 
         [MethodImpl(Inline)]
-        public static bool operator < (Utf8AsciPoint a, Utf8AsciPoint b)
+        public static bool operator < (Utf8Point a, Utf8Point b)
             => a.Code < b.Code;
 
         [MethodImpl(Inline)]
-        public static bool operator <= (Utf8AsciPoint a, Utf8AsciPoint b)
+        public static bool operator <= (Utf8Point a, Utf8Point b)
             => a.Code <= b.Code;
 
         [MethodImpl(Inline)]
-        public static bool operator > (Utf8AsciPoint a, Utf8AsciPoint b)
+        public static bool operator > (Utf8Point a, Utf8Point b)
             => a.Code > b.Code;
 
         [MethodImpl(Inline)]
-        public static bool operator >= (Utf8AsciPoint a, Utf8AsciPoint b)
+        public static bool operator >= (Utf8Point a, Utf8Point b)
             => a.Code >= b.Code;
 
         [MethodImpl(Inline)]
-        public static implicit operator char (Utf8AsciPoint src)
+        public static implicit operator char (Utf8Point src)
             => src.ToChar();
 
         [MethodImpl(Inline)]
-        public static implicit operator byte (Utf8AsciPoint src)
+        public static implicit operator byte (Utf8Point src)
             => src.Code;
 
         [MethodImpl(Inline)]
-        internal static Utf8AsciPoint From(int src)
-            => new Utf8AsciPoint((byte)src);
+        internal static Utf8Point From(int src)
+            => new Utf8Point((byte)src);
 
         [MethodImpl(Inline)]
-        internal Utf8AsciPoint(byte code)
+        internal Utf8Point(byte code)
             => this.Code = code;
 
         [MethodImpl(Inline)]
@@ -159,15 +158,15 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool Equals(Utf8AsciPoint b)
+        public bool Equals(Utf8Point b)
             => Code == b.Code;
 
         [MethodImpl(Inline)]
-        public int CompareTo(Utf8AsciPoint b)
+        public int CompareTo(Utf8Point b)
             => Code.CompareTo(b.Code);
 
         public override bool Equals(object obj)
-            => obj is Utf8AsciPoint p && Equals(p);
+            => obj is Utf8Point p && Equals(p);
 
         public override int GetHashCode()
             => Code.GetHashCode();
