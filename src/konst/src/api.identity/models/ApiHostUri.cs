@@ -23,8 +23,8 @@ namespace Z0
         public FolderName HostFolder
             => FolderName.Define(Name);
 
-        public FileName FileName(FileExtension ext)
-            => Z0.FileName.define(text.concat(Owner.Format(), Chars.Dot, Name), ext);
+        public FS.FileName FileName(FileExtension ext)
+            => FS.file(text.concat(Owner.Format(), Chars.Dot, Name), ext);
 
         public bool IsEmpty
         {

@@ -43,13 +43,13 @@ namespace Z0
         /// </summary>
         /// <param name="src">The type to query</param>
         [Op]
-        public static ResourceAccessor[] resources(Type src)
+        public static ApiResource[] resources(Type src)
             => src.StaticProperties()
                  .Ignore()
                   .WithPropertyType(ResAccessorTypes)
                   .Select(p => p.GetGetMethod(true))
                   .Where(m  => m != null)
                   .Concrete()
-                  .Select(x => new ResourceAccessor(ApiQuery.uri(src), x, FormatAccessor(x.ReturnType)));
+                  .Select(x => new ApiResource(ApiQuery.uri(src), x, FormatAccessor(x.ReturnType)));
     }
 }

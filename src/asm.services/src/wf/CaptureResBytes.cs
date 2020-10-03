@@ -27,10 +27,10 @@ namespace Z0
         /// </summary>
         public void Run()
         {
-            var resfile = z.insist(Workflow.ResBytesCompiled);
+            var resfile = Workflow.ResBytesCompiled;
             var captured = Workflow.Capture(resfile, Workflow.ResBytesUncompiled);
-            var csvfile = Workflow.ResIndexDir + FileName.define("z0.res.bytes", FileExtensions.Csv);
-            Workflow.SaveIndex(captured, csvfile);
+            var csvfile = Workflow.ResIndexDir + FS.file("z0.res.bytes", FileExtensions.Csv);
+            AsmProcessors.save(captured, csvfile);
         }
     }
 }

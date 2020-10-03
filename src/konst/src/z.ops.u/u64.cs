@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {                
+    {
         /// <summary>
         /// Converts a <see cref='bool'/> to a <see cref='ulong'/>
         /// </summary>
@@ -26,6 +26,6 @@ namespace Z0
         /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref ulong u64<T>(in T src)
-            => ref cast<T,ulong>(src);
+            => ref @as<T,ulong>(src);
     }
 }

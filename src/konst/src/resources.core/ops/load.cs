@@ -12,14 +12,32 @@ namespace Z0
 
     partial struct Resources
     {
-        [MethodImpl(Inline)]
-        public static ResourceSet<A> load<A>(in asci32 name, ReadOnlySpan<byte> src)
-            where A : unmanaged, IBytes
-                => new ResourceSet<A>(name, src);
+        [Op]
+        public static TextResource[] textres(Type src)
+        {
+            var values = span(Literals.values2<string>(src));
+            var count = values.Length;
+            var buffer = alloc<TextResource>(count);
+            var dst = span(buffer);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var fv = ref skip(values,i);
+                ref var target = ref seek(dst,i);
+                target.Address = address(fv.Value);
+                target.Source = fv.Field;
+                target.Value = fv.Value;
+            }
+            return buffer;
+        }
 
-        [MethodImpl(Inline)]
-        public static ResourceSet<A> load<A>(string name, ReadOnlySpan<byte> src)
-            where A : unmanaged, IBytes
-                => new ResourceSet<A>(name, src);
+        public static Span<TextResource<E>> textres<E>(Type src)
+            where E : unmanaged, Enum
+        {
+            var locations = Resources.addresses(src);
+            var count = locations.Length;
+            var dst = span<TextResource<E>>(count);
+            Resources.read(locations, dst);
+            return dst;
+        }
     }
 }

@@ -31,11 +31,11 @@ namespace Z0
 
         T State;
 
-        IContext Context;
+        IWfShell Wf;
 
-        internal CpuWorker(IContext context, uint core, Func<T,T> worker, T data, TimeSpan freq, ulong? maxCycles = null)
+        internal CpuWorker(IWfShell wf, uint core, Func<T,T> worker, T data, TimeSpan freq, ulong? maxCycles = null)
         {
-            Context = context;
+            Wf = wf;
             CoreNumber = core;
             Worker = worker;
             State =data;

@@ -13,17 +13,6 @@ namespace Z0
     [ApiHost]
     public readonly struct WfControl
     {
-        /// <summary>
-        /// Creates a T-parametric sink predicated on a <see cref='ValueReceiver{T}'/> process function
-        /// </summary>
-        /// <param name="wf">The workflow context</param>
-        /// <param name="f">The process function</param>
-        /// <typeparam name="T">The data type</typeparam>
-        [MethodImpl(Inline)]
-        public static TableSink<T> sink<T>(IWfShell wf, ValueReceiver<T> f)
-            where T : struct, ITable<T>
-                => new TableSink<T>(wf, f);
-
         [MethodImpl(Inline)]
         public static WfFunc<H> func<H>([CallerMemberName] string name = null)
             where H : struct, IWfStep<H>
@@ -38,25 +27,6 @@ namespace Z0
         public static WfFunc<H,T> func<H,T>([CallerMemberName] string name = null)
             where H : struct, IWfStep<H>
                 => new WfFunc<H,T>(name);
-
-        [MethodImpl(Inline), Op]
-        public static WfStepControl step(WfStepId id, Action fx)
-            => new WfStepControl(id, fx);
-
-        [MethodImpl(Inline)]
-        public static WfStepControl<H> step<H>(Action fx)
-            where H : IWfStep<H>, new()
-                => new WfStepControl<H>(fx);
-
-        [MethodImpl(Inline)]
-        public static DataBroker<K,C,T> broker<K,C,T>(IWfShell wf, int capacity, WfDelegates.Indexer<K> xf)
-            where K : unmanaged, Enum
-                => new DataBroker<K,C,T>(wf, capacity, xf);
-
-        [MethodImpl(Inline)]
-        public static DataBroker<K,T> broker<K,T>(int capacity, WfDelegates.Indexer<K> @if = null)
-            where K : unmanaged, Enum
-                => new DataBroker<K,T>(capacity, @if ?? Enums.e64u);
 
         [MethodImpl(Inline), Op]
         public static WfShellHost host(IWfShell wf, WfHost host)
@@ -75,7 +45,5 @@ namespace Z0
             e.Configure(args ?? WfStepArgs.Empty);
             return e;
         }
-
-
     }
 }

@@ -11,16 +11,16 @@ namespace Z0
     /// </summary>
     public readonly struct PulseEvent : IServerEvent
     {
-        public const ulong SystemId = IntrinsicEvents.Pulse;
-    
-        public static PulseEvent Define(uint ServerId, uint AgentId, ulong Timestamp)
-            => new PulseEvent(new AgentEventId(ServerId, AgentId, Timestamp, SystemId));
-
-        PulseEvent(AgentEventId Identity)
-        {
-            this.Identity = Identity;
-        }
-
         public AgentEventId Identity {get;}
+
+        public const ulong SystemId = IntrinsicEvents.Pulse;
+
+        public static PulseEvent create(uint server, uint agent, ulong ts)
+            => new PulseEvent(new AgentEventId(server, agent, ts, SystemId));
+
+        PulseEvent(AgentEventId id)
+        {
+            Identity = id;
+        }
     }
 }

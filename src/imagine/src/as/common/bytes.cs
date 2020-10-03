@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<byte> bytes<T>(Span<T> src)
             where T : struct
-                => AsBytes(src);        
+                => AsBytes(src);
 
         /// <summary>
         /// Presents a readonly span over T-cells as a readonly bytespan
@@ -41,7 +41,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<byte> bytes<T>(ReadOnlySpan<T> src)
             where T : struct
-                => cover<byte>(cast<T,byte>(first(src)), src.Length*SizeOf<T>());
+                => cover<byte>(z.@as<T,byte>(first(src)), src.Length*SizeOf<T>());
 
         /// <summary>
         /// Presents a selected segment of T-cels from a soruce span as a readonly bytespan
@@ -53,8 +53,8 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<byte> bytes<T>(Span<T> src, int offset, int ? length = null)
             where T : struct
-                => length == null  
-                ? bytes(slice(src,offset)) 
+                => length == null
+                ? bytes(slice(src,offset))
                 : bytes(slice(src, offset, length.Value));
 
         /// <summary>
@@ -67,8 +67,8 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<byte> bytes<T>(ReadOnlySpan<T> src, int offset, int ? length = null)
             where T : struct
-                => length == null  
-                ? bytes(slice(src,offset)) 
+                => length == null
+                ? bytes(slice(src,offset))
                 : bytes(slice(src, offset, length.Value));
     }
 }

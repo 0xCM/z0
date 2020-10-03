@@ -18,7 +18,6 @@ namespace Z0.Asm
 
         public ApiCaptureBlock Code {get;}
 
-
         [MethodImpl(Inline)]
         public static implicit operator AsmRoutineCode((AsmRoutine f, ApiCaptureBlock code) src)
             => new AsmRoutineCode(src.f, src.code);

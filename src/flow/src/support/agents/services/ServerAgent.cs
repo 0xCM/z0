@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    
+
     /// <summary>
     /// Defines a logical server
     /// </summary>
     public class ServerAgent : SystemAgent
-    {        
+    {
         public static ServerAgent create(AgentContext context, ServerConfig config)
             => new ServerAgent(context, config);
 
@@ -22,9 +22,9 @@ namespace Z0
             : base(Context, (Config.ServerId, 0u))
         {
             this.Config = Config;
-            var hearbeat = PulseEmitter.define(Context, 
-                ServiceIdentityPool.NextAgentId(ServerId), 
-                new PulseEmitterConfig(new TimeSpan(0,0,1)));            
+            var hearbeat = PulseEmitter.create(Context,
+                ServiceIdentityPool.NextAgentId(ServerId),
+                new PulseEmitterConfig(new TimeSpan(0,0,1)));
             this.Worker = ServerProcess.Define(Context, ServerId, Config.CoreNumber, new ISystemAgent[]{hearbeat});
         }
 

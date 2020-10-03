@@ -49,6 +49,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ConstPair<ulong> and(in ConstPair<ulong> x, in ConstPair<ulong> y)
             => ConstPair.define(x.Left & y.Left, x.Right & y.Right);
-
    }
 }

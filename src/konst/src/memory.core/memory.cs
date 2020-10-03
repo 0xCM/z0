@@ -13,24 +13,6 @@ namespace Z0
     [ApiHost]
     public unsafe class memory
     {
-        [MethodImpl(Inline)]
-        public static MemorySlots<E> slots<E>(Type src)
-            where E : unmanaged, Enum
-                => new MemorySlots<E>(slots(src));
-
-        [MethodImpl(Inline)]
-        public static MemorySlots<E> slots<E>(params SegRef[] src)
-            where E : unmanaged, Enum
-                => new MemorySlots<E>(src);
-
-        [MethodImpl(Inline), Op]
-        public static MemorySlots slots(Type src)
-            => ApiDynamic.jit(src).Map(m => new SegRef(m.Address, m.Size));
-
-        public static MemorySlots<E> slots<E,T>(T src)
-            where E : unmanaged, Enum
-                => slots<E>(typeof(T));
-
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Ref<T> @ref<T>(in T src, uint size)

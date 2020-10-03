@@ -10,26 +10,26 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ResourceAccessors : IConstSpan<ResourceAccessors,ResourceAccessor>
+    public readonly struct ResourceAccessors : IConstSpan<ResourceAccessors,ApiResource>
     {
-        public readonly ResourceAccessor[] Accessors;
+        public readonly ApiResource[] Accessors;
 
         [MethodImpl(Inline)]
-        public static implicit operator ResourceAccessors(ResourceAccessor[] src)
+        public static implicit operator ResourceAccessors(ApiResource[] src)
             => new ResourceAccessors(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<ResourceAccessor>(ResourceAccessors src)
+        public static implicit operator ReadOnlySpan<ApiResource>(ResourceAccessors src)
             => src.Accessors;
 
         [MethodImpl(Inline)]
-        public ResourceAccessors(ResourceAccessor[] accessors)
+        public ResourceAccessors(ApiResource[] accessors)
             => Accessors = accessors;
 
-        public ReadOnlySpan<ResourceAccessor> Data
+        public ReadOnlySpan<ApiResource> Data
         {
             [MethodImpl(Inline)]
             get => Accessors;
-        }        
-    }    
+        }
+    }
 }

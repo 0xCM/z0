@@ -14,7 +14,7 @@ namespace Z0
     /// </summary>
     public readonly struct BinaryResource
     {
-        public readonly string Identifier;
+        public readonly StringRef Identifier;
 
         public readonly PartId Owner;
 

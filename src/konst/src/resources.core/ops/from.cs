@@ -19,7 +19,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source assembly</param>
         [Op]
-        public static ComponentResources from(Assembly owner, ResourceAccessor[] src)
+        public static ComponentResources from(Assembly owner, ApiResource[] src)
             => new ComponentResources(owner, (from access in src
                 let t = access.Member.DeclaringType
                 group access by t).Map(x => new ResourceDeclarations(x.Key, x.ToArray())));

@@ -10,17 +10,17 @@ namespace Z0.Asm
     using static z;
     using static Konst;
 
-    public readonly ref struct AsmMovHandler
+    public ref struct AsmMovHandler
     {
         readonly Span<Arrow<Imm64,IceRegister>> Buffer;
 
-        readonly Span<int> I;
+        int Index;
 
         [MethodImpl(Inline)]
         public AsmMovHandler(int capacity)
         {
             Buffer = new Arrow<Imm64,IceRegister>[capacity];
-            I = new int[]{0};
+            Index = 0;
         }
 
         [MethodImpl(Inline)]
@@ -48,11 +48,6 @@ namespace Z0.Asm
             set => seek(Buffer, (uint)index) = value;
         }
 
-        ref int Index
-        {
-            [MethodImpl(Inline)]
-            get => ref z.first(I);
-        }
 
         bool HasCapacity
         {

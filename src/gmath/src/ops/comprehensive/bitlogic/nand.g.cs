@@ -54,7 +54,7 @@ namespace Z0
             else if(typeof(T) == typeof(long))
                 return generic<T>(BL.nand(int64(a), int64(b)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
     }

@@ -61,6 +61,9 @@ namespace Z0
 
         public const string maps = nameof(maps);
 
+        public const string memory = nameof(memory);
+
+
         public const string options = nameof(options);
 
         public const string operators = nameof(operators);
@@ -68,6 +71,8 @@ namespace Z0
         public const string operands = nameof(operands);
 
         public const string projectors = nameof(projectors);
+
+        public const string primal = nameof(primal);
 
         public const string rows = nameof(rows);
 
@@ -81,6 +86,10 @@ namespace Z0
 
         public const string surrogates = nameof(surrogates);
 
+        public const string store = nameof(store);
+
+        public const string specs = nameof(specs);
+
         public const string symbolic = nameof(symbolic);
 
         public const string scalar = nameof(scalar);
@@ -92,7 +101,5 @@ namespace Z0
         public const string tables = nameof(tables);
 
         public const string wf = nameof(wf);
-
-        public const string primal = nameof(primal);
     }
 }

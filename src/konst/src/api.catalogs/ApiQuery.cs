@@ -52,14 +52,14 @@ namespace Z0
         static Type[] ResAccessorTypes
             => new Type[]{typeof(ReadOnlySpan<byte>), typeof(ReadOnlySpan<char>)};
 
-        static ResourceFormat FormatAccessor(Type match)
+        static ApiResourceKind FormatAccessor(Type match)
         {
             ref readonly var src = ref first(span(ResAccessorTypes));
-            var kind = ResourceFormat.None;
+            var kind = ApiResourceKind.None;
             if(skip(src,0).Equals(match))
-                kind = ResourceFormat.ByteSpan;
+                kind = ApiResourceKind.ByteSpan;
             else if(skip(src,1).Equals(match))
-                kind = ResourceFormat.CharSpan;
+                kind = ApiResourceKind.CharSpan;
             return kind;
         }
 

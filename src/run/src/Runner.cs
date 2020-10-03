@@ -365,7 +365,7 @@ namespace Z0
 
         void ListTextResources()
         {
-            var rows = TextResources.rows(TextResources.from(typeof(Db.Literals))).View;
+            var rows = Resources.rows(Resources.textres(typeof(Db.Literals))).View;
             var count = rows.Length;
             for(var i=0; i<count; i++)
             {

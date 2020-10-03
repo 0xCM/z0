@@ -17,7 +17,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe BinaryOp<T> create<T>(OpIdentity id, ReadOnlySpan<byte> code)
             where T : unmanaged
-                => emit<T>(id, Address.liberate(code));
+                => emit<T>(id, Buffers.liberate(code));
 
         [MethodImpl(Inline)]
         public static BinaryOp<T> create<T>(string name, ReadOnlySpan<byte> f)
@@ -33,11 +33,11 @@ namespace Z0
         public static BinaryOp<T> create<T,K>(K kind, in BinaryCode code, bool generic)
             where K : unmanaged, IApiKey
             where T : unmanaged
-                => emit<T>(identify<T,K>(kind, generic), Address.liberate(code).Ref);
+                => emit<T>(identify<T,K>(kind, generic), Buffers.liberate(code).Ref);
 
         [MethodImpl(Inline)]
         public static BinaryOp<T> create<T>(OpIdentity id, in BinaryCode code)
-            => emit<T>(id, Address.liberate(code).Ref);
+            => emit<T>(id, Buffers.liberate(code).Ref);
 
         static OpIdentity identify<T,K>(K k, bool generic)
             where K : unmanaged, IApiKey

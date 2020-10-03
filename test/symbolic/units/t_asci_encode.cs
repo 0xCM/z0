@@ -67,15 +67,6 @@ namespace Z0
             // Claim.yea(asci.eq(a64d,a64c));
         }
 
-        public void res_HexKind()
-        {
-            var res = Resources.create<Hex8Seq,asci4>();
-            for(var i=0; i<res.EntryCount; i++)
-            {
-                var expect = asci.encode(n4, text.concat('x', As.uint8(i).FormatHex(true, false)));
-                ref readonly var actual = ref res[i];
-                Claim.Eq(expect,actual);
-            }
-        }
+
     }
 }

@@ -13,14 +13,10 @@ namespace Z0
 
     using Z0.Asm;
 
-    public delegate void CpuidProcessStep(Vector128<byte> src);
 
     [ApiHost]
     public readonly struct AsmProcessors
     {
-        public static asci16 process(ReadOnlySpan<CpuidFeature> src, CpuidProcessStep step)
-            => CpuidProcessor.Service.Process(src,step ?? OnStep);
-
         /// <summary>
         /// Creates a nonparametric process state
         /// </summary>
@@ -53,7 +49,7 @@ namespace Z0
 
         }
 
-        public static void save(WfShellHost wfHost, ReadOnlySpan<CapturedAccessor> src, FS.FilePath dst)
+        public static void save(ReadOnlySpan<CapturedApiResource> src, FS.FilePath dst)
         {
             const ulong Cut = 0x55005500550;
             const string Sep = SpacePipe;
@@ -62,8 +58,6 @@ namespace Z0
             const string Col1 = "Accessor";
             const ushort Col0Width = 16;
 
-            var wf = wfHost.Wf;
-            wf.Running(wfHost, text.format(RP.PSx2, StartMsg, dst));
             var capcount = src.Length;
             using var writer = dst.Writer();
             writer.WriteLine(text.concat(Col0.PadRight(Col0Width), Sep, Col1));
@@ -73,9 +67,9 @@ namespace Z0
                 ref readonly var captured = ref skip(src, i);
 
                 var code = captured.Code;
-                var host = captured.Host;
+                var host = captured.ApiHost;
                 var accessor = captured.Accessor;
-                var uri = OpUri.hex(host, accessor.Member.Name, captured.Code.Code.MemberId);
+                var uri = OpUri.hex(host, accessor.Member.Name, code.Code.MemberId);
 
                 var moves = AsmAnalyzer.moves(code.Routine);
                 var movecount = moves.Length;
@@ -87,8 +81,6 @@ namespace Z0
                         writer.WriteLine(text.concat(move.Source.ToAddress().Format().PadRight(Col0Width), Sep, uri));
                 }
             }
-
-            wf.Ran(wfHost);
         }
     }
 }

@@ -22,10 +22,6 @@ namespace Z0
         public static BinaryResource binary(PartId owner, string id, ByteSize size, MemoryAddress address)
             => new BinaryResource(owner, id, size, address);
 
-        [MethodImpl(Inline), Op]
-        public static BinaryResources binary(IResourceProvider src)
-            => new BinaryResources(src.Resources);
-
         /// <summary>
         /// Returns the properties declared by a type that define binary resource content
         /// </summary>

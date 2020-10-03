@@ -21,7 +21,7 @@ namespace Z0
         public TextExpression(string src)
             => Body = src;
 
-        public ReadOnlySpan<char> Symbols
+        public ReadOnlySpan<char> Data
         {
             [MethodImpl(Inline)]
             get => Body;
@@ -59,6 +59,6 @@ namespace Z0
             => Format();
 
         public static TextExpression Empty
-            => new TextExpression(string.Empty);
+            => new TextExpression(EmptyString);
     }
 }

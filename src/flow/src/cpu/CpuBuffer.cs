@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static Spans;
 
     [ApiDataType]
     public ref struct CpuBuffer
@@ -61,6 +62,8 @@ namespace Z0
         /// </summary>
         public const uint Buffer512 = BufferSize/64;
 
+        public const uint MaxSize = Buffer512/8;
+
         [MethodImpl(Inline)]
         public CpuBuffer(byte[] data)
             => Data = data;
@@ -77,44 +80,51 @@ namespace Z0
             get => Data;
         }
 
+
         [MethodImpl(Inline)]
-        public void Clear(W16 w)
+        public void Clear(W16 w, byte index)
         {
-            first(Content.Cast<byte,ushort>()) = Zero16u;
+            first(s16u(Data)) = Zero16u;
         }
 
         [MethodImpl(Inline), Op]
-        public void Clear(W32 w)
+        public void Clear(W32 w, byte index)
         {
-            first(Content.Cast<byte,uint>()) = Zero32u;
+            first(s32u(Data)) = Zero32u;
         }
 
         [MethodImpl(Inline), Op]
-        public void Clear(W64 w)
+        public void Clear(W64 w, byte index)
         {
-            first(Content.Cast<byte,ulong>()) = Zero64u;
+            first(s64u(Data)) = Zero64u;
         }
 
         [MethodImpl(Inline), Op]
-        public void Clear(W128 w)
+        public void Clear(W128 w, byte index)
         {
             first(Content.Cast<byte,Cell128>()) = Cell128.Empty;
         }
 
         [MethodImpl(Inline), Op]
-        public void Clear(W256 w)
+        public void Clear(W256 w, byte index)
         {
             first(Content.Cast<byte,Cell256>()) = Cell256.Empty;
         }
 
         [MethodImpl(Inline), Op]
-        public void Clear(W512 w)
+        public void Clear(W512 w, byte index)
         {
             first(Content.Cast<byte,Cell512>()) = Cell512.Empty;
         }
 
         [MethodImpl(Inline), Op]
-        public ref Cell512 cell(W512 w, uint5 index)
+        public ref Cell512 Cell(W512 w, byte index)
             => ref seek(Content.Cast<byte,Cell512>(), index);
+
+
+        [MethodImpl(Inline)]
+        uint offset(byte index)
+            =>  MaxSize * index;
+
     }
 }

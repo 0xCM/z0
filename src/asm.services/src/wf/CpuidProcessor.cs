@@ -9,20 +9,19 @@ namespace Z0.Asm
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Root;
-    using static As;
+    using static z;
 
     [ApiHost]
-    public readonly struct CpuidProcessor
+    public readonly struct DataProcessor
     {
-        public static CpuidProcessor Service => default;
+        public delegate void SegmentProcessed(Vector128<byte> src);
 
         [MethodImpl(Inline), Op]
-        public asci16 Process(ReadOnlySpan<CpuidFeature> src, CpuidProcessStep step)
+        public static Vector128<byte> process(ReadOnlySpan<CpuidFeature> src, SegmentProcessed step)
         {
             var srcCount = src.Length;
             var storage = default(Vector128<byte>);
-            ref var dst = ref z.vfirst(storage);
+            ref var dst = ref vfirst(storage);
 
             var consumed = 0;
             var remaining = asci16.Size;
@@ -40,11 +39,11 @@ namespace Z0.Asm
                 remaining -= take;
             }
 
-            return new asci16(storage);
+            return storage;
         }
 
         [MethodImpl(Inline), Op]
-        public int Capture(in CpuidFeature src, int remaining, int consumed, ref byte dst)
+        static int Capture(in CpuidFeature src, int remaining, int consumed, ref byte dst)
         {
             var name = src.ToString();
             ReadOnlySpan<char> rendered = name;

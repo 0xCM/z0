@@ -9,23 +9,23 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ResourceDeclarations : IConstSpan<ResourceDeclarations,ResourceAccessor>
+    public readonly struct ResourceDeclarations : IConstSpan<ResourceDeclarations,ApiResource>
     {
         public readonly Type DeclaringType;
 
-        public readonly ResourceAccessor[] Accessors;
+        public readonly ApiResource[] Accessors;
 
         [MethodImpl(Inline)]
-        public ResourceDeclarations(Type declaring, ResourceAccessor[] accessors)
+        public ResourceDeclarations(Type declaring, ApiResource[] accessors)
         {
             DeclaringType = declaring;
             Accessors = accessors;
         }
 
-        public ReadOnlySpan<ResourceAccessor> Data
+        public ReadOnlySpan<ApiResource> Data
         {
             [MethodImpl(Inline)]
             get => Accessors;
-        }        
-    }    
+        }
+    }
 }

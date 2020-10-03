@@ -8,16 +8,16 @@ namespace Z0
     using System.Security;
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate void DataReceiver<T>(T data);
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate void DataReceiver<C,T>(C context,T data);
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate void EventReceiver(IDataEvent e);
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public delegate void EventReceiver<E>(in E e)
         where E : struct, IDataEvent;
 }

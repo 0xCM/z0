@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using static AppErrorMsg;    
+    using static AppErrorMsg;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -19,40 +19,40 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
-        bool ContentEqual(ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)  
-            => Spans.eq(lhs,rhs);
+        bool ContentEqual(ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)
+            => z.eq(lhs,rhs);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
         /// </summary>
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
-        bool ContentEqual(ReadOnlySpan<byte> lhs, ReadOnlySpan<byte> rhs)  
-            => Spans.eq(lhs,rhs);
+        bool ContentEqual(ReadOnlySpan<byte> lhs, ReadOnlySpan<byte> rhs)
+            => z.eq(lhs,rhs);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
         /// </summary>
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
-        bool ContentEqual(ReadOnlySpan<int> lhs, ReadOnlySpan<int> rhs)  
-            => Spans.eq(lhs,rhs);
+        bool ContentEqual(ReadOnlySpan<int> lhs, ReadOnlySpan<int> rhs)
+            => z.eq(lhs,rhs);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
         /// </summary>
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
-        bool ContentEqual(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs)  
-            => Spans.eq(lhs,rhs);
+        bool ContentEqual(ReadOnlySpan<uint> lhs, ReadOnlySpan<uint> rhs)
+            => z.eq(lhs,rhs);
 
         /// <summary>
         /// Returns true if the character spans are equal as strings, false otherwise
         /// </summary>
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
-        bool ContentEqual(ReadOnlySpan<ulong> lhs, ReadOnlySpan<ulong> rhs)  
-            => Spans.eq(lhs,rhs);
+        bool ContentEqual(ReadOnlySpan<ulong> lhs, ReadOnlySpan<ulong> rhs)
+            => z.eq(lhs,rhs);
 
         /// <summary>
         /// Asserts the equality of two boolean arrays
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         void eq(bool[] lhs, bool[] rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-        {            
+        {
             var count = length(lhs,rhs);
             for(var i = 0; i< count; i++)
                 if(lhs[i] != rhs[i])

@@ -113,12 +113,6 @@ namespace Z0
             => FileName.define("config.json");
 
         /// <summary>
-        /// The name of a folder that contains one or more resource index files
-        /// </summary>
-        FolderName ResIndexFolder
-            => FolderName.Define("index");
-
-        /// <summary>
         /// The path to the directory that contains runtime configuration data
         /// </summary>
         FolderPath ConfigRoot
@@ -133,8 +127,8 @@ namespace Z0
         /// <summary>
         /// The path to the resource index directory
         /// </summary>
-        FolderPath ResIndexDir
-            => ResourceRoot + ResIndexFolder;
+        FS.FolderPath ResIndexDir
+            => FS.dir(ResourceRoot.Name) + FS.folder("index");
 
         /// <summary>
         /// The executing application's part identifier

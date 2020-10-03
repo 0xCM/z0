@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     partial struct Buffers
     {
@@ -24,6 +25,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe Span<T> cover<T>(BufferToken src)
             where T : unmanaged
-                => z.cover(src.Address.Pointer<byte>(), src.BufferSize).Cast<T>();       
+                => z.cover(src.Address.Pointer<byte>(), src.BufferSize).Cast<T>();
     }
 }

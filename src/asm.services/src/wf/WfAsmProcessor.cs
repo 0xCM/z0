@@ -21,7 +21,7 @@ namespace Z0
         public WfAsmProcessor(IWfShell wf)
         {
             Wf = wf;
-            Broker = WfControl.broker<Mnemonic,ApiInstruction>((int)Mnemonic.LAST);
+            Broker = WfBrokers.create<Mnemonic,ApiInstruction>((int)Mnemonic.LAST);
         }
 
         [MethodImpl(Inline)]

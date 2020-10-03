@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct BitLogic
     {
-        [ApiHost(ApiNames.BitLogicBits)]
+        [ApiHost(ApiNames.BitLogicBits, true)]
         public struct Bits
         {
             /// <summary>

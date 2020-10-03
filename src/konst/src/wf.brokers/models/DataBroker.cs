@@ -30,8 +30,7 @@ namespace Z0
         {
             Wf = wf;
             handlers = new DataHandler<C,T>[capacity];
-            handlers.Fill(DataHandler<C,T>.Empty);
-            this.IndexFx = xf;
+            IndexFx = xf;
         }
 
         [MethodImpl(Inline)]

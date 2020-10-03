@@ -48,12 +48,12 @@ namespace Z0
         [MethodImpl(Inline)]
         static S cast<S>(byte src)
             where S : unmanaged, ISizedInt<S>
-                => z.cast<byte,S>(src);
+                => z.@as<byte,S>(src);
 
         [MethodImpl(Inline)]
         static S cast<S>(Limits24u src)
             where S : unmanaged, ISizedInt<S>
-                => z.cast<Limits24u,S>(src);
+                => z.@as<Limits24u,S>(src);
 
         [MethodImpl(Inline)]
         static S maxval<S>()

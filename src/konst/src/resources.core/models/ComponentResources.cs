@@ -22,11 +22,5 @@ namespace Z0
             Owner = src;
             Declarations = declarations;
         }
-
-        public Type[] Hosts
-        {
-            [MethodImpl(Inline)]
-            get => Declarations.Select(x => x.DeclaringType);
-        }
     }
 }
