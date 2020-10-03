@@ -7,14 +7,14 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
-    
+
     using static Konst;
 
     /// <summary>
     /// Deefines a reference to a <see cref='FieldInfo'/>
     /// </summary>
     public readonly struct FieldRef : INullity
-    {                    
+    {
         public readonly SegRef Segment;
 
         public readonly FieldInfo Field;
@@ -26,14 +26,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public FieldRef(FieldInfo field, in SegRef seg)
         {
-            Segment = seg;        
+            Segment = seg;
             Field = field;
         }
 
         [MethodImpl(Inline)]
         public FieldRef(in SegRef seg, FieldInfo field)
         {
-            Segment = seg;        
+            Segment = seg;
             Field = field;
         }
 
@@ -42,7 +42,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Segment.Range;
         }
-        
+
         public string FieldName
         {
             [MethodImpl(Inline)]
@@ -54,7 +54,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Field.GetRawConstantValue();
         }
-        
+
         public Type DeclaringType
         {
             [MethodImpl(Inline)]
@@ -196,32 +196,32 @@ namespace Z0
         [MethodImpl(Inline)]
         public StringRef ToStringRef()
             => new StringRef(Segment);
-            
+
         /// <summary>
         /// Presents the leading source cell as a reference to an enum value of parametric kind
         /// </summary>
         [MethodImpl(Inline)]
-        public ref readonly E Enum<E>()     
-            where E : unmanaged, Enum                
+        public ref readonly E Enum<E>()
+            where E : unmanaged, Enum
                 => ref Address.Ref<E>();
 
         /// <summary>
         /// Presents the leading source cell as a reference to a structural value of pararametric kind
         /// </summary>
         [MethodImpl(Inline)]
-        public ref readonly T Struct<T>()     
+        public ref readonly T Struct<T>()
             where T : struct
                 => ref Address.Ref<T>();
 
         /// <summary>
         /// Specifies the field's primal kind, if applicable; otherwise, none
         /// </summary>
-        public PrimalKindId KindId
+        public PrimalTypeCode KindId
         {
             [MethodImpl(Inline)]
-            get => (PrimalKindId)Type.GetTypeCode(Field.FieldType);
+            get => (PrimalTypeCode)Type.GetTypeCode(Field.FieldType);
         }
-        
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -234,7 +234,7 @@ namespace Z0
             get => !Segment.IsEmpty;
         }
 
-        public static FieldRef Empty 
+        public static FieldRef Empty
             => new FieldRef(EmptyVessels.EmptyField, SegRef.Empty);
     }
 }

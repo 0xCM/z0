@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct PrimalBitFieldSpec
+    partial struct PrimalKindBitField
     {
         /// <summary>
         /// Defines integers that correspond to the position of the first bit of each bitfield segment

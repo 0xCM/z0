@@ -10,63 +10,26 @@ namespace Z0
     using static z;
     using static Konst;
 
-    using api = PrimalKindBits;
-
-    [ApiDataType]
-    public readonly struct PrimalKindInfo
+    public readonly struct PrimalKindInfo : ITextual
     {
-        readonly byte Data;
-
         [MethodImpl(Inline)]
-        public PrimalKindInfo(PrimalKind src)
-            => Data = (byte)src;
-
-        [MethodImpl(Inline)]
-        public PrimalKindInfo(LiteralKind src)
-            => Data = (byte)src;
-
-        [MethodImpl(Inline)]
-        public PrimalKindInfo(byte src)
-            => Data = src;
-
-        [MethodImpl(Inline)]
-        public bool Equals(PrimalKindInfo src)
-            => Data == src.Data;
-
-        public PrimalKind Kind
+        public PrimalKindInfo(PrimalKind kind, TypeWidth width, SignKind sign, PrimalTypeCode tc)
         {
-            [MethodImpl(Inline)]
-            get => (PrimalKind)Data;
+            Kind = kind;
+            Width = width;
+            Sign = sign;
+            TypeCode = tc;
         }
 
-        public byte Content
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
+        public PrimalKind Kind {get;}
 
-        public TypeWidth Width
-        {
-            [MethodImpl(Inline)]
-            get => api.width(this);
-        }
+        public TypeWidth Width {get;}
 
-        public SignKind Sign
-        {
-            [MethodImpl(Inline)]
-            get => api.sign(this);
-        }
+        public SignKind Sign {get;}
 
-        public TypeCode TypeCode
-        {
-            [MethodImpl(Inline)]
-            get => api.code(this);
-        }
+        public PrimalTypeCode TypeCode {get;}
 
-        public PrimalKindId KindId
-        {
-            [MethodImpl(Inline)]
-            get => api.id(this);
-        }
+        public string Format()
+            => Kind.ToString();
     }
 }

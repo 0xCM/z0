@@ -10,74 +10,72 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct PrimalBitField<I,P,T,S,W> : IBitField<PrimalBitField<I,P,T,S,W>, I, P, T, S, W>
+    public ref struct PrimalBitField<I,P,T,S,W>
         where I : unmanaged, Enum
         where P : unmanaged, Enum
-        where T : unmanaged
-        where S : unmanaged, Enum
         where W : unmanaged, Enum
+        where S : unmanaged
+        where T : unmanaged
     {
-        readonly I[] Indices;
+        readonly ReadOnlySpan<I> Indices;
 
-        readonly P[] Positions;
+        readonly ReadOnlySpan<P> Positions;
 
-        readonly W[] Widths;
+        readonly ReadOnlySpan<W> Widths;
 
-        readonly T[] Cells;
+        T Data;
 
         [MethodImpl(Inline)]
-        internal PrimalBitField(T data)
+        public PrimalBitField(T data)
         {
-            Cells = new T[1]{data};
+            Data = data;
             Indices = Enums.index<I>().Map(x => x.LiteralValue);
             Positions = Enums.index<P>().Map(x => x.LiteralValue);
             Widths = Enums.index<W>().Map(x => x.LiteralValue);
         }
 
-        public T Content
-            => Cell;
+        public T Value
+            => Data;
 
         [MethodImpl(Inline)]
-        public S Segment(I index)
-            => z.cast<T,S>(gbits.slice(Cell, SegPos(index), SegWidth(index)));
+        public S ReadSeg(I index)
+            => cast<T,S>(gbits.slice(Data, Pos8u(index), Width8u(index)));
 
         [MethodImpl(Inline)]
-        public void Segment(I index, S value)
+        public void WriteSeg(I index, S value)
         {
-            var pos = Enums.e8u(Position(index));
-            var width = Enums.e8u(Width(index));
-            Cell = gbits.copy(z.cast<S,T>(value), pos, width, Cell);
+            var pos = Pos8u(index);
+            var width = Width8u(index);
+            Data = gbits.copy(cast<S,T>(value), pos, width, Data);
         }
 
         public S this[I index]
         {
             [MethodImpl(Inline)]
-            get => Segment(index);
+            get => ReadSeg(index);
 
             [MethodImpl(Inline)]
-            set => Segment(index, value);
+            set => WriteSeg(index, value);
         }
 
         [MethodImpl(Inline)]
-        public P Position(I index)
-            => Positions[Enums.e8u(index)];
+        public ref readonly P Position(in I index)
+            => ref skip(Positions, Index8u(index));
 
         [MethodImpl(Inline)]
-        public W Width(I index)
-            => Widths[Enums.e8u(index)];
+        public ref readonly W Width(in I index)
+            => ref skip(Widths, Index8u(index));
 
         [MethodImpl(Inline)]
-        byte SegPos(I index)
-            => Enums.e8u(Position(index));
+        static ref readonly byte Index8u(in I index)
+            => ref @as<I,byte>(index);
 
         [MethodImpl(Inline)]
-        byte SegWidth(I index)
-            => Enums.e8u(Width(index));
+        ref readonly byte Pos8u(in I index)
+            => ref @as<P,byte>(Position(index));
 
-        ref T Cell
-        {
-            [MethodImpl(Inline)]
-            get => ref Cells[0];
-        }
+        [MethodImpl(Inline)]
+        ref readonly byte Width8u(in I index)
+            => ref @as<W,byte>(Width(index));
     }
 }

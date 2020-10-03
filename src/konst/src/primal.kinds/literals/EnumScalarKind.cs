@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using PN = PrimalNumericKind;
+    using PK = PrimalKind;
 
     /// <summary>
     /// Restricts the numeric kind classifier to reflect the numeric kinds
@@ -15,50 +15,43 @@ namespace Z0
         None = 0,
 
         /// <summary>
-        /// Specifies an enum type refines an unsigned 8-bit integer
+        /// An alias for <see cref='PK.U8'/>
         /// </summary>
-        U8 = PN.U8,
+        U8 = PK.U8,
 
         /// <summary>
-        /// Specifies an enum type refines an unsigned 16-bit integer
+        /// An alias for <see cref='PK.U16'/>
         /// </summary>
-        U16 = PN.U16,
+        U16 = PK.U16,
 
         /// <summary>
-        /// Specifies an enum type refines an unsigned 32-bit integer
+        /// An alias for <see cref='PK.U32'/>
         /// </summary>
-        U32 = PN.U32,
+        U32 = PK.U32,
 
         /// <summary>
-        /// Specifies an enum type refines an unsigned 64-bit integer
+        /// An alias for <see cref='PK.U64'/>
         /// </summary>
-        U64 = PN.U64,
+        U64 = PK.U64,
 
         /// <summary>
-        /// Specifies an enum type refines a signed 8-bit integer
+        /// An alias for <see cref='PK.I8'/>
         /// </summary>
-        I8 = PN.I8,
+        I8 = PK.I8,
 
         /// <summary>
-        /// Specifies an enum type refines a signed 16-bit integer
+        /// An alias for <see cref='PK.I16'/>
         /// </summary>
-        I16 = PN.I16,
+        I16 = PK.I16,
 
         /// <summary>
-        /// Specifies an enum type refines a signed 32-bit integer
+        /// An alias for <see cref='PK.I32'/>
         /// </summary>
-        I32 = PN.I32,
+        I32 =  PK.I32,
 
         /// <summary>
-        /// Specifies an enum type refines a signed 64-bit integer
+        /// An alias for <see cref='PK.I64'/>
         /// </summary>
-        I64 = PN.I64,
-    }
-
-    public readonly struct EnumScalarKindE
-    {
-        public const EnumScalarKind WidthMask = (EnumScalarKind)PrimalNumericKindE.WidthMask;
-
-        public const EnumScalarKind SignMask = (EnumScalarKind)PrimalNumericKindE.SignMask;
+        I64 = PK.I64,
     }
 }

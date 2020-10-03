@@ -40,18 +40,6 @@ namespace Z0
             => ((byte)src > 2 && (byte)src<16) || (byte)src == 18;
 
         /// <summary>
-        /// Determines the literal kind of a type, if any
-        /// </summary>
-        /// <param name="src">The source type</param>
-        [MethodImpl(Inline), Op]
-        public static LiteralKind literal(Type src)
-        {
-            var i = index(src);
-            var test = (i > 2 && i <16) || i == 18;
-            return test ? (LiteralKind)z.skip(PrimalKindData,i) : LiteralKind.None;
-        }
-
-        /// <summary>
         /// Determines an enumeration's underlying kind
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
@@ -125,10 +113,6 @@ namespace Z0
             else
                 throw no<T>();
         }
-
-        [MethodImpl(Inline), Op]
-        static byte index(Type src)
-            => (byte)Type.GetTypeCode(src);
 
         static ReadOnlySpan<PrimalKind> Kinds
         {

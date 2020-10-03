@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct PrimalBitFieldSpec
+    partial struct PrimalKindBitField
     {
         /// <summary>
         /// Defines positional identifiers for each bitfield segment
         /// </summary>
-        public enum SegId : byte
+        public enum Field : byte
         {
             /// <summary>
             /// Identifies the bitfield segment that specifies a primitive width

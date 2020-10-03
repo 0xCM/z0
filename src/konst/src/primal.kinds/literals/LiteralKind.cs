@@ -4,83 +4,83 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = PrimalKind;
+    using PK = PrimalKind;
 
     /// <summary>
-    /// Classifies system types for which field literals can be defined
-    /// </summary>    
+    /// Defines a <see cref='PrimalKind'/> subset that corresponds to primal types that can be used as compile-time literals
+    /// </summary>
     public enum LiteralKind : byte
     {
         None = 0,
 
         /// <summary>
-        /// Specifies a boolean value
+        /// An alias for <see cref='PK.U1'/>
         /// </summary>
-        U1 = K.U1,
+        U1 = PK.U1,
 
         /// <summary>
-        /// Specifies a signed 8-bit integer
+        /// An alias for <see cref='PK.U8'/>
         /// </summary>
-        I8 = K.I8,
+        U8 = PK.U8,
 
         /// <summary>
-        /// Specifies an unsigned 8-bit integer
+        /// An alias for <see cref='PK.U16'/>
         /// </summary>
-        U8 = K.U8,
+        U16 = PK.U16,
 
         /// <summary>
-        /// Specifies a signed 16-bit integer
+        /// An alias for <see cref='PK.U32'/>
         /// </summary>
-        I16 = K.I16,
+        U32 = PK.U32,
 
         /// <summary>
-        /// Specifies a 16-bit unicode character
+        /// An alias for <see cref='PK.U64'/>
         /// </summary>
-        C16 = K.C16,
+        U64 = PK.U64,
 
         /// <summary>
-        /// Specifies an unsigned 16-bit integer
+        /// An alias for <see cref='PK.I8'/>
         /// </summary>
-        U16 = K.U16,
+        I8 = PK.I8,
 
         /// <summary>
-        /// Specifies a signed 32-bit integer
+        /// An alias for <see cref='PK.I16'/>
         /// </summary>
-        I32 = K.I32,
+        I16 = PK.I16,
 
         /// <summary>
-        /// Specifies an unsigned 32-bit integer
+        /// An alias for <see cref='PK.I32'/>
         /// </summary>
-        U32 = K.U32,
+        I32 =  PK.I32,
 
         /// <summary>
-        /// Specifies an unsigned 64-bit integer
+        /// An alias for <see cref='PK.I64'/>
         /// </summary>
-        U64  = K.U64,
+        I64 = PK.I64,
 
         /// <summary>
-        /// Specifies a signed 64-bit integer
+        /// An alias for <see cref='PK.F32'/>
         /// </summary>
-        I64 = K.I64,
+        F32 = PK.F32,
 
         /// <summary>
-        /// Specifies a signed 32-bit floating-point number
+        /// An alias for <see cref='PK.F64'/>
         /// </summary>
-        F32 = K.F32,
+        F64 = PK.F64,
 
         /// <summary>
-        /// Specifies a signed 64-bit floating-point number
+        /// An alias for <see cref='PK.F128'/>
         /// </summary>
-        F64  = K.F64,
-        
-        /// <summary>
-        /// Specifies a signed 64-bit floating-point number
-        /// </summary>
-        F128  = K.F128,
+        F128 = PK.F128,
 
         /// <summary>
-        /// Specifies a 16-bit unicode character
+        /// An alias for <see cref='PK.C16'/>
         /// </summary>
-        String = K.String,
+        C16 = PK.C16,
+
+        /// <summary>
+        /// An alias for <see cref='PK.String'/>
+        /// </summary>
+        String = PK.String,
     }
 }

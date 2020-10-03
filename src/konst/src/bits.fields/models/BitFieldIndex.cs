@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct BitFieldIndex : IBitFieldIndex<BitFieldIndexEntry>
+    public readonly struct BitFieldIndex
     {
         readonly BitFieldIndexEntry[] Storage;
 

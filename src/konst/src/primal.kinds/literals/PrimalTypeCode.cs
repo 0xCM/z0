@@ -9,9 +9,8 @@ namespace Z0
     /// <summary>
     /// Identifies primal system types with 8-bit unsigned integers that capture the (grossly overallocated) 32-bit integer type code values.
     /// </summary>
-    public enum PrimalKindId : byte
+    public enum PrimalTypeCode : byte
     {
-        // 0
         None = 0,
 
         /// <summary>

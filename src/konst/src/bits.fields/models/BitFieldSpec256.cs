@@ -27,7 +27,7 @@ namespace Z0
         Vector256<byte> Widths;
 
         [MethodImpl(Inline)]
-        internal BitFieldSpec256(Vector256<byte> widths)
+        public BitFieldSpec256(Vector256<byte> widths)
             => Widths = widths;
 
         [MethodImpl(Inline)]

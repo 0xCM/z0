@@ -7,14 +7,14 @@ namespace Z0
     using static Log2x8;
     using static Sign8Kind;
 
-    using K = PrimalKindId;
-    using I = PrimalBitFieldSpec.SegPos;
+    using K = PrimalTypeCode;
+    using I = PrimalKindBitField.SegPos;
 
     /// <summary>
     /// Defines a bitfield that identifies and describes system type primitives
     /// </summary>
     /// <remarks>
-    /// [Log2x8:0..2 | PrimalKindId:3..6 | Sign8Kind:7]
+    /// [Sign8Kind:7 | PrimalKindId:3..6 | Log2x8:0..2]
     /// <remarks>
     public enum PrimalKind : byte
     {

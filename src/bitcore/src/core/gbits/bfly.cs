@@ -28,7 +28,7 @@ namespace Z0
             else if(typeof(N) == typeof(N16))
                 return bfly(n16,a);
             else
-                throw Unsupported.define<N>();
+                throw no<N>();
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.bfly(n,uint64(x)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>

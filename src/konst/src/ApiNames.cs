@@ -76,5 +76,7 @@ namespace Z0
         public const string PrimalKinds = primal + dot + kinds;
 
         public const string PrimalKindBits = primal + dot + kinds + dot + bitfield;
+
+        public const string BitFieldSpecs = bits + dot + fields + dot + "specs";
     }
 }

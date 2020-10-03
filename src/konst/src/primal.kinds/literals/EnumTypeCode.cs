@@ -7,50 +7,50 @@ namespace Z0
     using TC = System.TypeCode;
 
     /// <summary>
-    /// Defines type-code equivalent identifiers for valid numeric enumeration types
+    /// Defines aliases for the subset of <see cref='TC'> codes that correspond to valid <see cref='Enum'/> base types
     /// </summary>
     public enum EnumTypeCode : byte
     {
         None = 0,
 
         /// <summary>
-        /// Specifies an enum type refines a signed 8-bit integer
+        /// An alias for <see cref='TC.SByte'/>
         /// </summary>
         I8 = TC.SByte,
 
         /// <summary>
-        /// Specifies an enum type refines an unsigned 8-bit integer
+        /// An alias for <see cref='TC.Byte'/>
         /// </summary>
         U8 = TC.Byte,
 
         /// <summary>
-        /// Specifies an enum type refines a signed 16-bit integer
+        /// An alias for <see cref='TC.Int16'/>
         /// </summary>
         I16 = TC.Int16,
 
         /// <summary>
-        /// Specifies an enum type refines an unsigned 16-bit integer
+        /// An alias for <see cref='TC.UInt16'/>
         /// </summary>
         U16 = TC.UInt16,
 
         /// <summary>
-        /// Specifies an enum type refines a signed 32-bit integer
+        /// An alias for <see cref='TC.Int32'/>
         /// </summary>
         I32 = TC.Int32,
 
         /// <summary>
-        /// Specifies an enum type refines an unsigned 32-bit integer
+        /// An alias for <see cref='TC.UInt32'/>
         /// </summary>
         U32 = TC.UInt32,
 
         /// <summary>
-        /// Specifies an enum type refines a signed 64-bit integer
+        /// An alias for <see cref='TC.Int64'/>
         /// </summary>
         I64 = TC.Int64,
 
         /// <summary>
-        /// Specifies an enum type refines an unsigned 64-bit integer
+        /// An alias for <see cref='TC.UInt64'/>
         /// </summary>
-        U64 = TC.UInt64
+        U64 = TC.UInt64,
     }
 }

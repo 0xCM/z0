@@ -17,7 +17,7 @@ ref struct Runner
 
     public static int Main(params string[] args)
     {
-        using var wf = Polyrand.install(Flow.shell(args));
+        using var wf = Polyrand.install(WfCore.shell(args));
         using var runner = new Runner(wf,args);
         runner.Run();
         return 0;
@@ -42,7 +42,7 @@ ref struct Runner
     {
         Wf.Running(Id, Part);
 
-
+        Dispatcher.create().Run(Wf);
 
         Wf.Ran(Id, Part);
     }

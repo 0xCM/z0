@@ -39,15 +39,6 @@ namespace Z0
 
     }
 
-   public interface IRefinedBitField<F,T> : IBitField<T>
-        where F : unmanaged, Enum
-        where T : unmanaged
-    {
-        F Kind {get;}
-
-        T IBitField<T>.Content
-            => EnumValue.scalar<F,T>(Kind);
-    }
 
     /// <summary>
     /// Characterizes a bitfield from which segments can be specified/extracted

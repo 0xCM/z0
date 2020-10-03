@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    partial struct PrimalBitFieldSpec
+    partial struct PrimalKindBitField
     {
         /// <summary>
         /// Defines the widths of the primal kind bitfield segments

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using api = BitFieldSpecs;
 
    public readonly struct BitFieldSpec<E,W> : ITextual<BitFieldSpec<E,W>>
         where E : unmanaged
@@ -27,14 +28,14 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal BitFieldSpec(in BitFieldSpec untyped, uint bitcount)
+        public BitFieldSpec(in BitFieldSpec untyped, uint bitcount)
         {
             TotalWidth = bitcount;
             Untyped = untyped;
         }
 
         public string Format()
-            => BitFields.format(Segments);
+            => api.format(Segments);
 
         public override string ToString()
             => Format();

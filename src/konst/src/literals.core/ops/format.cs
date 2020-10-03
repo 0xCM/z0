@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using PK = PrimalKindId;
+    using PK = PrimalTypeCode;
 
     partial struct Literals
     {
@@ -19,7 +19,7 @@ namespace Z0
             where T : unmanaged
                 => Render.hex(src, false, false);
         [Op]
-        public static string format(object data, PrimalKindId kind)
+        public static string format(object data, PrimalTypeCode kind)
             => kind switch {
                 PK.String => cast<string>(data),
                 PK.C16 => cast<char>(data).ToString(),

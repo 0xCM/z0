@@ -4,73 +4,68 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using PK = PrimalKind;
+
     /// <summary>
-    /// Identifies the primal numeric kinds
+    /// Defines a <see cref='PrimalKind'/> subset that corresponds to primal numeric kinds
     /// </summary>
-    /// <remarks>
-    /// As a bitfield, Width = [0..2], Sign = [3], Floating = [4]
-    /// <remarks>
     public enum PrimalNumericKind : byte
     {
         None = 0,
 
         /// <summary>
-        /// Specifies an unsigned 8-bit integer
+        /// An alias for <see cref='PK.U8'/>
         /// </summary>
-        U8 = 0b00011,
+        U8 = PK.U8,
 
         /// <summary>
-        /// Specifies an unsigned 16-bit integer
+        /// An alias for <see cref='PK.U16'/>
         /// </summary>
-        U16 = 0b00100,
+        U16 = PK.U16,
 
         /// <summary>
-        /// Specifies an unsigned 32-bit integer
+        /// An alias for <see cref='PK.U32'/>
         /// </summary>
-        U32 = 0b00101,
+        U32 = PK.U32,
 
         /// <summary>
-        /// Specifies an unsigned 64-bit integer
+        /// An alias for <see cref='PK.U64'/>
         /// </summary>
-        U64 = 0b00110,
+        U64 = PK.U64,
 
         /// <summary>
-        /// Specifies a signed 8-bit integer
+        /// An alias for <see cref='PK.I8'/>
         /// </summary>
-        I8 = 0b01011,
+        I8 = PK.I8,
 
         /// <summary>
-        /// Specifies a signed 16-bit integer
+        /// An alias for <see cref='PK.I16'/>
         /// </summary>
-        I16 = 0b01100,
+        I16 = PK.I16,
 
         /// <summary>
-        /// Specifies a signed 32-bit integer
+        /// An alias for <see cref='PK.I32'/>
         /// </summary>
-        I32 = 0b01101,
+        I32 =  PK.I32,
 
         /// <summary>
-        /// Specifies a signed 64-bit integer
+        /// An alias for <see cref='PK.I64'/>
         /// </summary>
-        I64 = 0b01110,
+        I64 = PK.I64,
 
         /// <summary>
-        /// Specifies a signed 32-bit floating-point number
+        /// An alias for <see cref='PK.F32'/>
         /// </summary>
-        F32 = 0b10101,
+        F32 = PK.F32,
 
         /// <summary>
-        /// Specifies a signed 64-bit floating-point number
+        /// An alias for <see cref='PK.F64'/>
         /// </summary>
-        F64 = 0b10110,
-    }
+        F64 = PK.F64,
 
-    public readonly struct PrimalNumericKindE
-    {
-        public const PrimalNumericKind WidthMask = (PrimalNumericKind)0b0111;
-
-        public const PrimalNumericKind SignMask = (PrimalNumericKind)0b1000;
-
-        public const PrimalNumericKind FloatMask = (PrimalNumericKind)0b10000;
+        /// <summary>
+        /// An alias for <see cref='PK.F128'/>
+        /// </summary>
+        F128 = PK.F128,
     }
 }

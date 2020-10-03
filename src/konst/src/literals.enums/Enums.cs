@@ -21,17 +21,6 @@ namespace Z0
                 => default(E);
 
         /// <summary>
-        /// Computes the bit-width of an enum with a specified base kind
-        /// </summary>
-        /// <param name="base">An integral type refined by an enum</param>
-        [MethodImpl(Inline)]
-        public static TypeWidth width(EnumScalarKind @base)
-        {
-            var exp = (byte)(@base & EnumScalarKindE.WidthMask);
-            return (TypeWidth)Pow2.pow(exp);
-        }
-
-        /// <summary>
         /// Determines an enumeration's underlying kind
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>

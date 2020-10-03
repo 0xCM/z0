@@ -9,24 +9,13 @@ namespace Z0
 
     using static Konst;
 
+    using api = BitFieldSpecs;
+
     /// <summary>
     /// Defines a partition over a contiguous sequence of bits
     /// </summary>
     public readonly struct BitFieldSpec :  ITextual
     {
-        /// <summary>
-        /// Computes the aggregate width of the segments that comprise the bitfield
-        /// </summary>
-        /// <param name="spec">The bitfield spec</param>
-        [MethodImpl(Inline), Op]
-        public static uint width(in BitFieldSpec spec)
-        {
-            var total = 0u;
-            for(byte i=0; i<spec.Segments.Length; i++)
-                total += spec.Segment(i).Width;
-            return total;
-        }
-
         readonly BitFieldSegment[] Data;
 
         [MethodImpl(Inline)]
@@ -55,7 +44,7 @@ namespace Z0
         public uint TotalWidth
         {
             [MethodImpl(Inline)]
-            get => width(this);
+            get => api.width(this);
         }
 
         public ReadOnlySpan<BitFieldSegment> Segments
@@ -65,7 +54,7 @@ namespace Z0
         }
 
         public string Format()
-            => BitFields.format(Segments);
+            => api.format(Segments);
 
         public override string ToString()
             => Format();

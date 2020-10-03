@@ -12,20 +12,6 @@ namespace Z0
     partial class BitFields
     {
         /// <summary>
-        /// Computes the aggregate width of the segments that comprise the bitfield
-        /// </summary>
-        /// <param name="spec">The bitfield spec</param>
-        [MethodImpl(Inline), Op]
-        public static uint width(in BitFieldSpec spec)
-        {
-            var total = 0u;
-            var count = spec.Segments.Length;
-            for(byte i=0; i<count; i++)
-                total += spec.Segment(i).Width;
-            return total;
-        }
-
-        /// <summary>
         /// Defines a bitfield predicated on explicitly-specified segments
         /// </summary>
         /// <param name="segments">The defining segments</param>

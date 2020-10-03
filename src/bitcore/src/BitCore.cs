@@ -9,30 +9,30 @@ namespace Z0
     using static Konst;
 
     [ApiHost("scalar")]
-    public partial class Bits : IApiHost<Bits>
+    public partial class Bits
     {
 
     }
 
     [ApiHost("generic")]
-    public partial class gbits : IApiHost<gbits>
+    public partial class gbits
     {
 
     }
-    
+
     [ApiHost]
     public partial class BitLogixOps
     {
 
     }
- 
+
     public static partial class XTend
     {
 
     }
-    
-    public static partial class XBits 
-    { 
-        
-    }    
+
+    public static partial class XBits
+    {
+
+    }
 }

@@ -31,7 +31,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return generic<T>(Bits.clear8(uint64(src), index));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>

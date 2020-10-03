@@ -11,7 +11,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static CaptureMembers;
 
     readonly ref struct CaptureMembersStep
     {
@@ -21,38 +20,41 @@ namespace Z0
 
         readonly IPartCapturePaths Target;
 
+        readonly WfHost Host;
+
         [MethodImpl(Inline)]
-        public CaptureMembersStep(WfCaptureState state, IPartCapturePaths dst)
+        public CaptureMembersStep(WfCaptureState state, WfHost host, IPartCapturePaths dst)
         {
             Wf = state.Wf;
+            Host = host;
             State = state;
             Target = dst;
-            Wf.Created(StepId);
+            Wf.Created(Host);
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
         }
 
-        public void Execute(IApiHost host)
+        public void Execute(IApiHost api)
         {
-            Wf.Running(StepId);
+            Wf.Running(Host, api.Uri);
 
             try
             {
-                using var extract = new ExtractHostMembersStep(Wf, new ExtractHostMembers(), host, Target);
+                using var extract = new ExtractHostMembersStep(Wf, new ExtractHostMembers(), api, Target);
                 extract.Run();
 
-                using var emit = new EmitCaptureArtifactsStep(State, new EmitCaptureArtifacts(), host.Uri, extract.Extracts, Target);
+                using var emit = new EmitCaptureArtifactsStep(State, new EmitCaptureArtifacts(), api.Uri, extract.Extracts, Target);
                 emit.Run();
             }
             catch(Exception e)
             {
-                Wf.Error(StepId,e);
+                Wf.Error(Host,e);
             }
 
-            Wf.Ran(StepId);
+            Wf.Ran(Host, api.Uri);
         }
     }
 }
