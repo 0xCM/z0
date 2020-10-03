@@ -6,15 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection.Metadata;
+    using System.Reflection;
 
     using static Konst;
     using static z;
 
-    [ApiHost, Events]
-    public readonly partial struct WfEvents
+    public struct ManifestResourceData
     {
-        [MethodImpl(Inline), Op]
-        public static IWfEventLog log(WfLogConfig config, bool clear = true)
-            => new WfEventLog2(FS.path(config.StatusLog.Name), FS.path(config.ErrorLog.Name), clear);
+        public string Name;
+
+        public ulong Offset;
+
+        public ManifestResourceAttributes Attributes;
     }
 }

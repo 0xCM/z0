@@ -28,7 +28,7 @@ namespace Z0
             {
                 ref readonly var b = ref skip(input,i);
                 for(byte j=0; j<8; j++)
-                    seek(dst,j) = bit.test(b,j);
+                    seek(dst,j) = BitStates.test(b,j);
             }
             return buffer;
         }

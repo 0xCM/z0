@@ -24,5 +24,11 @@ namespace Z0
             FileOps.CreateParent(src.Name.Format());
             return src;
         }
+
+        public static void AppendLine(this FS.FilePath dst, string src)
+        {
+            File.AppendAllLines(dst.Name, z.array(src));
+        }
+
     }
 }

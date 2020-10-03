@@ -308,70 +308,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
         [MethodImpl(Inline), Op]
-        public static bit test(sbyte src, byte pos)
-            => new bit((src & (1 << pos)) != 0);
-
-        /// <summary>
-        /// Tests the state of an index-identified source bit
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="pos">The 0-based index of the bit to test</param>
-        [MethodImpl(Inline), Op]
         public static bit test(byte src, int pos)
             => new bit(((uint)src >> pos) & 1);
-
-        /// <summary>
-        /// Tests the state of an index-identified source bit
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="pos">The 0-based index of the bit to test</param>
-        [MethodImpl(Inline), Op]
-        public static bit test(short src, int pos)
-            => new bit((src & (1 << pos)) != 0);
-
-        /// <summary>
-        /// Tests the state of an index-identified source bit
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="pos">The 0-based index of the bit to test</param>
-        [MethodImpl(Inline), Op]
-        public static bit test(ushort src, int pos)
-            => new bit(((uint)src >> pos) & 1);
-
-        /// <summary>
-        /// Tests the state of an index-identified source bit
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="pos">The 0-based index of the bit to test</param>
-        [MethodImpl(Inline), Op]
-        public static bit test(int src, int pos)
-            => new bit((src & (1 << pos)) != 0);
-
-        /// <summary>
-        /// Tests the state of an index-identified source bit
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="pos">The 0-based index of the bit to test</param>
-        [MethodImpl(Inline), Op]
-        public static bit test(long src, int pos)
-            => new bit((src & (1L << pos)) != 0);
-
-        /// <summary>
-        /// Tests the state of an index-identified source bit
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="pos">The 0-based index of the bit to test</param>
-        [MethodImpl(Inline), Op]
-        public static bit test(uint src, int pos)
-            => new bit((src >> pos) & 1);
-
-        /// <summary>
-        /// Tests the state of an index-identified source bit
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="pos">The 0-based index of the bit to test</param>
-        [MethodImpl(Inline), Op]
-        public static bit test(ulong src, int pos)
-            => new bit((uint)((src >> pos) & 1));
     }
 }

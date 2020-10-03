@@ -5,11 +5,14 @@
 namespace Z0
 {
     using System;
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using System.Reflection.Metadata;
 
-    [Free]
-    public interface IWfEventLog : IWfEventSink, ISink<IAppEvent>, ISink<IAppMsg>, ISink<IWfEvent>, IDisposable
+    using static Konst;
+    using static z;
+
+    partial class MetadataReader
     {
+
 
     }
 }

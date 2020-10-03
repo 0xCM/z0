@@ -81,14 +81,6 @@ namespace Z0
             }
         }
 
-        [MethodImpl(Inline)]
-        public void Deposit(in WfTermEvent e)
-        {
-            Display(e);
-
-            StatusWriter.WriteLine(e.Format());
-        }
-
         public void Dispose()
         {
             StatusWriter?.Flush();

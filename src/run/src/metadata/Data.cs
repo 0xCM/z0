@@ -29,13 +29,5 @@ namespace Z0
         readonly Ptr<byte> ImagePointer;
 
         readonly PEMemoryBlock CliMetadata;
-
-        TableSpan<AssemblyFileHandle> _AssemblyFileHandles;
-
-        TableSpan<ManifestResourceHandle> _ManifestResourceHandles;
-
-        TableSpan<FieldDefinitionHandle> _FieldDefinitionHandles;
-
-        TableSpan<AssemblyReferenceHandle> _AssemblyReferenceHandles;
     }
 }

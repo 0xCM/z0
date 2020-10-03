@@ -6,15 +6,22 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection.Metadata;
 
     using static Konst;
     using static z;
 
-    [ApiHost, Events]
-    public readonly partial struct WfEvents
+    partial class MetadataReader
     {
         [MethodImpl(Inline), Op]
-        public static IWfEventLog log(WfLogConfig config, bool clear = true)
-            => new WfEventLog2(FS.path(config.StatusLog.Name), FS.path(config.ErrorLog.Name), clear);
+        public string Read(StringHandle src)
+            => Reader.GetString(src);
+
+        [MethodImpl(Inline), Op]
+        public ref string Read(StringHandle src, ref string dst)
+        {
+            dst = Read(src);
+            return ref dst;
+        }
     }
 }

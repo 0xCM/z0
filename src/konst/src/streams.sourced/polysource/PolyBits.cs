@@ -37,7 +37,7 @@ namespace Z0
             {
                 var data = src.Next<ulong>();
                 for(var i=0; i<64; i++)
-                    yield return z.force<byte,T>((byte)As.testbit(data,i));
+                    yield return z.force<byte,T>((byte)BitStates.test(data,i));
             }
         }
     }

@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="offset">The number of elements to skip from the head of the sequence</param>
         /// <param name="length">The number of elements to take from the sequence</param>
         /// <typeparam name="T">The element type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> ToReadOnlySpan<T>(this IEnumerable<T> src)
             => z.@readonly(src);
 

@@ -80,7 +80,8 @@ namespace Z0
             }
 
             var decoded = CilServices.decode(mod,props.Select(x => x.GetGetMethod())).ToArray();
-            var cilwriter = new CilFunctionWriter(CasePath(FileExtensions.Il));
+            var path = FS.path(CasePath(FileExtensions.Il).Name);
+            var cilwriter = new CilFunctionWriter(path);
             cilwriter.Write(decoded);
         }
 

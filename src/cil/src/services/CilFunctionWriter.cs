@@ -3,21 +3,21 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.IO;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
     public readonly struct CilFunctionWriter : ICilFunctionWriter
-    {        
-        public FilePath Target {get;}
+    {
+        public FS.FilePath Target {get;}
 
-        readonly CilFormatConfig Config;        
-        
+        readonly CilFormatConfig Config;
+
         [MethodImpl(Inline)]
-        public CilFunctionWriter(FilePath dst, CilFormatConfig? config = null)
+        public CilFunctionWriter(FS.FilePath dst, CilFormatConfig? config = null)
         {
             Target = dst;
             Config = config ?? CilFormatConfig.Default;
@@ -36,11 +36,11 @@ namespace Z0
                 if(src.Length != 0)
                 {
                     Target.FolderPath.Create();
-                    using var writer = new StreamWriter(Target.FullPath, false);
-                    
-                    if(Config.EmitFileHeader)                        
-                        writer.WriteLine($"; {DateTime.Now}"); 
-                    
+                    using var writer = new StreamWriter(Target.Name, false);
+
+                    if(Config.EmitFileHeader)
+                        writer.WriteLine($"; {DateTime.Now}");
+
                     foreach(var f in src)
                     {
                         writer.WriteLine(Formatter.Format(f));
@@ -53,6 +53,6 @@ namespace Z0
             {
                 throw;
             }
-        }        
+        }
     }
 }

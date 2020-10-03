@@ -6,12 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Security;
     using System.Reflection.Metadata;
     using System.Reflection.PortableExecutable;
 
     using static Konst;
     using static z;
 
+    [ApiHost, SuppressUnmanagedCodeSecurity]
     public unsafe partial class MetadataReader : IDisposable
     {
         public MetadataReader(IWfShell wf, FilePath src)

@@ -56,7 +56,7 @@ namespace Z0.Lang
             get => Data.Count;
         }
 
-        public Test<C, T>[] Storage
+        public Test<C,T>[] Storage
         {
             [MethodImpl(Inline)]
             get => Data.Storage;

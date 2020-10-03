@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     /// <summary>
     /// Defines service contract for persistent emission of cil functions that accompany asm functions
     /// </summary>
@@ -12,8 +12,8 @@ namespace Z0
         /// <summary>
         /// The writer's destintation path
         /// </summary>
-        FilePath Target {get;}        
-        
-        void Write(CilFunction[] src);     
+        FS.FilePath Target {get;}
+
+        void Write(CilFunction[] src);
     }
 }
