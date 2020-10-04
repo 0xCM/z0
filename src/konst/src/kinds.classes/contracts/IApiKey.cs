@@ -12,7 +12,7 @@ namespace Z0
     [Free]
     public interface IApiKey : IKind, ITextual
     {
-        ApiKeyId Id {get;}
+        ApiOpId Id {get;}
 
         string ITextual.Format()
             => Id.ToString().ToLower();
@@ -28,8 +28,8 @@ namespace Z0
     {
         new G Id {get;}
 
-        ApiKeyId IApiKey.Id
-            => (ApiKeyId)Enums.e16u(Id);
+        ApiOpId IApiKey.Id
+            => (ApiOpId)Enums.e16u(Id);
     }
 
     /// <summary>

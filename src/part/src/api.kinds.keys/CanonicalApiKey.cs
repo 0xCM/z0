@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Id = ApiKeyId;
+    using Id = ApiOpId;
 
     /// <summary>
     /// Classifies binary boolean and bitwise logical operations

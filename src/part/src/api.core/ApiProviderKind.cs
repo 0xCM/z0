@@ -7,19 +7,19 @@ namespace Z0
     using System;
 
     [Flags]
-    public enum ApiProviderKind : ulong
+    public enum ApiProviderKind : ushort
     {
         None,
 
         /// <summary>
         /// Indicates a classical or domain-specific value type that organizes data by some principle
         /// </summary>
-        DataStructure,
+        DataStructure = 1,
 
-        DataType,
+        DataType = 2,
 
-        Stateless,
+        Stateless = 4,
 
-        DataSummary,
+        DataSummary = 8,
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.BitFieldSpecs)]
+    [ApiHost(ApiNames.BitFieldSpecs, true)]
     public readonly struct BitFieldSpecs
     {
         /// <summary>
@@ -60,6 +60,5 @@ namespace Z0
                 => string.Format(SegRenderPattern, src.Name, src.StartPos, src.EndPos);
 
         const string SegRenderPattern = "{0}[{1},{2}]";
-
     }
 }

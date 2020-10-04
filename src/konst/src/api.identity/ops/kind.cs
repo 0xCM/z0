@@ -14,10 +14,10 @@ namespace Z0
     partial struct ApiIdentify
     {
         [MethodImpl(Inline), Op]
-        public static ApiKeyId kind(MethodInfo src)
+        public static ApiOpId kind(MethodInfo src)
         {
             if(src.Tag<OpKindAttribute>(out var dst))
-                return dst.KindId;
+                return dst.Id;
             else
                 return 0;
         }

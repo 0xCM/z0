@@ -13,7 +13,7 @@ namespace Z0
     public class KindFactoryAttribute : OpKindAttribute
     {
         public KindFactoryAttribute()
-            : base(ApiKeyId.KindFactory)
+            : base(ApiOpId.KindFactory)
         {
 
         }

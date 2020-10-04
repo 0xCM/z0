@@ -43,6 +43,10 @@ namespace Z0
 
         public const string BitFormatOptions = bits + dot + formatters + dot + options;
 
+        public const string BitFieldParts = bitfields + dot + parts;
+
+        public const string BitFieldSpecs = bitfields + dot + specs;
+
         public const string DataBlocks = blocks + dot + data;
 
         public const string CharBlocks = blocks + dot + chars;
@@ -101,7 +105,6 @@ namespace Z0
 
         public const string PrimalKindBits = primal + dot + kinds + dot + bitfield;
 
-        public const string BitFieldSpecs = bits + dot + fields + dot + specs;
 
         public const string MemoryStore = A.memory + dot + store;
 

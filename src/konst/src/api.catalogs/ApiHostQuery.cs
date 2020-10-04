@@ -52,7 +52,7 @@ namespace Z0
             where K : unmanaged, Enum
                 => (from m in Hosted.Tagged(typeof(OpKindAttribute))
                 let a = m.Tag<OpKindAttribute>().Require()
-                where a.KindId.ToString() == k.ToString()
+                where a.Id.ToString() == k.ToString()
                     select m).Array();
 
         /// <summary>

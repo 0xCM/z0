@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using Id = ApiKeyId;
+    using Id = ApiOpId;
 
     public enum UnaryBitLogicApiKey : ushort
     {

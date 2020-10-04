@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The operation kind id</param>
         [MethodImpl(Inline)]
-        public static string name(ApiKeyId k)
+        public static string name(ApiOpId k)
             => k.Format();
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The operation kind id</param>
         [MethodImpl(Inline)]
-        public static string vname(ApiKeyId k)
+        public static string vname(ApiOpId k)
             => k.Format(true);
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <param name="nk">The vector cell kind</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
-        public static OpIdentity vectorized(ApiKeyId k, TypeWidth w, NumericKind nk, bool generic)
+        public static OpIdentity vectorized(ApiOpId k, TypeWidth w, NumericKind nk, bool generic)
             => ApiIdentify.build(vname(k), w, nk, generic);
 
         /// <summary>
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <typeparam name="W">The vector operand width</typeparam>
         /// <typeparam name="T">The vector cell type</typeparam>
-        public static OpIdentity vdirect<T>(ApiKeyId k, TypeWidth w, T t = default)
+        public static OpIdentity vdirect<T>(ApiOpId k, TypeWidth w, T t = default)
             where T : unmanaged
                 => ApiIdentify.build(vname(k), w, nk(t), false);
 
@@ -56,7 +56,7 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <typeparam name="W">The vector operand width</typeparam>
         /// <typeparam name="T">The vector cell type</typeparam>
-        public static OpIdentity vdirect<W,T>(ApiKeyId k, W w = default, T t = default)
+        public static OpIdentity vdirect<W,T>(ApiOpId k, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeWidth
                 =>  ApiIdentify.build(vname(k), w.TypeWidth, nk(t), false);

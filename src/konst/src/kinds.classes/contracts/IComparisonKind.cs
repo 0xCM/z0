@@ -14,8 +14,8 @@ namespace Z0
     {
         K Kind {get;}
 
-        ApiKeyId IApiKey.Id
-            => (ApiKeyId)Kind;
+        ApiOpId IApiKey.Id
+            => (ApiOpId)Kind;
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ namespace Z0
     public interface IComparisonKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        ApiKeyId IApiKey.Id
+        ApiOpId IApiKey.Id
             => default(F).Id;
     }
 

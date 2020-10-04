@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <typeparam name="W">The vector operand width</typeparam>
         /// <typeparam name="T">The vector cell type</typeparam>
-        public static OpIdentity vgeneric<W,T>(ApiKeyId k, W w = default, T t = default)
+        public static OpIdentity vgeneric<W,T>(ApiOpId k, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeWidth
                 => ApiIdentify.build(vname(k), w.TypeWidth, NumericKinds.kind<T>(), true);

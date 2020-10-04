@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The method to examine</param>
         [MethodImpl(Inline), Op]
-        public static ApiKeyId KindId(this MethodInfo src)
+        public static ApiOpId KindId(this MethodInfo src)
             => ApiIdentify.kind(src);
 
     }

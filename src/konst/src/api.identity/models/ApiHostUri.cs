@@ -10,8 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = ApiIdentify;
-
     public readonly struct ApiHostUri : IApiUri<ApiHostUri>, INullary<ApiHostUri>
     {
         public readonly PartId Owner;

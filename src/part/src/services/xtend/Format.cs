@@ -17,19 +17,19 @@ namespace Z0
             => Part.format(id);
 
         [MethodImpl(Inline)]
-        public static bool IsDefined(this ApiKeyId src)
+        public static bool IsDefined(this ApiOpId src)
             => src != 0;
 
         [MethodImpl(Inline)]
-        public static bool Opaque(this ApiKeyId src)
-            => src >= ApiKeyId.Opaque;
+        public static bool Opaque(this ApiOpId src)
+            => src >= ApiOpId.Opaque;
 
         [MethodImpl(Inline)]
-        public static bool IsUserApi(this ApiKeyId src)
+        public static bool IsUserApi(this ApiOpId src)
             => src.IsDefined() && !src.Opaque();
 
         [MethodImpl(Inline)]
-        public static string Format(this ApiKeyId src)
+        public static string Format(this ApiOpId src)
             => src.Opaque() ? "opaque" : src.ToString().ToLower();
 
         [MethodImpl(Inline)]

@@ -22,6 +22,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static T lsb8x1<T>(T src)
             where T : unmanaged
-                => force<ulong,T>(Bit.scatter(force<T,ulong>(src), L.Lsb64x8x1));
+                => force<ulong,T>(scatter(force<T,ulong>(src), L.Lsb64x8x1));
     }
 }

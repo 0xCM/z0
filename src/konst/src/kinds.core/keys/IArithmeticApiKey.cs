@@ -20,8 +20,8 @@ namespace Z0
         NumericKind OperandKind
             => default;
 
-        ApiKeyId IApiKey.Id
-            => (ApiKeyId)Kind;
+        ApiOpId IApiKey.Id
+            => (ApiOpId)Kind;
     }
 
     /// <summary>
@@ -31,7 +31,7 @@ namespace Z0
     public interface IArithmeticKind<F> : I, IOpKind<F,K>
         where F : unmanaged, I
     {
-        ApiKeyId IApiKey.Id
+        ApiOpId IApiKey.Id
             => default(F).Id;
     }
 

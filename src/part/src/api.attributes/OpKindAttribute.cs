@@ -12,7 +12,7 @@ namespace Z0
         protected OpKindAttribute(object id, object group = null)
             : base(group?.ToString() ?? string.Empty)
         {
-            KindId = ApiAttributes.OpKindId(id);
+            Id = ApiAttributes.OpKindId(id);
         }
 
         public OpKindAttribute()
@@ -21,6 +21,6 @@ namespace Z0
 
         }
 
-        public ApiKeyId KindId {get;}
+        public ApiOpId Id {get;}
     }
 }

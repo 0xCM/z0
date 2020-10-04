@@ -21,8 +21,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref byte part15x3(ushort src, ref byte dst)
         {
-            seek32(dst, 0) = Bit.scatter(src, L.Lsb32x8x3);
-            seek(dst, 4) = (byte)Bit.scatter((byte)(src >> 12), L.Lsb8x8x3);
+            seek32(dst, 0) = scatter(src, L.Lsb32x8x3);
+            seek(dst, 4) = (byte)scatter((byte)(src >> 12), L.Lsb8x8x3);
             return ref dst;
         }
     }

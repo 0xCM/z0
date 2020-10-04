@@ -9,6 +9,9 @@ namespace Z0
 
     using static Konst;
 
+    /// <summary>
+    /// Identifies an <see cref='Enum'/>
+    /// </summary>
     public readonly struct EnumIdentity : IIdentifiedType<EnumIdentity>
     {
         public static EnumIdentity Empty = Define(string.Empty, NumericKind.None);

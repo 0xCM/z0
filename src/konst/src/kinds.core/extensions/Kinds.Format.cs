@@ -38,11 +38,11 @@ namespace Z0
 
 
         [MethodImpl(Inline), Op]
-        public static string Format(this ApiKeyId id, bool vectorized)
+        public static string Format(this ApiOpId id, bool vectorized)
             => vectorized ? $"v{id.Format()}" : id.Format();
 
         [MethodImpl(Inline), Op]
-        public static string Format(this ApiKeyId? id)
+        public static string Format(this ApiOpId? id)
             => id.HasValue ? id.Value.Format() : "unkinded";
 
         [MethodImpl(Inline), Op]

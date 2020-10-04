@@ -47,7 +47,7 @@ namespace Z0
             => build(opname, TypeWidth.None, k, generic);
 
         [MethodImpl(Inline), Op]
-        public static OpIdentity build(ApiKeyId k, NumericKind nk, bool generic)
+        public static OpIdentity build(ApiOpId k, NumericKind nk, bool generic)
             => build(k.Format(), nk, generic);
 
         /// <summary>

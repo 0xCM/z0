@@ -57,10 +57,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         static ulong maskpart(uint src, int offset)
-            => Bit.scatter((ulong)((byte)(src >> offset)), Msb64x8x1);
+            => BitMasks.scatter((ulong)((byte)(src >> offset)), Msb64x8x1);
 
         [MethodImpl(Inline), Op]
         static ulong maskpart(uint src, int offset, ulong mask)
-            => Bit.scatter((ulong)((byte)(src >> offset)), mask);
+            => BitMasks.scatter((ulong)((byte)(src >> offset)), mask);
     }
 }

@@ -40,7 +40,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         /// <param name="nk">The cell numeric kind</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
-        public static OpIdentity vsfunc(ApiKeyId k, TypeWidth w, NumericKind nk, bool generic = true)
+        public static OpIdentity vsfunc(ApiOpId k, TypeWidth w, NumericKind nk, bool generic = true)
             => build(vname(k), w, nk, generic);
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="nk">The cell numeric kind</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        public static OpIdentity vsfunc<T>(ApiKeyId k, TypeWidth w, T t = default, bool generic = true)
+        public static OpIdentity vsfunc<T>(ApiOpId k, TypeWidth w, T t = default, bool generic = true)
             where T : unmanaged
                 => build(vname(k), w, NumericKinds.kind<T>(), generic);
 
@@ -64,7 +64,7 @@ namespace Z0
         /// <param name="generic">Whether the produced identity has a generic marker</param>
         /// <typeparam name="W">The vector width type</typeparam>
         /// <typeparam name="T">The vector cell type</typeparam>
-        public static OpIdentity vsfunc<W,T>(ApiKeyId k, W w = default, T t = default, bool generic = true)
+        public static OpIdentity vsfunc<W,T>(ApiOpId k, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => build(vname(k), w.TypeWidth, NumericKinds.kind<T>(), generic);

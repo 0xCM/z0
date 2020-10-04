@@ -22,281 +22,257 @@ namespace Z0
         /// <summary>
         /// A 16-bit linear memory segment covering 2 unsigned 8-bit segments
         /// </summary>
-        Seg16x8u = W.W16 | Int8u,
+        Seg16x8u = W.W16 | Seg8u,
 
         /// <summary>
         /// A 16-bit linear memory segment covering 2 signed 8-bit segments
         /// </summary>
-        Seg16x8i = W.W16 | Int8i,
+        Seg16x8i = W.W16 | Seg8i,
 
         /// <summary>
         /// A 16-bit linear memory segment covering an unsigned 16-bit segment
         /// </summary>
-        Seg16x16u = W.W16 | Int16u,
+        Seg16x16u = W.W16 | Seg16u,
 
         /// <summary>
         /// A 16-bit linear memory segment covering an unsigned 16-bit segment
         /// </summary>
-        Seg16x16i = W.W16 | Int16i,
+        Seg16x16i = W.W16 | Seg16i,
 
         /// <summary>
         /// A 32-bit linear memory segment covering 4 unsigned 8-bit segments
         /// </summary>
-        Seg32x8u = W.W32 | Int8u,
+        Seg32x8u = W.W32 | Seg8u,
 
         /// <summary>
         /// A 32-bit linear memory segment covering 4 unsigned 8-bit segments
         /// </summary>
-        Seg32x8i = W.W32 | Int8i,
+        Seg32x8i = W.W32 | Seg8i,
 
         /// <summary>
         /// A 32-bit linear memory segment covering 2 unsigned 16-bit segments
         /// </summary>
-        Seg32x16u = W.W32 | Int16u,
+        Seg32x16u = W.W32 | Seg16u,
 
         /// <summary>
         /// A 32-bit linear memory segment covering 2 signed 16-bit segments
         /// </summary>
-        Seg32x16i = W.W32 | Int16i,
+        Seg32x16i = W.W32 | Seg16i,
 
         /// <summary>
         /// A 32-bit linear memory segment covering an unsigned 32-bit segment
         /// </summary>
-        Seg32x32u = W.W32 | Int32u,
+        Seg32x32u = W.W32 | Seg32u,
 
         /// <summary>
         /// A 32-bit linear memory segment covering a signed 32-bit segment
         /// </summary>
-        Seg32x32i = W.W32 | Int32i,
+        Seg32x32i = W.W32 | Seg32i,
 
         /// <summary>
         /// A 32-bit linear memory segment covering a floating-point 32-bit segment
         /// </summary>
-        Seg32x32f = W.W32 | Float32,
+        Seg32x32f = W.W32 | Seg32f,
 
         /// <summary>
         /// A 64-bit linear memory segment covering 8 unsigned 8-bit segments
         /// </summary>
-        Seg64x8u = W.W64 | Int8u,
+        Seg64x8u = W.W64 | Seg8u,
 
         /// <summary>
         /// A 64-bit linear memory segment covering 8 signed 8-bit segments
         /// </summary>
-        Seg64x8i = W.W64 | Int8i,
+        Seg64x8i = W.W64 | Seg8i,
 
         /// <summary>
         /// A 64-bit linear memory segment covering 4 unsigned 16-bit segments
         /// </summary>
-        Seg64x16u = W.W64 | Int16u,
+        Seg64x16u = W.W64 | Seg16u,
 
         /// <summary>
         /// A 64-bit linear memory segment covering 4 signed 16-bit segments
         /// </summary>
-        Seg64x16i = W.W64 | Int16i,
+        Seg64x16i = W.W64 | Seg16i,
 
         /// <summary>
         /// A 64-bit linear memory segment covering 2 unsigned 32-bit segments
         /// </summary>
-        Seg64x32u = W.W64 | Int32u,
+        Seg64x32u = W.W64 | Seg32u,
 
         /// <summary>
         /// A 64-bit linear memory segment covering 2 signed 32-bit segments
         /// </summary>
-        Seg64x32i = W.W64 | Int32i,
+        Seg64x32i = W.W64 | Seg32i,
 
         /// <summary>
         /// A 64-bit linear memory segment covering an unsigned 64-bit segment
         /// </summary>
-        Seg64x64u = W.W64 | Int64u,
+        Seg64x64u = W.W64 | Seg64u,
 
         /// <summary>
         /// A 64-bit linear memory segment covering a signed 64-bit segment
         /// </summary>
-        Seg64x64i = W.W64 | Int64i,
+        Seg64x64i = W.W64 | Seg64i,
 
         /// <summary>
         /// A 64-bit linear memory segment covering 2 32-bit floating-point segments
         /// </summary>
-        Seg64x32f = W.W64 | Float32,
+        Seg64x32f = W.W64 | Seg32f,
 
         /// <summary>
         /// A 64-bit linear memory segment covering a 64-bit floating-point segment
         /// </summary>
-        Seg64x64f = W.W64 | Float64,
+        Seg64x64f = W.W64 | Seg64f,
 
         /// <summary>
         /// A 128-bit linear memory segment covering 16 8-bit unsigned segments
         /// </summary>
-        Seg128x8u = W.W128 | Int8u,
+        Seg128x8u = W.W128 | Seg8u,
 
         /// <summary>
         /// A 128-bit linear memory segment covering 16 8-bit signed segments
         /// </summary>
-        Seg128x8i = W.W128 | Int8i,
+        Seg128x8i = W.W128 | Seg8i,
 
         /// <summary>
         /// A 128-bit linear memory segment covering 8 16-bit unsigned segments
         /// </summary>
-        Seg128x16u = W.W128 | Int16u,
+        Seg128x16u = W.W128 | Seg16u,
 
         /// <summary>
         /// A 128-bit linear memory segment covering 8 16-bit signed segments
         /// </summary>
-        Seg128x16i = W.W128 | Int16i,
+        Seg128x16i = W.W128 | Seg16i,
 
         /// <summary>
         /// A 128-bit linear memory segment covering 4 32-bit unsigned segments
         /// </summary>
-        Seg128x32u = W.W128 | Int32u,
+        Seg128x32u = W.W128 | Seg32u,
 
         /// <summary>
         /// A 128-bit linear memory segment covering 4 32-bit signed segments
         /// </summary>
-        Seg128x32i = W.W128 | Int32i,
+        Seg128x32i = W.W128 | Seg32i,
 
         /// <summary>
         /// A 128-bit linear memory segment covering 2 64-bit unsigned segments
         /// </summary>
-        Seg128x64u = W.W128 | Int64u,
+        Seg128x64u = W.W128 | Seg64u,
 
         /// <summary>
         /// A 128-bit linear memory segment covering 2 64-bit signed segments
         /// </summary>
-        Seg128x64i = W.W128 | Int64i,
+        Seg128x64i = W.W128 | Seg64i,
 
         /// <summary>
         /// A 128-bit linear memory segment covering 4 32-bit floating-point segments
         /// </summary>
-        Seg128x32f = W.W128 | Float32,
+        Seg128x32f = W.W128 | Seg32f,
 
         /// <summary>
         /// A 128-bit linear memory segment covering 2 64-bit floating-point segments
         /// </summary>
-        Seg128x64f = W.W128 | Float64,
+        Seg128x64f = W.W128 | Seg64f,
 
         /// <summary>
         /// A 256-bit linear memory segment covering 32 8-bit unsigned segments
         /// </summary>
-        Seg256x8u = W.W256 | Int8u,
+        Seg256x8u = W.W256 | Seg8u,
 
         /// <summary>
         /// A 256-bit linear memory segment covering 32 8-bit signed segments
         /// </summary>
-        Seg256x8i = W.W256 | Int8i,
+        Seg256x8i = W.W256 | Seg8i,
 
         /// <summary>
         /// A 256-bit linear memory segment covering 16 16-bit unsigned segments
         /// </summary>
-        Seg256x16u = W.W256 | Int16u,
+        Seg256x16u = W.W256 | Seg16u,
 
         /// <summary>
         /// A 256-bit linear memory segment covering 16 16-bit signed segments
         /// </summary>
-        Seg256x16i = W.W256 | Int16i,
+        Seg256x16i = W.W256 | Seg16i,
 
         /// <summary>
         /// A 256-bit linear memory segment covering 8 32-bit unsigned segments
         /// </summary>
-        Seg256x32u = W.W256 | Int32u,
+        Seg256x32u = W.W256 | Seg32u,
 
         /// <summary>
         /// A 256-bit linear memory segment covering 8 32-bit signed segments
         /// </summary>
-        Seg256x32i = W.W256 | Int32i,
+        Seg256x32i = W.W256 | Seg32i,
 
         /// <summary>
         /// A 256-bit linear memory segment covering 4 64-bit unsigned segments
         /// </summary>
-        Seg256x64u = W.W256 | Int64u,
+        Seg256x64u = W.W256 | Seg64u,
 
         /// <summary>
         /// A 256-bit linear memory segment covering 4 64-bit signed segments
         /// </summary>
-        Seg256x64i = W.W256 | Int64i,
+        Seg256x64i = W.W256 | Seg64i,
 
         /// <summary>
         /// A 256-bit linear memory segment covering 8 32-bit floating-point segments
         /// </summary>
-        Seg256x32f = W.W256 | Float32,
+        Seg256x32f = W.W256 | Seg32f,
 
         /// <summary>
         /// A 256-bit linear memory segment covering 4 64-bit floating-point segments
         /// </summary>
-        Seg256x64f = W.W256 | Float64,
+        Seg256x64f = W.W256 | Seg64f,
 
         /// <summary>
         /// A 512-bit linear memory segment covering 32 8-bit unsigned segments
         /// </summary>
-        Seg512x8u = W.W512 | Int8u,
+        Seg512x8u = W.W512 | Seg8u,
 
         /// <summary>
         /// A 512-bit linear memory segment covering 32 8-bit signed segments
         /// </summary>
-        Seg512x8i = W.W512 | Int8i,
+        Seg512x8i = W.W512 | Seg8i,
 
         /// <summary>
         /// A 512-bit linear memory segment covering 16 16-bit unsigned segments
         /// </summary>
-        Seg512x16u = W.W512 | Int16u,
+        Seg512x16u = W.W512 | Seg16u,
 
         /// <summary>
         /// A 512-bit linear memory segment covering 16 16-bit signed segments
         /// </summary>
-        Seg512x16i = W.W512 | Int16i,
+        Seg512x16i = W.W512 | Seg16i,
 
         /// <summary>
         /// A 512-bit linear memory segment covering 8 32-bit unsigned segments
         /// </summary>
-        Seg512x32u = W.W512 | Int32u,
+        Seg512x32u = W.W512 | Seg32u,
 
         /// <summary>
         /// A 512-bit linear memory segment covering 8 32-bit signed segments
         /// </summary>
-        Seg512x32i = W.W512 | Int32i,
+        Seg512x32i = W.W512 | Seg32i,
 
         /// <summary>
         /// A 512-bit linear memory segment covering 4 64-bit unsigned segments
         /// </summary>
-        Seg512x64u = W.W512 | Int64u,
+        Seg512x64u = W.W512 | Seg64u,
 
         /// <summary>
         /// A 512-bit linear memory segment covering 4 64-bit signed segments
         /// </summary>
-        Seg512x64i = W.W512 | Int64i,
+        Seg512x64i = W.W512 | Seg64i,
 
         /// <summary>
         /// A 512-bit linear memory segment covering 8 32-bit floating-point segments
         /// </summary>
-        Seg512x32f = W.W512 | Float32,
+        Seg512x32f = W.W512 | Seg32f,
 
         /// <summary>
         /// A 512-bit linear memory segment covering 4 64-bit floating-point segments
         /// </summary>
-        Seg512x64f = W.W512 | Float64,
-
-        W8 = W.W8,
-
-        W16 = W.W16,
-
-        W32 = W.W32,
-
-        W64 = W.W64,
-
-        W128 = W.W128,
-
-        W256 = W.W256,
-
-        W512 = W.W512,
-
-        /// <summary>
-        /// Classifies numeric 1-bit types that don't exist
-        /// </summary>
-        W1 = 1,
-
-        /// <summary>
-        /// Classifies the conceptually useful, but practically non-extant, 1-bit unsigned integer type
-        /// </summary>
-        Bit = W1,
+        Seg512x64f = W.W512 | Seg64f,
 
         /// <summary>
         /// Classifies signed integral types; if sign bit is not enabled and float bit
@@ -312,81 +288,51 @@ namespace Z0
         /// <summary>
         /// Classifies the 8-bit unsigned integer type
         /// </summary>
-        Int8u = W8,
+        Seg8u = W.W8,
 
         /// <summary>
         /// Classifies the 16-bit unsigned integer type
         /// </summary>
-        Int16u = W16,
+        Seg16u = W.W16,
 
         /// <summary>
         /// Classifies the 32-bit unsigned integer type
         /// </summary>
-        Int32u = W32,
+        Seg32u = W.W32,
 
         /// <summary>
         /// Classifies the 64-bit unsigned integer type
         /// </summary>
-        Int64u = W64,
-
-        /// <summary>
-        /// Tracks the last pure classifier
-        /// </summary>
-        LastClass = Int64u,
+        Seg64u = W.W64,
 
         /// <summary>
         /// Classifies the 8-bit signed integer type
         /// </summary>
-        Int8i = Signed | W8,
+        Seg8i = Signed | Seg8u,
 
         /// <summary>
         /// Classifies the 16-bit signed integer type
         /// </summary>
-        Int16i = Signed | W16,
+        Seg16i = Signed | Seg16u,
 
         /// <summary>
         /// Classifies the 32-bit signed integer type
         /// </summary>
-        Int32i = Signed | W32,
+        Seg32i = Signed | Seg32u,
 
         /// <summary>
         /// Classifies the 64-bit signed integer type
         /// </summary>
-        Int64i = Signed | W64,
+        Seg64i = Signed | Seg64u,
 
         /// <summary>
         /// Classifies the 32-bit floating-point type type
         /// </summary>
-        Float32 = Float | W32,
+        Seg32f = Float | Seg32i,
 
         /// <summary>
         /// Classifies the 64-bit floating-point type type
         /// </summary>
-        Float64 = Float | W64,
-
-        /// <summary>
-        /// Classifies all numeric type widths
-        /// </summary>
-        Widths = W8 | W16 | W32 | W64,
-
-        /// <summary>
-        /// Classifies signed integral types
-        /// </summary>
-        SignedInts = Int8i | Int16i | Int32i | Int64i,
-
-        /// <summary>
-        /// Classifies unsigned integral types
-        /// </summary>
-        UnsignedInts = Int8u | Int16u | Int32u | Int64u,
-
-        /// <summary>
-        /// Classifies floating-point types
-        /// </summary>
-        Floats = Float32 | Float64,
-
-        /// <summary>
-        /// Classifies integral types
-        /// </summary>
-        Integers = SignedInts | UnsignedInts,
+        Seg64f = Float | Seg64i,
     }
 }

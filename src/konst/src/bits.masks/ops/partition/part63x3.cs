@@ -23,9 +23,9 @@ namespace Z0
         public static void part63x3(ulong src, ref byte dst)
         {
             var x = BitMasks.lo(n63) & src;
-            seek64(dst, 0) = Bit.scatter(x, L.Lsb64x8x3);
-            seek64(dst, 1) = Bit.scatter(x >> 24, L.Lsb64x8x3);
-            seek64(dst, 2) = Bit.scatter(x >> 48, L.Lsb64x8x3);
+            seek64(dst, 0) = scatter(x, L.Lsb64x8x3);
+            seek64(dst, 1) = scatter(x >> 24, L.Lsb64x8x3);
+            seek64(dst, 2) = scatter(x >> 48, L.Lsb64x8x3);
         }
     }
 }

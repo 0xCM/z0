@@ -17,8 +17,8 @@ namespace Z0
         NumericKind NumericKind
             => default;
 
-        ApiKeyId IApiKey.Id
-            => (ApiKeyId)Kind;
+        ApiOpId IApiKey.Id
+            => (ApiOpId)Kind;
     }
 
     /// <summary>
@@ -29,7 +29,7 @@ namespace Z0
     public interface IBitLogicKind<F> : IBitLogicKind, IOpKind<F,BinaryBitLogicApiKey>
         where F : unmanaged, IBitLogicKind
     {
-        ApiKeyId IApiKey.Id
+        ApiOpId IApiKey.Id
             => default(F).Id;
     }
 

@@ -14,15 +14,15 @@ namespace Z0
     partial struct ApiIdentify
     {
         [MethodImpl(Inline), Op]
-        public static ref ApiIdentity identify(MethodInfo src, out ApiIdentity dst)
+        public static ref ApiMetadataUri identify(MethodInfo src, out ApiMetadataUri dst)
         {
-            dst = ApiIdentity.identify(src);
+            dst = ApiMetadataUri.identify(src);
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public static ApiIdentity identify2(MethodInfo src)
-            => ApiIdentity.identify(src);
+        public static ApiMetadataUri identify2(MethodInfo src)
+            => ApiMetadataUri.identify(src);
 
         [Op]
         public static Option<SegmentedIdentity> identify(ApiIdentityPart part)

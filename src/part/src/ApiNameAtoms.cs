@@ -37,6 +37,8 @@ namespace Z0
 
         public const string delegates = nameof(delegates);
 
+        public const string parts = nameof(parts);
+
         public const string dynamic = nameof(dynamic);
 
         public const string expressions = nameof(expressions);
@@ -62,7 +64,6 @@ namespace Z0
         public const string maps = nameof(maps);
 
         public const string memory = nameof(memory);
-
 
         public const string options = nameof(options);
 

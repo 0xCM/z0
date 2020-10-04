@@ -9,42 +9,42 @@ namespace Z0
     /// <summary>
     /// Defines operand kind identity classifiers
     /// </summary>
-    public enum ApiKeyId : ushort
+    public enum ApiOpId : ushort
     {
         /// <summary>
         /// The empty identity
         /// </summary>
         None = 0,
 
-        And = 0b0001,
+        And,
 
-        CNonImpl = 0b0010,
+        CNonImpl,
 
-        LProject = 0b0011,
+        LProject,
 
-        NonImpl = 0b0100,
+        NonImpl,
 
-        RProject = 0b0101,
+        RProject,
 
-        Xor = 0b0110,
+        Xor,
 
-        Or = 0b0111,
+        Or,
 
-        Nor = 0b1000,
+        Nor,
 
-        Xnor = 0b1001,
+        Xnor,
 
-        RNot = 0b1010,
+        RNot,
 
-        Impl = 0b1011,
+        Impl,
 
-        LNot = 0b1100,
+        LNot,
 
-        CImpl = 0b1101,
+        CImpl,
 
-        Nand = 0b1110,
+        Nand,
 
-        True = 0b1111,
+        True,
 
         Not,
 

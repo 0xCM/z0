@@ -22,7 +22,7 @@ namespace Z0
         /// <param name="nk">The operation numeric kind</typeparam>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
         [MethodImpl(Inline), Op]
-        public static OpIdentity numeric(ApiKeyId k,  NumericKind nk, bool generic = false)
+        public static OpIdentity numeric(ApiOpId k,  NumericKind nk, bool generic = false)
             => NumericOp(name(k), nk, generic);
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="generic">Whether the produced identity has a generic marker</param>
         /// <typeparam name="T">The operation numeric kind</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static OpIdentity numeric<T>(ApiKeyId k, T t = default, bool generic = false)
+        public static OpIdentity numeric<T>(ApiOpId k, T t = default, bool generic = false)
             where T : unmanaged
                 =>  NumericOp<T>(name(k),  generic);
 
@@ -150,7 +150,7 @@ namespace Z0
         /// <param name="generic">Whether the operation should include a generic marker</param>
         /// <param name="kinds">The numeric argument kinds</param>
         [Op]
-        public static OpIdentity NumericOp(ApiKeyId id, bool generic, params NumericKind[] kinds)
+        public static OpIdentity NumericOp(ApiOpId id, bool generic, params NumericKind[] kinds)
         {
             var result = text.build();
             result.Append(id.Format());
@@ -181,7 +181,7 @@ namespace Z0
         /// <param name="id">The operation kind id</param>
         /// <param name="kinds">The numeric argument kinds</param>
         [Op]
-        public static OpIdentity NumericOp(ApiKeyId id, params NumericKind[] kinds)
+        public static OpIdentity NumericOp(ApiOpId id, params NumericKind[] kinds)
             => NumericOp(id,false,kinds);
     }
 }

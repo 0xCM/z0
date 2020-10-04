@@ -6,38 +6,39 @@ namespace Z0
 {
     using System;
 
-    public enum ApiUriScheme
+    public enum ApiUriScheme : ushort
     {
         None = 0,
 
         /// <summary>
         /// Marker for operations emitted to a decoded asm file
         /// </summary>
-        Asm,
+        Asm = 1,
 
         /// <summary>
         /// Marker for operations emitted to a hex-formatted file
         /// </summary>
-        Hex,
+        Hex = 2,
 
         /// <summary>
         /// Marker for stateless hosted operations
         /// </summary>
-        Type,
+        Type = 4,
 
         /// <summary>
         /// Marker for serviced hosted operations
         /// </summary>
-        Svc,
+        Svc = 8,
 
         /// <summary>
         /// Marker for memory-located operations
         /// </summary>
-        Located,
+        Located = 16,
 
         /// <summary>
-        /// Scheme used when origin/location semantics should be eliminated from consideration
+        /// Marker for metadata-located operations
         /// </summary>
-        Any,
+        Meta = 32,
+
     }
 }

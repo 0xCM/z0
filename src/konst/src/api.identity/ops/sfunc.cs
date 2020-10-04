@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="w">A segment width representative</param>
         /// <param name="t">A cell type representative</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
-        public static OpIdentity sfunc<T>(ApiKeyId k, TypeWidth w, T t = default, bool generic = true)
+        public static OpIdentity sfunc<T>(ApiOpId k, TypeWidth w, T t = default, bool generic = true)
             where T : unmanaged
                 => ApiIdentify.build(name(k), w, NumericKinds.kind<T>(), generic);
 
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="generic">Whether the produced identity has a generic marker</param>
         /// <typeparam name="W">The width type</typeparam>
         /// <typeparam name="T">The numeric type</typeparam>
-        public static OpIdentity sfunc<W,T>(ApiKeyId k, W w = default, T t = default, bool generic = true)
+        public static OpIdentity sfunc<W,T>(ApiOpId k, W w = default, T t = default, bool generic = true)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => ApiIdentify.build(name(k), w.TypeWidth, NumericKinds.kind<T>(), generic);
@@ -41,7 +41,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The operation kind id</param>
         /// <typeparam name="T">The numeric type</typeparam>
-        public static OpIdentity sfunc<T>(ApiKeyId k, T t = default)
+        public static OpIdentity sfunc<T>(ApiOpId k, T t = default)
             => NumericOp(name(k), NumericKinds.kind<T>());
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The operation kind id</param>
         /// <param name="nk">The operation numeric kind</param>
-        public static OpIdentity sfunc(ApiKeyId k, NumericKind nk)
+        public static OpIdentity sfunc(ApiOpId k, NumericKind nk)
             => NumericOp(name(k), nk);
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="w">A segment width representative</param>
         /// <param name="t">A cell type representative</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
-        public static OpIdentity sfunc(ApiKeyId k, TypeWidth w, NumericKind nk, bool generic = true)
+        public static OpIdentity sfunc(ApiOpId k, TypeWidth w, NumericKind nk, bool generic = true)
             => build(name(k), w, nk, generic);
 
         /// <summary>
