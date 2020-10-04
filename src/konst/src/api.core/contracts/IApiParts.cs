@@ -19,9 +19,9 @@ namespace Z0
 
         IApiPartCatalog[] Catalogs {get;}
 
-        IApiHost[] Hosts {get;}
+        IApiHost[] ApiHosts {get;}
 
-        IApiHost[] OpHosts {get;}
+        IApiHost[] OperationHosts {get;}
 
         Option<IApiHost> FindHost(ApiHostUri uri);
 
@@ -29,5 +29,9 @@ namespace Z0
 
         IEnumerable<IApiHost> DefinedHosts(params PartId[] parts);
 
+        /// <summary>
+        /// The host-defined operations
+        /// </summary>
+        MethodInfo[] Operations {get;}
     }
 }

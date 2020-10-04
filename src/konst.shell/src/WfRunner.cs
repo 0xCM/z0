@@ -94,8 +94,14 @@ namespace Z0
         [Op]
         public void Run()
         {
+            var ops = @readonly(Wf.Api.Operations.Select(ApiIdentify.identify2).Where(x => x.KindKey.IsUserApi()));
+            var count = ops.Length;
+            for(var i=0; i<count; i++)
+            {
+                Wf.Status(Id, skip(ops,i).Format());
+            }
             //XedRunner.Run(Wf);
-            XedEtlWfHost.create().Run(Wf);
+            //XedEtlWfHost.create().Run(Wf);
 
         }
     }

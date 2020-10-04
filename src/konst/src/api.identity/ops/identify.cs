@@ -20,6 +20,10 @@ namespace Z0
             return ref dst;
         }
 
+        [MethodImpl(Inline), Op]
+        public static ApiIdentity identify2(MethodInfo src)
+            => ApiIdentity.identify(src);
+
         [Op]
         public static Option<SegmentedIdentity> identify(ApiIdentityPart part)
         {

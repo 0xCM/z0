@@ -68,7 +68,7 @@ namespace Z0
             {
                 var host = new CaptureApiHosts();
                 var dst = ApiArchives.capture(Config.TargetArchive.Root);
-                using var step = new CaptureApiHostsStep(State, host, Config.Api.Hosts, dst);
+                using var step = new CaptureApiHostsStep(State, host, Config.Api.ApiHosts, dst);
                 step.Run();
 
             }
@@ -91,7 +91,7 @@ namespace Z0
         void CaptureHosts(IApiPartCatalog src, IPartCapturePaths dst)
         {
             Capture(src.ApiDataTypes, dst);
-            Capture(src.Operations, dst);
+            Capture(src.OperationHosts, dst);
         }
 
         void Capture(ApiHost[] src, IPartCapturePaths dst)

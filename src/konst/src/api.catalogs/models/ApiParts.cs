@@ -28,11 +28,16 @@ namespace Z0
 
         public IApiPartCatalog[] Catalogs {get;}
 
-        public IApiHost[] Hosts {get;}
+        public IApiHost[] ApiHosts {get;}
 
-        public IApiHost[] OpHosts {get;}
+        public IApiHost[] OperationHosts {get;}
 
         public PartId[] PartIdentities {get;}
+
+        /// <summary>
+        /// The host-defined operations
+        /// </summary>
+        public MethodInfo[] Operations {get;}
 
         public static implicit operator ApiParts(IPart[] src)
             => new ApiParts(src);
@@ -47,19 +52,14 @@ namespace Z0
             Identifiers = Storage.Select(p => p.Id);
             Components = Storage.Select(p => p.Owner);
             Catalogs = Storage.Select(x => ApiQuery.catalog(x) as IApiPartCatalog).Where(c => c.IsIdentified);
-            Hosts = Catalogs.SelectMany(c => c.ApiHosts);
-            OpHosts = Catalogs.SelectMany(c => c.Operations).Cast<IApiHost>().Array();
+            ApiHosts = Catalogs.SelectMany(c => c.ApiHosts);
+            OperationHosts = Catalogs.SelectMany(c => c.OperationHosts).Cast<IApiHost>().Array();
             PartIdentities = Identifiers;
-        }
-
-        public Count Count
-        {
-            [MethodImpl(Inline)]
-            get => Storage.Length;
+            Operations = Catalogs.SelectMany(x => x.Operations);
         }
 
         public Option<IApiHost> FindHost(ApiHostUri uri)
-            => z.option(Hosts.Where(h => h.Uri == uri).FirstOrDefault());
+            => z.option(ApiHosts.Where(h => h.Uri == uri).FirstOrDefault());
 
         public IEnumerable<IApiPartCatalog> MatchingCatalogs(params PartId[] parts)
         {
@@ -74,9 +74,9 @@ namespace Z0
         public IEnumerable<IApiHost> DefinedHosts(params PartId[] parts)
         {
             if(parts.Length == 0)
-                return Hosts;
+                return ApiHosts;
             else
-                return  from h in Hosts
+                return  from h in ApiHosts
                         where parts.Contains(h.PartId)
                         select h;
         }

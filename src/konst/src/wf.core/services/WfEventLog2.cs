@@ -89,7 +89,6 @@ namespace Z0
         public void Deposit(IAppEvent e)
             => Emit(e);
 
-
         [MethodImpl(Inline)]
         public void Deposit(IWfEvent e)
             => Emit(e);

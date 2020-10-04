@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct ArtifactKey
+    public readonly struct ArtifactKey : ITextual
     {
         public readonly Key<ArtifactKind,ClrArtifactKey> Value;
 
@@ -31,5 +31,9 @@ namespace Z0
         {
             Value = (kind,id);
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => string.Format("{0}:{1}", Kind, Id);
     }
 }

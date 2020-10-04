@@ -36,9 +36,6 @@ namespace Z0
         public static string Format<T>(this ComparisonApiKey kind, T arg1, T arg2)
             => $"{kind.Format()}({arg1}, {arg2})";
 
-        [MethodImpl(Inline), Op]
-        public static string Format(this ApiKeyId id)
-            => id.ToString().ToLower();
 
         [MethodImpl(Inline), Op]
         public static string Format(this ApiKeyId id, bool vectorized)

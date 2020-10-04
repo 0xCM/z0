@@ -9,15 +9,6 @@ namespace Z0
 
     partial struct sys
     {
-        /// <summary>
-        /// Allocates storage for a specified number of T-cells
-        /// </summary>
-        /// <param name="count">The cell allocation count</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        // [MethodImpl(Options), Op, Closures(Closure)]
-        // public static T[] alloc<T>(int count)
-        //     => proxy.alloc<T>(count);
-
         [MethodImpl(Options), Op, Closures(Closure)]
         public static T[] alloc<T>(long count)
             => proxy.alloc<T>(count);

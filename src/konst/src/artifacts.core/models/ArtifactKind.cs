@@ -27,5 +27,12 @@ namespace Z0
         {
             Index = src;
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Index.ToString();
+
+        public override string ToString()
+            => Format();
     }
 }

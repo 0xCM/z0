@@ -13,6 +13,16 @@ namespace Z0
     public interface IApiPartCatalog
     {
         /// <summary>
+        /// The operation hosts
+        /// </summary>
+        ApiHost[] OperationHosts {get;}
+
+        /// <summary>
+        /// The data type hosts
+        /// </summary>
+        ApiDataTypes ApiDataTypes {get;}
+
+        /// <summary>
         /// The known types that reify contracted operation services, potentially generic
         /// </summary>
         Type[] ServiceHosts {get;}
@@ -28,19 +38,14 @@ namespace Z0
         Assembly Owner {get;}
 
         /// <summary>
-        /// The data type hosts
-        /// </summary>
-        ApiDataTypes ApiDataTypes {get;}
-
-        /// <summary>
-        /// The operation hosts
-        /// </summary>
-        ApiHost[] Operations {get;}
-
-        /// <summary>
         /// The api hosts known to the catalog, including both operation and data type hosts
         /// </summary>
         IApiHost[] ApiHosts {get;}
+
+        /// <summary>
+        /// The host-defined operations
+        /// </summary>
+        MethodInfo[] Operations {get;}
 
         /// <summary>
         /// Specifies whether the catalog contains content from an identified assembly
@@ -52,12 +57,12 @@ namespace Z0
         /// Specifies whether the catalog describes any api hosts
         /// </summary>
         bool IsNonEmpty
-            => (Operations.Length + ApiDataTypes.Count) != 0;
+            => (OperationHosts.Length + ApiDataTypes.Count) != 0;
 
         /// <summary>
         /// Specifies whether the catalog describes any api hosts
         /// </summary>
         bool IsEmpty
-            => (Operations.Length + ApiDataTypes.Count) == 0;
+            => (OperationHosts.Length + ApiDataTypes.Count) == 0;
     }
 }

@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata.Ecma335;
 
-    public interface IArtifactKind : ITypedLiteral<TableIndex,byte>
+    public interface IArtifactKind : ITypedLiteral<TableIndex,byte>, ITextual
     {
         TableIndex Index {get;}
 
@@ -17,6 +17,9 @@ namespace Z0
 
         byte ITypedLiteral<TableIndex,byte>.Value
             => (byte)Index;
+
+        string ITextual.Format()
+            => Index.ToString();
     }
 
     public interface IArtifactKind<K> : IArtifactKind

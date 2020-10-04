@@ -388,13 +388,13 @@ namespace Z0
 
         Recover,
 
-        KindFactory,
-
         Intrinsic = K.P2ᐞ11,
 
         /// <summary>
         /// Identifies a function that invokes framework/system operations which are located in an external scope that does not dissolve
         /// </summary>
         Opaque = K.P2ᐞ12,
+
+        KindFactory = K.P2ᐞ13,
     }
 }
