@@ -9,40 +9,32 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
+    using static z;
 
     /// <summary>
-    /// Defines a span of contiguous memory that can be evenly partitioned into 8 and 16-bit segments
+    /// Defines a span of contiguous memory that can be evenly partitioned into 8, 16 and 32-bit segments
     /// </summary>
-    [Blocked(TypeWidth.W16, SpanBlockKind.Sb16)]
-    public readonly ref struct SpanBlock16<T>
+    [ApiType(ApiTypeId.SpanBlock), Blocked(TypeWidth.W32, SpanBlockKind.Sb32)]
+    public readonly ref struct SpanBlock32<T>
         where T : unmanaged
     {
-        readonly Span<T> data;
+        public readonly Span<T> Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator Span<T>(in SpanBlock16<T> src)
-            => src.data;
+        public static implicit operator Span<T>(in SpanBlock32<T> src)
+            => src.Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T>(in SpanBlock16<T> src)
-            => src.data;
+        public static implicit operator ReadOnlySpan<T>(in SpanBlock32<T> src)
+            => src.Data;
 
         [MethodImpl(Inline)]
-        public SpanBlock16(Span<T> src)
-            => this.data = src;
+        public SpanBlock32(Span<T> src)
+            => this.Data = src;
 
         [MethodImpl(Inline)]
-        public SpanBlock16(params T[] src)
-            => this.data = src;
-
-        /// <summary>
-        /// The backing storage
-        /// </summary>
-        public Span<T> Data
-        {
-            [MethodImpl(Inline)]
-            get => data;
-        }
+        public SpanBlock32(params T[] src)
+            => this.Data = src;
 
         /// <summary>
         /// The leading storage cell
@@ -50,13 +42,13 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref MemoryMarshal.GetReference(data);
+            get => ref first(Data);
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => data.IsEmpty;
+            get => Data.IsEmpty;
         }
 
         /// <summary>
@@ -65,7 +57,7 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => data.Length;
+            get => Data.Length;
         }
 
         /// <summary>
@@ -74,7 +66,7 @@ namespace Z0
         public int BlockLength
         {
             [MethodImpl(Inline)]
-            get => 2/Unsafe.SizeOf<T>();
+            get => 4/(int)z.size<T>();
         }
 
         /// <summary>
@@ -92,7 +84,7 @@ namespace Z0
         public ulong BitCount
         {
             [MethodImpl(Inline)]
-            get => (ulong)CellCount * (ulong)Unsafe.SizeOf<T>()*8;
+            get => (ulong)CellCount * z.bitwidth<T>();
         }
 
         /// <summary>
@@ -119,7 +111,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.Bytes();
+            get => Data.Bytes();
         }
 
         /// <summary>
@@ -129,7 +121,7 @@ namespace Z0
         /// <param name="segment">The cell relative block index</param>
         [MethodImpl(Inline)]
         public ref T Cell(int block, int segment)
-            => ref Unsafe.Add(ref Head, BlockLength*block + segment);
+            => ref add(Head, BlockLength*block + segment);
 
         /// <summary>
         /// Retrieves an index-identified data block
@@ -137,23 +129,19 @@ namespace Z0
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
         public Span<T> Block(int block)
-            => data.Slice(block * BlockLength, BlockLength);
+            => slice(Data, block * BlockLength,BlockLength);
 
         /// <summary>
         /// Extracts an index-identified block (non-allocating, but not free due to the price of creating a new wrapper)
         /// </summary>
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
-        public SpanBlock16<T> Extract(int block)
-            => new SpanBlock16<T>(Block(block));
+        public SpanBlock32<T> Extract(int block)
+            => new SpanBlock32<T>(Block(block));
 
-        /// <summary>
-        /// Broadcasts a value to all blocked cells
-        /// </summary>
-        /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public void Fill(T src)
-            => data.Fill(src);
+            => Data.Fill(src);
 
         /// <summary>
         /// Zero-fills all blocked cells
@@ -168,23 +156,23 @@ namespace Z0
         /// <param name="dst">The target span</param>
         [MethodImpl(Inline)]
         public void CopyTo(Span<T> dst)
-            => data.CopyTo(dst);
+            => Data.CopyTo(dst);
 
         /// <summary>
         /// Reinterprets the storage cell type
         /// </summary>
         /// <typeparam name="S">The target cell type</typeparam>
         [MethodImpl(Inline)]
-        public SpanBlock16<S> As<S>()
+        public SpanBlock32<S> As<S>()
             where S : unmanaged
-                => new SpanBlock16<S>(z.recover<T,S>(data));
+                => new SpanBlock32<S>(z.recover<T,S>(Data));
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()
-            => data.GetEnumerator();
+            => Data.GetEnumerator();
 
         [MethodImpl(Inline)]
         public ref T GetPinnableReference()
-            => ref data.GetPinnableReference();
+            => ref Data.GetPinnableReference();
    }
 }

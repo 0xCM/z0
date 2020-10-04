@@ -9,5 +9,9 @@ namespace Z0
     public enum ApiTypeId : ushort
     {
         None = 0,
+
+        SpanBlock,
+
+
     }
 }

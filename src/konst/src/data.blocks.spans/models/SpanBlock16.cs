@@ -11,28 +11,28 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Defines a span of contiguous memory that can be evenly partitioned into 8, 16, 32, 64 and 128-bit segments
+    /// Defines a span of contiguous memory that can be evenly partitioned into 8 and 16-bit segments
     /// </summary>
-    [Blocked(TypeWidth.W128, SpanBlockKind.Sb128)]
-    public readonly ref struct SpanBlock128<T>
+    [ApiType(ApiTypeId.SpanBlock), Blocked(TypeWidth.W16, SpanBlockKind.Sb16)]
+    public readonly ref struct SpanBlock16<T>
         where T : unmanaged
     {
         readonly Span<T> data;
 
         [MethodImpl(Inline)]
-        public static implicit operator Span<T>(in SpanBlock128<T> src)
+        public static implicit operator Span<T>(in SpanBlock16<T> src)
             => src.data;
 
         [MethodImpl(Inline)]
-        public static implicit operator ReadOnlySpan<T>(in SpanBlock128<T> src)
+        public static implicit operator ReadOnlySpan<T>(in SpanBlock16<T> src)
             => src.data;
 
         [MethodImpl(Inline)]
-        public SpanBlock128(Span<T> src)
+        public SpanBlock16(Span<T> src)
             => this.data = src;
 
         [MethodImpl(Inline)]
-        public SpanBlock128(params T[] src)
+        public SpanBlock16(params T[] src)
             => this.data = src;
 
         /// <summary>
@@ -53,9 +53,6 @@ namespace Z0
             get => ref MemoryMarshal.GetReference(data);
         }
 
-        /// <summary>
-        /// True if no capacity exists, false otherwise
-        /// </summary>
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
@@ -77,7 +74,7 @@ namespace Z0
         public int BlockLength
         {
             [MethodImpl(Inline)]
-            get => 16/Unsafe.SizeOf<T>();
+            get => 2/Unsafe.SizeOf<T>();
         }
 
         /// <summary>
@@ -147,8 +144,8 @@ namespace Z0
         /// </summary>
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
-        public SpanBlock128<T> Extract(int block)
-            => new SpanBlock128<T>(Block(block));
+        public SpanBlock16<T> Extract(int block)
+            => new SpanBlock16<T>(Block(block));
 
         /// <summary>
         /// Broadcasts a value to all blocked cells
@@ -178,9 +175,9 @@ namespace Z0
         /// </summary>
         /// <typeparam name="S">The target cell type</typeparam>
         [MethodImpl(Inline)]
-        public SpanBlock128<S> As<S>()
+        public SpanBlock16<S> As<S>()
             where S : unmanaged
-                => new SpanBlock128<S>(z.recover<T,S>(data));
+                => new SpanBlock16<S>(z.recover<T,S>(data));
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()
@@ -189,5 +186,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public ref T GetPinnableReference()
             => ref data.GetPinnableReference();
-    }
+   }
 }
