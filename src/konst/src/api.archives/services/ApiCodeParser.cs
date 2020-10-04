@@ -29,7 +29,7 @@ namespace Z0
                 var address = Parsers.hex().Parse(parts[(byte)ApiCodeField.Base]).ValueOrDefault();
                 var uri = ApiUriParser.operation(parts[(byte)ApiCodeField.Uri].Trim()).ValueOrDefault();
                 var bytes = parts[(byte)ApiCodeField.Encoded].SplitClean(HexFormatSpecs.DataDelimiter).Select(parser.Succeed);
-                return parsed(src, new ApiCodeBlock(address,uri,bytes));
+                return parsed(src, new ApiCodeBlock(address, uri, bytes));
             }
             catch(Exception e)
             {

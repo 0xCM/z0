@@ -4,21 +4,36 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using static Konst;
+
+    using static z;
+
+    using System.Runtime.CompilerServices;
+
     public readonly struct ApiCodeReader : IApiCodeReader
     {
         public static IApiCodeReader Service => default(ApiCodeReader);
 
         public ApiCodeBlock[] Read(FilePath src)
-            => read(src);
-
-        public static ApiCodeBlock[] read(FilePath src)
-            => from line in src.ReadLines().Select(ApiCodeParser.parse)
-                where line.Succeeded
-                select line.Value;
+            => read(FS.path(src.Name));
 
         public static ApiCodeBlock[] read(FS.FilePath src)
-            => from line in src.ReadLines().Select(ApiCodeParser.parse)
-                where line.Succeeded
-                select line.Value;
+        {
+            var lines = @readonly(src.ReadLines());
+            var count = lines.Length;
+            var buffer = sys.alloc<ApiCodeBlock>(count);
+            var dst = span(buffer);
+            for(var i=1u; i<count; i++)
+            {
+                ref readonly var line = ref skip(lines,i);
+                var block = ApiCodeParser.parse(line);
+                if(block)
+                    seek(dst,i) = block.Value;
+                 else
+                    term.error(block.Reason);
+            }
+            return buffer;
+        }
     }
 }

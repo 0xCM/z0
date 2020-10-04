@@ -18,13 +18,12 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        readonly CorrelationToken Ct;
-
         readonly ApiMemberExtract[] Extracted;
 
         readonly AsmRoutine[] Decoded;
 
         readonly WfHost Host;
+
         public MatchAddressesStep(IWfCaptureState state, WfHost host, ApiMemberExtract[] extracted, AsmRoutine[] decoded, CorrelationToken ct)
         {
             State = state;
@@ -32,7 +31,6 @@ namespace Z0
             Host = host;
             Extracted = extracted;
             Decoded = decoded;
-            Ct = ct;
             Wf.Created(Host);
         }
 

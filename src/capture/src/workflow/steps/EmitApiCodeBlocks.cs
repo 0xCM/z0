@@ -7,15 +7,15 @@ namespace Z0
     using System;
 
     [WfHost]
-    public sealed class EmitApiCodeBlocksHost : WfHost<EmitApiCodeBlocksHost>
+    public sealed class EmitApiCodeBlocks : WfHost<EmitApiCodeBlocks>
     {
         ApiHostUri HostUri;
 
         ApiMemberCodeBlocks MemberBlocks;
 
-        public static EmitApiCodeBlocksHost create(ApiHostUri uri, ApiMemberCodeBlocks src)
+        public static EmitApiCodeBlocks create(ApiHostUri uri, ApiMemberCodeBlocks src)
         {
-            var dst = new EmitApiCodeBlocksHost();
+            var dst = new EmitApiCodeBlocks();
             dst.HostUri = uri;
             dst.MemberBlocks = src;
             return dst;

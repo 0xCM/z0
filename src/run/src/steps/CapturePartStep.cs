@@ -82,20 +82,6 @@ namespace Z0
             return slice(dst,j);
         }
 
-        public ReadOnlySpan<IdentifiedMethod> Identify(ReadOnlySpan<ApiDataType> types)
-        {
-
-            var dst = z.list<IdentifiedMethod>();
-            var count = types.Length;
-            var exclusions = new HashSet<string>(new string[4]{"ToString","GetHashCode", "Equals", "ToString"});
-            for(var i=0; i<count; i++)
-            {
-                var host = types[i];
-                dst.AddRange(host.HostType.DeclaredMethods().Unignored().NonGeneric().Exclude(exclusions).Select(m => new IdentifiedMethod(Diviner.Identify(m),m)));
-            }
-            return dst.ToArray();
-        }
-
         public ApiDataTypeRoutine[] Capture(in ApiDataType src, Span<byte> buffer)
         {
             var members = IdentifyMembers(src);

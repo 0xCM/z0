@@ -77,41 +77,11 @@ namespace Z0
             Wf.Ran(StepId);
         }
 
-        public void OnEvent(FunctionsDecoded e)
-        {
-            Sink.Deposit(e);
-
-            if(State.Settings.CollectAsmStats)
-                CollectAsmStats(e.Host, e.Functions);
-        }
-
-        public void OnEvent(ApiCodeTableSaved e)
-        {
-            Sink.Deposit(e);
-
-            if(State.Settings.MatchEmissions)
-            {
-                using var step = new MatchEmissionsStep(Wf, new MatchEmissions());
-                step.Run(e.Host, e.Rows, e.Target);
-                Broker.Raise(step.Event);
-            }
-        }
-
         public void OnEvent(MembersLocated e)
         {
             Sink.Deposit(e);
 
-            if(State.Settings.DuplicateCheck)
-                CheckDuplicates(e.Host, e.Members);
-        }
-
-        void CollectAsmStats(ApiHostUri host, ReadOnlySpan<AsmRoutine> functions)
-        {
-            var count = 0u;
-            for(var i = 0u; i<functions.Length; i++)
-                count += (uint)z.skip(functions,i).InstructionCount;
-
-           Wf.Raise(new CountedInstructions(Step.Name, host, count, Ct));
+            CheckDuplicates(e.Host, e.Members);
         }
 
         void CheckDuplicates(ApiHostUri host, ReadOnlySpan<ApiMember> src)

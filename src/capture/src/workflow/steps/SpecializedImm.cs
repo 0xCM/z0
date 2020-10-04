@@ -27,7 +27,6 @@ namespace Z0.Asm
 
         public FlairKind Flair {get;}
 
-
         [MethodImpl(Inline)]
         public SpecializedImm refined(WfStepId step, ApiHostUri uri, bool generic, Type refinement, FilePath dst, CorrelationToken ct)
             => new SpecializedImm(step, uri, generic, ImmRefinementKind.Refined, refinement, dst, ct);
@@ -42,7 +41,6 @@ namespace Z0.Asm
                 refinement != null ? ImmRefinementKind.Refined : ImmRefinementKind.Unrefined,
                 refinement,
                 dst, ct);
-            //=> new EmittedEmbeddedImm(uri, generic, refinement != null ? ImmRefinementKind.Refined : ImmRefinementKind.Unrefined, refinement, dst);
 
         [MethodImpl(Inline)]
         public SpecializedImm(WfStepId step, ApiHostUri uri, bool generic, ImmRefinementKind source, Type refinement, FilePath dst, CorrelationToken ct, FlairKind flair = Ran)
