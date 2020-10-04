@@ -10,14 +10,14 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// A grid of natural dimensions M and N such that M*N = W := 256
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     [IdentityProvider(typeof(BitGridIdentityProvider))]
-    public readonly ref struct BitGrid256<M,N,T>
+    public struct BitGrid256<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// The grid state
         /// </summary>
-        internal readonly Vector256<T> Data;
+        internal Vector256<T> Data;
 
         /// <summary>
         /// The number of bytes covered by the grid
@@ -43,7 +43,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator BitGrid256<M,N,T>(in SpanBlock256<T> src)
             => new BitGrid256<M,N,T>(src);
-
 
         [MethodImpl(Inline)]
         public static implicit operator BitGrid256<M,N,T>(Vector256<T> src)
@@ -86,12 +85,12 @@ namespace Z0
             => !BitGrid.same(g1,g2);
 
         [MethodImpl(Inline)]
-        internal BitGrid256(Vector256<T> data)
-            => this.Data = data;
+        internal BitGrid256(Vector256<T> src)
+            => Data = src;
 
         [MethodImpl(Inline)]
         internal BitGrid256(in SpanBlock256<T> src)
-            => this.Data = src.LoadVector();
+            => Data = src.LoadVector();
 
         /// <summary>
         /// The exposed grid state
@@ -102,7 +101,7 @@ namespace Z0
             get => Data;
         }
 
-        public int CellCount
+        public uint CellCount
         {
             [MethodImpl(Inline)]
             get => ByteCount/size<T>();
@@ -120,12 +119,12 @@ namespace Z0
         /// <summary>
         /// The number of rows in the grid
         /// </summary>
-        public int RowCount => nati<M>();
+        public int RowCount => nat32i<M>();
 
         /// <summary>
         /// The number of columns in the grid
         /// </summary>
-        public int ColCount => nati<N>();
+        public int ColCount => nat32i<N>();
 
         /// <summary>
         /// Reads an index-identified cell
@@ -138,10 +137,10 @@ namespace Z0
         public bool Equals(BitGrid256<M,N,T> rhs)
             => BitGrid.same(this,rhs);
 
-        public override bool Equals(object obj)
-            => throw new NotSupportedException();
+        public override bool Equals(object src)
+            => src is BitGrid256<M,N,T> x && Equals(x);
 
         public override int GetHashCode()
-            => throw new NotSupportedException();
+            => Data.GetHashCode();
     }
 }

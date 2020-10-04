@@ -8,10 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     partial class BitGrid
-    {        
+    {
         [MethodImpl(Inline), Op]
         public static Perm16L perm(BitGrid64<N16,N4,ulong> g)
             => (Perm16L)g.Content;

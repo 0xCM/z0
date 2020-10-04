@@ -63,8 +63,8 @@ namespace Z0
                 compare.Stop();
             }
 
-            ReportBenchmark($"gcdbin{ApiIdentity.numeric<T>()}", OpCount,subject);
-            ReportBenchmark($"gcd{ApiIdentity.numeric<T>()}", OpCount,compare);
+            ReportBenchmark($"gcdbin{ApiIdentify.numeric<T>()}", OpCount,subject);
+            ReportBenchmark($"gcd{ApiIdentify.numeric<T>()}", OpCount,compare);
         }
 
         /// <summary>

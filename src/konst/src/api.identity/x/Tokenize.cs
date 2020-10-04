@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = ApiIdentity;
+    using api = ApiIdentify;
 
     partial class XApiIdentity
     {

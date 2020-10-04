@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
         [Op]
         public static Option<ApiIdentityPart> component(OpIdentity src, int index)

@@ -44,7 +44,7 @@ namespace Z0
 
         OpIdentity BaselineId<K>(string label, K t = default)
             where K : unmanaged
-                => ApiIdentity.sfunc<K>($"{label}_baseline");
+                => ApiIdentify.sfunc<K>($"{label}_baseline");
 
         string CaseName(IFunc f)
             => TestCaseIdentity.name(HostType,f);
@@ -52,7 +52,7 @@ namespace Z0
         string CaseName<W,T>(IFunc f)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => CaseName<W,T>(HostType, ApiIdentity.build<W,T>(name(f)), true);
+                => CaseName<W,T>(HostType, ApiIdentify.build<W,T>(name(f)), true);
 
         string CaseName<W,T>([Caller] string label = null, bool generic = true)
             where W : unmanaged, ITypeWidth
@@ -65,7 +65,7 @@ namespace Z0
         /// <param name="label">The root name</param>
         string CaseName<C>(Type host, string label)
             where C : unmanaged
-                => text.concat(ApiIdentityKinds.OwningPartText(host), UriPathSep, host.Name, UriPathSep, label, '_', ApiIdentity.numeric<C>());
+                => text.concat(ApiIdentityKinds.OwningPartText(host), UriPathSep, host.Name, UriPathSep, label, '_', ApiIdentify.numeric<C>());
 
         string CaseName<W,C>(Type host, string label, bool generic)
             where W : unmanaged, ITypeWidth
@@ -83,7 +83,7 @@ namespace Z0
         string CaseName<W,T>(IFunc f, W w, bool generic = true)
             where W : unmanaged, ITypeWidth
             where T : unmanaged
-                => CaseName<W,T>(HostType, ApiIdentity.build<W,T>(name(f)), generic: generic);
+                => CaseName<W,T>(HostType, ApiIdentify.build<W,T>(name(f)), generic: generic);
 
         /// <summary>
         /// Produces a case name for an identified operation match test

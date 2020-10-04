@@ -6,11 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
     using static z;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
         /// <summary>
         /// Defines an <see cref='Enum'/> identifier

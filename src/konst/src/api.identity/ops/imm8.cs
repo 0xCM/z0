@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
        /// <summary>
         /// Extracts an 8-bit immediate value from an identity if it contains an immediate suffix; otherwise, returns none

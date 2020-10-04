@@ -16,10 +16,10 @@ namespace Z0
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=8)]
     [IdentityProvider(typeof(BitGridIdentityProvider))]
-    public readonly ref struct BitGrid64<T>
+    public struct BitGrid64<T>
         where T : unmanaged
     {
-        internal readonly ulong Data;
+        internal ulong Data;
 
         /// <summary>
         /// The number of covered bits

@@ -7,14 +7,19 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
 
     partial class XTend
     {
         /// <summary>
         /// Returns the source method's kind identifier if it exists
         /// </summary>
-        /// <param name="m">The method to examine</param>
-        public static ApiKeyId KindId(this MethodInfo m)
-            => m.Tag<OpKindAttribute>().MapValueOrDefault(a => a.KindId, ApiKeyId.None);
+        /// <param name="src">The method to examine</param>
+        [MethodImpl(Inline), Op]
+        public static ApiKeyId KindId(this MethodInfo src)
+            => ApiIdentify.kind(src);
+
     }
 }

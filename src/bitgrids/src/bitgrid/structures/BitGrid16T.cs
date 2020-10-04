@@ -16,13 +16,13 @@ namespace Z0
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=2)]
     [IdentityProvider(typeof(BitGridIdentityProvider))]
-    public readonly ref struct BitGrid16<T>
+    public struct BitGrid16<T>
         where T : unmanaged
     {
         /// <summary>
         /// Grid storage
         /// </summary>
-        internal readonly ushort Data;
+        internal ushort Data;
 
         /// <summary>
         /// The number of covered bits := 16

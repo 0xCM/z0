@@ -13,7 +13,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
         /// <summary>
         /// Produces an identifer for a kinded numeric operation
@@ -119,7 +119,7 @@ namespace Z0
         /// <param name="k">The primal kind over which the identifier is deined</param>
         [MethodImpl(Inline)]
         public static OpIdentity NumericOp(string opname, NumericKind k, bool generic = false)
-            => ApiIdentity.build(opname, TypeWidth.None, k, generic);
+            => ApiIdentify.build(opname, TypeWidth.None, k, generic);
 
         /// <summary>
         /// Produces an identifier of the form {opname}_g{kind}{u | i | f}
@@ -141,7 +141,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static OpIdentity NumericOp<T>(string opname, bool generic = true)
             where T : unmanaged
-                => ApiIdentity.build(opname, TypeWidth.None, nk<T>(), generic);
+                => ApiIdentify.build(opname, TypeWidth.None, nk<T>(), generic);
 
         /// <summary>
         /// Defines kinded identifiers for numeric functions

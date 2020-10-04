@@ -11,33 +11,13 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
-        [Op]
-        public static ApiCodeIndex index(IApiMemberLocator locator, ApiParts api, ApiHostUri uri, FilePath src)
+        [MethodImpl(Inline), Op]
+        public static ref ApiIdentity identify(MethodInfo src, out ApiIdentity dst)
         {
-            var code = ApiIdentity.index(ApiCodeReader.Service.Read(src));
-            var members = index(locator.Locate(api.FindHost(uri).Require()));
-            return ApiIdentity.index(members, code);
-        }
-
-        [Op]
-        public static ApiCodeIndex index(IApiMemberLocator locator, ApiParts api, ApiHostUri host, FolderPath root)
-        {
-            var members = locator.Locate(api.FindHost(host).Require());
-            var idx = index(members);
-            var archive =  ApiArchives.capture(root);
-            var paths =  HostCaptureArchive.create(root, host);
-            var code = ApiCodeReader.Service.Read(paths.HostX86Path);
-            var opIndex =  ApiCodeQuery.Service.CreateIndex(code);
-            return ApiIdentity.index(idx, opIndex);
-        }
-
-        [Op]
-        public static ApiMemberIndex index(ApiMembers src)
-        {
-            var index = ApiIdentity.index(src.Storage.Select(h => (h.Id, h)),true);
-            return new ApiMemberIndex(index.HashTable, index.Duplicates);
+            dst = ApiIdentity.identify(src);
+            return ref dst;
         }
 
         [Op]

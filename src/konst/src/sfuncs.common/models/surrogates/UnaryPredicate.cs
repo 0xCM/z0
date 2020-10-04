@@ -32,7 +32,7 @@ namespace Z0
             internal UnaryPredicate(Z0.UnaryPredicate<T> f, string name)
             {
                 F = f;
-                Id = ApiIdentity.sfunc<T>(name);
+                Id = ApiIdentify.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]

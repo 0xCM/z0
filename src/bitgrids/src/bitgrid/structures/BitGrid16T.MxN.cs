@@ -17,7 +17,7 @@ namespace Z0
     /// <remarks>Conforming dimensions include 1x16, 16x1, 2x8, 8x2, and 4x4</remarks>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     [IdentityProvider(typeof(BitGridIdentityProvider))]
-    public readonly ref struct BitGrid16<M,N,T>
+    public struct BitGrid16<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// The grid state
         /// </summary>
-        internal readonly ushort Data;
+        internal ushort Data;
 
         /// <summary>
         /// The number of bytes covered by the grid

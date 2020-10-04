@@ -36,7 +36,7 @@ namespace Z0
             internal BinaryOp(Z0.BinaryOp<T> f, string name)
             {
                 F = f;
-                Id = ApiIdentity.sfunc<T>(name);
+                Id = ApiIdentify.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]

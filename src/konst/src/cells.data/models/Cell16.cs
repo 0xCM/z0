@@ -9,6 +9,8 @@ namespace Z0
 
     using static Konst;
 
+    using api = Cells;
+
     public readonly struct Cell16 : IDataCell<Cell16,W16,ushort>
     {
         internal readonly ushort Data;

@@ -31,10 +31,8 @@ namespace Z0
             => !BitGrid.same(g1,g2);
 
         [MethodImpl(Inline)]
-        internal BitGrid(in SpanBlock256<T> data)
-        {
-            this.Data = data;
-        }
+        internal BitGrid(in SpanBlock256<T> src)
+            => Data = src;
 
         /// <summary>
         /// The allocated storage

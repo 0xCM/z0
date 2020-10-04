@@ -17,22 +17,47 @@ namespace Z0
         public static uint bitwidth<T>(T t = default)
             => (uint)SizeOf<T>() * 8;
 
+        /// <summary>
+        /// Computes the bit-width of a parametrically-identified type
+        /// </summary>
+        /// <param name="w">The result width selector</param>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static byte bitwidth<T>(W8 w)
+        public static byte bitwidth<T>(W8 w, T t = default)
             => (byte)(SizeOf<T>() * 8);
 
+        /// <summary>
+        /// Computes the bit-width of a parametrically-identified type
+        /// </summary>
+        /// <param name="w">The result width selector</param>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ushort bitwidth<T>(W16 w)
+        public static ushort bitwidth<T>(W16 w, T t = default)
             => (ushort)(SizeOf<T>() * 8);
 
+        /// <summary>
+        /// Computes the bit-width of a parametrically-identified type
+        /// </summary>
+        /// <param name="w">The result width selector</param>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static uint bitwidth<T>(W32 w)
+        public static uint bitwidth<T>(W32 w, T t = default)
             => (uint)(SizeOf<T>() * 8);
 
+        /// <summary>
+        /// Computes the bit-width of a parametrically-identified type
+        /// </summary>
+        /// <param name="w">The result width selector</param>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ulong bitwidth<T>(W64 w)
+        public static ulong bitwidth<T>(W64 w, T t = default)
             => (ulong)(SizeOf<T>() * 8);
 
+        /// <summary>
+        /// Computes the bit-width of a parametrically-identified type
+        /// </summary>
+        /// <param name="w">The result width selector</param>
+        /// <typeparam name="T">The source type</typeparam>
         [MethodImpl(Inline), Op]
         public static BitSize bitsize<T>()
             => Unsafe.SizeOf<T>()*8;

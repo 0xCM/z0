@@ -7,57 +7,31 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.Reflection;
 
     using static Konst;
+    using static z;
 
-
-    [ApiHost(ApiNames.ApiIdentity)]
-    public readonly partial struct ApiIdentity
+    public readonly struct ApiIdentity
     {
-        [MethodImpl(Inline)]
-        public static int compare<T>(in T a, in T b)
-            where T : IIdentified
-                => text.denullify(a.Identifier).CompareTo(b.Identifier);
+        readonly Cell128 Data;
 
         [MethodImpl(Inline)]
-        public static bool equals<T>(in T a, object b)
-            where T : IIdentified
-                => text.equals(a.Identifier, b is T x ? x.Identifier : EmptyString, NoCase);
+        public ApiIdentity(Cell128 src)
+            => Data = src;
 
-        [MethodImpl(Inline)]
-        public static bool equals<T>(in T a, in T b)
-            where T : IIdentified
-                => text.equals(a.Identifier, b.Identifier, NoCase);
-
-        [MethodImpl(Inline)]
-        public static int hash<T>(in T src)
-            where T : IIdentified
-                => text.denullify(src.Identifier).GetHashCode();
-
-        [MethodImpl(Inline), Op]
-        public static IMultiDiviner diviner()
-            => new ArtifactIdentities();
-
-        /// <summary>
-        /// Disables the generic indicator
-        /// </summary>
-        static OpIdentity WithoutGeneric(OpIdentity src)
+        public PartId Part
         {
-            var parts = ApiIdentity.components(src).ToArray();
-            if(parts.Length < 2)
-                return src;
-
-            if(parts[1].Identifier[0] != IDI.Generic)
-                return src;
-
-            parts[1] = parts[1].WithText(parts[1].Identifier.Substring(1));
-            return ApiIdentity.build(parts);
+            [MethodImpl(Inline)]
+            get => Cells.segment(Data, w16, out PartId _);
         }
-    }
 
-    [ApiHost(ApiNames.ApiIdentityX)]
-    public static partial class XApiIdentity
-    {
-
+        [MethodImpl(Inline)]
+        public static ApiIdentity identify(MethodInfo src)
+        {
+            var host = src.DeclaringType;
+            var dst = vparts(w128, (uint)host.Assembly.Id(), (uint)src.KindId(), (uint)host.MetadataToken, (uint)src.MetadataToken);
+            return new ApiIdentity(dst);
+        }
     }
 }

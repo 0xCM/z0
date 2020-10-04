@@ -6,23 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
+    using static z;
 
-    public readonly struct DataCell<W,T>
-        where W : unmanaged, IDataWidth
-        where T : struct
+    partial struct ApiIdentify
     {
-        public readonly T Content;
-
-        [MethodImpl(Inline)]
-        public DataCell(T data)
-            => Content = data;
-
-        public uint CellWidth
+        [MethodImpl(Inline), Op]
+        public static ApiKeyId kind(MethodInfo src)
         {
-            [MethodImpl(Inline)]
-            get => (uint)Widths.data<W>();
+            if(src.Tag<OpKindAttribute>(out var dst))
+                return dst.KindId;
+            else
+                return 0;
         }
     }
 }

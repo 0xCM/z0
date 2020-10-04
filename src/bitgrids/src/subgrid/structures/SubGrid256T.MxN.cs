@@ -17,7 +17,7 @@ namespace Z0
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     [IdentityProvider(typeof(BitGridIdentityProvider))]
-    public readonly ref struct SubGrid256<M,N,T>
+    public struct SubGrid256<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
@@ -25,7 +25,7 @@ namespace Z0
         /// <summary>
         /// The grid state
         /// </summary>
-        internal readonly Vector256<T> Data;
+        internal Vector256<T> Data;
 
         /// <summary>
         /// The maximum number of bytes covered by the grid

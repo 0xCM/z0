@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
         /// <summary>
         /// Determines whether a type is a natural span

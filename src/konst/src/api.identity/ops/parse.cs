@@ -12,7 +12,7 @@ namespace Z0
     using static z;
     using static IDI;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
         public static bool parse(string src, out SegmentedIdentity dst)
         {

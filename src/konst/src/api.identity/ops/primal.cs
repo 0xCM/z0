@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
         /// <summary>
         /// Defines a primal identity if the source type represents a recognized primitive; otherwise,
@@ -21,8 +21,8 @@ namespace Z0
         public static PrimalIdentity primal(Type src)
             => src.IsSystemDefined() ?
                (NumericKinds.test(src)
-               ? PrimalIdentity.Define(src.NumericKind(), ApiIdentity.keyword(src))
-               : PrimalIdentity.Define(ApiIdentity.keyword(src))
+               ? PrimalIdentity.Define(src.NumericKind(), ApiIdentify.keyword(src))
+               : PrimalIdentity.Define(ApiIdentify.keyword(src))
                ) : PrimalIdentity.Empty;
     }
 }

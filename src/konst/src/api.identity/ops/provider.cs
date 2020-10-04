@@ -12,7 +12,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
        /// <summary>
         /// Retrieves a type's specialized identity provider, if it has one; otherwise, returns a caller-supplied fallback

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
         /// <summary>
         /// Defines a type resource identity

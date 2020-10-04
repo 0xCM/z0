@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
         [MethodImpl(Inline), Op]
         public static ApiIdentityToken token(OpIdentity src)

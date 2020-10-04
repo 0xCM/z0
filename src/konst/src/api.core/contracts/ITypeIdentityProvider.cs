@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    using api = ApiIdentity;
+    using api = ApiIdentify;
 
     public interface ITypeIdentityProvider : IIdentityProvider<Type,TypeIdentity>
     {

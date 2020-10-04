@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
         /// <summary>
         /// Produces the canonical name of a kinded operation
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="nk">The vector cell kind</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
         public static OpIdentity vectorized(ApiKeyId k, TypeWidth w, NumericKind nk, bool generic)
-            => ApiIdentity.build(vname(k), w, nk, generic);
+            => ApiIdentify.build(vname(k), w, nk, generic);
 
         /// <summary>
         /// Produces an identifier for a kinded nongeneric vectorized operation
@@ -47,7 +47,7 @@ namespace Z0
         /// <typeparam name="T">The vector cell type</typeparam>
         public static OpIdentity vdirect<T>(ApiKeyId k, TypeWidth w, T t = default)
             where T : unmanaged
-                => ApiIdentity.build(vname(k), w, nk(t), false);
+                => ApiIdentify.build(vname(k), w, nk(t), false);
 
         /// <summary>
         /// Produces an identifier for a kinded nongeneric vectorized operation
@@ -59,6 +59,6 @@ namespace Z0
         public static OpIdentity vdirect<W,T>(ApiKeyId k, W w = default, T t = default)
             where T : unmanaged
             where W : unmanaged, ITypeWidth
-                =>  ApiIdentity.build(vname(k), w.TypeWidth, nk(t), false);
+                =>  ApiIdentify.build(vname(k), w.TypeWidth, nk(t), false);
     }
 }

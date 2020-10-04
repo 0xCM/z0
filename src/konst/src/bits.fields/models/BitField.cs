@@ -14,23 +14,25 @@ namespace Z0
     {
         readonly Span<byte> Data;
 
-        readonly BitFieldModel Spec;
+        readonly ReadOnlySpan<BitFieldSegment> Specs;
 
         public BitField(BitFieldModel spec)
         {
-            Spec = spec;
+            Specs = spec.Segments;
             Data = default;
         }
 
-        public Span<byte> Segment(uint index)
+        public Span<byte> Seg(uint index)
         {
+            ref readonly var spec = ref skip(Specs,index);
+
             return default;
         }
 
-        public readonly uint FieldCount
+        public readonly uint SegCount
         {
             [MethodImpl(Inline)]
-            get => Spec.FieldCount;
+            get => (uint)Specs.Length;
         }
     }
 }

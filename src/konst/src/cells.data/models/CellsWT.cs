@@ -9,25 +9,25 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct DataCells<W,T> : ITableSpan<DataCells<W,T>,DataCell<W,T>>
+    public readonly struct Cells<W,T> : ITableSpan<Cells<W,T>, CellW<W,T>>
         where W : unmanaged, IDataWidth
-        where T : struct
+        where T : struct, IDataCell
     {
-        readonly TableSpan<DataCell<W,T>> Data;
+        readonly TableSpan<CellW<W,T>> Data;
 
         [MethodImpl(Inline)]
-        public DataCells(DataCell<W,T>[] data)
+        public Cells(CellW<W,T>[] data)
             => Data = data;
 
         [MethodImpl(Inline)]
-        public static implicit operator DataCells<W,T>(DataCell<W,T>[] src)
-            => new DataCells<W,T>(src);
+        public static implicit operator Cells<W,T>(CellW<W,T>[] src)
+            => new Cells<W,T>(src);
 
         [MethodImpl(Inline)]
-        public DataCells<W,T> Refresh(DataCell<W,T>[] src)
+        public Cells<W,T> Refresh(CellW<W,T>[] src)
             => src;
 
-        public ref DataCell<W,T> this[ulong index]
+        public ref CellW<W,T> this[ulong index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
@@ -57,7 +57,7 @@ namespace Z0
             get => ((ulong)Count * (ulong)CellWidth);
         }
 
-        public DataCell<W,T>[] Storage
+        public CellW<W,T>[] Storage
         {
             [MethodImpl(Inline)]
             get => Data.Storage;

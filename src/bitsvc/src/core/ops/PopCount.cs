@@ -20,7 +20,7 @@ namespace Z0
             public const string Name = "popcount";
 
             public OpIdentity Id
-                => ApiIdentity.sfunc<T>(Name);
+                => ApiIdentify.sfunc<T>(Name);
 
             [MethodImpl(Inline)]
             public uint Invoke(T a)

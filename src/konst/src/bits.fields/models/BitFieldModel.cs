@@ -15,23 +15,14 @@ namespace Z0
 
         public readonly uint FieldCount;
 
-        public readonly uint TotalWidth;
-
-        readonly TableSpan<byte> Widths;
-
-        readonly TableSpan<StringRef> Names;
-
-        readonly TableSpan<uint> Positions;
+        readonly TableSpan<BitFieldSegment> _Segments;
 
         [MethodImpl(Inline)]
-        public BitFieldModel(string name, uint count, uint width, string[] names,  byte[] widths, uint[] positions)
+        public BitFieldModel(string name, uint count, uint width, BitFieldSegment[] segments)
         {
             FieldName = name;
             FieldCount = count;
-            TotalWidth = width;
-            Names = names.Select(n => StringRefs.@ref(n));
-            Widths = widths;
-            Positions = positions;
+            _Segments = segments;
         }
 
         public string BitFieldName
@@ -40,16 +31,26 @@ namespace Z0
             get => FieldName;
         }
 
+        public ReadOnlySpan<BitFieldSegment> Segments
+        {
+            [MethodImpl(Inline)]
+            get => _Segments.View;
+        }
+
         [MethodImpl(Inline)]
         public byte Width(int index)
-            => Widths[index];
+            => Segment(index).Width;
 
         [MethodImpl(Inline)]
         public string Name(int index)
-            => Names[index].Format();
+            => Segment(index).Name;
 
         [MethodImpl(Inline)]
         public uint Position(int index)
-            => Positions[index];
+            => Segment(index).StartPos;
+
+        [MethodImpl(Inline)]
+        public ref readonly BitFieldSegment Segment(int index)
+            => ref _Segments[index];
     }
 }

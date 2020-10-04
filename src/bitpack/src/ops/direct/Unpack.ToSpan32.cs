@@ -29,7 +29,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Unpacks 8 source bits over 16 32-bit target segments
+        /// Unpacks 16 source bits over 16 32-bit target segments
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="buffer">The intermediate buffer</param>

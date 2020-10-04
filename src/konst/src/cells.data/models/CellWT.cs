@@ -9,20 +9,20 @@ namespace Z0
 
     using static Konst;
 
-    partial class BC
+    public readonly struct CellW<W,T>
+        where W : unmanaged, IDataWidth
+        where T : struct, IDataCell
     {
-        [Closures(Integers)]
-        public readonly struct Dot<T> : IFunc<T,T,Bit32>
-            where T : unmanaged
+        public readonly T Content;
+
+        [MethodImpl(Inline)]
+        public CellW(T data)
+            => Content = data;
+
+        public uint CellWidth
         {
-            public static Dot<T> Op => default;
-
-            public const string Name = "dot";
-
-            public OpIdentity Id => ApiIdentify.sfunc<T>(Name);
-
             [MethodImpl(Inline)]
-            public Bit32 Invoke(T a, T b) => gbits.dot(a,b);
+            get => (uint)Widths.data<W>();
         }
     }
 }

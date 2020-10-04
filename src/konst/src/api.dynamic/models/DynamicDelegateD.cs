@@ -14,13 +14,13 @@ namespace Z0
     /// <summary>
     /// Encloses a generic delegate that was manufactured dynamically
     /// </summary>
-    public readonly struct DynamicDelegate<D>
+    public readonly struct DynamicDelegate<D> : IIdentified<OpIdentity>
         where D : Delegate
     {
         /// <summary>
         /// The delegate identity
         /// </summary>
-        public readonly OpIdentity Id;
+        public OpIdentity Id {get;}
 
         /// <summary>
         /// The method invoked by the dynamic operator that provides the substance of the operation
@@ -30,7 +30,7 @@ namespace Z0
         /// <summary>
         /// The dynamically-generated method that backs the dynamic operator
         /// </summary>
-        public readonly DynamicMethod Target;           
+        public readonly DynamicMethod Target;
 
         /// <summary>
         /// The dynamic operation

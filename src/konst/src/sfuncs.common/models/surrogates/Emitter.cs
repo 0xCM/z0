@@ -39,7 +39,7 @@ namespace Z0
             public Emitter(Z0.Emitter<T> f, string name)
             {
                 F = f;
-                Id = ApiIdentity.sfunc<T>(name);
+                Id = ApiIdentify.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]

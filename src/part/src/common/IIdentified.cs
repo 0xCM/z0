@@ -22,11 +22,8 @@ namespace Z0
     }
 
     [Free]
-    public interface IIdentified<T> : IIdentified
+    public interface IIdentified<T>
     {
         T Id {get;}
-
-        string IIdentified.Identifier
-            => $"{Id}";
     }
 }

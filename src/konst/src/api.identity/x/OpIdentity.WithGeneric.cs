@@ -5,8 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
 
     partial class XApiIdentity
     {

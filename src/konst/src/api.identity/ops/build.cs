@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
         [Op]
         public static OpIdentity build(params ApiIdentityPart[] parts)

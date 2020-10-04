@@ -23,7 +23,6 @@ namespace Z0
         {
             var mask = lsb<ulong>(n8,n1);
             ref var lead = ref first(dst);
-
             seek64(lead, 0) = scatter((ulong)(byte)src, mask);
         }
 

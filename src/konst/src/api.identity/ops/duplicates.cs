@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
        /// <summary>
         /// Returns the duplicate identities found in the source stream, if any; otherwise, returns an empty array

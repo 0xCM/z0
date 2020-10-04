@@ -15,7 +15,7 @@ namespace Z0
     using NK = NumericKind;
     using ID = NumericApiKey;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
         /// <summary>
         /// For a system-defined type, returns the C#-specific keyword for the type if it has one;

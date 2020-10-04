@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static ApiUriDelimiters;
 
-    using api = ApiIdentity;
+    using api = ApiIdentify;
 
     public readonly struct OpUri : IApiUri<OpUri>, INullary<OpUri>
     {

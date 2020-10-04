@@ -14,7 +14,7 @@ namespace Z0
     {
         BasedCodeBlock Case(ApiKeyId k, params NumericKind[] kinds)
         {
-            var id = ApiIdentity.NumericOp(k, kinds).ToPropertyName();
+            var id = ApiIdentify.NumericOp(k, kinds).ToPropertyName();
             var resource = TryFind(id);
             if(!resource)
                 throw new KeyNotFoundException(id);

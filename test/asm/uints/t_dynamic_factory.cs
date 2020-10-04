@@ -78,7 +78,7 @@ namespace Z0.Asm
                 foreach(var t in method.ParameterTypes())
                 {
                     Claim.yea(t.IsBlocked(), $"The parameter {t.Name} from the method {method.Name} is not of blocked type");
-                    var width = ApiIdentity.width(t);
+                    var width = ApiIdentify.width(t);
                     Claim.yea(width == TypeWidth.W128 || width == TypeWidth.W256, $"{width}");
                 }
             }
@@ -128,8 +128,8 @@ namespace Z0.Asm
 
         TestCaseRecord TestVectorMatch(BufferTokens dst, string name, TypeWidth w, NumericKind kind)
         {
-            var dId = ApiIdentity.build(name, w, kind, false);
-            var gId = ApiIdentity.build(name, w, kind, true);
+            var dId = ApiIdentify.build(name, w, kind, false);
+            var gId = ApiIdentify.build(name, w, kind, true);
             var archive = ApiHexArchives.create(FS.dir(TargetArchive.X86Dir.Name));
             var dBits = archive.Read(ApiQuery.host<dvec>().Uri).Where(x => x.Id == dId).Single();
             var gBits = archive.Read(ApiQuery.host<gvec>().Uri).Where(x => x.Id == gId).Single();

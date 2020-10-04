@@ -16,7 +16,7 @@ namespace Z0
     /// </summary>
     [StructLayout(LayoutKind.Sequential, Size=ByteCount)]
     [IdentityProvider(typeof(BitGridIdentityProvider))]
-    public readonly ref struct SubGrid64<M,N,T>
+    public struct SubGrid64<M,N,T>
         where M : unmanaged, ITypeNat
         where N : unmanaged, ITypeNat
         where T : unmanaged
@@ -24,7 +24,7 @@ namespace Z0
         /// <summary>
         /// The grid state
         /// </summary>
-        internal readonly ulong Data;
+        internal ulong Data;
 
         /// <summary>
         /// The number of bytes covered by the grid

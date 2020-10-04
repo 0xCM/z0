@@ -13,12 +13,12 @@ namespace Z0
 
     partial class BitGrid
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UInt8k)]
         public static BitGrid64<N8,N8,T> transpose<T>(BitGrid64<N8,N8,T> g)
             where T : unmanaged
         {
             var dst = alloc64<N8,N8,byte>();
-            var src = z.vscalar(n128,g);
+            var src = z.vscalar(w128,g.Data);
             for(var i=7; i>= 0; i--)
             {
                 dst.Cell(i) = (byte)z.vtakemask(v8u(src));
@@ -37,7 +37,7 @@ namespace Z0
                 => src.Content;
 
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitGrid64<N4,N16,ulong> transpose2(BitGrid64<N16,N4,ulong> A)
         {
             const ulong C =0b0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001_0001;
@@ -58,7 +58,7 @@ namespace Z0
 
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitGrid64<N4,N16,ulong> transpose(BitGrid64<N16,N4,ulong> A)
             => BitGrid.create(n64,n4,n16,
                 (ulong)A.Col(0) << 0  |

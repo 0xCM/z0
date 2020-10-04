@@ -12,7 +12,7 @@ namespace Z0
 
     using static Konst;
 
-    using api = ApiIdentity;
+    using api = ApiIdentify;
 
     public readonly struct ApiCodeQuery
     {

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
         /// <summary>
         /// Extracts an index-identified segmented identity part from an operation identity

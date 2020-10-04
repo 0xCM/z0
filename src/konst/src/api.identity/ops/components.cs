@@ -12,7 +12,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
         [Op]
         public static IEnumerable<ApiIdentityPart> components(OpIdentity src)

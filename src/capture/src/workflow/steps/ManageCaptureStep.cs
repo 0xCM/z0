@@ -116,7 +116,7 @@ namespace Z0
 
         void CheckDuplicates(ApiHostUri host, ReadOnlySpan<ApiMember> src)
         {
-            var index = ApiIdentity.index(src);
+            var index = ApiIdentify.index(src);
             foreach(var key in index.DuplicateKeys)
                 Wf.Warn(StepId, $"Duplicate key {key}");
         }

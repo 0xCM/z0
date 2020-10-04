@@ -43,9 +43,9 @@ namespace Z0
                 else if(argtype.IsOpenGeneric())
                 {
                     if(argtype.IsVector())
-                        last = text.concat(IDI.Vector, ApiIdentity.width(argtype).FormatValue());
+                        last = text.concat(IDI.Vector, ApiIdentify.width(argtype).FormatValue());
                     else if(argtype.IsBlocked())
-                        last = text.concat(IDI.Block, ApiIdentity.width(argtype).FormatValue());
+                        last = text.concat(IDI.Block, ApiIdentify.width(argtype).FormatValue());
                     else if(SpanTypes.IsSystemSpan(argtype))
                         last = SpanTypes.kind(argtype).Format();
                 }
@@ -53,7 +53,7 @@ namespace Z0
                 id += last;
             }
 
-            return ApiIdentity.generic(id);
+            return ApiIdentify.generic(id);
         }
 
         /// <summary>
@@ -99,7 +99,7 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline)]
         public static TypeWidth BitWidth(Type t)
-            => ApiIdentity.width(t);
+            => ApiIdentify.width(t);
 
         /// <summary>
         /// Closes generic operations over the set of primal types that each operation supports

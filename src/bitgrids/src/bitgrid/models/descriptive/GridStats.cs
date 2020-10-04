@@ -3,18 +3,18 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    
-    public class GridStats
-    {        
+    using static Konst;
+
+    public struct GridStats
+    {
         [MethodImpl(Inline)]
         public static GridStats Define(in GridMetrics src)
             => new GridStats(
-            
+
                 RowCount : src.RowCount,
                 ColCount : src.ColCount,
                 SegWidth : src.CellWidth,
@@ -27,13 +27,8 @@ namespace Z0
                 Vec256Count : GridMetrics.coverage(src,W256.W),
                 Vec256Remainder : GridMetrics.remainder(src,W256.W)
             );
-        
-        GridStats()
-        {
 
-        }
-
-        public GridStats(ushort RowCount, ushort ColCount,  ushort SegWidth, uint PointCount, 
+        public GridStats(ushort RowCount, ushort ColCount,  ushort SegWidth, uint PointCount,
             uint StorageSegs, uint StorageBits, uint StorageBytes, uint Vec128Count, uint Vec128Remainder, uint Vec256Count, uint Vec256Remainder)
         {
             this.Name = $"{RowCount}x{ColCount}";
@@ -49,14 +44,14 @@ namespace Z0
             this.Vec256Count = Vec256Count;
             this.Vec256Remainder = Vec256Remainder;
         }
-        
+
         public asci16 Name {get;}
 
         /// <summary>
         /// The number of grid rows
         /// </summary>
         public ushort RowCount {get;}
-        
+
         /// <summary>
         /// The number of grid columns
         /// </summary>
@@ -86,7 +81,7 @@ namespace Z0
         /// The number of segment-aligned bytes bits required for storage
         /// </summary>
         public uint StorageBytes {get;}
-            
+
         /// <summary>
         /// The number of whole 128-bit vectors required for storage
         /// </summary>
@@ -96,15 +91,15 @@ namespace Z0
         /// The number bytes that do not fit into a whole number of 128-bit vectors
         /// </summary>
         public uint Vec128Remainder  {get;}
-        
+
         /// <summary>
         /// The number of whole 256-bit vectors required for storage
         /// </summary>
         public uint Vec256Count {get;}
-            
+
         /// <summary>
         /// The number bytes that do not fit into a whole number of 256-bit vectors
         /// </summary>
-        public uint Vec256Remainder {get;}            
+        public uint Vec256Remainder {get;}
     }
 }

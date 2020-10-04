@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct ApiIdentity
+    partial struct ApiIdentify
     {
         readonly struct ArtifactIdentities : IMultiDiviner
         {

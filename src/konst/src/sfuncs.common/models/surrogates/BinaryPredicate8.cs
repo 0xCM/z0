@@ -32,7 +32,7 @@ namespace Z0
             internal BinaryPredicate8(Z0.BinaryPredicate8<T> f, string name)
             {
                 F = f;
-                Id = ApiIdentity.sfunc<T>(name);
+                Id = ApiIdentify.sfunc<T>(name);
             }
 
             [MethodImpl(Inline)]

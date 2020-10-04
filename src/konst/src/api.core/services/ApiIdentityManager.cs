@@ -13,7 +13,7 @@ namespace Z0
 
     using static Konst;
 
-    using api = ApiIdentity;
+    using api = ApiIdentify;
 
     [ApiHost]
     public readonly struct ApiIdentityManager

@@ -6,10 +6,13 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
 
     partial class XTend
     {
         public static ApiOpIndex<T> ToOpIndex<T>(this IEnumerable<(OpIdentity,T)> src, bool deduplicate = true)
-            => ApiIdentity.index(src,deduplicate);
+            => ApiIdentify.index(src,deduplicate);
     }
 }
