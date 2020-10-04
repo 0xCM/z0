@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
 
-    using OC = ApiClass;
+    using OC = OperationKind;
 
     [Flags]
-    public enum ArityClassKind : ushort
+    public enum ArityKind : ushort
     {
         /// <summary>
         /// Classifies nothing

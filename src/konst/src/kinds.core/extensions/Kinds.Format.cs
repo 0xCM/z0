@@ -13,7 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string Format(this SpanKind kind)
-            => kind != 0 ? (kind == SpanKind.Mutable ? IDI.Span : IDI.USpan) : EmptyString;
+            => kind != 0 ? (kind == SpanKind.Mutable ? IDI.Span : IDI.ReadOnlySpan) : EmptyString;
 
         [MethodImpl(Inline)]
         public static string Format<K>(this K kind)

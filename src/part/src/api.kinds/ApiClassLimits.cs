@@ -6,9 +6,9 @@ namespace Z0
 {
     public readonly struct ApiClassLimits
     {
-        public const ApiClass FirstApiClass = ApiClass.Nullary;
+        public const OperationKind FirstApiClass = OperationKind.Nullary;
 
-        public const ApiClass LastApiClass = ApiClass.System;
+        public const OperationKind LastApiClass = OperationKind.System;
 
         public const CellOperatorKind FirstCellOperator = (CellOperatorKind)((uint)LastApiClass << 1);
 

@@ -44,10 +44,9 @@ namespace Z0
             => (long)src;
 
         [MethodImpl(Inline), Op]
-        public static NumericSign sign(sbyte src)
-            => src < 0 ? new NumericSign(NumericSignKind.Negative)
-            : src > 0 ? new NumericSign(NumericSignKind.Positive)
-                : new NumericSign(0);
-
+        public static Sign sign(sbyte src)
+            => src < 0 ? new Sign(SignKind.Signed)
+            : src > 0 ? new Sign(SignKind.Unsigned)
+                : new Sign(0);
     }
 }

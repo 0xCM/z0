@@ -9,8 +9,8 @@ namespace Z0
 
     public interface IApiCollector
     {
-        IEnumerable<DirectApiGroup> ImmDirect(ApiHost host, ImmRefinementKind refinement);
+        IEnumerable<DirectApiGroup> ImmDirect(ApiHost host, ScalarRefinementKind refinement);
 
-        IEnumerable<GenericApiMethod> ImmGeneric(ApiHost host, ImmRefinementKind refinement);
+        IEnumerable<GenericApiMethod> ImmGeneric(ApiHost host, ScalarRefinementKind refinement);
     }
 }

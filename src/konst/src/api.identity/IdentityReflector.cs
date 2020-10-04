@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    using AC = ArityClassKind;
+    using AC = ArityKind;
     using OC = ApiOperatorClass;
     using PC = ApiPredicateClass;
 
@@ -183,7 +183,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source stream</param>
         [Op]
-        public static MethodInfo[] WithArityClass(MethodInfo[] src, ArityClassKind @class)
+        public static MethodInfo[] WithArityClass(MethodInfo[] src, ArityKind @class)
             => from m in src where ArityClass(m) == @class select m;
 
         /// <summary>
@@ -278,7 +278,7 @@ namespace Z0
         /// </summary>
         /// <param name="m">The method to examine</param>
         [Op]
-        public static ArityClassKind ArityClass(MethodInfo m)
+        public static ArityKind ArityClass(MethodInfo m)
             => m.ArityValue() switch{
                 0 => AC.Nullary,
                 1 => AC.Unary,

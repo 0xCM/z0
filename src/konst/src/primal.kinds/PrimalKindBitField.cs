@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static PrimalBits;
 
     [ApiDataType]
     public readonly partial struct PrimalKindBitField

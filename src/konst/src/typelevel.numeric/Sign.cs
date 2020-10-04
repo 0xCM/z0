@@ -9,6 +9,24 @@ namespace Z0
 
     using static Konst;
 
+    public readonly struct Sign
+    {
+        public readonly SignKind Kind;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Sign(SignKind src)
+            => new Sign(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator SignKind(Sign src)
+            => src.Kind;
+
+        [MethodImpl(Inline)]
+        public Sign(SignKind kind)
+        {
+            Kind = kind;
+        }
+    }
 
     /// <summary>
     /// Captures an S-parametric sign classifier via parametricity

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Promotes the literal classifier <See cref="SignKind.Negative"/> to a type
+    /// Promotes the literal classifier <See cref="SignKind.Signed"/> to a type
     /// </summary>
     public readonly struct Negative : ISigned<Negative>
     {
@@ -18,11 +18,11 @@ namespace Z0
         /// Reveals the represented literal
         /// </summary>
         public SignKind Kind
-            => SignKind.Negative;
+            => SignKind.Signed;
     }
 
     /// <summary>
-    /// Defines a T-parametric <See cref="SignKind.Negative"/> literal classifier promotion
+    /// Defines a T-parametric <See cref="SignKind.Signed"/> literal classifier promotion
     /// </summary>
     public readonly struct Negative<T> : ISigned<Negative<T>,Negative,T>
     {

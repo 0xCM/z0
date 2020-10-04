@@ -11,12 +11,12 @@ namespace Z0
 
     partial class XTend
     {
-        public static ImmRefinementKind ClassifyImmRefinement(this ParameterInfo src)
+        public static ScalarRefinementKind ClassifyImmRefinement(this ParameterInfo src)
         {
             if(!src.Tagged<ImmAttribute>())
-                return ImmRefinementKind.None;
+                return ScalarRefinementKind.None;
             else
-                return src.ParameterType.IsEnum ? ImmRefinementKind.Refined : ImmRefinementKind.Unrefined;
+                return src.ParameterType.IsEnum ? ScalarRefinementKind.Refined : ScalarRefinementKind.Unrefined;
         }
     }
 }

@@ -17,19 +17,19 @@ namespace Z0
         /// Determines whether a parameters is an immediate
         /// </summary>
         /// <param name="src">The source parameter</param>
-        public static bool IsImmediate(this ParameterInfo param, ImmRefinementKind refinement)
+        public static bool IsImmediate(this ParameterInfo param, ScalarRefinementKind refinement)
         {
             if(param.Tagged<ImmAttribute>())
             {
                 var refined = param.ParameterType.IsEnum;
                 if(refined)
                 {
-                    if(refinement == ImmRefinementKind.Refined || refinement == ImmRefinementKind.All)
+                    if(refinement == ScalarRefinementKind.Refined || refinement == ScalarRefinementKind.All)
                         return true;
                 }
                 else
                 {
-                    if(refinement == ImmRefinementKind.Unrefined)
+                    if(refinement == ScalarRefinementKind.Unrefined)
                         return true;
                 }
 
@@ -37,10 +37,10 @@ namespace Z0
             return false;
         }
 
-        public static Imm8R[] ToImm8Values(this byte[] src, ImmRefinementKind kind)
+        public static Imm8R[] ToImm8Values(this byte[] src, ScalarRefinementKind kind)
             => src.Map(x => new Imm8R(x, kind != 0));
 
-        public static Imm8R[] ToImm8Values(this IEnumerable<byte> src, ImmRefinementKind kind)
+        public static Imm8R[] ToImm8Values(this IEnumerable<byte> src, ScalarRefinementKind kind)
             => src.Map(x => new Imm8R(x, kind != 0));
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Z0
         /// Returns a method's immediate parameter types
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static Type[] ImmParameterTypes(this MethodInfo src, ImmRefinementKind kind)
+        public static Type[] ImmParameterTypes(this MethodInfo src, ScalarRefinementKind kind)
             => src.ImmParameters(kind).Select(p => p.ParameterType);
 
         static ImmFunctionClass ImmSlot(this ParameterInfo p)

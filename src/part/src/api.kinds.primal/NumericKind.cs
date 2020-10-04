@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using DW = DataWidth;
+    using W = DataWidth;
     using ID = NumericApiKey;
 
     /// <summary>
@@ -35,52 +35,52 @@ namespace Z0
         /// <summary>
         /// Identifies an unsigned 8-bit integral type
         /// </summary>
-        U8 = ID.U8 | DW.W8 | Unsigned,
+        U8 = ID.U8 | W.W8 | Unsigned,
 
         /// <summary>
         /// Identifies a signed 8-bit integral type
         /// </summary>
-        I8 = ID.I8 | DW.W8 | Signed,
+        I8 = ID.I8 | W.W8 | Signed,
 
         /// <summary>
         /// Identifies an unsigned 16-bit integral type
         /// </summary>
-        U16 = ID.U16 | DW.W16 | Unsigned,
+        U16 = ID.U16 | W.W16 | Unsigned,
 
         /// <summary>
         /// Identifies a signed 16-bit integral type
         /// </summary>
-        I16 = ID.I16 | DW.W16 | Signed,
+        I16 = ID.I16 | W.W16 | Signed,
 
         /// <summary>
         /// Identifies an unsigned 32-bit integral type
         /// </summary>
-        U32 = ID.U32 | DW.W32 | Unsigned,
+        U32 = ID.U32 | W.W32 | Unsigned,
 
         /// <summary>
         /// Identifies a signed 32-bit integral type
         /// </summary>
-        I32 = ID.I32 | DW.W32 | Signed,
+        I32 = ID.I32 | W.W32 | Signed,
 
         /// <summary>
         /// Identifies an unsigned 64-bit integral type
         /// </summary>
-        U64 = ID.U64 | DW.W64 | Unsigned,
+        U64 = ID.U64 | W.W64 | Unsigned,
 
         /// <summary>
         /// Identifies a signed 64-bit integral type
         /// </summary>
-        I64 = ID.I64 | DW.W64 | Signed,
+        I64 = ID.I64 | W.W64 | Signed,
 
         /// <summary>
         /// Identifies a 32-bit floating-point type
         /// </summary>
-        F32 = ID.F32 | DW.W32 | Float,
+        F32 = ID.F32 | W.W32 | Float,
 
         /// <summary>
         /// Identifies a 64-bit floating-point type
         /// </summary>
-        F64 = ID.F64 | DW.W64 | Float,
+        F64 = ID.F64 | W.W64 | Float,
 
         /// <summary>
         /// Defines a classification that includes all signed primal integral types and no others

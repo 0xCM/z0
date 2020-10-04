@@ -8,16 +8,17 @@ namespace Z0.Lang.Cs
     using Microsoft.CodeAnalysis;
 
     using static ModelKinds;
+    using K =Microsoft.CodeAnalysis.OperationKind;
 
     [ApiHost(ApiNames.CsBuilder)]
     public ref struct CsBuilders
     {
-        internal ReadOnlySpan<OperationKind> OpKinds;
+        internal ReadOnlySpan<K> OpKinds;
 
         public static CsBuilders init()
         {
             var dst = new CsBuilders();
-            dst.OpKinds = Enums.literals<OperationKind>();
+            dst.OpKinds = Enums.literals<K>();
             return dst;
         }
 

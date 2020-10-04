@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial class Widths
-    {        
+    {
         /// <summary>
         /// Computes the number of bits occupied by an instance of a parametrically-identified type
         /// </summary>
@@ -18,6 +18,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static uint bits<T>()
             where T : struct
-                =>  bytes<T>()*8;
+                => bytes<T>()*8;
     }
 }

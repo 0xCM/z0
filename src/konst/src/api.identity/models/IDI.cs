@@ -6,6 +6,7 @@ namespace Z0
 {
     using static Chars;
 
+
     /// <summary>
     /// Identity indicators
     /// </summary>
@@ -122,24 +123,24 @@ namespace Z0
         public const string Pointer = "ptr";
 
         /// <summary>
-        /// Indicates a span
-        /// </summary>
-        public const string Span = "span";
-
-        /// <summary>
         /// Indicates an array
         /// </summary>
         public const string Array = "arr";
 
         /// <summary>
+        /// Indicates a span
+        /// </summary>
+        public const string Span = SpanIndicators.Span;
+
+        /// <summary>
         /// Indicates an unmodifiable (readonly, immutable, etc) span
         /// </summary>
-        public const string USpan = "uspan";
+        public const string ReadOnlySpan = SpanIndicators.ReadOnly;
 
         /// <summary>
         /// Indicates a natural span
         /// </summary>
-        public const string NatSpan = "nspan";
+        public const string NatSpan = SpanIndicators.Natural;
 
         /// <summary>
         /// An identifier suffix indicating that an immediate value is required

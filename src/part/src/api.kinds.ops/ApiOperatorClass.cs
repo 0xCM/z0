@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    using OC = ApiClass;
+    using OC = OperationKind;
 
     /// <summary>
     /// Classifies operators of arity up to 3

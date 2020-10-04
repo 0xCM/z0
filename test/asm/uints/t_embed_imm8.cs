@@ -61,8 +61,8 @@ namespace Z0.Asm
         {
             Claim.Require(src.IsVectorized(w));
             Claim.Require(IdentityReflector.AcceptsVector(src,0,w));
-            Claim.Require(src.AcceptsImmediate(1, ImmRefinementKind.Unrefined));
-            Claim.Eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass(ImmRefinementKind.Unrefined));
+            Claim.Require(src.AcceptsImmediate(1, ScalarRefinementKind.Unrefined));
+            Claim.Eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass(ScalarRefinementKind.Unrefined));
 
             var tVector = src.ParameterType(0);
             check_cell_type(tVector, w);
@@ -120,8 +120,8 @@ namespace Z0.Asm
             var svc = IdentityReflector.Service;
             Claim.Require(src.IsVectorized(w));
             Claim.Require(svc.AcceptsVector(src,0,w));
-            Claim.Require(src.AcceptsImmediate(1,ImmRefinementKind.Unrefined));
-            Claim.Eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass(ImmRefinementKind.Unrefined));
+            Claim.Require(src.AcceptsImmediate(1,ScalarRefinementKind.Unrefined));
+            Claim.Eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass(ScalarRefinementKind.Unrefined));
 
             var tVector = src.ParameterType(0);
             check_cell_type(tVector, w);

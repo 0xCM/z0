@@ -10,16 +10,16 @@ namespace Z0
 
     using static Konst;
     using static Memories;
-    
+
     using S = Surrogates;
 
     public class t_arithmetic : t_mathsvc<t_arithmetic>
-    {        
+    {
         public void add_check()
         {
             const string name = "add";
 
-            if(DiagnosticMode)            
+            if(DiagnosticMode)
                 term.print(text.concat("Executing", Space, name));
 
             add_check(S.binary(math.add, name, z8));
@@ -32,13 +32,13 @@ namespace Z0
             add_check(S.binary(math.add, name, z64i));
             add_check(S.binary(fmath.add, name, z32f));
             add_check(S.binary(fmath.add, name, z64f));
-        }        
+        }
 
         [MethodImpl(Inline)]
         void add_check<T>(S.BinaryOp<T> f, T t = default)
             where  T : unmanaged
-        {            
-            if(DiagnosticMode)            
+        {
+            if(DiagnosticMode)
                 term.print(text.concat("Executing", Space, caller(), $"[{typeof(T).DisplayName()}]"));
 
             var g = MSvc.add(t);
@@ -46,10 +46,10 @@ namespace Z0
             validator.CheckMatch(f,g);
             validator.CheckSpanMatch(f,g);
 
-            if(DiagnosticMode)            
+            if(DiagnosticMode)
                 term.print(text.concat("Execututed", Space, caller(), $"[{typeof(T).DisplayName()}]"));
         }
-        
+
         public void sub_check()
         {
             const string name = "sub";
@@ -229,12 +229,12 @@ namespace Z0
             var g = MSvc.inc(t);
             var comparer = this.UnaryOpMatch(t);
             comparer.CheckMatch(f, g);
-            comparer.CheckSpanMatch(f, g);            
+            comparer.CheckSpanMatch(f, g);
         }
 
         public void dec_check()
         {
-            const string name = "dec";            
+            const string name = "dec";
 
             dec_check(S.unary(math.dec, name, z8));
             dec_check(S.unary(math.dec, name, z8i));
@@ -255,7 +255,7 @@ namespace Z0
             var g = MSvc.dec(t);
             var comparer = this.UnaryOpMatch(t);
             comparer.CheckMatch(f,g);
-            comparer.CheckSpanMatch(f,g);            
+            comparer.CheckSpanMatch(f,g);
         }
 
         public void negate_check()
@@ -281,7 +281,7 @@ namespace Z0
             var g = MSvc.negate(t);
             var comparer = this.UnaryOpMatch(t);
             comparer.CheckMatch(f, g);
-            comparer.CheckSpanMatch(f, g);            
+            comparer.CheckSpanMatch(f, g);
         }
 
         public void abs_check()
@@ -303,7 +303,7 @@ namespace Z0
             var g = MSvc.abs(t);
             var comparer = this.UnaryOpMatch(t);
             comparer.CheckMatch(f,g);
-            comparer.CheckSpanMatch(f,g);            
+            comparer.CheckSpanMatch(f,g);
         }
 
         public void check_increments()
@@ -326,7 +326,7 @@ namespace Z0
             Span<T> data = new T[count];
             ref var src = ref head(data);
             gmath.increments(first, count, ref src);
-            
+
             for(var i=0; i < count; i++)
                 Claim.Eq(gmath.add(first, convert<T>(i)), data[i]);
         }
@@ -356,7 +356,7 @@ namespace Z0
             for(var i=0; i<RepCount; i++)
             {
                 var x = Random.Next<T>();
-                var expect = gmath.lt(x, zero) ? SignKind.Negative : (gmath.gt(x, zero) ? SignKind.Positive : SignKind.Neutral);
+                var expect = gmath.lt(x, zero) ? SignKind.Signed : SignKind.Unsigned;
                 var actual = gmath.signum(x);
                 Claim.Eq(expect,actual);
             }

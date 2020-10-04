@@ -12,11 +12,6 @@ namespace Z0
         public static Negative Negative => default;
 
         /// <summary>
-        /// Specifies the singleton instance of the <see cref="Z0.Neutral"/> type-level classifier
-        /// </summary>
-        public static Neutral Neutral => default;
-
-        /// <summary>
         /// Specifies the singleton instance of the <see cref="Z0.Positive"/> type-level classifier
         /// </summary>
         public static Positive Positive => default;
@@ -40,15 +35,7 @@ namespace Z0
                 => s.Kind;
 
         /// <summary>
-        /// Closes the S/T-parametric sign classifier over the <see cref="Z0.Neutral"/> with a specified T-choice
-        /// </summary>
-        /// <param name="t">A T-choice representative, used only for type inference</param>
-        /// <typeparam name="T">Any type</typeparam>
-        public static Sign<Neutral,T> neutral<T>(T t = default)
-            => default;
-
-        /// <summary>
-        /// Closes the S/T-parametric sign classifier over the <see cref="Z0.Neutral"/> with a specified T-choice
+        /// Closes the S/T-parametric sign classifier over the <see cref="Z0.Negative"/> with a specified T-choice
         /// </summary>
         /// <param name="t">A T-choice representative, used only for type inference</param>
         /// <typeparam name="T">Any type</typeparam>
@@ -60,7 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="t">A T-choice representative, used only for type inference</param>
         /// <typeparam name="T">Any type</typeparam>
-        public static Sign<Positive,T> positive<T>(T t = default)
+        public static Sign<Positive,T> unsigned<T>(T t = default)
             => default;
     }
 }

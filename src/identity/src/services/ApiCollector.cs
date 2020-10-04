@@ -13,10 +13,10 @@ namespace Z0
         public static ApiCollector Service
             => default;
 
-        public IEnumerable<DirectApiGroup> ImmDirect(ApiHost host, ImmRefinementKind kind)
+        public IEnumerable<DirectApiGroup> ImmDirect(ApiHost host, ScalarRefinementKind kind)
             => ApiImmediates.direct(host,kind);
 
-        public IEnumerable<GenericApiMethod> ImmGeneric(ApiHost host, ImmRefinementKind kind)
+        public IEnumerable<GenericApiMethod> ImmGeneric(ApiHost host, ScalarRefinementKind kind)
             => ApiImmediates.generic(host,kind);
     }
 }

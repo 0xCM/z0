@@ -15,18 +15,18 @@ namespace Z0
         /// Determines whether a method is (partially) vectorized and accepts an immediate value
         /// </summary>
         /// <param name="src">The method to query</param>
-        public static bool IsVectorizedImm(this MethodInfo src, ImmRefinementKind refinment)
+        public static bool IsVectorizedImm(this MethodInfo src, ScalarRefinementKind refinment)
             => src.IsVectorized() && src.AcceptsImmediate(refinment) && src.ReturnsVector();
-        
+
         /// <summary>
         /// Determines whether a method is a vectorized unary operator that accepts an immediate value
         /// </summary>
         /// <param name="src">The method to query</param>
-        public static bool IsVectorizedUnaryImm(this MethodInfo src, ImmRefinementKind refinement)
+        public static bool IsVectorizedUnaryImm(this MethodInfo src, ScalarRefinementKind refinement)
         {
             var parameters = src.GetParameters().ToArray();
-            return parameters.Length == 2 
-                && parameters[0].ParameterType.IsVector() 
+            return parameters.Length == 2
+                && parameters[0].ParameterType.IsVector()
                 && parameters[1].IsImmediate(refinement)
                 && src.ReturnsVector();
         }
@@ -35,14 +35,14 @@ namespace Z0
         /// Determines whether a method is a vectorized binary operator that accepts an immediate value
         /// </summary>
         /// <param name="src">The method to query</param>
-        public static bool IsVectorizedBinaryImm(this MethodInfo src, ImmRefinementKind refinment)
+        public static bool IsVectorizedBinaryImm(this MethodInfo src, ScalarRefinementKind refinment)
         {
             var parameters = src.GetParameters().ToArray();
-            return parameters.Length == 3 
-                && parameters[0].ParameterType.IsVector() 
-                && parameters[1].ParameterType.IsVector() 
+            return parameters.Length == 3
+                && parameters[0].ParameterType.IsVector()
+                && parameters[1].ParameterType.IsVector()
                 && parameters[2].IsImmediate(refinment)
                 && src.ReturnsVector();
-        } 
+        }
     }
 }

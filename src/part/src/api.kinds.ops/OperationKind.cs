@@ -12,7 +12,7 @@ namespace Z0
     /// Classifies an operation in various ways
     /// </summary>
     [Flags]
-    public enum ApiClass : ushort
+    public enum OperationKind : ushort
     {
         /// <summary>
         /// The empty class

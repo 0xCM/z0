@@ -16,7 +16,7 @@ namespace Z0
         /// Calculates a method's immediate class
         /// </summary>
         /// <param name="src">The method to classify</param>
-        public static ImmFunctionClass ImmFunctionClass(this MethodInfo src, ImmRefinementKind refinement)
+        public static ImmFunctionClass ImmFunctionClass(this MethodInfo src, ScalarRefinementKind refinement)
         {
             var found = src.ImmParameters(refinement);
             var count = found.Length;

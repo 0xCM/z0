@@ -55,7 +55,7 @@ namespace Z0
         public IEnumerable<MethodInfo> Methods
             => Values.Select(v => v.Member.Method);
 
-        public IEnumerable<ApiMemberCode> Search(ArityClassKind arity)
+        public IEnumerable<ApiMemberCode> Search(ArityKind arity)
             => from code in  Values
                 let method = code.Member.Method
                 where method.ArityValue() == (int)arity

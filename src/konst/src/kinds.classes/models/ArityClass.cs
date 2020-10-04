@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using K = ArityClassKind;
+    using K = ArityKind;
 
     /// <summary>
     /// Classifies generic operations of arity 0
@@ -29,32 +29,32 @@ namespace Z0
     /// <summary>
     /// Classifies operations of arity 0
     /// </summary>
-    public readonly struct A0 : ILiteralKind<A0,K> 
-    { 
-        public K Class => K.Nullary; 
+    public readonly struct A0 : ILiteralKind<A0,K>
+    {
+        public K Class => K.Nullary;
     }
 
     /// <summary>
     /// Classifies operations of arity 0
     /// </summary>
-    public readonly struct A1 : ILiteralKind<A1,K> 
-    { 
-        public K Class => K.Unary; 
+    public readonly struct A1 : ILiteralKind<A1,K>
+    {
+        public K Class => K.Unary;
     }
 
     /// <summary>
     /// Classifies operations of arity 0
     /// </summary>
     public readonly struct A2 : ILiteralKind<A2,K>
-    { 
-        public K Class => K.Binary; 
+    {
+        public K Class => K.Binary;
     }
 
     /// <summary>
     /// Classifies operations of arity 3
     /// </summary>
-    public readonly struct A3 : ILiteralKind<A3,K> 
-    { 
-        public K Class => K.Ternary; 
-    }    
+    public readonly struct A3 : ILiteralKind<A3,K>
+    {
+        public K Class => K.Ternary;
+    }
 }

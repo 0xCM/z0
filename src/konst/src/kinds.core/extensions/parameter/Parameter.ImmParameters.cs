@@ -14,13 +14,13 @@ namespace Z0
         /// Selects parameters from a method, if any, that acceptrequire an immediate value
         /// </summary>
         /// <param name="m">The method to examine</param>
-        public static ParameterInfo[] ImmParameters(this MethodInfo src, ImmRefinementKind refinement)
+        public static ParameterInfo[] ImmParameters(this MethodInfo src, ScalarRefinementKind refinement)
         {
             var refined = src.GetParameters().Where(p => p.IsRefinedImmediate());
             var unrefined = src.GetParameters().Where(p => p.IsUnrefinedImmediate());
-            if(refinement == ImmRefinementKind.All)
+            if(refinement == ScalarRefinementKind.All)
                 return refined.Concat(unrefined).Array();
-            else if(refinement == ImmRefinementKind.Refined)
+            else if(refinement == ScalarRefinementKind.Refined)
                 return refined;
             else
                 return unrefined;

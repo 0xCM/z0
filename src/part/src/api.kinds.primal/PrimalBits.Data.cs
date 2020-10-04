@@ -7,15 +7,12 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
+    using W = PrimalBits.SegWidth;
+    using M = PrimalBits.SegMask;
+    using P = PrimalBits.SegPos;
+    using I = PrimalBits.Field;
 
-    using W = PrimalKindBitField.SegWidth;
-    using M = PrimalKindBitField.SegMask;
-    using P = PrimalKindBitField.SegPos;
-    using I = PrimalKindBitField.Field;
-
-    partial struct PrimalKindBitField
+    partial struct PrimalBits
     {
         /// <summary>
         /// The bitfield segment count
