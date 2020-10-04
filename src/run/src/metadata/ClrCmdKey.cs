@@ -6,16 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Konst;
-    using static z;
 
-
-    sealed class Dispatcher : WfHost<Dispatcher>
+    public enum ClrCmdKey : byte
     {
-        protected override void Execute(IWfShell wf)
-        {
+        None = 0,
 
-        }
+        EmitAssemblyReferences = 1,
     }
+
 }

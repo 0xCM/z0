@@ -156,6 +156,6 @@ namespace Z0
         /// The canonical zero
         /// </summary>
         public static BinaryCode Empty
-            => new BinaryCode(sys.empty<byte>());
+            => new BinaryCode(Array.Empty<byte>());
     }
 }

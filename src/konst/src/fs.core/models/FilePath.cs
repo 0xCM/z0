@@ -23,6 +23,12 @@ namespace Z0
                 get => Name.Length;
             }
 
+            public ReadOnlySpan<char> PathData
+            {
+                [MethodImpl(Inline)]
+                get => Name.View;
+            }
+
             public static FilePath Empty
                 => new FilePath(PathPart.Empty);
 
@@ -109,7 +115,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public bool Is(FileExt ext)
-                => string.Compare(Ext.Text, ext.Text, NoCase) == 0;
+                => string.Compare(Ext.Name.Text, ext.Name.Text, NoCase) == 0;
 
             public FilePath ChangeExtension(FileExt ext)
                 => FolderPath + FS.file(Path.ChangeExtension(Path.GetFileName(Name), ext.Name));

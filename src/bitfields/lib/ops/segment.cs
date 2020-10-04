@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="width">The segment width</param>
         /// <param name="seg">The inclusive left/right segment index boundaries</param>
         [MethodImpl(Inline), Op]
-        public static BitFieldSegment segment(string name, byte width, in ConstPair<byte> boundary)
+        public static BitFieldSegment segment(string name, byte width, in ConstPair<uint> boundary)
             => new BitFieldSegment(name, width, boundary);
 
         /// <summary>
@@ -27,11 +27,11 @@ namespace Z0
         /// <param name="src">The source model</param>
         /// <param name="index">The field index</param>
         [MethodImpl(Inline), Op]
-        public static BitFieldSegment segment(in BitFieldModel src, byte index)
+        public static BitFieldSegment segment(in BitFieldModel src, int index)
         {
             var width = src.Width(index);
             var i0 = src.Position(index);
-            var i1 = (byte)(i0 + width);
+            var i1 = (uint)(i0 + width);
             return segment(src.Name(index), width, (i0, i1));
         }
 
@@ -43,7 +43,7 @@ namespace Z0
         /// <param name="i0">The position of the first bit in the segment</param>
         /// <param name="i1">The position of the last bit in the segment</param>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static BitFieldSegment<T> segment<T>(string name, T width, in ConstPair<T> boundary)
+        public static BitFieldSegment<T> segment<T>(string name, byte width, in ConstPair<T> boundary)
             where T : unmanaged
                 => new BitFieldSegment<T>(name, width, boundary);
 

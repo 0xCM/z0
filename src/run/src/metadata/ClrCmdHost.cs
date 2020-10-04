@@ -5,14 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Reflection.Metadata;
+    using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    partial class MetadataReader
+    public sealed class ClrCmdHost<T> : WfHost<ClrCmdHost<T>>
+        where T : struct
     {
 
-
     }
+
 }

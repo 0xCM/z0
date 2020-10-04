@@ -9,6 +9,9 @@ namespace Z0
 
     using static Konst;
 
+    /// <summary>
+    /// Defines a sequence of contiguous bitfield segments
+    /// </summary>
     public readonly struct BitFieldIndex
     {
         readonly BitFieldIndexEntry[] Storage;

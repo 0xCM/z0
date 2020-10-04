@@ -13,18 +13,18 @@ namespace Z0
     {
         readonly StringRef FieldName;
 
-        public readonly byte FieldCount;
+        public readonly uint FieldCount;
 
-        public readonly byte TotalWidth;
+        public readonly uint TotalWidth;
 
         readonly TableSpan<byte> Widths;
 
         readonly TableSpan<StringRef> Names;
 
-        readonly TableSpan<byte> Positions;
+        readonly TableSpan<uint> Positions;
 
         [MethodImpl(Inline)]
-        public BitFieldModel(string name, byte count, byte width, string[] names,  byte[] widths, byte[] positions)
+        public BitFieldModel(string name, uint count, uint width, string[] names,  byte[] widths, uint[] positions)
         {
             FieldName = name;
             FieldCount = count;
@@ -49,7 +49,7 @@ namespace Z0
             => Names[index].Format();
 
         [MethodImpl(Inline)]
-        public byte Position(int index)
+        public uint Position(int index)
             => Positions[index];
     }
 }

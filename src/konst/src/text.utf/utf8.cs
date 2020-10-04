@@ -8,11 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static TextEncoders;
 
     public readonly struct utf8 : ITextual
     {
-        static Utf8 Kind => TextEncoderKinds.Utf8;
+        static Utf8 Kind => Utf8Encoding;
 
         readonly byte[] Data;
 
@@ -22,7 +21,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public utf8(string src)
-            => Data = encode(Kind, src, out byte[] _);
+            => Data = TextEncoders.encode(Kind, src, out byte[] _);
 
         [MethodImpl(Inline)]
         public static implicit operator utf8(string src)
@@ -50,7 +49,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => decode(Kind, Data, out string _);
+            => TextEncoders.decode(Kind, Data, out string _);
 
         public override string ToString()
             => Format();

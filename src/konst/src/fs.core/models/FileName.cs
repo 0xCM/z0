@@ -28,21 +28,7 @@ namespace Z0
             public static bool operator !=(FileName a, FileName b)
                 => !a.Equals(b);
 
-            public FileExt FileExt
-            {
-                [MethodImpl(Inline)]
-                get => new FileExt(Path.GetExtension(Name.Text));
-            }
 
-            [MethodImpl(Inline)]
-            public bool Is(FileExt ext)
-                => ext.Matches(this);
-
-            public FileName WithoutExtension
-            {
-                [MethodImpl(Inline)]
-                get => FS.file(Path.GetFileNameWithoutExtension(Name));
-            }
 
             [MethodImpl(Inline)]
             public FileName(PathPart name)
@@ -51,6 +37,12 @@ namespace Z0
             [MethodImpl(Inline)]
             public FileName(PathPart name, FileExt ext)
                 => Name = text.format(ExtPattern, name, ext);
+
+            public FileExt FileExt
+            {
+                [MethodImpl(Inline)]
+                get => new FileExt(Path.GetExtension(Name.Text));
+            }
 
             public bool HasExtension
             {
@@ -68,6 +60,12 @@ namespace Z0
             {
                 [MethodImpl(Inline)]
                 get => Name.IsNonEmpty;
+            }
+
+            public FileName WithoutExtension
+            {
+                [MethodImpl(Inline)]
+                get => FS.file(Path.GetFileNameWithoutExtension(Name));
             }
 
             /// <summary>
@@ -90,6 +88,10 @@ namespace Z0
                 => Name.Text.StartsWith(string.Concat(host.Owner.Format(), Chars.Dot, host.Name.ToLower(), Chars.Dot));
             public FileName ChangeExtension(FileExt ext)
                 => FS.file(Path.GetFileNameWithoutExtension(Name), ext);
+
+            [MethodImpl(Inline)]
+            public bool Is(FileExt ext)
+                => ext.Matches(this);
 
             public override int GetHashCode()
                 => Name.GetHashCode();
@@ -118,7 +120,6 @@ namespace Z0
 
             public override string ToString()
                 => Format();
-
         }
     }
 }

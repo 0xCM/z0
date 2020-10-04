@@ -30,6 +30,12 @@ namespace Z0
                 get => Name.Length;
             }
 
+            public ReadOnlySpan<char> PathData
+            {
+                [MethodImpl(Inline)]
+                get => Name.View;
+            }
+
             public bool IsEmpty
             {
                 [MethodImpl(Inline)]

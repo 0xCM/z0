@@ -12,8 +12,7 @@ namespace Z0
 
     public readonly struct TextEncoderKinds
     {
-        public static TextEncoders.Utf8 Utf8 => default;
-
+        public static Utf8 Utf8 => default;
     }
 
     [ApiHost(ApiNames.TextEncoders, true)]
@@ -40,34 +39,11 @@ namespace Z0
             => ref kind.Decode(src, out dst);
 
         [MethodImpl(Inline), Op]
+        public static ByteSize size(Utf8 kind, ReadOnlySpan<char> src)
+            => kind.EncodedSize(src);
+
+        [MethodImpl(Inline), Op]
         public static Utf8 utf8()
             => default;
-
-        public readonly struct Utf8
-        {
-            static TextEncodingService Service => service(Encoding.UTF8);
-
-            [MethodImpl(Inline)]
-            internal ref byte[] Encode(string src, out byte[] dst)
-            {
-                dst = Service.GetBytes(src);
-                return ref dst;
-            }
-
-            [MethodImpl(Inline)]
-            internal ByteSize Encode(ReadOnlySpan<char> src, Span<byte> dst)
-                => Service.GetBytes(src,dst);
-
-            [MethodImpl(Inline)]
-            internal void Decode(ReadOnlySpan<byte> src, Span<char> dst)
-                => Service.GetChars(src,dst);
-
-            [MethodImpl(Inline)]
-            internal ref string Decode(ReadOnlySpan<byte> src, out string dst)
-            {
-                dst = Service.GetString(src);
-                return ref dst;
-            }
-        }
     }
 }

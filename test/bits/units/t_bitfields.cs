@@ -63,10 +63,10 @@ namespace Z0
                 Claim.Eq(Bits.slice(input, 6, 2), seg3);
 
                 var output =  gmath.or(
-                    gmath.sll(seg0, spec[0].StartPos),
-                    gmath.sll(seg1, spec[1].StartPos),
-                    gmath.sll(seg2, spec[2].StartPos),
-                    gmath.sll(seg3, spec[3].StartPos));
+                    gmath.sll(seg0, (byte)spec[0].StartPos),
+                    gmath.sll(seg1, (byte)spec[1].StartPos),
+                    gmath.sll(seg2, (byte)spec[2].StartPos),
+                    gmath.sll(seg3, (byte)spec[3].StartPos));
                 Claim.Eq(input,output);
 
             }
@@ -103,10 +103,10 @@ namespace Z0
                 bf.Deposit(src,dst);
 
                 var output =  gmath.or(
-                    gmath.sll(dst[0], spec[0].StartPos),
-                    gmath.sll(dst[1], spec[1].StartPos),
-                    gmath.sll(dst[2], spec[2].StartPos),
-                    gmath.sll(dst[3], spec[3].StartPos)
+                    gmath.sll(dst[0], (byte)spec[0].StartPos),
+                    gmath.sll(dst[1], (byte)spec[1].StartPos),
+                    gmath.sll(dst[2], (byte)spec[2].StartPos),
+                    gmath.sll(dst[3], (byte)spec[3].StartPos)
                 );
 
                 Claim.Eq(src,output);
@@ -152,10 +152,10 @@ namespace Z0
                 bf.Deposit(src, dst);
 
                 var result1 =  gmath.or(
-                    gmath.sll(dst[0], spec[0].StartPos),
-                    gmath.sll(dst[1], spec[1].StartPos),
-                    gmath.sll(dst[2], spec[2].StartPos),
-                    gmath.sll(dst[3], spec[3].StartPos)
+                    gmath.sll(dst[0], (byte)spec[0].StartPos),
+                    gmath.sll(dst[1], (byte)spec[1].StartPos),
+                    gmath.sll(dst[2], (byte)spec[2].StartPos),
+                    gmath.sll(dst[3], (byte)spec[3].StartPos)
                     );
 
                 var result2 = gmath.or(
@@ -229,7 +229,7 @@ namespace Z0
             var bf = BitFields.create<ulong>(spec);
             var dst = Root.span(Root.alloc<ulong>(spec.FieldCount));
             var tmp = Root.span(Root.alloc<ulong>(spec.FieldCount));
-            var positions = spec.Segments.Map(s => s.StartPos);
+            var positions = spec.Segments.Map(s => (byte)s.StartPos);
 
             Trace(spec);
 
@@ -248,7 +248,7 @@ namespace Z0
 
                 var result2 = 0ul;
                 for(byte j=0; j<spec.FieldCount; j++)
-                    result2 = gmath.or(result2, gmath.sll(dst[j], spec[j].StartPos));
+                    result2 = gmath.or(result2, gmath.sll(dst[j], (byte)spec[j].StartPos));
 
                 Claim.Eq(result1, result2);
 

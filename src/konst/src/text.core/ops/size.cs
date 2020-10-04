@@ -10,12 +10,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-
-    sealed class Dispatcher : WfHost<Dispatcher>
+    partial class text
     {
-        protected override void Execute(IWfShell wf)
-        {
-
-        }
+        [MethodImpl(Inline)]
+        public static uint size(Utf8 kind, ReadOnlySpan<char> src)
+            => TextEncoders.size(kind,src);
     }
 }

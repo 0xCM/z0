@@ -21,6 +21,18 @@ namespace Z0
                 get => Name.Text;
             }
 
+            public uint PathLength
+            {
+                [MethodImpl(Inline)]
+                get => Name.Length;
+            }
+
+            public ReadOnlySpan<char> PathData
+            {
+                [MethodImpl(Inline)]
+                get => Name.View;
+            }
+
             [MethodImpl(Inline)]
             public static FileExt operator + (FileExt a, FileExt b)
                 => ext(text.format("{0}.{1}", a.Name, b.Name));

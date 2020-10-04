@@ -15,7 +15,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T deposit<T>(in BitFieldSegment seg, in T src, ref T dst)
             where T : unmanaged
-                => ref gbits.copy(src, seg.StartPos, seg.Width, ref dst);
+                => ref gbits.copy(src, (byte)seg.StartPos, seg.Width, ref dst);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void deposit<T>(in BitFieldSpec spec, T src, Span<T> dst)
@@ -86,7 +86,7 @@ namespace Z0
         public static ref T deposit<S,T>(in BitFieldSegment segment, in S src, ref T dst)
             where S : IScalarBitField<T>
             where T : unmanaged
-                => ref gbits.copy(src.Scalar, segment.StartPos, segment.Width, ref dst);
+                => ref gbits.copy(src.Scalar, (byte)segment.StartPos, segment.Width, ref dst);
 
         [MethodImpl(Inline)]
         public static ref S deposit<S,T>(in BitFieldSegment segment, in S src, ref S dst)
@@ -94,7 +94,7 @@ namespace Z0
             where T : unmanaged
         {
             var dstData = dst.Scalar;
-            dst.Update(gbits.copy(src.Scalar, segment.StartPos, segment.Width, ref dstData));
+            dst.Update(gbits.copy(src.Scalar, (byte)segment.StartPos, segment.Width, ref dstData));
             return ref dst;
         }
 
@@ -106,7 +106,7 @@ namespace Z0
             for(var i=0; i<spec.FieldCount; i++)
             {
                 ref readonly var segment = ref skip(spec.Segments,i);
-                gbits.copy(skip(src,i), segment.StartPos, segment.Width, ref data);
+                gbits.copy(skip(src,i), (byte)segment.StartPos, segment.Width, ref data);
             }
             return ref data;
         }

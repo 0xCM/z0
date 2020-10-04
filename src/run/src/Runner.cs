@@ -394,7 +394,7 @@ namespace Z0
             }
         }
 
-        public void Run()
+        public void Run93()
         {
             ListTextResources();
             Run77();
@@ -408,6 +408,14 @@ namespace Z0
             {
 
             }
+        }
+        public void Run()
+        {
+            var build = FS.dir(@"k:\z0\builds\nca.3.1.win-x64");
+            var cmd = new ClrCommands.EmitAssemblyReferences();
+            cmd.Source = build + FS.file("z0.konst.dll");
+            cmd.Target = Wf.AppData + FS.file("AssemblyReferences", "csv");
+            ClrCommands.exec(Wf,cmd);
         }
     }
 }

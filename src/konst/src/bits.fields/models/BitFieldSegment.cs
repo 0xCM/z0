@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Defines a byte-parametric field segment
     /// </summary>
-    public readonly struct BitFieldSegment : IBitFieldSegment<byte>
+    public readonly struct BitFieldSegment : IBitFieldSegment<uint>
     {
         /// <summary>
         /// Specifies the segment identifier
@@ -25,19 +25,19 @@ namespace Z0
         /// <remarks>
         /// gmath.add(gmath.sub(startpos, endpos), one<T>())
         /// </remarks>
-        public readonly byte Width;
+        public byte Width {get;}
 
         /// <summary>
         /// The inclusive left/right segment index boundaries
         /// </summary>
-        public readonly ConstPair<byte> Boundary;
+        public ConstPair<uint> Boundary {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator BitFieldSegment<byte>(in BitFieldSegment src)
-            => new BitFieldSegment<byte>(src.Name, src.Width, src.Boundary);
+        public static implicit operator BitFieldSegment<uint>(in BitFieldSegment src)
+            => new BitFieldSegment<uint>(src.Name, src.Width, src.Boundary);
 
         [MethodImpl(Inline)]
-        public BitFieldSegment(string name, byte width, in ConstPair<byte> boundary)
+        public BitFieldSegment(string name, byte width, in ConstPair<uint> boundary)
         {
             NameRef = name;
             Width = width;
@@ -50,22 +50,16 @@ namespace Z0
             get => NameRef;
         }
 
-        public byte StartPos
+        public uint StartPos
         {
            [MethodImpl(Inline)]
            get => Boundary.Left;
         }
 
-        public byte EndPos
+        public uint EndPos
         {
             [MethodImpl(Inline)]
             get => Boundary.Right;
-        }
-
-        byte IBitFieldSegment<byte>.Width
-        {
-            [MethodImpl(Inline)]
-            get => Width;
         }
     }
 }

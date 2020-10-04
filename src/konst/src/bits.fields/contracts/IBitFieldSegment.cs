@@ -35,7 +35,7 @@ namespace Z0
         /// <summary>
         /// The number of bits in the segment
         /// </summary>
-        T Width {get;}
+        byte Width {get;}
     }
 
     public interface IBitFieldSegment<F,T> : IBitFieldSegment<T>

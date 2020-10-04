@@ -13,6 +13,9 @@ namespace Z0
     using static Konst;
     using static z;
 
+    /// <summary>
+    /// Captures <see cref='ManifestResource'/> data in usable form
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public struct ManifestResourceData
     {

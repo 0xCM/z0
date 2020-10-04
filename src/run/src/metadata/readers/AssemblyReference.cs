@@ -14,8 +14,17 @@ namespace Z0
     partial class MetadataReader
     {
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<AssemblyReferenceHandle> AssemblyReferenceHandles()
+        ReadOnlySpan<AssemblyReferenceHandle> AssemblyReferenceHandles()
             => Reader.AssemblyReferences.ToReadOnlySpan();
+
+        [MethodImpl(Inline), Op]
+        public ReadOnlySpan<AssemblyReferenceData> AssemblyReferences()
+        {
+            var src = AssemblyReferenceHandles();
+            var dst = alloc<AssemblyReferenceData>(src.Length);
+            Read(src,dst);
+            return dst;
+        }
 
         [MethodImpl(Inline), Op]
         public AssemblyReference Read(AssemblyReferenceHandle src)
@@ -39,6 +48,14 @@ namespace Z0
             dst.PublicKeyOrToken = Read(src.PublicKeyOrToken);
             dst.Version = src.Version;
             return ref dst;
+        }
+
+        [MethodImpl(Inline), Op]
+        public void Read(ReadOnlySpan<AssemblyReferenceHandle> src, Span<AssemblyReferenceData> dst)
+        {
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+                Read(Read(skip(src,i)), ref seek(dst,i));
         }
 
         [MethodImpl(Inline), Op]

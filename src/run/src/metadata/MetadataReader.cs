@@ -16,7 +16,7 @@ namespace Z0
     [ApiHost, SuppressUnmanagedCodeSecurity]
     public unsafe partial class MetadataReader : IDisposable
     {
-        public MetadataReader(IWfShell wf, FilePath src)
+        public MetadataReader(IWfShell wf, FS.FilePath src)
         {
             Source = MemoryFile.open(src.Name);
             Wf = wf;
@@ -26,6 +26,9 @@ namespace Z0
             Reader = Pe.GetMetadataReader();
             CliMetadata = Pe.GetMetadata();
         }
+
+        public static MetadataReader create(IWfShell wf, FS.FilePath src)
+            => new MetadataReader(wf,src);
 
         public DebugMetadataHeader DebugMetadataHeader
             => Reader.DebugMetadataHeader;

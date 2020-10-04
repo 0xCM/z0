@@ -45,23 +45,23 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T extract<T>(in BitFieldSegment seg, T src)
             where T : unmanaged
-                => gbits.slice(src, seg.StartPos, seg.Width);
+                => gbits.slice(src, (byte)seg.StartPos, seg.Width);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T extract<T>(in BitFieldSegment seg, T src, bool offset)
             where T : unmanaged
-            => offset ? gmath.sll(extract(seg, src), seg.StartPos) : extract(seg,src);
+            => offset ? gmath.sll(extract(seg, src), (byte)seg.StartPos) : extract(seg,src);
 
         [MethodImpl(Inline)]
         public static T extract<S,T>(in BitFieldSegment segment, in S src)
             where S : IScalarBitField<T>
             where T : unmanaged
-                => gbits.slice(src.Scalar, segment.StartPos, segment.Width);
+                => gbits.slice(src.Scalar, (byte)segment.StartPos, segment.Width);
 
         [MethodImpl(Inline)]
         public static T extract<S,T>(in BitFieldSegment segment, in S src, bool offset)
             where S : IScalarBitField<T>
             where T : unmanaged
-                => offset ? gmath.sll(extract<S,T>(segment, src), segment.StartPos) : extract<S,T>(segment,src);
+                => offset ? gmath.sll(extract<S,T>(segment, src), (byte)segment.StartPos) : extract<S,T>(segment,src);
     }
 }

@@ -6,31 +6,22 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection.Metadata;
     using System.Runtime.InteropServices;
+    using System.Reflection.Metadata;
     using System.Reflection;
 
     using static Konst;
     using static z;
 
     /// <summary>
-    /// Captures <see cref='AssemblyReference'/> data in usable form
+    /// Captures <see cref='MethodImport'/> data in usable form
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
-    public struct AssemblyReferenceData
+    public struct MethodImportData
     {
-        public string Culture;
+        public MethodImportAttributes Attributes;
 
-        public AssemblyFlags Flags;
+        public ModuleReferenceHandle Module;
 
-        public BinaryCode HashValue;
-
-        public string Name;
-
-        public BinaryCode PublicKeyOrToken;
-
-        public Version Version;
-
-        public AssemblyName AssemblyName;
+        public utf8 Name;
     }
 }

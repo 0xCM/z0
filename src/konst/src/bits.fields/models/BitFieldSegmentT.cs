@@ -27,7 +27,7 @@ namespace Z0
         /// <remarks>
         /// gmath.add(gmath.sub(startpos, endpos), one<T>())
         /// </remarks>
-        public readonly T Width;
+        public byte Width {get;}
 
         /// <summary>
         /// The inclusive left/right segment index boundaries
@@ -35,7 +35,7 @@ namespace Z0
         public readonly ConstPair<T> Boundary;
 
         [MethodImpl(Inline)]
-        public BitFieldSegment(string name, T width, in ConstPair<T> boundary)
+        public BitFieldSegment(string name, byte width, in ConstPair<T> boundary)
         {
             NameRef = name;
             Width = width;
@@ -46,12 +46,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => NameRef;
-        }
-
-        T IBitFieldSegment<T>.Width
-        {
-            [MethodImpl(Inline)]
-            get => Width;
         }
 
         public T StartPos
