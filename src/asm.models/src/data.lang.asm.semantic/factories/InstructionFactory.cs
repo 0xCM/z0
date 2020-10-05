@@ -10,7 +10,7 @@ namespace Z0.Asm
     using static Konst;
 
     [ApiHost]
-    public readonly ref partial struct AsmSink
+    public readonly ref partial struct InstructionFactory
     {
         [MethodImpl(Inline)]
         public AsmArgs<A> args<A>(A a)

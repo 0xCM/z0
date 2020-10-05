@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using static AsmRegisterTypes;
 
-    partial struct AsmSink
+    partial struct InstructionFactory
     {
         [MethodImpl(Inline), Op]
         public static al set(byte src,  al dst)

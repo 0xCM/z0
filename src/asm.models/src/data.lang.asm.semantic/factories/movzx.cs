@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    partial struct AsmSink
+    partial struct InstructionFactory
     {
         [MethodImpl(Inline), Op]
         public AsmArgs<R8,R16> movzx(R8 src, R16 dst)
