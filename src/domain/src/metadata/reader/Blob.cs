@@ -7,27 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
-    using System.Reflection.PortableExecutable;
-
-    using SysReader = System.Reflection.Metadata.MetadataReader;
 
     using static Konst;
     using static z;
 
-    partial class MetadataReader
+    partial class ClrDataReader
     {
-        public IWfShell Wf;
+        [MethodImpl(Inline), Op]
+        public BinaryCode Read(BlobHandle src)
+            => Reader.GetBlobBytes(src);
 
-        readonly MemoryFile Source;
-
-        readonly PEReader Pe;
-
-        readonly SysReader Reader;
-
-        ulong ImageSize;
-
-        readonly Ptr<byte> ImagePointer;
-
-        readonly PEMemoryBlock CliMetadata;
+        [MethodImpl(Inline), Op]
+        public ref BinaryCode Read(BlobHandle src, ref BinaryCode dst)
+        {
+            dst = Read(src);
+            return ref dst;
+        }
     }
 }

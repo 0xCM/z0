@@ -9,8 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Apps)" />
-
-    <ProjectReference Include="$(ToolCore)" />
   </ItemGroup>
 
   <ItemGroup>

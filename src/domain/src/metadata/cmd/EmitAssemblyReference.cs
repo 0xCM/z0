@@ -10,6 +10,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static ClrData;
 
     partial struct ClrCommands
     {
@@ -29,8 +30,8 @@ namespace Z0
                 => ClrCmdHost<T>.create();
 
         [MethodImpl(Inline)]
-        static MetadataReader Reader(IWfShell wf, FS.FilePath src)
-            => MetadataReader.create(wf, src);
+        static ClrDataReader Reader(IWfShell wf, FS.FilePath src)
+            => ClrDataReader.create(wf, src);
 
         public static ReadOnlySpan<AssemblyReferenceData> exec(IWfShell wf, in EmitAssemblyReferences cmd)
         {

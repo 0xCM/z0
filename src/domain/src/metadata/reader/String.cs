@@ -6,23 +6,23 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
     using System.Reflection.Metadata;
-    using System.Reflection;
 
     using static Konst;
     using static z;
+    using static ClrData;
 
-    /// <summary>
-    /// Captures <see cref='ManifestResource'/> data in usable form
-    /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
-    public struct ManifestResourceData
+    partial class ClrDataReader
     {
-        public string Name;
+        [MethodImpl(Inline), Op]
+        public string Read(StringHandle src)
+            => Reader.GetString(src);
 
-        public ulong Offset;
-
-        public ManifestResourceAttributes Attributes;
+        [MethodImpl(Inline), Op]
+        public ref string Read(StringHandle src, ref string dst)
+        {
+            dst = Read(src);
+            return ref dst;
+        }
     }
 }

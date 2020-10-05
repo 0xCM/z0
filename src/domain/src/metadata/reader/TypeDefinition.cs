@@ -10,18 +10,14 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static ClrData;
 
-    partial class MetadataReader
+    partial class ClrDataReader
     {
-        [MethodImpl(Inline), Op]
-        public string Read(StringHandle src)
-            => Reader.GetString(src);
+        public void Read(TypeDefinitionHandle src, Receiver<TypeDefinition> dst)
+            => dst(Reader.GetTypeDefinition(src));
 
-        [MethodImpl(Inline), Op]
-        public ref string Read(StringHandle src, ref string dst)
-        {
-            dst = Read(src);
-            return ref dst;
-        }
+        public void Read(TableSpan<TypeDefinitionHandle> src, Receiver<TypeDefinition> dst)
+            => src.Iter(handle => dst(Reader.GetTypeDefinition(handle)));
     }
 }

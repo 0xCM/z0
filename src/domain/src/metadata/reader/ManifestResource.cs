@@ -10,26 +10,36 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static ClrData;
 
-    partial class MetadataReader
+    partial class ClrDataReader
     {
         [MethodImpl(Inline), Op]
-        public MethodImplementation Read(MethodImplementationHandle src)
-            => Reader.GetMethodImplementation(src);
+        public ManifestResource Read(ManifestResourceHandle src)
+            => Reader.GetManifestResource(src);
 
         [MethodImpl(Inline), Op]
-        public ref MethodImplementation Read(MethodImplementationHandle src, ref MethodImplementation dst)
+        public ref ManifestResource Read(ManifestResourceHandle src, ref ManifestResource dst)
         {
             dst = Read(src);
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public void Read(ReadOnlySpan<MethodImplementationHandle> src, Span<MethodImplementation> dst)
+        public void Read(ReadOnlySpan<ManifestResourceHandle> src, Span<ManifestResource> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
                 Read(skip(src,i), ref seek(dst,i));
+        }
+
+        [MethodImpl(Inline), Op]
+        public ref ManifestResourceData Read(ManifestResource src, ref ManifestResourceData dst)
+        {
+            dst.Name = Read(src.Name);
+            dst.Offset = (ulong)src.Offset;
+            dst.Attributes = src.Attributes;
+            return ref dst;
         }
     }
 }

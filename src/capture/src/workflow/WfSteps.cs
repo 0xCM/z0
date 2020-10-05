@@ -22,6 +22,4 @@ namespace Z0
         public static WfStepId StepId
             => WfCore.step<SpecializeImm>();
     }
-
-
 }

@@ -20,7 +20,7 @@ namespace Z0
 
         uint Offset;
 
-        internal ImageStream(Stream src, bool @virtual, uint offset = 0)
+        public ImageStream(Stream src, bool @virtual, uint offset = 0)
         {
             Stream = src;
             IsVirtual = @virtual;

@@ -19,10 +19,6 @@ namespace Z0.Asm
 
         const string PageBreak = text.PageBreak;
 
-        [MethodImpl(Inline), Op]
-        public static string encoded(BasedCodeBlock src, ApiMetadataUri uri)
-            => comment(new ByteSpanProperty(uri.Identifier, src).Format());
-
         /// <summary>
         /// Formats the function header
         /// </summary>
@@ -33,7 +29,7 @@ namespace Z0.Asm
             lines.Add(comment($"{src.OpSig}, {src.Uri}"));
 
             if(config.EmitFunctionHeaderEncoding)
-                lines.Add(encoded(src.Code.Code, src.MetaUri));
+                lines.Add(ByteSpans.property(src.Code.Code, src.MetaUri));
             else
                 lines.Add(comment(src.Code.Uri.OpId));
 

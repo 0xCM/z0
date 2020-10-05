@@ -10,35 +10,27 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static ClrData;
 
-    partial class MetadataReader
+    partial class ClrDataReader
     {
         [MethodImpl(Inline), Op]
-        public ManifestResource Read(ManifestResourceHandle src)
-            => Reader.GetManifestResource(src);
+        public FieldDefinition Read(FieldDefinitionHandle src)
+            => Reader.GetFieldDefinition(src);
 
         [MethodImpl(Inline), Op]
-        public ref ManifestResource Read(ManifestResourceHandle src, ref ManifestResource dst)
+        public ref FieldDefinition Read(FieldDefinitionHandle src, ref FieldDefinition dst)
         {
             dst = Read(src);
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public void Read(ReadOnlySpan<ManifestResourceHandle> src, Span<ManifestResource> dst)
+        public void Read(ReadOnlySpan<FieldDefinitionHandle> src, Span<FieldDefinition> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
                 Read(skip(src,i), ref seek(dst,i));
-        }
-
-        [MethodImpl(Inline), Op]
-        public ref ManifestResourceData Read(ManifestResource src, ref ManifestResourceData dst)
-        {
-            dst.Name = Read(src.Name);
-            dst.Offset = (ulong)src.Offset;
-            dst.Attributes = src.Attributes;
-            return ref dst;
         }
     }
 }

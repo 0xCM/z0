@@ -13,10 +13,12 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using SysReader = System.Reflection.Metadata.MetadataReader;
+
     [ApiHost, SuppressUnmanagedCodeSecurity]
-    public unsafe partial class MetadataReader : IDisposable
+    public unsafe partial class ClrDataReader : IDisposable
     {
-        public MetadataReader(IWfShell wf, FS.FilePath src)
+        public ClrDataReader(IWfShell wf, FS.FilePath src)
         {
             Source = MemoryFile.open(src.Name);
             Wf = wf;
@@ -27,8 +29,8 @@ namespace Z0
             CliMetadata = Pe.GetMetadata();
         }
 
-        public static MetadataReader create(IWfShell wf, FS.FilePath src)
-            => new MetadataReader(wf,src);
+        public static ClrDataReader create(IWfShell wf, FS.FilePath src)
+            => new ClrDataReader(wf,src);
 
         public DebugMetadataHeader DebugMetadataHeader
             => Reader.DebugMetadataHeader;
@@ -38,5 +40,19 @@ namespace Z0
             Pe.Dispose();
             Source.Dispose();
         }
+
+        public IWfShell Wf;
+
+        readonly MemoryFile Source;
+
+        readonly PEReader Pe;
+
+        readonly SysReader Reader;
+
+        ulong ImageSize;
+
+        readonly Ptr<byte> ImagePointer;
+
+        readonly PEMemoryBlock CliMetadata;
     }
 }

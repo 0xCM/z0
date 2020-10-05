@@ -13,20 +13,19 @@ namespace Z0
     using static Konst;
     using static z;
 
-    /// <summary>
-    /// Captures <see cref='MethodDefinition'/> data in usable form
-    /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
-    public struct MethodDefinitionData
+    public readonly partial struct ClrData
     {
-        public BinaryCode Signature;
+        /// <summary>
+        /// Captures <see cref='ManifestResource'/> data in usable form
+        /// </summary>
+        [StructLayout(LayoutKind.Sequential)]
+        public struct ManifestResourceData
+        {
+            public string Name;
 
-        public utf8 Name;
+            public ulong Offset;
 
-        public Address32 Rva;
-
-        public MethodAttributes Attributes;
-
-        public MethodImplAttributes ImplAttributes;
+            public ManifestResourceAttributes Attributes;
+        }
     }
 }

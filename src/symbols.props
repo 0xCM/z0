@@ -5,8 +5,6 @@
 
     <ToolCoreId>tool.core</ToolCoreId>
     <ToolCliId>tool.cli</ToolCliId>
-
-    <ToolCore>$(Src)$(ToolCoreId)/z0.$(ToolCoreId).csproj</ToolCore>
     <ToolCli>$(Src)$(ToolCliId)/z0.$(ToolCliId).csproj</ToolCli>
   </PropertyGroup>
 

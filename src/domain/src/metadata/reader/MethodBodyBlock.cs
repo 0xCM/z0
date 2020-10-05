@@ -10,17 +10,14 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static ClrData;
 
-    partial class MetadataReader
+    partial class ClrDataReader
     {
         [MethodImpl(Inline), Op]
-        public BinaryCode Read(BlobHandle src)
-            => Reader.GetBlobBytes(src);
-
-        [MethodImpl(Inline), Op]
-        public ref BinaryCode Read(BlobHandle src, ref BinaryCode dst)
+        public ref MethodBodyBlock Read(MethodDefinition src, ref MethodBodyBlock dst)
         {
-            dst = Read(src);
+            dst = Pe.GetMethodBody(src.RelativeVirtualAddress);
             return ref dst;
         }
     }

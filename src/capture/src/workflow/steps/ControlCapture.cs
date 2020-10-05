@@ -12,7 +12,14 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly ref struct CaptureControl
+    [WfHost]
+    public sealed class ControlCapture : WfHost<ControlCapture>
+    {
+        public static ControlCaptureStep create(WfCaptureState state)
+            => new ControlCaptureStep(state, new ControlCapture());
+    }
+
+    public readonly ref struct ControlCaptureStep
     {
         readonly IWfShell Wf;
 
@@ -20,7 +27,7 @@ namespace Z0
 
         readonly WfHost Host;
 
-        public CaptureControl(WfCaptureState state, WfHost host)
+        public ControlCaptureStep(WfCaptureState state, WfHost host)
         {
             State = state;
             Wf = state.Wf;

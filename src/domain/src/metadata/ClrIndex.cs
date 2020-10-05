@@ -12,7 +12,7 @@ namespace Z0
     using static z;
 
     [ApiHost]
-    public readonly struct MetadataIndex
+    public readonly struct ClrIndex
     {
         public const string PatternText = "{0,-60} | {1,-16}";
 
@@ -30,7 +30,7 @@ namespace Z0
             var l = labels(default(MetadataOffset));
             writer.WriteLine(text.format(PatternText, l[0], l[1]));
             for(var i=0u; i<src.Length; i++)
-                writer.WriteLine(MetadataIndex.format(skip(src,i)));
+                writer.WriteLine(ClrIndex.format(skip(src,i)));
         }
 
         public readonly struct MetadataOffset

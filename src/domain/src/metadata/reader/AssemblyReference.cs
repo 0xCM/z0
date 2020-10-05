@@ -11,7 +11,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class MetadataReader
+    using static ClrData;
+
+    partial class ClrDataReader
     {
         [MethodImpl(Inline), Op]
         ReadOnlySpan<AssemblyReferenceHandle> AssemblyReferenceHandles()

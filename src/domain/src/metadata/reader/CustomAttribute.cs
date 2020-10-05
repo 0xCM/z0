@@ -10,14 +10,11 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static ClrData;
 
-    partial class MetadataReader
+    partial class ClrDataReader
     {
-        [MethodImpl(Inline), Op]
-        public ref MethodBodyBlock Read(MethodDefinition src, ref MethodBodyBlock dst)
-        {
-            dst = Pe.GetMethodBody(src.RelativeVirtualAddress);
-            return ref dst;
-        }
+        public void Read(TableSpan<CustomAttributeHandle> src, Receiver<CustomAttribute> dst)
+            => src.Iter(handle => dst(Reader.GetCustomAttribute(handle)));
     }
 }

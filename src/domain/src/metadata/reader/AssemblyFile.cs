@@ -11,25 +11,29 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class MetadataReader
+    partial class ClrDataReader
     {
         [MethodImpl(Inline), Op]
-        public MethodDefinition Read(MethodDefinitionHandle src)
-            => Reader.GetMethodDefinition(src);
+        public ReadOnlySpan<AssemblyFileHandle> AssemblyFileHandles()
+            => Reader.AssemblyFiles.ToReadOnlySpan();
 
         [MethodImpl(Inline), Op]
-        public ref MethodDefinition Read(MethodDefinitionHandle src, ref MethodDefinition dst)
+        public AssemblyFile Read(AssemblyFileHandle src)
+            => Reader.GetAssemblyFile(src);
+
+        [MethodImpl(Inline), Op]
+        public ref AssemblyFile Read(AssemblyFileHandle src, ref AssemblyFile dst)
         {
             dst = Read(src);
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public void Read(ReadOnlySpan<MethodDefinitionHandle> src, Span<MethodDefinition> dst)
+        public void Read(ReadOnlySpan<AssemblyFileHandle> src, Span<AssemblyFile> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                 Read(skip(src,i), ref seek(dst,i));
+                Read(skip(src,i), ref seek(dst,i));
         }
     }
 }

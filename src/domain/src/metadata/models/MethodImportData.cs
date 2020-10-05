@@ -13,15 +13,18 @@ namespace Z0
     using static Konst;
     using static z;
 
-    /// <summary>
-    /// Captures <see cref='MethodImport'/> data in usable form
-    /// </summary>
-    public struct MethodImportData
+    public readonly partial struct ClrData
     {
-        public MethodImportAttributes Attributes;
+        /// <summary>
+        /// Captures <see cref='MethodImport'/> data in usable form
+        /// </summary>
+        public struct MethodImportData
+        {
+            public MethodImportAttributes Attributes;
 
-        public ModuleReferenceHandle Module;
+            public ModuleReferenceHandle Module;
 
-        public utf8 Name;
+            public utf8 Name;
+        }
     }
 }
