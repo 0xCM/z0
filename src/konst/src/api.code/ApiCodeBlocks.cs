@@ -28,22 +28,6 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static ApiCodeBlock define(OpUri uri, MemoryAddress address, in BinaryCode data)
-            => new ApiCodeBlock(uri, new BasedCodeBlock(address, data));
-
-        [MethodImpl(Inline), Op]
-        public static ApiCodeBlock define(OpUri uri, in BasedCodeBlock data)
-            => new ApiCodeBlock(uri, data);
-
-        [MethodImpl(Inline), Op]
-        public static BasedCodeBlock define(MemoryAddress address, in BinaryCode code)
-            => new BasedCodeBlock(address, code);
-
-        [MethodImpl(Inline), Op]
-        public static ApiCodeBlock define(MemoryAddress address, OpUri uri, in BinaryCode data)
-            => new ApiCodeBlock(address, uri, data);
-
-        [MethodImpl(Inline), Op]
         public static BinaryCode define(byte[] data)
             => new BinaryCode(data);
 

@@ -10,9 +10,6 @@ namespace Z0
 
     using static Konst;
 
-    /// <summary>
-    /// Defines a contiguous sequence of based x86-encoded bytes associated with a <see cref='ApiMember'/>
-    /// </summary>
     public readonly struct ApiMemberExtract
     {
         public readonly BasedCodeBlock Encoded;

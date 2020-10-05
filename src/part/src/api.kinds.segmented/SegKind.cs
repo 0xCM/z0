@@ -8,9 +8,6 @@ namespace Z0
 
     using W = DataWidth;
 
-    /// <summary>
-    /// Defines <see cref='MemoryClass.Segment' /> classifiers
-    /// </summary>
     [Flags]
     public enum SegKind : ushort
     {

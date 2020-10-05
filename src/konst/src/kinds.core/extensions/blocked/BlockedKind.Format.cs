@@ -11,7 +11,7 @@ namespace Z0
 
     partial class XTend
     {
-        public static string Format(this BlockedKind k)
+        public static string Format(this SegBlockKind k)
             => k != 0 ? k.ToString() : string.Empty;
     }
 }

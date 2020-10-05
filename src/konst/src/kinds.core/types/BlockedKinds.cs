@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using BK = BlockedKind;
+    using BK = SegBlockKind;
 
     using static Konst;
     using static z;
@@ -284,7 +284,7 @@ namespace Z0
 
             public TypeWidth BlockWidth => TypeWidth.W32;
 
-            public static implicit operator BlockedKind(Blocked32 src)
+            public static implicit operator SegBlockKind(Blocked32 src)
                 => src.Class;
         }
 

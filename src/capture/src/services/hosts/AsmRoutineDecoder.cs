@@ -30,7 +30,7 @@ namespace Z0.Asm
         public Option<AsmRoutine> Decode(ApiCaptureBlock src)
             => from i in Decode(src.Parsed)
                 let block = asm.block(src.UriHex, i, src.TermCode)
-                select AsmServices.routine(src.OpUri, src.Method.Signature().Format(), block);
+                select AsmServices.routine(src.MetaUri, src.OpUri, src.Method.Signature().Format(), block);
 
         public Option<AsmFxList> Decode(BasedCodeBlock src)
             => Decode(src.Encoded, src.Base).TryMap(x => asm.list(x, src));
@@ -114,7 +114,13 @@ namespace Z0.Asm
         }
 
         public Option<AsmRoutine> Decode(ApiMemberCode src)
-            => from i in Decode(src.Encoded) select AsmServices.routine(src,i);
+        {
+            var result = Decode(src.Encoded);
+            if(result)
+                return AsmServices.routine(src, result.Value);
+            else
+                return z.none<AsmRoutine>();
+        }
 
         public bool Decode(ApiCaptureBlock src, out AsmRoutine dst)
         {

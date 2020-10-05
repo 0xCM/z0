@@ -19,7 +19,7 @@ namespace Z0.Asm
         {
             var code = new ApiCodeBlock(captured.OpUri, captured.Parsed);
             var sig = captured.Method.Signature().Format();
-            return new AsmRoutine(captured.OpUri, sig, code, captured.TermCode, src);
+            return new AsmRoutine(captured.MetaUri, captured.OpUri, sig, code, captured.TermCode, src);
         }
 
         [MethodImpl(Inline), Op]
@@ -27,7 +27,7 @@ namespace Z0.Asm
         {
             var code = new ApiCodeBlock(member.OpUri, member.Encoded);
             var sig = member.Method.Signature().Format();
-            return new AsmRoutine(member.OpUri, sig, code, member.TermCode, new AsmFxList(asm, member.Encoded));
+            return new AsmRoutine(member.MetaUri, member.OpUri, sig, code, member.TermCode, new AsmFxList(asm, member.Encoded));
         }
 
         [MethodImpl(Inline), Op]
@@ -43,7 +43,7 @@ namespace Z0.Asm
             => new AsmWriter(dst, formatter);
 
         [Op]
-        public static AsmRoutine routine(OpUri uri, string sig, AsmBlock src, bool check = false)
+        public static AsmRoutine routine(ApiMetadataUri meta, OpUri uri, string sig, AsmBlock src, bool check = false)
         {
             var count = src.InstructionCount;
             var info = new AsmFxSummary[count];
@@ -62,7 +62,7 @@ namespace Z0.Asm
             if(check)
                 CheckBlockLength(src);
 
-            return new AsmRoutine(uri, sig, src.Encoded, src.TermCode, asm.list(src.Decoded, src.Encoded.Code));
+            return new AsmRoutine(meta, uri, sig, src.Encoded, src.TermCode, asm.list(src.Decoded, src.Encoded.Code));
         }
     }
 }

@@ -11,7 +11,6 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
-    using static ManagePartCapture;
     using static z;
 
     public struct CapturePartsStep : IDisposable
@@ -26,28 +25,31 @@ namespace Z0
 
         readonly ICaptureContext Context;
 
+        readonly WfHost Host;
+
         [MethodImpl(Inline)]
-        public CapturePartsStep(WfCaptureState state)
+        public CapturePartsStep(WfCaptureState state, WfHost host)
         {
             State = state;
+            Host = host;
             Wf = state.Wf;
             Ct = Wf.Ct;
             Config = State.Config;
             Context = State.CWf.Context;
-            Wf.Created(StepId);
-        }
-
-        public void Run()
-        {
-            Wf.Running(StepId);
-            Clear();
-            Capture(ApiArchives.capture(Config.TargetArchive.Root));
-            Wf.Ran(StepId);
+            Wf.Created(Host);
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed(Host);
+        }
+
+        public void Run()
+        {
+            Wf.Running(Host);
+            Clear();
+            Capture(ApiArchives.capture(Config.TargetArchive.Root));
+            Wf.Ran(Host);
         }
 
         void Capture(IPartCapturePaths dst)
@@ -60,7 +62,7 @@ namespace Z0
 
         public void Consolidate()
         {
-            Wf.Raise(new RunningConsolidated(StepName, (uint)Config.Api.Catalogs.Length, Ct));
+            Wf.Raise(new RunningConsolidated(Host.Identifier, (uint)Config.Api.Catalogs.Length, Ct));
 
             Clear();
 
@@ -74,7 +76,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(StepId, e);
+                Wf.Error(Host, e);
            }
         }
 
@@ -129,7 +131,7 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(StepId, e);
+                Wf.Error(Host, e);
             }
         }
     }

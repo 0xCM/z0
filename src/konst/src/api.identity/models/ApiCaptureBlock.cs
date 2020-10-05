@@ -29,6 +29,9 @@ namespace Z0
 
         public CilMethod Cil;
 
+        public ApiMetadataUri MetaUri
+            => Method;
+
         [MethodImpl(Inline)]
         public ApiCaptureBlock(OpIdentity id, MethodInfo method, BasedCodeBlock extracted, BasedCodeBlock parsed, ExtractTermCode term)
         {

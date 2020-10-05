@@ -22,6 +22,12 @@ namespace Z0
 
         public L.Launch Launcher {get;}
 
+        public string Identifier
+        {
+            [MethodImpl(Inline)]
+            get => Type.Name;
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator WfStepId(WfHost src)
             => src.Id;

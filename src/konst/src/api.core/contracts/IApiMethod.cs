@@ -22,6 +22,11 @@ namespace Z0
         MethodInfo Method {get;}
 
         /// <summary>
+        /// The metadata uri
+        /// </summary>
+        ApiMetadataUri MetaUri => Method;
+
+        /// <summary>
         /// The method's kind identifier if it exists
         /// </summary>
         ApiOpId KindId

@@ -194,64 +194,64 @@ namespace Z0
 
         public void classify_block_16()
         {
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock16<byte>)), BlockedKind.b16x8u);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock16<sbyte>)), BlockedKind.b16x8i);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock16<ushort>)), BlockedKind.b16x16u);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock16<short>)), BlockedKind.b16x16i);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock16<byte>)), SegBlockKind.b16x8u);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock16<sbyte>)), SegBlockKind.b16x8i);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock16<ushort>)), SegBlockKind.b16x16u);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock16<short>)), SegBlockKind.b16x16i);
         }
 
         void classify_block_32()
         {
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock32<byte>)), BlockedKind.b32x8u);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock32<sbyte>)), BlockedKind.b32x8i);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock32<ushort>)), BlockedKind.b32x16u);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock32<short>)), BlockedKind.b32x16i);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock32<uint>)), BlockedKind.b32x32u);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock32<int>)), BlockedKind.b32x32i);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock32<float>)), BlockedKind.b32x32f);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock32<byte>)), SegBlockKind.b32x8u);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock32<sbyte>)), SegBlockKind.b32x8i);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock32<ushort>)), SegBlockKind.b32x16u);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock32<short>)), SegBlockKind.b32x16i);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock32<uint>)), SegBlockKind.b32x32u);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock32<int>)), SegBlockKind.b32x32i);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock32<float>)), SegBlockKind.b32x32f);
         }
 
         void classify_block_64()
         {
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<byte>)), BlockedKind.b64x8u);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<sbyte>)), BlockedKind.b64x8i);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<ushort>)), BlockedKind.b64x16u);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<short>)), BlockedKind.b64x16i);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<uint>)), BlockedKind.b64x32u);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<int>)), BlockedKind.b64x32i);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<ulong>)), BlockedKind.b64x64u);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<long>)), BlockedKind.b64x64i);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<float>)), BlockedKind.b64x32f);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<double>)), BlockedKind.b64x64f);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<byte>)), SegBlockKind.b64x8u);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<sbyte>)), SegBlockKind.b64x8i);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<ushort>)), SegBlockKind.b64x16u);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<short>)), SegBlockKind.b64x16i);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<uint>)), SegBlockKind.b64x32u);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<int>)), SegBlockKind.b64x32i);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<ulong>)), SegBlockKind.b64x64u);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<long>)), SegBlockKind.b64x64i);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<float>)), SegBlockKind.b64x32f);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock64<double>)), SegBlockKind.b64x64f);
         }
 
         void classify_block_128()
         {
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<byte>)), BlockedKind.b128x8u);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<sbyte>)), BlockedKind.b128x8i);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<ushort>)), BlockedKind.b128x16u);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<short>)), BlockedKind.b128x16i);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<uint>)), BlockedKind.b128x32u);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<int>)), BlockedKind.b128x32i);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<ulong>)), BlockedKind.b128x64u);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<long>)), BlockedKind.b128x64i);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<float>)), BlockedKind.b128x32f);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<double>)), BlockedKind.b128x64f);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<byte>)), SegBlockKind.b128x8u);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<sbyte>)), SegBlockKind.b128x8i);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<ushort>)), SegBlockKind.b128x16u);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<short>)), SegBlockKind.b128x16i);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<uint>)), SegBlockKind.b128x32u);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<int>)), SegBlockKind.b128x32i);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<ulong>)), SegBlockKind.b128x64u);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<long>)), SegBlockKind.b128x64i);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<float>)), SegBlockKind.b128x32f);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock128<double>)), SegBlockKind.b128x64f);
 
         }
 
         void classify_block_256()
         {
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<byte>)), BlockedKind.b256x8u);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<sbyte>)), BlockedKind.b256x8i);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<ushort>)), BlockedKind.b256x16u);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<short>)), BlockedKind.b256x16i);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<uint>)), BlockedKind.b256x32u);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<int>)), BlockedKind.b256x32i);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<ulong>)), BlockedKind.b256x64u);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<long>)), BlockedKind.b256x64i);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<float>)), BlockedKind.b256x32f);
-            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<double>)), BlockedKind.b256x64f);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<byte>)), SegBlockKind.b256x8u);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<sbyte>)), SegBlockKind.b256x8i);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<ushort>)), SegBlockKind.b256x16u);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<short>)), SegBlockKind.b256x16i);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<uint>)), SegBlockKind.b256x32u);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<int>)), SegBlockKind.b256x32i);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<ulong>)), SegBlockKind.b256x64u);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<long>)), SegBlockKind.b256x64i);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<float>)), SegBlockKind.b256x32f);
+            Claim.Eq(BlockedKinds.kind(typeof(SpanBlock256<double>)), SegBlockKind.b256x64f);
         }
 
         public void classify_vector()

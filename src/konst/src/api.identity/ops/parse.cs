@@ -61,7 +61,6 @@ namespace Z0
             return false;
         }
 
-
         [Op]
         public static OpIdentity parse(string src)
         {

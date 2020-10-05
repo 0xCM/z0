@@ -32,7 +32,7 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public AsmBlock(ApiCodeBlock encoded, Instruction[] decoded, ExtractTermCode term)
         {
-            Encoded = new ApiCodeBlock(encoded.Uri, encoded.Base, encoded.Code);
+            Encoded = encoded;
             Decoded = decoded;
             TermCode = term;
         }

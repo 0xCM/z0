@@ -44,9 +44,16 @@ namespace Z0.Asm
         /// </summary>
         public ExtractTermCode TermCode {get;}
 
+        /// <summary>
+        /// The operation metadata uri
+        /// </summary>
+        public ApiMetadataUri MetaUri {get;}
+
+
         [MethodImpl(Inline)]
-        public AsmRoutine(OpUri uri, string sig, ApiCodeBlock code, ExtractTermCode term, AsmFxList instructions)
+        public AsmRoutine(ApiMetadataUri meta, OpUri uri, string sig, ApiCodeBlock code, ExtractTermCode term, AsmFxList instructions)
         {
+            MetaUri = meta;
             Uri = uri;
             OpId = uri.OpId;
             OpSig = sig;
@@ -80,6 +87,6 @@ namespace Z0.Asm
             => InstructionCount != 0;
 
         public static AsmRoutine Empty
-            => new AsmRoutine(OpUri.Empty, EmptyString, ApiCodeBlock.Empty, 0, AsmFxList.Empty);
+            => new AsmRoutine(ApiMetadataUri.Empty, OpUri.Empty, EmptyString, ApiCodeBlock.Empty, 0, AsmFxList.Empty);
     }
 }

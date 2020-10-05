@@ -14,6 +14,8 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using api = ApiIdentify;
+
     public readonly struct ApiMetadataUri : ITextual
     {
         const byte PartIndex = 0;
@@ -24,7 +26,7 @@ namespace Z0
 
         const byte OpIndex = 3;
 
-        readonly Vector128<uint> Data;
+        internal readonly Vector128<uint> Data;
 
         [MethodImpl(Inline)]
         public ApiMetadataUri(Vector128<uint> src)
@@ -48,7 +50,7 @@ namespace Z0
             get => new ArtifactKey(TableIndex.TypeDef, (ClrArtifactKey)vcell(Data,HostIndex));
         }
 
-        public uint HostId
+        public ClrArtifactKey HostId
         {
             [MethodImpl(Inline)]
             get => vcell(Data,HostIndex);
@@ -60,7 +62,7 @@ namespace Z0
             get => new ArtifactKey(TableIndex.MethodDef, (ClrArtifactKey)vcell(Data,OpIndex));
         }
 
-        public uint OperationId
+        public ClrArtifactKey OperationId
         {
             [MethodImpl(Inline)]
             get => vcell(Data, OpIndex);
@@ -68,20 +70,29 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ApiMetadataUri identify(MethodInfo src)
-        {
-            var host = src.DeclaringType;
-            var dst = vparts(w128, (uint)host.Assembly.Id(), (uint)src.KindId(), (uint)host.MetadataToken, (uint)src.MetadataToken);
-            return new ApiMetadataUri(dst);
-        }
+            => api.metauri(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ApiMetadataUri(MethodInfo src)
+            => identify(src);
 
         [MethodImpl(Inline)]
         public string Format()
+            => api.format(this);
+
+        public string Identifier
         {
-            const string pattern = "{0,-16} | metadata://{1}/{2}/{3}";
-            return string.Format(pattern,KindKey.Format(), Part.Format(), HostId, OperationId);
+            [MethodImpl(Inline)]
+            get => api.identifier(this);
         }
+
+        [MethodImpl(Inline)]
+        public bool Equals(ApiMetadataUri src)
+            => api.eq(this,src);
 
         public override string ToString()
             => Format();
+
+        public static ApiMetadataUri Empty => default;
     }
 }

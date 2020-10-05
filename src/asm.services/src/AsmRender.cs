@@ -19,14 +19,9 @@ namespace Z0.Asm
 
         const string PageBreak = text.PageBreak;
 
-        /// <summary>
-        /// Formats source bits on a single line intended for emission in the function header
-        /// </summary>
-        /// <param name="src">The source bits</param>
-
         [MethodImpl(Inline), Op]
-        public static string header(BasedCodeBlock src, OpIdentity id)
-            => comment(new ByteSpanProperty(id.ToPropertyName(), src).Format());
+        public static string encoded(BasedCodeBlock src, ApiMetadataUri uri)
+            => comment(new ByteSpanProperty(uri.Identifier, src).Format());
 
         /// <summary>
         /// Formats the function header
@@ -38,7 +33,7 @@ namespace Z0.Asm
             lines.Add(comment($"{src.OpSig}, {src.Uri}"));
 
             if(config.EmitFunctionHeaderEncoding)
-                lines.Add(header(src.Code.Code, src.OpId));
+                lines.Add(encoded(src.Code.Code, src.MetaUri));
             else
                 lines.Add(comment(src.Code.Uri.OpId));
 

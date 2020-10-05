@@ -17,6 +17,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static AsmBlock block(ApiCodeBlock encoded, Instruction[] decoded, ExtractTermCode term)
             => new AsmBlock(encoded, decoded, term);
-
     }
 }

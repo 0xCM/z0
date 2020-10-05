@@ -55,7 +55,7 @@ namespace Z0
 
             {
                 Wf.Raise(new CapturingParts(Step.Name, State.Parts, Ct));
-                using var manage = new CapturePartsStep(State);
+                using var manage = new CapturePartsStep(State, new CaptureParts());
                 manage.Run();
             }
 

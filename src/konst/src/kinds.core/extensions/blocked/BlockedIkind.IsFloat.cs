@@ -14,7 +14,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Konst.Inline)]
-        public static bool IsFloat(this BlockedKind k)
+        public static bool IsFloat(this SegBlockKind k)
             => ((uint)k & (uint)Z0.NumericKind.Float) != 0;
     }
 }

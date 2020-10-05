@@ -7,7 +7,6 @@ namespace Z0
     using System;
 
     using static z;
-    using static WfCore;
 
     [WfHost]
     public sealed class ManageCapture : WfHost<ManageCapture>
@@ -17,10 +16,8 @@ namespace Z0
     }
 
     [Step]
-    public sealed class ManagePartCapture : WfHost<ManagePartCapture>
+    public sealed class CaptureParts : WfHost<CaptureParts>
     {
-        public const string StepName = nameof(CapturePartsStep);
 
-        public static WfStepId StepId => step<ManagePartCapture>();
     }
 }

@@ -17,10 +17,13 @@ namespace Z0
 
         void Run(IWfShell shell);
 
+        string Identifier
+            => Type.Name;
         string ITextual.Format()
             => Id.Format();
 
-        L.Launch Launcher => Run;
+        L.Launch Launcher
+            => Run;
     }
 
     public interface IWfHost<H> : IWfHost, IWfStep<H>

@@ -13,7 +13,6 @@ namespace Z0
 
     using static ArchiveExt;
 
-
     public readonly struct ModuleArchive : IModuleArchive
     {
         [MethodImpl(Inline), Op]
@@ -31,7 +30,7 @@ namespace Z0
         IModuleArchive Base
             => this;
 
-        public IEnumerable<FS.FileModule> Modules
+        public IEnumerable<FileModule> Modules
         {
             get
             {
@@ -40,19 +39,19 @@ namespace Z0
                    if(path.Is(Dll))
                    {
                         if(FS.managed(path, out var assname))
-                            yield return new FS.ManagedDll(path, assname);
+                            yield return new ManagedDll(path, assname);
                         else
-                            yield return new FS.NativeDll(path);
+                            yield return new NativeDll(path);
                    }
                    else if(path.Is(Exe))
                    {
                         if(FS.managed(path, out var assname))
-                            yield return new FS.ManagedExe(path, assname);
+                            yield return new ManagedExe(path, assname);
                         else
-                            yield return new FS.NativeExe(path);
+                            yield return new NativeExe(path);
                    }
                    else if(path.Is(Lib))
-                        yield return new FS.NativeLib(path);
+                        yield return new NativeLib(path);
                 }
             }
         }

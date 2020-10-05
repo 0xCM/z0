@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="k">The vector classifier</param>
         [MethodImpl(Inline)]
-        public static bool IsIntegral(this BlockedKind k)
+        public static bool IsIntegral(this SegBlockKind k)
             => k.IsSigned() || k.IsUnsigned();
     }
 }
