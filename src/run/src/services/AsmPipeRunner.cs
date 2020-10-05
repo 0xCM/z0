@@ -132,11 +132,11 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        IPartCaptureArchive CaptureArchive(PartId part)
-            => ApiArchives.capture(part);
+        ICaptureArchive CaptureArchive(PartId part)
+            => ApiArchives.capture(FS.dir(AppPaths.AppCaptureRoot.Name), part);
 
         [MethodImpl(Inline)]
-        IPartCaptureArchive CaptureArchive(FolderPath root)
+        ICaptureArchive CaptureArchive(FolderPath root)
             => ApiArchives.capture(root);
 
         [MethodImpl(Inline)]

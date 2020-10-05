@@ -15,44 +15,62 @@ namespace Z0
 
     public readonly struct ModuleArchive : IModuleArchive
     {
-        [MethodImpl(Inline), Op]
-        public static IModuleArchive create(FS.FolderPath root)
-            => new ModuleArchive(root);
+        public FS.FolderPath Root => Config.Root;
 
-        public FS.FolderPath Root {get;}
+        public ArchiveConfig Config {get;}
 
         [MethodImpl(Inline)]
-        public ModuleArchive(FS.FolderPath root)
+        internal ModuleArchive(ArchiveConfig src)
+            => Config= src;
+
+        public void Query(Receiver<ManagedDll> dst)
         {
-            Root = root;
+            foreach(var path in Root.Files(true).Where(f => f.Is(Dll)))
+                if(FS.managed(path, out var assname))
+                    dst(new ManagedDll(path, assname));
         }
 
-        IModuleArchive Base
-            => this;
-
-        public IEnumerable<FileModule> Modules
+        public void Query(Receiver<NativeDll> dst)
         {
-            get
+            foreach(var path in Root.Files(true).Where(f => f.Is(Dll)))
+                if(!FS.managed(path, out var assname))
+                    dst(new NativeDll(path));
+        }
+
+        public  void Query(Receiver<ManagedExe> dst)
+        {
+            foreach(var path in Root.Files(true).Where(f => f.Is(Exe)))
+                if(FS.managed(path, out var assname))
+                    dst(new ManagedExe(path, assname));
+        }
+
+        public void Query(Receiver<NativeLib> dst)
+        {
+            foreach(var path in Root.Files(true))
+                if(path.Is(Lib))
+                    dst(new NativeLib(path));
+        }
+
+        public IEnumerable<FileModule> Query()
+        {
+            foreach(var path in Root.Files(true))
             {
-                foreach(var path in Root.Files(true))
+                if(path.Is(Dll))
                 {
-                   if(path.Is(Dll))
-                   {
-                        if(FS.managed(path, out var assname))
-                            yield return new ManagedDll(path, assname);
-                        else
-                            yield return new NativeDll(path);
-                   }
-                   else if(path.Is(Exe))
-                   {
-                        if(FS.managed(path, out var assname))
-                            yield return new ManagedExe(path, assname);
-                        else
-                            yield return new NativeExe(path);
-                   }
-                   else if(path.Is(Lib))
-                        yield return new NativeLib(path);
+                    if(FS.managed(path, out var assname))
+                        yield return new ManagedDll(path, assname);
+                    else
+                        yield return new NativeDll(path);
                 }
+                else if(path.Is(Exe))
+                {
+                    if(FS.managed(path, out var assname))
+                        yield return new ManagedExe(path, assname);
+                    else
+                        yield return new NativeExe(path);
+                }
+                else if(path.Is(Lib))
+                    yield return new NativeLib(path);
             }
         }
     }

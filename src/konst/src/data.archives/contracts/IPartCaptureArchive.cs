@@ -4,13 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IPartCaptureArchive : IPartCapturePaths
+    public interface ICaptureArchive : IPartCapturePaths
     {
 
     }
 
-    public interface IPartCaptureArchive<T> : IPartCaptureArchive
-        where T : struct, IPartCaptureArchive<T>
+    public interface ICaptureArchive<T> : ICaptureArchive
+        where T : struct, ICaptureArchive<T>
     {
 
     }

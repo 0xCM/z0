@@ -11,15 +11,15 @@ namespace Z0
 
     public struct ArchiveConfig : ITextual
     {
-        public FolderPath Root;
+        public FS.FolderPath Root;
 
         [MethodImpl(Inline)]
         public ArchiveConfig(FolderPath root)
-            => Root = root;
+            => Root = FS.dir(root.Name);
 
         [MethodImpl(Inline)]
         public ArchiveConfig(FS.FolderPath root)
-            => Root = FolderPath.Define(root.Name);
+            => Root = root;
 
         [MethodImpl(Inline)]
         public string Format()

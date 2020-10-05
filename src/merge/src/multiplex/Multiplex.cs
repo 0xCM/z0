@@ -13,19 +13,53 @@ namespace Z0
 
     public struct MultiplexSettings
     {
-        public FS.FolderPath[] BuildArchives;
+        public ArchiveConfig BuildArchive;
 
         public FS.FolderPath SlnRoot;
+
+        public ArchiveConfig CaptureArchive;
+
+        public ArchiveConfig MachineArchive;
     }
 
     public class Multiplex
     {
-        public TableSpan<ClrAssembly> Assemblies;
+        WfHost Host;
 
-        public TableSpan<NativeDll> Libraries;
+        MultiplexSettings Settings;
 
-        public BuildArchive BuildArchive;
+        // TableSpan<ClrAssembly> Assemblies;
 
-        public ArchiveConfig CaptureArchive;
+        // TableSpan<NativeDll> Libraries;
+
+        TableSpan<ClrAssembly> Assemblies;
+
+        IBuildArchive Build;
+
+        ICaptureArchive Capture;
+
+        IModuleArchive Modules;
+
+        public static Multiplex create(MultiplexSettings settings)
+        {
+            var mpx = new Multiplex();
+            mpx.Settings = settings;
+            mpx.Host = WfSelfHost.create(typeof(Multiplex));
+            mpx.Build = ApiArchives.build(mpx.Settings.BuildArchive);
+            mpx.Capture = ApiArchives.capture(mpx.Settings.CaptureArchive);
+            mpx.Modules = mpx.Build.Modules;
+            return mpx;
+        }
+
+        void LoadAssemblies()
+        {
+            Modules.Query((in ManagedDll x) => Receive(x));
+        }
+
+        void Receive(in ManagedDll src)
+        {
+
+        }
+
     }
 }

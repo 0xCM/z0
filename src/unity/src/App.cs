@@ -18,7 +18,7 @@ namespace Z0
         static FS.FolderPath BuildRoot = FS.dir(AppConfig.BuildRoot);
 
         static IModuleArchive CreateBuildModuleArchive()
-            => ModuleArchive.create(BuildRoot);
+            => ApiArchives.modules(new ArchiveConfig(BuildRoot));
 
         [MethodImpl(Inline)]
         static void Print<T>(IWfShell wf, ReadOnlySpan<T> src)

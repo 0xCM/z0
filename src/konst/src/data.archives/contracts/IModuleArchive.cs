@@ -4,9 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IModuleArchive : IFileArchive<ModuleArchive>
+    using System;
+    using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
 
+    public interface IModuleArchive : IFileArchive<ModuleArchive,FileModule>
     {
+        void Query(Receiver<ManagedDll> dst);
 
+        void Query(Receiver<NativeDll> dst);
+
+        void Query(Receiver<ManagedExe> dst);
+
+        void Query(Receiver<NativeLib> dst);
     }
 }

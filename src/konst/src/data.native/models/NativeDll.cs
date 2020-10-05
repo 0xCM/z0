@@ -9,6 +9,8 @@ namespace Z0
 
     using static Konst;
 
+    using api = Native;
+
     /// <summary>
     /// Identifies and represents a native module that lacks  an entry point
     /// </summary>
@@ -26,6 +28,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator FileModule(NativeDll src)
             => new FileModule(src.Path, src.Kind);
-    }
 
+        [MethodImpl(Inline)]
+        public NativeModule Load()
+            => api.load(Path);
+    }
 }

@@ -56,22 +56,22 @@ namespace Z0.Asm
             return result;
         }
 
-        Outcome<uint> ClearExtracts(IPartCaptureArchive archive, PartId part)
+        Outcome<uint> ClearExtracts(ICaptureArchive archive, PartId part)
             => Clear(part, archive.ExtractDir.Files(part));
 
-        Outcome<uint> ClearParsed(IPartCaptureArchive archive, PartId part)
+        Outcome<uint> ClearParsed(ICaptureArchive archive, PartId part)
             => Clear(part, archive.ParsedDir.Files(part));
 
-        Outcome<uint> ClearAsm(IPartCaptureArchive archive, PartId part)
+        Outcome<uint> ClearAsm(ICaptureArchive archive, PartId part)
             => Clear(part, archive.PartAsmDir(part).Files(part));
 
-        Outcome<uint> ClearX86(IPartCaptureArchive archive, PartId part)
+        Outcome<uint> ClearX86(ICaptureArchive archive, PartId part)
             => Clear(part, archive.X86Dir.Files(part));
 
-        Outcome<uint> ClearCil(IPartCaptureArchive archive, PartId part)
+        Outcome<uint> ClearCil(ICaptureArchive archive, PartId part)
             => Clear(part, archive.CilDir.Files(part));
 
-        void ClearPartFiles(IPartCaptureArchive archive, PartId part)
+        void ClearPartFiles(ICaptureArchive archive, PartId part)
         {
             var total = 0u;
             Wf.Running(Host, delimit(nameof(ClearPartFiles), part));

@@ -14,13 +14,37 @@ namespace Z0
 
     public readonly struct ApiArchives
     {
+        /// <summary>
+        /// Creates an archive over the output of a build
+        /// </summary>
+        /// <param name="root">The archive root</param>
         [MethodImpl(Inline), Op]
-        public static PathSettings defaults()
-        {
-            var dst = new PathSettings();
-            defaults(ref dst);
-            return dst;
-        }
+        public static IBuildArchive build(ArchiveConfig root)
+            => new BuildArchive(root);
+
+        /// <summary>
+        /// Creates an archive over both managed and unmanaged modules
+        /// </summary>
+        /// <param name="root">The archive root</param>
+        [MethodImpl(Inline), Op]
+        public static IModuleArchive modules(ArchiveConfig config)
+            => new ModuleArchive(config);
+
+        /// <summary>
+        /// Creates an archive over a set of capture artifacts
+        /// </summary>
+        /// <param name="root">The archive root</param>
+        [MethodImpl(Inline), Op]
+        public static ICaptureArchive capture(FS.FolderPath root)
+            => new CaptureArchive(root);
+
+        /// <summary>
+        /// Creates an archive over a set of capture artifacts
+        /// </summary>
+        /// <param name="root">The archive configuration</param>
+        [MethodImpl(Inline), Op]
+        public static ICaptureArchive capture(ArchiveConfig config)
+            => capture(config.Root);
 
         [Op]
         public static PartFiles partfiles(FS.FolderPath root)
@@ -47,20 +71,13 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static IPartCaptureArchive capture(FolderPath root)
-            => new PartCaptureArchive(root ?? EnvVars.Common.LogRoot, FolderName.Empty, FolderName.Empty);
+        public static ICaptureArchive capture(FolderPath root)
+            => new CaptureArchive(FS.dir(root.Name));
 
         [MethodImpl(Inline), Op]
-        public static IPartCaptureArchive capture(FS.FolderPath root)
-            => new PartCaptureArchive(root);
+        public static ICaptureArchive capture(FS.FolderPath root, PartId part)
+            => new CaptureArchive(root + FS.folder(part.Format()));
 
-        [MethodImpl(Inline), Op]
-        public static IPartCaptureArchive capture(PartId part)
-            => new PartCaptureArchive(EnvVars.Common.LogRoot, FolderName.Define("capture"), FolderName.Define(part.Format()));
-
-        [MethodImpl(Inline), Op]
-        public static IPartCaptureArchive capture(ArchiveConfig config)
-            => capture(FS.dir(config.Root.Name));
 
         [MethodImpl(Inline), Op]
         public static ApiHostCodeIndex index(ApiHostUri host, ApiCodeBlock[] code)

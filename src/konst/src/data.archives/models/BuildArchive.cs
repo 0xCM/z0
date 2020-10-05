@@ -9,19 +9,18 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using api = ApiArchives;
 
     public readonly struct BuildArchive : IBuildArchive
     {
-        [MethodImpl(Inline)]
-        public static IBuildArchive create(FS.FolderPath root)
-            => new BuildArchive(root);
+        public FS.FolderPath Root => Config.Root;
 
-        public FS.FolderPath Root {get;}
+        public ArchiveConfig Config {get;}
 
         [MethodImpl(Inline)]
-        public BuildArchive(FS.FolderPath root)
-        {
-            Root = root;
-        }
+        public BuildArchive(ArchiveConfig config)
+            => Config = config;
+
+        public IModuleArchive Modules => api.modules(Config);
     }
 }

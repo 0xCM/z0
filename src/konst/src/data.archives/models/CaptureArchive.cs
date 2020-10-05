@@ -9,20 +9,12 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct PartCaptureArchive : IPartCaptureArchive<PartCaptureArchive>
+    public readonly struct CaptureArchive : ICaptureArchive<CaptureArchive>
     {
         public FolderPath ArchiveRoot {get;}
 
         [MethodImpl(Inline)]
-        internal PartCaptureArchive(FolderPath root, FolderName area, FolderName subject)
-        {
-            ArchiveRoot = root.Create();
-        }
-
-        [MethodImpl(Inline)]
-        internal PartCaptureArchive(FS.FolderPath root)
-        {
-            ArchiveRoot = FolderPath.Define(root.Create().Name);
-        }
+        internal CaptureArchive(FS.FolderPath root)
+            => ArchiveRoot = FolderPath.Define(root.Create().Name);
     }
 }

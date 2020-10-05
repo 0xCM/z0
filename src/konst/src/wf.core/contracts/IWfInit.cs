@@ -79,7 +79,7 @@ namespace Z0
             => Logs.ErrorLog;
 
         FS.FolderPath ResDir
-            => FS.dir(Resources.Root.Name);
+            => Resources.Root;
 
         FS.FolderPath IndexDir
             => ResDir + FS.folder("index");

@@ -31,7 +31,7 @@ namespace Z0
 
         readonly IImmSpecializer Specializer;
 
-        public SpecializeImmStep(IWfShell wf, IAsmContext asm, IAsmFormatter formatter, IAsmDecoder decoder, FolderPath root)
+        public SpecializeImmStep(IWfShell wf, IAsmContext asm, IAsmFormatter formatter, IAsmDecoder decoder, FS.FolderPath root)
         {
             Wf = wf;
             Asm = asm;
