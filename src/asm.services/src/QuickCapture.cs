@@ -17,7 +17,7 @@ namespace Z0
     {
         readonly IAsmContext Context;
 
-        readonly BufferAllocation Buffer;
+        readonly NativeBuffer Buffer;
 
         readonly BufferTokens Tokens;
 
@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal QuickCapture(IAsmContext context, BufferAllocation buffer, BufferTokens tokens, ICaptureServiceProxy capture)
+        internal QuickCapture(IAsmContext context, NativeBuffer buffer, BufferTokens tokens, ICaptureServiceProxy capture)
         {
             Context = context;
             Tokens = tokens;

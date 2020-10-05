@@ -93,6 +93,18 @@ namespace Z0
         public override string ToString()
             => Format();
 
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => z.vnonz(Data);
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !z.vnonz(Data);
+        }
+
         public static ApiMetadataUri Empty => default;
     }
 }

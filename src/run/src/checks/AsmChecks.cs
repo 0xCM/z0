@@ -13,7 +13,7 @@ namespace Z0.Asm
 
         public BufferTokens Tokens {get;}
 
-        readonly BufferAllocation BufferAlloc;
+        readonly NativeBuffer BufferAlloc;
 
         public ICaptureExchange CaptureExchange {get;}
 

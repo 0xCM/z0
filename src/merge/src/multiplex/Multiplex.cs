@@ -13,9 +13,9 @@ namespace Z0
 
     public struct MultiplexSettings
     {
-        FS.FolderPath BuildOutput;
+        public FS.FolderPath[] BuildArchives;
 
-        FS.FolderPath SlnRoot;
+        public FS.FolderPath SlnRoot;
     }
 
     public class Multiplex

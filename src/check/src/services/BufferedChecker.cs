@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct BufferedChecker : IBufferedChecker
     {
-        readonly BufferAllocation BufferAlloc;
+        readonly NativeBuffer BufferAlloc;
 
         public readonly BufferTokens Tokens {get;}
 

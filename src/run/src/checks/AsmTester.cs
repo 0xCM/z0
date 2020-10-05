@@ -14,7 +14,7 @@ namespace Z0.Asm
     {
         public IAsmContext Context {get;}
 
-        readonly BufferAllocation BufferAlloc;
+        readonly NativeBuffer BufferAlloc;
 
         public BufferTokens Tokens {get;}
 
