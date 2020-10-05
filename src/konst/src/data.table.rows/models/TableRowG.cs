@@ -10,28 +10,26 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct TableRow<T,C0,C1>
-        where T : struct
+    public struct TableRow<C0,C1,C2>
     {
-        public T Source;
+        public C0 Col0;
 
-        public C0 Cell0;
+        public C1 Col1;
 
-        public C1 Cell1;
+        public C2 Col2;
     }
 
-    public readonly ref struct TableRows<T,C0,C1>
-        where T : struct
+    public readonly ref struct TableRows<C0,C1,C2>
     {
-        public readonly Span<TableRow<T,C0,C1>> Data;
+        public readonly Span<TableRow<C0,C1,C2>> Data;
 
         [MethodImpl(Inline)]
-        public TableRows(Span<TableRow<T,C0,C1>> src)
+        public TableRows(Span<TableRow<C0,C1,C2>> src)
         {
             Data = src;
         }
 
-        public ref TableRow<T,C0,C1> this[ulong index]
+        public ref TableRow<C0,C1,C2> this[ulong index]
         {
             [MethodImpl(Inline)]
             get => ref seek(Data, index);
@@ -44,20 +42,18 @@ namespace Z0
         }
     }
 
-    public struct TableRow<T,C0,C1,C2>
-        where T : struct
+    public struct TableRow<C0,C1,C2,C3>
     {
-        public T Source;
+        public C0 Col0;
 
-        public C0 Cell0;
+        public C1 Col1;
 
-        public C1 Cell1;
+        public C2 Col2;
 
-        public C2 Cell2;
+        public C3 Col3;
     }
 
     public readonly ref struct TableRows<T,C0,C1,C2>
-        where T : struct
     {
         public readonly Span<TableRow<T,C0,C1,C2>> Data;
 
@@ -80,22 +76,21 @@ namespace Z0
         }
     }
 
-    public struct TableRow<T,C0,C1,C2,C3>
-        where T : struct
+    public struct TableRow<C0,C1,C2,C3,C4>
     {
-        public T Source;
+        public C0 Col0;
 
-        public C0 Cell0;
+        public C1 Col1;
 
-        public C1 Cell1;
+        public C2 Col2;
 
-        public C2 Cell2;
+        public C3 Col3;
 
-        public C3 Cell3;
+        public C4 Col4;
+
     }
 
     public readonly ref struct TableRows<T,C0,C1,C2,C3>
-        where T : struct
     {
         public readonly Span<TableRow<T,C0,C1,C2,C3>> Data;
 
@@ -120,11 +115,8 @@ namespace Z0
 
     }
 
-    public struct TableRow<T,C0,C1,C2,C3,C4>
-        where T : struct
+    public struct TableRow<C0,C1,C2,C3,C4,C5>
     {
-        public T Source;
-
         public C0 Cell0;
 
         public C1 Cell1;
@@ -134,10 +126,11 @@ namespace Z0
         public C3 Cell3;
 
         public C4 Cell4;
+
+        public C5 Source;
     }
 
     public readonly ref struct TableRows<T,C0,C1,C2,C3,C4>
-        where T : struct
     {
         public readonly Span<TableRow<T,C0,C1,C2,C3,C4>> Data;
 
@@ -162,7 +155,6 @@ namespace Z0
     }
 
     public struct TableRow<T,C0,C1,C2,C3,C4,C5>
-        where T : struct
     {
         public T Source;
 
@@ -180,7 +172,6 @@ namespace Z0
     }
 
     public readonly ref struct TableRows<T,C0,C1,C2,C3,C4,C5>
-        where T : struct
     {
         public readonly Span<TableRow<T,C0,C1,C2,C3,C4,C5>> Data;
 

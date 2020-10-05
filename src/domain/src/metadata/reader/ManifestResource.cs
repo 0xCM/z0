@@ -15,26 +15,38 @@ namespace Z0
     partial class ClrDataReader
     {
         [MethodImpl(Inline), Op]
+        public ReadOnlySpan<ManifestResourceInfo> ManifestResources()
+        {
+            var handles = ManifestResourceHandles();
+            return Read(handles, alloc<ManifestResourceInfo>(handles.Length));
+        }
+
+        [MethodImpl(Inline), Op]
+        ReadOnlySpan<ManifestResourceHandle> ManifestResourceHandles()
+            => Reader.ManifestResources.ToReadOnlySpan();
+
+        [MethodImpl(Inline), Op]
         public ManifestResource Read(ManifestResourceHandle src)
             => Reader.GetManifestResource(src);
 
         [MethodImpl(Inline), Op]
-        public ref ManifestResource Read(ManifestResourceHandle src, ref ManifestResource dst)
+        public ref ManifestResource Read(ManifestResourceHandle src, out ManifestResource dst)
         {
             dst = Read(src);
             return ref dst;
         }
 
         [MethodImpl(Inline), Op]
-        public void Read(ReadOnlySpan<ManifestResourceHandle> src, Span<ManifestResource> dst)
+        public Span<ManifestResourceInfo> Read(ReadOnlySpan<ManifestResourceHandle> src, Span<ManifestResourceInfo> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                Read(skip(src,i), ref seek(dst,i));
+                Read(Read(skip(src,i), out var _), ref seek(dst,i));
+            return dst;
         }
 
         [MethodImpl(Inline), Op]
-        public ref ManifestResourceData Read(ManifestResource src, ref ManifestResourceData dst)
+        public ref ManifestResourceInfo Read(in ManifestResource src, ref ManifestResourceInfo dst)
         {
             dst.Name = Read(src.Name);
             dst.Offset = (ulong)src.Offset;

@@ -15,6 +15,10 @@ namespace Z0
     partial class ClrDataReader
     {
         [MethodImpl(Inline), Op]
+        ReadOnlySpan<MethodDefinitionHandle> MethodDefinitionHandles()
+            => Reader.MethodDefinitions.ToReadOnlySpan();
+
+        [MethodImpl(Inline), Op]
         public ref MethodBodyBlock Read(MethodDefinition src, ref MethodBodyBlock dst)
         {
             dst = Pe.GetMethodBody(src.RelativeVirtualAddress);

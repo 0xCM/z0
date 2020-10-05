@@ -11,6 +11,7 @@
     <ProjectReference Include="$(AsmModels)" />
     <ProjectReference Include="$(Derivatives)" />
     <ProjectReference Include="$(Xed)" />
+    <ProjectReference Include="$(Domain)" />
   </ItemGroup>
 
   <ItemGroup>

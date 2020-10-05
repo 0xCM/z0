@@ -18,23 +18,26 @@ namespace Z0
 
         readonly WfStepId Id;
 
+        readonly WfHost Host;
+
         [MethodImpl(Inline)]
         public WfRunner(IWfShell wf)
         {
             Wf = wf;
             Id = typeof(WfRunner);
-            Wf.Created(Id);
+            Host = WfSelfHost.create(typeof(WfRunner));
+            Wf.Created(Host);
 
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Id);
+            Wf.Disposed(Host);
         }
 
         void PrintLetterns()
         {
-            Wf.Running(Id);
+            Wf.Running(Host);
             var data = Resources.textres(typeof(AsciLetterLoText));
             var resources = @readonly(data);
             var rows = Resources.rows(data).View;
@@ -61,13 +64,13 @@ namespace Z0
             var archive = ApiHexArchives.create(Wf);
             var listing = archive.List();
             if(listing.Count == 0)
-                Wf.Warn(Id, $"No files found in archive with root {archive.Root}");
+                Wf.Warn(Host, $"No files found in archive with root {archive.Root}");
             Print(listing);
         }
 
         void Summarize(ApiCodeBlock src)
         {
-            Wf.Status(Id, src.OpUri);
+            Wf.Status(Host, src.OpUri);
         }
 
         ApiCodeBlockInfo[] DescribeCodeBlocks()
@@ -91,17 +94,43 @@ namespace Z0
             }
         }
 
-        [Op]
-        public void Run()
+        void Run33()
         {
             var ops = @readonly(Wf.Api.Operations.Select(ApiIdentify.identify2).Where(x => x.KindKey.IsUserApi()));
             var count = ops.Length;
             for(var i=0; i<count; i++)
             {
-                Wf.Status(Id, skip(ops,i).Format());
+                Wf.Status(Host, skip(ops,i).Format());
             }
             //XedRunner.Run(Wf);
             //XedEtlWfHost.create().Run(Wf);
+
+        }
+
+        FS.FilePath AppDataPath(FS.FileName file)
+            => Wf.AppData + file;
+
+        [Op]
+        public void Run()
+        {
+            const string Pattern = "{0,-8} | {1,-16} | {2}";
+            var header = string.Format(Pattern,"Index", "Offset", "Name");
+            using var reader = ClrDataReader.create(Wf,FS.path(@"J:\dev\projects\z0-starters\bin\lib\netcoreapp3.1\z0.res.capture.dll"));
+            var src = reader.ManifestResources();
+            var count = src.Length;
+            if(count != 0)
+            {
+                using var dst = AppDataPath(FS.file("ManifestResources.csv")).Writer();
+                dst.WriteLine(header);
+                for(var i=0; i<src.Length; i++)
+                {
+                    ref readonly var res = ref skip(src,i);
+                    dst.WriteLine(string.Format(Pattern, i, res.Offset, res.Name));
+                }
+            }
+
+            var allres = reader.Resources;
+            Wf.Status(Host, allres.Length);
 
         }
     }

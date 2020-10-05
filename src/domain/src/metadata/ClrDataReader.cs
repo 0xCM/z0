@@ -22,9 +22,9 @@ namespace Z0
         {
             Source = MemoryFile.open(src.Name);
             Wf = wf;
-            Pe = new PEReader(Source.BaseAddress.Pointer<byte>(), (int)Source.Size);
+            BasePointer = Source.BaseAddress.Pointer<byte>();
+            Pe = new PEReader(BasePointer, (int)Source.Size);
             ImageSize = Source.Size;
-            ImagePointer = Pe.GetEntireImage().Pointer;
             Reader = Pe.GetMetadataReader();
             CliMetadata = Pe.GetMetadata();
         }
@@ -32,13 +32,43 @@ namespace Z0
         public static ClrDataReader create(IWfShell wf, FS.FilePath src)
             => new ClrDataReader(wf,src);
 
-        public DebugMetadataHeader DebugMetadataHeader
-            => Reader.DebugMetadataHeader;
 
         public void Dispose()
         {
             Pe.Dispose();
             Source.Dispose();
+        }
+
+        public DirectoryEntry ResourceDirectory
+        {
+            [MethodImpl(Inline)]
+            get => PeHeaders.PEHeader.ResourceTableDirectory;
+        }
+
+        public PEHeaders PeHeaders
+        {
+            [MethodImpl(Inline)]
+            get => Pe.PEHeaders;
+        }
+
+        public ReadOnlySpan<SectionHeader> SectionHeaders
+        {
+            [MethodImpl(Inline)]
+            get => PeHeaders.SectionHeaders.ToReadOnlySpan();
+        }
+
+        [MethodImpl(Inline)]
+        public PEMemoryBlock SectonData(DirectoryEntry src)
+            => Pe.GetSectionData(src.RelativeVirtualAddress);
+
+        [MethodImpl(Inline)]
+        public unsafe ReadOnlySpan<byte> Read(PEMemoryBlock src)
+            => z.cover<byte>(src.Pointer, (uint)src.Length);
+
+        public ReadOnlySpan<byte> Resources
+        {
+            [MethodImpl(Inline)]
+            get => Read(SectonData(ResourceDirectory));
         }
 
         public IWfShell Wf;
@@ -51,7 +81,9 @@ namespace Z0
 
         ulong ImageSize;
 
-        readonly Ptr<byte> ImagePointer;
+        readonly Ptr<byte> BasePointer;
+
+        //readonly Ptr<byte> ImagePointer;
 
         readonly PEMemoryBlock CliMetadata;
     }

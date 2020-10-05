@@ -19,11 +19,11 @@ namespace Z0
         /// Captures <see cref='ManifestResource'/> data in usable form
         /// </summary>
         [StructLayout(LayoutKind.Sequential)]
-        public struct ManifestResourceData
+        public struct ManifestResourceInfo
         {
             public string Name;
 
-            public ulong Offset;
+            public MemoryAddress Offset;
 
             public ManifestResourceAttributes Attributes;
         }
