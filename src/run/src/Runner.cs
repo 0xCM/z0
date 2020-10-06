@@ -254,8 +254,7 @@ namespace Z0
             // }
 
             {
-                using var step = new EmitAsmSymbols(Wf);
-                step.Run();
+                EmitAsmSymbols.create().Run(Wf);
             }
 
             {
@@ -295,7 +294,7 @@ namespace Z0
 
         void EmitOpCodes()
         {
-            new EmitAsmOpCodesHost().Configure(Wf.Paths.DatabaseRoot + FS.file("AsmOpcodes",ArchiveExt.Csv)).Run(Wf);
+            new EmitAsmOpCodes().Configure(Wf.Paths.DatabaseRoot + FS.file("AsmOpcodes",ArchiveExt.Csv)).Run(Wf);
         }
 
         ReadOnlySpan<ApiCaptureBlock> Blocks(MethodInfo[] src)

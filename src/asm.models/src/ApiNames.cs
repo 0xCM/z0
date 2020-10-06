@@ -17,6 +17,10 @@ namespace Z0
     [LiteralProvider]
     readonly struct ApiNames
     {
+        public const string AsmData = asm + dot + data;
+
+        public const string AsmCodes = AsmData + dot + "codes";
+
         public const string AsmLang = asm + dot + lang;
 
         public const string AsmOperands =  AsmLang + dot + operands;

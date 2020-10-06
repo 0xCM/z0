@@ -12,7 +12,7 @@ namespace Z0
     using FN = ArchiveNames.Folders;
 
 
-    public interface IShellPaths : ILogPaths
+    public interface IShellPaths : ILogPaths, IDatabasePaths
     {
         ICaptureArchive PartCaptureArchive
             => ApiArchives.capture(FS.dir(LogRoot.Name) + FS.folder(FN.Capture));
@@ -130,7 +130,6 @@ namespace Z0
         /// </summary>
         FolderPath TestDataRoot
             => TestLogRoot + TestDataFolder;
-
 
         /// <summary>
         /// Creates a provider rooted at the current root directory for another application

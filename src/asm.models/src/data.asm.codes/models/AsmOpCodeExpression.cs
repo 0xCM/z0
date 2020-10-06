@@ -13,10 +13,6 @@ namespace Z0.Asm
     {
         public readonly asci32 Value;
 
-        // [MethodImpl(Inline)]
-        // public static implicit operator AsmOpCodeExpression(string src)
-        //     => AsmOpCodes.from(src);
-
         [MethodImpl(Inline)]
         public AsmOpCodeExpression(asci32 src)
             => Value = src;

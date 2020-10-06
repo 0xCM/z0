@@ -30,7 +30,6 @@ namespace Z0
 
     }
 
-
     public interface IFileArchive<H,F> : IFileArchive<H>
         where H : IFileArchive<H>
     {

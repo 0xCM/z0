@@ -10,16 +10,20 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct FileArchive : IFileArchive<FileArchive>
+    public struct DatabaseArchive : IFileArchive<DatabaseArchive>, IDatabasePaths
     {
-        public FS.FolderPath Root {get;}
+        public ArchiveConfig Settings {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator FileArchive(FS.FolderPath src)
-            => new FileArchive(src);
+        public DatabaseArchive(ArchiveConfig config)
+        {
+            Settings = config;
+        }
 
-        [MethodImpl(Inline)]
-        public FileArchive(FS.FolderPath root)
-            => Root = root;
+        public FS.FolderPath Root
+            => Settings.Root;
+
+        FS.FolderPath IDatabasePaths.DbRoot
+            => Settings.Root;
     }
 }
