@@ -5,10 +5,10 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.Intrinsics;
-    using System.Security;
 
-    [SuppressUnmanagedCodeSecurity]
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IDataResolver
     {
         TypeWidth TargetWidth {get;}
@@ -23,6 +23,7 @@ namespace Z0
             => RefiningType == typeof(void);
     }
 
+    [Free]
     public interface IDataResolver<D> : IDataResolver
         where D : struct
     {
@@ -39,7 +40,7 @@ namespace Z0
     /// <typeparam name="D">The resolution type</typeparam>
     /// <typeparam name="C">The cell type, bitwise equivalent to the primitive resolution type</typeparam>
     /// <typeparam name="T">The primitive resolution type, bitwise equivalent to the cellular type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IDataResolver<W,D,C,T> : ICellResolver<W,C,T>
         where W : unmanaged, ITypeWidth
         where D : unmanaged
@@ -66,7 +67,7 @@ namespace Z0
     /// <typeparam name="C">The cell type, bitwise equivalent to the primitive resolution type</typeparam>
     /// <typeparam name="E">The refining type</typeparam>
     /// <typeparam name="T">The primitive resolution type, bitwise equivalent to the cellular type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IDataResolver<W,D,C,E,T> : IDataResolver<W,D,C,T>, IRefiningResolver<W,E,T>
         where W : unmanaged, ITypeWidth
         where D : unmanaged

@@ -8,7 +8,9 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Security;
 
-    [SuppressUnmanagedCodeSecurity]
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IPrimalResolver : IDataResolver
     {
         Type PrimalType {get;}
@@ -19,7 +21,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="W">The resolution width</typeparam>
     /// <typeparam name="T">The primitive resolution type</typeparam>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IPrimalResolver<W,T> : IPrimalResolver, IDataResolver<T>
         where W : unmanaged, ITypeWidth
         where T : unmanaged

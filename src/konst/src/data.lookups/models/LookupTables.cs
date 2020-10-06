@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Table
+    partial struct Lookups
     {
         public readonly struct LuFx64<K>
             where K : unmanaged

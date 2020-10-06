@@ -31,7 +31,7 @@ namespace Z0.Asm
             BufferSize = buffersize;
             Context = context;
             Dispatcher = Evaluate.dispatcher(random, context, buffersize);
-            CodeArchive = ApiArchives.capture(root);
+            CodeArchive = Archives.capture(root);
             ApiSet = context.Api;
         }
 

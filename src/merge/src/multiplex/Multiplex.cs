@@ -45,8 +45,8 @@ namespace Z0
             var mpx = new Multiplex();
             mpx.Settings = settings;
             mpx.Host = WfSelfHost.create(typeof(Multiplex));
-            mpx.Build = ApiArchives.build(mpx.Settings.BuildArchive);
-            mpx.Capture = ApiArchives.capture(mpx.Settings.CaptureArchive);
+            mpx.Build = Archives.build(mpx.Settings.BuildArchive);
+            mpx.Capture = Archives.capture(mpx.Settings.CaptureArchive);
             mpx.Modules = mpx.Build.Modules;
             return mpx;
         }

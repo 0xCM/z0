@@ -14,6 +14,19 @@ namespace Z0
     using F = ImageStringField;
     using W = ImageStringFieldWidth;
 
+
+    [WfHost]
+    public sealed class EmitPartStrings : WfHost<EmitPartStrings>
+    {
+        public const string EmissionType = ImageStringRecords.DataType;
+
+        public static WfStepId StepId
+            => WfCore.step<EmitPartStrings>();
+
+        public static string ExtName(PartStringKind kind)
+            => (kind == PartStringKind.System ? ImageStringRecords.SystemKindExt : ImageStringRecords.UserKindExt).ToLower();
+    }
+
     ref struct EmitPartStringsStep
     {
         /// <summary>

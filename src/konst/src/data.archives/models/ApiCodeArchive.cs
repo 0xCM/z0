@@ -64,54 +64,19 @@ namespace Z0
             => ArchiveRoot.Files(owner, FileExtensions.HexLine, true);
 
         public IEnumerable<ApiHostCodeIndex> Indices(params PartId[] owners)
-        {
-            if(owners.Length != 0)
-            {
-                foreach(var owner in owners)
-                foreach(var file in Files(owner))
-                {
-                    var idx = Index(file);
-                    if(idx.IsNonEmpty)
-                        yield return idx;
-                }
-            }
-            else
-            {
-                foreach(var file in Files())
-                {
-                    var idx = Index(file);
-                    if(idx.IsNonEmpty)
-                        yield return idx;
-                }
-            }
-        }
+            => api.indices(this, owners);
 
         /// <summary>
         /// Enumerates the content of all archived files
         /// </summary>
         public IEnumerable<ApiCodeBlock> Read()
-        {
-            var list = List();
-            var iCount = list.Count;
-            for(var i=0; i<iCount; i++)
-            {
-                var path = list[i].Path;
-                var items = api.blocks(path);
-                var jCount = items.Length;
-                for(var j=0; j<jCount; j++)
-                    yield return items[j];            }
-        }
+            => api.read(this);
 
         /// <summary>
         /// Enumerates the content of archived files owned by a specified part
         /// </summary>
         public IEnumerable<ApiCodeBlock> Read(PartId owner)
-        {
-            foreach(var file in Files(owner))
-            foreach(var item in Read(file))
-                if(item.IsNonEmpty)
-                    yield return item;
-        }
+            => api.read(this, owner);
 
         /// <summary>
         /// Reads the archived files with names that satisfy a specified predicate
@@ -141,20 +106,7 @@ namespace Z0
             => Read(ArchiveRoot + FileName.define(id, FileExtensions.HexLine));
 
         public ApiHostCodeIndex Index(FilePath src)
-        {
-            var uri = ApiUriParser.host(src.FileName);
-            if(uri.Failed || uri.Value.IsEmpty)
-            {
-                return ApiHostCodeIndex.Empty;
-            }
-
-            var dst = z.list<ApiCodeBlock>();
-            foreach(var item in read(src))
-                if(item.IsNonEmpty)
-                    dst.Add(item);
-
-            return ApiArchives.index(uri.Value, dst.Array());
-        }
+            => api.index(this,src);
 
         static FilePath[] files(FolderPath root)
             => root.Files(FileExtensions.HexLine, true).Array();

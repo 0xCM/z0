@@ -19,6 +19,8 @@ namespace Z0
     {
         internal readonly Vector256<ulong> Data;
 
+        public CellKind Kind => CellKind.Cell256;
+
         public Vector256<ulong> Content
         {
             [MethodImpl(Inline)]

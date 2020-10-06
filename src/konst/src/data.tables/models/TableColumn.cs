@@ -25,5 +25,8 @@ namespace Z0
             Name = name;
             Width = width;
         }
+
+        public string Format()
+            => String.Concat($"{Index}".PadLeft(2,'0'), Space, $"{Width}".PadLeft(2,'0'), Space, Name);
     }
 }

@@ -7,13 +7,15 @@ namespace Z0
     using System;
     using System.Security;
 
-    [SuppressUnmanagedCodeSecurity]
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface ICellular
     {
         Count CellCount {get;}
     }
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ICellular<T> : ICellular
     {
         T[] Cells {get;}
@@ -25,7 +27,7 @@ namespace Z0
             => ref Cells[index];
     }
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface ICellular<T,K> : ICellular<T>
         where K : unmanaged, Enum
     {

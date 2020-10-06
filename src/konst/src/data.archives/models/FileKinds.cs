@@ -10,19 +10,31 @@ namespace Z0
     using static ArchiveNames.Ext;
 
     using X = ArchiveExt;
+    using K = FileKinds;
+
+    public readonly struct FileKind
+    {
+        public static K.Csv Csv => default;
+
+        public static K.Asm Asm => default;
+
+        public static K.Dll Dll => default;
+
+        public static K.Cil Cil => default;
+    }
 
     public readonly struct FileKinds
     {
         [FileKind]
         public readonly struct PCsv : IFileKind<PCsv>
         {
-            public const string Id = nameof(PCsv);
+
         }
 
         [FileKind]
         public readonly struct XCsv : IFileKind<XCsv>
         {
-            public const string Id = nameof(XCsv);
+
         }
 
         [FileKind]
@@ -68,7 +80,7 @@ namespace Z0
         [FileKind]
         public readonly struct Doc : IFileKind<Doc>
         {
-            public const string Id = nameof(Doc);
+
         }
 
         [FileKind]
@@ -94,19 +106,28 @@ namespace Z0
         [FileKind]
         public readonly struct Hex : IFileKind<Hex>
         {
+            public string Name
+                => hex;
 
+            public static implicit operator FS.FileExt(Hex src)
+                => X.Hex;
         }
 
         [FileKind]
         public readonly struct Json : IFileKind<Json>
         {
+            public string Name
+                => json;
 
+            public static implicit operator FS.FileExt(Json src)
+                => X.Json;
         }
 
         [FileKind]
         public readonly struct Txt : IFileKind<Txt>
         {
-            public const string Id = nameof(Txt);
+            public static implicit operator FS.FileExt(Txt src)
+                => X.Txt;
         }
 
         [FileKind]
@@ -117,6 +138,16 @@ namespace Z0
 
             public static implicit operator FS.FileExt(Xml src)
                 => X.Xml;
+        }
+
+        [FileKind]
+        public readonly struct Log : IFileKind<Log>
+        {
+            public string Name
+                => log;
+
+            public static implicit operator FS.FileExt(Log src)
+                => X.Log;
         }
     }
 }

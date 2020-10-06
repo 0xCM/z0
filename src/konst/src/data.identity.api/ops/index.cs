@@ -32,7 +32,7 @@ namespace Z0
         {
             var members = locator.Locate(api.FindHost(host).Require());
             var idx = index(members);
-            var archive =  ApiArchives.capture(root);
+            var archive =  Archives.capture(root);
             var paths =  HostCaptureArchive.create(root, host);
             var code = ApiCodeReader.Service.Read(paths.HostX86Path);
             var opIndex =  ApiCodeQuery.Service.CreateIndex(code);

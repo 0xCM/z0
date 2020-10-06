@@ -9,7 +9,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    [SuppressUnmanagedCodeSecurity]
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface ITableArchive : IDatabaseArchive
     {
         Option<FilePath> Deposit<F,R>(R[] src, FS.FileName name)

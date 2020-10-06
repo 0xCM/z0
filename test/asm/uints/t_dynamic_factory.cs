@@ -130,7 +130,7 @@ namespace Z0.Asm
         {
             var dId = ApiIdentify.build(name, w, kind, false);
             var gId = ApiIdentify.build(name, w, kind, true);
-            var archive = ApiHexArchives.create(FS.dir(TargetArchive.X86Dir.Name));
+            var archive = Archives.hex(FS.dir(TargetArchive.X86Dir.Name));
             var dBits = archive.Read(ApiQuery.host<dvec>().Uri).Where(x => x.Id == dId).Single();
             var gBits = archive.Read(ApiQuery.host<gvec>().Uri).Where(x => x.Id == gId).Single();
             return AsmCheck.Match(K.BinaryOp, w, dBits, gBits, dst);

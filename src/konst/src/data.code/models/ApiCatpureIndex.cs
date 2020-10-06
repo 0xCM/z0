@@ -81,12 +81,12 @@ namespace Z0
             => Memories[location];
 
         [MethodImpl(Inline)]
-        public ApiHostCodeBlocks HostCodeBlocks(ApiHostUri id)
-        {
-            var y = PartIndex[id];
-            var x = ApiArchives.index(id, y);
-            return new ApiHostCodeBlocks(id, x.Code);
-        }
+        public ApiHostCodeIndex HostCodeIndex(ApiHostUri host)
+            => Archives.index(host, PartIndex[host]);
+
+        [MethodImpl(Inline)]
+        public ApiHostCodeBlocks HostCodeBlocks(ApiHostUri host)
+            => new ApiHostCodeBlocks(host, HostCodeIndex(host).Code);
 
         [MethodImpl(Inline)]
         public ApiPartCodeBlocks PartCodeBlocks(PartId id)

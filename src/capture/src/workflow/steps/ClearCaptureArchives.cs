@@ -38,7 +38,7 @@ namespace Z0.Asm
         /// </summary>
         void Clear(PartId[] parts)
         {
-            var archive = ApiArchives.capture(Config.TargetArchive.Root);
+            var archive = Archives.capture(Config.TargetArchive.Root);
             foreach(var part in parts)
             ClearPartFiles(archive,part);
         }

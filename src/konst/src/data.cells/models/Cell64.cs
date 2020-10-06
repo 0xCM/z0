@@ -13,6 +13,8 @@ namespace Z0
     {
         internal readonly ulong Data;
 
+        public CellKind Kind => CellKind.Cell64;
+
         public ulong Content
         {
             [MethodImpl(Inline)]

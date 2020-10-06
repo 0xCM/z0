@@ -9,7 +9,8 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using api = ApiArchives;
+
+    using api = Archives;
 
     public readonly struct BuildArchive : IBuildArchive
     {

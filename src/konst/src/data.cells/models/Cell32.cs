@@ -14,6 +14,8 @@ namespace Z0
     {
         internal readonly uint Data;
 
+        public CellKind Kind => CellKind.Cell32;
+
         [MethodImpl(Inline)]
         public static Cell32 init(uint src)
             => new Cell32(src);

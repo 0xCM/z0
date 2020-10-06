@@ -9,12 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    /// <summary>
-    /// Specifies salient characteristics of a tabular field predicated
-    /// on an enumeration value
-    /// </summary>
-    public readonly struct TabularField<F> : ITextual
-        where F : unmanaged, Enum
+    public readonly struct TableColumn<F> : ITextual
+        where F : unmanaged
     {
         /// <summary>
         /// The field specifier
@@ -37,7 +33,7 @@ namespace Z0
         public readonly int Width;
 
         [MethodImpl(Inline)]
-        public TabularField(F id, string name, int index, int width)
+        public TableColumn(F id, string name, int index, int width)
         {
             Id = id;
             Name = name;

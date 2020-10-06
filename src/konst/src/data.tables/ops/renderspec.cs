@@ -23,13 +23,13 @@ namespace Z0
             var literals = @readonly(index<F>().Literals);
             var count = literals.Length;
             var headBuffer = sys.alloc<string>(count);
-            var fieldBuffer = sys.alloc<TabularField<F>>(count);
+            var fieldBuffer = sys.alloc<TableColumn<F>>(count);
             var fields = span(fieldBuffer);
 
             for(var i=0u; i<count; i++)
             {
                 ref readonly var literal = ref skip(literals, i);
-                seek(fields,i) = new TabularField<F>(literal, literal.ToString(), (int)i, (short)(uint32(literal) >> WidthOffset));
+                seek(fields,i) = new TableColumn<F>(literal, literal.ToString(), (int)i, (short)(uint32(literal) >> WidthOffset));
             }
 
             return new TableRenderSpec<F>(fieldBuffer);

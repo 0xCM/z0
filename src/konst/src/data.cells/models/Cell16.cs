@@ -15,6 +15,8 @@ namespace Z0
     {
         internal readonly ushort Data;
 
+        public CellKind Kind => CellKind.Cell16;
+
         public ushort Content
         {
             [MethodImpl(Inline)]

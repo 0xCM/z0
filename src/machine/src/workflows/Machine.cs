@@ -19,11 +19,15 @@ namespace Z0
 
         readonly WfHost Host;
 
+
+        ApiCaptureIndex Index;
+
         internal Machine(WfCaptureState state, WfHost host)
         {
             State = state;
             Wf = State.Wf;
             Host = host;
+            Index = default;
             Wf.Created(Host, delimit(Wf.Api.PartIdentities));
         }
 
@@ -38,22 +42,21 @@ namespace Z0
 
             try
             {
-                Run(new EmitFieldMetadata());
-                Run(new ProcessPartFiles());
-                Run(new EmitSectionHeadersHost());
-                Run(new EmitImageConstants());
-                Run(new EmitLocatedPartsHost());
-                Run(new EmitStringRecords());
-                Run(new EmitProjectDocsHost());
-                Run(new EmitResBytes());
-                Run(new EmitImageBlobs());
-                Run(new EmitPartCilHost());
-                Run(new EmitEnumCatalogHost());
-                Run(new EmitFieldLiterals());
-                Run(new EmitContentCatalog());
-                Run(new EmitBitMasksHost());
-                CreateCaptureIndex.run(Wf, State);
-
+                EmitFieldMetadata.create().Run(Wf);
+                ProcessPartFiles.create().Run(Wf, AsmContextProvider.create(State.Asm));
+                EmitSectionHeadersHost.create().Run(Wf);
+                EmitImageConstants.create().Run(Wf);
+                EmitLocatedPartsHost.create().Run(Wf);
+                EmitStringRecords.create().Run(Wf);
+                EmitProjectDocsHost.create().Run(Wf);
+                EmitImageBlobs.create().Run(Wf);
+                EmitPartCilHost.create().Run(Wf);
+                EmitEnumCatalogHost.create().Run(Wf);
+                EmitFieldLiterals.create().Run(Wf);
+                EmitContentCatalog.create().Run(Wf);
+                EmitBitMasksHost.create().Run(Wf);
+                BuildCaptureIndex.run(Wf, State, out Index);
+                EmitResBytes.create().WithIndex(Index).Run(Wf);
             }
             catch(Exception e)
             {
@@ -62,47 +65,5 @@ namespace Z0
 
             Wf.Ran(Host);
         }
-
-        void Run(EmitImageConstants host)
-            => host.Run(Wf);
-
-        void Run(EmitFieldMetadata host)
-            => host.Run(Wf);
-
-        void Run(EmitEnumCatalogHost host)
-            => host.Run(Wf);
-
-        void Run(EmitFieldLiterals host)
-            => host.Run(Wf);
-
-        void Run(EmitPartCilHost host)
-            => host.Run(Wf);
-
-        void Run(ProcessPartFiles host)
-            => host.Run(Wf, AsmContextProvider.create(State.Asm));
-
-        void Run(EmitContentCatalog host)
-            => host.Run(Wf);
-
-        void Run(EmitBitMasksHost host)
-            => host.Run(Wf);
-
-        void Run(EmitProjectDocsHost host)
-            => host.Run(Wf);
-
-        void Run(EmitStringRecords host)
-            => host.Run(Wf);
-
-        void Run(EmitImageBlobs host)
-            => host.Run(Wf);
-
-        void Run(EmitSectionHeadersHost host)
-            => host.Run(Wf);
-
-        void Run(EmitLocatedPartsHost host)
-            => host.Run(Wf);
-
-        void Run(EmitResBytes host)
-            => host.Run(Wf);
     }
 }

@@ -13,6 +13,8 @@ namespace Z0
     {
         internal readonly byte Data;
 
+        public CellKind Kind => CellKind.Cell8;
+
         public byte Content
         {
             [MethodImpl(Inline)]

@@ -15,7 +15,7 @@ namespace Z0
         /// <summary>
         /// The field specifications
         /// </summary>
-        public readonly TabularField<F>[] Fields;
+        public readonly TableColumn<F>[] Fields;
 
         /// <summary>
         /// The column header names
@@ -31,7 +31,7 @@ namespace Z0
         public char Delimiter
             => FieldDelimiter;
 
-        public ref readonly TabularField<F> this[int i]
+        public ref readonly TableColumn<F> this[int i]
         {
             [MethodImpl(Inline)]
             get => ref Fields[i];
@@ -41,22 +41,22 @@ namespace Z0
             => src.Generalize();
 
         [MethodImpl(Inline)]
-        public TableRenderSpec(TabularField<F>[] fields)
+        public TableRenderSpec(TableColumn<F>[] columns)
         {
-            Fields = fields;
-            Headers = fields.Map(f => f.Name);
+            Fields = columns;
+            Headers = columns.Map(f => f.Name);
         }
 
         public TableRenderSpec Generalize()
         {
             var src = this;
             var count = src.FieldCount;
-            var fields = sys.alloc<TabularField>(count);
+            var fields = sys.alloc<TableColumn>(count);
             var headers = sys.alloc<string>(count);
             for(var i=0; i<count; i++)
             {
                 ref readonly var x = ref src[i];
-                fields[i] = new TabularField(x.Name, x.Index, x.Width);
+                fields[i] = new TableColumn((ushort)x.Index, x.Name, (ushort)x.Width);
                 headers[i] = x.Name;
             }
             return new TableRenderSpec(fields, headers, src.Delimiter, src.EmitHeader);

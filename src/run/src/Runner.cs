@@ -294,7 +294,7 @@ namespace Z0
 
         void EmitOpCodes()
         {
-            new EmitAsmOpCodes().Configure(Wf.Paths.DatabaseRoot + FS.file("AsmOpcodes",ArchiveExt.Csv)).Run(Wf);
+            new EmitAsmOpCodes().Configure(Wf.Paths.DbRoot + FS.file("AsmOpcodes",ArchiveExt.Csv)).Run(Wf);
         }
 
         ReadOnlySpan<ApiCaptureBlock> Blocks(MethodInfo[] src)

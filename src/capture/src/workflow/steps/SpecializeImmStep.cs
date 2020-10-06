@@ -36,7 +36,7 @@ namespace Z0
             Wf = wf;
             Asm = asm;
             Formatter = formatter;
-            CodeArchive = ApiArchives.capture(root);
+            CodeArchive = Archives.capture(root);
             Specializer = Capture.Services.ImmSpecializer(decoder);
             ApiCollector = Identities.Services.Collector;
             Wf.Created(StepId);

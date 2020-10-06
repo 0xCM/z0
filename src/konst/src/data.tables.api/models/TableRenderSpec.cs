@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// The field specifications
         /// </summary>
-        public readonly TabularField[] Fields;
+        public readonly TableColumn[] Fields;
 
         /// <summary>
         /// The column header names
@@ -37,7 +37,7 @@ namespace Z0
         public readonly int FieldCount;
 
         [MethodImpl(Inline)]
-        internal TableRenderSpec(TabularField[] fields, string[] headers, char delimiter = Chars.Pipe, bool header = true)
+        internal TableRenderSpec(TableColumn[] fields, string[] headers, char delimiter = Chars.Pipe, bool header = true)
         {
             Fields = fields;
             Headers = headers;
@@ -46,7 +46,7 @@ namespace Z0
             FieldCount = fields.Length;
         }
 
-        public ref readonly TabularField this[int i]
+        public ref readonly TableColumn this[int i]
         {
             [MethodImpl(Inline)]
             get => ref Fields[i];
@@ -60,20 +60,6 @@ namespace Z0
             var dst = text.build();
             for(var i=0; i< FieldCount; i++)
                 dst.AppendLine(this[i].Format());
-            return dst.ToString();
-        }
-
-        public string FormatHeader()
-        {
-            var dst = text.build();
-            for(var i=0; i<FieldCount; i++)
-            {
-                ref readonly var field = ref this[i];
-                dst.Append(Delimiter);
-                dst.Append(Space);
-                dst.Append(field.Name.PadRight(field.Width));
-            }
-
             return dst.ToString();
         }
 

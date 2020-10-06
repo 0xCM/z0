@@ -8,17 +8,26 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static EmitImageBlobs;
     using static z;
 
     using F = ImageBlobField;
     using W = ImageBlobFieldWidth;
 
-    public ref struct EmitImageBlobsStep
+    [WfHost]
+    public sealed class EmitImageBlobs : WfHost<EmitImageBlobs>
     {
-        public uint EmissionCount;
+        protected override void Execute(IWfShell wf)
+        {
+            using var step = new EmitImageBlobsStep(wf,this);
+            step.Run();
+        }
+    }
 
-        public readonly FolderPath TargetDir;
+    ref struct EmitImageBlobsStep
+    {
+        const string DataType = "ImageBlob";
+
+        public uint EmissionCount;
 
         readonly IWfShell Wf;
 
@@ -32,7 +41,6 @@ namespace Z0
             Wf = wf;
             Host = host;
             Parts = Wf.Api.Storage;
-            TargetDir = wf.ResourceRoot + FolderName.Define("blobs");
             EmissionCount = 0;
             Wf.Created(Host);
         }
@@ -61,8 +69,7 @@ namespace Z0
 
         void Emit(IPart part)
         {
-            var id = part.Id;
-            var dstPath =  TargetDir + FileName.define(id.Format(), "blob.csv");
+            var dstPath = Wf.Paths.Table("image.blobs", string.Concat(part.Id.Format(), "blob"));
             var data = Read(part);
             var count = (uint)data.Length;
             var target = sink();
@@ -75,17 +82,17 @@ namespace Z0
 
             EmissionCount += count;
 
-            Wf.EmittedTable<ImageBlob>(Host, count, FS.path(dstPath.Name));
+            Wf.EmittedTable<ImageBlob>(Host, count, dstPath);
         }
 
         public void Run()
         {
-            Wf.Running(Host, delimit(EmissionType, TargetDir));
+            Wf.Running(Host, DataType);
 
             foreach(var part in Parts)
                 Emit(part);
 
-            Wf.Ran(Host, delimit(EmissionType, EmissionCount, TargetDir));
+            Wf.Ran(Host, delimit(DataType, EmissionCount));
         }
 
         public void Dispose()

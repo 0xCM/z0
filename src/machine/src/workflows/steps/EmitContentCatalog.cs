@@ -37,7 +37,7 @@ namespace Z0
         {
             Wf = wf;
             Host = host;
-            TargetPath =  Wf.Paths.DatabaseRoot + FS.file("documents","csv");
+            TargetPath =  Wf.Paths.Doc("documents", FileKind.Csv);
             EmissionCount = 0;
             Wf.Created(Host);
         }

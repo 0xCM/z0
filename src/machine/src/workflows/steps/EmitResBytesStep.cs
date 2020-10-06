@@ -12,46 +12,64 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly ref struct EmitResBytesStep
+    [WfHost]
+    public sealed class EmitResBytes : WfHost<EmitResBytes>
+    {
+        ApiCaptureIndex Index;
+
+        public EmitResBytes WithIndex(in ApiCaptureIndex index)
+        {
+            Index = index;
+            return this;
+        }
+
+        protected override void Execute(IWfShell wf)
+        {
+            using var step = new EmitResBytesStep(wf, this, Index);
+            step.Run();
+        }
+    }
+
+    readonly ref struct EmitResBytesStep
     {
         const string ProjectName = "bytes";
 
         readonly ApiCodeArchive Archive;
 
         readonly WfHost Host;
+
         public readonly FS.FolderPath SourceDir;
 
         public readonly FS.FolderPath TargetDir;
 
         readonly IWfShell Wf;
 
-        public EmitResBytesStep(IWfShell context, WfHost host)
+        readonly ApiCaptureIndex Index;
+
+        public EmitResBytesStep(IWfShell context, WfHost host, in ApiCaptureIndex index)
         {
             Wf = context;
             Host = host;
+            Index = index;
             SourceDir = FS.dir(context.Paths.AppCaptureRoot.Name);
             TargetDir = FS.dir((context.Paths.ResourceRoot + FolderName.Define(ProjectName)).Name);
-            Archive = ApiHexArchives.create(FS.dir(SourceDir.Name));
+            Archive = Archives.hex(FS.dir(SourceDir.Name));
             Wf.Created(Host);
         }
 
         public void Run()
         {
             Wf.Running(Host, flow(SourceDir, TargetDir));
-            var archive = ApiHexArchives.create(FS.dir(SourceDir.Name));
-            var indices = archive.Indices();
-            foreach(var index in indices)
-            {
-                Wf.Status(Host, $"Loaded {index.Code.Length} {index.Host} code blocks");
 
-                try
-                {
-                    Emit(index, TargetDir);
-                }
-                catch(Exception e)
-                {
-                    Wf.Error(Host, e);
-                }
+            try
+            {
+                foreach(var host in Index.Hosts)
+                    if(host.IsNonEmpty)
+                        Emit(Index.HostCodeIndex(host), TargetDir);
+            }
+            catch(Exception e)
+            {
+                Wf.Error(Host, e);
             }
 
             Wf.Ran(Host, flow(SourceDir, TargetDir));

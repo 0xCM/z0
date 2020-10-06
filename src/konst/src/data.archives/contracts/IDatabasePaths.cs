@@ -9,7 +9,17 @@ namespace Z0
 
     public interface IDatabasePaths
     {
-        FS.FolderPath DatabaseRoot
+        FS.FolderPath DbRoot
             => FS.dir(@"j:\database");
+
+        FS.FilePath Table(string name)
+            => DbRoot + FS.folder("tables") + FS.file(name,FileExtensions.Csv);
+
+        FS.FilePath Table(string schema, string name)
+            => DbRoot + FS.folder("tables") + FS.folder(schema) + FS.file(name,FileExtensions.Csv);
+
+        FS.FilePath Doc(string name, FS.FileExt ext)
+            => DbRoot + FS.folder("docs") + FS.file(name, ext);
+
     }
 }

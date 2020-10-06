@@ -8,10 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Security;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Characterizes a type that occupies a fixed amount of space at runtime
     /// </summary>
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IDataCell : ITextual
     {
         /// <summary>
@@ -22,6 +24,7 @@ namespace Z0
         ByteSize Size {get;}
     }
 
+    [Free]
     public interface IDataCell<T> : IDataCell
         where T : struct
     {
@@ -38,7 +41,7 @@ namespace Z0
             => (NumericWidth)(z.size<T>()*8);
     }
 
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IDataCell<C,T> : IDataCell<T>, IEquatable<C>, INullary<C,T>
         where C : struct, IDataCell<C,T>
         where T : struct
@@ -46,8 +49,7 @@ namespace Z0
 
     }
 
-
-    [SuppressUnmanagedCodeSecurity]
+    [Free]
     public interface IDataCell<C,W,T> : IDataCell<C,T>
         where C : unmanaged, IDataCell<C,W,T>
         where W : unmanaged, ITypeWidth

@@ -59,7 +59,7 @@ namespace Z0
         WfShell<S> WithState<S>(S src);
 
         IDatabaseArchive Db()
-            => new DatabaseArchive(new ArchiveConfig(Paths.DatabaseRoot));
+            => new DatabaseArchive(new ArchiveConfig(Paths.DbRoot));
 
         FS.FolderPath ArchiveRoot
             => FS.dir(@"k:/z0/archives");

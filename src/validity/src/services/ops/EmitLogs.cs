@@ -34,14 +34,6 @@ namespace Z0
         }
 
 
-        static FilePath AppendCaseResults(FolderName subdir, string basename,  TestCaseRecord[] records)
-        {
-            if(records.Length == 0)
-                return FilePath.Empty;
-
-            return TestLog.Create().Write(records, subdir, basename, LogWriteMode.Overwrite, Chars.Pipe, true, FileExtension.Define("csv"));
-        }
-
         static FilePath EmitBenchmarkLog<R>(string basename, R[] records, LogWriteMode mode = LogWriteMode.Create, bool header = true, char delimiter = Chars.Pipe)
             where R : ITabular
         {

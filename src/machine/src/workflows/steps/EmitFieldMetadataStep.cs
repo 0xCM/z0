@@ -9,7 +9,17 @@ namespace Z0
 
     using static Konst;
 
-    public readonly ref struct EmitFieldMetadataStep
+    [WfHost]
+    public sealed class EmitFieldMetadata : WfHost<EmitFieldMetadata>
+    {
+        protected override void Execute(IWfShell wf)
+        {
+            using var step = new EmitFieldMetadataStep(wf, this);
+            step.Run();
+        }
+    }
+
+    readonly ref struct EmitFieldMetadataStep
     {
         readonly IWfShell Wf;
 

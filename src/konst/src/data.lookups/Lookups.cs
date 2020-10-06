@@ -11,8 +11,15 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Table
+    [ApiHost]
+    public partial struct Lookups
     {
+        [MethodImpl(Inline)]
+        public static KeyMapIndex<D,S> selectors<D,S>(KeyMap<D,S>[] src, S min, S max)
+            where D : unmanaged, Enum
+            where S : unmanaged
+                => new KeyMapIndex<D,S>(src,min,max);
+
         [Op, Closures(UInt8k)]
         public static LookupGrid<byte,byte,byte,T> grid<T>(W8 ixj)
             => new LookupGrid<byte,byte,byte,T>(new byte[256,256], new T[256*256]);

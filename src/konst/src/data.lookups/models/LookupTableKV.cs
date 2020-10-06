@@ -6,19 +6,22 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static Konst;
     using static z;
 
-    partial struct ApiHexArchives
+    /// <summary>
+    /// Defines a K-V lookup table
+    /// </summary>
+    public struct LookupTable<K,V>
+        where K : unmanaged
     {
-        [MethodImpl(Inline), Op]
-        public static ApiCodeArchive create(IWfShell wf)
-            => new ApiCodeArchive(wf);
+        TableSpan<LookupEntry<K,V>> Entries;
 
-        [MethodImpl(Inline), Op]
-        public static ApiCodeArchive create(FS.FolderPath root)
-            => new ApiCodeArchive(root);
+        [MethodImpl(Inline)]
+        public LookupTable(LookupEntry<K,V>[] src)
+        {
+            Entries = src;
+        }
     }
 }

@@ -131,24 +131,14 @@ namespace Z0.Asm
             }
         }
 
-        [MethodImpl(Inline)]
-        ICaptureArchive CaptureArchive(PartId part)
-            => ApiArchives.capture(FS.dir(AppPaths.AppCaptureRoot.Name), part);
 
         [MethodImpl(Inline)]
         ICaptureArchive CaptureArchive(FolderPath root)
-            => ApiArchives.capture(root);
+            => Archives.capture(root);
 
-        [MethodImpl(Inline)]
-        FilePath AsmFilePath<T>(PartId part)
-            => CaptureArchive(part).AsmPath<T>();
-
-        [MethodImpl(Inline)]
-        FilePath HexFilePath<T>(PartId part)
-            => CaptureArchive(part).HexPath<T>();
 
         [MethodImpl(Inline)]
         ApiCodeArchive UriBitsArchive(FolderPath root)
-            => ApiHexArchives.create(FS.dir(root.Name));
+            => Archives.hex(FS.dir(root.Name));
     }
 }

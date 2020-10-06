@@ -23,7 +23,7 @@ namespace Z0
         public FS.FolderPath Root
             => Settings.Root;
 
-        FS.FolderPath IDatabasePaths.DatabaseRoot
+        FS.FolderPath IDatabasePaths.DbRoot
             => Settings.Root;
     }
 }

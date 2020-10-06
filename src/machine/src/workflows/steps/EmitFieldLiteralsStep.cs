@@ -10,7 +10,17 @@ namespace Z0
     using static z;
     using static Konst;
 
-    public readonly ref struct EmitFieldLiteralsStep
+    [WfHost]
+    public sealed class EmitFieldLiterals : WfHost<EmitFieldLiterals>
+    {
+        protected override void Execute(IWfShell wf)
+        {
+            using var step = new EmitFieldLiteralsStep(wf, this);
+            step.Run();
+        }
+    }
+
+    readonly ref struct EmitFieldLiteralsStep
     {
         readonly IWfShell Wf;
 

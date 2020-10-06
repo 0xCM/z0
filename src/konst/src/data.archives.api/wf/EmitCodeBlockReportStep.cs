@@ -50,7 +50,7 @@ namespace Z0
 
         ApiCodeBlockInfo[] DescribeCodeBlocks()
         {
-            var archive = ApiHexArchives.create(Wf);
+            var archive = Archives.hex(Wf);
             var files = archive.List();
             var dst = list<ApiCodeBlockInfo>();
             foreach(var file in files.Storage)

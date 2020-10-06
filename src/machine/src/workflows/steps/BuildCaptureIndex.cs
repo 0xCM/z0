@@ -14,24 +14,26 @@ namespace Z0
     using static z;
 
     [WfHost]
-    public sealed class CreateCaptureIndex : WfHost<CreateCaptureIndex>
+    public sealed class BuildCaptureIndex : WfHost<BuildCaptureIndex>
     {
-        public static void run(IWfShell wf, IWfCaptureState state)
+        public static ref ApiCaptureIndex run(IWfShell wf, IWfCaptureState state, out ApiCaptureIndex dst)
         {
-            var host = new CreateCaptureIndex();
-            var files = ApiArchives.partfiles(wf.CaptureRoot);
-            using var step = new CreateCaptureIndexStep(wf, host, state, files);
+            var host = new BuildCaptureIndex();
+            var files = Archives.partfiles(wf.CaptureRoot);
+            using var step = new BuildCaptureIndexStep(wf, host, state, files);
             step.Run();
+            dst = step.Target;
+            return ref dst;
         }
     }
 
-    ref struct CreateCaptureIndexStep
+    ref struct BuildCaptureIndexStep
     {
         readonly IWfShell Wf;
 
         readonly PartFiles SourceFiles;
 
-        public ApiCaptureIndex EncodedIndex;
+        public ApiCaptureIndex Target;
 
         readonly List<Instruction> Buffer;
 
@@ -39,13 +41,13 @@ namespace Z0
 
         readonly WfHost Host;
 
-        public CreateCaptureIndexStep(IWfShell wf, WfHost host, IWfCaptureState state, PartFiles src)
+        public BuildCaptureIndexStep(IWfShell wf, WfHost host, IWfCaptureState state, PartFiles src)
         {
             Wf = wf;
             Host = host;
             State = state;
             SourceFiles = src;
-            EncodedIndex = default;
+            Target = default;
             Buffer = list<Instruction>(2000);
             Wf.Created(Host);
         }
@@ -57,7 +59,7 @@ namespace Z0
 
         void BuildIndex()
         {
-            EncodedIndex = CaptureIndexBuilder.create(Wf, Host, SourceFiles);
+            Target = CaptureIndexBuilder.create(Wf, Host, SourceFiles);
         }
 
         public void Run()
@@ -68,9 +70,9 @@ namespace Z0
             {
                 BuildIndex();
 
-                Wf.Raise(new PartIndexCreated(Host, EncodedIndex, Wf.Ct));
+                Wf.Raise(new PartIndexCreated(Host, Target, Wf.Ct));
 
-                var index = EncodedIndex;
+                var index = Target;
                 Process(index);
                 var decoded = DecodeParts(index);
                 Process(decoded);
@@ -187,8 +189,7 @@ namespace Z0
         {
             var count = src.Count;
             var records = span(src.Sequenced);
-            var dir = Wf.Paths.DatabaseRoot + FS.folder("tables") + FS.folder("asm");
-            var dst = dir + FS.file(src.Key.ToString(), FileExtensions.Csv);
+            var dst = Wf.Paths.Table("asm.rows",src.Key.ToString());
             var formatter = Formatters.dataset<AsmTableField>();
             using var writer = dst.Writer();
             writer.WriteLine(Table.header53<AsmTableField>());
