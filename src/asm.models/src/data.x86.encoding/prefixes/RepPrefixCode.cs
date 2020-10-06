@@ -4,14 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using static Hex8Seq;
 
-    using static Konst;
-
-    public readonly struct AsmMnemonic
+    public enum RepPrefixCode : byte
     {
-        public readonly asci32 Name;
-    }
 
+        REPNE = xf2,
+
+        REP = xf3,
+    }
 }

@@ -36,7 +36,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The command source</param>
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<byte> bytes(in EncodedFx src)
+        public static ReadOnlySpan<byte> bytes(in EncodedInstruction src)
             => Cells.view<byte>(Cells.from(src.Data)).Slice(size(src));
 
 
@@ -45,12 +45,12 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The command source</param>
         [MethodImpl(Inline), Op]
-        public static byte size(in EncodedFx src)
+        public static byte size(in EncodedInstruction src)
             => vcell(src.Data, 15);
 
 
         [Op]
-        public static string format(in EncodedFx src)
+        public static string format(in EncodedInstruction src)
         {
             var data = AsmEncoder.bytes(src);
             var size = src.EncodingSize;
@@ -75,14 +75,14 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
-        public static EncodedFx encode(ReadOnlySpan<byte> src)
+        public static EncodedInstruction encode(ReadOnlySpan<byte> src)
         {
             var dst = default(Vector128<byte>);
             var count = src.Length;
             var max = min(15,count);
             for(var i=0; i<max; i++)
                 dst = dst.WithElement(i, skip(src,i));
-            var c = new EncodedFx(dst.WithElement(15, (byte)count));
+            var c = new EncodedInstruction(dst.WithElement(15, (byte)count));
             var b = bytes(c);
             return c;
         }
@@ -104,11 +104,11 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="lo64">The data source</param>
         [MethodImpl(Inline), Op]
-        public static EncodedFx encode(ulong lo64)
+        public static EncodedInstruction encode(ulong lo64)
         {
             var hi64 = (ulong)(effsize(lo64)/8) << 56;
             var v = v8u(Vector128.Create(lo64, hi64));
-            return new EncodedFx(v);
+            return new EncodedInstruction(v);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace Z0.Asm
         /// </summary>
         /// <param name="lo32">The data source</param>
         [MethodImpl(Inline), Op]
-        public static EncodedFx encode(uint lo32)
+        public static EncodedInstruction encode(uint lo32)
             => encode((ulong)lo32);
     }
 }

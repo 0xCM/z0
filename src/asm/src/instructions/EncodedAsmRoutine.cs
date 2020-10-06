@@ -13,16 +13,16 @@ namespace Z0.Asm
     {
         public readonly asci32 Name;
 
-        public readonly EncodedFx[] Commands;
+        public readonly EncodedInstruction[] Commands;
 
         [MethodImpl(Inline)]
-        public EncodedAsmRoutine(asci32 name, EncodedFx[] commands)
+        public EncodedAsmRoutine(asci32 name, EncodedInstruction[] commands)
         {
             Name = name;
             Commands = commands;
         }
 
-        public ref EncodedFx this[int index]
+        public ref EncodedInstruction this[int index]
         {
             [MethodImpl(Inline)]
             get => ref Commands[index];

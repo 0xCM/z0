@@ -9,26 +9,18 @@ namespace Z0.Asm
 
     using static Konst;
 
-    /// <summary>
-    /// Defines an encoded instruction
-    /// </summary>
-    public struct AsmStatementInfo
+    public readonly struct AsmStatementInfo
     {
-        public uint Sequence;
+        public Sequential Sequence {get;}
 
-        public AsmStatement Source;
+        public AsmMnemonic Mnemonic {get;}
 
-        public AsmSpecifier Spec;
+        public AsmOpCodeExpression OpCode {get;}
 
-        public EncodedFx Encoded;
+        public AsmInstructionPattern Instruction {get;}
 
-        [MethodImpl(Inline)]
-        public AsmStatementInfo(uint seq, AsmStatement statement, AsmSpecifier code, EncodedFx encoded)
-        {
-            Sequence = seq;
-            Source = statement;
-            Spec = code;
-            Encoded = encoded;
-        }
+        public AsmOperatingMode Mode {get;}
+
+        public CpuidExpression Cpuid {get;}
     }
 }

@@ -3,14 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
 
     using Z0.Asm;
 
-    using static Konst;    
+    using static Konst;
     using static z;
 
     partial struct asm
@@ -20,7 +20,7 @@ namespace Z0
             => new EncodedRoutine(name,32);
 
         [MethodImpl(Inline), Op]
-        public static EncodedRoutine encoded(asci32[] name, EncodedFx[] commands, uint[] index)
+        public static EncodedRoutine encoded(asci32[] name, EncodedInstruction[] commands, uint[] index)
             => new EncodedRoutine(name, commands, index);
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The encoded data</param>
         [MethodImpl(Inline), Op]
-        public static EncodedFx encoded(Vector128<byte> src)
-            => new EncodedFx(src);
+        public static EncodedInstruction encoded(Vector128<byte> src)
+            => new EncodedInstruction(src);
     }
 }

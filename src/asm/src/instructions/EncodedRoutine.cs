@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -16,12 +16,12 @@ namespace Z0
     {
         internal readonly Span<asci32> name;
 
-        internal readonly Span<EncodedFx> buffer;
+        internal readonly Span<EncodedInstruction> buffer;
 
         internal readonly Span<uint> index;
 
         [MethodImpl(Inline)]
-        public static EncodedRoutine operator +(in EncodedRoutine dst, in EncodedFx src)
+        public static EncodedRoutine operator +(in EncodedRoutine dst, in EncodedInstruction src)
             => Add(dst, src);
 
         public static implicit operator EncodedAsmRoutine(EncodedRoutine src)
@@ -31,12 +31,12 @@ namespace Z0
         public EncodedRoutine(string name, int capacity)
         {
             this.name = new asci32[1]{name};
-            this.buffer = alloc<EncodedFx>(capacity);
+            this.buffer = alloc<EncodedInstruction>(capacity);
             this.index = new uint[1]{0};
         }
 
         [MethodImpl(Inline)]
-        public EncodedRoutine(asci32[] name, EncodedFx[] buffer, uint[] index)
+        public EncodedRoutine(asci32[] name, EncodedInstruction[] buffer, uint[] index)
         {
             this.name = name;
             this.buffer = buffer;
@@ -50,7 +50,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public EncodedRoutine Add(in EncodedFx command)
+        public EncodedRoutine Add(in EncodedInstruction command)
         {
             if(HasCapacity)
                 seek(buffer, Index++) = command;
@@ -68,7 +68,7 @@ namespace Z0
 
         public EncodedAsmRoutine Emit()
             => Emit(this);
-        
+
         ref uint Index
         {
             [MethodImpl(Inline)]
@@ -82,7 +82,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static ref readonly EncodedRoutine Add(in EncodedRoutine dst, in EncodedFx src)
+        static ref readonly EncodedRoutine Add(in EncodedRoutine dst, in EncodedInstruction src)
         {
             dst.Add(src);
             return ref dst;

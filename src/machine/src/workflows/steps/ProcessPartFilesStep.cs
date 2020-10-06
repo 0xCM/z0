@@ -76,7 +76,7 @@ namespace Z0
         }
 
         [Op, MethodImpl(Inline)]
-        void Dispatch(in EncodedFx src)
+        void Dispatch(in EncodedInstruction src)
         {
             Execute(AsmEncoder.bytes(src));
         }

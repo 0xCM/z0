@@ -33,35 +33,35 @@ namespace Z0.Asm
             => math.sub(math.log2((byte)hipos(src)), One8u);
 
         [MethodImpl(Inline)]
-        static ReadOnlySpan<byte> bytes(in EncodedFx src)
+        static ReadOnlySpan<byte> bytes(in EncodedInstruction src)
             => Cells.view<byte>(Cells.from(src.Data)).Slice((int)size(src));
 
         [MethodImpl(Inline)]
-        static EncodedFx encode(ReadOnlySpan<byte> src)
+        static EncodedInstruction encode(ReadOnlySpan<byte> src)
         {
             var dst = default(Vector128<byte>);
             var count = src.Length;
             var max = min(15,count);
             for(var i=0; i<max; i++)
                 dst = dst.WithElement(i, skip(src,i));
-            var c = new EncodedFx(dst.WithElement(15, (byte)count));
+            var c = new EncodedInstruction(dst.WithElement(15, (byte)count));
             var b = bytes(c);
             return c;
         }
 
         [MethodImpl(Inline)]
-        static EncodedFx encode(ulong lo64)
+        static EncodedInstruction encode(ulong lo64)
         {
             var hi64 = (ulong)(effsize(lo64)/8) << 56;
             var v = v8u(Vector128.Create(lo64, hi64));
-            return new EncodedFx(v);
+            return new EncodedInstruction(v);
         }
 
         // Parses text of the form encoded[4]{48 83 ec 40}
         [MethodImpl(Inline), Op]
-        public static ParseResult<EncodedFx> ParseEncoded(string src)
+        public static ParseResult<EncodedInstruction> ParseEncoded(string src)
         {
-            var fail = ParseResult.Fail<EncodedFx>(src);
+            var fail = ParseResult.Fail<EncodedInstruction>(src);
             var np = Parsers.numeric<int>();
 
             (var iS0, var iS1) = text.indices(src,Chars.LBracket, Chars.RBracket);

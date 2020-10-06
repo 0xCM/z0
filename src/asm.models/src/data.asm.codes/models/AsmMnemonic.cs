@@ -6,17 +6,11 @@ namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static z;
 
-    public readonly struct EncodedInstruction
+    public readonly struct AsmMnemonic
     {
-        readonly Vector128<byte> Storage;
-
-        [MethodImpl(Inline)]
-        internal EncodedInstruction(Vector128<byte> src)
-            => Storage = src;
+        public readonly asci32 Name;
     }
 }
