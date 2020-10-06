@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    using static AsmRegisterTypes;
+    using static X86Registers;
 
     partial struct InstructionFactory
     {

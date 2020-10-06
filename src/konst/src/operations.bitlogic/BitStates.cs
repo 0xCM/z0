@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), TestBit]
         public static bit test(sbyte src, byte pos)
             => new bit((src & (1 << pos)) != 0);
 
@@ -26,8 +26,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
-        [MethodImpl(Inline), Op]
-        public static bit test(byte src, int pos)
+        [MethodImpl(Inline), TestBit]
+        public static bit test(byte src, byte pos)
             => new bit(((uint)src >> pos) & 1);
 
         /// <summary>
@@ -35,8 +35,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
-        [MethodImpl(Inline), Op]
-        public static bit test(short src, int pos)
+        [MethodImpl(Inline), TestBit]
+        public static bit test(short src, byte pos)
             => new bit((src & (1 << pos)) != 0);
 
         /// <summary>
@@ -44,8 +44,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
-        [MethodImpl(Inline), Op]
-        public static bit test(ushort src, int pos)
+        [MethodImpl(Inline), TestBit]
+        public static bit test(ushort src, byte pos)
             => new bit(((uint)src >> pos) & 1);
 
         /// <summary>
@@ -53,8 +53,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
-        [MethodImpl(Inline), Op]
-        public static bit test(int src, int pos)
+        [MethodImpl(Inline), TestBit]
+        public static bit test(int src, byte pos)
             => new bit((src & (1 << pos)) != 0);
 
         /// <summary>
@@ -62,8 +62,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
-        [MethodImpl(Inline), Op]
-        public static bit test(long src, int pos)
+        [MethodImpl(Inline), TestBit]
+        public static bit test(long src, byte pos)
             => new bit((src & (1L << pos)) != 0);
 
         /// <summary>
@@ -71,8 +71,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
-        [MethodImpl(Inline), Op]
-        public static bit test(uint src, int pos)
+        [MethodImpl(Inline), TestBit]
+        public static bit test(uint src, byte pos)
             => new bit((src >> pos) & 1);
 
         /// <summary>
@@ -80,8 +80,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         /// <param name="pos">The 0-based index of the bit to test</param>
-        [MethodImpl(Inline), Op]
-        public static bit test(ulong src, int pos)
+        [MethodImpl(Inline), TestBit]
+        public static bit test(ulong src, byte pos)
             => new bit((uint)((src >> pos) & 1));
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="src">The source</param>
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), SetBit]
         public static sbyte set(sbyte src, byte pos, bit state)
         {
             var c = ~(sbyte)state + 1;
@@ -104,7 +104,7 @@ namespace Z0
         /// <param name="src">The source</param>
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), SetBit]
         public static byte set(byte src, byte pos, bit state)
         {
             var c = ~(byte)state + 1;
@@ -118,7 +118,7 @@ namespace Z0
         /// <param name="src">The source</param>
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), SetBit]
         public static short set(short src, byte pos, bit state)
         {
             var c = ~(short)state + 1;
@@ -132,7 +132,7 @@ namespace Z0
         /// <param name="src">The source</param>
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), SetBit]
         public static ushort set(ushort src, byte pos, bit state)
         {
             var c = ~(ushort)state + 1;
@@ -146,7 +146,7 @@ namespace Z0
         /// <param name="src">The source</param>
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), SetBit]
         public static int set(int src, byte pos, bit state)
         {
             var c = ~(int)state + 1;
@@ -160,7 +160,7 @@ namespace Z0
         /// <param name="src">The source</param>
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), SetBit]
         public static uint set(uint src, byte pos, bit state)
         {
             var c = ~(uint)state + 1u;
@@ -174,7 +174,7 @@ namespace Z0
         /// <param name="src">The source</param>
         /// <param name="pos">The source bit index</param>
         /// <param name="state">The state with which to align a source bit</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), SetBit]
         public static long set(long src, byte pos, bit state)
         {
             var c = ~(long)state + 1L;
@@ -188,7 +188,7 @@ namespace Z0
         /// <param name="src">The source</param>
         /// <param name="index">The source bit index</param>
         /// <param name="value">The state with which to align a source bit</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), SetBit]
         public static ulong set(ulong src, byte pos, bit state)
         {
             var c = ~(ulong)state + 1ul;

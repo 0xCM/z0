@@ -61,7 +61,7 @@ namespace Z0
             var src = Random.Span<byte>(16);
             var dst = z.vcover<uint>(w128, ref first(src));
             var a = Spans.alloc<uint>(4);
-            vsave(dst, ref first(a));
+            z.vsave(dst, ref first(a));
             var b = uint32(src);
 
             Claim.eq(a,b);

@@ -8,7 +8,6 @@ namespace Z0
 
     using static Konst;
 
-
     public static class PolyStream
     {
         /// <summary>
@@ -16,9 +15,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The point source</param>
         /// <typeparam name="T">The point type</typeparam>
-        public static IRngStream<T> Stream<T>(this IPolyrand src)
+        public static IPolyStream<T> Stream<T>(this IPolySourced src)
             where T : unmanaged
-                => PolyStreams.create<T>(src);
+                => PolyStreams.create<T>((IPolyrand)src);
 
         /// <summary>
         /// Produces a stream values from the source subject to a specified range and optional filter
@@ -27,9 +26,9 @@ namespace Z0
         /// <param name="domain">If specified, the domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IRngStream<T> Stream<T>(this IPolyrand src, T min, T max)
+        public static IPolyStream<T> Stream<T>(this IPolySourced src, T min, T max)
             where T : unmanaged
-                => PolyStreams.create(src,min,max);
+                => PolyStreams.create((IPolyrand)src,min,max);
 
         /// <summary>
         /// Produces a stream of values from the random source
@@ -38,9 +37,9 @@ namespace Z0
         /// <param name="domain">The domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IRngStream<T> Stream<T>(this IPolyrand src, Interval<T> domain)
+        public static IPolyStream<T> Stream<T>(this IPolySourced src, Interval<T> domain)
             where T : unmanaged
-                => PolyStreams.create(src,domain);
+                => PolyStreams.create((IPolyrand)src,domain);
 
         /// <summary>
         /// Produces a stream of values from the random source
@@ -49,8 +48,8 @@ namespace Z0
         /// <param name="domain">The domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IRngStream<T> Stream<T>(this IPolyrand src, Interval<T> domain, Func<T,bool> filter)
+        public static IPolyStream<T> Stream<T>(this IPolySourced src, Interval<T> domain, Func<T,bool> filter)
             where T : unmanaged
-                => PolyStreams.create(src, domain, filter);
+                => PolyStreams.create((IPolyrand)src, domain, filter);
     }
 }

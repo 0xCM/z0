@@ -15,7 +15,7 @@ namespace Z0
     partial class BitLogixOps
     {
         /// <summary>
-        /// Returns a kind-indentified binary operator
+        /// Returns a kind-identified binary operator
         /// </summary>
         /// <param name="kind">The operator kind</param>
         [Op]

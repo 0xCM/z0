@@ -11,22 +11,22 @@ namespace Z0
 
     partial class BitMatrix
     {
-        [MethodImpl(Inline), False, Closures(UnsignedInts)]
+        [MethodImpl(Inline), False, Closures(Closure)]
         public static BitMatrix<T> @false<T>()
             where T:unmanaged
                 => BitMatrixA.zero<T>();
 
-        [MethodImpl(Inline), False, Closures(UnsignedInts)]
+        [MethodImpl(Inline), False, Closures(Closure)]
         public static BitMatrix<T> @false<T>(in BitMatrix<T> A)
             where T:unmanaged
                 => BitMatrixA.@false(A);
 
-        [MethodImpl(Inline), False, Closures(UnsignedInts)]
+        [MethodImpl(Inline), False, Closures(Closure)]
         public static BitMatrix<T> @false<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T:unmanaged
                 => BitMatrixA.@false(A,B);
 
-        [MethodImpl(Inline), False, Closures(UnsignedInts)]
+        [MethodImpl(Inline), False, Closures(Closure)]
         public static ref readonly BitMatrix<T> @false<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T:unmanaged
         {

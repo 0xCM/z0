@@ -10,7 +10,7 @@ namespace Z0
     using static Typed;
 
     [ApiHost]
-    public readonly struct TabularTruth : IApiHost<TabularTruth>
+    public readonly struct TabularTruth
     {
         static Bit32 on => Bit32.On;
 
@@ -136,21 +136,21 @@ namespace Z0
 
         public static void save(ReadOnlySpan<UnaryBitLogicKind> src, StreamWriter dst)
         {
-            var writer = BitMatrixWriter.Share(dst);
+            var writer = BitMatrixWriter.share(dst);
             for(var i=0; i<src.Length; i++)
                 save(src[i], writer);
         }
 
         public static void save(ReadOnlySpan<BinaryBitLogicKind> src, StreamWriter dst)
         {
-            var writer = BitMatrixWriter.Share(dst);
+            var writer = BitMatrixWriter.share(dst);
             for(var i=0; i<src.Length; i++)
                 save(src[i], writer);
         }
 
         public static void save(ReadOnlySpan<TernaryBitLogicKind> src, StreamWriter dst)
         {
-            var writer = BitMatrixWriter.Share(dst);
+            var writer = BitMatrixWriter.share(dst);
             for(var i=0; i<src.Length; i++)
                 save(src[i], writer);
         }

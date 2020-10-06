@@ -7,16 +7,16 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
-    
+
     partial class BitMatrix
     {
         /// <summary>
         /// Computes the Hadamard product of the source matrix and another of the same dimension
         /// </summary>
         /// <remarks>See https://en.wikipedia.org/wiki/Hadamard_product_(matrices)</remarks>
-        [MethodImpl(Inline), HProd, Closures(UnsignedInts)]
+        [MethodImpl(Inline), HProd, Closures(Closure)]
         public static ref readonly BitMatrix<T> hprod<T>(in BitMatrix<T> a, in BitMatrix<T> b, in BitMatrix<T> dst)
             where T : unmanaged
         {

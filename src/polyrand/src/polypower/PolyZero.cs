@@ -13,14 +13,14 @@ namespace Z0
     using static NumericLiterals;
 
     public static class PolyZero
-    {        
+    {
         /// <summary>
         /// Produces a stream of nonzero uniformly random values
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="domain">The domain of the random variable</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IRngStream<T> NonZStream<T>(this IPolyrand random, Interval<T> domain)
+        public static IPolyStream<T> NonZStream<T>(this IPolyrand random, Interval<T> domain)
             where T : unmanaged
                 => PolyStreams.create<T>(random, domain, x => gmath.nonz(x));
 
@@ -50,7 +50,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The random source</param>
         /// <typeparam name="T">The element type</typeparam>
-        /// <param name="max">The exclusive uper bound</param>
+        /// <param name="max">The exclusive upper bound</param>
         [MethodImpl(Inline)]
         public static T NonZ<T>(this IPolyrand src, T max)
             where T : unmanaged

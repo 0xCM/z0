@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     partial class BitMatrix
@@ -17,8 +17,8 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
-        /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>        
-        [MethodImpl(Inline), And, Closures(UnsignedInts)]
+        /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>
+        [MethodImpl(Inline), And, Closures(Closure)]
         public static BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B)
             where T : unmanaged
                 => BitMatrixA.and(A,B);
@@ -29,15 +29,15 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="dst">The target matrix</param>
-        /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>        
-        [MethodImpl(Inline), And, Closures(UnsignedInts)]
+        /// <typeparam name="T">The primal type over which the matrices are constructed</typeparam>
+        [MethodImpl(Inline), And, Closures(Closure)]
         public static ref readonly BitMatrix<T> and<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> dst)
             where T : unmanaged
         {
             LogicSquare.and(in A.Head, in B.Head, ref dst.Head);
             return ref dst;
         }
- 
+
         /// <summary>
         /// Computes the bitwise AND between two square bitmatrices of common natural order and stores the
         /// result a caller-supplied target matrix

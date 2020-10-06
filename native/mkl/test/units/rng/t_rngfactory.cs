@@ -5,12 +5,13 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
     using Z0.Mkl;
 
     using static Konst;
     using static Memories;
-    
+
     public class t_rngfactory : UnitTest<t_rngfactory>
     {
 
@@ -29,7 +30,7 @@ namespace Z0
         const int MaxI32 = 350000;
 
         static readonly Interval<int> RangeI32 = (MinI32, MaxI32);
-        
+
         static readonly Interval<float> RangeF32 = (MinF32, MaxF32);
 
         static readonly Interval<double> RangeF64 = (MinF64, MaxF64);
@@ -67,7 +68,7 @@ namespace Z0
         }
 
         public void mt19937()
-        {            
+        {
             using var src = rng.mt19937(Seed);
             rng_bench(samplers.uniform(src, (RangeI32)));
             rng_bench(samplers.uniform(src, (RangeF32)));
@@ -75,7 +76,7 @@ namespace Z0
         }
 
         public void sfmt19937()
-        {            
+        {
             using var src = rng.sfmt19937(Seed);
             rng_bench(samplers.uniform(src, (RangeI32)));
             rng_bench(samplers.uniform(src, (RangeF32)));
@@ -99,7 +100,7 @@ namespace Z0
         }
 
         public void polyrand()
-        {         
+        {
             rng_bench(Polyrand.Pcg64(Seed).Stream(RangeI32));
             rng_bench(Polyrand.Pcg64(Seed).Stream(RangeF32));
             rng_bench(Polyrand.Pcg64(Seed).Stream(RangeF64));
@@ -129,7 +130,7 @@ namespace Z0
             rng_bench(samplers.uniform(src, (RangeF64)));
         }
 
-        void rng_bench<T>(IRngStream<T> stream)
+        void rng_bench<T>(IPolyStream<T> stream, [CallerMemberName] string caller = null)
             where T : unmanaged
         {
             var segment = Pow2.T08;
@@ -144,9 +145,9 @@ namespace Z0
                 for(var j=0; j< segment; j++)
                     stats.Collect(convert<T,double>(sample[j]));
             }
-            
-            var opname = $"{stream.RngKind}<{typeof(T).DisplayName()}>";
-            Deposit(BenchmarkRecord.Define(total, sw.Elapsed, opname));            
+
+            var opname = $"{caller}<{typeof(T).DisplayName()}>";
+            Deposit(BenchmarkRecord.Define(total, sw.Elapsed, opname));
         }
 
     }

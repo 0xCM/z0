@@ -33,8 +33,8 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitMatrix(BitVector<T> fill)
         {
-            this.Data = new T[fill.Width];
-            this.Data.Fill(fill);
+            Data = new T[fill.Width];
+            Data.Fill(fill);
         }
 
         public ref T Head

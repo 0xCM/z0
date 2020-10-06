@@ -19,17 +19,17 @@ namespace Z0
     partial class LogicSquare
     {
         [MethodImpl(Inline), NonImpl, Closures(Closure)]
-        public static void nonimpl<T>(in T A, in T B, ref T Z)
+        public static void nonimpl<T>(in T a, in T b, ref T dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               BL.nonimpl(in uint8(in A), in uint8(in B), ref z.uint8(ref Z));
+               BL.nonimpl(in uint8(in a), in uint8(in b), ref z.uint8(ref dst));
             else if(typeof(T) == typeof(ushort))
-                nonimpl(w, in A, in B, ref Z);
+                nonimpl(w, in a, in b, ref dst);
             else if(typeof(T) == typeof(uint))
-                nonimpl(w, 4, 8, in A, in B, ref Z);
+                nonimpl(w, 4, 8, in a, in b, ref dst);
             else if(typeof(T) == typeof(ulong))
-                nonimpl(w, 16, 4, in A, in B, ref Z);
+                nonimpl(w, 16, 4, in a, in b, ref dst);
             else
                 throw no<T>();
         }

@@ -22,7 +22,6 @@ namespace Z0
         /// </summary>
         public const uint N = 64;
 
-
         [MethodImpl(Inline)]
         public static implicit operator BitMatrix<ulong>(in BitMatrix64 src)
             => BitMatrix.load(src.Data);

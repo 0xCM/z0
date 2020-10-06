@@ -11,7 +11,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     /// <summary>
     /// Captures a random stream along with the generator classification
     /// </summary>
@@ -23,7 +23,7 @@ namespace Z0
         public RngKind RngKind {get;}
 
         [MethodImpl(Inline)]
-        public PolyStream(RngKind kind, IEnumerable<T> src)
+        public PolyStream(IEnumerable<T> src, RngKind kind = RngKind.None)
         {
             Src = src;
             RngKind = kind;
@@ -33,13 +33,14 @@ namespace Z0
         public IEnumerator<T> GetEnumerator()
             => Src.GetEnumerator();
 
+        [MethodImpl(Inline)]
         public IEnumerable<T> Next(int count)
             => Src.Take(count);
 
         [MethodImpl(Inline)]
         public T Next()
             => Src.First();
-            
+
         IEnumerator IEnumerable.GetEnumerator()
             => Src.GetEnumerator();
     }

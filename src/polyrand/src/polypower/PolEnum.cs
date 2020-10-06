@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="random">The random source</param>
         /// <typeparam name="E">The enum type</typeparam>
-        public static IEnumerable<E> EnumValues<E>(this IPolyrand random, Func<E,bool> filter)
+        public static IEnumerable<E> EnumValues<E>(this IPolySourced random, Func<E,bool> filter)
             where E : unmanaged, Enum
         {
             IEnumerable<E> produce()
@@ -26,7 +26,7 @@ namespace Z0
                 var stream = random.Stream(domain);
 
                 while(true)
-                {   
+                {
                     var name = names[stream.First()];
                     var value = Enum.Parse<E>(name);
                     if(filter != null)
@@ -36,10 +36,10 @@ namespace Z0
                     }
                     else
                         yield return value;
-                }            
+                }
             }
 
-            return PolyStreams.create(produce(), random.RngKind);
+            return PolyStreams.create(produce());
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="exclusions">Enum literals to exclude</param>
         /// <typeparam name="E">The enum type</typeparam>
-        public static IEnumerable<E> EnumValues<E>(this IPolyrand random, params E[] exclusions)
+        public static IEnumerable<E> EnumValues<E>(this IPolySourced random, params E[] exclusions)
             where E : unmanaged, Enum
         {
             IEnumerable<E> produce()
@@ -62,7 +62,7 @@ namespace Z0
                     yield return Enum.Parse<E>(names[stream.Next()]);
             }
 
-            return PolyStreams.create(produce(), random.RngKind);
-        } 
+            return PolyStreams.create(produce());
+        }
     }
 }

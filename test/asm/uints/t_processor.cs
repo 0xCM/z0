@@ -9,20 +9,6 @@ namespace Z0.Asm.Data
 
     public class t_procesor : t_asmd<t_procesor>
     {
-        public void xmm_register_list()
-        {
-            var index = XmmIndex.Create();
-            var locations = index.Locations;
-            var data = index.Data;
-            var @base = Root.head(locations);
-            for(var i=0; i<locations.Length; i++)
-            {
-                var address = Root.skip(locations,i);
-                var offset = address - @base;
-                var reg = Root.skip(data,i);
-                term.print($"{address} | {offset} | {reg.Kind}");
-            }
-        }
 
     }
 }

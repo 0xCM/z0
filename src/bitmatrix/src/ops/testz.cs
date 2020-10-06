@@ -17,7 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is defined</typeparam>
-        [MethodImpl(Inline), TestZ, Closures(UnsignedInts)]
+        [MethodImpl(Inline), TestZ, Closures(Closure)]
         public static Bit32 testz<T>(in BitMatrix<T> A)
             where T : unmanaged
                 => LogicSquare.testz(in A.Head, in A.Head);
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="A">The source matrix</param>
         /// <param name="M">The mask matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is defined</typeparam>
-        [MethodImpl(Inline), TestZ, Closures(UnsignedInts)]
+        [MethodImpl(Inline), TestZ, Closures(Closure)]
         public static Bit32 testz<T>(in BitMatrix<T> A, in BitMatrix<T> M)
             where T : unmanaged
                 => LogicSquare.testz(in A.Head, in M.Head);

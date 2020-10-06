@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="src">The input/output span</param>
         /// <typeparam name="T">The primal type</typeparam>
-        public static Span<T> Shuffle<T>(this IPolyrand random, Span<T> src)
+        public static Span<T> Shuffle<T>(this IPolySourced random, Span<T> src)
         {
             for (var i = 0u; i < src.Length; i++)
                 refswap(ref seek(src,i), ref seek(src,(uint)(i + random.Next(0, src.Length - i))));
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="random">The random source</param>
         /// <param name="src">The input/output array</param>
         /// <typeparam name="T">The primal type</typeparam>
-        public static T[] Shuffle<T>(this IPolyrand random, T[] src)
+        public static T[] Shuffle<T>(this IPolySourced random, T[] src)
         {
             for (var i = 0u; i < src.Length; i++)
                 refswap(ref src[i], ref src[i + random.Next(0,src.Length - i)]);
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <typeparam name="T">The primal type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<T> Shuffle<T>(this IPolyrand random, ReadOnlySpan<T> src)
-            => random.Shuffle(src.Replicate());            
+        public static Span<T> Shuffle<T>(this IPolySourced random, ReadOnlySpan<T> src)
+            => random.Shuffle(src.Replicate());
     }
 }

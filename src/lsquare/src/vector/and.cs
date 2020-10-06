@@ -19,16 +19,16 @@ namespace Z0
                 => gvec.vand(vload(w, in a), vload(w, in b));
 
         [MethodImpl(Inline), And, Closures(Closure)]
-        public static void and<T>(W128 n, in T a, in T b, ref T z)
+        public static void and<T>(W128 n, in T a, in T b, ref T dst)
             where T : unmanaged
-                => vsave(and(n, in a, in b), ref z);
+                => vsave(and(n, in a, in b), ref dst);
 
         [MethodImpl(Inline), And, Closures(Closure)]
-        public static void and<T>(W128 n, int vcount, int blocklen, in T a, in T b, ref T z)
+        public static void and<T>(W128 n, int vcount, int blocklen, in T a, in T b, ref T dst)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                and(n, in skip(in a, offset), in skip(in b, offset), ref seek(z, offset));
+                and(n, in skip(in a, offset), in skip(in b, offset), ref seek(dst, offset));
         }
 
         [MethodImpl(Inline), And, Closures(Closure)]
@@ -37,16 +37,16 @@ namespace Z0
                 => gvec.vand(vload(w, in a),vload(w, in b));
 
         [MethodImpl(Inline), And, Closures(Closure)]
-        public static void and<T>(W256 w, in T a, in T b, ref T z)
+        public static void and<T>(W256 w, in T a, in T b, ref T dst)
             where T : unmanaged
-                => vsave(and(w, in a, in b), ref z);
+                => vsave(and(w, in a, in b), ref dst);
 
         [MethodImpl(Inline), And, Closures(Closure)]
-        public static void and<T>(W256 n, int vcount, int blocklen, in T a, in T b, ref T z)
+        public static void and<T>(W256 n, int vcount, int blocklen, in T a, in T b, ref T dst)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                and(n, in skip(in a, offset), in skip(in b, offset), ref seek(z, offset));
+                and(n, in skip(in a, offset), in skip(in b, offset), ref seek(dst, offset));
         }
    }
 }

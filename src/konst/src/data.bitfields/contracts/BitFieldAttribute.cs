@@ -9,12 +9,11 @@ namespace Z0
     /// <summary>
     /// Identifies a bitfield specification
     /// </summary>
-    [AttributeUsage(AttributeTargets.Enum)]
     public class BitFieldAttribute : Attribute
     {
         public BitFieldAttribute()
         {
-            
+
         }
 
         /// <summary>

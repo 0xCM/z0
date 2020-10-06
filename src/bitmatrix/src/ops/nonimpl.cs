@@ -18,8 +18,8 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
-        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), NonImpl, Closures(UnsignedInts)]
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
+        [MethodImpl(Inline), NonImpl, Closures(Closure)]
         public static ref readonly BitMatrix<T> nonimpl<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
         {

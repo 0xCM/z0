@@ -10,13 +10,13 @@ namespace Z0
     using static Konst;
 
     partial class BitMatrix
-    {   
-        [MethodImpl(Inline), IdentityFunction, Closures(UnsignedInts)]
+    {
+        [MethodImpl(Inline), IdentityFunction, Closures(Closure)]
         public static ref readonly BitMatrix<T> identity<T>(in BitMatrix<T> A)
             where T : unmanaged
                 => ref A;
 
-        [MethodImpl(Inline), IdentityFunction, Closures(UnsignedInts)]
+        [MethodImpl(Inline), IdentityFunction, Closures(Closure)]
         public static ref readonly BitMatrix<T> identity<T>(in BitMatrix<T> A, in BitMatrix<T> Z)
             where T : unmanaged
         {
@@ -24,26 +24,26 @@ namespace Z0
             return ref Z;
         }
 
-        public static BitMatrix4 identity(N4 n) 
+        public static BitMatrix4 identity(N4 n)
             => BitMatrix.primal(n,(ushort)0b1000010000100001);
 
-        public static BitMatrix8 identity(N8 n) 
+        public static BitMatrix8 identity(N8 n)
             => BitMatrix.primal(n,Identity8x8);
 
-        public static BitMatrix16 identity(N16 n) 
+        public static BitMatrix16 identity(N16 n)
             => BitMatrix.primal(n,Identity16x16);
 
-        public static BitMatrix32 identity(N32 n) 
+        public static BitMatrix32 identity(N32 n)
             => BitMatrix.primal(n,Identity32x32);
 
-        public static BitMatrix64 identity(N64 n) 
+        public static BitMatrix64 identity(N64 n)
             => BitMatrix.primal(n,Identity64x64);
 
         static ReadOnlySpan<byte> Identity4x4 => new byte[]
         {
-            1 << 0, 
-            1 << 1, 
-            1 << 2, 
+            1 << 0,
+            1 << 1,
+            1 << 2,
             1 << 3
         };
 
@@ -71,7 +71,7 @@ namespace Z0
             0, Pow2.T06,
             0, Pow2.T07,
         };
- 
+
         static ReadOnlySpan<byte> Identity32x32 => new byte[]
         {
             Pow2.T00, 0, 0, 0,
@@ -107,7 +107,7 @@ namespace Z0
             0, 0, 0, Pow2.T06,
             0, 0, 0, Pow2.T07,
         };
- 
+
          static ReadOnlySpan<byte> Identity64x64 => new byte[]
         {
             Pow2.T00, 0, 0, 0, 0, 0, 0, 0,

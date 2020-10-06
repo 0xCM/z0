@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     /// <summary>
-    /// Specifies the target width
+    /// Specifies the effective bit-width of a bitfield segment
     /// </summary>
     public class FieldWidthAttribute : Attribute
     {
@@ -16,12 +16,6 @@ namespace Z0
             Width = width;
         }
 
-        public FieldWidthAttribute(object width)
-        {
-
-            Width = width;
-        }
-
-        public object Width {get;}
+        public byte Width {get;}
     }
 }

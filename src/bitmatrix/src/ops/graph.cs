@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
-    
-    using static Konst; 
+
+    using static Konst;
     using static Memories;
 
     partial class BitMatrix
@@ -18,7 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         /// <typeparam name="T">The type over which the matrix is constructed</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Graph<T> graph<T>(in BitMatrix<T> A)
             where T : unmanaged
         {
@@ -38,33 +38,33 @@ namespace Z0
         /// Constructs a 8-node graph via the adjacency matrix interpretation
         /// </summary>
         /// <param name="src">The source matrix</param>
-        [MethodImpl(Inline), Op]    
+        [MethodImpl(Inline), Op]
         public static Graph<byte> graph(BitMatrix8 A)
-            => graph(BitMatrix.natural(A));            
+            => graph(BitMatrix.natural(A));
 
         /// <summary>
         /// Constructs a 16-node graph via the adjacency matrix interpretation
         /// </summary>
         /// <param name="src">The source matrix</param>
-        [MethodImpl(Inline), Op]    
+        [MethodImpl(Inline), Op]
         public static Graph<byte> graph(BitMatrix16 A)
-            => graph(BitMatrix.natural(A));            
+            => graph(BitMatrix.natural(A));
 
         /// <summary>
         /// Constructs a 32-node graph via the adjacency matrix interpretation
         /// </summary>
         /// <param name="src">The source matrix</param>
-        [MethodImpl(Inline), Op]    
+        [MethodImpl(Inline), Op]
         public static Graph<byte> graph(BitMatrix32 A)
-            => graph(BitMatrix.natural(A));            
+            => graph(BitMatrix.natural(A));
 
         /// <summary>
         /// Constructs a 64-node graph via the adjacency matrix interpretation
         /// </summary>
         /// <param name="src">The source matrix</param>
-        [MethodImpl(Inline), Op]    
+        [MethodImpl(Inline), Op]
         public static Graph<byte> graph(BitMatrix64 A)
-            => graph(BitMatrix.natural(A));            
+            => graph(BitMatrix.natural(A));
 
         /// <summary>
         /// Constructs a graph from an adjacency bitmatrix of natural order

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     partial class BitMatrix
@@ -18,8 +18,8 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
-        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), Xnor, Closures(UnsignedInts)]
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
+        [MethodImpl(Inline), Xnor, Closures(Closure)]
         public static ref readonly BitMatrix<T> xnor<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
         {
@@ -52,7 +52,7 @@ namespace Z0
             LogicSquare.xnor(in A.Head, in B.Head, ref Z.Head);
             return ref Z;
         }
-  
+
         /// <summary>
         /// Computes the converse implication for primal bitmatrices, depositing the result to a caller-supplied target
         /// </summary>
@@ -79,6 +79,6 @@ namespace Z0
             return ref Z;
         }
 
- 
+
     }
 }

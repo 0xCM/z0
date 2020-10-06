@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a bitmatrix of natural dimensions over a primal type
@@ -34,7 +34,7 @@ namespace Z0
             => new BitMatrix<M, N, T>(new T[BitMatrix.cellcount<M,N,T>()]);
 
         /// <summary>
-        /// Loads a matrix from an array of appopriate length
+        /// Loads a matrix from an array of appropriate length
         /// </summary>
         [MethodImpl(Inline)]
         public static BitMatrix<M,N,T> Load(Span<T> src)
@@ -70,7 +70,7 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref head(Data);
+            get => ref first(Data);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Z0
         public readonly int RowCount
         {
             [MethodImpl(Inline)]
-            get => nati<M>();
+            get => nat32i<M>();
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace Z0
         public readonly int ColCount
         {
             [MethodImpl(Inline)]
-            get => nati<N>();
+            get => nat32i<N>();
         }
 
         /// <summary>

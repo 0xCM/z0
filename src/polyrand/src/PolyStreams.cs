@@ -17,7 +17,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static IRngStream<T> create<T>(IEnumerable<T> src, RngKind kind)
             where T : struct
-                => new PolyStream<T>(kind,src);
+                => new PolyStream<T>(src,kind);
+
+        [MethodImpl(Inline)]
+        public static IPolyStream<T> create<T>(IEnumerable<T> src)
+            where T : struct
+                => new PolyStream<T>(src);
 
         /// <summary>
         /// Produces a random stream of unfiltered/unbounded points from a source
@@ -43,9 +48,9 @@ namespace Z0
         /// <param name="domain">The domain of the random variable</param>
         /// <param name="filter">If specified, values that do not satisfy the predicate are excluded from the stream</param>
         /// <typeparam name="T">The element type</typeparam>
-        public static IRngStream<T> create<T>(IPolyrand src, Interval<T> domain, Func<T,bool> filter = null)
+        public static IPolyStream<T> create<T>(IPolySourced src, Interval<T> domain, Func<T,bool> filter = null)
             where T : unmanaged
-                => create(forever(src, domain, filter), src.RngKind);
+                => create(forever(src, domain, filter));
 
         static IEnumerable<T> forever<T>(IPolySource src, ClosedInterval<T> domain, Func<T,bool> filter)
             where T : unmanaged

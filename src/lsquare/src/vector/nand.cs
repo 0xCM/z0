@@ -24,29 +24,29 @@ namespace Z0
                 => gvec.vnand(vload(w, in a),vload(w, in b));
 
         [MethodImpl(Inline), Nand, Closures(Closure)]
-        public static void nand<T>(W128 n, in T a, in T b, ref T z)
+        public static void nand<T>(W128 w, in T a, in T b, ref T z)
             where T : unmanaged
-                => vsave(vnand(n, in a, in b), ref z);
+                => vsave(vnand(w, in a, in b), ref z);
 
         [MethodImpl(Inline), Nand, Closures(Closure)]
-        public static void nand<T>(W128 n, int vcount, int blocklen, in T a, in T b, ref T z)
+        public static void nand<T>(W128 w, int vcount, int blocklen, in T a, in T b, ref T z)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                nand(n, in skip(in a, offset), in skip(in b, offset), ref seek(z, offset));
+                nand(w, in skip(in a, offset), in skip(in b, offset), ref seek(z, offset));
         }
 
         [MethodImpl(Inline), Nand, Closures(Closure)]
-        public static void nand<T>(N256 n, in T a, in T b, ref T z)
+        public static void nand<T>(W256 n, in T a, in T b, ref T z)
             where T : unmanaged
                 => vsave(vnand(n, in a, in b), ref z);
 
         [MethodImpl(Inline), Nand, Closures(Closure)]
-        public static void nand<T>(N256 n, int vcount, int blocklen, in T a, in T b, ref T z)
+        public static void nand<T>(W256 w, int vcount, int blocklen, in T a, in T b, ref T z)
             where T : unmanaged
         {
-            for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                nand(n, in skip(in a, offset), in skip(in b, offset), ref seek(z, offset));
+            for(int i=0, offset = 0; i<vcount; i++, offset += blocklen)
+                nand(w, in skip(in a, offset), in skip(in b, offset), ref seek(z, offset));
         }
     }
 }

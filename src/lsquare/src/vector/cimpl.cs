@@ -24,29 +24,29 @@ namespace Z0
                 => gvec.vcimpl(vload(w, in a),vload(w, in b));
 
         [MethodImpl(Inline), CImpl, Closures(Closure)]
-        public static void cimpl<T>(W128 w, in T a, in T b, ref T z)
+        public static void cimpl<T>(W128 w, in T a, in T b, ref T dst)
             where T : unmanaged
-                => V0.vsave(vcimpl(w, in a, in b), ref z);
+                => z.vsave(vcimpl(w, in a, in b), ref dst);
 
         [MethodImpl(Inline), CImpl, Closures(Closure)]
-        public static void cimpl<T>(W256 w, in T a, in T b, ref T z)
+        public static void cimpl<T>(W256 w, in T a, in T b, ref T dst)
             where T : unmanaged
-                => V0.vsave(vcimpl(w, in a, in b), ref z);
+                => z.vsave(vcimpl(w, in a, in b), ref dst);
 
         [MethodImpl(Inline), CImpl, Closures(Closure)]
-        public static void cimpl<T>(W128 w, int vcount, int blocklen, in T a, in T b, ref T z)
+        public static void cimpl<T>(W128 w, int vcount, int blocklen, in T a, in T b, ref T dst)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                cimpl(w, in skip(in a, offset), in skip(in b, offset), ref seek(z, offset));
+                cimpl(w, in skip(in a, offset), in skip(in b, offset), ref seek(dst, offset));
         }
 
         [MethodImpl(Inline), CImpl, Closures(Closure)]
-        public static void cimpl<T>(W256 w, int vcount, int blocklen, in T a, in T b, ref T z)
+        public static void cimpl<T>(W256 w, int vcount, int blocklen, in T a, in T b, ref T dst)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                cimpl(w, in skip(in a, offset), in skip(in b, offset), ref seek(z, offset));
+                cimpl(w, in skip(in a, offset), in skip(in b, offset), ref seek(dst, offset));
         }
     }
 }

@@ -4,12 +4,13 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+     using System;
+     using System.Runtime.CompilerServices;
 
     [ApiHost("api")]
     public partial class BitMatrix : IApiHost<BitMatrix>
-    {        
-
+    {
+        const NumericKind Closure = NumericKind.UnsignedInts;
     }
 
     [ApiHost("logix")]
@@ -45,7 +46,7 @@ namespace Z0
     }
 
     public static partial class XTend
-    {   
+    {
 
     }
 }

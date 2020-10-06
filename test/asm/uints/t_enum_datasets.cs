@@ -63,7 +63,7 @@ namespace Z0.Asm
             emit<BitSeq8,byte>();
             emit<Hex8Seq,byte>();
             emit<RegisterKind,uint>();
-            emit<RegisterCode,byte>();
+            emit<RegisterIndex,byte>();
             emit<RegisterClass,byte>();
             emit<RegisterWidth,ushort>();
             emit<AsmOperatingMode,byte>();

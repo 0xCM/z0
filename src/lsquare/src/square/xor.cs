@@ -19,17 +19,17 @@ namespace Z0
     partial class LogicSquare
     {
         [MethodImpl(Inline), Xor, Closures(Closure)]
-        public static void xor<T>(in T A, in T B, ref T Z)
+        public static void xor<T>(in T a, in T b, ref T dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               BL.xor(in uint8(in A), in uint8(in B), ref uint8(ref Z));
+               BL.xor(in uint8(in a), in uint8(in b), ref uint8(ref dst));
             else if(typeof(T) == typeof(ushort))
-                xor(w, in A, in B, ref Z);
+                xor(w, in a, in b, ref dst);
             else if(typeof(T) == typeof(uint))
-                xor(w, 4, 8, in A, in B, ref Z);
+                xor(w, 4, 8, in a, in b, ref dst);
             else if(typeof(T) == typeof(ulong))
-                xor(w, 16, 4, in A, in B, ref Z);
+                xor(w, 16, 4, in a, in b, ref dst);
             else
                 throw no<T>();
         }

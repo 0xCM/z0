@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     readonly struct RowBitsIdentityProvider : ITypeIdentityProvider
     {
@@ -23,7 +22,7 @@ namespace Z0
 
         const string @base = "rowbits";
 
-        public IEnumerable<Type> Identifiable => seq(typeof(RowBits<>));
+        public IEnumerable<Type> Identifiable => z.defer(typeof(RowBits<>));
 
         public TypeIdentity Identify(Type src)
         {

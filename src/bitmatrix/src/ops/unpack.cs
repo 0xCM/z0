@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The source matrix</param>
         /// <param name="dst">The target metrix</param>
         /// <typeparam name="T">The element type of the target matrix</typeparam>
-        [MethodImpl(Inline), Unpack, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Unpack, Closures(Closure)]
         public static ref readonly Matrix<N16,T> unpack<T>(in BitMatrix16 src, in Matrix<N16,T> dst)
             where T : unmanaged
         {
@@ -31,7 +31,7 @@ namespace Z0
         /// <param name="src">The source matrix</param>
         /// <param name="dst">The target metrix</param>
         /// <typeparam name="T">The element type of the target matrix</typeparam>
-        [MethodImpl(Inline), Unpack, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Unpack, Closures(Closure)]
         public static ref readonly Matrix<N8,T> unpack<T>(in BitMatrix8 src, in Matrix<N8,T> dst)
             where T : unmanaged
         {
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="src">The source matrix</param>
         /// <param name="dst">The target metrix</param>
         /// <typeparam name="T">The element type of the target matrix</typeparam>
-        [MethodImpl(Inline), Unpack, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Unpack, Closures(Closure)]
         public static ref readonly Matrix<N32,T> unpack<T>(in BitMatrix32 src, in Matrix<N32,T> dst)
             where T : unmanaged
         {
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="src">The source matrix</param>
         /// <param name="dst">The target metrix</param>
         /// <typeparam name="T">The element type of the target matrix</typeparam>
-        [MethodImpl(Inline), Unpack, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Unpack, Closures(Closure)]
         public static ref readonly Matrix<N64,T> unpack<T>(in BitMatrix64 src, in Matrix<N64,T> dst)
             where T : unmanaged
         {

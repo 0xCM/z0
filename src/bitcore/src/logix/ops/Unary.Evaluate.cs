@@ -13,7 +13,7 @@ namespace Z0
 
     partial class BitLogixOps
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Bit32 eval(ULK kind, Bit32 a)
         {
             if(kind == ULK.False)

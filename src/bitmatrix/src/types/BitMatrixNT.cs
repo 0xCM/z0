@@ -75,15 +75,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitMatrix(params T[] src)
-        {
-            this.Data = src;
-        }
+            => Data = src;
 
         [MethodImpl(Inline)]
         internal BitMatrix(Span<T> src)
-        {
-            this.Data = src;
-        }
+            => Data = src;
 
         /// <summary>
         /// Returns a reference to the leading segment of the underlying storage
@@ -138,7 +134,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Replaces an index-identied column of data with the content of a column vector
+        /// Replaces an index-identified column of data with the content of a column vector
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]
@@ -149,7 +145,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Retrieves an index-identied column of data presented as a bitvector
+        /// Retrieves an index-identified column of data presented as a bitvector
         /// </summary>
         /// <param name="col">The column index</param>
         [MethodImpl(Inline)]

@@ -19,17 +19,17 @@ namespace Z0
     partial class LogicSquare
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static void select<T>(in T A, in T B, in T C, ref T Z)
+        public static void select<T>(in T a, in T b, in T C, ref T dst)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-               BL.select(in uint8(in A), in uint8(in B), in uint8(in C), ref uint8(ref Z));
+               BL.select(in uint8(in a), in uint8(in b), in uint8(in C), ref uint8(ref dst));
             else if(typeof(T) == typeof(ushort))
-                select(w, in A, in B, in C, ref Z);
+                select(w, in a, in b, in C, ref dst);
             else if(typeof(T) == typeof(uint))
-                select(w, 4, 8, in A, in B, in C, ref Z);
+                select(w, 4, 8, in a, in b, in C, ref dst);
             else if(typeof(T) == typeof(ulong))
-                select(w, 16, 4, in A, in B, in C, ref Z);
+                select(w, 16, 4, in a, in b, in C, ref dst);
             else
                 throw no<T>();
         }

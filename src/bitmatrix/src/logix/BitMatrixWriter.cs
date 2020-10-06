@@ -8,10 +8,8 @@ namespace Z0
     using System.IO;
     using System.Runtime.CompilerServices;
 
-
     using static Konst;
-
-    using static Memories;
+    using static z;
 
     public readonly struct BitMatrixWriter : IBitMatrixWriter<BitMatrixWriter>
     {
@@ -22,12 +20,12 @@ namespace Z0
         [MethodImpl(Inline)]
         internal BitMatrixWriter(FilePath dst)
         {
-            this.TargetPath = dst;
+            TargetPath = dst;
             Stream = TargetPath.CreateParentIfMissing().Writer();
         }
 
         [MethodImpl(Inline)]
-        internal static IBitMatrixWriter Share(StreamWriter dst)
+        internal static IBitMatrixWriter share(StreamWriter dst)
             => new BitMatrixWriter(dst);
 
         [MethodImpl(Inline)]

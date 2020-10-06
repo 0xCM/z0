@@ -14,7 +14,6 @@ namespace Z0
 
     using Z0.Xed;
 
-
     public sealed class XedEtlWfHost : WfHost<XedEtlWfHost>
     {
         protected override void Execute(IWfShell wf)
@@ -23,5 +22,4 @@ namespace Z0
             step.Run();
         }
     }
-
 }
