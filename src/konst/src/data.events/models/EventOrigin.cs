@@ -9,18 +9,17 @@ namespace Z0
 
     using static Konst;
     using static Render;
-            
-    [Table]
-    public readonly struct WfEventOrigin : ITextual
+
+    public readonly struct EventOrigin : ITextual
     {
         public WfEventId EventId {get;}
 
         public WfActor Actor {get;}
 
         public WfCaller Call {get;}
-        
+
         [MethodImpl(Inline)]
-        public WfEventOrigin(WfEventId id, string actor, WfCaller call)
+        public EventOrigin(WfEventId id, string actor, WfCaller call)
         {
             EventId = id;
             Actor = actor;
@@ -28,7 +27,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public string Format() 
+        public string Format()
             => format(EventId, Actor, Call);
     }
 }

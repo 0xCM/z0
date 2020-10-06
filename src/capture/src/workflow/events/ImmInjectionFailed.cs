@@ -17,7 +17,7 @@ namespace Z0.Asm
         public const string EventName = nameof(ImmInjectionFailed);
         public WfEventId EventId {get;}
 
-        public WfPayload<MethodInfo> Method {get;}
+        public EventPayload<MethodInfo> Method {get;}
 
         public FlairKind Flair
             => FlairKind.Error;

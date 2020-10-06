@@ -14,7 +14,7 @@ namespace Z0
     [Event]
     public readonly struct RunningEvent : IWfEvent<RunningEvent>
     {
-        public const string EventName = nameof(RunningEvent);
+        public const string EventName = nameof(GlobalEvents.Running);
 
         public WfEventId EventId {get;}
 

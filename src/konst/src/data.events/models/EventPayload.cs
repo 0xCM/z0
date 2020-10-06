@@ -10,20 +10,20 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct WfPayload<T> : ITextual
+    public readonly struct EventPayload<T> : ITextual
     {
         public readonly T Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator WfPayload<T>(T src)
-            => new WfPayload<T>(src);
+        public static implicit operator EventPayload<T>(T src)
+            => new EventPayload<T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator T(WfPayload<T> src)
+        public static implicit operator T(EventPayload<T> src)
             => src.Data;
 
         [MethodImpl(Inline)]
-        public WfPayload(T data)
+        public EventPayload(T data)
             => Data = data;
 
         [MethodImpl(Inline)]

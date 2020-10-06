@@ -15,13 +15,13 @@ namespace Z0
     public static class AppErrorMsg
     {
         static AppMsg Fail(string msg, string caller, string file, int? line)
-            => AppMsg.define($"{msg} {caller} {line} {file}", MessageKind.Error);
+            => AppMsg.define($"{msg} {caller} {line} {file}", LogLevel.Error);
 
         static AppMsg Fail(string msg)
-            => AppMsg.define(msg, MessageKind.Error);
+            => AppMsg.define(msg, LogLevel.Error);
 
         public static AppMsg Unanticipated(Exception e)
-            => AppMsg.define(e?.ToString() ??"Heh?", MessageKind.Error);
+            => AppMsg.define(e?.ToString() ??"Heh?", LogLevel.Error);
 
         public static AppMsg NotEqual(object lhs, object rhs)
             => Fail($"Equality failure: {lhs} != {rhs}");

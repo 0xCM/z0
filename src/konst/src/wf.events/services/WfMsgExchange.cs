@@ -15,7 +15,7 @@ namespace Z0
         void IAppMsgSink.Deposit(IEnumerable<IAppMsg> msg)
         {}
 
-        void IAppMsgSink.Notify(string msg, MessageKind? kind)
+        void IAppMsgSink.Notify(string msg, LogLevel? kind)
         {}
 
         void IAppMsgSink.NotifyConsole(IAppMsg msg)

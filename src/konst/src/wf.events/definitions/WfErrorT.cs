@@ -23,7 +23,7 @@ namespace Z0
 
         public WfStepId StepId {get;}
 
-        public WfPayload<T> Data {get;}
+        public EventPayload<T> Data {get;}
 
         public FlairKind Flair {get;}
 

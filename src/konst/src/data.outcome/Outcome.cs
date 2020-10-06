@@ -56,14 +56,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public Outcome(AppMsg message)
         {
-            Ok = !(message.Kind == MessageKind.Error);
+            Ok = !(message.Kind == LogLevel.Error);
             Message = message;
         }
 
         [MethodImpl(Inline)]
         public Outcome(AppMsgData data)
         {
-            Ok = !(data.Kind == MessageKind.Error);
+            Ok = !(data.Kind == LogLevel.Error);
             Message = AppMsg.define(data);
         }
 

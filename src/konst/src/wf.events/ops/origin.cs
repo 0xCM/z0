@@ -18,14 +18,14 @@ namespace Z0
                 => new WfEventPair<S,T>(a,b);
 
         [MethodImpl(Inline), Op]
-        public static WfEventOrigin origin(in WfEventId id, string actor, in WfCaller call)
-            => new WfEventOrigin(id,actor, call);
+        public static EventOrigin origin(in WfEventId id, string actor, in WfCaller call)
+            => new EventOrigin(id,actor, call);
 
         [MethodImpl(Inline), Op]
-        public static WfEventOrigin origin(in WfEventId id, PartId part, string actor,
+        public static EventOrigin origin(in WfEventId id, PartId part, string actor,
             [CallerMemberName] string caller = null,
             [CallerFilePath] string file = null,
             [CallerLineNumber] int? line = null)
-                    => new WfEventOrigin(id,actor, WfCore.caller(part, caller,file,line));
+                    => new EventOrigin(id,actor, WfCore.caller(part, caller,file,line));
     }
 }

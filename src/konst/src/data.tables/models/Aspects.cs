@@ -128,7 +128,7 @@ namespace Z0
         }
 
         static AppMsg ContractMismatch(string host, string contract)
-            => AppMsg.define($"The source type {host} does not reify {contract}", MessageKind.Error);
+            => AppMsg.define($"The source type {host} does not reify {contract}", LogLevel.Error);
 
         static PropertyInfo[] Props(Type contract)
             => contract.Properties().Instance().Where(p => p.NotIgnored());

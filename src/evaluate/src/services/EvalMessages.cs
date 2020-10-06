@@ -18,12 +18,12 @@ namespace Z0
             => dst.NotifyConsole(AppMsg.info($"{opname}({a}, {b}) = {result}"));
 
         public static void AnalyzingEvaluation(this IAppMsgSink dst, in ApiMemberCode api)
-            => dst.NotifyConsole(AppMsg.define($"Analyzing evaluation of {api.Uri.WithScheme(ApiUriScheme.Located)}", MessageKind.Babble));
+            => dst.NotifyConsole(AppMsg.define($"Analyzing evaluation of {api.Uri.WithScheme(ApiUriScheme.Located)}", LogLevel.Babble));
 
         public static void RuntimeEvalFailure(this IAppMsgSink dst, in ApiMemberCode api, Exception e, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
         {
             dst.NotifyConsole(AppMsg.error($"Runtime evaluation error occurred duing execution of {api.Id}", caller, file, line));
-            dst.NotifyConsole(AppMsg.define(e, MessageKind.Error));
+            dst.NotifyConsole(AppMsg.define(e, LogLevel.Error));
         }
 
         public static AppMsg BufferSizeError(ApiMemberCode code, BufferToken buffer)

@@ -57,11 +57,8 @@ namespace Z0
                 var @base = ProcessImages.@base(part);
                 var dstpath = TargetDir + FileName.define(part.Format(), FileExtension.Define("csv"));
 
-                var h = EmitImageDataHost.create(part);
-                using var step = h.Step(Wf, out var _);
-                step.Run();
-
-                seek(Index,i) = new LocatedPart(part, @base, (uint)(step.OffsetAddress - @base));
+                EmitImageData.create().Run(Wf, part, out var offset);
+                seek(Index,i) = new LocatedPart(part, @base, (uint)(offset - @base));
              }
 
             EmitImageSummariesHost.create(Images).Run(Wf);

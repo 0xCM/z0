@@ -22,9 +22,9 @@ namespace Z0
             else if(e.InnerException is AppException app)
                 yield return app.Message;
             else if(e.InnerException != null)
-                yield return AppMsg.define($"{e}",MessageKind.Error);
+                yield return AppMsg.define($"{e}",LogLevel.Error);
             else
-                yield return AppMsg.define($"{name} failed {e}", MessageKind.Error);
+                yield return AppMsg.define($"{name} failed {e}", LogLevel.Error);
         }
 
         static IEnumerable<IAppMsg> FormatErrors(Exception e, MethodInfo method)
@@ -40,7 +40,7 @@ namespace Z0
             else if(e.InnerException is AppException app)
                 yield return app.Message;
             else if(e.InnerException != null)
-                yield return AppMsg.define($"{e}", MessageKind.Error);
+                yield return AppMsg.define($"{e}", LogLevel.Error);
             else
             {
                 var reason = e.Message;
@@ -49,7 +49,7 @@ namespace Z0
                 content.AppendLine(title);
                 content.AppendLine(e.StackTrace);
                 var payload = content.ToString();
-                yield return AppMsg.define(payload, MessageKind.Error);
+                yield return AppMsg.define(payload, LogLevel.Error);
             }
          }
     }

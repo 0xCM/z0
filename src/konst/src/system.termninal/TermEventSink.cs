@@ -43,7 +43,7 @@ namespace Z0
             => term.print(e);
 
         [MethodImpl(Inline)]
-        public void Deposit<T>(T content, CorrelationToken ct, MessageKind kind = MessageKind.Info, [Caller]string caller = null, [File] string file = null, [Line] int? line = null)
+        public void Deposit<T>(T content, CorrelationToken ct, LogLevel kind = LogLevel.Info, [Caller]string caller = null, [File] string file = null, [Line] int? line = null)
                 => term.print(AppMsg.called(content, kind, caller, file, line));
 
         public void Dispose()

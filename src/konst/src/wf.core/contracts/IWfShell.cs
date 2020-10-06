@@ -58,11 +58,8 @@ namespace Z0
 
         WfShell<S> WithState<S>(S src);
 
-        IFileDb FileDb()
-            => new FileDb(FS.dir(Paths.LogRoot.Name) + FS.folder("db"));
-
-        IFileDb FileDb(FS.FolderPath root)
-            => new FileDb(root);
+        IDatabaseArchive Db()
+            => new DatabaseArchive(new ArchiveConfig(Paths.DatabaseRoot));
 
         FS.FolderPath ArchiveRoot
             => FS.dir(@"k:/z0/archives");
@@ -190,12 +187,12 @@ namespace Z0
 
         void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst)
             where T : struct
-                => Raise(new TableEmitted(step, typeof(T), count, dst, Ct));
+                => Raise(new TableEmittedEvent(step, typeof(T), count, dst, Ct));
 
         void EmittedTable<H,T>(H host, T t, Count count, FS.FilePath dst)
             where H : IWfHost<H>, new()
             where T : struct
-                => Raise(new TableEmitted(host.Id, typeof(T), count, dst, Ct));
+                => Raise(new TableEmittedEvent(host.Id, typeof(T), count, dst, Ct));
 
         void EmittedTable(WfStepId step, Type t, Count count, FS.FilePath dst)
             => Raise(emitted(step, t, count, dst, Ct));

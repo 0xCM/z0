@@ -13,7 +13,7 @@ namespace Z0
 
     public readonly struct CreatedEvent : IWfEvent<CreatedEvent>
     {
-        public const string EventName = nameof(CreatedEvent);
+        public const string EventName = nameof(GlobalEvents.Created);
 
         public WfEventId EventId {get;}
 

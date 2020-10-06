@@ -15,7 +15,7 @@ namespace Z0
     [Event]
     public readonly struct RanEvent : IWfEvent<RanEvent>
     {
-        public const string EventName = nameof(RanEvent);
+        public const string EventName = nameof(GlobalEvents.Ran);
 
         public WfEventId EventId {get;}
 

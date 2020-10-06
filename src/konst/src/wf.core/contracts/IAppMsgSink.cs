@@ -12,12 +12,12 @@ namespace Z0
         void Deposit(IEnumerable<IAppMsg> msg)
             => z.iter(msg, Deposit);
 
-        void Notify(string msg, MessageKind? kind = null)
-            => Deposit(AppMsg.define(msg, kind ?? MessageKind.Info));
+        void Notify(string msg, LogLevel? kind = null)
+            => Deposit(AppMsg.define(msg, kind ?? LogLevel.Info));
 
         void NotifyConsole(IAppMsg msg)
         {
-            if(msg.Kind == MessageKind.Error)
+            if(msg.Kind == LogLevel.Error)
                 term.print(msg);
             else
                 term.print(msg, msg.Flair);

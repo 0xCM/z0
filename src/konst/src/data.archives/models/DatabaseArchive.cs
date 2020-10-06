@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct DatabaseArchive : IFileArchive<DatabaseArchive>, IDatabasePaths
+    public struct DatabaseArchive : IDatbaseArchive<DatabaseArchive>, IDatabasePaths
     {
         public ArchiveConfig Settings {get;}
 
@@ -23,7 +23,7 @@ namespace Z0
         public FS.FolderPath Root
             => Settings.Root;
 
-        FS.FolderPath IDatabasePaths.DbRoot
+        FS.FolderPath IDatabasePaths.DatabaseRoot
             => Settings.Root;
     }
 }

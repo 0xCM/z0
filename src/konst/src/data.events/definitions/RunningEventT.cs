@@ -12,13 +12,13 @@ namespace Z0
 
     public readonly struct RunningEvent<T> : IWfEvent<RunningEvent<T>, T>
     {
-        public const string EventName = nameof(RunningEvent<T>);
+        public const string EventName = nameof(GlobalEvents.Running);
 
         public WfEventId EventId {get;}
 
         public WfStepId StepId {get;}
 
-        public WfPayload<T> Payload {get;}
+        public EventPayload<T> Payload {get;}
 
         public FlairKind Flair {get;}
 

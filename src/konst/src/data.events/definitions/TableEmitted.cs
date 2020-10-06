@@ -10,9 +10,9 @@ namespace Z0
     using static Konst;
     using static RP;
 
-    public readonly struct TableEmitted : IWfEvent<TableEmitted>
+    public readonly struct TableEmittedEvent : IWfEvent<TableEmittedEvent>
     {
-        public const string EventName = nameof(TableEmitted);
+        public const string EventName = nameof(GlobalEvents.TableEmitted);
 
         public WfEventId EventId {get;}
 
@@ -25,7 +25,7 @@ namespace Z0
         public FS.FilePath Target {get;}
 
         [MethodImpl(Inline)]
-        public TableEmitted(WfStepId step, TableId dataset, uint count, FS.FilePath target, CorrelationToken ct)
+        public TableEmittedEvent(WfStepId step, TableId dataset, uint count, FS.FilePath target, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
             StepId = step;

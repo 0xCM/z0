@@ -16,7 +16,7 @@ namespace Z0
             Settings = XedSettings.Default();
             SourceRoot = FS.dir(wf.Paths.DevRoot.Name) + FS.folder("data") + FS.folder("sources") + FS.folder("xed");
             TargetRoot = FS.dir(wf.Paths.LogRoot.Name) + FS.folder("data") + FS.folder("xed");
-            Target = TableArchive.create(wf.FileDb().Root + FS.folder("tables") + FS.folder("xed"));
+            Target = TableArchive.create(wf.Db().Root + FS.folder("tables") + FS.folder("xed"));
         }
 
         public readonly ITableArchive Target;

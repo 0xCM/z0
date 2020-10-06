@@ -22,7 +22,7 @@ namespace Z0
         void ISink<IAppMsg>.Deposit(IAppMsg msg)
             => MessageQueue.Deposit(msg);
 
-        void IAppMsgSink.Notify(string msg, MessageKind? severity)
+        void IAppMsgSink.Notify(string msg, LogLevel? severity)
             => MessageQueue.Notify(msg, severity);
 
         IReadOnlyList<IAppMsg> IAppMsgQueue.Dequeue()

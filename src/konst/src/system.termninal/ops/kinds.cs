@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="content">The message to emit</param>
         /// <param name="caller">The calling member</param>
         public static void warn(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => T.WriteMessage(AppMsg.called(content?.ToString() ?? string.Empty, MessageKind.Warning, caller, file, line));
+            => T.WriteMessage(AppMsg.called(content?.ToString() ?? string.Empty, LogLevel.Warning, caller, file, line));
 
         /// <summary>
         /// Emits message to the error output stream
@@ -53,7 +53,7 @@ namespace Z0
             var msg = string.Empty.Build();
             msg.AppendLine($"Failure occurred at {caller} {file} {line}");
             msg.AppendLine(content?.ToString() ?? string.Empty);
-            T.WriteError(AppMsg.define($"{msg.ToString()}", MessageKind.Error));
+            T.WriteError(AppMsg.define($"{msg.ToString()}", LogLevel.Error));
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Z0
             var dst = text.build();
             dst.AppendLine($"Failure trapped by {caller} at {file} {line}");
             dst.AppendLine(e?.ToString() ?? string.Empty);
-            var msg = AppMsg.define($"{dst.ToString()}", MessageKind.Error);
+            var msg = AppMsg.define($"{dst.ToString()}", LogLevel.Error);
             T.WriteError(msg);
         }
 
@@ -80,7 +80,7 @@ namespace Z0
             var msg = string.Empty.Build();
             msg.AppendLine($"{title}: Failure occurred at {caller} {file} {line}");
             msg.AppendLine(e?.ToString() ?? string.Empty);
-            T.WriteError(AppMsg.define($"{msg.ToString()}", MessageKind.Error));
+            T.WriteError(AppMsg.define($"{msg.ToString()}", LogLevel.Error));
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Z0
             var msg = string.Empty.Build();
             msg.AppendLine($"{title}: Failure occurred at {caller} {file} {line}");
             msg.AppendLine(e?.ToString() ?? string.Empty);
-            T.WriteError(AppMsg.define($"{msg.ToString()}", MessageKind.Error));
+            T.WriteError(AppMsg.define($"{msg.ToString()}", LogLevel.Error));
         }
     }
 }

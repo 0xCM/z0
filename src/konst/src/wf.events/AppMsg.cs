@@ -27,11 +27,11 @@ namespace Z0
             => new AppMsgSource(PartId.None, caller, file, line);
 
         [MethodImpl(Inline), Op]
-        public static AppMsg called(object content, MessageKind kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static AppMsg called(object content, LogLevel kind, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new AppMsg(content, kind, (FlairKind)kind, caller, file, line);
 
         [MethodImpl(Inline), Op]
-        public static AppMsg define(object content, MessageKind kind)
+        public static AppMsg define(object content, LogLevel kind)
             => new AppMsg(content, kind, (FlairKind)(kind), EmptyString, EmptyString, null);
 
         [MethodImpl(Inline), Op]
@@ -40,30 +40,30 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static AppMsg colorize(object content, FlairKind color)
-            => new AppMsg(content, MessageKind.Info, color, string.Empty, EmptyString, null);
+            => new AppMsg(content, LogLevel.Info, color, string.Empty, EmptyString, null);
 
         [MethodImpl(Inline), Op]
         public static AppMsg info(object content)
-            => new AppMsg(content, MessageKind.Info, FlairKind.Status, EmptyString, EmptyString, null);
+            => new AppMsg(content, LogLevel.Info, FlairKind.Status, EmptyString, EmptyString, null);
 
         [MethodImpl(Inline), Op]
         public static AppMsg babble(object content)
-            => new AppMsg(content, MessageKind.Babble, FlairKind.Disposed, EmptyString, EmptyString, null);
+            => new AppMsg(content, LogLevel.Babble, FlairKind.Disposed, EmptyString, EmptyString, null);
 
         [MethodImpl(Inline), Op]
         public static AppMsg warn(object content)
-            => new AppMsg(content, MessageKind.Warning, FlairKind.Warning, EmptyString, EmptyString, null);
+            => new AppMsg(content, LogLevel.Warning, FlairKind.Warning, EmptyString, EmptyString, null);
 
         [MethodImpl(Inline), Op]
         public static AppMsg error(object content, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => define($"{content} {caller} {line} {file}", MessageKind.Error);
+            => define($"{content} {caller} {line} {file}", LogLevel.Error);
 
         [MethodImpl(Inline), Op]
         public static AppMsg error(Exception e)
-            => define(e.ToString(), MessageKind.Error);
+            => define(e.ToString(), LogLevel.Error);
 
         [MethodImpl(Inline)]
-        AppMsg(object content, MessageKind kind, FlairKind color, string caller, string file, int? line, bool displayed = false)
+        AppMsg(object content, LogLevel kind, FlairKind color, string caller, string file, int? line, bool displayed = false)
         {
             Data = new AppMsgData(content,"{0}", kind, color, source(caller, file, line));
         }
@@ -77,7 +77,7 @@ namespace Z0
         /// <summary>
         /// The message classification
         /// </summary>
-        public MessageKind Kind
+        public LogLevel Kind
             => Data.Kind;
 
         /// <summary>

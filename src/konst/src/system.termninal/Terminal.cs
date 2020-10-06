@@ -79,7 +79,7 @@ namespace Z0
 
         public void WriteMessage(IAppMsg msg, FlairKind? color = null)
         {
-            if(msg.Kind == MessageKind.Error)
+            if(msg.Kind == LogLevel.Error)
                 WriteError(msg);
             else
                 WriteLine(msg, color ?? msg.Flair);

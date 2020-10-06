@@ -10,7 +10,7 @@ namespace Z0
         /// <summary>
         /// The message classification
         /// </summary>
-        MessageKind Kind {get;}
+        LogLevel Kind {get;}
 
         /// <summary>
         /// The message foreground color when rendered for display
@@ -21,7 +21,7 @@ namespace Z0
         /// Specifies whether the message describes an error
         /// </summary>
         bool IsError
-            => Kind == MessageKind.Error;
+            => Kind == LogLevel.Error;
     }
 
     public interface IAppMsg<T> : IAppMsg

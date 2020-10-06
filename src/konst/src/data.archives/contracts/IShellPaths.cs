@@ -26,9 +26,6 @@ namespace Z0
         FolderPath ShellExeDir
             => FolderPath.Define(Part.ShellExeDir);
 
-        FS.FolderPath DatabaseRoot
-            => FS.dir(LogRoot.Name) + FS.folder("db");
-
         /// <summary>
         /// The executing application's data directory
         /// </summary>

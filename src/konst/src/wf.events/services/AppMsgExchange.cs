@@ -36,7 +36,7 @@ namespace Z0
         public event Action<IAppMsg> Next;
 
         [MethodImpl(Inline)]
-        public void Notify(string msg, MessageKind? severity = null)
+        public void Notify(string msg, LogLevel? severity = null)
         {
            Queue.Notify(msg, severity);
         }

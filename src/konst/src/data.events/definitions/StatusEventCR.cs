@@ -17,13 +17,13 @@ namespace Z0
         where C : IWfStep<C>, new()
         where R : ITextual
     {
-        public const string EventName = nameof(StatusEvent<C,R>);
+        public const string EventName = nameof(GlobalEvents.Status);
 
         public WfEventId EventId {get;}
 
         public WfFunc<C,R> Func {get;}
 
-        public WfPayload<R> Payload {get;}
+        public EventPayload<R> Payload {get;}
 
         public FlairKind Flair {get;}
 

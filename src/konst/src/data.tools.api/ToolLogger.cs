@@ -38,13 +38,13 @@ namespace Z0
 
         public void Log(in WfError<Exception> error)
         {
-            Log(MessageKind.Error, format(error));
+            Log(LogLevel.Error, format(error));
         }
 
         /// <summary>
         /// Log a line of text to the logging file, with string.Format arguments.
         /// </summary>
-        public void Log(MessageKind kind, string format, params object[] args)
+        public void Log(LogLevel kind, string format, params object[] args)
             => Log(kind, string.Format(format, args));
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Z0
         /// </summary>
         /// <param name="kind">The message kind</param>
         /// <param name="content">The message content</param>
-        public void Log(MessageKind kind, string content)
+        public void Log(LogLevel kind, string content)
         {
             var data = Encoded.utf8(content + Eol);
 
@@ -63,10 +63,10 @@ namespace Z0
         }
 
         public void LogError(string content)
-            => Log(MessageKind.Error, $"Error: {content}");
+            => Log(LogLevel.Error, $"Error: {content}");
 
         public void LogError(string format, params object[] args)
-            => Log(MessageKind.Error, $"Error: {format}", args);
+            => Log(LogLevel.Error, $"Error: {format}", args);
 
         /// <summary>
         /// Get the string that prefixes all log entries. Shows the process, thread, and time.

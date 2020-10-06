@@ -14,7 +14,7 @@ namespace Z0
     [Event]
     public readonly struct Disposed : IWfEvent<Disposed>
     {
-        public const string EventName = nameof(Disposed);
+        public const string EventName = nameof(GlobalEvents.Disposed);
 
         public WfEventId EventId {get;}
 

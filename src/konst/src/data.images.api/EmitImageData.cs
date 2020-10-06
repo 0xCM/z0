@@ -11,7 +11,19 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public ref struct EmitImageData
+    [WfHost]
+    public sealed class EmitImageData : WfHost<EmitImageData,IPart,MemoryAddress>
+    {
+        protected override ref MemoryAddress Execute(IWfShell wf, in IPart src, out MemoryAddress dst)
+        {
+            using var step = new EmitImageDataStep(wf, this, src);
+            step.Run();
+            dst = step.OffsetAddress;
+            return ref dst;
+        }
+    }
+
+    public ref struct EmitImageDataStep
     {
         readonly IWfShell Wf;
 
@@ -36,7 +48,7 @@ namespace Z0
         readonly HexDataFormatter Formatter;
 
         [MethodImpl(Inline)]
-        public EmitImageData(IWfShell wf, WfHost host, IPart part)
+        public EmitImageDataStep(IWfShell wf, WfHost host, IPart part)
         {
             Wf = wf;
             Host = host;

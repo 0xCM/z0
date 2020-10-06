@@ -18,7 +18,7 @@ namespace Z0
             => new AppException(msg);
 
         public static AppException Define(object reason, string caller, string file, int? line)
-            => Define(AppMsg.define($"{reason?.ToString()} {caller} {file} {line}", MessageKind.Error));
+            => Define(AppMsg.define($"{reason?.ToString()} {caller} {file} {line}", LogLevel.Error));
 
         public AppException() { }
 

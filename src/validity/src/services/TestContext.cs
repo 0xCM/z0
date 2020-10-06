@@ -234,7 +234,7 @@ namespace Z0
         protected void CheckAction(Action f, string name)
             => Context.CheckAction(f,name);
 
-        protected void Notify(string msg, MessageKind? severity = null)
+        protected void Notify(string msg, LogLevel? severity = null)
             => Queue.Notify(msg, severity);
 
         protected void Trace(object msg, [Caller] string caller = null)

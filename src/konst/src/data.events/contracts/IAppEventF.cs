@@ -23,6 +23,6 @@ namespace Z0
     public interface IAppEvent<F,T> : IAppEvent<F>
         where F : struct, IAppEvent<F,T>
     {
-        WfPayload<T> Content => default;
+        EventPayload<T> Content => default;
     }
 }

@@ -16,7 +16,7 @@ namespace Z0
             => new FileEmitted(step, path, ct);
 
         [MethodImpl(Inline), Op]
-        public static TableEmitted emitted(WfStepId step, TableId table, uint count, FS.FilePath dst, CorrelationToken ct)
-            => new TableEmitted(step, table, count, dst, ct);
+        public static TableEmittedEvent emitted(WfStepId step, TableId table, uint count, FS.FilePath dst, CorrelationToken ct)
+            => new TableEmittedEvent(step, table, count, dst, ct);
     }
 }

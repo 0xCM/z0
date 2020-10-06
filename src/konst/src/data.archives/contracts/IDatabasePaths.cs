@@ -9,10 +9,7 @@ namespace Z0
 
     public interface IDatabasePaths
     {
-        /// <summary>
-        /// The file database root
-        /// </summary>
-        FS.FolderPath DbRoot
+        FS.FolderPath DatabaseRoot
             => FS.dir(@"j:\database");
     }
 }

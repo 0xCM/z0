@@ -7,7 +7,7 @@ namespace Z0
     /// <summary>
     /// Classifier for application messages
     /// </summary>
-    public enum MessageKind
+    public enum LogLevel
     {
         /// <summary>
         /// Boring

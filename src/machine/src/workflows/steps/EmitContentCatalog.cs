@@ -8,25 +8,36 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     using F = ContentLibField;
 
-    public ref struct EmitContentCatalog
+    [WfHost]
+    public sealed class EmitContentCatalog : WfHost<EmitContentCatalog>
     {
-        public readonly FilePath TargetPath;
+        protected override void Execute(IWfShell wf)
+        {
+            using var step = new EmitContentCatalogStep(wf,this);
+            step.Run();
+        }
+    }
+
+    public ref struct EmitContentCatalogStep
+    {
+        public readonly FS.FilePath TargetPath;
 
         public uint EmissionCount;
 
         readonly IWfShell Wf;
 
-        readonly EmitContentCatalogHost Host;
+        readonly WfHost Host;
 
         [MethodImpl(Inline)]
-        public EmitContentCatalog(IWfShell wf, EmitContentCatalogHost host)
+        public EmitContentCatalogStep(IWfShell wf, WfHost host)
         {
             Wf = wf;
             Host = host;
-            TargetPath =  Wf.IndexRoot + FileName.define("catalog", FileExtensions.Csv);
+            TargetPath =  Wf.Paths.DatabaseRoot + FS.file("documents","csv");
             EmissionCount = 0;
             Wf.Created(Host);
         }
@@ -40,14 +51,15 @@ namespace Z0
         {
             Wf.Running(Host);
 
-            var provider = Docs.content<TableContentProvider>();
-            var entries = z.span(provider.Provided.Array());
+            var provider = TableContentProvider.create(Parts.Data.Assembly);
+            var entries = provider.Entries;
             EmissionCount = (uint)entries.Length;
 
             var f = Table.formatter<ContentLibField>();
+
             for(var i=0u; i<EmissionCount; i++)
             {
-                ref readonly var entry = ref z.skip(entries, i);
+                ref readonly var entry = ref skip(entries, i);
                 f.Append(F.Type, entry.Type);
                 f.Delimit(F.Name, entry.Name);
                 f.EmitEol();

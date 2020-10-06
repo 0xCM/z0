@@ -9,8 +9,6 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-    using static Render;
-    using static WfCore;
 
     public readonly struct WfEventPair<S,T>
         where S : struct, IWfEvent<S>

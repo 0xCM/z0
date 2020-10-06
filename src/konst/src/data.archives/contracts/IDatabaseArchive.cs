@@ -6,7 +6,7 @@ namespace Z0
 {
     using api = Archives;
 
-    public interface IFileDb : IFileArchive
+    public interface IDatabaseArchive : IFileArchive
     {
         FS.FolderPath TableRoot
             => api.TableRoot(Root);
@@ -22,8 +22,8 @@ namespace Z0
 
     }
 
-    public interface IFileDbHost<H> : IFileDb
-        where H : IFileDbHost<H>
+    public interface IDatbaseArchive<H> : IDatabaseArchive, IFileArchive<H>
+        where H : IDatbaseArchive<H>
     {
 
     }

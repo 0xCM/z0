@@ -57,13 +57,13 @@ namespace Z0
         {
             lock(lockobj)
             {
-                Deposit(AppMsg.define($"{e}", MessageKind.Error));
+                Deposit(AppMsg.define($"{e}", LogLevel.Error));
                 return Dequeue();
             }
         }
 
-        public void Notify(string msg, MessageKind? severity = null)
-            => Deposit(AppMsg.define($"{msg}", severity ?? MessageKind.Babble));
+        public void Notify(string msg, LogLevel? severity = null)
+            => Deposit(AppMsg.define($"{msg}", severity ?? LogLevel.Babble));
 
         public void Emit(FilePath dst)
         {

@@ -21,7 +21,7 @@ namespace Z0
         public AppMsg(AppMsgData<T> src)
             => Data = src;
 
-        public MessageKind Kind
+        public LogLevel Kind
         {
             [MethodImpl(Inline)]
             get => Data.Kind;

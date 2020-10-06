@@ -21,13 +21,13 @@ namespace Z0
         /// <param name="file">The source file of the calling function</param>
         /// <param name="line">The source file line number where invocation ocurred</param>
         unsafe void notnull(void* p, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => (p != null).OnNone(() => throw new ArgumentNullException(AppMsg.called($"Pointer was null", MessageKind.Error, caller,file,line).ToString()));
+            => (p != null).OnNone(() => throw new ArgumentNullException(AppMsg.called($"Pointer was null", LogLevel.Error, caller,file,line).ToString()));
 
         void notnull<T>(T src, string msg = null, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : class
         {
             if(src is null)
-                throw new ArgumentNullException(AppMsg.called($"Argument was null", MessageKind.Error, caller,file,line).ToString());
+                throw new ArgumentNullException(AppMsg.called($"Argument was null", LogLevel.Error, caller,file,line).ToString());
         }
     }
 }

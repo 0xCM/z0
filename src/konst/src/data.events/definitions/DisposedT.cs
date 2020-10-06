@@ -14,11 +14,11 @@ namespace Z0
     [Event]
     public readonly struct Disposed<T> : IWfEvent<Disposed<T>>
     {
-        public const string EventName = nameof(Disposed);
+        public const string EventName = nameof(GlobalEvents.Disposed);
 
         public WfEventId EventId {get;}
 
-        public WfPayload<T> Content {get;}
+        public EventPayload<T> Content {get;}
 
         public FlairKind Flair {get;}
 

@@ -187,7 +187,7 @@ namespace Z0
         {
             var count = src.Count;
             var records = span(src.Sequenced);
-            var dir = Wf.Paths.DbRoot + FS.folder("tables") + FS.folder("asm");
+            var dir = Wf.Paths.DatabaseRoot + FS.folder("tables") + FS.folder("asm");
             var dst = dir + FS.file(src.Key.ToString(), FileExtensions.Csv);
             var formatter = Formatters.dataset<AsmTableField>();
             using var writer = dst.Writer();

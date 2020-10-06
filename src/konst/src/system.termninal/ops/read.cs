@@ -16,12 +16,12 @@ namespace Z0
         /// Reads a character from the terminal
         /// </summary>
         public static char readKey(string content = null)
-            => T.ReadKey(content != null ? AppMsg.called(content, MessageKind.HiliteCL) : null);
+            => T.ReadKey(content != null ? AppMsg.called(content, LogLevel.HiliteCL) : null);
 
         /// <summary>
         /// Reads a line of text from the terminal after printing a supplied message
         /// </summary>
         public static string read(string content = null)
-            => T.ReadLine(content != null ? AppMsg.called(content, MessageKind.HiliteCL) : null);
+            => T.ReadLine(content != null ? AppMsg.called(content, LogLevel.HiliteCL) : null);
     }
 }

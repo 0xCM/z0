@@ -24,7 +24,7 @@ namespace Z0
         /// <summary>
         /// The message classification
         /// </summary>
-        public readonly MessageKind Kind;
+        public readonly LogLevel Kind;
 
         /// <summary>
         /// The message foreground color when rendered for display
@@ -37,7 +37,7 @@ namespace Z0
         public readonly AppMsgSource Origin;
 
         [MethodImpl(Inline)]
-        internal AppMsgData(T content, string pattern, MessageKind kind, FlairKind color, AppMsgSource origin)
+        internal AppMsgData(T content, string pattern, LogLevel kind, FlairKind color, AppMsgSource origin)
         {
             Content = content;
             Pattern = pattern;

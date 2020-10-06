@@ -8,8 +8,9 @@ namespace Z0
     using System.Security;
     using System.Collections.Generic;
     using System.Linq;
+
     [SuppressUnmanagedCodeSecurity]
-    public interface ITableArchive : IFileDb
+    public interface ITableArchive : IDatabaseArchive
     {
         Option<FilePath> Deposit<F,R>(R[] src, FS.FileName name)
             where F : unmanaged, Enum

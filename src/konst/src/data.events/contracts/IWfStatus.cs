@@ -15,13 +15,13 @@ namespace Z0
     [Free]
     public interface IWfStatus<T> : IWfStatus
     {
-        WfPayload<T> Content {get;}
+        EventPayload<T> Content {get;}
     }
 
 
     [Free]
     public interface IWfTrace<T> : IWfEvent
     {
-        WfPayload<T> Content {get;}
+        EventPayload<T> Content {get;}
     }
 }

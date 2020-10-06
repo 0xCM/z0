@@ -37,6 +37,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static EvalResult result<T>(int seq, in T id, Duration duration, AppMsg message)
-            => new EvalResult(seq,$"{id}", message.Kind != MessageKind.Error, duration, message);
+            => new EvalResult(seq,$"{id}", message.Kind != LogLevel.Error, duration, message);
     }
 }

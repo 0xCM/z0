@@ -50,7 +50,7 @@ namespace Z0
                 Run(new EmitPartCilHost());
                 Run(new EmitEnumCatalogHost());
                 Run(new EmitFieldLiterals());
-                Run(new EmitContentCatalogHost());
+                Run(new EmitContentCatalog());
                 Run(new EmitBitMasksHost());
                 CreateCaptureIndex.run(Wf, State);
 
@@ -81,7 +81,7 @@ namespace Z0
         void Run(ProcessPartFiles host)
             => host.Run(Wf, AsmContextProvider.create(State.Asm));
 
-        void Run(EmitContentCatalogHost host)
+        void Run(EmitContentCatalog host)
             => host.Run(Wf);
 
         void Run(EmitBitMasksHost host)

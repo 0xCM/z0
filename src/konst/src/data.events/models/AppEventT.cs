@@ -14,7 +14,7 @@ namespace Z0
     {
         public EventId Id {get;}
 
-        public WfPayload<T> Content {get;}
+        public EventPayload<T> Content {get;}
 
         public FlairKind Flair {get;}
 

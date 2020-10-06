@@ -15,13 +15,13 @@ namespace Z0
     [Event]
     public readonly struct TraceEvent<T> : IWfTrace<T>
     {
-        public static string EventName = nameof(TraceEvent<T>);
+        public const string EventName = nameof(GlobalEvents.Trace);
 
         public WfEventId EventId {get;}
 
         public WfStepId StepId {get;}
 
-        public WfPayload<T> Content {get;}
+        public EventPayload<T> Content {get;}
 
         public FlairKind Flair {get;}
 
