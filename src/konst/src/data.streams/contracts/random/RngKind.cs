@@ -3,12 +3,12 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     /// <summary>
     /// Defines rng classifiers
     /// </summary>
     public enum RngKind
-    {        
+    {
         None = 0,
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Z0
         /// A suite of 64-bit WyHash generators
         /// </summary>
         WyHash64Suite = 9,
-        
+
         /// <summary>
         /// An xorshift generator with 128 bits of state
         /// </summary>
@@ -86,10 +86,9 @@ namespace Z0
         User2 = 102,
 
         User3 = 103,
-                
+
         /// <summary>
-        /// Indentifes a hardware level entropic source driven by
-        /// the RDRAND instruction
+        /// Identifies a hardware level entropic source driven by the RDRAND instruction
         /// </summary>
         MklEntropic = 14680064,
 
@@ -112,12 +111,12 @@ namespace Z0
         /// A 59-bit multiplicative congruential generator provided by MKL
         /// </summary>
         MklMcg59 = 4194304,
-        
+
         /// <summary>
         /// A set of 273 Wichmann-Hill combined multiplicative congruential generators provided by MKL
         /// </summary>
         MklWH = 5242880,
-        
+
         /// <summary>
         /// A 32-bit Gray code-based generator producing low-discrepancy sequences for dimensions 1 ≤ s ≤ 40 provided by MKL
         /// </summary>
@@ -127,7 +126,7 @@ namespace Z0
         /// A 32-bit Gray code-based generator producing low-discrepancy sequences for dimensions 1 ≤ s ≤ 318 provided by MKL
         /// </summary>
         MklNiederr = 7340032,
-        
+
         /// <summary>
         /// A SIMD-oriented Fast Mersenne Twister pseudorandom number generator provided by MKL
         /// </summary>
@@ -137,7 +136,7 @@ namespace Z0
         /// A set of 6024 Mersenne Twister pseudorandom number generators provided by MKL
         /// </summary>
         MklMt2203 = 9437184,
-        
+
         /// <summary>
         /// A SIMD-oriented Fast Mersenne Twister pseudorandom number generator provided by MKL
         /// </summary>

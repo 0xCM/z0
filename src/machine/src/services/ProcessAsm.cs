@@ -31,7 +31,7 @@ namespace Z0
 
         readonly IAsmContext Asm;
 
-        readonly ApiCaptureIndex Encoded;
+        readonly ApiCodeBlockIndex Encoded;
 
         readonly int[] Sequence;
 
@@ -55,7 +55,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public ProcessAsm(IWfCaptureState state, in ApiCaptureIndex encoded)
+        public ProcessAsm(IWfCaptureState state, in ApiCodeBlockIndex encoded)
         {
             Wf = state.Wf;
             Asm = state.Asm;

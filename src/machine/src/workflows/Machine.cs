@@ -20,7 +20,7 @@ namespace Z0
         readonly WfHost Host;
 
 
-        ApiCaptureIndex Index;
+        ApiCodeBlockIndex Index;
 
         internal Machine(WfCaptureState state, WfHost host)
         {

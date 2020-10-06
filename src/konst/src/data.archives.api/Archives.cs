@@ -75,8 +75,8 @@ namespace Z0
             => new SemanticArchive();
 
         [MethodImpl(Inline), Op]
-        public static ApiHostCodeIndex index(ApiHostUri host, ApiCodeBlock[] code)
-            => new ApiHostCodeIndex(host,code);
+        public static ApiHostCodeBlocks index(ApiHostUri host, ApiCodeBlock[] code)
+            => new ApiHostCodeBlocks(host,code);
 
         public static Dictionary<PartId,PartFile[]> index(PartFileClass kind, PartFiles src, params PartId[] parts)
         {

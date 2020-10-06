@@ -15,9 +15,9 @@ namespace Z0
     [WfHost]
     public sealed class EmitResBytes : WfHost<EmitResBytes>
     {
-        ApiCaptureIndex Index;
+        ApiCodeBlockIndex Index;
 
-        public EmitResBytes WithIndex(in ApiCaptureIndex index)
+        public EmitResBytes WithIndex(in ApiCodeBlockIndex index)
         {
             Index = index;
             return this;
@@ -44,9 +44,9 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        readonly ApiCaptureIndex Index;
+        readonly ApiCodeBlockIndex Index;
 
-        public EmitResBytesStep(IWfShell context, WfHost host, in ApiCaptureIndex index)
+        public EmitResBytesStep(IWfShell context, WfHost host, in ApiCodeBlockIndex index)
         {
             Wf = context;
             Host = host;
@@ -65,7 +65,7 @@ namespace Z0
             {
                 foreach(var host in Index.Hosts)
                     if(host.IsNonEmpty)
-                        Emit(Index.HostCodeIndex(host), TargetDir);
+                        Emit(Index.HostCodeBlocks(host), TargetDir);
             }
             catch(Exception e)
             {
@@ -80,7 +80,7 @@ namespace Z0
             Wf.Disposed(Host);
         }
 
-        void Emit(ApiHostCodeIndex src, FS.FolderPath dst)
+        void Emit(ApiHostCodeBlocks src, FS.FolderPath dst)
         {
             var path = (dst + FS.folder("src")) + FS.file(src.Host.FileName(FileExtensions.Cs).Name);
             var resources = HostResources.from(src);

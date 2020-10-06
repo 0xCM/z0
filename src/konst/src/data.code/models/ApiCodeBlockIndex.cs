@@ -12,7 +12,7 @@ namespace Z0
     using static ApiCaptureIndexParts;
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct ApiCaptureIndex
+    public struct ApiCodeBlockIndex
     {
         PartAddresses Memories;
 
@@ -23,7 +23,7 @@ namespace Z0
         public readonly PartId[] Parts;
 
         [MethodImpl(Inline)]
-        public ApiCaptureIndex(PartId[] parts, PartAddresses members, UriAddresses memuri, PartCode code)
+        public ApiCodeBlockIndex(PartId[] parts, PartAddresses members, UriAddresses memuri, PartCode code)
         {
             Parts = parts;
             Memories = members;
@@ -81,12 +81,8 @@ namespace Z0
             => Memories[location];
 
         [MethodImpl(Inline)]
-        public ApiHostCodeIndex HostCodeIndex(ApiHostUri host)
-            => Archives.index(host, PartIndex[host]);
-
-        [MethodImpl(Inline)]
         public ApiHostCodeBlocks HostCodeBlocks(ApiHostUri host)
-            => new ApiHostCodeBlocks(host, HostCodeIndex(host).Code);
+            => Archives.index(host, PartIndex[host]);
 
         [MethodImpl(Inline)]
         public ApiPartCodeBlocks PartCodeBlocks(PartId id)

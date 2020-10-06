@@ -15,7 +15,7 @@ namespace Z0
         /// Produces an interminable stream of random bits
         /// </summary>
         /// <param name="random">The random source</param>
-        public static IEnumerable<Bit32> BitStream32(this IPolySource random)
+        public static IEnumerable<Bit32> BitStream32(this IValueSource random)
         {
             const int w = 64;
             while(true)
@@ -30,7 +30,7 @@ namespace Z0
         /// Produces an interminable stream of random bits from a value sequence of parametric type
         /// </summary>
         /// <param name="random">The random source</param>
-        public static IEnumerable<T> BitStream<T>(this IPolySource src)
+        public static IEnumerable<T> BitStream<T>(this IValueSource src)
             where T : unmanaged
         {
             while(true)

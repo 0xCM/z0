@@ -4,8 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+   [Free]
    public interface IRngSampler<T> : IRngStream<T>
         where T : struct
     {

@@ -25,9 +25,9 @@ namespace Z0
 
         readonly WfHost Host;
 
-        public ApiCaptureIndex Index;
+        public ApiCodeBlockIndex Index;
 
-        public static ApiCaptureIndex create(IWfShell wf, WfHost host, in PartFiles src)
+        public static ApiCodeBlockIndex create(IWfShell wf, WfHost host, in PartFiles src)
         {
             var files = src.Parsed.View;
             var count = files.Length;
@@ -121,7 +121,7 @@ namespace Z0
             Index = Freeze();
         }
 
-        ApiCaptureIndex Freeze()
+        ApiCodeBlockIndex Freeze()
         {
             var memories = Encoded;
             var locations = Located;
@@ -131,7 +131,7 @@ namespace Z0
                 .GroupBy(g => g.Host)
                 .Select(x => (new CodeBlocks(x.Key, x.Select(y => y.Code).ToArray()))).Array();
 
-            return new ApiCaptureIndex(parts,
+            return new ApiCodeBlockIndex(parts,
                    new PartAddresses(parts, memories),
                    new UriAddresses(parts, locations),
                    new PartCode(parts, code.Select(x => (x.Host, x)).ToDictionary()));

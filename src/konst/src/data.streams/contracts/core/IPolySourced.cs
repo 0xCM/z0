@@ -7,23 +7,18 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ICellValues<T> : IValueSource<T>
-        where T : struct, IDataCell
+    public interface IPolySourced : IPolySource,
+        IPolySource<sbyte>,
+        IPolySource<byte>,
+        IPolySource<short>,
+        IPolySource<ushort>,
+        IPolySource<int>,
+        IPolySource<uint>,
+        IPolySource<long>,
+        IPolySource<ulong>,
+        IPolySource<float>,
+        IPolySource<double>
     {
 
     }
-
-    [Free]
-    public interface ICellSource : IValueSource
-    {
-
-    }
-
-    [Free]
-    public interface IDomainCells<T> : IDomainValues<T>
-        where T : struct, IDataCell
-    {
-
-    }
-
 }

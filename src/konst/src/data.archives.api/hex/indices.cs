@@ -14,7 +14,7 @@ namespace Z0
 
     partial struct ApiHexArchives
     {
-        public static IEnumerable<ApiHostCodeIndex> indices(ApiCodeArchive src, params PartId[] owners)
+        public static IEnumerable<ApiHostCodeBlocks> indices(ApiCodeArchive src, params PartId[] owners)
         {
             if(owners.Length != 0)
             {
@@ -37,13 +37,11 @@ namespace Z0
             }
         }
 
-        public static ApiHostCodeIndex index(ApiCodeArchive src, FilePath path)
+        public static ApiHostCodeBlocks index(ApiCodeArchive src, FilePath path)
         {
             var uri = ApiUriParser.host(path.FileName);
             if(uri.Failed || uri.Value.IsEmpty)
-            {
-                return ApiHostCodeIndex.Empty;
-            }
+                return default;
 
             var dst = z.list<ApiCodeBlock>();
             foreach(var item in read(src))

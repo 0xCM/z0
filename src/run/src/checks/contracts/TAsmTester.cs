@@ -20,9 +20,6 @@ namespace Z0.Asm
         IAsmFormatter Formatter
             => Context.Formatter;
 
-        ApiCodeQuery UriBitQuery
-            => Z0.ApiCodeQuery.Service;
-
         IPolyrand IPolyrandProvider.Random
             => Context.Random;
 

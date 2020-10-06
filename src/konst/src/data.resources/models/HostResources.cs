@@ -15,12 +15,12 @@ namespace Z0
     /// </summary>
     public readonly struct HostResources
     {
-        public static HostResources from(ApiHostCodeIndex src)
+        public static HostResources from(ApiHostCodeBlocks src)
         {
-            var count = src.Code.Length;
+            var count = src.Length;
             var buffer = alloc<BinaryResourceSpec>(count);
             var dst = span(buffer);
-            var blocks = span(src.Code);
+            var blocks = span(src.Storage);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var code = ref skip(blocks,i);

@@ -26,27 +26,4 @@ namespace Z0
     {
 
     }
-
-    [Free]
-    public interface IPolyStream<T> : IValueSource<T>, IValueStream<T>
-        where T : struct
-    {
-
-    }
-
-    [Free]
-    public interface IPolySourced : IPolySource,
-        IPolySource<sbyte>,
-        IPolySource<byte>,
-        IPolySource<short>,
-        IPolySource<ushort>,
-        IPolySource<int>,
-        IPolySource<uint>,
-        IPolySource<long>,
-        IPolySource<ulong>,
-        IPolySource<float>,
-        IPolySource<double>
-    {
-
-    }
 }

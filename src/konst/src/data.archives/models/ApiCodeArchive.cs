@@ -63,7 +63,7 @@ namespace Z0
         public IEnumerable<FilePath> Files(PartId owner)
             => ArchiveRoot.Files(owner, FileExtensions.HexLine, true);
 
-        public IEnumerable<ApiHostCodeIndex> Indices(params PartId[] owners)
+        public IEnumerable<ApiHostCodeBlocks> Indices(params PartId[] owners)
             => api.indices(this, owners);
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Z0
         public ApiCodeBlock[] Read(OpIdentity id)
             => Read(ArchiveRoot + FileName.define(id, FileExtensions.HexLine));
 
-        public ApiHostCodeIndex Index(FilePath src)
+        public ApiHostCodeBlocks Index(FilePath src)
             => api.index(this,src);
 
         static FilePath[] files(FolderPath root)

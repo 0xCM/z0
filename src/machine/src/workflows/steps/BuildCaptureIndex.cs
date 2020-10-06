@@ -16,7 +16,7 @@ namespace Z0
     [WfHost]
     public sealed class BuildCaptureIndex : WfHost<BuildCaptureIndex>
     {
-        public static ref ApiCaptureIndex run(IWfShell wf, IWfCaptureState state, out ApiCaptureIndex dst)
+        public static ref ApiCodeBlockIndex run(IWfShell wf, IWfCaptureState state, out ApiCodeBlockIndex dst)
         {
             var host = new BuildCaptureIndex();
             var files = Archives.partfiles(wf.CaptureRoot);
@@ -33,7 +33,7 @@ namespace Z0
 
         readonly PartFiles SourceFiles;
 
-        public ApiCaptureIndex Target;
+        public ApiCodeBlockIndex Target;
 
         readonly List<Instruction> Buffer;
 
@@ -86,7 +86,7 @@ namespace Z0
             Wf.Ran(Host);
         }
 
-        Span<ApiPartRoutines> DecodeParts(in ApiCaptureIndex src)
+        Span<ApiPartRoutines> DecodeParts(in ApiCodeBlockIndex src)
         {
             Wf.Status(Host, text.format("Decoding {0} entries from {1} parts", src.EntryCount, src.Parts.Length));
 
@@ -157,7 +157,7 @@ namespace Z0
             return new ApiHostRoutines(hcs.Host, instructions.ToArray());
         }
 
-        void Process(in ApiCaptureIndex encoded)
+        void Process(in ApiCodeBlockIndex encoded)
         {
             try
             {

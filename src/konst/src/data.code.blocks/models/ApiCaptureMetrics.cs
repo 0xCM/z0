@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     /// <summary>
-    /// Collects statistics of encoded data known to a <see cref='ApiCaptureIndex'/>
+    /// Collects statistics of encoded data known to a <see cref='ApiCodeBlockIndex'/>
     /// </summary>
     public struct ApiCaptureMetrics
     {
@@ -30,7 +30,7 @@ namespace Z0
         public string Format()
             => text.format("{0}", new {PartCount, HostCount, AddressCount, FunctionCount, IdentityCount, ByteCount});
 
-        public static ApiCaptureMetrics from(ApiCaptureIndex src)
+        public static ApiCaptureMetrics from(ApiCodeBlockIndex src)
         {
             var stats = default(ApiCaptureMetrics);
             stats.PartCount = (uint)src.Parts.Length;

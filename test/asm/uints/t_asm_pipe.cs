@@ -28,16 +28,15 @@ namespace Z0.Asm
 
         void check_unary_ops(ApiCodeBlock[] src)
         {
-            var query = AsmCheck.UriBitQuery;
-            foreach(var code in query.WithParameterCount(src, 1))
+            foreach(var code in ApiCodeBlocks.withArity(src, 1))
             {
-                if(query.AcceptsParameter(code, NumericKind.U8))
+                if(ApiCodeBlocks.accepts(code, NumericKind.U8))
                     AsmCheck.CheckFixedMatch<Cell8>(K.UnaryOp, code, code);
-                else if(query.AcceptsParameter(code, NumericKind.U16))
+                else if(ApiCodeBlocks.accepts(code, NumericKind.U16))
                     AsmCheck.CheckFixedMatch<Cell16>(K.UnaryOp, code, code);
-                else if(query.AcceptsParameter(code, NumericKind.U32))
+                else if(ApiCodeBlocks.accepts(code, NumericKind.U32))
                     AsmCheck.CheckFixedMatch<Cell32>(K.UnaryOp, code, code);
-                else if(query.AcceptsParameter(code, NumericKind.U64))
+                else if(ApiCodeBlocks.accepts(code, NumericKind.U64))
                     AsmCheck.CheckFixedMatch<Cell64>(K.UnaryOp, code, code);
             }
         }

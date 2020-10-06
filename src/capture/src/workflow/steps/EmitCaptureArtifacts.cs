@@ -78,7 +78,8 @@ namespace Z0
             try
             {
                 Run(new EmitExtractReport());
-                Run(new EmitParsedReportHost());
+                //Run(new EmitHostCodeBlockReport());
+                ParseMembers();
                 EmitApiCodeBlocks.create(HostUri, ParsedBlocks).Run(Wf);
                 Run(new EmitCilMembersHost());
                 DecodeMembers();
@@ -108,7 +109,7 @@ namespace Z0
         }
 
 
-        void Run(EmitParsedReportHost host)
+        void ParseMembers()
         {
             if(Extracts.Length == 0)
                 return;
@@ -119,8 +120,8 @@ namespace Z0
             if(ParsedBlocks.Count == 0)
                 return;
 
-            using var step = new EmitApiParseReport(Wf, host, HostUri, ParsedBlocks, ParsedPath);
-            step.Run();
+            EmitHostCodeBlockReport.create(HostUri, ParsedBlocks, ParsedPath).Run(Wf);
+
         }
 
         void Run(EmitCilMembersHost host)

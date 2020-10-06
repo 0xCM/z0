@@ -4,11 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System.Security;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Characterizes a random stream navigator
     /// </summary>
+    [Free]
     public interface IRngNav
     {
         /// <summary>
@@ -28,6 +29,7 @@ namespace Z0
     /// Characterizes a random source that can be navigated
     /// </summary>
     /// <typeparam name="T">The primal element type</typeparam>
+    [Free]
     public interface IRngNav<T> : IRngNav, IRngBoundPointSource<T>
         where T : struct
     {

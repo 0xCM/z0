@@ -10,7 +10,33 @@ namespace Z0
     using static Konst;
     using static RP;
 
-    public ref struct EmitApiParseReport
+    [WfHost]
+    public sealed class EmitHostCodeBlockReport : WfHost<EmitHostCodeBlockReport>
+    {
+        ApiHostUri ApiHost;
+
+        ApiMemberCodeBlocks Source;
+
+        FS.FilePath Target;
+
+        [MethodImpl(Inline)]
+        public static EmitHostCodeBlockReport create(ApiHostUri uri, ApiMemberCodeBlocks src, FS.FilePath dst)
+        {
+            var host = new EmitHostCodeBlockReport();
+            host.ApiHost = uri;
+            host.Source = src;
+            host.Target = dst;
+            return host;
+        }
+
+        protected override void Execute(IWfShell wf)
+        {
+            using var step = new EmitHostCodeBlockReportStep(wf,this,ApiHost,Source,Target);
+            step.Run();
+        }
+    }
+
+    public ref struct EmitHostCodeBlockReportStep
     {
         readonly IWfShell Wf;
 
@@ -25,7 +51,7 @@ namespace Z0
         public Span<ApiParseBlock> Emitted;
 
         [MethodImpl(Inline)]
-        public EmitApiParseReport(IWfShell wf, WfHost host, ApiHostUri uri, ApiMemberCodeBlocks src, FS.FilePath dst)
+        public EmitHostCodeBlockReportStep(IWfShell wf, WfHost host, ApiHostUri uri, ApiMemberCodeBlocks src, FS.FilePath dst)
         {
             Wf = wf;
             Host = host;

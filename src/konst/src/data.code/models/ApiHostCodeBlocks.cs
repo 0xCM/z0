@@ -61,5 +61,23 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data.Count;
         }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsNonEmpty;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Data.IsNonEmpty;
+        }
+
+        public ApiCodeBlock[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data.Storage;
+        }
     }
 }

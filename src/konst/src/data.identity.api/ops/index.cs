@@ -35,7 +35,7 @@ namespace Z0
             var archive =  Archives.capture(root);
             var paths =  HostCaptureArchive.create(root, host);
             var code = ApiCodeReader.Service.Read(paths.HostX86Path);
-            var opIndex =  ApiCodeQuery.Service.CreateIndex(code);
+            var opIndex =  index(code);
             return ApiIdentify.index(idx, opIndex);
         }
 

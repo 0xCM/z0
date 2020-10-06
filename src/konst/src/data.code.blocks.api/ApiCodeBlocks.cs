@@ -7,6 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
+    using System.Collections.Generic;
+    using System.Linq;
 
     using static Konst;
     using static z;
@@ -14,6 +16,46 @@ namespace Z0
     [ApiHost]
     public readonly partial struct ApiCodeBlocks
     {
+        /// <summary>
+        /// Determines whether an operation accepts an argument of specified numeric kind
+        /// </summary>
+        /// <param name="src">The encoded operation</param>
+        /// <param name="match">The kind to match</param>
+        [MethodImpl(Inline)]
+        public static bool accepts(ApiCodeBlock src, NumericKind match)
+            => ApiIdentify.numeric(src.Id.TextComponents.Skip(1)).Contains(match);
+
+        /// <summary>
+        /// Determines the arity of the encoded operation
+        /// </summary>
+        /// <param name="src">The encoded operation</param>
+        [MethodImpl(Inline)]
+        public static int arity(ApiCodeBlock src)
+            => src.OpUri.OpId.TextComponents.Count() - 1;
+
+        /// <summary>
+        /// Excludes source operations that do not accept two parameters of specified numeric kind
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="k1">The first parameter kind</param>
+        /// <param name="k2">The second parameter kind</param>
+        public static IEnumerable<ApiCodeBlock> accepts(IEnumerable<ApiCodeBlock> src, NumericKind k1, NumericKind k2)
+            => from code in src
+                let kinds = ApiIdentify.numeric(code.OpUri.OpId.TextComponents.Skip(1))
+                where kinds.Contains(k1) && kinds.Contains(k2)
+                select code;
+
+        [Op]
+        public static IEnumerable<ApiCodeBlock> accepts(IEnumerable<ApiCodeBlock> src, NumericKind kind)
+            => from code in src
+                where accepts(code, kind)
+                select code;
+
+        [Op]
+        public static IEnumerable<ApiCodeBlock> withArity(IEnumerable<ApiCodeBlock> src, int count)
+            => from code in src
+                where arity(code) == count
+                select code;
         [Op]
         public static uint emit(ReadOnlySpan<ApiCodeBlockInfo> src, FS.FilePath dst)
         {

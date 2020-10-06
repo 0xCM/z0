@@ -4,13 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static z;
-    using static WfCore;
-
-    [WfHost]
-    public sealed class EmitParsedReportHost : WfHost<EmitParsedReportHost>
+    [Free]
+    public interface IPolyStream<T> : IValueSource<T>, IValueStream<T>
+        where T : struct
     {
+
     }
 }

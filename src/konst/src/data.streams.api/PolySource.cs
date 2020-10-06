@@ -12,20 +12,13 @@ namespace Z0
 
     using VS = Sourced;
 
-
     [ApiHost]
-    public ref partial struct PolySource
+    public ref struct PolySource
     {
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Pair<T> pair<T>(IValueSource source, T t = default)
             where T : struct
                 => Tuples.pair(VS.one(source, t), VS.one(source, t));
-
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public Pair<T> Pair<T>(T t = default)
-            where T : struct
-                => pair(Source,t);
     }
 }

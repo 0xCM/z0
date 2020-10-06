@@ -19,6 +19,7 @@ namespace Z0
             => Stream;
     }
 
+    [Free]
     public interface ICellStreamProvider<F,W,T> : ICellStreamProvider<F>
         where F : unmanaged, IDataCell
         where W : unmanaged, ITypeWidth

@@ -17,12 +17,12 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public readonly ApiCaptureIndex Index;
+        public readonly ApiCodeBlockIndex Index;
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public PartIndexCreated(WfStepId step, ApiCaptureIndex index, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
+        public PartIndexCreated(WfStepId step, ApiCodeBlockIndex index, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
         {
             EventId = (EventName, step, ct);
             Index = index;
