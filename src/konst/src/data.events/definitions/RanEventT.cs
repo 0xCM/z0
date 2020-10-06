@@ -12,23 +12,29 @@ namespace Z0
     using static z;
 
     [Event]
-    public readonly struct WfDisposed : IWfEvent<WfDisposed>
+    public readonly struct RanEvent<T> : IWfEvent<RanEvent<T>, T>
     {
-        public const string EventName = nameof(WfDisposed);
+        public const string EventName = nameof(RanEvent<T>);
 
         public WfEventId EventId {get;}
+
+        public WfStepId StepId {get;}
+
+        public WfPayload<T> Payload {get;}
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfDisposed(WfStepId step, CorrelationToken ct, FlairKind flair = Disposed)
+        public RanEvent(WfStepId step, T data, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
+            StepId = step;
+            Payload = data;
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => EventId.Format();
+            => Render.format(EventId, Payload);
     }
 }

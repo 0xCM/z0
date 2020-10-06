@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct WfEventLog2 : IWfEventLog
+    public struct WfEventLog : IWfEventLog
     {
         readonly FS.FilePath StatusPath;
 
@@ -19,13 +19,10 @@ namespace Z0
 
         readonly FileStream Status;
 
-        public WfEventLog2(FS.FilePath status, FS.FilePath error, bool clear)
+        public WfEventLog(FS.FilePath status, FS.FilePath error)
         {
-            if(clear)
-            {
-                status.FolderPath.Clear();
-                error.Delete();
-            }
+            status.Delete();
+            error.Delete();
 
             StatusPath = status;
             Status = FS.stream(StatusPath);

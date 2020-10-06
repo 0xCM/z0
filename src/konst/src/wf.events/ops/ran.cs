@@ -12,13 +12,13 @@ namespace Z0
     partial struct WfEvents
     {
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static WfStepRan<T> ran<T>(WfStepId step, T content, CorrelationToken ct)
-            => new WfStepRan<T>(step, content, ct);
+        public static RanEvent<T> ran<T>(WfStepId step, T content, CorrelationToken ct)
+            => new RanEvent<T>(step, content, ct);
 
         [MethodImpl(Inline)]
-        public static WfStepRan<T> ran<H,T>(H host, T content, CorrelationToken ct)
+        public static RanEvent<T> ran<H,T>(H host, T content, CorrelationToken ct)
             where H : IWfHost<H>, new()
-                => new WfStepRan<T>(host.Id, content, ct);
+                => new RanEvent<T>(host.Id, content, ct);
 
         [MethodImpl(Inline), Op]
         public static ToolRan ran(ToolId tool, CorrelationToken ct)

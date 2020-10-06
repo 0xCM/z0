@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.IO;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -13,24 +12,18 @@ namespace Z0
     using static z;
 
     [Event]
-    public readonly struct WfStepRan : IWfEvent<WfStepRan>
+    public readonly struct RunningEvent : IWfEvent<RunningEvent>
     {
-        public const string EventName = nameof(WfStepRan);
+        public const string EventName = nameof(RunningEvent);
 
         public WfEventId EventId {get;}
-
-        public WfActor Actor {get;}
-
-        public WfStepId StepId {get;}
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStepRan(WfStepId step, CorrelationToken ct, FlairKind flair = Ran)
+        public RunningEvent(WfStepId step, CorrelationToken ct, FlairKind flair = Running)
         {
             EventId = (EventName, step, ct);
-            Actor = step.Name;
-            StepId = step;
             Flair = flair;
         }
 

@@ -12,7 +12,7 @@ namespace Z0
     partial struct WfEvents
     {
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static WfWarn<T> warn<T>(WfStepId step, T body, CorrelationToken ct)
-            => new WfWarn<T>(step, body, ct);
+        public static WarnEvent<T> warn<T>(WfStepId step, T body, CorrelationToken ct)
+            => new WarnEvent<T>(step, body, ct);
     }
 }

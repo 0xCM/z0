@@ -11,7 +11,8 @@ namespace Z0
 
     using FN = ArchiveNames.Folders;
 
-    public interface IShellPaths
+
+    public interface IShellPaths : ILogPaths
     {
         ICaptureArchive PartCaptureArchive
             => ApiArchives.capture(FS.dir(LogRoot.Name) + FS.folder(FN.Capture));
@@ -22,29 +23,11 @@ namespace Z0
         IHostCaptureArchive CaptureArchive(ApiHostUri host)
             => HostCaptureArchive.create(CaptureArchive().ArchiveRoot, host);
 
-        string ShellName
-            => Assembly.GetEntryAssembly().GetSimpleName();
-
         FolderPath ShellExeDir
             => FolderPath.Define(Part.ShellExeDir);
 
-        /// <summary>
-        /// The global application log root
-        /// </summary>
-        FolderPath LogRoot
-            => EnvVars.Common.LogRoot;
-
-        /// <summary>
-        /// The global application log root
-        /// </summary>
-        FS.FolderPath LogDir
-            => FS.dir(EnvVars.Common.LogRoot.Name);
-
-        FS.FolderPath DbRoot
+        FS.FolderPath DatabaseRoot
             => FS.dir(LogRoot.Name) + FS.folder("db");
-
-        FS.FolderPath AppLogRoot
-            => FS.dir(text.format("{0}/apps/{1}/logs", LogRoot.Name, ShellName));
 
         /// <summary>
         /// The executing application's data directory
@@ -59,24 +42,6 @@ namespace Z0
             => EnvVars.Common.DevRoot;
 
         /// <summary>
-        /// The name of the folder that receives standard out stream data
-        /// </summary>
-        FolderName StatusLogFolder
-            => FolderName.Define(StatusLog);
-
-        /// <summary>
-        /// The name of the folder that receives error stream data
-        /// </summary>
-        FolderName ErrorLogFolder
-            => FolderName.Define(ErrorLog);
-
-        /// <summary>
-        /// The name of a folder that contains test result logs
-        /// </summary>
-        FolderName TestLogFolder
-            => FolderName.Define(Test);
-
-        /// <summary>
         /// The name of a folder to which test data is emitted
         /// </summary>
         FolderName TestDataFolder
@@ -87,12 +52,6 @@ namespace Z0
         /// </summary>
         FolderName OutcomeFolder
             => FolderName.Define(Results);
-
-        /// <summary>
-        /// The name of the runtime log folder
-        /// </summary>
-        FolderName AppLogFolder
-            => FolderName.Define(AppsFolder);
 
         /// <summary>
         /// The name of the folder into which capture results are deposited
@@ -143,54 +102,6 @@ namespace Z0
             => FolderName.Define(ShellName);
 
         /// <summary>
-        /// The root test directory
-        /// </summary>
-        FolderPath TestLogRoot
-            => LogRoot + TestLogFolder;
-
-        /// <summary>
-        /// The directory into into which standard out stream emissions are deposited
-        /// </summary>
-        FolderPath AppStatusLogDir
-            => ShellExeDir + StatusLogFolder;
-
-        /// <summary>
-        /// The path to the global test error log directory
-        /// </summary>
-        FolderPath AppErrorLogDir
-            => ShellExeDir + ErrorLogFolder;
-
-        /// <summary>
-        /// The executing application's standard out log filename
-        /// </summary>
-        FileName AppStatusLogName
-            => FileName.define($"{ShellName}.stdout", FileExtensions.StatusLog);
-
-        /// <summary>
-        /// The executing application's standard out log filename
-        /// </summary>
-        FileName CaseLogName
-            => FileName.define($"{ShellName}.cases", FileExtensions.Csv);
-
-        /// <summary>
-        /// The executing application's error log filename
-        /// </summary>
-        FileName AppErrorLogName
-            => FileName.define($"{ShellName}.errors", FileExtensions.StatusLog);
-
-        /// <summary>
-        /// The executing application's standard out log path
-        /// </summary>
-        FilePath AppStatusLogPath
-            => AppStatusLogDir + AppStatusLogName;
-
-        /// <summary>
-        /// The executing application's error log path
-        /// </summary>
-        FilePath AppErrorLogPath
-            => AppErrorLogDir + AppErrorLogName;
-
-        /// <summary>
         /// The application-relative source code directory
         /// </summary>
         FolderPath AppDevRoot
@@ -220,14 +131,6 @@ namespace Z0
         FolderPath TestDataRoot
             => TestLogRoot + TestDataFolder;
 
-        FilePath TestErrorPath
-            => TestLogRoot + ErrorLogFolder + AppErrorLogName;
-
-        FilePath TestStatusPath
-            => TestLogRoot + StatusLogFolder + AppStatusLogName;
-
-        FilePath CaseLogPath
-            => TestLogRoot + StatusLogFolder + CaseLogName;
 
         /// <summary>
         /// Creates a provider rooted at the current root directory for another application

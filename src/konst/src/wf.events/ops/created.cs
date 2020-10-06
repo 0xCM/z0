@@ -13,24 +13,24 @@ namespace Z0
     partial struct WfEvents
     {
         /// <summary>
-        /// Defines a <see cref='WfStepCreated'/> event
+        /// Defines a <see cref='CreatedEvent'/> event
         /// </summary>
         /// <param name="id">The step identifier</param>
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op]
-        public static WfStepCreated created(WfStepId id, CorrelationToken ct, FlairKind flair = Created)
-            => new WfStepCreated(id, ct, flair);
+        public static CreatedEvent created(WfStepId id, CorrelationToken ct, FlairKind flair = Created)
+            => new CreatedEvent(id, ct, flair);
 
         /// <summary>
-        /// Defines a <see cref='WfStepCreated{T}'/> event
+        /// Defines a <see cref='CreatedEvent{T}'/> event
         /// </summary>
         /// <param name="id">The step identifier</param>
         /// <param name="ct">The correlation token</param>
         /// <param name="flair">The flair</param>
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static WfStepCreated<T> created<T>(WfStepId id, T content, CorrelationToken ct, FlairKind flair = Created)
-            => new WfStepCreated<T>(id, content, ct, flair);
+        public static CreatedEvent<T> created<T>(WfStepId id, T content, CorrelationToken ct, FlairKind flair = Created)
+            => new CreatedEvent<T>(id, content, ct, flair);
 
         /// <summary>
         /// Defines a <see cref='ToolCreated'/> event

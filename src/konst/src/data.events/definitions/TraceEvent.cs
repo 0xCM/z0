@@ -13,34 +13,29 @@ namespace Z0
     using static z;
 
     [Event]
-    public readonly struct WfStatus<C,R> : IWfEvent<WfStatus<C,R>, R>
-        where C : IWfStep<C>, new()
-        where R : ITextual
+    public readonly struct TraceEvent<T> : IWfTrace<T>
     {
-        public const string EventName = nameof(WfStatus<C,R>);
+        public static string EventName = nameof(TraceEvent<T>);
 
         public WfEventId EventId {get;}
 
-        public WfFunc<C,R> Func {get;}
+        public WfStepId StepId {get;}
 
-        public WfPayload<R> Payload {get;}
+        public WfPayload<T> Content {get;}
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStatus(WfFunc<C,R> f, R content, CorrelationToken ct, FlairKind flair = Status)
+        public TraceEvent(WfStepId step, T content, CorrelationToken ct, FlairKind flair = Trace)
         {
-            EventId = (f, ct);
-            Func = f;
+            EventId = (EventName, step, ct);
+            StepId = step;
             Flair =  flair;
-            Payload = content;
+            Content = content;
         }
-
-        public WfStepId StepId
-            => Func.StepId;
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Payload);
+            => format(EventId, Content);
     }
 }

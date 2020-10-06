@@ -5,35 +5,37 @@
 namespace Z0
 {
     using System;
+    using System.IO;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static Render;
     using static z;
 
-    public readonly struct WfStepCreated<T> : IWfEvent<WfStepCreated<T>>
+    [Event]
+    public readonly struct RanEvent : IWfEvent<RanEvent>
     {
-        public const string EventName = nameof(WfStepCreated);
-
-        public WfStepId StepId {get;}
+        public const string EventName = nameof(RanEvent);
 
         public WfEventId EventId {get;}
 
-        public WfPayload<T> Content {get;}
+        public WfActor Actor {get;}
+
+        public WfStepId StepId {get;}
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfStepCreated(WfStepId step, T content, CorrelationToken ct, FlairKind flair = Created)
+        public RanEvent(WfStepId step, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
+            Actor = step.Name;
             StepId = step;
-            Content = content;
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, Content);
+            => EventId.Format();
     }
 }

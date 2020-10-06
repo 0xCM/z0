@@ -14,6 +14,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void status<T>(IWfShell wf, WfStepId step, T body, CorrelationToken ct)
-            => wf.Raise(new WfStatus<T>(step, body, ct));
+            => wf.Raise(new StatusEvent<T>(step, body, ct));
     }
 }

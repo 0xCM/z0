@@ -95,7 +95,7 @@ namespace Z0
         void Status<C,R>(WfFunc<C,R> f, R result)
             where C : IWfStep<C>, new()
             where R : ITextual
-                => Raise(new WfStatus<C,R>(f, result, Ct));
+                => Raise(new StatusEvent<C,R>(f, result, Ct));
 
         void Warn<T>(WfStepId step, T content)
             => Raise(warn(step, content, Ct));
@@ -176,10 +176,10 @@ namespace Z0
             => Raise(ran(tool, Ct));
 
         void Ran<T>(WfStepId step, T content)
-            => Raise(new WfStepRan<T>(step, content, Ct));
+            => Raise(new RanEvent<T>(step, content, Ct));
 
         void Ran(WfStepId step)
-            => Raise(new WfStepRan(step, Ct));
+            => Raise(new RanEvent(step, Ct));
 
         void Ran<H,T>(H host, T content)
             where H : IWfHost<H>, new()

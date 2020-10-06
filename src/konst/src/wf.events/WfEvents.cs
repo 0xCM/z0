@@ -14,7 +14,7 @@ namespace Z0
     public readonly partial struct WfEvents
     {
         [MethodImpl(Inline), Op]
-        public static IWfEventLog log(WfLogConfig config, bool clear = true)
-            => new WfEventLog2(FS.path(config.StatusLog.Name), FS.path(config.ErrorLog.Name), clear);
+        public static IWfEventLog log(WfLogConfig config)
+            => new WfEventLog(FS.path(config.StatusLog.Name), FS.path(config.ErrorLog.Name));
     }
 }

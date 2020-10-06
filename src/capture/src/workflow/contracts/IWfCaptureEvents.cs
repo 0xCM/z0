@@ -6,7 +6,7 @@ namespace Z0.Asm
 {
     public interface IWfCaptureEvents
     {
-        IWfStatus Status => default(WfStatus<string>);
+        IWfStatus Status => default(StatusEvent<string>);
 
         IWfError Error => default(WfError<object>);
 
@@ -17,8 +17,6 @@ namespace Z0.Asm
         ExtractedMembers ExtractedMembers => default;
 
         ExtractReportSaved ExtractReportSaved => default;
-
-        FunctionsDecoded FunctionsDecoded => default;
 
         MembersLocated MembersLocated => default;
 
@@ -33,8 +31,6 @@ namespace Z0.Asm
         CapturingHost CapturingHost => default;
 
         CapturedHost CapturedHost => default;
-
-        ApiCodeTableSaved HexSaved => default;
 
         ExtractParseFailed ExtractParseFailed => default;
 

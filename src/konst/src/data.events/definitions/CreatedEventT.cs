@@ -8,32 +8,32 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static Render;
+    using static z;
 
-    [Event]
-    public readonly struct WfTermEvent : IWfEvent<WfTermEvent,Textual<string>>
+    public readonly struct CreatedEvent<T> : IWfEvent<CreatedEvent<T>>
     {
-        public WfEventId EventId {get;}
-
-        public WfActor Actor {get;}
+        public const string EventName = nameof(CreatedEvent);
 
         public WfStepId StepId {get;}
 
+        public WfEventId EventId {get;}
+
+        public WfPayload<T> Content {get;}
+
         public FlairKind Flair {get;}
 
-        public Textual<string> Content {get;}
-
         [MethodImpl(Inline)]
-        public WfTermEvent(WfEventId e, WfActor actor, WfStepId step, string body, FlairKind flair)
+        public CreatedEvent(WfStepId step, T content, CorrelationToken ct, FlairKind flair = Created)
         {
-            EventId = e;
-            Actor = actor;
+            EventId = (EventName, step, ct);
             StepId = step;
+            Content = content;
             Flair = flair;
-            Content = new Textual<string>(body, body);
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, Actor, StepId, Content);
+            => Render.format(EventId, Content);
     }
 }

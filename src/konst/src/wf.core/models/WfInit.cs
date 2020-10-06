@@ -90,7 +90,6 @@ namespace Z0
         public FS.FolderPath IndexDir
             => ResDir + FS.folder("index");
 
-
         [MethodImpl(Inline)]
         public WfInit(IShellContext shell, string[] args, ApiModules modules)
         {
