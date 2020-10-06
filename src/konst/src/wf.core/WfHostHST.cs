@@ -21,6 +21,9 @@ namespace Z0
 
         }
 
+        public static new H create()
+            => new H();
+
         [MethodImpl(Inline)]
         public void Run(IWfShell wf, in S src)
             => Run(wf,src, out var _);

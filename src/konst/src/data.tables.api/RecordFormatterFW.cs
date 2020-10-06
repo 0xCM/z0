@@ -44,6 +44,9 @@ namespace Z0
                 EmitEol();
         }
 
+        public string FormatHeader()
+            => Table.datasetHeader<F>().Render();
+
         public void EmitHeader()
             => EmitHeader(true);
 

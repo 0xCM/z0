@@ -28,10 +28,6 @@ namespace Z0
 
         IWfEventSink WfSink {get;}
 
-        FolderPath IndexRoot {get;}
-
-        FolderPath ResourceRoot {get;}
-
         ApiModules Modules {get;}
 
         IWfBroker Broker {get;}
@@ -40,29 +36,10 @@ namespace Z0
 
         IPolyrand Random {get;}
 
-        IPolySource PolySource
-            => Random;
-
-        FS.FolderPath Resources
-            => FS.dir(ResourceRoot.Name);
-
-        IWfShell WithSource(IPolyrand random);
-
         ApiContext ApiContext {get;}
 
-        FolderPath AppDataRoot
-            => Shell.Paths.AppDataRoot;
-
-        FS.FolderPath AppData
-            => FS.dir(Shell.Paths.AppDataRoot.Name);
-
-        WfShell<S> WithState<S>(S src);
-
-        IDatabaseArchive Db()
-            => new DatabaseArchive(new ArchiveConfig(Paths.DbRoot));
-
         FS.FolderPath ArchiveRoot
-            => FS.dir(@"k:/z0/archives");
+            => FS.dir(@"k:\z0\archives");
 
         FS.FolderPath ToolOuputDir(string tool)
             => ArchiveRoot + FS.folder("tools") + FS.folder(tool) + FS.folder("output");
@@ -72,6 +49,31 @@ namespace Z0
 
         FS.FolderPath AsmTables
             => Resources + FS.folder("tables");
+
+        IPolySource PolySource
+            => Random;
+
+        IShellPaths IShellContext.Paths
+            => Shell.Paths;
+
+        FolderPath IndexRoot
+            => FolderPath.Define(Init.IndexDir.Name);
+
+        FolderPath ResourceRoot
+            => FolderPath.Define(Init.ResDir.Name);
+
+        FS.FolderPath Resources
+            => FS.dir(ResourceRoot.Name);
+
+        FS.FolderPath AppData
+            => FS.dir(Shell.Paths.AppDataRoot.Name);
+
+        IDbArchive Db()
+            => new DbArchive(new ArchiveConfig(Paths.DbRoot));
+
+        IWfShell WithSource(IPolyrand random);
+
+        WfShell<S> WithState<S>(S src);
 
         WfEventId Raise<E>(in E e)
             where E : IWfEvent
@@ -189,13 +191,15 @@ namespace Z0
             where T : struct
                 => Raise(new TableEmittedEvent(step, typeof(T), count, dst, Ct));
 
-        void EmittedTable<H,T>(H host, T t, Count count, FS.FilePath dst)
+        void EmittedTable<H,T>(H host, T[] rows, FS.FilePath dst)
             where H : IWfHost<H>, new()
             where T : struct
-                => Raise(new TableEmittedEvent(host.Id, typeof(T), count, dst, Ct));
+                => Raise(new TableEmittedEvent<T>(host.Id, rows, dst, Ct));
 
-        void EmittedTable(WfStepId step, Type t, Count count, FS.FilePath dst)
-            => Raise(emitted(step, t, count, dst, Ct));
+        void EmittedTable<H,T>(H host, ReadOnlySpan<T> rows, FS.FilePath dst)
+            where H : IWfHost<H>, new()
+            where T : struct
+                => Raise(new TableEmittedEvent<T>(host.Id, rows, dst, Ct));
 
         void Processed<T>(WfStepId step, DataFlow<T> flow)
             => Raise(processed(step, flow, Ct));

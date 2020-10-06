@@ -12,7 +12,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ITableArchive : IDatabaseArchive
+    public interface ITableArchive : IDbArchive
     {
         Option<FilePath> Deposit<F,R>(R[] src, FS.FileName name)
             where F : unmanaged, Enum

@@ -120,8 +120,7 @@ namespace Z0
             if(ParsedBlocks.Count == 0)
                 return;
 
-            EmitHostCodeBlockReport.create(HostUri, ParsedBlocks, ParsedPath).Run(Wf);
-
+            EmitHostCodeBlockReport.run(Wf,HostUri, ParsedBlocks, ParsedPath, out var payload);
         }
 
         void Run(EmitCilMembersHost host)

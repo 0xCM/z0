@@ -28,6 +28,9 @@ namespace Z0
             get => Definition.MetadataToken;
         }
 
+        public Type[] NestedTypes
+            => Reflex.nested(Definition);
+
         [MethodImpl(Inline)]
         public static ClrType From(Type src)
             => new ClrType(src);
@@ -44,7 +47,11 @@ namespace Z0
         public static implicit operator Type(ClrType src)
             => src.Definition;
 
-        public Type[] NestedTypes
-            => Reflex.nested(Definition);
+        [MethodImpl(Inline)]
+        public string Format()
+            => string.Format("{0}/{1}", Definition.Name, Id);
+
+        public override string ToString()
+            => Format();
     }
 }

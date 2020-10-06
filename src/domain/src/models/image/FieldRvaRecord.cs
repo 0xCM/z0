@@ -10,9 +10,11 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential), Table(TableName)]
     public struct FieldRvaRecord
     {
+        public const string TableName = "image.fieldrva";
+
         public Address32 Rva;
 
         public string TypeName;

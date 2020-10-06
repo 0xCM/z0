@@ -15,13 +15,9 @@ namespace Z0
     public readonly struct ClrEnum<T> : IClrEnum<ClrEnum<T>,ClrEnum,T>
         where T : unmanaged, Enum
     {
-        public Type Definition {get;}
+        static readonly Type TD = typeof(T);
 
-        [MethodImpl(Inline)]
-        public ClrEnum(Type src)
-        {
-            Definition = src;
-        }
+        public Type Definition => TD;
 
         public ClrArtifactKey Id
         {
@@ -45,7 +41,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ClrType<T>(ClrEnum<T> src)
-            => new ClrType<T>(src.Definition);
+            => default;
     }
-
 }

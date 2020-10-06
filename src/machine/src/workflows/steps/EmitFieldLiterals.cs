@@ -26,8 +26,8 @@ namespace Z0
 
         readonly WfHost Host;
 
-        FolderPath Target
-            => Wf.ResourceRoot + FolderName.Define("fieldlits");
+        FS.FolderPath Target
+            => Wf.Paths.TableRoot + FS.folder(ImageLiteralFieldTable.TableId);
 
         public EmitFieldLiteralsStep(IWfShell wf, WfHost host)
         {
@@ -41,7 +41,7 @@ namespace Z0
         {
             var fields = Refs.fields(src.Types);
             if(fields.Length != 0)
-                Emit(fields, Target + FileName.define(src.Part.Format(), FileExtensions.Csv));
+                Emit(fields, Target + FS.file(src.Part.Format(), FileExtensions.Csv));
         }
 
         public void Run()
@@ -112,18 +112,7 @@ namespace Z0
                 "Value".PadRight(48), Sep
                 );
 
-        static string FormatLine(FieldRef src)
-        {
-            var content = Literals.format(src).PadRight(48);
-            var address = src.Address.Format().PadRight(16);
-            var width = src.Width.Count.ToString().PadRight(16);
-            var type = src.Field.DeclaringType.Name.PadRight(36);
-            var field = src.Field.Name.PadRight(36);
-            var line = text.concat(address, Sep, width, Sep,type, Sep, field, Sep, content, Sep);
-            return line;
-        }
-
-        void Emit(FieldRef[] src, FilePath dst)
+        void Emit(FieldRef[] src, FS.FilePath dst)
         {
             Wf.Running(Host, dst.Name);
             var input = span(src);

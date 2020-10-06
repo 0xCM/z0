@@ -10,9 +10,13 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential), Table(TableId)]
     public struct ImageBlob
     {
+        public const string TableId = "image.blob";
+
+        public const string DataType = "blob";
+
         public Count Seq;
 
         public ByteSize HeapSize;

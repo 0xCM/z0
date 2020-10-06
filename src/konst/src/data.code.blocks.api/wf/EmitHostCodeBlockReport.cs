@@ -10,55 +10,62 @@ namespace Z0
     using static Konst;
     using static RP;
 
-    [WfHost]
-    public sealed class EmitHostCodeBlockReport : WfHost<EmitHostCodeBlockReport>
+    public struct EmitHostCodeBlockSpec
     {
-        ApiHostUri ApiHost;
+        public ApiHostUri ApiHost;
 
-        ApiMemberCodeBlocks Source;
+        public ApiMemberCodeBlocks Source;
 
-        FS.FilePath Target;
+        public FS.FilePath Target;
+    }
 
-        [MethodImpl(Inline)]
-        public static EmitHostCodeBlockReport create(ApiHostUri uri, ApiMemberCodeBlocks src, FS.FilePath dst)
+    public struct EmitHostCodeBlockPayload
+    {
+        public ApiParseBlock[] Emitted;
+    }
+
+    [WfHost]
+    public sealed class EmitHostCodeBlockReport : WfHost<EmitHostCodeBlockReport,EmitHostCodeBlockSpec,EmitHostCodeBlockPayload>
+    {
+        public static ref EmitHostCodeBlockPayload run(IWfShell wf, ApiHostUri uri, in ApiMemberCodeBlocks src, FS.FilePath dst, out EmitHostCodeBlockPayload payload)
         {
-            var host = new EmitHostCodeBlockReport();
-            host.ApiHost = uri;
-            host.Source = src;
-            host.Target = dst;
-            return host;
+            var spec = new EmitHostCodeBlockSpec();
+            spec.ApiHost = uri;
+            spec.Source = src;
+            spec.Target = dst;
+            var host = create();
+            host.Run(wf, spec, out payload);
+            return ref payload;
+
         }
 
-        protected override void Execute(IWfShell wf)
+        protected override ref EmitHostCodeBlockPayload Execute(IWfShell wf, in EmitHostCodeBlockSpec spec, out EmitHostCodeBlockPayload dst)
         {
-            using var step = new EmitHostCodeBlockReportStep(wf,this,ApiHost,Source,Target);
+            dst = default;
+            using var step = new EmitHostCodeBlockReportStep(wf, this, spec);
             step.Run();
+            dst.Emitted = step.Emitted;
+            return ref dst;
         }
     }
 
-    public ref struct EmitHostCodeBlockReportStep
+    ref struct EmitHostCodeBlockReportStep
     {
         readonly IWfShell Wf;
 
         readonly WfHost Host;
 
-        readonly ApiHostUri Uri;
+        readonly EmitHostCodeBlockSpec Spec;
 
-        readonly ApiMemberCodeBlocks Source;
-
-        readonly FS.FilePath Target;
-
-        public Span<ApiParseBlock> Emitted;
+        public ApiParseBlock[] Emitted;
 
         [MethodImpl(Inline)]
-        public EmitHostCodeBlockReportStep(IWfShell wf, WfHost host, ApiHostUri uri, ApiMemberCodeBlocks src, FS.FilePath dst)
+        public EmitHostCodeBlockReportStep(IWfShell wf, WfHost host, EmitHostCodeBlockSpec spec)
         {
             Wf = wf;
             Host = host;
             Emitted = default;
-            Uri = uri;
-            Source = src;
-            Target = dst;
+            Spec = spec;
             Wf.Created(Host);
         }
 
@@ -66,11 +73,11 @@ namespace Z0
         {
             try
             {
-                Wf.Running(Host, Uri);
-                var report = ApiParseReport.create(Uri, Source);
-                ApiParseReport.save(report,Target);
+                Wf.Running(Host, Spec.ApiHost);
+                var report = ApiParseReport.create(Spec.ApiHost, Spec.Source);
+                ApiParseReport.save(report, Spec.Target);
                 Emitted = report;
-                Wf.Ran(Host, text.format(PSx2, Uri, Emitted.Length));
+                Wf.EmittedTable(Host, Emitted, Spec.Target);
             }
             catch(Exception e)
             {

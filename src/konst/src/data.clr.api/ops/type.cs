@@ -15,7 +15,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ClrType<T> type<T>()
-            => new ClrType<T>(typeof(T));
+            => default;
 
         [MethodImpl(Inline), Op]
         public static bool type(in ClrTypes src, string name, out Type dst)

@@ -11,8 +11,7 @@ namespace Z0
 
     using FN = ArchiveNames.Folders;
 
-
-    public interface IShellPaths : ILogPaths, IDatabasePaths
+    public interface IShellPaths : ILogPaths, IDbPaths
     {
         ICaptureArchive PartCaptureArchive
             => Archives.capture(FS.dir(LogRoot.Name) + FS.folder(FN.Capture));

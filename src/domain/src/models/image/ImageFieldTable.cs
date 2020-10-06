@@ -13,7 +13,7 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential), Table(TableName)]
     public struct ImageFieldTable
     {
-        public const string TableName = "image.fields";
+        public const string TableName = "image.field";
 
         public Count Sequence;
 

@@ -25,7 +25,7 @@ namespace Z0
 
     ref struct EmitImageBlobsStep
     {
-        const string DataType = "ImageBlob";
+        const string DataType = ImageBlob.DataType;
 
         public uint EmissionCount;
 
@@ -51,44 +51,38 @@ namespace Z0
             return reader.ReadBlobs();
         }
 
-        static DataSink<F,ImageBlob> sink()
-        {
-            var formatter = Table.formatter<F,W>();
-            formatter.EmitHeader();
-            return new DataSink<F,ImageBlob>(formatter, deposit);
-        }
-
-        static void deposit(in ImageBlob src, IDatasetFormatter<F> dst)
+        static string format(in ImageBlob src, RecordFormatter<F,W> dst)
         {
             dst.Delimit(F.Sequence, src.Seq);
             dst.Delimit(F.HeapSize, src.HeapSize);
             dst.Delimit(F.Offset, src.Offset);
             dst.Delimit(F.Value, src.Data);
-            dst.EmitEol();
+            return dst.Render();
         }
 
         void Emit(IPart part)
         {
-            var dstPath = Wf.Paths.Table("image.blobs", string.Concat(part.Id.Format(), "blob"));
+            var dstPath = Wf.Paths.Table(ImageBlob.TableId, string.Concat(part.Id.Format(), Chars.Dot, DataType));
             var data = Read(part);
             var count = (uint)data.Length;
-            var target = sink();
-
-            for(var i=0u; i<count; i++)
-                target.Deposit(skip(data,i));
+            var formatter = Table.formatter<F,W>();
 
             using var writer = dstPath.Writer();
-            writer.Write(target.Render());
+            writer.WriteLine(formatter.FormatHeader());
+
+            for(var i=0u; i<count; i++)
+                writer.WriteLine(format(skip(data,i),formatter));
 
             EmissionCount += count;
 
-            Wf.EmittedTable<ImageBlob>(Host, count, dstPath);
+            Wf.EmittedTable(Host, data, dstPath);
         }
 
         public void Run()
         {
             Wf.Running(Host, DataType);
 
+            Wf.Db().Clear(FS.folder(ImageBlob.TableId));
             foreach(var part in Parts)
                 Emit(part);
 

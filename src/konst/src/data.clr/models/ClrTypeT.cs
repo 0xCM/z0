@@ -14,13 +14,9 @@ namespace Z0
     /// </summary>
     public readonly struct ClrType<T> : IClrType<T>
     {
-        public Type Definition {get;}
+        static readonly Type TD = typeof(T);
 
-        [MethodImpl(Inline)]
-        public ClrType(Type src)
-        {
-            Definition = src;
-        }
+        public Type Definition => TD;
 
         public ClrArtifactKey Id
         {
@@ -41,5 +37,12 @@ namespace Z0
 
         public ClrTypeKind Kind
             => ClrTypeKind.None;
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => string.Format("{0}/{1}", Definition.Name, Id);
+
+        public override string ToString()
+            => Format();
     }
 }
