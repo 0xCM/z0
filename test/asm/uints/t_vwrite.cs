@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
 
-    using static V0;
     using static Typed;
     using static As;
     using static Konst;

@@ -5,8 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Imagine)" />
-    <ProjectReference Include="$(Vectors)" />
+    <ProjectReference Include="$(Konst)" />
+    <ProjectReference Include="$(GMath)" />
+    <ProjectReference Include="$(Fixed)" />
   </ItemGroup>
 
 </Project>

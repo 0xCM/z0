@@ -14,7 +14,7 @@
     <ProjectReference Include="$(Blocked)" />
     <ProjectReference Include="$(Machine)" />
     <ProjectReference Include="$(Run)" />
-    <ProjectReference Include="$(VCheck)" />
+    <ProjectReference Include="$(VSvc)" />
   </ItemGroup>
 
 </Project>

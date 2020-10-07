@@ -6,12 +6,10 @@ namespace Z0.Logix
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static Konst;
 
-    using static V0;
-    using static V0d;
-    
+    using static Konst;
+    using static z;
+
     using S = NumericLogix;
 
     public class t_comparison_ops : TypedLogixTest<t_comparison_ops>
@@ -31,7 +29,7 @@ namespace Z0.Logix
             scalar_lt_op_check<uint>();
             scalar_lt_op_check<ulong>();
         }
-        
+
         public void scalar_lteq_op_check()
         {
             scalar_lteq_op_check<byte>();
@@ -47,7 +45,7 @@ namespace Z0.Logix
             scalar_gt_op_check<uint>();
             scalar_gt_op_check<ulong>();
         }
-        
+
         public void scalar_gteq_op_check()
         {
             scalar_gteq_op_check<byte>();
@@ -59,7 +57,7 @@ namespace Z0.Logix
         public void cpu128_lt_op_check()
         {
             var n = n128;
-            cpu_lt_op_check<byte>(n); 
+            cpu_lt_op_check<byte>(n);
             cpu_lt_op_check<sbyte>(n);
             cpu_lt_op_check<short>(n);
             cpu_lt_op_check<ushort>(n);
@@ -72,7 +70,7 @@ namespace Z0.Logix
         public void cpu256_lt_op_check()
         {
             var n = n256;
-            cpu_lt_op_check<byte>(n); 
+            cpu_lt_op_check<byte>(n);
             cpu_lt_op_check<sbyte>(n);
             cpu_lt_op_check<short>(n);
             cpu_lt_op_check<ushort>(n);
@@ -85,7 +83,7 @@ namespace Z0.Logix
         public void cpu128_gt_op_check()
         {
             var n = n128;
-            cpu_gt_op_check<byte>(n); 
+            cpu_gt_op_check<byte>(n);
             cpu_gt_op_check<sbyte>(n);
             cpu_gt_op_check<short>(n);
             cpu_gt_op_check<ushort>(n);
@@ -98,7 +96,7 @@ namespace Z0.Logix
         public void cpu256_gt_op_check()
         {
             var n = n256;
-            cpu_gt_op_check<byte>(n); 
+            cpu_gt_op_check<byte>(n);
             cpu_gt_op_check<sbyte>(n);
             cpu_gt_op_check<short>(n);
             cpu_gt_op_check<ushort>(n);
@@ -140,14 +138,14 @@ namespace Z0.Logix
             var expect = vzero<T>(n);
             var actual = vzero<T>(n);
             for(var i=0; i< RepCount; i++)
-            {                
+            {
                 expect = gvec.vlt(x,y);
                 actual = gvec.vlt(x,y);
                 Claim.Require(gvec.vsame(expect,actual));
 
-                var a = Vectors.vbroadcast(n,Random.Next<T>());
+                var a = z.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
-                y = gvec.vxor(y,a);                
+                y = gvec.vxor(y,a);
             }
         }
 
@@ -159,14 +157,14 @@ namespace Z0.Logix
             var expect = vzero<T>(n);
             var actual = vzero<T>(n);
             for(var i=0; i< RepCount; i++)
-            {                
+            {
                 expect = gvec.vlt(x,y);
                 actual = gvec.vlt(x,y);
                 Claim.Require(gvec.vsame(expect,actual));
 
-                var a = Vectors.vbroadcast(n,Random.Next<T>());
+                var a = z.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
-                y = gvec.vxor(y,a);                
+                y = gvec.vxor(y,a);
             }
 
         }
@@ -176,17 +174,17 @@ namespace Z0.Logix
         {
             var x = Random.CpuVector<T>(n);
             var y = Random.CpuVector<T>(n);
-            var expect = Vectors.vzero<T>(n);
-            var actual = Vectors.vzero<T>(n);
+            var expect = z.vzero<T>(n);
+            var actual = z.vzero<T>(n);
             for(var i=0; i< RepCount; i++)
-            {                
+            {
                 expect = gvec.vgt(x,y);
                 actual = gvec.vgt(x,y);
                 Claim.Require(gvec.vsame(expect,actual));
 
-                var a =Vectors.vbroadcast(n,Random.Next<T>());
+                var a = z.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
-                y = gvec.vxor(y,a);                
+                y = gvec.vxor(y,a);
             }
 
         }
@@ -196,17 +194,17 @@ namespace Z0.Logix
         {
             var x = Random.CpuVector<T>(n);
             var y = Random.CpuVector<T>(n);
-            var expect = Vectors.vzero<T>(n);
-            var actual = Vectors.vzero<T>(n);
-            for(var i=0; i< RepCount; i++)
-            {                
+            var expect = z.vzero<T>(n);
+            var actual = z.vzero<T>(n);
+            for(var i=0; i<RepCount; i++)
+            {
                 expect = gvec.vgt(x,y);
                 actual = gvec.vgt(x,y);
                 Claim.Require(gvec.vsame(expect,actual));
 
-                var a =Vectors.vbroadcast(n,Random.Next<T>());
+                var a = z.vbroadcast(n,Random.Next<T>());
                 x = gvec.vxor(x,a);
-                y = gvec.vxor(y,a);                
+                y = gvec.vxor(y,a);
             }
 
         }

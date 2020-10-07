@@ -11,7 +11,6 @@ namespace Z0
     using static Konst;
     using static As;
     using static Root;
-    using static V0;
 
     partial struct BitString
     {

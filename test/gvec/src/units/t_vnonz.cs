@@ -5,7 +5,7 @@
 namespace Z0
 {
     using System;
-    
+
     using static Konst;
     using static z;
 
@@ -43,16 +43,16 @@ namespace Z0
 
         protected void vnonz_check<T>(N128 w, T t = default)
             where T : unmanaged
-        {            
+        {
             var min = one(t);
             var max = maxval(t);
             var domain = Interval.closed(one(t), maxval(t));
             var f = VSvc.vnonz(w,t);
 
-            Claim.nea(gvec.vnonz(Vectors.vzero(w,t)));
-            
+            Claim.nea(gvec.vnonz(z.vzero(w,t)));
+
             for(var i=0; i<RepCount; i++)
-                Claim.Require(f.Invoke(Random.CpuVector(w, domain)));            
+                Claim.Require(f.Invoke(Random.CpuVector(w, domain)));
         }
 
         protected void vnonz_check<T>(N256 w, T t = default)
@@ -63,8 +63,8 @@ namespace Z0
             var domain = Interval.closed(one(t), maxval(t));
             var f = VSvc.vnonz(w,t);
 
-            Claim.nea(gvec.vnonz(Vectors.vzero(w,t)));
-            
+            Claim.nea(gvec.vnonz(z.vzero(w,t)));
+
             for(var i=0; i<RepCount; i++)
                 Claim.Require(f.Invoke(Random.CpuVector(w,domain)));
         }

@@ -7,17 +7,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static z;
 
     public class t_vlut : t_inx<t_vlut>
-    {     
+    {
         public void lut16_rep_check()
         {
             var w = w128;
 
-            var src = V0.vinc<byte>(w);
+            var src = z.vinc<byte>(w);
             var lut = VLut.init(src);
 
             var content = gvec.vinc<byte>(w, 64);
@@ -29,7 +29,7 @@ namespace Z0
         {
             var w = w256;
 
-            var src = V0.vinc<byte>(w);
+            var src = z.vinc<byte>(w);
             var lut = VLut.init(src);
 
             var content = gvec.vinc<byte>(w, 64);

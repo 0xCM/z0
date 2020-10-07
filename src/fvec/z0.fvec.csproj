@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="$(Memories)" />
-    <ProjectReference Include="$(Vectors)" />
+    <ProjectReference Include="$(GMath)" />
   </ItemGroup>
 
 </Project>

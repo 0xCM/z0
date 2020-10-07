@@ -53,7 +53,7 @@ namespace Z0
         void check_invariant<T>(N128 w, T t = default)
             where T : unmanaged
         {
-            var v1 = V0.vinc<T>(w);
+            var v1 = z.vinc<T>(w);
             var v2 = z.vdec<T>(w);
             var v3 = gvec.vreverse(v1);
             Claim.veq(v2,v3);
@@ -62,7 +62,7 @@ namespace Z0
         void check_invariant<T>(N256 w, T t = default)
             where T : unmanaged
         {
-            var v1 = V0.vinc<T>(w);
+            var v1 = z.vinc<T>(w);
             var v2 = z.vdec<T>(w);
             var v3 = gvec.vreverse(v1);
             Claim.veq(v2,v3);
@@ -81,7 +81,7 @@ namespace Z0
                 var output = f.Invoke(input);
                 var expect = z.vzero(w,t);
                 for(byte j = 0; j < n; j++)
-                    expect = vcell(V0.vcell(input,(n - 1) - j),j,expect);
+                    expect = vcell(z.vcell(input,(byte)((n - 1) - j)),j,expect);
 
                 Claim.veq(expect,output);
             }
@@ -100,9 +100,9 @@ namespace Z0
             {
                 var input = r.Invoke();
                 var output = f.Invoke(input);
-                var expect = V0.vzero(w,t);
+                var expect = z.vzero(w,t);
                 for(byte j = 0; j < n; j++)
-                    expect = vcell(V0.vcell(input,(n - 1) - j),j,expect);
+                    expect = vcell(z.vcell(input,(byte)((n - 1) - j)),j,expect);
 
                 Claim.veq(expect,output);
             }

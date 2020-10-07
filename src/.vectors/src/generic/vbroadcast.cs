@@ -5,21 +5,13 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
-    [ApiHost("api")]
-    public partial class Vectors : IApiHost<Vectors>
+    using static Konst;
+    using static z;
+
+    partial class Vectors
     {
-
-    }
-
-    [ApiHost]
-    public partial class VBlockD : IApiHost<VBlockD>
-    {
-
-    }
-
-    public static partial class XTend
-    {
-
     }
 }

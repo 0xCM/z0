@@ -83,7 +83,7 @@ namespace Z0
             const byte C = 0b10;
             const byte D = 0b11;
 
-            var x = V0.vinc<ushort>(n128);
+            var x = z.vinc<ushort>(n128);
             var xs = x.ToSpan();
             Claim.veq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A + 4], xs[B + 4], xs[C + 4], xs[D + 4]), x);
 
@@ -106,7 +106,7 @@ namespace Z0
             const byte C = 0b10;
             const byte D = 0b11;
 
-            var x = V0.vinc<ushort>(n128);
+            var x = z.vinc<ushort>(n128);
             var xs = x.ToSpan();
             Claim.veq(Vector128.Create(xs[A], xs[B], xs[C], xs[D], xs[A+4], xs[B+ 4], xs[C + 4], xs[D + 4]), x);
 
@@ -211,7 +211,7 @@ namespace Z0
         {
             var src = z.vinc<T>(n).ToSpan();
             var dst = src.Swap(swaps);
-            return Vectors.vload(n, in z.first(src));
+            return z.vload(n, in z.first(src));
         }
 
         [MethodImpl(Inline)]

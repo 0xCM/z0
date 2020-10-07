@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(BitCore)" />
     <ProjectReference Include="$(Symbolic)" />
-    <ProjectReference Include="$(V0)" />
   </ItemGroup>
 
 </Project>

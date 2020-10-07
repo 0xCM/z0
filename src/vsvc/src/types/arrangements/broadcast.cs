@@ -18,7 +18,7 @@ namespace Z0
             where T : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(T a) => Vectors.vbroadcast(n128, a);
+            public Vector128<T> Invoke(T a) => z.vbroadcast(n128, a);
         }
 
         [Closures(AllNumeric)]
@@ -27,7 +27,7 @@ namespace Z0
             where S : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector128<T> Invoke(S a) => Vectors.vbroadcast(n128, force<S,T>(a));
+            public Vector128<T> Invoke(S a) => z.vbroadcast(n128, force<S,T>(a));
         }
 
         [Closures(AllNumeric)]
@@ -36,7 +36,7 @@ namespace Z0
         {
 
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(T a) => Vectors.vbroadcast(n256, a);
+            public Vector256<T> Invoke(T a) => z.vbroadcast(n256, a);
         }
 
         public readonly struct Broadcast256<S,T> : IFactory256<S,T>
@@ -44,7 +44,7 @@ namespace Z0
             where S : unmanaged
         {
             [MethodImpl(Inline)]
-            public Vector256<T> Invoke(S a) => Vectors.vbroadcast(n256, force<S,T>(a));
+            public Vector256<T> Invoke(S a) => z.vbroadcast(n256, force<S,T>(a));
         }
     }
 }

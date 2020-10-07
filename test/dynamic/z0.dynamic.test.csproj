@@ -8,7 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="$(Validity)" />
     <ProjectReference Include="$(Dynamic)" />
-    <ProjectReference Include="$(VCheck)" />
+    <ProjectReference Include="$(VSvc)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(AsmServices)" />
   </ItemGroup>

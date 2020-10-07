@@ -105,7 +105,7 @@ namespace Z0.Asm
 
             var name = "vbsll";
             var vKind = K.vk256<uint>();
-            var src = typeof(V0d).DeclaredMethods().WithName(name).OfKind(vKind).Single();
+            var src = typeof(z).DeclaredMethods().WithName(name).OfKind(vKind).Single();
             var id = Z0.Identity.identify(src);
             var f = Dynop.EmbedVUnaryOpImm(vKind, id, src, imm8);
             var method = ApiDynamic.method(ApiDynamic.handle(f.Target));

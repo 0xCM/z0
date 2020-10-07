@@ -442,8 +442,8 @@ namespace Z0.Logix
                 var result1 = NumericLogixHost.eval(kind,a,b);
                 var result2 = BitVectorLogix.Service.EvalDirect(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
                 var result3 = BitVectorLogix.Service.EvalRef(kind, BitVector.alloc(a), BitVector.alloc(b)).Scalar;
-                var result4 = VLogixOps.eval(kind, Vectors.vbroadcast(n128,a), Vectors.vbroadcast(n128,b)).ToScalar();
-                var result5 = VLogixOps.eval(kind, Vectors.vbroadcast(n256,a), Vectors.vbroadcast(n256,b)).ToScalar();
+                var result4 = VLogixOps.eval(kind, z.vbroadcast(n128,a), z.vbroadcast(n128,b)).ToScalar();
+                var result5 = VLogixOps.eval(kind, z.vbroadcast(n256,a), z.vbroadcast(n256,b)).ToScalar();
                 Claim.Eq(result1, result2);
                 Claim.Eq(result2, result3);
                 Claim.Eq(result3, result4);

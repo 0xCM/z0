@@ -100,7 +100,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static sbyte vcell8i<T>(Vector128<T> x, int index)
             where T : unmanaged
-                => v8i(x).GetElement(index);
+                => z.v8i(x).GetElement(index);
 
         /// <summary>
         /// Extract an index-identified component of a reinterpreted vector

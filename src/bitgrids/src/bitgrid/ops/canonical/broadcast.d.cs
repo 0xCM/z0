@@ -55,7 +55,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Vectors.vbroadcast(n128,cell);
+                => z.vbroadcast(n128,cell);
 
         /// <summary>
         /// Transmits the content of a single cell to all cells in a grid
@@ -70,7 +70,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => Vectors.vbroadcast(n256,cell);
+                => z.vbroadcast(n256,cell);
 
         /// <summary>
         /// Fills a caller-allocated natural grid

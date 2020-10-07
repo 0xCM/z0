@@ -11,8 +11,6 @@ namespace Z0
     using static HexConst;
     using static Konst;
     using static Typed;
-    using static V0d;
-    using static V0;
 
     using M = BitMasks.Literals;
 
@@ -21,9 +19,9 @@ namespace Z0
         public void vblend_256x32f_outline()
         {
             var w = n256;
-            var x = vparts(0f, 1f, 2f, 3f, 4f, 5f, 6f, 7f);
-            var y = vparts(8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f);
-            var spec = vparts(0f,-1,0f,-1,0f,-1,0f,-1);
+            var x = z.vparts(w,0f, 1f, 2f, 3f, 4f, 5f, 6f, 7f);
+            var y = z.vparts(w,8f, 9f, 10f, 11f, 12f, 13f, 14f, 15f);
+            var spec = z.vparts(w,0f,-1,0f,-1,0f,-1,0f,-1);
             var _z = z.vblendv(x,y,spec);
         }
 
@@ -40,7 +38,7 @@ namespace Z0
         {
             var w = n128;
             var alt = (uint)M.Msb16x8x1 << 16;
-            z.vcover(V0.v16u(z.vbroadcast(w,alt)), out Vector128<byte> spec);
+            z.vcover(z.v16u(z.vbroadcast(w,alt)), out Vector128<byte> spec);
             var a = gvec.vinc(w,z16);
             var b = gvec.vdec(w,Max16u);
             var c = gvec.vblend(a,b,spec);
@@ -51,7 +49,7 @@ namespace Z0
             var w = n256;
             var altOdd = (uint)M.Msb16x8x1 << 16;
             var altEven = (uint)M.Msb16x8x1;
-            z.vcover(V0.v16u(z.vbroadcast<uint>(w, altOdd)), out Vector256<byte> spec);
+            z.vcover(z.v16u(z.vbroadcast<uint>(w, altOdd)), out Vector256<byte> spec);
             var a = gvec.vinc(w,z16);
             var b = gvec.vdec(w,Max16u);
             var c = gvec.vblend(a,b,spec);
@@ -110,55 +108,55 @@ namespace Z0
         {
             var n = n256;
             var w = w64;
-            var left = vparts(n,0,1,2,3);
-            var right = vparts(n,4,5,6,7);
+            var left = z.vparts(n,0,1,2,3);
+            var right = z.vparts(n,4,5,6,7);
 
-            Claim.veq(vparts(n,0,5,2,7), z.vblend(left, right, Blend4x64.LRLR));
-            Claim.veq(vparts(n,4,1,6,3), z.vblend(left, right, Blend4x64.RLRL));
-            Claim.veq(vparts(n,0,1,2,3), z.vblend(left, right, Blend4x64.LLLL));
-            Claim.veq(vparts(n,4,5,6,7), z.vblend(left, right, Blend4x64.RRRR));
+            Claim.veq(z.vparts(n,0,5,2,7), z.vblend(left, right, Blend4x64.LRLR));
+            Claim.veq(z.vparts(n,4,1,6,3), z.vblend(left, right, Blend4x64.RLRL));
+            Claim.veq(z.vparts(n,0,1,2,3), z.vblend(left, right, Blend4x64.LLLL));
+            Claim.veq(z.vparts(n,4,5,6,7), z.vblend(left, right, Blend4x64.RRRR));
         }
 
         public void vblend_2x64_basecases()
         {
             var n = w128;
             var w = w64;
-            var left =  vparts(0,1);
-            var right = vparts(4,5);
-            Claim.veq(vparts(0, 5), z.vblend(left, right, Blend2x64.LR));
-            Claim.veq(vparts(4, 1), z.vblend(left, right, Blend2x64.RL));
-            Claim.veq(vparts(0, 1), z.vblend(left, right, Blend2x64.LL));
-            Claim.veq(vparts(4, 5), z.vblend(left, right, Blend2x64.RR));
+            var left =  z.vparts(0,1);
+            var right = z.vparts(4,5);
+            Claim.veq(z.vparts(0, 5), z.vblend(left, right, Blend2x64.LR));
+            Claim.veq(z.vparts(4, 1), z.vblend(left, right, Blend2x64.RL));
+            Claim.veq(z.vparts(0, 1), z.vblend(left, right, Blend2x64.LL));
+            Claim.veq(z.vparts(4, 5), z.vblend(left, right, Blend2x64.RR));
         }
 
         public void vblend_4x32_basecases()
         {
             var n = w128;
             var w = w32;
-            var left =  vparts(n,0,1,2,3);
-            var right = vparts(n,4,5,6,7);
-            Claim.veq(vparts(n,0,5,2,7), z.vblend(left,right,Blend4x32.LRLR));
-            Claim.veq(vparts(n,4,1,6,3), z.vblend(left,right,Blend4x32.RLRL));
-            Claim.veq(vparts(n,0,1,6,7), z.vblend(left,right,Blend4x32.LLRR));
-            Claim.veq(vparts(n,4,5,2,3), z.vblend(left,right,Blend4x32.RRLL));
+            var left =  z.vparts(n,0,1,2,3);
+            var right = z.vparts(n,4,5,6,7);
+            Claim.veq(z.vparts(n,0,5,2,7), z.vblend(left,right,Blend4x32.LRLR));
+            Claim.veq(z.vparts(n,4,1,6,3), z.vblend(left,right,Blend4x32.RLRL));
+            Claim.veq(z.vparts(n,0,1,6,7), z.vblend(left,right,Blend4x32.LLRR));
+            Claim.veq(z.vparts(n,4,5,2,3), z.vblend(left,right,Blend4x32.RRLL));
         }
 
         public void vblend_8x32_basecases()
         {
             var n = w256;
             var w = w32;
-            var left =  vparts(0,1,2,3,4,5,6,7);
-            var right = vparts(8,9,A,B,C,D,E,F);
-            Claim.veq(vparts(0,9,2,B,4,D,6,F), z.vblend(left,right, Blend8x32.LRLRLRLR));
-            Claim.veq(vparts(8,1,A,3,C,5,E,7), z.vblend(left,right, Blend8x32.RLRLRLRL));
-            Claim.veq(vparts(0,1,A,B,4,5,E,F), z.vblend(left,right, Blend8x32.LLRRLLRR));
-            Claim.veq(vparts(8,9,2,3,C,D,6,7), z.vblend(left,right, Blend8x32.RRLLRRLL));
+            var left =  z.vparts(0,1,2,3,4,5,6,7);
+            var right = z.vparts(8,9,A,B,C,D,E,F);
+            Claim.veq(z.vparts(0,9,2,B,4,D,6,F), z.vblend(left,right, Blend8x32.LRLRLRLR));
+            Claim.veq(z.vparts(8,1,A,3,C,5,E,7), z.vblend(left,right, Blend8x32.RLRLRLRL));
+            Claim.veq(z.vparts(0,1,A,B,4,5,E,F), z.vblend(left,right, Blend8x32.LLRRLLRR));
+            Claim.veq(z.vparts(8,9,2,3,C,D,6,7), z.vblend(left,right, Blend8x32.RRLLRRLL));
 
             var lrpattern = z.v32u(z.vbroadcast(n,((ulong)(uint.MaxValue) << 32)));
             for(byte i=0; i < 8; i++)
                 Claim.eq(z.vcell(lrpattern,i), gmath.even(i) ? 0u : uint.MaxValue);
 
-            var zero = Vectors.vzero<uint>(n);
+            var zero = z.vzero<uint>(n);
             var ones = gvec.vones<uint>(n);
             Claim.veq(lrpattern, z.vblend(zero, ones, Blend8x32.LRLRLRLR));
         }
@@ -166,10 +164,10 @@ namespace Z0
         public void vblend_32x8_256x32u_basecase()
         {
             var n = w256;
-            var x = vparts(0,1,2,3,4,5,6,7);
-            var y = vparts(8,9,A,B,C,D,E,F);
-            var e = vparts(0,9,2,B,4,D,6,F);
-            var o = vparts(8,1,A,3,C,5,E,7);
+            var x = z.vparts(0,1,2,3,4,5,6,7);
+            var y = z.vparts(8,9,A,B,C,D,E,F);
+            var e = z.vparts(0,9,2,B,4,D,6,F);
+            var o = z.vparts(8,1,A,3,C,5,E,7);
             var mEven = z.vblendspec(n,false,n32);
             var mOdd = z.vblendspec(n,true,n32);
             Claim.veq(e,gvec.vblend(x,y,mEven));
@@ -179,10 +177,10 @@ namespace Z0
         public void vblend_32x8_256x64u_basecase()
         {
             var n = w256;
-            var x = vparts(n,0,1,2,3);
-            var y = vparts(n,4,5,6,7);
-            var e = vparts(n,0,5,2,7);
-            var o = vparts(n,4,1,6,3);
+            var x = z.vparts(n,0,1,2,3);
+            var y = z.vparts(n,4,5,6,7);
+            var e = z.vparts(n,0,5,2,7);
+            var o = z.vparts(n,4,1,6,3);
             var mEven = z.vblendspec(n,false,n64);
             var mOdd = z.vblendspec(n,true,n64);
             Claim.veq(e,gvec.vblend(x,y,mEven));

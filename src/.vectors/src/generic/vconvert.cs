@@ -46,7 +46,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Vector128<sbyte> v8i<T>(Vector128<T> x)
             where T : unmanaged
-                => x.AsSByte();
+                => z.v8i(x);
 
         /// <summary>
         /// Presents a generic cpu vector as a cpu vector with components of type uint8

@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="$(Imagine)" />
     <ProjectReference Include="$(Validity)" />
-    <ProjectReference Include="$(Vectors)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(VSvc)" />

@@ -218,7 +218,7 @@ namespace Z0
 
 
         /// <summary>
-        /// int _mm_comilt_sd (__m128d a, __m128d b)COMISD xmm, xmm/m64
+        /// int _mm_comilt_sd (__m128d a, __m128d b) COMISD xmm, xmm/m64
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>

@@ -9,8 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static Typed;
-    using static Vectors;
+    using static z;
     using static BitMasks.Literals;
 
     partial class BitMatrix
@@ -137,7 +136,7 @@ namespace Z0
         static Vector128<byte> Tr8x16Mask
         {
             [MethodImpl(Inline)]
-            get => Vectors.vload(n128, z.first(Tr8x16MaskBytes));
+            get => z.vload(n128, z.first(Tr8x16MaskBytes));
         }
 
         /// <summary>

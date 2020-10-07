@@ -414,14 +414,14 @@ namespace Z0
             where S : unmanaged
             where P : unmanaged, ITypeNat
         {
-            var spec = @as(Vectors.vbroadcast(w, pattern), t);
-            var x = gvec.vinc(w, t);
-            var y = gvec.vadd(x, gmath.add(x.LastCell(), As.one(t)));
-            var z = gvec.vblendp(x,y,spec);
+            var spec = @as(z.vbroadcast(w, pattern), t);
+            var a = gvec.vinc(w, t);
+            var b = gvec.vadd(a, gmath.add(a.LastCell(), As.one(t)));
+            var c = gvec.vblendp(a,b,spec);
 
             var dst = SpanBlocks.alloc(w,2,t);
-            gvec.vlo(z).StoreTo(dst,0);
-            gvec.vhi(z).StoreTo(dst,1);
+            gvec.vlo(c).StoreTo(dst,0);
+            gvec.vhi(c).StoreTo(dst,1);
 
             var perm = Perm.Init(dst.Data);
             for(var i=0; i< perm.Length; i++)
@@ -442,14 +442,14 @@ namespace Z0
             where S : unmanaged
             where P : unmanaged, ITypeNat
         {
-            var spec = @as(Vectors.vbroadcast(w, pattern),t);
-            var x = gvec.vinc(w, t);
-            var y = gvec.vadd(x, gmath.add(x.LastCell(), As.one(t)));
-            var z = gvec.vblendp(x,y,spec);
+            var spec = @as(z.vbroadcast(w, pattern),t);
+            var a = gvec.vinc(w, t);
+            var b = gvec.vadd(a, gmath.add(a.LastCell(), As.one(t)));
+            var c = gvec.vblendp(a,b,spec);
 
             var dst = SpanBlocks.alloc(w,2,t);
-            z.Lo.StoreTo(dst,0);
-            z.Hi.StoreTo(dst,1);
+            c.Lo.StoreTo(dst,0);
+            c.Hi.StoreTo(dst,1);
 
             var perm = Perm.Init(dst.Data);
             for(var i=0; i< perm.Length; i++)

@@ -278,9 +278,9 @@ namespace Z0.Logix
                 if(!NumericLogix.same(z3, z0.Scalar))
                     Claim.FailWith($"Evalutation of ternary op {id} failed");
 
-                var v1 = Vectors.vbroadcast(n256,sa);
-                var v2 = Vectors.vbroadcast(n256,sb);
-                var v3 = Vectors.vbroadcast(n256,sc);
+                var v1 = z.vbroadcast(n256,sa);
+                var v2 = z.vbroadcast(n256,sb);
+                var v3 = z.vbroadcast(n256,sc);
                 var v4 = Vector256.GetElement(V256(v1,v2,v3), 0);
                 Claim.Eq(v4,z3);
 

@@ -123,27 +123,27 @@ namespace Z0
         public void vshuf16x8_128x8u()
         {
             var w = w128;
-            var x0 = V0.vinc<byte>(w);
+            var x0 = z.vinc<byte>(w);
             var x0Spec = vload(w, z.first(IdentityPattern));
             var x0Dst = z.vshuf16x8(x0,x0Spec);
             Claim.veq(x0Spec,x0Dst);
 
-            var x1 = V0.vinc<byte>(w);
+            var x1 = z.vinc<byte>(w);
             var x1Spec = vload(w, z.first(ReversalPattern));
             var x1Dst = z.vshuf16x8(x1,x1Spec);
             Claim.veq(x1Spec,x1Dst);
 
-            var x2 = V0.vinc<byte>(w);
+            var x2 = z.vinc<byte>(w);
             var x2Spec = z.vrotl(n128, n8);
             var x2Dst = z.vshuf16x8(x2,x2Spec);
             Claim.veq(x2Spec,x2Dst);
 
-            var x3 = V0.vinc<byte>(w);
+            var x3 = z.vinc<byte>(w);
             var x3Spec = z.vrotr(n128, n8);
             var x3Dst = z.vshuf16x8(x3,x3Spec);
             Claim.veq(x3Spec,x3Dst);
 
-            var x4 = V0.vinc<byte>(w);
+            var x4 = z.vinc<byte>(w);
             var x4Spec1 = z.vrotl(n128, n8);
             var x4Spec2 = z.vrotr(n128, n8);
             var x4Dst = z.vshuf16x8(z.vshuf16x8(x4,x4Spec1), x4Spec2);
@@ -157,7 +157,7 @@ namespace Z0
 
         public void vshuf16x8()
         {
-            var src = V0.vinc<byte>(n128);
+            var src =z.vinc<byte>(n128);
             var perm = Permute.natural(Permutary.reversed(n16));
             for(int i=0,j=15; i<perm.Length; i++, j--)
                 Claim.eq(perm[i],j);

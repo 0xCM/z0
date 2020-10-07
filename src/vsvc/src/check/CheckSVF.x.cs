@@ -9,8 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost]
-    public static class Services
+    public static partial class XTend
     {
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static ICheckSVF<T> CheckSVF<T>(this ITestContext context)

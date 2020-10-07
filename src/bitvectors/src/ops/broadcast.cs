@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
 
     partial class BitVector
     {
@@ -15,7 +15,7 @@ namespace Z0
         public static BitVector128<N,T> broadcast<N,T>(N128 w, T a, N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => Vectors.vbroadcast(w,a);
+                => z.vbroadcast(w,a);
 
         [MethodImpl(Inline), Broadcast]
         public static BitVector16 broadcast(N16 n, byte a)

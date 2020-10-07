@@ -37,24 +37,24 @@ namespace Z0
                 => vsave(vor(w, in a, in b), ref z);
 
         [MethodImpl(Inline), Or, Closures(Closure)]
-        public static void or<T>(W128 w, int vcount, int blocklen, in T a, in T b, ref T z)
+        public static void or<T>(W128 w, int vcount, int blocklen, in T a, in T b, ref T dst)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                or(w, in skip(in a, offset), in skip(in b, offset), ref seek(z, offset));
+                or(w, in skip(in a, offset), in skip(in b, offset), ref seek(dst, offset));
         }
 
         [MethodImpl(Inline), Or, Closures(Closure)]
-        public static void or<T>(W256 w, in T a, in T b, ref T z)
+        public static void or<T>(W256 w, in T a, in T b, ref T dst)
             where T : unmanaged
-                => Vectors.vstore(vor(w, in a, in b), ref z);
+                => z.vsave(vor(w, in a, in b), ref dst);
 
         [MethodImpl(Inline), Or, Closures(Closure)]
-        public static void or<T>(W256 w, int vcount, int blocklen, in T a, in T b, ref T z)
+        public static void or<T>(W256 w, int vcount, int blocklen, in T a, in T b, ref T dst)
             where T : unmanaged
         {
             for(int i=0, offset = 0; i < vcount; i++, offset += blocklen)
-                or(w, in skip(in a, offset), in skip(in b, offset), ref seek(z, offset));
+                or(w, in skip(in a, offset), in skip(in b, offset), ref seek(dst, offset));
         }
     }
 }

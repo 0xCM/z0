@@ -6,38 +6,38 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
 
     public class t_vinsert : t_inx<t_vinsert>
     {
         public void vinsert_128x8i()
-            => vinsert_check<sbyte>(n128);            
+            => vinsert_check<sbyte>(n128);
 
         public void vinsert_128x8u()
-            => vinsert_check<byte>(n128);            
+            => vinsert_check<byte>(n128);
 
         public void vinsert_128x16i()
-            => vinsert_check<short>(n128);            
+            => vinsert_check<short>(n128);
 
         public void vinsert_128x16u()
-            => vinsert_check<ushort>(n128);            
+            => vinsert_check<ushort>(n128);
 
         public void vinsert_128x32i()
-            => vinsert_check<int>(n128);            
+            => vinsert_check<int>(n128);
 
         public void vinsert_128x32u()
-            => vinsert_check<uint>(n128);            
+            => vinsert_check<uint>(n128);
 
         public void vinsert_128x64i()
-            => vinsert_check<long>(n128);            
+            => vinsert_check<long>(n128);
 
         public void vinsert_128x64u()
-            => vinsert_check<ulong>(n128);            
+            => vinsert_check<ulong>(n128);
 
         public void vinsert_128x32f()
             => vinsert_check<float>(n128);
-        
+
         public void vinsert_128x64f()
             => vinsert_check<double>(n128);
 
@@ -49,8 +49,7 @@ namespace Z0
                 var v128Src = Random.CpuVector<T>(w);
                 var srcSpan = v128Src.ToSpan();
 
-                var dst = Vectors.vzero(n256,t);
-                
+                var dst = z.vzero(n256,t);
                 var vLo = gvec.vinsert(v128Src, dst, (byte)0);
                 var vLoSpan = vLo.ToSpan().Slice(0, vLo.Length()/2);
 
