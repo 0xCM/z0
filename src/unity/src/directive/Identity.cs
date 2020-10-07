@@ -11,7 +11,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-
     public readonly struct DirectiveIdentity : IModelIdentity<DirectiveIdentity>
     {
         readonly Vector128<uint> Components;

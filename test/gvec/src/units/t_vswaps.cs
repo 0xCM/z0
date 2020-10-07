@@ -43,14 +43,14 @@ namespace Z0
             var b = src.LoadVector(1);
             var c = src.LoadVector(2);
             var d = src.LoadVector(3);
-            dvec.vtranspose(ref a, ref b, ref c, ref d);
+            z.vtranspose(ref a, ref b, ref c, ref d);
 
 
             var dst = new uint[cells];
-            z.vsave(a, ref head(dst), step*0);
-            z.vsave(b, ref head(dst), step*1);
-            z.vsave(c, ref head(dst), step*2);
-            z.vsave(d, ref head(dst), step*3);
+            z.vstore(a, ref head(dst), step*0);
+            z.vstore(b, ref head(dst), step*1);
+            z.vstore(c, ref head(dst), step*2);
+            z.vstore(d, ref head(dst), step*3);
 
             var A = Matrix.load(order, src.Data.ToArray());
             var B = Matrix.load(order, dst);

@@ -6,13 +6,55 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static z;
 
     [ApiHost]
     public readonly struct Copier
     {
+        /// <summary>
+        /// Copies the source to the target using 128-bit intrinsic operations
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="src">The source</param>
+        /// <param name="dst">The target</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static void vcopy<T>(W128 w, ReadOnlySpan<T> src, Span<T> dst)
+            where T : unmanaged
+        {
+            var seg = (uint)vcount<T>(w);
+            var blocks = length(src,dst)/seg;
+            for(var i=0u; i<blocks; i++)
+            {
+                var offset = i*seg;
+                var vSrc = vload(w, skip(src, offset));
+                vsave(vSrc, ref seek(dst,offset));
+            }
+        }
+
+        /// <summary>
+        /// Copies the source to the target using 256-bit intrinsic operations
+        /// </summary>
+        /// <param name="w">The vector width selector</param>
+        /// <param name="src">The source</param>
+        /// <param name="dst">The target</param>
+        /// <typeparam name="T">The cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static void vcopy<T>(W256 w, ReadOnlySpan<T> src, Span<T> dst)
+            where T : unmanaged
+        {
+            var seg = (uint)vcount<T>(w);
+            var blocks = length(src,dst)/seg;
+            for(var i=0u; i<blocks; i++)
+            {
+                var offset = i*seg;
+                var vSrc = vload(w, skip(src, offset));
+                vsave(vSrc, ref seek(dst,offset));
+            }
+        }
+
         /// <summary>
         /// Copies a contiguous segments of bytes from one location to another
         /// </summary>
@@ -43,7 +85,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe void copy<T>(T* pSrc, Span<T> dst, int offset, uint srcCount)
             where T : unmanaged
-                =>  copy(pSrc, gptr(first(dst), offset), srcCount); 
+                =>  copy(pSrc, gptr(first(dst), offset), srcCount);
 
         /// <summary>
         /// Copies a contiguous segments of bytes from a source location to a target span
@@ -91,6 +133,6 @@ namespace Z0
         public static uint copy<S,T>(Span<S> src, int start, int count, Span<T> dst, int offset = 0)
             where S: unmanaged
             where T :unmanaged
-                => copy(src.ReadOnly(),start,count,dst,offset);             
+                => copy(src.ReadOnly(),start,count,dst,offset);
     }
 }

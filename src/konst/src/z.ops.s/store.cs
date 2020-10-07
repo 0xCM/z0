@@ -14,6 +14,16 @@ namespace Z0
     partial struct z
     {
         /// <summary>
+        /// Fills a caller-supplied buffer with T-cell bytes
+        /// </summary>
+        /// <param name="src">The data source</param>
+        /// <param name="dst">The target buffer</param>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static void store<T>(in T src, Span<byte> dst)
+            where T : struct
+                => @as<byte,T>(first(dst)) = src;
+
+        /// <summary>
         /// Writes a source to a target
         /// </summary>
         /// <param name="src">The source value</param>

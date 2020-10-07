@@ -10,8 +10,9 @@ namespace Z0
 
     using static z;
     using static BitMasks.Literals;
+    using static Konst;
 
-    partial class dvec
+    partial struct z
     {
         // The goal is to partition the first 30 bits of a 32-bit source into 30 bytes, each with an effective width of 3
         // So, here goes

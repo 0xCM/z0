@@ -15,7 +15,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class dvec
+    partial struct z
     {
         /// <summary>
         /// Computes ~(x | y) for vectors x and y

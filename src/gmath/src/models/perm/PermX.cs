@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
 
     partial class XTend
@@ -28,7 +28,7 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
                 dst[i] = src[i];
             return dst;
-        }                     
+        }
 
         /// <summary>
         /// Shuffles span content as determined by a permutation
@@ -36,10 +36,10 @@ namespace Z0
         /// <param name="src">The source span</param>
         /// <param name="p">The permutation to apply</param>
         public static Span<T> Permute<T>(this ReadOnlySpan<T> src, Perm p)
-        {            
+        {
             Span<T> dst = new T[src.Length];
             for(var i=0; i<p.Length; i++)
-                dst[i] = src[p[i]];                
+                dst[i] = src[p[i]];
             return dst;
         }
 
@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="j">The second index</param>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static Span<T> Swap<T>(this Span<T> src, params Swap[] swaps)           
+        public static Span<T> Swap<T>(this Span<T> src, params Swap[] swaps)
             where T : unmanaged
                 => Perm.apply(src,swaps);
 
@@ -86,7 +86,7 @@ namespace Z0
             var pad = colwidth ?? 3;
             var leftBoundary = $"{Chars.Pipe}";
             var rightBoundary = $"{Chars.Pipe}".PadLeft(2);
-            
+
             line1.Append(leftBoundary);
             line2.Append(leftBoundary);
             for(var i=0; i < terms.Length; i++)
@@ -96,7 +96,7 @@ namespace Z0
             }
             line1.Append(rightBoundary);
             line2.Append(rightBoundary);
-            
+
             return line1.ToString() + Eol + line2.ToString();
         }
 
@@ -107,5 +107,42 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string Format(this Swap[] src)
             => string.Join(" -> ", src.Map(x => x.Format()));
+
+
+        /// <summary>
+        /// Applies a sequence of transpositions to a blocked container
+        /// </summary>
+        /// <param name="src">The source and target span</param>
+        /// <param name="i">The first index</param>
+        /// <param name="j">The second index</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static SpanBlock128<T> Swap<T>(this SpanBlock128<T> src, params Swap[] swaps)
+            where T : unmanaged
+        {
+             if(swaps == null || swaps.Length == 0)
+                return src;
+
+             src.Data.Swap(swaps);
+             return src;
+        }
+
+        /// <summary>
+        /// Applies a sequence of transpositions to a blocked container
+        /// </summary>
+        /// <param name="src">The source and target span</param>
+        /// <param name="i">The first index</param>
+        /// <param name="j">The second index</param>
+        /// <typeparam name="T">The element type</typeparam>
+        [MethodImpl(Inline)]
+        public static SpanBlock256<T> Swap<T>(this SpanBlock256<T> src, params Swap[] swaps)
+            where T : unmanaged
+        {
+             if(swaps == null || swaps.Length == 0)
+                return src;
+
+             src.Data.Swap(swaps);
+             return src;
+        }
     }
 }

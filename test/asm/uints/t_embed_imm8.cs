@@ -151,7 +151,7 @@ namespace Z0.Asm
             var name = nameof(z.vblend8x16);
             var imm = (byte)Blend8x16.LRLRLRLR;
             var vKind = K.vk256<ushort>();
-            var src = typeof(dvec).DeclaredMethods().WithName(name).OfKind(vKind).WithParameterType<byte>().Single();
+            var src = typeof(z).DeclaredMethods().WithName(name).OfKind(vKind).WithParameterType<byte>().Single();
 
             var injector = AsmCheck.Dynamic.BinaryInjector<ushort>(w);
             var x = Random.CpuVector<ushort>(w);

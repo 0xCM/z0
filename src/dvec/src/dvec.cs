@@ -5,20 +5,20 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
     /// <summary>
     /// Direct vectorized intrinsics
     /// </summary>
     [ApiHost("api")]
-    public partial class dvec : IApiHost<dvec>
-    {        
-        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;    
+    public partial class dvec
+    {
+        internal const MethodImplOptions Inline = MethodImplOptions.AggressiveInlining;
     }
 
     public static partial class XTend
     {
-        
+
     }
 
 }

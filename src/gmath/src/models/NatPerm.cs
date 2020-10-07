@@ -5,12 +5,23 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    partial class Permute
+    public readonly struct NatPerm
     {
+        [MethodImpl(Inline), Op]
+        public static Perm32 unsize(in NatPerm<N32,byte> spec)
+            => new Perm32(z.vload(n256, spec.Terms));
+
+        [MethodImpl(Inline), Op]
+        public static Perm16 unsize(in NatPerm<N16,byte> spec)
+            => new Perm16(z.vload(n128, spec.Terms));
+
         /// <summary>
         /// Distills a natural permutation on 4 symbols to its canonical literal specification
         /// </summary>
@@ -58,5 +69,6 @@ namespace Z0
                 dst |= (ulong)src[i] << offset;
             return (Perm16L)dst;
         }
+
     }
 }

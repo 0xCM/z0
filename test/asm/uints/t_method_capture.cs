@@ -50,7 +50,7 @@ namespace Z0.Asm
         {
             using var dst = CaseWriter(FileExtensions.Asm);
             using var quick = QuickCapture.create(Context);
-            foreach(var m in typeof(dvec).DeclaredMethods().Public().Static().NonGeneric())
+            foreach(var m in typeof(z).DeclaredMethods().Public().Static().NonGeneric())
             {
                 var code = quick.Capture(m);
                 code.OnSome(c => AsmCheck.WriteAsm(c,dst));

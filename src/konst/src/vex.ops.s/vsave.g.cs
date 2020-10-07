@@ -133,9 +133,9 @@ namespace Z0
             else if(typeof(T) == typeof(ushort))
                 vsave(v16u(src), ref uint16(ref dst));
             else if(typeof(T) == typeof(uint))
-                vsave(v32u(src), ref uint32(ref dst));
+                vstore(v32u(src), ref uint32(ref dst));
             else if(typeof(T) == typeof(ulong))
-                vsave(v64u(src), ref uint64(ref dst));
+                vstore(v64u(src), ref uint64(ref dst));
             else
                  vsave_i(src,ref dst);
         }
@@ -147,11 +147,11 @@ namespace Z0
             if(typeof(T) == typeof(sbyte))
                 vsave(v8i(src), ref int8(ref dst));
             else if(typeof(T) == typeof(short))
-                vsave(v16i(src), ref int16(ref dst));
+                vstore(v16i(src), ref int16(ref dst));
             else if(typeof(T) == typeof(int))
-                vsave(v32i(src), ref int32(ref dst));
+                vstore(v32i(src), ref int32(ref dst));
             else if(typeof(T) == typeof(long))
-                vsave(v64i(src), ref int64(ref dst));
+                vstore(v64i(src), ref int64(ref dst));
             else
                 vsave_f(src, ref dst);
         }
@@ -161,9 +161,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                vsave(v32f(src), ref float32(ref dst));
+                vstore(v32f(src), ref float32(ref dst));
             else if(typeof(T) == typeof(double))
-                vsave(v64f(src), ref float64(ref dst));
+                vstore(v64f(src), ref float64(ref dst));
             else
                 throw no<T>();
         }
@@ -173,13 +173,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                vsave(v8u(src), ref uint8(ref dst), offset);
+                vstore(v8u(src), ref uint8(ref dst), offset);
             else if(typeof(T) == typeof(ushort))
                 vsave(v16u(src), ref uint16(ref dst), offset);
             else if(typeof(T) == typeof(uint))
-                vsave(v32u(src), ref uint32(ref dst), offset);
+                vstore(v32u(src), ref uint32(ref dst), offset);
             else
-                vsave(v64u(src), ref uint64(ref dst), offset);
+                vstore(v64u(src), ref uint64(ref dst), offset);
         }
 
         [MethodImpl(Inline)]

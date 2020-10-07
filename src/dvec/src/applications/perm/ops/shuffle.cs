@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
-        public static ref readonly Perm shuffle(in Perm src, IPolyrand random)
+        public static ref readonly Perm shuffle(in Perm src, IPolySourced random)
         {
             random.Shuffle(src.Terms);
             return ref src;
@@ -33,7 +33,7 @@ namespace Z0
         /// </summary>
         /// <param name="random">The random source</param>
         [MethodImpl(Inline)]
-        public static ref readonly Perm<T> shuffle<T>(in Perm<T> src, IPolyrand random)
+        public static ref readonly Perm<T> shuffle<T>(in Perm<T> src, IPolySourced random)
             where T : unmanaged
         {
             random.Shuffle(src.Terms);

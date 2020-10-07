@@ -60,7 +60,7 @@ namespace Z0
         /// <param name="spec">The representative</param>
         [MethodImpl(Inline), Op]
         public static NatPerm<N16> natural(Perm16L spec)
-            => natural(spec,NatPerm<N16>.Alloc());
+            => natural(spec, NatPerm<N16>.Alloc());
 
         /// <summary>
         /// Creates a new identity permutation of natural length

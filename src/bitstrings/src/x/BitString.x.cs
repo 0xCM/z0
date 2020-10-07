@@ -185,7 +185,7 @@ namespace Z0
                 => BitString.scalars(src.Data, maxbits ?? w256);
 
         /// <summary>
-        /// Converts an 128-bit intrinsic vector representation to a bistring
+        /// Converts an 128-bit intrinsic vector representation to a bitstring
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
@@ -195,7 +195,7 @@ namespace Z0
                 => BitString.load(src, maxbits);
 
         /// <summary>
-        /// Converts an 256-bit vector representation to a bistring
+        /// Converts an 256-bit vector representation to a bitstring
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>
@@ -205,7 +205,7 @@ namespace Z0
                 => BitString.load(src, maxbits);
 
         /// <summary>
-        /// Converts a 512-bit vector representation to a bistring
+        /// Converts a 512-bit vector representation to a bitstring
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The underlying primal type</typeparam>

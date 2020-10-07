@@ -125,7 +125,7 @@ namespace Z0
 
             var dst = Stacks.alloc(n256);
             ref var X = ref Stacks.head(ref dst, z64);
-            vsave(odd, ref X);
+            vstore(odd, ref X);
 
             var total = 0ul;
             total += (seek(X, 0) * kf) >> 56;

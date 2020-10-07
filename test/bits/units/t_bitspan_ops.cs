@@ -265,7 +265,7 @@ namespace Z0
                 {
                     var src = Random.One(t);
                     var bitspan = BitSpans.from(src);
-                    As.deposit(src,bytes);
+                    z.store(src,bytes);
                     bitspan_check(bytes, bitspan);
                 }
             }

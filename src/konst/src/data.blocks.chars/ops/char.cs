@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
 
     readonly partial struct CharBlocks
     {
@@ -74,5 +74,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref char @char(in CharBlock32 src)
             => ref z.c16(src);
+
+
     }
 }

@@ -9,11 +9,12 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using AES = System.Runtime.Intrinsics.X86.Aes;
+    using static Konst;
 
     /// <summary>
     /// Surfaces AES intrinsics
     /// </summary>
-    partial class dvec
+    partial struct z
     {
         /// <summary>
         /// __m128i _mm_aesenc_si128 (__m128i a, __m128i RoundKey) AESENC xmm, xmm/m128

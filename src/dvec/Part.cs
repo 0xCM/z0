@@ -7,8 +7,7 @@
 namespace Z0.Parts
 {
     public sealed class DVec : Part<DVec>
-    {        
-        public static IApiHost Api => default(dvec);
+    {
 
     }
 }
