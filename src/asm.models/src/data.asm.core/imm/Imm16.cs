@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a 16-bit immediate value
     /// </summary>
-    public readonly struct Imm16 : IAsmOperand<I,W16,ushort>
+    public readonly struct Imm16 : IAsmImm<I,W16,ushort>
     {
         public readonly ushort Data;
 
@@ -25,12 +25,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Data;
-        }
-
-        public AsmOperandKind OpKind
-        {
-            [MethodImpl(Inline)]
-            get => AsmOperandKind.Imm;
         }
 
         [MethodImpl(Inline)]

@@ -13,8 +13,8 @@ namespace Z0
     /// <summary>
     /// Defines a canonical table sink predicated on a process function
     /// </summary>
-    public readonly struct TableSink<T> : IWfTableSink<TableSink<T>,T>
-        where T : struct, ITable<T>
+    public readonly struct TableSink<T> : ITableSink<TableSink<T>,T>
+        where T : struct
     {
         public IWfShell Wf {get;}
 

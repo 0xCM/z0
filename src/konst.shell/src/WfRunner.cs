@@ -38,7 +38,7 @@ namespace Z0
         void PrintLetterns()
         {
             Wf.Running(Host);
-            var data = Resources.textres(typeof(AsciLetterLoText));
+            var data = Resources.strings(typeof(AsciLetterLoText));
             var resources = @readonly(data);
             var rows = Resources.rows(data).View;
             var count = resources.Length;

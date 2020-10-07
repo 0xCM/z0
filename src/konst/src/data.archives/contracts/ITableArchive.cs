@@ -25,8 +25,8 @@ namespace Z0
         void Clear()
             => Root.Clear();
 
-        void Clear(FS.FolderName folder)
-            => (Root + folder).Clear();
+        // void Clear(FS.FolderName folder)
+        //     => (Root + folder).Clear();
 
         ParseResult<TextDoc> Dataset(FS.FilePath src)
             => TextDocParser.parse(src);

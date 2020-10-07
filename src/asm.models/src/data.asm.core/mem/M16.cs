@@ -9,7 +9,7 @@ namespace Z0.Asm
 
     using static Konst;
 
-    public struct M16 : IAsmMemOp<M16,W16,ushort>
+    public struct M16 : IAsmMem<M16,W16,ushort>
     {
         public ushort Data;
 
@@ -25,7 +25,7 @@ namespace Z0.Asm
         public M16(ushort src)
             => Data = src;
 
-        ushort IAsmOperand<ushort>.Content
+        ushort IContented<ushort>.Content
             => Data;
     }
 }

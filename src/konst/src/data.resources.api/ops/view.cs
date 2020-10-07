@@ -29,7 +29,7 @@ namespace Z0
             => Buffers.view<byte>(res.Address, (i1 - i0 + 1));
 
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<char> view(in TextResourceRow src)
+        public static ReadOnlySpan<char> view(in StringResourceRow src)
             => Buffers.view<char>(src.Address, src.Length);
     }
 }

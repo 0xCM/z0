@@ -13,9 +13,9 @@ namespace Z0
     partial struct Resources
     {
         [MethodImpl(Inline), Op]
-        public unsafe static TextResourceRow row(in TextResource src)
+        public unsafe static StringResourceRow row(in StringResource src)
         {
-            var dst = new TextResourceRow();
+            var dst = new StringResourceRow();
             dst.Id = src.Source.MetadataToken;
             dst.Address = src.Address;
             dst.Length = (uint)src.Value.Length;
@@ -23,7 +23,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public unsafe static ref TextResourceRow row(in TextResource src, out TextResourceRow dst)
+        public unsafe static ref StringResourceRow row(in StringResource src, out StringResourceRow dst)
         {
             dst.Id = src.Source.MetadataToken;
             dst.Address = src.Address;

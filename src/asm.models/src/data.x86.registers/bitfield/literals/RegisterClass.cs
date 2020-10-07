@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
-{        
+{
     using static DataWidth;
 
     /// <summary>
@@ -20,13 +20,13 @@ namespace Z0.Asm
         /// <summary>
         /// A numbered general-purpose register of width <see cref='W8'/>, <see cref='W16'/>, <see cref='W32'/> or <see cref='W64'/>
         /// </summary>
-        GPN = 2,        
+        GPN = 2,
 
         /// <summary>
         /// Identifies a segment register
         /// </summary>
         SEG = 3,
-        
+
         /// <summary>
         /// An flag register of width <see cref='W16'/>, <see cref='W32'/> or <see cref='W64'/>
         /// </summary>
@@ -37,15 +37,15 @@ namespace Z0.Asm
         /// </summary>
         XMM = 10,
 
-       /// <summary>
-       /// A ymm vector register of width <see cref='W256'/>
-       /// </summary>
-       YMM = 11,
+        /// <summary>
+        /// A ymm vector register of width <see cref='W256'/>
+        /// </summary>
+        YMM = 11,
 
        /// <summary>
        /// A zmm vector register of width <see cref='W512'/>
        /// </summary>
-       ZMM = 12,  
+       ZMM = 12,
 
        /// <summary>
        /// A 64-bit mask register

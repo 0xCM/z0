@@ -21,7 +21,7 @@ namespace Z0.Asm
         where F : struct, IZmmReg<F,N>
         where N : unmanaged, ITypeNat
     {
-        RegisterIndex IRegister.Code
+        RegisterIndex IRegister.Index
             => (RegisterIndex)nat64u<N>();
     }
 }

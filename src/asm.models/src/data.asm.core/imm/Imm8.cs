@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines an 8-bit immediate value
     /// </summary>
-    public readonly struct Imm8 : IAsmOperand<I,W,byte>
+    public readonly struct Imm8 : IAsmImm<I,W,byte>
     {
         public readonly byte Data;
 
@@ -25,12 +25,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Data;
-        }
-
-        public AsmOperandKind OpKind
-        {
-            [MethodImpl(Inline)]
-            get => AsmOperandKind.Imm;
         }
 
         [MethodImpl(Inline)]

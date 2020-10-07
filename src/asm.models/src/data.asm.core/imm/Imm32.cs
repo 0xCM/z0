@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a 32-bit immediate value
     /// </summary>
-    public readonly struct Imm32 : IAsmOperand<I,W32, uint>
+    public readonly struct Imm32 : IAsmImm<I,W32, uint>
     {
         public readonly uint Data;
 
@@ -25,12 +25,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Data;
-        }
-
-        public AsmOperandKind OpKind
-        {
-            [MethodImpl(Inline)]
-            get => AsmOperandKind.Imm;
         }
 
         [MethodImpl(Inline)]

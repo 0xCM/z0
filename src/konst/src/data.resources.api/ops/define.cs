@@ -12,9 +12,9 @@ namespace Z0
 
     partial struct Resources
     {
-        [MethodImpl(Inline)]
-        public static TextResource<E> define<E>(E id, MemoryAddress location, string value)
-            where E : unmanaged, Enum
-                => new TextResource<E>(id,location,value);
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static StringResource<E> define<E>(E id, MemoryAddress location, uint length)
+            where E : unmanaged
+                => new StringResource<E>(id, location, length);
     }
 }

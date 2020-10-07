@@ -13,14 +13,14 @@ namespace Z0
     }
 
     [Free]
-    public interface IWfSink<T> : IWfSink, IDataSink<T>
+    public interface IWfSink<T> : IDataSink<T>
         where T : struct
     {
 
     }
 
     [Free]
-    public interface IWfSink<H,T> : IWfSink, IWfSink<T>
+    public interface IWfSink<H,T> : ISink, IDataSink<T>
         where T : struct
         where H : struct, IWfSink<H,T>
     {

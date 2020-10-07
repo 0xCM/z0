@@ -5,37 +5,43 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
     /// <summary>
-    /// Describes/models a literal text resource with an enum-predicated identity
+    /// Describes/models a literal text resource
     /// </summary>
-    public readonly struct TextResource<E>
-        where E : unmanaged, Enum
+    public struct StringResource : ITextual
     {
+        const string RenderPattern = "{0,-10} | {1,-16} | {2}";
+
         /// <summary>
         /// The resource identifier
         /// </summary>
-        public E Identifier {get;}
+        public FieldInfo Source;
 
         /// <summary>
         /// The resource address
         /// </summary>
-        public MemoryAddress Address {get;}
+        public MemoryAddress Address;
 
         /// <summary>
         /// The resource value extracted from the accompanying location
         /// </summary>
-        public string Content {get;}
+        public string Value;
 
         [MethodImpl(Inline)]
-        public TextResource(E id, MemoryAddress location, string value)
+        public StringResource(FieldInfo src, MemoryAddress address, string value)
         {
-            Identifier = id;
-            Address = location;
-            Content = value;
+            Source = src;
+            Address = address;
+            Value = value;
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => text.format(RenderPattern, Source.Name, Address, Value);
     }
 }

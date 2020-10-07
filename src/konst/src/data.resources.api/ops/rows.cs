@@ -52,7 +52,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public static TextResourceRows rows(TextResource[] src)
+        public static StringResourceRows rows(StringResource[] src)
             => src.Select(r => row(r));
     }
 }

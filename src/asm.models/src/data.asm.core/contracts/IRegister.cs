@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
     /// <summary>
-    /// Characterizes a register operand
+    /// Characterizes a register representation
     /// </summary>
     public interface IRegister
     {
@@ -14,20 +14,17 @@ namespace Z0.Asm
         /// </summary>
         RegisterKind Kind {get;}
 
-        RegisterIndex Code
+        RegisterIndex Index
             => (RegisterIndex)((byte)Kind);
 
         RegisterClass Class
             => default;
     }
 
-    public interface IRegister<T> : IRegister
+    public interface IRegister<T> : IRegister, IAsmContent<T>
         where T : unmanaged
     {
-        /// <summary>
-        /// The operand value
-        /// </summary>
-        T Content {get;}
+
     }
 
     /// <summary>
@@ -61,7 +58,7 @@ namespace Z0.Asm
         where T : unmanaged
         where N : unmanaged, ITypeNat
     {
-        RegisterIndex IRegister.Code
+        RegisterIndex IRegister.Index
             => (RegisterIndex)z.nat8u<N>();
     }
 }

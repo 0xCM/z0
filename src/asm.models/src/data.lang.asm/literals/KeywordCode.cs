@@ -18,9 +18,6 @@ namespace Z0.Asm
         {
             None = 0,
 
-            word,
-
-            dword,
 
             ptr,
 

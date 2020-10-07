@@ -15,17 +15,4 @@ namespace Z0
 
     }
 
-    public interface IWfTableWorker<T> : IWfTableWorker
-        where T : struct, ITable
-    {
-
-    }
-
-    public interface IWfTableWorker<H,T> : IWfTableWorker<T>, IWfWorker<H>
-        where T : struct, ITable
-        where H : struct, IWfTableWorker<H,T>
-    {
-
-    }
-
 }

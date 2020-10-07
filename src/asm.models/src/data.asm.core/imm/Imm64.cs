@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Defines a 64-bit immediate value
     /// </summary>
-    public readonly struct Imm64 : IAsmOperand<I,W64,ulong>
+    public readonly struct Imm64 : IAsmImm<I,W64,ulong>
     {
         public readonly ulong Data;
 
@@ -25,12 +25,6 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Data;
-        }
-
-        public AsmOperandKind OpKind
-        {
-            [MethodImpl(Inline)]
-            get => AsmOperandKind.Imm;
         }
 
         [MethodImpl(Inline)]

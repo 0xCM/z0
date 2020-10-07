@@ -26,7 +26,6 @@ namespace Z0
 
         CorrelationToken Ct;
 
-        WfStepId StepId;
 
         byte offset;
 
@@ -34,16 +33,18 @@ namespace Z0
 
         IAsmContext Asm;
 
+        WfHost Host;
+
         [MethodImpl(Inline)]
         public Runner(WfCaptureState wf)
         {
             Ct = wf.Ct;
-            StepId = WfCore.step(typeof(Runner));
             State = wf;
             Buffer = z.span<string>(256);
             offset = 0;
             Asm = wf.Asm;
             Random = wf.App.Random;
+            Host = WfSelfHost.create(typeof(Runner));
         }
 
         public void Run<C,S,T>(in WfRunSpec<C,S,T> spec)
@@ -74,11 +75,8 @@ namespace Z0
 
         }
 
-
         void Status<T>(T message)
-        {
-            Wf.Status(StepId, message);
-        }
+            => Wf.Status(Host, message);
 
         void Status<T>(WfStepId step, T message)
         {
@@ -264,7 +262,7 @@ namespace Z0
 
 
             {
-                Wf.Running(StepId);
+                Wf.Running(Host);
 
                 using var kernel = Native.kernel32();
                 Wf.Row(kernel);
@@ -275,13 +273,13 @@ namespace Z0
                 var a = (MemoryAddress)f.Invoke(kernel, "CreateDirectoryA");
                 Wf.Row(a);
 
-                Wf.Ran(StepId);
+                Wf.Ran(Host);
             }
         }
 
         void IceStuff()
         {
-            Wf.Running(StepId);
+            Wf.Running(Host);
 
             var bitfield = Ice.IceInstructionBits.init();
             var indices = bitfield.Indices;
@@ -289,7 +287,7 @@ namespace Z0
             foreach(var i in info)
                 Wf.Row(i);
 
-            Wf.Ran(StepId);
+            Wf.Ran(Host);
         }
 
         void EmitOpCodes()
@@ -364,7 +362,7 @@ namespace Z0
 
         void ListTextResources()
         {
-            var rows = Resources.rows(Resources.textres(typeof(Db.Literals))).View;
+            var rows = Resources.rows(Resources.strings(typeof(Db.Literals))).View;
             var count = rows.Length;
             for(var i=0; i<count; i++)
             {
@@ -408,13 +406,23 @@ namespace Z0
 
             }
         }
-        public void Run()
+
+        public void Run87()
         {
             var build = FS.dir(@"k:\z0\builds\nca.3.1.win-x64");
             var cmd = new ClrCommands.EmitAssemblyReferences();
             cmd.Source = build + FS.file("z0.konst.dll");
             cmd.Target = Wf.AppData + FS.file("AssemblyReferences", "csv");
             ClrCommands.exec(Wf,cmd);
+        }
+
+        public void Run()
+        {
+            var src = @readonly(Resources.strings<uint>(typeof(Db.Literals)));
+            for(var i=0; i<src.Length; i++)
+            {
+                Status(skip(src,i).Format());
+            }
         }
     }
 }

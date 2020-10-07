@@ -29,5 +29,10 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public R16(ushort value, RegisterKind kind)
             => Data = or((ulong)value, sll((ulong)kind, 32));
+
+
+        public RegisterClass Class
+            => RegisterClass.GP;
+
     }
 }

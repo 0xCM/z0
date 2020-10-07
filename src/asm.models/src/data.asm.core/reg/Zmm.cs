@@ -21,5 +21,8 @@ namespace Z0.Asm
             Content = value;
             Kind = kind;
         }
+
+        public RegisterClass Class
+            => RegisterClass.ZMM;
     }
 }

@@ -25,9 +25,5 @@ namespace Z0
             BranchCount = count;
         }
 
-        public void Emit(StringTable dst)
-        {
-
-        }
     }
 }

@@ -2,21 +2,22 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Asm
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    partial struct AsmLang
+    [ApiHost(ApiNames.StringTables)]
+    public readonly partial struct StringTables
     {
-        partial struct Operands
-        {
-            [MethodImpl(Inline)]
-            public static Operand<T> unify<T>(T src)
-                where T : unmanaged, IOperand<T>
-                    => src;
-        }
+        const NumericKind Closure = UnsignedInts;
+
+
+        [MethodImpl(Inline), Op]
+        public static StringLookup lookup(ReadOnlySpan<StringRef> src)
+            => new StringLookup(src);
     }
 }

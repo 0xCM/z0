@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="address">The reference address</param>
         /// <param name="length">The size, in bytes, of the segment</param>
         [MethodImpl(Inline)]
-        public StringRef @string(MemoryAddress address, uint length)
+        public static StringRef define(MemoryAddress address, uint length)
             => new StringRef(address, length);
 
         /// <summary>

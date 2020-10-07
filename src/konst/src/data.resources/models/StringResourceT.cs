@@ -5,43 +5,44 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
     /// <summary>
-    /// Describes/models a literal text resource
+    /// Represents an identified string resource
     /// </summary>
-    public struct TextResource : ITextual
+    public readonly struct StringResource<E> : ITextual
+        where E : unmanaged
     {
-        const string RenderPattern = "{0,-10} | {1,-16} | {2}";
-
         /// <summary>
         /// The resource identifier
         /// </summary>
-        public FieldInfo Source;
+        public E Identifier {get;}
 
         /// <summary>
         /// The resource address
         /// </summary>
-        public MemoryAddress Address;
+        public MemoryAddress Address {get;}
 
         /// <summary>
         /// The resource value extracted from the accompanying location
         /// </summary>
-        public string Value;
+        public uint Length {get;}
 
         [MethodImpl(Inline)]
-        public TextResource(FieldInfo src, MemoryAddress address, string value)
+        public StringResource(E id, MemoryAddress address, uint length)
         {
-            Source = src;
+            Identifier = id;
             Address = address;
-            Value = value;
+            Length = length;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(RenderPattern, Source.Name, Address, Value);
+            => StringRefs.define(Address,Length).Format();
+
+        public override string ToString()
+            => Format();
     }
 }

@@ -14,7 +14,7 @@ namespace Z0
     using api = Resources;
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct TextResourceRow : ITextual
+    public struct StringResourceRow : ITextual
     {
         public const string RenderPattern = "{0} | {1} | {2}";
 

@@ -85,7 +85,7 @@ namespace Z0
 
         public const string BitLogicBytes = BitLogic + dot + bytes;
 
-        public const string Resources = resources;
+        public const string Resources = data + dot + resources;
 
         public const string TextResources = Resources + dot + A.text;
 
@@ -133,5 +133,7 @@ namespace Z0
         const string octets = nameof(octets);
 
         public const string TextEncoders = A.text + dot + "encoders";
+
+        public const string StringTables = data + dot + "stringtables";
     }
 }

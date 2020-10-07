@@ -30,9 +30,8 @@ namespace Z0
             where F : unmanaged, Enum
         {
 
-            sb.Append(text.rspace(delimiter));
-            sb.Append($"{content}".PadRight(text.width(field)));
+            sb.Append(Z0.text.rspace(delimiter));
+            sb.Append($"{content}".PadRight(Z0.text.width(field)));
         }
     }
-
 }

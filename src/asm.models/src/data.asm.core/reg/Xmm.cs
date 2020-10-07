@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         public RegisterKind Kind {get;}
 
-        public RegisterIndex Code
+        public RegisterIndex Index
         {
             [MethodImpl(Inline)]
             get => X86RegBits.code(Kind);
@@ -31,6 +31,9 @@ namespace Z0.Asm
             Content = value;
             Kind = kind;
         }
+
+        public RegisterClass Class
+            => RegisterClass.XMM;
 
         [MethodImpl(Inline)]
         public static implicit operator Xmm(xmm8 src)

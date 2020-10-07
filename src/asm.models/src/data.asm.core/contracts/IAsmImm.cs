@@ -4,27 +4,26 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IAsmImmOp : IAsmOperand
+    public interface IAsmImm
     {
-        AsmOperandKind IAsmOperand.OpKind
-            => AsmOperandKind.Imm;
+
     }
 
-    public interface IAsmImmOp<T> : IAsmImmOp, IAsmOperand<T>
+    public interface IAsmImm<T> : IAsmImm
         where T : unmanaged
     {
 
     }
 
-    public interface IAsmImmOp<W,T> : IAsmImmOp<T>, IAsmOperand<W,T>
+    public interface IAsmImm<W,T> : IAsmImm<T>
         where W : unmanaged, IDataWidth
         where T : unmanaged
     {
 
     }
 
-    public interface IAsmImmOp<F,W,T> : IAsmImmOp<W,T>, IAsmOperand<F,W,T>
-        where F : unmanaged, IAsmImmOp<F,W,T>
+    public interface IAsmImm<F,W,T> : IAsmImm<W,T>
+        where F : unmanaged, IAsmImm<F,W,T>
         where W : unmanaged, IDataWidth
         where T : unmanaged
     {

@@ -8,10 +8,31 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using SQ = AsmSizeQualifiers;
 
     [ApiHost]
     public readonly partial struct AsmLang
     {
+        public static SQ.Byte @byte()
+            => default;
+
+        public static SQ.Word word()
+            => default;
+
+        public static SQ.DWord dword()
+            => default;
+
+        public static SQ.QWord qword()
+            => default;
+
+        public static SQ.XmmWord xmmword()
+            => default;
+
+        public static SQ.YmmWord ymmword()
+            => default;
+
+        public static SQ.ZmmWord zmmword()
+            => default;
 
         [MethodImpl(Inline), Op]
         public static AsmTokens tokens(in AsmTokenIndex index)

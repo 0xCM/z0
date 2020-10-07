@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     public readonly struct TableSinks<T>
-        where T : struct, ITable<T>
+        where T : struct
     {
         readonly TableSink<T>[] Data;
 

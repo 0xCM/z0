@@ -13,11 +13,11 @@ namespace Z0
     partial struct Resources
     {
         [Op]
-        public static TextResource[] textres(Type src)
+        public static StringResource[] strings(Type src)
         {
             var values = span(Literals.values2<string>(src));
             var count = values.Length;
-            var buffer = alloc<TextResource>(count);
+            var buffer = alloc<StringResource>(count);
             var dst = span(buffer);
             for(var i=0u; i<count; i++)
             {
@@ -30,14 +30,20 @@ namespace Z0
             return buffer;
         }
 
-        public static Span<TextResource<E>> textres<E>(Type src)
-            where E : unmanaged, Enum
+        [Op, Closures(UnsignedInts)]
+        public static StringResource<T>[] strings<T>(Type src)
+            where T : unmanaged
         {
-            var locations = Resources.addresses(src);
-            var count = locations.Length;
-            var dst = span<TextResource<E>>(count);
-            Resources.read(locations, dst);
-            return dst;
+            var values = span(Literals.values2<string>(src));
+            var count = values.Length;
+            var buffer = alloc<StringResource<T>>(count);
+            var dst = span(buffer);
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var fv = ref skip(values,i);
+                seek(dst,i) = define(@as<uint,T>(i),address(fv.Value), (uint)fv.Value.Length);
+            }
+            return buffer;
         }
     }
 }

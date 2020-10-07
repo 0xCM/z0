@@ -20,8 +20,8 @@ namespace Z0
         public static StringTable create(string name, HeaderCell[] cells, StringTableRow[] rows)
             => new StringTable(name, cells, rows);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static StringTable<T> create<T>(string name, TableHeader header, StringTableRow<T>[] rows)
-            => new StringTable<T>(name, header, rows);
+        // [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        // public static StringTable<T> create<T>(string name, TableHeader header, StringTableRow<T>[] rows)
+        //     => new StringTable<T>(name, header, rows);
     }
 }
