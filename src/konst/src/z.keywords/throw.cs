@@ -18,5 +18,9 @@ namespace Z0
         [Op]
         public static T @throw<T>(Exception e)
             => throw e;
+
+        [MethodImpl(Inline), Op]
+        public static void @throw(string msg)
+            => sys.@throw(msg);
     }
 }

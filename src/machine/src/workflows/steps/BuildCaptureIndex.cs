@@ -14,6 +14,13 @@ namespace Z0
     using static z;
 
     [WfHost]
+    public class CreateGlobalIndexHost : WfHost<CreateGlobalIndexHost>
+    {
+        public override void Run(IWfShell shell)
+            => throw missing();
+    }
+
+    [WfHost]
     public sealed class BuildCaptureIndex : WfHost<BuildCaptureIndex>
     {
         public static ref ApiCodeBlockIndex run(IWfShell wf, IWfCaptureState state, out ApiCodeBlockIndex dst)

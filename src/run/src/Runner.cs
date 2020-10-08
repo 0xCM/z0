@@ -242,7 +242,7 @@ namespace Z0
             }
 
             {
-                new CheckResourcesHost().Run(Wf);
+                new CheckResources().Run(Wf);
             }
 
             // {

@@ -13,6 +13,13 @@ namespace Z0
     [ApiHost]
     public unsafe class memory
     {
+        [MethodImpl(Inline), Op]
+        public static Span<byte> replicate(in SegRef src)
+        {
+            Span<byte> dst = sys.alloc<byte>(src.DataSize);
+            Copier.copy(src, dst);
+            return dst;
+        }
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Ref<T> @ref<T>(in T src, uint size)

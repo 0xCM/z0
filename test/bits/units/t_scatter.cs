@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static As;
+    using static z;
 
     public class t_scatter : t_bitcore<t_scatter>
     {

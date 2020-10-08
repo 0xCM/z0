@@ -68,7 +68,7 @@ namespace Z0
             var path = FS.dir(TargetDir.Name) +  file;
             var assembly = part.Owner;
             using var reader = PeTableReader.open(FS.path(assembly.Location));
-            var src = reader.ReadFields();
+            var src = reader.Fields();
             var count = (uint)src.Length;
 
             var formatter = TableRows.formatter(Widths,t);

@@ -52,7 +52,7 @@ namespace Z0
         public BinaryCode Content;
 
         [MethodImpl(Inline)]
-        public ImageConstantRecord(Count seq, HandleInfo parent, ConstantTypeCode tc, BinaryCode value)
+        public ImageConstantRecord(Count seq, HandleToken parent, ConstantTypeCode tc, BinaryCode value)
         {
             Sequence = seq;
             ParentId = parent.Token;

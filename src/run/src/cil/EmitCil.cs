@@ -44,7 +44,5 @@ namespace Z0
             var writer = new CilFunctionWriter(cmd.CilTarget);
             writer.Write(decoded);
         }
-
     }
-
 }

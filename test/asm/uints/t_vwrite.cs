@@ -6,9 +6,10 @@ namespace Z0
 {
     using System;
 
-    using static Typed;
-    using static As;
+    // using static Typed;
+    // using static As;
     using static Konst;
+    using static z;
 
     public class t_vwrite : t_vcheck<t_vwrite>
     {

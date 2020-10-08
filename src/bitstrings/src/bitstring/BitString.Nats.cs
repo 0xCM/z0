@@ -5,7 +5,6 @@
 namespace Z0
 {
     using static Konst;
-    using static Root;
 
     public static class BitStringNatX
     {
@@ -18,7 +17,7 @@ namespace Z0
         public static BitString Transpose<M,N>(this BitString src, M m = default, N n = default)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => BitString.transpose(src, value(m), value(n));
+                => BitString.transpose(src, z.nat64u(m), z.nat64u(n));
 
         public static BitString Transpose(this BitString bs, int m, int n)
             => BitString.transpose(bs,m,n);

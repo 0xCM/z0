@@ -5,8 +5,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
-    using static As;
-    using static NumericCast;
+    using static z;
 
     /// <summary>
     /// Produces pseudorandom numeric points and streams predicated on a supplied generator

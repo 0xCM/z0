@@ -25,6 +25,7 @@ namespace Z0
             return z.fptr(f);
         }
 
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void binop<T>(ReadOnlySpan<T> left, ReadOnlySpan<T> right, Func<T,T,T> f, Span<T> results)
         {
             var count = left.Length;
@@ -52,6 +53,7 @@ namespace Z0
         public static void binop(uint count, in Pair<uint> src, Func<uint,uint,uint> f, ref uint dst)
             => binop<uint>(count, src, f, ref dst);
 
+        [Op]
         public static void binfunc(uint count, in Paired<uint,byte> src, Func<uint,byte,ulong> f, ref ulong dst)
         {
             for(var i=0u; i<count; i++)

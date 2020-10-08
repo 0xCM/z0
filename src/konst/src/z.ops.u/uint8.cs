@@ -12,13 +12,13 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {                
+    {
         /// <summary>
         /// Converts a parametric source to a <see cref='byte'/>
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]   
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte uint8<T>(T src)
             => As<T,byte>(ref src);
 
@@ -36,12 +36,22 @@ namespace Z0
             where T : struct
                 => As<T?, byte?>(ref src);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<byte> uint8<T>(Span<T> src)
+            where T : struct
+                => recover<T,byte>(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<byte> uint8<T>(ReadOnlySpan<T> src)
+            where T : struct
+                => recover<T,byte>(src);
+
         /// <summary>
         /// Converts a <see cref='sbyte'/> to a <see cref='byte'/>
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static byte uint8(sbyte src)        
+        public static byte uint8(sbyte src)
             => (byte)src;
 
         /// <summary>
@@ -49,15 +59,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static byte uint8(byte src)        
+        public static byte uint8(byte src)
             => (byte)src;
-        
+
         /// <summary>
         /// Converts a <see cref='short'/> to a <see cref='byte'/>
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static byte uint8(short src)        
+        public static byte uint8(short src)
             => (byte)src;
 
         /// <summary>
@@ -65,7 +75,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static byte uint8(ushort src)        
+        public static byte uint8(ushort src)
             => (byte)src;
 
         /// <summary>
@@ -73,7 +83,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static byte uint8(int src)        
+        public static byte uint8(int src)
             => (byte)src;
 
         /// <summary>
@@ -81,7 +91,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static byte uint8(uint src)        
+        public static byte uint8(uint src)
             => (byte)src;
 
         /// <summary>
@@ -89,7 +99,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static byte uint8(long src)        
+        public static byte uint8(long src)
             => (byte)src;
 
         /// <summary>
@@ -97,7 +107,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static uint uint8(ulong src)        
+        public static uint uint8(ulong src)
             => (uint)src;
 
         /// <summary>

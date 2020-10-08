@@ -9,6 +9,8 @@ namespace Z0
     using System.Security;
     using System.Reflection.Metadata;
     using System.Reflection.PortableExecutable;
+    using System.IO;
+    using System.Linq;
 
     using static Konst;
     using static z;
@@ -31,7 +33,6 @@ namespace Z0
 
         public static ClrDataReader create(IWfShell wf, FS.FilePath src)
             => new ClrDataReader(wf,src);
-
 
         public void Dispose()
         {
@@ -82,8 +83,6 @@ namespace Z0
         ulong ImageSize;
 
         readonly Ptr<byte> BasePointer;
-
-        //readonly Ptr<byte> ImagePointer;
 
         readonly PEMemoryBlock CliMetadata;
     }

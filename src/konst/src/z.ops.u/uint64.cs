@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {                
+    {
         /// <summary>
         /// Converts a parametric source to a <see cref='ulong'/>
         /// </summary>
@@ -36,12 +36,22 @@ namespace Z0
             where T : unmanaged
                 => As<T?, ulong?>(ref src);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<ulong> uint64<T>(Span<T> src)
+            where T : struct
+                => recover<T,ulong>(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<ulong> uint64<T>(ReadOnlySpan<T> src)
+            where T : struct
+                => recover<T,ulong>(src);
+
         /// <summary>
         /// Converts a <see cref='sbyte'/> to a <see cref='ulong'/>
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static ulong uint64(sbyte src)        
+        public static ulong uint64(sbyte src)
             => (ulong)src;
 
         /// <summary>
@@ -49,15 +59,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static ulong uint64(byte src)        
+        public static ulong uint64(byte src)
             => (ulong)src;
-        
+
         /// <summary>
         /// Converts a <see cref='short'/> to a <see cref='ulong'/>
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static ulong uint64(short src)        
+        public static ulong uint64(short src)
             => (ulong)src;
 
         /// <summary>
@@ -65,27 +75,27 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static ulong uint64(ushort src)        
+        public static ulong uint64(ushort src)
             => (ulong)src;
 
         [MethodImpl(Inline), Op]
-        public static ulong uint64(int src)        
+        public static ulong uint64(int src)
             => (ulong)src;
 
         [MethodImpl(Inline), Op]
-        public static ulong uint64(uint src)        
+        public static ulong uint64(uint src)
             => (ulong)src;
 
         [MethodImpl(Inline), Op]
-        public static ulong uint64(long src)        
+        public static ulong uint64(long src)
             => (ulong)src;
 
         [MethodImpl(Inline), Op]
-        public static ulong uint64(ulong src)        
+        public static ulong uint64(ulong src)
             => (ulong)src;
 
         [MethodImpl(Inline), Op]
-        public static ulong uint64(float src)        
+        public static ulong uint64(float src)
             => (ulong)((long)src);
 
         [MethodImpl(Inline), Op]

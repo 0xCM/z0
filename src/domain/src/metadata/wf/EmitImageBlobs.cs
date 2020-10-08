@@ -48,7 +48,7 @@ namespace Z0
         public ReadOnlySpan<ImageBlob> Read(IPart part)
         {
             using var reader = PeTableReader.open(part.PartPath());
-            return reader.ReadBlobs();
+            return reader.Blobs();
         }
 
         static string format(in ImageBlob src, RecordFormatter<F,W> dst)

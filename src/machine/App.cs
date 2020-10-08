@@ -11,6 +11,11 @@ namespace Z0
 
     using static z;
 
+    [WfHost]
+    public sealed class MachineControl : WfHost<MachineControl>
+    {
+    }
+
     struct App
     {
         public static void Main(params string[] args)

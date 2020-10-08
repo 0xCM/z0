@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {                
+    {
         /// <summary>
         /// Converts a parametric source to a <see cref='uint'/>
         /// </summary>
@@ -36,12 +36,22 @@ namespace Z0
             where T : unmanaged
                 => As<T?, uint?>(ref src);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<uint> uint32<T>(Span<T> src)
+            where T : struct
+                => recover<T,uint>(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<uint> uint32<T>(ReadOnlySpan<T> src)
+            where T : struct
+                => recover<T,uint>(src);
+
         /// <summary>
         /// Converts a <see cref='sbyte'/> to a <see cref='uint'/>
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static uint uint32(sbyte src)        
+        public static uint uint32(sbyte src)
             => (uint)src;
 
         /// <summary>
@@ -49,35 +59,35 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
-        public static uint uint32(byte src)        
-            => (uint)src;
-        
-        [MethodImpl(Inline), Op]
-        public static uint uint32(short src)        
+        public static uint uint32(byte src)
             => (uint)src;
 
         [MethodImpl(Inline), Op]
-        public static uint uint32(ushort src)        
+        public static uint uint32(short src)
             => (uint)src;
 
         [MethodImpl(Inline), Op]
-        public static uint uint32(int src)        
+        public static uint uint32(ushort src)
             => (uint)src;
 
         [MethodImpl(Inline), Op]
-        public static uint uint32(uint src)        
+        public static uint uint32(int src)
             => (uint)src;
 
         [MethodImpl(Inline), Op]
-        public static uint uint32(long src)        
+        public static uint uint32(uint src)
             => (uint)src;
 
         [MethodImpl(Inline), Op]
-        public static uint uint32(ulong src)        
+        public static uint uint32(long src)
             => (uint)src;
 
         [MethodImpl(Inline), Op]
-        public static uint uint32(float src)        
+        public static uint uint32(ulong src)
+            => (uint)src;
+
+        [MethodImpl(Inline), Op]
+        public static uint uint32(float src)
             => (uint)((long)src);
 
         [MethodImpl(Inline), Op]

@@ -8,7 +8,7 @@ namespace Z0
     using Microsoft.Diagnostics.Tracing;
     using Microsoft.Diagnostics.Tracing.Session;
     using System.Linq.Expressions;
-    
+
     public static class TraceEventAdapter
     {
         public static T Payload<T>(this TraceEvent e, string name)
@@ -17,12 +17,12 @@ namespace Z0
         public static dynamic Payload<T>(this TraceEvent e, Expression<Func<T,dynamic>> selector)
             => e.PayloadByName(selector.GetAccessedProperty().Name);
 
-        public static AgentEventId EventIdentity(this TraceEvent data)         
+        public static AgentEventId EventIdentity(this TraceEvent data)
                 => Z0.AgentEventId.define(
-                data.Payload<uint>("ServerId"), 
-                data.Payload<uint>("AgentId"), 
+                data.Payload<uint>("ServerId"),
+                data.Payload<uint>("AgentId"),
                 data.Payload<ulong>("Timestamp"),
-                data.Payload<ulong>("EventKind") 
+                data.Payload<ulong>("EventKind")
                 );
 
         public static A Adapt<A>(this TraceEvent e)
@@ -51,6 +51,6 @@ namespace Z0
         where T : unmanaged
     {
         public virtual T Body
-            => As.cell<T>(Subject.Payload<byte[]>(nameof(Body)).ToSpan());
+            => z.cell<T>(Subject.Payload<byte[]>(nameof(Body)).ToSpan());
     }
 }

@@ -7,6 +7,5 @@ namespace Z0.Asm
     public interface IAsmTester : TTestCapture, TTestImmCapture, TTestDynamicVectors
     {
 
-
     }
 }

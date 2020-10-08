@@ -19,7 +19,7 @@ namespace Z0
             void check(char x, AsciCharCode y)
                 => Claim.Eq(encode(x), y);
 
-            var src = span(array('1','2','3','4'));
+            var src = span(z.array('1','2','3','4'));
             var dst = span(alloc<AsciCharCode>(4));
             encode(src,dst);
             iter(src, dst, check);

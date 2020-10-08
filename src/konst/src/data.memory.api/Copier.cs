@@ -13,6 +13,14 @@ namespace Z0
     [ApiHost]
     public readonly struct Copier
     {
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static unsafe void copy<T>(SegRef src, Span<T> dst)
+            where T : unmanaged
+        {
+            var reader = PointedReader.create<T>(src);
+            reader.ReadAll(dst);
+        }
+
         /// <summary>
         /// Copies the source to the target using 128-bit intrinsic operations
         /// </summary>

@@ -42,16 +42,16 @@ namespace Z0
 
             try
             {
-                EmitFieldMetadata.create().Run(Wf);
                 ProcessPartFiles.create().Run(Wf, AsmContextProvider.create(State.Asm));
+                EmitFieldMetadata.create().Run(Wf);
                 EmitSectionHeadersHost.create().Run(Wf);
                 EmitImageConstants.create().Run(Wf);
                 EmitLocatedPartsHost.create().Run(Wf);
                 EmitStringRecords.create().Run(Wf);
                 EmitProjectDocsHost.create().Run(Wf);
                 EmitImageBlobs.create().Run(Wf);
-                EmitPartCilHost.create().Run(Wf);
-                EmitEnumCatalogHost.create().Run(Wf);
+                EmitCilTables.create().Run(Wf);
+                EmitEnumCatalog.create().Run(Wf);
                 EmitFieldLiterals.create().Run(Wf);
                 EmitContentCatalog.create().Run(Wf);
                 EmitBitMasksHost.create().Run(Wf);

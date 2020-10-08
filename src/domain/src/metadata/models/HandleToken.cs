@@ -8,21 +8,28 @@ namespace Z0
     using System.Reflection.Metadata;
     using System.Reflection.Metadata.Ecma335;
     using System.Runtime.InteropServices;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
 
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct HandleInfo
+    public readonly struct HandleToken
     {
-        public readonly int Token;
+        public readonly Handle Handle;
+
+        public readonly ClrArtifactKey Token;
 
         public readonly TableIndex Source;
 
-        public HandleInfo(int token, TableIndex src)
+        [MethodImpl(Inline)]
+        public HandleToken(Handle handle, ClrArtifactKey token, TableIndex src)
         {
+            Handle = handle;
             Token = token;
             Source = src;
         }
 
-        public static HandleInfo Empty
-            => new HandleInfo(0, 0);
+        public static HandleToken Empty
+            => default;
     }
 }

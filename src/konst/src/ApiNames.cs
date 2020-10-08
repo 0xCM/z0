@@ -17,6 +17,8 @@ namespace Z0
 
         public const string ApiIdentityX = ApiIdentity + dot + extensions;
 
+        public const string ApiIdentify = api + dot + "identify";
+
         public const string BitFormatter = bits + dot + formatters;
 
         public const string BitStream = bits + dot + stream;

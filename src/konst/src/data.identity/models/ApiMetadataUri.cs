@@ -70,7 +70,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ApiMetadataUri identify(MethodInfo src)
-            => api.metauri(src);
+            => ApiIdentity.identify(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ApiMetadataUri(MethodInfo src)
@@ -78,17 +78,17 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+            => ApiIdentity.format(this);
 
         public string Identifier
         {
             [MethodImpl(Inline)]
-            get => api.identifier(this);
+            get => ApiIdentity.identifier(this);
         }
 
         [MethodImpl(Inline)]
         public bool Equals(ApiMetadataUri src)
-            => api.eq(this,src);
+            => ApiIdentity.eq(this,src);
 
         public override string ToString()
             => Format();

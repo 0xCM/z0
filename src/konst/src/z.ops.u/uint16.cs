@@ -12,13 +12,13 @@ namespace Z0
     using static Konst;
 
     partial struct z
-    {                
+    {
         /// <summary>
         /// Converts a parametric source to a <see cref='ushort'/>
         /// </summary>
         /// <param name="src">The source value</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]   
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ushort uint16<T>(T src)
             => As<T,ushort>(ref src);
 
@@ -36,36 +36,46 @@ namespace Z0
             where T : unmanaged
                 => As<T?, ushort?>(ref src);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static Span<ushort> uint16<T>(Span<T> src)
+            where T : struct
+                => recover<T,ushort>(src);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<ushort> uint16<T>(ReadOnlySpan<T> src)
+            where T : struct
+                => recover<T,ushort>(src);
+
         [MethodImpl(Inline), Op]
-        public static ushort uint16(sbyte src)        
+        public static ushort uint16(sbyte src)
             => (ushort)src;
 
         [MethodImpl(Inline), Op]
-        public static ushort uint16(byte src)        
-            => (ushort)src;
-        
-        [MethodImpl(Inline), Op]
-        public static ushort uint16(short src)        
+        public static ushort uint16(byte src)
             => (ushort)src;
 
         [MethodImpl(Inline), Op]
-        public static ushort uint16(ushort src)        
+        public static ushort uint16(short src)
             => (ushort)src;
 
         [MethodImpl(Inline), Op]
-        public static ushort uint16(int src)        
+        public static ushort uint16(ushort src)
             => (ushort)src;
 
         [MethodImpl(Inline), Op]
-        public static ushort uint16(uint src)        
+        public static ushort uint16(int src)
             => (ushort)src;
 
         [MethodImpl(Inline), Op]
-        public static ushort uint16(long src)        
+        public static ushort uint16(uint src)
             => (ushort)src;
 
         [MethodImpl(Inline), Op]
-        public static ushort uint16(ulong src)        
+        public static ushort uint16(long src)
+            => (ushort)src;
+
+        [MethodImpl(Inline), Op]
+        public static ushort uint16(ulong src)
             => (ushort)src;
 
         [MethodImpl(Inline), Op]

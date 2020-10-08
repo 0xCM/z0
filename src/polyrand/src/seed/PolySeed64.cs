@@ -10,21 +10,20 @@ namespace Z0
     using static Konst;
 
     public static class PolySeed64
-    {            
+    {
         static int Count => RawBytes.Length >> 3;
 
         [MethodImpl(Inline)]
         public static ulong Lookup(uint i)
         {
             if(i < Count)
-                return As.cell<ulong>(RawBytes, (int)(i*8));
+                return z.cell<ulong>(RawBytes, (int)(i*8));
             else
-            {               
-                //AppErrors.ThrowOutOfRange<ulong>((int)i, 0, Count - 1); 
-                    throw new Exception($"bad");                
+            {
+                throw new Exception("bad");
             }
         }
-                            
+
         public static ulong Seed00 => Lookup(0);
 
         public static ulong Seed01 => Lookup(1);
@@ -126,6 +125,6 @@ namespace Z0
             0x72, 0x9c, 0xbe, 0x29, 0xab, 0x98, 0x24, 0x31,
             0x51, 0xe3, 0x5d, 0x0c, 0xe2, 0xdf, 0x2c, 0x66,
             0xc2, 0x6e, 0xbc, 0x2c, 0xde, 0xc3, 0x0d, 0xd7,
-        };        
+        };
   }
 }

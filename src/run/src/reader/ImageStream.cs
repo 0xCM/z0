@@ -12,6 +12,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Text;
 
+    using static Konst;
+    using static z;
+
     public unsafe struct ImageStream : IDisposable
     {
         public readonly Stream Stream;
@@ -20,6 +23,7 @@ namespace Z0
 
         uint Offset;
 
+        [MethodImpl(Inline), Op]
         public ImageStream(Stream src, bool @virtual, uint offset = 0)
         {
             Stream = src;
@@ -70,7 +74,8 @@ namespace Z0
             => ReadString(Offset, len);
 
         public bool TryRead<T>(out T result)
-            where T : unmanaged => TryRead(Offset, out result);
+            where T : unmanaged
+                => TryRead(Offset, out result);
 
         public bool TryRead<T>(uint offset, out T t)
             where T : unmanaged
@@ -102,7 +107,8 @@ namespace Z0
             where T : unmanaged
                 => Read<T>(ref offset);
 
-        public T Read<T>(ref uint offset) where T : unmanaged
+        public T Read<T>(ref uint offset)
+            where T : unmanaged
         {
             int size = Unsafe.SizeOf<T>();
             T t = default;

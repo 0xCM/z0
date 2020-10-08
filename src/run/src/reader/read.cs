@@ -18,8 +18,16 @@ namespace Z0
     using static ImageTables;
     using static ImageLiterals;
 
-    partial struct ImageReader
+    public partial struct ImageReader
     {
+        [MethodImpl(Inline)]
+        public static ImageStream stream(Stream src, bool @virtual)
+            => new ImageStream(src, @virtual);
+
+        [MethodImpl(Inline)]
+        public static ImageStream stream(FS.FilePath src)
+            => new ImageStream(File.OpenRead(src.Name), false);
+
         public static Outcome<uint> read(FS.FilePath path, out Span<ImageSectionHeader> target)
         {
             using var stream = File.OpenRead(path.Name);
@@ -69,7 +77,7 @@ namespace Z0
             dst = default;
             try
             {
-                return create(src).Read(out dst);
+                return PeStreamReader.create(src).Read(out dst);
             }
             catch(Exception e)
             {

@@ -53,7 +53,6 @@ namespace Z0
             get => new Symbol<S>(Value);
         }
 
-
         public Type ValueType
             => typeof(S);
 

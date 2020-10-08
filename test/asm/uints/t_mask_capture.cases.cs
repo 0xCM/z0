@@ -51,10 +51,10 @@ namespace Z0.Asm
             => NumericMethods.Select(m => m.GetGenericMethodDefinition());
 
         public static Type[] NaturalArgs
-            => Root.array(typeof(N4), typeof(N6), typeof(N8), typeof(N10), typeof(N12));
+            => z.array(typeof(N4), typeof(N6), typeof(N8), typeof(N10), typeof(N12));
 
         public static Type[] NumericArgs
-            => Root.array(typeof(byte), typeof(ushort), typeof(uint), typeof(ulong));
+            => z.array(typeof(byte), typeof(ushort), typeof(uint), typeof(ulong));
     }
 
 }

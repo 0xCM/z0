@@ -82,7 +82,6 @@ namespace Z0
             HiMaskResults16 = alloc<CheckHiMaskResult<ushort>>(Reps);
             HiMaskResults32 = alloc<CheckHiMaskResult<uint>>(Reps);
             HiMaskResults64 = alloc<CheckHiMaskResult<ulong>>(Reps);
-
         }
 
         [MethodImpl(Inline)]
@@ -139,7 +138,6 @@ namespace Z0
         {
             Wf.Disposed(Host);
         }
-
 
         [Op]
         public static void CheckLoMasks(ref byte index, ref ulong log)

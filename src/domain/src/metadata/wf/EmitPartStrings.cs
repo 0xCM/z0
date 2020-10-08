@@ -36,21 +36,21 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        readonly CorrelationToken Ct;
-
         readonly IPart Part;
 
         readonly PartStringKind StringKind;
 
-        readonly FilePath TargetPath;
+        readonly FS.FilePath TargetPath;
 
         [MethodImpl(Inline)]
         public EmitPartStringsStep(IWfShell wf, IPart part, PartStringKind sk, FolderPath dir, CorrelationToken ct)
         {
             Wf = wf;
             Part = part;
-            Ct = ct;
-            TargetPath = dir + FileName.define(part.Id.Format(), ExtName(sk));
+            if(sk == PartStringKind.System)
+                TargetPath = Wf.Paths.Table(SystemStringRecord.TableId, string.Concat(part.Id.Format(), Chars.Dot, SystemStringRecord.DataType));
+            else
+                TargetPath = Wf.Paths.Table(UserStringRecord.TableId, string.Concat(part.Id.Format(), Chars.Dot, UserStringRecord.DataType));
             StringKind = sk;
             EmissionCount = 0;
             Wf.Created(StepId);
@@ -62,7 +62,20 @@ namespace Z0
         }
 
         [Op]
-        static ref readonly RecordFormatter<F,W> format(in ImageStringRecord src, in RecordFormatter<F,W> dst)
+        static ref readonly RecordFormatter<F,W> format(in SystemStringRecord src, in RecordFormatter<F,W> dst)
+        {
+            dst.Delimit(F.Sequence, src.Sequence);
+            dst.Delimit(F.Source, src.Source);
+            dst.Delimit(F.HeapSize, src.HeapSize);
+            dst.Delimit(F.Length, src.Length);
+            dst.Delimit(F.Offset, src.Offset);
+            dst.Delimit(F.Value, src.Content);
+            dst.EmitEol();
+            return ref dst;
+        }
+
+        [Op]
+        static ref readonly RecordFormatter<F,W> format(in UserStringRecord src, in RecordFormatter<F,W> dst)
         {
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.Source, src.Source);
@@ -78,7 +91,19 @@ namespace Z0
         {
             Wf.Running(StepId);
 
-            var data = ReadData();
+            if(StringKind == PartStringKind.System)
+                ReadSystemStrings();
+            else
+                ReadUserStrings();
+
+            Wf.EmittedTable<SystemStringRecord>(StepId, EmissionCount,FS.path(TargetPath.Name));
+        }
+
+        void ReadUserStrings()
+        {
+            var srcPath = Part.PartPath();
+            using var reader = PeTableReader.open(srcPath);
+            var data = reader.UserStrings();
             EmissionCount = (uint)data.Length;
 
             var target = Table.formatter<F,W>();
@@ -88,25 +113,22 @@ namespace Z0
             for(var i=0u; i<EmissionCount; i++)
                 format(skip(data,i), target);
             writer.Write(target.Render());
-
-            Wf.EmittedTable<ImageStringRecord>(StepId, EmissionCount,FS.path(TargetPath.Name));
         }
 
-        ReadOnlySpan<ImageStringRecord> ReadData()
-            => StringKind == PartStringKind.User ? ReadUserStrings(Part) : ReadSystemStrings(Part);
-
-        ReadOnlySpan<ImageStringRecord> ReadUserStrings(IPart part)
+        void ReadSystemStrings()
         {
-            var srcPath = part.PartPath();
+            var srcPath = Part.PartPath();
             using var reader = PeTableReader.open(srcPath);
-            return reader.ReadUserStrings();
-        }
+            var data = reader.SystemStrings();
+            EmissionCount = (uint)data.Length;
 
-        ReadOnlySpan<ImageStringRecord> ReadSystemStrings(IPart part)
-        {
-            var srcPath = part.PartPath();
-            using var reader = PeTableReader.open(srcPath);
-            return reader.ReadStrings();
+            var target = Table.formatter<F,W>();
+            using var writer = TargetPath.Writer();
+            target.EmitHeader();
+
+            for(var i=0u; i<EmissionCount; i++)
+                format(skip(data,i), target);
+            writer.Write(target.Render());
         }
     }
 }

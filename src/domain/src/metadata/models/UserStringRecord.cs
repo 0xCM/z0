@@ -37,7 +37,7 @@ namespace Z0
         public const string SystemKindExt = SystemKind + ExtSep + DataTypeExt;
     }
 
-    public enum ImgStringSource : byte
+    public enum ImageStringSource : byte
     {
         System = 1,
 
@@ -75,11 +75,15 @@ namespace Z0
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public struct ImageStringRecord
+    public struct UserStringRecord
     {
+        public const string TableId = "image.strings.user";
+
+        public const string DataType = "string";
+
         public Count Sequence;
 
-        public ImgStringSource Source;
+        public ImageStringSource Source;
 
         public ByteSize HeapSize;
 
@@ -90,7 +94,7 @@ namespace Z0
         public string Content;
 
         [MethodImpl(Inline)]
-        public ImageStringRecord(Count seq, ImgStringSource src, ByteSize heap, Address32 offset, string data)
+        public UserStringRecord(Count seq, ImageStringSource src, ByteSize heap, Address32 offset, string data)
         {
             Sequence = seq;
             Source = src;

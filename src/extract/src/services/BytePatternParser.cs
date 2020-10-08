@@ -39,7 +39,7 @@ namespace Z0
         ReadOnlySpan<byte> ParsedSlice
             =>  (Offset + Delta - 1) > 0
               ? Buffer.Slice(0, Offset + Delta - 1)
-              : Root.array<byte>();
+              : sys.array<byte>();
 
         internal BytePatternParser(IBytePatternSet<T> patterns, byte[] buffer)
         {

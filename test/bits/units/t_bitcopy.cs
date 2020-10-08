@@ -7,7 +7,7 @@ namespace Z0
     using System;
 
     using static Konst;
-    using static As;
+    using static z;
 
     public class t_bitcopy : t_bitcore<t_bitcopy>
     {

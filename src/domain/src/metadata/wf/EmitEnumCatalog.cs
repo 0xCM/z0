@@ -10,16 +10,26 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly ref struct EmitEnumCatalog
+    [Step]
+    public sealed class EmitEnumCatalog : WfHost<EmitEnumCatalog>
+    {
+        protected override void Execute(IWfShell wf)
+        {
+            using var step = new EmitEnumCatalogStep(wf, this);
+            step.Run();
+        }
+    }
+
+    public readonly ref struct EmitEnumCatalogStep
     {
         readonly IWfShell Wf;
 
-        readonly EmitEnumCatalogHost Host;
+        readonly WfHost Host;
 
         readonly FS.FilePath TargetPath;
 
         [MethodImpl(Inline)]
-        public EmitEnumCatalog(IWfShell context, EmitEnumCatalogHost host)
+        public EmitEnumCatalogStep(IWfShell context, WfHost host)
         {
             Wf = context;
             Host = host;

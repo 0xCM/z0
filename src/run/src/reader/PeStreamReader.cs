@@ -15,14 +15,18 @@ namespace Z0
     using T = ImageTables;
     using L = ImageLiterals;
 
-    public struct PeImageReader : IDisposable
+    public struct PeStreamReader : IDisposable
     {
+        [MethodImpl(Inline), Op]
+        public static PeStreamReader create(ImageStream src)
+            => new PeStreamReader(src);
+
         readonly ImageStream Stream;
 
         bool Succeeded;
 
         [MethodImpl(Inline)]
-        public PeImageReader(ImageStream src)
+        public PeStreamReader(ImageStream src)
         {
             Stream = src;
             Succeeded = false;

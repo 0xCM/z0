@@ -71,7 +71,7 @@ namespace Z0
         ReadOnlySpan<ImageConstantRecord> Read(IPart part)
         {
             using var reader = PeTableReader.open(part.PartPath());
-            return reader.ReadConstants();
+            return reader.Constants();
         }
 
         void Emit(IPart part)
