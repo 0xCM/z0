@@ -43,7 +43,7 @@ namespace Z0
         /// <summary>
         /// The input data archive configuration
         /// </summary>
-        public ApiModules Modules {get;}
+        public ApiPartSet Modules {get;}
 
         /// <summary>
         /// The output data archive configuration
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         public WfLogConfig Logs {get;}
 
-        public ApiParts Api {get;}
+        public SystemApiCatalog Api {get;}
 
         /// <summary>
         /// The application-specific status log path
@@ -91,7 +91,7 @@ namespace Z0
             => ResDir + FS.folder("index");
 
         [MethodImpl(Inline)]
-        public WfInit(IShellContext shell, string[] args, ApiModules modules)
+        public WfInit(IShellContext shell, string[] args, ApiPartSet modules)
         {
             Shell = insist(shell);
             Paths = shell.Paths;

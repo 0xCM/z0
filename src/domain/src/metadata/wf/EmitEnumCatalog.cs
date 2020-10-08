@@ -44,7 +44,7 @@ namespace Z0
 
         public void Run()
         {
-            var parts = ApiQuery.types(ClrTypeKind.Enum, Wf.Api);
+            var parts = ApiCatalogs.types(ClrTypeKind.Enum, Wf.Api);
             var dst = z.list<EnumLiteralRow>();
             for(var i=0; i<parts.Length; i++)
             {

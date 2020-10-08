@@ -22,13 +22,13 @@ namespace Z0
 
     public interface IWfShell : IShellContext, IDisposable
     {
-        ApiParts Api {get;}
+        SystemApiCatalog Api {get;}
 
         IShellContext Shell {get;}
 
         IWfEventSink WfSink {get;}
 
-        ApiModules Modules {get;}
+        ApiPartSet Modules {get;}
 
         IWfBroker Broker {get;}
 

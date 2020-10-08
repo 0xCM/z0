@@ -14,7 +14,7 @@ namespace Z0
         /// <summary>
         /// The configured api set
         /// </summary>
-        ApiParts Api {get;}
+        SystemApiCatalog Api {get;}
 
         /// <summary>
         /// The context root
@@ -39,7 +39,7 @@ namespace Z0
         /// <summary>
         /// The input data archive configuration
         /// </summary>
-        ApiModules Modules {get;}
+        ApiPartSet Modules {get;}
 
         /// <summary>
         /// The output data archive configuration

@@ -15,9 +15,13 @@ namespace Z0
     {
         public const string ApiIdentity = api + dot + identity;
 
-        public const string ApiIdentityX = ApiIdentity + dot + extensions;
+        public const string ApiIdentityX = api + dot + identity + dot + extensions;
 
         public const string ApiIdentify = api + dot + "identify";
+
+        public const string ApiCatalogs = api + dot + catalogs;
+
+        public const string ApiCatalogServices = api + dot + catalogs + dot + services;
 
         public const string BitFormatter = bits + dot + formatters;
 
@@ -35,9 +39,9 @@ namespace Z0
 
         public const string CellDelegates = cells + dot + delegates;
 
-        public const string CellBuffers = cells + dot + "buffers";
+        public const string CellBuffers = cells + dot + buffers;
 
-        public const string CellSource = cells + dot + "source";
+        public const string CellSource = cells + dot + source;
 
         public const string Delegates = delegates;
 
@@ -116,34 +120,6 @@ namespace Z0
         public const string PrimalKindBits = primal + dot + kinds + dot + bitfield;
 
         public const string MemoryStore = A.memory + dot + store;
-
-        const string u1 = nameof(u1);
-
-        const string u2 = nameof(u2);
-
-        const string u3 = nameof(u3);
-
-        const string u4 = nameof(u4);
-
-        const string u5 = nameof(u5);
-
-        const string u6 = nameof(u6);
-
-        const string u7 = nameof(u7);
-
-        const string u8 = nameof(u8);
-
-        const string u16 = nameof(u16);
-
-        const string u32 = nameof(u32);
-
-        const string u64 = nameof(u64);
-
-        const string octets = nameof(octets);
-
-        const string cells = nameof(cells);
-
-        const string buffers = nameof(buffers);
 
         public const string TextEncoders = A.text + dot + "encoders";
 

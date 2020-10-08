@@ -21,7 +21,7 @@ namespace Z0
         public static IAppContext context()
             => context(WfCore.modules(Assembly.GetEntryAssembly()), ShellPaths.Default);
 
-        public static IAppContext context(ApiModules src, IShellPaths paths)
+        public static IAppContext context(ApiPartSet src, IShellPaths paths)
             => new AppContext(paths, src.Api, Polyrand.@default(), settings(paths), AppMsgExchange.Create());
 
         static ISettings settings(IShellPaths paths)

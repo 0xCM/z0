@@ -19,7 +19,7 @@ namespace Z0
 
         public WfInit Init {get;}
 
-        public ApiModules Modules {get;}
+        public ApiPartSet Modules {get;}
 
         public IWfEventSink WfSink {get;}
 
@@ -35,7 +35,7 @@ namespace Z0
 
         public CorrelationToken Ct {get;}
 
-        public ApiParts Api {get;}
+        public SystemApiCatalog Api {get;}
 
         public string ShellName {get;}
 
@@ -59,7 +59,7 @@ namespace Z0
             Shell = insist(Init.Shell);
             Modules = Init.Modules;
             Api = Modules.Api;
-            Parts = Api;
+            Parts = Api.Storage;
             Components = Api.Components;
             Paths = Shell.Paths;
             Args = Shell.Args;

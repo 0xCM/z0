@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct BitLogic
     {
-        [ApiHost(ApiNames.BitLogicU7)]
+        [ApiHost(ApiNames.BitLogicU8)]
         public readonly struct U8
         {
             /// <summary>

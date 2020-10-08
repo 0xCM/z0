@@ -19,7 +19,7 @@ namespace Z0.Asm
         IShellPaths Paths
             => ContextRoot.Paths;
 
-        ApiParts Api
+        SystemApiCatalog Api
             => ContextRoot.Api;
 
         /// <summary>

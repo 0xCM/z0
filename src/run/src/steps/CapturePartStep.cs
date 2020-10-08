@@ -107,7 +107,7 @@ namespace Z0
         public ReadOnlySpan<ApiDataTypeRoutines> Capture(IPart src)
         {
             var buffer = span<byte>(Pow2.T14);
-            var catalog = ApiQuery.catalog(src);
+            var catalog = ApiCatalogs.part(src);
             var types = catalog.ApiDataTypes;
             var count = types.Count;
 

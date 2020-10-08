@@ -14,17 +14,17 @@ namespace Z0
     partial struct WfCore
     {
         [Op]
-        public static ApiModules modules(Assembly control, string[] args)
+        public static ApiPartSet modules(Assembly control, string[] args)
         {
             var parts = ApiPartIdParser.parse(args);
             if(parts.Length != 0)
-               return new ApiModules(control, parts);
+               return new ApiPartSet(control, parts);
             else
-                return new ApiModules(control);
+                return new ApiPartSet(control);
         }
 
         [Op]
-        public static ApiModules modules(Assembly control)
+        public static ApiPartSet modules(Assembly control)
             => modules(control, Environment.GetCommandLineArgs());
     }
 }

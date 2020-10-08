@@ -23,7 +23,7 @@ namespace Z0.Asm
 
         readonly IPartCapturePaths CodeArchive;
 
-        readonly ApiParts ApiSet;
+        readonly SystemApiCatalog ApiSet;
 
         internal EvalControl(IAppContext context, IPolyrand random, FolderPath root, uint buffersize)
         {

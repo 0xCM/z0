@@ -21,7 +21,7 @@ namespace Z0
         /// </summary>
         /// <param name="control">The controlling assembly</param>
         /// <param name="args">The shell args</param>
-        public static IWfShell shell(Assembly control, ApiModules modules, params string[] args)
+        public static IWfShell shell(Assembly control, ApiPartSet modules, params string[] args)
             => shell(new WfInit(context(control, modules, args), args, modules));
 
         /// <summary>

@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         [Op]
         public static ApiContext context(FS.FolderPath src)
-            => new ApiContext(new ApiContextState(new ApiModules(src)));
+            => new ApiContext(new ApiContextState(new ApiPartSet(src)));
 
         /// <summary>
         /// Creates a <see cref='ApiContext'/> with injected state
@@ -39,7 +39,7 @@ namespace Z0
         /// Creates a <see cref='ApiContext'/> over a specified set of modules
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static ApiContext context(in ApiModules src)
+        public static ApiContext context(in ApiPartSet src)
             => new ApiContext(new ApiContextState(src));
     }
 }
