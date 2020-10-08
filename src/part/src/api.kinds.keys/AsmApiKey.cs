@@ -11,5 +11,13 @@ namespace Z0
         CVTSS2SI = Id.Intrinsic + 1,
 
         CVTSD2SI,
+
+        PAVGB,
+
+        PAVGW,
+
+        VPAVGB,
+
+        VPAVGW
     }
 }

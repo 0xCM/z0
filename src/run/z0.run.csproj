@@ -11,6 +11,7 @@
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(Flow)" />
     <ProjectReference Include="$(AsmServices)" />
+    <ProjectReference Include="$(Check)" />
 
     <ProjectReference Include="$(BitVectors)" />
     <ProjectReference Include="$(BitFields)" />

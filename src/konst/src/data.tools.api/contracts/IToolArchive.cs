@@ -39,6 +39,6 @@ namespace Z0
             => Owner.ToolId;
 
         ToolFiles<T> Dir()
-            => ToolArchives.output(this).Map(f => new ToolFile<T>(f));
+            => Tools.output(this).Map(f => new ToolFile<T>(f));
     }
 }

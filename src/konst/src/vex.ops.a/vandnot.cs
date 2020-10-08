@@ -56,6 +56,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static Vector256<double> vandnot(Vector256<double> x, Vector256<double> y)
             => AndNot(y, x);
-
     }
 }

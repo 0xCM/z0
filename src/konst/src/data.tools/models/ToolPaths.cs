@@ -8,21 +8,22 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    public struct ToolConfig
+    public readonly struct ToolPaths
     {
-        public FS.FilePath Path;
+        readonly TableSpan<ToolId> Tools;
+
+        readonly TableSpan<FS.FilePath> Paths;
 
         [MethodImpl(Inline)]
-        public ToolConfig(FS.FilePath path)
+        internal ToolPaths(ToolId[] tools, FS.FilePath[] paths)
         {
-            Path = path;
+            Tools = tools;
+            Paths = paths;
+            Count = (uint)tools.Length;
         }
-    }
 
-    public struct ToolConfigs
-    {
-
-
+        public uint Count {get;}
     }
 }

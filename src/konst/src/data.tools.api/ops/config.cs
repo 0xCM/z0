@@ -9,10 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Tooling
+    partial struct Tools
     {
-        [MethodImpl(Inline), Op]
-        public static ToolConfig config(ToolId tool,FolderPath src, FolderPath dst)
-            => new ToolConfig(tool,src,dst);
+
     }
 }

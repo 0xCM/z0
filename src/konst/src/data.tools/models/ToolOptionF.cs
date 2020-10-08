@@ -10,16 +10,19 @@ namespace Z0
     using static Konst;
 
     public readonly struct ToolOption<F> : IToolOption<F>
-        where F : unmanaged, Enum
+        where F : unmanaged
     {
-        public F Flag {get;}
+        public StringRef Name {get;}
 
-        public string Value {get;}
+        public F Id {get;}
+
+        public utf8 Value {get;}
 
         [MethodImpl(Inline)]
-        public ToolOption(F flag, string value)
+        public ToolOption(string name, F id, string value)
         {
-            Flag = flag;
+            Name = name;
+            Id = id;
             Value = value;
         }
     }

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -43,7 +43,7 @@ namespace Z0.Tools
                 Wf = wf;
                 LineCount = 0;
                 IxCount = 0;
-                Archive = ToolArchives.create<DumpBin>(output, processed);
+                Archive = Tools.archive<DumpBin>(output, processed);
                 Flags = flags;
                 Options = options;
                 Wf.Created(StepId);
@@ -105,7 +105,7 @@ namespace Z0.Tools
             const string SearchPattern = "*.instructions.asm";
 
             public ListedFiles List()
-                => Tooling.listed(Archive.Dir(SearchPattern));
+                => Tools.list(Archive.Dir(SearchPattern));
 
             public void Process()
             {

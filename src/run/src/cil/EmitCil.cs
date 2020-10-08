@@ -41,8 +41,8 @@ namespace Z0
             }
 
             var decoded = CilServices.decode(mod,props.Select(x => x.GetGetMethod())).ToArray();
-            var cilwriter = new CilFunctionWriter(cmd.CilTarget);
-            cilwriter.Write(decoded);
+            var writer = new CilFunctionWriter(cmd.CilTarget);
+            writer.Write(decoded);
         }
 
     }

@@ -8,10 +8,16 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    public class ToolPaths
+    using static ApiNameAtoms;
+
+    readonly struct ApiNames
     {
-        public FS.FilePath IlDasm {get;}
-            = FS.path(@"J:\lang\net\runtime\artifacts\toolset\ilasm\ildasm.exe");
+        const string check = nameof(check);
+
+        const string outcomes = nameof(outcomes);
+
+        public const string CheckOutcomes = check + dot + outcomes;
     }
 }

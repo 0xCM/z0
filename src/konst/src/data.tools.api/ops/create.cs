@@ -8,11 +8,15 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    partial struct Tooling
+    partial struct Tools
     {
-        [Op]
-        public static ToolProcess runner(IWfShell context, string command, ToolProcessOptions config)
-            => new ToolProcess(command, config);
+        [MethodImpl(Inline)]
+        public static Tool<T,F> create<T,F>(IWfShell wf, ToolId id, FS.FolderPath src, FS.FolderPath dst)
+            where T : struct, ITool<T,F>
+            where F : unmanaged, Enum
+                => new Tool<T,F>(wf, id, src, dst);
+
     }
 }

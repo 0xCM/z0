@@ -13,8 +13,18 @@ namespace Z0
 
     using P2 = Pow2x16;
 
+
     public readonly struct IlDasm : ITextual
     {
+
+        [MethodImpl(Inline), Op]
+        public IlDasm ildasm(params string[] args)
+            => new IlDasm(Paths.IlDasm, args);
+
+
+        public FS.FilePath IlDasm {get;}
+            = FS.path(@"J:\lang\net\runtime\artifacts\toolset\ilasm\ildasm.exe");
+
         [MethodImpl(Inline)]
         public static implicit operator ToolCommand(IlDasm src)
             => new ToolCommand(src.ToolPath, src.Args);

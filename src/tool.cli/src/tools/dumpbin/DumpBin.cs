@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -60,7 +60,7 @@ namespace Z0.Tools
             var archive = Archive;
             var root = archive.ToolOutput;
             var files = archive.Dir();
-            return Tooling.listed(files);
+            return Tools.list(files);
         }
 
         public void Dispose()

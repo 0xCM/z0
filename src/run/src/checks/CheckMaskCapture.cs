@@ -35,7 +35,7 @@ namespace Z0
     public readonly struct MaskCaptureCheck<T>
         where T : unmanaged
     {
-        public struct CheckResult
+        public struct CaptureCheckResult
         {
             public T Mask;
 
@@ -52,11 +52,11 @@ namespace Z0
         {
             var declarer = typeof(BitMasks.Literals);
             var src = Literals.tagged<T>(Konst.base2, declarer).Table.View;
-            var dst = alloc<CheckResult>(src.Length);
+            var dst = alloc<CaptureCheckResult>(src.Length);
             check(src,dst);
         }
 
-        public static void check(ReadOnlySpan<BinaryLiteral<T>> src, Span<CheckResult> dst)
+        public static void check(ReadOnlySpan<BinaryLiteral<T>> src, Span<CaptureCheckResult> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)

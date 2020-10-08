@@ -90,6 +90,12 @@ namespace Z0
             get => Pairs;
         }
 
+        public ref KeyedValue<K,V> First
+        {
+            [MethodImpl(Inline)]
+            get => ref Pairs[0];
+        }
+
         [MethodImpl(Inline)]
         public ref KeyedValue<K,V> Pair(uint index)
             => ref Pairs[index];

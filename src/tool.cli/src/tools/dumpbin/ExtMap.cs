@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
     partial struct DumpBin
     {
@@ -10,20 +10,20 @@ namespace Z0.Tools
         {
             /// <summary>
             /// A dumpbin-generated disassembly file
-            /// </summary>       
+            /// </summary>
             Asm = DumpBinFlag.Disasm,
 
             AsmData,
 
             /// <summary>
             /// A dumpbin-generated raw data file
-            /// </summary>       
+            /// </summary>
             Raw = DumpBinFlag.RawData,
 
             /// <summary>
             /// A dumpbin-generated address relocation file
-            /// </summary>       
+            /// </summary>
             Relocation = DumpBinFlag.Relocations,
         }
-    }    
+    }
 }

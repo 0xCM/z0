@@ -8,22 +8,33 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    public interface IToolOption<F>
+    public interface IToolOption
+    {
+        ushort Id {get;}
+
+        StringRef Name {get;}
+
+        utf8 Value {get;}
+    }
+
+    public interface IToolOption<F> : IToolOption
         where F : unmanaged
     {
-        F Flag {get;}
+        new F Id {get;}
 
-        string Value {get;}
+        ushort IToolOption.Id
+            => uint16(Id);
     }
 
     public interface IToolOption<F,K> : IToolOption<F>
-        where F : unmanaged, Enum
-        where K : unmanaged, Enum
+        where F : unmanaged
+        where K : unmanaged
     {
         new K Value {get;}
 
-        string IToolOption<F>.Value
-            => Value.ToString();
+        utf8 IToolOption.Value
+            => default;
     }
 }

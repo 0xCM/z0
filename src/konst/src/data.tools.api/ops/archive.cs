@@ -9,18 +9,19 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ToolArchives
+    partial struct Tools
     {
         [MethodImpl(Inline)]
-        public static ToolArchive<T,F> create<T,F>(ToolId id, FS.FolderPath root)
+        public static ToolArchive<T,F> archive<T,F>(ToolId id, FS.FolderPath root)
             where T : struct, ITool<T,F>
             where F : unmanaged, Enum
                 => new ToolArchive<T,F>(id, root);
 
         [MethodImpl(Inline)]
-        public static ToolArchive<T> create<T>(FS.FolderPath src, FS.FolderPath dst)
+        public static ToolArchive<T> archive<T>(FS.FolderPath src, FS.FolderPath dst)
             where T : struct, ITool<T>
                 => new ToolArchive<T>(default(T).ToolId, src, dst);
+
 
         [MethodImpl(Inline)]
         public static FS.Files output<T>(IToolArchive<T> archive)
