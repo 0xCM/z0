@@ -16,10 +16,10 @@ namespace Z0
 
         public WfActor Actor {get;}
 
-        public WfCaller Call {get;}
+        public CallingMember Call {get;}
 
         [MethodImpl(Inline)]
-        public EventOrigin(WfEventId id, string actor, WfCaller call)
+        public EventOrigin(WfEventId id, string actor, CallingMember call)
         {
             EventId = id;
             Actor = actor;

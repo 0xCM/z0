@@ -12,23 +12,17 @@ namespace Z0
     /// <summary>
     /// Captures invocation origin details
     /// </summary>
-    [Table]
-    public struct WfCaller : ITextual
+    public struct CallingMember : ITextual
     {
-        /// <summary>
-        /// The part from which the call originated
-        /// </summary>
-        public PartId Part;
-
         /// <summary>
         /// The originator name
         /// </summary>
-        public string Name;
+        public StringRef Name;
 
         /// <summary>
         /// The name of the file from which the invocation occurred
         /// </summary>
-        public FS.FilePath File;
+        public StringRef File;
 
         /// <summary>
         /// The file-relative invocation line number
@@ -36,25 +30,18 @@ namespace Z0
         public uint FileLine;
 
         [MethodImpl(Inline)]
-        public WfCaller(PartId part, string name, FS.FilePath file, int line)
+        public CallingMember(string name, string file, int line)
         {
-            Part = part;
             Name = name;
             File = file;
             FileLine = (uint)line;
         }
 
         [MethodImpl(Inline)]
-        public WfCaller(PartId part, string name, FS.FilePath file, uint line)
-        {
-            Part = part;
-            Name = name;
-            File = file;
-            FileLine = line;
-        }
-
-        [MethodImpl(Inline)]
         public string Format()
-            => text.format(RP.PSx4, Part.Format(), Name, FileLine, File);
+            => text.format(RP.PSx3, Name, FileLine, File);
+
+        public override string ToString()
+            => Format();
     }
 }

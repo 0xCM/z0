@@ -22,10 +22,10 @@ namespace Z0
                 => new Span<T>(Unsafe.AsPointer(ref src), Unsafe.SizeOf<F>());
 
         [MethodImpl(Inline)]
-        internal static ref T head<F,T>(ref F src, T t)
+        internal static ref T first<F,T>(in F src, T t)
             where F : unmanaged, IDataCell
             where T : unmanaged
-                => ref Unsafe.As<F,T>(ref src);
+                => ref Unsafe.As<F,T>(ref z.edit(src));
 
         [MethodImpl(Inline)]
         internal static ref readonly F from<T,F>(in T src)

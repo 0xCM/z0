@@ -58,7 +58,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this sbyte src, uint? maxbits = null)
-            => BitString.scalar(src, (int)maxbits);
+            => BitString.scalar(src, maxbits == null ? (int?)null : (int)maxbits.Value);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -66,7 +66,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this byte src, uint? maxbits = null)
-            => BitString.scalar(src, (int)maxbits);
+            => BitString.scalar(src, maxbits == null ? (int?)null : (int)maxbits.Value);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -74,7 +74,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this short src, uint? maxbits = null)
-            => BitString.scalar(src, (int)maxbits);
+            => BitString.scalar(src, maxbits == null ? (int?)null : (int)maxbits.Value);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -82,7 +82,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this ushort src, uint? maxbits = null)
-            => BitString.scalar(src, (int)maxbits);
+            => BitString.scalar(src, maxbits == null ? (int?)null : (int)maxbits.Value);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this int src, uint? maxbits = null)
-            => BitString.scalar(src, (int)maxbits);
+            => BitString.scalar(src, maxbits == null ? (int?)null : (int)maxbits.Value);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -98,7 +98,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this uint src, uint? maxbits = null)
-            => BitString.scalar(src, (int)maxbits);
+            => BitString.scalar(src, maxbits == null ? (int?)null : (int)maxbits.Value);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -106,7 +106,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this long src, uint? maxbits = null)
-            => BitString.scalar(src, (int)maxbits);
+            => BitString.scalar(src, maxbits == null ? (int?)null : (int)maxbits.Value);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -114,7 +114,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this ulong src, uint? maxbits = null)
-            => BitString.scalar(src, (int)maxbits);
+            => BitString.scalar(src, maxbits == null ? (int?)null : (int)maxbits.Value);
 
         /// <summary>
         /// Converts the source value to a bitstring
@@ -130,7 +130,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public static BitString ToBitString(this double src, uint? maxbits = null)
-            => BitString.scalar(src, (int)maxbits);
+            => BitString.scalar(src, maxbits == null ? (int?)null : (int)maxbits.Value);
 
         /// <summary>
         /// Converts a span of bits to a to a bitstring

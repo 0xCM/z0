@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static CellValues;
+    using static CellSource;
 
     public struct CellSource<F> : ICellValues<F>
         where F : struct, IDataCell

@@ -6,103 +6,53 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
+    using System.Collections.Generic;
 
     using static Konst;
     using static z;
 
-    [ApiHost]
+    [ApiHost(ApiNames.CellSource, true)]
     public readonly struct CellSource
     {
         readonly IValueSource Provider;
 
         [MethodImpl(Inline), Op]
-        public static Func<Cell64> emitter(IValueSource source, W64 w, NumericKind nk)
-            => emitter<Cell64>(source, CellWidth.W64, nk);
+        public static Cell8 next(IValueSource source, W8 w)
+            => source.Next<byte>();
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static Func<F> emitter<F>(IValueSource source, CellWidth width, NumericKind nk)
-            where F : unmanaged
+        [MethodImpl(Inline), Op]
+        public static Cell16 next(IValueSource source, W16 w)
+            => source.Next<ushort>();
+
+        [MethodImpl(Inline), Op]
+        public static Cell32 next(IValueSource source, W32 w)
+            => source.Next<uint>();
+
+        [MethodImpl(Inline), Op]
+        public static Cell64 next(IValueSource source, W64 w)
+            => source.Next<ulong>();
+
+        [MethodImpl(Inline), Op]
+        public static Cell128 next(IValueSource source, W128 w)
+            => source.NextPair<ulong>();
+
+        [MethodImpl(Inline), Op]
+        public static Cell256 next(IValueSource source, W256 w)
         {
+            var dst = Cell256.Empty;
+            ref var storage = ref Unsafe.As<Cell256,Vector256<ulong>>(ref dst);
+            storage = storage.WithLower(next(source,w128));
+            storage = storage.WithUpper(next(source,w128));
+            return dst;
+        }
 
-            if(width <= CellWidth.W64)
-            {
-                switch(nk)
-                {
-                    case NumericKind.I8:
-                        return f8i;
-                    case NumericKind.U8:
-                        return f8u;
-                    case NumericKind.I16:
-                        return f16i;
-                    case NumericKind.U16:
-                        return f16u;
-                    case NumericKind.I32:
-                        return f32i;
-                    case NumericKind.U32:
-                        return f32u;
-                    case NumericKind.I64:
-                        return f64i;
-                    case NumericKind.U64:
-                        return f64u;
-                    case NumericKind.F32:
-                        return f32f;
-                    case NumericKind.F64:
-                        return f64f;
-                }
-            }
-            else
-            {
-                switch(width)
-                {
-                    case CellWidth.W128:
-                        return f128;
-                    case CellWidth.W256:
-                        return f256;
-                    case CellWidth.W512:
-                        return f512;
-                }
-            }
-
-            return () => default;
-
-            [MethodImpl(Inline)]
-            F f8i() => @as<sbyte,F>(source.Next<sbyte>());
-
-            [MethodImpl(Inline)]
-            F f8u() => @as<byte,F>(source.Next<byte>());
-
-            [MethodImpl(Inline)]
-            F f16u() => @as<ushort,F>(source.Next<ushort>());
-
-            [MethodImpl(Inline)]
-            F f16i() => @as<short,F>(source.Next<short>());
-
-            [MethodImpl(Inline)]
-            F f32i() => @as<int,F>(source.Next<int>());
-
-            [MethodImpl(Inline)]
-            F f32u() => @as<uint,F>(source.Next<uint>());
-
-            [MethodImpl(Inline)]
-            F f64u() => @as<ulong,F>(source.Next<ulong>());
-
-            [MethodImpl(Inline)]
-            F f64i() => @as<long,F>(source.Next<long>());
-
-            [MethodImpl(Inline)]
-            F f32f() => @as<float,F>(source.Next<float>());
-
-            [MethodImpl(Inline)]
-            F f64f() => @as<double,F>(source.Next<double>());
-
-            [MethodImpl(Inline)]
-            F f128() => @as<Cell128,F>(source.Cell(w128));
-
-            [MethodImpl(Inline)]
-            F f256() => @as<Cell256,F>(source.Cell(w256));
-
-            [MethodImpl(Inline)]
-            F f512() => @as<Cell512,F>(source.Cell(w512));
+        [MethodImpl(Inline), Op]
+        public static Cell512 next(IValueSource source, W512 w)
+        {
+            var lo = next(source,w256);
+            var hi = next(source,w256);
+            return new Cell512(lo,hi);
         }
 
         [MethodImpl(Inline)]

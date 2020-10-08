@@ -9,16 +9,18 @@ namespace Z0
 
     public sealed class t_span_convert : UnitTest<t_span_convert,CheckNumeric,TCheckNumeric>
     {
+        //public override bool Enabled => false;
+
         void VerifySpanBytesToValue<T>(Span<byte> src, T expect)
             where T : unmanaged
         {
-            Claim.Eq(expect, As.cell<T>(src));
+            Claim.Eq(expect, z.cell<T>(src));
         }
 
         void VerifySpanBytesToValues<T>(Span<byte> src, Span<T> expect)
             where T : unmanaged
         {
-            ClaimNumeric.Eq(expect, Spans.cast<T>(src));
+            ClaimNumeric.Eq(expect, z.recover<T>(src));
         }
 
         void VerifyBytesToValues<T>()

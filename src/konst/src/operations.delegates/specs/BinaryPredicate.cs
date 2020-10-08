@@ -17,8 +17,4 @@ namespace Z0
 
     [Free]
     public delegate bool BinaryPredicate8<T>(T a, T b);
-
-    [Free]
-    public delegate Bit32 BinaryPredicate<W,T>(T a, T b)
-         where W : unmanaged, ITypeWidth;
 }

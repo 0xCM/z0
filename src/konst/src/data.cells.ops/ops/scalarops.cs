@@ -13,7 +13,6 @@ namespace Z0
 
     partial class CellOps
     {
-
         [MethodImpl(Inline), Op]
         public static BinaryOp1 cellular(BinaryOp<Bit32> f)
             => (a,b) => f(a,b);

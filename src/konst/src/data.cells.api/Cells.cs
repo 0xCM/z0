@@ -7,9 +7,12 @@ namespace Z0
     using System;
     using System.Security;
 
-    [SuppressUnmanagedCodeSecurity, ApiHost]
-    public partial class Cells : IApiHost<Cells>
-    {
+    using static Konst;
 
+    [SuppressUnmanagedCodeSecurity]
+    [ApiHost(ApiNames.Cells, true)]
+    public partial class Cells
+    {
+        const NumericKind Closure = UnsignedInts;
     }
 }

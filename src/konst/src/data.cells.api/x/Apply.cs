@@ -9,7 +9,6 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Collections.Generic;
 
-    using static CellStream;
     using static CellSource;
     using static Konst;
 
@@ -22,7 +21,7 @@ namespace Z0
         /// <typeparam name="F">The fixed type</typeparam>
         public static IEnumerable<F> CellStream<F>(this IPolyrand random)
             where F: unmanaged, IDataCell
-                => create(create<F>(random));
+                => Cells.stream(create<F>(random));
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Vector512<T> Apply<T>(this UnaryOp512 f, Vector512<T> x)

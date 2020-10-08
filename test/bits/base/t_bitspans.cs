@@ -52,35 +52,6 @@ namespace Z0
         }
 
 
-
-        protected void check_bitblock_range<N,T>(N _ = default, T t = default)
-            where N : unmanaged, ITypeNat
-            where T : unmanaged
-        {
-            int n = (int)nat64u<N>();
-            var rep = default(N);
-            var segcount = (int)GridCells.mincells<T>(nat64u<N>());
-            Claim.eq(BitBlock<N,T>.NeededCells, segcount);
-            var totalcap = BitBlock<N,T>.RequiredWidth;
-            var segcap = bitwidth<T>();
-            Claim.eq(BitBlock<N,T>.CellWidth, segcap);
-
-            var src = Random.Span<T>(RepCount);
-            for(var i=0; i<RepCount; i+= segcount)
-            {
-                var bcSrc = src.Slice(i,segcount);
-                var bc = bcSrc.ToNatBits(rep);
-                ClaimEqual(bc,bc.ToBitString());
-                Claim.eq(n, bc.Width);
-                Claim.eq(segcap * segcount, totalcap);
-
-                var x = src[i];
-                for(byte j = 0; j < n; j++)
-                    Claim.Eq(gbits.testbit(x,j), bc[j]);
-            }
-        }
-
-
         protected void bitblock_pop_check<N,T>(N n = default)
             where T : unmanaged
             where N : unmanaged, ITypeNat

@@ -17,9 +17,9 @@ namespace Z0
         /// <param name="src">The storage block</param>
         /// <typeparam name="T">The reference cell type, of maximal width=8</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8k)]
-        public static ref T head<T>(ref Cell8 src)
+        public static ref T first<T>(in Cell8 src)
             where T : unmanaged
-                => ref head(ref src, default(T));
+                => ref first(src, default(T));
 
         /// <summary>
         /// Returns a generic reference to the leading storage cell of a 16-bit storage block
@@ -27,9 +27,9 @@ namespace Z0
         /// <param name="src">The storage block</param>
         /// <typeparam name="T">The reference cell type, of maximal width=16</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
-        public static ref T head<T>(ref Cell16 src)
+        public static ref T first<T>(in Cell16 src)
             where T : unmanaged
-                => ref head(ref src, default(T));
+                => ref first(src, default(T));
 
         /// <summary>
         /// Returns a generic reference to the leading storage cell of a 32-bit storage block
@@ -37,9 +37,9 @@ namespace Z0
         /// <param name="src">The storage block</param>
         /// <typeparam name="T">The reference cell type, of maximal width=32</typeparam>
         [MethodImpl(Inline), Op, Closures(Numeric8x16x32k)]
-        public static ref T head<T>(ref Cell32 src)
+        public static ref T first<T>(in Cell32 src)
             where T : unmanaged
-                => ref head(ref src, default(T));
+                => ref first(src, default(T));
 
         /// <summary>
         /// Returns a generic reference to the leading storage cell of a 64-bit storage block
@@ -47,9 +47,9 @@ namespace Z0
         /// <param name="src">The storage block</param>
         /// <typeparam name="T">The reference cell type, of maximal width=64</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T head<T>(ref Cell64 src)
+        public static ref T first<T>(in Cell64 src)
             where T : unmanaged
-                => ref head(ref src, default(T));
+                => ref first(src, default(T));
 
         /// <summary>
         /// Returns a generic reference to the leading storage cell of a 128-bit storage block
@@ -57,9 +57,9 @@ namespace Z0
         /// <param name="src">The storage block</param>
         /// <typeparam name="T">The reference cell type, of maximal width=128</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T head<T>(ref Cell128 src)
+        public static ref T first<T>(ref Cell128 src)
             where T : unmanaged
-                => ref head(ref src, default(T));
+                => ref first(src, default(T));
 
         /// <summary>
         /// Returns a generic reference to the leading storage cell of a 256-bit storage block
@@ -67,9 +67,9 @@ namespace Z0
         /// <param name="src">The storage block</param>
         /// <typeparam name="T">The reference cell type, of maximal width=256</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T head<T>(ref Cell256 src)
+        public static ref T first<T>(ref Cell256 src)
             where T : unmanaged
-                => ref head(ref src, default(T));
+                => ref first(src, default(T));
 
         /// <summary>
         /// Returns a generic reference to the leading storage cell of a 512-bit storage block
@@ -77,9 +77,9 @@ namespace Z0
         /// <param name="src">The storage block</param>
         /// <typeparam name="T">The reference cell type, of maximal width=512</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T head<T>(ref Cell512 src)
+        public static ref T first<T>(ref Cell512 src)
             where T : unmanaged
-                => ref head(ref src, default(T));
+                => ref first(src, default(T));
 
         /// <summary>
         /// Returns a generic reference to the leading storage cell of a fixed storage block

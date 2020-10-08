@@ -24,8 +24,8 @@ namespace Z0
             where S : struct
             where F : unmanaged, IDataCell
         {
-            ref var dstBytes = ref Unsafe.As<F,byte>(ref dst);
-            ref var srcBytes = ref Unsafe.As<S,byte>(ref Unsafe.AsRef(in src));
+            ref var dstBytes = ref @as<F,byte>(dst);
+            ref var srcBytes = ref @as<S,byte>(Unsafe.AsRef(in src));
             Unsafe.CopyBlockUnaligned(ref dstBytes, ref srcBytes, (uint)sizeof(F));
         }
     }

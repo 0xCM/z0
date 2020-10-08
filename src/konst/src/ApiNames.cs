@@ -13,27 +13,9 @@ namespace Z0
     [LiteralProvider]
     readonly struct ApiNames
     {
-        public const string SymHex = symbolic + dot + hex;
-
-        public const string SFxSurrogates = sfunc + dot + surrogates;
-
-        public const string SFxProjectors = sfunc + dot + projectors;
-
         public const string ApiIdentity = api + dot + identity;
 
         public const string ApiIdentityX = ApiIdentity + dot + extensions;
-
-        public const string Delegates = delegates;
-
-        public const string DelegatesX = Delegates + dot + extensions;
-
-        public const string XPress = expressions;
-
-        public const string XFunc = expressions + dot + functions;
-
-        public const string XFuncX = XFunc + dot + extensions;
-
-        public const string XQuery = expressions + dot + query;
 
         public const string BitFormatter = bits + dot + formatters;
 
@@ -46,6 +28,32 @@ namespace Z0
         public const string BitFieldParts = bitfields + dot + parts;
 
         public const string BitFieldSpecs = bitfields + dot + specs;
+
+        public const string Cells = cells + dot + api;
+
+        public const string CellDelegates = cells + dot + delegates;
+
+        public const string CellBuffers = cells + dot + "buffers";
+
+        public const string CellSource = cells + dot + "source";
+
+        public const string Delegates = delegates;
+
+        public const string SymHex = symbolic + dot + hex;
+
+        public const string SFxSurrogates = sfunc + dot + surrogates;
+
+        public const string SFxProjectors = sfunc + dot + projectors;
+
+        public const string DelegatesX = Delegates + dot + extensions;
+
+        public const string XPress = expressions;
+
+        public const string XFunc = expressions + dot + functions;
+
+        public const string XFuncX = XFunc + dot + extensions;
+
+        public const string XQuery = expressions + dot + query;
 
         public const string DataBlocks = blocks + dot + data;
 
@@ -105,7 +113,6 @@ namespace Z0
 
         public const string PrimalKindBits = primal + dot + kinds + dot + bitfield;
 
-
         public const string MemoryStore = A.memory + dot + store;
 
         const string u1 = nameof(u1);
@@ -131,6 +138,10 @@ namespace Z0
         const string u64 = nameof(u64);
 
         const string octets = nameof(octets);
+
+        const string cells = nameof(cells);
+
+        const string buffers = nameof(buffers);
 
         public const string TextEncoders = A.text + dot + "encoders";
 

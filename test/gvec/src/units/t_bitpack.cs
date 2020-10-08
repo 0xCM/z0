@@ -16,7 +16,7 @@ namespace Z0
             var block = w32;
             var count = n4;
             var mod = n8;
-            for(var sample = 0; sample < RepCount; sample++)
+            for(var sample = 0; sample<RepCount; sample++)
             {
                 var bs = Random.BitString(count);
                 var bitseq = bs.BitSeq.Blocked(block);

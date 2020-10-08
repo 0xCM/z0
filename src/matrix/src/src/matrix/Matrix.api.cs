@@ -209,7 +209,7 @@ namespace Z0
         /// <typeparam name="N">The column count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline)]
-        public static FileName filename<M,N,T>(int? index = null)
+        public static FS.FileName filename<M,N,T>(int? index = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -218,7 +218,7 @@ namespace Z0
             var kind = typeof(T).NumericKind().Format();
             var @base = $"mat_{kind}[{dim}]";
             var suffix  = index.MapValueOrDefault(i => Chars.Dot + index.ToString().PadLeft(3,'0'), EmptyString);
-            return FileName.define($"{@base}{suffix}",FileExtensions.Csv);
+            return FS.file($"{@base}{suffix}",FileExtensions.Csv);
         }
 
         /// <summary>
@@ -267,7 +267,7 @@ namespace Z0
         /// <typeparam name="M">The row count type</typeparam>
         /// <typeparam name="N">The column count type</typeparam>
         /// <typeparam name="T">The element type</typeparam>
-        public static Matrix256<M,N,T> blockread<M,N,T>(FilePath src)
+        public static Matrix256<M,N,T> blockread<M,N,T>(FS.FilePath src)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged

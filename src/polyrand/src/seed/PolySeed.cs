@@ -79,7 +79,7 @@ namespace Z0
                 => As.cell<T>(Bytes, VerifyIndex<T>(offset));
 
         /// <summary>
-        /// Acauires a readonly span of values from the embedded source
+        /// Selects a readonly span of values from the embedded source
         /// </summary>
         /// <param name="offset">The source offset</param>
         /// <param name="length">The number of values to take</param>
@@ -88,7 +88,7 @@ namespace Z0
             where T : unmanaged
         {
             VerifyIndex<T>(offset* Unsafe.SizeOf<T>() + length* Unsafe.SizeOf<T>());
-            return Spans.cast<T>(Bytes, offset,length);
+            return Spans.cast<T>(Bytes, offset, length);
         }
 
         /// <summary>

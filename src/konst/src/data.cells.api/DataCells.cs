@@ -6,13 +6,20 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Konst;
+    using static z;
 
-    partial struct WfEvents
+    public readonly struct DataCells<T>
+        where T : unmanaged, IDataCell
     {
-        [MethodImpl(Inline), Op]
-        public static EventOrigin origin(in WfEventId id, string actor, in CallingMember call)
-            => new EventOrigin(id,actor, call);
+        readonly TableSpan<T> Data;
+
+        [MethodImpl(Inline)]
+        public DataCells(T[] src)
+        {
+            Data = src;
+        }
     }
 }

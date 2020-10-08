@@ -8,12 +8,13 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    partial struct WfCore
+    partial struct WfEvents
     {
-        [MethodImpl(Inline), Op]
-        public static WfCaller caller(PartId part, [CallerMemberName] string caller = null, [CallerFilePath]string file = null, [CallerLineNumber] int? line = null)
-            => new WfCaller(part, caller, FS.path(file), line ?? 0);
+        [MethodImpl(Inline)]
+        public static WfEventPair<S,T> pair<S,T>(in S a, in T b)
+            where S : struct, IWfEvent<S>
+            where T : struct, IWfEvent<T>
+                => new WfEventPair<S,T>(a,b);
     }
 }

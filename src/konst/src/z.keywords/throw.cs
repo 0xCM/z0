@@ -14,5 +14,9 @@ namespace Z0
         [Op]
         public static void @throw(Exception e)
             => throw e;
+
+        [Op]
+        public static T @throw<T>(Exception e)
+            => throw e;
     }
 }

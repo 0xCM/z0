@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost]
+    [ApiHost(ApiNames.CellBuffers, true)]
     public readonly struct CellBuffers
     {
         /// <summary>

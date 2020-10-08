@@ -16,8 +16,6 @@ namespace Z0
 
     public readonly struct CheckGeneric : TCheckGeneric
     {
-        public static TCheckGeneric Checker => default(CheckGeneric);
-
         [MethodImpl(Inline)]
         public static void eq<T>(T lhs, T rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             where T : unmanaged

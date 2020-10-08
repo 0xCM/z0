@@ -238,7 +238,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static implicit operator BitState(bit src)
-            => (BitState)src;
+            => (BitState)u8(src.State);
 
         [MethodImpl(Inline), Op]
         public static implicit operator bit(BitState src)
@@ -301,14 +301,5 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
-        /// <summary>
-        /// Tests the state of an index-identified source bit
-        /// </summary>
-        /// <param name="src">The source value</param>
-        /// <param name="pos">The 0-based index of the bit to test</param>
-        [MethodImpl(Inline), Op]
-        public static bit test(byte src, int pos)
-            => new bit(((uint)src >> pos) & 1);
     }
 }

@@ -13,67 +13,35 @@ namespace Z0
     public static partial class XTend
     {
         [MethodImpl(Inline)]
-        public static BinaryOp8 ToCellOp(this BinaryOp<byte> f)
-            => CellOps.cellular(f);
-
-        [MethodImpl(Inline)]
-        public static BinaryOp8 ToCellOp(this BinaryOp<sbyte> f)
-            => CellOps.cellular(f);
-
-        [MethodImpl(Inline)]
-        public static BinaryOp16 ToCellOp(this BinaryOp<short> f)
-            => CellOps.cellular(f);
-
-        [MethodImpl(Inline)]
-        public static BinaryOp16 ToCellOp(this BinaryOp<ushort> f)
-            => CellOps.binary(f);
-
-        [MethodImpl(Inline)]
-        public static BinaryOp32 ToCellOp(this BinaryOp<int> f)
-            => CellOps.binary(f);
-
-        [MethodImpl(Inline)]
-        public static BinaryOp32 ToCellOp(this BinaryOp<uint> f)
-            => CellOps.binary(f);
-
-        [MethodImpl(Inline)]
-        public static BinaryOp64 ToCellOp(this BinaryOp<long> f)
-            => CellOps.binary(f);
-
-        [MethodImpl(Inline)]
-        public static BinaryOp64 ToCellOp(this BinaryOp<ulong> f)
-            => CellOps.binary(f);
-
-        [MethodImpl(Inline)]
-        public static Cell8 ToCellOp(this byte x)
+        public static Cell8 ToCell(this byte x)
             => x;
 
         [MethodImpl(Inline)]
-        public static Cell8 ToCellOp(this sbyte x)
+        public static Cell8 ToCell(this sbyte x)
             => x;
 
         [MethodImpl(Inline)]
-        public static Cell16 ToCellOp(this short x)
+        public static Cell16 ToCell(this short x)
             => x;
 
         [MethodImpl(Inline)]
-        public static Cell16 ToCellOp(this ushort x)
+        public static Cell16 ToCell(this ushort x)
             => x;
 
         [MethodImpl(Inline)]
-        public static Cell32 ToCellOp(this int x)
+        public static Cell32 ToCell(this int x)
             => x;
 
         [MethodImpl(Inline)]
-        public static Cell32 ToCellOp(this uint x)
+        public static Cell32 ToCell(this uint x)
             => x;
 
         [MethodImpl(Inline)]
-        public static Cell64 ToCellOp(this long x)
+        public static Cell64 ToCell(this long x)
             => x;
 
         [MethodImpl(Inline)]
-        public static Cell64 ToCellOp(this ulong x)
+        public static Cell64 ToCell(this ulong x)
             => x;
 
         /// <summary>

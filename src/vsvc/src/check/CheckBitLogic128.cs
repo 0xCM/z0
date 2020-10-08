@@ -26,7 +26,7 @@ namespace Z0
             var vSvc = VSvc.vbitlogic<T>(w);
 
             var buffer = Cells.alloc(w);
-            ref var dst = ref Cells.head<T>(ref buffer);
+            ref var dst = ref Cells.first<T>(ref buffer);
 
             var count = vcount<T>(w);
             for(var i=0; i<count; i++)

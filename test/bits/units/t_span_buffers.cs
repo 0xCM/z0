@@ -7,10 +7,22 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using Assert = CheckPrimal;
+
+    [ApiHost]
     public sealed class t_spanbuffers : UnitTest<t_spanbuffers>
     {
+        public override bool Enabled => true;
+
         static new TCheckNumeric Claim = CheckNumeric.Checker;
 
+        public void check_caller()
+        {
+            var caller = z.caller();
+            Assert.eq(caller.Name, nameof(check_caller));
+        }
+
+        [Op]
         public void stacked_basecase()
         {
             var stack = SpanBuffers.stack<uint>(3);
@@ -21,11 +33,12 @@ namespace Z0
             var x1 = stack.Pop();
             var x2 = stack.Pop();
             var x3 = stack.Pop();
-            Claim.eq(x1,3);
-            Claim.eq(x2,2);
-            Claim.eq(x3,1u);
+            Assert.eq(x1,3);
+            Assert.eq(x2,2);
+            Assert.eq(x3,1u);
         }
 
+        [Op]
         public void bitstack_basecase()
         {
             var stack = new BitStack(0b101011);
@@ -39,6 +52,7 @@ namespace Z0
             Claim.yea(stack.Pop() != 0);
         }
 
+        [Op]
         public void ringbuffer_32()
         {
             var buffer = SpanBuffers.ring<uint>(Pow2.T08);
@@ -52,6 +66,7 @@ namespace Z0
                 Claim.eq(points[i], buffer.Pop());
         }
 
+        [Op]
         public void partring_basecase()
         {
             var capacity = Pow2.T10;
@@ -66,7 +81,6 @@ namespace Z0
             Claim.eq(buffer.Data.AsUInt64()[1],0xFF);
             Claim.eq(buffer.Data.AsUInt64()[2],0xFFF);
             Claim.eq(buffer.Data.AsUInt64()[3],0xFFFF);
-
         }
     }
 }

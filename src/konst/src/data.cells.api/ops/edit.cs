@@ -51,7 +51,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> edit<T>(in Cell64 src)
             where T : unmanaged
                 => span<Cell64,T>(ref z.@edit(src));
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> edit<T>(in Cell128 src)
             where T : unmanaged
                 => span<Cell128,T>(ref z.@edit(src));
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> edit<T>(in Cell256 src)
             where T : unmanaged
                 => span<Cell256,T>(ref z.@edit(src));
@@ -84,7 +84,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <typeparam name="F">The fixed type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> edit<T>(in Cell512 src)
             where T : unmanaged
                 => span<Cell512,T>(ref z.@edit(src));
