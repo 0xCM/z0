@@ -25,12 +25,11 @@ namespace Z0
         protected virtual string AppName
             => GetType().Assembly.GetSimpleName();
 
-
         protected TestApp()
         {
             OnDispose += HandleDispose;
-            CaseLog = CaseLog.create(AppPaths.CaseLogPath);
-            Log = AppMsgLog.create(AppPaths.TestStatusPath, AppPaths.TestErrorPath);
+            CaseLog = WfLogs.caselog(FS.path(AppPaths.CaseLogPath.Name));
+            Log = WfLogs.app(AppPaths.TestStatusPath, AppPaths.TestErrorPath);
         }
 
         void HandleDispose()

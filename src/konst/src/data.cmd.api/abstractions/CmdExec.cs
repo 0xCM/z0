@@ -10,23 +10,17 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public class WfCmdAttribute : Attribute
-    {
-
-
-    }
-
     [WfCmd]
-    public abstract class WfCmdExec<C,R> : IWfCmdExec<C,R>
+    public abstract class CmdExec<C,R> : ICmdExec<C,R>
         where C : struct
         where R : struct
     {
 
-        readonly WfCmdHost Host;
+        readonly CmdHost Host;
 
-        protected WfCmdExec()
+        protected CmdExec()
         {
-            Host = new WfCmdHost();
+            Host = new CmdHost();
         }
 
         protected abstract R Execute(IWfShell wf, C spec);
@@ -46,12 +40,11 @@ namespace Z0
 
     }
 
-    public abstract class WfCmdExec<H,C,R> : WfCmdExec<C,R>
-        where H : WfCmdExec<H,C,R>, new()
+    public abstract class CmdExec<H,C,R> : CmdExec<C,R>
+        where H : CmdExec<H,C,R>, new()
         where C : struct
         where R : struct
     {
-
 
     }
 }

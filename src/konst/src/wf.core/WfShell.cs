@@ -29,19 +29,11 @@ namespace Z0
 
         public string[] Args {get;}
 
-        //public FolderPath AppDataRoot {get;}
-
         public IShellPaths Paths {get;}
 
         public ISettings Settings {get;}
 
-        //public FS.FolderPath CaptureRoot {get;}
-
         public CorrelationToken Ct {get;}
-
-        //public FolderPath IndexRoot {get;}
-
-        //public FolderPath ResourceRoot {get;}
 
         public ApiParts Api {get;}
 
@@ -63,7 +55,7 @@ namespace Z0
             Init = config;
             Id = config.ControlId;
             Ct = correlate(Id);
-            WfSink = WfEvents.log(config.Logs);
+            WfSink = WfLogs.events(config.Logs);
             Shell = insist(Init.Shell);
             Modules = Init.Modules;
             Api = Modules.Api;
@@ -74,12 +66,8 @@ namespace Z0
             Control = Assembly.GetEntryAssembly();
             ShellName = Control.GetSimpleName();
             Paths = Paths;
-            //CaptureRoot = FS.dir((Paths.LogRoot + FolderName.Define("capture/artifacts")).Name);
-            //AppDataRoot = Paths.AppDataRoot;
             PartIdentities = Parts.Select(x => x.Id);
             Settings = SettingValues.Load(Paths.AppConfigPath);
-            //ResourceRoot = FolderPath.Define(Init.ResDir.Name);
-            //IndexRoot = FolderPath.Define(Init.IndexDir.Name);
             Random = default;
             Broker = new WfBroker(WfSink, Ct);
             ApiContext = new ApiContext(new ApiContextState(Modules));

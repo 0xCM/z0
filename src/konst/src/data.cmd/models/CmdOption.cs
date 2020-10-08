@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct WfCmdOption<K,T>
+    public readonly struct CmdOption<K,T>
         where K : unmanaged
     {
         public K Kind {get;}
@@ -18,13 +18,14 @@ namespace Z0
         public T Value {get;}
 
         [MethodImpl(Inline)]
-        public WfCmdOption(K kind, T value)
+        public CmdOption(K kind, T value)
         {
             Kind = kind;
             Value = value;
         }
 
-        public static implicit operator WfCmdOption<K,T>((K kind, T value) src)
-            => new WfCmdOption<K,T>(src.kind, src.value);
+        [MethodImpl(Inline)]
+        public static implicit operator CmdOption<K,T>((K kind, T value) src)
+            => new CmdOption<K,T>(src.kind, src.value);
     }
 }

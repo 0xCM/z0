@@ -10,22 +10,22 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct WfCmdOptions<K,T>
+    public readonly struct CmdOptions<K,T>
         where K : unmanaged
     {
-        readonly TableSpan<WfCmdOption<K,T>> Data;
+        readonly TableSpan<CmdOption<K,T>> Data;
 
         [MethodImpl(Inline)]
-        public WfCmdOptions(WfCmdOption<K,T>[] src)
+        public CmdOptions(CmdOption<K,T>[] src)
         {
             Data = src;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator WfCmdOptions<K,T>(WfCmdOption<K,T>[] src)
-            => new WfCmdOptions<K,T>(src);
+        public static implicit operator CmdOptions<K,T>(CmdOption<K,T>[] src)
+            => new CmdOptions<K,T>(src);
 
-        public ReadOnlySpan<WfCmdOption<K,T>> View
+        public ReadOnlySpan<CmdOption<K,T>> View
         {
             [MethodImpl(Inline)]
             get => Data.View;

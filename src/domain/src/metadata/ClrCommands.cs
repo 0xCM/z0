@@ -39,7 +39,7 @@ namespace Z0
     }
 
 
-    public sealed class ClrCmdExec : WfCmdExec<ClrCmdExec, ClrCmdSpec, ClrCmdResult>
+    public sealed class ClrCmdExec : CmdExec<ClrCmdExec, ClrCmdSpec, ClrCmdResult>
     {
 
         void Execute(in EmitAssemblyReferences cmd)

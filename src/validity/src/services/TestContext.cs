@@ -25,7 +25,6 @@ namespace Z0
         {
             DiagnosticMode = diagnostic;
         }
-
     }
 
     public abstract class TestContext<U> : TestContext, ITestContext<U>

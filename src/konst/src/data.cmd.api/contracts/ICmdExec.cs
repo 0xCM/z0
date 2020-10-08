@@ -10,17 +10,17 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public interface IWfCmdExec
+    public class WfCmdAttribute : Attribute
     {
 
     }
 
-    public sealed class WfCmdHost : WfHost<WfCmdHost>
+    public interface ICmdExec
     {
 
     }
 
-    public interface IWfCmdExec<C,R> : IWfCmdExec
+    public interface ICmdExec<C,R> : ICmdExec
         where C : struct
         where R : struct
     {
@@ -28,10 +28,10 @@ namespace Z0
         Outcome<R> Run(IWfShell wf, C spec);
     }
 
-   public interface IWfCmdExec<H,C,R> : IWfCmdExec<C,R>
+   public interface ICmdExec<H,C,R> : ICmdExec<C,R>
         where C : struct
         where R : struct
-        where H : IWfCmdExec<H,C,R>, new()
+        where H : ICmdExec<H,C,R>, new()
     {
 
     }

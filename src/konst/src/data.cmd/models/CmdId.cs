@@ -10,20 +10,20 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct WfCmdId
+    public readonly struct CmdId
     {
         [MethodImpl(Inline)]
-        public static WfCmdId from(Type handler)
-            => new WfCmdId(handler.Assembly.Id(), handler.MetadataToken);
+        public static CmdId from(Type handler)
+            => new CmdId(handler.Assembly.Id(), handler.MetadataToken);
 
         readonly ulong Data;
 
         [MethodImpl(Inline)]
-        public WfCmdId(ulong src)
+        public CmdId(ulong src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public WfCmdId(PartId part, ClrArtifactKey handler)
+        public CmdId(PartId part, ClrArtifactKey handler)
             => Data = (ulong)part | ((ulong)handler << 32);
 
         public PartId Part

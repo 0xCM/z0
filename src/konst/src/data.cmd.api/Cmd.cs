@@ -10,24 +10,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public interface IWfCmdSpec
-    {
-        WfCmdId Id {get;}
-    }
-
-    public interface IWfCmdSpec<K,T> : IWfCmdSpec
-        where K : unmanaged
-
-    {
-        WfCmdOption<K,T>[] Options {get;}
-    }
-
-
-    public interface IWfCmdSpec<H,K,T> : IWfCmdSpec<K,T>
-        where K : unmanaged
-        where H : struct, IWfCmdSpec<H,K,T>
+    [ApiHost(ApiNames.WfCmd)]
+    public readonly struct Cmd
     {
 
-    }
 
+    }
 }

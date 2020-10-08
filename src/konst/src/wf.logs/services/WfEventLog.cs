@@ -25,7 +25,7 @@ namespace Z0
             error.Delete();
 
             StatusPath = status;
-            Status = FS.stream(StatusPath);
+            Status = StatusPath.Stream();
             Error = error.CreateParentIfMissing();
         }
 

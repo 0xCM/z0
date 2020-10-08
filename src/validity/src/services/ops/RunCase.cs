@@ -58,7 +58,6 @@ namespace Z0
                 Log.Deposit(messages);
                 cases.WithItems(outcomes);
                 CaseLog.Deposit(outcomes.Array());
-                //Root.iter(messages.Where(m => !m.Displayed), term.print);
             }
 
             return exectime;

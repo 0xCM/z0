@@ -32,5 +32,19 @@ namespace Z0
             void Target(in T src) => dst.WriteLine(src);
             return new Sink<T>(Target);
         }
+
+        /// <summary>
+        /// Creates a <see cref='Sink{T}'/> from a <see cref='StreamWriter'/>
+        /// </summary>
+        /// <param name="dst">The target writer</param>
+        /// <typeparam name="T">The reception type</typeparam>
+        public static Sink<T> sink<T>(FileStream dst)
+        {
+            void Target(in T src)
+                => FS.write(src?.ToString() ?? EmptyString, dst);
+
+            return new Sink<T>(Target);
+        }
+
     }
 }

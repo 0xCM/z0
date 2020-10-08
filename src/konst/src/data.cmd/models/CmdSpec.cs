@@ -10,10 +10,18 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.WfCmd)]
-    public readonly struct WfCmd
+    public readonly struct CmdSpec<K,T> : ICmdSpec<CmdSpec<K,T>,K,T>
+        where K : unmanaged
     {
+        public CmdId Id {get;}
 
+        public CmdOption<K,T>[] Options {get;}
 
+        [MethodImpl(Inline)]
+        public CmdSpec(CmdId id, params CmdOption<K,T>[] options)
+        {
+            Id = id;
+            Options = options;
+        }
     }
 }

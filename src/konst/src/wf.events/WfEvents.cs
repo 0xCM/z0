@@ -13,8 +13,6 @@ namespace Z0
     [ApiHost, Events]
     public readonly partial struct WfEvents
     {
-        [MethodImpl(Inline), Op]
-        public static IWfEventLog log(WfLogConfig config)
-            => new WfEventLog(FS.path(config.StatusLog.Name), FS.path(config.ErrorLog.Name));
+
     }
 }

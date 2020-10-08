@@ -14,9 +14,6 @@ namespace Z0
     /// </summary>
     public readonly struct WfTermLog : IWfEventSink, IMultiSink
     {
-        public static IWfEventSink create(IWfEventLog log, CorrelationToken ct)
-            => new WfTermLog(log,ct);
-
         public CorrelationToken Ct {get;}
 
         readonly IWfEventLog EventLog;
