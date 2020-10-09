@@ -6,14 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
 
     using static Konst;
+    using static z;
 
-    partial struct Reflex
+    public struct DbTableArchive
     {
-        [MethodImpl(Inline), Op]
-        public static bool @enum(Type src)
-            => src.IsEnum;
+        public IDbArchive Database {get;}
+
+        public string TableId {get;}
+
+        [MethodImpl(Inline)]
+        public DbTableArchive(IDbArchive db, string table)
+        {
+            Database = db;
+            TableId = table;
+        }
     }
 }

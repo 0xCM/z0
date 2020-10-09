@@ -10,16 +10,17 @@ namespace Z0
     using TC = System.TypeCode;
 
     partial class NumericKinds
-    {            
+    {
         /// <summary>
         /// Determines the numeric kind of a system type
         /// </summary>
         /// <param name="src">The source type</param>
+        [Op]
         public static NumericKind kind(Type src)
         {
-            var k = src.IsEnum 
-                ? NumericKind.None 
-                : Type.GetTypeCode(src.EffectiveType()) 
+            var k = src.IsEnum
+                ? NumericKind.None
+                : Type.GetTypeCode(src.EffectiveType())
                 switch
                 {
                     TC.SByte => NK.I8,

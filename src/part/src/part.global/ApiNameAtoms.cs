@@ -138,5 +138,32 @@ namespace Z0
         public const string buffers = nameof(buffers);
 
         public const string catalogs = nameof(catalogs);
+
+        public const string clr = nameof(clr);
+
+        public const string runtime = nameof(runtime);
+
+        public const string records = nameof(records);
+
+        public const string type = nameof(type);
+
+        public const string property = nameof(property);
+
+        public const string field = nameof(field);
+
+        public const string @enum = "enum";
+
+        public const string method = nameof(method);
+
+        public const string types = nameof(types);
+
+        public const string @struct = "struct";
+
+        public const string assembly = nameof(assembly);
+
+        public const string literal = nameof(literal);
+
+        public const string primitives = nameof(primitives);
+
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiDataType]
+    [ApiDataType(ApiNames.ClrMethod, true)]
     public readonly struct ClrMethod
     {
         [MethodImpl(Inline)]

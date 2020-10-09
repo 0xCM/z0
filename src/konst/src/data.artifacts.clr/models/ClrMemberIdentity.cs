@@ -15,6 +15,18 @@ namespace Z0
     /// </summary>
     public readonly struct ClrMemberIdentity : ITextual, IEquatable<ClrMemberIdentity>, INullity
     {
+        [MethodImpl(Inline)]
+        public static ClrMemberIdentity from(FieldInfo src)
+            => new ClrMemberIdentity(src);
+
+        [MethodImpl(Inline)]
+        public static ClrMemberIdentity from(PropertyInfo src)
+            => new ClrMemberIdentity(src);
+
+        [MethodImpl(Inline)]
+        public static ClrMemberIdentity from(MethodInfo src)
+            => new ClrMemberIdentity(src);
+
         readonly ulong Data;
 
         public ClrArtifactKey OwnerId
@@ -40,21 +52,6 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data != 0;
         }
-        public string Format()
-            => text.format("{0}:{1}", OwnerId, MemberId);
-
-
-        [MethodImpl(Inline)]
-        public static ClrMemberIdentity From(FieldInfo src)
-            => new ClrMemberIdentity(src);
-
-        [MethodImpl(Inline)]
-        public static ClrMemberIdentity From(PropertyInfo src)
-            => new ClrMemberIdentity(src);
-
-        [MethodImpl(Inline)]
-        public static ClrMemberIdentity From(MethodInfo src)
-            => new ClrMemberIdentity(src);
 
         [MethodImpl(Inline)]
         public static bool operator ==(ClrMemberIdentity x, ClrMemberIdentity y)
@@ -66,15 +63,15 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ClrMemberIdentity(FieldInfo src)
-            => Reflex.identity(src);
+            => new ClrMemberIdentity(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ClrMemberIdentity(PropertyInfo src)
-            => Reflex.identity(src);
+            => new ClrMemberIdentity(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ClrMemberIdentity(MethodInfo src)
-            => From(src);
+            => from(src);
 
         [MethodImpl(Inline)]
         internal ClrMemberIdentity(FieldInfo src)
@@ -97,6 +94,7 @@ namespace Z0
 
         }
 
+        [MethodImpl(Inline)]
         ClrMemberIdentity(uint owner, uint member)
         {
             Data = ((ulong)owner << 32) | (ulong)member;
@@ -110,12 +108,16 @@ namespace Z0
 
         }
 
-        public override string ToString()
-            => Format();
+        [MethodImpl(Inline)]
+        public string Format()
+            => text.format("{0}:{1}", OwnerId, MemberId);
 
         [MethodImpl(Inline)]
         public bool Equals(ClrMemberIdentity src)
             => Data == src.Data;
+
+        public override string ToString()
+            => Format();
 
         public override int GetHashCode()
             => Data.GetHashCode();

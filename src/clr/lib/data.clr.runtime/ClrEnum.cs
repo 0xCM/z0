@@ -12,7 +12,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiDataType]
+    [ApiDataType(ApiNames.ClrEnum, true)]
     public readonly struct ClrEnum
     {
         [MethodImpl(Inline)]
@@ -37,7 +37,6 @@ namespace Z0
             get => new ClrStruct(Definition.GetEnumUnderlyingType());
         }
 
-
         [MethodImpl(Inline)]
         public static implicit operator ClrType(ClrEnum src)
             => src.Definition;
@@ -45,6 +44,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Type(ClrEnum src)
             => src.Definition;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrEnum(Type src)
+            => from(src);
 
         static EnumLiteralDetails<E> Data<E>()
             where E : unmanaged, Enum

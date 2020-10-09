@@ -16,21 +16,22 @@ namespace Z0
     using V = System.Type;
     using K = ClrArtifactKey;
 
+    [ApiDataType(ApiNames.ClrTypes, true)]
     public readonly struct ClrTypes
     {
-        readonly Storage Data;
-
         [MethodImpl(Inline)]
-        static K kf(in V t)
-            => t.MetadataToken;
+        public static ClrTypes create(ReadOnlySpan<V> src)
+            => new ClrTypes(src);
 
         [MethodImpl(Inline)]
         public static ClrTypes init(uint capacity)
             => new ClrTypes(new Storage(kf,capacity));
 
+        readonly Storage Data;
+
         [MethodImpl(Inline)]
-        public static ClrTypes create(ReadOnlySpan<V> src)
-            => new ClrTypes(src);
+        static K kf(in V t)
+            => t.MetadataToken;
 
         [MethodImpl(Inline)]
         public ClrTypes(ReadOnlySpan<V> src)

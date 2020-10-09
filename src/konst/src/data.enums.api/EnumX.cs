@@ -11,6 +11,8 @@ namespace Z0
 
     using static Konst;
 
+    using api = Z0.Enums;
+
     partial class XTend
     {
         [MethodImpl(Inline)]
@@ -26,7 +28,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool IsSome<E>(this E src)
             where E : unmanaged, Enum
-                => !Z0.Enums.zero<E>().Equals(src);
+                => !api.zero<E>().Equals(src);
 
         /// <summary>
         /// Filters zero-valued elements from the source stream
@@ -74,47 +76,48 @@ namespace Z0
             where E : unmanaged, Enum
                 => new EnumLiteralDetails<E>(src.ToArray());
 
-        public static EnumLiteralSummaries ToIndex(this IEnumerable<EnumLiteralSummary> src)
-            => new EnumLiteralSummaries(src.ToArray());
-
         [MethodImpl(Inline)]
         public static sbyte ToInt8<E>(this E src)
             where E : unmanaged, Enum
-                => Z0.Enums.e8i(src);
+                => api.e8i(src);
 
         [MethodImpl(Inline)]
         public static byte ToUInt8<E>(this E src)
             where E : unmanaged, Enum
-                => Z0.Enums.e8u(src);
+                => api.e8u(src);
 
         [MethodImpl(Inline)]
         public static short ToInt16<E>(this E src)
             where E : unmanaged, Enum
-                => Z0.Enums.e16i(src);
+                => api.e16i(src);
 
         [MethodImpl(Inline)]
         public static ushort ToUInt16<E>(this E src)
             where E : unmanaged, Enum
-                => Z0.Enums.e16u(src);
+                => api.e16u(src);
 
         [MethodImpl(Inline)]
         public static int ToInt32<E>(this E src)
             where E : unmanaged, Enum
-                => Z0.Enums.e32i(src);
+                => api.e32i(src);
 
         [MethodImpl(Inline)]
         public static uint ToUInt32<E>(this E src)
             where E : unmanaged, Enum
-                => Z0.Enums.e32u(src);
+                => api.e32u(src);
 
         [MethodImpl(Inline)]
         public static long ToInt64<E>(this E src)
             where E : unmanaged, Enum
-                => Z0.Enums.e64i(src);
+                => api.e64i(src);
 
         [MethodImpl(Inline)]
         public static ulong ToUInt64<E>(this E src)
             where E : unmanaged, Enum
-                => Z0.Enums.e64u(src);
+                => api.e64u(src);
+
+        [MethodImpl(Inline)]
+        public static EnumScalarKind EnumScalarKind(this Type src)
+            => api.kind(src);
     }
 }

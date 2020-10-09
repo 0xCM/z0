@@ -66,7 +66,7 @@ namespace Z0
         public unsafe string Text
         {
             [MethodImpl(Inline)]
-            get => z.@string(this);
+            get => View.ToString();
         }
 
         public MemoryAddress Address

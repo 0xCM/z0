@@ -25,5 +25,11 @@ namespace Z0
         {
             Name = name;
         }
+
+        public ApiDataTypeAttribute(string name, bool global)
+            : base(ApiProviderKind.DataType, global)
+        {
+            Name = name;
+        }
     }
 }

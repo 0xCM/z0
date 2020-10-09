@@ -10,6 +10,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static ClrRecords;
 
     [WfHost(CommandName)]
     public sealed class EmitEnums : WfHost<EmitEnums,ClrAssembly>
@@ -29,13 +30,11 @@ namespace Z0
 
         public readonly ClrAssembly Source;
 
-        public readonly Name SourceName;
-
         public readonly FS.FilePath Target;
 
         readonly WfHost Host;
 
-        public ReadOnlySpan<EnumLiteralSummary> Emitted;
+        public EnumLiteralRecord[] Emitted;
 
         [MethodImpl(Inline)]
         public EmitEnumsStep(IWfShell wf, WfHost host, ClrAssembly src)
@@ -43,8 +42,7 @@ namespace Z0
             Wf = wf;
             Host = host;
             Source = src;
-            SourceName = src.IsPart ? src.Definition.Id().Format() : src.SimpleName;
-            Target = wf.AppData + FS.file(SourceName, "enums.csv");
+            Target = Wf.Db().Table(EnumLiteralRecord.TableId, Source.Part);
             Emitted = default;
             Wf.Created(Host);
         }
@@ -58,16 +56,17 @@ namespace Z0
 
         void Execute()
         {
-            var src = Enums.summaries(Source).View;
+            var records = ClrEnums.literals(Source);
+            var src = @readonly(records);
             var count = src.Length;
-            var formatter = TableRows.formatter<EnumLiteralSummary>(EnumLiteralSummary.RenderWidths);
+            var formatter = TableRows.formatter<EnumLiteralRecord>(EnumLiteralRecord.RenderWidths);
             var dst = Target.Writer();
             dst.WriteLine(formatter.FormatHeader());
 
             for(var i=0u; i<count; i++)
                 dst.WriteLine(formatter.FormatRow(skip(src,i)));
 
-            Emitted = src;
+            Emitted = records;
         }
 
         void TryRun()

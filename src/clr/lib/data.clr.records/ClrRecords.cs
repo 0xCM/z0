@@ -6,17 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
+    using static z;
 
-    partial struct z
+    public readonly partial struct ClrRecords
     {
-        [MethodImpl(Inline), Op]
-        public static unsafe string @string(char* pSrc)
-            => new string(pSrc);
 
-        [MethodImpl(Inline), Op]
-        public static unsafe string @string(ReadOnlySpan<byte> src)
-            => new string(gptr(recover<sbyte>(src)));
+
     }
 }

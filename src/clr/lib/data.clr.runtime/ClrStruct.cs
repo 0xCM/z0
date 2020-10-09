@@ -11,6 +11,7 @@ namespace Z0
 
     using static Konst;
 
+    [ApiDataType(ApiNames.ClrStruct, true)]
     public readonly struct ClrStruct
     {
         public Type Definition {get;}
@@ -24,7 +25,7 @@ namespace Z0
         public ClrType Generalized
         {
             [MethodImpl(Inline)]
-            get => ClrModelApi.@struct(Definition);
+            get => Definition;
         }
 
         public ClrArtifactKey Id

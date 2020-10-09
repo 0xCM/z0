@@ -22,6 +22,18 @@ namespace Z0
             Kind = 0ul;
         }
 
+        public TableAttribute(byte fields)
+        {
+            Name = "";
+            Kind = fields;
+        }
+
+        public TableAttribute(string name, byte fields)
+        {
+            Name = name;
+            Kind = fields;
+        }
+
         public TableAttribute(object kind)
         {
             Name = "";

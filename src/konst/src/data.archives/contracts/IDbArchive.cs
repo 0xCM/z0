@@ -17,8 +17,14 @@ namespace Z0
         FS.FolderPath IndexRoot
             => api.IndexRoot(Root);
 
+        FS.FolderPath tables(string id)
+            => api.tables(Root, id);
+
         FS.FilePath Table(string id, string name, string type = null)
             => api.table(Root, id, name, type);
+
+        FS.FilePath Table(string id, PartId part, string type = null)
+            => api.table(Root, id, part, type);
 
         FS.FilePath Table(FS.FileName file)
             => api.table(Root, file);

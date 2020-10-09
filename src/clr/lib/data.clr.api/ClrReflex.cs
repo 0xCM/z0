@@ -11,9 +11,25 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
-    public struct ClrModelApi
+    [ApiHost(ApiNames.ClrReflex, true)]
+    public readonly partial struct ClrReflex
     {
+        [MethodImpl(Inline), Op]
+        public static ClrMemberIdentity identity(FieldInfo src)
+            => ClrMemberIdentity.from(src);
+
+        [MethodImpl(Inline), Op]
+        public readonly void enums(in ReadOnlySpan<Type> src, Span<ClrEnum> dst)
+        {
+            var count = src.Length;
+            for(uint i=0, j=0; i<count; i++)
+            {
+                ref readonly var candidate = ref skip(src,i);
+                if(candidate.IsEnum)
+                    seek(dst, j++) = candidate;
+            }
+        }
+
         [MethodImpl(Inline), Op]
         public static Indexed<Type> interfaces(Type src)
             => src.GetInterfaces();
@@ -48,8 +64,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ClrStruct @struct(Type src)
-            => new ClrStruct(src) ;
-
+            => new ClrStruct(src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ClrStruct @struct<T>()

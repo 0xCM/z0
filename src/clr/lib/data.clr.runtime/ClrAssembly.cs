@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiDataType]
+    [ApiDataType(ApiNames.ClrAssembly, true)]
     public readonly struct ClrAssembly
     {
         [MethodImpl(Inline)]
@@ -28,6 +28,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public ClrAssembly(Assembly src)
             => Definition = src;
+
+        public PartId Part
+        {
+            [MethodImpl(Inline)]
+            get => Definition.Id();
+        }
 
         public bool IsPart
         {

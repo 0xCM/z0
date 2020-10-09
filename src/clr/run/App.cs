@@ -42,14 +42,8 @@ ref struct Runner
     {
         Wf.Running(Id, Part);
 
-        // using var tools = new Tools(Wf);
 
-
-        // var tool = tools.ildasm("-bytes", "-raweh", "-tokens", "-forward", "-typelist", "-headers", "-stats", "-classlist", "-metadata=raw", @"j:\dev\projects\z0\.build\bin\netcoreapp3.1\z0.dvec.dll", @"-out=j:\dev\projects\z0-logs\tools\ildasm\z0.dvec.dll.raw.il");
-        // var result = tools.Run(tool);
-
-
-        //Wf.Status(Id, tool);
+        EmitEnums.create().Run(Wf, typeof(PartId).Assembly);
 
 
         Wf.Ran(Id, Part);

@@ -10,6 +10,7 @@ namespace Z0
 
     using static Konst;
 
+    [ApiDataType(ApiNames.ClrProperty, true)]
     public readonly struct ClrProperty
     {
         public PropertyInfo Definition {get;}
@@ -37,6 +38,7 @@ namespace Z0
         public ClrProperty(PropertyInfo data)
             => Definition = data;
 
+        [MethodImpl(Inline)]
         public string Format()
             => Definition.Name;
 

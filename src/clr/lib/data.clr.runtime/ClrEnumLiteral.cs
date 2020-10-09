@@ -5,29 +5,25 @@
 namespace Z0
 {
     using System;
-    using System.Reflection;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
+    using System.Reflection;
+    using System.Linq;
 
     using static Konst;
 
-    [ApiDataType]
-    public readonly struct ClrField
+    [ApiDataType(ApiNames.ClrEnumLiteral, true)]
+    public readonly struct ClrEnumLiteral
     {
         [MethodImpl(Inline)]
-        public static ClrField from(FieldInfo src)
-            => new ClrField(src);
+        public static ClrEnumLiteral from(FieldInfo src)
+            => new ClrEnumLiteral(src);
 
         public FieldInfo Definition {get;}
 
         [MethodImpl(Inline)]
-        public ClrField(FieldInfo src)
+        public ClrEnumLiteral(FieldInfo src)
             => Definition = src;
-
-        public ClrArtifactKey Id
-        {
-            [MethodImpl(Inline)]
-            get => Definition.MetadataToken;
-        }
 
         [MethodImpl(Inline)]
         public string Format()
@@ -43,19 +39,19 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static bool operator ==(ClrField lhs, ClrField rhs)
+        public static bool operator ==(ClrEnumLiteral lhs, ClrEnumLiteral rhs)
             => lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(ClrField lhs, ClrField rhs)
+        public static bool operator !=(ClrEnumLiteral lhs, ClrEnumLiteral rhs)
             => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static implicit operator FieldInfo(ClrField src)
+        public static implicit operator FieldInfo(ClrEnumLiteral src)
             => src.Definition;
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrField(FieldInfo src)
+        public static implicit operator ClrEnumLiteral(FieldInfo src)
             => from(src);
     }
 }

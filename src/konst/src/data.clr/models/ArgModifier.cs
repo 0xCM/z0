@@ -12,7 +12,7 @@ namespace Z0
     /// Classifies method *value* parameters
     /// </summary>
     [Flags]
-    public enum ArgClass : uint
+    public enum ArgModifier : uint
     {
         /// <summary>
         /// No classification conferred

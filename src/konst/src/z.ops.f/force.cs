@@ -21,6 +21,7 @@ namespace Z0
         public static T force<S,T>(S src)
             => convert_u<S,T>(src);
 
+
         /// <summary>
         /// Unconditionally converts the source value to a value of parametric numeric type
         /// </summary>

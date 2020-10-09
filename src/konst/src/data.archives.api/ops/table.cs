@@ -16,7 +16,15 @@ namespace Z0
             => TableRoot(root) + FS.file(text.format("{0}.{1}", id,name), type ?? ArchiveExt.Csv.Name);
 
         [MethodImpl(Inline), Op]
+        public static FS.FolderPath tables(FS.FolderPath root, string id)
+            => TableRoot(root) + FS.folder(id);
+
+        [MethodImpl(Inline), Op]
         public static FS.FilePath table(FS.FolderPath root, FS.FileName file)
             => TableRoot(root) + file;
+
+        [MethodImpl(Inline), Op]
+        public static FS.FilePath table(FS.FolderPath root, string id, PartId part, string type = null)
+            => TableRoot(root) +  FS.folder(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), type ?? FileKind.Csv.Name);
     }
 }
