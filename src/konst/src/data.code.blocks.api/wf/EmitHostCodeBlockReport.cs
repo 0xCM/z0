@@ -77,7 +77,7 @@ namespace Z0
                 var report = ApiParseReport.create(Spec.ApiHost, Spec.Source);
                 ApiParseReport.save(report, Spec.Target);
                 Emitted = report;
-                Wf.EmittedTable(Host, Emitted, Spec.Target);
+                Wf.EmittedTable<ApiParseBlock>(Host, Emitted.Length, Spec.Target);
             }
             catch(Exception e)
             {

@@ -59,7 +59,7 @@ namespace Z0
             => new ApiCodeArchive(root);
 
         [MethodImpl(Inline), Op]
-        public static FS.FolderPath TableRoot(FS.FolderPath root)
+        public static FS.FolderPath dbRoot(FS.FolderPath root)
             => root + FS.folder("tables");
 
         [MethodImpl(Inline), Op]

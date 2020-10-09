@@ -34,5 +34,7 @@ namespace Z0
         public const string ClrReflex = clr + dot + "reflex";
 
         public const string ClrPrimitives = clr + dot + primitives;
+
+        public const string ClrHandles = clr + dot + "handles";
     }
 }

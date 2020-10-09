@@ -7,6 +7,7 @@ namespace Z0
     using System;
 
     using p = Pow2x8;
+    using static Pow2x8;
 
     /// <summary>
     /// Defines classifiers that correspond to the basic CLR types
@@ -16,14 +17,14 @@ namespace Z0
     {
         None = 0,
 
-        Class = p.P2ᐞ00,
+        Class = P2ᐞ00,
 
-        Struct = p.P2ᐞ01,
+        Struct = P2ᐞ01,
 
-        Delegate = p.P2ᐞ02,
+        Delegate = P2ᐞ02,
 
-        Enum = p.P2ᐞ03,
+        Enum = P2ᐞ03,
 
-        Interface = p.P2ᐞ04
+        Interface = P2ᐞ04
     }
 }

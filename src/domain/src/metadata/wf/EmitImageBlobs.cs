@@ -75,7 +75,7 @@ namespace Z0
 
             EmissionCount += count;
 
-            Wf.EmittedTable(Host, data, dstPath);
+            Wf.EmittedTable<ImageBlob>(Host, data.Length, dstPath);
         }
 
         public void Run()

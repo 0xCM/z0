@@ -164,10 +164,6 @@ namespace Z0
         void Running<H,T>(H host, T content)
             where H : IWfHost<H>, new()
                 => Raise(running(host, content, Ct));
-
-        void Running<S,T>(WfStepId step, DataFlow<S,T> df)
-            => Raise(running(step, df, Ct));
-
         // ~ Ran
         // ~ ---------------------------------------------------------------------------
 
@@ -187,19 +183,12 @@ namespace Z0
         void Emitted(WfStepId step, FS.FilePath dst)
             => Raise(emitted(step, dst, Ct));
 
-        void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst)
+        void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst, T t = default)
             where T : struct
-                => Raise(new TableEmittedEvent(step, typeof(T), count, dst, Ct));
+                => Raise(new TableEmittedEvent<T>(step, count, dst, Ct));
 
-        void EmittedTable<H,T>(H host, T[] rows, FS.FilePath dst)
-            where H : IWfHost<H>, new()
-            where T : struct
-                => Raise(new TableEmittedEvent<T>(host.Id, rows, dst, Ct));
-
-        void EmittedTable<H,T>(H host, ReadOnlySpan<T> rows, FS.FilePath dst)
-            where H : IWfHost<H>, new()
-            where T : struct
-                => Raise(new TableEmittedEvent<T>(host.Id, rows, dst, Ct));
+        void EmittedTable(WfStepId step, Count count, FS.FilePath dst, Type t = default)
+            => Raise(new TableEmittedEvent(step, t, count, dst, Ct));
 
         void Processed<T>(WfStepId step, DataFlow<T> flow)
             => Raise(processed(step, flow, Ct));

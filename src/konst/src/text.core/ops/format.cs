@@ -30,7 +30,7 @@ namespace Z0
         /// <param name="rest">The formattables to be rendered and concatenated</param>
         [MethodImpl(Inline), Op]
         public static string format(object first)
-            =>  first is ITextual t ? t.Format() : first?.ToString() ?? "!!null!!";
+            => first is ITextual t ? t.Format() : first?.ToString() ?? "!!null!!";
 
         [Op]
         public static string format(object src, Type t, char delimiter, RenderWidth width)

@@ -15,8 +15,6 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        readonly CorrelationToken Ct;
-
         public IWfCaptureBroker Broker {get;}
 
         public IWfEventSink Sink {get;}
@@ -34,7 +32,6 @@ namespace Z0
             State = state;
             App = state.Asm.ContextRoot;
             Wf = state.Wf;
-            Ct = ct;
             Sink = Wf.WfSink;
             Parts = Wf.Api.PartIdentities;
             Broker = state.CaptureBroker;
@@ -53,11 +50,7 @@ namespace Z0
 
             Wf.Running(StepId);
 
-            {
-                Wf.Raise(new CapturingParts(Step.Name, State.Parts, Ct));
-                using var manage = new CapturePartsStep(State, new CaptureParts());
-                manage.Run();
-            }
+            CaptureParts2.create().Run(Wf, State);
 
             {
                 using var step = new SpecializeImmStep(Wf, State.Asm, State.Formatter, State.RoutineDecoder, Wf.Init.TargetArchive.Root);

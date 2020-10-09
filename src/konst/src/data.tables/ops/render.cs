@@ -29,7 +29,6 @@ namespace Z0
                 dst.Append(Eol);
         }
 
-        [MethodImpl(Inline)]
         public static void render<T>(TableFieldIndex fields, in T src, StringBuilder dst, bool eol = true)
             where T : struct
         {
@@ -38,8 +37,16 @@ namespace Z0
             var tref = __makeref(edit(src));
             for(var i=0u; i<count; i++)
             {
-                ref readonly var field = ref skip(view,i);
-                dst.Append(text.format(value(field.Definition, tref), field.DataType, FieldDelimiter, field.RenderWidth));
+                try
+                {
+                    ref readonly var field = ref skip(view,i);
+                    var v = value(field.Definition, tref);
+                    dst.Append(text.format(v, field.DataType, FieldDelimiter, field.RenderWidth));
+                }
+                catch(Exception e)
+                {
+                    dst.Append(e.Message);
+                }
             }
 
             if(eol)

@@ -8,17 +8,20 @@ namespace Z0
 
     public interface IDbArchive : IFileArchive
     {
-        FS.FolderPath TableRoot
-            => api.TableRoot(Root);
+        FS.FolderPath DbRoot
+            => api.dbRoot(Root);
 
-        FS.FilePath[] Clear(FS.FolderName schema)
-            => (TableRoot + schema).Clear(z.list<FS.FilePath>()).ToArray();
+        FS.FilePath[] Clear(FS.FolderName id)
+            => (DbRoot + id).Clear(z.list<FS.FilePath>()).ToArray();
+
+        FS.FilePath[] Clear(string id)
+            => (DbRoot + FS.folder(id)).Clear(z.list<FS.FilePath>()).ToArray();
 
         FS.FolderPath IndexRoot
             => api.IndexRoot(Root);
 
-        FS.FolderPath tables(string id)
-            => api.tables(Root, id);
+        FS.FolderPath TableRoot(string id)
+            => DbRoot + FS.folder(id);
 
         FS.FilePath Table(string id, string name, string type = null)
             => api.table(Root, id, name, type);

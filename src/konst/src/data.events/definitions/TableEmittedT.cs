@@ -25,26 +25,17 @@ namespace Z0
         public FS.FilePath Target {get;}
 
         [MethodImpl(Inline)]
-        public TableEmittedEvent(WfStepId step, T[] rows, FS.FilePath target, CorrelationToken ct)
+        public TableEmittedEvent(WfStepId step, Count count, FS.FilePath target, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
             StepId = step;
-            RowCount = rows.Length;
-            Target = target;
-        }
-
-        [MethodImpl(Inline)]
-        public TableEmittedEvent(WfStepId step, ReadOnlySpan<T> rows, FS.FilePath target, CorrelationToken ct)
-        {
-            EventId = (EventName, step, ct);
-            StepId = step;
-            RowCount = rows.Length;
+            RowCount = count;
             Target = target;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx4, EventId, RowType, RowCount, Target.ToUri());
+            => text.format(PSx4, EventId, RowType.Name, RowCount, Target.ToUri());
 
         public override string ToString()
             => Format();

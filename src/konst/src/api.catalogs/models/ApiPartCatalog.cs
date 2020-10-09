@@ -7,6 +7,9 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Linq;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
 
     /// <summary>
     /// Defines a catalog over a <see cref='IPart'/>
@@ -48,11 +51,17 @@ namespace Z0
         /// </summary>
         public MethodInfo[] Operations {get;}
 
-        public ApiPartCatalog(IPart part, ApiDataType[] dtHosts, ApiHost[] opHosts, Type[] svcHostTypes)
+        public Module ManifestModule
         {
-            PartId = part.Id;
-            Owner = part.Owner;
-            ApiDataTypes = new ApiDataTypes(PartId,dtHosts);
+            [MethodImpl(Inline)]
+            get => Owner.ManifestModule;
+        }
+
+        public ApiPartCatalog(PartId part, Assembly component, ApiDataType[] dtHosts, ApiHost[] opHosts, Type[] svcHostTypes)
+        {
+            PartId = part;
+            Owner = component;
+            ApiDataTypes = new ApiDataTypes(PartId, dtHosts);
             OperationHosts = opHosts;
             ServiceHosts = svcHostTypes;
             ApiHosts = dtHosts.Cast<IApiHost>().Cast<IApiHost>().Concat(OperationHosts.Cast<IApiHost>()).Array();

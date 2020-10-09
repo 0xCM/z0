@@ -13,6 +13,15 @@ namespace Z0
     using static Konst;
     using static z;
 
+    public sealed class CaptureParts2 : WfHost<CaptureParts2,WfCaptureState>
+    {
+        protected override void Execute(IWfShell shell, in WfCaptureState state)
+        {
+            using var step = new CapturePartsStep(state, this);
+            step.Run();
+        }
+    }
+
     public struct CapturePartsStep : IDisposable
     {
         readonly WfCaptureState State;
@@ -46,7 +55,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running(Host);
+            Wf.Running(Host, State.Parts.Format());
             Clear();
             Capture(Archives.capture(Config.TargetArchive.Root));
             Wf.Ran(Host);
@@ -58,26 +67,6 @@ namespace Z0
             var count = catalogs.Length;
             for(var i=0; i<count; i++)
                 CapturePart(skip(catalogs,i), dst);
-        }
-
-        public void Consolidate()
-        {
-            Wf.Raise(new RunningConsolidated(Host.Identifier, (uint)Config.Api.Catalogs.Length, Ct));
-
-            Clear();
-
-            try
-            {
-                var host = new CaptureApiHosts();
-                var dst = Archives.capture(Config.TargetArchive.Root);
-                using var step = new CaptureApiHostsStep(State, host, Config.Api.ApiHosts, dst);
-                step.Run();
-
-            }
-            catch(Exception e)
-            {
-                Wf.Error(Host, e);
-           }
         }
 
         void CapturePart(IApiPartCatalog src, IPartCapturePaths dst)

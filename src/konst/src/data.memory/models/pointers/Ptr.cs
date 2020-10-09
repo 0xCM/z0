@@ -27,6 +27,10 @@ namespace Z0
             => new Ptr(src);
 
         [MethodImpl(Inline)]
+        public static implicit operator Ptr(IntPtr src)
+            => new Ptr(src.ToPointer());
+
+        [MethodImpl(Inline)]
         public static implicit operator IntPtr(Ptr src)
             => (IntPtr)src.P;
 

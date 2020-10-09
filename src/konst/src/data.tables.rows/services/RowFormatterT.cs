@@ -50,7 +50,6 @@ namespace Z0
             return content;
         }
 
-
         public string FormatHeader()
         {
             var dst = text.build();
@@ -70,7 +69,8 @@ namespace Z0
         public string FormatRow(in T src, bool clear = true)
         {
             EmitRow(src, false);
-            var row =  Target.ToString();
+
+            var row = Target.ToString();
             if(clear)
                 Reset();
             return row;

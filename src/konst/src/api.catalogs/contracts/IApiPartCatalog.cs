@@ -37,7 +37,6 @@ namespace Z0
         /// </summary>
         PartId PartId {get;}
 
-
         /// <summary>
         /// The api hosts known to the catalog, including both operation and data type hosts
         /// </summary>

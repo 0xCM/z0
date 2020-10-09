@@ -22,6 +22,19 @@ namespace Z0
             using var step = new EmitEnumsStep(wf, this, src);
             step.Run();
         }
+
+        const char XX = '\uDECC';
+
+        public static void run(IWfShell wf)
+        {
+            wf.Db().Clear(EnumLiteralRecord.TableId);
+            var components = wf.Api.Components;
+            foreach(var component in components)
+            {
+                if(component.Id() != PartId.AsmModels)
+                    EmitEnums.create().Run(wf, component);
+            }
+        }
     }
 
     ref struct EmitEnumsStep
@@ -34,7 +47,9 @@ namespace Z0
 
         readonly WfHost Host;
 
-        public EnumLiteralRecord[] Emitted;
+        public EnumLiteralRecord[] Records;
+
+        readonly ReadOnlySpan<byte> RenderWidths;
 
         [MethodImpl(Inline)]
         public EmitEnumsStep(IWfShell wf, WfHost host, ClrAssembly src)
@@ -43,47 +58,52 @@ namespace Z0
             Host = host;
             Source = src;
             Target = Wf.Db().Table(EnumLiteralRecord.TableId, Source.Part);
-            Emitted = default;
-            Wf.Created(Host);
-        }
-
-        public void Run()
-        {
-            Wf.Running(Host);
-            TryRun();
-            Wf.Ran(Host);
-        }
-
-        void Execute()
-        {
-            var records = ClrEnums.literals(Source);
-            var src = @readonly(records);
-            var count = src.Length;
-            var formatter = TableRows.formatter<EnumLiteralRecord>(EnumLiteralRecord.RenderWidths);
-            var dst = Target.Writer();
-            dst.WriteLine(formatter.FormatHeader());
-
-            for(var i=0u; i<count; i++)
-                dst.WriteLine(formatter.FormatRow(skip(src,i)));
-
-            Emitted = records;
-        }
-
-        void TryRun()
-        {
-            try
-            {
-                Execute();
-            }
-            catch(Exception e)
-            {
-                Wf.Error(Host, e);
-            }
+            Records = default;
+            RenderWidths = EnumLiteralRecord.RenderWidths;
         }
 
         public void Dispose()
         {
-           Wf.Disposed(Host);
+        }
+
+        public void Run()
+        {
+            Records = ClrEnums.literals(Source);
+            if(Records.Length != 0)
+            {
+                var t = default(EnumLiteralRecord);
+                var formatter = TableRows.formatter(RenderWidths,t);
+                Wf.Running(Host, Source.SimpleName);
+                var counter = 0u;
+                Execute(ref counter, formatter);
+                Wf.EmittedTable(Host, counter, Target, t);
+            }
+        }
+
+        void Execute(ref uint counter, in RowFormatter<EnumLiteralRecord> formatter)
+        {
+            var src = @readonly(Records);
+            var t = default(EnumLiteralRecord);
+            var count = src.Length;
+            using var dst = Target.Writer();
+            dst.WriteLine(formatter.FormatHeader());
+
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var record = ref skip(src,i);
+                try
+                {
+                    var row = formatter.FormatRow(record);
+                    dst.WriteLine(row);
+                    counter++;
+                }
+                catch(Exception)
+                {
+                    var msg = $"Error emitting row {i}/{count}";
+                    dst.WriteLine(msg);
+                    Wf.Warn(Host, msg);
+                }
+            }
         }
     }
 }

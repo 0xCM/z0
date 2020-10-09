@@ -77,7 +77,7 @@ namespace Z0
             foreach(var item in src)
                 writer.WriteLine(formatter.FormatRow(item));
 
-            Wf.EmittedTable(Host, src, FS.path(path.Name));
+            Wf.EmittedTable<ImageFieldTable>(Host, src.Length, FS.path(path.Name));
             return count;
         }
 

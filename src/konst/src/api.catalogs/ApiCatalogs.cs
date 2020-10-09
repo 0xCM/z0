@@ -15,8 +15,12 @@ namespace Z0
     public readonly struct ApiCatalogs
     {
         [Op]
-        public static ApiPartCatalog part(IPart part)
-            => new ApiPartCatalog(part, ApiQuery.datatypes(part.Owner), ApiQuery.apiHosts(part.Owner), ApiQuery.svcHostTypes(part.Owner));
+        public static ApiPartCatalog part(IPart src)
+            => part(src.Owner);
+
+        [Op]
+        public static ApiPartCatalog part(Assembly src)
+            => new ApiPartCatalog(src.Id(), src, ApiQuery.datatypes(src), ApiQuery.apiHosts(src), ApiQuery.svcHostTypes(src));
 
         [Op]
         public static ApiPartCatalog[] parts(params IPart[] parts)

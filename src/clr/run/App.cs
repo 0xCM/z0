@@ -42,10 +42,8 @@ ref struct Runner
     {
         Wf.Running(Id, Part);
 
-
-        EmitEnums.create().Run(Wf, typeof(PartId).Assembly);
-
-
+        EmitEnums.run(Wf);
+        EmitClrHandles.run(Wf);
         Wf.Ran(Id, Part);
     }
 }
