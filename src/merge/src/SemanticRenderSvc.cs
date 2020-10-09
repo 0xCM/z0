@@ -41,7 +41,7 @@ namespace Z0
             run(src,dst);
         }
 
-        public static void run(in ApiPartRoutines src, ISemanticArchive dst)
+        static void run(in ApiPartRoutines src, ISemanticArchive dst)
         {
             var part = src.Part;
             var dir = dst.SemanticDir(part).Clear();
@@ -60,22 +60,22 @@ namespace Z0
             }
         }
 
-
         public void Render(ApiHostRoutines src, StreamWriter dst)
         {
             var functions = span(src.Routines);
             var count = src.RoutineCount;
+            var offset = MemoryAddress.Empty;
 
             for(var i=0; i<count; i++)
             {
-                Render(skip(functions,i), dst);
+                Render(skip(functions,i), dst, ref offset);
 
                 if(i != count - 1)
                     dst.WriteLine();
             }
         }
 
-        public void Render(ApiRoutineObsolete src, StreamWriter dst)
+        public void Render(ApiRoutineObsolete src, StreamWriter dst, ref MemoryAddress offset)
         {
             Buffer.Clear();
 
@@ -83,15 +83,18 @@ namespace Z0
             Buffer.Add(SectionSep);
 
             var sequence = OffsetSequence.Zero;
-            var address = src.OffsetAddress;
+            var @base = src.OffsetAddress.Base;
+            var address = @base;
+            var instructions = src.Instructions.View;
+            var count = src.InstructionCount;
 
-            for(var i=0; i<src.InstructionCount; i++)
+            for(var i=0; i<count; i++)
             {
-                var fx = src[i];
-                Render(fx, address, sequence);
-
-                var size = (uint)fx.ByteLength;
-                address = address.AccrueOffset(size);
+                ref readonly var instruction = ref skip(instructions,i);
+                var size = (uint)instruction.ByteLength;
+                Render(instruction, address, offset, sequence);
+                address += size;
+                offset += size;
                 sequence = sequence.AccrueOffset(size);
             }
 
@@ -141,13 +144,13 @@ namespace Z0
             return string.Empty;
         }
 
-        public void Render(ApiInstruction src, MemoryOffset address,  OffsetSequence sequence)
+        public void Render(ApiInstruction src, MemoryAddress address, MemoryAddress offset, OffsetSequence seq)
         {
             var @base = src.Base;
             var fx = src.Instruction;
             var encoded = Format(src.Encoded);
-            var location = LineLocation(fx, address, sequence);
-            var header = InstructionHeader(src, address, sequence);
+            var location = LineLocation(fx, address, offset, seq);
+            var header = InstructionHeader(src, address, offset, seq);
             Buffer.Add(header);
 
             var opcount = src.Instruction.OpCount;
@@ -181,14 +184,14 @@ namespace Z0
         public string DelimitInstruction(string location)
             => text.concat(location, ColSep, FxDelimiter);
 
-        public string LineLocation(Instruction src, MemoryOffset address, OffsetSequence sequence)
+        public string LineLocation(Instruction src, MemoryAddress address, MemoryAddress offset, OffsetSequence seq)
             => text.concat(RenderAddress(src, AddressPad),
-                Z0.Render.concat(text.spaced(address.Offset.FormatAsmHex(6))).PadRight(OffsetAddrPad),
-                sequence.Format(InstructionCountPad));
+                Z0.Render.concat(text.spaced(offset)).PadRight(OffsetAddrPad),
+                seq.Format(InstructionCountPad));
 
-        public string InstructionHeader(ApiInstruction src, MemoryOffset address, OffsetSequence sequence)
+        public string InstructionHeader(ApiInstruction src, MemoryAddress address, MemoryAddress offset,  OffsetSequence seq)
         {
-            var left = LineLocation(src.Instruction, address, sequence);
+            var left = LineLocation(src.Instruction, address, offset, seq);
             var right = text.concat(src.FormattedInstruction, LeftImply, src.InstructionCode, HeaderSep, Format(src.Encoded));
             return text.concat(left, ColSep, right);
         }

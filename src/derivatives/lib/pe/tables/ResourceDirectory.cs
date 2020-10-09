@@ -19,7 +19,6 @@ namespace Z0
         /// This structure allows fast lookup by either name or number, but for any
         /// given resource entry only one form of lookup is supported, not both.
         /// </summary>
-        [Table]
         public struct ResourceDirectory
         {
             public int Characteristics;

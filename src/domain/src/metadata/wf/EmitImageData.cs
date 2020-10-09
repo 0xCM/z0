@@ -54,12 +54,13 @@ namespace Z0
             Host = host;
             Part = part;
             BaseAddress = ProcessImages.@base(Part);
-            TargetPath = FS.dir((wf.ResourceRoot + FolderName.Define("images")).Name) + FS.file(Part.Format(), FS.ext("csv"));
+            //TargetPath = FS.dir((wf.ResourceRoot + FolderName.Define("images")).Name) + FS.file(Part.Format(), FS.ext("csv"));
+            TargetPath = Wf.Db().Table(ImageDataRecord.TableId, part.Id);
             Formatter = Formatters.data(BaseAddress);
             Offset = 0;
             LineCount = 0;
             LabelDelimiter = Chars.Pipe;
-            BufferSize = 32;
+            BufferSize = ImageDataRecord.RowDataSize;
             SourcePath = FS.path(Part.Owner.Location);
             Wf.Created(Host);
         }
@@ -90,7 +91,7 @@ namespace Z0
                 k = Read(reader, buffer);
             }
 
-            Wf.EmittedTable<ImageData>(Host, LineCount, FS.path(TargetPath.Name));
+            Wf.EmittedTable<ImageDataRecord>(Host, LineCount, FS.path(TargetPath.Name));
         }
 
         public MemoryAddress OffsetAddress

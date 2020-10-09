@@ -58,14 +58,6 @@ namespace Z0
         public static ApiCodeArchive hex(FS.FolderPath root)
             => new ApiCodeArchive(root);
 
-        [MethodImpl(Inline), Op]
-        public static FS.FolderPath dbRoot(FS.FolderPath root)
-            => root + FS.folder("tables");
-
-        [MethodImpl(Inline), Op]
-        public static FS.FolderPath IndexRoot(FS.FolderPath root)
-            => root + FS.folder("index");
-
         [MethodImpl(Inline)]
         static SearchOption option(bool recurse)
             => recurse ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;

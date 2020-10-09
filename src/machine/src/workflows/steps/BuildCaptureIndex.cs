@@ -66,7 +66,8 @@ namespace Z0
 
         void BuildIndex()
         {
-            Target = CaptureIndexBuilder.create(Wf, Host, SourceFiles);
+            Target = CodeBlockIndexer.index(Wf, Host, SourceFiles);
+            Wf.Raise(new PartIndexCreated(Host, Target, Wf.Ct));
         }
 
         public void Run()
@@ -76,13 +77,8 @@ namespace Z0
             try
             {
                 BuildIndex();
-
-                Wf.Raise(new PartIndexCreated(Host, Target, Wf.Ct));
-
-                var index = Target;
-                Process(index);
-                var decoded = DecodeParts(index);
-                Process(decoded);
+                Process(Target);
+                Process(DecodeParts(Target));
 
             }
             catch(Exception e)
@@ -196,7 +192,8 @@ namespace Z0
         {
             var count = src.Count;
             var records = span(src.Sequenced);
-            var dst = Wf.Paths.Table("asm.rows",src.Key.ToString());
+            //var dst = Wf.Paths.Table("asm.rows",src.Key.ToString());
+            var dst = Wf.Db().Table(AsmRow.TableId, src.Key.ToString());
             var formatter = Formatters.dataset<AsmTableField>();
             using var writer = dst.Writer();
             writer.WriteLine(Table.header53<AsmTableField>());
@@ -221,6 +218,14 @@ namespace Z0
             {
                 Wf.Error(Host,e);
             }
+        }
+
+        void Process(in ApiPartRoutines src)
+        {
+            InstructionProcessors.ProcessJumps(Wf, src);
+            InstructionProcessors.RenderSemantic(Wf, src);
+            InstructionProcessors.ProcessEnlisted(Wf, src);
+            InstructionProcessors.ProcessCalls(Wf, src);
         }
     }
 }

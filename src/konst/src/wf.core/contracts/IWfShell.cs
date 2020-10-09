@@ -180,8 +180,8 @@ namespace Z0
             where H : IWfHost<H>, new()
                 => Raise(ran(host, content, Ct));
 
-        void Emitted(WfStepId step, FS.FilePath dst)
-            => Raise(emitted(step, dst, Ct));
+        void Emitted(WfStepId step, FS.FilePath dst, Count? segments = default)
+            => Raise(emitted(step, dst, segments ?? 0, Ct));
 
         void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst, T t = default)
             where T : struct

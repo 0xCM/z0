@@ -10,9 +10,13 @@ namespace Z0.Asm
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
     public struct AsmRow
     {
+        public const string TableId = "asm.rows";
+
+        public const byte FieldCount = 11;
+
         public int Sequence;
 
         public MemoryAddress Address;

@@ -37,10 +37,13 @@ namespace Z0
         Value = 30,
     }
 
-    [StructLayout(LayoutKind.Sequential), Table(TableName)]
+    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
     public struct ImageConstantRecord
     {
-        public const string TableName = "image.constant";
+        public const string TableId = "image.constant";
+
+        public const byte FieldCount = 5;
+
         public Count Sequence;
 
         public ClrArtifactKey ParentId;

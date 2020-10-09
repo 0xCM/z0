@@ -20,10 +20,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static TableId identify(Type src)
-            => src;
-
-        [MethodImpl(Inline), Op]
-        public static TableId identify(string name)
-            => new TableId(ClrArtifactKey.Empty, name);
+            => new TableId(src);
     }
 }

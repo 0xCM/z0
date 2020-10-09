@@ -15,10 +15,6 @@ namespace Z0
     [ApiHost(ApiNames.ClrEnums)]
     public readonly struct ClrEnums
     {
-        [MethodImpl(Inline), Op]
-        public static DbTableArchive tables(IWfShell wf)
-            => new DbTableArchive(wf.Db(), EnumLiteralRecord.TableId);
-
         [Op]
         public static EnumLiteralRecord[] literals(Assembly src)
         {

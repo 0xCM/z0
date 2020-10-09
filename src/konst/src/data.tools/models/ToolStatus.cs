@@ -6,9 +6,13 @@ namespace Z0
 {
     using System;
 
-    [Table]
+    [Table(TableId, FieldCount)]
     public struct ToolStatus
     {
+        public const string TableId = "tool.status";
+
+        public const byte FieldCount = 6;
+
         public int Id;
 
         public DateTime StartTime;
@@ -20,5 +24,5 @@ namespace Z0
         public TimeSpan Duration;
 
         public int ExitCode;
-    }   
+    }
 }

@@ -8,7 +8,6 @@ namespace Z0
 {
     public readonly partial struct ImageTables
     {
-        [Table]
         public struct ImageContent
         {
             public ImageHeader Header;

@@ -10,12 +10,14 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential), Table(TableId)]
+    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
     public struct ImageBlobRecord
     {
         public const string TableId = "image.blob";
 
         public const string DataType = "blob";
+
+        public const byte FieldCount = 4;
 
         public Count Seq;
 

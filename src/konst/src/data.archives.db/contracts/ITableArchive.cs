@@ -12,7 +12,7 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ITableArchive : IDbArchive
+    public interface ITableArchive : IFileArchive
     {
         Option<FilePath> Deposit<F,R>(R[] src, FS.FileName name)
             where F : unmanaged, Enum
@@ -22,11 +22,17 @@ namespace Z0
             where F : unmanaged, Enum
             where R : struct, ITabular;
 
+        FS.FilePath TablePath(FS.FileName file)
+            => Root + file;
+
+        FS.FilePath TablePath(FS.FolderName folder, FS.FileName file)
+            => Root + folder + file;
+
+        FS.FilePath[] Clear(FS.FolderName id)
+            => (Root + id).Clear(z.list<FS.FilePath>()).ToArray();
+
         void Clear()
             => Root.Clear();
-
-        // void Clear(FS.FolderName folder)
-        //     => (Root + folder).Clear();
 
         ParseResult<TextDoc> Dataset(FS.FilePath src)
             => TextDocParser.parse(src);

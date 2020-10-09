@@ -12,38 +12,14 @@ namespace Z0
     [AttributeUsage(AttributeTargets.Struct)]
     public class TableAttribute : Attribute
     {
-        public string Name {get;}
+        public string TableId {get;}
 
-        public object Kind {get;}
-
-        public TableAttribute()
-        {
-            Name = "";
-            Kind = 0ul;
-        }
-
-        public TableAttribute(byte fields)
-        {
-            Name = "";
-            Kind = fields;
-        }
+        public byte FieldCount {get;}
 
         public TableAttribute(string name, byte fields)
         {
-            Name = name;
-            Kind = fields;
-        }
-
-        public TableAttribute(object kind)
-        {
-            Name = "";
-            Kind = kind ?? 0ul;
-        }
-
-        public TableAttribute(string name, object kind = null)
-        {
-            Name = name;
-            Kind = kind ?? 0ul;
+            TableId = name;
+            FieldCount = fields;
         }
     }
 }

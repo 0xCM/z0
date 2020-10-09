@@ -44,7 +44,7 @@ namespace Z0
                     var ft = def.FieldType;
                     if(ft.IsStruct() && !ft.IsPrimitive && recurse)
                     {
-                        var subfields = index(ft,recurse);
+                        var subfields = index(ft, recurse);
                         collected.AddRange(subfields.Storage);
                     }
                 }

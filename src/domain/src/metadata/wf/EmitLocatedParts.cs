@@ -13,6 +13,16 @@ namespace Z0
 
     using static z;
 
+    [WfHost]
+    public sealed class EmitLocatedPartsHost : WfHost<EmitLocatedPartsHost>
+    {
+        protected override void Execute(IWfShell wf)
+        {
+            using var step = new EmitLocatedParts(wf, this);
+            step.Run();
+        }
+    }
+
     public ref struct EmitLocatedParts
     {
         readonly IWfShell Wf;

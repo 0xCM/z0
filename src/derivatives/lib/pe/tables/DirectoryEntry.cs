@@ -16,7 +16,7 @@ namespace Z0
         /// <remarks>
         /// See remarks on MSDN: https://msdn.microsoft.com/en-us/library/windows/desktop/ms680305(v=vs.85).aspx.
         /// </remarks>
-        [Table, StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential)]
         public struct DirectoryEntry
         {
             public int RelativeVirtualAddress;

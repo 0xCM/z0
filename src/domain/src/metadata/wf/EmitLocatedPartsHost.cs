@@ -10,13 +10,5 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [WfHost]
-    public sealed class EmitLocatedPartsHost : WfHost<EmitLocatedPartsHost>
-    {
-        protected override void Execute(IWfShell wf)
-        {
-            using var step = new EmitLocatedParts(wf, this);
-            step.Run();
-        }
-    }
+
 }

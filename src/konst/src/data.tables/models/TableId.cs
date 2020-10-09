@@ -8,13 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static RP;
 
     public readonly struct TableId : ITextual
     {
-        public readonly ClrArtifactKey Shape;
+        public readonly ClrArtifactKey RecordType;
 
-        public readonly CharBlock32 Name;
+        public readonly StringRef Identifier;
 
         [MethodImpl(Inline)]
         public static implicit operator TableId((ClrArtifactKey shape, string name) src)
@@ -27,20 +26,20 @@ namespace Z0
         [MethodImpl(Inline)]
         public TableId(Type shape)
         {
-            Shape = shape;
-            Name = CharBlocks.init(shape.Name, CharBlock32.Empty, out Name);
+            RecordType = shape;
+            Identifier = shape.Name;
         }
 
         [MethodImpl(Inline)]
         public TableId(ClrArtifactKey shape, string name)
         {
-            Shape = shape;
-            Name = CharBlocks.init(name, CharBlock32.Empty, out Name);
+            RecordType = shape;
+            Identifier = name;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx2, Shape, DataBlocks.format(Name));
+            => Render.format(RecordType, Identifier);
 
         public override string ToString()
             => Format();

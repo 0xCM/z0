@@ -71,9 +71,7 @@ namespace Z0
 
         [Op, MethodImpl(Inline)]
         void Dispatch(in EncodedInstruction src)
-        {
-            Execute(AsmEncoder.bytes(src));
-        }
+            => Execute(AsmEncoder.bytes(src));
 
         [Op, MethodImpl]
         void Execute(in ReadOnlySpan<byte> src)

@@ -25,7 +25,7 @@ namespace Z0
         /// set to indicate this.  Otherwise the high bit is clear and the offset
         /// field points to a resource data entry.
         /// </summary>
-        [Table, StructLayout (LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential)]
         public struct ResourceEntry
         {
             public int _nameOffsetAndFlag;

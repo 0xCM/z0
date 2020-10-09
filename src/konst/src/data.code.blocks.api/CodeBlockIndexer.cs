@@ -13,7 +13,7 @@ namespace Z0
     using static z;
     using static ApiCaptureIndexParts;
 
-    public class CaptureIndexBuilder : IDisposable
+    public class CodeBlockIndexer : IDisposable
     {
         readonly Dictionary<MemoryAddress,ApiCodeBlock> CodeAddress;
 
@@ -25,13 +25,25 @@ namespace Z0
 
         readonly WfHost Host;
 
-        public ApiCodeBlockIndex Index;
+        public void Dispose()
+        {
+            Wf.Disposed(Host);
+        }
 
-        public static ApiCodeBlockIndex create(IWfShell wf, WfHost host, in PartFiles src)
+        internal CodeBlockIndexer(IWfShell wf, WfHost host)
+        {
+            Wf = wf;
+            Host = host;
+            CodeAddress = dict<MemoryAddress,ApiCodeBlock>();
+            UriAddress = dict<MemoryAddress,OpUri>();
+            Locations = dict<OpUri,ApiCodeBlock>();
+        }
+
+        public static ApiCodeBlockIndex index(IWfShell wf, WfHost host, in PartFiles src)
         {
             var files = src.Parsed.View;
             var count = files.Length;
-            var builder = new CaptureIndexBuilder(wf, host);
+            var builder = new CodeBlockIndexer(wf, host);
                 wf.Status(host, text.format("Indexing {0} datasets",count));
 
             for(var i=0; i<count; i++)
@@ -41,7 +53,7 @@ namespace Z0
                 var result = ApiParseReport.load(path);
                 if(result)
                 {
-                    index(wf, host, result.Value, builder);
+                    include(wf, host, result.Value, builder);
                     wf.Status(host, text.format("Indexed {0}", path));
                 }
                 else
@@ -50,12 +62,10 @@ namespace Z0
 
             var status = builder.Status();
             wf.Status(host, text.format("Freeze: {0}", status.Format()));
-
-            builder.Run();
-            return builder.Index;
+            return builder.Freeze();
         }
 
-        static void index(IWfShell wf, WfHost host, in ApiParseBlock src, CaptureIndexBuilder dst)
+        internal static void include(IWfShell wf, WfHost host, in ApiParseBlock src, CodeBlockIndexer dst)
         {
             if(src.Address.IsEmpty)
                 return;
@@ -66,66 +76,29 @@ namespace Z0
                 wf.Warn(host, $"Duplicate | {src.Uri.Format()}");
         }
 
-        static void index(IWfShell wf, WfHost host, ReadOnlySpan<ApiParseBlock> src, CaptureIndexBuilder dst)
+        internal static void include(IWfShell wf, WfHost host, ReadOnlySpan<ApiParseBlock> src, CodeBlockIndexer dst)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
-                index(wf, host, skip(src,i), dst);
+                include(wf, host, skip(src,i), dst);
         }
 
-        public CaptureIndexBuilder(IWfShell wf, WfHost host)
-        {
-            Wf = wf;
-            Host = host;
-            CodeAddress = dict<MemoryAddress,ApiCodeBlock>();
-            UriAddress = dict<MemoryAddress,OpUri>();
-            Locations = dict<OpUri,ApiCodeBlock>();
-        }
-
-        public CaptureIndexStatus Status()
+        internal CaptureIndexStatus Status()
         {
             var dst = default(CaptureIndexStatus);
-            dst.Parts = Parts;
-            dst.Hosts = Hosts;
-            dst.Addresses = Addresses;
-            dst.MemberCount = MemberCount;
-            dst.Encoded = new PartAddresses(dst.Parts, Encoded);
+            dst.Parts = Locations.Keys.Select(x => x.Host.Owner).Distinct().Array();
+            dst.Hosts = Locations.Keys.Select(x => x.Host).Distinct().Array();
+            dst.Addresses = CodeAddress.Keys.Array();
+            dst.MemberCount = (uint)CodeAddress.Keys.Count;
+            dst.Encoded = new PartAddresses(dst.Parts, CodeAddress.ToKVPairs());
             return dst;
-        }
-
-        public void Dispose()
-        {
-            Wf.Disposed(Host);
-        }
-
-        public PartId[] Parts
-            => Locations.Keys.Select(x => x.Host.Owner).Distinct().Array();
-
-        public ApiHostUri[] Hosts
-            => Locations.Keys.Select(x => x.Host).Distinct().Array();
-
-        public MemoryAddress[] Addresses
-            => CodeAddress.Keys.Array();
-
-        public uint MemberCount
-            => (uint)CodeAddress.Keys.Count;
-
-        public KeyValuePairs<MemoryAddress,ApiCodeBlock> Encoded
-            => CodeAddress.ToKVPairs();
-
-        public KeyValuePairs<MemoryAddress,OpUri> Located
-            => UriAddress.ToKVPairs();
-
-        public void Run()
-        {
-            Index = Freeze();
         }
 
         ApiCodeBlockIndex Freeze()
         {
-            var memories = Encoded;
-            var locations = Located;
-            var parts = Parts;
+            var memories = CodeAddress.ToKVPairs();
+            var locations = UriAddress.ToKVPairs();
+            var parts = Locations.Keys.Select(x => x.Host.Owner).Distinct().Array();
             var code = CodeAddress.Values.Select(x => (x.Uri.Host, Code: x))
                 .Array()
                 .GroupBy(g => g.Host)

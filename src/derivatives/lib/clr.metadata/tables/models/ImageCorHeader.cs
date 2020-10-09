@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct ImageTables
     {
-        [Table, StructLayout (LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential)]
         public struct ImageCoreHeader
         {
             /// <summary>

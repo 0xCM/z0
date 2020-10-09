@@ -36,14 +36,15 @@ namespace Z0
         {
             Wf = wf;
             Source = src;
-            Target = (Wf.Paths.DbRoot + FS.folder("tables") + FS.folder("asm.calls")) + FS.file($"{src.Part.Format()}.calls", FileExtensions.Csv);
+            //Target = (Wf.Paths.DbRoot + FS.folder("tables") + FS.folder("asm.calls")) + FS.file($"{src.Part.Format()}.calls", FileExtensions.Csv);
+            Target = Wf.Db().Table("asm.calls", src.Part);
             Host = host;
             Wf.Created(Host);
         }
 
         public void Run()
         {
-            Wf.Running(Host, Target);
+            Wf.Running(Host, Target.ToUri());
 
             using var writer = Target.Writer();
             var calls = Source.Instructions.CallAspects;
@@ -52,6 +53,7 @@ namespace Z0
             writer.WriteLine(names);
             iter(delimited, writer.WriteLine);
 
+            Wf.Emitted(Host, Target);
             Wf.Ran(Host, calls.Length);
         }
 

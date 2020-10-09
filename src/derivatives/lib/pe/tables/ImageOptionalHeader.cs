@@ -13,7 +13,6 @@ namespace Z0
         /// <summary>
         /// A wrapper over IMAGE_OPTIONAL_HEADER.  See https://msdn.microsoft.com/en-us/library/windows/desktop/ms680339(v=vs.85).aspx.
         /// </summary>
-        [Table]
         public struct OptionalHeader
         {
             readonly bool _32bit;

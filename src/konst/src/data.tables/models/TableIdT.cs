@@ -17,15 +17,15 @@ namespace Z0
 
         public static Type TableType => typeof(T);
 
-        public ClrArtifactKey Shape => TableType;
+        public ClrArtifactKey RecordType => TableType;
 
-        public CharBlock32 Name => TableType.Name;
+        public StringRef Identifier => TableType.Name;
 
         public static implicit operator TableId(TableId<T> src)
             => TableType;
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx2, Shape, DataBlocks.format(Name));
+            => Render.format(RecordType, Identifier);
     }
 }

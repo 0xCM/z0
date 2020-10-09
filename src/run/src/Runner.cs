@@ -26,7 +26,6 @@ namespace Z0
 
         CorrelationToken Ct;
 
-
         byte offset;
 
         IPolyrand Random;
@@ -416,13 +415,18 @@ namespace Z0
             ClrCommands.exec(Wf,cmd);
         }
 
-        public void Run()
+        public void Run233()
         {
             var src = @readonly(Resources.strings<uint>(typeof(Db.Literals)));
             for(var i=0; i<src.Length; i++)
             {
                 Status(skip(src,i).Format());
             }
+
+        }
+        public void Run()
+        {
+            XedEtlWfHost.create().Run(Wf);
         }
     }
 }

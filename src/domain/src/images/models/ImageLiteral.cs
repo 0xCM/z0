@@ -10,10 +10,12 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential), Table(TableId)]
+    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
     public struct ImageLiteralRecord
     {
         public const string TableId = "image.literal";
+
+        public const byte FieldCount = 4;
 
         public Count Sequence;
 

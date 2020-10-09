@@ -20,13 +20,17 @@ namespace Z0
 
             public FS.FilePath Path {get;}
 
+            public Count SegmentCount {get;}
+
             public FlairKind Flair {get;}
 
+
             [MethodImpl(Inline)]
-            public FileEmitted(WfStepId step, FS.FilePath path, CorrelationToken ct, FlairKind flair = Ran)
+            public FileEmitted(WfStepId step, FS.FilePath path, Count segments, CorrelationToken ct, FlairKind flair = Ran)
             {
                 EventId = (EventName, step, ct);
                 StepId = step;
+                SegmentCount = segments;
                 Path = path;
                 Flair = flair;
             }
@@ -36,7 +40,7 @@ namespace Z0
 
             [MethodImpl(Inline)]
             public string Format()
-                => format(EventId, Path.ToUri());
+                => Render.format(EventId, SegmentCount, Path.ToUri());
         }
     }
 }

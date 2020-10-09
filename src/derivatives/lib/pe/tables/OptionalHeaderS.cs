@@ -8,7 +8,6 @@ namespace Z0
 {
     partial struct ImageTables
     {
-        [Table]
         public struct OptionalHeaderS
         {
             public ulong SizeOfStackReserve;

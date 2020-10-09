@@ -34,6 +34,8 @@ namespace Z0.Xed
 
         readonly XedStageArchive Stage;
 
+        readonly IDbArchive Target2;
+
         readonly ITableArchive Target;
 
         public XedEtlWf(IWfShell wf, XedWfConfig config)
@@ -43,7 +45,8 @@ namespace Z0.Xed
             Settings = config.Settings;
             Source = XedWfOps.SourceArchive(Config.SourceRoot);
             Stage = XedStageArchive.Create(Config.ExtractRoot);
-            Target = TableArchive.create(Config.PubRoot);
+            Target2 = Wf.Db();
+            Target = DbArchives.tables(wf, "xed");
             Wf.Created(typeof(XedEtlWf));
         }
 
@@ -104,6 +107,9 @@ namespace Z0.Xed
             var sorted = (src as IEnumerable<XedPattern>).OrderBy(x => x.Class).ThenBy(x => x.Category).ThenBy(x => x.Extension).ThenBy(x => x.IsaSet).Array();
             var records = sorted.Map(p => XedWfOps.summary(p));
 
+            var id = Config.SummaryFile.WithoutExtension.Name;
+            var type = Config.SummaryFile.FileExt;
+            var subject = "xed";
             Target.Deposit<F,R>(records, Config.SummaryFile);
             return records;
         }
@@ -114,26 +120,57 @@ namespace Z0.Xed
         XedPatternRow[] Filter(XedPatternRow[] src, xed_cat match)
             => src.Where(p => p.Category == XedConst.Name(match)).ToArray();
 
+        void SaveExtensions2(XedPatternRow[] src)
+        {
+            foreach(var selected in Config.Extensions)
+            {
+                var filtered = Filter(src, selected);
+                var subject = Config.ExtensionFolder.Name;
+                var type = Config.DataFileExt;
+                var id = XedConst.Name(selected);
+                Target2.deposit<F,R,string>(filtered, id, subject, type);
+            }
+
+        }
+
         void SaveExtensions(XedPatternRow[] src)
         {
             foreach(var selected in Config.Extensions)
+            {
                 Target.Deposit<F,R>(Filter(src, selected),
-                    Config.ExtensionFolder, FS.file(XedConst.Name(selected), Config.DataFileExt));
+                                    Config.ExtensionFolder, FS.file(XedConst.Name(selected), Config.DataFileExt));
+            }
         }
 
+        void SaveCategories2(XedPatternRow[] src)
+        {
+            foreach(var selected in Config.Categories)
+            {
+                var filtered = Filter(src, selected);
+                var subject = Config.CategoryFolder.Name;
+                var type = Config.DataFileExt;
+                var id = XedConst.Name(selected);
+                Target2.deposit<F,R,string>(filtered, id, subject, type);
+            }
+
+
+        }
         void SaveCategories(XedPatternRow[] src)
         {
             foreach(var selected in Config.Categories)
+            {
                 Target.Deposit<F,R>(Filter(src, selected),
                     Config.CategoryFolder,
                     FS.file(XedConst.Name(selected), Config.DataFileExt)
                     );
+            }
+
         }
 
         void SaveMnemonics(XedPatternRow[] src)
         {
             var upper = src.Select(s => s.Class).Distinct().OrderBy(x => x).ToArray();
-            var dst = Target.Root + FS.file("mnemonics.csv");
+            var dst = Target.TablePath(FS.file("mnemonics", FileKind.Csv));
             dst.Overwrite(upper);
         }
 
@@ -165,7 +202,7 @@ namespace Z0.Xed
                         var kCount = content.Length;
                         if(kCount != 0)
                         {
-                            var target = Target.Table(ruleset.TargetFile);
+                            var target = Target.TablePath(FS.folder("rules"), ruleset.TargetFile);
                             using var writer = target.Writer();
                             writer.WriteLine(ruleset.Description);
                             writer.WriteLine(RulePageBreak);
@@ -210,7 +247,7 @@ namespace Z0.Xed
                 SaveExtensions(summaries);
             }
 
-            if(Settings.EmitCatagories)
+            if(Settings.EmitCategories)
             {
                 Target.Clear(Config.CategoryFolder);
                 SaveCategories(summaries);

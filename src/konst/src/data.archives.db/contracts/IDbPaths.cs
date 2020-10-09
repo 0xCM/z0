@@ -7,16 +7,18 @@ namespace Z0
     using System;
     using System.Reflection;
 
+    using api = DbArchives;
+
     public interface IDbPaths
     {
         FS.FolderPath DbRoot
             => FS.dir(@"j:\database");
 
         FS.FolderPath TableRoot
-            => DbRoot + FS.folder("tables");
+            => api.tableRoot(DbRoot);
 
         FS.FolderPath DocRoot
-            => DbRoot + FS.folder("docs");
+            => api.docRoot(DbRoot);
 
         FS.FilePath Table(string name)
             => TableRoot + FS.file(name,FileExtensions.Csv);

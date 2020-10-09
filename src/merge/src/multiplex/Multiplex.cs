@@ -28,10 +28,6 @@ namespace Z0
 
         MultiplexSettings Settings;
 
-        // TableSpan<ClrAssembly> Assemblies;
-
-        // TableSpan<NativeDll> Libraries;
-
         TableSpan<ClrAssembly> Assemblies;
 
         IBuildArchive Build;

@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct ImageTables
     {
-        [Table, StructLayout(LayoutKind.Explicit)]
+        [StructLayout(LayoutKind.Explicit)]
         public struct HeaderEntryPoint
         {
             [FieldOffset(0)]

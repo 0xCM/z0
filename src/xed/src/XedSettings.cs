@@ -17,12 +17,14 @@ namespace Z0
             var settings = new XedSettings();
             settings.EmitSummary = true;
             settings.EmitRules = true;
+            settings.EmitMnemonicList = true;
+            settings.EmitExtensions = true;
             return settings;
         }
 
         public bool EmitSummary;
 
-        public bool EmitCatagories;
+        public bool EmitCategories;
 
         public bool EmitMnemonicList;
 

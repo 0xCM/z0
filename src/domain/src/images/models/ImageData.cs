@@ -5,73 +5,41 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    public readonly struct ImageData : ITableSpan<ImageData,byte>
+    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
+    public struct ImageDataRecord
     {
-        public readonly ImageToken Source;
+        public const string TableId = "image.bytes";
 
-        readonly byte[] Data;
+        public const byte FieldCount = 2;
+
+        public const byte RowDataSize = 32;
+
+        public ImageToken Source;
+
+        public BinaryCode Data;
 
         [MethodImpl(Inline)]
-        public ImageData(ImageToken src, byte[] content)
+        public ImageDataRecord(ImageToken src, byte[] content)
         {
             Source = src;
             Data = content;
         }
 
-        public ReadOnlySpan<byte> View
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        public Span<byte> Edit
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        public uint ImageSize
-        {
-            [MethodImpl(Inline)]
-            get => (uint)Data.Length;
-        }
-
-        public byte[] Storage
-        {
-            [MethodImpl(Inline)]
-            get => Data;
-        }
-
-        public ref byte this[ulong index]
-        {
-            [MethodImpl(Inline)]
-            get => ref Data[index];
-        }
-
-        public ref byte this[long index]
-        {
-            [MethodImpl(Inline)]
-            get => ref Data[index];
-        }
+        [MethodImpl(Inline)]
+        public static implicit operator ImageDataRecord((ImageToken src, byte[] data) x)
+            => new ImageDataRecord(x.src, x.data);
 
         [MethodImpl(Inline)]
-        public ImageData Refresh(byte[] data)
-            => new ImageData(Source, data);
+        public static implicit operator ImageDataRecord((ImageToken src, BinaryCode data) x)
+            => new ImageDataRecord(x.src, x.data);
 
         [MethodImpl(Inline)]
-        public static implicit operator ImageData((ImageToken src, byte[] data) x)
-            => new ImageData(x.src, x.data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ImageData((ImageToken src, BinaryCode data) x)
-            => new ImageData(x.src, x.data);
-
-        [MethodImpl(Inline)]
-        public static implicit operator ImageData(Paired<ImageToken,BinaryCode> x)
-            => new ImageData(x.Left, x.Right);
+        public static implicit operator ImageDataRecord(Paired<ImageToken,BinaryCode> x)
+            => new ImageDataRecord(x.Left, x.Right);
     }
 }
