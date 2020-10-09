@@ -5,14 +5,14 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
     using System.Reflection;
 
     using static Konst;
 
     partial struct ClrRecords
     {
-        [Table(TableId, FieldCount)]
+        [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
         public struct EnumLiteralRecord
         {
             public const byte FieldCount = 8;
@@ -20,7 +20,7 @@ namespace Z0
             public static ReadOnlySpan<byte> RenderWidths
                 => new byte[FieldCount]{16, 36, 16, 24, 16, 16, 24, 16};
 
-            public const string TableId = "clr.enums.literals";
+            public const string TableId = "clr.enums";
 
             /// <summary>
             /// The part in which the enum is defined

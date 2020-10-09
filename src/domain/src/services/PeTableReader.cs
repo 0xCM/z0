@@ -77,7 +77,7 @@ namespace Z0
         public static string ustring(MetadataReader reader, UserStringHandle handle)
             => reader.GetUserString(handle);
 
-        public ReadOnlySpan<ImageBlob> Blobs()
+        public ReadOnlySpan<ImageBlobRecord> Blobs()
             => blobs(State);
 
         internal static TableIndex? index(Handle handle)

@@ -14,12 +14,7 @@ namespace Z0
 
     public readonly partial struct ClrCommands
     {
-        public static void decode(in ClrCmdSpec src, ref EmitAssemblyReferences dst)
-        {
-            dst = default;
-        }
     }
-
 
     public sealed class ClrCmdExec : CmdExec<ClrCmdExec, ClrCmdSpec, ClrCmdResult>
     {

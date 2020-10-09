@@ -13,7 +13,7 @@ namespace Z0
 
     using static ClrData;
 
-    partial class ClrDataReader
+    partial class ImageMemoryMap
     {
         [MethodImpl(Inline), Op]
         ReadOnlySpan<AssemblyReferenceHandle> AssemblyReferenceHandles()

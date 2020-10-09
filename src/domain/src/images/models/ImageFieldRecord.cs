@@ -10,10 +10,15 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential), Table(TableName)]
-    public struct ImageFieldTable
+    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
+    public struct ImageFieldRecord
     {
-        public const string TableName = "image.field";
+        public const byte FieldCount = 7;
+
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[FieldCount]{16,60,12,12,16,40,30};
+
+        public const string TableId = "image.fields";
 
         public Count Sequence;
 
@@ -30,7 +35,7 @@ namespace Z0
         public string Attribs;
 
         [MethodImpl(Inline)]
-        public ImageFieldTable(Count seq, ImageLiteralFieldTable field, ImageBlob sig, string attribs)
+        public ImageFieldRecord(Count seq, ImageLiteralRecord field, ImageBlobRecord sig, string attribs)
         {
             Sequence = seq;
             Sig = sig.Data;

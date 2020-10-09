@@ -18,9 +18,9 @@ namespace Z0
     using SysReader = System.Reflection.Metadata.MetadataReader;
 
     [ApiHost, SuppressUnmanagedCodeSecurity]
-    public unsafe partial class ClrDataReader : IDisposable
+    public unsafe partial class ImageMemoryMap : IDisposable
     {
-        public ClrDataReader(IWfShell wf, FS.FilePath src)
+        public ImageMemoryMap(IWfShell wf, FS.FilePath src)
         {
             Source = MemoryFile.open(src.Name);
             Wf = wf;
@@ -31,8 +31,8 @@ namespace Z0
             CliMetadata = Pe.GetMetadata();
         }
 
-        public static ClrDataReader create(IWfShell wf, FS.FilePath src)
-            => new ClrDataReader(wf,src);
+        public static ImageMemoryMap create(IWfShell wf, FS.FilePath src)
+            => new ImageMemoryMap(wf,src);
 
         public void Dispose()
         {

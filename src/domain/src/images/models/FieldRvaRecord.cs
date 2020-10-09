@@ -21,13 +21,13 @@ namespace Z0
 
         public string FieldName;
 
-        public ImageBlob Sig;
+        public ImageBlobRecord Sig;
 
         public BinaryCode SigData
             => Sig.Data;
 
         [MethodImpl(Inline)]
-        public FieldRvaRecord(Address32 rva, string typeName, string name, ImageBlob sig)
+        public FieldRvaRecord(Address32 rva, string typeName, string name, ImageBlobRecord sig)
         {
             Rva = rva;
             TypeName = typeName;

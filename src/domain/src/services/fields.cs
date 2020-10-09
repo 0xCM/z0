@@ -15,7 +15,7 @@ namespace Z0
 
     partial class PeTableReader
     {
-        public static ImageBlob sig(in ReaderState state, FieldDefinition src, Count seq)
+        public static ImageBlobRecord sig(in ReaderState state, FieldDefinition src, Count seq)
             => blob(state, src.Signature, seq);
 
         public static ReadOnlySpan<FieldRvaRecord> rva(in ReaderState state)
@@ -40,15 +40,15 @@ namespace Z0
             return dst.OrderBy(x => x.Rva);
         }
 
-        public static ImageLiteralFieldTable literal(in ReaderState state, StringHandle handle, Count seq)
+        public static ImageLiteralRecord literal(in ReaderState state, StringHandle handle, Count seq)
         {
             var value = state.Reader.GetString(handle);
             var offset = state.Reader.GetHeapOffset(handle);
             var size = state.Reader.GetHeapSize(HeapIndex.String);
-            return new ImageLiteralFieldTable(seq, size, (Address32)offset, value);
+            return new ImageLiteralRecord(seq, size, (Address32)offset, value);
         }
 
-        public static ImageLiteralFieldTable name(in ReaderState state, FieldDefinition entry, Count seq)
+        public static ImageLiteralRecord name(in ReaderState state, FieldDefinition entry, Count seq)
             => literal(state, entry.Name, seq);
 
         internal static string format(FieldAttributes src)

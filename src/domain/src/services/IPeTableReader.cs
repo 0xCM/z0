@@ -12,10 +12,10 @@ namespace Z0
 
         ReadOnlySpan<UserStringRecord> UserStrings();
 
-        ReadOnlySpan<ImageBlob> Blobs();
+        ReadOnlySpan<ImageBlobRecord> Blobs();
 
         ReadOnlySpan<ImageConstantRecord> Constants();
 
-        ReadOnlySpan<ImageFieldTable> Fields();
+        ReadOnlySpan<ImageFieldRecord> Fields();
     }
 }

@@ -25,7 +25,7 @@ namespace Z0
 
     ref struct EmitImageBlobsStep
     {
-        const string DataType = ImageBlob.DataType;
+        const string DataType = ImageBlobRecord.DataType;
 
         public uint EmissionCount;
 
@@ -45,13 +45,13 @@ namespace Z0
             Wf.Created(Host);
         }
 
-        public ReadOnlySpan<ImageBlob> Read(IPart part)
+        public ReadOnlySpan<ImageBlobRecord> Read(IPart part)
         {
             using var reader = PeTableReader.open(part.PartPath());
             return reader.Blobs();
         }
 
-        static string format(in ImageBlob src, RecordFormatter<F,W> dst)
+        static string format(in ImageBlobRecord src, RecordFormatter<F,W> dst)
         {
             dst.Delimit(F.Sequence, src.Seq);
             dst.Delimit(F.HeapSize, src.HeapSize);
@@ -62,7 +62,7 @@ namespace Z0
 
         void Emit(IPart part)
         {
-            var dstPath = Wf.Paths.Table(ImageBlob.TableId, string.Concat(part.Id.Format(), Chars.Dot, DataType));
+            var dstPath = Wf.Paths.Table(ImageBlobRecord.TableId, string.Concat(part.Id.Format(), Chars.Dot, DataType));
             var data = Read(part);
             var count = (uint)data.Length;
             var formatter = Table.formatter<F,W>();
@@ -75,14 +75,14 @@ namespace Z0
 
             EmissionCount += count;
 
-            Wf.EmittedTable<ImageBlob>(Host, data.Length, dstPath);
+            Wf.EmittedTable<ImageBlobRecord>(Host, data.Length, dstPath);
         }
 
         public void Run()
         {
             Wf.Running(Host, DataType);
 
-            Wf.Db().Clear(FS.folder(ImageBlob.TableId));
+            Wf.Db().Clear(FS.folder(ImageBlobRecord.TableId));
             foreach(var part in Parts)
                 Emit(part);
 

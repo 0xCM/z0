@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     [StructLayout(LayoutKind.Sequential), Table(TableId)]
-    public struct ImageLiteralFieldTable
+    public struct ImageLiteralRecord
     {
         public const string TableId = "image.literal";
 
@@ -26,7 +26,7 @@ namespace Z0
         public string Value;
 
         [MethodImpl(Inline)]
-        public ImageLiteralFieldTable(Count seq, ByteSize heap, Address32 offset, string value)
+        public ImageLiteralRecord(Count seq, ByteSize heap, Address32 offset, string value)
         {
             Sequence = seq;
             HeapSize = heap;

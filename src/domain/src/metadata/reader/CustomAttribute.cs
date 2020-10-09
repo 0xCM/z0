@@ -12,7 +12,7 @@ namespace Z0
     using static z;
     using static ClrData;
 
-    partial class ClrDataReader
+    partial class ImageMemoryMap
     {
         public void Read(TableSpan<CustomAttributeHandle> src, Receiver<CustomAttribute> dst)
             => src.Iter(handle => dst(Reader.GetCustomAttribute(handle)));

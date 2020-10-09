@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     /// <summary>
     /// Represents an in-memory part with a specified base address
     /// </summary>
@@ -29,28 +29,28 @@ namespace Z0
             BaseAddress = @base;
             Size = size;
         }
-        
+
         public PartId Id
         {
             [MethodImpl(Inline)]
             get => Part.Id;
         }
-        
+
         public MemoryRange Range
         {
             [MethodImpl(Inline)]
             get =>  (BaseAddress, (BaseAddress + (uint)Size));
         }
-        
+
         public int CompareTo(LocatedPart src)
             => BaseAddress.CompareTo(src.BaseAddress);
 
-        public int CompareTo(LocatedImage src)
-            => BaseAddress.CompareTo(src.BaseAddress);            
+        // public int CompareTo(LocatedImage src)
+        //     => BaseAddress.CompareTo(src.BaseAddress);
 
         public bool Equals(LocatedPart src)
             => src.BaseAddress == BaseAddress;
-        
+
         public override int GetHashCode()
             => BaseAddress.GetHashCode();
 

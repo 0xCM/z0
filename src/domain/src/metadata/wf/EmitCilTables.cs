@@ -75,7 +75,7 @@ namespace Z0
         {
             Wf.Running(Host);
 
-            var methods = ClrFileReader.cil(part.Id, FS.path(part.Owner.Location));
+            var methods = CilReader.read(part.Id, FS.path(part.Owner.Location));
             var count = (uint)methods.Length;
             using var writer = dst.Writer();
             writer.WriteLine(Header);
@@ -92,9 +92,6 @@ namespace Z0
             var dst = EmptyString.Build();
             dst.Append(FieldDelimiter);
             dst.Append(Space);
-            // dst.Append(src.MethodUri.Identifier.PadRight(24));
-            // dst.Append(FieldDelimiter);
-            // dst.Append(Space);
             dst.Append(src.Sig.Format().PadRight(80));
             dst.Append(FieldDelimiter);
             dst.Append(Space);
@@ -110,7 +107,6 @@ namespace Z0
 
         static string Header
             => text.concat(FieldDelimiter, Space,
-                //"Identifier".PadRight(24), FieldDelimiter, Space,
                 "Signature".PadRight(80),  FieldDelimiter,  Space,
                 "Method".PadRight(50), FieldDelimiter,  Space,
                 "Rva".PadRight(12), FieldDelimiter, Space,

@@ -115,7 +115,7 @@ namespace Z0
         {
             const string Pattern = "{0,-8} | {1,-16} | {2}";
             var header = string.Format(Pattern,"Index", "Offset", "Name");
-            using var reader = ClrDataReader.create(Wf,FS.path(@"J:\dev\projects\z0-starters\bin\lib\netcoreapp3.1\z0.res.capture.dll"));
+            using var reader = ImageMemoryMap.create(Wf,FS.path(@"J:\dev\projects\z0-starters\bin\lib\netcoreapp3.1\z0.res.capture.dll"));
             var src = reader.ManifestResources();
             var count = src.Length;
             if(count != 0)

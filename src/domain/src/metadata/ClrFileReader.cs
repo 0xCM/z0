@@ -15,9 +15,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct ClrFileReader
+    public readonly struct CilReader
     {
-        public static ReadOnlySpan<CilMethodData> cil(PartId part, FS.FilePath src)
+        public static ReadOnlySpan<CilMethodData> read(PartId part, FS.FilePath src)
         {
             var dst = list<CilMethodData>();
 

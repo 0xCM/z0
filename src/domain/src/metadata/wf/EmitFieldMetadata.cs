@@ -63,21 +63,20 @@ namespace Z0
 
         uint Emit(IPart part)
         {
-            var t = new ImageFieldTable();
-            var file = FS.file(string.Format("{0}.{1}", part.Id.Format(), ImageFieldTable.TableName), ArchiveExt.Csv);
-            var path = FS.dir(TargetDir.Name) +  file;
+            var t = new ImageFieldRecord();
+            var path = Wf.Db().Table(ImageFieldRecord.TableId, part.Id);
             var assembly = part.Owner;
             using var reader = PeTableReader.open(FS.path(assembly.Location));
             var src = reader.Fields();
             var count = (uint)src.Length;
 
-            var formatter = TableRows.formatter(Widths,t);
+            var formatter = TableRows.formatter(ImageFieldRecord.RenderWidths, t);
             using var writer = path.Writer();
             writer.WriteLine(formatter.FormatHeader());
             foreach(var item in src)
                 writer.WriteLine(formatter.FormatRow(item));
 
-            Wf.EmittedTable<ImageFieldTable>(Host, src.Length, FS.path(path.Name));
+            Wf.EmittedTable(Host, src.Length, FS.path(path.Name),t);
             return count;
         }
 

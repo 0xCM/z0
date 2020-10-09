@@ -12,7 +12,7 @@ namespace Z0
     using static z;
     using static ClrData;
 
-    partial class ClrDataReader
+    partial class ImageMemoryMap
     {
         public void Read(TypeDefinitionHandle src, Receiver<TypeDefinition> dst)
             => dst(Reader.GetTypeDefinition(src));

@@ -5,25 +5,18 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Reflection.Metadata;
-    using System.Reflection.PortableExecutable;
-    using System.Reflection.Metadata.Ecma335;
-    using System.IO;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
     using static z;
 
     partial class PeTableReader
     {
-        public ReadOnlySpan<ImageFieldTable> Fields()
+        public ReadOnlySpan<ImageFieldRecord> Fields()
         {
             var reader = State.Reader;
             var handles = reader.FieldDefinitions.ToReadOnlySpan();
             var count = handles.Length;
-            var dst = Spans.alloc<ImageFieldTable>(count);
+            var dst = Spans.alloc<ImageFieldRecord>(count);
 
             for(var i=0u; i<count; i++)
             {
@@ -31,7 +24,7 @@ namespace Z0
                 var entry = reader.GetFieldDefinition(handle);
                 int offset = entry.GetOffset();
 
-                seek(dst,i) = new ImageFieldTable(i, name(State, entry, i), sig(State, entry, i), format(entry.Attributes));
+                seek(dst,i) = new ImageFieldRecord(i, name(State, entry, i), sig(State, entry, i), format(entry.Attributes));
             }
             return dst;
         }

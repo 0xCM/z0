@@ -27,7 +27,7 @@ namespace Z0
         readonly WfHost Host;
 
         FS.FolderPath Target
-            => Wf.Paths.TableRoot + FS.folder(ImageLiteralFieldTable.TableId);
+            => Wf.Paths.TableRoot + FS.folder(ImageLiteralRecord.TableId);
 
         public EmitFieldLiteralsStep(IWfShell wf, WfHost host)
         {

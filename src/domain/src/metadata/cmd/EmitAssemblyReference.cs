@@ -30,8 +30,8 @@ namespace Z0
                 => ClrCmdHost<T>.create();
 
         [MethodImpl(Inline)]
-        static ClrDataReader Reader(IWfShell wf, FS.FilePath src)
-            => ClrDataReader.create(wf, src);
+        static ImageMemoryMap Reader(IWfShell wf, FS.FilePath src)
+            => ImageMemoryMap.create(wf, src);
 
         public static ReadOnlySpan<AssemblyReferenceData> exec(IWfShell wf, in EmitAssemblyReferences cmd)
         {

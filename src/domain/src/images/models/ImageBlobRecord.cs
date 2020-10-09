@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
 
     [StructLayout(LayoutKind.Sequential), Table(TableId)]
-    public struct ImageBlob
+    public struct ImageBlobRecord
     {
         public const string TableId = "image.blob";
 
@@ -26,7 +26,7 @@ namespace Z0
         public BinaryCode Data;
 
         [MethodImpl(Inline)]
-        public ImageBlob(Count seq, ByteSize heap, Address32 offset, byte[] data)
+        public ImageBlobRecord(Count seq, ByteSize heap, Address32 offset, byte[] data)
         {
             Seq = seq;
             HeapSize = heap;

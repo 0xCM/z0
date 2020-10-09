@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class ClrDataReader
+    partial class ImageMemoryMap
     {
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<AssemblyFileHandle> AssemblyFileHandles()
