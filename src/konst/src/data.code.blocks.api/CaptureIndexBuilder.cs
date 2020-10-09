@@ -131,7 +131,7 @@ namespace Z0
                 .GroupBy(g => g.Host)
                 .Select(x => (new CodeBlocks(x.Key, x.Select(y => y.Code).ToArray()))).Array();
 
-            return new ApiCodeBlockIndex(parts,
+            return new ApiCodeBlockIndex(
                    new PartAddresses(parts, memories),
                    new UriAddresses(parts, locations),
                    new PartCode(parts, code.Select(x => (x.Host, x)).ToDictionary()));

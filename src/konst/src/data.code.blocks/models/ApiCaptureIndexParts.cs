@@ -151,9 +151,6 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => Data[src];
             }
-
-            public static PartAddresses Empty
-                => new PartAddresses(sys.empty<PartId>(), HC.Empty);
         }
     }
 }

@@ -45,8 +45,6 @@ namespace Z0
         public int CompareTo(LocatedPart src)
             => BaseAddress.CompareTo(src.BaseAddress);
 
-        // public int CompareTo(LocatedImage src)
-        //     => BaseAddress.CompareTo(src.BaseAddress);
 
         public bool Equals(LocatedPart src)
             => src.BaseAddress == BaseAddress;
