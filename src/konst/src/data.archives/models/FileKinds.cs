@@ -25,6 +25,7 @@ namespace Z0
 
     public readonly struct FileKinds
     {
+
         [FileKind]
         public readonly struct PCsv : IFileKind<PCsv>
         {

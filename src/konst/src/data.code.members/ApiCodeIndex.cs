@@ -113,7 +113,7 @@ namespace Z0
                     dst = items.Where(i => !duplicates.Contains(i.Item1.Identifier)).ToDictionary();
                 else
                     dst = src.ToDictionary();
-                return new ApiOpIndex<T>(dst, duplicates.Select(d => ApiIdentityParser.parse(d)).Array());
+                return new ApiOpIndex<T>(dst, duplicates.Select(d => OpIdentityParser.parse(d)).Array());
             }
             catch(Exception e)
             {

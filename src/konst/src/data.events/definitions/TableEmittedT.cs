@@ -18,7 +18,7 @@ namespace Z0
 
         public WfStepId StepId {get;}
 
-        public ClrType<T> RowType => default;
+        public Type RowType => typeof(T);
 
         public Count RowCount {get;}
 

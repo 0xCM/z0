@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Text;
@@ -37,7 +37,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var field = ref skip(fields,i);
-                seek(dst,i) = new TableColumn((ushort)i, field.Name, (ushort)field.GetRawConstantValue());
+                seek(dst,i) = new TableColumn((ushort)i, field.Name, (ushort)rebox(field.GetRawConstantValue(), NumericKind.U16));
             }
             return dst;
         }

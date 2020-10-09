@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static BufferToken token(MemoryAddress location, uint size)
-            => new BufferToken(location, size);        
+            => new BufferToken(location, size);
     }
 }

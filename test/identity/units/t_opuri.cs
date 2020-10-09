@@ -12,7 +12,7 @@ namespace Z0
     {
         public void parse_uri_1()
         {
-            var opid = ApiIdentityParser.parse("vgeneric_g[8u](v512x8i~in)");
+            var opid = OpIdentityParser.parse("vgeneric_g[8u](v512x8i~in)");
             var input = $"hex://fixed/Vector512?vgeneric#{opid}";
             var attempt = ApiUriParser.Service.Parse(input);
             Claim.Require(attempt.Succeeded);

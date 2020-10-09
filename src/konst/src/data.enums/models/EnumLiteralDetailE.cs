@@ -88,7 +88,7 @@ namespace Z0
             => DataType;
 
         [MethodImpl(Inline)]
-        internal EnumLiteralDetail(FieldInfo field, EnumScalarKind kind, uint index, string identifier, E value, string description, UserMetadata data)
+        public EnumLiteralDetail(FieldInfo field, EnumScalarKind kind, uint index, string identifier, E value, string description, UserMetadata data)
         {
             BackingField = field;
             PrimalKind = kind;

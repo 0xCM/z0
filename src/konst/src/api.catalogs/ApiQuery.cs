@@ -20,12 +20,12 @@ namespace Z0
         /// </summary>
         /// <param name="src">The catalog to query</param>
         [MethodImpl(Inline), Op]
-        public static ApiCatalogQuery catalog(IApiPartCatalog src)
-            => new ApiCatalogQuery(src);
+        public static PartCatalogQuery catalog(IApiPartCatalog src)
+            => new PartCatalogQuery(src);
 
         [MethodImpl(Inline), Op]
-        public static ApiHostQuery host(IApiHost host)
-            => new ApiHostQuery(host);
+        public static HostMemberQuery host(IApiHost host)
+            => new HostMemberQuery(host);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ApiDependency<T> needs<T>(T src, T dst)

@@ -197,13 +197,12 @@ namespace Z0
         protected string CaseName(IFunc f)
             => Context.CaseName(f);
 
+        public CasePaths Paths
+            => new CasePaths(FS.dir(Context.Paths.TestDataRoot.Name), TestedPart, GetType());
+
         [MethodImpl(Inline)]
         protected FilePath UnitPath(FileName name)
             => UnitDataDir + name;
-
-        [MethodImpl(Inline)]
-        protected FS.FilePath UnitPath(FS.FileName name)
-            => FS.dir(UnitDataDir.Name) + name;
 
         protected StreamWriter UnitWriter(FileName filename)
             => UnitPath(filename).Writer();

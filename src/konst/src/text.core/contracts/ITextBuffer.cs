@@ -16,6 +16,7 @@ namespace Z0
             Append(src);
             Append(Eol);
         }
+
         void AppendLine()
             => Append(Eol);
 
@@ -27,6 +28,21 @@ namespace Z0
 
         void Append(char c)
             => Append(c.ToString());
+
+        void Delimit<F,T>(F field, T value, char c = FieldDelimiter)
+            where F : unmanaged
+        {
+            var shift = bitsize<F>()/2;
+            var width = uint32(field) >> shift;
+            Append(text.rspace(c));
+            Append($"{value}".PadRight((int)width));
+        }
+
+        void Delimit<T>(uint width, T value, char c = FieldDelimiter)
+        {
+            Append(text.rspace(c));
+            Append($"{value}".PadRight((int)width));
+        }
 
         void AppendFormat(string pattern, params object[] args)
             => Append(string.Format(pattern, args));

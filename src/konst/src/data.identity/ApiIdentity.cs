@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Reflection;
+    using System.Collections.Generic;
 
     using static Konst;
     using static z;
@@ -15,6 +16,26 @@ namespace Z0
     [ApiHost(ApiNames.ApiIdentity, true)]
     public readonly struct ApiIdentity
     {
+        /// <summary>
+        /// Defines the name of an api member predicated on a tag, if present, or the metadata-defined name if not
+        /// </summary>
+        /// <param name="m">The source method</param>
+        public static string name(MethodInfo m)
+        {
+            var attrib = m.Tag<OpAttribute>();
+
+            if(attrib.IsNone())
+                return m.Name;
+            else
+            {
+                var name = attrib.Value.GroupName;
+                if(text.empty(name))
+                    return m.Name;
+                else
+                    return name;
+            }
+        }
+
         [MethodImpl(Inline), Op]
         public static ApiMetadataUri identify(MethodInfo src)
         {

@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+
+[assembly: PartId(PartId.Clr)]
+
+namespace Z0.Parts
 {
-    /// <summary>
-    /// Characterizes a model of an unmanaged type
-    /// </summary>
-    public interface IClrStruct : IClrType
+    public sealed class Clr : Part<Clr>
     {
-        ClrTypeKind IClrType.Kind
-            => ClrTypeKind.Struct;
+
     }
 }
+

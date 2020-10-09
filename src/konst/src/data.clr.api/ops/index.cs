@@ -13,8 +13,6 @@ namespace Z0
 
     partial struct Reflex
     {
-        [MethodImpl(Inline), Op]
-        public static ClrTypes index(Type[] src)
-            => ClrTypes.create(src);
+
     }
 }

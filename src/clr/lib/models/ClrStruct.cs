@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ClrStruct : IClrStruct
+    public readonly struct ClrStruct
     {
         public Type Definition {get;}
 
@@ -24,7 +24,7 @@ namespace Z0
         public ClrType Generalized
         {
             [MethodImpl(Inline)]
-            get => Reflex.@struct(Definition);
+            get => ClrModelApi.@struct(Definition);
         }
 
         public ClrArtifactKey Id

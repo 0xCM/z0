@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
@@ -17,8 +19,9 @@ namespace Z0
     {
         T Identifier {get;}
     }
+
     [Free]
-    public interface IIdentifier<H,T> : IIdentifier<T>
+    public interface IIdentifier<H,T> : IIdentifier<T>, IEquatable<H>
     {
 
     }

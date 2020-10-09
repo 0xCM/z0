@@ -39,7 +39,7 @@ namespace Z0
 
         public static ApiHostCodeBlocks index(ApiCodeArchive src, FilePath path)
         {
-            var uri = ApiUriParser.host(path.FileName);
+            var uri = ApiUri.host(path.FileName);
             if(uri.Failed || uri.Value.IsEmpty)
                 return default;
 

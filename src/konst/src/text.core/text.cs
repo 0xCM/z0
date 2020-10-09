@@ -26,7 +26,6 @@ namespace Z0
         public static StringBuilder build()
             => EmptyString.Build();
 
-
         [MethodImpl(Inline)]
         public static int width<E>(E field)
             where E : unmanaged, Enum

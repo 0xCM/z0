@@ -12,14 +12,6 @@ namespace Z0
 
     partial struct Reflex
     {
-        [MethodImpl(Inline), Op]
-        public static ClrStruct @struct(Type src)
-            => new ClrStruct(src) ;
 
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ClrStruct @struct<T>()
-            where T : struct
-                => new ClrStruct<T>(typeof(T));
     }
 }

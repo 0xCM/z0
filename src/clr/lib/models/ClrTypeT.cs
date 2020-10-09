@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Represents a parametrically-identified clr type
     /// </summary>
-    public readonly struct ClrType<T> : IClrType<T>
+    public readonly struct ClrType<T>
     {
         static readonly Type TD = typeof(T);
 

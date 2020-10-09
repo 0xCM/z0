@@ -10,15 +10,37 @@ namespace Z0
 
     using static Konst;
 
+    [ApiDataType]
     public readonly struct ClrField
     {
+        [MethodImpl(Inline)]
+        public static ClrField from(FieldInfo src)
+            => new ClrField(src);
+
         public FieldInfo Definition {get;}
+
+        [MethodImpl(Inline)]
+        public ClrField(FieldInfo src)
+            => Definition = src;
 
         public ClrArtifactKey Id
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Definition.Name;
+
+        public override bool Equals(object obj)
+            => Definition.Equals(obj);
+
+        public override int GetHashCode()
+            => Definition.GetHashCode();
+
+        public override string ToString()
+            => Format();
 
         [MethodImpl(Inline)]
         public static bool operator ==(ClrField lhs, ClrField rhs)
@@ -33,19 +55,7 @@ namespace Z0
             => src.Definition;
 
         [MethodImpl(Inline)]
-        public ClrField(FieldInfo data)
-            => Definition = data;
-
-        public string Format()
-            => Definition.Name;
-
-        public override bool Equals(object obj)
-            => Definition.Equals(obj);
-
-        public override int GetHashCode()
-            => Definition.GetHashCode();
-
-        public override string ToString()
-            => Format();
+        public static implicit operator ClrField(FieldInfo src)
+            => from(src);
     }
 }

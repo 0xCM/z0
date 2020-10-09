@@ -11,12 +11,16 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using D = CellDelegates;
 
     public class t_vsign : t_dynamic<t_vsign>
     {
+        static Cell8 add(Cell8 a, Cell8 b)
+            => math.add(a,b);
+
         public void check_vsign_8i()
         {
-            var fp = fptr<BinaryOp<uint>>(math.add);
+            var fp = fptr<D.BinaryOp8>(add);
             term.print(fp.P);
         }
     }

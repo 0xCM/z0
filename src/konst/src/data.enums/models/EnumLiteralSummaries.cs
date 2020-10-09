@@ -14,28 +14,28 @@ namespace Z0
     /// <summary>
     /// Defines an untyped literal index
     /// </summary>
-    public readonly struct EnumLiteralDetails : IConstIndex<EnumLiteralDetail>
+    public readonly struct EnumLiteralSummaries : IConstIndex<EnumLiteralSummary>
     {
-        public static EnumLiteralDetails Empty
-            => new EnumLiteralDetails(sys.empty<EnumLiteralDetail>());
+        public static EnumLiteralSummaries Empty
+            => new EnumLiteralSummaries(sys.empty<EnumLiteralSummary>());
 
-        readonly EnumLiteralDetail[] Data;
-
-        [MethodImpl(Inline)]
-        public static implicit operator EnumLiteralDetails(EnumLiteralDetail[] src)
-            => new EnumLiteralDetails(src);
+        readonly EnumLiteralSummary[] Data;
 
         [MethodImpl(Inline)]
-        public EnumLiteralDetails(EnumLiteralDetail[] src)
+        public static implicit operator EnumLiteralSummaries(EnumLiteralSummary[] src)
+            => new EnumLiteralSummaries(src);
+
+        [MethodImpl(Inline)]
+        public EnumLiteralSummaries(EnumLiteralSummary[] src)
             => Data = src;
 
-        public ReadOnlySpan<EnumLiteralDetail> View
+        public ReadOnlySpan<EnumLiteralSummary> View
         {
             [MethodImpl(Inline)]
             get => Data;
         }
 
-        public Span<EnumLiteralDetail> Edit
+        public Span<EnumLiteralSummary> Edit
         {
             [MethodImpl(Inline)]
             get => Data;
@@ -47,13 +47,13 @@ namespace Z0
             get => Data.Length;
         }
 
-        public ref readonly EnumLiteralDetail this[int i]
+        public ref readonly EnumLiteralSummary this[int i]
         {
             [MethodImpl(Inline)]
             get => ref Data[i];
         }
 
-        public ref readonly EnumLiteralDetail this[uint i]
+        public ref readonly EnumLiteralSummary this[uint i]
         {
             [MethodImpl(Inline)]
             get => ref Data[i];
@@ -73,8 +73,8 @@ namespace Z0
             return dst;
         }
 
-        public EnumLiteralDetails Append(EnumLiteralDetails more)
-            => new EnumLiteralDetails(Data.Concat(more.Data).Array());
+        public EnumLiteralSummaries Append(EnumLiteralSummaries more)
+            => new EnumLiteralSummaries(Data.Concat(more.Data).Array());
 
         public IEnumerable<NamedValue<variant>> NamedValues
             => from i in Data select NamedValue.define(i.LiteralName, i.ScalarValue);

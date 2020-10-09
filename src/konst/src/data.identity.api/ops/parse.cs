@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.Collections.Generic;
 
     using static Konst;
     using static z;
@@ -14,6 +15,16 @@ namespace Z0
 
     partial struct ApiIdentify
     {
+        /// <summary>
+        /// Assigns aggregate identity to an identity sequence
+        /// </summary>
+        /// <param name="open">The left fence</param>
+        /// <param name="close">The right fence</param>
+        /// <param name="sep">The sequence element delimiter</param>
+        /// <param name="src">The source sequence</param>
+        public static string sequential(char open, char close, char sep, IEnumerable<string> src)
+            => text.concat(open, string.Join(sep,src), close);
+
         public static bool parse(string src, out SegmentedIdentity dst)
         {
             dst = default;

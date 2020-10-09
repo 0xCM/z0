@@ -13,7 +13,6 @@ namespace Z0
     /// <summary>
     /// Defines an E-V parametric enum value
     /// </summary>
-    [ApiProviderAttribute(DataSummary)]
     public readonly struct EnumLiteralDetail<E,P> : IEnumLiteral<EnumLiteralDetail<E,P>,E,P>
         where E : unmanaged, Enum
         where P : unmanaged

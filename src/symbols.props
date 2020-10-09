@@ -1,8 +1,6 @@
 <Project  xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-
-
     <ToolCoreId>tool.core</ToolCoreId>
     <ToolCliId>tool.cli</ToolCliId>
     <ToolCli>$(Src)$(ToolCliId)/z0.$(ToolCliId).csproj</ToolCli>
@@ -20,6 +18,7 @@
     <Konst>$(Src)konst/z0.konst.csproj</Konst>
 
     <Xed>$(Src)xed/z0.xed.csproj</Xed>
+    <Clr>$(Src)clr/z0.clr.csproj</Clr>
 
     <Check>$(Src)check/z0.check.csproj</Check>
     <CheckDynamic>$(Src)check.dynamic/z0.check.dynamic.csproj</CheckDynamic>

@@ -33,8 +33,7 @@ namespace Z0
     /// <typeparam name="M">The reifying type</typeparam>
     public interface IClrType<T> : IClrType
     {
-        ClrType Generalized
-            => Definition;
+        IClrType Generalized {get;}
 
         new IEnumerable<T> NestedTypes
             => z.stream<T>();
@@ -56,7 +55,7 @@ namespace Z0
         /// </summary>
         M Untyped {get;}
 
-        ClrType IClrType<M>.Generalized
+        IClrType IClrType<M>.Generalized
             => Untyped.Generalized;
 
         Type IReflexArtifact<Type>.Definition

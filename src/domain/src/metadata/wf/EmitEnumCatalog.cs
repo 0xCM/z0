@@ -53,7 +53,7 @@ namespace Z0
                 {
                     var y = x[j];
                     (var part, var type) = y;
-                    var records = Enums.enums(part,type);
+                    var records = Enums.rows(part,type);
                     for(var k = 0; k<records.Length; k++)
                         dst.Add(records[k]);
                 }
@@ -66,7 +66,7 @@ namespace Z0
             formatter.EmitHeader();
 
             for(var i=0; i<m.Length; i++)
-                Enums.format(m[i],formatter);
+                Enums.format(m[i], formatter);
 
             using var writer = TargetPath.Writer();
             writer.Write(formatter.Format());

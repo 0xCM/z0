@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct ClrType : IClrType<ClrType>
+    public readonly struct ClrType
     {
         public Type Definition {get;}
 
@@ -20,6 +20,12 @@ namespace Z0
         public ClrType(Type src)
         {
             Definition = src;
+        }
+
+        public ClrAssembly Assembly
+        {
+            [MethodImpl(Inline)]
+            get => Definition.Assembly;
         }
 
         public ClrArtifactKey Id

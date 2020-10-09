@@ -9,17 +9,15 @@ namespace Z0
     using System.Text;
 
     using static Konst;
-    using static z;
 
-    [ApiHost]
-    public readonly partial struct TextBuffers
+    partial struct Buffers
     {
         [MethodImpl(Inline), Op]
-        public static DynamicTextBuffer dynamic()
-            => new DynamicTextBuffer(text.build());
+        public static DynamicTextBuffer text()
+            => new DynamicTextBuffer(new StringBuilder());
 
         [MethodImpl(Inline), Op]
-        public static DynamicTextBuffer dynamic(StringBuilder dst)
+        public static DynamicTextBuffer text(StringBuilder dst)
             => new DynamicTextBuffer(dst);
     }
 }

@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Defines api queries over a specific host
     /// </summary>
-    public readonly struct ApiHostQuery : IApiView<ApiHostQuery,IApiHost>
+    public readonly struct HostMemberQuery : IApiView<HostMemberQuery,IApiHost>
     {
         /// <summary>
         /// The host to interrogate
@@ -22,7 +22,7 @@ namespace Z0
         public IApiHost Source {get;}
 
         [MethodImpl(Inline)]
-        public ApiHostQuery(IApiHost host)
+        public HostMemberQuery(IApiHost host)
             => Source = host;
 
         /// <summary>

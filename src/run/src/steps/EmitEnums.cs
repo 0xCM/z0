@@ -23,13 +23,6 @@ namespace Z0
         }
     }
 
-    public struct EmitEnumsSpec
-    {
-        public FS.FilePath Source;
-
-        public FS.FilePath Target;
-    }
-
     ref struct EmitEnumsStep
     {
         readonly IWfShell Wf;
@@ -42,7 +35,7 @@ namespace Z0
 
         readonly WfHost Host;
 
-        public ReadOnlySpan<EnumLiteralDetail> Emitted;
+        public ReadOnlySpan<EnumLiteralSummary> Emitted;
 
         [MethodImpl(Inline)]
         public EmitEnumsStep(IWfShell wf, WfHost host, ClrAssembly src)
@@ -65,9 +58,9 @@ namespace Z0
 
         void Execute()
         {
-            var src = Enums.details(Source).View;
+            var src = Enums.summaries(Source).View;
             var count = src.Length;
-            var formatter = TableRows.formatter<EnumLiteralDetail>(EnumLiteralDetail.RenderWidths);
+            var formatter = TableRows.formatter<EnumLiteralSummary>(EnumLiteralSummary.RenderWidths);
             var dst = Target.Writer();
             dst.WriteLine(formatter.FormatHeader());
 

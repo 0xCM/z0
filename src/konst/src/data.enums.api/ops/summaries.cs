@@ -14,30 +14,30 @@ namespace Z0
     partial class Enums
     {
         [Op]
-        public static EnumLiteralDetails details(Assembly src)
+        public static EnumLiteralSummaries summaries(Assembly src)
         {
             var types = src.GetTypes().Where(t => t.IsEnum);
-            var dst = EnumLiteralDetails.Empty;
+            var dst = EnumLiteralSummaries.Empty;
             for(var i=0; i<types.Length; i++)
-                dst = dst.Append(details(types[i]));
+                dst = dst.Append(summaries(types[i]));
             return dst;
         }
 
         [Op]
-        public static EnumLiteralDetails details(Type src)
+        public static EnumLiteralSummaries summaries(Type src)
         {
             var ut = src.GetEnumUnderlyingType();
             var nk = ut.NumericKind();
 
             var fields = span(src.LiteralFields());
             var count = fields.Length;
-            var buffer = sys.alloc<EnumLiteralDetail>(count);
+            var buffer = sys.alloc<EnumLiteralSummary>(count);
             var index = span(buffer);
 
             for(var i=0u; i<fields.Length; i++)
             {
                 ref readonly var field = ref skip(fields,i);
-                var dst = new EnumLiteralDetail();
+                var dst = new EnumLiteralSummary();
                 dst.Id = Reflex.identity(field);
                 dst.TypeName = src.Name;
                 dst.PrimalKind = Enums.@base(nk);
@@ -47,7 +47,7 @@ namespace Z0
                 seek(index,i) = dst;
             }
 
-            return new EnumLiteralDetails(buffer);
+            return new EnumLiteralSummaries(buffer);
         }
     }
 }

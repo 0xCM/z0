@@ -9,24 +9,24 @@ namespace Z0
 
     using static Konst;
 
-    using api = ApiIdentify;
+    using api = ApiUri;
 
-    public readonly struct ApiIdentityParser : IInfallibleParser<OpIdentity>
+    public readonly struct OpIdentityParser : IInfallibleParser<OpIdentity>
     {
-        public static ApiIdentityParser Service => default(ApiIdentityParser);
+        public static OpIdentityParser Service => default(OpIdentityParser);
 
         OpIdentity INullary<OpIdentity>.Zero
             => OpIdentity.Empty;
 
         OpIdentity IInfallibleParser<OpIdentity>.Parse(string text)
-            => api.parse(text);
+            => api.operation(text);
 
         [MethodImpl(Inline)]
         public static OpIdentity parse(string src)
-            => api.parse(src);
+            => api.operation(src);
 
         [MethodImpl(Inline)]
         public OpIdentity Parse(string text)
-            => api.parse(text);
+            => api.operation(text);
     }
 }

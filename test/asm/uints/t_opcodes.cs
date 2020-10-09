@@ -80,7 +80,7 @@ namespace Z0.Asm
         public static string header(char delimiter = FieldDelimiter)
             => Table.headerText<AsmOpCodeField>(delimiter);
 
-        public void opcode_reccords()
+        public void check_opcode_records()
         {
             var data = AsmCodes.dataset();
             var count = data.OpCodeCount;

@@ -61,29 +61,6 @@ namespace Z0
             return index(eValueBuffer);
         }
 
-        [Op]
-        public static void enums(PartId part, Type type, EnumTypeCode ecode, ReadOnlySpan<FieldInfo> fields, Span<EnumLiteralRow> dst)
-        {
-            var count = fields.Length;
-            var address = type.TypeHandle.Value;
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var f = ref z.skip(fields,i);
-                var nameAddress = z.address(f.Name);
-                seek(dst,i) = new EnumLiteralRow(part, type, address, (ushort)i, f.Name, nameAddress, (EnumScalarKind)ecode, Enums.unbox(ecode, f.GetRawConstantValue()));
-            }
-        }
-
-        [Op]
-        public static ReadOnlySpan<EnumLiteralRow> enums(PartId part, Type src)
-        {
-            var fields = span(src.LiteralFields());
-            var dst = span<EnumLiteralRow>(fields.Length);
-            var ecode = PrimalKinds.ecode(src);
-            enums(part, src, ecode, fields, dst);
-            return dst;
-        }
-
         /// <summary>
         /// Determines whether an enum defines a name-identified literal
         /// </summary>

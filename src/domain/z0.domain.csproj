@@ -9,6 +9,7 @@
     <ProjectReference Include="$(Sys)" />
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(math)" />
+    <ProjectReference Include="$(Clr)" />
 
   </ItemGroup>
 

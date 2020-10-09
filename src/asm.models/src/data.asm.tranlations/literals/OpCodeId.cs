@@ -5,7 +5,7 @@
 namespace Z0.Asm
 {
 	/// <summary>x86 instruction code</summary>
-	public enum OpCodeId 
+	public enum OpCodeId
 	{
 		/// <summary>It&apos;s an invalid instruction, eg. it&apos;s a new unknown instruction, garbage or there&apos;s not enough bytes to decode the instruction etc.</summary>
 		INVALID = 0,

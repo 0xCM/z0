@@ -147,7 +147,7 @@ namespace Z0
             if(count != 0)
             {
                 using var writer = dst.Writer();
-                var buffer = TextBuffers.dynamic();
+                var buffer = Buffers.text();
 
                 for(var i=0; i<count; i++)
                 {

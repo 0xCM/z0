@@ -27,7 +27,7 @@ namespace Z0
                     return unparsed<ApiCodeBlock>(src, $"components = {parts.Length} != 3");
 
                 var address = Parsers.hex().Parse(parts[(byte)ApiCodeField.Base]).ValueOrDefault();
-                var uri = ApiUriParser.operation(parts[(byte)ApiCodeField.Uri].Trim()).ValueOrDefault();
+                var uri = ApiUri.parse(parts[(byte)ApiCodeField.Uri].Trim()).ValueOrDefault();
                 var bytes = parts[(byte)ApiCodeField.Encoded].SplitClean(HexFormatSpecs.DataDelimiter).Select(parser.Succeed);
                 return parsed(src, new ApiCodeBlock(address, uri, bytes));
             }

@@ -2,16 +2,11 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+[assembly: PartId(Runner.Part)]
+namespace Z0.Parts
 {
-    using System;
-    using System.Reflection;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-
-    public readonly struct ClrMethod
+    public sealed class ClrRunner : Part<ClrRunner>
     {
-        public MethodInfo Definition {get;}
+
     }
 }

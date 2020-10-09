@@ -124,7 +124,7 @@ namespace Z0
             else
                 HashTable = src.ToDictionary();
 
-            var duplicated = duplicates.Select(d => ApiIdentityParser.parse(d)).ToArray();
+            var duplicated = duplicates.Select(d => OpIdentityParser.parse(d)).ToArray();
             return new ApiOpIndex<T>(HashTable, duplicated);
         }
     }

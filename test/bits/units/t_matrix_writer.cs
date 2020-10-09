@@ -53,7 +53,7 @@ namespace Z0.Test
         {
             for(var i=0u; i< count; i++)
             {
-                var path = UnitPath(filename<M,N,T>(i));
+                var path = Paths.CasePath(filename<M,N,T>(i));
                 var matrix = Random.MatrixBlock<M,N,T>();
                 var A = MatrixWriter.write(matrix, path, m, n, t);
                 var B = MatrixReader.read(path, m, n, t);

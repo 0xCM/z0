@@ -76,6 +76,10 @@ public enum PartId : ulong
 
     MathTest = 73,
 
+    Clr = 75,
+
+    ClrRun = 76,
+
     // ~ 100
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -161,7 +165,6 @@ public enum PartId : ulong
 
     Circuits = 154,
 
-    Vectors = 155,
 
     Structured = 156,
 

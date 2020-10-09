@@ -14,7 +14,7 @@ namespace Z0
     /// <summary>
     /// Represents a parametrically-identified clr struct
     /// </summary>
-    public readonly struct ClrStruct<T> : IClrStruct
+    public readonly struct ClrStruct<T>
         where T : struct
     {
         public Type Definition {get;}

@@ -74,8 +74,8 @@ namespace Z0
             where E : unmanaged, Enum
                 => new EnumLiteralDetails<E>(src.ToArray());
 
-        public static EnumLiteralDetails ToIndex(this IEnumerable<EnumLiteralDetail> src)
-            => new EnumLiteralDetails(src.ToArray());
+        public static EnumLiteralSummaries ToIndex(this IEnumerable<EnumLiteralSummary> src)
+            => new EnumLiteralSummaries(src.ToArray());
 
         [MethodImpl(Inline)]
         public static sbyte ToInt8<E>(this E src)

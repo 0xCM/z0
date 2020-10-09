@@ -20,7 +20,7 @@ namespace Z0
             if(src.TextComponents.Skip(1).First()[0] == IDI.Generic)
                 return src;
             else
-               return ApiIdentityParser.parse(
+               return OpIdentityParser.parse(
                    text.concat(src.Identifier.LeftOf(IDI.PartSep), IDI.PartSep, IDI.Generic,  src.Identifier.RightOf(IDI.PartSep)));
         }
     }

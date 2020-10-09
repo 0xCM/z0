@@ -10,14 +10,19 @@ namespace Z0
 
     using static Konst;
 
+    [ApiDataType]
     public readonly struct ClrAssembly
     {
+        [MethodImpl(Inline)]
+        public static ClrAssembly from(Assembly src)
+            => new ClrAssembly(src);
+
         public Assembly Definition {get;}
 
         public ClrArtifactKey Id
         {
             [MethodImpl(Inline)]
-            get => new ClrArtifactKey(Definition);
+            get => ClrArtifactKey.from(Definition);
         }
 
         [MethodImpl(Inline)]

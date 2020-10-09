@@ -14,7 +14,7 @@ namespace Z0
     {
         [Op]
         public static OpIdentity build(params ApiIdentityPart[] parts)
-            => ApiIdentityParser.parse(string.Join(IDI.PartSep, parts.Select(x =>x.Identifier)));
+            => OpIdentityParser.parse(string.Join(IDI.PartSep, parts.Select(x =>x.Identifier)));
 
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
@@ -30,11 +30,11 @@ namespace Z0
             var w = (CellWidth)tw;
             var g = generic ? $"{IDI.Generic}" : EmptyString;
             if(generic && k == 0)
-                return ApiIdentityParser.parse(text.concat(opname, IDI.PartSep, IDI.Generic));
+                return OpIdentityParser.parse(text.concat(opname, IDI.PartSep, IDI.Generic));
             else if(w.IsSome())
-                return ApiIdentityParser.parse(text.concat(opname, IDI.PartSep, $"{g}{w.Format()}{IDI.SegSep}{k.Format()}"));
+                return OpIdentityParser.parse(text.concat(opname, IDI.PartSep, $"{g}{w.Format()}{IDI.SegSep}{k.Format()}"));
             else
-                return ApiIdentityParser.parse(Render.concat($"{opname}_{g}{k.Format()}"));
+                return OpIdentityParser.parse(Render.concat($"{opname}_{g}{k.Format()}"));
         }
 
         /// <summary>

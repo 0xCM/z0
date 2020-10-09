@@ -16,7 +16,7 @@ namespace Z0
     /// Defines a view over a <see cref='IApiPartCatalog'/>
     /// </summary>
     [ApiHost]
-    public readonly struct ApiCatalogQuery : IApiView<ApiCatalogQuery,IApiPartCatalog>
+    public readonly struct PartCatalogQuery : IApiView<PartCatalogQuery,IApiPartCatalog>
     {
         /// <summary>
         /// The catalog to interrogate
@@ -24,7 +24,7 @@ namespace Z0
         public IApiPartCatalog Source {get;}
 
         [MethodImpl(Inline)]
-        public ApiCatalogQuery(IApiPartCatalog src)
+        public PartCatalogQuery(IApiPartCatalog src)
             => Source = src;
 
         public MethodInfo[] Vectorized<T>(W128 w, bool generic)

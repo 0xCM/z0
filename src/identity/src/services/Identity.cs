@@ -23,7 +23,7 @@ namespace Z0
             if(!src.IsGenericMethod)
                 return ApiGenericOpIdentity.Empty;
 
-            var id = ApiUri.MemberName(src);
+            var id = ApiIdentity.name(src);
             id += IDI.PartSep;
             id += IDI.Generic;
 
@@ -118,15 +118,21 @@ namespace Z0
         /// <param name="src">The constructed method</param>
         static OpIdentity ConstructedIdentity(MethodInfo src)
         {
+            static void RequireConstructed(MethodInfo src)
+            {
+                if(!src.IsConstructedGenericMethod)
+                    throw AppErrors.NonGenericMethod(src);
+            }
+
             RequireConstructed(src);
 
             var id = EmptyString;
-            id += ApiUri.MemberName(src);
+            id += ApiIdentity.name(src);
             id += IDI.PartSep;
             id += IDI.Generic;
             id += TypeArgIdentity(src);
             id += ValueParamIdentity(src);
-            return ApiIdentityParser.parse(id);
+            return OpIdentityParser.parse(id);
         }
 
         /// <summary>
@@ -135,14 +141,18 @@ namespace Z0
         /// <param name="src">The source method</param>
         static OpIdentity NonGenericIdentity(MethodInfo src)
         {
+            static void RequireNonGeneric(MethodInfo src)
+            {
+                if(src.IsGenericMethod || src.IsConstructedGenericMethod || src.IsGenericMethodDefinition)
+                    throw AppErrors.GenericMethod(src);
+            }
+
             RequireNonGeneric(src);
-
             var id = EmptyString;
-            id += ApiUri.MemberName(src);
+            id += ApiIdentity.name(src);
             id += IDI.PartSep;
-            id += SequenceIdentity(IDI.ArgsOpen, IDI.ArgsClose, IDI.ArgSep, ValueParamIdentities(src));
-
-            return ApiIdentityParser.parse(id);
+            id += ApiIdentify.sequential(IDI.ArgsOpen, IDI.ArgsClose, IDI.ArgSep, ValueParamIdentities(src));
+            return OpIdentityParser.parse(id);
         }
 
         /// <summary>
@@ -163,7 +173,6 @@ namespace Z0
 
             return EmptyString;
         }
-
 
         /// <summary>
         /// Assigns identity to each value parameter (not to be confused with type parametricity) declared by a method
@@ -193,43 +202,13 @@ namespace Z0
         /// </summary>
         /// <param name="src">The constructed generic method</param>
         static string TypeArgIdentity(MethodInfo src)
-            => SequenceIdentity(IDI.TypeArgsOpen, IDI.TypeArgsClose, IDI.ArgSep, TypeArgIdentities(src));
+            => ApiIdentify.sequential(IDI.TypeArgsOpen, IDI.TypeArgsClose, IDI.ArgSep, TypeArgIdentities(src));
 
         /// <summary>
         /// Assigns aggregate identity to a method's value parameter sequence
         /// </summary>
         /// <param name="src">The source method</param>
         static string ValueParamIdentity(MethodInfo src)
-            => SequenceIdentity(IDI.ArgsOpen, IDI.ArgsClose, IDI.ArgSep, ValueParamIdentities(src));
-
-        /// <summary>
-        /// Assigns aggregate identity to an identity sequence
-        /// </summary>
-        /// <param name="open">The left fence</param>
-        /// <param name="close">The right fence</param>
-        /// <param name="sep">The sequence element delimiter</param>
-        /// <param name="src">The source sequence</param>
-        static string SequenceIdentity(char open, char close, char sep, IEnumerable<string> src)
-            => text.concat(open, string.Join(sep,src), close);
-
-         /// <summary>
-        /// Raises an error if the source method is any flavor of generic
-        /// </summary>
-        /// <param name="src">The method to examine</param>
-        static void RequireNonGeneric(MethodInfo src)
-        {
-            if(src.IsGenericMethod || src.IsConstructedGenericMethod || src.IsGenericMethodDefinition)
-                throw AppErrors.GenericMethod(src);
-        }
-
-        /// <summary>
-        /// Raises an error if the source method is not a constructed generic method
-        /// </summary>
-        /// <param name="src">The method to examine</param>
-        static void RequireConstructed(MethodInfo src)
-        {
-            if(!src.IsConstructedGenericMethod)
-                throw AppErrors.NonGenericMethod(src);
-        }
+            => ApiIdentify.sequential(IDI.ArgsOpen, IDI.ArgsClose, IDI.ArgSep, ValueParamIdentities(src));
     }
 }

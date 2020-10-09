@@ -15,7 +15,7 @@ namespace Z0
 
     public readonly struct ApiComponent
     {
-        public ClrAssembly Assembly {get;}
+        public Assembly Assembly {get;}
 
         [MethodImpl(Inline)]
         public ApiComponent(Assembly src)

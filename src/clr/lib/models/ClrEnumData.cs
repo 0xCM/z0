@@ -5,26 +5,29 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.InteropServices;
+    using System.Runtime.CompilerServices;
+    using System.Reflection;
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct EnumLiteralDetail
+    using static Konst;
+
+    public struct ClrEnumData
     {
-        public static ReadOnlySpan<byte> RenderWidths
-            => new byte[6]{24, 24, 16, 12, 24, 16};
-
         /// <summary>
-        /// The literal's surrogate identifier
+        /// The metadata token that identifies the backing field
         /// </summary>
-        public ClrMemberIdentity Id;
+        public ClrArtifactKey Key
+        {
+            [MethodImpl(Inline)]
+            get => BackingField;
+        }
 
         /// <summary>
-        /// The name of the declaring type
+        /// The compiler-emitted field that defines the literal
         /// </summary>
-        public string TypeName;
+        public FieldInfo BackingField;
 
         /// <summary>
-        /// The primal kind specialized by the enum
+        /// The kind of primitive specialized by the enum
         /// </summary>
         public EnumScalarKind PrimalKind;
 
@@ -36,11 +39,17 @@ namespace Z0
         /// <summary>
         /// The literal identifier, unique within the declaring enum
         /// </summary>
-        public string LiteralName;
+        public string Name;
 
         /// <summary>
-        /// The literal value
+        /// The literal E-value
         /// </summary>
-        public variant ScalarValue;
+        public ulong LiteralValue;
+
+        /// <summary>
+        /// The system data type
+        /// </summary>
+        public Type DataType;
+
     }
 }

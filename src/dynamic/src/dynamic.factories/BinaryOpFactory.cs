@@ -50,7 +50,7 @@ namespace Z0
         static OpIdentity identify<T>(string name)
         {
             var operand = Identities.Services.Diviner.Identify(typeof(T));
-            return ApiIdentityParser.Service.Parse($"{name}_({operand},{operand})");
+            return OpIdentityParser.Service.Parse($"{name}_({operand},{operand})");
         }
 
         static BinaryOp<T> emit<T>(OpIdentity id, in Ref target)

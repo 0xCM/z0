@@ -40,7 +40,7 @@ namespace Z0
         public static implicit operator FileModule(ManagedDll src)
             => new FileModule(src.Path, src.Kind);
 
-        public ClrAssembly Load()
+        public Assembly Load()
             => Assembly.LoadFrom(Path.Name);
     }
 }
