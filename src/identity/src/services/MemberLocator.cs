@@ -30,8 +30,9 @@ namespace Z0
         static IEnumerable<ApiMember> HostedDirect(IApiHost src)
             => from m in Reflex.DirectApiMethods(src)
                 let id = MultiDiviner.Service.Identify(m)
+                let im = new IdentifiedMethod(id,m)
                 let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
-                let located = ApiDynamic.jit(m)
+                let located = ApiDynamic.jit(im)
                 select new ApiMember(uri, located,  m.KindId());
 
         static IEnumerable<ApiMember> HostedGeneric(IApiHost src)
@@ -39,8 +40,9 @@ namespace Z0
                 from closure in Reflex.NumericClosureTypes(m)
                 let reified = m.MakeGenericMethod(closure)
                 let id = MultiDiviner.Service.Identify(reified)
+                let im = new IdentifiedMethod(id,m)
                 let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
-                let located = ApiDynamic.jit(m)
+                let located = ApiDynamic.jit(im)
                 select new ApiMember(uri, located, m.KindId());
       }
 }

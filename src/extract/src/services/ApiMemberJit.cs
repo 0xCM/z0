@@ -18,13 +18,6 @@ namespace Z0
     public readonly struct ApiMemberJit
     {
         [MethodImpl(Inline)]
-        public static MemoryAddress jit(ApiMember src)
-        {
-            RuntimeHelpers.PrepareMethod(src.Method.MethodHandle);
-            return src.Method.MethodHandle.GetFunctionPointer();
-        }
-
-        [MethodImpl(Inline)]
         public static MemoryAddress jit(MethodInfo src)
         {
             RuntimeHelpers.PrepareMethod(src.MethodHandle);
@@ -75,15 +68,10 @@ namespace Z0
             var dst = z.list<ApiMember>();
             var count = src.Count;
             var exclusions = ApiDataType.Ignore;
-
-            //Array.Sort(src);
             ref var lead = ref src.LeadingCell;
 
             for(var i=0u; i<count; i++)
-            {
-                var host = skip(lead,i);
-                dst.AddRange(jit(host, exclusions));
-            }
+                dst.AddRange(jit(skip(lead,i), exclusions));
             var collected = dst.ToArray();
             Array.Sort(collected);
             return collected;

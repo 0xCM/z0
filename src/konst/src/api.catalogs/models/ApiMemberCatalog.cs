@@ -9,43 +9,27 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
+    using static z;
 
-    public readonly struct ApiFx
+    public interface  IApiMemberCatalog
     {
-        public readonly struct Numeric
-        {
-
-        }
-
-        public readonly struct Cellular
-        {
-
-        }
-
-        public readonly struct Vectorized
-        {
-
-        }
-
-        public readonly struct SpanBlock
-        {
-
-        }
-
-        public readonly struct Segmented
-        {
-
-        }
-
 
     }
 
-
-    public readonly struct ApiFunctions
+    public readonly struct ApiMemberCatalog : IApiMemberCatalog
     {
+        readonly TableSpan<ApiMember> _Members;
 
+        [MethodImpl(Inline)]
+        public ApiMemberCatalog(ApiMember[] src)
+        {
+            _Members = src;
+        }
 
+        public ReadOnlySpan<ApiMember> Members
+        {
+            [MethodImpl(Inline)]
+            get => _Members.View;
+        }
     }
-
-
 }

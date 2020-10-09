@@ -50,7 +50,7 @@ namespace Z0
             var count = src.Length;
             var located = span<LocatedMethod>(count);
             for(var i=0u; i<count; i++)
-                seek(located,i) = ApiDynamic.jit(skip(src,i).Method);
+                seek(located,i) = ApiDynamic.jit(skip(src,i));
             return located;
         }
 
@@ -79,7 +79,7 @@ namespace Z0
 
         public static ApiMemberCapture capture(in ApiMember src, Span<byte> buffer)
         {
-            var summary = capture(buffer, src.Id, ApiMemberJit.jit(src));
+            var summary = capture(buffer, src.Id, ApiDynamic.jit(src));
             var size = summary.Data.Length;
             var code = new ApiCaptureBlock(src.Id, src.Method, summary.Encoded.Input, summary.Encoded.Output, summary.Outcome.TermCode);
             return new ApiMemberCapture(src, code);
@@ -93,7 +93,7 @@ namespace Z0
 
         public static ApiCaptureBlock capture(IdentifiedMethod src, Span<byte> buffer)
         {
-            var located = ApiDynamic.jit(src.Method);
+            var located = ApiDynamic.jit(src);
             var summary = capture(buffer, src.Id, located.Address);
             return DefineMember(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
         }

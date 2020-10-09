@@ -8,6 +8,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
+
+    [WfHost]
+    public sealed class ExtractMembersHost : WfHost<ExtractMembersHost>
+    {
+        protected override void Execute(IWfShell wf)
+            => throw missing();
+    }
 
     public readonly ref struct ExtractMembers
     {

@@ -13,7 +13,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public sealed class CaptureParts2 : WfHost<CaptureParts2,WfCaptureState>
+    public sealed class CaptureParts : WfHost<CaptureParts,WfCaptureState>
     {
         protected override void Execute(IWfShell shell, in WfCaptureState state)
         {

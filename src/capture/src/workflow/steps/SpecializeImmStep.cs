@@ -25,8 +25,6 @@ namespace Z0
 
         readonly IAsmFormatter Formatter;
 
-        readonly IApiCollector ApiCollector;
-
         readonly IPartCapturePaths CodeArchive;
 
         readonly IImmSpecializer Specializer;
@@ -38,7 +36,6 @@ namespace Z0
             Formatter = formatter;
             CodeArchive = Archives.capture(root);
             Specializer = Capture.Services.ImmSpecializer(decoder);
-            ApiCollector = Identities.Services.Collector;
             Wf.Created(StepId);
         }
 
@@ -83,7 +80,7 @@ namespace Z0
         void EmitDirectRefinements(in CaptureExchange exchange, ApiHost host, IAsmImmWriter dst)
         {
             var archive = Archive(host);
-            var groups = ApiCollector.ImmDirect(host, ScalarRefinementKind.Refined);
+            var groups = ApiImmediates.direct(host,ScalarRefinementKind.Refined);
             var uri = host.Uri;
             var generic = false;
             foreach(var g in groups)
@@ -156,7 +153,7 @@ namespace Z0
             foreach(var host in Hosts(parts))
             {
                 var archive = Archive(host);
-                var groups = ApiCollector.ImmDirect(host, ScalarRefinementKind.Unrefined);
+                var groups = ApiImmediates.direct(host, ScalarRefinementKind.Unrefined);
                 EmitUnrefinedDirect(exchange, groups,imm8, archive);
             }
         }
@@ -183,7 +180,7 @@ namespace Z0
             foreach(var host in Hosts(parts))
             {
                 var archive = Archive(host);
-                var specs = ApiCollector.ImmGeneric(host, ScalarRefinementKind.Unrefined);
+                var specs = ApiImmediates.generic(host, ScalarRefinementKind.Unrefined);
                 foreach(var spec in specs)
                     EmitUnrefinedGeneric(exchange, spec, imm8, archive);
             }
@@ -191,7 +188,7 @@ namespace Z0
 
         void EmitGenericRefinements(in CaptureExchange exchange, ApiHost host, IAsmImmWriter dst)
         {
-            var specs = ApiCollector.ImmGeneric(host, ScalarRefinementKind.Refined);
+            var specs = ApiImmediates.generic(host, ScalarRefinementKind.Refined);
             foreach(var f in specs)
             {
                 if(f.Method.IsVectorizedUnaryImm(ScalarRefinementKind.Refined))

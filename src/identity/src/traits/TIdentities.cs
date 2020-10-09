@@ -6,13 +6,10 @@ namespace Z0
 {
     public interface TIdentities
     {
-        IMultiDiviner Diviner 
+        IMultiDiviner Diviner
             => MultiDiviner.Service;
 
-        ApiCollector Collector 
-            => ApiCollector.Service;
-
-        MemberLocator Locator 
+        MemberLocator Locator
             => MemberLocator.Service;
     }
 }
