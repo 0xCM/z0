@@ -21,7 +21,7 @@ namespace Z0
                 return src;
             else
                return OpIdentityParser.parse(
-                   text.concat(src.Identifier.LeftOf(IDI.PartSep), IDI.PartSep, IDI.Generic,  src.Identifier.RightOf(IDI.PartSep)));
+                   text.concat(src.Identifier.LeftOfFirst(IDI.PartSep), IDI.PartSep, IDI.Generic,  src.Identifier.RightOfFirst(IDI.PartSep)));
         }
     }
 }

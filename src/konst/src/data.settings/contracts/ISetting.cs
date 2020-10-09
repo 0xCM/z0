@@ -4,6 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System.Collections.Generic;
+    using System.Linq;
+
     /// <summary>
     /// Characterizes a nonparametric application setting
     /// </summary>
@@ -18,5 +21,24 @@ namespace Z0
         /// The setting value
         /// </summary>
         string Value {get;}
+    }
+
+    public interface ISetting<H,K,V> : ISetting
+        where H : struct, ISetting<H,K,V>
+        where K : struct, ISettingKey<K>
+        where V : struct, ISettingValue<V>
+    {
+        new K Name {get;}
+
+        new V Value {get;}
+
+        string ISetting.Name
+            => Name.ToString();
+
+        string ISetting.Value
+            => Value.ToString();
+        string ITextual.Format()
+            => Render.setting(Name,Value);
+        bool Parse(string src, out H dst);
     }
 }

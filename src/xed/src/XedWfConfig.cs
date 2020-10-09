@@ -14,9 +14,10 @@ namespace Z0
         public XedWfConfig(IWfShell wf)
         {
             Settings = XedSettings.Default();
-            SourceRoot = FS.dir(wf.Paths.DevRoot.Name) + FS.folder("data") + FS.folder("sources") + FS.folder("xed");
+            //SourceRoot = FS.dir(wf.Paths.DevRoot.Name) + FS.folder("data") + FS.folder("sources") + FS.folder("xed");
+            SourceRoot = wf.Db().SourceRoot("xed");
             TargetRoot = FS.dir(wf.Paths.LogRoot.Name) + FS.folder("data") + FS.folder("xed");
-            Target = TableArchive.create(wf.Db().Root + FS.folder("tables") + FS.folder("xed"));
+            Target = DbTables.create(wf.Db().Root + FS.folder("tables") + FS.folder("xed"));
         }
 
         public readonly ITableArchive Target;

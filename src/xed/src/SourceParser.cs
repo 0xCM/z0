@@ -77,7 +77,7 @@ namespace Z0
 
         XedRuleSet ParseFunction(TextDocRows data, ref int ix)
         {
-            var title = data[ix].Text.LeftOf(RuleMarker);
+            var title = data[ix].Text.LeftOfFirst(RuleMarker);
             var body = list<string>();
             var first = ix;
             for(var i = ix; i<data.RowCount; i++)

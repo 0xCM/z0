@@ -15,9 +15,9 @@ namespace Z0
         public static ApiHostUri uri(Type src)
         {
             var typename = src.Name;
-            var partName = typename.LeftOf('_');
+            var partName = typename.LeftOfFirst('_');
             var part = ApiPartIdParser.single(partName);
-            var host = text.ifempty(typename.RightOf('_'), "anonymous");
+            var host = text.ifempty(typename.RightOfFirst('_'), "anonymous");
             return new ApiHostUri(part, host);
         }
     }

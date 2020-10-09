@@ -13,7 +13,7 @@ namespace Z0
         /// </summary>
         /// <param name="s">The string to search</param>
         /// <param name="c">The character</param>
-        public static string RightOf(this string s, char c)
+        public static string RightOfFirst(this string s, char c)
             => s.RightOf(s.IndexOf(c));
 
         /// <summary>
@@ -21,9 +21,9 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source text</param>
         /// <param name="left">The left marker</param>
-        /// <param name="right">THe rigt marker</param>
+        /// <param name="right">THe right marker</param>
         public static string Unfence(this string src, char left, char right)
-            => src.RightOf(left).LeftOfLast(right);
+            => src.RightOfFirst(left).LeftOfLast(right);
 
         /// <summary>
         /// Gets the string to the right of, but not including, a specified index
@@ -31,8 +31,8 @@ namespace Z0
         /// <param name="src">The string to search</param>
         /// <param name="idx">The index</param>
         public static string RightOf(this string src, int idx)
-            => (idx >= src.Length - 1) 
-             ? String.Empty 
+            => (idx >= src.Length - 1)
+             ? String.Empty
              : src.Substring(idx + 1) ?? string.Empty;
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Z0
             else
                 return string.Empty;
         }
- 
+
         public static string LeftOfLast(this string s, string match)
         {
             var idx = s.LastIndexOf(match);
@@ -73,7 +73,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Retrieves the substring that precedes the last occurence of a marker
+        /// Retrieves the substring that precedes the last occurrence of a marker
         /// </summary>
         /// <param name="s">The string to search</param>
         /// <param name="match">The substring to match</param>
@@ -84,6 +84,6 @@ namespace Z0
                 return s.Substring(0, idx);
             else
                 return string.Empty;
-        }        
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdId
+    public readonly struct CmdId : ITextual
     {
         [MethodImpl(Inline)]
         public static CmdId from(Type handler)
@@ -27,9 +27,19 @@ namespace Z0
             => Data = (ulong)part | ((ulong)handler << 32);
 
         public PartId Part
-            => (PartId)Data;
+        {
+            [MethodImpl(Inline)]
+            get => (PartId)Data;
+        }
 
         public ClrArtifactKey Handler
-            => (ClrArtifactKey)Data >> 32;
+        {
+            [MethodImpl(Inline)]
+            get => (ClrArtifactKey)Data >> 32;
+        }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => string.Format(RP.SlotDot2, Part.Format(), Handler.Format());
     }
 }

@@ -25,7 +25,7 @@ namespace Z0
             }
 
             var dst = z.dict<string,string>();
-            SettingValues.absorb(configPath(),dst);
+            JsonSettings.absorb(configPath(),dst);
             return new WfSettings(dst);
         }
 
@@ -36,7 +36,7 @@ namespace Z0
             var filename = FileName.define(assname, FileExtensions.Json);
             var src = paths.ConfigRoot + filename;
             var dst = z.dict<string,string>();
-            SettingValues.absorb(src,dst);
+            JsonSettings.absorb(src,dst);
             return new WfSettings(dst);
         }
     }

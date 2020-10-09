@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     using static Konst;
     using static z;
     using static CellFormatter;
@@ -15,20 +15,20 @@ namespace Z0
     {
         public delegate T RenderFunction<S,T>(in S src);
     }
-    
+
     public readonly struct CellFormatter<S,T> : ICellFormatter<S,T>
-    {        
+    {
         readonly T[] Buffer;
-        
-        readonly RenderFunction<S,T> Fx;
-        
+
+        readonly CellFormatter.RenderFunction<S,T> Fx;
+
         [MethodImpl(Inline)]
-        public CellFormatter(RenderFunction<S,T> f)
+        public CellFormatter(CellFormatter.RenderFunction<S,T> f)
         {
             Fx = f;
             Buffer = sys.alloc<T>(1);
         }
-        
+
         [MethodImpl(Inline)]
         public ref readonly T Format(in S src)
         {
@@ -36,5 +36,5 @@ namespace Z0
              dst = Fx(src);
              return ref dst;
         }
-    }    
+    }
 }

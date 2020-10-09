@@ -31,7 +31,7 @@ namespace Z0
 
         public IShellPaths Paths {get;}
 
-        public ISettings Settings {get;}
+        public IJsonSettings Settings {get;}
 
         public CorrelationToken Ct {get;}
 
@@ -67,7 +67,7 @@ namespace Z0
             ShellName = Control.GetSimpleName();
             Paths = Paths;
             PartIdentities = Parts.Select(x => x.Id);
-            Settings = SettingValues.Load(Paths.AppConfigPath);
+            Settings = JsonSettings.Load(Paths.AppConfigPath);
             Random = default;
             Broker = new WfBroker(WfSink, Ct);
             ApiContext = new ApiContext(new ApiContextState(Modules));

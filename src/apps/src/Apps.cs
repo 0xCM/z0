@@ -24,7 +24,7 @@ namespace Z0
         public static IAppContext context(ApiPartSet src, IShellPaths paths)
             => new AppContext(paths, src.Api, Polyrand.@default(), settings(paths), AppMsgExchange.Create());
 
-        static ISettings settings(IShellPaths paths)
-            => SettingValues.Load(paths.AppConfigPath);
+        static IJsonSettings settings(IShellPaths paths)
+            => JsonSettings.Load(paths.AppConfigPath);
     }
 }

@@ -15,8 +15,8 @@ namespace Z0
         IShellPaths Paths
             => Z0.ShellPaths.Default;
 
-        ISettings Settings
-            => SettingValues.Load(Paths.AppConfigPath);
+        IJsonSettings Settings
+            => JsonSettings.Load(Paths.AppConfigPath);
 
         FS.FolderPath CaptureRoot
             => FS.dir((Paths.LogRoot + FolderName.Define("capture/artifacts")).Name);

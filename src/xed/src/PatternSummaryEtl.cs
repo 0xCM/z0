@@ -20,7 +20,7 @@ namespace Z0
                 var rowText = row.Text;
                 if(text.nonempty(rowText) && rowText.StartsWith(name))
                 {
-                    var value = rowText.RightOf(PROP_DELIMITER);
+                    var value = rowText.RightOfFirst(PROP_DELIMITER);
                     if(text.nonempty(value))
                         return value.Trim();
                 }

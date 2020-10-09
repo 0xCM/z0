@@ -10,16 +10,14 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdOptions<K,T>
+    public readonly struct CmdOptions<K,T> : ITextual
         where K : unmanaged
     {
         readonly TableSpan<CmdOption<K,T>> Data;
 
         [MethodImpl(Inline)]
         public CmdOptions(CmdOption<K,T>[] src)
-        {
-            Data = src;
-        }
+            => Data = src;
 
         [MethodImpl(Inline)]
         public static implicit operator CmdOptions<K,T>(CmdOption<K,T>[] src)
@@ -29,6 +27,16 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Data.View;
+        }
+
+        public string Format()
+        {
+            var dst = text.build();
+            var src = Data.View;
+            var count = src.Length;
+            for(var i=0; i<count; i++)
+                dst.AppendLine(skip(src,i).Format());
+            return dst.ToString();
         }
     }
 }

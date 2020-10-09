@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    using api = DbArchives;
+    using api = DbFiles;
 
     public interface IDbPaths
     {

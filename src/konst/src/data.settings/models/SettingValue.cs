@@ -36,7 +36,7 @@ namespace Z0
             if(config.FormatAsJson)
                 return string.Concat(Name.Enquote(), Chars.Colon, Chars.Space, Value.Enquote());
             else
-                return $"{Name}: {Value}";
+                return Render.setting(Name,Value);
         }
 
         public string Format()

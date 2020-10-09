@@ -18,16 +18,6 @@ namespace Z0
                 => new ArchivedTable<T>(src);
 
         [MethodImpl(Inline)]
-        public static DataFlow<Rowset<T>,ArchivedTable<T>> archived<T,M,K>(Rowset<T> src, TableArchive dst, M m = default)
-            where T : struct
-            where M : struct, IDataModel
-            where K : unmanaged, Enum
-        {
-            var path = FS.dir(dst.Root.Name) + FS.folder(m.Name) + FS.file(typeof(T).Name);
-            return (src, new ArchivedTable<T>(path));
-        }
-
-        [MethodImpl(Inline)]
         public static DataFlow<Rowset<T>, ArchivedTable<T>> archived<T>(Rowset<T> src, FS.FilePath dst)
             where T : struct
                 => (src, new ArchivedTable<T>(dst));

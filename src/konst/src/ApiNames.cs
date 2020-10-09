@@ -121,8 +121,10 @@ namespace Z0
 
         public const string MemoryStore = A.memory + dot + store;
 
-        public const string TextEncoders = A.text + dot + "encoders";
+        public const string TextEncoders = A.text + dot + encoders;
 
         public const string StringTables = data + dot + "stringtables";
+
+        public const string DbFiles = "archives" + dot + "db";
     }
 }

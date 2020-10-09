@@ -70,7 +70,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal string ExtractProp(TextRow src)
-            => src.Text.RightOf(M.PROP_DELIMITER).Trim();
+            => src.Text.RightOfFirst(M.PROP_DELIMITER).Trim();
 
         [MethodImpl(Inline)]
         internal string ExtractProp(int index)

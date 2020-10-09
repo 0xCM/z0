@@ -8,27 +8,26 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    public readonly struct CmdOption<K,T> : ITextual
-        where K : unmanaged
+    public struct ArchiveConfig<T> : ITextual
+        where T : struct
     {
-        public K Kind {get;}
+        public FS.FolderPath Root;
 
-        public T Value {get;}
+        public T Options;
 
         [MethodImpl(Inline)]
-        public CmdOption(K kind, T value)
+        public ArchiveConfig(FolderPath root, T options)
         {
-            Kind = kind;
-            Value = value;
+            Root = FS.dir(root.Name);
+            Options = options;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdOption<K,T>((K kind, T value) src)
-            => new CmdOption<K,T>(src.kind, src.value);
-
         public string Format()
-            => Render.setting(Kind, Value);
+            => string.Format("Root:{0}{1}{2}", Root, Eol, Options);
+
+        public override string ToString()
+            => Format();
     }
 }

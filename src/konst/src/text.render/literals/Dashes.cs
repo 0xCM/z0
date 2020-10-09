@@ -8,6 +8,12 @@ namespace Z0
 
     partial struct RP
     {
+        /// <summary>
+        /// Defines the canonical setting format
+        /// </summary>
+        [StringLiteral(Setting, 2)]
+        public const string Setting = "{0}:{1}";
+
         [StringLiteral(Dash2, 1)]
         public const string Dash1 = Dash;
 

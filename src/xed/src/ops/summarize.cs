@@ -16,7 +16,7 @@ namespace Z0
         [Op]
         public static XedPatternRow summary(in XedPattern src)
         {
-            var modidx = src.Parts.TryFind(x => x.StartsWith(MODIDX)).MapValueOrDefault(x => x.RightOf(ASSIGN).Trim(), EmptyString);
+            var modidx = src.Parts.TryFind(x => x.StartsWith(MODIDX)).MapValueOrDefault(x => x.RightOfFirst(ASSIGN).Trim(), EmptyString);
             return new XedPatternRow(
                 Class: src.Class,
                 Category: src.Category,

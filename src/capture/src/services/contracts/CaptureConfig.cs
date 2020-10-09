@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public class CaptureConfig : SettingValues<CaptureConfig>
+    public class CaptureConfig : JsonSettings<CaptureConfig>
     {
         public ISettingSource Ops => this;
 

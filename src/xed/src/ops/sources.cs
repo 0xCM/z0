@@ -16,7 +16,7 @@ namespace Z0
             => Archives.list(FS.dir(config.SourceRoot.Name),"*.*", true);
 
         [MethodImpl(Inline), Op]
-        public static XedSourceArchive SourceArchive(FS.FolderPath root)
-            => new XedSourceArchive(root);
+        public static XedSources SourceArchive(FS.FolderPath root)
+            => new XedSources(root);
     }
 }

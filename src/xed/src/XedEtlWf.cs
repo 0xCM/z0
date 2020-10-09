@@ -30,11 +30,9 @@ namespace Z0.Xed
 
         readonly IWfShell Wf;
 
-        readonly XedSourceArchive Source;
+        readonly XedSources Source;
 
-        readonly XedStageArchive Stage;
-
-        readonly IDbArchive Target2;
+        readonly XedStage Stage;
 
         readonly ITableArchive Target;
 
@@ -44,9 +42,8 @@ namespace Z0.Xed
             Config = config;
             Settings = config.Settings;
             Source = XedWfOps.SourceArchive(Config.SourceRoot);
-            Stage = XedStageArchive.Create(Config.ExtractRoot);
-            Target2 = Wf.Db();
-            Target = DbArchives.tables(wf, "xed");
+            Stage = XedStage.Create(Wf.Db().StageRoot("xed"));
+            Target = DbFiles.tables(wf, "xed");
             Wf.Created(typeof(XedEtlWf));
         }
 
@@ -120,18 +117,6 @@ namespace Z0.Xed
         XedPatternRow[] Filter(XedPatternRow[] src, xed_cat match)
             => src.Where(p => p.Category == XedConst.Name(match)).ToArray();
 
-        void SaveExtensions2(XedPatternRow[] src)
-        {
-            foreach(var selected in Config.Extensions)
-            {
-                var filtered = Filter(src, selected);
-                var subject = Config.ExtensionFolder.Name;
-                var type = Config.DataFileExt;
-                var id = XedConst.Name(selected);
-                Target2.deposit<F,R,string>(filtered, id, subject, type);
-            }
-
-        }
 
         void SaveExtensions(XedPatternRow[] src)
         {
@@ -142,19 +127,6 @@ namespace Z0.Xed
             }
         }
 
-        void SaveCategories2(XedPatternRow[] src)
-        {
-            foreach(var selected in Config.Categories)
-            {
-                var filtered = Filter(src, selected);
-                var subject = Config.CategoryFolder.Name;
-                var type = Config.DataFileExt;
-                var id = XedConst.Name(selected);
-                Target2.deposit<F,R,string>(filtered, id, subject, type);
-            }
-
-
-        }
         void SaveCategories(XedPatternRow[] src)
         {
             foreach(var selected in Config.Categories)

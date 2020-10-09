@@ -18,6 +18,16 @@ namespace Z0
 
         FS.FolderPath TableRoot();
 
+        FS.FolderPath SourceRoot();
+
+        FS.FolderPath StageRoot();
+
+        FS.FolderPath SourceRoot<S>(S subject)
+            => SourceRoot() + FS.folder(subject.ToString());
+
+        FS.FolderPath StageRoot<S>(S subject)
+            => StageRoot() + FS.folder(subject.ToString());
+
         FS.FilePath Document<S>(string id, S subject, FS.FileExt type);
 
         FS.FilePath Table<S>(string id, S subject, string type = null);

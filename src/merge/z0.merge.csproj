@@ -11,6 +11,7 @@
     <ProjectReference Include="$(AsmServices)" />
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(BitVectors)" />
+    <ProjectReference Include="$(Xed)" />
   </ItemGroup>
 
 </Project>
