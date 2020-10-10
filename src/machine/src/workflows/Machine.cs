@@ -44,7 +44,7 @@ namespace Z0
             {
                 //ProcessPartFiles.create().Run(Wf, AsmContextProvider.create(State.Asm));
                 EmitFieldMetadata.create().Run(Wf);
-                EmitSectionHeadersHost.create().Run(Wf);
+                EmitSectionHeaders.create().Run(Wf);
                 EmitImageConstants.create().Run(Wf);
                 EmitLocatedPartsHost.create().Run(Wf);
                 EmitStringRecords.create().Run(Wf);

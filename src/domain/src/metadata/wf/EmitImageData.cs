@@ -54,7 +54,6 @@ namespace Z0
             Host = host;
             Part = part;
             BaseAddress = ProcessImages.@base(Part);
-            //TargetPath = FS.dir((wf.ResourceRoot + FolderName.Define("images")).Name) + FS.file(Part.Format(), FS.ext("csv"));
             TargetPath = Wf.Db().Table(ImageDataRecord.TableId, part.Id);
             Formatter = Formatters.data(BaseAddress);
             Offset = 0;

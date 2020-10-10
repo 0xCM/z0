@@ -11,9 +11,9 @@ namespace Z0
     using static EmitPartStrings;
     using static z;
 
-    using F = CliStringField;
-    using W = CliStringFieldWidth;
-
+    using F = CliStringRecord.Fields;
+    using W = CliStringRecord.RenderWidths;
+    using R = CliStringRecord;
 
     [WfHost]
     public sealed class EmitPartStrings : WfHost<EmitPartStrings>
@@ -23,8 +23,8 @@ namespace Z0
         public static WfStepId StepId
             => WfCore.step<EmitPartStrings>();
 
-        public static string ExtName(PartStringKind kind)
-            => (kind == PartStringKind.System ? CliStringRecords.SystemKindExt : CliStringRecords.UserKindExt).ToLower();
+        public static string ExtName(R.Kind kind)
+            => (kind == R.Kind.System ? CliStringRecords.SystemKindExt : CliStringRecords.UserKindExt).ToLower();
     }
 
     ref struct EmitPartStringsStep
@@ -38,16 +38,16 @@ namespace Z0
 
         readonly IPart Part;
 
-        readonly PartStringKind StringKind;
+        readonly R.Kind StringKind;
 
         readonly FS.FilePath TargetPath;
 
         [MethodImpl(Inline)]
-        public EmitPartStringsStep(IWfShell wf, IPart part, PartStringKind sk, FolderPath dir, CorrelationToken ct)
+        public EmitPartStringsStep(IWfShell wf, IPart part, R.Kind sk, FolderPath dir, CorrelationToken ct)
         {
             Wf = wf;
             Part = part;
-            if(sk == PartStringKind.System)
+            if(sk == R.Kind.System)
                 TargetPath = Wf.Paths.Table(CliSystemStringRecord.TableId, string.Concat(part.Id.Format(), Chars.Dot, CliSystemStringRecord.DataType));
             else
                 TargetPath = Wf.Paths.Table(CliUserStringRecord.TableId, string.Concat(part.Id.Format(), Chars.Dot, CliUserStringRecord.DataType));
@@ -91,7 +91,7 @@ namespace Z0
         {
             Wf.Running(StepId);
 
-            if(StringKind == PartStringKind.System)
+            if(StringKind == R.Kind.System)
                 ReadSystemStrings();
             else
                 ReadUserStrings();

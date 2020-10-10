@@ -10,9 +10,19 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using F = ImageSectionHeaderField;
+    using F = ImageSectionHeader.Fields;
 
-    public readonly ref struct EmitSectionHeaders
+    [WfHost]
+    public sealed class EmitSectionHeaders : WfHost<EmitSectionHeaders>
+    {
+        protected override void Execute(IWfShell wf)
+        {
+            using var step = new EmitSectionHeadersStep(wf.WithHost(this), this);
+            step.Run();
+        }
+    }
+
+    readonly ref struct EmitSectionHeadersStep
     {
         readonly IWfShell Wf;
 
@@ -20,28 +30,28 @@ namespace Z0
 
         readonly IPart[] Parts;
 
-        readonly FilePath TargetPath;
+        readonly FS.FilePath TargetPath;
 
         [MethodImpl(Inline)]
-        public EmitSectionHeaders(IWfShell wf, WfHost host)
+        public EmitSectionHeadersStep(IWfShell wf, WfHost host)
         {
             Wf = wf;
             Host = host;
             Parts = Wf.Api.Storage;
-            TargetPath = wf.ResourceRoot + FileName.define("z0", "pe.csv");
+            TargetPath = wf.Db().Table(ImageSectionHeader.TableId, "headers");
             Wf.Created(Host, TargetPath);
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
 
         public void Run()
         {
             var pCount = Parts.Length;
             var total = 0u;
-            Wf.Running(Host, pCount);
+            Wf.Running(pCount);
 
             var formatter = Formatters.dataset<F>();
             using var writer = TargetPath.Writer();
@@ -56,7 +66,7 @@ namespace Z0
 
                 for(var i=0; i<count; i++)
                 {
-                    format(z.skip(records,i), formatter);
+                    ImageSectionHeader.format(z.skip(records,i), formatter);
                     writer.WriteLine(formatter.Render());
                 }
                 total += count;
@@ -65,16 +75,6 @@ namespace Z0
             Wf.Ran(Host, delimit(pCount, total));
         }
 
-        static void format(in ImageSectionHeader src, DatasetFormatter<F> dst)
-        {
-            dst.Delimit(F.FileName, src.File);
-            dst.Delimit(F.Section, src.SectionName);
-            dst.Delimit(F.Address, src.RawData);
-            dst.Delimit(F.Size, src.RawDataSize);
-            dst.Delimit(F.EntryPoint, src.EntryPoint);
-            dst.Delimit(F.CodeBase, src.CodeBase);
-            dst.Delimit(F.Gpt, src.GptRva);
-            dst.Delimit(F.GptSize, src.GptSize);
-        }
+
     }
 }

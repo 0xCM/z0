@@ -15,7 +15,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CliReader : IDisposable
+    public readonly struct CliFileReader : IDisposable
     {
         readonly FS.FilePath Source;
 
@@ -27,7 +27,7 @@ namespace Z0
 
         public PEMemoryBlock MetadataBlock {get;}
 
-        public CliReader(FS.FilePath src)
+        public CliFileReader(FS.FilePath src)
         {
             Source = src;
             Stream = File.OpenRead(src.Name);

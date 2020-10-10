@@ -29,8 +29,8 @@ namespace Z0
                 => ClrCmdHost<T>.create();
 
         [MethodImpl(Inline)]
-        static ImageMap Reader(IWfShell wf, FS.FilePath src)
-            => ImageMap.create(wf, src);
+        static CliMemoryReader Reader(IWfShell wf, FS.FilePath src)
+            => CliMemoryReader.create(wf, src);
 
         public static ReadOnlySpan<CliAssemblyReferenceRecord> exec(IWfShell wf, in EmitAssemblyReferences cmd)
         {

@@ -49,6 +49,8 @@ namespace Z0
 
         public ApiContext ApiContext {get;}
 
+        public WfHost Host {get; private set;}
+
         [MethodImpl(Inline)]
         public WfShell(WfInit config)
         {
@@ -71,12 +73,23 @@ namespace Z0
             Random = default;
             Broker = new WfBroker(WfSink, Ct);
             ApiContext = new ApiContext(new ApiContextState(Modules));
+            Host = new WfHost(typeof(WfShell), typeof(WfShell), Launch);
         }
+
+        static void Launch(IWfShell wf)
+            => throw no<WfShell>();
 
         [MethodImpl(Inline)]
         public IWfShell WithSource(IPolyrand random)
         {
             Random = random;
+            return this;
+        }
+
+        [MethodImpl(Inline)]
+        public IWfShell WithHost(WfHost host)
+        {
+            Host = host;
             return this;
         }
 

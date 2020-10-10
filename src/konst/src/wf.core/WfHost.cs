@@ -10,8 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using L = WfStepLaunchers;
-
     public readonly struct WfHost : IWfHost<WfHost>
     {
         public WfStepId Id {get;}
@@ -20,7 +18,7 @@ namespace Z0
 
         public StringRef Name {get;}
 
-        public L.Launch Launcher {get;}
+        public WfStepLauncher Launcher {get;}
 
         public string Identifier
         {
@@ -33,7 +31,7 @@ namespace Z0
             => src.Id;
 
         [MethodImpl(Inline)]
-        public WfHost(WfStepId id, Type type, L.Launch launch)
+        public WfHost(WfStepId id, Type type, WfStepLauncher launch)
         {
             Id =id;
             Type = type;

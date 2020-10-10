@@ -21,7 +21,7 @@ namespace Z0
 
         public Count Sequence;
 
-        public CliStringSource Source;
+        public CliStringRecord.Source Source;
 
         public ByteSize HeapSize;
 
@@ -32,7 +32,7 @@ namespace Z0
         public string Content;
 
         [MethodImpl(Inline)]
-        public CliSystemStringRecord(Count seq, CliStringSource src, ByteSize heap, Address32 offset, string data)
+        public CliSystemStringRecord(Count seq, CliStringRecord.Source src, ByteSize heap, Address32 offset, string data)
         {
             Sequence = seq;
             Source = src;

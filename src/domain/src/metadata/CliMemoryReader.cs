@@ -15,7 +15,7 @@ namespace Z0
     using static z;
 
     [ApiHost, Free]
-    public unsafe partial class ImageMap : ICliImageReader
+    public unsafe partial class CliMemoryReader : ICliImageReader
     {
         readonly IWfShell Wf;
 
@@ -31,7 +31,7 @@ namespace Z0
 
         public PEMemoryBlock CliMetadata {get;}
 
-        public ImageMap(IWfShell wf, FS.FilePath src)
+        public CliMemoryReader(IWfShell wf, FS.FilePath src)
         {
             Source = MemoryFile.open(src.Name);
             Wf = wf;
@@ -42,8 +42,8 @@ namespace Z0
             CliMetadata = PeReader.GetMetadata();
         }
 
-        public static ImageMap create(IWfShell wf, FS.FilePath src)
-            => new ImageMap(wf,src);
+        public static CliMemoryReader create(IWfShell wf, FS.FilePath src)
+            => new CliMemoryReader(wf,src);
 
         public void Dispose()
         {

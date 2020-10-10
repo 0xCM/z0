@@ -118,7 +118,7 @@ namespace Z0
         {
             const string Pattern = "{0,-8} | {1,-16} | {2}";
             var header = string.Format(Pattern,"Index", "Offset", "Name");
-            using var reader = ImageMap.create(Wf,FS.path(@"J:\dev\projects\z0-starters\bin\lib\netcoreapp3.1\z0.res.capture.dll"));
+            using var reader = CliMemoryReader.create(Wf,FS.path(@"J:\dev\projects\z0-starters\bin\lib\netcoreapp3.1\z0.res.capture.dll"));
             var src = reader.ManifestResourceDescriptions();
             var count = src.Length;
             if(count != 0)
@@ -152,7 +152,7 @@ namespace Z0
         {
             var root = FS.dir(@"K:\z0\builds\nca.3.1.win-x64");
             var path = root + FS.file("z0.data.dll");
-            using var reader = ImageMap.create(Wf, path);
+            using var reader = CliMemoryReader.create(Wf, path);
 
             var items = reader.ResourceAddresses();
             var count = items.Length;

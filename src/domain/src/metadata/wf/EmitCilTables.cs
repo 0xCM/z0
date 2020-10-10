@@ -71,13 +71,11 @@ namespace Z0
             Wf.Running(Host, delimit(PartCount, EmissionCount));
         }
 
-
-
         uint Emit(IPart part, FS.FilePath dst)
         {
             Wf.Running(Host);
 
-            var methods = CliReader.cil(part.Id, FS.path(part.Owner.Location));
+            var methods = CliFileReader.cil(part.Id, FS.path(part.Owner.Location));
             var count = (uint)methods.Length;
             using var writer = dst.Writer();
             writer.WriteLine(Header);

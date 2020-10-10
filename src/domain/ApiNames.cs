@@ -4,20 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public enum LocatedImageField : ushort
+    using System;
+
+    using static ApiNameAtoms;
+
+    readonly struct ApiNames
     {
-        ImageName = 60,
-
-        PartId = 12,
-
-        EntryAddress = 16,
-
-        BaseAddress = 16,
-
-        EndAddress = 16,
-
-        Size = 10,
-
-        Gap = 10
+        public const string EnumCatalog = "enums.catalogs";
     }
 }

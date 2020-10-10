@@ -29,7 +29,7 @@ namespace Z0
         public StringRef Name
             => Host.Name;
 
-        public WfStepLaunchers.Launch Launcher
+        public WfStepLauncher Launcher
             => Host.Launcher;
 
         [MethodImpl(Inline)]

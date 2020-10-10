@@ -58,7 +58,7 @@ namespace Z0
         uint EmitUserStrings(IPart part)
         {
             var dst = Wf.ResourceRoot + FolderName.Define(UserTargetFolder);
-            using var emitter = new EmitPartStringsStep(Wf, part, PartStringKind.User, dst, Wf.Ct);
+            using var emitter = new EmitPartStringsStep(Wf, part, CliStringRecord.Kind.User, dst, Wf.Ct);
             emitter.Run();
             return emitter.EmissionCount;
         }
@@ -66,7 +66,7 @@ namespace Z0
         uint EmitSystemStrings(IPart part)
         {
             var dst = Wf.ResourceRoot + FolderName.Define(SystemTargetFolder);
-            using var emitter = new EmitPartStringsStep(Wf, part, PartStringKind.System, dst, Wf.Ct);
+            using var emitter = new EmitPartStringsStep(Wf, part, CliStringRecord.Kind.System, dst, Wf.Ct);
             emitter.Run();
             return emitter.EmissionCount;
         }

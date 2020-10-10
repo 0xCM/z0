@@ -85,7 +85,7 @@ namespace Z0
             var system = SystemImages;
             var count = src.Count;
             var images = src.View;
-            var fields = Table.columns<LocatedImageField>();
+            var fields = Table.columns<LocatedImageSummary.Fields>();
             var header = Table.header(fields);
             var summaries = span<LocatedImageSummary>(count);
 

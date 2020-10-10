@@ -26,7 +26,7 @@ namespace Z0
             var i=0;
             do
             {
-                values.Add(new CliSystemStringRecord(seq: i++, CliStringSource.System, size, (Address32)reader.GetHeapOffset(handle), reader.GetString(handle)));
+                values.Add(new CliSystemStringRecord(seq: i++, CliStringRecord.Source.System, size, (Address32)reader.GetHeapOffset(handle), reader.GetString(handle)));
                 handle = reader.GetNextHandle(handle);
             }
             while (!handle.IsNil);

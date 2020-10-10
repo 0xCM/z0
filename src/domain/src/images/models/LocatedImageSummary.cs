@@ -10,6 +10,23 @@ namespace Z0
     [StructLayout(LayoutKind.Sequential)]
     public struct LocatedImageSummary
     {
+        public enum Fields : ushort
+        {
+            ImageName = 60,
+
+            PartId = 12,
+
+            EntryAddress = 16,
+
+            BaseAddress = 16,
+
+            EndAddress = 16,
+
+            Size = 10,
+
+            Gap = 10
+        }
+
         public StringRef ImageId;
 
         public PartId PartId;

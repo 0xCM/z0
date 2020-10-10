@@ -18,8 +18,10 @@ namespace Z0
     {
         protected override void Execute(IWfShell wf)
         {
-            using var step = new EmitLocatedParts(wf, this);
+            using var step = new EmitLocatedParts(wf.WithHost(this), this);
+            wf.Running();
             step.Run();
+            wf.Ran();
         }
     }
 
@@ -47,17 +49,17 @@ namespace Z0
             TargetDir = wf.ResourceRoot + FolderName.Define("images");
             var process = Process.GetCurrentProcess();
             Images = process.Modules.Cast<ProcessModule>().Map(ProcessImages.locate).OrderBy(x => x.BaseAddress);
-            Wf.Created(Host);
+            wf.Created();
+
         }
 
         public void Dispose()
         {
-             Wf.Disposed(Host);
+             Wf.Disposed();
         }
 
         public void Run()
         {
-             Wf.Running(Host);
              var count = Parts.Length;
 
              Index = span<LocatedPart>(count);
@@ -72,8 +74,6 @@ namespace Z0
              }
 
             EmitImageSummariesHost.create(Images).Run(Wf);
-
-            Wf.Ran(Host);
         }
     }
 }

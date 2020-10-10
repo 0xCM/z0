@@ -10,11 +10,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct WfStepLaunchers
-    {
-        public delegate void Launch(IWfShell wf);
+    public delegate void WfStepLauncher(IWfShell wf);
 
-        public delegate void Launch<H>(IWfShell wf, H host)
-            where H : IWfHost<H>,new();
-    }
+    public delegate void WfStepLauncher<H>(IWfShell wf, H host)
+        where H : IWfHost<H>,new();
+
 }

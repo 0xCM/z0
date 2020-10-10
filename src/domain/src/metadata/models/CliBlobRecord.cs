@@ -19,6 +19,28 @@ namespace Z0
 
         public const byte FieldCount = 4;
 
+        public enum Fields : ushort
+        {
+            Sequence = 0,
+
+            HeapSize = 1,
+
+            Offset = 2,
+
+            Value = 3,
+        }
+
+        public enum RenderWidths : ushort
+        {
+            Sequence = 12,
+
+            HeapSize = 12,
+
+            Offset = 12,
+
+            Value = 30,
+        }
+
         public Count Seq;
 
         public ByteSize HeapSize;
@@ -37,25 +59,5 @@ namespace Z0
         }
     }
 
-    public enum CliBlobField : ushort
-    {
-        Sequence = 0,
 
-        HeapSize = 1,
-
-        Offset = 2,
-
-        Value = 3,
-    }
-
-    public enum CliBlobFieldWidth : ushort
-    {
-        Sequence = 12,
-
-        HeapSize = 12,
-
-        Offset = 12,
-
-        Value = 30,
-    }
 }

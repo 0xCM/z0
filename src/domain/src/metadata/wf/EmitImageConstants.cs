@@ -11,8 +11,8 @@ namespace Z0
     using static RP;
     using static z;
 
-    using F = CliConstantField;
-    using W = CliConstantFieldWidth;
+    using F = CliConstantRecord.Fields;
+    using W = CliConstantRecord.RenderWidths;
 
     [WfHost]
     public sealed class EmitImageConstants : WfHost<EmitImageConstants>

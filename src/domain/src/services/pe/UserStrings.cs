@@ -27,7 +27,7 @@ namespace Z0
 
             do
             {
-                values.Add(new CliUserStringRecord(seq: i++, CliStringSource.User, size, offset(reader,handle), ustring(reader,handle)));
+                values.Add(new CliUserStringRecord(seq: i++, CliStringRecord.Source.User, size, offset(reader,handle), ustring(reader,handle)));
                 handle = reader.GetNextHandle(handle);
             }
             while (!handle.IsNil);

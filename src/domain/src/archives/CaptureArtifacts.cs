@@ -43,7 +43,7 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        readonly ImageMap ClrReader;
+        readonly CliMemoryReader ClrReader;
 
         readonly WfHost Host;
 
@@ -53,7 +53,7 @@ namespace Z0
         {
             Wf = wf;
             SourcePath = src;
-            ClrReader = ImageMap.create(wf,src);
+            ClrReader = CliMemoryReader.create(wf,src);
             Host = WfSelfHost.create(typeof(CaptureResourceReader));
             Resources = ClrReader.ManifestResourceDescriptions();
         }
