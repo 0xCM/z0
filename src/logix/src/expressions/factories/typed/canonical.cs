@@ -20,7 +20,7 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static LiteralExpr<T> @true<T>()
             where T : unmanaged
-                => As.maxval<T>();
+                => AsDeprecated.maxval<T>();
 
         /// <summary>
         /// Defines a 128-bit cpu vector where all bits are on

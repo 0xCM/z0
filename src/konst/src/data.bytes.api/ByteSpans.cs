@@ -18,6 +18,10 @@ namespace Z0
             => comment(new ByteSpanProperty(uri.Identifier, src).Format());
 
         [MethodImpl(Inline), Op]
+        public static string property(BasedCodeBlock src, OpIdentity id)
+            => comment(new ByteSpanProperty(LegalIdentityBuilder.code(id), src).Format());
+
+        [MethodImpl(Inline), Op]
         public static string comment(string text)
             =>  $"; {text}";
 

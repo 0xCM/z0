@@ -59,7 +59,7 @@ namespace Z0
         void vsllv_check<T>(W256 w, T t = default)
             where T : unmanaged
         {
-            var domain = Interval.closed(As.zero(t),force<uint,T>((uint)bitwidth(t) - 1));
+            var domain = Interval.closed(AsDeprecated.zero(t),force<uint,T>((uint)bitwidth(t) - 1));
 
             Pair<Vector256<T>> @case(uint i)
             {

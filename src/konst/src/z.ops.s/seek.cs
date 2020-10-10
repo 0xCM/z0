@@ -12,7 +12,6 @@ namespace Z0
 
     partial struct z
     {
-
         /// <summary>
         /// Advances an S-reference in units measured by T-cells and returns
         /// the resulting T-cell reference
@@ -27,7 +26,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T seek<T>(Span<byte> src, uint count)
-            =>  ref seek<byte,T>(skip(src,count*size<T>()), 1);
+            => ref seek<byte,T>(skip(src,count*size<T>()), 1);
 
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
@@ -132,13 +131,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref T seek<T>(in T src, int offset)
             => ref Add(ref edit(src), offset);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T regress<T>(in T src, byte offset)
-            => ref Add(ref edit(src), -offset);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref T regress<T>(in T src, ushort offset)
-            => ref Add(ref edit(src), -offset);
     }
 }

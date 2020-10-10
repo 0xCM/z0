@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         /// <summary>
         /// Converts a <see cref='bool'/> to a <see cref='byte'/>
@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline), Op]
         public static unsafe byte @byte(bool src)
-            => (*((byte*)(&src))); 
+            => (*((byte*)(&src)));
     }
 }

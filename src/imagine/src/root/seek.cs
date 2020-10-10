@@ -13,6 +13,6 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, int count)
-            => ref As.seek(src, (uint)count);
+            => ref AsDeprecated.seek(src, (uint)count);
     }
 }

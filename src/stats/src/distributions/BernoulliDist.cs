@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
-    using static As;
+    using static AsDeprecated;
 
     /// <summary>
     /// Realizes a Bernoulli distribution
@@ -17,7 +17,7 @@ namespace Z0
     /// <typeparam name="T">The sample element type</typeparam>
     public class BernoulliDist<T> : Distribution<BernoulliSpec<T>,T>
         where T : unmanaged
-    {    
+    {
         static readonly T Zero = zero<T>();
 
         static readonly T One = one<T>();
@@ -33,7 +33,7 @@ namespace Z0
             {
                 var success = fmath.lt(Polyrand.Next<double>(), Spec.Success) ? One : Zero;
                 yield return success;
-            }            
-        }           
+            }
+        }
     }
 }

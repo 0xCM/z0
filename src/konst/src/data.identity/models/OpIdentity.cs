@@ -97,6 +97,7 @@ namespace Z0
         IIdentifiedOp<OpIdentity> Identified
             => this;
 
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]

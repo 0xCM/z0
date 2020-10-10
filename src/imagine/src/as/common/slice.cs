@@ -9,8 +9,8 @@ namespace Z0
 
     using static Konst;
     using static System.Runtime.InteropServices.MemoryMarshal;
-    
-    partial struct As
+
+    partial struct AsDeprecated
     {
         /// <summary>
         /// Selects a segment [offset, length(src) - 1] from a source span src:ReadOnlySpan[T]
@@ -94,6 +94,6 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> slice<T>(Span<T> src, uint offset, uint length)
-            => CreateSpan(ref seek(first(src), offset), (int)length);            
+            => CreateSpan(ref seek(first(src), offset), (int)length);
     }
 }

@@ -9,9 +9,9 @@ namespace Z0
 
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
-    
-    partial struct As
-    {         
+
+    partial struct AsDeprecated
+    {
         /// <summary>
         /// Skips a specified number of 8-bit source segments and returns a reference to the located cell
         /// </summary>

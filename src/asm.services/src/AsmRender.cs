@@ -29,7 +29,7 @@ namespace Z0.Asm
             lines.Add(comment($"{src.OpSig}, {src.Uri}"));
 
             if(config.EmitFunctionHeaderEncoding)
-                lines.Add(ByteSpans.property(src.Code.Code, src.MetaUri));
+                lines.Add(ByteSpans.property(src.Code.Code, src.Uri.OpId));
             else
                 lines.Add(comment(src.Code.Uri.OpId));
 

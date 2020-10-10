@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static As;
+    using static AsDeprecated;
 
     partial class BitGrid
-    {        
+    {
         /// <summary>
         /// Extracts a sequence of bits
         /// </summary>

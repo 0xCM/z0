@@ -3,13 +3,13 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0.Logix
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
 
     using static Konst;
-    using static As;
+    using static AsDeprecated;
     using static Root;
 
     public class Survey
@@ -32,9 +32,9 @@ namespace Z0.Logix
                 var choices = new QuestionChoice<T>[width];
                 var choiceId = one<T>();
                 for(var j = 0u; j< width; j++)
-                {                    
+                {
                     choices[j] = Choice(choiceId, ChoiceLabel(j));
-                    choiceId = gmath.sll(choiceId, (byte)1);                    
+                    choiceId = gmath.sll(choiceId, (byte)1);
                 }
                 questions[i] = Question(questionId, $"Question {questionId}", 1, choices);
             }
@@ -53,7 +53,7 @@ namespace Z0.Logix
                 => Template<T>(id,name, bitsize<T>(), bitsize<T>());
 
         /// <summary>
-        /// Creates a stock survey with a specified number of questions, each of which has the maximum number 
+        /// Creates a stock survey with a specified number of questions, each of which has the maximum number
         /// of choices supported by the primal type
         /// </summary>
         /// <param name="id">The survey id</param>
@@ -183,7 +183,7 @@ namespace Z0.Logix
             var dst = BitMatrix.alloc<T>();
             for(var i=0; i< rowcount; i++)
                 dst[i] = Vector(src.Answered[i]);
-            return dst;                
+            return dst;
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Z0.Logix
             var dst = BitMatrix.alloc<T>();
             for(var i=0; i< rowcount; i++)
                 dst[i] = Vector(src.Questions[i]);
-            return dst;                
+            return dst;
         }
 
         public static RowBits<T> Rows<T>(in Survey<T> src)
@@ -229,7 +229,7 @@ namespace Z0.Logix
             where T : unmanaged
         {
             var sb = text.build();
-            
+
             for(var i=0; i<src.Answered.Length; i++)
             {
                 sb.Append(src.Answered[i].QuestionId);
@@ -262,7 +262,7 @@ namespace Z0.Logix
             format.AppendLine(src.Name);
             format.AppendLine(new string(Chars.Dash,80));
             for(var i=0; i<src.Questions.Length; i++)
-                format.AppendLine(Format(src.Questions[i]));            
+                format.AppendLine(Format(src.Questions[i]));
                     return format.ToString();
         }
 
@@ -270,7 +270,7 @@ namespace Z0.Logix
         {
             var q = (int)(index / 26);
             var r = (int)(index % 26);
-            var code = Convert.ToChar(ChoiceCodes[r]);        
+            var code = Convert.ToChar(ChoiceCodes[r]);
             var label = ChoiceCodes[r].ToString();
             if(q != 0)
                 label = new string(code,q);
@@ -282,7 +282,7 @@ namespace Z0.Logix
         /// <summary>
         /// The numeric codes for the asci characters 'A' .. 'Z'
         /// </summary>
-        static ReadOnlySpan<byte> ChoiceCodes 
+        static ReadOnlySpan<byte> ChoiceCodes
             => new byte[26]{65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90};
     }
 }

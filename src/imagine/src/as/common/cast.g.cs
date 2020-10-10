@@ -9,18 +9,18 @@ namespace Z0
 
     using static Konst;
 
-    partial struct As
+    partial struct AsDeprecated
     {
-        [MethodImpl(Inline)]        
-        public static ReadOnlySpan<T> cast<S,T>(ReadOnlySpan<S> src)                
+        [MethodImpl(Inline)]
+        public static ReadOnlySpan<T> cast<S,T>(ReadOnlySpan<S> src)
             where S : struct
             where T : struct
                 => recover<S,T>(src);
 
-        [MethodImpl(Inline)]        
-        public static Span<T> cast<S,T>(Span<S> src)                
+        [MethodImpl(Inline)]
+        public static Span<T> cast<S,T>(Span<S> src)
             where S : struct
             where T : struct
-                => recover<S,T>(src); 
+                => recover<S,T>(src);
     }
 }

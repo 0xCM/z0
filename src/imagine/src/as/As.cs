@@ -3,36 +3,36 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
     using static Konst;
 
     [ApiHost]
-    public readonly partial struct As
+    public readonly partial struct AsDeprecated
     {
-        const NumericKind Closure = UnsignedInts;    
+        const NumericKind Closure = UnsignedInts;
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         internal static T[] alloc<T>(int length)
             => new T[length];
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         internal static uint size<T>()
             => (uint)Unsafe.SizeOf<T>();
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         internal static uint bitsize<T>()
             => (uint)Unsafe.SizeOf<T>() * 8;
 
-        [MethodImpl(Inline)]        
+        [MethodImpl(Inline)]
         internal static Span<T> EmptySpan<T>()
             => Span<T>.Empty;
 
         internal static Span<byte> EmptyByteSpan
         {
-            [MethodImpl(Inline)]        
+            [MethodImpl(Inline)]
             get => Span<byte>.Empty;
         }
     }
@@ -41,6 +41,6 @@ namespace Z0
     [ApiHost]
     public readonly partial struct AsInternal
     {
-        const NumericKind Closure = NumericKind.All;    
+        const NumericKind Closure = NumericKind.All;
     }
 }

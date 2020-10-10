@@ -8,7 +8,7 @@ namespace Z0
 
     using static Konst;
     using static Root;
-    using static As;
+    using static AsDeprecated;
 
     public class t_unpack : t_bitcore<t_unpack>
     {
@@ -41,7 +41,7 @@ namespace Z0
 
         public void unpack_64x64()
             => unpack_check<ulong,ulong>();
-        
+
         public void unpack_8x8_bench()
             => unpack_bench<byte,byte>();
 
@@ -73,8 +73,8 @@ namespace Z0
             for(var j=0; j< RepCount; j++)
             {
                 var src = Random.Next<S>();
-                Span<T> dst = new T[bitsize<S>()];   
-                gbits.unpack(src,dst);                     
+                Span<T> dst = new T[bitsize<S>()];
+                gbits.unpack(src,dst);
                 var bs = BitString.scalar(src);
                 for(var i = 0; i< bs.Length; i++)
                 {
@@ -102,10 +102,10 @@ namespace Z0
         {
             var opcount = RoundCount * CycleCount;
             var srcSign = NumericKinds.signed<S>() ? "i" : string.Empty;
-            var dstSign = NumericKinds.signed<T>() ? "i" : string.Empty;            
+            var dstSign = NumericKinds.signed<T>() ? "i" : string.Empty;
             var opname = $"unpack_{bitsize<S>()}{srcSign}x{bitsize<T>()}{dstSign}";
 
-            Span<T> dst = new T[bitsize<S>()];   
+            Span<T> dst = new T[bitsize<S>()];
 
             for(var i=0; i<opcount; i++)
             {

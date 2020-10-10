@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.CompilerServices.Unsafe;
     using static System.Runtime.InteropServices.MemoryMarshal;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         /// <summary>
         /// Presents a pointer as a reference

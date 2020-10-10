@@ -10,8 +10,8 @@ namespace Z0
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
 
-    partial struct As
-    {                        
+    partial struct AsDeprecated
+    {
         /// <summary>
         /// Transforms a readonly S-cell into an editable T-cell
         /// </summary>
@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T edit<S,T>(in S src)   
+        public static ref T edit<S,T>(in S src)
             => ref As<S,T>(ref AsRef(src));
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Z0
         /// <typeparam name="S">The source type</typeparam>
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
-        public static ref T edit<S,T>(in S src, ref T dst)   
+        public static ref T edit<S,T>(in S src, ref T dst)
             => ref As<S,T>(ref AsRef(src));
     }
 }

@@ -78,6 +78,6 @@ namespace Z0.Logix
         [MethodImpl(Inline)]
         public static RangeExpr<T> rangexpr<T>(T min, T max, T? step = null)
             where T : unmanaged
-                => new RangeExpr<T>(min,max,step ?? As.one<T>());
+                => new RangeExpr<T>(min,max,step ?? AsDeprecated.one<T>());
     }
 }

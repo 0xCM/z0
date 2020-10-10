@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         /// <summary>
         /// Adds an offset to a reference
@@ -42,6 +42,6 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T add<T>(in T src, uint count)
-            => ref Add(ref edit(src), (int)count);            
+            => ref Add(ref edit(src), (int)count);
     }
 }

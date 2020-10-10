@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static bool equal<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b)

@@ -11,16 +11,16 @@ namespace Z0
     using static Konst;
 
     partial class Root
-    {     
+    {
 
         [MethodImpl(Inline)]
         public static Span<byte> bytes<T>(in T src)
             where T : struct
-                => As.bytes(src);        
+                => AsDeprecated.bytes(src);
 
         [MethodImpl(Inline)]
         public static ReadOnlySpan<byte> bytes<T>(ReadOnlySpan<T> src)
             where T : struct
-                => As.bytes(src);
+                => AsDeprecated.bytes(src);
     }
 }

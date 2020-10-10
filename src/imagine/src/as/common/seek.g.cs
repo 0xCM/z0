@@ -9,11 +9,11 @@ namespace Z0
 
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
-    
-    partial struct As
-    {         
+
+    partial struct AsDeprecated
+    {
         /// <summary>
-        /// Advances an S-reference in units measured by T-cells and returns 
+        /// Advances an S-reference in units measured by T-cells and returns
         /// the resulting T-cell reference
         /// </summary>
         /// <param name="src">The data source</param>

@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
-    using static As;
+    using static AsDeprecated;
     using static Root;
 
     partial struct BitString

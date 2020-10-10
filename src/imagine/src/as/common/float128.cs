@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref decimal float128<T>(in T src)
@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static decimal? float128<T>(T? src)
             where T : unmanaged
-                => As<T?, decimal?>(ref src);            
+                => As<T?, decimal?>(ref src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<decimal> float128<T>(Span<T> src)

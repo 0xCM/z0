@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         /// <summary>
         /// Skips a specified number of source elements and returns a readonly reference to the result
@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(in T src, byte count)
-            => ref Add(ref edit(in src), (int)count); 
+            => ref Add(ref edit(in src), (int)count);
 
         /// <summary>
         /// Skips a specified number of source elements and returns a readonly reference to the result
@@ -30,7 +30,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(in T src, ushort count)
-            => ref Add(ref edit(in src), (int)count); 
+            => ref Add(ref edit(in src), (int)count);
 
         /// <summary>
         /// Skips a specified number of source elements and returns a readonly reference to the result
@@ -40,7 +40,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(in T src, uint count)
-            => ref Add(ref edit(in src), (int)count); 
+            => ref Add(ref edit(in src), (int)count);
 
         /// <summary>
         /// Skips a specified number of source elements and returns a readonly reference to the result
@@ -50,8 +50,8 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(in T src, ulong count)
-            => ref Add(ref edit(in src), (int)count); 
- 
+            => ref Add(ref edit(in src), (int)count);
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, byte count)
             => ref skip(in first(src), count);
@@ -67,7 +67,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, ulong count)
             => ref skip(in first(src), count);
-    
+
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(Span<T> src, byte count)
             => ref skip(in first(src), count);
@@ -82,6 +82,6 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T skip<T>(Span<T> src, ulong count)
-            => ref skip(in first(src), count);                        
+            => ref skip(in first(src), count);
     }
 }

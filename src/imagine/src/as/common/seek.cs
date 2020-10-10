@@ -9,9 +9,9 @@ namespace Z0
 
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
-    
-    partial struct As
-    {         
+
+    partial struct AsDeprecated
+    {
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
         /// </summary>
@@ -27,7 +27,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T seek<T>(Span<T> src, uint offset)
-            => ref add(first(src), (int)offset);            
+            => ref add(first(src), (int)offset);
 
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
@@ -37,7 +37,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, byte offset)
-            => ref add(first(src), offset);            
+            => ref add(first(src), offset);
 
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
@@ -47,7 +47,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, ushort offset)
-            => ref add(first(src), offset);            
+            => ref add(first(src), offset);
 
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell

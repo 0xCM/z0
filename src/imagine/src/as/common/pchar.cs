@@ -9,14 +9,14 @@ namespace Z0
 
     using static Konst;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         /// <summary>
         /// Retrieves a pointer to a string that, hopefully (shouldn't)  move
         /// </summary>
         /// <param name="src">The source string</param>
         [MethodImpl(Inline), Op]
-        public static unsafe char* pchar(string src) 
+        public static unsafe char* pchar(string src)
             => gptr(first(span(src)));
     }
 }

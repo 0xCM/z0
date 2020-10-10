@@ -9,11 +9,11 @@ namespace Z0
 
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
-    
-    partial struct As
-    {         
+
+    partial struct AsDeprecated
+    {
         /// <summary>
-        /// Adds an offset, measured by 32-bit segments, to a source reference and presents the cell 
+        /// Adds an offset, measured by 32-bit segments, to a source reference and presents the cell
         /// at the offset as an unsigned integer of bit-width <see cref='W64'/>
         /// </summary>
         /// <param name="src">The data source</param>
@@ -24,7 +24,7 @@ namespace Z0
             => ref Add(ref As<T,ulong>(ref edit(src)), (int)count);
 
         /// <summary>
-        /// Adds a specified offset count, measured by 64-bit segments, to the leading cell of a source span 
+        /// Adds a specified offset count, measured by 64-bit segments, to the leading cell of a source span
         /// and returns the offset cell as an unsigned integer of bit-width <see cref='W64'/>
         /// </summary>
         /// <param name="src">The source span</param>

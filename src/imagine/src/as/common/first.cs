@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.CompilerServices.Unsafe;
     using static System.Runtime.InteropServices.MemoryMarshal;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         /// <summary>
         /// Returns a reference to the head of a readonly span
@@ -39,7 +39,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly byte first<T>(W8 w, ReadOnlySpan<T> src)
             where T : unmanaged
-                => ref As<T,byte>(ref GetReference(src));    
+                => ref As<T,byte>(ref GetReference(src));
 
         /// <summary>
         /// Presents the span head as a readonly reference to an unsigned 16-bit integer
@@ -79,7 +79,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte first<T>(W8 w, Span<T> src)
             where T : unmanaged
-                => ref As<T,byte>(ref GetReference(src));    
+                => ref As<T,byte>(ref GetReference(src));
 
         /// <summary>
         /// Presents the span head as a reference to an unsigned 16-bit integer

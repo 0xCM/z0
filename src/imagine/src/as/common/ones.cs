@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         /// <summary>
         /// Ones all bits each and every ... one

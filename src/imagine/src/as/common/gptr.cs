@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         [MethodImpl(Inline)]
         public unsafe static T* gptr<T>(ReadOnlySpan<T> src)
@@ -22,7 +22,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Presents a readonly reference to an unmanaged value as a pointer displaced 
+        /// Presents a readonly reference to an unmanaged value as a pointer displaced
         /// by a specified element offset
         /// </summary>
         /// <param name="src">The memory reference</param>
@@ -31,7 +31,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe T* gptr<T>(in T src, int offset)
             where T : unmanaged
-                => refptr(ref edit(in skip(in src, (uint)offset)));            
+                => refptr(ref edit(in skip(in src, (uint)offset)));
 
         /// <summary>
         /// Presents a readonly reference to an unmanaged value as a pointer
@@ -54,6 +54,6 @@ namespace Z0
         public static unsafe T* gptr<S,T>(in S src)
             where S : unmanaged
             where T : unmanaged
-                => (T*)AsPointer(ref edit(src));                
+                => (T*)AsPointer(ref edit(src));
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.CompilerServices.Unsafe;
     using static System.Runtime.InteropServices.MemoryMarshal;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         /// <summary>
         /// Presents the span head as a reference to an unsigned 64-bit integer
@@ -40,6 +40,6 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op]
         public static ref readonly long first64i(ReadOnlySpan<byte> src)
-            => ref first(src.AsInt64());                
+            => ref first(src.AsInt64());
     }
 }

@@ -503,8 +503,8 @@ namespace Z0
                 return (force<T>(int.MinValue/2), force<T>(int.MaxValue/2));
             else
             {
-                var min = NumericKinds.signed<T>() ? gmath.negate(gmath.sra(As.maxval<T>(), 1)) : As.minval<T>();
-                var max = NumericKinds.signed<T>() ? gmath.sra(As.maxval<T>(), 1)  : As.maxval<T>();
+                var min = NumericKinds.signed<T>() ? gmath.negate(gmath.sra(AsDeprecated.maxval<T>(), 1)) : AsDeprecated.minval<T>();
+                var max = NumericKinds.signed<T>() ? gmath.sra(AsDeprecated.maxval<T>(), 1)  : AsDeprecated.maxval<T>();
                 return (min,max);
             }
         }

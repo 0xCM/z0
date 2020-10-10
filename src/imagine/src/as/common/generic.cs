@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    
+
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref Func<T,T,T> generic<T>(in Func<sbyte,sbyte,sbyte> src)
@@ -82,11 +82,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T generic<T>(char src)
-            => As<char,T>(ref src);                 
+            => As<char,T>(ref src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T generic<T>(bool src)
-            => As<bool,T>(ref src);                 
+            => As<bool,T>(ref src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T generic<T>(sbyte src)
@@ -126,11 +126,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T generic<T>(double src)
-            => As<double,T>(ref src);            
+            => As<double,T>(ref src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T generic<T>(decimal src)
-            => As<decimal,T>(ref src);            
+            => As<decimal,T>(ref src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T generic<T>(ref sbyte src)

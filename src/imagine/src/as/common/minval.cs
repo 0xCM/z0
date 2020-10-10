@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T minval<T>(T rep = default)

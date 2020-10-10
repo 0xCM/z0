@@ -6,11 +6,11 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ushort uint16<T>(T src)

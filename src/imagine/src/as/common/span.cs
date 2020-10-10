@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         [MethodImpl(Inline), Op]
         static ReadOnlySpan<char> span(string src)

@@ -10,8 +10,8 @@ namespace Z0
 
     using static Konst;
 
-    partial struct As
-    {        
+    partial struct AsDeprecated
+    {
         /// <summary>
         /// Presents a vector over T-cells as a vector over cells of type float64
         /// </summary>
@@ -30,6 +30,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vector256<double> v64f<T>(Vector256<T> x)
             where T : unmanaged
-                => x.AsDouble(); 
+                => x.AsDouble();
     }
 }

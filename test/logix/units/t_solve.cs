@@ -16,7 +16,7 @@ namespace Z0.Logix
             var identity = TypedIdentities.AndOverOr<uint>();
             identity.SetVar(0, 32u);
             var sln = LogicEngine.solve(identity, (0u,255u),1);
-            Claim.eq(256,sln.Count);        
+            Claim.eq(256,sln.Count);
         }
 
         public void solve_and_over_or_u32_2vars()
@@ -34,10 +34,10 @@ namespace Z0.Logix
         void check_identity_sln<T>(ComparisonExpr<T> identity, T min, T max)
             where T : unmanaged
         {
-            var count = convert<T,int>(gmath.add(gmath.sub(max, min), As.one<T>()));
+            var count = convert<T,int>(gmath.add(gmath.sub(max, min), AsDeprecated.one<T>()));
             var expect = gmath.square(count);
             var sln = LogicEngine.solve(identity, (min,max));
-            Claim.eq(expect,sln.Count);            
+            Claim.eq(expect,sln.Count);
         }
     }
 }

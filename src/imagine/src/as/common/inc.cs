@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         /// <summary>
         /// lea rax,[rcx+n] where n = 1,2,4,8
@@ -24,7 +24,7 @@ namespace Z0
                 => ++pSrc;
 
         /// <summary>
-        /// For n=1: movsxd rax,edx => add rax,rcx 
+        /// For n=1: movsxd rax,edx => add rax,rcx
         /// For n=2,4,2: lea rax,[rcx+rax*n]
         /// </summary>
         /// <param name="pSrc"></param>
@@ -33,7 +33,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe T* add<T>(T* pSrc, int count)
             where T : unmanaged
-                =>  pSrc + count; 
+                =>  pSrc + count;
 
         /// <summary>
         /// Increments a reference by a unit
@@ -46,6 +46,6 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T inc<T>(in T src)
-            => ref Add(ref edit(src), 1);                
+            => ref Add(ref edit(src), 1);
     }
 }

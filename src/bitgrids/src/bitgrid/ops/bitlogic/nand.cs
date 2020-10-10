@@ -8,10 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static As;
+    using static AsDeprecated;
 
     partial class BitGrid
-    {                
+    {
         /// <summary>
         /// Computes the bitwise nand between generic bitgrids
         /// </summary>
@@ -112,7 +112,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vnand<T>(x,y);    
+                => gvec.vnand<T>(x,y);
 
         /// <summary>
         /// Computes the bitwise nand between natural bitgrids
@@ -125,7 +125,7 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
             where M : unmanaged, ITypeNat
-                => gvec.vnand<T>(x,y);    
+                => gvec.vnand<T>(x,y);
 
         /// <summary>
         /// Computes the bitwise NAND between natural bitgrids and stores the result to a caller-supplied target
@@ -158,7 +158,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
         {
-            var gz = alloc<M,N,T>();    
+            var gz = alloc<M,N,T>();
             nand(x,y,gz);
             return gz;
         }

@@ -7,13 +7,13 @@ namespace Z0
     using System;
 
     public class t_ntz : t_bitcore<t_ntz>
-    {        
+    {
         public void ntz_outline()
         {
             Claim.Eq((byte)3, gbits.ntz((byte)0b111000));
             Claim.Eq(2u, gbits.ntz(0b0001011000100u));
             Claim.Eq(5u, gbits.ntz(0b000101100000u));
-            Claim.Eq(3ul, gbits.ntz(Pow2.pow(3)));            
+            Claim.Eq(3ul, gbits.ntz(Pow2.pow(3)));
         }
 
         public void ntz_8()
@@ -27,7 +27,7 @@ namespace Z0
 
         public void ntz_64()
             => ntz_check<ulong>();
- 
+
         protected void ntz_check<T>(T t = default)
             where T : unmanaged
         {
@@ -36,7 +36,7 @@ namespace Z0
                 var x = Random.Next<T>();
                 var ntzX = gbits.ntz(x);
                 var y = BitString.scalar(x);
-                var ntzY = As.generic<T>(y.Ntz());
+                var ntzY = AsDeprecated.generic<T>(y.Ntz());
 
                 if(gmath.neq(ntzX, ntzY))
                 {
@@ -47,7 +47,7 @@ namespace Z0
                 Claim.Eq(ntzX, ntzY);
             }
         }
- 
+
     }
 
 }

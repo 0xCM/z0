@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static System.Runtime.InteropServices.MemoryMarshal;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         /// <summary>
         /// Covers a pointer-identified T-counted buffer with a span
@@ -42,7 +42,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> cover<T>(in T src, int count)
-            => CreateSpan(ref edit(src), count);    
+            => CreateSpan(ref edit(src), count);
 
         /// <summary>
         /// Covers a reference-identified T-counted buffer with a span
@@ -52,7 +52,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<T> cover<T>(in T src, uint count)
-            => CreateSpan(ref edit(src), (int)count);    
+            => CreateSpan(ref edit(src), (int)count);
 
         /// <summary>
         /// Creates a span over a sequence of T-cells from a specified number of S-cells

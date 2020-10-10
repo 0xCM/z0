@@ -38,9 +38,9 @@ namespace Z0
         {
             var lo = x.Lo;
             if(lo != 0)
-                return As.generic<T>(gbits.ntz(lo.Data));
+                return AsDeprecated.generic<T>(gbits.ntz(lo.Data));
             else
-                return As.generic<T>(gmath.add(gbits.ntz(x.Hi.Data), 64ul));
+                return AsDeprecated.generic<T>(gmath.add(gbits.ntz(x.Hi.Data), 64ul));
         }
 
         /// <summary>

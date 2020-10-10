@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         /// <summary>
         /// Presents generic reference as a generic pointer
@@ -21,7 +21,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe T* refptr<T>(ref T src)
             where T : unmanaged
-                => (T*)AsPointer(ref src); 
+                => (T*)AsPointer(ref src);
 
         /// <summary>
         /// Presents generic reference as a generic pointer displaced by an element offset

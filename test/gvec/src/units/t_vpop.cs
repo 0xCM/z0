@@ -40,7 +40,7 @@ namespace Z0
 
             void check()
             {
-                var zed = As.zero(t);
+                var zed = AsDeprecated.zero(t);
                 var src = Random.Blocks<T>(w, Interval.closed(zed, maxval(t)),3);
 
                 (var x0, var x1, var x2) = src.LoadVectors(0,1,2);
@@ -55,7 +55,7 @@ namespace Z0
                 Claim.eq(expect,result);
             }
 
-            CheckAction(check, CaseName(f));            
+            CheckAction(check, CaseName(f));
         }
 
         void vpop_check<T>(N256 w, T t = default)
@@ -80,7 +80,7 @@ namespace Z0
                 Claim.eq(expect,result);
             }
 
-            CheckAction(check, CaseName(f));            
+            CheckAction(check, CaseName(f));
         }
     }
 }

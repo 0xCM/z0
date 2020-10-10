@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct As
+    partial struct AsDeprecated
     {
         [MethodImpl(Inline)]
         public static T zero<T>(T t = default)

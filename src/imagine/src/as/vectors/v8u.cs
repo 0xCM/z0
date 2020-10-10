@@ -10,8 +10,8 @@ namespace Z0
 
     using static Konst;
 
-    partial struct As
-    {        
+    partial struct AsDeprecated
+    {
         /// <summary>
         /// Presents a vector over T-cells as a vector over i8 cells
         /// </summary>

@@ -11,13 +11,13 @@ namespace Z0
 
     partial class Memories
     {
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static ref float float32<T>(ref T src)
-            => ref As.float32(ref src);
+            => ref AsDeprecated.float32(ref src);
 
-        [MethodImpl(Inline)]   
+        [MethodImpl(Inline)]
         public static float? float32<T>(T? src)
             where T : unmanaged
-                => As.float32(src);
+                => AsDeprecated.float32(src);
     }
 }

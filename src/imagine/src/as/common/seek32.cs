@@ -9,11 +9,11 @@ namespace Z0
 
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
-    
-    partial struct As
-    {         
+
+    partial struct AsDeprecated
+    {
         /// <summary>
-        /// Adds an offset, measured by segments of bit-width <see cref='W64'/>, to a source reference and presents the cell 
+        /// Adds an offset, measured by segments of bit-width <see cref='W64'/>, to a source reference and presents the cell
         /// at the offset as an unsigned integer of bit-width <see cref='W64'/>
         /// </summary>
         /// <param name="src">The data source</param>

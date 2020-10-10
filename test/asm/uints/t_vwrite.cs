@@ -35,8 +35,8 @@ namespace Z0
         {
             const string Buffer = "                                                                                                                                ";
 
-            var pDst = As.pchar(Buffer);
-            var pSrc = As.gptr(first(src));
+            var pDst = AsDeprecated.pchar(Buffer);
+            var pSrc = AsDeprecated.gptr(first(src));
             var count = Math.Min(src.Length, Buffer.Length);
             for(var i=0; i<count; i++)
                 *pDst++ = *pSrc++;

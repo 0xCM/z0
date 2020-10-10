@@ -9,8 +9,8 @@ namespace Z0
 
     using static Konst;
     using static System.Runtime.CompilerServices.Unsafe;
-    
-    partial struct As
+
+    partial struct AsDeprecated
     {
         /// <summary>
         /// Skips a specified number of 16-bit source segments and returns a reference to the located cell
@@ -42,4 +42,4 @@ namespace Z0
         public static ref ulong skip64<T>(in T src, uint count)
             => ref Add(ref edit<T,ulong>(src), (int)count);
     }
-}   
+}
