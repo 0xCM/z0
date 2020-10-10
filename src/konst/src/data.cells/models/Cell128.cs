@@ -15,9 +15,28 @@ namespace Z0
 
     public readonly struct Cell128 : IDataCell<F,W128,Vector128<ulong>>
     {
+        [MethodImpl(Inline)]
+        public static Cell128 scalar<T>(T src)
+            where T : unmanaged
+                => create(vscalar(w128,src));
+
+        [MethodImpl(Inline)]
+        public static Cell128 create<T>(Vector128<T> src)
+            where T : unmanaged
+                => new Cell128(v64u(src));
+
+        [MethodImpl(Inline)]
+        public static Cell128 create((ulong x0, ulong x1) x)
+            => new Cell128(x.x0, x.x1);
+
+        [MethodImpl(Inline)]
+        public static Cell128 create(in ConstPair<ulong> x)
+            => new Cell128(x.Left,x.Right);
+
         internal readonly Vector128<ulong> Data;
 
-        public CellKind Kind => CellKind.Cell128;
+        public CellKind Kind
+            => CellKind.Cell128;
 
         public Vector128<ulong> Content
         {
@@ -44,67 +63,12 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static Cell128 From<T>(Vector128<T> src)
-            where T : unmanaged
-                => new Cell128(v64u(src));
-
-        [MethodImpl(Inline)]
-        public static Cell128 From((ulong x0, ulong x1) x)
-            => new Cell128(x.x0,x.x1);
-
-        [MethodImpl(Inline)]
-        public static Cell128 From(in ConstPair<ulong> x)
-            => new Cell128(x.Left,x.Right);
-
-        [MethodImpl(Inline)]
         public Cell128(Vector128<ulong> src)
             => Data = src;
 
         [MethodImpl(Inline)]
         Cell128(ulong x0, ulong x1)
-        {
-            Data = Vector128.Create(x0,x1);
-        }
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell128((ulong x0, ulong x1) x)
-            => From(x);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell128(in ConstPair<ulong> x)
-            => From(x);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell128(Vector128<byte> x)
-            => From(x);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell128(Vector128<ushort> x)
-            => From(x);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell128(Vector128<uint> x)
-            => From(x);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Cell128(Vector128<ulong> x)
-            => From(x);
-
-        [MethodImpl(Inline)]
-        public static implicit operator Vector128<byte>(Cell128 x)
-            => x.Data.AsByte();
-
-        [MethodImpl(Inline)]
-        public static implicit operator Vector128<ushort>(Cell128 x)
-            => x.Data.AsUInt16();
-
-        [MethodImpl(Inline)]
-        public static implicit operator Vector128<uint>(Cell128 x)
-            => x.Data.AsUInt32();
-
-        [MethodImpl(Inline)]
-        public static implicit operator Vector128<ulong>(Cell128 x)
-            => x.Data.AsUInt64();
+            => Data = vparts(w128, x0,x1);
 
         [MethodImpl(Inline)]
         public bool Equals(Cell128 src)
@@ -137,5 +101,53 @@ namespace Z0
 
         public static Cell128 Empty
             => default;
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell128((ulong x0, ulong x1) x)
+            => create(x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell128(in ConstPair<ulong> x)
+            => create(x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell128(Vector128<byte> x)
+            => create(x);
+
+        [MethodImpl(Inline)]
+        public static explicit operator Cell128(ushort src)
+            => create(z.vscalar(w128,src));
+
+        [MethodImpl(Inline)]
+        public static explicit operator ushort(Cell128 src)
+            => vcell(v16u(src.Data),0);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell128(Vector128<ushort> x)
+            => create(x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell128(Vector128<uint> x)
+            => create(x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Cell128(Vector128<ulong> x)
+            => create(x);
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector128<byte>(Cell128 x)
+            => x.Data.AsByte();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector128<ushort>(Cell128 x)
+            => x.Data.AsUInt16();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector128<uint>(Cell128 x)
+            => x.Data.AsUInt32();
+
+        [MethodImpl(Inline)]
+        public static implicit operator Vector128<ulong>(Cell128 x)
+            => x.Data.AsUInt64();
     }
 }

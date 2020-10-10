@@ -126,5 +126,9 @@ namespace Z0
         public const string StringTables = data + dot + "stringtables";
 
         public const string DbFiles = "archives" + dot + "db";
+
+        const string signatures = nameof(signatures);
+
+        public const string CellFxSig = cells + dot + functions + dot + signatures;
     }
 }

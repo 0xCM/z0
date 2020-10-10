@@ -18,7 +18,6 @@ namespace Z0
         EnumScalarKind KeyKind {get;}
 
         ReadOnlySpan<string> KeyNames {get;}
-
     }
 
     [Free]
@@ -51,7 +50,6 @@ namespace Z0
     {
         new ReadOnlySpan<EnumLiteralDetail<K,P>> KeyIndex
             => Enums.values<K,P>().Content;
-
     }
 
     [Free]
