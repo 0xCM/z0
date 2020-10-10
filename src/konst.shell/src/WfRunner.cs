@@ -7,6 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.IO;
+    using System.Runtime;
 
     using static z;
     using static Konst;
@@ -110,8 +114,7 @@ namespace Z0
         FS.FilePath AppDataPath(FS.FileName file)
             => Wf.AppData + file;
 
-        [Op]
-        public void Run()
+        void Run89()
         {
             const string Pattern = "{0,-8} | {1,-16} | {2}";
             var header = string.Format(Pattern,"Index", "Offset", "Name");
@@ -133,5 +136,19 @@ namespace Z0
             Wf.Status(Host, allres.Length);
 
         }
+
+        [Op]
+        public void Run()
+        {
+            var archive = RuntimeArchive.create();
+            var resolver = new PathAssemblyResolver(archive.Libraries.Select(x => x.Name.Text));
+            using var context = new MetadataLoadContext(resolver);
+            iter(archive.ManagedLibraries, path => context.LoadFromAssemblyPath(path.Name));
+            iter(context.GetAssemblies(), c => Wf.Status(Host, c.GetSimpleName()));
+
+            //iter(archive.Libraries, x => Wf.Status(Host, x));
+
+        }
+
     }
 }

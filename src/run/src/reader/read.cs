@@ -9,14 +9,40 @@ namespace Z0
     using System;
     using System.IO;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using PEReader = System.Reflection.PortableExecutable.PEReader;
 
     using static Konst;
     using static z;
 
-    using static ImageTables;
+    // using static ImageTables;
     using static ImageLiterals;
+
+    public readonly struct ImageLiterals
+    {
+        public const ushort Magical = 0x5A4D;
+
+        public const byte SigOffset = 0x3C;
+
+        public const uint SigExpect = 0x00004550;
+
+        public const byte ImageDataDirectoryCount = 15;
+
+        public const byte ComDataDirectory = 14;
+
+        public const byte DebugDataDirectory = 6;
+
+        public const byte IMAGE_SIZEOF_SHORT_NAME = 8;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct DirectoryEntry
+    {
+        public uint RelativeVirtualAddress;
+
+        public uint Size;
+    }
 
     public partial struct ImageReader
     {
@@ -72,17 +98,5 @@ namespace Z0
             return count;
         }
 
-        public static Outcome read(ImageStream src, out ImageHeader dst)
-        {
-            dst = default;
-            try
-            {
-                return PeStreamReader.create(src).Read(out dst);
-            }
-            catch(Exception e)
-            {
-                return e;
-            }
-        }
     }
 }
