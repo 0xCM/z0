@@ -14,7 +14,6 @@
     <ProjectReference Include="$(Polyrand)" />
     <ProjectReference Include="$(Identify)" />
     <ProjectReference Include="$(Dynamic)" />
-    <ProjectReference Include="$(Fixed)" />
     <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(CheckDynamic)" />
 

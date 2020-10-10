@@ -7,9 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static System.Runtime.CompilerServices.Unsafe;
+    using static Part;
 
-    partial struct z
+    partial struct As
     {
         /// <summary>
         /// Presents generic reference as a generic pointer
@@ -17,10 +18,10 @@ namespace Z0
         /// <param name="src">The memory reference</param>
         /// <typeparam name="T">The reference type</typeparam>
         /// <remarks>For all T, effects: mov rax,rcx</remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe T* refptr<T>(ref T src)
             where T : unmanaged
-                => As.refptr(ref src);
+                => (T*)AsPointer(ref src);
 
         /// <summary>
         /// Presents generic reference as a generic pointer displaced by an element offset
@@ -35,10 +36,10 @@ namespace Z0
         /// width[T]=32: movsxd rax,edx => lea rax,[rcx+rax*4]
         /// width[T]=64: movsxd rax,edx => lea rax,[rcx+rax*8]
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe T* refptr<T>(ref T src, int offset)
             where T : unmanaged
-                => As.refptr(ref src, offset);
+                => (T*)AsPointer(ref Add(ref src, offset));
 
         /// <summary>
         /// Presents a generic reference r:T as a generic pointer p:T
@@ -50,6 +51,6 @@ namespace Z0
         public static unsafe P* refptr<T,P>(ref T r)
             where T : unmanaged
             where P : unmanaged
-                => As.refptr<T,P>(ref r);
+                => (P*)AsPointer(ref r);
     }
 }

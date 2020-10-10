@@ -7,14 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static Part;
+    using static System.Runtime.CompilerServices.Unsafe;
 
-    partial struct z
+    partial struct As
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe T* gptr<T>(in T src)
             where T : unmanaged
-                => As.gptr(src);
+                => (T*)AsPointer(ref edit(src));
 
         /// <summary>
         /// Presents a readonly reference to an unmanaged value as a pointer displaced
@@ -23,15 +24,15 @@ namespace Z0
         /// <param name="src">The memory reference</param>
         /// <param name="offset">The number of elements to skip</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe T* gptr<T>(in T src, int offset)
             where T : unmanaged
-                => As.gptr(src,offset);
+                => refptr(ref edit(in skip(in src, (uint)offset)));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public unsafe static T* gptr<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => As.gptr(src);
+                => (T*)AsPointer(ref edit(first(src)));
 
         /// <summary>
         /// Presents a generic reference r:T as a generic pointer p:T
@@ -43,6 +44,6 @@ namespace Z0
         public static unsafe T* gptr<S,T>(in S src)
             where S : unmanaged
             where T : unmanaged
-                => As.gptr<S,T>(src);
+                => (T*)AsPointer(ref edit(src));
     }
 }

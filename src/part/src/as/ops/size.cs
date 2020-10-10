@@ -7,10 +7,10 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Part;
     using static System.Runtime.CompilerServices.Unsafe;
-    using static Konst;
 
-    partial struct z
+    partial struct As
     {
         [MethodImpl(Inline), Op]
         public static byte scale<T>()
@@ -27,21 +27,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static uint size(string src)
             => (uint)src.Length*scale<char>();
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static byte size<T>(W8 w)
-            => (byte)SizeOf<T>();
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ushort size<T>(W16 w)
-            => (ushort)SizeOf<T>();
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static uint size<T>(W32 w)
-            => (uint)SizeOf<T>();
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ulong size<T>(W64 w)
-            => (ulong)SizeOf<T>();
     }
 }

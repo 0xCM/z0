@@ -7,13 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static Part;
     using static System.Runtime.CompilerServices.Unsafe;
 
-    using static Konst;
-
-    partial struct z
+    partial struct As
     {
-
         /// <summary>
         /// Adds an offset to a reference
         /// </summary>
@@ -26,9 +24,9 @@ namespace Z0
         /// u32: movsxd rax,edx -> lea rax,[rcx+rax*4]
         /// u64: movsxd rax,edx -> lea rax,[rcx+rax*8]
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T add<T>(in T src, int count)
-            => ref As.add(src,count);
+            => ref Add(ref edit(src), count);
 
         /// <summary>
         /// Adds an offset to a reference
@@ -42,9 +40,9 @@ namespace Z0
         /// u32: movsxd rax,edx -> lea rax,[rcx+rax*4]
         /// u64: movsxd rax,edx -> lea rax,[rcx+rax*8]
         /// </remarks>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T add<T>(in T src, uint count)
-            => ref As.add(src,count);
+            => ref Add(ref edit(src), (int)count);
 
         /// <summary>
         /// Adds an offset to a reference
@@ -52,9 +50,9 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="count">The T-cell count to add</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T add<T>(in T src, byte count)
-            => ref As.add(src,count);
+            => ref Add(ref edit(src), (int)count);
 
         /// <summary>
         /// Adds an offset to a reference
@@ -62,9 +60,9 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="count">The T-cell count to add</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T add<T>(in T src, ushort count)
-            => ref As.add(src,count);
+            => ref Add(ref edit(src), (int)count);
 
         /// <summary>
         /// Adds an offset to a reference
@@ -72,8 +70,8 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="count">The T-cell count to add</param>
         /// <typeparam name="T">The reference type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T add<T>(in T src, ulong count)
-            => ref As.add(src,count);
+            => ref Add(ref edit(src), (int)count);
     }
 }
