@@ -38,6 +38,9 @@ namespace Z0
 
         ApiContext ApiContext {get;}
 
+        LogLevel Verbosity
+            => LogLevel.Info;
+
         FS.FolderPath ArchiveRoot
             => FS.dir(@"k:\z0\archives");
 
@@ -129,7 +132,10 @@ namespace Z0
             => Raise(created(tool, Ct));
 
         void Created(WfStepId id)
-            => Raise(created(id, Ct));
+        {
+            if(Verbosity == LogLevel.Babble)
+                Raise(created(id, Ct));
+        }
 
         void Created<T>(WfStepId id, T content)
             => Raise(created(id, content, Ct));
@@ -143,7 +149,10 @@ namespace Z0
                 => Raise(created(host.Id, step, Ct));
 
         void Disposed(WfStepId step)
-            => Raise(disposed(step, Ct));
+        {
+            if(Verbosity == LogLevel.Babble)
+                Raise(disposed(step, Ct));
+        }
 
         void Disposed<T>(WfStepId step, T payload)
             => Raise(disposed(step, payload, Ct));
@@ -156,7 +165,10 @@ namespace Z0
         // ~ ---------------------------------------------------------------------------
 
         void Running(WfStepId step)
-            => Raise(running(step, Ct));
+        {
+            if(Verbosity == LogLevel.Babble)
+                Raise(running(step, Ct));
+        }
 
         void Running<T>(WfStepId step, T content)
             => Raise(running(step, content, Ct));
@@ -174,7 +186,10 @@ namespace Z0
             => Raise(new RanEvent<T>(step, content, Ct));
 
         void Ran(WfStepId step)
-            => Raise(new RanEvent(step, Ct));
+        {
+            if(Verbosity == LogLevel.Babble)
+                Raise(new RanEvent(step, Ct));
+        }
 
         void Ran<H,T>(H host, T content)
             where H : IWfHost<H>, new()

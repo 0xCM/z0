@@ -141,38 +141,43 @@ namespace Z0
             Wf.Raise(new CilDataSaved(Host, HostUri, src.Length, CilDataPath, Ct));
         }
 
-        void SaveDecoded(ReadOnlySpan<AsmRoutine> src, FS.FilePath dst)
-        {
-            var count = src.Length;
-            if(count != 0)
-            {
-                using var writer = dst.Writer();
-                var buffer = Buffers.text();
+        // void SaveDecoded(ReadOnlySpan<AsmRoutine> src, FS.FilePath dst)
+        // {
+        //     var count = src.Length;
+        //     if(count != 0)
+        //     {
+        //         using var writer = dst.Writer();
+        //         var buffer = Buffers.text();
 
-                for(var i=0; i<count; i++)
-                {
-                    ref readonly var routine = ref skip(src,i);
-                    AsmRender.format(routine, AsmFormat, buffer);
-                    writer.Write(buffer.Emit());
-                }
-            }
-
-            // using var writer = State.CWf.Context.AsmWriter(FS.path(dst.Name));
-            // writer.WriteAsm(src);
-        }
+        //         for(var i=0; i<count; i++)
+        //         {
+        //             ref readonly var routine = ref skip(src,i);
+        //             AsmRender.format(routine, AsmFormat, buffer);
+        //             writer.Write(buffer.Emit());
+        //         }
+        //     }
+        // }
 
         void DecodeMembers()
         {
-            var host = DecodeApiMembers.create(State.CWf.Context, HostUri);
-            var decoded = host.Run(Wf, ParsedBlocks, out var _).Storage;
-            if(decoded.Length != 0)
+            var host = EmitHostAsm.create(State.CWf.Context, HostUri, AsmPath);
+            host.Run(Wf, ParsedBlocks, out var decoded);
+            if(decoded.Count != 0)
             {
-                SaveDecoded(decoded, AsmPath);
-                Wf.Status(Host, text.format(RP.PSx3, decoded.Length,HostUri.Format(), AsmPath.ToUri()));
-
-                using var match = new MatchAddressesStep(State, new MatchAddresses(), Extracts, decoded, Ct);
+                using var match = new MatchAddressesStep(State, new MatchAddresses(), Extracts, decoded.Storage, Ct);
                 match.Run();
             }
+
+            // var host = DecodeApiMembers.create(State.CWf.Context, HostUri);
+            // var decoded = host.Run(Wf, ParsedBlocks, out var _).Storage;
+            // if(decoded.Length != 0)
+            // {
+            //     SaveDecoded(decoded, AsmPath);
+            //     Wf.Status(Host, text.format(RP.PSx3, decoded.Length,HostUri.Format(), AsmPath.ToUri()));
+
+            //     using var match = new MatchAddressesStep(State, new MatchAddresses(), Extracts, decoded, Ct);
+            //     match.Run();
+            // }
         }
     }
 }

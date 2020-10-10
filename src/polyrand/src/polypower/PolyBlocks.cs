@@ -8,7 +8,7 @@ namespace Z0
 
     using B = SpanBlocks;
 
-    public static partial class PolyBlocks
+    public static class PolyBlocks
     {
         /// <summary>
         /// Allocates and fills specified number of 8-bit blocks

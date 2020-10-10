@@ -9,7 +9,7 @@ namespace Z0
     using W = DataWidth;
 
     [Flags]
-    public enum SegKind : ushort
+    public enum SegmentKind : ushort
     {
         /// <summary>
         /// Classifier that classifies nothing
