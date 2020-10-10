@@ -18,7 +18,7 @@ namespace Z0
             => new BinaryJudgement<T>(a,b,result);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static SequenceJudgement<T> sequence<T>(BinaryJudgement<T>[] src)
-            => new SequenceJudgement<T>(src);
+        public static SequenceJudgement<T> sequence<T>(BinaryJudgement<T>[] src, bit result)
+            => new SequenceJudgement<T>(src, result);
     }
 }

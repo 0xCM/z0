@@ -14,7 +14,7 @@ namespace Z0
         {
             try
             {
-                using var wf = Polyrand.install(WfCore.shell(args));
+                using var wf = Polyrand.install(WfShell.shell(args));
                 var app = Apps.context(wf);
                 var asm = new AsmContext(app, wf);
                 var cstate = new WfCaptureState(wf, asm);

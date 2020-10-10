@@ -31,7 +31,7 @@ namespace Z0
         }
 
         protected Shell()
-            : this(WfCore.context())
+            : this(WfShell.context())
         {
 
         }

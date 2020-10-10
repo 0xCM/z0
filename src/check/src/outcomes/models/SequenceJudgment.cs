@@ -13,8 +13,8 @@ namespace Z0
     public readonly struct SequenceJudgement
     {
         [MethodImpl(NotInline)]
-        public static SequenceJudgement<T> alloc<T>(uint count)
-            => new SequenceJudgement<T>(new BinaryJudgement<T>[count]);
+        public static SequenceJudgement<T> alloc<T>(uint count, bit result)
+            => new SequenceJudgement<T>(new BinaryJudgement<T>[count], result);
     }
 
     public struct SequenceJudgement<T> : ISequenceJudgement<SequenceJudgement<T>,BinaryJudgement<T>>
@@ -24,7 +24,7 @@ namespace Z0
         public bit Result;
 
         [MethodImpl(Inline)]
-        public SequenceJudgement(BinaryJudgement<T>[] src, bit result = default)
+        internal SequenceJudgement(BinaryJudgement<T>[] src, bit result)
         {
             Result = result;
             Data = src;

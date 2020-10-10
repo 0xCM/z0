@@ -12,29 +12,9 @@ namespace Z0
     public interface IWfInit
     {
         /// <summary>
-        /// The configured api set
-        /// </summary>
-        SystemApiCatalog Api {get;}
-
-        /// <summary>
         /// The context root
         /// </summary>
         IShellContext Shell {get;}
-
-        /// <summary>
-        /// The controlling part
-        /// </summary>
-        PartId ControlId {get;}
-
-        /// <summary>
-        /// The controlling arguments, in raw form as supplied by the entry point or caller
-        /// </summary>
-        string[] Args {get;}
-
-        /// <summary>
-        /// The parts considered by the workflow
-        /// </summary>
-        PartId[] PartIdentities {get;}
 
         /// <summary>
         /// The input data archive configuration
@@ -42,41 +22,58 @@ namespace Z0
         ApiPartSet Modules {get;}
 
         /// <summary>
-        /// The output data archive configuration
+        /// The configured api set
         /// </summary>
-        ArchiveConfig TargetArchive {get;}
+        SystemApiCatalog Api
+            => Modules.Api;
 
         /// <summary>
-        /// The persistent settings supplied by a json.config
+        /// The controlling part
         /// </summary>
-        WfSettings Settings {get;}
+        PartId ControlId
+            => Part.ExecutingPart;
+
+        /// <summary>
+        /// The output data archive configuration
+        /// </summary>
+        ArchiveConfig TargetArchive
+            => new ArchiveConfig(FS.dir(Paths.LogRoot.Name) + FS.folder("capture/artifacts"));
+
+        /// <summary>
+        /// The configured paths
+        /// </summary>
+        IShellPaths Paths
+            => Shell.Paths;
+
+        /// <summary>
+        /// The parts considered by the workflow
+        /// </summary>
+        PartId[] PartIdentities
+            => WfShell.parts(Args, Api.PartIdentities);
 
         /// <summary>
         /// The resource staging area
         /// </summary>
-        ArchiveConfig Resources {get;}
+        ArchiveConfig Resources
+            => new ArchiveConfig(Paths.ResourceRoot);
 
         /// <summary>
-        /// The application-specific data root
+        /// The persistent settings supplied by a json.config
         /// </summary>
-        ArchiveConfig AppData {get;}
+        WfSettings Settings
+            => WfShell.settings(Shell);
 
         /// <summary>
         /// The specified log configuration
         /// </summary>
-        WfLogConfig Logs {get;}
+        WfLogConfig Logs
+            => new WfLogConfig(ControlId, Shell.Paths.AppLogRoot);
 
         /// <summary>
-        /// The application-specific status log path
+        /// The controlling arguments, in raw form as supplied by the entry point or caller
         /// </summary>
-        FS.FilePath StatusPath
-            => Logs.StatusLog;
-
-        /// <summary>
-        /// The application-specific error log path
-        /// </summary>
-        FS.FilePath ErrorPath
-            => Logs.ErrorLog;
+        string[] Args
+             => Shell.Args;
 
         FS.FolderPath ResDir
             => Resources.Root;

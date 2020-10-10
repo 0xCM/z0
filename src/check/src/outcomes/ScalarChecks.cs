@@ -24,7 +24,7 @@ namespace Z0
         public static SequenceJudgement<T> eq<T>(ReadOnlySpan<T> a, ReadOnlySpan<T> b)
             where T : unmanaged, IEquatable<T>
         {
-            var dst = SequenceJudgement.alloc<T>((uint)a.Length);
+            var dst = SequenceJudgement.alloc<T>((uint)a.Length, true);
             return eq(a,b, ref dst);
         }
     }

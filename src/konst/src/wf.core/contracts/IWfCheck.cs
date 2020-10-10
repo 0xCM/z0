@@ -5,12 +5,8 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
-    partial struct WfCore
+    public interface IWfShellCheck : IWfShell
     {
 
     }

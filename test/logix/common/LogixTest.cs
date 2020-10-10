@@ -17,6 +17,7 @@ namespace Z0.Logix
 
     using BL = BinaryBitLogicKind;
 
+
     public abstract class LogixTest<X> : UnitTest<X, CheckVectorBits, ICheckVectorBits>
         where X : LogixTest<X>
     {
@@ -24,16 +25,19 @@ namespace Z0.Logix
 
         protected void logic_op_check(BL kind, Func<Bit32,Bit32,Bit32> rule)
         {
-            var lhs = Random.BitStream32().Take(RepCount).ToArray();
-            var rhs = Random.BitStream32().Take(RepCount).ToArray();
-            for(var i=0; i<RepCount; i++)
-            {
-                var a = lhs[i];
-                var b = rhs[i];
-                var expect = rule(a,b);
-                var actual = bitlogix.Evaluate(kind, a,b);
-                Claim.Eq(expect, actual);
-            }
+            var check = BinaryBitLogixCheck.create(kind,rule, (uint)RepCount, Random);
+            Claim.yea(check.Run().Result);
+
+            // var lhs = Random.BitStream32().Take(RepCount).ToArray();
+            // var rhs = Random.BitStream32().Take(RepCount).ToArray();
+            // for(var i=0; i<RepCount; i++)
+            // {
+            //     var a = lhs[i];
+            //     var b = rhs[i];
+            //     var expect = rule(a,b);
+            //     var actual = bitlogix.Evaluate(kind, a,b);
+            //     Claim.Eq(expect, actual);
+            // }
         }
 
         protected void logic_expr_check(BL kind, Func<Bit32,Bit32,Bit32> rule)

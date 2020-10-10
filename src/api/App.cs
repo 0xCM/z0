@@ -11,7 +11,7 @@ namespace Z0
     {
         public static int Main(params string[] args)
         {
-            using var wf = WfCore.shell(args);
+            using var wf = WfShell.shell(args);
             iter(wf.Modules.ManagedSources, m => wf.Raise(WfEvents.row(m, wf.Ct)));
             return 0;
         }

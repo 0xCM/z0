@@ -118,7 +118,7 @@ namespace Z0
             => Context.RoundCount;
 
         /// <summary>
-        /// The number of operations performed in a benchmarking expercise
+        /// The number of operations performed in a benchmarking exercise
         /// </summary>
         protected virtual int OpCount
             => RoundCount*CycleCount;

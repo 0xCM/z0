@@ -32,13 +32,19 @@ namespace Z0
 
         IWfBroker Broker {get;}
 
-        WfInit Init {get;}
+        IWfInit Init {get;}
 
         IPolyrand Random {get;}
 
         ApiContext ApiContext {get;}
 
         WfHost Host {get;}
+
+        IWfShell WithSource(IPolyrand random);
+
+        WfShell<S> WithState<S>(S src);
+
+        IWfShell WithHost(WfHost host);
 
         LogLevel Verbosity
             => LogLevel.Info;
@@ -75,12 +81,6 @@ namespace Z0
 
         IDbArchive Db()
             => new DbArchive(new ArchiveConfig(Paths.DbRoot));
-
-        IWfShell WithSource(IPolyrand random);
-
-        WfShell<S> WithState<S>(S src);
-
-        IWfShell WithHost(WfHost host);
 
         WfEventId Raise<E>(in E e)
             where E : IWfEvent

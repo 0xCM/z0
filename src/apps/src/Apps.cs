@@ -19,7 +19,7 @@ namespace Z0
             => new AppContext(wf.Paths, wf.Api, random, settings(wf.Paths), WfMsgExchange.Create(wf));
 
         public static IAppContext context()
-            => context(WfCore.modules(Assembly.GetEntryAssembly()), ShellPaths.Default);
+            => context(WfShell.modules(Assembly.GetEntryAssembly()), ShellPaths.Default);
 
         public static IAppContext context(ApiPartSet src, IShellPaths paths)
             => new AppContext(paths, src.Api, Polyrand.@default(), settings(paths), AppMsgExchange.Create());
