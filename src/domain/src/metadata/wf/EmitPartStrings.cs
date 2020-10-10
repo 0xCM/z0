@@ -11,20 +11,20 @@ namespace Z0
     using static EmitPartStrings;
     using static z;
 
-    using F = ImageStringField;
-    using W = ImageStringFieldWidth;
+    using F = CliStringField;
+    using W = CliStringFieldWidth;
 
 
     [WfHost]
     public sealed class EmitPartStrings : WfHost<EmitPartStrings>
     {
-        public const string EmissionType = ImageStringRecords.DataType;
+        public const string EmissionType = CliStringRecords.DataType;
 
         public static WfStepId StepId
             => WfCore.step<EmitPartStrings>();
 
         public static string ExtName(PartStringKind kind)
-            => (kind == PartStringKind.System ? ImageStringRecords.SystemKindExt : ImageStringRecords.UserKindExt).ToLower();
+            => (kind == PartStringKind.System ? CliStringRecords.SystemKindExt : CliStringRecords.UserKindExt).ToLower();
     }
 
     ref struct EmitPartStringsStep
@@ -48,9 +48,9 @@ namespace Z0
             Wf = wf;
             Part = part;
             if(sk == PartStringKind.System)
-                TargetPath = Wf.Paths.Table(SystemStringRecord.TableId, string.Concat(part.Id.Format(), Chars.Dot, SystemStringRecord.DataType));
+                TargetPath = Wf.Paths.Table(CliSystemStringRecord.TableId, string.Concat(part.Id.Format(), Chars.Dot, CliSystemStringRecord.DataType));
             else
-                TargetPath = Wf.Paths.Table(UserStringRecord.TableId, string.Concat(part.Id.Format(), Chars.Dot, UserStringRecord.DataType));
+                TargetPath = Wf.Paths.Table(CliUserStringRecord.TableId, string.Concat(part.Id.Format(), Chars.Dot, CliUserStringRecord.DataType));
             StringKind = sk;
             EmissionCount = 0;
             Wf.Created(StepId);
@@ -62,7 +62,7 @@ namespace Z0
         }
 
         [Op]
-        static ref readonly RecordFormatter<F,W> format(in SystemStringRecord src, in RecordFormatter<F,W> dst)
+        static ref readonly RecordFormatter<F,W> format(in CliSystemStringRecord src, in RecordFormatter<F,W> dst)
         {
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.Source, src.Source);
@@ -75,7 +75,7 @@ namespace Z0
         }
 
         [Op]
-        static ref readonly RecordFormatter<F,W> format(in UserStringRecord src, in RecordFormatter<F,W> dst)
+        static ref readonly RecordFormatter<F,W> format(in CliUserStringRecord src, in RecordFormatter<F,W> dst)
         {
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.Source, src.Source);
@@ -96,7 +96,7 @@ namespace Z0
             else
                 ReadUserStrings();
 
-            Wf.EmittedTable<SystemStringRecord>(StepId, EmissionCount,FS.path(TargetPath.Name));
+            Wf.EmittedTable<CliSystemStringRecord>(StepId, EmissionCount,FS.path(TargetPath.Name));
         }
 
         void ReadUserStrings()

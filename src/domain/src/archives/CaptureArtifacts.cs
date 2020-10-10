@@ -10,8 +10,6 @@ namespace Z0
     using static z;
     using static Konst;
 
-    using static ClrData;
-
     public interface IArchiveDoc<D,I,C> : IIdentified<I>, IContented<C>, ITextual
         where D : struct, IArchiveDoc<D,I,C>
     {
@@ -45,19 +43,19 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        readonly ImageMemoryMap ClrReader;
+        readonly ImageMap ClrReader;
 
         readonly WfHost Host;
 
-        readonly ReadOnlySpan<ManifestResourceInfo> Resources;
+        readonly ReadOnlySpan<CliManifestResourceInfo> Resources;
 
         public CaptureResourceReader(IWfShell wf, FS.FilePath src)
         {
             Wf = wf;
             SourcePath = src;
-            ClrReader = ImageMemoryMap.create(wf,src);
+            ClrReader = ImageMap.create(wf,src);
             Host = WfSelfHost.create(typeof(CaptureResourceReader));
-            Resources = ClrReader.ManifestResources();
+            Resources = ClrReader.ManifestResourceDescriptions();
         }
 
         public void Dispose()

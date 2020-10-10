@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static ImageStringRecords;
+    using static CliStringRecords;
 
     [WfHost]
     public sealed class EmitStringRecords : WfHost<EmitStringRecords>

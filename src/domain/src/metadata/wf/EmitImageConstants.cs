@@ -11,8 +11,8 @@ namespace Z0
     using static RP;
     using static z;
 
-    using F = ImageConstantField;
-    using W = ImageConstantFieldWidth;
+    using F = CliConstantField;
+    using W = CliConstantFieldWidth;
 
     [WfHost]
     public sealed class EmitImageConstants : WfHost<EmitImageConstants>
@@ -68,7 +68,7 @@ namespace Z0
             Wf.Ran(Host);
         }
 
-        ReadOnlySpan<ImageConstantRecord> Read(IPart part)
+        ReadOnlySpan<CliConstantRecord> Read(IPart part)
         {
             using var reader = PeTableReader.open(part.PartPath());
             return reader.Constants();
@@ -94,7 +94,7 @@ namespace Z0
             Wf.Ran(Host, delimit(id, count));
         }
 
-        static ref readonly RecordFormatter<F,W> format(in ImageConstantRecord src, in RecordFormatter<F,W> dst, bool eol = true)
+        static ref readonly RecordFormatter<F,W> format(in CliConstantRecord src, in RecordFormatter<F,W> dst, bool eol = true)
         {
             dst.Delimit(F.Sequence, src.Sequence);
             dst.Delimit(F.ParentId, src.ParentId);

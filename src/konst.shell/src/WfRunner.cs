@@ -118,8 +118,8 @@ namespace Z0
         {
             const string Pattern = "{0,-8} | {1,-16} | {2}";
             var header = string.Format(Pattern,"Index", "Offset", "Name");
-            using var reader = ImageMemoryMap.create(Wf,FS.path(@"J:\dev\projects\z0-starters\bin\lib\netcoreapp3.1\z0.res.capture.dll"));
-            var src = reader.ManifestResources();
+            using var reader = ImageMap.create(Wf,FS.path(@"J:\dev\projects\z0-starters\bin\lib\netcoreapp3.1\z0.res.capture.dll"));
+            var src = reader.ManifestResourceDescriptions();
             var count = src.Length;
             if(count != 0)
             {
@@ -137,14 +137,31 @@ namespace Z0
 
         }
 
-        [Op]
-        public void Run()
+        void Run64()
         {
             var archive = RuntimeArchive.create();
             var resolver = new PathAssemblyResolver(archive.Libraries.Select(x => x.Name.Text));
             using var context = new MetadataLoadContext(resolver);
             iter(archive.ManagedLibraries, path => context.LoadFromAssemblyPath(path.Name));
             iter(context.GetAssemblies(), c => Wf.Status(Host, c.GetSimpleName()));
+
+        }
+
+        [Op]
+        public void Run()
+        {
+            var root = FS.dir(@"K:\z0\builds\nca.3.1.win-x64");
+            var path = root + FS.file("z0.data.dll");
+            using var reader = ImageMap.create(Wf, path);
+
+            var items = reader.ResourceAddresses();
+            var count = items.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var item = ref skip(items,i);
+                Wf.Status(Host, item);
+            }
+
 
             //iter(archive.Libraries, x => Wf.Status(Host, x));
 

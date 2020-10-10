@@ -10,7 +10,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static ClrData;
 
     partial struct ClrCommands
     {
@@ -30,10 +29,10 @@ namespace Z0
                 => ClrCmdHost<T>.create();
 
         [MethodImpl(Inline)]
-        static ImageMemoryMap Reader(IWfShell wf, FS.FilePath src)
-            => ImageMemoryMap.create(wf, src);
+        static ImageMap Reader(IWfShell wf, FS.FilePath src)
+            => ImageMap.create(wf, src);
 
-        public static ReadOnlySpan<AssemblyReferenceData> exec(IWfShell wf, in EmitAssemblyReferences cmd)
+        public static ReadOnlySpan<CliAssemblyReferenceRecord> exec(IWfShell wf, in EmitAssemblyReferences cmd)
         {
             var host = Host(cmd);
             using var reader = Reader(wf,cmd.Source);

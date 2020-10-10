@@ -10,8 +10,6 @@ namespace Z0
     using System.Reflection.PortableExecutable;
     using System.Reflection.Metadata.Ecma335;
     using System.IO;
-    using System.Collections.Generic;
-    using System.Linq;
 
     using static Konst;
     using static z;
@@ -77,7 +75,7 @@ namespace Z0
         public static string ustring(MetadataReader reader, UserStringHandle handle)
             => reader.GetUserString(handle);
 
-        public ReadOnlySpan<ImageBlobRecord> Blobs()
+        public ReadOnlySpan<CliBlobRecord> Blobs()
             => blobs(State);
 
         internal static TableIndex? index(Handle handle)
@@ -95,14 +93,14 @@ namespace Z0
         public static int ConstantCount(in ReaderState state)
             => state.Reader.GetTableRowCount(I.Constant);
 
-        public static HandleToken? describe(in ReaderState state, Handle handle)
+        public static CliHandleToken? describe(in ReaderState state, Handle handle)
         {
             if(!handle.IsNil)
             {
                 var table = index(handle);
                 var token = state.Reader.GetToken(handle);
                 if (table != null)
-                    return new HandleToken(handle, token, table.Value);
+                    return new CliHandleToken(handle, token, table.Value);
             }
 
             return null;

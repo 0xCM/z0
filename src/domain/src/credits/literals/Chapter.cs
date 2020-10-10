@@ -3,10 +3,9 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
-
+{
     partial class CreditTypes
-    {    
+    {
         /// <summary>
         /// Defines chapter reference component values
         /// </summary>

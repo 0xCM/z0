@@ -10,10 +10,15 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
     public struct ImageSectionHeader
     {
-        public static ReadOnlySpan<byte> RenderWidths => new byte[9]{60,16,16,12,12,60,16,16,16};
+        public const byte FieldCount = 9;
+
+        public const string TableId = "image.sectionheaders";
+
+        public static ReadOnlySpan<byte> RenderWidths
+            => new byte[FieldCount]{60,16,16,12,12,60,16,16,16};
 
         public FS.FileName File;
 

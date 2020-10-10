@@ -22,51 +22,40 @@ namespace Z0
 
     public static class ManifestResourceLocator
     {
-        public static unsafe ManifestResourceDescriptor Descriptor(PEReader pe, MetadataReader reader, string resourceName)
-        {
 
-            ManifestResourceDescriptor result = default;
-            ManifestResourceHandleCollection manifestResources = reader.ManifestResources;
-            foreach (ManifestResourceHandle resourceHandle in manifestResources)
-            {
-                ManifestResource resource = resourceHandle.GetManifestResource(reader);
-                if (resource.Name.Equals(resourceName, reader))
-                {
-                    if (resource.Implementation.IsNil)
-                    {
-                        checked
-                        {
-                            // Embedded data resource
-                            result.Location = ResourceLocation.Embedded | ResourceLocation.ContainedInManifestFile;
 
-                            PEMemoryBlock resourceDirectory = pe.GetSectionData(pe.PEHeaders.CorHeader!.ResourcesDirectory.RelativeVirtualAddress);
-                            BlobReader blobReader = resourceDirectory.GetReader((int)resource.Offset, resourceDirectory.Length - (int)resource.Offset);
-                            uint length = blobReader.ReadUInt32();
-                            result.Address = blobReader.CurrentPointer;
+        // public static unsafe bool Descriptor(ICliImageReader _reader, PEReader pe, MetadataReader reader, string resourceName, out ManifestResourceDescriptor result)
+        // {
+        //     result = default;
+        //     var manifestResources = reader.ManifestResources;
+        //     foreach (var resourceHandle in manifestResources)
+        //     {
+        //         var resource = resourceHandle.GetManifestResource(reader);
+        //         if (resource.Name.Equals(resourceName, reader))
+        //         {
+        //             if (resource.Implementation.IsNil)
+        //             {
+        //                 checked
+        //                 {
+        //                     // Embedded data resource
+        //                     result.Location = ResourceLocation.Embedded | ResourceLocation.ContainedInManifestFile;
 
-                            // Length check the size of the resource to ensure it fits in the PE file section, note, this is only safe as its in a checked region
-                            if (length + sizeof(int) > blobReader.Length)
-                                throw new BadImageFormatException();
-                            result.Size = length;
-                        }
-                    }
-                }
-            }
+        //                     PEMemoryBlock resourceDirectory = pe.GetSectionData(pe.PEHeaders.CorHeader!.ResourcesDirectory.RelativeVirtualAddress);
+        //                     BlobReader blobReader = resourceDirectory.GetReader((int)resource.Offset, resourceDirectory.Length - (int)resource.Offset);
+        //                     uint length = blobReader.ReadUInt32();
+        //                     result.Address = blobReader.CurrentPointer;
 
-            return result;
-        }
+        //                     // Length check the size of the resource to ensure it fits in the PE file section, note, this is only safe as its in a checked region
+        //                     if (length + sizeof(int) > blobReader.Length)
+        //                         throw new BadImageFormatException();
+        //                     result.Size = length;
+        //                 }
+        //             }
+        //         }
+        //     }
+        //     return false;
+        // }
 
-    }
-
-    public struct ManifestResourceDescriptor
-    {
-        public string FileName;
-
-        public MemoryAddress Address;
-
-        public ByteSize Size;
-
-        public ResourceLocation Location;
     }
 
     public readonly struct RuntimeArchive : IFileArchive<RuntimeArchive>

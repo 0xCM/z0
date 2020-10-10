@@ -5,13 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Collections.Immutable;
     using System.Reflection.Metadata;
-    using System.Reflection.Metadata.Ecma335;
     using System.Reflection.PortableExecutable;
     using System.IO;
-    using System.Linq;
 
     public readonly struct ReaderState : IDisposable
     {
