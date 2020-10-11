@@ -12,18 +12,21 @@ namespace Z0
     using static z;
 
     [Event(EventName)]
-    public readonly struct DisposedEvent : IWfEvent<DisposedEvent>
+    public readonly struct ToolCreatedEvent : IWfEvent<ToolCreatedEvent>
     {
-        public const string EventName = nameof(GlobalEvents.Disposed);
+        public const string EventName = GlobalEvents.ToolCreated;
 
         public WfEventId EventId {get;}
+
+        public ToolId ToolId {get;}
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public DisposedEvent(WfStepId step, CorrelationToken ct, FlairKind flair = Render.Disposed)
+        public ToolCreatedEvent(ToolId tool, CorrelationToken ct, FlairKind flair = Created)
         {
-            EventId = (EventName, step, ct);
+            EventId = (tool, ct);
+            ToolId = tool;
             Flair = flair;
         }
 

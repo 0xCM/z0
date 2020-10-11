@@ -101,7 +101,7 @@ namespace Z0
         public ref Block256<N,T> Row(int row, ref Block256<N,T> dst)
         {
             if(row < 0 || row >= Order)
-                AppErrors.ThrowOutOfRange<T>(row, 0, Order - 1);
+                AppErrors.ThrowOutOfRange(row, 0, Order - 1);
 
              var src = data.Slice(row * Order, Order);
              src.CopyTo(dst.Unsized);
@@ -111,7 +111,7 @@ namespace Z0
         public ref Block256<N,T> Col(int col, ref Block256<N,T> dst)
         {
             if(col < 0 || col >= Order)
-                AppErrors.ThrowOutOfRange<T>(col, 0, Order - 1);
+                AppErrors.ThrowOutOfRange(col, 0, Order - 1);
 
             for(var row = 0; row < Order; row++)
                 dst[row] = data[row*Order + col];

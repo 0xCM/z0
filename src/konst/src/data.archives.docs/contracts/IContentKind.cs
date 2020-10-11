@@ -7,14 +7,21 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
+    using static z;
     using static Konst;
 
-    partial struct WfEvents
+    public interface IContentKind<H,K>
+        where H : struct, IContentKind<H,K>
+        where K : unmanaged
     {
-        [MethodImpl(Inline)]
-        public static PairedEvents<S,T> pair<S,T>(in S a, in T b)
-            where S : struct, IWfEvent<S>
-            where T : struct, IWfEvent<T>
-                => new PairedEvents<S,T>(a,b);
+        K Kind {get;}
     }
+
+    public interface IContentKind<H,K,I> : IContentKind<H,K>, IIdentified<I>, ITextual
+        where H : struct, IContentKind<H,K,I>
+        where K : unmanaged
+    {
+
+    }
+
 }

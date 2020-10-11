@@ -129,7 +129,9 @@ namespace Z0
 
         public const string StringTables = data + dot + "stringtables";
 
-        public const string DbFiles = "archives" + dot + "db";
+        public const string Db = "archives" + dot + "db";
+
+        public const string DbFiles = "archives" + dot + "db" + dot + "files";
 
         const string signatures = nameof(signatures);
 
@@ -137,10 +139,20 @@ namespace Z0
 
         const string events = nameof(events);
 
+        const string app = nameof(app);
         public const string Signatures = signatures;
 
         public const string LiteralFields = literal + dot + fields;
 
-        //const string wf = nameof(wf);
+        const string msg = nameof(msg);
+
+        const string errors = nameof(errors);
+
+        public const string AppMsg = app + dot + msg;
+
+        public const string AppErrors = app + dot + errors;
+
+        public const string AppErrorMsg = app + dot + errors + dot + msg;
+
     }
 }

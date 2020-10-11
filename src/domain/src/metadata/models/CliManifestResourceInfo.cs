@@ -24,6 +24,5 @@ namespace Z0
         public MemoryAddress Offset;
 
         public ManifestResourceAttributes Attributes;
-
     }
 }

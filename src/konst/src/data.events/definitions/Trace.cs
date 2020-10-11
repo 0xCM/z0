@@ -9,26 +9,33 @@ namespace Z0
 
     using static Konst;
     using static Render;
+    using static WfCore;
     using static z;
 
     [Event(EventName)]
-    public readonly struct DisposedEvent : IWfEvent<DisposedEvent>
+    public readonly struct TraceEvent<T> : IWfTrace<T>
     {
-        public const string EventName = nameof(GlobalEvents.Disposed);
+        public const string EventName = nameof(GlobalEvents.Trace);
 
         public WfEventId EventId {get;}
+
+        public WfStepId StepId {get;}
+
+        public EventPayload<T> Content {get;}
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public DisposedEvent(WfStepId step, CorrelationToken ct, FlairKind flair = Render.Disposed)
+        public TraceEvent(WfStepId step, T content, CorrelationToken ct, FlairKind flair = Trace)
         {
             EventId = (EventName, step, ct);
-            Flair = flair;
+            StepId = step;
+            Flair =  flair;
+            Content = content;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => EventId.Format();
+            => format(EventId, Content);
     }
 }

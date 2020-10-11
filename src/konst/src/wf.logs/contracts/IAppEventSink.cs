@@ -6,20 +6,14 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [Free]
-    public interface IAppEventSink : ISink
-    {
-       void Deposit(IAppEvent e);
-    }
-
     /// <summary>
     /// Characterizes an event-parametric application event sink
     /// </summary>
     /// <typeparam name="E">The event type</typeparam>
     [Free]
-    public interface IAppEventSink<E> : IAppEventSink, ISink<E>
+    public interface IAppEventSink<E> : ISink<E>
         where E : IAppEvent
     {
-
+        void Deposit(IAppEvent e);
     }
 }

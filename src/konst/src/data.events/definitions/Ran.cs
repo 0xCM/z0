@@ -5,6 +5,7 @@
 namespace Z0
 {
     using System;
+    using System.IO;
     using System.Runtime.CompilerServices;
 
     using static Konst;
@@ -12,18 +13,24 @@ namespace Z0
     using static z;
 
     [Event(EventName)]
-    public readonly struct DisposedEvent : IWfEvent<DisposedEvent>
+    public readonly struct RanEvent : IWfEvent<RanEvent>
     {
-        public const string EventName = nameof(GlobalEvents.Disposed);
+        public const string EventName = nameof(GlobalEvents.Ran);
 
         public WfEventId EventId {get;}
+
+        public WfActor Actor {get;}
+
+        public WfStepId StepId {get;}
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public DisposedEvent(WfStepId step, CorrelationToken ct, FlairKind flair = Render.Disposed)
+        public RanEvent(WfStepId step, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
+            Actor = step.Name;
+            StepId = step;
             Flair = flair;
         }
 

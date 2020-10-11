@@ -5,13 +5,17 @@
 namespace Z0
 {
     using System;
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using System.Runtime.CompilerServices;
 
-    [Free]
-    public interface ITableSink<H,T> : IDataSink<T>
-        where T : struct
-        where H : struct, ITableSink<H,T>
+    using static Konst;
+    using static z;
+
+    public readonly struct ContentKinds
     {
-        void Deposit(ReadOnlySpan<T> src);
+        public static AsmDoc Asm => default;
+
+        public static CsvDoc Csv => default;
+
+        public static HexDoc Hex => default;
     }
 }

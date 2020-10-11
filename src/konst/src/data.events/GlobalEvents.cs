@@ -25,8 +25,21 @@ namespace Z0
 
         public const string Error = nameof(Error);
 
-        public const string TableEmitted = nameof(TableEmitted);
+        public const string EmittedTable = nameof(EmittedTable);
 
-        public const string FileEmitted = nameof(FileEmitted);
+        public const string EmittingFile = nameof(EmittingFile);
+
+        public const string EmittedFile = nameof(EmittedFile);
+
+        public const string Flowed = nameof(Flowed);
+
+        public const string Processed = nameof(Processed);
+
+
+        public const string ProcessingFile = nameof(ProcessingFile);
+
+        public const string ToolCreated = nameof(ToolCreated);
+
+        public const string RowCreated = nameof(RowCreated);
     }
 }

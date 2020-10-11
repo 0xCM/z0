@@ -5,30 +5,38 @@
 namespace Z0
 {
     using System;
+    using System.IO;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static Render;
+    using static RP;
     using static z;
 
     [Event(EventName)]
-    public readonly struct DisposedEvent : IWfEvent<DisposedEvent>
+    public readonly struct ProcessingFileEvent<T> : IWfEvent<ProcessingFileEvent<T>>
     {
-        public const string EventName = nameof(GlobalEvents.Disposed);
+        public const string EventName = GlobalEvents.ProcessingFile;
 
         public WfEventId EventId {get;}
+
+        public T FileKind {get;}
+
+        public FS.FilePath SourcePath {get;}
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public DisposedEvent(WfStepId step, CorrelationToken ct, FlairKind flair = Render.Disposed)
+        public ProcessingFileEvent(WfStepId step, T kind, FS.FilePath src, CorrelationToken ct, FlairKind flair = Running)
         {
             EventId = (EventName, step, ct);
+            SourcePath = src;
+            FileKind = kind;
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => EventId.Format();
+            => Render.format(EventId, SourcePath.ToUri());
     }
 }

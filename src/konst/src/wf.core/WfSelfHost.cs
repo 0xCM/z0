@@ -8,13 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    partial struct WfEvents
+    public sealed class WfSelfHost : WfHost<WfSelfHost>
     {
-        [MethodImpl(Inline)]
-        public static PairedEvents<S,T> pair<S,T>(in S a, in T b)
-            where S : struct, IWfEvent<S>
-            where T : struct, IWfEvent<T>
-                => new PairedEvents<S,T>(a,b);
+        Type HostType;
+
+        public override WfStepId Id => HostType;
+
+        public static WfSelfHost create(Type self)
+        {
+            var host = new WfSelfHost();
+            host.HostType = self;
+            return host;
+        }
     }
 }

@@ -9,26 +9,37 @@ namespace Z0
 
     using static Konst;
     using static Render;
-    using static z;
 
     [Event(EventName)]
-    public readonly struct DisposedEvent : IWfEvent<DisposedEvent>
+    public readonly struct EmittedFileEvent<T> : IWfEvent<EmittedFileEvent<T>>
     {
-        public const string EventName = nameof(GlobalEvents.Disposed);
+        public const string EventName = GlobalEvents.EmittedFile;
 
         public WfEventId EventId {get;}
+
+        public WfStepId StepId {get;}
+
+        public InputValue<T> Source {get;}
+
+        public FS.FilePath Target {get;}
+
+        public Count SegmentCount {get;}
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public DisposedEvent(WfStepId step, CorrelationToken ct, FlairKind flair = Render.Disposed)
+        public EmittedFileEvent(WfStepId step, T source, Count segments, FS.FilePath target, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
+            StepId = step;
+            SegmentCount = segments;
+            Source = source;
+            Target = target;
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => EventId.Format();
+            => Render.format(EventId, Source, SegmentCount, Target.ToUri());
     }
 }

@@ -17,13 +17,30 @@ namespace Z0
     partial struct WfEvents
     {
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static ErrorEvent<T> error<T>(string actor, T content, CorrelationToken ct,
-            [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-                => new ErrorEvent<T>(actor, content, ct, source(caller,file,line));
+        public static ErrorEvent<Pair<T>> neq<T>(WfStepId step, Pair<T> data, CorrelationToken ct, AppMsgSource source)
+             => new ErrorEvent<Pair<T>>(step, data, ct, source);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static ErrorEvent<T> error<T>(WfStepId step, T content, CorrelationToken ct,
-            [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
+        public static ErrorEvent<Pair<T>> neq<T>(WfStepId step, Pair<T> data, CorrelationToken ct, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+             => neq(step, data, ct, WfCore.source(caller,file,line));
+
+        [MethodImpl(Inline), Op]
+        public static ErrorEvent<string> missing(WfStepId step, string caller, string file, int? line, CorrelationToken? ct = null)
+            => WfEvents.error(step, text.format(MissingPattern, caller, file, line), ct ?? CorrelationToken.Empty, WfCore.source(caller,file,line));
+
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        public static ErrorEvent<Pair<T>> length<T>(WfStepId step, T a, T b, CorrelationToken ct, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new ErrorEvent<Pair<T>>(step, z.pair(a,b), ct, WfCore.source(caller,file,line));
+
+        public static AppException length(WfStepId step, int a, int b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => AppException.Define(AppErrorMsg.LengthMismatch(a,b,caller,file,line));
+
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        public static ErrorEvent<T> error<T>(string actor, T content, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
+            => new ErrorEvent<T>(actor, content, ct, source(caller,file,line));
+
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        public static ErrorEvent<T> error<T>(WfStepId step, T content, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
                 => new ErrorEvent<T>(step, content, ct, source(caller,file,line));
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
@@ -31,8 +48,7 @@ namespace Z0
             => new ErrorEvent<T>(step, content, ct, origin);
 
         [Op]
-        public static ErrorEvent<string> error(Exception e, CorrelationToken ct,
-            [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
+        public static ErrorEvent<string> error(Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
         {
             const string CallerPattern = "An error was trapped by {0} on line {1} in {2}";
             const string Pattern = "{0}" + Eol + "{1}";
@@ -41,5 +57,10 @@ namespace Z0
             var msg = text.format(Pattern, where, what);
             return error(caller, msg, ct);
         }
+
+        const string MissingPattern = "Implementation amiss | {0} | {1} | {2}";
+
+        const string LengthMismatch = "Length mismatch: {0} != {1}";
+
     }
 }

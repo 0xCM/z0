@@ -241,18 +241,18 @@ namespace Z0
             => Emitted(Host,dst,segments);
 
         void EmittedFile<T>(T source, Count count, FS.FilePath dst)
-            => Raise(new FileEmittedEvent<T>(Host, source, count, dst, Ct));
+            => Raise(new EmittedFileEvent<T>(Host, source, count, dst, Ct));
 
         void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst, T t = default)
             where T : struct
-                => Raise(new TableEmittedEvent<T>(step, count, dst, Ct));
+                => Raise(new EmittedTableEvent<T>(step, count, dst, Ct));
 
         void EmittedTable<T>(Count count, FS.FilePath dst, T t = default)
             where T : struct
                 => EmittedTable<T>(Host,count,dst);
 
         void EmittedTable(WfStepId step, Type type, Count count, FS.FilePath dst)
-            => Raise(new TableEmittedEvent(step, type, count, dst, Ct));
+            => Raise(new EmittedTableEvent(step, type, count, dst, Ct));
 
         void EmittedTable(Type type, Count count, FS.FilePath dst)
             => EmittedTable(Host,type,count,dst);

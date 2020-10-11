@@ -12,13 +12,13 @@ namespace Z0
     partial struct WfEvents
     {
         /// <summary>
-        /// Defines a <see cref='Disposed'/> event
+        /// Defines a <see cref='DisposedEvent'/> event
         /// </summary>
         /// <param name="id">The step identifier</param>
         /// <param name="ct">The correlation token</param>
         [MethodImpl(Inline), Op]
-        public static Disposed disposed(WfStepId step, CorrelationToken ct)
-            => new Disposed(step,ct);
+        public static DisposedEvent disposed(WfStepId step, CorrelationToken ct)
+            => new DisposedEvent(step,ct);
 
         /// <summary>
         /// Defines a <see cref='Disposed{T}'/> event that carries a specified payload
