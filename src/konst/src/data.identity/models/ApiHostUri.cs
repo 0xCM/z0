@@ -24,6 +24,10 @@ namespace Z0
         public FS.FileName FileName(FileExtension ext)
             => FS.file(text.concat(Owner.Format(), Chars.Dot, Name), ext);
 
+
+        public FS.FileName FileName(FS.FileExt a, FS.FileExt b)
+            => FS.file(text.concat(Owner.Format(), Chars.Dot, Name, a), b);
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]

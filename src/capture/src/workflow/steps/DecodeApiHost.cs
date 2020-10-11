@@ -13,78 +13,72 @@ namespace Z0
     using static z;
 
     [WfHost]
-    public sealed class DecodeApiMembers : WfHost<DecodeApiMembers,ApiMemberCodeBlocks, AsmRoutines>
+    public sealed class DecodeApiHost : WfHost<DecodeApiHost,ApiMemberCodeBlocks, AsmRoutines>
     {
-        ICaptureContext Capture;
+        IAsmDecoder Decoder;
 
-        ApiHostUri ApiHost;
+        ApiHostUri Uri;
 
-        public static DecodeApiMembers create(ICaptureContext capture, ApiHostUri host)
+        public static DecodeApiHost create(IAsmDecoder decoder, ApiHostUri uri)
         {
             var dst = create();
-            dst.Capture = capture;
-            dst.ApiHost = host;
+            dst.Decoder = decoder;
+            dst.Uri = uri;
             return dst;
         }
 
         protected override ref AsmRoutines Execute(IWfShell wf, in ApiMemberCodeBlocks src, out AsmRoutines dst)
         {
-            using var step = new DecodeApiMembersStep(wf, this, Capture);
-            dst = step.Run(ApiHost, src);
+            using var step = new DecodeApiHostStep(wf, this, Decoder);
+            dst = step.Run(Uri, src);
             return ref dst;
         }
     }
 
-    readonly ref struct DecodeApiMembersStep
+    readonly ref struct DecodeApiHostStep
     {
         public IWfShell Wf {get;}
 
         readonly WfHost Host;
 
-        readonly ICaptureContext Capture;
+        readonly IAsmDecoder Decoder;
 
         [MethodImpl(Inline)]
-        internal DecodeApiMembersStep(IWfShell wf, WfHost host, ICaptureContext capture)
+        internal DecodeApiHostStep(IWfShell wf, WfHost host, IAsmDecoder decoder)
         {
             Wf = wf;
             Host = host;
-            Capture = capture;
+            Decoder = decoder;
             Wf.Created(Host);
         }
 
-        public AsmRoutine[] Run(ApiHostUri apihost, ApiMemberCodeBlocks src)
+        public AsmRoutine[] Run(ApiHostUri uri, ApiMemberCodeBlocks src)
         {
             try
             {
-                Wf.Running(Host, apihost);
+                Wf.Running(Host, uri);
                 var count = src.Count;
                 var view = src.View;
                 var dst = alloc<AsmRoutine>(count);
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var member = ref skip(view,i);
-                    var decoded = Capture.Decoder.Decode(member);
+                    var decoded = Decoder.Decode(member);
                     if(!decoded)
                         HandleFailure(member);
 
                     dst[i] = decoded ? decoded.Value : AsmRoutine.Empty;
                 }
 
-                Wf.Raise(new FunctionsDecoded(Host, apihost, dst, Wf.Ct));
+                Wf.Raise(new FunctionsDecoded(Host, uri, dst, Wf.Ct));
                 return dst;
             }
             catch(Exception e)
             {
-                Wf.Error(Host, $"{apihost}: {e}");
+                Wf.Error(Host, $"{uri}: {e}");
                 return sys.empty<AsmRoutine>();
             }
         }
-
-        // public void SaveDecoded(AsmRoutine[] src, FilePath dst)
-        // {
-        //     using var writer = Capture.AsmWriter(FS.path(dst.Name));
-        //     writer.WriteAsm(src);
-        // }
 
         void HandleFailure(in ApiMemberCode member)
         {

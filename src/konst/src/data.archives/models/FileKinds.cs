@@ -21,6 +21,8 @@ namespace Z0
         public static K.Dll Dll => default;
 
         public static K.Cil Cil => default;
+
+        public static K.Hex Hex => default;
     }
 
     public readonly struct FileKinds

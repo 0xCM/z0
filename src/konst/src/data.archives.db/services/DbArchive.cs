@@ -62,5 +62,24 @@ namespace Z0
 
         public FS.FolderPath StageRoot()
             => api.stageRoot(Root);
+
+        public FS.FilePath Document<S>(PartId part, S subject, FS.FileExt type)
+            => DocRoot() + FS.folder(subject.ToString()) + FS.file(part, type);
+
+        public FS.FilePath Document<S>(ApiHostUri host, S subject, FS.FileExt type)
+            => DocRoot() + FS.folder(subject.ToString()) + FS.file(host, type);
+
+        public FS.FolderPath DocRoot()
+            => api.docRoot(Root);
+
+        public FS.FilePath Document<S>(ApiHostUri host, S subject, FS.FileExt a, FS.FileExt b)
+            => DocRoot() + FS.folder(subject.ToString()) + FS.file(host, a, b);
+
+        public FS.FilePath Document<S1,S2>(ApiHostUri host, S1 s1, S2 s2, FS.FileExt ext)
+            => DocRoot() + FS.folder(s1.ToString()) + FS.folder(s2.ToString()) + FS.file(host, ext);
+
+        public FS.FilePath Document<S1,S2>(ApiHostUri host, S1 s1, S2 s2, FS.FileExt a, FS.FileExt b)
+            => DocRoot() + FS.folder(s1.ToString()) + FS.folder(s2.ToString()) + FS.file(host, a, b);
+
     }
 }

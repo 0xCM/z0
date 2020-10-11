@@ -11,9 +11,17 @@ namespace Z0
 
     partial struct FS
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static FileName file(PartId part, FileExt ext)
             => file(Render.concat(part.Format()), ext);
+
+        [MethodImpl(Inline), Op]
+        public static FileName file(ApiHostUri host, FileExt ext)
+            => FS.file(text.concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
+
+        [MethodImpl(Inline), Op]
+        public static FS.FileName file(ApiHostUri host, FS.FileExt a, FS.FileExt b)
+            => FS.file(text.concat(host.Owner.Format(), Chars.Dot, host.Name, a), b);
 
         /// <summary>
         /// Defines a host-specialized filename

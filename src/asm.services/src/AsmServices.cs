@@ -9,10 +9,33 @@ namespace Z0.Asm
 
     using static Konst;
     using static AsmFxCheck;
+    using static z;
 
     public readonly struct AsmServices : IAsmServices
     {
         public static IAsmServices Services => default(AsmServices);
+
+        public static FS.FilePath emit(ApiHostUri uri, ReadOnlySpan<AsmRoutine> src, in AsmFormatConfig format, IDbArchive dst)
+        {
+            var count = src.Length;
+            if(count != 0)
+            {
+                var path = dst.Document(uri, "capture", "asm", FileKind.Asm);
+                using var writer = path.Writer();
+                var buffer = Buffers.text();
+
+                for(var i=0; i<count; i++)
+                {
+                    ref readonly var routine = ref skip(src,i);
+
+                    AsmRender.format(routine, format, buffer);
+                    writer.Write(buffer.Emit());
+                }
+                return path;
+            }
+            else
+                return FS.FilePath.Empty;
+        }
 
         [MethodImpl(Inline), Op]
         public static AsmRoutine routine(ApiCaptureBlock captured, AsmFxList src)

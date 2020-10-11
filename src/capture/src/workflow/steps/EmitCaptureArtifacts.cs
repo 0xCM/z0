@@ -78,7 +78,7 @@ namespace Z0
                 Run(new EmitExtractReport());
                 ParseMembers();
                 EmitApiCodeBlocks.create(HostUri, ParsedBlocks).Run(Wf);
-                EmitCelHex();
+                EmitHostCil.create(HostUri).Run(Wf, ParsedBlocks, out var _);
                 DecodeMembers();
             }
             catch(Exception e)
@@ -119,27 +119,9 @@ namespace Z0
             EmitHostCodeBlockReport.run(Wf, HostUri, ParsedBlocks, ParsedPath, out var payload);
         }
 
-        void EmitCelHex()
-        {
-            if(ParsedBlocks.Count== 0)
-                return;
-
-            var src = ParsedBlocks.View;
-            var count = src.Length;
-            using var dst = CilDataPath.Writer();
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var parsed = ref skip(src,i);
-                var cil = ApiDynamic.cil(parsed.Address, parsed.OpUri, parsed.Method);
-                dst.WriteLine(cil.Format());
-            }
-
-            Wf.EmittedFile(HostUri, src.Length, CilDataPath);
-        }
-
         void DecodeMembers()
         {
-            var host = EmitHostAsm.create(State.CWf.Context, HostUri, AsmPath);
+            var host = EmitHostAsm.create(State.CWf.Context, HostUri);
             host.Run(Wf, ParsedBlocks, out var decoded);
             if(decoded.Count != 0)
             {
