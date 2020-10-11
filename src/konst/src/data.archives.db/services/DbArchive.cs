@@ -11,7 +11,7 @@ namespace Z0
 
     using api = DbFiles;
 
-    public struct DbArchive : IDbArchive<DbArchive>, IDbPaths
+    public struct DbArchive : IDbArchive<DbArchive>
     {
         public ArchiveConfig Settings {get;}
 
@@ -22,9 +22,6 @@ namespace Z0
         }
 
         public FS.FolderPath Root
-            => Settings.Root;
-
-        FS.FolderPath IDbPaths.DbRoot
             => Settings.Root;
 
         public FS.FilePath[] Clear(FS.FolderName id)

@@ -13,7 +13,7 @@ namespace Z0
             => FS.ext("txt");
 
         FS.FolderPath SemanticDir(FS.FolderName folder)
-            => DocRoot() + SemanticFolder + folder;
+            => DbPaths.create().DocRoot() + SemanticFolder + folder;
 
         FS.FolderPath SemanticDir(PartId part)
             => SemanticDir(FS.folder(part.Format()));

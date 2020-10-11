@@ -9,7 +9,7 @@ namespace Z0
     using static BufferSeqId;
     using static z;
 
-    using K = Kinds.UnaryOpClass;
+    using K = UnaryOpClass;
 
     public interface ITestUnaryDynamic : TTester, TTestOperatorMatch, TCheckDynamic
     {

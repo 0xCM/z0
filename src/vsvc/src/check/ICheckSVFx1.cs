@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static Kinds;
 
     public readonly struct CheckSVF<T> : ICheckSVF<T>
         where T : unmanaged

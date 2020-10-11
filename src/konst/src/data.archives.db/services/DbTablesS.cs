@@ -22,11 +22,11 @@ namespace Z0
         public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
-        internal DbTables(IDbArchive db, S subject)
+        internal DbTables(IDbArchive archive, S subject)
         {
-            Db = db;
+            Db = archive;
             Subject = subject;
-            Root = Db.TableRoot() + FS.folder(subject.ToString());
+            Root = Db.DbPaths.TableRoot() + FS.folder(subject.ToString());
         }
 
         public void Clear()

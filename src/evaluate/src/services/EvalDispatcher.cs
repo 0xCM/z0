@@ -201,7 +201,7 @@ namespace Z0
             }
         }
 
-        public void Dispatch(BufferTokens buffers, in ApiMemberCode api, K.UnaryOpClass k)
+        public void Dispatch(BufferTokens buffers, in ApiMemberCode api, UnaryOpClass k)
         {
             var kid = api.Member.KindId;
             int count = 128;

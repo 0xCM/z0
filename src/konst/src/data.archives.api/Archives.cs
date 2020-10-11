@@ -42,7 +42,7 @@ namespace Z0
         }
 
         public static ApiCodeBlock[] hexblocks(FS.FilePath src)
-            => from line in src.ReadLines().Select(ApiCodeParser.parse)
+            => from line in src.ReadLines().Select(ApiHexParser.parse)
                 where line.Succeeded
                 select line.Value;
 

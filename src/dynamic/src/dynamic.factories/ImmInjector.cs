@@ -9,7 +9,6 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    using static Kinds;
 
     public readonly struct ImmInjector : IImmInjector
     {

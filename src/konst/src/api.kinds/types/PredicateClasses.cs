@@ -17,7 +17,6 @@ namespace Z0
 
         public readonly struct TernaryPredicate : IOperationalF<TernaryPredicate,K> { public K Kind => K.TernaryPredicate; }
 
-
         //~ Parametric
         //~ -------------------------------------------------------------------
         public readonly struct PredicateClass<T> : IOperational<PredicateClass,K,T> {}

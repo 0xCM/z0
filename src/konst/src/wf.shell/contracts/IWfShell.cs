@@ -76,7 +76,7 @@ namespace Z0
             => FS.dir(Shell.Paths.AppDataRoot.Name);
 
         IDbArchive Db()
-            => new DbArchive(new ArchiveConfig(Paths.DbRoot));
+            => new DbArchive(new ArchiveConfig(DbPaths.create().DbRoot));
 
         WfEventId Raise<E>(in E e)
             where E : IWfEvent

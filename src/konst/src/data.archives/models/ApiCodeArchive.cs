@@ -46,7 +46,7 @@ namespace Z0
         }
 
         public ApiCodeBlock[] Read(FS.FilePath src)
-            => ApiCodeReader.read(src).Where(x => x.IsNonEmpty);
+            => ApiHexReader.read(src).Where(x => x.IsNonEmpty);
 
         public ListedFiles List()
             => FS.dir(ArchiveRoot.Name).Files(ArchiveExt.Hex);
@@ -96,7 +96,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source path</param>
         public ApiCodeBlock[] Read(FilePath src)
-            => ApiCodeReader.Service.Read(src);
+            => ApiHexReader.Service.Read(src);
 
         /// <summary>
         /// Reads the bits of an identified operation
@@ -112,6 +112,6 @@ namespace Z0
             => root.Files(FileExtensions.HexLine, true).Array();
 
         static ApiCodeBlock[] read(FilePath src)
-            => ApiCodeReader.Service.Read(src).Where(x => x.IsNonEmpty);
+            => ApiHexReader.Service.Read(src).Where(x => x.IsNonEmpty);
     }
 }

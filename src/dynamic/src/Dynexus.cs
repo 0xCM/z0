@@ -17,9 +17,9 @@ namespace Z0
     using K = Kinds;
     using I = Z0;
 
-    using U = Kinds.UnaryOpClass;
+    using U = UnaryOpClass;
     using B = BinaryOpClass;
-    using T = Kinds.TernaryOpClass;
+    using T = TernaryOpClass;
 
     readonly struct Dynexus : IDynexus
     {
