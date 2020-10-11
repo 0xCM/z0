@@ -12,8 +12,8 @@ namespace Z0
     partial struct WfEvents
     {
         [MethodImpl(Inline), Op]
-        public static FileEmitted emitted(WfStepId step, FS.FilePath path, Count segments, CorrelationToken ct)
-            => new FileEmitted(step, path, segments, ct);
+        public static FileEmittedEvent emitted(WfStepId step, FS.FilePath path, Count segments, CorrelationToken ct)
+            => new FileEmittedEvent(step, path, segments, ct);
 
         [MethodImpl(Inline), Op]
         public static TableEmittedEvent emitted(WfStepId step, TableId table, uint count, FS.FilePath dst, CorrelationToken ct)

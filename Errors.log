@@ -114,3 +114,19 @@ System.Text.EncoderFallbackException: Unable to translate Unicode character \\uD
    at Z0.EmitFieldLiteralsStep.Emit(ApiPartTypes src) in j:\dev\projects\z0\src\domain\src\metadata\wf\EmitFieldLiterals.cs:line 45
    at Z0.EmitFieldLiteralsStep.Run() in j:\dev\projects\z0\src\domain\src\metadata\wf\EmitFieldLiterals.cs:line 55
 
+Failure trapped by Run at j:\dev\projects\z0\src\domain\src\metadata\wf\EmitFieldLiterals.cs 59
+System.Text.EncoderFallbackException: Unable to translate Unicode character \\uDECC at index 852 to specified code page.
+   at System.Text.EncoderExceptionFallbackBuffer.Fallback(Char charUnknown, Int32 index)
+   at System.Text.EncoderFallbackBuffer.InternalFallback(ReadOnlySpan`1 chars, Int32& charsConsumed)
+   at System.Text.Encoding.GetBytesWithFallback(ReadOnlySpan`1 chars, Int32 originalCharsLength, Span`1 bytes, Int32 originalBytesLength, EncoderNLS encoder)
+   at System.Text.Encoding.GetBytesWithFallback(Char* pOriginalChars, Int32 originalCharCount, Byte* pOriginalBytes, Int32 originalByteCount, Int32 charsConsumedSoFar, Int32 bytesWrittenSoFar, EncoderNLS encoder)
+   at System.Text.Encoding.GetBytes(Char* pChars, Int32 charCount, Byte* pBytes, Int32 byteCount, EncoderNLS encoder)
+   at System.Text.EncoderNLS.GetBytes(Char* chars, Int32 charCount, Byte* bytes, Int32 byteCount, Boolean flush)
+   at System.Text.EncoderNLS.GetBytes(Char[] chars, Int32 charIndex, Int32 charCount, Byte[] bytes, Int32 byteIndex, Boolean flush)
+   at System.IO.StreamWriter.Flush(Boolean flushStream, Boolean flushEncoder)
+   at System.IO.StreamWriter.Dispose(Boolean disposing)
+   at System.IO.TextWriter.Dispose()
+   at Z0.EmitFieldLiteralsStep.Emit(FieldRef[] src, FilePath dst) in j:\dev\projects\z0\src\domain\src\metadata\wf\EmitFieldLiterals.cs:line 131
+   at Z0.EmitFieldLiteralsStep.Emit(ApiPartTypes src) in j:\dev\projects\z0\src\domain\src\metadata\wf\EmitFieldLiterals.cs:line 45
+   at Z0.EmitFieldLiteralsStep.Run() in j:\dev\projects\z0\src\domain\src\metadata\wf\EmitFieldLiterals.cs:line 55
+

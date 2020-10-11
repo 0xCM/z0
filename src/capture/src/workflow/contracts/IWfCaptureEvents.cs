@@ -8,7 +8,7 @@ namespace Z0.Asm
     {
         IWfStatus Status => default(StatusEvent<string>);
 
-        IWfError Error => default(WfError<object>);
+        IWfError Error => default(ErrorEvent<object>);
 
         CapturingHosts CapturingHosts => default;
 

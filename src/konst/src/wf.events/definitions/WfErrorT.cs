@@ -13,9 +13,9 @@ namespace Z0
     using static z;
 
     [Event]
-    public readonly struct WfError<T> : IWfEvent<WfError<T>,T>, IWfError
+    public readonly struct ErrorEvent<T> : IWfEvent<ErrorEvent<T>,T>, IWfError
     {
-        public const string EventName = nameof(WfError<T>);
+        public const string EventName = "Error";
 
         public WfEventId EventId {get;}
 
@@ -30,7 +30,7 @@ namespace Z0
         public AppMsgSource Source {get;}
 
         [MethodImpl(Inline)]
-        public WfError(string actor, T data, CorrelationToken ct, AppMsgSource source)
+        public ErrorEvent(string actor, T data, CorrelationToken ct, AppMsgSource source)
         {
             EventId = (EventName, ct);
             StepId = WfStepId.Empty;
@@ -41,7 +41,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public WfError(WfStepId step, T data, CorrelationToken ct, AppMsgSource source)
+        public ErrorEvent(WfStepId step, T data, CorrelationToken ct, AppMsgSource source)
         {
             EventId = (EventName, step, ct);
             Actor = EmptyString;
@@ -52,7 +52,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public WfError(WfStepId step, T data, string pattern, CorrelationToken ct, AppMsgSource source)
+        public ErrorEvent(WfStepId step, T data, string pattern, CorrelationToken ct, AppMsgSource source)
         {
             EventId = (EventName, step, ct);
             Actor = EmptyString;

@@ -10,7 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-
     partial struct CellFunctions
     {
         public interface ISignature

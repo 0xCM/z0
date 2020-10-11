@@ -9,14 +9,14 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct BinaryEvaluation<T>
+    public readonly struct BinaryEvaluation<A,B,R>
     {
-        public readonly Pair<T> Source;
+        public readonly Paired<A,B> Source;
 
-        public readonly PairEvalResult<T> Target;
+        public readonly PairEvalResult<R> Target;
 
         [MethodImpl(Inline)]
-        public BinaryEvaluation(Pair<T> src, PairEvalResult<T> dst)
+        public BinaryEvaluation(Paired<A,B> src, PairEvalResult<R> dst)
         {
             Source = src;
             Target = dst;

@@ -34,13 +34,13 @@ namespace Z0
             => new CreatedEvent<T>(id, content, ct, flair);
 
         /// <summary>
-        /// Defines a <see cref='ToolCreated'/> event
+        /// Defines a <see cref='ToolCreatedEvent'/> event
         /// </summary>
         /// <param name="tool"></param>
         /// <param name="ct"></param>
         /// <param name="flair"></param>
         [MethodImpl(Inline), Op]
-        public static ToolCreated created(ToolId tool, CorrelationToken ct, FlairKind flair = Created)
-            => new ToolCreated(tool, ct, flair);
+        public static ToolCreatedEvent created(ToolId tool, CorrelationToken ct, FlairKind flair = Created)
+            => new ToolCreatedEvent(tool, ct, flair);
     }
 }

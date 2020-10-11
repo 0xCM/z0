@@ -128,7 +128,7 @@ namespace Z0
             => Raise(WfEvents.error(step, e, Ct));
 
         void Error(Exception e)
-            => Error(Host,e);
+            => Error(Host, e);
 
         void Error<T>(T body)
             => Error(Host, body);
@@ -240,6 +240,9 @@ namespace Z0
 
         void Emitted(FS.FilePath dst, Count? segments = default)
             => Emitted(Host,dst,segments);
+
+        void EmittedFile<T>(T source, Count count, FS.FilePath dst)
+            => Raise(new FileEmittedEvent<T>(Host, source, count, dst, Ct));
 
         void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst, T t = default)
             where T : struct

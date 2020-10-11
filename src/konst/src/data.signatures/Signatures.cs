@@ -6,17 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Konst;
     using static z;
 
-    partial struct CellFunctions
+    [ApiHost(ApiNames.Signatures, true)]
+    public readonly partial struct Signatures
     {
-        public readonly struct Fx<R> : ISignature<Fx<R>,R>
-            where R : unmanaged, IDataCell
-        {
-            public TypeWidth ResultWidth
-                => (TypeWidth)default(R).BitWidth;
-        }
+        static W256 W => default;
     }
 }

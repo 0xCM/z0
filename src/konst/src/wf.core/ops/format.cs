@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct WfCore
     {
-        public static void format(WfError<Exception> error, StringBuilder dst)
+        public static void format(ErrorEvent<Exception> error, StringBuilder dst)
         {
             const string ErrorTrace = "{0} | {1} | {2} | Outer | {3} | {4} | {5}";
             const string InnerTrace = "{0} | {1} | {2} | Inner | {3} | {4} | {5} | {6}";

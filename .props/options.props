@@ -15,14 +15,9 @@
     <NoWarn>1591;1572;1573;1701;1702;1712;1711;1570;1571;1574;1710;8321;NETSDK1057;0169;0414;0219;649;8632;SYSLIB0001;IDE0060;IDE0059;MSB3026</NoWarn>
     <NullableReferenceTypes>true</NullableReferenceTypes>
     <NullableContextOptions>disable</NullableContextOptions>
-
-
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
-    <PropertyGroup>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <IncludeSymbols>true</IncludeSymbols>
-        <!-- <SymbolPackageFormat>snupkg</SymbolPackageFormat> -->
-        <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-    </PropertyGroup>
 </Project>

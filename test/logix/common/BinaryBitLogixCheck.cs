@@ -11,6 +11,8 @@ namespace Z0.Logix
     using static Konst;
     using static z;
 
+
+
     [ApiHost(ApiNames.BinaryBitLogixCheck,true)]
     public ref struct BinaryBitLogixCheck
     {
@@ -36,7 +38,6 @@ namespace Z0.Logix
         {
             Wf = wf;
         }
-
 
         [Op, MethodImpl(NotInline)]
         public static BinaryBitLogixCheck create(BinaryBitLogicKind kind, Func<Bit32,Bit32,Bit32> rule, uint count, IPolySourced source)

@@ -46,10 +46,9 @@ namespace Z0
 
         readonly WfHost Host;
 
-        readonly AsmFormatConfig AsmFormat;
         public EmitCaptureArtifactsStep(IWfCaptureState state, WfHost host, ApiHostUri src, ApiMemberExtract[] extracts, IPartCapturePaths dst)
         {
-            Wf = state.Wf;
+            Wf = state.Wf.WithHost(host);
             Host = host;
             State = state;
             Ct = Wf.Ct;
@@ -62,34 +61,32 @@ namespace Z0
             CilDataPath = FS.path(Target.CilPath.Name);
             Parser = ApiExtractParsers.member();
             ParsedBlocks = default;
-            AsmFormat = State.Asm.FormatConfig;
-            Wf.Created(Host);
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
 
         public void Run()
         {
-            Wf.Running(Host);
+            Wf.Running();
 
             try
             {
                 Run(new EmitExtractReport());
-                //Run(new EmitHostCodeBlockReport());
                 ParseMembers();
                 EmitApiCodeBlocks.create(HostUri, ParsedBlocks).Run(Wf);
-                Run(new EmitCilMembersHost());
+                EmitCelHex();
                 DecodeMembers();
             }
             catch(Exception e)
             {
-                Wf.Error(Host, e);
+                Wf.Error(e);
             }
 
-            Wf.Ran(Host);
+            Wf.Ran();
         }
 
         void Run(EmitExtractReport host)
@@ -108,7 +105,6 @@ namespace Z0
             }
         }
 
-
         void ParseMembers()
         {
             if(Extracts.Length == 0)
@@ -120,10 +116,10 @@ namespace Z0
             if(ParsedBlocks.Count == 0)
                 return;
 
-            EmitHostCodeBlockReport.run(Wf,HostUri, ParsedBlocks, ParsedPath, out var payload);
+            EmitHostCodeBlockReport.run(Wf, HostUri, ParsedBlocks, ParsedPath, out var payload);
         }
 
-        void Run(EmitCilMembersHost host)
+        void EmitCelHex()
         {
             if(ParsedBlocks.Count== 0)
                 return;
@@ -138,25 +134,8 @@ namespace Z0
                 dst.WriteLine(cil.Format());
             }
 
-            Wf.Raise(new CilDataSaved(Host, HostUri, src.Length, CilDataPath, Ct));
+            Wf.EmittedFile(HostUri, src.Length, CilDataPath);
         }
-
-        // void SaveDecoded(ReadOnlySpan<AsmRoutine> src, FS.FilePath dst)
-        // {
-        //     var count = src.Length;
-        //     if(count != 0)
-        //     {
-        //         using var writer = dst.Writer();
-        //         var buffer = Buffers.text();
-
-        //         for(var i=0; i<count; i++)
-        //         {
-        //             ref readonly var routine = ref skip(src,i);
-        //             AsmRender.format(routine, AsmFormat, buffer);
-        //             writer.Write(buffer.Emit());
-        //         }
-        //     }
-        // }
 
         void DecodeMembers()
         {
@@ -167,17 +146,6 @@ namespace Z0
                 using var match = new MatchAddressesStep(State, new MatchAddresses(), Extracts, decoded.Storage, Ct);
                 match.Run();
             }
-
-            // var host = DecodeApiMembers.create(State.CWf.Context, HostUri);
-            // var decoded = host.Run(Wf, ParsedBlocks, out var _).Storage;
-            // if(decoded.Length != 0)
-            // {
-            //     SaveDecoded(decoded, AsmPath);
-            //     Wf.Status(Host, text.format(RP.PSx3, decoded.Length,HostUri.Format(), AsmPath.ToUri()));
-
-            //     using var match = new MatchAddressesStep(State, new MatchAddresses(), Extracts, decoded, Ct);
-            //     match.Run();
-            // }
-        }
+       }
     }
 }

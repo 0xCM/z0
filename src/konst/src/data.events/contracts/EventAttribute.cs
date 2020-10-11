@@ -9,16 +9,16 @@ namespace Z0
     [AttributeUsage(AttributeTargets.Struct)]
     public class EventAttribute : Attribute
     {
+        public EventAttribute()
+        {
+            EventName = "";
+        }
 
-    }
+        public EventAttribute(string name)
+        {
+            EventName = name;
+        }
 
-    /// <summary>
-    /// Applies to a class or struct that defines nested event types and logically
-    /// equivalent to applying the <see cref='EventAttribute'/> to each enclosed event definition
-    /// </summary>
-    [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class)]
-    public class EventsAttribute : Attribute
-    {
-
+        public string EventName {get;}
     }
 }

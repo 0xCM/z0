@@ -11,54 +11,30 @@ namespace Z0
     using static Render;
     using static z;
 
-    partial struct WfEvents
+    [Event(EventName)]
+    public readonly struct ProcessedEvent : IWfEvent<ProcessedEvent>
     {
-        [Event]
-        public readonly struct Processed<T> : IWfEvent<Processed<T>>
+        public const string EventName = "Processed";
+
+        public WfEventId EventId {get;}
+
+        public FS.FileUri File {get;}
+
+        public Count ProcessedCount {get;}
+
+        public FlairKind Flair {get;}
+
+        [MethodImpl (Inline)]
+        public ProcessedEvent(WfStepId step, FS.FilePath file, Count count, CorrelationToken ct, FlairKind flair = Ran)
         {
-            public const string EventName = nameof(Processed<T>);
-
-            public WfEventId EventId {get;}
-
-            public DataFlow<T> DataFlow {get;}
-
-            public FlairKind Flair {get;}
-
-            [MethodImpl (Inline)]
-            public Processed(WfStepId step, DataFlow<T> flow, CorrelationToken ct, FlairKind flair = Ran)
-            {
-                EventId = (EventName, step, ct);
-                DataFlow = flow;
-                Flair = flair;
-            }
-
-            [MethodImpl (Inline)]
-            public string Format()
-                => Render.format(EventId, DataFlow);
+            EventId = (EventName, step, ct);
+            File = file;
+            ProcessedCount = count;
+            Flair = flair;
         }
 
-        [Event]
-        public readonly struct Processed<S,T> : IWfEvent<Processed<S,T>>
-        {
-            public const string EventName = nameof(Processed<S,T>);
-
-            public WfEventId EventId {get;}
-
-            public DataFlow<S,T> DataFlow {get;}
-
-            public FlairKind Flair {get;}
-
-            [MethodImpl (Inline)]
-            public Processed(WfStepId step, DataFlow<S,T> flow, CorrelationToken ct, FlairKind flair = Ran)
-            {
-                EventId = (EventName, step, ct);
-                DataFlow = flow;
-                Flair = flair;
-            }
-
-            [MethodImpl (Inline)]
-            public string Format()
-                => Render.format(EventId, DataFlow);
-        }
+        [MethodImpl (Inline)]
+        public string Format()
+            => Render.format(EventId, File, ProcessedCount);
     }
 }

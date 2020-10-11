@@ -1,3 +1,5 @@
+//-----------------------------------------------------------------------------
+// Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
@@ -9,7 +11,7 @@ namespace Z0
     using static Render;
 
     [Event(EventName)]
-    public readonly struct FileEmittedEvent : IWfEvent<FileEmittedEvent, FS.FilePath>, IWfFileEmission<FileEmittedEvent>
+    public readonly struct FileEmittedEvent<T> : IWfEvent<FileEmittedEvent<T>>
     {
         public const string EventName = "FileEmitted";
 
@@ -17,28 +19,27 @@ namespace Z0
 
         public WfStepId StepId {get;}
 
-        public FS.FilePath Path {get;}
+        public InputValue<T> Source {get;}
+
+        public FS.FilePath Target {get;}
 
         public Count SegmentCount {get;}
 
         public FlairKind Flair {get;}
 
-
         [MethodImpl(Inline)]
-        public FileEmittedEvent(WfStepId step, FS.FilePath path, Count segments, CorrelationToken ct, FlairKind flair = Ran)
+        public FileEmittedEvent(WfStepId step, T source, Count segments, FS.FilePath target, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
             StepId = step;
             SegmentCount = segments;
-            Path = path;
+            Source = source;
+            Target = target;
             Flair = flair;
         }
 
-        public EventPayload<FS.FilePath> Payload
-            => Path;
-
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, SegmentCount, Path.ToUri());
+            => Render.format(EventId, Source, SegmentCount, Target.ToUri());
     }
 }

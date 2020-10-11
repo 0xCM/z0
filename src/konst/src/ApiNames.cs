@@ -129,6 +129,6 @@ namespace Z0
 
         const string signatures = nameof(signatures);
 
-        public const string CellFxSig = cells + dot + functions + dot + signatures;
+        public const string Signatures = signatures;
     }
 }

@@ -11,11 +11,11 @@ namespace Z0
     using static Render;
     using static z;
 
-    [Event]
-    public readonly struct WfDataFlowed<H,S,T,R> : IWfEvent<WfDataFlowed<H,S,T,R>>
+    [Event(EventName)]
+    public readonly struct FlowedEvent<H,S,T,R> : IWfEvent<FlowedEvent<H,S,T,R>>
         where H : IWfHost<H>, new()
     {
-        public const string EventName = nameof(WfDataFlowed<H,S,T,R>);
+        public const string EventName = "Flowed";
 
         public WfEventId EventId {get;}
         public H Host {get;}
@@ -24,7 +24,7 @@ namespace Z0
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public WfDataFlowed(H host, DataFlow<S,T,R> flow, CorrelationToken ct, FlairKind flair = Ran)
+        public FlowedEvent(H host, DataFlow<S,T,R> flow, CorrelationToken ct, FlairKind flair = Ran)
         {
             Host = host;
             EventId = (EventName, Host.Id, ct);

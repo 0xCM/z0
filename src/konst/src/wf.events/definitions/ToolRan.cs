@@ -11,27 +11,27 @@ namespace Z0
     using static Render;
     using static z;
 
-    partial struct WfEvents
+    [Event(EventName)]
+    public readonly struct ToolRanEvent : IWfEvent<ToolRanEvent>
     {
-        public readonly struct ToolRan : IWfEvent<ToolRan>
+        public const string EventName = "ToolRan";
+
+        public WfEventId EventId {get;}
+
+        public ToolId ToolId {get;}
+
+        public FlairKind Flair {get;}
+
+        [MethodImpl(Inline)]
+        public ToolRanEvent(ToolId tool, CorrelationToken ct, FlairKind flair = Ran)
         {
-            public WfEventId EventId {get;}
-
-            public ToolId ToolId {get;}
-
-            public FlairKind Flair {get;}
-
-            [MethodImpl(Inline)]
-            public ToolRan(ToolId tool, CorrelationToken ct, FlairKind flair = Ran)
-            {
-                EventId = (tool, ct);
-                ToolId = tool;
-                Flair = flair;
-            }
-
-            [MethodImpl(Inline)]
-            public string Format()
-                => EventId.Format();
+            EventId = (tool, ct);
+            ToolId = tool;
+            Flair = flair;
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => EventId.Format();
     }
 }

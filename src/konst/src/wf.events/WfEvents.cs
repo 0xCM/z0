@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost, Events]
+    [ApiHost]
     public readonly partial struct WfEvents
     {
 

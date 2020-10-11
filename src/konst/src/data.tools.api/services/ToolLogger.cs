@@ -36,7 +36,7 @@ namespace Z0
             LogStream.Dispose();
         }
 
-        public void Log(in WfError<Exception> error)
+        public void Log(in ErrorEvent<Exception> error)
         {
             Log(LogLevel.Error, format(error));
         }

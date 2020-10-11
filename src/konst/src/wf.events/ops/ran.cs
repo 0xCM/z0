@@ -21,7 +21,7 @@ namespace Z0
                 => new RanEvent<T>(host.Id, content, ct);
 
         [MethodImpl(Inline), Op]
-        public static ToolRan ran(ToolId tool, CorrelationToken ct)
-            => new ToolRan(tool, ct);
+        public static ToolRanEvent ran(ToolId tool, CorrelationToken ct)
+            => new ToolRanEvent(tool, ct);
     }
 }
