@@ -16,9 +16,11 @@ namespace Z0
     /// <summary>
     /// Captures <see cref='AssemblyReference'/> data in usable form
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
-    public struct CliAssemblyReferenceRecord
+    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
+    public struct CliAssemblyReference
     {
+        public const string TableId = "cli.assemblyref";
+
         public const byte FieldCount = 7;
 
         public string Culture;

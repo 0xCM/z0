@@ -32,7 +32,7 @@ namespace Z0
         static CliMemoryReader Reader(IWfShell wf, FS.FilePath src)
             => CliMemoryReader.create(wf, src);
 
-        public static ReadOnlySpan<CliAssemblyReferenceRecord> exec(IWfShell wf, in EmitAssemblyReferences cmd)
+        public static ReadOnlySpan<CliAssemblyReference> exec(IWfShell wf, in EmitAssemblyReferences cmd)
         {
             var host = Host(cmd);
             using var reader = Reader(wf,cmd.Source);

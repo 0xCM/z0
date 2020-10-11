@@ -30,16 +30,13 @@ namespace Z0
 
         readonly IPart[] Parts;
 
-        readonly FS.FilePath TargetPath;
-
         [MethodImpl(Inline)]
         public EmitSectionHeadersStep(IWfShell wf, WfHost host)
         {
-            Wf = wf;
+            Wf = wf.WithHost(host);
             Host = host;
             Parts = Wf.Api.Parts;
-            TargetPath = wf.Db().Table(ImageSectionHeader.TableId, "headers");
-            Wf.Created(Host, TargetPath);
+            Wf.Created();
         }
 
         public void Dispose()
@@ -49,32 +46,31 @@ namespace Z0
 
         public void Run()
         {
+            Wf.Running();
+
             var pCount = Parts.Length;
             var total = 0u;
-            Wf.Running(pCount);
-
             var formatter = Formatters.dataset<F>();
-            using var writer = TargetPath.Writer();
+            var dst = Wf.Db().Table(ImageSectionHeader.TableId);
+            using var writer = dst.Writer();
             writer.WriteLine(formatter.HeaderText);
 
             foreach(var part in Parts)
             {
                 var id = part.Id;
                 var assembly = part.Owner;
-                var records = PeTableReader.headers(FilePath.Define(assembly.Location));
+                var records = PeTableReader.headers(FS.path(assembly.Location));
                 var count = (uint)records.Length;
 
                 for(var i=0; i<count; i++)
                 {
-                    ImageSectionHeader.format(z.skip(records,i), formatter);
+                    ImageSectionHeader.format(skip(records,i), formatter);
                     writer.WriteLine(formatter.Render());
                 }
                 total += count;
             }
 
-            Wf.Ran(Host, delimit(pCount, total));
+            Wf.EmittedTable<ImageSectionHeader>(total, dst);
         }
-
-
     }
 }

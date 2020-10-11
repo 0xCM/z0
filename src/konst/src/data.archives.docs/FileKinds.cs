@@ -32,8 +32,11 @@ namespace Z0
             public string Name
                 => asm;
 
-            public static implicit operator FS.FileExt(Asm src)
+            public FS.FileExt Ext
                 => X.Asm;
+
+            public static implicit operator FS.FileExt(Asm src)
+                => src.Ext;
         }
 
         [FileKind]
@@ -42,8 +45,11 @@ namespace Z0
             public string Name
                 => cil;
 
+            public FS.FileExt Ext
+                => X.Cil;
+
             public static implicit operator FS.FileExt(Cil src)
-                => ArchiveExt.Cil;
+                => src.Ext;
         }
 
         [FileKind]
@@ -52,8 +58,12 @@ namespace Z0
             public string Name
                 => cs;
 
-            public static implicit operator FS.FileExt(Cs src)
+
+            public FS.FileExt Ext
                 => X.Cs;
+
+            public static implicit operator FS.FileExt(Cs src)
+                => src.Ext;
         }
 
         [FileKind]
@@ -62,8 +72,11 @@ namespace Z0
             public string Name
                 => csv;
 
-            public static implicit operator FS.FileExt(Csv src)
+            public FS.FileExt Ext
                 => X.Csv;
+
+            public static implicit operator FS.FileExt(Csv src)
+                => src.Ext;
         }
 
         [FileKind]

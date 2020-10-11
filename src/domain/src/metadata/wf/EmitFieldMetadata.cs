@@ -63,14 +63,14 @@ namespace Z0
 
         uint Emit(IPart part)
         {
-            var t = new CliFieldRecord();
-            var path = Wf.Db().Table(CliFieldRecord.TableId, part.Id);
+            var t = new CliField();
+            var path = Wf.Db().Table(CliField.TableId, part.Id);
             var assembly = part.Owner;
             using var reader = PeTableReader.open(FS.path(assembly.Location));
             var src = reader.Fields();
             var count = (uint)src.Length;
 
-            var formatter = TableRows.formatter(CliFieldRecord.RenderWidths, t);
+            var formatter = TableRows.formatter(CliField.RenderWidths, t);
             using var writer = path.Writer();
             writer.WriteLine(formatter.FormatHeader());
             foreach(var item in src)

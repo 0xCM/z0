@@ -51,8 +51,8 @@ namespace Z0
             => tableRoot(root) + FS.folder(id) + FS.file(text.format("{0}.{1}", id, subject), type ?? ArchiveExt.Csv.Name);
 
         [MethodImpl(Inline), Op]
-        public static FS.FilePath table(FS.FolderPath root, FS.FileName file)
-            => tableRoot(root) + file;
+        public static FS.FilePath table(FS.FolderPath root, PartId part, string id, FS.FileExt ext)
+            => tableRoot(root) + FS.folder(id) + FS.file(part.Format(),  ext);
 
         [MethodImpl(Inline), Op]
         public static FS.FilePath table(FS.FolderPath root, string id, PartId part, string type = null)

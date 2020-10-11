@@ -227,6 +227,9 @@ namespace Z0
         void Ran()
             => Ran(Host);
 
+        void Ran2<T>(T content)
+            => Raise(new RanEvent<T>(Host, content, Ct));
+
         void Ran<H,T>(H host, T content)
             where H : IWfHost<H>, new()
                 => Raise(ran(host, content, Ct));

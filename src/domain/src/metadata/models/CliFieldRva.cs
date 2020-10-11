@@ -11,9 +11,9 @@ namespace Z0
     using static Konst;
 
     [StructLayout(LayoutKind.Sequential), Table(TableName, FieldCount)]
-    public struct CliFieldRvaRecord
+    public struct CliFieldRva
     {
-        public const string TableName = "image.fieldrva";
+        public const string TableName = "cli.fieldrva";
 
         public const byte FieldCount = 4;
 
@@ -23,13 +23,13 @@ namespace Z0
 
         public string FieldName;
 
-        public CliBlobRecord Sig;
+        public CliBlob Sig;
 
         public BinaryCode SigData
             => Sig.Data;
 
         [MethodImpl(Inline)]
-        public CliFieldRvaRecord(Address32 rva, string typeName, string name, CliBlobRecord sig)
+        public CliFieldRva(Address32 rva, string typeName, string name, CliBlob sig)
         {
             Rva = rva;
             TypeName = typeName;
@@ -37,7 +37,7 @@ namespace Z0
             Sig = sig;
         }
 
-        public int CompareTo(CliFieldRvaRecord src)
+        public int CompareTo(CliFieldRva src)
             => Rva.CompareTo(src.Rva);
     }
 }

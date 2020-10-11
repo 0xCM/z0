@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static CliStringRecords;
 
     [WfHost]
     public sealed class EmitStringRecords : WfHost<EmitStringRecords>
@@ -42,38 +41,36 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmitStringRecordsStep(IWfShell wf, WfHost host)
         {
-            Wf = wf;
+            Wf = wf.WithHost(host);
             Host = host;
             Parts = Wf.Api.Parts;
             EmissionCount = 0;
             PartCount = (uint)Parts.Length;
-            Wf.Created(Host);
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
 
         uint EmitUserStrings(IPart part)
         {
-            var dst = Wf.ResourceRoot + FolderName.Define(UserTargetFolder);
-            using var emitter = new EmitPartStringsStep(Wf, part, CliStringRecord.Kind.User, dst, Wf.Ct);
+            using var emitter = new EmitPartStringsStep(Wf, part, CliStringRecord.Kind.User, Wf.Ct);
             emitter.Run();
             return emitter.EmissionCount;
         }
 
         uint EmitSystemStrings(IPart part)
         {
-            var dst = Wf.ResourceRoot + FolderName.Define(SystemTargetFolder);
-            using var emitter = new EmitPartStringsStep(Wf, part, CliStringRecord.Kind.System, dst, Wf.Ct);
+            using var emitter = new EmitPartStringsStep(Wf, part, CliStringRecord.Kind.System, Wf.Ct);
             emitter.Run();
             return emitter.EmissionCount;
         }
 
         public void Run()
         {
-            Wf.Running(Host);
+            Wf.Running();
 
             foreach(var part in Parts)
             {
@@ -81,7 +78,7 @@ namespace Z0
                 EmissionCount += EmitSystemStrings(part);
             }
 
-            Wf.Ran(Host, delimit(PartCount, EmissionCount));
+            Wf.Ran2(delimit(PartCount, EmissionCount));
         }
     }
 }

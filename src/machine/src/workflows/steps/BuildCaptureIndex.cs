@@ -219,12 +219,12 @@ namespace Z0
             }
         }
 
-        void Process(in ApiPartRoutines src)
-        {
-            InstructionProcessors.ProcessJumps(Wf, src);
-            InstructionProcessors.RenderSemantic(Wf, src);
-            InstructionProcessors.ProcessEnlisted(Wf, src);
-            InstructionProcessors.ProcessCalls(Wf, src);
-        }
+        // void Process(in ApiPartRoutines src)
+        // {
+        //     InstructionProcessors.ProcessJumps(Wf, src);
+        //     InstructionProcessors.RenderSemantic(Wf, src);
+        //     InstructionProcessors.ProcessEnlisted(Wf, src);
+        //     InstructionProcessors.ProcessCalls(Wf, src);
+        // }
     }
 }

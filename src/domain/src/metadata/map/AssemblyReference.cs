@@ -18,10 +18,10 @@ namespace Z0
             => CliReader.AssemblyReferences.ToReadOnlySpan();
 
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<CliAssemblyReferenceRecord> AssemblyReferences()
+        public ReadOnlySpan<CliAssemblyReference> AssemblyReferences()
         {
             var src = AssemblyReferenceHandles();
-            var dst = alloc<CliAssemblyReferenceRecord>(src.Length);
+            var dst = alloc<CliAssemblyReference>(src.Length);
             Read(src,dst);
             return dst;
         }
@@ -38,7 +38,7 @@ namespace Z0
         }
 
         [Op]
-        public ref CliAssemblyReferenceRecord Read(AssemblyReference src, ref CliAssemblyReferenceRecord dst)
+        public ref CliAssemblyReference Read(AssemblyReference src, ref CliAssemblyReference dst)
         {
             dst.AssemblyName = src.GetAssemblyName();
             dst.Culture = Read(src.Culture);
@@ -51,7 +51,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public void Read(ReadOnlySpan<AssemblyReferenceHandle> src, Span<CliAssemblyReferenceRecord> dst)
+        public void Read(ReadOnlySpan<AssemblyReferenceHandle> src, Span<CliAssemblyReference> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
@@ -59,7 +59,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public void Read(ReadOnlySpan<AssemblyReference> src, Span<CliAssemblyReferenceRecord> dst)
+        public void Read(ReadOnlySpan<AssemblyReference> src, Span<CliAssemblyReference> dst)
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)

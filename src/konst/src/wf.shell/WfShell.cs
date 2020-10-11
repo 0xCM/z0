@@ -99,10 +99,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public IWfShell WithHost(WfHost host)
             => clone(this, host);
-        // {
-        //     Host = host;
-        //     return this;
-        // }
+
 
         public void Dispose()
         {

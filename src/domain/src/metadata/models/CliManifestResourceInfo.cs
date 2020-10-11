@@ -16,9 +16,13 @@ namespace Z0
     /// <summary>
     /// Captures <see cref='ManifestResource'/> data in usable form
     /// </summary>
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
     public struct CliManifestResourceInfo
     {
+        public const string TableId = "cli.manifest.resource";
+
+        public const byte FieldCount = 3;
+
         public string Name;
 
         public MemoryAddress Offset;

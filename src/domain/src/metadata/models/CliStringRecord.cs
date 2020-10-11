@@ -4,33 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-
     using static Konst;
     using static RP;
-
-
-    public readonly struct CliStringRecords
-    {
-        public const string DataType = "strings";
-
-        public const string UserKind = "user";
-
-        public const string SystemKind = "system";
-
-        public const string UserTargetFolder = DataType + ExtSep + UserKind;
-
-        public const string SystemTargetFolder = DataType + ExtSep + SystemKind;
-
-        public const string DataTypeExt = DataType + ExtSep + DataExt;
-
-        public const string UserKindExt = UserKind + ExtSep + DataTypeExt;
-
-        public const string SystemKindExt = SystemKind + ExtSep + DataTypeExt;
-    }
-
 
     public struct CliStringRecord
     {
@@ -78,7 +53,5 @@ namespace Z0
 
             Value = 12,
         }
-
     }
-
 }

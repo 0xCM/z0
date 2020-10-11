@@ -10,18 +10,14 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential), Table(TableId,FieldCount)]
-    public struct CliSystemStringRecord
+    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
+    public struct CliLiteral
     {
-        public const string TableId = "cli.strings.system";
+        public const string TableId = "cli.literal";
 
-        public const string DataType = "string";
-
-        public const byte FieldCount = 6;
+        public const byte FieldCount = 4;
 
         public Count Sequence;
-
-        public CliStringRecord.Source Source;
 
         public ByteSize HeapSize;
 
@@ -29,17 +25,16 @@ namespace Z0
 
         public Address32 Offset;
 
-        public string Content;
+        public string Value;
 
         [MethodImpl(Inline)]
-        public CliSystemStringRecord(Count seq, CliStringRecord.Source src, ByteSize heap, Address32 offset, string data)
+        public CliLiteral(Count seq, ByteSize heap, Address32 offset, string value)
         {
             Sequence = seq;
-            Source = src;
             HeapSize = heap;
-            Length = data.Length;
+            Length = value.Length;
             Offset = offset;
-            Content = data;
+            Value = value;
         }
     }
 }

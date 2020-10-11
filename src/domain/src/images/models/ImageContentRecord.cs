@@ -11,9 +11,9 @@ namespace Z0
     using static Konst;
 
     [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
-    public struct ImageDataRecord
+    public struct ImageContentRecord
     {
-        public const string TableId = "image.bytes";
+        public const string TableId = "image.content";
 
         public const byte FieldCount = 2;
 
@@ -24,22 +24,22 @@ namespace Z0
         public BinaryCode Data;
 
         [MethodImpl(Inline)]
-        public ImageDataRecord(ImageToken src, byte[] content)
+        public ImageContentRecord(ImageToken src, byte[] content)
         {
             Source = src;
             Data = content;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator ImageDataRecord((ImageToken src, byte[] data) x)
-            => new ImageDataRecord(x.src, x.data);
+        public static implicit operator ImageContentRecord((ImageToken src, byte[] data) x)
+            => new ImageContentRecord(x.src, x.data);
 
         [MethodImpl(Inline)]
-        public static implicit operator ImageDataRecord((ImageToken src, BinaryCode data) x)
-            => new ImageDataRecord(x.src, x.data);
+        public static implicit operator ImageContentRecord((ImageToken src, BinaryCode data) x)
+            => new ImageContentRecord(x.src, x.data);
 
         [MethodImpl(Inline)]
-        public static implicit operator ImageDataRecord(Paired<ImageToken,BinaryCode> x)
-            => new ImageDataRecord(x.Left, x.Right);
+        public static implicit operator ImageContentRecord(Paired<ImageToken,BinaryCode> x)
+            => new ImageContentRecord(x.Left, x.Right);
     }
 }

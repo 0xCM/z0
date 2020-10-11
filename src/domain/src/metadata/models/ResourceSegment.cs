@@ -7,7 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-
     using static Konst;
 
     public readonly struct ResourceSegment
@@ -29,6 +28,5 @@ namespace Z0
 
         public override string ToString()
             => Format();
-
     }
 }

@@ -8,14 +8,14 @@ namespace Z0
 
     public interface IPeTableReader : IDisposable
     {
-        ReadOnlySpan<CliSystemStringRecord> SystemStrings();
+        ReadOnlySpan<CliSystemString> SystemStrings();
 
-        ReadOnlySpan<CliUserStringRecord> UserStrings();
+        ReadOnlySpan<CliUserString> UserStrings();
 
-        ReadOnlySpan<CliBlobRecord> Blobs();
+        ReadOnlySpan<CliBlob> Blobs();
 
-        ReadOnlySpan<CliConstantRecord> Constants();
+        ReadOnlySpan<CliConstant> Constants();
 
-        ReadOnlySpan<CliFieldRecord> Fields();
+        ReadOnlySpan<CliField> Fields();
     }
 }

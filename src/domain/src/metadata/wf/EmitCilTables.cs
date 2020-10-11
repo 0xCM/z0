@@ -36,31 +36,29 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmitCilTablesStep(IWfShell wf, WfHost host)
         {
-            Wf = wf;
+            Wf = wf.WithHost(host);
             Host = host;
             Parts = wf.Api.Parts;
             PartCount = (uint)Parts.Length;
             EmissionCount = 0;
-            Wf.Created(Host);
+            Wf.Created();
         }
 
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
 
         public void Run()
         {
-            Wf.Running(Host, PartCount);
+            Wf.Running();
 
             foreach(var part in Parts)
             {
                 try
                 {
-                    var dstPath = Wf.Paths.Table(CilMethodData.TableId, string.Concat(part.Id.Format(), Chars.Dot, CilMethodData.DataType));
-
-                    EmissionCount += Emit(part, dstPath);
+                    EmissionCount += Emit(part);;
                 }
                 catch(Exception e)
                 {
@@ -68,48 +66,27 @@ namespace Z0
                 }
             }
 
-            Wf.Running(Host, delimit(PartCount, EmissionCount));
+            Wf.Ran2(EmissionCount);
         }
 
-        uint Emit(IPart part, FS.FilePath dst)
+        uint Emit(IPart part)
         {
-            Wf.Running(Host);
+            var dst = Wf.Db().Table(part.Id, CilCil.TableId, FileKind.Csv);
 
             var methods = CliFileReader.cil(part.Id, FS.path(part.Owner.Location));
             var count = (uint)methods.Length;
-            using var writer = dst.Writer();
-            writer.WriteLine(Header);
+            if(count != 0)
+            {
+                using var writer = dst.Writer();
+                writer.WriteLine(CilCil.RowHeader);
 
-            for(var i=0u; i<count; i++)
-                writer.WriteLine(format(skip(methods,i)));
+                for(var i=0u; i<count; i++)
+                    writer.WriteLine(CilCil.format(skip(methods,i)));
 
-            Wf.EmittedTable<CilMethodData>(Host, count, FS.path(dst.Name));
+                Wf.EmittedTable<CilCil>(count, dst);
+            }
+
             return count;
         }
-
-        public static string format(in CilMethodData src)
-        {
-            var dst = EmptyString.Build();
-            dst.Append(FieldDelimiter);
-            dst.Append(Space);
-            dst.Append(src.Sig.Format().PadRight(80));
-            dst.Append(FieldDelimiter);
-            dst.Append(Space);
-            dst.Append(src.Name.PadRight(50));
-            dst.Append(FieldDelimiter);
-            dst.Append(Space);
-            dst.Append(src.Rva.Format().PadRight(12));
-            dst.Append(FieldDelimiter);
-            dst.Append(Space);
-            dst.Append(src.Cil.Format());
-            return dst.ToString();
-        }
-
-        static string Header
-            => text.concat(FieldDelimiter, Space,
-                "Signature".PadRight(80),  FieldDelimiter,  Space,
-                "Method".PadRight(50), FieldDelimiter,  Space,
-                "Rva".PadRight(12), FieldDelimiter, Space,
-                "Il");
     }
 }

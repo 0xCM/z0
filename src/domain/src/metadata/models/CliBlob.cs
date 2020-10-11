@@ -11,30 +11,50 @@ namespace Z0
     using static Konst;
 
     [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
-    public struct CliLiteralRecord
+    public struct CliBlob
     {
-        public const string TableId = "image.literal";
+        public const string TableId = "cli.blob";
 
         public const byte FieldCount = 4;
 
-        public Count Sequence;
+        public enum Fields : ushort
+        {
+            Sequence = 0,
+
+            HeapSize = 1,
+
+            Offset = 2,
+
+            Value = 3,
+        }
+
+        public enum RenderWidths : ushort
+        {
+            Sequence = 12,
+
+            HeapSize = 12,
+
+            Offset = 12,
+
+            Value = 30,
+        }
+
+        public Count Seq;
 
         public ByteSize HeapSize;
 
-        public Count Length;
-
         public Address32 Offset;
 
-        public string Value;
+        public BinaryCode Data;
+
 
         [MethodImpl(Inline)]
-        public CliLiteralRecord(Count seq, ByteSize heap, Address32 offset, string value)
+        public CliBlob(Count seq, ByteSize heap, Address32 offset, byte[] data)
         {
-            Sequence = seq;
+            Seq = seq;
             HeapSize = heap;
-            Length = value.Length;
             Offset = offset;
-            Value = value;
+            Data = data;
         }
     }
 }

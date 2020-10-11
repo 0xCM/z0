@@ -15,7 +15,7 @@ namespace Z0
     {
         public const byte FieldCount = 9;
 
-        public const string TableId = "image.sectionheaders";
+        public const string TableId = "image.headers";
 
         public static ReadOnlySpan<byte> RenderWidths
             => new byte[FieldCount]{60,16,16,12,12,60,16,16,16};

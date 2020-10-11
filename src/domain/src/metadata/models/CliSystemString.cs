@@ -9,15 +9,13 @@ namespace Z0
     using System.Runtime.InteropServices;
 
     using static Konst;
-    using static RP;
 
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct CliUserStringRecord
+    [StructLayout(LayoutKind.Sequential), Table(TableId,FieldCount)]
+    public struct CliSystemString
     {
-        public const string TableId = "cli.strings.user";
+        public const string TableId = "cli.strings.system";
 
-        public const string DataType = "string";
+        public const byte FieldCount = 6;
 
         public Count Sequence;
 
@@ -32,7 +30,7 @@ namespace Z0
         public string Content;
 
         [MethodImpl(Inline)]
-        public CliUserStringRecord(Count seq, CliStringRecord.Source src, ByteSize heap, Address32 offset, string data)
+        public CliSystemString(Count seq, CliStringRecord.Source src, ByteSize heap, Address32 offset, string data)
         {
             Sequence = seq;
             Source = src;

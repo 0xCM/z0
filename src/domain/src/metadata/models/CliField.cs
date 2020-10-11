@@ -11,14 +11,14 @@ namespace Z0
     using static Konst;
 
     [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
-    public struct CliFieldRecord
+    public struct CliField
     {
         public const byte FieldCount = 7;
 
         public static ReadOnlySpan<byte> RenderWidths
             => new byte[FieldCount]{16,60,12,12,16,40,30};
 
-        public const string TableId = "image.fields";
+        public const string TableId = "cli.fields";
 
         public Count Sequence;
 
@@ -35,7 +35,7 @@ namespace Z0
         public string Attribs;
 
         [MethodImpl(Inline)]
-        public CliFieldRecord(Count seq, CliLiteralRecord field, CliBlobRecord sig, string attribs)
+        public CliField(Count seq, CliLiteral field, CliBlob sig, string attribs)
         {
             Sequence = seq;
             Sig = sig.Data;

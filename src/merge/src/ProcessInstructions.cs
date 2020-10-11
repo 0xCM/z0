@@ -73,8 +73,8 @@ namespace Z0
             try
             {
                 ProcessJumps(Wf, Source);
-                ProcessEnlisted(Wf,Source);
-                RenderSemantic(Wf,Source);
+                ProcessEnlisted(Wf, Source);
+                RenderSemantic(Wf, Source);
             }
             catch(Exception e)
             {

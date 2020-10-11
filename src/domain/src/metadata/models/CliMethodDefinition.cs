@@ -14,14 +14,24 @@ namespace Z0
     using static z;
 
     /// <summary>
-    /// Captures <see cref='MethodImport'/> data in usable form
+    /// Captures <see cref='MethodDefinition'/> data in usable form
     /// </summary>
-    public struct CliMethodImportRecord
+    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
+    public struct CliMethodDefinition
     {
-        public MethodImportAttributes Attributes;
+        public const string TableId = "cli.method.definition";
 
-        public ModuleReferenceHandle Module;
+        public const byte FieldCount = 5;
 
-        public StringRef Name;
+        public BinaryCode Signature;
+
+        public string Name;
+
+        public Address32 Rva;
+
+        public MethodAttributes Attributes;
+
+        public MethodImplAttributes ImplAttributes;
     }
+
 }

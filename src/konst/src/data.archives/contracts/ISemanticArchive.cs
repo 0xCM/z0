@@ -6,22 +6,22 @@ namespace Z0
 {
     public interface ISemanticArchive : IPartFilePaths
     {
-        FolderName SemanticFolder
-            => FolderName.Define("semantic");
+        FS.FolderName SemanticFolder
+            => FS.folder("asm.semantic");
 
-        FileExtension SemanticExt
-            => FileExtensions.Txt;
+        FS.FileExt SemanticExt
+            => FS.ext("txt");
 
-        FolderPath SemanticDir(FolderName folder)
-            => (ResRoot + SemanticFolder) + folder;
+        FS.FolderPath SemanticDir(FS.FolderName folder)
+            => DocRoot() + SemanticFolder + folder;
 
-        FolderPath SemanticDir(PartId part)
-            => SemanticDir(FolderName.Define(part.Format()));
+        FS.FolderPath SemanticDir(PartId part)
+            => SemanticDir(FS.folder(part.Format()));
 
-        FileName SemanticFileName(ApiHostUri host, FileExtension ext)
+        FS.FileName SemanticFileName(ApiHostUri host, FS.FileExt ext)
             => LegalFileName(host,ext);
 
-        FilePath SemanticPath(ApiHostUri host)
+        FS.FilePath SemanticPath(ApiHostUri host)
             => SemanticDir(host.Owner) + SemanticFileName(host, SemanticExt);
     }
 

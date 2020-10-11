@@ -12,6 +12,9 @@ namespace Z0
         FileName LegalFileName(ApiHostUri host, FileExtension ext)
             => FileName.define(string.Concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
 
+        FS.FileName LegalFileName(ApiHostUri host, FS.FileExt ext)
+            => FS.file(string.Concat(host.Owner.Format(), Chars.Dot, host.Name), ext);
+
         FileName AsmFileName(OpIdentity id)
             => LegalFileName(id, Asm);
 

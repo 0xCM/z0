@@ -10,6 +10,8 @@ namespace Z0
     {
         string Name {get;}
 
+        FS.FileExt Ext
+            => FS.ext(Name);
         string ITextual.Format()
             => Name;
     }

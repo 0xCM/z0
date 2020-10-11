@@ -13,9 +13,9 @@ namespace Z0
 
 
     [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
-    public struct CliConstantRecord
+    public struct CliConstant
     {
-        public const string TableId = "image.constant";
+        public const string TableId = "cli.constant";
 
         public const byte FieldCount = 5;
 
@@ -56,7 +56,7 @@ namespace Z0
         public BinaryCode Content;
 
         [MethodImpl(Inline)]
-        public CliConstantRecord(Count seq, CliHandleToken parent, ConstantTypeCode tc, BinaryCode value)
+        public CliConstant(Count seq, CliHandleToken parent, ConstantTypeCode tc, BinaryCode value)
         {
             Sequence = seq;
             ParentId = parent.Token;

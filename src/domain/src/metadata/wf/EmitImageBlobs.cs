@@ -10,8 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using F = CliBlobRecord.Fields;
-    using W = CliBlobRecord.RenderWidths;
+    using F = CliBlob.Fields;
+    using W = CliBlob.RenderWidths;
 
     [WfHost]
     public sealed class EmitImageBlobs : WfHost<EmitImageBlobs>
@@ -25,7 +25,7 @@ namespace Z0
 
     ref struct EmitImageBlobsStep
     {
-        const string DataType = CliBlobRecord.DataType;
+        const string TableId = CliBlob.TableId;
 
         public uint EmissionCount;
 
@@ -38,20 +38,20 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmitImageBlobsStep(IWfShell wf, WfHost host)
         {
-            Wf = wf;
+            Wf = wf.WithHost(host);
             Host = host;
             Parts = Wf.Api.Parts;
             EmissionCount = 0;
-            Wf.Created(Host);
+            Wf.Created();
         }
 
-        public ReadOnlySpan<CliBlobRecord> Read(IPart part)
+        public ReadOnlySpan<CliBlob> Read(IPart part)
         {
             using var reader = PeTableReader.open(part.PartPath());
             return reader.Blobs();
         }
 
-        static string format(in CliBlobRecord src, RecordFormatter<F,W> dst)
+        static string format(in CliBlob src, RecordFormatter<F,W> dst)
         {
             dst.Delimit(F.Sequence, src.Seq);
             dst.Delimit(F.HeapSize, src.HeapSize);
@@ -62,7 +62,7 @@ namespace Z0
 
         void Emit(IPart part)
         {
-            var dstPath = Wf.Paths.Table(CliBlobRecord.TableId, string.Concat(part.Id.Format(), Chars.Dot, DataType));
+            var dstPath = Wf.Db().Table(part.Id, TableId, FileKind.Csv);
             var data = Read(part);
             var count = (uint)data.Length;
             var formatter = Table.formatter<F,W>();
@@ -75,23 +75,23 @@ namespace Z0
 
             EmissionCount += count;
 
-            Wf.EmittedTable<CliBlobRecord>(Host, data.Length, dstPath);
+            Wf.EmittedTable<CliBlob>(Host, data.Length, dstPath);
         }
 
         public void Run()
         {
-            Wf.Running(Host, DataType);
+            Wf.Running();
 
-            Wf.Db().Clear(FS.folder(CliBlobRecord.TableId));
+            Wf.Db().Clear(FS.folder(TableId));
             foreach(var part in Parts)
                 Emit(part);
 
-            Wf.Ran(Host, delimit(DataType, EmissionCount));
+            Wf.Ran();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
     }
 }

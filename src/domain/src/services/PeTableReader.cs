@@ -33,7 +33,7 @@ namespace Z0
             return new PeTableReader(new ReaderState(stream, reader));
         }
 
-        public static ReadOnlySpan<ImageSectionHeader> headers(FilePath src)
+        public static ReadOnlySpan<ImageSectionHeader> headers(FS.FilePath src)
         {
             using var stream = File.OpenRead(src.Name);
             using var reader = new PEReader(stream);
@@ -75,7 +75,7 @@ namespace Z0
         public static string ustring(MetadataReader reader, UserStringHandle handle)
             => reader.GetUserString(handle);
 
-        public ReadOnlySpan<CliBlobRecord> Blobs()
+        public ReadOnlySpan<CliBlob> Blobs()
             => blobs(State);
 
         internal static TableIndex? index(Handle handle)

@@ -15,12 +15,12 @@ namespace Z0
 
     partial class PeTableReader
     {
-        public ReadOnlySpan<CliFieldRecord> Fields()
+        public ReadOnlySpan<CliField> Fields()
         {
             var reader = State.Reader;
             var handles = reader.FieldDefinitions.ToReadOnlySpan();
             var count = handles.Length;
-            var dst = Spans.alloc<CliFieldRecord>(count);
+            var dst = Spans.alloc<CliField>(count);
 
             for(var i=0u; i<count; i++)
             {
@@ -28,20 +28,20 @@ namespace Z0
                 var entry = reader.GetFieldDefinition(handle);
                 int offset = entry.GetOffset();
 
-                seek(dst,i) = new CliFieldRecord(i, name(State, entry, i), sig(State, entry, i), format(entry.Attributes));
+                seek(dst,i) = new CliField(i, name(State, entry, i), sig(State, entry, i), format(entry.Attributes));
             }
             return dst;
         }
 
-        public static CliBlobRecord sig(in ReaderState state, FieldDefinition src, Count seq)
+        public static CliBlob sig(in ReaderState state, FieldDefinition src, Count seq)
             => blob(state, src.Signature, seq);
 
-        public static ReadOnlySpan<CliFieldRvaRecord> rva(in ReaderState state)
+        public static ReadOnlySpan<CliFieldRva> rva(in ReaderState state)
         {
             var reader = state.Reader;
             var handles = reader.FieldDefinitions.ToReadOnlySpan();
             var count = handles.Length;
-            var dst = sys.alloc<CliFieldRvaRecord>(count);
+            var dst = sys.alloc<CliFieldRva>(count);
 
             for(var i=0u; i<count; i++)
             {
@@ -52,21 +52,21 @@ namespace Z0
                 var sig = PeTableReader.sig(state, entry, i);
                 var name = reader.GetString(entry.Name);
                 var va = entry.GetRelativeVirtualAddress();
-                dst[i] = new CliFieldRvaRecord((Address32)va, tName, name, sig);
+                dst[i] = new CliFieldRva((Address32)va, tName, name, sig);
             }
 
             return dst.OrderBy(x => x.Rva);
         }
 
-        public static CliLiteralRecord literal(in ReaderState state, StringHandle handle, Count seq)
+        public static CliLiteral literal(in ReaderState state, StringHandle handle, Count seq)
         {
             var value = state.Reader.GetString(handle);
             var offset = state.Reader.GetHeapOffset(handle);
             var size = state.Reader.GetHeapSize(HeapIndex.String);
-            return new CliLiteralRecord(seq, size, (Address32)offset, value);
+            return new CliLiteral(seq, size, (Address32)offset, value);
         }
 
-        public static CliLiteralRecord name(in ReaderState state, FieldDefinition entry, Count seq)
+        public static CliLiteral name(in ReaderState state, FieldDefinition entry, Count seq)
             => literal(state, entry.Name, seq);
 
         internal static string format(FieldAttributes src)
