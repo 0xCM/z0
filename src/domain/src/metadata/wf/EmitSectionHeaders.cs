@@ -37,7 +37,7 @@ namespace Z0
         {
             Wf = wf;
             Host = host;
-            Parts = Wf.Api.Storage;
+            Parts = Wf.Api.Parts;
             TargetPath = wf.Db().Table(ImageSectionHeader.TableId, "headers");
             Wf.Created(Host, TargetPath);
         }

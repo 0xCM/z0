@@ -36,7 +36,7 @@ namespace Z0
         {
             try
             {
-                using var wf = WfShell.shell(args);
+                using var wf = WfShell.create(args);
                 wf.Status(StepId, new {Message ="Running shell", Args = text.bracket(args.FormatList())});
                 wf.Status(StepId, "Shell run complete");
             }

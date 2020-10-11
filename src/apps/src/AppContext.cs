@@ -10,7 +10,7 @@ namespace Z0
 
     public class AppContext : IAppContext
     {
-        public SystemApiCatalog Api {get;}
+        public ISystemApiCatalog Api {get;}
 
         public IJsonSettings Settings {get;}
 
@@ -22,17 +22,7 @@ namespace Z0
 
         public event Action<IAppMsg> Next;
 
-        public AppContext(SystemApiCatalog parts, IPolyrand random, IJsonSettings settings, IAppMsgQueue queue)
-        {
-            Paths = Z0.ShellPaths.Default;
-            Next = msg => {};
-            Random = random;
-            Settings = settings ?? JsonSettings.Load(Paths.AppConfigPath);
-            MessageQueue = queue;
-            Api = parts;
-        }
-
-        public AppContext(IShellPaths paths, SystemApiCatalog parts, IPolyrand random, IJsonSettings settings, IAppMsgQueue queue)
+        public AppContext(IShellPaths paths, ISystemApiCatalog parts, IPolyrand random, IJsonSettings settings, IAppMsgQueue queue)
         {
             Paths = paths;
             Next = msg => {};

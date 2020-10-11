@@ -56,21 +56,20 @@ namespace Z0
 
         public ProcessInstructionsStep(IWfShell wf, WfHost host, ApiPartRoutines src)
         {
-            Wf = wf;
+            Wf = wf.WithHost(host);
             Host = host;
             Source = src;
-            Wf.Created(Host);
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
-
 
         public void Run()
         {
-            Wf.Running(Host, Source.Part);
+            Wf.Running();
             try
             {
                 ProcessJumps(Wf, Source);
@@ -81,7 +80,7 @@ namespace Z0
             {
                 Wf.Error(e);
             }
-            Wf.Ran(Host, Source.Part);
+            Wf.Ran();
         }
     }
 }

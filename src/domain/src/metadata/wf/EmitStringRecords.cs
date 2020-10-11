@@ -44,7 +44,7 @@ namespace Z0
         {
             Wf = wf;
             Host = host;
-            Parts = Wf.Api.Storage;
+            Parts = Wf.Api.Parts;
             EmissionCount = 0;
             PartCount = (uint)Parts.Length;
             Wf.Created(Host);

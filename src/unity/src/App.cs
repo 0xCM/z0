@@ -79,7 +79,7 @@ namespace Z0
 
         public static void Main(params string[] args)
         {
-            var wf = WfShell.shell(args);
+            var wf = WfShell.create(args);
             Traverse(wf,Assembly.GetEntryAssembly());
 
         }

@@ -44,7 +44,7 @@ namespace Z0
         {
             Wf = wf;
             Host = host;
-            Parts = Wf.Api.Storage;
+            Parts = Wf.Api.Parts;
             Index = default;
             TargetDir = wf.ResourceRoot + FolderName.Define("images");
             var process = Process.GetCurrentProcess();

@@ -23,7 +23,7 @@ namespace Z0
         public IShellPaths Paths {get;}
 
         [MethodImpl(Inline)]
-        public ShellContext(Assembly control, string[] args, ApiPartSet modules)
+        public ShellContext(Assembly control, string[] args, in ApiPartSet modules)
         {
             Control = control;
             Args = args;

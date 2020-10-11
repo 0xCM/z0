@@ -5,16 +5,20 @@
 namespace Z0
 {
     using System;
+    using System.Reflection;
+    using System.Linq;
+
+    using static Konst;
     using static z;
 
-    readonly struct App
+    public interface IApiPartSet
     {
-        public static int Main(params string[] args)
-        {
-            using var wf = WfShell.create(args);
-            using var runner = new WfRunner(wf);
-            runner.Run();
-            return 0;
-        }
+        FS.FolderPath Source {get;}
+
+        FS.Files ManagedSources {get;}
+
+        Assembly[] Components {get;}
+
+        ISystemApiCatalog Api {get;}
     }
 }

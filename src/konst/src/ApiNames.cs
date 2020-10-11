@@ -115,6 +115,10 @@ namespace Z0
 
         public const string WfCmd = wf + dot + cmd;
 
+        public const string WfShell = wf + dot + shell;
+
+        public const string WfEvents = wf + dot + events;
+
         public const string PrimalKinds = primal + dot + kinds;
 
         public const string PrimalKindBits = primal + dot + kinds + dot + bitfield;
@@ -129,6 +133,14 @@ namespace Z0
 
         const string signatures = nameof(signatures);
 
+        const string shell = nameof(shell);
+
+        const string events = nameof(events);
+
         public const string Signatures = signatures;
+
+
+
+        //const string wf = nameof(wf);
     }
 }

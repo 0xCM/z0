@@ -32,9 +32,13 @@ namespace Z0
         public EmitFieldLiteralsStep(IWfShell wf, WfHost host)
         {
             Host = host;
-            Wf = wf;
+            Wf = wf.WithHost(host);
+            Wf.Created();
+        }
 
-            Wf.Created(Host);
+        public void Dispose()
+        {
+            Wf.Disposed();
         }
 
         void Emit(ApiPartTypes src)
@@ -47,7 +51,7 @@ namespace Z0
         public void Run()
         {
             Target.Clear();
-            var parts = span(Wf.Api.Storage.Map(part => ApiQuery.types(part)));
+            var parts = span(Wf.Api.Parts.Map(part => ApiQuery.types(part)));
             foreach(var part in parts)
             {
                 try
@@ -56,15 +60,11 @@ namespace Z0
                 }
                 catch(Exception e)
                 {
-                    term.error(e);
+                    Wf.Error(e);
                 }
             }
         }
 
-        public void Dispose()
-        {
-            Wf.Disposed(Host);
-        }
 
         const string Sep = "| ";
 
@@ -114,7 +114,7 @@ namespace Z0
 
         void Emit(FieldRef[] src, FS.FilePath dst)
         {
-            Wf.Running(Host, dst.Name);
+            Wf.EmittingFile(nameof(FieldRef), dst);
             var input = span(src);
             var count = input.Length;
 
@@ -123,11 +123,18 @@ namespace Z0
 
             for(var i=0u; i<count; i++)
             {
-                ref readonly var field = ref skip(input,i);
-                writer.WriteLine(formatLine(field));
+                try
+                {
+                    ref readonly var field = ref skip(input,i);
+                    writer.WriteLine(formatLine(field));
+                }
+                catch(Exception e)
+                {
+                    Wf.Warn(e.Message);
+                }
             }
 
-            Wf.Ran(Host, dst.Name);
+            Wf.EmittedFile(nameof(FieldRef), count, dst);
         }
     }
 }

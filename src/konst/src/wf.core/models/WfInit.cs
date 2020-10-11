@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
     using static z;
@@ -26,7 +27,12 @@ namespace Z0
         public IShellPaths Paths {get;}
 
         /// <summary>
-        /// The controlling part
+        /// The entry assembly
+        /// </summary>
+        public Assembly Control {get;}
+
+        /// <summary>
+        /// The entry assembly identifier
         /// </summary>
         public PartId ControlId {get;}
 
@@ -43,7 +49,7 @@ namespace Z0
         /// <summary>
         /// The input data archive configuration
         /// </summary>
-        public ApiPartSet Modules {get;}
+        public IApiPartSet ApiParts {get;}
 
         /// <summary>
         /// The output data archive configuration
@@ -65,19 +71,20 @@ namespace Z0
         /// </summary>
         public WfLogConfig Logs {get;}
 
-        public SystemApiCatalog Api {get;}
+        public ISystemApiCatalog Api {get;}
 
         [MethodImpl(Inline)]
-        public WfInit(IShellContext shell, ApiPartSet modules)
+        public WfInit(IShellContext shell, IApiPartSet parts)
         {
             Shell = shell;
-            Modules = modules;
+            ApiParts = parts;
+            Control = Assembly.GetEntryAssembly();
             Args = shell.Args;
             Paths = shell.Paths;
-            Api = Modules.Api;
+            Api = ApiParts.Api;
             ControlId = Part.ExecutingPart;
             TargetArchive = new ArchiveConfig(FS.dir(Paths.LogRoot.Name) + FS.folder("capture/artifacts"));
-            PartIdentities = WfShell.parts(Args, Api.PartIdentities);
+            PartIdentities = WfShell.parse(Args, Api.PartIdentities);
             Resources = new ArchiveConfig(Paths.ResourceRoot);
             Settings = WfShell.settings(Shell);
             Logs = new WfLogConfig(ControlId, Paths.AppLogRoot);

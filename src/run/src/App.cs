@@ -34,7 +34,7 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {
-            using var wf = WfShell.shell(args);
+            using var wf = WfShell.create(args);
             using var state = AsmWorkflows.state(wf, AsmWorkflows.context(Context));
 
             try

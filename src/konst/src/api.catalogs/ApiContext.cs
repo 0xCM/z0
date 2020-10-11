@@ -24,47 +24,6 @@ namespace Z0
         internal ApiContext(in ApiContextState src)
             => Data = new ApiContextState[1]{src};
 
-        ref readonly ApiPartSet Modules
-        {
-            [MethodImpl(Inline)]
-            get => ref State.Modules;
-        }
-
-        public ReadOnlySpan<Assembly> Components
-        {
-            [MethodImpl(Inline)]
-            get => Modules.Assemblies;
-        }
-
-        ref readonly SystemApiCatalog SystemCatalog
-        {
-            [MethodImpl(Inline)]
-            get => ref Modules.Api;
-        }
-
-        public IApiPartCatalog[] PartCatalogs
-        {
-            [MethodImpl(Inline)]
-            get => SystemCatalog.Catalogs;
-        }
-
-        public FS.FolderPath ModuleRoot
-        {
-            [MethodImpl(Inline)]
-            get => Modules.Root;
-        }
-
-        public ref readonly FS.Files ManagedSources
-        {
-            [MethodImpl(Inline)]
-            get => ref Modules.ManagedSources;
-        }
-
-        public PartId[] PartIdentifiers
-        {
-            [MethodImpl(Inline)]
-            get => SystemCatalog.Identifiers;
-        }
 
         ApiContextState IStateful<ApiContextState>.State
             => State;

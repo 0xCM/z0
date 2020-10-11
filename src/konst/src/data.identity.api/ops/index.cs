@@ -20,7 +20,7 @@ namespace Z0
     partial struct ApiIdentify
     {
         [Op]
-        public static ApiCodeIndex index(IApiMemberLocator locator, SystemApiCatalog api, ApiHostUri uri, FilePath src)
+        public static ApiCodeIndex index(IApiMemberLocator locator, ISystemApiCatalog api, ApiHostUri uri, FilePath src)
         {
             var code = ApiIdentify.index(ApiCodeReader.Service.Read(src));
             var members = index(locator.Locate(api.FindHost(uri).Require()));
@@ -28,7 +28,7 @@ namespace Z0
         }
 
         [Op]
-        public static ApiCodeIndex index(IApiMemberLocator locator, SystemApiCatalog api, ApiHostUri host, FolderPath root)
+        public static ApiCodeIndex index(IApiMemberLocator locator, ISystemApiCatalog api, ApiHostUri host, FolderPath root)
         {
             var members = locator.Locate(api.FindHost(host).Require());
             var idx = index(members);

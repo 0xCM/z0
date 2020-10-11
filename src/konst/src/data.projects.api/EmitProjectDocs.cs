@@ -69,7 +69,7 @@ namespace Z0
         {
             var docs = Wf.ResourceRoot + FolderName.Define("docs");
             docs.Clear();
-            var src = collect(Wf.Modules.ManagedSources);
+            var src = collect(Wf.ApiParts.ManagedSources);
             var dst = new Dictionary<PartId, Dictionary<string,SummaryComment>>();
             foreach(var part in src.Keys)
             {

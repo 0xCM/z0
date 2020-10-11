@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static Konst;
 
@@ -19,13 +20,19 @@ namespace Z0
         /// <summary>
         /// The input data archive configuration
         /// </summary>
-        ApiPartSet Modules {get;}
+        IApiPartSet ApiParts {get;}
+
+        /// <summary>
+        /// The entry assembly
+        /// </summary>
+        Assembly Control
+            => Assembly.GetEntryAssembly();
 
         /// <summary>
         /// The configured api set
         /// </summary>
-        SystemApiCatalog Api
-            => Modules.Api;
+        ISystemApiCatalog Api
+            => ApiParts.Api;
 
         /// <summary>
         /// The controlling part
@@ -49,7 +56,7 @@ namespace Z0
         /// The parts considered by the workflow
         /// </summary>
         PartId[] PartIdentities
-            => WfShell.parts(Args, Api.PartIdentities);
+            => WfShell.parse(Args, Api.PartIdentities);
 
         /// <summary>
         /// The resource staging area

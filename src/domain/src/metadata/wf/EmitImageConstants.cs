@@ -39,7 +39,7 @@ namespace Z0
         {
             Wf = wf;
             Host = host;
-            Parts = Wf.Api.Storage;
+            Parts = Wf.Api.Parts;
             TargetDir = wf.Resources + FS.folder("constants");
             Wf.Created(Host);
         }

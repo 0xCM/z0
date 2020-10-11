@@ -5,16 +5,16 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
+    using System.Reflection;
+
+    using static Konst;
     using static z;
 
-    readonly struct App
+    partial struct WfShell
     {
-        public static int Main(params string[] args)
-        {
-            using var wf = WfShell.create(args);
-            using var runner = new WfRunner(wf);
-            runner.Run();
-            return 0;
-        }
+        [MethodImpl(Inline), Op]
+        public static PartId[] parse(string[] args, PartId[] fallback)
+            => ApiPartIdParser.parse(args,fallback);
     }
 }

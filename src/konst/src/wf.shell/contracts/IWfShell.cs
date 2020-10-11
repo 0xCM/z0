@@ -22,13 +22,13 @@ namespace Z0
 
     public interface IWfShell : IShellContext, IDisposable
     {
-        SystemApiCatalog Api {get;}
+        ISystemApiCatalog Api {get;}
 
         IShellContext Shell {get;}
 
         IWfEventSink WfSink {get;}
 
-        ApiPartSet Modules {get;}
+        IApiPartSet ApiParts {get;}
 
         IWfBroker Broker {get;}
 
@@ -36,13 +36,9 @@ namespace Z0
 
         IPolyrand Random {get;}
 
-        ApiContext ApiContext {get;}
-
         WfHost Host {get;}
 
         IWfShell WithSource(IPolyrand random);
-
-        WfShell<S> WithState<S>(S src);
 
         IWfShell WithHost(WfHost host);
 
@@ -234,6 +230,9 @@ namespace Z0
         void Ran<H,T>(H host, T content)
             where H : IWfHost<H>, new()
                 => Raise(ran(host, content, Ct));
+
+        void EmittingFile<T>(T source, FS.FilePath dst)
+            => Raise(new EmittingFileEvent<T>(Host, source, dst, Ct));
 
         void Emitted(WfStepId step, FS.FilePath dst, Count? segments = default)
             => Raise(emitted(step, dst, segments ?? 0, Ct));

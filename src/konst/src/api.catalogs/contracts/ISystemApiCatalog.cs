@@ -13,6 +13,8 @@ namespace Z0
 
     public interface ISystemApiCatalog
     {
+        IPart[] Parts {get;}
+
         PartId[] PartIdentities {get;}
 
         Assembly[] Components {get;}

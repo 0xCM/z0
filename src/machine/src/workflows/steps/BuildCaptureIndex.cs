@@ -192,7 +192,6 @@ namespace Z0
         {
             var count = src.Count;
             var records = span(src.Sequenced);
-            //var dst = Wf.Paths.Table("asm.rows",src.Key.ToString());
             var dst = Wf.Db().Table(AsmRow.TableId, src.Key.ToString());
             var formatter = Formatters.dataset<AsmTableField>();
             using var writer = dst.Writer();

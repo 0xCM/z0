@@ -17,7 +17,7 @@ namespace Z0
         Action<IAppMsg> MessageRelay
             => (e => term.print(e));
 
-        SystemApiCatalog Api {get;}
+        ISystemApiCatalog Api {get;}
 
         void ISink<IAppMsg>.Deposit(IAppMsg msg)
             => MessageQueue.Deposit(msg);

@@ -11,12 +11,12 @@ namespace Z0
 
     public readonly struct ApiContextState
     {
-        internal readonly ApiPartSet Modules;
+        internal readonly IApiPartSet ApiParts;
 
         [MethodImpl(Inline)]
-        internal ApiContextState(in ApiPartSet modules)
+        internal ApiContextState(IApiPartSet src)
         {
-            Modules = modules;
+            ApiParts = src;
         }
     }
 }

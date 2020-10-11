@@ -27,13 +27,13 @@ namespace Z0
             => parts.Select(part);
 
         [Op]
-        public static SystemApiCatalog system(Assembly[] src)
+        public static ISystemApiCatalog system(Assembly[] src)
             => new SystemApiCatalog(src.Where(ApiQuery.isPart).Select(ApiQuery.part).Where(x => x.IsSome()).Select(x => x.Value).OrderBy(x => x.Id));
 
         public static SystemApiCatalog system(FS.Files paths)
             => new SystemApiCatalog(ApiQuery.parts(paths.Data));
 
-        public static KeyedValues<PartId,Type>[] types(ClrTypeKind kind, SystemApiCatalog src)
+        public static KeyedValues<PartId,Type>[] types(ClrTypeKind kind, ISystemApiCatalog src)
         {
             switch(kind)
             {
@@ -44,9 +44,9 @@ namespace Z0
             }
         }
 
-        static KeyedValues<PartId,Type>[] enums(SystemApiCatalog src)
+        static KeyedValues<PartId,Type>[] enums(ISystemApiCatalog src)
         {
-            var x = from part in  src.Storage
+            var x = from part in  src.Parts
                     let enums = part.Owner.Enums()
                         orderby part.Id
                         select KeyedValues.@from(part.Id, enums);

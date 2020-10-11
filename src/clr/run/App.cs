@@ -17,7 +17,7 @@ ref struct Runner
 
     public static int Main(params string[] args)
     {
-        using var wf = WfShell.shell(args);
+        using var wf = WfShell.create(args);
         using var runner = new Runner(wf,args);
         runner.Run();
         return 0;

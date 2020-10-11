@@ -15,7 +15,7 @@ namespace Z0
     {
         public static int Main(params string[] args)
         {
-            using var wf = WfShell.shell(args);
+            using var wf = WfShell.create(args);
             AppWf.create().Run(wf);
             return 0;
         }

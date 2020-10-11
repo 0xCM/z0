@@ -20,7 +20,7 @@ namespace Z0
         /// <summary>
         /// The members of the compostion
         /// </summary>
-        public IPart[] Storage {get;}
+        public IPart[] Parts {get;}
 
         public Assembly[] Components {get;}
 
@@ -42,10 +42,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public SystemApiCatalog(params IPart[] parts)
         {
-            Storage = parts;
-            Identifiers = Storage.Select(p => p.Id);
-            Components = Storage.Select(p => p.Owner);
-            Catalogs = Storage.Select(x => ApiCatalogs.part(x) as IApiPartCatalog).Where(c => c.IsIdentified);
+            Parts = parts;
+            Identifiers = Parts.Select(p => p.Id);
+            Components = Parts.Select(p => p.Owner);
+            Catalogs = Parts.Select(x => ApiCatalogs.part(x) as IApiPartCatalog).Where(c => c.IsIdentified);
             ApiHosts = Catalogs.SelectMany(c => c.ApiHosts);
             OperationHosts = Catalogs.SelectMany(c => c.OperationHosts).Cast<IApiHost>().Array();
             PartIdentities = Identifiers;

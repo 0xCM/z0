@@ -34,7 +34,7 @@ namespace Z0
         {
             Wf = wf;
             Host = host;
-            Parts = wf.Api.Storage;
+            Parts = wf.Api.Parts;
             TargetDir = wf.ResourceRoot + FolderName.Define("fields");
             Wf.Created(Host);
         }

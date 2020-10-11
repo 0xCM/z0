@@ -38,7 +38,7 @@ namespace Z0
         {
             Wf = wf;
             Host = host;
-            Parts = wf.Api.Storage;
+            Parts = wf.Api.Parts;
             PartCount = (uint)Parts.Length;
             EmissionCount = 0;
             Wf.Created(Host);
