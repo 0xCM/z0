@@ -13,9 +13,9 @@ namespace Z0
     using K = FileKind;
     using FK = FileKinds;
 
-    public readonly struct AsmDoc : IContentKind<AsmDoc,ContentKind,string>
+    public readonly struct HexDoc : IContentKind<HexDoc,ContentKind,string>
     {
-        public const string Name = "asm";
+        public const string Name = ArchiveFileKindNames.hex;
 
         public ContentKind Kind
             => ContentKind.Asm;
@@ -23,8 +23,8 @@ namespace Z0
         public string Id
             => Name;
 
-        public FK.Asm FileKind
-            => K.Asm;
+        public FK.Hex FileKind
+            => K.Hex;
 
         public string Format()
             => Name;

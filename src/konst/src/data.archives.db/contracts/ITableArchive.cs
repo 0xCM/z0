@@ -10,6 +10,7 @@ namespace Z0
     using System.Linq;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    using X = ArchiveFileKinds;
 
     [Free]
     public interface ITableArchive : IFileArchive
@@ -42,9 +43,9 @@ namespace Z0
                 select Dataset(p)).FirstOrDefault();
 
         ParseResult<TextDoc> Dataset(string name)
-            => Dataset(Root + FS.file(name, ArchiveExt.Csv));
+            => Dataset(Root + FS.file(name, X.Csv));
 
         IEnumerable<FS.FilePath> DatasetPaths(FS.FolderName? subject = default)
-            => (Root + (subject ?? FS.folder("asm"))).Files(ArchiveExt.Csv, true);
+            => (Root + (subject ?? FS.folder("asm"))).Files(X.Csv, true);
     }
 }

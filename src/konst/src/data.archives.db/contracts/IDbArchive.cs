@@ -6,9 +6,11 @@ namespace Z0
 {
     using System;
 
+    using X = ArchiveFileKinds;
+
     public interface IDbArchive : IFileArchive
     {
-        IDbPaths DbPaths => Z0.DbPaths.create();
+        IDbPaths DbPaths {get;}
 
         FS.FilePath[] Clear(FS.FolderName id);
 
@@ -40,14 +42,14 @@ namespace Z0
             => DbPaths.TableRoot() + FS.file(id,FileKind.Csv);
 
         FS.FilePath Table<S>(string id, S subject, FS.FileExt? ext = null)
-            => DbPaths.TableRoot() + FS.folder(id) + FS.file(string.Format(RP.SlotDot2, id, subject), ext ?? ArchiveExt.Csv);
+            => DbPaths.TableRoot() + FS.folder(id) + FS.file(string.Format(RP.SlotDot2, id, subject), ext ?? X.Csv);
 
         FS.FilePath Table<K>(string id, K kind)
             where K : unmanaged,  IFileKind<K>
                 => DbPaths.TableRoot() + FS.file(id, kind.Ext);
 
         FS.FilePath Table(string id, PartId part, FS.FileExt? ext = null)
-            => DbPaths.TableRoot() +  FS.folder(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), ext ?? ArchiveExt.Csv);
+            => DbPaths.TableRoot() +  FS.folder(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), ext ?? X.Csv);
 
         FS.FilePath Table(PartId part, string id, FS.FileExt ext)
             => DbPaths.TableRoot() + FS.folder(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), ext);

@@ -15,14 +15,20 @@ namespace Z0
     {
         public ArchiveConfig Settings {get;}
 
+        readonly IWfShell Wf;
+
         [MethodImpl(Inline)]
-        public DbArchive(ArchiveConfig config)
+        public DbArchive(IWfShell wf, ArchiveConfig config)
         {
+            Wf = wf;
             Settings = config;
+            DbPaths = Z0.DbPaths.create(wf);
         }
 
         public FS.FolderPath Root
             => Settings.Root;
+
+        public IDbPaths DbPaths {get;}
 
         public FS.FilePath[] Clear(FS.FolderName id)
             => (api.tableRoot(Root) + id).Clear(z.list<FS.FilePath>()).ToArray();

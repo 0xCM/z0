@@ -15,7 +15,7 @@ namespace Z0
 
     public readonly struct CsvDoc : IContentKind<CsvDoc,ContentKind,string>
     {
-        public const string Name = "csv";
+        public const string Name = ArchiveFileKindNames.csv;
 
         public ContentKind Kind
             => ContentKind.Asm;

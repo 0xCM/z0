@@ -19,7 +19,6 @@ namespace Z0
         Csv = 2,
 
         Hex = 4,
-
     }
 
     public readonly struct ContentKind<H> : IContentKind<ContentKind<H>,ContentKind,string>

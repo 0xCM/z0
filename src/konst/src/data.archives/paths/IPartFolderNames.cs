@@ -4,8 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static ArchiveNames.Folders;
-    using L = ArchiveNames.Folders;
+    using static ArchiveFolderNames;
+
+    using L = ArchiveFolderNames;
 
     /// <summary>
     /// Defines common part path components

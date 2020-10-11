@@ -12,21 +12,22 @@ namespace Z0
     using static Konst;
 
     using api = ApiHexArchives;
+    using X = ArchiveFileKinds;
 
     public readonly struct ApiCodeArchive
     {
-        readonly FolderPath ArchiveRoot;
+        readonly FS.FolderPath ArchiveRoot;
 
         [MethodImpl(Inline)]
         public ApiCodeArchive(FS.FolderPath root)
         {
-            ArchiveRoot = FolderPath.Define(root.Name);
+            ArchiveRoot = root;
         }
 
         [MethodImpl(Inline)]
         public ApiCodeArchive(IWfShell wf)
         {
-            ArchiveRoot = FolderPath.Define((wf.CaptureRoot + FS.folder("code")).Name);
+            ArchiveRoot = wf.CaptureRoot + FS.folder("code");
         }
 
         public FS.FolderPath Root
@@ -41,7 +42,7 @@ namespace Z0
         public ApiCodeBlock[] Read(ApiHostUri host)
         {
             var hfn = FileName.define(host.Owner, host.Name, FileExtensions.HexLine);
-            var path = files(ArchiveRoot).Where(f => f.FileName == hfn).FirstOrDefault(FilePath.Empty);
+            var path = files(ArchiveRoot).Where(f => f.FileName.Name == hfn.Name).FirstOrDefault(FS.FilePath.Empty);
             return read(path);
         }
 
@@ -54,14 +55,14 @@ namespace Z0
         /// <summary>
         /// Enumerates the archived files
         /// </summary>
-        public IEnumerable<FilePath> Files()
-            => ArchiveRoot.Files(FileExtensions.HexLine, true);
+        public IEnumerable<FS.FilePath> Files()
+            => ArchiveRoot.Files(X.Hex, true);
 
         /// <summary>
         /// Enumerates the archived files owned by a specified part
         /// </summary>
         public IEnumerable<FilePath> Files(PartId owner)
-            => ArchiveRoot.Files(owner, FileExtensions.HexLine, true);
+            => FolderPath.Define(ArchiveRoot.Name).Files(owner, FileExtensions.HexLine, true);
 
         public IEnumerable<ApiHostCodeBlocks> Indices(params PartId[] owners)
             => api.indices(this, owners);
@@ -81,7 +82,7 @@ namespace Z0
         /// <summary>
         /// Reads the archived files with names that satisfy a specified predicate
         /// </summary>
-        public IEnumerable<ApiCodeBlock> Read(Func<FileName,bool> predicate)
+        public IEnumerable<ApiCodeBlock> Read(Func<FS.FileName,bool> predicate)
         {
             foreach(var file in Files().Where(f => predicate(f.FileName)))
             foreach(var item in Read(file))
@@ -103,15 +104,28 @@ namespace Z0
         /// </summary>
         /// <param name="id">The source path</param>
         public ApiCodeBlock[] Read(OpIdentity id)
-            => Read(ArchiveRoot + FileName.define(id, FileExtensions.HexLine));
+        {
+            var dir = FolderPath.Define(ArchiveRoot.Name);
+            var path = dir + FileName.define(id,FileExtension.Define("hex"));
+            return Read(FS.path(path.Name));
+        }
 
         public ApiHostCodeBlocks Index(FilePath src)
-            => api.index(this,src);
+            => api.index(this, src);
 
-        static FilePath[] files(FolderPath root)
-            => root.Files(FileExtensions.HexLine, true).Array();
+        public ApiHostCodeBlocks Index(FS.FilePath src)
+            => api.index(this, src);
 
-        static ApiCodeBlock[] read(FilePath src)
+        static FS.FilePath[] files(FS.FolderPath root)
+            => root.Files(X.Hex, true).Array();
+
+        // static FilePath[] files(FolderPath root)
+        //     => root.Files(FileExtensions.HexLine, true).Array();
+
+        // static ApiCodeBlock[] read(FilePath src)
+        //     => ApiHexReader.Service.Read(src).Where(x => x.IsNonEmpty);
+
+        static ApiCodeBlock[] read(FS.FilePath src)
             => ApiHexReader.Service.Read(src).Where(x => x.IsNonEmpty);
     }
 }

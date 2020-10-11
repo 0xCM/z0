@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static ArchiveNames.Ext;
+    using static ArchiveFileKindNames;
 
     using X = ArchiveExt;
 

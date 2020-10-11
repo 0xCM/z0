@@ -1,2 +1,2 @@
 dotnet build
-z0 run
+z0 merge run

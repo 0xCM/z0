@@ -6,7 +6,7 @@ namespace Z0
 {
     using static Hex8Seq;
 
-    public enum PartFileClass : byte
+    public enum ArchiveFileKindId : byte
     {
         /// <summary>
         /// Text-formatted x86-encoded assembly

@@ -5,17 +5,20 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Linq;
     using System.Collections.Generic;
-    using System.Reflection;
+    using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
 
-    partial struct Archives
+    public readonly partial struct FileArchives
     {
-        [MethodImpl(Inline), Op]
-        public static FileKindList kinds(params Assembly[] src)
-            => new FileKindList(src.SelectMany(x => x.Types().Tagged<FileKindAttribute>()));
+        [Op]
+        public static IEnumerable<FS.FolderPath> directories(FS.FolderPath root, bool recurse = true)
+        {
+            foreach(var path in root.SubDirs(recurse))
+                yield return FS.dir(path.Name);
+        }
     }
 }

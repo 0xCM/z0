@@ -16,6 +16,10 @@ namespace Z0
     [ApiHost]
     public readonly partial struct Archives
     {
+        [MethodImpl(Inline), Op]
+        public static ApiHostCodeBlocks index(ApiHostUri host, ApiCodeBlock[] code)
+            => new ApiHostCodeBlocks(host,code);
+
         [Op]
         public static void save(ListedFiles src, FS.FilePath dst)
         {
@@ -62,26 +66,18 @@ namespace Z0
         static SearchOption option(bool recurse)
             => recurse ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 
-        [MethodImpl(Inline), Op]
-        public static ISemanticArchive semantic()
-            => new SemanticArchive();
-
-        [MethodImpl(Inline), Op]
-        public static ApiHostCodeBlocks index(ApiHostUri host, ApiCodeBlock[] code)
-            => new ApiHostCodeBlocks(host,code);
-
-        public static Dictionary<PartId,PartFile[]> index(PartFileClass kind, PartFiles src, params PartId[] parts)
+        public static Dictionary<PartId,PartFile[]> index(ArchiveFileKindId kind, PartFiles src, params PartId[] parts)
         {
             switch(kind)
             {
-                case PartFileClass.Parsed:
-                    return select(PartFileClass.Parsed, src.Parsed, parts);
+                case ArchiveFileKindId.Parsed:
+                    return select(ArchiveFileKindId.Parsed, src.Parsed, parts);
                 default:
                     return dict<PartId,PartFile[]>();
             }
         }
 
-        static Dictionary<PartId,PartFile[]> select(PartFileClass kind, FS.Files src, PartId[] parts)
+        static Dictionary<PartId,PartFile[]> select(ArchiveFileKindId kind, FS.Files src, PartId[] parts)
         {
             var partSet = parts.ToHashSet();
             var files = (from f in src

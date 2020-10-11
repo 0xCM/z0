@@ -31,7 +31,8 @@ namespace Z0
 
         public static void RenderSemantic(IWfShell wf, in ApiPartRoutines src)
         {
-            SemanticRenderSvc.run(src);
+            var svc = AsmSemanticRender.create(wf);
+            svc.Render(src);
         }
 
         public static void ProcessEnlisted(IWfShell wf, in ApiPartRoutines src)

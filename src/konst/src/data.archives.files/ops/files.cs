@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Archives
+    partial struct FileArchives
     {
         [MethodImpl(Inline), Op]
         public static IEnumerable<FS.FilePath> files(FS.FolderPath root,  bool recurse = true)

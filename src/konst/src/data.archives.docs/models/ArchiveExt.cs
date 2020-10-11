@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static ArchiveNames.Ext;
+    using static ArchiveFileKindNames;
     using static FS;
 
     /// <summary>

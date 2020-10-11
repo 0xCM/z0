@@ -13,7 +13,14 @@ namespace Z0
             return dst;
         }
 
-        public FS.FolderPath DbRoot {get;set;}
+        public static DbPaths create(IWfShell wf)
+        {
+            var dst = new DbPaths();
+            dst.DbRoot = FS.dir(@"j:\database");
+            return dst;
+        }
+
+        public FS.FolderPath DbRoot;
 
         public FS.FolderPath TableRoot()
             => DbRoot + FS.folder("tables");
@@ -29,5 +36,8 @@ namespace Z0
 
         public FS.FilePath Doc(string name, FS.FileExt ext)
             => DocRoot() + FS.file(name, ext);
+
+        FS.FolderPath IDbPaths.DbRoot
+            => DbRoot;
     }
 }

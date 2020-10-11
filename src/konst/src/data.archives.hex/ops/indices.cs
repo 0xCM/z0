@@ -37,6 +37,20 @@ namespace Z0
             }
         }
 
+        public static ApiHostCodeBlocks index(ApiCodeArchive src, FS.FilePath path)
+        {
+            var uri = ApiUri.host(path.Name);
+            if(uri.Failed || uri.Value.IsEmpty)
+                return default;
+
+            var dst = z.list<ApiCodeBlock>();
+            foreach(var item in read(src))
+                if(item.IsNonEmpty)
+                    dst.Add(item);
+
+            return Archives.index(uri.Value, dst.Array());
+        }
+
         public static ApiHostCodeBlocks index(ApiCodeArchive src, FilePath path)
         {
             var uri = ApiUri.host(path.FileName);

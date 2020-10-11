@@ -12,6 +12,7 @@ namespace Z0
     using static Konst;
 
     using api = Table;
+    using X = ArchiveFileKinds;
 
     public readonly struct DbTables : ITableArchive
     {
@@ -32,7 +33,7 @@ namespace Z0
             => (FS.dir(Root.Name) + folder).Clear();
 
         public IEnumerable<FS.FilePath> Files()
-            => Root.Files(ArchiveExt.Csv, true);
+            => Root.Files(X.Csv, true);
 
         public Option<FilePath> Deposit<F,R>(R[] src, FS.FileName name)
             where F : unmanaged, Enum

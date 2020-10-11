@@ -27,9 +27,6 @@ namespace Z0
         public static FileExtension Dll
             => FileExtension.Define("dll", "Application library");
 
-        public static FileExtension Xml
-            => FileExtension.Define("xml", "Xml file");
-
         public static FileExtension Json
             => FileExtension.Define("json", "JSON file");
 

@@ -13,7 +13,7 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ListedFiles SourceFiles(in XedWfConfig config)
-            => Archives.list(FS.dir(config.SourceRoot.Name),"*.*", true);
+            => FileArchives.list(FS.dir(config.SourceRoot.Name),"*.*", true);
 
         [MethodImpl(Inline), Op]
         public static XedSources SourceArchive(FS.FolderPath root)

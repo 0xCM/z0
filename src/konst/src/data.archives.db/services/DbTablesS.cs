@@ -11,7 +11,9 @@ namespace Z0
 
     using static Konst;
     using static z;
+
     using api = Table;
+    using X = ArchiveFileKinds;
 
     public struct DbTables<S> : ITableArchive
     {

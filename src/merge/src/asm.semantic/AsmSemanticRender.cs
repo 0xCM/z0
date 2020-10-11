@@ -16,51 +16,61 @@ namespace Z0
     using static AsmRenderPatterns;
     using static Z0.Asm.OpKind;
 
-    public readonly struct SemanticRenderSvc : IDisposable
+    [ApiHost(ApiNames.AsmSemanticRender, true)]
+    public readonly struct AsmSemanticRender : IDisposable
     {
+        [MethodImpl(Inline), Op]
+        public static AsmSemanticRender create(IWfShell wf)
+            => new AsmSemanticRender(wf);
+
+        readonly IWfShell Wf;
+
         readonly HexFormatOptions DataFormat;
 
         readonly List<string> Buffer;
 
-        public SemanticRenderSvc(List<string> descriptions)
+        [MethodImpl(Inline)]
+        public AsmSemanticRender(IWfShell wf)
         {
-            Buffer = descriptions;
+            Wf = wf;
+            Buffer = list<string>();
             DataFormat = HexFormatOptions.HexData;
         }
+
 
         public void Dispose()
         {
 
         }
 
+        public void Render(in ApiPartRoutines src)
+            => Execute(src);
 
-        public static void run(in ApiPartRoutines src)
+        [MethodImpl(Inline), Op]
+        public static ISemanticArchive semantic(IWfShell wf)
+            => AsmSemanticArchive.create(wf);
+
+        [Op, MethodImpl(NotInline)]
+        void Execute(in ApiPartRoutines src)
         {
             var part = src.Part;
-            var dst = Archives.semantic();
-            run(src,dst);
-        }
-
-        static void run(in ApiPartRoutines src, ISemanticArchive dst)
-        {
-            var part = src.Part;
+            var dst = semantic(Wf);
             var dir = dst.SemanticDir(part).Clear();
             var view = src.ViewHosts;
-            var buffer = list<string>();
             var count = view.Length;
-            var semantic = new SemanticRenderSvc(buffer);
             for(var i=0u; i<count; i++)
             {
-                buffer.Clear();
-
+                Buffer.Clear();
                 ref readonly var host = ref skip(view,i);
                 var path = dst.SemanticPath(host.Uri);
                 using var writer = path.Writer();
-                semantic.Render(host, writer);
+                Render(host, writer);
             }
         }
 
-        public void Render(ApiHostRoutines src, StreamWriter dst)
+
+        [Op, MethodImpl(NotInline)]
+        void Render(ApiHostRoutines src, StreamWriter dst)
         {
             var functions = span(src.Routines);
             var count = src.RoutineCount;
@@ -75,7 +85,8 @@ namespace Z0
             }
         }
 
-        public void Render(ApiRoutineObsolete src, StreamWriter dst, ref MemoryAddress offset)
+        [Op, MethodImpl(NotInline)]
+        void Render(ApiRoutineObsolete src, StreamWriter dst, ref MemoryAddress offset)
         {
             Buffer.Clear();
 
@@ -103,10 +114,12 @@ namespace Z0
                 dst.WriteLine(rendered[j]);
         }
 
-        public string FormatMemory(MemoryAddress @base, Instruction src, byte i)
+        [Op, MethodImpl(NotInline)]
+        string FormatMemory(MemoryAddress @base, Instruction src, byte i)
             => Render(asm.meminfo(src, i));
 
-        public string Format(MemoryAddress @base, Instruction src, byte i)
+        [Op, MethodImpl(NotInline)]
+        string Format(MemoryAddress @base, Instruction src, byte i)
         {
             var kind = asm.kind(src, i);
             var desc = kind.ToString();
@@ -123,10 +136,12 @@ namespace Z0
             return desc;
         }
 
-        public string Format(BinaryCode src)
+        [Op, MethodImpl(NotInline)]
+        string Format(BinaryCode src)
             => text.concat("encoded", text.bracket(src.Length), Assign, src.Data.FormatHexBytes(DataFormat));
 
-        public string Footer(ApiInstruction src)
+        [Op, MethodImpl(NotInline)]
+        string Footer(ApiInstruction src)
         {
             if(asm.isCall(src.Instruction))
             {
@@ -144,7 +159,8 @@ namespace Z0
             return string.Empty;
         }
 
-        public void Render(ApiInstruction src, MemoryAddress address, MemoryAddress offset, OffsetSequence seq)
+        [Op, MethodImpl(NotInline)]
+        void Render(ApiInstruction src, MemoryAddress address, MemoryAddress offset, OffsetSequence seq)
         {
             var @base = src.Base;
             var fx = src.Instruction;
@@ -180,29 +196,36 @@ namespace Z0
             Buffer.Add(DelimitInstruction(location));
         }
 
-        [MethodImpl(Inline)]
-        public string DelimitInstruction(string location)
+        [Op, MethodImpl(NotInline)]
+        string DelimitInstruction(string location)
             => text.concat(location, ColSep, FxDelimiter);
 
-        public string LineLocation(Instruction src, MemoryAddress address, MemoryAddress offset, OffsetSequence seq)
+        [Op, MethodImpl(NotInline)]
+        string LineLocation(Instruction src, MemoryAddress address, MemoryAddress offset, OffsetSequence seq)
             => text.concat(RenderAddress(src, AddressPad),
                 Z0.Render.concat(text.spaced(offset)).PadRight(OffsetAddrPad),
                 seq.Format(InstructionCountPad));
 
-        public string InstructionHeader(ApiInstruction src, MemoryAddress address, MemoryAddress offset,  OffsetSequence seq)
+        [Op, MethodImpl(NotInline)]
+        string InstructionHeader(ApiInstruction src, MemoryAddress address, MemoryAddress offset,  OffsetSequence seq)
         {
             var left = LineLocation(src.Instruction, address, offset, seq);
             var right = text.concat(src.FormattedInstruction, LeftImply, src.InstructionCode, HeaderSep, Format(src.Encoded));
             return text.concat(left, ColSep, right);
         }
 
-        public static string Render(AsmBranchInfo src)
+        [Op, MethodImpl(NotInline)]
+        static string Render(AsmBranchInfo src)
             => text.concat(src.Source.Format(), " + ",  src.TargetOffset.FormatMinimal(), " -> ",  (src.Source + src.TargetOffset).Format());
 
         static HexFormatOptions HexSpec
-            => HexFormatOptions.define(zpad:false, specifier:false);
+        {
+            [MethodImpl(Inline), Op]
+            get => HexFormatOptions.define(zpad:false, specifier:false);
+        }
 
-        public static string format(in MemDx src)
+        [Op, MethodImpl(NotInline)]
+        static string format(in MemDx src)
             => (src.Size switch{
                 MemDxSize.y1 => ((byte)src.Value).FormatHex(HexSpec),
                 MemDxSize.y2 => ((ushort)src.Value).FormatHex(HexSpec),
@@ -210,21 +233,24 @@ namespace Z0
                 _ => (src.Value).FormatHex(HexSpec),
             }) + "dx";
 
-        [MethodImpl(Inline), Op]
-        public static string format(in ImmInfo src)
+        [Op, MethodImpl(NotInline)]
+        static string format(in ImmInfo src)
             => Z0.Render.concat(src.Value.FormatHex(zpad:false, prespec:false));
 
-        public static string Render(IceRegister src)
+        [Op, MethodImpl(NotInline)]
+        static string Render(IceRegister src)
             => text.format("{0}",src);
 
-        [MethodImpl(Inline), Op]
-        public static string Render(in ImmInfo src)
+        [Op, MethodImpl(NotInline)]
+        static string Render(in ImmInfo src)
             => format(src);
 
-        public static string Render(MemDx src)
+        [Op, MethodImpl(NotInline)]
+        static string Render(MemDx src)
             => format(src);
 
-        public static string format(OpKind src)
+        [Op, MethodImpl(NotInline)]
+        static string format(OpKind src)
         {
             var si = RenderSegKind(src);
             if(text.nonempty(si))
@@ -254,10 +280,12 @@ namespace Z0
             return result;
         }
 
-        public static string Render(OpKind src)
+        [Op, MethodImpl(NotInline)]
+        static string Render(OpKind src)
             => format(src);
 
-        public static string Render(MemDirect src)
+        [Op, MethodImpl(NotInline)]
+        static string Render(MemDirect src)
         {
             var dst = text.build();
             if(src.Base.IsSome())
@@ -277,9 +305,11 @@ namespace Z0
             return dst.ToString();
         }
 
+        [Op, MethodImpl(NotInline)]
         static string RenderSegKind(string symbol)
             => text.blank(symbol) ? EmptyString : text.concat("seg:", Chars.LBracket, symbol, Chars.RBracket);
 
+        [Op, MethodImpl(NotInline)]
         static string RenderSegKind(OpKind src)
             => RenderSegKind(src switch {
                 MemorySegDI => "di",
@@ -294,14 +324,16 @@ namespace Z0
             _ => ""
             });
 
-        public static string RenderAddress(Instruction src, int pad = 16)
+        [Op, MethodImpl(NotInline)]
+        static string RenderAddress(Instruction src, int pad = 16)
             => Z0.Render.concat(src.IP.FormatHex(zpad:false, prespec:false)).PadRight(pad);
 
-        public static string Render(MemorySize src)
+        [Op, MethodImpl(NotInline)]
+        static string Render(MemorySize src)
             => asm.identify(src).Format();
 
-        [Op]
-        public static string Render(MemInfo src)
+        [Op, MethodImpl(NotInline)]
+        static string Render(MemInfo src)
         {
             var builder = text.build();
 
@@ -331,8 +363,8 @@ namespace Z0
             return builder.ToString();
         }
 
-        [MethodImpl(Inline), Op]
-        public static string Render(MemoryScale src)
+        [Op, MethodImpl(NotInline)]
+        static string Render(MemoryScale src)
         {
             if(src.IsNonEmpty)
                 return src.Value.ToString();

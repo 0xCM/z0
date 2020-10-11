@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static ArchiveNames.Folders;
+    using static ArchiveFolderNames;
 
-    using FN = ArchiveNames.Folders;
+    using FN = ArchiveFolderNames;
 
     public interface IPartResPaths : IShellPaths
     {
