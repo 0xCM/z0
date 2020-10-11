@@ -104,7 +104,7 @@ namespace Z0
             CloseTypeDeclaration(writer);
             CloseFileNamespace(writer);
 
-            Wf.Raise(new EmittedHostBytes(Host, src.Host, (ushort)resources.Count, Wf.Ct));
+            Wf.Raise(new EmittedHostBytesEvent(Host, src.Host, (ushort)resources.Count, Wf.Ct));
         }
     }
 }

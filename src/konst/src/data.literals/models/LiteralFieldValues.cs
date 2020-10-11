@@ -10,15 +10,15 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct LiteralFields<F>
-        where F : unmanaged, Enum
+    public readonly struct LiteralFieldValues<F>
+        where F : unmanaged
     {
         readonly FieldInfo[] FieldSpecs;
 
         readonly F[] FieldValues;
 
         [MethodImpl(Inline)]
-        public LiteralFields(FieldInfo[] specs, F[] values)
+        public LiteralFieldValues(FieldInfo[] specs, F[] values)
         {
             FieldSpecs = specs;
             FieldValues = values;

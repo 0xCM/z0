@@ -8,32 +8,27 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Render;
 
     [Event(EventName)]
-    public readonly struct EmittedHostBytesEvent : IWfEvent<EmittedHostBytesEvent>
+    public readonly struct CpuCycledEvent<T> : IWfEvent<CpuCycledEvent<T>>
     {
-        public const string EventName = "EmittedHostBytes";
+        public const string EventName = "CpuCycled";
 
         public WfEventId EventId {get;}
 
-        public ApiHostUri Host {get;}
-
-        public Count AccessorCount {get;}
-
+        public CpuCycleInfo Description {get;}
         public FlairKind Flair {get;}
 
-
         [MethodImpl(Inline)]
-        public EmittedHostBytesEvent(WfStepId step, ApiHostUri host, ushort count, CorrelationToken ct, FlairKind flair = Running)
+        public CpuCycledEvent(WfStepId step, CpuCycleInfo  info, CorrelationToken ct, FlairKind flair = FlairKind.Status)
         {
-            EventId = (EventName,step,ct);
-            Host= host;
-            AccessorCount = count;
+            EventId = (EventName, step, ct);
+            Description = info;
             Flair = flair;
         }
 
+        [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Host, AccessorCount);
+            => Render.format(EventId, Description);
     }
 }

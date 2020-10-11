@@ -19,19 +19,18 @@ namespace Z0
             where W : unmanaged, Enum
                 => new RecordFormatter<F,W>(text.build(), delimiter);
 
-
         [MethodImpl(Inline)]
-        public static TableFormatter<F> formatter<F>(in LiteralFields<F> fields, StringBuilder dst, char delimiter)
+        public static TableFormatter<F> formatter<F>(in LiteralFieldValues<F> fields, StringBuilder dst, char delimiter)
             where F : unmanaged, Enum
                 => new TableFormatter<F>(dst, delimiter, fields);
 
         [MethodImpl(Inline)]
         public static TableFormatter<F> formatter<F>(F f = default)
             where F : unmanaged, Enum
-                => new TableFormatter<F>(text.build(), FieldDelimiter, Literals.fields<F>());
+                => new TableFormatter<F>(text.build(), FieldDelimiter, LiteralFields.fields<F>());
 
         [MethodImpl(Inline)]
-        public static TableFormatter<F> formatter<F>(in LiteralFields<F> fields, char delimiter = FieldDelimiter)
+        public static TableFormatter<F> formatter<F>(in LiteralFieldValues<F> fields, char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
                 => new TableFormatter<F>(text.build(), delimiter, fields);
 

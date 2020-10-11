@@ -38,7 +38,7 @@ namespace Z0
         {
             Wf = wf;
             Host = host;
-            Buffers = CpuBuffer.alloc(DefaultBufferSize);
+            Buffers = CpuBuffers.create(DefaultBufferSize);
             ProcessedCount = 0;
             Wf.Created(Host);
         }

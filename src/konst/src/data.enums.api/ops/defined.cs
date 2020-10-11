@@ -45,7 +45,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
         {
-            var tValues = Literals.fields<T>(src);
+            var tValues = LiteralFields.values<T>(src);
             var count = tValues.Length;
             var eValueBuffer = sys.alloc<EnumFieldValue<E,T>>(count);
             var dst = span(eValueBuffer);

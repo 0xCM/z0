@@ -16,17 +16,6 @@ namespace Z0
     {
         readonly Span<byte> Data;
 
-        [MethodImpl(Inline), Op]
-        public static CpuBuffers alloc(uint size)
-            => new CpuBuffers(size);
-
-        [MethodImpl(Inline)]
-        public static CpuBuffer<N,W,T> alloc<N,W,T>()
-            where N : unmanaged, ITypeNat
-            where W : unmanaged, ITypeWidth
-            where T : unmanaged
-                => new CpuBuffer<N,W,T>(new T[nat64u<N>()]);
-
         /// <summary>
         /// The number of bytes covered by the buffer
         /// </summary>
@@ -80,7 +69,6 @@ namespace Z0
             get => Data;
         }
 
-
         [MethodImpl(Inline)]
         public void Clear(W16 w, byte index)
         {
@@ -121,10 +109,8 @@ namespace Z0
         public ref Cell512 Cell(W512 w, byte index)
             => ref seek(Content.Cast<byte,Cell512>(), index);
 
-
         [MethodImpl(Inline)]
         uint offset(byte index)
             =>  MaxSize * index;
-
     }
 }

@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Reflection;
+    using System.Threading.Tasks;
 
     using System.Text;
 
@@ -424,9 +425,24 @@ namespace Z0
             }
 
         }
+
+
+        public static void delay(uint ms)
+            => Task.Run(async delegate {await Task.Delay((int)ms);}).Wait();
+
         public void Run()
         {
-            XedEtlWfHost.create().Run(Wf);
+            var worker = CpuWorkers.example(Wf, 4, Pow2.T21);
+
+            for(var i=0; i<100; i++)
+            {
+                delay(500);
+                var status = worker.Status();
+                Wf.Status(Host, status);
+
+            }
+            //var info = worker.Status();
+
         }
     }
 }

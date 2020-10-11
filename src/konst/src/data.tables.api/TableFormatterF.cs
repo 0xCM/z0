@@ -18,10 +18,10 @@ namespace Z0
 
         char Delimiter;
 
-        readonly LiteralFields<F> Fields;
+        readonly LiteralFieldValues<F> Fields;
 
         [MethodImpl(Inline)]
-        public TableFormatter(StringBuilder dst, char delimiter, LiteralFields<F> fields)
+        public TableFormatter(StringBuilder dst, char delimiter, LiteralFieldValues<F> fields)
         {
             Target = dst;
             Delimiter = delimiter;

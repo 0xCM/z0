@@ -14,12 +14,12 @@ namespace Z0
     public readonly struct TableHeader<F>
         where F : unmanaged, Enum
     {
-        readonly LiteralFields<F> Fields;
+        readonly LiteralFieldValues<F> Fields;
 
         readonly char Delimiter;
 
         [MethodImpl(Inline)]
-        public TableHeader(LiteralFields<F> fields, char delimiter = FieldDelimiter)
+        public TableHeader(LiteralFieldValues<F> fields, char delimiter = FieldDelimiter)
         {
             Fields = fields;
             Delimiter = delimiter;

@@ -12,6 +12,17 @@ namespace Z0
 
     public ref struct CpuBuffers
     {
+        [MethodImpl(Inline), Op]
+        public static CpuBuffers create(uint size)
+            => new CpuBuffers(size);
+
+        [MethodImpl(Inline)]
+        static CpuBuffer<N,W,T> buffer<N,W,T>()
+            where N : unmanaged, ITypeNat
+            where W : unmanaged, ITypeWidth
+            where T : unmanaged
+                => new CpuBuffer<N,W,T>(new T[nat64u<N>()]);
+
         readonly CpuBuffer<N64,W8,HexCode> step;
 
         readonly CpuBuffer<N64,W8,HexCode> run;
@@ -19,11 +30,11 @@ namespace Z0
         readonly char[] log;
 
         [MethodImpl(Inline)]
-        public CpuBuffers(uint size)
+        internal CpuBuffers(uint size)
         {
             log = z.alloc<char>(size);
-            step = CpuBuffer.alloc<N64,W8,HexCode>();
-            run = CpuBuffer.alloc<N64,W8,HexCode>();
+            step = buffer<N64,W8,HexCode>();
+            run = buffer<N64,W8,HexCode>();
         }
 
         [MethodImpl(Inline), Op]

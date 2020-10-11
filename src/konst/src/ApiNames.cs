@@ -139,7 +139,7 @@ namespace Z0
 
         public const string Signatures = signatures;
 
-
+        public const string LiteralFields = literal + dot + fields;
 
         //const string wf = nameof(wf);
     }

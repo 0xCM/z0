@@ -99,7 +99,7 @@ namespace Z0
         {
             var t = typeof(T);
             var tFields = TableFields.index(t);
-            var literals = Literals.fields<F>();
+            var literals = LiteralFields.fields<F>();
             var lFields = literals.Specs;
 
             var specs = index<T>();

@@ -19,9 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public CpuBuffer(T[] data)
-        {
-            Data = data;
-        }
+            => Data = data;
 
         public int Length
         {
