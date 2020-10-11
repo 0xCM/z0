@@ -12,11 +12,11 @@ namespace Z0
     partial struct z
     {
         /// <summary>
-        /// Returns a parametric numerick-kind classifier
+        /// Returns a parametric numeric-kind classifier
         /// </summary>
         /// <typeparam name="T">The numeric type</typeparam>
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static NK<T> nk<T>()
+        public static NK<T> nk<T>(T t = default)
             where T : unmanaged
                 => NumericKinds.kind<T>();
 

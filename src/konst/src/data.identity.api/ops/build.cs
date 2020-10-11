@@ -12,10 +12,6 @@ namespace Z0
 
     partial struct ApiIdentify
     {
-        [Op]
-        public static OpIdentity build(params ApiIdentityPart[] parts)
-            => OpIdentityParser.parse(string.Join(IDI.PartSep, parts.Select(x =>x.Identifier)));
-
         /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
         /// </summary>
@@ -63,15 +59,5 @@ namespace Z0
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => build(opname, w.TypeWidth, NumericKinds.kind<T>(), true);
-
-        /// <summary>
-        /// Produces an identifier of the form {opname}_{g}{bitsize(kind)}{u | i | f}
-        /// </summary>
-        /// <param name="opname">The base operator name</param>
-        /// <param name="k">The primal kind over which the identifier is deined</param>
-        [MethodImpl(Inline)]
-        public static OpIdentity build<K>(string opname, K k, bool generic)
-            where K : unmanaged, INumericKind
-                => build(opname, TypeWidth.None, k.Class, generic);
     }
 }

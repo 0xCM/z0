@@ -5,15 +5,14 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    partial struct ApiIdentify
+    partial class XTend
     {
-        [MethodImpl(Inline), Op]
-        public static ApiIdentityToken token(OpIdentity src)
-            => ApiIdentityTokens.dispense(src);
+        public static ApiOpIndex<T> ToOpIndex<T>(this IEnumerable<(OpIdentity,T)> src, bool deduplicate = true)
+            => ApiCode.index(src,deduplicate);
     }
 }

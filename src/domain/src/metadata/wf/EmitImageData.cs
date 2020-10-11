@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmitImageDataStep(IWfShell wf, WfHost host, IPart part)
         {
-            Wf = wf;
+            Wf = wf.WithHost(host);
             Host = host;
             Part = part;
             BaseAddress = ProcessImages.@base(Part);
@@ -61,17 +61,17 @@ namespace Z0
             LabelDelimiter = Chars.Pipe;
             BufferSize = ImageContentRecord.RowDataSize;
             SourcePath = FS.path(Part.Owner.Location);
-            Wf.Created(Host);
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
 
         public void Run()
         {
-            Wf.Running(Host);
+            Wf.Running();
             using var stream = SourcePath.Reader();
             using var reader = stream.BinaryReader();
             using var dst = TargetPath.Writer();

@@ -12,57 +12,6 @@ namespace Z0
     partial struct ApiIdentify
     {
         /// <summary>
-        /// Produces an identifier for a kinded structural function of segmented type
-        /// </summary>
-        /// <param name="k">The operation kind id</param>
-        /// <param name="w">A segment width representative</param>
-        /// <param name="t">A cell type representative</param>
-        /// <param name="generic">Whether the produced identity has a generic marker</param>
-        public static OpIdentity sfunc<T>(ApiOpId k, TypeWidth w, T t = default, bool generic = true)
-            where T : unmanaged
-                => ApiIdentify.build(name(k), w, NumericKinds.kind<T>(), generic);
-
-        /// <summary>
-        /// Produces an identifier for a kinded structural function of segmented type
-        /// </summary>
-        /// <param name="k">The operation kind id</param>
-        /// <param name="w">A segment width representative</param>
-        /// <param name="t">A cell type representative</param>
-        /// <param name="generic">Whether the produced identity has a generic marker</param>
-        /// <typeparam name="W">The width type</typeparam>
-        /// <typeparam name="T">The numeric type</typeparam>
-        public static OpIdentity sfunc<W,T>(ApiOpId k, W w = default, T t = default, bool generic = true)
-            where W : unmanaged, ITypeWidth
-            where T : unmanaged
-                => ApiIdentify.build(name(k), w.TypeWidth, NumericKinds.kind<T>(), generic);
-
-        /// <summary>
-        /// Produces an identifier for a kinded numeric structural function
-        /// </summary>
-        /// <param name="k">The operation kind id</param>
-        /// <typeparam name="T">The numeric type</typeparam>
-        public static OpIdentity sfunc<T>(ApiOpId k, T t = default)
-            => NumericOp(name(k), NumericKinds.kind<T>());
-
-        /// <summary>
-        /// Produces an identifier for a kinded numeric structural function
-        /// </summary>
-        /// <param name="k">The operation kind id</param>
-        /// <param name="nk">The operation numeric kind</param>
-        public static OpIdentity sfunc(ApiOpId k, NumericKind nk)
-            => NumericOp(name(k), nk);
-
-        /// <summary>
-        /// Produces an identifier for a kinded structural function of segmented type
-        /// </summary>
-        /// <param name="k">The operation kind id</param>
-        /// <param name="w">A segment width representative</param>
-        /// <param name="t">A cell type representative</param>
-        /// <param name="generic">Whether the produced identity has a generic marker</param>
-        public static OpIdentity sfunc(ApiOpId k, TypeWidth w, NumericKind nk, bool generic = true)
-            => build(name(k), w, nk, generic);
-
-        /// <summary>
         /// Defines an identifier of the form {opname}_WxN{u | i | f} where N := bitsize[T]
         /// </summary>
         /// <param name="opname">The base operator name</param>

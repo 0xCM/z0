@@ -149,12 +149,18 @@ namespace Z0
             => Created(Host);
 
         void Created<T>(WfStepId id, T content)
-            => Raise(created(id, content, Ct));
+        {
+            if(Verbosity == LogLevel.Babble)
+                Raise(created(id, content, Ct));
+        }
 
 
         void Created<H>(H host)
             where H : IWfHost<H>, new()
-                => Raise(created(host.Id, Ct));
+        {
+            if(Verbosity == LogLevel.Babble)
+                Raise(created(host.Id, Ct));
+        }
 
         void Disposed(WfStepId step)
         {
@@ -172,11 +178,17 @@ namespace Z0
             => Disposed(Host);
 
         void Disposed<T>(WfStepId step, T payload)
-            => Raise(disposed(step, payload, Ct));
+        {
+            if(Verbosity == LogLevel.Babble)
+                Raise(disposed(step, payload, Ct));
+        }
 
         void Disposed<H>(H host)
             where H : WfHost<H>, new()
-                => Raise(disposed(host.Id, Ct));
+        {
+            if(Verbosity == LogLevel.Babble)
+                Raise(disposed(host.Id, Ct));
+        }
 
         // ~ Running
         // ~ ---------------------------------------------------------------------------

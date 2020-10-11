@@ -16,16 +16,6 @@ namespace Z0
     partial struct ApiIdentify
     {
         /// <summary>
-        /// Produces an identifer for a kinded numeric operation
-        /// </summary>
-        /// <param name="k">The operation kind id</param>
-        /// <param name="nk">The operation numeric kind</typeparam>
-        /// <param name="generic">Whether the produced identity has a generic marker</param>
-        [MethodImpl(Inline), Op]
-        public static OpIdentity numeric(ApiOpId k,  NumericKind nk, bool generic = false)
-            => NumericOp(name(k), nk, generic);
-
-        /// <summary>
         /// Produces an identifier of the form {opname}_{bitsize(kind)}{u | i | f}
         /// </summary>
         /// <param name="opname">The base operator name</param>
@@ -33,25 +23,6 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static OpIdentity numeric(string opname, NumericKind k, bool generic = false)
             => build(opname, TypeWidth.None, k, generic);
-
-        /// <summary>
-        /// Produces an identifer for a kinded numeric operation
-        /// </summary>
-        /// <param name="k">The operation kind id</param>
-        /// <param name="generic">Whether the produced identity has a generic marker</param>
-        /// <typeparam name="T">The operation numeric kind</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static OpIdentity numeric<T>(ApiOpId k, T t = default, bool generic = false)
-            where T : unmanaged
-                =>  NumericOp<T>(name(k),  generic);
-
-        /// <summary>
-        /// Defines a scalar type identity
-        /// </summary>
-        /// <param name="width">The scalar bit-width</param>
-        [MethodImpl(Inline), Op]
-        public static NumericIdentity numeric(NumericKind nk)
-            => TypeIdentity.numeric(nk);
 
         /// <summary>
         /// Produces an identifier of the form {bitsize[T]}{u | i | f} for a numeric type
@@ -109,7 +80,7 @@ namespace Z0
                 select x;
 
         [MethodImpl(Inline)]
-        static NumericKind nk<T>(T t = default)
+        public static NumericKind nk<T>(T t = default)
             => NumericKinds.kind<T>();
 
         /// <summary>
@@ -120,17 +91,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static OpIdentity NumericOp(string opname, NumericKind k, bool generic = false)
             => ApiIdentify.build(opname, TypeWidth.None, k, generic);
-
-        /// <summary>
-        /// Produces an identifier of the form {opname}_g{kind}{u | i | f}
-        /// </summary>
-        /// <param name="opname">The base operator name</param>
-        /// <param name="t">A primal type representative</param>
-        /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
-        public static OpIdentity NumericOp<T>(string opname, NK<T> k, bool generic)
-            where T : unmanaged
-                => build(opname, TypeWidth.None, k, generic);
 
         /// <summary>
         /// Produces an identifier of the form {opname}_g{kind}{u | i | f}

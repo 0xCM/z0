@@ -48,21 +48,7 @@ namespace Z0
         public static IMultiDiviner diviner()
             => new ArtifactIdentities();
 
-        /// <summary>
-        /// Disables the generic indicator
-        /// </summary>
-        static OpIdentity WithoutGeneric(OpIdentity src)
-        {
-            var parts = ApiIdentify.components(src).ToArray();
-            if(parts.Length < 2)
-                return src;
 
-            if(parts[1].Identifier[0] != IDI.Generic)
-                return src;
-
-            parts[1] = parts[1].WithText(parts[1].Identifier.Substring(1));
-            return ApiIdentify.build(parts);
-        }
     }
 
     [ApiHost(ApiNames.ApiIdentityX)]

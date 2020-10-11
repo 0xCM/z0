@@ -40,7 +40,7 @@ namespace Z0.Asm
             var dst = HostCaptureArchive.create(CodeArchive.ArchiveRoot, host.Uri);
             if(dst.HostX86Path.Exists)
             {
-                var code = ApiIdentify.index(Identities.Services.Locator, ApiSet, host.Uri, CodeArchive.ArchiveRoot);
+                var code = ApiCode.index(Identities.Services.Locator, ApiSet, host.Uri, CodeArchive.ArchiveRoot).Members;
                 Context.Notify($"Correlated {code.EntryCount} {host} implemented operations with executable code");
 
                 foreach(var api in code.UnaryOperators)

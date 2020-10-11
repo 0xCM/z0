@@ -10,25 +10,27 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
+    using static Konst;
+    using static z;
+
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    using static Konst;
-    using static z;
 
-    partial struct ApiIdentify
+    [ApiHost]
+    public readonly partial struct ApiCode
     {
         [Op]
-        public static ApiCodeIndex index(IApiMemberLocator locator, ISystemApiCatalog api, ApiHostUri uri, FilePath src)
+        public static ApiHostMemberCode index(IApiMemberLocator locator, ISystemApiCatalog api, ApiHostUri host, FilePath src)
         {
-            var code = ApiIdentify.index(ApiCodeReader.Service.Read(src));
-            var members = index(locator.Locate(api.FindHost(uri).Require()));
-            return ApiIdentify.index(members, code);
+            var code = index(ApiCodeReader.Service.Read(src));
+            var members = index(locator.Locate(api.FindHost(host).Require()));
+            return new ApiHostMemberCode(host, index(members, code));
         }
 
         [Op]
-        public static ApiCodeIndex index(IApiMemberLocator locator, ISystemApiCatalog api, ApiHostUri host, FolderPath root)
+        public static ApiHostMemberCode index(IApiMemberLocator locator, ISystemApiCatalog api, ApiHostUri host, FolderPath root)
         {
             var members = locator.Locate(api.FindHost(host).Require());
             var idx = index(members);
@@ -36,16 +38,15 @@ namespace Z0
             var paths =  HostCaptureArchive.create(root, host);
             var code = ApiCodeReader.Service.Read(paths.HostX86Path);
             var opIndex =  index(code);
-            return ApiIdentify.index(idx, opIndex);
+            return new ApiHostMemberCode(host, index(idx, opIndex));
         }
 
         [Op]
         public static ApiMemberIndex index(ApiMembers src)
         {
-            var index = ApiIdentify.index(src.Storage.Select(h => (h.Id, h)),true);
-            return new ApiMemberIndex(index.HashTable, index.Duplicates);
+            var ix = index(src.Storage.Select(h => (h.Id, h)),true);
+            return new ApiMemberIndex(ix.HashTable, ix.Duplicates);
         }
-
 
         [Op]
         public static ApiIdentityToken[] index(ReadOnlySpan<OpIdentity> src, out uint duplicates)
@@ -101,9 +102,6 @@ namespace Z0
         public static ApiOpIndex<ApiCodeBlock> index(IEnumerable<ApiCodeBlock> src)
             => index(src.Select(x => (x.OpUri.OpId, x)));
 
-        static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new Exception(text.concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
-
         public static ApiOpIndex<T> index<T>(IEnumerable<(OpIdentity,T)> src, bool deduplicate = true)
         {
             var items = src.ToArray();
@@ -119,7 +117,7 @@ namespace Z0
                 if(deduplicate)
                     HashTable = items.Where(i => !duplicates.Contains(i.Item1.Identifier)).ToDictionary();
                 else
-                    throw DuplicateKeyException(duplicates);
+                    @throw(DuplicateKeyException(duplicates));
             }
             else
                 HashTable = src.ToDictionary();
@@ -127,5 +125,8 @@ namespace Z0
             var duplicated = duplicates.Select(d => OpIdentityParser.parse(d)).ToArray();
             return new ApiOpIndex<T>(HashTable, duplicated);
         }
+
+        static Exception DuplicateKeyException(IEnumerable<object> keys, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+            => new Exception(text.concat($"Duplicate keys were detected {keys.FormatList()}",  caller,file, line));
     }
 }

@@ -10,11 +10,11 @@ namespace Z0
 
     using static Konst;
 
-    public interface IAsmFunctionCases : IBinaryResourceIndex
+    public interface ICodeBlockIndex : IBinaryResourceIndex
     {
         BasedCodeBlock Case(ApiOpId k, params NumericKind[] kinds)
         {
-            var id = ApiIdentify.NumericOp(k, kinds).ToPropertyName();
+            var id = Signatures.NumericOp(k, kinds).ToPropertyName();
             var resource = TryFind(id);
             if(!resource)
                 throw new KeyNotFoundException(id);
@@ -23,17 +23,14 @@ namespace Z0
         }
     }
 
-    public readonly struct ParsedFunctions : IBinaryResourceIndex, IAsmFunctionCases
+    readonly struct ParsedSigCases : IBinaryResourceIndex, ICodeBlockIndex
     {
-        public static IAsmFunctionCases Service
-            => new ParsedFunctions(0);
-
         [MethodImpl(Inline)]
-        internal ParsedFunctions(int _)
+        internal ParsedSigCases(int _)
         {
-            var providers = Resources.BinaryProviders<ParsedFunctions>();
+            var providers = Resources.BinaryProviders<ParsedSigCases>();
             var count = providers.Length;
-            Data = Root.alloc<BinaryResource>(count);
+            Data = z.alloc<BinaryResource>(count);
 
             var index = 0;
             Register(index++, OpIdentityParser.parse(nameof(or_ᐤ8uㆍ8uᐤ)), or_ᐤ8uㆍ8uᐤ);

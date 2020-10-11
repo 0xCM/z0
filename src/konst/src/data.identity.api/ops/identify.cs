@@ -13,25 +13,11 @@ namespace Z0
 
     partial struct ApiIdentify
     {
-        [MethodImpl(Inline), Op]
-        public static ref ApiMetadataUri identify(MethodInfo src, out ApiMetadataUri dst)
-        {
-            dst = ApiMetadataUri.identify(src);
-            return ref dst;
-        }
 
         [MethodImpl(Inline), Op]
         public static ApiMetadataUri identify2(MethodInfo src)
             => ApiMetadataUri.identify(src);
 
-        [Op]
-        public static Option<SegmentedIdentity> identify(ApiIdentityPart part)
-        {
-            if(part.IsSegment && parse(part.Identifier, out var seg))
-                return seg;
-            else
-                return none<SegmentedIdentity>();
-        }
 
         /// <summary>
         /// Identifies a type

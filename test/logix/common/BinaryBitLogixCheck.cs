@@ -11,8 +11,6 @@ namespace Z0.Logix
     using static Konst;
     using static z;
 
-
-
     [ApiHost(ApiNames.BinaryBitLogixCheck,true)]
     public ref struct BinaryBitLogixCheck
     {
