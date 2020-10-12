@@ -5,31 +5,40 @@
 namespace Z0
 {
     using static ArchiveFileKindNames;
+    using static FS;
 
     public readonly struct ArchiveFileKinds
     {
-        public static FS.FileExt Asm => FS.ext(asm);
+        public static FileExt Asm => ext(asm);
 
-        public static FS.FileExt Csv => FS.ext(csv);
+        public static FileExt Csv => ext(csv);
 
-        public static FS.FileExt Cs => FS.ext(cs);
+        public static FileExt Cs => ext(cs);
 
-        public static FS.FileExt Dll => FS.ext(dll);
+        public static FileExt Dll => ext(dll);
 
-        public static FS.FileExt Xml => FS.ext(xml);
+        public static FileExt Xml => ext(xml);
 
-        public static FS.FileExt Json => FS.ext(json);
+        public static FileExt Json => ext(json);
 
-        public static FS.FileExt Exe => FS.ext(exe);
+        public static FileExt Exe => ext(exe);
 
-        public static FS.FileExt Txt => FS.ext(txt);
+        public static FileExt Txt => ext(txt);
 
-        public static FS.FileExt Il => FS.ext(il);
+        public static FileExt Il => ext(il);
 
-        public static FS.FileExt Hex => FS.ext(hex);
+        public static FileExt Hex => ext(hex);
 
-        public static FS.FileExt XCsv => FS.ext(xcsv);
+        public static FileExt XCsv => ext(xcsv);
 
-        public static FS.FileExt PCsv => FS.ext(pcsv);
+        public static FileExt PCsv => ext(pcsv);
+
+        public static FileExt Log => ext(log);
+
+        public static FileExt Lib => ext(lib);
+
+        public static FileExt StatusLog => ext(status) + Log;
+
+        public static FileExt ErrorLog => ext(error) + Log;
     }
 }

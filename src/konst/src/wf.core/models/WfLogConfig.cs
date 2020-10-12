@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static FS;
+    using X = ArchiveFileKinds;
 
     public struct WfLogConfig : ITextual
     {
@@ -38,8 +38,8 @@ namespace Z0
             Control = control;
             Root = root;
             var app = Control.Format();
-            StatusLog = root + FS.file(app, ArchiveExt.StatusLog);
-            ErrorLog = root + FS.file(app, ArchiveExt.ErrorLog);
+            StatusLog = root + FS.file(app, X.StatusLog);
+            ErrorLog = root + FS.file(app, X.ErrorLog);
         }
 
         [MethodImpl(Inline)]

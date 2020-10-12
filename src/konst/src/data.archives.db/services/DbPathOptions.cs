@@ -9,7 +9,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct DbOptions
+    public struct DbPathOptions
     {
         public FS.FolderPath Root;
 

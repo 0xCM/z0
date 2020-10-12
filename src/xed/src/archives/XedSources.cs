@@ -19,7 +19,7 @@ namespace Z0
         internal XedSources(FS.FolderPath root)
         {
             ArchiveRoot = root;
-            Files = ArchiveRoot.Files(ArchiveExt.Txt,true);
+            Files = ArchiveRoot.Files(ArchiveFileKinds.Txt,true);
         }
 
         bool DefinesInstructions(FS.FilePath file)

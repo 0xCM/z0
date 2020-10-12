@@ -35,8 +35,9 @@ namespace Z0
 
         public const string Processed = nameof(Processed);
 
-
         public const string ProcessingFile = nameof(ProcessingFile);
+
+        public const string ProcessedFile = nameof(ProcessedFile);
 
         public const string ToolCreated = nameof(ToolCreated);
 

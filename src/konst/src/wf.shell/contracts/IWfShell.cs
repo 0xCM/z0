@@ -75,8 +75,8 @@ namespace Z0
         FS.FolderPath AppData
             => FS.dir(Shell.Paths.AppDataRoot.Name);
 
-        IDbArchive Db()
-            => new DbArchive(this, new ArchiveConfig(DbPaths.create(this).DbRoot));
+        IDbFileArchive Db()
+            => Z0.Db.files(this, DbPaths.create(this));
 
         WfEventId Raise<E>(in E e)
             where E : IWfEvent
@@ -141,7 +141,7 @@ namespace Z0
 
         void Created(WfStepId id)
         {
-            if(Verbosity == LogLevel.Babble)
+            if(Verbosity.Babble())
                 Raise(created(id, Ct));
         }
 
@@ -150,27 +150,26 @@ namespace Z0
 
         void Created<T>(WfStepId id, T content)
         {
-            if(Verbosity == LogLevel.Babble)
+            if(Verbosity.Babble())
                 Raise(created(id, content, Ct));
         }
-
 
         void Created<H>(H host)
             where H : IWfHost<H>, new()
         {
-            if(Verbosity == LogLevel.Babble)
+            if(Verbosity.Babble())
                 Raise(created(host.Id, Ct));
         }
 
         void Disposed(WfStepId step)
         {
-            if(Verbosity == LogLevel.Babble)
+            if(Verbosity.Babble())
                 Raise(disposed(step, Ct));
         }
 
         void Disposed(WfHost host)
         {
-            if(Verbosity == LogLevel.Babble)
+            if(Verbosity.Babble())
                 Raise(disposed(host.Id, Ct));
         }
 
@@ -179,7 +178,7 @@ namespace Z0
 
         void Disposed<T>(WfStepId step, T payload)
         {
-            if(Verbosity == LogLevel.Babble)
+            if(Verbosity.Babble())
                 Raise(disposed(step, payload, Ct));
         }
 
@@ -195,13 +194,13 @@ namespace Z0
 
         void Running(WfStepId step)
         {
-            if(Verbosity == LogLevel.Babble)
+            if(Verbosity.Babble())
                 Raise(running(step, Ct));
         }
 
         void Running(WfHost host)
         {
-            if(Verbosity == LogLevel.Babble)
+            if(Verbosity.Babble())
                 Raise(running(host, Ct));
         }
 
@@ -232,7 +231,7 @@ namespace Z0
 
         void Ran(WfStepId step)
         {
-            if(Verbosity == LogLevel.Babble)
+            if(Verbosity.Babble())
                 Raise(new RanEvent(step, Ct));
         }
 
@@ -271,6 +270,24 @@ namespace Z0
 
         void EmittedTable(Type type, Count count, FS.FilePath dst)
             => EmittedTable(Host,type,count,dst);
+
+        void ProcessingFile<T>(FS.FilePath src, T kind)
+        {
+            if(Verbosity.Babble())
+                Raise(new ProcessingFileEvent<T>(Host, kind, src, Ct));
+        }
+
+        void ProcessedFile<T>(FS.FilePath src, T kind)
+        {
+            if(Verbosity.Babble())
+                Raise(new ProcessedFileEvent<T>(Host, src, kind, Ct));
+        }
+
+        void ProcessedFile<T,M>(FS.FilePath src, T kind, M metric)
+        {
+            if(Verbosity.Babble())
+                Raise(new ProcessedFileEvent<T,M>(Host, src, kind, metric, Ct));
+        }
 
         void Processed<T>(WfStepId step, DataFlow<T> flow)
             => Raise(processed(step, flow, Ct));

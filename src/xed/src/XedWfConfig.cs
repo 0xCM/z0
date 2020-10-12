@@ -20,7 +20,7 @@ namespace Z0
             Target = DbTables.create(wf.Db().Root + FS.folder("tables") + FS.folder("xed"));
         }
 
-        public readonly ITableArchive Target;
+        public readonly IDbTableArchive Target;
 
         public FS.FileName SummaryFile
             => FS.file(text.format("{0}.{1}", "xed", "summary"), DataFileExt);
@@ -44,7 +44,7 @@ namespace Z0
             => FS.folder("categories");
 
         public FS.FileExt DataFileExt
-            => ArchiveExt.Csv;
+            => ArchiveFileKinds.Csv;
 
         public xed_ext[] Extensions
         {

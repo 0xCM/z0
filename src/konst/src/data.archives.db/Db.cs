@@ -14,6 +14,14 @@ namespace Z0
     public readonly partial struct Db
     {
         [MethodImpl(Inline), Op]
+        public static IDbTableArchive tables<S>(IWfShell wf, S subject)
+            => new DbTables<S>(wf.Db(), subject);
+
+        [MethodImpl(Inline), Op]
+        public static IDbFileArchive files(IWfShell wf, DbPaths paths)
+            => new DbFiles(wf, paths);
+
+        [MethodImpl(Inline), Op]
         public static ObjectName name(string src)
             => new ObjectName(src);
 
@@ -26,11 +34,11 @@ namespace Z0
             => relate(name(src), name(dst));
 
         [MethodImpl(Inline), Op]
-        public static Key key(in ObjectName id)
-            => new Key(id.Ref.Address);
+        public static DbKey key(in ObjectName id)
+            => new DbKey(id.Ref.Address);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Key<T> key<T>(T src)
+        public static DbKey<T> key<T>(T src)
             where T : unmanaged
                 => src;
 

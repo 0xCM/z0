@@ -9,6 +9,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
+    using static ArchiveFileKinds;
 
     partial struct FS
     {
@@ -36,6 +37,6 @@ namespace Z0
         /// <param name="recurse">Specifies whether subdirectories should be searched</param>
         [MethodImpl(Inline), Op]
         public static Source<FilePath> managed(FolderPath src, bool recurse = false)
-            => files(src, recurse, ArchiveExt.Dll, ArchiveExt.Exe).Where(managed);
+            => files(src, recurse, Dll, Exe).Where(managed);
     }
 }

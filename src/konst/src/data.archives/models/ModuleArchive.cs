@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using static ArchiveExt;
+    using static ArchiveFileKinds;
 
     public readonly struct ModuleArchive : IModuleArchive
     {

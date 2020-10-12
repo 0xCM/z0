@@ -10,32 +10,34 @@ namespace Z0
 
     using static Konst;
     using static Render;
-    using static z;
 
     [Event(EventName)]
-    public readonly struct ProcessingFileEvent<T> : IWfEvent<ProcessingFileEvent<T>>
+    public readonly struct ProcessedFileEvent<T,M> : IWfEvent<ProcessedFileEvent<T,M>>
     {
-        public const string EventName = GlobalEvents.ProcessingFile;
+        public const string EventName = GlobalEvents.ProcessedFile;
 
         public WfEventId EventId {get;}
 
         public T FileKind {get;}
+
+        public M Metric {get;}
 
         public FS.FilePath SourcePath {get;}
 
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ProcessingFileEvent(WfStepId step, T kind, FS.FilePath src, CorrelationToken ct, FlairKind flair = Running)
+        public ProcessedFileEvent(WfStepId step, FS.FilePath src, T kind,  M metric, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
             SourcePath = src;
             FileKind = kind;
+            Metric = metric;
             Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, SourcePath.ToUri());
+            => string.Format(RP.PSx4, EventId, FileKind, Metric, SourcePath.ToUri());
     }
 }

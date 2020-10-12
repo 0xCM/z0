@@ -15,7 +15,7 @@ namespace Z0.Asm
     {
         public static IAsmServices Services => default(AsmServices);
 
-        public static FS.FilePath emit(ApiHostUri uri, ReadOnlySpan<AsmRoutine> src, in AsmFormatConfig format, IDbArchive dst)
+        public static FS.FilePath emit(ApiHostUri uri, ReadOnlySpan<AsmRoutine> src, in AsmFormatConfig format, IDbFileArchive dst)
         {
             var count = src.Length;
             if(count != 0)

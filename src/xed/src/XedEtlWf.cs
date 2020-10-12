@@ -34,22 +34,25 @@ namespace Z0.Xed
 
         readonly XedStage Stage;
 
-        readonly ITableArchive Target;
+        readonly IDbTableArchive Target;
 
+        readonly WfHost Host;
         public XedEtlWf(IWfShell wf, XedWfConfig config)
         {
-            Wf = wf;
+            Host = WfSelfHost.create(typeof(XedEtlWf));
+            Wf = wf.WithHost(Host);
+
             Config = config;
             Settings = config.Settings;
             Source = XedWfOps.SourceArchive(Config.SourceRoot);
             Stage = XedStage.Create(Wf.Db().StageRoot("xed"));
-            Target = DbFiles.tables(wf, "xed");
-            Wf.Created(typeof(XedEtlWf));
+            Target = Db.tables(wf, "xed");
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(typeof(XedEtlWf));
+            Wf.Disposed();
         }
 
         public XedPattern[] ExtractPatterns()
@@ -64,6 +67,8 @@ namespace Z0.Xed
                 {
                     ref readonly var file = ref skip(files,i);
                     var id = Wf.Raise(new ParsingXedInstructions(ParseInstructionsStep.StepId, file, Wf.Ct));
+                    Wf.ProcessingFile(file, "instructions");
+
                     var parsed = span(parser.ParseInstructions(file));
                     for(var j = 0; j< parsed.Length; j++)
                     {
@@ -72,7 +77,8 @@ namespace Z0.Xed
                         Stage.Deposit(parsed, file.FileName);
                     }
 
-                    Wf.Raise(new ParsedXedInstructions(step, FS.path(file.Name), parsed.Length, Wf.Ct));
+
+                    Wf.ProcessedFile(FS.path(file.Name), "instructions", parsed.Length);
                 }
             }
             catch(Exception e)

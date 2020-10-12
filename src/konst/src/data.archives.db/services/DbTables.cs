@@ -14,12 +14,12 @@ namespace Z0
     using api = Table;
     using X = ArchiveFileKinds;
 
-    public readonly struct DbTables : ITableArchive
+    public readonly struct DbTables : IDbTableArchive
     {
         public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
-        public static ITableArchive create(FS.FolderPath root)
+        public static IDbTableArchive create(FS.FolderPath root)
             => new DbTables(root);
 
         [MethodImpl(Inline)]

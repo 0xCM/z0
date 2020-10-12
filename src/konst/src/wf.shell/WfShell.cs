@@ -11,6 +11,13 @@ namespace Z0
     using static Konst;
     using static z;
 
+    partial class XTend
+    {
+        [MethodImpl(Inline), Op]
+        public static bool Babble(this LogLevel src)
+            => src == LogLevel.Babble;
+    }
+
     [ApiHost(ApiNames.WfShell)]
     public partial struct WfShell : IWfShell
     {

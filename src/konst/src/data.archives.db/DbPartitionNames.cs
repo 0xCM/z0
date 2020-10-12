@@ -7,13 +7,15 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;
-
-    [ApiHost("api")]
-    public readonly partial struct XedWfOps
+    [LiteralProvider]
+    public readonly struct DbPartitionNames
     {
-        [Op]
-        public static FS.FileName TargetRuleFile(FS.FileName src, string name)
-            => FS.file(text.format("{0}.{1}.{2}.{3}", "xed", "rules", src.WithoutExtension, name), ArchiveFileKinds.Csv);
+        public const string Docs = "docs";
+
+        public const string Tables = "tables";
+
+        public const string Sources = "sources";
+
+        public const string Stage = "stage";
     }
 }

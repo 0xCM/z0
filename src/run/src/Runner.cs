@@ -16,6 +16,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static ArchiveFileKinds;
 
     public ref struct Runner
     {
@@ -292,7 +293,7 @@ namespace Z0
 
         void EmitOpCodes()
         {
-            new EmitAsmOpCodes().Configure(Wf.Db().DbPaths.DbRoot + FS.file("AsmOpcodes",ArchiveExt.Csv)).Run(Wf);
+            new EmitAsmOpCodes().Configure(Wf.Db().DbPaths.DbRoot + FS.file("AsmOpcodes", Csv)).Run(Wf);
         }
 
         ReadOnlySpan<ApiCaptureBlock> Blocks(MethodInfo[] src)
@@ -309,7 +310,7 @@ namespace Z0
         ReadOnlySpan<AsmRoutineCode> Capture(MethodInfo[] src, string label)
         {
             var results = Blocks(src);
-            var target = Wf.Paths.AppLogRoot + FS.file(label, ArchiveExt.Asm);
+            var target = Wf.Paths.AppLogRoot + FS.file(label, ArchiveFileKinds.Asm);
             return Decode(results, target);
         }
 

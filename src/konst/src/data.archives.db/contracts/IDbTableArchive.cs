@@ -13,7 +13,7 @@ namespace Z0
     using X = ArchiveFileKinds;
 
     [Free]
-    public interface ITableArchive : IFileArchive
+    public interface IDbTableArchive : IFileArchive
     {
         Option<FilePath> Deposit<F,R>(R[] src, FS.FileName name)
             where F : unmanaged, Enum

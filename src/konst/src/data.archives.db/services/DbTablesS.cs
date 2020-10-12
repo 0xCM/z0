@@ -15,16 +15,16 @@ namespace Z0
     using api = Table;
     using X = ArchiveFileKinds;
 
-    public struct DbTables<S> : ITableArchive
+    public struct DbTables<S> : IDbTableArchive
     {
-        public IDbArchive Db {get;}
+        public IDbFileArchive Db {get;}
 
         public S Subject {get;}
 
         public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
-        internal DbTables(IDbArchive archive, S subject)
+        internal DbTables(IDbFileArchive archive, S subject)
         {
             Db = archive;
             Subject = subject;
@@ -38,7 +38,7 @@ namespace Z0
             => (FS.dir(Root.Name) + folder).Clear();
 
         public IEnumerable<FS.FilePath> Files()
-            => Root.Files(ArchiveExt.Csv, true);
+            => Root.Files(X.Csv, true);
 
         public Option<FilePath> Deposit<F,R>(R[] src, FS.FileName name)
             where F : unmanaged, Enum

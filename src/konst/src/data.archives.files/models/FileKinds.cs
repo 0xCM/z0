@@ -9,11 +9,10 @@ namespace Z0
 
     using static ArchiveFileKindNames;
 
-    using X = ArchiveExt;
+    using X = ArchiveFileKinds;
 
     public readonly struct FileKinds
     {
-
         [FileKind]
         public readonly struct PCsv : IFileKind<PCsv>
         {
@@ -46,7 +45,7 @@ namespace Z0
                 => cil;
 
             public FS.FileExt Ext
-                => X.Cil;
+                => X.Il;
 
             public static implicit operator FS.FileExt(Cil src)
                 => src.Ext;
