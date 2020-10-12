@@ -9,18 +9,15 @@ namespace Z0
 
     using static Konst;
 
-    public interface IToolConfig
-    {
-        ToolId ToolId {get;}
-
-        FolderPath Source {get;}
-
-        FolderPath Target {get;}
-    }
-
-    public interface IToolConfig<T> : IToolConfig
+    public struct ToolEmission<T> : IToolEmission<T>
         where T : struct, ITool<T>
     {
+        public FS.FilePath Target {get;}
 
+        [MethodImpl(Inline)]
+        public ToolEmission(FS.FilePath path)
+        {
+            Target = Files.normalize(path);
+        }
     }
 }

@@ -142,5 +142,7 @@ namespace Z0
         public const string AppErrors = app + dot + errors;
 
         public const string AppErrorMsg = app + dot + errors + dot + msg;
+
+        public const string ToolApi = "tools.api";
     }
 }

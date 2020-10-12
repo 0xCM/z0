@@ -10,7 +10,6 @@ namespace Z0
 
     using static Konst;
 
-
     public partial struct ProcDump : ITool<ProcDump>
     {
         [StringLiteral]
@@ -27,5 +26,4 @@ namespace Z0
             return dst;
         }
     }
-
 }

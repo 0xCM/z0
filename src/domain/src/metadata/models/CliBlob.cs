@@ -17,6 +17,8 @@ namespace Z0
 
         public const byte FieldCount = 4;
 
+        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{12,12,12,30};
+
         public enum Fields : ushort
         {
             Sequence = 0,
@@ -28,16 +30,16 @@ namespace Z0
             Value = 3,
         }
 
-        public enum RenderWidths : ushort
-        {
-            Sequence = 12,
+        // public enum RenderWidths : ushort
+        // {
+        //     Sequence = 12,
 
-            HeapSize = 12,
+        //     HeapSize = 12,
 
-            Offset = 12,
+        //     Offset = 12,
 
-            Value = 30,
-        }
+        //     Value = 30,
+        // }
 
         public Count Seq;
 
@@ -46,7 +48,6 @@ namespace Z0
         public Address32 Offset;
 
         public BinaryCode Data;
-
 
         [MethodImpl(Inline)]
         public CliBlob(Count seq, ByteSize heap, Address32 offset, byte[] data)

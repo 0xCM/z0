@@ -6,24 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Diagnostics;
 
     using static Konst;
 
-    public readonly partial struct MsBuild
+    using static ToolFolderNames;
+
+    public readonly struct ToolFolders
     {
-        public enum LoggerVerbosity : byte
-        {
-            Quiet,
+        public static FS.FolderName Input => FS.folder(input);
 
-            Minimal,
+        public static FS.FolderName Output => FS.folder(output);
 
-            Normal,
-
-            Detailed,
-
-            Diagnostic
-        }
+        public static FS.FolderName Processed => FS.folder(processed);
     }
-
 }

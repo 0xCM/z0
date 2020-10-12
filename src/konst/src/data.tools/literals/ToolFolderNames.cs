@@ -6,35 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
-    using static FS;
 
+    using static Konst;
 
-    public interface IScriptFile
+    [LiteralProvider]
+    public readonly struct ToolFolderNames
     {
-        
-    }
+        public const string input = nameof(input);
 
-    public readonly struct Projects
-    {
+        public const string output = nameof(output);
 
-    }
-
-    public readonly struct CppProject
-    {
-
-
-    }
-
-    public readonly struct CsProject
-    {
-
-
-    }
-
-    public readonly struct Production<S,T>
-    {
-
-
+        public const string processed = nameof(processed);
     }
 }

@@ -12,10 +12,10 @@ namespace Z0
     {
         ToolId ToolId {get;}
 
-        FS.FilePath EmissionPath {get;}
+        FS.FilePath Target {get;}
     }
 
-    public interface IToolFile<T> : IToolFile
+    public interface IToolEmission<T> : IToolFile
         where T : struct, ITool<T>
     {
         T Tool => default(T);
@@ -24,7 +24,7 @@ namespace Z0
             => Tool.ToolId;
     }
 
-    public interface IToolFile<T,F> : IToolFile<T>
+    public interface IToolFile<T,F> : IToolEmission<T>
         where T : struct, ITool<T>
         where F : unmanaged, Enum
     {

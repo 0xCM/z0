@@ -13,7 +13,7 @@ namespace Z0
         where F : unmanaged, Enum
     {
         public readonly F[] Available;
-        
+
         [MethodImpl(Inline)]
         public ToolFlags(int i)
         {

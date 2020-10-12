@@ -91,7 +91,6 @@ namespace Z0
             ShellName = config.Shell.ShellName;
         }
 
-
         [MethodImpl(Inline)]
         static IWfShell clone(IWfShell src, WfHost host)
             => new WfShell(src.Init, src.Ct, src.WfSink, src.Broker, host, src.Random);

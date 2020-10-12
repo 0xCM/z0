@@ -16,14 +16,14 @@ namespace Z0
 
         public readonly StringRef Name;
 
-        public readonly ushort Width;
+        public readonly byte Width;
 
         [MethodImpl(Inline)]
         public TableColumn(ushort index, string name, ushort width)
         {
             Index = index;
             Name = name;
-            Width = width;
+            Width = (byte)width;
         }
 
         public string Format()

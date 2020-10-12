@@ -11,7 +11,6 @@ namespace Z0
     using static z;
 
     using F = CliBlob.Fields;
-    using W = CliBlob.RenderWidths;
 
     [WfHost]
     public sealed class EmitImageBlobs : WfHost<EmitImageBlobs>
@@ -45,19 +44,24 @@ namespace Z0
             Wf.Created();
         }
 
+        public void Dispose()
+        {
+            Wf.Disposed();
+        }
+
         public ReadOnlySpan<CliBlob> Read(IPart part)
         {
             using var reader = PeTableReader.open(part.PartPath());
             return reader.Blobs();
         }
 
-        static string format(in CliBlob src, RecordFormatter<F,W> dst)
+        static string format(in CliBlob src, ReadOnlySpan<TableColumn> columns, ITextBuffer dst)
         {
-            dst.Delimit(F.Sequence, src.Seq);
-            dst.Delimit(F.HeapSize, src.HeapSize);
-            dst.Delimit(F.Offset, src.Offset);
-            dst.Delimit(F.Value, src.Data);
-            return dst.Render();
+            dst.Delimit(columns[0].Width, src.Seq);
+            dst.Delimit(columns[1].Width, src.HeapSize);
+            dst.Delimit(columns[2].Width, src.Offset);
+            dst.Delimit(columns[3].Width, src.Data);
+            return dst.Emit();
         }
 
         void Emit(IPart part)
@@ -65,17 +69,19 @@ namespace Z0
             var dstPath = Wf.Db().Table(part.Id, TableId, FileKind.Csv);
             var data = Read(part);
             var count = (uint)data.Length;
-            var formatter = Table.formatter<F,W>();
+            var buffer = Buffers.text();
+            var columns = Table.columns(typeof(CliBlob), CliBlob.RenderWidths);
+            var header = Table.header(columns);
 
             using var writer = dstPath.Writer();
-            writer.WriteLine(formatter.FormatHeader());
+            writer.WriteLine(header);
 
             for(var i=0u; i<count; i++)
-                writer.WriteLine(format(skip(data,i),formatter));
+                writer.WriteLine(format(skip(data,i),columns, buffer));
 
             EmissionCount += count;
 
-            Wf.EmittedTable<CliBlob>(Host, data.Length, dstPath);
+            Wf.EmittedTable<CliBlob>(data.Length, dstPath);
         }
 
         public void Run()
@@ -89,9 +95,6 @@ namespace Z0
             Wf.Ran();
         }
 
-        public void Dispose()
-        {
-            Wf.Disposed();
-        }
+
     }
 }

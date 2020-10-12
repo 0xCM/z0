@@ -87,7 +87,7 @@ namespace Z0
             PartIdentities = WfShell.parse(Args, Api.PartIdentities);
             Resources = new ArchiveConfig(Paths.ResourceRoot);
             Settings = WfShell.settings(Shell);
-            Logs = new WfLogConfig(ControlId, Paths.AppLogRoot);
+            Logs = new WfLogConfig(ControlId, Paths.AppLogRoot, FS.dir(@"j:\database\logs\wf"));
         }
     }
 }

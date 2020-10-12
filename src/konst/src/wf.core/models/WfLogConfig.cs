@@ -32,14 +32,17 @@ namespace Z0
         /// </summary>
         public FS.FilePath ErrorLog;
 
+        public FS.FolderPath Target;
+
         [MethodImpl(Inline)]
-        public WfLogConfig(PartId control, FS.FolderPath root)
+        public WfLogConfig(PartId control, FS.FolderPath root, FS.FolderPath target)
         {
             Control = control;
             Root = root;
             var app = Control.Format();
             StatusLog = root + FS.file(app, X.StatusLog);
             ErrorLog = root + FS.file(app, X.ErrorLog);
+            Target = target;
         }
 
         [MethodImpl(Inline)]

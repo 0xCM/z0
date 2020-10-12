@@ -14,15 +14,15 @@ namespace Z0
     partial struct Table
     {
         [Op]
-        public static ReadOnlySpan<TableColumn> columns(Type table)
+        public static ReadOnlySpan<TableColumn> columns(Type table, ReadOnlySpan<byte> widths)
         {
-            var fields = span(table.DeclaredFields());
+            var fields = span(table.DeclaredInstanceFields());
             var count = fields.Length;
             var dst = span<TableColumn>(count);
             for(var i=0u; i<count; i++)
             {
                 ref readonly var field = ref skip(fields,i);
-                seek(dst,i) = new TableColumn((ushort)i, field.Name, 0);
+                seek(dst,i) = new TableColumn((ushort)i, field.Name, skip(widths,i));
             }
             return dst;
         }

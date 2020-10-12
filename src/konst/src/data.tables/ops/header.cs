@@ -41,12 +41,8 @@ namespace Z0
             var count = columns.Length;
             for(var i=0u; i<count; i++)
             {
-                if(i != 0)
-                {
-                    dst.Append(Space);
-                    dst.Append(delimiter);
-                    dst.Append(Space);
-                }
+                dst.Append(delimiter);
+                dst.Append(Space);
 
                 ref readonly var field = ref skip(columns,i);
                 var name = field.Name.Format();

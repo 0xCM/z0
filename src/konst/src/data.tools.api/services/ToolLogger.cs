@@ -1,9 +1,6 @@
 //-----------------------------------------------------------------------------
-// Derivative Work
-// Copyright  : Microsoft/.Net foundation
-// Copyright  : (c) Chris Moore, 2020
-// License    :  MIT
-// Original   : roslyn/src/Compilers/Core/CommandLine/CompilerServerLogger.cs
+// Copyright   :  (c) Chris Moore, 2020
+// License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
@@ -19,16 +16,16 @@ namespace Z0
     {
         public IWfShell Wf {get;}
 
-        readonly FilePath Target;
+        readonly FS.FilePath Target;
 
         readonly Stream LogStream;
 
         [MethodImpl(Inline)]
-        public ToolLogger(IWfShell context, FilePath target)
+        public ToolLogger(IWfShell wf, FS.FilePath dst)
         {
-            Wf = context;
-            Target = target;
-            LogStream = new FileStream(target.CreateParentIfMissing().Name, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);;
+            Wf = wf;
+            Target = dst;
+            LogStream = new FileStream(dst.CreateParentIfMissing().Name, FileMode.OpenOrCreate, FileAccess.Write, FileShare.ReadWrite);;
         }
 
         public void Dispose()
@@ -44,8 +41,8 @@ namespace Z0
         /// <summary>
         /// Log a line of text to the logging file, with string.Format arguments.
         /// </summary>
-        public void Log(LogLevel kind, string format, params object[] args)
-            => Log(kind, string.Format(format, args));
+        public void Log(LogLevel kind, params object[] args)
+            => Log(kind, string.Join("| ", args));
 
         /// <summary>
         /// Log a line of text to the logging file.
@@ -54,33 +51,18 @@ namespace Z0
         /// <param name="content">The message content</param>
         public void Log(LogLevel kind, string content)
         {
-            var data = Encoded.utf8(content + Eol);
-
-            // Because multiple processes might be logging to the same file, we always seek to the end, write, and flush.
+            const string Pattern = "| {0,-10} | {1}";
+            var entry = string.Format(Pattern, kind, content);
+            var data = Encoded.utf8(entry + Eol);
             LogStream.Seek(0, SeekOrigin.End);
             LogStream.Write(data, 0, data.Length);
             LogStream.Flush();
         }
 
         public void LogError(string content)
-            => Log(LogLevel.Error, $"Error: {content}");
+            => Log(LogLevel.Error, content);
 
         public void LogError(string format, params object[] args)
-            => Log(LogLevel.Error, $"Error: {format}", args);
-
-        /// <summary>
-        /// Get the string that prefixes all log entries. Shows the process, thread, and time.
-        /// </summary>
-        static string EntryPrefix
-        {
-            [MethodImpl(Inline)]
-            get => string.Format(EntryPattern, CurrentProcess.ProcessId, CurrentProcess.OsThreadId, Environment.TickCount);
-        }
-
-        const string ErrorTrace = "'{0}' '{1}' occurred during '{2}'. Stack trace:\r\n{3}";
-
-        const string InnerTrace = "Inner exception[{0}] '{1}' '{2}'. Stack trace: \r\n{3}";
-
-        const string EntryPattern = "PID={1} TID={2} Ticks={3}: ";
+            => Log(LogLevel.Error, args);
     }
 }

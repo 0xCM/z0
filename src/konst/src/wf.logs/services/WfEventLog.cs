@@ -17,22 +17,35 @@ namespace Z0
 
         readonly FS.FilePath Error;
 
+        readonly FS.FolderPath Target;
+
         readonly FileStream Status;
 
-        public WfEventLog(FS.FilePath status, FS.FilePath error)
+        public WfEventLog(WfLogConfig config)
         {
-            status.Delete();
-            error.Delete();
-
-            StatusPath = status;
+            Target = config.Target;
+            config.StatusLog.Delete();
+            config.ErrorLog.Delete();
+            StatusPath = FS.path(config.StatusLog.Name);
+            Error = FS.path(config.ErrorLog.Name).CreateParentIfMissing();
             Status = StatusPath.Stream();
-            Error = error.CreateParentIfMissing();
         }
+
+        // public WfEventLog(FS.FilePath status, FS.FilePath error, FS.FolderPath target)
+        // {
+        //     Target = target;
+        //     status.Delete();
+        //     error.Delete();
+        //     StatusPath = status;
+        //     Status = StatusPath.Stream();
+        //     Error = error.CreateParentIfMissing();
+        // }
 
         public void Dispose()
         {
             Status?.Flush();
             Status?.Dispose();
+            StatusPath.CopyTo(Target);
         }
 
         [MethodImpl(Inline)]
@@ -77,7 +90,6 @@ namespace Z0
             }
             catch(Exception error)
             {
-
                 term.error(error);
             }
         }

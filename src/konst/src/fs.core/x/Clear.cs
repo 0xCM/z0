@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
+    using System.IO;
 
     using static Konst;
 
@@ -23,5 +24,18 @@ namespace Z0
 
         public static List<FS.FilePath> Clear(this FS.FolderPath src, List<FS.FilePath> dst, bool recurse = false)
             => FS.clear(src, dst, recurse);
+
+        public static FS.FilePath CopyTo(this FS.FilePath src, FS.FolderPath dst, bool overwrite = true)
+        {
+            if(src.Exists)
+            {
+                dst.Create();
+                var path = dst + src.FileName;
+                File.Copy(src.Name, path.Name, overwrite);
+                return path;
+            }
+            else
+                return FS.FilePath.Empty;
+        }
     }
 }

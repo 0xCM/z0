@@ -9,21 +9,17 @@ namespace Z0
 
     using static Konst;
 
-    public struct ToolConfig<T> : IToolConfig<T>
+    public struct ToolEmissions<T>
         where T : struct, ITool<T>
     {
-        public ToolId ToolId {get;}
-
-        public FolderPath Source {get;}
-
-        public FolderPath Target {get;}
+        public readonly TableSpan<ToolEmission<T>> Table;
 
         [MethodImpl(Inline)]
-        public ToolConfig(ToolId tool, FolderPath src, FolderPath dst)
-        {
-            Source = src;
-            ToolId = tool;
-            Target = dst;
-        }
+        public static implicit operator ToolEmissions<T>(ToolEmission<T>[] src)
+            => new ToolEmissions<T>(src);
+
+        [MethodImpl(Inline)]
+        public ToolEmissions(ToolEmission<T>[] src)
+            => Table = src;
     }
 }

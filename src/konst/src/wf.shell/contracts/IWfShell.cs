@@ -45,15 +45,6 @@ namespace Z0
         LogLevel Verbosity
             => LogLevel.Info;
 
-        FS.FolderPath ArchiveRoot
-            => FS.dir(@"k:\z0\archives");
-
-        FS.FolderPath ToolOuputDir(string tool)
-            => ArchiveRoot + FS.folder("tools") + FS.folder(tool) + FS.folder("output");
-
-        FS.FolderPath ToolProcessDir(string tool)
-            => ArchiveRoot + FS.folder("tools") + FS.folder(tool) + FS.folder("processed");
-
         FS.FolderPath AsmTables
             => Resources + FS.folder("tables");
 

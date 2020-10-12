@@ -38,10 +38,11 @@ namespace Z0
             Append($"{value}".PadRight((int)width));
         }
 
-        void Delimit<T>(uint width, T value, char c = FieldDelimiter)
+        void Delimit<T>(byte width, T value, char c = FieldDelimiter)
+            where T : ITextual
         {
             Append(text.rspace(c));
-            Append($"{value}".PadRight((int)width));
+            Append(value.Format().PadRight(width));
         }
 
         void AppendFormat(string pattern, params object[] args)

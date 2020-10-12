@@ -9,13 +9,20 @@ namespace Z0
 
     using static Konst;
 
+
     public partial struct DumpBin : ITool<DumpBin,DumpBinFlag>
     {
-        [MethodImpl(Inline)]
-        public ProcessRawAsm Processor(DumpBinFlag flags, DumpBinOptions options = default)
-            => new ProcessRawAsm(Wf, Wf.ToolOuputDir(DumpBin.Name), Wf.ToolProcessDir(DumpBin.Name), flags, options);
-
         public const string Name = "dumpbin";
+
+        public static ToolSettings settings(FS.FolderPath root)
+        {
+            var dst = new ToolSettings();
+            dst.ToolName = Name;
+            dst.InputRoot = root + FS.folder(Name) + FS.folder("input");
+            dst.OutputRoot = root + FS.folder(Name) + FS.folder("output");
+            dst.ProcessedRoot = root + FS.folder(Name) + FS.folder("processed");
+            return dst;
+        }
 
         public static ToolId Id => Name;
 
@@ -35,6 +42,15 @@ namespace Z0
 
         public DumpBinFlag SelectedFlags {get;}
 
+        FS.FolderPath ArchiveRoot
+            => FS.dir(@"k:\z0\archives");
+
+        FS.FolderPath ToolOuputDir(string tool)
+            => ArchiveRoot + FS.folder("tools") + FS.folder(tool) + FS.folder("output");
+
+        FS.FolderPath ToolProcessDir(string tool)
+            => ArchiveRoot + FS.folder("tools") + FS.folder(tool) + FS.folder("processed");
+
         [MethodImpl(Inline)]
         public DumpBin(IWfShell wf, FS.FolderPath outdir, FS.FolderPath processed, DumpBinFlag selected)
         {
@@ -48,6 +64,10 @@ namespace Z0
             Archive = new ToolArchive<DumpBin>(ToolId, outdir, processed);
             Wf.Created(Id);
         }
+
+        [MethodImpl(Inline)]
+        public ProcessRawAsm Processor(DumpBinFlag flags, DumpBinOptions options = default)
+            => new ProcessRawAsm(Wf, ToolOuputDir(DumpBin.Name), ToolProcessDir(DumpBin.Name), flags, options);
 
         public void Process()
         {

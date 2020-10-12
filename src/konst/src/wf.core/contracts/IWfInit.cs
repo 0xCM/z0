@@ -73,8 +73,7 @@ namespace Z0
         /// <summary>
         /// The specified log configuration
         /// </summary>
-        WfLogConfig Logs
-            => new WfLogConfig(ControlId, Shell.Paths.AppLogRoot);
+        WfLogConfig Logs {get;}
 
         /// <summary>
         /// The controlling arguments, in raw form as supplied by the entry point or caller

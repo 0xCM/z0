@@ -22,6 +22,15 @@ namespace Z0
 
         FS.FolderPath StageRoot<S>(S subject);
 
+        FS.FolderPath LogRoot()
+            =>  DbPaths.DbRoot + FS.folder("logs");
+
+        FS.FolderPath LogDir<S>(S subject)
+            => LogRoot() + FS.folder(subject.ToString());
+
+        FS.FilePath Log<S>(string id, S subject)
+            => LogDir(subject) + FS.file(id, ArchiveFileKinds.Log);
+
         FS.FilePath Document<S>(string id, S subject, FS.FileExt ext);
 
         FS.FilePath Document<S>(PartId part, S subject, FS.FileExt ext);

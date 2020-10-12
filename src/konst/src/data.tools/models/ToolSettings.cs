@@ -9,8 +9,14 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Tools
+    public struct ToolSettings
     {
+        public string ToolName;
 
+        public FS.FolderPath InputRoot;
+
+        public FS.FolderPath OutputRoot;
+
+        public FS.FolderPath ProcessedRoot;
     }
 }

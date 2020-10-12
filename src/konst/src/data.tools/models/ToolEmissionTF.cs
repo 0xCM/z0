@@ -9,19 +9,19 @@ namespace Z0
 
     using static Konst;
 
-    public struct ToolFile<T,F> : IToolFile<T,F>
+    public struct ToolEmission<T,F> : IToolFile<T,F>
         where T : struct, ITool<T>
         where F : unmanaged, Enum
     {
-        public FS.FilePath EmissionPath {get;}
+        public FS.FilePath Target {get;}
 
         public F Kind {get;}
 
         [MethodImpl(Inline)]
-        public ToolFile(F kind, FS.FilePath path)
+        public ToolEmission(F kind, FS.FilePath path)
         {
             Kind = kind;
-            EmissionPath = Files.normalize(path);
+            Target = Files.normalize(path);
         }
     }
 }

@@ -20,7 +20,6 @@ namespace Z0
 
     partial struct DumpBin
     {
-
         public struct ProcessRawAsm : IToolProcessor<DumpBin,DumpBinFlag>
         {
             public const string ActorName = nameof(ProcessRawAsm);
@@ -76,13 +75,13 @@ namespace Z0
                 return false;
             }
 
-            void Process(ToolFile<DumpBin> src, FilePath dst)
+            void Process(ToolEmission<DumpBin> src, FilePath dst)
             {
                 LineCount = 0;
                 IxCount = 0;
 
 
-                using var reader = src.EmissionPath.Reader();
+                using var reader = src.Target.Reader();
                 using var writer = dst.Writer();
                 var table = new RawAsmTable();
                 writer.WriteLine(table.FormatHeader());
