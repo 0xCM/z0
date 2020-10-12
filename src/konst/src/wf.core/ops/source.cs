@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct WfCore
+    partial struct Workflow
     {
         /// <summary>
         /// Defines a <see cref='AppMsgSource'/>

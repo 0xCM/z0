@@ -14,6 +14,7 @@ namespace Z0
         {
             try
             {
+
                 using var wf = Polyrand.install(WfShell.create(args));
                 var app = Apps.context(wf);
                 var asm = new AsmContext(app, wf);

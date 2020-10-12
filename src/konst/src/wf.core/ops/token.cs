@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct WfCore
+    partial struct Workflow
     {
         [MethodImpl(Inline), Op]
         public static WfToken token(WfPartKind kind, Type src)

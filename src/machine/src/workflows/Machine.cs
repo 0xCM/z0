@@ -24,21 +24,22 @@ namespace Z0
 
         internal Machine(WfCaptureState state, WfHost host)
         {
-            State = state;
-            Wf = State.Wf;
             Host = host;
+            State = state;
+            Wf = State.Wf.WithHost(host);
             Index = default;
-            Wf.Created(Host, delimit(Wf.Api.PartIdentities));
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
 
         public void Run()
         {
-            Wf.Running(Host);
+            Wf.Running();
+            Wf.Status(delimit(Wf.Api.PartIdentities));
 
             try
             {
@@ -62,7 +63,7 @@ namespace Z0
                 Wf.Error(Host,e);
             }
 
-            Wf.Ran(Host);
+            Wf.Ran();
         }
     }
 }

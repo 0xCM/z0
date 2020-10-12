@@ -7,7 +7,13 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface ITableProjector<T,Y> : IWfTableWorker
+    public interface ITableProjector : IWfWorker
+    {
+
+    }
+
+    [Free]
+    public interface ITableProjector<T,Y> : ITableProjector
         where T : struct
     {
         Y Project(in T src);

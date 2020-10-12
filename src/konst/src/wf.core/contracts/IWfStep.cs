@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using api = WfCore;
+    using api = Workflow;
     using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>

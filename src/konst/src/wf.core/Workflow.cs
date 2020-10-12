@@ -10,8 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
-    public readonly struct WfControl
+    [ApiHost(ApiNames.Workflow, true)]
+    public readonly partial struct Workflow
     {
         [MethodImpl(Inline)]
         public static WfFunc<H> func<H>([CallerMemberName] string name = null)
@@ -41,9 +41,10 @@ namespace Z0
         public static WfStepExec<H,T> executor<H,T>(IWfShell wf, WfStepArgs? args = null, WfStepId? id = null)
             where H : struct, IWfStepExec<T>, IWfStep<H>
         {
-            var e = new WfStepExec<H,T>(wf, id ?? WfCore.step<H>());
+            var e = new WfStepExec<H,T>(wf, id ?? Workflow.step<H>());
             e.Configure(args ?? WfStepArgs.Empty);
             return e;
         }
+
     }
 }

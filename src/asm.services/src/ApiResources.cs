@@ -56,7 +56,7 @@ namespace Z0
             for(var i=0u; i<count; i++)
             {
                 ref readonly var index = ref skip(indices,i);
-                var host = WfCore.uri(index.DeclaringType);
+                var host = Workflow.uri(index.DeclaringType);
                 var path = dst + host.FileName(FileExtensions.Asm);
                 results.AddRange(capture(context, host, index.Data, path));
             }

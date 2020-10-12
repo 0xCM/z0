@@ -41,7 +41,6 @@ namespace Z0.Xed
         {
             Host = WfSelfHost.create(typeof(XedEtlWf));
             Wf = wf.WithHost(Host);
-
             Config = config;
             Settings = config.Settings;
             Source = XedWfOps.SourceArchive(Config.SourceRoot);
@@ -57,18 +56,18 @@ namespace Z0.Xed
 
         public XedPattern[] ExtractPatterns()
         {
-            var step = WfCore.step(typeof(XedEtlWf));
+            var step = Workflow.step(typeof(XedEtlWf));
             var patterns = list<XedPattern>();
             var parser = XedSourceParser.Service;
             var files = @readonly(Source.InstructionFiles);
+            const string kind = "instructions";
             try
             {
                 for(var i=0; i< files.Length; i++)
                 {
                     ref readonly var file = ref skip(files,i);
-                    var id = Wf.Raise(new ParsingXedInstructions(ParseInstructionsStep.StepId, file, Wf.Ct));
-                    Wf.ProcessingFile(file, "instructions");
-
+                    //var id = Wf.Raise(new ParsingXedInstructions(ParseInstructionsStep.StepId, file, Wf.Ct));
+                    Wf.ProcessingFile(file, kind);
                     var parsed = span(parser.ParseInstructions(file));
                     for(var j = 0; j< parsed.Length; j++)
                     {
@@ -77,8 +76,7 @@ namespace Z0.Xed
                         Stage.Deposit(parsed, file.FileName);
                     }
 
-
-                    Wf.ProcessedFile(FS.path(file.Name), "instructions", parsed.Length);
+                    Wf.ProcessedFile(FS.path(file.Name), kind, parsed.Length);
                 }
             }
             catch(Exception e)
@@ -142,7 +140,6 @@ namespace Z0.Xed
                     FS.file(XedConst.Name(selected), Config.DataFileExt)
                     );
             }
-
         }
 
         void SaveMnemonics(XedPatternRow[] src)

@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct WfCore
+    partial struct WfEvents
     {
         public static void format(ErrorEvent<Exception> error, StringBuilder dst)
         {

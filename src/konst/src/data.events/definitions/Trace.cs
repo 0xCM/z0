@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static Render;
-    using static WfCore;
+    using static Workflow;
     using static z;
 
     [Event(EventName)]

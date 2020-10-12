@@ -18,7 +18,7 @@ namespace Z0
         public const string ShellName = nameof(PartId.ToolCli) + "/" + nameof(App);
 
         public static WfStepId StepId
-            => WfCore.step<Shelly>();
+            => Workflow.step<Shelly>();
     }
 
     class App : AppShell<App,IAppContext>

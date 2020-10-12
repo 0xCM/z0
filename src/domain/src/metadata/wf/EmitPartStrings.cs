@@ -19,7 +19,7 @@ namespace Z0
     public sealed class EmitPartStrings : WfHost<EmitPartStrings>
     {
         public static WfStepId StepId
-            => WfCore.step<EmitPartStrings>();
+            => Workflow.step<EmitPartStrings>();
 
     }
 

@@ -111,13 +111,11 @@ namespace Z0
 
         public const string TableMaps = tables + dot + maps;
 
-        public const string WfCore = wf + dot + core;
+        public const string Workflow = workflow + dot + core;
 
-        public const string WfCmd = wf + dot + cmd;
+        public const string WfCmd = workflow + dot + cmd;
 
-        public const string WfShell = wf + dot + shell;
-
-        public const string WfEvents = wf + dot + events;
+        public const string WfShell = workflow + dot + shell;
 
         public const string PrimalKinds = primal + dot + kinds;
 
@@ -125,7 +123,7 @@ namespace Z0
 
         public const string MemStore = A.memory + dot + store;
 
-        public const string MemReader = A.memory + dot + "reader";
+        public const string MemReader = A.memory + dot + reader;
 
         public const string TextEncoders = A.text + dot + encoders;
 
@@ -145,26 +143,40 @@ namespace Z0
 
         public const string AppErrorMsg = app + dot + errors + dot + msg;
 
-        public const string ToolApi = "tools.api";
-
-        const string memory = nameof(memory);
-
-        public const string refs = nameof(refs);
+        public const string ToolApi =  tools + dot + core;
 
         public const string MemRefs = memory + dot + refs;
 
-        public const string StringRefs = memory + dot + refs + dot + "strings";
+        public const string StringRefs = memory + dot + refs + dot + strings;
 
         public const string Scalars = primal + dot + "scalars";
 
-        public const string ApiQuery = api + dot + "query";
+        public const string ApiQuery = api + dot + query;
 
-        public const string ApiPartCatalogQuery = api + dot + "query" + dot + "parts";
+        public const string ApiPartCatalogQuery = api + dot + query + dot + parts;
 
-        public const string ApiHostMemberQuery = api + dot + "query" + dot + "hosts";
+        public const string ApiHostMemberQuery = api + dot + query + dot + "hosts";
 
-        public const string ApiCatalogExtensions = api + dot + "catalogs" + dot + "extensions";
+        public const string ApiCatalogExtensions = api + dot + catalogs + dot + extensions;
 
-        public const string Lookups = "lookups";
+        public const string ApiEnumCatalog = api + dot + catalogs + dot + enums;
+
+        public const string Lookups = lookups + dot + core;
+
+        const string lookups = nameof(lookups);
+
+        const string memory = nameof(memory);
+
+        const string enums = nameof(enums);
+
+        const string refs = nameof(refs);
+
+        const string tools = nameof(tools);
+
+        const string strings = nameof(strings);
+
+         const string reader = nameof(reader);
+
+         const string workflow = nameof(workflow);
     }
 }

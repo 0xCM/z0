@@ -40,6 +40,7 @@ namespace Z0
         public static SystemApiCatalog system(FS.Files paths)
             => new SystemApiCatalog(parts(paths.Data));
 
+
         public static KeyedValues<PartId,Type>[] types(ClrTypeKind kind, ISystemApiCatalog src)
         {
             switch(kind)

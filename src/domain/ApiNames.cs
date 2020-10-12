@@ -10,9 +10,6 @@ namespace Z0
 
     readonly struct ApiNames
     {
-        public const string EnumCatalog = "enums.catalogs";
-
-
         public const string Signatures = signatures;
 
     }

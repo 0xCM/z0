@@ -26,8 +26,8 @@ namespace Z0
 
         void IWfDataProcessor.Connect()
         {
-            Broker[Mnemonic.And] = WfCore.handler<ApiInstruction>(OnAnd);
-            Broker[Mnemonic.Or] = WfCore.handler<ApiInstruction>(OnOr);
+            Broker[Mnemonic.And] = Workflow.handler<ApiInstruction>(OnAnd);
+            Broker[Mnemonic.Or] = Workflow.handler<ApiInstruction>(OnOr);
         }
     }
 }

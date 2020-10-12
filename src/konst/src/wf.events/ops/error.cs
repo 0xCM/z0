@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static WfCore;
+    using static Workflow;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -22,15 +22,15 @@ namespace Z0
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static ErrorEvent<Pair<T>> neq<T>(WfStepId step, Pair<T> data, CorrelationToken ct, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-             => neq(step, data, ct, WfCore.source(caller,file,line));
+             => neq(step, data, ct, Workflow.source(caller,file,line));
 
         [MethodImpl(Inline), Op]
         public static ErrorEvent<string> missing(WfStepId step, string caller, string file, int? line, CorrelationToken? ct = null)
-            => WfEvents.error(step, text.format(MissingPattern, caller, file, line), ct ?? CorrelationToken.Empty, WfCore.source(caller,file,line));
+            => WfEvents.error(step, text.format(MissingPattern, caller, file, line), ct ?? CorrelationToken.Empty, Workflow.source(caller,file,line));
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static ErrorEvent<Pair<T>> length<T>(WfStepId step, T a, T b, CorrelationToken ct, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
-            => new ErrorEvent<Pair<T>>(step, z.pair(a,b), ct, WfCore.source(caller,file,line));
+            => new ErrorEvent<Pair<T>>(step, z.pair(a,b), ct, Workflow.source(caller,file,line));
 
         public static AppException length(WfStepId step, int a, int b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(AppErrorMsg.LengthMismatch(a,b,caller,file,line));

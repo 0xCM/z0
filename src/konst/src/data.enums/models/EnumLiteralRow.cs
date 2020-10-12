@@ -10,9 +10,13 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
     public struct EnumLiteralRow : IComparable<EnumLiteralRow>
     {
+        public const string TableId = "enums.literals";
+
+        public const byte FieldCount = 9;
+
         public static void format(in EnumLiteralRow src, TableFormatter<Fields> dst, bool eol = true)
         {
             dst.Delimit(Fields.PartId, src.PartId);
@@ -67,12 +71,6 @@ namespace Z0
 
         public readonly ulong ScalarValue;
 
-        public string Identifier
-        {
-            [MethodImpl(Inline)]
-            get => text.format(RP.SlotDot3, PartId.Format(), TypeId, Index);
-        }
-
         [MethodImpl(Inline)]
         public EnumLiteralRow(PartId part, Type type,  MemoryAddress address, ushort index, string name, MemoryAddress nameaddress, EnumScalarKind primal, ulong value)
         {
@@ -87,7 +85,10 @@ namespace Z0
             ScalarValue = value;
         }
 
+        static string Identifier(in EnumLiteralRow src)
+            => text.format(RP.SlotDot3, src.PartId.Format(), src.TypeId, src.Index);
+
         public int CompareTo(EnumLiteralRow src)
-            => Identifier.CompareTo(src.Identifier);
+            => Identifier(this).CompareTo(Identifier(src));
     }
 }

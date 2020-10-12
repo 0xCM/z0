@@ -41,7 +41,7 @@ namespace Z0
         public static WfEventId identity<E,S>(CorrelationToken ct, E e = default, S s = default)
             where E : struct, IWfEvent<E>
             where S : struct, IWfStep<S>
-                => new WfEventId(typeof(E), WfCore.step<S>(), ct, now());
+                => new WfEventId(typeof(E), Workflow.step<S>(), ct, now());
 
         /// <summary>
         /// Defines an event identifier
