@@ -28,14 +28,14 @@ namespace Z0
 
         }
 
-        FolderPath OutputFolder
+        FS.FolderPath OutputFolder
             => EnvVars.Common.LogRoot;
 
-        public FolderPath LogDir(LogArea target)
-            => OutputFolder + FolderName.Define(target.ToString().ToLower());
+        public FS.FolderPath LogDir(LogArea target)
+            => OutputFolder + FS.folder(target.ToString().ToLower());
 
-        public FolderPath LogDir(LogArea target, FolderName subdir)
-            => OutputFolder + (FolderName.Define(target.ToString().ToLower()) + subdir);
+        public FS.FolderPath LogDir(LogArea target, FS.FolderName subdir)
+            => OutputFolder + (FS.folder(target.ToString().ToLower()) + subdir);
     }
 
     readonly struct TestLogPaths
@@ -45,36 +45,36 @@ namespace Z0
 
         static FileExtension LogExt => FileExtensions.StatusLog;
 
-        public FilePath LogPath(LogArea area, string basename, FileExtension ext = null)
-            => Settings.LogDir(area) + FileName.define(basename, ext ?? LogExt);
+        public FS.FilePath LogPath(LogArea area, string basename, FS.FileExt? ext = null)
+            => Settings.LogDir(area) + FS.file(basename, ext ?? ArchiveFileKinds.Log);
 
-        public FilePath LogPath(LogArea area, FolderName subdir, string basename, FileExtension ext = null)
-            => Settings.LogDir(area, subdir) + FileName.define(basename, ext ?? LogExt);
+        public FS.FilePath LogPath(LogArea area, FS.FolderName subdir, string basename, FS.FileExt? ext = null)
+            => Settings.LogDir(area, subdir) + FS.file(basename, ext ?? ArchiveFileKinds.Log);
 
-        public FilePath Timestamped(LogArea area, string basename, FileExtension ext = null)
-            => Settings.LogDir(area) + FileName.define($"{basename}.{LogDate}", ext ?? LogExt);
+        public FS.FilePath Timestamped(LogArea area, string basename, FS.FileExt? ext = null)
+            => Settings.LogDir(area) + FS.file($"{basename}.{LogDate}", ext ?? ArchiveFileKinds.Log);
 
-        public FilePath UniqueLogPath(LogArea area, string basename, FileExtension ext = null)
+        public FS.FilePath UniqueLogPath(LogArea area, string basename, FS.FileExt? ext = null)
         {
             var first = new DateTime(2019,1,1);
             var current = Time.now();
             var elapsed = (long) (current - first).TotalMilliseconds;
-            return LogPath(area, basename, ext ?? LogExt, elapsed);
+            return LogPath(area, basename, ext ?? ArchiveFileKinds.Log, elapsed);
         }
 
-        public FilePath UniqueLogPath(LogArea area, FolderName subdir, string basename, FileExtension ext = null)
+        public FS.FilePath UniqueLogPath(LogArea area, FS.FolderName subdir, string basename, FS.FileExt? ext = null)
         {
             var first = new DateTime(2019,1,1);
             var current = Time.now();
             var elapsed = (long) (current - first).TotalMilliseconds;
-            return LogPath(area, subdir, basename, ext ?? LogExt, elapsed);
+            return LogPath(area, subdir, basename, ext ?? ArchiveFileKinds.Log, elapsed);
         }
 
-        static FilePath LogPath(LogArea area, string basename, FileExtension ext, long timestamp)
-            => LogDir(area) + FileName.define($"{basename}.{timestamp}", ext);
+        static FS.FilePath LogPath(LogArea area, string basename, FS.FileExt ext, long timestamp)
+            => LogDir(area) + FS.file($"{basename}.{timestamp}", ext);
 
-        static FilePath LogPath(LogArea area, FolderName subdir, string basename, FileExtension ext, long timestamp)
-            => LogDir(area, subdir) + FileName.define($"{basename}.{timestamp}.{ext}", ext);
+        static FS.FilePath LogPath(LogArea area, FS.FolderName subdir, string basename, FS.FileExt ext, long timestamp)
+            => LogDir(area, subdir) + FS.file($"{basename}.{timestamp}.{ext}", ext);
 
         static EnvConfig Settings
             => new EnvConfig();
@@ -82,10 +82,10 @@ namespace Z0
         static long LogDate
             => Date.Today.ToDateKey();
 
-        static FolderPath LogDir(LogArea target)
+        static FS.FolderPath LogDir(LogArea target)
             => Settings.LogDir(target);
 
-        static FolderPath LogDir(LogArea target, FolderName subject)
+        static FS.FolderPath LogDir(LogArea target, FS.FolderName subject)
             => Settings.LogDir(target, subject);
     }
 
@@ -111,10 +111,10 @@ namespace Z0
                 Area = area;
             }
 
-            FilePath LogPath
+            FS.FilePath LogPath
                 => Paths.Timestamped(Area, Area.ToString().ToLower());
 
-            void Emit<R>(IReadOnlyList<R> records, char delimiter, bool header, FilePath dst)
+            void Emit<R>(IReadOnlyList<R> records, char delimiter, bool header, FS.FilePath dst)
                 where R : ITabular
             {
                 if(records.Count == 0)
@@ -126,17 +126,21 @@ namespace Z0
                 Root.iter(records, r => dst.AppendLine(r.DelimitedText(delimiter)));
             }
 
-            FilePath ComputePath(FolderName subdir, string basename, bool create, FileExtension ext)
+            FS.FilePath ComputePath(FS.FolderName subdir, string basename, bool create, FS.FileExt ext)
                 => create
-                    ? (subdir.IsEmpty ? Paths.UniqueLogPath(Area,basename,ext) : Paths.UniqueLogPath(Area, subdir, basename,ext))
-                    : (subdir.IsEmpty ?  Paths.LogPath(Area, basename, ext) : Paths.LogPath(Area, subdir, basename, ext)) ;
+                    ? (subdir.IsEmpty ? Paths.UniqueLogPath(Area,basename,ext)
+                                      : Paths.UniqueLogPath(Area, subdir, basename,ext))
+                    : (subdir.IsEmpty ?  Paths.LogPath(Area, basename, ext)
+                                      : Paths.LogPath(Area, subdir, basename, ext));
 
-            public FilePath Write<R>(IEnumerable<R> src, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header = true, FileExtension ext = null)
+            public FS.FilePath Write<R>(IEnumerable<R> src, FS.FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header = true, FS.FileExt ext = default)
                 where R : ITabular
             {
                 var records = src.ToArray();
                 if(records.Length == 0)
-                    return FilePath.Empty;
+                    return FS.FilePath.Empty;
+
+                ext = ext.IsEmpty ? ArchiveFileKinds.Log : ext;
 
                 var path = ComputePath(subdir,basename, mode == LogWriteMode.Create, ext);
 

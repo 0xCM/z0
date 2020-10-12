@@ -16,7 +16,7 @@ namespace Z0
     public struct LookupTable<K,V>
         where K : unmanaged
     {
-        TableSpan<LookupEntry<K,V>> Entries;
+        internal LookupEntry<K,V>[] Entries;
 
         [MethodImpl(Inline)]
         public LookupTable(LookupEntry<K,V>[] src)

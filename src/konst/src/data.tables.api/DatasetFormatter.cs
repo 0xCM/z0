@@ -151,6 +151,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         static string[] labels()
-            => Z0.Table.index<F>().Names;
+            => LiteralIndex.create<F>().Names;
     }
 }

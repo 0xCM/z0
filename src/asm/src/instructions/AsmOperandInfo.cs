@@ -42,10 +42,10 @@ namespace Z0.Asm
         /// <summary>
         /// Instruction branching info, if applicable
         /// </summary>
-        public AsmBranchInfo Branch;
+        public AsmBranch Branch;
 
         [MethodImpl(Inline)]
-        public AsmOperandInfo(int index, OpKind kind, in ImmInfo imm, in MemInfo memory, in IceRegister register, AsmBranchInfo branch)
+        public AsmOperandInfo(int index, OpKind kind, in ImmInfo imm, in MemInfo memory, in IceRegister register, AsmBranch branch)
         {
             Index = (byte)index;
             Kind = kind;

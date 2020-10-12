@@ -10,6 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     public interface IWfStepId : ITextual, INamed
     {
         /// <summary>

@@ -4,11 +4,11 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IWfError : IWfEvent
     {
-     
+
     }
 }

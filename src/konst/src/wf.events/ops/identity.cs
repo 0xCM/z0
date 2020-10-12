@@ -9,10 +9,16 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static Render;
 
     partial struct WfEvents
     {
+        [MethodImpl(Inline), Op]
+        public static EventId identify(string eventName, WfStepId step, CorrelationToken? ct = null, Timestamp? ts = null)
+        {
+            var data = vparts(w256, (ulong)eventName.GetHashCode(), step.Token.Value, ct ?? correlate(), ts == null ? timestamp() : ts.Value);
+            return new EventId(data);
+        }
+
         /// <summary>
         /// Defines an event identifier
         /// </summary>

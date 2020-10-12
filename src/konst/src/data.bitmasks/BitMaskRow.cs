@@ -9,9 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    [StructLayout(LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
     public struct BitMaskRow
     {
+        public const string TableId = "bitmasks";
+
+        public const byte FieldCount = 5;
+
         public string Name;
 
         public TypeCode TypeCode;

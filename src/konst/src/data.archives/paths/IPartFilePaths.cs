@@ -43,6 +43,6 @@ namespace Z0
         /// The path to which all archive path arithmetic is relative
         /// </summary>
         FolderPath ArchiveRoot
-            => EnvVars.Common.LogRoot;
+            => FolderPath.Define(EnvVars.Common.LogRoot.Name);
     }
 }

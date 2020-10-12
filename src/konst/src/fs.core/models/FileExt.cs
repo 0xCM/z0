@@ -114,6 +114,12 @@ namespace Z0
 
             public override bool Equals(object src)
                 => src is FileExt x && Equals(x);
+
+
+        //     [MethodImpl(Inline)]
+        //     public static implicit operator Z0.FileExtension(FileExt src)
+        //         => Z0.FileExtension.Define(src.Name);
+        // }
         }
     }
 }

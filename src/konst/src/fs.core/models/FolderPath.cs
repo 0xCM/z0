@@ -60,6 +60,7 @@ namespace Z0
             public static FilePath operator +(FolderPath a, FileName b)
                 => new FilePath(text.format(FileJoinPattern, a, b));
 
+
             [MethodImpl(Inline)]
             public ListedFiles List(string pattern, bool recurse)
                 => Directory.EnumerateFiles(Name, pattern, option(recurse))
@@ -177,11 +178,14 @@ namespace Z0
             public static FolderPath Empty
                 => new FolderPath(PathPart.Empty);
 
-
             [MethodImpl(Inline)]
             static SearchOption option(bool recurse)
                 => recurse ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 
+
+            [MethodImpl(Inline)]
+            public static implicit operator Z0.FolderPath(FolderPath src)
+                => Z0.FolderPath.Define(src.Name);
         }
     }
 }

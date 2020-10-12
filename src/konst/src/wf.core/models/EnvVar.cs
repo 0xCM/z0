@@ -41,8 +41,10 @@ namespace Z0
 
         public EnvVar<T> Transform<T>(Func<string,T> f)
             => EnvVars.define(Name, f(Value));
+
+        [MethodImpl(Inline)]
         public string Format()
-            => $"{Name} := {Value}";
+            => $"{Name}:{Value}";
 
         public override string ToString()
             => Format();
@@ -50,9 +52,9 @@ namespace Z0
         public override int GetHashCode()
             => Format().GetHashCode();
 
+        [MethodImpl(Inline)]
         public bool Equals(EnvVar src)
-            => string.Equals(Name,src.Name, NoCase)
-            && string.Equals(Value, src.Value, NoCase);
+            => string.Equals(Name,src.Name, NoCase) && string.Equals(Value, src.Value, NoCase);
 
         public override bool Equals(object src)
             => src is EnvVar v && Equals(v);

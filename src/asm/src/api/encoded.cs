@@ -15,13 +15,6 @@ namespace Z0
 
     partial struct asm
     {
-        [MethodImpl(Inline), Op]
-        public static EncodedRoutine encoded([CallerMemberName] string name = null)
-            => new EncodedRoutine(name,32);
-
-        [MethodImpl(Inline), Op]
-        public static EncodedRoutine encoded(asci32[] name, EncodedInstruction[] commands, uint[] index)
-            => new EncodedRoutine(name, commands, index);
 
         /// <summary>
         /// Defines an encoded instruction from the lower 15 source bytes

@@ -154,5 +154,17 @@ namespace Z0
         public const string MemRefs = memory + dot + refs;
 
         public const string StringRefs = memory + dot + refs + dot + "strings";
+
+        public const string Scalars = primal + dot + "scalars";
+
+        public const string ApiQuery = api + dot + "query";
+
+        public const string ApiPartCatalogQuery = api + dot + "query" + dot + "parts";
+
+        public const string ApiHostMemberQuery = api + dot + "query" + dot + "hosts";
+
+        public const string ApiCatalogExtensions = api + dot + "catalogs" + dot + "extensions";
+
+        public const string Lookups = "lookups";
     }
 }

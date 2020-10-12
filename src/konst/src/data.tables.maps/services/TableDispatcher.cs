@@ -10,98 +10,53 @@ namespace Z0
     using static Konst;
     using static z;
 
-    /// <summary>
-    /// Table process orchestrator
-    /// </summary>
-    public readonly ref struct TableDispatcher<F,T,K,S,Y>
-        where F : unmanaged, Enum
-        where T : struct, ITable<F,T,K>
-        where K : unmanaged, Enum
+    public readonly struct TableDispatcher<F,T,D,S,Y> : ITableDispatcher<F,T,D,S,Y>
+        where F : unmanaged
+        where T : struct, IKeyedTable<F,T,D>
+        where D : unmanaged
         where S : unmanaged
     {
-        /// <summary>
-        /// The context in which the dispatcher is running
-        /// </summary>
-        internal readonly IWfShell Wf;
+        public IWfShell Wf {get;}
 
-        /// <summary>
-        /// The data source
-        /// </summary>
-        readonly Span<T> Source;
+        readonly WfHost Host;
 
-        /// <summary>
-        /// The data target
-        /// </summary>
-        readonly Span<Y> Target;
+        readonly TableProjectors<D,S,T,Y> Projectors;
 
-        /// <summary>
-        /// The table processors that define/apply target -> source projection
-        /// </summary>
-        readonly Span<TableMap<K,S,T,Y>> Processors;
-
-        /// <summary>
-        /// Processor selection keys
-        /// </summary>
-        readonly KeyMapIndex<K,S> Selectors;
-
-        uint SourceCount
-            => (uint)Source.Length;
+        readonly KeyMap<D,S> Selectors;
 
         [MethodImpl(Inline)]
-        public TableDispatcher(IWfShell wf, T[] tables, TableProcessors<K,S,T,Y> processors, KeyMapIndex<K,S> selectors, Y[] dst)
+        public TableDispatcher(IWfShell wf, in TableProjectors<D,S,T,Y> processors, in KeyMap<D,S> selectors)
         {
-            Wf = wf;
-            Source = tables;
-            Target = dst;
-            Processors = processors.Edit;
+            Host = WfSelfHost.create(typeof(TableDispatcher<F,T,D,S,Y>));
+            Wf = wf.WithHost(Host);
+            Projectors = processors;
             Selectors = selectors;
+            Wf.Created();
+        }
+
+        public void Dispose()
+        {
+            Wf.Disposed();
         }
 
         [MethodImpl(Inline)]
-        public void Run()
+        public void Dispatch(T[] src, Y[] dst)
         {
-            Map(first(Source), ref first(Target), 0u, SourceCount);
-        }
-
-        [MethodImpl(Inline)]
-        public void Map(in T src, ref Y dst, uint offset, uint count)
-        {
-            for(var i=offset; i<count; i++)
-                Map(skip(src,i), ref seek(dst,i));
-        }
-
-        [MethodImpl(Inline)]
-        public ref Y Map(in T src, ref Y dst)
-        {
-            dst = Processor(src.Key).Map(src);
-            return ref dst;
-        }
-
-        [MethodImpl(Inline)]
-        public ref readonly Y Processed(K id)
-            => ref skip(Target, Index(id));
-
-
-        [MethodImpl(Inline)]
-        public ulong Index(K id)
-        {
-            ref readonly var selector = ref Selectors[id];
-            var position = selector.Index;
-            return TableMaps.index(selector, Selectors.Offset);
-        }
-
-        /// <summary>
-        /// Retrieves a D-identified projector vie the D/S selectors
-        /// </summary>
-        /// <param name="id">The projector identity</param>
-        [MethodImpl(Inline)]
-        public ref readonly TableMap<K,S,T,Y> Processor(K id)
-        {
-            ref readonly var selector = ref Selectors[id];
-            var position = selector.Index;
-            var idx = Index(id);
-            ref readonly var p = ref skip(Processors, idx);
-            return ref p;
+            try
+            {
+                Wf.Running();
+                using var engine = new TableDispatchEngine<F,T,D,S,Y>(Wf, src, Projectors, Selectors, dst);
+                engine.Run();
+                Wf.Ran();
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e);
+            }
+            finally
+            {
+                Wf.Ran();
+            }
         }
     }
 }

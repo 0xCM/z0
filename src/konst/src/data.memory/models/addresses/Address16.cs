@@ -106,9 +106,6 @@ namespace Z0
         public static A Empty
             => new A(0);
 
-        // T IAddress<T>.Location
-        //     => Location;
-
         [MethodImpl(Inline)]
         public Address16(T offset)
             => Location = offset;

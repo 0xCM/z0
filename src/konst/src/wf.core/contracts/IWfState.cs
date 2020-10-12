@@ -9,6 +9,8 @@ namespace Z0
 
     using static Konst;
 
+    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Attaches a state/context to a <see cref='IWfShell'/>
     /// </summary>

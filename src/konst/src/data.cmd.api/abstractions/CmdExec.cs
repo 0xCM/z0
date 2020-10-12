@@ -15,7 +15,6 @@ namespace Z0
         where C : struct
         where R : struct
     {
-
         readonly CmdHost Host;
 
         protected CmdExec()
@@ -37,7 +36,6 @@ namespace Z0
                 return e;
             }
         }
-
     }
 
     public abstract class CmdExec<H,C,R> : CmdExec<C,R>

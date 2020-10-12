@@ -17,9 +17,7 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public WfStepId StepId {get;}
-
-        public TableId Dataset {get;}
+        public TableId TableId {get;}
 
         public Count RowCount {get;}
 
@@ -29,15 +27,14 @@ namespace Z0
         public EmittedTableEvent(WfStepId step, TableId dataset, uint count, FS.FilePath target, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
-            StepId = step;
-            Dataset = dataset;
+            TableId = dataset;
             RowCount = count;
             Target = target;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx5, EventId, StepId, Dataset, RowCount, Target.ToUri());
+            => Render.format(EventId, TableId, RowCount, Target.ToUri());
 
         public override string ToString()
             => Format();

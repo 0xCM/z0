@@ -4,26 +4,26 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.IO;
-    using System.Runtime.CompilerServices;
+     using System;
+     using System.IO;
+     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    public readonly struct EventPayload<T> : ITextual
+    public readonly struct EventPayload : ITextual
     {
-        public readonly T Data;
+        public readonly BinaryCode Data;
 
         [MethodImpl(Inline)]
-        public static implicit operator EventPayload<T>(T src)
-            => new EventPayload<T>(src);
+        public static implicit operator EventPayload(BinaryCode src)
+            => new EventPayload(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator T(EventPayload<T> src)
+        public static implicit operator BinaryCode(EventPayload src)
             => src.Data;
 
         [MethodImpl(Inline)]
-        public EventPayload(T data)
+        public EventPayload(BinaryCode data)
             => Data = data;
 
         [MethodImpl(Inline)]

@@ -14,71 +14,75 @@ namespace Z0
 
     public readonly ref struct EncodedRoutine
     {
-        internal readonly Span<asci32> name;
+        [MethodImpl(Inline), Op]
+        public static EncodedRoutine define(asci32[] name, EncodedInstruction[] commands, uint[] index)
+            => new EncodedRoutine(name, commands, index);
 
-        internal readonly Span<EncodedInstruction> buffer;
+        internal readonly Span<asci32> Identifier;
 
-        internal readonly Span<uint> index;
+        internal readonly Span<EncodedInstruction> Buffer;
+
+        internal readonly Span<uint> Index;
 
         [MethodImpl(Inline)]
         public static EncodedRoutine operator +(in EncodedRoutine dst, in EncodedInstruction src)
             => Add(dst, src);
 
-        public static implicit operator EncodedAsmRoutine(EncodedRoutine src)
+        public static implicit operator EncodedData(EncodedRoutine src)
             => src.Emit();
 
         [MethodImpl(Inline)]
         public EncodedRoutine(string name, int capacity)
         {
-            this.name = new asci32[1]{name};
-            this.buffer = alloc<EncodedInstruction>(capacity);
-            this.index = new uint[1]{0};
+            Identifier = new asci32[1]{name};
+            Buffer = alloc<EncodedInstruction>(capacity);
+            Index = new uint[1]{0};
         }
 
         [MethodImpl(Inline)]
         public EncodedRoutine(asci32[] name, EncodedInstruction[] buffer, uint[] index)
         {
-            this.name = name;
-            this.buffer = buffer;
-            this.index = index;
+            Identifier = name;
+            Buffer = buffer;
+            Index = index;
         }
 
         public bool HasCapacity
         {
             [MethodImpl(Inline)]
-            get => Index < buffer.Length - 1;
+            get => Entry < Buffer.Length - 1;
         }
 
         [MethodImpl(Inline)]
         public EncodedRoutine Add(in EncodedInstruction command)
         {
             if(HasCapacity)
-                seek(buffer, Index++) = command;
+                seek(Buffer, Entry++) = command;
             return this;
         }
 
-        static EncodedAsmRoutine Emit(in EncodedRoutine builder)
+        static EncodedData Emit(in EncodedRoutine builder)
         {
-            var f = new EncodedAsmRoutine(first(builder.name), builder.buffer.ToArray());
-            builder.Index = 0;
+            var f = new EncodedData(first(builder.Identifier), builder.Buffer.ToArray());
+            builder.Entry = 0;
             builder.Name = asci32.Null;
-            builder.buffer.Clear();
+            builder.Buffer.Clear();
             return f;
         }
 
-        public EncodedAsmRoutine Emit()
+        public EncodedData Emit()
             => Emit(this);
 
-        ref uint Index
+        ref uint Entry
         {
             [MethodImpl(Inline)]
-            get => ref first(index);
+            get => ref first(Index);
         }
 
         ref asci32 Name
         {
             [MethodImpl(Inline)]
-            get => ref first(name);
+            get => ref first(Identifier);
         }
 
         [MethodImpl(Inline)]
@@ -87,5 +91,32 @@ namespace Z0
             dst.Add(src);
             return ref dst;
         }
+
+        public readonly struct EncodedData
+        {
+            public readonly asci32 Name;
+
+            public readonly EncodedInstruction[] Commands;
+
+            [MethodImpl(Inline)]
+            public EncodedData(asci32 name, EncodedInstruction[] commands)
+            {
+                Name = name;
+                Commands = commands;
+            }
+
+            public ref EncodedInstruction this[int index]
+            {
+                [MethodImpl(Inline)]
+                get => ref Commands[index];
+            }
+
+            public bool IsEmpty
+            {
+                [MethodImpl(Inline)]
+                get => Commands.Length == 0;
+            }
+        }
+
     }
 }

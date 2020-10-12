@@ -259,8 +259,11 @@ namespace Z0
         void EmittedTable(WfStepId step, Type type, Count count, FS.FilePath dst)
             => Raise(new EmittedTableEvent(step, type, count, dst, Ct));
 
+        void EmittingTable(Type type, FS.FilePath dst)
+            => Raise(new EmittingTableEvent(Host, type, dst, Ct));
+
         void EmittedTable(Type type, Count count, FS.FilePath dst)
-            => EmittedTable(Host,type,count,dst);
+            => EmittedTable(Host, type, count, dst);
 
         void ProcessingFile<T>(FS.FilePath src, T kind)
         {

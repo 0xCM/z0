@@ -29,7 +29,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        EventId(Vector256<ulong> data)
+        internal EventId(Vector256<ulong> data)
             => Data = data;
 
         public MemoryAddress EventName

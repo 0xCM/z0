@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using api = WfCore;
+    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Describes a workflow step

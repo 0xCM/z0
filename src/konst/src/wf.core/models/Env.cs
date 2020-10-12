@@ -12,20 +12,20 @@ namespace Z0
     /// <summary>
     /// Reifies an application environment service predicated on environment variables
     /// </summary>
-    public readonly struct Env
+    public struct Env
     {
-        public readonly FolderPath LogRoot;
+        public FS.FolderPath LogRoot;
 
-        public readonly FolderPath DevRoot;
+        public FS.FolderPath DevRoot;
 
-        public readonly FolderPath PubRoot;
+        public FS.FolderPath ArchiveRoot;
 
         [MethodImpl(Inline)]
-        public Env(EnvVar<FolderPath> log, EnvVar<FolderPath> dev, EnvVar<FolderPath> archive)
+        public Env(EnvVar<FS.FolderPath> log, EnvVar<FS.FolderPath> dev, EnvVar<FS.FolderPath> archive)
         {
             LogRoot = log;
             DevRoot = dev;
-            PubRoot = archive;
+            ArchiveRoot = archive;
         }
     }
 }

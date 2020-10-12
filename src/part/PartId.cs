@@ -165,9 +165,6 @@ public enum PartId : ulong
 
     Circuits = 154,
 
-
-    Structured = 156,
-
     Symbolic = 157,
 
     Identify = 158,
@@ -260,6 +257,11 @@ public enum PartId : ulong
 
     Part409,
 
+    // ~ 512
+    // ~ -------------------------------------------------------------------------------
+
+    AsmShell = 512,
+
     // ~ Test
     // ~ -------------------------------------------------------------------------------
 
@@ -270,7 +272,6 @@ public enum PartId : ulong
     LibMTest = LibM | Test,
 
     MachinesTest = Machines | Test,
-
 
     BitsTest = BitSuite | Test,
 

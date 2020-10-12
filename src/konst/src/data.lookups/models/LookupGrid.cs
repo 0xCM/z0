@@ -31,7 +31,5 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Values[uint64(Index[uint64(i), uint64(j)])];
         }
-
-
     }
 }

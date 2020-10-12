@@ -22,6 +22,9 @@ namespace Z0
 
         FS.FolderPath StageRoot<S>(S subject);
 
+        FS.FileExt DefaultTableExt
+            => ArchiveFileKinds.Csv;
+
         FS.FolderPath LogRoot()
             =>  DbPaths.DbRoot + FS.folder("logs");
 
@@ -45,17 +48,29 @@ namespace Z0
 
         FS.FilePath Table(string id);
 
+        FS.FilePath Table(Type t)
+            => t.Tag<TableAttribute>().MapValueOrElse(
+                    a => Table(a.TableId),
+                    () => Table(t.Name));
+
         FS.FilePath Table<S>(string id, S subject, FS.FileExt? ext = null);
-            //=> DbPaths.TableRoot() + FS.folder(id) + FS.file(string.Format(RP.SlotDot2, id, subject), ext ?? X.Csv);
+
+        FS.FilePath Table<S>(Type t, S subject)
+            => t.Tag<TableAttribute>().MapValueOrElse(
+                    a => Table<S>(a.TableId, subject, DefaultTableExt),
+                    () => Table<S>(t.Name, subject, DefaultTableExt));
 
         FS.FilePath Table<K>(string id, K kind)
             where K : unmanaged,  IFileKind<K>;
 
         FS.FilePath Table(string id, PartId part, FS.FileExt? ext = null);
-            //=> DbPaths.TableRoot() +  FS.folder(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), ext ?? X.Csv);
 
         FS.FilePath Table(PartId part, string id, FS.FileExt ext);
-            //=> DbPaths.TableRoot() + FS.folder(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), ext);
+
+        FS.FilePath Table(Type t, PartId part)
+            => t.Tag<TableAttribute>().MapValueOrElse(
+                    a => Table(part,  a.TableId, DefaultTableExt),
+                    () => Table(part, t.Name, DefaultTableExt));
 
         Option<FilePath> deposit<F,R,S>(R[] src, string id, S subject, FS.FileExt type)
             where F : unmanaged, Enum

@@ -7,12 +7,15 @@ namespace Z0
     using System;
     using System.Security;
 
-    [SuppressUnmanagedCodeSecurity]
+    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IWfWorker
     {
 
     }
 
+    [Free]
     public interface IWfWorker<H> : IWfWorker
         where H : struct, IWfWorker<H>
     {

@@ -152,6 +152,10 @@ namespace Z0
 
             public override string ToString()
                 => Format();
+
+            [MethodImpl(Inline)]
+            public static implicit operator Z0.FilePath(FilePath src)
+                => Z0.FilePath.Define(src.Name);
         }
     }
 }

@@ -15,15 +15,15 @@ namespace Z0
     partial struct asm
     {
         [MethodImpl(Inline), Op]
-        public static AsmBranchInfo branch(in MemoryAddress @base, in Instruction ix, in AsmBranch target)
-            => new AsmBranchInfo(@base, ix.IP, target, offset(ix.IP, (byte)ix.ByteLength, target.Target));
+        public static AsmBranch branch(in MemoryAddress @base, in Instruction ix, in AsmBranchTarget target)
+            => new AsmBranch(@base, ix.IP, target, offset(ix.IP, (byte)ix.ByteLength, target.Address));
 
         [MethodImpl(Inline), Op]
-        public static AsmBranchInfo branch(in MemoryAddress @base, in Instruction src, byte index)
+        public static AsmBranch branch(in MemoryAddress @base, in Instruction src, byte index)
             => branch(@base, src, branch(src, index));
 
         [Op]
-        public static AsmBranch branch(in Instruction src, byte index)
+        public static AsmBranchTarget branch(in Instruction src, byte index)
         {
             var k = asm.kind(src, index);
             switch(k)
@@ -39,7 +39,7 @@ namespace Z0
                 case FarBranch32:
                     return asm.target(BranchTargetKind.Far, src.FarBranch32, BranchTargetWidth.Branch32, (Address16)src.FarBranchSelector);
             }
-            return AsmBranch.Empty;
+            return AsmBranchTarget.Empty;
         }
     }
 }

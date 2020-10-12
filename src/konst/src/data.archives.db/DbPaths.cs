@@ -11,7 +11,7 @@ namespace Z0
         public static DbPaths create(IWfShell wf)
         {
             var dst = new DbPaths();
-            dst.DbRoot = FS.dir(@"j:\database");
+            dst.DbRoot = EnvRules.Default.DbRoot();
             return dst;
         }
 

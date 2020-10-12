@@ -17,7 +17,7 @@ namespace Z0
     public readonly struct ApiResources
     {
         public static CapturedApiResource[] capture(IAsmContext context, ApiHostUri host, FS.FilePath dst)
-            => capture(context, host, ApiQuery.resources(context.ContextRoot.Api.Components), dst);
+            => capture(context, host, Resources.accessors(context.ContextRoot.Api.Components), dst);
 
         public static CapturedApiResource[] capture(IAsmContext context, ApiHostUri host, ReadOnlySpan<ApiResource> src, FS.FilePath dst)
         {

@@ -28,8 +28,6 @@ namespace Z0
             public static bool operator !=(FileName a, FileName b)
                 => !a.Equals(b);
 
-
-
             [MethodImpl(Inline)]
             public FileName(PathPart name)
                 => Name = name;
@@ -120,6 +118,10 @@ namespace Z0
 
             public override string ToString()
                 => Format();
+
+            [MethodImpl(Inline)]
+            public static implicit operator Z0.FileName(FileName src)
+                => Z0.FileName.define(src.Name);
         }
     }
 }

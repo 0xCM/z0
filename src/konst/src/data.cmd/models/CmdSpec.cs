@@ -10,18 +10,19 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdSpec<K,T> : ICmdSpec<CmdSpec<K,T>,K,T>
-        where K : unmanaged
+    public readonly struct CmdSpec
     {
         public CmdId Id {get;}
 
-        public CmdOption<K,T>[] Options {get;}
+
+        public CmdOption[] Options {get;}
 
         [MethodImpl(Inline)]
-        public CmdSpec(CmdId id, params CmdOption<K,T>[] options)
+        public CmdSpec(CmdId id, params CmdOption[] options)
         {
             Id = id;
             Options = options;
         }
     }
+
 }

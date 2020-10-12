@@ -11,16 +11,55 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using Q = ApiQuery;
 
     partial struct Resources
     {
+        /// <summary>
+        /// Queries the source type for ByteSpan property getters
+        /// </summary>
+        /// <param name="src">The type to query</param>
+        [Op]
+        public static ApiResource[] api(Type src)
+            => src.StaticProperties()
+                 .Ignore()
+                  .WithPropertyType(Q.ResAccessorTypes)
+                  .Select(p => p.GetGetMethod(true))
+                  .Where(m  => m != null)
+                  .Concrete()
+                  .Select(x => new ApiResource(Q.uri(src), x, Q.FormatAccessor(x.ReturnType)));
+
+        /// <summary>
+        /// Queries the source assemblies for ByteSpan property getters
+        /// </summary>
+        /// <param name="src">The assemblies to query</param>
+        [MethodImpl(Inline), Op]
+        public static ResourceAccessors accessors(Assembly[] src)
+            => accessors(src.SelectMany(x => x.GetTypes()));
+
+        /// <summary>
+        /// Queries the source assembly for ByteSpan property getters
+        /// </summary>
+        /// <param name="src">The assembly to query</param>
+        [MethodImpl(Inline), Op]
+        public static ResourceAccessors accessors(Assembly src)
+            => accessors(src.GetTypes());
+
+        /// <summary>
+        /// Queries the source types for ByteSpan property getters
+        /// </summary>
+        /// <param name="src">The types to query</param>
+        [MethodImpl(Inline), Op]
+        public static ResourceAccessors accessors(Type[] src)
+            => src.Where(t => !t.IsInterface).SelectMany(api).Array();
+
         /// <summary>
         /// Collects all resource accessors defined by a specified assembly
         /// </summary>
         /// <param name="src">The source assembly</param>
         [Op]
         public static ResourceDeclarations[] declarations(Assembly src)
-            => (from a in ApiQuery.resources(src).Accessors
+            => (from a in accessors(src).Accessors
                 let t = a.Member.DeclaringType
                 group a by t).Map(x => new ResourceDeclarations(x.Key, x.ToArray()));
     }

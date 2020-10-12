@@ -37,8 +37,8 @@ namespace Z0
 
         static FilePath ComputePath(FolderName subdir, string basename, bool create, FileExtension ext)
             => create
-                ? (subdir.IsEmpty ? Paths.UniqueLogPath(Area,basename,ext) : Paths.UniqueLogPath(Area, subdir, basename,ext))
-                : (subdir.IsEmpty ?  Paths.LogPath(Area, basename, ext) : Paths.LogPath(Area, subdir, basename, ext)) ;
+                ? (subdir.IsEmpty ? Paths.UniqueLogPath(Area,basename, FS.ext(ext.Name)) : Paths.UniqueLogPath(Area, FS.folder(subdir.Name), basename, FS.ext(ext.Name)))
+                : (subdir.IsEmpty ?  Paths.LogPath(Area, basename, FS.ext(ext.Name)) : Paths.LogPath(Area, FS.folder(subdir.Name), basename, FS.ext(ext.Name))) ;
 
         public FilePath Write(IEnumerable<R> src, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header = true, FileExtension ext = null)
         {

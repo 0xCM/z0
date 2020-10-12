@@ -42,5 +42,7 @@ namespace Z0
         public const string ToolCreated = nameof(ToolCreated);
 
         public const string RowCreated = nameof(RowCreated);
+
+        public const string EmittingTable = nameof(EmittingTable);
     }
 }

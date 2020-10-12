@@ -11,18 +11,63 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
+    [ApiHost(ApiNames.Lookups)]
     public partial struct Lookups
     {
-        [MethodImpl(Inline)]
-        public static KeyMapIndex<D,S> selectors<D,S>(KeyMap<D,S>[] src, S min, S max)
-            where D : unmanaged, Enum
-            where S : unmanaged
-                => new KeyMapIndex<D,S>(src,min,max);
-
         [Op, Closures(UInt8k)]
         public static LookupGrid<byte,byte,byte,T> grid<T>(W8 ixj)
             => new LookupGrid<byte,byte,byte,T>(new byte[256,256], new T[256*256]);
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static Lu8<V> lookup<V>(LookupEntry<byte,V>[] src)
+            => new Lu8<V>(lookup<byte,V>(src));
+
+        public static Lu8<V> lookup<V>(byte[] keys, V[] values)
+        {
+            var count = keys.Length;
+            var lu = lookup(alloc<LookupEntry<byte,V>>(count));
+            fill(keys,values, ref lu);
+            return lu;
+        }
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static ref Lu8<V> fill<V>(byte[] keys, V[] values, ref Lu8<V> dst)
+        {
+            var count = keys.Length;
+            ref readonly var kSrc = ref first(@readonly(keys));
+            ref readonly var vSrc = ref first(@readonly(values));
+            ref var luDst = ref first(span(dst.Entries.Entries));
+            for(var i=0; i<count; i++)
+                seek(luDst,i) = entry(skip(kSrc,i), skip(vSrc,i));
+            return ref dst;
+        }
+
+        [MethodImpl(Inline)]
+        public static LookupEntry<K,V> entry<K,V>(K key, V value)
+            where K : unmanaged
+                => new LookupEntry<K,V>(key,value);
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static Lu16<V> lookup<V>(LookupEntry<ushort,V>[] src)
+            => new Lu16<V>(lookup<ushort,V>(src));
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static Lu32<V> lookup<V>(LookupEntry<uint,V>[] src)
+            => new Lu32<V>(lookup<uint,V>(src));
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static Lu64<V> lookup<V>(LookupEntry<ulong,V>[] src)
+            => new Lu64<V>(lookup<ulong,V>(src));
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static LuFx64<T> lookup<T>(ulong[] index, T[] values)
+            where T : unmanaged
+                => new LuFx64<T>(index, values);
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static LuFx64<T> lookup<T>(Paired<ulong,T>[] pairs)
+            where T : unmanaged
+                => new LuFx64<T>(pairs);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static ref T lookup<T>(in LookupGrid<byte,byte,byte,T> src, byte i, byte j)
@@ -57,38 +102,19 @@ namespace Z0
             where K : unmanaged
                 => new LookupTable<K,V>(src);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Lu8<V> lookup<V>(LookupEntry<byte,V>[] src)
-            => new Lu8<V>(lookup(src, z8));
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Lu16<V> lookup<V>(LookupEntry<ushort,V>[] src)
-            => new Lu16<V>(lookup(src, z16));
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Lu32<V> lookup<V>(LookupEntry<uint,V>[] src)
-            => new Lu32<V>(lookup(src, z32));
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Lu64<V> lookup<V>(LookupEntry<ulong,V>[] src)
-            => new Lu64<V>(lookup(src, z64));
 
         [MethodImpl(Inline)]
-        public static LookupTable<T,V> lookup<S,T,V>(LookupEntry<S,V>[] src, T t = default)
+        public static Span<LookupEntry<T,V>> convert<S,V,T>(Span<LookupEntry<S,V>> src, T t = default)
             where S : unmanaged
             where T : unmanaged
         {
-            ref var eV = ref first(span(src));
-            ref var dst = ref @as<LookupEntry<S,V>,LookupEntry<T,V>>(eV);
+            var edit = src;
+            ref var sv = ref first(edit);
+            var tv = recover<LookupEntry<S,V>,LookupEntry<T,V>>(src);
             var count = src.Length;
             for(var i=0u; i<count; i++)
-            {
-                ref var eSrc = ref seek(eV,i);
-                ref var eDst = ref @as<LookupEntry<S,V>,LookupEntry<T,V>>(eSrc);
-                seek(dst,i) = eDst;
-            }
-
-            return new LookupTable<T,V>();
+                seek(tv, i) = @as<LookupEntry<S,V>,LookupEntry<T,V>>(skip(sv,i));
+            return tv;
         }
     }
 }

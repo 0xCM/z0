@@ -14,20 +14,17 @@ namespace Z0
     {
         public WfEventId EventId {get;}
 
-        public WfActor Actor {get;}
-
         public CallingMember Call {get;}
 
         [MethodImpl(Inline)]
-        public EventOrigin(WfEventId id, string actor, CallingMember call)
+        public EventOrigin(WfEventId id, CallingMember call)
         {
             EventId = id;
-            Actor = actor;
             Call = call;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => format(EventId, Actor, Call);
+            => format(EventId, Call);
     }
 }

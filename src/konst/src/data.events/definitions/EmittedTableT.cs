@@ -17,26 +17,26 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public WfStepId StepId {get;}
-
-        public Type RowType => typeof(T);
+        public TableId TableId => typeof(T);
 
         public Count RowCount {get;}
 
         public FS.FilePath Target {get;}
 
+        public FlairKind Flair {get;}
+
         [MethodImpl(Inline)]
-        public EmittedTableEvent(WfStepId step, Count count, FS.FilePath target, CorrelationToken ct)
+        public EmittedTableEvent(WfStepId step, Count count, FS.FilePath target, CorrelationToken ct, FlairKind flair = FlairKind.Ran)
         {
             EventId = (EventName, step, ct);
-            StepId = step;
             RowCount = count;
             Target = target;
+            Flair = flair;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(PSx4, EventId, RowType.Name, RowCount, Target.ToUri());
+            => Render.format(EventId, TableId, RowCount, Target.ToUri());
 
         public override string ToString()
             => Format();

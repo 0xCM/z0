@@ -31,6 +31,12 @@ namespace Z0
                 get => Name.IsNonEmpty;
             }
 
+            public static FolderName Empty
+            {
+                [MethodImpl(Inline)]
+                get => new FolderName(PathPart.Empty);
+            }
+
             [MethodImpl(Inline)]
             public FolderName(PathPart name)
                 => Name = name;
@@ -46,6 +52,9 @@ namespace Z0
             public FilePath Replace(char src, char dst)
                 => new FilePath(Name.Replace(src,dst));
 
+            [MethodImpl(Inline)]
+            public static implicit operator Z0.FolderName(FolderName src)
+                => Z0.FolderName.Define(src.Name);
         }
     }
 }

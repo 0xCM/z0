@@ -4,6 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Defines an untyped characterization of a wokflow operand
     /// </summary>

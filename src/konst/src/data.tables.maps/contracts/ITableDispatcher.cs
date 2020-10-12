@@ -4,16 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
     public interface ITableDispatcher<F,T,D,S,Y>
         where F : unmanaged
-        where T : struct, ITable<F,T,D>
+        where T : struct
         where D : unmanaged
         where S : unmanaged
     {
-        void Process(T[] src, Y[] dst);
+        void Dispatch(T[] src, Y[] dst);
     }
 }

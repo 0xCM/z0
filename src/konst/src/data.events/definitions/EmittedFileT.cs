@@ -17,8 +17,6 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public WfStepId StepId {get;}
-
         public InputValue<T> Source {get;}
 
         public FS.FilePath Target {get;}
@@ -31,7 +29,6 @@ namespace Z0
         public EmittedFileEvent(WfStepId step, T source, Count segments, FS.FilePath target, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
-            StepId = step;
             SegmentCount = segments;
             Source = source;
             Target = target;

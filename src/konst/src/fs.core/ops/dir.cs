@@ -16,5 +16,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static FolderPath dir(PathPart name)
             => new FolderPath(normalize(name));
+
+        [MethodImpl(Inline), Op]
+        public static FolderPath dir(string name)
+            => new FolderPath(normalize(name));
     }
 }

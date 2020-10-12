@@ -50,7 +50,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public int Read(int offset, int wantedCount, Span<T> dst)
         {
-            int count = Math.Min(wantedCount, State.Remaining);
+            int count = min(wantedCount, State.Remaining);
             read<T>(Source, offset, ref first(dst), count);
             State.Advance((uint)count);
             return count;
@@ -95,7 +95,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Spefifies whether the reader can advance to and read the next cell
+        /// Specifies whether the reader can advance to and read the next cell
         /// </summary>
         public readonly bool HasNext
         {
@@ -104,7 +104,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Spefifies the length of the data soruce
+        /// Specifies the length of the data source
         /// </summary>
         public readonly int Length
         {
@@ -113,7 +113,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Spefifies the number of elements that remain to be read
+        /// Specifies the number of elements that remain to be read
         /// </summary>
         public readonly int Remaining
         {

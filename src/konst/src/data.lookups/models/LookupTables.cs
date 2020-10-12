@@ -22,7 +22,7 @@ namespace Z0
             public readonly uint EntryCount;
 
             [MethodImpl(Inline)]
-            internal LuFx64(TableSpan<ulong> index, TableSpan<K> values)
+            internal LuFx64(ulong[] index, K[] values)
             {
                 KeyIndex = index;
                 KeyValues = values;
@@ -57,7 +57,7 @@ namespace Z0
         /// </summary>
         public readonly struct Lu8<V>
         {
-            readonly LookupTable<byte,V> Entries;
+            internal readonly LookupTable<byte,V> Entries;
 
             [MethodImpl(Inline)]
             public Lu8(LookupTable<byte,V> src)
@@ -65,7 +65,6 @@ namespace Z0
                 Entries = src;
             }
         }
-
 
         /// <summary>
         /// Defines a 16-bit lookup tablee

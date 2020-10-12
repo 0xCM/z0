@@ -28,6 +28,14 @@ namespace Z0
             ShellExeDir = FolderPath.Define(Part.ShellExeDir);
         }
 
+        [MethodImpl(Inline)]
+        public ShellPaths(PartId id, FS.FolderPath log)
+        {
+            AppId = id;
+            LogRoot = FolderPath.Define(log.Name);
+            ShellExeDir = FolderPath.Define(Part.ShellExeDir);
+        }
+
         public static IShellPaths Default
             => new ShellPaths(Part.ExecutingPart, EnvVars.Common.LogRoot);
     }

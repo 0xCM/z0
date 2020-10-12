@@ -8,6 +8,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
 
+    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     using static Konst;
 
     public interface IWfInit

@@ -112,7 +112,7 @@ namespace Z0
             dst.Source = src.IP;
             dst.InstructionSize = src.Encoded.Size;
             dst.CallSite = dst.Source + dst.InstructionSize;
-            dst.Target = target.Target.Target;
+            dst.Target = target.Target.Address;
             dst.Asm = src.FormattedInstruction;
         }
     }

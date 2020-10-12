@@ -4,12 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
-    using static z;
-
+    [Free]
     public interface IWfTableWorker : IWfWorker
     {
 

@@ -15,7 +15,6 @@ namespace Z0
         public static void update<E,T>(ReadOnlySpan<BinaryCode> src, MemorySlots<E> slots, T dst)
             where E : unmanaged, Enum
         {
-            //var slots = asm.slots<E,T>(dst);
             var count = slots.Length;
             ref readonly var lead = ref slots.Lookup(default(E));
             for(var i=0u; i<count; i++)

@@ -26,11 +26,10 @@ namespace Z0
 
     [Free]
     public interface ITable<F,T> : ITable<T>
-        where T : struct, ITable<F,T>
+        where T : struct
         where F : unmanaged
     {
 
     }
-
 
 }

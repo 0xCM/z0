@@ -11,13 +11,10 @@ namespace Z0
     using static z;
 
     using PK = PrimalKind;
-    using NK = PrimalNumericKind;
-    using TC = System.TypeCode;
 
-    [ApiHost]
+    [ApiHost(ApiNames.PrimalKinds, true)]
     public readonly struct PrimalKinds
     {
-
         /// <summary>
         /// Returns the type-code identified primal kind
         /// </summary>

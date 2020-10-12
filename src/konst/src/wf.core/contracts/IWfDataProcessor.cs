@@ -4,17 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
-    using static z;
-
+    [Free]
     public interface IWfDataProcessor
     {
         void Connect() {}
     }
 
+    [Free]
     public interface IWfDataProcessor<S> : IWfDataProcessor
     {
 

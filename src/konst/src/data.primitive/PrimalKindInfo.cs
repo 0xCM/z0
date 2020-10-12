@@ -12,6 +12,14 @@ namespace Z0
 
     public readonly struct PrimalKindInfo : ITextual
     {
+        public PrimalKind Kind {get;}
+
+        public TypeWidth Width {get;}
+
+        public SignKind Sign {get;}
+
+        public PrimalTypeCode TypeCode {get;}
+
         [MethodImpl(Inline)]
         public PrimalKindInfo(PrimalKind kind, TypeWidth width, SignKind sign, PrimalTypeCode tc)
         {
@@ -20,14 +28,6 @@ namespace Z0
             Sign = sign;
             TypeCode = tc;
         }
-
-        public PrimalKind Kind {get;}
-
-        public TypeWidth Width {get;}
-
-        public SignKind Sign {get;}
-
-        public PrimalTypeCode TypeCode {get;}
 
         public string Format()
             => Kind.ToString();

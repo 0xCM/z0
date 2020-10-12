@@ -10,25 +10,17 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdOption<K,T> : ITextual
-        where K : unmanaged
+    public readonly struct CmdOption
     {
-        public K Kind {get;}
+        public ulong Id {get;}
 
-        public T Value {get;}
+        public BinaryCode Value {get;}
 
         [MethodImpl(Inline)]
-        public CmdOption(K kind, T value)
+        public CmdOption(ulong kind, BinaryCode value)
         {
-            Kind = kind;
+            Id = kind;
             Value = value;
         }
-
-        [MethodImpl(Inline)]
-        public static implicit operator CmdOption<K,T>((K kind, T value) src)
-            => new CmdOption<K,T>(src.kind, src.value);
-
-        public string Format()
-            => Render.setting(Kind, Value);
     }
 }

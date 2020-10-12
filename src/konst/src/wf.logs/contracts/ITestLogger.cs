@@ -21,10 +21,10 @@ namespace Z0
     /// </summary>
     public interface ITestLogger
     {
-        FilePath Write<R>(IEnumerable<R> data, FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header, FileExtension ext)
+        FS.FilePath Write<R>(IEnumerable<R> data, FS.FolderName subdir, string basename, LogWriteMode mode, char delimiter, bool header, FS.FileExt ext)
             where R : ITabular;
 
-        FilePath Write<R>(IEnumerable<R> data, FolderName subdir, string basename, FileWriteMode mode, char delimiter, bool header, FileExtension ext)
+        FS.FilePath Write<R>(IEnumerable<R> data, FS.FolderName subdir, string basename, FileWriteMode mode, char delimiter, bool header, FS.FileExt ext)
             where R : ITabular
                 => Write(data,subdir, basename, mode == FileWriteMode.Append ? LogWriteMode.Create : LogWriteMode.Append, delimiter, header, ext);
     }

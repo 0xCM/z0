@@ -15,13 +15,13 @@ namespace Z0
         /// The global application log root
         /// </summary>
         FS.FolderPath LogDir
-            => FS.dir(EnvVars.Common.LogRoot.Name);
+            => EnvVars.Common.LogRoot;
 
         /// <summary>
         /// The global application log root
         /// </summary>
         FolderPath LogRoot
-            => EnvVars.Common.LogRoot;
+            => FolderPath.Define(EnvVars.Common.LogRoot.Name);
 
         FS.FolderPath AppLogRoot
             => FS.dir(text.format("{0}/applogs", LogRoot.Name));

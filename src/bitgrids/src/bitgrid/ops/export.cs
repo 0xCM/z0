@@ -166,12 +166,12 @@ namespace Z0
             where T: unmanaged
                 => export<M,N,T>(g.Data, showrow, label);
 
-        static FileName filename<W,M,N,T>(string label, W w, M m = default, N n = default, T t = default)
+        static FS.FileName filename<W,M,N,T>(string label, W w, M m = default, N n = default, T t = default)
             where W: unmanaged, ITypeNat
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => FileName.define($"{label}_{sigtext(w,m,n,t)}","grid");
+                => FS.file($"{label}_{sigtext(w,m,n,t)}","grid");
 
         /// <summary>
         /// Creates a grid writer predicated on type parameters
@@ -190,7 +190,7 @@ namespace Z0
             where M: unmanaged, ITypeNat
             where N: unmanaged, ITypeNat
             where T: unmanaged
-                => ((EnvVars.Common.LogRoot + FolderName.Define("grids")) +  filename(label,w,m,n,t)).Writer();
+                => ((EnvVars.Common.LogRoot + FS.folder("grids")) + filename(label,w,m,n,t)).Writer();
 
         /// <summary>
         /// Exports grid data to a file

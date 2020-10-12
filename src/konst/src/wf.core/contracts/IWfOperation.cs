@@ -4,11 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-    using static FS;
+    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     public interface IWfOperation : ITextual
     {

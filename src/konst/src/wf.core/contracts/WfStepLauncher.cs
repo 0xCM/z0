@@ -4,14 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
-    using static z;
-
+    [Free]
     public delegate void WfStepLauncher(IWfShell wf);
 
+    [Free]
     public delegate void WfStepLauncher<H>(IWfShell wf, H host)
         where H : IWfHost<H>,new();
 
