@@ -70,6 +70,7 @@ namespace Z0
             Wf.Raise(new PartIndexCreated(Host, Target, Wf.Ct));
         }
 
+
         public void Run()
         {
             Wf.Running(Host);
@@ -94,33 +95,33 @@ namespace Z0
             Wf.Status(Host, text.format("Decoding {0} entries from {1} parts", src.EntryCount, src.Parts.Length));
 
             var parts = src.Parts;
-            var dst = alloc<ApiPartRoutines>(parts.Length);
+            var partCount = parts.Length;
+            var dst = alloc<ApiPartRoutines>(partCount);
             var hostFx = list<ApiHostRoutines>();
             var kMembers = 0u;
             var kHosts = 0u;
             var kParts = 0u;
             var kFx = 0u;
 
-            for(var i=0; i<parts.Length; i++)
+            for(var i=0; i<partCount; i++)
             {
                 hostFx.Clear();
                 var part = parts[i];
                 if(part == 0)
-                {
                     dst[i] = new ApiPartRoutines(part, sys.empty<ApiHostRoutines>());
-                }
                 else
                 {
                     var hosts = src.Hosts.Where(h => h.Owner == part);
+                    var hostCount = hosts.Length;
+
                     Wf.Status(Host, text.format("Decoding {0}", part.Format()));
 
-                    for(var j=0; j<hosts.Length; j++)
+                    for(var j=0; j<hostCount; j++)
                     {
                         var host = hosts[j];
                         var members = src[host];
-                        var fx = Decode(members);
+                        var fx = CaptureIndexBuilder.DecodeBlocks(State.RoutineDecoder, members);
                         hostFx.Add(fx);
-
                         kHosts++;
                         kMembers += fx.RoutineCount;
                         kFx += fx.InstructionCount;
@@ -137,18 +138,18 @@ namespace Z0
             return dst;
         }
 
-        ApiHostRoutines Decode(in ApiHostCodeBlocks hcs)
+        ApiHostRoutines DecodeBlocks(in ApiHostCodeBlocks blocks)
         {
             var instructions = list<ApiRoutineObsolete>();
             var ip = MemoryAddress.Empty;
             var decoder = State.RoutineDecoder;
             var target = Buffer;
-            var count = hcs.Length;
+            var count = blocks.Length;
 
             for(var i=0; i<count; i++)
             {
                 Buffer.Clear();
-                ref readonly var block = ref hcs[i];
+                ref readonly var block = ref blocks[i];
                 decoder.Decode(block, x => target.Add(x));
 
                 if(i == 0)
@@ -157,14 +158,13 @@ namespace Z0
                 instructions.Add(AsmProjections.project(ip, block, Buffer.ToArray()));
             }
 
-            return new ApiHostRoutines(hcs.Host, instructions.ToArray());
+            return new ApiHostRoutines(blocks.Host, instructions.ToArray());
         }
 
         void Process(in ApiCodeBlockIndex encoded)
         {
             try
             {
-
                 var id = new CreateGlobalIndexHost().Id;
                 Wf.Running(id);
 
@@ -200,31 +200,31 @@ namespace Z0
                 writer.WriteLine(AsmTables.format(skip(records,i), formatter).Render());
 
             Wf.Emitted(Host, dst);
+        }
 
+        void Process(in ApiPartRoutines src)
+        {
+            ProcessInstructions.create().Run(Wf, src);
+            InstructionProcessors.ProcessCalls(Wf, src);
         }
 
         void Process(ReadOnlySpan<ApiPartRoutines> src)
         {
             try
             {
-                foreach(var part in src)
-                {
-                    ProcessInstructions.create().Run(Wf,part);
-                    EmitCallIndex.create().Run(Wf, part);
-                }
+                var count = src.Length;
+                for(var i=0; i<count; i++)
+                    Process(skip(src,i));
+                // foreach(var part in src)
+                // {
+                //     Process(part);
+                //     //EmitCallIndex.create().Run(Wf, part);
+                // }
             }
             catch(Exception e)
             {
                 Wf.Error(Host,e);
             }
         }
-
-        // void Process(in ApiPartRoutines src)
-        // {
-        //     InstructionProcessors.ProcessJumps(Wf, src);
-        //     InstructionProcessors.RenderSemantic(Wf, src);
-        //     InstructionProcessors.ProcessEnlisted(Wf, src);
-        //     InstructionProcessors.ProcessCalls(Wf, src);
-        // }
     }
 }

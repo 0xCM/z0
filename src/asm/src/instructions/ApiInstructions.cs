@@ -12,6 +12,7 @@ namespace Z0
     using Z0.Asm;
 
     using static Konst;
+    using static z;
 
     public readonly struct ApiInstructions
     {
@@ -97,5 +98,16 @@ namespace Z0
         [MethodImpl(Inline)]
         internal ApiInstructions(ApiInstruction[] src)
             => Data = src;
+
+        public AsmCallRecord[] CallRecords()
+        {
+            var calls = @readonly(CallInfo);
+            var count = calls.Length;
+            var buffer = alloc<AsmCallRecord>(count);
+            ref var dst = ref first(span(buffer));
+            for(var i=0u; i<count; i++)
+                skip(calls,i).Fill(ref seek(dst,i));
+            return buffer;
+        }
     }
 }

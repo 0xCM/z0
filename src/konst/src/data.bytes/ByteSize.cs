@@ -12,8 +12,13 @@ namespace Z0
     /// <summary>
     /// Specifies data size in bytes
     /// </summary>
+    [ApiDataType]
     public readonly struct ByteSize : ITextual
     {
+        [MethodImpl(Inline)]
+        public static string format(ByteSize src)
+            => src.Count == 0 ? "0" : src.Count.ToString("#,#");
+
         /// <summary>
         /// Specifies a byte count
         /// </summary>
@@ -40,6 +45,30 @@ namespace Z0
             => new ByteSize((uint)src/8);
 
         [MethodImpl(Inline)]
+        public static explicit operator ByteSize(byte src)
+            => new ByteSize(src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator ByteSize(sbyte src)
+            => new ByteSize(src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator ByteSize(short src)
+            => new ByteSize(src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator ByteSize(long src)
+            => new ByteSize((uint)src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator ByteSize(ushort src)
+            => new ByteSize(src);
+
+        [MethodImpl(Inline)]
+        public static explicit operator ByteSize(uint src)
+            => new ByteSize(src);
+
+        [MethodImpl(Inline)]
         public static implicit operator ByteSize(TypeWidth src)
             => new ByteSize((uint)src/8);
 
@@ -56,32 +85,32 @@ namespace Z0
             => new ByteSize((int)src);
 
         [MethodImpl(Inline)]
-        public static bool operator ==(ByteSize lhs, ByteSize rhs)
-            => lhs.Count == rhs.Count;
+        public static bool operator ==(ByteSize a, ByteSize b)
+            => a.Count == b.Count;
 
         [MethodImpl(Inline)]
-        public static bool operator !=(ByteSize lhs, ByteSize rhs)
-            => lhs.Count != rhs.Count;
+        public static bool operator !=(ByteSize a, ByteSize b)
+            => a.Count != b.Count;
 
         [MethodImpl(Inline)]
-        public static ByteSize operator +(ByteSize lhs, ByteSize rhs)
-            => lhs.Count + rhs.Count;
+        public static ByteSize operator +(ByteSize a, ByteSize b)
+            => a.Count + b.Count;
 
         [MethodImpl(Inline)]
-        public static ByteSize operator -(ByteSize lhs, ByteSize rhs)
-            => lhs.Count - rhs.Count;
+        public static ByteSize operator -(ByteSize a, ByteSize b)
+            => a.Count - b.Count;
 
         [MethodImpl(Inline)]
-        public static ByteSize operator *(ByteSize lhs, ByteSize rhs)
-            => lhs.Count * rhs.Count;
+        public static ByteSize operator *(ByteSize a, ByteSize b)
+            => a.Count * b.Count;
 
         [MethodImpl(Inline)]
-        public static ByteSize operator /(ByteSize lhs, ByteSize rhs)
-            => lhs.Count / rhs.Count;
+        public static ByteSize operator /(ByteSize a, ByteSize b)
+            => a.Count / b.Count;
 
         [MethodImpl(Inline)]
-        public static ByteSize operator %(ByteSize lhs, ByteSize rhs)
-            => lhs.Count % rhs.Count;
+        public static ByteSize operator %(ByteSize a, ByteSize b)
+            => a.Count % b.Count;
 
         [MethodImpl(Inline)]
         public ByteSize(int count)
@@ -97,9 +126,11 @@ namespace Z0
             get => Count/8;
         }
 
+        [MethodImpl(Inline),Ignore]
         public string Format(string pattern)
-            => Count.ToString(pattern);
+            => format(this);
 
+        [MethodImpl(Inline),Ignore]
         public string Format()
             => Count == 0 ? "0" : Format("#,#");
 
@@ -109,8 +140,8 @@ namespace Z0
         public override int GetHashCode()
             => Count.GetHashCode();
 
-        public bool Equals(ByteSize rhs)
-            => Count == rhs.Count;
+        public bool Equals(ByteSize src)
+            => Count == src.Count;
 
         public override bool Equals(object obj)
             => obj is ByteSize ? Equals((ByteSize)obj) : false;
