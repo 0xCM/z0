@@ -17,7 +17,7 @@ namespace Z0
     using OT = CilOperandType;
     using SB = CilStackBehaviour;
 
-    partial struct Cil
+    partial struct CilApi
     {
         /// <summary>
         /// Populates an opcode dataset

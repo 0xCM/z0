@@ -4,6 +4,7 @@
     <ToolCoreId>tool.core</ToolCoreId>
     <ToolCliId>tool.cli</ToolCliId>
     <ToolCli>$(Src)$(ToolCliId)/z0.$(ToolCliId).csproj</ToolCli>
+    <Refs>$(Src)refs/z0.refs.csproj</Refs>
   </PropertyGroup>
 
   <PropertyGroup>

@@ -11,8 +11,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost("api")]
-    public readonly partial struct Cil
+    [ApiHost(ApiNames.CilApi, true)]
+    public readonly partial struct CilApi
     {
         readonly CilOpCodeDataset Data;
 
@@ -25,16 +25,16 @@ namespace Z0
             => new CilFunctionFormatter(config);
 
         [Op]
-        public static Cil init()
+        public static CilApi init()
         {
             var buffer = sys.alloc<CilOpCodeRow>(300);
             ref var dst = ref first(span(buffer));
             load(ref dst);
-            return new Cil(buffer);
+            return new CilApi(buffer);
         }
 
         [MethodImpl(Inline)]
-        Cil(CilOpCodeRow[] src)
+        CilApi(CilOpCodeRow[] src)
         {
             Data = src;
         }

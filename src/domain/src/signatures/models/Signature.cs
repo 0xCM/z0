@@ -20,7 +20,6 @@ namespace Z0
 
         public StringRef Identifier {get;}
 
-
         [MethodImpl(Inline)]
         internal Signature(string identifier, Vector256<uint> aspects)
         {

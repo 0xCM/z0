@@ -4,9 +4,6 @@
     <OutputType>Library</OutputType>
   </PropertyGroup>
 
-  <!-- <ItemGroup>
-    <Compile Include="$(TopDir).settings/Settings.cs" />
-  </ItemGroup> -->
 
   <ItemGroup>
     <ProjectReference Include="$(Imagine)" />

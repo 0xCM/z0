@@ -28,7 +28,7 @@ namespace Z0
         static Type[] _Types = new Type[TypeCount]{typeof(R)};
 
         public static implicit operator Signature(Sig<R> src)
-            => define(src.Identifier, skip(Types,0));
+            => encode(src.Identifier, skip(Types,0));
 
         public static ClrArtifactKey target()
             => skip(Types,0);

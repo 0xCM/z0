@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Cil
+    partial struct CilApi
     {
         [Op]
         public static string name(ILOpCode opcode)

@@ -135,8 +135,6 @@ namespace Z0
 
         public const string DbArtifacts = archives + dot + db + dot + artifacts;
 
-        public const string Signatures = signatures;
-
         public const string LiteralFields = literal + dot + fields;
 
         public const string AppMsg = app + dot + msg;

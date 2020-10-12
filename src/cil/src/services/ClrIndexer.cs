@@ -15,7 +15,7 @@ namespace Z0
     using static z;
 
     using Dn = dnlib.DotNet;
-    using api = CilServices;
+    using api = CilApi;
 
     class ClrIndexer : IClrIndexer
     {

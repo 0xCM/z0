@@ -11,27 +11,27 @@ namespace Z0
     using static z;
     using static Signatures;
 
-    public readonly struct Sig<A,R> : ISignature<Sig<A,R>,A,R>
+    public readonly struct Sig<A,B,C,R> : ISignature<Sig<A,B,C,R>,A,B,C,R>
     {
-        public const byte SourceCount = 1;
+        public const byte SourceCount = 3;
 
-        public const byte TypeCount = 2;
+        public const byte TypeCount = 4;
 
-        static ClrArtifactKey[] _Sources = new ClrArtifactKey[SourceCount]{source(n0)};
+        static ClrArtifactKey[] _SourceKeys = new ClrArtifactKey[SourceCount]{source(n0), source(n1), source(n2)};
 
-        static Type[] _Types = new Type[TypeCount]{typeof(A), typeof(R)};
+        static Type[] _Types = new Type[TypeCount]{typeof(A), typeof(B), typeof(C), typeof(R)};
 
         public StringRef Identifier {get;}
 
         [MethodImpl(Inline)]
-        public Sig(string name)
+        public Sig(string id)
         {
-            Identifier = name;
+            Identifier = id;
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator Signature(Sig<A,R> src)
-            => define(src.Identifier, skip(Types,0), skip(Types,1));
+        public static implicit operator Signature(Sig<A,B,C,R> src)
+            => encode(src.Identifier, skip(Types,0), skip(Types,1), skip(Types,2), skip(Types,3));
 
         public static ClrArtifactKey target()
             => typeof(R);
@@ -39,10 +39,17 @@ namespace Z0
         public static ClrArtifactKey source(N0 n)
             => typeof(A);
 
+        public static ClrArtifactKey source(N1 n)
+            => typeof(B);
+
+        public static ClrArtifactKey source(N2 n)
+            => typeof(C);
+
         public static ReadOnlySpan<ClrArtifactKey> Sources
-            => _Sources;
+            => _SourceKeys;
 
         public static ReadOnlySpan<Type> Types
             => _Types;
     }
+
 }

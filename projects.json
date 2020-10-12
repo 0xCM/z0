@@ -306,5 +306,12 @@
 		"paths": [],
 		"group": "",
 		"enabled": true
+	},
+	{
+		"name": "ms/powershell",
+		"rootPath": "j:\\lang\\net\\PowerShell",
+		"paths": [],
+		"group": "",
+		"enabled": true
 	}
 ]

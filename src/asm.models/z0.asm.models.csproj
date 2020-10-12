@@ -8,6 +8,7 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Math)" />
     <ProjectReference Include="$(BitCore)" />
+    <ProjectReference Include="$(Refs)" />
 
   </ItemGroup>
 

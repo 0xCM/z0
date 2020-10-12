@@ -64,7 +64,7 @@ namespace Z0
             => !a.Equals(b);
 
         [MethodImpl(Inline)]
-        internal TypeIdentity(string id)
+        public TypeIdentity(string id)
             => Identifier = id;
 
         IIdentifiedType<TypeIdentity> Identified => this;

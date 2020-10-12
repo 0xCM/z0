@@ -16,5 +16,4 @@
     <EmbeddedResource Include="specs/**/*.csv" />
   </ItemGroup>
 
-
 </Project>

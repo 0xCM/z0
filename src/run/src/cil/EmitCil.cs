@@ -40,7 +40,7 @@ namespace Z0
                 summary.WriteLine(line);
             }
 
-            var decoded = CilServices.decode(mod,props.Select(x => x.GetGetMethod())).ToArray();
+            var decoded = CilApi.decode(mod,props.Select(x => x.GetGetMethod())).ToArray();
             var writer = new CilFunctionWriter(cmd.CilTarget);
             writer.Write(decoded);
         }

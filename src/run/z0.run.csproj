@@ -18,7 +18,6 @@
     <ProjectReference Include="$(Merge)" />
 
     <ProjectReference Include="$(Capture)" />
-    <ProjectReference Include="$(Tools)" />
     <ProjectReference Include="$(Json)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(Cil)" />

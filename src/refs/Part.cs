@@ -5,10 +5,9 @@
 using System;
 using System.Reflection;
 
-[assembly: AssemblyDescription("Data sourced from hither, thither and yon")]
-[assembly: PartId(PartId.Data)]
+[assembly: PartId(PartId.Refs)]
 
 namespace Z0.Parts
-{        
-    public sealed class Data : Part<Data> { }
+{
+    public sealed class Refs : Part<Refs> { }
 }

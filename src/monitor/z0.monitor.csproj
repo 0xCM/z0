@@ -3,12 +3,10 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <AssemblyName>zwatch</AssemblyName>
-    <!-- <RuntimeIdentifier>win-x64</RuntimeIdentifier> -->
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Flow)" />
-    <ProjectReference Include="$(ToolCore)" />
+    <ProjectReference Include="$(Konst)" />
   </ItemGroup>
 
 </Project>

@@ -1,2 +1,2 @@
 dotnet build
-z0 konst.shell
+z0 domain konst.shell

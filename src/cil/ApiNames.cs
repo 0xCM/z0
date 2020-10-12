@@ -10,10 +10,8 @@ namespace Z0
 
     readonly struct ApiNames
     {
-        public const string EnumCatalog = "enums.catalogs";
+        const string cil = nameof(cil);
 
-
-        public const string Signatures = signatures;
-
+        public const string CilApi = cil + dot + api;
     }
 }

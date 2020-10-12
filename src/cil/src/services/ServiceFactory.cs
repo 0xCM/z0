@@ -15,7 +15,7 @@ namespace Z0
     using DnLib = dnlib.DotNet.Emit;
     using R = System.Reflection;
 
-    public readonly struct CilServices
+    public readonly partial struct CilApi
     {
         /// <summary>
         /// Converts the dnlib-defined data structure to a Z0-defined replication of the dnlib structure

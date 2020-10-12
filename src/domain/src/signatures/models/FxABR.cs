@@ -31,7 +31,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator Signature(Sig<A,B,R> src)
-            => define(src.Identifier, skip(Types,0), skip(Types,1), skip(Types,2));
+            => encode(src.Identifier, skip(Types,0), skip(Types,1), skip(Types,2));
 
         public static ClrArtifactKey target()
             => typeof(R);

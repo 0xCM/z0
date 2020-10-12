@@ -14,51 +14,52 @@ namespace Z0
     partial struct Signatures
     {
         [MethodImpl(Inline), Op]
-        public static Signature define(string identifier, Type r)
+        public static Signature encode(string identifier, Type r)
             => new Signature(identifier, vparts(W, z32, 0,0,0,0,0,0, (uint)r.MetadataToken));
 
         [MethodImpl(Inline), Op]
-        public static Signature define(string identifier, Type a, Type r)
+        public static Signature encode(string identifier, Type a, Type r)
             => new Signature(identifier, vparts(W, (uint)a.MetadataToken, 0,0,0,0,0,0, (uint)r.MetadataToken));
 
         [MethodImpl(Inline), Op]
-        public static Signature define(string identifier, Type a, Type b, Type r)
+        public static Signature encode(string identifier, Type a, Type b, Type r)
             => new Signature(identifier, vparts(W, (uint)a.MetadataToken, (uint)b.MetadataToken,0,0,0,0,0, (uint)r.MetadataToken));
 
         [MethodImpl(Inline), Op]
-        public static Signature define(string identifier, Type a, Type b, Type c, Type r)
+        public static Signature encode(string identifier, Type a, Type b, Type c, Type r)
             => new Signature(identifier, vparts(W, (uint)a.MetadataToken, (uint)b.MetadataToken,(uint)c.MetadataToken,0,0,0,0, (uint)r.MetadataToken));
 
         [MethodImpl(Inline), Op]
-        public static Signature define(in StringRef identifier, Type r)
+        public static Signature encode(in StringRef identifier, Type r)
             => new Signature(identifier, vparts(W, z32, 0,0,0,0,0,0, (uint)r.MetadataToken));
 
         [MethodImpl(Inline), Op]
-        public static Signature define(in StringRef identifier, Type a, Type r)
+        public static Signature encode(in StringRef identifier, Type a, Type r)
             => new Signature(identifier, vparts(W, (uint)a.MetadataToken, 0,0,0,0,0,0, (uint)r.MetadataToken));
 
         [MethodImpl(Inline), Op]
-        public static Signature define(in StringRef identifier, Type a, Type b, Type r)
+        public static Signature encode(in StringRef identifier, Type a, Type b, Type r)
             => new Signature(identifier, vparts(W, (uint)a.MetadataToken, (uint)b.MetadataToken,0,0,0,0,0, (uint)r.MetadataToken));
 
         [MethodImpl(Inline), Op]
-        public static Signature define(in StringRef identifier, Type a, Type b, Type c, Type r)
+        public static Signature encode(in StringRef identifier, Type a, Type b, Type c, Type r)
             => new Signature(identifier, vparts(W, (uint)a.MetadataToken, (uint)b.MetadataToken,(uint)c.MetadataToken,0,0,0,0, (uint)r.MetadataToken));
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static Sig<A> define<A>(string identifier, A a = default)
-            => new Sig<A>(identifier);
+        [MethodImpl(Inline), Op]
+        public static Signature fx(string identifier, U8 a)
+            => define<byte>(identifier);
 
-        [MethodImpl(Inline)]
-        public static Sig<A,B> define<A,B>(string identifier, A a = default, B b = default)
-            => new Sig<A,B>(identifier);
+        [MethodImpl(Inline), Op]
+        public static Signature fx(string identifier, U8 a, U8 r)
+            => define<byte,ushort>(identifier);
 
-        [MethodImpl(Inline)]
-        public static Sig<A,B,C> define<A,B,C>(string identifier, A a = default, B b = default, C c = default)
-            => new Sig<A,B,C>(identifier);
+        [MethodImpl(Inline), Op]
+        public static Signature fx(string identifier, U8 a, U8 b, U8 r)
+            => define<byte,ushort,uint>(identifier);
 
-        [MethodImpl(Inline)]
-        public static Sig<A,B,C,D> define<A,B,C,D>(string identifier, A a = default, B b = default, C c = default, D d = default)
-            => new Sig<A,B,C,D>(identifier);
+        [MethodImpl(Inline), Op]
+        public static Signature fx(string identifier, U8 a, U8 b, U8 c, U8 r)
+            => define<byte,ushort,uint,ulong>(identifier);
+
     }
 }
