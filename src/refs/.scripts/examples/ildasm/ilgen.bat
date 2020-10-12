@@ -36,8 +36,3 @@ call %Cmd%
 
 set Cmd=del %DstDir%\*.res /Q
 call %Cmd%
-
-:: set UsagePath=%SrcRoot%\src\tools\specs\%Tool%.doc
-:: set Cmd=%ToolPath% > %UsagePath%
-:: echo %Cmd% >> %LogPath%
-:: call %Cmd% > %UsagePath%

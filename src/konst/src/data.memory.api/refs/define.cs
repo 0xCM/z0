@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Refs
+    partial struct MemRefs
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe Ref define(ulong location, uint size)

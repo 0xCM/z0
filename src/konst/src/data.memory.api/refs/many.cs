@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Refs
+    partial struct MemRefs
     {
         [Op]
         public static Ref<T>[] many<T>(ReadOnlySpan<T> src)

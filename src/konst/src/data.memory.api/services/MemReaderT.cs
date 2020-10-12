@@ -11,21 +11,21 @@ namespace Z0
     using static z;
 
     /// <summary>
-    /// Defines a stream reader (of sourts) over a sequence of pointer-identified unmanaged values
+    /// Defines a stream reader (of sorts) over a sequence of pointer-identified unmanaged values
     /// This ought to be fast, but if your looking for safe, many other choices would be better
     /// </summary>
-    public unsafe struct PointedReader<T>
+    public unsafe struct MemReader<T>
         where T : unmanaged
     {
         readonly T* Source;
 
-        PointedReaderState State;
+        MemReaderState State;
 
         [MethodImpl(Inline)]
-        internal PointedReader(T* pSrc, int length)
+        internal MemReader(T* pSrc, int length)
         {
             Source = pSrc;
-            State = new PointedReaderState(length, 0);
+            State = new MemReaderState(length, 0);
         }
 
         /// <summary>

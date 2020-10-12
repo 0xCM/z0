@@ -123,7 +123,9 @@ namespace Z0
 
         public const string PrimalKindBits = primal + dot + kinds + dot + bitfield;
 
-        public const string MemoryStore = A.memory + dot + store;
+        public const string MemStore = A.memory + dot + store;
+
+        public const string MemReader = A.memory + dot + "reader";
 
         public const string TextEncoders = A.text + dot + encoders;
 
@@ -144,5 +146,13 @@ namespace Z0
         public const string AppErrorMsg = app + dot + errors + dot + msg;
 
         public const string ToolApi = "tools.api";
+
+        const string memory = nameof(memory);
+
+        public const string refs = nameof(refs);
+
+        public const string MemRefs = memory + dot + refs;
+
+        public const string StringRefs = memory + dot + refs + dot + "strings";
     }
 }

@@ -20,11 +20,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public StringRef(in SegRef src)
-            => Location = Refs.location(src);
+            => Location = MemRefs.location(src);
 
         [MethodImpl(Inline)]
         public StringRef(MemoryAddress address, uint length, uint user = 0)
-            => Location = Refs.pack(address, length, user);
+            => Location = MemRefs.pack(address, length, user);
 
         [MethodImpl(Inline)]
         internal StringRef(Vector128<ulong> data)
@@ -48,7 +48,7 @@ namespace Z0
         public int Length
         {
             [MethodImpl(Inline)]
-            get => (int)Refs.length<char>(Location);
+            get => (int)MemRefs.length<char>(Location);
         }
 
         public uint Count
@@ -60,7 +60,7 @@ namespace Z0
         public uint User
         {
             [MethodImpl(Inline)]
-            get => Refs.user(Location);
+            get => MemRefs.user(Location);
         }
 
         public unsafe string Text
@@ -72,7 +72,7 @@ namespace Z0
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => Refs.location(Location);
+            get => MemRefs.location(Location);
         }
 
         public ref readonly char this[int index]

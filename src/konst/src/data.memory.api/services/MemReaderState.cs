@@ -9,18 +9,18 @@ namespace Z0
 
     using static Konst;
 
-    unsafe struct PointedReaderState
+    unsafe struct MemReaderState
     {
         public readonly int Length;
 
         public int Position;
 
         [MethodImpl(Inline)]
-        internal PointedReaderState(int length, int position)
+        internal MemReaderState(int length, int position)
         {
             Length = length;
             Position = position;
-        }        
+        }
 
         /// <summary>
         /// Advances the stream to the next position, if any
@@ -59,7 +59,7 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Position < (Length - 1);
-        }            
+        }
 
         public readonly int Remaining
         {

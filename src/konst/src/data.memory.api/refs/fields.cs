@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Refs
+    partial struct MemRefs
     {
         [MethodImpl(Inline), Op]
         public static MemoryAddress location(Vector128<ulong> src)
@@ -31,7 +31,7 @@ namespace Z0
                 for(var j=0u; j<fields.Length; j++)
                 {
                     var field = fields[j];
-                    var segment = Refs.field(@base, offset, field);
+                    var segment = MemRefs.field(@base, offset, field);
                     if(segment.IsNonEmpty)
                     {
                         z.append(dst,segment);

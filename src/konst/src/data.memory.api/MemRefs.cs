@@ -7,15 +7,33 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.Intrinsics;
-    using System.Linq;
-    using System.Reflection;
 
     using static Konst;
     using static z;
 
-    [ApiHost]
-    public readonly partial struct Refs
+    [ApiHost(ApiNames.MemRefs, true)]
+    public readonly partial struct MemRefs
     {
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static Ref<byte> from(ReadOnlySpan<byte> src)
+            => new Ref<byte>(new Ref(z.address(src), (uint)src.Length));
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static Ref<T> define<T>(in T src, uint size)
+            => new Ref<T>(new Ref(z.address(src), size));
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static Span<T> read<T>(in Ref src)
+            => src.As<T>();
+
+        [MethodImpl(Inline), Op]
+        public static Span<byte> replicate(in SegRef src)
+        {
+            Span<byte> dst = sys.alloc<byte>(src.DataSize);
+            Copier.copy(src, dst);
+            return dst;
+        }
+
         [MethodImpl(Inline), Op]
         public static QuadRef<T> quad<T>(in T r0, in T r1, in T r2, in T r3)
             where T : struct
@@ -26,7 +44,7 @@ namespace Z0
             where T : struct
         {
             for(var i=0u; i<src.Length; i++)
-                seek(dst,i) = memory.@ref(skip<T>(src,i), size<T>());
+                seek(dst,i) = define(skip<T>(src,i), size<T>());
         }
 
         [MethodImpl(Inline), Op]

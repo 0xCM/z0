@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Refs
+    partial struct MemRefs
     {
         [MethodImpl(Inline), Op]
         public static uint user(Vector128<ulong> src)
@@ -35,7 +35,7 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static void unpack(Vector128<ulong> src, out MemoryAddress a, out uint length, out uint user)
         {
-            a = Refs.location(src);
+            a = MemRefs.location(src);
             unpack(src, out length, out user);
         }
 

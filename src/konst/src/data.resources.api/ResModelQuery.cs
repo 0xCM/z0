@@ -17,7 +17,7 @@ namespace Z0
         {
             Refs = models.Refs;
             Storage = Segments.create(Refs);
-            Stores = MemoryStore.Service;
+            Stores = MemStore.Service;
             Models = models;
         }
 
@@ -27,7 +27,7 @@ namespace Z0
 
         readonly Segments Storage;
 
-        readonly MemoryStore Stores;
+        readonly MemStore Stores;
 
         [MethodImpl(Inline)]
         public ref readonly byte first_d(N0 n)

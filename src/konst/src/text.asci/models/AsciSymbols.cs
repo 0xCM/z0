@@ -40,7 +40,7 @@ namespace Z0
         public Ref Ref
         {
             [MethodImpl(Inline), Op]
-            get => memory.@ref(First, Size);
+            get => MemRefs.define(First, Size);
         }
 
         public ref AsciSymbol First

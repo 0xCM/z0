@@ -13,7 +13,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Refs
+    partial struct MemRefs
     {
         [Op]
         public unsafe static FieldRef field(MemoryAddress @base, MemoryAddress offset, FieldInfo src)

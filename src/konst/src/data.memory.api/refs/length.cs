@@ -11,12 +11,12 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Refs
+    partial struct MemRefs
     {
         [MethodImpl(Inline), Op]
         public static uint length<T>(Vector128<ulong> src)
         {
-            Refs.unpack(vcell(src,1), out var size, out var _);
+            MemRefs.unpack(vcell(src,1), out var size, out var _);
             return size/scale<T>();
         }
     }

@@ -43,10 +43,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public QuadRef(in T s0, in T s1, in T s2, in T s3)
             => Segments = v512<ulong>(
-                Refs.from(s0).Segment.Segment,
-                Refs.from(s1).Segment.Segment,
-                Refs.from(s2).Segment.Segment,
-                Refs.from(s3).Segment.Segment
+                MemRefs.from(s0).Segment.Segment,
+                MemRefs.from(s1).Segment.Segment,
+                MemRefs.from(s2).Segment.Segment,
+                MemRefs.from(s3).Segment.Segment
                 );
 
         public string Format()

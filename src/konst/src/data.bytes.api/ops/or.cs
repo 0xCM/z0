@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static memory;
+    using static Buffers;
 
     partial struct Bytes
     {
@@ -41,6 +41,5 @@ namespace Z0
         [MethodImpl(Inline), Or]
         public static void or(in byte A, in byte B, ref byte Z)
             => store8(or(read8(A), read8(B)), ref Z);
-
     }
 }

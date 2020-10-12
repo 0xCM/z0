@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static memory;
+    using static Buffers;
 
     using L = BitLogic.Scalar;
 

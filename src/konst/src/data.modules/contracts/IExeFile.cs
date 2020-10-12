@@ -8,17 +8,14 @@ namespace Z0
 
     using static FS;
 
-    partial struct FS
+    public interface IExeFile : IFileModule
     {
-        public interface IExecutable : IFileModule
-        {
-            FileModuleKind IFileModule.Kind => FileModuleKind.Exe;
-        }
+        FileModuleKind IFileModule.Kind => FileModuleKind.Exe;
+    }
 
-        public interface IExecutable<T> : IExecutable
-            where T : struct, IExecutable<T>
-        {
+    public interface IExeFile<T> : IExeFile
+        where T : struct, IExeFile<T>
+    {
 
-        }
     }
 }

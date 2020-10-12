@@ -11,7 +11,7 @@ namespace Z0
     using static System.Runtime.Intrinsics.X86.Bmi1.X64;
 
     using static Konst;
-    using static memory;
+    using static Buffers;
 
     [ApiHost]
     public readonly partial struct Bytes
@@ -27,7 +27,6 @@ namespace Z0
         [MethodImpl(Inline), And]
         public static void and(in byte A, in byte B, ref byte Z)
             => store8(and(read8(A), read8(B)), ref Z);
-
 
         /// <summary>
         /// Computes the bitwise nand c := ~(a & b) for operands a and b

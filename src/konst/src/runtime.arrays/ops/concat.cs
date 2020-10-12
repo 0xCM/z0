@@ -20,15 +20,15 @@ namespace Z0
         /// <param name="src">The source arrays</param>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static T[] concat<T>(IEnumerable<T[]> src)
-            => concat(src.ToArray());   
-        
+            => concat(src.ToArray());
+
         /// <summary>
         /// Concatenates an array sequence
         /// </summary>
         /// <param name="src">The source arrays</param>
         [Op]
         public static void concat(byte[][] src, byte[] dst)
-        {            
+        {
             ref var target = ref first(span(dst));
             var k = 0u;
 
@@ -37,7 +37,7 @@ namespace Z0
             for(uint i=0u; i<terms; i++)
             {
                 var term = span(z.skip(members,i));
-                memory.copy(first(term), (uint)term.Length, ref target, ref k);
+                Buffers.copy(first(term), (uint)term.Length, ref target, ref k);
             }
         }
 
@@ -47,11 +47,11 @@ namespace Z0
         /// <param name="src">The source arrays</param>
         [MethodImpl(Inline), Op]
         public static byte[] concat(byte[][] src)
-        {            
+        {
             var members = span(src);
             var terms = members.Length;
             var items = 0;
-            
+
             for(var i=0; i<terms; i++)
                 items += members[i].Length;
 
@@ -74,7 +74,7 @@ namespace Z0
             left.CopyTo(dst,0);
             right.CopyTo(dst, left.Length);
             return dst;
-        }   
+        }
 
         /// <summary>
         /// Concatentates two byte arrays
@@ -106,8 +106,8 @@ namespace Z0
                 var arr = src[i];
                 var len = arr.Length;
                 for(var j = 0; j<len; j++)
-                    dst[idx++] = arr[j];            
-            }        
+                    dst[idx++] = arr[j];
+            }
             return dst;
         }
     }

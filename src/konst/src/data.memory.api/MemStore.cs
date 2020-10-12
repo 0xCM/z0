@@ -9,10 +9,10 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost(ApiNames.MemoryStore)]
-    public readonly struct MemoryStore
+    [ApiHost(ApiNames.MemStore, true)]
+    public readonly struct MemStore
     {
-        public static MemoryStore Service => default;
+        public static MemStore Service => default;
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<byte> load(in SegRef src)

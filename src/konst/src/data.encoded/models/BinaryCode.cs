@@ -53,7 +53,7 @@ namespace Z0
         public Ref Ref
         {
             [MethodImpl(Inline)]
-            get => memory.@ref(in this[0], (uint)Length);
+            get => MemRefs.define(in this[0], (uint)Length);
         }
 
         public int Length

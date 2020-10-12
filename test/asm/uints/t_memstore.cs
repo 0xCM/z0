@@ -16,7 +16,7 @@ namespace Z0
         public void read_ref_1()
         {
             var src = array(3u,5u,6u,7u);
-            var r = Refs.from(src);
+            var r = MemRefs.from(src);
             var z = r.As<uint>();
 
             Claim.eq(16, r.DataSize);
@@ -44,12 +44,12 @@ namespace Z0
 
         unsafe void Process(in SegRef src, in Segments store)
         {
-            var reader = PointedReader.create(src.Address.Pointer<byte>(), (int)src.DataSize);
+            var reader = MemReader.create(src.Address.Pointer<byte>(), (int)src.DataSize);
             var dstA = Spans.alloc<byte>(src.DataSize);
             var count = reader.ReadAll(dstA);
             Claim.eq(count,src.DataSize);
 
-            var dstB = MemoryStore.Service.load(src);
+            var dstB = MemStore.Service.load(src);
             Claim.eq(count, dstB.Length);
 
             for(var i=0u; i<count; i++)

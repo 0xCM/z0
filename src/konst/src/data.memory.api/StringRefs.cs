@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
+    [ApiHost(ApiNames.StringRefs, true)]
     public readonly partial struct StringRefs
     {
         /// <summary>

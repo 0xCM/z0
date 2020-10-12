@@ -13,11 +13,28 @@ namespace Z0
     [ApiHost]
     public readonly struct Copier
     {
+        /// <summary>
+        /// Copies a specified number of source values to the target and returns the count of copied bytes
+        /// </summary>
+        /// <param name="src">The source reference</param>
+        /// <param name="count">The number of source cells to copy</param>
+        /// <param name="dst">The target reference</param>
+        /// <typeparam name="S">The source type</typeparam>
+        /// <typeparam name="T">The target type</typeparam>
+        [MethodImpl(Inline)]
+        public static ref T copy<S,T>(in S src, ref T dst, int count, int dstOffset = 0)
+            where S: unmanaged
+            where T :unmanaged
+        {
+            sys.copy(z.view<S,byte>(src), ref edit<T,byte>(add(dst, dstOffset)), (uint)count);
+            return ref dst;
+        }
+
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static unsafe void copy<T>(SegRef src, Span<T> dst)
             where T : unmanaged
         {
-            var reader = PointedReader.create<T>(src);
+            var reader = MemReader.create<T>(src);
             reader.ReadAll(dst);
         }
 

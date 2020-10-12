@@ -161,7 +161,7 @@ namespace Z0
             {
                 ref readonly var source = ref skip(sources,i);
                 var length = source.DataSize;
-                var data = MemoryStore.Service.load(source);
+                var data = MemStore.Service.load(source);
 
                 if(data.Length == length)
                 {
