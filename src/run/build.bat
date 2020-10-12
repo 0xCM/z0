@@ -1,2 +1,2 @@
 dotnet build
-z0 merge run
+z0 domain merge run

@@ -214,9 +214,13 @@ namespace Z0
             return text.concat(left, ColSep, right);
         }
 
+        [Op, MethodImpl(Inline)]
+        static string format(MemoryAddress src)
+            => string.Format("{0:x}" + HexFormatSpecs.PostSpec, src);
+
         [Op, MethodImpl(NotInline)]
         static string Render(AsmBranchInfo src)
-            => text.concat(src.Source.Format(), " + ",  src.TargetOffset.FormatMinimal(), " -> ",  (src.Source + src.TargetOffset).Format());
+            => text.concat(format(src.Source), " + ",  src.TargetOffset.FormatMinimal(), " -> ",  (src.Source + src.TargetOffset).Format());
 
         static HexFormatOptions HexSpec
         {

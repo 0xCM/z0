@@ -12,6 +12,7 @@
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Cil)" />
     <ProjectReference Include="$(Apps)" />
+    <ProjectReference Include="$(Domain)" />
   </ItemGroup>
 
 </Project>

@@ -15,7 +15,8 @@ namespace Z0
     [Step]
     public sealed class EmitCaptureArtifacts : WfHost<EmitCaptureArtifacts>
     {
-
+        protected override void Execute(IWfShell wf)
+            => missing();
     }
 
     public ref struct EmitCaptureArtifactsStep

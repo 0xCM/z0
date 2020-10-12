@@ -8,11 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
-    
+
     partial class XTend
     {
         /// <summary>
-        /// Defines an array-sepecific join operator
+        /// Defines an array-specific join operator
         /// </summary>
         /// <param name="source"></param>
         /// <param name="selector"></param>
@@ -20,9 +20,9 @@ namespace Z0
         /// <typeparam name="T"></typeparam>
         public static T[] SelectMany<S,T>(this S[] source, Func<S, IEnumerable<T>> selector)
             => Enumerable.SelectMany(source,selector).ToArray();
-                    
+
         /// <summary>
-        /// Sequenteially condenses a sequence of arrays into a single array
+        /// Sequentially condenses a sequence of arrays into a single array
         /// </summary>
         /// <param name="src">The many</param>
         /// <typeparam name="T">The array element type</typeparam>

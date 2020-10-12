@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0.Asm
 {
-    public interface IWfCaptureBroker : IWfBroker, IWfCaptureEvents
+    public interface IWfCaptureBroker : IWfBroker
     {
 
     }

@@ -299,5 +299,12 @@
 		"paths": [],
 		"group": "",
 		"enabled": true
+	},
+	{
+		"name": "ms/scalar",
+		"rootPath": "j:\\lang\\net\\scalar",
+		"paths": [],
+		"group": "",
+		"enabled": true
 	}
 ]

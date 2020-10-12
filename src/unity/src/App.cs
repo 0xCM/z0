@@ -15,7 +15,7 @@ namespace Z0
 
     struct App
     {
-        static FS.FolderPath BuildRoot = FS.dir(AppConfig.BuildRoot);
+        static FS.FolderPath BuildRoot = FS.dir(@"J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64");
 
         static IModuleArchive CreateBuildModuleArchive()
             => Archives.modules(new ArchiveConfig(BuildRoot));

@@ -18,6 +18,11 @@ namespace Z0
     using static z;
     using static ArchiveFileKinds;
 
+    public static partial class XTend
+    {
+
+    }
+
     public ref struct Runner
     {
         readonly WfCaptureState State;
@@ -427,23 +432,17 @@ namespace Z0
 
         }
 
+        public static Type[] DiscoverWfHosts(params Assembly[] src)
+            => src.Types().Tagged<WfHostAttribute>();
 
         public static void delay(uint ms)
             => Task.Run(async delegate {await Task.Delay((int)ms);}).Wait();
 
         public void Run()
         {
-            var worker = CpuWorkers.example(Wf, 4, Pow2.T21);
-
-            for(var i=0; i<100; i++)
-            {
-                delay(500);
-                var status = worker.Status();
-                Wf.Status(Host, status);
-
-            }
-            //var info = worker.Status();
-
+            var hosts = DiscoverWfHosts(Wf.ApiParts.Components).OrderBy(x => x.Assembly.FullName);
+            var wf = Wf;
+            iter(hosts, h => wf.Status(delimit(h.Assembly.GetSimpleName(),h.Name)));
         }
     }
 }
