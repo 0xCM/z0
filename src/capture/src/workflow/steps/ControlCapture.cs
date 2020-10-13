@@ -21,28 +21,29 @@ namespace Z0
 
     public readonly ref struct ControlCaptureStep
     {
+        readonly WfHost Host;
+
         readonly IWfShell Wf;
 
         public WfCaptureState State {get;}
 
-        readonly WfHost Host;
 
         public ControlCaptureStep(WfCaptureState state, WfHost host)
         {
-            State = state;
-            Wf = state.Wf;
             Host = host;
-            Wf.Created(Host);
+            State = state;
+            Wf = state.Wf.WithHost(host);
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
 
         public void Run()
         {
-            Wf.Running(Host, delimit(Wf.Init.PartIdentities));
+            Wf.Running(delimit(Wf.Init.PartIdentities));
 
             try
             {
@@ -51,10 +52,10 @@ namespace Z0
             }
             catch(Exception e)
             {
-                State.Error(Host, e);
+                Wf.Error(e);
             }
 
-            Wf.Ran(Host);
+            Wf.Ran();
         }
     }
 }

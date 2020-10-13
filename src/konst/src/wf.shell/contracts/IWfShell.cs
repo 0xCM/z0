@@ -199,17 +199,23 @@ namespace Z0
             => Running(Host);
 
         void Running<T>(WfHost step, T content)
-            => Raise(running(step, content, Ct));
+        {
+            if(Verbosity.Babble())
+                Raise(running(step, content, Ct));
+        }
 
         void Running<T>(WfStepId step, T content)
-            => Raise(running(step, content, Ct));
+        {
+            if(Verbosity.Babble())
+                Raise(running(step, content, Ct));
+        }
 
         void Running<T>(T content)
-            => Raise(running(Host, content, Ct));
+        {
+            if(Verbosity.Babble())
+                Raise(running(Host, content, Ct));
+        }
 
-        void Running<H,T>(H host, T content)
-            where H : IWfHost<H>, new()
-                => Raise(running(host, content, Ct));
 
         // ~ Ran
         // ~ ---------------------------------------------------------------------------
@@ -237,7 +243,10 @@ namespace Z0
                 => Raise(ran(host, content, Ct));
 
         void EmittingFile<T>(T source, FS.FilePath dst)
-            => Raise(new EmittingFileEvent<T>(Host, source, dst, Ct));
+        {
+            if(Verbosity.Babble())
+                Raise(new EmittingFileEvent<T>(Host, source, dst, Ct));
+        }
 
         void Emitted(WfStepId step, FS.FilePath dst, Count? segments = default)
             => Raise(emitted(step, dst, segments ?? 0, Ct));
@@ -260,7 +269,10 @@ namespace Z0
             => Raise(new EmittedTableEvent(step, type, count, dst, Ct));
 
         void EmittingTable(Type type, FS.FilePath dst)
-            => Raise(new EmittingTableEvent(Host, type, dst, Ct));
+        {
+            if(Verbosity.Babble())
+                Raise(new EmittingTableEvent(Host, type, dst, Ct));
+        }
 
         void EmittedTable(Type type, Count count, FS.FilePath dst)
             => EmittedTable(Host, type, count, dst);
@@ -272,16 +284,10 @@ namespace Z0
         }
 
         void ProcessedFile<T>(FS.FilePath src, T kind)
-        {
-            if(Verbosity.Babble())
-                Raise(new ProcessedFileEvent<T>(Host, src, kind, Ct));
-        }
+            => Raise(new ProcessedFileEvent<T>(Host, src, kind, Ct));
 
         void ProcessedFile<T,M>(FS.FilePath src, T kind, M metric)
-        {
-            if(Verbosity.Babble())
-                Raise(new ProcessedFileEvent<T,M>(Host, src, kind, metric, Ct));
-        }
+            => Raise(new ProcessedFileEvent<T,M>(Host, src, kind, metric, Ct));
 
         void Processed<T>(WfStepId step, DataFlow<T> flow)
             => Raise(processed(step, flow, Ct));

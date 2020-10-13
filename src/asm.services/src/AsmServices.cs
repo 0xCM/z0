@@ -11,6 +11,8 @@ namespace Z0.Asm
     using static AsmFxCheck;
     using static z;
 
+    using S = CaptureSubjects;
+
     public readonly struct AsmServices : IAsmServices
     {
         public static IAsmServices Services => default(AsmServices);
@@ -20,7 +22,8 @@ namespace Z0.Asm
             var count = src.Length;
             if(count != 0)
             {
-                var path = dst.Document(uri, "capture", "asm", FileKind.Asm);
+                var subjects = S.CapturedAsm();
+                var path = dst.Doc(uri, subjects[0], subjects[1], FileKind.Asm);
                 using var writer = path.Writer();
                 var buffer = Buffers.text();
 

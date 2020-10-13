@@ -87,12 +87,8 @@ namespace Z0
         {
             var count = src.Length;
             var hosts = @readonly(src);
-            using var step = new CaptureMembersStep(State, new CaptureMembers(), dst);
             for(var i=0; i<count; i++)
-            {
-                ref readonly var host = ref skip(hosts,i);
-                step.Execute(host);
-            }
+                CaptureApiHost.create(State,skip(hosts,i)).Run(Wf);
         }
 
         void Capture(ApiDataTypes src, IPartCapturePaths dst)

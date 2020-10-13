@@ -62,8 +62,11 @@ namespace Z0.Asm
         Outcome<uint> ClearParsed(ICaptureArchive archive, PartId part)
             => Clear(part, archive.ParsedDir.Files(part));
 
-        Outcome<uint> ClearAsm(ICaptureArchive archive, PartId part)
-            => Clear(part, archive.PartAsmDir(part).Files(part));
+        Files ClearAsm(ICaptureArchive archive, PartId part)
+        {
+            var subjects = CaptureSubjects.CapturedAsm();
+            return Wf.Db().ClearDocs(part, subjects[0], subjects[1], ArchiveFileKinds.Asm);
+        }
 
         Outcome<uint> ClearX86(ICaptureArchive archive, PartId part)
             => Clear(part, archive.X86Dir.Files(part));
@@ -77,7 +80,7 @@ namespace Z0.Asm
             Wf.Running(Host, delimit(nameof(ClearPartFiles), part));
             total += ClearExtracts(archive,part);
             total += ClearParsed(archive,part);
-            total += ClearAsm(archive,part);
+            total += ClearAsm(archive,part).Count;
             total += ClearX86(archive,part);
             total += ClearCil(archive,part);
             Wf.Ran(Host, delimit(nameof(ClearPartFiles), part, total));

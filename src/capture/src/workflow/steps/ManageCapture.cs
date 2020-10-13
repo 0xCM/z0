@@ -79,13 +79,6 @@ namespace Z0
             Wf.Ran(StepId);
         }
 
-        public void OnEvent(MembersLocated e)
-        {
-            Sink.Deposit(e);
-
-            CheckDuplicates(e.Host, e.Members);
-        }
-
         void CheckDuplicates(ApiHostUri host, ReadOnlySpan<ApiMember> src)
         {
             var index = ApiCode.index(src);

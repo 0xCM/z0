@@ -22,43 +22,23 @@ namespace Z0
 
         FS.FolderPath StageRoot<S>(S subject);
 
-        FS.FileExt DefaultTableExt
-            => ArchiveFileKinds.Csv;
+        FS.FileExt DefaultTableExt {get;}
 
-        FS.FolderPath LogRoot()
-            =>  DbPaths.DbRoot + FS.folder("logs");
+        FS.FolderPath LogRoot();
 
-        FS.FolderPath LogDir<S>(S subject)
-            => LogRoot() + FS.folder(subject.ToString());
+        FS.FilePath Log(string id, Subject subject);
 
-        FS.FilePath Log<S>(string id, S subject)
-            => LogDir(subject) + FS.file(id, ArchiveFileKinds.Log);
+        FS.FilePath Doc(ApiHostUri host, Subject subject, FS.FileExt ext);
 
-        FS.FilePath Document<S>(string id, S subject, FS.FileExt ext);
+        FS.FilePath Doc(ApiHostUri host, Subject subject, FS.FileExt a, FS.FileExt b);
 
-        FS.FilePath Document<S>(PartId part, S subject, FS.FileExt ext);
+        FS.FilePath Doc(ApiHostUri host, Subject s1, Subject s2, FS.FileExt a, FS.FileExt b);
 
-        FS.FilePath Document<S>(ApiHostUri host, S subject, FS.FileExt type);
-
-        FS.FilePath Document<S>(ApiHostUri host, S subject, FS.FileExt a, FS.FileExt b);
-
-        FS.FilePath Document<S1,S2>(ApiHostUri host, S1 s1, S2 s2, FS.FileExt ext);
-
-        FS.FilePath Document<S1,S2>(ApiHostUri host, S1 s1, S2 s2, FS.FileExt a, FS.FileExt b);
+        FS.FilePath Doc(ApiHostUri host, Subject s1, Subject s2, FS.FileExt a);
 
         FS.FilePath Table(string id);
 
-        FS.FilePath Table(Type t)
-            => t.Tag<TableAttribute>().MapValueOrElse(
-                    a => Table(a.TableId),
-                    () => Table(t.Name));
-
         FS.FilePath Table<S>(string id, S subject, FS.FileExt? ext = null);
-
-        FS.FilePath Table<S>(Type t, S subject)
-            => t.Tag<TableAttribute>().MapValueOrElse(
-                    a => Table<S>(a.TableId, subject, DefaultTableExt),
-                    () => Table<S>(t.Name, subject, DefaultTableExt));
 
         FS.FilePath Table<K>(string id, K kind)
             where K : unmanaged,  IFileKind<K>;
@@ -67,18 +47,23 @@ namespace Z0
 
         FS.FilePath Table(PartId part, string id, FS.FileExt ext);
 
-        FS.FilePath Table(Type t, PartId part)
-            => t.Tag<TableAttribute>().MapValueOrElse(
-                    a => Table(part,  a.TableId, DefaultTableExt),
-                    () => Table(part, t.Name, DefaultTableExt));
+        FS.FilePath Table(Type t);
 
-        Option<FilePath> deposit<F,R,S>(R[] src, string id, S subject, FS.FileExt type)
+        FS.FilePath Table<S>(Type t, S subject);
+
+        FS.FilePath Table(Type t, PartId part);
+
+        Option<FilePath> Deposit<F,R,S>(R[] src, string id, S subject, FS.FileExt type)
             where F : unmanaged, Enum
             where R : struct, ITabular;
 
-        FS.FilePath[] Clear(FS.FolderName id);
+        Files Clear(FS.FolderName id);
 
-        FS.FilePath[] Clear(string id);
+        Files Clear(string id);
+
+        Files ClearDocs(PartId part, Subject subject, FS.FileExt ext);
+
+        Files ClearDocs(PartId part, Subject s1, Subject s2, FS.FileExt ext);
 
     }
 

@@ -11,16 +11,7 @@ namespace Z0
     [WfHost]
     public sealed class EmitHostCil : WfHost<EmitHostCil, ApiMemberCodeBlocks, FS.FilePath>
     {
-        FS.FilePath Target;
-
         ApiHostUri Uri;
-
-        public static EmitHostCil create(FS.FilePath dst)
-        {
-            var host = new EmitHostCil();
-            host.Target = dst;
-            return host;
-        }
 
         public static EmitHostCil create(ApiHostUri uri)
         {
@@ -32,7 +23,7 @@ namespace Z0
         protected override ref FS.FilePath Execute(IWfShell wf, in ApiMemberCodeBlocks src, out FS.FilePath dst)
         {
 
-            var path = wf.Db().Document(Uri, "capture", "cil", FileKind.Cil, FileKind.Hex);
+            var path = wf.Db().Doc(Uri, "capture", "cil", FileKind.Cil, FileKind.Hex);
             if(src.Count != 0)
             {
                 dst = path;
