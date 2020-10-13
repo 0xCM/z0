@@ -11,38 +11,37 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ClrCommands
+    partial struct ClrCmd
     {
         [StructLayout(LayoutKind.Sequential)]
         public struct EmitAssemblyReferences
         {
-            public ClrCmdKey CmdId;
-
             public FS.FilePath Source;
 
             public FS.FilePath Target;
         }
 
-        [MethodImpl(Inline)]
-        static ClrCmdHost<T> Host<T>(T t = default)
-            where T : struct
-                => ClrCmdHost<T>.create();
+        [CmdWorker]
+        public static void exec(IWfShell wf, in EmitAssemblyReferences cmd)
+        {
+            var host = Cmd.host(cmd);
+            using var reader = Reader(wf,cmd.Source);
+            var data = reader.AssemblyReferences();
+            var count = data.Length;
+            for(var i=0; i<count; i++)
+                wf.Status(host, skip(data,i).Name);
+        }
 
         [MethodImpl(Inline)]
         static CliMemoryReader Reader(IWfShell wf, FS.FilePath src)
             => CliMemoryReader.create(wf, src);
 
-        public static ReadOnlySpan<CliAssemblyReference> exec(IWfShell wf, in EmitAssemblyReferences cmd)
+        public ref EmitAssemblyReferences spec(FS.FilePath src, FS.FilePath dst,  out EmitAssemblyReferences cmd)
         {
-            var host = Host(cmd);
-            using var reader = Reader(wf,cmd.Source);
-            var data = reader.AssemblyReferences();
-            var count = data.Length;
-            for(var i=0; i<count; i++)
-            {
-                wf.Status(host, skip(data,i).Name);
-            }
-            return data;
+            cmd = default;
+            cmd.Source = src;
+            cmd.Target = dst;
+            return ref cmd;
         }
     }
 }

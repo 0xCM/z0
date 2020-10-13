@@ -113,8 +113,6 @@ namespace Z0
 
         public const string Workflow = workflow + dot + core;
 
-        public const string WfCmd = workflow + dot + cmd;
-
         public const string WfShell = workflow + dot + shell;
 
         public const string PrimalKinds = primal + dot + kinds;
@@ -145,6 +143,8 @@ namespace Z0
 
         public const string ToolApi =  tools + dot + core;
 
+        const string memory = nameof(memory);
+
         public const string MemRefs = memory + dot + refs;
 
         public const string StringRefs = memory + dot + refs + dot + strings;
@@ -163,20 +163,5 @@ namespace Z0
 
         public const string Lookups = lookups + dot + core;
 
-        const string lookups = nameof(lookups);
-
-        const string memory = nameof(memory);
-
-        const string enums = nameof(enums);
-
-        const string refs = nameof(refs);
-
-        const string tools = nameof(tools);
-
-        const string strings = nameof(strings);
-
-         const string reader = nameof(reader);
-
-         const string workflow = nameof(workflow);
     }
 }

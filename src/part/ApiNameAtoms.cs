@@ -188,5 +188,19 @@ namespace Z0
         public const string app = nameof(app);
 
         public const string identify = nameof(identify);
+
+        public const string lookups = nameof(lookups);
+
+        public const string enums = nameof(enums);
+
+        public const string refs = nameof(refs);
+
+        public const string tools = nameof(tools);
+
+        public const string strings = nameof(strings);
+
+         public const string reader = nameof(reader);
+
+         public const string workflow = nameof(workflow);
     }
 }

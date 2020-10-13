@@ -8,24 +8,25 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    public readonly struct ClrCmdResult
+    public readonly struct CmdResult
     {
-        public ClrCmdKey CmdId {get;}
+        public CmdId CmdId {get;}
 
         public bit Succeeded {get;}
 
         public BinaryCode Content {get;}
 
         [MethodImpl(Inline)]
-        public ClrCmdResult(ClrCmdKey id, bit success, byte[] content)
+        public CmdResult(CmdId id, bit success, byte[] content)
         {
             CmdId = id;
             Content = content;
             Succeeded = success;
         }
 
-        public static ClrCmdResult Empty
-            => new ClrCmdResult(ClrCmdKey.None, false, BinaryCode.Empty);
+        public static CmdResult Empty
+            => default;
     }
 }

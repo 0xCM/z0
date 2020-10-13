@@ -5,14 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
+    using static ApiNameAtoms;
 
-    public sealed class ClrCmdHost<T> : WfHost<ClrCmdHost<T>>
-        where T : struct
+    readonly struct ApiNames
     {
 
     }
-
 }

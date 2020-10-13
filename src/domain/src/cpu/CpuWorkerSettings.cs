@@ -5,16 +5,21 @@
 namespace Z0
 {
     using System;
+    using System.Threading;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
+    using System.Threading.Tasks;
+    using System.Diagnostics;
 
     using static Konst;
+    using static z;
 
-    public enum ClrCmdKey : byte
+    public struct CpuWorkerSettings
     {
-        None = 0,
+        public uint Id;
 
-        EmitAssemblyReferences = 1,
+        public uint Core;
+
+        public Duration Frequency;
     }
 
 }

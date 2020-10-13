@@ -11,8 +11,6 @@ namespace Z0
         public static IDynamic Services => default(Dynops);
     }
 
-    readonly struct ApiNames
-    {
-        public const string DynamicOperators = dynamic + dot + operators;
-    }
+
+
 }

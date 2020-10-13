@@ -10,19 +10,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdSpec
+    public readonly partial struct CmdWorkers
     {
-        public CmdId Id {get;}
 
 
-        public CmdOption[] Options {get;}
-
-        [MethodImpl(Inline)]
-        public CmdSpec(CmdId id, params CmdOption[] options)
-        {
-            Id = id;
-            Options = options;
-        }
     }
 
 }

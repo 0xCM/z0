@@ -12,5 +12,8 @@ namespace Z0
     {
         public const string Signatures = signatures;
 
+        const string workers = nameof(workers);
+
+        public const string Cmd = workflow + dot + cmd;
     }
 }

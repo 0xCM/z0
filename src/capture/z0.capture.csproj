@@ -9,7 +9,6 @@
     <ProjectReference Include="$(Numeric)" />
     <ProjectReference Include="$(Identity)" />
     <ProjectReference Include="$(Apps)" />
-    <ProjectReference Include="$(Cil)" />
     <ProjectReference Include="$(AsmServices)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Evaluate)" />

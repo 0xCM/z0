@@ -20,7 +20,6 @@
     <ProjectReference Include="$(Capture)" />
     <ProjectReference Include="$(Json)" />
     <ProjectReference Include="$(Canonical)" />
-    <ProjectReference Include="$(Cil)" />
     <ProjectReference Include="$(CheckDynamic)" />
     <ProjectReference Include="$(Derivatives)" />
     <ProjectReference Include="$(Xed)" />

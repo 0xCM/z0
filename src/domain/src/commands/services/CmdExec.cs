@@ -14,7 +14,7 @@ namespace Z0
 
     public sealed class CmdExec : CmdExec<CmdExec, CmdSpec, CmdResult>
     {
-        ConcurrentDictionary<CmdId,CmdHandler> Handlers;
+        readonly ConcurrentDictionary<CmdId,CmdHandler> Handlers;
 
         public CmdExec()
         {
@@ -38,6 +38,7 @@ namespace Z0
             else return CmdResult.Empty;
         }
 
+        [MethodImpl(Inline)]
         public bool Register(in CmdHandler handler)
             => Handlers.TryAdd(handler.Id, handler);
     }

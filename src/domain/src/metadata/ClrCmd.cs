@@ -6,20 +6,23 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Konst;
     using static z;
 
-    public readonly struct CmdResult
+    [ApiHost]
+    public readonly partial struct ClrCmd
     {
-        public CmdId Id {get;}
 
-        public bool Succeeded {get;}
-
-        //public WfEvent[] Events {get;}
-
-        public BinaryCode Payload {get;}
-
-        public static CmdResult Empty => default;
     }
+
+    // public sealed class ClrCmdExec : CmdExec<ClrCmdExec, CmdSpec, CmdResult>
+    // {
+    //     protected override CmdResult Execute(IWfShell wf, CmdSpec spec)
+    //     {
+
+    //         return CmdResult.Empty;
+    //     }
+    // }
 }

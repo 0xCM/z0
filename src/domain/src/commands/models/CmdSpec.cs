@@ -6,29 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Konst;
     using static z;
 
-    public readonly struct CmdHandler : ICmdHandler<CmdHandler>
+    public readonly struct CmdSpec
     {
         public CmdId Id {get;}
 
-        public ClrArtifactKey Host {get;}
-
-        readonly Func<CmdSpec,CmdResult> Fx;
+        public CmdOption[] Options {get;}
 
         [MethodImpl(Inline)]
-        public CmdHandler(CmdId id, ClrArtifactKey host, Func<CmdSpec,CmdResult> fx)
+        public CmdSpec(CmdId id, params CmdOption[] options)
         {
             Id = id;
-            Host = host;
-            Fx = fx;
+            Options = options;
         }
-
-        [MethodImpl(Inline)]
-        public CmdResult Exec(CmdSpec cmd)
-            => Fx(cmd);
     }
 }

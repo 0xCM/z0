@@ -5,13 +5,13 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    using static ApiNameAtoms;
+    using static Konst;
 
-    readonly struct ApiNames
+    public class CmdHost<T> : WfHost<CmdHost<T>>
+        where T : struct
     {
-        const string cil = nameof(cil);
 
-        public const string CilApi = cil + dot + api;
     }
 }

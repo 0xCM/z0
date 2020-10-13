@@ -6,14 +6,27 @@ namespace Z0
 {
     using System;
 
-    public interface ITableSource : ISourceFacets
+    public interface ITableSource<T>
+        where T : struct
     {
-        
-    }
-    
-    public interface ITableSource<T> : ITableSource    
-    {
-        T RowSource {get;}    
+        TableSpan<T> Pull();
+
+        uint Pull(uint requested, ref T dst);
     }
 
+    public interface ITableTarget<T>
+        where T : struct
+    {
+        void Push(TableSpan<T> src);
+
+        void Push(in T src);
+    }
+
+    public interface ITableExchange<S,T> : ITableSource<S>, ITableTarget<T>
+        where S : struct
+        where T : struct
+
+    {
+
+    }
 }

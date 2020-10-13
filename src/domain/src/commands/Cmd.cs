@@ -11,14 +11,18 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public interface ICmdHandler<H>
-        where H : struct, ICmdHandler<H>
+    [ApiHost(ApiNames.Cmd)]
+    public readonly struct Cmd
     {
-        CmdId Id {get;}
+        [Op]
+        public static int execute(IWfShell wf, CmdId id, params CmdOption[] options)
+        {
+            return 0;
+        }
 
-        ClrArtifactKey Host {get;}
-
-        CmdResult Exec(CmdSpec cmd);
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static CmdHost<T> host<T>(T t = default)
+            where T : struct
+                => CmdHost<T>.create();
     }
-
 }

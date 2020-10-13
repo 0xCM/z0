@@ -34,6 +34,12 @@ namespace Z0
         public const string CsRender = Cs + dot + render;
 
         public const string CsBuilder = Cs + dot + builder;
+
+        const string cil = nameof(cil);
+
+        public const string CilApi = cil + dot + api;
+
+        public const string DynamicOperators = dynamic + dot + operators;
     }
 }
 
