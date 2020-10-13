@@ -16,11 +16,6 @@ namespace Z0
     public readonly struct BitSize
     {
         /// <summary>
-        /// The maximum number of bytes apprehended by this data structure
-        /// </summary>
-        public const int MaxBytes = (int)(UInt32.MaxValue/8);
-
-        /// <summary>
         /// Specifies a bit count
         /// </summary>
         public readonly uint Count;

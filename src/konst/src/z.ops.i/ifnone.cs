@@ -29,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The input</param>
         /// <param name="null">The emitter to invoke if the input is null</param>
-        /// <param name="else">The onptional function to invoke if the input is not null; if no
+        /// <param name="else">The optional function to invoke if the input is not null; if no
         /// function is provided, the default target type value will be returned</param>
         /// <typeparam name="X">The input type</typeparam>
         /// <typeparam name="Y">The output type</typeparam>
@@ -37,7 +37,7 @@ namespace Z0
         public static Y ifnone<X,Y>(X? x, Func<Y> @null, Func<X,Y> @else = null)
             where X : struct
             where Y : struct
-                => !x.HasValue ? @null() : @else?.Invoke(x.Value) ?? default(Y);        
+                => !x.HasValue ? @null() : @else?.Invoke(x.Value) ?? default(Y);
     }
 }
 

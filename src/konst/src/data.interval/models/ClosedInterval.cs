@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static z;
 
@@ -60,11 +60,11 @@ namespace Z0
         public ulong Width
         {
             [MethodImpl(Inline)]
-            get => RightU64 - LeftU64;
+            get => RightU64 - LeftU64 + 1;
         }
 
         /// <summary>
-        /// Specifies whether the left and right enpoints are the same
+        /// Specifies whether the left and right endpoints are the same
         /// </summary>
         public bool Degenerate
         {
@@ -80,11 +80,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Min.Equals(Max);
         }
-        
+
         [MethodImpl(Inline)]
         public bool Contains(T point)
             => between(uint64(point), LeftU64, RightU64);
-        
+
         /// <summary>
         /// Converts the left and right underlying values
         /// </summary>
@@ -95,7 +95,7 @@ namespace Z0
                 => new ClosedInterval<U>(Cast.to<T,U>(Min), Cast.to<T,U>(Max));
 
         /// <summary>
-        /// Creates a view of the data in the inverval as seen through the
+        /// Creates a view of the data in the interval as seen through the
         /// lens of another type, but performs no conversion
         /// </summary>
         /// <typeparam name="U">The target type</typeparam>
@@ -116,6 +116,14 @@ namespace Z0
             => new ClosedInterval<T>(left,right);
 
         [MethodImpl(Inline)]
+        public ClosedInterval<T> WithLeft(T left)
+            => new ClosedInterval<T>(left, Min);
+
+        [MethodImpl(Inline)]
+        public ClosedInterval<T> WithRight(T right)
+            => new ClosedInterval<T>(Min, right);
+
+        [MethodImpl(Inline)]
         public string Format()
             => text.concat(Chars.LBracket, Min, Chars.Comma, Max, Chars.RBracket);
 
@@ -128,7 +136,7 @@ namespace Z0
             => Min.Equals(src.Min) && Max.Equals(src.Max);
 
         public override string ToString()
-            => Format();        
+            => Format();
 
         ulong LeftU64
         {
@@ -148,22 +156,22 @@ namespace Z0
         T IInterval<T>.Right
             => Max;
 
-        bool IInterval.LeftClosed 
+        bool IInterval.LeftClosed
             => true;
 
-        bool IInterval.RightClosed 
+        bool IInterval.RightClosed
             => true;
-       
+
         /// <summary>
         /// The interval classification
         /// </summary>
-        K IInterval.Kind 
+        K IInterval.Kind
             => K.Closed;
 
         /// <summary>
         /// The interval of nothingness
         /// </summary>
-        public static ClosedInterval<T> Empty 
+        public static ClosedInterval<T> Empty
             => default;
     }
 }

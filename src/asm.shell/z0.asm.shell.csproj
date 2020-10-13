@@ -9,6 +9,7 @@
     <ProjectReference Include="$(Apps)" />
     <ProjectReference Include="$(AsmServices)" />
     <ProjectReference Include="$(Capture)" />
+    <ProjectReference Include="$(Domain)" />
   </ItemGroup>
 
 </Project>

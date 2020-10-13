@@ -138,29 +138,6 @@ namespace Z0
             return dst;
         }
 
-        ApiHostRoutines DecodeBlocks(in ApiHostCodeBlocks blocks)
-        {
-            var instructions = list<ApiRoutineObsolete>();
-            var ip = MemoryAddress.Empty;
-            var decoder = State.RoutineDecoder;
-            var target = Buffer;
-            var count = blocks.Length;
-
-            for(var i=0; i<count; i++)
-            {
-                Buffer.Clear();
-                ref readonly var block = ref blocks[i];
-                decoder.Decode(block, x => target.Add(x));
-
-                if(i == 0)
-                    ip = Buffer[0].IP;
-
-                instructions.Add(AsmProjections.project(ip, block, Buffer.ToArray()));
-            }
-
-            return new ApiHostRoutines(blocks.Host, instructions.ToArray());
-        }
-
         void Process(in ApiCodeBlockIndex encoded)
         {
             try
@@ -215,11 +192,7 @@ namespace Z0
                 var count = src.Length;
                 for(var i=0; i<count; i++)
                     Process(skip(src,i));
-                // foreach(var part in src)
-                // {
-                //     Process(part);
-                //     //EmitCallIndex.create().Run(Wf, part);
-                // }
+
             }
             catch(Exception e)
             {

@@ -120,10 +120,10 @@ namespace Z0
         public ByteSize(uint count)
             => Count = count;
 
-        public BitSize Bits
+        public ulong Bits
         {
             [MethodImpl(Inline)]
-            get => Count/8;
+            get => Count*8;
         }
 
         [MethodImpl(Inline),Ignore]

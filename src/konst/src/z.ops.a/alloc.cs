@@ -24,5 +24,21 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T[] alloc<T>(ulong count)
             => sys.alloc<T>(count);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static byte[] alloc(byte size)
+            => sys.alloc<byte>(size);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static byte[] alloc(ushort size)
+            => sys.alloc<byte>(size);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static byte[] alloc(uint size)
+            => sys.alloc<byte>(size);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static byte[] alloc(ulong size)
+            => sys.alloc<byte>(size);
     }
 }

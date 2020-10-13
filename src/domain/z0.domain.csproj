@@ -10,6 +10,8 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(math)" />
     <ProjectReference Include="$(Clr)" />
+    <ProjectReference Include="$(gmath)" />
+    <ProjectReference Include="$(MathSvc)" />
 
   </ItemGroup>
 
