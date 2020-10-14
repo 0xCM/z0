@@ -67,6 +67,10 @@ namespace Z0
             => src.Failed;
 
         [MethodImpl(Inline)]
+        public static implicit operator bool(ParseResult<T> src)
+            => src.Succeeded;
+
+        [MethodImpl(Inline)]
         ParseResult(string source, T value, object reason)
         {
             Source = source;
@@ -82,7 +86,7 @@ namespace Z0
         /// <summary>
         /// Invokes an action if the value exists
         /// </summary>
-        /// <param name="ifSome">The action to potentially ivoke</param>
+        /// <param name="ifSome">The action to potentially invoke</param>
         [MethodImpl(Inline)]
         public ParseResult<T> OnSuccess(Action<T> ifSome)
         {
@@ -126,7 +130,7 @@ namespace Z0
             =>  Succeeded ? success(Value) : failure(Source);
 
         /// <summary>
-        /// Extracts the encapulated value if it exists; otherwise, returns the default value for
+        /// Extracts the encapsulated value if it exists; otherwise, returns the default value for
         /// the underlying type which is NULL for reference types
         /// </summary>
         /// <param name="default">The value to return if the option is non-valued</param>

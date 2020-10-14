@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct ClrCmd
     {
-        [StructLayout(LayoutKind.Sequential)]
+        [StructLayout(LayoutKind.Sequential), Cmd]
         public struct EmitAssemblyReferences
         {
             public FS.FilePath Source;
@@ -26,22 +26,16 @@ namespace Z0
         {
             var host = Cmd.host(cmd);
             using var reader = Reader(wf,cmd.Source);
+            using var writer = cmd.Target.Writer();
             var data = reader.AssemblyReferences();
+
             var count = data.Length;
             for(var i=0; i<count; i++)
-                wf.Status(host, skip(data,i).Name);
+                writer.WriteLine(skip(data,i).Name);
         }
 
         [MethodImpl(Inline)]
         static CliMemoryReader Reader(IWfShell wf, FS.FilePath src)
             => CliMemoryReader.create(wf, src);
-
-        public ref EmitAssemblyReferences spec(FS.FilePath src, FS.FilePath dst,  out EmitAssemblyReferences cmd)
-        {
-            cmd = default;
-            cmd.Source = src;
-            cmd.Target = dst;
-            return ref cmd;
-        }
     }
 }

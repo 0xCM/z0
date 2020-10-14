@@ -16,13 +16,4 @@ namespace Z0
     {
 
     }
-
-    // public sealed class ClrCmdExec : CmdExec<ClrCmdExec, CmdSpec, CmdResult>
-    // {
-    //     protected override CmdResult Execute(IWfShell wf, CmdSpec spec)
-    //     {
-
-    //         return CmdResult.Empty;
-    //     }
-    // }
 }

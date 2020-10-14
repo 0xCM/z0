@@ -56,24 +56,6 @@ namespace Z0
             return false;
         }
 
-        [Op]
-        public unsafe ReadOnlySpan<Paired<string,MemoryAddress>> ResourceAddresses()
-        {
-            var resources = ManifestResourceDescriptions();
-            var count = resources.Length;
-            var dst = span<Paired<string,MemoryAddress>>(count);
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var res = ref skip(resources, i);
-                var resdir = SectonData(ResourcesDirectory);
-                var blobReader = resdir.GetReader((int)res.Offset, resdir.Length - (int)res.Offset);
-                var length = blobReader.ReadUInt32();
-                MemoryAddress address = blobReader.CurrentPointer;
-                seek(dst,i) = (res.Name,address);
-            }
-            return dst;
-        }
-
 
         [Op]
         public unsafe ReadOnlySpan<ResourceSegment> ResourceSegments()

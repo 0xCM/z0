@@ -101,7 +101,5 @@ namespace Z0
         void Read(TypeDefinitionHandle src, Receiver<TypeDefinition> dst);
 
         void Read(TableSpan<TypeDefinitionHandle> src, Receiver<TypeDefinition> dst);
-
-        ReadOnlySpan<Paired<string,MemoryAddress>> ResourceAddresses();
     }
 }

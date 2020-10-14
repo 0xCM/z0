@@ -10,24 +10,17 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdOption
+    public readonly struct CmdPrinter
     {
-        public string Name {get;}
-
-        public string Value {get;}
-
-        [MethodImpl(Inline)]
-        public CmdOption(string name, string value)
+        public void Print(CmdSpec src, ITextBuffer dst)
         {
-            Name = name;
-            Value = value;
+
         }
 
-        [MethodImpl(Inline)]
-        public CmdOption(string name)
+        public void Print(CmdId src, ITextBuffer dst)
         {
-            Name = name;
-            Value = EmptyString;
+
+
         }
     }
 }

@@ -14,45 +14,29 @@ namespace Z0
     {
         [MethodImpl(Inline)]
         public static CmdId from(Type spec)
-            => new CmdId(spec.Assembly.Id(), spec.MetadataToken);
+            => new CmdId(spec.Name);
 
         [MethodImpl(Inline)]
         public static CmdId from<T>()
             where T : struct
                 => from(typeof(T));
 
-        readonly ulong Data;
+        readonly StringRef Data;
 
         [MethodImpl(Inline)]
-        public CmdId(ulong src)
+        internal CmdId(string src)
             => Data = src;
-
-        [MethodImpl(Inline)]
-        public CmdId(PartId part, ClrArtifactKey spec)
-            => Data = (ulong)part | ((ulong)spec << 32);
-
-        public PartId Part
-        {
-            [MethodImpl(Inline)]
-            get => (PartId)Data;
-        }
-
-        public ClrArtifactKey Spec
-        {
-            [MethodImpl(Inline)]
-            get => (ClrArtifactKey)Data >> 32;
-        }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => Data == 0;
+            get => Data.IsEmpty;
         }
 
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => Data != 0;
+            get => Data.IsNonEmpty;
         }
 
         [MethodImpl(Inline)]
@@ -61,9 +45,8 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => string.Format(RP.SlotDot2, Part.Format(), Spec.Format());
+            => string.Format(RP.SlotDot2, Data.Format());
 
         public static CmdId Empty => default;
-
     }
 }

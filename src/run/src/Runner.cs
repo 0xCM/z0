@@ -413,15 +413,6 @@ namespace Z0
             }
         }
 
-        public void Run87()
-        {
-            var build = FS.dir(@"k:\z0\builds\nca.3.1.win-x64");
-            var cmd = new ClrCmd.EmitAssemblyReferences();
-            cmd.Source = build + FS.file("z0.konst.dll");
-            cmd.Target = Wf.AppData + FS.file("AssemblyReferences", "csv");
-            ClrCmd.exec(Wf,cmd);
-        }
-
         public void Run233()
         {
             var src = @readonly(Resources.strings<uint>(typeof(Db.Literals)));
@@ -438,11 +429,20 @@ namespace Z0
         public static void delay(uint ms)
             => Task.Run(async delegate {await Task.Delay((int)ms);}).Wait();
 
-        public void Run()
+        public void Run999()
         {
             var hosts = DiscoverWfHosts(Wf.ApiParts.Components).OrderBy(x => x.Assembly.FullName);
             var wf = Wf;
             iter(hosts, h => wf.Status(delimit(h.Assembly.GetSimpleName(),h.Name)));
+        }
+
+        public void Run()
+        {
+            var build = FS.dir(@"k:\z0\builds\nca.3.1.win-x64");
+            var cmd = new ClrCmd.EmitAssemblyReferences();
+            cmd.Source = build + FS.file("z0.konst.dll");
+            cmd.Target = Wf.AppData + FS.file("AssemblyReferences", "csv");
+            ClrCmd.exec(Wf,cmd);
         }
     }
 }

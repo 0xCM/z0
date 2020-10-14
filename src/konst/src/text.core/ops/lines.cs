@@ -20,7 +20,7 @@ namespace Z0
         {
             var dst = build();
             foreach(var item in src)
-                dst.AppendLine(item);
+                dst.AppendLine(item.Trim());
             return dst.ToString();
         }
     }

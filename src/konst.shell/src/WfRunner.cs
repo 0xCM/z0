@@ -150,19 +150,6 @@ namespace Z0
         [Op]
         public void Run()
         {
-            var root = FS.dir(@"K:\z0\builds\nca.3.1.win-x64");
-            var path = root + FS.file("z0.data.dll");
-            using var reader = CliMemoryReader.create(Wf, path);
-
-            var items = reader.ResourceAddresses();
-            var count = items.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var item = ref skip(items,i);
-                Wf.Status(Host, item);
-            }
-
-
             //iter(archive.Libraries, x => Wf.Status(Host, x));
 
         }
