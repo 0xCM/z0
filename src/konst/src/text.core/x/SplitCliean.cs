@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="s">The string to split</param>
         /// <param name="delimiter">The delimiter</param>
-        [MethodImpl(Inline)]
+        [TextUtility]
         public static string[] SplitClean(this string s, string delimiter)
             => s.Split(new string[]{delimiter}, StringSplitOptions.RemoveEmptyEntries);
 
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="s">The string to split</param>
         /// <param name="delimiter">The delimiter</param>
-        [MethodImpl(Inline)]
+        [TextUtility]
         public static string[] SplitClean(this string s, char delimiter)
             => s.Split(delimiter, StringSplitOptions.RemoveEmptyEntries);
     }

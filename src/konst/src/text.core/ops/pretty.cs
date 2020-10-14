@@ -15,11 +15,27 @@ namespace Z0
     partial class text
     {
         /// <summary>
+        /// Determines whether the source text is of the form "[{content}]"
+        /// </summary>
+        /// <param name="src">The source text</param>
+        [Op]
+        public static bool bracketed(string src)
+            => fenced(src, Chars.LBracket, Chars.RBracket);
+
+        /// <summary>
+        /// Encloses text between single quote (') characters
+        /// </summary>
+        /// <param name="src">The text to enclose</param>
+        [Op]
+        public static string squote(object src)
+            => enclose(src, CharText.SQuote);
+
+        /// <summary>
         /// Creates a string of the form "lhs := rhs"
         /// </summary>
         /// <param name="lhs">The left</param>
         /// <param name="rhs">The right</param>
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string assign(object lhs, object rhs)
             => concat(lhs, Space, Assignment, Space, rhs);
 
@@ -28,27 +44,11 @@ namespace Z0
         /// </summary>
         /// <param name="content">The content to be embraced</param>
         [MethodImpl(Inline), Op]
-        public static string embrace(string content)      
+        public static string embrace(string content)
             => $"{LBrace}{content}{RBrace}";
 
         /// <summary>
-        /// Determines whether the source text is of the form "[{content}]"
-        /// </summary>
-        /// <param name="src">The source text</param>
-        [MethodImpl(Inline), Op]
-        public static bool bracketed(string src)    
-            => fenced(src, Chars.LBracket, Chars.RBracket);
-
-        /// <summary>
-        /// Encloses the supplied text in quotation marks
-        /// </summary>
-        /// <param name="content">The content to be quoted</param>
-        [MethodImpl(Inline), Op]
-        public static string enquote(object content)
-            => $"{Chars.Quote}{content}{Chars.Quote}";
-
-        /// <summary>
-        /// Encloses text in quotation marks if nonempty; otherwirse returns empty
+        /// Encloses text in quotation marks if nonempty; otherwise returns empty
         /// </summary>
         /// <param name="src">The text to be quoted</param>
         [MethodImpl(Inline), Op]
@@ -69,14 +69,6 @@ namespace Z0
             => enclose(string.Concat(content.Select(x => x.ToString())), Chars.LParen, Chars.RParen);
 
         /// <summary>
-        /// Encloses text between single quote (') characters
-        /// </summary>
-        /// <param name="src">The text to enclose</param>
-        [MethodImpl(Inline), Op]
-        public static string squote(object src)
-            => enclose(src, CharText.SQuote);
-    
-        /// <summary>
         /// Encloses text between '[' and ']' characters
         /// </summary>
         /// <param name="content">The content to enclose</param>
@@ -84,60 +76,9 @@ namespace Z0
         public static string bracket(object content)
             => enclose($"{content}", Chars.LBracket, Chars.RBracket);
 
-        /// <summary>
-        /// Produces "..." where count has the default value of 3
-        /// </summary>
-        [MethodImpl(Inline), Op]
-        public static string dots(int count = 3)
-            => new string(Chars.Dot, count);
-
-        /// <summary>
-        /// Produces an indented string
-        /// </summary>
-        /// <param name="offset">The left indentation offset </param>
-        [MethodImpl(Inline), Op]
-        public static string indented(string content, int offset = 4)
-            => content + new string(Chars.Space, offset);
-
-        /// <summary>
-        /// Produces a string containing a specified number of spaces
-        /// </summary>
-        /// <param name="count">The number of spaces the output string should contain</param>
-        [MethodImpl(Inline), Op]
-        public static string spaces(int count = 3)
-            => new string(Chars.Space, count);
-
-        [MethodImpl(Inline), Op]
-        public static string rpad<T>(T src, int width, char c = Space)
-            where T : ITextual
-                => src.Format().PadRight(width, c);
-
-        [MethodImpl(Inline), Op]
-        public static string rpad(object src, int width, char c = Space)
-            => $"{src}".PadRight(width, c);
-
         [MethodImpl(Inline), Op]
         public static string rpad(string src, int width, char c = Space)
             => src.PadRight(width, c);
-
-        [MethodImpl(Inline), Op]
-        public static string rpad(char src, int width, char c = Space)
-            => $"{src}".PadRight(width, c);
-
-        /// <summary>
-        /// Produces a quote
-        /// </summary>
-        [MethodImpl(Inline), Op]
-        public static string quote(string content)
-            => $"{Chars.Quote}{content}{Chars.Quote}";
-
-        /// <summary>
-        /// Prepends a space to the source content
-        /// </summary>
-        /// <param name="content">The source content</param>
-        [MethodImpl(Inline), Op]
-        public static string lspace(object content)
-            => $" {content}";
 
         /// <summary>
         /// Appends a space to the source content
@@ -155,39 +96,5 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static string label(object name, object content)
             => concat(name, Colon, Space, content);
-
-        /// <summary>
-        /// Trims leading characters when matched
-        /// </summary>
-        /// <param name="src">The text to manipulate</param>
-        /// <param name="chars">The leading characters to remove</param>
-        [MethodImpl(Inline), Op]
-        public static string ltrim(string src, params char[] chars)
-            => blank(src) ? string.Empty : src.TrimStart(chars);
-
-        /// <summary>
-        /// Trims trailing characters when matched
-        /// </summary>
-        /// <param name="src">The text to manipulate</param>
-        /// <param name="chars">The leading characters to remove</param>
-        [MethodImpl(Inline), Op]
-        public static string rtrim(string src, params char[] chars)
-            => blank(src) ? string.Empty : src.TrimEnd(chars);
-
-        /// <summary>
-        /// Produces a line of content
-        /// </summary>
-        /// <param name="content">The line content</param>
-        [MethodImpl(Inline), Op]
-        public static string line(string content)
-            => content + Eol;
-
-        /// <summary>
-        /// Renders each item from a sequence as list of values, delimited by end-of-line
-        /// </summary>
-        /// <param name="content">The content to enclose</param>
-        [MethodImpl(Inline), Op]
-        public static string line(IEnumerable<object> content)
-            => string.Join(Chars.Eol, content);
     }
 }

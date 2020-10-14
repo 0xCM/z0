@@ -14,9 +14,9 @@ namespace Z0
         /// <summary>
         /// Returns the source string if it is not blank; otherwise, returns an alternate string
         /// </summary>
-        /// <param name="src">The soruce string</param>
+        /// <param name="src">The source string</param>
         /// <param name="alt">The alternate string</param>
-        [MethodImpl(Inline)]
+        [TextUtility]
         public static string IfBlank(this string src, string alt)
             => string.IsNullOrWhiteSpace(src) ? alt : src;
     }

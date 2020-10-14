@@ -17,10 +17,10 @@ namespace Z0
 
         public ClrArtifactKey Key {get;}
 
-        public ClrName Name {get;}
+        public StringRef Name {get;}
 
         [MethodImpl(Inline)]
-        public ClrArtifactRef(ClrArtifactKey id, ClrArtifactKind kind, ClrName name)
+        public ClrArtifactRef(ClrArtifactKey id, ClrArtifactKind kind, StringRef name)
         {
             Key = id;
             Kind = kind;

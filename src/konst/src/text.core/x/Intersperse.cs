@@ -13,6 +13,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source string</param>
         /// <param name="c">The character to intersperse</param>
+        [TextUtility]
         public static string Intersperse(this string src, char c)
             => text.intersperse(src, c);
 
@@ -21,6 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source string</param>
         /// <param name="sep">The value to intersperse</param>
+        [TextUtility]
         public static string Intersperse(this string src, string sep)
             => text.intersperse(src, sep);
     }

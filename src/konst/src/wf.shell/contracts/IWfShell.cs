@@ -8,6 +8,7 @@ namespace Z0
     using System.IO;
 
     using static Konst;
+    using static z;
 
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
@@ -216,7 +217,6 @@ namespace Z0
                 Raise(running(Host, content, Ct));
         }
 
-
         // ~ Ran
         // ~ ---------------------------------------------------------------------------
 
@@ -297,11 +297,28 @@ namespace Z0
 
         void Row<T>(T content)
             where T : ITextual
-                => Raise(row(content, Ct));
+                => Raise(rows(content, Ct));
+
+        void Rows<T>(params T[] content)
+            where T : ITextual
+        {
+            if(content.Length != 0)
+            {
+                var buffer = Buffers.text();
+                buffer.AppendLine("Rows");
+                var src = @readonly(content);
+                for(var i=0; i<content.Length; i++)
+                {
+                    ref readonly var row = ref skip(src,i);
+                    buffer.AppendLine(row.Format());
+                }
+                Raise(status(Host,buffer.Emit(), Ct));
+            }
+        }
 
         void Row<K,T>(K kind, T content)
             where T : ITextual
             where K : unmanaged
-                => Raise(row(kind, content, Ct));
+                => Raise(rows(kind, content, Ct));
     }
 }

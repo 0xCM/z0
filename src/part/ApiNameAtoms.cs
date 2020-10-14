@@ -202,5 +202,10 @@ namespace Z0
          public const string reader = nameof(reader);
 
          public const string workflow = nameof(workflow);
+
+         public const string symbols = nameof(symbols);
+
+         public const string part = nameof(part);
+
     }
 }

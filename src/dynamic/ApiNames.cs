@@ -40,6 +40,8 @@ namespace Z0
         public const string CilApi = cil + dot + api;
 
         public const string DynamicOperators = dynamic + dot + operators;
+
+        public const string TableBuilder = dynamic + dot + tables + dot + "builder";
     }
 }
 

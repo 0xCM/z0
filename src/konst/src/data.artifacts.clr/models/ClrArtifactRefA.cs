@@ -21,7 +21,7 @@ namespace Z0
 
         public ClrArtifactKey Key  => Artifact.Id;
 
-        public ClrName Name => Artifact.Name;
+        public StringRef Name => Artifact.Name;
 
         [MethodImpl(Inline)]
         public ClrArtifactRef(A artifact)

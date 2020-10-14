@@ -20,6 +20,10 @@ namespace Z0
 
         public const string Empty = "";
 
+        const MethodImplOptions Options = NotInline;
+
+        const NumericKind Closure = UnsignedInts;
+
         /// <summary>
         /// Creates a new stringbuilder
         /// </summary>

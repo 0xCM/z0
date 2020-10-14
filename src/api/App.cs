@@ -12,7 +12,7 @@ namespace Z0
         public static int Main(params string[] args)
         {
             using var wf = WfShell.create(args);
-            iter(wf.ApiParts.ManagedSources, m => wf.Raise(WfEvents.row(m, wf.Ct)));
+            iter(wf.ApiParts.ManagedSources, m => wf.Raise(WfEvents.rows(m, wf.Ct)));
             return 0;
         }
     }

@@ -18,8 +18,8 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
-        [MethodImpl(Inline)]
-        public static bool ContentEqual(this ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)        
+        [TextUtility]
+        public static bool ContentEqual(this ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)
              => lhs.CompareTo(rhs, StringComparison.InvariantCulture) == 0;
 
         /// <summary>
@@ -27,8 +27,8 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
-        [MethodImpl(Inline)]
-        public static bool ContentEqual(this Span<char> lhs, ReadOnlySpan<char> rhs)        
+        [TextUtility]
+        public static bool ContentEqual(this Span<char> lhs, ReadOnlySpan<char> rhs)
              => lhs.ReadOnly().ContentEqual(rhs);
 
         /// <summary>
@@ -36,8 +36,8 @@ namespace Z0
         /// </summary>
         /// <param name="lhs">The left operand</param>
         /// <param name="rhs">The right operand</param>
-        [MethodImpl(Inline)]
-        public static bool ContentEqual(this Span<char> lhs, Span<char> rhs)        
+        [TextUtility]
+        public static bool ContentEqual(this Span<char> lhs, Span<char> rhs)
              => lhs.ReadOnly().ContentEqual(rhs);
     }
 }

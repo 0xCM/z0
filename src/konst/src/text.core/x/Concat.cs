@@ -19,15 +19,19 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source strings</param>
         /// <param name="sep">The separator, if any</param>
+        [TextUtility]
         public static string Concat(this IEnumerable<string> src, string sep = null)
             => string.Join(sep ?? string.Empty, src);
 
+        [TextUtility]
         public static string Concat(this IEnumerable<string> src, char sep)
             => string.Join(sep, src);
 
+        [TextUtility]
         public static string Concat(this ReadOnlySpan<string> src, string delimiter = null)
             => Z0.Render.concat(src,delimiter);
 
+        [TextUtility]
         public static string Concat(this ReadOnlySpan<string> src, char? delimiter)
             => Z0.Render.concat(src,delimiter);
 
@@ -36,6 +40,7 @@ namespace Z0
         /// </summary>
         /// <param name="chars">The characters to join</param>
         /// <param name="sep">The character to intersperse</param>
+        [TextUtility]
         public static string Concat(this IEnumerable<char> chars, char sep)
             => new string(chars.Intersperse(sep).ToSpan());
 
@@ -43,6 +48,7 @@ namespace Z0
         /// Forms a string by source character juxtaposition
         /// </summary>
         /// <param name="src">The characters to concatenate</param>
+        [TextUtility]
         public static string Concat(this IEnumerable<char> src)
             => new string(src.ToArray());
 
@@ -50,7 +56,7 @@ namespace Z0
         /// Forms a string from a character array
         /// </summary>
         /// <param name="src">The source array</param>
-        [MethodImpl(Inline)]
+        [TextUtility]
         public static string Concat(this char[] src)
             => new string(src);
 
@@ -58,7 +64,7 @@ namespace Z0
         /// Forms a string by source character juxtaposition
         /// </summary>
         /// <param name="src">The source span</param>
-        [MethodImpl(Inline)]
+        [TextUtility]
         public static string Concat(this ReadOnlySpan<char> src)
             => new string(src);
 
@@ -66,7 +72,7 @@ namespace Z0
         /// Forms a string by source character juxtaposition
         /// </summary>
         /// <param name="src">The source span</param>
-        [MethodImpl(Inline)]
+        [TextUtility]
         public static string Concat(this Span<char> src)
             => new string(src);
 
@@ -74,10 +80,11 @@ namespace Z0
         /// Forms a string by source character juxtaposition
         /// </summary>
         /// <param name="src">The source span</param>
-        [MethodImpl(Inline)]
+        [TextUtility]
         public static ReadOnlySpan<char> Concat(this ReadOnlySpan<char> lhs, ReadOnlySpan<char> rhs)
             => lhs.Concat() + rhs.Concat();
 
+        [TextUtility]
         public static string Concat(this Span<string> src, string sep)
         {
             var dst = text.build();
@@ -96,6 +103,7 @@ namespace Z0
         /// Sequentially concatenates each indexed cell to the next without deimiters/interspersal
         /// </summary>
         /// <param name="src">The source text</param>
+        [TextUtility]
         public static string Concat(this Span<string> src)
             => src.Concat(string.Empty);
 
@@ -103,6 +111,7 @@ namespace Z0
         /// Sequentially concatenates each indexed cell to the next, separated by a specified character
         /// </summary>
         /// <param name="src">The source text</param>
+        [TextUtility]
         public static string Concat(this Span<string> src, char sep)
             => src.Concat(sep.ToString());
     }

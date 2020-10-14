@@ -18,6 +18,7 @@ namespace Z0
         /// <param name="sb">The target builder</param>
         /// <param name="label">The label text</param>
         /// <param name="sep">A character that denotes the end of a label and indicate that what follows is content</param>
+        [TextUtility]
         public static void Label(this StringBuilder sb, string label, char sep = Chars.Pipe)
         {
             sb.Append(label);
@@ -32,11 +33,12 @@ namespace Z0
         /// <param name="label">The label text</param>
         /// <param name="sep">A character that denotes the end of a label and indicate that what follows is content</param>
         /// <param name="content">The content to append</param>
+        [TextUtility]
         public static void Label(this StringBuilder sb, string label, char sep, object content)
         {
             sb.Label(label,sep);
             sb.Append(content);
-        }        
+        }
 
         /// <summary>
         /// Appends labeled formattable content to produce: '{label}{sep} {content}'
@@ -45,6 +47,7 @@ namespace Z0
         /// <param name="label">The label text</param>
         /// <param name="sep">A character that denotes the end of a label and indicate that what follows is content</param>
         /// <param name="content">The content to append</param>
+        [TextUtility]
         public static void Label<T>(this StringBuilder sb, string label, T content, char delimiter = Chars.Pipe)
             where T : ITextual
         {
@@ -61,6 +64,7 @@ namespace Z0
         /// <param name="content">The content to delimit</param>
         /// <param name="pad">The right-padded content width</param>
         /// <param name="delimiter">The content delimiter</param>
+        [TextUtility]
         public static void Label<T>(this StringBuilder sb, string label, char sep, T content, Padding pad, char delimiter = Chars.Pipe)
             where T : ITextual
         {
@@ -69,6 +73,6 @@ namespace Z0
             sb.Append(Chars.Space);
             sb.Label(label, sep);
             sb.Append($"{content.Format()}".PadRight((int)pad));
-        }        
+        }
     }
 }

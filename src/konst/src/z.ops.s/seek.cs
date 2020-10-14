@@ -21,11 +21,11 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seek<S,T>(in S src, uint count)
-            => ref As.seek<S,T>(src,count);
+            => ref memory.seek<S,T>(src,count);
 
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<byte> src, uint count)
-            => ref As.seek<T>(src,count);
+            => ref memory.seek<T>(src,count);
 
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
@@ -42,7 +42,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, uint offset)
-            => ref As.seek(src,offset);
+            => ref memory.seek(src,offset);
 
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
@@ -52,7 +52,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, ulong offset)
-            => ref As.seek(src,offset);
+            => ref memory.seek(src,offset);
 
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
@@ -62,7 +62,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, byte offset)
-            => ref As.seek(src,offset);
+            => ref memory.seek(src,offset);
 
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
@@ -72,7 +72,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seek<T>(Span<T> src, ushort offset)
-            => ref As.seek(src,offset);
+            => ref memory.seek(src,offset);
 
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
@@ -82,7 +82,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seek<T>(in T src, byte offset)
-            => ref As.seek(src,offset);
+            => ref memory.seek(src,offset);
 
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
@@ -92,7 +92,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seek<T>(in T src, ushort offset)
-            => ref As.seek(src,offset);
+            => ref memory.seek(src,offset);
 
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
@@ -109,7 +109,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline)]
         public static ref T seek<T>(in T src, uint offset)
-            => ref As.seek(src,offset);
+            => ref memory.seek(src,offset);
 
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
@@ -119,7 +119,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seek<T>(in T src, ulong offset)
-            => ref As.seek(src,offset);
+            => ref memory.seek(src,offset);
 
         /// <summary>
         /// Returns a reference to a T-measured offset-identified cell
@@ -129,6 +129,6 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref T seek<T>(in T src, int offset)
-            => ref As.seek(src,offset);
+            => ref memory.seek(src,offset);
     }
 }

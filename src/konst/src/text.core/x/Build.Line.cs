@@ -12,6 +12,7 @@ namespace Z0
 
     partial class XTend
     {
+        [TextUtility]
         public static StringBuilder Line(this StringBuilder sb, char c)
         {
             sb.AppendLine(c.ToString());

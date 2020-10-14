@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="src">The source text</param>
         /// <param name="left">The left boundary</param>
         /// <param name="right">The right boundary</param>
-        [Op]
+        [MethodImpl(Options), Op]
         public static string content(string src, string left, string right)
         {
             (var i0, var i1) = indices(src, left, right);

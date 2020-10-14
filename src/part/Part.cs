@@ -9,8 +9,17 @@ using System.Reflection;
 [assembly: PartId(PartId.Part)]
 
 namespace Z0.Parts
-{        
+{
     public sealed class Part : Part<Part>
+    {
+
+    }
+}
+
+namespace Z0
+{
+    [ApiHost]
+    public static partial class XTend
     {
 
     }

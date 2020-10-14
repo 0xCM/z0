@@ -27,7 +27,7 @@ namespace Z0
         /// <summary>
         /// The name of the referenced artifact
         /// </summary>
-        ClrName Name {get;}
+        StringRef Name {get;}
 
         string ITextual.Format()
             => text.format(RP.PSx3, Kind, Key, Name);

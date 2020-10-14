@@ -70,7 +70,7 @@ namespace Z0
                 if(i == NotFound)
                     return parsed(src,new CmdOption(src));
                 else
-                    return parsed(src, new CmdOption(src.LeftOf(i), src.RightOf(i)));
+                    return parsed(src, new CmdOption(src.LeftOfIndex(i), src.RightOfIndex(i)));
             }
             catch(Exception e)
             {

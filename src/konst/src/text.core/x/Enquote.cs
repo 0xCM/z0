@@ -14,6 +14,7 @@ namespace Z0
         /// Encloses supplied text in quotation marks
         /// </summary>
         /// <param name="content">The content to be quoted</param>
+        [TextUtility]
         public static string Enquote(this string content)
             => $"{Chars.Quote}{content}{Chars.Quote}";
     }

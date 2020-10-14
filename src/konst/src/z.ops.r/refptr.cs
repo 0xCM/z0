@@ -20,7 +20,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe T* refptr<T>(ref T src)
             where T : unmanaged
-                => As.refptr(ref src);
+                => memory.refptr(ref src);
 
         /// <summary>
         /// Presents generic reference as a generic pointer displaced by an element offset
@@ -38,7 +38,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe T* refptr<T>(ref T src, int offset)
             where T : unmanaged
-                => As.refptr(ref src, offset);
+                => memory.refptr(ref src, offset);
 
         /// <summary>
         /// Presents a generic reference r:T as a generic pointer p:T
@@ -50,6 +50,6 @@ namespace Z0
         public static unsafe P* refptr<T,P>(ref T r)
             where T : unmanaged
             where P : unmanaged
-                => As.refptr<T,P>(ref r);
+                => memory.refptr<T,P>(ref r);
     }
 }

@@ -16,8 +16,9 @@ namespace Z0
         /// <param name="left">The left marker</param>
         /// <param name="right">The right marker</param>
         /// <param name="compare">Th comparison type</param>
+        [TextUtility]
         public static bool EnclosedBy(this string s, string left, string right,
-            StringComparison compare = StringComparison.InvariantCulture) 
+            StringComparison compare = StringComparison.InvariantCulture)
                 => s.StartsWith(left, compare) && s.EndsWith(right, compare);
 
         /// <summary>
@@ -26,6 +27,7 @@ namespace Z0
         /// <param name="s">The string to search</param>
         /// <param name="left">The left marker</param>
         /// <param name="right">The right marker</param>
+        [TextUtility]
         public static bool EnclosedBy(this string s, char left, char right)
             => String.IsNullOrEmpty(s) ? false : s[0] == left && s.Last() == right;
     }

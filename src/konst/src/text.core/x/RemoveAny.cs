@@ -8,7 +8,7 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
 
-    using static Konst;
+    using static Part;
 
     partial class XTend
     {
@@ -17,11 +17,12 @@ namespace Z0
         /// </summary>
         /// <param name="s">The string to manipulate</param>
         /// <param name="removals">The characters to remove</param>
+        [TextUtility]
         public static string RemoveAny(this string s, IEnumerable<char> removals)
         {
             if (s.ContainsAny(removals))
             {
-                var dst = String.Empty;
+                var dst = EmptyString;
                 var src = s.ToCharArray();
                 for (int i = 0; i < s.Length; i++)
                     if (!removals.Contains(src[i]))
@@ -37,6 +38,7 @@ namespace Z0
         /// </summary>
         /// <param name="s">The string to manipulate</param>
         /// <param name="removals">The characters to remove</param>
+        [TextUtility]
         public static string RemoveAny(this string s, params char[] removals)
             => s.RemoveAny(removals as IEnumerable<char>);
     }

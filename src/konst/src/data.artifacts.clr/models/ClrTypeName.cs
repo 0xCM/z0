@@ -15,25 +15,38 @@ namespace Z0
     /// <summary>
     /// Defines an assembly-qualified type name
     /// </summary>
+    [ApiDataType]
     public readonly struct ClrTypeName : IName<string>, IEquatable<ClrTypeName>, IComparable<ClrTypeName>
     {
-        public readonly string Content;
+        [MethodImpl(Inline)]
+        public static ClrTypeName from(Type src)
+            => new ClrTypeName(src.AssemblyQualifiedName);
 
         [MethodImpl(Inline)]
-        public ClrTypeName(string src)
-            => Content = src;
+        public static ClrTypeName define(string src)
+            => new ClrTypeName(string.Intern(src));
 
         [MethodImpl(Inline)]
-        public static implicit operator ClrTypeName(string src)
+        public static ClrTypeName define(StringRef src)
             => new ClrTypeName(src);
+
+        readonly StringRef Content;
+
+        [MethodImpl(Inline)]
+        internal ClrTypeName(string src)
+            => Content = src;
 
         [MethodImpl(Inline)]
         public static implicit operator string(ClrTypeName src)
             => src.Content;
 
         [MethodImpl(Inline)]
+        public static implicit operator ClrTypeName(Type src)
+            => from(src);
+
+        [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<char>(ClrTypeName src)
-            => src.Content;
+            => src.Content.View;
 
         [MethodImpl(Inline)]
         public static bool operator <(ClrTypeName x, ClrTypeName y)
@@ -63,22 +76,10 @@ namespace Z0
         public string Format()
             => Content;
 
-        public ReadOnlySpan<char> Data
-        {
-            [MethodImpl(Inline)]
-            get => Content;
-        }
-
-        public MemoryAddress Address
-        {
-            [MethodImpl(Inline)]
-            get => address(Content);
-        }
-
         public uint Hash
         {
             [MethodImpl(Inline)]
-            get => (uint)Address;
+            get => (uint)Content.GetHashCode();
         }
 
         public Count Count
@@ -97,6 +98,12 @@ namespace Z0
         {
             [MethodImpl(Inline)]
             get => Length * sizeof(char);
+        }
+
+        public string ShortName
+        {
+            [MethodImpl(Inline), Ignore]
+            get => Content.Format().LeftOfFirst(Chars.Comma);
         }
 
         [MethodImpl(Inline), Ignore]

@@ -46,7 +46,7 @@ public enum PartId : ulong
 
     Polyrand = 36,
 
-    Cg = 40,
+    EvaluateShell = 40,
 
     ToolDocs = 41,
 

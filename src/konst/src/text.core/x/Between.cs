@@ -8,6 +8,7 @@ namespace Z0
 
     partial class XTend
     {
+        [TextUtility]
         public static string Between(this string src, char left, char right)
         {
             var result = string.Empty;

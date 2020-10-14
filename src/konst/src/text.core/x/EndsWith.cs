@@ -18,6 +18,7 @@ namespace Z0
         /// </summary>
         /// <param name="s">The string to search</param>
         /// <param name="c">The character to match</param>
+        [TextUtility]
         public static bool EndsWith(this string s, char c)
             => ! string.IsNullOrWhiteSpace(s) ? s.EndsWith(c.ToString()) : false;
 
@@ -26,6 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The string to examine</param>
         /// <param name="values">The characters for which to search</param>
+        [TextUtility]
         public static bool EndsWithAny(this string src, IEnumerable<string> values)
         {
             foreach (var v in values)
@@ -38,7 +40,7 @@ namespace Z0
         /// Determines whether a string ends with a digit
         /// </summary>
         /// <param name="s">The string to search</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), TextUtility]
         public static bool EndsWithDigit(this string s)
             => ! string.IsNullOrWhiteSpace(s) ? Char.IsDigit(s.Last()) : false;
     }

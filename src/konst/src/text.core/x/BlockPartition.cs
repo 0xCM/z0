@@ -20,6 +20,7 @@ namespace Z0
         /// <param name="src">The source string</param>
         /// <param name="blocklen">The number of characters in each block, save the last</param>
         /// <param name="sep">The block separator</param>
+        [TextUtility]
         public static string BlockPartition(this string src, int blocklen, string sep)
             => src.Partition(blocklen).Concat(sep);
 
@@ -29,6 +30,7 @@ namespace Z0
         /// <param name="src">The source string</param>
         /// <param name="blocklen">The number of characters in each block, save the last</param>
         /// <param name="sep">The block separator</param>
+        [TextUtility]
         public static string BlockPartition(this string src, int blocklen, char sep)
             => src.Partition(blocklen).Concat(sep.ToString());
 
@@ -39,9 +41,10 @@ namespace Z0
         /// <param name="blocklen">The number of characters in each block, save the last</param>
         /// <param name="sep">The block separator</param>
         /// <param name="prefix">Content that immediately precedes each block</param>
+        [TextUtility]
         public static string BlockPartition(this string src, int blocklen, char sep, string blockprefix)
         {
-            var parts = src.Partition(blocklen).ToArray();            
+            var parts = src.Partition(blocklen).ToArray();
             var result = new StringBuilder();
             var prefix = blockprefix ?? string.Empty;
             var lastindex = parts.Length - 1;
@@ -53,6 +56,6 @@ namespace Z0
                     result.Append(sep);
             }
             return result.ToString();
-        }    
+        }
     }
 }

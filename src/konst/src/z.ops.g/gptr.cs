@@ -14,7 +14,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe T* gptr<T>(in T src)
             where T : unmanaged
-                => As.gptr(src);
+                => memory.gptr(src);
 
         /// <summary>
         /// Presents a readonly reference to an unmanaged value as a pointer displaced
@@ -26,12 +26,12 @@ namespace Z0
         [MethodImpl(Inline)]
         public static unsafe T* gptr<T>(in T src, int offset)
             where T : unmanaged
-                => As.gptr(src,offset);
+                => memory.gptr(src,offset);
 
         [MethodImpl(Inline)]
         public unsafe static T* gptr<T>(ReadOnlySpan<T> src)
             where T : unmanaged
-                => As.gptr(src);
+                => memory.gptr(src);
 
         /// <summary>
         /// Presents a generic reference r:T as a generic pointer p:T
@@ -43,6 +43,6 @@ namespace Z0
         public static unsafe T* gptr<S,T>(in S src)
             where S : unmanaged
             where T : unmanaged
-                => As.gptr<S,T>(src);
+                => memory.gptr<S,T>(src);
     }
 }

@@ -19,7 +19,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(in T src, byte count)
-            => ref As.skip(src,count);
+            => ref memory.skip(src,count);
 
         /// <summary>
         /// Skips a specified number of source elements and returns a readonly reference to the result
@@ -29,7 +29,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(in T src, ushort count)
-            => ref As.skip(src,count);
+            => ref memory.skip(src,count);
 
         /// <summary>
         /// Skips a specified number of source elements and returns a readonly reference to the result
@@ -39,7 +39,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(in T src, uint count)
-            => ref As.skip(src,count);
+            => ref memory.skip(src,count);
 
         /// <summary>
         /// Skips a specified number of source elements and returns a readonly reference to the result
@@ -49,7 +49,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(in T src, ulong count)
-            => ref As.skip(src,count);
+            => ref memory.skip(src,count);
 
         /// <summary>
         /// Skips a specified number of source elements and returns a readonly reference to the result
@@ -59,7 +59,7 @@ namespace Z0
         /// <typeparam name="T">The source element type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(in T src, long count)
-            => ref As.skip(src,count);
+            => ref memory.skip(src,count);
 
         /// <summary>
         /// Skips a specified number of source elements and returns a readonly reference to the result
@@ -73,42 +73,42 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, byte count)
-            => ref As.skip(src,count);
+            => ref memory.skip(src,count);
 
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, ushort count)
-            => ref As.skip(src,count);
+            => ref memory.skip(src,count);
 
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, uint count)
-            => ref As.skip(src,count);
+            => ref memory.skip(src,count);
 
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, ulong count)
-            => ref As.skip(src,count);
+            => ref memory.skip(src,count);
 
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(ReadOnlySpan<T> src, long count)
-            => ref As.skip(src,count);
+            => ref memory.skip(src,count);
 
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(Span<T> src, byte count)
-            => ref As.skip(src,count);
+            => ref memory.skip(src,count);
 
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(Span<T> src, ushort count)
-            => ref As.skip(src,count);
+            => ref memory.skip(src,count);
 
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(Span<T> src, uint count)
-            => ref As.skip(src,count);
+            => ref memory.skip(src,count);
 
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(Span<T> src, ulong count)
-            => ref As.skip(src,count);
+            => ref memory.skip(src,count);
 
         [MethodImpl(Inline)]
         public static ref readonly T skip<T>(Span<T> src, long count)
-            => ref As.skip(src,count);
+            => ref memory.skip(src,count);
     }
 }

@@ -5,12 +5,11 @@
 namespace Z0
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Text;
 
     partial class XTend
-    {        
+    {
+        [TextUtility]
         public static StringBuilder Build(this string src)
             => new StringBuilder(src);
     }

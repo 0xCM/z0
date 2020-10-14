@@ -15,7 +15,7 @@ namespace Z0
         /// Returns true if a string is null or whitespace; otherwise, returns false
         /// </summary>
         /// <param name="s">The string to evaluate</param>
-        [MethodImpl(Inline)]
+        [TextUtility]
         public static bool IsBlank(this string s)
             => string.IsNullOrWhiteSpace(s);
 
@@ -23,7 +23,7 @@ namespace Z0
         /// Returns true if a string has at least one character that is not considered whitespace
         /// </summary>
         /// <param name="s">The string to evaluate</param>
-        [MethodImpl(Inline)]
+        [TextUtility]
         public static bool IsNotBlank(this string s)
             => !string.IsNullOrWhiteSpace(s);
     }

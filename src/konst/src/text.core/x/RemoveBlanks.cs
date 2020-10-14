@@ -4,13 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using static Chars;
+
     partial class XTend
     {
         /// <summary>
         /// Removes whitespace characters from a string
         /// </summary>
         /// <param name="src">The source string</param>
+        [TextUtility]
         public static string RemoveBlanks(this string src)
-            => src.RemoveAny(z.stream(Chars.Space, Chars.LineFeed, Chars.NL, Chars.Tab));
+            => src.RemoveAny(z.stream(Space, LineFeed, NL, Tab));
     }
 }

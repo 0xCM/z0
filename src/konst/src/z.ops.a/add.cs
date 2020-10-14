@@ -28,7 +28,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline)]
         public static ref T add<T>(in T src, int count)
-            => ref As.add(src,count);
+            => ref memory.add(src,count);
 
         /// <summary>
         /// Adds an offset to a reference
@@ -44,7 +44,7 @@ namespace Z0
         /// </remarks>
         [MethodImpl(Inline)]
         public static ref T add<T>(in T src, uint count)
-            => ref As.add(src,count);
+            => ref memory.add(src,count);
 
         /// <summary>
         /// Adds an offset to a reference
@@ -54,7 +54,7 @@ namespace Z0
         /// <typeparam name="T">The reference type</typeparam>
         [MethodImpl(Inline)]
         public static ref T add<T>(in T src, byte count)
-            => ref As.add(src,count);
+            => ref memory.add(src,count);
 
         /// <summary>
         /// Adds an offset to a reference
@@ -64,7 +64,7 @@ namespace Z0
         /// <typeparam name="T">The reference type</typeparam>
         [MethodImpl(Inline)]
         public static ref T add<T>(in T src, ushort count)
-            => ref As.add(src,count);
+            => ref memory.add(src,count);
 
         /// <summary>
         /// Adds an offset to a reference
@@ -74,6 +74,6 @@ namespace Z0
         /// <typeparam name="T">The reference type</typeparam>
         [MethodImpl(Inline)]
         public static ref T add<T>(in T src, ulong count)
-            => ref As.add(src,count);
+            => ref memory.add(src,count);
     }
 }

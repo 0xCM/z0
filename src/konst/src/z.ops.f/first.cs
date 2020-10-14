@@ -20,7 +20,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref T first<T>(Span<T> src)
-            => ref As.first(src);
+            => ref memory.first(src);
 
         /// <summary>
         /// Returns a readonly reference to the first source cell
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="src">The source span</param>
         [MethodImpl(Inline)]
         public static ref readonly char first(ReadOnlySpan<char> src)
-            => ref As.first(src);
+            => ref memory.first(src);
 
         /// <summary>
         /// Returns a reference to the head of a readonly span
@@ -37,7 +37,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T first<T>(ReadOnlySpan<T> src)
-            => ref As.first(src);
+            => ref memory.first(src);
 
         /// <summary>
         /// Returns a readonly reference to the first cell of a readonly span, offset by a specified cell count
@@ -48,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref readonly T first<T>(ReadOnlySpan<T> src, int offset)
             where T : unmanaged
-                => ref As.first(src, offset);
+                => ref memory.first(src, offset);
 
         /// <summary>
         /// Presents the span head as a readonly reference to an unsigned 8-bit integer

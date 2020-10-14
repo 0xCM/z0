@@ -11,7 +11,7 @@ namespace Z0
 
     partial class XTend
     {
-       /// <summary>
+        /// <summary>
         /// Delimits labeled content to produce '{delimiter} {label}{sep} {content}'
         /// </summary>
         /// <param name="sb">The target builder</param>
@@ -20,6 +20,7 @@ namespace Z0
         /// <param name="content">The content to delimit</param>
         /// <param name="pad">The right-padded content width</param>
         /// <param name="delimiter">The content delimiter</param>
+        [TextUtility]
         public static void DelimitLabel(this StringBuilder sb, string label, char sep, object content, Padding pad, char delimiter)
         {
             sb.Append(Chars.Space);
