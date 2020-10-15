@@ -35,6 +35,11 @@ namespace Z0
             get => Definition;
         }
 
+        public ClrType FieldType
+        {
+            get => Definition.FieldType;
+        }
+
         [MethodImpl(Inline)]
         public string Format()
             => Definition.Name;

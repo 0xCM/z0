@@ -68,13 +68,13 @@ namespace Z0
         [MethodImpl(NotInline),Op]
         public CilTableBuilder WithField(PropertyInfo src)
         {
-            var field = new CilFieldSpec(src.Name, src.PropertyType, Index);
+            var field = new CilFieldSpec(src, src.PropertyType, Index);
             seek(Fields, Index++) = field;
             return this;
         }
 
         [MethodImpl(NotInline),Op]
-        public CilTableBuilder WithField(string name, Type type)
+        public CilTableBuilder WithField(ClrMemberName name, Type type)
         {
             var field = new CilFieldSpec(name, type, Index);
             seek(Fields, Index++) = field;
@@ -84,7 +84,7 @@ namespace Z0
         [MethodImpl(NotInline), Op]
         public CilTableBuilder WithField(ClrField src)
         {
-            var field = new CilFieldSpec(src.Name, src.FieldType, Index);
+            var field = new CilFieldSpec(src.Name, src.FieldType.Name, Index);
             seek(Fields, Index++) = field;
             return this;
         }

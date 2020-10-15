@@ -55,24 +55,24 @@ namespace Z0
 
         public void Run()
         {
-            var handles = ClrHandles.methods(Source);
-            var count = (uint)handles.Length;
-            var target = Wf.Db().Table(HandleRecord.TableId, Source.Part);
-            if(count != 0)
-            {
-                Wf.EmittingTable<HandleRecord>(target);
+            // var handles = ClrHandles.methods(Source);
+            // var count = (uint)handles.Length;
+            // var target = Wf.Db().Table(HandleRecord.TableId, Source.Part);
+            // if(count != 0)
+            // {
+            //     Wf.EmittingTable<HandleRecord>(target);
 
-                Emitted = alloc<HandleRecord>(count);
-                ClrRecords.project(handles, Emitted);
-                var counter = 0u;
-                var t = default(HandleRecord);
-                var formatter = TableRows.formatter(HandleRecord.RenderWidths,t);
-                using var dst = target.Writer();
-                dst.WriteLine(formatter.FormatHeader());
-                count += ClrRecords.project(Emitted, dst);
+            //     Emitted = alloc<HandleRecord>(count);
+            //     ClrRecords.project(handles, Emitted);
+            //     var counter = 0u;
+            //     var t = default(HandleRecord);
+            //     var formatter = TableRows.formatter(HandleRecord.RenderWidths,t);
+            //     using var dst = target.Writer();
+            //     dst.WriteLine(formatter.FormatHeader());
+            //     count += ClrRecords.project(Emitted, dst);
 
-                Wf.EmittedTable<HandleRecord>(Host, counter, target);
-            }
+            //     Wf.EmittedTable<HandleRecord>(Host, counter, target);
+            // }
         }
 
         public void Dispose()

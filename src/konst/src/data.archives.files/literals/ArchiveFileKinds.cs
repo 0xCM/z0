@@ -17,6 +17,8 @@ namespace Z0
 
         public static FileExt Dll => ext(dll);
 
+        public static FileExt Pdb => ext(pdb);
+
         public static FileExt Xml => ext(xml);
 
         public static FileExt Json => ext(json);

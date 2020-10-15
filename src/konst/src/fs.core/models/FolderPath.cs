@@ -76,6 +76,10 @@ namespace Z0
             public FilePath[] Files(FileExt ext, bool recurse = false)
                 => Files(this, ext, recurse);
 
+
+            public Files Files(bool recurse, params FileExt[] ext)
+                => Files(this, recurse, ext);
+
             /// <summary>
             /// Nonrecursively enumerates all files in the folder
             /// </summary>
@@ -108,42 +112,10 @@ namespace Z0
                 => Files(ext).Where(f => f.HostedBy(host));
 
             /// <summary>
-            /// Enumerates files in the folder, with optional recursion, that match a specified extension
-            /// </summary>
-            /// <param name="ext">The extension to match</param>
-            /// <param name="recursive">Whether to enumerate recursively</param>
-            static FilePath[] Files(FolderPath src, FileExt ext, bool recurse = false)
-                => src.Exists ? Directory.GetFiles(src.Name, ext.SearchPattern, option(recurse)).Map(FS.path) : sys.empty<FilePath>();
-
-            static FilePath[] Files(FolderPath src, FileName name)
-                => src.Exists ? Directory.GetFiles(src.Name, $"{name}").Map(FS.path) : sys.empty<FilePath>();
-
-            static FilePath[] Files(FolderPath src, PartId part, FileExt ext)
-                => Files(src, ext).Where(f => f.OwnedBy(part));
-
-            static FilePath[] Files(FolderPath src, ApiHostUri host, FileExt ext)
-                => Files(src,ext).Where(f => f.HostedBy(host));
-
-            static IEnumerable<FilePath> Files(FolderPath src, FileName name, bool recurse)
-                => recurse ? src.Recurse(name) : Files(src,name);
-
-            static FilePath[] Files(FolderPath src, FileExt ext, string match)
-                => Files(src, ext).Where(f => f.FileName.Name.Contains(match));
-
-            /// <summary>
             /// Just the one
             /// </summary>
             FolderPath[] One
                 => new FolderPath[]{this};
-
-            IEnumerable<FilePath> Recurse(FileExt ext)
-                => from d in (One).Union(SubDirs()) from f in Files(d,ext) select f;
-
-            IEnumerable<FilePath> Recurse(PartId owner, FileExt ext)
-                => from d in (One).Union(SubDirs()) from f in Files(d,ext) where f.OwnedBy(owner) select f;
-
-            IEnumerable<FilePath> Recurse(FileName name)
-                => from d in (One).Union(SubDirs()) from f in Files(d,name) select f;
 
             /// <summary>
             /// Creates the represented directory in the file system if it doesn't exist
@@ -182,10 +154,27 @@ namespace Z0
             static SearchOption option(bool recurse)
                 => recurse ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 
-
             [MethodImpl(Inline)]
             public static implicit operator Z0.FolderPath(FolderPath src)
                 => Z0.FolderPath.Define(src.Name);
+
+            static FilePath[] Files(FS.FolderPath src, bool recurse, params FileExt[] ext)
+                => ext.SelectMany(x => Directory.EnumerateFiles(src.Name, x.SearchPattern, option(recurse))).Map(FS.path);
+
+            static FilePath[] Files(FolderPath src, FileExt ext, bool recurse = false)
+                => src.Exists ? Directory.GetFiles(src.Name, ext.SearchPattern, option(recurse)).Map(FS.path) : sys.empty<FilePath>();
+
+            static FilePath[] Files(FolderPath src, FileName name)
+                => src.Exists ? Directory.GetFiles(src.Name, $"{name}").Map(FS.path) : sys.empty<FilePath>();
+
+            static FilePath[] Files(FolderPath src, PartId part, FileExt ext)
+                => Files(src, ext).Where(f => f.OwnedBy(part));
+
+            static FilePath[] Files(FolderPath src, ApiHostUri host, FileExt ext)
+                => Files(src,ext).Where(f => f.HostedBy(host));
+
+            static FilePath[] Files(FolderPath src, FileExt ext, string match)
+                => Files(src, ext).Where(f => f.FileName.Name.Contains(match));
         }
     }
 }

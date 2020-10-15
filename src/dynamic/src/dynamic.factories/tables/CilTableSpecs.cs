@@ -33,7 +33,7 @@ namespace Z0
             => new CilTableSpec(type, Fields);
 
         [MethodImpl(Inline), Op]
-        public static CilFieldSpec field(Name name, ClrTypeName type, ushort position, Address16 offset = default)
+        public static CilFieldSpec field(ClrMemberName name, ClrTypeName type, ushort position, Address16 offset = default)
             => new CilFieldSpec(name, type, position, offset);
 
         public static CilFieldSpec clone(FieldInfo src)
@@ -55,7 +55,7 @@ namespace Z0
             {
                 ref readonly var f = ref skip(fields, i);
                 var offset = skip(fieldOffsets,i);
-                seek(dst,i) = CilTableSpecs.field(f.Name, name, i, skip(fieldOffsets,i));
+                seek(dst,i) = CilTableSpecs.field(f, name, i, skip(fieldOffsets,i));
             }
 
             return new CilTableSpec(name, buffer);

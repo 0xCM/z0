@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Reflection;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
     using System.IO;
     using System.Runtime;
@@ -140,19 +141,29 @@ namespace Z0
         void Run64()
         {
             var archive = RuntimeArchive.create();
-            var resolver = new PathAssemblyResolver(archive.Libraries.Select(x => x.Name.Text));
+            var resolver = new PathAssemblyResolver(archive.Files.Select(x => x.Name.Text));
             using var context = new MetadataLoadContext(resolver);
             iter(archive.ManagedLibraries, path => context.LoadFromAssemblyPath(path.Name));
             iter(context.GetAssemblies(), c => Wf.Status(Host, c.GetSimpleName()));
-
         }
 
         [Op]
         public void Run()
         {
-            //iter(archive.Libraries, x => Wf.Status(Host, x));
+
+            var archive = RuntimeArchive.create();
+            var src = archive.ManagedLibraries.Select(x => Assembly.LoadFrom(x.Name));
+            var rows = map(src, f => delimit(f.GetSimpleName(), delimit(f.DebugFlags())));
+            Wf.Rows(rows);
 
         }
+    }
+
+
+    public static partial class XTend
+    {
+        public static string[] DebugFlags(this Assembly src)
+            => src.GetCustomAttributes<DebuggableAttribute>().Select(a => a.DebuggingFlags.ToString()).Array();
 
     }
 }

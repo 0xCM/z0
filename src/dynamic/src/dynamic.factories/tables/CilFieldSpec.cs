@@ -18,7 +18,7 @@ namespace Z0
         /// <summary>
         /// The field's name
         /// </summary>
-        public readonly Name FieldName;
+        public readonly ClrMemberName FieldName;
 
         /// <summary>
         /// The assembly-qualified name of the field data type
@@ -36,7 +36,7 @@ namespace Z0
         public readonly Address16 Offset;
 
         [MethodImpl(Inline)]
-        public CilFieldSpec(Name name, ClrTypeName type, ushort pos, Address16 offset = default)
+        public CilFieldSpec(ClrMemberName name, ClrTypeName type, ushort pos, Address16 offset = default)
         {
             TypeName = type;
             FieldName = name;

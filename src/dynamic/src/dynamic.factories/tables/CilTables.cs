@@ -35,7 +35,7 @@ namespace Z0
             => mb.DefineType(fullName, attributes, typeof(ValueType));
 
         [Op]
-        public static FieldBuilder field(TypeBuilder tb, Name name, string type, Address16? offset = null)
+        public static FieldBuilder field(TypeBuilder tb, ClrMemberName name, string type, Address16? offset = null)
         {
             var fb = tb.DefineField(name, Type.GetType(type), FieldAttributes.Public);
             if(offset != null)

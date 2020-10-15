@@ -13,13 +13,17 @@ namespace Z0
 
     partial struct WfShell
     {
+        [Op]
+        public static IWfShell create(params string[] args)
+            => create(Assembly.GetEntryAssembly(), args);
+
         /// <summary>
         /// Reifies a <see cref='IWfShell'/> predicated on a controlling assembly and zero or more arguments
         /// </summary>
         /// <param name="control">The controlling assembly</param>
         /// <param name="args">The shell args</param>
         [Op]
-        public static IWfShell create(Assembly control, ApiPartSet modules, params string[] args)
+        static IWfShell create(Assembly control, ApiPartSet modules, params string[] args)
             => create(new WfInit(context(control, modules, args), modules));
 
         /// Reifies a <see cref='IWfShell'/> predicated on a controlling assembly and zero or more arguments
@@ -27,12 +31,9 @@ namespace Z0
         /// <param name="control">The controlling assembly</param>
         /// <param name="args">The shell args</param>
         [Op]
-        public static IWfShell create(Assembly control, params string[] args)
+        static IWfShell create(Assembly control, params string[] args)
             => create(control, parts(control, args), args);
 
-        [Op]
-        public static IWfShell create(params string[] args)
-            => create(Assembly.GetEntryAssembly(), args);
 
         [Op]
         static IWfShell create(WfInit init)
