@@ -40,63 +40,38 @@ namespace Z0
 
         public readonly ClrAssembly Source;
 
-        public readonly FS.FilePath Target;
-
         readonly WfHost Host;
 
-        public Span<HandleRecord> Records;
-
-        readonly ReadOnlySpan<byte> RenderWidths;
+        public Span<HandleRecord> Emitted;
 
         [MethodImpl(Inline)]
         public EmitClrHandlesStep(IWfShell wf, WfHost host, ClrAssembly src)
         {
-            Wf = wf;
             Host = host;
+            Wf = wf.WithHost(Host);
             Source = src;
-            Target = Wf.Db().Table(HandleRecord.TableId, Source.Part);
-            Records = default;
-            RenderWidths = HandleRecord.RenderWidths;
+            Emitted = default;
         }
 
         public void Run()
         {
             var handles = ClrHandles.methods(Source);
-            var count = handles.Length;
+            var count = (uint)handles.Length;
+            var target = Wf.Db().Table(HandleRecord.TableId, Source.Part);
             if(count != 0)
             {
-                Wf.Running(Host, Source.SimpleName);
+                Wf.EmittingTable<HandleRecord>(target);
 
-                Records = alloc<HandleRecord>(count);
-                project(handles, Records);
+                Emitted = alloc<HandleRecord>(count);
+                ClrRecords.project(handles, Emitted);
                 var counter = 0u;
                 var t = default(HandleRecord);
-                var formatter = TableRows.formatter(RenderWidths,t);
-                using var dst = Target.Writer();
+                var formatter = TableRows.formatter(HandleRecord.RenderWidths,t);
+                using var dst = target.Writer();
                 dst.WriteLine(formatter.FormatHeader());
-                for(var i=0; i<count; i++)
-                {
-                    ref readonly var record = ref skip(Records,i);
-                    var row = formatter.FormatRow(record);
-                    dst.WriteLine(row);
-                    counter++;
-                }
+                count += ClrRecords.project(Emitted, dst);
 
-                Wf.EmittedTable(Host, counter, Target, t);
-            }
-        }
-
-        [MethodImpl(Inline)]
-        static void project(ReadOnlySpan<ClrHandle> src, Span<HandleRecord> dst)
-        {
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var handle = ref skip(src,i);
-                ref var record = ref seek(dst,i);
-                record.Address = handle.Pointer.Address;
-                record.Key = handle.Key;
-                record.Kind = handle.Kind;
+                Wf.EmittedTable<HandleRecord>(Host, counter, target);
             }
         }
 

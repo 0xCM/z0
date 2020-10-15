@@ -274,6 +274,13 @@ namespace Z0
                 Raise(new EmittingTableEvent(Host, type, dst, Ct));
         }
 
+        void EmittingTable<T>(FS.FilePath dst, T t = default)
+            where T : struct
+        {
+            if(Verbosity.Babble())
+                Raise(new EmittingTableEvent<T>(Host, dst, Ct));
+        }
+
         void EmittedTable(Type type, Count count, FS.FilePath dst)
             => EmittedTable(Host, type, count, dst);
 

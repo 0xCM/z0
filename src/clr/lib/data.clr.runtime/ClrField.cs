@@ -29,6 +29,12 @@ namespace Z0
             get => Definition.MetadataToken;
         }
 
+        public ClrMemberName Name
+        {
+            [MethodImpl(Inline)]
+            get => Definition;
+        }
+
         [MethodImpl(Inline)]
         public string Format()
             => Definition.Name;
@@ -43,12 +49,12 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public static bool operator ==(ClrField lhs, ClrField rhs)
-            => lhs.Equals(rhs);
+        public static bool operator ==(ClrField a, ClrField b)
+            => a.Equals(b);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(ClrField lhs, ClrField rhs)
-            => !lhs.Equals(rhs);
+        public static bool operator !=(ClrField a, ClrField b)
+            => !a.Equals(b);
 
         [MethodImpl(Inline)]
         public static implicit operator FieldInfo(ClrField src)

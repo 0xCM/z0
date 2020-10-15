@@ -40,6 +40,12 @@ namespace Z0
             get => _Literals;
         }
 
+        public ClrTypeName Name
+        {
+            [MethodImpl(Inline)]
+            get => Definition;
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator ClrEnum(ClrEnum<T> src)
             => src.Untyped;

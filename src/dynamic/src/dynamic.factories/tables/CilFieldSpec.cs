@@ -8,12 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using api = TableBuilder;
+    using api = CilTableSpecs;
 
     /// <summary>
     /// Defines a field
     /// </summary>
-    public readonly struct FieldSpec
+    public readonly struct CilFieldSpec
     {
         /// <summary>
         /// The field's name
@@ -36,7 +36,7 @@ namespace Z0
         public readonly Address16 Offset;
 
         [MethodImpl(Inline)]
-        public FieldSpec(Name name, ClrTypeName type, ushort pos, Address16 offset = default)
+        public CilFieldSpec(Name name, ClrTypeName type, ushort pos, Address16 offset = default)
         {
             TypeName = type;
             FieldName = name;

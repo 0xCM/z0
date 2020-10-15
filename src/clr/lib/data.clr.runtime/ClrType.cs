@@ -19,9 +19,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ClrType(Type src)
-        {
-            Definition = src;
-        }
+            => Definition = src;
 
         public ClrAssembly Assembly
         {
@@ -35,8 +33,17 @@ namespace Z0
             get => Definition.MetadataToken;
         }
 
-        public Type[] NestedTypes
-            => Reflex.nested(Definition);
+        public ClrTypeName Name
+        {
+            [MethodImpl(Inline)]
+            get => Definition;
+        }
+
+        public ReadOnlySpan<ClrType> NestedTypes
+        {
+            [MethodImpl(Inline)]
+            get => z.recover<Type,ClrType>(Reflex.nested(Definition));
+        }
 
         [MethodImpl(Inline)]
         public static ClrType From(Type src)
@@ -54,9 +61,9 @@ namespace Z0
         public static implicit operator Type(ClrType src)
             => src.Definition;
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Ignore]
         public string Format()
-            => string.Format("{0}/{1}", Definition.Name, Id);
+            => Definition.FullName;
 
         public override string ToString()
             => Format();

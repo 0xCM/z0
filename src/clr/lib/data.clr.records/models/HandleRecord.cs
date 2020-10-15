@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.InteropServices;
-    using System.Reflection;
 
     using static Konst;
+    using static z;
 
     partial struct ClrRecords
     {
@@ -17,10 +17,10 @@ namespace Z0
         {
             public const byte FieldCount = 3;
 
+            public const string TableId = "clr.handles";
+
             public static ReadOnlySpan<byte> RenderWidths
                 => new byte[FieldCount]{16, 16, 16};
-
-            public const string TableId = "clr.handles";
 
             public ClrArtifactKind Kind;
 

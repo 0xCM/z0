@@ -16,7 +16,6 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-
         public Runner(IWfShell wf)
         {
             Host = WfSelfHost.create(typeof(Runner));
@@ -35,7 +34,7 @@ namespace Z0
             for(var i =0; i<count; i++)
             {
                 ref readonly var model = ref skip(view,i);
-                var clone = TableBuilder.clone(model);
+                var clone = CilTableSpecs.clone(model);
                 Wf.Rows(clone);
 
             }

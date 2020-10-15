@@ -32,15 +32,15 @@ namespace Z0
         public static implicit operator Type(ClrType<T> src)
             => src.Definition;
 
-        public Type[] NestedTypes
-            => Reflex.nested(Definition);
-
-        public ClrTypeKind Kind
-            => ClrTypeKind.None;
+        public ReadOnlySpan<ClrType> NestedTypes
+        {
+            [MethodImpl(Inline)]
+            get => z.recover<Type,ClrType>(Reflex.nested(Definition));
+        }
 
         [MethodImpl(Inline)]
         public string Format()
-            => string.Format("{0}/{1}", Definition.Name, Id);
+            => Definition.FullName;
 
         public override string ToString()
             => Format();

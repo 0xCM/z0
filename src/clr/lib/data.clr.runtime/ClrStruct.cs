@@ -35,6 +35,12 @@ namespace Z0
             get => Definition.MetadataToken;
         }
 
+        public ClrTypeName Name
+        {
+            [MethodImpl(Inline)]
+            get => Definition;
+        }
+
         [MethodImpl(Inline)]
         public static implicit operator ClrType(ClrStruct src)
             => src.Generalized;

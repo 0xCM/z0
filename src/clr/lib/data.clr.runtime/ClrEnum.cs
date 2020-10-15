@@ -31,6 +31,12 @@ namespace Z0
             get => Definition.MetadataToken;
         }
 
+        public ClrTypeName Name
+        {
+            [MethodImpl(Inline)]
+            get => Definition;
+        }
+
         public ClrStruct BaseType
         {
             [MethodImpl(Inline)]
@@ -48,6 +54,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator ClrEnum(Type src)
             => from(src);
+
+        [MethodImpl(Inline), Ignore]
+        public string Format()
+            => Definition.FullName;
+
+        public override string ToString()
+            => Format();
 
         static EnumLiteralDetails<E> Data<E>()
             where E : unmanaged, Enum

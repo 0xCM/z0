@@ -15,22 +15,59 @@ namespace Z0
     public readonly struct ClrHandles
     {
         [Op]
-        public static ReadOnlySpan<ClrHandle> methods(Assembly src)
+        public static ReadOnlySpan<ClrHandle<RuntimeTypeHandle>> types(Assembly src)
+        {
+            var metadata = src.Types();
+            var count = metadata.Length;
+            var buffer = alloc<ClrHandle<RuntimeTypeHandle>>(count);
+            types(metadata, src.ManifestModule, buffer);
+            return buffer;
+        }
+
+        [Op]
+        public static ReadOnlySpan<ClrHandle<RuntimeFieldHandle>> fields(Assembly src)
+        {
+            var metadata = src.Fields();
+            var count = metadata.Length;
+            var buffer = alloc<ClrHandle<RuntimeFieldHandle>>(count);
+            fields(metadata, src.ManifestModule, buffer);
+            return buffer;
+        }
+
+        [Op]
+        public static ReadOnlySpan<ClrHandle<RuntimeMethodHandle>> methods(Assembly src)
         {
             var catalog = ApiCatalogs.part(src);
-            var ops = catalog.ConcreteOperations();
-            var count = ops.Length;
-            var buffer = alloc<ClrHandle>(count);
-            methods(ops, catalog.ManifestModule, buffer);
+            var metadata = catalog.ConcreteOperations();
+            var count = metadata.Length;
+            var buffer = alloc<ClrHandle<RuntimeMethodHandle>>(count);
+            methods(metadata, catalog.ManifestModule, buffer);
             return buffer;
         }
 
         [MethodImpl(Inline), Op]
-        public static void methods(in ReadOnlySpan<MethodInfo> methods, Module module, Span<ClrHandle> dst)
+        public static void fields(in ReadOnlySpan<FieldInfo> src, Module module, Span<ClrHandle<RuntimeFieldHandle>> dst)
         {
-            var count = methods.Length;
+            var count = src.Length;
             for(var i=0u; i<count; i++)
-                seek(dst,i) = method(module, ClrArtifactKey.from(skip(methods,i)));
+                seek(dst,i) = field(module, ClrArtifactKey.from(skip(src,i)));
+        }
+
+
+        [MethodImpl(Inline), Op]
+        public static void types(in ReadOnlySpan<Type> src, Module module, Span<ClrHandle<RuntimeTypeHandle>> dst)
+        {
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = type(module, ClrArtifactKey.from(skip(src,i)));
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void methods(in ReadOnlySpan<MethodInfo> src, Module module, Span<ClrHandle<RuntimeMethodHandle>> dst)
+        {
+            var count = src.Length;
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = method(module, ClrArtifactKey.from(skip(src,i)));
         }
 
         [MethodImpl(Inline), Op]
@@ -39,11 +76,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ClrHandle<RuntimeTypeHandle> type(Module src, ClrArtifactKey key)
-            => new ClrHandle<RuntimeTypeHandle>(ClrArtifactKind.Method, key, src.ModuleHandle.GetRuntimeTypeHandleFromMetadataToken((int)key));
+            => new ClrHandle<RuntimeTypeHandle>(ClrArtifactKind.Type, key, src.ModuleHandle.GetRuntimeTypeHandleFromMetadataToken((int)key));
 
         [MethodImpl(Inline), Op]
         public static ClrHandle<RuntimeFieldHandle> field(Module src, ClrArtifactKey key)
-            => new ClrHandle<RuntimeFieldHandle>(ClrArtifactKind.Method, key, src.ModuleHandle.GetRuntimeFieldHandleFromMetadataToken((int)key));
+            => new ClrHandle<RuntimeFieldHandle>(ClrArtifactKind.Field, key, src.ModuleHandle.GetRuntimeFieldHandleFromMetadataToken((int)key));
 
         [MethodImpl(Inline), Op]
         public static ClrHandle untype(in ClrHandle<RuntimeMethodHandle> src)

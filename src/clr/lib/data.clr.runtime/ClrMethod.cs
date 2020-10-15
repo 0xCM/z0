@@ -29,10 +29,10 @@ namespace Z0
             get => Definition.MetadataToken;
         }
 
-        public string Name
+        public ClrMemberName Name
         {
             [MethodImpl(Inline)]
-            get => Definition.Name;
+            get => Definition;
         }
 
         public ClrAssembly Assembly

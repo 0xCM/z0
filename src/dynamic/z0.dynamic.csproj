@@ -8,6 +8,7 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Identity)" />
     <ProjectReference Include="$(Derivatives)" />
+    <ProjectReference Include="$(Clr)" />
 
   </ItemGroup>
 

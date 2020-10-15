@@ -10,22 +10,22 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = TableBuilder;
+    using api = CilTableSpecs;
 
-    public readonly struct TableSpec : ITextual
+    public readonly struct CilTableSpec : ITextual
     {
         public readonly ClrTypeName TableName;
 
-        readonly TableSpan<FieldSpec> FieldSpecs;
+        readonly TableSpan<CilFieldSpec> FieldSpecs;
 
         [MethodImpl(Inline)]
-        public TableSpec(ClrTypeName name, FieldSpec[] cells)
+        public CilTableSpec(ClrTypeName name, CilFieldSpec[] cells)
         {
             TableName = name;
             FieldSpecs = cells;
         }
 
-        public ReadOnlySpan<FieldSpec> Fields
+        public ReadOnlySpan<CilFieldSpec> Fields
         {
             [MethodImpl(Inline)]
             get => FieldSpecs.View;

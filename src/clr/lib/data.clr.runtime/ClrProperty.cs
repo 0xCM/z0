@@ -22,6 +22,12 @@ namespace Z0
             get => Definition.MetadataToken;
         }
 
+        public ClrMemberName Name
+        {
+            [MethodImpl(Inline)]
+            get => Definition;
+        }
+
         [MethodImpl(Inline)]
         public static bool operator ==(ClrProperty lhs, ClrProperty rhs)
             => lhs.Equals(rhs);

@@ -26,7 +26,6 @@ ref struct Runner
     public void Dispose()
     {
         Wf.Disposed(Id, Part);
-
     }
 
     public Runner(IWfShell wf, string[] args)

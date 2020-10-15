@@ -27,6 +27,10 @@ namespace Z0
             => new ClrMemberName(src.Name);
 
         [MethodImpl(Inline)]
+        public static ClrMemberName from(MethodInfo src)
+            => new ClrMemberName(src.Name);
+
+        [MethodImpl(Inline)]
         public static ClrMemberName from(EventInfo src)
             => new ClrMemberName(src.Name);
 
@@ -47,6 +51,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator string(ClrMemberName src)
             => src.Content;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrMemberName(FieldInfo src)
+            => from(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrMemberName(PropertyInfo src)
+            => from(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrMemberName(EventInfo src)
+            => from(src);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrMemberName(MethodInfo src)
+            => from(src);
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<char>(ClrMemberName src)

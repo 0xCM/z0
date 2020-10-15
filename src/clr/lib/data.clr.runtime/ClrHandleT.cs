@@ -11,20 +11,27 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct ClrHandle
+    using api = ClrHandles;
+
+    public readonly struct ClrHandle<T>
+        where T : struct
     {
         public ClrArtifactKind Kind {get;}
 
         public ClrArtifactKey Key {get;}
 
-        public Ptr Pointer {get;}
+        public T Handle {get;}
 
         [MethodImpl(Inline)]
-        public ClrHandle(ClrArtifactKind kind, ClrArtifactKey key, Ptr ptr)
+        public ClrHandle(ClrArtifactKind kind, ClrArtifactKey key, T handle)
         {
             Kind = kind;
             Key = key;
-            Pointer = ptr;
+            Handle = handle;
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrHandle(ClrHandle<T> src)
+            => api.untype(src);
     }
 }
