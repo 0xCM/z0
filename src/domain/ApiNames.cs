@@ -14,6 +14,8 @@ namespace Z0
 
         const string workers = nameof(workers);
 
-        public const string Cmd = workflow + dot + cmd;
+        public const string Cmd = cmd + dot + core;
+
+        public const string CmdParse = cmd + dot + "parse";
     }
 }

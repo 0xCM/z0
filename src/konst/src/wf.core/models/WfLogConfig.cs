@@ -32,7 +32,10 @@ namespace Z0
         /// </summary>
         public FS.FilePath ErrorLog;
 
-        public FS.FolderPath Target;
+        /// <summary>
+        /// The location to which completed logs are published
+        /// </summary>
+        public FS.FolderPath Publication;
 
         [MethodImpl(Inline)]
         public WfLogConfig(PartId control, FS.FolderPath root, FS.FolderPath target)
@@ -40,13 +43,16 @@ namespace Z0
             Control = control;
             Root = root;
             var app = Control.Format();
-            StatusLog = root + FS.file(app, X.StatusLog);
-            ErrorLog = root + FS.file(app, X.ErrorLog);
-            Target = target;
+            StatusLog = Root + FS.file(app, X.StatusLog);
+            ErrorLog = Root + FS.file(app, X.ErrorLog);
+            Publication = target;
         }
 
         [MethodImpl(Inline)]
         public string Format()
             => Render.format(Root, StatusLog, ErrorLog);
+
+        public override string ToString()
+            => Format();
     }
 }

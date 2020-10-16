@@ -34,7 +34,6 @@ namespace Z0
         static IWfShell create(Assembly control, params string[] args)
             => create(control, parts(control, args), args);
 
-
         [Op]
         static IWfShell create(WfInit init)
             => new WfShell(init);

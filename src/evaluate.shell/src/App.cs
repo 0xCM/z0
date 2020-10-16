@@ -20,8 +20,6 @@ namespace Z0
                 using var wf = Polyrand.install(WfShell.create(args));
                 using var runner = new Runner(wf);
                 runner.Run();
-
-
             }
             catch(Exception e)
             {

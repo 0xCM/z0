@@ -28,7 +28,6 @@ namespace Z0
             using var reader = Reader(wf,cmd.Source);
             using var writer = cmd.Target.Writer();
             var data = reader.AssemblyReferences();
-
             var count = data.Length;
             for(var i=0; i<count; i++)
                 writer.WriteLine(skip(data,i).Name);

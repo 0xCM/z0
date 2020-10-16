@@ -12,36 +12,30 @@ namespace Z0
 
     using api = Cmd;
 
-    public readonly struct CmdOptions : ITextual
+    public readonly struct CmdOptions<K,T> : ITextual
+        where K : unmanaged
     {
-        readonly TableSpan<CmdOption> Data;
+        readonly TableSpan<CmdOption<K,T>> Data;
 
         [MethodImpl(Inline)]
-        public CmdOptions(CmdOption[] src)
+        public CmdOptions(CmdOption<K,T>[] src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdOptions(CmdOption[] src)
-            => new CmdOptions(src);
+        public static implicit operator CmdOptions<K,T>(CmdOption<K,T>[] src)
+            => new CmdOptions<K,T>(src);
 
-        public ReadOnlySpan<CmdOption> View
+        public ReadOnlySpan<CmdOption<K,T>> View
         {
             [MethodImpl(Inline)]
             get => Data.View;
         }
 
-        public Span<CmdOption> Edit
+        public ref CmdOption<K,T> this[uint index]
         {
             [MethodImpl(Inline)]
-            get => Data.Edit;
+            get => ref Data[index];
         }
-
-        public byte Count
-        {
-            [MethodImpl(Inline)]
-            get => (byte)Data.Length;
-        }
-
         public string Format()
             => api.format(this);
 

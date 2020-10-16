@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdHandler : ICmdHandler<CmdHandler>
+    public readonly struct CmdHandler : ICmdExec<CmdHandler>
     {
         public CmdId Id {get;}
 

@@ -23,7 +23,7 @@ namespace Z0
 
         public WfEventLog(WfLogConfig config)
         {
-            Target = config.Target;
+            Target = config.Publication;
             config.StatusLog.Delete();
             config.ErrorLog.Delete();
             StatusPath = FS.path(config.StatusLog.Name);
@@ -73,7 +73,7 @@ namespace Z0
             }
             catch(Exception error)
             {
-                term.error(error);
+                term.errlabel(error, "EventLogError");
             }
         }
 
@@ -90,7 +90,7 @@ namespace Z0
             }
             catch(Exception error)
             {
-                term.error(error);
+                term.errlabel(error, "EventLogError");
             }
         }
 

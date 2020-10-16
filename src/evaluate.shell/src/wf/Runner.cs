@@ -26,7 +26,7 @@ namespace Z0
         {
         }
 
-        public void Run()
+        void CloneTables()
         {
             var models = TableModels.create();
             var count = models.Count;
@@ -38,6 +38,16 @@ namespace Z0
                 Wf.Rows(clone);
 
             }
+
+        }
+
+        public void Run()
+        {
+            var o1 = Cmd.option("option1_name", "option1_value");
+            var o2 = Cmd.option("option2_name", "option2_value");
+            var o3 = Cmd.option("option3_name", "option3_value");
+            var options = Cmd.options(o1,o2,o3);
+            Wf.Status(options);
         }
     }
 }

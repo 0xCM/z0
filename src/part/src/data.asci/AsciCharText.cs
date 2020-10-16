@@ -308,7 +308,7 @@ namespace Z0
 
         public const string FS = "/";
 
-        public const string BS = "\\";
+        public const string BSlash = "\\";
 
         public const string Null = "\0";
 

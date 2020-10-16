@@ -10,28 +10,17 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public class WfCmdAttribute : Attribute
-    {
-
-    }
-
     public interface ICmdExec
     {
+        CmdId Id {get;}
 
+        ClrArtifactKey Host {get;}
+
+        CmdResult Exec(CmdSpec cmd);
     }
 
-    public interface ICmdExec<C,R> : ICmdExec
-        where C : struct
-        where R : struct
-    {
-
-        Outcome<R> Run(IWfShell wf, C spec);
-    }
-
-   public interface ICmdExec<H,C,R> : ICmdExec<C,R>
-        where C : struct
-        where R : struct
-        where H : ICmdExec<H,C,R>, new()
+    public interface ICmdExec<H> : ICmdExec
+        where H : struct, ICmdExec<H>
     {
 
     }

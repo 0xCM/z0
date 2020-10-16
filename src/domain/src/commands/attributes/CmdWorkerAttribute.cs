@@ -10,15 +10,15 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdParser
+    /// <summary>
+    /// Applied to a method to indicate that it can execute a <see cref='CmdSpec'/>
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Method)]
+    public class CmdWorkerAttribute : Attribute
     {
-        public ParseResult<CmdSpec> ParseSpec(string src)
-            => CmdParse.spec(src);
+        public CmdWorkerAttribute()
+        {
 
-        public ParseResult<CmdId> ParseId(string src)
-            => CmdParse.id(src);
-
-        public ParseResult<CmdOption> ParseOption(string src)
-            => CmdParse.option(src);
+        }
     }
 }

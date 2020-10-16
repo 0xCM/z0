@@ -20,10 +20,6 @@ namespace Z0
         public static IWfEventSink termlog(IWfEventLog log, CorrelationToken ct)
             => new WfTermLog(log,ct);
 
-        // [MethodImpl(Inline), Op]
-        // public static IWfEventLog events(WfLogConfig config)
-        //     => new WfEventLog(FS.path(config.StatusLog.Name), FS.path(config.ErrorLog.Name), config.Target);
-
         [MethodImpl(Inline), Op]
         public static IWfEventLog events(WfLogConfig config)
             => new WfEventLog(config);

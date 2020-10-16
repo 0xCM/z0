@@ -10,15 +10,13 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdParser
+    partial struct Tooling
     {
-        public ParseResult<CmdSpec> ParseSpec(string src)
-            => CmdParse.spec(src);
+        [MethodImpl(Inline)]
+        public static Tool<T,F> create<T,F>(IWfShell wf, ToolId id, FS.FolderPath src, FS.FolderPath dst)
+            where T : struct, ITool<T,F>
+            where F : unmanaged, Enum
+                => new Tool<T,F>(wf, id, src, dst);
 
-        public ParseResult<CmdId> ParseId(string src)
-            => CmdParse.id(src);
-
-        public ParseResult<CmdOption> ParseOption(string src)
-            => CmdParse.option(src);
     }
 }

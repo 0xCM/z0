@@ -6,13 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.Cmd)]
-    public readonly struct Cmd
+    [ApiHost(ApiNames.Cmd, true)]
+    public readonly partial struct Cmd
     {
         [Op]
         public static int execute(IWfShell wf, CmdId id, params CmdOption[] options)
@@ -20,9 +19,18 @@ namespace Z0
             return 0;
         }
 
+        [MethodImpl(Inline)]
+        public static asci32 name<K,T>(in CmdOption<K,T> src)
+            where K : unmanaged
+                => src.Kind.ToString().ToLower();
+
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static CmdHost<T> host<T>(T t = default)
             where T : struct
                 => CmdHost<T>.create();
+
+        [MethodImpl(Inline), Op]
+        public static CmdOptions options(params CmdOption[] src)
+            => src;
     }
 }

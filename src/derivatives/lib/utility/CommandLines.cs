@@ -49,7 +49,7 @@ namespace Z0
         /// and the double quotation mark is "escaped" by the remaining backslash,
         /// causing a literal double quotation mark (") to be placed in argv.
         /// </remarks>
-        public static IEnumerable<string> split(string commandLine, bool removeHashComments)
+        public static IEnumerable<string> split(string commandLine, bool removeHashComments = false)
         {
             char? unused;
             return split(commandLine, removeHashComments, out unused);

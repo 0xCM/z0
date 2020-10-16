@@ -5,4 +5,4 @@ set ProjectId=evaluate.shell
 call .cmd\setup.g.cmd
 call %BuildCmd%
 
-z0 dynamic evaluate
+z0 domain dynamic evaluate

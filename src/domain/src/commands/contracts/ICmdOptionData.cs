@@ -10,15 +10,21 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdParser
+    public interface ICmdOptionData<H> : ICmdOption
+        where H : struct,  ICmdOptionData<H>
     {
-        public ParseResult<CmdSpec> ParseSpec(string src)
-            => CmdParse.spec(src);
 
-        public ParseResult<CmdId> ParseId(string src)
-            => CmdParse.id(src);
+    }
 
-        public ParseResult<CmdOption> ParseOption(string src)
-            => CmdParse.option(src);
+    public interface ICmdOptionData<H,T> : ICmdOption<T>
+        where H : struct,  ICmdOptionData<H,T>
+    {
+
+    }
+
+    public interface ICmdOptionData<H,K,T> : ICmdOptionData<H,T>
+        where H : struct,  ICmdOptionData<H,K,T>
+    {
+
     }
 }

@@ -19,7 +19,7 @@ namespace Z0
         where K : unmanaged
 
     {
-        CmdOption<K,T>[] Options {get;}
+        ReadOnlySpan<CmdOption<K,T>> Options {get;}
     }
 
     public interface ICmdSpec<H,K,T> : ICmdSpec<K,T>
