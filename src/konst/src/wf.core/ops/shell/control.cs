@@ -6,17 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
+
     using static Konst;
     using static z;
 
-    public readonly struct CaptureSubjects
+    partial struct WfShell
     {
-        [MethodImpl(Inline)]
-        public static Subject[] CapturedAsm()
-            => array<Subject>("capture","asm");
-
-        [MethodImpl(Inline)]
-        public static Subject[] CapturedCil()
-            => array<Subject>("capture","cil");
+        [MethodImpl(Inline), Op]
+        public static Assembly control()
+            => Assembly.GetEntryAssembly();
     }
 }

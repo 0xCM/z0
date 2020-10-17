@@ -17,6 +17,16 @@ namespace Z0
         public static IWfShell create(params string[] args)
             => create(Assembly.GetEntryAssembly(), args);
 
+        [Op]
+        public static IWfShell create(IWfPaths paths, params string[] args)
+        {
+            var control = Assembly.GetEntryAssembly();
+            var parts = WfShell.parts(control, args);
+            var ctx = context(control, parts, args,  paths);
+            var init = new WfInit(ctx, parts);
+            return create(init);
+        }
+
         /// <summary>
         /// Reifies a <see cref='IWfShell'/> predicated on a controlling assembly and zero or more arguments
         /// </summary>

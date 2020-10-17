@@ -86,23 +86,8 @@ namespace Z0
             {
                 [MethodImpl(Inline)]
                 get => Name.IsNonEmpty;
+
             }
-
-            /// <summary>
-            /// Determines whether the filename is of the form {owner}.{host}.{*}
-            /// </summary>
-            /// <param name="owner">The owner to test</param>
-            [MethodImpl(Inline)]
-            public bool HostedBy(ApiHostUri host)
-                => FileName.HostedBy(host);
-
-            /// <summary>
-            /// Determines whether the filename is of the form {owner}.{.}.{*}
-            /// </summary>
-            /// <param name="owner">The owner to test</param>
-            [MethodImpl(Inline)]
-            public bool OwnedBy(PartId owner)
-                => owner == FileName.Owner;
 
             /// <summary>
             /// Specifies the file's owning part, if any
@@ -112,6 +97,22 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => FileName.Owner;
             }
+
+            /// <summary>
+            /// Determines whether the filename is of the form {owner}.{host}.{*}
+            /// </summary>
+            /// <param name="owner">The owner to test</param>
+            [MethodImpl(Inline)]
+            public bool IsHost(ApiHostUri host)
+                => FileName.IsHost(host);
+
+            /// <summary>
+            /// Determines whether the filename is of the form {owner}.{.}.{*}
+            /// </summary>
+            /// <param name="owner">The owner to test</param>
+            [MethodImpl(Inline)]
+            public bool IsOwner(PartId part)
+                => FileName.IsOwner(part);
 
             [MethodImpl(Inline)]
             public bool Is(FileExt ext)

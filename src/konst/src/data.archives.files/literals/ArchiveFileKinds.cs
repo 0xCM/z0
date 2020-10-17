@@ -29,6 +29,8 @@ namespace Z0
 
         public static FileExt Il => ext(il);
 
+        public static FileExt IlData => ext(il,csv);
+
         public static FileExt Hex => ext(hex);
 
         public static FileExt XCsv => ext(xcsv);

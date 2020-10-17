@@ -27,7 +27,7 @@ namespace Z0
 
         public IWfInit Init {get;}
 
-        public IApiPartSet ApiParts {get;}
+        public IApiParts ApiParts {get;}
 
         public IWfEventSink WfSink {get;}
 
@@ -43,7 +43,7 @@ namespace Z0
 
         public ISystemApiCatalog Api {get;}
 
-        public string ShellName {get;}
+        public string AppName {get;}
 
         public Assembly Control {get;}
 
@@ -62,14 +62,14 @@ namespace Z0
             Host = new WfHost(typeof(WfShell), typeof(WfShell), _ => throw no<WfShell>());
             Random = default;
 
+            Paths = config.Shell.Paths;
             Shell = config.Shell;
             Args = config.Shell.Args;
-            Paths = config.Shell.Paths;
             Settings = JsonSettings.Load(config.Shell.Paths.AppConfigPath);
             ApiParts = config.ApiParts;
             Api = config.ApiParts.Api;
             Control = config.Control;
-            ShellName = config.Shell.ShellName;
+            AppName = config.Shell.AppName;
         }
 
         WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyrand random)
@@ -88,7 +88,7 @@ namespace Z0
             ApiParts = config.ApiParts;
             Api = config.ApiParts.Api;
             Control = config.Control;
-            ShellName = config.Shell.ShellName;
+            AppName = config.Shell.AppName;
         }
 
         [MethodImpl(Inline)]
@@ -114,6 +114,6 @@ namespace Z0
         }
 
         string ITextual.Format()
-            => ShellName;
+            => AppName;
    }
 }

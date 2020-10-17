@@ -28,11 +28,10 @@ namespace Z0
 
         protected override void Execute(IWfShell wf)
         {
-            using var step = new CaptureApiHostStep(State,this, Api);
+            using var step = new CaptureApiHostStep(State, this, Api);
             step.Run();
         }
     }
-
 
     readonly ref struct CaptureApiHostStep
     {
@@ -65,10 +64,10 @@ namespace Z0
 
             try
             {
-                using var extract = new ExtractHostMembersStep(Wf, new ExtractHostMembers(), Api, Wf.Paths.PartCaptureArchive);
+                using var extract = new ExtractHostMembersStep(Wf, new ExtractHostMembers(), Api);
                 extract.Run();
 
-                using var emit = new EmitCaptureArtifactsStep(State, new EmitCaptureArtifacts(), Api.Uri, extract.Extracts, Wf.Paths.PartCaptureArchive);
+                using var emit = new EmitCaptureArtifactsStep(State, new EmitCaptureArtifacts(), Api.Uri, extract.Extracts);
                 emit.Run();
             }
             catch(Exception e)

@@ -7,8 +7,6 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.IO;
-    using System.Linq;
-    using System.Collections.Generic;
 
     using static Konst;
 
@@ -79,7 +77,6 @@ namespace Z0
             public FilePath[] Files(FileExt ext, bool recurse = false)
                 => Files(this, ext, recurse);
 
-
             public Files Files(bool recurse, params FileExt[] ext)
                 => Files(this, recurse, ext);
 
@@ -87,13 +84,13 @@ namespace Z0
             /// Nonrecursively enumerates all files in the folder
             /// </summary>
             public Files AllFiles
-                => Directory.EnumerateFiles(Name).Map(FS.path);
+                => Directory.Exists(Name) ? Directory.EnumerateFiles(Name).Map(FS.path) : FS.Files.Empty;
 
             public Files Files(string pattern, bool recurse)
-                =>  Exists ? Directory.EnumerateFiles(Name, pattern, option(recurse)).Map(f => FS.path(f)) : sys.empty<FilePath>();
+                =>  Exists ? Directory.EnumerateFiles(Name, pattern, option(recurse)).Map(f => FS.path(f)) : FS.Files.Empty;
 
             public Files Files(bool recurse)
-                => Exists ? Directory.EnumerateFiles(Name, SearchAll, option(recurse)).Map(f => FS.path(f)) : sys.empty<FilePath>();
+                => Exists ? Directory.EnumerateFiles(Name, SearchAll, option(recurse)).Map(f => FS.path(f)) : FS.Files.Empty;
 
             public FolderPath[] SubDirs(bool recurse = false)
                 => Directory.Exists(Name) ? Directory.EnumerateDirectories(Name, SearchAll, option(recurse)).Map(x => FS.dir(x)) : sys.empty<FolderPath>();
@@ -104,7 +101,7 @@ namespace Z0
             /// <param name="part">The owning part</param>
             /// <param name="ext">The extension to match</param>
             public FilePath[] Files(PartId part, FileExt ext)
-                => Files(ext).Where(f => f.OwnedBy(part));
+                => Files(ext).Where(f => f.IsOwner(part));
 
             /// <summary>
             /// Nonrecursively enumerates host-owned folder files
@@ -112,7 +109,7 @@ namespace Z0
             /// <param name="part">The owning part</param>
             /// <param name="ext">The extension to match</param>
             public FilePath[] Files(ApiHostUri host, FileExt ext)
-                => Files(ext).Where(f => f.HostedBy(host));
+                => Files(ext).Where(f => f.IsHost(host));
 
             /// <summary>
             /// Just the one
@@ -171,10 +168,10 @@ namespace Z0
                 => src.Exists ? Directory.GetFiles(src.Name, $"{name}").Map(FS.path) : sys.empty<FilePath>();
 
             static FilePath[] Files(FolderPath src, PartId part, FileExt ext)
-                => Files(src, ext).Where(f => f.OwnedBy(part));
+                => Files(src, ext).Where(f => f.IsOwner(part));
 
             static FilePath[] Files(FolderPath src, ApiHostUri host, FileExt ext)
-                => Files(src,ext).Where(f => f.HostedBy(host));
+                => Files(src,ext).Where(f => f.IsHost(host));
 
             static FilePath[] Files(FolderPath src, FileExt ext, string match)
                 => Files(src, ext).Where(f => f.FileName.Name.Contains(match));

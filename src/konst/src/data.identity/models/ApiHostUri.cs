@@ -21,9 +21,8 @@ namespace Z0
         public FolderName HostFolder
             => FolderName.Define(Name);
 
-        public FS.FileName FileName(FileExtension ext)
+        public FS.FileName FileName(FS.FileExt ext)
             => FS.file(text.concat(Owner.Format(), Chars.Dot, Name), ext);
-
 
         public FS.FileName FileName(FS.FileExt a, FS.FileExt b)
             => FS.file(text.concat(Owner.Format(), Chars.Dot, Name, a), b);

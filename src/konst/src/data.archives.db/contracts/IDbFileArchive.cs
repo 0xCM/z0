@@ -20,6 +20,9 @@ namespace Z0
 
         FS.FolderPath ToolRoot();
 
+        FS.FolderPath CaptureRoot()
+            => DbPaths.DbRoot + FS.folder("capture");
+
         FS.FolderPath SourceRoot<S>(S subject);
 
         FS.FolderPath StageRoot<S>(S subject);
@@ -72,6 +75,81 @@ namespace Z0
 
         FS.FolderPath ToolOutput(ToolId id)
             => Tools(id) + FS.folder("output");
+
+        FS.FolderPath CapturedExtractDir()
+            => CaptureRoot() + FS.folder("extracts");
+
+        FS.FilePath[] CapturedExtractFiles()
+            => CapturedExtractDir().AllFiles;
+
+        FS.FolderPath ParsedExtractDir()
+            => CaptureRoot() + FS.folder("parsed");
+
+        FS.FolderPath CapturedHexDir()
+            => CaptureRoot() + FS.folder("hex");
+
+        FS.FolderPath CapturedCilDir()
+            => CaptureRoot() + FS.folder("cil");
+
+        FS.FolderPath CapturedAsmDir()
+            => CaptureRoot() + FS.folder("asm");
+
+        FS.FilePath CapturedAsmFile(FS.FileName name)
+            => CapturedAsmDir() + name;
+
+        FS.FilePath CapturedAsmFile(ApiHostUri host)
+            => CapturedAsmFile(host.FileName(ArchiveFileKinds.Asm));
+
+        FS.FilePath[] CapturedAsmFiles()
+            => CapturedAsmDir().AllFiles;
+
+        FS.FilePath[] CapturedAsmFiles(PartId part)
+            => CapturedAsmFiles().Where(f => f.IsOwner(part));
+
+        FS.FilePath CapturedHexFile(FS.FileName name)
+            => CapturedHexDir() + name;
+
+        FS.FilePath CapturedHexFile(ApiHostUri host)
+            => CapturedHexFile(host.FileName(ArchiveFileKinds.Hex));
+
+        FS.FilePath[] CapturedHexFiles()
+            => CapturedHexDir().AllFiles;
+
+        FS.FilePath[] CapturedHexFiles(PartId part)
+            => CapturedHexFiles().Where(f => f.IsOwner(part));
+
+        FS.FilePath CapturedCilFile(FS.FileName name)
+            => CapturedCilDir() + name;
+
+        FS.FilePath CapturedCilFile(ApiHostUri host)
+            => CapturedCilFile(host.FileName(ArchiveFileKinds.IlData));
+
+        FS.FilePath[] CapturedCilFiles()
+            => CapturedCilDir().AllFiles;
+
+        FS.FilePath[] CapturedCilFiles(PartId part)
+            => CapturedCilFiles().Where(f => f.IsOwner(part));
+
+        FS.FilePath CapturedExtractFile(ApiHostUri host)
+            => CapturedExtractFile(host.FileName(ArchiveFileKinds.XCsv));
+
+        FS.FilePath CapturedExtractFile(FS.FileName name)
+            => CapturedExtractDir() + name;
+
+        FS.FilePath[] CapturedExtractFiles(PartId part)
+            => CapturedExtractFiles().Where(f => f.IsOwner(part));
+
+        FS.FilePath ParsedExtractFile(FS.FileName name)
+            => ParsedExtractDir() + name;
+
+        FS.FilePath ParsedExtractFile(ApiHostUri host)
+            => ParsedExtractFile(host.FileName(ArchiveFileKinds.PCsv));
+
+        FS.FilePath[] ParsedExtractFiles()
+            => ParsedExtractDir().AllFiles;
+
+        FS.FilePath[] ParsedExtractFiles(PartId part)
+            => ParsedExtractFiles().Where(f => f.IsOwner(part));
     }
 
     public interface IDbFileArchive<H> : IDbFileArchive, IFileArchive<H>

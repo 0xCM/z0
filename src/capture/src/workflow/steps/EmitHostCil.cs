@@ -22,15 +22,14 @@ namespace Z0
 
         protected override ref FS.FilePath Execute(IWfShell wf, in ApiMemberCodeBlocks src, out FS.FilePath dst)
         {
-
-            var path = wf.Db().Doc(Uri, "capture", "cil", FileKind.Cil, FileKind.Hex);
+            var path = wf.Db().CapturedCilFile(Uri);
             if(src.Count != 0)
             {
                 dst = path;
                 wf = wf.WithHost(this);
                 var count = src.Count;
                 var view = src.View;
-                using var writer = dst.Writer();
+                using var writer = path.Writer();
                 for(var i=0u; i<count; i++)
                 {
                     ref readonly var parsed = ref skip(view,i);

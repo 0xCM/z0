@@ -75,7 +75,7 @@ namespace Z0
         public void Emit()
         {
             var list = IntelIntrinsicsDocReader.read();
-            var target = (WfPaths.Default.ResourceRoot + FolderName.Define("intrinsics")) + FolderName.Define("algorithms");
+            var target = (WfPaths.create().ResourceRoot + FolderName.Define("intrinsics")) + FolderName.Define("algorithms");
             var kind = FileExtension.Define("md");
             var folder = IntelIntrinsicsDocReader.folder(kind);
             target.Clear();

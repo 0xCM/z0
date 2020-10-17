@@ -14,6 +14,10 @@ namespace Z0
     partial struct WfShell
     {
         [Op]
+        public static ApiPartSet parts()
+            => parts(Assembly.GetEntryAssembly(), args());
+
+        [Op]
         public static ApiPartSet parts(Assembly control, string[] args)
         {
             var parts = ApiPartIdParser.parse(args);
@@ -25,6 +29,6 @@ namespace Z0
 
         [Op]
         public static ApiPartSet parts(Assembly control)
-            => parts(control, Environment.GetCommandLineArgs());
+            => parts(control, args());
     }
 }

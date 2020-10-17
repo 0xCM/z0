@@ -15,11 +15,4 @@ namespace Z0
         public static WfStepId StepId
             => step<EvaluateStep>();
     }
-
-    [Step]
-    public sealed class SpecializeImm : WfHost<SpecializeImm>
-    {
-        public static WfStepId StepId
-            => Workflow.step<SpecializeImm>();
-    }
 }

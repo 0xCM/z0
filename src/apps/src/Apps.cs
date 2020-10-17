@@ -16,7 +16,7 @@ namespace Z0
             => new AppContext(wf.Paths, wf.Api, Polyrand.@default(), WfShell.json(wf.Paths), WfMsgExchange.Create(wf));
 
         public static IAppContext context()
-            => context(WfShell.parts(Assembly.GetEntryAssembly()), WfPaths.Default);
+            => context(WfShell.parts(Assembly.GetEntryAssembly()), WfPaths.create());
 
         static IAppContext context(ApiPartSet src, IWfPaths paths)
             => new AppContext(paths, src.Api, Polyrand.@default(), WfShell.json(paths), AppMsgExchange.Create());

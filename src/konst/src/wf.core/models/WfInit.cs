@@ -49,7 +49,7 @@ namespace Z0
         /// <summary>
         /// The input data archive configuration
         /// </summary>
-        public IApiPartSet ApiParts {get;}
+        public IApiParts ApiParts {get;}
 
         /// <summary>
         /// The output data archive configuration
@@ -74,7 +74,7 @@ namespace Z0
         public ISystemApiCatalog Api {get;}
 
         [MethodImpl(Inline)]
-        public WfInit(IWfContext shell, IApiPartSet parts)
+        public WfInit(IWfContext shell, IApiParts parts)
         {
             Shell = shell;
             ApiParts = parts;

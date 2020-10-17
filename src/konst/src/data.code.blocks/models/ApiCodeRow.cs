@@ -18,11 +18,4 @@ namespace Z0
 
         public BinaryCode Encoded;
     }
-
-    public struct ApiCodeRow<K,T>
-        where T : struct
-    {
-
-
-    }
 }

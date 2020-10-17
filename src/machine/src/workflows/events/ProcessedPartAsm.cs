@@ -13,9 +13,9 @@ namespace Z0
     using static Render;
 
     [Event]
-    public readonly struct ProcessedParts : IWfEvent<ProcessedParts>
+    public readonly struct ProcessedPartAsm : IWfEvent<ProcessedPartAsm>
     {
-        public const string EventName = nameof(ProcessedParts);
+        public const string EventName = nameof(ProcessedPartAsm);
 
         public WfEventId EventId {get;}
 
@@ -26,7 +26,7 @@ namespace Z0
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ProcessedParts(WfStepId step, PartId[] parts, AsmRowSets<Mnemonic> data,  CorrelationToken ct, FlairKind flair = Running)
+        public ProcessedPartAsm(WfStepId step, PartId[] parts, AsmRowSets<Mnemonic> data,  CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
             Output = data;

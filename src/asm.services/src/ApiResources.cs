@@ -57,7 +57,7 @@ namespace Z0
             {
                 ref readonly var index = ref skip(indices,i);
                 var host = Workflow.uri(index.DeclaringType);
-                var path = dst + host.FileName(FileExtensions.Asm);
+                var path = dst + host.FileName(ArchiveFileKinds.Asm);
                 results.AddRange(capture(context, host, index.Data, path));
             }
 

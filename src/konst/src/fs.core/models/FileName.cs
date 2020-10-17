@@ -72,20 +72,26 @@ namespace Z0
             public PartId Owner
                 => ApiPartIdParser.single(WithoutExtension.Name.Remove("z0."));
 
-            public static FileName Empty
-            {
-                [MethodImpl(Inline)]
-                get => new FileName(PathPart.Empty);
-            }
+            /// <summary>
+            /// Determines whether the name of a file is of the form {owner}.{*}
+            /// </summary>
+            /// <param name="host">The owner to test</param>
+            [MethodImpl(Inline)]
+            public bool IsOwner(PartId id)
+                => id == Owner;
 
             /// <summary>
             /// Determines whether the name of a file is of the form {owner}.{host}.{*}
             /// </summary>
             /// <param name="host">The owner to test</param>
-            public bool HostedBy(ApiHostUri host)
+            public bool IsHost(ApiHostUri host)
                 => Name.Text.StartsWith(string.Concat(host.Owner.Format(), Chars.Dot, host.Name.ToLower(), Chars.Dot));
+
             public FileName ChangeExtension(FileExt ext)
                 => FS.file(Path.GetFileNameWithoutExtension(Name), ext);
+
+            public bool StartsWith(string src)
+                => Name.Contains(src);
 
             [MethodImpl(Inline)]
             public bool Is(FileExt ext)
@@ -122,6 +128,13 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator Z0.FileName(FileName src)
                 => Z0.FileName.define(src.Name);
+
+            public static FileName Empty
+            {
+                [MethodImpl(Inline)]
+                get => new FileName(PathPart.Empty);
+            }
+
         }
     }
 }

@@ -50,6 +50,13 @@ namespace Z0
                 => Name = name;
 
             [MethodImpl(Inline)]
+            public FileExt(PathPart a, PathPart b)
+                : this(string.Format("{0}.{1}", a, b))
+            {
+
+            }
+
+            [MethodImpl(Inline)]
             public bool Matches(FilePath src)
             {
 

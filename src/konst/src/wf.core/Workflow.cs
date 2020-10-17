@@ -13,10 +13,6 @@ namespace Z0
     [ApiHost(ApiNames.Workflow, true)]
     public readonly partial struct Workflow
     {
-        [MethodImpl(Inline), Op]
-        public static IWfPaths paths(FS.FolderPath root)
-            => new WfPaths(root);
-
         [MethodImpl(Inline)]
         public static WfFunc<H> func<H>([CallerMemberName] string name = null)
             where H : struct, IWfStep<H>
@@ -49,6 +45,5 @@ namespace Z0
             e.Configure(args ?? WfStepArgs.Empty);
             return e;
         }
-
     }
 }

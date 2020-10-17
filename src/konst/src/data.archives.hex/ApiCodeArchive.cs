@@ -27,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public ApiCodeArchive(IWfShell wf)
         {
-            ArchiveRoot = wf.CaptureRoot + FS.folder("code");
+            ArchiveRoot = wf.Db().CaptureRoot() + FS.folder("code");
         }
 
         public FS.FolderPath Root

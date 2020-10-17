@@ -13,6 +13,16 @@ namespace Z0
     [ApiHost(ApiNames.Db, true)]
     public readonly partial struct Db
     {
+        [Op]
+        public static PartFiles partfiles(IWfShell wf)
+        {
+            var db = wf.Db();
+            var parsed = db.ParsedExtractFiles();
+            var hex = db.CapturedHexFiles();
+            var asm = db.CapturedAsmFiles();
+            return new PartFiles(parsed, hex, asm);
+        }
+
         [MethodImpl(Inline), Op]
         public static IDbTableArchive tables<S>(IWfShell wf, S subject)
             => new DbTables<S>(wf.Db(), subject);

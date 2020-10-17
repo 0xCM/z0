@@ -63,7 +63,7 @@ namespace Z0
             Wf.Running(Host);
             DecodeApiHost.create(Context.Decoder, Uri).Run(Wf, src, out dst);
 
-            var emitted = AsmServices.emit(Uri, dst.Storage, Context.Formatter.Config, Wf.Db());
+            var emitted = AsmServices.emit(Wf, Uri, dst.Storage, Context.Formatter.Config);
 
             if(emitted.IsNonEmpty)
                 Wf.EmittedFile(dst, dst.Count, emitted);

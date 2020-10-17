@@ -13,7 +13,6 @@ namespace Z0
     [WfHost]
     public sealed class ExtractHostMembers : WfHost<ExtractHostMembers>
     {
-
         protected override void Execute(IWfShell shell)
             => throw missing();
     }
@@ -24,16 +23,16 @@ namespace Z0
 
         readonly WfHost Host;
 
-        readonly IApiHost Source;
+        readonly IApiHost Api;
 
         public ApiMemberExtract[] Extracts;
 
         [MethodImpl(Inline)]
-        public ExtractHostMembersStep(IWfShell wf, WfHost host, IApiHost src, IPartCapturePaths dst)
+        public ExtractHostMembersStep(IWfShell wf, WfHost host, IApiHost src)
         {
             Wf = wf;
             Host = host;
-            Source = src;
+            Api = src;
             Extracts = new ApiMemberExtract[0]{};
             Wf.Created(Host);
         }
@@ -49,7 +48,7 @@ namespace Z0
             try
             {
                 using var step = new ExtractMembers(Wf, new ExtractMembersHost());
-                Extracts = step.Extract(Source);
+                Extracts = step.Extract(Api);
 
             }
             catch(Exception e)

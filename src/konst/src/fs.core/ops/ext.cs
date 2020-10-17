@@ -14,5 +14,9 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static FileExt ext(PathPart name)
             => new FileExt(name);
+
+        [MethodImpl(Inline), Op]
+        public static FileExt ext(PathPart a, PathPart b)
+            => new FileExt(a,b);
     }
 }

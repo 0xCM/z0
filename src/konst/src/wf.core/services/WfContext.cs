@@ -16,19 +16,19 @@ namespace Z0
 
         public string[] Args {get;}
 
-        public ApiPartSet Modules {get;}
+        public IApiParts ApiParts {get;}
 
         public CorrelationToken Ct {get;}
 
         public IWfPaths Paths {get;}
 
         [MethodImpl(Inline)]
-        public WfContext(Assembly control, string[] args, in ApiPartSet modules)
+        public WfContext(Assembly control, string[] args, IApiParts parts, IWfPaths paths = null)
         {
             Control = control;
             Args = args;
-            Modules = modules;
-            Paths = WfPaths.Default;
+            ApiParts = parts;
+            Paths = paths ?? WfPaths.create();
             Ct = z.correlate(control.Id());
         }
     }

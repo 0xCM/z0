@@ -5,18 +5,20 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Reflection;
+    using System.Linq;
 
     using static Konst;
+    using static z;
 
-    public readonly struct ApiContextState
+    public interface IApiParts
     {
-        internal readonly IApiPartSet ApiParts;
+        FS.FolderPath Source {get;}
 
-        [MethodImpl(Inline)]
-        internal ApiContextState(IApiPartSet src)
-        {
-            ApiParts = src;
-        }
+        FS.Files ManagedSources {get;}
+
+        Assembly[] Components {get;}
+
+        ISystemApiCatalog Api {get;}
     }
 }

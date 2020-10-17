@@ -88,16 +88,6 @@ namespace Z0
             return files;
         }
 
-        [Op]
-        public static PartFiles partfiles(FS.FolderPath root)
-        {
-            var src = Archives.capture(root);
-            var parsed = src.ParsePaths.Select(x => FS.path(x.Name));
-            var hex = src.HexPaths.Select(x => FS.path(x.Name));
-            var asm = src.AsmPaths.Select(x => FS.path(x.Name));
-            return new PartFiles(root, parsed, hex, asm);
-        }
-
         /// <summary>
         /// Creates an archive over the output of a build
         /// </summary>

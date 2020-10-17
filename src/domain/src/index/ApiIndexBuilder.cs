@@ -13,8 +13,12 @@ namespace Z0
     using static z;
     using static ApiCaptureIndexParts;
 
-    public class CodeBlockIndexer : IDisposable
+    public class ApiIndexBuilder : IDisposable
     {
+        public ApiCodeBlockIndex Product;
+
+        public CaptureIndexStatus IndexStatus;
+
         readonly Dictionary<MemoryAddress,ApiCodeBlock> CodeAddress;
 
         readonly Dictionary<MemoryAddress,OpUri> UriAddress;
@@ -30,60 +34,77 @@ namespace Z0
             Wf.Disposed(Host);
         }
 
-        internal CodeBlockIndexer(IWfShell wf, WfHost host)
+        public ApiIndexBuilder(IWfShell wf, WfHost host)
         {
-            Wf = wf;
             Host = host;
+            Wf = wf.WithHost(Host);
             CodeAddress = dict<MemoryAddress,ApiCodeBlock>();
             UriAddress = dict<MemoryAddress,OpUri>();
             Locations = dict<OpUri,ApiCodeBlock>();
+            Product = default;
         }
 
-        public static ApiCodeBlockIndex index(IWfShell wf, WfHost host, in PartFiles src)
+        public void Run()
         {
-            var files = src.Parsed.View;
-            var count = files.Length;
-            var builder = new CodeBlockIndexer(wf, host);
-                wf.Status(host, text.format("Indexing {0} datasets",count));
+            var src = Db.partfiles(Wf);
+            Wf.Status(src);
+            var parsed = src.Parsed.View;
+            var count = parsed.Length;
+            Wf.Status(text.format("Indexing {0} datasets",count));
 
             for(var i=0; i<count; i++)
             {
-                ref readonly var path = ref skip(files,i);
+                ref readonly var path = ref skip(parsed,i);
 
                 var result = ApiParseReport.load(path);
                 if(result)
                 {
-                    include(wf, host, result.Value, builder);
-                    wf.Status(host, text.format("Indexed {0}", path));
+                    var blocks = result.Value;
+                    Include(blocks);
+                    Wf.Status(text.format("Included {0} blocks from {1}", blocks.Length, path));
                 }
                 else
-                    wf.Error(host, $"Could not parse {path}");
+                    Wf.Error($"Could not parse {path}");
             }
 
-            var status = builder.Status();
-            wf.Status(host, text.format("Freeze: {0}", status.Format()));
-            return builder.Freeze();
+            IndexStatus = Status();
+            Wf.Status(IndexStatus.Format());
+            Product = Freeze();
         }
 
-        internal static void include(IWfShell wf, WfHost host, in ApiParseBlock src, CodeBlockIndexer dst)
+        [MethodImpl(Inline)]
+        static Triple<T> triple<T>(T a, T b, T c)
+            => new Triple<T>(a,b,c);
+
+        void Include(in ApiParseBlock src)
         {
             if(src.Address.IsEmpty)
+            {
+                Wf.Warn($"{src.Uri} code has no base address");
                 return;
+            }
 
-            var code = new ApiCodeBlock(src.Uri, src.Data);
-            var inclusion = dst.Include(code);
+            var inclusion = Include(new ApiCodeBlock(src.Uri, src.Data));
             if(inclusion.Any(x => x == false))
-                wf.Warn(host, $"Duplicate | {src.Uri.Format()}");
+                Wf.Warn($"Duplicate | {src.Uri.Format()}");
         }
 
-        internal static void include(IWfShell wf, WfHost host, ReadOnlySpan<ApiParseBlock> src, CodeBlockIndexer dst)
+        Triple<bool> Include(in ApiCodeBlock src)
+        {
+            var a = CodeAddress.TryAdd(src.Base, src);
+            var b = UriAddress.TryAdd(src.Base, src.Uri);
+            var c = Locations.TryAdd(src.Uri, src);
+            return triple(a,b,c);
+        }
+
+        void Include(ReadOnlySpan<ApiParseBlock> src)
         {
             var count = src.Length;
             for(var i=0; i<count; i++)
-                include(wf, host, skip(src,i), dst);
+                Include(skip(src, i));
         }
 
-        internal CaptureIndexStatus Status()
+        CaptureIndexStatus Status()
         {
             var dst = default(CaptureIndexStatus);
             dst.Parts = Locations.Keys.Select(x => x.Host.Owner).Distinct().Array();
@@ -110,12 +131,6 @@ namespace Z0
                    new PartCode(parts, code.Select(x => (x.Host, x)).ToDictionary()));
         }
 
-        public Triple<bool> Include(in ApiCodeBlock src)
-        {
-            var a = CodeAddress.TryAdd(src.Base, src);
-            var b = UriAddress.TryAdd(src.Base, src.Uri);
-            var c = Locations.TryAdd(src.Uri, src);
-            return (a,b,c);
-        }
+
     }
 }

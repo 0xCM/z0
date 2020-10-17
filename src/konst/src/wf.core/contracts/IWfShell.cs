@@ -16,7 +16,7 @@ namespace Z0
 
     using static WfEvents;
 
-    public interface IWfShell<C> : IShellContext<C>
+    public interface IWfShell<C> : IWfContext<C>
     {
         IWfShell Shell {get;}
     }
@@ -29,7 +29,7 @@ namespace Z0
 
         IWfEventSink WfSink {get;}
 
-        IApiPartSet ApiParts {get;}
+        //IApiParts ApiParts {get;}
 
         IWfBroker Broker {get;}
 

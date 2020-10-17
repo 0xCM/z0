@@ -11,26 +11,22 @@ namespace Z0.Asm
     using static AsmFxCheck;
     using static z;
 
-    using S = CaptureSubjects;
-
     public readonly struct AsmServices : IAsmServices
     {
         public static IAsmServices Services => default(AsmServices);
 
-        public static FS.FilePath emit(ApiHostUri uri, ReadOnlySpan<AsmRoutine> src, in AsmFormatConfig format, IDbFileArchive dst)
+        public static FS.FilePath emit(IWfShell wf, ApiHostUri uri, ReadOnlySpan<AsmRoutine> src, in AsmFormatConfig format)
         {
             var count = src.Length;
             if(count != 0)
             {
-                var subjects = S.CapturedAsm();
-                var path = dst.Doc(uri, subjects[0], subjects[1], FileKind.Asm);
+                var path = wf.Db().CapturedAsmFile(uri);
                 using var writer = path.Writer();
                 var buffer = Buffers.text();
 
                 for(var i=0; i<count; i++)
                 {
                     ref readonly var routine = ref skip(src,i);
-
                     AsmRender.format(routine, format, buffer);
                     writer.Write(buffer.Emit());
                 }

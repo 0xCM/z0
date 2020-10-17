@@ -82,7 +82,7 @@ namespace Z0
 
         void Emit(ApiHostCodeBlocks src, FS.FolderPath dst)
         {
-            var path = (dst + FS.folder("src")) + FS.file(src.Host.FileName(FileExtensions.Cs).Name);
+            var path = (dst + FS.folder("src")) + FS.file(src.Host.FileName(ArchiveFileKinds.Cs).Name);
             var resources = HostResources.from(src);
             var typename = text.concat(src.Host.Owner.Format(), Chars.Underscore, src.Host.Name);
             var members = new HashSet<string>();

@@ -10,9 +10,9 @@ namespace Z0
     using static z;
     using static Konst;
 
-    public readonly struct PartFiles
+    public readonly struct PartFiles : ITextual
     {
-        public readonly FS.FolderPath Root;
+        const string FormatPattern = "{0}:{1} | {2}:{3} | {4}:{5}";
 
         public readonly FS.Files Parsed;
 
@@ -21,12 +21,18 @@ namespace Z0
         public readonly FS.Files Asm;
 
         [MethodImpl(Inline)]
-        public PartFiles(FS.FolderPath root, FS.Files parsed, FS.Files hex, FS.Files asm)
+        public PartFiles(FS.Files parsed, FS.Files hex, FS.Files asm)
         {
-            Root = root;
             Asm = asm;
             Hex = hex;
             Parsed = parsed;
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => string.Format(FormatPattern, nameof(Parsed), Parsed.Count, nameof(Hex), Hex.Count, nameof(Asm), Asm.Count);
+
+        public override string ToString()
+            => Format();
     }
 }

@@ -117,6 +117,10 @@ namespace Z0
             public bool Contains(string substring)
                 => Text.Contains(substring);
 
+            [MethodImpl(Inline)]
+            public bool StartsWith(string substring)
+                => Text.StartsWith(substring);
+
             /// <summary>
             /// Determines whether the filename, including the extension, ends with a specified substring
             /// </summary>

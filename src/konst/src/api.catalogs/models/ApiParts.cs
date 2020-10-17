@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct ApiPartSet : IApiPartSet
+    public readonly struct ApiPartSet : IApiParts
     {
         /// <summary>
         /// The root of the archive one which the api module set is predicated
@@ -24,13 +24,13 @@ namespace Z0
 
         public readonly SystemApiCatalog Api;
 
-        FS.Files IApiPartSet.ManagedSources
+        FS.Files IApiParts.ManagedSources
             => ManagedSources;
 
-        Assembly[] IApiPartSet.Components
+        Assembly[] IApiParts.Components
             => Components;
 
-        ISystemApiCatalog IApiPartSet.Api
+        ISystemApiCatalog IApiParts.Api
             => Api;
 
         public ApiPartSet(FS.FolderPath src)

@@ -13,15 +13,15 @@ namespace Z0
     using static z;
 
     [WfHost]
-    public sealed class EmitApiCodeBlocks : WfHost<EmitApiCodeBlocks>
+    public sealed class EmitParsedExtracts : WfHost<EmitParsedExtracts>
     {
         ApiHostUri HostUri;
 
         ApiMemberCodeBlocks MemberBlocks;
 
-        public static EmitApiCodeBlocks create(ApiHostUri uri, ApiMemberCodeBlocks src)
+        public static EmitParsedExtracts create(ApiHostUri uri, ApiMemberCodeBlocks src)
         {
-            var dst = new EmitApiCodeBlocks();
+            var dst = new EmitParsedExtracts();
             dst.HostUri = uri;
             dst.MemberBlocks = src;
             return dst;
@@ -32,14 +32,14 @@ namespace Z0
             if(MemberBlocks.Count == 0)
                 return;
 
-            using var step = new EmitApiCodeBlocksStep(wf, this, HostUri, MemberBlocks);
+            using var step = new EmitParsedExtractsStep(wf, this, HostUri, MemberBlocks);
             step.Run();
         }
     }
 
-    ref struct EmitApiCodeBlocksStep
+    ref struct EmitParsedExtractsStep
     {
-        public ApiCodeRow[] Emitted;
+        public ApiParseBlock[] Emitted;
 
         public ApiCodeTableSaved Event;
 
@@ -51,30 +51,33 @@ namespace Z0
 
         readonly ApiMemberCodeBlocks Source;
 
-        readonly FS.FilePath Target;
-
-        public EmitApiCodeBlocksStep(IWfShell wf, WfHost host, ApiHostUri uri, ApiMemberCodeBlocks src)
+        public EmitParsedExtractsStep(IWfShell wf, WfHost host, ApiHostUri uri, ApiMemberCodeBlocks src)
         {
-            Wf = wf;
             Host = host;
+            Wf = wf.WithHost(Host);
             Uri = uri;
             Source = src;
-            Target = FS.path(Wf.Paths.CaptureArchive(uri).HostX86Path.Name);
             Emitted = default;
             Event = default;
-            Wf.Created(Host.Id);
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host.Id);
+            Wf.Disposed();
         }
 
         public void Run()
         {
-            Emitted = ApiCodeBlocks.save(Source.Storage.Map(x => new ApiCodeBlock(x.Uri, x.Address, x.Encoded)), Target);
-            Event = new ApiCodeTableSaved(Host.Id, Uri, Emitted, Target, Wf.Ct);
-            Wf.Raise(Event);
+            var target = Wf.Db().ParsedExtractFile(Uri);
+            Emitted = ApiParseReport.create(Uri, Source);
+            if(ApiParseReport.save(Emitted,target))
+                Wf.EmittedTable<ApiParseBlock>(Emitted.Length, target);
+            else
+                Wf.Error($"Could not save {target}");
+
+            //Emitted = ApiCodeBlocks.save(Source.Storage.Map(x => new ApiCodeBlock(x.Uri, x.Address, x.Encoded)), target);
+            //Event = new ApiCodeTableSaved(Host.Id, Uri, Emitted, target, Wf.Ct);
         }
     }
 }

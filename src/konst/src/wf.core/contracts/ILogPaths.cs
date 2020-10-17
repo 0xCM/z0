@@ -60,19 +60,19 @@ namespace Z0
         /// The executing application's standard out log filename
         /// </summary>
         FileName AppStatusLogName
-            => FileName.define($"{ShellName}.stdout", FileExtensions.StatusLog);
+            => FileName.define($"{AppName}.stdout", FileExtensions.StatusLog);
 
         /// <summary>
         /// The executing application's standard out log filename
         /// </summary>
         FileName CaseLogName
-            => FileName.define($"{ShellName}.cases", FileExtensions.Csv);
+            => FileName.define($"{AppName}.cases", FileExtensions.Csv);
 
         /// <summary>
         /// The executing application's error log filename
         /// </summary>
         FileName AppErrorLogName
-            => FileName.define($"{ShellName}.errors", FileExtensions.StatusLog);
+            => FileName.define($"{AppName}.errors", FileExtensions.StatusLog);
 
         FilePath TestErrorPath
             => TestLogRoot + ErrorLogFolder + AppErrorLogName;
@@ -83,7 +83,7 @@ namespace Z0
         FilePath CaseLogPath
             => TestLogRoot + StatusLogFolder + CaseLogName;
 
-        string ShellName
+        string AppName
             => Assembly.GetEntryAssembly().GetSimpleName();
     }
 }

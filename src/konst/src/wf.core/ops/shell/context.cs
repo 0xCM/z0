@@ -20,13 +20,18 @@ namespace Z0
         [Op]
         public static IWfContext context()
         {
-            var control = Assembly.GetEntryAssembly();
-            var args = Environment.GetCommandLineArgs();
-            return context(control, parts(control, args), args);
+            var control = WfShell.control();
+            var args = WfShell.args();
+            var parts = WfShell.parts(control, args);
+            return context(control, parts, args);
         }
 
         [MethodImpl(Inline), Op]
-        static IWfContext context(Assembly control, ApiPartSet modules, params string[] args)
-            => new WfContext(control, args, modules);
+        public static IWfContext context(Assembly control, IApiParts parts, string[] args, IWfPaths paths)
+            => new WfContext(control, args, parts, paths);
+
+        [MethodImpl(Inline), Op]
+        public static IWfContext context(Assembly control, IApiParts parts, string[] args)
+            => new WfContext(control, args, parts);
     }
 }

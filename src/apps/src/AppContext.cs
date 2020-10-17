@@ -20,6 +20,8 @@ namespace Z0
 
         public IWfPaths Paths {get;}
 
+        public IApiParts ApiParts {get;}
+
         public event Action<IAppMsg> Next;
 
         public AppContext(IWfPaths paths, ISystemApiCatalog parts, IPolyrand random, IJsonSettings settings, IAppMsgQueue queue)
@@ -30,9 +32,7 @@ namespace Z0
             Settings = settings ?? JsonSettings.Load(Paths.AppConfigPath);
             MessageQueue = queue;
             Api = parts;
+            ApiParts = WfShell.parts();
         }
-
-        public PartId[] PartIdentities
-            => Api.PartIdentities;
     }
 }

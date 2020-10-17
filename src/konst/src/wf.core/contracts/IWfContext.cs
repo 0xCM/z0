@@ -9,32 +9,32 @@ namespace Z0
 
     public interface IWfContext : ITextual
     {
+        IApiParts ApiParts
+             => WfShell.parts();
+
         CorrelationToken Ct
             => z.correlate(Control.Id());
 
         IWfPaths Paths
-            => Z0.WfPaths.Default;
+            => WfPaths.create();
 
         IJsonSettings Settings
             => JsonSettings.Load(Paths.AppConfigPath);
 
-        FS.FolderPath CaptureRoot
-            => FS.dir((Paths.LogRoot + FolderName.Define("capture/artifacts")).Name);
-
         string[] Args
              => Environment.GetCommandLineArgs();
 
-        string ShellName
+        string AppName
             => Control.GetSimpleName();
 
         string ITextual.Format()
-            => ShellName;
+            => AppName;
 
         Assembly Control
             => Assembly.GetEntryAssembly();
     }
 
-    public interface IShellContext<C> : IWfContext, IStateful<C>
+    public interface IWfContext<C> : IWfContext, IStateful<C>
     {
 
     }

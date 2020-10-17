@@ -15,8 +15,6 @@ namespace Z0
         public ApiHostUri ApiHost;
 
         public ApiMemberCodeBlocks Source;
-
-        public FS.FilePath Target;
     }
 
     public struct EmitHostCodeBlockPayload
@@ -25,31 +23,29 @@ namespace Z0
     }
 
     [WfHost]
-    public sealed class EmitHostCodeBlockReport : WfHost<EmitHostCodeBlockReport,EmitHostCodeBlockSpec,EmitHostCodeBlockPayload>
+    public sealed class EmitHostHex : WfHost<EmitHostHex,EmitHostCodeBlockSpec,EmitHostCodeBlockPayload>
     {
-        public static ref EmitHostCodeBlockPayload run(IWfShell wf, ApiHostUri uri, in ApiMemberCodeBlocks src, FS.FilePath dst, out EmitHostCodeBlockPayload payload)
+        public static ref EmitHostCodeBlockPayload run(IWfShell wf, ApiHostUri uri, in ApiMemberCodeBlocks src, out EmitHostCodeBlockPayload payload)
         {
             var spec = new EmitHostCodeBlockSpec();
             spec.ApiHost = uri;
             spec.Source = src;
-            spec.Target = dst;
             var host = create();
             host.Run(wf, spec, out payload);
             return ref payload;
-
         }
 
         protected override ref EmitHostCodeBlockPayload Execute(IWfShell wf, in EmitHostCodeBlockSpec spec, out EmitHostCodeBlockPayload dst)
         {
             dst = default;
-            using var step = new EmitHostCodeBlockReportStep(wf, this, spec);
+            using var step = new EmitHostHexStep(wf, this, spec);
             step.Run();
             dst.Emitted = step.Emitted;
             return ref dst;
         }
     }
 
-    ref struct EmitHostCodeBlockReportStep
+    ref struct EmitHostHexStep
     {
         readonly IWfShell Wf;
 
@@ -60,34 +56,35 @@ namespace Z0
         public ApiParseBlock[] Emitted;
 
         [MethodImpl(Inline)]
-        public EmitHostCodeBlockReportStep(IWfShell wf, WfHost host, EmitHostCodeBlockSpec spec)
+        public EmitHostHexStep(IWfShell wf, WfHost host, EmitHostCodeBlockSpec spec)
         {
-            Wf = wf;
             Host = host;
+            Wf = wf.WithHost(Host);
             Emitted = default;
             Spec = spec;
-            Wf.Created(Host);
+            Wf.Created();
+        }
+
+        public void Dispose()
+        {
+            Wf.Disposed();
         }
 
         public void Run()
         {
             try
             {
-                Wf.Running(Host, Spec.ApiHost);
+                Wf.Running(Spec.ApiHost);
                 var report = ApiParseReport.create(Spec.ApiHost, Spec.Source);
-                ApiParseReport.save(report, Spec.Target);
+                var target = Wf.Db().CapturedHexFile(Spec.ApiHost);
+                ApiParseReport.save(report, target);
                 Emitted = report;
-                Wf.EmittedTable<ApiParseBlock>(Host, Emitted.Length, Spec.Target);
+                Wf.EmittedTable<ApiParseBlock>(Emitted.Length, target);
             }
             catch(Exception e)
             {
-                Wf.Error(Host, e);
+                Wf.Error(e);
             }
-        }
-
-        public void Dispose()
-        {
-            Wf.Disposed(Host);
         }
     }
 }

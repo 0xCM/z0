@@ -26,8 +26,7 @@ namespace Z0
         public static ref ApiCodeBlockIndex run(IWfShell wf, IWfCaptureState state, out ApiCodeBlockIndex dst)
         {
             var host = new BuildCaptureIndex();
-            var files = Archives.partfiles(wf.CaptureRoot);
-            using var step = new BuildCaptureIndexStep(wf, host, state, files);
+            using var step = new BuildCaptureIndexStep(wf, host, state);
             step.Run();
             dst = step.Target;
             return ref dst;
@@ -38,42 +37,37 @@ namespace Z0
     {
         readonly IWfShell Wf;
 
-        readonly PartFiles SourceFiles;
-
         public ApiCodeBlockIndex Target;
-
-        readonly List<Instruction> Buffer;
 
         readonly IWfCaptureState State;
 
         readonly WfHost Host;
 
-        public BuildCaptureIndexStep(IWfShell wf, WfHost host, IWfCaptureState state, PartFiles src)
+        public BuildCaptureIndexStep(IWfShell wf, WfHost host, IWfCaptureState state)
         {
-            Wf = wf;
             Host = host;
+            Wf = wf.WithHost(Host);
             State = state;
-            SourceFiles = src;
             Target = default;
-            Buffer = list<Instruction>(2000);
-            Wf.Created(Host);
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host.Id);
+            Wf.Disposed();
         }
 
         void BuildIndex()
         {
-            Target = CodeBlockIndexer.index(Wf, Host, SourceFiles);
+            using var builder = new ApiIndexBuilder(Wf, Host);
+            builder.Run();
+            Target = builder.Product;
             Wf.Raise(new PartIndexCreated(Host, Target, Wf.Ct));
         }
 
-
         public void Run()
         {
-            Wf.Running(Host);
+            Wf.Running();
 
             try
             {
@@ -84,16 +78,14 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(Host,e);
+                Wf.Error(e);
             }
 
-            Wf.Ran(Host);
+            Wf.Ran();
         }
 
         Span<ApiPartRoutines> DecodeParts(in ApiCodeBlockIndex src)
         {
-            Wf.Status(Host, text.format("Decoding {0} entries from {1} parts", src.EntryCount, src.Parts.Length));
-
             var parts = src.Parts;
             var partCount = parts.Length;
             var dst = alloc<ApiPartRoutines>(partCount);
@@ -114,7 +106,7 @@ namespace Z0
                     var hosts = src.Hosts.Where(h => h.Owner == part);
                     var hostCount = hosts.Length;
 
-                    Wf.Status(Host, text.format("Decoding {0}", part.Format()));
+                    Wf.Status(text.format("Decoding {0}", part.Format()));
 
                     for(var j=0; j<hostCount; j++)
                     {
@@ -130,11 +122,11 @@ namespace Z0
                     dst[i] = new ApiPartRoutines(part, hostFx.ToArray());
 
                     kParts++;
-                    Wf.Status(Host, text.format(RP.PSx4, kParts, kHosts, kMembers, kFx));
+                    Wf.Status(text.format(RP.PSx4, kParts, kHosts, kMembers, kFx));
                 }
             }
 
-            Wf.Status(Host, text.format("Decoded {0} entries from {1} parts", src.EntryCount, src.Parts.Length));
+            Wf.Status(text.format("Decoded {0} entries from {1} parts", src.EntryCount, src.Parts.Length));
             return dst;
         }
 
@@ -146,18 +138,13 @@ namespace Z0
                 Wf.Running(id);
 
                 var processor = new ProcessAsm(State, encoded);
-                var parts = Wf.Api.PartIdentities;
                 var result = processor.Process();
-                Wf.Raise(new ProcessedParts(id, parts, result, Wf.Ct));
+                Wf.Raise(new ProcessedPartAsm(id, Wf.Api.PartIdentities, result, Wf.Ct));
 
                 var sets = result.View;
                 var count = result.Count;
                 for(var i=0; i<count; i++)
-                {
-                    ref readonly var set = ref skip(sets,i);
-                    Process(set);
-                }
-
+                    Process(skip(sets,i));
             }
             catch(Exception e)
             {
@@ -170,19 +157,14 @@ namespace Z0
             var count = src.Count;
             var records = span(src.Sequenced);
             var dst = Wf.Db().Table(AsmRow.TableId, src.Key.ToString());
+
             var formatter = Formatters.dataset<AsmTableField>();
             using var writer = dst.Writer();
             writer.WriteLine(Table.header53<AsmTableField>());
             for(var i=0; i<count; i++)
                 writer.WriteLine(AsmTables.format(skip(records,i), formatter).Render());
 
-            Wf.Emitted(Host, dst);
-        }
-
-        void Process(in ApiPartRoutines src)
-        {
-            ProcessInstructions.create().Run(Wf, src);
-            InstructionProcessors.ProcessCalls(Wf, src);
+            Wf.EmittedTable<AsmRow>(count, dst);
         }
 
         void Process(ReadOnlySpan<ApiPartRoutines> src)
@@ -196,8 +178,15 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(Host,e);
+                Wf.Error(e);
             }
         }
+
+        void Process(in ApiPartRoutines src)
+        {
+            ProcessInstructions.create().Run(Wf, src);
+            InstructionProcessors.ProcessCalls(Wf, src);
+        }
+
     }
 }

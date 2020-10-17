@@ -57,33 +57,28 @@ namespace Z0
         {
             Wf.Running();
             Clear();
-            Capture(Archives.capture(Config.TargetArchive.Root));
-            Wf.Ran();
-        }
-
-        void Capture(IPartCapturePaths dst)
-        {
             var catalogs = @readonly(Config.Api.Catalogs);
             var count = catalogs.Length;
             for(var i=0; i<count; i++)
-                CapturePart(skip(catalogs,i), dst);
+                CapturePart(skip(catalogs,i));
+            Wf.Ran();
         }
 
-        void CapturePart(IApiPartCatalog src, IPartCapturePaths dst)
+        void CapturePart(IApiPartCatalog src)
         {
             if(src.IsEmpty)
                 return;
 
-            CaptureHosts(src,dst);
+            CaptureHosts(src);
         }
 
-        void CaptureHosts(IApiPartCatalog src, IPartCapturePaths dst)
+        void CaptureHosts(IApiPartCatalog src)
         {
-            Capture(src.ApiDataTypes, dst);
-            Capture(src.OperationHosts, dst);
+            Capture(src.ApiDataTypes);
+            Capture(src.OperationHosts);
         }
 
-        void Capture(ApiHost[] src, IPartCapturePaths dst)
+        void Capture(ApiHost[] src)
         {
             var count = src.Length;
             var hosts = @readonly(src);
@@ -91,14 +86,14 @@ namespace Z0
                 CaptureApiHost.create(State,skip(hosts,i)).Run(Wf);
         }
 
-        void Capture(ApiDataTypes src, IPartCapturePaths dst)
+        void Capture(ApiDataTypes src)
         {
             using var step = new ExtractMembers(Wf, new ExtractMembersHost());
             var extracted = @readonly(step.Extract(src).GroupBy(x => x.Host).Select(x => kvp(x.Key, x.Array())).Array());
             for(var i=0; i<extracted.Length; i++)
             {
                 ref readonly var x = ref skip(extracted,i);
-                using var emit = new EmitCaptureArtifactsStep(State, new EmitCaptureArtifacts(), x.Key, x.Value, dst);
+                using var emit = new EmitCaptureArtifactsStep(State, new EmitCaptureArtifacts(), x.Key, x.Value);
                 emit.Run();
             }
         }

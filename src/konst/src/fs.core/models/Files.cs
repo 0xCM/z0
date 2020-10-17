@@ -92,6 +92,8 @@ namespace Z0
 
             IEnumerator IEnumerable.GetEnumerator()
                 => ViewNonEmpty.ToEnumerable().GetEnumerator();
+
+            public static Files Empty => new Files(sys.empty<FilePath>());
         }
     }
 }

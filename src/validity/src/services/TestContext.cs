@@ -25,12 +25,20 @@ namespace Z0
         {
             DiagnosticMode = diagnostic;
         }
+
+        protected TestContext()
+        {
+            ApiParts = WfShell.parts();
+        }
+
+        public IApiParts ApiParts {get;}
     }
 
     public abstract class TestContext<U> : TestContext, ITestContext<U>
         where U : TestContext<U>
     {
         public ITestContext Context {get;}
+
 
         public virtual IPolyrand Random {get;}
             = Polyrand.WyHash64(PolySeed64.Seed00);

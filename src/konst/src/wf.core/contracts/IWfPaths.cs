@@ -8,15 +8,16 @@ namespace Z0
 
     using static ArchiveFolderNames;
 
-    using FN = ArchiveFolderNames;
-
     public interface IWfPaths : ILogPaths
     {
+        FS.FolderPath DbRoot
+            => Env.DbRoot;
+
         ICaptureArchive PartCaptureArchive
-            => Archives.capture(FS.dir(LogRoot.Name) + FS.folder(FN.Capture));
+            => Archives.capture(DbRoot + FS.folder(Capture));
 
         ICaptureArchive CaptureArchive()
-            => Archives.capture(FS.dir(LogRoot.Name) + FS.folder(Capture) + FS.folder(ArtifactFolder));
+            => Archives.capture(DbRoot + FS.folder(Capture));
 
         IHostCaptureArchive CaptureArchive(ApiHostUri host)
             => HostCaptureArchive.create(CaptureArchive().ArchiveRoot, host);
@@ -25,7 +26,7 @@ namespace Z0
         /// The executing application's data directory
         /// </summary>
         FS.FolderPath AppDataDir
-            => (LogDir + FS.folder(AppsFolder)) + FS.folder(ShellName);
+            => (LogDir + FS.folder(AppsFolder)) + FS.folder(AppName);
 
         /// <summary>
         /// The path to the root development directory
@@ -85,7 +86,7 @@ namespace Z0
         /// The executing application's folder name
         /// </summary>
         FolderName AppFolder
-            => FolderName.Define(ShellName);
+            => FolderName.Define(AppName);
 
         /// <summary>
         /// The application-relative source code directory
@@ -118,17 +119,11 @@ namespace Z0
             => TestLogRoot + TestDataFolder;
 
         /// <summary>
-        /// The name of the entry assembly
-        /// </summary>
-        string AppName
-            => Part.AppName;
-
-        /// <summary>
         /// Creates a provider rooted at the current root directory for another application
         /// </summary>
         /// <param name="dst">The target app id</param>
         IWfPaths ForApp()
-            => new WfPaths(LogDir);
+            => WfPaths.create(LogDir);
 
         /// <summary>
         /// Defines a test-specific data folder

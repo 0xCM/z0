@@ -5,13 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
     using System.Reflection;
 
     using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     using static Konst;
 
+    [Free]
     public interface IWfInit
     {
         /// <summary>
@@ -22,7 +22,8 @@ namespace Z0
         /// <summary>
         /// The input data archive configuration
         /// </summary>
-        IApiPartSet ApiParts {get;}
+        IApiParts ApiParts
+            => Shell.ApiParts;
 
         /// <summary>
         /// The entry assembly

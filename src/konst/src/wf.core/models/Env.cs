@@ -20,6 +20,8 @@ namespace Z0
 
         public FS.FolderPath ArchiveRoot;
 
+        public static FS.FolderPath DbRoot => FS.dir("j:\\database");
+
         [MethodImpl(Inline)]
         public Env(EnvVar<FS.FolderPath> log, EnvVar<FS.FolderPath> dev, EnvVar<FS.FolderPath> archive)
         {

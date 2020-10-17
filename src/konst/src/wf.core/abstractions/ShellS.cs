@@ -44,7 +44,7 @@ namespace Z0
         /// The default application path collection
         /// </summary>
         protected static IWfPaths AppPaths
-            => Z0.WfPaths.Default;
+            => WfPaths.create();
 
         /// <summary>
         /// The shell terminal

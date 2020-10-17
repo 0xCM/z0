@@ -10,16 +10,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct WfShell<S> : IWfShell<S>
+    partial struct WfShell
     {
-        readonly Paired<WfShell,S> Data;
-
-        public IWfShell Shell => Data.Left;
-
-        public S State => Data.Right;
-
-        [MethodImpl(Inline)]
-        public WfShell(WfShell wf, S state)
-            => Data = (wf,state);
+        [MethodImpl(Inline), Op]
+        public static string[] args()
+            => Environment.GetCommandLineArgs();
     }
 }

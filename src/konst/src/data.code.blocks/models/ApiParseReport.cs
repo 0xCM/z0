@@ -18,9 +18,6 @@ namespace Z0
         public ApiHostUri ApiHost {get;}
 
         public static ParseResult<ApiParseBlock[]> load(FS.FilePath src)
-            => load(FilePath.Define(src.Name));
-
-        static ParseResult<ApiParseBlock[]> load(FilePath src)
         {
             var attempts = src.ReadLines().Skip(1).Select(ApiParseReport.row);
             var failed = attempts.Where(r => !r.Succeeded);
@@ -28,7 +25,7 @@ namespace Z0
             if(failed.Length != 0 && success.Length == 0)
                 return ParseResult.Fail<ApiParseBlock[]>(src.Name, failed[0].Reason);
             else
-                return ParseResult.Success(src.Name, success);
+                return ParseResult.Success<ApiParseBlock[]>(src.Name, success);
         }
 
         static ApiParseBlock record(in ApiMemberCode extract, uint seq)
