@@ -10,9 +10,9 @@ namespace Z0
     using System.Xml;
     using System.IO;
 
-    public readonly struct Commented
+    public readonly struct Comments
     {
-        public enum DocTargetKind
+        public enum CommentTargetKind : byte
         {
             None = 0,
 
@@ -25,15 +25,20 @@ namespace Z0
             Property = 4,
         }
 
-        public readonly struct SummaryComment
+        [Table(TableId, FieldCount)]
+        public struct SummaryComment
         {
-            public readonly DocTargetKind Kind;
+            public const string TableId = "comments";
 
-            public readonly string Identifer;
+            public const byte FieldCount = 3;
 
-            public readonly string Summary;
+            public CommentTargetKind Kind;
 
-            public SummaryComment(DocTargetKind kind, string identifier, string summary)
+            public string Identifer;
+
+            public string Summary;
+
+            public SummaryComment(CommentTargetKind kind, string identifier, string summary)
             {
                 Kind = kind;
                 Identifer = identifier;
@@ -41,46 +46,40 @@ namespace Z0
             }
         }
 
-        static DocTargetKind kind(char src)
+        static CommentTargetKind kind(char src)
             => src switch {
-                'T' => DocTargetKind.Type,
-                'M' => DocTargetKind.Method,
-                'P' => DocTargetKind.Property,
-                'F' => DocTargetKind.Field,
-                _ => DocTargetKind.None,
+                'T' => CommentTargetKind.Type,
+                'M' => CommentTargetKind.Method,
+                'P' => CommentTargetKind.Property,
+                'F' => CommentTargetKind.Field,
+                _ => CommentTargetKind.None,
             };
 
         const string Sep = "| ";
 
         static string format(SummaryComment src)
-        {
-            return text.concat(src.Kind.ToString().PadRight(12), Sep, src.Identifer.PadRight(70), Sep, src.Summary);
-        }
+            => text.concat(src.Kind.ToString().PadRight(12), Sep, src.Identifer.PadRight(70), Sep, src.Summary);
 
         public static Dictionary<PartId, Dictionary<string,string>> collect(IWfShell wf)
         {
-            var docs = wf.ResourceRoot + FolderName.Define("docs");
-            docs.Clear();
+            var dir = wf.Db().TableDir<SummaryComment>();
             var src = collect(wf, wf.ApiParts.ManagedSources);
             var dst = new Dictionary<PartId, Dictionary<string,SummaryComment>>();
             foreach(var part in src.Keys)
             {
-                var path = docs + FileName.define(part.Format(), FileExtensions.Csv);
-                var partDocs = new Dictionary<string, SummaryComment>();
-                dst[part] = partDocs;
+                var path = wf.Db().Table<SummaryComment>(part);
+                var docs = new Dictionary<string, SummaryComment>();
+                dst[part] = docs;
                 using var writer = path.Writer();
 
                 var kvp = src[part];
                 foreach(var key in kvp.Keys)
                 {
-                    var member = parse(key, kvp[key])
-                                .OnSuccess(d => partDocs[d.Identifer] = d);
+                    var member = parse(key, kvp[key]).OnSuccess(d => docs[d.Identifer] = d);
                     if(member.Succeeded)
-                    {
-                        var line = format(member.Value);
-                        writer.WriteLine(line);
-                    }
+                        writer.WriteLine(format(member.Value));
                 }
+                wf.EmittedTable<SummaryComment>(kvp.Count, path);
             }
             return src;
         }
@@ -88,12 +87,14 @@ namespace Z0
         static Dictionary<PartId, Dictionary<string,string>> collect(IWfShell wf, FS.FilePath[] paths)
         {
             var dst = new Dictionary<PartId, Dictionary<string,string>>();
+            var t = default(SummaryComment);
             foreach(var path in paths)
             {
+
                 var id = path.Owner;
                 if(id.IsSome())
                 {
-                    var xmlfile = path.ChangeExtension(FS.ext("xml"));
+                    var xmlfile = path.ChangeExtension(ArchiveFileKinds.Xml);
                     if(xmlfile.Exists)
                     {
                         var data = xmlfile.ReadText();
@@ -101,12 +102,11 @@ namespace Z0
                         if(parsed.Count != 0)
                         {
                             dst[id] = parsed;
-                            wf.Status(typeof(SummaryComment), $"Parsed {dst[id].Count} entries from {xmlfile}");
+                            wf.ProcessedFile(path, t, dst[id].Count);
                         }
                     }
                 }
             }
-
             return dst;
         }
 

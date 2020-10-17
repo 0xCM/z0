@@ -81,6 +81,7 @@ namespace Z0
         public FS.FilePath Table(string id)
             => DbPaths.TableRoot() + FS.file(id,FileKind.Csv);
 
+
         public FS.FilePath Table<K>(string id, K kind)
             where K : unmanaged,  IFileKind<K>
                 => DbPaths.TableRoot() + FS.file(id, kind.Ext);
@@ -107,6 +108,14 @@ namespace Z0
             => t.Tag<TableAttribute>().MapValueOrElse(
                     a => Table(a.TableId),
                     () => Table(t.Name));
+
+        public FS.FolderPath TableDir(string id)
+            => DbPaths.TableRoot() + FS.folder(id);
+
+        public FS.FolderPath TableDir(Type t)
+            => t.Tag<TableAttribute>().MapValueOrElse(
+                    a => TableDir(a.TableId),
+                    () => TableDir(t.Name));
 
         public FS.FilePath Table<S>(Type t, S subject)
             => t.Tag<TableAttribute>().MapValueOrElse(

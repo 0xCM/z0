@@ -17,9 +17,8 @@ namespace Z0
     using Caller = System.Runtime.CompilerServices.CallerMemberNameAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-
     [ApiHost]
-    public readonly partial struct ApiCode
+    public readonly partial struct ApiCodeIndices
     {
         [Op]
         public static ApiHostMemberCode index(IApiMemberLocator locator, ISystemApiCatalog api, ApiHostUri host, FilePath src)
@@ -82,8 +81,8 @@ namespace Z0
         }
 
         [Op]
-        public static ApiCodeIndex index(ApiMemberIndex members, ApiOpIndex<ApiCodeBlock> code)
-            => ApiCodeIndex.create(members,code);
+        public static ApiMemberCodeIndex index(ApiMemberIndex members, ApiOpIndex<ApiCodeBlock> code)
+            => ApiMemberCodeIndex.create(members,code);
 
         /// <summary>
         /// Creates an operation index from an api member span, readonly that is

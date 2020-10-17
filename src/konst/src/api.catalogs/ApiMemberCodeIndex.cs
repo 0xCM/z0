@@ -15,7 +15,7 @@ namespace Z0
     /// <summary>
     /// Correlates operation identifiers and coded members
     /// </summary>
-    public readonly struct ApiCodeIndex : IApiView<ApiCodeIndex,ApiOpIndex<ApiMemberCode>>
+    public readonly struct ApiMemberCodeIndex : IApiView<ApiMemberCodeIndex,ApiOpIndex<ApiMemberCode>>
     {
         static ApiOpIndex<(L left, R right)> intersect<L,R>(IApiOpIndex<L> left, IApiOpIndex<R> right)
         {
@@ -29,16 +29,16 @@ namespace Z0
                 var key = keylist[i];
                 entries[i] = (key, (left[key], right[key]));
              }
-             return ApiCode.index(entries);
+             return ApiCodeIndices.index(entries);
          }
 
-        internal static ApiCodeIndex create(ApiMemberIndex members, ApiOpIndex<ApiCodeBlock> code)
+        internal static ApiMemberCodeIndex create(ApiMemberIndex members, ApiOpIndex<ApiCodeBlock> code)
         {
             var apicode = from pair in intersect(members, code).Enumerated
                           let l = pair.Item1
                           let r = pair.Item2
                           select new ApiMemberCode(r.left, r.right);
-            return new ApiCodeIndex(create(apicode.Select(c => (c.Id, c))));
+            return new ApiMemberCodeIndex(create(apicode.Select(c => (c.Id, c))));
         }
 
         readonly IReadOnlyDictionary<OpIdentity,ApiMemberCode> Hashtable;
@@ -46,7 +46,7 @@ namespace Z0
         public ApiOpIndex<ApiMemberCode> Source {get;}
 
         [MethodImpl(Inline)]
-        public ApiCodeIndex(in ApiOpIndex<ApiMemberCode> code)
+        public ApiMemberCodeIndex(in ApiOpIndex<ApiMemberCode> code)
         {
             Source = code;
             Hashtable = code.Enumerated.ToDictionary();

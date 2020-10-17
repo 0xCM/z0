@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Collects statistics of encoded data known to a <see cref='ApiCodeBlockIndex'/>
     /// </summary>
-    public struct ApiCaptureMetrics
+    public struct ApiIndexMetrics
     {
         public uint PartCount;
 
@@ -30,9 +30,9 @@ namespace Z0
         public string Format()
             => text.format("{0}", new {PartCount, HostCount, AddressCount, FunctionCount, IdentityCount, ByteCount});
 
-        public static ApiCaptureMetrics from(ApiCodeBlockIndex src)
+        public static ApiIndexMetrics from(ApiCodeBlockIndex src)
         {
-            var stats = default(ApiCaptureMetrics);
+            var stats = default(ApiIndexMetrics);
             stats.PartCount = (uint)src.Parts.Length;
             stats.HostCount = (uint)src.Hosts.Length;
             stats.AddressCount =(uint)src.Locations.Length;

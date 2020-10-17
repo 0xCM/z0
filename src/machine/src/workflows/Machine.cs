@@ -48,7 +48,7 @@ namespace Z0
                 EmitImageConstants.create().Run(Wf);
                 EmitLocatedPartsHost.create().Run(Wf);
                 EmitStringRecords.create().Run(Wf);
-                EmitProjectDocsHost.create().Run(Wf);
+                EmitComments.create().Run(Wf);
                 EmitImageBlobs.create().Run(Wf);
                 EmitCilTables.create().Run(Wf);
                 EmitEnumCatalog.create().Run(Wf);

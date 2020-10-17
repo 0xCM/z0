@@ -293,12 +293,6 @@ namespace Z0
         void ProcessedFile<T,M>(FS.FilePath src, T kind, M metric)
             => Raise(new ProcessedFileEvent<T,M>(Host, src, kind, metric, Ct));
 
-        void Processed<T>(WfStepId step, DataFlow<T> flow)
-            => Raise(processed(step, flow, Ct));
-
-        void Processed<S,T>(WfStepId step, DataFlow<S,T> flow)
-            => Raise(processed(step, flow, Ct));
-
         void Row<T>(T content)
             where T : ITextual
                 => Raise(rows(content, Ct));

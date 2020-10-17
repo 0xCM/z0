@@ -30,28 +30,25 @@ namespace Z0
 
         readonly WfHost Host;
 
-        readonly FS.FolderPath TargetDir;
-
         readonly IPart[] Parts;
 
         [MethodImpl(Inline)]
         public EmitImageConstantsStep(IWfShell wf, WfHost host)
         {
-            Wf = wf;
             Host = host;
+            Wf = wf.WithHost(host);
             Parts = Wf.Api.Parts;
-            TargetDir = wf.Resources + FS.folder("constants");
-            Wf.Created(Host);
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
 
         public void Run()
         {
-            Wf.Running(Host);
+            Wf.Running();
 
             foreach(var part in Parts)
             {
@@ -61,11 +58,11 @@ namespace Z0
                 }
                 catch(Exception e)
                 {
-                    Wf.Error(Host, e);
+                    Wf.Error(e);
                 }
             }
 
-            Wf.Ran(Host);
+            Wf.Ran();
         }
 
         ReadOnlySpan<CliConstant> Read(IPart part)
@@ -76,9 +73,8 @@ namespace Z0
 
         void Emit(IPart part)
         {
-            var id = part.Id;
-            var dstPath = TargetDir + FS.file(id.Format(), DataExt);
-            Wf.Running(Host, dstPath.ToUri());
+            var target = Wf.Db().Table(CliConstant.TableId);
+            Wf.EmittingTable<CliConstant>(target);
 
             var data = Read(part);
             var count = data.Length;
@@ -88,10 +84,10 @@ namespace Z0
             for(var i=0u; i<count; i++)
                 format(skip(data,i), dst);
 
-            using var writer = dstPath.Writer();
+            using var writer = target.Writer();
             writer.Write(dst.Render());
 
-            Wf.Ran(Host, delimit(id, count));
+            Wf.EmittedTable<CliConstant>(count, target);
         }
 
         static ref readonly RecordFormatter<F,W> format(in CliConstant src, in RecordFormatter<F,W> dst, bool eol = true)

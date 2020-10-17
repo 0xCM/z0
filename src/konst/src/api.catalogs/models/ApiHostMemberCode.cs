@@ -6,9 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
 
     using static Konst;
 
@@ -25,10 +22,10 @@ namespace Z0
         /// <summary>
         /// The code-correlated members
         /// </summary>
-        public ApiCodeIndex Members {get;}
+        public ApiMemberCodeIndex Members {get;}
 
         [MethodImpl(Inline)]
-        public ApiHostMemberCode(ApiHostUri host, ApiCodeIndex members)
+        public ApiHostMemberCode(ApiHostUri host, ApiMemberCodeIndex members)
         {
             Host = host;
             Members = members;

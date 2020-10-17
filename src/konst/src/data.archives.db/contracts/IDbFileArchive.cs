@@ -58,6 +58,18 @@ namespace Z0
 
         FS.FilePath Table(Type t, PartId part);
 
+        FS.FilePath Table<T>(PartId part)
+            where T : struct
+                => Table(typeof(T), part);
+
+        FS.FolderPath TableDir(string id);
+
+        FS.FolderPath TableDir(Type t);
+
+        FS.FolderPath TableDir<T>()
+            where T : struct
+                => TableDir(typeof(T));
+
         Option<FilePath> Deposit<F,R,S>(R[] src, string id, S subject, FS.FileExt type)
             where F : unmanaged, Enum
             where R : struct, ITabular;
