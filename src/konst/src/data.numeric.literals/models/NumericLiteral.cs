@@ -8,36 +8,36 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     using NBK = NumericBaseKind;
-        
+
     /// <summary>
     /// Defines a (boxed) numeric literal relative to a specified base
     /// </summary>
     public readonly struct NumericLiteral : INumericLiteral<NumericLiteral>
     {
         public readonly string Name;
-        
+
         public readonly object Data;
 
         public readonly string Text;
 
         public readonly NBK Base;
-        
+
         [MethodImpl(Inline)]
-        public static NumericLiteral Base2(string Name, object Value, string Text)
+        public static NumericLiteral base2(string Name, object Value, string Text)
             => new NumericLiteral(Name, Value, Text, NBK.Base2);
 
         [MethodImpl(Inline)]
-        public static NumericLiteral Base10(string Name, object Value, string Text)
+        public static NumericLiteral base10(string Name, object Value, string Text)
             => new NumericLiteral(Name, Value, Text, NBK.Base10);
 
         [MethodImpl(Inline)]
-        public static NumericLiteral Base16(string Name, object Value, string Text)
+        public static NumericLiteral base16(string Name, object Value, string Text)
             => new NumericLiteral(Name, Value, Text, NBK.Base16);
 
         [MethodImpl(Inline)]
-        public static NumericLiteral Define(string Name, object Value, string Text, NBK NumericBase)
+        public static NumericLiteral define(string Name, object Value, string Text, NBK NumericBase)
             => new NumericLiteral(Name,Value,Text,NumericBase);
 
         [MethodImpl(Inline)]
@@ -47,7 +47,7 @@ namespace Z0
             Data = data ?? 0;
             Text = text ?? Data.ToString();
             Base = @base;
-        }        
+        }
 
         public bool IsEmpty
         {
@@ -60,20 +60,20 @@ namespace Z0
             [MethodImpl(Inline)]
             get => !IsEmpty;
         }
-        
+
         public bool HasValue
         {
             [MethodImpl(Inline)]
             get => Data != null && Data.GetType() != typeof(string);
         }
 
-        public Type SystemType 
+        public Type SystemType
         {
             [MethodImpl(Inline)]
             get => Data.GetType();
         }
 
-        public TypeCode TypeCode  
+        public TypeCode TypeCode
         {
             [MethodImpl(Inline)]
             get => Type.GetTypeCode(SystemType);
@@ -85,7 +85,7 @@ namespace Z0
             get => Empty;
         }
 
-        public bool IsEnum 
+        public bool IsEnum
         {
             [MethodImpl(Inline)]
             get => SystemType.IsEnum;
@@ -97,19 +97,19 @@ namespace Z0
             => Format();
 
         [MethodImpl(Inline)]
-        public bool Equals(NumericLiteral src)            
-            => object.Equals(Data, src.Data);        
+        public bool Equals(NumericLiteral src)
+            => object.Equals(Data, src.Data);
 
-        public static NumericLiteral Empty 
+        public static NumericLiteral Empty
             => new NumericLiteral(EmptyString, EmptyString, EmptyString, 0);
 
-        string ILiteral.Name 
+        string ILiteral.Name
             => Name;
 
-        object ILiteral.Data 
+        object ILiteral.Data
             => Data;
 
-        string ILiteral.Text 
+        string ILiteral.Text
             => Text;
     }
 }

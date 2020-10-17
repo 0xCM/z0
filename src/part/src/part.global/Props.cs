@@ -46,5 +46,8 @@ namespace Z0
         public const NK Integers = NK.Integers;
 
         public const NK AllNumeric = NK.All;
+
+        public static NotSupportedException no<T>()
+            => new NotSupportedException($"The type {typeof(T).Name} is not supported");
     }
 }

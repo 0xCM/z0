@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
-    public interface IAgentContext : IShellContext
+    public interface IAgentContext : IWfContext
     {
         IEnumerable<ISystemAgent> Members {get;}
 

@@ -13,8 +13,8 @@ namespace Z0
     partial struct Cmd
     {
         [MethodImpl(NotInline), Op]
-        public static string format(CmdLinePattern pattern, params ITextual[] args)
-            => string.Format(pattern.Text, args.Select(a => a.Format()));
+        public static string format(CmdLinePattern pattern, params object[] args)
+            => string.Format(pattern.Text, args);
 
         /// <summary>
         /// Renders a specified option as text
@@ -72,20 +72,20 @@ namespace Z0
                 dst.AppendLine(skip(view,i).Format());
         }
 
-        [Op]
-        public static string format(in CmdLine src)
-        {
-            var dst = text.build();
-            dst.Append(src.ToolName);
-            var count = src.OptionCount;
-            var options = src.Options.View;
-            for(var i=0; i<count; i++)
-            {
-                dst.Append(Space);
-                dst.Append(format(skip(options,i)));
-            }
+        // [Op]
+        // public static string format(in CmdLine src)
+        // {
+        //     var dst = text.build();
+        //     dst.Append(src.ToolName);
+        //     var count = src.OptionCount;
+        //     var options = src.Options.View;
+        //     for(var i=0; i<count; i++)
+        //     {
+        //         dst.Append(Space);
+        //         dst.Append(format(skip(options,i)));
+        //     }
 
-            return dst.ToString();
-        }
+        //     return dst.ToString();
+        // }
     }
 }

@@ -12,30 +12,24 @@ namespace Z0
     /// <summary>
     /// Lifts an enumeration literal to a type
     /// </summary>
-    public readonly struct TypedLiteral<E> : ITypedLiteral<E>
-        where E : unmanaged, Enum
+    public readonly struct TypedLiteral<T> : ITypedLiteral<T>
+        where T : unmanaged
     {
-        public readonly E LiteralClass;
-
         /// <summary>
         /// The classifying literal
         /// </summary>
-        public E Class
-        {
-            [MethodImpl(Inline)]
-            get => LiteralClass;
-        }
+        public T Class {get;}
 
         [MethodImpl(Inline)]
-        public static implicit operator E(TypedLiteral<E> t)
+        public static implicit operator T(TypedLiteral<T> t)
             => t.Class;
 
         [MethodImpl(Inline)]
-        public static implicit operator TypedLiteral<E>(E @class)
-            => new TypedLiteral<E>(@class);
+        public static implicit operator TypedLiteral<T>(T @class)
+            => new TypedLiteral<T>(@class);
 
         [MethodImpl(Inline)]
-        public TypedLiteral(E @class)
-            => LiteralClass = @class;
+        public TypedLiteral(T @class)
+            => Class = @class;
     }
 }

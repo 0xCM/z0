@@ -19,8 +19,7 @@ namespace Z0
         /// <typeparam name="T">The target type</typeparam>
         [MethodImpl(Inline)]
         public static T force<S,T>(S src)
-            => convert_u<S,T>(src);
-
+            => NumericCast.force<S,T>(src);
 
         /// <summary>
         /// Unconditionally converts the source value to a value of parametric numeric type
@@ -120,48 +119,5 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T force<T>(char src)
             => convert16c_u<T>(src);
-
-        [MethodImpl(Inline)]
-        static T convert_u<S,T>(S src)
-        {
-            if(typeof(S) == typeof(byte))
-                return force<T>(uint8(src));
-            else if(typeof(S) == typeof(ushort))
-                return force<T>(uint16(src));
-            else if(typeof(S) == typeof(uint))
-                return force<T>(uint32(src));
-            else if(typeof(S) == typeof(ulong))
-                return force<T>(uint64(src));
-            else
-                return convert_i<S,T>(src);
-        }
-
-        [MethodImpl(Inline)]
-        static T convert_i<S,T>(S src)
-        {
-            if(typeof(S) == typeof(sbyte))
-                return force<T>(int8(src));
-            else if(typeof(S) == typeof(short))
-                return force<T>(int16(src));
-            else if(typeof(S) == typeof(int))
-                return force<T>(int32(src));
-            else if(typeof(S) == typeof(long))
-                return force<T>(int64(src));
-            else
-                return convert_x<S,T>(src);
-        }
-
-        [MethodImpl(Inline)]
-        static T convert_x<S,T>(S src)
-        {
-            if(typeof(S) == typeof(float))
-                return force<T>(float32(src));
-            else if(typeof(S) == typeof(double))
-                return force<T>(float64(src));
-            else if(typeof(S) == typeof(char))
-                return force<T>(char16(src));
-            else
-                return no<S,T>();
-        }
     }
 }

@@ -9,6 +9,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using Z0.Tools;
 
     ref struct Runner
     {
@@ -43,11 +44,12 @@ namespace Z0
 
         public void Run()
         {
-            var o1 = Cmd.option("option1_name", "option1_value");
-            var o2 = Cmd.option("option2_name", "option2_value");
-            var o3 = Cmd.option("option3_name", "option3_value");
-            var options = Cmd.options(o1,o2,o3);
-            Wf.Status(options);
+            var archive = RuntimeArchive.create();
+            //Wf.Rows(archive.NativeLibraries.Storage);
+
+            var dll = archive.Root + FS.file("mscoredbi", ArchiveFileKinds.Dll);
+            var cmd = DumpBin.headers(dll, Wf.Db().ToolOutput(DumpBin.ToolId));
+            Wf.Status(cmd);
         }
     }
 }

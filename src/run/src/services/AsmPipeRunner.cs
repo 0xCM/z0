@@ -16,8 +16,8 @@ namespace Z0.Asm
     {
         public FilePath LogPath {get;}
 
-        public IShellPaths AppPaths
-            => Z0.ShellPaths.Default;
+        public IWfPaths AppPaths
+            => Z0.WfPaths.Default;
 
         readonly AsmFxHandlers Handlers;
 
@@ -65,7 +65,7 @@ namespace Z0.Asm
         public Dictionary<Mnemonic,Instruction[]> RunPipe(params PartId[] parts)
         {
             using var log = LogPath.Writer();
-            var paths = AppPaths.ForApp(PartId.Control);
+            var paths = AppPaths.ForApp();
             var capture = CaptureArchive(paths.AppCaptureRoot);
             var archive = UriBitsArchive(capture.X86Dir);
 

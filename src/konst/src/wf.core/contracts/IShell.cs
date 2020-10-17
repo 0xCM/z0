@@ -13,7 +13,7 @@ namespace Z0
     {
         PartId AppId {get;}
 
-        IShellContext Context {get;}
+        IWfContext Context {get;}
 
         void OnFatalError(Exception e);
 

@@ -17,7 +17,7 @@ namespace Z0
         /// <summary>
         /// The context root
         /// </summary>
-        IShellContext Shell {get;}
+        IWfContext Shell {get;}
 
         /// <summary>
         /// The input data archive configuration
@@ -51,7 +51,7 @@ namespace Z0
         /// <summary>
         /// The configured paths
         /// </summary>
-        IShellPaths Paths
+        IWfPaths Paths
             => Shell.Paths;
 
         /// <summary>

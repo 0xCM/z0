@@ -40,6 +40,12 @@ namespace Z0
             get => Data;
         }
 
+        public FS.FilePath[] Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
         public ref FS.FilePath this[ulong index]
         {
             [MethodImpl(Inline)]

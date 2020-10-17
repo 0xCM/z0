@@ -17,5 +17,7 @@ namespace Z0
         public const string Sources = "sources";
 
         public const string Stage = "stage";
+
+        public const string Tools = "tools";
     }
 }

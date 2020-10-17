@@ -19,12 +19,12 @@ namespace Z0
         /// <summary>
         /// The context root
         /// </summary>
-        public IShellContext Shell {get;}
+        public IWfContext Shell {get;}
 
         /// <summary>
         /// The configured paths
         /// </summary>
-        public IShellPaths Paths {get;}
+        public IWfPaths Paths {get;}
 
         /// <summary>
         /// The entry assembly
@@ -74,7 +74,7 @@ namespace Z0
         public ISystemApiCatalog Api {get;}
 
         [MethodImpl(Inline)]
-        public WfInit(IShellContext shell, IApiPartSet parts)
+        public WfInit(IWfContext shell, IApiPartSet parts)
         {
             Shell = shell;
             ApiParts = parts;

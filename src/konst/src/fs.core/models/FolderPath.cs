@@ -48,9 +48,13 @@ namespace Z0
                 get => Name.IsNonEmpty;
             }
 
-            [MethodImpl(Inline)]
             public FolderPath(PathPart name)
-                => Name = name;
+            {
+                if(name.EndsWith(Chars.FSlash) || name.EndsWith(Chars.BSlash))
+                    Name = name.RemoveLast();
+                else
+                    Name = name;
+            }
 
             [MethodImpl(Inline)]
             public static FolderPath operator +(FolderPath a, FolderName b)
@@ -59,7 +63,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public static FilePath operator +(FolderPath a, FileName b)
                 => new FilePath(text.format(FileJoinPattern, a, b));
-
 
             [MethodImpl(Inline)]
             public ListedFiles List(string pattern, bool recurse)

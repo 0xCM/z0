@@ -16,7 +16,7 @@ namespace Z0
     {
         protected IMultiSink Sink {get;}
 
-        protected Shell(IShellContext context, IMultiSink sink)
+        protected Shell(IWfContext context, IMultiSink sink)
         {
             Sink = sink;
             Context = context;
@@ -24,7 +24,7 @@ namespace Z0
             ProfileOptimization.StartProfile("Startup.Profile");
         }
 
-        protected Shell(IShellContext context)
+        protected Shell(IWfContext context)
             : this(context, term.sink(context.Ct))
         {
 
@@ -38,13 +38,13 @@ namespace Z0
 
         public string[] Args {get; private set;}
 
-        public IShellContext Context {get; private set;}
+        public IWfContext Context {get; private set;}
 
         /// <summary>
         /// The default application path collection
         /// </summary>
-        protected static IShellPaths AppPaths
-            => Z0.ShellPaths.Default;
+        protected static IWfPaths AppPaths
+            => Z0.WfPaths.Default;
 
         /// <summary>
         /// The shell terminal

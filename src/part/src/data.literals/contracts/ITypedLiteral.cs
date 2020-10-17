@@ -11,7 +11,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="E">The enum type that defines the classifier superset</typeparam>
     public interface ITypedLiteral<E> : IClassT<E>
-        where E : unmanaged, Enum
+        where E : unmanaged
     {
         E Class {get;}
 
@@ -25,7 +25,7 @@ namespace Z0
     /// <typeparam name="E">The enum type that defines the classifier superset</typeparam>
     /// <typeparam name="T">The numeric type refined by the enum</typeparam>
     public interface ITypedLiteral<E,T> : ITypedLiteral<E>
-        where E : unmanaged, Enum
+        where E : unmanaged
         where T : unmanaged
     {
         T Value {get;}
@@ -39,7 +39,7 @@ namespace Z0
     /// <typeparam name="T">The numeric type refined by the enum</typeparam>
     public interface ITypedLiteral<F,E,T> : ITypedLiteral<E,T>
         where F : struct, ITypedLiteral<F,E,T>
-        where E : unmanaged, Enum
+        where E : unmanaged
         where T : unmanaged
     {
 

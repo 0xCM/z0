@@ -20,5 +20,7 @@ namespace Z0
         public const string Memory = A.memory + dot + core;
 
         public const string PartExtensions = part + dot + extensions;
+
+        public const string LiteralKinds = literals + dot + kinds;
     }
 }

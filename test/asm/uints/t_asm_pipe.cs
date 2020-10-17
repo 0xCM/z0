@@ -46,7 +46,7 @@ namespace Z0.Asm
             var dSrc = ApiQuery.uri(typeof(math));
             var gSrc = ApiQuery.uri(typeof(gmath));
             var id = PartId.GMath;
-            var paths = AppPaths.ForApp(PartId.Control);
+            var paths = AppPaths.ForApp();
             var capture = AsmCheck.CaptureArchive(paths.AppCaptureRoot);
             var archive = Archives.hex(FS.dir(capture.X86Dir.Name));
             var direct = archive.Read(dSrc).ToArray();

@@ -15,7 +15,7 @@ namespace Z0
     /// <typeparam name="C">The shell context type</typeparam>
     public abstract class Shell<S,C> : Shell<S>
         where S : Shell<S,C>, new()
-        where C : IShellContext
+        where C : IWfContext
     {
         public new C Context {get;}
 

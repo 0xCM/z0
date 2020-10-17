@@ -18,6 +18,8 @@ namespace Z0
 
         FS.FolderPath DocRoot();
 
+        FS.FolderPath ToolRoot();
+
         FS.FolderPath SourceRoot<S>(S subject);
 
         FS.FolderPath StageRoot<S>(S subject);
@@ -65,6 +67,11 @@ namespace Z0
 
         Files ClearDocs(PartId part, Subject s1, Subject s2, FS.FileExt ext);
 
+        FS.FolderPath Tools(ToolId id)
+            => ToolRoot() + FS.folder(id.Name);
+
+        FS.FolderPath ToolOutput(ToolId id)
+            => Tools(id) + FS.folder("output");
     }
 
     public interface IDbFileArchive<H> : IDbFileArchive, IFileArchive<H>

@@ -14,20 +14,26 @@ namespace Z0
 
     public readonly struct CmdLine
     {
-        public string ToolName {get;}
+        public string Content {get;}
 
-        public CmdOptions Options {get;}
-
-        public CmdLine(string tool, CmdOptions options)
+        [MethodImpl(Inline)]
+        public CmdLine(string content)
         {
-            ToolName = tool;
-            Options = options;
+            Content = content;
         }
 
-        public byte OptionCount
-        {
-            [MethodImpl(Inline)]
-            get => Options.Count;
-        }
+        public string ToolName
+            => Content?.LeftOfFirst(Space) ?? EmptyString;
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdLine(string src)
+            => new CmdLine(src);
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Content;
+
+        public override string ToString()
+            => Format();
     }
 }

@@ -18,15 +18,15 @@ namespace Z0
     partial struct Literals
     {
         [MethodImpl(Inline)]
-        public static unsafe V numeric<E,V>(E e)
+        public static unsafe V numeric<E,V>(E src)
             where E : unmanaged, Enum
             where V : unmanaged
-                => Unsafe.Read<V>((V*)(&e));
+                => Unsafe.Read<V>((V*)(&src));
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static NumericLiteral<T> numeric<T>(string Name, T data, string Text, NBK @base)
             where T : unmanaged
-            => new NumericLiteral<T>(Name,data, Text, @base);
+                => new NumericLiteral<T>(Name,data, Text, @base);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T numeric<T>(FieldInfo f)
@@ -52,7 +52,7 @@ namespace Z0
                 else if(LiteralAttributes.HasBinaryLiteral(field))
                     dst.Add(LiteralAttributes.BinaryLiteral(field,vRaw));
                 else
-                    dst.Add(NumericLiteral.Base2(field.Name, vRaw, BitFormatter.bits(vRaw, tc)));
+                    dst.Add(NumericLiteral.base2(field.Name, vRaw, BitFormatter.bits(vRaw, tc)));
             }
             return dst.ToArray();
         }
@@ -76,12 +76,12 @@ namespace Z0
                             var indicator = NumericBases.indicator(component[0]);
 
                             if(indicator != 0)
-                                dst[i] = NumericLiteral.Define(src.Name, value, component.Substring(1), NumericBases.kind(indicator));
+                                dst[i] = NumericLiteral.define(src.Name, value, component.Substring(1), NumericBases.kind(indicator));
                             else
                             {
                                 indicator = NumericBases.indicator(component[length - 1]);
                                 indicator = indicator != 0 ? indicator : NBI.Base2;
-                                dst[i] = NumericLiteral.Define(
+                                dst[i] = NumericLiteral.define(
                                     src.Name,
                                     value,
                                     component.Substring(0, length - 1),

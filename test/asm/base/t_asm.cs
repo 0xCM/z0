@@ -48,7 +48,7 @@ namespace Z0.Asm
 
         protected ApiCodeBlock[] ReadHostBits(ApiHostUri host)
         {
-            var paths = AppPaths.ForApp(PartId.Control);
+            var paths = AppPaths.ForApp();
             var root = paths.AppCaptureRoot;
             var capture = Archives.capture(root);
             var archive = Archives.hex(FS.dir(root.Name));

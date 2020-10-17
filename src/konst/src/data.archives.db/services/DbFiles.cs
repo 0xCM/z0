@@ -63,6 +63,9 @@ namespace Z0
         public FS.FolderPath SourceRoot()
             => Root + FS.folder(PN.Sources);
 
+        public FS.FolderPath ToolRoot()
+            => Root + FS.folder(PN.Tools);
+
         public FS.FolderPath SourceRoot<S>(S subject)
             => DbPaths.SourceRoot() + FS.folder(subject.ToString());
 
@@ -153,6 +156,5 @@ namespace Z0
             where F : unmanaged, Enum
             where R : struct, ITabular
                 => T.store<F,R>().Save(src, T.renderspec<F>(), (FS.dir(root.Name) + FS.folder(id) + FS.file($"{id}.{subject}",type)));
-
     }
 }

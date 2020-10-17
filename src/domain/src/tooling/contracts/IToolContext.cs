@@ -11,7 +11,7 @@ namespace Z0
 
     public interface IToolContext : ICorrelated
     {
-        IShellPaths Paths {get;}
+        IWfPaths Paths {get;}
 
         string ProcessName
             => CurrentProcess.Name;

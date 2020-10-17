@@ -125,7 +125,21 @@ namespace Z0
             public bool EndsWith(string substring)
                 => Text.EndsWith(substring, NoCase);
 
+            /// <summary>
+            /// Determines whether the filename, including the extension, ends with a specified substring
+            /// </summary>
+            /// <param name="substring">The substring to match</param>
+            [MethodImpl(Inline)]
+            public bool EndsWith(char c)
+                => Text.EndsWith(c);
 
+            public PathPart RemoveLast()
+            {
+                if(Text.Length > 0)
+                    return new PathPart(Text.Substring(0, Text.Length - 1));
+                else
+                    return this;
+            }
         }
     }
 }

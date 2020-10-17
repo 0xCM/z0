@@ -223,7 +223,6 @@ namespace Z0
                 return maxval_f<T>();
         }
 
-
         [MethodImpl(Inline)]
         static T minval_i<T>()
             where T : unmanaged
@@ -345,7 +344,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return z.force<T>((double)Ones64u);
             else
-                 throw Unsupported.define<T>();
+                 throw no<T>();
        }
     }
 }

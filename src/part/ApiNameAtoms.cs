@@ -207,5 +207,6 @@ namespace Z0
 
          public const string part = nameof(part);
 
+         public const string literals = nameof(literals);
     }
 }
