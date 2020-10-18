@@ -9,8 +9,9 @@ namespace Z0.Asm
 
     using static Konst;
 
-    partial struct InstructionFactory
+    partial struct AsmSemantic
     {
+        [MethodImpl(Inline), Op]
         public AsmArgs<Xmm,Xmm> vmovdqu(Xmm xmm1, Xmm xmm2)
             => args(xmm1,xmm2);
     }

@@ -17,6 +17,8 @@ namespace Z0.Asm
 
         public const byte FieldCount = 5;
 
+        public const string RenderPattern = "| {0,-16} | {1,-16} | {2,-16} | {3,-16} | {4}";
+
         public MemoryAddress Source;
 
         public MemoryAddress Target;
@@ -26,5 +28,13 @@ namespace Z0.Asm
         public MemoryAddress TargetOffset;
 
         public BinaryCode Encoded;
+
+        [MethodImpl(Inline)]
+        public static string format(in AsmCallRecord src)
+            => string.Format(AsmCallRecord.RenderPattern, src.Source, src.Target, src.InstructionSize, src.TargetOffset, src.Encoded);
+
+        [MethodImpl(Inline)]
+        public static string header()
+            => string.Format(RenderPattern, nameof(Source), nameof(Target), nameof(InstructionSize), nameof(TargetOffset), nameof(Encoded));
     }
 }

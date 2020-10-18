@@ -34,15 +34,6 @@ namespace Z0
             public string Formatted;
 
             [MethodImpl(Inline)]
-            public Instruction(OpCode opCode, object operand, uint offset, string formatted)
-            {
-                OpCode = opCode;
-                Operand = operand;
-                Offset = offset;
-                Formatted = formatted;
-            }
-
-            [MethodImpl(Inline)]
             public string Format()
                 => Formatted;
 

@@ -82,7 +82,7 @@ namespace Z0
             if(!md.HasBody || !md.Body.HasInstructions)
                 return default;
 
-            var f = new CilFunction((int)md.MDToken.Raw, md.FullName, ToSpec(md.ImplAttributes), md.Body.Instructions.Map(api.ToSpec));
+            var f = new CilFunction((int)md.MDToken.Raw, md.FullName, ToSpec(md.ImplAttributes), md.Body.Instructions.Map(api.describe));
             md.FreeMethodBody();
             return f;
         }

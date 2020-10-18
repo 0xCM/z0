@@ -14,20 +14,6 @@ namespace Z0
 
     partial struct TableFields
     {
-        public static void header(in TableFieldIndex src, char Delimiter, StringBuilder dst)
-        {
-            var view = src.View;
-            var count = view.Length;
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var field = ref skip(view,i);
-                var width = field.RenderWidth;
-                var name = field.Name.PadRight(width);
-                var label = $"{Delimiter} {name} ";
-                dst.Append(label);
-            }
-        }
-
         [MethodImpl(Inline), Op]
         static object value(FieldInfo def, TypedReference tr)
             => def.GetValueDirect(tr);

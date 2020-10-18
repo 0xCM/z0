@@ -15,6 +15,19 @@ namespace Z0
 
     public struct RowFormatter
     {
+        public static void header(in TableFieldIndex src, char Delimiter, StringBuilder dst)
+        {
+            var view = src.View;
+            var count = view.Length;
+            for(var i=0u; i<count; i++)
+            {
+                ref readonly var field = ref skip(view,i);
+                dst.Append(Delimiter);
+                dst.Append(Space);
+                dst.Append(field.Name.PadRight(field.RenderWidth - 2));
+            }
+        }
+
         readonly Type TableType;
 
         readonly TableFieldIndex Fields;
@@ -50,7 +63,7 @@ namespace Z0
         public string FormatHeader()
         {
             var dst = text.build();
-            TableFields.header(Fields, Delimiter, dst);
+            header(Fields, Delimiter, dst);
             return dst.ToString();
         }
 

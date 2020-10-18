@@ -14,8 +14,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = ApiIdentify;
-
     public readonly struct ApiMetadataUri : ITextual
     {
         const byte PartIndex = 0;

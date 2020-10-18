@@ -11,6 +11,8 @@ namespace Z0.Asm.Types
 
     public readonly struct MOVZX
     {
+
+
         [MethodImpl(Inline)]
         public static MOVZX<S,T> create<S,T>(S src, T dst)
             => new MOVZX<S,T>(src,dst);

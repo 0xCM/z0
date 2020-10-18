@@ -8,10 +8,9 @@ namespace Z0.Asm
     using System.Runtime.CompilerServices;
 
     using static Konst;
-
     using static X86Registers;
 
-    partial struct InstructionFactory
+    partial struct AsmSemantic
     {
         /// <summary>
         /// CMP AL, imm8

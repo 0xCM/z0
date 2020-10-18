@@ -13,11 +13,20 @@ namespace Z0
     using static z;
 
     [WfHost]
-    public sealed class EmitCallIndex : WfHost<EmitCallIndex,ApiPartRoutines>
+    public sealed class EmitCallIndex : WfHost<EmitCallIndex>
     {
-        protected override void Execute(IWfShell wf, in ApiPartRoutines state)
+        ApiPartRoutines Routines;
+
+        public static WfHost create(in ApiPartRoutines routines)
         {
-            using var step = new EmitCallIndexStep(wf, this, state);
+            var host = new EmitCallIndex();
+            host.Routines = routines;
+            return host;
+        }
+
+        protected override void Execute(IWfShell wf)
+        {
+            using var step = new EmitCallIndexStep(wf, this, Routines);
             step.Run();
         }
     }
@@ -47,16 +56,13 @@ namespace Z0
         {
             var dst = Wf.Db().Table(AsmCallRecord.TableId, Source.Part);
             Wf.EmittingFile(Source.Part, dst);
-
             using var writer = dst.Writer();
-            //var records = Source.Instructions.CallRecords();
-            var calls = Source.Instructions.CallAspects;
-            var delimited = calls.Select(x => Render.delimit(x.Rows, FieldDelimiter));
-            var names = Render.delimit(AsmCallInfo.AspectNames, FieldDelimiter);
-            writer.WriteLine(names);
-            iter(delimited, writer.WriteLine);
-
-            Wf.EmittedFile(Source.Part, calls.Length, dst);
+            var records = @readonly(Source.Instructions.CallRecords());
+            var count = records.Length;
+            writer.WriteLine(AsmCallRecord.header());
+            for(var i=0; i<count; i++)
+                writer.WriteLine(AsmCallRecord.format(skip(records,i)));
+            Wf.EmittedTable<AsmCallRecord>(count, dst);
         }
     }
 }

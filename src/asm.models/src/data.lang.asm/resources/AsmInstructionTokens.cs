@@ -11,11 +11,9 @@ namespace Z0.Asm
 
     public readonly struct AsmInstructionTokens
     {
-
         public enum Category : byte
         {
             DataTransfer,
-
         }
 
         const string Fields = "| Class | Category | Extension | IsaSet | BaseCode | Mod | Reg | Pattern                                                                                             | Operands";

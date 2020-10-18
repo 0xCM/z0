@@ -11,7 +11,7 @@ namespace Z0.Asm
 
     using static X86Registers;
 
-    partial struct InstructionFactory
+    partial struct AsmSemantic
     {
         [MethodImpl(Inline), Op]
         public rax set(ulong src,  rax dst)

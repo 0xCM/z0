@@ -59,8 +59,6 @@ namespace Z0
             Wf.Ran(Host, count);
         }
 
-        static ReadOnlySpan<byte> Widths => new byte[7]{16,60,12,12,16,40,30};
-
         uint Emit(IPart part)
         {
             var t = new CliField();

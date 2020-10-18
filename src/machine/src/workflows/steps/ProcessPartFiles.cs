@@ -36,22 +36,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public ProcessPartFilesStep(IWfShell wf, WfHost host, IAsmContext asm)
         {
-            Wf = wf;
             Host = host;
+            Wf = wf.WithHost(Host);
             Buffers = CpuBuffers.create(DefaultBufferSize);
             ProcessedCount = 0;
-            Wf.Created(Host);
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
 
         [Op]
         public void Run()
         {
-            Wf.Running(Host);
+            Wf.Running();
             try
             {
                 var buffer =  Buffers.Run();
@@ -59,14 +59,14 @@ namespace Z0
                 var log = Buffers.Log();
                 var count = asci.render(steps, log);
                 var hex = log.Slice(0,count).ToString();
-                term.print(hex);
+                Wf.Status(hex);
             }
             catch(Exception error)
             {
-                Wf.Error(Host, error);
+                Wf.Error(error);
             }
 
-            Wf.Ran(Host);
+            Wf.Ran();
         }
 
         [Op, MethodImpl(Inline)]

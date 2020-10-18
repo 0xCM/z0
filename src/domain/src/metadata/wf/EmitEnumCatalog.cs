@@ -12,8 +12,7 @@ namespace Z0
     using static z;
     using static ApiEnumCatalog;
 
-
-    [Step]
+    [WfHost]
     public sealed class EmitEnumCatalog : WfHost<EmitEnumCatalog>
     {
         protected override void Execute(IWfShell wf)
@@ -23,31 +22,29 @@ namespace Z0
         }
     }
 
-    public readonly ref struct EmitEnumCatalogStep
+    readonly ref struct EmitEnumCatalogStep
     {
         readonly IWfShell Wf;
 
         readonly WfHost Host;
 
-        readonly FS.FilePath TargetPath;
-
         [MethodImpl(Inline)]
-        public EmitEnumCatalogStep(IWfShell context, WfHost host)
+        public EmitEnumCatalogStep(IWfShell wf, WfHost host)
         {
-            Wf = context;
             Host = host;
-            TargetPath = FS.path((Wf.IndexRoot + FileName.define("enums", FileExtensions.Csv)).Name);
-            Wf.Created(Host);
+            Wf = wf.WithHost(Host);
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
 
         public void Run()
         {
             var parts = ApiCatalogs.types(ClrTypeKind.Enum, Wf.Api);
+            var target = Wf.Db().Table(EnumLiteralRow.TableId);
             var dst = z.list<EnumLiteralRow>();
             for(var i=0; i<parts.Length; i++)
             {
@@ -62,19 +59,19 @@ namespace Z0
                 }
             }
 
-            var m = dst.ToArray();
-            Array.Sort(m);
+            var rows = dst.ToArray();
+            Array.Sort(rows);
 
             var formatter = Table.formatter<EnumLiteralRow.Fields>();
             formatter.EmitHeader();
 
-            for(var i=0; i<m.Length; i++)
-                EnumLiteralRow.format(m[i], formatter);
+            for(var i=0; i<rows.Length; i++)
+                EnumLiteralRow.format(rows[i], formatter);
 
-            using var writer = TargetPath.Writer();
+            using var writer = target.Writer();
             writer.Write(formatter.Format());
 
-            Wf.EmittedTable(Host, typeof(EnumLiteralRow), m.Length, TargetPath);
+            Wf.EmittedTable(typeof(EnumLiteralRow), rows.Length, target);
         }
     }
 }

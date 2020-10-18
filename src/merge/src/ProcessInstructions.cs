@@ -30,21 +30,13 @@ namespace Z0
         }
 
         public static void RenderSemantic(IWfShell wf, in ApiPartRoutines src)
-        {
-            var svc = AsmSemanticRender.create(wf);
-            svc.Render(src);
-        }
+            => AsmSemanticRender.create(wf).Render(src);
 
         public static void ProcessEnlisted(IWfShell wf, in ApiPartRoutines src)
-        {
-            AsmProcessors.parts(wf).Process(src);
-        }
+            => AsmProcessors.parts(wf).Process(src);
 
         public static void ProcessCalls(IWfShell wf, in ApiPartRoutines src)
-        {
-            EmitCallIndex.create().Run(wf,src);
-        }
-
+            => EmitCallIndex.create(src).Run(wf);
     }
 
     ref struct ProcessInstructionsStep
@@ -76,11 +68,13 @@ namespace Z0
                 ProcessJumps(Wf, Source);
                 ProcessEnlisted(Wf, Source);
                 RenderSemantic(Wf, Source);
+                ProcessCalls(Wf, Source);
             }
             catch(Exception e)
             {
                 Wf.Error(e);
             }
+
             Wf.Ran();
         }
     }

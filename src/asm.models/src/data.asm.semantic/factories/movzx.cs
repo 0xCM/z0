@@ -12,7 +12,7 @@ namespace Z0.Asm
 
     using Types;
 
-    partial struct InstructionFactory
+    partial struct AsmSemantic
     {
         [MethodImpl(Inline), Op]
         public MOVZX<R8,R16> movzx(R8 src, R16 dst)

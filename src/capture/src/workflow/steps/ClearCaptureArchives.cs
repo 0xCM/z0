@@ -10,10 +10,14 @@ namespace Z0.Asm
     using static Konst;
     using static z;
 
-    [Step]
+    [WfHost]
     public sealed class ClearCaptureArchives : WfHost<ClearCaptureArchives>
     {
-
+        protected override void Execute(IWfShell wf)
+        {
+            using var step = new ClearCaptureArchivesStep(wf,this);
+            step.Run();
+        }
     }
 
     readonly ref struct ClearCaptureArchivesStep
@@ -22,14 +26,11 @@ namespace Z0.Asm
 
         readonly WfHost Host;
 
-        readonly IWfInit Config;
-
         [MethodImpl(Inline)]
-        public ClearCaptureArchivesStep(IWfShell wf, WfHost host, IWfInit config)
+        public ClearCaptureArchivesStep(IWfShell wf, WfHost host)
         {
             Host = host;
             Wf = wf.WithHost(Host);
-            Config = config;
             Wf.Created();
         }
 
@@ -40,11 +41,19 @@ namespace Z0.Asm
 
         public void Run()
         {
-            var parts = Config.PartIdentities;
-            var root = Wf.Db().CaptureRoot();
-            var archive = Archives.capture(Config.TargetArchive.Root);
-            foreach(var part in parts)
-            Clear(part);
+            foreach(var part in Wf.Api.PartIdentities)
+                Clear(part);
+        }
+
+        void Clear(PartId part)
+        {
+            var total = 0u;
+            total += ClearExtracts(part);
+            total += ClearParsed(part);
+            total += ClearAsm(part);
+            total += ClearHex(part);
+            total += ClearCil(part);
+            Wf.Status(delimit(part, total));
         }
 
         Outcome<uint> Clear(PartId part, FS.Files src, [CallerMemberName] string caller = null)
@@ -57,17 +66,6 @@ namespace Z0.Asm
                 wf.Error(result.Error);
 
             return result;
-        }
-
-        void Clear(PartId part)
-        {
-            var total = 0u;
-            total += ClearExtracts(part);
-            total += ClearParsed(part);
-            total += ClearAsm(part);
-            total += ClearHex(part);
-            total += ClearCil(part);
-            Wf.Status(delimit(part, total));
         }
 
         Outcome<uint> ClearExtracts(PartId part)

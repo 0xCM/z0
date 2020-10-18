@@ -330,7 +330,6 @@ namespace Z0.Asm
         public static DatasetFormatter<T> formatter<T>()
             where T : unmanaged, Enum
                     => Formatters.dataset<T>();
-
         [Op]
         public static AsmOpCodeDataset dataset()
         {

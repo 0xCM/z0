@@ -20,9 +20,6 @@ namespace Z0
 
         public const byte FieldCount = 7;
 
-        public static ReadOnlySpan<byte> RenderWidths
-            => new byte[FieldCount]{16,16,16,16,16,16,32};
-
         public MemoryAddress Base;
 
         public MemoryAddress Source;
@@ -36,5 +33,11 @@ namespace Z0
         public JccKind Kind;
 
         public string Asm;
+
+        public static string format(in JmpInfo jmp)
+            => string.Format(RenderPattern, jmp.Base, jmp.Source, jmp.InstructionSize, jmp.CallSite, jmp.Target, jmp.Kind, jmp.Asm);
+
+        public static string header()
+            => string.Format(RenderPattern, nameof(Base), nameof(Source), nameof(InstructionSize), nameof(CallSite), nameof(Target), nameof(Kind), nameof(Asm));
     }
 }

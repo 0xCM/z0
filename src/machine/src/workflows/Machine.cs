@@ -52,8 +52,8 @@ namespace Z0
                 EmitImageBlobs.create().Run(Wf);
                 EmitCilTables.create().Run(Wf);
                 EmitEnumCatalog.create().Run(Wf);
-                //EmitFieldLiterals.create().Run(Wf);
-                //EmitReferenceData.create().Run(Wf);
+                EmitFieldLiterals.create().Run(Wf);
+                EmitReferenceData.create().Run(Wf);
                 EmitBitMasks.create().Run(Wf);
                 BuildCaptureIndex.run(Wf, State, out Index);
                 EmitResBytes.create().WithIndex(Index).Run(Wf);

@@ -9,7 +9,6 @@ namespace Z0.Asm
 
     using static Konst;
 
-
     /// <summary>
     /// Captures operation invocation information from the client perspective
     /// </summary>

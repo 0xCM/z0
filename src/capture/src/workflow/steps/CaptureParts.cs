@@ -56,11 +56,13 @@ namespace Z0
         public void Run()
         {
             Wf.Running();
-            Clear();
+
+            ClearCaptureArchives.create().Run(Wf);
             var catalogs = @readonly(Config.Api.Catalogs);
             var count = catalogs.Length;
             for(var i=0; i<count; i++)
                 CapturePart(skip(catalogs,i));
+
             Wf.Ran();
         }
 
@@ -68,12 +70,6 @@ namespace Z0
         {
             if(src.IsEmpty)
                 return;
-
-            CaptureHosts(src);
-        }
-
-        void CaptureHosts(IApiPartCatalog src)
-        {
             Capture(src.ApiDataTypes);
             Capture(src.OperationHosts);
         }
@@ -83,7 +79,7 @@ namespace Z0
             var count = src.Length;
             var hosts = @readonly(src);
             for(var i=0; i<count; i++)
-                CaptureApiHost.create(State,skip(hosts,i)).Run(Wf);
+                CaptureApiHost.create(State, skip(hosts,i)).Run(Wf);
         }
 
         void Capture(ApiDataTypes src)
@@ -95,19 +91,6 @@ namespace Z0
                 ref readonly var x = ref skip(extracted,i);
                 using var emit = new EmitCaptureArtifactsStep(State, new EmitCaptureArtifacts(), x.Key, x.Value);
                 emit.Run();
-            }
-        }
-
-        void Clear()
-        {
-            try
-            {
-                using var step = new ClearCaptureArchivesStep(Wf, new ClearCaptureArchives(), Config);
-                step.Run();
-            }
-            catch(Exception e)
-            {
-                Wf.Error(Host, e);
             }
         }
     }

@@ -39,7 +39,7 @@ namespace Z0
                     target.FullName = dnMethod.FullName;
                     target.Attributes = _m.MethodImplementationFlags;
                     target.Encoded = _m.GetMethodBody().GetILAsByteArray();
-                    target.Instructions = dnMethod.Body.Instructions.Map(ToSpec);
+                    target.Instructions = dnMethod.Body.Instructions.Map(describe);
                     target.BaseAddress = srcMethod.Address;
                     target.Identifier = srcMethod.Id;
                     target.Formatted = formatter.Format(target);
@@ -64,7 +64,7 @@ namespace Z0
                     var token = mDef.MDToken.Raw;
                     if(token == src.MetadataToken)
                     {
-                        var cil = new CilFunction((int)token, mDef.FullName, (R.MethodImplAttributes)mDef.ImplAttributes, mDef.Body.Instructions.Map(ToSpec));
+                        var cil = new CilFunction((int)token, mDef.FullName, (R.MethodImplAttributes)mDef.ImplAttributes, mDef.Body.Instructions.Map(describe));
                         mDef.FreeMethodBody();
                         return cil;
                     }
@@ -89,7 +89,7 @@ namespace Z0
                     var token = mDef.MDToken.Raw;
                     if(lookup.ContainsKey(token))
                     {
-                        var fx = new CilFunction(token, mDef.FullName, (R.MethodImplAttributes)mDef.ImplAttributes, mDef.Body.Instructions.Map(ToSpec));
+                        var fx = new CilFunction(token, mDef.FullName, (R.MethodImplAttributes)mDef.ImplAttributes, mDef.Body.Instructions.Map(describe));
                         mDef.FreeMethodBody();
                         yield return fx;
                     }

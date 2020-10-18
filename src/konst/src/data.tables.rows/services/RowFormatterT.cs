@@ -53,7 +53,7 @@ namespace Z0
         public string FormatHeader()
         {
             var dst = text.build();
-            TableFields.header(Fields, Delimiter, dst);
+            RowFormatter.header(Fields, Delimiter, dst);
             return dst.ToString();
         }
 

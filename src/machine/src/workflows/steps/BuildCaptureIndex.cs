@@ -5,20 +5,13 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
 
     using Z0.Asm;
 
     using static Konst;
     using static z;
 
-    [WfHost]
-    public class CreateGlobalIndexHost : WfHost<CreateGlobalIndexHost>
-    {
-        public override void Run(IWfShell shell)
-            => throw missing();
-    }
+    using F = Asm.AsmRowField;
 
     [WfHost]
     public sealed class BuildCaptureIndex : WfHost<BuildCaptureIndex>
@@ -156,11 +149,11 @@ namespace Z0
             var records = span(src.Sequenced);
             var dst = Wf.Db().Table(AsmRow.TableId, src.Key.ToString());
 
-            var formatter = Formatters.dataset<AsmTableField>();
+            var formatter = Formatters.dataset<AsmRowField>();
             using var writer = dst.Writer();
-            writer.WriteLine(Table.header53<AsmTableField>());
+            writer.WriteLine(formatter.HeaderText);
             for(var i=0; i<count; i++)
-                writer.WriteLine(AsmTables.format(skip(records,i), formatter).Render());
+                writer.WriteLine(AsmRow.format(skip(records,i), formatter).Render());
 
             Wf.EmittedTable<AsmRow>(count, dst);
         }
@@ -183,7 +176,6 @@ namespace Z0
         void Process(in ApiPartRoutines src)
         {
             ProcessInstructions.create().Run(Wf, src);
-            InstructionProcessors.ProcessCalls(Wf, src);
         }
     }
 }

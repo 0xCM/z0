@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,7 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct asm
+    [ApiHost]
+    public readonly partial struct AsmSemantic
     {
 
     }

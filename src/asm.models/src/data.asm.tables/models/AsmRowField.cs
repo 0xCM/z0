@@ -11,11 +11,11 @@ namespace Z0.Asm
 
     using W = AsmOpCodeFieldWidths;
 
-    public enum AsmTableField : uint
+    public enum AsmRowField : uint
     {
-        Sequence = 0 | (W.Sequence << WidthOffset),
+        Sequence = 0 | (10 << WidthOffset),
 
-        Address = 1 | (W.Address64 << WidthOffset),
+        Address = 1 | (16 << WidthOffset),
 
         GlobalOffset = 2 | (16 << WidthOffset),
 
@@ -25,13 +25,13 @@ namespace Z0.Asm
 
         OpCode = 5 | (16 << WidthOffset),
 
-        Instruction = 6 | (W.Instruction << WidthOffset),
+        Instruction = 6 | (64 << WidthOffset),
 
-        SourceCode = 7 | (W.Instruction << WidthOffset),
+        SourceCode = 7 | (64 << WidthOffset),
 
         Encoded = 8 | 32 << WidthOffset,
 
-        CpuId = 9 | (W.CpuId << WidthOffset),
+        CpuId = 9 | (64 << WidthOffset),
 
         OpCodeId = 10 | (20 << WidthOffset),
     }

@@ -2,22 +2,24 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Asm
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
+    using System.Runtime.InteropServices;
 
-    using Z0.Asm;
+    using static Konst;
 
-    public struct AsmJmpClassifier
+    partial struct AsmSemantic
     {
-        public Outcome<JccKind> Result;
+        [MethodImpl(Inline), Op]
+        public static JccKind jccKind(Mnemonic src)
+            => classify(src, out JccKind _);
 
-        public static Outcome<JccKind> classify(Mnemonic src)
+        [Op]
+        public static ref JccKind classify(Mnemonic src, out JccKind kind)
         {
-            Outcome<JccKind> kind = default;
-
+            kind = JccKind.None;
             switch(src)
             {
                 case Mnemonic.Ja:
@@ -72,10 +74,9 @@ namespace Z0
                     kind= JccKind.JP;
                     break;
                 default:
-                    kind = z.fail<JccKind>(text.format("{0} unanticipated", src));
                 break;
             }
-            return kind;
+            return ref kind;
         }
     }
 }

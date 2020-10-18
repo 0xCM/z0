@@ -105,6 +105,5 @@ namespace Z0.Asm
 
         /// <summary> Jump if Zero; ZF=1 </summary>
         public readonly struct JZ  : I { K I.Literal => K.JA; }
-
     }
 }

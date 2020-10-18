@@ -48,7 +48,8 @@ namespace Z0
             /// </summary>
             public readonly StackBehaviour StackBehaviourPop;
 
-            public OpCode(string name, Code code, OperandType operandType, FlowControl flowControl, OpCodeType opCodeType, StackBehaviour push, StackBehaviour pop) {
+            public OpCode(string name, Code code, OperandType operandType, FlowControl flowControl, OpCodeType opCodeType, StackBehaviour push, StackBehaviour pop)
+            {
                 Name = name;
                 Code = code;
                 OperandType = operandType;
@@ -61,7 +62,6 @@ namespace Z0
                 else if (((ushort)code >> 8) == 0xFE)
                     OpCodes.TwoByteOpCodes[(byte)code] = this;
             }
-
 
             /// <inheritdoc/>
             public override string ToString() => Name;

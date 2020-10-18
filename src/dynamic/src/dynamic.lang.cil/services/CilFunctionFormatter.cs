@@ -25,7 +25,7 @@ namespace Z0
             const string Margin = "    ";
 
             var rendered = text.build();
-            rendered.AppendLine(comment(f.FullName));
+            rendered.AppendLine(comment(f.Identifier));
             rendered.AppendLine(comment(f.Attributes.ToString()));
             rendered.AppendLine(RP.OpenSlot);
             foreach(var i in f.Instructions)

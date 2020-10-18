@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public AsmJmpProcessor(IWfShell wf, ApiPartRoutines src,  bool connect = true)
+        public AsmJmpProcessor(IWfShell wf, ApiPartRoutines src)
         {
             Wf = wf;
             broker = AsmBrokers.jmp();
@@ -43,11 +43,8 @@ namespace Z0
 
         void Dispatch(in ApiInstruction fx)
         {
-            var mnemonic = fx.Mnemonic;
-            var kind = AsmJmpClassifier.classify(fx.Mnemonic);
-
-            var dst = default(JmpInfo);
-            Fill(fx, kind, ref dst);
+            var kind = AsmSemantic.jccKind(fx.Mnemonic);
+            init(fx, kind, out var dst);
             Collected.Add(dst);
             broker.Get(kind).Handle(fx);
         }
@@ -89,21 +86,19 @@ namespace Z0
         {
             if(Collected.Count != 0)
             {
-                var formatter = TableRows.formatter<JmpInfo>(JmpInfo.RenderWidths);
                 using var writer = Target.Writer();
-                writer.WriteLine(formatter.FormatHeader());
+                writer.WriteLine(JmpInfo.header());
                 var jumps = @readonly(Collected.ToArray());
                 var count = jumps.Length;
                 for(var i=0u; i<count; i++)
                 {
                     ref readonly var jmp = ref skip(jumps,i);
-                    var rendered = string.Format(JmpInfo.RenderPattern, jmp.Base, jmp.Source, jmp.InstructionSize, jmp.CallSite, jmp.Target, jmp.Kind, jmp.Asm);
-                    writer.WriteLine(rendered);
+                    writer.WriteLine(JmpInfo.format(jmp));
                 }
             }
         }
 
-        void Fill(in ApiInstruction src, JccKind jk, ref JmpInfo dst)
+        static ref JmpInfo init(in ApiInstruction src, JccKind jk, out JmpInfo dst)
         {
             var target = asm.branch(src.Base, src.Instruction, 0);
             dst.Kind = jk;
@@ -113,6 +108,7 @@ namespace Z0
             dst.CallSite = dst.Source + dst.InstructionSize;
             dst.Target = target.Target.Address;
             dst.Asm = src.FormattedInstruction;
+            return ref dst;
         }
     }
 }

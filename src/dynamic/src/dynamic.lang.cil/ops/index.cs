@@ -20,9 +20,9 @@ namespace Z0
         /// Converts the dnlib-defined data structure to a Z0-defined replication of the dnlib structure
         /// </summary>
         /// <param name="src">The dnlib source value</param>
-        internal static Instruction ToSpec(DnLib.Instruction src)
+        internal static Instruction describe(DnLib.Instruction src)
             => new Instruction{
-                OpCode = ToSpec(src.OpCode),
+                OpCode = describe(src.OpCode),
                 Operand = src.Operand,
                 Offset = src.Offset,
                 Formatted = src.ToString()
@@ -32,7 +32,7 @@ namespace Z0
         /// Converts the dnlib-defined data structure to a Z0-defined replication of the dnlib structure
         /// </summary>
         /// <param name="src">The dnlib source value</param>
-        internal static OpCode ToSpec(DnLib.OpCode src)
+        internal static OpCode describe(DnLib.OpCode src)
             => new OpCode(
                 name: src.Name,
                 code: (Code)src.Code,

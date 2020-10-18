@@ -72,14 +72,19 @@ namespace Z0
 
             public Outcome<uint> Delete()
             {
+                var count = 0u;
                 try
                 {
                     foreach(var file in Data.View)
-                        FS.delete(file);
+                    {
+                        var result = FS.delete(file);
+                        if(result)
+                            count++;
+                    }
 
                     Edit.Clear();
 
-                    return Count;
+                    return count;
                 }
                 catch(Exception e)
                 {
@@ -93,7 +98,8 @@ namespace Z0
             IEnumerator IEnumerable.GetEnumerator()
                 => ViewNonEmpty.ToEnumerable().GetEnumerator();
 
-            public static Files Empty => new Files(sys.empty<FilePath>());
+            public static Files Empty
+                => new Files(sys.empty<FilePath>());
         }
     }
 }
