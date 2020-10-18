@@ -82,4 +82,3 @@ namespace Z0.Asm
         public OpAccess[] Access {get;set;}
 	}
 }
-

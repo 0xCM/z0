@@ -71,7 +71,7 @@ namespace Z0
 
         uint Emit(IPart part)
         {
-            var dst = Wf.Db().Table(part.Id, CilCil.TableId, FileKind.Csv);
+            var dst = Wf.Db().Table(part.Id, CilCil.TableId, FileKindType.Csv);
 
             var methods = CliFileReader.cil(part.Id, FS.path(part.Owner.Location));
             var count = (uint)methods.Length;

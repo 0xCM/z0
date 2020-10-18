@@ -27,11 +27,7 @@ namespace Z0
         public static implicit operator EnvRules(Env src)
             => new EnvRules(src);
 
-        [MethodImpl(Inline)]
-        public FS.FolderPath ProjectDataRoot()
-            => Base.DevRoot + FS.folder("data");
-
         public FS.FolderPath DbRoot()
-            => FS.dir("j:/database");
+            => Base.DbRoot;
     }
 }

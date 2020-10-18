@@ -53,7 +53,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Spefifies whether the reader can advance to and read the next cell
+        /// Specifies whether the reader can advance to and read the next cell
         /// </summary>
         public bool HasNext
         {

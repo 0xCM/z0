@@ -41,7 +41,7 @@ namespace Z0.Asm
             => Target - (Source + InstructionSize);
 
         public byte InstructionSize
-            => (byte)Fx.ByteLength;
+            => (byte)Fx.Size;
 
         public BinaryCode Encoded
             => Fx.EncodedData;

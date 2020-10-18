@@ -21,15 +21,5 @@ namespace Z0.Asm
         [MethodImpl(Inline)]
         public static CaptureExchange exchange(IAsmContext context)
             => new CaptureExchange(context.CaptureCore, new byte[context.DefaultBufferLength]);
-
-        [MethodImpl(Inline)]
-        public static CaptureExchange exchange(IAsmContext context, Span<byte> buffer)
-            => new CaptureExchange(context.CaptureCore, buffer);
-
-        public static IAsmDecoder DefaultDecoder
-        {
-             [MethodImpl(Inline)]
-             get => AsmRoutineDecoder.Default;
-        }
     }
 }

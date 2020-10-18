@@ -15,7 +15,7 @@ namespace Z0
 
     public struct AsmJmpProcessor : IDisposable
     {
-        readonly BitBroker<JmpKind,ApiInstruction> broker;
+        readonly BitBroker<JccKind,ApiInstruction> broker;
 
         public IWfShell Wf {get;}
 
@@ -23,7 +23,7 @@ namespace Z0
 
         public readonly FS.FilePath Target;
 
-        readonly List<AsmJmpRecord> Collected;
+        readonly List<JmpInfo> Collected;
 
 
         public void Dispose()
@@ -37,9 +37,8 @@ namespace Z0
             Wf = wf;
             broker = AsmBrokers.jmp();
             Source = src;
-            Collected = list<AsmJmpRecord>();
-            //Target = wf.AsmTables + FS.folder("jumps") + FS.file(src.Part.Format(), FileExtensions.Csv) ;
-            Target = Wf.Db().Table(AsmJmpRecord.TableId, src.Part);
+            Collected = list<JmpInfo>();
+            Target = Wf.Db().Table(JmpInfo.TableId, src.Part);
         }
 
         void Dispatch(in ApiInstruction fx)
@@ -47,7 +46,7 @@ namespace Z0
             var mnemonic = fx.Mnemonic;
             var kind = AsmJmpClassifier.classify(fx.Mnemonic);
 
-            var dst = default(AsmJmpRecord);
+            var dst = default(JmpInfo);
             Fill(fx, kind, ref dst);
             Collected.Add(dst);
             broker.Get(kind).Handle(fx);
@@ -55,8 +54,8 @@ namespace Z0
 
         public void Process()
         {
-            var hosts = Source.ViewHosts;
-            var kHost = Source.Length;
+            var hosts = Source.View;
+            uint kHost = Source.HostCount;
             for(var i=0u; i<kHost; i++)
             {
                 ref readonly var host = ref skip(hosts,i);
@@ -90,7 +89,7 @@ namespace Z0
         {
             if(Collected.Count != 0)
             {
-                var formatter = TableRows.formatter<AsmJmpRecord>(AsmJmpRecord.RenderWidths);
+                var formatter = TableRows.formatter<JmpInfo>(JmpInfo.RenderWidths);
                 using var writer = Target.Writer();
                 writer.WriteLine(formatter.FormatHeader());
                 var jumps = @readonly(Collected.ToArray());
@@ -98,13 +97,13 @@ namespace Z0
                 for(var i=0u; i<count; i++)
                 {
                     ref readonly var jmp = ref skip(jumps,i);
-                    var rendered = string.Format(AsmJmpRecord.RenderPattern, jmp.Base, jmp.Source, jmp.InstructionSize, jmp.CallSite, jmp.Target, jmp.Kind, jmp.Asm);
+                    var rendered = string.Format(JmpInfo.RenderPattern, jmp.Base, jmp.Source, jmp.InstructionSize, jmp.CallSite, jmp.Target, jmp.Kind, jmp.Asm);
                     writer.WriteLine(rendered);
                 }
             }
         }
 
-        void Fill(in ApiInstruction src, JmpKind jk, ref AsmJmpRecord dst)
+        void Fill(in ApiInstruction src, JccKind jk, ref JmpInfo dst)
         {
             var target = asm.branch(src.Base, src.Instruction, 0);
             dst.Kind = jk;

@@ -46,21 +46,23 @@ namespace Z0
 
         public EmitHostAsmStep(IWfShell wf, WfHost host, ICaptureContext context, ApiHostUri uri)
         {
-            Wf = wf;
             Host = host;
+            Wf = wf.WithHost(Host);
             Context = context;
             Uri = uri;
+            Wf.Created();
         }
 
 
         public void Dispose()
         {
-
+            Wf.Disposed();
         }
 
         public ref AsmRoutines Run(in ApiMemberCodeBlocks src, out AsmRoutines dst)
         {
-            Wf.Running(Host);
+            Wf.Running();
+
             DecodeApiHost.create(Context.Decoder, Uri).Run(Wf, src, out dst);
 
             var emitted = AsmServices.emit(Wf, Uri, dst.Storage, Context.Formatter.Config);
@@ -68,7 +70,7 @@ namespace Z0
             if(emitted.IsNonEmpty)
                 Wf.EmittedFile(dst, dst.Count, emitted);
 
-            Wf.Ran(Host);
+            Wf.Ran();
             return ref dst;
         }
     }

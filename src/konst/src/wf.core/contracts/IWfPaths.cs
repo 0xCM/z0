@@ -10,18 +10,6 @@ namespace Z0
 
     public interface IWfPaths : ILogPaths
     {
-        FS.FolderPath DbRoot
-            => Env.DbRoot;
-
-        ICaptureArchive PartCaptureArchive
-            => Archives.capture(DbRoot + FS.folder(Capture));
-
-        ICaptureArchive CaptureArchive()
-            => Archives.capture(DbRoot + FS.folder(Capture));
-
-        IHostCaptureArchive CaptureArchive(ApiHostUri host)
-            => HostCaptureArchive.create(CaptureArchive().ArchiveRoot, host);
-
         /// <summary>
         /// The executing application's data directory
         /// </summary>
@@ -45,12 +33,6 @@ namespace Z0
         /// </summary>
         FolderName OutcomeFolder
             => FolderName.Define(Results);
-
-        /// <summary>
-        /// The name of the folder into which capture results are deposited
-        /// </summary>
-        FolderName CaptureFolder
-            => FolderName.Define(Capture);
 
         /// <summary>
         /// The name of the development source folder
@@ -110,7 +92,7 @@ namespace Z0
         /// The application-relative capture directory
         /// </summary>
         FolderPath AppCaptureRoot
-            => AppDataRoot + CaptureFolder;
+            => AppDataRoot + FolderName.Define(Capture);
 
         /// <summary>
         /// The root folder for test-specific data
@@ -123,7 +105,7 @@ namespace Z0
         /// </summary>
         /// <param name="dst">The target app id</param>
         IWfPaths ForApp()
-            => WfPaths.create(LogDir);
+            => WfShell.paths(LogDir);
 
         /// <summary>
         /// Defines a test-specific data folder

@@ -32,7 +32,6 @@ namespace Z0.Asm
                     (IceRegister)src.SegmentPrefix
                     );
 
-
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
         /// </summary>
@@ -57,7 +56,7 @@ namespace Z0.Asm
                 UsedMemory =  IceExtractors.UsedMemory(src),
                 UsedRegisters = IceExtractors.UsedRegisters(src),
                 CpuidFeatures = src.CpuidFeatures.Map(Thaw),
-                Access = IceExtractors.OpAccess(src)
+                Access = IceExtractors.access(src)
             };
         }
 

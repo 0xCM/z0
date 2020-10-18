@@ -10,8 +10,8 @@ namespace Z0
     using static z;
     using static Konst;
 
-    using K = FileKind;
-    using FK = FileKinds;
+    using K = FileKindType;
+    using FK = FileKindTypes;
 
     public readonly struct HexDoc : IContentKind<HexDoc,ContentKind,string>
     {

@@ -34,7 +34,7 @@ namespace Z0
         public static unsafe void copy<T>(SegRef src, Span<T> dst)
             where T : unmanaged
         {
-            var reader = MemReader.create<T>(src);
+            var reader = MemoryReader.create<T>(src);
             reader.ReadAll(dst);
         }
 

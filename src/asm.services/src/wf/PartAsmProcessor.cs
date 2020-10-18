@@ -31,7 +31,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Process(ApiPartRoutines src)
         {
-            for(var i=0; i<src.Length; i++)
+            uint count = src.HostCount;
+            for(var i=0u; i<count; i++)
                 AsmProcessors.hosts(Wf, src[i]).Process();
         }
     }

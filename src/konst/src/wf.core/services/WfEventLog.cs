@@ -23,23 +23,13 @@ namespace Z0
 
         public WfEventLog(WfLogConfig config)
         {
-            Target = config.Publication;
+            Target = config.Pub;
             config.StatusLog.Delete();
             config.ErrorLog.Delete();
             StatusPath = FS.path(config.StatusLog.Name);
             Error = FS.path(config.ErrorLog.Name).CreateParentIfMissing();
             Status = StatusPath.Stream();
         }
-
-        // public WfEventLog(FS.FilePath status, FS.FilePath error, FS.FolderPath target)
-        // {
-        //     Target = target;
-        //     status.Delete();
-        //     error.Delete();
-        //     StatusPath = status;
-        //     Status = StatusPath.Stream();
-        //     Error = error.CreateParentIfMissing();
-        // }
 
         public void Dispose()
         {

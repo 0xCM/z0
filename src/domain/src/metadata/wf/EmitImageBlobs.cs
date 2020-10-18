@@ -66,7 +66,7 @@ namespace Z0
 
         void Emit(IPart part)
         {
-            var dstPath = Wf.Db().Table(part.Id, TableId, FileKind.Csv);
+            var dstPath = Wf.Db().Table(part.Id, TableId, FileKindType.Csv);
             var data = Read(part);
             var count = (uint)data.Length;
             var buffer = Buffers.text();

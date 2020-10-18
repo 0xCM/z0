@@ -14,19 +14,8 @@ namespace Z0
     /// </summary>
     public readonly struct WfPaths : IWfPaths
     {
-        [MethodImpl(Inline), Op]
-        public static IWfPaths create(FS.FolderPath root)
-            => new WfPaths(root);
-
-        [MethodImpl(Inline), Op]
-        public static IWfPaths create()
-            => new WfPaths(EnvVars.Common.LogRoot);
-
         public FolderPath LogRoot {get;}
 
-        /// <summary>
-        /// The global application log root
-        /// </summary>
         public FS.FolderPath LogDir {get;}
 
         [MethodImpl(Inline)]

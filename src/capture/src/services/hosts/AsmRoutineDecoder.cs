@@ -10,6 +10,7 @@ namespace Z0.Asm
     using System.Linq;
 
     using static Konst;
+    using static z;
 
     using Iced = Iced.Intel;
 
@@ -73,7 +74,7 @@ namespace Z0.Asm
             }
         }
 
-        Option<AsmInstructions> Decode(BinaryCode code, MemoryAddress @base)
+        public Option<AsmInstructions> Decode(BinaryCode code, MemoryAddress @base)
         {
             try
             {
@@ -103,7 +104,7 @@ namespace Z0.Asm
             catch(Exception e)
             {
                 term.error(e);
-                return Option.none<AsmInstructions>();
+                return none<AsmInstructions>();
             }
         }
 
@@ -119,7 +120,7 @@ namespace Z0.Asm
             if(result)
                 return AsmServices.routine(src, result.Value);
             else
-                return z.none<AsmRoutine>();
+                return none<AsmRoutine>();
         }
 
         public bool Decode(ApiCaptureBlock src, out AsmRoutine dst)

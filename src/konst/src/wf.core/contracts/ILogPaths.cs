@@ -21,7 +21,7 @@ namespace Z0
         /// The global application log root
         /// </summary>
         FolderPath LogRoot
-            => FolderPath.Define(EnvVars.Common.LogRoot.Name);
+            => FolderPath.Define(LogDir.Name);
 
         FS.FolderPath AppLogRoot
             => FS.dir(text.format("{0}/applogs", LogRoot.Name));

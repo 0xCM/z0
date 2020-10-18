@@ -134,12 +134,10 @@ namespace Z0
         {
             try
             {
-                var id = new CreateGlobalIndexHost().Id;
-                Wf.Running(id);
-
                 var processor = new ProcessAsm(State, encoded);
                 var result = processor.Process();
-                Wf.Raise(new ProcessedPartAsm(id, Wf.Api.PartIdentities, result, Wf.Ct));
+
+                Wf.Processed(delimit(nameof(AsmRow), encoded.Hosts.Length, result.Count));
 
                 var sets = result.View;
                 var count = result.Count;
@@ -187,6 +185,5 @@ namespace Z0
             ProcessInstructions.create().Run(Wf, src);
             InstructionProcessors.ProcessCalls(Wf, src);
         }
-
     }
 }

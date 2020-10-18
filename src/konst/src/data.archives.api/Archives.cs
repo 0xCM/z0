@@ -17,6 +17,10 @@ namespace Z0
     public readonly partial struct Archives
     {
         [MethodImpl(Inline), Op]
+        public static IFileArchive filtered(FS.FolderPath root, string filter)
+            => new FilteredArchive(root, filter);
+
+        [MethodImpl(Inline), Op]
         public static ApiHostCodeBlocks index(ApiHostUri host, ApiCodeBlock[] code)
             => new ApiHostCodeBlocks(host,code);
 

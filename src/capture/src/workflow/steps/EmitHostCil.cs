@@ -33,6 +33,7 @@ namespace Z0
                 for(var i=0u; i<count; i++)
                 {
                     ref readonly var parsed = ref skip(view,i);
+
                     var cil = ApiDynamic.cil(parsed.Address, parsed.OpUri, parsed.Method);
                     writer.WriteLine(cil.Format());
                 }
@@ -40,6 +41,33 @@ namespace Z0
                 wf.EmittedFile(src, count, dst);
             }
 
+            EmitDecoded(wf, src, out var _);
+
+            return ref dst;
+        }
+
+        ref FS.FilePath EmitDecoded(IWfShell wf, in ApiMemberCodeBlocks src, out FS.FilePath dst)
+        {
+            dst = wf.Db().CapturedAsmFile(Uri).ChangeExtension(ArchiveFileKinds.Il);
+            if(src.Count != 0)
+            {
+                wf = wf.WithHost(this);
+                var module = src.First.Method.DeclaringType.Assembly.ManifestModule;
+                var count = src.Count;
+                var methods = src.Storage.Map(x => new LocatedMethod(x.OpUri.OpId, x.Method, x.Address));
+                var cilFx = @readonly(CilApi.functions(module, methods));
+                using var writer = dst.Writer();
+                for(var i=0u; i<count; i++)
+                {
+                    ref readonly var fx = ref skip(cilFx,i);
+                    if(fx.IsNonEmpty)
+                        writer.WriteLine(fx.Formatted);
+                    else
+                        writer.WriteLine("!!Empty!!");
+                }
+
+                wf.EmittedFile(src, count, dst);
+            }
             return ref dst;
         }
     }

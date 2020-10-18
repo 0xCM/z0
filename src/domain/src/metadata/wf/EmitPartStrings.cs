@@ -44,9 +44,9 @@ namespace Z0
             Wf = wf;
             Part = part;
             if(sk == R.Kind.System)
-                TargetPath = Wf.Db().Table(part.Id, CliSystemString.TableId, FileKind.Csv);
+                TargetPath = Wf.Db().Table(part.Id, CliSystemString.TableId, FileKindType.Csv);
             else
-                TargetPath = Wf.Db().Table(part.Id, CliUserString.TableId, FileKind.Csv);
+                TargetPath = Wf.Db().Table(part.Id, CliUserString.TableId, FileKindType.Csv);
             StringKind = sk;
             EmissionCount = 0;
             Wf.Created(StepId);

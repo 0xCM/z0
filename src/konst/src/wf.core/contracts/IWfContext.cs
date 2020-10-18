@@ -16,7 +16,7 @@ namespace Z0
             => z.correlate(Control.Id());
 
         IWfPaths Paths
-            => WfPaths.create();
+            => WfShell.paths();
 
         IJsonSettings Settings
             => JsonSettings.Load(Paths.AppConfigPath);
@@ -32,10 +32,5 @@ namespace Z0
 
         Assembly Control
             => Assembly.GetEntryAssembly();
-    }
-
-    public interface IWfContext<C> : IWfContext, IStateful<C>
-    {
-
     }
 }

@@ -23,53 +23,64 @@ namespace Z0.Asm
         /// <summary>
         /// The decoded instructions
         /// </summary>
-        readonly TableSpan<ApiHostRoutines> _Hosts;
+        readonly TableSpan<ApiHostRoutines> Data;
 
         [MethodImpl(Inline)]
         public ApiPartRoutines(PartId part, ApiHostRoutines[] hosts)
         {
             Part = part;
-            _Hosts = hosts;
-        }
-
-        public ReadOnlySpan<ApiHostRoutines> ViewHosts
-        {
-            [MethodImpl(Inline)]
-            get => _Hosts.View;
+            Data = hosts;
         }
 
         public Span<ApiHostRoutines> Edit
         {
             [MethodImpl(Inline)]
-            get => _Hosts.Edit;
+            get => Data.Edit;
         }
 
-        public ref ApiHostRoutines this[int index]
+        public ReadOnlySpan<ApiHostRoutines> View
         {
             [MethodImpl(Inline)]
-            get => ref _Hosts[index];
+            get => Data.View;
         }
 
-        public int Length
+        public ref ApiHostRoutines this[ulong index]
         {
             [MethodImpl(Inline)]
-            get => _Hosts.Length;
+            get => ref Data[index];
         }
 
-
-        public uint HostCount
+        public ref ApiHostRoutines this[long index]
         {
             [MethodImpl(Inline)]
-            get => _Hosts.Count;
+            get => ref Data[index];
+        }
+
+        /// <summary>
+        /// The number of host routine sets
+        /// </summary>
+        public Count HostCount
+        {
+            [MethodImpl(Inline)]
+            get => Data.Count;
+        }
+
+        /// <summary>
+        /// The total routine count
+        /// </summary>
+        public Count RoutineCount
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Data.Storage.Sum(x => x.RoutineCount);
         }
 
         /// <summary>
         /// The total instruction count
         /// </summary>
-        public uint InstructionCount
-            => (uint)_Hosts.Storage.Sum(i => (long)i.InstructionCount);
+        public Count InstructionCount
+            => (uint)Data.Storage.Sum(i => (long)i.InstructionCount);
 
         public ApiInstructions Instructions
-            => _Hosts.Storage.SelectMany(x => x.Routines).SelectMany(x => x.Instructions.Storage).OrderBy(x => x.IP).Array();
+            => Data.Storage.SelectMany(x => x.Routines).SelectMany(x => x.Instructions.Storage).OrderBy(x => x.IP).Array();
     }
 }

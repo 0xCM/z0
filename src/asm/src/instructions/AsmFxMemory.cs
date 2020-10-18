@@ -19,7 +19,7 @@ namespace Z0.Asm
 
         public MemorySize MemorySize;
 
-        public MemoryScale MemoryIndexScale;
+        public MemScale MemoryIndexScale;
 
         public MemDx MemDx;
 

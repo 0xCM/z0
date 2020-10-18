@@ -44,7 +44,7 @@ namespace Z0
 
         unsafe void Process(in SegRef src, in Segments store)
         {
-            var reader = MemReader.create(src.Address.Pointer<byte>(), (int)src.DataSize);
+            var reader = MemoryReader.create(src.Address.Pointer<byte>(), (int)src.DataSize);
             var dstA = Spans.alloc<byte>(src.DataSize);
             var count = reader.ReadAll(dstA);
             Claim.eq(count,src.DataSize);

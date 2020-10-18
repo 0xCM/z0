@@ -17,7 +17,7 @@ namespace Z0
         {
             var log = text.build();
             var host  = new CheckBitMasksHost();
-            using var step = new CheckBitMasks(wf, host, source, log);
+            using var step = new BitMaskChecker(wf, host, source, log);
             step.Run();
         }
     }

@@ -11,14 +11,14 @@ namespace Z0
     {
         FS.FolderPath Root {get;}
 
-        IEnumerable<FS.FolderPath> Directories(bool recurse = true)
-            => FileArchives.directories(Root, recurse);
+        IEnumerable<FS.FolderPath> Directories()
+            => FileArchives.directories(Root, true);
 
-        IEnumerable<FS.FilePath> Files(bool recurse = true)
-            => FileArchives.files(Root, recurse);
+        IEnumerable<FS.FilePath> Files()
+            => FileArchives.files(Root, true);
 
-        IEnumerable<FS.FilePath> Files(FS.FileExt ext, bool recurse = true)
-            => FileArchives.files(Root, recurse);
+        IEnumerable<FS.FilePath> Files(FS.FileExt ext)
+            => FileArchives.files(Root, true);
 
     }
 

@@ -34,7 +34,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static CliMemoryReader Reader(IWfShell wf, FS.FilePath src)
-            => CliMemoryReader.create(wf, src);
+        static CliMemoryMap Reader(IWfShell wf, FS.FilePath src)
+            => CliMemoryMap.create(wf, src);
     }
 }

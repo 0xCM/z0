@@ -270,10 +270,10 @@ namespace Z0
             {
                 Wf.Running(Host);
 
-                using var kernel = Native.kernel32();
+                using var kernel = NativeModules.kernel32();
                 Wf.Row(kernel);
 
-                var f = Native.func<OS.Delegates.GetProcAddress>(kernel, nameof(OS.Delegates.GetProcAddress));
+                var f = NativeModules.func<OS.Delegates.GetProcAddress>(kernel, nameof(OS.Delegates.GetProcAddress));
                 Wf.Row(f);
 
                 var a = (MemoryAddress)f.Invoke(kernel, "CreateDirectoryA");
@@ -301,70 +301,54 @@ namespace Z0
             new EmitAsmOpCodes().Configure(Wf.Db().DbPaths.DbRoot + FS.file("AsmOpcodes", Csv)).Run(Wf);
         }
 
-        ReadOnlySpan<ApiCaptureBlock> Blocks(MethodInfo[] src)
-        {
-            var methods = src.Select(m =>  new IdentifiedMethod(m.Identify(),m));
-            var results = CaptureAlt.capture(methods);
-            return results;
-        }
+        // public static ReadOnlySpan<AsmRoutineCode> decode(IAsmWf asmWf, MethodInfo[] src, FS.FilePath target)
+        //     => decode(asmWf, CaptureAlt.capture(src), target);
 
-        ReadOnlySpan<ApiCaptureBlock> Blocks(Type src)
-            => Blocks(src.DeclaredMethods());
+        // public static void decode(IAsmWf asmWf, ReadOnlySpan<ApiCaptureBlock> src, Span<AsmRoutineCode> dst)
+        // {
+        //     var count = src.Length;
+        //     var decoder = asmWf.Decoder;
+        //     var formatter = asmWf.Formatter;
+        //     for(var i=0u; i<count; i++)
+        //     {
+        //         ref readonly var captured = ref skip(src,i);
+        //         if(decoder.Decode(captured, out var fx))
+        //         {
+        //             var asm = formatter.FormatFunction(fx);
+        //             seek(dst,i) = new AsmRoutineCode(fx,captured);
+        //         }
+        //     }
+        // }
 
+        // public static ReadOnlySpan<AsmRoutineCode> decode(IAsmWf asmWf, ReadOnlySpan<ApiCaptureBlock> src, FS.FilePath target)
+        // {
+        //     var count = src.Length;
+        //     var dst = span<AsmRoutineCode>(count);
+        //     var decoder = asmWf.Decoder;
+        //     var formatter = asmWf.Formatter;
 
-        ReadOnlySpan<AsmRoutineCode> Capture(MethodInfo[] src, string label)
-        {
-            var results = Blocks(src);
-            var target = Wf.Paths.AppLogRoot + FS.file(label, ArchiveFileKinds.Asm);
-            return Decode(results, target);
-        }
+        //     using var writer = target.Writer();
+        //     for(var i=0u; i<count; i++)
+        //     {
+        //         ref readonly var captured = ref skip(src,i);
+        //         if(decoder.Decode(captured, out var fx))
+        //         {
+        //             seek(dst,i) = new AsmRoutineCode(fx,captured);
+        //             var asm = formatter.FormatFunction(fx);
+        //             writer.Write(asm);
+        //         }
+        //     }
+        //     return dst;
+        // }
 
-        void Decode(ReadOnlySpan<ApiCaptureBlock> src, Span<AsmRoutineCode> dst)
-        {
-            var count = src.Length;
-            var decoder = Asm.RoutineDecoder;
-            var formatter = Asm.Formatter;
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var captured = ref skip(src,i);
-                if(decoder.Decode(captured, out var fx))
-                {
-                    var asm = formatter.FormatFunction(fx);
-
-                    seek(dst,i) = new AsmRoutineCode(fx,captured);
-                }
-            }
-        }
-
-        ReadOnlySpan<AsmRoutineCode> Decode(ReadOnlySpan<ApiCaptureBlock> src, FS.FilePath target)
-        {
-            var count = src.Length;
-            var dst = span<AsmRoutineCode>(count);
-            var decoder = Asm.RoutineDecoder;
-            var formatter = Asm.Formatter;
-
-            using var writer = target.Writer();
-            for(var i=0u; i<count; i++)
-            {
-                ref readonly var captured = ref skip(src,i);
-                if(decoder.Decode(captured, out var fx))
-                {
-                    seek(dst,i) = new AsmRoutineCode(fx,captured);
-                    Wf.Row(fx.BaseAddress);
-                    var asm = formatter.FormatFunction(fx);
-                    writer.Write(asm);
-                }
-            }
-            return dst;
-
-        }
         void CheckBitMasks()
         {
-            var methods = typeof(CheckBitMasks).Methods().WithNameStartingWith("CheckLoMask");
-            var routines = Capture(methods, "bitmasks");
+            var asmWf = AsmWorkflows.create(Wf);
+            var methods = typeof(BitMaskChecker).Methods().WithNameStartingWith("CheckLoMask");
+            var dst = Wf.AppData + FS.file("bitmasks", ArchiveFileKinds.Asm);
+            var routines = asmWf.Decode(methods, dst);
             CheckBitMasksHost.control(Wf, Random);
         }
-
 
         void ListTextResources()
         {
@@ -393,7 +377,6 @@ namespace Z0
             for(var i=0; i<src.Length; i++)
             {
                 EmitEnums.create().Run(Wf, src[i]);
-
             }
         }
 
@@ -403,7 +386,7 @@ namespace Z0
             Run77();
             Run89(Parts.Konst.Assembly, Parts.Asm.Assembly);
 
-            var blocks = Blocks(typeof(Switch16));
+            var blocks = CaptureAlt.capture(typeof(Switch16));
             var count = blocks.Length;
             Wf.Row((Count)count);
 
@@ -417,10 +400,7 @@ namespace Z0
         {
             var src = @readonly(Resources.strings<uint>(typeof(Db.Literals)));
             for(var i=0; i<src.Length; i++)
-            {
                 Status(skip(src,i).Format());
-            }
-
         }
 
         public static Type[] DiscoverWfHosts(params Assembly[] src)
@@ -436,13 +416,19 @@ namespace Z0
             iter(hosts, h => wf.Status(delimit(h.Assembly.GetSimpleName(),h.Name)));
         }
 
-        public void Run()
+        void Run666()
         {
             var build = FS.dir(@"k:\z0\builds\nca.3.1.win-x64");
             var cmd = new ClrCmd.EmitAssemblyReferences();
             cmd.Source = build + FS.file("z0.konst.dll");
             cmd.Target = Wf.AppData + FS.file("AssemblyReferences", "csv");
             ClrCmd.exec(Wf,cmd);
+
+        }
+
+        public void Run()
+        {
+            CheckBitMasks();
         }
     }
 }

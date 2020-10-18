@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+
     using X = ArchiveFileKinds;
 
     public struct WfLogConfig : ITextual
@@ -35,7 +36,7 @@ namespace Z0
         /// <summary>
         /// The location to which completed logs are published
         /// </summary>
-        public FS.FolderPath Publication;
+        public FS.FolderPath Pub;
 
         [MethodImpl(Inline)]
         public WfLogConfig(PartId control, FS.FolderPath root, FS.FolderPath target)
@@ -45,7 +46,7 @@ namespace Z0
             var app = Control.Format();
             StatusLog = Root + FS.file(app, X.StatusLog);
             ErrorLog = Root + FS.file(app, X.ErrorLog);
-            Publication = target;
+            Pub = target;
         }
 
         [MethodImpl(Inline)]

@@ -16,7 +16,7 @@ namespace Z0
 
     using static WfEvents;
 
-    public interface IWfShell<C> : IWfContext<C>
+    public interface IWfShell<C> : IWfContext, IStateful<C>
     {
         IWfShell Shell {get;}
     }
@@ -28,8 +28,6 @@ namespace Z0
         IWfContext Shell {get;}
 
         IWfEventSink WfSink {get;}
-
-        //IApiParts ApiParts {get;}
 
         IWfBroker Broker {get;}
 
@@ -281,6 +279,12 @@ namespace Z0
         void EmittedTable(Type type, Count count, FS.FilePath dst)
             => EmittedTable(Host, type, count, dst);
 
+        void Processed<T>(T content)
+            => WfEvents.processed(Host, content, Ct);
+
+        void Processed<S,T>(S src, T dst)
+            => WfEvents.processed(Host, (src,dst), Ct);
+
         void ProcessingFile<T>(FS.FilePath src, T kind)
         {
             if(Verbosity.Babble())
@@ -292,6 +296,7 @@ namespace Z0
 
         void ProcessedFile<T,M>(FS.FilePath src, T kind, M metric)
             => Raise(new ProcessedFileEvent<T,M>(Host, src, kind, metric, Ct));
+
 
         void Row<T>(T content)
             where T : ITextual

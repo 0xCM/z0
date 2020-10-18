@@ -44,7 +44,7 @@ namespace Z0.Asm
         /// <summary>
         /// The encoded byte count
         /// </summary>
-        public int ByteLength
+        public int Size
             => Instruction.ByteLength;
 
         [MethodImpl(Inline)]

@@ -44,7 +44,7 @@ namespace Z0
         /// The default application path collection
         /// </summary>
         protected static IWfPaths AppPaths
-            => WfPaths.create();
+            => WfShell.paths();
 
         /// <summary>
         /// The shell terminal

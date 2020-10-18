@@ -14,23 +14,49 @@ namespace Z0
     /// <summary>
     /// Adheres a set of IL instructions with the source method
     /// </summary>
-    public readonly struct CilFunction
+    public struct CilFunction
     {
-        public readonly ClrArtifactKey Id;
+        public ClrArtifactKey Key;
 
-        public readonly MethodImplAttributes Attributes;
+        public OpIdentity Identifier;
 
-        public readonly string FullName;
+        public string FullName;
 
-        public readonly Instruction[] Instructions;
+        public MemoryAddress BaseAddress;
+
+        public MethodImplAttributes Attributes;
+
+        /// <summary>
+        /// The encoded cil
+        /// </summary>
+        public BinaryCode Encoded;
+
+        public Instruction[] Instructions;
+
+        public string Formatted;
 
         [MethodImpl(Inline)]
         public CilFunction(ClrArtifactKey id, string name, MethodImplAttributes attribs, Instruction[] instructions)
         {
-            Id = id;
+            Key = id;
+            Identifier = default;
             FullName = name;
+            BaseAddress = default;
             Attributes = attribs;
             Instructions = instructions;
+            Encoded = default;
+            Formatted = EmptyString;
         }
+
+        public bool IsEmpty
+        {
+            get => Key == 0 || Identifier.IsEmpty || Instructions == null || text.blank(Formatted) || Encoded.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            get => !IsEmpty;
+        }
+
     }
 }

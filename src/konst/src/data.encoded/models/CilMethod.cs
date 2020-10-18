@@ -49,11 +49,9 @@ namespace Z0
             ImplSpec = impl;
         }
 
-
         [MethodImpl(Inline)]
         public string Format()
             => text.format(FormatPattern, Base, Name, Encoded.Format());
-
 
         public override string ToString()
             => Format();

@@ -22,8 +22,9 @@ namespace Z0
             {
                 ref readonly var field = ref skip(view,i);
                 var width = field.RenderWidth;
-                var label = $"{Delimiter} {field.Name}";
-                dst.Append(label.PadRight(width));
+                var name = field.Name.PadRight(width);
+                var label = $"{Delimiter} {name} ";
+                dst.Append(label);
             }
         }
 

@@ -18,20 +18,20 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public DataFlow<T> DataFlow {get;}
+        public OutputValue<T> Content {get;}
 
         public FlairKind Flair {get;}
 
         [MethodImpl (Inline)]
-        public ProcessedEvent(WfStepId step, DataFlow<T> flow, CorrelationToken ct, FlairKind flair = Ran)
+        public ProcessedEvent(WfStepId step, T content, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
-            DataFlow = flow;
+            Content = content;
             Flair = flair;
         }
 
         [MethodImpl (Inline)]
         public string Format()
-            => Render.format(EventId, DataFlow);
+            => Render.format(EventId, Content);
     }
 }

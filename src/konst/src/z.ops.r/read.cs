@@ -8,47 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static System.Runtime.CompilerServices.Unsafe;
-    using static System.Runtime.InteropServices.MemoryMarshal;
 
     partial struct z
     {
-        /// <summary>
-        /// Interprets a readonly generic reference as a readonly uint8 reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly byte read<T>(W8 w, in T src)
-            => ref As<T,byte>(ref AsRef(in src));
-
-        /// <summary>
-        /// Interprets a readonly generic reference as a readonly uint16 reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly ushort read<T>(W16 w, in T src)
-            => ref As<T,ushort>(ref AsRef(in src));
-
-        /// <summary>
-        /// Interprets a readonly generic reference as a readonly uint32 reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly uint read<T>(W32 w, in T src)
-            => ref As<T,uint>(ref AsRef(in src));
-
-        /// <summary>
-        /// Interprets a readonly generic reference as a readonly uint64 reference
-        /// </summary>
-        /// <param name="src">The source reference</param>
-        /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly ulong read<T>(W64 w, in T src)
-            => ref As<T,ulong>(ref AsRef(in src));
-
         /// <summary>
         /// Reads a T-cell from a bytespan
         /// </summary>
@@ -58,15 +20,15 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static T read<T>(ReadOnlySpan<byte> src)
             where T : struct
-                => Read<T>(src);
+                => memory.read<T>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly T read2<T>(ReadOnlySpan<byte> src)
-            => ref @as<byte,T>(first(src));
+            => ref memory.read2<T>(src);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref T read2<T>(Span<byte> src)
-            => ref @as<byte,T>(first(src));
+            => ref memory.read2<T>(src);
 
         /// <summary>
         /// Deposits a source value, identified by pointer and offset, into a target reference
@@ -82,10 +44,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public unsafe static ref T read<T>(T* pSrc, int offset, ref T dst)
             where T : unmanaged
-        {
-            dst = *(pSrc + offset);
-            return ref dst;
-        }
+                => ref memory.read(pSrc, offset, ref dst);
 
         /// <summary>
         /// Deposits a range of source values into a target reference
@@ -98,11 +57,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe void read<T>(T* pSrc, int offset, ref T dst, int count)
             where T : unmanaged
-        {
-            var last = offset + count;
-            for(var i=offset; i<last; i++)
-                read(pSrc, i, ref add(dst, i));
-        }
+                => memory.read(pSrc, offset, ref dst, count);
 
         /// <summary>
         /// Reads a T-value from an S-source
@@ -112,7 +67,7 @@ namespace Z0
         /// <typeparam name="T">The target cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T read<S,T>(in S src)
-            => ref As<S,T>(ref edit(src));
+            => ref memory.read<S,T>(src);
 
         /// <summary>
         /// Reads a T-value from an S-source after skipping a specified count of S-elements
@@ -123,240 +78,240 @@ namespace Z0
         /// <typeparam name="T">The target cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T read<S,T>(in S src, int offset)
-            => ref read<S,T>(Add(ref edit(src), offset));
+            => ref memory.read<S,T>(src, offset);
 
         /// <summary>
         /// Reads a T-cell from a specified data source
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in byte src)
-            => ref read<byte,T>(src);
+            => ref memory.read<T>(src);
 
         /// <summary>
         /// Reads a T-cell from a specified data source
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in sbyte src)
-            => ref read<sbyte,T>(src);
+            => ref memory.read<T>(src);
 
         /// <summary>
         /// Reads a T-cell from a specified data source
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in short src)
-            => ref read<short,T>(src);
+            => ref memory.read<T>(src);
 
         /// <summary>
         /// Reads a T-cell from a specified data source
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in ushort src)
-            => ref read<ushort,T>(src);
+            => ref memory.read<T>(src);
 
         /// <summary>
         /// Reads a T-cell from a specified data source
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in int src)
-            => ref read<int,T>(src);
+            => ref memory.read<T>(src);
 
         /// <summary>
         /// Reads a T-cell from a specified data source
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in uint src)
-            => ref read<uint,T>(src);
+            => ref memory.read<T>(src);
 
         /// <summary>
         /// Reads a T-cell from a specified data source
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in long src)
-            => ref read<long,T>(src);
+            => ref memory.read<T>(src);
 
         /// <summary>
         /// Reads a T-cell from a specified data source
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in ulong src)
-            => ref read<ulong,T>(src);
+            => ref memory.read<T>(src);
 
         /// <summary>
         /// Reads a T-cell from a specified data source
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in float src)
-            => ref read<float,T>(src);
+            => ref memory.read<T>(src);
 
         /// <summary>
         /// Reads a T-cell from a specified data source
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in double src)
-            => ref read<double,T>(src);
+            => ref memory.read<T>(src);
 
         /// <summary>
         /// Reads a T-cell from a specified data source
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in bool src)
-            => ref read<bool,T>(src);
+            => ref memory.read<T>(src);
 
         /// <summary>
         /// Reads a T-cell from a specified data source
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in char src)
-            => ref read<char,T>(src);
+            => ref memory.read<T>(src);
 
         /// <summary>
         /// Reads a T-cell from a specified data source
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in decimal src)
-            => ref read<decimal,T>(src);
+            => ref memory.read<T>(src);
 
         /// <summary>
         /// Reads a T-cell from a specified data source after skipping a specified number of source cells
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in byte src, int offset)
-            => ref read<byte,T>(src, offset);
+            => ref memory.read<T>(src, offset);
 
         /// <summary>
         /// Reads a T-cell from a specified data source after skipping a specified number of source cells
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in sbyte src, int offset)
-            => ref read<sbyte,T>(src, offset);
+            => ref memory.read<T>(src, offset);
 
         /// <summary>
         /// Reads a T-cell from a specified data source after skipping a specified number of source cells
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in short src, int offset)
-            => ref read<short,T>(src, offset);
+            => ref memory.read<T>(src, offset);
 
         /// <summary>
         /// Reads a T-cell from a specified data source after skipping a specified number of source cells
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in ushort src, int offset)
-            => ref read<ushort,T>(src, offset);
+            => ref memory.read<T>(src, offset);
 
         /// <summary>
         /// Reads a T-cell from a specified data source after skipping a specified number of source cells
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in int src, int offset)
-            => ref read<int,T>(src, offset);
+            => ref memory.read<T>(src, offset);
 
         /// <summary>
         /// Reads a T-cell from a specified data source after skipping a specified number of source cells
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in uint src, int offset)
-            => ref read<uint,T>(src, offset);
+            => ref memory.read<T>(src, offset);
 
         /// <summary>
         /// Reads a T-cell from a specified data source after skipping a specified number of source cells
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in long src, int offset)
-            => ref read<long,T>(src, offset);
+            => ref memory.read<T>(src, offset);
 
         /// <summary>
         /// Reads a T-cell from a specified data source after skipping a specified number of source cells
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in ulong src, int offset)
-            => ref read<ulong,T>(src, offset);
+            => ref memory.read<T>(src, offset);
 
         /// <summary>
         /// Reads a T-cell from a specified data source after skipping a specified number of source cells
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in float src, int offset)
-            => ref read<float,T>(src, offset);
+            => ref memory.read<T>(src, offset);
 
         /// <summary>
         /// Reads a T-cell from a specified data source after skipping a specified number of source cells
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in double src, int offset)
-            => ref read<double,T>(src, offset);
+            => ref memory.read<T>(src, offset);
 
         /// <summary>
         /// Reads a T-cell from a specified data source after skipping a specified number of source cells
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in bool src, int offset)
-            => ref read<bool,T>(src, offset);
+            => ref memory.read<T>(src, offset);
 
         /// <summary>
         /// Reads a T-cell from a specified data source after skipping a specified number of source cells
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in char src, int offset)
-            => ref read<char,T>(src, offset);
+            => ref memory.read<T>(src, offset);
 
         /// <summary>
         /// Reads a T-cell from a specified data source after skipping a specified number of source cells
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The target type</typeparam>
-        [MethodImpl(Inline), Op, Closures(Closure)]
+        [MethodImpl(Inline)]
         public static ref readonly T read<T>(in decimal src, int offset)
-            => ref read<decimal,T>(src, offset);
+            => ref memory.read<T>(src, offset);
     }
 }

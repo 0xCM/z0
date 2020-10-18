@@ -91,13 +91,6 @@ namespace Z0
                 Process(src.Code, decoded.Value);
         }
 
-        void Process(in ApiParseBlock src)
-        {
-            var instructions = Decoder.Decode(src.Data);
-            if(instructions)
-                Process(src.Data, instructions.Value);
-        }
-
         AsmRowSets<Mnemonic> Processed()
         {
             var keys = Index.Keys.ToArray();
@@ -138,24 +131,24 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        void Process(Address16 localOffset, Span<byte> encoded, in Instruction asm)
+        void Process(Address16 offset, Span<byte> encoded, in Instruction src)
         {
-            var mnemonic = asm.Mnemonic;
+            var mnemonic = src.Mnemonic;
 
             if(mnemonic != 0)
             {
                 var record = new AsmRow(
                     Sequence: NextSequence,
-                    Address: asm.IP,
-                    LocalOffset: localOffset,
+                    Address: src.IP,
+                    LocalOffset: offset,
                     GlobalOffset: NextOffset,
                     Mnemonic: mnemonic.ToString().ToUpper(),
-                    OpCode: asm.InstructionCode.OpCode,
+                    OpCode: src.InstructionCode.OpCode,
                     Encoded: new BinaryCode(encoded.TrimEnd().ToArray()),
-                    SourceCode: asm.FormattedInstruction,
-                    Instruction: asm.InstructionCode.Instruction,
-                    CpuId: text.embrace(asm.CpuidFeatures.Select(x => x.ToString()).Concat(",")),
-                    Id: (OpCodeId)asm.Code
+                    SourceCode: src.FormattedInstruction,
+                    Instruction: src.InstructionCode.Instruction,
+                    CpuId: text.embrace(src.CpuidFeatures.Select(x => x.ToString()).Concat(",")),
+                    Id: (OpCodeId)src.Code
                     );
 
                 if(Index.TryGetValue(mnemonic, out var builder))

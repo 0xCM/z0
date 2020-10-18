@@ -15,6 +15,33 @@ namespace Z0
     [ApiHost]
     public readonly unsafe struct CaptureAlt
     {
+        [Op]
+        public static ReadOnlySpan<IdentifiedMethod> identify(ReadOnlySpan<MethodInfo> src)
+            => src.Map(m =>  new IdentifiedMethod(m.Identify(), m));
+
+        [Op]
+        public static Span<LocatedMethod> locate(ReadOnlySpan<IdentifiedMethod> src)
+        {
+            var count = src.Length;
+            var buffer = alloc<LocatedMethod>(count);
+            ref var located = ref first(span(buffer));
+
+            for(var i=0u; i<count; i++)
+                seek(located, i) = ApiDynamic.jit(skip(src,i));
+            Array.Sort(buffer);
+
+            return buffer;
+        }
+
+        [Op]
+        public static ReadOnlySpan<ApiCaptureBlock> capture(ReadOnlySpan<MethodInfo> src)
+            => capture(src.Map(m =>  new IdentifiedMethod(m.Identify(),m)));
+
+        [Op]
+        public static ReadOnlySpan<ApiCaptureBlock> capture(Type src)
+            => capture(src.DeclaredMethods());
+
+        [Op]
         public static ReadOnlySpan<ApiCaptureBlock> capture(ReadOnlySpan<IdentifiedMethod> src)
             => capture(src, sys.alloc<byte>(Pow2.T14));
 
@@ -24,11 +51,12 @@ namespace Z0
         /// <param name="src">The source method</param>
         /// <param name="id">The identity to confer to the captured result</param>
         /// <param name="buffer">The target buffer</param>
+        [Op]
         public static ApiCaptureBlock capture(MethodInfo src, OpIdentity id, Span<byte> buffer)
         {
             var summary = capture(buffer, id, ApiMemberJit.jit(src));
             var outcome = summary.Outcome;
-            return DefineMember(id, src, summary.Encoded, outcome.TermCode);
+            return block(id, src, summary.Encoded, outcome.TermCode);
         }
 
         /// <summary>
@@ -37,23 +65,16 @@ namespace Z0
         /// <param name="src">The source method</param>
         /// <param name="id">The identity to confer to the captured result, if specified</param>
         /// <param name="buffersize">The target buffer size to allocate,</param>
+        [Op]
         public static ApiCaptureBlock capture(MethodInfo src, OpIdentity? id = null, uint buffersize = Pow2.T14)
         {
             var _id = id ?? OpIdentity.define(src.MetadataToken.ToString());
             var summary = capture(alloc<byte>(buffersize), _id, ApiMemberJit.jit(src));
             var outcome = summary.Outcome;
-            return DefineMember(_id, src, summary.Encoded, outcome.TermCode);
+            return block(_id, src, summary.Encoded, outcome.TermCode);
         }
 
-        static Span<LocatedMethod> locate(ReadOnlySpan<IdentifiedMethod> src)
-        {
-            var count = src.Length;
-            var located = span<LocatedMethod>(count);
-            for(var i=0u; i<count; i++)
-                seek(located,i) = ApiDynamic.jit(skip(src,i));
-            return located;
-        }
-
+        [Op]
         public static ReadOnlySpan<ApiCaptureBlock> capture(ReadOnlySpan<IdentifiedMethod> src, Span<byte> buffer)
         {
             var located = locate(src);
@@ -67,7 +88,7 @@ namespace Z0
                 {
                     var summary = capture(buffer, method.Id, method.Address);
                     var outcome = summary.Outcome;
-                    seek(captured,i) = DefineMember(method.Id, method.Method, summary.Encoded, outcome.TermCode);
+                    seek(captured,i) = block(method.Id, method.Method, summary.Encoded, outcome.TermCode);
                 }
                 catch(Exception e)
                 {
@@ -77,6 +98,7 @@ namespace Z0
             return captured;
         }
 
+        [Op]
         public static ApiMemberCapture capture(in ApiMember src, Span<byte> buffer)
         {
             var summary = capture(buffer, src.Id, ApiDynamic.jit(src));
@@ -85,27 +107,30 @@ namespace Z0
             return new ApiMemberCapture(src, code);
         }
 
+        [Op]
         public static ApiCaptureBlock capture(LocatedMethod located, Span<byte> buffer)
         {
             var summary = capture(buffer, located.Id, located.Address);
-            return DefineMember(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
+            return block(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
         }
 
+        [Op]
         public static ApiCaptureBlock capture(IdentifiedMethod src, Span<byte> buffer)
         {
             var located = ApiDynamic.jit(src);
             var summary = capture(buffer, src.Id, located.Address);
-            return DefineMember(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
+            return block(located.Id, located.Method, summary.Encoded, summary.Outcome.TermCode);
         }
 
+        [Op]
         public static ApiCaptureBlock capture(IdentifiedMethod src)
             => capture(src, sys.alloc<byte>(Pow2.T14));
 
-        [MethodImpl(Inline)]
-        static ApiCaptureBlock DefineMember(OpIdentity id, MethodInfo src, Z0.CapturedCodeBlock bits, ExtractTermCode term)
+        [MethodImpl(Inline), Op]
+        static ApiCaptureBlock block(OpIdentity id, MethodInfo src, Z0.CapturedCodeBlock bits, ExtractTermCode term)
             => new ApiCaptureBlock(id, src, bits.Input, bits.Output, term);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static CapturedOperation capture(Span<byte> buffer, OpIdentity id, MemoryAddress src)
             => capture(buffer, id, src.Pointer<byte>());
 

@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class CliMemoryReader
+    partial class CliMemoryMap
     {
         [MethodImpl(Inline), Op]
         public void Read(TypeDefinitionHandle src, Receiver<TypeDefinition> dst)

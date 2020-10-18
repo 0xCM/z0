@@ -10,7 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Part;
-    using static CilOpCodes;
+    using static CilOpCodeSpecs;
 
     using C = System.Reflection.Metadata.ILOpCode;
 

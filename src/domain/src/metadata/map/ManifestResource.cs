@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class CliMemoryReader
+    partial class CliMemoryMap
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<ManifestResourceHandle> ManifestResourceHandles(MetadataReader reader)

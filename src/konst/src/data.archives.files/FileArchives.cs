@@ -5,12 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.IO;
-    using System.Text;
 
     using static Konst;
     using static z;
@@ -28,7 +25,7 @@ namespace Z0
                         .Select(x => FS.path(pattern));
 
         [MethodImpl(Inline), Op]
-        public static FileKindList kinds(params Assembly[] src)
-            => new FileKindList(src.SelectMany(x => x.Types().Tagged<FileKindAttribute>()));
+        public static FileTypeList kinds(params Assembly[] src)
+            => new FileTypeList(src.SelectMany(x => x.Types().Tagged<FileKindAttribute>()));
     }
 }

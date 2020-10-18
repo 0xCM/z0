@@ -28,7 +28,7 @@ namespace Z0
             Control = control;
             Args = args;
             ApiParts = parts;
-            Paths = paths ?? WfPaths.create();
+            Paths = paths ?? WfShell.paths();
             Ct = z.correlate(control.Id());
         }
     }

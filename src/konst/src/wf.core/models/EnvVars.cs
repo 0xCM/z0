@@ -12,30 +12,11 @@ namespace Z0
     [ApiHost]
     public readonly struct EnvVars
     {
-        public const string Dev = "ZDev";
-
-        public const string Log = "ZLogs";
-
-        public const string Pub = "ZArchive";
-
         public static Env Common
         {
             [MethodImpl(Inline)]
-            get => common();
+            get => Env.create();
         }
-
-        [MethodImpl(Inline), Op]
-        static Env common()
-        {
-            var log = EnvVars.read(Log).Transform(FS.dir);
-            var dev = EnvVars.read(Dev).Transform(FS.dir);
-            var archive = EnvVars.read(Pub).Transform(FS.dir);
-            return new Env(log, dev,archive);
-        }
-
-        [MethodImpl(Inline), Op]
-        public static EnvVar read(string name)
-            => new EnvVar(name, Environment.GetEnvironmentVariable(name));
 
         [MethodImpl(Inline), Op]
         public static EnvVar define(string name, string value)

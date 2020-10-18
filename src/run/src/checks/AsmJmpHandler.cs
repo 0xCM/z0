@@ -16,15 +16,15 @@ namespace Z0
     {
         public IWfShell Wf {get;}
 
-        readonly BitBroker<JmpKind,ApiInstruction> broker;
+        readonly BitBroker<JccKind,ApiInstruction> broker;
 
         [MethodImpl(Inline)]
         public void Connect()
         {
-            broker[JmpKind.JA] = Workflow.handler<ApiInstruction>(OnJA);
-            broker[JmpKind.JAE] = Workflow.handler<ApiInstruction>(OnJAE);
-            broker[JmpKind.JB] = Workflow.handler<ApiInstruction>(OnJB);
-            broker[JmpKind.JBE] = Workflow.handler<ApiInstruction>(OnJBE);
+            broker[JccKind.JA] = Workflow.handler<ApiInstruction>(OnJA);
+            broker[JccKind.JAE] = Workflow.handler<ApiInstruction>(OnJAE);
+            broker[JccKind.JB] = Workflow.handler<ApiInstruction>(OnJB);
+            broker[JccKind.JBE] = Workflow.handler<ApiInstruction>(OnJBE);
         }
 
         [MethodImpl(Inline)]

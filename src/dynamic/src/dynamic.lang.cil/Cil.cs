@@ -14,15 +14,7 @@ namespace Z0
     [ApiHost(ApiNames.CilApi, true)]
     public readonly partial struct CilApi
     {
-        readonly CilOpCodeDataset Data;
-
-        [MethodImpl(Inline), Op]
-        public static CilFunctionFormatter formatter()
-            => new CilFunctionFormatter();
-
-        [MethodImpl(Inline), Op]
-        public static CilFunctionFormatter formatter(CilFormatConfig config)
-            => new CilFunctionFormatter(config);
+        readonly CilOpCodes Data;
 
         [Op]
         public static CilApi init()

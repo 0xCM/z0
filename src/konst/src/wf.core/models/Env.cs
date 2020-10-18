@@ -14,20 +14,36 @@ namespace Z0
     /// </summary>
     public struct Env
     {
+        const string Dev = "ZDev";
+
+        const string Log = "ZLogs";
+
+        const string Pub = "ZArchive";
+
+        const string Db = "ZDb";
+
         public FS.FolderPath LogRoot;
 
         public FS.FolderPath DevRoot;
 
         public FS.FolderPath ArchiveRoot;
 
-        public static FS.FolderPath DbRoot => FS.dir("j:\\database");
+        public FS.FolderPath DbRoot;
 
-        [MethodImpl(Inline)]
-        public Env(EnvVar<FS.FolderPath> log, EnvVar<FS.FolderPath> dev, EnvVar<FS.FolderPath> archive)
+        [MethodImpl(Inline), Op]
+        public static Env create()
         {
-            LogRoot = log;
-            DevRoot = dev;
-            ArchiveRoot = archive;
+            var dst = new Env();
+            dst.LogRoot = read(Log).Transform(FS.dir);
+            dst.DevRoot = read(Dev).Transform(FS.dir);
+            dst.DbRoot = read(Db).Transform(FS.dir);
+            dst.ArchiveRoot = read(Pub).Transform(FS.dir);
+            return dst;
         }
+
+        [MethodImpl(Inline), Op]
+        static EnvVar read(string name)
+            => new EnvVar(name, Environment.GetEnvironmentVariable(name));
+
     }
 }

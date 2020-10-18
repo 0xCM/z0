@@ -38,5 +38,7 @@ namespace Z0.Asm
         Option<AsmFxList> Decode(ApiCodeBlock src, Action<Instruction> f);
 
         Option<AsmFxList> Decode(BasedCodeBlock src, Action<Instruction> f);
+
+        Option<AsmInstructions> Decode(BinaryCode code, MemoryAddress @base);
     }
 }

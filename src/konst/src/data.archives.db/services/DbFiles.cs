@@ -79,7 +79,7 @@ namespace Z0
             => Root + FS.folder(PN.Docs);
 
         public FS.FilePath Table(string id)
-            => DbPaths.TableRoot() + FS.file(id,FileKind.Csv);
+            => DbPaths.TableRoot() + FS.file(id,FileKindType.Csv);
 
 
         public FS.FilePath Table<K>(string id, K kind)

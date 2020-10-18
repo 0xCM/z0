@@ -23,55 +23,25 @@ namespace Z0.Asm
         public static UsedRegister[] UsedRegisters(Iced.InstructionInfo src)
             => src.GetUsedRegisters().Map(x => Deicer.Thaw(x));
 
-        [MethodImpl(Inline), Op]
-        public static InstructionInfo FxInfo(Iced.Instruction src)
-            => Deicer.Thaw(src.GetInfo());
-
         [MethodImpl(Inline)]
         public static Func<OpAccess[]> OpAccessDefer(Iced.InstructionInfo src)
-            => () => OpAccess(src);
-
-        [MethodImpl(Inline)]
-        public static Func<AsmFlowInfo> FlowInfoDefer(Iced.Code src)
-            => () => FxFlow(src);
+            => () => access(src);
 
         [Op]
-        public static AsmSpecifier FxCode(Iced.Instruction src)
+        public static AsmSpecifier specifier(Iced.Instruction src)
         {
             var opcode = Iced.EncoderCodeExtensions.ToOpCode(src.Code);
             return new AsmSpecifier(opcode.ToInstructionString(), opcode.ToOpCodeString());
         }
 
         [MethodImpl(Inline), Op]
-        public static OpAccess[] OpAccess(Iced.InstructionInfo src)
+        public static OpAccess[] access(Iced.InstructionInfo src)
             => z.array(
                     Deicer.Thaw(src.Op0Access),
                     Deicer.Thaw(src.Op0Access),
                     Deicer.Thaw(src.Op2Access),
                     Deicer.Thaw(src.Op3Access),
                     Deicer.Thaw(src.Op4Access)).Where(x => x != 0);
-       [Op]
-       public static AsmFlowInfo FxFlow(Iced.Code src)
-            => new AsmFlowInfo
-            {
-                Code = Deicer.Thaw(src),
-                ConditionCode = Deicer.Thaw(src.GetConditionCode()),
-                IsStackInstruction = src.IsStackInstruction(),
-                FlowControl = Deicer.Thaw(src.FlowControl()),
-                IsJccShortOrNear = src.IsJccShortOrNear(),
-                IsJccNear = src.IsJccNear(),
-                IsJccShort = src.IsJccShort(),
-                IsJmpShort = src.IsJmpShort(),
-                IsJmpNear = src.IsJmpNear(),
-                IsJmpShortOrNear = src.IsJmpShortOrNear(),
-                IsJmpFar = src.IsJmpFar(),
-                IsCallNear = src.IsCallNear(),
-                IsCallFar = src.IsCallFar(),
-                IsJmpNearIndirect = src.IsJmpNearIndirect(),
-                IsJmpFarIndirect = src.IsJmpFarIndirect(),
-                IsCallNearIndirect = src.IsCallNearIndirect(),
-                IsCallFarIndirect = src.IsCallFarIndirect()
-            };
 
         /// <summary>
         /// Converts the iced-defined data structure to a Z0-defined replication of the iced structure
@@ -86,8 +56,7 @@ namespace Z0.Asm
                 UsedMemory = UsedMemory(info),
                 UsedRegisters = UsedRegisters(info),
                 Access = OpAccessDefer(info),
-                FlowInfo = FlowInfoDefer(src.Code),
-                InstructionCode = FxCode(src),
+                InstructionCode = specifier(src),
                 ByteLength = src.ByteLength,
                 ConditionCode = Deicer.Thaw(src.ConditionCode),
                 CodeSize = Deicer.Thaw(src.CodeSize),

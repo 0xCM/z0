@@ -16,23 +16,23 @@ namespace Z0.Asm
 
     public readonly struct AsmFxCheck
     {
-        public static void CheckInstructionSize(in Instruction instruction, uint offset, in AsmBlock src)
+        public static void CheckInstructionSize(in Instruction instruction, uint offset, in ApiBlockAsm src)
         {
             if(src.Encoded.Length < offset + instruction.ByteLength)
                 throw SizeMismatch(instruction, offset, src);
         }
 
-        public static void CheckBlockLength(in AsmBlock src)
+        public static void CheckBlockLength(in ApiBlockAsm src)
         {
             var blocklen = (uint)src.Decoded.Select(i => i.ByteLength).Sum();
             if(blocklen != src.Encoded.Length)
                 throw BadBlockLength(src,blocklen);
         }
 
-        static AppException BadBlockLength(in AsmBlock src, uint computedLength)
+        static AppException BadBlockLength(in ApiBlockAsm src, uint computedLength)
             => AppException.Define(InstructionBlockSizeMismatch(src.BaseAddress, src.Encoded.Length, computedLength));
 
-        static AppException SizeMismatch(in Instruction instruction, uint offset, in AsmBlock src)
+        static AppException SizeMismatch(in Instruction instruction, uint offset, in ApiBlockAsm src)
             => AppException.Define(InstructionSizeMismatch(instruction.IP, offset, (uint)src.Encoded.Length, (uint)instruction.ByteLength));
 
         static AppMsg InstructionSizeMismatch(MemoryAddress ip, uint offset, uint actual, uint reported,

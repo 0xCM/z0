@@ -53,5 +53,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Data;
         }
+
+        public ref ApiMemberCode this[uint index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Data[index];
+        }
     }
 }

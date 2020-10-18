@@ -5,7 +5,6 @@
 namespace Z0.Asm
 {
     using System;
-    using System.Diagnostics;
 
     public struct Instruction : IAsmFxInfo
     {
@@ -34,11 +33,6 @@ namespace Z0.Asm
         /// </summary>
         public Func<OpAccess[]> Access {get;set;}
 
-        /// <summary>
-        /// Computes flow information upon request
-        /// </summary>
-        public Func<AsmFlowInfo> FlowInfo {get;set;}
-
         //
         // Summary:
         //     Gets the condition code if it's jcc, setcc, cmovcc else Iced.Intel.ConditionCode.None
@@ -60,7 +54,7 @@ namespace Z0.Asm
         // Summary:
         //     Gets the index register scale value, valid values are *1, *2, *4, *8. Use this
         //     property if the operand has kind Iced.Intel.OpKind.Memory
-        public MemoryScale MemoryIndexScale {get; set;}
+        public MemScale MemoryIndexScale {get; set;}
         //
         // Summary:
         //     Gets the memory operand's displacement. This should be sign extended to 64 bits

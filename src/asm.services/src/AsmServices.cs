@@ -65,7 +65,7 @@ namespace Z0.Asm
             => new AsmWriter(dst, formatter);
 
         [Op]
-        public static AsmRoutine routine(ApiMetadataUri meta, OpUri uri, string sig, AsmBlock src, bool check = false)
+        public static AsmRoutine routine(ApiMetadataUri meta, OpUri uri, string sig, ApiBlockAsm src, bool check = false)
         {
             var count = src.InstructionCount;
             var info = new AsmFxSummary[count];

@@ -5,11 +5,7 @@
 namespace Z0
 {
     using System;
-    using System.Linq;
-    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.IO;
     using System.Text;
 
     using static Konst;
@@ -56,7 +52,7 @@ namespace Z0
         }
 
         [Op]
-        public static string format(FileKindList src)
+        public static string format(FileTypeList src)
         {
             var dst = text.build();
             format(src,dst);
@@ -64,7 +60,7 @@ namespace Z0
         }
 
         [Op]
-        public static void format(FileKindList src, StringBuilder dst)
+        public static void format(FileTypeList src, StringBuilder dst)
         {
             dst.Append(Chars.LBracket);
             var count = src.Count;

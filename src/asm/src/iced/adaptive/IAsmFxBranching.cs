@@ -7,7 +7,7 @@ namespace Z0.Asm
     /// <summary>
     /// Aggregates call/jmp/branching instruction aspects
     /// </summary>
-    public interface IAsmFxBranching  : IAsmJccAspects, IAsmJmpAspects, IAsmFxCall, IAsmFxBranch
+    public interface IAsmFxBranching  : IAsmJccAspects, IAsmJmpAspects, IAsmFxCall
     {
 
     }

@@ -87,7 +87,7 @@ namespace Z0
                 => Directory.Exists(Name) ? Directory.EnumerateFiles(Name).Map(FS.path) : FS.Files.Empty;
 
             public Files Files(string pattern, bool recurse)
-                =>  Exists ? Directory.EnumerateFiles(Name, pattern, option(recurse)).Map(f => FS.path(f)) : FS.Files.Empty;
+                => Exists ? Directory.EnumerateFiles(Name, pattern, option(recurse)).Map(f => FS.path(f)) : FS.Files.Empty;
 
             public Files Files(bool recurse)
                 => Exists ? Directory.EnumerateFiles(Name, SearchAll, option(recurse)).Map(f => FS.path(f)) : FS.Files.Empty;
@@ -110,6 +110,15 @@ namespace Z0
             /// <param name="ext">The extension to match</param>
             public FilePath[] Files(ApiHostUri host, FileExt ext)
                 => Files(ext).Where(f => f.IsHost(host));
+
+            // public static FilePath[] Files(FolderPath src, PartId part, FileExt ext)
+            //     => Files(src, ext).Where(f => f.IsOwner(part));
+
+            // public static FilePath[] Files(FolderPath src, ApiHostUri host, FileExt ext)
+            //     => Files(src,ext).Where(f => f.IsHost(host));
+
+            // public static FilePath[] Files(FolderPath src, FileExt ext, string match)
+            //     => Files(src, ext).Where(f => f.FileName.Name.Contains(match));
 
             /// <summary>
             /// Just the one
@@ -167,14 +176,7 @@ namespace Z0
             static FilePath[] Files(FolderPath src, FileName name)
                 => src.Exists ? Directory.GetFiles(src.Name, $"{name}").Map(FS.path) : sys.empty<FilePath>();
 
-            static FilePath[] Files(FolderPath src, PartId part, FileExt ext)
-                => Files(src, ext).Where(f => f.IsOwner(part));
 
-            static FilePath[] Files(FolderPath src, ApiHostUri host, FileExt ext)
-                => Files(src,ext).Where(f => f.IsHost(host));
-
-            static FilePath[] Files(FolderPath src, FileExt ext, string match)
-                => Files(src, ext).Where(f => f.FileName.Name.Contains(match));
         }
     }
 }

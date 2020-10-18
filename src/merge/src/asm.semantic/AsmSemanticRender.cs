@@ -56,7 +56,7 @@ namespace Z0
             var part = src.Part;
             var dst = semantic(Wf);
             var dir = dst.SemanticDir(part).Clear();
-            var view = src.ViewHosts;
+            var view = src.View;
             var count = view.Length;
             for(var i=0u; i<count; i++)
             {
@@ -102,7 +102,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var instruction = ref skip(instructions,i);
-                var size = (uint)instruction.ByteLength;
+                var size = (uint)instruction.Size;
                 Render(instruction, address, offset, sequence);
                 address += size;
                 offset += size;
@@ -368,7 +368,7 @@ namespace Z0
         }
 
         [Op, MethodImpl(NotInline)]
-        static string Render(MemoryScale src)
+        static string Render(MemScale src)
         {
             if(src.IsNonEmpty)
                 return src.Value.ToString();
