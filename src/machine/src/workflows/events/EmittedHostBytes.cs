@@ -25,7 +25,7 @@ namespace Z0
 
 
         [MethodImpl(Inline)]
-        public EmittedHostBytesEvent(WfStepId step, ApiHostUri host, ushort count, CorrelationToken ct, FlairKind flair = Running)
+        public EmittedHostBytesEvent(WfStepId step, ApiHostUri host, ushort count, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName,step,ct);
             Host= host;

@@ -20,11 +20,13 @@ namespace Z0
 
         Ran = ConsoleColor.Magenta,
 
+        Processed = ConsoleColor.Blue,
+
         Warning = ConsoleColor.Yellow,
 
         Error = ConsoleColor.Red,
 
-        Disposed = ConsoleColor.Blue,
+        Disposed = ConsoleColor.Gray,
 
         Status = ConsoleColor.Cyan,
 

@@ -15,6 +15,22 @@ namespace Z0
 
     public readonly struct ModuleArchive : IModuleArchive
     {
+        /// <summary>
+        /// Creates an archive over both managed and unmanaged modules
+        /// </summary>
+        /// <param name="root">The archive root</param>
+        [MethodImpl(Inline), Op]
+        public static IModuleArchive create(ArchiveConfig config)
+            => new ModuleArchive(config);
+
+        /// <summary>
+        /// Creates an archive over both managed and unmanaged modules
+        /// </summary>
+        /// <param name="root">The archive root</param>
+        [MethodImpl(Inline), Op]
+        public static IModuleArchive create(FS.FolderPath root)
+            => new ModuleArchive(new ArchiveConfig(root));
+
         public FS.FolderPath Root => Config.Root;
 
         public ArchiveConfig Config {get;}

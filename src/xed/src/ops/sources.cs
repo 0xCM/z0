@@ -12,10 +12,6 @@ namespace Z0
     partial struct XedWfOps
     {
         [MethodImpl(Inline), Op]
-        public static ListedFiles SourceFiles(in XedWfConfig config)
-            => FileArchives.list(FS.dir(config.SourceRoot.Name),"*.*", true);
-
-        [MethodImpl(Inline), Op]
         public static XedSources SourceArchive(FS.FolderPath root)
             => new XedSources(root);
     }

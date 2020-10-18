@@ -11,8 +11,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct FileArchives
+    partial struct ApiFiles
     {
+
         [Op]
         public static string format(ListedFiles src)
         {

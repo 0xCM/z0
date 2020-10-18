@@ -53,7 +53,7 @@ namespace Z0
             Index = index;
             SourceDir = FS.dir(context.Paths.AppCaptureRoot.Name);
             TargetDir = FS.dir((context.Paths.ResourceRoot + FolderName.Define(ProjectName)).Name);
-            Archive = Archives.hex(FS.dir(SourceDir.Name));
+            Archive = ApiFiles.hex(FS.dir(SourceDir.Name));
             Wf.Created(Host);
         }
 
@@ -82,11 +82,11 @@ namespace Z0
 
         void Emit(ApiHostCodeBlocks src, FS.FolderPath dst)
         {
-            var path = (dst + FS.folder("src")) + FS.file(src.Host.FileName(ArchiveFileKinds.Cs).Name);
+            var target = (dst + FS.folder("src")) + FS.file(src.Host.FileName(ArchiveFileKinds.Cs).Name);
             var resources = HostResources.from(src);
             var typename = text.concat(src.Host.Owner.Format(), Chars.Underscore, src.Host.Name);
             var members = new HashSet<string>();
-            using var writer = path.Writer();
+            using var writer = target.Writer();
             EmitFileHeader(writer);
             OpenFileNamespace(writer, "Z0.ByteCode");
             EmitUsingStatements(writer);
@@ -104,7 +104,9 @@ namespace Z0
             CloseTypeDeclaration(writer);
             CloseFileNamespace(writer);
 
-            Wf.Raise(new EmittedHostBytesEvent(Host, src.Host, (ushort)resources.Count, Wf.Ct));
+            Wf.Processed(src.Host, resources.Count);
+            Wf.EmittedFile(src.Host, members.Count, target);
+            //Wf.Raise(new EmittedHostBytesEvent(Host, src.Host, (ushort)resources.Count, Wf.Ct));
         }
     }
 }

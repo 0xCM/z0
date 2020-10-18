@@ -16,6 +16,10 @@ namespace Z0
     [ApiHost]
     public readonly partial struct ApiCodeBlocks
     {
+        [MethodImpl(Inline), Op]
+        public static ApiPartCodeBlocks combine(PartId part, ApiHostCodeBlocks[] src)
+            => new ApiPartCodeBlocks(part,src);
+
         /// <summary>
         /// Determines whether an operation accepts an argument of specified numeric kind
         /// </summary>

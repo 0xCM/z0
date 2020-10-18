@@ -18,7 +18,7 @@ namespace Z0
         static FS.FolderPath BuildRoot = FS.dir(@"J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64");
 
         static IModuleArchive CreateBuildModuleArchive()
-            => Archives.modules(new ArchiveConfig(BuildRoot));
+            => ModuleArchive.create(new ArchiveConfig(BuildRoot));
 
         [MethodImpl(Inline)]
         static void Print<T>(IWfShell wf, ReadOnlySpan<T> src)

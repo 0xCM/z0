@@ -12,7 +12,7 @@ namespace Z0
 
     using api = Cmd;
 
-    public readonly struct CmdExpr
+    public readonly struct CmdExpr : ITextual
     {
         readonly string Content;
 
@@ -33,5 +33,12 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Content;
         }
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Content;
+
+        public override string ToString()
+            => Format();
     }
 }

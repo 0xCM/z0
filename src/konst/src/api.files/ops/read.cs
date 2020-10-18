@@ -12,8 +12,18 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ApiHexArchives
+    partial struct ApiFiles
     {
+        [MethodImpl(Inline)]
+        public static IApiHexReader hexreader<H>(H rep = default)
+            where H : struct, IArchiveReader
+        {
+            if(typeof(H) == typeof(ApiHexReader))
+                return new ApiHexReader();
+            else
+                throw no<H>();
+        }
+
         /// <summary>
         /// Enumerates the content of all archived files
         /// </summary>
@@ -24,7 +34,7 @@ namespace Z0
             for(var i=0; i<iCount; i++)
             {
                 var path = list[i].Path;
-                var items = Archives.hexblocks(path);
+                var items = hexblocks(path);
                 var jCount = items.Length;
                 for(var j=0; j<jCount; j++)
                     yield return items[j];            }

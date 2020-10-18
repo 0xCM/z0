@@ -6,12 +6,23 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.IO;
 
     using static Konst;
     using static z;
 
     public readonly struct ListedFiles
     {
+        [MethodImpl(Inline)]
+        static SearchOption option(bool recurse)
+            => recurse ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+
+        [Op]
+        public static ListedFiles search(FileArchive src, string pattern, bool recurse)
+            => Directory.EnumerateFiles(src.Root.Name, pattern, option(recurse))
+                        .Array()
+                        .Select(x => FS.path(pattern));
+
         readonly TableSpan<ListedFile> Data;
 
         [MethodImpl(Inline)]

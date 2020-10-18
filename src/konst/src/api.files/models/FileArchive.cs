@@ -6,26 +6,30 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
     using System.IO;
 
     using static Konst;
     using static z;
 
-    public readonly partial struct FileArchives
+    public readonly struct FileArchive : IFileArchive<FileArchive>
     {
+        public FS.FolderPath Root {get;}
+
+        [MethodImpl(Inline)]
+        public static implicit operator FileArchive(FS.FolderPath src)
+            => new FileArchive(src);
+
+        [MethodImpl(Inline)]
+        public FileArchive(FS.FolderPath root)
+            => Root = root;
+
         [MethodImpl(Inline)]
         static SearchOption option(bool recurse)
             => recurse ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
 
-        [Op]
-        public static ListedFiles list(FileArchive src, string pattern, bool recurse)
-            => Directory.EnumerateFiles(src.Root.Name, pattern, option(recurse))
+        public ListedFiles List(string pattern, bool recurse)
+            => Directory.EnumerateFiles(Root.Name, pattern, option(recurse))
                         .Array()
                         .Select(x => FS.path(pattern));
-
-        [MethodImpl(Inline), Op]
-        public static FileTypeList kinds(params Assembly[] src)
-            => new FileTypeList(src.SelectMany(x => x.Types().Tagged<FileKindAttribute>()));
     }
 }

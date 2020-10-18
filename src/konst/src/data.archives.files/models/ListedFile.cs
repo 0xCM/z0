@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using  api = Archives;
 
     /// <summary>
     /// Defines an entry in list of files
@@ -43,6 +42,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+            => ApiFiles.format(this);
     }
 }

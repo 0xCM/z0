@@ -134,11 +134,11 @@ namespace Z0.Asm
 
         [MethodImpl(Inline)]
         ICaptureArchive CaptureArchive(FolderPath root)
-            => Archives.capture(root);
+            => ApiFiles.capture(root);
 
 
         [MethodImpl(Inline)]
         ApiCodeArchive UriBitsArchive(FolderPath root)
-            => Archives.hex(FS.dir(root.Name));
+            => ApiFiles.hex(FS.dir(root.Name));
     }
 }

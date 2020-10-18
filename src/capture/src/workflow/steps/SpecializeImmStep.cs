@@ -40,7 +40,7 @@ namespace Z0.Asm
             Wf = wf;
             Asm = asm;
             Formatter = formatter;
-            CodeArchive = Archives.capture(root);
+            CodeArchive = ApiFiles.capture(root);
             Specializer = Capture.Services.ImmSpecializer(decoder);
             Wf.Created(StepId);
         }

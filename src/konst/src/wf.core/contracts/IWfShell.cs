@@ -282,8 +282,11 @@ namespace Z0
         void Processed<T>(T content)
             => WfEvents.processed(Host, content, Ct);
 
+        void Processed<T>(ApiHostUri uri, T content)
+            => WfEvents.processed(Host, delimit(uri,content), Ct);
+
         void Processed<S,T>(S src, T dst)
-            => WfEvents.processed(Host, (src,dst), Ct);
+            => WfEvents.processed(Host, (src, dst), Ct);
 
         void ProcessingFile<T>(FS.FilePath src, T kind)
         {
@@ -297,10 +300,9 @@ namespace Z0
         void ProcessedFile<T,M>(FS.FilePath src, T kind, M metric)
             => Raise(new ProcessedFileEvent<T,M>(Host, src, kind, metric, Ct));
 
-
         void Row<T>(T content)
             where T : ITextual
-                => Raise(rows(content, Ct));
+                => Raise(rows(content));
 
         void Rows<T>(params T[] content)
             where T : ITextual
@@ -322,6 +324,6 @@ namespace Z0
         void Row<K,T>(K kind, T content)
             where T : ITextual
             where K : unmanaged
-                => Raise(rows(kind, content, Ct));
+                => Raise(rows(kind, content));
     }
 }

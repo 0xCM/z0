@@ -48,7 +48,7 @@ namespace Z0.Asm
             var id = PartId.GMath;
             var paths = AppPaths.ForApp();
             var capture = AsmCheck.CaptureArchive(paths.AppCaptureRoot);
-            var archive = Archives.hex(FS.dir(capture.X86Dir.Name));
+            var archive = ApiFiles.hex(FS.dir(capture.X86Dir.Name));
             var direct = archive.Read(dSrc).ToArray();
             var generic = archive.Read(gSrc).ToArray();
             check_unary_ops(direct);

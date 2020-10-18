@@ -14,13 +14,15 @@ namespace Z0
     /// </summary>
     public struct Env
     {
-        const string Dev = "ZDev";
+        const string ZDev = nameof(ZDev);
 
-        const string Log = "ZLogs";
+        const string ZLogs = nameof(ZLogs);
 
         const string Pub = "ZArchive";
 
-        const string Db = "ZDb";
+        const string ZDb = nameof(ZDb);
+
+        const string CORE_ROOT = nameof(CORE_ROOT);
 
         public FS.FolderPath LogRoot;
 
@@ -30,20 +32,22 @@ namespace Z0
 
         public FS.FolderPath DbRoot;
 
+        public FS.FolderPath ClrCoreRoot;
+
         [MethodImpl(Inline), Op]
         public static Env create()
         {
             var dst = new Env();
-            dst.LogRoot = read(Log).Transform(FS.dir);
-            dst.DevRoot = read(Dev).Transform(FS.dir);
-            dst.DbRoot = read(Db).Transform(FS.dir);
+            dst.LogRoot = read(ZLogs).Transform(FS.dir);
+            dst.DevRoot = read(ZDev).Transform(FS.dir);
+            dst.DbRoot = read(ZDb).Transform(FS.dir);
             dst.ArchiveRoot = read(Pub).Transform(FS.dir);
+            dst.ClrCoreRoot = read("CORE_ROOT").Transform(FS.dir);
             return dst;
         }
 
         [MethodImpl(Inline), Op]
         static EnvVar read(string name)
             => new EnvVar(name, Environment.GetEnvironmentVariable(name));
-
     }
 }

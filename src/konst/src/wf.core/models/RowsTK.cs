@@ -28,17 +28,17 @@ namespace Z0
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public RowsEvent(T data, K kind, CorrelationToken ct, FlairKind flair = FlairKind.DataRow)
+        public RowsEvent(T data, K kind)
         {
             DataType = typeof(T);
             DataKind = kind;
-            EventId = (text.format("{0}/{1}", DataKind, DataType.Name), ct);
+            EventId = (text.format("{0}:{1}", DataKind, DataType.Name), CorrelationToken.Empty);
             Content = data;
-            Flair = flair;
+            Flair = FlairKind.DataRow;
         }
 
         [MethodImpl(Inline)]
         public string Format()
-            => Render.format(EventId, Content);
+            => string.Format("{0}:{1}");
     }
 }

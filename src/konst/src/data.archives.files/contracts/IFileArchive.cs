@@ -12,13 +12,13 @@ namespace Z0
         FS.FolderPath Root {get;}
 
         IEnumerable<FS.FolderPath> Directories()
-            => FileArchives.directories(Root, true);
+            => ApiFiles.directories(Root, true);
 
         IEnumerable<FS.FilePath> Files()
-            => FileArchives.files(Root, true);
+            => ApiFiles.files(Root, true);
 
         IEnumerable<FS.FilePath> Files(FS.FileExt ext)
-            => FileArchives.files(Root, true);
+            => ApiFiles.files(Root, true);
 
     }
 

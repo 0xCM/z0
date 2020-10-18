@@ -10,16 +10,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ApiHexArchives
+    partial struct ApiFiles
     {
-        [MethodImpl(Inline)]
-        public static IApiHexReader reader<H>(H rep = default)
-            where H : struct, IArchiveReader
-        {
-            if(typeof(H) == typeof(ApiHexReader))
-                return new ApiHexReader();
-            else
-                throw no<H>();
-        }
+        [MethodImpl(Inline), Op]
+        public static IFileArchive filtered(FS.FolderPath root, string filter)
+            => new FilteredArchive(root, filter);
     }
 }

@@ -81,11 +81,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ApiHostCodeBlocks HostCodeBlocks(ApiHostUri host)
-            => Archives.index(host, PartIndex[host]);
+            => ApiFiles.index(host, PartIndex[host]);
 
         [MethodImpl(Inline)]
         public ApiPartCodeBlocks PartCodeBlocks(PartId id)
-            => ApiHexArchives.combine(id, Hosts.Map(HostCodeBlocks));
+            => ApiCodeBlocks.combine(id, Hosts.Map(HostCodeBlocks));
 
         public ApiCodeBlock this[MemoryAddress location]
         {

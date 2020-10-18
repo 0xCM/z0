@@ -5,16 +5,17 @@
 namespace Z0
 {
     using System;
+    using System.Linq;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    public readonly struct CaptureArchive : ICaptureArchive<CaptureArchive>
+    partial struct ApiFiles
     {
-        public FolderPath ArchiveRoot {get;}
-
-        [MethodImpl(Inline)]
-        internal CaptureArchive(FS.FolderPath root)
-            => ArchiveRoot = FolderPath.Define(root.Create().Name);
+        [MethodImpl(Inline), Op]
+        public static IEnumerable<FS.FilePath> files(FS.FolderPath root,  bool recurse = true)
+            => root.Files(recurse);
     }
 }

@@ -12,14 +12,14 @@ namespace Z0
     partial struct WfEvents
     {
         [MethodImpl(Inline)]
-        public static RowsEvent<T> rows<T>(T content, CorrelationToken ct)
+        public static RowsEvent<T> rows<T>(T content)
             where T : ITextual
-                => new RowsEvent<T>(content, ct);
+                => new RowsEvent<T>(content);
 
         [MethodImpl(Inline)]
-        public static RowsEvent<T,K> rows<T,K>(K kind, T content, CorrelationToken ct)
+        public static RowsEvent<T,K> rows<T,K>(K kind, T content)
             where T : ITextual
              where K : unmanaged
-                => new RowsEvent<T,K>(content, kind, ct);
+                => new RowsEvent<T,K>(content, kind);
     }
 }

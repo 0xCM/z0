@@ -47,7 +47,7 @@ namespace Z0.Tools
 
             TLS = P2ᐞ16,
 
-            OUTPUT = P2ᐞ17,
+            OUT = P2ᐞ17,
         }
     }
 }

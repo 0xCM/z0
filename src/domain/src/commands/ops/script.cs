@@ -10,16 +10,14 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ApiHexArchives
+    partial struct Cmd
     {
-        [MethodImpl(Inline)]
-        public static ApiHexWriter writer<H>(FS.FilePath dst, H rep = default)
-            where H : struct, IArchiveWriter<H>
-        {
-            if(typeof(H) == typeof(ApiHexWriter))
-                return new ApiHexWriter(dst);
-            else
-                throw no<H>();
-        }
+        [MethodImpl(Inline), Op]
+        public static CmdScript script(uint count)
+            => new CmdScript(alloc<CmdExpr>(count));
+
+        [MethodImpl(Inline), Op]
+        public static CmdScript script(params CmdExpr[] expr)
+            => new CmdScript(expr);
     }
 }

@@ -5,11 +5,9 @@
 namespace Z0
 {
     using System;
-    using System.IO;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Render;
 
     [Event(EventName)]
     public readonly struct ProcessedFileEvent<T,M> : IWfEvent<ProcessedFileEvent<T,M>>
@@ -27,13 +25,13 @@ namespace Z0
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public ProcessedFileEvent(WfStepId step, FS.FilePath src, T kind,  M metric, CorrelationToken ct, FlairKind flair = Ran)
+        public ProcessedFileEvent(WfStepId step, FS.FilePath src, T kind,  M metric, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
             SourcePath = src;
             FileKind = kind;
             Metric = metric;
-            Flair = flair;
+            Flair = FlairKind.Processed;
         }
 
         [MethodImpl(Inline)]

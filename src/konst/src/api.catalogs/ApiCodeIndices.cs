@@ -33,7 +33,7 @@ namespace Z0
         {
             var members = locator.Locate(api.FindHost(host).Require());
             var idx = index(members);
-            var archive =  Archives.capture(root);
+            var archive =  ApiFiles.capture(root);
             var paths =  HostCaptureArchive.create(root, host);
             var code = ApiHexReader.Service.Read(paths.HostX86Path);
             var opIndex =  index(code);

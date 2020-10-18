@@ -15,10 +15,10 @@ namespace Z0.Tools
         [LiteralProvider]
         public readonly struct Expressions
         {
-            [StringLiteral("dumpbin /HEADERS /OUTPUT:{1} {0}")]
+            [StringLiteral("dumpbin /HEADERS /OUT:{1} {0}")]
             const string HeadersLiteral = ToolName + Space
                 + FlagPrefix + nameof(Flag.HEADERS) + Space
-                + FlagPrefix + nameof(Flag.OUTPUT) + FlagDelimiter + RP.Slot1 + Space
+                + FlagPrefix + nameof(Flag.OUT) + FlagDelimiter + RP.Slot1 + Space
                 + RP.Slot0;
 
             public static CmdExpr Headers => HeadersLiteral;

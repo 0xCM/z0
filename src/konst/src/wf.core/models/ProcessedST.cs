@@ -8,8 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Render;
-    using static z;
 
     [Event(EventName)]
     public readonly struct ProcessedEvent<S,T> : IWfEvent<ProcessedEvent<S,T>>
@@ -23,11 +21,11 @@ namespace Z0
         public FlairKind Flair {get;}
 
         [MethodImpl (Inline)]
-        public ProcessedEvent(WfStepId step, DataFlow<S,T> flow, CorrelationToken ct, FlairKind flair = Ran)
+        public ProcessedEvent(WfStepId step, DataFlow<S,T> flow, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
             DataFlow = flow;
-            Flair = flair;
+            Flair = FlairKind.Processed;
         }
 
         [MethodImpl (Inline)]

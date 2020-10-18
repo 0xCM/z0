@@ -44,12 +44,17 @@ namespace Z0
 
         public void Run()
         {
-            var archive = RuntimeArchive.create();
-            //Wf.Rows(archive.NativeLibraries.Storage);
+            var dir = EnvVars.Common.ClrCoreRoot;
 
-            var dll = archive.Root + FS.file("mscoredbi", ArchiveFileKinds.Dll);
-            var cmd = DumpBin.headers(dll, Wf.Db().ToolOutput(DumpBin.ToolId));
-            Wf.Status(cmd);
+
+            var name = FS.file("clrjit", ArchiveFileKinds.Dll);
+            var source = dir + name;
+            var target = Wf.Db().ToolOutput(DumpBin.ToolId);
+            var cmd = DumpBin.headers(source, target);
+            var script = Cmd.script(cmd);
+
+            Wf.Row(cmd);
+
         }
     }
 }

@@ -1,14 +1,17 @@
 echo off
-call wf\vars.cmd
+
+set CmdSep="--------------------------------------------------------------------------------"
+set CmdLog=%ZDb%\logs\commands\command.build.log
+echo %CmdSep% >> %CmdLog%
 
 set SlnPath="%ZDev%\z0.sln"
-set BuildLog="%ZLogs%\builds\logs\z0.main.binlog"
-set Cmd=dotnet build %SlnPath% -bl:%BuildLog%;ProjectImports=ZipFile -m -detailedSummary -graph:true
+echo SlnPath:%SlnPath% >> %CmdLog%
+
+set BuildLog="%ZDb%\logs\build\z0.main.binlog"
+echo BuildLog:%BuildLog% >> %CmdLog%
+
+set CmdExec=dotnet build %SlnPath% -bl:%BuildLog%;ProjectImports=ZipFile -m -detailedSummary -graph:true
+echo CmdExec:%BuildCmd% >> %CmdLog%
 
 echo on
-call %Cmd%
-echo off
-
-set Cmd=%ZDev%\wf\stage.bat
-echo on
-call %Cmd%
+call %CmdExec%

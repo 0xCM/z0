@@ -27,7 +27,7 @@ namespace Z0.Asm
             => Context.CaptureCore;
 
         IPartCapturePaths CaptureArchive(FolderPath root)
-            => Archives.capture(root);
+            => ApiFiles.capture(root);
 
         void WriteAsm(ApiCaptureBlock capture, StreamWriter dst)
         {

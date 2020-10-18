@@ -12,8 +12,40 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ApiHexArchives
+    partial struct ApiFiles
     {
+        [MethodImpl(Inline), Op]
+        public static ApiHostCodeBlocks index(ApiHostUri host, ApiCodeBlock[] code)
+            => new ApiHostCodeBlocks(host,code);
+
+        public static ApiHostCodeBlocks index(ApiCodeArchive src, FS.FilePath path)
+        {
+            var uri = ApiUri.host(path.Name);
+            if(uri.Failed || uri.Value.IsEmpty)
+                return default;
+
+            var dst = z.list<ApiCodeBlock>();
+            foreach(var item in read(src))
+                if(item.IsNonEmpty)
+                    dst.Add(item);
+
+            return index(uri.Value, dst.Array());
+        }
+
+        public static ApiHostCodeBlocks index(ApiCodeArchive src, FilePath path)
+        {
+            var uri = ApiUri.host(path.FileName);
+            if(uri.Failed || uri.Value.IsEmpty)
+                return default;
+
+            var dst = z.list<ApiCodeBlock>();
+            foreach(var item in read(src))
+                if(item.IsNonEmpty)
+                    dst.Add(item);
+
+            return index(uri.Value, dst.Array());
+        }
+
         public static IEnumerable<ApiHostCodeBlocks> indices(ApiCodeArchive src, params PartId[] owners)
         {
             if(owners.Length != 0)
@@ -35,34 +67,6 @@ namespace Z0
                         yield return idx;
                 }
             }
-        }
-
-        public static ApiHostCodeBlocks index(ApiCodeArchive src, FS.FilePath path)
-        {
-            var uri = ApiUri.host(path.Name);
-            if(uri.Failed || uri.Value.IsEmpty)
-                return default;
-
-            var dst = z.list<ApiCodeBlock>();
-            foreach(var item in read(src))
-                if(item.IsNonEmpty)
-                    dst.Add(item);
-
-            return Archives.index(uri.Value, dst.Array());
-        }
-
-        public static ApiHostCodeBlocks index(ApiCodeArchive src, FilePath path)
-        {
-            var uri = ApiUri.host(path.FileName);
-            if(uri.Failed || uri.Value.IsEmpty)
-                return default;
-
-            var dst = z.list<ApiCodeBlock>();
-            foreach(var item in read(src))
-                if(item.IsNonEmpty)
-                    dst.Add(item);
-
-            return Archives.index(uri.Value, dst.Array());
         }
     }
 }

@@ -10,10 +10,16 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = Archives;
-
     public readonly struct BuildArchive : IBuildArchive
     {
+        /// <summary>
+        /// Creates an archive over the output of a build
+        /// </summary>
+        /// <param name="root">The archive root</param>
+        [MethodImpl(Inline), Op]
+        public static IBuildArchive create(ArchiveConfig root)
+            => new BuildArchive(root);
+
         public FS.FolderPath Root => Config.Root;
 
         public ArchiveConfig Config {get;}
@@ -22,6 +28,7 @@ namespace Z0
         public BuildArchive(ArchiveConfig config)
             => Config = config;
 
-        public IModuleArchive Modules => api.modules(Config);
+        public IModuleArchive Modules
+            => ModuleArchive.create(Config);
     }
 }

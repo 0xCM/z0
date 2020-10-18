@@ -23,11 +23,11 @@ namespace Z0
         public FlairKind Flair {get;}
 
         [MethodImpl (Inline)]
-        public ProcessedEvent(WfStepId step, T content, CorrelationToken ct, FlairKind flair = Ran)
+        public ProcessedEvent(WfStepId step, T content, CorrelationToken ct)
         {
             EventId = (EventName, step, ct);
             Content = content;
-            Flair = flair;
+            Flair = FlairKind.Processed;
         }
 
         [MethodImpl (Inline)]

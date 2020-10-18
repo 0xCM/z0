@@ -5,21 +5,19 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     using static Konst;
     using static z;
 
-    public readonly struct FileArchive : IFileArchive<FileArchive>
+    public readonly partial struct ApiFiles
     {
-        public FS.FolderPath Root {get;}
-
-        [MethodImpl(Inline)]
-        public static implicit operator FileArchive(FS.FolderPath src)
-            => new FileArchive(src);
-
-        [MethodImpl(Inline)]
-        public FileArchive(FS.FolderPath root)
-            => Root = root;
+        [Op]
+        public static IEnumerable<FS.FolderPath> directories(FS.FolderPath root, bool recurse = true)
+        {
+            foreach(var path in root.SubDirs(recurse))
+                yield return FS.dir(path.Name);
+        }
     }
 }
