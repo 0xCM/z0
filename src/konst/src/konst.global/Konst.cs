@@ -200,11 +200,6 @@ namespace Z0
             where T : unmanaged
                 => Zero.zed(t);
 
-        [MethodImpl(Inline)]
-        internal static ReadOnlySpan<T> transform<T>(ReadOnlySpan<byte> src)
-            where T : unmanaged
-                => MemoryMarshal.Cast<byte,T>(MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(src), src.Length));
-
         /// <summary>
         /// Populates a <see cref="NotSupportedException"/> complaining that a
         /// parametrically-identified type is not supported

@@ -41,7 +41,7 @@ namespace Z0
                 wf.EmittedFile(src, count, dst);
             }
 
-            EmitDecoded(wf, src, out var _);
+            //EmitDecoded(wf, src, out var _);
 
             return ref dst;
         }

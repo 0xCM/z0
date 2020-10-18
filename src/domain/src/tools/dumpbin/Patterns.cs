@@ -13,7 +13,7 @@ namespace Z0.Tools
     public partial struct DumpBin
     {
         [LiteralProvider]
-        public readonly struct Patterns
+        public readonly struct Expressions
         {
             [StringLiteral("dumpbin /HEADERS /OUTPUT:{1} {0}")]
             const string HeadersLiteral = ToolName + Space
@@ -21,7 +21,7 @@ namespace Z0.Tools
                 + FlagPrefix + nameof(Flag.OUTPUT) + FlagDelimiter + RP.Slot1 + Space
                 + RP.Slot0;
 
-            public static CmdLinePattern Headers => HeadersLiteral;
+            public static CmdExpr Headers => HeadersLiteral;
         }
     }
 }

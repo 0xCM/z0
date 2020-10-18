@@ -14,21 +14,21 @@ namespace Z0
     [ApiDataType]
     public readonly partial struct AsmSymbols
     {
-        readonly Symbolic<Mnemonic,ushort> _Mnemonics;
+        readonly NamedSymbols<Mnemonic,ushort> _Mnemonics;
 
-        readonly Symbolic<RegisterKind,uint> _Registers;
+        readonly NamedSymbols<RegisterKind,uint> _Registers;
 
         readonly AsmOpCodeDataset _OpCodes;
 
         [MethodImpl(Inline)]
-        public AsmSymbols(Symbolic<Mnemonic,ushort> mnemonics, Symbolic<RegisterKind,uint> registers, AsmOpCodeDataset opcodes)
+        public AsmSymbols(NamedSymbols<Mnemonic,ushort> mnemonics, NamedSymbols<RegisterKind,uint> registers, AsmOpCodeDataset opcodes)
         {
             _Mnemonics = mnemonics;
             _OpCodes = opcodes;
             _Registers = registers;
         }
 
-        public Symbols<Mnemonic,ushort> Mnemonics
+        public SymbolStore<Mnemonic,ushort> Mnemonics
         {
             [MethodImpl(Inline)]
             get => _Mnemonics.Symbols;
@@ -40,7 +40,7 @@ namespace Z0
             get => _OpCodes.Entries.View;
         }
 
-        public Symbols<RegisterKind,uint> Registers
+        public SymbolStore<RegisterKind,uint> Registers
         {
             [MethodImpl(Inline)]
             get => _Registers.Symbols;

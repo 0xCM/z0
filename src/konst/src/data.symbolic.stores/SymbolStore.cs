@@ -8,9 +8,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
-    partial struct Symbolic
+
+    [ApiHost("symbols.store")]
+    public readonly partial struct SymbolStore
     {
-
+        const NumericKind Closure = UnsignedInts;
     }
 }

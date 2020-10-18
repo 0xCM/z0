@@ -70,13 +70,13 @@ namespace Z0
         public static ReadOnlySpan<AsciLetterLoCode> LetterCodesLo
         {
             [MethodImpl(Inline)]
-            get => transform<AsciLetterLoCode>(LettersLo);
+            get => memory.transform<AsciLetterLoCode>(LettersLo);
         }
 
         public static ReadOnlySpan<AsciCharCode> CharCodes
         {
             [MethodImpl(Inline)]
-            get => transform<AsciCharCode>(CodeBytes);
+            get => memory.transform<AsciCharCode>(CodeBytes);
         }
     }
 }

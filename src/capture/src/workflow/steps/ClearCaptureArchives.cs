@@ -53,34 +53,81 @@ namespace Z0.Asm
             total += ClearAsm(part);
             total += ClearHex(part);
             total += ClearCil(part);
-            Wf.Status(delimit(part, total));
+            TotalStatus(part,total);
         }
 
-        Outcome<uint> Clear(PartId part, FS.Files src, [CallerMemberName] string caller = null)
-        {
-            var wf = Wf;
-            var result = src.Delete();
-            if(result)
-                wf.Trace(delimit(part.Format(), caller, result.Data));
-            else
-                wf.Error(result.Error);
+        static Outcome<uint> Clear(FS.Files src)
+            => src.Delete();
 
+
+        const string TypeStatusPattern = "Cleared {0} *.{1} {2} files";
+
+        const string TotalStatusPattern = "Cleared {0} total {1} files";
+
+        void TypeStatus(PartId part, FS.FileExt ext, Count count)
+            => Wf.Status(string.Format(TypeStatusPattern, count, ext, part.Format()));
+
+        void TotalStatus(PartId part, Count count)
+            => Wf.Status(string.Format(TotalStatusPattern, count, part.Format()));
+
+        Outcome<uint> ClearExtracts(PartId part)
+        {
+            var kind = ArchiveFileKinds.XCsv;
+            var files = Wf.Db().CapturedExtractFiles(part);
+            var result = Clear(files);
+            if(result)
+                TypeStatus(part, kind, result.Data);
+            else
+                Wf.Error(result.Error);
             return result;
         }
 
-        Outcome<uint> ClearExtracts(PartId part)
-            => Clear(part, Wf.Db().CapturedExtractFiles(part));
-
         Outcome<uint> ClearParsed(PartId part)
-            => Clear(part, Wf.Db().ParsedExtractFiles(part));
+        {
+            var kind = ArchiveFileKinds.PCsv;
+            var files = Wf.Db().ParsedExtractFiles(part);
+            var result = Clear(files);
+            if(result)
+                TypeStatus(part, kind, result.Data);
+            else
+                Wf.Error(result.Error);
+            return result;
+        }
 
         Outcome<uint> ClearAsm(PartId part)
-            => Clear(part, Wf.Db().CapturedAsmFiles(part));
+        {
+            var kind = ArchiveFileKinds.Asm;
+            var files = Wf.Db().CapturedAsmFiles(part);
+            var result = Clear(files);
+            if(result)
+                TypeStatus(part, kind, result.Data);
+            else
+                Wf.Error(result.Error);
+            return result;
+        }
 
         Outcome<uint> ClearHex(PartId part)
-            => Clear(part, Wf.Db().CapturedHexFiles(part));
+        {
+            var kind = ArchiveFileKinds.Hex;
+            var files = Wf.Db().CapturedHexFiles(part);
+            var result = Clear(files);
+            if(result)
+                TypeStatus(part, kind, result.Data);
+            else
+                Wf.Error(result.Error);
+            return result;
+        }
 
         Outcome<uint> ClearCil(PartId part)
-            => Clear(part, Wf.Db().CapturedCilFiles(part));
+        {
+            var kind = ArchiveFileKinds.IlData;
+            var files = Wf.Db().CapturedCilFiles(part);
+            var result = Clear(files);
+            if(result)
+                TypeStatus(part, kind, result.Data);
+            else
+                Wf.Error(result.Error);
+            return result;
+        }
     }
 }

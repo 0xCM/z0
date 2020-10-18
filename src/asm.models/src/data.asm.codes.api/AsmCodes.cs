@@ -208,9 +208,9 @@ namespace Z0.Asm
         [Op]
         public static AsmSymbols symbols()
         {
-            var mnemonics = Symbolic.cover<Mnemonic,ushort>();
+            var mnemonics = SymbolStore.named<Mnemonic,ushort>();
             var opcodes = AsmCodes.dataset();
-            var registers = Symbolic.cover<RegisterKind,uint>();
+            var registers = SymbolStore.named<RegisterKind,uint>();
             return new AsmSymbols(mnemonics, registers, opcodes);
         }
 

@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines operations over character digits
     /// </summary>
-    [ApiHost]
+    [ApiHost(ApiNames.SymbolicDigits, true)]
     public readonly struct Digital
     {
         /// <summary>

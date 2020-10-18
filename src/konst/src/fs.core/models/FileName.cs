@@ -70,7 +70,7 @@ namespace Z0
             /// Specifies the file's owning part, if any
             /// </summary>
             public PartId Owner
-                => ApiPartIdParser.single(WithoutExtension.Name.Remove("z0."));
+                => part(this);
 
             /// <summary>
             /// Determines whether the name of a file is of the form {owner}.{*}
@@ -134,7 +134,6 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => new FileName(PathPart.Empty);
             }
-
         }
     }
 }

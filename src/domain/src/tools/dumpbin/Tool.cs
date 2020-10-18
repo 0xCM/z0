@@ -18,11 +18,11 @@ namespace Z0.Tools
             => new DumpBin(typeof(DumpBin));
 
         [Op]
-        public static CmdLine headers(FS.FilePath src, FS.FolderPath dst)
+        public static CmdExpr headers(FS.FilePath src, FS.FolderPath dst)
         {
             var input = src;
             var output = dst + src.FileName.ChangeExtension(FS.ext("headers.log"));
-            return Cmd.format(Patterns.Headers, input.Format(PathSeparator.BS), output.Format(PathSeparator.BS));
+            return Cmd.format(Expressions.Headers, input.Format(PathSeparator.BS), output.Format(PathSeparator.BS));
         }
 
         public const string FlagPrefix = AsciCharText.FS;

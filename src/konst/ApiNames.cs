@@ -45,7 +45,11 @@ namespace Z0
 
         public const string Delegates = delegates;
 
-        public const string SymHex = symbolic + dot + hex;
+        public const string Symbolic = symbolic;
+
+        public const string SymbolicHex = symbolic + dot + hex;
+
+        public const string SymbolicDigits = symbolic + dot + "digits";
 
         public const string SFxSurrogates = sfunc + dot + surrogates;
 

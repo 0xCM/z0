@@ -47,5 +47,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public string Format()
             => Value.ToString();
+
+        public override string ToString()
+            => Format();
     }
 }

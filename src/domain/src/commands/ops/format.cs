@@ -13,8 +13,8 @@ namespace Z0
     partial struct Cmd
     {
         [MethodImpl(NotInline), Op]
-        public static string format(CmdLinePattern pattern, params object[] args)
-            => string.Format(pattern.Text, args);
+        public static CmdExpr format(CmdExpr expr, params object[] args)
+            => string.Format(expr.Text, args);
 
         /// <summary>
         /// Renders a specified option as text
