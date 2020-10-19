@@ -13,6 +13,17 @@ namespace Z0
     partial struct asci
     {
         /// <summary>
+        /// Converts 16 source characters to 16 asci codes
+        /// </summary>
+        /// <param name="src">The source data</param>
+        /// <param name="offset">The source offset</param>
+        /// <param name="count">The number of source characters to convert</param>
+        /// <param name="dst">The receiving buffer</param>
+        [MethodImpl(Inline), Op]
+        public static void encode(in char src, uint offset, N16 count, ref AsciCharCode dst)
+            => vsave(vcompact(vload(w256, memory.read(src, offset)), w8), ref @byte(dst));
+
+        /// <summary>
         /// Encodes a sequence of source characters and stores a result in a caller-supplied
         /// T-parametric target with cells assumed to be at least 16 bits wide
         /// </summary>

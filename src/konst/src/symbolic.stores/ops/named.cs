@@ -13,17 +13,23 @@ namespace Z0
     partial struct SymbolStore
     {
         [MethodImpl(Inline)]
-        public static NamedSymbols<S,T> named<S,T>(S s = default, T t = default)
+        public static NamedSymbols<S,T> named<S,T>()
             where S : unmanaged, Enum
             where T : unmanaged
+                => named(symbols<S,T>());
+
+
+        [MethodImpl(Inline)]
+        public static NamedSymbols<S,T> named<S,T>(in SymbolStore<S,T> src)
+            where S : unmanaged
+            where T : unmanaged
         {
-            var symbols = symbols<S,T>();
-            var names = new NamedSymbols<S>(alloc<NamedSymbol<S>>(symbols.Count));
-            return new NamedSymbols<S,T>(symbols, names);
+            var names = new NamedSymbols<S>(alloc<NamedSymbol<S>>(src.Count));
+            return new NamedSymbols<S,T>(src, names);
         }
 
         [MethodImpl(Inline)]
-        public static NamedSymbols<S,T,N> named<S,T,N>(S s = default, T t = default, N n = default)
+        public static NamedSymbols<S,T,N> named<S,T,N>()
             where S : unmanaged, Enum
             where T : unmanaged
             where N : unmanaged, ITypeNat

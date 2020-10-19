@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost]
+    [ApiHost(ApiNames.Asci, true)]
     public readonly partial struct asci
     {
         static AsciDataStrings AsciStrings => default;

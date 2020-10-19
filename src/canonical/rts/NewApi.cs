@@ -63,8 +63,6 @@ namespace Z0
             0,0,0,0,0,0,0,0,    0,0,0,0,0,0,0,0
             };
 
-
-
         static ReadOnlySpan<byte> IndexPos => new byte[6]{
             0, 24, 47, 92, 128, 200
         };

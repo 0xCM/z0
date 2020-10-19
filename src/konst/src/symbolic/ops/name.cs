@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="symbol">The target symbol</param>
         /// <param name="name">The name to assign</param>
         /// <typeparam name="S">The symbol type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static NamedSymbol<S> name<S>(S symbol, string name)
             where S : unmanaged
                 => new NamedSymbol<S>(symbol, name);

@@ -29,7 +29,7 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => new SymbolStore<E,T,N>(src.Map(x => Symbolic.symbol<E,T,N>(x)));
+                => new SymbolStore<E,T,N>(src.Map(e => Symbolic.symbol<E,T,N>(e)));
 
         /// <summary>
         /// Defines a symbol spec predicated on enumeration literals
@@ -64,9 +64,9 @@ namespace Z0
         /// Defines a symbol spec predicated on enumeration literals
         /// </summary>
         /// <typeparam name="E">The enum type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static SymbolStore<E> symbols<E>(E[] src)
-            where E : unmanaged, Enum
+            where E : unmanaged
                 => new SymbolStore<E>(src.Map(x => Symbolic.symbol<E>(x)));
     }
 }

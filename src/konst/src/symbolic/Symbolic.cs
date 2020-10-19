@@ -24,6 +24,8 @@ namespace Z0
     [ApiHost(ApiNames.Symbolic, true)]
     public readonly partial struct Symbolic
     {
+        const NumericKind Closure = UnsignedInts;
+
         [MethodImpl(Inline), Op]
         public static Symbol<BinarySym,byte,N1> symbol(BinaryDigit src)
             => Symbolic.symbol<BinarySym,byte,N1>((BinarySym)(src + (byte)BF.First));

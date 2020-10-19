@@ -13,6 +13,8 @@ namespace Z0
     [ApiNameProvider]
     readonly struct ApiNames
     {
+        const string asci = nameof(asci);
+
         public const string ApiIdentity = api + dot + identity;
 
         public const string ApiIdentityX = api + dot + identity + dot + extensions;
@@ -54,6 +56,8 @@ namespace Z0
         public const string SymbolStore = symbolic + dot + store;
 
         public const string SymbolicDigits = symbolic + dot + "digits";
+
+        public const string Asci = symbolic + dot + asci;
 
         public const string PermSymbolic = symbolic + dot + "permutations";
 
