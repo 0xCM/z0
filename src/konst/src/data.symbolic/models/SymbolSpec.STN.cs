@@ -18,19 +18,19 @@ namespace Z0
         where T : unmanaged
         where W : unmanaged, IDataWidth
     {
-        public S[] Symbols {get;}
+        public readonly S[] Symbols;
 
         [MethodImpl(Inline)]
         public static implicit operator SymbolSpec(SymbolSpec<S,T,W> src)
-            => new SymbolSpec(src.SymbolWidth, src.SegmentWidth, src.SegmentDomain, src.SymbolDomain);
+            => new SymbolSpec(src.SymWidth, src.SegWidth, src.SegDomain, src.SymDomain);
 
         [MethodImpl(Inline)]
         public static implicit operator SymbolSpec<S>(SymbolSpec<S,T,W> src)
-            => new SymbolSpec<S>(src.SymbolWidth, src.SegmentWidth, src.SegmentDomain, src.SymbolDomain, src.Symbols);
+            => new SymbolSpec<S>(src.SymWidth, src.SegWidth, src.SegDomain, src.SymDomain, src.Symbols);
 
         [MethodImpl(Inline)]
         public static implicit operator SymbolSpec<S,W>(SymbolSpec<S,T,W> src)
-            => new SymbolSpec<S,W>(src.SegmentWidth, src.SegmentDomain, src.Symbols);
+            => new SymbolSpec<S,W>(src.SegWidth, src.SegDomain, src.Symbols);
 
         [MethodImpl(Inline)]
         public SymbolSpec(params S[] symbols)
@@ -39,7 +39,7 @@ namespace Z0
         /// <summary>
         /// The number of bits occupied by a symbol
         /// </summary>
-        public ushort SymbolWidth
+        public ushort SymWidth
         {
             [MethodImpl(Inline)]
             get => (ushort) Widths.data<W>();
@@ -48,7 +48,7 @@ namespace Z0
         /// <summary>
         /// The width of the underlying numeric primitive
         /// </summary>
-        public ushort SegmentWidth
+        public ushort SegWidth
         {
             [MethodImpl(Inline)]
             get => (ushort)bitwidth<T>();
@@ -57,19 +57,19 @@ namespace Z0
         /// <summary>
         /// The maximum number of symbols that can be stored in a segment
         /// </summary>
-        public ushort SegmentCapacity
+        public ushort SegCapacity
         {
             [MethodImpl(Inline)]
             get => (ushort)((ushort)bitwidth<T>()/(ushort)Widths.data<W>());
         }
 
-        public ClrArtifactKey SegmentDomain
+        public ClrArtifactKey SegDomain
         {
             [MethodImpl(Inline)]
             get => typeof(T);
         }
 
-        public ClrArtifactKey SymbolDomain
+        public ClrArtifactKey SymDomain
         {
             [MethodImpl(Inline)]
             get => typeof(S);
@@ -80,5 +80,8 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Symbols != null  && Symbols.Length != 0;
         }
+
+        S[] ISymbolSpec<S>.Symbols
+            => Symbols;
     }
 }

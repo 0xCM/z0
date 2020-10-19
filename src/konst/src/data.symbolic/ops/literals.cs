@@ -18,14 +18,13 @@ namespace Z0
         /// <param name="src">The canonical literal representation</param>
         /// <param name="dst">The literal receiver</param>
         [MethodImpl(Inline), Op]
-        public static Bit32 literals(Perm16L src, Span<Perm16L> dst)
+        public static bool literals(Perm16L src, Span<Perm16L> dst)
         {
-            const int length = 16;
+            const byte Count = 16;
 
-            for(var i=0; i< length; i++)
-                if(!literal(src, i, out seek(dst,(uint)i)))
+            for(byte i=0; i<Count; i++)
+                if(!literal(src, i, out seek(dst,i)))
                     return false;
-
             return true;
         }
 
@@ -36,7 +35,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<Perm16L> literals(Perm16L src)
         {
-            Span<Perm16L> dst = new Perm16L[16];
+            const byte Count = 16;
+
+            var dst = new Perm16L[Count];
             if(!Symbolic.literals(src,dst))
                 return Span<Perm16L>.Empty;
             return dst;
@@ -46,13 +47,13 @@ namespace Z0
         /// Extracts the ordered sequence of symbolic literals that define a 4-symbol permutation
         /// </summary>
         /// <param name="src">The canonical literal representation</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static Span<Perm4L> literals(Perm4L src)
         {
-            const int length = 4;
-
-            Span<Perm4L> dst = new Perm4L[length];
-            for(var i=0; i < length; i++)
+            const byte Count = 4;
+            var buffer = new Perm4L[Count];
+            var dst = span(buffer);
+            for(byte i=0; i <Count; i++)
                 if(!literal(src,i, out seek(dst,(uint)i)))
                     return Span<Perm4L>.Empty;
 
@@ -67,10 +68,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool literals(Perm8L src, Span<Perm8L> dst)
         {
-            const int length = 8;
+            const byte Count = 8;
 
-            for(var i=0; i< length; i++)
-                if(!literal(src, i, out seek(dst,(uint)i)))
+            for(byte i=0; i<Count; i++)
+                if(!literal(src, i, out seek(dst, i)))
                     return false;
 
             return true;
@@ -83,9 +84,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Span<Perm8L> literals(Perm8L src)
         {
-            const int length = 8;
+            const byte Length = 8;
 
-            Span<Perm8L> dst = new Perm8L[length];
+            var dst = new Perm8L[Length];
             if(!literals(src, dst))
                 return Span<Perm8L>.Empty;
 

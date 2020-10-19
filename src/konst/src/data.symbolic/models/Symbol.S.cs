@@ -10,6 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using api = Symbolic;
+
     /// <summary>
     /// Defines a symbol, characterized by its value, that defines an atomic element in some vocabulary/grammar
     /// </summary>
@@ -19,11 +21,11 @@ namespace Z0
         /// <summary>
         /// The symbol value
         /// </summary>
-        public S Value {get;}
+        public readonly S Value;
 
         [MethodImpl(Inline)]
         public static explicit operator char(Symbol<S> src)
-            => @char(src);
+            => api.@char(src);
 
         [MethodImpl(Inline)]
         public static implicit operator S(Symbol<S> src)
@@ -34,7 +36,16 @@ namespace Z0
             => new Symbol<S>(src);
 
         [MethodImpl(Inline)]
-        public Symbol(S value)
-            => Value = value;
+        public Symbol(S src)
+            => Value = src;
+
+        public char Character
+        {
+            [MethodImpl(Inline)]
+            get => api.@char(this);
+        }
+
+        S ISymbol<S>.Value
+            => Value;
     }
 }

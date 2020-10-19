@@ -10,10 +10,12 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using api = Symbolic;
+
     /// <summary>
     /// Defines an S-symbol value, of bit-width N, covered by a T-storage cell
     /// </summary>
-    public readonly struct Symbol<S,T,N> : ISymbol<S,T,N>
+    public readonly struct Symbol<S,T,N> : ISymbolic<Symbol<S,T,N>, S,T,N>
         where S : unmanaged
         where T : unmanaged
         where N : unmanaged, ITypeNat
@@ -21,11 +23,11 @@ namespace Z0
         /// <summary>
         /// The symbol value
         /// </summary>
-        public S Value {get;}
+        public readonly S Value;
 
         [MethodImpl(Inline)]
         public static explicit operator char(Symbol<S,T,N> src)
-            => @char(src);
+            => api.@char(src);
 
         [MethodImpl(Inline)]
         public static implicit operator S(Symbol<S,T,N> src)
@@ -40,10 +42,8 @@ namespace Z0
             => new Symbol<S,T>(src.Value);
 
         [MethodImpl(Inline)]
-        public Symbol(S value)
-        {
-            Value = value;
-        }
+        public Symbol(S src)
+            => Value = src;
 
         public Symbol<S> Simplified
         {
@@ -85,5 +85,14 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (ushort)(SegWidth/SymWidth);
         }
+
+        public char Character
+        {
+            [MethodImpl(Inline)]
+            get => api.@char(this);
+        }
+
+        S ISymbol<S>.Value
+            => Value;
     }
 }

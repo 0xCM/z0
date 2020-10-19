@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     partial struct Symbolic
     {
@@ -16,17 +17,17 @@ namespace Z0
             where S : unmanaged
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => z.@as<S,char>(src.Value);
+                => @as<S,char>(src.Value);
 
         [MethodImpl(Inline)]
         public static char @char<S,T>(Symbol<S,T> src)
             where S : unmanaged
             where T : unmanaged
-                => z.@as<S,char>(src.Value);
+                => @as<S,char>(src.Value);
 
         [MethodImpl(Inline)]
         public static char @char<S>(Symbol<S> src)
             where S : unmanaged
-                => z.@as<S,char>(src.Value);
+                => @as<S,char>(src.Value);
     }
 }

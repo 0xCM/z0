@@ -9,9 +9,10 @@ namespace Z0
 
 
     using static Konst;
+    using static z;
 
     partial struct Symbolic
-    {        
+    {
         /// <summary>
         /// Attempts to extract an index-identified permutation symbol
         /// </summary>
@@ -22,11 +23,12 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool literal(Perm4L src, int index, out Perm4L dst)
         {
-            const int segwidth = 2;             
-            var first = (byte)(index * segwidth);
-            var last = (byte)(first + segwidth - 1);
+            const byte SegWidth = 2;
 
-            dst = (Perm4L)z.extract((byte)src, first, last);
+            var first = (byte)(index * SegWidth);
+            var last = (byte)(first + SegWidth - 1);
+
+            dst = (Perm4L)extract((byte)src, first, last);
             return test(dst);
         }
 
@@ -40,11 +42,11 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool literal(Perm8L src, int index, out Perm8L dst)
         {
-            const int segwidth = 3; 
-            var first = (byte)(index * segwidth);
-            var last = (byte)(first + segwidth - 1);
+            const byte Segwidth = 3;
 
-            dst = (Perm8L)z.extract((uint)src, first, last);
+            var first = (byte)(index * Segwidth);
+            var last = (byte)(first + Segwidth - 1);
+            dst = (Perm8L)extract((uint)src, first, last);
             return test(dst);
         }
 
@@ -58,12 +60,12 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool literal(Perm16L src, int index, out Perm16L dst)
         {
-            const int segwidth = 4;     
-            var first = (byte)(index * segwidth);
-            var last = (byte)(first + segwidth - 1);
+            const byte Segwidth = 4;
 
-            dst = (Perm16L)z.extract((ulong)src, first, last);
+            var first = (byte)(index * Segwidth);
+            var last = (byte)(first + Segwidth - 1);
+            dst = (Perm16L)extract((ulong)src, first, last);
             return test(dst);
-        }        
+        }
     }
 }

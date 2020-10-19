@@ -12,15 +12,15 @@ namespace Z0
     partial struct Symbolic
     {
         [MethodImpl(Inline)]
-        public static Symbol<S> symbol<S>(S value)
+        public static Symbol<S> symbol<S>(S src)
             where S : unmanaged
-                => new Symbol<S>(value);
+                => new Symbol<S>(src);
 
         [MethodImpl(Inline)]
-        public static Symbol<S,T> symbol<S,T>(S value, T t = default)
+        public static Symbol<S,T> symbol<S,T>(S src)
             where S : unmanaged
             where T : unmanaged
-                => new Symbol<S,T>(value);
+                => new Symbol<S,T>(src);
 
         /// <summary>
         /// Defines an <typeparamref name='S'/>-valued symbol of representation bit-width <typeparamref name='N'/>  covered by a <see cref='T'/> storage cell

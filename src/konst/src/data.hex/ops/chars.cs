@@ -12,12 +12,12 @@ namespace Z0
 
     partial class Hex
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<char> chars<T>(T value)
             where T : unmanaged
                 => chars_u(value);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void chars<T>(T value, Span<char> dst, int offset)
             where T : unmanaged
                 => chars_u(value, dst, offset);

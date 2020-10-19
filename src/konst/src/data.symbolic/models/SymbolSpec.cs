@@ -9,29 +9,49 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct SymbolSpec : ISymbolSpec
+    [Table(TableId,FieldCount)]
+    public struct SymbolSpec : ISymbolSpec
     {
-        public ushort SymbolWidth {get;}
+        public const string TableId = "symbols.spec";
 
-        public ushort SegmentWidth {get;}
+        public const byte FieldCount = 6;
 
-        public ushort SegmentCapacity {get;}
+        public ushort SymWidth;
 
-        public ClrArtifactKey SegmentDomain {get;}
+        public ushort SegWidth;
 
-        public ClrArtifactKey SymbolDomain {get;}
+        public ushort SegCapacity;
 
-        public ClrArtifactKey KindDomain {get;}
+        public ClrArtifactKey SegDomain;
+
+        public ClrArtifactKey SymDomain;
+
+        public ClrArtifactKey KindDomain;
 
         [MethodImpl(Inline)]
         public SymbolSpec(ushort symwidth, ushort segwidth, ClrArtifactKey seg, ClrArtifactKey sym, ClrArtifactKey kind = default)
         {
-            SymbolWidth = symwidth;
-            SegmentWidth = segwidth;
-            SegmentCapacity = (ushort)(SegmentWidth/SymbolWidth);
-            SegmentDomain = seg;
-            SymbolDomain = sym;
+            SymWidth = symwidth;
+            SegWidth = segwidth;
+            SegCapacity = (ushort)(SegWidth/SymWidth);
+            SegDomain = seg;
+            SymDomain = sym;
             KindDomain = kind;
         }
+
+        ushort ISymbolSpec.SymWidth
+            => SymWidth;
+
+        ushort ISymbolSpec.SegWidth
+            => SegWidth;
+
+        ushort ISymbolSpec.SegCapacity
+            => SegCapacity;
+
+        ClrArtifactKey ISymbolSpec.SegDomain
+            => SegDomain;
+
+        ClrArtifactKey ISymbolSpec.SymDomain
+            => SymDomain;
     }
 }

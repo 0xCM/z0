@@ -5,16 +5,20 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
-    using static Konst;
-    using static z;
-
-    [ApiHost]
-    public readonly partial struct Permutary
+    public interface ISymExpr : INullity, ITextual
     {
-         
- 
+
+    }
+
+    public interface ISymExpr<T> : ISymExpr
+    {
+        T Body {get;}
+    }
+
+    public interface ISymExpr<F,T> :  ISymExpr<T>, INullary<F>, IEquatable<F>
+        where F : struct, ISymExpr<F,T>
+    {
+
     }
 }

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface ITextExpression<F> : IExpressional<F,string>
+    public interface ITextExpression<F> : ISymExpr<F,string>
         where F : struct, ITextExpression<F>
     {
         string Text => Body;

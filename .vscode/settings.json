@@ -672,6 +672,7 @@
         "rtrim",
         "ruleset",
         "runas",
+        "segdomain",
         "segprefix",
         "segref",
         "segwidth",

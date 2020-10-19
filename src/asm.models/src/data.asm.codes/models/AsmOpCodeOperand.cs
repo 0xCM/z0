@@ -12,7 +12,7 @@ namespace Z0.Asm
     /// <summary>
     /// Defines an operand in the context of an opcode expression
     /// </summary>
-    public readonly struct AsmOpCodeOperand : IExpressional<AsmOpCodeOperand,ushort>
+    public readonly struct AsmOpCodeOperand : ISymExpr<AsmOpCodeOperand,ushort>
     {
         readonly ushort Source;
 

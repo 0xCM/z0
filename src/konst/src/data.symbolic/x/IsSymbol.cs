@@ -9,30 +9,30 @@ namespace Z0
 
      using static Konst;
 
-    partial class XTend
+    partial class XSymbolic
     {
         /// <summary>
         /// Determines whether a permutation literal is a symbol
         /// </summary>
         /// <param name="src">The value to inspect</param>
-        [MethodImpl(Inline)]
-        public static Bit32 IsSymbol(this Perm4L src)
+        [MethodImpl(Inline), Op]
+        public static bool IsSymbol(this Perm4L src)
             => Symbolic.test(src);
 
         /// <summary>
         /// Determines whether a permutation literal is a symbol
         /// </summary>
         /// <param name="src">The value to inspect</param>
-        [MethodImpl(Inline)]
-        public static Bit32 IsSymbol(this Perm8L src)
+        [MethodImpl(Inline), Op]
+        public static bool IsSymbol(this Perm8L src)
             => Symbolic.test(src);
 
         /// <summary>
         /// Determines whether a permutation literal is a symbol
         /// </summary>
         /// <param name="src">The value to inspect</param>
-        [MethodImpl(Inline)]
-        public static Bit32 IsSymbol(this Perm16L src)
+        [MethodImpl(Inline), Op]
+        public static bool IsSymbol(this Perm16L src)
             => Symbolic.test(src);
     }
 }

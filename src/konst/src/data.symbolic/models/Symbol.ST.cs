@@ -10,6 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using api = Symbolic;
+
     /// <summary>
     /// Defines an S-symbol value covered by a T-storage cell
     /// </summary>
@@ -20,7 +22,7 @@ namespace Z0
         /// <summary>
         /// The symbol value
         /// </summary>
-        public S Value {get;}
+        public readonly S Value;
 
         /// <summary>
         /// The symbol value, from storage cell perspective
@@ -28,12 +30,12 @@ namespace Z0
         public T Cell
         {
             [MethodImpl(Inline)]
-            get => z.@as<S,T>(Value);
+            get => @as<S,T>(Value);
         }
 
         [MethodImpl(Inline)]
         public static explicit operator char(Symbol<S,T> src)
-            => @char(src);
+            => api.@char(src);
 
         [MethodImpl(Inline)]
         public static implicit operator S(Symbol<S,T> src)
@@ -44,8 +46,8 @@ namespace Z0
             => new Symbol<S>(src.Value);
 
         [MethodImpl(Inline)]
-        public Symbol(S value)
-            => Value = value;
+        public Symbol(S src)
+            => Value = src;
 
         public Symbol<S> Simplified
         {
@@ -58,5 +60,14 @@ namespace Z0
 
         public Type CellType
             => typeof(T);
+
+        public char Character
+        {
+            [MethodImpl(Inline)]
+            get => api.@char(this);
+        }
+
+        S ISymbol<S>.Value
+            => Value;
     }
 }

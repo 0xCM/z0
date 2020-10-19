@@ -19,7 +19,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="case">The case selector</param>
         [MethodImpl(Inline)]
-        public static ReadOnlySpan<HexSym> hex<C>(byte src, C @case = default)
+        public static ReadOnlySpan<HexSym> hexchar<C>(byte src, C @case = default)
             where C : unmanaged, ILetterCase
         {
             if(typeof(C) == typeof(LowerCased))
@@ -29,108 +29,108 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static char hex<T,C>(T src, byte pos, C @case = default)
+        public static char hexchar<T,C>(T src, byte pos, C @case = default)
             where T : unmanaged
             where C : unmanaged, ILetterCase
         {
             if(typeof(T) == typeof(byte))
-                return hex(uint8(src), pos, @case);
+                return hexchar(uint8(src), pos, @case);
             else if(typeof(T) == typeof(ushort))
-                return hex(uint16(src), pos, @case);
+                return hexchar(uint16(src), pos, @case);
             else if(typeof(T) == typeof(uint))
-                return hex(uint32(src), pos, @case);
+                return hexchar(uint32(src), pos, @case);
             else if(typeof(T) == typeof(ulong))
-                return hex(uint64(src), pos, @case);
-            else 
+                return hexchar(uint64(src), pos, @case);
+            else
                 return default;
         }
-        
+
         [MethodImpl(Inline)]
-        public static char hex<C>(byte src, byte pos, C @case = default)
+        public static char hexchar<C>(byte src, byte pos, C @case = default)
             where C : unmanaged, ILetterCase
         {
             if(typeof(C) == typeof(LowerCased))
-                return hex(src, pos, LowerCase);
+                return hexchar(src, pos, LowerCase);
             else
-                return hex(src, pos, UpperCase);            
+                return hexchar(src, pos, UpperCase);
         }
 
         [MethodImpl(Inline)]
-        public static char hex<C>(ushort src, byte pos, C @case = default)
+        public static char hexchar<C>(ushort src, byte pos, C @case = default)
             where C : unmanaged, ILetterCase
         {
             if(typeof(C) == typeof(LowerCased))
-                return hex(src, pos, LowerCase);
+                return hexchar(src, pos, LowerCase);
             else
-                return hex(src, pos, UpperCase);            
+                return hexchar(src, pos, UpperCase);
         }
 
         [MethodImpl(Inline)]
-        public static char hex<C>(uint src, byte pos, C @case = default)
+        public static char hexchar<C>(uint src, byte pos, C @case = default)
             where C : unmanaged, ILetterCase
         {
             if(typeof(C) == typeof(LowerCased))
-                return hex(src, pos, LowerCase);
+                return hexchar(src, pos, LowerCase);
             else
-                return hex(src, pos, UpperCase);            
+                return hexchar(src, pos, UpperCase);
         }
 
         [MethodImpl(Inline)]
-        public static char hex<C>(ulong src, byte pos, C @case = default)
+        public static char hexchar<C>(ulong src, byte pos, C @case = default)
             where C : unmanaged, ILetterCase
         {
             if(typeof(C) == typeof(LowerCased))
-                return hex(src, pos, LowerCase);
+                return hexchar(src, pos, LowerCase);
             else
-                return hex(src, pos, UpperCase);            
+                return hexchar(src, pos, UpperCase);
         }
 
         [MethodImpl(Inline), Op]
-        public static char hex(byte value, byte pos)
+        public static char hexchar(byte value, byte pos)
             => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
-        public static char hex(ushort value, byte pos)
+        public static char hexchar(ushort value, byte pos)
             => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
-        public static char hex(uint value, byte pos)
+        public static char hexchar(uint value, byte pos)
             => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
-        public static char hex(ulong value, byte pos)
-            => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));        
+        public static char hexchar(ulong value, byte pos)
+            => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
-        public static char hex(byte value, byte pos, LowerCased @case)
+        public static char hexchar(byte value, byte pos, LowerCased @case)
             => (char)skip(first(LowerDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
-        public static char hex(ushort value, byte pos, LowerCased @case)
+        public static char hexchar(ushort value, byte pos, LowerCased @case)
             => (char)skip(first(LowerDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
-        public static char hex(uint value, byte pos, LowerCased @case)
+        public static char hexchar(uint value, byte pos, LowerCased @case)
             => (char)skip(first(LowerDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
-        public static char hex(ulong value, byte pos, LowerCased @case)
-            => (char)skip(first(LowerDigits), (byte)(0xF & (byte)(value >> pos*4)));        
+        public static char hexchar(ulong value, byte pos, LowerCased @case)
+            => (char)skip(first(LowerDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
-        public static char hex(byte value, byte pos, UpperCased @case)
+        public static char hexchar(byte value, byte pos, UpperCased @case)
             => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
-        public static char hex(ushort value, byte pos, UpperCased @case)
+        public static char hexchar(ushort value, byte pos, UpperCased @case)
             => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
-        public static char hex(uint value, byte pos, UpperCased @case)
+        public static char hexchar(uint value, byte pos, UpperCased @case)
             => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));
 
         [MethodImpl(Inline), Op]
-        public static char hex(ulong value, byte pos, UpperCased @case)
-            => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));        
+        public static char hexchar(ulong value, byte pos, UpperCased @case)
+            => (char)skip(first(UpperDigits), (byte)(0xF & (byte)(value >> pos*4)));
     }
 }

@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Permutary
+    partial struct PermSymbolic
     {
         /// <summary>
         /// Defines the identity permutation on 4 symbols

@@ -22,7 +22,14 @@ namespace Z0
             where E : unmanaged, Enum
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => new SymbolStore<E,T,N>(Enums.literals<E>().Map(x => Symbolic.symbol<E,T,N>(x)));
+                => symbols<E,T,N>(Enums.literals<E>());
+
+        [MethodImpl(Inline)]
+        public static SymbolStore<E,T,N> symbols<E,T,N>(E[] src)
+            where E : unmanaged, Enum
+            where T : unmanaged
+            where N : unmanaged, ITypeNat
+                => new SymbolStore<E,T,N>(src.Map(x => Symbolic.symbol<E,T,N>(x)));
 
         /// <summary>
         /// Defines a symbol spec predicated on enumeration literals
@@ -32,7 +39,18 @@ namespace Z0
         public static SymbolStore<E,T> symbols<E,T>()
             where E : unmanaged, Enum
             where T : unmanaged
-                => new SymbolStore<E,T>(Enums.literals<E>().Map(x => Symbolic.symbol<E,T>(x)));
+                => symbols<E,T>(Enums.literals<E>());
+
+        /// <summary>
+        /// Defines a symbol spec predicated on enumeration literals
+        /// </summary>
+        /// <typeparam name="E"></typeparam>
+        /// <typeparam name="T"></typeparam>
+        [MethodImpl(Inline)]
+        public static SymbolStore<E,T> symbols<E,T>(E[] src)
+            where E : unmanaged, Enum
+            where T : unmanaged
+                => new SymbolStore<E,T>(src.Map(x => Symbolic.symbol<E,T>(x)));
 
         /// <summary>
         /// Defines a symbol spec predicated on enumeration literals
@@ -40,6 +58,15 @@ namespace Z0
         /// <typeparam name="E">The enum type</typeparam>
         public static SymbolStore<E> symbols<E>()
             where E : unmanaged, Enum
-                => new SymbolStore<E>(Enums.literals<E>().Map(x => Symbolic.symbol<E>(x)));
+                => symbols<E>(Enums.literals<E>());
+
+        /// <summary>
+        /// Defines a symbol spec predicated on enumeration literals
+        /// </summary>
+        /// <typeparam name="E">The enum type</typeparam>
+        [MethodImpl(Inline)]
+        public static SymbolStore<E> symbols<E>(E[] src)
+            where E : unmanaged, Enum
+                => new SymbolStore<E>(src.Map(x => Symbolic.symbol<E>(x)));
     }
 }

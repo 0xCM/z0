@@ -24,7 +24,6 @@ namespace Z0
         public static Hex3 hex(Hex3Seq src)
             => new Hex3(src);
 
-
         [MethodImpl(Inline), Op]
         public static Hex4 hex(Hex4Seq src)
             => new Hex4(src);

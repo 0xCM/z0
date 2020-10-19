@@ -21,12 +21,12 @@ namespace Z0
         /// <summary>
         /// The symbol kind
         /// </summary>
-        public K Kind {get;}
+        public readonly K Kind;
 
         /// <summary>
         /// The symbol value
         /// </summary>
-        public S Value {get;}
+        public readonly S Value;
 
         /// <summary>
         /// The symbol value, from storage cell perspective
@@ -67,5 +67,11 @@ namespace Z0
             Kind = kind;
             Value = value;
         }
+
+        K IKindedSymbol<K, S>.Kind
+            => Kind;
+
+        S ISymbol<S>.Value
+            => Value;
     }
 }

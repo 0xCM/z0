@@ -6,11 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Konst;
+    using static z;
 
-    partial struct Symbolic
+    [ApiHost(ApiNames.Symbolic, true)]
+    public readonly partial struct PermSymbolic
     {
+
 
     }
 }

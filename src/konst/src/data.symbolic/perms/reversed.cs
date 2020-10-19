@@ -9,8 +9,8 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Permutary
-    {   
+    partial struct PermSymbolic
+    {
         /// <summary>
         /// Defines the canonical literal representation of the reversal of the identity permutation on 4 symbols
         /// </summary>

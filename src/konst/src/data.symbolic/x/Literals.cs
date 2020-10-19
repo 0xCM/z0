@@ -9,14 +9,13 @@ namespace Z0
 
     using static Konst;
 
-
-    partial class XTend
+    partial class XSymbolic
     {
         /// <summary>
         /// Constructs the sequence of permutation symbols corresponding to the canonical literal representation
         /// </summary>
         /// <param name="src">The canonical literal representation of a 4-symbol permutation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Span<Perm4L> Literals(this Perm4L src)
             => Symbolic.literals(src);
 
@@ -24,7 +23,7 @@ namespace Z0
         /// Constructs the sequence of permutation symbols corresponding to the canonical literal representation
         /// </summary>
         /// <param name="src">The canonical literal representation of a 8-symbol permutation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Span<Perm8L> Literals(this Perm8L src)
             => Symbolic.literals(src);
 
@@ -32,7 +31,7 @@ namespace Z0
         /// Constructs the sequence of permutation symbols corresponding to the canonical literal representation
         /// </summary>
         /// <param name="src">The canonical literal representation of a 16-symbol permutation</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Span<Perm16L> Literals(this Perm16L src)
             => Symbolic.literals(src);
     }

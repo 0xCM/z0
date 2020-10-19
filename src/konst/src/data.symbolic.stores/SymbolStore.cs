@@ -10,8 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-
-    [ApiHost("symbols.store")]
+    [ApiHost(ApiNames.SymbolStore, true)]
     public readonly partial struct SymbolStore
     {
         const NumericKind Closure = UnsignedInts;

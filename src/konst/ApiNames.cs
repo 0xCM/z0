@@ -47,9 +47,15 @@ namespace Z0
 
         public const string Symbolic = symbolic;
 
+        public const string SymbolicX = symbolic + dot + extensions;
+
         public const string SymbolicHex = symbolic + dot + hex;
 
+        public const string SymbolStore = symbolic + dot + store;
+
         public const string SymbolicDigits = symbolic + dot + "digits";
+
+        public const string PermSymbolic = symbolic + dot + "permutations";
 
         public const string SFxSurrogates = sfunc + dot + surrogates;
 

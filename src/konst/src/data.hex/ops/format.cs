@@ -59,7 +59,7 @@ namespace Z0
             else if(typeof(T) == typeof(double))
                 return float64(src).FormatHex(zpad, specifier, uppercase, prespec);
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         [MethodImpl(Inline), Op]
@@ -123,6 +123,7 @@ namespace Z0
         public static string format(ReadOnlySpan<byte> src, char sep, bool zpad = true, bool specifier = true)
             => format(src, sep, zpad, specifier, false, true, null);
 
+        [Op]
         public static string format(ReadOnlySpan<byte> src, char sep, bool zpad, bool specifier, bool uppercase, bool prespec, int? segwidth)
         {
             var dst = Z0.text.build();

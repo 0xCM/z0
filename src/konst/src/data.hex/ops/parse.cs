@@ -15,17 +15,17 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool parse(char src, out byte dst)
         {
-            if(isNumber(src))
+            if(HexTest.scalar(src))
             {
                 dst = Bytes.sub((byte)src, MinScalarCode);
                 return true;
             }
-            else if(isUpper(src))
+            else if(HexTest.upper(src))
             {
                 dst = Bytes.add(Bytes.sub((byte)src, MinCharCodeU), unsigned(0xA));
                 return true;
             }
-            else if(isLower(src))
+            else if(HexTest.lower(src))
             {
                 dst = Bytes.add(Bytes.sub((byte)src,  MinCharCodeL), unsigned(0xA));
                 return true;

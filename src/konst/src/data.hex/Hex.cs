@@ -58,5 +58,7 @@ namespace Z0
 
         public static SegRef[] HexRefs
             => sys.array(memref(H.UpperSymData), memref(H.LowerSymData), memref(H.UpperCodes), memref(H.LowerCodes));
+
+        const NumericKind Closure = UnsignedInts;
     }
 }

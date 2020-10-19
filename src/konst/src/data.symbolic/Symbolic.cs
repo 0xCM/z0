@@ -12,6 +12,12 @@ namespace Z0
 
     using BF = BinarySymFacet;
 
+    [ApiHost(ApiNames.SymbolicX, true)]
+    public static partial class XSymbolic
+    {
+
+    }
+
     /// <summary>
     /// Defines an api surface for <see cref='ISymbol'/> manipulation
     /// </summary>

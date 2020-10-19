@@ -22,9 +22,9 @@ namespace Z0
     }
 
     /// <summary>
-    /// Characterizes a
+    /// Characterizes a parametric <see cref='ISymbol'/> value
     /// </summary>
-    /// <typeparam name="S"></typeparam>
+    /// <typeparam name="S">The symbol value type</typeparam>
     public interface ISymbol<S> : ISymbol
         where S : unmanaged
     {

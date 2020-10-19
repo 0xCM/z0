@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Attaches a classifier to a symbol
     /// </summary>
-    public readonly struct KindedSymbol<K,S,T,N> : IKindedSymbol<K,S,T,N>
+    public readonly struct KindedSymbol<K,S,T,N> : IKindedSymbolic<KindedSymbol<K,S,T,N>,K,S,T,N>
         where K : unmanaged
         where S : unmanaged
         where T : unmanaged
@@ -22,12 +22,12 @@ namespace Z0
         /// <summary>
         /// The symbol kind
         /// </summary>
-        public K Kind {get;}
+        public readonly K Kind;
 
         /// <summary>
         /// The symbol value
         /// </summary>
-        public S Value {get;}
+        public readonly S Value;
 
         /// <summary>
         /// The symbol value, from storage cell perspective
@@ -39,14 +39,24 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static implicit operator KindedSymbol<K,S,T,N>((K kind, S value) src)
-            => new KindedSymbol<K,S,T,N>(src.kind, src.value);
-
-        [MethodImpl(Inline)]
         public KindedSymbol(K kind, S value)
         {
             Kind = kind;
             Value = value;
         }
+
+        K IKindedSymbol<K, S>.Kind
+            => Kind;
+
+        S ISymbol<S>.Value
+            => Value;
+
+        [MethodImpl(Inline)]
+        public static implicit operator KindedSymbol<K,S,T,N>((K kind, S value) src)
+            => new KindedSymbol<K,S,T,N>(src.kind, src.value);
+
+        [MethodImpl(Inline)]
+        public static implicit operator KindedSymbol<K,S,T,N>(Paired<K,S> src)
+            => new KindedSymbol<K,S,T,N>(src.Left, src.Right);
     }
 }

@@ -13,14 +13,14 @@ namespace Z0
     using static z;
 
     public readonly struct HexByteParser : IHexParser<byte>
-    {    
-        public static HexByteParser Service 
+    {
+        public static HexByteParser Service
             => default(HexByteParser);
-        
-        public ParseResult<byte> Parse(string src) 
+
+        public ParseResult<byte> Parse(string src)
         {
             try
-            { 
+            {
                 return parsed(src, ParseByte(src));
             }
             catch(Exception e)
@@ -30,11 +30,11 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public bool HasPreSpec(string src) 
+        public bool HasPreSpec(string src)
             => src.TrimStart().StartsWith(HexFormatSpecs.PreSpec);
 
         [MethodImpl(Inline)]
-        public bool HasPostSpec(string src) 
+        public bool HasPostSpec(string src)
             => src.TrimEnd().EndsWith(HexFormatSpecs.PostSpec);
 
         /// <summary>
@@ -45,9 +45,9 @@ namespace Z0
         public ParseResult<byte> Parse(char c)
         {
             var u = Char.ToUpperInvariant(c);
-            if(Hex.isNumber(c))
+            if(HexTest.scalar(c))
                 return parsed(c, (byte)((byte)u - Hex.MinScalarCode));
-            else if(Hex.isUpper(c))
+            else if(HexTest.upper(c))
                 return parsed(c, (byte)((byte)u - Hex.MinCharCodeU + 0xA));
             else
                 return unparsed<byte>(c);
@@ -61,7 +61,7 @@ namespace Z0
         {
             try
             {
-                return parsed(src, 
+                return parsed(src,
                     src.SplitClean(Chars.Space)
                        .Select(x => byte.Parse(x, NumberStyles.HexNumber)));
             }
@@ -78,7 +78,7 @@ namespace Z0
         /// Parses a hex byte
         /// </summary>
         /// <param name="src">hex text</param>
-        public byte ParseByte(string src)    
+        public byte ParseByte(string src)
             => byte.Parse(ClearSpecs(src), NumberStyles.HexNumber);
     }
 }

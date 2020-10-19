@@ -12,6 +12,11 @@ namespace Z0
 
     partial struct SymbolStore
     {
+        /// <summary>
+        /// Provides a store covering each <see cref='Hex2Seq'/> member
+        /// </summary>
+        /// <param name="n"></param>
+        /// <returns></returns>
         [MethodImpl(Inline), Op]
         public static SymbolStore<Hex2Seq,byte,N2> hex(N2 n)
             => symbols<Hex2Seq,byte,N2>();
