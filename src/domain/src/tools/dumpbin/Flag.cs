@@ -29,11 +29,11 @@ namespace Z0.Tools
 
             HEADERS = P2ᐞ07,
 
-            Imports = P2ᐞ08,
+            IMPORTS = P2ᐞ08,
 
-            LineNumbers = P2ᐞ09,
+            LINENUMBERS = P2ᐞ09,
 
-            LinkerMember = P2ᐞ10,
+            LINKERMEMBER = P2ᐞ10,
 
             LOADCONFIG = P2ᐞ11,
 
@@ -48,6 +48,13 @@ namespace Z0.Tools
             TLS = P2ᐞ16,
 
             OUT = P2ᐞ17,
+
+            NOBYTES = P2ᐞ18,
+        }
+
+        public readonly struct Options
+        {
+
         }
     }
 }

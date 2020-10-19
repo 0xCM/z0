@@ -67,7 +67,7 @@ namespace Z0
                     dst(new NativeLib(path));
         }
 
-        public IEnumerable<FileModule> Query()
+        public IEnumerable<FileModule> Files()
         {
             foreach(var path in Root.Files(true))
             {

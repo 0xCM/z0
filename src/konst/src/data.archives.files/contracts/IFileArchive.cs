@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public interface IFileArchive
     {
@@ -30,7 +31,11 @@ namespace Z0
 
     public interface IFileArchive<H,F> : IFileArchive<H>
         where H : IFileArchive<H>
+        where F : IFile
     {
-        IEnumerable<F> Query();
+        new IEnumerable<F> Files();
+
+        IEnumerable<FS.FilePath> IFileArchive.Files()
+            => Files().Select(x => x.Path);
     }
 }

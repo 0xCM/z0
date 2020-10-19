@@ -28,7 +28,7 @@ namespace Z0
             => new DbTables<S>(wf.Db(), subject);
 
         [MethodImpl(Inline), Op]
-        public static IDbFileArchive files(IWfShell wf, DbPaths paths)
+        public static IFileDb files(IWfShell wf, DbPaths paths)
             => new DbFiles(wf, paths);
 
         [MethodImpl(Inline), Op]

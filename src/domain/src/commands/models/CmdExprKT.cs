@@ -10,53 +10,46 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdExpr : ITextual, IIdentified<asci32>, IContented<string>
+    public readonly struct CmdExpr<K,T> : ITextual, IIdentified<K>, IContented<T>
+        where K : unmanaged
     {
-        public asci32 Id {get;}
+        public K Id {get;}
 
         public bool Anonymous {get;}
 
-        public string Content {get;}
+        public T Content {get;}
 
         [MethodImpl(Inline)]
-        public CmdExpr(string src)
+        public CmdExpr(T src)
         {
-            Id = Cmd.Anonymous;
+            Id = default;
             Content = src;
             Anonymous = true;
         }
 
         [MethodImpl(Inline)]
-        public CmdExpr(string name, string src)
+        public CmdExpr(K id, T src)
         {
-            Id = name;
+            Id = id;
             Content = src;
             Anonymous = false;
         }
 
         [MethodImpl(Inline)]
-        internal CmdExpr(in asci32 name, string src)
-        {
-            Id = name;
-            Content = src;
-            Anonymous = false;
-        }
+        public static implicit operator CmdExpr<K,T>(T src)
+            => new CmdExpr<K,T>(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdExpr(string src)
-            => new CmdExpr(src);
+        public static implicit operator string(CmdExpr<K,T> src)
+            => src.Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator string(CmdExpr src)
-            => src.Content;
-
-        [MethodImpl(Inline)]
-        public static implicit operator CmdExpr(Pair<string> src)
-            => new CmdExpr(src.Left, src.Right);
+        public static implicit operator CmdExpr(CmdExpr<K,T> src)
+            => new CmdExpr(src.Id.ToString(), src.Format());
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content ?? EmptyString;
+            => Content?.ToString() ?? EmptyString;
 
         public override string ToString()
             => Format();

@@ -10,16 +10,18 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdExpr : ITextual, IIdentified<asci32>, IContented<string>
+    using api = Cmd;
+
+    public readonly struct CmdPattern
     {
-        public asci32 Id {get;}
+        public string Id {get;}
 
         public bool Anonymous {get;}
 
         public string Content {get;}
 
         [MethodImpl(Inline)]
-        public CmdExpr(string src)
+        public CmdPattern(string src)
         {
             Id = Cmd.Anonymous;
             Content = src;
@@ -27,7 +29,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public CmdExpr(string name, string src)
+        public CmdPattern(string name, string src)
         {
             Id = name;
             Content = src;
@@ -35,30 +37,18 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        internal CmdExpr(in asci32 name, string src)
-        {
-            Id = name;
-            Content = src;
-            Anonymous = false;
-        }
+        public static implicit operator CmdPattern(string src)
+            => new CmdPattern(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdExpr(string src)
-            => new CmdExpr(src);
-
-        [MethodImpl(Inline)]
-        public static implicit operator string(CmdExpr src)
+        public static implicit operator string(CmdPattern src)
             => src.Content;
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdExpr(Pair<string> src)
-            => new CmdExpr(src.Left, src.Right);
-
-        [MethodImpl(Inline)]
-        public string Format()
-            => Content ?? EmptyString;
+        public static implicit operator CmdPattern(Pair<string> src)
+            => new CmdPattern(src.Left, src.Right);
 
         public override string ToString()
-            => Format();
+            => Content;
     }
 }

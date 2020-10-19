@@ -13,6 +13,18 @@ namespace Z0
     [ApiHost(ApiNames.Cmd, true)]
     public readonly partial struct Cmd
     {
+        internal const string Anonymous = "anonymous";
+
+        const NumericKind Closure = UnsignedInts;
+
+        public static FS.FilePath enqueue<T>(CmdJob<T> job, IFileDb db)
+            where T : struct, ITextual
+        {
+            var dst = db.JobQueue() + FS.file(job.Name.Format(), ArchiveFileKinds.Cmd);
+            dst.Overwrite(job.Format());
+            return dst;
+        }
+
         [Op]
         public static int execute(IWfShell wf, CmdId id, params CmdOption[] options)
         {
@@ -24,13 +36,9 @@ namespace Z0
             where K : unmanaged
                 => src.Kind.ToString().ToLower();
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static CmdHost<T> host<T>(T t = default)
-            where T : struct
-                => CmdHost<T>.create();
+        public static CmdJob<T> job<T>(string name, T spec)
+            where T : struct, ITextual
+                => new CmdJob<T>(name, spec);
 
-        [MethodImpl(Inline), Op]
-        public static CmdOptions options(params CmdOption[] src)
-            => src;
     }
 }

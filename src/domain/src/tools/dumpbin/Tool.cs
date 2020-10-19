@@ -20,10 +20,23 @@ namespace Z0.Tools
         [Op]
         public static CmdExpr headers(FS.FilePath src, FS.FolderPath dst)
         {
-            var input = src;
-            var output = dst + src.FileName.ChangeExtension(FS.ext("headers.log"));
-            return Cmd.format(Expressions.Headers, input.Format(PathSeparator.BS), output.Format(PathSeparator.BS));
+            var output = dst + src.FileName.ChangeExtension(Patterns.HeadersExt);
+            return Cmd.format(Patterns.Headers,
+                src.Format(PathSeparator.BS),
+                output.Format(PathSeparator.BS)
+                );
         }
+
+        [Op]
+        public static CmdExpr disasm(FS.FilePath src, FS.FolderPath dst)
+        {
+            var output = dst + src.FileName.ChangeExtension(Patterns.DisasmExt);
+            return Cmd.format(Patterns.Disasm,
+                src.Format(PathSeparator.BS),
+                output.Format(PathSeparator.BS)
+                );
+        }
+
 
         public const string FlagPrefix = AsciCharText.FS;
 
@@ -36,6 +49,8 @@ namespace Z0.Tools
         const byte MaxArgCount = 12;
 
         const byte MaxArgIndex = MaxArgCount - 1;
+
+        public const string ArgSpecifier = AsciCharText.Colon;
 
         uint ArgIndex;
 

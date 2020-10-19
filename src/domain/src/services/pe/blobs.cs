@@ -43,5 +43,8 @@ namespace Z0
 
             return values.ToArray();
         }
+
+       public ReadOnlySpan<CliBlob> Blobs()
+            => blobs(State);
     }
 }

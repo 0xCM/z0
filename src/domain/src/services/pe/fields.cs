@@ -33,9 +33,6 @@ namespace Z0
             return dst;
         }
 
-        public static CliBlob sig(in ReaderState state, FieldDefinition src, Count seq)
-            => blob(state, src.Signature, seq);
-
         public static ReadOnlySpan<CliFieldRva> rva(in ReaderState state)
         {
             var reader = state.Reader;

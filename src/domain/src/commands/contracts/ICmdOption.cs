@@ -12,27 +12,28 @@ namespace Z0
 
     public interface ICmdOption : ITextual
     {
-        asci32 Name {get;}
+        asci32 Id {get;}
 
         string Value {get;}
 
         string ITextual.Format()
-            => Render.setting(Name,Value);
+            => Render.setting(Id,Value);
     }
 
     public interface ICmdOption<T> : ICmdOption
     {
         new T Value {get;}
 
-        string ICmdOption.Value => Value.ToString();
+        string ICmdOption.Value
+            => Value.ToString();
     }
 
     public interface ICmdOption<K,T> : ICmdOption<T>
         where K : unmanaged, Enum
     {
-        K Kind {get;}
+        new K Id {get;}
 
-        asci32 ICmdOption.Name
-            => Kind.ToString().ToLower();
+        asci32 ICmdOption.Id
+            => Id.ToString().ToLower();
     }
 }

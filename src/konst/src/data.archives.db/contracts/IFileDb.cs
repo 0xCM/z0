@@ -6,69 +6,12 @@ namespace Z0
 {
     using System;
 
-    public interface IDbFileArchive : IFileArchive
+    using X = ArchiveFileKinds;
+    using PN = DbPartitionNames;
+
+    public interface IFileDb : IFileArchive
     {
         IDbPaths DbPaths {get;}
-
-        FS.FolderPath TableRoot();
-
-        FS.FolderPath SourceRoot();
-
-        FS.FolderPath StageRoot();
-
-        FS.FolderPath DocRoot();
-
-        FS.FolderPath ToolRoot();
-
-        FS.FolderPath CaptureRoot()
-            => DbPaths.DbRoot + FS.folder("capture");
-
-        FS.FolderPath SourceRoot<S>(S subject);
-
-        FS.FolderPath StageRoot<S>(S subject);
-
-        FS.FileExt DefaultTableExt {get;}
-
-        FS.FolderPath LogRoot();
-
-        FS.FilePath Log(string id, Subject subject);
-
-        FS.FilePath Doc(ApiHostUri host, Subject subject, FS.FileExt ext);
-
-        FS.FilePath Doc(ApiHostUri host, Subject subject, FS.FileExt a, FS.FileExt b);
-
-        FS.FilePath Doc(ApiHostUri host, Subject s1, Subject s2, FS.FileExt a, FS.FileExt b);
-
-        FS.FilePath Doc(ApiHostUri host, Subject s1, Subject s2, FS.FileExt a);
-
-        FS.FilePath Table(string id);
-
-        FS.FilePath Table<S>(string id, S subject, FS.FileExt? ext = null);
-
-        FS.FilePath Table<K>(string id, K kind)
-            where K : unmanaged,  IFileKind<K>;
-
-        FS.FilePath Table(string id, PartId part, FS.FileExt? ext = null);
-
-        FS.FilePath Table(PartId part, string id, FS.FileExt ext);
-
-        FS.FilePath Table(Type t);
-
-        FS.FilePath Table<S>(Type t, S subject);
-
-        FS.FilePath Table(Type t, PartId part);
-
-        FS.FilePath Table<T>(PartId part)
-            where T : struct
-                => Table(typeof(T), part);
-
-        FS.FolderPath TableDir(string id);
-
-        FS.FolderPath TableDir(Type t);
-
-        FS.FolderPath TableDir<T>()
-            where T : struct
-                => TableDir(typeof(T));
 
         Option<FilePath> Deposit<F,R,S>(R[] src, string id, S subject, FS.FileExt type)
             where F : unmanaged, Enum
@@ -78,9 +21,86 @@ namespace Z0
 
         Files Clear(string id);
 
-        Files ClearDocs(PartId part, Subject subject, FS.FileExt ext);
+        FS.FileExt DefaultTableExt
+             => X.Csv;
 
-        Files ClearDocs(PartId part, Subject s1, Subject s2, FS.FileExt ext);
+        FS.FolderPath LogRoot()
+            => Root + FS.folder(PN.Logs);
+
+        FS.FolderPath TableRoot()
+            => Root + FS.folder(PN.Tables);
+
+        FS.FolderPath SourceRoot()
+            => Root + FS.folder(PN.Sources);
+
+        FS.FolderPath DocRoot()
+            => Root + FS.folder(PN.Docs);
+
+        FS.FolderPath ToolRoot()
+            => Root + FS.folder(PN.Tools);
+
+        FS.FolderPath CaptureRoot()
+            => Root + FS.folder(PN.Capture);
+
+        FS.FolderPath JobRoot()
+            => Root + FS.folder(PN.Jobs);
+
+        FS.FolderPath JobQueue()
+            => JobRoot() + FS.folder("queue");
+
+        FS.FolderPath StageRoot()
+            => Root + FS.folder(PN.Stage);
+
+        FS.FolderPath SourceRoot<S>(S subject)
+            => SourceRoot() + FS.folder(subject.ToString());
+
+        FS.FolderPath StageRoot<S>(S subject)
+            => StageRoot() + FS.folder(subject.ToString());
+
+        FS.FilePath Table(string id)
+            => TableRoot() + FS.file(id, DefaultTableExt);
+
+        FS.FilePath Table<S>(string id, S subject, FS.FileExt? ext = null)
+            => Table<S>(Root, id, subject, ext);
+
+        FS.FilePath Table<K>(string id, K kind)
+            where K : unmanaged,  IFileKind<K>
+                => TableRoot() + FS.file(id, kind.Ext);
+
+        FS.FilePath Table(string id, PartId part, FS.FileExt? ext = null)
+            => TableRoot() +  FS.folder(id) + FS.file(string.Format(RP.SlotDot2, id, part.Format()), ext ?? DefaultTableExt);
+
+        FS.FilePath Table(PartId part, string id, FS.FileExt ext)
+            => TableRoot() + FS.folder(id) + FS.file(part.Format(), ext);
+
+        FS.FilePath Table<D>(FS.FolderPath root, string id, D subject, FS.FileExt? type = null)
+            => TableRoot()+ FS.folder(id) + FS.file(text.format("{0}.{1}", id, subject), type ?? X.Csv);
+
+        FS.FilePath Table(Type t)
+            => t.Tag<TableAttribute>().MapValueOrElse(
+                    a => Table(a.TableId),
+                    () => Table(t.Name));
+
+        FS.FilePath Table(Type t, PartId part)
+            => t.Tag<TableAttribute>().MapValueOrElse(
+                    a => Table(part,  a.TableId, DefaultTableExt),
+                    () => Table(part, t.Name, DefaultTableExt));
+
+        FS.FilePath Table<T>(PartId part)
+            where T : struct
+                => Table(typeof(T), part);
+
+        FS.FolderPath TableDir(string id)
+            => DbPaths.TableRoot() + FS.folder(id);
+
+        FS.FolderPath TableDir(Type t)
+            => t.Tag<TableAttribute>().MapValueOrElse(
+                    a => TableDir(a.TableId),
+                    () => TableDir(t.Name));
+
+        FS.FolderPath TableDir<T>()
+            where T : struct
+                => TableDir(typeof(T));
 
         FS.FolderPath Tools(ToolId id)
             => ToolRoot() + FS.folder(id.Name);
@@ -165,7 +185,7 @@ namespace Z0
 
     }
 
-    public interface IDbFileArchive<H> : IDbFileArchive, IFileArchive<H>
+    public interface IDbFileArchive<H> : IFileDb, IFileArchive<H>
         where H : IDbFileArchive<H>
     {
 

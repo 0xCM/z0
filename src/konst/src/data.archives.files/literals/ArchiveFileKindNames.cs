@@ -103,8 +103,19 @@ namespace Z0
         /// </summary>
         public const string lib = nameof(lib);
 
+        /// <summary>
+        /// Defines the 'cmd' literal
+        /// </summary>
+        public const string cmd = nameof(cmd);
+
+        /// <summary>
+        /// Defines the 'x.csv' literal
+        /// </summary>
         public const string xcsv = x + dot + csv;
 
+        /// <summary>
+        /// Defines the 'p.csv' literal
+        /// </summary>
         public const string pcsv = p + dot + csv;
     }
 }

@@ -10,47 +10,52 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdScript : ITextual
+    using api = Cmd;
+
+    public readonly struct CmdScript : ITextual, IContented<TableSpan<CmdExpr>>, IIdentified<asci32>
     {
+        public asci32 Id {get;}
+
         readonly TableSpan<CmdExpr> Data;
 
         [MethodImpl(Inline)]
         public CmdScript(CmdExpr[] src)
         {
+            Id = api.Anonymous;
             Data = src;
         }
 
-        public Span<CmdExpr> Parts
+        [MethodImpl(Inline)]
+        public CmdScript(string id, CmdExpr[] src)
         {
-            [MethodImpl(Inline)]
-            get => Data.Edit;
+            Id = id;
+            Data = src;
         }
 
-        public ref CmdExpr First
+        [MethodImpl(Inline)]
+        internal CmdScript(asci32 id, CmdExpr[] src)
         {
-            [MethodImpl(Inline)]
-            get => ref Data.First;
+            Id = id;
+            Data = src;
         }
 
-        public uint PartCount
+        public int Length
         {
             [MethodImpl(Inline)]
-            get => Data.Count;
+            get => Data.Length;
+        }
+
+        public TableSpan<CmdExpr> Content
+        {
+            [MethodImpl(Inline)]
+            get => Data;
         }
 
         [MethodImpl(Inline)]
         public static implicit operator CmdScript(CmdExpr[] src)
             => new CmdScript(src);
-
         public string Format()
-        {
-            var dst = text.build();
-            var count = PartCount;
-            var parts = Data.View;
-            for(var i=0; i<count; i++)
-                dst.AppendLine(skip(parts,i).Format());
-            return dst.ToString();
-        }
+            => api.format(this);
 
         public override string ToString()
             => Format();

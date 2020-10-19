@@ -1,6 +1,6 @@
 //-----------------------------------------------------------------------------
-// Copyright   :  (c) Chris Moore, 2020
-// License     :  MIT
+// Copyright   : (c) Chris Moore, 2020
+// License     : MIT
 //-----------------------------------------------------------------------------
 namespace Z0
 {
@@ -8,33 +8,31 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    using api = Cmd;
-
-    public readonly struct CmdOption : ICmdOptionData<CmdOption>
+    public readonly struct CmdJob : ITextual
     {
-        public asci32 Id {get;}
+        public asci32 Name {get;}
 
-        public string Value {get;}
+        public string Spec {get;}
 
         [MethodImpl(Inline)]
-        public CmdOption(string name, string value)
+        public CmdJob(string name, string spec)
         {
-            Id = name;
-            Value = value;
+            Name = name;
+            Spec = spec;
         }
 
         [MethodImpl(Inline)]
-        public CmdOption(string name)
+        public CmdJob(in asci32 name, string spec)
         {
-            Id = name;
-            Value = EmptyString;
+            Name = name;
+            Spec = spec;
         }
+
 
         [MethodImpl(Inline)]
         public string Format()
-            => api.format(this);
+            => Spec;
 
         public override string ToString()
             => Format();

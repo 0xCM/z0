@@ -42,19 +42,35 @@ namespace Z0
 
         }
 
+
         public void Run()
         {
-            var dir = EnvVars.Common.ClrCoreRoot;
-
-
-            var name = FS.file("clrjit", ArchiveFileKinds.Dll);
-            var source = dir + name;
             var target = Wf.Db().ToolOutput(DumpBin.ToolId);
-            var cmd = DumpBin.headers(source, target);
-            var script = Cmd.script(cmd);
 
-            Wf.Row(cmd);
+            var headers = list<CmdExpr>();
 
+            var disasm = list<CmdExpr>();
+
+            var archive = ModuleArchive.create(EnvVars.Common.ClrCoreRoot);
+            foreach(var file in archive.Files())
+            {
+                if(file.Kind == FileModuleKind.NativeDll)
+                {
+                    headers.Add(DumpBin.headers(file.Path, target));
+                    disasm.Add(DumpBin.disasm(file.Path, target));
+                }
+            }
+
+            var headerScript = Cmd.script(headers.ToArray());
+            var headersJob = Cmd.job("dumpbin.headers", headerScript);
+            Wf.EmittedFile(headerScript.GetType(),
+                headerScript.Length,
+                Cmd.enqueue(headersJob, Wf.Db()));
+
+            var disasmScript = Cmd.script(disasm.ToArray());
+            var disasmJob = Cmd.job("dumpbin.disasm", disasmScript);
+            Wf.EmittedFile(disasmScript.GetType(), disasmScript.Length,
+                Cmd.enqueue(disasmJob, Wf.Db()));
         }
     }
 }

@@ -19,5 +19,12 @@ namespace Z0
         public const string Stage = "stage";
 
         public const string Tools = "tools";
+
+        public const string Jobs = "jobs";
+
+        public const string Capture = "capture";
+
+        public const string Logs = "logs";
+
     }
 }

@@ -17,14 +17,14 @@ namespace Z0
 
     public struct DbTables<S> : IDbTableArchive
     {
-        public IDbFileArchive Db {get;}
+        public IFileDb Db {get;}
 
         public S Subject {get;}
 
         public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
-        internal DbTables(IDbFileArchive archive, S subject)
+        internal DbTables(IFileDb archive, S subject)
         {
             Db = archive;
             Subject = subject;

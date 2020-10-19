@@ -13,14 +13,6 @@ namespace Z0
 
     using api = Cmd;
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct CmdOptionData<K,T>
-    {
-        public K OptionKind;
-
-        public T OptionValue;
-    }
-
     public readonly struct CmdOption<K,T> : ICmdOptionData<CmdOption<K,T>,K,T>
         where K : unmanaged
     {
@@ -35,7 +27,7 @@ namespace Z0
             Value = value;
         }
 
-        public asci32 Name
+        public asci32 Id
         {
             [MethodImpl(Inline)]
             get => api.name(this);

@@ -24,12 +24,22 @@ namespace Z0
         /// <summary>
         /// Defines a <see cref='CmdOption{T}'/>
         /// </summary>
-        /// <param name="name">The option name</param>
+        /// <param name="name">The option identifier</param>
         /// <param name="value">The option value</param>
         /// <typeparam name="T">The option value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static CmdOption<T> option<T>(string name, T value)
             => new CmdOption<T>(name,value);
+
+        /// <summary>
+        /// Defines a <see cref='CmdOption{T}'/>
+        /// </summary>
+        /// <param name="id">The option identifier</param>
+        /// <param name="value">The option value</param>
+        /// <typeparam name="T">The option value type</typeparam>
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static CmdOption<T> option<T>(in asci32 id, T value)
+            => new CmdOption<T>(id,value);
 
         /// <summary>
         /// Defines a <see cref='CmdOption{K,T}'/>

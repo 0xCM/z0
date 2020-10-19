@@ -9,6 +9,7 @@ namespace Z0
 
     public readonly struct ArchiveFileKinds
     {
+        public static FileExt Cmd => ext(cmd);
         public static FileExt Asm => ext(asm);
 
         public static FileExt Csv => ext(csv);

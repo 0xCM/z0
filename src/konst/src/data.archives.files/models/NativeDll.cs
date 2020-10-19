@@ -19,7 +19,7 @@ namespace Z0
         public FS.FilePath Path {get;}
 
         public FileModuleKind Kind
-            => FileModuleKind.NativeLib;
+            => FileModuleKind.NativeDll;
 
         [MethodImpl(Inline)]
         public NativeDll(FS.FilePath path)

@@ -32,8 +32,8 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ref CmdOptionData data(in CmdOption src, ref CmdOptionData dst)
         {
-            dst.OptionName = src.Name;
-            dst.OptionValue = src.Value;
+            dst.Id = src.Id;
+            dst.Value = src.Value;
             return ref dst;
         }
 
@@ -42,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The option value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static CmdOptionData<T> data<T>(in CmdOption<T> src)
         {
             var dst = new CmdOptionData<T>();
@@ -56,11 +56,11 @@ namespace Z0
         /// <param name="src">The data source</param>
         /// <param name="dst">The data target</param>
         /// <typeparam name="T">The option value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref CmdOptionData<T> data<T>(in CmdOption<T> src, ref CmdOptionData<T> dst)
         {
-            dst.OptionName = src.Name;
-            dst.OptionValue = src.Value;
+            dst.Id = src.Id;
+            dst.Value = src.Value;
             return ref dst;
         }
 
@@ -90,8 +90,8 @@ namespace Z0
         public static ref CmdOptionData<K,T> data<K,T>(in CmdOption<K,T> src, ref CmdOptionData<K,T> dst)
             where K : unmanaged
         {
-            dst.OptionKind = src.Kind;
-            dst.OptionValue = src.Value;
+            dst.Id = src.Kind;
+            dst.Value = src.Value;
             return ref dst;
         }
 

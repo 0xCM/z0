@@ -12,9 +12,9 @@ namespace Z0
 
     partial struct Cmd
     {
-        [MethodImpl(NotInline), Op]
-        public static CmdExpr format(CmdExpr expr, params object[] args)
-            => string.Format(expr.Text, args);
+        [MethodImpl(Inline), Op]
+        public static CmdExpr format(CmdPattern pattern, params object[] args)
+            => new CmdExpr(pattern.Id, string.Format(pattern.Content, args));
 
         /// <summary>
         /// Renders a specified option as text
@@ -22,16 +22,16 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static string format(in CmdOption src)
-            => Render.setting(src.Name, src.Value);
+            => Render.setting(src.Id, src.Value);
 
         /// <summary>
         /// Renders a specified option as text
         /// </summary>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The option value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(in CmdOption<T> src)
-            => Render.setting(src.Name, src.Value);
+            => Render.setting(src.Id, src.Value);
 
         /// <summary>
         /// Renders a specified option as text
@@ -42,7 +42,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string format<K,T>(in CmdOption<K,T> src)
             where K : unmanaged
-                => Render.setting(src.Name, src.Value);
+                => Render.setting(src.Id, src.Value);
 
         public static string format<K,T>(in CmdOptions<K,T> src)
             where K : unmanaged
@@ -63,14 +63,15 @@ namespace Z0
             return dst.Emit();
         }
 
+
         [Op]
-        public static void render(in CmdOptions src, ITextBuffer dst)
+        public static string format(in CmdScript src)
         {
-            var view = src.View;
-            var count = view.Length;
-            for(var i=0; i<count; i++)
-                dst.AppendLine(skip(view,i).Format());
+            var dst = Buffers.text();
+            render(src,dst);
+            return dst.Emit();
         }
+
 
         // [Op]
         // public static string format(in CmdLine src)

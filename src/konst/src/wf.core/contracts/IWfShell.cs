@@ -62,7 +62,7 @@ namespace Z0
         FS.FolderPath AppData
             => FS.dir(Shell.Paths.AppDataRoot.Name);
 
-        IDbFileArchive Db()
+        IFileDb Db()
             => Z0.Db.files(this, DbPaths.create(this));
 
         WfEventId Raise<E>(in E e)
