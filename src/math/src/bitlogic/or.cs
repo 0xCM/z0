@@ -115,14 +115,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong or(ulong a, ulong b, ulong c, ulong d)
             => or(or(a,b), or(c,d));
-
-        /// <summary>
-        /// Computes the bitwise OR of two 128-bit integers
-        /// </summary>
-        /// <param name="x">The first integer, represented via paired hi/lo components</param>
-        /// <param name="y">The second integer, represented via paired hi/lo components</param>
-        [MethodImpl(Inline), Op]
-        public static ConstPair<ulong> or(in ConstPair<ulong> x, in ConstPair<ulong> y)
-            => ConstPair.define(x.Left | y.Left, x.Right | y.Right);
     }
 }

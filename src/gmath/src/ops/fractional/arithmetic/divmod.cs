@@ -22,11 +22,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return ConstPair.generic<T>(fmath.divmod(float32(a), float32(b)));
+                return Tuples.generic<T>(fmath.divmod(float32(a), float32(b)));
             else if(typeof(T) == typeof(float))
-                return ConstPair.generic<T>(fmath.divmod(float64(a), float64(b)));
+                return Tuples.generic<T>(fmath.divmod(float64(a), float64(b)));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
     }
 }

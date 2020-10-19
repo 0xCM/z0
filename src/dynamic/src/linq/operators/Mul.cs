@@ -9,8 +9,8 @@ namespace Z0.Dynamics.Operators
     using System.Runtime.CompilerServices;
 
     using static Root;
-    using static XPress;
-    using static XFunc;
+    using static LinqXPress;
+    using static LinqXFunc;
 
     public static class Mul<T>
     {

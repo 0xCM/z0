@@ -313,5 +313,12 @@
 		"paths": [],
 		"group": "",
 		"enabled": true
+	},
+	{
+		"name": "intel/xed",
+		"rootPath": "j:\\tools\\intel\\github\\xedtool",
+		"paths": [],
+		"group": "",
+		"enabled": true
 	}
 ]

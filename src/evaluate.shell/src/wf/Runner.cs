@@ -42,7 +42,16 @@ namespace Z0
 
         }
 
+/*
+dumpbin /DISASM:NOBYTES /OUT:j:\database\tools\DumpBin\output\coreclr.disasm.nobytes.asm J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug\Tests\Core_Root\coreclr.dll
+dumpbin /RELOCATIONS /OUT:j:\database\tools\DumpBin\output\coreclr.relocations.log J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug\Tests\Core_Root\coreclr.dll
+dumpbin /RAWDATA:1,32 /OUT:j:\database\tools\DumpBin\output\coreclr.rawdata.log J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug\Tests\Core_Root\coreclr.dll
+dumpbin /LOADCONFIG /OUT:j:\database\tools\DumpBin\output\coreclr.loadconfig.log J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug\Tests\Core_Root\coreclr.dll
 
+dumpbin /DISASM:NOBYTES /OUT:j:\database\tools\DumpBin\output\dia2lib.disasm.nobytes.asm J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug\Tests\Core_Root\dia2lib.dll
+dumpbin /DISASM:NOBYTES /OUT:j:\database\tools\DumpBin\output\createdump.disasm.asm J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug\Tests\Core_Root\createdump.exe
+
+*/
         public void Run()
         {
             var target = Wf.Db().ToolOutput(DumpBin.ToolId);

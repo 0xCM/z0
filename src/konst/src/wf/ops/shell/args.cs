@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct WfShell
+    partial class WfShell
     {
         [MethodImpl(Inline), Op]
         public static string[] args()

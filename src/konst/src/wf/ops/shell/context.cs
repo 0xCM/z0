@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct WfShell
+    partial class WfShell
     {
         /// <summary>
         /// Creates a <see cref='IWfContext'/> predicated on the entry <see cref='Assembly'/>, a <see cref='ApiPartSet'/> derived

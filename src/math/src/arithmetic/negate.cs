@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-        
+
     partial class math
     {
         /// <summary>
@@ -26,7 +26,7 @@ namespace Z0
         [MethodImpl(Inline), Negate]
         public static byte negate(byte src)
             => (byte)(~src + 1);
-     
+
         /// <summary>
         /// Negates the source value
         /// </summary>
@@ -97,13 +97,5 @@ namespace Z0
         [MethodImpl(Inline), Negate]
         public static double negate(double src)
             => -src;
-
-        /// <summary>
-        /// Computes the two's complement of a 128-bit integer
-        /// </summary>
-        /// <param name="x">The integer, represented via paired hi/lo components</param>
-        [MethodImpl(Inline), Op]
-        public static ConstPair<ulong> negate(ConstPair<ulong> x)
-            => math.add(not(x), ConstPair.define(1ul,0ul));
    }
 }

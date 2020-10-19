@@ -13,17 +13,52 @@ namespace Z0
     [ApiNameProvider]
     readonly struct ApiNames
     {
-        const string asci = nameof(asci);
 
-        public const string ApiIdentity = api + dot + identity;
 
-        public const string ApiIdentityX = api + dot + identity + dot + extensions;
+        public const string AppMsg = app + dot + msg;
 
-        public const string ApiIdentify = api + dot + identify;
+        public const string AppErrors = app + dot + errors;
 
-        public const string ApiCatalogs = api + dot + catalogs;
+        public const string AppErrorMsg = app + dot + errors + dot + msg;
 
-        public const string ApiCatalogServices = api + dot + catalogs + dot + services;
+        public const string Scalars = primal + dot + scalars;
+
+        public const string Lookups = lookups + dot + core;
+
+        public const string Tuples = tuples;
+
+        // ~~ Primal
+        // ~~ -----------------------------------------------------------------------------------------
+
+        public const string PrimalKinds = primal + dot + kinds;
+
+
+        // ~~ Cells
+        // ~~ -----------------------------------------------------------------------------------------
+        public const string Cells = cells;
+
+        public const string CellDelegates = cells + dot + delegates;
+
+        public const string CellBuffers = cells + dot + buffers;
+
+        public const string CellSource = cells + dot + source;
+
+        // ~~ Delegates
+        // ~~ -----------------------------------------------------------------------------------------
+
+        public const string Delegates = delegates;
+
+        public const string DelegatesX = delegates + dot + extensions;
+
+        // ~~ Db
+        // ~~ -----------------------------------------------------------------------------------------
+
+        public const string Db = db;
+
+        public const string DbArtifacts = db + dot + artifacts;
+
+        // ~~ Bits
+        // ~~ -----------------------------------------------------------------------------------------
 
         public const string BitFormatter = bits + dot + formatters;
 
@@ -33,19 +68,48 @@ namespace Z0
 
         public const string BitFormatOptions = bits + dot + formatters + dot + options;
 
-        public const string BitFieldParts = bitfields + dot + parts;
+        public const string BitFieldParts = bits + dot + bitfields + dot + parts;
 
-        public const string BitFieldSpecs = bitfields + dot + specs;
+        public const string BitFieldSpecs = bits + dot + bitfields + dot + specs;
 
-        public const string Cells = cells + dot + api;
+        // ~~ Linq
+        // ~~ -----------------------------------------------------------------------------------------
 
-        public const string CellDelegates = cells + dot + delegates;
+        const string linq = nameof(linq);
 
-        public const string CellBuffers = cells + dot + buffers;
+        public const string LinqXPress = linq + dot + expressions;
 
-        public const string CellSource = cells + dot + source;
+        public const string LinqXQuery = linq + dot + expressions + dot + query;
 
-        public const string Delegates = delegates;
+        public const string LinqXFunc = linq + dot + expressions + dot + functions;
+
+        public const string LinqXFuncX = linq + dot + expressions + dot + extensions;
+
+        // ~~ Resources
+        // ~~ -----------------------------------------------------------------------------------------
+
+        public const string Resources = resources;
+
+        public const string TextResources = resources + dot + A.text;
+
+
+        // ~~ SFunc
+        // ~~ -----------------------------------------------------------------------------------------
+
+        public const string SFxSurrogates = sfunc + dot + surrogates;
+
+        public const string SFxProjectors = sfunc + dot + projectors;
+
+
+        // ~~ Blocks
+        // ~~ -----------------------------------------------------------------------------------------
+
+        public const string DataBlocks = blocks + dot + data;
+
+        public const string CharBlocks = blocks + dot + chars;
+
+        // ~~ Symbolic
+        // ~~ -----------------------------------------------------------------------------------------
 
         public const string Symbolic = symbolic;
 
@@ -55,67 +119,60 @@ namespace Z0
 
         public const string SymbolStore = symbolic + dot + store;
 
-        public const string SymbolicDigits = symbolic + dot + "digits";
+        public const string SymbolicDigits = symbolic + dot + digits;
 
-        public const string Asci = symbolic + dot + asci;
+        public const string Asci = symbolic + dot + A.asci;
 
-        public const string PermSymbolic = symbolic + dot + "permutations";
+        public const string PermSymbolic = symbolic + dot + permutations;
 
-        public const string SFxSurrogates = sfunc + dot + surrogates;
+        // ~~ Wf
+        // ~~ -----------------------------------------------------------------------------------------
 
-        public const string SFxProjectors = sfunc + dot + projectors;
+        public const string Workflow = workflow;
 
-        public const string DelegatesX = Delegates + dot + extensions;
+        public const string WfShell = workflow + dot + shell;
 
-        public const string XPress = expressions;
+        // ~~ Text
+        // ~~ -----------------------------------------------------------------------------------------
 
-        public const string XFunc = expressions + dot + functions;
+        public const string TextEncoders = A.text + dot + encoders;
 
-        public const string XFuncX = XFunc + dot + extensions;
+        // ~~ Memory
+        // ~~ -----------------------------------------------------------------------------------------
 
-        public const string XQuery = expressions + dot + query;
+        public const string MemStore = A.memory + dot + store;
 
-        public const string DataBlocks = blocks + dot + data;
+        public const string MemReader = A.memory + dot + reader;
 
-        public const string CharBlocks = blocks + dot + chars;
+        public const string MemRefs = A.memory + dot + refs;
 
-        public const string BitLogic = bits + dot + logic;
+        public const string StringRefs = A.memory + dot + refs + dot + strings;
 
-        public const string BitLogicBits = BitLogic + dot + bits;
+        // ~~ Api
+        // ~~ -----------------------------------------------------------------------------------------
 
-        public const string BitLogicU1 = BitLogic + dot + u1;
+        public const string ApiIdentity = api + dot + identity;
 
-        public const string BitLogicU2 = BitLogic + dot + u2;
+        public const string ApiIdentityX = api + dot + identity + dot + extensions;
 
-        public const string BitLogicU3 = BitLogic + dot + u3;
+        public const string ApiIdentify = api + dot + identify;
 
-        public const string BitLogicU4 = BitLogic + dot + u4;
+        public const string ApiCatalogs = api + dot + catalogs;
 
-        public const string BitLogicU5 = BitLogic + dot + u5;
+        public const string ApiEnumCatalog = api + dot + catalogs + dot + enums;
 
-        public const string BitLogicU6 = BitLogic + dot + u6;
+        public const string ApiCatalogExtensions = api + dot + catalogs + dot + extensions;
 
-        public const string BitLogicU7 = BitLogic + dot + u7;
+        public const string ApiCatalogServices = api + dot + catalogs + dot + services;
 
-        public const string BitLogicO8 = BitLogic + dot + octets;
+        public const string ApiQuery = api + dot + query;
 
-        public const string BitLogicU8 = BitLogic + dot + u8;
+        public const string ApiPartCatalogQuery = api + dot + query + dot + parts;
 
-        public const string BitLogicU16 = BitLogic + dot + u16;
+        public const string ApiHostMemberQuery = api + dot + query + dot + hosts;
 
-        public const string BitLogicU32 = BitLogic + dot + u32;
-
-        public const string BitLogicU64 = BitLogic + dot + u64;
-
-        public const string BitLogicKinds = BitLogic + dot + kinds;
-
-        public const string BitLogicScalar = BitLogic + dot + scalar;
-
-        public const string BitLogicBytes = BitLogic + dot + bytes;
-
-        public const string Resources = data + dot + resources;
-
-        public const string TextResources = Resources + dot + A.text;
+        // ~~ Tables
+        // ~~ -----------------------------------------------------------------------------------------
 
         public const string Tables = tables;
 
@@ -125,57 +182,53 @@ namespace Z0
 
         public const string TableMaps = tables + dot + maps;
 
-        public const string Workflow = workflow + dot + core;
+        public const string StringTables = tables + dot + strings;
 
-        public const string WfShell = workflow + dot + shell;
-
-        public const string PrimalKinds = primal + dot + kinds;
-
-        public const string PrimalKindBits = primal + dot + kinds + dot + bitfield;
-
-        public const string MemStore = A.memory + dot + store;
-
-        public const string MemReader = A.memory + dot + reader;
-
-        public const string TextEncoders = A.text + dot + encoders;
-
-        public const string StringTables = data + dot + "stringtables";
-
-        public const string Db = archives + dot + db;
-
-        public const string DbFiles = archives + dot + db + dot + files;
-
-        public const string DbArtifacts = archives + dot + db + dot + artifacts;
-
+        // ~~ Literals
+        // ~~ -----------------------------------------------------------------------------------------
         public const string LiteralFields = literal + dot + fields;
 
-        public const string AppMsg = app + dot + msg;
+        public const string TypedLiterals = literals + dot + typed;
 
-        public const string AppErrors = app + dot + errors;
+        // ~~ Bitlogic
+        // ~~ -----------------------------------------------------------------------------------------
 
-        public const string AppErrorMsg = app + dot + errors + dot + msg;
+        public const string BitLogicBits = bitlogic + dot + bits;
 
-        public const string ToolApi =  tools + dot + core;
+        public const string BitLogicU1 = bitlogic + dot + u1;
 
-        const string memory = nameof(memory);
+        public const string BitLogicU2 = bitlogic + dot + u2;
 
-        public const string MemRefs = memory + dot + refs;
+        public const string BitLogicU3 = bitlogic + dot + u3;
 
-        public const string StringRefs = memory + dot + refs + dot + strings;
+        public const string BitLogicU4 = bitlogic + dot + u4;
 
-        public const string Scalars = primal + dot + "scalars";
+        public const string BitLogicU5 = bitlogic + dot + u5;
 
-        public const string ApiQuery = api + dot + query;
+        public const string BitLogicU6 = bitlogic + dot + u6;
 
-        public const string ApiPartCatalogQuery = api + dot + query + dot + parts;
+        public const string BitLogicU7 = bitlogic + dot + u7;
 
-        public const string ApiHostMemberQuery = api + dot + query + dot + "hosts";
+        public const string BitLogicO8 = bitlogic + dot + octets;
 
-        public const string ApiCatalogExtensions = api + dot + catalogs + dot + extensions;
+        public const string BitLogicU8 = bitlogic + dot + u8;
 
-        public const string ApiEnumCatalog = api + dot + catalogs + dot + enums;
+        public const string BitLogicU16 = bitlogic + dot + u16;
 
-        public const string Lookups = lookups + dot + core;
+        public const string BitLogicU32 = bitlogic + dot + u32;
 
+        public const string BitLogicU64 = bitlogic + dot + u64;
+
+        public const string BitLogicKinds = bitlogic + dot + kinds;
+
+        public const string BitLogicScalar = bitlogic + dot + scalar;
+
+        public const string BitLogicBytes = bitlogic + dot + bytes;
+
+        const string bitlogic = bits + dot + logic;
+
+        const string types = nameof(types);
+
+        const string typed = nameof(typed);
     }
 }

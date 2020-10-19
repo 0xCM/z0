@@ -40,9 +40,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong nor(ulong a, ulong b)
             => ~ (a | b);
-
-        [MethodImpl(Inline), Op]
-        public static ConstPair<ulong> nor(in ConstPair<ulong> x, in ConstPair<ulong> y)
-            => not(math.or(x,y));
     }
 }

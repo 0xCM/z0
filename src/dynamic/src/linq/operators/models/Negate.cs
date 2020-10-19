@@ -9,7 +9,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static XPress;
+    using static LinqXPress;
 
     partial struct DynamicOps
     {

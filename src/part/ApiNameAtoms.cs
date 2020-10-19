@@ -199,14 +199,26 @@ namespace Z0
 
         public const string strings = nameof(strings);
 
-         public const string reader = nameof(reader);
+        public const string reader = nameof(reader);
 
-         public const string workflow = nameof(workflow);
+        public const string workflow = nameof(workflow);
 
-         public const string symbols = nameof(symbols);
+        public const string symbols = nameof(symbols);
 
-         public const string part = nameof(part);
+        public const string part = nameof(part);
 
-         public const string literals = nameof(literals);
+        public const string literals = nameof(literals);
+
+        public const string scalars = nameof(scalars);
+
+        public const string tuples = nameof(tuples);
+
+        public const string hosts = nameof(hosts);
+
+        public const string digits= nameof(digits);
+
+        public const string asci = nameof(asci);
+
+        public const string permutations = nameof(permutations);
     }
 }

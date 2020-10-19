@@ -11,8 +11,8 @@ namespace Z0
     using Z0.Dynamics.Operators;
 
     using static z;
-    using static Z0.XPress;
-    using static Z0.XFunc;
+    using static Z0.LinqXPress;
+    using static Z0.LinqXFunc;
 
     partial struct DynamicOps
     {

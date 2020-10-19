@@ -7,7 +7,7 @@ namespace Z0
 {
     using System;
 
-    using static Z0.XFunc;
+    using static Z0.LinqXFunc;
 
     partial struct DynamicOps
     {

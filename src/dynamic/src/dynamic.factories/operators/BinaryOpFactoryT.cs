@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    using static XPress;
+    using static LinqXPress;
 
     public readonly struct BinaryOpFactory<T> : IBinaryOpFactory<T>
     {

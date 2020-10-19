@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     partial class math
     {
         /// <summary>
@@ -72,12 +72,5 @@ namespace Z0
         [MethodImpl(Inline), Dec]
         public static ulong dec(ulong src)
             => --src;
-
-        [MethodImpl(Inline), Op]
-        public static ref ConstPair<ulong> dec(ref ConstPair<ulong> x)
-        {
-            x = math.sub(x, ConstPair.define(1ul,0ul));
-            return ref x;
-        }
     }
 }

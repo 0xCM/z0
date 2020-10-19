@@ -11,7 +11,7 @@ namespace Z0.Dynamics.Operators
     using Z0.Dynamics.Operators;
 
     using static z;
-    using static XPress;
+    using static LinqXPress;
 
     public static class LtEq<T>
     {

@@ -9,7 +9,7 @@ namespace Z0.Dynamics.Operators
     using System.Linq.Expressions;
 
     using static z;
-    using static XPress;
+    using static LinqXPress;
 
     public readonly struct Inc<T>
     {

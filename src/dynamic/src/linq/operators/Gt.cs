@@ -10,7 +10,7 @@ namespace Z0.Dynamics.Operators
 
     using static Konst;
     using static z;
-    using static XPress;
+    using static LinqXPress;
 
     public static class Gt<T>
     {

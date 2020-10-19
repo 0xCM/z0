@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq.Expressions;
 
     using static z;
-    using static XPress;
+    using static LinqXPress;
 
     using Z0.Dynamics.Operators;
 

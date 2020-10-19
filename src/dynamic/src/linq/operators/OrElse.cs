@@ -7,7 +7,7 @@ namespace Z0.Dynamics.Operators
     using System;
     using System.Linq.Expressions;
 
-    using static Z0.XPress;
+    using static Z0.LinqXPress;
 
     public static class OrElse<T>
     {

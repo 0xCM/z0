@@ -41,13 +41,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                return ConstPair.generic<T>(math.divmod(int8(a), int8(m)));
+                return Tuples.generic<T>(math.divmod(int8(a), int8(m)));
             else if(typeof(T) == typeof(short))
-                return ConstPair.generic<T>(math.divmod(int16(a), int16(m)));
+                return Tuples.generic<T>(math.divmod(int16(a), int16(m)));
             else if(typeof(T) == typeof(int))
-                 return ConstPair.generic<T>(math.divmod(int32(a), int32(m)));
+                 return Tuples.generic<T>(math.divmod(int32(a), int32(m)));
             else
-                 return ConstPair.generic<T>(math.divmod(int64(a), int64(m)));
+                 return Tuples.generic<T>(math.divmod(int64(a), int64(m)));
         }
 
         [MethodImpl(Inline)]
@@ -55,13 +55,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return ConstPair.generic<T>(math.divmod(uint8(a), uint8(m)));
+                return Tuples.generic<T>(math.divmod(uint8(a), uint8(m)));
             else if(typeof(T) == typeof(ushort))
-                return ConstPair.generic<T>(math.divmod(uint16(a), uint16(m)));
+                return Tuples.generic<T>(math.divmod(uint16(a), uint16(m)));
             else if(typeof(T) == typeof(uint))
-                return ConstPair.generic<T>(math.divmod(uint32(a), uint32(m)));
+                return Tuples.generic<T>(math.divmod(uint32(a), uint32(m)));
             else
-                return ConstPair.generic<T>(math.divmod(uint64(a), uint64(m)));
+                return Tuples.generic<T>(math.divmod(uint64(a), uint64(m)));
         }
     }
 }

@@ -9,8 +9,8 @@ namespace Z0.Dynamics
 
     using Z0;
     using static Z0.Root;
-    using static Z0.XPress;
-    using static Z0.XFunc;
+    using static Z0.LinqXPress;
+    using static Z0.LinqXFunc;
 
     public class StandardOperators
     {

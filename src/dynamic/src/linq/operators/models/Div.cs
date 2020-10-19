@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Linq.Expressions;
 
-    using static XPress;
+    using static LinqXPress;
 
     partial struct DynamicOps
     {

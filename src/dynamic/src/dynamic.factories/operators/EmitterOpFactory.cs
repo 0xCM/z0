@@ -8,7 +8,7 @@ namespace Z0
     using System.Reflection;
 
     using static Konst;
-    using static XPress;
+    using static LinqXPress;
 
     public readonly struct EmitterFactory<T> : IEmitterOpFactory<T>
     {

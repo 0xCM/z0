@@ -8,9 +8,9 @@ namespace Z0.Dynamics.Operators
     using System.Linq.Expressions;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using static XPress;
+    using static LinqXPress;
 
     public readonly struct And<T> : IFunc<T,T,T>
     {

@@ -40,14 +40,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong xnor(ulong a, ulong b)
             => ~ (a ^ b);
-
-        /// <summary>
-        /// Computes the bitwise XNOR of two 128-bit integers
-        /// </summary>
-        /// <param name="x">The first integer, represented via paired hi/lo components</param>
-        /// <param name="y">The second integer, represented via paired hi/lo components</param>
-        [MethodImpl(Inline), Op]
-        public static ConstPair<ulong> xnor(in ConstPair<ulong> x, in ConstPair<ulong> y)
-            => not(xor(x,y));
     }
 }

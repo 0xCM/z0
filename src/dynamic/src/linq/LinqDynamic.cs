@@ -11,7 +11,7 @@ namespace Z0
     using Z0.Dynamics.Operators;
 
     using static Konst;
-    using static XPress;
+    using static LinqXPress;
     using static z;
 
     using static DynamicOps;

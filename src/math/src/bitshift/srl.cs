@@ -83,21 +83,6 @@ namespace Z0
         [MethodImpl(Inline), Srl]
         public static ulong srl(ulong src, byte offset)
             => srl64u(src,offset);
- 
-        /// <summary>
-        /// Shifts the source integer leftwards
-        /// </summary>
-        /// <param name="x">The integer, represented via paired hi/lo components</param>
-        /// <param name="offset">The number of bits to shift letward</param>
-        /// <remarks>Follows https://github.com/chfast/intx/include/intx/int128.hpp</remarks>
-        [MethodImpl(Inline), Op]
-        public static ConstPair<ulong> srl(in ConstPair<ulong> x, byte offset)
-            => offset < 64 
-              ?  ConstPair.define((x.Right >> offset), (x.Left >> offset) | ((x.Right << 1) << 63 - offset))
-              : offset < 128 
-              ? ConstPair.define(z64, x.Left >> (offset - 64)) 
-              : ConstPair.zero(z64);
-
 
         [MethodImpl(Inline), Srl]
         static int srl32i(int src, byte offset)

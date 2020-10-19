@@ -40,13 +40,5 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ulong not(ulong src)
             => ~ src;
-
-        /// <summary>
-        /// Computes the bitwise complement of a 128-bit integer
-        /// </summary>
-        /// <param name="x">The integer, represented via paired hi/lo components</param>
-        [MethodImpl(Inline), Op]
-        public static ConstPair<ulong> not(in ConstPair<ulong> x)
-            => ConstPair.define(~x.Left, ~x.Right);
     }
 }
