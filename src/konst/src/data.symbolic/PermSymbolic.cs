@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.Symbolic, true)]
+    [ApiHost(ApiNames.PermSymbolic, true)]
     public readonly partial struct PermSymbolic
     {
 
