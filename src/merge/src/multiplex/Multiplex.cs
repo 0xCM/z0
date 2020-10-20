@@ -49,7 +49,7 @@ namespace Z0
 
         void LoadAssemblies()
         {
-            Modules.Query((in ManagedDll x) => Receive(x));
+
         }
 
         void Receive(in ManagedDll src)

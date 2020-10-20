@@ -16,19 +16,25 @@ namespace Z0
     /// </summary>
     public readonly struct StringRef : ITextual, IConstSpan<StringRef,char>
     {
-        internal readonly Vector128<ulong> Location;
+        internal readonly Vector128<ulong> Data;
 
         [MethodImpl(Inline)]
         public StringRef(in SegRef src)
-            => Location = MemRefs.location(src);
+            => Data = MemRefs.location(src);
 
         [MethodImpl(Inline)]
         public StringRef(MemoryAddress address, uint length, uint user = 0)
-            => Location = MemRefs.pack(address, length, user);
+            => Data = MemRefs.pack(address, length, user);
 
         [MethodImpl(Inline)]
-        internal StringRef(Vector128<ulong> data)
-            => Location = data;
+        public StringRef(Vector128<ulong> data)
+
+            => Data = data;
+
+        [MethodImpl(Inline)]
+        public StringRef(Cell128 data)
+
+            => Data = data;
 
         [MethodImpl(Inline)]
         public static implicit operator StringRef(SegRef src)
@@ -42,13 +48,19 @@ namespace Z0
         public static implicit operator StringRef(string src)
             => @ref(src);
 
+        public Vector128<ulong> Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
         /// <summary>
         /// The length of the represented string
         /// </summary>
         public int Length
         {
             [MethodImpl(Inline)]
-            get => (int)MemRefs.length<char>(Location);
+            get => (int)MemRefs.length<char>(Data);
         }
 
         public uint Count
@@ -60,7 +72,7 @@ namespace Z0
         public uint User
         {
             [MethodImpl(Inline)]
-            get => MemRefs.user(Location);
+            get => MemRefs.user(Data);
         }
 
         public unsafe string Text
@@ -72,7 +84,7 @@ namespace Z0
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
-            get => MemRefs.location(Location);
+            get => MemRefs.location(Data);
         }
 
         public ref readonly char this[int index]

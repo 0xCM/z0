@@ -17,5 +17,10 @@ namespace Z0
         public const string Cmd = cmd + dot + core;
 
         public const string CmdParse = cmd + dot + "parse";
+
+
+        const string parsers = nameof(parsers);
+
+        public const string FilePathParser = parsers + dot + files + dot + "paths";
     }
 }

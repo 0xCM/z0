@@ -18,21 +18,4 @@ namespace Z0
 
         public string Value;
     }
-
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct CmdOptionData<T>
-    {
-        public asci32 Id;
-
-        public T Value;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public struct CmdOptionData<K,T>
-    {
-        public K Id;
-
-        public T Value;
-    }
 }

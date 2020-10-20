@@ -230,5 +230,9 @@ namespace Z0
         const string types = nameof(types);
 
         const string typed = nameof(typed);
+
+        const string relations = nameof(relations);
+
+        public const string Relations = relations;
     }
 }

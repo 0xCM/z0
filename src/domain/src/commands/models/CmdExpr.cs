@@ -10,36 +10,57 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct CmdExpr : ITextual, IIdentified<asci32>, IContented<string>
+    using api = Cmd;
+
+    public readonly struct CmdExpr : ITextual, IIdentified<string>
     {
-        public asci32 Id {get;}
+        public CmdPattern Pattern {get;}
 
-        public bool Anonymous {get;}
-
-        public string Content {get;}
+        public CmdVars Variables {get;}
 
         [MethodImpl(Inline)]
-        public CmdExpr(string src)
+        public CmdExpr(string pattern)
         {
-            Id = Cmd.Anonymous;
-            Content = src;
-            Anonymous = true;
+            Pattern = pattern;
+            Variables = api.vars();
         }
 
         [MethodImpl(Inline)]
-        public CmdExpr(string name, string src)
+        internal CmdExpr(CmdPattern pattern)
         {
-            Id = name;
-            Content = src;
-            Anonymous = false;
+            Pattern = pattern;
+            Variables = api.vars();
         }
 
         [MethodImpl(Inline)]
-        internal CmdExpr(in asci32 name, string src)
+        internal CmdExpr(CmdPattern pattern, CmdVars vars)
         {
-            Id = name;
-            Content = src;
-            Anonymous = false;
+            Pattern = pattern;
+            Variables = vars;
+        }
+
+        public string Id
+        {
+            [MethodImpl(Inline)]
+            get => Pattern.Id;
+        }
+
+        public ref CmdVar this[byte index]
+        {
+            [MethodImpl(Inline)]
+            get => ref Variables[index];
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Pattern.IsEmpty;
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => Pattern.IsNonEmpty;
         }
 
         [MethodImpl(Inline)]
@@ -47,16 +68,20 @@ namespace Z0
             => new CmdExpr(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator string(CmdExpr src)
-            => src.Content;
+        public static implicit operator CmdExpr(CmdPattern src)
+            => api.expr(src);
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdExpr(Pair<string> src)
-            => new CmdExpr(src.Left, src.Right);
+        public static implicit operator string(CmdExpr src)
+            => src.Pattern;
+
+        [MethodImpl(Inline)]
+        public static implicit operator CmdExpr(Paired<CmdPattern,CmdVars> src)
+            => api.expr(src);
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content ?? EmptyString;
+            => api.format(this);
 
         public override string ToString()
             => Format();

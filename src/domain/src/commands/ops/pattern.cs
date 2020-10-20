@@ -18,6 +18,11 @@ namespace Z0
         /// <param name="src">The source array</param>
         [MethodImpl(Inline), Op]
         public static CmdPattern pattern(string id, string spec)
-            => new CmdPattern(id,spec);
+            => new CmdPattern(id, spec);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static CmdPattern<K> pattern<K>(K id, string content)
+            where K : unmanaged
+                => new CmdPattern<K>(id,content);
     }
 }

@@ -1,0 +1,13 @@
+OVERVIEW: llvm-install-name-tool tool
+
+USAGE: llvm-install-name-tool [options] input
+
+OPTIONS:
+  -add_rpath <value>      Add new rpath
+  -change <value> <value> Change dependent shared library install name
+  -delete_rpath <value>   Delete specified rpath
+  -id <value>             Change dynamic shared library id
+  -rpath <value> <value>  Change rpath path name
+  --version               Print the version and exit.
+
+Pass @FILE as argument to read options from FILE.

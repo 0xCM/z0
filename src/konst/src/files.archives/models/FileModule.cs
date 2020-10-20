@@ -21,5 +21,35 @@ namespace Z0
             Path = src;
             Kind = kind;
         }
+
+        public bool IsManaged
+        {
+            [MethodImpl(Inline)]
+            get => (Kind & FileModuleKind.Managed) != 0;
+        }
+
+        public bool IsExe
+        {
+            [MethodImpl(Inline)]
+            get => (Kind & FileModuleKind.Exe) != 0;
+        }
+
+        public bool IsDll
+        {
+            [MethodImpl(Inline)]
+            get => (Kind & FileModuleKind.Dll) != 0;
+        }
+
+        public bool IsStaticLib
+        {
+            [MethodImpl(Inline)]
+            get => (Kind & FileModuleKind.Lib) != 0;
+        }
+
+        public bool IsNative
+        {
+            [MethodImpl(Inline)]
+            get => (Kind & FileModuleKind.Native) != 0;
+        }
     }
 }

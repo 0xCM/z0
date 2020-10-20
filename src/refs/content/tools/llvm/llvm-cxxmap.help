@@ -1,0 +1,30 @@
+OVERVIEW: LLVM C++ mangled name remapper
+
+USAGE: llvm-cxxmap.exe [options] <symbol-file> <symbol-file>
+
+OPTIONS:
+
+Color Options:
+
+  --color                   - Use colors in output (default=autodetect)
+
+General options:
+
+  --Wambiguous              - Warn on equivalent symbols in the output symbol list
+  --Wincomplete             - Warn on input symbols missing from output symbol list
+  --disable-symbolication   - Disable symbolizing crash backtraces.
+  -o                        - 
+  --output=<output>         - Output file
+  -r                        - 
+  --remapping-file=<string> - Remapping file
+
+Generic Options:
+
+  -h                        - Alias for --help
+  --help                    - Display available options (--help-hidden for more)
+  --help-hidden             - Display all available options
+  --help-list               - Display list of available options (--help-list-hidden for more)
+  --help-list-hidden        - Display list of all available options
+  --print-all-options       - Print all option values after command line parsing
+  --print-options           - Print non-default options after command line parsing
+  --version                 - Display the version of this program

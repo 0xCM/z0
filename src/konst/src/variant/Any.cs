@@ -8,18 +8,18 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     /// <summary>
     /// A parametric T-equatable value
     /// </summary>
-    public readonly struct Any<T> : IAny<Any<T>,T>
-        where T : struct, IEquatable<T>
+    public readonly struct Any<T>
     {
         public readonly T Value;
 
         [MethodImpl(Inline)]
         public static Any<T> From<S>(in S src)
-            => new Any<T>(Unsafe.As<S,T>(ref z.edit(src)));
+            => new Any<T>(Unsafe.As<S,T>(ref edit(src)));
 
         [MethodImpl(Inline)]
         public static bool operator ==(Any<T> x, Any<T> y)
@@ -49,8 +49,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Any<S> As<S>()
-            where S : struct, IEquatable<S>
-                => new Any<S>(Unsafe.As<T,S>(ref Unsafe.AsRef(in Value)));
+            => new Any<S>(Unsafe.As<T,S>(ref Unsafe.AsRef(in Value)));
 
         [MethodImpl(Inline)]
         public bool Equals(T src)

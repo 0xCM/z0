@@ -1,0 +1,79 @@
+USAGE: FileCheck.exe [options] <check-file>
+
+OPTIONS:
+
+Color Options:
+
+  --color                        - Use colors in output (default=autodetect)
+
+General options:
+
+  -D=<VAR=VALUE>                 - Define a variable to be used in capture patterns.
+  --allow-deprecated-dag-overlap - Enable overlapping among matches in a group of consecutive
+                                   CHECK-DAG directives.  This option is deprecated and is only
+                                   provided for convenience as old tests are migrated to the new
+                                   non-overlapping CHECK-DAG implementation.
+  --allow-empty                  - Allow the input file to be empty. This is useful when making
+                                   checks that some error message does not occur, for example.
+  --check-prefix=<string>        - Prefix to use from check file (defaults to 'CHECK')
+  --check-prefixes               - Alias for -check-prefix permitting multiple comma separated values
+  --comment-prefixes=<string>    - Comma-separated list of comment prefixes to use from check file
+                                   (defaults to 'COM,RUN'). Please avoid using this feature in
+                                   LLVM's LIT-based test suites, which should be easier to
+                                   maintain if they all follow a consistent comment style. This
+                                   feature is meant for non-LIT test suites using FileCheck.
+  --disable-symbolication        - Disable symbolizing crash backtraces.
+  --dump-input=<value>           - Dump input to stderr, adding annotations representing
+                                   currently enabled diagnostics.  When there are multiple
+                                   occurrences of this option, the <value> that appears earliest
+                                   in the list below has precedence.  The default is 'fail'.
+    =help                        -   Explain input dump and quit
+    =always                      -   Always dump input
+    =fail                        -   Dump input on failure
+    =never                       -   Never dump input
+  --dump-input-context=<N>       - In the dump requested by -dump-input, print <N> input lines
+                                   before and <N> input lines after any lines specified by
+                                   -dump-input-filter.  When there are multiple occurrences of
+                                   this option, the largest specified <N> has precedence.  The
+                                   default is 5.
+  --dump-input-filter=<value>    - In the dump requested by -dump-input, print only input lines of
+                                   kind <value> plus any context specified by -dump-input-context.
+                                   When there are multiple occurrences of this option, the <value>
+                                   that appears earliest in the list below has precedence.  The
+                                   default is 'error' when -dump-input=fail, and it's 'all' when
+                                   -dump-input=always.
+    =all                         -   All input lines
+    =annotation-full             -   Input lines with annotations
+    =annotation                  -   Input lines with starting points of annotations
+    =error                       -   Input lines with starting points of error annotations
+  --enable-var-scope             - Enables scope for regex variables. Variables with names that
+                                   do not start with '$' will be reset at the beginning of
+                                   each CHECK-LABEL block.
+  --ignore-case                  - Use case-insensitive matching
+  --implicit-check-not=<pattern> - Add an implicit negative check with this pattern to every
+                                   positive check. This can be used to ensure that no instances of
+                                   this pattern occur which are not matched by a positive pattern
+  --input-file=<filename>        - File to check (defaults to stdin)
+  --match-full-lines             - Require all positive matches to cover an entire input line.
+                                   Allows leading and trailing whitespace if --strict-whitespace
+                                   is not also passed.
+  --strict-whitespace            - Do not treat all horizontal whitespace as equivalent
+  -v                             - Print directive pattern matches, or add them to the input dump
+                                   if enabled.
+  --vv                           - Print information helpful in diagnosing internal FileCheck
+                                   issues, or add it to the input dump if enabled.  Implies
+                                   -v.
+
+Generic Options:
+
+  -h                             - Alias for --help
+  --help                         - Display available options (--help-hidden for more)
+  --help-hidden                  - Display all available options
+  --help-list                    - Display list of available options (--help-list-hidden for more)
+  --help-list-hidden             - Display list of all available options
+  --print-all-options            - Print all option values after command line parsing
+  --print-options                - Print non-default options after command line parsing
+  --version                      - Display the version of this program
+
+Options are parsed from the environment variable FILECHECK_OPTS and
+from the command line.

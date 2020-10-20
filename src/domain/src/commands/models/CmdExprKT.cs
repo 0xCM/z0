@@ -44,10 +44,6 @@ namespace Z0
             => src.Format();
 
         [MethodImpl(Inline)]
-        public static implicit operator CmdExpr(CmdExpr<K,T> src)
-            => new CmdExpr(src.Id.ToString(), src.Format());
-
-        [MethodImpl(Inline)]
         public string Format()
             => Content?.ToString() ?? EmptyString;
 

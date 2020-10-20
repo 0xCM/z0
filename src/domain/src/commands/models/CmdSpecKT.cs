@@ -10,14 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public struct CmdSpecData<K,T>
-        where K : unmanaged
-    {
-        public CmdId Id;
-
-        public TableSpan<CmdOption<K,T>> Options;
-    }
-
     public readonly struct CmdSpec<K,T> : ICmdSpec<CmdSpec<K,T>,K,T>
         where K : unmanaged
     {

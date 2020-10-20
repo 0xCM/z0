@@ -27,6 +27,17 @@ namespace Z0
             return src;
         }
 
+        [MethodImpl(NotInline)]
+        public static int insist<A,B>(A[] a, B[] b)
+        {
+            if(a == null || b == null)
+                sys.@throw(AppErrors.NullArg());
+            var length = a.Length;
+            if(length != b.Length)
+                z.@throw(AppErrors.LengthMismatch(a.Length, b.Length));
+            return length;
+        }
+
         [MethodImpl(Inline), Op, Closures(UInt8k)]
         public static IEnumerable<T> insist<T>(IEnumerable<T> src)
         {

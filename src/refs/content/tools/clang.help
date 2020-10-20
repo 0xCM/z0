@@ -236,7 +236,6 @@ OPTIONS:
   -fmacro-prefix-map=<value>
                           remap file source paths in predefined preprocessor macros
   -fmath-errno            Require math functions to indicate errors by setting errno
-  -fmax-tokens <value>    Max total number of preprocessed tokens for -Wmax-tokens.
   -fmax-type-align=<value>
                           Specify the maximum alignment to enforce on pointers lacking an explicit alignment
   -fmerge-all-constants   Allow merging of constants
@@ -553,11 +552,10 @@ OPTIONS:
                           DEPRECATED: Filename defining the whitelist for imbuing the 'always instrument' XRay attribute.
   -fxray-attr-list= <value>
                           Filename defining the list of functions/types for imbuing XRay attributes.
-  -fxray-ignore-loops     Don't instrument functions with loops unless they also meet the minimum function size
   -fxray-instruction-threshold= <value>
                           Sets the minimum function size to instrument with XRay
   -fxray-instrumentation-bundle= <value>
-                          Select which XRay instrumentation points to emit. Options: all, none, function-entry, function-exit, function, custom. Default is 'all'.  'function' includes both 'function-entry' and 'function-exit'.
+                          Select which XRay instrumentation points to emit. Options: all, none, function, custom. Default is 'all'.
   -fxray-instrument       Generate XRay instrumentation sleds on function entry and exit
   -fxray-link-deps        Tells clang to add the link dependencies for XRay.
   -fxray-modes= <value>   List of modes to link in by default into XRay instrumented binaries.
@@ -595,7 +593,6 @@ OPTIONS:
   --hip-link              Link clang-offload-bundler bundles for HIP
   -H                      Show header includes and nesting depth
   -I-                     Restrict all prior -I flags to double-quoted inclusion and remove current directory from include path
-  -ibuiltininc            Enable builtin #include directories even when -nostdinc is used before or after -ibuiltininc. Using -nobuiltininc after the option disables it
   -idirafter <value>      Add directory to AFTER include search path
   -iframeworkwithsysroot <directory>
                           Add directory to SYSTEM framework search path, absolute paths are relative to -isysroot

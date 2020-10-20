@@ -9,11 +9,6 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost]
-    public readonly struct DataModels
-    {
-
-    }
 
     public readonly struct Mapped<S> : ITextual
     {

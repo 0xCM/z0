@@ -1,0 +1,149 @@
+OVERVIEW: LLVM Object Reader
+
+USAGE: llvm-readobj.exe [options] <input object files>
+
+llvm-readobj --sections  coreclr.dll
+
+OPTIONS:
+
+Color Options:
+
+  --color                                 - Use colors in output (default=autodetect)
+
+General options:
+
+  -A                                      - Alias for --arch-specific
+  -C                                      - Alias for --demangle
+  -I                                      - Alias for -elf-hash-histogram
+  -S                                      - Alias for --section-headers
+  -V                                      - Alias for -version-info
+  -W                                      - Alias for --wide
+  -a                                      - Alias for --all
+  --addrsig                               - Display address-significance table
+  --all                                   - Equivalent to setting: --file-headers, --program-headers, --section-headers, --symbols, --relocations, --dynamic-table, --notes, --version-info, --unwind, --section-groups and --elf-hash-histogram.
+  --arch-specific                         - Displays architecture-specific information, if there is any.
+  --as-secure-log-file-name=<value>       - As secure log file name (initialized from AS_SECURE_LOG_FILE env variable)
+  --asm-macro-max-nesting-depth=<uint>    - The maximum nesting depth allowed for assembly macros.
+  --cg-profile                            - Display callgraph profile section
+  --codeview                              - Display CodeView debug information
+  --codeview-ghash                        - Enable global hashing for CodeView type stream de-duplication
+  --codeview-merged-types                 - Display the merged CodeView type stream
+  --codeview-subsection-bytes             - Dump raw contents of codeview debug sections and records
+  --coff-basereloc                        - Display the PE/COFF .reloc section
+  --coff-debug-directory                  - Display the PE/COFF debug directory
+  --coff-directives                       - Display the PE/COFF .drectve section
+  --coff-exports                          - Display the PE/COFF export table
+  --coff-imports                          - Display the PE/COFF import table
+  --coff-load-config                      - Display the PE/COFF load config
+  --coff-resources                        - Display the PE/COFF .rsrc section
+  -d                                      - Alias for --dynamic-table
+  --debug-pass=<value>                    - Print PassManager debugging information
+    =Disabled                             -   disable debug output
+    =Arguments                            -   print pass arguments to pass to 'opt'
+    =Structure                            -   print pass structure before run()
+    =Executions                           -   print pass name before it is executed
+    =Details                              -   print pass details when it is executed
+  --demangle                              - Demangle symbol names in output
+  --dependent-libraries                   - Display the dependent libraries section
+  --disable-ondemand-mds-loading          - Force disable the lazy-loading on-demand of metadata when loading bitcode for importing.
+  --disable-symbolication                 - Disable symbolizing crash backtraces.
+  --dt                                    - Alias for --dyn-symbols
+  --dyn-relocations                       - Display the dynamic relocation entries in the file
+  --dyn-symbols                           - Display the dynamic symbol table
+  --dyn-syms                              - Alias for --dyn-symbols
+  --dynamic                               - Alias for --dynamic-table
+  --dynamic-table                         - Display the ELF .dynamic section table
+  -e                                      - Alias for --headers
+  --elf-cg-profile                        - Alias for --cg-profile
+  --elf-hash-histogram                    - Display bucket list histogram for hash sections
+  --elf-linker-options                    - Display the ELF .linker-options section
+  --elf-output-style=<value>              - Specify ELF dump style
+    =LLVM                                 -   LLVM default style
+    =GNU                                  -   GNU readelf style
+  --elf-section-groups                    - Display ELF section group contents
+  --expand-relocs                         - Expand each shown relocation to multiple lines
+  --file-header                           - Alias for --file-headers
+  --file-headers                          - Display file headers
+  --filter-print-funcs=<function names>   - Only print IR for functions whose name match this for all print-[before|after][-all] options
+  -g                                      - Alias for -elf-sections-groups
+  --gnu-hash-table                        - Display ELF .gnu.hash section
+  -h                                      - Alias for --file-headers
+  --hash-symbols                          - Display the dynamic symbols derived from the hash section
+  --hash-table                            - Display ELF hash table
+  --headers                               - Equivalent to setting: --file-headers, --program-headers, --section-headers
+  --hex-dump=<number|name>                - Display the specified section(s) as hexadecimal bytes
+  --histogram                             - Alias for --elf-hash-histogram
+  --import-constants-with-refs            - Import constant global variables with references
+  --import-full-type-definitions          - Import full type definitions for ThinLTO.
+  --info-output-file=<filename>           - File to append -stats and -timer output to
+  -l                                      - Alias for --program-headers
+  --macho-data-in-code                    - Display MachO Data in Code command
+  --macho-dysymtab                        - Display MachO Dysymtab command
+  --macho-indirect-symbols                - Display MachO indirect symbols
+  --macho-linker-options                  - Display MachO linker options
+  --macho-segment                         - Display MachO Segment command
+  --macho-version-min                     - Display MachO version min command
+  -n                                      - Alias for --notes
+  --needed-libs                           - Display the needed libraries
+  --non-global-value-max-name-size=<uint> - Maximum size for the name of non-global values.
+  --notes                                 - Display the ELF notes in the file
+  --opt-bisect-limit=<int>                - Maximum optimization to perform
+  -p                                      - Alias for --string-dump
+  --pass-remarks=<pattern>                - Enable optimization remarks from passes whose name match the given regular expression
+  --pass-remarks-analysis=<pattern>       - Enable optimization analysis remarks from passes whose name match the given regular expression
+  --pass-remarks-missed=<pattern>         - Enable missed optimization remarks from passes whose name match the given regular expression
+  --print-after=<value>                   - Print IR after specified passes
+  --print-after-all                       - Print IR after each pass
+  --print-before=<value>                  - Print IR before specified passes
+  --print-before-all                      - Print IR before each pass
+  --print-module-scope                    - When printing IR for print-[before|after]{-all} always print a module IR
+  --print-summary-global-ids              - Print the global id for each value when reading the module summary
+  --program-headers                       - Display ELF program headers
+  --propagate-attrs                       - Propagate attributes in index
+  -r                                      - Alias for --relocations
+  --raw-relr                              - Do not decode relocations in SHT_RELR section, display raw contents
+  --relocations                           - Display the relocation entries in the file
+  --relocs                                - Alias for --relocations
+  --remarks-section                       - Emit a section containing remark diagnostics metadata. By default, this is enabled for the following formats: yaml-strtab, bitstream.
+  --rng-seed=<seed>                       - Seed for the random number generator
+  -s                                      - Alias for --section-headers
+  --sd                                    - Alias for --section-data
+  --section-data                          - Display section data for each section shown.
+  --section-groups                        - Alias for -elf-sections-groups
+  --section-headers                       - Display all section headers.
+  --section-mapping                       - Display the section to segment mapping.
+  --section-relocations                   - Display relocations for each section shown.
+  --section-symbols                       - Display symbols for each section shown.
+  --sections                              - Alias for --section-headers
+  --segments                              - Alias for --program-headers
+  --sr                                    - Alias for --section-relocations
+  --st                                    - Alias for --section-symbols
+  --stack-sizes                           - Display contents of all stack sizes sections
+  --stackmap                              - Display contents of stackmap section
+  --stats                                 - Enable statistics output from program (available with Asserts)
+  --stats-json                            - Display statistics as json data
+  --string-dump=<number|name>             - Display the specified section(s) as a list of strings
+  --symbols                               - Display the symbol table. Also display the dynamic symbol table when using GNU output style for ELF
+  --syms                                  - Alias for --symbols
+  -t                                      - Alias for --symbols
+  --time-passes                           - Time each pass, printing elapsed time for each on exit
+  --track-memory                          - Enable -time-passes memory tracking (this may be slow)
+  -u                                      - Alias for --unwind
+  --unwind                                - Display unwind information
+  --use-dbg-addr                          - Use llvm.dbg.addr for all local variables
+  --verify-dom-info                       - Verify dominator info (time consuming)
+  --version-info                          - Display ELF version sections (if present)
+  --wide                                  - Ignored for compatibility with GNU readelf
+  -x                                      - Alias for --hex-dump
+
+Generic Options:
+
+  --help                                  - Display available options (--help-hidden for more)
+  --help-hidden                           - Display all available options
+  --help-list                             - Display list of available options (--help-list-hidden for more)
+  --help-list-hidden                      - Display list of all available options
+  --print-all-options                     - Print all option values after command line parsing
+  --print-options                         - Print non-default options after command line parsing
+  --version                               - Display the version of this program
+
+Pass @FILE as argument to read options from FILE.

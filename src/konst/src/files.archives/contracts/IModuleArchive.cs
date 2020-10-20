@@ -5,15 +5,19 @@
 namespace Z0
 {
     using System;
+    using System.Collections.Generic;
 
     public interface IModuleArchive : IFileArchive<ModuleArchive,FileModule>
     {
-        void Query(Receiver<ManagedDll> dst);
+        IEnumerable<FileModule> ManagedDllFiles();
 
-        void Query(Receiver<NativeDll> dst);
+        IEnumerable<FileModule> NativeDllFiles();
 
-        void Query(Receiver<ManagedExe> dst);
+        IEnumerable<FileModule> ManagedExeFiles();
 
-        void Query(Receiver<NativeLib> dst);
+        IEnumerable<FileModule> NativeExeFiles();
+
+        IEnumerable<FileModule> StaticLibs();
+
     }
 }

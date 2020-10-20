@@ -13,7 +13,6 @@ namespace Z0
             public const string asm = nameof(asm);
 
             public const string cs = nameof(cs);
-
         }
     }
 }

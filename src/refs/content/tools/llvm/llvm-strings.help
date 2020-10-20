@@ -1,0 +1,37 @@
+OVERVIEW: llvm string dumper
+
+USAGE: llvm-strings.exe [options] <input object files>
+
+OPTIONS:
+
+Color Options:
+
+  --color                 - Use colors in output (default=autodetect)
+
+General options:
+
+  -a                      - 
+  --all                   - Check all sections, not just the data section
+  --bytes=<int>           - Print sequences of the specified length
+  --disable-symbolication - Disable symbolizing crash backtraces.
+  -f                      - 
+  -n                      - 
+  --print-file-name       - Print the name of the file before each string
+  --radix=<value>         - print the offset within the file
+    =o                    -   octal
+    =x                    -   hexadecimal
+    =d                    -   decimal
+  -t                      - 
+
+Generic Options:
+
+  -h                      - Alias for --help
+  --help                  - Display available options (--help-hidden for more)
+  --help-hidden           - Display all available options
+  --help-list             - Display list of available options (--help-list-hidden for more)
+  --help-list-hidden      - Display list of all available options
+  --print-all-options     - Print all option values after command line parsing
+  --print-options         - Print non-default options after command line parsing
+  --version               - Display the version of this program
+
+Pass @FILE as argument to read options from FILE.

@@ -31,26 +31,7 @@ namespace Z0
         public static IFileDb files(IWfShell wf, DbPaths paths)
             => new DbFiles(wf, paths);
 
-        [MethodImpl(Inline), Op]
-        public static ObjectName name(string src)
-            => new ObjectName(src);
 
-        [MethodImpl(Inline), Op]
-        public static Relation relate(in ObjectName src, in ObjectName dst)
-            => new Relation(src,dst);
-
-        [MethodImpl(Inline), Op]
-        public static Relation relate(string src, string dst)
-            => relate(name(src), name(dst));
-
-        [MethodImpl(Inline), Op]
-        public static DbKey key(in ObjectName id)
-            => new DbKey(id.Ref.Address);
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static DbKey<T> key<T>(T src)
-            where T : unmanaged
-                => src;
 
         [MethodImpl(Inline), Op]
         public string literal(N0 n)

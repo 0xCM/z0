@@ -1,0 +1,11 @@
+OVERVIEW: LLVM Ranlib (llvm-ranlib)
+
+  This program generates an index to speed access to archives
+
+USAGE: llvm-ranlib <archive-file>
+
+OPTIONS:
+  -h --help             - Display available options
+  -v --version          - Display the version of this program
+  -D                    - Use zero for timestamps and uids/gids (default)
+  -U                    - Use actual timestamps and uids/gids

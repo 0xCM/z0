@@ -10,30 +10,36 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = Cmd;
-
     public readonly struct CmdPattern
     {
         public string Id {get;}
 
-        public bool Anonymous {get;}
-
         public string Content {get;}
 
         [MethodImpl(Inline)]
-        public CmdPattern(string src)
+        public CmdPattern(string content)
         {
             Id = Cmd.Anonymous;
-            Content = src;
-            Anonymous = true;
+            Content = content;
         }
 
         [MethodImpl(Inline)]
-        public CmdPattern(string name, string src)
+        public CmdPattern(string id, string content)
         {
-            Id = name;
-            Content = src;
-            Anonymous = false;
+            Id = id;
+            Content = content;
+        }
+
+        public bool IsEmpty
+        {
+            [MethodImpl(Inline)]
+            get => text.blank(Content);
+        }
+
+        public bool IsNonEmpty
+        {
+            [MethodImpl(Inline)]
+            get => !text.blank(Content);
         }
 
         [MethodImpl(Inline)]
@@ -50,5 +56,7 @@ namespace Z0
 
         public override string ToString()
             => Content;
+
+        public static CmdPattern Empty => new CmdPattern(EmptyString, EmptyString);
     }
 }

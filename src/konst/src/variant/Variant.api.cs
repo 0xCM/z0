@@ -63,7 +63,6 @@ namespace Z0
         static Vector128<ulong> store(double value, NK kind)
             => Vector128.Create(value).WithElement(1, (double)kind).AsUInt64();
 
-
         [MethodImpl(Inline), Op]
         public static unsafe variant scalar(Enum src)
         {

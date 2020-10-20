@@ -12,9 +12,28 @@ namespace Z0
 
     partial struct Cmd
     {
-        [MethodImpl(Inline), Op]
-        public static CmdExpr format(CmdPattern pattern, params object[] args)
-            => new CmdExpr(pattern.Id, string.Format(pattern.Content, args));
+        [Op]
+        public static string format(in CmdExpr src)
+            => format(src.Pattern, src.Variables.Storage);
+
+        [Op]
+        public static string format<K>(in CmdExpr<K> src)
+            where K : unmanaged
+            => format(src.Pattern, src.Variables.Storage);
+
+        [Op]
+        public static CmdExpr format(in CmdPattern pattern, params CmdVar[] args)
+            => string.Format(pattern.Content, args.Select(a => a.Format()));
+
+        [Op, Closures(UnsignedInts)]
+        public static CmdExpr format<K>(in CmdPattern<K> pattern, params CmdVar[] args)
+            where K : unmanaged
+                => string.Format(pattern.Content, args.Select(a => a.Format()));
+
+        [Op, Closures(UnsignedInts)]
+        public static CmdExpr format<K>(in CmdPattern pattern, params CmdVar<K>[] args)
+            where K : unmanaged
+                => string.Format(pattern.Content, args.Select(a => a.Format()));
 
         /// <summary>
         /// Renders a specified option as text
@@ -71,22 +90,5 @@ namespace Z0
             render(src,dst);
             return dst.Emit();
         }
-
-
-        // [Op]
-        // public static string format(in CmdLine src)
-        // {
-        //     var dst = text.build();
-        //     dst.Append(src.ToolName);
-        //     var count = src.OptionCount;
-        //     var options = src.Options.View;
-        //     for(var i=0; i<count; i++)
-        //     {
-        //         dst.Append(Space);
-        //         dst.Append(format(skip(options,i)));
-        //     }
-
-        //     return dst.ToString();
-        // }
     }
 }

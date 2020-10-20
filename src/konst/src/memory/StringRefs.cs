@@ -85,11 +85,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         static ulong lo(StringRef src)
-            => z.vcell(src.Location, 0);
+            => z.vcell(src.Data, 0);
 
         [MethodImpl(Inline), Op]
         static ulong hi(StringRef src)
-            => z.vcell(src.Location, 1);
+            => z.vcell(src.Data, 1);
 
         [MethodImpl(Inline), Op]
         public static unsafe string format(StringRef src)

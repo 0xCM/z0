@@ -1,0 +1,30 @@
+OVERVIEW: llvm-bcanalyzer file analyzer
+
+USAGE: llvm-bcanalyzer.exe [options] <input bitcode>
+
+OPTIONS:
+
+Color Options:
+
+  --color                 - Use colors in output (default=autodetect)
+
+General options:
+
+  --block-info=<string>   - Use the BLOCK_INFO from the given file
+  --check-hash=<string>   - Check module hash using the argument as a string table
+  --disable-histogram     - Do not print per-code histogram
+  --disable-symbolication - Disable symbolizing crash backtraces.
+  --dump                  - Dump low level bitcode trace
+  --non-symbolic          - Emit numeric info in dump even if symbolic info is available
+  --show-binary-blobs     - Print binary blobs using hex escapes
+
+Generic Options:
+
+  -h                      - Alias for --help
+  --help                  - Display available options (--help-hidden for more)
+  --help-hidden           - Display all available options
+  --help-list             - Display list of available options (--help-list-hidden for more)
+  --help-list-hidden      - Display list of all available options
+  --print-all-options     - Print all option values after command line parsing
+  --print-options         - Print non-default options after command line parsing
+  --version               - Display the version of this program

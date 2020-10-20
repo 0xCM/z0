@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Konst;
     using static z;
@@ -37,49 +38,38 @@ namespace Z0
                 ref readonly var model = ref skip(view,i);
                 var clone = CilTableSpecs.clone(model);
                 Wf.Rows(clone);
-
             }
-
         }
 
-/*
-dumpbin /DISASM:NOBYTES /OUT:j:\database\tools\DumpBin\output\coreclr.disasm.nobytes.asm J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug\Tests\Core_Root\coreclr.dll
-dumpbin /RELOCATIONS /OUT:j:\database\tools\DumpBin\output\coreclr.relocations.log J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug\Tests\Core_Root\coreclr.dll
-dumpbin /RAWDATA:1,32 /OUT:j:\database\tools\DumpBin\output\coreclr.rawdata.log J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug\Tests\Core_Root\coreclr.dll
-dumpbin /LOADCONFIG /OUT:j:\database\tools\DumpBin\output\coreclr.loadconfig.log J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug\Tests\Core_Root\coreclr.dll
-
-dumpbin /DISASM:NOBYTES /OUT:j:\database\tools\DumpBin\output\dia2lib.disasm.nobytes.asm J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug\Tests\Core_Root\dia2lib.dll
-dumpbin /DISASM:NOBYTES /OUT:j:\database\tools\DumpBin\output\createdump.disasm.asm J:\lang\net\runtime\artifacts\tests\coreclr\Windows_NT.x64.Debug\Tests\Core_Root\createdump.exe
-
-*/
         public void Run()
         {
-            var target = Wf.Db().ToolOutput(DumpBin.ToolId);
-
-            var headers = list<CmdExpr>();
-
-            var disasm = list<CmdExpr>();
-
+            var tool = DumpBin.create(Wf);
             var archive = ModuleArchive.create(EnvVars.Common.ClrCoreRoot);
-            foreach(var file in archive.Files())
-            {
-                if(file.Kind == FileModuleKind.NativeDll)
-                {
-                    headers.Add(DumpBin.headers(file.Path, target));
-                    disasm.Add(DumpBin.disasm(file.Path, target));
-                }
-            }
+            var exe = archive.NativeExeFiles().Array();
+            var libs = archive.StaticLibs().Array();
+            var managed = archive.Files().Where(f => f.IsManaged).Array();
+            var modules = managed;
 
-            var headerScript = Cmd.script(headers.ToArray());
-            var headersJob = Cmd.job("dumpbin.headers", headerScript);
-            Wf.EmittedFile(headerScript.GetType(),
-                headerScript.Length,
-                Cmd.enqueue(headersJob, Wf.Db()));
 
-            var disasmScript = Cmd.script(disasm.ToArray());
-            var disasmJob = Cmd.job("dumpbin.disasm", disasmScript);
-            Wf.EmittedFile(disasmScript.GetType(), disasmScript.Length,
-                Cmd.enqueue(disasmJob, Wf.Db()));
+            Emit(tool.Script("dumpbin.headers",  DumpBin.CmdId.EmitHeaders, modules));
+            Emit(tool.Script("dumpbin.exports",  DumpBin.CmdId.EmitExports, modules));
+            Emit(tool.Script("dumpbin.relocations",  DumpBin.CmdId.EmitRelocations, modules));
+            Emit(tool.Script("dumpbin.disasm",  DumpBin.CmdId.EmitAsm, modules));
+            Emit(tool.Script("dumpbin.rawdata",  DumpBin.CmdId.EmitRawData, modules));
+            Emit(tool.Script("dumpbin.loadConfig",  DumpBin.CmdId.EmitLoadConfig, modules));
         }
+
+        void Emit(CmdScript script)
+        {
+            Wf.EmittedFile(script.GetType(),
+                script.Length,
+                Cmd.enqueue(Cmd.job(script.Id, script), Wf.Db()));
+        }
+
+    }
+
+    public readonly struct CmdScriptBuilder
+    {
+
     }
 }

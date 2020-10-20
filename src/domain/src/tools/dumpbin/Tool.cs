@@ -10,45 +10,38 @@ namespace Z0.Tools
     using static Konst;
     using static z;
 
-    [ApiHost("tools.external.dumpbin", true)]
+
+    [ApiHost(ToolApiNames.Dumpbin, true)]
     public partial struct DumpBin
     {
-        [MethodImpl(Inline), Op]
-        public static DumpBin create()
-            => new DumpBin(typeof(DumpBin));
+        readonly IWfShell Wf;
+
+        public ToolInfo Description {get;}
+
+        public FS.FolderPath ToolOutput {get;}
 
         [Op]
-        public static CmdExpr headers(FS.FilePath src, FS.FolderPath dst)
-        {
-            var output = dst + src.FileName.ChangeExtension(Patterns.HeadersExt);
-            return Cmd.format(Patterns.Headers,
-                src.Format(PathSeparator.BS),
-                output.Format(PathSeparator.BS)
-                );
-        }
+        public static DumpBin create(IWfShell wf)
+            => new DumpBin(wf, typeof(DumpBin));
 
         [Op]
-        public static CmdExpr disasm(FS.FilePath src, FS.FolderPath dst)
+        public static ToolInfo describe()
         {
-            var output = dst + src.FileName.ChangeExtension(Patterns.DisasmExt);
-            return Cmd.format(Patterns.Disasm,
-                src.Format(PathSeparator.BS),
-                output.Format(PathSeparator.BS)
-                );
+            var dst = new ToolInfo();
+            dst.HostName = nameof(DumpBin);
+            dst.RuntimeName = "dumpbin";
+            dst.FlagPrefix = "/";
+            dst.ArgSpecifier = ":";
+            dst.MaxVarCount = 12;
+            dst.FlagNames = Enums.names<Flag>();
+            return dst;
         }
-
 
         public const string FlagPrefix = AsciCharText.FS;
 
-        public const string ToolName = "dumpbin";
+        const byte MaxVarCount = 12;
 
-        public static ToolId ToolId => Tooling.identify<DumpBin>();
-
-        public const string FlagDelimiter = AsciCharText.Colon;
-
-        const byte MaxArgCount = 12;
-
-        const byte MaxArgIndex = MaxArgCount - 1;
+        const byte MaxVarIndex = MaxVarCount - 1;
 
         public const string ArgSpecifier = AsciCharText.Colon;
 
@@ -59,16 +52,20 @@ namespace Z0.Tools
         public CmdOptions<Flag,object> Args {get;}
 
         [MethodImpl(Inline)]
-        internal DumpBin(ToolId id)
+        internal DumpBin(IWfShell wf, ToolId id)
         {
-            Id = id;
-            Args =  alloc<CmdOption<Flag,object>>(MaxArgCount);
+            Wf = wf;
+            Id = Tooling.identify<DumpBin>();;
+            Args =  alloc<CmdOption<Flag,object>>(MaxVarCount);
             ArgIndex = 0;
+            Description = describe();
+            ToolOutput = Wf.Db().ToolOutput(Id);
+
         }
 
         public DumpBin With<T>(Flag option, T value)
         {
-            if(ArgIndex < MaxArgIndex)
+            if(ArgIndex < MaxVarIndex)
             {
                 Args[ArgIndex++] = Cmd.option(option, (object)value);
             }

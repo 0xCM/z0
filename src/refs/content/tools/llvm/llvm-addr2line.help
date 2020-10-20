@@ -1,0 +1,54 @@
+OVERVIEW: llvm-addr2line
+
+USAGE: llvm-addr2line [options] addresses...
+
+OPTIONS:
+  --addresses             Show address before line information
+  --adjust-vma=<offset>   Add specified offset to object file addresses
+  -a                      Alias for --addresses
+  --basenames             Strip directory names from paths
+  -C                      Alias for --demangle
+  --debug-file-directory=<dir>
+                          Path to directory where to look for debug files
+  --default-arch=<value>  Default architecture (for multi-arch objects)
+  -demangle=false         Alias for --no-demangle
+  -demangle=true          Alias for --demangle
+  --demangle              Demangle function names
+  --dsym-hint=<dir>       Path to .dSYM bundles to search for debug info for the object files
+  --dwp=<file>            Path to DWP file to be use for any split CUs
+  -e=<file>               Alias for --obj
+  --exe=<file>            Alias for --obj
+  --exe <file>            Alias for --obj
+  -e <file>               Alias for --obj
+  -f=<value>              Alias for --functions=
+  --fallback-debug-path=<dir>
+                          Fallback path for debug binaries
+  --functions=<value>     Print function name for a given address
+  --functions             Print function name for a given address
+  -f                      Alias for --functions
+  --help                  Display this help
+  --inlines               Print all inlined frames for a given address
+  --inlining=false        Alias for --no-inlines
+  --inlining=true         Alias for --inlines
+  --inlining              Alias for --inlines
+  -i                      Alias for --inlines
+  --no-demangle           Don't demangle function names
+  --no-inlines            Do not print inlined frames
+  --no-untag-addresses    Remove memory tags from addresses before symbolization
+  --obj=<file>            Path to object file to be symbolized (if not provided, object file should be specified for each input line)
+  --output-style=style    Specify print style. Supported styles: LLVM, GNU
+  --pretty-print          Make the output more human friendly
+  --print-address         Alias for --addresses
+  --print-source-context-lines=<value>
+                          Print N lines of source file context
+  -p                      Alias for --pretty-print
+  --relative-address      Interpret addresses as addresses relative to the image base
+  --relativenames         Strip the compilation directory from paths
+  -s                      Alias for --basenames
+  --untag-addresses       
+  --use-native-pdb-reader Use native PDB functionality
+  --verbose               Print verbose line info
+  --version               Display the version
+  -v                      Alias for --version
+
+Pass @FILE as argument to read options from FILE.

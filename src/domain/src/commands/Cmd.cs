@@ -13,9 +13,21 @@ namespace Z0
     [ApiHost(ApiNames.Cmd, true)]
     public readonly partial struct Cmd
     {
+        internal const byte MaxVarCount = 16;
+
         internal const string Anonymous = "anonymous";
 
         const NumericKind Closure = UnsignedInts;
+
+        public static CmdVars vars(byte count)
+            => new CmdVars(new CmdVar[count]);
+
+        public static CmdVars vars()
+            => new CmdVars(new CmdVar[MaxVarCount]);
+
+        public static CmdVars<K> vars<K>()
+            where K : unmanaged
+                => new CmdVars<K>(new CmdVar<K>[MaxVarCount]);
 
         public static FS.FilePath enqueue<T>(CmdJob<T> job, IFileDb db)
             where T : struct, ITextual
@@ -39,6 +51,5 @@ namespace Z0
         public static CmdJob<T> job<T>(string name, T spec)
             where T : struct, ITextual
                 => new CmdJob<T>(name, spec);
-
     }
 }

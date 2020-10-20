@@ -1,0 +1,50 @@
+OVERVIEW: llvm object size dumper
+
+USAGE: llvm-size.exe [options] <input files>
+
+OPTIONS:
+
+Color Options:
+
+  This option category has no options.
+
+General options:
+
+  This option category has no options.
+
+Generic Options:
+
+  -h                  - Alias for --help
+  --help              - Display available options (--help-hidden for more)
+  --help-hidden       - Display all available options
+  --help-list         - Display list of available options (--help-list-hidden for more)
+  --help-list-hidden  - Display list of all available options
+  --print-all-options - Print all option values after command line parsing
+  --print-options     - Print non-default options after command line parsing
+  --version           - Display the version of this program
+
+llvm-size Options:
+
+  Specify output format
+      -A                - System V format
+      -B                - Berkeley format
+      -m                - Darwin -m format
+  --arch=<string>     - architecture(s) from a Mach-O file to dump
+  --common            - Print common symbols in the ELF file.  When using Berkeley format, this is added to bss.
+  Print size in radix:
+      -o                - Print size in octal
+      -d                - Print size in decimal
+      -x                - Print size in hexadecimal
+  --format=<value>    - Specify output format
+    =sysv             -   System V format
+    =berkeley         -   Berkeley format
+    =darwin           -   Darwin -m format
+  -l                  - When format is darwin, use long format to include addresses and offsets.
+  --radix=<value>     - Print size in radix
+    =8                -   Print size in octal
+    =10               -   Print size in decimal
+    =16               -   Print size in hexadecimal
+  -t                  - Short for --totals
+  --totals            - Print totals of all objects - Berkeley format only
+
+Pass @FILE as argument to read options from FILE.

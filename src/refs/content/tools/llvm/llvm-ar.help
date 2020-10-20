@@ -1,0 +1,49 @@
+OVERVIEW: LLVM Archiver
+
+USAGE: llvm-ar [options] [-]<operation>[modifiers] [relpos] [count] <archive> [files]
+       llvm-ar -M [<mri-script]
+
+OPTIONS:
+  --format              - archive format to create
+    =default            -   default
+    =gnu                -   gnu
+    =darwin             -   darwin
+    =bsd                -   bsd
+  --plugin=<string>     - ignored for compatibility
+  -h --help             - display this help and exit
+  --rsp-quoting         - quoting style for response files
+    =posix              -   posix
+    =windows            -   windows
+  --version             - print the version and exit
+  @<file>               - read options from <file>
+
+OPERATIONS:
+  d - delete [files] from the archive
+  m - move [files] in the archive
+  p - print [files] found in the archive
+  q - quick append [files] to the archive
+  r - replace or insert [files] into the archive
+  s - act as ranlib
+  t - display contents of archive
+  x - extract [files] from the archive
+
+MODIFIERS:
+  [a] - put [files] after [relpos]
+  [b] - put [files] before [relpos] (same as [i])
+  [c] - do not warn if archive had to be created
+  [D] - use zero for timestamps and uids/gids (default)
+  [h] - display this help and exit
+  [i] - put [files] before [relpos] (same as [b])
+  [l] - ignored for compatibility
+  [L] - add archive's contents
+  [N] - use instance [count] of name
+  [o] - preserve original dates
+  [O] - display member offsets
+  [P] - use full names when matching (implied for thin archives)
+  [s] - create an archive index (cf. ranlib)
+  [S] - do not build a symbol table
+  [T] - create a thin archive
+  [u] - update only [files] newer than archive contents
+  [U] - use actual timestamps and uids/gids
+  [v] - be verbose about actions taken
+  [V] - display the version and exit

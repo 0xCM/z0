@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Konst;
     using static z;
@@ -33,38 +34,47 @@ namespace Z0
 
         public FS.FolderPath Root => Config.Root;
 
+
         public ArchiveConfig Config {get;}
 
         [MethodImpl(Inline)]
         internal ModuleArchive(ArchiveConfig src)
             => Config= src;
 
-        public void Query(Receiver<ManagedDll> dst)
+
+        public IEnumerable<FileModule> ManagedDllFiles()
         {
             foreach(var path in Root.Files(true).Where(f => f.Is(Dll)))
                 if(FS.managed(path, out var assname))
-                    dst(new ManagedDll(path, assname));
+                    yield return new ManagedDll(path, assname);
         }
 
-        public void Query(Receiver<NativeDll> dst)
+        public IEnumerable<FileModule> NativeDllFiles()
         {
             foreach(var path in Root.Files(true).Where(f => f.Is(Dll)))
-                if(!FS.managed(path, out var assname))
-                    dst(new NativeDll(path));
+                if(FS.native(path))
+                    yield return new NativeDll(path);
         }
 
-        public  void Query(Receiver<ManagedExe> dst)
+        public IEnumerable<FileModule> ManagedExeFiles()
         {
             foreach(var path in Root.Files(true).Where(f => f.Is(Exe)))
                 if(FS.managed(path, out var assname))
-                    dst(new ManagedExe(path, assname));
+                    yield return new ManagedExe(path, assname);
         }
 
-        public void Query(Receiver<NativeLib> dst)
+        public IEnumerable<FileModule> NativeExeFiles()
+        {
+            foreach(var path in Root.Files(true).Where(f => f.Is(Exe)))
+                if(FS.native(path))
+                    yield return new NativeExe(path);
+        }
+
+        public IEnumerable<FileModule> StaticLibs()
         {
             foreach(var path in Root.Files(true))
                 if(path.Is(Lib))
-                    dst(new NativeLib(path));
+                    yield return new NativeLib(path);
         }
 
         public IEnumerable<FileModule> Files()

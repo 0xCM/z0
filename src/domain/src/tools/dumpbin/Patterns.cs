@@ -8,70 +8,80 @@ namespace Z0.Tools
     using System.Runtime.CompilerServices;
 
     using static z;
-    using static AsciCharText;
+    using static Konst;
     using static DumpBin.Flag;
 
     using X = ArchiveFileKinds;
 
-
     public partial struct DumpBin
     {
-        [LiteralProvider]
-        public readonly struct Patterns
+        const string Space = " ";
+
+        const PathSeparator PS = PathSeparator.BS;
+
+        public static FS.FileExt ext(Flag f)
+            => Z0.FS.ext(f.ToString().ToLower());
+
+        public FS.FileExt OutputExt(CmdId id)
         {
-            [StringLiteral]
-            const string HeadersLiteral = ToolName + Space
-                + FlagPrefix + nameof(HEADERS) + Space
-                + FlagPrefix + nameof(OUT) + FlagDelimiter + RP.Slot1 + Space
-                + RP.Slot0;
+            switch(id)
+            {
+                case CmdId.EmitAsm:
+                    return ext(DISASM) + ext(NOBYTES) + X.Asm;
+                case CmdId.EmitRawData:
+                    return ext(RAWDATA) + X.Log;
+                case CmdId.EmitHeaders:
+                    return ext(HEADERS) + X.Log;
+                case CmdId.EmitRelocations:
+                    return ext(RELOCATIONS) + X.Log;
+                case CmdId.EmitExports:
+                    return ext(EXPORTS) + X.Log;
+                case CmdId.EmitLoadConfig:
+                    return ext(LOADCONFIG) + X.Log;
+            }
 
-            public static CmdPattern Headers
-                => Cmd.pattern(nameof(HeadersLiteral), HeadersLiteral);
-
-            public static FS.FileExt HeadersExt
-                => ext(HEADERS) + X.Log;
-
-            [StringLiteral]
-            const string DisasmLiteral = ToolName + Space
-                + FlagPrefix + nameof(DISASM) + Space
-                + FlagPrefix + nameof(OUT) + FlagDelimiter + RP.Slot1 + Space
-                + RP.Slot0;
-
-            public static CmdPattern Disasm
-                => Cmd.pattern(nameof(DisasmLiteral), DisasmLiteral);
-
-            public static FS.FileExt DisasmExt
-                => ext(DISASM) + X.Asm;
-
-            [StringLiteral]
-            const string ExportsLiteral = ToolName + Space
-                + FlagPrefix + nameof(EXPORTS) + Space
-                + FlagPrefix + nameof(OUT) + FlagDelimiter + RP.Slot1 + Space
-                + RP.Slot0;
-
-            public static CmdPattern Exports
-                => Cmd.pattern(nameof(ExportsLiteral), ExportsLiteral);
-
-            public static FS.FileExt ExportsExt
-                => ext(EXPORTS) + X.Log;
-
-            [StringLiteral]
-            const string DisasmAsmOnly = ToolName + Space
-                + FlagPrefix + nameof(DISASM) + ArgSpecifier + nameof(NOBYTES)
-                + FlagPrefix + nameof(OUT) + FlagDelimiter + RP.Slot1 + Space
-                + RP.Slot0;
-
-            public static FS.FileExt DisasmAsmOnlyExt
-                => ext(DISASM) + Z0.FS.ext(nameof(NOBYTES));
-
-            public static CmdPattern DisasmAsmOnlyPattern
-                => Cmd.pattern(nameof(DisasmAsmOnly), DisasmAsmOnly);
-
-            public static FS.FileExt ext(Flag f)
-                => Z0.FS.ext(f.ToString().ToLower());
-
-            public static FS.FileExt ext(Flag f1, Flag f2)
-                => Z0.FS.ext(f1.ToString().ToLower(), f2.ToString().ToLower());
+            return X.Log;
         }
+
+        public static CmdScript script(DumpBin tool, string name, CmdId id, FileModule[] src)
+            => Cmd.script(name,src.Map(file => tool.Command(id, file.Path)));
+
+        public CmdScript Script(string name, CmdId id, FileModule[] src)
+            => script(this, name, id, src);
+
+        public CmdExpr Command(CmdId id, FS.FilePath src)
+        {
+            var subdir = ToolOutput + FS.folder(src.FileName.WithoutExtension.Name);
+            subdir.Create();
+            var x = OutputExt(id);
+            var output = subdir + src.FileName.ChangeExtension(x);
+            var source = src.Format(PS);
+            var target = output.Format(PS);
+            var pattern = CmdPattern.Empty;
+            switch(id)
+            {
+                case CmdId.EmitAsm:
+                    pattern = Cmd.pattern("dumpbin.disasm", string.Format("dumpbin /DISASM:{2} /OUT:{1} {0}", source, target, "NOBYTES"));
+                    break;
+                case CmdId.EmitRawData:
+                    pattern = Cmd.pattern("dumpbin.rawdata", string.Format("dumpbin /RAWDATA:1,32 /OUT:{1} {0}", source, target));
+                    break;
+                case CmdId.EmitHeaders:
+                    pattern = Cmd.pattern("dumpbin.headers", string.Format("dumpbin /HEADERS /OUT:{1} {0}", source, target));
+                    break;
+                case CmdId.EmitRelocations:
+                    pattern = Cmd.pattern("dumpbin.relocations", string.Format("dumpbin /RELOCATIONS /OUT:{1} {0}", src.Format(PS), output.Format(PS)));
+                    break;
+                case CmdId.EmitExports:
+                    pattern = Cmd.pattern("dumpbin.exports", string.Format("dumpbin /EXPORTS /OUT:{1} {0}", source, target));
+                    break;
+                case CmdId.EmitLoadConfig:
+                    pattern = Cmd.pattern("dumpbin.loadconfig", string.Format("dumpbin /LOADCONFIG /OUT:{1} {0}", src.Format(PS), output.Format(PS)));
+                    break;
+            }
+            return Cmd.expr(pattern);
+        }
+
+
     }
 }

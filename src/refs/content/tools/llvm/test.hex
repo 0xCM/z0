@@ -1,0 +1,2 @@
+# llvm-mc --disassemble --x86-asm-syntax=intel test.hex -triple=x86_64 > test.asm
+0xc5 0x04 0xc2 0xc7 0x1f

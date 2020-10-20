@@ -1,0 +1,195 @@
+OVERVIEW: llvm linker
+
+USAGE: llvm-link.exe [options] <input bitcode files>
+
+OPTIONS:
+
+Color Options:
+
+  --color                                                         - Use colors in output (default=autodetect)
+
+General options:
+
+  -S                                                              - Write output as LLVM assembly
+  --alias-set-saturation-threshold=<uint>                         - The maximum number of pointers may-alias sets may contain before degradation
+  --as-secure-log-file-name=<value>                               - As secure log file name (initialized from AS_SECURE_LOG_FILE env variable)
+  --asm-macro-max-nesting-depth=<uint>                            - The maximum nesting depth allowed for assembly macros.
+  --available-load-scan-limit=<uint>                              - Use this to specify the default maximum number of instructions to scan backward from a given instruction, when searching for available loaded value
+  --basic-aa-double-calc-bits                                     - 
+  --basic-aa-force-at-least-64b                                   - 
+  --basic-aa-recphi                                               - 
+  --bitcode-mdindex-threshold=<uint>                              - Number of metadatas above which we emit an index to enable lazy-loading
+  --capture-tracking-max-uses-to-explore=<uint>                   - Maximal number of uses to explore.
+  --check-bfi-unknown-block-queries                               - Check if block frequency is queried for an unknown block for debugging missed BFI updates
+  --compute-dead                                                  - Compute dead symbols
+  --costmodel-reduxcost                                           - Recognize reduction patterns.
+  -d                                                              - Print assembly as linked
+  --da-delinearize                                                - Try to delinearize array references.
+  --da-disable-delinearization-checks                             - Disable checks that try to statically verify validity of delinearized subscripts. Enabling this option may result in incorrect dependence vectors for languages that allow the subscript of one dimension to underflow or overflow into another dimension.
+  -debug-counter                                                  - Comma separated list of debug counter skip and count
+    =assume-queries-counter                                       -   Controls which assumes gets created
+  --debug-pass=<value>                                            - Print PassManager debugging information
+    =Disabled                                                     -   disable debug output
+    =Arguments                                                    -   print pass arguments to pass to 'opt'
+    =Structure                                                    -   print pass structure before run()
+    =Executions                                                   -   print pass name before it is executed
+    =Details                                                      -   print pass details when it is executed
+  --disable-basic-aa                                              - 
+  --disable-debug-info-type-map                                   - Don't use a uniquing type map for debug info
+  --disable-lazy-loading                                          - Disable lazy module loading
+  --disable-ondemand-mds-loading                                  - Force disable the lazy-loading on-demand of metadata when loading bitcode for importing.
+  --disable-symbolication                                         - Disable symbolizing crash backtraces.
+  --dom-conditions-max-uses=<uint>                                - 
+  --enable-import-metadata                                        - Enable import metadata like 'thinlto_src_module'
+  --enable-mem-access-versioning                                  - Enable symbolic stride memory access versioning
+  --enable-mssa-loop-dependency                                   - Enable MemorySSA dependency for loop pass manager
+  --enable-name-compression                                       - Enable name/filename string compression
+  --enable-objc-arc-opts                                          - enable/disable all ARC Optimizations
+  --enable-scoped-noalias                                         - 
+  --enable-tbaa                                                   - 
+  --enable-unsafe-globalsmodref-alias-results                     - 
+  -f                                                              - Enable binary output on terminals
+  --filter-print-funcs=<function names>                           - Only print IR for functions whose name match this for all print-[before|after][-all] options
+  --force-reduction-intrinsics                                    - Force creating reduction intrinsics for testing.
+  --force-summary-edges-cold=<value>                              - Force all edges in the function summary to cold
+    =none                                                         -   None.
+    =all-non-critical                                             -   All non-critical edges.
+    =all                                                          -   All edges.
+  --force-vector-interleave=<uint>                                - Sets the vectorization interleave count. Zero is autoselect.
+  --force-vector-width=<uint>                                     - Sets the SIMD width. Zero is autoselect.
+  --icp-max-prom=<uint>                                           - Max number of promotions for a single indirect call callsite
+  --icp-remaining-percent-threshold=<uint>                        - The percentage threshold against remaining unpromoted indirect call count for the promotion
+  --icp-total-percent-threshold=<uint>                            - The percentage threshold against total count for the promotion
+  --import=<function:filename>                                    - Pair of function name and filename, where function should be imported from bitcode in filename
+  --import-all-index                                              - Import all external functions in index.
+  --import-cold-multiplier=<N>                                    - Multiply the `import-instr-limit` threshold for cold callsites
+  --import-constants-with-refs                                    - Import constant global variables with references
+  --import-critical-multiplier=<x>                                - Multiply the `import-instr-limit` threshold for critical callsites
+  --import-cutoff=<N>                                             - Only import first N functions if N>=0 (default -1)
+  --import-full-type-definitions                                  - Import full type definitions for ThinLTO.
+  --import-hot-evolution-factor=<x>                               - As we import functions called from hot callsite, multiply the `import-instr-limit` threshold by this factor before processing newly imported functions
+  --import-hot-multiplier=<x>                                     - Multiply the `import-instr-limit` threshold for hot callsites
+  --import-instr-evolution-factor=<x>                             - As we import functions, multiply the `import-instr-limit` threshold by this factor before processing newly imported functions
+  --import-instr-limit=<N>                                        - Only import functions with less than N instructions
+  --info-output-file=<filename>                                   - File to append -stats and -timer output to
+  --internalize                                                   - Internalize linked symbols
+  --internalize-public-api-file=<filename>                        - A file containing list of symbol names to preserve
+  --internalize-public-api-list=<list>                            - A list of symbol names to preserve
+  --max-dependences=<uint>                                        - Maximum number of dependences collected by loop-access analysis (default = 100)
+  --max-interleave-group-factor=<uint>                            - Maximum factor for an interleaved access group (default = 8)
+  --max-speculation-depth=<uint>                                  - Limit maximum recursion depth when calculating costs of speculatively executed instructions
+  --memdep-block-number-limit=<uint>                              - The number of blocks to scan during memory dependency analysis (default = 1000)
+  --memdep-block-scan-limit=<uint>                                - The number of instructions to scan in a block in memory dependency analysis (default = 100)
+  --memory-check-merge-threshold=<uint>                           - Maximum number of comparisons done when trying to merge runtime memory checks. (default = 100)
+  --memssa-check-limit=<uint>                                     - The maximum number of stores/phis MemorySSAwill consider trying to walk past (default = 100)
+  --module-summary-dot-file=<filename>                            - File to emit dot graph of new summary into.
+  --non-global-value-max-name-size=<uint>                         - Maximum size for the name of non-global values.
+  -o=<filename>                                                   - Override output filename
+  --only-needed                                                   - Link only needed symbols
+  --opt-bisect-limit=<int>                                        - Maximum optimization to perform
+  --override=<filename>                                           - input bitcode file which can override previously defined symbol(s)
+  --partial-profile                                               - Specify the current profile is used as a partial profile.
+  --partial-sample-profile-working-set-size-scale-factor=<number> - The scale factor used to scale the working set size of the partial sample profile along with the partial profile ratio. This includes the factor of the profile counter per block and the factor to scale the working set size to use the same shared thresholds as PGO.
+  --pass-remarks=<pattern>                                        - Enable optimization remarks from passes whose name match the given regular expression
+  --pass-remarks-analysis=<pattern>                               - Enable optimization analysis remarks from passes whose name match the given regular expression
+  --pass-remarks-missed=<pattern>                                 - Enable missed optimization remarks from passes whose name match the given regular expression
+  --pgo-view-counts=<value>                                       - A boolean option to show CFG dag or text with block profile counts and branch probabilities right after PGO profile annotation step. The profile counts are computed using branch probabilities from the runtime profile data and block frequency propagation algorithm. To view the raw counts from the profile, use option -pgo-view-raw-counts instead. To limit graph display to only one function, use filtering option -view-bfi-func-name.
+    =none                                                         -   do not show.
+    =graph                                                        -   show a graph.
+    =text                                                         -   show in text.
+  --phi-node-folding-threshold=<uint>                             - Control the amount of phi node folding to perform (default = 2)
+  --phicse-debug-hash                                             - Perform extra assertion checking to verify that PHINodes's hash function is well-behaved w.r.t. its isEqual predicate
+  --preserve-bc-uselistorder                                      - Preserve use-list order when writing LLVM bitcode.
+  --preserve-ll-uselistorder                                      - Preserve use-list order when writing LLVM assembly.
+  --print-after=<value>                                           - Print IR after specified passes
+  --print-after-all                                               - Print IR after each pass
+  --print-before=<value>                                          - Print IR before specified passes
+  --print-before-all                                              - Print IR before each pass
+  --print-bfi                                                     - Print the block frequency info.
+  --print-bfi-func-name=<string>                                  - The option to specify the name of the function whose block frequency info is printed.
+  --print-bpi                                                     - Print the branch probability info.
+  --print-bpi-func-name=<string>                                  - The option to specify the name of the function whose branch probability info is printed.
+  --print-debug-counter                                           - Print out debug counter info after all counters accumulated
+  --print-import-failures                                         - Print information for functions rejected for importing
+  --print-imports                                                 - Print imported functions
+  --print-module-scope                                            - When printing IR for print-[before|after]{-all} always print a module IR
+  --print-summary-global-ids                                      - Print the global id for each value when reading the module summary
+  --profile-summary-cutoff-cold=<int>                             - A count is cold if it is below the minimum count to reach this percentile of total counts.
+  --profile-summary-cutoff-hot=<int>                              - A count is hot if it exceeds the minimum count to reach this percentile of total counts.
+  --profile-summary-huge-working-set-size-threshold=<uint>        - The code working set size is considered huge if the number of blocks required to reach the -profile-summary-cutoff-hot percentile exceeds this count.
+  --profile-summary-large-working-set-size-threshold=<uint>       - The code working set size is considered large if the number of blocks required to reach the -profile-summary-cutoff-hot percentile exceeds this count.
+  --propagate-attrs                                               - Propagate attributes in index
+  --remarks-section                                               - Emit a section containing remark diagnostics metadata. By default, this is enabled for the following formats: yaml-strtab, bitstream.
+  --rng-seed=<seed>                                               - Seed for the random number generator
+  --runtime-memory-check-threshold=<uint>                         - When performing memory disambiguation checks at runtime do not generate more than this number of comparisons (default = 8).
+  --scalar-evolution-classify-expressions                         - When printing analysis, include information on every instruction
+  --scalar-evolution-huge-expr-threshold=<uint>                   - Size of the expression which is considered huge
+  --scalar-evolution-max-add-rec-size=<uint>                      - Max coefficients in AddRec during evolving
+  --scalar-evolution-max-arith-depth=<uint>                       - Maximum depth of recursive arithmetics
+  --scalar-evolution-max-cast-depth=<uint>                        - Maximum depth of recursive SExt/ZExt/Trunc
+  --scalar-evolution-max-constant-evolving-depth=<uint>           - Maximum depth of recursive constant evolving
+  --scalar-evolution-max-scev-compare-depth=<uint>                - Maximum depth of recursive SCEV complexity comparisons
+  --scalar-evolution-max-scev-operations-implication-depth=<uint> - Maximum depth of recursive SCEV operations implication analysis
+  --scalar-evolution-max-value-compare-depth=<uint>               - Maximum depth of recursive value complexity comparisons
+  --scale-partial-sample-profile-working-set-size                 - If true, scale the working set size of the partial sample profile by the partial profile ratio to reflect the size of the program being compiled.
+  --scev-addops-inline-threshold=<uint>                           - Threshold for inlining addition operands into a SCEV
+  --scev-cheap-expansion-budget=<uint>                            - When performing SCEV expansion only if it is cheap to do, this controls the budget that is considered cheap (default = 4)
+  --scev-mulops-inline-threshold=<uint>                           - Threshold for inlining multiplication operands into a SCEV
+  --scev-verify-ir                                                - Verify IR correctness when making sensitive SCEV queries (slow)
+  --simplifycfg-dup-ret                                           - Duplicate return instructions into unconditional branches
+  --simplifycfg-hoist-common                                      - Hoist common instructions up to the parent block
+  --simplifycfg-hoist-cond-stores                                 - Hoist conditional stores if an unconditional store precedes
+  --simplifycfg-max-small-block-size=<int>                        - Max size of a block which is still considered small enough to thread through
+  --simplifycfg-merge-cond-stores                                 - Hoist conditional stores even if an unconditional store does not precede - hoist multiple conditional stores into a single predicated store
+  --simplifycfg-merge-cond-stores-aggressively                    - When merging conditional stores, do so even if the resultant basic blocks are unlikely to be if-converted as a result
+  --simplifycfg-sink-common                                       - Sink common instructions down to the end block
+  --speculate-one-expensive-inst                                  - Allow exactly one expensive instruction to be speculatively executed
+  --stack-safety-max-iterations=<int>                             - 
+  --stack-safety-print                                            - 
+  --stack-safety-run                                              - 
+  --static-func-full-module-prefix                                - Use full module build paths in the profile counter names for static functions.
+  --static-func-strip-dirname-prefix=<uint>                       - Strip specified level of directory name from source path in the profile counter name for static functions.
+  --stats                                                         - Enable statistics output from program (available with Asserts)
+  --stats-json                                                    - Display statistics as json data
+  --store-to-load-forwarding-conflict-detection                   - Enable conflict detection in loop-access analysis
+  --summary-file=<string>                                         - The summary file to use for function importing.
+  --summary-index=<filename>                                      - Module summary index filename
+  --suppress-warnings                                             - Suppress all linking warnings
+  --time-passes                                                   - Time each pass, printing elapsed time for each on exit
+  --track-memory                                                  - Enable -time-passes memory tracking (this may be slow)
+  --two-entry-phi-node-folding-threshold=<uint>                   - Control the maximal total instruction cost that we are willing to speculatively execute to fold a 2-entry PHI node into a select (default = 4)
+  --use-dbg-addr                                                  - Use llvm.dbg.addr for all local variables
+  -v                                                              - Print information about actions taken
+  --vector-library=<value>                                        - Vector functions library
+    =none                                                         -   No vector functions library
+    =Accelerate                                                   -   Accelerate framework
+    =MASSV                                                        -   IBM MASS vector library
+    =SVML                                                         -   Intel SVML library
+  --verify-assumption-cache                                       - Enable verification of assumption cache
+  --verify-dom-info                                               - Verify dominator info (time consuming)
+  --verify-loop-info                                              - Verify loop info (time consuming)
+  --verify-loop-lcssa                                             - Verify loop lcssa form (time consuming)
+  --verify-memoryssa                                              - Enable verification of MemorySSA.
+  --verify-scev                                                   - Verify ScalarEvolution's backedge taken counts (slow)
+  --verify-scev-maps                                              - Verify no dangling value in ScalarEvolution's ExprValueMap (slow)
+  --verify-scev-strict                                            - Enable stricter verification with -verify-scev is passed
+  --view-background                                               - Execute graph viewer in the background. Creates tmp file litter.
+  --view-bfi-func-name=<string>                                   - The option to specify the name of the function whose CFG will be displayed.
+  --view-block-freq-propagation-dags=<value>                      - Pop up a window to show a dag displaying how block frequencies propagation through the CFG.
+    =none                                                         -   do not display graphs.
+    =fraction                                                     -   display a graph using the fractional block frequency representation.
+    =integer                                                      -   display a graph using the raw integer fractional block frequency representation.
+    =count                                                        -   display a graph using the real profile count if available.
+  --view-hot-freq-percent=<uint>                                  - An integer in percent used to specify the hot blocks/edges to be displayed in red: a block or edge whose frequency is no less than the max frequency of the function multiplied by this percent.
+  --write-relbf-to-summary                                        - Write relative block frequency to function summary 
+
+Generic Options:
+
+  -h                                                              - Alias for --help
+  --help                                                          - Display available options (--help-hidden for more)
+  --help-hidden                                                   - Display all available options
+  --help-list                                                     - Display list of available options (--help-list-hidden for more)
+  --help-list-hidden                                              - Display list of all available options
+  --print-all-options                                             - Print all option values after command line parsing
+  --print-options                                                 - Print non-default options after command line parsing
+  --version                                                       - Display the version of this program

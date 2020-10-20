@@ -15,15 +15,15 @@ namespace Z0
     {
         public K Key {get;}
 
-        readonly RenderFunction<K,string> Formatter;
+        readonly RenderFunctions.Canonical<K,string> Formatter;
 
-        readonly ParseFunction<string,K> Parser;
+        readonly ParseFunctions.Canonical<string,K> Parser;
 
-        public SettingKey(K key, RenderFunction<K,string> fRx, ParseFunction<string,K> pFx)
+        public SettingKey(K key, RenderFunctions.Canonical<K,string> render, ParseFunctions.Canonical<string,K> parse)
         {
             Key = key;
-            Formatter = fRx;
-            Parser = pFx;
+            Formatter = render;
+            Parser = parse;
         }
 
         public string Format()

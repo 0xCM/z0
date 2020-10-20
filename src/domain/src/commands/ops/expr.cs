@@ -13,24 +13,21 @@ namespace Z0
     partial struct Cmd
     {
         [MethodImpl(Inline), Op]
-        public static CmdExpr expr(string content)
-            => new CmdExpr(content);
+        public static CmdExpr expr(CmdPattern pattern)
+            => new CmdExpr(pattern);
 
         [MethodImpl(Inline), Op]
-        public static CmdExpr expr(string id, string content)
-            => new CmdExpr(id, content);
+        public static CmdExpr expr(in Paired<CmdPattern,CmdVars> src)
+            => new CmdExpr(src.Left, src.Right);
 
         [MethodImpl(Inline), Op]
-        public static CmdExpr expr(in asci32 id, string content)
-            => new CmdExpr(id, content);
+        public static CmdExpr expr(CmdPattern pattern, CmdVars vars)
+            => new CmdExpr(pattern, vars);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static CmdExpr<T> expr<T>(string id, T content)
-            => new CmdExpr<T>(id, content);
-
-        [MethodImpl(Inline), Op, Closures(Closure)]
-        public static CmdExpr<T> expr<T>(in asci32 id, T content)
-            => new CmdExpr<T>(id, content);
+        public static CmdExpr<K> expr<K>(CmdPattern pattern, CmdVars<K> content)
+            where K : unmanaged
+                => new CmdExpr<K>(pattern, content);
 
         [MethodImpl(Inline)]
         public static CmdExpr<K,T> expr<K,T>(K id, T content)

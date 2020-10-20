@@ -12,12 +12,6 @@ namespace Z0
 
     using api = Cmd;
 
-    public struct CmdSpecData
-    {
-        public CmdId Id;
-
-        public CmdOptions Options;
-    }
 
     public readonly struct CmdSpec
     {

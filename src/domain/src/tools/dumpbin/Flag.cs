@@ -10,6 +10,23 @@ namespace Z0.Tools
 
     public partial struct DumpBin
     {
+        public enum CmdId : byte
+        {
+            None = 0,
+
+            EmitRawData,
+
+            EmitLoadConfig,
+
+            EmitRelocations,
+
+            EmitExports,
+
+            EmitAsm,
+
+            EmitHeaders,
+        }
+
         [Flags]
         public enum Flag : ulong
         {

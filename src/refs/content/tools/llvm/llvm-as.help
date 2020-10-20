@@ -1,0 +1,35 @@
+OVERVIEW: llvm .ll -> .bc assembler
+
+USAGE: llvm-as.exe [options] <input .llvm file>
+
+OPTIONS:
+
+Color Options:
+
+  This option category has no options.
+
+General options:
+
+  This option category has no options.
+
+Generic Options:
+
+  -h                            - Alias for --help
+  --help                        - Display available options (--help-hidden for more)
+  --help-hidden                 - Display all available options
+  --help-list                   - Display list of available options (--help-list-hidden for more)
+  --help-list-hidden            - Display list of all available options
+  --print-all-options           - Print all option values after command line parsing
+  --print-options               - Print non-default options after command line parsing
+  --version                     - Display the version of this program
+
+llvm-as Options:
+
+  -d                            - Print assembly as parsed
+  --data-layout=<layout-string> - data layout string to use
+  --disable-output              - Disable output
+  --disable-verify              - Do not run verifier on input LLVM (dangerous!)
+  -f                            - Enable binary output on terminals
+  --module-hash                 - Emit module hash
+  -o=<filename>                 - Override output filename
+  --preserve-bc-uselistorder    - Preserve use-list order when writing LLVM bitcode.

@@ -1,0 +1,47 @@
+OVERVIEW: llvm-strip tool
+
+USAGE: llvm-strip [options] inputs...
+
+OPTIONS:
+  --allow-broken-links   Allow the tool to remove sections even if it would leave invalid section references. The appropriate sh_link fields will be set to zero.
+  --disable-deterministic-archives
+                         Disable deterministic mode when operating on archives (use real values for UIDs, GIDs, and timestamps).
+  --discard-all          Remove all local symbols except file and section symbols
+  --discard-locals       Remove compiler-generated local symbols, (e.g. symbols starting with .L)
+  -D                     Alias for --enable-deterministic-archives
+  -d                     Alias for --strip-debug
+  --enable-deterministic-archives
+                         Enable deterministic mode when operating on archives (use zero for UIDs, GIDs, and timestamps).
+  -g                     Alias for --strip-debug
+  --keep-file-symbols    Do not remove file symbols
+  --keep-section=section Keep <section>
+  --keep-symbol=symbol   Do not remove symbol <symbol>
+  -K <value>             Alias for --keep-symbol
+  --no-strip-all         Disable --strip-all
+  -N <value>             Alias for --strip-symbol
+  --only-keep-debug      Produce a debug file as the output that only preserves contents of sections useful for debugging purposes
+  -o <file>              Write output to <file>
+  --preserve-dates       Preserve access and modification timestamps
+  -p                     Alias for --preserve-dates
+  --regex                Permit regular expressions in name comparison
+  --remove-section=section
+                         Remove <section>
+  -R <value>             Alias for --remove-section
+  --strip-all-gnu        Compatible with GNU's --strip-all
+  --strip-all            Remove non-allocated sections outside segments. .gnu.warning* and .ARM.attribute sections are not removed
+  --strip-debug          Remove all debug sections
+  --strip-sections       Remove all section headers and all sections not in segments
+  --strip-symbol=symbol  Strip <symbol>
+  --strip-unneeded       Remove all symbols not needed by relocations
+  -S                     Alias for --strip-debug
+  -s                     Alias for --strip-all
+  -T                     Remove Swift symbols
+  -U                     Alias for --disable-deterministic-archives
+  --version              Print the version and exit.
+  -V                     Alias for --version
+  --wildcard             Allow wildcard syntax for symbol-related flags. Incompatible with --regex. Allows using '*' to match any number of characters, '?' to match any single character, '' to escape special characters, and '[]' to define character classes. Wildcards beginning with '!' will prevent a match, for example "-N '*' -N '!x'" will strip all symbols except for "x".
+  -w                     Alias for --wildcard
+  -X                     Alias for --discard-locals
+  -x                     Alias for --discard-all
+
+Pass @FILE as argument to read options from FILE.
