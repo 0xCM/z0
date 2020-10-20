@@ -23,7 +23,7 @@ namespace Z0
         {
             var dst = span<Bit32>(bitwidth<T>());
             var len = math.min(dst.Length, src.Length - offset);
-            Copier.copy(src.Edit, offset, len, dst);
+            MemCopy.copy(src.Edit, offset, len, dst);
             return BitPack.pack<T>(dst);
         }
 
@@ -38,7 +38,7 @@ namespace Z0
         {
             var dst = span<Bit32>(bitwidth<T>());
             var len = math.min(dst.Length, src.Length);
-            Copier.copy(src.Edit, 0, len, dst);
+            MemCopy.copy(src.Edit, 0, len, dst);
             return BitPack.pack<T>(dst);
         }
 
@@ -55,7 +55,7 @@ namespace Z0
         {
             var dst = span<Bit32>(bitwidth<T>());
             var len = math.min(count, src.Length - offset);
-            Copier.copy(src.Edit, offset, len, dst);
+            MemCopy.copy(src.Edit, offset, len, dst);
             return BitPack.pack<T>(dst);
         }
    }

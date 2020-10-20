@@ -81,8 +81,8 @@ namespace Z0
 
             var decoded = CilApi.decode(mod,props.Select(x => x.GetGetMethod())).ToArray();
             var path = FS.path(CasePath(FileExtensions.Il).Name);
-            var cilwriter = new CilFunctionWriter(path);
-            cilwriter.Write(decoded);
+            var cilWriter = new CilFunctionWriter(path);
+            cilWriter.Write(decoded);
         }
 
         public void emit_data()
@@ -93,7 +93,7 @@ namespace Z0
             for(var i=0; i<refs.Length; i++)
             {
                 var r = refs[i];
-                var data = Buffers.view(r.Address, r.DataSize);
+                var data = MemView.view(r.Address, r.DataSize);
                 dst.WriteLine(data.FormatHexBytes(Chars.Space));
 
             }

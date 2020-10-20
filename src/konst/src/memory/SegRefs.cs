@@ -13,6 +13,8 @@ namespace Z0
     [ApiHost]
     public readonly partial struct SegRefs
     {
-
+        [MethodImpl(Inline), Op]
+        public static SegRef create(MemoryAddress address, ByteSize size)
+            => new SegRef(address, size);
     }
 }

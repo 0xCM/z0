@@ -3,7 +3,7 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
 
@@ -14,6 +14,8 @@ namespace Z0
     /// </summary>
     public readonly struct AsciNull
     {
+        public const char Literal = '\0';
+
         [MethodImpl(Inline)]
         public static implicit operator asci2(AsciNull src)
             => default;
@@ -25,7 +27,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator asci8(AsciNull src)
             => default;
-        
+
         [MethodImpl(Inline)]
         public static implicit operator asci16(AsciNull src)
             => default;

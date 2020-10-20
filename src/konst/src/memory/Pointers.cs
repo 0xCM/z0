@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost]
+    [ApiHost(ApiNames.Pointers, true)]
     public unsafe readonly partial struct Pointers
     {
 

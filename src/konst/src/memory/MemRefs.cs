@@ -30,7 +30,7 @@ namespace Z0
         public static Span<byte> replicate(in SegRef src)
         {
             Span<byte> dst = sys.alloc<byte>(src.DataSize);
-            Copier.copy(src, dst);
+            MemCopy.copy(src, dst);
             return dst;
         }
 

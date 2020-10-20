@@ -12,11 +12,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static unsafe void* pointer(IntPtr src)
-            => src.ToPointer();        
-        
+            => src.ToPointer();
+
         [MethodImpl(Inline)]
         public static unsafe T* pointer<T>(ref T src)
             where T : unmanaged
-                => (T*)AsPointer(ref src); 
+                => (T*)AsPointer(ref src);
     }
 }

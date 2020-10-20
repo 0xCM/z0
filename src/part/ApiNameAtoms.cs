@@ -220,5 +220,17 @@ namespace Z0
         public const string asci = nameof(asci);
 
         public const string permutations = nameof(permutations);
+
+        public const string bitlogic = bits + dot + logic;
+
+        public const string copy = nameof(copy);
+
+        public const string view = nameof(view);
+
+        public const string typed = nameof(typed);
+
+        public const string pointers = nameof(pointers);
+
+        public const string relations = nameof(relations);
     }
 }

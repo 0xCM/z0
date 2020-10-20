@@ -10,14 +10,17 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Buffers
+    [ApiHost(ApiNames.MemView, true)]
+    public readonly struct MemView
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> view<T>(MemoryAddress src, int count)
             where T : unmanaged
                 => z.cover<T>(src.Ref<T>(), (uint)count);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> view<T>(MemoryAddress src, uint count)
             where T : unmanaged
                 => z.cover<T>(src.Ref<T>(), count);

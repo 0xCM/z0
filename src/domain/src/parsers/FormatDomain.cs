@@ -4,14 +4,16 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using static Konst;
+    using System;
+    using System.Runtime.CompilerServices;
 
-    /// <summary>
-    /// Api for buffer manipulation
-    /// </summary>
-    [ApiHost]
-    public unsafe partial struct Buffers
+    using static Konst;
+    using static z;
+
+    public readonly partial struct FormatDomain
     {
-        const NumericKind Closure = UnsignedInts;
+        [MethodImpl(Inline)]
+        public static string format<A,B>(string pattern, A a, B b)
+            => string.Format(pattern, a, b);
     }
 }

@@ -22,7 +22,7 @@ namespace Z0
         /// <summary>
         /// Covers a token-identified buffer with a span
         /// </summary>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Span<T> cover<T>(BufferToken src)
             where T : unmanaged
                 => z.cover(src.Address.Pointer<byte>(), src.BufferSize).Cast<T>();

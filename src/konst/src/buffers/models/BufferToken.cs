@@ -10,7 +10,6 @@ namespace Z0
 
     using static Konst;
 
-
     /// <summary>
     /// Describes an allocated buffer
     /// </summary>

@@ -13,7 +13,7 @@ namespace Z0
     /// Defines a key-parametric indexed view over <see cref='SegRef'/> values
     /// </summary>
     public readonly struct MemorySlots<E>
-        where E : unmanaged, Enum
+        where E : unmanaged
     {
         readonly SegRef[] Data;
 

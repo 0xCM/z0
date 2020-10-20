@@ -132,28 +132,28 @@ namespace Z0
         [MethodImpl(Inline)]
         static unsafe void bitchars(byte src, Span<char> dst, int offset)
         {
-            Copier.copy(bitcharP((byte)(src >> seglen*0)), dst, offset + seglen*0,  seglen);
+            MemCopy.copy(bitcharP((byte)(src >> seglen*0)), dst, offset + seglen*0,  seglen);
         }
 
         [MethodImpl(Inline)]
         static unsafe void bitchars(ushort src, Span<char> dst, int offset)
         {
-            Copier.copy(bitcharP((byte)(src >> seglen*0)), dst, offset + seglen*0,  seglen);
-            Copier.copy(bitcharP((byte)(src >> seglen*1)), dst, offset + seglen*1,  seglen);
+            MemCopy.copy(bitcharP((byte)(src >> seglen*0)), dst, offset + seglen*0,  seglen);
+            MemCopy.copy(bitcharP((byte)(src >> seglen*1)), dst, offset + seglen*1,  seglen);
         }
 
         [MethodImpl(Inline)]
         static unsafe void bitchars(uint src, Span<char> dst, int offset)
         {
             for(var i=0; i<4; i++)
-                Copier.copy(bitcharP((byte)(src >> seglen*i)), dst, offset + seglen*i,  seglen);
+                MemCopy.copy(bitcharP((byte)(src >> seglen*i)), dst, offset + seglen*i,  seglen);
         }
 
         [MethodImpl(Inline)]
         static unsafe void bitchars(ulong src, Span<char> dst, int offset)
         {
             for(var i=0; i<8; i++)
-                Copier.copy(bitcharP((byte)(src >> seglen*i)), dst, offset + seglen*i,  seglen);
+                MemCopy.copy(bitcharP((byte)(src >> seglen*i)), dst, offset + seglen*i,  seglen);
         }
 
         [MethodImpl(Inline)]
@@ -183,29 +183,29 @@ namespace Z0
         [MethodImpl(Inline)]
         static unsafe void bitseq(byte src, Span<byte> dst, int offset)
         {
-            Copier.copy(bitseqP((byte)(src >> seglen*0)), dst, offset + seglen*0, seglen);
+            MemCopy.copy(bitseqP((byte)(src >> seglen*0)), dst, offset + seglen*0, seglen);
         }
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(ushort src, Span<byte> dst, int offset)
         {
             ref var target = ref head(dst);
-            Copier.copy(bitseqP((byte)(src >> seglen*0)), dst, offset + seglen*0, seglen);
-            Copier.copy(bitseqP((byte)(src >> seglen*1)), dst, offset + seglen*1, seglen);
+            MemCopy.copy(bitseqP((byte)(src >> seglen*0)), dst, offset + seglen*0, seglen);
+            MemCopy.copy(bitseqP((byte)(src >> seglen*1)), dst, offset + seglen*1, seglen);
         }
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(uint src, Span<byte> dst, int offset)
         {
             for(var i=0; i<4; i++)
-                Copier.copy(bitseqP((byte)(src >> seglen*i)), dst, offset + seglen*i, seglen);
+                MemCopy.copy(bitseqP((byte)(src >> seglen*i)), dst, offset + seglen*i, seglen);
         }
 
         [MethodImpl(Inline)]
         static unsafe void bitseq(ulong src, Span<byte> dst, int offset)
         {
             for(var i=0; i<8; i++)
-                Copier.copy(bitseqP((byte)(src >> seglen*i)), dst, offset + seglen*i, seglen);
+                MemCopy.copy(bitseqP((byte)(src >> seglen*i)), dst, offset + seglen*i, seglen);
         }
 
         [MethodImpl(Inline)]

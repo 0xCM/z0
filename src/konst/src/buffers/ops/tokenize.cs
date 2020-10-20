@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="base">The base address</param>
         /// <param name="size">The number of bytes covered by each represented buffer</param>
         /// <param name="count">The length of the buffer sequence</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static BufferToken<F>[] tokenize<F>(IntPtr @base, uint size, uint count)
             where F : unmanaged, IDataCell
         {

@@ -12,20 +12,21 @@ namespace Z0
 
     partial struct Buffers
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static MemorySlots<E> slots<E>(Type src)
-            where E : unmanaged, Enum
+            where E : unmanaged
                 => new MemorySlots<E>(slots(src));
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static MemorySlots<E> slots<E>(params SegRef[] src)
-            where E : unmanaged, Enum
+            where E : unmanaged
                 => new MemorySlots<E>(src);
 
         [MethodImpl(Inline), Op]
         public static MemorySlots slots(Type src)
             => ApiDynamic.jit(src).Map(m => new SegRef(m.Address, m.Size));
 
+        [MethodImpl(Inline)]
         public static MemorySlots<E> slots<E,T>(T src)
             where E : unmanaged, Enum
                 => slots<E>(typeof(T));

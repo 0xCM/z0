@@ -12,7 +12,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-
     [ApiDataType]
     public struct Multiparser
     {

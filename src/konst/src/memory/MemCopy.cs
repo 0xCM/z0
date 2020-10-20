@@ -10,9 +10,11 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
-    public readonly struct Copier
+    [ApiHost(ApiNames.MemCopy, true)]
+    public readonly struct MemCopy
     {
+        const NumericKind Closure = UnsignedInts;
+
         /// <summary>
         /// Copies a specified number of source values to the target and returns the count of copied bytes
         /// </summary>
@@ -30,13 +32,10 @@ namespace Z0
             return ref dst;
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe void copy<T>(SegRef src, Span<T> dst)
             where T : unmanaged
-        {
-            var reader = MemoryReader.create<T>(src);
-            reader.ReadAll(dst);
-        }
+                => MemoryReader.create<T>(src).ReadAll(dst);
 
         /// <summary>
         /// Copies the source to the target using 128-bit intrinsic operations
@@ -45,7 +44,7 @@ namespace Z0
         /// <param name="src">The source</param>
         /// <param name="dst">The target</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void vcopy<T>(W128 w, ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
         {
@@ -66,7 +65,7 @@ namespace Z0
         /// <param name="src">The source</param>
         /// <param name="dst">The target</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void vcopy<T>(W256 w, ReadOnlySpan<T> src, Span<T> dst)
             where T : unmanaged
         {
@@ -86,7 +85,7 @@ namespace Z0
         /// <param name="pSrc">The location of the source bytes</param>
         /// <param name="pDst">The location of the target</param>
         /// <param name="srcCount">The number of values to copy</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe void copy(byte* pSrc, byte* pDst, uint srcCount)
             => sys.copy(pSrc, pDst, srcCount);
 
@@ -96,7 +95,7 @@ namespace Z0
         /// <param name="pSrc">The location of the source bytes</param>
         /// <param name="pDst">The location of the target</param>
         /// <param name="srcCount">The number of values to copy</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe void copy<T>(T* pSrc, T* pDst, uint srcCount)
             where T : unmanaged
                 => sys.copy(pSrc, pDst, srcCount);
@@ -107,7 +106,7 @@ namespace Z0
         /// <param name="pSrc">The location of the source bytes</param>
         /// <param name="pDst">The location of the target</param>
         /// <param name="srcCount">The number of values to copy</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe void copy<T>(T* pSrc, Span<T> dst, int offset, uint srcCount)
             where T : unmanaged
                 =>  copy(pSrc, gptr(first(dst), offset), srcCount);
@@ -127,7 +126,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="start">The source start index</param>
-        /// <param name="count">The soruce cell count</param>
+        /// <param name="count">The source cell count</param>
         /// <param name="dst">The data target</param>
         /// <param name="offset">The target offset</param>
         /// <typeparam name="S">The source cell type</typeparam>
@@ -149,7 +148,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="start">The source start index</param>
-        /// <param name="count">The soruce cell count</param>
+        /// <param name="count">The source cell count</param>
         /// <param name="dst">The data target</param>
         /// <param name="offset">The target offset</param>
         /// <typeparam name="S">The source cell type</typeparam>

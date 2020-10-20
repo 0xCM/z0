@@ -14,11 +14,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> view(in ResIdentity<byte> id)
-            => Buffers.view<byte>(id.Address, id.CellCount);
+            => MemView.view<byte>(id.Address, id.CellCount);
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> view(in ResIdentity<char> id)
-            => Buffers.view<char>(id.Address, id.CellCount);
+            => MemView.view<char>(id.Address, id.CellCount);
 
         [MethodImpl(Inline), Op]
         public unsafe static ReadOnlySpan<char> view(in ResIdentity<char> res, int i0, int i1)
@@ -26,10 +26,10 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> view(in ResIdentity<byte> res, int i0, int i1)
-            => Buffers.view<byte>(res.Address, (i1 - i0 + 1));
+            => MemView.view<byte>(res.Address, (i1 - i0 + 1));
 
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<char> view(in StringResourceRow src)
-            => Buffers.view<char>(src.Address, src.Length);
+            => MemView.view<char>(src.Address, src.Length);
     }
 }

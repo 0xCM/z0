@@ -25,7 +25,7 @@ namespace Z0
             var buffer = Stacks.alloc(w64);
             var unpacked = Stacks.span<Bit32>(ref buffer);
             ref var dst = ref Stacks.head<Bit32>(ref buffer);
-            Copier.copy(in skip(src.Edit, offset), ref dst, count);
+            MemCopy.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked,Konst.z8);
         }
 
@@ -42,7 +42,7 @@ namespace Z0
             var buffer = Stacks.alloc(w128);
             var unpacked = Stacks.span<Bit32>(ref buffer);
             ref var dst = ref Stacks.head<Bit32>(ref buffer);
-            Copier.copy(in skip(src.Edit, offset), ref dst, count);
+            MemCopy.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked, z16);
         }
 
@@ -76,7 +76,7 @@ namespace Z0
             var buffer = Stacks.alloc(w512);
             var unpacked = Stacks.span<Bit32>(ref buffer);
             ref var dst = ref Stacks.head<Bit32>(ref buffer);
-            Copier.copy(in skip(src.Edit, offset), ref dst, count);
+            MemCopy.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked, z64);
         }
 
@@ -86,7 +86,7 @@ namespace Z0
             var buffer = Stacks.alloc(w64);
             var unpacked = Stacks.span<Bit32>(ref buffer);
             ref var dst = ref Stacks.head<Bit32>(ref buffer);
-            Copier.copy(in skip(src.Edit, offset), ref dst, count);
+            MemCopy.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked, z8i);
         }
 
@@ -96,7 +96,7 @@ namespace Z0
             var buffer = Stacks.alloc(w128);
             var unpacked = Stacks.span<Bit32>(ref buffer);
             ref var dst = ref Stacks.head<Bit32>(ref buffer);
-            Copier.copy(in skip(src.Edit, offset), ref dst, count);
+            MemCopy.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked, z16i);
         }
 
@@ -106,7 +106,7 @@ namespace Z0
             var buffer = Stacks.alloc(w256);
             var unpacked = Stacks.span<Bit32>(ref buffer);
             ref var dst = ref Stacks.head<Bit32>(ref buffer);
-            Copier.copy(in skip(src.Edit, offset), ref dst, count);
+            MemCopy.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked,z32i);
         }
 
@@ -116,7 +116,7 @@ namespace Z0
             var buffer = Stacks.alloc(w512);
             var unpacked = Stacks.span<Bit32>(ref buffer);
             ref var dst = ref Stacks.head<Bit32>(ref buffer);
-            Copier.copy(in skip(src.Edit, offset), ref dst, count);
+            MemCopy.copy(in skip(src.Edit, offset), ref dst, count);
             return BitPack.pack(unpacked, z64i);
         }
     }

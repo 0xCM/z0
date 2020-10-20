@@ -17,8 +17,28 @@ namespace Z0
     public readonly struct SegRef : ISegRef, ITextual, IEquatable<SegRef>, IHashed
     {
         public const byte Size = 16;
-        
-        readonly Vector128<ulong> Segment;        
+
+        readonly Vector128<ulong> Segment;
+
+        // [MethodImpl(Inline)]
+        // public SegRef(ulong location, uint size)
+        //     => Segment = vparts(location, (ulong)size);
+
+        [MethodImpl(Inline)]
+        public SegRef(Vector128<ulong> src)
+            => Segment = src;
+
+        [MethodImpl(Inline)]
+        public unsafe SegRef(byte* src, ByteSize length)
+            =>  Segment = vparts((ulong)src, (ulong)length);
+
+        // [MethodImpl(Inline)]
+        // public SegRef(MemoryAddress src, int length)
+        //     => Segment = vparts((ulong)src, (ulong)length);
+
+        [MethodImpl(Inline)]
+        public SegRef(MemoryAddress src, ByteSize size)
+            => Segment = vparts((ulong)src, (ulong)size);
 
         public MemoryAddress Address
         {
@@ -30,7 +50,7 @@ namespace Z0
         /// Specifies the segment byte count
         /// </summary>
         /// <typeparam name="T">The cell type</typeparam>
-        public uint DataSize 
+        public uint DataSize
         {
             [MethodImpl(Inline)]
             get => (uint)vcell(Segment, 1);
@@ -41,50 +61,34 @@ namespace Z0
             [MethodImpl(Inline)]
             get => cover(Address, DataSize);
         }
- 
+
         public MemoryRange Range
         {
             [MethodImpl(Inline)]
             get => new MemoryRange(Address, Address + DataSize);
         }
-        
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => Segment.Equals(default);
-        }      
-        
+        }
+
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
             get => !Segment.Equals(default);
-        }      
+        }
 
         [MethodImpl(Inline)]
         public unsafe ref byte Cell(int offset)
             => ref @ref<byte>((void*)(Address + offset));
-        
+
         public ref byte this[int index]
         {
             [MethodImpl(Inline)]
             get => ref Cell(index);
         }
-
-        [MethodImpl(Inline)]
-        public SegRef(ulong location, uint size)
-            => Segment = vparts(location, (ulong)size);
-
-        [MethodImpl(Inline)]
-        public SegRef(Vector128<ulong> src)
-            => Segment = src;
-
-        [MethodImpl(Inline)]
-        public unsafe SegRef(byte* src, int length)
-            =>  Segment = vparts((ulong)src, (ulong)length);
-
-        [MethodImpl(Inline)]
-        public SegRef(MemoryAddress src, int length)
-            => Segment = vparts((ulong)src, (ulong)length);
 
         /// <summary>
         /// Computes the whole number of T-cells covered by segment
@@ -108,18 +112,18 @@ namespace Z0
         [MethodImpl(Inline)]
         public uint Hash()
             => hash(Segment);
-        
+
         [MethodImpl(Inline)]
         public bool Equals(SegRef src)
             => src.Segment.Equals(Segment);
-        
+
         [MethodImpl(Inline)]
         public static implicit operator Vector128<ulong>(in SegRef src)
             => src.Segment;
-        
+
         string ITextual.Format()
             => Format();
-        
+
         uint IHashed.Hash
         {
             get => Hash();
@@ -127,17 +131,17 @@ namespace Z0
 
         bool IEquatable<SegRef>.Equals(SegRef src)
             => Equals(src);
-        
+
         public override bool Equals(object src)
             => src is SegRef x && Equals(x);
-            
+
         public override string ToString()
             => Format();
 
         public override int GetHashCode()
             => (int)Hash();
 
-        public static SegRef Empty 
+        public static SegRef Empty
             => default;
     }
 }

@@ -13,8 +13,6 @@ namespace Z0
     [ApiNameProvider]
     readonly struct ApiNames
     {
-
-
         public const string AppMsg = app + dot + msg;
 
         public const string AppErrors = app + dot + errors;
@@ -146,6 +144,12 @@ namespace Z0
 
         public const string MemRefs = A.memory + dot + refs;
 
+        public const string MemCopy = A.memory + dot + copy;
+
+        public const string MemView = A.memory + dot + view;
+
+        public const string Pointers = A.memory + dot + pointers;
+
         public const string StringRefs = A.memory + dot + refs + dot + strings;
 
         // ~~ Api
@@ -224,14 +228,6 @@ namespace Z0
         public const string BitLogicScalar = bitlogic + dot + scalar;
 
         public const string BitLogicBytes = bitlogic + dot + bytes;
-
-        const string bitlogic = bits + dot + logic;
-
-        const string types = nameof(types);
-
-        const string typed = nameof(typed);
-
-        const string relations = nameof(relations);
 
         public const string Relations = relations;
     }
