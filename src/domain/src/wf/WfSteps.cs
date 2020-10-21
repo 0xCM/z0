@@ -32,7 +32,8 @@ namespace Z0
         public void Run(WfStepId id)
         {
             var src = typeof(RP);
-            var dst = FS.dir(Wf.IndexRoot.Name) + FS.file("format-patterns", "csv");
+
+            var dst = Wf.Db().Root + FS.folder("indices") + FS.file("format-patterns", "csv");
             EmitRenderPatterns.create(src,dst).Run(Wf);
         }
     }

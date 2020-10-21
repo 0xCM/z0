@@ -30,7 +30,6 @@ namespace Z0
             Flair = flair;
         }
 
-
         [MethodImpl(Inline)]
         public string Format()
             => Render.format(EventId, SegmentCount, Path.ToUri());

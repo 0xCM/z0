@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     public sealed class EmitRenderPatterns : WfHost<EmitRenderPatterns>
     {
@@ -55,16 +56,31 @@ namespace Z0
             Wf.Disposed();
         }
 
+        [Op]
+        public static RenderPatternSources sources(Type src)
+        {
+            var values = src.LiteralFieldValues<string>(out var fields);
+            var count = values.Length;
+            var buffer = alloc<RenderPatternSource>(count);
+            var dst = span(buffer);
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = new RenderPatternSource(skip(fields,i), skip(values,i));
+            return buffer;
+        }
+
         public void Run()
         {
             Wf.Running();
 
             try
             {
-                var patterns = Render.sources(Source);
-                foreach(var pattern in patterns.View)
-                    Wf.Status(pattern.Format());
-
+                using var writer = Target.Writer();
+                var patterns = sources(Source);
+                var view = patterns.View;
+                var count = view.Length;
+                for(var i=0; i<count; i++)
+                    writer.WriteLine(skip(view,i).Format());
+                Wf.EmittedFile(count, Target);
             }
             catch(Exception e)
             {

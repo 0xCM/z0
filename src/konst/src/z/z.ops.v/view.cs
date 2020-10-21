@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source reference</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ReadOnlySpan<T> view<T>(in SegRef src)
             => cover(src.Address.Ref<T>(), count<T>(src));
 
@@ -47,9 +47,9 @@ namespace Z0
         /// <param name="src">A reference to the leading cell</param>
         /// <param name="count">The source cell count</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static ReadOnlySpan<T> view<T>(in T src, int count)
-            => CreateReadOnlySpan(ref edit(src), count);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ReadOnlySpan<T> view<T>(in T src, uint count)
+            => CreateReadOnlySpan(ref edit(src), (int)count);
 
         /// <summary>
         /// Presents a readonly T-reference as a reference of bit-width w
@@ -57,7 +57,7 @@ namespace Z0
         /// <param name="w">The target width selector</param>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly byte view<T>(W8 w, in T src)
             => ref view<T,byte>(src);
 
@@ -67,7 +67,7 @@ namespace Z0
         /// <param name="w">The target width selector</param>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly ushort view<T>(W16 w, in T src)
             => ref view<T,ushort>(src);
 
@@ -77,7 +77,7 @@ namespace Z0
         /// <param name="w">The target width selector</param>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly uint view<T>(W32 w, in T src)
             => ref view<T,uint>(src);
 
@@ -87,10 +87,9 @@ namespace Z0
         /// <param name="w">The target width selector</param>
         /// <param name="src">The data source</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref readonly ulong view<T>(W64 w, in T src)
             => ref view<T,ulong>(src);
-
 
         /// <summary>
         /// Interprets a readonly T-reference as a readonly int8 reference

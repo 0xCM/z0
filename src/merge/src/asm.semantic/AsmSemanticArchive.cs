@@ -46,16 +46,13 @@ namespace Z0
 
         readonly IWfShell Wf;
 
-        public IDbPaths DbPaths {get;}
-
         readonly FS.FolderPath SemanticRoot;
 
         [MethodImpl(Inline)]
         public AsmSemanticArchive(IWfShell wf)
         {
             Wf = wf;
-            DbPaths = Z0.DbPaths.create(wf);
-            SemanticRoot = DbPaths.DocRoot();
+            SemanticRoot = wf.Db().DocRoot() + FS.folder("asm.semantic");
         }
 
         public FS.FolderName SemanticFolder

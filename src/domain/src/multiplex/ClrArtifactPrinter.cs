@@ -11,8 +11,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using static ClrArtifacts;
-
     public readonly struct ClrArtifactPrinter
     {
         readonly IWfShell Wf;

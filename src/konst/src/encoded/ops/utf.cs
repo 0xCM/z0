@@ -23,5 +23,17 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static BinaryCode utf32(string src)
             => Encoding.UTF32.GetBytes(src);
+
+        [MethodImpl(Inline), Op]
+        public static string utf7(ReadOnlySpan<byte> src)
+            => Encoding.UTF7.GetString(src);
+
+        [MethodImpl(Inline), Op]
+        public static string utf8(ReadOnlySpan<byte> src)
+            => Encoding.UTF8.GetString(src);
+
+        [MethodImpl(Inline), Op]
+        public static string utf32(ReadOnlySpan<byte> src)
+            => Encoding.UTF32.GetString(src);
     }
 }

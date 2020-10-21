@@ -37,23 +37,32 @@ namespace Z0
 
         readonly IWfShell Wf;
 
+        readonly Multiplex Mpx;
+
         public AppRunner(IWfShell wf, WfHost host)
         {
             Host = host;
             Wf = wf;
+            Mpx = Multiplex.create(Multiplex.configure(wf.Db().Root));
         }
 
-        public void Run()
+        public unsafe void Run()
         {
             var steps = Wf.Steps();
             steps.Run(typeof(EmitRenderPatterns));
 
-            var resources = @readonly(Resources.describe(Wf.Controller));
+            var resources = @readonly(Mpx.ResourceDescriptors(Wf.Controller));
             var count = resources.Length;
             for(var i=0; i<count; i++)
             {
                 ref readonly var res = ref skip(resources,i);
-                Wf.Row(res);
+                Wf.Status(res);
+                var target = Wf.Db().RefDataPath(Parts.Tools.Resolved, FS.file(res.Name));
+                var data = MemView.view(res.Address, res.Size);
+                var text = Encoded.utf8(data);
+                using var writer = target.Writer();
+                writer.Write(text);
+                Wf.EmittedFile(text.Length, target);
             }
         }
 

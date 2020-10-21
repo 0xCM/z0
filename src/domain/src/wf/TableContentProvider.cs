@@ -49,7 +49,6 @@ namespace Z0
             }
         }
 
-
         [Op]
         ReadOnlySpan<ImageToken> SystemImages
         {

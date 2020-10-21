@@ -4,8 +4,5 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public interface IBuildArchive : IFileArchive<BuildArchive>
-    {
-        IModuleArchive Modules {get;}
-    }
+
 }

@@ -12,12 +12,12 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Resources
+    partial class Multiplex
     {
         [Op]
-        public static unsafe ResourceDescriptor[] describe(Assembly src)
+        public unsafe ResourceDescriptor[] ResourceDescriptors(Assembly src)
         {
-            var resnames = names(src);
+            var resnames = Resources.names(src);
             var count = resnames.Length;
             var buffer = alloc<ResourceDescriptor>(count);
             var target = span(buffer);

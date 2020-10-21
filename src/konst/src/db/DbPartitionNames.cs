@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     [LiteralProvider]
-    public readonly struct DbPartitionNames
+    public readonly struct DbNames
     {
         public const string Docs = "docs";
 
@@ -26,5 +26,30 @@ namespace Z0
 
         public const string Logs = "logs";
 
+        public const string Refs = "refs";
+
+        public const string Events = "events";
+
+        public const string Etl = "etl";
+
+        public const string Queue = "queue";
+
+        public const string Parsed = "parsed";
+
+        public const string Il = "il";
+
+        public const string Cil = "cil";
+
+        public const string Asm = "asm";
+
+        public const string Hex = "hex";
+
+        public const string Extracts = "extracts";
+
+        public const string Output = "output";
+
+        public const string SubjectDelimiter = ".";
+
+        public const string QualifiedSubject = "{0}" + SubjectDelimiter + "{1}";
     }
 }

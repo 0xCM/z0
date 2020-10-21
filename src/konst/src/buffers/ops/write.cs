@@ -11,7 +11,6 @@ namespace Z0
 
     partial struct Buffers
     {
-
         /// <summary>
         /// Reads a byte
         /// </summary>
@@ -32,14 +31,6 @@ namespace Z0
             return ref dst;
         }
 
-
-        [MethodImpl(Inline), Op]
-        public static void copy(in byte src, uint count, ref byte dst, ref uint index)
-        {
-            for(var j=0u; j<count; j++)
-                z.seek(dst, index++) = z.skip(src, j);
-        }
-
         /// <summary>
         /// Projects 64 source bits onto a contiguous sequence of 8 bytes
         /// </summary>
@@ -52,16 +43,8 @@ namespace Z0
              return ref dst;
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe Span<T> edit<T>(MemoryAddress src, uint count)
-            => z.cover(src.Ref<T>(), count);
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static unsafe Span<byte> edit(MemoryAddress src, ByteSize size)
-            => z.cover(src.Ref<byte>(), size);
-
         [MethodImpl(Inline), Op]
         public static void write(BinaryCode src, ByteSize size, MemoryAddress dst)
-            => src.Data.CopyTo(edit<byte>(dst, size));
+            => src.Data.CopyTo(z.edit<byte>(dst, size));
     }
 }

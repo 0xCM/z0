@@ -34,6 +34,8 @@ namespace Z0
 
         public FS.FolderPath ClrCoreRoot;
 
+        public FS.FolderPath BuildPubRoot;
+
         [MethodImpl(Inline), Op]
         public static Env create()
         {
@@ -43,6 +45,7 @@ namespace Z0
             dst.DbRoot = read(ZDb).Transform(FS.dir);
             dst.ArchiveRoot = read(Pub).Transform(FS.dir);
             dst.ClrCoreRoot = read("CORE_ROOT").Transform(FS.dir);
+            dst.BuildPubRoot = FS.dir(@"J:\dev\projects\z0\.build\bin\netcoreapp3.1\win-x64");
             return dst;
         }
 

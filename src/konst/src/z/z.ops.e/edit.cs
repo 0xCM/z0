@@ -84,5 +84,13 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ref T edit<S,T>(in S src, ref T dst)
             => ref As<S,T>(ref AsRef(src));
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe Span<T> edit<T>(MemoryAddress src, uint count)
+            => cover(src.Ref<T>(), count);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static unsafe Span<byte> edit(MemoryAddress src, ByteSize size)
+            => cover(src.Ref<byte>(), size);
     }
 }

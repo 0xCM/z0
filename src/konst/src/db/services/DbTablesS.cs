@@ -28,7 +28,7 @@ namespace Z0
         {
             Db = archive;
             Subject = subject;
-            Root = Db.DbPaths.TableRoot() + FS.folder(subject.ToString());
+            Root = archive.TableRoot();
         }
 
         public void Clear()

@@ -10,25 +10,29 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct BuildArchive : IBuildArchive
+    public interface IBuildArchive : IFileArchive<BuildArchive>
+    {
+        IModuleArchive Modules {get;}
+    }
+
+    public struct BuildArchive : IBuildArchive
     {
         /// <summary>
         /// Creates an archive over the output of a build
         /// </summary>
         /// <param name="root">The archive root</param>
         [MethodImpl(Inline), Op]
-        public static IBuildArchive create(ArchiveConfig root)
+        public static IBuildArchive create(FS.FolderPath root)
             => new BuildArchive(root);
 
-        public FS.FolderPath Root => Config.Root;
+        public FS.FolderPath Root{get;}
 
-        public ArchiveConfig Config {get;}
 
         [MethodImpl(Inline)]
-        public BuildArchive(ArchiveConfig config)
-            => Config = config;
+        public BuildArchive(FS.FolderPath root)
+            => Root = root;
 
         public IModuleArchive Modules
-            => ModuleArchive.create(Config);
+            => ModuleArchive.create(Root);
     }
 }

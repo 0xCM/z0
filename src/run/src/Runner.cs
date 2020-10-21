@@ -291,7 +291,7 @@ namespace Z0
 
         void EmitOpCodes()
         {
-            new EmitAsmOpCodes().Configure(Wf.Db().DbPaths.DbRoot + FS.file("AsmOpcodes", Csv)).Run(Wf);
+            new EmitAsmOpCodes().Configure(Wf.Db().Root + FS.file("AsmOpcodes", Csv)).Run(Wf);
         }
 
         // public static ReadOnlySpan<AsmRoutineCode> decode(IAsmWf asmWf, MethodInfo[] src, FS.FilePath target)

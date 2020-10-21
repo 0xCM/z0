@@ -6,20 +6,9 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
 
-    public interface IFileArchive
+    public interface IFileArchive : IFileArchivePaths
     {
-        FS.FolderPath Root {get;}
-
-        IEnumerable<FS.FolderPath> Directories()
-            => ApiFiles.directories(Root, true);
-
-        IEnumerable<FS.FilePath> Files()
-            => ApiFiles.files(Root, true);
-
-        IEnumerable<FS.FilePath> Files(FS.FileExt ext)
-            => ApiFiles.files(Root, true);
 
     }
 
@@ -33,9 +22,6 @@ namespace Z0
         where H : IFileArchive<H>
         where F : IFile
     {
-        new IEnumerable<F> Files();
-
-        IEnumerable<FS.FilePath> IFileArchive.Files()
-            => Files().Select(x => x.Path);
+        IEnumerable<F> Files();
     }
 }

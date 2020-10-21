@@ -13,6 +13,10 @@ namespace Z0
     [ApiHost(ApiNames.Db, true)]
     public readonly partial struct Db
     {
+        [MethodImpl(Inline), Op]
+        public static FileDbPaths paths(FS.FolderPath root)
+            => new FileDbPaths(root);
+
         [Op]
         public static PartFiles partfiles(IWfShell wf)
         {
@@ -28,10 +32,8 @@ namespace Z0
             => new DbTables<S>(wf.Db(), subject);
 
         [MethodImpl(Inline), Op]
-        public static IFileDb files(IWfShell wf, DbPaths paths)
-            => new DbFiles(wf, paths);
-
-
+        public static IFileDb files(IWfShell wf, FileDbPaths paths)
+            => new FileDb(wf, paths);
 
         [MethodImpl(Inline), Op]
         public string literal(N0 n)

@@ -12,6 +12,8 @@ namespace Z0
 
     public readonly struct RenderPatternSource : ITextual
     {
+        public const string FormatPattern = "{0}:{1}";
+
         readonly FieldInfo Field;
 
         readonly StringRef Content;
@@ -23,7 +25,8 @@ namespace Z0
             Content = content;
         }
 
+        [MethodImpl(Inline)]
         public string Format()
-            => StringRefs.format("{0} | {1}", Field.Name, Content);
+            => StringRefs.format(FormatPattern, Field.Name, Content);
     }
 }

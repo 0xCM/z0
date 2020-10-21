@@ -6,8 +6,6 @@ namespace Z0
 {
     public interface ISemanticArchive : IPartFilePaths
     {
-        IDbPaths DbPaths {get;}
-
         FS.FolderName SemanticFolder {get;}
 
         FS.FileExt SemanticExt {get;}

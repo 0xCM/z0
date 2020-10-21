@@ -22,7 +22,6 @@ namespace Z0
         public static TypeCodeIndex index(in ClrTypeCodes src)
             => new TypeCodeIndex(src.Types);
 
-
         [MethodImpl(Inline), Op]
         public static ref readonly Type type(in ClrTypeCodes src, TypeCode tc)
             => ref src[tc];

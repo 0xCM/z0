@@ -57,7 +57,7 @@ namespace Z0
             => FS.dir(Shell.Paths.AppDataRoot.Name);
 
         IFileDb Db()
-            => Z0.Db.files(this, DbPaths.create(this));
+            => Z0.Db.files(this, new FileDbPaths(EnvRules.Default.DbRoot()));
 
         WfEventId Raise<E>(in E e)
             where E : IWfEvent
@@ -246,6 +246,9 @@ namespace Z0
 
         void EmittedFile<T>(T source, Count count, FS.FilePath dst)
             => Raise(new EmittedFileEvent<T>(Host, source, count, dst, Ct));
+
+        void EmittedFile(Count count, FS.FilePath dst)
+            => Raise(new EmittedFileEvent(Host, dst, count, Ct));
 
         void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst, T t = default)
             where T : struct

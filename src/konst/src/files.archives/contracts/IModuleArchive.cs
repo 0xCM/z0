@@ -18,6 +18,5 @@ namespace Z0
         IEnumerable<FileModule> NativeExeFiles();
 
         IEnumerable<FileModule> StaticLibs();
-
     }
 }

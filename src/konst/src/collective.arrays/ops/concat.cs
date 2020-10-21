@@ -23,45 +23,7 @@ namespace Z0
             => concat(src.ToArray());
 
         /// <summary>
-        /// Concatenates an array sequence
-        /// </summary>
-        /// <param name="src">The source arrays</param>
-        [Op]
-        public static void concat(byte[][] src, byte[] dst)
-        {
-            ref var target = ref first(span(dst));
-            var k = 0u;
-
-            var members = span(src);
-            var terms = members.Length;
-            for(uint i=0u; i<terms; i++)
-            {
-                var term = span(z.skip(members,i));
-                Buffers.copy(first(term), (uint)term.Length, ref target, ref k);
-            }
-        }
-
-        /// <summary>
-        /// Concatenates an array sequence
-        /// </summary>
-        /// <param name="src">The source arrays</param>
-        [MethodImpl(Inline), Op]
-        public static byte[] concat(byte[][] src)
-        {
-            var members = span(src);
-            var terms = members.Length;
-            var items = 0;
-
-            for(var i=0; i<terms; i++)
-                items += members[i].Length;
-
-            var dst = alloc<byte>(items);
-            concat(src,dst);
-            return dst;
-        }
-
-        /// <summary>
-        /// Concatentates two arrays
+        /// Concatenates two arrays
         /// </summary>
         /// <param name="left">The first array</param>
         /// <param name="right">The second array</param>

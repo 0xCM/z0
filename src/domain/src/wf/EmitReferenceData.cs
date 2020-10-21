@@ -24,8 +24,6 @@ namespace Z0
 
     public ref struct EmitReferenceDataStep
     {
-        public readonly FS.FilePath TargetPath;
-
         public uint EmissionCount;
 
         readonly IWfShell Wf;
@@ -35,21 +33,20 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmitReferenceDataStep(IWfShell wf, WfHost host)
         {
-            Wf = wf;
             Host = host;
-            TargetPath =  Wf.Db().DbPaths.Doc("documents", FileKindType.Csv);
+            Wf = wf.WithHost(Host);
             EmissionCount = 0;
             Wf.Created(Host);
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
 
         public void Run()
         {
-            Wf.Running(Host);
+            Wf.Running();
 
             XedEtlWfHost.create().Run(Wf);
 
@@ -58,7 +55,7 @@ namespace Z0
             EmissionCount = (uint)entries.Length;
 
             var f = Table.formatter<ContentLibField>();
-
+            var target = Wf.Db().RefDataRoot() + FS.file("index", ArchiveFileKinds.Csv);
             for(var i=0u; i<EmissionCount; i++)
             {
                 ref readonly var entry = ref skip(entries, i);
@@ -67,10 +64,10 @@ namespace Z0
                 f.EmitEol();
             }
 
-            using var dst = TargetPath.Writer();
+            using var dst = target.Writer();
             dst.Write(f.Format());
 
-            Wf.EmittedTable<DocLibEntry>(Host, EmissionCount, FS.path(TargetPath.Name));
+            Wf.EmittedTable<DocLibEntry>(Host, EmissionCount, target);
         }
     }
 }

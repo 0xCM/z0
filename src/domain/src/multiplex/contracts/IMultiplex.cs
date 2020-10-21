@@ -5,9 +5,16 @@
 namespace Z0
 {
     using System;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    public interface IFileDb : IFileDbPaths, IFileDbOps
+    using static Konst;
+    using static z;
+
+    [Free]
+    public interface IMultiplex
     {
+        IBuildArchive BuildArchive {get;}
 
+        IModuleArchive Modules {get;}
     }
 }

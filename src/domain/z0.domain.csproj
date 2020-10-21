@@ -12,6 +12,8 @@
     <ProjectReference Include="$(Clr)" />
     <ProjectReference Include="$(gmath)" />
     <ProjectReference Include="$(MathSvc)" />
+    <ProjectReference Include="$(Xed)" />
+    <ProjectReference Include="$(Refs)" />
 
   </ItemGroup>
 

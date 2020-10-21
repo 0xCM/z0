@@ -5,9 +5,15 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public interface IFileDb : IFileDbPaths, IFileDbOps
+    using static Konst;
+    using static z;
+
+    public struct MultiplexSettings
     {
+        public FS.FolderPath DbRoot;
 
+        public FS.FolderPath BuildRoot;
     }
 }
