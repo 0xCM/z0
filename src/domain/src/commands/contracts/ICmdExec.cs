@@ -14,8 +14,6 @@ namespace Z0
     {
         CmdId Id {get;}
 
-        ClrArtifactKey Host {get;}
-
         CmdResult Exec(CmdSpec cmd);
     }
 

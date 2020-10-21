@@ -18,36 +18,40 @@ namespace Z0
     {
         const string MissingPattern = "Implementation amiss | {0} | {1} | {2}";
 
-        const string LengthMismatch = "Length mismatch: {0} != {1}";
+        const string HandlerNotFound = "Handler for {0} not found";
 
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        [Op, Closures(UInt64k)]
         public static ErrorEvent<Pair<T>> neq<T>(WfStepId step, Pair<T> data, CorrelationToken ct, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
              => neq(step, data, ct, Workflow.source(caller,file,line));
 
-        [MethodImpl(Inline), Op]
+        [Op]
+        public static ErrorEvent<string> missing(CmdId cmd, [Caller] string caller = null, [File] string file= null, [Line] int? line = null)
+            => new ErrorEvent<string>(cmd, string.Format(HandlerNotFound, cmd), CorrelationToken.Empty, Workflow.source(caller,file,line));
+
+        [Op]
         public static ErrorEvent<string> missing(WfStepId step, string caller, string file, int? line, CorrelationToken? ct = null)
             => error(step, text.format(MissingPattern, caller, file, line), ct ?? CorrelationToken.Empty, Workflow.source(caller,file,line));
 
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        [Op, Closures(UInt64k)]
         public static ErrorEvent<Pair<T>> length<T>(WfStepId step, T a, T b, CorrelationToken ct, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => new ErrorEvent<Pair<T>>(step, z.pair(a,b), ct, Workflow.source(caller,file,line));
 
         public static AppException length(WfStepId step, int a, int b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(AppErrorMsg.LengthMismatch(a,b,caller,file,line));
 
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        [Op, Closures(UInt64k)]
         public static ErrorEvent<Pair<T>> neq<T>(WfStepId step, Pair<T> data, CorrelationToken ct, AppMsgSource source)
              => new ErrorEvent<Pair<T>>(step, data, ct, source);
 
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        [Op, Closures(UInt64k)]
         public static ErrorEvent<T> error<T>(string actor, T content, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
             => new ErrorEvent<T>(actor, content, ct, source(caller,file,line));
 
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        [Op, Closures(UInt64k)]
         public static ErrorEvent<T> error<T>(WfStepId step, T content, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
                 => new ErrorEvent<T>(step, content, ct, source(caller,file,line));
 
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        [Op, Closures(UInt64k)]
         public static ErrorEvent<T> error<T>(WfStepId step, T content, CorrelationToken ct, AppMsgSource origin)
             => new ErrorEvent<T>(step, content, ct, origin);
 

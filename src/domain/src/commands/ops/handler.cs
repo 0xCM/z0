@@ -10,21 +10,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public interface ICmdOptionData<H> : ICmdOption
-        where H : struct,  ICmdOptionData<H>
+    partial struct Cmd
     {
-
-    }
-
-    public interface ICmdOptionData<H,T> : ICmdOption<T>
-        where H : struct,  ICmdOptionData<H,T>
-    {
-
-    }
-
-    public interface ICmdOptionData<H,K,T> : ICmdOptionData<H,T>
-        where H : struct,  ICmdOptionData<H,K,T>
-    {
-
+        [MethodImpl(Inline), Op]
+        public static CmdHandler handler(CmdId id, Func<CmdSpec,CmdResult> fx)
+            => new CmdHandler(id,fx);
     }
 }

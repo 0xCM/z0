@@ -49,7 +49,8 @@ namespace Z0
         public unsafe void Run()
         {
             var steps = Wf.Steps();
-            steps.Run(typeof(EmitRenderPatterns));
+            var id = Cmd.id<EmitRenderPatterns>();
+            steps.Run(id);
 
             var resources = @readonly(Mpx.ResourceDescriptors(Wf.Controller));
             var count = resources.Length;

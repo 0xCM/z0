@@ -13,12 +13,12 @@ namespace Z0
     public readonly struct CmdParser
     {
         public ParseResult<CmdSpec> ParseSpec(string src)
-            => CmdParse.spec(src);
+            => Cmd.spec(src);
 
         public ParseResult<CmdId> ParseId(string src)
-            => CmdParse.id(src);
+            => Cmd.id(src);
 
         public ParseResult<CmdOption> ParseOption(string src)
-            => CmdParse.option(src);
+            => Cmd.option(src);
     }
 }

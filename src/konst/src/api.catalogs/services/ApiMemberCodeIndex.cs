@@ -15,38 +15,14 @@ namespace Z0
     /// <summary>
     /// Correlates operation identifiers and coded members
     /// </summary>
-    public readonly struct ApiMemberCodeIndex : IApiView<ApiMemberCodeIndex,ApiOpIndex<ApiMemberCode>>
+    public readonly struct ApiMemberCodeIndex
     {
-        static ApiOpIndex<(L left, R right)> intersect<L,R>(IApiOpIndex<L> left, IApiOpIndex<R> right)
-        {
-             var keys = left.Keys.ToHashSet();
-             keys.IntersectWith(right.Keys);
-             var keylist = keys.ToArray();
-             var count = keylist.Length;
-             var entries = Arrays.alloc<(OpIdentity,(L,R))>(count);
-             for(var i=0; i<count; i++)
-             {
-                var key = keylist[i];
-                entries[i] = (key, (left[key], right[key]));
-             }
-             return ApiCodeIndices.index(entries);
-         }
-
-        internal static ApiMemberCodeIndex create(ApiMemberIndex members, ApiOpIndex<ApiCodeBlock> code)
-        {
-            var apicode = from pair in intersect(members, code).Enumerated
-                          let l = pair.Item1
-                          let r = pair.Item2
-                          select new ApiMemberCode(r.left, r.right);
-            return new ApiMemberCodeIndex(create(apicode.Select(c => (c.Id, c))));
-        }
-
         readonly IReadOnlyDictionary<OpIdentity,ApiMemberCode> Hashtable;
 
         public ApiOpIndex<ApiMemberCode> Source {get;}
 
         [MethodImpl(Inline)]
-        public ApiMemberCodeIndex(in ApiOpIndex<ApiMemberCode> code)
+        internal ApiMemberCodeIndex(in ApiOpIndex<ApiMemberCode> code)
         {
             Source = code;
             Hashtable = code.Enumerated.ToDictionary();
@@ -112,29 +88,5 @@ namespace Z0
             => from code in Values
                 where code.Method.IsKindedOperator() && code.Method.ArityValue() == arity
                 select code;
-
-        static ApiOpIndex<T> create<T>(IEnumerable<(OpIdentity,T)> src)
-        {
-            try
-            {
-                var items = src.ToArray();
-                var identities = items.Select(x => x.Item1).ToArray();
-                var duplicates = (from g in identities.GroupBy(i => i.Identifier)
-                                where g.Count() > 1
-                                select g.Key).ToHashSet();
-
-                var dst = new Dictionary<OpIdentity,T>();
-                if(duplicates.Count() != 0)
-                    dst = items.Where(i => !duplicates.Contains(i.Item1.Identifier)).ToDictionary();
-                else
-                    dst = src.ToDictionary();
-                return new ApiOpIndex<T>(dst, duplicates.Select(d => OpIdentityParser.parse(d)).Array());
-            }
-            catch(Exception e)
-            {
-                term.error(e);
-                return ApiOpIndex<T>.Empty;
-            }
-        }
     }
 }

@@ -14,15 +14,12 @@ namespace Z0
     {
         public CmdId Id {get;}
 
-        public ClrArtifactKey Host {get;}
-
         readonly Func<CmdSpec,CmdResult> Fx;
 
         [MethodImpl(Inline)]
-        public CmdHandler(CmdId id, ClrArtifactKey host, Func<CmdSpec,CmdResult> fx)
+        public CmdHandler(CmdId id, Func<CmdSpec,CmdResult> fx)
         {
             Id = id;
-            Host = host;
             Fx = fx;
         }
 

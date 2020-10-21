@@ -11,8 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.ApiEnumCatalog, true)]
-    public readonly struct ApiEnumCatalog
+    partial struct ApiQuery
     {
         [Op]
         public static ReadOnlySpan<EnumLiteralRow> enums(PartId part, Type src)

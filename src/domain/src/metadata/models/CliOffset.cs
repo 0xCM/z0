@@ -6,25 +6,27 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
 
     using static Konst;
     using static z;
 
-    public readonly struct CmdSpec<K,T> : ICmdSpec<CmdSpec<K,T>,K,T>
-        where K : unmanaged
+    [StructLayout(LayoutKind.Sequential), Table(TableId,FieldCount)]
+    public struct CliOffset
     {
-        internal readonly CmdOption<K,T>[] OptionStorage;
+        public const string TableId = "cli.offsets";
 
-        public CmdId Id {get;}
+        public const byte FieldCount = 2;
 
-        public ReadOnlySpan<CmdOption<K,T>> Options
-            => OptionStorage;
+        public string Name;
+
+        public ulong Value;
 
         [MethodImpl(Inline)]
-        public CmdSpec(CmdId id, params CmdOption<K,T>[] options)
+        public CliOffset(string name, ulong address)
         {
-            Id = id;
-            OptionStorage = options;
+            Name = name;
+            Value  = address;
         }
     }
 }

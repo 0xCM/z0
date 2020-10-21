@@ -320,5 +320,19 @@
 		"paths": [],
 		"group": "",
 		"enabled": true
+	},
+	{
+		"name": "ms/msbuild",
+		"rootPath": "j:\\lang\\net\\msbuild",
+		"paths": [],
+		"group": "",
+		"enabled": true
+	},
+	{
+		"name": "ms/detours",
+		"rootPath": "j:\\lang\\tools\\Detours",
+		"paths": [],
+		"group": "",
+		"enabled": true
 	}
 ]

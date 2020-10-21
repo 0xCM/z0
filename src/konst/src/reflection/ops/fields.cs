@@ -19,6 +19,6 @@ namespace Z0
         /// <param name="src">The type to examine</param>
         [MethodImpl(Inline), Op]
         public static Indexed<FieldInfo> fields(Type src)
-            => src.GetFields(BF);
+            => src.GetFields(ReflectionFlags.BF_All);
     }
 }

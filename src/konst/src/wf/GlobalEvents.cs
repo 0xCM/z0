@@ -17,6 +17,10 @@ namespace Z0
 
         public const string Ran = nameof(Ran);
 
+        public const string RanCmd = nameof(RanCmd);
+
+        public const string RunningCmd = nameof(RunningCmd);
+
         public const string Trace = nameof(Trace);
 
         public const string Status = nameof(Status);

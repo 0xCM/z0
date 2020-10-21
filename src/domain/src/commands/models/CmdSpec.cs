@@ -10,32 +10,17 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using api = Cmd;
-
-
-    public readonly struct CmdSpec
+    public struct CmdSpec
     {
-        internal readonly CmdOption[] OptionStorage;
-
         public CmdId Id {get;}
 
-        public Span<CmdOption> Options
-        {
-            [MethodImpl(Inline)]
-            get => OptionStorage;
-        }
+        public CmdOption[] Options;
 
         [MethodImpl(Inline)]
         public CmdSpec(CmdId id, params CmdOption[] options)
         {
             Id = id;
-            OptionStorage = options;
-        }
-
-        public CmdSpecData Data
-        {
-            [MethodImpl(Inline)]
-            get => api.data(this);
+            Options = options;
         }
     }
 }

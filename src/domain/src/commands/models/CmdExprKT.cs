@@ -15,8 +15,6 @@ namespace Z0
     {
         public K Id {get;}
 
-        public bool Anonymous {get;}
-
         public T Content {get;}
 
         [MethodImpl(Inline)]
@@ -24,7 +22,6 @@ namespace Z0
         {
             Id = default;
             Content = src;
-            Anonymous = true;
         }
 
         [MethodImpl(Inline)]
@@ -32,7 +29,6 @@ namespace Z0
         {
             Id = id;
             Content = src;
-            Anonymous = false;
         }
 
         [MethodImpl(Inline)]

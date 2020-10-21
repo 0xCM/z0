@@ -12,21 +12,21 @@ namespace Z0
 
     public readonly struct CmdPattern
     {
-        public string Id {get;}
+        public string PatternId {get;}
 
         public string Content {get;}
 
         [MethodImpl(Inline)]
         public CmdPattern(string content)
         {
-            Id = Cmd.Anonymous;
+            PatternId = Cmd.Anonymous;
             Content = content;
         }
 
         [MethodImpl(Inline)]
         public CmdPattern(string id, string content)
         {
-            Id = id;
+            PatternId = id;
             Content = content;
         }
 
@@ -57,6 +57,7 @@ namespace Z0
         public override string ToString()
             => Content;
 
-        public static CmdPattern Empty => new CmdPattern(EmptyString, EmptyString);
+        public static CmdPattern Empty
+            => new CmdPattern(EmptyString, EmptyString);
     }
 }

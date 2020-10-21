@@ -6,14 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
     using static z;
 
-    [ApiHost]
-    public readonly partial struct ClrCmd
+    partial struct Cmd
     {
-
+        [MethodImpl(Inline)]
+        public static string name<K,T>(in CmdOption<K,T> src)
+            where K : unmanaged
+                => src.Kind.ToString();
     }
 }

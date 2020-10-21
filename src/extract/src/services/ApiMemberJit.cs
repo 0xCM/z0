@@ -94,7 +94,7 @@ namespace Z0
         public static HostedMethod[] JitGeneric(IApiHost[] src, IWfEventSink sink)
         {
             var methods = GenericMethods(src, sink);
-            var closed = methods.SelectMany(m => (from t in Reflex.NumericClosureTypes(m.Method) select new HostedMethod(m.Host, m.Method.MakeGenericMethod(t))));
+            var closed = methods.SelectMany(m => (from t in ApiQuery.NumericClosureTypes(m.Method) select new HostedMethod(m.Host, m.Method.MakeGenericMethod(t))));
             var located = closed.Select(m => m.WithLocation(Root.address(Jit(m.Method))));
             Array.Sort(located);
             return located;
@@ -118,7 +118,7 @@ namespace Z0
         }
 
         public static ApiMember[] JitLocatedDirect(IApiHost src)
-            =>  from m in ApiMemberQuery.DirectMethods(src)
+            =>  from m in ApiQuery.DirectMethods(src)
                 let kid = m.Method.KindId()
                 let id = Diviner.Identify(m.Method)
                 let uri = OpUri.Define(ApiUriScheme.Located, src.Uri, m.Method.Name, id)
@@ -126,9 +126,9 @@ namespace Z0
                 select new ApiMember(uri, m.Method, kid, address);
 
         public static ApiMember[] JitGeneric(IApiHost src)
-            =>  (from m in ApiMemberQuery.GenericMethods(src)
+            =>  (from m in ApiQuery.GenericMethods(src)
                 let kid = m.Method.KindId()
-                from t in Reflex.NumericClosureTypes(m.Method)
+                from t in ApiQuery.NumericClosureTypes(m.Method)
                 let reified = m.Method.MakeGenericMethod(t)
                 let address = Root.address(Jit(reified))
                 let id = Diviner.Identify(reified)
@@ -141,7 +141,7 @@ namespace Z0
             var dst = z.list<HostedMethod>();
             foreach(var host in src)
             {
-                var methods = ApiMemberQuery.DirectMethods(host);
+                var methods = ApiQuery.DirectMethods(host);
                 if(methods.Length != 0)
                 {
                     broker.Deposit(new MethodsPrepared(WfActor.create(), host.Uri, methods.Length, correlate(0ul)));
@@ -156,7 +156,7 @@ namespace Z0
             var dst = z.list<HostedMethod>();
             foreach(var host in src)
             {
-                var methods = ApiMemberQuery.GenericMethods(host);
+                var methods = ApiQuery.GenericMethods(host);
                 if(methods.Length != 0)
                 {
                     broker.Deposit(new MethodsPrepared(WfActor.create(), host.Uri, methods.Length, correlate(0ul)));

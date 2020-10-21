@@ -189,6 +189,12 @@ namespace Z0
 
         void Ran();
 
+        void Running(CmdId cmd)
+            => Raise(new RunningCmdEvent(cmd, Ct));
+
+        void Ran(CmdId cmd)
+            => Raise(new RanCmdEvent(cmd, Ct));
+
         void Ran(ExecutionFlow flow);
 
         void Running<T>(WfHost step, T content)

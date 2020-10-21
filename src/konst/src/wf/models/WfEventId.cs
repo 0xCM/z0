@@ -45,12 +45,17 @@ namespace Z0
             => new WfEventId(src.name, src.actor, src.ct);
 
         [MethodImpl(Inline)]
+        public static implicit operator WfEventId((string name, CmdId cmd, CorrelationToken ct) src)
+            => new WfEventId(src.name, src.cmd, src.ct);
+
+        [MethodImpl(Inline)]
         public static implicit operator WfEventId((ToolId tool, CorrelationToken ct) src)
             => new WfEventId(src.tool, src.ct);
 
         [MethodImpl(Inline)]
         public static implicit operator WfEventId((WfFunc fx, CorrelationToken ct) src)
             => new WfEventId(src.fx, src.ct);
+
 
         [MethodImpl(Inline)]
         public WfEventId(string name, CorrelationToken ct, Timestamp? ts = null)
@@ -66,6 +71,14 @@ namespace Z0
             Ts = ts ?? timestamp();
             Ct = ct;
             Identifier = text.format("{0} | {1} | {2}", Ts, Ct, tool);
+        }
+
+        [MethodImpl(Inline)]
+        WfEventId(string name, CmdId cmd, CorrelationToken ct, Timestamp? ts = null)
+        {
+            Ts = ts ?? timestamp();
+            Ct = ct;
+            Identifier = text.format("{0} | {1} | {2} | {3}", Ts, Ct, name, cmd);
         }
 
         [MethodImpl(Inline)]

@@ -28,7 +28,7 @@ namespace Z0
             => locate(src);
 
         static IEnumerable<ApiMember> HostedDirect(IApiHost src)
-            => from m in Reflex.DirectApiMethods(src)
+            => from m in ApiQuery.DirectApiMethods(src)
                 let id = MultiDiviner.Service.Identify(m)
                 let im = new IdentifiedMethod(id,m)
                 let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
@@ -36,8 +36,8 @@ namespace Z0
                 select new ApiMember(uri, located,  m.KindId());
 
         static IEnumerable<ApiMember> HostedGeneric(IApiHost src)
-                => from m in Reflex.GenericApiMethods(src)
-                from closure in Reflex.NumericClosureTypes(m)
+                => from m in ApiQuery.GenericApiMethods(src)
+                from closure in ApiQuery.NumericClosureTypes(m)
                 let reified = m.MakeGenericMethod(closure)
                 let id = MultiDiviner.Service.Identify(reified)
                 let im = new IdentifiedMethod(id,m)

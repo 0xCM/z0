@@ -5,12 +5,12 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    public struct CmdSpecData
+    using static Konst;
+
+    [ApiHost(ApiNames.ApiCatalogExtensions, true)]
+    public static partial class XApiCatalogs
     {
-        public CmdId Id;
-
-        public CmdOptions Options;
+        const NumericKind Closure = UnsignedInts;
     }
 }

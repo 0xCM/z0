@@ -8,13 +8,86 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection;
     using System.Linq;
+    using System.Collections.Generic;
 
     using static Konst;
     using static z;
 
     [ApiHost(ApiNames.ApiQuery, true)]
-    public readonly struct ApiQuery
+    public readonly partial struct ApiQuery
     {
+        [MethodImpl(Inline), Op]
+        public static ApiQueries over(ApiMembers src)
+            => new ApiQueries(src);
+
+        [Op]
+        public static ApiIdentityToken[] identities(ReadOnlySpan<OpIdentity> src, out uint duplicates)
+        {
+            var dst = alloc<ApiIdentityToken>(src.Length);
+            duplicates = ApiIndices.identities(src,dst);
+            return dst;
+        }
+
+        [Op]
+        public static ApiMemberIndex index(ApiMembers src)
+        {
+            var ix = ApiIndices.index(src.Storage.Select(h => (h.Id, h)),true);
+            return new ApiMemberIndex(ix.HashTable, ix.Duplicates);
+        }
+
+        [Op]
+        public static ApiHostMemberCode code(IApiMemberLocator locator, ISystemApiCatalog api, ApiHostUri host, FilePath src)
+        {
+            var code = ApiIndices.index(ApiHexReader.Service.Read(src));
+            var members = index(locator.Locate(api.FindHost(host).Require()));
+            return new ApiHostMemberCode(host, index(members, code));
+        }
+
+        [Op]
+        public static ApiHostMemberCode code(IApiMemberLocator locator, ISystemApiCatalog api, ApiHostUri host, FolderPath root)
+        {
+            var members = locator.Locate(api.FindHost(host).Require());
+            var idx = ApiQuery.index(members);
+            var archive =  ApiFiles.capture(root);
+            var paths =  HostCaptureArchive.create(root, host);
+            var code = ApiHexReader.Service.Read(paths.HostX86Path);
+            var opIndex =  ApiIndices.index(code);
+            return new ApiHostMemberCode(host, ApiQuery.index(idx, opIndex));
+        }
+
+        [Op]
+        public static ApiMemberCodeIndex index(ApiMemberIndex members, ApiOpIndex<ApiCodeBlock> code)
+            => ApiIndices.code(members,code);
+
+        public static HostedMethod[] DirectMethods(IApiHost host)
+            => host.HostType.DeclaredMethods().NonGeneric().Where(ApiQuery.IsDirectApiMember).Select(m => new HostedMethod(host.Uri, m));
+
+        public static HostedMethod[] GenericMethods(IApiHost host)
+            => host.HostType.DeclaredMethods().OpenGeneric(1).Where(ApiQuery.IsGenericApiMember).Select(m => new HostedMethod(host.Uri, m));
+
+        public static bool IsDirectApiMember(MethodInfo src)
+            => src.Tagged<OpAttribute>() && !src.AcceptsImmediate();
+
+        public static bool IsGenericApiMember(MethodInfo src)
+            => src.Tagged<OpAttribute>() && src.Tagged<ClosuresAttribute>() && !src.AcceptsImmediate();
+
+        public static MethodInfo[] GenericMethods<K>(IApiHost src, K kind)
+            where K : unmanaged, Enum
+                => from m in src.HostType.DeclaredMethods().OpenGeneric(1)
+                where m.Tagged<OpAttribute>()
+                && m.Tagged<ClosuresAttribute>()
+                && !m.AcceptsImmediate()
+                && m.KindId().ToString() == kind.ToString()
+                select m;
+
+        public static MethodInfo[] DirectMethods<K>(IApiHost src, K kind)
+            where K : unmanaged, Enum
+                => from m in src.HostType.DeclaredMethods().NonGeneric()
+                where m.Tagged<OpAttribute>()
+                && !m.AcceptsImmediate()
+                && m.KindId().ToString() == kind.ToString()
+                select m;
+
         [Op]
         public static BitMaskRow[] bitmasks(Type src)
             => BitMasks.rows(src);
@@ -45,8 +118,8 @@ namespace Z0
         /// </summary>
         /// <param name="src">The catalog to query</param>
         [MethodImpl(Inline), Op]
-        public static PartCatalogQuery catalog(IApiPartCatalog src)
-            => new PartCatalogQuery(src);
+        public static ApiPartCatalogQuery catalog(IApiPartCatalog src)
+            => new ApiPartCatalogQuery(src);
 
         [MethodImpl(Inline), Op]
         public static ApiHostMemberQuery host(IApiHost host)
@@ -94,7 +167,6 @@ namespace Z0
 
         public static bool nonempty(Assembly src)
             => src.GetTypes().Where(t => t.Reifies<IPart>() && !t.IsAbstract).Count() > 0;
-
 
         [Op]
         public static ApiHostInfo host<H>()
@@ -171,5 +243,55 @@ namespace Z0
         [Op]
         public static ApiPartSet components(FS.FolderPath src)
             => new ApiPartSet(src);
+
+
+        public static IEnumerable<MethodInfo> DirectApiMethods(IApiHost src)
+            => from m in src.HostType.DeclaredMethods().NonGeneric()
+                where m.Tagged<OpAttribute>() && !m.AcceptsImmediate()
+                select m;
+
+        public static IEnumerable<MethodInfo> GenericApiMethods(IApiHost src)
+                => from m in src.HostType.DeclaredMethods().OpenGeneric(1)
+                    where m.Tagged<OpAttribute>()
+                    && m.Tagged<ClosuresAttribute>()
+                    && !m.AcceptsImmediate()
+                    select m;
+
+        /// <summary>
+        /// Computes a method's numeric closures, predicated on available metadata
+        /// </summary>
+        /// <param name="m">The source method</param>
+        public static NumericKind[] NumericClosureKinds(MethodInfo m)
+            => (from tag in m.Tag<ClosuresAttribute>()
+                where tag.Kind == TypeClosureKind.Numeric
+                let spec = (NumericKind)tag.Spec
+                select spec.DistinctKinds().ToArray()).ValueOrElse(() => sys.empty<NumericKind>());
+
+        public static Type[] NumericClosureTypes(MethodInfo m)
+            => from c in NumericClosureKinds(m)
+               let t = c.SystemType()
+               where t != typeof(void)
+               select t;
+
+        /// <summary>
+        /// Computes a types's numeric closures, predicated on available metadata
+        /// </summary>
+        /// <param name="t">The source type</param>
+        public static NumericKind[] NumericClosureKinds(Type t)
+            => (from tag in t.Tag<ClosuresAttribute>()
+                where tag.Kind == TypeClosureKind.Numeric
+                let spec = (NumericKind)tag.Spec
+                select spec.DistinctKinds().ToArray()).ValueOrElse(() => sys.empty<NumericKind>());
+
+        /// <summary>
+        /// Computes a method's natural closures, predicated on available metadata
+        /// </summary>
+        /// <param name="m">The source method</param>
+        public static Type[] NaturalClosureTypes(MethodInfo m)
+            => (from tag in m.Tag<ClosuresAttribute>()
+                where tag.Kind == TypeClosureKind.Natural
+                let spec = (NatClosureKind)tag.Spec
+                select NativeNaturals.FindTypes(spec).ToArray()).ValueOrElse(() => sys.empty<Type>());
+
     }
 }

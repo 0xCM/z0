@@ -13,7 +13,7 @@ namespace Z0
     public readonly struct Indexed<T> : IIndex<T>
     {
         public readonly T[] Data;
-        
+
         public ReadOnlySpan<T> View
         {
             [MethodImpl(Inline)]
@@ -48,7 +48,7 @@ namespace Z0
             found = default;
             return false;
         }
-        
+
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(Indexed<T> src)
             => src.Edit;
@@ -63,7 +63,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public Indexed(T[] content)
-            => Data = content;            
+            => Data = content;
 
         public ref T this[int i]
         {
@@ -76,16 +76,23 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Data[i];
         }
+
         public int Length
         {
             [MethodImpl(Inline)]
             get => (int)Data.Length;
         }
 
-        public ref T Head 
+        public uint Count
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Length;
+        }
+
+        public ref T First
             => ref this[0];
 
-        public ref T Tail
+        public ref T Last
              => ref this[Length - 1];
 
         public Indexed<T> Reverse()

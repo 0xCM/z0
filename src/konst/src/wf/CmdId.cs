@@ -18,13 +18,12 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static CmdId from<T>()
-            where T : struct
-                => from(typeof(T));
+            => from(typeof(T));
 
         readonly StringRef Data;
 
         [MethodImpl(Inline)]
-        internal CmdId(string src)
+        public CmdId(string src)
             => Data = src;
 
         public bool IsEmpty

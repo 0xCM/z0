@@ -12,23 +12,16 @@ namespace Z0
 
     using api = Cmd;
 
-    public readonly struct CmdOption<T> : ICmdOptionData<CmdOption<T>,T>, IIdentified<asci32>
+    public struct CmdOption<T>
     {
-        public asci32 Id {get;}
+        public string Name;
 
-        public T Value {get;}
+        public T Value;
 
         [MethodImpl(Inline)]
         public CmdOption(string id, T value)
         {
-            Id = id;
-            Value = value;
-        }
-
-        [MethodImpl(Inline)]
-        internal CmdOption(in asci32 id, T value)
-        {
-            Id = id;
+            Name = id;
             Value = value;
         }
 
@@ -45,6 +38,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator CmdOption(CmdOption<T> src)
-            => new CmdOption(src.Id, src.Value?.ToString() ?? EmptyString);
+            => new CmdOption(src.Name, src.Value?.ToString() ?? EmptyString);
     }
 }

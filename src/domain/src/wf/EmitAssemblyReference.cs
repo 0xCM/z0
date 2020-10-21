@@ -6,15 +6,18 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
+    using System.Runtime.InteropServices;
 
     using static Konst;
+    using static z;
 
-    [ApiHost(ApiNames.ApiCatalogExtensions, true)]
-    public static partial class XApiCatalogs
+    [StructLayout(LayoutKind.Sequential), Cmd]
+    public struct EmitAssemblyRefsSpec
     {
-        const NumericKind Closure = UnsignedInts;
+        public FS.FilePath Source;
+
+        public FS.FilePath Target;
     }
+
+
 }

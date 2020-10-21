@@ -6,16 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
     using static z;
 
-    [StructLayout(LayoutKind.Sequential)]
-    public struct CmdOptionData<T>
+    partial struct Cmd
     {
-        public asci32 Id;
-
-        public T Value;
+        [MethodImpl(Inline), Op]
+        public static CmdRouter router(IWfShell wf)
+            => new CmdRouter(wf);
     }
 }

@@ -11,7 +11,6 @@ namespace Z0
     using static Konst;
     using static RP;
 
-
     [StructLayout(LayoutKind.Sequential)]
     public struct CliUserString
     {

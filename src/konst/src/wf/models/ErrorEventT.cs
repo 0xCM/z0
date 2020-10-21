@@ -9,7 +9,6 @@ namespace Z0
 
     using static Konst;
     using static Render;
-    using static Workflow;
     using static z;
 
     [Event(EventName)]
@@ -28,6 +27,17 @@ namespace Z0
         public FlairKind Flair {get;}
 
         public AppMsgSource Source {get;}
+
+        [MethodImpl(Inline)]
+        public ErrorEvent(CmdId cmd, T data, CorrelationToken ct, AppMsgSource source)
+        {
+            EventId = (EventName, cmd, ct);
+            StepId = WfStepId.Empty;
+            Actor = cmd.Format();
+            Data = data;
+            Flair =  FlairKind.Error;
+            Source = source;
+        }
 
         [MethodImpl(Inline)]
         public ErrorEvent(string actor, T data, CorrelationToken ct, AppMsgSource source)

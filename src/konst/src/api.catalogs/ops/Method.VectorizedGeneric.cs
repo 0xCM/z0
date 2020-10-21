@@ -6,14 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Reflection;
 
     using static Konst;
 
     partial class XApiCatalogs
     {
+        [MethodImpl(Inline)]
+        public static MethodInfo[] ConcreteOperations(this IApiPartCatalog src)
+            => src.Operations.Concrete();
+
         /// <summary>
         /// Selects open generic source methods that have at least one 128-bit vector parameter
         /// </summary>

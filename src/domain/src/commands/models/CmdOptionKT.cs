@@ -13,12 +13,12 @@ namespace Z0
 
     using api = Cmd;
 
-    public readonly struct CmdOption<K,T> : ICmdOptionData<CmdOption<K,T>,K,T>
+    public struct CmdOption<K,T>
         where K : unmanaged
     {
-        public K Kind {get;}
+        public K Kind;
 
-        public T Value {get;}
+        public T Value;
 
         [MethodImpl(Inline)]
         public CmdOption(K kind, T value)
@@ -27,16 +27,10 @@ namespace Z0
             Value = value;
         }
 
-        public asci32 Id
+        public string Name
         {
             [MethodImpl(Inline)]
             get => api.name(this);
-        }
-
-        public CmdOptionData<K,T> Data
-        {
-            [MethodImpl(Inline)]
-            get => api.data(this);
         }
 
         [MethodImpl(Inline)]
@@ -50,9 +44,6 @@ namespace Z0
         public static implicit operator CmdOption<K,T>((K kind, T value) src)
             => new CmdOption<K,T>(src.kind, src.value);
 
-        [MethodImpl(Inline)]
-        public static implicit operator CmdOptionData<K,T>(CmdOption<K,T> src)
-            => src.Data;
 
         [MethodImpl(Inline)]
         public static implicit operator CmdOption<K,T>(Paired<K,T> src)

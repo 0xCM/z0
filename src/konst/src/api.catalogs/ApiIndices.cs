@@ -18,45 +18,58 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     [ApiHost]
-    public readonly partial struct ApiCodeIndices
+    public readonly partial struct ApiIndices
     {
-        [Op]
-        public static ApiHostMemberCode index(IApiMemberLocator locator, ISystemApiCatalog api, ApiHostUri host, FilePath src)
+        internal static ApiMemberCodeIndex code(ApiMemberIndex members, ApiOpIndex<ApiCodeBlock> code)
         {
-            var code = index(ApiHexReader.Service.Read(src));
-            var members = index(locator.Locate(api.FindHost(host).Require()));
-            return new ApiHostMemberCode(host, index(members, code));
+            var apicode = from pair in intersect(members, code).Enumerated
+                          let l = pair.Item1
+                          let r = pair.Item2
+                          select new ApiMemberCode(r.left, r.right);
+            return new ApiMemberCodeIndex(create(apicode.Select(c => (c.Id, c))));
+        }
+
+        static ApiOpIndex<(L left, R right)> intersect<L,R>(IApiOpIndex<L> left, IApiOpIndex<R> right)
+        {
+             var keys = left.Keys.ToHashSet();
+             keys.IntersectWith(right.Keys);
+             var keylist = keys.ToArray();
+             var count = keylist.Length;
+             var entries = Arrays.alloc<(OpIdentity,(L,R))>(count);
+             for(var i=0; i<count; i++)
+             {
+                var key = keylist[i];
+                entries[i] = (key, (left[key], right[key]));
+             }
+             return ApiIndices.index(entries);
+         }
+
+        static ApiOpIndex<T> create<T>(IEnumerable<(OpIdentity,T)> src)
+        {
+            try
+            {
+                var items = src.ToArray();
+                var identities = items.Select(x => x.Item1).ToArray();
+                var duplicates = (from g in identities.GroupBy(i => i.Identifier)
+                                where g.Count() > 1
+                                select g.Key).ToHashSet();
+
+                var dst = new Dictionary<OpIdentity,T>();
+                if(duplicates.Count() != 0)
+                    dst = items.Where(i => !duplicates.Contains(i.Item1.Identifier)).ToDictionary();
+                else
+                    dst = src.ToDictionary();
+                return new ApiOpIndex<T>(dst, duplicates.Select(d => OpIdentityParser.parse(d)).Array());
+            }
+            catch(Exception e)
+            {
+                term.error(e);
+                return ApiOpIndex<T>.Empty;
+            }
         }
 
         [Op]
-        public static ApiHostMemberCode index(IApiMemberLocator locator, ISystemApiCatalog api, ApiHostUri host, FolderPath root)
-        {
-            var members = locator.Locate(api.FindHost(host).Require());
-            var idx = index(members);
-            var archive =  ApiFiles.capture(root);
-            var paths =  HostCaptureArchive.create(root, host);
-            var code = ApiHexReader.Service.Read(paths.HostX86Path);
-            var opIndex =  index(code);
-            return new ApiHostMemberCode(host, index(idx, opIndex));
-        }
-
-        [Op]
-        public static ApiMemberIndex index(ApiMembers src)
-        {
-            var ix = index(src.Storage.Select(h => (h.Id, h)),true);
-            return new ApiMemberIndex(ix.HashTable, ix.Duplicates);
-        }
-
-        [Op]
-        public static ApiIdentityToken[] index(ReadOnlySpan<OpIdentity> src, out uint duplicates)
-        {
-            var dst = alloc<ApiIdentityToken>(src.Length);
-            duplicates = index(src,dst);
-            return dst;
-        }
-
-        [Op]
-        public static uint index(ReadOnlySpan<OpIdentity> src, Span<ApiIdentityToken> dst)
+        public static uint identities(ReadOnlySpan<OpIdentity> src, Span<ApiIdentityToken> dst)
         {
             var count = min(src.Length,dst.Length);
             if(count == 0)
@@ -82,7 +95,7 @@ namespace Z0
 
         [Op]
         public static ApiMemberCodeIndex index(ApiMemberIndex members, ApiOpIndex<ApiCodeBlock> code)
-            => ApiMemberCodeIndex.create(members,code);
+            => ApiIndices.code(members,code);
 
         /// <summary>
         /// Creates an operation index from an api member span, readonly that is

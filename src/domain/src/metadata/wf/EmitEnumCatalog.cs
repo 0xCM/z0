@@ -10,7 +10,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static ApiEnumCatalog;
 
     [WfHost]
     public sealed class EmitEnumCatalog : WfHost<EmitEnumCatalog>
@@ -53,7 +52,7 @@ namespace Z0
                 {
                     var y = x[j];
                     (var part, var type) = y;
-                    var records = enums(part,type);
+                    var records = ApiQuery.enums(part,type);
                     for(var k = 0; k<records.Length; k++)
                         dst.Add(records[k]);
                 }

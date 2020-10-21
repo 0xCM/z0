@@ -30,7 +30,7 @@ namespace Z0
             where K : unmanaged
                 => string.Format(pattern.Content, args.Select(a => a.Format()));
 
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static CmdExpr format<K>(in CmdPattern pattern, params CmdVar<K>[] args)
             where K : unmanaged
                 => string.Format(pattern.Content, args.Select(a => a.Format()));
@@ -41,7 +41,7 @@ namespace Z0
         /// <param name="src">The data source</param>
         [MethodImpl(Inline), Op]
         public static string format(in CmdOption src)
-            => Render.setting(src.Id, src.Value);
+            => Render.setting(src.Name, src.Value);
 
         /// <summary>
         /// Renders a specified option as text
@@ -50,7 +50,7 @@ namespace Z0
         /// <typeparam name="T">The option value type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static string format<T>(in CmdOption<T> src)
-            => Render.setting(src.Id, src.Value);
+            => Render.setting(src.Name, src.Value);
 
         /// <summary>
         /// Renders a specified option as text
@@ -61,7 +61,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string format<K,T>(in CmdOption<K,T> src)
             where K : unmanaged
-                => Render.setting(src.Id, src.Value);
+                => Render.setting(src.Name, src.Value);
 
         public static string format<K,T>(in CmdOptions<K,T> src)
             where K : unmanaged
@@ -81,7 +81,6 @@ namespace Z0
             render(src,dst);
             return dst.Emit();
         }
-
 
         [Op]
         public static string format(in CmdScript src)
