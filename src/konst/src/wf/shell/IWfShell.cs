@@ -5,7 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.IO;
 
     using static Konst;
     using static z;
@@ -15,11 +14,6 @@ namespace Z0
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
     using static WfEvents;
-
-    public interface IWfShell<C> : IWfContext, IStateful<C>
-    {
-        IWfShell Shell {get;}
-    }
 
     public interface IWfShell : IWfContext, IDisposable
     {
@@ -99,16 +93,16 @@ namespace Z0
             => Warn(Host,content);
 
         void Error(Exception e, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-            => Raise(error(e,  Ct, caller, file, line));
+            => Raise(WfErrors.error(e,  Ct, caller, file, line));
 
         void Error(WfStepId step, Exception e, CorrelationToken? ct = null, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
-            => Raise(error(e, ct ?? Ct, caller, file, line));
+            => Raise(WfErrors.error(e, ct ?? Ct, caller, file, line));
 
         void Error<T>(WfStepId step, T body)
-            => Raise(error(step, body, Ct));
+            => Raise(WfErrors.error(step, body, Ct));
 
         void Error(WfStepId step, Exception e)
-            => Raise(WfEvents.error(step, e, Ct));
+            => Raise(WfErrors.error(step, e, Ct));
 
         void Error(Exception e)
             => Error(Host, e);
@@ -118,7 +112,7 @@ namespace Z0
 
         void Error<H>(H host, Exception e)
             where H : WfHost<H>, new()
-                => Raise(WfEvents.error(host.Id, e, Ct));
+                => Raise(WfErrors.error(host.Id, e, Ct));
 
         // ~ Lifecycle
         // ~ ---------------------------------------------------------------------------

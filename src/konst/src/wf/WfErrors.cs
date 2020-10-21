@@ -14,11 +14,11 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
-    partial struct WfEvents
+    public readonly struct WfErrors
     {
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
-        public static ErrorEvent<Pair<T>> neq<T>(WfStepId step, Pair<T> data, CorrelationToken ct, AppMsgSource source)
-             => new ErrorEvent<Pair<T>>(step, data, ct, source);
+        const string MissingPattern = "Implementation amiss | {0} | {1} | {2}";
+
+        const string LengthMismatch = "Length mismatch: {0} != {1}";
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static ErrorEvent<Pair<T>> neq<T>(WfStepId step, Pair<T> data, CorrelationToken ct, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
@@ -26,7 +26,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static ErrorEvent<string> missing(WfStepId step, string caller, string file, int? line, CorrelationToken? ct = null)
-            => WfEvents.error(step, text.format(MissingPattern, caller, file, line), ct ?? CorrelationToken.Empty, Workflow.source(caller,file,line));
+            => error(step, text.format(MissingPattern, caller, file, line), ct ?? CorrelationToken.Empty, Workflow.source(caller,file,line));
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static ErrorEvent<Pair<T>> length<T>(WfStepId step, T a, T b, CorrelationToken ct, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
@@ -34,6 +34,10 @@ namespace Z0
 
         public static AppException length(WfStepId step, int a, int b, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
             => AppException.Define(AppErrorMsg.LengthMismatch(a,b,caller,file,line));
+
+        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        public static ErrorEvent<Pair<T>> neq<T>(WfStepId step, Pair<T> data, CorrelationToken ct, AppMsgSource source)
+             => new ErrorEvent<Pair<T>>(step, data, ct, source);
 
         [MethodImpl(Inline), Op, Closures(UInt64k)]
         public static ErrorEvent<T> error<T>(string actor, T content, CorrelationToken ct, [Caller] string caller  = null, [File] string file = null, [Line] int? line = null)
@@ -57,10 +61,6 @@ namespace Z0
             var msg = text.format(Pattern, where, what);
             return error(caller, msg, ct);
         }
-
-        const string MissingPattern = "Implementation amiss | {0} | {1} | {2}";
-
-        const string LengthMismatch = "Length mismatch: {0} != {1}";
-
     }
+
 }

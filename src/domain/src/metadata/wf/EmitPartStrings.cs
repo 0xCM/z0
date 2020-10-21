@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static EmitPartStrings;
     using static z;
 
     using F = CliStringRecord.Fields;
@@ -18,13 +17,13 @@ namespace Z0
     [WfHost]
     public sealed class EmitPartStrings : WfHost<EmitPartStrings>
     {
-        public static WfStepId StepId
-            => Workflow.step<EmitPartStrings>();
+
 
     }
 
     ref struct EmitPartStringsStep
     {
+        readonly WfHost Host;
         /// <summary>
         /// Indicates the number of records emitted after running
         /// </summary>
@@ -41,7 +40,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public EmitPartStringsStep(IWfShell wf, IPart part, R.Kind sk, CorrelationToken ct)
         {
-            Wf = wf;
+            Host = new EmitPartStrings();
+            Wf = wf.WithHost(Host);
             Part = part;
             if(sk == R.Kind.System)
                 TargetPath = Wf.Db().Table(part.Id, CliSystemString.TableId, FileKindType.Csv);
@@ -49,12 +49,12 @@ namespace Z0
                 TargetPath = Wf.Db().Table(part.Id, CliUserString.TableId, FileKindType.Csv);
             StringKind = sk;
             EmissionCount = 0;
-            Wf.Created(StepId);
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed();
         }
 
         [Op]
@@ -85,14 +85,14 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running(StepId);
+            Wf.Running();
 
             if(StringKind == R.Kind.System)
                 ReadSystemStrings();
             else
                 ReadUserStrings();
 
-            Wf.EmittedTable<CliSystemString>(StepId, EmissionCount,FS.path(TargetPath.Name));
+            Wf.EmittedTable<CliSystemString>(EmissionCount,FS.path(TargetPath.Name));
         }
 
         void ReadUserStrings()

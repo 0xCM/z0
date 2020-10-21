@@ -56,7 +56,7 @@ namespace Z0.Xed
 
         public XedPattern[] ExtractPatterns()
         {
-            var step = Workflow.step(typeof(XedEtlWf));
+            WfStepId step = typeof(XedEtlWf);
             var patterns = list<XedPattern>();
             var parser = XedSourceParser.Service;
             var files = @readonly(Source.InstructionFiles);

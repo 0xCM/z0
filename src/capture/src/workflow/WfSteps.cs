@@ -12,7 +12,5 @@ namespace Z0
     [Step]
     public sealed class EvaluateStep : WfHost<EvaluateStep>
     {
-        public static WfStepId StepId
-            => step<EvaluateStep>();
     }
 }

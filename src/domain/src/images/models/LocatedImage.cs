@@ -76,7 +76,7 @@ namespace Z0
             get =>  (BaseAddress, EndAddress);
         }
 
-        MemoryAddress IAddressable<MemoryAddress>.Base
+        MemoryAddress IAddressable<MemoryAddress>.Address
             => BaseAddress;
 
         public int CompareTo(LocatedImage src)

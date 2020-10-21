@@ -130,6 +130,10 @@ namespace Z0
 
         public const string WfShell = workflow + dot + shell;
 
+        public const string WfControl = workflow + dot + control;
+
+        public const string WfShellX = workflow + dot + shell + dot + extensions;
+
         // ~~ Text
         // ~~ -----------------------------------------------------------------------------------------
 
@@ -230,5 +234,7 @@ namespace Z0
         public const string BitLogicBytes = bitlogic + dot + bytes;
 
         public const string Relations = relations;
+
+        const string control = nameof(control);
     }
 }

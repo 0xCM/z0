@@ -32,8 +32,8 @@ namespace Z0
         /// <summary>
         /// The step name
         /// </summary>
-        public string Name
-            => Control.Name.Remove("Step");
+        public string HostName
+            => Control.FullName;
 
         /// <summary>
         /// The step controller
@@ -78,7 +78,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Name;
+            => HostName;
 
         [MethodImpl(Inline)]
         public string Format(bool full)

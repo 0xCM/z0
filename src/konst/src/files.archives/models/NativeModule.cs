@@ -26,7 +26,7 @@ namespace Z0
             Handle = handle;
         }
 
-        public MemoryAddress Base
+        public MemoryAddress Address
         {
             [MethodImpl(Inline)]
             get => Handle;
@@ -40,6 +40,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => text.format(RP.PSx2, Base, Name);
+            => text.format(RP.PSx2, Address, Name);
     }
 }

@@ -34,13 +34,13 @@ namespace Z0
             EndAddress = end;
         }
 
-        MemoryAddress IAddressable<MemoryAddress>.Base
-            => StartAddress;
-
         public MemoryRange Segment
         {
             [MethodImpl(Inline)]
             get =>  (StartAddress, EndAddress);
         }
+
+        MemoryAddress IAddressable<MemoryAddress>.Address
+            => StartAddress;
     }
 }

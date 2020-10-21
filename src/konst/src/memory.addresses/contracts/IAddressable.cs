@@ -9,10 +9,10 @@ namespace Z0
     /// </summary>
     public interface IAddressable : ITextual
     {
-        MemoryAddress Base {get;}
+        MemoryAddress Address {get;}
 
         string ITextual.Format()
-            => Base.Format();
+            => Address.Format();
     }
 
     /// <summary>
@@ -22,10 +22,10 @@ namespace Z0
     public interface IAddressable<T> : IAddressable
         where T : unmanaged, IAddress
     {
-        new T Base {get;}
+        new T Address {get;}
 
-        MemoryAddress IAddressable.Base
-            => z.force<T,ulong>(Base);
+        MemoryAddress IAddressable.Address
+            => z.force<T,ulong>(Address);
     }
 
     /// <summary>

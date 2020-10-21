@@ -241,21 +241,14 @@ namespace Z0
         void Run59()
         {
             {
-                var src = typeof(RP);
-                var dst = FS.dir(Wf.IndexRoot.Name) + FS.file("format-patterns", "csv");
-                var host = EmitRenderPatternsHost.create();
-                host.Run(Wf, flow(src,dst));
+
+
             }
 
             {
                 new CheckResources().Run(Wf);
             }
 
-            // {
-            //     var host = new EmitLiterals();
-            //     using var step = new EmitLiteralsStep(Wf, Parts.Konst.Assembly, host);
-            //     step.Run();
-            // }
 
             {
                 EmitAsmSymbols.create().Run(Wf);

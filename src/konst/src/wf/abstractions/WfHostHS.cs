@@ -36,18 +36,6 @@ namespace Z0
             get => ref _State[0];
         }
 
-        public void Run(IWfShell<S> wf)
-        {
-            try
-            {
-                Execute(wf);
-            }
-            catch(Exception e)
-            {
-                wf.Shell.Error(Id,e);
-            }
-        }
-
         protected virtual void Execute(IWfShell wf, in S src)
             => Execute(wf);
 
@@ -63,8 +51,5 @@ namespace Z0
                 wf.Error(e);
             }
         }
-
-        protected virtual void Execute(IWfShell<S> wf)
-            => Run(wf.Shell, wf.State);
     }
 }

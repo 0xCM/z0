@@ -1,0 +1,1 @@
+dotnet sln %SlnPath% remove %ProjectPath%

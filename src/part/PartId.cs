@@ -48,7 +48,7 @@ public enum PartId : ulong
 
     EvaluateShell = 40,
 
-    ToolDocs = 41,
+    Tools = 41,
 
 
     // ~ 50

@@ -12,7 +12,7 @@ namespace Z0
 
     public readonly struct NativeFunction : INativeFunction
     {
-        public MemoryAddress Base {get;}
+        public MemoryAddress Address {get;}
 
         public NativeModule Source {get;}
 
@@ -22,18 +22,18 @@ namespace Z0
         public NativeFunction(NativeModule src, MemoryAddress @base, string name)
         {
             Source = src;
-            Base = @base;
+            Address = @base;
             Name = name;
         }
 
         public string Format()
-            => Base.Format();
+            => Address.Format();
     }
 
     public readonly struct NativeFunction<D> : INativeFunction
         where D : Delegate
     {
-        public MemoryAddress Base {get;}
+        public MemoryAddress Address {get;}
 
         public NativeModule Source {get;}
 
@@ -44,12 +44,12 @@ namespace Z0
         internal NativeFunction(NativeModule src, MemoryAddress @base, string name, D f)
         {
             Source = src;
-            Base = @base;
+            Address = @base;
             Name = name;
             Invoke = f;
         }
 
         public string Format()
-            => text.format(RP.PSx3, Base, Source, Name);
+            => text.format(RP.PSx3, Address, Source, Name);
     }
 }

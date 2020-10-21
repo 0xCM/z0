@@ -14,11 +14,17 @@ namespace Z0
     /// <summary>
     /// Identifies a workflow step
     /// </summary>
-    public readonly struct WfStepId<S,T> : IWfStepId
+    public readonly struct WfStepId<S,T>
         where S : struct
         where T : struct
     {
         public const string RenderPattern = "{0} -> {1}";
+
+        public string HostName
+        {
+            [MethodImpl(Inline)]
+            get => text.format(RenderPattern, typeof(S).AssemblyQualifiedName, typeof(T).AssemblyQualifiedName);
+        }
 
         [MethodImpl(Inline)]
         public static implicit operator FlowType<S,T>(WfStepId<S,T> src)
@@ -31,12 +37,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator Type(WfStepId<S,T> src)
             => FlowType<S,T>.Type;
-
-        /// <summary>
-        /// The step name
-        /// </summary>
-        public string Name
-            => text.format(RenderPattern, typeof(S).Name, typeof(T).Name);
 
         /// <summary>
         /// The step controller
@@ -72,11 +72,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Name;
-
-        [MethodImpl(Inline)]
-        public string Format(bool full)
-            => text.format(RenderPattern, typeof(S).AssemblyQualifiedName, typeof(T).AssemblyQualifiedName);
+            => HostName;
 
         public uint Hashed
         {

@@ -19,8 +19,6 @@ namespace Z0
 
         public WfEventId EventId {get;}
 
-        public WfActor Actor {get;}
-
         public WfStepId StepId {get;}
 
         public FlairKind Flair {get;}
@@ -29,7 +27,6 @@ namespace Z0
         public RanEvent(WfStepId step, CorrelationToken ct, FlairKind flair = Ran)
         {
             EventId = (EventName, step, ct);
-            Actor = step.Name;
             StepId = step;
             Flair = flair;
         }

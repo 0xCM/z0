@@ -19,16 +19,5 @@ namespace Z0
         {
             Id = id;
         }
-
-        public Type Control
-        {
-            [MethodImpl(Inline)]
-            get => Id.Control;
-        }
-
-        [MethodImpl(Inline)]
-        public WfFunc<C> Fx<C>([CallerMemberName] string name = null)
-            where C : struct, IWfStep<C>
-                => new WfFunc<C>(name);
     }
 }

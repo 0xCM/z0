@@ -113,6 +113,21 @@ namespace Z0
                 return string.Empty;
         }
 
+        /// <summary>
+        /// Retrieves the substring that follows the last occurrence of a marker
+        /// </summary>
+        /// <param name="s">The string to search</param>
+        /// <param name="match">The substring to match</param>
+        [TextUtility]
+        public static string RightOfLast(this string s, char match)
+        {
+            var idx = s.LastIndexOf(match);
+            if (idx != -1 && idx < s.Length - 1)
+                return s.Substring(idx + 1);
+            else
+                return string.Empty;
+        }
+
         [TextUtility]
         public static string LeftOfLast(this string s, string match)
         {

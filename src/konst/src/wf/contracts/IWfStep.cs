@@ -13,6 +13,7 @@ namespace Z0
     /// <summary>
     /// Describes a workflow step
     /// </summary>
+    [Free]
     public interface IWfStep
     {
         WfStepId Id {get;}
@@ -25,6 +26,7 @@ namespace Z0
     /// <summary>
     /// Describes a workflow step
     /// </summary>
+    [Free]
     public interface IWfStep<C> : IWfStep
         where C : IWfStep<C>, new()
     {

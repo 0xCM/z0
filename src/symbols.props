@@ -12,6 +12,7 @@
 
     <Derivatives>$(Src)derivatives/z0.derivatives.csproj</Derivatives>
 
+
     <Sys>$(Src)sys/z0.sys.csproj</Sys>
     <Domain>$(Src)domain/z0.domain.csproj</Domain>
 
@@ -23,6 +24,8 @@
 
     <Check>$(Src)check/z0.check.csproj</Check>
     <CheckDynamic>$(Src)check.dynamic/z0.check.dynamic.csproj</CheckDynamic>
+
+    <Tools>$(Src)tools/z0.tools.csproj</Tools>
 
     <Data>$(Src)data/z0.data.csproj</Data>
     <Expressive>$(Src)expressive/z0.expressive.csproj</Expressive>

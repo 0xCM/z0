@@ -34,11 +34,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public static MemoryAddress procaddress(NativeModule src, string name)
-            => OS.GetProcAddress(src.Base, name);
+            => OS.GetProcAddress(src.Address, name);
 
         [MethodImpl(Inline), Op]
         public unsafe static FPtr fptr(NativeModule src, string name)
-            => new FPtr(OS.GetProcAddress(src.Base,name).ToPointer());
+            => new FPtr(OS.GetProcAddress(src.Address,name).ToPointer());
 
         [MethodImpl(Inline), Op]
         public static unsafe Delegate proc(FPtr src, Type t)
@@ -60,7 +60,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe static FPtr<D> fptr<D>(NativeModule src, string name)
             where D : Delegate
-                => new FPtr<D>(OS.GetProcAddress(src.Base,name).ToPointer());
+                => new FPtr<D>(OS.GetProcAddress(src.Address,name).ToPointer());
 
         [MethodImpl(Inline)]
         public static unsafe D proc<D>(FPtr src)

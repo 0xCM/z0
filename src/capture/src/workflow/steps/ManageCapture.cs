@@ -62,7 +62,7 @@ namespace Z0
             CaptureParts.create().Run(Wf, State);
 
             {
-                using var step = new SpecializeImmStep(Wf, State.Asm, State.Formatter, State.RoutineDecoder, Wf.Init.TargetArchive.Root);
+                using var step = new SpecializeImmStep(Wf, new SpecializeImm(), State.Asm, State.Formatter, State.RoutineDecoder, Wf.Init.TargetArchive.Root);
                 step.ClearArchive(Parts);
                 step.EmitRefined(Parts);
             }

@@ -12,19 +12,19 @@ namespace Z0
 
     partial struct ProjectModel
     {
-        public readonly struct EmbeddedResource : IProjectItem<EmbeddedResource>
+        public readonly struct EmbeddedResourceSpec : IProjectItem<EmbeddedResourceSpec>
         {
-            public const string TagName = nameof(EmbeddedResource);
+            public const string TagName = nameof(EmbeddedResourceSpec);
 
             const string DefaultFormat = OpenTagFence + TagName + Delimiter + nameof(Include) + AttribSetOpen + Arg0 + AttribSetClose;
 
             public readonly string Include;
 
             [MethodImpl(Inline)]
-            public EmbeddedResource(string include)
+            public EmbeddedResourceSpec(string include)
             {
                 Include = include;
-            }       
+            }
 
             [MethodImpl(Inline)]
             public string Render()
@@ -34,11 +34,11 @@ namespace Z0
             public string Format()
                 => Render();
 
-            public override string ToString() 
+            public override string ToString()
                 => Render();
 
-            string IProjectElement.Name 
-                => TagName;   
-        }        
+            string IProjectElement.Name
+                => TagName;
+        }
     }
 }

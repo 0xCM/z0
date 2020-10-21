@@ -26,7 +26,7 @@ namespace Z0.Events
         [MethodImpl(Inline)]
         public MethodsPrepared(WfActor actor, ApiHostUri host, int count, CorrelationToken ct)
         {
-            EventId = evid(EventName, ct);
+            EventId = (EventName, ct);
             Actor = actor;
             Host = host;
             Count = count;

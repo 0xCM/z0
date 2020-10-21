@@ -10,16 +10,19 @@ namespace Z0
     using static Konst;
     using static Render;
 
-    public readonly struct EventOrigin : ITextual
+    public readonly struct WfEventOrigin : ITextual
     {
+        public WfStepId StepId {get;}
+
         public WfEventId EventId {get;}
 
         public CallingMember Call {get;}
 
         [MethodImpl(Inline)]
-        public EventOrigin(WfEventId id, CallingMember call)
+        public WfEventOrigin(WfStepId step, WfEventId @event, CallingMember call)
         {
-            EventId = id;
+            StepId = step;
+            EventId = @event;
             Call = call;
         }
 

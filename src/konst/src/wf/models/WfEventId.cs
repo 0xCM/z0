@@ -53,14 +53,6 @@ namespace Z0
             => new WfEventId(src.fx, src.ct);
 
         [MethodImpl(Inline)]
-        internal WfEventId(string identifier, CorrelationToken ct, Timestamp ts)
-        {
-            Identifier = identifier;
-            Ts = ts;
-            Ct = ct;
-        }
-
-        [MethodImpl(Inline)]
         public WfEventId(string name, CorrelationToken ct, Timestamp? ts = null)
         {
             Ts = ts ?? timestamp();
@@ -77,7 +69,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public WfEventId(string name, WfStepId step, CorrelationToken ct, Timestamp? ts = null)
+        WfEventId(string name, WfStepId step, CorrelationToken ct, Timestamp? ts = null)
         {
             Ts = ts ?? timestamp();
             Ct = ct;
@@ -105,7 +97,7 @@ namespace Z0
         {
             Ts = ts ?? timestamp();
             Ct = ct;
-            Identifier = text.format("{0} | {1} | {2} | {3}", Ts, Ct, fx.StepId.Control.Name, fx.Name.Format());
+            Identifier = text.format("{0} | {1} | {2} | {3}", Ts, Ct, fx.StepId, fx.Name.Format());
         }
 
         /// <summary>

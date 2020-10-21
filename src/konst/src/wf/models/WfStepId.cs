@@ -15,16 +15,12 @@ namespace Z0
     /// </summary>
     public readonly struct WfStepId : IWfStepId
     {
-        /// <summary>
-        /// The Step controller
-        /// </summary>
-        public Type Control {get;}
+        public ClrArtifactKey HostKey {get;}
 
-        /// <summary>
-        /// The step name
-        /// </summary>
-        public string Name
-            => Control.Name.Remove("Step");
+        public string HostName {get;}
+
+        public string HostIdentifier
+            => HostName.LeftOfFirst(Chars.Comma).RightOfLast(Chars.Dot);
 
         [MethodImpl(Inline)]
         public static implicit operator WfStepId(Type control)
@@ -33,7 +29,8 @@ namespace Z0
         [MethodImpl(Inline)]
         public WfStepId(Type control)
         {
-            Control = control;
+            HostName = control.AssemblyQualifiedName;
+            HostKey = control.MetadataToken;
         }
 
         /// <summary>
@@ -42,7 +39,7 @@ namespace Z0
         public WfToken Token
         {
             [MethodImpl(Inline)]
-            get => Workflow.token(WfPartKind.Step, Control);
+            get => Workflow.token(this);
         }
 
         public bool IsEmpty
@@ -63,11 +60,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public int CompareTo(WfStepId src)
-            => Name.CompareTo(src.Name);
+            => HostName.CompareTo(src.HostName);
 
         [MethodImpl(Inline)]
         public string Format()
-            => Name;
+            => HostIdentifier;
 
         public uint Hashed
         {

@@ -32,14 +32,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public CheckCredits(IWfShell wf, WfHost host)
         {
-            Wf = wf;
             Host = host;
-            Wf.Created(Host);
+            Wf = wf.WithHost(Host);
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
 
         public void Run()
@@ -55,10 +55,10 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(Step.StepId, e);
+                Wf.Error(e);
             }
 
-            Wf.Ran(Step.StepId);
+            Wf.Ran();
 
         }
 

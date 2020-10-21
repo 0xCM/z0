@@ -12,15 +12,22 @@ namespace Z0
 
     using Free =System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    public interface IWfStepId : ITextual, INamed
+    [Free]
+    public interface IWfStepId : ITextual
     {
+        /// <summary>
+        /// The fully-qualified host name
+        /// </summary>
+        string HostName {get;}
+
         /// <summary>
         /// The step token
         /// </summary>
         WfToken Token {get;}
     }
 
-    public interface IWfStepId<H> : IWfStepId, IComparable<H>, IEquatable<H>, INamed<H>
+    [Free]
+    public interface IWfStepId<H> : IWfStepId, IComparable<H>, IEquatable<H>
         where H : struct, IWfStepId<H>
     {
         /// <summary>
@@ -32,12 +39,14 @@ namespace Z0
             get => new WfToken((ulong)typeof(H).MetadataToken);
         }
 
-        string INamed.Name
-            => typeof(H).Name;
+        string IWfStepId.HostName
+            => typeof(H).AssemblyQualifiedName;
+
+        string Name
+            => HostName;
 
         string ITextual.Format()
-            => Name;
-
+            => HostName;
 
         [MethodImpl(Inline)]
         bool IEquatable<H>.Equals(H src)
@@ -45,7 +54,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         int IComparable<H>.CompareTo(H src)
-            => Name.CompareTo(src.Name);
+            => HostName.CompareTo(src.HostName);
 
         uint Hashed
         {

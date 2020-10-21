@@ -18,6 +18,8 @@ namespace Z0
 
         public virtual WfStepId Id {get;}
 
+        public static WfStepId StepId = typeof(H);
+
         [MethodImpl(Inline)]
         public static implicit operator WfStepId(WfHost<H> src)
             => src.Id;

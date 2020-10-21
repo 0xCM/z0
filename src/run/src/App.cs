@@ -8,12 +8,11 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static AppHost;
 
-    [Step]
+    [WfHost]
     sealed class AppHost : WfHost<AppHost>
     {
-        public static WfStepId StepId => typeof(AppHost);
+
     }
 
     class App : AppShell<App,IAppContext>
@@ -34,15 +33,15 @@ namespace Z0
 
         public override void RunShell(params string[] args)
         {
-            using var wf = WfShell.create(args);
+            using var wf = WfShell.create(args).WithHost(new AppHost());
             using var state = AsmWorkflows.state(wf, AsmWorkflows.context(Context));
 
             try
             {
-                wf.Running(StepId, text.bracket(args.FormatList()));
+                wf.Running(text.bracket(args.FormatList()));
                 using var runner = new Runner(state);
                 runner.Run();
-                wf.Ran(StepId);
+                wf.Ran();
             }
             catch(Exception e)
             {

@@ -2,14 +2,14 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+[assembly: PartId(PartId.Tools)]
+
+namespace Z0.Parts
 {
     using System;
 
-    public interface IMemoryRange<F> : IEquatable<F>, IComparable<F>, ITextual<F>
-        where F : unmanaged, IMemoryRange<F>
+    public sealed class Tools : Part<Tools>
     {
 
     }
-
 }

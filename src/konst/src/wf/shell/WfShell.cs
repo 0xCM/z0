@@ -11,13 +11,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class XTend
-    {
-        [MethodImpl(Inline), Op]
-        public static bool Babble(this LogLevel src)
-            => src == LogLevel.Babble;
-    }
-
     [ApiHost(ApiNames.WfShell, true)]
     public partial class WfShell : IWfShell
     {
@@ -45,7 +38,7 @@ namespace Z0
 
         public string AppName {get;}
 
-        public Assembly Control {get;}
+        public WfController Controller {get;}
 
         public IPolyrand Random {get; private set;}
 
@@ -70,7 +63,7 @@ namespace Z0
             Settings = JsonSettings.Load(config.Shell.Paths.AppConfigPath);
             ApiParts = config.ApiParts;
             Api = config.ApiParts.Api;
-            Control = config.Control;
+            Controller = config.Control;
             AppName = config.Shell.AppName;
         }
 
@@ -89,7 +82,7 @@ namespace Z0
             Settings = JsonSettings.Load(config.Shell.Paths.AppConfigPath);
             ApiParts = config.ApiParts;
             Api = config.ApiParts.Api;
-            Control = config.Control;
+            Controller = config.Control;
             AppName = config.Shell.AppName;
         }
 

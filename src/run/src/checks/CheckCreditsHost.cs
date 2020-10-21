@@ -9,7 +9,6 @@ namespace Z0
 
     public sealed class CheckCreditsHost : WfHost<CheckCreditsHost>
     {
-        public static WfStepId StepId
-            => typeof(CheckCreditsHost);
+
     }
 }

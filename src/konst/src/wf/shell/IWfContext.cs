@@ -13,7 +13,7 @@ namespace Z0
              => WfShell.parts();
 
         CorrelationToken Ct
-            => z.correlate(Control.Id());
+            => z.correlate(Controller.Id);
 
         IWfPaths Paths
             => WfShell.paths();
@@ -25,12 +25,12 @@ namespace Z0
              => Environment.GetCommandLineArgs();
 
         string AppName
-            => Control.GetSimpleName();
+            => Controller.Name;
 
         string ITextual.Format()
             => AppName;
 
-        Assembly Control
+        WfController Controller
             => Assembly.GetEntryAssembly();
     }
 }

@@ -96,9 +96,10 @@ namespace Z0
         public static ItemGroup items(ProjectItem[] src)
             => new ItemGroup(src);
 
+
         [MethodImpl(Inline), Op]
-        public static ProjectItem<EmbeddedResource> resource(string include)
-            => new EmbeddedResource(include);
+        public static ProjectItem<EmbeddedResourceSpec> resource(string include)
+            => new EmbeddedResourceSpec(include);
 
         [MethodImpl(Inline), Op]
         public static TargetFramework framework(string value)
@@ -106,7 +107,7 @@ namespace Z0
 
 
         [MethodImpl(Inline), Op]
-        public static string render(in EmbeddedResource src)
+        public static string render(in EmbeddedResourceSpec src)
             => format(src);
 
         [MethodImpl(Inline), Op]

@@ -14,14 +14,6 @@ namespace Z0
     partial struct Workflow
     {
         /// <summary>
-        /// Creates an identifier for a workflow step
-        /// </summary>
-        /// <param name="control">The controller type</param>
-        [MethodImpl(Inline), Op]
-        public static WfStepId step(Type control)
-            => new WfStepId(control);
-
-        /// <summary>
         /// Defines a workflow step id predicated on a parametric controller type
         /// </summary>
         /// <typeparam name="T">The host type</typeparam>

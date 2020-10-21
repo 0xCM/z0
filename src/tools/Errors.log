@@ -1,0 +1,12 @@
+Failure trapped by Main at J:\dev\projects\z0\src\tools\app\App.cs 27
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Z0.IWfShell.Status[T](WfStepId step, T data) in j:\dev\projects\z0\src\konst\src\wf\shell\IWfShell.cs:line 85
+   at Z0.IWfShell.Status[T](T data) in j:\dev\projects\z0\src\konst\src\wf\shell\IWfShell.cs:line 88
+   at Z0.App.Main(String[] args) in J:\dev\projects\z0\src\tools\app\App.cs:line 23
+
+Failure trapped by Main at J:\dev\projects\z0\src\tools\app\App.cs 27
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at Z0.IWfShell.Status[T](WfStepId step, T data) in j:\dev\projects\z0\src\konst\src\wf\shell\IWfShell.cs:line 85
+   at Z0.IWfShell.Status[T](T data) in j:\dev\projects\z0\src\konst\src\wf\shell\IWfShell.cs:line 88
+   at Z0.App.Main(String[] args) in J:\dev\projects\z0\src\tools\app\App.cs:line 23
+

@@ -5,9 +5,6 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
-    using System.Runtime;
-    using System.IO;
 
     using static z;
 
@@ -20,8 +17,6 @@ namespace Z0
         {
             Sink = sink;
             Context = context;
-            ProfileOptimization.SetProfileRoot(Path.GetDirectoryName(typeof(S).Assembly.Location));
-            ProfileOptimization.StartProfile("Startup.Profile");
         }
 
         protected Shell(IWfContext context)
