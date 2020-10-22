@@ -22,7 +22,7 @@ namespace Z0
         public static EmitAsmSymbolsCmd specify(IWfShell wf)
             => new EmitAsmSymbolsCmd();
 
-        public static new CmdResult run(IWfShell wf, in EmitAsmSymbolsCmd spec)
+        public static CmdResult run(IWfShell wf, in EmitAsmSymbolsCmd spec)
         {
             const string RenderPattern = "{0,-20} | {1,-20} | {2,-20} | {3}";
             const string TableId = "asm.mnemonics";

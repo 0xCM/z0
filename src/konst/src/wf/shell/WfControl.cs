@@ -46,14 +46,5 @@ namespace Z0
         public static WfShellHost<H> host<H>(IWfShell wf)
             where H : IWfHost<H>, new()
                 => new WfShellHost<H>(wf,new H());
-
-        [MethodImpl(Inline)]
-        public static WfStepExec<H,T> executor<H,T>(IWfShell wf, WfStepArgs? args = null, WfStepId? id = null)
-            where H : struct, IWfStepExec<T>, IWfStep<H>
-        {
-            var e = new WfStepExec<H,T>(wf, id ?? Workflow.step<H>());
-            e.Configure(args ?? WfStepArgs.Empty);
-            return e;
-        }
     }
 }

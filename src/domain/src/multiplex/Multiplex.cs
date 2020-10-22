@@ -17,7 +17,21 @@ namespace Z0
     [Free,ApiHost]
     public partial class Multiplex : IMultiplex
     {
+        void OnChange(FsEntry entry, FS.ChangeKind kind)
+        {
+            Wf.Status(delimit(entry.Name, kind));
+        }
+
+        public void monitor(IWfShell wf, params string[] args)
+        {
+            var path = args.Length != 0 ? FS.dir(args[0]) : wf.Db().Root;
+            using var monitor = DirectoryMonitor.create(path, OnChange);
+            monitor.Start();
+            Console.ReadKey();
+        }
         readonly WfHost Host;
+
+        readonly IWfShell Wf;
 
         public IBuildArchive BuildArchive {get;}
 
@@ -40,13 +54,11 @@ namespace Z0
 
         Multiplex(IWfShell wf, MultiplexSettings settings)
         {
+
             Host = WfSelfHost.create(typeof(Multiplex));
+            Wf = wf.WithHost(Host);
             BuildArchive = Z0.BuildArchive.create(wf, settings.BuildRoot);
         }
-
-        // public IModuleArchive Modules
-        //     => BuildArchive.Modules;
-
 
         [MethodImpl(Inline)]
         static void Print<T>(IWfShell wf, ReadOnlySpan<T> src)

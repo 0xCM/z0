@@ -53,11 +53,6 @@ namespace Z0
             Host = WfSelfHost.create(typeof(Runner));
         }
 
-        public void Run<C,S,T>(in WfRunSpec<C,S,T> spec)
-        {
-
-        }
-
         void RunCalc()
         {
             CalcDemo.compute();
@@ -251,10 +246,6 @@ namespace Z0
 
 
             {
-                //EmitAsmSymbols.create().Run(Wf);
-            }
-
-            {
                 using var step = new CheckCredits(Wf, new CheckCreditsHost());
                 step.Run();
             }
@@ -350,16 +341,6 @@ namespace Z0
             }
         }
 
-        void Run77()
-        {
-            var build = FS.dir("J:/dev/labs/blend/App01/bin/x64/Release/net5.0/win-x64");
-            var dllFiles = build.Files(false).Where(f => f.Ext.Name.Contains("dll"));
-            var dllTarget = FS.path("J:/dev/projects/z0-logs/db/images.dll.csv");
-            var exeFiles = build.Files(false).Where(f => f.Ext.Name.Contains("exe"));
-            var exeTarget = FS.path("J:/dev/projects/z0-logs/db/images.exe.csv");
-            EmitImageHeaders.create(dllFiles, dllTarget).Run(Wf);
-            EmitImageHeaders.create(exeFiles, exeTarget).Run(Wf);
-        }
 
         public void Run89(params Assembly[] src)
         {
@@ -372,7 +353,6 @@ namespace Z0
         public void Run93()
         {
             ListTextResources();
-            Run77();
             Run89(Parts.Konst.Assembly, Parts.Asm.Assembly);
 
             var blocks = CaptureAlt.capture(typeof(Switch16));

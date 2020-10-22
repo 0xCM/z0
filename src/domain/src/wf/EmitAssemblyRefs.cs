@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [Op]
-        public static new CmdResult run(IWfShell wf, in EmitAssemblyRefsCmd cmd)
+        public static CmdResult run(IWfShell wf, in EmitAssemblyRefsCmd cmd)
         {
             var host = Cmd.host(cmd);
             var sources = @readonly(cmd.Sources.Storage);

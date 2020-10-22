@@ -70,7 +70,6 @@ namespace Z0
             }
         }
 
-
         /// <summary>
         /// Searches for an embedded document with a matching identifier and, if found,
         /// returns the first match; otherwise returns an empty document

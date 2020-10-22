@@ -244,6 +244,9 @@ namespace Z0
                 Raise(new EmittingFileEvent<T>(Host, source, dst, Ct));
         }
 
+        void EmittingFile(Count measure, FS.FilePath dst)
+            => Raise(new EmittingFileEvent<Count>(Host, measure, dst, Ct));
+
         void Emitted(WfStepId step, FS.FilePath dst, Count? segments = default)
             => Raise(emitted(step, dst, segments ?? 0, Ct));
 

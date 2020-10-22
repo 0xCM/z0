@@ -14,18 +14,15 @@ namespace Z0
     using static Konst;
     using static z;
 
-
     [StructLayout(LayoutKind.Sequential), Cmd]
     public struct EmitToolScriptsCmd : ICmdSpec<EmitToolScriptsCmd>
     {
 
     }
 
-
     [CmdHost, ApiHost]
     public sealed class EmitToolScripts : CmdHost<EmitToolScripts, EmitToolScriptsCmd>
     {
-
         public static EmitToolScriptsCmd specify(IWfShell wf)
         {
             var cmd = new EmitToolScriptsCmd();
@@ -33,7 +30,7 @@ namespace Z0
         }
 
         [Op]
-        public static new CmdResult run(IWfShell wf, in EmitToolScriptsCmd spec)
+        public static CmdResult run(IWfShell wf, in EmitToolScriptsCmd spec)
         {
             var tool = DumpBin.create(wf);
             var archive = ModuleArchive.create(EnvVars.Common.ClrCoreRoot);

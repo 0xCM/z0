@@ -16,6 +16,23 @@ namespace Z0
     {
         public uint Value;
 
+        public static Count Zero => default;
+
+        [MethodImpl(Inline)]
+        public Count(uint value)
+            => Value = value;
+
+        [MethodImpl(Inline)]
+        public Count(int value)
+            => Value = (uint)value;
+
+        [MethodImpl(Inline)]
+        public string Format()
+            => Value.ToString();
+
+        public override string ToString()
+            => Format();
+
         [MethodImpl(Inline)]
         public static implicit operator Count(uint count)
             => new Count(count);
@@ -49,18 +66,15 @@ namespace Z0
             => (int)src.Value;
 
         [MethodImpl(Inline)]
-        public Count(uint value)
-            => Value = value;
+        public static Count operator +(Count a, Count b)
+            => new Count(a.Value + b.Value);
 
         [MethodImpl(Inline)]
-        public Count(int value)
-            => Value = (uint)value;
+        public static Count operator ++(Count src)
+            => new Count(src.Value++);
 
         [MethodImpl(Inline)]
-        public string Format()
-            => Value.ToString();
-
-        public override string ToString()
-            => Format();
+        public static Count operator --(Count src)
+            => new Count(src.Value--);
     }
 }

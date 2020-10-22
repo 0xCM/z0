@@ -18,9 +18,6 @@ namespace Z0
 
         protected static C Spec() => new C();
 
-        public static CmdResult run(IWfShell wf, in C spec)
-            => new H().Execute(wf, spec);
-
         protected static CmdResult Fail(params byte[] data)
             => new CmdResult(new CmdId(), false, data);
 

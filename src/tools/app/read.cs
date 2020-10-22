@@ -15,8 +15,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-
-    // using static ImageTables;
     using static ImageLiterals;
 
     public readonly struct ImageLiterals
@@ -44,7 +42,7 @@ namespace Z0
         public uint Size;
     }
 
-    public partial struct ImageReader
+    public struct ImageReader
     {
         [MethodImpl(Inline)]
         public static ImageStream stream(Stream src, bool @virtual)
@@ -97,6 +95,5 @@ namespace Z0
                 seek(dst,i) = src.Read<DirectoryEntry>();
             return count;
         }
-
     }
 }

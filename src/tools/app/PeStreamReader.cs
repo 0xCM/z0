@@ -14,7 +14,6 @@ namespace Z0
 
     using L = ImageLiterals;
 
-
     public struct PeStreamReader : IDisposable
     {
         [MethodImpl(Inline), Op]
@@ -30,14 +29,11 @@ namespace Z0
         {
             Stream = src;
             Succeeded = false;
-            //Offsets = default;
         }
 
         [MethodImpl(Inline)]
         public static bool magical(ushort src)
             => src == L.Magical;
-
-        //ImageOffsets Offsets;
 
         // public Outcome Read(ImageStream src, out T.ImageContent dst)
         // {

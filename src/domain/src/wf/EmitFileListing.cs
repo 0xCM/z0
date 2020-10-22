@@ -38,7 +38,7 @@ namespace Z0
             return cmd;
         }
 
-        protected override CmdResult Execute(IWfShell wf, in EmitFileListingCmd spec)
+        public static CmdResult run(IWfShell wf, in EmitFileListingCmd spec)
         {
             var archive = FS.archive(spec.Source);
             var files = archive.Files(true, spec.Kinds).Where(f => !f.Name.EndsWith(".resources.dll"));
@@ -55,5 +55,8 @@ namespace Z0
 
             return Win();
         }
+
+        protected override CmdResult Execute(IWfShell wf, in EmitFileListingCmd spec)
+            => run(wf,spec);
     }
 }

@@ -25,34 +25,34 @@ namespace Z0
         IEnumerable<FS.FilePath> Files(FS.FileExt ext)
             => Root.EnumerateFiles(ext, true);
 
-        IEnumerable<FS.FilePath> DllFiles
+        IEnumerable<FS.FilePath> DllFiles()
             => Files(Dll);
 
-        IEnumerable<FS.FilePath> PdbFiles
+        IEnumerable<FS.FilePath> PdbFiles()
             => Files(Pdb);
 
-        IEnumerable<FS.FilePath> LibFiles
+        IEnumerable<FS.FilePath> LibFiles()
             => Files(Lib);
 
-        IEnumerable<FS.FilePath> XmlFiles
+        IEnumerable<FS.FilePath> XmlFiles()
             => Files(Xml);
 
-        IEnumerable<FS.FilePath> ExeFiles
+        IEnumerable<FS.FilePath> ExeFiles()
             => Files(Exe);
 
-        IEnumerable<FS.FilePath> CsvFiles
+        IEnumerable<FS.FilePath> CsvFiles()
             => Files(Csv);
 
-        IEnumerable<FS.FilePath> IlFiles
+        IEnumerable<FS.FilePath> IlFiles()
             => Files(Il);
 
-        IEnumerable<FS.FilePath> JsonFiles
+        IEnumerable<FS.FilePath> JsonFiles()
             => Files(Json);
 
-        IEnumerable<FS.FilePath> AsmFiles
+        IEnumerable<FS.FilePath> AsmFiles()
             => Files(Asm);
 
-        IEnumerable<FS.FilePath> CsFiles
+        IEnumerable<FS.FilePath> CsFiles()
             => Files(Cs);
     }
 }

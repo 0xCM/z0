@@ -37,7 +37,7 @@ namespace Z0
             => run(wf, spec);
 
         [Op]
-        public static new CmdResult run(IWfShell wf, in EmitResourceContentCmd spec)
+        public static CmdResult run(IWfShell wf, in EmitResourceContentCmd spec)
         {
             var descriptors = @readonly(Resources.descriptors(spec.Source));
             var count = descriptors.Length;
@@ -55,32 +55,6 @@ namespace Z0
                 wf.EmittedFile(utf.Length, target);
             }
             return Win();
-        }
-    }
-
-    partial class XTend
-    {
-        public static string ReplaceAny(this string src, ReadOnlySpan<char> replace, char replacement)
-        {
-            var length = src.Length;
-            var chars = span(src);
-            var buffer = alloc<char>(chars.Length);
-            var dst = span(buffer);
-            for(var i=0u; i<length; i++)
-            {
-                ref readonly var c = ref skip(chars,i);
-                seek(dst,i) = c;
-                for(var j=0u; j<replace.Length; j++)
-                {
-                    ref readonly var r = ref skip(replace, j);
-                    if(c == r)
-                    {
-                        seek(dst,i) = replacement;
-                        break;
-                    }
-                }
-            }
-            return new string(buffer);
         }
     }
 }

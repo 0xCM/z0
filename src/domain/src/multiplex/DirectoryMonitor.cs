@@ -12,6 +12,10 @@ namespace Z0
 
     public readonly struct DirectoryMonitor : IDirectoryMonitor
     {
+        [MethodImpl(Inline), Op]
+        public static IDirectoryMonitor create(FS.FolderPath src, FS.ChangeHandler handler, bool recursive = true, string filter = null)
+            => new DirectoryMonitor(src, handler, recursive, filter);
+
         public FS.FolderPath Subject {get;}
 
         readonly FileSystemWatcher Watcher;
@@ -28,8 +32,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static FS.FsEntry objects(FileSystemEventArgs src)
-            => new FS.FsEntry(src.FullPath, FS.ObjectKind.File);
+        public static FsEntry objects(FileSystemEventArgs src)
+            => new FsEntry(src.FullPath, FS.ObjectKind.File);
 
         [MethodImpl(Inline)]
         void Created(object sender, FileSystemEventArgs e)

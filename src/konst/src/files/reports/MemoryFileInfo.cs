@@ -10,6 +10,6 @@ namespace Z0
     {
         public MemoryAddress BaseAddress;
 
-        public FS.FsEntryDetail Description;
+        public FsEntryDetail Description;
     }
 }

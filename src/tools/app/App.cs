@@ -71,10 +71,19 @@ namespace Z0
             return EmitAssemblyRefs.run(Wf,cmd);
         }
 
-        static CmdResult ListBuildFiles(IWfShell wf)
+        void EmitPeHeaders()
         {
-            var a = BuildArchives.Roslyn(wf);
-            return  EmitFileListing.run(wf, EmitFileListing.specify(wf, "roslyn.artifacts", a.Root, array(a.Dll)));
+            var build = BuildArchives.Z(Wf);
+            var dllTarget = Wf.Db().Table(ImageSectionHeader.TableId, "z0.dll.headers");
+            var exeTarget = Wf.Db().Table(ImageSectionHeader.TableId, "z0.exe.headers");
+            EmitImageHeaders.run(Wf, EmitImageHeaders.specify(Wf, build.DllFiles().Array(), dllTarget));
+            EmitImageHeaders.run(Wf, EmitImageHeaders.specify(Wf, build.ExeFiles().Array(), exeTarget));
+        }
+
+        static CmdResult ListBuildFiles(IWfShell wf, BuildArchiveSpec spec)
+        {
+            var archive = BuildArchive.create(wf, spec);
+            return  EmitFileListing.run(wf, EmitFileListing.specify(wf, spec.Label + ".artifacts", archive.Root, array(archive.Dll, archive.Exe, archive.Pdb, archive.Lib)));
         }
 
         public unsafe void Run()
@@ -85,7 +94,8 @@ namespace Z0
             // EmitSymbols();
             // EmitScripts();
             // EmitAsmRefs();
-            ListBuildFiles(Wf);
+            ListBuildFiles(Wf, BuildArchiveSpecs.Runtime);
+            //EmitPeHeaders();
         }
 
 
