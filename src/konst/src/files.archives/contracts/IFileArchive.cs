@@ -4,24 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    public interface IFileArchive : IFileArchivePaths
+    [Free]
+    public interface IFileArchive : IFileArchiveQueries
     {
 
     }
 
+    [Free]
     public interface IFileArchive<H> : IFileArchive
         where H : IFileArchive<H>
     {
 
-    }
-
-    public interface IFileArchive<H,F> : IFileArchive<H>
-        where H : IFileArchive<H>
-        where F : IFile
-    {
-        IEnumerable<F> Files();
     }
 }

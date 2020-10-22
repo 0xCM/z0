@@ -6,13 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Konst;
     using static z;
 
     public interface IBuildArchive : IFileArchive<BuildArchive>
     {
-        IModuleArchive Modules {get;}
+
     }
 
     public struct BuildArchive : IBuildArchive
@@ -22,15 +23,19 @@ namespace Z0
         /// </summary>
         /// <param name="root">The archive root</param>
         [MethodImpl(Inline), Op]
-        public static IBuildArchive create(FS.FolderPath root)
-            => new BuildArchive(root);
+        public static IBuildArchive create(IWfShell wf, FS.FolderPath root)
+            => new BuildArchive(wf, root);
 
-        public FS.FolderPath Root{get;}
+        readonly IWfShell Wf;
 
+        public FS.FolderPath Root {get;}
 
         [MethodImpl(Inline)]
-        public BuildArchive(FS.FolderPath root)
-            => Root = root;
+        public BuildArchive(IWfShell wf, FS.FolderPath root)
+        {
+            Wf = wf;
+            Root = root;
+        }
 
         public IModuleArchive Modules
             => ModuleArchive.create(Root);

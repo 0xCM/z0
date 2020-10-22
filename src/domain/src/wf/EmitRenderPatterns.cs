@@ -48,7 +48,7 @@ namespace Z0
         }
 
         [Op]
-        public static CmdResult run(IWfShell wf, in EmitRenderPatternsCmd spec)
+        public static new CmdResult run(IWfShell wf, in EmitRenderPatternsCmd spec)
         {
             using var writer = spec.Target.Writer();
             var patterns = sources(spec.Source);

@@ -11,6 +11,7 @@ namespace Z0
 
     sealed class App : WfHost<App>
     {
+
         public App()
         {
 
@@ -42,8 +43,8 @@ namespace Z0
         public AppRunner(IWfShell wf, WfHost host)
         {
             Host = host;
-            Wf = wf;
-            Mpx = Multiplex.create(Multiplex.configure(wf.Db().Root));
+            Wf = wf.WithHost(Host);
+            Mpx = Multiplex.create(wf, Multiplex.configure(wf.Db().Root));
         }
 
         CmdResult EmitOpCodes()
@@ -55,29 +56,36 @@ namespace Z0
         CmdResult EmitSymbols()
             => EmitAsmSymbols.run(Wf, Wf.CmdBuilder().EmitAsmSymbols());
 
-        void EmitResources()
+        void EmitScripts()
+            => EmitToolScripts.run(Wf, EmitToolScripts.specify(Wf));
+
+        CmdResult EmitRes()
+            => EmitResourceContent.run(Wf, EmitResourceContent.specify(Wf, Wf.Controller));
+
+        CmdResult EmitAsmRefs()
         {
-            var descriptors = @readonly(Resources.descriptors(Wf.Controller));
-            var count = descriptors.Length;
-            for(var i=0; i<count; i++)
-            {
-                ref readonly var descriptor = ref skip(descriptors,i);
-                Wf.Status(descriptor);
-                var target = Wf.Db().RefDataPath(Parts.Tools.Resolved, FS.file(descriptor.Name));
-                var data = Resources.data(descriptor);
-                var text = Encoded.utf8(data);
-                using var writer = target.Writer();
-                writer.Write(text);
-                Wf.EmittedFile(text.Length, target);
-            }
+            var srcDir = FS.dir("k:/z0/builds/nca.3.1.win-x64");
+            var sources = array(srcDir + FS.file("z0.konst.dll"), srcDir + FS.file("z0.asm.dll"));
+            var dst = Wf.Db().Doc("AssemblyReferences", ArchiveFileKinds.Csv);
+            var cmd = EmitAssemblyRefs.specify(Wf, sources, dst);
+            return EmitAssemblyRefs.run(Wf,cmd);
+        }
+
+        static CmdResult ListBuildFiles(IWfShell wf)
+        {
+            var a = BuildArchives.Roslyn(wf);
+            return  EmitFileListing.run(wf, EmitFileListing.specify(wf, "roslyn.artifacts", a.Root, array(a.Dll)));
         }
 
         public unsafe void Run()
         {
-            EmitOpCodes();
-            EmitPatterns();
-            EmitResources();
-            EmitSymbols();
+            // EmitOpCodes();
+            // EmitPatterns();
+            // EmitRes();
+            // EmitSymbols();
+            // EmitScripts();
+            // EmitAsmRefs();
+            ListBuildFiles(Wf);
         }
 
 

@@ -4,14 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Collections.Generic;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    public interface IFileArchivePaths
+    [Free]
+    public interface IFileArchivePaths : IFileExtensions
     {
         FS.FolderPath Root {get;}
     }
 
+    [Free]
     public interface IFileArchivePaths<H> : IFileArchivePaths
         where H : struct, IFileArchivePaths<H>
     {

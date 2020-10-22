@@ -18,7 +18,7 @@ namespace Z0.Asm
     {
         [MethodImpl(Inline), Op]
         public static Mnemonic ParseMnemonic(string src)
-            => Enums.Parse(src, Mnemonic.INVALID);
+            => Enums.parse(src, Mnemonic.INVALID);
 
         [MethodImpl(Inline), Nlz]
         static int nlz(ulong src)

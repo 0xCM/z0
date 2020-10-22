@@ -31,21 +31,21 @@ namespace Z0
         }
 
         [Op]
-        public static Multiplex create(MultiplexSettings? settings = null)
+        public static Multiplex create(IWfShell wf, MultiplexSettings? settings = null)
         {
             var config = settings ?? configure(EnvVars.Common.DbRoot);
-            var mpx = new Multiplex(config);
+            var mpx = new Multiplex(wf, config);
             return mpx;
         }
 
-        Multiplex(MultiplexSettings settings)
+        Multiplex(IWfShell wf, MultiplexSettings settings)
         {
             Host = WfSelfHost.create(typeof(Multiplex));
-            BuildArchive = Z0.BuildArchive.create(settings.BuildRoot);
+            BuildArchive = Z0.BuildArchive.create(wf, settings.BuildRoot);
         }
 
-        public IModuleArchive Modules
-            => BuildArchive.Modules;
+        // public IModuleArchive Modules
+        //     => BuildArchive.Modules;
 
 
         [MethodImpl(Inline)]

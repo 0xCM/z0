@@ -7,6 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata;
+    using System.Reflection;
 
     using static Konst;
     using static z;
@@ -22,32 +23,8 @@ namespace Z0
         {
             var src = AssemblyReferenceHandles();
             var dst = alloc<CliAssemblyReference>(src.Length);
-            Read(src,dst);
+            Read(src, dst);
             return dst;
-        }
-
-        [MethodImpl(Inline), Op]
-        public AssemblyReference Read(AssemblyReferenceHandle src)
-            => CliReader.GetAssemblyReference(src);
-
-        [MethodImpl(Inline), Op]
-        public ref AssemblyReference Read(AssemblyReferenceHandle src, ref AssemblyReference dst)
-        {
-            dst = Read(src);
-            return ref dst;
-        }
-
-        [Op]
-        public ref CliAssemblyReference Read(AssemblyReference src, ref CliAssemblyReference dst)
-        {
-            dst.AssemblyName = src.GetAssemblyName();
-            dst.Culture = Read(src.Culture);
-            dst.Flags = src.Flags;
-            dst.HashValue = Read(src.HashValue);
-            dst.Name = Read(src.Name);
-            dst.PublicKeyOrToken = Read(src.PublicKeyOrToken);
-            dst.Version = src.Version;
-            return ref dst;
         }
 
         [MethodImpl(Inline), Op]
@@ -55,15 +32,24 @@ namespace Z0
         {
             var count = src.Length;
             for(var i=0u; i<count; i++)
-                Read(Read(skip(src,i)), ref seek(dst,i));
+            {
+                var ar = CliReader.GetAssemblyReference(skip(src,i));
+                Read(ar, ref seek(dst,i));
+            }
         }
 
-        [MethodImpl(Inline), Op]
-        public void Read(ReadOnlySpan<AssemblyReference> src, Span<CliAssemblyReference> dst)
+        [Op]
+        public ref CliAssemblyReference Read(AssemblyReference src, ref CliAssemblyReference dst)
         {
-            var count = src.Length;
-            for(var i=0u; i<count; i++)
-                Read(skip(src,i), ref seek(dst,i));
+            dst.Source = CliReader.GetAssemblyDefinition().GetAssemblyName();
+            dst.Target = src.GetAssemblyName();
+            // dst.Culture = Read(src.Culture);
+            // dst.Flags = src.Flags;
+            // dst.HashValue = Read(src.HashValue);
+            // dst.Name = Read(src.Name);
+            // dst.PublicKeyOrToken = Read(src.PublicKeyOrToken);
+            // dst.Version = src.Version;
+            return ref dst;
         }
     }
 }

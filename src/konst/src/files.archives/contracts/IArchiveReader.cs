@@ -4,13 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IArchiveReader
     {
 
     }
 
+    [Free]
     public interface IArchiveReader<H> : IArchiveReader
         where H : struct, IArchiveReader<H>
     {

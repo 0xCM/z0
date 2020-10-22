@@ -7,6 +7,9 @@ namespace Z0
     using System;
     using System.Collections.Generic;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IFileArchiveOps : IFileArchive
     {
        Option<FilePath> Deposit<F,R,S>(R[] src, string id, S subject, FS.FileExt type)
@@ -19,11 +22,5 @@ namespace Z0
 
         IEnumerable<FS.FolderPath> Directories()
             => ApiFiles.directories(Root, true);
-
-        IEnumerable<FS.FilePath> Files()
-            => ApiFiles.files(Root, true);
-
-        IEnumerable<FS.FilePath> Files(FS.FileExt ext)
-            => ApiFiles.files(Root, true);
     }
 }

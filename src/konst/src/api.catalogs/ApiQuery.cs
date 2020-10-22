@@ -213,7 +213,7 @@ namespace Z0
             var components = src.WithoutExtension.Name.Split(Chars.Dot);
             if(components.Length == 2)
             {
-                var owner = Z0.Enums.Parse(components[0], PartId.None);
+                var owner = Z0.Enums.parse(components[0], PartId.None);
                 if(owner.IsSome())
                     return z.some(new ApiHostUri(owner, components[1]));
             }

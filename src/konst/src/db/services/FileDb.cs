@@ -12,7 +12,7 @@ namespace Z0
     using PN = DbNames;
     using T = Table;
 
-    public class FileDb : IFileDb, IFileArchiveOps, IFileArchive
+    public class FileDb : IFileDb
     {
         public ArchiveConfig Settings {get;}
 

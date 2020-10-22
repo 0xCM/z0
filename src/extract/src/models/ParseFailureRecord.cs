@@ -53,7 +53,7 @@ namespace Z0
             var seq = parser.Parse(fields[0]).ValueOrDefault();
             var address = z.address(Parsers.hex().Parse(fields[1]).ValueOrDefault());
             var len = parser.Parse(fields[2]).ValueOrDefault();
-            var term = Enums.Parse<ExtractTermCode>(fields[3]).ValueOrDefault();
+            var term = Enums.parse<ExtractTermCode>(fields[3]).ValueOrDefault();
             var uri = ApiUriParser.Service.Parse(fields[4]);
             if(uri.Failed)
                 sys.@throw($"{uri.Reason}");

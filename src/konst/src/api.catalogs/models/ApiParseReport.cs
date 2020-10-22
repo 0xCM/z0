@@ -70,7 +70,7 @@ namespace Z0
                 dst.SourceSeq = NumericParser.succeed<int>(fields[index++]);
                 dst.Address = MemoryAddressParser.succeed(fields[index++]);
                 dst.Length = NumericParser.succeed<int>(fields[index++]);
-                dst.TermCode = Enums.Parse(fields[index++], ExtractTermCode.None);
+                dst.TermCode = Enums.parse(fields[index++], ExtractTermCode.None);
                 dst.Uri = ApiUriParser.Service.Parse(fields[index++]).Require();
                 dst.OpSig = fields[index++];
                 dst.Data = new BasedCodeBlock(dst.Address, Parsers.hex(true).ParseData(fields[index++], sys.empty<byte>()));

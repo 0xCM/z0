@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    public interface IFileDb : IFileDbPaths, IFileDbOps
+    public interface IFileDb : IFileDbPaths, IFileDbOps, IFileArchiveOps, IFileArchive, IFileArchiveQueries
     {
 
     }

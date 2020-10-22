@@ -35,7 +35,7 @@ namespace Z0.Asm
 
             var l3Parts = lines[3].RightOfFirst(CommentMarker).SplitClean(Assign);
             var tcText = l3Parts.Length == 2 ? l3Parts[1] : string.Empty;
-            var tcVal = Enums.Parse(tcText, ExtractTermCode.None);
+            var tcVal = Enums.parse(tcText, ExtractTermCode.None);
 
             return ParseResult.Success(lines.Concat(Chars.NL), new AsmRoutineHeader(uri, sig, prop, @base, tcVal));
         }

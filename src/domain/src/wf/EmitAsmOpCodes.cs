@@ -27,7 +27,7 @@ namespace Z0
         public static CmdResult run(IWfShell wf)
             => run(wf, wf.CmdBuilder().EmitAsmOpCodes());
 
-        public static CmdResult run(IWfShell wf, in EmitAsmOpCodesCmd spec)
+        public static new CmdResult run(IWfShell wf, in EmitAsmOpCodesCmd spec)
         {
             var data = AsmOpCodes.dataset().Entries;
             var count = data.Count;

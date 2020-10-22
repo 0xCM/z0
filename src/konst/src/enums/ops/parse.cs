@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     partial class Enums
     {
@@ -17,26 +18,28 @@ namespace Z0
         /// <param name="name">The literal name</param>
         /// <typeparam name="E">The enum type</typeparam>
         [MethodImpl(Inline)]
-        public static E Parse<E>(string name, E @default)
+        public static E parse<E>(string name, E @default)
             where E : unmanaged, Enum
-                => Option.Try(() => Enum.Parse<E>(name, true), error => {}).ValueOrDefault(@default);
+        {
+            if(Enum.TryParse(name,true,out E result))
+                return result;
+            else
+                return @default;
+        }
 
         /// <summary>
         /// Attempts o parse an enum literal, ignoring case, and returns a null value if parsing failed
         /// </summary>
         /// <param name="name">The literal name</param>
         /// <typeparam name="E">The enum type</typeparam>
-        public static ParseResult<E> Parse<E>(string name)
+        [MethodImpl(Inline)]
+        public static ParseResult<E> parse<E>(string name)
             where E : unmanaged, Enum
         {
-            try
-            {
-                return ParseResult.Success(name,Enum.Parse<E>(name,true));
-            }
-            catch(Exception e)
-            {
-                return ParseResult.Fail<E>(name, e);
-            }
+            if(Enum.TryParse(name, true, out E result))
+                return parsed(name, result);
+            else
+                return unparsed<E>(name);
         }
     }
 }

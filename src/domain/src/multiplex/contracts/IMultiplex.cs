@@ -14,7 +14,5 @@ namespace Z0
     public interface IMultiplex
     {
         IBuildArchive BuildArchive {get;}
-
-        IModuleArchive Modules {get;}
     }
 }

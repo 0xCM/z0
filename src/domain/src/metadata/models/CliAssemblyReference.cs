@@ -21,20 +21,12 @@ namespace Z0
     {
         public const string TableId = "cli.assemblyref";
 
-        public const byte FieldCount = 7;
+        public const byte FieldCount = 2;
 
-        public string Culture;
+        public static ReadOnlySpan<byte> RenderWidths => new byte[FieldCount]{48, 48};
 
-        public AssemblyFlags Flags;
+        public AssemblyName Source;
 
-        public BinaryCode HashValue;
-
-        public string Name;
-
-        public BinaryCode PublicKeyOrToken;
-
-        public Version Version;
-
-        public AssemblyName AssemblyName;
+        public AssemblyName Target;
     }
 }
