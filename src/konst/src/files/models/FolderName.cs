@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct FS
     {
-        public readonly struct FolderName : IEntry<FolderName>
+        public readonly struct FolderName : IFsEntry<FolderName>
         {
             [MethodImpl(Inline)]
             public static FolderName operator +(FolderName a, FolderName b)

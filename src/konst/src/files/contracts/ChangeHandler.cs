@@ -9,6 +9,6 @@ namespace Z0
 
     partial struct FS
     {
-        public delegate void ChangeHandler(Entry subject, ChangeKind kind);        
+        public delegate void ChangeHandler(FsEntry subject, ChangeKind kind);
     }
 }

@@ -165,6 +165,10 @@ namespace Z0
 
         public const string ApiIdentify = api + dot + identify;
 
+        public const string ApiTestIdentity = api + dot + identity + dot + tests;
+
+        public const string ApiIdentityReflector = api + dot + identity + dot + reflector;
+
         public const string ApiCatalogs = api + dot + catalogs;
 
         public const string ApiEnumCatalog = api + dot + catalogs + dot + enums;
@@ -236,5 +240,9 @@ namespace Z0
         public const string Relations = relations;
 
         const string control = nameof(control);
+
+        const string tests = nameof(tests);
+
+        const string reflector = nameof(reflector);
     }
 }

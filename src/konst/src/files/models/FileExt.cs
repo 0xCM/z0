@@ -11,7 +11,7 @@ namespace Z0
 
     partial struct FS
     {
-        public readonly struct FileExt : IEntry<FileExt>
+        public readonly struct FileExt : IFsEntry<FileExt>
         {
             public PathPart Name {get;}
 

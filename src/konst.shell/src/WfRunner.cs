@@ -112,29 +112,6 @@ namespace Z0
         FS.FilePath AppDataPath(FS.FileName file)
             => Wf.AppData + file;
 
-        void Run89()
-        {
-            const string Pattern = "{0,-8} | {1,-16} | {2}";
-            var header = string.Format(Pattern,"Index", "Offset", "Name");
-            using var reader = CliMemoryMap.create(Wf,FS.path(@"J:\dev\projects\z0-starters\bin\lib\netcoreapp3.1\z0.res.capture.dll"));
-            var src = reader.ManifestResourceDescriptions();
-            var count = src.Length;
-            if(count != 0)
-            {
-                using var dst = AppDataPath(FS.file("ManifestResources.csv")).Writer();
-                dst.WriteLine(header);
-                for(var i=0; i<src.Length; i++)
-                {
-                    ref readonly var res = ref skip(src,i);
-                    dst.WriteLine(string.Format(Pattern, i, res.Offset, res.Name));
-                }
-            }
-
-            var allres = reader.Resources;
-            Wf.Status(Host, allres.Length);
-
-        }
-
         void Run64()
         {
             var archive = RuntimeArchive.create();
@@ -144,14 +121,21 @@ namespace Z0
             iter(context.GetAssemblies(), c => Wf.Status(Host, c.GetSimpleName()));
         }
 
-        [Op]
-        public void Run()
+        void ShowDebugFlags()
         {
-
             var archive = RuntimeArchive.create();
             var src = archive.ManagedLibraries.Select(x => Assembly.LoadFrom(x.Name));
             var rows = map(src, f => delimit(f.GetSimpleName(), delimit(f.DebugFlags())));
             Wf.Rows(rows);
+
+        }
+
+
+        [Op]
+        public void Run()
+        {
+            var tokens = array<int>(typeof(byte).MetadataToken, typeof(sbyte).MetadataToken, typeof(char).MetadataToken);
+            Wf.Status(delimit(tokens.Map(t => t.FormatHex())));
 
         }
     }
@@ -161,6 +145,5 @@ namespace Z0
     {
         public static string[] DebugFlags(this Assembly src)
             => src.GetCustomAttributes<DebuggableAttribute>().Select(a => a.DebuggingFlags.ToString()).Array();
-
     }
 }

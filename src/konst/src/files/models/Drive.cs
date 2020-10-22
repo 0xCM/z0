@@ -11,11 +11,11 @@ namespace Z0
 
     partial struct FS
     {
-        public readonly struct Drive : IEntry<Drive>
+        public readonly struct Drive : IFsEntry<Drive>
         {
             public DriveLetter Name {get;}
 
-            PathPart IEntry.Name 
+            PathPart IFsEntry.Name
                 => new PathPart(Name.ToString());
 
             [MethodImpl(Inline)]
@@ -25,6 +25,6 @@ namespace Z0
             [MethodImpl(Inline)]
             public string Format()
                 => Name.ToString();
-        }        
+        }
     }
 }

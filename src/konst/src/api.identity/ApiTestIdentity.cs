@@ -12,7 +12,7 @@ namespace Z0
     using static Konst;
     using static ApiUriDelimiters;
 
-    [ApiHost]
+    [ApiHost(ApiNames.ApiTestIdentity, true)]
     public readonly struct ApiTestIdentity
     {
         [Op]

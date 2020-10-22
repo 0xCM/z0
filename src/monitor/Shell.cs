@@ -20,7 +20,7 @@ namespace Z0
 
     sealed class AppShell : Shell<AppShell>
     {
-        void OnChange(FS.Entry subject, FS.ChangeKind kind)
+        void OnChange(FS.FsEntry subject, FS.ChangeKind kind)
         {
             term.print(subject);
         }

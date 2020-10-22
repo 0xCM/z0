@@ -10,8 +10,10 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using static EnumLiteralRow;
 
-    partial struct ApiQuery
+    [ApiHost(ApiNames.EnumCatalogs, true)]
+    public readonly struct EnumCatalogs
     {
         [Op]
         public static ReadOnlySpan<EnumLiteralRow> enums(PartId part, Type src)
@@ -64,6 +66,57 @@ namespace Z0
                     dst[i] = default;
             }
             return dst;
+        }
+
+        [Op]
+        public static void format(in EnumLiteralRow src, TableFormatter<Fields> dst, bool eol = true)
+        {
+            dst.Delimit(Fields.PartId, src.PartId);
+            dst.Delimit(Fields.TypeId, src.TypeId);
+            dst.Delimit(Fields.TypeAddress, src.TypeAddress);
+            dst.Delimit(Fields.NameAddress, src.NameAddress);
+            dst.Delimit(Fields.TypeName, src.TypeName);
+            dst.Delimit(Fields.DataType, src.DataType);
+            dst.Delimit(Fields.Index, src.Index);
+            dst.Delimit(Fields.ScalarValue, src.ScalarValue);
+            dst.Delimit(Fields.Name, src.Name);
+            if(eol)
+                dst.EmitEol();
+        }
+
+        [Op]
+        public static void emit(IWfShell wf)
+        {
+            var parts = ApiCatalogs.types(ClrTypeKind.Enum, wf.Api);
+            var target = wf.Db().Table(EnumLiteralRow.TableId);
+            var dst = list<EnumLiteralRow>();
+            for(var i=0; i<parts.Length; i++)
+            {
+                var x = parts[i];
+                for(var j=0u; j<x.Length; j++)
+                {
+                    var y = x[j];
+                    (var part, var type) = y;
+                    var records = enums(part,type);
+                    for(var k = 0; k<records.Length; k++)
+                        dst.Add(records[k]);
+                }
+            }
+
+            var rows = dst.ToArray();
+            var rc = rows.Length;
+            Array.Sort(rows);
+
+            var formatter = Table.formatter<Fields>();
+            formatter.EmitHeader();
+
+            for(var i=0; i<rc; i++)
+                format(rows[i], formatter);
+
+            using var writer = target.Writer();
+            writer.Write(formatter.Format());
+
+            wf.EmittedTable(typeof(EnumLiteralRow), rows.Length, target);
         }
     }
 }

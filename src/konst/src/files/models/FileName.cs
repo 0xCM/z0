@@ -12,21 +12,10 @@ namespace Z0
 
     partial struct FS
     {
-        public readonly struct FileName : IEntry<FileName>
+        public readonly struct FileName : IFsEntry<FileName>
         {
             public PathPart Name {get;}
 
-            [MethodImpl(Inline)]
-            public static FileName operator +(FileName a, FileExt b)
-                => file(text.format("{0}.{1}",a,b));
-
-            [MethodImpl(Inline)]
-            public static bool operator ==(FileName a, FileName b)
-                => a.Equals(b);
-
-            [MethodImpl(Inline)]
-            public static bool operator !=(FileName a, FileName b)
-                => !a.Equals(b);
 
             [MethodImpl(Inline)]
             public FileName(PathPart name)
@@ -128,6 +117,18 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator Z0.FileName(FileName src)
                 => Z0.FileName.define(src.Name);
+
+            [MethodImpl(Inline)]
+            public static FileName operator +(FileName a, FileExt b)
+                => file(text.format("{0}.{1}",a,b));
+
+            [MethodImpl(Inline)]
+            public static bool operator ==(FileName a, FileName b)
+                => a.Equals(b);
+
+            [MethodImpl(Inline)]
+            public static bool operator !=(FileName a, FileName b)
+                => !a.Equals(b);
 
             public static FileName Empty
             {

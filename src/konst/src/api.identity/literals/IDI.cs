@@ -6,7 +6,6 @@ namespace Z0
 {
     using static Chars;
 
-
     /// <summary>
     /// Identity indicators
     /// </summary>

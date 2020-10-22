@@ -117,9 +117,8 @@ namespace Z0.Asm
 
         void check_unary_shift(MethodInfo src, W256 w, StreamWriter dst)
         {
-            var svc = IdentityReflector.Service;
             Claim.Require(src.IsVectorized(w));
-            Claim.Require(svc.AcceptsVector(src,0,w));
+            Claim.Require(IdentityReflector.AcceptsVector(src,0,w));
             Claim.Require(src.AcceptsImmediate(1,ScalarRefinementKind.Unrefined));
             Claim.Eq(ImmFunctionClass.UnaryImm8, src.ImmFunctionClass(ScalarRefinementKind.Unrefined));
 

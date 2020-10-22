@@ -6,22 +6,17 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Intrinsics;
 
     using static Konst;
 
-    public interface ITypeCode
+    partial class XApiIdentity
     {
-        ulong TypeId {get;}
-
-        Type IdentifiedType {get;}
-    }
-
-    public interface ITypeCode<T> : ITypeCode
-    {
-        Type ITypeCode.IdentifiedType
-        {
-            [MethodImpl(Inline)]
-            get => typeof(T);
-        }
+        /// <summary>
+        /// Determines whether a type is classified as an intrinsic vector
+        /// </summary>
+        /// <param name="t">The type to test</param>
+        public static bool IsVector(this Type t)
+            => IdentityReflector.IsVector(t);
     }
 }

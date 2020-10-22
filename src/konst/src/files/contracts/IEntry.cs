@@ -3,26 +3,22 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
 
     using static FS;
 
-    partial struct FS
+    public interface IFsEntry : ITextual
+    {
+        PathPart Name {get;}
+
+        string ITextual.Format()
+            => Name.Format();
+    }
+
+    public interface IFsEntry<F> : IFsEntry
+        where F : struct, IFsEntry<F>
     {
 
-        public interface IEntry : ITextual
-        {
-            PathPart Name {get;}    
-
-            string ITextual.Format() 
-                => Name.Format();
-        }
-
-        public interface IEntry<F> : IEntry 
-            where F : struct, IEntry<F>
-        {
-            
-        }
     }
 }

@@ -11,24 +11,21 @@ namespace Z0
 
     using static Konst;
 
-    partial struct FS
+    [StructLayout(LayoutKind.Sequential), Table(TableId,FieldCount)]
+    public struct FsEntryDetail
     {
-        [StructLayout(LayoutKind.Sequential), Table(TableId,FieldCount)]
-        public struct EntryDetail
-        {
-            public const string TableId = "fs.entry";
+        public const string TableId = "fs.entry";
 
-            public const byte FieldCount = 5;
+        public const byte FieldCount = 5;
 
-            public FS.FilePath Path;
+        public FS.FilePath Path;
 
-            public ByteSize Size;
+        public ByteSize Size;
 
-            public Timestamp CreateTS;
+        public Timestamp CreateTS;
 
-            public Timestamp UpdateTS;
+        public Timestamp UpdateTS;
 
-            public FileAttributes Attributes;
-        }
+        public FileAttributes Attributes;
     }
 }

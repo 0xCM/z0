@@ -23,5 +23,7 @@ namespace Z0
         public const string ParseDomain = parsers + dot + "domain";
 
         public const string FilePathParser = parsers + dot + files + dot + "paths";
+
+        public const string EnumCatalogs = enums + dot + catalogs;
     }
 }

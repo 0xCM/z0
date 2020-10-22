@@ -13,9 +13,13 @@ namespace Z0
 
     partial struct FS
     {
-        public readonly struct FilePath : IEntry<FilePath>
+        public readonly struct FilePath : IFsEntry<FilePath>
         {
             public PathPart Name {get;}
+
+            [MethodImpl(Inline)]
+            public FilePath(PathPart name)
+                => Name = name;
 
             public uint PathLength
             {
@@ -28,17 +32,6 @@ namespace Z0
                 [MethodImpl(Inline)]
                 get => Name.View;
             }
-
-            public static FilePath Empty
-                => new FilePath(PathPart.Empty);
-
-            [MethodImpl(Inline)]
-            public static FileName operator +(FilePath a, FileExt b)
-                => file(text.format("{0}.{1}",a,b));
-
-            [MethodImpl(Inline)]
-            public FilePath(PathPart name)
-                => Name = name;
 
             public bool Exists
             {
@@ -86,7 +79,6 @@ namespace Z0
             {
                 [MethodImpl(Inline)]
                 get => Name.IsNonEmpty;
-
             }
 
             /// <summary>
@@ -157,6 +149,16 @@ namespace Z0
             [MethodImpl(Inline)]
             public static implicit operator Z0.FilePath(FilePath src)
                 => Z0.FilePath.Define(src.Name);
+
+            public static FilePath Empty
+            {
+                [MethodImpl(Inline)]
+                get => new FilePath(PathPart.Empty);
+            }
+
+            [MethodImpl(Inline)]
+            public static FileName operator +(FilePath a, FileExt b)
+                => file(text.format("{0}.{1}",a,b));
         }
     }
 }

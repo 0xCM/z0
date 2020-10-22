@@ -13,7 +13,6 @@ namespace Z0
 
     using F = EnumDatasetField;
 
-    [Stateless(typeof(IEnumLiteralEmitter))]
     public readonly struct EnumLiteralEmitter : IEnumLiteralEmitter
     {
         public static IEnumLiteralEmitter Service => default(EnumLiteralEmitter);

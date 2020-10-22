@@ -42,6 +42,5 @@ namespace Z0
 
         public bool Parse(in string src, out FS.FilePath dst)
             => parse(src, out dst);
-
     }
 }

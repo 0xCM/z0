@@ -9,7 +9,7 @@ namespace Z0
     using System.IO;
 
     using static Konst;
-            
+
     public readonly struct DirectoryMonitor : IDirectoryMonitor
     {
         public FS.FolderPath Subject {get;}
@@ -26,11 +26,11 @@ namespace Z0
             Handler = handler;
             Subscribe();
         }
-        
+
         [MethodImpl(Inline)]
-        public static FS.Entry objects(FileSystemEventArgs src)
-            => new FS.Entry(src.FullPath, FS.ObjectKind.File);
-        
+        public static FS.FsEntry objects(FileSystemEventArgs src)
+            => new FS.FsEntry(src.FullPath, FS.ObjectKind.File);
+
         [MethodImpl(Inline)]
         void Created(object sender, FileSystemEventArgs e)
         {
@@ -63,7 +63,7 @@ namespace Z0
             Watcher.Renamed += Renamed;
             Watcher.Error += Error;
         }
-        
+
         [MethodImpl(Inline)]
         public void Start()
         {
@@ -79,7 +79,7 @@ namespace Z0
         public void Dispose()
         {
             Watcher?.Dispose();
-        }        
+        }
 
         void Error(object sender, ErrorEventArgs e)
         {

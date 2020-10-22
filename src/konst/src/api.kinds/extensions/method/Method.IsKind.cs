@@ -9,16 +9,14 @@ namespace Z0
 
     partial class XTend
     {
-        static TIdentityReflector RC => IdentityReflector.Service;
-
         /// <summary>
         /// Determines whether a method has intrinsic parameters or return type of specified width
         /// </summary>
         /// <param name="m">The method to examine</param>
         /// <param name="width">The required vector width</param>
         /// <param name="total">Whether all parameters and return type must be intrinsic</param>
-        public static bool IsKind(this MethodInfo m, Vec128Type vk, bool total)        
-            => RC.IsVectorized(m, vk.BitWidth, total);
+        public static bool IsKind(this MethodInfo m, Vec128Type vk, bool total)
+            => IdentityReflector.IsVectorized(m, vk.BitWidth, total);
 
         /// <summary>
         /// Determines whether a method is of characterized vector kind
@@ -26,8 +24,8 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         /// <param name="vk">The vector kind under test</param>
         /// <param name="total">Whether all parameters and return type must be intrinsic</param>
-        public static bool IsKind(this MethodInfo m, Vec256Type vk, bool total)        
-            => RC.IsVectorized(m, vk.BitWidth, total);
+        public static bool IsKind(this MethodInfo m, Vec256Type vk, bool total)
+            => IdentityReflector.IsVectorized(m, vk.BitWidth, total);
 
         /// <summary>
         /// Determines whether a method is of characterized vector kind
@@ -35,8 +33,8 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         /// <param name="vk">The vector kind under test</param>
         /// <param name="total">Whether all parameters and return type must be intrinsic</param>
-        public static bool IsKind(this MethodInfo m, Vec512Type vk, bool total)        
-            => RC.IsVectorized(m, vk.BitWidth, total);
+        public static bool IsKind(this MethodInfo m, Vec512Type vk, bool total)
+            => IdentityReflector.IsVectorized(m, vk.BitWidth, total);
 
         /// <summary>
         /// Determines whether a method is of characterized vector kind
@@ -44,9 +42,9 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         /// <param name="vk">The vector kind under test</param>
         /// <param name="total">Whether all parameters and return type must be intrinsic</param>
-        public static bool IsKind<T>(this MethodInfo m, Vec128Kind<T> vk)        
+        public static bool IsKind<T>(this MethodInfo m, Vec128Kind<T> vk)
             where T : unmanaged
-                => RC.IsVectorized(m, vk.W, typeof(T));
+                => IdentityReflector.IsVectorized(m, vk.W, typeof(T));
 
         /// <summary>
         /// Determines whether a method is of characterized vector kind
@@ -54,9 +52,9 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         /// <param name="vk">The vector kind under test</param>
         /// <param name="total">Whether all parameters and return type must be intrinsic</param>
-        public static bool IsKind<T>(this MethodInfo m, Vec256Kind<T> vk)        
+        public static bool IsKind<T>(this MethodInfo m, Vec256Kind<T> vk)
             where T : unmanaged
-                => RC.IsVectorized(m, vk.W, typeof(T));
+                => IdentityReflector.IsVectorized(m, vk.W, typeof(T));
 
         /// <summary>
         /// Determines whether a method is of characterized vector kind
@@ -64,8 +62,8 @@ namespace Z0
         /// <param name="m">The method to examine</param>
         /// <param name="vk">The vector kind under test</param>
         /// <param name="total">Whether all parameters and return type must be intrinsic</param>
-        public static bool IsKind<T>(this MethodInfo m, Vec512Kind<T> vk)        
+        public static bool IsKind<T>(this MethodInfo m, Vec512Kind<T> vk)
             where T : unmanaged
-                => RC.IsVectorized(m, vk.W, typeof(T));
+                => IdentityReflector.IsVectorized(m, vk.W, typeof(T));
     }
 }

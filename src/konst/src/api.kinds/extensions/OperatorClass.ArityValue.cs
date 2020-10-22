@@ -11,6 +11,6 @@ namespace Z0
         /// </summary>
         /// <param name="src">The operator class</param>
         public static int ArityValue(this ApiOperatorClass src)
-            => RC.ArityValue(src);
+            => IdentityReflector.ArityValue(src);
     }
 }

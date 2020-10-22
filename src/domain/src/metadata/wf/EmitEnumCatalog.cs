@@ -11,6 +11,12 @@ namespace Z0
     using static Konst;
     using static z;
 
+    [Cmd]
+    public struct EmitEnumCatalogCmd : ICmdSpec<EmitEnumCatalogCmd>
+    {
+
+    }
+
     [WfHost]
     public sealed class EmitEnumCatalog : WfHost<EmitEnumCatalog>
     {
@@ -41,36 +47,6 @@ namespace Z0
         }
 
         public void Run()
-        {
-            var parts = ApiCatalogs.types(ClrTypeKind.Enum, Wf.Api);
-            var target = Wf.Db().Table(EnumLiteralRow.TableId);
-            var dst = z.list<EnumLiteralRow>();
-            for(var i=0; i<parts.Length; i++)
-            {
-                var x = parts[i];
-                for(var j=0u; j<x.Length; j++)
-                {
-                    var y = x[j];
-                    (var part, var type) = y;
-                    var records = ApiQuery.enums(part,type);
-                    for(var k = 0; k<records.Length; k++)
-                        dst.Add(records[k]);
-                }
-            }
-
-            var rows = dst.ToArray();
-            Array.Sort(rows);
-
-            var formatter = Table.formatter<EnumLiteralRow.Fields>();
-            formatter.EmitHeader();
-
-            for(var i=0; i<rows.Length; i++)
-                EnumLiteralRow.format(rows[i], formatter);
-
-            using var writer = target.Writer();
-            writer.Write(formatter.Format());
-
-            Wf.EmittedTable(typeof(EnumLiteralRow), rows.Length, target);
-        }
+            => EnumCatalogs.emit(Wf);
     }
 }
