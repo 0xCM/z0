@@ -12,7 +12,7 @@ namespace Z0
 
     using api = Cmd;
 
-    public struct CmdOption<T>
+    public struct CmdOption<T> : ICmdOption<T>
     {
         public string Name;
 
@@ -39,5 +39,11 @@ namespace Z0
         [MethodImpl(Inline)]
         public static implicit operator CmdOption(CmdOption<T> src)
             => new CmdOption(src.Name, src.Value?.ToString() ?? EmptyString);
+
+        string ICmdOption.Name
+            => Name;
+
+        T ICmdOption<T>.Value
+            => Value;
     }
 }

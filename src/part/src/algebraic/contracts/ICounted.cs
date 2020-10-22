@@ -30,9 +30,9 @@ namespace Z0
     public interface ICounted<T> : ICounted
         where T : unmanaged
     {
-        T Value {get;}
+        new T Count {get;}
 
         uint ICounted.Count
-            => Part.uint32(Value);
+            => Part.uint32(Count);
     }
 }

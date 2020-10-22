@@ -12,7 +12,7 @@ namespace Z0
 
     using api = Cmd;
 
-    public struct CmdOption
+    public struct CmdOption : ICmdOption
     {
         public string Name;
 
@@ -42,5 +42,11 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        string ICmdOption.Name
+            => Name;
+
+        string ICmdOption.Value
+            => Value;
     }
 }

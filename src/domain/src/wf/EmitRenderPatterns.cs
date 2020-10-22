@@ -10,50 +10,29 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public sealed class EmitRenderPatterns : WfHost<EmitRenderPatterns>
+    [Cmd]
+    public struct EmitRenderPatternsCmd : ICmdSpec<EmitRenderPatternsCmd>
     {
-        Type Source;
-
-        FS.FilePath Target;
-
-        public static WfHost create(Type src, FS.FilePath dst)
-        {
-            var host = create();
-            host.Source = src;
-            host.Target = dst;
-            return host;
-        }
-
-        protected override void Execute(IWfShell wf)
-        {
-            using  var step = new EmitRenderPatternsStep(wf, this, Source, Target);
-            step.Run();
-        }
-    }
-
-    public ref struct EmitRenderPatternsStep
-    {
-        readonly WfHost Host;
-
-        readonly IWfShell Wf;
-
         public Type Source;
 
         public FS.FilePath Target;
 
         [MethodImpl(Inline)]
-        public EmitRenderPatternsStep(IWfShell wf, WfHost host, Type src, FS.FilePath dst)
+        public EmitRenderPatternsCmd(Type src, FS.FilePath dst)
         {
-            Host = host;
-            Wf = wf.WithHost(Host);
             Source = src;
             Target = dst;
-            Wf.Created();
         }
+    }
 
-        public void Dispose()
+    [CmdHost, ApiHost]
+    public sealed class EmitRenderPatterns : CmdHost<EmitRenderPatterns, EmitRenderPatternsCmd>
+    {
+        [Op]
+        public static EmitRenderPatternsCmd specify(IWfShell wf, Type src)
         {
-            Wf.Disposed();
+            var dst = wf.Db().Doc("render.patterns", src.Name, ArchiveFileKinds.Csv);
+            return new EmitRenderPatternsCmd(src,dst);
         }
 
         [Op]
@@ -68,26 +47,20 @@ namespace Z0
             return buffer;
         }
 
-        public void Run()
+        [Op]
+        public static CmdResult run(IWfShell wf, in EmitRenderPatternsCmd spec)
         {
-            Wf.Running();
-
-            try
-            {
-                using var writer = Target.Writer();
-                var patterns = sources(Source);
-                var view = patterns.View;
-                var count = view.Length;
-                for(var i=0; i<count; i++)
-                    writer.WriteLine(skip(view,i).Format());
-                Wf.EmittedFile(count, Target);
-            }
-            catch(Exception e)
-            {
-                Wf.Error(e);
-            }
-
-            Wf.Ran();
+            using var writer = spec.Target.Writer();
+            var patterns = sources(spec.Source);
+            var view = patterns.View;
+            var count = view.Length;
+            for(var i=0; i<count; i++)
+                writer.WriteLine(skip(view,i).Format());
+            wf.EmittedFile(count, spec.Target);
+            return Win();
         }
+
+        protected override CmdResult Execute(IWfShell wf, in EmitRenderPatternsCmd spec)
+            => run(wf, spec);
     }
 }

@@ -19,7 +19,9 @@ namespace Z0
     {
         public const string AsmData = asm + dot + data;
 
-        public const string AsmCodes = AsmData + dot + "codes";
+        const string opcodes = nameof(opcodes);
+
+        public const string AsmOpCodes = AsmData + dot + opcodes;
 
         public const string AsmLang = asm + dot + lang;
 

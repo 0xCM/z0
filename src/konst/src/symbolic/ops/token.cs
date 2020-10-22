@@ -13,8 +13,8 @@ namespace Z0
     partial struct Symbolic
     {
         [MethodImpl(Inline)]
-        public static TokenInfo token<T>(T index, string id, string value, string description)
+        public static TokenRecord token<T>(T index, string id, string value, string description)
             where T : unmanaged, Enum
-                => new TokenInfo(EnumValue.e32u(index), id, value, description);
+                => new TokenRecord(EnumValue.e32u(index), id, value, description);
     }
 }

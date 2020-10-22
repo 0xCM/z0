@@ -29,6 +29,7 @@ namespace Z0
         readonly IWfShell Wf;
 
         readonly WfHost Host;
+
         [MethodImpl(Inline)]
         public CheckCredits(IWfShell wf, WfHost host)
         {
@@ -44,7 +45,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running(Step.StepId);
+            Wf.Running();
             try
             {
                 Exec(CheckCreditFields, default(Step));
@@ -74,7 +75,7 @@ namespace Z0
             where C : struct, IWfStep<C>
             where R : ITextual
         {
-            Wf.Status(fx.StepId, src.Format());
+            Wf.Status(src.Format());
         }
 
         [Op]

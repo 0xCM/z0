@@ -5,17 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
-    using static z;
-
-
-    public struct CmdSpecData<K,T>
-        where K : unmanaged
+    /// <summary>
+    /// Identifies a command host
+    /// </summary>
+    public class CmdHostAttribute : Attribute
     {
-        public CmdId Id;
+        public CmdHostAttribute()
+        {
 
-        public TableSpan<CmdOption<K,T>> Options;
+        }
     }
 }

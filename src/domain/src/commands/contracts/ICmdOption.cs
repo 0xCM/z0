@@ -27,4 +27,12 @@ namespace Z0
         string ICmdOption.Value
             => Value.ToString();
     }
+
+    public interface ICmdOption<K,T> : ICmdOption<T>
+    {
+        K Kind {get;}
+
+        string ICmdOption.Name
+            => Kind.ToString();
+    }
 }

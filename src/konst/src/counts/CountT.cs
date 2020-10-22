@@ -26,7 +26,7 @@ namespace Z0
         public string Format()
             => Value.ToString();
 
-        T ICounted<T>.Value
+        T ICounted<T>.Count
             => Value;
     }
 }

@@ -14,6 +14,7 @@
     <ProjectReference Include="$(MathSvc)" />
     <ProjectReference Include="$(Xed)" />
     <ProjectReference Include="$(Refs)" />
+    <ProjectReference Include="$(AsmModels)" />
 
   </ItemGroup>
 

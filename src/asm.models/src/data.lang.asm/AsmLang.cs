@@ -47,7 +47,7 @@ namespace Z0.Asm
             => tokens.Meanings[(int)id];
 
         [MethodImpl(Inline), Op]
-        public static ref readonly TokenInfo token(in AsmTokens tokens, AsmTokenKind id)
+        public static ref readonly TokenRecord token(in AsmTokens tokens, AsmTokenKind id)
             => ref tokens.Models[(int)id];
 
         [MethodImpl(Inline), Op]

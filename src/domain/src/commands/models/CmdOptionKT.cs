@@ -13,7 +13,7 @@ namespace Z0
 
     using api = Cmd;
 
-    public struct CmdOption<K,T>
+    public struct CmdOption<K,T> : ICmdOption<K,T>
         where K : unmanaged
     {
         public K Kind;
@@ -40,10 +40,15 @@ namespace Z0
         public override string ToString()
             => Format();
 
+        K ICmdOption<K, T>.Kind
+            => Kind;
+
+        T ICmdOption<T>.Value
+            => Value;
+
         [MethodImpl(Inline)]
         public static implicit operator CmdOption<K,T>((K kind, T value) src)
             => new CmdOption<K,T>(src.kind, src.value);
-
 
         [MethodImpl(Inline)]
         public static implicit operator CmdOption<K,T>(Paired<K,T> src)

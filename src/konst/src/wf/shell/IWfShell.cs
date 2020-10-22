@@ -192,7 +192,7 @@ namespace Z0
         void Running(CmdId cmd)
             => Raise(new RunningCmdEvent(cmd, Ct));
 
-        void Ran(CmdId cmd)
+        void Ran(CmdResult cmd)
             => Raise(new RanCmdEvent(cmd, Ct));
 
         void Ran(ExecutionFlow flow);

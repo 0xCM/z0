@@ -22,9 +22,9 @@ namespace Z0
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public RanCmdEvent(CmdId cmd, CorrelationToken ct, FlairKind flair = Ran)
+        public RanCmdEvent(CmdResult cmd, CorrelationToken ct, FlairKind flair = Ran)
         {
-            EventId = (EventName, cmd, ct);
+            EventId = (EventName, cmd.CmdId, ct);
             Flair = flair;
         }
 

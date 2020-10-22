@@ -31,29 +31,22 @@ namespace Z0
             Enlist(handlers);
         }
 
-        public Outcome<CmdResult> Dispatch(CmdSpec spec)
+        public CmdResult Dispatch(CmdSpec spec)
         {
             try
             {
-                Wf.Running(spec.Id);
-
                 if(Handlers.TryGetValue(spec.Id, out var handler))
                     return handler.Exec(spec);
                 else
                 {
-                    var error = WfErrors.missing(spec.Id);
-                    Wf.Error(error);
-                    return default;
+                    Wf.Error(WfErrors.missing(spec.Id));
+                    return CmdResult.fail(spec.Id);
                 }
             }
             catch(Exception e)
             {
                 Wf.Error(e);
-                return e;
-            }
-            finally
-            {
-                Wf.Ran(spec.Id);
+                return CmdResult.fail(spec.Id);
             }
         }
     }

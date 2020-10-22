@@ -36,7 +36,7 @@ namespace Z0
             => Value[(int)kind];
 
         [MethodImpl(Inline), Op]
-        public TokenInfo model(AsmTokenKind kind)
+        public TokenRecord model(AsmTokenKind kind)
             => Model[(int)kind];
     }
 }

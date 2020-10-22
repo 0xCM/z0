@@ -61,18 +61,5 @@ namespace Z0
             exec(Wf,cmd);
 
         }
-
-        public void Run(WfStepId id)
-        {
-            var src = typeof(RP);
-
-            var dst = Wf.Db().Root + FS.folder("indices") + FS.file("format-patterns", "csv");
-            EmitRenderPatterns.create(src,dst).Run(Wf);
-        }
-
-        public void Run(CmdId id)
-        {
-
-        }
     }
 }

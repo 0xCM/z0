@@ -12,8 +12,8 @@ namespace Z0
 
     partial class  AsmTokenIndex
     {
-        public TokenInfo[] Model
-            = new TokenInfo[TokenCount]{
+        public TokenRecord[] Model
+            = new TokenRecord[TokenCount]{
                 None, bnd, DST, ᛁerᛁ,  imm8, imm16, imm32, imm64, k1, m, m8,
                 m16, m32, m64, m128, m16ᙾ16, m16ᙾ32, m16ᙾ64, m16Ʌ32, m16Ʌ16,
                 m32Ʌ32, m16Ʌ64, m32fp, m64fp, m80fp, m16int, m32int, m64int,

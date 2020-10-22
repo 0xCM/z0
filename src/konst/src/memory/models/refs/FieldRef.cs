@@ -49,6 +49,18 @@ namespace Z0
             get => Field.Name;
         }
 
+        public MemoryAddress NameAddress
+        {
+            [MethodImpl(Inline)]
+            get => z.address(Field.Name);
+        }
+
+        public Ref<char> NameRef
+        {
+            [MethodImpl(Inline)]
+            get => Ref<char>.define(NameAddress, FieldName.Length);
+        }
+
         public object ReflectedValue
         {
             [MethodImpl(Inline)]

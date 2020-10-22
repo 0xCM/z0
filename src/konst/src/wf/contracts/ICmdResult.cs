@@ -5,17 +5,21 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    public interface ICount : ICounted, ITextual
+    using static Konst;
+    using static z;
+
+    public interface ICmdResult
     {
+        CmdId Id {get;}
 
+        bool Succeeded {get;}
     }
 
-    public interface ICount<F,T> : ICount, ICounted<T>
-        where T : unmanaged
-        where F : unmanaged, ICount<F,T>
+    public interface ICmdResult<P> : ICmdResult
+        where P : struct
     {
-        string ITextual.Format()
-            => Count.ToString();
+        P Payload {get;}
     }
 }

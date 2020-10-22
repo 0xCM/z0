@@ -11,7 +11,7 @@ namespace Z0
     {
         Pairings<S,T> Terms {get;}
 
-        Count ICounted<Count>.Value
+        Count ICounted<Count>.Count
             => Terms.Count;
     }
 }

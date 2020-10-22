@@ -15,12 +15,28 @@ namespace Z0.Asm
 
     using F = AsmOpCodeField;
 
-    [ApiHost(ApiNames.AsmCodes, true)]
-    public readonly struct AsmCodes
+    [ApiHost(ApiNames.AsmOpCodes, true)]
+    public readonly struct AsmOpCodes
     {
+        public static AsmOpCodeTokens tokens(ReadOnlySpan<FieldRef> src)
+        {
+            var dst = alloc<AsmOpCodeToken>(src.Length);
+            tokens(src,dst);
+            return new AsmOpCodeTokens(dst);
+        }
+
+        [MethodImpl(Inline), Op]
+        public static void tokens(ReadOnlySpan<FieldRef> src, Span<AsmOpCodeToken> dst)
+        {
+            var count = src.Length;
+            for(byte i=0; i<count; i++)
+                seek(dst, i) = new AsmOpCodeToken(i, (AsmOpCodeTokenKind)(i + 1), skip(src,i).NameRef);
+        }
+
+        [Op]
         public static void emit()
         {
-            var data = AsmCodes.dataset();
+            var data = AsmOpCodes.dataset();
             var count = data.OpCodeCount;
             var records = data.Entries.View;
             var identifers = data.Identity.View;
@@ -31,9 +47,9 @@ namespace Z0.Asm
             var handler = AsmOpCodeGroup.Create(count);
             processor.Partition(records, handler);
 
-            AsmCodes.emit(handler.Instructions);
-            AsmCodes.emit(handler.OpCodes);
-            AsmCodes.emit(handler.Mnemonics);
+            AsmOpCodes.emit(handler.Instructions);
+            AsmOpCodes.emit(handler.OpCodes);
+            AsmOpCodes.emit(handler.Mnemonics);
         }
 
         /// <summary>
@@ -42,9 +58,9 @@ namespace Z0.Asm
         /// <param name="dst">The target path</param>
         [Op]
         public static void emit(FS.FilePath dst)
-            => emit(AsmCodes.dataset(), dst);
+            => emit(AsmOpCodes.dataset(), dst);
 
-        public static void emit(ReadOnlySpan<TokenInfo> src, FS.FilePath dst)
+        public static void emit(ReadOnlySpan<TokenRecord> src, FS.FilePath dst)
         {
             var count = src.Length;
             using var writer = dst.Writer();
@@ -58,7 +74,7 @@ namespace Z0.Asm
             }
         }
 
-       [Op]
+        [Op]
         public static void emit(in AsmOpCodeDataset src, FS.FilePath dst)
         {
             var records = src.Entries.View;
@@ -75,7 +91,7 @@ namespace Z0.Asm
 
        public static void emit(ReadOnlySpan<AsmInstructionPattern> src)
         {
-            emit(src, AsmCodes.CasePath($"InstructionExpression"));
+            emit(src, AsmOpCodes.CasePath($"InstructionExpression"));
         }
 
         public static void emit(ReadOnlySpan<AsmInstructionPattern> src, FS.FilePath dstPath)
@@ -91,7 +107,7 @@ namespace Z0.Asm
 
         public static void emit(ReadOnlySpan<AsmOpCodePattern> src)
         {
-            var dstPath = AsmCodes.CasePath($"OpCodeIdentifiers");
+            var dstPath = AsmOpCodes.CasePath($"OpCodeIdentifiers");
             using var writer = dstPath.Writer();
             writer.WriteLine("Identifier");
             for(var i=0; i<src.Length; i++)
@@ -103,7 +119,7 @@ namespace Z0.Asm
 
         public static void emit(ReadOnlySpan<AsmOpCodeExpression> src)
         {
-            var dstPath = AsmCodes.CasePath($"OpCodes");
+            var dstPath = AsmOpCodes.CasePath($"OpCodes");
             using var writer = dstPath.Writer();
             writer.WriteLine("OpCode");
             for(var i=0; i<src.Length; i++)
@@ -115,7 +131,7 @@ namespace Z0.Asm
 
         public static void emit(ReadOnlySpan<MnemonicExpression> src)
         {
-            var dstPath = AsmCodes.CasePath($"Mnemonics");
+            var dstPath = AsmOpCodes.CasePath($"Mnemonics");
             using var writer = dstPath.Writer();
             writer.WriteLine("Mnemonic");
             for(var i=0; i<src.Length; i++)
@@ -128,11 +144,11 @@ namespace Z0.Asm
         [Op]
         public AsmOpCodeGroup partition()
         {
-            var dataset = AsmCodes.dataset();
+            var dataset = AsmOpCodes.dataset();
             var count = dataset.OpCodeCount;
             var handler = new AsmOpCodeGroup((uint)count);
             var processor = new AsmOpCodePartitoner();
-            AsmCodes.partition(processor, handler, dataset.Entries.View);
+            AsmOpCodes.partition(processor, handler, dataset.Entries.View);
             return handler;
         }
 
@@ -197,19 +213,18 @@ namespace Z0.Asm
         public static void partition(in AsmOpCodePartitoner processor, in AsmOpCodeGroup handler, ReadOnlySpan<AsmOpCodeRow> src)
             => processor.Partition(src, handler);
 
-        public static TableSpan<TokenInfo> Tokens
+        public static TableSpan<TokenRecord> Tokens
             => AsmTokenIndex.create().Model;
 
         [MethodImpl(Inline), Op]
         public AsmOpCodeOperand operand(ulong src, uint2 index)
             => new AsmOpCodeOperand((ushort)Bits.slice(src, index*16, 16));
 
-
         [Op]
         public static AsmSymbols symbols()
         {
             var mnemonics = SymbolStore.named<Mnemonic,ushort>();
-            var opcodes = AsmCodes.dataset();
+            var opcodes = AsmOpCodes.dataset();
             var registers = SymbolStore.named<RegisterKind,uint>();
             return new AsmSymbols(mnemonics, registers, opcodes);
         }
@@ -338,7 +353,7 @@ namespace Z0.Asm
             var records = sys.alloc<AsmOpCodeRow>(count);
             AsmTables.parse(resource, records);
             var identifers = sys.alloc<AsmOpCodePattern>(count);
-            AsmCodes.identify(records, identifers);
+            AsmOpCodes.identify(records, identifers);
             return new AsmOpCodeDataset(records,identifers);
         }
 
@@ -369,20 +384,6 @@ namespace Z0.Asm
 
         static StreamWriter CaseWriter(string name)
             =>  CasePath(name).Writer();
-
-        [Op]
-        public static AsmOpCodeTokens load(ReadOnlySpan<FieldRef> src, AsmOpCodeToken[] dst)
-        {
-            var buffer = span(dst);
-            ref var target = ref first(buffer);
-            for(byte i=0; i<src.Length; i++)
-            {
-                ref readonly var field = ref skip(src,i);
-                var sr = field.ToStringRef();
-                seek(buffer, i) = new AsmOpCodeToken(i, (AsmOpCodeTokenKind)(i + 1), sr);
-            }
-            return new AsmOpCodeTokens(dst);
-        }
 
         [Op]
         public static ref readonly DatasetFormatter<F> emit(in AsmOpCodeRow src, in DatasetFormatter<F> dst)

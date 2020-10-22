@@ -19,6 +19,8 @@ namespace Z0
         /// The encoded symbol value
         /// </summary>
         BinaryCode Encoded {get;}
+
+        char Render();
     }
 
     /// <summary>
@@ -33,6 +35,9 @@ namespace Z0
         /// </summary>
         S Value {get;}
 
+        char ISymbol.Render()
+            => (char)z.force<S,ushort>(Value);
+
         BinaryCode ISymbol.Encoded
             => bytes(Value);
     }
@@ -42,12 +47,12 @@ namespace Z0
         where T : unmanaged
     {
         /// <summary>
-        /// The <typeparamref name='T' />-cell bit-width
+        /// The <typeparamref name='T' /> cell bit-width
         /// </summary>
         ushort SegWidth => (ushort)bitwidth<T>();
 
         /// <summary>
-        /// The <typeparamref name='T' />-cell value
+        /// The <typeparamref name='T' /> cell value
         /// </summary>
         T Cell => Unsafe.As<S,T>(ref edit(Value));
     }

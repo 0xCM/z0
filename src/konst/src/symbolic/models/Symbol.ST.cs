@@ -35,7 +35,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static explicit operator char(Symbol<S,T> src)
-            => api.@char(src);
+            => api.render(src);
 
         [MethodImpl(Inline)]
         public static implicit operator S(Symbol<S,T> src)
@@ -61,11 +61,9 @@ namespace Z0
         public Type CellType
             => typeof(T);
 
-        public char Character
-        {
-            [MethodImpl(Inline)]
-            get => api.@char(this);
-        }
+        [MethodImpl(Inline)]
+        public char Render()
+            => api.render(this);
 
         S ISymbol<S>.Value
             => Value;

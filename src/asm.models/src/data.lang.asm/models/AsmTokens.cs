@@ -14,7 +14,7 @@ namespace Z0.Asm
 
     public readonly struct AsmTokens
     {
-        public readonly TableSpan<TokenInfo> Models;
+        public readonly TableSpan<TokenRecord> Models;
 
         public readonly string[] Meanings;
 
@@ -37,7 +37,7 @@ namespace Z0.Asm
             => Meanings[(int)id];
 
         [MethodImpl(Inline), Op]
-        public ref readonly TokenInfo Token(AsmTokenKind id)
+        public ref readonly TokenRecord Token(AsmTokenKind id)
             => ref Models[(int)id];
 
         [MethodImpl(Inline), Op]

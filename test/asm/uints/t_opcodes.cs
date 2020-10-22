@@ -82,13 +82,13 @@ namespace Z0.Asm
 
         public void check_opcode_records()
         {
-            var data = AsmCodes.dataset();
+            var data = AsmOpCodes.dataset();
             var count = data.OpCodeCount;
             var records = data.Entries.View;
             using var writer = CaseWriter("OpCodes");
             writer.WriteLine(header());
             for(var i=0; i<records.Length; i++)
-                writer.WriteLine(AsmCodes.format(skip(records,i)));
+                writer.WriteLine(AsmOpCodes.format(skip(records,i)));
         }
 
         // void opcode_tokens()

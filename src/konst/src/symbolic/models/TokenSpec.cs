@@ -9,27 +9,25 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct TokenInfo<K>
+    public struct TokenSpec<K,S>
         where K : unmanaged
+        where S : unmanaged, ISymbol<S>
     {
         public readonly Sequential Index;
 
         public readonly Kind<K> Kind;
 
-        public readonly StringRef Identifier;
+        public asci16 Identifier;
 
-        public readonly StringRef Value;
-
-        public readonly StringRef Description;
+        public Symbols<S> Symbols;
 
         [MethodImpl(Inline)]
-        public TokenInfo(uint index, K kind, string id, string value, string description)
+        public TokenSpec(uint index, K kind, string id, S[] symbols)
         {
-            Index = index;
             Kind = kind;
-            Identifier = id ?? EmptyString;
-            Value = value;
-            Description = description ?? EmptyString;
+            Index = index;
+            Identifier = id;
+            Symbols = symbols;
         }
 
         public bool IsEmpty
@@ -44,7 +42,14 @@ namespace Z0
             get => Index != 0;
         }
 
+        public uint4 Length
+        {
+            [MethodImpl(Inline)]
+            get => (byte)Symbols.Count;
+        }
+
+        [MethodImpl(Inline)]
         public string Format()
-            => Render.format(Index, Kind, Identifier, Value, Description);
+            => Render.format(Index, Kind, Identifier);
     }
 }

@@ -251,7 +251,7 @@ namespace Z0
 
 
             {
-                EmitAsmSymbols.create().Run(Wf);
+                //EmitAsmSymbols.create().Run(Wf);
             }
 
             {
@@ -289,10 +289,6 @@ namespace Z0
             Wf.Ran(Host);
         }
 
-        void EmitOpCodes()
-        {
-            new EmitAsmOpCodes().Configure(Wf.Db().Root + FS.file("AsmOpcodes", Csv)).Run(Wf);
-        }
 
         // public static ReadOnlySpan<AsmRoutineCode> decode(IAsmWf asmWf, MethodInfo[] src, FS.FilePath target)
         //     => decode(asmWf, CaptureAlt.capture(src), target);

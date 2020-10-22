@@ -5,34 +5,26 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static z;
 
-    public interface ICmdSpec
+    public interface IToken
     {
-        CmdId Id {get;}
+
     }
 
-    public interface ICmdSpec<T> : ICmdSpec
-        where T : struct
-    {
-        CmdId ICmdSpec.Id =>
-            CmdId.from<EmitAsmOpCodesCmd>();
-    }
-
-    public interface ICmdSpec<K,T> : ICmdSpec<CmdOptions<K,T>>
+    public interface IToken<K> : IToken, IIdentified<K>
         where K : unmanaged
-
     {
 
     }
 
-    public interface ICmdSpec<H,K,T> : ICmdSpec<K,T>
+    public interface IToken<K,S> : IConstIndex<uint4,K,S>
+        where S : unmanaged, ISymbol
         where K : unmanaged
-        where H : struct, ICmdSpec<H,K,T>
     {
-
+        ReadOnlySpan<S> Symbols {get;}
     }
 }

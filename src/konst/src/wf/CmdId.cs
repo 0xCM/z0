@@ -44,7 +44,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => string.Format(RP.SlotDot2, Data.Format());
+            => Data.Format();
 
         public static CmdId Empty => default;
     }

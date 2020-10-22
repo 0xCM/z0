@@ -50,6 +50,12 @@ namespace Z0
         FS.FolderPath StageRoot()
             => Root + FS.folder(PN.Stage);
 
+        FS.FilePath Doc(string name, FS.FileExt ext)
+            => DocRoot() + FS.file(name, ext);
+
+        FS.FilePath Doc<S>(S subject, string name, FS.FileExt ext)
+            => DocRoot() + SubjectName(subject) + FS.file(name, ext);
+
         FS.FolderName SubjectName<S>(S subject)
             => FS.folder(subject.ToString().ToLowerInvariant());
 
@@ -194,8 +200,6 @@ namespace Z0
         FS.FilePath[] CapturedCilFiles(PartId part)
             => CapturedCilFiles().Where(f => f.IsOwner(part));
 
-        FS.FilePath Doc(string name, FS.FileExt ext)
-            => DocRoot() + FS.file(name, ext);
     }
 
     public interface IFileDbPaths<H> : IFileDbPaths, IFileArchivePaths<H>

@@ -6,24 +6,37 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+
     using static Konst;
     using static z;
 
-    public struct CmdSpec<K,T> : ICmdSpec<CmdSpec<K,T>,K,T>
-        where K : unmanaged
+    public struct CmdResult<P> : ICmdResult<P>
+        where P : struct
     {
         public CmdId Id;
 
-        public CmdOptions<K,T> Options;
+        public bool Succeeded;
+
+        public P Payload;
 
         [MethodImpl(Inline)]
-        public CmdSpec(CmdId id, params CmdOption<K,T>[] options)
+        public CmdResult(CmdId id, bool success, P payload)
         {
             Id = id;
-            Options = options;
+            Payload = payload;
+            Succeeded = success;
         }
 
-        CmdId ICmdSpec.Id
+        public static CmdResult<P> Empty
+            => default;
+
+        P ICmdResult<P>.Payload
+            => Payload;
+
+        CmdId ICmdResult.Id
             => Id;
+
+        bool ICmdResult.Succeeded
+            => Succeeded;
     }
 }

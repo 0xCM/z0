@@ -9,12 +9,21 @@ namespace Z0
     using System.Runtime.Intrinsics;
 
     using static Konst;
+    using static z;
 
     /// <summary>
     /// Defines a content-parametric memory reference
     /// </summary>
     public readonly struct Ref<T> : ISegRef<Ref<T>,T>
     {
+        [MethodImpl(Inline)]
+        public static Ref<T> define(in T src, Count count)
+            => new Ref<T>(address(src), size<T>()*count);
+
+        [MethodImpl(Inline)]
+        public static Ref<T> define(MemoryAddress address, Count count)
+            => new Ref<T>(address, size<T>()*count);
+
         /// <summary>
         /// The source reference
         /// </summary>
@@ -39,7 +48,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool operator ==(Ref<T> lhs, Ref<T> rhs)
             => lhs.Equals(rhs);
-        
+
         [MethodImpl(Inline)]
         public static bool operator !=(Ref<T> lhs, Ref<T> rhs)
             => !lhs.Equals(rhs);
@@ -55,26 +64,26 @@ namespace Z0
         [MethodImpl(Inline)]
         internal Ref(Vector128<ulong> src)
             => Segment = new Ref(src);
-        
+
         public Span<T> Data
         {
             [MethodImpl(Inline)]
             get => Segment.As<T>();
         }
-        
+
         public Span<byte> Buffer
         {
             [MethodImpl(Inline)]
-            get => Segment.Buffer; 
+            get => Segment.Buffer;
         }
 
         public uint DataSize
         {
             [MethodImpl(Inline)]
             get => Segment.DataSize;
-        } 
+        }
 
-        public uint CellSize 
+        public uint CellSize
         {
             [MethodImpl(Inline)]
             get => (uint)Unsafe.SizeOf<T>();
@@ -91,19 +100,19 @@ namespace Z0
             [MethodImpl(Inline)]
             get => Segment.Location;
         }
-    
+
         public MemoryAddress Address
         {
             [MethodImpl(Inline)]
             get => Segment.Location;
         }
-        
+
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
             get => Location == 0 || DataSize == 0;
         }
-        
+
         [MethodImpl(Inline)]
         public unsafe ref T Cell(int index)
             => ref Unsafe.AsRef<T>((void*)(Location + (uint)index*CellSize));
@@ -113,7 +122,7 @@ namespace Z0
             [MethodImpl(Inline)]
             get => ref Cell(index);
         }
-    
+
         [MethodImpl(Inline)]
         public Span<S> As<S>()
             => Segment.As<S>();
@@ -122,13 +131,13 @@ namespace Z0
         public bool Equals(Ref<T> src)
             => Segment.Equals(src.Segment);
 
-        public override bool Equals(object src)        
+        public override bool Equals(object src)
             => src is Ref<T> r && Equals(r);
-        
+
         public override int GetHashCode()
             => (int) Location;
 
-        public static Ref<T> Empty 
+        public static Ref<T> Empty
             => default;
     }
 }

@@ -46,25 +46,38 @@ namespace Z0
             Mpx = Multiplex.create(Multiplex.configure(wf.Db().Root));
         }
 
-        public unsafe void Run()
-        {
-            var steps = Wf.Steps();
-            var id = Cmd.id<EmitRenderPatterns>();
-            steps.Run(id);
+        CmdResult EmitOpCodes()
+            => EmitAsmOpCodes.run(Wf);
 
-            var resources = @readonly(Mpx.ResourceDescriptors(Wf.Controller));
-            var count = resources.Length;
+        CmdResult EmitPatterns()
+            => EmitRenderPatterns.run(Wf, Wf.CmdBuilder().EmitRenderPatterns(typeof(RP)));
+
+        CmdResult EmitSymbols()
+            => EmitAsmSymbols.run(Wf, Wf.CmdBuilder().EmitAsmSymbols());
+
+        void EmitResources()
+        {
+            var descriptors = @readonly(Resources.descriptors(Wf.Controller));
+            var count = descriptors.Length;
             for(var i=0; i<count; i++)
             {
-                ref readonly var res = ref skip(resources,i);
-                Wf.Status(res);
-                var target = Wf.Db().RefDataPath(Parts.Tools.Resolved, FS.file(res.Name));
-                var data = MemView.view(res.Address, res.Size);
+                ref readonly var descriptor = ref skip(descriptors,i);
+                Wf.Status(descriptor);
+                var target = Wf.Db().RefDataPath(Parts.Tools.Resolved, FS.file(descriptor.Name));
+                var data = Resources.data(descriptor);
                 var text = Encoded.utf8(data);
                 using var writer = target.Writer();
                 writer.Write(text);
                 Wf.EmittedFile(text.Length, target);
             }
+        }
+
+        public unsafe void Run()
+        {
+            EmitOpCodes();
+            EmitPatterns();
+            EmitResources();
+            EmitSymbols();
         }
 
 

@@ -25,12 +25,24 @@ namespace Z0
             => new Count((uint)count);
 
         [MethodImpl(Inline)]
+        public static implicit operator Count(ushort src)
+            => new Count(src);
+
+        [MethodImpl(Inline)]
         public static implicit operator uint(Count src)
             => src.Value;
 
         [MethodImpl(Inline)]
-        public static implicit operator Count(ushort src)
-            => new Count(src);
+        public static explicit operator byte(Count src)
+            => (byte)src.Value;
+
+        [MethodImpl(Inline)]
+        public static explicit operator ushort(Count src)
+            => (ushort)src.Value;
+
+        [MethodImpl(Inline)]
+        public static explicit operator ulong(Count src)
+            => src.Value;
 
         [MethodImpl(Inline)]
         public static explicit operator int(Count src)

@@ -68,10 +68,10 @@ namespace Z0
             }
 
             {
-                Wf.Running(EvaluateStep.StepId);
+                Wf.Running();
                 var evaluate = Evaluate.control(App, Wf.Paths.AppCaptureRoot, Pow2.T14);
                 evaluate.Execute();
-                Wf.Ran(EvaluateStep.StepId);
+                Wf.Ran(StepId);
             }
 
             EmitCodeBlockReport.create().Run(Wf);
