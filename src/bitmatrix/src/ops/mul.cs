@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    using static Memories;
+    using static Konst;
+    using static z;
 
     partial class BitMatrix
     {
@@ -17,6 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The bitmatrix that defines the transformation</param>
         /// <param name="x">The vector to be transformed</param>
+        [MethodImpl(Inline), Op]
         public static BitVector<T> mul<T>(in BitMatrix<T> A, in BitVector<T> x)
             where T : unmanaged
         {
@@ -24,7 +25,7 @@ namespace Z0
             var dst = BitVector.alloc<T>();
             for(var i=0; i< n; i++)
                 dst[i] = BitVector.dot(A[i], x);
-            return dst;        
+            return dst;
         }
 
         /// <summary>
@@ -32,13 +33,14 @@ namespace Z0
         /// </summary>
         /// <param name="A">The bitmatrix that defines the transformation</param>
         /// <param name="x">The vector to be transformed</param>
+        [MethodImpl(Inline), Op]
         public static BitVector4 mul(BitMatrix4 A, BitVector4 x)
         {
             var n = n4;
             var z = BitVector.alloc(n);
             for(byte i=0; i< n; i++)
                 z[i] = A[i] % x;
-            return z;        
+            return z;
         }
 
         /// <summary>
@@ -46,13 +48,14 @@ namespace Z0
         /// </summary>
         /// <param name="A">The bitmatrix that defines the transformation</param>
         /// <param name="x">The vector to be transformed</param>
+        [MethodImpl(Inline), Op]
         public static BitVector8 mul(in BitMatrix8 A, in BitVector8 B)
         {
             var n = n8;
             var z = BitVector.alloc(n);
             for(var i=0; i< n; i++)
                 z[i] = A[i] % B;
-            return z;        
+            return z;
         }
 
         /// <summary>
@@ -60,6 +63,7 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
+        [MethodImpl(Inline), Op]
         public static ref BitMatrix4 mul(in BitMatrix4 A, in BitMatrix4 B, ref BitMatrix4 Z)
         {
             var n = BitMatrix4.N;
@@ -87,7 +91,7 @@ namespace Z0
             var Z = alloc(n4);
             return mul(A,B, ref Z);
         }
-        
+
         /// <summary>
         /// Multiplies two primal bitmatrices of order 8, writing the result to a caller-supplied target
         /// </summary>
@@ -112,21 +116,24 @@ namespace Z0
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
+        [MethodImpl(Inline), Op]
         public static BitMatrix8 mul(in BitMatrix8 A, in BitMatrix8 B)
         {
             var Z = alloc(n8);
             return mul(A,B, ref Z);
         }
-        
+
+        [MethodImpl(Inline), Op]
         public static BitVector16 mul(in BitMatrix16 A, in BitVector16 x)
         {
             var n = BitMatrix16.N;
             var dst = BitVector.alloc(n16);
             for(var i=0; i< n; i++)
                 dst[i] = A[i] % x;
-            return dst;        
+            return dst;
         }
 
+        [Op]
         public static BitMatrix16 mul(in BitMatrix16 A, in BitMatrix16 B)
         {
             var n = BitMatrix16.N;
@@ -143,11 +150,12 @@ namespace Z0
             return dst;
         }
 
+        [MethodImpl(Inline), Op]
         public static ref BitMatrix32 mul(ref BitMatrix32 A, in BitMatrix32 B)
         {
             var n = BitMatrix32.N;
-            var C = B.Transpose();            
-            
+            var C = B.Transpose();
+
             for(var i=0; i< n; i++)
             {
                 var r = A[i];
@@ -156,28 +164,31 @@ namespace Z0
                     z[j] = r % C[j];
                 A[i] = (uint)z;
             }
-            
+
             return ref A;
         }
 
+        [Op]
         public static BitMatrix32 mul(BitMatrix32 A, in BitMatrix32 B)
         {
             var C = A.Replicate();
             return mul(ref C, B);
         }
 
+        [MethodImpl(Inline), Op]
         public static BitVector32 mul(in BitMatrix32 A, in BitVector32 x)
         {
             const int N = 32;
             var y = BitVector.alloc(n32);
             for(var i=0; i< N; i++)
                 y[i] = A[i] % x;
-            return y;        
+            return y;
         }
 
+        [MethodImpl(Inline), Op]
         public static ref BitMatrix64 mul(ref BitMatrix64 A, BitMatrix64 B)
         {
-            const int N = 64;                        
+            const int N = 64;
             var C = B.Transpose();
             for(var i=0; i< N; i++)
             {
@@ -191,19 +202,21 @@ namespace Z0
             return ref A;
         }
 
+        [Op]
         public static BitMatrix64 mul(in BitMatrix64 A, in BitMatrix64 B)
         {
             var C = A.Replicate();
             return mul(ref C, B);
         }
 
+        [MethodImpl(Inline), Op]
         public static BitVector64 mul(in BitMatrix64 A, BitVector64 B)
         {
-            const int N = 64;                        
+            const int N = 64;
             var dst = BitVector.alloc(n64);
             for(var i=0; i< N; i++)
                 dst[i] = A[i] % B;
-            return dst;        
+            return dst;
         }
 
         /// <summary>
@@ -267,7 +280,7 @@ namespace Z0
             }
 
             return ref Z;
-        }    
+        }
 
         /// <summary>
         /// Computes the product of square bitmatrices of common natural order and returns the allocated result

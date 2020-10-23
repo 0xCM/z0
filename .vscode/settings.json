@@ -655,6 +655,7 @@
         "pindex",
         "pino",
         "preferreduilang",
+        "premul",
         "procdump",
         "publicsign",
         "pvoid",

@@ -8,7 +8,6 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     partial class BitMatrix
     {
@@ -17,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The source matrix</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
-        [MethodImpl(Inline), TestC, Closures(UnsignedInts)]
+        [MethodImpl(Inline), TestC, Closures(Closure)]
         public static Bit32 testc<T>(in BitMatrix<T> a)
             where T : unmanaged
                 => LogicSquare.testc(a.Head);
@@ -28,7 +27,7 @@ namespace Z0
         /// <param name="a">The source matrix</param>
         /// <param name="B">The mask matrix</param>
         /// <typeparam name="T">The primal component type</typeparam>
-        [MethodImpl(Inline), TestC, Closures(UnsignedInts)]
+        [MethodImpl(Inline), TestC, Closures(Closure)]
         public static Bit32 testc<T>(in BitMatrix<T> a, in BitMatrix<T> mask)
             where T : unmanaged
                 => LogicSquare.testc(a.Head, mask.Head);

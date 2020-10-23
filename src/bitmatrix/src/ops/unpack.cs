@@ -15,7 +15,7 @@ namespace Z0
         /// Projects the bits of a fixed primal bitmatrix into a generic target matrix of the same order
         /// </summary>
         /// <param name="src">The source matrix</param>
-        /// <param name="dst">The target metrix</param>
+        /// <param name="dst">The target matrix</param>
         /// <typeparam name="T">The element type of the target matrix</typeparam>
         [MethodImpl(Inline), Unpack, Closures(Closure)]
         public static ref readonly Matrix<N16,T> unpack<T>(in BitMatrix16 src, in Matrix<N16,T> dst)
@@ -29,7 +29,7 @@ namespace Z0
         /// Projects the bits of a fixed primal bitmatrix into a generic target matrix of the same order
         /// </summary>
         /// <param name="src">The source matrix</param>
-        /// <param name="dst">The target metrix</param>
+        /// <param name="dst">The target matrix</param>
         /// <typeparam name="T">The element type of the target matrix</typeparam>
         [MethodImpl(Inline), Unpack, Closures(Closure)]
         public static ref readonly Matrix<N8,T> unpack<T>(in BitMatrix8 src, in Matrix<N8,T> dst)
@@ -43,7 +43,7 @@ namespace Z0
         /// Projects the bits of a fixed primal bitmatrix into a generic target matrix of the same order
         /// </summary>
         /// <param name="src">The source matrix</param>
-        /// <param name="dst">The target metrix</param>
+        /// <param name="dst">The target matrix</param>
         /// <typeparam name="T">The element type of the target matrix</typeparam>
         [MethodImpl(Inline), Unpack, Closures(Closure)]
         public static ref readonly Matrix<N32,T> unpack<T>(in BitMatrix32 src, in Matrix<N32,T> dst)
@@ -57,7 +57,7 @@ namespace Z0
         /// Projects the bits of a fixed primal bitmatrix into a generic target matrix of the same order
         /// </summary>
         /// <param name="src">The source matrix</param>
-        /// <param name="dst">The target metrix</param>
+        /// <param name="dst">The target matrix</param>
         /// <typeparam name="T">The element type of the target matrix</typeparam>
         [MethodImpl(Inline), Unpack, Closures(Closure)]
         public static ref readonly Matrix<N64,T> unpack<T>(in BitMatrix64 src, in Matrix<N64,T> dst)
@@ -87,7 +87,7 @@ namespace Z0
         /// Projects the bits of a generic sqare bitmatix of natural order into a generic target matrix of the same order
         /// </summary>
         /// <param name="src">The source matrix</param>
-        /// <param name="dst">The target metrix</param>
+        /// <param name="dst">The target matrix</param>
         /// <typeparam name="N">The orer type</typeparam>
         /// <typeparam name="S">The source matrix element type</typeparam>
         /// <typeparam name="T">The target matrix element type</typeparam>
@@ -105,7 +105,7 @@ namespace Z0
         /// Projects the bits of a generic bitmatix of natural dimensions into a generic matrix of the same dimensions
         /// </summary>
         /// <param name="src">The source matrix</param>
-        /// <param name="dst">The target metrix</param>
+        /// <param name="dst">The target matrix</param>
         /// <typeparam name="M">The row dimension type</typeparam>
         /// <typeparam name="N">The col dimension type</typeparam>
         /// <typeparam name="S">The source matrix element type</typeparam>
@@ -125,7 +125,7 @@ namespace Z0
         /// Projects the bits of a square generic bitmatix of natural order into a generic block matrix of the same order
         /// </summary>
         /// <param name="src">The source matrix</param>
-        /// <param name="dst">The target metrix</param>
+        /// <param name="dst">The target matrix</param>
         /// <typeparam name="M">The row dimension type</typeparam>
         /// <typeparam name="N">The col dimension type</typeparam>
         /// <typeparam name="S">The source matrix element type</typeparam>
@@ -144,7 +144,7 @@ namespace Z0
         /// Projects the bits of a generic bitmatix of natural dimensions into a generic block matrix of the same dimensions
         /// </summary>
         /// <param name="src">The source matrix</param>
-        /// <param name="dst">The target metrix</param>
+        /// <param name="dst">The target matrix</param>
         /// <typeparam name="M">The row dimension type</typeparam>
         /// <typeparam name="N">The col dimension type</typeparam>
         /// <typeparam name="S">The source matrix element type</typeparam>

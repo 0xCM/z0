@@ -28,7 +28,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         internal BitMatrix(Span<T> data)
-            => this.Data = data;
+            => Data = data;
 
         [MethodImpl(Inline)]
         internal BitMatrix(BitVector<T> fill)

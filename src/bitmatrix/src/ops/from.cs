@@ -27,7 +27,7 @@ namespace Z0
             return load(src.data);
         }
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitMatrix32 from(N32 n, Span<byte> src)
             => new BitMatrix32(src.AsUInt32());
     }

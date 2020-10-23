@@ -24,18 +24,23 @@ namespace Z0
             return ref Z;
         }
 
+        [MethodImpl(Inline), Op]
         public static BitMatrix4 identity(N4 n)
             => BitMatrix.primal(n,(ushort)0b1000010000100001);
 
+        [MethodImpl(Inline), Op]
         public static BitMatrix8 identity(N8 n)
             => BitMatrix.primal(n,Identity8x8);
 
+        [MethodImpl(Inline), Op]
         public static BitMatrix16 identity(N16 n)
             => BitMatrix.primal(n,Identity16x16);
 
+        [MethodImpl(Inline), Op]
         public static BitMatrix32 identity(N32 n)
             => BitMatrix.primal(n,Identity32x32);
 
+        [MethodImpl(Inline), Op]
         public static BitMatrix64 identity(N64 n)
             => BitMatrix.primal(n,Identity64x64);
 
@@ -108,7 +113,7 @@ namespace Z0
             0, 0, 0, Pow2.T07,
         };
 
-         static ReadOnlySpan<byte> Identity64x64 => new byte[]
+        static ReadOnlySpan<byte> Identity64x64 => new byte[]
         {
             Pow2.T00, 0, 0, 0, 0, 0, 0, 0,
             Pow2.T01, 0, 0, 0, 0, 0, 0, 0,

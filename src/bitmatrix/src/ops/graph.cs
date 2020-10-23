@@ -9,7 +9,7 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     partial class BitMatrix
     {
@@ -31,7 +31,7 @@ namespace Z0
             else if(typeof(T) == typeof(ulong))
                 return graph(BitMatrix.load(n64,A.Content));
             else
-                throw Unsupported.define<T>();
+                throw no<T>();
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var n = (int)value<N>();
+            var n = nat32i<N>();
             var nodes = Graph.vertices<T>(n);
             var edges = new List<Edge<T>>();
             for(var row=0; row<n; row++)

@@ -17,6 +17,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The permutation definition</param>
         /// <param name="A">The matrix to be permuted</param>
+        [Op]
         public static ref readonly BitMatrix<T> permute<T>(Perm spec, in BitMatrix<T> A)
             where T : unmanaged
         {
@@ -31,6 +32,7 @@ namespace Z0
         /// </summary>
         /// <param name="perm">The permutation to apply</param>
         /// <param name="A">The matrix to be permuted</param>
+        [Op]
         public static ref readonly BitMatrix8 permute(in NatPerm<N8> perm, in BitMatrix8 A)
         {
             for(var row = 0; row < perm.Length; row++)
@@ -44,6 +46,7 @@ namespace Z0
         /// </summary>
         /// <param name="perm">The permutation to apply</param>
         /// <param name="A">The matrix to be permuted</param>
+        [Op]
         public static ref readonly BitMatrix16 permute(in NatPerm<N16> perm, in BitMatrix16 A)
         {
             for(var row = 0; row < perm.Length; row++)
@@ -57,6 +60,7 @@ namespace Z0
         /// </summary>
         /// <param name="perm">The permutation definition</param>
         /// <param name="A">The source/target matrix</param>
+        [Op]
         public static ref readonly BitMatrix32 permute(in NatPerm<N32> perm, in BitMatrix32 A)
         {
             for(var row = 0u; row < perm.Length; row++)
@@ -70,6 +74,7 @@ namespace Z0
         /// </summary>
         /// <param name="perm">The permutation definition</param>
         /// <param name="A">The source/target matrix</param>
+        [Op]
         public static ref readonly BitMatrix64 permute(in NatPerm<N64> perm, in BitMatrix64 A)
         {
             for(var row = 0; row < perm.Length; row++)
@@ -82,7 +87,7 @@ namespace Z0
         /// Creates a canonical permutation matrix by swapping matrix rows of the identity matrix as specified by a permutation
         /// </summary>
         /// <param name="spec">The permutation spec</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static BitMatrix64 permute(NatPerm<N64> spec)
             => permute(spec, identity(n64));
     }

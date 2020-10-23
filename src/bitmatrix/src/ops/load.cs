@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; using static Memories;
+    using static Konst;
 
     partial class BitMatrix
     {
@@ -16,13 +16,13 @@ namespace Z0
         /// </summary>
         /// <param name="src">The row content</param>
         /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitMatrix<T> load<T>(Span<T> src)
             where T : unmanaged
                 => new BitMatrix<T>(src);
 
-        [MethodImpl(Inline)]
-        public static BitMatrix<T> load<T>(SpanBlock256<T> src)
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static BitMatrix<T> load<T>(in SpanBlock256<T> src)
             where T : unmanaged
                 => new BitMatrix<T>(src);
 

@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
-    using static Memories;
+    using static Konst;
+    using static z;
 
     partial class BitMatrix
     {
@@ -16,8 +16,8 @@ namespace Z0
         /// Computes the logical negation of a generic bitmatrix, returning the allocated result to the caller
         /// </summary>
         /// <param name="a">The source matrix</param>
-        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), Not, Closures(UnsignedInts)]
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
+        [MethodImpl(Inline), Not, Closures(Closure)]
         public static BitMatrix<T> not<T>(in BitMatrix<T> a)
             where T : unmanaged
                 => BitMatrixA.not(a);
@@ -27,8 +27,8 @@ namespace Z0
         /// </summary>
         /// <param name="A">The source matrix</param>
         /// <param name="Z">The target matrix</param>
-        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), Not, Closures(UnsignedInts)]
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
+        [MethodImpl(Inline), Not, Closures(Closure)]
         public static ref readonly BitMatrix<T> not<T>(in BitMatrix<T> A, in BitMatrix<T> Z)
             where T : unmanaged
         {
@@ -37,7 +37,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Computes the logical negation of the source matrix, returning the allocated result to the caller 
+        /// Computes the logical negation of the source matrix, returning the allocated result to the caller
         /// </summary>
         /// <param name="A">The source matrix</param>
         [MethodImpl(Inline), Not]
@@ -79,7 +79,7 @@ namespace Z0
             LogicSquare.not(in A.Head, ref Z.Head);
             return Z;
         }
-        
+
         /// <summary>
         /// Computes the logical negation of a primal bitmatrix, depositing the result to the caller-supplied target
         /// </summary>
@@ -138,6 +138,6 @@ namespace Z0
         {
             LogicSquare.not(in A.Head, ref Z.Head);
             return ref Z;
-        } 
+        }
     }
 }

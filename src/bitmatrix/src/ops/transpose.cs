@@ -14,6 +14,14 @@ namespace Z0
 
     partial class BitMatrix
     {
+        [Op]
+        public static BitMatrix<N16,N8,uint> transpose(in BitMatrix<N8,N16,uint> A)
+        {
+            var vec = z.vload(n128,A.Bytes);
+            z.vstore(z.vshuf16x8(vec, Tr8x16Mask), ref z.first(A.Bytes));
+            return BitMatrix.load<N16,N8,uint>(A.Content);
+        }
+
         /// <summary>
         /// Transposes a copy of the matrix
         /// </summary>
@@ -115,14 +123,6 @@ namespace Z0
             for(var i=0; i < BitMatrix16.N; i++)
                 dst[i] = A.Col(i);
             return dst;
-        }
-
-
-        public static BitMatrix<N16,N8,uint> transpose(in BitMatrix<N8,N16,uint> A)
-        {
-            var vec = z.vload(n128,A.Bytes);
-            z.vstore(z.vshuf16x8(vec, Tr8x16Mask), ref z.first(A.Bytes));
-            return BitMatrix.load<N16,N8,uint>(A.Content);
         }
 
         public static BitMatrix32 transpose(in BitMatrix32 A)

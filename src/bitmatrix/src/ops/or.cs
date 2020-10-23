@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; using static Memories;
+    using static Konst;
+    using static z;
 
     partial class BitMatrix
     {
@@ -17,8 +18,8 @@ namespace Z0
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>
         /// <param name="B">The target matrix</param>
-        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>        
-        [MethodImpl(Inline), Or, NumericClosures(UnsignedInts)]
+        /// <typeparam name="T">The primal type over which the matrix is constructed</typeparam>
+        [MethodImpl(Inline), Or, NumericClosures(Closure)]
         public static ref readonly BitMatrix<T> or<T>(in BitMatrix<T> A, in BitMatrix<T> B, in BitMatrix<T> Z)
             where T : unmanaged
         {
