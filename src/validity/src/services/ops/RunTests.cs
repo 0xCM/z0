@@ -9,7 +9,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-
     partial class TestApp<A>
     {
         void RunTests(bool concurrent, params string[] filters)
@@ -22,8 +21,8 @@ namespace Z0
         {
             try
             {
-                Context.Paths.TestErrorPath.Delete();
-                Context.Paths.TestStatusPath.Delete();
+                Context.TestLogPaths.TestErrorLogPath.Delete();
+                Context.TestLogPaths.TestStatusLogPath.Delete();
 
                 RunTests(false,filters);
 

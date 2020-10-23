@@ -38,10 +38,9 @@ namespace Z0
             => OutputFolder + (FS.folder(target.ToString().ToLower()) + subdir);
     }
 
-    readonly struct TestLogPaths
+    readonly struct TestLogPathsLegacy
     {
-        public static TestLogPaths The => default;
-
+        public static TestLogPathsLegacy The => default;
 
         static FileExtension LogExt => FileExtensions.StatusLog;
 
@@ -91,8 +90,8 @@ namespace Z0
 
     static class Log
     {
-        static TestLogPaths Paths
-            => TestLogPaths.The;
+        static TestLogPathsLegacy Paths
+            => TestLogPathsLegacy.The;
 
         public static ITestLogger BenchLog
             => BenchLogger.TheOnly;

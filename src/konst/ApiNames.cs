@@ -254,5 +254,13 @@ namespace Z0
 
         const string spans = nameof(spans);
 
+        public const string CaseLogs = logs + dot + cases;
+
+        const string @case = "case";
+
+        const string cases = nameof(cases);
+
+        const string logs = nameof(logs);
+
     }
 }

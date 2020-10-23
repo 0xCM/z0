@@ -19,7 +19,6 @@ namespace Z0
         public static TableHeader<F> header<F>(char delimiter = FieldDelimiter)
             where F : unmanaged, Enum
                 => new TableHeader<F>(LiteralFields.fields<F>());
-
         [Op]
         public static string header53<T>(char delimiter = FieldDelimiter)
             where T : unmanaged, Enum

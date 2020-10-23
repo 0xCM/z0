@@ -158,22 +158,25 @@ namespace Z0
         protected IWfPaths AppPaths
             => Context.Paths;
 
+        public ITestLogPaths LogPaths
+            => Context.TestLogPaths;
+
         protected PartId TestedPart
         {
             [MethodImpl(Inline)]
             get => (PartId)((ulong)Assembly.GetEntryAssembly().Id() & 0xFFFFul);
         }
 
-        FolderPath TestRoot
+        FS.FolderPath TestRoot
         {
              [MethodImpl(Inline)]
-             get => Context.Paths.TestDataRoot + FolderName.Define(TestedPart.Format());
+             get => Context.TestLogPaths.TestDataRoot + FS.folder(TestedPart.Format());
         }
 
         protected FolderPath UnitDataDir
         {
              [MethodImpl(Inline)]
-             get => TestRoot + FolderName.Define(GetType().Name);
+             get => FolderPath.Define(TestRoot.Name) + FolderName.Define(GetType().Name);
         }
 
         protected string caller([Caller] string caller = null)
@@ -206,7 +209,7 @@ namespace Z0
             => Context.CaseName(f);
 
         public CasePaths Paths
-            => new CasePaths(FS.dir(Context.Paths.TestDataRoot.Name), TestedPart, GetType());
+            => new CasePaths(Context.TestLogPaths.TestDataRoot, TestedPart, GetType());
 
         [MethodImpl(Inline)]
         protected FilePath UnitPath(FileName name)

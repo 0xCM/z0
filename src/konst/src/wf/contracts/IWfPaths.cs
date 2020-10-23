@@ -95,30 +95,10 @@ namespace Z0
             => AppDataRoot + FolderName.Define(Capture);
 
         /// <summary>
-        /// The root folder for test-specific data
-        /// </summary>
-        FolderPath TestDataRoot
-            => TestLogRoot + TestDataFolder;
-
-        /// <summary>
         /// Creates a provider rooted at the current root directory for another application
         /// </summary>
         /// <param name="dst">The target app id</param>
         IWfPaths ForApp()
             => WfShell.paths(LogDir);
-
-        /// <summary>
-        /// Defines a test-specific data folder
-        /// </summary>
-        /// <param name="test">The test host type</param>
-        FolderPath TestDataDir(Type test)
-            => TestDataRoot +  FolderName.Define((test ?? GetType()).Name);
-
-        /// <summary>
-        /// Defines a parametrically-identified test-specific data folder
-        /// </summary>
-        /// <typeparam name="T">The test host type</typeparam>
-        FolderPath TestDataDir<T>()
-            => TestDataDir(typeof(T));
     }
 }

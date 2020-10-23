@@ -16,6 +16,7 @@ namespace Z0
         string DelimitedText(char delimiter);
 
         string[] HeaderNames {get;}
+
         string ITextual.Format()
             => DelimitedText(FieldDelimiter);
     }

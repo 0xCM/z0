@@ -26,5 +26,9 @@ namespace Z0
         public const string AsmLang = asm + dot + lang;
 
         public const string AsmOperands =  AsmLang + dot + operands;
+
+        public const string AsmMachines = asm + dot + machines;
+
+        const string machines = nameof(machines);
     }
 }

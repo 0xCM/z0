@@ -22,19 +22,14 @@ namespace Z0
 
         protected readonly CaseLog CaseLog;
 
-        protected virtual string AppName
-            => GetType().Assembly.GetSimpleName();
+        protected virtual string AppName {get;}
 
         protected TestApp()
         {
-            OnDispose += HandleDispose;
-            CaseLog = WfLogs.caselog(FS.path(AppPaths.CaseLogPath.Name));
-            Log = WfLogs.app(AppPaths.TestStatusPath, AppPaths.TestErrorPath);
-        }
-
-        void HandleDispose()
-        {
-            CaseLog.Dispose();
+            CaseLog = CaseLogs.create(LogPaths.CaseLogPath);
+            OnDispose += CaseLog.Dispose;
+            AppName = GetType().Assembly.GetSimpleName();
+            Log = WfLogs.app(LogPaths.TestStatusLogPath, LogPaths.TestErrorLogPath);
         }
 
         ConcurrentQueue<TestCaseRecord> TestResultQueue {get;}

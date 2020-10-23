@@ -7,6 +7,11 @@ namespace Z0
     using System;
     using System.Reflection;
 
+    public readonly struct TestLogPaths : ITestLogPaths
+    {
+
+    }
+
     public interface IWfContext : ITextual
     {
         IApiParts ApiParts
@@ -17,6 +22,9 @@ namespace Z0
 
         IWfPaths Paths
             => WfShell.paths();
+
+        ITestLogPaths TestLogPaths
+            => new TestLogPaths();
 
         IJsonSettings Settings
             => JsonSettings.Load(Paths.AppConfigPath);

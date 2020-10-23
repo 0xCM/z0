@@ -27,61 +27,28 @@ namespace Z0
             => FS.dir(text.format("{0}/applogs", LogRoot.Name));
 
         /// <summary>
-        /// The name of the folder that receives standard out stream data
-        /// </summary>
-        FolderName StatusLogFolder
-            => FolderName.Define(StatusLog);
-
-        /// <summary>
-        /// The name of the folder that receives error stream data
-        /// </summary>
-        FolderName ErrorLogFolder
-            => FolderName.Define(ErrorLog);
-
-        /// <summary>
-        /// The name of a folder that contains test result logs
-        /// </summary>
-        FolderName TestLogFolder
-            => FolderName.Define(Test);
-
-        /// <summary>
         /// The name of the runtime log folder
         /// </summary>
         FolderName AppLogFolder
             => FolderName.Define(AppsFolder);
 
-        /// <summary>
-        /// The root test directory
-        /// </summary>
-        FolderPath TestLogRoot
-            => LogRoot + TestLogFolder;
+        // FS.FolderPath TestLogRootDir
+        //     => LogDir + FS.folder(Test);
 
-        /// <summary>
-        /// The executing application's standard out log filename
-        /// </summary>
-        FileName AppStatusLogName
-            => FileName.define($"{AppName}.stdout", FileExtensions.StatusLog);
+        // /// <summary>
+        // /// The root test directory
+        // /// </summary>
+        // FolderPath TestLogRoot
+        //     => FolderPath.Define(TestLogRootDir.Name);
 
-        /// <summary>
-        /// The executing application's standard out log filename
-        /// </summary>
-        FileName CaseLogName
-            => FileName.define($"{AppName}.cases", FileExtensions.Csv);
+        // FS.FilePath TestErrorLogPath
+        //     => FS.path((TestLogRoot + FolderName.Define(ErrorLog) + FileName.define($"{AppName}.errors", FileExtensions.StatusLog)).Name);
 
-        /// <summary>
-        /// The executing application's error log filename
-        /// </summary>
-        FileName AppErrorLogName
-            => FileName.define($"{AppName}.errors", FileExtensions.StatusLog);
+        // FS.FilePath TestStatusLogPath
+        //     => FS.path((TestLogRoot + FolderName.Define(StatusLog) + FileName.define($"{AppName}.stdout", FileExtensions.StatusLog)).Name);
 
-        FilePath TestErrorPath
-            => TestLogRoot + ErrorLogFolder + AppErrorLogName;
-
-        FilePath TestStatusPath
-            => TestLogRoot + StatusLogFolder + AppStatusLogName;
-
-        FilePath CaseLogPath
-            => TestLogRoot + StatusLogFolder + CaseLogName;
+        // FS.FilePath CaseLogPath
+        //     => FS.path((TestLogRoot + FolderName.Define(StatusLog) + FileName.define($"{AppName}.cases", FileExtensions.Csv)).Name);
 
         string AppName
             => Assembly.GetEntryAssembly().GetSimpleName();

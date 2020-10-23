@@ -22,8 +22,8 @@ namespace Z0
     {
         object locker;
 
-        static TestLogPaths Paths
-            => TestLogPaths.The;
+        static TestLogPathsLegacy Paths
+            => TestLogPathsLegacy.The;
 
         internal TestLog()
         {

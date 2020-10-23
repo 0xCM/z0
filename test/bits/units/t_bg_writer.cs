@@ -10,7 +10,7 @@ namespace Z0
     {
         public void write_maps()
         {
-            var outdir = Context.Paths.TestDataDir<t_grid_writer>();
+            var outdir = Context.TestLogPaths.TestDataDir<t_grid_writer>();
             var writer = GridWriter.Create();
             writer.Save(8, 1, 256, outdir);
             writer.Save(16,1, 256, outdir);

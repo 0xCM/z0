@@ -24,12 +24,8 @@ namespace Z0
         public static IWfEventLog events(WfLogConfig config)
             => new WfEventLog(config);
 
-        [Op]
-        public static IAppMsgLog app(FilePath std, FilePath err)
+        [MethodImpl(Inline), Op]
+        public static IAppMsgLog app(FS.FilePath std, FS.FilePath err)
             => new AppMsgLog(std, err);
-
-        [Op]
-        public static CaseLog caselog(FS.FilePath dst)
-            => new CaseLog(new CaseLog<TestCaseField,TestCaseRecord>(dst));
     }
 }
