@@ -10,79 +10,23 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using api = Swaps;
+
     /// <summary>
     /// Defines a transposition, i.e. a specification for a two-element position exchange
     /// Typically denoted by an ordered pair of space-delimited indices (i j)
     /// </summary>
-    [ApiHost]
-    public struct Swap 
+    public struct Swap
     {
         /// <summary>
         /// The first index
         /// </summary>
         public int i;
-        
+
         /// <summary>
         /// The second index
         /// </summary>
         public int j;
-
-        /// <summary>
-        /// Effects (i j) -> ((i + 1) (j+ 1))
-        /// </summary>
-        [MethodImpl(Inline), Op]
-        public static ref Swap inc(ref Swap src)
-        {
-            ++src.i;
-            ++src.j;
-            return ref src;
-        }
-    
-        /// <summary>
-        /// Effects (i j) -> ((i - 1) (j - 1)) where decremented indices are clamped to 0 
-        /// </summary>
-        [MethodImpl(Inline), Op]
-        public static ref Swap dec(ref Swap src)
-        {
-            if(src.i != 0)
-                src.i--;
-            if(src.j != 0)
-                --src.j;
-            return ref src;
-        }
-
-        /// <summary>
-        /// Creates a sequence of transpositions
-        /// </summary>
-        /// <param name="s0">The leading transposition</param>
-        /// <param name="len">The length of the chain</param>
-        [MethodImpl(Inline), Op]
-        public static Swap[] Chain(Swap s0, int len)
-        {
-            var dst = new Swap[len];
-            dst[0]  = s0;
-            for(var k = 1; k < len; k++)
-                dst[k] = ++s0;
-            return dst;
-        }
-
-        /// <summary>
-        /// Parses a transposition in canonical form (i j), if possible; otherwise
-        /// returns the empty transposition
-        /// </summary>
-        /// <param name="src">The source text</param>
-        public static Swap Parse(string src)
-        {
-            var indices = src.RemoveAny(Chars.LParen, Chars.RParen).Trim().Split(Chars.Space);
-            if(indices.Length != 2)
-                return Empty;
-
-            var result = Option.Try(() => (Int32.Parse(indices[0]), Int32.Parse(indices[1])));
-            if(result.IsSome())
-                return result.Value();
-            else
-                return Empty;
-        }
 
         [MethodImpl(Inline)]
         public static implicit operator Swap((int i, int j) src)
@@ -94,11 +38,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static Swap operator ++(Swap src)
-            => inc(ref src);
+            => api.inc(ref src);
 
         [MethodImpl(Inline)]
         public static Swap operator --(Swap src)
-            => dec(ref src);
+            => api.dec(ref src);
 
         [MethodImpl(Inline)]
         public static bool operator ==(Swap lhs, Swap rhs)
@@ -106,7 +50,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static bool operator !=(Swap lhs, Swap rhs)
-            => !(lhs == rhs);                    
+            => !(lhs == rhs);
 
         [MethodImpl(Inline)]
         public Swap((int i, int j) src)
@@ -127,14 +71,14 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Op]
         public string Format()
-            => $"({i} {j})";
-        
-        public bool IsEmpy
+            => api.format(this);
+
+        public bool IsEmpty
         {
             [MethodImpl(Inline), Op]
             get => i == Empty.i && j == Empty.j;
         }
-            
+
         /// <summary>
         /// Determines whether this transposition is identical to another.
         /// Note that the order of indices is immaterial
@@ -154,19 +98,16 @@ namespace Z0
         /// <summary>
         /// Creates a copy
         /// </summary>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public Swap Replicate()
             => (i,j);
 
-        [Ignore]
         public override string ToString()
             => Format();
 
-        [Ignore]
         public override int GetHashCode()
             => HashCode.Combine(i,j);
-             
-        [Ignore]
+
         public override bool Equals(object o)
             => o is Swap x && Equals(x);
 

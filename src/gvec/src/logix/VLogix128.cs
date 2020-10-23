@@ -281,7 +281,6 @@ namespace Z0
             }
         }
 
-
         /// <summary>
         /// Evaluates an ternary operator over supplied operands
         /// </summary>
@@ -335,7 +334,6 @@ namespace Z0
                 default: throw Unsupported.define<T>(sig<T>(kind));
             }
         }
-
 
         // a nor (b or c)
         [MethodImpl(Inline), Op, Closures(Integers)]

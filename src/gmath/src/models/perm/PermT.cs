@@ -158,7 +158,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Perm<T> Swap(T i, T j)
         {
-            refswap(ref terms[iVal(i)], ref terms[iVal(j)]);
+            swap(ref terms[iVal(i)], ref terms[iVal(j)]);
             return this;
         }
 
@@ -169,7 +169,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Perm<T> Swap(int i, int j)
         {
-            refswap(ref seek(Head, i), ref seek(Head,j));
+            swap(ref seek(Head, i), ref seek(Head,j));
             return this;
         }
 
@@ -179,7 +179,7 @@ namespace Z0
         public Perm<T> Swap(params (T i, T j)[] specs)
         {
             for(var k=0; k<specs.Length; k++)
-                refswap(ref terms[iVal(specs[k].i)], ref terms[iVal(specs[k].j)]);
+                swap(ref terms[iVal(specs[k].i)], ref terms[iVal(specs[k].j)]);
             return this;
         }
 
@@ -189,7 +189,7 @@ namespace Z0
         public Perm<T> Swap(params (int i, int j)[] specs)
         {
             for(var k=0; k<specs.Length; k++)
-                refswap(ref terms[specs[k].i], ref terms[specs[k].j]);
+                swap(ref terms[specs[k].i], ref terms[specs[k].j]);
             return this;
         }
 
@@ -199,7 +199,7 @@ namespace Z0
         public Perm<T> Swap(params Swap[] specs)
         {
             for(var k=0; k<specs.Length; k++)
-                refswap(ref terms[specs[k].i], ref terms[specs[k].j]);
+                swap(ref terms[specs[k].i], ref terms[specs[k].j]);
             return this;
         }
 

@@ -57,7 +57,7 @@ namespace Z0
             for(var k = 0u; k < len; k++)
             {
                 (var i, var j) = skip(in swapmem, k);
-                z.refswap(ref seek(srcmem, i), ref seek(srcmem, j));
+                z.swap(ref seek(srcmem, i), ref seek(srcmem, j));
             }
             return src;
         }
@@ -317,7 +317,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Perm Swap(int i, int j)
         {
-            z.refswap(ref terms[i], ref terms[j]);
+            z.swap(ref terms[i], ref terms[j]);
             return this;
         }
 
@@ -327,7 +327,7 @@ namespace Z0
         public Perm Swap(params (int i, int j)[] specs)
         {
             for(var k=0; k<specs.Length; k++)
-                z.refswap(ref terms[specs[k].i], ref terms[specs[k].j]);
+                z.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
             return this;
         }
 
@@ -337,7 +337,7 @@ namespace Z0
         public Perm Apply(params Swap[] specs)
         {
             for(var k=0; k<specs.Length; k++)
-                z.refswap(ref terms[specs[k].i], ref terms[specs[k].j]);
+                z.swap(ref terms[specs[k].i], ref terms[specs[k].j]);
             return this;
         }
 

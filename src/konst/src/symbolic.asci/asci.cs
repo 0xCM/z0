@@ -12,7 +12,7 @@ namespace Z0
     [ApiHost(ApiNames.Asci, true)]
     public readonly partial struct asci
     {
-        static AsciDataStrings AsciStrings => default;
+        static AsciSymbols AsciStrings => default;
 
         [MethodImpl(Inline)]
         static bool IndexFound(int i)

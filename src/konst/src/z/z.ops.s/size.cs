@@ -28,20 +28,36 @@ namespace Z0
         public static uint size(string src)
             => (uint)src.Length*scale<char>();
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static byte size<T>(W8 w)
             => (byte)SizeOf<T>();
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ushort size<T>(W16 w)
             => (ushort)SizeOf<T>();
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint size<T>(W32 w)
             => (uint)SizeOf<T>();
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ulong size<T>(W64 w)
             => (ulong)SizeOf<T>();
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static sbyte size<T>(W8i w)
+            => (sbyte)SizeOf<T>();
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static short size<T>(W16i w)
+            => (short)SizeOf<T>();
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static int size<T>(W32i w)
+            => (int)SizeOf<T>();
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static long size<T>(W64i w)
+            => (long)SizeOf<T>();
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Symbolic
+    partial struct PermSymbolic
     {
         /// <summary>
         /// Extracts the ordered sequence of symbolic literals that define a 16-symbol permutation to a caller-supplied target
@@ -38,7 +38,7 @@ namespace Z0
             const byte Count = 16;
 
             var dst = new Perm16L[Count];
-            if(!Symbolic.literals(src,dst))
+            if(!literals(src,dst))
                 return Span<Perm16L>.Empty;
             return dst;
         }

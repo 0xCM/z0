@@ -229,7 +229,7 @@ namespace Z0
             Claim.veq(x2, src);
 
             //Shuffle the first element all the way through to the last element
-            var chain = Swap.Chain((0,1), 15);
+            var chain = Swaps.chain((0,1), 15);
             var x3 = vswap(src, chain).ToSpan();
             Claim.eq(x3[15],(byte)0);
         }
@@ -242,7 +242,7 @@ namespace Z0
             {
                 var perm = perms.First();
                 Claim.contains(all,perm);
-                var symbols = Symbolic.literals(perm);
+                var symbols = PermSymbolic.literals(perm);
                 Claim.eq(4, symbols.Length);
             }
         }
@@ -343,7 +343,7 @@ namespace Z0
             var symbol = default(Perm4L);
             for(var i=0; i<expect.Length; i++)
             {
-                Claim.Require(Symbolic.literal(perm, i, out symbol));
+                Claim.Require(PermSymbolic.literal(perm, i, out symbol));
                 Claim.Eq(expect[i], symbol);
             }
         }

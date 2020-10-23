@@ -11,11 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    /// <summary>
-    /// Encoded x86 bytes extracted from a memory source
-    /// </summary>
-    [ApiHost]
-    public readonly struct AsciSymbols
+    public readonly struct AsciSymbolCover
     {
         /// <summary>
         /// The encoded bytes
@@ -86,31 +82,31 @@ namespace Z0
         }
 
         [MethodImpl(Inline), Op]
-        public AsciSymbols(AsciSymbol[] bytes)
+        public AsciSymbolCover(AsciSymbol[] bytes)
             => Data = bytes ?? new AsciSymbol[0];
 
         [MethodImpl(Inline), Op]
-        public static implicit operator AsciSymbol[](in AsciSymbols src)
+        public static implicit operator AsciSymbol[](in AsciSymbolCover src)
             => src.Data;
 
         [MethodImpl(Inline), Op]
-        public static implicit operator AsciSymbols(AsciSymbol[] src)
-            => new AsciSymbols(src);
+        public static implicit operator AsciSymbolCover(AsciSymbol[] src)
+            => new AsciSymbolCover(src);
 
         [MethodImpl(Inline), Op]
-        public static implicit operator ReadOnlySpan<byte>(in AsciSymbols src)
+        public static implicit operator ReadOnlySpan<byte>(in AsciSymbolCover src)
             => src.ByteEdit;
 
         [MethodImpl(Inline), Op]
-        public static bool operator==(in AsciSymbols a, in AsciSymbols b)
+        public static bool operator==(in AsciSymbolCover a, in AsciSymbolCover b)
             => a.Equals(b);
 
         [MethodImpl(Inline), Op]
-        public static bool operator!=(in AsciSymbols a, in AsciSymbols b)
+        public static bool operator!=(in AsciSymbolCover a, in AsciSymbolCover b)
             => !a.Equals(b);
 
         [MethodImpl(Inline), Op]
-        public bool Equals(AsciSymbols src)
+        public bool Equals(AsciSymbolCover src)
         {
             if(IsNonEmpty && src.IsNonEmpty)
                 return Data.SequenceEqual(src.Data);
@@ -130,12 +126,12 @@ namespace Z0
             => Data.GetHashCode();
 
         public override bool Equals(object src)
-            => src is AsciSymbols x && Equals(x);
+            => src is AsciSymbolCover x && Equals(x);
 
         public override string ToString()
             => Format();
 
-        public static AsciSymbols Empty
+        public static AsciSymbolCover Empty
             => default;
     }
 }

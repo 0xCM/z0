@@ -405,7 +405,7 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe void copy<T>(T* pSrc, Span<T> dst, int offset, uint srcCount)
             where T : unmanaged
-                =>  copy(pSrc, gptr(first(dst), offset), srcCount);
+                => copy(pSrc, gptr(first(dst), offset), srcCount);
 
         /// <summary>
         /// Copies a contiguous segments of bytes from a source location to a target span

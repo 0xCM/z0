@@ -11,8 +11,8 @@ namespace Z0
     using static Konst;
     using static AsciKonst;
 
-    [ApiHost]
-    public readonly struct AsciDataStrings
+    [ApiHost(ApiNames.AsciSymbols, true)]
+    public readonly struct AsciSymbols
     {
         [MethodImpl(Inline), Op]
         public static ReadOnlySpan<byte> charbytes(N0 index)
@@ -20,7 +20,11 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public string @string(sbyte offset, sbyte count)
-            => slice(AsciCharString, offset, count);
+            => text.slice(AsciCharString, offset, count);
+
+        [MethodImpl(Inline), Op]
+        public ReadOnlySpan<AsciCharCode> codes(in asci16 src)
+            => recover<AsciCharCode>(bytes(src));
 
         /// <summary>
         /// Returns the asci codes [offset, ..., offset + count] where offset <= (2^7-1) - count
@@ -38,7 +42,7 @@ namespace Z0
         /// <param name="count">Tne number of characters to select</param>
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<char> chars(sbyte offset, sbyte count)
-            => z.slice(z.recover<char>(CharBytes), offset, count);
+            => slice(recover<char>(CharBytes), offset, count);
 
         /// <summary>
         /// Returns the asci symbols corresponding to the asci codes [offset, ..., offset + count] where offset <= (2^7-1) - count
@@ -46,8 +50,8 @@ namespace Z0
         /// <param name="offset">The zero-based offset</param>
         /// <param name="count">Tne number of characters to select</param>
         [MethodImpl(Inline), Op]
-        public ReadOnlySpan<AsciChar> symbols(sbyte offset, sbyte count)
-            => recover<char,AsciChar>(chars(offset,count));
+        public ReadOnlySpan<AsciSymbol> symbols(sbyte offset, sbyte count)
+            => recover<char,AsciSymbol>(chars(offset,count));
 
         /// <summary>
         /// Returns the uint16 asci scalar values corresponding to the asci codes [offset, ..., offset + count] where offset <= (2^7-1) - count
@@ -111,7 +115,7 @@ namespace Z0
                 };
 
 
-        public static AsciDataStrings Service
+        public static AsciSymbols Service
             => default;
 
         string AsciCharString

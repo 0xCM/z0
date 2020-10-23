@@ -36,7 +36,6 @@ namespace Z0
             where N : unmanaged, ITypeNat
                 => load(AsBytes(src),n);
 
-
         /// <summary>
         /// Allocates span of natural length
         /// </summary>

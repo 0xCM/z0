@@ -21,7 +21,7 @@ namespace Z0
         public static Span<T> Shuffle<T>(this IPolySourced random, Span<T> src)
         {
             for (var i = 0u; i < src.Length; i++)
-                refswap(ref seek(src,i), ref seek(src,(uint)(i + random.Next(0, src.Length - i))));
+                swap(ref seek(src,i), ref seek(src,(uint)(i + random.Next(0, src.Length - i))));
             return src;
         }
 
@@ -34,7 +34,7 @@ namespace Z0
         public static T[] Shuffle<T>(this IPolySourced random, T[] src)
         {
             for (var i = 0u; i < src.Length; i++)
-                refswap(ref src[i], ref src[i + random.Next(0,src.Length - i)]);
+                swap(ref src[i], ref src[i + random.Next(0,src.Length - i)]);
             return src;
         }
 

@@ -6,15 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Intrinsics;
 
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.PermSymbolic, true)]
-    public readonly partial struct PermSymbolic
+    [ApiHost]
+    public readonly struct Tokens
     {
-
-
+        [MethodImpl(Inline)]
+        public static TokenRecord token<T>(T index, string id, string value, string description)
+            where T : unmanaged, Enum
+                => new TokenRecord(EnumValue.e32u(index), id, value, description);
     }
 }

@@ -9,7 +9,6 @@ namespace Z0
     using System.Collections.Generic;
 
     using static Konst;
-    using static Memories;
 
     public static class PRngX
     {
@@ -69,7 +68,7 @@ namespace Z0
         public static NatPerm<N> Perm<N>(this IPolyrand random, N n = default)
             where N : unmanaged, ITypeNat
                 => Shuffle22(Z0.Permute.natural(n), random);
-                
+
         /// <summary>
         /// Produces a stream of random permutation of natural length N
         /// </summary>
@@ -83,7 +82,7 @@ namespace Z0
         {
             while(true)
                 yield return random.Perm(n);
-        }                        
+        }
 
         /// <summary>
         /// Shuffles a copy of the source permutation, leaving the original intact.
@@ -99,7 +98,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Shuffles a copy of the source permutatiion, leaving the original intact.
+        /// Shuffles a copy of the source permutation, leaving the original intact.
         /// </summary>
         /// <param name="random">The random source</param>
         /// <param name="src">The permutation</param>

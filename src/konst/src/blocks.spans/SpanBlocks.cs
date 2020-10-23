@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [ApiHost]
+    [ApiHost(ApiNames.SpanBlocks)]
     public readonly partial struct SpanBlocks
     {
 

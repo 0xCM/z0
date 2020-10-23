@@ -25,14 +25,45 @@ namespace Z0
 
         public const string Tuples = tuples;
 
-        // ~~ Primal
+        // ~~ Api
         // ~~ -----------------------------------------------------------------------------------------
 
-        public const string PrimalKinds = primal + dot + kinds;
+        public const string ApiIdentity = api + dot + identity;
 
+        public const string ApiIdentityX = api + dot + identity + dot + extensions;
+
+        public const string ApiIdentify = api + dot + identify;
+
+        public const string ApiTestIdentity = api + dot + identity + dot + tests;
+
+        public const string ApiIdentityReflector = api + dot + identity + dot + reflector;
+
+        public const string ApiCatalogs = api + dot + catalogs;
+
+        public const string ApiEnumCatalog = api + dot + catalogs + dot + enums;
+
+        public const string ApiCatalogExtensions = api + dot + catalogs + dot + extensions;
+
+        public const string ApiCatalogServices = api + dot + catalogs + dot + services;
+
+        public const string ApiQuery = api + dot + query;
+
+        public const string ApiPartCatalogQuery = api + dot + query + dot + parts;
+
+        public const string ApiHostMemberQuery = api + dot + query + dot + hosts;
+
+        // ~~ Blocks
+        // ~~ -----------------------------------------------------------------------------------------
+
+        public const string DataBlocks = blocks + dot + data;
+
+        public const string CharBlocks = blocks + dot + chars;
+
+        public const string SpanBlocks = blocks + dot + spans;
 
         // ~~ Cells
         // ~~ -----------------------------------------------------------------------------------------
+
         public const string Cells = cells;
 
         public const string CellDelegates = cells + dot + delegates;
@@ -83,62 +114,6 @@ namespace Z0
 
         public const string LinqXFuncX = linq + dot + expressions + dot + extensions;
 
-        // ~~ Resources
-        // ~~ -----------------------------------------------------------------------------------------
-
-        public const string Resources = resources;
-
-        public const string TextResources = resources + dot + A.text;
-
-
-        // ~~ SFunc
-        // ~~ -----------------------------------------------------------------------------------------
-
-        public const string SFxSurrogates = sfunc + dot + surrogates;
-
-        public const string SFxProjectors = sfunc + dot + projectors;
-
-
-        // ~~ Blocks
-        // ~~ -----------------------------------------------------------------------------------------
-
-        public const string DataBlocks = blocks + dot + data;
-
-        public const string CharBlocks = blocks + dot + chars;
-
-        // ~~ Symbolic
-        // ~~ -----------------------------------------------------------------------------------------
-
-        public const string Symbolic = symbolic;
-
-        public const string SymbolicX = symbolic + dot + extensions;
-
-        public const string SymbolicHex = symbolic + dot + hex;
-
-        public const string SymbolStore = symbolic + dot + store;
-
-        public const string SymbolicDigits = symbolic + dot + digits;
-
-        public const string Asci = symbolic + dot + A.asci;
-
-        public const string PermSymbolic = symbolic + dot + permutations;
-
-        // ~~ Wf
-        // ~~ -----------------------------------------------------------------------------------------
-
-        public const string Workflow = workflow;
-
-        public const string WfShell = workflow + dot + shell;
-
-        public const string WfControl = workflow + dot + control;
-
-        public const string WfShellX = workflow + dot + shell + dot + extensions;
-
-        // ~~ Text
-        // ~~ -----------------------------------------------------------------------------------------
-
-        public const string TextEncoders = A.text + dot + encoders;
-
         // ~~ Memory
         // ~~ -----------------------------------------------------------------------------------------
 
@@ -156,32 +131,64 @@ namespace Z0
 
         public const string StringRefs = A.memory + dot + refs + dot + strings;
 
-        // ~~ Api
+
+        // ~~ Primal
         // ~~ -----------------------------------------------------------------------------------------
 
-        public const string ApiIdentity = api + dot + identity;
+        public const string PrimalKinds = primal + dot + kinds;
 
-        public const string ApiIdentityX = api + dot + identity + dot + extensions;
+        // ~~ Resources
+        // ~~ -----------------------------------------------------------------------------------------
 
-        public const string ApiIdentify = api + dot + identify;
+        public const string Resources = resources;
 
-        public const string ApiTestIdentity = api + dot + identity + dot + tests;
+        public const string TextResources = resources + dot + A.text;
 
-        public const string ApiIdentityReflector = api + dot + identity + dot + reflector;
 
-        public const string ApiCatalogs = api + dot + catalogs;
+        // ~~ SFunc
+        // ~~ -----------------------------------------------------------------------------------------
 
-        public const string ApiEnumCatalog = api + dot + catalogs + dot + enums;
+        public const string SFxSurrogates = sfunc + dot + surrogates;
 
-        public const string ApiCatalogExtensions = api + dot + catalogs + dot + extensions;
+        public const string SFxProjectors = sfunc + dot + projectors;
 
-        public const string ApiCatalogServices = api + dot + catalogs + dot + services;
 
-        public const string ApiQuery = api + dot + query;
+        // ~~ Symbolic
+        // ~~ -----------------------------------------------------------------------------------------
 
-        public const string ApiPartCatalogQuery = api + dot + query + dot + parts;
+        public const string Symbolic = symbolic;
 
-        public const string ApiHostMemberQuery = api + dot + query + dot + hosts;
+        public const string SymbolicX = symbolic + dot + extensions;
+
+        public const string SymbolicHex = symbolic + dot + hex;
+
+        public const string SymbolStore = symbolic + dot + store;
+
+        public const string SymbolicDigits = symbolic + dot + digits;
+
+        public const string Asci = symbolic + dot + A.asci;
+
+        public const string AsciSymbols = symbolic + dot + A.asci + dot + symbols;
+
+        public const string PermSymbolic = symbolic + dot + permutations;
+
+        public const string PermSymbolicX = symbolic + dot + permutations + dot + extensions;
+
+        // ~~ Wf
+        // ~~ -----------------------------------------------------------------------------------------
+
+        public const string Workflow = workflow;
+
+        public const string WfShell = workflow + dot + shell;
+
+        public const string WfControl = workflow + dot + control;
+
+        public const string WfShellX = workflow + dot + shell + dot + extensions;
+
+        // ~~ Text
+        // ~~ -----------------------------------------------------------------------------------------
+
+        public const string TextEncoders = A.text + dot + encoders;
 
         // ~~ Tables
         // ~~ -----------------------------------------------------------------------------------------
@@ -244,5 +251,8 @@ namespace Z0
         const string tests = nameof(tests);
 
         const string reflector = nameof(reflector);
+
+        const string spans = nameof(spans);
+
     }
 }

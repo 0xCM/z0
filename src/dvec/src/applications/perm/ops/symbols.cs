@@ -8,12 +8,39 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.Intrinsics;
 
     using static Konst;
+    using static BitMasks.Literals;
     using static z;
 
     partial class Permute
     {
+
+        /// <summary>
+        /// Creates a fixed 16-bit permutation over a generic permutation over 16 elements
+        /// </summary>
+        /// <param name="src">The source permutation</param>
+        [MethodImpl(Inline), Op]
+        public static Perm16 vinit(W128 w, Perm<byte> spec)
+            => new Perm16(z.vload(w128, spec.Terms));
+
+        /// <summary>
+        /// Creates a fixed 32-bit permutation over a generic permutation over 32 elements
+        /// </summary>
+        /// <param name="src">The source permutation</param>
+        [MethodImpl(Inline), Op]
+        public static Perm32 vinit(W256 w, Perm<byte> src)
+            => new Perm32(z.vload(w, src.Terms));
+
+        [MethodImpl(Inline), Op]
+        public static Perm16 vspec(Vector128<byte> data)
+            => new Perm16(z.vand(data, z.vbroadcast(w128, Msb8x8x3)));
+
+        [MethodImpl(Inline), Op]
+        public static Perm32 vspec(Vector256<byte> data)
+            => new Perm32(z.vand(data, z.vbroadcast(w256, Msb8x8x3)));
+
         /// <summary>
         /// Enumerates all permutation map format strings on 4 symbols
         /// </summary>
@@ -106,5 +133,33 @@ namespace Z0
         static void ThrowKeyNotFound<T>(T key)
             where T : unmanaged
                 => throw new Exception($"The value {key}:{typeof(T).DisplayName()} does not exist in the index");
+
+
+        [MethodImpl(Inline), Op]
+        public static Vector128<byte> shuffles(NatPerm<N16> src)
+            => z.vload(n128, first(z.transform<byte>(src.Terms)));
+
+        /// <summary>
+        /// Shuffles the permutation in-place using a provided random source.
+        /// </summary>
+        /// <param name="random">The random source</param>
+        [MethodImpl(Inline)]
+        public static ref readonly Perm shuffle(in Perm src, IPolySourced random)
+        {
+            random.Shuffle(src.Terms);
+            return ref src;
+        }
+
+        /// <summary>
+        /// Shuffles the permutation in-place using a provided random source.
+        /// </summary>
+        /// <param name="random">The random source</param>
+        [MethodImpl(Inline)]
+        public static ref readonly Perm<T> shuffle<T>(in Perm<T> src, IPolySourced random)
+            where T : unmanaged
+        {
+            random.Shuffle(src.Terms);
+            return ref src;
+        }
     }
 }

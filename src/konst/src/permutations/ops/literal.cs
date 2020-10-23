@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Symbolic
+    partial struct PermSymbolic
     {
         /// <summary>
         /// Attempts to extract an index-identified permutation symbol

@@ -6,9 +6,9 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
+    using static z;
 
     /// <summary>
     /// Defines a span of contiguous memory that can be evenly partitioned into 8, 16, 32, 64 and 128-bit segments
@@ -17,23 +17,23 @@ namespace Z0
     public readonly ref struct SpanBlock128<T>
         where T : unmanaged
     {
-        readonly Span<T> data;
+        readonly Span<T> Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator Span<T>(in SpanBlock128<T> src)
-            => src.data;
+            => src.Storage;
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<T>(in SpanBlock128<T> src)
-            => src.data;
+            => src.Storage;
 
         [MethodImpl(Inline)]
         public SpanBlock128(Span<T> src)
-            => this.data = src;
+            => Storage = src;
 
         [MethodImpl(Inline)]
         public SpanBlock128(params T[] src)
-            => this.data = src;
+            => Storage = src;
 
         /// <summary>
         /// The backing storage
@@ -41,7 +41,7 @@ namespace Z0
         public Span<T> Data
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Storage;
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref MemoryMarshal.GetReference(data);
+            get => ref first(Storage);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => data.IsEmpty;
+            get => Storage.IsEmpty;
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => data.Length;
+            get => Storage.Length;
         }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace Z0
         public int BlockLength
         {
             [MethodImpl(Inline)]
-            get => 16/Unsafe.SizeOf<T>();
+            get => 16/size<T>(w32i);
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Z0
         public ulong BitCount
         {
             [MethodImpl(Inline)]
-            get => (ulong)CellCount * (ulong)Unsafe.SizeOf<T>()*8;
+            get => (ulong)CellCount * size<T>(w64)*8;
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.Bytes();
+            get => Storage.Bytes();
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
         public Span<T> Block(int block)
-            => data.Slice(block * BlockLength, BlockLength);
+            => Storage.Slice(block * BlockLength, BlockLength);
 
         /// <summary>
         /// Extracts an index-identified block (non-allocating, but not free due to the price of creating a new wrapper)
@@ -156,7 +156,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public void Fill(T src)
-            => data.Fill(src);
+            => Storage.Fill(src);
 
         /// <summary>
         /// Zero-fills all blocked cells
@@ -171,7 +171,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         [MethodImpl(Inline)]
         public void CopyTo(Span<T> dst)
-            => data.CopyTo(dst);
+            => Storage.CopyTo(dst);
 
         /// <summary>
         /// Reinterprets the storage cell type
@@ -180,14 +180,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public SpanBlock128<S> As<S>()
             where S : unmanaged
-                => new SpanBlock128<S>(z.recover<T,S>(data));
+                => new SpanBlock128<S>(z.recover<T,S>(Storage));
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()
-            => data.GetEnumerator();
+            => Storage.GetEnumerator();
 
         [MethodImpl(Inline)]
         public ref T GetPinnableReference()
-            => ref data.GetPinnableReference();
+            => ref Storage.GetPinnableReference();
     }
 }

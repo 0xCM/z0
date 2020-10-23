@@ -3,18 +3,18 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using static AsciDataStrings;
+    using static AsciSymbols;
     using static z;
 
     partial struct asci
-    {        
+    {
         /// <summary>
-        /// if given a lowercase character [a..z], produces the corresponding uppercase charcter [A..z]
+        /// if given a lowercase character [a..z], produces the corresponding uppercase character [A..z]
         /// Otherwise, returns the input unharmed
         /// </summary>
         /// <param name="src">The source character</param>

@@ -17,23 +17,23 @@ namespace Z0
     public readonly ref struct SpanBlock512<T>
         where T : unmanaged
     {
-        readonly Span<T> data;
+        readonly Span<T> Storage;
 
         [MethodImpl(Inline)]
         public static explicit operator Span<T>(in SpanBlock512<T> src)
-            => src.data;
+            => src.Storage;
 
         [MethodImpl(Inline)]
         public static explicit operator ReadOnlySpan<T>(in SpanBlock512<T> src)
-            => src.data;
+            => src.Storage;
 
         [MethodImpl(Inline)]
         public SpanBlock512(Span<T> src)
-            => this.data = src;
+            => Storage = src;
 
         [MethodImpl(Inline)]
         public SpanBlock512(params T[] src)
-            => this.data = src;
+            => Storage = src;
 
         /// <summary>
         /// The unblocked storage cells
@@ -41,7 +41,7 @@ namespace Z0
         public Span<T> Data
         {
             [MethodImpl(Inline)]
-            get => data;
+            get => Storage;
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref MemoryMarshal.GetReference(data);
+            get => ref MemoryMarshal.GetReference(Storage);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Z0
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => data.IsEmpty;
+            get => Storage.IsEmpty;
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Z0
         public int CellCount
         {
             [MethodImpl(Inline)]
-            get => data.Length;
+            get => Storage.Length;
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace Z0
         public Span<byte> Bytes
         {
             [MethodImpl(Inline)]
-            get => data.Bytes();
+            get => Storage.Bytes();
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
         public Span<T> Block(int block)
-            => data.Slice(block * BlockLength, BlockLength);
+            => Storage.Slice(block * BlockLength, BlockLength);
 
         /// <summary>
         /// Extracts an index-identified block (non-allocating, but not free due to the price of creating a new wrapper)
@@ -158,7 +158,7 @@ namespace Z0
         public Span<T> LoBlock(int block)
         {
             var count = BlockLength / 2;
-            return data.Slice(block*BlockLength, count);
+            return Storage.Slice(block*BlockLength, count);
         }
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Z0
         public Span<T> HiBlock(int block)
         {
             var count = BlockLength / 2;
-            return data.Slice(block * BlockLength + count, count);
+            return Storage.Slice(block * BlockLength + count, count);
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         [MethodImpl(Inline)]
         public void Fill(T src)
-            => data.Fill(src);
+            => Storage.Fill(src);
 
         /// <summary>
         /// Zero-fills all blocked cells
@@ -193,7 +193,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         [MethodImpl(Inline)]
         public void CopyTo(Span<T> dst)
-            => data.CopyTo(dst);
+            => Storage.CopyTo(dst);
 
         /// <summary>
         /// Reinterprets the storage cell type
@@ -202,14 +202,14 @@ namespace Z0
         [MethodImpl(Inline)]
         public SpanBlock512<S> As<S>()
             where S : unmanaged
-                => new SpanBlock512<S>(z.recover<T,S>(data));
+                => new SpanBlock512<S>(z.recover<T,S>(Storage));
 
         [MethodImpl(Inline)]
         public Span<T>.Enumerator GetEnumerator()
-            => data.GetEnumerator();
+            => Storage.GetEnumerator();
 
         [MethodImpl(Inline)]
         public ref T GetPinnableReference()
-            => ref data.GetPinnableReference();
+            => ref Storage.GetPinnableReference();
     }
 }

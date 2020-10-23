@@ -9,7 +9,8 @@ namespace Z0
 
      using static Konst;
 
-    partial class XSymbolic
+    [ApiHost(ApiNames.PermSymbolicX, true)]
+    public static partial class XPermSymbolic
     {
         /// <summary>
         /// Determines whether a permutation literal is a symbol
@@ -17,7 +18,7 @@ namespace Z0
         /// <param name="src">The value to inspect</param>
         [MethodImpl(Inline), Op]
         public static bool IsSymbol(this Perm4L src)
-            => Symbolic.test(src);
+            => PermSymbolic.test(src);
 
         /// <summary>
         /// Determines whether a permutation literal is a symbol
@@ -25,7 +26,7 @@ namespace Z0
         /// <param name="src">The value to inspect</param>
         [MethodImpl(Inline), Op]
         public static bool IsSymbol(this Perm8L src)
-            => Symbolic.test(src);
+            => PermSymbolic.test(src);
 
         /// <summary>
         /// Determines whether a permutation literal is a symbol
@@ -33,6 +34,6 @@ namespace Z0
         /// <param name="src">The value to inspect</param>
         [MethodImpl(Inline), Op]
         public static bool IsSymbol(this Perm16L src)
-            => Symbolic.test(src);
+            => PermSymbolic.test(src);
     }
 }

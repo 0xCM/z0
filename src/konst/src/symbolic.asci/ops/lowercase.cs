@@ -3,16 +3,16 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
+{
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    using static AsciDataStrings;
+    using static AsciSymbols;
     using static z;
 
     partial struct asci
-    {        
+    {
         /// <summary>
         /// Transforms an uppercase character [A..Z] to the corresponding lowercase charcter [a..z];
         /// if the source character is not in the letter domain, the input is returned unharmed
