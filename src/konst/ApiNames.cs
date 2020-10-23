@@ -68,9 +68,17 @@ namespace Z0
 
         public const string CellDelegates = cells + dot + delegates;
 
+        public const string CellOps = cells + dot + ops;
+
+        public const string CellOpX = cells + dot + ops + dot + extensions;
+
+        public const string CellOpKinds = cells + dot + ops + dot + kinds;
+
         public const string CellBuffers = cells + dot + buffers;
 
         public const string CellSource = cells + dot + source;
+
+        public const string CellsX = cells + dot + extensions;
 
         // ~~ Delegates
         // ~~ -----------------------------------------------------------------------------------------
@@ -246,6 +254,37 @@ namespace Z0
 
         public const string Relations = relations;
 
+        public const string CaseLogs = logs + dot + cases;
+
+
+        public const string VectorKinds = vex + dot + kinds;
+
+        public const string VectorKindsX = vex + dot + kinds + dot + extensions;
+
+        public const string NumericKinds = numeric + dot + kinds;
+
+        public const string NumericArrays = numeric + dot + arrays;
+
+        public const string NumericKindX = numeric + dot + kinds + dot + extensions;
+
+        public const string Widths = widths;
+
+        const string @case = "case";
+
+        const string cases = nameof(cases);
+
+        const string logs = nameof(logs);
+
+        const string vex = nameof(vex);
+
+        const string numeric = nameof(numeric);
+
+        const string arrays = nameof(arrays);
+
+        const string widths = nameof(widths);
+
+        const string ops = nameof(ops);
+
         const string control = nameof(control);
 
         const string tests = nameof(tests);
@@ -254,13 +293,10 @@ namespace Z0
 
         const string spans = nameof(spans);
 
-        public const string CaseLogs = logs + dot + cases;
+        const string memory = nameof(memory);
 
-        const string @case = "case";
+        const string models = nameof(models);
 
-        const string cases = nameof(cases);
-
-        const string logs = nameof(logs);
-
+        public const string MemoryModels = memory + dot + models;
     }
 }

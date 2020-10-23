@@ -11,7 +11,7 @@ namespace Z0
 
     using K = ApiOperatorClass;
 
-    public readonly struct OperatorClass : IOperatorClass<OperatorClass,K>
+    public readonly struct OperatorClass : IOperatorClassHost<OperatorClass,K>
     {
         public K Kind {get;}
 
@@ -19,20 +19,10 @@ namespace Z0
         public OperatorClass(K k)
             => Kind = k;
 
-        public OperatorClass Generalized
-            => new OperatorClass(Kind);
-    }
-
-    public readonly struct OperatorClass<T> : IOperational<K,T>
-    {
-        public K Kind {get;}
-
-        [MethodImpl(Inline)]
-        public static implicit operator OperatorClass(OperatorClass<T> src)
-            => new OperatorClass(src.Kind);
-
-        [MethodImpl(Inline)]
-        public OperatorClass(K k)
-            => Kind = k;
+        public OperatorClass Classifier
+        {
+            [MethodImpl(Inline)]
+            get => new OperatorClass(Kind);
+        }
     }
 }

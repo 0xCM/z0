@@ -32,24 +32,6 @@ namespace Z0
         FolderName AppLogFolder
             => FolderName.Define(AppsFolder);
 
-        // FS.FolderPath TestLogRootDir
-        //     => LogDir + FS.folder(Test);
-
-        // /// <summary>
-        // /// The root test directory
-        // /// </summary>
-        // FolderPath TestLogRoot
-        //     => FolderPath.Define(TestLogRootDir.Name);
-
-        // FS.FilePath TestErrorLogPath
-        //     => FS.path((TestLogRoot + FolderName.Define(ErrorLog) + FileName.define($"{AppName}.errors", FileExtensions.StatusLog)).Name);
-
-        // FS.FilePath TestStatusLogPath
-        //     => FS.path((TestLogRoot + FolderName.Define(StatusLog) + FileName.define($"{AppName}.stdout", FileExtensions.StatusLog)).Name);
-
-        // FS.FilePath CaseLogPath
-        //     => FS.path((TestLogRoot + FolderName.Define(StatusLog) + FileName.define($"{AppName}.cases", FileExtensions.Csv)).Name);
-
         string AppName
             => Assembly.GetEntryAssembly().GetSimpleName();
     }

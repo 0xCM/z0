@@ -14,7 +14,7 @@ namespace Z0.Asm
     partial struct AsmSemantic
     {
         [MethodImpl(Inline), Op]
-        public static ax set(ushort src,  ax dst)
+        public static ax set(ushort src, ax dst)
             => new ax(src);
 
         [MethodImpl(Inline), Op]

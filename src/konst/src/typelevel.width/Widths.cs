@@ -9,8 +9,9 @@ namespace Z0
 
     using static Konst;
 
+    [ApiHost(ApiNames.Widths, true)]
     public static partial class Widths
     {
-
+        const NumericKind Closure = UnsignedInts;
     }
 }

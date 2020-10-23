@@ -15,7 +15,7 @@ namespace Z0
         /// Computes the number of bits occupied by an instance of a parametrically-identified type
         /// </summary>
         /// <typeparam name="T">The measurable type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint bits<T>()
             where T : struct
                 => bytes<T>()*8;

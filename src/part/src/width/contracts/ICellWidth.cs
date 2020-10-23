@@ -21,4 +21,10 @@ namespace Z0
         string ITypedLiteral<CellWidth>.Name
             => CellWidth.FormatName();
     }
+
+    public interface ICellWidth<W> : ICellWidth
+        where W : unmanaged, ICellWidth<W>
+    {
+
+    }
 }

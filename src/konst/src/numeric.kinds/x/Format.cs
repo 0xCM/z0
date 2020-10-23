@@ -9,13 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XNumericKinds
     {
         /// <summary>
         /// Converts a numeric indicator to a character
         /// </summary>
         /// <param name="src">The source kind</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static char ToChar(this NumericIndicator src)
             => NumericKinds.@char(src);
 
@@ -23,7 +23,7 @@ namespace Z0
         /// Produces text in the form {'i' | 'u' | 'f'}
         /// </summary>
         /// <param name="src">The source kind</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string Format(this NumericIndicator src)
             => NumericKinds.format(src);
 
@@ -31,7 +31,7 @@ namespace Z0
         /// Produces text in the form {width}{indicator}
         /// </summary>
         /// <param name="k">The source kind</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static string Format(this NumericKind k)
             => NumericKinds.format(k);
     }

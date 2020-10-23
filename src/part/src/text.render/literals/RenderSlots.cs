@@ -107,6 +107,12 @@ namespace Z0
         public const string Slot7 = OpenSlot + D7 + CloseSlot;
 
         /// <summary>
+        /// Defines the literal "{8}"
+        /// </summary>
+        [FormatPattern(1, "{8}")]
+        public const string Slot8 = OpenSlot + D8 + CloseSlot;
+
+        /// <summary>
         /// Defines the literal "{0} "
         /// </summary>
         [FormatPattern(1, "{0} ")]
@@ -177,6 +183,12 @@ namespace Z0
         /// </summary>
         [FormatPattern(6, "{0} | {1} | {2} | {3} | {4} | {5}")]
         public const string PSx6 = PSx5 + SpacePipe + Space + Slot5;
+
+        /// <summary>
+        /// Defines the literal '| {0} | {1} | {2} | {3} | {4} | {5} | {6}'
+        /// </summary>
+        [FormatPattern(7, "{0} | {1} | {2} | {3} | {4} | {5} | {6}")]
+        public const string PSx7 = PSx6 + SpacePipe + Space + Slot6;
 
         /// <summary>
         /// Defines the literal '"{0}": "{1}"'

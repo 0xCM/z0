@@ -81,11 +81,11 @@ namespace Z0
             => Dynop.EmbedImmVBinaryOpImm(K.vk256<T>(), Identify(src), src, imm);
 
         [MethodImpl(Inline)]
-        IEmitterOpFactory<T> IDynamicFactories.Factory<T>(K.EmitterOpClass<T> k)
+        IEmitterOpFactory<T> IDynamicFactories.Factory<T>(EmitterOpClass<T> k)
             => FactorySource.Factory(k);
 
         [MethodImpl(Inline)]
-        IUnaryOpFactory<T> IDynamicFactories.Factory<T>(K.UnaryOpClass<T> k)
+        IUnaryOpFactory<T> IDynamicFactories.Factory<T>(UnaryOpClass<T> k)
             => FactorySource.Factory(k);
 
         [MethodImpl(Inline)]
@@ -93,7 +93,7 @@ namespace Z0
             => FactorySource.Factory(k);
 
         [MethodImpl(Inline)]
-        ITernaryOpFactory<T> IDynamicFactories.Factory<T>(K.TernaryOpClass<T> k)
+        ITernaryOpFactory<T> IDynamicFactories.Factory<T>(TernaryOpClass<T> k)
             => FactorySource.Factory(k);
 
         Option<DynamicDelegate> IDynamicImmediate.CreateUnaryOp(TypeWidth w, MethodInfo src, byte imm8)

@@ -4,7 +4,7 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    [ApiHost("numeric.kinds")]
+    [ApiHost(ApiNames.NumericKinds, true)]
     public partial class NumericKinds
     {
         public static NK<T> from<T>()

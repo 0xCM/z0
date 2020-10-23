@@ -251,7 +251,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public Matrix<N,U> Convert<U>()
             where U : unmanaged
-               => new Matrix<N,U>(NumericArray.to<T,U>(data));
+               => new Matrix<N,U>(NumericArrays.force<T,U>(data));
 
         /// <summary>
         /// Creates a copy of the matrix

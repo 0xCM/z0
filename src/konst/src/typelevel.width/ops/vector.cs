@@ -13,11 +13,11 @@ namespace Z0
     using K = VectorWidth;
 
     partial class Widths
-    {        
+    {
         [MethodImpl(Inline)]
         public static VectorWidth vector<W>(W w = default)
             where W : struct, IVectorWidth
-        {            
+        {
             if(typeof(W) == typeof(W128))
                 return K.W128;
             else if(typeof(W) == typeof(W256))
@@ -32,17 +32,17 @@ namespace Z0
         /// Determines the width of a system-defined or custom intrinsic vector type
         /// </summary>
         /// <param name="t">The source type</param>
-        [MethodImpl(Inline)]
+        [Op]
         public static TypeWidth vector(Type t)
         {
             var eff = t.EffectiveType();
-            var def = eff.IsGenericType 
-                ? eff.GetGenericTypeDefinition() 
+            var def = eff.IsGenericType
+                ? eff.GetGenericTypeDefinition()
                 : (eff.IsGenericTypeDefinition ? eff : null);
-                
+
             if(def == null)
                 return TypeWidth.None;
-            else if(def == typeof(Vector128<>))            
+            else if(def == typeof(Vector128<>))
                 return TypeWidth.W128;
             else if(def == typeof(Vector256<>))
                 return TypeWidth.W256;

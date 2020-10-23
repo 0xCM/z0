@@ -51,5 +51,7 @@ namespace Z0
         public const string SubjectDelimiter = ".";
 
         public const string QualifiedSubject = "{0}" + SubjectDelimiter + "{1}";
+
+        public const string Notebooks = "notebooks";
     }
 }

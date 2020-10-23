@@ -9,17 +9,15 @@ namespace Z0
 
     using static Konst;
 
-    using K = ApiOperatorClass;
-
-    public readonly struct ShiftOpClass : IOperatorClass<ShiftOpClass,K>
+    public readonly struct ShiftOpClass : IOperatorClassHost<ShiftOpClass,ApiOperatorClass>
     {
         public static implicit operator OperatorClass(ShiftOpClass src)
-            => src.Generalized;
+            => src.Classifier;
 
-        public K Kind
-            => K.ShiftOp;
+        public ApiOperatorClass Kind
+            => ApiOperatorClass.ShiftOp;
 
-        public OperatorClass Generalized
+        public OperatorClass Classifier
             => new OperatorClass(Kind);
     }
 }

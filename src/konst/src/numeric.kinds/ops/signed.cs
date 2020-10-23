@@ -6,14 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Konst;
     using static NumericKinds;
-    
+
     using NK = NumericKind;
 
     partial class NumericKinds
-    {            
+    {
         /// <summary>
         /// Determines whether a numeric kind designates a signed integral type
         /// </summary>
@@ -29,9 +30,9 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(NumericKind.All)]
         public static bool signed<T>()
             where T : unmanaged
-            => typeof(T) == typeof(sbyte) 
-            || typeof(T) == typeof(short) 
-            || typeof(T) == typeof(int) 
+            => typeof(T) == typeof(sbyte)
+            || typeof(T) == typeof(short)
+            || typeof(T) == typeof(int)
             || typeof(T) == typeof(long);
 
         /// <summary>
@@ -40,9 +41,9 @@ namespace Z0
         /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
         public static bool signed(Type src)
-            => src == typeof(sbyte) 
-            || src == typeof(short) 
-            || src == typeof(int) 
+            => src == typeof(sbyte)
+            || src == typeof(short)
+            || src == typeof(int)
             || src == typeof(long);
 
         /// <summary>
@@ -52,24 +53,20 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool signed(object src)
             => src is sbyte || src is short || src is int || src is long;
+
+
+       /// <summary>
+        /// Recognized signed integral kinds
+        /// </summary>
+        [Op]
+        public static IEnumerable<Type> SignedTypes()
+            => seq(typeof(sbyte), typeof(short), typeof(int), typeof(long));
+
+        /// <summary>
+        /// Recognized signed integral kinds
+        /// </summary>
+        [Op]
+        public static IEnumerable<NumericKind> SignedKindSeq()
+            => seq(NK.I8, NK.I16, NK.I32, NK.I64);
     }
-
-    partial class XTend
-    {
-        /// <summary>
-        /// Determines whether a numeric kind designates a signed integral type
-        /// </summary>
-        /// <param name="src">The source kind</typeparam>
-        [MethodImpl(Inline)]
-        public static bool IsSigned(this NumericKind src)
-            => signed(src);
-
-        /// <summary>
-        /// Determines the indicator of a numeric kind
-        /// </summary>
-        /// <param name="src">The source kind</param>
-        [MethodImpl(Inline)]   
-        public static NumericIndicator Indicator(this NumericKind src)
-            => indicator(src);
-    }    
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct bit
+    public readonly struct bit : ITextual, IEquatable<bit>
     {
         internal readonly bool State;
 

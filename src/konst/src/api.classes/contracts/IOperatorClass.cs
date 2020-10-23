@@ -10,34 +10,15 @@ namespace Z0
     using static Konst;
 
     [Free]
-    public interface IOperatorClass : IOperational
+    public interface IOperatorClass : IOperationalClass
     {
 
     }
 
     [Free]
-    public interface IOperatorClass<E> : IOperatorClass, IOperational<E>
+    public interface IOperatorClass<E> : IOperatorClass, IOperationalClass<E>
         where E : unmanaged, Enum
     {
 
-    }
-
-    [Free]
-    public interface IOperatorClass<F,E> : IOperatorClass<E>, IOperationalF<F,E>
-        where F : struct, IOperatorClass<F,E>
-        where E : unmanaged, Enum
-    {
-        OperatorClass Generalized {get;}
-    }
-
-    [Free]
-    public interface IOperatorClass<F,E,T> : IOperatorClass<F,E>, IOperationalT<T>
-        where F : struct, IOperatorClass<F,E>
-        where E : unmanaged, Enum
-    {
-        new OperatorClass<T> Generalized {get;}
-
-        OperatorClass IOperatorClass<F,E>.Generalized
-            => Generalized;
     }
 }

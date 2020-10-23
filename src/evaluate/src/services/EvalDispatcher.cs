@@ -72,7 +72,7 @@ namespace Z0
             return Evaluate.compute(context, error);
         }
 
-        MemberEvaluator Evaluator<E,T>(BufferTokens buffers, IOperational<E,T> k)
+        MemberEvaluator Evaluator<E,T>(BufferTokens buffers, IOperationalClass<E,T> k)
             where T : unmanaged
             where E : unmanaged, Enum
                 => Evaluator(buffers);
@@ -385,7 +385,7 @@ namespace Z0
 
         }
 
-        Triples<T> Dispatch<E,T>(BufferTokens buffers, in ApiMemberCode api, IOperational<E,T> k, in Pairs<T> src)
+        Triples<T> Dispatch<E,T>(BufferTokens buffers, in ApiMemberCode api, IOperationalClass<E,T> k, in Pairs<T> src)
             where E : unmanaged, Enum
             where T : unmanaged
         {

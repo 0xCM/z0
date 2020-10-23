@@ -11,6 +11,9 @@ namespace Z0
 
     public interface IFileDbPaths : IFileArchivePaths
     {
+        FS.FileName ApiFileName(PartId part, string api, FS.FileExt ext)
+            => FS.file(string.Format("{0}.{1}", part.Format(), api), ext);
+
         FS.FileExt DefaultFileExt
              => X.Csv;
 
@@ -38,6 +41,9 @@ namespace Z0
         FS.FolderPath ToolRoot()
             => Root + FS.folder(PN.Tools);
 
+        FS.FolderPath Notebooks()
+            => Root + FS.folder(PN.Notebooks);
+
         FS.FolderPath CaptureRoot()
             => Root + FS.folder(PN.Capture);
 
@@ -49,6 +55,12 @@ namespace Z0
 
         FS.FolderPath StageRoot()
             => Root + FS.folder(PN.Stage);
+
+        IDbTableArchive Tables(string id)
+            => DbTables.create(TableDir(id));
+
+        FS.FolderPath Notebook(string name)
+            => Notebooks() + FS.folder(name);
 
         FS.FilePath Doc(string name, FS.FileExt ext)
             => DocRoot() + FS.file(name, ext);
@@ -137,11 +149,14 @@ namespace Z0
         FS.FolderPath CapturedHexDir()
             => CaptureRoot() + FS.folder(PN.Hex);
 
-        FS.FolderPath CapturedCilDir()
-            => CaptureRoot() + FS.folder(PN.Cil);
-
         FS.FolderPath CapturedAsmDir()
             => CaptureRoot() + FS.folder(PN.Asm);
+
+        FS.FilePath[] CapturedAsmFiles()
+            => CapturedAsmDir().Files(Asm,true);
+
+        FS.FilePath[] CapturedAsmFiles(PartId part)
+            => CapturedAsmFiles().Where(f => f.IsOwner(part));
 
         FS.FilePath CapturedAsmFile(FS.FileName name)
             => CapturedAsmDir() + name;
@@ -149,17 +164,38 @@ namespace Z0
         FS.FilePath CapturedAsmFile(ApiHostUri host)
             => CapturedAsmFile(host.FileName(ArchiveFileKinds.Asm));
 
+        FS.FilePath CapturedAsmFile(PartId part, string api)
+            => CapturedAsmDir() + ApiFileName(part, api, Asm);
+
+        FS.FilePath[] CapturedHexFiles()
+            => CapturedHexDir().Files(Hex);
+
+        FS.FilePath[] CapturedHexFiles(PartId part)
+            => CapturedHexFiles().Where(f => f.IsOwner(part));
+
         FS.FilePath CapturedHexFile(FS.FileName name)
             => CapturedHexDir() + name;
+
+        FS.FilePath CapturedHexFile(PartId part, string api)
+            => CapturedHexDir() + ApiFileName(part, api, Hex);
 
         FS.FilePath CapturedHexFile(ApiHostUri host)
             => CapturedHexFile(host.FileName(ArchiveFileKinds.Hex));
 
-        FS.FilePath CapturedCilFile(FS.FileName name)
+        FS.FolderPath CapturedCilDir()
+            => CaptureRoot() + FS.folder(PN.Cil);
+
+        FS.FilePath CapturedCilDataFile(FS.FileName name)
             => CapturedCilDir() + name;
 
-        FS.FilePath CapturedCilFile(ApiHostUri host)
-            => CapturedCilFile(host.FileName(ArchiveFileKinds.IlData));
+        FS.FilePath CapturedCilDataFile(ApiHostUri host)
+            => CapturedCilDataFile(host.FileName(ArchiveFileKinds.IlData));
+
+        FS.FilePath[] CapturedCilDataFiles()
+            => CapturedCilDir().Files(Csv);
+
+        FS.FilePath[] CapturedCilDataFiles(PartId part)
+            => CapturedCilDataFiles().Where(f => f.IsOwner(part));
 
         FS.FilePath CapturedExtractFile(ApiHostUri host)
             => CapturedExtractFile(host.FileName(ArchiveFileKinds.XCsv));
@@ -176,30 +212,11 @@ namespace Z0
         FS.FilePath ParsedExtractFile(ApiHostUri host)
             => ParsedExtractFile(host.FileName(ArchiveFileKinds.PCsv));
 
-        FS.FilePath[] CapturedAsmFiles()
-            => CapturedAsmDir().AllFiles;
-
-        FS.FilePath[] CapturedHexFiles()
-            => CapturedHexDir().AllFiles;
-
-        FS.FilePath[] CapturedCilFiles()
-            => CapturedCilDir().AllFiles;
-
         FS.FilePath[] ParsedExtractFiles()
             => ParsedExtractDir().AllFiles;
 
         FS.FilePath[] ParsedExtractFiles(PartId part)
             => ParsedExtractFiles().Where(f => f.IsOwner(part));
-
-        FS.FilePath[] CapturedAsmFiles(PartId part)
-            => CapturedAsmDir().AllFiles.Where(f => f.FileName.StartsWith(part.Format()));
-
-        FS.FilePath[] CapturedHexFiles(PartId part)
-            => CapturedHexFiles().Where(f => f.IsOwner(part));
-
-        FS.FilePath[] CapturedCilFiles(PartId part)
-            => CapturedCilFiles().Where(f => f.IsOwner(part));
-
     }
 
     public interface IFileDbPaths<H> : IFileDbPaths, IFileArchivePaths<H>

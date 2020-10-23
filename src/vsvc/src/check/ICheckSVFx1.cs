@@ -111,7 +111,7 @@ namespace Z0
                 }
             }
 
-            Run(f, run, w, op.Generalized);
+            Run(f, run, w, op.Classifier);
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace Z0
                 }
             }
 
-            Run(f, run, w, op.Generalized);
+            Run(f, run, w, op.Classifier);
         }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace Z0
                 }
             }
 
-            Run(f, run, w, op.Generalized);
+            Run(f, run, w, op.Classifier);
         }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace Z0
                 }
             }
 
-            Run(f, run, w, k.Generalized);
+            Run(f, run, w, k.Classifier);
         }
 
         /// <summary>
@@ -225,7 +225,7 @@ namespace Z0
                 }
             }
 
-            Run(f, run, w, op.Generalized);
+            Run(f, run, w, op.Classifier);
         }
 
         /// <summary>
@@ -255,7 +255,7 @@ namespace Z0
                 }
             }
 
-            Run(f, run, w, op.Generalized);
+            Run(f, run, w, op.Classifier);
         }
 
         void CheckSVF<F>(F f, ShiftOpClass k, W128 w)
@@ -277,7 +277,7 @@ namespace Z0
                 }
             }
 
-            Run(f, run, w, k.Generalized);
+            Run(f, run, w, k.Classifier);
         }
 
         void CheckSVF<F>(F f, ShiftOpClass k, W256 w)
@@ -299,7 +299,7 @@ namespace Z0
                 }
             }
 
-            Run(f, run, w, k.Generalized);
+            Run(f, run, w, k.Classifier);
         }
     }
 }

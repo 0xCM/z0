@@ -23,12 +23,6 @@ namespace Z0
             => EnvVars.Common.DevRoot;
 
         /// <summary>
-        /// The name of a folder to which test data is emitted
-        /// </summary>
-        FolderName TestDataFolder
-            => FolderName.Define("data");
-
-        /// <summary>
         /// The name of the folder into which test results are deposited
         /// </summary>
         FolderName OutcomeFolder
@@ -95,10 +89,16 @@ namespace Z0
             => AppDataRoot + FolderName.Define(Capture);
 
         /// <summary>
+        /// Creates a path provider for the controlling application
+        /// </summary>
+        IWfPaths ForApp()
+            => WfShell.paths(LogDir);
+
+        /// <summary>
         /// Creates a provider rooted at the current root directory for another application
         /// </summary>
         /// <param name="dst">The target app id</param>
-        IWfPaths ForApp()
-            => WfShell.paths(LogDir);
+        IWfPaths ForApp(string id)
+            => WfShell.paths(LogDir + FS.folder(id));
     }
 }

@@ -33,5 +33,4 @@ namespace Z0
 
         Cell512 = W.W512
     }
-
 }

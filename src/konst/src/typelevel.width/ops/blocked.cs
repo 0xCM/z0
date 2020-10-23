@@ -7,11 +7,12 @@ namespace Z0
     using System;
 
     partial class Widths
-    {        
+    {
         /// <summary>
         /// Determines the attributed width of a blocked type
         /// </summary>
-        /// <param name="src">The source type</param>        
+        /// <param name="src">The source type</param>
+        [Op]
         public static TypeWidth blocked(Type src)
             => src.Tag<BlockedAttribute>().MapValueOrDefault(a => a.TypeWidth, TypeWidth.None);
     }

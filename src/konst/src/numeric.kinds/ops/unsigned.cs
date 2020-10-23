@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Konst;
 
@@ -13,14 +14,14 @@ namespace Z0
     using NK = NumericKind;
 
     partial class NumericKinds
-    {            
+    {
         /// <summary>
         /// Determines whether a numeric kind designates an unsigned integral type
         /// </summary>
         /// <typeparam name="T">The type to test</typeparam>
         [MethodImpl(Inline), Op]
         public static bool unsigned(NumericKind k)
-            => (k & NK.Unsigned) != 0;        
+            => (k & NK.Unsigned) != 0;
 
         /// <summary>
         /// Returns true if a parametric type is of unsigned numeric type, false otherwise
@@ -29,9 +30,9 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static bool unsigned<T>()
             where T : unmanaged
-                => typeof(T) == typeof(byte) 
-                || typeof(T) == typeof(ushort) 
-                || typeof(T) == typeof(uint) 
+                => typeof(T) == typeof(byte)
+                || typeof(T) == typeof(ushort)
+                || typeof(T) == typeof(uint)
                 || typeof(T) == typeof(ulong);
 
         /// <summary>
@@ -39,9 +40,9 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Op]
         public static bool unsigned(Type src)
-            => src == typeof(byte) 
-            || src == typeof(ushort) 
-            || src == typeof(uint) 
+            => src == typeof(byte)
+            || src == typeof(ushort)
+            || src == typeof(uint)
             || src == typeof(ulong);
 
         /// <summary>
@@ -49,6 +50,20 @@ namespace Z0
         /// </summary>
         [MethodImpl(Inline), Op]
         public static bool unsigned(object src)
-            => src is byte || src is ushort || src is uint || src is ulong;            
+            => src is byte || src is ushort || src is uint || src is ulong;
+
+        /// <summary>
+        /// Recognized unsigned integral types
+        /// </summary>
+        [Op]
+        public static IEnumerable<Type> UnsignedTypes()
+            => seq(typeof(byte), typeof(ushort),  typeof(uint), typeof(ulong));
+
+        /// <summary>
+        /// Recognized unsigned integral kinds
+        /// </summary>
+        [Op]
+        public static IEnumerable<NumericKind> UnsignedKindSeq()
+            => seq(NK.U8, NK.U16, NK.U32, NK.U64);
     }
 }

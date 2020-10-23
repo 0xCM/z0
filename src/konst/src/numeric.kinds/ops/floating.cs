@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Konst;
 
@@ -45,5 +46,19 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static bool floating(object value)
             => value is float || value is double;
+
+        /// <summary>
+        /// recognized floating-point types
+        /// </summary>
+        [Op]
+        public static IEnumerable<Type> FloatingTypes()
+            => seq(typeof(float), typeof(double));
+
+        /// <summary>
+        /// Recognized floating-point kinds
+        /// </summary>
+        [Op]
+        public static IEnumerable<NumericKind> FloatingKindSeq()
+           => seq(NK.F32, NK.F64);
     }
 }

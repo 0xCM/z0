@@ -17,7 +17,7 @@ namespace Z0.Asm
         void check_fixed_lists()
         {
 
-            var kinds = CellOps.kinds();
+            var kinds = CellOpKinds.kinds();
             Root.iter(kinds, k => Trace(k));
         }
     }

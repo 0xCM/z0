@@ -10,12 +10,12 @@ namespace Z0
     using static Konst;
 
     partial class Widths
-    {        
+    {
         /// <summary>
         /// Computes the number of bytes occupied by an instance of a parametrically-identified type
         /// </summary>
         /// <typeparam name="T">The measurable type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint bytes<T>()
             =>  (uint)(Unsafe.SizeOf<T>());
     }

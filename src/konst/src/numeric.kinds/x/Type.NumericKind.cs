@@ -10,12 +10,13 @@ namespace Z0
     using static Konst;
     using static NumericKinds;
 
-    partial class XTend
+    partial class XNumericKinds
     {
         /// <summary>
         /// Determines the numeric kind of a type
         /// </summary>
         /// <param name="src">The type to examine</param>
+        [MethodImpl(Inline), Op]
         public static NumericKind NumericKind(this Type src)
             => kind(src);
     }

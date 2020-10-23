@@ -21,6 +21,5 @@ namespace Z0
         public static T force<T>(ulong src, T t = default)
             where T : unmanaged
                 => z.force<T>(src);
-
     }
 }

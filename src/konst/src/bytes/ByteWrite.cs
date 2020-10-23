@@ -13,7 +13,9 @@ namespace Z0
     [ApiHost]
     public readonly struct ByteWrite
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Span<byte> write<T>(in T src)
             where T : struct
         {
@@ -28,7 +30,7 @@ namespace Z0
         /// <param name="src">The source value</param>
         /// <param name="dst">The target array</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void to<T>(in T src, Span<byte> dst)
             where T : struct
                 => first(recover<byte,T>(dst)) = src;
@@ -39,7 +41,7 @@ namespace Z0
         /// <param name="src">The source reference</param>
         /// <param name="offset">The 0-based/byte-relative offset</param>
         /// <typeparam name="T">The data type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ref byte one<T>(ref T src, int offset)
             where T : unmanaged
                 => ref Unsafe.Add(ref Unsafe.As<T,byte>(ref src), offset);
@@ -51,7 +53,7 @@ namespace Z0
         /// <param name="dst">The target span</param>
         /// <param name="offset">The target span offset</param>
         /// <typeparam name="T">The source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void write<T>(in T src, Span<byte> dst)
             where T : struct
                 => seek(recover<byte,T>(dst), 0) = src;

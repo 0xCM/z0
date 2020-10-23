@@ -14,10 +14,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static string indicator<W>(W w = default)
             where W : unmanaged, IDataWidth
-                => indicator<W>(W1.W);
+                => indicator_a<W>();
 
         [MethodImpl(Inline)]
-        static string indicator<W>(W1 first)
+        static string indicator_a<W>(W w = default)
             where W : unmanaged, IDataWidth
         {
             if(typeof(W) == typeof(W1))
@@ -34,12 +34,12 @@ namespace Z0
                 return W6.Identifier;
             else if(typeof(W) == typeof(W7))
                 return W7.Identifier;
-            else 
-                return indicator<W>(W8.W);
+            else
+                return indicator_b<W>();
         }
 
         [MethodImpl(Inline)]
-        static string indicator<W>(W8 first)
+        static string indicator_b<W>(W w = default)
             where W : unmanaged, IDataWidth
         {
             if(typeof(W) == typeof(W8))
@@ -58,6 +58,18 @@ namespace Z0
                 return W512.Identifier;
             else
                 return EmptyString;
-        }                
+        }
+
+        [MethodImpl(Inline), Op]
+        public static string indicator(W8 w)
+            => indicator_a(w);
+
+        [MethodImpl(Inline), Op]
+        public static string indicator(W16 w)
+            => indicator_a(w);
+
+        [MethodImpl(Inline), Op]
+        public static string indicator(W32 w)
+            => indicator_a(w);
     }
 }

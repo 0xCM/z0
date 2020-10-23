@@ -4,12 +4,18 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
+    using System;
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+    using static z;
+
     public enum ClaimKind
     {
         Eq,
-        
+
         Close,
-        
+
         EqItem,
 
         NEq,
@@ -17,11 +23,11 @@ namespace Z0
         Lt,
 
         LtEq,
-        
+
         Gt,
-        
+
         GtEq,
-        
+
         False,
 
         True,
@@ -29,11 +35,11 @@ namespace Z0
         Fail,
 
         Nonzero,
-        
+
         Between,
 
         NotIn,
 
         Invariant
-    }    
+    }
 }

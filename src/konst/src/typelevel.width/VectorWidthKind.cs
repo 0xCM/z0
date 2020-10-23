@@ -9,14 +9,14 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct VectorWidthKind : IVectorWidth
+    public readonly struct VectorWidthKind : IVectorWidth<VectorWidthKind>
     {
         public VectorWidth VectorWidth {get;}
 
-        public TypeWidth TypeWidth 
+        public TypeWidth TypeWidth
             => (TypeWidth)VectorWidth;
 
-        public DataWidth DataWidth 
+        public DataWidth DataWidth
             => (DataWidth)VectorWidth;
 
         [MethodImpl(Inline)]
@@ -25,8 +25,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public VectorWidthKind(VectorWidth width)
-        {
-            VectorWidth = width;
-        }
+            => VectorWidth = width;
     }
 }

@@ -9,22 +9,22 @@ namespace Z0
 
     partial class Kinds
     {
-        public readonly struct PredicateClass : IOperationalF<PredicateClass,K> { public K Kind => K.Predicate; }
+        public readonly struct PredicateClass : IOperationalClassHost<PredicateClass,K> { public K Kind => K.Predicate; }
 
-        public readonly struct UnaryPredicate : IOperationalF<UnaryPredicate,K> { public K Kind => K.UnaryPredicate; }
+        public readonly struct UnaryPredicate : IOperationalClassHost<UnaryPredicate,K> { public K Kind => K.UnaryPredicate; }
 
-        public readonly struct BinaryPredicate : IOperationalF<BinaryPredicate,K> { public K Kind => K.BinaryPredicate; }
+        public readonly struct BinaryPredicate : IOperationalClassHost<BinaryPredicate,K> { public K Kind => K.BinaryPredicate; }
 
-        public readonly struct TernaryPredicate : IOperationalF<TernaryPredicate,K> { public K Kind => K.TernaryPredicate; }
+        public readonly struct TernaryPredicate : IOperationalClassHost<TernaryPredicate,K> { public K Kind => K.TernaryPredicate; }
 
         //~ Parametric
         //~ -------------------------------------------------------------------
-        public readonly struct PredicateClass<T> : IOperational<PredicateClass,K,T> {}
+        public readonly struct PredicateClass<T> : IOperationalClass<PredicateClass,K,T> {}
 
-        public readonly struct UnaryPredicate<T> : IOperational<UnaryPredicate,K,T> {}
+        public readonly struct UnaryPredicate<T> : IOperationalClass<UnaryPredicate,K,T> {}
 
-        public readonly struct BinaryPredicate<T> : IOperational<BinaryPredicate,K,T> {}
+        public readonly struct BinaryPredicate<T> : IOperationalClass<BinaryPredicate,K,T> {}
 
-        public readonly struct TernaryPredicate<T> : IOperational<TernaryPredicate,K,T> {}
+        public readonly struct TernaryPredicate<T> : IOperationalClass<TernaryPredicate,K,T> {}
     }
 }

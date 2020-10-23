@@ -23,7 +23,7 @@ namespace Z0
             => new DbTables(root);
 
         [MethodImpl(Inline)]
-        public DbTables(FS.FolderPath root)
+        internal DbTables(FS.FolderPath root)
             => Root = root;
 
         public void Clear()

@@ -9,43 +9,50 @@ namespace Z0
 
     using static Konst;
 
-    using K = ApiOperatorClass;
-
-    public readonly struct EmitterOpClass : IOperatorClass<EmitterOpClass,K>
+    public readonly struct EmitterOpClass : IOperatorClassHost<EmitterOpClass,ApiOperatorClass>
     {
-        public K Kind
-            => K.Emitter;
+        public ApiOperatorClass Kind
+            => ApiOperatorClass.Emitter;
 
         [MethodImpl(Inline)]
         public static implicit operator OperatorClass(EmitterOpClass src)
-            => src.Generalized;
+            => src.Classifier;
 
-        public OperatorClass Generalized
-            => new OperatorClass(Kind);
+        public OperatorClass Classifier
+        {
+            [MethodImpl(Inline)]
+            get => new OperatorClass(Kind);
+        }
     }
 
-    public readonly struct UnaryOpClass : IOperatorClass<UnaryOpClass,K>
+    public readonly struct UnaryOpClass : IOperatorClassHost<UnaryOpClass,ApiOperatorClass>
     {
         [MethodImpl(Inline)]
         public static implicit operator OperatorClass(UnaryOpClass src)
-            => src.Generalized;
+            => src.Classifier;
 
-        public K Kind
-            => K.UnaryOp;
+        public ApiOperatorClass Kind
+            => ApiOperatorClass.UnaryOp;
 
-        public OperatorClass Generalized
-            => new OperatorClass(Kind);
+        public OperatorClass Classifier
+        {
+            [MethodImpl(Inline)]
+            get => new OperatorClass(Kind);
+        }
     }
 
-    public readonly struct TernaryOpClass : IOperatorClass<TernaryOpClass,K>
+    public readonly struct TernaryOpClass : IOperatorClassHost<TernaryOpClass,ApiOperatorClass>
     {
         public static implicit operator OperatorClass(TernaryOpClass src)
-            => src.Generalized;
+            => src.Classifier;
 
-        public K Kind
-            => K.TernaryOp;
+        public ApiOperatorClass Kind
+            => ApiOperatorClass.TernaryOp;
 
-        public OperatorClass Generalized
-            => new OperatorClass(Kind);
+        public OperatorClass Classifier
+        {
+            [MethodImpl(Inline)]
+            get => new OperatorClass(Kind);
+        }
     }
 }

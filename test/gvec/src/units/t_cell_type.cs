@@ -14,8 +14,8 @@ namespace Z0
     {
         public void check_cell_types()
         {
-            iter(VectorKinds.Types128, t => check_cell_type(t,n128));
-            iter(VectorKinds.Types256, t => check_cell_type(t,n256));
+            iter(VectorKinds.Types128(), t => check_cell_type(t,n128));
+            iter(VectorKinds.Types256(), t => check_cell_type(t,n256));
         }
 
         void check_cell_type(Type tVector, N128 w)

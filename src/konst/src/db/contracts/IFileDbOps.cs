@@ -6,8 +6,9 @@ namespace Z0
 {
     using System;
 
-    public interface IFileDbOps : IFileArchiveOps
+    public interface IFileDbOps : IFileArchiveOps, IFileDbPaths
     {
-
+        FS.FilePath CopyToNotebook(FS.FilePath src, string notebook)
+            => src.CopyTo(Notebook(notebook));
     }
 }

@@ -26,7 +26,6 @@ namespace Z0
             Call = call;
         }
 
-        [MethodImpl(Inline)]
         public string Format()
             => format(EventId, Call);
     }

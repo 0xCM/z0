@@ -121,7 +121,7 @@ namespace Z0.Asm
         Outcome<uint> ClearCil(PartId part)
         {
             var kind = ArchiveFileKinds.IlData;
-            var files = Wf.Db().CapturedCilFiles(part);
+            var files = Wf.Db().CapturedCilDataFiles(part);
             var result = Clear(files);
             if(result)
                 TypeStatus(part, kind, result.Data);

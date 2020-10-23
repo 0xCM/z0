@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The memory bit-width</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static int cells<T>(W8 w)
             => 1/(int)bytes<T>();
 
@@ -70,7 +70,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The memory bit-width</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static int cells<T>(W16 w)
             => 2/(int)bytes<T>();
 
@@ -79,7 +79,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The memory bit-width</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static int cells<T>(W32 w)
             => 4/(int)bytes<T>();
 
@@ -88,7 +88,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The memory bit-width</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static int cells<T>(W64 w)
             => 8/(int)bytes<T>();
 
@@ -97,7 +97,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The memory bit-width</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static int cells<T>(W128 w)
             where T : unmanaged
                 => 16/(int)bytes<T>();
@@ -107,7 +107,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The memory bit-width</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static int cells<T>(W256 w)
             where T : unmanaged
                 => 32/(int)bytes<T>();
@@ -117,7 +117,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The memory bit-width</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static int cells<T>(W512 w)
             where T : unmanaged
                 => 64/(int)bytes<T>();

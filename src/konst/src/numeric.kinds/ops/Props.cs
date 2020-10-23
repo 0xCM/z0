@@ -11,9 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    using NK = NumericKind;
-
-    partial class NumericKinds  
+    partial class NumericKinds
     {
         /// <summary>
         /// Specifies the int8 kind
@@ -64,59 +62,26 @@ namespace Z0
         /// Specifies the float64 kind
         /// </summary>
         public static NK<double> f64 => default;
-         
-        /// <summary>
-        /// Recognized unsigned integral types
-        /// </summary>
-        public static IEnumerable<Type> UnsignedTypes
-            => seq(typeof(byte), typeof(ushort),  typeof(uint), typeof(ulong));
-
-        /// <summary>
-        /// Recognized unsigned integral kinds
-        /// </summary>
-        public static IEnumerable<NumericKind> UnsignedKindSeq
-            => seq(NK.U8, NK.U16, NK.U32, NK.U64);
-
-        /// <summary>
-        /// Recognized signed integral kinds
-        /// </summary>
-        public static IEnumerable<Type> SignedTypes
-            => seq(typeof(sbyte), typeof(short), typeof(int), typeof(long));
-        
-        /// <summary>
-        /// Recognized signed integral kinds
-        /// </summary>
-        public static IEnumerable<NumericKind> SignedKindSeq
-            => seq(NK.I8, NK.I16, NK.I32, NK.I64);
 
         /// <summary>
         /// Recognized integral types
         /// </summary>
-        public static IEnumerable<Type> IntegralTypes
-            => SignedTypes.Union(UnsignedTypes);
+        [Op]
+        public static IEnumerable<Type> IntegralTypes()
+            => SignedTypes().Union(UnsignedTypes());
 
         /// <summary>
         /// Recognized integral kinds
         /// </summary>
-        public static IEnumerable<NumericKind> IntegralKindSeq
-            => UnsignedKindSeq.Union(SignedKindSeq);
-
-        /// <summary>
-        /// recognized floating-point types
-        /// </summary>
-        public static IEnumerable<Type> FloatingTypes
-            => seq(typeof(float), typeof(double));
-
-        /// <summary>
-        /// Recognized floating-point kinds
-        /// </summary>
-        public static IEnumerable<NumericKind> FloatingKindSeq
-            => seq(NK.F32, NK.F64);
+        [Op]
+        public static IEnumerable<NumericKind> IntegralKindSeq()
+            => UnsignedKindSeq().Union(SignedKindSeq());
 
         /// <summary>
         /// Recognized numeric types
         /// </summary>
-        public static IEnumerable<Type> NumericTypes
-            => IntegralTypes.Union(FloatingTypes);       
+        [Op]
+        public static IEnumerable<Type> NumericTypes()
+            => IntegralTypes().Union(FloatingTypes());
     }
 }

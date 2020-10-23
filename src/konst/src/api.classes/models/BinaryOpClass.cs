@@ -9,43 +9,46 @@ namespace Z0
 
     using static Konst;
 
-    using K = ApiOperatorClass;
-
     /// <summary>
-    /// Defines a type-level lift for the <see cref='K.BinaryOp'/> classifier
+    /// Defines a type-level lift for the <see cref='ApiOperatorClass.BinaryOp'/> classifier
     /// </summary>
-    public readonly struct BinaryOpClass : IOperatorClass<BinaryOpClass,K>
+    public readonly struct BinaryOpClass : IOperatorClassHost<BinaryOpClass,ApiOperatorClass>
     {
         public static implicit operator OperatorClass(BinaryOpClass src)
-            => src.Generalized;
+            => src.Classifier;
 
-        public K Kind
-            => K.BinaryOp;
+        public ApiOperatorClass Kind
+            => ApiOperatorClass.BinaryOp;
 
-        public OperatorClass Generalized
-            => new OperatorClass(Kind);
-    }
+        public OperatorClass Classifier
+        {
+            [MethodImpl(Inline)]
+            get => new OperatorClass(Kind);
+        }    }
 
     /// <summary>
-    /// Defines an operand-parametric type-level lift for the <see cref='K.BinaryOp'/> classifier
+    /// Defines an operand-parametric type-level lift for the <see cref='ApiOperatorClass.BinaryOp'/> classifier
     /// </summary>
-    public readonly struct BinaryOpClass<T> : IOperatorClass<BinaryOpClass<T>,K,T>
+    public readonly struct BinaryOpClass<T> : IOperatorClassHost<BinaryOpClass<T>,ApiOperatorClass,T>
     {
-        public K Kind
-            => K.BinaryOp;
+        public ApiOperatorClass Kind
+            => ApiOperatorClass.BinaryOp;
 
         [MethodImpl(Inline)]
         public static implicit operator OperatorClass<T>(BinaryOpClass<T> src)
-            => src.Generalized;
+            => src.Classifier;
 
         [MethodImpl(Inline)]
         public static implicit operator BinaryOpClass(BinaryOpClass<T> src)
-            => src.NonGeneric;
+            => src.Untyped;
 
-        public OperatorClass<T> Generalized
-            => new OperatorClass<T>(Kind);
+        public OperatorClass<T> Classifier
+        {
+            [MethodImpl(Inline)]
+            get => new OperatorClass<T>(Kind);
+        }
 
-        public BinaryOpClass NonGeneric
+        public BinaryOpClass Untyped
             => default;
     }
 }

@@ -27,6 +27,5 @@ namespace Z0
             else
                 return NumericIndicator.None;
         }
-
     }
 }

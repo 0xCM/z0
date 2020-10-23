@@ -16,18 +16,17 @@ namespace Z0
     using File = System.Runtime.CompilerServices.CallerFilePathAttribute;
     using Line = System.Runtime.CompilerServices.CallerLineNumberAttribute;
 
+    using R = ClaimResults;
+
     [ApiHost]
     public readonly struct CheckVectors : ICheckVectors
     {
-        public static ICheckVectors Checker
-            => default(CheckVectors);
-
         public const NumericKind Closure = UnsignedInts;
 
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ClaimResult veq<T>(Vector128<T> lhs, Vector128<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)
+        public static ClaimResult<Vector128<T>,Vector128<T>> veq<T>(Vector128<T> lhs, Vector128<T> rhs)
             where T : unmanaged
-                => lhs.Equals(rhs) ? tripled(ClaimKind.Eq, true, AppMsg.Empty) : tripled(ClaimKind.Eq, false, NotEqual(lhs,rhs, caller, file, line));
+                => R.define("veq", ClaimKind.Eq, lhs.Equals(rhs), EmptyString, lhs, rhs);
 
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static ClaimResult veq<T>(Vector256<T> lhs, Vector256<T> rhs, [Caller] string caller = null, [File] string file = null, [Line] int? line = null)

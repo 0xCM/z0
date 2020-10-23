@@ -29,9 +29,7 @@ namespace Z0
 
         readonly Span<string> Buffer;
 
-        IWfShell Wf => State.Wf;
-
-        CorrelationToken Ct;
+        readonly IWfShell Wf;
 
         byte offset;
 
@@ -41,16 +39,24 @@ namespace Z0
 
         WfHost Host;
 
+        IFileDb Db;
+
         [MethodImpl(Inline)]
         public Runner(WfCaptureState wf)
         {
-            Ct = wf.Ct;
+            Host = WfSelfHost.create(typeof(Runner));
+            Wf = wf.Wf.WithHost(Host);
+            Db = Wf.Db();
             State = wf;
             Buffer = z.span<string>(256);
             offset = 0;
             Asm = wf.Asm;
             Random = wf.App.Random;
-            Host = WfSelfHost.create(typeof(Runner));
+        }
+
+        public void Dispose()
+        {
+            Wf.Disposed();
         }
 
         void RunCalc()
@@ -61,19 +67,12 @@ namespace Z0
             CalcDemo.run(Buffer, ref offset);
             for(var i=pos; i<offset; i++)
                 term.print(Buffer[i]);
-
         }
-
 
         void RunFsm()
         {
             using var step = new RunFsm(Wf);
             step.Run();
-        }
-
-        public void Dispose()
-        {
-
         }
 
         void Status<T>(T message)
@@ -388,7 +387,44 @@ namespace Z0
 
         public void Run()
         {
-            CheckBitMasks();
+            Wf.Running();
+            //RunCalc();
+
+            Db.CopyToNotebook(Db.CapturedAsmFile(PartId.Run, ApiNames.FxSlots), ApiNames.FxSlots);
+            Db.CopyToNotebook(Db.CapturedAsmFile(PartId.Run, ApiNames.FxSlots_n16x8x8x8), ApiNames.FxSlots);
+
+
+            //Db.CapturedAsmFile()
+            Wf.Ran();
+
+
+
         }
+    }
+
+
+
+    readonly struct ApiNames
+    {
+        const string slots = nameof(slots);
+
+        const string fx = nameof(fx);
+
+        public const string FxSlots = fx + dot + slots;
+
+        public const string n16 = nameof(n16);
+
+        public const string u8 = nameof(u8);
+
+        public const string x = nameof(x);
+
+        public const string x8 = nameof(x8);
+
+        public const string dot = ApiNameAtoms.dot;
+
+        const string sep ="_";
+
+        public const string FxSlots_n16x8x8x8 = fx + dot + slots + sep + n16 + x8 + x8 + x8;
+
     }
 }

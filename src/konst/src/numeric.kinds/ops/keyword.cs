@@ -6,12 +6,10 @@ namespace Z0
 {
     using System;
 
-    using static NumericKinds;
-
     using NK = NumericKind;
-    
+
     partial class NumericKinds
-    {            
+    {
         /// <summary>
         /// Specifies the C# keyword used to designate a kind-identified primal type
         /// </summary>
@@ -49,34 +47,5 @@ namespace Z0
                 NK.F64 => "float64",
                  _ => string.Empty
            };
-    }
-
-    partial class XTend
-    {
-        /// <summary>
-        /// Specifies the C# keyword used to designate a kind-identified numeric type
-        /// </summary>
-        public static string Keyword(this NumericKind k)
-            => keyword(k);
-
-        /// <summary>
-        /// Specifies the keyword not used in C# to designate a kind-identified primal type
-        /// </summary>
-        public static string KeywordNot(this NumericKind k)
-            => nonkeyword(k);
-
-        /// <summary>
-        /// Specifies the C# keyword used to designate a primal numeric type
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        public static string NumericKeyword(this Type src)
-            => src.NumericKind().Keyword();
-
-        /// <summary>
-        /// Specifies the keyword not used in C# to designate a primal numeric type
-        /// </summary>
-        /// <param name="src">The type to examine</param>
-        public static string NumericKeywordNot(this Type src)
-            => src.NumericKind().KeywordNot();            
     }
 }

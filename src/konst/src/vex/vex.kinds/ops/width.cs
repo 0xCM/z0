@@ -15,20 +15,6 @@ namespace Z0
 
     partial class VectorKinds
     {
-        [MethodImpl(Inline)]
-        public static VW width<W>(W w = default)
-            where W : struct, IVectorWidth
-        {
-            if(typeof(W) == typeof(W128))
-                return VW.W128;
-            else if(typeof(W) == typeof(W256))
-                return VW.W256;
-            else if(typeof(W) == typeof(W512))
-                return VW.W512;
-            else
-                return VW.None;
-        }
-
         [MethodImpl(Inline), Op]
         public static TW width(Type t)
         {
