@@ -20,5 +20,11 @@ namespace Z0
         public static Fence<T> fence<T>(T left, T right)
             where T : unmanaged
                 => new Fence<T>(left,right);
+
+        [MethodImpl(Inline)]
+        public static Fence<L,R> fence<L,R>(L left, R right)
+            where L : unmanaged
+            where R : unmanaged
+                => new Fence<L,R>(left,right);
     }
 }

@@ -17,8 +17,8 @@ namespace Z0
         /// <param name="size">The size of each buffer</param>
         /// <param name="length">The sequence length</param>
         [MethodImpl(Inline), Op]
-        public static BufferSeq sequence(uint size, byte length)
-            => new BufferSeq(size, length);
+        public static NativeBuffers sequence(uint size, byte length)
+            => new NativeBuffers(size, length);
 
         /// <summary>
         /// Creates a caller-owed buffer sequence
@@ -27,9 +27,9 @@ namespace Z0
         /// <param name="length">The sequence length</param>
         /// <param name="allocation">The allocation handle that defines ownership</param>
         [MethodImpl(Inline), Op]
-        public static BufferSeq sequence(uint size, byte length, out NativeBuffer allocation)
+        public static NativeBuffers sequence(uint size, byte length, out NativeBuffer allocation)
         {
-            var buffers = new BufferSeq(size,length,false);
+            var buffers = new NativeBuffers(size,length,false);
             allocation = buffers.Allocation;
             return buffers;
         }

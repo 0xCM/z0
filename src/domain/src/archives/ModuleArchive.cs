@@ -13,8 +13,6 @@ namespace Z0
     using static z;
     using static ArchiveFileKinds;
 
-    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
-
 
     public struct ModuleArchive : IModuleArchive
     {

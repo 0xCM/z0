@@ -15,7 +15,7 @@ namespace Z0
         /// Zero-fills a token-identified buffer and returns the cleared memory content
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static Span<byte> clear(in BufferSeq src, byte index)
+        public static Span<byte> clear(in NativeBuffers src, byte index)
             => sys.clear(cover(src.Token(index)));
 
         [MethodImpl(Inline), Op]

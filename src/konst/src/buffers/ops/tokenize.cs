@@ -18,12 +18,12 @@ namespace Z0
         /// <param name="size">The number of bytes covered by each represented buffer</param>
         /// <param name="count">The length of the buffer sequence</param>
         [MethodImpl(Inline)]
-        public static BufferToken<F>[] tokenize<F>(IntPtr @base, uint size, uint count)
+        public static CellBufferToken<F>[] tokenize<F>(IntPtr @base, uint size, uint count)
             where F : unmanaged, IDataCell
         {
-            var tokens = new BufferToken<F>[count];
+            var tokens = new CellBufferToken<F>[count];
             for(var i=0; i<count; i++)
-                tokens[i] = new BufferToken<F>(IntPtr.Add(@base, (int)size*i), size);
+                tokens[i] = new CellBufferToken<F>(IntPtr.Add(@base, (int)size*i), size);
             return tokens;
         }
 

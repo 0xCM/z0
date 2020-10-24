@@ -271,5 +271,9 @@ namespace Z0
         public const string Widths = widths;
 
         public const string MemoryModels = A.memory + dot + models;
+
+        public const string MemorySlots = A.memory + dot + slots;
+
+        const string slots = nameof(slots);
     }
 }

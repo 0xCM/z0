@@ -12,11 +12,11 @@ namespace Z0
 
     partial struct SyntaxModels
     {
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string format(Fence src)
             => string.Format(FencePattern, src.Left, src.Right);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [Op, Closures(UnsignedInts)]
         public static string format<T>(Fence<T> src)
             where T : unmanaged
                 => string.Format(FencePattern, src.Left, src.Right);
@@ -27,7 +27,7 @@ namespace Z0
             where R : unmanaged
                 => string.Format(FencePattern, src.Left, src.Right);
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static string format(in Fence src)
             => format(FencePattern, src.Left, src.Right);
 

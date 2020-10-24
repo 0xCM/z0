@@ -10,21 +10,39 @@ namespace Z0
     using static Konst;
     using static z;
 
-    /// <summary>
-    /// Defines an indexed view over <see cref='SegRef'/> values
-    /// </summary>
+    [ApiHost(ApiNames.MemorySlots, true)]
     public readonly struct MemorySlots
     {
-        public static string[] format<E>(MemorySlots<E> src)
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static MemorySlots<E> define<E>(Type src)
+            where E : unmanaged
+                => new MemorySlots<E>(from(src));
+
+        [MethodImpl(Inline), Op]
+        public static MemorySlots from(Type src)
+            => ApiDynamic.jit(src).Map(m => new SegRef(m.Address, m.Size));
+
+        [MethodImpl(Inline)]
+        public static MemorySlots<E> from<E,T>(T src)
             where E : unmanaged, Enum
+                => define<E>(typeof(T));
+
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        public static MemorySlots<E> define<E>(params SegRef[] src)
+            where E : unmanaged
+                => new MemorySlots<E>(src);
+
+        public static string[] format<E>(MemorySlots<E> src)
+            where E : unmanaged
         {
             var dst = sys.alloc<string>(src.Length);
             format(src,dst);
             return dst;
         }
 
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static void format<E>(MemorySlots<E> src, Span<string> dst)
-            where E : unmanaged, Enum
+            where E : unmanaged
         {
             var count = src.Length;
             ref readonly var lead = ref src.Lookup(default(E));

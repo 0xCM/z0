@@ -11,12 +11,12 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly ref struct BufferSeq<F>
+    public readonly ref struct CellBuffers<F>
         where F : unmanaged, IDataCell
     {
         readonly Span<F> View;
 
-        readonly Span<BufferToken<F>> Tokens;
+        readonly Span<CellBufferToken<F>> Tokens;
 
         readonly NativeBuffer Buffered;
 
@@ -26,7 +26,7 @@ namespace Z0
 
         readonly uint TotalSize;
 
-        public unsafe BufferSeq(byte count)
+        public unsafe CellBuffers(byte count)
         {
             BufferCount = count;
             BufferSize = (uint)default(F).Size;
@@ -65,7 +65,7 @@ namespace Z0
         /// Presents an index-identified buffer as a span of bytes
         /// </summary>
         /// <param name="index">The buffer index</param>
-        public ref readonly BufferToken<F> this[byte index]
+        public ref readonly CellBufferToken<F> this[byte index]
         {
             [MethodImpl(Inline)]
             get => ref Token(index);
@@ -76,7 +76,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">The buffer index</param>
         [MethodImpl(Inline)]
-        public ref readonly BufferToken<F> Token(byte index)
+        public ref readonly CellBufferToken<F> Token(byte index)
             => ref skip(Tokens, index);
 
         /// <summary>

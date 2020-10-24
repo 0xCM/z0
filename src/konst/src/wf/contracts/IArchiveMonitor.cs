@@ -6,15 +6,8 @@ namespace Z0
 {
     using System;
 
-    public interface IMonitor : IDisposable
+    public interface IArchiveMonitor : IMonitor<FS.FolderPath>
     {
-        void Start();
 
-        void Stop();
-    }
-
-    public interface IMonitor<T> : IMonitor
-    {
-        T Subject {get;}
     }
 }

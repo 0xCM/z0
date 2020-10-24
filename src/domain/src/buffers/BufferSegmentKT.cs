@@ -14,7 +14,6 @@ namespace Z0
     /// Defines a segment over a buffer
     /// </summary>
     public struct BufferSegment<K,T> : ITextual
-        where T : unmanaged
         where K : unmanaged
     {
         public ClosedInterval<K> Range;
@@ -27,11 +26,30 @@ namespace Z0
         public BufferSegment(in ClosedInterval<K> range)
             => Range = range;
 
+        public K I0
+        {
+            [MethodImpl(Inline)]
+            get => Range.Min;
+        }
+
+        public K I1
+        {
+            [MethodImpl(Inline)]
+            get => Range.Max;
+        }
+
+        public uint Length
+        {
+            [MethodImpl(Inline)]
+            get => (uint)Range.Width;
+        }
+
         [MethodImpl(Inline)]
         public string Format()
             => Range.Format();
 
         public override string ToString()
             => Format();
+
     }
 }

@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Describes a fixed-width allocated buffer
     /// </summary>
-    public readonly struct BufferToken<F> : IBufferToken<F>
+    public readonly struct CellBufferToken<F> : IBufferToken<F>
         where F : unmanaged, IDataCell
     {
         public readonly MemoryAddress Address;
@@ -21,23 +21,23 @@ namespace Z0
         public readonly uint BufferSize;
 
         [MethodImpl(Inline)]
-        public static implicit operator BufferToken<F>((IntPtr handle, int length) src)
-            => new BufferToken<F>(src.handle, src.length);
+        public static implicit operator CellBufferToken<F>((IntPtr handle, int length) src)
+            => new CellBufferToken<F>(src.handle, src.length);
 
         [MethodImpl(Inline)]
-        public static implicit operator IntPtr(BufferToken<F> src)
+        public static implicit operator IntPtr(CellBufferToken<F> src)
             => src.Handle;
 
 
         [MethodImpl(Inline)]
-        internal BufferToken(MemoryAddress address, uint size)
+        internal CellBufferToken(MemoryAddress address, uint size)
         {
             Address = address;
             BufferSize = size;
         }
 
         [MethodImpl(Inline)]
-        internal BufferToken(IntPtr handle, int size)
+        internal CellBufferToken(IntPtr handle, int size)
         {
             Address = handle;
             BufferSize = (uint)size;

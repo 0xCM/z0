@@ -6,104 +6,76 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
     using static z;
-        
+
     public ref struct RingBuffer<T>
         where T : unmanaged
-    {        
-        Span<T> buffer;
+    {
+        Span<T> Buffer;
 
-        int capacity;
+        int Capacity;
 
-        int inpos;
+        /// <summary>
+        /// The current position of the writer
+        /// </summary>
+        int InPos;
 
-        int outpos;
+        /// <summary>
+        /// The current position of the reader
+        /// </summary>
+        int OutPos;
 
-        int count;
-    
+        /// <summary>
+        /// The number of elements stored in the queue
+        /// </summary>
+        int Count;
 
         [MethodImpl(Inline)]
         internal RingBuffer(Span<T> buffer)
         {
-            this.buffer = buffer;
-            this.capacity = buffer.Length;
-            this.inpos = 0;
-            this.outpos = 0;
-            this.count = 0;
+            Buffer = buffer;
+            Capacity = buffer.Length;
+            InPos = 0;
+            OutPos = 0;
+            Count = 0;
         }
-            
+
 
         [MethodImpl(Inline)]
         public void Push(in T src)
         {
-            if(inpos > MaxPos)
-                inpos = 0;
-            
-            if(count != capacity)
-                count++;
-            
-            seek(Head, inpos++) = src; 
+            if(InPos > MaxPos)
+                InPos = 0;
+
+            if(Count != Capacity)
+                Count++;
+
+            seek(Head, InPos++) = src;
         }
 
         [MethodImpl(Inline)]
         public ref readonly T Pop()
         {
-            if(outpos > MaxPos)
-                outpos = 0;
+            if(OutPos > MaxPos)
+                OutPos = 0;
 
-            count--;
+            Count--;
 
-            return ref seek(Head, outpos++);
+            return ref seek(Head, OutPos++);
         }
 
         ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref first(buffer);
+            get => ref first(Buffer);
         }
 
         int MaxPos
         {
             [MethodImpl(Inline)]
-            get => capacity - 1;
-        }
-
-        /// <summary>
-        /// The number of elements stored in the queue
-        /// </summary>
-        public int Count
-        {
-            [MethodImpl(Inline)]
-            get => count;
-        }
-
-        /// <summary>
-        /// The current position of the writer
-        /// </summary>
-        public int InPos
-        {
-            [MethodImpl(Inline)]
-            get => inpos;
-        }
-
-        /// <summary>
-        /// The current position of the reader
-        /// </summary>
-        public int OutPos
-        {
-            [MethodImpl(Inline)]
-            get => outpos;
-        }
-
-        /// <summary>
-        /// The number of elements the buffer can store
-        /// </summary>
-        public int Capacity
-        {
-            [MethodImpl(Inline)]
-            get => capacity;
+            get => Capacity - 1;
         }
     }
 }

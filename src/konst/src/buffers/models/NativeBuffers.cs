@@ -12,7 +12,7 @@ namespace Z0
     /// <summary>
     /// Covers a sequence of allocated buffers
     /// </summary>
-    public unsafe readonly ref struct BufferSeq
+    public unsafe readonly ref struct NativeBuffers
     {
         internal readonly NativeBuffer Allocation;
 
@@ -28,7 +28,7 @@ namespace Z0
 
         readonly bool OwnsBuffer;
 
-        internal BufferSeq(uint size, byte count, bool owns = true)
+        internal NativeBuffers(uint size, byte count, bool owns = true)
         {
             OwnsBuffer = owns;
             BufferCount = count;

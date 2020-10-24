@@ -10,11 +10,11 @@ namespace Z0
 
     using static Konst;
 
-    public readonly struct DirectoryMonitor : IDirectoryMonitor
+    public readonly struct ArchiveMonitor : IArchiveMonitor
     {
         [MethodImpl(Inline), Op]
-        public static IDirectoryMonitor create(FS.FolderPath src, FS.ChangeHandler handler, bool recursive = true, string filter = null)
-            => new DirectoryMonitor(src, handler, recursive, filter);
+        public static IArchiveMonitor create(FS.FolderPath src, FS.ChangeHandler handler, bool recursive = true, string filter = null)
+            => new ArchiveMonitor(src, handler, recursive, filter);
 
         public FS.FolderPath Subject {get;}
 
@@ -22,7 +22,7 @@ namespace Z0
 
         readonly FS.ChangeHandler Handler;
 
-        public DirectoryMonitor(FS.FolderPath subject, FS.ChangeHandler handler, bool recursive = true, string filter = null)
+        public ArchiveMonitor(FS.FolderPath subject, FS.ChangeHandler handler, bool recursive = true, string filter = null)
         {
             Subject = subject;
             Watcher = new FileSystemWatcher(subject.Name, filter ?? EmptyString);
