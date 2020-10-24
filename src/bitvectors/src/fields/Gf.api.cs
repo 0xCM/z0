@@ -21,7 +21,7 @@ namespace Z0
             for(var i=0; i< exponents.Length; i++)
                 components = gmath.or(components, gmath.pow2<T>(exponents[i]));
             return components;
-        }        
+        }
 
         /// <summary>
         /// Defines a binary polynomial of degree at most 15 from a monotonically decreasing exponent sequence
@@ -40,7 +40,7 @@ namespace Z0
         public static GfPoly<N,T> Poly<N,T>(params byte[] exponents)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => new GfPoly<N, T>(exponents);
+                => new GfPoly<N,T>(exponents);
 
         /// <summary>
         /// Defines a binary polynomial of natural degree N = 3

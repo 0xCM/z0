@@ -11,7 +11,7 @@ namespace Z0
      using static z;
 
      partial class Bits
-     {                
+     {
           /// <summary>
           /// Enables a contiguous sequence of source bits starting at a specified index
           /// </summary>
@@ -21,7 +21,6 @@ namespace Z0
           [MethodImpl(Inline), Op]
           public static byte fill(byte src, byte index, byte count)
           {
-               
                var mask = (uint)Max16u ^ ((uint)lo64(count - 1) << index);
                return (byte)(~(mask | src));
           }
@@ -97,7 +96,6 @@ namespace Z0
           [MethodImpl(Inline), Op]
           public static ulong fill(ulong src, byte index, byte count)
           {
-               
                var mask = Max64u ^ (lo64(count - 1) << index);
                return ~(mask | src);
           }

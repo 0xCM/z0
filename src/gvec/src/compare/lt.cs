@@ -33,7 +33,7 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return Memories.generic<T>(z.vlt(v8u(x), v8u(y)));
+                return generic<T>(z.vlt(v8u(x), v8u(y)));
             else if(typeof(T) == typeof(ushort))
                 return generic<T>(z.vlt(v16u(x), v16u(y)));
             else if(typeof(T) == typeof(uint))

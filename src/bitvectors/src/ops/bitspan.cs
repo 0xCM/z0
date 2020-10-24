@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
 
     partial class BitVector
     {
@@ -62,10 +62,10 @@ namespace Z0
         /// <summary>
         /// Converts the vector to a bitspan representation
         /// </summary>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitSpan bitspan<T>(BitVector<T> src, int? maxbits = null)
             where T : unmanaged
-                => BitSpans.from(src.Data, maxbits ?? 0); 
+                => BitSpans.from(src.Data, maxbits ?? 0);
 
         /// <summary>
         /// Converts the vector to a bitspan representation

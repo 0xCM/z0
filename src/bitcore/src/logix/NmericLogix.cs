@@ -11,7 +11,7 @@ namespace Z0
     using static z;
 
     [ApiHost]
-    public readonly struct NumericLogix : IApiHost<NumericLogix>
+    public readonly struct NumericLogix
     {
         [MethodImpl(Inline), Op, Closures(Integers)]
         public static T identity<T>(T a)

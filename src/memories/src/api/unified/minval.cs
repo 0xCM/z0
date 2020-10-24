@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
 
     partial class Memories
-    {    
+    {
         /// <summary>
         /// Returns the minimum value supported by a parametrically-identified primal type
         /// </summary>
@@ -20,14 +20,5 @@ namespace Z0
             where T : unmanaged
                 => NumericLiterals.minval<T>();
 
-        /// <summary>
-        /// Returns the minimum value supported by a parametrically-identified primal type
-        /// </summary>
-        /// <param name="nk">The kind classifier</param>
-        /// <typeparam name="T">The primal source type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T min<T>(NK<T> nk)
-            where T : unmanaged
-                => minval<T>();
     }
 }

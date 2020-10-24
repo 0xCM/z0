@@ -7,11 +7,11 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; 
+    using static Konst;
     using static Memories;
 
     partial class BitVector
-    {        
+    {
         /// <summary>
         /// Creates an 8-bit vector by concatenating a pair of 4-bit vectors
         /// </summary>
@@ -24,7 +24,7 @@ namespace Z0
         /// <summary>
         /// Creates a 16-bit vector by concatenating 4 4-bit vectors
         /// </summary>
-        /// <param name="x0">The first segment that froms the least significant bits of the new vector</param>
+        /// <param name="x0">The first segment that from the least significant bits of the new vector</param>
         /// <param name="x1">The second segment</param>
         /// <param name="x2">The third segment</param>
         /// <param name="x3">The last segment that forms the most significant bits of the new vector</param>
@@ -53,7 +53,7 @@ namespace Z0
         /// <summary>
         /// Creates a 32-bit vector by concatenating 4 8-bit vectors
         /// </summary>
-        /// <param name="x0">The first segment that froms the least significant bits of the new vector</param>
+        /// <param name="x0">The first segment that forms the least significant bits of the new vector</param>
         /// <param name="x1">The second segment</param>
         /// <param name="x2">The third segment</param>
         /// <param name="x3">The last segment that forms the most significant bits of the new vector</param>
@@ -64,7 +64,7 @@ namespace Z0
         /// <summary>
         /// Creates a 64-bit vector by concatenating 8 8-bit vectors
         /// </summary>
-        /// <param name="x0">The first segment that froms the least significant bits of the new vector</param>
+        /// <param name="x0">The first segment that forms the least significant bits of the new vector</param>
         /// <param name="x1">The second segment</param>
         /// <param name="x2">The third segment</param>
         /// <param name="x3">The fourth segment</param>
@@ -73,7 +73,7 @@ namespace Z0
         /// <param name="x6">The pentultimate segment</param>
         /// <param name="x3">The last segment that forms the most significant bits of the new vector</param>
         [MethodImpl(Inline), Op]
-        public static BitVector64 concat(BitVector8 x0, BitVector8 x1, BitVector8 x2,  BitVector8 x3, 
+        public static BitVector64 concat(BitVector8 x0, BitVector8 x1, BitVector8 x2,  BitVector8 x3,
             BitVector8 x4, BitVector8 x5, BitVector8 x6,  BitVector8 x7)
                 => concat(concat(x0,x1,x2,x3),concat(x4,x5,x6,x7));
 

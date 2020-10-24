@@ -8,12 +8,11 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
 
     partial class BitMatrix
     {
         /// <summary>
-        /// Computes the logical Xor btween two generic bitmatrices, depositing the result to a caller-allocated target
+        /// Computes the logical Xor between two generic bitmatrices, depositing the result to a caller-allocated target
         /// </summary>
         /// <param name="A">The left matrix</param>
         /// <param name="B">The right matrix</param>

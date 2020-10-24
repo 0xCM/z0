@@ -32,7 +32,7 @@ llvm-strings --help-hidden > llvm-strings.help
 llvm-strip --help > llvm-strip.help
 opt --help-hidden > opt.help
 
-llvm-tblgen --help-hidden > llvm-tblgen.help
+llvm-tblgen --help > llvm-tblgen.help
 llvm-xray --help > llvm-xray.help
 obj2yaml --help-hidden > obj2yaml.help
 llvm-dlltool --help-hidden > llvm-dlltool.help

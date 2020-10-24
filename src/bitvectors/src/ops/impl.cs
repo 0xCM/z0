@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline), Impl, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Impl, Closures(Closure)]
         public static BitVector<T> impl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.impl(x.Data, y.Data);

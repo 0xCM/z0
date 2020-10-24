@@ -10,16 +10,16 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct RuleOperand
+    public readonly struct RuleOperand<T>
     {
-        public string Data {get;}
+        public T[] Data {get;}
 
         [MethodImpl(Inline)]
-        public RuleOperand(string src)
+        public RuleOperand(T[] src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator RuleOperand(string src)
-            => new RuleOperand(src);
+        public static implicit operator RuleOperand<T>(T[] src)
+            => new RuleOperand<T>(src);
     }
 }

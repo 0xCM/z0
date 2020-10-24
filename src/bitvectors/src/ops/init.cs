@@ -13,7 +13,7 @@ namespace Z0
     partial class BitVector
     {
         /// <summary>
-        /// Initialzes a generic bitvector with a supplied value
+        /// Initializes a generic bitvector with a supplied value
         /// </summary>
         /// <param name="src">The value used to initialize the bitvector</param>
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]

@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst;    
+    using static Konst;
 
     partial class BitVector
     {
@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="first">The first bit position</param>
         /// <param name="last">The last bit position</param>
-        [MethodImpl(Inline), Extract, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Extract, Closures(Closure)]
         public static BitVector<T> bitseg<T>(BitVector<T> x, byte first, byte last)
             where T : unmanaged
                 => gbits.extract(x.Data, first, last);

@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; using static Memories;
+    using static Konst;
+    using static z;
 
     partial class BitVector
     {
@@ -47,6 +48,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static int width<T>(BitVector<T> x)
             where T : unmanaged
-                => bitwidth<T>() - nlz(x);
+                => (int)bitwidth<T>() - nlz(x);
     }
 }

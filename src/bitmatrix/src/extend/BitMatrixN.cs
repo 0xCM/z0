@@ -6,11 +6,12 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
-    using static Konst; using static Memories;
-    
+
+    using static Konst;
+    using static z;
+
     public static class BitMatrixNx
-    {   
+    {
         public static BitMatrix<N,T> Replicate<N,T>(this BitMatrix<N,T> A)
             where N : unmanaged, ITypeNat
             where T : unmanaged
@@ -20,7 +21,7 @@ namespace Z0
             where N : unmanaged, ITypeNat
             where T : unmanaged
         {
-            var order = nati<N>();
+            var order = nat32i<N>();
             var dst = BitBlocks.alloc<N,T>();
             for(var i=0; i < order; i++)
                 dst[i] = A[i,i];

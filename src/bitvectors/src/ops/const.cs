@@ -8,7 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     partial class BitVector
     {
         /// <summary>
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal scalar upon which the bitvector is predicated</typeparam>
-        [MethodImpl(Inline), True, Closures(UnsignedInts)]
+        [MethodImpl(Inline), True, Closures(Closure)]
         public static BitVector<T> @true<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BitVector.ones<T>();
@@ -28,7 +28,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal scalar upon which the bitvector is predicated</typeparam>
-        [MethodImpl(Inline), False, Closures(UnsignedInts)]
+        [MethodImpl(Inline), False, Closures(Closure)]
         public static BitVector<T> @false<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => BitVector.zero<T>();

@@ -15,7 +15,7 @@ namespace Z0
         /// Creates a generic bitvector
         /// </summary>
         /// <param name="src">The source cell</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitVector<T> generic<T>(T src)
             where T : unmanaged
                 => new BitVector<T>(src);
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source bits</param>
         /// <param name="n">The bitvector length</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitVector<T> generic<T>(Span<byte> src)
             where T : unmanaged
                 => generic(src.Take<T>());
@@ -34,7 +34,7 @@ namespace Z0
         /// Loads an bitvector of minimal size from a source bitstring
         /// </summary>
         /// <param name="src">The bitstring source</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitVector<T> generic<T>(BitString src)
             where T : unmanaged
                 => generic<T>(src.ToPackedBytes());
@@ -50,7 +50,7 @@ namespace Z0
         /// Creates a byte-generic bitvector from 4 bits
         /// </summary>
         [MethodImpl(Inline), Op]
-        public static BitVector<byte> generic(N8 n, Bit32 b0, Bit32 b1, Bit32 b2, Bit32 b3)
+        public static BitVector<byte> generic(N8 n, bit b0, bit b1, bit b2, bit b3)
             => create(n, b0, b1, b2, b3);
 
         /// <summary>

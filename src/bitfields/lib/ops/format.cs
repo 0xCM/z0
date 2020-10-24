@@ -14,23 +14,11 @@ namespace Z0
     {
         [MethodImpl(Inline), Op]
         public static string format(ReadOnlySpan<BitFieldSegment> src)
-            => BitFieldFormatter.format(src);
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static string format<T>(in BitFieldSegment<T> src)
-            where T : unmanaged
-                => BitFieldFormatter.format(src);
-
-        public static string format<T>(ReadOnlySpan<BitFieldSegment<T>> src)
-            where T : unmanaged
-                => BitFieldFormatter.format(src);
+            => BitFieldSpecs.format(src);
 
         public static string format<F>(F src)
             where F : unmanaged, IBitFieldIndexEntry<F>
                 => BitFieldFormatter.format(src);
-
-        public static string[] format(in BitFieldModel src)
-            => BitFieldFormatter.lines(src);
 
         public static string format<W>(in BitFieldIndexEntry<W> src)
             where W : unmanaged, Enum
@@ -55,10 +43,6 @@ namespace Z0
         public static string format<S,T>(ReadOnlySpan<S> src)
             where T : unmanaged
             where S : IBitFieldSegment<T>
-                => BitFieldFormatter.format<S,T>(src);
-
-        static string Format<T>(IBitFieldSegment<T> src)
-            where T : unmanaged
-                => $"{src.Name}({src.Width}:{src.StartPos}..{src.EndPos})";
+                => BitFieldSpecs.format<S,T>(src);
     }
 }

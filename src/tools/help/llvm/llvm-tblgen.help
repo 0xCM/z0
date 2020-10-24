@@ -11,7 +11,6 @@ General options:
   -D=<macro name>                    - Name of the macro to be defined
   -I=<directory>                     - Directory of include files
   -d=<filename>                      - Dependency filename
-  --disable-symbolication            - Disable symbolizing crash backtraces.
   Action to perform:
       --print-records                   - Print all records to stdout (default)
       --dump-json                       - Dump all records as machine-readable JSON
@@ -48,22 +47,14 @@ General options:
       --gen-directive-decl              - Generate directive related declaration code (header file)
       --gen-directive-impl              - Generate directive related implementation code
       --gen-directive-gen               - Generate directive related implementation code part
-  --info-output-file=<filename>      - File to append -stats and -timer output to
-  --long-string-literals             - when emitting large string tables, prefer string literals over comma-separated char literals. This can be a readability and compile-time performance win, but upsets some compilers
   -o=<filename>                      - Output filename
   --time-regions                     - Time regions of tablegens execution
-  --track-memory                     - Enable -time-passes memory tracking (this may be slow)
   --write-if-changed                 - Only write output if it changed
 
 Generic Options:
 
-  -h                                 - Alias for --help
   --help                             - Display available options (--help-hidden for more)
-  --help-hidden                      - Display all available options
   --help-list                        - Display list of available options (--help-list-hidden for more)
-  --help-list-hidden                 - Display list of all available options
-  --print-all-options                - Print all option values after command line parsing
-  --print-options                    - Print non-default options after command line parsing
   --version                          - Display the version of this program
 
 Options for -gen-asm-matcher:

@@ -10,18 +10,18 @@ namespace Z0
     using static Konst;
 
     partial class BitVector
-    {        
+    {
         /// <summary>
         /// Computes the bitvector z := ~(x ^ y) from bitvectors x and y
         /// </summary>
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Xnor, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Xnor, Closures(Closure)]
         public static BitVector<T> xnor<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.xnor(x.Data, y.Data);
-         
+
         /// <summary>
         /// Computes the bitvector z := ~(x ^ y) from bitvectors x and y
         /// </summary>
@@ -44,7 +44,7 @@ namespace Z0
         public static BitVector128<N,T> xnor<N,T>(in BitVector128<N,T> x, in BitVector128<N,T> y)
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => gvec.vxnor(x.Data,y.Data); 
+                => gvec.vxnor(x.Data,y.Data);
 
         /// <summary>
         /// Computes the bitvector z := ~(x ^ y) from bitvectors x and y
@@ -88,7 +88,7 @@ namespace Z0
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
         [MethodImpl(Inline), Xnor]
-        public static BitVector64 xnor(BitVector64 x, BitVector64 y) 
-            => gmath.xnor(x.Data, y.Data);  
+        public static BitVector64 xnor(BitVector64 x, BitVector64 y)
+            => gmath.xnor(x.Data, y.Data);
    }
 }

@@ -6,15 +6,15 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
- 
+
     using static Konst;
-    
+
     partial class Bits
-    {                    
+    {
         /// <summary>
         /// Extracts the lower 4 bits from the source
         /// </summary>
-        /// <param name="src">The soruce value</param>
+        /// <param name="src">The source value</param>
         [MethodImpl(Inline), Lo]
         public static byte lo(byte src)
             => (byte)(0xF & src);

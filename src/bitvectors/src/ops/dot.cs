@@ -61,7 +61,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The left bitvector</param>
         /// <param name="y">The right bitvector</param>
-        [MethodImpl(Inline), Dot, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Dot, Closures(Closure)]
         public static Bit32 dot<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => parity(and(x,y));

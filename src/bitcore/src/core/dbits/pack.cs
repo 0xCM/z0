@@ -48,10 +48,23 @@ namespace Z0
         }
 
         /// <summary>
+        /// Packs 4 bits into the least bits of an unsigned integer
+        /// </summary>
+        [MethodImpl(Inline), Pack]
+        public static uint pack(bit b0, bit b1, bit b2, bit b3)
+        {
+            var dst = (uint)b0;
+            dst |= ((uint)b1 << 1);
+            dst |= ((uint)b2 << 2);
+            dst |= ((uint)b3 << 3);
+            return dst;
+        }
+
+        /// <summary>
         /// Packs 5 bits into the least bits of an unsigned integer
         /// </summary>
         [MethodImpl(Inline), Pack]
-        public static uint pack(Bit32 b0, Bit32 b1, Bit32 b2, Bit32 b3, Bit32 b4)
+        public static uint pack(bit b0, bit b1, bit b2, bit b3, bit b4)
         {
             var dst = (uint)b0;
             dst |= ((uint)b1 << 1);
@@ -65,7 +78,7 @@ namespace Z0
         /// Packs 8 bits into the least bits of an unsigned integer
         /// </summary>
         [MethodImpl(Inline), Pack]
-        public static uint pack(Bit32 b0, Bit32 b1, Bit32 b2, Bit32 b3, Bit32 b4, Bit32 b5, Bit32 b6, Bit32 b7)
+        public static uint pack(bit b0, bit b1, bit b2, bit b3, bit b4, bit b5, bit b6, bit b7)
         {
             var dst = pack(b0, b1, b2, b3);
             dst |= (pack(b4, b5, b6, b7) << 4);

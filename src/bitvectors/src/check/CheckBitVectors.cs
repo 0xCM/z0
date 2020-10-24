@@ -11,7 +11,7 @@ namespace Z0
 
     public readonly struct CheckBitVectors : ICheckBitVectors
     {
-        public static ICheckBitVectors Checker => default(CheckBitVectors);
+
     }
 
 }

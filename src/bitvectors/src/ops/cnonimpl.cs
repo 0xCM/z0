@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="x">The left vector</param>
         /// <param name="y">The right vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), CNonImpl, Closures(UnsignedInts)]
+        [MethodImpl(Inline), CNonImpl, Closures(Closure)]
         public static BitVector<T> cnonimpl<T>(BitVector<T> x, BitVector<T> y)
             where T : unmanaged
                 => gmath.cnonimpl(x.Data, y.Data);

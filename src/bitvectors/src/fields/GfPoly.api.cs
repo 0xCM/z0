@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    using static Konst; using static Memories;
+    using static Konst;
+    using static z;
 
     /// <summary>
     /// Primitive polynomials for GF reduction
@@ -19,7 +20,7 @@ namespace Z0
         /// x^2 + x^1 + x^0
         /// </summary>
         public static readonly GfPoly<N2,byte> Gfp_2_1_0 = Gf.Poly<N2,byte>(2,1,0);
-        
+
         /// <summary>
         /// x^3 + x^1 + x^0
         /// </summary>
@@ -75,7 +76,7 @@ namespace Z0
         /// x^32 + x^22 + x^2 + x^1 + x^0
         /// </summary>
         public static readonly GfPoly<N32,ulong> Gfp_32_22_2_1_0 = Gf.Poly<N32,ulong>(32,22,2,1,0);
- 
+
         /// <summary>
         /// Searches for a primal polynomial of degree N used for reduction in GF(2^N)
         /// <typeparam name="N">The degree of the polynomial</typeparam>
@@ -86,11 +87,11 @@ namespace Z0
             where T : unmanaged
             where N : unmanaged, ITypeNat
         {
-            var n = nati<N>();
+            var n = nat32i<N>();
             switch(n)
             {
                 case 2:
-                    return Gfp_2_1_0.As<N,T>();                    
+                    return Gfp_2_1_0.As<N,T>();
                 case 3:
                     return Gfp_3_1_0.As<N,T>();
                 case 4:

@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="first">The first bit position</param>
         /// <param name="last">The last bit position</param>
-        [MethodImpl(Inline), TestBit, Closures(UnsignedInts)]
+        [MethodImpl(Inline), TestBit, Closures(Closure)]
         public static Bit32 testbit<T>(BitVector<T> x, byte index)
             where T : unmanaged
                 => gbits.testbit(x.Data, index);
@@ -38,7 +38,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), TestBit]
         public static Bit32 testbit(BitVector4 x, byte pos)
-            => Bits.testbit(x.Data, pos);
+            => Bits.testbit32(x.Data, pos);
 
         /// <summary>
         /// Determines whether a bit is enabled
@@ -46,7 +46,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), TestBit]
         public static Bit32 testbit(BitVector8 x, byte pos)
-            => Bits.testbit(x.Data, pos);
+            => Bits.testbit32(x.Data, pos);
 
         /// <summary>
         /// Determines whether a bit is enabled
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), TestBit]
         public static Bit32 testbit(BitVector16 x, byte pos)
-            => Bits.testbit(x.Data, pos);
+            => Bits.testbit32(x.Data, pos);
 
         /// <summary>
         /// Determines whether a bit is enabled
@@ -62,7 +62,7 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), TestBit]
         public static Bit32 testbit(BitVector32 x, byte pos)
-            => Bits.testbit(x.Data, pos);
+            => Bits.testbit32(x.Data, pos);
 
         /// <summary>
         /// Determines whether a bit is enabled
@@ -70,6 +70,6 @@ namespace Z0
         /// <param name="pos">The bit position</param>
         [MethodImpl(Inline), TestBit]
         public static Bit32 testbit(BitVector64 x, byte pos)
-            => Bits.testbit(x.Data, pos);
+            => Bits.testbit32(x.Data, pos);
     }
 }

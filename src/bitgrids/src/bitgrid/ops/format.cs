@@ -17,7 +17,7 @@ namespace Z0
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => src.Content.Bytes.FormatMatrixBits(nati<N>(), (int)NatCalc.mul<M,N>(), false);
+                => src.Content.Bytes.FormatMatrixBits(z.nat32i<N>(), (int)NatCalc.mul<M,N>(), false);
 
         public static string format<T>(BitGrid<T> src, bool showrow = false, int? maxbits = null)
             where T : unmanaged
@@ -94,28 +94,28 @@ namespace Z0
         static string format<M,N>(ushort data, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => z.bytes(data).FormatMatrixBits(nati<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
+                => z.bytes(data).FormatMatrixBits(z.nat32i<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
 
         static string format<M,N>(uint data, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => z.bytes(data).FormatMatrixBits(nati<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
+                => z.bytes(data).FormatMatrixBits(z.nat32i<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
 
         static string format<M,N>(ulong data, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
-                => z.bytes(data).FormatMatrixBits(nati<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
+                => z.bytes(data).FormatMatrixBits(z.nat32i<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
 
         static string format<M,N,T>(Vector128<T> data, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => data.ToSpan().FormatMatrixBits(nati<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
+                => data.ToSpan().FormatMatrixBits(z.nat32i<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
 
         static string format<M,N,T>(Vector256<T> data, bool showrow = false, int? maxbits = null)
             where M : unmanaged, ITypeNat
             where N : unmanaged, ITypeNat
             where T : unmanaged
-                => data.ToSpan().FormatMatrixBits(nati<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
+                => data.ToSpan().FormatMatrixBits(z.nat32i<N>(), maxbits ?? (int)NatCalc.mul<M,N>(), showrow);
     }
 }

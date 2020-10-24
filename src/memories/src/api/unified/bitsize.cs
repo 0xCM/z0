@@ -15,8 +15,6 @@ namespace Z0
         public static int bitwidth<T>()
             => (int)z.bitwidth<T>();
 
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static BitSize bitwidth<T>(T rep)
-            => z.bitwidth<T>();
+
     }
 }

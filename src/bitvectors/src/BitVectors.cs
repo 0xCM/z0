@@ -11,7 +11,9 @@ namespace Z0
 
     [ApiHost("api")]
     public partial class BitVector
-    {           
+    {
+        const NumericKind Closure = UnsignedInts;
+
         [MethodImpl(Inline)]
         internal static Span<byte> bytes<T>(in T src)
             where T : struct
@@ -20,6 +22,6 @@ namespace Z0
 
     public static partial class XTend
     {
-        
-    }    
+
+    }
 }

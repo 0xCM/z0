@@ -13,7 +13,6 @@ namespace Z0
     using static Konst;
     using static LinqXPress;
     using static z;
-
     using static DynamicOps;
 
     [ApiHost]
@@ -36,13 +35,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return new Xor<T>(generic<T>(Ops8u.Xor));
+                return new Xor<T>(Delegates.generic<T>(Ops8u.Xor));
             else if(typeof(T) == typeof(ushort))
-                return new Xor<T>(generic<T>(Ops16u.Xor));
+                return new Xor<T>(Delegates.generic<T>(Ops16u.Xor));
             else if(typeof(T) == typeof(uint))
-                return new Xor<T>(generic<T>(Ops32u.Xor));
+                return new Xor<T>(Delegates.generic<T>(Ops32u.Xor));
             else if(typeof(T) == typeof(ulong))
-                return new Xor<T>(generic<T>(Ops64u.Xor));
+                return new Xor<T>(Delegates.generic<T>(Ops64u.Xor));
             else
                 throw no<T>();
         }
@@ -52,13 +51,13 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                return new GtEq<T>(generic<T>(Ops8u.GtEq.Compile()));
+                return new GtEq<T>(Delegates.generic<T>(Ops8u.GtEq.Compile()));
             else if(typeof(T) == typeof(ushort))
-                return new GtEq<T>(z.cast<Func<T,T,bool>>(Ops16u.GtEq.Compile()));
+                return new GtEq<T>(Delegates.generic<T>(Ops16u.GtEq.Compile()));
             else if(typeof(T) == typeof(uint))
-                return new GtEq<T>(z.cast<Func<T,T,bool>>(Ops32u.GtEq.Compile()));
+                return new GtEq<T>(Delegates.generic<T>(Ops32u.GtEq.Compile()));
             else if(typeof(T) == typeof(ulong))
-                return new GtEq<T>(z.cast<Func<T,T,bool>>(Ops64u.GtEq.Compile()));
+                return new GtEq<T>(Delegates.generic<T>(Ops64u.GtEq.Compile()));
             else
                 return new GtEq<T>(lambda<T,T,bool>(Expression.GreaterThanOrEqual).Compile());
         }

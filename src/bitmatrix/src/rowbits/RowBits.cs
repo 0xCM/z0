@@ -7,12 +7,12 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static Memories;
+    using static z;
 
     /// <summary>
     /// Defines a sequence of generic bitvectors, interpreted as rows, for which the width is determined by the bitvector primal type
     /// </summary>
-    /// <remarks>The primary use case for this data structure is to faciltate efficient bitwise
+    /// <remarks>The primary use case for this data structure is to facilitate efficient bitwise
     /// operations over generic scalar sequences where the length of the sequence varies</remarks>
     [IdentityProvider(typeof(RowBitsIdentityProvider))]
     public readonly ref struct RowBits<T>
@@ -20,7 +20,8 @@ namespace Z0
     {
         readonly internal Span<T> data;
 
-        public static int Width => bitwidth<T>();
+        public static int Width
+            => (int)bitwidth<T>();
 
         /// <summary>
         /// Computes the bitwise AND between the operands
@@ -71,7 +72,7 @@ namespace Z0
         public ref T Head
         {
             [MethodImpl(Inline)]
-            get => ref head(data);
+            get => ref first(data);
         }
 
         public int RowCount
@@ -110,17 +111,8 @@ namespace Z0
         public ref BitVector<T> this[int row]
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.As<T,BitVector<T>>(ref head(data, row));
+            get => ref Unsafe.As<T,BitVector<T>>(ref seek(data, (uint)row));
         }
-
-        // public bit this[int row, int col]
-        // {
-        //     [MethodImpl(Inline)]
-        //     get => BitBlocks.readbit(Width, in Head, row, col);
-
-        //     [MethodImpl(Inline)]
-        //     set => BitBlocks.setbit(Width, row, col, value, ref Head);
-        // }
 
         [MethodImpl(Inline)]
         public RowBits<S> As<S>()

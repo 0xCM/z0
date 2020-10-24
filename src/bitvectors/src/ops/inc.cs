@@ -16,7 +16,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline), Inc, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Inc, Closures(Closure)]
         public static BitVector<T> inc<T>(BitVector<T> x)
             where T : unmanaged
                 => gmath.inc(x.Data);
@@ -47,15 +47,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Inc]
-        public static BitVector8 inc(BitVector8 x)        
-            => gmath.inc(x.Data);
-        
-        /// <summary>
-        /// Increments the source vector
-        /// </summary>
-        /// <param name="x">The source vector</param>
-        [MethodImpl(Inline), Inc]
-        public static BitVector16 inc(BitVector16 x)        
+        public static BitVector8 inc(BitVector8 x)
             => gmath.inc(x.Data);
 
         /// <summary>
@@ -63,7 +55,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Inc]
-        public static BitVector32 inc(BitVector32 x)        
+        public static BitVector16 inc(BitVector16 x)
             => gmath.inc(x.Data);
 
         /// <summary>
@@ -71,7 +63,15 @@ namespace Z0
         /// </summary>
         /// <param name="x">The source vector</param>
         [MethodImpl(Inline), Inc]
-        public static BitVector64 inc(BitVector64 x)        
+        public static BitVector32 inc(BitVector32 x)
+            => gmath.inc(x.Data);
+
+        /// <summary>
+        /// Increments the source vector
+        /// </summary>
+        /// <param name="x">The source vector</param>
+        [MethodImpl(Inline), Inc]
+        public static BitVector64 inc(BitVector64 x)
             => gmath.inc(x.Data);
     }
 }

@@ -11,21 +11,6 @@ namespace Z0
 
     partial class Memories
     {
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T generic<T>(bool src)
-            => AsDeprecated.generic<T>(src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T generic<T>(char src)
-            => AsDeprecated.generic<T>(src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T generic<T>(sbyte src)
-            => AsDeprecated.generic<T>(src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T generic<T>(ref sbyte src)
-            => ref AsDeprecated.generic<T>(ref src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T generic<T>(byte src)
@@ -36,27 +21,11 @@ namespace Z0
             => ref AsDeprecated.generic<T>(ref src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T generic<T>(short src)
-            => AsDeprecated.generic<T>(src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T generic<T>(ref short src)
-            => ref AsDeprecated.generic<T>(ref src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T generic<T>(ushort src)
             => AsDeprecated.generic<T>(src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T generic<T>(ref ushort src)
-            => ref AsDeprecated.generic<T>(ref src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T generic<T>(int src)
-            => AsDeprecated.generic<T>(src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref T generic<T>(ref int src)
             => ref AsDeprecated.generic<T>(ref src);
 
 
@@ -67,10 +36,6 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static ref T generic<T>(ref uint src)
             => ref AsDeprecated.generic<T>(ref src);
-
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static T generic<T>(long src)
-            => AsDeprecated.generic<T>(src);
 
         [MethodImpl(Inline), Op, Closures(AllNumeric)]
         public static T generic<T>(ulong src)

@@ -38,7 +38,7 @@ namespace Z0
             return id;
         }
 
-       /// <summary>
+        /// <summary>
         /// Returns the duplicate identities found in the source stream, if any; otherwise, returns an empty array
         /// </summary>
         /// <param name="src">The identities to search for duplicates</param>
@@ -78,7 +78,7 @@ namespace Z0
         /// <param name="generic">The operation's generic status</param>
         /// <param name="imm">Specifies whether the operation requires one or more immediate values</param>
         /// <param name="components">The identity components</param>
-        [MethodImpl(Inline), Op]
+        [Op]
         public static OpIdentity define(string text, string name, string suffix, bool generic, bool imm, string[] components)
             => new OpIdentity(text, name, suffix, generic, imm, components);
 
@@ -89,6 +89,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         /// <param name="nk">The cell numeric kind</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
+        [Op]
         public static OpIdentity vsfunc(ApiOpId k, TypeWidth w, NumericKind nk, bool generic = true)
             => I.build(I.vname(k), w, nk, generic);
 
@@ -117,6 +118,7 @@ namespace Z0
             where W : unmanaged, ITypeWidth
             where T : unmanaged
                 => I.build(I.vname(k), w.TypeWidth, nk<T>(), generic);
+
         [MethodImpl(Inline), Op]
         public static ApiIdentityToken token(OpIdentity src)
             => ApiIdentityTokens.dispense(src);
@@ -203,7 +205,7 @@ namespace Z0
         /// <param name="k">The operation kind id</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
         /// <typeparam name="T">The operation numeric kind</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static OpIdentity numeric<T>(ApiOpId k, T t = default, bool generic = false)
             where T : unmanaged
                 => I.NumericOp<T>(I.name(k),  generic);
@@ -236,6 +238,7 @@ namespace Z0
                 return none<SegmentedIdentity>();
         }
 
+        [Op]
         public static bool parse(string src, out SegmentedIdentity dst)
         {
             dst = default;
@@ -289,7 +292,7 @@ namespace Z0
         /// <param name="name">The type name</param>
         /// <param name="wk">The width kind</param>
         /// <param name="nk">The numeric kind</param>
-        [MethodImpl(Inline), Op]
+        [Op]
         public static TypeIdentity segmented(string name, TypeWidth wk, NumericKind nk)
             => new TypeIdentity($"{name}{wk.FormatValue()}x{nk.Format()}");
 
@@ -299,7 +302,7 @@ namespace Z0
         /// <param name="basename">The base name of the resource</param>
         /// <param name="w">The resource bit width</param>
         /// <param name="kind">The numeric kind of the resource</param>
-        [MethodImpl(Inline), Op]
+        [Op]
         public static TypeIdentity resource(string basename, ITypeWidth w, NumericKind kind)
             => new TypeIdentity($"{basename}{w}x{kind.Format()}");
 
@@ -310,7 +313,7 @@ namespace Z0
         /// <param name="w1">The first bit width</param>
         /// <param name="w2">The second bit width</param>
         /// <param name="kind">The numeric kind of the resource</param>
-        [MethodImpl(Inline), Op]
+        [Op]
         public static TypeIdentity resource(string basename, ITypeWidth w1, ITypeWidth w2, NumericKind kind)
             => new TypeIdentity($"{basename}{w1}x{w2}x{kind.Format()}");
 
@@ -320,7 +323,7 @@ namespace Z0
         /// <param name="basename">The base name of the resource</param>
         /// <param name="w">The resource bit width</param>
         /// <param name="kind">The numeric kind of the resource</param>
-        [MethodImpl(Inline)]
+        [Op]
         public static TypeIdentity resource(string basename, ITypeNat w, NumericKind kind)
             => new TypeIdentity($"{basename}{w}x{kind.Format()}");
 
@@ -331,7 +334,7 @@ namespace Z0
         /// <param name="w1">The first bit width</param>
         /// <param name="w2">The second bit width</param>
         /// <param name="kind">The numeric kind of the resource</param>
-        [MethodImpl(Inline), Op]
+        [Op]
         public static TypeIdentity resource(string basename, ITypeNat w1, ITypeNat w2, NumericKind kind)
             => new TypeIdentity($"{basename}{w1}x{w2}x{kind.Format()}");
 
@@ -354,6 +357,7 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <param name="nk">The vector cell kind</param>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
+        [Op]
         public static OpIdentity vectorized(ApiOpId k, TypeWidth w, NumericKind nk, bool generic)
             => I.build(I.vname(k), w, nk, generic);
 
@@ -364,6 +368,7 @@ namespace Z0
         /// <param name="w">The vector operand width</param>
         /// <typeparam name="W">The vector operand width</typeparam>
         /// <typeparam name="T">The vector cell type</typeparam>
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static OpIdentity vdirect<T>(ApiOpId k, TypeWidth w, T t = default)
             where T : unmanaged
                 => I.build(I.vname(k), w, I.nk(t), false);
@@ -386,7 +391,7 @@ namespace Z0
         /// <param name="k">The operation kind id</param>
         /// <param name="nk">The operation numeric kind</typeparam>
         /// <param name="generic">Whether the produced identity has a generic marker</param>
-        [MethodImpl(Inline), Op]
+        [Op]
         public static OpIdentity numeric(ApiOpId k,  NumericKind nk, bool generic = false)
             => I.NumericOp(I.name(k), nk, generic);
 
@@ -396,29 +401,11 @@ namespace Z0
         /// <param name="opname">The base operator name</param>
         /// <param name="t">A primal type representative</param>
         /// <typeparam name="T">The primal type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static OpIdentity NumericOp<T>(string opname, NK<T> k, bool generic)
             where T : unmanaged
                 => I.build(opname, TypeWidth.None, k, generic);
 
-        public void parse_uri_1()
-        {
-            var opid = OpIdentityParser.parse("vgeneric_g[8u](v512x8i~in)");
-            var input = $"hex://fixed/Vector512?vgeneric#{opid}";
-            var attempt = ApiUriParser.Service.Parse(input);
-            //insist(attempt.Succeeded);
-            var uri = attempt.Value;
-
-            // Claim.Eq(ApiUriScheme.Hex, uri.Scheme);
-            // ClaimEquatable.Eq(new ApiHostUri(PartId.Fixed, "Vector512"), uri.Host);
-            // Claim.eq("vgeneric", uri.GroupName);
-            // Claim.eq(opid, uri.OpId);
-            // Claim.eq(true, opid.IsGeneric);
-            // Claim.eq("vgeneric", opid.Name);
-            // var parts  = Signatures.components(opid).ToArray();
-            // foreach(var p in parts)
-            //     Trace(p.Kind, p);
-        }
         [Op]
         public static IEnumerable<ApiIdentityPart> components(OpIdentity src)
         {
@@ -458,6 +445,7 @@ namespace Z0
         /// <summary>
         /// Disables the generic indicator
         /// </summary>
+        [Op]
         static OpIdentity WithoutGeneric(OpIdentity src)
         {
             var parts = components(src).ToArray();
@@ -471,6 +459,7 @@ namespace Z0
             return build(parts);
         }
 
+        [Op]
         static IEnumerable<string> SuffixText(OpIdentity src)
         {
             if(src.Identifier.Contains(IDI.SuffixSep))
@@ -485,7 +474,8 @@ namespace Z0
             }
         }
 
-        static IEnumerable<string> ComponentText(OpIdentity src)
+       [Op]
+       static IEnumerable<string> ComponentText(OpIdentity src)
         {
             var parts = (src.Identifier.Contains(IDI.SuffixSep)
             ? src.Identifier.TakeBefore(IDI.SuffixSep)

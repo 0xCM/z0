@@ -29,8 +29,6 @@ namespace Z0.Asm
 
         public void Run()
         {
-            var header = ImageDataLayout.SectionHeader(0);
-            Wf.Status(header.Format());
         }
     }
 

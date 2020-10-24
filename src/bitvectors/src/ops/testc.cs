@@ -43,7 +43,7 @@ namespace Z0
         /// <summary>
         /// Returns true of all bits are enabled, false otherwise
         /// </summary>
-        [MethodImpl(Inline), TestC, Closures(UnsignedInts)]
+        [MethodImpl(Inline), TestC, Closures(Closure)]
         public static Bit32 testc<T>(BitVector<T> src)
             where T : unmanaged
                 => gmath.eq(gmath.and(maxval<T>(), src.Data), maxval<T>());
