@@ -4,26 +4,34 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    public readonly struct WfContext : IWfContext
+    public struct WfContext : IWfContext
     {
-        // public Assembly Control {get;}
+        internal IWfPaths Paths;
 
-        // public string[] Args {get;}
+        internal IApiParts ApiParts;
 
-        // public IApiParts ApiParts {get;}
+        internal ITestLogPaths TestLogPaths;
 
-        // public CorrelationToken Ct {get;}
+        internal WfSettings WfSettings;
 
-        // public IWfPaths Paths {get;}
+        internal IJsonSettings Settings;
 
-        // [MethodImpl(Inline)]
-        // public WfContext(Assembly control, string[] args, IApiParts parts, IWfPaths paths = null)
-        // {
-        //     Control = control;
-        //     Args = args;
-        //     ApiParts = parts;
-        //     Paths = paths ?? WfShell.paths();
-        //     Ct = z.correlate(control.Id());
-        // }
+        internal string[] Args;
+
+        internal WfController Controller;
+
+        IWfPaths IWfContext.Paths => Paths;
+
+        IApiParts IWfContext.ApiParts => ApiParts;
+
+        ITestLogPaths IWfContext.TestLogPaths => TestLogPaths;
+
+        IJsonSettings IWfContext.Settings => Settings;
+
+        WfSettings IWfContext.WfSettings => WfSettings;
+
+        string[] IWfContext.Args => Args;
+
+        WfController IWfContext.Controller => Controller;
     }
 }

@@ -11,6 +11,12 @@ namespace Z0
     using static HexConst;
     using static z;
 
+    public readonly struct ExampleRunner
+    {
+
+    }
+
+
     partial class t_vexamples
     {
         public static ReadOnlySpan<byte> AddPattern

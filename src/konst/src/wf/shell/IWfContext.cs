@@ -9,20 +9,24 @@ namespace Z0
 
     public interface IWfContext : ITextual
     {
+        IWfPaths Paths
+            => WfShell.paths();
+
+        WfSettings WfSettings
+            => WfShell.settings(this);
+
+        IJsonSettings Settings
+            => JsonSettings.Load(Paths.AppConfigPath);
+
         IApiParts ApiParts
              => WfShell.parts();
 
         CorrelationToken Ct
             => z.correlate(Controller.Id);
 
-        IWfPaths Paths
-            => WfShell.paths();
 
         ITestLogPaths TestLogPaths
             => new TestLogPaths();
-
-        IJsonSettings Settings
-            => JsonSettings.Load(Paths.AppConfigPath);
 
         string[] Args
              => Environment.GetCommandLineArgs();

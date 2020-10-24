@@ -11,6 +11,14 @@ namespace Z0
     public interface IWfPaths : ILogPaths
     {
         /// <summary>
+        /// The workflow's database root
+        /// </summary>
+        FS.FolderPath DbRoot {get;}
+
+        FS.FolderPath CaptureRoot
+            => DbRoot + FS.folder("capture");
+
+        /// <summary>
         /// The executing application's data directory
         /// </summary>
         FS.FolderPath AppDataDir
@@ -92,13 +100,6 @@ namespace Z0
         /// Creates a path provider for the controlling application
         /// </summary>
         IWfPaths ForApp()
-            => WfShell.paths(LogDir);
-
-        /// <summary>
-        /// Creates a provider rooted at the current root directory for another application
-        /// </summary>
-        /// <param name="dst">The target app id</param>
-        IWfPaths ForApp(string id)
-            => WfShell.paths(LogDir + FS.folder(id));
+            => WfShell.paths();
     }
 }

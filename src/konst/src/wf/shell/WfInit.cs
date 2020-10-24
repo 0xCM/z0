@@ -17,77 +17,65 @@ namespace Z0
     public struct WfInit : IWfInit
     {
         /// <summary>
-        /// The context root
-        /// </summary>
-        public IWfContext Shell {get;}
-
-        /// <summary>
-        /// The configured paths
-        /// </summary>
-        public IWfPaths Paths {get;}
-
-        /// <summary>
         /// The entry assembly
         /// </summary>
-        public Assembly Control {get;}
+        internal Assembly Control {get;}
 
         /// <summary>
         /// The entry assembly identifier
         /// </summary>
-        public PartId ControlId {get;}
-
-        /// <summary>
-        /// The controlling arguments, in raw form as supplied by the entry point or caller
-        /// </summary>
-        public string[] Args {get;}
+        internal PartId ControlId {get;}
 
         /// <summary>
         /// The parts considered by the workflow
         /// </summary>
-        public PartId[] PartIdentities {get;}
+        internal PartId[] PartIdentities {get;}
 
         /// <summary>
-        /// The input data archive configuration
+        /// The context root
         /// </summary>
-        public IApiParts ApiParts {get;}
-
-        /// <summary>
-        /// The output data archive configuration
-        /// </summary>
-        public ArchiveConfig TargetArchive {get;}
-
-        /// <summary>
-        /// The persistent settings supplied by a json.config
-        /// </summary>
-        public WfSettings Settings {get;}
-
-        /// <summary>
-        /// The resource staging area
-        /// </summary>
-        public ArchiveConfig Resources {get;}
+        internal IWfContext Context {get;}
 
         /// <summary>
         /// The specified log configuration
         /// </summary>
-        public WfLogConfig Logs {get;}
+        internal WfLogConfig Logs {get;}
+
+        /// <summary>
+        /// The input data archive configuration
+        /// </summary>
+        internal IApiParts ApiParts {get;}
 
         public ISystemApiCatalog Api {get;}
 
         [MethodImpl(Inline)]
-        public WfInit(IWfContext shell, IApiParts parts)
+        public WfInit(IWfContext ctx, WfLogConfig logs, PartId[] parts)
         {
-            Shell = shell;
-            ApiParts = parts;
-            Control = Assembly.GetEntryAssembly();
-            Args = shell.Args;
-            Paths = shell.Paths;
-            Api = ApiParts.Api;
-            ControlId = Part.ExecutingPart;
-            TargetArchive = new ArchiveConfig(FS.dir(Paths.LogRoot.Name) + FS.folder("capture/artifacts"));
-            PartIdentities = WfShell.parse(Args, Api.PartIdentities);
-            Resources = new ArchiveConfig(Paths.ResourceRoot);
-            Settings = WfShell.settings(Shell);
-            Logs = new WfLogConfig(ControlId, Paths.AppLogRoot, FS.dir(@"j:\database\logs\wf"));
+            Context = ctx;
+            ApiParts = ctx.ApiParts;
+            Control = ctx.Controller;
+            Api = ctx.ApiParts.Api;
+            ControlId = ctx.Controller.Id;
+            Logs = logs;
+            PartIdentities = parts;
         }
+
+        IWfContext IWfInit.Shell
+            => Context;
+
+        IApiParts IWfInit.ApiParts
+            => ApiParts;
+
+        Assembly IWfInit.Control
+            => Control;
+
+        PartId IWfInit.ControlId
+            => ControlId;
+
+        PartId[] IWfInit.PartIdentities
+            => PartIdentities;
+
+        WfLogConfig IWfInit.Logs
+            => Logs;
     }
 }

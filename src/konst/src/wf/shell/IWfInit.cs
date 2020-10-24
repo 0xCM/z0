@@ -20,72 +20,37 @@ namespace Z0
         IWfContext Shell {get;}
 
         /// <summary>
-        /// The input data archive configuration
-        /// </summary>
-        IApiParts ApiParts
-            => Shell.ApiParts;
-
-        /// <summary>
-        /// The entry assembly
-        /// </summary>
-        Assembly Control
-            => Assembly.GetEntryAssembly();
-
-        /// <summary>
-        /// The configured api set
-        /// </summary>
-        ISystemApiCatalog Api
-            => ApiParts.Api;
-
-        /// <summary>
-        /// The controlling part
-        /// </summary>
-        PartId ControlId
-            => Part.ExecutingPart;
-
-        /// <summary>
-        /// The output data archive configuration
-        /// </summary>
-        ArchiveConfig TargetArchive
-            => new ArchiveConfig(FS.dir(Paths.LogRoot.Name) + FS.folder("capture/artifacts"));
-
-        /// <summary>
-        /// The configured paths
-        /// </summary>
-        IWfPaths Paths
-            => Shell.Paths;
-
-        /// <summary>
-        /// The parts considered by the workflow
-        /// </summary>
-        PartId[] PartIdentities
-            => WfShell.parse(Args, Api.PartIdentities);
-
-        /// <summary>
-        /// The resource staging area
-        /// </summary>
-        ArchiveConfig Resources
-            => new ArchiveConfig(Paths.ResourceRoot);
-
-        /// <summary>
-        /// The persistent settings supplied by a json.config
-        /// </summary>
-        WfSettings Settings
-            => WfShell.settings(Shell);
-
-        /// <summary>
         /// The specified log configuration
         /// </summary>
         WfLogConfig Logs {get;}
 
         /// <summary>
-        /// The controlling arguments, in raw form as supplied by the entry point or caller
+        /// The input data archive configuration
         /// </summary>
-        string[] Args
-             => Shell.Args;
+        IApiParts ApiParts {get;}
+
+        /// <summary>
+        /// The entry assembly
+        /// </summary>
+        Assembly Control {get;}
+
+        /// <summary>
+        /// The configured api set
+        /// </summary>
+        ISystemApiCatalog Api {get;}
+
+        /// <summary>
+        /// The controlling part
+        /// </summary>
+        PartId ControlId {get;}
+
+        /// <summary>
+        /// The parts considered by the workflow
+        /// </summary>
+        PartId[] PartIdentities {get;}
 
         FS.FolderPath ResDir
-            => Resources.Root;
+            => FS.dir(Shell.Paths.ResourceRoot.Name);
 
         FS.FolderPath IndexDir
             => ResDir + FS.folder("index");

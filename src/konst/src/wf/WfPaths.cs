@@ -18,11 +18,13 @@ namespace Z0
 
         public FS.FolderPath LogDir {get;}
 
-        [MethodImpl(Inline)]
-        public WfPaths(FS.FolderPath log)
+        public FS.FolderPath DbRoot {get;}
+
+        public WfPaths(WfLogConfig logs)
         {
-            LogRoot = FolderPath.Define(log.Name);
-            LogDir = log;
+            LogDir = logs.Root;
+            LogRoot = FolderPath.Define(LogDir.Name);
+            DbRoot = logs.DbRoot;
         }
     }
 }

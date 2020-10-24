@@ -9,6 +9,11 @@ namespace Z0
 
     public readonly struct TestLogPaths : ITestLogPaths
     {
+        public FS.FolderPath LogDir {get;}
 
+        public TestLogPaths(FS.FolderPath dir)
+        {
+            LogDir = dir;
+        }
     }
 }

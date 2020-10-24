@@ -23,7 +23,7 @@ namespace Z0
 
         public WfEventLog(WfLogConfig config)
         {
-            Target = config.Pub;
+            Target = config.DbRoot;
             config.StatusLog.Delete();
             config.ErrorLog.Delete();
             StatusPath = FS.path(config.StatusLog.Name);

@@ -19,6 +19,12 @@ namespace Z0
         public WfSettings(KeyedValue<string,string>[] src)
             => Index = new KeyedValues<string,string>(src);
 
+        public WfSettings(IJsonSettings src)
+            : this(src.All.Map(s => new KeyedValue<string,string>(s.Name, s.Value)))
+        {
+
+        }
+
         [MethodImpl(Inline)]
         public WfSettings(Dictionary<string,string> src)
             => Index = KeyedValues.from(src);

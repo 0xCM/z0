@@ -19,6 +19,9 @@ namespace Z0
     public class JsonSettings : IJsonSettings
     {
         public static IJsonSettings Load(FilePath src)
+            => Load(FS.path(src.Name));
+
+        public static IJsonSettings Load(FS.FilePath src)
         {
             var dst = new Dictionary<string,string>();
             absorb(src, dst);
