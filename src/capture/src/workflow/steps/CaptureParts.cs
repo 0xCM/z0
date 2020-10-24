@@ -58,7 +58,7 @@ namespace Z0
             Wf.Running();
 
             ClearCaptureArchives.create().Run(Wf);
-            var catalogs = @readonly(Config.Api.Catalogs);
+            var catalogs = Config.Api.Catalogs.Terms;
             var count = catalogs.Length;
             for(var i=0; i<count; i++)
                 CapturePart(skip(catalogs,i));

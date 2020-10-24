@@ -36,6 +36,8 @@ namespace Z0
 
         public const string ApiTestIdentity = api + dot + identity + dot + tests;
 
+        const string reflector = nameof(reflector);
+
         public const string ApiIdentityReflector = api + dot + identity + dot + reflector;
 
         public const string ApiCatalogs = api + dot + catalogs;
@@ -51,6 +53,41 @@ namespace Z0
         public const string ApiPartCatalogQuery = api + dot + query + dot + parts;
 
         public const string ApiHostMemberQuery = api + dot + query + dot + hosts;
+
+       // ~~ Bitlogic
+        // ~~ -----------------------------------------------------------------------------------------
+
+        public const string BitLogicBits = bitlogic + dot + bits;
+
+        public const string BitLogicU1 = bitlogic + dot + u1;
+
+        public const string BitLogicU2 = bitlogic + dot + u2;
+
+        public const string BitLogicU3 = bitlogic + dot + u3;
+
+        public const string BitLogicU4 = bitlogic + dot + u4;
+
+        public const string BitLogicU5 = bitlogic + dot + u5;
+
+        public const string BitLogicU6 = bitlogic + dot + u6;
+
+        public const string BitLogicU7 = bitlogic + dot + u7;
+
+        public const string BitLogicO8 = bitlogic + dot + octets;
+
+        public const string BitLogicU8 = bitlogic + dot + u8;
+
+        public const string BitLogicU16 = bitlogic + dot + u16;
+
+        public const string BitLogicU32 = bitlogic + dot + u32;
+
+        public const string BitLogicU64 = bitlogic + dot + u64;
+
+        public const string BitLogicKinds = bitlogic + dot + kinds;
+
+        public const string BitLogicScalar = bitlogic + dot + scalar;
+
+        public const string BitLogicBytes = bitlogic + dot + bytes;
 
         // ~~ Blocks
         // ~~ -----------------------------------------------------------------------------------------
@@ -217,45 +254,9 @@ namespace Z0
 
         public const string TypedLiterals = literals + dot + typed;
 
-        // ~~ Bitlogic
-        // ~~ -----------------------------------------------------------------------------------------
-
-        public const string BitLogicBits = bitlogic + dot + bits;
-
-        public const string BitLogicU1 = bitlogic + dot + u1;
-
-        public const string BitLogicU2 = bitlogic + dot + u2;
-
-        public const string BitLogicU3 = bitlogic + dot + u3;
-
-        public const string BitLogicU4 = bitlogic + dot + u4;
-
-        public const string BitLogicU5 = bitlogic + dot + u5;
-
-        public const string BitLogicU6 = bitlogic + dot + u6;
-
-        public const string BitLogicU7 = bitlogic + dot + u7;
-
-        public const string BitLogicO8 = bitlogic + dot + octets;
-
-        public const string BitLogicU8 = bitlogic + dot + u8;
-
-        public const string BitLogicU16 = bitlogic + dot + u16;
-
-        public const string BitLogicU32 = bitlogic + dot + u32;
-
-        public const string BitLogicU64 = bitlogic + dot + u64;
-
-        public const string BitLogicKinds = bitlogic + dot + kinds;
-
-        public const string BitLogicScalar = bitlogic + dot + scalar;
-
-        public const string BitLogicBytes = bitlogic + dot + bytes;
-
         public const string Relations = relations;
 
         public const string CaseLogs = logs + dot + cases;
-
 
         public const string VectorKinds = vex + dot + kinds;
 
@@ -269,34 +270,6 @@ namespace Z0
 
         public const string Widths = widths;
 
-        const string @case = "case";
-
-        const string cases = nameof(cases);
-
-        const string logs = nameof(logs);
-
-        const string vex = nameof(vex);
-
-        const string numeric = nameof(numeric);
-
-        const string arrays = nameof(arrays);
-
-        const string widths = nameof(widths);
-
-        const string ops = nameof(ops);
-
-        const string control = nameof(control);
-
-        const string tests = nameof(tests);
-
-        const string reflector = nameof(reflector);
-
-        const string spans = nameof(spans);
-
-        const string memory = nameof(memory);
-
-        const string models = nameof(models);
-
-        public const string MemoryModels = memory + dot + models;
+        public const string MemoryModels = A.memory + dot + models;
     }
 }

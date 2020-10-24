@@ -8,8 +8,6 @@ namespace Z0
 
     public interface IEvalExecutor
     {
-        EvalResult ExecAction(Action action, OpUri f);   
-
         EvalResult ExecAction(Action action, OpUri f, OpUri g);
-    }    
+    }
 }

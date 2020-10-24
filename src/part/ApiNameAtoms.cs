@@ -232,5 +232,43 @@ namespace Z0
         public const string pointers = nameof(pointers);
 
         public const string relations = nameof(relations);
+
+        public const string workers = nameof(workers);
+
+        public const string paths = nameof(paths);
+
+        public const string parsers = nameof(parsers);
+
+        public const string cases = nameof(cases);
+
+        public const string states = nameof(states);
+
+        public const string unmanaged = nameof(unmanaged);
+
+        public const string segments = nameof(segments);
+
+        public const string @case = "case";
+
+        public const string logs = nameof(logs);
+
+        public const string vex = nameof(vex);
+
+        public const string numeric = nameof(numeric);
+
+        public const string arrays = nameof(arrays);
+
+        public const string widths = nameof(widths);
+
+        public const string ops = nameof(ops);
+
+        public const string control = nameof(control);
+
+        public const string tests = nameof(tests);
+
+        const string reflector = nameof(reflector);
+
+        public const string spans = nameof(spans);
+
+        public const string models = nameof(models);
     }
 }

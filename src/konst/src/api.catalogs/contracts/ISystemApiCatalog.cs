@@ -19,7 +19,7 @@ namespace Z0
 
         Assembly[] Components {get;}
 
-        IApiPartCatalog[] Catalogs {get;}
+        ApiPartCatalogs Catalogs {get;}
 
         IApiHost[] ApiHosts {get;}
 

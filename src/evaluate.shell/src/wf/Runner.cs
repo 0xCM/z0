@@ -8,9 +8,10 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
 
+    using Z0.Tools;
+
     using static Konst;
     using static z;
-    using Z0.Tools;
 
     ref struct Runner
     {
@@ -42,7 +43,7 @@ namespace Z0
         }
 
 
-        public void Run()
+        public void EmitScripts()
         {
             var tool = DumpBin.create(Wf);
             var archive = ModuleArchive.create(EnvVars.Common.ClrCoreRoot);
@@ -58,13 +59,18 @@ namespace Z0
             Emit(tool.Script("dumpbin.disasm",  DumpBin.CmdId.EmitAsm, modules));
             Emit(tool.Script("dumpbin.rawdata",  DumpBin.CmdId.EmitRawData, modules));
             Emit(tool.Script("dumpbin.loadConfig",  DumpBin.CmdId.EmitLoadConfig, modules));
+
         }
 
         void Emit(CmdScript script)
         {
-            Wf.EmittedFile(script.GetType(),
-                script.Length,
-                Cmd.enqueue(Cmd.job(script.Id, script), Wf.Db()));
+            Wf.EmittedFile(script.GetType(), script.Length, Cmd.enqueue(Cmd.job(script.Id, script), Wf.Db()));
+
+        }
+
+        public void Run()
+        {
+            UnmanagedParserCases.create(Wf).Run();
         }
 
     }

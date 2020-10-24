@@ -26,7 +26,7 @@ namespace Z0
 
         public PartId[] Identifiers {get;}
 
-        public IApiPartCatalog[] Catalogs {get;}
+        public ApiPartCatalogs Catalogs {get;}
 
         public IApiHost[] ApiHosts {get;}
 
@@ -46,10 +46,10 @@ namespace Z0
             Identifiers = Parts.Select(p => p.Id);
             Components = Parts.Select(p => p.Owner);
             Catalogs = Parts.Select(x => ApiCatalogs.part(x) as IApiPartCatalog).Where(c => c.IsIdentified);
-            ApiHosts = Catalogs.SelectMany(c => c.ApiHosts.Storage);
-            OperationHosts = Catalogs.SelectMany(c => c.OperationHosts).Cast<IApiHost>().Array();
+            ApiHosts = Catalogs.Storage.SelectMany(c => c.ApiHosts.Storage);
+            OperationHosts = Catalogs.Storage.SelectMany(c => c.OperationHosts).Cast<IApiHost>().Array();
             PartIdentities = Identifiers;
-            Operations = Catalogs.SelectMany(x => x.Operations);
+            Operations = Catalogs.Storage.SelectMany(x => x.Operations);
         }
 
         public Option<IApiHost> FindHost(ApiHostUri uri)
@@ -58,9 +58,9 @@ namespace Z0
         public IEnumerable<IApiPartCatalog> MatchingCatalogs(params PartId[] parts)
         {
             if(parts.Length == 0)
-                return Catalogs;
+                return Catalogs.Storage;
             else
-                return from c in Catalogs
+                return from c in Catalogs.Storage
                        where parts.Contains(c.PartId)
                        select c;
         }

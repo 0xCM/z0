@@ -31,12 +31,13 @@ namespace Z0
 
         WfHost Host {get;}
 
+        LogLevel Verbosity {get;}
+
         IWfShell WithSource(IPolyrand random);
 
         IWfShell WithHost(WfHost host);
 
-        LogLevel Verbosity
-            => LogLevel.Info;
+        IWfShell WithVerbosity(LogLevel level);
 
         IPolySource PolySource
             => Random;
@@ -229,7 +230,6 @@ namespace Z0
             if(Verbosity.Babble())
                 Raise(new RanEvent(step, Ct));
         }
-
 
         void Ran2<T>(T content)
             => Raise(new RanEvent<T>(Host, content, Ct));

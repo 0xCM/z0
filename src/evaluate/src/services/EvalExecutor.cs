@@ -229,19 +229,6 @@ namespace Z0
             return ExecAction(check, fUri, gUri);
         }
 
-        public EvalResult ExecAction(Action action, OpUri f)
-        {
-            var clock = Time.counter(true);
-            try
-            {
-                action();
-                return Eval.result(seq, f, clock, true);
-            }
-            catch(Exception e)
-            {
-                return Eval.result(seq, f, clock, e);
-            }
-        }
 
         public EvalResult ExecAction(Action action, OpUri f, OpUri g)
         {

@@ -14,6 +14,9 @@ namespace Z0
     using AN = BuildArchiveNames;
     using AP = BuildArchivePaths;
 
+    // "J:\lang\net\symreader\.dotnet\dotnet.exe" exec --depsfile "J:\lang\net\symreader\artifacts\bin\Microsoft.DiaSymReader.UnitTests\Debug\netcoreapp3.1\Microsoft.DiaSymReader.UnitTests.deps.json" --runtimeconfig "J:\lang\net\symreader\artifacts\bin\Microsoft.DiaSymReader.UnitTests\Debug\netcoreapp3.1\Microsoft.DiaSymReader.UnitTests.runtimeconfig.json"  "J:\cache\nuget\cache\xunit.runner.console/2.4.1/tools/netcoreapp2.0/xunit.console.dll" "J:\lang\net\symreader\artifacts\bin\Microsoft.DiaSymReader.UnitTests\Debug\netcoreapp3.1\Microsoft.DiaSymReader.UnitTests.dll" -noautoreporters -xml "J:\lang\net\symreader\artifacts\TestResults\Debug\Microsoft.DiaSymReader.UnitTests_netcoreapp3.1_x64.xml" -html "J:\lang\net\symreader\artifacts\TestResults\Debug\Microsoft.DiaSymReader.UnitTests_netcoreapp3.1_x64.html"  > "J:\lang\net\symreader\artifacts\log\Debug\Microsoft.DiaSymReader.UnitTests_netcoreapp3.1_x64.log" 2>&1
+
+    // "J:\lang\net\symreader\.dotnet\dotnet.exe" exec --depsfile "J:\lang\net\symreader\artifacts\bin\Microsoft.DiaSymReader.UnitTests\Debug\netcoreapp3.1\Microsoft.DiaSymReader.UnitTests.deps.json" --runtimeconfig "J:\lang\net\symreader\artifacts\bin\Microsoft.DiaSymReader.UnitTests\Debug\netcoreapp3.1\Microsoft.DiaSymReader.UnitTests.runtimeconfig.json"  "J:\cache\nuget\cache\xunit.runner.console/2.4.1/tools/netcoreapp2.0/xunit.console.dll" "J:\lang\net\symreader\artifacts\bin\Microsoft.DiaSymReader.UnitTests\Debug\netcoreapp3.1\Microsoft.DiaSymReader.UnitTests.dll" -noautoreporters -xml "J:\lang\net\symreader\artifacts\TestResults\Debug\Microsoft.DiaSymReader.UnitTests_netcoreapp3.1_x64.xml" -html "J:\lang\net\symreader\artifacts\TestResults\Debug\Microsoft.DiaSymReader.UnitTests_netcoreapp3.1_x64.html"
     public readonly struct BuildArchiveLabels
     {
         public const string roslyn = nameof(roslyn);

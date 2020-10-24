@@ -10,13 +10,8 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using F = FormatDomain;
-
-    [ApiHost(ApiNames.ParseDomain, true)]
-    public readonly partial struct ParseDomain
+    partial struct SyntaxModels
     {
-        const NumericKind Closure = UnsignedInts;
-
         [MethodImpl(Inline), Op]
         public static Fence fence(char left, char right)
             => new Fence(left,right);
@@ -25,12 +20,5 @@ namespace Z0
         public static Fence<T> fence<T>(T left, T right)
             where T : unmanaged
                 => new Fence<T>(left,right);
-
-        [MethodImpl(Inline), Op]
-        public static string format(in Fence src)
-        {
-            const string Pattern = "(<<{0}...{1}>>)";
-            return F.format(Pattern, src.Left, src.Right);
-        }
     }
 }

@@ -10,23 +10,23 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public sealed class WfSelfHost : WfHost<WfSelfHost>
+    public ref struct StateBuffer<T>
+        where T : unmanaged
     {
-        [MethodImpl(Inline)]
-        public static WfSelfHost create(Type self)
-            => new WfSelfHost(self);
-
-        Type HostType;
-
-        public override WfStepId Id
-            => HostType;
+        readonly Span<T> States;
 
         [MethodImpl(Inline)]
-        public WfSelfHost()
-            => HostType = typeof(WfSelfHost);
+        public StateBuffer(uint count)
+            => States = alloc<T>(count);
 
         [MethodImpl(Inline)]
-        public WfSelfHost(Type host)
-            => HostType = host;
+        public StateBuffer(T[] states)
+            => States = states;
+
+        public ref T this[T index]
+        {
+            [MethodImpl(Inline)]
+            get => ref seek(States, z.@as<T,uint>(index));
+        }
     }
 }

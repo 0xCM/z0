@@ -44,6 +44,8 @@ namespace Z0
 
         public WfHost Host {get; private set;}
 
+        public LogLevel Verbosity {get; private set;}
+
         IWfShell Wf => this;
 
         [MethodImpl(Inline)]
@@ -56,7 +58,7 @@ namespace Z0
             Broker = new WfBroker(WfSink, Ct);
             Host = new WfHost(typeof(WfShell), typeof(WfShell), _ => throw no<WfShell>());
             Random = default;
-
+            Verbosity = LogLevel.Info;
             Paths = config.Shell.Paths;
             Shell = config.Shell;
             Args = config.Shell.Args;
@@ -67,7 +69,7 @@ namespace Z0
             AppName = config.Shell.AppName;
         }
 
-        WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyrand random)
+        WfShell(IWfInit config, CorrelationToken ct, IWfEventSink sink, IWfBroker broker, WfHost host, IPolyrand random, LogLevel verbosity)
         {
             Init = config;
             Id = config.ControlId;
@@ -76,6 +78,7 @@ namespace Z0
             Broker = broker;
             Host = host;
             Random = random;
+            Verbosity = verbosity;
             Shell = config.Shell;
             Args = config.Shell.Args;
             Paths = config.Shell.Paths;
@@ -87,20 +90,20 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static IWfShell clone(IWfShell src, WfHost host)
-            => new WfShell(src.Init, src.Ct, src.WfSink, src.Broker, host, src.Random);
+        static IWfShell clone(IWfShell src, WfHost host, IPolyrand random, LogLevel verbosity)
+            => new WfShell(src.Init, src.Ct, src.WfSink, src.Broker, host, random, verbosity);
 
         [MethodImpl(Inline)]
         public IWfShell WithSource(IPolyrand random)
-        {
-            Random = random;
-            return this;
-        }
+            => clone(this, Host, random, Verbosity);
+
+        [MethodImpl(Inline)]
+        public IWfShell WithVerbosity(LogLevel level)
+            => clone(this, Host, Random, level);
 
         [MethodImpl(Inline)]
         public IWfShell WithHost(WfHost host)
-            => clone(this, host);
-
+            => clone(this, host, Random, Verbosity);
 
         public void Dispose()
         {

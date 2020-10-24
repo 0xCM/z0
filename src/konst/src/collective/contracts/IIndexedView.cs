@@ -9,9 +9,13 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IIndexedView<T> : INullity, IMeasured
+    public interface IIndexedView<T> : INullity, IMeasured, ITextual
     {
-        ReadOnlySpan<T> Terms {get;}
+        T[] Storage {get;}
+
+
+        ReadOnlySpan<T> Terms
+            => Storage;
 
         ref readonly T this[long index]
             => ref z.skip(Terms, index);
@@ -27,6 +31,9 @@ namespace Z0
 
         bool INullity.IsNonEmpty
             => Length != 0;
+
+        string ITextual.Format()
+            => z.delimit(Storage).Format();
     }
 
     public interface IIndexedView<I,T> : IIndexedView<T>, IMeasured<I>

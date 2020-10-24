@@ -75,5 +75,4 @@ namespace Z0
             where T : unmanaged
                 => new SpanStack<T>(src);
     }
-
 }

@@ -11,7 +11,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static Kinds;
 
     readonly struct V256BinaryOpImmInjector : IImmInjector
     {

@@ -10,16 +10,11 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct EnumFormatters
+    [ApiHost(ApiNames.SyntaxModels, true)]
+    public readonly partial struct SyntaxModels
     {
-        [MethodImpl(Inline)]
-        public static EnumFormatter<E> create<E>()
-            where E : unmanaged, Enum
-                => default;
+        const string FencePattern = "<<{0}..{1}>>";
 
-        [MethodImpl(Inline)]
-        public static string format<E>(E src)
-            where E : unmanaged, Enum
-                => create<E>().Format(src);
+        const NumericKind Closure = UnsignedInts;
     }
 }

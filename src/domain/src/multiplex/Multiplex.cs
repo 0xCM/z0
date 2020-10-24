@@ -15,7 +15,7 @@ namespace Z0
     using api = ClrArtifacts;
 
     [Free,ApiHost]
-    public partial class Multiplex : IMultiplex
+    public partial class Multiplex
     {
         void OnChange(FsEntry entry, FS.ChangeKind kind)
         {
@@ -29,6 +29,7 @@ namespace Z0
             monitor.Start();
             Console.ReadKey();
         }
+
         readonly WfHost Host;
 
         readonly IWfShell Wf;
