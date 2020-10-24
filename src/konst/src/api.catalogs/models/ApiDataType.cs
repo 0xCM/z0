@@ -48,7 +48,7 @@ namespace Z0
             Uri = uri;
         }
 
-        public MethodInfo[] Methods
+        public MethodInfo[] DeclaredMethods
             => HostType.DeclaredMethods();
 
         [MethodImpl(Inline)]

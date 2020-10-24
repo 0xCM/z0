@@ -22,7 +22,7 @@ namespace Z0
         PartId PartId
             => HostType.Assembly.Id();
 
-        MethodInfo[] Methods
+        MethodInfo[] DeclaredMethods
             => HostType.DeclaredMethods();
     }
 

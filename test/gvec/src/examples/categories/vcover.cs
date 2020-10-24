@@ -6,13 +6,14 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
+
     using static z;
-    
-    partial class t_vexamples
+
+    partial class VexExamples
     {
+        [Op(ExampleGroups.Cover)]
         public void vcover()
-        {            
+        {
             var x1 = vparts(4,8);
             var y1 = vparts(w128,4,4,4,4, 4,4,4,4, 8,8,8,8, 8,8,8,8);
             var z1 = z.vcover(x1, out Vector128<byte> _);
@@ -34,19 +35,19 @@ namespace Z0
             Claim.veq(y4,z4);
 
             var x5 =vparts(w256, 0ul,1,2,3);
-            var y5 = vparts(w256, 
+            var y5 = vparts(w256,
                  0, 0, 0, 0, 0, 0, 0, 0,
-                 1, 1, 1, 1, 1, 1, 1, 1, 
-                 2, 2, 2, 2, 2, 2, 2, 2, 
+                 1, 1, 1, 1, 1, 1, 1, 1,
+                 2, 2, 2, 2, 2, 2, 2, 2,
                  3, 3, 3, 3, 3, 3, 3, 3);
             z.vcover(x5, out Vector256<byte> z5);
             Claim.veq(y5,z5);
 
             var x6 =vparts(1,2,3,4,5,6,7,8);
             var y6 = vparts(w256,
-                 1, 1, 1, 1, 2, 2, 2, 2, 
-                 3, 3, 3, 3, 4, 4, 4, 4, 
-                 5, 5, 5, 5, 6, 6, 6, 6, 
+                 1, 1, 1, 1, 2, 2, 2, 2,
+                 3, 3, 3, 3, 4, 4, 4, 4,
+                 5, 5, 5, 5, 6, 6, 6, 6,
                  7, 7, 7, 7, 8, 8, 8, 8);
             z.vcover(x6, out Vector256<byte> z6);
             Claim.veq(y6,z6);

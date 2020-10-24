@@ -8,8 +8,9 @@ namespace Z0
 
     using static z;
 
-    partial class t_vexamples
+    partial class VexExamples
     {
+        [Op(ExampleGroups.Merge)]
         public void vmerge_128()
         {
             var a = z.vparts(n128, 0u,1,2,3);
@@ -26,6 +27,7 @@ namespace Z0
             var z3 = v8u(z.vmergehi(v16u(x1),v16u(y1)));
         }
 
+        [Op(ExampleGroups.Merge)]
         public void vmerge_lo()
         {
             /*
@@ -43,6 +45,7 @@ namespace Z0
             var fmt = $"({a.Format()},{b.Format()}) -> {c.Format()}";
         }
 
+        [Op(ExampleGroups.Merge)]
         public void vmerge_256()
         {
             var w = n256;
@@ -56,6 +59,7 @@ namespace Z0
             Notify(_z.Format());
         }
 
+        [Op(ExampleGroups.Merge)]
         public void vmerge_hi()
         {
             var w = n256;
@@ -69,6 +73,7 @@ namespace Z0
             Notify(_z.Format());
         }
 
+        [Op(ExampleGroups.Merge)]
         public void vmerge_hilo()
         {
             var x = z.vinc<byte>(n128);

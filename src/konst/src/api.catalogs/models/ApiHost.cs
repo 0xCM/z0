@@ -23,7 +23,7 @@ namespace Z0
 
         public ApiHostUri Uri {get;}
 
-        public MethodInfo[] Methods {get;}
+        public MethodInfo[] DeclaredMethods {get;}
 
         [MethodImpl(Inline)]
         public static implicit operator ApiHostUri(ApiHost src)
@@ -44,7 +44,7 @@ namespace Z0
             PartId = part;
             Uri = uri;
             HostType = type;
-            Methods = HostType.DeclaredMethods();
+            DeclaredMethods = HostType.DeclaredMethods();
         }
 
         public bool IsEmpty

@@ -5,6 +5,7 @@
 namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     using System.Runtime.CompilerServices;
 
     /// <summary>

@@ -9,12 +9,9 @@
     <ProjectReference Include="$(Imagine)" />
     <ProjectReference Include="$(GMath)" />
     <ProjectReference Include="$(Polyrand)" />
-    <ProjectReference Include="$(Identify)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(GVec)" />
     <ProjectReference Include="$(CheckDynamic)" />
-
-
   </ItemGroup>
 
 </Project>

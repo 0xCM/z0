@@ -22,7 +22,7 @@ namespace Z0
             => generic(host).Where(op => op.Method.AcceptsImmediate(kind));
 
         static MethodInfo[] TaggedOps(IApiHost src)
-            => src.Methods.Tagged<OpAttribute>();
+            => src.DeclaredMethods.Tagged<OpAttribute>();
 
         static DirectApiGroup[] direct(ApiHost src)
             => (from d in DirectOpSpecs(src).GroupBy(op => op.Method.Name)

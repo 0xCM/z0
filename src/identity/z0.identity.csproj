@@ -5,9 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(Imagine)" />
-    <ProjectReference Include="$(Gmath)" />
-    <ProjectReference Include="$(Identify)" />
+    <ProjectReference Include="$(Konst)" />
+    <!-- <ProjectReference Include="$(Gmath)" /> -->
   </ItemGroup>
 
 </Project>

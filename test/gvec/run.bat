@@ -1,0 +1,1 @@
+call z0.gvec.test.exe

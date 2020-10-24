@@ -44,7 +44,7 @@ namespace Z0
         /// <summary>
         /// The api hosts known to the catalog, including both operation and data type hosts
         /// </summary>
-        public IApiHost[] ApiHosts {get;}
+        public ApiHosts ApiHosts {get;}
 
         /// <summary>
         /// The host-defined operations
@@ -65,7 +65,7 @@ namespace Z0
             OperationHosts = opHosts;
             ServiceHosts = svcHostTypes;
             ApiHosts = dtHosts.Cast<IApiHost>().Cast<IApiHost>().Concat(OperationHosts.Cast<IApiHost>()).Array();
-            Operations = ApiHosts.SelectMany(x => x.Methods);
+            Operations = ApiHosts.Storage.SelectMany(x => x.DeclaredMethods);
         }
 
         /// <summary>

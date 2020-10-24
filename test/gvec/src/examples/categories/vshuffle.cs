@@ -7,17 +7,13 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Runtime.Intrinsics;
+    using System.Runtime.CompilerServices;
 
     using static HexConst;
     using static z;
+    using static Konst;
 
-    public readonly struct ExampleRunner
-    {
-
-    }
-
-
-    partial class t_vexamples
+    partial class VexExamples
     {
         public static ReadOnlySpan<byte> AddPattern
             => new byte[32]{0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,10,10,11,11,12,12,13,13,14,14,15,15,16};
@@ -33,6 +29,7 @@ namespace Z0
         /// <summary>
         /// Encodes a permutation on 16 unsigned shorts as a permutation on 32 bytes
         /// </summary>
+        [Op]
         public static Vector256<byte> vshuffle_spec_parts(
             ushort x0, ushort x1, ushort x2, ushort x3, ushort x4, ushort x5, ushort x6, ushort x7,
             ushort x8, ushort x9, ushort xA, ushort xB, ushort xC, ushort xD, ushort xE, ushort xF)
@@ -94,6 +91,7 @@ namespace Z0
         /// <summary>
         /// Encodes a 256x16u component-oriented shuffle as an equivalent 256x8u component-oriented shuffle
         /// </summary>
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vshuffle_spec_1(Vector256<ushort> src)
             => vshuffle_spec_parts(
                 vcell(src,0), vcell(src,1), vcell(src,2),vcell(src,3),
@@ -102,12 +100,15 @@ namespace Z0
                 vcell(src,12), vcell(src,13), vcell(src,14), vcell(src,15)
                 );
 
+        [MethodImpl(Inline), Op]
         public static Vector256<byte> vshuffle_spec_2(Vector256<ushort> src)
             => z.vcompact(src, gvec.vinc(w256, z.uint16(16)),n256,z8);
 
+        [MethodImpl(Inline), Op]
         public static Vector256<ushort> vshuf16x16(Vector256<ushort> a, Vector256<ushort> spec)
             => z.v16u(z.vshuf32x8(z.v8u(a), vshuffle_spec_1(spec)));
 
+        [Op(ExampleGroups.Shuffles)]
         public void vshuf16x16()
         {
             var w = n256;
@@ -126,6 +127,7 @@ namespace Z0
             Claim.veq(pairswap,y3);
         }
 
+        [Op(ExampleGroups.Shuffles)]
         public void vshuf16x8_128x8u()
         {
             var w = w128;
@@ -161,6 +163,7 @@ namespace Z0
             Claim.veq(x5Dst, z.vbroadcast(w,(byte)0));
         }
 
+        [Op(ExampleGroups.Shuffles)]
         public void vshuf16x8()
         {
             var src =z.vinc<byte>(n128);
@@ -182,6 +185,7 @@ namespace Z0
             }
         }
 
+        [Op]
         public static Vector256<byte> videntity_shuffle()
         {
             SpanBlock256<byte> mask = SpanBlocks.cellalloc<byte>(n256,1);

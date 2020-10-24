@@ -8,7 +8,8 @@ namespace Z0.Dynamics.Operators
     using System.Linq.Expressions;
     using System.Runtime.CompilerServices;
 
-    using static Root;
+    using static Konst;
+    using static z;
     using static LinqXPress;
     using static LinqXFunc;
 

@@ -72,8 +72,11 @@ namespace Z0
         public static Assembly controller()
             => Assembly.GetEntryAssembly();
 
+        public static IWfShell create()
+            => create(args());
+
         [Op]
-        public static IWfShell create(params string[] args)
+        public static IWfShell create(string[] args)
         {
             var control = controller();
             var controlId = control.Id();

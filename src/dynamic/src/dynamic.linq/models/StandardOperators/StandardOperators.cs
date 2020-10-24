@@ -8,27 +8,34 @@ namespace Z0.Dynamics
     using System.Linq;
 
     using Z0;
-    using static Z0.Root;
     using static Z0.LinqXPress;
     using static Z0.LinqXFunc;
 
     public class StandardOperators
     {
-        public static NotNullOperator IsNotNull => new NotNullOperator();
+        public static NotNullOperator IsNotNull
+            => new NotNullOperator();
 
-        public static IsNullOperator IsNull => new IsNullOperator();
+        public static IsNullOperator IsNull
+            => new IsNullOperator();
 
-        public static FalseOperator False => new FalseOperator();
+        public static FalseOperator False
+            => new FalseOperator();
 
-        public static TrueOperator True => new TrueOperator();
+        public static TrueOperator True
+            => new TrueOperator();
 
-        public static EqualOperator Equal => new EqualOperator();
+        public static EqualOperator Equal
+            => new EqualOperator();
 
-        public static NotEqualOperator NotEqual => new NotEqualOperator();
+        public static NotEqualOperator NotEqual
+            => new NotEqualOperator();
 
-        public static GreaterThanOperator GreaterThan => new GreaterThanOperator();
+        public static GreaterThanOperator GreaterThan
+            => new GreaterThanOperator();
 
-        public static LessThanOperator LessThan => new LessThanOperator();
+        public static LessThanOperator LessThan
+            => new LessThanOperator();
 
         public static GreaterThanOrEqualOperator GreaterThanOrEqual => new GreaterThanOrEqualOperator();
 

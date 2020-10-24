@@ -40,7 +40,7 @@ namespace Z0
         /// <summary>
         /// The api hosts known to the catalog, including both operation and data type hosts
         /// </summary>
-        IApiHost[] ApiHosts {get;}
+        ApiHosts ApiHosts {get;}
 
         /// <summary>
         /// The operations defined by <see cref='ApiHosts'/>

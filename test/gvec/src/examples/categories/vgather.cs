@@ -11,8 +11,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial class t_vexamples
+    partial class VexExamples
     {
+        [Op(ExampleGroups.Gather)]
         public void vgather_128()
         {
             const int count = Pow2.T09;
@@ -98,6 +99,7 @@ namespace Z0
             Claim.veq(z.vcompact(i4x128, n128, z32i), v32i(v4x128));
         }
 
+        [Op(ExampleGroups.Gather)]
         public void vgather_256()
         {
             Span<uint> data = new uint[Pow2.T09];
@@ -116,6 +118,7 @@ namespace Z0
             Claim.veq(v512Expect, v512Actual);
         }
 
+        [Op(ExampleGroups.Gather)]
         public void vgather_blocks()
         {
             const int BlockLength = 4;

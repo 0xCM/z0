@@ -25,12 +25,6 @@ namespace Z0
 
         }
 
-        protected Shell()
-            : this(WfShell.context())
-        {
-
-        }
-
         public string[] Args {get; private set;}
 
         public IWfContext Context {get; private set;}

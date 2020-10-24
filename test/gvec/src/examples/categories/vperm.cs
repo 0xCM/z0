@@ -10,14 +10,17 @@ namespace Z0
 
     using static z;
 
-    partial class t_vexamples
+    partial class VexExamples
     {
+
+        [Op(ExampleGroups.Perms)]
         public void vperm4x16()
         {
             var id = vparts(w128,0,1,2,3,6,7,8,9);
             Claim.veq(z.vperm4x16(vparts(w128,0,1,2,3,6,7,8,9), Perm4L.ADCB, Perm4L.ADCB), vparts(w128,0,3,2,1,6,9,8,7));
         }
 
+        [Op(ExampleGroups.Perms)]
         public void vperm4x32_128x32u_A()
         {
             var trace = false;
@@ -59,6 +62,7 @@ namespace Z0
             }
         }
 
+        [Op(ExampleGroups.Perms)]
         public void vperm4x32_128x32u_B()
         {
             var n = n128;

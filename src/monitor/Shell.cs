@@ -10,15 +10,13 @@ namespace Z0
     using static Konst;
     using static z;
 
-    sealed class AppShell : Shell<AppShell>
+    sealed class AppShell
     {
 
         public static void Main(params string[] args)
-            => AppShell.Launch(args);
-
-        protected override void OnDispose()
         {
 
         }
+
     }
 }

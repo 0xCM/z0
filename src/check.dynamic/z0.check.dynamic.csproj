@@ -8,6 +8,7 @@
     <ProjectReference Include="$(Konst)" />
     <ProjectReference Include="$(Dynamic)" />
     <ProjectReference Include="$(Check)" />
+    <ProjectReference Include="$(Gmath)" />
   </ItemGroup>
 
 </Project>

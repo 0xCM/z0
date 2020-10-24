@@ -30,7 +30,7 @@ namespace Z0
         /// All hosted methods
         /// </summary>
         public MethodInfo[] Hosted
-            => Source.Methods;
+            => Source.DeclaredMethods;
 
         /// <summary>
         /// All hosted generic methods

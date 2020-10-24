@@ -1,0 +1,40 @@
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation.
+ ---> System.IO.IOException: The process cannot access the file 'J:\dev\projects\z0-logs\gvec.test.status.log' because it is being used by another process.
+   at System.IO.FileSystem.DeleteFile(String fullPath)
+   at System.IO.File.Delete(String path)
+   at Z0.FS.delete(FilePath src) in j:\dev\projects\z0\src\konst\src\files\ops\delete.cs:line 46
+   at Z0.WfEventLog..ctor(WfLogConfig config) in j:\dev\projects\z0\src\konst\src\wf\services\WfEventLog.cs:line 28
+   at Z0.WfShell.create(String[] args) in j:\dev\projects\z0\src\konst\src\wf\ops\shell\create.cs:line 110
+   at Z0.TestContext..ctor() in j:\dev\projects\z0\src\validity\src\services\TestContext.cs:line 29
+   at Z0.TestContext`1..ctor() in j:\dev\projects\z0\src\validity\src\services\TestContext.cs:line 63
+   at Z0.t_inx`1..ctor() in j:\dev\projects\z0\test\gvec\src\base\t_inx.cs:line 14
+   --- End of inner exception stack trace ---
+   at System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean wrapExceptions, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& hasNoDefaultCtor)
+   at System.RuntimeType.CreateInstanceDefaultCtorSlow(Boolean publicOnly, Boolean wrapExceptions, Boolean fillCache)
+   at System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, Boolean wrapExceptions)
+   at System.Activator.CreateInstance(Type type, Boolean nonPublic, Boolean wrapExceptions)
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at System.Activator.CreateInstance(Type type, BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes)
+   at Z0.TestApp`1.RunUnit(Type host, String[] filters) in j:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs:line 62
+   at Z0.z.iter[T](IEnumerable`1 items, Action`1 action, Boolean pll) in j:\dev\projects\z0\src\konst\src\z\z.ops.i\iter.cs:line 27
+   at Z0.TestApp`1.RunTests(String[] filters) in j:\dev\projects\z0\src\validity\src\services\ops\RunTests.cs:line 29
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation.
+ ---> System.IO.IOException: The process cannot access the file 'J:\dev\projects\z0-logs\gvec.test.status.log' because it is being used by another process.
+   at System.IO.FileSystem.DeleteFile(String fullPath)
+   at System.IO.File.Delete(String path)
+   at Z0.FS.delete(FilePath src) in j:\dev\projects\z0\src\konst\src\files\ops\delete.cs:line 46
+   at Z0.WfEventLog..ctor(WfLogConfig config) in j:\dev\projects\z0\src\konst\src\wf\services\WfEventLog.cs:line 28
+   at Z0.WfShell.create(String[] args) in j:\dev\projects\z0\src\konst\src\wf\ops\shell\create.cs:line 110
+   at Z0.TestContext..ctor() in j:\dev\projects\z0\src\validity\src\services\TestContext.cs:line 29
+   at Z0.TestContext`1..ctor() in j:\dev\projects\z0\src\validity\src\services\TestContext.cs:line 63
+   at Z0.t_inx`1..ctor() in j:\dev\projects\z0\test\gvec\src\base\t_inx.cs:line 14
+   --- End of inner exception stack trace ---
+   at System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean wrapExceptions, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& hasNoDefaultCtor)
+   at System.RuntimeType.CreateInstanceDefaultCtorSlow(Boolean publicOnly, Boolean wrapExceptions, Boolean fillCache)
+   at System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, Boolean wrapExceptions)
+   at System.Activator.CreateInstance(Type type, Boolean nonPublic, Boolean wrapExceptions)
+   at System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture)
+   at System.Activator.CreateInstance(Type type, BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes)
+   at Z0.TestApp`1.RunUnit(Type host, String[] filters) in j:\dev\projects\z0\src\validity\src\services\ops\RunUnit.cs:line 62
+   at Z0.z.iter[T](IEnumerable`1 items, Action`1 action, Boolean pll) in j:\dev\projects\z0\src\konst\src\z\z.ops.i\iter.cs:line 27
+   at Z0.TestApp`1.RunTests(String[] filters) in j:\dev\projects\z0\src\validity\src\services\ops\RunTests.cs:line 29
