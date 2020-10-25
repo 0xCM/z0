@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XVectorKinds
+    partial class XVexKinds
     {
         /// <summary>
         /// Returns the clr cell type of a vector of specified kind
@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="kind">The vector kind</param>
         [MethodImpl(Inline), Op]
         public static Type CellType(this VectorKind kind)
-            => VectorKinds.celltype(kind);
+            => VexKinds.celltype(kind);
     }
 }

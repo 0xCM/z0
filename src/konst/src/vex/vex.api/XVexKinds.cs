@@ -9,15 +9,17 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost(ApiNames.VectorKindsX, true)]
-    public static partial class XVectorKinds
+    [ApiHost(ApiNames.VexKindX, true)]
+    public static partial class XVexKinds
     {
+        const NumericKind Closure = AllNumeric;
+
         /// <summary>
         /// Classifies a 128-bit vector
         /// </summary>
         /// <param name="w">The vector width</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vec128Kind<T> VectorKind<T>(this W128 w)
             where T : unmanaged
                 => default;
@@ -27,7 +29,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vec256Kind<T> VectorKind<T>(this W256 w)
             where T : unmanaged
                 => default;
@@ -37,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="w">The vector width</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Vec512Kind<T> VectorKind<T>(this W512 w)
             where T : unmanaged
                 => default;

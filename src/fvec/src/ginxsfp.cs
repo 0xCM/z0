@@ -23,9 +23,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(z.load(float32(src)));
+                return generic<T>(z.vloads(float32(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(z.load(float64(src)));
+                return generic<T>(z.vloads(float64(src)));
             else
                 throw no<T>();
         }
@@ -35,9 +35,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(z.store(v32f(src)));
+                return generic<T>(z.vstores(v32f(src)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(z.store(v64f(src)));
+                return generic<T>(z.vstores(v64f(src)));
             else
                 throw no<T>();
         }
@@ -47,9 +47,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(z.add(v32f(x), v32f(y)));
+                return generic<T>(z.vadds(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(z.add(v64f(x), v64f(y)));
+                return generic<T>(z.vadds(v64f(x), v64f(y)));
             else
                 throw no<T>();
         }
@@ -70,9 +70,9 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                return generic<T>(z.mul(v32f(x), v32f(y)));
+                return generic<T>(z.vmuls(v32f(x), v32f(y)));
             else if(typeof(T) == typeof(double))
-                return generic<T>(z.mul(v64f(x), v64f(y)));
+                return generic<T>(z.vmuls(v64f(x), v64f(y)));
             else
                 throw no<T>();
         }

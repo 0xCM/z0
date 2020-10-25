@@ -32,6 +32,11 @@ namespace Z0
             => (NumericWidth)Widths.bits<T>();
 
         public Type TypeDefinition
-            => typeof(void);
+            => typeof(Vector512<T>).GenericDefinition2();
+
+        [MethodImpl(Inline)]
+        public Type Close()
+            => TypeDefinition.MakeGenericType(typeof(T));
+
     }
 }

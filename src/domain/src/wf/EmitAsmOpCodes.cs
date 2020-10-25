@@ -12,6 +12,9 @@ namespace Z0
     using static Konst;
     using static z;
 
+    /// <summary>
+    /// When executed, emits an x86 opcode set from embedded resources
+    /// </summary>
     [Cmd]
     public struct EmitAsmOpCodesCmd : ICmdSpec<EmitAsmOpCodesCmd>
     {

@@ -11,7 +11,7 @@ namespace Z0.Asm
     using static Konst;
 
     [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
-    public struct AsmCallRecord
+    public struct AsmCallRow
     {
         public const string TableId = "asm.calls";
 
@@ -30,8 +30,8 @@ namespace Z0.Asm
         public BinaryCode Encoded;
 
         [MethodImpl(Inline)]
-        public static string format(in AsmCallRecord src)
-            => string.Format(AsmCallRecord.RenderPattern, src.Source, src.Target, src.InstructionSize, src.TargetOffset, src.Encoded);
+        public static string format(in AsmCallRow src)
+            => string.Format(AsmCallRow.RenderPattern, src.Source, src.Target, src.InstructionSize, src.TargetOffset, src.Encoded);
 
         [MethodImpl(Inline)]
         public static string header()

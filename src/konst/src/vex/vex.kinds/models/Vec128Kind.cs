@@ -35,5 +35,9 @@ namespace Z0
 
         public Type TypeDefinition
             => typeof(Vector128<T>).GenericDefinition2();
+
+        [MethodImpl(Inline)]
+        public Type Close()
+            => TypeDefinition.MakeGenericType(typeof(T));
     }
 }

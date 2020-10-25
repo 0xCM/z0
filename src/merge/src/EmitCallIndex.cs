@@ -54,15 +54,15 @@ namespace Z0
 
         public void Run()
         {
-            var dst = Wf.Db().Table(AsmCallRecord.TableId, Source.Part);
+            var dst = Wf.Db().Table(AsmCallRow.TableId, Source.Part);
             Wf.EmittingFile(Source.Part, dst);
             using var writer = dst.Writer();
             var records = @readonly(Source.Instructions.CallRecords());
             var count = records.Length;
-            writer.WriteLine(AsmCallRecord.header());
+            writer.WriteLine(AsmCallRow.header());
             for(var i=0; i<count; i++)
-                writer.WriteLine(AsmCallRecord.format(skip(records,i)));
-            Wf.EmittedTable<AsmCallRecord>(count, dst);
+                writer.WriteLine(AsmCallRow.format(skip(records,i)));
+            Wf.EmittedTable<AsmCallRow>(count, dst);
         }
     }
 }

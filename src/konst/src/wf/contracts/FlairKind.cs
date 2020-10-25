@@ -16,7 +16,7 @@ namespace Z0
 
         Created = ConsoleColor.Blue,
 
-        Running = ConsoleColor.Gray,
+        Running = ConsoleColor.Cyan,
 
         Ran = ConsoleColor.Magenta,
 

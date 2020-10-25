@@ -13,13 +13,13 @@ namespace Z0
 
     using static Konst;
 
-    partial class VectorKinds
+    partial class VexKinds
     {
         /// <summary>
         /// Determines whether a type is classified as an intrinsic vector
         /// </summary>
         /// <param name="t">The type to test</param>
-        [MethodImpl(Inline), Test]
+        [Test]
         public static bool test(Type t)
         {
             var tE = t.EffectiveType();
@@ -39,7 +39,7 @@ namespace Z0
         /// Determines whether a type is an intrinsic vector of specified width
         /// </summary>
         /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline), Test]
+        [Test]
         public static bool test(Type t, int? w)
         {
             if(!test(t))

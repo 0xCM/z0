@@ -11,11 +11,10 @@ namespace Z0
     using static Konst;
 
     using TW = TypeWidth;
-    using VW = VectorWidth;
 
-    partial class VectorKinds
+    partial class VexKinds
     {
-        [MethodImpl(Inline), Op]
+        [Op]
         public static TW width(Type t)
         {
             var eff = t.EffectiveType();

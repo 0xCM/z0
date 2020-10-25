@@ -10,14 +10,14 @@ namespace Z0
 
     using static Konst;
 
-    partial class VectorKinds
+    partial class VexKinds
     {
         /// <summary>
         /// Computes a vector kind classifier from a 128-bit vector instance
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Classify, Closures(AllNumeric)]
+        [MethodImpl(Inline), Classify, Closures(Closure)]
         public static VectorKind kind<T>(Vector128<T> src)
             where T : unmanaged
                 => vkind128_u(src);
@@ -27,7 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Classify, Closures(AllNumeric)]
+        [MethodImpl(Inline), Classify, Closures(Closure)]
         public static VectorKind kind<T>(Vector256<T> src)
             where T : unmanaged
                 => vkind256_u(src);
@@ -37,7 +37,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source vector</param>
         /// <typeparam name="T">The vector cell type</typeparam>
-        [MethodImpl(Inline), Classify, Closures(AllNumeric)]
+        [MethodImpl(Inline), Classify, Closures(Closure)]
         public static VectorKind kind<T>(Vector512<T> src)
             where T : unmanaged
                 => vkind512_u(src);
@@ -48,7 +48,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         /// <param name="t">A representative cell value</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Classify, Closures(AllNumeric)]
+        [MethodImpl(Inline), Classify, Closures(Closure)]
         public static VectorKind kind<T>(W128 w, T t = default)
             where T : unmanaged
                 => kind_u(w,t);
@@ -59,7 +59,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         /// <param name="t">A representative cell value</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Classify, Closures(AllNumeric)]
+        [MethodImpl(Inline), Classify, Closures(Closure)]
         public static VectorKind kind<T>(W256 w, T t = default)
             where T : unmanaged
                 => kind_u(w,t);
@@ -70,7 +70,7 @@ namespace Z0
         /// <param name="w">The vector width</param>
         /// <param name="t">A representative cell value</param>
         /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Classify, Closures(AllNumeric)]
+        [MethodImpl(Inline), Classify, Closures(Closure)]
         public static VectorKind kind<T>(W512 w, T t = default)
             where T : unmanaged
                 => kind_u(w,t);
@@ -88,11 +88,11 @@ namespace Z0
             where T : unmanaged
         {
             if(typeof(W) == typeof(W128))
-                return VectorKinds.kind<T>(default(W128));
+                return VexKinds.kind<T>(default(W128));
             else if(typeof(W) == typeof(W256))
-                return VectorKinds.kind<T>(default(W256));
+                return VexKinds.kind<T>(default(W256));
             else if(typeof(W) == typeof(W512))
-                return VectorKinds.kind<T>(default(W512));
+                return VexKinds.kind<T>(default(W512));
             else
                 return VectorKind.None;
         }

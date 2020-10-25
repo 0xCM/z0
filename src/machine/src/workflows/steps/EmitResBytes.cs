@@ -84,7 +84,8 @@ namespace Z0
         {
             var target = (dst + FS.folder("src")) + FS.file(src.Host.FileName(ArchiveFileKinds.Cs).Name);
             var resources = HostResources.from(src);
-            var typename = text.concat(src.Host.Owner.Format(), Chars.Underscore, src.Host.Name);
+            var hostname = src.Host.Name.ReplaceAny(array('.'), '_');
+            var typename = text.concat(src.Host.Owner.Format(), Chars.Underscore, hostname);
             var members = new HashSet<string>();
             using var writer = target.Writer();
             EmitFileHeader(writer);
@@ -106,7 +107,6 @@ namespace Z0
 
             Wf.Processed(src.Host, resources.Count);
             Wf.EmittedFile(src.Host, members.Count, target);
-            //Wf.Raise(new EmittedHostBytesEvent(Host, src.Host, (ushort)resources.Count, Wf.Ct));
         }
     }
 }

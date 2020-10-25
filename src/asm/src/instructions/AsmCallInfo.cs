@@ -58,7 +58,7 @@ namespace Z0.Asm
         }
 
         [MethodImpl(Inline)]
-        public ref AsmCallRecord Fill(ref AsmCallRecord dst)
+        public ref AsmCallRow Fill(ref AsmCallRow dst)
         {
             dst.Encoded = Encoded;
             dst.InstructionSize = (ByteSize)InstructionSize;

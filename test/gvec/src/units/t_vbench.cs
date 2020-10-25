@@ -332,7 +332,7 @@ namespace Z0
                 var z = Random.CpuVector<ulong>(n);
                 counter.Start();
                 for(var i=0; i<RepCount; i++)
-                    total += BitPop.vpop(x,y,z);
+                    total += VexPop.vpop(x,y,z);
                 counter.Stop();
                 opcount += (4 * 3 * RepCount);
             }
@@ -350,7 +350,7 @@ namespace Z0
                 var z = Random.CpuVector<ulong>(n);
                 counter.Start();
                 for(var i=0; i<RepCount; i++)
-                    total += BitPop.vpop(x,y,z);
+                    total += VexPop.vpop(x,y,z);
                 counter.Stop();
                 opcount += (2 * 3 * RepCount);
             }

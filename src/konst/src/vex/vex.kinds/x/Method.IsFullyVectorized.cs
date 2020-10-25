@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    partial class XVectorKinds
+    partial class XVexKinds
     {
         /// <summary>
         /// Determines whether a method has intrinsic parameters or return type
@@ -17,7 +17,7 @@ namespace Z0
         /// <param name="src">The method to test</param>
         [Op]
         public static bool IsFullyVectorized(this MethodInfo src)
-            => VectorKinds.test(src.ReturnType) && src.ParameterTypes().All(VectorKinds.test);
+            => VexKinds.test(src.ReturnType) && src.ParameterTypes().All(VexKinds.test);
 
         /// <summary>
         /// Determines whether all parameters of a method are 128-bit intrinsic vectors

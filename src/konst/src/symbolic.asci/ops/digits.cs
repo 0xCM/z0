@@ -19,14 +19,14 @@ namespace Z0
     using HSU = HexSymUp;
 
     partial struct asci
-    {       
+    {
         [MethodImpl(Inline), Op]
         public static Span<D> digits(ReadOnlySpan<char> src, Span<D> dst)
         {
             var len = src.Length;
             for(var i=0u; i< len; i++)
-                seek(dst,i) = digit(base10, skip(src,i));            
-            return dst;            
+                seek(dst,i) = digit(base10, skip(src,i));
+            return dst;
         }
 
         [MethodImpl(Inline), Op]
@@ -34,7 +34,7 @@ namespace Z0
         {
             var len = src.Length;
             for(var i=0u; i<len; i++)
-                seek(dst,i) = digit(skip(src,i));            
+                seek(dst,i) = digit(skip(src,i));
         }
 
         [MethodImpl(Inline), Op]
@@ -42,7 +42,7 @@ namespace Z0
         {
             var len = src.Length;
             for(var i=0u; i<len; i++)
-                seek(dst,i) = digit(skip(src,i));            
+                seek(dst,i) = digit(skip(src,i));
         }
 
         [MethodImpl(Inline), Op]
@@ -106,7 +106,7 @@ namespace Z0
         /// Computes the digigs corresponding to each 2-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static ref readonly NatSpan<N4,byte> digits(Perm4L src, in NatSpan<N4,byte> dst)
         {
             var scalar = (byte)src;
@@ -116,7 +116,7 @@ namespace Z0
             dst[3] = z.extract(scalar, 6, 7);
             return ref dst;
         }
-        
+
         /// <summary>
         /// Computes the digigs corresponding to each 2-bit segment of the permutation spec
         /// </summary>
@@ -131,7 +131,7 @@ namespace Z0
         {
             var len = src.Length;
             for(var i=0u; i<len; i++)
-                seek(dst,i) = digit(skip(src,i));            
+                seek(dst,i) = digit(skip(src,i));
         }
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Z0
         /// Computes the digits corresponding to each 3-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static ref readonly NatSpan<N8, OctalDigit> digits(Perm8L src, in NatSpan<N8,OctalDigit> dst)
         {
             //[0 1 2 | 3 4 5 | 6 7 8 | ... | 21 22 23] -> 256x32
@@ -179,7 +179,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The perm spec</param>
         public static NatSpan<N8, OctalDigit> digits(Perm8L src)
-            => digits(src,NatSpan.alloc<N8,OctalDigit>());            
+            => digits(src,NatSpan.alloc<N8,OctalDigit>());
 
 
         /// <summary>
@@ -207,13 +207,13 @@ namespace Z0
             seek(dst,14) = (X)z.extract(scalar, 56, 59);
             seek(dst,15) = (X)z.extract(scalar, 60, 63);
             return dst;
-        }        
+        }
 
         /// <summary>
         /// Computes the digits corresponding to each 4-bit segment of the permutation spec
         /// </summary>
         /// <param name="src">The perm spec</param>
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline)]
         public static ref readonly NatSpan<N16,X> digits(Perm16L src, in NatSpan<N16,X> dst)
         {
             var scalar = (ulong)src;

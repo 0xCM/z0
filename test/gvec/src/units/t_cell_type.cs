@@ -14,13 +14,13 @@ namespace Z0
     {
         public void check_cell_types()
         {
-            iter(VectorKinds.Types128(), t => check_cell_type(t,n128));
-            iter(VectorKinds.Types256(), t => check_cell_type(t,n256));
+            iter(VexKinds.Types128(), t => check_cell_type(t,n128));
+            iter(VexKinds.Types256(), t => check_cell_type(t,n256));
         }
 
         void check_cell_type(Type tVector, N128 w)
         {
-            var kVector = VectorKinds.kind(tVector);
+            var kVector = VexKinds.kind(tVector);
             var tCell = kVector.CellType();
 
             if(TraceDetailEnabled)
@@ -91,7 +91,7 @@ namespace Z0
 
         void check_cell_type(Type tVector, N256 w)
         {
-            var kVector = VectorKinds.kind(tVector);
+            var kVector = VexKinds.kind(tVector);
             var tCell = kVector.CellType();
 
             if(TraceDetailEnabled)

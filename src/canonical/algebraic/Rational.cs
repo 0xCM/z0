@@ -10,19 +10,19 @@ namespace Z0
     /// Characterizes fractional operations
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
-    public interface IFractionalOps<T> : IRealNumberOps<T> 
+    public interface IFractionalOps<T> : IRealNumberOps<T>
         where T : unmanaged
     {
         T Ceil(T x);
-        
-        T Floor(T x);        
+
+        T Floor(T x);
     }
-    
-   public interface IFractional<S> : IRealNumber<S> 
+
+   public interface IFractional<S> : IRealNumber<S>
         where S : IFractional<S>, new()
     {
         S Ceil();
-        
+
         S Floor();
     }
 
@@ -30,38 +30,9 @@ namespace Z0
     /// Characterizes a fractional structure
     /// </summary>
     /// <typeparam name="T">The operand type</typeparam>
-    public interface IFractional<S,T> : IFractional<S>, IRealNumber<S,T> 
+    public interface IFractional<S,T> : IFractional<S>, IRealNumber<S,T>
         where S : IFractional<S,T>, new()
     {
-        
-    }
 
-    public interface IRational<T>
-    {
-        /// <summary>
-        /// The dividend
-        /// </summary>
-        T Over();
-
-        /// <summary>
-        /// The divisor
-        /// </summary>
-        T Under();
-
-        (T Over, T Under) Paired();
-
-    }
-    
-    public interface IRational<T,R> : IRational<T>
-    {
-
-    }
-
-    /// <summary>
-    /// Charactrizes a rational number
-    /// </summary>
-    public interface IRational<S, T, R> : IRational<T,R>
-        where S : IRational<S,T,R>,  new()
-    {
     }
 }

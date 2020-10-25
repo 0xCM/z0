@@ -20,81 +20,175 @@ namespace Z0
     using static Konst;
     using static z;
 
-    /// <summary>
-    /// Direct floating-point scalar intrinsics
-    /// </summary>
-    partial struct z
+    [ApiHost(ApiNames.VexFpS, true)]
+    public readonly struct VexSFp
     {
-        [MethodImpl(Inline)]
+        /// <summary>
+        ///  __m128 _mm_load_ss (float const* mem_address) MOVSS xmm, m32
+        /// </summary>
+        /// <param name="x">The source value</param>
+        [MethodImpl(Inline), Op]
         public static unsafe Vector128<float> vloads(float x)
-            => VexSFp.vloads(x);
-
-        [MethodImpl(Inline)]
-        public static unsafe Vector128<double> vloads(double x)
-            => VexSFp.vloads(x);
-
-        [MethodImpl(Inline)]
-        public static unsafe float vstores(Vector128<float> src)
-            => VexSFp.vstores(src);
-
-        [MethodImpl(Inline)]
-        public static unsafe double vstores(Vector128<double> src)
-            => VexSFp.vstores(src);
-
-        [MethodImpl(Inline)]
-        public static ref Vector128<double> convert(int src, out Vector128<double> dst)
-            => ref VexSFp.convert(src, out dst);
-
-        [MethodImpl(Inline)]
-        public static ref Vector128<float> convert(int src, out Vector128<float> dst)
-            => ref VexSFp.convert(src, out dst);
-
-        [MethodImpl(Inline)]
-        public static ref Vector128<float> convert(long src, out Vector128<float> dst)
-            => ref VexSFp.convert(src, out dst);
-
-        [MethodImpl(Inline)]
-        public static unsafe int to32i(in float src)
-            => VexSFp.to32i(src);
-
-        [MethodImpl(Inline)]
-        public static unsafe int to32i(in double src)
-            => VexSFp.to32i(src);
-
-        [MethodImpl(Inline)]
-        public static unsafe long to64i(in float src)
-            => VexSFp.to64i(src);
-
-        [MethodImpl(Inline)]
-        public static unsafe long to64i(in double src)
-            => VexSFp.to64i(src);
-
-        [MethodImpl(Inline)]
-        public static Vector128<float> vadds(Vector128<float> x, Vector128<float> y)
-            => VexSFp.vadds(x, y);
-
-        [MethodImpl(Inline)]
-        public static Vector128<double> vadds(Vector128<double> x, Vector128<double> y)
-            => VexSFp.vadds(x, y);
-
-        [MethodImpl(Inline)]
-        public static Vector128<float> vmuls(Vector128<float> x, Vector128<float> y)
-            => VexSFp.vmuls(x, y);
-
-        [MethodImpl(Inline)]
-        public static Vector128<double> vmuls(Vector128<double> x, Vector128<double> y)
-            => VexSFp.vmuls(x, y);
-
-        [MethodImpl(Inline)]
-        public static Vector128<float> vfmadds(Vector128<float> x, Vector128<float> y, Vector128<float> z)
-            => VexSFp.vfmadds(x, y, z);
-
-        [MethodImpl(Inline)]
-        public static Vector128<double> vfmadds(Vector128<double> x, Vector128<double> y, Vector128<double> z)
-            => VexSFp.vfmadds(x, y, z);
+            => LoadScalarVector128(z.gptr(x));
 
         /// <summary>
-        /// __m128 _mm_fmsub_ss (__m128 a, __m128 b, __m128 c) VFMSUBSS xmm, xmm, xmm/m32
+        ///  __m128d _mm_load_sd (double const* mem_address) MOVSD xmm, m64
+        /// </summary>
+        /// <param name="x">The source value</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe Vector128<double> vloads(double x)
+            => LoadScalarVector128(z.gptr(x));
+
+        /// <summary>
+        /// void _mm_store_ss (float* mem_addr, __m128 a) MOVSS m32, xmm
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe float vstores(Vector128<float> src)
+        {
+            var dst = default(float);
+            StoreScalar(&dst,src);
+            return dst;
+        }
+
+        /// <summary>
+        /// void _mm_store_sd (double* mem_addr, __m128d a)MOVSD m64, xmm
+        /// </summary>
+        /// <param name="src">The source vector</param>
+        [MethodImpl(Inline), Op]
+        public static unsafe double vstores(Vector128<double> src)
+        {
+            var dst = default(double);
+            StoreScalar(&dst,src);
+            return dst;
+        }
+
+        /// <summary>
+        ///  __m128d _mm_cvtsi32_sd (__m128d a, int b)CVTSI2SD xmm, reg/m32
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="dst"></param>
+        [MethodImpl(Inline), Op]
+        public static ref Vector128<double> convert(int x, out Vector128<double> dst)
+        {
+            dst = ConvertScalarToVector128Double(default, x);
+            return ref dst;
+        }
+
+        /// <summary>
+        ///  __m128 _mm_cvtsi32_ss (__m128 a, int b)CVTSI2SS xmm, reg/m32
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="src"></param>
+        [MethodImpl(Inline), Op]
+        public static ref Vector128<float> convert(int src, out Vector128<float> dst)
+        {
+            dst = ConvertScalarToVector128Single(default, src);
+            return ref dst;
+        }
+
+        /// <summary>
+        ///  __m128 _mm_cvtsi64_ss (__m128 a, __int64 b)CVTSI2SS xmm, reg/m64
+        /// </summary>
+        /// <param name="src"></param>
+        /// <param name="dst"></param>
+        [MethodImpl(Inline), Op]
+        public static ref Vector128<float> convert(long src, out Vector128<float> dst)
+        {
+            dst = ConvertScalarToVector128Single(default, src);
+            return ref dst;
+        }
+
+        /// <summary>
+        /// int _mm_cvtss_si32 (__m128 a) CVTSS2SI r32, xmm/m32
+        /// </summary>
+        /// <param name="x"></param>
+        [MethodImpl(Inline), Op]
+        public static unsafe int to32i(in float x)
+            => ConvertToInt32(LoadScalarVector128(gptr(x)));
+
+        /// <summary>
+        /// int _mm_cvtsd_si32 (__m128d a) CVTSD2SI r32, xmm/m64
+        /// </summary>
+        /// <param name="x"></param>
+        [MethodImpl(Inline), Op]
+        public static unsafe int to32i(in double x)
+            => ConvertToInt32(LoadScalarVector128(gptr(x)));
+
+        /// <summary>
+        /// __int64 _mm_cvtss_si64 (__m128 a) CVTSS2SI r64, xmm/m32
+        /// </summary>
+        /// <param name="x"></param>
+        [MethodImpl(Inline), Op]
+        public static unsafe long to64i(in float x)
+            => ConvertToInt64(LoadScalarVector128(gptr(x)));
+
+        /// <summary>
+        /// __int64 _mm_cvtsd_si64 (__m128d a) CVTSD2SI r64, xmm/m64
+        /// </summary>
+        /// <param name="x"></param>
+        [MethodImpl(Inline), Op]
+        public static unsafe long to64i(in double x)
+            => ConvertToInt64(LoadScalarVector128(gptr(x)));
+
+        /// <summary>
+        /// __m128 _mm_add_ss (__m128 a, __m128 b)ADDSS xmm, xmm/m32
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<float> vadds(Vector128<float> x, Vector128<float> y)
+            => AddScalar(x, y);
+
+        /// <summary>
+        /// __m128d _mm_add_sd (__m128d a, __m128d b)ADDSD xmm, xmm/m64
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<double> vadds(Vector128<double> x, Vector128<double> y)
+            => AddScalar(x, y);
+
+        /// <summary>
+        ///  __m128 _mm_mul_ss (__m128 a, __m128 b) MULPS xmm, xmm/m32
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<float> vmuls(Vector128<float> x, Vector128<float> y)
+            =>  MultiplyScalar(x, y);
+
+        /// <summary>
+        ///  __m128d _mm_mul_sd (__m128d a, __m128d b) MULSD xmm, xmm/m64
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<double> vmuls(Vector128<double> x, Vector128<double> y)
+            =>  MultiplyScalar(x, y);
+
+        /// <summary>
+        /// __m128 _mm_fmadd_ss (__m128 a, __m128 b, __m128 c) VFMADDSS xmm, xmm, xmm/m32
+        /// </summary>
+        /// <param name="x">The first operand</param>
+        /// <param name="y">The second operand</param>
+        /// <param name="z">The third operand</param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<float> vfmadds(Vector128<float> x, Vector128<float> y, Vector128<float> z)
+            => MultiplyAddScalar(x, y, z);
+
+        /// <summary>
+        /// __m128d _mm_fmadd_sd (__m128d a, __m128d b, __m128d c) VFMADDSS xmm, xmm, xmm/m64
+        /// </summary>
+        /// <param name="x">The first operand</param>
+        /// <param name="y">The second operand</param>
+        /// <param name="z">The third operand</param>
+        [MethodImpl(Inline), Op]
+        public static Vector128<double> vfmadds(Vector128<double> x, Vector128<double> y, Vector128<double> z)
+            => MultiplyAddScalar(x, y, z);
+
+        /// <summary>
+        /// __m128 _mm_fmsub_ss (__m128 a, __m128 b, __m128 c)VFMSUBSS xmm, xmm, xmm/m32
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>

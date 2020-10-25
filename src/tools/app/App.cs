@@ -88,14 +88,14 @@ namespace Z0
 
         public unsafe void Run()
         {
-            // EmitOpCodes();
-            // EmitPatterns();
-            // EmitRes();
-            // EmitSymbols();
-            // EmitScripts();
-            // EmitAsmRefs();
-            ListBuildFiles(Wf, BuildArchiveSpecs.Runtime);
-            //EmitPeHeaders();
+            EmitOpCodes();
+            EmitPatterns();
+            EmitRes();
+            EmitSymbols();
+            EmitScripts();
+            EmitAsmRefs();
+            //ListBuildFiles(Wf, BuildArchiveSpecs.Runtime);
+            EmitPeHeaders();
         }
 
 

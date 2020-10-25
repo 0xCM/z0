@@ -8,7 +8,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class VectorKinds
+    partial class VexKinds
     {
         /// <summary>
         /// Returns the clr cell type of a vector of specified kind

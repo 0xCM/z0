@@ -12,6 +12,31 @@ namespace Z0.Asm
 
     using F = Asm.AsmRowField;
 
+    public enum AsmRowField : uint
+    {
+        Sequence = 0 | (10 << WidthOffset),
+
+        Address = 1 | (16 << WidthOffset),
+
+        GlobalOffset = 2 | (16 << WidthOffset),
+
+        LocalOffset = 3 | (16 << WidthOffset),
+
+        Mnemonic = 4 | (16 << WidthOffset),
+
+        OpCode = 5 | (32 << WidthOffset),
+
+        Instruction = 6 | (64 << WidthOffset),
+
+        SourceCode = 7 | (64 << WidthOffset),
+
+        Encoded = 8 | 32 << WidthOffset,
+
+        CpuId = 9 | (64 << WidthOffset),
+
+        OpCodeId = 10 | (20 << WidthOffset),
+    }
+
     [StructLayout(LayoutKind.Sequential), Table(TableId, FieldCount)]
     public struct AsmRow
     {

@@ -258,10 +258,6 @@ namespace Z0
 
         public const string CaseLogs = logs + dot + cases;
 
-        public const string VectorKinds = vex + dot + kinds;
-
-        public const string VectorKindsX = vex + dot + kinds + dot + extensions;
-
         public const string NumericKinds = numeric + dot + kinds;
 
         public const string NumericArrays = numeric + dot + arrays;
@@ -275,5 +271,19 @@ namespace Z0
         public const string MemorySlots = A.memory + dot + slots;
 
         const string slots = nameof(slots);
+
+        const string fp = nameof(fp);
+
+        const string reflex = nameof(reflex);
+
+        public const string VexKinds = vex + dot + kinds;
+
+        public const string VexKindX = vex + dot + kinds + dot + extensions;
+
+        public const string VexFpS = vex + dot + fp + dot + scalar;
+
+        public const string VexReflex = vex + dot + reflex;
+
+        public const string VexPop = vex + dot + "pop";
     }
 }

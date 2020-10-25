@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    partial class XVectorKinds
+    partial class XVexKinds
     {
         /// <summary>
         /// Determines whether a method is a vectorized operator which, by definition, is an operator
@@ -16,6 +16,7 @@ namespace Z0
         /// or a custom intrinsic vector type)
         /// </summary>
         /// <param name="src">The method to test</param>
+        [Op]
         public static bool IsVectorizedOperator(this MethodInfo src)
             => src.IsOperator() && src.ReturnType.IsVector();
     }

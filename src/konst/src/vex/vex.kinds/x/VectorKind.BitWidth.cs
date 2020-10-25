@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XVectorKinds
+    partial class XVexKinds
     {
         /// <summary>
         /// Specifies the bit-width of a classified cpu vector
@@ -17,6 +17,6 @@ namespace Z0
         /// <param name="t">The type to examine</param>
         [MethodImpl(Inline), Op]
         public static int BitWidth(this VectorKind k)
-            => VectorKinds.width(k);
+            => VexKinds.width(k);
     }
 }

@@ -42,5 +42,9 @@ namespace Z0
         public Type TypeDefinition
             => typeof(Vector128<>).GenericDefinition2();
 
+        [MethodImpl(Inline)]
+        public Type Close(Type cell)
+            => TypeDefinition.MakeGenericType(cell);
+
     }
 }

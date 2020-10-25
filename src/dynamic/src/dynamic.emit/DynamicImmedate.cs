@@ -81,7 +81,7 @@ namespace Z0
         {
             try
             {
-                var width = VectorKinds.width(src.ReturnType);
+                var width = VexKinds.width(src.ReturnType);
                 return width switch{
                     TypeWidth.W128 => EmbedV128UnaryOpImm(src, imm8, id),
                     TypeWidth.W256 => EmbedV256UnaryOpImm(src, imm8, id),

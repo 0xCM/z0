@@ -23,7 +23,8 @@ namespace Z0
         /// <summary>
         /// The reified vector type as determined by kind facets
         /// </summary>
-        Type Close();
+        Type Close(Type cell)
+            => TypeDefinition.MakeGenericType(cell);
     }
 
     /// <summary>
@@ -51,7 +52,7 @@ namespace Z0
         /// <summary>
         /// The reified vector type as determined by kind facets
         /// </summary>
-        Type IVectorKind.Close()
+        Type Close()
             => TypeDefinition.MakeGenericType(CellKind.SystemType());
     }
 }

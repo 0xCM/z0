@@ -8,9 +8,13 @@ namespace Z0
     using System.Runtime.Intrinsics;
     using System.Linq;
 
-    [ApiHost(ApiNames.VectorKinds, true)]
-    public partial class VectorKinds
+    using static Konst;
+
+    [ApiHost(ApiNames.VexKinds, true)]
+    public partial class VexKinds
     {
+        const NumericKind Closure = AllNumeric;
+
         /// <summary>
         /// Closed vector types of width 128
         /// </summary>

@@ -340,7 +340,6 @@ namespace Z0.Asm
             return ref dst;
         }
 
-
         [MethodImpl(Inline)]
         public static DatasetFormatter<T> formatter<T>()
             where T : unmanaged, Enum
@@ -348,7 +347,7 @@ namespace Z0.Asm
         [Op]
         public static AsmOpCodeDataset dataset()
         {
-            var resource = ResExtractor.Service(typeof(Parts.Refs).Assembly).MatchDocument("OpCodeSpecs");
+            var resource = ResExtractor.Service(typeof(Parts.Refs).Assembly).MatchDocument(PartResId.OpCodeSpecs);
             var count = resource.RowCount;
             var records = sys.alloc<AsmOpCodeRow>(count);
             AsmTables.parse(resource, records);

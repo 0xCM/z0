@@ -256,58 +256,58 @@ namespace Z0
 
         public void classify_vector()
         {
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<byte>)), VectorKind.v128x8u);
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<sbyte>)), VectorKind.v128x8i);
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<ushort>)), VectorKind.v128x16u);
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<short>)), VectorKind.v128x16i);
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<uint>)), VectorKind.v128x32u);
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<int>)), VectorKind.v128x32i);
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<ulong>)), VectorKind.v128x64u);
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<long>)), VectorKind.v128x64i);
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<float>)), VectorKind.v128x32f);
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<double>)), VectorKind.v128x64f);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<byte>)), VectorKind.v128x8u);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<sbyte>)), VectorKind.v128x8i);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<ushort>)), VectorKind.v128x16u);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<short>)), VectorKind.v128x16i);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<uint>)), VectorKind.v128x32u);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<int>)), VectorKind.v128x32i);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<ulong>)), VectorKind.v128x64u);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<long>)), VectorKind.v128x64i);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<float>)), VectorKind.v128x32f);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<double>)), VectorKind.v128x64f);
 
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<byte>)), VectorKind.v256x8u);
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<sbyte>)), VectorKind.v256x8i);
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<ushort>)), VectorKind.v256x16u);
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<short>)), VectorKind.v256x16i);
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<uint>)), VectorKind.v256x32u);
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<int>)), VectorKind.v256x32i);
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<ulong>)), VectorKind.v256x64u);
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<long>)), VectorKind.v256x64i);
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<float>)), VectorKind.v256x32f);
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<double>)), VectorKind.v256x64f);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<byte>)), VectorKind.v256x8u);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<sbyte>)), VectorKind.v256x8i);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<ushort>)), VectorKind.v256x16u);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<short>)), VectorKind.v256x16i);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<uint>)), VectorKind.v256x32u);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<int>)), VectorKind.v256x32i);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<ulong>)), VectorKind.v256x64u);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<long>)), VectorKind.v256x64i);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<float>)), VectorKind.v256x32f);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<double>)), VectorKind.v256x64f);
         }
 
         public void classify_vector_type()
         {
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<sbyte>)), VectorKind.v128x8i);
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<byte>)), VectorKind.v128x8u);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<sbyte>)), VectorKind.v128x8i);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<byte>)), VectorKind.v128x8u);
 
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<short>)), VectorKind.v128x16i);
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<ushort>)), VectorKind.v128x16u);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<short>)), VectorKind.v128x16i);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<ushort>)), VectorKind.v128x16u);
 
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<int>)), VectorKind.v128x32i);
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<uint>)), VectorKind.v128x32u);
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<float>)), VectorKind.v128x32f);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<int>)), VectorKind.v128x32i);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<uint>)), VectorKind.v128x32u);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<float>)), VectorKind.v128x32f);
 
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<ulong>)), VectorKind.v128x64u);
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<long>)), VectorKind.v128x64i);
-            Claim.Eq(VectorKinds.kind(typeof(Vector128<double>)), VectorKind.v128x64f);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<ulong>)), VectorKind.v128x64u);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<long>)), VectorKind.v128x64i);
+            Claim.Eq(VexKinds.kind(typeof(Vector128<double>)), VectorKind.v128x64f);
 
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<sbyte>)), VectorKind.v256x8i);
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<byte>)), VectorKind.v256x8u);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<sbyte>)), VectorKind.v256x8i);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<byte>)), VectorKind.v256x8u);
 
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<short>)), VectorKind.v256x16i);
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<ushort>)), VectorKind.v256x16u);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<short>)), VectorKind.v256x16i);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<ushort>)), VectorKind.v256x16u);
 
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<int>)), VectorKind.v256x32i);
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<uint>)), VectorKind.v256x32u);
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<float>)), VectorKind.v256x32f);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<int>)), VectorKind.v256x32i);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<uint>)), VectorKind.v256x32u);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<float>)), VectorKind.v256x32f);
 
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<ulong>)), VectorKind.v256x64u);
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<long>)), VectorKind.v256x64i);
-            Claim.Eq(VectorKinds.kind(typeof(Vector256<double>)), VectorKind.v256x64f);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<ulong>)), VectorKind.v256x64u);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<long>)), VectorKind.v256x64i);
+            Claim.Eq(VexKinds.kind(typeof(Vector256<double>)), VectorKind.v256x64f);
         }
     }
 }

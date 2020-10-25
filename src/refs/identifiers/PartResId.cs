@@ -2,14 +2,13 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Refs
+namespace Z0
 {
 
-    using static ApiNameAtoms;
-
     [LiteralProvider]
-    public readonly struct Tools
+    public readonly struct PartResId
     {
-        const string tools = nameof(tools);
+
+        public const string OpCodeSpecs = nameof(OpCodeSpecs);
     }
 }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XVectorKinds
+    partial class XVexKinds
     {
         /// <summary>
         /// Determines whether a vector of specified kind has a singed 8-bit cell type
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
         public static bool HasCellType(this VectorKind k, sbyte t)
-            => VectorKinds.test(k,t);
+            => VexKinds.test(k,t);
 
         /// <summary>
         /// Determines whether a vector of specified kind has an unsigned 8-bit cell type
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
         public static bool HasCellType(this VectorKind k, byte t)
-            => VectorKinds.test(k,t);
+            => VexKinds.test(k,t);
 
         /// <summary>
         /// Determines whether a vector of specified kind has a singed 16-bit cell type
@@ -36,7 +36,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
         public static bool HasCellType(this VectorKind k, short t)
-            => VectorKinds.test(k,t);
+            => VexKinds.test(k,t);
 
         /// <summary>
         /// Determines whether a vector of specified kind has an unsigned 16-bit cell type
@@ -45,7 +45,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
         public static bool HasCellType(this VectorKind k, ushort t)
-            => VectorKinds.test(k,t);
+            => VexKinds.test(k,t);
 
         /// <summary>
         /// Determines whether a vector of specified kind has a singed 32-bit cell type
@@ -54,7 +54,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
         public static bool HasCellType(this VectorKind k, int t)
-            => VectorKinds.test(k,t);
+            => VexKinds.test(k,t);
 
         /// <summary>
         /// Determines whether a vector of specified kind has an unsigned 32-bit cell type
@@ -63,7 +63,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
         public static bool HasCellType(this VectorKind k, uint t)
-            => VectorKinds.test(k,t);
+            => VexKinds.test(k,t);
 
         /// <summary>
         /// Determines whether a vector of specified kind has a singed 64-bit cell type
@@ -72,7 +72,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
         public static bool HasCellType(this VectorKind k, long t)
-            => VectorKinds.test(k,t);
+            => VexKinds.test(k,t);
 
         /// <summary>
         /// Determines whether a vector of specified kind has an unsigned 64-bit cell type
@@ -81,7 +81,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
         public static bool HasCellType(this VectorKind k, ulong t)
-            => VectorKinds.test(k,t);
+            => VexKinds.test(k,t);
 
         /// <summary>
         /// Determines whether a vector of specified kind has a 32-bit floating-point cell type
@@ -90,7 +90,7 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
         public static bool HasCellType(this VectorKind k, float t)
-            => VectorKinds.test(k,t);
+            => VexKinds.test(k,t);
 
         /// <summary>
         /// Determines whether a vector of specified kind has a 64-bit floating-point cell type
@@ -99,6 +99,6 @@ namespace Z0
         /// <param name="t">The type to match as specified by a representative value</param>
         [MethodImpl(Inline), Op]
         public static bool HasCellType(this VectorKind k, double t)
-            => VectorKinds.test(k,t);
+            => VexKinds.test(k,t);
     }
 }

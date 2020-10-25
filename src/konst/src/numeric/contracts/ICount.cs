@@ -6,11 +6,15 @@ namespace Z0
 {
     using System;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface ICount : ICounted, ITextual
     {
 
     }
 
+    [Free]
     public interface ICount<F,T> : ICount, ICounted<T>
         where T : unmanaged
         where F : unmanaged, ICount<F,T>

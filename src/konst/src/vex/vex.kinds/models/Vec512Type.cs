@@ -38,6 +38,10 @@ namespace Z0
         public int BitWidth
             => W;
 
+        [MethodImpl(Inline)]
+        public Type Close(Type cell)
+            => TypeDefinition.MakeGenericType(cell);
+
         public Type TypeDefinition
             => typeof(Vector512<>).GenericDefinition2();
     }
