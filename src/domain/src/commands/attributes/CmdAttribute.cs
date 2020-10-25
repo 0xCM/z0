@@ -18,6 +18,14 @@ namespace Z0
     {
         public CmdAttribute()
         {
+            Code = EmptyString;
         }
+
+        public CmdAttribute(string code)
+        {
+            Code = code;
+        }
+
+        public string Code {get;}
     }
 }

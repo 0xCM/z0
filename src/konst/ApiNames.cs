@@ -211,6 +211,10 @@ namespace Z0
 
         public const string SymbolicDigits = symbolic + dot + digits;
 
+        public const string SymbolicTest = symbolic + dot + "test";
+
+        public const string SymbolicTests = symbolic + dot + tests;
+
         public const string Asci = symbolic + dot + A.asci;
 
         public const string AsciSymbols = symbolic + dot + A.asci + dot + symbols;

@@ -16,9 +16,9 @@ namespace Z0
     partial struct Resources
     {
         [Op]
-        public static unsafe ResourceDescriptor[] descriptors(Assembly src)
+        public static unsafe ResourceDescriptor[] descriptors(Assembly src, string match = null)
         {
-            var resnames = Resources.names(src);
+            var resnames = Resources.names(src, match);
             var count = resnames.Length;
             var buffer = alloc<ResourceDescriptor>(count);
             var target = span(buffer);
@@ -31,13 +31,5 @@ namespace Z0
             }
             return buffer;
         }
-
-        /// <summary>
-        /// Reveals the data represented by a <see cref='ResourceDescriptor'/>
-        /// </summary>
-        /// <param name="src">The source descriptor</param>
-        [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<byte> data(in ResourceDescriptor src)
-            => MemView.view(src.Address, src.Size);
     }
 }

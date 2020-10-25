@@ -27,6 +27,10 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
+        public bool NameLike(string match)
+            => Name.Format().Contains(match);
+
+        [MethodImpl(Inline)]
         public int CompareTo(ResourceDescriptor src)
             => Address.CompareTo(src.Address);
 

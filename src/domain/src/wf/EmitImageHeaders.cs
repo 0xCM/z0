@@ -17,18 +17,18 @@ namespace Z0
         public Files Sources;
 
         public FS.FilePath Target;
-    }
 
-    public sealed class EmitImageHeaders : CmdHost<EmitImageHeaders, EmitImageHeadersCmd>
-    {
         public static EmitImageHeadersCmd specify(IWfShell wf, FS.FilePath[] src, FS.FilePath dst)
         {
-            var cmd = Spec();
+            var cmd = new EmitImageHeadersCmd();
             cmd.Sources = src;
             cmd.Target = dst;
             return cmd;
         }
+    }
 
+    public sealed class EmitImageHeaders : CmdHost<EmitImageHeaders, EmitImageHeadersCmd>
+    {
         public static CmdResult run(IWfShell wf, in EmitImageHeadersCmd spec)
         {
             var total = Count.Zero;

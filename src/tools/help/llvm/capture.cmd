@@ -25,7 +25,6 @@ llvm-objcopy --help > llvm-objcopy.help
 llvm-install-name-tool --help > llvm-install-name-tool.help
 llvm-nm --help-hidden > llvm-nm.help
 llvm-objdump --help-hidden > llvm-objdump.help
-llvm-pdbutil --help-hidden > llvm-pdbutil.help
 llvm-ranlib --help > llvm-ranlib.help
 llvm-size --help-hidden > llvm-size.help
 llvm-strings --help-hidden > llvm-strings.help
@@ -39,3 +38,6 @@ llvm-dlltool --help-hidden > llvm-dlltool.help
 
 clang++ --help > clang++.help
 
+llvm-pdbutil --help-hidden > llvm-pdbutil.help
+llvm-pdbutil dump --help >> llvm-pdbutil.help
+llvm-pdbutil diadump --help-hidden >> llvm-pdbutil.help

@@ -6,6 +6,8 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.IO;
+    using System.Text;
 
     using static z;
 
@@ -40,11 +42,14 @@ namespace Z0
 
         readonly Multiplex Mpx;
 
+        readonly ReadOnlySpan<string> AppArgs;
+
         public AppRunner(IWfShell wf, WfHost host)
         {
             Host = host;
             Wf = wf.WithHost(Host);
             Mpx = Multiplex.create(wf, Multiplex.configure(wf.Db().Root));
+            AppArgs = wf.Args;
         }
 
         CmdResult EmitOpCodes()
@@ -59,8 +64,12 @@ namespace Z0
         void EmitScripts()
             => EmitToolScripts.run(Wf, EmitToolScripts.specify(Wf));
 
-        CmdResult EmitRes()
-            => EmitResourceContent.run(Wf, EmitResourceContent.specify(Wf, Wf.Controller));
+
+        CmdResult EmitToolHelp()
+            => EmitResourceContent.run(Wf, EmitResourceContentCmd.specify(Wf, Wf.Controller, "res/tools/help", ".help"));
+
+        CmdResult EmitCaseLogs()
+            => EmitResourceContent.run(Wf, EmitResourceContentCmd.specify(Wf, Wf.Controller, "res/tools/caselogs", ".log"));
 
         CmdResult EmitAsmRefs()
         {
@@ -76,9 +85,11 @@ namespace Z0
             var build = BuildArchives.Z(Wf);
             var dllTarget = Wf.Db().Table(ImageSectionHeader.TableId, "z0.dll.headers");
             var exeTarget = Wf.Db().Table(ImageSectionHeader.TableId, "z0.exe.headers");
-            EmitImageHeaders.run(Wf, EmitImageHeaders.specify(Wf, build.DllFiles().Array(), dllTarget));
-            EmitImageHeaders.run(Wf, EmitImageHeaders.specify(Wf, build.ExeFiles().Array(), exeTarget));
+            EmitImageHeaders.run(Wf, EmitImageHeadersCmd.specify(Wf, build.DllFiles().Array(), dllTarget));
+            EmitImageHeaders.run(Wf, EmitImageHeadersCmd.specify(Wf, build.ExeFiles().Array(), exeTarget));
         }
+
+            //ListBuildFiles(Wf, BuildArchiveSpecs.Runtime);
 
         static CmdResult ListBuildFiles(IWfShell wf, BuildArchiveSpec spec)
         {
@@ -86,16 +97,45 @@ namespace Z0
             return  EmitFileListing.run(wf, EmitFileListing.specify(wf, spec.Label + ".artifacts", archive.Root, array(archive.Dll, archive.Exe, archive.Pdb, archive.Lib)));
         }
 
-        public unsafe void Run()
+        void PrintArgs()
+        {
+            var count = AppArgs.Length;
+            for(var i=0; i<count; i++)
+            {
+                ref readonly var arg = ref skip(AppArgs,i);
+                Wf.Status(arg);
+            }
+
+        }
+
+        void RunAll()
         {
             EmitOpCodes();
             EmitPatterns();
-            EmitRes();
+            EmitToolHelp();
+            EmitCaseLogs();
             EmitSymbols();
             EmitScripts();
             EmitAsmRefs();
-            //ListBuildFiles(Wf, BuildArchiveSpecs.Runtime);
             EmitPeHeaders();
+
+        }
+
+
+        public unsafe void Run()
+        {
+            var query = Resources.query(Wf.Controller, CaseNames.CoreClrBuildLog);
+            if(query.ResourceCount == 1)
+            {
+                var data = query.Descriptor(0).Utf8();
+                using var reader = new StringReader(data.ToString());
+                var line = reader.ReadLine();
+                while(line != null)
+                {
+                    term.print(line);
+                    line = reader.ReadLine();
+                }
+            }
         }
 
 

@@ -664,6 +664,7 @@
         "parametricity",
         "pathmap",
         "pchar",
+        "pdbutil",
         "pdep",
         "peref",
         "perefs",

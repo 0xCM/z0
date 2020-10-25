@@ -14,7 +14,7 @@ namespace Z0
     partial struct asci
     {
         /// <summary>
-        /// Transforms an uppercase character [A..Z] to the corresponding lowercase charcter [a..z];
+        /// Transforms an uppercase character [A..Z] to the corresponding lowercase character [a..z];
         /// if the source character is not in the letter domain, the input is returned unharmed
         /// </summary>
         /// <param name="src">The source character</param>

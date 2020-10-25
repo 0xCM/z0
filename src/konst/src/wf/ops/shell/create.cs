@@ -81,18 +81,19 @@ namespace Z0
             var control = controller();
             var controlId = control.Id();
             var logRoot = EnvVars.Common.LogRoot;
+            var configured = list<string>();
 
-            term.inform(string.Format("{0}:{1}", "control", controlId));
-            term.inform(string.Format("{0}:{1}", "args", delimit(args)));
-            term.inform(string.Format("{0}:{1}", "logs.root", logRoot));
+            configured.Add(string.Format("{0}:{1}", "control", controlId));
+            configured.Add(string.Format("{0}:{1}", "args", delimit(args)));
+            configured.Add(string.Format("{0}:{1}", "logs.root", logRoot));
 
             var api = parts(control, args);
             var partIdList = api.Api.PartIdentities;
-            term.inform(string.Format("{0}:{1}", "api.components.length", partIdList.Length));
-            term.inform(string.Format("{0}:{1}", "api.components", delimit(partIdList)));
+            configured.Add(string.Format("{0}:{1}", "api.components.length", partIdList.Length));
+            configured.Add(string.Format("{0}:{1}", "api.components", delimit(partIdList)));
 
             var logConfig = config(controlId, logRoot, dbRoot());
-            term.inform(string.Format("{0}:{1}", "logs.config", logConfig.Format()));
+            configured.Add(string.Format("{0}:{1}", "logs.config", logConfig.Format()));
 
             IWfPaths _paths = new WfPaths(logConfig);
             var ctx = new WfContext();
@@ -105,10 +106,11 @@ namespace Z0
             ctx.Controller = control;
 
             var init = new WfInit(ctx, logConfig, partIdList);
-            term.inform(string.Format("{0}:{1}", "wf.init", init.ControlId));
+            configured.Add(string.Format("{0}:{1}", "wf.init", init.ControlId));
 
-            var wf = new WfShell(init);
-            term.inform(string.Format("{0}:{1}", "wf", wf.AppName));
+            IWfShell wf = new WfShell(init);
+            configured.Add(string.Format("{0}:{1}", "wf", wf.AppName));
+            wf.Status(configured.FormatList(FieldDelimiter));
             return wf;
         }
     }

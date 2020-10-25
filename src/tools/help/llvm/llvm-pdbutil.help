@@ -121,3 +121,160 @@ Type Options:
 Type Record Options:
 
   This option category has no options.
+OVERVIEW: LLVM PDB Dumper
+
+SUBCOMMAND 'dump': Dump MSF and CodeView debug info
+
+USAGE: llvm-pdbutil.exe dump [options] <input PDB files>
+
+OPTIONS:
+
+Generic Options:
+
+  --help                      - Display available options (--help-hidden for more)
+  --help-list                 - Display list of available options (--help-list-hidden for more)
+
+MSF Container Options:
+
+  --id-stats                  - Dump a detailed breakdown of IPI types usage/size
+  --stream-blocks             - Add block information to the output of -streams
+  --streams                   - dump summary of the PDB streams
+  --summary                   - dump file summary
+  --sym-stats                 - Dump a detailed breakdown of symbol usage/size for each module
+  --type-stats                - Dump a detailed breakdown of type usage/size
+  --udt-stats                 - Dump a detailed breakdown of S_UDT record usage / stats
+
+Miscellaneous Options:
+
+  --all                       - Implies most other options.
+  --named-streams             - dump PDB named stream table
+  --section-contribs          - dump section contributions
+  --section-headers           - Dump image section headers
+  --section-map               - dump section map
+  --string-table              - dump PDB String Table
+  --string-table-details      - dump PDB String Table Details
+
+Module & File Options:
+
+  --files                     - Dump the source files that contribute to each module's.
+  --il                        - dump inlinee line information (DEBUG_S_INLINEELINES subsection)
+  --jmc                       - For all options that iterate over modules, ignore modules from system libraries
+  -l                          - dump source file/line information (DEBUG_S_LINES subsection)
+  --modi=<uint>               - For all options that iterate over modules, limit to the specified module
+  --modules                   - dump compiland information
+  --xme                       - dump cross module exports (DEBUG_S_CROSSSCOPEEXPORTS subsection)
+  --xmi                       - dump cross module imports (DEBUG_S_CROSSSCOPEIMPORTS subsection)
+
+Symbol Options:
+
+  --fpo                       - dump FPO records
+  --global-extras             - dump Globals hashes
+  --global-name=<string>      - With -globals, only dump globals whose name matches the given value
+  --globals                   - dump Globals symbol records
+  --gsi-records               - dump public / global common record stream
+  --public-extras             - dump Publics hashes and address maps
+  --publics                   - dump Publics stream data
+  --sym-data                  - dump CodeView symbol record raw bytes
+  --symbols                   - dump module symbols
+
+Type Record Options:
+
+  --dependents                - In conjunection with -type-index and -id-index, dumps the entire dependency graph for the specified index instead of just the single record with the specified index
+  --dont-resolve-forward-refs - When dumping type records for classes, unions, enums, and structs, don't try to resolve forward references
+  --id-data                   - dump CodeView type record raw bytes from IPI stream
+  --id-extras                 - dump id hashes and index offsets
+  --id-index=<uint>           - only dump ids with the specified hexadecimal type index
+  --ids                       - dump CodeView type records from IPI stream
+  --type-data                 - dump CodeView type record raw bytes from TPI stream
+  --type-extras               - dump type hashes and index offsets
+  --type-index=<uint>         - only dump types with the specified hexadecimal type index
+  --type-ref-stats            - dump statistics on the number and size of types transitively referenced by symbol records
+  --types                     - dump CodeView type records from TPI stream
+OVERVIEW: LLVM PDB Dumper
+
+SUBCOMMAND 'diadump': Dump debug information using a DIA-like API
+
+USAGE: llvm-pdbutil.exe diadump [options] <input PDB files>
+
+OPTIONS:
+
+Color Options:
+
+  This option category has no options.
+
+Dbi Stream Options:
+
+  This option category has no options.
+
+Filtering and Sorting Options:
+
+  This option category has no options.
+
+General options:
+
+  --arrays            - Dump array types
+  --compilands        - Dump compiland information
+  --enums             - Dump enum types
+  --funcsigs          - Dump function signature information
+  --hierarchy         - Show lexical and class parents
+  --native            - Use native PDB reader instead of DIA
+  --no-ids            - Don't show any SymIndexId fields (overrides -hierarchy)
+  --pointers          - Dump enum types
+  --recurse           - When dumping a SymIndexId, dump the full details of the corresponding record
+  --typedefs          - Dump typedefs
+  --udts              - Dump udt types
+  --vtshapes          - Dump virtual table shapes
+
+Generic Options:
+
+  -h                  - Alias for --help
+  --help              - Display available options (--help-hidden for more)
+  --help-hidden       - Display all available options
+  --help-list         - Display list of available options (--help-list-hidden for more)
+  --help-list-hidden  - Display list of all available options
+  --print-all-options - Print all option values after command line parsing
+  --print-options     - Print non-default options after command line parsing
+
+MSF Container Options:
+
+  This option category has no options.
+
+MSF File Options:
+
+  This option category has no options.
+
+Miscellaneous Options:
+
+  This option category has no options.
+
+Module & File Options:
+
+  This option category has no options.
+
+Module Options:
+
+  This option category has no options.
+
+Other Options:
+
+  This option category has no options.
+
+PDB Stream Options:
+
+  This option category has no options.
+
+Symbol Options:
+
+  This option category has no options.
+
+Symbol Type Options:
+
+  This option category has no options.
+
+Type Options:
+
+  This option category has no options.
+
+Type Record Options:
+
+  This option category has no options.

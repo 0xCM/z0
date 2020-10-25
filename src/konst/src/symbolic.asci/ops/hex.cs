@@ -13,7 +13,6 @@ namespace Z0
     using HSU = HexSymUp;
     using HSL = HexSymLo;
     using H = HexSymData;
-    using XF = HexSymFacet;
 
     partial struct asci
     {

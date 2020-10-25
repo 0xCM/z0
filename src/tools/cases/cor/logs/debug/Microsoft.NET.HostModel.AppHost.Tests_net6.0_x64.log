@@ -1,9 +1,0 @@
-xUnit.net Console Runner v2.4.1 (64-bit .NET 5.0.0-rc.1.20451.14)
-  Discovering: Microsoft.NET.HostModel.AppHost.Tests
-  Discovered:  Microsoft.NET.HostModel.AppHost.Tests
-  Starting:    Microsoft.NET.HostModel.AppHost.Tests
-  Finished:    Microsoft.NET.HostModel.AppHost.Tests
-=== TEST EXECUTION SUMMARY ===
-   Microsoft.NET.HostModel.AppHost.Tests  Total: 6, Errors: 0, Failed: 0, Skipped: 0, Time: 2.148s
-=== COMMAND LINE ===
-"J:\lang\net\runtime\.dotnet\dotnet.exe" exec --depsfile "J:\lang\net\runtime\artifacts\bin\Microsoft.NET.HostModel.AppHost.Tests\Debug\net6.0\Microsoft.NET.HostModel.AppHost.Tests.deps.json" --runtimeconfig "J:\lang\net\runtime\artifacts\bin\Microsoft.NET.HostModel.AppHost.Tests\Debug\net6.0\Microsoft.NET.HostModel.AppHost.Tests.runtimeconfig.json"  "J:\cache\nuget\cache\xunit.runner.console/2.4.1/tools/netcoreapp2.0/xunit.console.dll" "J:\lang\net\runtime\artifacts\bin\Microsoft.NET.HostModel.AppHost.Tests\Debug\net6.0\Microsoft.NET.HostModel.AppHost.Tests.dll" -noautoreporters -xml "J:\lang\net\runtime\artifacts\TestResults\Debug\Microsoft.NET.HostModel.AppHost.Tests_net6.0_x64.xml" -html "J:\lang\net\runtime\artifacts\TestResults\Debug\Microsoft.NET.HostModel.AppHost.Tests_net6.0_x64.html" -notrait category=failing > "J:\lang\net\runtime\artifacts\log\Debug\Microsoft.NET.HostModel.AppHost.Tests_net6.0_x64.log" 2>&1
