@@ -23,5 +23,10 @@ namespace Z0
         [MethodImpl(Inline), Op]
         public static ToolRanEvent ran(ToolId tool, CorrelationToken ct)
             => new ToolRanEvent(tool, ct);
+
+        [MethodImpl(Inline), Op]
+        public static RanEvent ran(WfStepId step, CorrelationToken ct)
+            => new RanEvent(step, ct);
+
     }
 }

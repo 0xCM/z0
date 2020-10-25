@@ -1,0 +1,9 @@
+xUnit.net Console Runner v2.4.1 (64-bit .NET 5.0.0-rc.1.20451.14)
+  Discovering: Microsoft.DotNet.CoreSetup.Packaging.Tests
+  Discovered:  Microsoft.DotNet.CoreSetup.Packaging.Tests
+  Starting:    Microsoft.DotNet.CoreSetup.Packaging.Tests
+  Finished:    Microsoft.DotNet.CoreSetup.Packaging.Tests
+=== TEST EXECUTION SUMMARY ===
+   Microsoft.DotNet.CoreSetup.Packaging.Tests  Total: 3, Errors: 0, Failed: 0, Skipped: 0, Time: 0.193s
+=== COMMAND LINE ===
+"J:\lang\net\runtime\.dotnet\dotnet.exe" exec --depsfile "J:\lang\net\runtime\artifacts\bin\Microsoft.DotNet.CoreSetup.Packaging.Tests\Debug\net6.0\Microsoft.DotNet.CoreSetup.Packaging.Tests.deps.json" --runtimeconfig "J:\lang\net\runtime\artifacts\bin\Microsoft.DotNet.CoreSetup.Packaging.Tests\Debug\net6.0\Microsoft.DotNet.CoreSetup.Packaging.Tests.runtimeconfig.json"  "J:\cache\nuget\cache\xunit.runner.console/2.4.1/tools/netcoreapp2.0/xunit.console.dll" "J:\lang\net\runtime\artifacts\bin\Microsoft.DotNet.CoreSetup.Packaging.Tests\Debug\net6.0\Microsoft.DotNet.CoreSetup.Packaging.Tests.dll" -noautoreporters -xml "J:\lang\net\runtime\artifacts\TestResults\Debug\Microsoft.DotNet.CoreSetup.Packaging.Tests_net6.0_x64.xml" -html "J:\lang\net\runtime\artifacts\TestResults\Debug\Microsoft.DotNet.CoreSetup.Packaging.Tests_net6.0_x64.html" -notrait category=failing > "J:\lang\net\runtime\artifacts\log\Debug\Microsoft.DotNet.CoreSetup.Packaging.Tests_net6.0_x64.log" 2>&1

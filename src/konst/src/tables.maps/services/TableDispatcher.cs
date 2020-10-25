@@ -42,9 +42,9 @@ namespace Z0
         [MethodImpl(Inline)]
         public void Dispatch(T[] src, Y[] dst)
         {
+            var flow = Wf.Running();
             try
             {
-                Wf.Running();
                 using var engine = new TableDispatchEngine<F,T,D,S,Y>(Wf, src, Projectors, Selectors, dst);
                 engine.Run();
                 Wf.Ran();
@@ -55,7 +55,7 @@ namespace Z0
             }
             finally
             {
-                Wf.Ran();
+                Wf.Ran(flow);
             }
         }
     }

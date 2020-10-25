@@ -37,13 +37,14 @@ namespace Z0
                 Wf.Raise(new RanEvent(Host, Ct));
         }
 
-        public void Ran(ExecutionFlow flow)
+        public ExecutionFlow Ran(ExecutionFlow flow)
         {
             if(Wf.Verbosity.Babble())
                 Wf.Raise(new RanEvent(Host, Ct));
 
             var ran = flow.Reacted((ulong)atomic(ref RanToken));
             Flows.TryAdd(flow.Dispensed, flow);
+            return ran;
         }
     }
 }

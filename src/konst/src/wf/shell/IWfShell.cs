@@ -186,18 +186,6 @@ namespace Z0
                 Raise(running(host, Ct));
         }
 
-        ExecutionFlow Running();
-
-        void Ran();
-
-        void Running(CmdId cmd)
-            => Raise(new RunningCmdEvent(cmd, Ct));
-
-        void Ran(CmdResult cmd)
-            => Raise(new RanCmdEvent(cmd, Ct));
-
-        void Ran(ExecutionFlow flow);
-
         void Running<T>(WfHost step, T content)
         {
             if(Verbosity.Babble())
@@ -216,27 +204,11 @@ namespace Z0
                 Raise(running(Host, content, Ct));
         }
 
-        // ~ Ran
-        // ~ ---------------------------------------------------------------------------
-
-        void Ran(ToolId tool)
-            => Raise(ran(tool, Ct));
-
-        void Ran<T>(WfStepId step, T content)
-            => Raise(new RanEvent<T>(step, content, Ct));
-
-        void Ran(WfStepId step)
+        void ProcessingFile<T>(FS.FilePath src, T kind)
         {
             if(Verbosity.Babble())
-                Raise(new RanEvent(step, Ct));
+                Raise(new ProcessingFileEvent<T>(Host, kind, src, Ct));
         }
-
-        void Ran2<T>(T content)
-            => Raise(new RanEvent<T>(Host, content, Ct));
-
-        void Ran<H,T>(H host, T content)
-            where H : IWfHost<H>, new()
-                => Raise(ran(host, content, Ct));
 
         void EmittingFile<T>(T source, FS.FilePath dst)
         {
@@ -246,29 +218,6 @@ namespace Z0
 
         void EmittingFile(Count measure, FS.FilePath dst)
             => Raise(new EmittingFileEvent<Count>(Host, measure, dst, Ct));
-
-        void Emitted(WfStepId step, FS.FilePath dst, Count? segments = default)
-            => Raise(emitted(step, dst, segments ?? 0, Ct));
-
-        void Emitted(FS.FilePath dst, Count? segments = default)
-            => Emitted(Host,dst,segments);
-
-        void EmittedFile<T>(T source, Count count, FS.FilePath dst)
-            => Raise(new EmittedFileEvent<T>(Host, source, count, dst, Ct));
-
-        void EmittedFile(Count count, FS.FilePath dst)
-            => Raise(new EmittedFileEvent(Host, dst, count, Ct));
-
-        void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst, T t = default)
-            where T : struct
-                => Raise(new EmittedTableEvent<T>(step, count, dst, Ct));
-
-        void EmittedTable<T>(Count count, FS.FilePath dst, T t = default)
-            where T : struct
-                => EmittedTable<T>(Host,count,dst);
-
-        void EmittedTable(WfStepId step, Type type, Count count, FS.FilePath dst)
-            => Raise(new EmittedTableEvent(step, type, count, dst, Ct));
 
         void EmittingTable(Type type, FS.FilePath dst)
         {
@@ -283,29 +232,80 @@ namespace Z0
                 Raise(new EmittingTableEvent<T>(Host, dst, Ct));
         }
 
-        void EmittedTable(Type type, Count count, FS.FilePath dst)
-            => EmittedTable(Host, type, count, dst);
+        void Running(CmdId cmd)
+            => Raise(new RunningCmdEvent(cmd, Ct));
 
-        void Processed<T>(T content)
-            => WfEvents.processed(Host, content, Ct);
+        // ~ Ran
+        // ~ ---------------------------------------------------------------------------
 
-        void Processed<T>(ApiHostUri uri, T content)
-            => WfEvents.processed(Host, delimit(uri,content), Ct);
+        ExecutionFlow Running();
 
-        void Processed<S,T>(S src, T dst)
-            => WfEvents.processed(Host, (src, dst), Ct);
+        ExecutionFlow Ran(ExecutionFlow src);
 
-        void ProcessingFile<T>(FS.FilePath src, T kind)
+        void Ran();
+
+        void Ran(CmdResult cmd)
+            => Raise(new RanCmdEvent(cmd, Ct));
+
+        void Ran(ToolId tool)
+            => Raise(ran(tool, Ct));
+
+        void Ran<T>(WfStepId step, T content)
+            => Raise(ran<T>(step, content, Ct));
+
+        void Ran(WfStepId step)
+            => Raise(ran(step, Ct));
+
+        void Ran2<T>(T content)
+            => Raise(ran(Host, content, Ct));
+
+        void Ran2<T>(ExecutionFlow flow, T content)
         {
-            if(Verbosity.Babble())
-                Raise(new ProcessingFileEvent<T>(Host, kind, src, Ct));
+            Raise(ran(Host, content, Ct));
+            Ran(flow);
         }
 
+        void Ran<H,T>(H host, T content)
+            where H : IWfHost<H>, new()
+                => Raise(ran(host, content, Ct));
+
+        void Emitted(WfStepId step, FS.FilePath dst, Count? segments = default)
+            => Raise(fileOut(step, dst, segments ?? 0, Ct));
+
+        void EmittedFile<T>(T source, Count count, FS.FilePath dst)
+            => Raise(fileOut(Host, source, count, dst, Ct));
+
+        void EmittedFile(Count count, FS.FilePath dst)
+            => Raise(fileOut(Host, dst, count, Ct));
+
+        void EmittedTable<T>(WfStepId step, Count count, FS.FilePath dst, T t = default)
+            where T : struct
+                => Raise(tableOut<T>(step, count, dst, Ct));
+
+        void EmittedTable<T>(Count count, FS.FilePath dst, T t = default)
+            where T : struct
+                => Raise(tableOut<T>(Host, count, dst, Ct));
+
+        void EmittedTable(WfStepId step, Type type, Count count, FS.FilePath dst)
+            => Raise(tableOut(step, type, count, dst, Ct));
+
+        void EmittedTable(Type type, Count count, FS.FilePath dst)
+            => Raise(tableOut(Host, type, count, dst, Ct));
+
+        void Processed<T>(T content)
+            => processed(Host, content, Ct);
+
+        void Processed<T>(ApiHostUri uri, T content)
+            => processed(Host, delimit(uri,content), Ct);
+
+        void Processed<S,T>(S src, T dst)
+            => processed(Host, (src, dst), Ct);
+
         void ProcessedFile<T>(FS.FilePath src, T kind)
-            => Raise(new ProcessedFileEvent<T>(Host, src, kind, Ct));
+            => Raise(fileProcessed(Host, src, kind, Ct));
 
         void ProcessedFile<T,M>(FS.FilePath src, T kind, M metric)
-            => Raise(new ProcessedFileEvent<T,M>(Host, src, kind, metric, Ct));
+            => Raise(fileProcessed(Host, src, kind, metric, Ct));
 
         void Row<T>(T content)
             where T : ITextual

@@ -61,14 +61,14 @@ namespace Z0
 
         public ref AsmRoutines Run(in ApiMemberCodeBlocks src, out AsmRoutines dst)
         {
-            Wf.Running();
+            var flow = Wf.Running();
 
             DecodeApiHost.create(Context.Decoder, Uri).Run(Wf, src, out dst);
             var emitted = AsmServices.emit(Wf, Uri, dst.Storage, Context.Formatter.Config);
             if(emitted.IsNonEmpty)
                 Wf.EmittedFile(dst, dst.Count, emitted);
 
-            Wf.Ran();
+            Wf.Ran(flow);
             return ref dst;
         }
     }

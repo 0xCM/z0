@@ -48,7 +48,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running();
+            var flow = Wf.Running();
 
             foreach(var part in Parts)
             {
@@ -62,7 +62,7 @@ namespace Z0
                 }
             }
 
-            Wf.Ran();
+            Wf.Ran(flow);
         }
 
         ReadOnlySpan<CliConstant> Read(IPart part)

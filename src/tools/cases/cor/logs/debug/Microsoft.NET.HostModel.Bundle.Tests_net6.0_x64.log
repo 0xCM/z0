@@ -1,0 +1,48 @@
+xUnit.net Console Runner v2.4.1 (64-bit .NET 5.0.0-rc.1.20451.14)
+  Discovering: Microsoft.NET.HostModel.Bundle.Tests
+  Discovered:  Microsoft.NET.HostModel.Bundle.Tests
+  Starting:    Microsoft.NET.HostModel.Bundle.Tests
+[EXEC       >] [....] [00:00:00.000] J:\lang\net\runtime\.dotnet\dotnet.exe publish /bl:PublishProject.binlog --no-restore --runtime win-x64 --framework net6.0 /p:NetCoreAppCurrent=net6.0 -o J:\lang\net\runtime\artifacts\tests\Debug\hmb\0\StandaloneApp\publish /p:TestTargetRid=win-x64 /p:MNAVersion=6.0.0-dev
+[EXEC       >] [....] [00:00:00.000] J:\lang\net\runtime\.dotnet\dotnet.exe publish /bl:PublishProject.binlog --runtime win-x64 --framework netcoreapp3.0 /p:NetCoreAppCurrent=netcoreapp3.0 -o J:\lang\net\runtime\artifacts\tests\Debug\hmb\0\StandaloneApp3x\publish /p:TestTargetRid=win-x64 /p:MNAVersion=3.0.0
+[EXEC       >] [....] [00:00:00.108] J:\lang\net\runtime\.dotnet\dotnet.exe publish /bl:PublishProject.binlog --no-restore --runtime win-x64 --framework net6.0 /p:NetCoreAppCurrent=net6.0 -o J:\lang\net\runtime\artifacts\tests\Debug\hmb\0\AppWithSubDirs\publish /p:TestTargetRid=win-x64 /p:MNAVersion=6.0.0-dev
+[EXEC       -] [....] [00:00:00.165] Waiting for process 15588 to exit...
+[EXEC       -] [....] [00:00:00.165] Waiting for process 14000 to exit...
+[EXEC       -] [....] [00:00:00.165] Waiting for process 18452 to exit...
+[EXEC       <] [ OK ] [00:01:05.977] J:\lang\net\runtime\.dotnet\dotnet.exe publish /bl:PublishProject.binlog --no-restore --runtime win-x64 --framework net6.0 /p:NetCoreAppCurrent=net6.0 -o J:\lang\net\runtime\artifacts\tests\Debug\hmb\0\AppWithSubDirs\publish /p:TestTargetRid=win-x64 /p:MNAVersion=6.0.0-dev exited with 0
+[EXEC       <] [ OK ] [00:01:09.727] J:\lang\net\runtime\.dotnet\dotnet.exe publish /bl:PublishProject.binlog --no-restore --runtime win-x64 --framework net6.0 /p:NetCoreAppCurrent=net6.0 -o J:\lang\net\runtime\artifacts\tests\Debug\hmb\0\StandaloneApp\publish /p:TestTargetRid=win-x64 /p:MNAVersion=6.0.0-dev exited with 0
+[EXEC       <] [ OK ] [00:02:40.743] J:\lang\net\runtime\.dotnet\dotnet.exe publish /bl:PublishProject.binlog --runtime win-x64 --framework netcoreapp3.0 /p:NetCoreAppCurrent=netcoreapp3.0 -o J:\lang\net\runtime\artifacts\tests\Debug\hmb\0\StandaloneApp3x\publish /p:TestTargetRid=win-x64 /p:MNAVersion=3.0.0 exited with 0
+[EXEC       >] [....] [00:02:41.641] J:\lang\net\runtime\.dotnet\dotnet.exe publish /bl:PublishProject.binlog --runtime win-x64 --framework netcoreapp3.1 /p:NetCoreAppCurrent=netcoreapp3.1 -o J:\lang\net\runtime\artifacts\tests\Debug\hmb\1\StandaloneApp3x\publish /p:TestTargetRid=win-x64 /p:MNAVersion=3.1.0
+[EXEC       -] [....] [00:02:41.642] Waiting for process 33608 to exit...
+[EXEC       <] [ OK ] [00:03:15.708] J:\lang\net\runtime\.dotnet\dotnet.exe publish /bl:PublishProject.binlog --runtime win-x64 --framework netcoreapp3.1 /p:NetCoreAppCurrent=netcoreapp3.1 -o J:\lang\net\runtime\artifacts\tests\Debug\hmb\1\StandaloneApp3x\publish /p:TestTargetRid=win-x64 /p:MNAVersion=3.1.0 exited with 0
+[EXEC       >] [....] [00:03:38.389] ..\..\..\..\tests\Debug\hmb\1\AppWithSubDirs\publish\AppWithSubDirs.exe
+[EXEC       -] [....] [00:03:38.988] Waiting for process 20116 to exit...
+[EXEC       >] [....] [00:06:11.619] J:\lang\net\runtime\artifacts\tests\Debug\hmb\2\StandaloneApp3x\bundle\StandaloneApp.exe
+[EXEC       -] [....] [00:06:11.632] Waiting for process 32892 to exit...
+[EXEC       <] [ OK ] [00:06:11.981] J:\lang\net\runtime\artifacts\tests\Debug\hmb\2\StandaloneApp3x\bundle\StandaloneApp.exe exited with 0
+[EXEC       <] [ OK ] [00:07:44.867] ..\..\..\..\tests\Debug\hmb\1\AppWithSubDirs\publish\AppWithSubDirs.exe exited with 0
+[EXEC       >] [....] [00:08:33.280] J:\lang\net\runtime\artifacts\tests\Debug\hmb\3\StandaloneApp3x\bundle\StandaloneApp.exe
+[EXEC       -] [....] [00:08:33.297] Waiting for process 22144 to exit...
+[EXEC       <] [ OK ] [00:08:33.657] J:\lang\net\runtime\artifacts\tests\Debug\hmb\3\StandaloneApp3x\bundle\StandaloneApp.exe exited with 0
+[EXEC       >] [....] [00:08:42.481] J:\lang\net\runtime\artifacts\tests\Debug\hmb\1\AppWithSubDirs\bundle\AppWithSubDirs.exe
+[EXEC       -] [....] [00:08:42.684] Waiting for process 22252 to exit...
+[EXEC       <] [ OK ] [00:08:53.075] J:\lang\net\runtime\artifacts\tests\Debug\hmb\1\AppWithSubDirs\bundle\AppWithSubDirs.exe exited with 0
+[EXEC       >] [....] [00:10:12.569] J:\lang\net\runtime\artifacts\tests\Debug\hmb\2\AppWithSubDirs\publish\AppWithSubDirs.exe
+[EXEC       -] [....] [00:10:12.868] Waiting for process 11032 to exit...
+[EXEC       <] [ OK ] [00:13:08.914] J:\lang\net\runtime\artifacts\tests\Debug\hmb\2\AppWithSubDirs\publish\AppWithSubDirs.exe exited with 0
+[EXEC       >] [....] [00:14:03.925] J:\lang\net\runtime\artifacts\tests\Debug\hmb\2\AppWithSubDirs\bundle\AppWithSubDirs.exe
+[EXEC       -] [....] [00:14:04.502] Waiting for process 22940 to exit...
+[EXEC       >] [....] [00:14:08.044] J:\lang\net\runtime\artifacts\tests\Debug\hmb\19\StandaloneApp\bundle\StandaloneApp.exe
+[EXEC       -] [....] [00:14:08.758] Waiting for process 22568 to exit...
+[EXEC       <] [ OK ] [00:14:31.659] J:\lang\net\runtime\artifacts\tests\Debug\hmb\19\StandaloneApp\bundle\StandaloneApp.exe exited with 0
+[EXEC       <] [ OK ] [00:14:38.872] J:\lang\net\runtime\artifacts\tests\Debug\hmb\2\AppWithSubDirs\bundle\AppWithSubDirs.exe exited with 0
+[EXEC       >] [....] [00:15:05.427] ..\..\..\..\tests\Debug\hmb\3\AppWithSubDirs\publish\AppWithSubDirs.exe
+[EXEC       -] [....] [00:15:05.438] Waiting for process 8272 to exit...
+[EXEC       <] [ OK ] [00:15:10.768] ..\..\..\..\tests\Debug\hmb\3\AppWithSubDirs\publish\AppWithSubDirs.exe exited with 0
+[EXEC       >] [....] [00:15:11.992] J:\lang\net\runtime\artifacts\tests\Debug\hmb\3\AppWithSubDirs\bundle\AppWithSubDirs.exe
+[EXEC       -] [....] [00:15:12.006] Waiting for process 11504 to exit...
+[EXEC       <] [ OK ] [00:15:16.957] J:\lang\net\runtime\artifacts\tests\Debug\hmb\3\AppWithSubDirs\bundle\AppWithSubDirs.exe exited with 0
+  Finished:    Microsoft.NET.HostModel.Bundle.Tests
+=== TEST EXECUTION SUMMARY ===
+   Microsoft.NET.HostModel.Bundle.Tests  Total: 26, Errors: 0, Failed: 0, Skipped: 0, Time: 919.340s
+=== COMMAND LINE ===
+"J:\lang\net\runtime\.dotnet\dotnet.exe" exec --depsfile "J:\lang\net\runtime\artifacts\bin\Microsoft.NET.HostModel.Bundle.Tests\Debug\net6.0\Microsoft.NET.HostModel.Bundle.Tests.deps.json" --runtimeconfig "J:\lang\net\runtime\artifacts\bin\Microsoft.NET.HostModel.Bundle.Tests\Debug\net6.0\Microsoft.NET.HostModel.Bundle.Tests.runtimeconfig.json"  "J:\cache\nuget\cache\xunit.runner.console/2.4.1/tools/netcoreapp2.0/xunit.console.dll" "J:\lang\net\runtime\artifacts\bin\Microsoft.NET.HostModel.Bundle.Tests\Debug\net6.0\Microsoft.NET.HostModel.Bundle.Tests.dll" -noautoreporters -xml "J:\lang\net\runtime\artifacts\TestResults\Debug\Microsoft.NET.HostModel.Bundle.Tests_net6.0_x64.xml" -html "J:\lang\net\runtime\artifacts\TestResults\Debug\Microsoft.NET.HostModel.Bundle.Tests_net6.0_x64.html" -notrait category=failing > "J:\lang\net\runtime\artifacts\log\Debug\Microsoft.NET.HostModel.Bundle.Tests_net6.0_x64.log" 2>&1

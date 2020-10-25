@@ -32,19 +32,19 @@ namespace Z0
             Wf = wf.WithHost(Host).WithVerbosity(LogLevel.Babble);
         }
 
-        void Ran<C,T>(C @case, T data)
+        void Ran<C,T>(ExecutionFlow flow, C @case, T data)
         {
-            Wf.Ran2(delimit(@case, data));
+            Wf.Ran2(flow, delimit(@case, data));
         }
 
         [Op]
         public void Run()
         {
-            Wf.Running();
-            Ran(n0, test(n0).Format());
-            Ran(n1, test(n1).Format());
-            Ran(n2, test(n2).Format());
-            Wf.Ran();
+            var flow = Wf.Running();
+            Ran(flow, n0, test(n0).Format());
+            Ran(flow, n1, test(n1).Format());
+            Ran(flow, n2, test(n2).Format());
+            Wf.Ran(flow);
         }
 
         [Op]

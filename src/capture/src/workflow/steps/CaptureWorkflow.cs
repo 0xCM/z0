@@ -43,7 +43,7 @@ namespace Z0
 
         public void Run()
         {
-            Wf.Running();
+            var flow = Wf.Running();
 
             Wf.Status(enclose(Wf.Init.PartIdentities));
 
@@ -57,7 +57,7 @@ namespace Z0
                 Wf.Error(e);
             }
 
-            Wf.Ran();
+            Wf.Ran(flow);
         }
     }
 }
