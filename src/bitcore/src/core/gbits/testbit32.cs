@@ -18,50 +18,50 @@ namespace Z0
         /// <param name="src">The value to test</param>
         /// <param name="pos">The bit index to check</param>
         [MethodImpl(Inline), TestBit, Closures(Integers)]
-        public static bit testbit<T>(T src, byte pos)
+        public static Bit32 testbit32<T>(T src, byte pos)
             where T : unmanaged
-                => testbit_u(src,pos);
+                => testbit_u32(src,pos);
 
         [MethodImpl(Inline)]
-        static bit testbit_u<T>(T src, byte pos)
+        static Bit32 testbit_u32<T>(T src, byte pos)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
-                 return Bits.testbit(uint8(src), pos);
+                 return Bits.testbit32(uint8(src), pos);
             else if(typeof(T) == typeof(ushort))
-                 return Bits.testbit(uint16(src), pos);
+                 return Bits.testbit32(uint16(src), pos);
             else if(typeof(T) == typeof(uint))
-                 return Bits.testbit(uint32(src), pos);
+                 return Bits.testbit32(uint32(src), pos);
             else if(typeof(T) == typeof(ulong))
-                 return Bits.testbit(uint64(src), pos);
+                 return Bits.testbit32(uint64(src), pos);
             else
-                return testbit_i(src,pos);
+                return testbit_i32(src,pos);
         }
 
         [MethodImpl(Inline)]
-        static bit testbit_i<T>(T src, byte pos)
+        static Bit32 testbit_i32<T>(T src, byte pos)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
-                 return Bits.testbit(int8(src), pos);
+                 return Bits.testbit32(int8(src), pos);
             else if(typeof(T) == typeof(short))
-                 return Bits.testbit(int16(src), pos);
+                 return Bits.testbit32(int16(src), pos);
             else if(typeof(T) == typeof(int))
-                 return Bits.testbit(int32(src), pos);
+                 return Bits.testbit32(int32(src), pos);
             else if(typeof(T) == typeof(long))
-                 return Bits.testbit(int64(src), pos);
+                 return Bits.testbit32(int64(src), pos);
             else
-                return testbit_f(src,pos);
+                return testbit_f32(src,pos);
         }
 
         [MethodImpl(Inline)]
-        static bit testbit_f<T>(T src, byte pos)
+        static Bit32 testbit_f32<T>(T src, byte pos)
             where T : unmanaged
         {
             if(typeof(T) == typeof(float))
-                 return Bits.testbit(float32(src), pos);
+                 return Bits.testbit32(float32(src), pos);
             else if(typeof(T) == typeof(double))
-                 return Bits.testbit(float64(src), pos);
+                 return Bits.testbit32(float64(src), pos);
             else
                 throw no<T>();
         }

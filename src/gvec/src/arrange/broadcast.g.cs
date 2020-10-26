@@ -30,7 +30,7 @@ namespace Z0
             ref var dst = ref z.vref(ref buffer);
             var length = min(count, bitsize<S>());
             for(var i=0u; i<length; i++)
-                seek(dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
+                seek(dst, i) = gbits.testbit32(src,(byte)i) ? enabled : default;
             return buffer;
         }
 
@@ -51,7 +51,7 @@ namespace Z0
             ref var dst = ref z.vref(ref buffer);
             var length = min(count, bitsize<S>());
             for(var i=0u; i<length; i++)
-                seek(dst, i) = gbits.testbit(src,(byte)i) ? enabled : default;
+                seek(dst, i) = gbits.testbit32(src,(byte)i) ? enabled : default;
             return buffer;
         }
 
@@ -70,7 +70,7 @@ namespace Z0
         {
             var length = z.min(dst.CellCount, bitsize<S>());
             for(var i=0; i< length; i++)
-                dst[i] = gbits.testbit(src,(byte)i) ? enabled : default;
+                dst[i] = gbits.testbit32(src,(byte)i) ? enabled : default;
             return ref dst;
         }
 
@@ -89,7 +89,7 @@ namespace Z0
         {
             var length = z.min(dst.CellCount, bitsize<S>());
             for(var i=0; i< length; i++)
-                dst[i] = gbits.testbit(src,(byte)i) ? enabled : default;
+                dst[i] = gbits.testbit32(src,(byte)i) ? enabled : default;
             return ref dst;
         }
 

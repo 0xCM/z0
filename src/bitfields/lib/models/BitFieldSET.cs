@@ -19,7 +19,7 @@ namespace Z0
     /// <typeparam name="E">A indexing enumeration</typeparam>
     public readonly ref struct BitField<S,E,T>
         where S : IScalarBitField<T>
-        where E : unmanaged, Enum
+        where E : unmanaged
         where T : unmanaged
     {
         /// <summary>
@@ -42,7 +42,7 @@ namespace Z0
         /// <param name="index">The segment index</param>
         [MethodImpl(Inline)]
         public ref readonly BitFieldSegment Segment(E index)
-            => ref skip(Segments, Enums.scalar<E,byte>(index));
+            => ref skip(Segments, z.@as<E,uint>(index));
 
         /// <summary>
         /// Extracts a contiguous range of bits from the source value per the segment specification

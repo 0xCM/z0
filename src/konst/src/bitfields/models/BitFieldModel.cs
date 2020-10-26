@@ -11,24 +11,15 @@ namespace Z0
 
     public readonly struct BitFieldModel
     {
-        readonly StringRef FieldName;
-
         public readonly uint FieldCount;
 
         readonly TableSpan<BitFieldSegment> _Segments;
 
         [MethodImpl(Inline)]
-        public BitFieldModel(string name, uint count, uint width, BitFieldSegment[] segments)
+        public BitFieldModel(uint count, uint width, BitFieldSegment[] segments)
         {
-            FieldName = name;
             FieldCount = count;
             _Segments = segments;
-        }
-
-        public string BitFieldName
-        {
-            [MethodImpl(Inline)]
-            get => FieldName;
         }
 
         public ReadOnlySpan<BitFieldSegment> Segments
@@ -38,12 +29,8 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public byte Width(int index)
+        public uint Width(int index)
             => Segment(index).Width;
-
-        [MethodImpl(Inline)]
-        public string Name(int index)
-            => Segment(index).Name;
 
         [MethodImpl(Inline)]
         public uint Position(int index)

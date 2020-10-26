@@ -12,7 +12,7 @@ namespace Z0
         /// <summary>
         /// A unique name that identifies the segment
         /// </summary>
-        string Name {get;}
+        string Name  =>"";
     }
 
     /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// <summary>
         /// The number of bits in the segment
         /// </summary>
-        byte Width {get;}
+        uint Width {get;}
     }
 
     public interface IBitFieldSegment<F,T> : IBitFieldSegment<T>

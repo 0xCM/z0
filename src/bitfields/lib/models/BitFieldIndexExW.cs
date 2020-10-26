@@ -10,8 +10,8 @@ namespace Z0
     using static Konst;
 
     public readonly struct BitFieldIndex<E,W>
-        where E : unmanaged, Enum
-        where W : unmanaged, Enum
+        where E : unmanaged
+        where W : unmanaged
     {
         readonly BitFieldIndexEntry<E,W>[] Storage;
 
@@ -25,9 +25,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public BitFieldIndex(BitFieldIndexEntry<E,W>[] src)
-        {
-            Storage = src;
-        }
+            => Storage = src;
 
         public ReadOnlySpan<BitFieldIndexEntry<E,W>> View
         {
@@ -56,7 +54,7 @@ namespace Z0
         public ref BitFieldIndexEntry<E,W> this[E index]
         {
             [MethodImpl(Inline)]
-            get => ref Storage[Enums.scalar<E,int>(index)];
+            get => ref Storage[z.@as<E,int>(index)];
         }
 
         public ref BitFieldIndexEntry<E,W> this[long index]

@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="src">The input from which a bit will be selected</param>
         [MethodImpl(Inline), Mux]
         public static Bit32 mux(byte src, byte control)
-            => gbits.testbit(src, control);
+            => gbits.testbit32(src, control);
 
         /// <summary>
         /// Uses the four bits of the control operand to select one of 16 bits from the input operand
@@ -44,7 +44,7 @@ namespace Z0
         /// <param name="control">Specifies the output selection</param>
         [MethodImpl(Inline), Mux]
         public static Bit32 mux(ushort src, byte control)
-            => gbits.testbit(src, control);
+            => gbits.testbit32(src, control);
 
         /// <summary>
         /// Uses the first 5 bits of the control operand to select one of 32 bits from the input operand
@@ -53,7 +53,7 @@ namespace Z0
         /// <param name="control">Specifies the output selection</param>
         [MethodImpl(Inline), Mux]
         public static Bit32 mux(uint src, byte control)
-            => gbits.testbit(src, control);
+            => gbits.testbit32(src, control);
 
         /// <summary>
         /// Uses the first 6 bits of the control operand to select one of 64 bits from the source operand
@@ -62,6 +62,6 @@ namespace Z0
         /// <param name="control">Specifies the output selection</param>
         [MethodImpl(Inline), Mux]
         public static Bit32 mux(ulong src, byte control)
-            => gbits.testbit(src, control);
+            => gbits.testbit32(src, control);
     }
 }

@@ -14,7 +14,7 @@ namespace Z0
     /// Associates the declaration order of an enum literal with the corresponding literal value
     /// </summary>
     public readonly struct BitFieldIndexEntry<W> : IBitFieldIndexEntry<BitFieldIndexEntry<W>,W>
-        where W : unmanaged, Enum
+        where W : unmanaged
     {
         public uint FieldIndex {get;}
 
@@ -27,8 +27,8 @@ namespace Z0
             => new BitFieldIndexEntry(src.FieldIndex, src.FieldName, uint32(src.FieldWidth));
 
         [MethodImpl(Inline)]
-        public static bool operator ==(BitFieldIndexEntry<W> lhs, BitFieldIndexEntry<W> rhs)
-            => lhs.Equals(rhs);
+        public static bool operator ==(BitFieldIndexEntry<W> a, BitFieldIndexEntry<W> b)
+            => a.Equals(b);
 
         [MethodImpl(Inline)]
         public static bool operator !=(BitFieldIndexEntry<W> lhs, BitFieldIndexEntry<W> rhs)

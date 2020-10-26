@@ -302,7 +302,7 @@ namespace Z0
                     Claim.eq(seqlen, bitwidth<T>());
 
                     for(byte j = 0; j < seqlen; j++)
-                        Claim.Eq(gbits.testbit(x0, j), (Bit32)(x1[j] == 1));
+                        Claim.Eq(gbits.testbit32(x0, j), (Bit32)(x1[j] == 1));
                 }
 
             }

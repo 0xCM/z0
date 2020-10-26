@@ -60,7 +60,7 @@ namespace Z0
         public Bit32 this[byte i]
         {
             [MethodImpl(Inline)]
-            get => gbits.testbit(data,i);
+            get => gbits.testbit32(data,i);
         }
 
         /// <summary>

@@ -18,8 +18,8 @@ namespace Z0
         /// <param name="width">The segment width</param>
         /// <param name="seg">The inclusive left/right segment index boundaries</param>
         [MethodImpl(Inline), Op]
-        public static BitFieldSegment segment(string name, byte width, in ConstPair<uint> boundary)
-            => new BitFieldSegment(name, width, boundary);
+        public static BitFieldSegment segment(byte width, in ConstPair<uint> boundary)
+            => new BitFieldSegment(width, boundary);
 
         /// <summary>
         /// Describes an index-identified model segment
@@ -32,36 +32,13 @@ namespace Z0
             var width = src.Width(index);
             var i0 = src.Position(index);
             var i1 = (uint)(i0 + width);
-            return segment(src.Name(index), width, (i0, i1));
+            return segment((byte)width, (i0, i1));
         }
-
-        /// <summary>
-        /// Defines a bitfield segment
-        /// </summary>
-        /// <param name="name">The segment name</param>
-        /// <param name="index">The segment index</param>
-        /// <param name="i0">The position of the first bit in the segment</param>
-        /// <param name="i1">The position of the last bit in the segment</param>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static BitFieldSegment<T> segment<T>(string name, byte width, in ConstPair<T> boundary)
-            where T : unmanaged
-                => new BitFieldSegment<T>(name, width, boundary);
-
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public ref readonly BitFieldSegment segment<T>(in BitField<T> field, int index)
-            where T : unmanaged
-                => ref field.Segment(index);
-
-        [MethodImpl(Inline)]
-        public static BitFieldSegment segment<I,W>(BitField64<I,W> src, I index)
-            where I : unmanaged, Enum
-            where W : unmanaged, Enum
-                => z.skip(src.Spec.Segments, Enums.scalar<I,byte>(index));
 
         [MethodImpl(Inline)]
         public static BitFieldSegment segment<E>(E id, byte startpos, byte endpos)
             where E : unmanaged, Enum
-                => segment(id.ToString(),(byte)(endpos - startpos + 1), (startpos, endpos));
+                => segment((byte)(endpos - startpos + 1), (startpos, endpos));
 
         internal static BitFieldSegment segment<I,W>(in BitFieldIndexEntry<I,W> entry, ref byte start)
             where I : unmanaged, Enum
@@ -70,7 +47,7 @@ namespace Z0
             var i = Enums.scalar<I,byte>(entry.FieldIndex);
             var width = Enums.scalar<W,byte>(entry.FieldWidth);
             var end = (byte)(start + width - 1);
-            var seg = BitFields.segment(entry.FieldName, width, (start, end));
+            var seg = BitFields.segment(width, (start, end));
             start = (byte)(end + 1);
             return seg;
         }

@@ -19,7 +19,7 @@ namespace Z0
         [MethodImpl(Inline), TestBit, Closures(Closure)]
         public static Bit32 testbit<T>(BitVector<T> x, byte index)
             where T : unmanaged
-                => gbits.testbit(x.Data, index);
+                => gbits.testbit32(x.Data, index);
 
         /// <summary>
         /// Determines whether an index-identified bit is enabled
@@ -30,7 +30,7 @@ namespace Z0
         public static Bit32 testbit<N,T>(BitVector<N,T> x, byte index)
             where T : unmanaged
             where N : unmanaged, ITypeNat
-                => gbits.testbit(x.Data, index);
+                => gbits.testbit32(x.Data, index);
 
         /// <summary>
         /// Determines whether a bit is enabled

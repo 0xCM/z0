@@ -16,12 +16,12 @@ namespace Z0
     {
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static string format(in BitFieldSegment src)
-                => string.Format(SegRenderPattern, src.Name, src.StartPos, src.EndPos);
+            => string.Format(SegRenderPattern, src.StartPos, src.EndPos);
 
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static string format<T>(in BitFieldSegment<T> src)
             where T : unmanaged
-                => string.Format(SegRenderPattern, src.Name, src.StartPos, src.EndPos);
+                => string.Format(SegRenderPattern, src.StartPos, src.EndPos);
 
         /// <summary>
         /// Computes the canonical format for a contiguous field segment sequence
@@ -42,7 +42,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 ref readonly var seg = ref z.skip(src,i);
-                formatted.Append(string.Format(SegRenderPattern, seg.Name, seg.StartPos, seg.EndPos));
+                formatted.Append(string.Format(SegRenderPattern, seg.StartPos, seg.EndPos));
                 if(i != last)
                     formatted.Append(Sep);
             }
@@ -66,7 +66,6 @@ namespace Z0
             return total;
         }
 
-
         public static string format(in BitFieldModel src)
             => lines(src).Intersperse("\r\n").Concat();
 
@@ -78,14 +77,13 @@ namespace Z0
             {
                 var index = i;
                 var indexLabel = index.ToString().PadLeft(2, Chars.D0);
-                var name = src.Name(i);
                 var width = src.Width(i);
                 var widthLabel = width.ToString().PadLeft(2, Chars.D0);
                 var left = src.Position(i);
                 var leftLabel = left.ToString().PadLeft(2, Chars.D0);
                 var right = left + width - 1;
                 var rightLabel = right.ToString().PadLeft(2, Chars.D0);
-                dst[i] = $"{src.BitFieldName} | {name} | {indexLabel} | {widthLabel} | [{leftLabel}..{rightLabel}]";
+                dst[i] = $"{index} | {indexLabel} | {widthLabel} | [{leftLabel}..{rightLabel}]";
             }
             return dst;
         }
@@ -115,9 +113,8 @@ namespace Z0
 
         static string Format<T>(IBitFieldSegment<T> src)
             where T : unmanaged
-                => $"{src.Name}({src.Width}:{src.StartPos}..{src.EndPos})";
+                => $"[{src.Width}:{src.StartPos}..{src.EndPos}]";
 
-
-        const string SegRenderPattern = "{0}[{1},{2}]";
+        const string SegRenderPattern = "[{1},{2}]";
     }
 }

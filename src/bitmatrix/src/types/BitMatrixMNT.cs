@@ -118,7 +118,7 @@ namespace Z0
             get
             {
                 var index = TableIndex.Create(row, col, RowDim, ColDim, default(T));
-                return gbits.testbit(Data[index.CellIndex], index.BitOffset);
+                return gbits.testbit32(Data[index.CellIndex], index.BitOffset);
             }
 
             [MethodImpl(Inline)]

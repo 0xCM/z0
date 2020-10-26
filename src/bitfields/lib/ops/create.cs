@@ -42,7 +42,7 @@ namespace Z0
         /// </summary>
         /// <param name="spec">The bitfield definition</param>
         /// <typeparam name="T">The type over which the bitfield is defined</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static BitField<T> create<T>(in BitFieldSpec spec)
             where T : unmanaged
                 => new BitField<T>(spec);

@@ -18,7 +18,7 @@ namespace Z0
     /// <typeparam name="E">A indexing enumeration</typeparam>
     /// <typeparam name="T">The numeric type over which the bitfield is defined</typeparam>
     public readonly ref struct BitField<E,T>
-        where E : unmanaged, Enum
+        where E : unmanaged
         where T : unmanaged
     {
         /// <summary>

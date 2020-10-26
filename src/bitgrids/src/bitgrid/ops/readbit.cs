@@ -16,7 +16,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static Bit32 readbit<T>(in T src, int bitpos)
             where T : unmanaged
-                => gbits.testbit(readcell(in src, bitpos), (byte)(bitpos % bitwidth<T>()));
+                => gbits.testbit32(readcell(in src, bitpos), (byte)(bitpos % bitwidth<T>()));
 
         /// <summary>
         /// Reads a cell determined by a linear bit position

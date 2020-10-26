@@ -13,9 +13,9 @@ namespace Z0
     partial class gmath
     {
         [MethodImpl(Inline)]
-        public static uint sll<E>(Bit32 x, E offset)
+        public static uint sll<E>(bit x, E offset)
             where E : unmanaged, Enum
-                => sll((uint)x, Enums.scalar<E,byte>(offset));
+                => sll((uint)x, @as<E,byte>(offset));
 
         [MethodImpl(Inline)]
         public static T sll<T,E>(T x, E offset)

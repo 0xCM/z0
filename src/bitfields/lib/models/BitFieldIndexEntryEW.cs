@@ -13,8 +13,8 @@ namespace Z0
     /// Associates the declaration order of an enum literal with the corresponding literal value
     /// </summary>
     public readonly struct BitFieldIndexEntry<E,W> : IBitFieldIndexEntry<BitFieldIndexEntry<E,W>,E,W>
-        where E : unmanaged, Enum
-        where W : unmanaged, Enum
+        where E : unmanaged
+        where W : unmanaged
     {
         public E FieldIndex {get;}
 
@@ -41,8 +41,8 @@ namespace Z0
         public string Format()
         {
             var t = typeof(E).Name;
-            var i = Enums.scalar<E,byte>(FieldIndex);
-            var w = Enums.scalar<W,byte>(FieldWidth);
+            var i = z.@as<E,byte>(FieldIndex);
+            var w = z.@as<W,byte>(FieldWidth);
             return $"{t}[{i}:{w}] = {FieldName}";
         }
 
@@ -54,7 +54,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public int CompareTo(BitFieldIndexEntry<E,W> other)
-            => FieldIndex.CompareTo(other.FieldIndex);
+            => z.@as<E,uint>(FieldIndex).CompareTo(z.@as<E,uint>(other.FieldIndex));
 
         public override string ToString()
             => Format();

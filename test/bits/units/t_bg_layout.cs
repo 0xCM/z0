@@ -81,7 +81,7 @@ namespace Z0
             for(var row = 0; row < map.RowCount; row++)
             for(var col = 0; col < map.ColCount; col++)
             {
-                var actual = gbits.testbit(src, (byte)map.Position(row,col));
+                var actual = gbits.testbit32(src, (byte)map.Position(row,col));
                 Claim.Require(actual == state);
                 state = !state;
             }

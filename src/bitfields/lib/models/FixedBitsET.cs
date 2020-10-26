@@ -10,9 +10,9 @@ namespace Z0
     using static Konst;
 
     public readonly ref struct FixedBits<E,T,W>
-        where E : unmanaged, Enum
+        where E : unmanaged
         where T : unmanaged
-        where W : unmanaged, Enum
+        where W : unmanaged
     {
         readonly FixedBits<T> Data;
 

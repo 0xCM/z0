@@ -34,7 +34,7 @@ namespace Z0
 
     public interface IBitFieldIndexEntry<F,W> : IBitFieldIndexEntry<F>
         where F : IBitFieldIndexEntry
-        where W : unmanaged, Enum
+        where W : unmanaged
     {
         /// <summary>
         /// The number of bits covered by the field
@@ -47,8 +47,8 @@ namespace Z0
 
     public interface IBitFieldIndexEntry<F,E,W> : IBitFieldIndexEntry<F,W>
        where F : IBitFieldIndexEntry
-       where E : unmanaged, Enum
-       where W : unmanaged, Enum
+       where E : unmanaged
+       where W : unmanaged
     {
         /// <summary>
         /// The zero-based and sequential field index
@@ -58,7 +58,7 @@ namespace Z0
         uint IBitFieldIndexEntry.FieldIndex
         {
             [MethodImpl(Inline)]
-            get => Enums.scalar<E,uint>(FieldIndex);
+            get => z.@as<E,uint>(FieldIndex);
         }
 
         string IBitFieldIndexEntry.FieldName

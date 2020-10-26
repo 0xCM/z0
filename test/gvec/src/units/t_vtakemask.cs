@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.Intrinsics;
-    
+
     using static Konst;
     using static Memories;
 
@@ -61,11 +61,11 @@ namespace Z0
                     var a = f.Invoke(x);
                     var y = v8u(x);
                     for(var j=0; j<count; j++)
-                        Claim.Eq(gbits.testbit(vcell(y,j), 7), gbits.testbit(a,(byte)j));                
+                        Claim.Eq(gbits.testbit32(vcell(y,j), 7), gbits.testbit32(a,(byte)j));
                 }
             }
 
-            CheckAction(check, CaseName(f));            
+            CheckAction(check, CaseName(f));
         }
 
         void vtakemask_check<T>(N256 w, T t = default)
@@ -74,16 +74,16 @@ namespace Z0
             const int count = 32;
             var f = VSvc.vtakemask(w,t);
             var r = Random.VectorEmitter(w,t);
-            
+
             void check()
-            {                                
+            {
                 for(var rep=0; rep<RepCount; rep++)
-                {                    
+                {
                     var x = r.Invoke();
                     var a = f.Invoke(x);
                     var y = v8u(x);
                     for(var j=0; j<count; j++)
-                        Claim.Eq(gbits.testbit(vcell(y,j), 7), gbits.testbit(a,(byte)j));                
+                        Claim.Eq(gbits.testbit32(vcell(y,j), 7), gbits.testbit32(a,(byte)j));
                 }
             }
 

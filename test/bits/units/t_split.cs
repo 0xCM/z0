@@ -45,21 +45,21 @@ namespace Z0
         {
             static ref byte pack(byte x0, byte x1, byte x2, byte x3, byte x4, byte x5, byte x6, byte x7, byte pos, ref byte dst)
             {
-                if(gbits.testbit(x0, pos))
+                if(gbits.testbit32(x0, pos))
                     dst = Bits.enable(dst, 0);
-                if(gbits.testbit(x1, pos))
+                if(gbits.testbit32(x1, pos))
                     dst = Bits.enable(dst, 1);
-                if(gbits.testbit(x2, pos))
+                if(gbits.testbit32(x2, pos))
                     dst = Bits.enable(dst, 2);
-                if(gbits.testbit(x3, pos))
+                if(gbits.testbit32(x3, pos))
                     dst = Bits.enable(dst, 3);
-                if(gbits.testbit(x4, pos))
+                if(gbits.testbit32(x4, pos))
                     dst = Bits.enable(dst, 4);
-                if(gbits.testbit(x5, pos))
+                if(gbits.testbit32(x5, pos))
                     dst = Bits.enable(dst, 5);
-                if(gbits.testbit(x6, pos))
+                if(gbits.testbit32(x6, pos))
                     dst = Bits.enable(dst, 6);
-                if(gbits.testbit(x7, pos))
+                if(gbits.testbit32(x7, pos))
                     dst = Bits.enable(dst, 7);
                 return ref dst;
             }

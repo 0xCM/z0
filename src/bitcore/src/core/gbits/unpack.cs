@@ -23,7 +23,7 @@ namespace Z0
             var k = 0;
             for(var i=0; i < src.Length; i++)
             for(byte j=0; j < srcsize; j++, k++)
-                seek(target, k) = testbit(skip(src,i), j);
+                seek(target, k) = testbit32(skip(src,i), j);
             return dst;
         }
 
@@ -63,7 +63,7 @@ namespace Z0
         {
             var len = bitsize<S>();
             for(var i=0u; i< len; i++)
-                seek(dst,offset + i)  = testbit(src, (byte)i) == Bit32.On ? one<T>() : zero<T>();
+                seek(dst,offset + i)  = testbit32(src, (byte)i) == Bit32.On ? one<T>() : zero<T>();
             return dst;
         }
 
@@ -88,7 +88,7 @@ namespace Z0
                 var k = 0u;
                 for(var i=0; i < src.Length; i++)
                 for(byte j=0; j < srcsize; j++)
-                    seek(dst,k++)  = testbit(skip(src,i), j) == Bit32.On ? one<T>() : zero<T>();
+                    seek(dst,k++)  = testbit32(skip(src,i), j) == Bit32.On ? one<T>() : zero<T>();
                 return dst;
             }
         }

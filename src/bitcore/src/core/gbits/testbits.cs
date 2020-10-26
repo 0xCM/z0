@@ -26,7 +26,7 @@ namespace Z0
             ref var loc = ref seek(first(dst), offset);
 
             for(var i=0; i<n; i++)
-                seek(loc, i) = (byte)testbit(src, (byte)i);
+                seek(loc, i) = (byte)testbit32(src, (byte)i);
             return dst;
         }
 

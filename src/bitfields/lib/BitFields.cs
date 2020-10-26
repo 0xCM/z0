@@ -13,6 +13,8 @@ namespace Z0
     [ApiHost("api")]
     public partial class BitFields : IApiHost<BitFields>
     {
+        const NumericKind Closure = UnsignedInts;
+
         [MethodImpl(Inline)]
         public static BitField64<E> bf64<E>(E state)
             where E : unmanaged, Enum

@@ -272,7 +272,7 @@ namespace Z0
         public Bit32 this[int index]
         {
             [MethodImpl(Inline)]
-            get => gbits.testbit(Data, (byte)index);
+            get => gbits.testbit32(Data, (byte)index);
 
             [MethodImpl(Inline)]
             set => Data = gbits.setbit(Data, index, value);
@@ -284,7 +284,7 @@ namespace Z0
         public Bit32 this[byte index]
         {
             [MethodImpl(Inline)]
-            get => gbits.testbit(Data, (byte)index);
+            get => gbits.testbit32(Data, (byte)index);
 
             [MethodImpl(Inline)]
             set => Data = gbits.setbit(Data, index, value);
