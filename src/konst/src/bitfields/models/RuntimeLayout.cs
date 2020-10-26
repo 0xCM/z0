@@ -6,15 +6,13 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
-    using System.Reflection;
 
     using static Part;
 
     partial struct BitFieldParts
     {
         /// <summary>
-        /// Characterizes the layout of a bitfield at runtime
+        /// Defines the layout of a bitfield at runtime
         /// </summary>
         public readonly ref struct RuntimeLayout
         {

@@ -10,6 +10,11 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using api = DataLayouts;
+
+    /// <summary>
+    /// Defines identity for a <see cref 'DataLayout{T}'/> component
+    /// </summary>
     public readonly struct LayoutIdentity<T> : ITextual
         where T : unmanaged
     {
@@ -18,7 +23,7 @@ namespace Z0
         public T Kind {get;}
 
         [MethodImpl(Inline)]
-        public LayoutIdentity(uint index, T kind)
+        internal LayoutIdentity(uint index, T kind)
         {
             Index = index;
             Kind = kind;
@@ -26,9 +31,13 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => Index.ToString();
+            => api.format(this);
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator LayoutIdentity(LayoutIdentity<T> src)
+            => api.untyped(src);
     }
 }

@@ -43,7 +43,7 @@ namespace Z0
     /// <summary>
     /// Characterizes a bitfield from which segments can be specified/extracted
     /// </summary>
-    /// <typeparam name="I">The bifield index type that defines 0-based sequential index corresponding to each bitfield segment</typeparam>
+    /// <typeparam name="I">The bitfield index type that defines 0-based sequential index corresponding to each bitfield segment</typeparam>
     /// <typeparam name="P">The bitfield position type</typeparam>
     /// <typeparam name="T">The bitfield content type from which segments are extracted/specified</typeparam>
     public interface IBitField<I,P,T> : IBitField<I,T>

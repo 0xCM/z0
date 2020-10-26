@@ -14,53 +14,43 @@ namespace Z0
     using api = DataLayouts;
 
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct DataLayout : IDataLayout<DataLayout>
+    public readonly struct LayoutPartition : IDataLayout<LayoutPartition>
     {
+        /// <summary>
+        /// Defines enclosure-relative partition identity
+        /// </summary>
         public LayoutIdentity Id {get;}
 
-        readonly TableSpan<LayoutPartition> Data;
+        readonly ClosedInterval<ulong> Range;
+
+        /// <summary>
+        /// The enclosure-relative partition index
+        /// </summary>
+        public uint Index => Id.Index;
 
         [MethodImpl(Inline)]
-        public DataLayout(LayoutIdentity id, LayoutPartition[] parts)
+        public LayoutPartition(LayoutIdentity id, ulong start, ulong end)
         {
             Id = id;
-            Data = parts;
+            Range = new ClosedInterval<ulong>(start,end);
         }
 
-        public uint Index
+        public ulong Left
         {
             [MethodImpl(Inline)]
-            get => Id.Index;
+            get => Range.Min;
         }
 
-        public uint PartitionCount
+        public ulong Right
         {
             [MethodImpl(Inline)]
-            get => Data.Count;
-        }
-
-        public ReadOnlySpan<LayoutPartition> Partitions
-        {
-            [MethodImpl(Inline)]
-            get => Data.View;
-        }
-
-        public ref LayoutPartition FirstPartition
-        {
-            [MethodImpl(Inline)]
-            get => ref Data.First;
-        }
-
-        public ref LayoutPartition this[uint index]
-        {
-            [MethodImpl(Inline)]
-            get => ref Data[index];
+            get => Range.Max;
         }
 
         public ulong Width
         {
             [MethodImpl(Inline)]
-            get => api.width(Partitions);
+            get => Range.Width;
         }
 
         [MethodImpl(Inline)]

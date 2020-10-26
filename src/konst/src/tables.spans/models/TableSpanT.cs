@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct TableSpan<T> : ITableSpan<T>
+    public readonly struct TableSpan<T> : ITableSpan<T>, ITextual
         where T : struct
     {
         public static TableSpan<T> Empty
@@ -98,5 +98,11 @@ namespace Z0
             for(var i=0; i<count; i++)
                 f(skip(src,i));
         }
+
+        public string Format()
+            => delimit(Data).Format();
+
+        public override string ToString()
+            => Format();
     }
 }

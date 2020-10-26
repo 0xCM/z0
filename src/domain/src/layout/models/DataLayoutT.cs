@@ -14,14 +14,15 @@ namespace Z0
     using api = DataLayouts;
 
     [StructLayout(LayoutKind.Sequential)]
-    public readonly struct SegmentSpec : IDataLayout<SegmentSpec,SegmentPartition>
+    public readonly struct DataLayout<T> : IDataLayout<DataLayout<T>,LayoutPartition<T>,T>
+        where T : unmanaged
     {
-        public LayoutIdentity Id {get;}
+        public LayoutIdentity<T> Id {get;}
 
-        readonly TableSpan<SegmentPartition> Data;
+        readonly TableSpan<LayoutPartition<T>> Data;
 
         [MethodImpl(Inline)]
-        public SegmentSpec(LayoutIdentity id, SegmentPartition[] parts)
+        public DataLayout(LayoutIdentity<T> id, LayoutPartition<T>[] parts)
         {
             Id = id;
             Data = parts;
@@ -33,25 +34,31 @@ namespace Z0
             get => Id.Index;
         }
 
-        public uint SectionCount
+        public uint PartitionCount
         {
             [MethodImpl(Inline)]
             get => Data.Count;
         }
 
-        public ReadOnlySpan<SegmentPartition> Sections
+        public TableSpan<LayoutPartition<T>> Storage
+        {
+            [MethodImpl(Inline)]
+            get => Data;
+        }
+
+        public ReadOnlySpan<LayoutPartition<T>> Partitions
         {
             [MethodImpl(Inline)]
             get => Data.View;
         }
 
-        public ref SegmentPartition FirstSection
+        public ref LayoutPartition<T> FirstPartition
         {
             [MethodImpl(Inline)]
             get => ref Data.First;
         }
 
-        public ref SegmentPartition this[uint index]
+        public ref LayoutPartition<T> this[uint index]
         {
             [MethodImpl(Inline)]
             get => ref Data[index];
@@ -60,7 +67,7 @@ namespace Z0
         public ulong Width
         {
             [MethodImpl(Inline)]
-            get => api.width(Sections);
+            get => api.width(Partitions);
         }
 
         [MethodImpl(Inline)]
@@ -69,5 +76,9 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static implicit operator DataLayout(DataLayout<T> src)
+            => api.untyped(src);
     }
 }

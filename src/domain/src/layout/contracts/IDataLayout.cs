@@ -31,10 +31,21 @@ namespace Z0
         where H : struct, IDataLayout<H,S>
         where S : struct
     {
-        ReadOnlySpan<S> Sections {get;}
+        ReadOnlySpan<S> Partitions {get;}
+
+        uint PartitionCount
+            => (uint)Partitions.Length;
+    }
 
 
-        uint SectionCount
-            => (uint)Sections.Length;
+    public interface IDataLayout<H,S,T> : IDataLayout<H,S>
+        where H : struct, IDataLayout<H,S,T>
+        where S : struct
+        where T : unmanaged
+    {
+        new LayoutIdentity<T> Id {get;}
+
+        LayoutIdentity IDataLayout.Id
+            => Id;
     }
 }

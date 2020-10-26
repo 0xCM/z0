@@ -93,7 +93,7 @@ namespace Z0
                 ref readonly var input = ref first(src);
                 var result = default(T);
 
-                for(var i=0; i< src.Length; i++)
+                for(var i=0; i<src.Length; i++)
                     result = gmath.add(result, skip(input,i));
                 return result;
             }
