@@ -7,9 +7,9 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
 
-    public enum CorSigKind
+    public enum CorSigKind : byte
     {
-        None = 0,
+        Default = 0,
 
         MethodDef,
 
@@ -22,6 +22,14 @@ namespace Z0
         Property,
 
         LocalVar
+    }
+
+
+    public enum CorSigField : byte
+    {
+        None = 0,
+
+        CallingConvention = 1,
     }
 
     public interface ICorSig<T>
@@ -62,7 +70,5 @@ namespace Z0
         {
             public CorSigKind Kind => CorSigKind.LocalVar;
         }
-
     }
-
 }

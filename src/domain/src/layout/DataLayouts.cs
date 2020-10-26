@@ -14,5 +14,13 @@ namespace Z0
     public readonly partial struct DataLayouts
     {
         const NumericKind Closure = UnsignedInts;
+
+        [Op]
+        public static DataLayout<CorSigField> coresig()
+        {
+            var id = identify(0, CorSigField.None);
+            var p0 = partition(0, CorSigField.CallingConvention, 0, 3);
+            return specify(0, id, p0);
+        }
     }
 }

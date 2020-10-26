@@ -21,6 +21,11 @@ namespace Z0
             where T : unmanaged
                 => new DataLayout<T>(identify(index, kind), parts);
 
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static DataLayout<T> specify<T>(uint index, LayoutIdentity<T> id, params LayoutPartition<T>[] parts)
+            where T : unmanaged
+                => new DataLayout<T>(id, parts);
+
         [Op, Closures(Closure)]
         public static DataLayout<T> specify<T>(uint index, T kind, uint count)
             where T : unmanaged
