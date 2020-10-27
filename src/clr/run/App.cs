@@ -41,8 +41,7 @@ ref struct Runner
     {
         Wf.Running(Id, Part);
 
-        EmitEnums.run(Wf);
-        EmitClrHandles.run(Wf);
+
         Wf.Ran(Id, Part);
     }
 }

@@ -9,6 +9,12 @@ namespace Z0
     using static ApiNameAtoms;
     using static CmdCodeAtoms;
 
+    [ApiHost]
+    public static partial class XCmdFactory
+    {
+
+    }
+
     public readonly struct CmdCodeAtoms
     {
         public const string ArgSpec = ":";
@@ -26,7 +32,6 @@ namespace Z0
         public const string emit = nameof(emit);
 
         public const string res = nameof(res);
-
     }
 
     readonly struct CmdCodes

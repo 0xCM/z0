@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static ReflectionFlags;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Queries the source <see cref='Type'/> for <see cref='FieldInfo'/> members determined by the <see cref='BF_DeclaredInstance'/> flags

@@ -12,6 +12,13 @@ namespace Z0
     using static Konst;
     using static z;
 
+    partial class XCmdFactory
+    {
+        [MethodImpl(Inline)]
+        public static EmitAsmOpCodesCmd EmitAsmOpCodes(this CmdBuilder builder)
+            => new EmitAsmOpCodesCmd(builder.Db.RefDataPath("asm.opcodes"));
+    }
+
     /// <summary>
     /// When executed, emits an x86 opcode set from embedded resources
     /// </summary>

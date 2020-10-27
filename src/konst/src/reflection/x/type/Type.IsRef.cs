@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Determines whether the type is a (memory) reference

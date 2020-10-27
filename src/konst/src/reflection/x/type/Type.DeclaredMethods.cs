@@ -10,8 +10,8 @@ namespace Z0
 
     using static Konst;
     using static ReflectionFlags;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Queries the source <see cref='Type'/> for <see cref='BF_Declared'/> <see cref='MethodInfo'/> members

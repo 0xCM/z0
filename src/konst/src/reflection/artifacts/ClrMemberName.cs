@@ -54,19 +54,23 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public static implicit operator ClrMemberName(FieldInfo src)
-            => from(src);
+            => new ClrMemberName(src.Name);
 
         [MethodImpl(Inline)]
         public static implicit operator ClrMemberName(PropertyInfo src)
-            => from(src);
+            => new ClrMemberName(src.Name);
 
         [MethodImpl(Inline)]
         public static implicit operator ClrMemberName(EventInfo src)
-            => from(src);
+            => new ClrMemberName(src.Name);
 
         [MethodImpl(Inline)]
         public static implicit operator ClrMemberName(MethodInfo src)
-            => from(src);
+            => new ClrMemberName(src.Name);
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrMemberName(MemberInfo src)
+            => new ClrMemberName(src.Name);
 
         [MethodImpl(Inline)]
         public static implicit operator ReadOnlySpan<char>(ClrMemberName src)

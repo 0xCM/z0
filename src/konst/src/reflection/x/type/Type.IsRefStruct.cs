@@ -9,9 +9,9 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool IsRefStruct(this Type src)
             => src.IsByRefLike;
     }

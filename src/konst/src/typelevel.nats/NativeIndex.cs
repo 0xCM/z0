@@ -3,14 +3,14 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{        
+{
     using System;
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Reflection;
     using System.Collections.Generic;
     using System.Collections.Concurrent;
-     
+
     using static Konst;
 
     public static class NativeNaturals
@@ -24,7 +24,7 @@ namespace Z0
             for(var i=0; i<types.Length; i++)
             {
                 var t = types[i];
-                var value = t.Field("Value").MapValueOrDefault(f => (ulong)f.GetRawConstantValue());
+                var value = (ulong)t.Field("Value").GetRawConstantValue();
                 index.TryAdd(value,t);
             }
         }
@@ -45,7 +45,7 @@ namespace Z0
                     yield return t;
         }
 
-        public static IEnumerable<Type> Powers2(ulong min, ulong max)        
+        public static IEnumerable<Type> Powers2(ulong min, ulong max)
         {
             var current = min;
             if(index.TryGetValue(current, out var t) && current <= max)

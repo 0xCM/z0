@@ -10,44 +10,39 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiDataType]
-    public readonly struct CmdBuilder
-    {
-        [MethodImpl(Inline)]
-        public static CmdBuilder create(IWfShell wf)
-            => new CmdBuilder(wf);
-
-        readonly IWfShell Wf;
-
-        readonly IFileDb Db;
-
-        [MethodImpl(Inline)]
-        public CmdBuilder(IWfShell wf)
-        {
-            Wf = wf;
-            Db = wf.Db();
-        }
-
-        [MethodImpl(Inline)]
-        public EmitAsmOpCodesCmd EmitAsmOpCodes()
-            => new EmitAsmOpCodesCmd(Db.RefDataPath("asm.opcodes"));
-
-        [MethodImpl(Inline)]
-        public EmitAsmSymbolsCmd EmitAsmSymbols()
-            => new EmitAsmSymbolsCmd();
-
-        [MethodImpl(Inline)]
-        public EmitRenderPatternsCmd EmitRenderPatterns(Type src)
-        {
-            var dst = Db.Doc("render.patterns", src.Name, ArchiveFileKinds.Csv);
-            return new EmitRenderPatternsCmd(src,dst);
-        }
-    }
-
     partial class XTend
     {
         [MethodImpl(Inline)]
         public static CmdBuilder CmdBuilder(this IWfShell wf)
             => new CmdBuilder(wf);
+
+    }
+
+    public readonly struct CmdBuilder
+    {
+        readonly IWfShell _Wf;
+
+        readonly IFileDb _Db;
+
+        [MethodImpl(Inline)]
+        internal CmdBuilder(IWfShell wf)
+        {
+            _Wf = wf;
+            _Db = wf.Db();
+        }
+
+        public IWfShell Wf
+        {
+            [MethodImpl(Inline)]
+            get => _Wf;
+        }
+
+        public IFileDb Db
+        {
+            [MethodImpl(Inline)]
+            get => _Db;
+        }
+
+
     }
 }

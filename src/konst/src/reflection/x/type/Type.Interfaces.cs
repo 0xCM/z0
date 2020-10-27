@@ -5,14 +5,18 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    partial class XTend
+    using static Konst;
+
+    partial class XReflex
     {
         /// <summary>
         /// Returns all interfaces realized by the type, including those inherited from
         /// supertypes
         /// </summary>
         /// <param name="src">The type to examine</param>
+        [MethodImpl(Inline), Op]
         public static Type[] Interfaces(this Type src)
             => src.GetInterfaces() ?? sys.empty<Type>();
     }

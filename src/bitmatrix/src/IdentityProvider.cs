@@ -13,7 +13,7 @@ namespace Z0
             const string prefix = "bm";
 
             var t = src.EffectiveType();
-            if(t.ContainsGenericParameters && t.GenericDefinition() == typeof(BitMatrix<>))
+            if(t.ContainsGenericParameters && t.GenericDefinition2() == typeof(BitMatrix<>))
                 return TypeIdentity.define($"{prefix}[T]");
 
             if(t.IsConstructedGenericType && t.GetGenericTypeDefinition() ==typeof(BitMatrix<>))

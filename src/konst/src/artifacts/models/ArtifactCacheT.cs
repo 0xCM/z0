@@ -12,18 +12,18 @@ namespace Z0
     using static z;
 
     /// <summary>
-    /// Defines a key-value association from an artifact to an entity of arbitrary type
+    /// Defines a key-value association from an artifact to an entity of parametric type
     /// </summary>
-    public readonly struct ArtifactCache
+    public readonly struct ArtifactCache<T>
     {
-        static readonly ConcurrentDictionary<ClrArtifactKey,object> Data = new ConcurrentDictionary<ClrArtifactKey, object>();
+        static readonly ConcurrentDictionary<ClrArtifactKey,T> Data = new ConcurrentDictionary<ClrArtifactKey, T>();
 
         [MethodImpl(NotInline)]
-        public static object acquire<T>(ClrArtifactKey id, Func<ClrArtifactKey,T> factory)
+        public static object acquire(ClrArtifactKey id, Func<ClrArtifactKey,T> factory)
             => Data.GetOrAdd(id,factory);
 
         [MethodImpl(NotInline)]
-        public static Option<T> search<T>(ClrArtifactKey id)
+        public static Option<T> search(ClrArtifactKey id)
         {
             if(Data.TryGetValue(id, out var dst))
                 return some((T)dst);
@@ -32,7 +32,7 @@ namespace Z0
         }
 
         [MethodImpl(NotInline)]
-        public static void insert<T>(ClrArtifactKey id, T value)
+        public static void insert(ClrArtifactKey id, T value)
             => Data[id] = value;
     }
 }

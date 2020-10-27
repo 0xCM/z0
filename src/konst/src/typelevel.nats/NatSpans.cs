@@ -30,7 +30,7 @@ namespace Z0
 
         [Op]
         public static Option<NatSpanSig> sig(Type t)
-            => from def in t.GenericDefinition()
+            => from def in some(t.GenericDefinition2())
                 where def == typeof(NatSpan<,>) && t.IsClosedGeneric()
                 let args = t.SuppliedTypeArgs().ToArray()
                 let pair = (nat: args[0], cell: args[1])

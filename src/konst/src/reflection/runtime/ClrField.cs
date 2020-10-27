@@ -10,17 +10,17 @@ namespace Z0
 
     using static Konst;
 
-    [ApiDataType(ApiNames.ClrMethod, true)]
-    public readonly struct ClrMethod
+    [ApiDataType(ApiNames.ClrField, true)]
+    public readonly struct ClrField : IClrMember<ClrField,FieldInfo>
     {
         [MethodImpl(Inline)]
-        public static ClrMethod from(MethodInfo src)
-            => new ClrMethod(src);
+        public static ClrField from(FieldInfo src)
+            => new ClrField(src);
 
-        public MethodInfo Definition {get;}
+        public FieldInfo Definition {get;}
 
         [MethodImpl(Inline)]
-        public ClrMethod(MethodInfo src)
+        public ClrField(FieldInfo src)
             => Definition = src;
 
         public ClrArtifactKey Id
@@ -35,33 +35,10 @@ namespace Z0
             get => Definition;
         }
 
-        public ClrAssembly Assembly
+        public ClrType FieldType
         {
-            [MethodImpl(Inline)]
-            get => DeclaringType.Assembly;
+            get => Definition.FieldType;
         }
-
-        public ClrType DeclaringType
-        {
-            [MethodImpl(Inline)]
-            get => Definition.DeclaringType;
-        }
-
-        [MethodImpl(Inline)]
-        public static bool operator ==(ClrMethod lhs, ClrMethod rhs)
-            => lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        public static bool operator !=(ClrMethod lhs, ClrMethod rhs)
-            => !lhs.Equals(rhs);
-
-        [MethodImpl(Inline)]
-        public static implicit operator MethodInfo(ClrMethod src)
-            => src.Definition;
-
-        [MethodImpl(Inline)]
-        public static implicit operator ClrMethod(MethodInfo src)
-            => from(src);
 
         [MethodImpl(Inline)]
         public string Format()
@@ -75,5 +52,21 @@ namespace Z0
 
         public override string ToString()
             => Format();
+
+        [MethodImpl(Inline)]
+        public static bool operator ==(ClrField a, ClrField b)
+            => a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static bool operator !=(ClrField a, ClrField b)
+            => !a.Equals(b);
+
+        [MethodImpl(Inline)]
+        public static implicit operator FieldInfo(ClrField src)
+            => src.Definition;
+
+        [MethodImpl(Inline)]
+        public static implicit operator ClrField(FieldInfo src)
+            => from(src);
     }
 }

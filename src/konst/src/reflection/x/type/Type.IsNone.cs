@@ -12,9 +12,9 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool IsNone<T>(this T? src)
             where T : struct
                 => !src.HasValue;

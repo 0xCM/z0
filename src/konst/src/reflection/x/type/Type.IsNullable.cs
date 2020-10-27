@@ -4,12 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;    
+    using System;
     using System.Runtime.CompilerServices;
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Determines whether a type is nullable
@@ -28,7 +28,7 @@ namespace Z0
         /// <returns>
         /// Returns true if t is both a nullable type and is of type T
         /// </returns>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool IsNullable<T>(this Type t)
             => t.IsNullableType() && Nullable.GetUnderlyingType(t) == typeof(T);
 

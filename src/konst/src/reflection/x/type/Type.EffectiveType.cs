@@ -9,9 +9,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static ReflectionFlags;
-        
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Computes the effective type of the source <see cref='Type'/>

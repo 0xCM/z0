@@ -171,7 +171,7 @@ namespace Z0
         //     }
         // }
 
-        unsafe static void Emit(MemoryRange src, FilePath dst)
+        unsafe static void Emit(MemoryRange src, FS.FilePath dst)
         {
             var bpl = 32;
             var line = text.build();
@@ -234,11 +234,6 @@ namespace Z0
 
         void Run59()
         {
-            {
-
-
-            }
-
             {
                 new CheckResources().Run(Wf);
             }
@@ -388,16 +383,16 @@ namespace Z0
         public void Run()
         {
             Wf.Running();
+
+            Wf.Rows(Blm32u.Addresses);
+
             //RunCalc();
 
-            Db.CopyToNotebook(Db.CapturedAsmFile(PartId.Run, ApiNames.FxSlots), ApiNames.FxSlots);
-            Db.CopyToNotebook(Db.CapturedAsmFile(PartId.Run, ApiNames.FxSlots_n16x8x8x8), ApiNames.FxSlots);
-
+            // Db.CopyToNotebook(Db.CapturedAsmFile(PartId.Run, ApiNames.FxSlots), ApiNames.FxSlots);
+            // Db.CopyToNotebook(Db.CapturedAsmFile(PartId.Run, ApiNames.FxSlots_n16x8x8x8), ApiNames.FxSlots);
 
             //Db.CapturedAsmFile()
             Wf.Ran();
-
-
 
         }
     }

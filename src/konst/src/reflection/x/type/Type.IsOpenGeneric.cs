@@ -9,13 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Determines whether a type is an unconstructed generic type, also called an open generic type
         /// </summary>
         /// <param name="src">The type to examine</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool IsOpenGeneric(this Type src, bool effective = true)
         {
             var t = effective ? src.EffectiveType() : src;

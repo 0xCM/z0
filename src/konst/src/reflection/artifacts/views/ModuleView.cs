@@ -13,15 +13,15 @@ namespace Z0
 
     partial struct ClrArtifacts
     {
-        public readonly struct ValueParamView : IClrArtifact<ValueParamView>
+        public readonly struct ModuleView : IClrArtifact<ModuleView>
         {
-            readonly R.ParameterInfo Subject;
+            readonly R.Module Subject;
 
             [MethodImpl(Inline)]
-            public ValueParamView(R.ParameterInfo src)
+            public ModuleView(R.Module src)
                 => Subject = src;
 
-            public ClrArtifactKey Id
+            public ClrArtifactKey Key
             {
                 [MethodImpl(Inline)]
                 get => Subject.MetadataToken;
@@ -30,7 +30,7 @@ namespace Z0
             public ClrArtifactKind Kind
             {
                 [MethodImpl(Inline)]
-                get => ClrArtifactKind.ValueParam;
+                get => ClrArtifactKind.Module;
             }
 
             public string Name
@@ -40,12 +40,24 @@ namespace Z0
             }
 
             [MethodImpl(Inline)]
-            public static implicit operator ValueParamView(R.ParameterInfo src)
-                => new ValueParamView(src);
+            public static implicit operator ModuleView(R.Module src)
+                => new ModuleView(src);
 
             [MethodImpl(Inline)]
-            public static implicit operator R.ParameterInfo(ValueParamView src)
+            public static implicit operator R.Module(ModuleView src)
                 => src.Subject;
+
+            public string FullName
+            {
+                [MethodImpl(Inline)]
+                get => Subject.FullyQualifiedName;
+            }
+
+            public string ScopeName
+            {
+                [MethodImpl(Inline)]
+                get => Subject.ScopeName;
+            }
         }
     }
 }

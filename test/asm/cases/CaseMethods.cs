@@ -8,34 +8,33 @@ namespace Z0
     using System.Reflection;
 
     using Host = CaseMethods;
-    
+
     public readonly struct CaseMethods
     {
         public static CaseMethods Methods => default;
 
-        public static uint K17() 
+        public static uint K17()
             => 17;
 
-        public static uint Square(uint x) 
+        public static uint Square(uint x)
             => x*x;
 
-        public static uint BinaryAdd(uint x, uint y) 
+        public static uint BinaryAdd(uint x, uint y)
             => x + y;
 
-        public static uint TernaryAdd(uint x, uint y, uint z) 
+        public static uint TernaryAdd(uint x, uint y, uint z)
             => x + y + z;
 
         public static MethodInfo K17_Method
-            => typeof(Host).Method(nameof(K17)).Require();
+            => typeof(Host).Method(nameof(K17));
 
         public static MethodInfo Square_Method
-            => typeof(Host).Method(nameof(Square)).Require();
+            => typeof(Host).Method(nameof(Square));
 
         public static MethodInfo BinaryAdd_Method
-            => typeof(Host).Method(nameof(BinaryAdd)).Require();
+            => typeof(Host).Method(nameof(BinaryAdd));
 
-        public static MethodInfo TernaryAdd_Method 
-            => typeof(Host).Method(nameof(TernaryAdd)).Require();
-
+        public static MethodInfo TernaryAdd_Method
+            => typeof(Host).Method(nameof(TernaryAdd));
     }
 }

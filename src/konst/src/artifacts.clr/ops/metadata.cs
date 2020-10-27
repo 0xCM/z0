@@ -20,8 +20,8 @@ namespace Z0
             var a = ClrViews.view(src);
             var dst = new FieldMetadata();
             dst.Key = reference(a);
-            dst.DeclaringType = a.DeclaringType.Id;
-            dst.DataType = a.FieldType.Id;
+            dst.DeclaringType = a.DeclaringType.Key;
+            dst.DataType = a.FieldType.Key;
             dst.Attributes = a.Attributes;
             dst.Address = a.Address;
             dst.IsStatic = a.IsStatic;

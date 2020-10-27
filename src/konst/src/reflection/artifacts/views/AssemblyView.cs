@@ -35,7 +35,7 @@ namespace Z0
                 get => Subject.FullName;
             }
 
-            public ClrArtifactKey Id
+            public ClrArtifactKey Key
             {
                 [MethodImpl(Inline)]
                 get => Subject.GetHashCode();

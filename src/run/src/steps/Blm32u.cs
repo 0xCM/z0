@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Reflection;
 
     using static z;
     using static Konst;
@@ -14,8 +15,53 @@ namespace Z0
     using BL = BitLogic.Scalar;
 
     [ApiDataType]
-    public readonly struct Blm32u
+    public unsafe readonly struct Blm32u
     {
+        static MethodInfo[] Methods;
+
+        static MemoryAddress Address;
+
+        static MemberAddress[] MethodAddressData;
+
+        static Blm32u()
+        {
+            Methods = typeof(Blm32u).DeclaredStaticMethods();
+            Address = typeof(Blm32u).TypeHandle.Value.ToPointer();
+            MethodAddressData = Methods.Select(MemberAddress.from);
+            Array.Sort(MethodAddressData);
+        }
+
+        public static ReadOnlySpan<MemberAddress> Addresses
+            => MethodAddressData;
+
+        [MethodImpl(Inline)]
+        public MemoryAddress TypeAddress()
+            => Address;
+
+        [MethodImpl(Inline)]
+        public MemberAddress method(N0 n)
+            => MethodAddressData[0];
+
+        [MethodImpl(Inline)]
+        public MemberAddress method(N1 n)
+            => MethodAddressData[1];
+
+        [MethodImpl(Inline)]
+        public MemberAddress method(N2 n)
+            => MethodAddressData[2];
+
+        [MethodImpl(Inline)]
+        public MemberAddress method(N3 n)
+            => MethodAddressData[3];
+
+        [MethodImpl(Inline)]
+        public MemberAddress method(N4 n)
+            => MethodAddressData[4];
+
+        [MethodImpl(Inline)]
+        public MemberAddress method(N5 n)
+            => MethodAddressData[5];
+
         [MethodImpl(NotInline)]
         static uint @false(uint a, uint b)
             => BL.@false(a,b);
@@ -76,7 +122,7 @@ namespace Z0
         static uint nand(uint a, uint b)
             => BL.nand(a,b);
 
-        public uint Evaluate(uint a, uint b, BinaryBitLogicKind k)
+        public uint Eval(uint a, uint b, BinaryBitLogicKind k)
         {
             switch(k)
             {
@@ -100,6 +146,16 @@ namespace Z0
                     return nor(a,b);
                 case Xnor:
                     return xnor(a,b);
+                case RNot:
+                    return rnot(a,b);
+                case Impl:
+                    return impl(a,b);
+                case LNot:
+                    return lnot(a,b);
+                case CImpl:
+                    return cimpl(a,b);
+                case Nand:
+                    return nand(a,b);
             }
 
             return 0;

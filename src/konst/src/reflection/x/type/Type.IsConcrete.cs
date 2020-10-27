@@ -5,13 +5,17 @@
 namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
-    partial class XTend
+    using static Konst;
+
+    partial class XReflex
     {
         /// <summary>
         /// Returns true if the source type is either non-generic or a generic type that has been closed over all parameters
         /// </summary>
         /// <param name="src">The type to examine</param>
+        [MethodImpl(Inline), Op]
         public static bool IsConcrete(this Type src)
             => !src.ContainsGenericParameters && !src.IsGenericParameter && !src.IsAbstract;
     }

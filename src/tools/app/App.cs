@@ -44,32 +44,34 @@ namespace Z0
 
         readonly ReadOnlySpan<string> AppArgs;
 
+        readonly CmdBuilder CmdBuilder;
+
         public AppRunner(IWfShell wf, WfHost host)
         {
             Host = host;
             Wf = wf.WithHost(Host);
             Mpx = Multiplex.create(wf, Multiplex.configure(wf.Db().Root));
             AppArgs = wf.Args;
+            CmdBuilder = wf.CmdBuilder();
         }
 
         CmdResult EmitOpCodes()
             => EmitAsmOpCodes.run(Wf);
 
         CmdResult EmitPatterns()
-            => EmitRenderPatterns.run(Wf, Wf.CmdBuilder().EmitRenderPatterns(typeof(RP)));
+            => EmitRenderPatterns.run(Wf, CmdBuilder.EmitRenderPatterns(typeof(RP)));
 
         CmdResult EmitSymbols()
-            => EmitAsmSymbols.run(Wf, Wf.CmdBuilder().EmitAsmSymbols());
+            => EmitAsmSymbols.run(Wf, CmdBuilder.EmitAsmSymbols());
 
         void EmitScripts()
             => EmitToolScripts.run(Wf, EmitToolScripts.specify(Wf));
 
-
         CmdResult EmitToolHelp()
-            => EmitResourceContent.run(Wf, EmitResourceContentCmd.specify(Wf, Wf.Controller, "res/tools/help", ".help"));
+            => EmitResData.run(Wf, CmdBuilder.EmitResData(Parts.Tools.Assembly, "res/tools/help", ".help"));
 
         CmdResult EmitCaseLogs()
-            => EmitResourceContent.run(Wf, EmitResourceContentCmd.specify(Wf, Wf.Controller, "res/tools/caselogs", ".log"));
+            => EmitResData.run(Wf, CmdBuilder.EmitResData(Parts.Tools.Assembly, "res/tools/caselogs", ".log"));
 
         CmdResult EmitAsmRefs()
         {
@@ -118,11 +120,9 @@ namespace Z0
             EmitScripts();
             EmitAsmRefs();
             EmitPeHeaders();
-
         }
 
-
-        public unsafe void Run()
+        void ShowCases()
         {
             var query = Resources.query(Wf.Controller, CaseNames.CoreClrBuildLog);
             if(query.ResourceCount == 1)
@@ -136,6 +136,12 @@ namespace Z0
                     line = reader.ReadLine();
                 }
             }
+
+        }
+
+        public unsafe void Run()
+        {
+            EmitToolHelp();
         }
 
 

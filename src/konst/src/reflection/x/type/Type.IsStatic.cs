@@ -9,13 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Determines whether a type is static
         /// </summary>
         /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool IsStatic(this Type t)
             => Reflex.IsStatic(t);
     }

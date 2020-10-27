@@ -10,9 +10,10 @@ namespace Z0
     using static ReflectionFlags;
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
+        [MethodImpl(Inline), Op]
         public static DataMember[] DataMembers(this Type src)
-            => DataMemberCache.Lookup(src);
+            => CachedReflections.Lookup(src);
     }
 }

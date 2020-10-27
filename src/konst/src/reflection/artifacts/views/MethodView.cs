@@ -21,7 +21,7 @@ namespace Z0
             public MethodView(R.MethodInfo src)
                 => Subject = src;
 
-            public ClrArtifactKey Id
+            public ClrArtifactKey Key
             {
                 [MethodImpl(Inline)]
                 get => Subject.MetadataToken;

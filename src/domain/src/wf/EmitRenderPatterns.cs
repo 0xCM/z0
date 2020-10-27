@@ -10,6 +10,13 @@ namespace Z0
     using static Konst;
     using static z;
 
+    partial class XCmdFactory
+    {
+        [MethodImpl(Inline), Op]
+        public static EmitRenderPatternsCmd EmitRenderPatterns(this CmdBuilder builder, Type src)
+            => new EmitRenderPatternsCmd(src, builder.Db.Doc("render.patterns", src.Name, ArchiveFileKinds.Csv));
+    }
+
     [Cmd]
     public struct EmitRenderPatternsCmd : ICmdSpec<EmitRenderPatternsCmd>
     {

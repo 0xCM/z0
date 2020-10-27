@@ -9,9 +9,8 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    using static ReflectionFlags;
-        
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Queries the source <see cref='Type'/> for the <see cref='Type'/> it wraps

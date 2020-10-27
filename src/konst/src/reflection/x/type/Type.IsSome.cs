@@ -10,9 +10,9 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static bool IsSome<T>(this T? src)
             where T : struct
                 => src.HasValue;

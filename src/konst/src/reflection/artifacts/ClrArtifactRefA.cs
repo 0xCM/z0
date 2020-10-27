@@ -12,16 +12,31 @@ namespace Z0
     /// <summary>
     /// Defines a reference to clr-specific artifact
     /// </summary>
-    public readonly struct ClrArtifactRef<A> : IClrArtifactRef<A>
+    public readonly struct ClrArtifactRef<A> : IClrArtifact<A>
         where A : struct, IClrArtifact<A>
     {
         readonly A Artifact;
 
-        public ClrArtifactKind Kind => Artifact.Kind;
+        public ClrArtifactKind Kind
+        {
+            [MethodImpl(Inline)]
+            get => Artifact.Kind;
+        }
 
-        public ClrArtifactKey Key  => Artifact.Id;
+        public ClrArtifactKey Key
+        {
+            [MethodImpl(Inline)]
+            get => Artifact.Key;
+        }
 
-        public StringRef Name => Artifact.Name;
+        public StringRef Name
+        {
+            [MethodImpl(Inline)]
+            get => Artifact.Name;
+        }
+
+        string IClrArtifact.Name
+            => Name;
 
         [MethodImpl(Inline)]
         public ClrArtifactRef(A artifact)

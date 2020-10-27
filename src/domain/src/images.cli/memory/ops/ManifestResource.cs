@@ -15,13 +15,8 @@ namespace Z0
     partial class CliMemoryMap
     {
         [MethodImpl(Inline), Op]
-        public static ReadOnlySpan<ManifestResourceHandle> ManifestResourceHandles(MetadataReader reader)
-            => reader.ManifestResources.ToReadOnlySpan();
-
-        [MethodImpl(Inline), Op]
         public static ManifestResource Read(MetadataReader reader, ManifestResourceHandle src)
             => reader.GetManifestResource(src);
-
 
         [MethodImpl(Inline), Op]
         public static ref ManifestResource Read(MetadataReader reader, ManifestResourceHandle src, out ManifestResource dst)

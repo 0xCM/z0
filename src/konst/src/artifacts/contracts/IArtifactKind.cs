@@ -8,6 +8,9 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Reflection.Metadata.Ecma335;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
+    [Free]
     public interface IArtifactKind : ITypedLiteral<TableIndex,byte>, ITextual
     {
         TableIndex Index {get;}
@@ -22,6 +25,7 @@ namespace Z0
             => Index.ToString();
     }
 
+    [Free]
     public interface IArtifactKind<K> : IArtifactKind
         where K : unmanaged, IArtifactKind<K>
     {

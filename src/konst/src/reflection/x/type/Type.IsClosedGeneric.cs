@@ -9,13 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Determines whether a type is a constructed generic type
         /// </summary>
         /// <param name="t">The type to examine</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool IsClosedGeneric(this Type t, bool effective = true)
             => effective ? t.EffectiveType().IsConstructedGenericType : t.IsConstructedGenericType;
     }

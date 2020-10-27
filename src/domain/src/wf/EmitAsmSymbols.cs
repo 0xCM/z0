@@ -12,6 +12,13 @@ namespace Z0
     using static Konst;
     using static z;
 
+    partial class XCmdFactory
+    {
+        [MethodImpl(Inline)]
+        public static EmitAsmSymbolsCmd EmitAsmSymbols(this CmdBuilder builder)
+            => new EmitAsmSymbolsCmd();
+
+    }
     public struct EmitAsmSymbolsCmd : ICmdSpec<EmitAsmSymbolsCmd>
     {
 

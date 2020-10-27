@@ -11,13 +11,13 @@ namespace Z0
 
     using static Konst;
     using static ReflectionFlags;
-        
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Queries the source <see cref='Type'/> for the <see cref='EventInfo'/> members determined by the <see cref='BF_World'/> flags
         /// </summary>
-        /// <param name="src">The source type</param>        
+        /// <param name="src">The source type</param>
         [MethodImpl(Inline), Op]
         public static EventInfo[] Events(this Type src)
             => src.GetEvents(BF_World);

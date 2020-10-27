@@ -9,13 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Returns true if the source type is non-null and non-void; otherwise, returns false
         /// </summary>
         /// <param name="src">The type to examine</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool IsNonEmpty(this Type src)
             => src != null && src != EmptyType && src != typeof(void);
     }

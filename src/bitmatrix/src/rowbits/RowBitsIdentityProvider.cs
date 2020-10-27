@@ -22,15 +22,16 @@ namespace Z0
 
         const string @base = "rowbits";
 
-        public IEnumerable<Type> Identifiable => z.defer(typeof(RowBits<>));
+        public IEnumerable<Type> Identifiable
+            => z.defer(typeof(RowBits<>));
 
         public TypeIdentity Identify(Type src)
         {
-            var t = src.GenericDefinition();
-            if(t.IsNone())
+            var t = src.GenericDefinition2();
+            if(t == typeof(void))
                 return TypeIdentity.Empty;
 
-            if(t.Value != typeof(RowBits<>))
+            if(t != typeof(RowBits<>))
                 return TypeIdentity.Empty;
 
             if(src.IsOpenGeneric())

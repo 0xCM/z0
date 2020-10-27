@@ -11,54 +11,9 @@ namespace Z0
     using static Konst;
     using static z;
 
-
     [WfHost]
     public sealed class BuildCaptureIndex : WfHost<BuildCaptureIndex>
     {
-        // public static ApiCodeBlockIndex drive(IWfShell wf, IWfCaptureState state)
-        // {
-        //     var host = create();
-        //     wf = wf.WithHost(host);
-
-        //     wf.Running();
-
-        //     try
-        //     {
-        //         var index = BuildIndex(wf);
-        //         EmitAsmTables(wf,  state, index);
-        //         process(wf, DecodeParts(wf, state.RoutineDecoder, index));
-        //         return index;
-
-        //     }
-        //     catch(Exception e)
-        //     {
-        //         wf.Error(e);
-        //     }
-
-        //     wf.Ran();
-        //     return default;
-        // }
-
-        // public static ApiCodeBlockIndex BuildIndex(IWfShell wf)
-        // {
-        //     var host = create();
-        //     wf = wf.WithHost(host);
-        //     using var builder = new ApiIndexBuilder(wf, host);
-        //     builder.Run();
-        //     var target = builder.Product;
-        //     wf.Raise(new PartIndexCreated(host, target, wf.Ct));
-        //     return target;
-        // }
-
-        // public static ref ApiCodeBlockIndex run(IWfShell wf, IWfCaptureState state, out ApiCodeBlockIndex dst)
-        // {
-        //     var host = new BuildCaptureIndex();
-        //     using var step = new BuildCaptureIndexStep(wf, host, state);
-        //     step.Run();
-        //     dst = step.Target;
-        //     return ref dst;
-        // }
-
         public static void EmitAsmTables(IWfShell wf, IWfCaptureState state, in ApiCodeBlockIndex encoded)
         {
             try

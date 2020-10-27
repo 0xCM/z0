@@ -10,13 +10,20 @@ namespace Z0
 
     using static Konst;
 
-    [ApiDataType(ApiNames.ClrProperty, true)]
-    public readonly struct ClrProperty
+    [ApiDataType(ApiNames.ClrMethod, true)]
+    public readonly struct ClrMethod : IClrMember<ClrMethod, MethodInfo>
     {
-        public PropertyInfo Definition {get;}
+        [MethodImpl(Inline)]
+        public static ClrMethod from(MethodInfo src)
+            => new ClrMethod(src);
+
+        public MethodInfo Definition {get;}
+
+        [MethodImpl(Inline)]
+        public ClrMethod(MethodInfo src)
+            => Definition = src;
 
         public ClrArtifactKey Id
-
         {
             [MethodImpl(Inline)]
             get => Definition.MetadataToken;
@@ -28,21 +35,33 @@ namespace Z0
             get => Definition;
         }
 
+        public ClrAssembly Assembly
+        {
+            [MethodImpl(Inline)]
+            get => DeclaringType.Assembly;
+        }
+
+        public ClrType DeclaringType
+        {
+            [MethodImpl(Inline)]
+            get => Definition.DeclaringType;
+        }
+
         [MethodImpl(Inline)]
-        public static bool operator ==(ClrProperty lhs, ClrProperty rhs)
+        public static bool operator ==(ClrMethod lhs, ClrMethod rhs)
             => lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static bool operator !=(ClrProperty lhs, ClrProperty rhs)
+        public static bool operator !=(ClrMethod lhs, ClrMethod rhs)
             => !lhs.Equals(rhs);
 
         [MethodImpl(Inline)]
-        public static implicit operator PropertyInfo(ClrProperty src)
+        public static implicit operator MethodInfo(ClrMethod src)
             => src.Definition;
 
         [MethodImpl(Inline)]
-        public ClrProperty(PropertyInfo data)
-            => Definition = data;
+        public static implicit operator ClrMethod(MethodInfo src)
+            => from(src);
 
         [MethodImpl(Inline)]
         public string Format()

@@ -11,10 +11,13 @@ namespace Z0
 
     using static Konst;
 
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+
     /// <summary>
     /// Characterizes a model of a CLR type
     /// </summary>
-    public interface IClrType : IReflexArtifact<Type>
+    [Free]
+    public interface IClrType
     {
         ClrTypeKind Kind {get;}
 
@@ -31,7 +34,9 @@ namespace Z0
     /// Characterizes an F-bound polyorphic type model reification
     /// </summary>
     /// <typeparam name="M">The reifying type</typeparam>
+    [Free]
     public interface IClrType<T> : IClrType
+        where T : struct, IClrType<T>
     {
         IClrType Generalized {get;}
 
@@ -47,6 +52,7 @@ namespace Z0
     /// </summary>
     /// <typeparam name="M">The reified model type</typeparam>
     /// <typeparam name="T">The subject of the model</typeparam>
+    [Free]
     public interface IClrType<M,T> : IClrType<M>
         where M : struct, IClrType<M>
     {
@@ -58,8 +64,6 @@ namespace Z0
         IClrType IClrType<M>.Generalized
             => Untyped.Generalized;
 
-        Type IReflexArtifact<Type>.Definition
-            => typeof(T);
     }
 
     /// <summary>
@@ -68,6 +72,7 @@ namespace Z0
     /// <typeparam name="X">The reifying type</typeparam>
     /// <typeparam name="M">The reifying type of the equivalent non-parametric model</typeparam>
     /// <typeparam name="T">The subject of the model</typeparam>
+    [Free]
     public interface IClrType<X,M,T> : IClrType<M,T>
         where M : struct, IClrType<M>
         where X : struct, IClrType<X,M,T>

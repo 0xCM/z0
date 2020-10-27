@@ -12,11 +12,18 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [Cmd(Code)]
-    public struct EmitResourceContentCmd : ICmdSpec<EmitResourceContentCmd>
+    partial class XCmdFactory
     {
-        public static EmitResourceContentCmd specify(IWfShell wf, Assembly src, string id, string match = null)
-            => new EmitResourceContentCmd(src, wf.Db().RefDataRoot() + FS.folder(id), match);
+        [MethodImpl(Inline), Op]
+        public static EmitResDataCmd EmitResData(this CmdBuilder builder, Assembly src, string id, string match = null)
+            => new EmitResDataCmd(src, builder.Db.RefDataRoot() + FS.folder(id), match);
+    }
+
+    [Cmd(Code)]
+    public struct EmitResDataCmd : ICmdSpec<EmitResDataCmd>
+    {
+        public static EmitResDataCmd specify(IWfShell wf, Assembly src, string id, string match = null)
+            => new EmitResDataCmd(src, wf.Db().RefDataRoot() + FS.folder(id), match);
 
         public const string Code = CmdCodes.EmitRes;
 
@@ -27,7 +34,7 @@ namespace Z0
         public string Match;
 
         [MethodImpl(Inline)]
-        public EmitResourceContentCmd(Assembly src, FS.FolderPath dst, string filter = null)
+        public EmitResDataCmd(Assembly src, FS.FolderPath dst, string filter = null)
         {
             Source = src;
             Target = dst;
@@ -36,13 +43,13 @@ namespace Z0
     }
 
     [CmdHost, ApiHost]
-    public sealed class EmitResourceContent : CmdHost<EmitResourceContent, EmitResourceContentCmd>
+    public sealed class EmitResData : CmdHost<EmitResData, EmitResDataCmd>
     {
-        protected override CmdResult Execute(IWfShell wf, in EmitResourceContentCmd spec)
+        protected override CmdResult Execute(IWfShell wf, in EmitResDataCmd spec)
             => run(wf, spec);
 
         [Op]
-        public static CmdResult run(IWfShell wf, in EmitResourceContentCmd spec)
+        public static CmdResult run(IWfShell wf, in EmitResDataCmd spec)
         {
             var query = Resources.query(spec.Source, spec.Match);
             var count = query.ResourceCount;

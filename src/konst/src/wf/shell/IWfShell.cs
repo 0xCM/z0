@@ -311,20 +311,24 @@ namespace Z0
             where T : ITextual
                 => Raise(rows(content));
 
-        void Rows<T>(params T[] content)
+        void Rows<T>(params T[] src)
+            where T : ITextual
+                => Rows(@readonly(src));
+
+        void Rows<T>(ReadOnlySpan<T> src)
             where T : ITextual
         {
-            if(content.Length != 0)
+            if(src.Length != 0)
             {
                 var buffer = Buffers.text();
                 buffer.AppendLine("Rows");
-                var src = @readonly(content);
-                for(var i=0; i<content.Length; i++)
+                var count = src.Length;
+                for(var i=0; i<count; i++)
                 {
                     ref readonly var row = ref skip(src,i);
                     buffer.AppendLine(row.Format());
                 }
-                Raise(status(Host,buffer.Emit(), Ct));
+                Raise(status(Host, buffer.Emit(), Ct));
             }
         }
 

@@ -11,7 +11,7 @@ namespace Z0
 
     using static ReflectionFlags;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Attempts to retrieve a name-identified field from a type
@@ -19,7 +19,8 @@ namespace Z0
         /// <param name="src">The type to examine</param>
         /// <param name="name">The name of the field</param>
         /// <param name="declared">Whether the field is required to be declared by the source type</param>
-        public static Option<FieldInfo> Field(this Type src, string name)        
+        [Op]
+        public static FieldInfo Field(this Type src, string name)
             => src.GetFields(BF_All).FirstOrDefault(f => f.Name == name);
     }
 }

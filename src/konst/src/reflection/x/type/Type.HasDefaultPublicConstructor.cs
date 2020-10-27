@@ -9,12 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Determines whether a type has a public default constructor
         /// </summary>
         /// <param name="t">The type to examine</param>
+        [MethodImpl(Inline), Op]
         public static bool HasDefaultPublicConstructor(this Type t)
             => t.GetConstructor(new Type[] { }) != null;
 
@@ -23,7 +24,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The type to examine</typeparam>
         public static bool HasDefaultPublicConstructor<T>()
-            where T : class 
-                => typeof(T).GetConstructor(new Type[] { }) != null; 
+            where T : class
+                => typeof(T).GetConstructor(new Type[] { }) != null;
     }
 }

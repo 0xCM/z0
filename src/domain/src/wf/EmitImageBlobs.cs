@@ -10,8 +10,6 @@ namespace Z0
     using static Konst;
     using static z;
 
-    using F = CliBlob.Fields;
-
     [WfHost]
     public sealed class EmitImageBlobs : WfHost<EmitImageBlobs>
     {

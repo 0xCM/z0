@@ -69,8 +69,8 @@ namespace Z0
 
         public static Option<ApiGridKind> GridKind(this Type src)
         {
-            var def =  src.GenericDefinition().ValueOrDefault();
-            if(def == null)
+            var def =  src.GenericDefinition2();
+            if(def == typeof(void))
                 return none<ApiGridKind>();
 
             if(def == typeof(BitGrid<>))

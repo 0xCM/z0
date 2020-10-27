@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Recursively close an IEnumerable generic type
@@ -16,6 +16,7 @@ namespace Z0
         /// <remarks>
         /// Adapted from https://blogs.msdn.microsoft.com/mattwar/2007/07/30/linq-building-an-iqueryable-provider-part-i/
         /// </remarks>
+        [Op]
         public static Option<Type> CloseEnumerableType(this Type seq)
         {
             if (seq == typeof(string))

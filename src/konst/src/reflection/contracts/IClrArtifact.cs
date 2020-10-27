@@ -4,14 +4,12 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     /// <summary>
     /// Characterizes an clr artifact reference
     /// </summary>
+    [Free]
     public interface IClrArtifactRef : ITextual
     {
         /// <summary>
@@ -33,9 +31,23 @@ namespace Z0
             => text.format(RP.PSx3, Kind, Key, Name);
     }
 
-    public interface IClrArtifactRef<A> : IClrArtifactRef
-        where A : struct, IClrArtifact<A>
+    public interface IClrArtifact : ITextual
     {
+        ClrArtifactKind Kind {get;}
+
+        ClrArtifactKey Key {get;}
+
+        string Name {get;}
+
+        ClrArtifactRef Ref
+            => new ClrArtifactRef(Key, Kind ,Name);
+        string ITextual.Format()
+            => Name;
     }
 
+    public interface IClrArtifact<A> : IClrArtifact
+        where A : struct, IClrArtifact<A>
+    {
+
+    }
 }
