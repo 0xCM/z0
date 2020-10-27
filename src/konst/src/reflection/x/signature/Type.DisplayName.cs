@@ -17,31 +17,42 @@ namespace Z0
         [Op]
         public static string DisplayName(this Type src)
         {
-            if(src == null)
-                sys.@throw(new ArgumentNullException(nameof(src)));
-
-            if(Attribute.IsDefined(src, typeof(DisplayNameAttribute)))
-                return src.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
-
-            if(src.IsEnum)
-                return src.Name + ':' + src.GetEnumUnderlyingType().DisplayName();
-
-            if(src.IsPointer)
-                return $"{src.GetElementType().DisplayName()}*";
-
-            if(src.IsSystemDefined())
+            try
             {
-                var kw = ApiIdentify.keyword(src);
-                return string.IsNullOrWhiteSpace(kw) ? src.Name : kw;
+                if(src.IsGenericMethodParameter || src.IsGenericParameter || src.IsGenericTypeParameter)
+                    return src.Name;
+
+                if(src == null)
+                    sys.@throw(new ArgumentNullException(nameof(src)));
+
+                if(Attribute.IsDefined(src, typeof(DisplayNameAttribute)))
+                    return src.GetCustomAttribute<DisplayNameAttribute>().DisplayName;
+
+                if(src.IsEnum && src.IsConcrete())
+                    return src.Name + ':' + src.GetEnumUnderlyingType().DisplayName();
+
+                if(src.IsPointer)
+                    return $"{src.GetElementType().DisplayName()}*";
+
+                if(src.IsSystemDefined())
+                {
+                    var kw = ApiIdentify.keyword(src);
+                    return string.IsNullOrWhiteSpace(kw) ? src.Name : kw;
+                }
+
+                if(src.IsGenericType && !src.IsRef())
+                    return src.FormatGeneric();
+
+                if(src.IsRef())
+                    return src.GetElementType().DisplayName();
+
+                return src.Name;
+
             }
-
-            if(src.IsGenericType && !src.IsRef())
-                return src.FormatGeneric();
-
-            if(src.IsRef())
-                return src.GetElementType().DisplayName();
-
-            return src.Name;
+            catch(Exception)
+            {
+                return $"Error:{src}";
+            }
         }
 
         [Op]

@@ -23,12 +23,13 @@ namespace Z0
             => ref GetReference<T>(src);
 
         /// <summary>
-        /// Returns a readonly reference to the first source cell
+        /// Returns a reference to the location of the first element
         /// </summary>
-        /// <param name="src">The source span</param>
+        /// <param name="src">The source array</param>
+        /// <typeparam name="T">The element type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
-        public static ref readonly char first(ReadOnlySpan<char> src)
-            => ref GetReference(src);
+        public static unsafe ref T first<T>(T[] src)
+            => ref GetReference<T>(src);
 
         /// <summary>
         /// Returns a reference to the head of a readonly span
@@ -40,14 +41,11 @@ namespace Z0
             => ref GetReference<T>(src);
 
         /// <summary>
-        /// Returns a readonly reference to the first cell of a readonly span, offset by a specified cell count
+        /// Returns a readonly reference to the first source cell
         /// </summary>
         /// <param name="src">The source span</param>
-        /// <param name="offset">The cell-measured offset</param>
-        /// <typeparam name="T">The cell type</typeparam>
-        [MethodImpl(Inline), Op, Closures(AllNumeric)]
-        public static ref readonly T first<T>(ReadOnlySpan<T> src, int offset)
-            where T : unmanaged
-                => ref Add(ref GetReference<T>(src), offset);
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static ref readonly char first(ReadOnlySpan<char> src)
+            => ref GetReference(src);
     }
 }

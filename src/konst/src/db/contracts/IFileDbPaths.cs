@@ -30,25 +30,34 @@ namespace Z0
             => Root + FS.folder(PN.Logs);
 
         FS.FolderPath TableRoot()
-            => Root + FS.folder(PN.Tables);
+            => Root + FS.folder(PN.tables);
 
         FS.FolderPath SourceRoot()
-            => Root + FS.folder(PN.Sources);
+            => Root + FS.folder(PN.sources);
 
         FS.FolderPath DocRoot()
-            => Root + FS.folder(PN.Docs);
+            => Root + FS.folder(PN.docs);
 
         FS.FolderPath ToolRoot()
-            => Root + FS.folder(PN.Tools);
+            => Root + FS.folder(PN.tools);
 
         FS.FolderPath Notebooks()
-            => Root + FS.folder(PN.Notebooks);
+            => Root + FS.folder(PN.notebooks);
 
         FS.FolderPath CaptureRoot()
             => Root + FS.folder(PN.Capture);
 
         FS.FolderPath JobRoot()
-            => Root + FS.folder(PN.Jobs);
+            => Root + FS.folder(PN.jobs);
+
+        FS.FolderPath IndexRoot()
+            => Root + FS.folder(PN.indices);
+
+        FS.FilePath IndexFile(string id)
+            => IndexRoot() + FS.file(id, Idx);
+
+        FS.FilePath[] IndexFiles()
+            => IndexRoot().Files(Idx);
 
         FS.FolderPath JobQueue()
             => JobRoot() + FS.folder(PN.Queue);
@@ -135,10 +144,10 @@ namespace Z0
             => ToolRoot() + FS.folder(id.Name);
 
         FS.FolderPath ToolOutput(ToolId id)
-            => Tools(id) + FS.folder(PN.Output);
+            => Tools(id) + FS.folder(PN.output);
 
         FS.FolderPath CapturedExtractDir()
-            => CaptureRoot() + FS.folder(PN.Extracts);
+            => CaptureRoot() + FS.folder(PN.extracts);
 
         FS.FilePath[] CapturedExtractFiles()
             => CapturedExtractDir().AllFiles;

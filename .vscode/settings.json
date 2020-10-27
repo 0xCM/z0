@@ -673,6 +673,7 @@
         "nspan",
         "opcount",
         "opid",
+        "opkey",
         "opmask",
         "opname",
         "oprod",

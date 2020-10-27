@@ -14,11 +14,6 @@ namespace Z0
     partial struct ApiIdentify
     {
 
-        [MethodImpl(Inline), Op]
-        public static ApiMetadataUri identify2(MethodInfo src)
-            => ApiMetadataUri.identify(src);
-
-
         /// <summary>
         /// Identifies a type
         /// </summary>

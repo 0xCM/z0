@@ -11,24 +11,25 @@ namespace Z0
 
     using static Konst;
 
-    [ApiHost]
+    [ApiHost(ApiNames.Seq, true)]
     public readonly struct Seq
     {
+        const NumericKind Closure = UInt64k;
+
         /// <summary>
         /// Constructs a nonempty stream
         /// </summary>
         /// <param name="head">The first element in the stream</param>
         /// <param name="tail">The remaining elements of the stream</param>
         /// <typeparam name="T">The streamed element type</typeparam>
-        [Op, Closures(UInt64k)]
+        [Op, Closures(Closure)]
         public static Source<T> nonempty<T>(T head, params T[] tail)
-            => z.seq(nes(head,tail));
+            => z.seq(nes(head, tail));
 
-        [Op, Closures(UInt64k)]
+        [Op, Closures(Closure)]
         static IEnumerable<T> nes<T>(T head, params T[] tail)
         {
             yield return head;
-
             foreach (var t in tail)
                 yield return t;
         }
@@ -38,7 +39,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The stream elements</param>
         /// <typeparam name="T">The streamed element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Source<T> from<T>(params T[] src)
             => src;
 
@@ -48,7 +49,7 @@ namespace Z0
         /// <param name="head">The first part of the sequence</param>
         /// <param name="tail">The last part of the sequence</param>
         /// <typeparam name="T">The streamed element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Source<T> from<T>(Source<T> head, Source<T> tail)
             => head.Concat(tail);
 
@@ -59,7 +60,7 @@ namespace Z0
         /// <param name="s2">The second segment</param>
         /// <param name="s3">The terminal segment</param>
         /// <typeparam name="T">The streamed element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Source<T> from<T>(Source<T> s1, Source<T> s2, Source<T> s3)
             => s1.Concat(s2).Concat(s3);
 
@@ -68,16 +69,15 @@ namespace Z0
         /// </summary>
         /// <param name="src">The source streams</param>
         /// <typeparam name="T">The streamed element type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Source<T> join<T>(params IEnumerable<T>[] src)
             => src.SelectMany(x => x);
 
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Source<T> from<T>(IEnumerable<T> src)
             => new Source<T>(src);
 
-
-        [MethodImpl(Inline), Op, Closures(UInt64k)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Source<T> empty<T>()
             => Source<T>.Empty;
     }

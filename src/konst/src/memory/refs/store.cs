@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct MemRefs
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void store<T>(ReadOnlySpan<Ref> src, Span<T> dst)
             where T : struct
         {

@@ -9,7 +9,6 @@ namespace Z0
 
     using static Part;
     using static System.Runtime.CompilerServices.Unsafe;
-    using static System.Runtime.InteropServices.MemoryMarshal;
 
     partial struct memory
     {

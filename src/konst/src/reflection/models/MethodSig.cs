@@ -12,11 +12,11 @@ namespace Z0
     /// <summary>
     /// Identifies and describes a method that, whithin some useful scope, is unique
     /// </summary>
-    public struct MethodSig
+    public struct MethodSig : ITextual
     {
         public ClrArtifactKey MethodId;
 
-        public string MethodName;
+        public Name MethodName;
 
         public Name DefiningAssembly;
 
@@ -30,7 +30,7 @@ namespace Z0
 
         public TypeParameters TypeParams;
 
-        internal MethodSig(
+        public MethodSig(
             int MethodId,
             string DefiningAssembly,
             string DefiningModule,
@@ -52,23 +52,9 @@ namespace Z0
         }
 
         public string Format()
-        {
-            var dst = text.build();
-            dst.Append(ReturnType.Format());
-            dst.Append(Chars.Space);
-            dst.Append(MethodName);
-            dst.Append(ValueParams.Format());
-            return dst.ToString();
-        }
+            => Reflex.format(this);
 
         public override string ToString()
             => Format();
-
-        /// <summary>
-        /// Describes a method's type parameters, if any
-        /// </summary>
-        /// <param name="method">The method to examine</param>
-        static TypeParameter[] TypeParameters(MethodInfo method)
-            => method.GenericParameters(false).Mapi((i,t) => new TypeParameter(t.DisplayName(), i));
     }
 }

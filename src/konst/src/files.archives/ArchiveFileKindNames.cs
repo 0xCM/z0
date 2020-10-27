@@ -117,5 +117,15 @@ namespace Z0
         /// Defines the 'p.csv' literal
         /// </summary>
         public const string pcsv = p + dot + csv;
+
+        /// <summary>
+        /// Defines the 'idx' literal
+        /// </summary>
+        public const string idx = nameof(idx);
+
+        /// <summary>
+        /// Defines the 'deps' literal
+        /// </summary>
+        public const string deps = nameof(deps);
     }
 }

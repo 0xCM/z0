@@ -43,8 +43,12 @@ namespace Z0
 
         public static FileExt Lib => ext(lib);
 
+        public static FileExt Idx => ext(idx, csv);
+
         public static FileExt StatusLog => ext(status) + Log;
 
         public static FileExt ErrorLog => ext(error) + Log;
+
+        public static FileExt JsonDeps => ext(deps, json);
     }
 }

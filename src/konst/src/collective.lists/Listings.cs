@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
+    [ApiHost(ApiNames.Listings, true)]
     public readonly struct Listings
     {
         const NumericKind Closure = UnsignedInts;
@@ -24,7 +24,7 @@ namespace Z0
             where T : unmanaged
                 => new DelimitedList<T>(src, text.delimit, FieldDelimiter);
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static DelimitedList<object> create(char delimiter, params object[] src)
             => new DelimitedList<object>(src, delimiter);
 
@@ -37,5 +37,13 @@ namespace Z0
         public static EnclosedList<T> create<T>(ListEnclosureKind kind, char delimiter, params T[] src)
             where T : unmanaged
                 => new EnclosedList<T>(src, kind, delimiter);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static DelimitedList<T> create<T>(Span<T> src, char delimiter = FieldDelimiter)
+            => new DelimitedList<T>(src.ToArray(), delimiter);
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static DelimitedList<T> create<T>(ReadOnlySpan<T> src, char delimiter = FieldDelimiter)
+            => new DelimitedList<T>(src.ToArray(), delimiter);
     }
 }

@@ -9,9 +9,27 @@ namespace Z0
 
     using static Konst;
     using static z;
-    
-    partial struct StringRefs
+
+    partial struct MemRefs
     {
+        public static string[] format<E>(MemorySlots<E> src)
+            where E : unmanaged
+        {
+            var dst = sys.alloc<string>(src.Length);
+            format(src,dst);
+            return dst;
+        }
+
+        [Op, Closures(Closure)]
+        public static void format<E>(MemorySlots<E> src, Span<string> dst)
+            where E : unmanaged
+        {
+            var count = src.Length;
+            ref readonly var lead = ref src.Lookup(default(E));
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = skip(lead,i).Format();
+        }
+
         /// <summary>
         /// Formats the source argument according to a specified format pattern
         /// </summary>

@@ -46,5 +46,9 @@ namespace Z0
         FileExt Log => X.Log;
 
         FileExt Lib => X.Lib;
+
+        FileExt Idx => X.Idx;
+
+        FileExt JsonDeps => X.JsonDeps;
     }
 }

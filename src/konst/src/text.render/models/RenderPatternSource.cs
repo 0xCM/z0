@@ -27,6 +27,6 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public string Format()
-            => StringRefs.format(FormatPattern, Field.Name, Content);
+            => string.Format(FormatPattern, Field.Name, Content);
     }
 }

@@ -10,7 +10,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
+    [ApiHost("collective.strings")]
     public readonly partial struct Strings
     {
         [MethodImpl(Inline), Op]

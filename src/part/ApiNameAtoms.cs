@@ -265,10 +265,26 @@ namespace Z0
 
         public const string tests = nameof(tests);
 
-        const string reflector = nameof(reflector);
+        public const string test = nameof(test);
+
+        public const string reflector = nameof(reflector);
 
         public const string spans = nameof(spans);
 
         public const string models = nameof(models);
+
+        public const string collective = nameof(collective);
+
+        public const string indexed = nameof(indexed);
+
+        public const string slots = nameof(slots);
+
+        public const string fp = nameof(fp);
+
+        public const string reflex = nameof(reflex);
+
+        public const string seq = nameof(seq);
+
+        public const string linq = nameof(linq);
     }
 }

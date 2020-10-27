@@ -28,7 +28,7 @@ namespace Z0
 
         public void read_models()
         {
-            var svc = ResStoreModels.Service;
+            var svc = Resources.stores(n256);
             var store = svc.store();
             var results = svc.locations(store);
             var dst = CaseWriter(FileExtensions.Csv);
@@ -101,7 +101,7 @@ namespace Z0
 
         public void run_2()
         {
-            var svc = ResStoreModels.Service;
+            var svc = Resources.stores(n256);
             var store = svc.store();
             var sources = store.View;
             for(var i=0u; i<sources.Length; i++)

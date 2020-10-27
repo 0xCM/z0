@@ -12,7 +12,6 @@ namespace Z0
 
     partial struct MemRefs
     {
-        [Op]
         public static Ref<T>[] many<T>(ReadOnlySpan<T> src)
             where T : struct
         {
@@ -21,7 +20,7 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static void many<T>(ReadOnlySpan<T> src, Span<Ref<T>> dst)
             where T : struct
                 => refs(src, dst);

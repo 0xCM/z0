@@ -175,13 +175,6 @@ namespace Z0
         public static OpIdentity sfunc(ApiOpId k, TypeWidth w, NumericKind nk, bool generic = true)
             => I.build(I.name(k), w, nk, generic);
 
-        [MethodImpl(Inline), Op]
-        public static ref ApiMetadataUri identify(MethodInfo src, out ApiMetadataUri dst)
-        {
-            dst = ApiMetadataUri.identify(src);
-            return ref dst;
-        }
-
         /// <summary>
         /// Defines kinded identifiers for nongeneric numeric functions
         /// </summary>

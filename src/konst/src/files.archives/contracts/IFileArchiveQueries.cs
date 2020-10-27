@@ -6,7 +6,6 @@ namespace Z0
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
 
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
@@ -54,5 +53,12 @@ namespace Z0
 
         IEnumerable<FS.FilePath> CsFiles()
             => Files(Cs);
+
+        IEnumerable<FS.FilePath> IndexFiles()
+            => Files(Idx);
+
+        IEnumerable<FS.FilePath> JsonDepsFiles()
+            => Files(JsonDeps);
+
     }
 }

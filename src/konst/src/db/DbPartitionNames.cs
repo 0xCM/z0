@@ -10,17 +10,17 @@ namespace Z0
     [LiteralProvider]
     public readonly struct DbNames
     {
-        public const string Docs = "docs";
+        public const string docs = nameof(docs);
 
-        public const string Tables = "tables";
+        public const string tables = nameof(tables);
 
-        public const string Sources = "sources";
+        public const string sources = nameof(sources);
 
         public const string Stage = "stage";
 
-        public const string Tools = "tools";
+        public const string tools = nameof(tools);
 
-        public const string Jobs = "jobs";
+        public const string jobs = nameof(jobs);
 
         public const string Capture = "capture";
 
@@ -44,14 +44,16 @@ namespace Z0
 
         public const string Hex = "hex";
 
-        public const string Extracts = "extracts";
+        public const string extracts = nameof(extracts);
 
-        public const string Output = "output";
+        public const string output = nameof(output);
 
         public const string SubjectDelimiter = ".";
 
         public const string QualifiedSubject = "{0}" + SubjectDelimiter + "{1}";
 
-        public const string Notebooks = "notebooks";
+        public const string notebooks = nameof(notebooks);
+
+        public const string indices = nameof(indices);
     }
 }

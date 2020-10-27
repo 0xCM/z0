@@ -54,7 +54,7 @@ namespace Z0
 
         public const string ApiHostMemberQuery = api + dot + query + dot + hosts;
 
-       // ~~ Bitlogic
+        // ~~ Bitlogic
         // ~~ -----------------------------------------------------------------------------------------
 
         public const string BitLogicBits = bitlogic + dot + bits;
@@ -149,8 +149,6 @@ namespace Z0
         // ~~ Linq
         // ~~ -----------------------------------------------------------------------------------------
 
-        const string linq = nameof(linq);
-
         public const string LinqXPress = linq + dot + expressions;
 
         public const string LinqXQuery = linq + dot + expressions + dot + query;
@@ -211,7 +209,7 @@ namespace Z0
 
         public const string SymbolicDigits = symbolic + dot + digits;
 
-        public const string SymbolicTest = symbolic + dot + "test";
+        public const string SymbolicTest = symbolic + dot + test;
 
         public const string SymbolicTests = symbolic + dot + tests;
 
@@ -274,12 +272,6 @@ namespace Z0
 
         public const string MemorySlots = A.memory + dot + slots;
 
-        const string slots = nameof(slots);
-
-        const string fp = nameof(fp);
-
-        const string reflex = nameof(reflex);
-
         public const string VexKinds = vex + dot + kinds;
 
         public const string VexKindX = vex + dot + kinds + dot + extensions;
@@ -289,5 +281,11 @@ namespace Z0
         public const string VexReflex = vex + dot + reflex;
 
         public const string VexPop = vex + dot + "pop";
+
+        public const string Indexed = collective + dot + indexed;
+
+        public const string Listings = collective + dot + "listings";
+
+        public const string Seq = collective + dot + seq;
     }
 }

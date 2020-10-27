@@ -154,7 +154,7 @@ namespace Z0
                 if(Index.TryGetValue(mnemonic, out var builder))
                     builder.Include(record);
                 else
-                    Index.Add(mnemonic, ArrayBuilder.Create(record));
+                    Index.Add(mnemonic, ArrayBuilder.build(record));
             }
         }
     }

@@ -13,7 +13,7 @@ namespace Z0
 
     partial struct MemRefs
     {
-        [MethodImpl(Inline), Op]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static uint length<T>(Vector128<ulong> src)
         {
             MemRefs.unpack(vcell(src,1), out var size, out var _);

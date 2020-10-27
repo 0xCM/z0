@@ -13,16 +13,17 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using api = ApiIdentity;
 
     public readonly struct ApiMetadataUri : ITextual
     {
-        const byte PartIndex = 0;
+        internal const byte PartIndex = 0;
 
-        const byte KeyIndex = 1;
+        internal const byte HostIndex = 1;
 
-        const byte HostIndex = 2;
+        internal const byte KeyIndex = 2;
 
-        const byte OpIndex = 3;
+        internal const byte OpIndex = 3;
 
         internal readonly Vector128<uint> Data;
 
@@ -33,31 +34,31 @@ namespace Z0
         public PartId Part
         {
             [MethodImpl(Inline)]
-            get => (PartId)vcell(Data, PartIndex);
-        }
-
-        public ApiOpId KindKey
-        {
-            [MethodImpl(Inline)]
-            get => (ApiOpId)vcell(Data, KeyIndex);
+            get => api.part(this);
         }
 
         public ArtifactKey HostKey
         {
             [MethodImpl(Inline)]
-            get => new ArtifactKey(TableIndex.TypeDef, (ClrArtifactKey)vcell(Data,HostIndex));
+            get => api.host(this);
         }
 
         public ClrArtifactKey HostId
         {
             [MethodImpl(Inline)]
-            get => vcell(Data,HostIndex);
+            get => vcell(Data, HostIndex);
+        }
+
+        public ApiOpId KindKey
+        {
+            [MethodImpl(Inline)]
+            get => api.kind(this);
         }
 
         public ArtifactKey OperationKey
         {
             [MethodImpl(Inline)]
-            get => new ArtifactKey(TableIndex.MethodDef, (ClrArtifactKey)vcell(Data,OpIndex));
+            get => api.operation(this);
         }
 
         public ClrArtifactKey OperationId
@@ -67,26 +68,22 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        public static ApiMetadataUri identify(MethodInfo src)
-            => ApiIdentity.identify(src);
-
-        [MethodImpl(Inline)]
         public static implicit operator ApiMetadataUri(MethodInfo src)
-            => identify(src);
+            => api.identify(src);
 
         [MethodImpl(Inline)]
         public string Format()
-            => ApiIdentity.format(this);
+            => api.format(this);
 
         public string Identifier
         {
             [MethodImpl(Inline)]
-            get => ApiIdentity.identifier(this);
+            get => api.identifier(this);
         }
 
         [MethodImpl(Inline)]
         public bool Equals(ApiMetadataUri src)
-            => ApiIdentity.eq(this,src);
+            => api.eq(this,src);
 
         public override string ToString()
             => Format();
@@ -94,13 +91,13 @@ namespace Z0
         public bool IsNonEmpty
         {
             [MethodImpl(Inline)]
-            get => z.vnonz(Data);
+            get => vnonz(Data);
         }
 
         public bool IsEmpty
         {
             [MethodImpl(Inline)]
-            get => !z.vnonz(Data);
+            get => !vnonz(Data);
         }
 
         public static ApiMetadataUri Empty => default;

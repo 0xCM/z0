@@ -67,7 +67,7 @@ namespace Z0
         public static FS.FolderPath Runtime => FS.dir(AN.Runtime);
     }
 
-    readonly struct BuildArchives
+    readonly struct BuildArchiveFactory
     {
         public static IBuildArchive create(IWfShell wf, FS.FolderPath src)
             => BuildArchive.create(wf, src);
@@ -84,10 +84,10 @@ namespace Z0
 
     readonly struct BuildArchiveSpecs
     {
-        public static BuildArchiveSpec Roslyn
-            => new BuildArchiveSpec(BuildArchiveLabels.roslyn, BuildArchivePaths.Roslyn);
+        public static BuildArchiveSettings Roslyn
+            => new BuildArchiveSettings(BuildArchiveLabels.roslyn, BuildArchivePaths.Roslyn);
 
-        public static BuildArchiveSpec Runtime
-            => new BuildArchiveSpec(BuildArchiveLabels.runtime, BuildArchivePaths.Runtime);
+        public static BuildArchiveSettings Runtime
+            => new BuildArchiveSettings(BuildArchiveLabels.runtime, BuildArchivePaths.Runtime);
     }
 }

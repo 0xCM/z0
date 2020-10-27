@@ -15,12 +15,13 @@ namespace Z0
     /// Implementation of a basic multiset
     /// </summary>
     /// <remarks>See https://en.wikipedia.org/wiki/Multiset</remarks>
-    public struct Multiset<T> 
-    {        
+    public struct Multiset<T>
+    {
         readonly Dictionary<T,int> data;
 
+        [MethodImpl(Inline)]
         public Multiset(IEnumerable<T> src)
-        {            
+        {
             data = new Dictionary<T,int>();
             AddRange(src);
         }
@@ -32,7 +33,7 @@ namespace Z0
         public void AddRange(IEnumerable<T> src)
         {
             foreach(var item in src)
-            {                
+            {
                 if(data.ContainsKey(item))
                     data[item] = ++data[item];
                 else
@@ -40,10 +41,10 @@ namespace Z0
             }
         }
 
-        public int Count 
+        public int Count
             => data.Count;
 
-        public bool IsEmtpty 
+        public bool IsEmtpty
             => Count != 0;
 
 
@@ -60,20 +61,20 @@ namespace Z0
         static IEnumerable<T> _Duplicates(Multiset<T> src)
             => from k in src.data.Keys
                     where src.data[k] > 1 select k;
-        
+
         /// <summary>
         /// Selects the members that occur more than once
         /// </summary>
         public IEnumerable<T> Duplicates
             => _Duplicates(this);
-            
+
         /// <summary>
         /// Determines whether an item exists in the set
         /// </summary>
         /// <param name="candidate">The search item</param>
         [MethodImpl(Inline)]
         public bool IsMember(T candidate)
-            => data.ContainsKey(candidate);        
+            => data.ContainsKey(candidate);
 
         /// <summary>
         /// Selects all contained items with their occurrence counts

@@ -39,7 +39,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Concatentates two byte arrays
+        /// Concatenates two byte arrays
         /// </summary>
         /// <param name="left">The first array</param>
         /// <param name="right">The second array</param>

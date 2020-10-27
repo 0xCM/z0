@@ -9,13 +9,15 @@ namespace Z0
 
     using static Konst;
 
+    using api = MemRefs;
+
     /// <summary>
     /// Defines a key-parametric indexed view over <see cref='SegRef'/> values
     /// </summary>
     public readonly struct MemorySlots<E>
         where E : unmanaged
     {
-        readonly SegRef[] Data;
+        internal readonly SegRef[] Data;
 
         [MethodImpl(Inline)]
         public MemorySlots(SegRef[] slots)
@@ -23,7 +25,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public ref readonly SegRef Lookup(E index)
-            => ref Data[z.uint8(index)];
+            => ref api.lookup(this, index);
 
         public ref readonly SegRef this[E index]
         {

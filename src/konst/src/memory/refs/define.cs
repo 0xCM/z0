@@ -12,7 +12,7 @@ namespace Z0
 
     partial struct MemRefs
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Ref define(ulong location, uint size)
             => new Ref(location, size);
 

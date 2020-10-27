@@ -14,6 +14,35 @@ namespace Z0
     [ApiHost(ApiNames.MemRefs, true)]
     public readonly partial struct MemRefs
     {
+        const NumericKind Closure = UnsignedInts;
+
+        [Op]
+        public static void locations(in Segments store, Span<MemoryAddress> results)
+        {
+            var sources = store.View;
+            var kSources = sources.Length;
+            for(var i=0u; i<kSources; i++)
+            {
+                ref readonly var source = ref skip(sources,i);
+                var length = source.DataSize;
+                var data = MemStore.Service.load(source);
+
+                if(data.Length == length)
+                {
+                    for(var j = 0u; j<length; j++)
+                    {
+                        ref readonly var x = ref skip(data,j);
+                        if(j == 0)
+                        {
+                            var a = z.address(x);
+                            if(source.Address == a)
+                                seek(results,i) = a;
+                        }
+                    }
+                }
+            }
+        }
+
         [MethodImpl(Inline), Op, Closures(UnsignedInts)]
         public static Ref<byte> from(ReadOnlySpan<byte> src)
             => new Ref<byte>(new Ref(z.address(src), (uint)src.Length));

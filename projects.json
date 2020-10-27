@@ -334,5 +334,12 @@
 		"paths": [],
 		"group": "",
 		"enabled": true
+	},
+	{
+		"name": "ms/dependency-model",
+		"rootPath": "j:\\lang\\net\\runtime\\src\\libraries\\Microsoft.Extensions.DependencyModel",
+		"paths": [],
+		"group": "",
+		"enabled": true
 	}
 ]

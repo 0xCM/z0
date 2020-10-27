@@ -9,16 +9,27 @@ namespace Z0
 
     using static Konst;
 
-    /// <summary>
-    /// Defines a memory store index
-    /// </summary>
+    using api = MemRefs;
+
     public struct MemorySlot
     {
-        Hex8Seq Index;
+        internal Hex8Seq Index;
 
         [MethodImpl(Inline)]
-        public static MemorySlot Init()
-            => new MemorySlot(FirstKey);
+        public MemorySlot(Hex8Seq value)
+            => Index = value;
+
+        [MethodImpl(Inline)]
+        public MemorySlot(byte value)
+            => Index = (Hex8Seq)value;
+
+        [MethodImpl(Inline)]
+        public MemorySlot Advance()
+            => api.advance(ref this);
+
+        [MethodImpl(Inline)]
+        public MemorySlot Retreat()
+            => api.retreat(ref this);
 
         [MethodImpl(Inline)]
         public static MemorySlot operator++(MemorySlot src)
@@ -40,32 +51,8 @@ namespace Z0
         public static implicit operator MemorySlot(byte src)
             => new MemorySlot((Hex8Seq)src);
 
-        [MethodImpl(Inline)]
-        public MemorySlot(Hex8Seq value)
-            => Index = value;
+        internal const Hex8Seq FirstKey = Hex8Seq.x00;
 
-        [MethodImpl(Inline)]
-        public MemorySlot Advance()
-        {
-            if(Index == LastKey)
-                Index = FirstKey;
-            else
-                Index += 1;
-            return this;
-        }
-
-        [MethodImpl(Inline)]
-        public MemorySlot Retreat()
-        {
-            if(Index == FirstKey)
-                Index = LastKey;
-            else
-                Index -= 1;
-            return this;
-        }
-
-        const Hex8Seq FirstKey = Hex8Seq.x00;
-
-        const Hex8Seq LastKey = Hex8Seq.xff;
+        internal const Hex8Seq LastKey = Hex8Seq.xff;
     }
 }

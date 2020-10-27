@@ -10,13 +10,14 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
-    public unsafe readonly struct ResStoreModels
+    [ApiHost("resources.cache.reader")]
+    public unsafe readonly struct ResCacheReader
     {
-        public static ResStoreModels Service => default;
+        readonly ResStore256 Data;
 
-        internal static ResStoreModel Data
-            => ResStoreModel.Data;
+        [MethodImpl(Inline)]
+        internal ResCacheReader(ResStore256 data)
+            => Data = data;
 
         public SegRef[] Refs
         {
@@ -37,7 +38,7 @@ namespace Z0
         {
             var sources = store.View;
             var results = sys.alloc<MemoryAddress>(sources.Length);
-            locations(store,results);
+            MemRefs.locations(store,results);
             return results;
         }
 
@@ -115,21 +116,21 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             if(typeof(N) == typeof(N0))
-                return ResStoreModel.Seg00;
+                return Data.seg(n0);
             else if(typeof(N) == typeof(N1))
-                return ResStoreModel.Seg01;
+                return Data.seg(n1);
             else if(typeof(N) == typeof(N2))
-                return ResStoreModel.Seg02;
+                return Data.seg(n2);
             else if(typeof(N) == typeof(N3))
-                return ResStoreModel.Seg03;
+                return Data.seg(n3);
             else if(typeof(N) == typeof(N4))
-                return ResStoreModel.Seg04;
+                return Data.seg(n4);
             else if(typeof(N) == typeof(N5))
-                return ResStoreModel.Seg05;
+                return Data.seg(n5);
             else if(typeof(N) == typeof(N6))
-                return ResStoreModel.Seg06;
+                return Data.seg(n6);
             else if(typeof(N) == typeof(N7))
-                return ResStoreModel.Seg07;
+                return Data.seg(n7);
             else
                 return Data.SegZ;
         }
@@ -151,32 +152,6 @@ namespace Z0
             var src = span<N>(n);
             var pSrc = gptr(z.first(src));
             return new SegRef(pSrc, src.Length);
-        }
-
-        [Op]
-        static void locations(in Segments store, Span<MemoryAddress> results)
-        {
-            var sources = store.View;
-            for(var i=0u; i<sources.Length; i++)
-            {
-                ref readonly var source = ref skip(sources,i);
-                var length = source.DataSize;
-                var data = MemStore.Service.load(source);
-
-                if(data.Length == length)
-                {
-                    for(var j = 0u; j<length; j++)
-                    {
-                        ref readonly var x = ref skip(data,j);
-                        if(j == 0)
-                        {
-                            var a = z.address(x);
-                            if(source.Address == a)
-                                seek(results,i) = a;
-                        }
-                    }
-                }
-            }
         }
     }
 }

@@ -9,6 +9,8 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Diagnostics;
+    using System.Text.Json;
+    using System.Text.Json.Serialization;
 
     using static z;
     using static Konst;
@@ -96,18 +98,21 @@ namespace Z0
             }
         }
 
-        void Run33()
+        public static ReadOnlySpan<ApiSummaryInfo> api(ISystemApiCatalog src)
         {
-            var ops = @readonly(Wf.Api.Operations.Select(ApiIdentify.identify2).Where(x => x.KindKey.IsUserApi()));
+            var ops = @readonly(src.Operations);
+            var identities = ops.Map(ApiIdentity.identify);
+            var sigs = ops.Map(x => x.Signature());
             var count = ops.Length;
-            for(var i=0; i<count; i++)
-            {
-                Wf.Status(Host, skip(ops,i).Format());
-            }
-            //XedRunner.Run(Wf);
-            //XedEtlWfHost.create().Run(Wf);
-
+            var dst = span<ApiSummaryInfo>(count);
+            for(var i=0u; i<count; i++)
+                seek(dst,i) = ApiSummaryInfo.define(skip(identities,i), skip(sigs,i));
+            return dst;
         }
+
+
+        void EmitApiList()
+            => ApiSummaryInfo.emit(Wf.Api,Wf.Db().IndexFile("z0.api"));
 
         FS.FilePath AppDataPath(FS.FileName file)
             => Wf.AppData + file;
@@ -127,16 +132,36 @@ namespace Z0
             var src = archive.ManagedLibraries.Select(x => Assembly.LoadFrom(x.Name));
             var rows = map(src, f => delimit(f.GetSimpleName(), delimit(f.DebugFlags())));
             Wf.Rows(rows);
-
         }
 
-
-        [Op]
-        public void Run()
+        void ShowTokens()
         {
             var tokens = array<int>(typeof(byte).MetadataToken, typeof(sbyte).MetadataToken, typeof(char).MetadataToken);
             Wf.Status(delimit(tokens.Map(t => t.FormatHex())));
 
+        }
+
+        void ShowDependencies(Assembly src)
+        {
+            var deps = JsonDeps.dependencies(src);
+            var options = deps.OptionData();
+            var json = JsonData.serialize(options);
+            Wf.Row(json);
+
+        }
+
+        [Op]
+        public void Run()
+        {
+            var fx = new FunctionWorkflows(Wf);
+            var f = fx.RunF();
+            var g = fx.RunG();
+            Wf.Status(f.Delimit());
+            Wf.Status(g.Delimit());
+
+            f.SequenceEqual(g);
+
+            ShowDependencies(Wf.Controller);
         }
     }
 

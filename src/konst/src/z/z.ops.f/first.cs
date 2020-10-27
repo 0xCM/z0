@@ -13,42 +13,21 @@ namespace Z0
 
     partial struct z
     {
-        /// <summary>
-        /// Returns a reference to the head of a readonly span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref T first<T>(Span<T> src)
             => ref memory.first(src);
 
-        /// <summary>
-        /// Returns a readonly reference to the first source cell
-        /// </summary>
-        /// <param name="src">The source span</param>
         [MethodImpl(Inline)]
         public static ref readonly char first(ReadOnlySpan<char> src)
             => ref memory.first(src);
 
-        /// <summary>
-        /// Returns a reference to the head of a readonly span
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
         public static ref readonly T first<T>(ReadOnlySpan<T> src)
             => ref memory.first(src);
 
-        /// <summary>
-        /// Returns a readonly reference to the first cell of a readonly span, offset by a specified cell count
-        /// </summary>
-        /// <param name="src">The source span</param>
-        /// <param name="offset">The cell-measured offset</param>
-        /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline)]
-        public static ref readonly T first<T>(ReadOnlySpan<T> src, int offset)
-            where T : unmanaged
-                => ref memory.first(src, offset);
+        public static ref T first<T>(T[] src)
+            => ref memory.first(src);
 
         /// <summary>
         /// Presents the span head as a readonly reference to an unsigned 8-bit integer

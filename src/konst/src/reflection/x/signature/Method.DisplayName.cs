@@ -11,6 +11,8 @@ namespace Z0
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
 
+    using static Konst;
+
     partial class XReflex
     {
         /// <summary>
@@ -24,9 +26,9 @@ namespace Z0
         [Op]
         static string GenericMethodDisplayName(this MethodInfo src, IReadOnlyList<Type> args)
         {
-            var argFmt = args.Count != 0 ?  string.Join(", ", args.Select(t => t.DisplayName()).ToArray()) : string.Empty;
+            var argFmt = args.Count != 0 ?  string.Join(", ", args.Select(t => t.DisplayName()).ToArray()) : EmptyString;
             var typeName = src.Name.Replace($"`{args.Count}", string.Empty);
-            return typeName + (args.Count != 0 ? angled(argFmt) : string.Empty);
+            return typeName + (args.Count != 0 ? angled(argFmt) : EmptyString);
         }
 
         /// <summary>
