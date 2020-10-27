@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Linq;
 
     using static Konst;
     using static z;
@@ -100,5 +101,21 @@ namespace Z0
             Array.Reverse(Data);
             return this;
         }
+
+        public Indexed<Y> Select<Y>(Func<T,Y> selector)
+             => new Indexed<Y>(from x in Data select selector(x));
+
+        public Indexed<Z> SelectMany<Y,Z>(Func<T,Indexed<Y>> lift, Func<T,Y,Z> project)
+            => new Indexed<Z>((from x in Data
+                          from y in lift(x).Data
+                          select project(x, y)).Array());
+
+        public Indexed<Y> SelectMany<Y>(Func<T,Indexed<Y>> lift)
+            => new Indexed<Y>((from x in Data
+                          from y in lift(x).Data
+                          select y).Array());
+
+        public Indexed<T> Where(Func<T,bool> predicate)
+            => new Indexed<T>(from x in Data where predicate(x) select x);
     }
 }

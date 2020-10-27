@@ -11,12 +11,13 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// For a non-constructed generic method or a generic method definition, returns an array of the method's type parameters; otherwise, returns an empty array
         /// </summary>
         /// <param name="m">The method to examine</param>
+        [Op]
         public static Type[] OpenTypeParameters(this MethodInfo m, bool effective)
             => (m.ContainsGenericParameters ? m.GetGenericMethodDefinition().GetGenericArguments()
              : m.IsGenericMethodDefinition ? m.GetGenericArguments()

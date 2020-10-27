@@ -8,25 +8,26 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
-        /// If a method is non-generic, returns an emtpy list.
+        /// If a method is non-generic, returns an empty list.
         /// If a method is open generic, returns a list describing the open parameters
         /// If a method is closed generic, returns a list describing the closed parameters
         /// </summary>
         /// <param name="m">The method to examine</param>
         /// <param name="effective">Whether to yield effective types or types as reported by the framework reflection api</param>
+        [Op]
         public static Type[] GenericParameters(this MethodInfo m, bool effective)
         {
             var dst = new Type[]{};
             if((!m.IsGenericMethod && !m.IsGenericMethodDefinition))
                 return dst;
-            else return 
-                (m.IsConstructedGenericMethod 
-                ? m.GetGenericArguments() 
-                : m.GetGenericMethodDefinition().GetGenericArguments()).Select(arg => effective ? arg.EffectiveType() : arg).ToArray();                             
+            else return
+                (m.IsConstructedGenericMethod
+                ? m.GetGenericArguments()
+                : m.GetGenericMethodDefinition().GetGenericArguments()).Select(arg => effective ? arg.EffectiveType() : arg).ToArray();
         }
 
         /// <summary>
@@ -35,9 +36,10 @@ namespace Z0
         /// returns an empty result
         /// </summary>
         /// <param name="src">The method to examine</param>
+        [Op]
         public static Type[] GenericParameters(this MethodInfo src)
             => src.IsConstructedGenericMethod ? src.GetGenericMethodDefinition().GetGenericArguments()
-             : src.IsGenericMethodDefinition ? src.GetGenericArguments()            
+             : src.IsGenericMethodDefinition ? src.GetGenericArguments()
              : Array.Empty<Type>();
 
     }

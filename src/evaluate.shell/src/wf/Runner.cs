@@ -32,13 +32,23 @@ namespace Z0
         void CloneTables()
         {
             var models = TableModels.create();
-            var count = models.Count;
+            var kT = models.Count;
             var view = models.View;
-            for(var i =0; i<count; i++)
+            for(var i =0; i<kT; i++)
             {
                 ref readonly var model = ref skip(view,i);
                 var clone = CilTableSpecs.clone(model);
-                Wf.Rows(clone);
+                var fields = clone.Fields;
+                var kF = fields.Length;
+
+                var table = CilTableBuilder.create();
+                for(var j=0; j<kF; j++)
+                {
+                    ref readonly var f = ref skip(fields,j);
+                    table.WithField(f);
+                }
+
+
             }
         }
 

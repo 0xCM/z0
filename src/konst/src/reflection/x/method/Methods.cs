@@ -8,20 +8,22 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Selects the conversion operators from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
+        [Op]
         public static MethodInfo[] ConversionOperators(this MethodInfo[] src)
             => src.Where(m => m.IsConversionOperator());
 
         /// <summary>
-        /// Reomoves any conversion operations from the stream
+        /// Removes any conversion operations from the stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
+        [Op]
         public static MethodInfo[] WithoutConversionOperators(this MethodInfo[] src)
             => src.Where(m => !m.IsConversionOperator());
 
@@ -29,6 +31,7 @@ namespace Z0
         /// Selects the abstract methods from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
+        [Op]
         public static MethodInfo[] Abstract(this MethodInfo[] src)
             => src.Where(t => t.IsAbstract);
 
@@ -36,6 +39,7 @@ namespace Z0
         /// Selects the instance methods from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
+        [Op]
         public static MethodInfo[] Instance(this MethodInfo[] src)
             => src.Where(t => !t.IsStatic);
 
@@ -43,6 +47,7 @@ namespace Z0
         /// Selects the non-public methods from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
+        [Op]
         public static MethodInfo[] NonPublic(this MethodInfo[] src)
             => src.Where(t => !t.IsPublic);
     }

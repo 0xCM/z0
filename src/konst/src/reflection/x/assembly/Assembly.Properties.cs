@@ -11,7 +11,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         [MethodImpl(Inline), Op]
         public static PropertyInfo[] Properties(this Assembly a)

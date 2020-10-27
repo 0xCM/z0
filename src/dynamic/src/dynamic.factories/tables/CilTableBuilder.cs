@@ -42,7 +42,7 @@ namespace Z0
             => mb.DefineType(fullName, attributes, parent);
 
         [MethodImpl(Inline), Op]
-        public static TypeBuilder valueType(ModuleBuilder mb, ClrTypeName fullName, TypeAttributes attributes)
+        public static TypeBuilder @struct(ModuleBuilder mb, ClrTypeName fullName, TypeAttributes attributes)
             => mb.DefineType(fullName, attributes, typeof(ValueType));
 
         const TypeAttributes Default = BeforeFieldInit | Public | Sealed | AnsiClass;
@@ -57,39 +57,33 @@ namespace Z0
 
         ushort Index;
 
-
-        [MethodImpl(NotInline),Op]
+        [MethodImpl(Inline),Op]
         public CilTableBuilder(uint capacity)
         {
             Index = 0;
             Fields = span<CilFieldSpec>(capacity);
         }
 
-        [MethodImpl(NotInline),Op]
+        [MethodImpl(Inline),Op]
+        public CilTableBuilder WithField(in CilFieldSpec src)
+        {
+            seek(Fields, Index++) = src;
+            return this;
+        }
+
+        [MethodImpl(Inline),Op]
         public CilTableBuilder WithField(PropertyInfo src)
-        {
-            var field = new CilFieldSpec(src, src.PropertyType, Index);
-            seek(Fields, Index++) = field;
-            return this;
-        }
+            => WithField(new CilFieldSpec(src, src.PropertyType, Index));
 
-        [MethodImpl(NotInline),Op]
+        [MethodImpl(Inline),Op]
         public CilTableBuilder WithField(ClrMemberName name, Type type)
-        {
-            var field = new CilFieldSpec(name, type, Index);
-            seek(Fields, Index++) = field;
-            return this;
-        }
+            => WithField(new CilFieldSpec(name, type, Index));
 
-        [MethodImpl(NotInline), Op]
+        [MethodImpl(Inline), Op]
         public CilTableBuilder WithField(ClrField src)
-        {
-            var field = new CilFieldSpec(src.Name, src.FieldType.Name, Index);
-            seek(Fields, Index++) = field;
-            return this;
-        }
+            =>  WithField(new CilFieldSpec(src.Name, src.FieldType.Name, Index));
 
-        [MethodImpl(NotInline), Op]
+        [MethodImpl(Inline), Op]
         public CilTableBuilder WithFields(params PropertyInfo[] src)
         {
             foreach(var item in src)
@@ -97,7 +91,7 @@ namespace Z0
             return this;
         }
 
-        [MethodImpl(NotInline), Op]
+        [MethodImpl(Inline), Op]
         public CilTableBuilder WithFields(params FieldInfo[] src)
         {
             foreach(var item in src)

@@ -10,6 +10,10 @@ namespace Z0
 
     using static Konst;
 
+    /// <summary>
+    /// Covers a sequence of T-valued fields
+    /// </summary>
+    /// <typeparam name="T">The field value type</param>
     public readonly struct FieldValues<T>
     {
         readonly FieldValue<T>[] Data;

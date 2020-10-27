@@ -6,13 +6,17 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    
-    partial class XTend
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+
+    partial class XReflex
     {
         /// <summary>
         /// Determines whether a property is an indexer
         /// </summary>
         /// <param name="p">The property to examine</param>
+        [MethodImpl(Inline), Op]
         public static bool IsIndexer(this PropertyInfo p)
             => p.GetIndexParameters().Length > 0;
     }

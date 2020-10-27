@@ -8,17 +8,18 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    
+
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Creates generic methods of parametric arity *1*
         /// </summary>
         /// <param name="src"></param>
         /// <param name="args"></param>
-        public static IEnumerable<MethodInfo> MakeGenericMethods(this MethodInfo src, params Type[] args)
+        [Op]
+        public static MethodInfo[] MakeGenericMethods(this MethodInfo src, params Type[] args)
             => args.Select(arg => src.GetGenericMethodDefinition().MakeGenericMethod(arg));
     }
 }

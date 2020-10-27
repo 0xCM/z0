@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Attempts to retrieves the value of a static or instance property
@@ -15,6 +15,7 @@ namespace Z0
         /// <typeparam name="V">The value type</typeparam>
         /// <param name="member">The property</param>
         /// <param name="instance">The object instance, if applicable</param>
+        [Op]
         public static Option<V> Value<V>(this PropertyInfo member, object instance = null)
             => from o in member.Read(instance)
                 from v in Option.TryCast<V>(o)

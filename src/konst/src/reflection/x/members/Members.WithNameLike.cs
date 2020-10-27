@@ -8,8 +8,11 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
 
-    partial class XTend
+    using static Konst;
+
+    partial class XReflex
     {
         /// <summary>
         /// Selects the members with names that contain the supplied search field
@@ -18,7 +21,7 @@ namespace Z0
         /// <param name="search">The name to match</param>
         public static IEnumerable<T> WithNameLike<T>(this IEnumerable<T> src, string search)
             where T : MemberInfo
-                => src.Where(x => x.Name.Contains(search)); 
+                => src.Where(x => x.Name.Contains(search));
 
         /// <summary>
         /// Selects the members with names that contain the supplied search field
@@ -27,7 +30,7 @@ namespace Z0
         /// <param name="search">The name to match</param>
         public static T[] WithNameLike<T>(this T[] src, string search)
             where T : MemberInfo
-                => src.Where(x => x.Name.Contains(search)); 
+                => src.Where(x => x.Name.Contains(search));
 
         /// <summary>
         /// Selects the members with names that contain the supplied search field
@@ -49,6 +52,6 @@ namespace Z0
             where T : MemberInfo
                 => from m in src
                     where search.Any(match => m.Name.StartsWith(match))
-                    select m;    
+                    select m;
     }
 }

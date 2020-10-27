@@ -8,16 +8,9 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    
-    partial class XTend
-    {
-        /// <summary>
-        /// Selects the static methods from a stream
-        /// </summary>
-        /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Static(this IEnumerable<MethodInfo> src)
-            => src.Where(x => x.IsStatic);
 
+    partial class XReflex
+    {
         /// <summary>
         /// Selects the static methods from a stream
         /// </summary>

@@ -12,7 +12,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Returns true if the method accepts generic parameters, false otherwise
@@ -45,7 +45,7 @@ namespace Z0
         [MethodImpl(Inline)]
         public static bool IsNonGeneric(this MethodInfo src)
             => !src.IsGenericMethod && !src.IsConstructedGenericMethod;
-    
+
         /// <summary>
         /// Determines whether a method has a void return and, consequently, cannot be a function
         /// </summary>

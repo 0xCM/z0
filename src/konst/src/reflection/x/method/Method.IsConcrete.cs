@@ -6,9 +6,14 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    
-    partial class XTend
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+
+    partial class XReflex
     {
+
+        [Op, MethodImpl(Inline)]
         public static bool IsConcrete(this MethodInfo src)
             => !src.IsAbstract && !src.ContainsGenericParameters;
     }

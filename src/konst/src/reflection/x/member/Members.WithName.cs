@@ -9,7 +9,7 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Selects the members with a particular name
@@ -18,7 +18,7 @@ namespace Z0
         /// <param name="name">The name to match</param>
         public static IEnumerable<T> WithName<T>(this IEnumerable<T> src, string name)
             where T : MemberInfo
-                => src.Where(x => x.Name == name); 
+                => src.Where(x => x.Name == name);
 
         /// <summary>
         /// Selects the members with a particular name
@@ -27,7 +27,7 @@ namespace Z0
         /// <param name="name">The name to match</param>
         public static T[] WithName<T>(this T[] src, string name)
             where T : MemberInfo
-                => src.Where(x => x.Name == name); 
+                => src.Where(x => x.Name == name);
 
         /// <summary>
         /// Selects the members with a name that exists within a supplied set

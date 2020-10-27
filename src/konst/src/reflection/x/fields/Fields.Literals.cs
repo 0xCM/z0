@@ -10,13 +10,13 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Selects literal fields from the source
         /// </summary>
         /// <param name="src">The data source</param>
-        [MethodImpl(Inline)]
+        [Op]
         public static FieldInfo[] Literals(this FieldInfo[] src)
             => src.Where(x => x.IsLiteral);
 
@@ -25,7 +25,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The data source</param>
         /// <param name="match">The field type to match</param>
-        [MethodImpl(Inline)]
+        [Op]
         public static FieldInfo[] Literals(this FieldInfo[] src, Type match)
             => src.Where(x => x.IsLiteral && x.FieldType == match);
     }

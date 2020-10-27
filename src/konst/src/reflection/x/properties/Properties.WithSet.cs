@@ -6,13 +6,14 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Selects the properties with set methods from the stream
         /// </summary>
         /// <param name="src">The properties to examine</param>
+        [Op]
         public static PropertyInfo[] WithSet(this PropertyInfo[] src)
             => src.Where(p => p.GetSetMethod() != null);
 
@@ -20,6 +21,7 @@ namespace Z0
         /// Selects the properties from a stream that have public manipulators
         /// </summary>
         /// <param name="src">The source stream</param>
+        [Op]
         public static PropertyInfo[] WithPublicSet(this PropertyInfo[] src)
             => src.Where(p => p.CanWrite && p.GetSetMethod().IsPublic);
     }

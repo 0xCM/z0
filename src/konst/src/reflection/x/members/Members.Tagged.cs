@@ -8,8 +8,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Selects the members with a particular attribute
@@ -18,6 +18,6 @@ namespace Z0
         /// <param name="name">The name to match</param>
         public static IEnumerable<T> Tagged<T>(this IEnumerable<T> src, Type tAttrib)
             where T : MemberInfo
-                => src.Where(m => m.Tagged(tAttrib)); 
+                => src.Where(m => m.Tagged(tAttrib));
     }
 }

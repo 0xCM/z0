@@ -7,13 +7,26 @@ namespace Z0
     using System;
     using System.Runtime.CompilerServices;
     using System.Reflection;
+    using System.Runtime.InteropServices;
 
     using static Konst;
 
     partial struct ClrArtifacts
     {
-        [MethodImpl(Inline), Op]
-        public static ModuleView vManifest(Assembly src)
-            => view(src.ManifestModule);
+        [StructLayout(DefaultLayout)]
+        public struct FieldMetadata
+        {
+            public ClrArtifactRef Key;
+
+            public ClrArtifactKey DeclaringType;
+
+            public ClrArtifactKey DataType;
+
+            public FieldAttributes Attributes;
+
+            public MemoryAddress Address;
+
+            public bool IsStatic;
+        }
     }
 }

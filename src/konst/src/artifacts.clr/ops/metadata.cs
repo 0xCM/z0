@@ -15,10 +15,10 @@ namespace Z0
     partial struct ClrArtifacts
     {
         [MethodImpl(Inline), Op]
-        public static FieldTable table(FieldInfo src)
+        public static FieldMetadata metadata(FieldInfo src)
         {
-            var a = view(src);
-            var dst = new FieldTable();
+            var a = ClrViews.view(src);
+            var dst = new FieldMetadata();
             dst.Key = reference(a);
             dst.DeclaringType = a.DeclaringType.Id;
             dst.DataType = a.FieldType.Id;

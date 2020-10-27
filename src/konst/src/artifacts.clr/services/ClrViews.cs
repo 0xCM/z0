@@ -6,14 +6,22 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Buffers;
     using System.Reflection;
 
     using static Konst;
     using static z;
+    using static ClrArtifacts;
 
-    partial struct ClrArtifacts
+    /// <summary>
+    /// Defines the primary interface for clr artifact interrogation
+    /// </summary>
+    [ApiHost("reflex.views")]
+    public readonly partial struct ClrViews
     {
+        [MethodImpl(Inline), Op]
+        public static ModuleView vManifest(Assembly src)
+            => view(src.ManifestModule);
+
         /// <summary>
         /// Defines a <see cref='ModuleView'/> over the source
         /// </summary>

@@ -15,6 +15,8 @@ namespace Z0
     /// </summary>
     public readonly struct ClrMemberIdentity : ITextual, IEquatable<ClrMemberIdentity>, INullity
     {
+        readonly ulong Data;
+
         [MethodImpl(Inline)]
         public static ClrMemberIdentity from(FieldInfo src)
             => new ClrMemberIdentity(src);
@@ -26,8 +28,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ClrMemberIdentity from(MethodInfo src)
             => new ClrMemberIdentity(src);
-
-        readonly ulong Data;
 
         public ClrArtifactKey OwnerId
         {

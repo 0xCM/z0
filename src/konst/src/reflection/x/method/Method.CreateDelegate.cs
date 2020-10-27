@@ -9,7 +9,7 @@ namespace Z0
     using System.Reflection;
     using System.Linq.Expressions;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Creates a delegate for a static method via the expression api

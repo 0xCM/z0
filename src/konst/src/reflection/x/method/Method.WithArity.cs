@@ -8,13 +8,17 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    
-    partial class XTend
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+
+    partial class XReflex
     {
         /// <summary>
         /// Selects functions from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
+        [Op]
         public static MethodInfo[] WithArity(this MethodInfo[] src, int arity)
             => src.Where(m => m.HasArityValue(arity));
 
@@ -23,6 +27,7 @@ namespace Z0
         /// </summary>
         /// <param name="src">The methods to examine</param>
         /// <param name="t">The parameter type to match</param>
+        [Op]
         public static MethodInfo[] WithParameterCount(this MethodInfo[] src, int count)
             => from m in src
                 where m.GetParameters().Length == count

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         [MethodImpl(Inline), Op]
         public static Type[] Structs(this Assembly[] src)

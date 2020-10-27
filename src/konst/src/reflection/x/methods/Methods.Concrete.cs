@@ -8,17 +8,15 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    
-    partial class XTend
-    {
-        public static MethodInfo[] Concrete(this MethodInfo[] src)
-            => src.Where(m => m.IsConcrete());
 
+    partial class XReflex
+    {
         /// <summary>
         /// Selects the concrete (not abstract) methods from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> Concrete(this IEnumerable<MethodInfo> src)
+        [Op]
+        public static MethodInfo[] Concrete(this MethodInfo[] src)
             => src.Where(m => m.IsConcrete());
     }
 }

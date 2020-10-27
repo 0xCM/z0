@@ -10,13 +10,13 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Determines whether a parameter's type is of some generic kind
         /// </summary>
         /// <param name="src">The source parameter</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool IsParametric(this ParameterInfo src)
             => src.ParameterType.IsGenericParameter
             || src.ParameterType.IsGenericMethodParameter

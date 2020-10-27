@@ -30,3 +30,7 @@ Abbreviation key:
    Page        Paged Pool
    Cswtch      Context Switches
 
+pslist64 -d -m -x >pslist.log
+
+pslist64 -nobanner -t > pslist.log
+

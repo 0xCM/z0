@@ -9,13 +9,14 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Determines whether a member has a name that contains {'<' | '>'}
         /// </summary>
         /// <param name="src">The member</param>
+        [MethodImpl(Inline), Op]
         public static bool HasGenericName(this MemberInfo src)
             => src.Name.Contains('<') || src.Name.Contains('>');
     }

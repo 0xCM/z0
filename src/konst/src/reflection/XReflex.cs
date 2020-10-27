@@ -10,9 +10,10 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost("reflected.extensions")]
-    public static partial class RXTend
+    [ApiHost("reflex.extensions")]
+    public static partial class XReflex
     {
+        const NumericKind Closure = AllNumeric;
 
     }
 

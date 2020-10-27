@@ -6,13 +6,14 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Selects the public fields from a stream
         /// </summary>
         /// <param name="src">The source stream</param>
+        [Op]
         public static FieldInfo[] Public(this FieldInfo[] src)
             => src.Where(x => x.IsPublic);
 
@@ -20,6 +21,7 @@ namespace Z0
         /// Selects the non-public fields from a stream
         /// </summary>
         /// <param name="src">The source stream</param>
+        [Op]
         public static FieldInfo[] NonPublic(this FieldInfo[] src)
             => src.Where(x => !x.IsPublic);
     }

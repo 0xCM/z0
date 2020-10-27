@@ -8,14 +8,15 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Selects the static properties from an array
         /// </summary>
         /// <param name="src">The source array</param>
-        public static PropertyInfo[] Static(this PropertyInfo[] src)    
+        [Op]
+        public static PropertyInfo[] Static(this PropertyInfo[] src)
             => src.Where(p => p.IsStatic());
     }
 }

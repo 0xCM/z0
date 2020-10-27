@@ -13,7 +13,7 @@ namespace Z0
     using static ReflectionFlags;
     using static Konst;
 
-    public readonly struct FieldCache
+    public readonly struct CachedReflections
     {
         static readonly ConcurrentDictionary<Type, FieldInfo[]> Index
             = new ConcurrentDictionary<Type, FieldInfo[]>();

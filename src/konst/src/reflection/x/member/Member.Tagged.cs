@@ -12,8 +12,17 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
+        /// <summary>
+        /// Determines whether an attribute of specified type is attached to a member
+        /// </summary>
+        /// <param name="m">The member to test</param>
+        /// <param name="tAttrib">The target attribute type</param>
+        [MethodImpl(Inline), Op]
+        public static bool Tagged(this MemberInfo m, Type tAttrib)
+            => System.Attribute.IsDefined(m, tAttrib);
+
         /// <summary>
         /// Determines whether an attribute is applied to a subject
         /// </summary>
@@ -23,15 +32,6 @@ namespace Z0
         public static bool Tagged<T>(this MemberInfo m)
             where T : Attribute
                 => System.Attribute.IsDefined(m, typeof(T));
-
-        /// <summary>
-        /// Determines whether an attribute of specified type is attached to a member
-        /// </summary>
-        /// <param name="m">The member to test</param>
-        /// <param name="tAttrib">The target attribute type</param>
-        [MethodImpl(Inline)]
-        public static bool Tagged(this MemberInfo m, Type tAttrib)
-            => System.Attribute.IsDefined(m, tAttrib);
 
         /// <summary>
         /// Returns true if a parametrically-identified attribute is not applied to the subject

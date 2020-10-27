@@ -2,6 +2,28 @@ OVERVIEW: clang LLVM compiler
 
 USAGE: clang.exe [options] file...
 
+DEBUG/DEVELOPMENT OPTIONS:
+  -ccc-install-dir <value>
+                      Simulate installation in the given directory
+  -ccc-print-bindings Show bindings of tools to actions
+  -ccc-print-phases   Dump list of actions to perform
+  -gen-cdb-fragment-path <value>
+                      Emit a compilation database fragment to the specified directory
+  -gen-reproducer     Auto-generates preprocessed source files and a reproduction script
+  -via-file-asm       Write assembly to file for input to assemble jobs
+
+DRIVER OPTIONS:
+  -ccc-arcmt-check      Check for ARC migration issues that need manual handling
+  -ccc-arcmt-migrate <value>
+                        Apply modifications and produces temporary files that conform to ARC
+  -ccc-arcmt-modify     Apply modifications to files to conform to ARC
+  -ccc-gcc-name <gcc-path>
+                        Name for native GCC compiler
+  -ccc-objcmt-migrate <value>
+                        Apply modifications and produces temporary files to migrate to modern ObjC syntax
+  --driver-mode=<value> Set the driver mode to either 'gcc', 'g++', 'cpp', or 'cl'
+  --rsp-quoting=<value> Set the rsp quoting to either 'posix', or 'windows'
+
 OPTIONS:
   -###                    Print (but do not run) the commands to run for this compilation
   --analyzer-output <value>
@@ -30,6 +52,10 @@ OPTIONS:
                           OpenCL only. Defines that the global work-size be a multiple of the work-group size specified to clEnqueueNDRangeKernel
   -cl-unsafe-math-optimizations
                           OpenCL only. Allow unsafe floating-point optimizations.  Also implies -cl-no-signed-zeros and -cl-mad-enable.
+  --config-system-dir=<value>
+                          System directory for configuration files
+  --config-user-dir=<value>
+                          User directory for configuration files
   --config <value>        Specifies configuration file
   --cuda-compile-host-device
                           Compile CUDA code for both host and device (default).  Has no effect on non-CUDA compilations.
@@ -392,6 +418,8 @@ OPTIONS:
   -fobjc-exceptions       Enable Objective-C exceptions
   -fobjc-runtime=<value>  Specify the target Objective-C runtime kind and version
   -fobjc-weak             Enable ARC-style weak references in Objective-C
+  -fopenmp-enable-irbuilder
+                          Use the experimental OpenMP-IR-Builder codegen path.
   -fopenmp-simd           Emit OpenMP code only for SIMD-based constructs.
   -fopenmp-targets=<value>
                           Specify comma-separated list of triples OpenMP offloading targets to be supported
@@ -619,6 +647,8 @@ OPTIONS:
   -L <dir>                Add directory to library search path
   -mabicalls              Enable SVR4-style position-independent code (Mips only)
   -malign-double          Align doubles to two words in structs (x86 only)
+  -mamdgpu-debugger-abi=<version>
+                          Generate additional code for specified <version> of debugger ABI (AMDGPU only)
   -mbackchain             Link stack frames through backchain on System Z
   -mbranch-protection=<value>
                           Enforce targets of indirect branches and function returns
@@ -637,6 +667,7 @@ OPTIONS:
   -mfix-cortex-a53-835769 Workaround Cortex-A53 erratum 835769 (AArch64 only)
   -mfp32                  Use 32-bit floating point registers (MIPS only)
   -mfp64                  Use 64-bit floating point registers (MIPS only)
+  -mfpxx                  Avoid FPU mode dependent operations when used with the O32 ABI
   -MF <file>              Write depfile output from -MMD, -MD, -MM, or -M to <file>
   -mgeneral-regs-only     Generate code which only uses the general purpose registers (AArch64 only)
   -mglobal-merge          Enable merging of globals
@@ -652,6 +683,21 @@ OPTIONS:
   -mindirect-jump=<value> Change indirect jump instructions to inhibit speculation
   -mios-version-min=<value>
                           Set iOS deployment target
+  -mips1                  Equivalent to -march=mips1
+  -mips2                  Equivalent to -march=mips2
+  -mips32r2               Equivalent to -march=mips32r2
+  -mips32r3               Equivalent to -march=mips32r3
+  -mips32r5               Equivalent to -march=mips32r5
+  -mips32r6               Equivalent to -march=mips32r6
+  -mips32                 Equivalent to -march=mips32
+  -mips3                  Equivalent to -march=mips3
+  -mips4                  Equivalent to -march=mips4
+  -mips5                  Equivalent to -march=mips5
+  -mips64r2               Equivalent to -march=mips64r2
+  -mips64r3               Equivalent to -march=mips64r3
+  -mips64r5               Equivalent to -march=mips64r5
+  -mips64r6               Equivalent to -march=mips64r6
+  -mips64                 Equivalent to -march=mips64
   -MJ <value>             Write a compilation database entry per input
   -mllvm <value>          Additional arguments to forward to LLVM's option processing
   -mlocal-sdata           Extend the -G behaviour to object local data (MIPS)
@@ -694,8 +740,10 @@ OPTIONS:
   -mno-neg-immediates     Disallow converting instructions with negative immediates to their negation or inversion.
   -mno-nvj                Disable generation of new-value jumps
   -mno-nvs                Disable generation of new-value stores
+  -mno-odd-spreg          Disable odd single-precision floating point registers
   -mno-outline            Disable function outlining (AArch64 only)
   -mno-packets            Disable generation of instruction packets
+  -mno-relax-pic-calls    Do not produce relaxation hints for linkers to try optimizing PIC call sequences into direct calls (MIPS only)
   -mno-relax              Disable linker relaxation
   -mno-restrict-it        Allow generation of deprecated IT blocks for ARMv8. It is off by default for ARMv8 Thumb mode
   -mno-save-restore       Disable using library calls for save and restore
@@ -710,6 +758,7 @@ OPTIONS:
   -mnop-mcount            Generate mcount/__fentry__ calls as nops. To activate they need to be patched in.
   -mnvj                   Enable generation of new-value jumps
   -mnvs                   Enable generation of new-value stores
+  -modd-spreg             Enable odd single-precision floating point registers
   -module-dependency-dir <value>
                           Directory to dump module dependencies to
   -module-file-info       Provide information about a particular module file
@@ -726,6 +775,7 @@ OPTIONS:
   -MQ <value>             Specify name of main file output to quote in depfile
   -mrecord-mcount         Generate a __mcount_loc section entry for each __fentry__ call.
   -mrelax-all             (integrated-as) Relax all machine instructions
+  -mrelax-pic-calls       Produce relaxation hints for linkers to try optimizing PIC call sequences into direct calls (MIPS only)
   -mrelax                 Enable linker relaxation
   -mrestrict-it           Disallow generation of deprecated IT blocks for ARMv8. It is on by default for ARMv8 Thumb mode.
   -mrtd                   Make StdCall calling convention the default
@@ -740,6 +790,7 @@ OPTIONS:
   -mstack-probe-size=<value>
                           Set the stack probe size
   -mstackrealign          Force realign the stack at entry to every function
+  -mstrict-align          Force all memory accesses to be aligned (same as mno-unaligned-access)
   -mthread-model <value>  The thread model to use, e.g. posix, single (posix by default)
   -mtls-direct-seg-refs   Enable direct TLS access through segment registers (default)
   -mtls-size=<value>      Specify bit size of immediate TLS offsets (AArch64 ELF only): 12 (for 4KB) | 24 (for 16MB, default) | 32 (for 4GB) | 48 (for 256TB, needs -mcmodel=large)
@@ -750,6 +801,7 @@ OPTIONS:
   -mwavefrontsize64       Wavefront size 64 is used
   -mxnack                 Enable XNACK (AMDGPU only)
   -M                      Like -MD, but also implies -E and writes to stdout by default
+  -no-canonical-prefixes  Use relative instead of canonical paths
   --no-cuda-gpu-arch=<value>
                           Remove GPU architecture (e.g. sm_35) from the list of GPUs to compile for. 'all' resets the list to its default value.
   --no-cuda-include-ptx=<value>
@@ -812,6 +864,7 @@ OPTIONS:
   -Qunused-arguments      Don't emit warning for unused driver arguments
   -Qy                     Emit metadata containing compiler name and version
   -relocatable-pch        Whether to build a relocatable precompiled header
+  -resource-dir <value>   The directory which holds the compiler resource files
   -rewrite-legacy-objc    Rewrite Legacy Objective-C source to C++
   -rewrite-objc           Rewrite Objective-C source to C++
   -Rpass-analysis=<value> Report transformation analysis from optimization passes whose name matches the given POSIX regular expression
@@ -853,6 +906,7 @@ OPTIONS:
   -Wa,<arg>               Pass the comma separated arguments in <arg> to the assembler
   -Wdeprecated            Enable warnings for deprecated constructs and define __DEPRECATED
   -Wl,<arg>               Pass the comma separated arguments in <arg> to the linker
+  -Wlarge-by-value-copy   Warn if a function definition returns or accepts an object larger in bytes than a given value
   -working-directory <value>
                           Resolve file paths relative to the specified directory
   -Wp,<arg>               Pass the comma separated arguments in <arg> to the preprocessor

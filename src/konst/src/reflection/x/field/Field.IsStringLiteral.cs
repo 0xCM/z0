@@ -10,9 +10,9 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static bool IsStringLiteral(this FieldInfo src)
             => src.IsLiteral && src.FieldType == typeof(string);
     }

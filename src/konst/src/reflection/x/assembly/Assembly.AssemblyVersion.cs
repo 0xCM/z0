@@ -7,7 +7,7 @@ namespace Z0
     using System;
     using System.Reflection;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Convenience accessor for the assembly's version

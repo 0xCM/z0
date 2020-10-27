@@ -9,10 +9,10 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Reifies a method if it is open generic; otherwise, returns the original method
@@ -23,7 +23,7 @@ namespace Z0
         public static MethodInfo Reify(this MethodInfo m, params Type[] args)
         {
             if(m.IsGenericMethodDefinition)
-                return m.MakeGenericMethod(args);            
+                return m.MakeGenericMethod(args);
             else if(m.IsConstructedGenericMethod)
                 return m;
             else if(m.IsGenericMethod)

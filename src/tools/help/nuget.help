@@ -1,42 +1,53 @@
-NuGet Version: 4.7.1.5393
+NuGet Version: 5.9.0.6929
 usage: NuGet <command> [args] [options] 
 Type 'NuGet help <command>' for help on a specific command.
 
 Available commands:
 
- add                      Adds the given package to a hierarchical source. http sources are not supported. For more info, goto https://docs.nuget.org/consume/command-line-reference#add-command.
+ add                                  Adds the given package to a hierarchical source. http sources are not supported. For more info, goto https://docs.nuget.org/consume/command-line-reference#add-command
+                   .
 
- config                   Gets or sets NuGet config values.
+ client-certs                         Provides the ability to manage list of client certificates located in NuGet.config files
 
- delete                   Deletes a package from the server.
+ config                               Gets or sets NuGet config values.
 
- help (?)                 Displays general help information and help information about other commands.
+ delete                               Deletes a package from the server.
 
- init                     Adds all the packages from the <srcPackageSourcePath> to the hierarchical <destPackageSourcePath>. http feeds are not supported. For more info, goto https://docs.nuget.org/consume/command-line-reference#init-command.
+ help (?)                             Displays general help information and help information about other commands.
 
- install                  Installs a package using the specified sources. If no sources are specified, all sources defined in the NuGet configuration file are used. If the configuration file specifies no sources, uses the default NuGet feed.
+ init                                 Adds all the packages from the <srcPackageSourcePath> to the hierarchical <destPackageSourcePath>. http feeds are not supported. For more info, goto https://docs.nuge
+                   t.org/consume/command-line-reference#init-command.
 
- list                     Displays a list of packages from a given source. If no sources are specified, all sources defined in %AppData%\NuGet\NuGet.config are used. If NuGet.config specifies no sources, uses the default NuGet feed.
+ install                              Installs a package using the specified sources. If no sources are specified, all sources defined in the NuGet configuration file are used. If the configuration file s
+                   pecifies no sources, uses the default NuGet feed.
 
- locals                   Clears or lists local NuGet resources such as http requests cache, temp cache or machine-wide global packages folder.
+ list                                 Displays a list of packages from a given source. If no sources are specified, all sources defined in %AppData%\NuGet\NuGet.config are used. If NuGet.config specifies
+                   no sources, uses the default NuGet feed.
 
- pack                     Creates a NuGet package based on the specified nuspec or project file.
+ locals                               Clears or lists local NuGet resources such as http requests cache, temp cache or machine-wide global packages folder.
 
- push                     Pushes a package to the server and publishes it.
-             NuGet's default configuration is obtained by loading %AppData%\NuGet\NuGet.config, then loading any nuget.config or .nuget\nuget.config starting from root of drive and ending in current directory.
+ pack                                 Creates a NuGet package based on the specified nuspec or project file.
 
- restore                  Restores NuGet packages.
+ push                                 Pushes a package to the server and publishes it.
+                   NuGet's default configuration is obtained by loading %AppData%\NuGet\NuGet.config, then loading any nuget.config or .nuget\nuget.config starting from root of drive an
+                   d ending in current directory.
 
- setApiKey                Saves an API key for a given server URL. When no URL is provided API key is saved for the NuGet gallery.
+ restore                              Restores NuGet packages.
 
- sign                     Signs a NuGet package with the specified certificate.
+ search                               Searches a given source using the query string provided. If no sources are specified, all sources defined in %AppData%\NuGet\NuGet.config are used.
 
- sources                  Provides the ability to manage list of sources located in %AppData%\NuGet\NuGet.config
+ setApiKey                            Saves an API key for a given server URL. When no URL is provided API key is saved for the NuGet gallery.
 
- spec                     Generates a nuspec for a new package. If this command is run in the same folder as a project file (.csproj, .vbproj, .fsproj), it will create a tokenized nuspec file.
+ sign                                 Signs a NuGet package with the specified certificate.
 
- update                   Update packages to latest available versions. This command also updates NuGet.exe itself.
+ sources                              Provides the ability to manage list of sources located in NuGet.config files.
 
- verify                   Verifies a signed NuGet package.
+ spec                                 Generates a nuspec for a new package. If this command is run in the same folder as a project file (.csproj, .vbproj, .fsproj), it will create a tokenized nuspec file.
 
-For more information, visit http://docs.nuget.org/docs/reference/command-line-reference
+ trusted-signers                      Provides the ability to manage the list of trusted signers.
+
+ update                               Update packages to latest available versions. This command also updates NuGet.exe itself.
+
+ verify                               Verifies a signed NuGet package.
+
+For more information, visit https://docs.nuget.org/docs/reference/command-line-reference

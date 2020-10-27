@@ -10,11 +10,11 @@ namespace Z0
     using static Konst;
 
     public readonly struct GenericState
-    {   
+    {
         public readonly byte State;
 
         public const byte NonGeneric = 0;
-        
+
         public const byte Generic = 1;
 
         [MethodImpl(Inline)]
@@ -43,9 +43,7 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public GenericState(byte state)
-        {
-            State = state;
-        }
+            => State = state;
 
         [MethodImpl(Inline)]
         public bool IsGeneric()
@@ -53,7 +51,7 @@ namespace Z0
 
         public override int GetHashCode()
             => State.GetHashCode();
-        
+
         public override bool Equals(object src)
             => src is GenericState p && p.State == State;
     }

@@ -6,14 +6,18 @@ namespace Z0
 {
     using System;
     using System.Reflection;
- 
-    partial class XTend
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+
+    partial class XReflex
     {
         /// <summary>
         /// Gets the value of a specified field or property
         /// </summary>
         /// <param name="m">The field or property</param>
         /// <param name="o">The object on which the member is defined</param>
+        [Op]
         public static object MemberValue(this MemberInfo m, object o)
         {
             if (m is FieldInfo)
@@ -30,6 +34,7 @@ namespace Z0
         /// <typeparam name="T">The value type</typeparam>
         /// <param name="m">The member</param>
         /// <param name="o">The instance from which to access the member</param>
+        [MethodImpl(Inline), Closures(AllNumeric)]
         public static T MemberValue<T>(this MemberInfo m, object o)
             => (T)m.MemberValue(o);
     }

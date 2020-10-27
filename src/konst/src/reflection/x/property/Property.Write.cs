@@ -7,9 +7,13 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
 
-    partial class XTend
+    using static Konst;
+
+    partial class XReflex
     {
+        [Op]
         public static Option<object> Write(this PropertyInfo p, object src, object dst)
         {
             try

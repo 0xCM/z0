@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Defines the primary interface for clr artifact interrogation
     /// </summary>
-    [ApiHost]
+    [ApiHost("reflex.artifacts")]
     public readonly partial struct ClrArtifacts
     {
         [MethodImpl(Inline), Op]

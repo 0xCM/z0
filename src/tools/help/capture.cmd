@@ -30,14 +30,12 @@ llvm-size --help-hidden > llvm-size.help
 llvm-strings --help-hidden > llvm-strings.help
 llvm-strip --help > llvm-strip.help
 opt --help-hidden > opt.help
-
 llvm-tblgen --help > llvm-tblgen.help
 llvm-xray --help > llvm-xray.help
 obj2yaml --help-hidden > obj2yaml.help
 llvm-dlltool --help-hidden > llvm-dlltool.help
-
-clang++ --help > clang++.help
-
 llvm-pdbutil --help-hidden > llvm-pdbutil.help
 llvm-pdbutil dump --help >> llvm-pdbutil.help
 llvm-pdbutil diadump --help-hidden >> llvm-pdbutil.help
+
+clang --help-hidden > clang.help

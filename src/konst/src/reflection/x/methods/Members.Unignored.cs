@@ -10,13 +10,14 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Selects source methods that are not tagged with <see cref='IgnoreAttribute'/>
         /// </summary>
-        /// <param name="src">The soruce methods</param>
+        /// <param name="src">The source methods</param>
         /// <param name="name">The name to match</param>
+        [Op]
         public static MethodInfo[] Unignored(this MethodInfo[] src)
         {
             var dst = z.list<MethodInfo>();
@@ -25,18 +26,18 @@ namespace Z0
                 ref readonly var method = ref src[i];
                 var ignored = method.Tagged(typeof(IgnoreAttribute));
                 var name = method.Name;
-                var declarer = method.DeclaringType;                    
+                var declarer = method.DeclaringType;
                 var isGetter = name.Contains("get_");
                 var isSetter = name.Contains("set_");
 
                 if(ignored)
                     continue;
-                
+
                 if(!method.IsSpecialName)
                 {
                     dst.Add(method);
                     continue;
-                }                
+                }
 
                 if(!isGetter && !isSetter)
                 {
@@ -46,11 +47,11 @@ namespace Z0
 
                 if(isGetter)
                 {
-                    var getterName = name.Replace("get_", EmptyString);   
+                    var getterName = name.Replace("get_", EmptyString);
                     var getter = declarer.Members(getterName).FirstOrDefault();
                     var getterIgnored = getter != null && getter.Tagged(typeof(IgnoreAttribute));
                     if(!getterIgnored)
-                        dst.Add(method);                        
+                        dst.Add(method);
 
                 }
                 else //setter
@@ -59,12 +60,12 @@ namespace Z0
                     var setter = declarer.Members(setterName).FirstOrDefault();
                     var setterIgnored = setter != null && setter.Tagged(typeof(IgnoreAttribute));
                     if(!setterIgnored)
-                        dst.Add(method);                        
+                        dst.Add(method);
                 }
-                    
+
             }
-            
-            return dst.ToArray();            
+
+            return dst.ToArray();
         }
     }
 }

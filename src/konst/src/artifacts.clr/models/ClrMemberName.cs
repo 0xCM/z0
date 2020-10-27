@@ -18,6 +18,8 @@ namespace Z0
     /// </summary>
     public readonly struct ClrMemberName : IName<string>, IEquatable<ClrMemberName>, IComparable<ClrMemberName>
     {
+        readonly StringRef Content;
+
         [MethodImpl(Inline)]
         public static ClrMemberName from(FieldInfo src)
             => new ClrMemberName(src.Name);
@@ -41,8 +43,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public static ClrMemberName define(string src)
             => new ClrMemberName(string.Intern(src));
-
-        readonly StringRef Content;
 
         [MethodImpl(Inline)]
         public ClrMemberName(string src)

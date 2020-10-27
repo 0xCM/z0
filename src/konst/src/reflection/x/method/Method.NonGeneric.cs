@@ -8,12 +8,13 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Selects the non-generic methods from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
+        [Op]
         public static MethodInfo[] NonGeneric(this MethodInfo[] src)
             => src.Where(t => !t.ContainsGenericParameters && !t.IsConstructedGenericMethod);
     }

@@ -9,7 +9,7 @@ namespace Z0
 
     using static Konst;
 
-    partial class RXTend
+    partial class XReflex
     {
         /// <summary>
         /// Determines whether a type is system-defined primitive

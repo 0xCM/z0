@@ -11,15 +11,17 @@ namespace Z0
     using System.ComponentModel;
     using System.Runtime.CompilerServices;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Encloses text between less than and greater than characters
         /// </summary>
         /// <param name="content">The content to enclose</param>
+        [Op]
         static string angled(string content)
             => String.IsNullOrWhiteSpace(content) ? string.Empty : $"<{content}>";
 
+        [Op]
         static string GenericMethodDisplayName(this MethodInfo src, IReadOnlyList<Type> args)
         {
             var argFmt = args.Count != 0 ?  string.Join(", ", args.Select(t => t.DisplayName()).ToArray()) : string.Empty;
@@ -31,6 +33,7 @@ namespace Z0
         /// Constructs a display name for a method
         /// </summary>
         /// <param name="src">The source method</param>
+        [Op]
         public static string DisplayName(this MethodInfo src)
         {
             var attrib = src.GetCustomAttribute<DisplayNameAttribute>();
@@ -45,6 +48,7 @@ namespace Z0
         /// </summary>
         /// <typeparam name="T">The relative type</typeparam>
         /// <param name="src">The source method</param>
+        [Op, Closures(Closure)]
         public static string DisplayName<T>(this MethodBase src)
             => src.DeclaringType.DisplayName() + "/" + src.Name + "<" + typeof(T).DisplayName() + ">";
     }

@@ -30,17 +30,6 @@ namespace Z0
 
         public TypeParameters TypeParams;
 
-        public static MethodSig from(MethodInfo method)
-            => new MethodSig(
-                MethodId: method.MetadataToken,
-                DefiningAssembly: method.Module.Assembly.GetSimpleName(),
-                DefiningModule: method.Module.Name,
-                DeclaringType: TypeSig.from(method.DeclaringType),
-                MethodName: method.DisplayName(),
-                ReturnType: TypeSig.from(method.ReturnType),
-                Args: method.GetParameters().Select(p => new MethodParameter(TypeSig.from(p), p.RefKind(), p.Name, (ushort)p.Position)),
-                TypeParams: TypeParameters(method));
-
         internal MethodSig(
             int MethodId,
             string DefiningAssembly,

@@ -6,14 +6,18 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    
-    partial class XTend
+    using System.Runtime.CompilerServices;
+
+    using static Konst;
+
+    partial class XReflex
     {
         /// <summary>
         /// Determines whether the property has both a public getter and setter
         /// </summary>
         /// <param name="p">The property to examine</param>
-        public static bool HasPublicGetterAndSetter(this PropertyInfo p)
+         [MethodImpl(Inline), Op]
+         public static bool HasPublicGetterAndSetter(this PropertyInfo p)
             => p.HasPublicGetter() && p.HasPublicSetter();
     }
 }

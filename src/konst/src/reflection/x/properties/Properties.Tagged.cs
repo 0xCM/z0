@@ -8,8 +8,8 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Selects properaties from a source stream to which a parametrically-identified attribute is attached

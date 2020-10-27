@@ -8,14 +8,15 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Selects the closed generic methods from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> ClosedGeneric(this IEnumerable<MethodInfo> src)
+        [Op]
+        public static IEnumerable<MethodInfo> ClosedGeneric(this MethodInfo[] src)
             => src.Where(t => t.IsConstructedGenericMethod);
     }
 }

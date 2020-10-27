@@ -9,14 +9,15 @@ namespace Z0
     using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Selects the properties from a stream that reify a specified interface type
         /// </summary>
         /// <param name="src">The source stream</param>
-        /// <param name="tInterface">The inteface type</param>
+        /// <param name="tInterface">The interface type</param>
+        [Op]
         public static PropertyInfo[] Reifies(this PropertyInfo[] src, Type tInterface)
             => src.Where(p => p.PropertyType.Reifies(tInterface));
     }

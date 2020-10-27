@@ -6,8 +6,8 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Selects source members that are not tagged with <see cref='IgnoreAttribute'/>
@@ -16,6 +16,6 @@ namespace Z0
         /// <param name="name">The name to match</param>
         public static T[] Unignored<T>(this T[] src)
             where T : MemberInfo
-                => src.Where(m => !m.Tagged(typeof(IgnoreAttribute))); 
+                => src.Where(m => !m.Tagged(typeof(IgnoreAttribute)));
     }
 }

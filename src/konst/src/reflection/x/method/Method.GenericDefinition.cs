@@ -8,14 +8,15 @@ namespace Z0
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// For the generic methods in a stream, selects their respective definitions
         /// </summary>
         /// <param name="src">The methods to examine</param>
-        public static IEnumerable<MethodInfo> GenericDefinitions(this IEnumerable<MethodInfo> src)
-            => src.Where(m => m.IsOpenGeneric() || m.IsClosedGeneric()).Select(m => m.GetGenericMethodDefinition()).Distinct();            
+        [Op]
+        public static IEnumerable<MethodInfo> GenericDefinitions(this MethodInfo[] src)
+            => src.Where(m => m.IsOpenGeneric() || m.IsClosedGeneric()).Select(m => m.GetGenericMethodDefinition()).Distinct();
     }
 }

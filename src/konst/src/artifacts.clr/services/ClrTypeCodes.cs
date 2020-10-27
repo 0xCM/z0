@@ -11,7 +11,7 @@ namespace Z0
 
     using TC = System.TypeCode;
 
-    [ApiHost]
+    [ApiHost("reflex.typcodes")]
     public readonly struct ClrTypeCodes
     {
         [MethodImpl(Inline), Op]

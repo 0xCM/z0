@@ -8,12 +8,13 @@ namespace Z0
     using System.Reflection;
     using System.ComponentModel;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Constructs a display name for a type
         /// </summary>
         /// <param name="src">The source type</param>
+        [Op]
         public static string DisplayName(this Type src)
         {
             if(src == null)
@@ -43,6 +44,7 @@ namespace Z0
             return src.Name;
         }
 
+        [Op]
         static string FormatGeneric(this Type src)
         {
             var name = src.Name;

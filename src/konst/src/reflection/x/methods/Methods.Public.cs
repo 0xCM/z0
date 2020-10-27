@@ -6,13 +6,14 @@ namespace Z0
 {
     using System;
     using System.Reflection;
-    
-    public static partial class Reflective
+
+    partial class XReflex
     {
         /// <summary>
         /// Selects the public methods from a stream
         /// </summary>
         /// <param name="src">The methods to examine</param>
+        [Op]
         public static MethodInfo[] Public(this MethodInfo[] src)
             => src.Where(t => t.IsPublic);
     }
