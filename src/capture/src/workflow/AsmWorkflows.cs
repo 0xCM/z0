@@ -19,8 +19,12 @@ namespace Z0
             => new AsmContext(root);
 
         [MethodImpl(Inline), Op]
-        public static IAsmWf create(IWfShell shell)
-            => new AsmWf(shell);
+        public static IAsmWf create(IWfShell wf)
+            => new AsmWf(wf);
+
+        [MethodImpl(Inline), Op]
+        public static IAsmWf create(IWfShell wf, WfHost host)
+            => new AsmWf(wf.WithHost(host));
 
         [MethodImpl(Inline), Op]
         public static IWfCaptureBroker broker(IWfShell wf)

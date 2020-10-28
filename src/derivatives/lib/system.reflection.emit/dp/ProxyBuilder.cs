@@ -12,42 +12,41 @@ namespace System.Reflection.Emit
     using System.Linq;
     using System.Reflection;
 
-    using DP = DispatcherProxy;
+    using DP = DispatcherProxies;
 
     partial class DispatchProxyGenerator
     {
         partial class ProxyBuilder
         {
-            private static readonly MethodInfo s_delegateInvoke = typeof(Action<object[]>).GetTypeInfo().GetDeclaredMethod("Invoke")!;
+            static readonly MethodInfo s_delegateInvoke = typeof(Action<object[]>).GetTypeInfo().GetDeclaredMethod("Invoke")!;
 
-            private readonly ProxyAssembly _assembly;
+            readonly ProxyAssembly _assembly;
 
-            private readonly TypeBuilder _tb;
+            readonly TypeBuilder _tb;
 
-            private readonly Type _proxyBaseType;
+            readonly Type _proxyBaseType;
 
-            private readonly List<FieldBuilder> _fields;
+            readonly List<FieldBuilder> _fields;
 
             internal ProxyBuilder(ProxyAssembly assembly, TypeBuilder tb, Type proxyBaseType)
             {
                 _assembly = assembly;
                 _tb = tb;
                 _proxyBaseType = proxyBaseType;
-
                 _fields = new List<FieldBuilder>();
                 _fields.Add(tb.DefineField("invoke", typeof(Action<object[]>), FieldAttributes.Private));
             }
 
             void Complete()
             {
-                Type[] args = new Type[_fields.Count];
+                var args = new Type[_fields.Count];
                 for (int i = 0; i < args.Length; i++)
                 {
                     args[i] = _fields[i].FieldType;
                 }
 
-                ConstructorBuilder cb = _tb.DefineConstructor(MethodAttributes.Public, CallingConventions.HasThis, args);
-                ILGenerator il = cb.GetILGenerator();
+                var cb = _tb.DefineConstructor(MethodAttributes.Public, CallingConventions.HasThis, args);
+                var il = cb.GetILGenerator();
 
                 // chained ctor call
                 ConstructorInfo? baseCtor = _proxyBaseType.GetTypeInfo().DeclaredConstructors.SingleOrDefault(c => c.IsPublic && c.GetParameters().Length == 0);
@@ -57,7 +56,7 @@ namespace System.Reflection.Emit
                 il.Emit(OpCodes.Call, baseCtor!);
 
                 // store all the fields
-                for (int i = 0; i < args.Length; i++)
+                for(int i = 0; i< args.Length; i++)
                 {
                     il.Emit(OpCodes.Ldarg_0);
                     il.Emit(OpCodes.Ldarg, i + 1);
@@ -131,9 +130,9 @@ namespace System.Reflection.Emit
                     }
                 }
 
-                foreach (PropertyInfo pi in iface.GetRuntimeProperties())
+                foreach (var prop in iface.GetRuntimeProperties())
                 {
-                    PropertyAccessorInfo ai = propertyMap[pi.GetMethod ?? pi.SetMethod!];
+                    PropertyAccessorInfo ai = propertyMap[prop.GetMethod ?? prop.SetMethod!];
 
                     // If we didn't make an overridden accessor above, this was a static property, non-virtual property,
                     // or a default implementation of a property of a different interface. In any case, we don't need
@@ -141,7 +140,7 @@ namespace System.Reflection.Emit
                     if (ai.GetMethodBuilder == null && ai.SetMethodBuilder == null)
                         continue;
 
-                    PropertyBuilder pb = _tb.DefineProperty(pi.Name, pi.Attributes, pi.PropertyType, pi.GetIndexParameters().Select(p => p.ParameterType).ToArray());
+                    var pb = _tb.DefineProperty(prop.Name, prop.Attributes, prop.PropertyType, prop.GetIndexParameters().Select(p => p.ParameterType).ToArray());
                     if (ai.GetMethodBuilder != null)
                         pb.SetGetMethod(ai.GetMethodBuilder);
                     if (ai.SetMethodBuilder != null)
@@ -150,7 +149,7 @@ namespace System.Reflection.Emit
 
                 foreach (EventInfo ei in iface.GetRuntimeEvents())
                 {
-                    EventAccessorInfo ai = eventMap[ei.AddMethod ?? ei.RemoveMethod!];
+                    var ai = eventMap[ei.AddMethod ?? ei.RemoveMethod!];
 
                     // If we didn't make an overridden accessor above, this was a static event, non-virtual event,
                     // or a default implementation of an event of a different interface. In any case, we don't
@@ -159,7 +158,7 @@ namespace System.Reflection.Emit
                         continue;
 
                     Debug.Assert(ei.EventHandlerType != null);
-                    EventBuilder eb = _tb.DefineEvent(ei.Name, ei.Attributes, ei.EventHandlerType!);
+                    var eb = _tb.DefineEvent(ei.Name, ei.Attributes, ei.EventHandlerType!);
                     if (ai.AddMethodBuilder != null)
                         eb.SetAddOnMethod(ai.AddMethodBuilder);
                     if (ai.RemoveMethodBuilder != null)
@@ -171,33 +170,30 @@ namespace System.Reflection.Emit
 
             MethodBuilder AddMethodImpl(MethodInfo mi)
             {
-                ParameterInfo[] parameters = mi.GetParameters();
-                Type[] paramTypes = ParamTypes(parameters, false);
+                var parameters = mi.GetParameters();
+                var paramTypes = DispatcherProxies.ParamTypes(parameters, false);
+                var mdb = _tb.DefineMethod(mi.Name, MethodAttributes.Public | MethodAttributes.Virtual, mi.ReturnType, paramTypes);
 
-                MethodBuilder mdb = _tb.DefineMethod(mi.Name, MethodAttributes.Public | MethodAttributes.Virtual, mi.ReturnType, paramTypes);
                 if (mi.ContainsGenericParameters)
                 {
-                    Type[] ts = mi.GetGenericArguments();
-                    string[] ss = new string[ts.Length];
-                    for (int i = 0; i < ts.Length; i++)
-                    {
+                    var ts = mi.GetGenericArguments();
+                    var ss = new string[ts.Length];
+                    for(int i=0; i< ts.Length; i++)
                         ss[i] = ts[i].Name;
-                    }
-                    GenericTypeParameterBuilder[] genericParameters = mdb.DefineGenericParameters(ss);
-                    for (int i = 0; i < genericParameters.Length; i++)
-                    {
-                        genericParameters[i].SetGenericParameterAttributes(ts[i].GetTypeInfo().GenericParameterAttributes);
-                    }
-                }
-                ILGenerator il = mdb.GetILGenerator();
 
-                ParametersArray args = new ParametersArray(il, paramTypes);
+                    var genericParameters = mdb.DefineGenericParameters(ss);
+                    for(int i=0; i<genericParameters.Length; i++)
+                        genericParameters[i].SetGenericParameterAttributes(ts[i].GetTypeInfo().GenericParameterAttributes);
+                }
+
+                var il = mdb.GetILGenerator();
+                var args = new ParametersArray(il, paramTypes);
 
                 // object[] args = new object[paramCount];
                 il.Emit(OpCodes.Nop);
-                GenericArray<object> argsArr = new GenericArray<object>(il, ParamTypes(parameters, true).Length);
+                var argsArr = new GenericArray<object>(il, DispatcherProxies.ParamTypes(parameters, true).Length);
 
-                for (int i = 0; i < parameters.Length; i++)
+                for(int i=0; i<parameters.Length; i++)
                 {
                     // args[i] = argi;
                     bool isOutRef = parameters[i].IsOut && parameters[i].ParameterType.IsByRef && !parameters[i].IsIn;
@@ -272,95 +268,13 @@ namespace System.Reflection.Emit
                 if (mi.ReturnType != typeof(void))
                 {
                     packedArr.Get(PackedArgs.ReturnValuePosition);
-                    Convert(il, typeof(object), mi.ReturnType, false);
+                    DP.Convert(il, typeof(object), mi.ReturnType, false);
                 }
 
                 il.Emit(OpCodes.Ret);
 
                 _tb.DefineMethodOverride(mdb, mi);
                 return mdb;
-            }
-
-            static Type[] ParamTypes(ParameterInfo[] src, bool noByRef)
-            {
-                var types = new Type[src.Length];
-                for (int i = 0; i < src.Length; i++)
-                {
-                    types[i] = src[i].ParameterType;
-                    if (noByRef && types[i].IsByRef)
-                        types[i] = types[i].GetElementType()!;
-                }
-                return types;
-            }
-
-            static void Convert(ILGenerator il, Type source, Type target, bool isAddress)
-            {
-                Debug.Assert(!target.IsByRef);
-                if (target == source)
-                    return;
-
-                TypeInfo sourceTypeInfo = source.GetTypeInfo();
-                TypeInfo targetTypeInfo = target.GetTypeInfo();
-
-                if (source.IsByRef)
-                {
-                    Debug.Assert(!isAddress);
-                    Type argType = source.GetElementType()!;
-                    Ldind(il, argType);
-                    Convert(il, argType, target, isAddress);
-                    return;
-                }
-                if (targetTypeInfo.IsValueType)
-                {
-                    if (sourceTypeInfo.IsValueType)
-                    {
-                        OpCode opCode = DP.conv()[DP.GetTypeCode(target)];
-                        Debug.Assert(!opCode.Equals(OpCodes.Nop));
-                        il.Emit(opCode);
-                    }
-                    else
-                    {
-                        Debug.Assert(sourceTypeInfo.IsAssignableFrom(targetTypeInfo));
-                        il.Emit(OpCodes.Unbox, target);
-                        if (!isAddress)
-                            Ldind(il, target);
-                    }
-                }
-                else if (targetTypeInfo.IsAssignableFrom(sourceTypeInfo))
-                {
-                    if (sourceTypeInfo.IsValueType || source.IsGenericParameter)
-                    {
-                        if (isAddress)
-                            Ldind(il, source);
-                        il.Emit(OpCodes.Box, source);
-                    }
-                }
-                else
-                {
-                    Debug.Assert(sourceTypeInfo.IsAssignableFrom(targetTypeInfo) || targetTypeInfo.IsInterface || sourceTypeInfo.IsInterface);
-                    if (target.IsGenericParameter)
-                        il.Emit(OpCodes.Unbox_Any, target);
-                    else
-                        il.Emit(OpCodes.Castclass, target);
-                }
-            }
-
-            static void Ldind(ILGenerator il, Type type)
-            {
-                OpCode opCode = DP.ldind()[DP.GetTypeCode(type)];
-                if (!opCode.Equals(OpCodes.Nop))
-                    il.Emit(opCode);
-                else
-                    il.Emit(OpCodes.Ldobj, type);
-            }
-
-            static void Stind(ILGenerator il, Type type)
-            {
-                OpCode opCode = DP.stind()[DP.GetTypeCode(type)];
-                if (!opCode.Equals(OpCodes.Nop))
-                    il.Emit(opCode);
-                else
-                    il.Emit(OpCodes.Stobj, type);
             }
         }
     }

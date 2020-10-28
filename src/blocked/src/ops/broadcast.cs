@@ -23,11 +23,9 @@ namespace Z0
         public static void broadcast<T>(T data, in SpanBlock8<T> dst)
             where T : unmanaged
         {
-            if(aligned<T>(w128,dst.CellCount))
-            {
+            if(aligned<T>(w128, dst.CellCount))
                 for(var i=0; i<dst.BlockCount; i++)
-                    z.vload(n128, dst.Block(i));
-            }
+                    vload(n128, dst.Block(i));
         }
 
         /// <summary>
@@ -39,7 +37,16 @@ namespace Z0
         [MethodImpl(Inline), Op, Closures(Numeric8x16k)]
         public static void broadcast<T>(T data, in SpanBlock16<T> dst)
             where T : unmanaged
-                => dst.Fill(data);
+        {
+            var kBlocks = dst.BlockCount;
+            for(var i=0; i<kBlocks; i++)
+            {
+                var block = dst.Block(i);
+                var kCells = block.Length;
+                for(var j=0u; i<block.Length; j++)
+                    seek(block,j) = data;
+            }
+        }
 
         /// <summary>
         /// Fills a target block with replicated cell data

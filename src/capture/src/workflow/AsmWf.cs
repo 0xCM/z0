@@ -108,6 +108,5 @@ namespace Z0.Asm
 
         public Span<LocatedMethod> Locate(ReadOnlySpan<MethodInfo> src)
             => CaptureAlt.locate(CaptureAlt.identify(src));
-
     }
 }

@@ -79,7 +79,7 @@ namespace System.Reflection.Emit
             return Activator.CreateInstance(proxiedType, (Action<object[]>)DispatchProxyGenerator.Invoke)!;
         }
 
-        static Type GetProxyType(Type baseType, Type interfaceType)
+        internal static Type GetProxyType(Type baseType, Type interfaceType)
         {
             lock (s_baseTypeAndInterfaceToGeneratedProxyType)
             {
@@ -100,7 +100,7 @@ namespace System.Reflection.Emit
         }
 
         // Unconditionally generates a new proxy type derived from 'baseType' and implements 'interfaceType'
-        static Type GenerateProxyType(Type baseType, Type interfaceType)
+        internal static Type GenerateProxyType(Type baseType, Type interfaceType)
         {
             // Parameter validation is deferred until the point we need to create the proxy.
             // This prevents unnecessary overhead revalidating cached proxy types.
@@ -147,10 +147,10 @@ namespace System.Reflection.Emit
         // All generated proxy methods call this static helper method to dispatch.
         // Its job is to unpack the arguments and the 'this' instance and to dispatch directly
         // to the (abstract) DispatchProxy.Invoke() method.
-        static void Invoke(object?[] args)
+        internal static void Invoke(object?[] args)
         {
-            PackedArgs packed = new PackedArgs(args);
-            MethodBase method = s_proxyAssembly.ResolveMethodToken(packed.DeclaringType, packed.MethodToken);
+            var packed = new PackedArgs(args);
+            var method = s_proxyAssembly.ResolveMethodToken(packed.DeclaringType, packed.MethodToken);
             if (method.IsGenericMethodDefinition)
                 method = ((MethodInfo)method).MakeGenericMethod(packed.GenericTypes!);
 

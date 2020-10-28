@@ -17,6 +17,10 @@ namespace Z0
     {
         public static CaptureWorkflowMain create(WfCaptureState state)
             => new CaptureWorkflowMain(state, new CaptureWorkflow());
+
+        public static CaptureWorkflowMain create(IAsmWf asm)
+            => new CaptureWorkflowMain(asm, new CaptureWorkflow());
+
     }
 
     public readonly ref struct CaptureWorkflowMain
@@ -27,11 +31,23 @@ namespace Z0
 
         public WfCaptureState State {get;}
 
+        readonly IAsmWf Asm;
+
+        public CaptureWorkflowMain(IAsmWf asm, WfHost host)
+        {
+            Host = host;
+            Asm = asm;
+            Wf = asm.Wf;
+            State = default;
+            Wf.Created();
+        }
+
         public CaptureWorkflowMain(WfCaptureState state, WfHost host)
         {
             Host = host;
             State = state;
             Wf = state.Wf.WithHost(host);
+            Asm = AsmWorkflows.create(Wf);
             Wf.Created();
         }
 
@@ -44,12 +60,13 @@ namespace Z0
         {
             var flow = Wf.Running();
 
-            Wf.Status(enclose(Wf.Init.PartIdentities));
+            Wf.Status(enclose(Wf.Api.PartIdentities));
 
             try
             {
-                using var host = new ManageCaptureStep(State, Wf.Ct);
-                host.Run();
+                ManageCapture.create(State).Run(Wf);
+                // using var host = new ManageCaptureStep(State, Wf.Ct);
+                // host.Run();
             }
             catch(Exception e)
             {

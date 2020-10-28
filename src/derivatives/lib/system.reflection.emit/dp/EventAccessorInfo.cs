@@ -6,31 +6,29 @@
 //-----------------------------------------------------------------------------
 namespace System.Reflection.Emit
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
     using System.Reflection;
 
     partial class DispatchProxyGenerator
     {
-        partial class ProxyBuilder
+        sealed class EventAccessorInfo
         {
-            sealed class EventAccessorInfo
-            {
-                public MethodInfo? InterfaceAddMethod { get; }
-                public MethodInfo? InterfaceRemoveMethod { get; }
-                public MethodInfo? InterfaceRaiseMethod { get; }
-                public MethodBuilder? AddMethodBuilder { get; set; }
-                public MethodBuilder? RemoveMethodBuilder { get; set; }
-                public MethodBuilder? RaiseMethodBuilder { get; set; }
+            public MethodInfo? InterfaceAddMethod { get; }
 
-                public EventAccessorInfo(MethodInfo? interfaceAddMethod, MethodInfo? interfaceRemoveMethod, MethodInfo? interfaceRaiseMethod)
-                {
-                    InterfaceAddMethod = interfaceAddMethod;
-                    InterfaceRemoveMethod = interfaceRemoveMethod;
-                    InterfaceRaiseMethod = interfaceRaiseMethod;
-                }
+            public MethodInfo? InterfaceRemoveMethod { get; }
+
+            public MethodInfo? InterfaceRaiseMethod { get; }
+
+            public MethodBuilder? AddMethodBuilder { get; set; }
+
+            public MethodBuilder? RemoveMethodBuilder { get; set; }
+
+            public MethodBuilder? RaiseMethodBuilder { get; set; }
+
+            public EventAccessorInfo(MethodInfo? interfaceAddMethod, MethodInfo? interfaceRemoveMethod, MethodInfo? interfaceRaiseMethod)
+            {
+                InterfaceAddMethod = interfaceAddMethod;
+                InterfaceRemoveMethod = interfaceRemoveMethod;
+                InterfaceRaiseMethod = interfaceRaiseMethod;
             }
         }
     }

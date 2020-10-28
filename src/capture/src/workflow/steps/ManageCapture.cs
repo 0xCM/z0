@@ -14,15 +14,31 @@ namespace Z0
     [WfHost]
     public sealed class ManageCapture : WfHost<ManageCapture>
     {
+        WfCaptureState State;
+
+        public static WfHost create(WfCaptureState state)
+        {
+            var host = create();
+            host.State = state;
+            return host;
+        }
+
         protected override void Execute(IWfShell wf)
-            => throw missing();
+        {
+            using var step = new ManageCaptureStep(State,this);
+            step.Run();
+        }
     }
 
     public struct ManageCaptureStep : IManageCapture
     {
-        readonly WfCaptureState State;
+        readonly WfHost Host;
 
         readonly IWfShell Wf;
+
+        readonly WfCaptureState State;
+
+        readonly IAsmWf Asm;
 
         public IWfCaptureBroker Broker {get;}
 
@@ -32,30 +48,27 @@ namespace Z0
 
         readonly PartId[] Parts;
 
-        readonly ManageCapture Step;
-
-        WfStepId StepId => Step.Id;
-
-        public ManageCaptureStep(WfCaptureState state, CorrelationToken ct)
+        public ManageCaptureStep(WfCaptureState state, WfHost host)
         {
+            Host = host;
             State = state;
             App = state.Asm.ContextRoot;
-            Wf = state.Wf;
+            Wf = state.Wf.WithHost(host);
             Sink = Wf.WfSink;
             Parts = Wf.Api.PartIdentities;
             Broker = state.CaptureBroker;
-            Step = new ManageCapture();
-            Wf.Created(StepId);
+            Asm = AsmWorkflows.create(Wf, Host);
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(StepId);
+            Wf.Disposed();
         }
 
         public void Run()
         {
-            Wf.Running(StepId);
+            var flow = Wf.Running();
 
             CaptureParts.create().Run(Wf, State);
 
@@ -66,15 +79,15 @@ namespace Z0
             }
 
             {
-                Wf.Running();
+                var inner = Wf.Running();
                 var evaluate = Evaluate.control(App, Wf.Paths.AppCaptureRoot, Pow2.T14);
                 evaluate.Execute();
-                Wf.Ran(StepId);
+                Wf.Ran(inner);
             }
 
             EmitCodeBlockReport.create().Run(Wf);
 
-            Wf.Ran(StepId);
+            Wf.Ran(flow);
         }
     }
 }

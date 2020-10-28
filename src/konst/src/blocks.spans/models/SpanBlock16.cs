@@ -29,11 +29,11 @@ namespace Z0
 
         [MethodImpl(Inline)]
         public SpanBlock16(Span<T> src)
-            => this.data = src;
+            => data = src;
 
         [MethodImpl(Inline)]
         public SpanBlock16(params T[] src)
-            => this.data = src;
+            => data = src;
 
         /// <summary>
         /// The backing storage
@@ -98,10 +98,10 @@ namespace Z0
         /// <summary>
         /// Mediates access to the underlying storage cells via linear index
         /// </summary>
-        public ref T this[int index]
+        public ref T this[int cell]
         {
             [MethodImpl(Inline)]
-            get => ref Unsafe.Add(ref Head, index);
+            get => ref z.add(Head, cell);
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace Z0
         /// <param name="segment">The cell relative block index</param>
         [MethodImpl(Inline)]
         public ref T Cell(int block, int segment)
-            => ref Unsafe.Add(ref Head, BlockLength*block + segment);
+            => ref z.add(Head, BlockLength*block + segment);
 
         /// <summary>
         /// Retrieves an index-identified data block
@@ -137,7 +137,7 @@ namespace Z0
         /// <param name="block">The block index</param>
         [MethodImpl(Inline)]
         public Span<T> Block(int block)
-            => data.Slice(block * BlockLength, BlockLength);
+            => z.slice(data, block * BlockLength, BlockLength);
 
         /// <summary>
         /// Extracts an index-identified block (non-allocating, but not free due to the price of creating a new wrapper)

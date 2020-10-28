@@ -25,15 +25,20 @@ namespace System.Reflection.Emit
 
             internal const int ReturnValuePosition = 5;
 
-            internal static readonly Type[] PackedTypes = new Type[] { typeof(object), typeof(Type), typeof(int), typeof(object[]), typeof(Type[]), typeof(object) };
+            internal static readonly Type[] PackedTypes = new Type[] {
+                typeof(object), typeof(Type), typeof(int), typeof(object[]), typeof(Type[]), typeof(object)};
 
             private readonly object?[] _args;
 
-            internal PackedArgs() : this(new object[PackedTypes.Length]) { }
+            internal PackedArgs()
+                : this(new object[PackedTypes.Length]) { }
 
             internal PackedArgs(object?[] args) { _args = args; }
 
-            internal DispatchProxy? DispatchProxy { get { return (DispatchProxy?)_args[DispatchProxyPosition]; } }
+            internal DispatchProxy? DispatchProxy
+            {
+                 get => (DispatchProxy?)_args[DispatchProxyPosition];
+            }
 
             internal Type? DeclaringType { get { return (Type?)_args[DeclaringTypePosition]; } }
 

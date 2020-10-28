@@ -517,6 +517,7 @@
         "broadcastd",
         "broadcastq",
         "broadcastw",
+        "brsl",
         "bslli",
         "bsrli",
         "bswap",
