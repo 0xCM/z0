@@ -10,18 +10,20 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
+    [ApiHost(ApiNames.Seq)]
     public static class Seq
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Seq<T> empty<T>()
             => Seq<T>.Empty;
 
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static Seq<T> create<T>(params T[] src)
             => create<T>(@readonly(src));
 
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static void format<T>(in Seq<T> src, char delimiter, ITextBuffer dst)
         {
             var count = src.Length;
@@ -40,8 +42,7 @@ namespace Z0
             dst.Append(Chars.RBrace);
         }
 
-
-        [Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static Seq<T> create<T>(ReadOnlySpan<T> src)
         {
             var count = src.Length;

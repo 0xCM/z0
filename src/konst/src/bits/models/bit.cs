@@ -241,6 +241,10 @@ namespace Z0
             => (BitState)u8(src.State);
 
         [MethodImpl(Inline), Op]
+        public static implicit operator Bit32(bit src)
+            => src.State;
+
+        [MethodImpl(Inline), Op]
         public static implicit operator bit(BitState src)
             => new bit((byte)src);
 

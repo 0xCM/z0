@@ -16,7 +16,6 @@ namespace Z0
         public readonly struct NonZ128<T> : IUnaryPred128D<T>
             where T : unmanaged
         {
-
             [MethodImpl(Inline)]
             public Bit32 Invoke(Vector128<T> x)
                 => gvec.vnonz(x);

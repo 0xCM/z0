@@ -8,9 +8,12 @@ namespace Z0
 
     using Z0.Asm;
 
+    using static z;
+
     class App : IDisposable
     {
         readonly WfHost Host;
+
         readonly IWfShell Wf;
 
         App(IWfShell wf)
@@ -20,12 +23,24 @@ namespace Z0
             PrintContextSummary();
         }
 
-
         void PrintContextSummary()
-        {
-            z.iter(Wf.Settings, s => Wf.Status(string.Format("{0}:{1}", s.Name, s.Value )));
-        }
+            => iter(Wf.Settings, s => Wf.Status(string.Format("{0}:{1}", s.Name, s.Value )));
 
+        public void Run()
+        {
+            try
+            {
+                var app = Apps.context(Wf);
+                var asm = new AsmContext(app, Wf);
+                var cstate = new WfCaptureState(Wf, asm);
+                using var control = CaptureWorkflow.create(cstate);
+                control.Run();
+            }
+            catch(Exception e)
+            {
+                Wf.Error(e);
+            }
+        }
 
         public static void Main(params string[] args)
         {
@@ -33,11 +48,7 @@ namespace Z0
             {
                 using var wf = Polyrand.install(WfShell.create(args));
                 using var host = new App(wf);
-                var app = Apps.context(wf);
-                var asm = new AsmContext(app, wf);
-                var cstate = new WfCaptureState(wf, asm);
-                using var control = CaptureWorkflow.create(cstate);
-                control.Run();
+                host.Run();
             }
             catch(Exception e)
             {

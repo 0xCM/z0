@@ -6,6 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
+    using System.Collections.Generic;
 
     using static Konst;
 
@@ -14,6 +15,10 @@ namespace Z0
         [MethodImpl(Inline)]
         public static DelimitedList<object> delimit(params object[] src)
             => Listings.create(src);
+
+        [MethodImpl(Inline)]
+        public static DelimitedList<T> delimit<T>(IList<T> src, char delimiter = FieldDelimiter)
+            => Listings.create<T>(src.Array());
 
         [MethodImpl(Inline)]
         public static DelimitedList<T> delimit<T>(params T[] src)

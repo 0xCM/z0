@@ -27,7 +27,6 @@ namespace Z0
 
         public WfCaptureState State {get;}
 
-
         public CaptureWorkflowMain(WfCaptureState state, WfHost host)
         {
             Host = host;

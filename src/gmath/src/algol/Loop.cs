@@ -13,11 +13,11 @@ namespace Z0
     public struct Loop<I>
         where I : unmanaged
     {
-        public I Lower;
+        public I LowerBound;
 
         public bool LowerInclusive;
 
-        public I Upper;
+        public I UpperBound;
 
         public bool UpperInclusive;
     }

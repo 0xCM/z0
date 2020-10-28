@@ -20,8 +20,7 @@ namespace Z0
         /// <typeparam name="T">The cell type</typeparam>
         [MethodImpl(Inline), Op, Closures(Closure)]
         public static unsafe Span<T> cover<T>(MemoryAddress address, uint count)
-            where T : struct
-                => CreateSpan<T>(ref address.Ref<T>(), (int)count);
+            => CreateSpan<T>(ref address.Ref<T>(), (int)count);
 
         /// <summary>
         /// Covers content beginning at a specified address with a bytespan

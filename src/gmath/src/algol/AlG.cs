@@ -10,22 +10,24 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost]
+    [ApiHost(ApiNames.AlG)]
     public readonly struct AlG
     {
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        const NumericKind Closure = UnsignedInts;
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static Loop<I> loop<I>(Interval<I> bounds)
             where I : unmanaged
        {
             var dst = new Loop<I>();
-            dst.Lower = bounds.Left;
-            dst.Upper = bounds.Right;
+            dst.LowerBound = bounds.Left;
+            dst.UpperBound = bounds.Right;
             dst.LowerInclusive = bounds.LeftClosed;
             dst.UpperInclusive = bounds.RightClosed;
             return dst;
        }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ActionableLoop<I> join<I>(Loop<I> loop, ILoopAction<I> action)
             where I : unmanaged
        {
@@ -35,7 +37,7 @@ namespace Z0
            return dst;
        }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static DelegatedLoop<I> join<I>(Loop<I> loop, Action<I> action)
             where I : unmanaged
        {
@@ -44,6 +46,11 @@ namespace Z0
            dst.Action = action;
            return dst;
        }
+
+        [MethodImpl(Inline), Op, Closures(Closure)]
+        public static HostedLoop<Accrue<I>,I> accrue<I>(Loop<I> loop, Accrue<I> h = default)
+            where I : unmanaged
+                => host(loop, h);
 
         [MethodImpl(Inline)]
         public static HostedLoop<H,I> loop<H,I>(Interval<I> bounds, H h = default)
@@ -62,11 +69,6 @@ namespace Z0
             return dst;
         }
 
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
-        public static HostedLoop<Accrue<I>,I> accrue<I>(Loop<I> loop, Accrue<I> h = default)
-            where I : unmanaged
-                => host(loop, h);
-
         [MethodImpl(Inline)]
         public static void run<H,I>(in HostedLoop<H,I> runnable)
             where I : unmanaged
@@ -74,8 +76,8 @@ namespace Z0
         {
             var loop =  runnable.Loop;
             var host = runnable.Host;
-            var min = int64(loop.Lower);
-            var max = int64(loop.Upper);
+            var min = int64(loop.LowerBound);
+            var max = int64(loop.UpperBound);
             for(var a=min; a<max; a++)
                 host.Step(@as<long,I>(a));
         }
@@ -87,8 +89,8 @@ namespace Z0
         {
             var loop = a.Loop;
             var host = a.Host;
-            var max = loop.Upper;
-            var i = loop.Lower;
+            var max = loop.UpperBound;
+            var i = loop.LowerBound;
             while(gmath.lt(i, max))
             {
                 host.Step(i);

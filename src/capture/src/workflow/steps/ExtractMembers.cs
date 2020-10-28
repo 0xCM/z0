@@ -55,19 +55,6 @@ namespace Z0
             }
         }
 
-        public ApiMemberExtract[] Extract(IApiHost[] hosts)
-        {
-            try
-            {
-                return Extractor.Extract(ApiMemberJit.jit(hosts, Wf.Broker.Sink));
-            }
-            catch(Exception e)
-            {
-                Wf.Error(Host, e);
-                return sys.empty<ApiMemberExtract>();
-            }
-        }
-
         public ApiMemberExtract[] Extract(ApiDataTypes types)
         {
             var extracted = sys.empty<ApiMemberExtract>();

@@ -1,1 +1,3 @@
-dotnet run
+call build.bat
+
+zrun

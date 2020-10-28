@@ -16,7 +16,6 @@ namespace Z0
 
     using static Konst;
     using static z;
-    using static ArchiveFileKinds;
 
     public static partial class XTend
     {
@@ -379,24 +378,22 @@ namespace Z0
             iter(hosts, h => wf.Status(delimit(h.Assembly.GetSimpleName(),h.Name)));
         }
 
-
         public void Run()
         {
             Wf.Running();
 
-            Wf.Rows(Blm32u.Addresses);
+            //Wf.Rows(Blm32u.Addresses);
 
-            //RunCalc();
+            var counts = FixedBuffer256<byte>.fetch();
+            var dst = list<byte>();
+            counts.Enumerate(c => dst.Add(c));
+            Wf.Status(counts.BufferAddress);
+            Wf.Status(delimit(dst));
 
-            // Db.CopyToNotebook(Db.CapturedAsmFile(PartId.Run, ApiNames.FxSlots), ApiNames.FxSlots);
-            // Db.CopyToNotebook(Db.CapturedAsmFile(PartId.Run, ApiNames.FxSlots_n16x8x8x8), ApiNames.FxSlots);
-
-            //Db.CapturedAsmFile()
             Wf.Ran();
 
         }
     }
-
 
 
     readonly struct ApiNames

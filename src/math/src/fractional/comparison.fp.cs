@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     partial class fmath
     {
         /// <summary>
@@ -14,7 +14,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The value to inspect</param>
         [MethodImpl(Inline), Positive]
-        public static bool positive(float a)
+        public static bit positive(float a)
             => a > 0;
 
         /// <summary>
@@ -22,7 +22,7 @@ namespace Z0
         /// </summary>
         /// <param name="a">The value to inspect</param>
         [MethodImpl(Inline), Positive]
-        public static bool positive(double a)
+        public static bit positive(double a)
             => a > 0;
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline), Negative]
-        public static bool negative(float x)
+        public static bit negative(float x)
             => x < 0;
 
         /// <summary>
@@ -38,69 +38,69 @@ namespace Z0
         /// </summary>
         /// <param name="x">The value to inspect</param>
         [MethodImpl(Inline), Negative]
-        public static bool negative(double x)
+        public static bit negative(double x)
             => x < 0;
 
         [MethodImpl(Inline), Eq]
-        public static bool eq(float a, float b)
+        public static bit eq(float a, float b)
             => a == b;
 
         [MethodImpl(Inline), Eq]
-        public static bool eq(double a, double b)
+        public static bit eq(double a, double b)
             => a == b;
 
         [MethodImpl(Inline), Neq]
-        public static bool neq(float a, float b)
+        public static bit neq(float a, float b)
             => a != b;
 
         [MethodImpl(Inline), Neq]
-        public static bool neq(double a, double b)
+        public static bit neq(double a, double b)
             => a != b;
 
         [MethodImpl(Inline), Gt]
-        public static bool gt(float a, float b)
+        public static bit gt(float a, float b)
             => a > b;
 
         [MethodImpl(Inline), Gt]
-        public static bool gt(double a, double b)
-            => a > b;        
+        public static bit gt(double a, double b)
+            => a > b;
 
         [MethodImpl(Inline), GtEq]
-        public static bool gteq(float a, float b)
+        public static bit gteq(float a, float b)
             => a >= b;
 
         [MethodImpl(Inline), GtEq]
-        public static bool gteq(double a, double b)
-            => a >= b;        
+        public static bit gteq(double a, double b)
+            => a >= b;
 
         [MethodImpl(Inline), Lt]
-        public static bool lt(float lhs, float rhs)
+        public static bit lt(float lhs, float rhs)
             => lhs < rhs;
 
         [MethodImpl(Inline), Lt]
-        public static bool lt(double lhs, double rhs)
-            => lhs < rhs;        
+        public static bit lt(double lhs, double rhs)
+            => lhs < rhs;
 
         [MethodImpl(Inline), LtEq]
-        public static bool lteq(float lhs, float rhs)
+        public static bit lteq(float lhs, float rhs)
             => lhs <= rhs;
 
         [MethodImpl(Inline), LtEq]
-        public static bool lteq(double lhs, double rhs)
-            => lhs <= rhs;        
+        public static bit lteq(double lhs, double rhs)
+            => lhs <= rhs;
 
         [MethodImpl(Inline), Nonz]
-        public static bool nonz(float src)
+        public static bit nonz(float src)
             => src != 0;
-            
+
         [MethodImpl(Inline), Nonz]
-        public static bool nonz(double src)
+        public static bit nonz(double src)
             => src != 0;
 
         [MethodImpl(Inline), Op]
         public static float nonz(float src, float alt)
             => src != 0 ? alt : src;
-            
+
         [MethodImpl(Inline), Op]
         public static double nonz(double src, double alt)
             => src != 0 ? alt : src;
@@ -130,13 +130,13 @@ namespace Z0
             => abs(rhs - lhs);
 
         [MethodImpl(Inline), Op]
-        public static bool within(float a, float b, float delta)
-            => a > b ? a - b <= delta 
+        public static bit within(float a, float b, float delta)
+            => a > b ? a - b <= delta
               : b - a <= delta;
 
         [MethodImpl(Inline), Op]
-        public static bool within(double a, double b, double delta)
-            => a > b ? a - b <= delta 
+        public static bit within(double a, double b, double delta)
+            => a > b ? a - b <= delta
               : b - a <= delta;
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace Z0
         /// <param name="a">The lower bound</param>
         /// <param name="b">The uppper bound</param>
         [MethodImpl(Inline), Between]
-        public static bool between(float x, float a, float b)    
+        public static bit between(float x, float a, float b)
             => x >= a && x <= b;
 
         /// <summary>
@@ -156,11 +156,11 @@ namespace Z0
         /// <param name="a">The lower bound</param>
         /// <param name="b">The uppper bound</param>
         [MethodImpl(Inline), Between]
-        public static bool between(double x, double a, double b)    
+        public static bit between(double x, double a, double b)
             => x >= a && x <= b;
 
         [Op]
-        public static bool fcmp(float x, float y, FpCmpMode mode)
+        public static bit fcmp(float x, float y, FpCmpMode mode)
         {
             var result = mode switch
             {
@@ -182,30 +182,30 @@ namespace Z0
 
                 FpCmpMode.LE_OQ =>  x <= y,
                 FpCmpMode.LE_OS =>  x <= y,
-                
+
                 FpCmpMode.GE_OQ => x >= y,
                 FpCmpMode.GE_OS => x >= y,
 
-                FpCmpMode.NGE_UQ => !(x >= y),                    
-                FpCmpMode.NGE_US => !(x >= y),                    
-                
-                FpCmpMode.NGT_UQ => !(x > y),                    
+                FpCmpMode.NGE_UQ => !(x >= y),
+                FpCmpMode.NGE_US => !(x >= y),
+
+                FpCmpMode.NGT_UQ => !(x > y),
                 FpCmpMode.NGT_US => !(x > y),
 
                 FpCmpMode.NLE_UQ => !(x <= y),
                 FpCmpMode.NLE_US => !(x <= y),
-                
+
                 FpCmpMode.NLT_UQ => !(x < y),
                 FpCmpMode.NLT_US => !(x < y),
 
                 _ => throw new NotSupportedException()
             };
-                            
-            return result; 
+
+            return result;
         }
 
         [Op]
-        public static bool fcmp(double x, double y, FpCmpMode mode)
+        public static bit fcmp(double x, double y, FpCmpMode mode)
         {
             var result = mode switch
             {
@@ -227,26 +227,26 @@ namespace Z0
 
                 FpCmpMode.LE_OQ =>  x <= y,
                 FpCmpMode.LE_OS =>  x <= y,
-                
+
                 FpCmpMode.GE_OQ => x >= y,
                 FpCmpMode.GE_OS => x >= y,
 
-                FpCmpMode.NGE_UQ => !(x >= y),                    
-                FpCmpMode.NGE_US => !(x >= y),                    
-                
-                FpCmpMode.NGT_UQ => !(x > y),                    
+                FpCmpMode.NGE_UQ => !(x >= y),
+                FpCmpMode.NGE_US => !(x >= y),
+
+                FpCmpMode.NGT_UQ => !(x > y),
                 FpCmpMode.NGT_US => !(x > y),
 
                 FpCmpMode.NLE_UQ => !(x <= y),
                 FpCmpMode.NLE_US => !(x <= y),
-                
+
                 FpCmpMode.NLT_UQ => !(x < y),
                 FpCmpMode.NLT_US => !(x < y),
 
                 _ => throw new NotSupportedException()
             };
-                            
-            return result; 
+
+            return result;
         }
 
         public static bool[] fcmp(Span<float> lhs, Span<float> rhs, FpCmpMode kind)

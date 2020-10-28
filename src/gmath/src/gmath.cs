@@ -3,21 +3,23 @@
 // License     :  MIT
 //-----------------------------------------------------------------------------
 namespace Z0
-{    
-    [ApiHost("api")]
+{
+    using static ApiNameAtoms;
+
+    [ApiHost(ApiNames.gmath)]
     public partial class gmath : IApiHost<gmath>
     {
-          
+
     }
 
     [ApiHost("as.numeric")]
-    public partial class AsNumeric : IApiHost<AsNumeric>
-    {                
+    public partial class AsNumeric
+    {
 
     }
 
-    [ApiHost]
-    public partial class Partition : IApiHost<Partition>
+    [ApiHost(ApiNames.Partition)]
+    public partial class Partition
     {
 
     }
@@ -25,6 +27,25 @@ namespace Z0
 
     public static partial class XTend
     {
-       
+
+    }
+
+    readonly struct ApiNames
+    {
+        const string generic = nameof(generic);
+
+        const string math = nameof(math);
+
+        public const string gmath =  math + dot + generic;
+
+        public const string algorithms = nameof(algorithms);
+
+        public const string AlG = math + dot + generic + dot + algorithms;
+
+        public const string XAlG = math + dot + generic + dot + algorithms + dot + extensions;
+
+        public const string Partition = math + dot + "partition";
+
+        public const string Seq = math + dot + seq;
     }
 }

@@ -12,7 +12,6 @@ namespace Z0
 
     public abstract class WfHost<H,S,T> : WfHost<H>, IWfHost<H,S,T>
         where H : WfHost<H,S,T>, new()
-        //where S : new()
     {
         [MethodImpl(Inline)]
         protected WfHost()

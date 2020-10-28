@@ -55,8 +55,6 @@ namespace Z0
 
         public void Run()
         {
-            (this as IManageCapture).Connect();
-
             Wf.Running(StepId);
 
             CaptureParts.create().Run(Wf, State);

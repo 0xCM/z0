@@ -13,7 +13,7 @@ namespace Z0
     /// <summary>
     /// Describes a fixed-width allocated buffer
     /// </summary>
-    public readonly struct CellBufferToken<F> : IBufferToken<F>
+    public readonly struct CellBufferToken<F> : ICellBufferToken<F>
         where F : unmanaged, IDataCell
     {
         public readonly MemoryAddress Address;

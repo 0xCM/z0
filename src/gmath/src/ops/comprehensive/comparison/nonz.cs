@@ -18,12 +18,12 @@ namespace Z0
         /// <param name="src">The source operand</param>
         /// <typeparam name="T">The operand type</typeparam>
         [MethodImpl(Inline), Nonz, Closures(Integers)]
-        public static Bit32 nonz<T>(T src)
+        public static bit nonz<T>(T src)
             where T : unmanaged
                 => nonz_u(src);
 
         [MethodImpl(Inline)]
-        static Bit32 nonz_u<T>(T a)
+        static bit nonz_u<T>(T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(byte))
@@ -39,7 +39,7 @@ namespace Z0
         }
 
         [MethodImpl(Inline)]
-        static Bit32 nonz_i<T>(T a)
+        static bit nonz_i<T>(T a)
             where T : unmanaged
         {
             if(typeof(T) == typeof(sbyte))
@@ -52,18 +52,6 @@ namespace Z0
                  return math.nonz(int64(a));
             else
                 return gfp.nonz(a);
-        }
-
-        [MethodImpl(Inline)]
-        static Bit32 nonz_f<T>(T a)
-            where T : unmanaged
-        {
-            if(typeof(T) == typeof(float))
-                return fmath.nonz(float32(a));
-            else if(typeof(T) == typeof(double))
-                return fmath.nonz(float64(a));
-            else
-                throw Unsupported.define<T>();
         }
     }
 }

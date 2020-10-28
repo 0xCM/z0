@@ -10,19 +10,9 @@ namespace Z0
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
     [Free]
-    public interface IBufferTokenSource
+    public interface ICellBufferToken<F> : IBufferToken
+        where F : unmanaged, IDataCell
     {
-        /// <summary>
-        /// Returns the token of an index-identified buffer
-        /// </summary>
-        ref readonly BufferToken this[BufferSeqId id] {get;}
-    }
 
-    [Free]
-    public interface IBufferToken
-    {
-        IntPtr Handle {get;}
-
-        int Size {get;}
     }
 }

@@ -82,7 +82,7 @@ namespace Z0
         }
 
         /// <summary>
-        /// Specfies whether the polynomial is the zero polynomial
+        /// Specifies whether the polynomial is the zero polynomial
         /// </summary>
         public bool Nonzero
         {

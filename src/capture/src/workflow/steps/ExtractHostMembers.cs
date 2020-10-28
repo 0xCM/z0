@@ -11,10 +11,15 @@ namespace Z0
     using static z;
 
     [WfHost]
-    public sealed class ExtractHostMembers : WfHost<ExtractHostMembers>
+    public sealed class ExtractHostMembers : WfHost<ExtractHostMembers, IApiHost, TableSpan<ApiMemberExtract>>
     {
-        protected override void Execute(IWfShell shell)
-            => throw missing();
+        protected override ref TableSpan<ApiMemberExtract> Execute(IWfShell wf, in IApiHost api, out TableSpan<ApiMemberExtract> dst)
+        {
+            using var step = new ExtractHostMembersStep(wf,this, api);
+            step.Run();
+            dst = step.Extracts;
+            return ref dst;
+        }
     }
 
     ref struct ExtractHostMembersStep
@@ -30,21 +35,22 @@ namespace Z0
         [MethodImpl(Inline)]
         public ExtractHostMembersStep(IWfShell wf, WfHost host, IApiHost src)
         {
-            Wf = wf;
             Host = host;
+            Wf = wf.WithHost(Host);
             Api = src;
             Extracts = new ApiMemberExtract[0]{};
-            Wf.Created(Host);
+            Wf.Created();
         }
 
         public void Dispose()
         {
-            Wf.Disposed(Host);
+            Wf.Disposed();
         }
 
         public void Run()
         {
-            Wf.Running(Host);
+            Wf.Running();
+
             try
             {
                 using var step = new ExtractMembers(Wf, new ExtractMembersHost());
@@ -53,10 +59,10 @@ namespace Z0
             }
             catch(Exception e)
             {
-                Wf.Error(Host, e);
+                Wf.Error(e);
             }
 
-            Wf.Ran(Host);
+            Wf.Ran();
         }
     }
 }

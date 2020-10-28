@@ -26,7 +26,7 @@ namespace Z0
         /// </summary>
         /// <param name="index">An integer in the range [0,63]</param>
         [MethodImpl(Inline)]
-        public uint1 Test(byte index)
+        public bit Test(byte index)
             => math.nonz(BL.and(Pow2.pow(index), State));
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Z0
         /// <param name="index">An integer in the range [0,63]</param>
         /// <param name="state">If 1, turns the bit on; otherwise, the bit is turned off</param>
         [MethodImpl(Inline)]
-        public void Set(byte index, uint1 state)
+        public void Set(byte index, bit state)
         {
             if(state != 0)
                 Enable(index);
@@ -76,6 +76,7 @@ namespace Z0
         public byte Index(T src)
             => (byte)Pow2.log(uint64(src));
 
+        [MethodImpl(Inline)]
         public string Format()
              => Formatters.bits<ulong>().Format(State);
 
