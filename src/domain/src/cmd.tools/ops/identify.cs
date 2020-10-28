@@ -16,7 +16,7 @@ namespace Z0
         /// Creates a parametrically-predicated tool identifier
         /// </summary>
         /// <typeparam name="T">The tool type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [MethodImpl(Inline), Op, Closures(Closure)]
         public static ToolId<T> identify<T>()
             => default;
 

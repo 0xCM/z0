@@ -4,12 +4,8 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
-
-    using static Konst;
-    using static z;
-
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
+    [Free]
     public interface ICmdExec
     {
         CmdId Id {get;}
@@ -17,6 +13,7 @@ namespace Z0
         CmdResult Exec(CmdSpec cmd);
     }
 
+    [Free]
     public interface ICmdExec<H> : ICmdExec
         where H : struct, ICmdExec<H>
     {

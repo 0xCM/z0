@@ -61,6 +61,8 @@ namespace Z0
 
         public const string StateBuffers = buffers + dot + states;
 
+        public const string CmdPatterns = cmd + dot + "patterns";
+
         const string syntax = nameof(syntax);
     }
 }

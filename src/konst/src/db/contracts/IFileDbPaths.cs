@@ -143,7 +143,13 @@ namespace Z0
         FS.FolderPath Tools(ToolId id)
             => ToolRoot() + FS.folder(id.Name);
 
+        FS.FolderPath Tools(CmdToolId id)
+            => ToolRoot() + FS.folder(id.Format());
+
         FS.FolderPath ToolOutput(ToolId id)
+            => Tools(id) + FS.folder(PN.output);
+
+        FS.FolderPath ToolOutput(CmdToolId id)
             => Tools(id) + FS.folder(PN.output);
 
         FS.FolderPath CapturedExtractDir()

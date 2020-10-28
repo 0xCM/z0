@@ -4,12 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
-    using static z;
-
+    [Free]
     public interface ICmdOption : ITextual
     {
         string Name {get;}
@@ -20,6 +17,7 @@ namespace Z0
             => Render.setting(Name,Value);
     }
 
+    [Free]
     public interface ICmdOption<T> : ICmdOption
     {
         new T Value {get;}
@@ -28,6 +26,7 @@ namespace Z0
             => Value.ToString();
     }
 
+    [Free]
     public interface ICmdOption<K,T> : ICmdOption<T>
     {
         K Kind {get;}

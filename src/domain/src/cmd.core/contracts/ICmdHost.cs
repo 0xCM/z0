@@ -4,23 +4,22 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
-    using static z;
-
+    [Free]
     public interface ICmdHost
     {
         CmdId CmdId {get;}
     }
 
+    [Free]
     public interface ICmdHost<H> : ICmdHost
         where H : ICmdHost, new()
     {
 
     }
 
+    [Free]
     public interface ICmdHost<H,C> : ICmdHost<H>
         where H : ICmdHost, new()
         where C : struct, ICmdSpec<C>
@@ -28,6 +27,7 @@ namespace Z0
         CmdResult Run(IWfShell wf, in C spec);
     }
 
+    [Free]
     public interface ICmdHost<H,C,P> : ICmdHost<H,C>
         where H : ICmdHost, new()
         where C : struct, ICmdSpec<C>

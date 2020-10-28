@@ -10,7 +10,7 @@ namespace Z0
     /// Characterizes an identifier
     /// </summary>
     [Free]
-    public interface IIdentified
+    public interface IIdentified : ITextual
     {
         string Identifier {get;}
 
@@ -19,6 +19,8 @@ namespace Z0
 
         bool IsNonEmpty
             => !IsEmpty;
+        string ITextual.Format()
+            => Identifier;
     }
 
     [Free]
@@ -26,4 +28,12 @@ namespace Z0
     {
         T Id {get;}
     }
+
+    [Free]
+    public interface IIdentified<H,T> : IIdentified<T>
+        where H : struct, IIdentified<H,T>
+    {
+
+    }
+
 }

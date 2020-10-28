@@ -13,7 +13,7 @@ namespace Z0
     [ApiHost("tooling", true)]
     public partial struct Tooling
     {
-
+        const NumericKind Closure = UnsignedInts;
 
         readonly IWfShell Wf;
 

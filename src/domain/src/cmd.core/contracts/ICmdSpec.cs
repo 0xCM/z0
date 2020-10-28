@@ -4,17 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    using static Konst;
-    using static z;
-
+    [Free]
     public interface ICmdSpec
     {
         CmdId Id {get;}
     }
 
+    [Free]
     public interface ICmdSpec<T> : ICmdSpec
         where T : struct
     {
@@ -22,6 +20,7 @@ namespace Z0
             CmdId.from<EmitAsmOpCodesCmd>();
     }
 
+    [Free]
     public interface ICmdSpec<K,T> : ICmdSpec<CmdOptions<K,T>>
         where K : unmanaged
 
@@ -29,6 +28,7 @@ namespace Z0
 
     }
 
+    [Free]
     public interface ICmdSpec<H,K,T> : ICmdSpec<K,T>
         where K : unmanaged
         where H : struct, ICmdSpec<H,K,T>
