@@ -10,14 +10,12 @@ namespace Z0
     using static Konst;
     using static z;
 
-    public readonly struct ApiCmdEncoder
+    partial struct Tooling
     {
-
-
-    }
-
-    public readonly struct ApiCmd
-    {
-
+        [MethodImpl(Inline)]
+        public static Tool<T,F> create<T,F>(IWfShell wf, ToolId id, FS.FolderPath src, FS.FolderPath dst)
+            where T : struct, ITool<T,F>
+            where F : unmanaged, Enum
+                => new Tool<T,F>(wf, id, src, dst);
     }
 }

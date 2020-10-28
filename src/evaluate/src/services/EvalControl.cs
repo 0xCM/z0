@@ -61,7 +61,7 @@ namespace Z0
         public void Execute(params PartId[] parts)
         {
             using var buffers = Buffers.sequence(BufferSize, BufferCount);
-            iter(ApiSet.MatchingCatalogs(parts), ExecuteCatalog);
+            iter(ApiSet.PartCatalogs(parts), ExecuteCatalog);
         }
     }
 }

@@ -211,26 +211,17 @@ namespace Z0
         }
 
         void EmittingFile<T>(T source, FS.FilePath dst)
-        {
-            if(Verbosity.Babble())
-                Raise(new EmittingFileEvent<T>(Host, source, dst, Ct));
-        }
+            => Raise(new EmittingFileEvent<T>(Host, source, dst, Ct));
 
         void EmittingFile(Count measure, FS.FilePath dst)
             => Raise(new EmittingFileEvent<Count>(Host, measure, dst, Ct));
 
         void EmittingTable(Type type, FS.FilePath dst)
-        {
-            if(Verbosity.Babble())
-                Raise(new EmittingTableEvent(Host, type, dst, Ct));
-        }
+            => Raise(new EmittingTableEvent(Host, type, dst, Ct));
 
         void EmittingTable<T>(FS.FilePath dst, T t = default)
             where T : struct
-        {
-            if(Verbosity.Babble())
-                Raise(new EmittingTableEvent<T>(Host, dst, Ct));
-        }
+                => Raise(new EmittingTableEvent<T>(Host, dst, Ct));
 
         void Running(CmdId cmd)
             => Raise(new RunningCmdEvent(cmd, Ct));

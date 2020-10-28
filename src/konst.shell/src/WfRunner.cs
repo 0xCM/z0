@@ -12,8 +12,8 @@ namespace Z0
     using System.Text.Json;
     using System.Text.Json.Serialization;
 
-    using static z;
     using static Konst;
+    using static z;
 
     [ApiHost]
     public class WfRunner : IDisposable
@@ -98,21 +98,9 @@ namespace Z0
             }
         }
 
-        public static ReadOnlySpan<ApiSummaryInfo> api(ISystemApiCatalog src)
-        {
-            var ops = @readonly(src.Operations);
-            var identities = ops.Map(ApiIdentity.identify);
-            var sigs = ops.Map(x => x.Signature());
-            var count = ops.Length;
-            var dst = span<ApiSummaryInfo>(count);
-            for(var i=0u; i<count; i++)
-                seek(dst,i) = ApiSummaryInfo.define(skip(identities,i), skip(sigs,i));
-            return dst;
-        }
-
 
         void EmitApiList()
-            => ApiSummaryInfo.emit(Wf.Api,Wf.Db().IndexFile("z0.api"));
+            => ApiSummaries.emit(Wf.Api,Wf.Db().IndexFile("z0.api"));
 
         FS.FilePath AppDataPath(FS.FileName file)
             => Wf.AppData + file;

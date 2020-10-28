@@ -23,11 +23,11 @@ namespace Z0
         public FlairKind Flair {get;}
 
         [MethodImpl(Inline)]
-        public EmittingTableEvent(WfStepId step, Type tt,  FS.FilePath target, CorrelationToken ct, FlairKind flair = FlairKind.Running)
+        public EmittingTableEvent(WfStepId step, Type type, FS.FilePath target, CorrelationToken ct, FlairKind flair = FlairKind.Running)
         {
             EventId = (EventName, step, ct);
             Flair = flair;
-            TableId = Table.id(tt);
+            TableId = Table.id(type);
             Target = target;
         }
 

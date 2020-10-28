@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.Tools
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,13 +10,18 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Tooling
+    public struct ToolInfo
     {
-        [MethodImpl(Inline)]
-        public static Tool<T,F> create<T,F>(IWfShell wf, ToolId id, FS.FolderPath src, FS.FolderPath dst)
-            where T : struct, ITool<T,F>
-            where F : unmanaged, Enum
-                => new Tool<T,F>(wf, id, src, dst);
+        public string HostName;
 
+        public string RuntimeName;
+
+        public string FlagPrefix;
+
+        public string ArgSpecifier;
+
+        public byte MaxVarCount;
+
+        public string[] FlagNames;
     }
 }

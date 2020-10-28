@@ -46,6 +46,8 @@ namespace Z0
 
         readonly CmdBuilder CmdBuilder;
 
+        readonly IFileDb Db;
+
         public AppRunner(IWfShell wf, WfHost host)
         {
             Host = host;
@@ -53,6 +55,7 @@ namespace Z0
             Mpx = Multiplex.create(wf, Multiplex.configure(wf.Db().Root));
             AppArgs = wf.Args;
             CmdBuilder = wf.CmdBuilder();
+            Db = Wf.Db();
         }
 
         CmdResult EmitOpCodes()
@@ -77,7 +80,7 @@ namespace Z0
         {
             var srcDir = FS.dir("k:/z0/builds/nca.3.1.win-x64");
             var sources = array(srcDir + FS.file("z0.konst.dll"), srcDir + FS.file("z0.asm.dll"));
-            var dst = Wf.Db().Doc("AssemblyReferences", ArchiveFileKinds.Csv);
+            var dst = Db.Doc("AssemblyReferences", ArchiveFileKinds.Csv);
             var cmd = EmitAssemblyRefs.specify(Wf, sources, dst);
             return EmitAssemblyRefs.run(Wf,cmd);
         }
@@ -141,7 +144,13 @@ namespace Z0
 
         public unsafe void Run()
         {
-            EmitToolHelp();
+            var api = Wf.Api;
+            var parts = api.PartIdentities;
+            var data = ApiSummaries.parts(Wf, parts);
+            var dst = ApiSummaries.target(Db);
+            Wf.EmittingTable(typeof(ApiSummaryInfo), dst);
+            ApiSummaries.emit(data,dst);
+            Wf.EmittedTable(typeof(ApiSummaryInfo), data.Length, dst);
         }
 
 

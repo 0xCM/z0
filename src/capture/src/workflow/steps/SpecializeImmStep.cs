@@ -131,7 +131,7 @@ namespace Z0.Asm
         }
 
         IEnumerable<ApiHost> Hosts(params PartId[] parts)
-            => from h in Wf.Api.DefinedHosts(parts)
+            => from h in Wf.Api.PartHosts(parts)
                 where h is ApiHost
                 select (ApiHost)h;
 

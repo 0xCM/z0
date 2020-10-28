@@ -603,6 +603,7 @@
         "ifblank",
         "ifempty",
         "ihash",
+        "ilasm",
         "ildasm",
         "imminfo",
         "immval",

@@ -27,9 +27,9 @@ namespace Z0
 
         Option<IApiHost> FindHost(ApiHostUri uri);
 
-        IEnumerable<IApiPartCatalog> MatchingCatalogs(params PartId[] parts);
+        IEnumerable<IApiPartCatalog> PartCatalogs(params PartId[] parts);
 
-        IEnumerable<IApiHost> DefinedHosts(params PartId[] parts);
+        IEnumerable<IApiHost> PartHosts(params PartId[] parts);
 
         /// <summary>
         /// The host-defined operations

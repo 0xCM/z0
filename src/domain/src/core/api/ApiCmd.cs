@@ -2,15 +2,30 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
     using System;
+    using System.Runtime.CompilerServices;
 
+    using static Konst;
+    using static z;
 
-    public readonly struct ToolNames
+    public readonly partial struct ApiCommands
     {
-        public const string dumpbin = nameof(dumpbin);
 
-        public const string procdump = nameof(procdump);
+
     }
+
+    public readonly struct ApiCmd
+    {
+
+    }
+
+
+    public readonly struct ApiCmdEncoder
+    {
+
+
+    }
+
 }

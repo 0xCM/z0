@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0.Tools
+namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
@@ -10,19 +10,8 @@ namespace Z0.Tools
     using static Konst;
     using static z;
 
-    public struct ToolInfo
+    public struct EmitApiSummariesCmd
     {
-        public string HostName;
 
-        public string RuntimeName;
-
-        public string FlagPrefix;
-
-        public string ArgSpecifier;
-
-        public byte MaxVarCount;
-
-        public string[] FlagNames;
     }
-
 }

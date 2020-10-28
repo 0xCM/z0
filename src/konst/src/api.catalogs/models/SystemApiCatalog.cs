@@ -55,7 +55,7 @@ namespace Z0
         public Option<IApiHost> FindHost(ApiHostUri uri)
             => z.option(ApiHosts.Where(h => h.Uri == uri).FirstOrDefault());
 
-        public IEnumerable<IApiPartCatalog> MatchingCatalogs(params PartId[] parts)
+        public IEnumerable<IApiPartCatalog> PartCatalogs(params PartId[] parts)
         {
             if(parts.Length == 0)
                 return Catalogs.Storage;
@@ -65,7 +65,7 @@ namespace Z0
                        select c;
         }
 
-        public IEnumerable<IApiHost> DefinedHosts(params PartId[] parts)
+        public IEnumerable<IApiHost> PartHosts(params PartId[] parts)
         {
             if(parts.Length == 0)
                 return ApiHosts;
