@@ -9,35 +9,6 @@ namespace Z0
     using static ApiNameAtoms;
     using static CmdCodeAtoms;
 
-    [ApiHost]
-    public static partial class XCmdFactory
-    {
-
-    }
-
-    public readonly struct CmdCodeAtoms
-    {
-        public const string ArgSpec = ":";
-
-        public const string FlagSpec = "--";
-
-        public const string OpenList = "[";
-
-        public const string CloseList = "]";
-
-        public const string DelimitList = ";";
-
-        public const string DelimitSubCmd = " ";
-
-        public const string emit = nameof(emit);
-
-        public const string res = nameof(res);
-    }
-
-    readonly struct CmdCodes
-    {
-        public const string EmitRes = FlagSpec + emit + DelimitSubCmd + res;
-    }
 
     readonly struct ApiNames
     {

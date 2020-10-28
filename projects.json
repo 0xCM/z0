@@ -341,5 +341,12 @@
 		"paths": [],
 		"group": "",
 		"enabled": true
+	},
+	{
+		"name": "msdocs/win32",
+		"rootPath": "j:\\lang\\docs\\repos\\win32",
+		"paths": [],
+		"group": "",
+		"enabled": true
 	}
 ]

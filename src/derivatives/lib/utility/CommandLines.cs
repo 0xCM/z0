@@ -4,14 +4,14 @@
 // Copyright  : (c) Chris Moore, 2020
 // License    :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+namespace Z0.X
 {
     using System;
     using System.Collections.Generic;
     using System.Text;
 
     [ApiHost]
-    public readonly struct CommandLines
+    public readonly struct CmdSplit
     {
         /// <summary>
         /// Split a command line by the same rules as Main would get the commands except the original

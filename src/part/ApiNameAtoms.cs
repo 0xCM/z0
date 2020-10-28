@@ -286,5 +286,15 @@ namespace Z0
         public const string seq = nameof(seq);
 
         public const string linq = nameof(linq);
+
+        public const string external = nameof(external);
+
+        public const string system = nameof(system);
+
+        public const string emit = nameof(emit);
+
+        public const string opcodes = nameof(opcodes);
+
+        public const string reflection = nameof(reflection);
     }
 }
