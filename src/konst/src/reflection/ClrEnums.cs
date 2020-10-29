@@ -12,7 +12,7 @@ namespace Z0
     using static z;
     using static ClrRecords;
 
-    [ApiHost(ApiNames.ClrEnums)]
+    [ApiHost(ApiNames.ClrEnums, true)]
     public readonly struct ClrEnums
     {
         [Op]

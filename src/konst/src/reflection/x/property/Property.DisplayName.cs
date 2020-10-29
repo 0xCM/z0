@@ -7,9 +7,7 @@ namespace Z0
     using System;
     using System.Linq;
     using System.Reflection;
-    using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Runtime.CompilerServices;
 
     partial class XReflex
     {

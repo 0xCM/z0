@@ -8,8 +8,8 @@ namespace Z0
     using System.Reflection;
 
     using static ReflectionFlags;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Gets the static properties declared by a specified type
@@ -27,7 +27,7 @@ namespace Z0
             => get ? src.StaticProperties().Where(p => p.HasPublicGetter()) : src.StaticProperties();
 
         /// <summary>
-        /// Gets the static properties defined on a specified type that provided get/set accessors/manipulators 
+        /// Gets the static properties defined on a specified type that provided get/set accessors/manipulators
         /// per the provided specifiation
         /// </summary>
         /// <param name="this">The type to examine</param>

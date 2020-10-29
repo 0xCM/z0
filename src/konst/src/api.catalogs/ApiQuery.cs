@@ -29,7 +29,7 @@ namespace Z0
         }
 
         [Op]
-        public static ApiMemberIndex index(ApiMembers src)
+        public static ApiMemberIndex index(ApiHostMembers src)
         {
             var ix = ApiIndices.index(src.Storage.Select(h => (h.Id, h)),true);
             return new ApiMemberIndex(ix.HashTable, ix.Duplicates);

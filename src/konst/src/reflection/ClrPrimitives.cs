@@ -16,7 +16,7 @@ namespace Z0
     using TC = System.TypeCode;
 
 
-    [ApiHost(ApiNames.ClrPrimitives)]
+    [ApiHost(ApiNames.ClrPrimitives, true)]
     public readonly struct ClrPrimitives
     {
         [MethodImpl(Inline)]

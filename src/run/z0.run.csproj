@@ -18,16 +18,11 @@
     <ProjectReference Include="$(Merge)" />
 
     <ProjectReference Include="$(Capture)" />
-    <ProjectReference Include="$(Json)" />
     <ProjectReference Include="$(Canonical)" />
     <ProjectReference Include="$(CheckDynamic)" />
     <ProjectReference Include="$(Derivatives)" />
     <ProjectReference Include="$(Xed)" />
 
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="3.1.8" />
   </ItemGroup>
 
 </Project>

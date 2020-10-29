@@ -16,15 +16,15 @@ namespace Z0
         public static MemberLocator Service
             => default;
 
-        public static ApiMembers locate(IApiHost src)
+        public static ApiHostMembers locate(IApiHost src)
         {
             var generic = HostedGeneric(src);
             var direct = HostedDirect(src);
             var all = direct.Concat(generic).Array();
-            return all.OrderBy(x => x.Method.MetadataToken);
+            return new ApiHostMembers(src, all.OrderBy(x => x.Method.MetadataToken));
         }
 
-        public ApiMembers Locate(IApiHost src)
+        public ApiHostMembers Locate(IApiHost src)
             => locate(src);
 
         static IEnumerable<ApiMember> HostedDirect(IApiHost src)

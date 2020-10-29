@@ -8,12 +8,12 @@ namespace Z0
     using System.Reflection;
 
     using static ReflectionFlags;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         public static FieldInfo[] PublicStaticFields(this Type src)
             => src.GetFields(BF_PublicStatic);
-            
+
         /// <summary>
         /// Selects all public instance fields from the source
         /// </summary>

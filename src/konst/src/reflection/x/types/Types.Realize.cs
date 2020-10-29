@@ -7,8 +7,8 @@ namespace Z0
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Selects the types from a stream that implement a specific interface

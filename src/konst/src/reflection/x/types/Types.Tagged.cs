@@ -9,10 +9,10 @@ namespace Z0
     using System.Linq;
     using System.Collections.Generic;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
-        /// Selects source types from the stream to wich a parametrically-identified attribute is applied
+        /// Selects source types from the stream to which a parametrically-identified attribute is applied
         /// </summary>
         /// <param name="src">The source stypes</param>
         /// <typeparam name="A">The attribute type</typeparam>
@@ -21,7 +21,7 @@ namespace Z0
                 => src.Where(t => t.Tagged<A>());
 
         /// <summary>
-        /// Selects source types from the stream to wich a parametrically-identified attribute is applied
+        /// Selects source types from the stream to which a parametrically-identified attribute is applied
         /// </summary>
         /// <param name="src">The source stypes</param>
         /// <typeparam name="A">The attribute type</typeparam>

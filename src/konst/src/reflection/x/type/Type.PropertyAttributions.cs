@@ -13,14 +13,14 @@ namespace Z0
     using static Konst;
     using static ReflectionFlags;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Retrieves the type's properties together with applied attributes
         /// </summary>
         /// <typeparam name="A">The attribute type</typeparam>
         /// <param name="t">The type to examine</param>
-        public static IReadOnlyDictionary<PropertyInfo,A> PropertyAttributions<A>(this Type t) 
+        public static IReadOnlyDictionary<PropertyInfo,A> PropertyAttributions<A>(this Type t)
             where A : Attribute
         {
             var q = from p in t.GetProperties(BF_Instance)

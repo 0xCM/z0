@@ -7,7 +7,8 @@ namespace Z0
     using System;
     using System.Reflection;
     using System.Linq;
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Selects all static properties declared by the source types

@@ -9,6 +9,6 @@ namespace Z0
 
     public interface IApiMemberLocator
     {
-        ApiMembers Locate(IApiHost src);
+        ApiHostMembers Locate(IApiHost src);
     }
 }

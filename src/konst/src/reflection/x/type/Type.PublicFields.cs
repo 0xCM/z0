@@ -8,8 +8,8 @@ namespace Z0
     using System.Reflection;
 
     using static ReflectionFlags;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Selects all public static/instance fields from the source

@@ -10,7 +10,7 @@ namespace Z0
 
     using static Konst;
 
-    partial struct Reflex
+    partial struct ClrReflexSvc
     {
         /// <summary>
         /// Determines whether a type is static

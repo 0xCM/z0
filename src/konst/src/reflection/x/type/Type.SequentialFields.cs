@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static ReflectionFlags;
 
-    partial class XTend
+    partial class XReflex
     {
         [MethodImpl(Inline), Op]
         public static FieldInfo[] SequentialFields(this Type src)

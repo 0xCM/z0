@@ -10,13 +10,14 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Determines whether a type implements a specified interface
         /// </summary>
         /// <param name="src">The type to examine</param>
         /// <param name="tInterface">The interface type to test</param>
+        [Op]
         public static bool Reifies(this Type src, Type tInterface)
             => tInterface.IsInterface && src.Interfaces().Contains(tInterface);
 

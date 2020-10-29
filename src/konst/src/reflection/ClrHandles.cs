@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost(ApiNames.ClrHandles)]
+    [ApiHost(ApiNames.ClrHandles, true)]
     public readonly struct ClrHandles
     {
         [Op]

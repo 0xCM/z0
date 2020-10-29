@@ -22,5 +22,9 @@ namespace Z0
         public const string PartExtensions = part + dot + extensions;
 
         public const string LiteralKinds = literals + dot + kinds;
+
+        public const string Arrays = A.memory + dot + arrays;
+
+        public const string ArrayBuilder = A.memory + dot + arrays + dot + builder;
     }
 }

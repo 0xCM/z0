@@ -17,7 +17,7 @@ namespace Z0
         /// <typeparam name="T">The type to match</typeparam>
         /// <param name="candidate">The source type</param>
         /// <param name="match">The type to match</param>
-        [MethodImpl(Inline), Op]
+        [Op]
         public static bool IsTypeOf(this Type candidate, Type match)
             => candidate.TEffective() == match
             || candidate.TEffective().IsNullable(match)
@@ -29,7 +29,7 @@ namespace Z0
         /// <param name="match">The source type</param>
         /// <typeparam name="T">The type to match</typeparam>
 
-        [MethodImpl(Inline), Op]
+        [Op]
         public static bool IsTypeOf<T>(this Type match)
             => match.TEffective() == typeof(T)
             || match.TEffective().IsNullable<T>()

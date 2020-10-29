@@ -9,13 +9,13 @@ namespace Z0
 
     using static Konst;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// If the source type is a pointer, returns the type to which the pointer points; otherwise, returns the empty type
         /// </summary>
         /// <param name="src">The source type</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Type TPointer(this Type src)
             => src.IsPointer ? src.GetElementType() : EmptyType;
     }

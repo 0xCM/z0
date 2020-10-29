@@ -11,8 +11,8 @@ namespace Z0
 
     using static Konst;
     using static ReflectionFlags;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Queries the source <see cref='Type'/> for the value of a name-identified literal <see cref='FieldInfo'/>
@@ -21,7 +21,7 @@ namespace Z0
         /// <param name="name">The field name</param>
         /// <param name="fallback">The value returned if the field doesn't exist</param>
         /// <typeparam name="T">The literal value type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static T LiteralFieldValue<T>(this Type src, string name, T fallback = default)
         {
             var field = src.DeclaredFields().Where(f => f.Name == name).FirstOrDefault();

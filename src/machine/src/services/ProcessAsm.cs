@@ -99,7 +99,7 @@ namespace Z0
             for(var i=0; i<count; i++)
             {
                 var key = keys[i];
-                sets[i] = asm.set(key, Index[key].Create());
+                sets[i] = asm.set(key, Index[key].Emit());
             }
             return asm.sets(sets);
         }

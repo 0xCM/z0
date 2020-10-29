@@ -11,7 +11,7 @@ namespace Z0
 
     using static ReflectionFlags;
 
-    partial class XTend
+    partial class XReflex
     {
         public static bool ProvidesEvent(this Type src, string name)
             => src.Events().Any(x => x.Name == name);

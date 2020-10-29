@@ -52,7 +52,7 @@ namespace Z0
         }
 
         public string Format()
-            => Reflex.format(this);
+            => ClrReflexSvc.format(this);
 
         public override string ToString()
             => Format();

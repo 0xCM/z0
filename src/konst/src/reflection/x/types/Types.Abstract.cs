@@ -5,8 +5,8 @@
 namespace Z0
 {
     using System;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Selects the abstract types from a stream

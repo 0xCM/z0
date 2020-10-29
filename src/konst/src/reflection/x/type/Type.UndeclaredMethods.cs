@@ -10,14 +10,14 @@ namespace Z0
     using System.Reflection;
 
     using static ReflectionFlags;
-    
-    partial class XTend
-    {
 
+    partial class XReflex
+    {
         /// <summary>
         /// Selects the methods available through the type that were not declared by the type
         /// </summary>
         /// <param name="src">The type to examine</param>
+        [Op]
         public static MethodInfo[] UndeclaredMethods(this Type src)
             => src.Methods().Except(src.DeclaredMethods()).Array();
     }

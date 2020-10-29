@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    [LiteralProvider]
+    [ApiNameProvider]
     public readonly struct ApiNameAtoms
     {
         public const string dot = AsciCharText.Dot;
@@ -296,5 +296,15 @@ namespace Z0
         public const string opcodes = nameof(opcodes);
 
         public const string reflection = nameof(reflection);
+
+        public const string builder = nameof(builder);
+
+        public const string handles = nameof(handles);
+
+        public const string reflect = nameof(reflect);
+
+        public const string metadata = nameof(metadata);
+
+        public const string listings = nameof(listings);
     }
 }

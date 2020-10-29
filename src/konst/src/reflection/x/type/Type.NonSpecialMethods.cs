@@ -9,14 +9,15 @@ namespace Z0
     using System.Reflection;
 
     using static ReflectionFlags;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
-        /// Selects all methods declared by a type; however, property getters/setters and other 
+        /// Selects all methods declared by a type; however, property getters/setters and other
         /// compiler-generated artifacts are excluded
         /// </summary>
         /// <param name="src">The type to examine</param>
+        [Op]
         public static MethodInfo[] NonSpecialMethods(this Type src)
             => src.GetMethods(BF_Declared).Where(m => !m.IsSpecialName);
     }

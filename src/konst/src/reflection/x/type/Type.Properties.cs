@@ -9,8 +9,8 @@ namespace Z0
     using System.Linq;
 
     using static ReflectionFlags;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Retrieves all declared or inheraited by a type

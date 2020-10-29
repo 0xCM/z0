@@ -7,10 +7,12 @@ namespace Z0
 {
     using System;
     using System.Reflection;
+    using System.Runtime.CompilerServices;
 
+    using static Konst;
     using static ReflectionFlags;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Searches a type for any method that matches the supplied signature
@@ -18,6 +20,7 @@ namespace Z0
         /// <param name="declarer">The type to search</param>
         /// <param name="name">The name of the method</param>
         /// <param name="paramTypes">The method parameter types in ordinal position</param>
+        [MethodImpl(Inline), Op]
         public static Option<MethodInfo> MatchMethod(this Type declarer, string name, params Type[] paramTypes)
             => paramTypes.Length != 0
                 ? declarer.GetMethod(name, bindingAttr: BF_All, binder: null, types: paramTypes, modifiers: null)

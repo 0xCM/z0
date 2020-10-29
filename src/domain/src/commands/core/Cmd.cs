@@ -28,10 +28,10 @@ namespace Z0
             where T : struct
         {
             var t = typeof(T);
-            var fields = Reflex.fields(t);
+            var fields = ClrReflexSvc.fields(t);
             var count = fields.Count;
             var reflected = alloc<FieldValue>(count);
-            Reflex.values(spec, fields, reflected);
+            ClrReflexSvc.values(spec, fields, reflected);
             var buffer = alloc<CmdOption>(count);
             var target = span(buffer);
             var source = @readonly(reflected);

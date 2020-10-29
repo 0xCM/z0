@@ -11,9 +11,9 @@ namespace Z0
 
     using static ReflectionFlags;
 
-    partial class XTend
+    partial class XReflex
     {
         public static bool ProvidesProperty(this Type src, string name)
-            => src.GetProperties(BF_World).Any(x => x.Name == name);            
+            => src.GetProperties(BF_World).Any(x => x.Name == name);
     }
 }

@@ -117,6 +117,55 @@ namespace Z0
 
         public const string CellsX = cells + dot + extensions;
 
+
+        // ~~ Clr Runtime
+        // ~~ -----------------------------------------------------------------------------------------
+
+        const string ClrRuntime = clr + dot + runtime;
+
+        public const string ClrType = ClrRuntime + dot + type;
+
+        public const string ClrTypes = ClrRuntime + dot + types;
+
+        public const string ClrEnum = ClrRuntime + dot + @enum;
+
+        public const string ClrEnums = ClrRuntime + dot + enums + dot + api;
+
+        public const string ClrEnumLiteral = ClrRuntime + dot + @enum + dot + literal;
+
+        public const string ClrStruct = ClrRuntime + dot + @struct;
+
+        public const string ClrAssembly = ClrRuntime + dot + assembly;
+
+        public const string ClrField = ClrRuntime + dot + field;
+
+        public const string ClrMethod = ClrRuntime + dot + method;
+
+        public const string ClrProperty = ClrRuntime + dot + property;
+
+
+        public const string ClrHandles = ClrRuntime + dot + handles;
+
+        public const string ClrMember = ClrRuntime + dot + member;
+
+        public const string ClrReflexSvc = ClrRuntime + dot + reflex + dot + "svc";
+
+        public const string ClrReflex = ClrRuntime + dot + reflex;
+
+        public const string XRelflex = ClrRuntime + dot + reflex + dot + extensions;
+
+
+        // ~~ Clr Metadata
+        // ~~ -----------------------------------------------------------------------------------------
+
+        const string ClrMetadata = clr + dot + metadata;
+
+        public const string ClrArtifacts = ClrMetadata + dot + artifacts;
+
+        public const string ClrRecords = ClrMetadata + dot + records;
+
+        public const string ClrPrimitives = ClrMetadata + dot + primitives;
+
         // ~~ Delegates
         // ~~ -----------------------------------------------------------------------------------------
 
@@ -174,7 +223,6 @@ namespace Z0
 
         public const string StringRefs = A.memory + dot + refs + dot + strings;
 
-
         // ~~ Primal
         // ~~ -----------------------------------------------------------------------------------------
 
@@ -194,7 +242,6 @@ namespace Z0
         public const string SFxSurrogates = sfunc + dot + surrogates;
 
         public const string SFxProjectors = sfunc + dot + projectors;
-
 
         // ~~ Symbolic
         // ~~ -----------------------------------------------------------------------------------------
@@ -284,39 +331,9 @@ namespace Z0
 
         public const string Indexed = collective + dot + indexed;
 
-        public const string Listings = collective + dot + "listings";
+        public const string Listings = collective + dot + listings;
 
         public const string Seq = collective + dot + seq;
-
-        public const string ClrType = clr + dot + type;
-
-        public const string ClrTypes = clr + dot + types;
-
-        public const string ClrEnum = clr + dot + @enum;
-
-        public const string ClrEnums = clr + dot + enums + dot + api;
-
-        public const string ClrEnumLiteral = clr + dot + @enum + dot + literal;
-
-        public const string ClrStruct = clr + dot + @struct;
-
-        public const string ClrAssembly = clr + dot + assembly;
-
-        public const string ClrField = clr + dot + field;
-
-        public const string ClrMethod = clr + dot + method;
-
-        public const string ClrProperty = clr + dot + property;
-
-        public const string ClrRecords = clr + dot + records;
-
-        public const string ClrReflex = clr + dot + "reflex";
-
-        public const string ClrPrimitives = clr + dot + primitives;
-
-        public const string ClrHandles = clr + dot + "handles";
-
-        public const string ClrMember = clr + dot + member;
 
         const string member = nameof(member);
     }

@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Selects all nested types declared by an array of source types

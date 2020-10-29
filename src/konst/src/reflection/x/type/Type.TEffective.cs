@@ -6,16 +6,16 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    
+
     using static Konst;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// If the source type is a type reference, returns the referenced type; otherwise, returns the original type
         /// </summary>
         /// <param name="src">The type to examine</param>
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         public static Type TEffective(this Type src)
             => src.UnderlyingSystemType.IsByRef ? src.GetElementType() : src;
     }

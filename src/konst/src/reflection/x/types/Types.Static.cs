@@ -6,7 +6,7 @@ namespace Z0
 {
     using System;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Selects the static types from a stream

@@ -5,8 +5,8 @@
 namespace Z0
 {
     using System;
-    
-    partial class XTend
+
+    partial class XReflex
     {
         /// <summary>
         /// Selects the public types from a stream

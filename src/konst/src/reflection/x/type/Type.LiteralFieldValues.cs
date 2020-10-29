@@ -12,7 +12,7 @@ namespace Z0
     using static ReflectionFlags;
     using static z;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Fetches the values of literal fields declared by a specified type that are of specified parametric type
@@ -20,9 +20,9 @@ namespace Z0
         /// <param name="src">The source type</param>
         /// <param name="fields">The fields for which values are specified</param>
         /// <typeparam name="T">The literal field type</typeparam>
-        [MethodImpl(Inline), Op, Closures(UnsignedInts)]
+        [Op, Closures(Closure)]
         public static ReadOnlySpan<T> LiteralFieldValues<T>(this Type src, out ReadOnlySpan<FieldInfo> fields)
-        {            
+        {
             fields = src.LiteralFields(typeof(T));
             var count = fields.Length;
             var dst = span<T>(fields.Length);

@@ -8,12 +8,13 @@ namespace Z0
     using System.Reflection;
     using System.Linq;
 
-    partial class XTend
+    partial class XReflex
     {
         /// <summary>
         /// Selects all fields from the source types
         /// </summary>
         /// <param name="src">The types to search</param>
+        [Op]
         public static FieldInfo[] Fields(this Type[] src)
             => src.SelectMany(x => x.Fields()).ToArray();
     }

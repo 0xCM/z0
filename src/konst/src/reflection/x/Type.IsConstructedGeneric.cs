@@ -11,7 +11,7 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct Reflex
+    partial struct ClrReflexSvc
     {
         [MethodImpl(Inline), Op]
         public static bool ConstructedGeneric(Type src)
