@@ -306,5 +306,11 @@ namespace Z0
         public const string metadata = nameof(metadata);
 
         public const string listings = nameof(listings);
+
+        public const string member = nameof(member);
+
+        public const string identities = nameof(identities);
+
+        public const string svc = nameof(svc);
     }
 }

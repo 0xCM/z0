@@ -34,14 +34,18 @@ namespace Z0
 
         public const string FixedBuffers = buffers + dot + @fixed;
 
-        const string @static = "static";
-
-        const string @fixed = "fixed";
+        public const string JsonData = data + dot + json;
 
         const string syntax = nameof(syntax);
 
         const string parse = nameof(parse);
 
         const string patterns = nameof(patterns);
+
+        const string json = nameof(json);
+
+        const string @static = "static";
+
+        const string @fixed = "fixed";
     }
 }

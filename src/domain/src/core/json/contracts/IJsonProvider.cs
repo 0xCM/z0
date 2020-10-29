@@ -4,25 +4,15 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
-    [AttributeUsage(AttributeTargets.Struct)]
-    public class JsonProviderAttribute : Attribute
-    {
-        public Type[] Supported {get;}
-
-        public JsonProviderAttribute(params Type[] supported)
-        {
-            Supported = supported;
-        }
-    }
-
+    [Free]
     public interface IJsonProvider
     {
         JsonText ToJson(object src);
     }
 
+    [Free]
     public interface IJsonProvider<T> : IJsonProvider
     {
         JsonText ToJson(in T src);
@@ -31,6 +21,7 @@ namespace Z0
             => ToJson((T)src);
     }
 
+    [Free]
     public interface IJsonProvider<H,T> : IJsonProvider<T>
         where H : struct, IJsonProvider<H,T>
     {

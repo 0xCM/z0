@@ -8,6 +8,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
     using System.Linq;
     using System.Reflection;
+    using System.Collections.Generic;
 
     using static Konst;
     using static z;
@@ -17,6 +18,35 @@ namespace Z0
     [ApiHost(ApiNames.ApiCatalogs, true)]
     public readonly struct ApiCatalogs
     {
+        [Op]
+        public static ApiHostMembers members(IApiHost src)
+        {
+            var generic = HostedGeneric(src);
+            var direct = HostedDirect(src);
+            var all = direct.Concat(generic).Array();
+            return new ApiHostMembers(src, all.OrderBy(x => x.Method.MetadataToken));
+        }
+
+        [Op]
+        static IEnumerable<ApiMember> HostedDirect(IApiHost src)
+            => from m in ApiQuery.DirectApiMethods(src)
+                let id = MultiDiviner.Service.Identify(m)
+                let im = new IdentifiedMethod(id,m)
+                let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
+                let located = ApiDynamic.jit(im)
+                select new ApiMember(uri, located,  m.KindId());
+
+        [Op]
+        static IEnumerable<ApiMember> HostedGeneric(IApiHost src)
+            =>  from m in ApiQuery.GenericApiMethods(src)
+                from closure in ApiQuery.NumericClosureTypes(m)
+                let reified = m.MakeGenericMethod(closure)
+                let id = MultiDiviner.Service.Identify(reified)
+                let im = new IdentifiedMethod(id,m)
+                let uri = OpUri.Define(ApiUriScheme.Type, src.Uri, m.Name, id)
+                let located = ApiDynamic.jit(im)
+                select new ApiMember(uri, located, m.KindId());
+
         [MethodImpl(Inline), Op]
         public static ApiUriParser UriParser()
             => new ApiUriParser();
@@ -38,10 +68,10 @@ namespace Z0
             => new LegalIdentityBuilder(options);
 
         [MethodImpl(Inline), Op]
-        public static ApiIdentityManager IdentityManager(IWfShell wf)
-            => new ApiIdentityManager(wf);
+        public static ApiIdentities IdentityManager(IWfShell wf)
+            => new ApiIdentities(wf);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         static LegalIdentityOptions FileIdentityOptions()
             => new LegalIdentityOptions(
                 TypeArgsOpen: Chars.LBracket,
@@ -51,7 +81,7 @@ namespace Z0
                 ArgSep: Chars.Comma,
                 ModSep: IDI.ModSep);
 
-        [MethodImpl(Inline)]
+        [MethodImpl(Inline), Op]
         internal static LegalIdentityOptions CodeIdentityOptions()
             => new LegalIdentityOptions(
             TypeArgsOpen: SymNot.Lt,
@@ -86,6 +116,7 @@ namespace Z0
             => new SystemApiCatalog(parts(paths.Data));
 
 
+        [Op]
         public static KeyedValues<PartId,Type>[] types(ClrTypeKind kind, ISystemApiCatalog src)
         {
             switch(kind)
@@ -97,6 +128,7 @@ namespace Z0
             }
         }
 
+        [Op]
         static KeyedValues<PartId,Type>[] enums(ISystemApiCatalog src)
         {
             var x = from part in  src.Parts
@@ -153,6 +185,7 @@ namespace Z0
         /// <summary>
         /// Attempts to resolve a part from a resolution property
         /// </summary>
+        [Op]
         static Option<IPart> resolve(PropertyInfo src)
             => Try(src, x => (IPart)x.GetValue(null));
 
@@ -160,6 +193,7 @@ namespace Z0
         /// Searches an assembly for types tagged with the <see cref="ApiHostAttribute"/>
         /// </summary>
         /// <param name="src">The assembly to search</param>
+        [Op]
         static Type[] apiHostTypes(Assembly src)
             => src.GetTypes().Where(t => t.Tagged<ApiHostAttribute>());
 
@@ -167,9 +201,11 @@ namespace Z0
         /// Searches an assembly for types tagged with the <see cref="FunctionalServiceAttribute"/>
         /// </summary>
         /// <param name="src">The assembly to search</param>
+        [Op]
         static Type[] svcHostTypes(Assembly src)
             => src.GetTypes().Where(t => t.Tagged<FunctionalServiceAttribute>());
 
+        [Op]
         static ApiHost[] apiHosts(Assembly src)
         {
             var _id = Q.id(src);

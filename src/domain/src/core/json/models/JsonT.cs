@@ -10,25 +10,28 @@ namespace Z0
     using static z;
     using static Konst;
 
-    public readonly struct Json<T> : ITextual
+    using api = JsonData;
+
+    public readonly struct Json<T> : ITextual, IJsonSource<Json<T>>
     {
-        public T Content {get;}
+        public T[] Content {get;}
 
         [MethodImpl(Inline)]
-        public Json(T src)
-        {
-            Content = src;
-        }
+        public Json(T[] src)
+            => Content = src;
 
         [MethodImpl(Inline)]
         public string Format()
-            => Content?.ToString() ?? EmptyString;
+            => api.format(this);
 
         public override string ToString()
             => Format();
 
+        public JsonText ToJson()
+            => api.text(this);
+
         [MethodImpl(Inline)]
-        public static implicit operator Json<T>(T src)
+        public static implicit operator Json<T>(T[] src)
             => new Json<T>(src);
     }
 }

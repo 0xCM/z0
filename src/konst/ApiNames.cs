@@ -48,6 +48,8 @@ namespace Z0
 
         public const string ApiCatalogServices = api + dot + catalogs + dot + services;
 
+        public const string ApiIdentities = api + dot + catalogs + dot + identities;
+
         public const string ApiQuery = api + dot + query;
 
         public const string ApiPartCatalogQuery = api + dot + query + dot + parts;
@@ -148,12 +150,11 @@ namespace Z0
 
         public const string ClrMember = ClrRuntime + dot + member;
 
-        public const string ClrReflexSvc = ClrRuntime + dot + reflex + dot + "svc";
+        public const string ClrReflexSvc = ClrRuntime + dot + reflex + dot + svc;
 
         public const string ClrReflex = ClrRuntime + dot + reflex;
 
         public const string XRelflex = ClrRuntime + dot + reflex + dot + extensions;
-
 
         // ~~ Clr Metadata
         // ~~ -----------------------------------------------------------------------------------------
@@ -334,7 +335,5 @@ namespace Z0
         public const string Listings = collective + dot + listings;
 
         public const string Seq = collective + dot + seq;
-
-        const string member = nameof(member);
     }
 }

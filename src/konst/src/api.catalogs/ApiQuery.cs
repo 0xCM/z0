@@ -39,14 +39,14 @@ namespace Z0
         public static ApiHostMemberCode code(IApiMemberLocator locator, ISystemApiCatalog api, ApiHostUri host, FilePath src)
         {
             var code = ApiIndices.index(ApiHexReader.Service.Read(src));
-            var members = index(locator.Locate(api.FindHost(host).Require()));
+            var members = index(ApiCatalogs.members(api.FindHost(host).Require()));
             return new ApiHostMemberCode(host, index(members, code));
         }
 
         [Op]
         public static ApiHostMemberCode code(IApiMemberLocator locator, ISystemApiCatalog api, ApiHostUri host, FolderPath root)
         {
-            var members = locator.Locate(api.FindHost(host).Require());
+            var members = ApiCatalogs.members(api.FindHost(host).Require());
             var idx = ApiQuery.index(members);
             var archive =  ApiFiles.capture(root);
             var paths =  HostCaptureArchive.create(root, host);

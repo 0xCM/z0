@@ -11,15 +11,11 @@ namespace Z0
 
     public readonly struct JsonText : ITextual
     {
-        public static JsonText Empty => new JsonText(EmptyString);
-
-        public readonly string Content;
+        readonly string Content;
 
         [MethodImpl(Inline)]
         public JsonText(string content)
-        {
-            Content = content;
-        }
+            => Content = content;
 
         [MethodImpl(Inline)]
         public string Format()
@@ -30,5 +26,11 @@ namespace Z0
             [MethodImpl(Inline)]
             get => (uint)Content.GetHashCode();
         }
+
+        [MethodImpl(Inline)]
+        public static implicit operator JsonText(string src)
+            => new JsonText(src);
+
+        public static JsonText Empty => new JsonText(EmptyString);
     }
 }

@@ -4,9 +4,9 @@
 //-----------------------------------------------------------------------------
 namespace Z0
 {
-    using System;
-    using System.Runtime.CompilerServices;
+    using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+    [Free]
     public interface IJsonSource : ITextual
     {
         JsonText ToJson();
@@ -15,10 +15,10 @@ namespace Z0
             => ToJson().Format();
     }
 
+    [Free]
     public interface IJsonSource<H> : IJsonSource
         where H : struct, IJsonSource<H>
     {
 
     }
-
 }

@@ -5,15 +5,15 @@
 namespace Z0
 {
     using System;
-    using System.Runtime.CompilerServices;
 
-    using static Konst;
-
-    [ApiHost]
-    public readonly struct JsonFx
+    [AttributeUsage(AttributeTargets.Struct)]
+    public class JsonProviderAttribute : Attribute
     {
-        [MethodImpl(Inline), Op]
-        public static JsonText json(string src)
-            => new JsonText(src);
+        public Type[] Supported {get;}
+
+        public JsonProviderAttribute(params Type[] supported)
+        {
+            Supported = supported;
+        }
     }
 }

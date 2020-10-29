@@ -6,8 +6,6 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Reflection;
-    using System.Linq;
     using System.Collections.Generic;
     using System.Collections.Concurrent;
 
@@ -15,8 +13,8 @@ namespace Z0
 
     using api = ApiIdentify;
 
-    [ApiHost]
-    public readonly struct ApiIdentityManager
+    [ApiHost(ApiNames.ApiIdentities, true)]
+    public readonly struct ApiIdentities
     {
         readonly IWfShell Wf;
 
@@ -24,7 +22,7 @@ namespace Z0
 
         readonly ConcurrentDictionary<NumericKind, HashSet<Type>> NumericTypeSets;
 
-        internal ApiIdentityManager(IWfShell wf)
+        internal ApiIdentities(IWfShell wf)
         {
             Wf = wf;
             NumericKindSets = new ConcurrentDictionary<NumericKind, HashSet<NumericKind>>();
