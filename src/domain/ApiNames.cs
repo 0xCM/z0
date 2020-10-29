@@ -47,5 +47,7 @@ namespace Z0
         const string @static = "static";
 
         const string @fixed = "fixed";
+
+        public const string ApiData = api + dot + data;
     }
 }

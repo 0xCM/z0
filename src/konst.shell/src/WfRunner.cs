@@ -14,6 +14,7 @@ namespace Z0
 
     using static Konst;
     using static z;
+    using D = ApiDataModel;
 
     [ApiHost]
     public class WfRunner : IDisposable
@@ -77,24 +78,14 @@ namespace Z0
             Wf.Status(Host, src.OpUri);
         }
 
-        ApiCodeBlockInfo[] DescribeCodeBlocks()
-        {
-            var archive = ApiFiles.hex(Wf);
-            var files = archive.List();
-            var dst = list<ApiCodeBlockInfo>();
-            foreach(var file in files.Storage)
-                dst.AddRange(archive.Read(file.Path).Select(x => x.Describe()));
-            return dst.OrderBy(x => x.Base).ToArray();
-        }
-
-        void Emit(ReadOnlySpan<ApiCodeBlockInfo> src, FS.FilePath dst)
+        void Emit(ReadOnlySpan<D.CodeBlockDescriptor> src, FS.FilePath dst)
         {
             using var writer = dst.Writer();
             var count = src.Length;
             for(var i=0; i<count; i++)
             {
                 ref readonly var block = ref skip(src,i);
-                writer.WriteLine(string.Format(ApiCodeBlockInfo.FormatPattern, block.Part, block.Host, block.Base, block.Size, block.Uri));
+                writer.WriteLine(string.Format(D.CodeBlockDescriptor.FormatPattern, block.Part, block.Host, block.Base, block.Size, block.Uri));
             }
         }
 
@@ -138,8 +129,7 @@ namespace Z0
 
         }
 
-        [Op]
-        public void Run()
+        void FxWf()
         {
             var fx = new FunctionWorkflows(Wf);
             var f = fx.RunF();
@@ -148,8 +138,15 @@ namespace Z0
             Wf.Status(g.Delimit());
 
             f.SequenceEqual(g);
+        }
 
-            ShowDependencies(Wf.Controller);
+        [Op]
+        public void Run()
+        {
+            var hosts = CmdRunners.discover(Parts.Domain.Assembly);
+            Wf.Status($"Found {hosts.Length} hosts");
+
+            //ShowDependencies(Wf.Controller);
         }
     }
 

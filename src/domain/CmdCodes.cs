@@ -27,7 +27,10 @@ namespace Z0
 
         public const string RightRequire = ">";
 
-        public const string SemanticSep = "-";
+        /// <summary>
+        /// Semantic separator
+        /// </summary>
+        public const string SSep = "-";
 
         public const string res = nameof(res);
     }
@@ -36,14 +39,18 @@ namespace Z0
     {
         const string summaries = nameof(summaries);
 
-        const string ApiSummaries = api + SemanticSep + summaries;
+        const string ApiSummaries = api + SSep + summaries;
 
-        const string AsmOpCodes = api + SemanticSep + opcodes;
+        const string AsmOpCodes = api + SSep + opcodes;
+
+        const string index = nameof(index);
 
         public const string EmitRes = FlagSpec + emit + DelimitSubCmd + res;
 
         public const string EmitApiSummaries = FlagSpec + emit + DelimitSubCmd + ApiSummaries;
 
         public const string EmitAsmOpCodes = FlagSpec + emit + DelimitSubCmd + AsmOpCodes;
+
+        public const string EmitHexIndex = FlagSpec + emit + DelimitSubCmd + api + SSep + hex + SSep + index;
     }
 }

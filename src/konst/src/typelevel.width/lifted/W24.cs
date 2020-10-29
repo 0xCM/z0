@@ -8,18 +8,19 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
-    
+
     using DW = DataWidth;
     using TS = TypeSignKind;
-    
+    using TW = TypeWidth;
+
     using W = W24;
 
     /// <summary>
     /// Defines a type-level representation of <see cref='DW.W24'/>
     /// </summary>
-    public readonly struct W24 : TDataWidth<W> 
-    { 
-        public const DW Width = DW.W24; 
+    public readonly struct W24 : TTypeWidth<W>
+    {
+        public const DW Width = DW.W24;
 
         public const TS Sign = TS.Unsigned;
 
@@ -37,43 +38,47 @@ namespace Z0
         /// The width represented as text
         /// </summary>
         public const string ValueText = "24";
-        
-        public string Id 
+
+        public string Id
             => Identifier;
 
-        public DW DataWidth 
+        public DW DataWidth
             => Width;
 
         public TS TypeSign
             => Sign;
 
         [MethodImpl(Inline)]
-        public static implicit operator int(W src) 
+        public static implicit operator int(W src)
             => (int)Width;
 
         [MethodImpl(Inline)]
-        public static implicit operator DW(W src) 
+        public static implicit operator DW(W src)
             => Width;
 
+       [MethodImpl(Inline)]
+        public static implicit operator TW(W src)
+            => (TW)Width;
+
         [MethodImpl(Inline)]
-        public static implicit operator DataWidth<W>(W src) 
+        public static implicit operator DataWidth<W>(W src)
             => default;
 
         [MethodImpl(Inline)]
-        public bool Equals(W w) 
+        public bool Equals(W w)
             => true;
 
         [MethodImpl(Inline)]
         public string Format()
             => ValueText;
 
-        public override string ToString() 
+        public override string ToString()
             => Format();
-        
-        public override int GetHashCode() 
+
+        public override int GetHashCode()
             => (int)Width;
-        
-        public override bool Equals(object obj) 
+
+        public override bool Equals(object obj)
             => obj is W;
     }
 }

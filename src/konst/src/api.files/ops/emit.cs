@@ -22,7 +22,6 @@ namespace Z0
                 throw no<H>();
         }
 
-
         [Op]
         public static void emit(ListedFiles src, FS.FilePath dst)
         {

@@ -2,7 +2,7 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-using static Z0.ApiNameAtoms;
+using static ApiNameAtoms;
 
 namespace Z0
 {
@@ -32,7 +32,7 @@ namespace System.Reflection.Metadata
 {
     readonly struct ApiNames
     {
-        public const string XSrm = system + dot + reflection + dot + "metadata" + dot + extensions;
+        public const string XSrm = system + dot + reflection + dot + metadata + dot + extensions;
     }
 }
 
@@ -47,4 +47,3 @@ namespace Z0.LLVM
         public const string Char6 = llvm + dot + char6;
     }
 }
-

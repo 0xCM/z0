@@ -6,16 +6,13 @@ namespace Z0
 {
     using System;
 
-    /// <summary>
-    /// Applied to a target to specify the target definition source
-    /// </summary>
-    public class OriginAttribute : Attribute
+    public abstract class LiteralAttachmentAttribute : Attribute
     {
-        public OriginAttribute(object src)
-        {
-            Source = src;
-        }
+        public object[] Attached {get;}
 
-        public object Source {get;}
+        protected LiteralAttachmentAttribute(params object[] values)
+        {
+            Attached = values;
+        }
     }
 }

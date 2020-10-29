@@ -6,10 +6,10 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Linq;
 
     using static z;
     using static Konst;
+    using static ApiDataModel;
 
     [WfHost]
     public sealed class EmitCodeBlockReport : WfHost<EmitCodeBlockReport>
@@ -29,7 +29,7 @@ namespace Z0
 
         Count EmissionCount;
 
-        TableSpan<ApiCodeBlockInfo> Descriptions;
+        TableSpan<CodeBlockDescriptor> Descriptors;
 
         [MethodImpl(Inline)]
         public EmitCodeBlockReportStep(IWfShell wf, WfHost host)
@@ -37,7 +37,7 @@ namespace Z0
             Host = host;
             Wf = wf.WithHost(Host);
             EmissionCount = 0;
-            Descriptions = default;
+            Descriptors = default;
             Wf.Created();
         }
 
@@ -50,19 +50,9 @@ namespace Z0
         public void Run()
         {
             var dst = Wf.Db().Table("apihex.index");
-            Descriptions = DescribeCodeBlocks();
-            EmissionCount = ApiCodeBlocks.emit(Descriptions.Storage, dst);
-            Wf.EmittedTable<ApiCodeBlockInfo>(EmissionCount, dst);
-        }
-
-        ApiCodeBlockInfo[] DescribeCodeBlocks()
-        {
-            var archive = ApiFiles.hex(Wf);
-            var files = archive.List();
-            var dst = list<ApiCodeBlockInfo>();
-            foreach(var file in files.Storage)
-                dst.AddRange(archive.Read(file.Path).Select(x => x.Describe()));
-            return dst.OrderBy(x => x.Base).ToArray();
+            Descriptors = ApiData.BlockDescriptors(Wf);
+            EmissionCount = ApiData.emit(Descriptors.Storage, dst);
+            Wf.EmittedTable<CodeBlockDescriptor>(EmissionCount, dst);
         }
     }
 }

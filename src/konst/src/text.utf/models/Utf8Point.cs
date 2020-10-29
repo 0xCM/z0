@@ -10,6 +10,7 @@ namespace Z0
     using System.Runtime.CompilerServices;
 
     using static Konst;
+    using static z;
 
     /// <summary>
     /// Represents the least 8 bits of a unicode code point which, by definition of the encoding, is equivalent to the 7 ascii bits.
@@ -22,13 +23,10 @@ namespace Z0
 
         public static Utf8Point MaxValue => From(127);
 
-        public static IEnumerable<Utf8Point> All
+        public static ReadOnlySpan<Utf8Point> All
         {
-            get
-            {
-                for(var i=0; i <= 127; i++)
-                    yield return From(i);
-            }
+            [MethodImpl(Inline)]
+            get => recover<byte,Utf8Point>(ConstBytes256.Storage.Seg(n7, n0));
         }
 
         [MethodImpl(Inline)]

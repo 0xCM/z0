@@ -42,5 +42,11 @@ namespace Z0
         }
 
         protected abstract CmdResult Execute(IWfShell wf, in C spec);
+
+
+        public virtual CmdResult Run(IWfShell wf, CmdData spec)
+        {
+            return Execute(wf, Spec());
+        }
     }
 }

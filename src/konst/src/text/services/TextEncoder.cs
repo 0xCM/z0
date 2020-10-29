@@ -10,111 +10,128 @@ namespace Z0
 
     using static Konst;
 
-    public readonly unsafe struct TextEncodingService : ITextEncoder<TextEncodingService>
+    using api = TextEncoders;
+
+    public readonly unsafe struct TextEncoder : ITextEncoder<TextEncoder>
     {
-        readonly Encoding Effector;
+        readonly Encoding Encoding;
 
         [MethodImpl(Inline)]
-        internal TextEncodingService(Encoding service)
-            => Effector = service;
+        internal TextEncoder(Encoding service)
+            => Encoding = service;
 
         public string EncodingName
         {
             [MethodImpl(Inline)]
-            get => Effector.EncodingName;
+            get => Encoding.EncodingName;
         }
 
         public int CodePage
         {
             [MethodImpl(Inline)]
-            get => Effector.CodePage;
+            get => Encoding.CodePage;
         }
 
         public ReadOnlySpan<byte> Preamble
         {
             [MethodImpl(Inline)]
-            get => Effector.Preamble;
+            get => Encoding.Preamble;
         }
 
         public int WindowsCodePage
         {
             [MethodImpl(Inline)]
-            get => Effector.WindowsCodePage;
+            get => Encoding.WindowsCodePage;
         }
 
         public string WebName
         {
             [MethodImpl(Inline)]
-            get => Effector.WebName;
+            get => Encoding.WebName;
         }
 
         [MethodImpl(Inline)]
+        public ByteSize Encode(ReadOnlySpan<char> src, Span<byte> dst)
+            => Encoding.GetBytes(src,dst);
+
+        [MethodImpl(Inline)]
+        public ByteSize EncodedSize(ReadOnlySpan<char> src)
+            => Encoding.GetByteCount(src);
+
+        [MethodImpl(Inline)]
+        public void Decode(ReadOnlySpan<byte> src, Span<char> dst)
+            => Encoding.GetChars(src,dst);
+
+        [MethodImpl(Inline)]
+        public ref string Decode(ReadOnlySpan<byte> src, out string dst)
+            => ref api.Decode(Encoding, src, out dst);
+
+        [MethodImpl(Inline)]
         public int GetCharCount(ReadOnlySpan<byte> bytes)
-            => Effector.GetCharCount(bytes);
+            => api.GetCharCount(Encoding, bytes);
 
         [MethodImpl(Inline)]
         public int GetCharCount(byte* bytes, int count)
-            => Effector.GetCharCount(bytes,count);
+            => api.GetCharCount(Encoding, bytes,count);
 
         [MethodImpl(Inline)]
         public char[] GetChars(byte[] bytes)
-            => Effector.GetChars(bytes);
+            => api.GetChars(Encoding, bytes);
 
         [MethodImpl(Inline)]
         public int GetChars(byte* bytes, int byteCount, char* chars, int charCount)
-            => Effector.GetChars(bytes,byteCount,chars,charCount);
+            => api.GetChars(Encoding, bytes, byteCount, chars, charCount);
 
         [MethodImpl(Inline)]
         public void GetChars(ReadOnlySpan<byte> src, Span<char> dst)
-            => Effector.GetChars(src,dst);
+            => api.GetChars(Encoding, src,dst);
 
         [MethodImpl(Inline)]
         public int GetByteCount(ReadOnlySpan<char> src)
-            => Effector.GetByteCount(src);
+            => Encoding.GetByteCount(src);
 
         [MethodImpl(Inline)]
         public int GetByteCount(string src)
-            => Effector.GetByteCount(src);
+            => api.GetByteCount(Encoding, src);
 
         [MethodImpl(Inline)]
         public int GetByteCount(string src, int index, int count)
-            => Effector.GetByteCount(src, index, count);
+            => api.GetByteCount(Encoding, src, index, count);
 
         [MethodImpl(Inline)]
         public int GetByteCount(char* src, int count)
-            => Effector.GetByteCount(src, count);
+            => api.GetByteCount(Encoding, src, count);
 
         [MethodImpl(Inline)]
         public byte[] GetBytes(string src)
-            => Effector.GetBytes(src);
+            => api.GetBytes(Encoding, src);
 
         [MethodImpl(Inline)]
         public int GetBytes(ReadOnlySpan<char> src, Span<byte> dst)
-            => Effector.GetBytes(src, dst);
+            => api.GetBytes(Encoding, src, dst);
 
         [MethodImpl(Inline)]
         public byte[] GetBytes(char[] src)
-            => Effector.GetBytes(src);
+            => api.GetBytes(Encoding, src);
 
         [MethodImpl(Inline)]
         public int GetBytes(char* src, int charCount, byte* bytes, int byteCount)
-            => Effector.GetBytes(src, charCount, bytes, byteCount);
+            => api.GetBytes(Encoding, src, charCount, bytes, byteCount);
 
         [MethodImpl(Inline)]
         public string GetString(byte[] src)
-            => Effector.GetString(src);
+            => api.GetString(Encoding, src);
 
         [MethodImpl(Inline)]
         public string GetString(ReadOnlySpan<byte> src)
-            => Effector.GetString(src);
+            => api.GetString(Encoding, src);
 
         [MethodImpl(Inline)]
         public string GetString(byte* src, int byteCount)
-            => Effector.GetString(src, byteCount);
+            => api.GetString(Encoding, src, byteCount);
 
         [MethodImpl(Inline)]
         public string GetString(byte[] src, int index, int count)
-            => Effector.GetString(src, index, count);
+            => api.GetString(Encoding, src, index, count);
     }
-
 }

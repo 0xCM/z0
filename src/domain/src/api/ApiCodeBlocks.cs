@@ -13,6 +13,8 @@ namespace Z0
     using static Konst;
     using static z;
 
+    using D = ApiDataModel;
+
     [ApiHost]
     public readonly partial struct ApiCodeBlocks
     {
@@ -61,14 +63,14 @@ namespace Z0
                 where arity(code) == count
                 select code;
         [Op]
-        public static uint emit(ReadOnlySpan<ApiCodeBlockInfo> src, FS.FilePath dst)
+        public static uint emit(ReadOnlySpan<D.CodeBlockDescriptor> src, FS.FilePath dst)
         {
             using var writer = dst.Writer();
             var count = (uint)src.Length;
             for(var i=0; i<count; i++)
             {
                 ref readonly var block = ref skip(src,i);
-                writer.WriteLine(string.Format(ApiCodeBlockInfo.FormatPattern, block.Part, block.Host, block.Base, block.Size, block.Uri));
+                writer.WriteLine(string.Format(D.CodeBlockDescriptor.FormatPattern, block.Part, block.Host, block.Base, block.Size, block.Uri));
             }
             return count;
         }

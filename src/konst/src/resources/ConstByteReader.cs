@@ -10,19 +10,19 @@ namespace Z0
     using static Konst;
     using static z;
 
-    [ApiHost("resources.cache.reader")]
-    public unsafe readonly struct ResCacheReader
+    [ApiHost(ApiNames.ConstBytesReader)]
+    public unsafe readonly struct ConstBytesReader
     {
-        readonly ResStore256 Data;
+        readonly ConstBytes256 Data;
 
         [MethodImpl(Inline)]
-        internal ResCacheReader(ResStore256 data)
+        internal ConstBytesReader(ConstBytes256 data)
             => Data = data;
 
         public SegRef[] Refs
         {
             [MethodImpl(Inline)]
-            get => Data.provided();
+            get => Data.SegRefs();
         }
 
         [MethodImpl(Inline), Op]
@@ -31,7 +31,7 @@ namespace Z0
 
         [MethodImpl(Inline), Op]
         public ReadOnlySpan<byte> leads()
-            => Data.leads();
+            => Data.SegLeads();
 
         [Op]
         public ReadOnlySpan<MemoryAddress> locations(in Segments store)
@@ -116,21 +116,21 @@ namespace Z0
             where N : unmanaged, ITypeNat
         {
             if(typeof(N) == typeof(N0))
-                return Data.seg(n0);
+                return Data.Seg(n6, n0);
             else if(typeof(N) == typeof(N1))
-                return Data.seg(n1);
+                return Data.Seg(n6, n1);
             else if(typeof(N) == typeof(N2))
-                return Data.seg(n2);
+                return Data.Seg(n6, n2);
             else if(typeof(N) == typeof(N3))
-                return Data.seg(n3);
+                return Data.Seg(n6, n3);
             else if(typeof(N) == typeof(N4))
-                return Data.seg(n4);
+                return Data.Seg(n7, n0);
             else if(typeof(N) == typeof(N5))
-                return Data.seg(n5);
+                return Data.Seg(n7, n1);
             else if(typeof(N) == typeof(N6))
-                return Data.seg(n6);
+                return Data.Seg(n8, n0);
             else if(typeof(N) == typeof(N7))
-                return Data.seg(n7);
+                return Data.Seg(n8, n0);
             else
                 return Data.SegZ;
         }

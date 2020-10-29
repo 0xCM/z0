@@ -50,7 +50,6 @@ namespace Z0
             seek(c,i2) = f2(skip(a,i2), skip(b,i2));
             seek(c,i3) = f3(skip(a,i3), skip(b,i3));
             return Target;
-
         }
 
         [Op]

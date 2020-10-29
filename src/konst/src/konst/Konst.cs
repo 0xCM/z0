@@ -183,8 +183,6 @@ namespace Z0
         /// </summary>
         public static Base16 base16 => default;
 
-        public static Utf8 Utf8Encoding => default;
-
         public const OpacityApiKey Opaque = OpacityApiKey.Closure;
 
         public const string Connector = " -> ";

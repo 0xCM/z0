@@ -13,7 +13,6 @@ namespace Z0
 
     partial struct ApiFiles
     {
-
         [Op]
         public static string format(ListedFiles src)
         {

@@ -11,26 +11,15 @@ namespace Z0
     using static Konst;
     using static z;
 
-    partial struct ApiData
+    [ApiHost(ApiNames.CmdHosts, true)]
+    public readonly struct CmdRunners
     {
-        public struct ApiMember
+        [Op]
+        public static ICmdRunner[] discover(Assembly src)
         {
-            public MemoryAddress Address;
-
-            public ApiMetadataUri MetaUri;
-
-            public ApiHostUri Host;
-
-            public ApiOpId ApiKind;
-
-            public CilMethod Cil;
-        }
-
-        public struct ApiHostMembers
-        {
-            public ApiHostUri Host;
-
-            public TableSpan<ApiMember> Members;
+            var types = src.Types().Tagged<CmdHostAttribute>();
+            var runners = types.Select(t => (ICmdRunner)Activator.CreateInstance(t));
+            return runners;
         }
     }
 }

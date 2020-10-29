@@ -6,10 +6,12 @@ namespace Z0
 {
     using Free = System.Security.SuppressUnmanagedCodeSecurityAttribute;
 
+
     [Free]
-    public interface ICmdHost
+    public interface ICmdHost : ICmdRunner
     {
-        CmdId CmdId {get;}
+
+        CmdResult Run(IWfShell wf, CmdData spec);
     }
 
     [Free]
@@ -20,11 +22,11 @@ namespace Z0
     }
 
     [Free]
-    public interface ICmdHost<H,C> : ICmdHost<H>
+    public interface ICmdHost<H,C> : ICmdHost<H>, ICmdRunner<C>
         where H : ICmdHost, new()
         where C : struct, ICmdSpec<C>
     {
-        CmdResult Run(IWfShell wf, in C spec);
+
     }
 
     [Free]
@@ -36,7 +38,7 @@ namespace Z0
     {
         CmdResult Run(IWfShell wf, in C spec, out P payload);
 
-        CmdResult ICmdHost<H,C>.Run(IWfShell wf, in C spec)
+        CmdResult ICmdRunner<C>.Run(IWfShell wf, in C spec)
             => Run(wf, spec, out var _);
     }
 }

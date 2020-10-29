@@ -2,315 +2,321 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+using static Z0.CsKeywords;
+using static Z0.AsciCharText;
+
+[ApiNameProvider]
+public readonly struct ApiNameAtoms
 {
-    using System;
+    public const string @const = Const;
 
-    [ApiNameProvider]
-    public readonly struct ApiNameAtoms
-    {
-        public const string dot = AsciCharText.Dot;
+    public const string @char = Char;
 
-        public const string api = nameof(api);
+    public const string @enum = Enum;
 
-        public const string asm = nameof(asm);
+    public const string @struct = Struct;
 
-        public const string bits = nameof(bits);
+    public const string @case = Case;
 
-        public const string blocks = nameof(blocks);
+    public const string dot = Dot;
 
-        public const string bitfield = nameof(bitfield);
+    public const string api = nameof(api);
 
-        public const string bitfields = nameof(bitfields);
+    public const string asm = nameof(asm);
 
-        public const string bytes = nameof(bytes);
+    public const string bits = nameof(bits);
 
-        public const string @char = "char";
+    public const string blocks = nameof(blocks);
 
-        public const string chars = nameof(chars);
+    public const string bitfield = nameof(bitfield);
 
-        public const string cmd = nameof(cmd);
+    public const string bitfields = nameof(bitfields);
 
-        public const string core = nameof(core);
+    public const string bytes = nameof(bytes);
 
-        public const string data = nameof(data);
+    public const string chars = nameof(chars);
 
-        public const string delegates = nameof(delegates);
+    public const string cmd = nameof(cmd);
 
-        public const string parts = nameof(parts);
+    public const string core = nameof(core);
 
-        public const string dynamic = nameof(dynamic);
+    public const string data = nameof(data);
 
-        public const string expressions = nameof(expressions);
+    public const string delegates = nameof(delegates);
 
-        public const string extensions = nameof(extensions);
+    public const string parts = nameof(parts);
 
-        public const string identity = nameof(identity);
+    public const string dynamic = nameof(dynamic);
 
-        public const string formatters = nameof(formatters);
+    public const string expressions = nameof(expressions);
 
-        public const string functions = nameof(functions);
+    public const string extensions = nameof(extensions);
 
-        public const string fields = nameof(fields);
+    public const string identity = nameof(identity);
 
-        public const string hex = nameof(hex);
+    public const string formatters = nameof(formatters);
 
-        public const string kinds = nameof(kinds);
+    public const string functions = nameof(functions);
 
-        public const string lang = nameof(lang);
+    public const string fields = nameof(fields);
 
-        public const string logic = nameof(logic);
+    public const string hex = nameof(hex);
 
-        public const string maps = nameof(maps);
+    public const string kinds = nameof(kinds);
 
-        public const string memory = nameof(memory);
+    public const string lang = nameof(lang);
 
-        public const string options = nameof(options);
+    public const string logic = nameof(logic);
 
-        public const string operators = nameof(operators);
+    public const string maps = nameof(maps);
 
-        public const string operands = nameof(operands);
+    public const string memory = nameof(memory);
 
-        public const string projectors = nameof(projectors);
+    public const string options = nameof(options);
 
-        public const string primal = nameof(primal);
+    public const string operators = nameof(operators);
 
-        public const string rows = nameof(rows);
+    public const string operands = nameof(operands);
 
-        public const string parser = nameof(parser);
+    public const string projectors = nameof(projectors);
 
-        public const string resources = nameof(resources);
+    public const string primal = nameof(primal);
 
-        public const string sfunc = nameof(sfunc);
+    public const string rows = nameof(rows);
 
-        public const string stream = nameof(stream);
+    public const string parser = nameof(parser);
 
-        public const string surrogates = nameof(surrogates);
+    public const string resources = nameof(resources);
 
-        public const string store = nameof(store);
+    public const string sfunc = nameof(sfunc);
 
-        public const string source = nameof(source);
+    public const string stream = nameof(stream);
 
-        public const string sources = nameof(sources);
+    public const string surrogates = nameof(surrogates);
 
-        public const string services = nameof(services);
+    public const string store = nameof(store);
 
-        public const string specs = nameof(specs);
+    public const string source = nameof(source);
 
-        public const string symbolic = nameof(symbolic);
+    public const string sources = nameof(sources);
 
-        public const string scalar = nameof(scalar);
+    public const string services = nameof(services);
 
-        public const string query = nameof(query);
+    public const string specs = nameof(specs);
 
-        public const string text = nameof(text);
+    public const string symbolic = nameof(symbolic);
 
-        public const string tables = nameof(tables);
+    public const string scalar = nameof(scalar);
 
-        public const string wf = nameof(wf);
+    public const string query = nameof(query);
 
-        public const string u1 = nameof(u1);
+    public const string text = nameof(text);
 
-        public const string u2 = nameof(u2);
+    public const string tables = nameof(tables);
 
-        public const string u3 = nameof(u3);
+    public const string wf = nameof(wf);
 
-        public const string u4 = nameof(u4);
+    public const string u1 = nameof(u1);
 
-        public const string u5 = nameof(u5);
+    public const string u2 = nameof(u2);
 
-        public const string u6 = nameof(u6);
+    public const string u3 = nameof(u3);
 
-        public const string u7 = nameof(u7);
+    public const string u4 = nameof(u4);
 
-        public const string u8 = nameof(u8);
+    public const string u5 = nameof(u5);
 
-        public const string u16 = nameof(u16);
+    public const string u6 = nameof(u6);
 
-        public const string u32 = nameof(u32);
+    public const string u7 = nameof(u7);
 
-        public const string u64 = nameof(u64);
+    public const string u8 = nameof(u8);
 
-        public const string octets = nameof(octets);
+    public const string u16 = nameof(u16);
 
-        public const string cells = nameof(cells);
+    public const string u32 = nameof(u32);
 
-        public const string buffers = nameof(buffers);
+    public const string u64 = nameof(u64);
 
-        public const string catalogs = nameof(catalogs);
+    public const string octets = nameof(octets);
 
-        public const string clr = nameof(clr);
+    public const string cells = nameof(cells);
 
-        public const string runtime = nameof(runtime);
+    public const string buffers = nameof(buffers);
 
-        public const string records = nameof(records);
+    public const string catalogs = nameof(catalogs);
 
-        public const string type = nameof(type);
+    public const string clr = nameof(clr);
 
-        public const string property = nameof(property);
+    public const string runtime = nameof(runtime);
 
-        public const string field = nameof(field);
+    public const string records = nameof(records);
 
-        public const string @enum = "enum";
+    public const string type = nameof(type);
 
-        public const string method = nameof(method);
+    public const string property = nameof(property);
 
-        public const string types = nameof(types);
+    public const string field = nameof(field);
 
-        public const string @struct = "struct";
+    public const string method = nameof(method);
 
-        public const string assembly = nameof(assembly);
+    public const string types = nameof(types);
 
-        public const string literal = nameof(literal);
+    public const string assembly = nameof(assembly);
 
-        public const string primitives = nameof(primitives);
+    public const string literal = nameof(literal);
 
-        public const string encoders = nameof(encoders);
+    public const string primitives = nameof(primitives);
 
-        public const string archives = nameof(archives);
+    public const string encoders = nameof(encoders);
 
-        public const string msg = nameof(msg);
+    public const string archives = nameof(archives);
 
-        public const string errors = nameof(errors);
+    public const string msg = nameof(msg);
 
-        public const string artifacts = nameof(artifacts);
+    public const string errors = nameof(errors);
 
-        public const string db = nameof(db);
+    public const string artifacts = nameof(artifacts);
 
-        public const string files = nameof(files);
+    public const string db = nameof(db);
 
-        public const string signatures = nameof(signatures);
+    public const string files = nameof(files);
 
-        public const string shell = nameof(shell);
+    public const string signatures = nameof(signatures);
 
-        public const string events = nameof(events);
+    public const string shell = nameof(shell);
 
-        public const string app = nameof(app);
+    public const string events = nameof(events);
 
-        public const string identify = nameof(identify);
+    public const string app = nameof(app);
 
-        public const string lookups = nameof(lookups);
+    public const string identify = nameof(identify);
 
-        public const string enums = nameof(enums);
+    public const string lookups = nameof(lookups);
 
-        public const string refs = nameof(refs);
+    public const string enums = nameof(enums);
 
-        public const string tools = nameof(tools);
+    public const string refs = nameof(refs);
 
-        public const string strings = nameof(strings);
+    public const string tools = nameof(tools);
 
-        public const string reader = nameof(reader);
+    public const string strings = nameof(strings);
 
-        public const string workflow = nameof(workflow);
+    public const string reader = nameof(reader);
 
-        public const string symbols = nameof(symbols);
+    public const string workflow = nameof(workflow);
 
-        public const string part = nameof(part);
+    public const string symbols = nameof(symbols);
 
-        public const string literals = nameof(literals);
+    public const string part = nameof(part);
 
-        public const string scalars = nameof(scalars);
+    public const string literals = nameof(literals);
 
-        public const string tuples = nameof(tuples);
+    public const string scalars = nameof(scalars);
 
-        public const string hosts = nameof(hosts);
+    public const string tuples = nameof(tuples);
 
-        public const string digits= nameof(digits);
+    public const string hosts = nameof(hosts);
 
-        public const string asci = nameof(asci);
+    public const string digits= nameof(digits);
 
-        public const string permutations = nameof(permutations);
+    public const string asci = nameof(asci);
 
-        public const string bitlogic = bits + dot + logic;
+    public const string permutations = nameof(permutations);
 
-        public const string copy = nameof(copy);
+    public const string bitlogic = bits + dot + logic;
 
-        public const string view = nameof(view);
+    public const string copy = nameof(copy);
 
-        public const string typed = nameof(typed);
+    public const string view = nameof(view);
 
-        public const string pointers = nameof(pointers);
+    public const string typed = nameof(typed);
 
-        public const string relations = nameof(relations);
+    public const string pointers = nameof(pointers);
 
-        public const string workers = nameof(workers);
+    public const string relations = nameof(relations);
 
-        public const string paths = nameof(paths);
+    public const string workers = nameof(workers);
 
-        public const string parsers = nameof(parsers);
+    public const string paths = nameof(paths);
 
-        public const string cases = nameof(cases);
+    public const string parsers = nameof(parsers);
 
-        public const string states = nameof(states);
+    public const string cases = nameof(cases);
 
-        public const string unmanaged = nameof(unmanaged);
+    public const string states = nameof(states);
 
-        public const string segments = nameof(segments);
+    public const string unmanaged = nameof(unmanaged);
 
-        public const string @case = "case";
+    public const string segments = nameof(segments);
 
-        public const string logs = nameof(logs);
+    public const string logs = nameof(logs);
 
-        public const string vex = nameof(vex);
+    public const string vex = nameof(vex);
 
-        public const string numeric = nameof(numeric);
+    public const string numeric = nameof(numeric);
 
-        public const string arrays = nameof(arrays);
+    public const string arrays = nameof(arrays);
 
-        public const string widths = nameof(widths);
+    public const string widths = nameof(widths);
 
-        public const string ops = nameof(ops);
+    public const string ops = nameof(ops);
 
-        public const string control = nameof(control);
+    public const string control = nameof(control);
 
-        public const string tests = nameof(tests);
+    public const string tests = nameof(tests);
 
-        public const string test = nameof(test);
+    public const string test = nameof(test);
 
-        public const string reflector = nameof(reflector);
+    public const string reflector = nameof(reflector);
 
-        public const string spans = nameof(spans);
+    public const string spans = nameof(spans);
 
-        public const string models = nameof(models);
+    public const string models = nameof(models);
 
-        public const string collective = nameof(collective);
+    public const string collective = nameof(collective);
 
-        public const string indexed = nameof(indexed);
+    public const string indexed = nameof(indexed);
 
-        public const string slots = nameof(slots);
+    public const string slots = nameof(slots);
 
-        public const string fp = nameof(fp);
+    public const string fp = nameof(fp);
 
-        public const string reflex = nameof(reflex);
+    public const string reflex = nameof(reflex);
 
-        public const string seq = nameof(seq);
+    public const string seq = nameof(seq);
 
-        public const string linq = nameof(linq);
+    public const string linq = nameof(linq);
 
-        public const string external = nameof(external);
+    public const string external = nameof(external);
 
-        public const string system = nameof(system);
+    public const string system = nameof(system);
 
-        public const string emit = nameof(emit);
+    public const string emit = nameof(emit);
 
-        public const string opcodes = nameof(opcodes);
+    public const string opcodes = nameof(opcodes);
 
-        public const string reflection = nameof(reflection);
+    public const string reflection = nameof(reflection);
 
-        public const string builder = nameof(builder);
+    public const string builder = nameof(builder);
 
-        public const string handles = nameof(handles);
+    public const string handles = nameof(handles);
 
-        public const string reflect = nameof(reflect);
+    public const string reflect = nameof(reflect);
 
-        public const string metadata = nameof(metadata);
+    public const string metadata = nameof(metadata);
 
-        public const string listings = nameof(listings);
+    public const string listings = nameof(listings);
 
-        public const string member = nameof(member);
+    public const string member = nameof(member);
 
-        public const string identities = nameof(identities);
+    public const string identities = nameof(identities);
 
-        public const string svc = nameof(svc);
-    }
+    public const string svc = nameof(svc);
+
+    public const string utf8 = nameof(utf8);
+
+    public const string n256 = nameof(n256);
+
+    public const string cache = nameof(cache);
 }

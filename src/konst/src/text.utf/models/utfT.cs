@@ -6,22 +6,21 @@ namespace Z0
 {
     using System;
     using System.Runtime.CompilerServices;
-    using System.Runtime.InteropServices;
 
     using static Konst;
     using static z;
 
-    public readonly struct Utf<T>
+    public readonly struct utf<T>
         where T : unmanaged
     {
         readonly T[] Data;
 
         [MethodImpl(Inline)]
-        public Utf(T[] src)
+        public utf(T[] src)
             => Data = src;
 
         [MethodImpl(Inline)]
-        public static implicit operator Utf<T>(T[] src)
-            => new Utf<T>(src);
+        public static implicit operator utf<T>(T[] src)
+            => new utf<T>(src);
     }
 }

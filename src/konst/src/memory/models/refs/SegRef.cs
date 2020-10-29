@@ -20,9 +20,6 @@ namespace Z0
 
         readonly Vector128<ulong> Segment;
 
-        // [MethodImpl(Inline)]
-        // public SegRef(ulong location, uint size)
-        //     => Segment = vparts(location, (ulong)size);
 
         [MethodImpl(Inline)]
         public SegRef(Vector128<ulong> src)
@@ -31,10 +28,6 @@ namespace Z0
         [MethodImpl(Inline)]
         public unsafe SegRef(byte* src, ByteSize length)
             =>  Segment = vparts((ulong)src, (ulong)length);
-
-        // [MethodImpl(Inline)]
-        // public SegRef(MemoryAddress src, int length)
-        //     => Segment = vparts((ulong)src, (ulong)length);
 
         [MethodImpl(Inline)]
         public SegRef(MemoryAddress src, ByteSize size)

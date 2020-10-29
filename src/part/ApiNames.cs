@@ -2,29 +2,22 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+using static ApiNameAtoms;
+
+[ApiNameProvider]
+readonly struct ApiNames
 {
-    using System;
+    public const string TextApi = text + dot + core;
 
-    using static ApiNameAtoms;
+    public const string SymbolQuery = symbolic + dot + query;
 
-    using A = ApiNameAtoms;
+    public const string Memory = memory + dot + core;
 
-    [ApiNameProvider]
-    readonly struct ApiNames
-    {
-        public const string TextApi = A.text + dot + core;
+    public const string PartExtensions = part + dot + extensions;
 
-        public const string SymbolQuery = symbolic + dot + query;
+    public const string LiteralKinds = literals + dot + kinds;
 
-        public const string Memory = A.memory + dot + core;
+    public const string Arrays = memory + dot + arrays;
 
-        public const string PartExtensions = part + dot + extensions;
-
-        public const string LiteralKinds = literals + dot + kinds;
-
-        public const string Arrays = A.memory + dot + arrays;
-
-        public const string ArrayBuilder = A.memory + dot + arrays + dot + builder;
-    }
+    public const string ArrayBuilder = memory + dot + arrays + dot + builder;
 }

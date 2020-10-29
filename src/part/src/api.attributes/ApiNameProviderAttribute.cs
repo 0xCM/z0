@@ -2,13 +2,9 @@
 // Copyright   :  (c) Chris Moore, 2020
 // License     :  MIT
 //-----------------------------------------------------------------------------
-namespace Z0
+
+public class ApiNameProviderAttribute : Z0.LiteralProviderAttribute
 {
-    using System;
-
-    public class ApiNameProviderAttribute : LiteralProviderAttribute
-    {
 
 
-    }
 }

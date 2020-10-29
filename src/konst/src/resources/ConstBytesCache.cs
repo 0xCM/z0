@@ -9,11 +9,11 @@ namespace Z0
 
     using static Konst;
 
-    [ApiDataType("resources.cache")]
-    public readonly struct ResCache
+    [ApiDataType(ApiNames.ConstBytesCache, true)]
+    public readonly struct ConstBytesCache
     {
         [MethodImpl(Inline)]
-        internal ResCache(ResCacheReader models)
+        internal ConstBytesCache(ConstBytesReader models)
         {
             Refs = models.Refs;
             Storage = Segments.create(Refs);
@@ -21,7 +21,7 @@ namespace Z0
             Models = models;
         }
 
-        readonly ResCacheReader Models;
+        readonly ConstBytesReader Models;
 
         readonly SegRef[] Refs;
 
